@@ -464,6 +464,16 @@
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil" class="com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil">
+		<property name="DDMXML">
+			<bean class="com.liferay.portlet.dynamicdatamapping.util.DDMXMLImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" class="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil">
+		<property name="DDMXSD">
+			<bean class="com.liferay.portlet.dynamicdatamapping.util.DDMXSDImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdmin" class="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminImpl" />
 	<bean id="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" class="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil">
 		<property name="enterpriseAdmin" ref="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdmin" />
