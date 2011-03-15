@@ -261,34 +261,20 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				>
 
 					<%
-					String rowHREF = themeDisplay.getPathMain().concat("/bookmarks/open_entry?entryId=").concat(String.valueOf(entry.getEntryId()));
+					String rowHREF = null;
+
+					if (BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW)) {
+						PortletURL tempRowURL = renderResponse.createRenderURL();
+
+						tempRowURL.setParameter("struts_action", "/bookmarks/view_entry");
+						tempRowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+						tempRowURL.setParameter("redirect", currentURL);
+
+						rowHREF = tempRowURL.toString();
+					}
 					%>
 
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						property="name"
-						target="_blank"
-						title="<%= entry.getDescription() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						property="url"
-						target="_blank"
-						title="<%= entry.getDescription() %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						href="<%= rowHREF %>"
-						property="visits"
-						target="_blank"
-						title="<%= entry.getDescription() %>"
-					/>
-
-					<liferay-ui:search-container-column-jsp
-						align="right"
-						path="/html/portlet/bookmarks/entry_action.jsp"
-					/>
+					<%@ include file="/html/portlet/bookmarks/entry_columns.jspf" %>
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator />

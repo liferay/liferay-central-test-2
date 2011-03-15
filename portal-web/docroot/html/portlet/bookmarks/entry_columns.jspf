@@ -39,7 +39,6 @@ for (int j = 0; j < entryColumns.length; j++) {
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="<%= bookmarksEntryColumn %>"
-				target="<%= target %>"
 				value="<%= dateFormatDate.format(entry.getModifiedDate()) %>"
 			/>
 		</c:when>
@@ -47,7 +46,6 @@ for (int j = 0; j < entryColumns.length; j++) {
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="<%= bookmarksEntryColumn %>"
-				target="<%= target %>"
 				value="<%= HtmlUtil.escape(entry.getName()) %>"
 			/>
 		</c:when>
@@ -55,7 +53,6 @@ for (int j = 0; j < entryColumns.length; j++) {
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="<%= bookmarksEntryColumn %>"
-				target="<%= target %>"
 				value="<%= entry.getUrl() %>"
 			/>
 		</c:when>
@@ -63,7 +60,6 @@ for (int j = 0; j < entryColumns.length; j++) {
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="<%= bookmarksEntryColumn %>"
-				target="<%= target %>"
 				value="<%= String.valueOf(entry.getVisits()) %>"
 			/>
 		</c:when>

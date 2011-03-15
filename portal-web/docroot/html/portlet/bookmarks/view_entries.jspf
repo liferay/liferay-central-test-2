@@ -75,7 +75,6 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 
 		<%
 		String rowHREF = null;
-		String target = null;
 
 		if (BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW)) {
 			PortletURL tempRowURL = renderResponse.createRenderURL();
