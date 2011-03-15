@@ -17,7 +17,6 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -27,7 +26,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -299,6 +297,16 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 	}
 
+	protected String getRootPortletId(Portlet portlet) {
+
+		// Workaround for portlet.getRootPortletId() because that does not
+		// return the proper root portlet ID for OpenSocial and WSRP portlets
+
+		Portlet rootPortlet = portlet.getRootPortlet();
+
+		return rootPortlet.getPortletId();
+	}
+
 	protected void populatePortletJSONObject(
 			HttpServletRequest request, StringServletResponse stringResponse,
 			Portlet portlet, JSONObject jsonObject)
@@ -320,17 +328,18 @@ public class UpdateLayoutAction extends JSONAction {
 
 		boolean portletOnLayout = false;
 
-		String rootPortletId = portlet.getRootPortlet().getPortletId();
+		String rootPortletId = getRootPortletId(portlet);
+		String portletId = portlet.getPortletId();
 
 		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
-			String layoutRootPortletId =
-				layoutPortlet.getRootPortlet().getPortletId();
 
-			// Check to see if an instance of this portlet is already in layout,
-			// but ignore the portlet that was just added
+			// Check to see if an instance of this portlet is already in the
+			// layout, but ignore the portlet that was just added
 
-			if (layoutRootPortletId.equals(rootPortletId) &&
-				(layoutPortlet.getPortletId() != portlet.getPortletId())) {
+			String layoutPortletRootPortletId = getRootPortletId(layoutPortlet);
+
+			if (rootPortletId.equals(layoutPortletRootPortletId) &&
+				!portletId.equals(layoutPortlet.getPortletId())) {
 
 				portletOnLayout = true;
 
