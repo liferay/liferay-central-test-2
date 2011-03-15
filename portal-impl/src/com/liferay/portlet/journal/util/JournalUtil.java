@@ -52,7 +52,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -786,7 +786,7 @@ public class JournalUtil {
 				_mergeArticleContentDelete(curRoot, newDocument);
 			}
 
-			curContent = FormsXMLUtil.formatXML(curDocument);
+			curContent = DDMXMLUtil.formatXML(curDocument);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -846,7 +846,7 @@ public class JournalUtil {
 
 			removeArticleLocale(root, languageId);
 
-			content = FormsXMLUtil.formatXML(doc);
+			content = DDMXMLUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -868,7 +868,7 @@ public class JournalUtil {
 
 			_removeOldContent(path, contentRoot, xsdDoc);
 
-			content = FormsXMLUtil.formatXML(contentDoc);
+			content = DDMXMLUtil.formatXML(contentDoc);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

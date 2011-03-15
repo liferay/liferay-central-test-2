@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 
 import java.util.List;
 
@@ -96,7 +96,7 @@ public class LocaleTransformerListener extends TransformerListener {
 
 			replace(root);
 
-			xml = FormsXMLUtil.formatXML(doc);
+			xml = DDMXMLUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(e);

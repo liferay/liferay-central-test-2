@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.JournalTemplateConstants;
@@ -84,7 +84,7 @@ public class GetArticleAction extends Action {
 
 			JournalUtil.addAllReservedEls(root, tokens, article);
 
-			xml = FormsXMLUtil.formatXML(doc);
+			xml = DDMXMLUtil.formatXML(doc);
 
 			String contentType = ContentTypes.TEXT_XML_UTF8;
 

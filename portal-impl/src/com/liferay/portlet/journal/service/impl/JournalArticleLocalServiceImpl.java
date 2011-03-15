@@ -65,8 +65,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
 import com.liferay.portlet.journal.ArticleContentException;
 import com.liferay.portlet.journal.ArticleDisplayDateException;
 import com.liferay.portlet.journal.ArticleExpirationDateException;
@@ -935,7 +935,7 @@ public class JournalArticleLocalServiceImpl
 
 				JournalUtil.addAllReservedEls(root, tokens, article);
 
-				xml = FormsXMLUtil.formatXML(doc);
+				xml = DDMXMLUtil.formatXML(doc);
 			}
 		}
 		catch (DocumentException de) {
@@ -2326,7 +2326,7 @@ public class JournalArticleLocalServiceImpl
 					groupId, articleId, version, incrementVersion, root,
 					images);
 
-				content = FormsXMLUtil.formatXML(doc);
+				content = DDMXMLUtil.formatXML(doc);
 			}
 			catch (DocumentException de) {
 				_log.error(de);

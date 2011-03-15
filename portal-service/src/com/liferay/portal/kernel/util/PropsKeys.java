@@ -569,6 +569,8 @@ public interface PropsKeys {
 
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
+	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE_ENTRY_FORCE_AUTOGENERATE_ID = "dynamic.data.mapping.structure.entry.force.autogenerate.id";
+
 	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
 
 	public static final String EHCACHE_BLOCKING_CACHE_ALLOWED = "ehcache.blocking.cache.allowed";
@@ -626,8 +628,6 @@ public interface PropsKeys {
 	public static final String FLAGS_GUEST_USERS_ENABLED = "flags.guest.users.enabled";
 
 	public static final String FLAGS_REASONS = "flags.reasons";
-
-	public static final String FORMS_STRUCTURE_ENTRY_FORCE_AUTOGENERATE_ID = "forms.structure.entry.force.autogenerate.id";
 
 	public static final String FREEMARKER_ENGINE_CACHE_ENABLED = "freemarker.engine.cache.enabled";
 

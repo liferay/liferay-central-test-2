@@ -26,14 +26,14 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.forms.NoSuchStructureEntryException;
-import com.liferay.portlet.forms.StructureEntryDuplicateElementException;
-import com.liferay.portlet.forms.StructureEntryDuplicateStructureIdException;
-import com.liferay.portlet.forms.StructureEntryNameException;
-import com.liferay.portlet.forms.StructureEntryStructureIdException;
-import com.liferay.portlet.forms.StructureEntryXsdException;
-import com.liferay.portlet.forms.model.FormsStructureEntry;
-import com.liferay.portlet.forms.service.FormsStructureEntryServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateElementException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateStructureIdException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryNameException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryStructureIdException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryXsdException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -60,7 +60,7 @@ public class EditStructureEntryAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		FormsStructureEntry structureEntry = null;
+		DDMStructureEntry structureEntry = null;
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
@@ -145,7 +145,7 @@ public class EditStructureEntryAction extends PortletAction {
 
 	protected String getSaveAndContinueRedirect(
 			PortletConfig portletConfig, ActionRequest actionRequest,
-			FormsStructureEntry structureEntry, String redirect)
+			DDMStructureEntry structureEntry, String redirect)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -171,7 +171,7 @@ public class EditStructureEntryAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected FormsStructureEntry updateStructureEntry(
+	protected DDMStructureEntry updateStructureEntry(
 			ActionRequest actionRequest)
 		throws Exception {
 
@@ -188,15 +188,15 @@ public class EditStructureEntryAction extends PortletAction {
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			FormsStructureEntry.class.getName(), actionRequest);
+			DDMStructureEntry.class.getName(), actionRequest);
 
-		FormsStructureEntry structureEntry = null;
+		DDMStructureEntry structureEntry = null;
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add form structure
 
-			structureEntry = FormsStructureEntryServiceUtil.addStructureEntry(
+			structureEntry = DDMStructureEntryServiceUtil.addStructureEntry(
 				groupId, structureId, autoStructureId, name,
 				description, xsd, serviceContext);
 		}
@@ -204,10 +204,8 @@ public class EditStructureEntryAction extends PortletAction {
 
 			// Update form structure
 
-			structureEntry =
-				FormsStructureEntryServiceUtil.updateStructureEntry(
-					groupId, structureId, name, description, xsd,
-					serviceContext);
+			structureEntry = DDMStructureEntryServiceUtil.updateStructureEntry(
+				groupId, structureId, name, description, xsd, serviceContext);
 		}
 
 		return structureEntry;

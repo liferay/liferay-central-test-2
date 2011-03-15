@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
 import com.liferay.portlet.journal.DuplicateStructureElementException;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -73,7 +73,7 @@ public class JournalStructureLocalServiceImpl
 		Date now = new Date();
 
 		try {
-			xsd = FormsXMLUtil.formatXML(xsd);
+			xsd = DDMXMLUtil.formatXML(xsd);
 		}
 		catch (Exception e) {
 			throw new StructureXsdException();
@@ -416,7 +416,7 @@ public class JournalStructureLocalServiceImpl
 		structureId = structureId.trim().toUpperCase();
 
 		try {
-			xsd = FormsXMLUtil.formatXML(xsd);
+			xsd = DDMXMLUtil.formatXML(xsd);
 		}
 		catch (Exception e) {
 			throw new StructureXsdException();

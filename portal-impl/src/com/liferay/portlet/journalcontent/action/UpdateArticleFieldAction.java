@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
@@ -118,7 +118,7 @@ public class UpdateArticleFieldAction extends Action {
 
 		node.setText(fieldData);
 
-		content = FormsXMLUtil.formatXML(doc);
+		content = DDMXMLUtil.formatXML(doc);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("After\n" + content);

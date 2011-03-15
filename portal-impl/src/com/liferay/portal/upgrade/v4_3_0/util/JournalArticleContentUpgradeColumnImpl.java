@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.util.Table;
-import com.liferay.portlet.forms.util.FormsXMLUtil;
+import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.util.PKParser;
 
@@ -99,7 +99,7 @@ public class JournalArticleContentUpgradeColumnImpl
 				oldCompanyId, newCompanyId.longValue(), groupId.longValue(),
 				articleId, version.doubleValue(), root);
 
-			content = FormsXMLUtil.formatXML(doc);
+			content = DDMXMLUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(

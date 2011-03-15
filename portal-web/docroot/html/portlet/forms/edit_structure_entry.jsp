@@ -22,7 +22,7 @@ String callback = ParamUtil.getString(request, "callback");
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.ADD);
 String resourceNamespace = ParamUtil.getString(request, "resourceNamespace");
 
-FormsStructureEntry structureEntry = (FormsStructureEntry)request.getAttribute(WebKeys.FORMS_STRUCTURE_ENTRY);
+DDMStructureEntry structureEntry = (DDMStructureEntry)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_ENTRY);
 
 long groupId = BeanParamUtil.getLong(structureEntry, request, "groupId", scopeGroupId);
 
@@ -51,7 +51,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 	<liferay-ui:error exception="<%= StructureEntryNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= StructureEntryXsdException.class %>" message="please-enter-a-valid-xsd" />
 
-	<aui:model-context bean="<%= structureEntry %>" model="<%= FormsStructureEntry.class %>" />
+	<aui:model-context bean="<%= structureEntry %>" model="<%= DDMStructureEntry.class %>" />
 
 	<aui:input name="name" />
 
@@ -60,7 +60,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 			<c:choose>
 				<c:when test="<%= structureEntry == null %>">
 					<c:choose>
-						<c:when test="<%= PropsValues.FORMS_STRUCTURE_ENTRY_FORCE_AUTOGENERATE_ID %>">
+						<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_ENTRY_FORCE_AUTOGENERATE_ID %>">
 							<aui:input name="newStructureId" type="hidden" />
 							<aui:input name="autoStructureId" type="hidden" value="<%= true %>" />
 						</c:when>
@@ -189,7 +189,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 			fields:
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(xsd) %>">
-					<%= FormsXSDUtil.getJSONArray(xsd) %>
+					<%= DDMXSDUtil.getJSONArray(xsd) %>
 				</c:when>
 				<c:otherwise>
 					[

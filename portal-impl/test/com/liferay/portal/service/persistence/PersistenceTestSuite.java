@@ -40,8 +40,6 @@ import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceT
 import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceTest;
-import com.liferay.portlet.forms.service.persistence.FormsStructureEntryLinkPersistenceTest;
-import com.liferay.portlet.forms.service.persistence.FormsStructureEntryPersistenceTest;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceTest;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceTest;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceTest;
@@ -195,9 +193,6 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(ExpandoRowPersistenceTest.class);
 		testSuite.addTestSuite(ExpandoTablePersistenceTest.class);
 		testSuite.addTestSuite(ExpandoValuePersistenceTest.class);
-
-		testSuite.addTestSuite(FormsStructureEntryLinkPersistenceTest.class);
-		testSuite.addTestSuite(FormsStructureEntryPersistenceTest.class);
 
 		testSuite.addTestSuite(IGFolderPersistenceTest.class);
 		testSuite.addTestSuite(IGImagePersistenceTest.class);

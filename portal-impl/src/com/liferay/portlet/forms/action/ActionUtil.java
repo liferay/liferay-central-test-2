@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.forms.model.FormsStructureEntry;
-import com.liferay.portlet.forms.service.FormsStructureEntryServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryServiceUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -38,14 +38,15 @@ public class ActionUtil {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String structureId = ParamUtil.getString(request, "structureId");
 
-		FormsStructureEntry structureEntry = null;
+		DDMStructureEntry structureEntry = null;
 
 		if (Validator.isNotNull(structureId)) {
-			structureEntry = FormsStructureEntryServiceUtil.getStructureEntry(
+			structureEntry = DDMStructureEntryServiceUtil.getStructureEntry(
 				groupId, structureId);
 		}
 
-		request.setAttribute(WebKeys.FORMS_STRUCTURE_ENTRY, structureEntry);
+		request.setAttribute(
+			WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_ENTRY, structureEntry);
 	}
 
 	public static void getStructureEntry(PortletRequest portletRequest)
