@@ -78,6 +78,8 @@ public class PortletDataHandlerKeys {
 
 	public static final String PORTLETS_MERGE_MODE_REPLACE = "REPLACE";
 
+	public static final String PUBLISH_TO_REMOTE = "PUBLISH_TO_REMOTE";
+
 	public static final String SELECTED_LAYOUTS = "SELECTED_LAYOUTS";
 
 	public static final String THEME = "THEME";

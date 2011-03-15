@@ -644,6 +644,7 @@ public class StagingImpl implements Staging {
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE});
 		}
 
+		/*
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS)) {
 
@@ -651,6 +652,7 @@ public class StagingImpl implements Staging {
 				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 				new String[] {Boolean.TRUE.toString()});
 		}
+		*/
 
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.DELETE_PORTLET_DATA)) {
@@ -1488,6 +1490,9 @@ public class StagingImpl implements Staging {
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
 
+		parameterMap.put(
+			PortletDataHandlerKeys.PUBLISH_TO_REMOTE,
+			new String[] {Boolean.TRUE.toString()});
 
 		if (scope.equals("selected-pages")) {
 			layoutIdMap = new LinkedHashMap<Long, Boolean>();
