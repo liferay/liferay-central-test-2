@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -508,7 +510,8 @@ public class DocumentImpl implements Document {
 		return sb.toString();
 	}
 
-	private static final String _DATE_FORMAT_PATTERN = "yyyyMMddHHmmss";
+	private static final String _DATE_FORMAT_PATTERN = PropsUtil.get(
+		PropsKeys.INDEX_TIME_FORMAT);
 
 	private static final String _UID_FIELD = "_FIELD_";
 

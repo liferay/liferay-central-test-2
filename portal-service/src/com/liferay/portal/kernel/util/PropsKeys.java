@@ -733,6 +733,8 @@ public interface PropsKeys {
 
 	public static final String INDEX_SEARCH_SCORING_ENABLED = "index.search.scoring.enabled";
 
+	public static final String INDEX_TIME_FORMAT = "index.time.format";
+
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
 	public static final String INVITATION_EMAIL_MAX_RECIPIENTS = "invitation.email.max.recipients";
