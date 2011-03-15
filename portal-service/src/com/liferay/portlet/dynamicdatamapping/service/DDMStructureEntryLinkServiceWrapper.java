@@ -1,0 +1,78 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portlet.dynamicdatamapping.service;
+
+/**
+ * <p>
+ * This class is a wrapper for {@link DDMStructureEntryLinkService}.
+ * </p>
+ *
+ * @author    Brian Wing Shun Chan
+ * @see       DDMStructureEntryLinkService
+ * @generated
+ */
+public class DDMStructureEntryLinkServiceWrapper
+	implements DDMStructureEntryLinkService {
+	public DDMStructureEntryLinkServiceWrapper(
+		DDMStructureEntryLinkService ddmStructureEntryLinkService) {
+		_ddmStructureEntryLinkService = ddmStructureEntryLinkService;
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink addStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureEntryLinkService.addStructureEntryLink(structureId,
+			className, classPK, serviceContext);
+	}
+
+	public void deleteStructureEntryLink(long groupId,
+		java.lang.String structureId, long structureEntryLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureEntryLinkService.deleteStructureEntryLink(groupId,
+			structureId, structureEntryLinkId);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink getStructureEntryLink(
+		long groupId, java.lang.String structureId, java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureEntryLinkService.getStructureEntryLink(groupId,
+			structureId, className, classPK);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink updateStructureEntryLink(
+		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureEntryLinkService.updateStructureEntryLink(structureEntryLinkId,
+			structureId, groupId, className, classPK);
+	}
+
+	public DDMStructureEntryLinkService getWrappedDDMStructureEntryLinkService() {
+		return _ddmStructureEntryLinkService;
+	}
+
+	public void setWrappedDDMStructureEntryLinkService(
+		DDMStructureEntryLinkService ddmStructureEntryLinkService) {
+		_ddmStructureEntryLinkService = ddmStructureEntryLinkService;
+	}
+
+	private DDMStructureEntryLinkService _ddmStructureEntryLinkService;
+}

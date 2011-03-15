@@ -1646,6 +1646,39 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryModelImpl">
+		<attributes>
+			<id name="structureEntryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="structureId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="xsd" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryLinkModelImpl">
+		<attributes>
+			<id name="structureEntryLinkId" />
+			<basic name="structureId" />
+			<basic name="className" />
+			<basic name="classPK" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl">
 		<attributes>
 			<id name="columnId" />
@@ -1694,6 +1727,39 @@
 			<basic name="data">
 				<column name="DATA_" />
 			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryModelImpl">
+		<attributes>
+			<id name="structureEntryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="structureId" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="xsd" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkModelImpl">
+		<attributes>
+			<id name="structureEntryLinkId" />
+			<basic name="structureId" />
+			<basic name="className" />
+			<basic name="classPK" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -2773,39 +2839,10 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryModelImpl">
-		<attributes>
-			<id name="structureEntryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="structureId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="xsd" />
-			<transient name="primaryKey" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkModelImpl">
-		<attributes>
-			<id name="structureEntryLinkId" />
-			<basic name="structureId" />
-			<basic name="className" />
-			<basic name="classPK" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
+	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
+		<table name="Counter" />
+		<attributes />
+	</entity>
 	<entity class="com.liferay.portal.model.impl.AccountImpl" name="Account">
 		<table name="Account_" />
 		<attributes />
@@ -3258,6 +3295,14 @@
 		<table name="DLFolder" />
 		<attributes />
 	</entity>
+	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryImpl" name="DDMStructureEntry">
+		<table name="DDMStructureEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryLinkImpl" name="DDMStructureEntryLink">
+		<table name="DDMStructureEntryLink" />
+		<attributes />
+	</entity>
 	<entity class="com.liferay.portlet.expando.model.impl.ExpandoColumnImpl" name="ExpandoColumn">
 		<table name="ExpandoColumn" />
 		<attributes>
@@ -3292,6 +3337,14 @@
 			<transient name="string" />
 			<transient name="stringArray" />
 		</attributes>
+	</entity>
+	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryImpl" name="FormsStructureEntry">
+		<table name="FormsStructureEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkImpl" name="FormsStructureEntryLink">
+		<table name="FormsStructureEntryLink" />
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" name="IGFolder">
 		<table name="IGFolder" />
@@ -3493,18 +3546,6 @@
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" name="WikiPageResource">
 		<table name="WikiPageResource" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
-		<table name="Counter" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryImpl" name="FormsStructureEntry">
-		<table name="FormsStructureEntry" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkImpl" name="FormsStructureEntryLink">
-		<table name="FormsStructureEntryLink" />
 		<attributes />
 	</entity>
 </entity-mappings>

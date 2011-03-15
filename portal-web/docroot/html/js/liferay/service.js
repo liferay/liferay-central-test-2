@@ -709,6 +709,28 @@ Liferay.Service.registerClass(
 	}
 );
 
+Liferay.Service.register("Liferay.Service.DDM", "com.liferay.portlet.dynamicdatamapping.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.DDM, "DDMStructureEntry",
+	{
+		addStructureEntry: true,
+		deleteStructureEntry: true,
+		getStructureEntry: true,
+		updateStructureEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.DDM, "DDMStructureEntryLink",
+	{
+		addStructureEntryLink: true,
+		deleteStructureEntryLink: true,
+		getStructureEntryLink: true,
+		updateStructureEntryLink: true
+	}
+);
+
 Liferay.Service.register("Liferay.Service.Expando", "com.liferay.portlet.expando.service");
 
 Liferay.Service.registerClass(
@@ -736,6 +758,28 @@ Liferay.Service.registerClass(
 	Liferay.Service.Flags, "FlagsEntry",
 	{
 		addEntry: true
+	}
+);
+
+Liferay.Service.register("Liferay.Service.Forms", "com.liferay.portlet.forms.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Forms, "FormsStructureEntry",
+	{
+		addStructureEntry: true,
+		deleteStructureEntry: true,
+		getStructureEntry: true,
+		updateStructureEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Forms, "FormsStructureEntryLink",
+	{
+		addStructureEntryLink: true,
+		deleteStructureEntryLink: true,
+		getStructureEntryLink: true,
+		updateStructureEntryLink: true
 	}
 );
 
@@ -1056,27 +1100,5 @@ Liferay.Service.registerClass(
 		subscribePage: true,
 		unsubscribePage: true,
 		updatePage: true
-	}
-);
-
-Liferay.Service.register("Liferay.Service.Forms", "com.liferay.portlet.forms.service");
-
-Liferay.Service.registerClass(
-	Liferay.Service.Forms, "FormsStructureEntry",
-	{
-		addStructureEntry: true,
-		deleteStructureEntry: true,
-		getStructureEntry: true,
-		updateStructureEntry: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.Forms, "FormsStructureEntryLink",
-	{
-		addStructureEntryLink: true,
-		deleteStructureEntryLink: true,
-		getStructureEntryLink: true,
-		updateStructureEntryLink: true
 	}
 );
