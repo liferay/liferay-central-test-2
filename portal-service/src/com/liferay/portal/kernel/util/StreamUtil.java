@@ -17,15 +17,14 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import java.nio.ByteBuffer;
 import java.nio.channels.Channel;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.channels.WritableByteChannel;
+import java.nio.channels.FileChannel;
 
 /**
  * @author Brian Wing Shun Chan
@@ -36,10 +35,6 @@ public class StreamUtil {
 	public static final int BUFFER_SIZE = GetterUtil.getInteger(
 		System.getProperty(StreamUtil.class.getName() + ".buffer.size"),
 		8192);
-
-	public static final boolean USE_NIO = GetterUtil.getBoolean(
-		System.getProperty(StreamUtil.class.getName() + ".use.nio"),
-		false);
 
 	public static void cleanUp(Channel channel) {
 		try {
@@ -141,14 +136,19 @@ public class StreamUtil {
 			bufferSize = BUFFER_SIZE;
 		}
 
-		if (USE_NIO) {
-			ReadableByteChannel readableByteChannel = Channels.newChannel(
-				inputStream);
-			WritableByteChannel writableByteChannel = Channels.newChannel(
-				outputStream);
+		if ((inputStream instanceof FileInputStream) &&
+			(outputStream instanceof FileOutputStream)) {
+			FileChannel sourceChannel =
+				((FileInputStream)inputStream).getChannel();
+			FileChannel targetChannel =
+				((FileOutputStream)outputStream).getChannel();
 
-			transfer(
-				readableByteChannel, writableByteChannel, bufferSize, cleanUp);
+			long position = 0;
+
+			while (position < sourceChannel.size()) {
+				position += sourceChannel.transferTo(
+					position, sourceChannel.size() - position, targetChannel);
+			}
 		}
 		else {
 			try {
@@ -164,71 +164,6 @@ public class StreamUtil {
 				if (cleanUp) {
 					cleanUp(inputStream, outputStream);
 				}
-			}
-		}
-	}
-
-	public static void transfer(
-			ReadableByteChannel readableByteChannel,
-			WritableByteChannel writableByteChannel)
-		throws IOException {
-
-		transfer(readableByteChannel, writableByteChannel, BUFFER_SIZE);
-	}
-
-	public static void transfer(
-			ReadableByteChannel readableByteChannel,
-			WritableByteChannel writableByteChannel, boolean cleanUp)
-		throws IOException {
-
-		transfer(
-			readableByteChannel, writableByteChannel, BUFFER_SIZE, cleanUp);
-	}
-
-	public static void transfer(
-			ReadableByteChannel readableByteChannel,
-			WritableByteChannel writableByteChannel, int bufferSize)
-		throws IOException {
-
-		transfer(readableByteChannel, writableByteChannel, bufferSize, true);
-	}
-
-	public static void transfer(
-			ReadableByteChannel readableByteChannel,
-			WritableByteChannel writableByteChannel, int bufferSize,
-			boolean cleanUp)
-		throws IOException {
-
-		try {
-			if (readableByteChannel == null) {
-				throw new IllegalArgumentException(
-					"Readable byte channel cannot be null");
-			}
-
-			if (writableByteChannel == null) {
-				throw new IllegalArgumentException(
-					"Writable byte channel cannot be null");
-			}
-
-			ByteBuffer byteBuffer = ByteBuffer.allocateDirect(bufferSize);
-
-			while (readableByteChannel.read(byteBuffer) != -1) {
-				byteBuffer.flip();
-
-				writableByteChannel.write(byteBuffer);
-
-				byteBuffer.compact();
-			}
-
-			byteBuffer.flip();
-
-			while (byteBuffer.hasRemaining()) {
-				writableByteChannel.write(byteBuffer);
-			}
-		}
-		finally {
-			if (cleanUp) {
-				cleanUp(readableByteChannel, writableByteChannel);
 			}
 		}
 	}
