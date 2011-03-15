@@ -119,6 +119,42 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
+	* Gets the create date of this layout.
+	*
+	* @return the create date of this layout
+	*/
+	public java.util.Date getCreateDate() {
+		return _layout.getCreateDate();
+	}
+
+	/**
+	* Sets the create date of this layout.
+	*
+	* @param createDate the create date of this layout
+	*/
+	public void setCreateDate(java.util.Date createDate) {
+		_layout.setCreateDate(createDate);
+	}
+
+	/**
+	* Gets the modified date of this layout.
+	*
+	* @return the modified date of this layout
+	*/
+	public java.util.Date getModifiedDate() {
+		return _layout.getModifiedDate();
+	}
+
+	/**
+	* Sets the modified date of this layout.
+	*
+	* @param modifiedDate the modified date of this layout
+	*/
+	public void setModifiedDate(java.util.Date modifiedDate) {
+		_layout.setModifiedDate(modifiedDate);
+	}
+
+	/**
 	* Gets the private layout of this layout.
 	*
 	* @return the private layout of this layout

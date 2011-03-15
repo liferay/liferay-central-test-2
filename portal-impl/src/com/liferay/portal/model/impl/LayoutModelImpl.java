@@ -38,6 +38,7 @@ import java.lang.reflect.Proxy;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -68,6 +69,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			{ "plid", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
 			{ "privateLayout", Types.BOOLEAN },
 			{ "layoutId", Types.BIGINT },
 			{ "parentLayoutId", Types.BIGINT },
@@ -90,7 +93,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			{ "priority", Types.INTEGER },
 			{ "layoutPrototypeId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,modifiedDate DATE null,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Layout";
 	public static final String ORDER_BY_JPQL = " ORDER BY layout.parentLayoutId ASC, layout.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Layout.parentLayoutId ASC, Layout.priority ASC";
@@ -117,6 +120,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		model.setPlid(soapModel.getPlid());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setPrivateLayout(soapModel.getPrivateLayout());
 		model.setLayoutId(soapModel.getLayoutId());
 		model.setParentLayoutId(soapModel.getParentLayoutId());
@@ -229,6 +234,22 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
 	}
 
 	public boolean getPrivateLayout() {
@@ -936,6 +957,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		layoutModelImpl._setOriginalGroupId = false;
 		layoutImpl.setCompanyId(getCompanyId());
 
+		layoutImpl.setCreateDate(getCreateDate());
+
+		layoutImpl.setModifiedDate(getModifiedDate());
+
 		layoutImpl.setPrivateLayout(getPrivateLayout());
 
 		layoutModelImpl._originalPrivateLayout = layoutModelImpl._privateLayout;
@@ -1055,7 +1080,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -1065,6 +1090,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
 		sb.append(", privateLayout=");
 		sb.append(getPrivateLayout());
 		sb.append(", layoutId=");
@@ -1113,7 +1142,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Layout");
@@ -1134,6 +1163,14 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
 		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>privateLayout</column-name><column-value><![CDATA[");
@@ -1232,6 +1269,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private Date _createDate;
+	private Date _modifiedDate;
 	private boolean _privateLayout;
 	private boolean _originalPrivateLayout;
 	private boolean _setOriginalPrivateLayout;

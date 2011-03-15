@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -66,6 +67,8 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		newLayout.setUuid(randomString());
 		newLayout.setGroupId(nextLong());
 		newLayout.setCompanyId(nextLong());
+		newLayout.setCreateDate(nextDate());
+		newLayout.setModifiedDate(nextDate());
 		newLayout.setPrivateLayout(randomBoolean());
 		newLayout.setLayoutId(nextLong());
 		newLayout.setParentLayoutId(nextLong());
@@ -96,6 +99,10 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingLayout.getPlid(), newLayout.getPlid());
 		assertEquals(existingLayout.getGroupId(), newLayout.getGroupId());
 		assertEquals(existingLayout.getCompanyId(), newLayout.getCompanyId());
+		assertEquals(Time.getShortTimestamp(existingLayout.getCreateDate()),
+			Time.getShortTimestamp(newLayout.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingLayout.getModifiedDate()),
+			Time.getShortTimestamp(newLayout.getModifiedDate()));
 		assertEquals(existingLayout.getPrivateLayout(),
 			newLayout.getPrivateLayout());
 		assertEquals(existingLayout.getLayoutId(), newLayout.getLayoutId());
@@ -198,6 +205,8 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		layout.setUuid(randomString());
 		layout.setGroupId(nextLong());
 		layout.setCompanyId(nextLong());
+		layout.setCreateDate(nextDate());
+		layout.setModifiedDate(nextDate());
 		layout.setPrivateLayout(randomBoolean());
 		layout.setLayoutId(nextLong());
 		layout.setParentLayoutId(nextLong());

@@ -752,6 +752,8 @@ create table Layout (
 	plid LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
 	privateLayout BOOLEAN,
 	layoutId LONG,
 	parentLayoutId LONG,

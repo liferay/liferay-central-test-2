@@ -249,6 +249,12 @@
 			</basic>
 			<basic name="groupId" />
 			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="privateLayout" />
 			<basic name="layoutId" />
 			<basic name="parentLayoutId" />

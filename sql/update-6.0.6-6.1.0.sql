@@ -74,9 +74,16 @@ update DLFolder set repositoryId = groupId;
 
 update Group_ set type_ = 3 where type_ = 0;
 
+alter table Layout add createDate DATE null;
+alter table Layout add modifiedDate DATE null;
 alter table Layout add keywords STRING null;
 alter table Layout add robots STRING null;
 alter table Layout drop column dlFolderId;
+
+update Layout set createDate = CURRENT_TIMESTAMP;
+update Layout set modifiedDate = CURRENT_TIMESTAMP;
+
+COMMIT_TRANSACTION;
 
 create table LayoutRevision (
 	layoutRevisionId LONG not null primary key,

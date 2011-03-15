@@ -17,8 +17,10 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +35,26 @@ public class LayoutJSONSerializer {
 		jsonObject.put("plid", model.getPlid());
 		jsonObject.put("groupId", model.getGroupId());
 		jsonObject.put("companyId", model.getCompanyId());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObject.put("createDate", createDateJSON);
+
+		Date modifiedDate = model.getModifiedDate();
+
+		String modifiedDateJSON = StringPool.BLANK;
+
+		if (modifiedDate != null) {
+			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
+		}
+
+		jsonObject.put("modifiedDate", modifiedDateJSON);
 		jsonObject.put("privateLayout", model.getPrivateLayout());
 		jsonObject.put("layoutId", model.getLayoutId());
 		jsonObject.put("parentLayoutId", model.getParentLayoutId());

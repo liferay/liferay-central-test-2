@@ -116,6 +116,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, layoutId, parentLayoutId, name, type,
 			hidden, friendlyURL);
 
+		Date now = new Date();
+
 		long plid = counterLocalService.increment();
 
 		Layout layout = layoutPersistence.create(plid);
@@ -123,6 +125,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setUuid(serviceContext.getUuid());
 		layout.setGroupId(groupId);
 		layout.setCompanyId(user.getCompanyId());
+		layout.setCreateDate(serviceContext.getCreateDate(now));
+		layout.setModifiedDate(serviceContext.getModifiedDate(now));
 		layout.setPrivateLayout(privateLayout);
 		layout.setLayoutId(layoutId);
 		layout.setParentLayoutId(parentLayoutId);
@@ -761,6 +765,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout updateFriendlyURL(long plid, String friendlyURL)
 		throws PortalException, SystemException {
 
+		Date now = new Date();
+
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
 		friendlyURL = getFriendlyURL(
@@ -771,6 +777,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			friendlyURL);
 
+		layout.setModifiedDate(now);
 		layout.setFriendlyURL(friendlyURL);
 
 		layoutPersistence.update(layout, false);
@@ -802,6 +809,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		validateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
 
+		Date now = new Date();
+
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
@@ -810,6 +819,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				getNextPriority(groupId, privateLayout, parentLayoutId));
 		}
 
+		layout.setModifiedDate(serviceContext.getModifiedDate(now));
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setNameMap(nameMap);
 		layout.setTitleMap(titleMap);
@@ -862,9 +872,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String typeSettings)
 		throws PortalException, SystemException {
 
+		Date now = new Date();
+
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
+		layout.setModifiedDate(now);
 		layout.setTypeSettings(typeSettings);
 
 		layoutPersistence.update(layout, false);
@@ -877,8 +890,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String colorSchemeId, String css, boolean wapTheme)
 		throws PortalException, SystemException {
 
+		Date now = new Date();
+
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
+
+		layout.setModifiedDate(now);
 
 		if (wapTheme) {
 			layout.setWapThemeId(themeId);
@@ -898,8 +915,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout updateName(Layout layout, String name, String languageId)
 		throws PortalException, SystemException {
 
+		Date now = new Date();
+
 		validateName(name, languageId);
 
+		layout.setModifiedDate(now);
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
 		layoutPersistence.update(layout, false);
@@ -937,6 +957,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		validateParentLayoutId(
 			groupId, privateLayout, layoutId, parentLayoutId);
 
+		Date now = new Date();
+
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
@@ -945,6 +967,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				getNextPriority(groupId, privateLayout, parentLayoutId));
 		}
 
+		layout.setModifiedDate(now);
 		layout.setParentLayoutId(parentLayoutId);
 
 		layoutPersistence.update(layout, false);
@@ -954,6 +977,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateParentLayoutId(long plid, long parentPlid)
 		throws PortalException, SystemException {
+
+		Date now = new Date();
 
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
@@ -982,6 +1007,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layout.setPriority(priority);
 		}
 
+		layout.setModifiedDate(now);
 		layout.setParentLayoutId(parentLayoutId);
 
 		layoutPersistence.update(layout, false);
@@ -996,12 +1022,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return layout;
 		}
 
+		Date now = new Date();
+
 		boolean lessThan = false;
 
 		if (layout.getPriority() < priority) {
 			lessThan = true;
 		}
 
+		layout.setModifiedDate(now);
 		layout.setPriority(priority);
 
 		layoutPersistence.update(layout, false);
@@ -1016,6 +1045,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layouts, new LayoutPriorityComparator(layout, lessThan));
 
 		for (Layout curLayout : layouts) {
+			curLayout.setModifiedDate(now);
 			curLayout.setPriority(priority++);
 
 			layoutPersistence.update(curLayout, false);

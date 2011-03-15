@@ -21,6 +21,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -114,6 +115,34 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param companyId the company ID of this layout
 	 */
 	public void setCompanyId(long companyId);
+
+	/**
+	 * Gets the create date of this layout.
+	 *
+	 * @return the create date of this layout
+	 */
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this layout.
+	 *
+	 * @param createDate the create date of this layout
+	 */
+	public void setCreateDate(Date createDate);
+
+	/**
+	 * Gets the modified date of this layout.
+	 *
+	 * @return the modified date of this layout
+	 */
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this layout.
+	 *
+	 * @param modifiedDate the modified date of this layout
+	 */
+	public void setModifiedDate(Date modifiedDate);
 
 	/**
 	 * Gets the private layout of this layout.
