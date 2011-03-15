@@ -370,13 +370,13 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long repositoryId, long folderId, int status, int start,
-			int end)
+			int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(repositoryId);
 
 		return localRepository.getFoldersAndFileEntriesAndFileShortcuts(
-			folderId, status, start, end);
+			folderId, status, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(

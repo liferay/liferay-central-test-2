@@ -14,17 +14,21 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 import java.util.Date;
 
 /**
+ * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public class FolderModifiedDateComparator extends OrderByComparator {
+public class RepositoryModelModifiedDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "modifiedDate ASC";
 
@@ -32,32 +36,17 @@ public class FolderModifiedDateComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"modifiedDate"};
 
-	public FolderModifiedDateComparator() {
+	public RepositoryModelModifiedDateComparator() {
 		this(false);
 	}
 
-	public FolderModifiedDateComparator(boolean ascending) {
+	public RepositoryModelModifiedDateComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		Date modifiedDate1 = null;
-		Date modifiedDate2 = null;
-
-		if (obj1 instanceof DLFolder) {
-			DLFolder dlFolder1 = (DLFolder)obj1;
-			DLFolder dlFolder2 = (DLFolder)obj2;
-
-			modifiedDate1 = dlFolder1.getModifiedDate();
-			modifiedDate2 = dlFolder2.getModifiedDate();
-		}
-		else {
-			Folder folder1 = (Folder)obj1;
-			Folder folder2 = (Folder)obj2;
-
-			modifiedDate1 = folder1.getModifiedDate();
-			modifiedDate2 = folder2.getModifiedDate();
-		}
+		Date modifiedDate1 = getModifiedDate(obj1);
+		Date modifiedDate2 = getModifiedDate(obj2);
 
 		int value = DateUtil.compareTo(modifiedDate1, modifiedDate2);
 
@@ -84,6 +73,34 @@ public class FolderModifiedDateComparator extends OrderByComparator {
 
 	public boolean isAscending() {
 		return _ascending;
+	}
+
+	protected Date getModifiedDate(Object obj) {
+		if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+			return dlFileEntry.getModifiedDate();
+		}
+		else if (obj instanceof FileEntry) {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getModifiedDate();
+		}
+		else if (obj instanceof DLFolder) {
+			DLFolder dlFolder = (DLFolder)obj;
+
+			return dlFolder.getModifiedDate();
+		}
+		else if (obj instanceof Folder){
+			Folder folder = (Folder)obj;
+
+			return folder.getModifiedDate();
+		}
+		else {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
+
+			return dlFileShortcut.getModifiedDate();
+		}
 	}
 
 	private boolean _ascending;

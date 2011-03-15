@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLAppServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -346,10 +346,19 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long repositoryId, long folderId, int status, int start, int end)
 		throws PortalException, SystemException {
 
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			repositoryId, folderId, status, start, end, null);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long repositoryId, long folderId, int status, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
 		Repository repository = getRepository(repositoryId);
 
 		return repository.getFoldersAndFileEntriesAndFileShortcuts(
-			folderId, status, start, end);
+			folderId, status, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
@@ -385,7 +394,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		return getGroupFileEntries(
 			repositoryId, userId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			start, end, new FileEntryModifiedDateComparator());
+			start, end, new RepositoryModelModifiedDateComparator());
 	}
 
 	public List<FileEntry> getGroupFileEntries(
@@ -405,7 +414,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		return getGroupFileEntries(
 			repositoryId, userId, rootFolderId, start, end,
-			new FileEntryModifiedDateComparator());
+			new RepositoryModelModifiedDateComparator());
 	}
 
 	public List<FileEntry> getGroupFileEntries(

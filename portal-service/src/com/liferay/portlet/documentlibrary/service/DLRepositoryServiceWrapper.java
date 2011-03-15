@@ -172,10 +172,11 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	}
 
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
+		long groupId, long folderId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
-			folderId, status, start, end);
+			folderId, status, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,

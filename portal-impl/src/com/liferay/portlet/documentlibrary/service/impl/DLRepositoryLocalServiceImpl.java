@@ -59,8 +59,8 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLRepositoryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
@@ -483,11 +483,12 @@ public class DLRepositoryLocalServiceImpl
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return dlFolderFinder.findF_FE_FS_ByG_F_S(
-			groupId, folderId, status, start, end);
+			groupId, folderId, status, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
@@ -531,7 +532,7 @@ public class DLRepositoryLocalServiceImpl
 		throws SystemException {
 
 		return getGroupFileEntries(
-			groupId, start, end, new FileEntryModifiedDateComparator());
+			groupId, start, end, new RepositoryModelModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(
@@ -546,7 +547,8 @@ public class DLRepositoryLocalServiceImpl
 		throws SystemException {
 
 		return getGroupFileEntries(
-			groupId, userId, start, end, new FileEntryModifiedDateComparator());
+			groupId, userId, start, end,
+			new RepositoryModelModifiedDateComparator());
 	}
 
 	public List<DLFileEntry> getGroupFileEntries(

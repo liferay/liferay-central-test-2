@@ -87,7 +87,8 @@ public interface LocalRepository {
 		throws SystemException;
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long folderId, int status, int start, int end)
+			long folderId, int status, int start, int end,
+			OrderByComparator obc)
 		throws SystemException;
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(

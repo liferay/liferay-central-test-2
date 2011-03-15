@@ -756,7 +756,7 @@ public class DLRepositoryServiceHttp {
 
 	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
-		int start, int end)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
@@ -764,7 +764,7 @@ public class DLRepositoryServiceHttp {
 					_getFoldersAndFileEntriesAndFileShortcutsParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, status, start, end);
+					folderId, status, start, end, obc);
 
 			Object returnObj = null;
 
@@ -1859,7 +1859,10 @@ public class DLRepositoryServiceHttp {
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsParameterTypes20 =
-		new Class[] { long.class, long.class, int.class, int.class, int.class };
+		new Class[] {
+			long.class, long.class, int.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes21 =
 		new Class[] { long.class, long.class, int.class };
 	private static final Class<?>[] _getFoldersCountParameterTypes22 = new Class[] {

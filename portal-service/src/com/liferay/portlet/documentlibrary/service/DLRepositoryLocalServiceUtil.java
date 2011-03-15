@@ -249,11 +249,12 @@ public class DLRepositoryLocalServiceUtil {
 	}
 
 	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, long folderId, int status, int start, int end)
+		long groupId, long folderId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getFoldersAndFileEntriesAndFileShortcuts(groupId, folderId,
-			status, start, end);
+			status, start, end, obc);
 	}
 
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(

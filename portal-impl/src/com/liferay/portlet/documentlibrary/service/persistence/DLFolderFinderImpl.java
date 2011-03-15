@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -86,11 +87,12 @@ public class DLFolderFinderImpl
 	}
 
 	public List<Object> filterFindF_FE_FS_ByG_F_S(
-			long groupId, long folderId, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return doFindF_FE_FS_ByG_F_S(
-			groupId, folderId, status, start, end, true);
+			groupId, folderId, status, start, end, obc, true);
 	}
 
 	public List<Object> filterFindFE_FS_ByG_F_S(
@@ -102,11 +104,12 @@ public class DLFolderFinderImpl
 	}
 
 	public List<Object> findF_FE_FS_ByG_F_S(
-			long groupId, long folderId, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return doFindF_FE_FS_ByG_F_S(
-			groupId, folderId, status, start, end, false);
+			groupId, folderId, status, start, end, obc, false);
 	}
 
 	public List<Object> findFE_FS_ByG_F_S(
@@ -312,7 +315,7 @@ public class DLFolderFinderImpl
 
 	protected List<Object> doFindF_FE_FS_ByG_F_S(
 			long groupId, long folderId, int status, int start, int end,
-			boolean inlineSQLHelper)
+			OrderByComparator obc, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -374,6 +377,8 @@ public class DLFolderFinderImpl
 				sql = StringUtil.replace(
 					sql, "(DLFileVersion.status = ?) AND", "");
 			}
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

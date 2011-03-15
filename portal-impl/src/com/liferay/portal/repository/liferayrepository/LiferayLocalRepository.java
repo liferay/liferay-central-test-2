@@ -209,12 +209,14 @@ public class LiferayLocalRepository
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long folderId, int status, int start, int end)
+			long folderId, int status, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		List<Object> dlFoldersAndFileEntriesAndFileShortcuts =
 			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
-					getGroupId(), toFolderId(folderId), status, start, end);
+					getGroupId(), toFolderId(folderId), status, start, end,
+					obc);
 
 		return toFileEntriesAndFolders(dlFoldersAndFileEntriesAndFileShortcuts);
 	}

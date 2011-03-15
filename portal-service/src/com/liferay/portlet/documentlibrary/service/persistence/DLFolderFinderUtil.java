@@ -42,11 +42,12 @@ public class DLFolderFinderUtil {
 	}
 
 	public static java.util.List<java.lang.Object> filterFindF_FE_FS_ByG_F_S(
-		long groupId, long folderId, int status, int start, int end)
+		long groupId, long folderId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .filterFindF_FE_FS_ByG_F_S(groupId, folderId, status, start,
-			end);
+			end, obc);
 	}
 
 	public static java.util.List<java.lang.Object> filterFindFE_FS_ByG_F_S(
@@ -58,10 +59,12 @@ public class DLFolderFinderUtil {
 	}
 
 	public static java.util.List<java.lang.Object> findF_FE_FS_ByG_F_S(
-		long groupId, long folderId, int status, int start, int end)
+		long groupId, long folderId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findF_FE_FS_ByG_F_S(groupId, folderId, status, start, end);
+				   .findF_FE_FS_ByG_F_S(groupId, folderId, status, start, end,
+			obc);
 	}
 
 	public static java.util.List<java.lang.Object> findFE_FS_ByG_F_S(

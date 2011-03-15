@@ -15,16 +15,19 @@
 package com.liferay.portlet.documentlibrary.util.comparator;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 import java.util.Date;
 
 /**
  * @author Alexander Chow
  */
-public class FileEntryCreateDateComparator extends OrderByComparator {
+public class RepositoryModelCreateDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "createDate ASC";
 
@@ -32,32 +35,17 @@ public class FileEntryCreateDateComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"createDate"};
 
-	public FileEntryCreateDateComparator() {
+	public RepositoryModelCreateDateComparator() {
 		this(false);
 	}
 
-	public FileEntryCreateDateComparator(boolean ascending) {
+	public RepositoryModelCreateDateComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		Date createDate1 = null;
-		Date createDate2 = null;
-
-		if (obj1 instanceof DLFileEntry) {
-			DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
-			DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
-
-			createDate1 = dlFileEntry1.getCreateDate();
-			createDate2 = dlFileEntry2.getCreateDate();
-		}
-		else {
-			FileEntry fileEntry1 = (FileEntry)obj1;
-			FileEntry fileEntry2 = (FileEntry)obj2;
-
-			createDate1 = fileEntry1.getCreateDate();
-			createDate2 = fileEntry2.getCreateDate();
-		}
+		Date createDate1 = getCreateDate(obj1);
+		Date createDate2 = getCreateDate(obj2);
 
 		int value = DateUtil.compareTo(createDate1, createDate2);
 
@@ -84,6 +72,34 @@ public class FileEntryCreateDateComparator extends OrderByComparator {
 
 	public boolean isAscending() {
 		return _ascending;
+	}
+
+	protected Date getCreateDate(Object obj) {
+		if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+			return dlFileEntry.getCreateDate();
+		}
+		else if (obj instanceof FileEntry) {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getCreateDate();
+		}
+		else if (obj instanceof DLFolder) {
+			DLFolder dlFolder = (DLFolder)obj;
+
+			return dlFolder.getCreateDate();
+		}
+		else if (obj instanceof Folder){
+			Folder folder = (Folder)obj;
+
+			return folder.getCreateDate();
+		}
+		else {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
+
+			return dlFileShortcut.getCreateDate();
+		}
 	}
 
 	private boolean _ascending;

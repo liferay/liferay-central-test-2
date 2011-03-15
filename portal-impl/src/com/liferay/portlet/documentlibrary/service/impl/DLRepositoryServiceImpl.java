@@ -306,11 +306,12 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, long folderId, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S(
-			groupId, folderId, status, start, end);
+			groupId, folderId, status, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(

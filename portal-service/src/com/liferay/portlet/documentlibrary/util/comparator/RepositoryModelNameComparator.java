@@ -14,14 +14,18 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 /**
+ * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public class FolderNameComparator extends OrderByComparator {
+public class RepositoryModelNameComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "name ASC";
 
@@ -29,32 +33,17 @@ public class FolderNameComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"name"};
 
-	public FolderNameComparator() {
+	public RepositoryModelNameComparator() {
 		this(false);
 	}
 
-	public FolderNameComparator(boolean ascending) {
+	public RepositoryModelNameComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		String name1 = null;
-		String name2 = null;
-
-		if (obj1 instanceof DLFolder) {
-			DLFolder dlFolder1 = (DLFolder)obj1;
-			DLFolder dlFolder2 = (DLFolder)obj2;
-
-			name1 = dlFolder1.getName();
-			name2 = dlFolder2.getName();
-		}
-		else {
-			Folder folder1 = (Folder)obj1;
-			Folder folder2 = (Folder)obj2;
-
-			name1 = folder1.getName();
-			name2 = folder2.getName();
-		}
+		String name1 = getName(obj1);
+		String name2 = getName(obj2);
 
 		int value = name1.compareToIgnoreCase(name2);
 
@@ -81,6 +70,34 @@ public class FolderNameComparator extends OrderByComparator {
 
 	public boolean isAscending() {
 		return _ascending;
+	}
+
+	protected String getName(Object obj) {
+		if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+			return dlFileEntry.getTitle();
+		}
+		else if (obj instanceof FileEntry) {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getTitle();
+		}
+		else if (obj instanceof DLFolder) {
+			DLFolder dlFolder = (DLFolder)obj;
+
+			return dlFolder.getName();
+		}
+		else if (obj instanceof Folder){
+			Folder folder = (Folder)obj;
+
+			return folder.getName();
+		}
+		else {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
+
+			return dlFileShortcut.getToTitle();
+		}
 	}
 
 	private boolean _ascending;
