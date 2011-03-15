@@ -72,7 +72,10 @@ public abstract class JSONAction extends Action {
 			return null;
 		}
 
-		if (Validator.isNotNull(json)) {
+		if (ParamUtil.getBoolean(request, "refresh")) {
+			return mapping.findForward(ActionConstants.COMMON_REFERER);
+		}
+		else if (Validator.isNotNull(json)) {
 			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 			response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 

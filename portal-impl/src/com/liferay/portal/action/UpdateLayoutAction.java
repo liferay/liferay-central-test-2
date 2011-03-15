@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -38,7 +39,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
-import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
@@ -58,15 +59,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class UpdateLayoutAction extends Action {
+public class UpdateLayoutAction extends JSONAction {
 
-	public ActionForward execute(
+	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
@@ -84,6 +84,8 @@ public class UpdateLayoutAction extends Action {
 			themeDisplay.getPermissionChecker();
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
+
+		String json = StringPool.BLANK;
 
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
@@ -210,19 +212,11 @@ public class UpdateLayoutAction extends Action {
 			}
 		}
 
-		// The check for the refresh variable can be removed in the future. See
-		// LEP-6910.
-
-		if (ParamUtil.getBoolean(request, "refresh")) {
-			return mapping.findForward(ActionConstants.COMMON_REFERER);
+		if (cmd.equals(Constants.ADD) && (portletId != null)) {
+			addPortlet(mapping, form, request, response, portletId);
 		}
-		else {
-			if (cmd.equals(Constants.ADD) && (portletId != null)) {
-				addPortlet(mapping, form, request, response, portletId);
-			}
 
-			return null;
-		}
+		return json;
 	}
 
 	protected void addPortlet(
