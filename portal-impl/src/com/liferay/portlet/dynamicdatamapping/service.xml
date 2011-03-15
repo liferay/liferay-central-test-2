@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+
+<service-builder package-path="com.liferay.portlet.dynamicdatamapping">
+	<namespace>DDM</namespace>
+	<entity name="DDMStructureEntry" uuid="true" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="structureEntryId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="structureId" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="xsd" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_S" return-type="DDMStructureEntry" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="structureId" />
+		</finder>
+	</entity>
+	<entity name="DDMStructureEntryLink" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="structureEntryLinkId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="structureId" type="String" />
+		<column name="className" type="String" />
+		<column name="classPK" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="StructureId" return-type="Collection">
+			<finder-column name="structureId" />
+		</finder>
+		<finder name="S_C_C" return-type="DDMStructureEntryLink" unique="true">
+			<finder-column name="structureId" />
+			<finder-column name="className" />
+			<finder-column name="classPK" />
+		</finder>
+	</entity>
+	<exceptions>
+		<exception>StructureEntryDuplicateElement</exception>
+		<exception>StructureEntryDuplicateStructureId</exception>
+		<exception>StructureEntryStructureId</exception>
+		<exception>StructureEntryName</exception>
+		<exception>StructureEntryXsd</exception>
+	</exceptions>
+</service-builder>
