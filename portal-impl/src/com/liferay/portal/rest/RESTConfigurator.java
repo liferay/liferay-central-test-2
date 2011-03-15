@@ -57,13 +57,13 @@ public class RESTConfigurator extends FindClass {
 
 			File classPathFile = null;
 
-			int index = servicePropertiesPath.indexOf("_wl_cls_gen.jar!");
+			int pos = servicePropertiesPath.indexOf("_wl_cls_gen.jar!");
 
-			if (index != -1) {
-				String wlclsgenJarPath =
-					servicePropertiesPath.substring(0, index + 15);
+			if (pos != -1) {
+				String wlClsGenJarPath =
+					servicePropertiesPath.substring(0, pos + 15);
 
-				classPathFile = new File(wlclsgenJarPath);
+				classPathFile = new File(wlClsGenJarPath);
 			}
 			else {
 				File servicePropertiesFile = new File(servicePropertiesPath);
