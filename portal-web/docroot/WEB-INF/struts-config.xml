@@ -640,6 +640,13 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<!-- Dynamic Data Mapping -->
+
+		<action path="/dynamic_data_mapping/edit_structure_entry" type="com.liferay.portlet.dynamicdatamapping.action.EditStructureEntryAction">
+			<forward name="portlet.dynamic_data_mapping.edit_structure_entry" path="portlet.dynamic_data_mapping.edit_structure_entry" />
+			<forward name="portlet.dynamic_data_mapping.error" path="portlet.dynamic_data_mapping.error" />
+		</action>
+
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">
@@ -1175,13 +1182,6 @@
 
 		<action path="/flags/edit_entry" type="com.liferay.portlet.flags.action.EditEntryAction">
 			<forward name="portlet.flags.edit_entry" path="portlet.flags.edit_entry" />
-		</action>
-
-		<!-- Forms -->
-
-		<action path="/forms/edit_structure_entry" type="com.liferay.portlet.forms.action.EditStructureEntryAction">
-			<forward name="portlet.forms.edit_structure_entry" path="portlet.forms.edit_structure_entry" />
-			<forward name="portlet.forms.error" path="portlet.forms.error" />
 		</action>
 
 		<!-- Global Prayer Digest -->

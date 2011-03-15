@@ -1736,16 +1736,16 @@
 	</portlet>
 	<portlet>
 		<portlet-name>166</portlet-name>
-		<icon>/html/icons/forms.png</icon>
-		<struts-path>forms</struts-path>
+		<icon>/html/icons/dynamic_data_mapping.png</icon>
+		<struts-path>dynamic_data_mapping</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/forms/css/main.jsp</header-portlet-css>
-		<header-portlet-javascript>/html/portlet/forms/js/main.js</header-portlet-javascript>
-		<css-class-wrapper>portlet-forms</css-class-wrapper>
+		<header-portlet-css>/html/portlet/dynamic_data_mapping/css/main.jsp</header-portlet-css>
+		<header-portlet-javascript>/html/portlet/dynamic_data_mapping/js/main.js</header-portlet-javascript>
+		<css-class-wrapper>portlet-dynamic-data-mapping</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>

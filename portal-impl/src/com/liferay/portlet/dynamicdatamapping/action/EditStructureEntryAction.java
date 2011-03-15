@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.forms.action;
+package com.liferay.portlet.dynamicdatamapping.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
@@ -91,7 +91,7 @@ public class EditStructureEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.forms.error");
+				setForward(actionRequest, "portlet.dynamic_data_mapping.error");
 			}
 			else if (e instanceof StructureEntryDuplicateElementException ||
 					 e instanceof StructureEntryDuplicateStructureIdException ||
@@ -131,7 +131,8 @@ public class EditStructureEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.forms.error");
+				return mapping.findForward(
+					"portlet.dynamic_data_mapping.error");
 			}
 			else {
 				throw e;
@@ -140,7 +141,8 @@ public class EditStructureEntryAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(
-				renderRequest, "portlet.forms.edit_structure_entry"));
+				renderRequest,
+				"portlet.dynamic_data_mapping.edit_structure_entry"));
 	}
 
 	protected String getSaveAndContinueRedirect(
@@ -160,7 +162,8 @@ public class EditStructureEntryAction extends PortletAction {
 		portletURL.setWindowState(actionRequest.getWindowState());
 
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
-		portletURL.setParameter("struts_action", "/forms/edit_structure_entry");
+		portletURL.setParameter(
+			"struts_action", "/dynamic_data_mapping/edit_structure_entry");
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter("callback", callback, false);
 		portletURL.setParameter(

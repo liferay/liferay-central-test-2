@@ -23,7 +23,7 @@
 		</permissions>
 	</portlet-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.forms</model-name>
+		<model-name>com.liferay.portlet.dynamicdatamapping</model-name>
 		<portlet-ref>
 			<portlet-name>166</portlet-name>
 		</portlet-ref>
@@ -39,7 +39,7 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.forms.model.FormsStructureEntry</model-name>
+		<model-name>com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry</model-name>
 		<portlet-ref>
 			<portlet-name>166</portlet-name>
 		</portlet-ref>
@@ -62,7 +62,7 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.forms.model.FormsStructureEntryLink</model-name>
+		<model-name>com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink</model-name>
 		<portlet-ref>
 			<portlet-name>166</portlet-name>
 		</portlet-ref>

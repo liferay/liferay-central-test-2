@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/forms/init.jsp" %>
+<%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <liferay-ui:header
 	backURL="javascript:history.go(-1);"

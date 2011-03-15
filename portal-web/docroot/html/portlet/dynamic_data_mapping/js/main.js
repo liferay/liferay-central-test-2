@@ -1,5 +1,5 @@
 AUI().add(
-	'liferay-portlet-forms',
+	'liferay-portlet-dynamic-data-mapping',
 	function(A) {
 		var Lang = A.Lang;
 

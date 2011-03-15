@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.forms.action;
+package com.liferay.portlet.dynamicdatamapping.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
