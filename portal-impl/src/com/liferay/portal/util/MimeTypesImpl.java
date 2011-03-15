@@ -25,8 +25,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import org.apache.tika.Tika;
+import org.apache.tika.detect.DefaultDetector;
+import org.apache.tika.detect.Detector;
 import org.apache.tika.io.TikaInputStream;
+import org.apache.tika.metadata.Metadata;
 
 /**
  * @author Jorge Ferrer
@@ -34,6 +36,11 @@ import org.apache.tika.io.TikaInputStream;
  * @author Alexander Chow
  */
 public class MimeTypesImpl implements MimeTypes {
+
+	public MimeTypesImpl() {
+		_detector = new DefaultDetector(
+			org.apache.tika.mime.MimeTypes.getDefaultMimeTypes());
+	}
 
 	public String getContentType(File file) {
 		try {
@@ -52,10 +59,11 @@ public class MimeTypesImpl implements MimeTypes {
 		String contentType = null;
 
 		try {
-			Tika tika = new Tika();
+			Metadata metadata = new Metadata();
+			metadata.set(Metadata.RESOURCE_NAME_KEY, fileName);
 
-			contentType = tika.detect(
-				TikaInputStream.get(inputStream), fileName);
+			contentType = _detector.detect(
+				TikaInputStream.get(inputStream), metadata).toString();
 
 			if (contentType.contains("tika")) {
 				if (_log.isDebugEnabled()) {
@@ -88,9 +96,10 @@ public class MimeTypesImpl implements MimeTypes {
 		}
 
 		try {
-			Tika tika = new Tika();
+			Metadata metadata = new Metadata();
+			metadata.set(Metadata.RESOURCE_NAME_KEY, fileName);
 
-			String contentType = tika.detect(fileName);
+			String contentType = _detector.detect(null, metadata).toString();
 
 			if (!contentType.contains("tika")) {
 				return contentType;
@@ -105,6 +114,8 @@ public class MimeTypesImpl implements MimeTypes {
 
 		return ContentTypes.APPLICATION_OCTET_STREAM;
 	}
+
+	private Detector _detector;
 
 	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
 
