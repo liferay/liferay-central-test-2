@@ -180,6 +180,8 @@ public class ActionKeys {
 
 	public static final String PERMISSIONS_USER = "PERMISSIONS_USER";
 
+	public static final String PERSONALIZE = "PERSONALIZE";
+
 	public static final String PREFERENCES = "PREFERENCES";
 
 	public static final String PRINT = "PRINT";

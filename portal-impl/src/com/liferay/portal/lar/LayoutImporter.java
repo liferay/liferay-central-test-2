@@ -19,8 +19,11 @@ import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchLayoutSetPrototypeException;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
@@ -51,6 +54,7 @@ import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
@@ -61,9 +65,11 @@ import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeLoader;
@@ -75,6 +81,7 @@ import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.io.File;
@@ -132,6 +139,10 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean importTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME);
+		boolean isLayoutSetPrototype = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
+		boolean publishToRemote = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
 		String layoutsImportMode = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
 			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID);
@@ -240,6 +251,35 @@ public class LayoutImporter {
 			headerElement.attributeValue("group-id"));
 
 		context.setSourceGroupId(sourceGroupId);
+
+		// Layout Set Prototype
+
+		String layoutSetPrototypeUuid = headerElement.attributeValue(
+			"layout-set-prototype-uuid");
+
+		if (isLayoutSetPrototype &&
+			Validator.isNotNull(layoutSetPrototypeUuid)) {
+
+			if (publishToRemote) {
+				ServiceContext serviceContext =
+					ServiceContextThreadLocal.getServiceContext();
+
+				importLayoutSetPrototype(
+					context, user, layoutSetPrototypeUuid, serviceContext);
+			}
+
+			UnicodeProperties settingsProperties =
+				layoutSet.getSettingsProperties();
+
+			settingsProperties.setProperty(
+				"layoutSetPrototypeUuid", layoutSetPrototypeUuid);
+
+			layoutSet.setSettingsProperties(settingsProperties);
+
+			LayoutSetLocalServiceUtil.updateSettings(
+				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+				settingsProperties.toString());
+		}
 
 		// Look and feel
 
@@ -539,6 +579,18 @@ public class LayoutImporter {
 		// Layout set
 
 		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
+	}
+
+	protected String getLayoutSetPrototype(
+		PortletDataContext context, String layoutSetPrototypeUuid) {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(context.getSourceRootPath());
+		sb.append("/layoutSetPrototype/");
+		sb.append(layoutSetPrototypeUuid);
+
+		return sb.toString();
 	}
 
 	protected void fixTypeSettings(Layout layout) throws Exception {
@@ -948,6 +1000,45 @@ public class LayoutImporter {
 
 		_portletImporter.importPortletData(
 			context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutElement);
+	}
+
+	protected void importLayoutSetPrototype(
+			PortletDataContext context, User user,
+			String layoutSetPrototypeUuid, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		String path = getLayoutSetPrototype(context, layoutSetPrototypeUuid);
+
+		LayoutSetPrototype layoutSetPrototype = null;
+
+		try {
+			layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
+					layoutSetPrototypeUuid);
+		}
+		catch (NoSuchLayoutSetPrototypeException nslspe) {
+		}
+
+		if (layoutSetPrototype == null) {
+			layoutSetPrototype =
+				(LayoutSetPrototype)context.getZipEntryAsObject(
+					path.concat(".xml"));
+
+			serviceContext.setUuid(layoutSetPrototypeUuid);
+
+			layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.addLayoutSetPrototype(
+					user.getUserId(), user.getCompanyId(),
+					layoutSetPrototype.getNameMap(),
+					layoutSetPrototype.getDescription(),
+					layoutSetPrototype.getActive(), serviceContext);
+		}
+
+		InputStream inputStream = context.getZipEntryAsInputStream(
+			path.concat(".lar"));
+
+		CommunitiesUtil.importLayoutSetPrototype(
+			layoutSetPrototype, inputStream, serviceContext);
 	}
 
 	protected String importTheme(LayoutSet layoutSet, InputStream themeZip)

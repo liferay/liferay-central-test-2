@@ -39,6 +39,10 @@ long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEF
 
 String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
+if (!group.isUser() && selLayout.isTypePortlet()) {
+	mainSections = ArrayUtil.append(mainSections, "personalization-settings");
+}
+
 String[][] categorySections = {mainSections};
 %>
 

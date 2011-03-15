@@ -273,6 +273,10 @@ html > .lfr-dockbar-pinned {
 	background-image: url(../images/dockbar/unchecked.png);
 }
 
+.toggle-controls a {
+	background-image: url(../images/dockbar/unchecked.png);
+}
+
 .dockbar .menu-button {
 	background: url(../images/arrows/05_down.png) no-repeat 93% 50%;
 	display: inline-block;
@@ -299,6 +303,23 @@ html > .lfr-dockbar-pinned {
 
 .dockbar .staging-options .menu-button span {
 	background-image: url(../images/dockbar/staging.png);
+}
+
+.dockbar .toggle-personalized-view .menu-button {
+	background: url(../images/arrows/05_down.png) no-repeat 97% 50%;
+}
+
+.dockbar .toggle-personalized-view .menu-button span {
+	background-image: url(../images/dockbar/checked.png);
+}
+
+.dockbar .toggle-personalized-view.false span {
+	background: url(../images/dockbar/unchecked.png) no-repeat 0 50%;
+	padding-left: 20px;
+}
+
+.dockbar .toggle-personalized-view.update .menu-button span {
+	background-image: url(../images/messages/info.png);
 }
 
 .dockbar-messages-container {
@@ -362,4 +383,9 @@ html > .lfr-dockbar-pinned {
 
 .manage-content-menu .control-panel a {
 	background-image: url(../images/dock/control_panel.png);
+}
+
+.toggle-personalized-view-menu .reset-personalized-view a {
+	background: url(../images/portlet/refresh.png) no-repeat 3px 50%;
+	padding-left: 25px;
 }

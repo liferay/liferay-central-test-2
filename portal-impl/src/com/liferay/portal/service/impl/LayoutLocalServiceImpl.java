@@ -24,12 +24,14 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.lar.LayoutExporter;
@@ -59,6 +61,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
+import java.text.DateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -874,11 +878,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Date now = new Date();
 
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
+
+		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
+			PropsValues.INDEX_TIME_FORMAT);
+
+		typeSettingsProperties.fastLoad(typeSettings);
+		typeSettingsProperties.setProperty(
+			"modifiedDate", dateFormat.format(now));
+
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
 		layout.setModifiedDate(now);
-		layout.setTypeSettings(typeSettings);
+		layout.setTypeSettings(typeSettingsProperties.toString());
 
 		layoutPersistence.update(layout, false);
 

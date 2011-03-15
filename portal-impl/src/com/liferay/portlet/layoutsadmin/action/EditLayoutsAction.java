@@ -152,6 +152,21 @@ public class EditLayoutsAction extends PortletAction {
 			else if (cmd.equals("publish_to_remote")) {
 				StagingUtil.publishToRemote(actionRequest);
 			}
+			else if (cmd.equals("reset_personalized_view")) {
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)actionRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+				LayoutTypePortlet layoutTypePortlet =
+					themeDisplay.getLayoutTypePortlet();
+
+				if ((layoutTypePortlet != null) &&
+					layoutTypePortlet.isPersonalizable() &&
+					layoutTypePortlet.isPersonalizedView()) {
+
+					layoutTypePortlet.resetUserPreferences();
+				}
+			}
 			else if (cmd.equals("schedule_copy_from_live")) {
 				StagingUtil.scheduleCopyFromLive(actionRequest);
 			}
@@ -320,14 +335,25 @@ public class EditLayoutsAction extends PortletAction {
 				ActionKeys.UPDATE);
 		}
 
-		if (group.isCommunity()) {
-			String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
+		String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
 
+		if (cmd.equals("reset_personalized_view")) {
+			if (!LayoutPermissionUtil.contains(
+				permissionChecker, layout, ActionKeys.PERSONALIZE)) {
+
+				throw new PrincipalException();
+			}
+			else {
+				return;
+			}
+		}
+
+		if (group.isCommunity()) {
 			boolean publishToLive =
 				GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
 					ActionKeys.PUBLISH_STAGING) &&
-				cmd.equals("publish_to_live");
+					cmd.equals("publish_to_live");
 
 			if (!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
@@ -352,8 +378,6 @@ public class EditLayoutsAction extends PortletAction {
 		}
 		else if (group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
-
-			String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
 
 			boolean publishToLive =
 				OrganizationPermissionUtil.contains(

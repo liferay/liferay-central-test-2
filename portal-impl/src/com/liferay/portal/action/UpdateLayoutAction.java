@@ -17,6 +17,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -25,8 +26,8 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -93,23 +94,31 @@ public class UpdateLayoutAction extends JSONAction {
 		boolean deletePortlet = false;
 
 		if (cmd.equals(Constants.ADD)) {
-			portletId = layoutTypePortlet.addPortletId(userId, portletId);
+			String columnId = ParamUtil.getString(request, "p_p_col_id", null);
+			int columnPos = ParamUtil.getInteger(request, "p_p_col_pos", -1);
 
-			String columnId = ParamUtil.getString(request, "p_p_col_id");
-			int columnPos = ParamUtil.getInteger(request, "p_p_col_pos");
+			portletId = layoutTypePortlet.addPortletId(
+				userId, portletId, columnId, columnPos);
 
-			if (Validator.isNotNull(columnId) &&
-				Validator.isNotNull(portletId)) {
+			if (layoutTypePortlet.isPersonalizable() &&
+				!layoutTypePortlet.isColumnDisabled(columnId)) {
 
-				layoutTypePortlet.movePortletId(
-					userId, portletId, columnId, columnPos);
+				updateLayout = false;
 			}
 		}
 		else if (cmd.equals(Constants.DELETE)) {
 			if (layoutTypePortlet.hasPortletId(portletId)) {
-				deletePortlet = true;
-
 				layoutTypePortlet.removePortletId(userId, portletId);
+
+				if (layoutTypePortlet.isPersonalizable() &&
+					layoutTypePortlet.isPersonalizedView()) {
+
+					updateLayout = false;
+					deletePortlet = false;
+				}
+				else {
+					deletePortlet = true;
+				}
 			}
 		}
 		else if (cmd.equals("drag")) {
@@ -165,6 +174,12 @@ public class UpdateLayoutAction extends JSONAction {
 
 			layoutTypePortlet.movePortletId(
 				userId, portletId, columnId, columnPos);
+
+			if (layoutTypePortlet.isPersonalizable() &&
+				!layoutTypePortlet.isColumnDisabled(columnId)) {
+
+				updateLayout = false;
+			}
 		}
 		else if (cmd.equals("select_layout_revision")) {
 			long layoutRevisionId = ParamUtil.getLong(
@@ -177,6 +192,9 @@ public class UpdateLayoutAction extends JSONAction {
 
 			updateLayout = false;
 		}
+		else if (cmd.equals("toggle_personalized_view")) {
+			updateLayout = false;
+		}
 
 		if (updateLayout) {
 
@@ -185,7 +203,7 @@ public class UpdateLayoutAction extends JSONAction {
 			layoutTypePortlet.resetModes();
 			layoutTypePortlet.resetStates();
 
-			LayoutServiceUtil.updateLayout(
+			layout = LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), layout.getTypeSettings());
 

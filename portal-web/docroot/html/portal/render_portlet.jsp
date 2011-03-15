@@ -257,9 +257,22 @@ if ((!themeDisplay.isSignedIn()) ||
 	(group.hasStagingGroup() && !group.isStagingGroup()) ||
 	(!LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE))) {
 
-	showCloseIcon = false;
 	showMaxIcon = PropsValues.LAYOUT_GUEST_SHOW_MAX_ICON;
 	showMinIcon = PropsValues.LAYOUT_GUEST_SHOW_MIN_ICON;
+
+	if (!(layoutTypePortlet.isPersonalizable() &&
+		  !layoutTypePortlet.isColumnDisabled(columnId) &&
+		  LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE))) {
+
+		showCloseIcon = false;
+		showMoveIcon = false;
+	}
+}
+
+// Portlets cannot be moved if the column is not personalizable
+
+if (layoutTypePortlet.isPersonalizable() && layoutTypePortlet.isColumnDisabled(columnId)) {
+	showCloseIcon = false;
 	showMoveIcon = false;
 }
 
@@ -776,7 +789,10 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 	}
 
 	if (!portletDisplay.isShowMoveIcon()) {
-		if (portlet.isStaticStart()) {
+		if (layoutTypePortlet.isPersonalizable() && layoutTypePortlet.isColumnDisabled(columnId)) {
+			cssClasses += " portlet-static";
+		}
+		else if (portlet.isStaticStart()) {
 			cssClasses += " portlet-static portlet-static-start";
 		}
 		else if (portlet.isStaticEnd()) {

@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class TemplateProcessor {
+public class TemplateProcessor implements ColumnProcessor {
 
 	public TemplateProcessor(
 		ServletContext servletContext, HttpServletRequest request,

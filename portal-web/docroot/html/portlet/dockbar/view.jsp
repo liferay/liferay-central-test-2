@@ -48,7 +48,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= HtmlUtil.escape(themeDisplay.getPathThemeImages()) %>/spacer.png" /></a>
 		</li>
 
-		<c:if test="<%= (group != null) && !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+		<c:if test="<%= (group != null) && !group.isControlPanel() && (!group.hasStagingGroup() || group.isStagingGroup()) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) || (layoutTypePortlet.isPersonalizable() && layoutTypePortlet.isPersonalizedView() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE))) %>">
 			<li class="add-content has-submenu" id="<portlet:namespace />addContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -76,15 +76,21 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 											<ul>
 
 												<%
+												int j = 0;
+
 												for (int i = 0; i < portlets.size(); i++) {
 													Portlet portlet = portlets.get(i);
 
 													boolean portletInstanceable = portlet.isInstanceable();
 													boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 													boolean portletLocked = (!portletInstanceable && portletUsed);
+
+													if (!PortletPermissionUtil.contains(permissionChecker, plid, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE)) {
+														continue;
+													}
 												%>
 
-													<li class="<%= (i == 0) ? "first" : "" %>">
+													<li class="<%= (j == 0) ? "first" : "" %>">
 														<a class="app-shortcut <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>" data-portlet-id="<%= portlet.getPortletId() %>" href="javascript:;" <c:if test="<%= portletLocked %>">tabIndex="-1"</c:if>>
 															<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
 
@@ -93,6 +99,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 													</li>
 
 												<%
+													j++;
 												}
 												%>
 
@@ -181,9 +188,45 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 		<c:if test="<%= !group.isControlPanel() && themeDisplay.isSignedIn() %>">
 			<li class="toggle-controls" id="<portlet:namespace />toggleControls">
 				<a href="javascript:;">
-					<liferay-ui:message key="toggle-edit-controls" />
+					<liferay-ui:message key="edit-controls" />
 				</a>
 			</li>
+
+			<c:if test="<%= layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE) %>">
+				<li class="aui-toolbar-separator">
+					<span></span>
+				</li>
+
+				<li class="toggle-personalized-view<%= (layoutTypePortlet.isPersonalizedView() ? " has-submenu" : " false") %><%= (layoutTypePortlet.isPersonalizedView() && layoutTypePortlet.isDefaultUpdated() ? " update" : "") %>" id="<portlet:namespace />togglePersonalizedView">
+					<a class="<%= (layoutTypePortlet.isPersonalizedView() ? "menu-button" : "") %>" href="javascript:;" <%= (layoutTypePortlet.isDefaultUpdated() ? "title='" + LanguageUtil.get(pageContext, "the-defaults-for-the-current-page-have-been-updated-click-here-to-see-them") + "'" : "") %>>
+						<span>
+							<liferay-ui:message key="personalized-view" />
+						</span>
+					</a>
+
+					<c:if test="<%= layoutTypePortlet.isPersonalizedView() %>">
+						<div class="aui-menu toggle-personalized-view-menu aui-overlaycontext-hidden" id="<portlet:namespace />togglePersonalizedViewContainer">
+							<div class="aui-menu-content">
+								<ul>
+									<li class="first last reset-personalized-view" id="<portlet:namespace />resetPersonalizedView">
+										<liferay-portlet:actionURL portletName="<%= PortletKeys.LAYOUTS_ADMIN %>" var="resetPersonalizationViewURL">
+											<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
+											<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
+											<portlet:param name="<%= Constants.CMD %>" value="reset_personalized_view" />
+										</liferay-portlet:actionURL>
+
+										<%
+										String taglibURL = "javascript:if(confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-reset-your-personalizations-to-default") + "')){submitForm(document.hrefFm, '" + HttpUtil.encodeURL(resetPersonalizationViewURL) + "');}";
+										%>
+
+										<aui:a href="<%= taglibURL %>" label="reset-personalized-view" title="reset-your-personalized-view-of-the-current-page-to-default" />
+									</li>
+								</ul>
+							</div>
+						</div>
+					</c:if>
+				</li>
+			</c:if>
 		</c:if>
 
 		<c:if test="<%= group.isControlPanel() %>">

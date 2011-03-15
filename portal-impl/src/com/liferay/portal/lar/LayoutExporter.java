@@ -44,6 +44,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -52,6 +53,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
@@ -66,7 +68,10 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.util.ContentUtil;
+
+import de.schlichtherle.io.FileInputStream;
 
 import java.io.File;
 
@@ -184,6 +189,11 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.THEME);
 		boolean exportThemeSettings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
+		boolean isLayoutSetPrototype = MapUtil.getBoolean(
+			parameterMap,
+			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
+		boolean publishToRemote = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export categories " + exportCategories);
@@ -232,6 +242,8 @@ public class LayoutExporter {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
+		Group group = layoutSet.getGroup();
+
 		long companyId = layoutSet.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
@@ -268,6 +280,37 @@ public class LayoutExporter {
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));
 
+		if (isLayoutSetPrototype && group.isLayoutSetPrototype()) {
+			LayoutSetPrototype layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
+					group.getClassPK());
+
+			String layoutSetPrototypeUuid = layoutSetPrototype.getUuid();
+
+			headerElement.addAttribute(
+				"layout-set-prototype-uuid", layoutSetPrototypeUuid);
+
+			if (publishToRemote) {
+				String path = getLayoutSetPrototype(
+					context, layoutSetPrototypeUuid);
+
+				File layoutSetPrototypeFile =
+					CommunitiesUtil.exportLayoutSetPrototype(
+						layoutSetPrototype, serviceContext);
+
+				try {
+					context.addZipEntry(
+						path.concat(".lar"),
+						new FileInputStream(layoutSetPrototypeFile));
+					context.addZipEntry(
+						path.concat(".xml"), layoutSetPrototype);
+				}
+				finally {
+					layoutSetPrototypeFile.delete();
+				}
+			}
+		}
+
 		if (exportTheme || exportThemeSettings) {
 			headerElement.addAttribute("theme-id", layoutSet.getThemeId());
 			headerElement.addAttribute(
@@ -300,8 +343,6 @@ public class LayoutExporter {
 		}
 
 		Layout firstLayout = layouts.get(0);
-
-		Group group = GroupLocalServiceUtil.getGroup(context.getGroupId());
 
 		if (group.isStagingGroup()) {
 			group = group.getLiveGroup();
@@ -902,6 +943,18 @@ public class LayoutExporter {
 		}
 
 		return new boolean[] {exportCurPortletData, exportCurPortletSetup};
+	}
+
+	protected String getLayoutSetPrototype(
+		PortletDataContext context, String layoutSetPrototypeUuid) {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(context.getRootPath());
+		sb.append("/layoutSetPrototype/");
+		sb.append(layoutSetPrototypeUuid);
+
+		return sb.toString();
 	}
 
 	protected String getLayoutIconPath(

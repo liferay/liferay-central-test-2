@@ -54,7 +54,7 @@ if (layout != null) {
 }
 %>
 
-<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
+<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) || (layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE))) %>">
 	<aui:script use="liferay-layout,liferay-navigation">
 		var layoutOptions = {};
 
@@ -142,6 +142,7 @@ if (layout != null) {
 
 		if (Liferay.Util) {
 			Liferay.Util.toggleControls();
+			Liferay.Util.togglePersonalizedView();
 		}
 
 		Liferay.Poller.init(

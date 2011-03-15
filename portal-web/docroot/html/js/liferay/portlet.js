@@ -125,7 +125,7 @@
 			}
 
 			var portletPosition = 0;
-			var currentColumnId = 'column-1';
+			var currentColumnId = Util.getColumnId(container.attr('id'));
 
 			if (options.placeHolder) {
 				var column = placeHolder.get('parentNode');

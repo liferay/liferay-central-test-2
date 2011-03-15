@@ -15,6 +15,8 @@
 package com.liferay.portlet.communities.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -38,6 +40,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
+import java.io.InputStream;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -187,6 +190,21 @@ public class CommunitiesUtil {
 		deleteLayout(request, response);
 	}
 
+	public static File exportLayoutSetPrototype(
+			LayoutSetPrototype layoutSetPrototype,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		LayoutSet layoutSet = layoutSetPrototype.getLayoutSet();
+
+		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
+			serviceContext);
+
+		return LayoutLocalServiceUtil.exportLayoutsAsFile(
+			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+			null, parameterMap, null, null);
+	}
+
 	public static Map<String, String[]> getLayoutSetPrototypeParameters(
 		ServiceContext serviceContext) {
 
@@ -205,6 +223,16 @@ public class CommunitiesUtil {
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			new String[] {Boolean.FALSE.toString()});
+
+		String siteTemplateRelationship = ParamUtil.getString(
+			serviceContext, "siteTemplateRelationship");
+
+		if (siteTemplateRelationship.equals("inherited")) {
+			parameterMap.put(
+				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED,
+				new String[] {Boolean.TRUE.toString()});
+		}
+
 		parameterMap.put(
 			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
 			new String[] {Boolean.TRUE.toString()});
@@ -237,6 +265,21 @@ public class CommunitiesUtil {
 			new String[] {Boolean.FALSE.toString()});
 
 		return parameterMap;
+	}
+
+	public static void importLayoutSetPrototype(
+			LayoutSetPrototype layoutSetPrototype, InputStream inputStream,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		LayoutSet layoutSet = layoutSetPrototype.getLayoutSet();
+
+		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
+			serviceContext);
+
+		LayoutServiceUtil.importLayouts(
+			layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
+			parameterMap, inputStream);
 	}
 
 }

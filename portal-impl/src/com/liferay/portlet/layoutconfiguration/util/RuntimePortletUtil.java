@@ -17,6 +17,7 @@ package com.liferay.portlet.layoutconfiguration.util;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.PipingPageContext;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.MethodHandler;
@@ -35,6 +36,7 @@ import com.liferay.portal.theme.PortletDisplayFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.layoutconfiguration.util.velocity.PersonalizationSettingsProcessor;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 
@@ -57,6 +59,58 @@ import javax.servlet.jsp.PageContext;
  * @author Shuyang Zhou
  */
 public class RuntimePortletUtil {
+
+	public static String processPersonalizationSettings(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, PageContext pageContext,
+			String velocityTemplateId, String velocityTemplateContent)
+		throws Exception {
+
+		if (Validator.isNull(velocityTemplateContent)) {
+			return StringPool.BLANK;
+		}
+
+		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+
+		PersonalizationSettingsProcessor processor =
+			new PersonalizationSettingsProcessor(
+				request, new PipingPageContext(pageContext, unsyncStringWriter),
+				unsyncStringWriter);
+
+		VelocityContext velocityContext =
+			VelocityEngineUtil.getWrappedStandardToolsContext();
+
+		velocityContext.put("processor", processor);
+
+		// Velocity variables
+
+		VelocityVariablesUtil.insertVariables(velocityContext, request);
+
+		// liferay:include tag library
+
+		MethodHandler methodHandler = new MethodHandler(
+			_initMethodKey, servletContext, request,
+			new PipingServletResponse(response, unsyncStringWriter),
+			pageContext);
+
+		Object velocityTaglib = methodHandler.invoke(true);
+
+		velocityContext.put("taglibLiferay", velocityTaglib);
+		velocityContext.put("theme", velocityTaglib);
+
+		try {
+			VelocityEngineUtil.mergeTemplate(
+				velocityTemplateId, velocityTemplateContent, velocityContext,
+				unsyncStringWriter);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw e;
+		}
+
+		return unsyncStringWriter.toString();
+	}
 
 	public static String processPortlet(
 			ServletContext servletContext, HttpServletRequest request,

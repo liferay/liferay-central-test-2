@@ -94,6 +94,8 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 
 import java.io.File;
@@ -1241,6 +1243,10 @@ public class ServicePreAction extends Action {
 			}
 		}
 
+		boolean personalizedView = SessionParamUtil.getBoolean(
+			request, "personalized_view", true);
+		boolean isPersonalizable = false;
+
 		LayoutTypePortlet layoutTypePortlet = null;
 
 		layouts = mergeAdditionalLayouts(
@@ -1295,6 +1301,28 @@ public class ServicePreAction extends Action {
 			layout = (Layout)layout.clone();
 
 			layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+
+			isPersonalizable = layoutTypePortlet.isPersonalizable();
+
+			if (!isPersonalizable) {
+				personalizedView = false;
+			}
+
+			layoutTypePortlet.setPersonalizedView(personalizedView);
+			layoutTypePortlet.setUpdatePermission(
+				LayoutPermissionUtil.contains(permissionChecker, layout,
+					ActionKeys.UPDATE));
+
+			if (signedIn && isPersonalizable && personalizedView &&
+				LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.PERSONALIZE)) {
+
+				PortalPreferences portalPreferences =
+					PortletPreferencesFactoryUtil.getPortalPreferences(
+						companyId, user.getUserId(), true);
+
+				layoutTypePortlet.setPortalPreferences(portalPreferences);
+			}
 
 			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
 
@@ -1602,7 +1630,7 @@ public class ServicePreAction extends Action {
 					LayoutPermissionUtil.contains(
 						permissionChecker, layout, ActionKeys.UPDATE);
 
-				if (hasUpdateLayoutPermission) {
+				if (hasUpdateLayoutPermission && !personalizedView) {
 					themeDisplay.setShowAddContentIconPermission(true);
 
 					if (!LiferayWindowState.isMaximized(request)) {
@@ -1617,6 +1645,23 @@ public class ServicePreAction extends Action {
 
 					themeDisplay.setURLLayoutTemplates(
 						"Liferay.LayoutConfiguration.showTemplates();");
+				}
+
+				boolean hasPersonalizePermission =
+					LayoutPermissionUtil.contains(
+						permissionChecker, layout, ActionKeys.PERSONALIZE);
+
+				if (hasPersonalizePermission && personalizedView) {
+
+					themeDisplay.setShowAddContentIconPermission(true);
+
+					if (!LiferayWindowState.isMaximized(request)) {
+						themeDisplay.setShowAddContentIcon(true);
+					}
+
+					themeDisplay.setURLAddContent(
+						"Liferay.LayoutConfiguration.toggle('".concat(
+							PortletKeys.LAYOUT_CONFIGURATION).concat("');"));
 				}
 			}
 

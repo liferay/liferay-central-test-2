@@ -16,6 +16,7 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portlet.PortalPreferences;
 
 import java.util.List;
 
@@ -74,6 +75,8 @@ public interface LayoutTypePortlet extends LayoutType {
 			List<Portlet> endPortlets)
 		throws SystemException;
 
+	public void resetUserPreferences();
+
 	public List<Portlet> getAllPortlets()
 		throws PortalException, SystemException;
 
@@ -101,6 +104,8 @@ public interface LayoutTypePortlet extends LayoutType {
 	public String getModePrint();
 
 	public int getNumOfColumns();
+
+	public PortalPreferences getPortalPreferences();
 
 	public List<String> getPortletIds();
 
@@ -145,6 +150,22 @@ public interface LayoutTypePortlet extends LayoutType {
 	public boolean hasStateMinPortletId(String portletId);
 
 	public boolean hasStateNormalPortletId(String portletId);
+
+	public boolean hasTemplate();
+
+	public boolean hasUpdatePermission();
+
+	public boolean isColumnDisabled(String columnId);
+
+	public boolean isDefaultUpdated();
+
+	public boolean isPersonalizable();
+
+	public boolean isPersonalizable(String columnId);
+
+	public boolean isPersonalizedView();
+
+	public boolean isTemplatePersonalizable(String columnId);
 
 	public void movePortletId(
 			long userId, String portletId, String columnId, int columnPos)
@@ -209,10 +230,16 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void setModePrint(String modePrint);
 
+	public void setPersonalizedView(boolean personalizedView);
+
+	public void setPortalPreferences(PortalPreferences portalPreferences);
+
 	public void setPortletIds(String columnId, String portletIds);
 
 	public void setStateMax(String stateMax);
 
 	public void setStateMin(String stateMin);
+
+	public void setUpdatePermission(boolean updatePermission);
 
 }

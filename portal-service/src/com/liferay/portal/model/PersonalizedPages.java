@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
@@ -12,11 +11,26 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.model;
 
-<%@ page import="com.liferay.portal.kernel.staging.LayoutStagingUtil" %>
-<%@ page import="com.liferay.portal.kernel.staging.StagingUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.SessionParamUtil" %>
-<%@ page import="com.liferay.portal.util.comparator.LayoutRevisionIdComparator" %>
+/**
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-15626.
+ * </p>
+ *
+ * @author Raymond Augé
+ */
+public class PersonalizedPages {
+
+	public static String encodeColumnId(String columnId) {
+		return columnId.concat(_PERSONALIZABLE_SUFFIX);
+	}
+
+	public static String namespace(long plid) {
+		return PersonalizedPages.class.getName().concat(String.valueOf(plid));
+	}
+
+	private static final String _PERSONALIZABLE_SUFFIX = "-personalizable";
+
+}
