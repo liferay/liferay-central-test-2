@@ -262,16 +262,14 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.deployRemotePortlet(portlet, categoryName);
 	}
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet,
 		java.lang.String[] categoryNames)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.deployRemotePortlet(portlet, categoryNames);
 	}
 

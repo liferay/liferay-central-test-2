@@ -59,7 +59,7 @@ public class ResourceActionLocalServiceImpl
 	}
 
 	public void checkResourceActions(String name, List<String> actionIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
 			return;
@@ -96,7 +96,7 @@ public class ResourceActionLocalServiceImpl
 	protected void checkResourceActions(
 			String name, List<String> actionIds,
 			List<ResourceAction> resourceActions)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long lastBitwiseValue = 1;
 

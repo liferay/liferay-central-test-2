@@ -232,8 +232,7 @@ public interface ResourcePermissionLocalService {
 
 	public void addResourcePermissions(java.lang.String resourceName,
 		java.lang.String roleName, int scope, long resourceActionBitwiseValue)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteResourcePermissions(long companyId,
 		java.lang.String name, int scope, long primKey)

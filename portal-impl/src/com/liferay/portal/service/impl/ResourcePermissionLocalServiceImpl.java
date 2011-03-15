@@ -83,7 +83,7 @@ public class ResourcePermissionLocalServiceImpl
 	public void addResourcePermissions(
 			String resourceName, String roleName, int scope,
 			long resourceActionBitwiseValue)
-		throws PortalException, SystemException{
+		throws SystemException{
 
 		List<Role> roles = rolePersistence.findByName(roleName);
 
