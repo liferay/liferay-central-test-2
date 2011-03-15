@@ -36,7 +36,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure_entry" />
 </liferay-portlet:actionURL>
 
-<aui:form action="<%= editStructureEntryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveForm();" %>'>
+<aui:form action="<%= editStructureEntryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructureEntry();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
@@ -191,7 +191,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 </div>
 
 <aui:button-row>
-	<aui:button onClick='<%= renderResponse.getNamespace() + "saveForm();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
+	<aui:button onClick='<%= renderResponse.getNamespace() + "saveStructureEntry();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
 </aui:button-row>
 
 <aui:script use="liferay-portlet-dynamic-data-mapping">
@@ -222,7 +222,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 
 	Liferay.provide(
 		window,
-		'<portlet:namespace />saveForm',
+		'<portlet:namespace />saveStructureEntry',
 		function() {
 			document.<portlet:namespace />fm.<portlet:namespace />xsd.value = formBuilder.getXSD();
 
