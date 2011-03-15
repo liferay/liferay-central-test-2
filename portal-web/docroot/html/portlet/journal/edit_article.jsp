@@ -61,14 +61,6 @@ String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3
 
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleConstants.DEFAULT_VERSION);
 
-Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-if (article != null) {
-	if (article.getDisplayDate() != null) {
-		displayDate.setTime(article.getDisplayDate());
-	}
-}
-
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
 Calendar expirationDate = CalendarFactoryUtil.getCalendar(timeZone, locale);

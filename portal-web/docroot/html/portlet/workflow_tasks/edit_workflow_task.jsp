@@ -23,12 +23,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowTask workflowTask = (WorkflowTask)request.getAttribute(WebKeys.WORKFLOW_TASK);
 
-Calendar dueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-if (workflowTask.getDueDate() != null) {
-	dueDate.setTime(workflowTask.getDueDate());
-}
-
 WorkflowInstance workflowInstance = WorkflowInstanceManagerUtil.getWorkflowInstance(company.getCompanyId(), workflowTask.getWorkflowInstanceId());
 
 Map<String, Serializable> workflowContext = workflowInstance.getWorkflowContext();

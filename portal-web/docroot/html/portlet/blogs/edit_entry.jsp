@@ -28,14 +28,6 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 String content = BeanParamUtil.getString(entry, request, "content");
 
-Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-if (entry != null) {
-	if (entry.getDisplayDate() != null) {
-		displayDate.setTime(entry.getDisplayDate());
-	}
-}
-
 boolean preview = ParamUtil.getBoolean(request, "preview");
 
 boolean allowPingbacks = PropsValues.BLOGS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(entry, request, "allowPingbacks", true);
@@ -77,7 +69,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:fieldset>
 		<aui:input name="title" />
 
-		<aui:input name="displayDate" value="<%= displayDate %>" />
+		<aui:input name="displayDate" />
 
 		<c:if test="<%= preview %>">
 

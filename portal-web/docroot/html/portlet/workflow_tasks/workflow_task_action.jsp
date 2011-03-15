@@ -35,12 +35,6 @@ else {
 }
 
 long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
-
-Calendar dueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-if (workflowTask.getDueDate() != null) {
-	dueDate.setTime(workflowTask.getDueDate());
-}
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= (row == null) %>" showWhenSingleIcon="<%= (row == null) %>">
@@ -166,7 +160,7 @@ if (workflowTask.getDueDate() != null) {
 </div>
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateDueDate">
-	<aui:input bean="<%= workflowTask %>" model="<%= WorkflowTask.class %>" name="dueDate" value="<%= dueDate %>" />
+	<aui:input bean="<%= workflowTask %>" model="<%= WorkflowTask.class %>" name="dueDate" />
 </div>
 
 <div class="aui-helper-hidden" id="<%= randomId %>updateComments">
