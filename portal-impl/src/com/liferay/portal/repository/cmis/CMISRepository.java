@@ -277,9 +277,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		List<FileEntry> fileEntries = getFileEntries(folderId);
 
 		if (obc != null) {
-			if (obc instanceof RepositoryModelCreateDateComparator ||
-				obc instanceof RepositoryModelModifiedDateComparator ||
-				obc instanceof FileEntrySizeComparator) {
+			if (obc instanceof FileEntrySizeComparator ||
+				obc instanceof RepositoryModelCreateDateComparator ||
+				obc instanceof RepositoryModelModifiedDateComparator) {
 
 				fileEntries = ListUtil.sort(fileEntries, obc);
 			}

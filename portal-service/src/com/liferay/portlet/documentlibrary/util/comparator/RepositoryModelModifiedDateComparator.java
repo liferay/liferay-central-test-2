@@ -81,25 +81,25 @@ public class RepositoryModelModifiedDateComparator extends OrderByComparator {
 
 			return dlFileEntry.getModifiedDate();
 		}
-		else if (obj instanceof FileEntry) {
-			FileEntry fileEntry = (FileEntry)obj;
+		else if (obj instanceof DLFileShortcut) {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
 
-			return fileEntry.getModifiedDate();
+			return dlFileShortcut.getModifiedDate();
 		}
 		else if (obj instanceof DLFolder) {
 			DLFolder dlFolder = (DLFolder)obj;
 
 			return dlFolder.getModifiedDate();
 		}
-		else if (obj instanceof Folder){
+		else if (obj instanceof FileEntry) {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getModifiedDate();
+		}
+		else {
 			Folder folder = (Folder)obj;
 
 			return folder.getModifiedDate();
-		}
-		else {
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
-
-			return dlFileShortcut.getModifiedDate();
 		}
 	}
 

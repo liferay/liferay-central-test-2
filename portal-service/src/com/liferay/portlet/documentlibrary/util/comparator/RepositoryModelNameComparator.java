@@ -78,25 +78,25 @@ public class RepositoryModelNameComparator extends OrderByComparator {
 
 			return dlFileEntry.getTitle();
 		}
-		else if (obj instanceof FileEntry) {
-			FileEntry fileEntry = (FileEntry)obj;
+		else if (obj instanceof DLFileShortcut) {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
 
-			return fileEntry.getTitle();
+			return dlFileShortcut.getToTitle();
 		}
 		else if (obj instanceof DLFolder) {
 			DLFolder dlFolder = (DLFolder)obj;
 
 			return dlFolder.getName();
 		}
-		else if (obj instanceof Folder){
+		else if (obj instanceof FileEntry) {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getTitle();
+		}
+		else {
 			Folder folder = (Folder)obj;
 
 			return folder.getName();
-		}
-		else {
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
-
-			return dlFileShortcut.getToTitle();
 		}
 	}
 

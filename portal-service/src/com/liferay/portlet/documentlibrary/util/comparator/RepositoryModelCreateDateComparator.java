@@ -80,25 +80,25 @@ public class RepositoryModelCreateDateComparator extends OrderByComparator {
 
 			return dlFileEntry.getCreateDate();
 		}
-		else if (obj instanceof FileEntry) {
-			FileEntry fileEntry = (FileEntry)obj;
+		else if (obj instanceof DLFileShortcut) {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
 
-			return fileEntry.getCreateDate();
+			return dlFileShortcut.getCreateDate();
 		}
 		else if (obj instanceof DLFolder) {
 			DLFolder dlFolder = (DLFolder)obj;
 
 			return dlFolder.getCreateDate();
 		}
-		else if (obj instanceof Folder){
+		else if (obj instanceof FileEntry) {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getCreateDate();
+		}
+		else {
 			Folder folder = (Folder)obj;
 
 			return folder.getCreateDate();
-		}
-		else {
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
-
-			return dlFileShortcut.getCreateDate();
 		}
 	}
 
