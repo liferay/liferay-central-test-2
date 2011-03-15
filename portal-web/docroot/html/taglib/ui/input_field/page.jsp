@@ -78,7 +78,18 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				fieldParam = field;
 			}
 
-			Calendar cal = (Calendar)defaultValue;
+			Calendar cal = null;
+
+			if (defaultValue != null) {
+				cal = (Calendar)defaultValue;
+			}
+			else {
+				cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+				Date date = (Date)BeanPropertiesUtil.getObject(bean, field, new Date());
+
+				cal.setTime(date);
+			}
 
 			int month = ParamUtil.getInteger(request, fieldParam + "Month", -1);
 
