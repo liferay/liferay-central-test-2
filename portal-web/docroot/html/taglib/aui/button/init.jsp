@@ -47,4 +47,8 @@ _updateOptions(_options, "type", type);
 _updateOptions(_options, "value", value);
 %>
 
+<%!
+private static final String _NAMESPACE = "aui:button:";
+%>
+
 <%@ include file="init-ext.jspf" %>
