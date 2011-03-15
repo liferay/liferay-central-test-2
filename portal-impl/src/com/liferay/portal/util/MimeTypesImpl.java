@@ -29,6 +29,7 @@ import org.apache.tika.detect.DefaultDetector;
 import org.apache.tika.detect.Detector;
 import org.apache.tika.io.TikaInputStream;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.mime.MediaType;
 
 /**
  * @author Jorge Ferrer
@@ -60,10 +61,13 @@ public class MimeTypesImpl implements MimeTypes {
 
 		try {
 			Metadata metadata = new Metadata();
+
 			metadata.set(Metadata.RESOURCE_NAME_KEY, fileName);
 
-			contentType = _detector.detect(
-				TikaInputStream.get(inputStream), metadata).toString();
+			MediaType mediaType = _detector.detect(
+				TikaInputStream.get(inputStream), metadata);
+
+			contentType = mediaType.toString();
 
 			if (contentType.contains("tika")) {
 				if (_log.isDebugEnabled()) {
@@ -97,9 +101,12 @@ public class MimeTypesImpl implements MimeTypes {
 
 		try {
 			Metadata metadata = new Metadata();
+
 			metadata.set(Metadata.RESOURCE_NAME_KEY, fileName);
 
-			String contentType = _detector.detect(null, metadata).toString();
+			MediaType mediaType = _detector.detect(null, metadata);
+
+			String contentType = mediaType.toString();
 
 			if (!contentType.contains("tika")) {
 				return contentType;
@@ -115,8 +122,8 @@ public class MimeTypesImpl implements MimeTypes {
 		return ContentTypes.APPLICATION_OCTET_STREAM;
 	}
 
-	private Detector _detector;
-
 	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
+
+	private Detector _detector;
 
 }
