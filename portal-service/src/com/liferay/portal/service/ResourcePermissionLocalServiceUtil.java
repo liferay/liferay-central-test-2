@@ -259,11 +259,12 @@ public class ResourcePermissionLocalServiceUtil {
 	}
 
 	public static void addResourcePermissions(java.lang.String resourceName,
-		java.lang.String roleName, int scope, java.lang.String actionId)
+		java.lang.String roleName, int scope, long resourceActionBitwiseValue)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addResourcePermissions(resourceName, roleName, scope, actionId);
+			.addResourcePermissions(resourceName, roleName, scope,
+			resourceActionBitwiseValue);
 	}
 
 	public static void deleteResourcePermissions(long companyId,

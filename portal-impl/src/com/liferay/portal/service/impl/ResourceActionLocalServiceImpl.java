@@ -163,18 +163,20 @@ public class ResourceActionLocalServiceImpl
 			if (communityDefaultActions.contains(actionId)) {
 				resourcePermissionLocalService.addResourcePermissions(
 					name, RoleConstants.COMMUNITY_MEMBER,
-					ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+					ResourceConstants.SCOPE_INDIVIDUAL,
+					resourceAction.getBitwiseValue());
 			}
 
 			if (guestDefaultActions.contains(actionId)) {
 				resourcePermissionLocalService.addResourcePermissions(
 					name, RoleConstants.GUEST,
-					ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+					ResourceConstants.SCOPE_INDIVIDUAL,
+					resourceAction.getBitwiseValue());
 			}
 
 			resourcePermissionLocalService.addResourcePermissions(
 				name, RoleConstants.OWNER, ResourceConstants.SCOPE_INDIVIDUAL,
-				actionId);
+				resourceAction.getBitwiseValue());
 		}
 	}
 

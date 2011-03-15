@@ -81,7 +81,8 @@ public class ResourcePermissionLocalServiceImpl
 	}
 
 	public void addResourcePermissions(
-			String resourceName, String roleName, int scope, String actionId)
+			String resourceName, String roleName, int scope,
+			long resourceActionBitwiseValue)
 		throws PortalException, SystemException{
 
 		List<Role> roles = rolePersistence.findByName(roleName);
@@ -91,22 +92,34 @@ public class ResourcePermissionLocalServiceImpl
 				role.getCompanyId(), resourceName, scope);
 
 			for (String primKey : primKeys) {
-				List<String> actionIds =
-					getAvailableResourcePermissionActionIds(
-						role.getCompanyId(), resourceName, scope, primKey,
-						role.getRoleId(),
-						ResourceActionsUtil.getResourceActions(resourceName));
+				ResourcePermission resourcePermission = null;
 
-				if (actionIds == (List<?>)Collections.emptyList()) {
-					actionIds = new ArrayList<String>();
+				resourcePermission =
+					resourcePermissionPersistence.fetchByC_N_S_P_R(
+						role.getCompanyId(), resourceName, scope, primKey,
+						role.getRoleId());
+
+				if (resourcePermission == null) {
+					long resourcePermissionId = counterLocalService.increment(
+						ResourcePermission.class.getName());
+
+					resourcePermission = resourcePermissionPersistence.create(
+						resourcePermissionId);
+
+					resourcePermission.setCompanyId(role.getCompanyId());
+					resourcePermission.setName(resourceName);
+					resourcePermission.setScope(scope);
+					resourcePermission.setPrimKey(primKey);
+					resourcePermission.setRoleId(role.getRoleId());
 				}
 
-				actionIds.add(actionId);
+				long actionIdsLong = resourcePermission.getActionIds();
 
-				setResourcePermissions(
-					role.getCompanyId(), resourceName, scope, primKey,
-					role.getRoleId(),
-					actionIds.toArray(new String[actionIds.size()]));
+				actionIdsLong |= resourceActionBitwiseValue;
+
+				resourcePermission.setActionIds(actionIdsLong);
+
+				resourcePermissionPersistence.update(resourcePermission, false);
 			}
 		}
 	}
