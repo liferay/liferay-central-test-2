@@ -47,11 +47,9 @@ public interface Staging {
 	public void copyRemoteLayouts(
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> exportParameterMap, String remoteAddress,
+			Map<String, String[]> parameterMap, String remoteAddress,
 			int remotePort, boolean secureConnection, long remoteGroupId,
-			boolean remotePrivateLayout,
-			Map<String, String[]> importParameterMap, Date startDate,
-			Date endDate)
+			boolean remotePrivateLayout, Date startDate, Date endDate)
 		throws Exception;
 
 	public void disableStaging(

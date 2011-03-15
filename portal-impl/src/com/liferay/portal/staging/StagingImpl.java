@@ -164,11 +164,9 @@ public class StagingImpl implements Staging {
 	public void copyRemoteLayouts(
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> exportParameterMap, String remoteAddress,
+			Map<String, String[]> parameterMap, String remoteAddress,
 			int remotePort, boolean secureConnection, long remoteGroupId,
-			boolean remotePrivateLayout,
-			Map<String, String[]> importParameterMap, Date startDate,
-			Date endDate)
+			boolean remotePrivateLayout, Date startDate, Date endDate)
 		throws Exception {
 
 		PermissionChecker permissionChecker =
@@ -221,8 +219,7 @@ public class StagingImpl implements Staging {
 
 		if (layoutIdMap == null) {
 			bytes = LayoutLocalServiceUtil.exportLayouts(
-				sourceGroupId, privateLayout, exportParameterMap, startDate,
-				endDate);
+				sourceGroupId, privateLayout, parameterMap, startDate, endDate);
 		}
 		else {
 			List<Layout> layouts = new ArrayList<Layout>();
@@ -280,13 +277,13 @@ public class StagingImpl implements Staging {
 			}
 
 			bytes = LayoutLocalServiceUtil.exportLayouts(
-				sourceGroupId, privateLayout, layoutIds, exportParameterMap,
+				sourceGroupId, privateLayout, layoutIds, parameterMap,
 				startDate, endDate);
 		}
 
 		LayoutServiceHttp.importLayouts(
-			httpPrincipal, remoteGroupId, remotePrivateLayout,
-			importParameterMap, bytes);
+			httpPrincipal, remoteGroupId, remotePrivateLayout, parameterMap,
+			bytes);
 	}
 
 	public void disableStaging(
@@ -1488,7 +1485,9 @@ public class StagingImpl implements Staging {
 		}
 
 		Map<Long, Boolean> layoutIdMap = null;
-		Map<String, String[]> parameterMap = portletRequest.getParameterMap();
+		Map<String, String[]> parameterMap = getStagingParameters(
+			portletRequest);
+
 
 		if (scope.equals("selected-pages")) {
 			layoutIdMap = new LinkedHashMap<Long, Boolean>();
@@ -1598,11 +1597,10 @@ public class StagingImpl implements Staging {
 				portletRequest, "description");
 
 			LayoutServiceUtil.schedulePublishToRemote(
-				groupId, privateLayout, layoutIdMap,
-				getStagingParameters(portletRequest), remoteAddress, remotePort,
-				secureConnection, remoteGroupId, remotePrivateLayout, startDate,
-				endDate, groupName, cronText, startCal.getTime(),
-				schedulerEndDate, description);
+				groupId, privateLayout, layoutIdMap, parameterMap,
+				remoteAddress, remotePort, secureConnection, remoteGroupId,
+				remotePrivateLayout, startDate, endDate, groupName, cronText,
+				startCal.getTime(), schedulerEndDate, description);
 		}
 		else {
 			MessageStatus messageStatus = new MessageStatus();
@@ -1613,8 +1611,7 @@ public class StagingImpl implements Staging {
 				copyRemoteLayouts(
 					groupId, privateLayout, layoutIdMap, parameterMap,
 					remoteAddress, remotePort, secureConnection, remoteGroupId,
-					remotePrivateLayout, getStagingParameters(portletRequest),
-					startDate, endDate);
+					remotePrivateLayout, startDate, endDate);
 			}
 			catch (Exception e) {
 				messageStatus.setException(e);

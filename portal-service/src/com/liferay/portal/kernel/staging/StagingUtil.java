@@ -60,17 +60,15 @@ public class StagingUtil {
 	public static void copyRemoteLayouts(
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> exportParameterMap, String remoteAddress,
+			Map<String, String[]> parameterMap, String remoteAddress,
 			int remotePort, boolean secureConnection, long remoteGroupId,
-			boolean remotePrivateLayout,
-			Map<String, String[]> importParameterMap, Date startDate,
-			Date endDate)
+			boolean remotePrivateLayout, Date startDate, Date endDate)
 		throws Exception {
 
 		getStaging().copyRemoteLayouts(
-			sourceGroupId, privateLayout, layoutIdMap, exportParameterMap,
+			sourceGroupId, privateLayout, layoutIdMap, parameterMap,
 			remoteAddress, remotePort, secureConnection, remoteGroupId,
-			remotePrivateLayout, importParameterMap, startDate, endDate);
+			remotePrivateLayout, startDate, endDate);
 	}
 
 	public static void disableStaging(

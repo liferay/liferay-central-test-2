@@ -101,7 +101,7 @@ public class LayoutsRemotePublisherMessageListener
 			StagingUtil.copyRemoteLayouts(
 				sourceGroupId, privateLayout, layoutIdMap, parameterMap,
 				remoteAddress, remotePort, secureConnection, remoteGroupId,
-				remotePrivateLayout, parameterMap, startDate, endDate);
+				remotePrivateLayout, startDate, endDate);
 		}
 		finally {
 			PrincipalThreadLocal.setName(null);
