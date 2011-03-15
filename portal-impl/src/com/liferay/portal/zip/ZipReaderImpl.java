@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 
+import de.schlichtherle.io.ArchiveBusyWarningException;
 import de.schlichtherle.io.ArchiveDetector;
 import de.schlichtherle.io.ArchiveException;
 import de.schlichtherle.io.DefaultArchiveDetector;
@@ -70,6 +71,11 @@ public class ZipReaderImpl implements ZipReader {
 	public void close() {
 		try {
 			File.umount(_zipFile);
+		}
+		catch (ArchiveBusyWarningException abwee) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(abwee, abwee);
+			}
 		}
 		catch (ArchiveException ae) {
 			_log.error(ae, ae);
