@@ -293,7 +293,7 @@ public class UpdateLayoutAction extends Action {
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
 
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
@@ -308,15 +308,10 @@ public class UpdateLayoutAction extends Action {
 
 		boolean portletOnLayout = false;
 
-		String rootPortletId = portlet.getRootPortlet().getPortletId();
+		String portletId = portlet.getPortletId();
 
 		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
-			String layoutRootPortletId =
-				layoutPortlet.getRootPortlet().getPortletId();
-
-			if (layoutRootPortletId.equals(rootPortletId) &&
-				(layoutPortlet.getPortletId() != portlet.getPortletId())) {
-
+			if (portletId.equals(layoutPortlet.getPortletId())) {
 				portletOnLayout = true;
 
 				break;
