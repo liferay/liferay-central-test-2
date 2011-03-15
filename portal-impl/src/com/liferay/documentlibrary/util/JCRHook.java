@@ -24,7 +24,6 @@ import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -449,8 +448,6 @@ public class JCRHook extends BaseHook {
 			String versionNumber)
 		throws PortalException, SystemException {
 
-		InputStream is = null;
-
 		Session session = null;
 
 		try {
@@ -465,7 +462,7 @@ public class JCRHook extends BaseHook {
 
 			Binary binary = value.getBinary();
 
-			is = new UnsyncBufferedInputStream(binary.getStream());
+			return binary.getStream();
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
@@ -475,8 +472,6 @@ public class JCRHook extends BaseHook {
 				session.logout();
 			}
 		}
-
-		return is;
 	}
 
 	public String[] getFileNames(
