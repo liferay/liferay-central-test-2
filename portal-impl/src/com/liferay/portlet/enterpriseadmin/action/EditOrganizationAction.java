@@ -246,7 +246,7 @@ public class EditOrganizationAction extends PortletAction {
 
 		CommunitiesUtil.applyLayoutSetPrototypes(
 			organization.getGroup(), publicLayoutSetPrototypeId,
-			privateLayoutSetPrototypeId);
+			privateLayoutSetPrototypeId, serviceContext);
 
 		// Reminder queries
 

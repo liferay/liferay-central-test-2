@@ -29,6 +29,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -56,7 +57,7 @@ public class CommunitiesUtil {
 
 	public static void applyLayoutSetPrototypes(
 			Group group, long publicLayoutSetPrototypeId,
-			long privateLayoutSetPrototypeId)
+			long privateLayoutSetPrototypeId, ServiceContext serviceContext)
 		throws Exception {
 
 		if (publicLayoutSetPrototypeId > 0) {
@@ -66,7 +67,9 @@ public class CommunitiesUtil {
 
 			LayoutSet publicLayoutSet = group.getPublicLayoutSet();
 
-			copyLayoutSet(layoutSetPrototype.getLayoutSet(), publicLayoutSet);
+			copyLayoutSet(
+				layoutSetPrototype.getLayoutSet(), publicLayoutSet,
+				serviceContext);
 		}
 
 		if (privateLayoutSetPrototypeId > 0) {
@@ -76,15 +79,19 @@ public class CommunitiesUtil {
 
 			LayoutSet privateLayoutSet = group.getPrivateLayoutSet();
 
-			copyLayoutSet(layoutSetPrototype.getLayoutSet(), privateLayoutSet);
+			copyLayoutSet(
+				layoutSetPrototype.getLayoutSet(), privateLayoutSet,
+				serviceContext);
 		}
 	}
 
 	public static void copyLayoutSet(
-			LayoutSet sourceLayoutSet, LayoutSet targetLayoutSet)
+			LayoutSet sourceLayoutSet, LayoutSet targetLayoutSet,
+			ServiceContext serviceContext)
 		throws Exception {
 
-		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters();
+		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
+			serviceContext);
 
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceLayoutSet.getGroupId(), sourceLayoutSet.isPrivateLayout(),
@@ -180,7 +187,9 @@ public class CommunitiesUtil {
 		deleteLayout(request, response);
 	}
 
-	public static Map<String, String[]> getLayoutSetPrototypeParameters() {
+	public static Map<String, String[]> getLayoutSetPrototypeParameters(
+		ServiceContext serviceContext) {
+
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
 
@@ -196,6 +205,9 @@ public class CommunitiesUtil {
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});

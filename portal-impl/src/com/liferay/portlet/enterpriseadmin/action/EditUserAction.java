@@ -410,7 +410,7 @@ public class EditUserAction extends PortletAction {
 
 		CommunitiesUtil.applyLayoutSetPrototypes(
 			user.getGroup(), publicLayoutSetPrototypeId,
-			privateLayoutSetPrototypeId);
+			privateLayoutSetPrototypeId, serviceContext);
 
 		return user;
 	}
@@ -661,7 +661,7 @@ public class EditUserAction extends PortletAction {
 
 		CommunitiesUtil.applyLayoutSetPrototypes(
 			user.getGroup(), publicLayoutSetPrototypeId,
-			privateLayoutSetPrototypeId);
+			privateLayoutSetPrototypeId, serviceContext);
 
 		return new Object[] {user, oldScreenName, oldLanguageId};
 	}

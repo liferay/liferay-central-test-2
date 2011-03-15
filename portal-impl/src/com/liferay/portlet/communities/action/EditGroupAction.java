@@ -233,7 +233,8 @@ public class EditGroupAction extends PortletAction {
 			actionRequest, "privateLayoutSetPrototypeId");
 
 		CommunitiesUtil.applyLayoutSetPrototypes(
-			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId);
+			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
+			serviceContext);
 	}
 
 	protected void updateActive(ActionRequest actionRequest, String cmd)
