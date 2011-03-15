@@ -80,15 +80,14 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 			PortletURL tempRowURL = renderResponse.createRenderURL();
 
 			tempRowURL.setParameter("struts_action", "/bookmarks/view_entry");
-			tempRowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 			tempRowURL.setParameter("redirect", currentURL);
+			tempRowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
 			rowHREF = tempRowURL.toString();
 		}
 		%>
 
 		<%@ include file="/html/portlet/bookmarks/entry_columns.jspf" %>
-
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator />

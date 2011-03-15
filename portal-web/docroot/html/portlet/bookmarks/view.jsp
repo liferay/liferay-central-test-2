@@ -267,8 +267,8 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 						PortletURL tempRowURL = renderResponse.createRenderURL();
 
 						tempRowURL.setParameter("struts_action", "/bookmarks/view_entry");
-						tempRowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 						tempRowURL.setParameter("redirect", currentURL);
+						tempRowURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
 						rowHREF = tempRowURL.toString();
 					}
