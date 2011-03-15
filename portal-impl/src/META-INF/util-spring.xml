@@ -488,16 +488,6 @@
 			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.forms.util.FormsXMLUtil" class="com.liferay.portlet.forms.util.FormsXMLUtil">
-		<property name="formsXML">
-			<bean class="com.liferay.portlet.forms.util.FormsXMLImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.forms.util.FormsXSDUtil" class="com.liferay.portlet.forms.util.FormsXSDUtil">
-		<property name="formsXSD">
-			<bean class="com.liferay.portlet.forms.util.FormsXSDImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContent" class="com.liferay.portlet.journalcontent.util.JournalContentImpl" />
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContentUtil" class="com.liferay.portlet.journalcontent.util.JournalContentUtil">
 		<property name="journalContent" ref="com.liferay.portlet.journalcontent.util.JournalContent" />

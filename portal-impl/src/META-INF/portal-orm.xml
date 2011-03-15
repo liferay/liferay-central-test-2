@@ -1730,39 +1730,6 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryModelImpl">
-		<attributes>
-			<id name="structureEntryId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="structureId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="xsd" />
-			<transient name="primaryKey" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkModelImpl">
-		<attributes>
-			<id name="structureEntryLinkId" />
-			<basic name="structureId" />
-			<basic name="className" />
-			<basic name="classPK" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl">
 		<attributes>
 			<id name="folderId" />
@@ -3337,14 +3304,6 @@
 			<transient name="string" />
 			<transient name="stringArray" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryImpl" name="FormsStructureEntry">
-		<table name="FormsStructureEntry" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkImpl" name="FormsStructureEntryLink">
-		<table name="FormsStructureEntryLink" />
-		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" name="IGFolder">
 		<table name="IGFolder" />

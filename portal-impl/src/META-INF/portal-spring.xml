@@ -259,12 +259,6 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueService" class="com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.flags.service.FlagsEntryService" class="com.liferay.portlet.flags.service.impl.FlagsEntryServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryLocalService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.persistence.FormsStructureEntryPersistence" class="com.liferay.portlet.forms.service.persistence.FormsStructureEntryPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryLinkLocalService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryLinkLocalServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryLinkServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.persistence.FormsStructureEntryLinkPersistence" class="com.liferay.portlet.forms.service.persistence.FormsStructureEntryLinkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService" class="com.liferay.portlet.imagegallery.service.impl.IGFolderLocalServiceImpl" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService" class="com.liferay.portlet.imagegallery.service.impl.IGFolderServiceImpl" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" parent="basePersistence" />
