@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -117,8 +116,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		}
 
 		request.setAttribute(
-		   "liferay-ui:icon-menu:extended", String.valueOf(_extended));
-		request.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 		request.setAttribute(
 			"liferay-ui:icon-menu:showWhenSingleIcon",
@@ -197,9 +194,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		boolean extended = GetterUtil.getBoolean(
-			(String)request.getAttribute("liferay-ui:icon-menu:extended"));
-
 		IntegerWrapper iconCount = (IntegerWrapper)request.getAttribute(
 			"liferay-ui:icon-menu:icon-count");
 
@@ -239,12 +233,12 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write(" ");
 					jspWriter.print(_cssClass);
 
-					if (_showArrow) {
-						jspWriter.write(" show-arrow");
-					}
-
 					if (_extended) {
 						jspWriter.write(" lfr-extended");
+					}
+
+					if (_showArrow) {
+						jspWriter.write(" show-arrow");
 					}
 
 					jspWriter.write("'>");
