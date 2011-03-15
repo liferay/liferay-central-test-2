@@ -171,7 +171,7 @@ body.portlet {
 	background-image: url(../images/portlet/close_borderless.png);
 }
 
-.portlet-borderless-bar .portlet-options li.lfr-trigger strong a {
+.portlet-borderless-bar .lfr-extended.portlet-options li.lfr-trigger strong a {
 	background-image: url(../images/portlet/options_borderless.png);
 }
 
@@ -511,7 +511,7 @@ body.portlet {
 .lfr-actions {
 }
 
-.lfr-actions, .lfr-actions ul {
+.lfr-actions.lfr-extended, .lfr-actions.lfr-extended ul {
 	background: #FFF url(../images/forms/button.png) repeat-x 0 100%;
 	border: 1px solid;
 	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
@@ -549,22 +549,22 @@ body.portlet {
 	border-bottom: none;
 }
 
-.lfr-actions.portlet-options {
+.lfr-actions.lfr-extended.portlet-options {
 	background: none;
 	border: none;
 	float: left;
 }
 
-.lfr-actions.portlet-options .lfr-trigger {
+.lfr-actions.lfr-extended.portlet-options .lfr-trigger {
 	padding: 0;
 }
 
-.lfr-actions.portlet-options .lfr-trigger strong {
+.lfr-actions.lfr-extended.portlet-options .lfr-trigger strong {
 	min-width: 0;
 	padding: 1px;
 }
 
-.lfr-actions.portlet-options .lfr-trigger strong a {
+.lfr-actions.lfr-extended.portlet-options .lfr-trigger strong a {
 	background-image: url(../images/portlet/options.png);
 	background-position: 0 0;
 	display: block;
@@ -575,7 +575,7 @@ body.portlet {
 	width: 16px;
 }
 
-.visible.portlet-options .lfr-trigger strong a {
+.visible.lfr-extended.portlet-options .lfr-trigger strong a {
 	background-image: url(../images/portlet/options_selected.png);
 }
 

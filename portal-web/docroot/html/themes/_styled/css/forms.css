@@ -102,7 +102,7 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
 	color: #369;
 }
 
-input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions, .lfr-actions ul {
+input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions.lfr-extended, .lfr-actions.lfr-extended ul {
 	background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0;
 	border: 1px solid;
 	border-color: #C8C9CA #9E9E9E #9E9E9E #C8C9CA;
@@ -118,13 +118,13 @@ input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-ac
 	opacity: 0.5;
 }
 
-input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions:hover, .lfr-actions:hover ul {
+input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions.lfr-extended:hover, .lfr-actions.lfr-extended:hover ul {
 	background: #B9CED9 url(../images/application/state_hover_bg.png) repeat-x 0 0;
 	border-color: #627782;
 	color: #369;
 }
 
-input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus, button:focus, .lfr-actions:focus, .lfr-actions:focus ul {
+input[type="submit"]:focus, input[type="button"]:focus, input[type="reset"]:focus, button:focus, .lfr-actions.lfr-extended:focus, .lfr-actions.lfr-extended:focus ul {
 	background: #EBEBEB url(../images/application/state_active_bg.png) repeat-x 0 0;
 	border-color: #555;
 }

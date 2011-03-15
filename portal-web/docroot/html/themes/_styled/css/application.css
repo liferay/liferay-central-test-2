@@ -340,11 +340,11 @@
 
 /* ---------- Menus ---------- */
 
-.lfr-actions.portlet-options .lfr-trigger strong span, .visible.portlet-options .lfr-trigger strong span {
+.lfr-actions.lfr-extended.portlet-options .lfr-trigger strong span, .visible.portlet-options .lfr-trigger strong span {
 	background-image: url(../images/portlet/options.png);
 }
 
-.lfr-actions.portlet-options:hover, .lfr-actions.portlet-options:hover ul {
+.lfr-actions.lfr-extended.portlet-options:hover, .lfr-actions.portlet-options:hover ul {
 	background: transparent;
 }
 

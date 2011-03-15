@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -76,6 +77,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				_cssClass = null;
 				_direction = null;
 				_endPage = null;
+				_extended = true;
 				_icon = null;
 				_id = null;
 				_message = "actions";
@@ -115,6 +117,8 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		}
 
 		request.setAttribute(
+		   "liferay-ui:icon-menu:extended", String.valueOf(_extended));
+		request.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 		request.setAttribute(
 			"liferay-ui:icon-menu:showWhenSingleIcon",
@@ -137,6 +141,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
+	}
+
+	public void setExtended(boolean extended) {
+		_extended = extended;
 	}
 
 	public void setIcon(String icon) {
@@ -189,6 +197,9 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
+		boolean extended = GetterUtil.getBoolean(
+			(String)request.getAttribute("liferay-ui:icon-menu:extended"));
+
 		IntegerWrapper iconCount = (IntegerWrapper)request.getAttribute(
 			"liferay-ui:icon-menu:icon-count");
 
@@ -227,10 +238,13 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write(_direction);
 					jspWriter.write(" ");
 					jspWriter.print(_cssClass);
-					jspWriter.write(" ");
 
 					if (_showArrow) {
-						jspWriter.write("show-arrow");
+						jspWriter.write(" show-arrow");
+					}
+
+					if (_extended) {
+						jspWriter.write(" lfr-extended");
 					}
 
 					jspWriter.write("'>");
@@ -296,6 +310,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private String _cssClass;
 	private String _direction;
 	private String _endPage;
+	private boolean _extended = true;
 	private String _icon;
 	private String _id;
 	private String _message = "actions";

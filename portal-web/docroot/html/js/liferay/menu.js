@@ -101,7 +101,14 @@ AUI().add(
 					instance._active.menu.hide();
 					instance._active.menu = null;
 
-					instance._active.trigger.removeClass('aui-state-active');
+					cssClass = instance._active.trigger.attr('className');
+
+					var extended = (cssClass.indexOf('lfr-extended') > -1);
+
+					if (extended) {
+						instance._active.trigger.removeClass('aui-state-active');
+					}
+
 					instance._active.trigger = null;
 				}
 			},
@@ -255,7 +262,11 @@ AUI().add(
 
 					menu.show();
 
-					trigger.addClass('aui-state-active');
+					var extended = (cssClass.indexOf('lfr-extended') > -1);
+
+					if (extended) {
+						trigger.addClass('aui-state-active');
+					}
 
 					instance._active = {
 						menu: menu,
