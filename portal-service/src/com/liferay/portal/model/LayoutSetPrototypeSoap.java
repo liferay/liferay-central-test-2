@@ -30,6 +30,7 @@ public class LayoutSetPrototypeSoap implements Serializable {
 	public static LayoutSetPrototypeSoap toSoapModel(LayoutSetPrototype model) {
 		LayoutSetPrototypeSoap soapModel = new LayoutSetPrototypeSoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setLayoutSetPrototypeId(model.getLayoutSetPrototypeId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setName(model.getName());
@@ -91,6 +92,14 @@ public class LayoutSetPrototypeSoap implements Serializable {
 		setLayoutSetPrototypeId(pk);
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public long getLayoutSetPrototypeId() {
 		return _layoutSetPrototypeId;
 	}
@@ -143,6 +152,7 @@ public class LayoutSetPrototypeSoap implements Serializable {
 		_active = active;
 	}
 
+	private String _uuid;
 	private long _layoutSetPrototypeId;
 	private long _companyId;
 	private String _name;

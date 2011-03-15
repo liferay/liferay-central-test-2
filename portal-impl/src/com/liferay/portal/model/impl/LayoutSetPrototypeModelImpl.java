@@ -64,6 +64,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	 */
 	public static final String TABLE_NAME = "LayoutSetPrototype";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "layoutSetPrototypeId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
@@ -71,7 +72,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 			{ "settings_", Types.VARCHAR },
 			{ "active_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutSetPrototype (layoutSetPrototypeId LONG not null primary key,companyId LONG,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutSetPrototype (uuid_ VARCHAR(75) null,layoutSetPrototypeId LONG not null primary key,companyId LONG,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSetPrototype";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -92,6 +93,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public static LayoutSetPrototype toModel(LayoutSetPrototypeSoap soapModel) {
 		LayoutSetPrototype model = new LayoutSetPrototypeImpl();
 
+		model.setUuid(soapModel.getUuid());
 		model.setLayoutSetPrototypeId(soapModel.getLayoutSetPrototypeId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setName(soapModel.getName());
@@ -135,6 +137,19 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_layoutSetPrototypeId);
+	}
+
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public long getLayoutSetPrototypeId() {
@@ -306,6 +321,8 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public Object clone() {
 		LayoutSetPrototypeImpl layoutSetPrototypeImpl = new LayoutSetPrototypeImpl();
 
+		layoutSetPrototypeImpl.setUuid(getUuid());
+
 		layoutSetPrototypeImpl.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
 
 		layoutSetPrototypeImpl.setCompanyId(getCompanyId());
@@ -364,9 +381,11 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
-		sb.append("{layoutSetPrototypeId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", layoutSetPrototypeId=");
 		sb.append(getLayoutSetPrototypeId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -384,12 +403,16 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.LayoutSetPrototype");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>layoutSetPrototypeId</column-name><column-value><![CDATA[");
 		sb.append(getLayoutSetPrototypeId());
@@ -420,6 +443,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return sb.toString();
 	}
 
+	private String _uuid;
 	private long _layoutSetPrototypeId;
 	private long _companyId;
 	private String _name;

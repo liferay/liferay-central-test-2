@@ -848,6 +848,7 @@ create table LayoutSetBranch (
 );
 
 create table LayoutSetPrototype (
+	uuid_ VARCHAR(75) null,
 	layoutSetPrototypeId LONG not null primary key,
 	companyId LONG,
 	name STRING null,

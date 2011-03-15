@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -137,6 +138,11 @@ public class VerifyUUID extends VerifyProcess {
 			LayoutLocalServiceUtil.class.getName(),
 			"Layout",
 			"plid"
+		},
+		new String[] {
+			LayoutSetPrototypeLocalServiceUtil.class.getName(),
+			"LayoutSetPrototype",
+			"layoutSetPrototypeId"
 		},
 		new String[] {
 			WikiPageResourceLocalServiceUtil.class.getName(),

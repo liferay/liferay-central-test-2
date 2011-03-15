@@ -124,6 +124,8 @@ create table LayoutSetBranch (
 	description STRING null
 );
 
+alter table LayoutSetPrototype add uuid_ VARCHAR(75) null;
+
 alter table MBCategory add displayStyle VARCHAR(75) null;
 
 COMMIT_TRANSACTION;

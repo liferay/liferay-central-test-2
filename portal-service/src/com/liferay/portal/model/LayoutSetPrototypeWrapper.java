@@ -47,6 +47,24 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	}
 
 	/**
+	* Gets the uuid of this layout set prototype.
+	*
+	* @return the uuid of this layout set prototype
+	*/
+	public java.lang.String getUuid() {
+		return _layoutSetPrototype.getUuid();
+	}
+
+	/**
+	* Sets the uuid of this layout set prototype.
+	*
+	* @param uuid the uuid of this layout set prototype
+	*/
+	public void setUuid(java.lang.String uuid) {
+		_layoutSetPrototype.setUuid(uuid);
+	}
+
+	/**
 	* Gets the layout set prototype ID of this layout set prototype.
 	*
 	* @return the layout set prototype ID of this layout set prototype

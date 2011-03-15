@@ -29,6 +29,7 @@ public class LayoutSetPrototypeJSONSerializer {
 	public static JSONObject toJSONObject(LayoutSetPrototype model) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+		jsonObject.put("uuid", model.getUuid());
 		jsonObject.put("layoutSetPrototypeId", model.getLayoutSetPrototypeId());
 		jsonObject.put("companyId", model.getCompanyId());
 		jsonObject.put("name", model.getName());

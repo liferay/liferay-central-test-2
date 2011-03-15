@@ -728,7 +728,7 @@
 			<finder-column name="name" />
 		</finder>
 	</entity>
-	<entity name="LayoutSetPrototype" local-service="true" remote-service="true">
+	<entity name="LayoutSetPrototype" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

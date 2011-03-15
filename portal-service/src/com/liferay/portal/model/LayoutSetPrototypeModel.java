@@ -59,6 +59,21 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	public void setPrimaryKey(long pk);
 
 	/**
+	 * Gets the uuid of this layout set prototype.
+	 *
+	 * @return the uuid of this layout set prototype
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this layout set prototype.
+	 *
+	 * @param uuid the uuid of this layout set prototype
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Gets the layout set prototype ID of this layout set prototype.
 	 *
 	 * @return the layout set prototype ID of this layout set prototype

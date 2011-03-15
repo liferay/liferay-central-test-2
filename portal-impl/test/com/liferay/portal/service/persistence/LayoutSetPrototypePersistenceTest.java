@@ -63,6 +63,7 @@ public class LayoutSetPrototypePersistenceTest extends BasePersistenceTestCase {
 
 		LayoutSetPrototype newLayoutSetPrototype = _persistence.create(pk);
 
+		newLayoutSetPrototype.setUuid(randomString());
 		newLayoutSetPrototype.setCompanyId(nextLong());
 		newLayoutSetPrototype.setName(randomString());
 		newLayoutSetPrototype.setDescription(randomString());
@@ -73,6 +74,8 @@ public class LayoutSetPrototypePersistenceTest extends BasePersistenceTestCase {
 
 		LayoutSetPrototype existingLayoutSetPrototype = _persistence.findByPrimaryKey(newLayoutSetPrototype.getPrimaryKey());
 
+		assertEquals(existingLayoutSetPrototype.getUuid(),
+			newLayoutSetPrototype.getUuid());
 		assertEquals(existingLayoutSetPrototype.getLayoutSetPrototypeId(),
 			newLayoutSetPrototype.getLayoutSetPrototypeId());
 		assertEquals(existingLayoutSetPrototype.getCompanyId(),
@@ -161,6 +164,7 @@ public class LayoutSetPrototypePersistenceTest extends BasePersistenceTestCase {
 
 		LayoutSetPrototype layoutSetPrototype = _persistence.create(pk);
 
+		layoutSetPrototype.setUuid(randomString());
 		layoutSetPrototype.setCompanyId(nextLong());
 		layoutSetPrototype.setName(randomString());
 		layoutSetPrototype.setDescription(randomString());
