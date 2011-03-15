@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Map;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -51,6 +53,25 @@ public class PortalPreferencesImpl implements PortalPreferences {
 		key = _encodeKey(namespace, key);
 
 		return _preferences.getValues(key, defaultValue);
+	}
+
+	public void resetValues(String namespace) {
+		try {
+			for (Map.Entry<String, Preference> preference :
+					_preferences.getPreferences().entrySet()) {
+
+				String key = preference.getKey();
+
+				if (key.startsWith(namespace) && !_preferences.isReadOnly(key)) {
+					_preferences.reset(key);
+				}
+			}
+
+			_preferences.store();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public void setValue(String namespace, String key, String value) {

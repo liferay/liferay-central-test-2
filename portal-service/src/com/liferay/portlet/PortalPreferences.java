@@ -30,6 +30,8 @@ public interface PortalPreferences extends Serializable {
 	public String[] getValues(
 		String namespace, String key, String[] defaultValue);
 
+	public void resetValues(String namespace);
+
 	public void setValue(String namespace, String key, String value);
 
 	public void setValues(String namespace, String key, String[] values);
