@@ -92,9 +92,7 @@ public class ResourcePermissionLocalServiceImpl
 				role.getCompanyId(), resourceName, scope);
 
 			for (String primKey : primKeys) {
-				ResourcePermission resourcePermission = null;
-
-				resourcePermission =
+				ResourcePermission resourcePermission =
 					resourcePermissionPersistence.fetchByC_N_S_P_R(
 						role.getCompanyId(), resourceName, scope, primKey,
 						role.getRoleId());
