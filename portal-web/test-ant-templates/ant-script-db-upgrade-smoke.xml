@@ -5,7 +5,7 @@
 
 	<target name="test-db-upgrade-smoke-${test.ant.script.version}-tomcat-db2-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="db2-9.7" />
 			<param name="vm.host" value="${vm.host.db}" />
@@ -34,7 +34,7 @@
 
 	<target name="test-db-upgrade-smoke-${test.ant.script.version}-tomcat-oracle-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="oracle-10.2.0.1.0" />
 			<param name="vm.host" value="${vm.host.db}" />
@@ -54,7 +54,7 @@
 
 	<target name="test-db-upgrade-smoke-${test.ant.script.version}-tomcat-postgresql-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="postgresql-8.4.2-1" />
 			<param name="vm.host" value="${vm.host.db}" />
@@ -74,7 +74,7 @@
 
 	<target name="test-db-upgrade-smoke-${test.ant.script.version}-tomcat-sql-server-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="sql-server-2005-sp2" />
 			<param name="vm.host" value="${vm.host.db}" />

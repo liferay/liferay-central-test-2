@@ -31,7 +31,7 @@
 
 	<target name="test-${test.ant.script.command}-tomcat-db2-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="db2-9.7" />
 			<param name="vm.host" value="${vm.host.db}" />
@@ -55,6 +55,19 @@
 
 	<target name="test-${test.ant.script.command}-tomcat-hsql-firefox">
 		<antcall target="prepare-hsql">
+			${test.ant.script.file.properties}
+		</antcall>
+
+		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
+			${test.ant.script.file.plugin.hooks}
+			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.webs}
+			<property name="test.name" value="${test.ant.script.suite}" />
+		</ant>
+	</target>
+
+	<target name="test-${test.ant.script.command}-tomcat-mysql-firefox">
+		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -94,22 +107,9 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-mysql-firefox">
-		<antcall target="prepare-mysql">
-			${test.ant.script.file.properties}
-		</antcall>
-
-		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
-			${test.ant.script.file.plugin.hooks}
-			${test.ant.script.file.plugin.portlets}
-			${test.ant.script.file.plugin.webs}
-			<property name="test.name" value="${test.ant.script.suite}" />
-		</ant>
-	</target>
-
 	<target name="test-${test.ant.script.command}-tomcat-oracle-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="oracle-10.2.0.1.0" />
 			<param name="vm.host" value="${vm.host.db}" />
@@ -132,7 +132,7 @@
 
 	<target name="test-${test.ant.script.command}-tomcat-postgresql-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="postgresql-8.4.2-1" />
 			<param name="vm.host" value="${vm.host.db}" />
@@ -156,7 +156,7 @@
 
 	<target name="test-${test.ant.script.command}-tomcat-sql-server-firefox">
 		<antcall target="prepare-vm-server">
-			<param name="build.war value="false" />
+			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="sql-server-2005-sp2" />
 			<param name="vm.host" value="${vm.host.db}" />
