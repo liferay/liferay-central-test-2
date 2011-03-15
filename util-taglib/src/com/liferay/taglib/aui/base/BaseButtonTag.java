@@ -21,6 +21,7 @@ import javax.servlet.jsp.JspException;
  * @author Eduardo Lundgren
  * @author Bruno Basto
  * @author Nathan Cavanaugh
+ * @author Julio Camarero
  * @generated
  */
 public class BaseButtonTag extends com.liferay.taglib.util.IncludeTag {

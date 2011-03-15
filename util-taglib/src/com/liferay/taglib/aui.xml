@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 
 <taglibs short-name="aui" uri="http://alloy.liferay.com/tld/aui" tlib-version="1.0">
+	<authors>
+		<author>Eduardo Lundgren</author>
+		<author>Bruno Basto</author>
+		<author>Nathan Cavanaugh</author>
+		<author>Julio Camarero</author>
+	</authors>
 	<!--<component name="A" bodyContent="true" alloyComponent="false">
 		<attributes>
 			<attribute>
