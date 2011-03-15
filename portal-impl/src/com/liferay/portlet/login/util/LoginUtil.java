@@ -399,12 +399,12 @@ public class LoginUtil {
 			}
 		}
 
-		CookieKeys.addCookie(request, response, companyIdCookie, secure);
-		CookieKeys.addCookie(request, response, idCookie, secure);
-		CookieKeys.addCookie(request, response, passwordCookie, secure);
-		CookieKeys.addCookie(request, response, rememberMeCookie, secure);
-		CookieKeys.addCookie(request, response, loginCookie, secure);
-		CookieKeys.addCookie(request, response, screenNameCookie, secure);
+		CookieKeys.addCookie(response, companyIdCookie, secure);
+		CookieKeys.addCookie(response, idCookie, secure);
+		CookieKeys.addCookie(response, passwordCookie, secure);
+		CookieKeys.addCookie(response, rememberMeCookie, secure);
+		CookieKeys.addCookie(response, loginCookie, secure);
+		CookieKeys.addCookie(response, screenNameCookie, secure);
 	}
 
 	public static void sendPassword(ActionRequest actionRequest)
