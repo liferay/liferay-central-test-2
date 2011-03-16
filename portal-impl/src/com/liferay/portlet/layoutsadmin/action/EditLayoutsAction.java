@@ -433,11 +433,11 @@ public class EditLayoutsAction extends PortletAction {
 	}
 
 	protected void deleteThemeSettings(
-		UnicodeProperties properties, String device) {
+		UnicodeProperties typeSettingsProperties, String device) {
 
 		String keyPrefix = ThemeSettingImpl.namespaceProperty(device);
 
-		Set<String> keys = properties.keySet();
+		Set<String> keys = typeSettingsProperties.keySet();
 
 		Iterator<String> itr = keys.iterator();
 
@@ -716,7 +716,7 @@ public class EditLayoutsAction extends PortletAction {
 	protected void updateLookAndFeel(
 			ActionRequest actionRequest, long companyId, long liveGroupId,
 			long stagingGroupId, boolean privateLayout, long layoutId,
-			UnicodeProperties properties)
+			UnicodeProperties typeSettingsProperties)
 		throws Exception {
 
 		String[] devices = StringUtil.split(
@@ -737,7 +737,7 @@ public class EditLayoutsAction extends PortletAction {
 				themeId = StringPool.BLANK;
 				colorSchemeId = StringPool.BLANK;
 
-				deleteThemeSettings(properties, device);
+				deleteThemeSettings(typeSettingsProperties, device);
 			}
 			else if (Validator.isNotNull(themeId)) {
 				Theme theme = ThemeLocalServiceUtil.getTheme(
@@ -762,7 +762,7 @@ public class EditLayoutsAction extends PortletAction {
 				for (String key : themeSettingsProperties.keySet()) {
 					String value = themeSettingsProperties.get(key);
 
-					properties.setProperty(
+					typeSettingsProperties.setProperty(
 						ThemeSettingImpl.namespaceProperty(device, key), value);
 				}
 			}
@@ -774,7 +774,8 @@ public class EditLayoutsAction extends PortletAction {
 			}
 
 			LayoutServiceUtil.updateLayout(
-				groupId, privateLayout, layoutId, properties.toString());
+				groupId, privateLayout, layoutId,
+				typeSettingsProperties.toString());
 
 			LayoutServiceUtil.updateLookAndFeel(
 				groupId, privateLayout, layoutId, themeId, colorSchemeId,
