@@ -36,21 +36,10 @@ String version = GetterUtil.getString((String)request.getAttribute("aui:workflow
 	</c:if>
 
 	<%
-	String statusMessage = StringPool.BLANK;
+	String statusMessage = WorkflowConstants.toLabel(status);
 	String additionalText = StringPool.BLANK;
 
-	if (status == WorkflowConstants.STATUS_APPROVED) {
-		statusMessage = "approved";
-	}
-	else if (status == WorkflowConstants.STATUS_DRAFT) {
-		statusMessage = "draft";
-	}
-	else if (status == WorkflowConstants.STATUS_EXPIRED) {
-		statusMessage = "expired";
-	}
-	else if (status == WorkflowConstants.STATUS_PENDING) {
-		statusMessage = "pending";
-
+	if (status == WorkflowConstants.STATUS_PENDING) {
 		long companyId = BeanPropertiesUtil.getLong(bean, "companyId");
 		long groupId = BeanPropertiesUtil.getLong(bean, "groupId");
 		long classPK = BeanPropertiesUtil.getLong(bean, "primaryKey");
