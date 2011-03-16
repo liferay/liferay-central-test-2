@@ -217,7 +217,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		PortletInstanceFactoryUtil.clear(portlet, false);
 
 		PortletConfigFactoryUtil.destroy(portlet);
-		PortletContextFactory.destroy(portlet);
 
 		clearCache();
 
