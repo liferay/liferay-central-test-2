@@ -163,10 +163,10 @@ public class StagingImpl implements Staging {
 
 	public void copyRemoteLayouts(
 			long sourceGroupId, boolean privateLayout,
-			Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> parameterMap, String remoteAddress,
-			int remotePort, boolean secureConnection, long remoteGroupId,
-			boolean remotePrivateLayout, Date startDate, Date endDate)
+			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
+			String remoteAddress, int remotePort, boolean secureConnection,
+			long remoteGroupId, boolean remotePrivateLayout, Date startDate,
+			Date endDate)
 		throws Exception {
 
 		PermissionChecker permissionChecker =
@@ -1487,6 +1487,7 @@ public class StagingImpl implements Staging {
 		}
 
 		Map<Long, Boolean> layoutIdMap = null;
+
 		Map<String, String[]> parameterMap = getStagingParameters(
 			portletRequest);
 
