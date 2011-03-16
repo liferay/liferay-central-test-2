@@ -518,7 +518,7 @@ public class DocumentImpl implements Document {
 	private static final String _UID_PORTLET = "_PORTLET_";
 
 	private Format _dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
-		_DATE_FORMAT);
+		_DATE_FORMAT_PATTERN);
 
 	private Map<String, Field> _fields = new HashMap<String, Field>();
 
