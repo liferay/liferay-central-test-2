@@ -18,9 +18,9 @@
 
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateElementException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateStructureIdException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateStructureKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryNameException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryStructureIdException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryStructureKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryXsdException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>

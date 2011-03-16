@@ -30,37 +30,37 @@ public class DDMStructureEntryServiceWrapper implements DDMStructureEntryService
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry addStructureEntry(
-		long groupId, java.lang.String structureId, boolean autoStrucureId,
+		long groupId, java.lang.String structureKey, boolean autoStrucureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureEntryService.addStructureEntry(groupId,
-			structureId, autoStrucureId, name, description, xsd, serviceContext);
+			structureKey, autoStrucureId, name, description, xsd, serviceContext);
 	}
 
-	public void deleteStructureEntry(long groupId, java.lang.String structureId)
+	public void deleteStructureEntry(long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_ddmStructureEntryService.deleteStructureEntry(groupId, structureId);
+		_ddmStructureEntryService.deleteStructureEntry(groupId, structureKey);
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry getStructureEntry(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmStructureEntryService.getStructureEntry(groupId, structureId);
+		return _ddmStructureEntryService.getStructureEntry(groupId, structureKey);
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry updateStructureEntry(
-		long groupId, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureEntryService.updateStructureEntry(groupId,
-			structureId, name, description, xsd, serviceContext);
+			structureKey, name, description, xsd, serviceContext);
 	}
 
 	public DDMStructureEntryService getWrappedDDMStructureEntryService() {

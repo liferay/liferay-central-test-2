@@ -47,10 +47,10 @@ public class DDMStructureEntryPermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId,
-			String structureId, String actionId)
+			String structureKey, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, structureId, actionId)) {
+		if (!contains(permissionChecker, groupId, structureKey, actionId)) {
 			throw new PrincipalException();
 		}
 	}

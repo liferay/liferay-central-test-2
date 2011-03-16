@@ -26,9 +26,9 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateElementException;
-import com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateStructureIdException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureEntryNameException;
-import com.liferay.portlet.dynamicdatamapping.StructureEntryStructureIdException;
+import com.liferay.portlet.dynamicdatamapping.StructureEntryStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureEntryXsdException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryConstants;
@@ -49,8 +49,8 @@ public class DDMStructureEntryLocalServiceImpl
 	extends DDMStructureEntryLocalServiceBaseImpl {
 
 	public DDMStructureEntry addStructureEntry(
-			long userId, long groupId, String structureId,
-			boolean autoStructureId, String name, String description,
+			long userId, long groupId, String structureKey,
+			boolean autoStructureKey, String name, String description,
 			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -59,10 +59,10 @@ public class DDMStructureEntryLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
 
-		structureId = structureId.trim().toUpperCase();
+		structureKey = structureKey.trim().toUpperCase();
 
-		if (autoStructureId) {
-			structureId = String.valueOf(counterLocalService.increment());
+		if (autoStructureKey) {
+			structureKey = String.valueOf(counterLocalService.increment());
 		}
 
 		try {
@@ -74,7 +74,7 @@ public class DDMStructureEntryLocalServiceImpl
 
 		Date now = new Date();
 
-		validate(groupId, structureId, autoStructureId, name, xsd);
+		validate(groupId, structureKey, autoStructureKey, name, xsd);
 
 		long structureEntryId = counterLocalService.increment();
 
@@ -88,7 +88,7 @@ public class DDMStructureEntryLocalServiceImpl
 		structureEntry.setUserName(user.getFullName());
 		structureEntry.setCreateDate(serviceContext.getCreateDate(now));
 		structureEntry.setModifiedDate(serviceContext.getModifiedDate(now));
-		structureEntry.setStructureId(structureId);
+		structureEntry.setStructureKey(structureKey);
 		structureEntry.setName(name);
 		structureEntry.setDescription(description);
 		structureEntry.setXsd(xsd);
@@ -121,7 +121,7 @@ public class DDMStructureEntryLocalServiceImpl
 		resourceLocalService.addResources(
 			structureEntry.getCompanyId(), structureEntry.getGroupId(),
 			structureEntry.getUserId(), DDMStructureEntry.class.getName(),
-			structureEntry.getStructureId(), false, addCommunityPermissions,
+			structureEntry.getStructureKey(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -133,7 +133,7 @@ public class DDMStructureEntryLocalServiceImpl
 		resourceLocalService.addModelResources(
 			structureEntry.getCompanyId(), structureEntry.getGroupId(),
 			structureEntry.getUserId(), DDMStructureEntry.class.getName(),
-			structureEntry.getStructureId(), communityPermissions,
+			structureEntry.getStructureKey(), communityPermissions,
 			guestPermissions);
 	}
 
@@ -159,14 +159,14 @@ public class DDMStructureEntryLocalServiceImpl
 		resourceLocalService.deleteResource(
 			structureEntry.getCompanyId(), DDMStructureEntry.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
-			structureEntry.getStructureId());
+			structureEntry.getStructureKey());
 	}
 
-	public void deleteStructureEntry(long groupId, String structureId)
+	public void deleteStructureEntry(long groupId, String structureKey)
 		throws PortalException, SystemException {
 
 		DDMStructureEntry structureEntry =
-			ddmStructureEntryPersistence.findByG_S(groupId, structureId);
+			ddmStructureEntryPersistence.findByG_S(groupId, structureKey);
 
 		deleteStructureEntry(structureEntry);
 	}
@@ -201,14 +201,14 @@ public class DDMStructureEntryLocalServiceImpl
 	}
 
 	public DDMStructureEntry getStructureEntry(
-			long groupId, String structureId)
+			long groupId, String structureKey)
 		throws PortalException, SystemException {
 
-		return ddmStructureEntryPersistence.findByG_S(groupId, structureId);
+		return ddmStructureEntryPersistence.findByG_S(groupId, structureKey);
 	}
 
 	public DDMStructureEntry updateStructureEntry(
-			long groupId, String structureId, String name,
+			long groupId, String structureKey, String name,
 			String description, String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -220,7 +220,7 @@ public class DDMStructureEntryLocalServiceImpl
 		}
 
 		DDMStructureEntry structureEntry =
-			ddmStructureEntryPersistence.findByG_S(groupId, structureId);
+			ddmStructureEntryPersistence.findByG_S(groupId, structureKey);
 
 		validate(groupId, name, xsd);
 
@@ -295,18 +295,18 @@ public class DDMStructureEntryLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, String structureId, boolean autoStructureId,
+			long groupId, String structureKey, boolean autoStructureKey,
 			String name, String xsd)
 		throws PortalException, SystemException {
 
-		if (!autoStructureId) {
-			validateStructureId(structureId);
+		if (!autoStructureKey) {
+			validateStructureKey(structureKey);
 
 			DDMStructureEntry structureEntry =
-				ddmStructureEntryPersistence.fetchByG_S(groupId, structureId);
+				ddmStructureEntryPersistence.fetchByG_S(groupId, structureKey);
 
 			if (structureEntry != null) {
-				throw new StructureEntryDuplicateStructureIdException();
+				throw new StructureEntryDuplicateStructureKeyException();
 			}
 		}
 
@@ -353,13 +353,13 @@ public class DDMStructureEntryLocalServiceImpl
 		}
 	}
 
-	protected void validateStructureId(String structureId)
+	protected void validateStructureKey(String structureKey)
 		throws PortalException {
 
-		if (Validator.isNull(structureId) || Validator.isNumber(structureId) ||
-			structureId.indexOf(CharPool.SPACE) != -1) {
+		if (Validator.isNull(structureKey) || Validator.isNumber(structureKey) ||
+			structureKey.indexOf(CharPool.SPACE) != -1) {
 
-			throw new StructureEntryStructureIdException();
+			throw new StructureEntryStructureKeyException();
 		}
 	}
 

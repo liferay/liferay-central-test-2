@@ -66,21 +66,21 @@ public class DDMStructureEntryLinkWrapper implements DDMStructureEntryLink {
 	}
 
 	/**
-	* Gets the structure ID of this d d m structure entry link.
+	* Gets the structure key of this d d m structure entry link.
 	*
-	* @return the structure ID of this d d m structure entry link
+	* @return the structure key of this d d m structure entry link
 	*/
-	public java.lang.String getStructureId() {
-		return _ddmStructureEntryLink.getStructureId();
+	public java.lang.String getStructureKey() {
+		return _ddmStructureEntryLink.getStructureKey();
 	}
 
 	/**
-	* Sets the structure ID of this d d m structure entry link.
+	* Sets the structure key of this d d m structure entry link.
 	*
-	* @param structureId the structure ID of this d d m structure entry link
+	* @param structureKey the structure key of this d d m structure entry link
 	*/
-	public void setStructureId(java.lang.String structureId) {
-		_ddmStructureEntryLink.setStructureId(structureId);
+	public void setStructureKey(java.lang.String structureKey) {
+		_ddmStructureEntryLink.setStructureKey(structureKey);
 	}
 
 	/**

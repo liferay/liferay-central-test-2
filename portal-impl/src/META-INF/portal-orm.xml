@@ -1682,7 +1682,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="structureId" />
+			<basic name="structureKey" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="xsd" />
@@ -1693,7 +1693,7 @@
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryLinkModelImpl">
 		<attributes>
 			<id name="structureEntryLinkId" />
-			<basic name="structureId" />
+			<basic name="structureKey" />
 			<basic name="className" />
 			<basic name="classPK" />
 			<transient name="primaryKey" />

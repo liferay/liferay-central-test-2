@@ -58,7 +58,7 @@ public class DDMStructureEntryJSONSerializer {
 		}
 
 		jsonObject.put("modifiedDate", modifiedDateJSON);
-		jsonObject.put("structureId", model.getStructureId());
+		jsonObject.put("structureKey", model.getStructureKey());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
 		jsonObject.put("xsd", model.getXsd());

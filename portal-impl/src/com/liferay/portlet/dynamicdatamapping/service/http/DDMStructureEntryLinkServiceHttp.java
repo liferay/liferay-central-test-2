@@ -55,7 +55,7 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkServi
  */
 public class DDMStructureEntryLinkServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink addStructureEntryLink(
-		HttpPrincipal httpPrincipal, java.lang.String structureId,
+		HttpPrincipal httpPrincipal, java.lang.String structureKey,
 		java.lang.String className, long classPK,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -66,7 +66,7 @@ public class DDMStructureEntryLinkServiceHttp {
 					_addStructureEntryLinkParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					structureId, className, classPK, serviceContext);
+					structureKey, className, classPK, serviceContext);
 
 			Object returnObj = null;
 
@@ -95,7 +95,7 @@ public class DDMStructureEntryLinkServiceHttp {
 	}
 
 	public static void deleteStructureEntryLink(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String structureId, long structureEntryLinkId)
+		long groupId, java.lang.String structureKey, long structureEntryLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -104,7 +104,7 @@ public class DDMStructureEntryLinkServiceHttp {
 					_deleteStructureEntryLinkParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId, structureEntryLinkId);
+					structureKey, structureEntryLinkId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -130,7 +130,7 @@ public class DDMStructureEntryLinkServiceHttp {
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink getStructureEntryLink(
 		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureId, java.lang.String className, long classPK)
+		java.lang.String structureKey, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -139,7 +139,7 @@ public class DDMStructureEntryLinkServiceHttp {
 					_getStructureEntryLinkParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId, className, classPK);
+					structureKey, className, classPK);
 
 			Object returnObj = null;
 
@@ -169,8 +169,8 @@ public class DDMStructureEntryLinkServiceHttp {
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink updateStructureEntryLink(
 		HttpPrincipal httpPrincipal, long structureEntryLinkId,
-		java.lang.String structureId, long groupId, java.lang.String className,
-		long classPK)
+		java.lang.String structureKey, long groupId,
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -179,7 +179,7 @@ public class DDMStructureEntryLinkServiceHttp {
 					_updateStructureEntryLinkParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					structureEntryLinkId, structureId, groupId, className,
+					structureEntryLinkId, structureKey, groupId, className,
 					classPK);
 
 			Object returnObj = null;

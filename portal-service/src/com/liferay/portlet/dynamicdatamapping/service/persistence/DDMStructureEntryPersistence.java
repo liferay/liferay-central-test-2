@@ -421,41 +421,41 @@ public interface DDMStructureEntryPersistence extends BasePersistence<DDMStructu
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException;
 
 	/**
-	* Finds the d d m structure entry where groupId = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException} if it could not be found.
+	* Finds the d d m structure entry where groupId = &#63; and structureKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException} if it could not be found.
 	*
 	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the matching d d m structure entry
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException if a matching d d m structure entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry findByG_S(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException;
 
 	/**
-	* Finds the d d m structure entry where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Finds the d d m structure entry where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
 	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the matching d d m structure entry, or <code>null</code> if a matching d d m structure entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry fetchByG_S(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m structure entry where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Finds the d d m structure entry where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
 	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the matching d d m structure entry, or <code>null</code> if a matching d d m structure entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry fetchByG_S(
-		long groupId, java.lang.String structureId, boolean retrieveFromCache)
+		long groupId, java.lang.String structureKey, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -531,13 +531,13 @@ public interface DDMStructureEntryPersistence extends BasePersistence<DDMStructu
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the d d m structure entry where groupId = &#63; and structureId = &#63; from the database.
+	* Removes the d d m structure entry where groupId = &#63; and structureKey = &#63; from the database.
 	*
 	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByG_S(long groupId, java.lang.String structureId)
+	public void removeByG_S(long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException;
 
@@ -591,14 +591,14 @@ public interface DDMStructureEntryPersistence extends BasePersistence<DDMStructu
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m structure entries where groupId = &#63; and structureId = &#63;.
+	* Counts all the d d m structure entries where groupId = &#63; and structureKey = &#63;.
 	*
 	* @param groupId the group ID to search with
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the number of matching d d m structure entries
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_S(long groupId, java.lang.String structureId)
+	public int countByG_S(long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

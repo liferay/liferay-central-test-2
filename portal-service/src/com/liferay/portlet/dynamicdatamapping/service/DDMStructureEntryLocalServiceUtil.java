@@ -265,15 +265,15 @@ public class DDMStructureEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry addStructureEntry(
-		long userId, long groupId, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String name,
+		long userId, long groupId, java.lang.String structureKey,
+		boolean autoStructureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addStructureEntry(userId, groupId, structureId,
-			autoStructureId, name, description, xsd, serviceContext);
+				   .addStructureEntry(userId, groupId, structureKey,
+			autoStructureKey, name, description, xsd, serviceContext);
 	}
 
 	public static void addStructureEntryResources(
@@ -311,10 +311,10 @@ public class DDMStructureEntryLocalServiceUtil {
 	}
 
 	public static void deleteStructureEntry(long groupId,
-		java.lang.String structureId)
+		java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructureEntry(groupId, structureId);
+		getService().deleteStructureEntry(groupId, structureKey);
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry> getStructureEntries()
@@ -347,20 +347,20 @@ public class DDMStructureEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry getStructureEntry(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureEntry(groupId, structureId);
+		return getService().getStructureEntry(groupId, structureKey);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry updateStructureEntry(
-		long groupId, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStructureEntry(groupId, structureId, name,
+				   .updateStructureEntry(groupId, structureKey, name,
 			description, xsd, serviceContext);
 	}
 

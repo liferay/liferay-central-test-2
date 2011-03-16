@@ -203,210 +203,212 @@ public class DDMStructureEntryLinkUtil {
 	}
 
 	/**
-	* Finds all the d d m structure entry links where structureId = &#63;.
+	* Finds all the d d m structure entry links where structureKey = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the matching d d m structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> findByStructureId(
-		java.lang.String structureId)
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> findByStructureKey(
+		java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByStructureId(structureId);
+		return getPersistence().findByStructureKey(structureKey);
 	}
 
 	/**
-	* Finds a range of all the d d m structure entry links where structureId = &#63;.
+	* Finds a range of all the d d m structure entry links where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param start the lower bound of the range of d d m structure entry links to return
 	* @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	* @return the range of matching d d m structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> findByStructureId(
-		java.lang.String structureId, int start, int end)
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> findByStructureKey(
+		java.lang.String structureKey, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByStructureId(structureId, start, end);
+		return getPersistence().findByStructureKey(structureKey, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the d d m structure entry links where structureId = &#63;.
+	* Finds an ordered range of all the d d m structure entry links where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param start the lower bound of the range of d d m structure entry links to return
 	* @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> findByStructureId(
-		java.lang.String structureId, int start, int end,
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> findByStructureKey(
+		java.lang.String structureKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByStructureId(structureId, start, end, orderByComparator);
+				   .findByStructureKey(structureKey, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Finds the first d d m structure entry link in the ordered set where structureId = &#63;.
+	* Finds the first d d m structure entry link in the ordered set where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d d m structure entry link
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a matching d d m structure entry link could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink findByStructureId_First(
-		java.lang.String structureId,
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink findByStructureKey_First(
+		java.lang.String structureKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException {
 		return getPersistence()
-				   .findByStructureId_First(structureId, orderByComparator);
+				   .findByStructureKey_First(structureKey, orderByComparator);
 	}
 
 	/**
-	* Finds the last d d m structure entry link in the ordered set where structureId = &#63;.
+	* Finds the last d d m structure entry link in the ordered set where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d d m structure entry link
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a matching d d m structure entry link could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink findByStructureId_Last(
-		java.lang.String structureId,
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink findByStructureKey_Last(
+		java.lang.String structureKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException {
 		return getPersistence()
-				   .findByStructureId_Last(structureId, orderByComparator);
+				   .findByStructureKey_Last(structureKey, orderByComparator);
 	}
 
 	/**
-	* Finds the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureId = &#63;.
+	* Finds the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param structureEntryLinkId the primary key of the current d d m structure entry link
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure entry link
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a d d m structure entry link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink[] findByStructureId_PrevAndNext(
-		long structureEntryLinkId, java.lang.String structureId,
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink[] findByStructureKey_PrevAndNext(
+		long structureEntryLinkId, java.lang.String structureKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException {
 		return getPersistence()
-				   .findByStructureId_PrevAndNext(structureEntryLinkId,
-			structureId, orderByComparator);
+				   .findByStructureKey_PrevAndNext(structureEntryLinkId,
+			structureKey, orderByComparator);
 	}
 
 	/**
-	* Filters by the user's permissions and finds all the d d m structure entry links where structureId = &#63;.
+	* Filters by the user's permissions and finds all the d d m structure entry links where structureKey = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the matching d d m structure entry links that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> filterFindByStructureId(
-		java.lang.String structureId)
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> filterFindByStructureKey(
+		java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterFindByStructureId(structureId);
+		return getPersistence().filterFindByStructureKey(structureKey);
 	}
 
 	/**
-	* Filters by the user's permissions and finds a range of all the d d m structure entry links where structureId = &#63;.
+	* Filters by the user's permissions and finds a range of all the d d m structure entry links where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param start the lower bound of the range of d d m structure entry links to return
 	* @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	* @return the range of matching d d m structure entry links that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> filterFindByStructureId(
-		java.lang.String structureId, int start, int end)
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> filterFindByStructureKey(
+		java.lang.String structureKey, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterFindByStructureId(structureId, start, end);
+		return getPersistence()
+				   .filterFindByStructureKey(structureKey, start, end);
 	}
 
 	/**
-	* Filters by the user's permissions and finds an ordered range of all the d d m structure entry links where structureId = &#63;.
+	* Filters by the user's permissions and finds an ordered range of all the d d m structure entry links where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param start the lower bound of the range of d d m structure entry links to return
 	* @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d d m structure entry links that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> filterFindByStructureId(
-		java.lang.String structureId, int start, int end,
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink> filterFindByStructureKey(
+		java.lang.String structureKey, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .filterFindByStructureId(structureId, start, end,
+				   .filterFindByStructureKey(structureKey, start, end,
 			orderByComparator);
 	}
 
 	/**
-	* Filters the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureId = &#63;.
+	* Filters the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureKey = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param structureEntryLinkId the primary key of the current d d m structure entry link
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d d m structure entry link
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a d d m structure entry link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink[] filterFindByStructureId_PrevAndNext(
-		long structureEntryLinkId, java.lang.String structureId,
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink[] filterFindByStructureKey_PrevAndNext(
+		long structureEntryLinkId, java.lang.String structureKey,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException {
 		return getPersistence()
-				   .filterFindByStructureId_PrevAndNext(structureEntryLinkId,
-			structureId, orderByComparator);
+				   .filterFindByStructureKey_PrevAndNext(structureEntryLinkId,
+			structureKey, orderByComparator);
 	}
 
 	/**
-	* Finds the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException} if it could not be found.
+	* Finds the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException} if it could not be found.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param className the class name to search with
 	* @param classPK the class p k to search with
 	* @return the matching d d m structure entry link
@@ -414,42 +416,42 @@ public class DDMStructureEntryLinkUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink findByS_C_C(
-		java.lang.String structureId, java.lang.String className, long classPK)
+		java.lang.String structureKey, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException {
-		return getPersistence().findByS_C_C(structureId, className, classPK);
+		return getPersistence().findByS_C_C(structureKey, className, classPK);
 	}
 
 	/**
-	* Finds the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Finds the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param className the class name to search with
 	* @param classPK the class p k to search with
 	* @return the matching d d m structure entry link, or <code>null</code> if a matching d d m structure entry link could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink fetchByS_C_C(
-		java.lang.String structureId, java.lang.String className, long classPK)
+		java.lang.String structureKey, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByS_C_C(structureId, className, classPK);
+		return getPersistence().fetchByS_C_C(structureKey, className, classPK);
 	}
 
 	/**
-	* Finds the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Finds the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param className the class name to search with
 	* @param classPK the class p k to search with
 	* @return the matching d d m structure entry link, or <code>null</code> if a matching d d m structure entry link could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink fetchByS_C_C(
-		java.lang.String structureId, java.lang.String className, long classPK,
-		boolean retrieveFromCache)
+		java.lang.String structureKey, java.lang.String className,
+		long classPK, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByS_C_C(structureId, className, classPK,
+				   .fetchByS_C_C(structureKey, className, classPK,
 			retrieveFromCache);
 	}
 
@@ -503,29 +505,29 @@ public class DDMStructureEntryLinkUtil {
 	}
 
 	/**
-	* Removes all the d d m structure entry links where structureId = &#63; from the database.
+	* Removes all the d d m structure entry links where structureKey = &#63; from the database.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByStructureId(java.lang.String structureId)
+	public static void removeByStructureKey(java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByStructureId(structureId);
+		getPersistence().removeByStructureKey(structureKey);
 	}
 
 	/**
-	* Removes the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; from the database.
+	* Removes the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; from the database.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param className the class name to search with
 	* @param classPK the class p k to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByS_C_C(java.lang.String structureId,
+	public static void removeByS_C_C(java.lang.String structureKey,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException {
-		getPersistence().removeByS_C_C(structureId, className, classPK);
+		getPersistence().removeByS_C_C(structureKey, className, classPK);
 	}
 
 	/**
@@ -539,42 +541,42 @@ public class DDMStructureEntryLinkUtil {
 	}
 
 	/**
-	* Counts all the d d m structure entry links where structureId = &#63;.
+	* Counts all the d d m structure entry links where structureKey = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the number of matching d d m structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByStructureId(java.lang.String structureId)
+	public static int countByStructureKey(java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByStructureId(structureId);
+		return getPersistence().countByStructureKey(structureKey);
 	}
 
 	/**
-	* Filters by the user's permissions and counts all the d d m structure entry links where structureId = &#63;.
+	* Filters by the user's permissions and counts all the d d m structure entry links where structureKey = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @return the number of matching d d m structure entry links that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int filterCountByStructureId(java.lang.String structureId)
+	public static int filterCountByStructureKey(java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().filterCountByStructureId(structureId);
+		return getPersistence().filterCountByStructureKey(structureKey);
 	}
 
 	/**
-	* Counts all the d d m structure entry links where structureId = &#63; and className = &#63; and classPK = &#63;.
+	* Counts all the d d m structure entry links where structureKey = &#63; and className = &#63; and classPK = &#63;.
 	*
-	* @param structureId the structure ID to search with
+	* @param structureKey the structure key to search with
 	* @param className the class name to search with
 	* @param classPK the class p k to search with
 	* @return the number of matching d d m structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByS_C_C(java.lang.String structureId,
+	public static int countByS_C_C(java.lang.String structureKey,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByS_C_C(structureId, className, classPK);
+		return getPersistence().countByS_C_C(structureKey, className, classPK);
 	}
 
 	/**

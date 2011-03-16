@@ -75,18 +75,18 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	public static final String FINDER_CLASS_NAME_ENTITY = DDMStructureEntryLinkImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_STRUCTUREID = new FinderPath(DDMStructureEntryLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_STRUCTUREKEY = new FinderPath(DDMStructureEntryLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureEntryLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByStructureId",
+			FINDER_CLASS_NAME_LIST, "findByStructureKey",
 			new String[] {
 				String.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_STRUCTUREID = new FinderPath(DDMStructureEntryLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_STRUCTUREKEY = new FinderPath(DDMStructureEntryLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureEntryLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByStructureId",
+			FINDER_CLASS_NAME_LIST, "countByStructureKey",
 			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_S_C_C = new FinderPath(DDMStructureEntryLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureEntryLinkModelImpl.FINDER_CACHE_ENABLED,
@@ -121,7 +121,7 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_S_C_C,
 			new Object[] {
-				ddmStructureEntryLink.getStructureId(),
+				ddmStructureEntryLink.getStructureKey(),
 				
 			ddmStructureEntryLink.getClassName(),
 				Long.valueOf(ddmStructureEntryLink.getClassPK())
@@ -175,7 +175,7 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
 			new Object[] {
-				ddmStructureEntryLink.getStructureId(),
+				ddmStructureEntryLink.getStructureKey(),
 				
 			ddmStructureEntryLink.getClassName(),
 				Long.valueOf(ddmStructureEntryLink.getClassPK())
@@ -287,7 +287,7 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
 			new Object[] {
-				ddmStructureEntryLinkModelImpl.getStructureId(),
+				ddmStructureEntryLinkModelImpl.getStructureKey(),
 				
 			ddmStructureEntryLinkModelImpl.getClassName(),
 				Long.valueOf(ddmStructureEntryLinkModelImpl.getClassPK())
@@ -332,14 +332,14 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 			ddmStructureEntryLink.getPrimaryKey(), ddmStructureEntryLink);
 
 		if (!isNew &&
-				(!Validator.equals(ddmStructureEntryLink.getStructureId(),
-					ddmStructureEntryLinkModelImpl.getOriginalStructureId()) ||
+				(!Validator.equals(ddmStructureEntryLink.getStructureKey(),
+					ddmStructureEntryLinkModelImpl.getOriginalStructureKey()) ||
 				!Validator.equals(ddmStructureEntryLink.getClassName(),
 					ddmStructureEntryLinkModelImpl.getOriginalClassName()) ||
 				(ddmStructureEntryLink.getClassPK() != ddmStructureEntryLinkModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
 				new Object[] {
-					ddmStructureEntryLinkModelImpl.getOriginalStructureId(),
+					ddmStructureEntryLinkModelImpl.getOriginalStructureKey(),
 					
 				ddmStructureEntryLinkModelImpl.getOriginalClassName(),
 					Long.valueOf(
@@ -348,14 +348,14 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 		}
 
 		if (isNew ||
-				(!Validator.equals(ddmStructureEntryLink.getStructureId(),
-					ddmStructureEntryLinkModelImpl.getOriginalStructureId()) ||
+				(!Validator.equals(ddmStructureEntryLink.getStructureKey(),
+					ddmStructureEntryLinkModelImpl.getOriginalStructureKey()) ||
 				!Validator.equals(ddmStructureEntryLink.getClassName(),
 					ddmStructureEntryLinkModelImpl.getOriginalClassName()) ||
 				(ddmStructureEntryLink.getClassPK() != ddmStructureEntryLinkModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_S_C_C,
 				new Object[] {
-					ddmStructureEntryLink.getStructureId(),
+					ddmStructureEntryLink.getStructureKey(),
 					
 				ddmStructureEntryLink.getClassName(),
 					Long.valueOf(ddmStructureEntryLink.getClassPK())
@@ -377,7 +377,7 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 		ddmStructureEntryLinkImpl.setPrimaryKey(ddmStructureEntryLink.getPrimaryKey());
 
 		ddmStructureEntryLinkImpl.setStructureEntryLinkId(ddmStructureEntryLink.getStructureEntryLinkId());
-		ddmStructureEntryLinkImpl.setStructureId(ddmStructureEntryLink.getStructureId());
+		ddmStructureEntryLinkImpl.setStructureKey(ddmStructureEntryLink.getStructureKey());
 		ddmStructureEntryLinkImpl.setClassName(ddmStructureEntryLink.getClassName());
 		ddmStructureEntryLinkImpl.setClassPK(ddmStructureEntryLink.getClassPK());
 
@@ -471,61 +471,61 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Finds all the d d m structure entry links where structureId = &#63;.
+	 * Finds all the d d m structure entry links where structureKey = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the matching d d m structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureEntryLink> findByStructureId(String structureId)
+	public List<DDMStructureEntryLink> findByStructureKey(String structureKey)
 		throws SystemException {
-		return findByStructureId(structureId, QueryUtil.ALL_POS,
+		return findByStructureKey(structureKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m structure entry links where structureId = &#63;.
+	 * Finds a range of all the d d m structure entry links where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param start the lower bound of the range of d d m structure entry links to return
 	 * @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	 * @return the range of matching d d m structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureEntryLink> findByStructureId(String structureId,
+	public List<DDMStructureEntryLink> findByStructureKey(String structureKey,
 		int start, int end) throws SystemException {
-		return findByStructureId(structureId, start, end, null);
+		return findByStructureKey(structureKey, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m structure entry links where structureId = &#63;.
+	 * Finds an ordered range of all the d d m structure entry links where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param start the lower bound of the range of d d m structure entry links to return
 	 * @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureEntryLink> findByStructureId(String structureId,
+	public List<DDMStructureEntryLink> findByStructureKey(String structureKey,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				structureId,
+				structureKey,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMStructureEntryLink> list = (List<DDMStructureEntryLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREID,
+		List<DDMStructureEntryLink> list = (List<DDMStructureEntryLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREKEY,
 				finderArgs, this);
 
 		if (list == null) {
@@ -541,15 +541,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			query.append(_SQL_SELECT_DDMSTRUCTUREENTRYLINK_WHERE);
 
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
 			}
 			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
 				}
 			}
 
@@ -569,8 +569,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureId != null) {
-					qPos.add(structureId);
+				if (structureKey != null) {
+					qPos.add(structureKey);
 				}
 
 				list = (List<DDMStructureEntryLink>)QueryUtil.list(q,
@@ -581,13 +581,13 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_STRUCTUREID,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_STRUCTUREKEY,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_STRUCTUREID,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_STRUCTUREKEY,
 						finderArgs, list);
 				}
 
@@ -599,31 +599,31 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Finds the first d d m structure entry link in the ordered set where structureId = &#63;.
+	 * Finds the first d d m structure entry link in the ordered set where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d m structure entry link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a matching d d m structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink findByStructureId_First(String structureId,
+	public DDMStructureEntryLink findByStructureKey_First(String structureKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureEntryLinkException, SystemException {
-		List<DDMStructureEntryLink> list = findByStructureId(structureId, 0, 1,
-				orderByComparator);
+		List<DDMStructureEntryLink> list = findByStructureKey(structureKey, 0,
+				1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("structureId=");
-			msg.append(structureId);
+			msg.append("structureKey=");
+			msg.append(structureKey);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -635,24 +635,24 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Finds the last d d m structure entry link in the ordered set where structureId = &#63;.
+	 * Finds the last d d m structure entry link in the ordered set where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d m structure entry link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a matching d d m structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink findByStructureId_Last(String structureId,
+	public DDMStructureEntryLink findByStructureKey_Last(String structureKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureEntryLinkException, SystemException {
-		int count = countByStructureId(structureId);
+		int count = countByStructureKey(structureKey);
 
-		List<DDMStructureEntryLink> list = findByStructureId(structureId,
+		List<DDMStructureEntryLink> list = findByStructureKey(structureKey,
 				count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
@@ -660,8 +660,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("structureId=");
-			msg.append(structureId);
+			msg.append("structureKey=");
+			msg.append(structureKey);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -673,21 +673,21 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Finds the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureId = &#63;.
+	 * Finds the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param structureEntryLinkId the primary key of the current d d m structure entry link
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure entry link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a d d m structure entry link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink[] findByStructureId_PrevAndNext(
-		long structureEntryLinkId, String structureId,
+	public DDMStructureEntryLink[] findByStructureKey_PrevAndNext(
+		long structureEntryLinkId, String structureKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureEntryLinkException, SystemException {
 		DDMStructureEntryLink ddmStructureEntryLink = findByPrimaryKey(structureEntryLinkId);
@@ -699,13 +699,14 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			DDMStructureEntryLink[] array = new DDMStructureEntryLinkImpl[3];
 
-			array[0] = getByStructureId_PrevAndNext(session,
-					ddmStructureEntryLink, structureId, orderByComparator, true);
+			array[0] = getByStructureKey_PrevAndNext(session,
+					ddmStructureEntryLink, structureKey, orderByComparator, true);
 
 			array[1] = ddmStructureEntryLink;
 
-			array[2] = getByStructureId_PrevAndNext(session,
-					ddmStructureEntryLink, structureId, orderByComparator, false);
+			array[2] = getByStructureKey_PrevAndNext(session,
+					ddmStructureEntryLink, structureKey, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -717,9 +718,9 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 		}
 	}
 
-	protected DDMStructureEntryLink getByStructureId_PrevAndNext(
+	protected DDMStructureEntryLink getByStructureKey_PrevAndNext(
 		Session session, DDMStructureEntryLink ddmStructureEntryLink,
-		String structureId, OrderByComparator orderByComparator,
+		String structureKey, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -733,15 +734,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 		query.append(_SQL_SELECT_DDMSTRUCTUREENTRYLINK_WHERE);
 
-		if (structureId == null) {
-			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		if (structureKey == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
 		}
 		else {
-			if (structureId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			if (structureKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
 			}
 		}
 
@@ -808,8 +809,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (structureId != null) {
-			qPos.add(structureId);
+		if (structureKey != null) {
+			qPos.add(structureKey);
 		}
 
 		if (orderByComparator != null) {
@@ -831,55 +832,56 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Filters by the user's permissions and finds all the d d m structure entry links where structureId = &#63;.
+	 * Filters by the user's permissions and finds all the d d m structure entry links where structureKey = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the matching d d m structure entry links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureEntryLink> filterFindByStructureId(
-		String structureId) throws SystemException {
-		return filterFindByStructureId(structureId, QueryUtil.ALL_POS,
+	public List<DDMStructureEntryLink> filterFindByStructureKey(
+		String structureKey) throws SystemException {
+		return filterFindByStructureKey(structureKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Filters by the user's permissions and finds a range of all the d d m structure entry links where structureId = &#63;.
+	 * Filters by the user's permissions and finds a range of all the d d m structure entry links where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param start the lower bound of the range of d d m structure entry links to return
 	 * @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	 * @return the range of matching d d m structure entry links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureEntryLink> filterFindByStructureId(
-		String structureId, int start, int end) throws SystemException {
-		return filterFindByStructureId(structureId, start, end, null);
+	public List<DDMStructureEntryLink> filterFindByStructureKey(
+		String structureKey, int start, int end) throws SystemException {
+		return filterFindByStructureKey(structureKey, start, end, null);
 	}
 
 	/**
-	 * Filters by the user's permissions and finds an ordered range of all the d d m structure entry links where structureId = &#63;.
+	 * Filters by the user's permissions and finds an ordered range of all the d d m structure entry links where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param start the lower bound of the range of d d m structure entry links to return
 	 * @param end the upper bound of the range of d d m structure entry links to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure entry links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureEntryLink> filterFindByStructureId(
-		String structureId, int start, int end,
+	public List<DDMStructureEntryLink> filterFindByStructureKey(
+		String structureKey, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByStructureId(structureId, start, end, orderByComparator);
+			return findByStructureKey(structureKey, start, end,
+				orderByComparator);
 		}
 
 		StringBundler query = null;
@@ -899,15 +901,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 			query.append(_FILTER_SQL_SELECT_DDMSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		if (structureId == null) {
-			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		if (structureKey == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
 		}
 		else {
-			if (structureId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			if (structureKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
 			}
 		}
 
@@ -948,8 +950,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			if (structureId != null) {
-				qPos.add(structureId);
+			if (structureKey != null) {
+				qPos.add(structureKey);
 			}
 
 			return (List<DDMStructureEntryLink>)QueryUtil.list(q, getDialect(),
@@ -964,26 +966,26 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Filters the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureId = &#63;.
+	 * Filters the d d m structure entry links before and after the current d d m structure entry link in the ordered set where structureKey = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param structureEntryLinkId the primary key of the current d d m structure entry link
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure entry link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a d d m structure entry link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink[] filterFindByStructureId_PrevAndNext(
-		long structureEntryLinkId, String structureId,
+	public DDMStructureEntryLink[] filterFindByStructureKey_PrevAndNext(
+		long structureEntryLinkId, String structureKey,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureEntryLinkException, SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
-			return findByStructureId_PrevAndNext(structureEntryLinkId,
-				structureId, orderByComparator);
+			return findByStructureKey_PrevAndNext(structureEntryLinkId,
+				structureKey, orderByComparator);
 		}
 
 		DDMStructureEntryLink ddmStructureEntryLink = findByPrimaryKey(structureEntryLinkId);
@@ -995,13 +997,14 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			DDMStructureEntryLink[] array = new DDMStructureEntryLinkImpl[3];
 
-			array[0] = filterGetByStructureId_PrevAndNext(session,
-					ddmStructureEntryLink, structureId, orderByComparator, true);
+			array[0] = filterGetByStructureKey_PrevAndNext(session,
+					ddmStructureEntryLink, structureKey, orderByComparator, true);
 
 			array[1] = ddmStructureEntryLink;
 
-			array[2] = filterGetByStructureId_PrevAndNext(session,
-					ddmStructureEntryLink, structureId, orderByComparator, false);
+			array[2] = filterGetByStructureKey_PrevAndNext(session,
+					ddmStructureEntryLink, structureKey, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -1013,9 +1016,9 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 		}
 	}
 
-	protected DDMStructureEntryLink filterGetByStructureId_PrevAndNext(
+	protected DDMStructureEntryLink filterGetByStructureKey_PrevAndNext(
 		Session session, DDMStructureEntryLink ddmStructureEntryLink,
-		String structureId, OrderByComparator orderByComparator,
+		String structureKey, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -1034,15 +1037,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 			query.append(_FILTER_SQL_SELECT_DDMSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		if (structureId == null) {
-			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		if (structureKey == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
 		}
 		else {
-			if (structureId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			if (structureKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
 			}
 		}
 
@@ -1134,8 +1137,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (structureId != null) {
-			qPos.add(structureId);
+		if (structureKey != null) {
+			qPos.add(structureKey);
 		}
 
 		if (orderByComparator != null) {
@@ -1157,19 +1160,19 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Finds the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException} if it could not be found.
+	 * Finds the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException} if it could not be found.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param className the class name to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching d d m structure entry link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryLinkException if a matching d d m structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink findByS_C_C(String structureId,
+	public DDMStructureEntryLink findByS_C_C(String structureKey,
 		String className, long classPK)
 		throws NoSuchStructureEntryLinkException, SystemException {
-		DDMStructureEntryLink ddmStructureEntryLink = fetchByS_C_C(structureId,
+		DDMStructureEntryLink ddmStructureEntryLink = fetchByS_C_C(structureKey,
 				className, classPK);
 
 		if (ddmStructureEntryLink == null) {
@@ -1177,8 +1180,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("structureId=");
-			msg.append(structureId);
+			msg.append("structureKey=");
+			msg.append(structureKey);
 
 			msg.append(", className=");
 			msg.append(className);
@@ -1199,32 +1202,32 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Finds the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param className the class name to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching d d m structure entry link, or <code>null</code> if a matching d d m structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink fetchByS_C_C(String structureId,
+	public DDMStructureEntryLink fetchByS_C_C(String structureKey,
 		String className, long classPK) throws SystemException {
-		return fetchByS_C_C(structureId, className, classPK, true);
+		return fetchByS_C_C(structureKey, className, classPK, true);
 	}
 
 	/**
-	 * Finds the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param className the class name to search with
 	 * @param classPK the class p k to search with
 	 * @return the matching d d m structure entry link, or <code>null</code> if a matching d d m structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntryLink fetchByS_C_C(String structureId,
+	public DDMStructureEntryLink fetchByS_C_C(String structureKey,
 		String className, long classPK, boolean retrieveFromCache)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { structureId, className, classPK };
+		Object[] finderArgs = new Object[] { structureKey, className, classPK };
 
 		Object result = null;
 
@@ -1238,15 +1241,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			query.append(_SQL_SELECT_DDMSTRUCTUREENTRYLINK_WHERE);
 
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_S_C_C_STRUCTUREID_1);
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_1);
 			}
 			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREID_3);
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREID_2);
+					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_2);
 				}
 			}
 
@@ -1275,8 +1278,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureId != null) {
-					qPos.add(structureId);
+				if (structureKey != null) {
+					qPos.add(structureKey);
 				}
 
 				if (className != null) {
@@ -1300,9 +1303,9 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 					cacheResult(ddmStructureEntryLink);
 
-					if ((ddmStructureEntryLink.getStructureId() == null) ||
-							!ddmStructureEntryLink.getStructureId()
-													  .equals(structureId) ||
+					if ((ddmStructureEntryLink.getStructureKey() == null) ||
+							!ddmStructureEntryLink.getStructureKey()
+													  .equals(structureKey) ||
 							(ddmStructureEntryLink.getClassName() == null) ||
 							!ddmStructureEntryLink.getClassName()
 													  .equals(className) ||
@@ -1446,30 +1449,30 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Removes all the d d m structure entry links where structureId = &#63; from the database.
+	 * Removes all the d d m structure entry links where structureKey = &#63; from the database.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByStructureId(String structureId)
+	public void removeByStructureKey(String structureKey)
 		throws SystemException {
-		for (DDMStructureEntryLink ddmStructureEntryLink : findByStructureId(
-				structureId)) {
+		for (DDMStructureEntryLink ddmStructureEntryLink : findByStructureKey(
+				structureKey)) {
 			ddmStructureEntryLinkPersistence.remove(ddmStructureEntryLink);
 		}
 	}
 
 	/**
-	 * Removes the d d m structure entry link where structureId = &#63; and className = &#63; and classPK = &#63; from the database.
+	 * Removes the d d m structure entry link where structureKey = &#63; and className = &#63; and classPK = &#63; from the database.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param className the class name to search with
 	 * @param classPK the class p k to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByS_C_C(String structureId, String className, long classPK)
-		throws NoSuchStructureEntryLinkException, SystemException {
-		DDMStructureEntryLink ddmStructureEntryLink = findByS_C_C(structureId,
+	public void removeByS_C_C(String structureKey, String className,
+		long classPK) throws NoSuchStructureEntryLinkException, SystemException {
+		DDMStructureEntryLink ddmStructureEntryLink = findByS_C_C(structureKey,
 				className, classPK);
 
 		ddmStructureEntryLinkPersistence.remove(ddmStructureEntryLink);
@@ -1487,16 +1490,17 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Counts all the d d m structure entry links where structureId = &#63;.
+	 * Counts all the d d m structure entry links where structureKey = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the number of matching d d m structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByStructureId(String structureId) throws SystemException {
-		Object[] finderArgs = new Object[] { structureId };
+	public int countByStructureKey(String structureKey)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { structureKey };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREKEY,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1504,15 +1508,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			query.append(_SQL_COUNT_DDMSTRUCTUREENTRYLINK_WHERE);
 
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
 			}
 			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
 				}
 			}
 
@@ -1527,8 +1531,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureId != null) {
-					qPos.add(structureId);
+				if (structureKey != null) {
+					qPos.add(structureKey);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -1541,7 +1545,7 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREKEY,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1552,31 +1556,31 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Filters by the user's permissions and counts all the d d m structure entry links where structureId = &#63;.
+	 * Filters by the user's permissions and counts all the d d m structure entry links where structureKey = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the number of matching d d m structure entry links that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int filterCountByStructureId(String structureId)
+	public int filterCountByStructureKey(String structureKey)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled()) {
-			return countByStructureId(structureId);
+			return countByStructureKey(structureKey);
 		}
 
 		StringBundler query = new StringBundler(2);
 
 		query.append(_FILTER_SQL_COUNT_DDMSTRUCTUREENTRYLINK_WHERE);
 
-		if (structureId == null) {
-			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		if (structureKey == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
 		}
 		else {
-			if (structureId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			if (structureKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
 			}
 			else {
-				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
 			}
 		}
 
@@ -1596,8 +1600,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			if (structureId != null) {
-				qPos.add(structureId);
+			if (structureKey != null) {
+				qPos.add(structureKey);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -1613,17 +1617,17 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	}
 
 	/**
-	 * Counts all the d d m structure entry links where structureId = &#63; and className = &#63; and classPK = &#63;.
+	 * Counts all the d d m structure entry links where structureKey = &#63; and className = &#63; and classPK = &#63;.
 	 *
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @param className the class name to search with
 	 * @param classPK the class p k to search with
 	 * @return the number of matching d d m structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByS_C_C(String structureId, String className, long classPK)
+	public int countByS_C_C(String structureKey, String className, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { structureId, className, classPK };
+		Object[] finderArgs = new Object[] { structureKey, className, classPK };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_S_C_C,
 				finderArgs, this);
@@ -1633,15 +1637,15 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 			query.append(_SQL_COUNT_DDMSTRUCTUREENTRYLINK_WHERE);
 
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_S_C_C_STRUCTUREID_1);
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_1);
 			}
 			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREID_3);
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREID_2);
+					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_2);
 				}
 			}
 
@@ -1670,8 +1674,8 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureId != null) {
-					qPos.add(structureId);
+				if (structureKey != null) {
+					qPos.add(structureKey);
 				}
 
 				if (className != null) {
@@ -1785,12 +1789,12 @@ public class DDMStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<DD
 	private static final String _SQL_SELECT_DDMSTRUCTUREENTRYLINK_WHERE = "SELECT ddmStructureEntryLink FROM DDMStructureEntryLink ddmStructureEntryLink WHERE ";
 	private static final String _SQL_COUNT_DDMSTRUCTUREENTRYLINK = "SELECT COUNT(ddmStructureEntryLink) FROM DDMStructureEntryLink ddmStructureEntryLink";
 	private static final String _SQL_COUNT_DDMSTRUCTUREENTRYLINK_WHERE = "SELECT COUNT(ddmStructureEntryLink) FROM DDMStructureEntryLink ddmStructureEntryLink WHERE ";
-	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1 = "ddmStructureEntryLink.structureId IS NULL";
-	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2 = "ddmStructureEntryLink.structureId = ?";
-	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3 = "(ddmStructureEntryLink.structureId IS NULL OR ddmStructureEntryLink.structureId = ?)";
-	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREID_1 = "ddmStructureEntryLink.structureId IS NULL AND ";
-	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREID_2 = "ddmStructureEntryLink.structureId = ? AND ";
-	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREID_3 = "(ddmStructureEntryLink.structureId IS NULL OR ddmStructureEntryLink.structureId = ?) AND ";
+	private static final String _FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1 = "ddmStructureEntryLink.structureKey IS NULL";
+	private static final String _FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2 = "ddmStructureEntryLink.structureKey = ?";
+	private static final String _FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3 = "(ddmStructureEntryLink.structureKey IS NULL OR ddmStructureEntryLink.structureKey = ?)";
+	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREKEY_1 = "ddmStructureEntryLink.structureKey IS NULL AND ";
+	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREKEY_2 = "ddmStructureEntryLink.structureKey = ? AND ";
+	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREKEY_3 = "(ddmStructureEntryLink.structureKey IS NULL OR ddmStructureEntryLink.structureKey = ?) AND ";
 	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_1 = "ddmStructureEntryLink.className IS NULL AND ";
 	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_2 = "ddmStructureEntryLink.className = ? AND ";
 	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_3 = "(ddmStructureEntryLink.className IS NULL OR ddmStructureEntryLink.className = ?) AND ";

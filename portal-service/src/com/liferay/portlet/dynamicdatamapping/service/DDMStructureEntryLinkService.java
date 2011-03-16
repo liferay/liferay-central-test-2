@@ -42,25 +42,25 @@ public interface DDMStructureEntryLinkService {
 	 * Never modify or reference this interface directly. Always use {@link DDMStructureEntryLinkServiceUtil} to access the d d m structure entry link remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryLinkServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink addStructureEntryLink(
-		java.lang.String structureId, java.lang.String className, long classPK,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String structureKey, java.lang.String className,
+		long classPK, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteStructureEntryLink(long groupId,
-		java.lang.String structureId, long structureEntryLinkId)
+		java.lang.String structureKey, long structureEntryLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink getStructureEntryLink(
-		long groupId, java.lang.String structureId, java.lang.String className,
-		long classPK)
+		long groupId, java.lang.String structureKey,
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink updateStructureEntryLink(
-		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		long structureEntryLinkId, java.lang.String structureKey, long groupId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

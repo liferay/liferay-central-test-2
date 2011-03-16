@@ -189,18 +189,18 @@ public interface DDMStructureEntryModel extends BaseModel<DDMStructureEntry> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the structure ID of this d d m structure entry.
+	 * Gets the structure key of this d d m structure entry.
 	 *
-	 * @return the structure ID of this d d m structure entry
+	 * @return the structure key of this d d m structure entry
 	 */
-	public String getStructureId();
+	public String getStructureKey();
 
 	/**
-	 * Sets the structure ID of this d d m structure entry.
+	 * Sets the structure key of this d d m structure entry.
 	 *
-	 * @param structureId the structure ID of this d d m structure entry
+	 * @param structureKey the structure key of this d d m structure entry
 	 */
-	public void setStructureId(String structureId);
+	public void setStructureKey(String structureKey);
 
 	/**
 	 * Gets the name of this d d m structure entry.

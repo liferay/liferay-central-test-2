@@ -42,25 +42,25 @@ public interface DDMStructureEntryService {
 	 * Never modify or reference this interface directly. Always use {@link DDMStructureEntryServiceUtil} to access the d d m structure entry remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry addStructureEntry(
-		long groupId, java.lang.String structureId, boolean autoStrucureId,
+		long groupId, java.lang.String structureKey, boolean autoStrucureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteStructureEntry(long groupId, java.lang.String structureId)
+	public void deleteStructureEntry(long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry getStructureEntry(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry updateStructureEntry(
-		long groupId, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

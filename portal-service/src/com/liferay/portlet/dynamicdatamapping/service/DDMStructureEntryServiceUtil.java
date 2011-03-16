@@ -38,39 +38,39 @@ public class DDMStructureEntryServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry addStructureEntry(
-		long groupId, java.lang.String structureId, boolean autoStrucureId,
+		long groupId, java.lang.String structureKey, boolean autoStrucureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addStructureEntry(groupId, structureId, autoStrucureId,
+				   .addStructureEntry(groupId, structureKey, autoStrucureId,
 			name, description, xsd, serviceContext);
 	}
 
 	public static void deleteStructureEntry(long groupId,
-		java.lang.String structureId)
+		java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructureEntry(groupId, structureId);
+		getService().deleteStructureEntry(groupId, structureKey);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry getStructureEntry(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureEntry(groupId, structureId);
+		return getService().getStructureEntry(groupId, structureKey);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry updateStructureEntry(
-		long groupId, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStructureEntry(groupId, structureId, name,
+				   .updateStructureEntry(groupId, structureKey, name,
 			description, xsd, serviceContext);
 	}
 

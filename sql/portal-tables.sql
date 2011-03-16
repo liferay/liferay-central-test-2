@@ -398,7 +398,7 @@ create table DDMStructureEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	structureId VARCHAR(75) null,
+	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
 	xsd TEXT null
@@ -406,7 +406,7 @@ create table DDMStructureEntry (
 
 create table DDMStructureEntryLink (
 	structureEntryLinkId LONG not null primary key,
-	structureId VARCHAR(75) null,
+	structureKey VARCHAR(75) null,
 	className VARCHAR(75) null,
 	classPK LONG
 );

@@ -240,8 +240,8 @@ public interface DDMStructureEntryLocalService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry addStructureEntry(
-		long userId, long groupId, java.lang.String structureId,
-		boolean autoStructureId, java.lang.String name,
+		long userId, long groupId, java.lang.String structureKey,
+		boolean autoStructureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -269,7 +269,7 @@ public interface DDMStructureEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteStructureEntry(long groupId, java.lang.String structureId)
+	public void deleteStructureEntry(long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -299,12 +299,12 @@ public interface DDMStructureEntryLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry getStructureEntry(
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry updateStructureEntry(
-		long groupId, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

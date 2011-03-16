@@ -211,21 +211,21 @@ public class DDMStructureEntryWrapper implements DDMStructureEntry {
 	}
 
 	/**
-	* Gets the structure ID of this d d m structure entry.
+	* Gets the structure key of this d d m structure entry.
 	*
-	* @return the structure ID of this d d m structure entry
+	* @return the structure key of this d d m structure entry
 	*/
-	public java.lang.String getStructureId() {
-		return _ddmStructureEntry.getStructureId();
+	public java.lang.String getStructureKey() {
+		return _ddmStructureEntry.getStructureKey();
 	}
 
 	/**
-	* Sets the structure ID of this d d m structure entry.
+	* Sets the structure key of this d d m structure entry.
 	*
-	* @param structureId the structure ID of this d d m structure entry
+	* @param structureKey the structure key of this d d m structure entry
 	*/
-	public void setStructureId(java.lang.String structureId) {
-		_ddmStructureEntry.setStructureId(structureId);
+	public void setStructureKey(java.lang.String structureKey) {
+		_ddmStructureEntry.setStructureKey(structureKey);
 	}
 
 	/**

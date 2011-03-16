@@ -59,11 +59,11 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 	public static final String TABLE_NAME = "DDMStructureEntryLink";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "structureEntryLinkId", Types.BIGINT },
-			{ "structureId", Types.VARCHAR },
+			{ "structureKey", Types.VARCHAR },
 			{ "className", Types.VARCHAR },
 			{ "classPK", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMStructureEntryLink (structureEntryLinkId LONG not null primary key,structureId VARCHAR(75) null,className VARCHAR(75) null,classPK LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DDMStructureEntryLink (structureEntryLinkId LONG not null primary key,structureKey VARCHAR(75) null,className VARCHAR(75) null,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DDMStructureEntryLink";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -86,7 +86,7 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 		DDMStructureEntryLink model = new DDMStructureEntryLinkImpl();
 
 		model.setStructureEntryLinkId(soapModel.getStructureEntryLinkId());
-		model.setStructureId(soapModel.getStructureId());
+		model.setStructureKey(soapModel.getStructureKey());
 		model.setClassName(soapModel.getClassName());
 		model.setClassPK(soapModel.getClassPK());
 
@@ -136,25 +136,25 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 		_structureEntryLinkId = structureEntryLinkId;
 	}
 
-	public String getStructureId() {
-		if (_structureId == null) {
+	public String getStructureKey() {
+		if (_structureKey == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _structureId;
+			return _structureKey;
 		}
 	}
 
-	public void setStructureId(String structureId) {
-		if (_originalStructureId == null) {
-			_originalStructureId = _structureId;
+	public void setStructureKey(String structureKey) {
+		if (_originalStructureKey == null) {
+			_originalStructureKey = _structureKey;
 		}
 
-		_structureId = structureId;
+		_structureKey = structureKey;
 	}
 
-	public String getOriginalStructureId() {
-		return GetterUtil.getString(_originalStructureId);
+	public String getOriginalStructureKey() {
+		return GetterUtil.getString(_originalStructureKey);
 	}
 
 	public String getClassName() {
@@ -225,11 +225,11 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 
 		ddmStructureEntryLinkImpl.setStructureEntryLinkId(getStructureEntryLinkId());
 
-		ddmStructureEntryLinkImpl.setStructureId(getStructureId());
+		ddmStructureEntryLinkImpl.setStructureKey(getStructureKey());
 
 		DDMStructureEntryLinkModelImpl ddmStructureEntryLinkModelImpl = ddmStructureEntryLinkImpl;
 
-		ddmStructureEntryLinkModelImpl._originalStructureId = ddmStructureEntryLinkModelImpl._structureId;
+		ddmStructureEntryLinkModelImpl._originalStructureKey = ddmStructureEntryLinkModelImpl._structureKey;
 
 		ddmStructureEntryLinkImpl.setClassName(getClassName());
 
@@ -291,8 +291,8 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 
 		sb.append("{structureEntryLinkId=");
 		sb.append(getStructureEntryLinkId());
-		sb.append(", structureId=");
-		sb.append(getStructureId());
+		sb.append(", structureKey=");
+		sb.append(getStructureKey());
 		sb.append(", className=");
 		sb.append(getClassName());
 		sb.append(", classPK=");
@@ -315,8 +315,8 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 		sb.append(getStructureEntryLinkId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>structureId</column-name><column-value><![CDATA[");
-		sb.append(getStructureId());
+			"<column><column-name>structureKey</column-name><column-value><![CDATA[");
+		sb.append(getStructureKey());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>className</column-name><column-value><![CDATA[");
@@ -333,8 +333,8 @@ public class DDMStructureEntryLinkModelImpl extends BaseModelImpl<DDMStructureEn
 	}
 
 	private long _structureEntryLinkId;
-	private String _structureId;
-	private String _originalStructureId;
+	private String _structureKey;
+	private String _originalStructureKey;
 	private String _className;
 	private String _originalClassName;
 	private long _classPK;

@@ -56,7 +56,7 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryServiceUt
 public class DDMStructureEntryServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry addStructureEntry(
 		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureId, boolean autoStrucureId,
+		java.lang.String structureKey, boolean autoStrucureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -67,7 +67,7 @@ public class DDMStructureEntryServiceHttp {
 					"addStructureEntry", _addStructureEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId, autoStrucureId, name, description, xsd,
+					structureKey, autoStrucureId, name, description, xsd,
 					serviceContext);
 
 			Object returnObj = null;
@@ -97,7 +97,7 @@ public class DDMStructureEntryServiceHttp {
 	}
 
 	public static void deleteStructureEntry(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -105,7 +105,7 @@ public class DDMStructureEntryServiceHttp {
 					"deleteStructureEntry", _deleteStructureEntryParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId);
+					structureKey);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -130,7 +130,7 @@ public class DDMStructureEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry getStructureEntry(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureId)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -138,7 +138,7 @@ public class DDMStructureEntryServiceHttp {
 					"getStructureEntry", _getStructureEntryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId);
+					structureKey);
 
 			Object returnObj = null;
 
@@ -168,7 +168,7 @@ public class DDMStructureEntryServiceHttp {
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry updateStructureEntry(
 		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureId, java.lang.String name,
+		java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -178,7 +178,7 @@ public class DDMStructureEntryServiceHttp {
 					"updateStructureEntry", _updateStructureEntryParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId, name, description, xsd, serviceContext);
+					structureKey, name, description, xsd, serviceContext);
 
 			Object returnObj = null;
 

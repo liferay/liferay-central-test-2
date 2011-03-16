@@ -71,18 +71,18 @@ public interface DDMStructureEntryLinkModel extends BaseModel<DDMStructureEntryL
 	public void setStructureEntryLinkId(long structureEntryLinkId);
 
 	/**
-	 * Gets the structure ID of this d d m structure entry link.
+	 * Gets the structure key of this d d m structure entry link.
 	 *
-	 * @return the structure ID of this d d m structure entry link
+	 * @return the structure key of this d d m structure entry link
 	 */
-	public String getStructureId();
+	public String getStructureKey();
 
 	/**
-	 * Sets the structure ID of this d d m structure entry link.
+	 * Sets the structure key of this d d m structure entry link.
 	 *
-	 * @param structureId the structure ID of this d d m structure entry link
+	 * @param structureKey the structure key of this d d m structure entry link
 	 */
-	public void setStructureId(String structureId);
+	public void setStructureKey(String structureKey);
 
 	/**
 	 * Gets the class name of this d d m structure entry link.

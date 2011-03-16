@@ -65,7 +65,7 @@ public class DDMStructureEntryLinkPersistenceTest
 
 		DDMStructureEntryLink newDDMStructureEntryLink = _persistence.create(pk);
 
-		newDDMStructureEntryLink.setStructureId(randomString());
+		newDDMStructureEntryLink.setStructureKey(randomString());
 		newDDMStructureEntryLink.setClassName(randomString());
 		newDDMStructureEntryLink.setClassPK(nextLong());
 
@@ -75,8 +75,8 @@ public class DDMStructureEntryLinkPersistenceTest
 
 		assertEquals(existingDDMStructureEntryLink.getStructureEntryLinkId(),
 			newDDMStructureEntryLink.getStructureEntryLinkId());
-		assertEquals(existingDDMStructureEntryLink.getStructureId(),
-			newDDMStructureEntryLink.getStructureId());
+		assertEquals(existingDDMStructureEntryLink.getStructureKey(),
+			newDDMStructureEntryLink.getStructureKey());
 		assertEquals(existingDDMStructureEntryLink.getClassName(),
 			newDDMStructureEntryLink.getClassName());
 		assertEquals(existingDDMStructureEntryLink.getClassPK(),
@@ -157,7 +157,7 @@ public class DDMStructureEntryLinkPersistenceTest
 
 		DDMStructureEntryLink ddmStructureEntryLink = _persistence.create(pk);
 
-		ddmStructureEntryLink.setStructureId(randomString());
+		ddmStructureEntryLink.setStructureKey(randomString());
 		ddmStructureEntryLink.setClassName(randomString());
 		ddmStructureEntryLink.setClassPK(nextLong());
 

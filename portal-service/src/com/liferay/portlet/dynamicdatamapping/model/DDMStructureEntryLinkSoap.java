@@ -32,7 +32,7 @@ public class DDMStructureEntryLinkSoap implements Serializable {
 		DDMStructureEntryLinkSoap soapModel = new DDMStructureEntryLinkSoap();
 
 		soapModel.setStructureEntryLinkId(model.getStructureEntryLinkId());
-		soapModel.setStructureId(model.getStructureId());
+		soapModel.setStructureKey(model.getStructureKey());
 		soapModel.setClassName(model.getClassName());
 		soapModel.setClassPK(model.getClassPK());
 
@@ -98,12 +98,12 @@ public class DDMStructureEntryLinkSoap implements Serializable {
 		_structureEntryLinkId = structureEntryLinkId;
 	}
 
-	public String getStructureId() {
-		return _structureId;
+	public String getStructureKey() {
+		return _structureKey;
 	}
 
-	public void setStructureId(String structureId) {
-		_structureId = structureId;
+	public void setStructureKey(String structureKey) {
+		_structureKey = structureKey;
 	}
 
 	public String getClassName() {
@@ -123,7 +123,7 @@ public class DDMStructureEntryLinkSoap implements Serializable {
 	}
 
 	private long _structureEntryLinkId;
-	private String _structureId;
+	private String _structureKey;
 	private String _className;
 	private long _classPK;
 }

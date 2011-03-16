@@ -1417,7 +1417,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="structureKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xsd" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -1427,7 +1427,7 @@
 		<id name="structureEntryLinkId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="structureKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="className" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>

@@ -72,7 +72,7 @@ public class DDMStructureEntryPersistenceTest extends BasePersistenceTestCase {
 		newDDMStructureEntry.setUserName(randomString());
 		newDDMStructureEntry.setCreateDate(nextDate());
 		newDDMStructureEntry.setModifiedDate(nextDate());
-		newDDMStructureEntry.setStructureId(randomString());
+		newDDMStructureEntry.setStructureKey(randomString());
 		newDDMStructureEntry.setName(randomString());
 		newDDMStructureEntry.setDescription(randomString());
 		newDDMStructureEntry.setXsd(randomString());
@@ -99,8 +99,8 @@ public class DDMStructureEntryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDDMStructureEntry.getModifiedDate()),
 			Time.getShortTimestamp(newDDMStructureEntry.getModifiedDate()));
-		assertEquals(existingDDMStructureEntry.getStructureId(),
-			newDDMStructureEntry.getStructureId());
+		assertEquals(existingDDMStructureEntry.getStructureKey(),
+			newDDMStructureEntry.getStructureKey());
 		assertEquals(existingDDMStructureEntry.getName(),
 			newDDMStructureEntry.getName());
 		assertEquals(existingDDMStructureEntry.getDescription(),
@@ -189,7 +189,7 @@ public class DDMStructureEntryPersistenceTest extends BasePersistenceTestCase {
 		ddmStructureEntry.setUserName(randomString());
 		ddmStructureEntry.setCreateDate(nextDate());
 		ddmStructureEntry.setModifiedDate(nextDate());
-		ddmStructureEntry.setStructureId(randomString());
+		ddmStructureEntry.setStructureKey(randomString());
 		ddmStructureEntry.setName(randomString());
 		ddmStructureEntry.setDescription(randomString());
 		ddmStructureEntry.setXsd(randomString());

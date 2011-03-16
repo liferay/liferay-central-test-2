@@ -29,7 +29,7 @@
 
 		<!-- Other fields -->
 
-		<column name="structureId" type="String" />
+		<column name="structureKey" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="xsd" type="String" />
@@ -41,7 +41,7 @@
 		</finder>
 		<finder name="G_S" return-type="DDMStructureEntry" unique="true">
 			<finder-column name="groupId" />
-			<finder-column name="structureId" />
+			<finder-column name="structureKey" />
 		</finder>
 	</entity>
 	<entity name="DDMStructureEntryLink" local-service="true" remote-service="true">
@@ -52,25 +52,25 @@
 
 		<!-- Other fields -->
 
-		<column name="structureId" type="String" />
+		<column name="structureKey" type="String" />
 		<column name="className" type="String" />
 		<column name="classPK" type="long" />
 
 		<!-- Finder methods -->
 
-		<finder name="StructureId" return-type="Collection">
-			<finder-column name="structureId" />
+		<finder name="StructureKey" return-type="Collection">
+			<finder-column name="structureKey" />
 		</finder>
 		<finder name="S_C_C" return-type="DDMStructureEntryLink" unique="true">
-			<finder-column name="structureId" />
+			<finder-column name="structureKey" />
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
 	<exceptions>
 		<exception>StructureEntryDuplicateElement</exception>
-		<exception>StructureEntryDuplicateStructureId</exception>
-		<exception>StructureEntryStructureId</exception>
+		<exception>StructureEntryDuplicateStructureKey</exception>
+		<exception>StructureEntryStructureKey</exception>
 		<exception>StructureEntryName</exception>
 		<exception>StructureEntryXsd</exception>
 	</exceptions>

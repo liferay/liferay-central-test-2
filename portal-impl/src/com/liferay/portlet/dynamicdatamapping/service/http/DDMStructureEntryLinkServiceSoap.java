@@ -66,12 +66,12 @@ import java.rmi.RemoteException;
  */
 public class DDMStructureEntryLinkServiceSoap {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLinkSoap addStructureEntryLink(
-		java.lang.String structureId, java.lang.String className, long classPK,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String structureKey, java.lang.String className,
+		long classPK, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink returnValue =
-				DDMStructureEntryLinkServiceUtil.addStructureEntryLink(structureId,
+				DDMStructureEntryLinkServiceUtil.addStructureEntryLink(structureKey,
 					className, classPK, serviceContext);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLinkSoap.toSoapModel(returnValue);
@@ -84,11 +84,11 @@ public class DDMStructureEntryLinkServiceSoap {
 	}
 
 	public static void deleteStructureEntryLink(long groupId,
-		java.lang.String structureId, long structureEntryLinkId)
+		java.lang.String structureKey, long structureEntryLinkId)
 		throws RemoteException {
 		try {
 			DDMStructureEntryLinkServiceUtil.deleteStructureEntryLink(groupId,
-				structureId, structureEntryLinkId);
+				structureKey, structureEntryLinkId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -98,12 +98,12 @@ public class DDMStructureEntryLinkServiceSoap {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLinkSoap getStructureEntryLink(
-		long groupId, java.lang.String structureId, java.lang.String className,
-		long classPK) throws RemoteException {
+		long groupId, java.lang.String structureKey,
+		java.lang.String className, long classPK) throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink returnValue =
 				DDMStructureEntryLinkServiceUtil.getStructureEntryLink(groupId,
-					structureId, className, classPK);
+					structureKey, className, classPK);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLinkSoap.toSoapModel(returnValue);
 		}
@@ -115,12 +115,12 @@ public class DDMStructureEntryLinkServiceSoap {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLinkSoap updateStructureEntryLink(
-		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		long structureEntryLinkId, java.lang.String structureKey, long groupId,
 		java.lang.String className, long classPK) throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink returnValue =
 				DDMStructureEntryLinkServiceUtil.updateStructureEntryLink(structureEntryLinkId,
-					structureId, groupId, className, classPK);
+					structureKey, groupId, className, classPK);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLinkSoap.toSoapModel(returnValue);
 		}

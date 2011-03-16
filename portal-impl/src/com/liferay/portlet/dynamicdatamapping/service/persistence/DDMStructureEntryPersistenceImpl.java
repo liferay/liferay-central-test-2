@@ -145,7 +145,7 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 			new Object[] {
 				Long.valueOf(ddmStructureEntry.getGroupId()),
 				
-			ddmStructureEntry.getStructureId()
+			ddmStructureEntry.getStructureKey()
 			}, ddmStructureEntry);
 	}
 
@@ -203,7 +203,7 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 			new Object[] {
 				Long.valueOf(ddmStructureEntry.getGroupId()),
 				
-			ddmStructureEntry.getStructureId()
+			ddmStructureEntry.getStructureKey()
 			});
 	}
 
@@ -324,7 +324,7 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 			new Object[] {
 				Long.valueOf(ddmStructureEntryModelImpl.getGroupId()),
 				
-			ddmStructureEntryModelImpl.getStructureId()
+			ddmStructureEntryModelImpl.getStructureKey()
 			});
 
 		EntityCacheUtil.removeResult(DDMStructureEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -395,26 +395,26 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 
 		if (!isNew &&
 				((ddmStructureEntry.getGroupId() != ddmStructureEntryModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(ddmStructureEntry.getStructureId(),
-					ddmStructureEntryModelImpl.getOriginalStructureId()))) {
+				!Validator.equals(ddmStructureEntry.getStructureKey(),
+					ddmStructureEntryModelImpl.getOriginalStructureKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
 					Long.valueOf(
 						ddmStructureEntryModelImpl.getOriginalGroupId()),
 					
-				ddmStructureEntryModelImpl.getOriginalStructureId()
+				ddmStructureEntryModelImpl.getOriginalStructureKey()
 				});
 		}
 
 		if (isNew ||
 				((ddmStructureEntry.getGroupId() != ddmStructureEntryModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(ddmStructureEntry.getStructureId(),
-					ddmStructureEntryModelImpl.getOriginalStructureId()))) {
+				!Validator.equals(ddmStructureEntry.getStructureKey(),
+					ddmStructureEntryModelImpl.getOriginalStructureKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
 					Long.valueOf(ddmStructureEntry.getGroupId()),
 					
-				ddmStructureEntry.getStructureId()
+				ddmStructureEntry.getStructureKey()
 				}, ddmStructureEntry);
 		}
 
@@ -440,7 +440,7 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 		ddmStructureEntryImpl.setUserName(ddmStructureEntry.getUserName());
 		ddmStructureEntryImpl.setCreateDate(ddmStructureEntry.getCreateDate());
 		ddmStructureEntryImpl.setModifiedDate(ddmStructureEntry.getModifiedDate());
-		ddmStructureEntryImpl.setStructureId(ddmStructureEntry.getStructureId());
+		ddmStructureEntryImpl.setStructureKey(ddmStructureEntry.getStructureKey());
 		ddmStructureEntryImpl.setName(ddmStructureEntry.getName());
 		ddmStructureEntryImpl.setDescription(ddmStructureEntry.getDescription());
 		ddmStructureEntryImpl.setXsd(ddmStructureEntry.getXsd());
@@ -1669,17 +1669,17 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 	}
 
 	/**
-	 * Finds the d d m structure entry where groupId = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException} if it could not be found.
+	 * Finds the d d m structure entry where groupId = &#63; and structureKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException} if it could not be found.
 	 *
 	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the matching d d m structure entry
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException if a matching d d m structure entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntry findByG_S(long groupId, String structureId)
+	public DDMStructureEntry findByG_S(long groupId, String structureKey)
 		throws NoSuchStructureEntryException, SystemException {
-		DDMStructureEntry ddmStructureEntry = fetchByG_S(groupId, structureId);
+		DDMStructureEntry ddmStructureEntry = fetchByG_S(groupId, structureKey);
 
 		if (ddmStructureEntry == null) {
 			StringBundler msg = new StringBundler(6);
@@ -1689,8 +1689,8 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 			msg.append("groupId=");
 			msg.append(groupId);
 
-			msg.append(", structureId=");
-			msg.append(structureId);
+			msg.append(", structureKey=");
+			msg.append(structureKey);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -1705,29 +1705,29 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 	}
 
 	/**
-	 * Finds the d d m structure entry where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d d m structure entry where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the matching d d m structure entry, or <code>null</code> if a matching d d m structure entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntry fetchByG_S(long groupId, String structureId)
+	public DDMStructureEntry fetchByG_S(long groupId, String structureKey)
 		throws SystemException {
-		return fetchByG_S(groupId, structureId, true);
+		return fetchByG_S(groupId, structureKey, true);
 	}
 
 	/**
-	 * Finds the d d m structure entry where groupId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d d m structure entry where groupId = &#63; and structureKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the matching d d m structure entry, or <code>null</code> if a matching d d m structure entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureEntry fetchByG_S(long groupId, String structureId,
+	public DDMStructureEntry fetchByG_S(long groupId, String structureKey,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, structureId };
+		Object[] finderArgs = new Object[] { groupId, structureKey };
 
 		Object result = null;
 
@@ -1743,15 +1743,15 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_G_S_STRUCTUREID_1);
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_1);
 			}
 			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_3);
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_2);
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_2);
 				}
 			}
 
@@ -1768,8 +1768,8 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 
 				qPos.add(groupId);
 
-				if (structureId != null) {
-					qPos.add(structureId);
+				if (structureKey != null) {
+					qPos.add(structureKey);
 				}
 
 				List<DDMStructureEntry> list = q.list();
@@ -1788,9 +1788,9 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 					cacheResult(ddmStructureEntry);
 
 					if ((ddmStructureEntry.getGroupId() != groupId) ||
-							(ddmStructureEntry.getStructureId() == null) ||
-							!ddmStructureEntry.getStructureId()
-												  .equals(structureId)) {
+							(ddmStructureEntry.getStructureKey() == null) ||
+							!ddmStructureEntry.getStructureKey()
+												  .equals(structureKey)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
 							finderArgs, ddmStructureEntry);
 					}
@@ -1968,15 +1968,15 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 	}
 
 	/**
-	 * Removes the d d m structure entry where groupId = &#63; and structureId = &#63; from the database.
+	 * Removes the d d m structure entry where groupId = &#63; and structureKey = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_S(long groupId, String structureId)
+	public void removeByG_S(long groupId, String structureKey)
 		throws NoSuchStructureEntryException, SystemException {
-		DDMStructureEntry ddmStructureEntry = findByG_S(groupId, structureId);
+		DDMStructureEntry ddmStructureEntry = findByG_S(groupId, structureKey);
 
 		ddmStructureEntryPersistence.remove(ddmStructureEntry);
 	}
@@ -2230,16 +2230,16 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 	}
 
 	/**
-	 * Counts all the d d m structure entries where groupId = &#63; and structureId = &#63;.
+	 * Counts all the d d m structure entries where groupId = &#63; and structureKey = &#63;.
 	 *
 	 * @param groupId the group ID to search with
-	 * @param structureId the structure ID to search with
+	 * @param structureKey the structure key to search with
 	 * @return the number of matching d d m structure entries
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_S(long groupId, String structureId)
+	public int countByG_S(long groupId, String structureKey)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, structureId };
+		Object[] finderArgs = new Object[] { groupId, structureKey };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_S,
 				finderArgs, this);
@@ -2251,15 +2251,15 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 
 			query.append(_FINDER_COLUMN_G_S_GROUPID_2);
 
-			if (structureId == null) {
-				query.append(_FINDER_COLUMN_G_S_STRUCTUREID_1);
+			if (structureKey == null) {
+				query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_1);
 			}
 			else {
-				if (structureId.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_3);
+				if (structureKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_G_S_STRUCTUREID_2);
+					query.append(_FINDER_COLUMN_G_S_STRUCTUREKEY_2);
 				}
 			}
 
@@ -2276,8 +2276,8 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 
 				qPos.add(groupId);
 
-				if (structureId != null) {
-					qPos.add(structureId);
+				if (structureKey != null) {
+					qPos.add(structureKey);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -2394,9 +2394,9 @@ public class DDMStructureEntryPersistenceImpl extends BasePersistenceImpl<DDMStr
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmStructureEntry.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmStructureEntry.groupId = ?";
 	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "ddmStructureEntry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "ddmStructureEntry.structureId IS NULL";
-	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "ddmStructureEntry.structureId = ?";
-	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(ddmStructureEntry.structureId IS NULL OR ddmStructureEntry.structureId = ?)";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREKEY_1 = "ddmStructureEntry.structureKey IS NULL";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREKEY_2 = "ddmStructureEntry.structureKey = ?";
+	private static final String _FINDER_COLUMN_G_S_STRUCTUREKEY_3 = "(ddmStructureEntry.structureKey IS NULL OR ddmStructureEntry.structureKey = ?)";
 	private static final String _FILTER_SQL_SELECT_DDMSTRUCTUREENTRY_WHERE = "SELECT DISTINCT {ddmStructureEntry.*} FROM DDMStructureEntry ddmStructureEntry WHERE ";
 	private static final String _FILTER_SQL_SELECT_DDMSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_1 =
 		"SELECT {DDMStructureEntry.*} FROM (SELECT DISTINCT ddmStructureEntry.structureEntryId FROM DDMStructureEntry ddmStructureEntry WHERE ";

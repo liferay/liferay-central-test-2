@@ -26,8 +26,8 @@ DDMStructureEntry structureEntry = (DDMStructureEntry)request.getAttribute(WebKe
 
 long groupId = BeanParamUtil.getLong(structureEntry, request, "groupId", scopeGroupId);
 
-String structureId = BeanParamUtil.getString(structureEntry, request, "structureId");
-String newStructureId = ParamUtil.getString(request, "newStructureId");
+String structureKey = BeanParamUtil.getString(structureEntry, request, "structureKey");
+String newStructureKey = ParamUtil.getString(request, "newStructureKey");
 
 String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 %>
@@ -42,12 +42,12 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 	<aui:input name="callback" type="hidden" value="<%= callback %>" />
-	<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="xsd" type="hidden" />
 
 	<liferay-ui:error exception="<%= StructureEntryDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
-	<liferay-ui:error exception="<%= StructureEntryDuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
-	<liferay-ui:error exception="<%= StructureEntryStructureIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:error exception="<%= StructureEntryDuplicateStructureKeyException.class %>" message="please-enter-a-unique-id" />
+	<liferay-ui:error exception="<%= StructureEntryStructureKeyException.class %>" message="please-enter-a-valid-id" />
 	<liferay-ui:error exception="<%= StructureEntryNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= StructureEntryXsdException.class %>" message="please-enter-a-valid-xsd" />
 
@@ -61,19 +61,19 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 				<c:when test="<%= structureEntry == null %>">
 					<c:choose>
 						<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_ENTRY_FORCE_AUTOGENERATE_ID %>">
-							<aui:input name="newStructureId" type="hidden" />
-							<aui:input name="autoStructureId" type="hidden" value="<%= true %>" />
+							<aui:input name="newStructureKey" type="hidden" />
+							<aui:input name="autoStructureKey" type="hidden" value="<%= true %>" />
 						</c:when>
 						<c:otherwise>
-							<aui:input cssClass="lfr-input-text-container" field="structureId" fieldParam="newStructureId" label="id" name="newStructureId" value="<%= newStructureId %>" />
+							<aui:input cssClass="lfr-input-text-container" field="structureKey" fieldParam="newStructureKey" label="id" name="newStructureKey" value="<%= newStructureKey %>" />
 
-							<aui:input label="autogenerate-id" name="autoStructureId" type="checkbox" value="<%= true %>" />
+							<aui:input label="autogenerate-id" name="autoStructureKey" type="checkbox" value="<%= true %>" />
 						</c:otherwise>
 					</c:choose>
 				</c:when>
 				<c:otherwise>
 					<aui:field-wrapper label="id">
-						<%= structureId %>
+						<%= structureKey %>
 					</aui:field-wrapper>
 				</c:otherwise>
 			</c:choose>
@@ -227,7 +227,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 			document.<portlet:namespace />fm.<portlet:namespace />xsd.value = formBuilder.getXSD();
 
 			<c:if test="<%= structureEntry == null %>">
-				document.<portlet:namespace />fm.<portlet:namespace />structureId.value = document.<portlet:namespace />fm.<portlet:namespace />newStructureId.value;
+				document.<portlet:namespace />fm.<portlet:namespace />structureKey.value = document.<portlet:namespace />fm.<portlet:namespace />newStructureKey.value;
 			</c:if>
 
 			submitForm(document.<portlet:namespace />fm);
@@ -235,7 +235,7 @@ String xsd = BeanParamUtil.getString(structureEntry, request, "xsd");
 		['aui-base']
 	);
 
-	<c:if test="<%= Validator.isNotNull(structureId) %>">
-		window.parent.<%= HtmlUtil.escapeJS(callback) %>('<%= HtmlUtil.escapeJS(structureId) %>');
+	<c:if test="<%= Validator.isNotNull(structureKey) %>">
+		window.parent.<%= HtmlUtil.escapeJS(callback) %>('<%= HtmlUtil.escapeJS(structureKey) %>');
 	</c:if>
 </aui:script>

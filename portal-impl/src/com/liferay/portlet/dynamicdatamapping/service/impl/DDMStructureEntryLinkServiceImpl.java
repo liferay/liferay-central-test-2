@@ -31,7 +31,7 @@ public class DDMStructureEntryLinkServiceImpl
 	extends DDMStructureEntryLinkServiceBaseImpl {
 
 	public DDMStructureEntryLink addStructureEntryLink(
-			String structureId, String className, long classPK,
+			String structureKey, String className, long classPK,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -40,41 +40,41 @@ public class DDMStructureEntryLinkServiceImpl
 			ActionKeys.ADD_STRUCTURE_ENTRY);
 
 		return ddmStructureEntryLinkLocalService.addStructureEntryLink(
-			structureId, className, classPK, serviceContext);
+			structureKey, className, classPK, serviceContext);
 	}
 
 	public void deleteStructureEntryLink(
-			long groupId, String structureId, long structureEntryLinkId)
+			long groupId, String structureKey, long structureEntryLinkId)
 		throws PortalException, SystemException {
 
 		DDMStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId, ActionKeys.DELETE);
+			getPermissionChecker(), groupId, structureKey, ActionKeys.DELETE);
 
 		ddmStructureEntryLinkLocalService.deleteStructureEntryLink(
 			structureEntryLinkId);
 	}
 
 	public DDMStructureEntryLink getStructureEntryLink(
-			long groupId, String structureId, String className, long classPK)
+			long groupId, String structureKey, String className, long classPK)
 		throws PortalException, SystemException {
 
 		DDMStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId, ActionKeys.VIEW);
+			getPermissionChecker(), groupId, structureKey, ActionKeys.VIEW);
 
 		return ddmStructureEntryLinkLocalService.getStructureEntryLink(
-			structureId, className, classPK);
+			structureKey, className, classPK);
 	}
 
 	public DDMStructureEntryLink updateStructureEntryLink(
-			long structureEntryLinkId, String structureId, long groupId,
+			long structureEntryLinkId, String structureKey, long groupId,
 			String className, long classPK)
 		throws PortalException, SystemException {
 
 		DDMStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, structureKey, ActionKeys.UPDATE);
 
 		return ddmStructureEntryLinkLocalService.updateStructureEntryLink(
-			structureEntryLinkId, structureId, groupId, className, classPK);
+			structureEntryLinkId, structureKey, groupId, className, classPK);
 	}
 
 }

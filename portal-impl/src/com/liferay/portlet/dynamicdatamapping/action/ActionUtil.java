@@ -36,13 +36,13 @@ public class ActionUtil {
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(request, "groupId");
-		String structureId = ParamUtil.getString(request, "structureId");
+		String structureKey = ParamUtil.getString(request, "structureKey");
 
 		DDMStructureEntry structureEntry = null;
 
-		if (Validator.isNotNull(structureId)) {
+		if (Validator.isNotNull(structureKey)) {
 			structureEntry = DDMStructureEntryServiceUtil.getStructureEntry(
-				groupId, structureId);
+				groupId, structureKey);
 		}
 
 		request.setAttribute(
