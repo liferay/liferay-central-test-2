@@ -13,6 +13,7 @@
 				<property name="propertyPrefix" value="jdbc.default." />
 			</bean>
 		</property>
+		<property name="defaultAutoCommit" value="false" />
 	</bean>
 	<bean id="mailSession" class="com.liferay.mail.util.MailSessionFactoryBean">
 		<property name="propertyPrefix" value="mail.session." />
