@@ -771,7 +771,7 @@ public class LayoutTypePortletImpl
 			_NULL_DATE);
 
 		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
-			PropsValues.INDEX_TIME_FORMAT);
+			PropsValues.INDEX_DATE_FORMAT_PATTERN);
 
 		try {
 			Date modifiedDate = dateFormat.parse(modifiedDateString);
@@ -1559,7 +1559,7 @@ public class LayoutTypePortletImpl
 		LayoutTypePortletImpl.class);
 
 	private Format _dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
-		PropsValues.INDEX_TIME_FORMAT);
+		PropsValues.INDEX_DATE_FORMAT_PATTERN);
 
 	private boolean _enablePortletLayoutListener = true;
 	private Layout _templateLayout;

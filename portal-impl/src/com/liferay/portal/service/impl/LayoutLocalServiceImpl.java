@@ -881,7 +881,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
 
 		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
-			PropsValues.INDEX_TIME_FORMAT);
+			PropsValues.INDEX_DATE_FORMAT_PATTERN);
 
 		typeSettingsProperties.fastLoad(typeSettings);
 		typeSettingsProperties.setProperty(
