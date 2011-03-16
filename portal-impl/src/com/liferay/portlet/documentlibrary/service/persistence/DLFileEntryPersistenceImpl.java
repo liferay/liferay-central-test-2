@@ -567,6 +567,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		dlFileEntryImpl.setFolderId(dlFileEntry.getFolderId());
 		dlFileEntryImpl.setName(dlFileEntry.getName());
 		dlFileEntryImpl.setExtension(dlFileEntry.getExtension());
+		dlFileEntryImpl.setMimeType(dlFileEntry.getMimeType());
 		dlFileEntryImpl.setTitle(dlFileEntry.getTitle());
 		dlFileEntryImpl.setDescription(dlFileEntry.getDescription());
 		dlFileEntryImpl.setExtraSettings(dlFileEntry.getExtraSettings());

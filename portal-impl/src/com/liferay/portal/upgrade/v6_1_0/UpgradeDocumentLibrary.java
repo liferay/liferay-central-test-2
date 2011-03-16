@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.upgrade.v6_1_0.util.DLFileVersionTable;
 
 import java.sql.Connection;
@@ -33,6 +34,7 @@ import java.sql.ResultSet;
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		updateFileEntries();
 		updateFileRanks();
 		updateFileShortcuts();
 		updateFileVersions();
@@ -95,6 +97,35 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		}
 
 		return groupId;
+	}
+
+	protected void updateFileEntries() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select fileEntryId, extension from DLFileEntry");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long fileEntryId = rs.getLong("fileEntryId");
+				String extension = rs.getString("extension");
+				String mimeType = MimeTypesUtil.getContentType(
+					"A." + extension);
+
+				runSQL(
+					"update DLFileEntry set mimeType = " + mimeType +
+						" where fileEntryId = " + fileEntryId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected void updateFileRanks() throws Exception {
@@ -178,8 +209,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select groupId, fileVersionId, folderId, name from " +
-					"DLFileVersion");
+				"select groupId, fileVersionId, folderId, name, extension " +
+					"from DLFileVersion");
 
 			rs = ps.executeQuery();
 
@@ -188,12 +219,16 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long fileVersionId = rs.getLong("fileVersionId");
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
+				String extension = rs.getString("extension");
+				String mimeType = MimeTypesUtil.getContentType(
+					"A." + extension);
 
 				long fileEntryId = getFileEntryId(groupId, folderId, name);
 
 				runSQL(
 					"update DLFileVersion set fileEntryId = " + fileEntryId +
-						" where fileVersionId = " + fileVersionId);
+						", mimeType = " + mimeType + " where fileVersionId = " +
+						fileVersionId);
 			}
 		}
 		finally {

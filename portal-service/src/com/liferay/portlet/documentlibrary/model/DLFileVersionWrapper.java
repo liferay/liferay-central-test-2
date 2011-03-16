@@ -229,6 +229,24 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
+	* Gets the mime type of this d l file version.
+	*
+	* @return the mime type of this d l file version
+	*/
+	public java.lang.String getMimeType() {
+		return _dlFileVersion.getMimeType();
+	}
+
+	/**
+	* Sets the mime type of this d l file version.
+	*
+	* @param mimeType the mime type of this d l file version
+	*/
+	public void setMimeType(java.lang.String mimeType) {
+		_dlFileVersion.setMimeType(mimeType);
+	}
+
+	/**
 	* Gets the title of this d l file version.
 	*
 	* @return the title of this d l file version

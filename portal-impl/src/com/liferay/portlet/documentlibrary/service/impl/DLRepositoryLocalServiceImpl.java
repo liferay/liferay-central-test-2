@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -103,6 +102,7 @@ public class DLRepositoryLocalServiceImpl
 		folderId = getFolderId(user.getCompanyId(), folderId);
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
+		String mimeType = (String)serviceContext.getAttribute("contentType");
 		String extension = (String)serviceContext.getAttribute("extension");
 		Date now = new Date();
 
@@ -125,6 +125,7 @@ public class DLRepositoryLocalServiceImpl
 		dlFileEntry.setFolderId(folderId);
 		dlFileEntry.setName(name);
 		dlFileEntry.setExtension(extension);
+		dlFileEntry.setMimeType(mimeType);
 		dlFileEntry.setTitle(title);
 		dlFileEntry.setDescription(description);
 		dlFileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
@@ -152,7 +153,7 @@ public class DLRepositoryLocalServiceImpl
 
 		DLFileVersion dlFileVersion = addFileVersion(
 			user, dlFileEntry, serviceContext.getModifiedDate(now), extension,
-			title, description, null, StringPool.BLANK,
+			mimeType, title, description, null, StringPool.BLANK,
 			DLFileEntryConstants.DEFAULT_VERSION, size,
 			WorkflowConstants.STATUS_DRAFT, serviceContext);
 
@@ -799,7 +800,7 @@ public class DLRepositoryLocalServiceImpl
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		String mimeType = MimeTypesUtil.getContentType(dlFileEntry.getTitle());
+		String mimeType = dlFileEntry.getMimeType();
 
 		boolean addDraftAssetEntry = false;
 
@@ -1037,7 +1038,7 @@ public class DLRepositoryLocalServiceImpl
 
 	protected DLFileVersion addFileVersion(
 			User user, DLFileEntry dlFileEntry, Date modifiedDate,
-			String extension, String title, String description,
+			String extension, String mimeType, String title, String description,
 			String changeLog, String extraSettings, String version, long size,
 			int status, ServiceContext serviceContext)
 		throws SystemException {
@@ -1064,6 +1065,7 @@ public class DLRepositoryLocalServiceImpl
 		dlFileVersion.setRepositoryId(dlFileEntry.getRepositoryId());
 		dlFileVersion.setFileEntryId(dlFileEntry.getFileEntryId());
 		dlFileVersion.setExtension(extension);
+		dlFileVersion.setMimeType(mimeType);
 		dlFileVersion.setTitle(title);
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);
@@ -1470,6 +1472,12 @@ public class DLRepositoryLocalServiceImpl
 			}
 		}
 
+		String mimeType = (String)serviceContext.getAttribute("contentType");
+
+		if (Validator.isNull(mimeType)) {
+			mimeType = dlFileEntry.getMimeType();
+		}
+
 		String extension = (String)serviceContext.getAttribute("extension");
 
 		if (Validator.isNull(extension)) {
@@ -1510,9 +1518,9 @@ public class DLRepositoryLocalServiceImpl
 				}
 
 				updateFileVersion(
-					user, latestDLFileVersion, sourceFileName, extension, title,
-					description, changeLog, extraSettings, version, size,
-					latestDLFileVersion.getStatus(),
+					user, latestDLFileVersion, sourceFileName, extension,
+					mimeType, title, description, changeLog, extraSettings,
+					version, size, latestDLFileVersion.getStatus(),
 					serviceContext.getModifiedDate(now), serviceContext);
 			}
 			else {
@@ -1521,16 +1529,16 @@ public class DLRepositoryLocalServiceImpl
 
 					updateFileVersion(
 						user, latestDLFileVersion, sourceFileName, extension,
-						title, description, changeLog, extraSettings, version,
-						size, latestDLFileVersion.getStatus(),
+						mimeType, title, description, changeLog, extraSettings,
+						version, size, latestDLFileVersion.getStatus(),
 						serviceContext.getModifiedDate(now), serviceContext);
 				}
 				else {
 					dlFileVersion = addFileVersion(
 						user, dlFileEntry, serviceContext.getModifiedDate(now),
-						extension, title, description, changeLog, extraSettings,
-						version, size, WorkflowConstants.STATUS_DRAFT,
-						serviceContext);
+						extension, mimeType, title, description, changeLog,
+						extraSettings, version, size,
+						WorkflowConstants.STATUS_DRAFT, serviceContext);
 				}
 			}
 
@@ -1541,8 +1549,9 @@ public class DLRepositoryLocalServiceImpl
 		catch (NoSuchFileVersionException nsfve) {
 			dlFileVersion = addFileVersion(
 				user, dlFileEntry, serviceContext.getModifiedDate(now),
-				extension, title, description, changeLog, extraSettings,
-				version, size, WorkflowConstants.STATUS_DRAFT, serviceContext);
+				extension, mimeType, title, description, changeLog,
+				extraSettings, version, size, WorkflowConstants.STATUS_DRAFT,
+				serviceContext);
 		}
 
 		File file = null;
@@ -1652,13 +1661,14 @@ public class DLRepositoryLocalServiceImpl
 
 	protected void updateFileVersion(
 			User user, DLFileVersion dlFileVersion, String sourceFileName,
-			String extension, String title, String description,
+			String extension, String mimeType, String title, String description,
 			String changeLog, String extraSettings, String version, long size,
 			int status, Date statusDate, ServiceContext serviceContext)
 		throws SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
 			dlFileVersion.setExtension(extension);
+			dlFileVersion.setMimeType(mimeType);
 		}
 
 		dlFileVersion.setTitle(title);

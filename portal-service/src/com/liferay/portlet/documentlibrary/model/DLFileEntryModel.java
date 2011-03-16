@@ -291,6 +291,21 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setExtension(String extension);
 
 	/**
+	 * Gets the mime type of this d l file entry.
+	 *
+	 * @return the mime type of this d l file entry
+	 */
+	@AutoEscape
+	public String getMimeType();
+
+	/**
+	 * Sets the mime type of this d l file entry.
+	 *
+	 * @param mimeType the mime type of this d l file entry
+	 */
+	public void setMimeType(String mimeType);
+
+	/**
 	 * Gets the title of this d l file entry.
 	 *
 	 * @return the title of this d l file entry

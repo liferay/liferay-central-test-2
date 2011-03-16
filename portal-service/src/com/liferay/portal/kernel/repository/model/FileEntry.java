@@ -71,6 +71,10 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 
 	public Lock getLock();
 
+	public String getMimeType();
+
+	public String getMimeType(String version);
+
 	public Date getModifiedDate();
 
 	public int getReadCount();

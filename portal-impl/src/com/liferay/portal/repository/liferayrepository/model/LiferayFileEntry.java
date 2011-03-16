@@ -19,9 +19,12 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -134,6 +137,24 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
 	public Lock getLock() {
 		return _dlFileEntry.getLock();
+	}
+
+	public String getMimeType() {
+		return _dlFileEntry.getMimeType();
+	}
+
+	public String getMimeType(String version) {
+		try {
+			DLFileVersion dlFileVersion =
+				DLRepositoryLocalServiceUtil.getFileVersion(
+					_dlFileEntry.getFileEntryId(), version);
+
+			return dlFileVersion.getMimeType();
+		}
+		catch (Exception e) {
+		}
+
+		return ContentTypes.APPLICATION_OCTET_STREAM;
 	}
 
 	public Object getModel() {

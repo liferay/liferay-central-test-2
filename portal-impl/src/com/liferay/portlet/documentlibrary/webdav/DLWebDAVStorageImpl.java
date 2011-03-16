@@ -25,8 +25,10 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -626,6 +628,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String title = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
 			String changeLog = StringPool.BLANK;
+			String contentType = GetterUtil.get(
+				request.getHeader(HttpHeaders.CONTENT_TYPE),
+				ContentTypes.APPLICATION_OCTET_STREAM);
+			String extension = FileUtil.getExtension(title);
 
 			ServiceContext serviceContext = new ServiceContext();
 
@@ -638,8 +644,31 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
+			// If this is a chunked transfer, then the content length will be 0
+
 			long contentLength = GetterUtil.getLong(
 				request.getHeader(HttpHeaders.CONTENT_LENGTH));
+
+			if (contentLength > 0) {
+				contentType = MimeTypesUtil.getContentType(title);
+
+				serviceContext.setAttribute("contentType", contentType);
+				serviceContext.setAttribute("extension", extension);
+			}
+			else {
+				file = FileUtil.createTempFile(extension);
+
+				FileUtil.write(file, request.getInputStream());
+
+				if (contentType.equals(
+						ContentTypes.APPLICATION_OCTET_STREAM)) {
+
+					contentType = MimeTypesUtil.getContentType(file);
+				}
+
+				serviceContext.setAttribute("contentType", contentType);
+				serviceContext.setAttribute("extension", extension);
+			}
 
 			try {
 				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
@@ -665,11 +694,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 						serviceContext);
 				}
 				else {
-					file = FileUtil.createTempFile(
-						FileUtil.getExtension(title));
-
-					FileUtil.write(file, request.getInputStream());
-
 					DLAppServiceUtil.updateFileEntry(
 						fileEntryId, title, title, description, changeLog,
 						false, file, serviceContext);
@@ -683,11 +707,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 						serviceContext);
 				}
 				else {
-					file =
-						FileUtil.createTempFile(FileUtil.getExtension(title));
-
-					FileUtil.write(file, request.getInputStream());
-
 					DLAppServiceUtil.addFileEntry(
 						groupId, parentFolderId, title, description, changeLog,
 						file, serviceContext);

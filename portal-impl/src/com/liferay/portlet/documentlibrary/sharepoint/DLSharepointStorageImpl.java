@@ -14,9 +14,14 @@
 
 package com.liferay.portlet.documentlibrary.sharepoint;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
@@ -30,10 +35,11 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
-import java.io.File;
 import java.io.InputStream;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Bruno Farache
@@ -287,6 +293,8 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 	public void putDocument(SharepointRequest sharepointRequest)
 		throws Exception {
 
+		HttpServletRequest request = sharepointRequest.getHttpServletRequest();
+
 		String documentPath = sharepointRequest.getRootPath();
 		String parentFolderPath = getParentFolderPath(documentPath);
 
@@ -297,11 +305,25 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String title = getResourceName(documentPath);
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
+		long contentLength = sharepointRequest.getBytes().length;
+		InputStream is = new UnsyncByteArrayInputStream(
+			sharepointRequest.getBytes());
+		String contentType = GetterUtil.get(
+			request.getHeader(HttpHeaders.CONTENT_TYPE),
+			ContentTypes.APPLICATION_OCTET_STREAM);
+		String extension = FileUtil.getExtension(title);
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+
+		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
+			contentType = MimeTypesUtil.getContentType(is, title);
+		}
+
+		serviceContext.setAttribute("contentType", contentType);
+		serviceContext.setAttribute("extension", extension);
 
 		try {
 			FileEntry fileEntry = getFileEntry(sharepointRequest);
@@ -317,16 +339,12 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			DLAppServiceUtil.updateFileEntry(
 				fileEntryId, title, title, description, changeLog, false,
-				sharepointRequest.getBytes(), serviceContext);
+				is, contentLength, serviceContext);
 		}
 		catch (NoSuchFileEntryException nsfee) {
-			File file = FileUtil.createTempFile(FileUtil.getExtension(title));
-
-			FileUtil.write(file, sharepointRequest.getBytes());
-
 			DLAppServiceUtil.addFileEntry(
-				groupId, parentFolderId, title, description, changeLog, file,
-				serviceContext);
+				groupId, parentFolderId, title, description, changeLog, is,
+				contentLength, serviceContext);
 		}
 	}
 

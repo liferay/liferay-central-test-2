@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -202,6 +203,22 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		lock.setCreateDate(new Date());
 
 		return lock;
+	}
+
+	public String getMimeType() {
+		return _document.getContentStreamMimeType();
+	}
+
+	public String getMimeType(String version) {
+		for (Document document : _document.getAllVersions()) {
+			if (version.equals(document.getVersionLabel())) {
+				ContentStream contentStream = document.getContentStream();
+
+				return contentStream.getMimeType();
+			}
+		}
+
+		return ContentTypes.APPLICATION_OCTET_STREAM;
 	}
 
 	public Object getModel() {

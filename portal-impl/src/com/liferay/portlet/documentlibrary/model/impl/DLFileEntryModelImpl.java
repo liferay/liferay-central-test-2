@@ -72,6 +72,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 			{ "folderId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "extension", Types.VARCHAR },
+			{ "mimeType", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "extraSettings", Types.CLOB },
@@ -79,7 +80,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 			{ "size_", Types.BIGINT },
 			{ "readCount", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -300,6 +301,19 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_extension = extension;
 	}
 
+	public String getMimeType() {
+		if (_mimeType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mimeType;
+		}
+	}
+
+	public void setMimeType(String mimeType) {
+		_mimeType = mimeType;
+	}
+
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -443,6 +457,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 		dlFileEntryImpl.setExtension(getExtension());
 
+		dlFileEntryImpl.setMimeType(getMimeType());
+
 		dlFileEntryImpl.setTitle(getTitle());
 
 		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
@@ -515,7 +531,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -545,6 +561,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		sb.append(getName());
 		sb.append(", extension=");
 		sb.append(getExtension());
+		sb.append(", mimeType=");
+		sb.append(getMimeType());
 		sb.append(", title=");
 		sb.append(getTitle());
 		sb.append(", description=");
@@ -563,7 +581,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileEntry");
@@ -626,6 +644,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		sb.append(getExtension());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>mimeType</column-name><column-value><![CDATA[");
+		sb.append(getMimeType());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
 		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
@@ -677,6 +699,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	private String _name;
 	private String _originalName;
 	private String _extension;
+	private String _mimeType;
 	private String _title;
 	private String _originalTitle;
 	private String _description;

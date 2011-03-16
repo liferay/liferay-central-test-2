@@ -1538,6 +1538,7 @@
 			<basic name="folderId" />
 			<basic name="name" />
 			<basic name="extension" />
+			<basic name="mimeType" />
 			<basic name="title" />
 			<basic name="description" />
 			<basic name="extraSettings" />
@@ -1608,6 +1609,7 @@
 			<basic name="repositoryId" />
 			<basic name="fileEntryId" />
 			<basic name="extension" />
+			<basic name="mimeType" />
 			<basic name="title" />
 			<basic name="description" />
 			<basic name="changeLog" />

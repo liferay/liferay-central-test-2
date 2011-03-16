@@ -17,7 +17,6 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -211,7 +210,7 @@ public class DLFileShortcutLocalServiceImpl
 		FileEntry fileEntry = dlAppLocalService.getFileEntry(
 			fileShortcut.getToFileEntryId());
 
-		String mimeType = MimeTypesUtil.getContentType(fileEntry.getTitle());
+		String mimeType = fileEntry.getMimeType();
 
 		assetEntryLocalService.updateEntry(
 			userId, fileShortcut.getGroupId(), DLFileShortcut.class.getName(),

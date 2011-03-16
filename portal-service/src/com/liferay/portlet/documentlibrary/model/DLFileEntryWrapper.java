@@ -339,6 +339,24 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
+	* Gets the mime type of this d l file entry.
+	*
+	* @return the mime type of this d l file entry
+	*/
+	public java.lang.String getMimeType() {
+		return _dlFileEntry.getMimeType();
+	}
+
+	/**
+	* Sets the mime type of this d l file entry.
+	*
+	* @param mimeType the mime type of this d l file entry
+	*/
+	public void setMimeType(java.lang.String mimeType) {
+		_dlFileEntry.setMimeType(mimeType);
+	}
+
+	/**
 	* Gets the title of this d l file entry.
 	*
 	* @return the title of this d l file entry

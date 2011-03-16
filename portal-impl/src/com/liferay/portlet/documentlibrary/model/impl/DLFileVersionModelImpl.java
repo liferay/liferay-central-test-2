@@ -69,6 +69,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			{ "repositoryId", Types.BIGINT },
 			{ "fileEntryId", Types.BIGINT },
 			{ "extension", Types.VARCHAR },
+			{ "mimeType", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "changeLog", Types.VARCHAR },
@@ -80,7 +81,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,repositoryId LONG,fileEntryId LONG,extension VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings TEXT null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,repositoryId LONG,fileEntryId LONG,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings TEXT null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.fileEntryId DESC, dlFileVersion.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.fileEntryId DESC, DLFileVersion.createDate DESC";
@@ -209,6 +210,19 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	public void setExtension(String extension) {
 		_extension = extension;
+	}
+
+	public String getMimeType() {
+		if (_mimeType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mimeType;
+		}
+	}
+
+	public void setMimeType(String mimeType) {
+		_mimeType = mimeType;
 	}
 
 	public String getTitle() {
@@ -431,6 +445,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionModelImpl._setOriginalFileEntryId = false;
 		dlFileVersionImpl.setExtension(getExtension());
 
+		dlFileVersionImpl.setMimeType(getMimeType());
+
 		dlFileVersionImpl.setTitle(getTitle());
 
 		dlFileVersionImpl.setDescription(getDescription());
@@ -516,7 +532,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{fileVersionId=");
 		sb.append(getFileVersionId());
@@ -536,6 +552,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getFileEntryId());
 		sb.append(", extension=");
 		sb.append(getExtension());
+		sb.append(", mimeType=");
+		sb.append(getMimeType());
 		sb.append(", title=");
 		sb.append(getTitle());
 		sb.append(", description=");
@@ -562,7 +580,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFileVersion");
@@ -603,6 +621,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(
 			"<column><column-name>extension</column-name><column-value><![CDATA[");
 		sb.append(getExtension());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mimeType</column-name><column-value><![CDATA[");
+		sb.append(getMimeType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>title</column-name><column-value><![CDATA[");
@@ -662,6 +684,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	private long _originalFileEntryId;
 	private boolean _setOriginalFileEntryId;
 	private String _extension;
+	private String _mimeType;
 	private String _title;
 	private String _description;
 	private String _changeLog;

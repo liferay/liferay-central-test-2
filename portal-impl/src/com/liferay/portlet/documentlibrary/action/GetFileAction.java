@@ -203,6 +203,8 @@ public class GetFileAction extends PortletAction {
 
 		InputStream is = fileEntry.getContentStream(version);
 
+		String contentType = fileEntry.getMimeType(version);
+
 		boolean converted = false;
 
 		String fileName = fileEntry.getTitle();
@@ -239,8 +241,9 @@ public class GetFileAction extends PortletAction {
 				contentLength = (int)fileVersion.getSize();
 			}
 		}
-
-		String contentType = MimeTypesUtil.getContentType(fileName);
+		else {
+			contentType = MimeTypesUtil.getContentType(fileName);
+		}
 
 		ServletResponseUtil.sendFile(
 			request, response, fileName, is, contentLength, contentType);

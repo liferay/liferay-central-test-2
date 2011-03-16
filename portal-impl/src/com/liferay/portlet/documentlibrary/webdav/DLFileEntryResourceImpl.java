@@ -16,7 +16,6 @@ package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
 import com.liferay.portal.kernel.webdav.WebDAVException;
@@ -73,7 +72,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	}
 
 	public String getContentType() {
-		return MimeTypesUtil.getContentType(_fileEntry.getTitle());
+		return _fileEntry.getMimeType();
 	}
 
 	public InputStream getContentAsStream() throws WebDAVException {

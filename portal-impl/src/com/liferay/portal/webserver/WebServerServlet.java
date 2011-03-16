@@ -344,6 +344,8 @@ public class WebServerServlet extends HttpServlet {
 
 		InputStream inputStream = fileEntry.getContentStream(version);
 
+		String contentType = fileEntry.getMimeType();
+
 		FileVersion fileVersion = fileEntry.getFileVersion(version);
 
 		String fileName = fileVersion.getTitle();
@@ -410,8 +412,9 @@ public class WebServerServlet extends HttpServlet {
 				contentLength = (int)fileVersion.getSize();
 			}
 		}
-
-		String contentType = MimeTypesUtil.getContentType(fileName);
+		else {
+			contentType = MimeTypesUtil.getContentType(fileName);
+		}
 
 		ServletResponseUtil.sendFile(
 			request, response, fileName, inputStream, contentLength,
@@ -426,8 +429,7 @@ public class WebServerServlet extends HttpServlet {
 		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
 			groupId, folderId, title);
 
-		String contentType = MimeTypesUtil.getContentType(
-			fileEntry.getTitle());
+		String contentType = fileEntry.getMimeType();
 
 		InputStream inputStream = fileEntry.getContentStream();
 

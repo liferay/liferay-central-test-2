@@ -1233,6 +1233,7 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="extension" type="String" />
+		<field name="mimeType" type="String" />
 		<field name="title" type="String">
 			<hint name="max-length">255</hint>
 		</field>
@@ -1281,6 +1282,7 @@
 		<field name="repositoryId" type="long" />
 		<field name="fileEntryId" type="long" />
 		<field name="extension" type="String" />
+		<field name="mimeType" type="String" />
 		<field name="title" type="String">
 			<hint name="max-length">255</hint>
 		</field>

@@ -115,8 +115,7 @@ public class JournalRSSUtil {
 
 			enclosure.setLength(fileEntry.getSize());
 
-			enclosure.setType(
-				MimeTypesUtil.getContentType(fileEntry.getTitle()));
+			enclosure.setType(fileEntry.getMimeType());
 
 			enclosure.setUrl(portalURL + url);
 
@@ -184,7 +183,7 @@ public class JournalRSSUtil {
 
 			link.setRel("enclosure");
 
-			link.setType(MimeTypesUtil.getContentType(fileEntry.getTitle()));
+			link.setType(fileEntry.getMimeType());
 
 			links.add(link);
 		}

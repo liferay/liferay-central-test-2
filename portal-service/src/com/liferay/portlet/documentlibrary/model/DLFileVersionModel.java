@@ -203,6 +203,21 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setExtension(String extension);
 
 	/**
+	 * Gets the mime type of this d l file version.
+	 *
+	 * @return the mime type of this d l file version
+	 */
+	@AutoEscape
+	public String getMimeType();
+
+	/**
+	 * Sets the mime type of this d l file version.
+	 *
+	 * @param mimeType the mime type of this d l file version
+	 */
+	public void setMimeType(String mimeType);
+
+	/**
 	 * Gets the title of this d l file version.
 	 *
 	 * @return the title of this d l file version
