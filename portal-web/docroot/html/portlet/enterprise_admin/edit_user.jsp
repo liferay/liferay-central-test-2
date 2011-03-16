@@ -97,7 +97,7 @@ List<UserGroupRole> userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(rende
 List<UserGroupRole> communityRoles = new ArrayList<UserGroupRole>();
 List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
 
-if (userGroupRoles.isEmpty() && selUser != null) {
+if ((userGroupRoles == null) || (userGroupRoles.isEmpty() && (selUser != null))) {
 	userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(selUser.getUserId());
 
 	if (filterManageableUserGroupRoles) {

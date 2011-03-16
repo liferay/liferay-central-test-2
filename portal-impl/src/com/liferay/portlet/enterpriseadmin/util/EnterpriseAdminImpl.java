@@ -853,7 +853,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		if ((portletRequest.getParameter("groupRolesGroupIds") == null) ||
 			(portletRequest.getParameter("groupRolesRoleIds") == null)) {
 
-			return Collections.emptyList();
+			return null;
 		}
 
 		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
