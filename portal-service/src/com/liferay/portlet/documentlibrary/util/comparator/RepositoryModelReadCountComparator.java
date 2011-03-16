@@ -94,7 +94,7 @@ public class RepositoryModelReadCountComparator extends OrderByComparator {
 				return 0;
 			}
 		}
-		else if (obj instanceof DLFolder || obj instanceof Folder) {
+		else if ((obj instanceof DLFolder) || (obj instanceof Folder)) {
 			return 0;
 		}
 		else {
