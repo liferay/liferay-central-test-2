@@ -1324,6 +1324,26 @@
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMContent">
 		<field name="uuid" type="String" />
 		<field name="contentId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="contentKey" type="String">
+			<hint name="upper-case">true</hint>
+			<hint name="auto-escape">false</hint>
+		</field>
+		<field name="name" type="String" localized="true">
+			<validator name="required" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
+		</field>
+		<field name="xml" type="String">
+			<hint-collection name="CLOB" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStructure">
 		<field name="uuid" type="String" />
