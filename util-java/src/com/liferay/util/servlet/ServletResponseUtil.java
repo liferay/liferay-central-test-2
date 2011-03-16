@@ -315,7 +315,7 @@ public class ServletResponseUtil {
 
 		if (contentLength > 0) {
 			response.setHeader(
-				HttpHeaders.CONTENT_LENGTH, Long.toString(contentLength));
+				HttpHeaders.CONTENT_LENGTH, String.valueOf(contentLength));
 		}
 
 		StreamUtil.transfer(is, response.getOutputStream());
