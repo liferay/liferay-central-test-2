@@ -101,7 +101,7 @@ AUI().add(
 					instance._active.menu.hide();
 					instance._active.menu = null;
 
-					cssClass = instance._active.trigger.attr('className');
+					var cssClass = instance._active.trigger.attr('className');
 
 					var extended = (cssClass.indexOf('lfr-extended') > -1);
 
@@ -174,7 +174,7 @@ AUI().add(
 				if (menu) {
 					var offset = trigger.get('region');
 
-					cssClass = trigger.attr('className');
+					var cssClass = trigger.attr('className');
 
 					var align = 'auto';
 					var direction = 'auto';

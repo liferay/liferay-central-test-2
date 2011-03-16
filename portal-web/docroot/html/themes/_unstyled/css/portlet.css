@@ -364,7 +364,7 @@ body.portlet {
 .lfr-actions {
 }
 
-.lfr-actions, .lfr-actions ul {
+.lfr-actions.lfr-extended, .lfr-actions.lfr-extended ul {
 }
 
 .lfr-actions ul {

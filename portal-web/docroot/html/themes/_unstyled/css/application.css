@@ -41,13 +41,13 @@
 .active-area {
 }
 
-.portlet-boundary.yui-dd-dragging {
+.portlet-boundary.aui-dd-dragging {
 }
 
-.ie .portlet-boundary.yui-dd-dragging {
+.ie .portlet-boundary.aui-dd-dragging {
 }
 
-.portlet-boundary.yui-dd-dragging .portlet {
+.portlet-boundary.aui-dd-dragging .portlet {
 }
 
 .aui-portal-layout-proxy {
@@ -83,7 +83,7 @@
 .lfr-freeform-layout-drag-indicator {
 }
 
-.aui-portal-layout-drag-target-indicator  {
+.aui-portal-layout-drag-target-indicator {
 }
 
 /* ---------- Portal tool tips ---------- */
@@ -238,7 +238,7 @@
 .aui-menu-content, .lfr-menu-list ul {
 }
 
-.aui-menugroup-content h4 {
+.aui-menugroup-content .aui-menu-label {
 }
 
 .aui-menugroup-content ul, .lfr-menu-list ul ul {
@@ -256,13 +256,13 @@
 .aui-menu-content li.last, .lfr-menu-list ul li.last {
 }
 
-.aui-menu-content li a, .lfr-menu-list ul li a {
+.aui-menu-content li a, .lfr-menu-list ul li .taglib-icon {
 }
 
-.aui-menu-content li a:hover, .lfr-menu-list ul a:hover {
+.aui-menu-content li a.aui-focus, .lfr-menu-list ul .taglib-icon.aui-focus, .lfr-menu-expanded li a:focus {
 }
 
-.aui-menu-content a, .lfr-menu-list li a, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+.aui-menu-content a, .lfr-menu-list li .taglib-icon, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 }
 
 /* ---------- Toolbar ---------- */
@@ -282,4 +282,9 @@
 }
 
 .aui-loadingmask-message {
+}
+
+/* ---------- Tree View ---------- */
+
+.aui-tree-node-selected .aui-tree-label {
 }

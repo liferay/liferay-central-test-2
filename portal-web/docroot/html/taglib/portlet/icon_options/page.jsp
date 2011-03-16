@@ -19,6 +19,8 @@
 <liferay-ui:icon-menu
 	align="auto"
 	cssClass="portlet-options"
+	direction="down"
+	extended="<%= false %>"
 	icon=""
 	message="options"
 	showArrow="<%= false %>"
