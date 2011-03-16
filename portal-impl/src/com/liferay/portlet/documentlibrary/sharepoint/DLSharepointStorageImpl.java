@@ -305,24 +305,27 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String title = getResourceName(documentPath);
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
-		long contentLength = sharepointRequest.getBytes().length;
 		InputStream is = new UnsyncByteArrayInputStream(
 			sharepointRequest.getBytes());
-		String contentType = GetterUtil.get(
-			request.getHeader(HttpHeaders.CONTENT_TYPE),
-			ContentTypes.APPLICATION_OCTET_STREAM);
-		String extension = FileUtil.getExtension(title);
+		long contentLength = sharepointRequest.getBytes().length;
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
+		String contentType = GetterUtil.get(
+			request.getHeader(HttpHeaders.CONTENT_TYPE),
+			ContentTypes.APPLICATION_OCTET_STREAM);
+
 		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
 			contentType = MimeTypesUtil.getContentType(is, title);
 		}
 
 		serviceContext.setAttribute("contentType", contentType);
+
+		String extension = FileUtil.getExtension(title);
+
 		serviceContext.setAttribute("extension", extension);
 
 		try {

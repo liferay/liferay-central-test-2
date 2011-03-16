@@ -628,10 +628,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String title = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
 			String changeLog = StringPool.BLANK;
-			String contentType = GetterUtil.get(
-				request.getHeader(HttpHeaders.CONTENT_TYPE),
-				ContentTypes.APPLICATION_OCTET_STREAM);
-			String extension = FileUtil.getExtension(title);
+			long contentLength = GetterUtil.getLong(
+				request.getHeader(HttpHeaders.CONTENT_LENGTH));
 
 			ServiceContext serviceContext = new ServiceContext();
 
@@ -639,23 +637,21 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
-			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_SAVE_DRAFT);
-			}
+			String contentType = GetterUtil.get(
+				request.getHeader(HttpHeaders.CONTENT_TYPE),
+				ContentTypes.APPLICATION_OCTET_STREAM);
 
-			// If this is a chunked transfer, then the content length will be 0
-
-			long contentLength = GetterUtil.getLong(
-				request.getHeader(HttpHeaders.CONTENT_LENGTH));
+			String extension = FileUtil.getExtension(title);
 
 			if (contentLength > 0) {
 				contentType = MimeTypesUtil.getContentType(title);
 
 				serviceContext.setAttribute("contentType", contentType);
-				serviceContext.setAttribute("extension", extension);
 			}
 			else {
+
+				// Chunked transfers have a content length of 0
+
 				file = FileUtil.createTempFile(extension);
 
 				FileUtil.write(file, request.getInputStream());
@@ -667,7 +663,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				}
 
 				serviceContext.setAttribute("contentType", contentType);
-				serviceContext.setAttribute("extension", extension);
+			}
+
+			serviceContext.setAttribute("extension", extension);
+
+			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
+				serviceContext.setWorkflowAction(
+					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
 			try {

@@ -115,6 +115,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			while (rs.next()) {
 				long fileEntryId = rs.getLong("fileEntryId");
 				String extension = rs.getString("extension");
+
 				String mimeType = MimeTypesUtil.getContentType(
 					"A." + extension);
 
@@ -220,6 +221,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
 				String extension = rs.getString("extension");
+
 				String mimeType = MimeTypesUtil.getContentType(
 					"A." + extension);
 
@@ -228,7 +230,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				runSQL(
 					"update DLFileVersion set fileEntryId = " + fileEntryId +
 						", mimeType = " + mimeType + " where fileVersionId = " +
-						fileVersionId);
+							fileVersionId);
 			}
 		}
 		finally {

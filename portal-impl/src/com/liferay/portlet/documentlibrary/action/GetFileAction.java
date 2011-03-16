@@ -203,8 +203,6 @@ public class GetFileAction extends PortletAction {
 
 		InputStream is = fileEntry.getContentStream(version);
 
-		String contentType = fileEntry.getMimeType(version);
-
 		boolean converted = false;
 
 		String fileName = fileEntry.getTitle();
@@ -230,6 +228,7 @@ public class GetFileAction extends PortletAction {
 		}
 
 		long contentLength = 0;
+		String contentType = fileEntry.getMimeType(version);
 
 		if (!converted) {
 			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {

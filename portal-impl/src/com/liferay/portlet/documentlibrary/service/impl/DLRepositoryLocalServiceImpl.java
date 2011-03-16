@@ -102,8 +102,8 @@ public class DLRepositoryLocalServiceImpl
 		folderId = getFolderId(user.getCompanyId(), folderId);
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
-		String mimeType = (String)serviceContext.getAttribute("contentType");
 		String extension = (String)serviceContext.getAttribute("extension");
+		String mimeType = (String)serviceContext.getAttribute("contentType");
 		Date now = new Date();
 
 		validateFile(groupId, folderId, title, extension, is);
@@ -800,8 +800,6 @@ public class DLRepositoryLocalServiceImpl
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
 
-		String mimeType = dlFileEntry.getMimeType();
-
 		boolean addDraftAssetEntry = false;
 
 		if ((dlFileVersion != null) && !dlFileVersion.isApproved()) {
@@ -827,7 +825,8 @@ public class DLRepositoryLocalServiceImpl
 		dlAppHelperLocalService.updateAsset(
 			userId, new LiferayFileEntry(dlFileEntry),
 			new LiferayFileVersion(dlFileVersion), assetCategoryIds,
-			assetTagNames, mimeType, addDraftAssetEntry, visible);
+			assetTagNames, dlFileEntry.getMimeType(), addDraftAssetEntry,
+			visible);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -1464,12 +1463,10 @@ public class DLRepositoryLocalServiceImpl
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
-		if (Validator.isNull(title)) {
-			title = sourceFileName;
+		String extension = (String)serviceContext.getAttribute("extension");
 
-			if (Validator.isNull(title)) {
-				title = dlFileEntry.getTitle();
-			}
+		if (Validator.isNull(extension)) {
+			extension = dlFileEntry.getExtension();
 		}
 
 		String mimeType = (String)serviceContext.getAttribute("contentType");
@@ -1478,10 +1475,12 @@ public class DLRepositoryLocalServiceImpl
 			mimeType = dlFileEntry.getMimeType();
 		}
 
-		String extension = (String)serviceContext.getAttribute("extension");
+		if (Validator.isNull(title)) {
+			title = sourceFileName;
 
-		if (Validator.isNull(extension)) {
-			extension = dlFileEntry.getExtension();
+			if (Validator.isNull(title)) {
+				title = dlFileEntry.getTitle();
+			}
 		}
 
 		Date now = new Date();

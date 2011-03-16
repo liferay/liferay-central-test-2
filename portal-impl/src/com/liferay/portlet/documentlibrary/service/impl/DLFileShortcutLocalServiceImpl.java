@@ -210,14 +210,12 @@ public class DLFileShortcutLocalServiceImpl
 		FileEntry fileEntry = dlAppLocalService.getFileEntry(
 			fileShortcut.getToFileEntryId());
 
-		String mimeType = fileEntry.getMimeType();
-
 		assetEntryLocalService.updateEntry(
 			userId, fileShortcut.getGroupId(), DLFileShortcut.class.getName(),
 			fileShortcut.getFileShortcutId(), fileShortcut.getUuid(),
 			assetCategoryIds, assetTagNames, false, null, null, null, null,
-			mimeType, fileEntry.getTitle(), fileEntry.getDescription(), null,
-			null, 0, 0, null, false);
+			fileEntry.getMimeType(), fileEntry.getTitle(),
+			fileEntry.getDescription(), null, null, 0, 0, null, false);
 	}
 
 	public DLFileShortcut updateFileShortcut(

@@ -344,8 +344,6 @@ public class WebServerServlet extends HttpServlet {
 
 		InputStream inputStream = fileEntry.getContentStream(version);
 
-		String contentType = fileEntry.getMimeType();
-
 		FileVersion fileVersion = fileEntry.getFileVersion(version);
 
 		String fileName = fileVersion.getTitle();
@@ -402,6 +400,7 @@ public class WebServerServlet extends HttpServlet {
 			converted = true;
 		}
 
+		String contentType = fileEntry.getMimeType();
 		long contentLength = 0;
 
 		if (!converted) {
@@ -431,9 +430,9 @@ public class WebServerServlet extends HttpServlet {
 
 		String contentType = fileEntry.getMimeType();
 
-		InputStream inputStream = fileEntry.getContentStream();
-
 		response.setContentType(contentType);
+
+		InputStream inputStream = fileEntry.getContentStream();
 
 		ServletResponseUtil.write(response, inputStream);
 	}
