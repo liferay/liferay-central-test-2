@@ -72,7 +72,9 @@ public abstract class JSONAction extends Action {
 			return null;
 		}
 
-		if (ParamUtil.getBoolean(request, "refresh")) {
+		boolean refresh = ParamUtil.getBoolean(request, "refresh");
+
+		if (refresh) {
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		else if (Validator.isNotNull(json)) {

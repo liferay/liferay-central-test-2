@@ -84,8 +84,6 @@ public class UpdateLayoutAction extends JSONAction {
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		String json = StringPool.BLANK;
-
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		boolean updateLayout = true;
@@ -232,7 +230,7 @@ public class UpdateLayoutAction extends JSONAction {
 			addPortlet(mapping, form, request, response, portletId);
 		}
 
-		return json;
+		return StringPool.BLANK;
 	}
 
 	protected void addPortlet(
