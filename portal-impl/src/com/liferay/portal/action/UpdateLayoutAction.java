@@ -25,9 +25,11 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -345,13 +347,20 @@ public class UpdateLayoutAction extends JSONAction {
 			}
 		}
 
+		PortletApp portletApp = portlet.getPortletApp();
+
+		String servletContextName = portletApp.getServletContextName();
+
+		if (Validator.isNotNull(servletContextName)) {
+			servletContextName = StringPool.SLASH + servletContextName;
+		}
+
 		if (!portletOnLayout) {
 			Portlet rootPortlet = portlet.getRootPortlet();
 
 			for (String footerPortalCss : portlet.getFooterPortalCss()) {
 				if (!HttpUtil.hasProtocol(footerPortalCss)) {
-					footerPortalCss =
-						PortalUtil.getPathContext() + footerPortalCss;
+					footerPortalCss = servletContextName + footerPortalCss;
 
 					footerPortalCss = PortalUtil.getStaticResourceURL(
 						request, footerPortalCss, rootPortlet.getTimestamp());
@@ -365,7 +374,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
 					footerPortalJavaScript =
-						PortalUtil.getPathContext() + footerPortalJavaScript;
+						servletContextName + footerPortalJavaScript;
 
 					footerPortalJavaScript = PortalUtil.getStaticResourceURL(
 						request, footerPortalJavaScript,
@@ -377,8 +386,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 			for (String footerPortletCss : portlet.getFooterPortletCss()) {
 				if (!HttpUtil.hasProtocol(footerPortletCss)) {
-					footerPortletCss =
-						PortalUtil.getPathContext() + footerPortletCss;
+					footerPortletCss = servletContextName + footerPortletCss;
 
 					footerPortletCss = PortalUtil.getStaticResourceURL(
 						request, footerPortletCss, rootPortlet.getTimestamp());
@@ -392,7 +400,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
 					footerPortletJavaScript =
-						PortalUtil.getPathContext() + footerPortletJavaScript;
+						servletContextName + footerPortletJavaScript;
 
 					footerPortletJavaScript = PortalUtil.getStaticResourceURL(
 						request, footerPortletJavaScript,
@@ -404,8 +412,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 			for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 				if (!HttpUtil.hasProtocol(headerPortalCss)) {
-					headerPortalCss =
-						PortalUtil.getPathContext() + headerPortalCss;
+					headerPortalCss = servletContextName + headerPortalCss;
 
 					headerPortalCss = PortalUtil.getStaticResourceURL(
 						request, headerPortalCss, rootPortlet.getTimestamp());
@@ -419,7 +426,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
 					headerPortalJavaScript =
-						PortalUtil.getPathContext() + headerPortalJavaScript;
+						servletContextName + headerPortalJavaScript;
 
 					headerPortalJavaScript = PortalUtil.getStaticResourceURL(
 						request, headerPortalJavaScript,
@@ -431,8 +438,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 			for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 				if (!HttpUtil.hasProtocol(headerPortletCss)) {
-					headerPortletCss =
-						PortalUtil.getPathContext() + headerPortletCss;
+					headerPortletCss = servletContextName + headerPortletCss;
 
 					headerPortletCss = PortalUtil.getStaticResourceURL(
 						request, headerPortletCss, rootPortlet.getTimestamp());
@@ -446,7 +452,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
 					headerPortletJavaScript =
-						PortalUtil.getPathContext() + headerPortletJavaScript;
+						servletContextName + headerPortletJavaScript;
 
 					headerPortletJavaScript = PortalUtil.getStaticResourceURL(
 						request, headerPortletJavaScript,
