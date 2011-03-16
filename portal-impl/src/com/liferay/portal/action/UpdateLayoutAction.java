@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -349,18 +348,13 @@ public class UpdateLayoutAction extends JSONAction {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		String servletContextName = portletApp.getServletContextName();
-
-		if (Validator.isNotNull(servletContextName)) {
-			servletContextName = StringPool.SLASH + servletContextName;
-		}
-
 		if (!portletOnLayout) {
 			Portlet rootPortlet = portlet.getRootPortlet();
 
 			for (String footerPortalCss : portlet.getFooterPortalCss()) {
 				if (!HttpUtil.hasProtocol(footerPortalCss)) {
-					footerPortalCss = servletContextName + footerPortalCss;
+					footerPortalCss =
+						portletApp.getContextPath() + footerPortalCss;
 
 					footerPortalCss = PortalUtil.getStaticResourceURL(
 						request, footerPortalCss, rootPortlet.getTimestamp());
@@ -374,7 +368,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
 					footerPortalJavaScript =
-						servletContextName + footerPortalJavaScript;
+						portletApp.getContextPath() + footerPortalJavaScript;
 
 					footerPortalJavaScript = PortalUtil.getStaticResourceURL(
 						request, footerPortalJavaScript,
@@ -386,7 +380,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 			for (String footerPortletCss : portlet.getFooterPortletCss()) {
 				if (!HttpUtil.hasProtocol(footerPortletCss)) {
-					footerPortletCss = servletContextName + footerPortletCss;
+					footerPortletCss =
+						portletApp.getContextPath() + footerPortletCss;
 
 					footerPortletCss = PortalUtil.getStaticResourceURL(
 						request, footerPortletCss, rootPortlet.getTimestamp());
@@ -400,7 +395,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
 					footerPortletJavaScript =
-						servletContextName + footerPortletJavaScript;
+						portletApp.getContextPath() + footerPortletJavaScript;
 
 					footerPortletJavaScript = PortalUtil.getStaticResourceURL(
 						request, footerPortletJavaScript,
@@ -412,7 +407,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 			for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 				if (!HttpUtil.hasProtocol(headerPortalCss)) {
-					headerPortalCss = servletContextName + headerPortalCss;
+					headerPortalCss =
+						portletApp.getContextPath() + headerPortalCss;
 
 					headerPortalCss = PortalUtil.getStaticResourceURL(
 						request, headerPortalCss, rootPortlet.getTimestamp());
@@ -426,7 +422,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
 					headerPortalJavaScript =
-						servletContextName + headerPortalJavaScript;
+						portletApp.getContextPath() + headerPortalJavaScript;
 
 					headerPortalJavaScript = PortalUtil.getStaticResourceURL(
 						request, headerPortalJavaScript,
@@ -438,7 +434,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 			for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 				if (!HttpUtil.hasProtocol(headerPortletCss)) {
-					headerPortletCss = servletContextName + headerPortletCss;
+					headerPortletCss =
+						portletApp.getContextPath() + headerPortletCss;
 
 					headerPortletCss = PortalUtil.getStaticResourceURL(
 						request, headerPortletCss, rootPortlet.getTimestamp());
@@ -452,7 +449,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
 					headerPortletJavaScript =
-						servletContextName + headerPortletJavaScript;
+						portletApp.getContextPath() + headerPortletJavaScript;
 
 					headerPortletJavaScript = PortalUtil.getStaticResourceURL(
 						request, headerPortletJavaScript,

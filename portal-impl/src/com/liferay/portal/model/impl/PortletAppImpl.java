@@ -47,6 +47,7 @@ public class PortletAppImpl implements PortletApp {
 		_servletContextName = servletContextName;
 
 		if (Validator.isNotNull(_servletContextName)) {
+			_contextPath = StringPool.SLASH.concat(_servletContextName);
 			_warFile = true;
 		}
 		else {
@@ -95,6 +96,10 @@ public class PortletAppImpl implements PortletApp {
 
 	public Map<String, String[]> getContainerRuntimeOptions() {
 		return _containerRuntimeOptions;
+	}
+
+	public String getContextPath() {
+		return _contextPath;
 	}
 
 	public Map<String, String> getCustomUserAttributes() {
@@ -184,6 +189,7 @@ public class PortletAppImpl implements PortletApp {
 
 	private Map<String, String[]> _containerRuntimeOptions =
 		new HashMap<String, String[]>();
+	private String _contextPath = StringPool.BLANK;
 	private Map<String, String> _customUserAttributes =
 		new LinkedHashMap<String, String>();
 	private String _defaultNamespace = XMLConstants.NULL_NS_URI;

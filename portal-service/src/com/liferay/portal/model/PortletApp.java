@@ -45,6 +45,8 @@ public interface PortletApp extends Serializable {
 
 	public Map<String, String[]> getContainerRuntimeOptions();
 
+	public String getContextPath();
+
 	public Map<String, String> getCustomUserAttributes();
 
 	public String getDefaultNamespace();
