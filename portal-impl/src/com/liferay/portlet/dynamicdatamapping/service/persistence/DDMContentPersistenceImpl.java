@@ -1016,10 +1016,10 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 	@BeanReference(type = DDMContentPersistence.class)
 	protected DDMContentPersistence ddmContentPersistence;
-	@BeanReference(type = DDMStructureEntryPersistence.class)
-	protected DDMStructureEntryPersistence ddmStructureEntryPersistence;
-	@BeanReference(type = DDMStructureEntryLinkPersistence.class)
-	protected DDMStructureEntryLinkPersistence ddmStructureEntryLinkPersistence;
+	@BeanReference(type = DDMStructurePersistence.class)
+	protected DDMStructurePersistence ddmStructurePersistence;
+	@BeanReference(type = DDMStructureLinkPersistence.class)
+	protected DDMStructureLinkPersistence ddmStructureLinkPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)

@@ -712,22 +712,22 @@ Liferay.Service.registerClass(
 Liferay.Service.register("Liferay.Service.DDM", "com.liferay.portlet.dynamicdatamapping.service");
 
 Liferay.Service.registerClass(
-	Liferay.Service.DDM, "DDMStructureEntry",
+	Liferay.Service.DDM, "DDMStructure",
 	{
-		addStructureEntry: true,
-		deleteStructureEntry: true,
-		getStructureEntry: true,
-		updateStructureEntry: true
+		addStructure: true,
+		deleteStructure: true,
+		getStructure: true,
+		updateStructure: true
 	}
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.DDM, "DDMStructureEntryLink",
+	Liferay.Service.DDM, "DDMStructureLink",
 	{
-		addStructureEntryLink: true,
-		deleteStructureEntryLink: true,
-		getStructureEntryLink: true,
-		updateStructureEntryLink: true
+		addStructureLink: true,
+		deleteStructureLink: true,
+		getStructureLink: true,
+		updateStructureLink: true
 	}
 );
 

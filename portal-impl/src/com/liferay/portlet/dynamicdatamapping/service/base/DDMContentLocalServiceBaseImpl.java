@@ -35,13 +35,13 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMContent;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryLinkPersistence;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
 
 import java.util.List;
 
@@ -288,117 +288,116 @@ public abstract class DDMContentLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m structure entry local service.
+	 * Gets the d d m structure local service.
 	 *
-	 * @return the d d m structure entry local service
+	 * @return the d d m structure local service
 	 */
-	public DDMStructureEntryLocalService getDDMStructureEntryLocalService() {
-		return ddmStructureEntryLocalService;
+	public DDMStructureLocalService getDDMStructureLocalService() {
+		return ddmStructureLocalService;
 	}
 
 	/**
-	 * Sets the d d m structure entry local service.
+	 * Sets the d d m structure local service.
 	 *
-	 * @param ddmStructureEntryLocalService the d d m structure entry local service
+	 * @param ddmStructureLocalService the d d m structure local service
 	 */
-	public void setDDMStructureEntryLocalService(
-		DDMStructureEntryLocalService ddmStructureEntryLocalService) {
-		this.ddmStructureEntryLocalService = ddmStructureEntryLocalService;
+	public void setDDMStructureLocalService(
+		DDMStructureLocalService ddmStructureLocalService) {
+		this.ddmStructureLocalService = ddmStructureLocalService;
 	}
 
 	/**
-	 * Gets the d d m structure entry remote service.
+	 * Gets the d d m structure remote service.
 	 *
-	 * @return the d d m structure entry remote service
+	 * @return the d d m structure remote service
 	 */
-	public DDMStructureEntryService getDDMStructureEntryService() {
-		return ddmStructureEntryService;
+	public DDMStructureService getDDMStructureService() {
+		return ddmStructureService;
 	}
 
 	/**
-	 * Sets the d d m structure entry remote service.
+	 * Sets the d d m structure remote service.
 	 *
-	 * @param ddmStructureEntryService the d d m structure entry remote service
+	 * @param ddmStructureService the d d m structure remote service
 	 */
-	public void setDDMStructureEntryService(
-		DDMStructureEntryService ddmStructureEntryService) {
-		this.ddmStructureEntryService = ddmStructureEntryService;
+	public void setDDMStructureService(DDMStructureService ddmStructureService) {
+		this.ddmStructureService = ddmStructureService;
 	}
 
 	/**
-	 * Gets the d d m structure entry persistence.
+	 * Gets the d d m structure persistence.
 	 *
-	 * @return the d d m structure entry persistence
+	 * @return the d d m structure persistence
 	 */
-	public DDMStructureEntryPersistence getDDMStructureEntryPersistence() {
-		return ddmStructureEntryPersistence;
+	public DDMStructurePersistence getDDMStructurePersistence() {
+		return ddmStructurePersistence;
 	}
 
 	/**
-	 * Sets the d d m structure entry persistence.
+	 * Sets the d d m structure persistence.
 	 *
-	 * @param ddmStructureEntryPersistence the d d m structure entry persistence
+	 * @param ddmStructurePersistence the d d m structure persistence
 	 */
-	public void setDDMStructureEntryPersistence(
-		DDMStructureEntryPersistence ddmStructureEntryPersistence) {
-		this.ddmStructureEntryPersistence = ddmStructureEntryPersistence;
+	public void setDDMStructurePersistence(
+		DDMStructurePersistence ddmStructurePersistence) {
+		this.ddmStructurePersistence = ddmStructurePersistence;
 	}
 
 	/**
-	 * Gets the d d m structure entry link local service.
+	 * Gets the d d m structure link local service.
 	 *
-	 * @return the d d m structure entry link local service
+	 * @return the d d m structure link local service
 	 */
-	public DDMStructureEntryLinkLocalService getDDMStructureEntryLinkLocalService() {
-		return ddmStructureEntryLinkLocalService;
+	public DDMStructureLinkLocalService getDDMStructureLinkLocalService() {
+		return ddmStructureLinkLocalService;
 	}
 
 	/**
-	 * Sets the d d m structure entry link local service.
+	 * Sets the d d m structure link local service.
 	 *
-	 * @param ddmStructureEntryLinkLocalService the d d m structure entry link local service
+	 * @param ddmStructureLinkLocalService the d d m structure link local service
 	 */
-	public void setDDMStructureEntryLinkLocalService(
-		DDMStructureEntryLinkLocalService ddmStructureEntryLinkLocalService) {
-		this.ddmStructureEntryLinkLocalService = ddmStructureEntryLinkLocalService;
+	public void setDDMStructureLinkLocalService(
+		DDMStructureLinkLocalService ddmStructureLinkLocalService) {
+		this.ddmStructureLinkLocalService = ddmStructureLinkLocalService;
 	}
 
 	/**
-	 * Gets the d d m structure entry link remote service.
+	 * Gets the d d m structure link remote service.
 	 *
-	 * @return the d d m structure entry link remote service
+	 * @return the d d m structure link remote service
 	 */
-	public DDMStructureEntryLinkService getDDMStructureEntryLinkService() {
-		return ddmStructureEntryLinkService;
+	public DDMStructureLinkService getDDMStructureLinkService() {
+		return ddmStructureLinkService;
 	}
 
 	/**
-	 * Sets the d d m structure entry link remote service.
+	 * Sets the d d m structure link remote service.
 	 *
-	 * @param ddmStructureEntryLinkService the d d m structure entry link remote service
+	 * @param ddmStructureLinkService the d d m structure link remote service
 	 */
-	public void setDDMStructureEntryLinkService(
-		DDMStructureEntryLinkService ddmStructureEntryLinkService) {
-		this.ddmStructureEntryLinkService = ddmStructureEntryLinkService;
+	public void setDDMStructureLinkService(
+		DDMStructureLinkService ddmStructureLinkService) {
+		this.ddmStructureLinkService = ddmStructureLinkService;
 	}
 
 	/**
-	 * Gets the d d m structure entry link persistence.
+	 * Gets the d d m structure link persistence.
 	 *
-	 * @return the d d m structure entry link persistence
+	 * @return the d d m structure link persistence
 	 */
-	public DDMStructureEntryLinkPersistence getDDMStructureEntryLinkPersistence() {
-		return ddmStructureEntryLinkPersistence;
+	public DDMStructureLinkPersistence getDDMStructureLinkPersistence() {
+		return ddmStructureLinkPersistence;
 	}
 
 	/**
-	 * Sets the d d m structure entry link persistence.
+	 * Sets the d d m structure link persistence.
 	 *
-	 * @param ddmStructureEntryLinkPersistence the d d m structure entry link persistence
+	 * @param ddmStructureLinkPersistence the d d m structure link persistence
 	 */
-	public void setDDMStructureEntryLinkPersistence(
-		DDMStructureEntryLinkPersistence ddmStructureEntryLinkPersistence) {
-		this.ddmStructureEntryLinkPersistence = ddmStructureEntryLinkPersistence;
+	public void setDDMStructureLinkPersistence(
+		DDMStructureLinkPersistence ddmStructureLinkPersistence) {
+		this.ddmStructureLinkPersistence = ddmStructureLinkPersistence;
 	}
 
 	/**
@@ -605,18 +604,18 @@ public abstract class DDMContentLocalServiceBaseImpl
 	protected DDMContentLocalService ddmContentLocalService;
 	@BeanReference(type = DDMContentPersistence.class)
 	protected DDMContentPersistence ddmContentPersistence;
-	@BeanReference(type = DDMStructureEntryLocalService.class)
-	protected DDMStructureEntryLocalService ddmStructureEntryLocalService;
-	@BeanReference(type = DDMStructureEntryService.class)
-	protected DDMStructureEntryService ddmStructureEntryService;
-	@BeanReference(type = DDMStructureEntryPersistence.class)
-	protected DDMStructureEntryPersistence ddmStructureEntryPersistence;
-	@BeanReference(type = DDMStructureEntryLinkLocalService.class)
-	protected DDMStructureEntryLinkLocalService ddmStructureEntryLinkLocalService;
-	@BeanReference(type = DDMStructureEntryLinkService.class)
-	protected DDMStructureEntryLinkService ddmStructureEntryLinkService;
-	@BeanReference(type = DDMStructureEntryLinkPersistence.class)
-	protected DDMStructureEntryLinkPersistence ddmStructureEntryLinkPersistence;
+	@BeanReference(type = DDMStructureLocalService.class)
+	protected DDMStructureLocalService ddmStructureLocalService;
+	@BeanReference(type = DDMStructureService.class)
+	protected DDMStructureService ddmStructureService;
+	@BeanReference(type = DDMStructurePersistence.class)
+	protected DDMStructurePersistence ddmStructurePersistence;
+	@BeanReference(type = DDMStructureLinkLocalService.class)
+	protected DDMStructureLinkLocalService ddmStructureLinkLocalService;
+	@BeanReference(type = DDMStructureLinkService.class)
+	protected DDMStructureLinkService ddmStructureLinkService;
+	@BeanReference(type = DDMStructureLinkPersistence.class)
+	protected DDMStructureLinkPersistence ddmStructureLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

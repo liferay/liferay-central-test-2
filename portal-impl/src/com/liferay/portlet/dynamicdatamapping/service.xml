@@ -9,11 +9,11 @@
 
 		<column name="contentId" type="long" primary="true" />
 	</entity>
-	<entity name="DDMStructureEntry" uuid="true" local-service="true" remote-service="true">
+	<entity name="DDMStructure" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="structureEntryId" type="long" primary="true" />
+		<column name="structureId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -39,16 +39,16 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_S" return-type="DDMStructureEntry" unique="true">
+		<finder name="G_S" return-type="DDMStructure" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="structureKey" />
 		</finder>
 	</entity>
-	<entity name="DDMStructureEntryLink" local-service="true" remote-service="true">
+	<entity name="DDMStructureLink" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="structureEntryLinkId" type="long" primary="true" />
+		<column name="structureLinkId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
@@ -61,17 +61,17 @@
 		<finder name="StructureKey" return-type="Collection">
 			<finder-column name="structureKey" />
 		</finder>
-		<finder name="S_C_C" return-type="DDMStructureEntryLink" unique="true">
+		<finder name="S_C_C" return-type="DDMStructureLink" unique="true">
 			<finder-column name="structureKey" />
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
 	<exceptions>
-		<exception>StructureEntryDuplicateElement</exception>
-		<exception>StructureEntryDuplicateStructureKey</exception>
-		<exception>StructureEntryStructureKey</exception>
-		<exception>StructureEntryName</exception>
-		<exception>StructureEntryXsd</exception>
+		<exception>StructureDuplicateElement</exception>
+		<exception>StructureDuplicateStructureKey</exception>
+		<exception>StructureStructureKey</exception>
+		<exception>StructureName</exception>
+		<exception>StructureXsd</exception>
 	</exceptions>
 </service-builder>

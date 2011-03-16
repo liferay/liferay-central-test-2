@@ -129,13 +129,13 @@ create unique index IX_19DA007B on Country (name);
 
 create index IX_AE4B50C2 on DDMContent (uuid_);
 
-create index IX_8A62E038 on DDMStructureEntry (groupId);
-create unique index IX_EA905D18 on DDMStructureEntry (groupId, structureKey);
-create index IX_9EA320C2 on DDMStructureEntry (uuid_);
-create unique index IX_190E0E28 on DDMStructureEntry (uuid_, groupId);
+create index IX_C8419FBE on DDMStructure (groupId);
+create unique index IX_490E7A1E on DDMStructure (groupId, structureKey);
+create index IX_E61809C8 on DDMStructure (uuid_);
+create unique index IX_85C7EBE2 on DDMStructure (uuid_, groupId);
 
-create index IX_B020B62C on DDMStructureEntryLink (structureKey);
-create unique index IX_98A0BA5C on DDMStructureEntryLink (structureKey, className, classPK);
+create index IX_D5DA0D66 on DDMStructureLink (structureKey);
+create unique index IX_7DF03096 on DDMStructureLink (structureKey, className, classPK);
 
 create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_F4AF5636 on DLFileEntry (groupId);

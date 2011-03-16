@@ -16,11 +16,11 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureEntryException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateElementException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryDuplicateStructureKeyException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryNameException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryStructureKeyException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureEntryXsdException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureDuplicateElementException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureNameException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StructureXsdException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>

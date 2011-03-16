@@ -21,4 +21,4 @@
 	title="error"
 />
 
-<liferay-ui:error exception="<%= NoSuchStructureEntryException.class %>" message="the-structure-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchStructureException.class %>" message="the-structure-could-not-be-found" />

@@ -649,29 +649,29 @@
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLRepositoryService" />
 		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.DLRepositoryService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" />
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" />
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" />
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureEntryLinkService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" />
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureLinkService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureEntryLinkService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" />
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureLinkService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureEntryLinkService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" />
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureLinkService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" />
 	</bean>
 	<bean name="/com_liferay_portlet_expando_service_spring_ExpandoColumnService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoColumnService" />

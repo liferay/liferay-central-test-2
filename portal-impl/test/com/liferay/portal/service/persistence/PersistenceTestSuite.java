@@ -37,8 +37,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPer
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceTest;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryLinkPersistenceTest;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistenceTest;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceTest;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceTest;
@@ -193,8 +193,8 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(DLFolderPersistenceTest.class);
 
 		testSuite.addTestSuite(DDMContentPersistenceTest.class);
-		testSuite.addTestSuite(DDMStructureEntryLinkPersistenceTest.class);
-		testSuite.addTestSuite(DDMStructureEntryPersistenceTest.class);
+		testSuite.addTestSuite(DDMStructureLinkPersistenceTest.class);
+		testSuite.addTestSuite(DDMStructurePersistenceTest.class);
 
 		testSuite.addTestSuite(ExpandoColumnPersistenceTest.class);
 		testSuite.addTestSuite(ExpandoRowPersistenceTest.class);

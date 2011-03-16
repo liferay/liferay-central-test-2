@@ -14,9 +14,9 @@ alter table BookmarksEntry drop column comments;
 
 alter table CalEvent add location STRING null;
 
-create table DDMStructureEntry (
+create table DDMStructure (
 	uuid_ VARCHAR(75) null,
-	structureEntryId LONG not null primary key,
+	structureId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -29,8 +29,8 @@ create table DDMStructureEntry (
 	xsd TEXT null
 );
 
-create table DDMStructureEntryLink (
-	structureEntryLinkId LONG not null primary key,
+create table DDMStructureLink (
+	structureLinkId LONG not null primary key,
 	structureKey VARCHAR(75) null,
 	className VARCHAR(75) null,
 	classPK LONG

@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -32,30 +32,29 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getStructureEntry(HttpServletRequest request)
+	public static void getStructure(HttpServletRequest request)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String structureKey = ParamUtil.getString(request, "structureKey");
 
-		DDMStructureEntry structureEntry = null;
+		DDMStructure structure = null;
 
 		if (Validator.isNotNull(structureKey)) {
-			structureEntry = DDMStructureEntryServiceUtil.getStructureEntry(
+			structure = DDMStructureServiceUtil.getStructure(
 				groupId, structureKey);
 		}
 
-		request.setAttribute(
-			WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_ENTRY, structureEntry);
+		request.setAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE, structure);
 	}
 
-	public static void getStructureEntry(PortletRequest portletRequest)
+	public static void getStructure(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		getStructureEntry(request);
+		getStructure(request);
 	}
 
 }

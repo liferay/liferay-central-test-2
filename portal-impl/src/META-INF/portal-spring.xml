@@ -244,12 +244,12 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLRepositoryService" class="com.liferay.portlet.documentlibrary.service.impl.DLRepositoryServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMContentLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryLinkLocalServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryLinkServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryLinkPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryLinkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLocalServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLinkLocalServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLinkServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService" class="com.liferay.portlet.expando.service.impl.ExpandoColumnLocalServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnService" class="com.liferay.portlet.expando.service.impl.ExpandoColumnServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceImpl" parent="basePersistence" />

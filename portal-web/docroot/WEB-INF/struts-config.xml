@@ -642,8 +642,8 @@
 
 		<!-- Dynamic Data Mapping -->
 
-		<action path="/dynamic_data_mapping/edit_structure_entry" type="com.liferay.portlet.dynamicdatamapping.action.EditStructureEntryAction">
-			<forward name="portlet.dynamic_data_mapping.edit_structure_entry" path="portlet.dynamic_data_mapping.edit_structure_entry" />
+		<action path="/dynamic_data_mapping/edit_structure" type="com.liferay.portlet.dynamicdatamapping.action.EditStructureAction">
+			<forward name="portlet.dynamic_data_mapping.edit_structure" path="portlet.dynamic_data_mapping.edit_structure" />
 			<forward name="portlet.dynamic_data_mapping.error" path="portlet.dynamic_data_mapping.error" />
 		</action>
 
