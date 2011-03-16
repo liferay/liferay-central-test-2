@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -49,10 +48,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		LayoutSetPrototype layoutSetPrototype =
 			layoutSetPrototypePersistence.create(layoutSetPrototypeId);
 
-		if (Validator.isNotNull(serviceContext.getUuid())) {
-			layoutSetPrototype.setUuid(serviceContext.getUuid());
-		}
-
+		layoutSetPrototype.setUuid(serviceContext.getUuid());
 		layoutSetPrototype.setCompanyId(companyId);
 		layoutSetPrototype.setNameMap(nameMap);
 		layoutSetPrototype.setDescription(description);
