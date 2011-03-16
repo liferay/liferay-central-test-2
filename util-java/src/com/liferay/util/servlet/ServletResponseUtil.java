@@ -81,7 +81,7 @@ public class ServletResponseUtil {
 
 	public static void sendFile(
 			HttpServletRequest request, HttpServletResponse response,
-			String fileName, InputStream is, int contentLength,
+			String fileName, InputStream is, long contentLength,
 			String contentType)
 		throws IOException {
 
@@ -306,7 +306,7 @@ public class ServletResponseUtil {
 	}
 
 	public static void write(
-			HttpServletResponse response, InputStream is, int contentLength)
+			HttpServletResponse response, InputStream is, long contentLength)
 		throws IOException {
 
 		if (response.isCommitted()) {
@@ -314,7 +314,7 @@ public class ServletResponseUtil {
 		}
 
 		if (contentLength > 0) {
-			response.setContentLength(contentLength);
+			response.setHeader("Content-Length", Long.toString(contentLength));
 		}
 
 		StreamUtil.transfer(is, response.getOutputStream());

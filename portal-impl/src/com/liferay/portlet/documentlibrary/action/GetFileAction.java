@@ -229,16 +229,16 @@ public class GetFileAction extends PortletAction {
 			}
 		}
 
-		int contentLength = 0;
+		long contentLength = 0;
 
 		if (!converted) {
 			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {
-				contentLength = (int)fileEntry.getSize();
+				contentLength = fileEntry.getSize();
 			}
 			else {
 				FileVersion fileVersion = fileEntry.getFileVersion(version);
 
-				contentLength = (int)fileVersion.getSize();
+				contentLength = fileVersion.getSize();
 			}
 		}
 		else {

@@ -107,7 +107,7 @@ public class GetPageAttachmentAction extends PortletAction {
 
 		InputStream is = DLLocalServiceUtil.getFileAsStream(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
-		int contentLength = (int)DLLocalServiceUtil.getFileSize(
+		long contentLength = DLLocalServiceUtil.getFileSize(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
 		String contentType = MimeTypesUtil.getContentType(fileName);
 

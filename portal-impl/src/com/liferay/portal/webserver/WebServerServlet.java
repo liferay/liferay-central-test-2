@@ -402,14 +402,14 @@ public class WebServerServlet extends HttpServlet {
 			converted = true;
 		}
 
-		int contentLength = 0;
+		long contentLength = 0;
 
 		if (!converted) {
 			if (DLUtil.compareVersions(version, fileEntry.getVersion()) >= 0) {
-				contentLength = (int)fileEntry.getSize();
+				contentLength = fileEntry.getSize();
 			}
 			else {
-				contentLength = (int)fileVersion.getSize();
+				contentLength = fileVersion.getSize();
 			}
 		}
 		else {
