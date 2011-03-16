@@ -35,16 +35,6 @@ import javax.servlet.jsp.tagext.Tag;
  */
 public class PersonalizationSettingsProcessor implements ColumnProcessor {
 
-	private static Class<?> _INPUT_TAG;
-
-	static {
-		try {
-			_INPUT_TAG = Class.forName("com.liferay.taglib.aui.InputTag");
-		}
-		catch (ClassNotFoundException e) {
-		}
-	}
-
 	public PersonalizationSettingsProcessor(
 		HttpServletRequest request, PageContext pageContext, Writer writer) {
 
@@ -67,7 +57,8 @@ public class PersonalizationSettingsProcessor implements ColumnProcessor {
 	public String processColumn(String columnId, String classNames)
 		throws Exception {
 
-		String personalizableKey = PersonalizedPages.encodeColumnId(columnId);
+		String personalizableKey = PersonalizedPages.namespaceColumnId(
+			columnId);
 
 		boolean templatePersonalizable = true;
 
@@ -85,22 +76,22 @@ public class PersonalizationSettingsProcessor implements ColumnProcessor {
 					personalizableKey, String.valueOf(false)));
 		}
 
-		_writer.append("<div class='");
+		_writer.append("<div class=\"");
 		_writer.append(classNames);
-		_writer.append("'>");
+		_writer.append("\">");
 
 		_writer.append("<h1>");
 		_writer.append(columnId);
 		_writer.append("</h1>");
 
-		Object inputTag = _INPUT_TAG.newInstance();
+		Object inputTag = _inputTagClass.newInstance();
 
-		BeanPropertiesUtil.setProperty(
-			inputTag, "name",
-			"TypeSettingsProperties--".concat(personalizableKey).concat("--"));
 		BeanPropertiesUtil.setProperty(
 			inputTag, "disabled", !templatePersonalizable);
 		BeanPropertiesUtil.setProperty(inputTag, "label", "personalizable");
+		BeanPropertiesUtil.setProperty(
+			inputTag, "name",
+			"TypeSettingsProperties--".concat(personalizableKey).concat("--"));
 		BeanPropertiesUtil.setProperty(inputTag, "pageContext", _pageContext);
 		BeanPropertiesUtil.setProperty(inputTag, "type", "checkbox");
 		BeanPropertiesUtil.setProperty(inputTag, "value", personalizable);
@@ -130,7 +121,7 @@ public class PersonalizationSettingsProcessor implements ColumnProcessor {
 	}
 
 	public String processPortlet(String portletId) throws Exception {
-		_writer.append("<div class='portlet'>");
+		_writer.append("<div class=\"portlet\">");
 		_writer.append(portletId);
 		_writer.append("</div>");
 
@@ -141,11 +132,20 @@ public class PersonalizationSettingsProcessor implements ColumnProcessor {
 		"com.liferay.taglib.aui.InputTag", "doEndTag");
 	private static MethodKey _doStartTagMethodKey = new MethodKey(
 		"com.liferay.taglib.aui.InputTag", "doStartTag");
+	private static Class<?> _inputTagClass;
 
 	private UnicodeProperties _layoutTypeSettings;
 	private PageContext _pageContext;
 	private HttpServletRequest _request;
 	private Layout _templateLayout;
 	private Writer _writer;
+
+	static {
+		try {
+			_inputTagClass = Class.forName("com.liferay.taglib.aui.InputTag");
+		}
+		catch (ClassNotFoundException e) {
+		}
+	}
 
 }

@@ -884,6 +884,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PropsValues.INDEX_DATE_FORMAT_PATTERN);
 
 		typeSettingsProperties.fastLoad(typeSettings);
+
 		typeSettingsProperties.setProperty(
 			"modifiedDate", dateFormat.format(now));
 

@@ -182,8 +182,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 				</c:choose>
 
 				<aui:field-wrapper name="site-template-relationship">
-					<aui:input checked="<%= true %>" inlineLabel="right" name="siteTemplateRelationship" type="radio" value="cloned" label="cloned" />
-					<aui:input inlineLabel="right" name="siteTemplateRelationship" type="radio" value="inherited" label="inherited"  />
+					<aui:input checked="<%= true %>" inlineLabel="right" label="cloned" name="siteTemplateRelationship" type="radio" value="cloned" />
+
+					<aui:input inlineLabel="right" label="inherited" name="siteTemplateRelationship" type="radio" value="inherited" />
 				</aui:field-wrapper>
 			</aui:fieldset>
 		</c:if>

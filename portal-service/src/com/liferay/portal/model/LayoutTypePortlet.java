@@ -75,8 +75,6 @@ public interface LayoutTypePortlet extends LayoutType {
 			List<Portlet> endPortlets)
 		throws SystemException;
 
-	public void resetUserPreferences();
-
 	public List<Portlet> getAllPortlets()
 		throws PortalException, SystemException;
 
@@ -208,6 +206,8 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void resetModes();
 
 	public void resetStates();
+
+	public void resetUserPreferences();
 
 	public void setLayoutTemplateId(long userId, String newLayoutTemplateId);
 

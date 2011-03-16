@@ -1243,16 +1243,15 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		boolean personalizedView = SessionParamUtil.getBoolean(
-			request, "personalized_view", true);
-		boolean isPersonalizable = false;
-
 		LayoutTypePortlet layoutTypePortlet = null;
 
 		layouts = mergeAdditionalLayouts(
 			request, user, permissionChecker, layout, layouts);
 
 		LayoutSet layoutSet = null;
+
+		boolean personalizedView = SessionParamUtil.getBoolean(
+			request, "personalized_view", true);
 
 		if (layout != null) {
 			layoutSet = layout.getLayoutSet();
@@ -1302,18 +1301,18 @@ public class ServicePreAction extends Action {
 
 			layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
-			isPersonalizable = layoutTypePortlet.isPersonalizable();
+			boolean personalizable = layoutTypePortlet.isPersonalizable();
 
-			if (!isPersonalizable) {
+			if (!personalizable) {
 				personalizedView = false;
 			}
 
 			layoutTypePortlet.setPersonalizedView(personalizedView);
 			layoutTypePortlet.setUpdatePermission(
-				LayoutPermissionUtil.contains(permissionChecker, layout,
-					ActionKeys.UPDATE));
+				LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.UPDATE));
 
-			if (signedIn && isPersonalizable && personalizedView &&
+			if (signedIn && personalizable && personalizedView &&
 				LayoutPermissionUtil.contains(
 					permissionChecker, layout, ActionKeys.PERSONALIZE)) {
 
@@ -1652,7 +1651,6 @@ public class ServicePreAction extends Action {
 						permissionChecker, layout, ActionKeys.PERSONALIZE);
 
 				if (hasPersonalizePermission && personalizedView) {
-
 					themeDisplay.setShowAddContentIconPermission(true);
 
 					if (!LiferayWindowState.isMaximized(request)) {

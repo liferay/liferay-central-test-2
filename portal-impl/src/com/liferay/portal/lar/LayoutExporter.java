@@ -189,7 +189,7 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.THEME);
 		boolean exportThemeSettings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
-		boolean isLayoutSetPrototype = MapUtil.getBoolean(
+		boolean layoutSetPrototypeInherited = MapUtil.getBoolean(
 			parameterMap,
 			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
 		boolean publishToRemote = MapUtil.getBoolean(
@@ -242,8 +242,6 @@ public class LayoutExporter {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
-		Group group = layoutSet.getGroup();
-
 		long companyId = layoutSet.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
@@ -280,7 +278,9 @@ public class LayoutExporter {
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));
 
-		if (isLayoutSetPrototype && group.isLayoutSetPrototype()) {
+		Group group = layoutSet.getGroup();
+
+		if (layoutSetPrototypeInherited && group.isLayoutSetPrototype()) {
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
 					group.getClassPK());
@@ -945,18 +945,6 @@ public class LayoutExporter {
 		return new boolean[] {exportCurPortletData, exportCurPortletSetup};
 	}
 
-	protected String getLayoutSetPrototype(
-		PortletDataContext context, String layoutSetPrototypeUuid) {
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(context.getRootPath());
-		sb.append("/layoutSetPrototype/");
-		sb.append(layoutSetPrototypeUuid);
-
-		return sb.toString();
-	}
-
 	protected String getLayoutIconPath(
 		PortletDataContext context, Layout layout, Image image) {
 
@@ -967,6 +955,18 @@ public class LayoutExporter {
 		sb.append(image.getImageId());
 		sb.append(StringPool.PERIOD);
 		sb.append(image.getType());
+
+		return sb.toString();
+	}
+
+	protected String getLayoutSetPrototype(
+		PortletDataContext context, String layoutSetPrototypeUuid) {
+
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(context.getRootPath());
+		sb.append("/layout-set-prototype/");
+		sb.append(layoutSetPrototypeUuid);
 
 		return sb.toString();
 	}

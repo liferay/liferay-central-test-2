@@ -23,11 +23,11 @@ package com.liferay.portal.model;
  */
 public class PersonalizedPages {
 
-	public static String encodeColumnId(String columnId) {
+	public static String namespaceColumnId(String columnId) {
 		return columnId.concat(_PERSONALIZABLE_SUFFIX);
 	}
 
-	public static String namespace(long plid) {
+	public static String namespacePlid(long plid) {
 		return PersonalizedPages.class.getName().concat(String.valueOf(plid));
 	}
 

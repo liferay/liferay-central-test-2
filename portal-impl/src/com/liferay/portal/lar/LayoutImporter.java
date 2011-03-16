@@ -139,8 +139,9 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean importTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME);
-		boolean isLayoutSetPrototype = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
+		boolean layoutSetPrototypeInherited = MapUtil.getBoolean(
+			parameterMap,
+			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
 		boolean publishToRemote = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
 		String layoutsImportMode = MapUtil.getString(
@@ -252,12 +253,12 @@ public class LayoutImporter {
 
 		context.setSourceGroupId(sourceGroupId);
 
-		// Layout Set Prototype
+		// Layout set prototype
 
 		String layoutSetPrototypeUuid = headerElement.attributeValue(
 			"layout-set-prototype-uuid");
 
-		if (isLayoutSetPrototype &&
+		if (layoutSetPrototypeInherited &&
 			Validator.isNotNull(layoutSetPrototypeUuid)) {
 
 			if (publishToRemote) {
@@ -584,10 +585,10 @@ public class LayoutImporter {
 	protected String getLayoutSetPrototype(
 		PortletDataContext context, String layoutSetPrototypeUuid) {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(context.getSourceRootPath());
-		sb.append("/layoutSetPrototype/");
+		sb.append("/layout-set-prototype/");
 		sb.append(layoutSetPrototypeUuid);
 
 		return sb.toString();

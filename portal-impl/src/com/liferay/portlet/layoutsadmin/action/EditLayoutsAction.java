@@ -121,6 +121,9 @@ public class EditLayoutsAction extends PortletAction {
 			return;
 		}
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
@@ -153,10 +156,6 @@ public class EditLayoutsAction extends PortletAction {
 				StagingUtil.publishToRemote(actionRequest);
 			}
 			else if (cmd.equals("reset_personalized_view")) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
-
 				LayoutTypePortlet layoutTypePortlet =
 					themeDisplay.getLayoutTypePortlet();
 
@@ -195,10 +194,6 @@ public class EditLayoutsAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if ((layout != null) && Validator.isNotNull(oldFriendlyURL)) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
-
 				if (layout.getPlid() == themeDisplay.getPlid()) {
 					Group group = layout.getGroup();
 
@@ -312,19 +307,32 @@ public class EditLayoutsAction extends PortletAction {
 
 		// LEP-850
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
 		Group group = getGroup(portletRequest);
 
 		if (group == null) {
 			throw new PrincipalException();
 		}
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
 		Layout layout = themeDisplay.getLayout();
+
+		String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
+
+		if (cmd.equals("reset_personalized_view")) {
+			if (!LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.PERSONALIZE)) {
+
+				throw new PrincipalException();
+			}
+			else {
+				return;
+			}
+		}
 
 		boolean hasUpdateLayoutPermission = false;
 
@@ -333,19 +341,6 @@ public class EditLayoutsAction extends PortletAction {
 				permissionChecker, layout.getGroupId(),
 				layout.isPrivateLayout(), layout.getLayoutId(),
 				ActionKeys.UPDATE);
-		}
-
-		String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
-
-		if (cmd.equals("reset_personalized_view")) {
-			if (!LayoutPermissionUtil.contains(
-				permissionChecker, layout, ActionKeys.PERSONALIZE)) {
-
-				throw new PrincipalException();
-			}
-			else {
-				return;
-			}
 		}
 
 		if (group.isCommunity()) {
