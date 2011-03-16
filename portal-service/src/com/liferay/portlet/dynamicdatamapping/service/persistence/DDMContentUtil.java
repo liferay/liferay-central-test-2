@@ -318,6 +318,337 @@ public class DDMContentUtil {
 	}
 
 	/**
+	* Finds the d d m content where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the matching d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	/**
+	* Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	/**
+	* Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
+	/**
+	* Finds all the d d m contents where groupId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @return the matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> findByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	/**
+	* Finds a range of all the d d m contents where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param start the lower bound of the range of d d m contents to return
+	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @return the range of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> findByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByGroupId(groupId, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the d d m contents where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param start the lower bound of the range of d d m contents to return
+	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> findByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* Finds the first d d m content in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent findByGroupId_First(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+	}
+
+	/**
+	* Finds the last d d m content in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent findByGroupId_Last(
+		long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+	}
+
+	/**
+	* Finds the d d m contents before and after the current d d m content in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param contentId the primary key of the current d d m content
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent[] findByGroupId_PrevAndNext(
+		long contentId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence()
+				   .findByGroupId_PrevAndNext(contentId, groupId,
+			orderByComparator);
+	}
+
+	/**
+	* Finds all the d d m contents where companyId = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @return the matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> findByCompanyId(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	/**
+	* Finds a range of all the d d m contents where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param start the lower bound of the range of d d m contents to return
+	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @return the range of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> findByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByCompanyId(companyId, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the d d m contents where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param start the lower bound of the range of d d m contents to return
+	* @param end the upper bound of the range of d d m contents to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> findByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByCompanyId(companyId, start, end, orderByComparator);
+	}
+
+	/**
+	* Finds the first d d m content in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent findByCompanyId_First(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence()
+				   .findByCompanyId_First(companyId, orderByComparator);
+	}
+
+	/**
+	* Finds the last d d m content in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent findByCompanyId_Last(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence()
+				   .findByCompanyId_Last(companyId, orderByComparator);
+	}
+
+	/**
+	* Finds the d d m contents before and after the current d d m content in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param contentId the primary key of the current d d m content
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent[] findByCompanyId_PrevAndNext(
+		long contentId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(contentId, companyId,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the d d m content where groupId = &#63; and contentKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	*
+	* @param groupId the group ID to search with
+	* @param contentKey the content key to search with
+	* @return the matching d d m content
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent findByG_C(
+		long groupId, java.lang.String contentKey)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		return getPersistence().findByG_C(groupId, contentKey);
+	}
+
+	/**
+	* Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param contentKey the content key to search with
+	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchByG_C(
+		long groupId, java.lang.String contentKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_C(groupId, contentKey);
+	}
+
+	/**
+	* Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param contentKey the content key to search with
+	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchByG_C(
+		long groupId, java.lang.String contentKey, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_C(groupId, contentKey, retrieveFromCache);
+	}
+
+	/**
 	* Finds all the d d m contents.
 	*
 	* @return the d d m contents
@@ -378,6 +709,54 @@ public class DDMContentUtil {
 	}
 
 	/**
+	* Removes the d d m content where uuid = &#63; and groupId = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
+	/**
+	* Removes all the d d m contents where groupId = &#63; from the database.
+	*
+	* @param groupId the group ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
+	/**
+	* Removes all the d d m contents where companyId = &#63; from the database.
+	*
+	* @param companyId the company ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
+	/**
+	* Removes the d d m content where groupId = &#63; and contentKey = &#63; from the database.
+	*
+	* @param groupId the group ID to search with
+	* @param contentKey the content key to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_C(long groupId, java.lang.String contentKey)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchContentException {
+		getPersistence().removeByG_C(groupId, contentKey);
+	}
+
+	/**
 	* Removes all the d d m contents from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -397,6 +776,56 @@ public class DDMContentUtil {
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
+	}
+
+	/**
+	* Counts all the d d m contents where uuid = &#63; and groupId = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the number of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
+	}
+
+	/**
+	* Counts all the d d m contents where groupId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @return the number of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
+	* Counts all the d d m contents where companyId = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @return the number of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByCompanyId(companyId);
+	}
+
+	/**
+	* Counts all the d d m contents where groupId = &#63; and contentKey = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param contentKey the content key to search with
+	* @return the number of matching d d m contents
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_C(long groupId, java.lang.String contentKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_C(groupId, contentKey);
 	}
 
 	/**

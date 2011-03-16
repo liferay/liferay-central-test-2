@@ -194,6 +194,20 @@ public abstract class DDMContentLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the d d m content with the UUID and group id.
+	 *
+	 * @param uuid the UUID of d d m content to get
+	 * @param groupId the group id of the d d m content to get
+	 * @return the d d m content
+	 * @throws PortalException if a d d m content with the UUID and group id could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent getDDMContentByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return ddmContentPersistence.findByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Gets a range of all the d d m contents.
 	 *
 	 * <p>

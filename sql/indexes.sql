@@ -127,7 +127,11 @@ create unique index IX_717B9BA2 on Country (a3);
 create index IX_25D734CD on Country (active_);
 create unique index IX_19DA007B on Country (name);
 
+create index IX_E3BAF436 on DDMContent (companyId);
+create index IX_50BF1038 on DDMContent (groupId);
+create unique index IX_358C7052 on DDMContent (groupId, contentKey);
 create index IX_AE4B50C2 on DDMContent (uuid_);
+create unique index IX_EB9BDE28 on DDMContent (uuid_, groupId);
 
 create index IX_C8419FBE on DDMStructure (groupId);
 create unique index IX_490E7A1E on DDMStructure (groupId, structureKey);

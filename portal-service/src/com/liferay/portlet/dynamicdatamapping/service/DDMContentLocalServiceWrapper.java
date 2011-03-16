@@ -165,6 +165,23 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService {
 	}
 
 	/**
+	* Gets the d d m content with the UUID and group id.
+	*
+	* @param uuid the UUID of d d m content to get
+	* @param groupId the group id of the d d m content to get
+	* @return the d d m content
+	* @throws PortalException if a d d m content with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getDDMContentByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getDDMContentByUuidAndGroupId(uuid,
+			groupId);
+	}
+
+	/**
 	* Gets a range of all the d d m contents.
 	*
 	* <p>
@@ -237,6 +254,82 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_ddmContentLocalService.setBeanIdentifier(beanIdentifier);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent addContent(
+		long userId, long groupId, java.lang.String contentKey,
+		boolean autoContentKey, java.lang.String name,
+		java.lang.String description, java.lang.String xml,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.addContent(userId, groupId, contentKey,
+			autoContentKey, name, description, xml, serviceContext);
+	}
+
+	public void deleteContent(
+		com.liferay.portlet.dynamicdatamapping.model.DDMContent content)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmContentLocalService.deleteContent(content);
+	}
+
+	public void deleteContent(long groupId, java.lang.String contentKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmContentLocalService.deleteContent(groupId, contentKey);
+	}
+
+	public void deleteContents(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmContentLocalService.deleteContents(groupId);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getContent(
+		long contentId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getContent(contentId);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getContent(
+		long groupId, java.lang.String contentKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getContent(groupId, contentKey);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getContents();
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getContents(groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getContents(groupId, start, end);
+	}
+
+	public int getContentsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.getContentsCount(groupId);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent updateContent(
+		long groupId, java.lang.String contentKey, java.lang.String name,
+		java.lang.String description, java.lang.String xml,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.updateContent(groupId, contentKey, name,
+			description, xml, serviceContext);
 	}
 
 	public DDMContentLocalService getWrappedDDMContentLocalService() {

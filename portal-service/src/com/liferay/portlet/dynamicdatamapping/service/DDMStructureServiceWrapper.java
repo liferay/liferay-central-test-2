@@ -29,14 +29,14 @@ public class DDMStructureServiceWrapper implements DDMStructureService {
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
-		long groupId, java.lang.String structureKey, boolean autoStrucureId,
+		long groupId, java.lang.String structureKey, boolean autoStructureKey,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureService.addStructure(groupId, structureKey,
-			autoStrucureId, name, description, xsd, serviceContext);
+			autoStructureKey, name, description, xsd, serviceContext);
 	}
 
 	public void deleteStructure(long groupId, java.lang.String structureKey)

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.dynamicdatamapping.NoSuchContentException;
@@ -65,6 +66,16 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		DDMContent newDDMContent = _persistence.create(pk);
 
 		newDDMContent.setUuid(randomString());
+		newDDMContent.setGroupId(nextLong());
+		newDDMContent.setCompanyId(nextLong());
+		newDDMContent.setUserId(nextLong());
+		newDDMContent.setUserName(randomString());
+		newDDMContent.setCreateDate(nextDate());
+		newDDMContent.setModifiedDate(nextDate());
+		newDDMContent.setContentKey(randomString());
+		newDDMContent.setName(randomString());
+		newDDMContent.setDescription(randomString());
+		newDDMContent.setXml(randomString());
 
 		_persistence.update(newDDMContent, false);
 
@@ -73,6 +84,23 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDDMContent.getUuid(), newDDMContent.getUuid());
 		assertEquals(existingDDMContent.getContentId(),
 			newDDMContent.getContentId());
+		assertEquals(existingDDMContent.getGroupId(), newDDMContent.getGroupId());
+		assertEquals(existingDDMContent.getCompanyId(),
+			newDDMContent.getCompanyId());
+		assertEquals(existingDDMContent.getUserId(), newDDMContent.getUserId());
+		assertEquals(existingDDMContent.getUserName(),
+			newDDMContent.getUserName());
+		assertEquals(Time.getShortTimestamp(existingDDMContent.getCreateDate()),
+			Time.getShortTimestamp(newDDMContent.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(
+				existingDDMContent.getModifiedDate()),
+			Time.getShortTimestamp(newDDMContent.getModifiedDate()));
+		assertEquals(existingDDMContent.getContentKey(),
+			newDDMContent.getContentKey());
+		assertEquals(existingDDMContent.getName(), newDDMContent.getName());
+		assertEquals(existingDDMContent.getDescription(),
+			newDDMContent.getDescription());
+		assertEquals(existingDDMContent.getXml(), newDDMContent.getXml());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -147,6 +175,16 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		DDMContent ddmContent = _persistence.create(pk);
 
 		ddmContent.setUuid(randomString());
+		ddmContent.setGroupId(nextLong());
+		ddmContent.setCompanyId(nextLong());
+		ddmContent.setUserId(nextLong());
+		ddmContent.setUserName(randomString());
+		ddmContent.setCreateDate(nextDate());
+		ddmContent.setModifiedDate(nextDate());
+		ddmContent.setContentKey(randomString());
+		ddmContent.setName(randomString());
+		ddmContent.setDescription(randomString());
+		ddmContent.setXml(randomString());
 
 		_persistence.update(ddmContent, false);
 

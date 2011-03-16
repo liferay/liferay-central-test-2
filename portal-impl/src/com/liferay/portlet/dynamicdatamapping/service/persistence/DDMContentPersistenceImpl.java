@@ -86,6 +86,46 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByGroupId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByGroupId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_C = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByG_C",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_C",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -101,6 +141,18 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	public void cacheResult(DDMContent ddmContent) {
 		EntityCacheUtil.putResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey(), ddmContent);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
+			}, ddmContent);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
+			new Object[] {
+				Long.valueOf(ddmContent.getGroupId()),
+				
+			ddmContent.getContentKey()
+			}, ddmContent);
 	}
 
 	/**
@@ -145,6 +197,18 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	public void clearCache(DDMContent ddmContent) {
 		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
+			new Object[] {
+				Long.valueOf(ddmContent.getGroupId()),
+				
+			ddmContent.getContentKey()
+			});
 	}
 
 	/**
@@ -250,6 +314,21 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		DDMContentModelImpl ddmContentModelImpl = (DDMContentModelImpl)ddmContent;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				ddmContentModelImpl.getUuid(),
+				Long.valueOf(ddmContentModelImpl.getGroupId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
+			new Object[] {
+				Long.valueOf(ddmContentModelImpl.getGroupId()),
+				
+			ddmContentModelImpl.getContentKey()
+			});
+
 		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey());
 
@@ -260,6 +339,10 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent,
 		boolean merge) throws SystemException {
 		ddmContent = toUnwrappedModel(ddmContent);
+
+		boolean isNew = ddmContent.isNew();
+
+		DDMContentModelImpl ddmContentModelImpl = (DDMContentModelImpl)ddmContent;
 
 		if (Validator.isNull(ddmContent.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
@@ -288,6 +371,51 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		EntityCacheUtil.putResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey(), ddmContent);
 
+		if (!isNew &&
+				(!Validator.equals(ddmContent.getUuid(),
+					ddmContentModelImpl.getOriginalUuid()) ||
+				(ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					ddmContentModelImpl.getOriginalUuid(),
+					Long.valueOf(ddmContentModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!Validator.equals(ddmContent.getUuid(),
+					ddmContentModelImpl.getOriginalUuid()) ||
+				(ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
+				}, ddmContent);
+		}
+
+		if (!isNew &&
+				((ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(ddmContent.getContentKey(),
+					ddmContentModelImpl.getOriginalContentKey()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
+				new Object[] {
+					Long.valueOf(ddmContentModelImpl.getOriginalGroupId()),
+					
+				ddmContentModelImpl.getOriginalContentKey()
+				});
+		}
+
+		if (isNew ||
+				((ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()) ||
+				!Validator.equals(ddmContent.getContentKey(),
+					ddmContentModelImpl.getOriginalContentKey()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
+				new Object[] {
+					Long.valueOf(ddmContent.getGroupId()),
+					
+				ddmContent.getContentKey()
+				}, ddmContent);
+		}
+
 		return ddmContent;
 	}
 
@@ -303,6 +431,16 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 		ddmContentImpl.setUuid(ddmContent.getUuid());
 		ddmContentImpl.setContentId(ddmContent.getContentId());
+		ddmContentImpl.setGroupId(ddmContent.getGroupId());
+		ddmContentImpl.setCompanyId(ddmContent.getCompanyId());
+		ddmContentImpl.setUserId(ddmContent.getUserId());
+		ddmContentImpl.setUserName(ddmContent.getUserName());
+		ddmContentImpl.setCreateDate(ddmContent.getCreateDate());
+		ddmContentImpl.setModifiedDate(ddmContent.getModifiedDate());
+		ddmContentImpl.setContentKey(ddmContent.getContentKey());
+		ddmContentImpl.setName(ddmContent.getName());
+		ddmContentImpl.setDescription(ddmContent.getDescription());
+		ddmContentImpl.setXml(ddmContent.getXml());
 
 		return ddmContentImpl;
 	}
@@ -747,6 +885,972 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
+	 * Finds the d d m content where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the matching d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent findByUUID_G(String uuid, long groupId)
+		throws NoSuchContentException, SystemException {
+		DDMContent ddmContent = fetchByUUID_G(uuid, groupId);
+
+		if (ddmContent == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(", groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchContentException(msg.toString());
+		}
+
+		return ddmContent;
+	}
+
+	/**
+	 * Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	/**
+	 * Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, groupId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				List<DDMContent> list = q.list();
+
+				result = list;
+
+				DDMContent ddmContent = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
+				}
+				else {
+					ddmContent = list.get(0);
+
+					cacheResult(ddmContent);
+
+					if ((ddmContent.getUuid() == null) ||
+							!ddmContent.getUuid().equals(uuid) ||
+							(ddmContent.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, ddmContent);
+					}
+				}
+
+				return ddmContent;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DDMContent)result;
+			}
+		}
+	}
+
+	/**
+	 * Finds all the d d m contents where groupId = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @return the matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMContent> findByGroupId(long groupId)
+		throws SystemException {
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the d d m contents where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param start the lower bound of the range of d d m contents to return
+	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @return the range of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMContent> findByGroupId(long groupId, int start, int end)
+		throws SystemException {
+		return findByGroupId(groupId, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the d d m contents where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param start the lower bound of the range of d d m contents to return
+	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMContent> findByGroupId(long groupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<DDMContent> list = (List<DDMContent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				list = (List<DDMContent>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_GROUPID,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first d d m content in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent findByGroupId_First(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchContentException, SystemException {
+		List<DDMContent> list = findByGroupId(groupId, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchContentException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last d d m content in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent findByGroupId_Last(long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchContentException, SystemException {
+		int count = countByGroupId(groupId);
+
+		List<DDMContent> list = findByGroupId(groupId, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchContentException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the d d m contents before and after the current d d m content in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param contentId the primary key of the current d d m content
+	 * @param groupId the group ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent[] findByGroupId_PrevAndNext(long contentId, long groupId,
+		OrderByComparator orderByComparator)
+		throws NoSuchContentException, SystemException {
+		DDMContent ddmContent = findByPrimaryKey(contentId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DDMContent[] array = new DDMContentImpl[3];
+
+			array[0] = getByGroupId_PrevAndNext(session, ddmContent, groupId,
+					orderByComparator, true);
+
+			array[1] = ddmContent;
+
+			array[2] = getByGroupId_PrevAndNext(session, ddmContent, groupId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DDMContent getByGroupId_PrevAndNext(Session session,
+		DDMContent ddmContent, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(ddmContent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DDMContent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Finds all the d d m contents where companyId = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @return the matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMContent> findByCompanyId(long companyId)
+		throws SystemException {
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Finds a range of all the d d m contents where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param start the lower bound of the range of d d m contents to return
+	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @return the range of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMContent> findByCompanyId(long companyId, int start, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the d d m contents where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param start the lower bound of the range of d d m contents to return
+	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMContent> findByCompanyId(long companyId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<DDMContent> list = (List<DDMContent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				list = (List<DDMContent>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first d d m content in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
+		throws NoSuchContentException, SystemException {
+		List<DDMContent> list = findByCompanyId(companyId, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchContentException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last d d m content in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
+		throws NoSuchContentException, SystemException {
+		int count = countByCompanyId(companyId);
+
+		List<DDMContent> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchContentException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the d d m contents before and after the current d d m content in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param contentId the primary key of the current d d m content
+	 * @param companyId the company ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent[] findByCompanyId_PrevAndNext(long contentId,
+		long companyId, OrderByComparator orderByComparator)
+		throws NoSuchContentException, SystemException {
+		DDMContent ddmContent = findByPrimaryKey(contentId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DDMContent[] array = new DDMContentImpl[3];
+
+			array[0] = getByCompanyId_PrevAndNext(session, ddmContent,
+					companyId, orderByComparator, true);
+
+			array[1] = ddmContent;
+
+			array[2] = getByCompanyId_PrevAndNext(session, ddmContent,
+					companyId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DDMContent getByCompanyId_PrevAndNext(Session session,
+		DDMContent ddmContent, long companyId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(ddmContent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DDMContent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Finds the d d m content where groupId = &#63; and contentKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param contentKey the content key to search with
+	 * @return the matching d d m content
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent findByG_C(long groupId, String contentKey)
+		throws NoSuchContentException, SystemException {
+		DDMContent ddmContent = fetchByG_C(groupId, contentKey);
+
+		if (ddmContent == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", contentKey=");
+			msg.append(contentKey);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchContentException(msg.toString());
+		}
+
+		return ddmContent;
+	}
+
+	/**
+	 * Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param contentKey the content key to search with
+	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent fetchByG_C(long groupId, String contentKey)
+		throws SystemException {
+		return fetchByG_C(groupId, contentKey, true);
+	}
+
+	/**
+	 * Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param contentKey the content key to search with
+	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMContent fetchByG_C(long groupId, String contentKey,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, contentKey };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			if (contentKey == null) {
+				query.append(_FINDER_COLUMN_G_C_CONTENTKEY_1);
+			}
+			else {
+				if (contentKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (contentKey != null) {
+					qPos.add(contentKey);
+				}
+
+				List<DDMContent> list = q.list();
+
+				result = list;
+
+				DDMContent ddmContent = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
+						finderArgs, list);
+				}
+				else {
+					ddmContent = list.get(0);
+
+					cacheResult(ddmContent);
+
+					if ((ddmContent.getGroupId() != groupId) ||
+							(ddmContent.getContentKey() == null) ||
+							!ddmContent.getContentKey().equals(contentKey)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
+							finderArgs, ddmContent);
+					}
+				}
+
+				return ddmContent;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DDMContent)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the d d m contents.
 	 *
 	 * @return the d d m contents
@@ -868,6 +1972,58 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
+	 * Removes the d d m content where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchContentException, SystemException {
+		DDMContent ddmContent = findByUUID_G(uuid, groupId);
+
+		ddmContentPersistence.remove(ddmContent);
+	}
+
+	/**
+	 * Removes all the d d m contents where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByGroupId(long groupId) throws SystemException {
+		for (DDMContent ddmContent : findByGroupId(groupId)) {
+			ddmContentPersistence.remove(ddmContent);
+		}
+	}
+
+	/**
+	 * Removes all the d d m contents where companyId = &#63; from the database.
+	 *
+	 * @param companyId the company ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByCompanyId(long companyId) throws SystemException {
+		for (DDMContent ddmContent : findByCompanyId(companyId)) {
+			ddmContentPersistence.remove(ddmContent);
+		}
+	}
+
+	/**
+	 * Removes the d d m content where groupId = &#63; and contentKey = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param contentKey the content key to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_C(long groupId, String contentKey)
+		throws NoSuchContentException, SystemException {
+		DDMContent ddmContent = findByG_C(groupId, contentKey);
+
+		ddmContentPersistence.remove(ddmContent);
+	}
+
+	/**
 	 * Removes all the d d m contents from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -935,6 +2091,254 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d d m contents where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the number of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, groupId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d d m contents where groupId = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @return the number of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByGroupId(long groupId) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_GROUPID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d d m contents where companyId = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @return the number of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByCompanyId(long companyId) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d d m contents where groupId = &#63; and contentKey = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param contentKey the content key to search with
+	 * @return the number of matching d d m contents
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_C(long groupId, String contentKey)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, contentKey };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
+
+			if (contentKey == null) {
+				query.append(_FINDER_COLUMN_G_C_CONTENTKEY_1);
+			}
+			else {
+				if (contentKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (contentKey != null) {
+					qPos.add(contentKey);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -1031,6 +2435,16 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddmContent.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddmContent.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddmContent.uuid IS NULL OR ddmContent.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "ddmContent.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "ddmContent.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(ddmContent.uuid IS NULL OR ddmContent.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmContent.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmContent.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "ddmContent.companyId = ?";
+	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "ddmContent.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_CONTENTKEY_1 = "ddmContent.contentKey IS NULL";
+	private static final String _FINDER_COLUMN_G_C_CONTENTKEY_2 = "ddmContent.contentKey = ?";
+	private static final String _FINDER_COLUMN_G_C_CONTENTKEY_3 = "(ddmContent.contentKey IS NULL OR ddmContent.contentKey = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmContent.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMContent exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMContent exists with the key {";

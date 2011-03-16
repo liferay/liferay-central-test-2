@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatamapping.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,6 +32,16 @@ public class DDMContentSoap implements Serializable {
 
 		soapModel.setUuid(model.getUuid());
 		soapModel.setContentId(model.getContentId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
+		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setContentKey(model.getContentKey());
+		soapModel.setName(model.getName());
+		soapModel.setDescription(model.getDescription());
+		soapModel.setXml(model.getXml());
 
 		return soapModel;
 	}
@@ -99,6 +110,96 @@ public class DDMContentSoap implements Serializable {
 		_contentId = contentId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
+	public String getContentKey() {
+		return _contentKey;
+	}
+
+	public void setContentKey(String contentKey) {
+		_contentKey = contentKey;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public void setDescription(String description) {
+		_description = description;
+	}
+
+	public String getXml() {
+		return _xml;
+	}
+
+	public void setXml(String xml) {
+		_xml = xml;
+	}
+
 	private String _uuid;
 	private long _contentId;
+	private long _groupId;
+	private long _companyId;
+	private long _userId;
+	private String _userName;
+	private Date _createDate;
+	private Date _modifiedDate;
+	private String _contentKey;
+	private String _name;
+	private String _description;
+	private String _xml;
 }

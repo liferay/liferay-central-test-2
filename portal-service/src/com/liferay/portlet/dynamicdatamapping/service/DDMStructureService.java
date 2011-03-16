@@ -42,7 +42,7 @@ public interface DDMStructureService {
 	 * Never modify or reference this interface directly. Always use {@link DDMStructureServiceUtil} to access the d d m structure remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
-		long groupId, java.lang.String structureKey, boolean autoStrucureId,
+		long groupId, java.lang.String structureKey, boolean autoStructureKey,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)

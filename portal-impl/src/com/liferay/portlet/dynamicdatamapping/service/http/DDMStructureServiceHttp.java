@@ -56,7 +56,7 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 public class DDMStructureServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
 		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureKey, boolean autoStrucureId,
+		java.lang.String structureKey, boolean autoStructureKey,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -67,7 +67,7 @@ public class DDMStructureServiceHttp {
 					"addStructure", _addStructureParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, autoStrucureId, name, description, xsd,
+					structureKey, autoStructureKey, name, description, xsd,
 					serviceContext);
 
 			Object returnObj = null;

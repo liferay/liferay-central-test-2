@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
@@ -12,17 +11,30 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalServiceUtil" %>
-<%@ include file="/html/portlet/breadcrumb/init.jsp" %>
+package com.liferay.portlet.dynamicdatamapping;
 
-<liferay-ui:breadcrumb displayStyle="<%= displayStyle %>" />
+import com.liferay.portal.kernel.exception.PortalException;
 
-<%
-String xml = "<?xml version='1.0' encoding='UTF-8'?><root><Title language-id=\"en_US\">a</Title></root>";
+/**
+ * @author Brian Wing Shun Chan
+ */
+public class ContentXmlException extends PortalException {
 
-ServiceContext sc = ServiceContextFactory.getInstance(request);
+	public ContentXmlException() {
+		super();
+	}
 
-DDMContentLocalServiceUtil.addContent(user.getUserId(), scopeGroupId, "TESTING3", false, "TESTING3", "desc", xml, sc);
-%>
+	public ContentXmlException(String msg) {
+		super(msg);
+	}
+
+	public ContentXmlException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public ContentXmlException(Throwable cause) {
+		super(cause);
+	}
+
+}

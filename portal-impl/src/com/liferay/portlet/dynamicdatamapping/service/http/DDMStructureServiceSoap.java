@@ -66,7 +66,7 @@ import java.rmi.RemoteException;
  */
 public class DDMStructureServiceSoap {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureSoap addStructure(
-		long groupId, java.lang.String structureKey, boolean autoStrucureId,
+		long groupId, java.lang.String structureKey, boolean autoStructureKey,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -74,7 +74,7 @@ public class DDMStructureServiceSoap {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMStructure returnValue =
 				DDMStructureServiceUtil.addStructure(groupId, structureKey,
-					autoStrucureId, name, description, xsd, serviceContext);
+					autoStructureKey, name, description, xsd, serviceContext);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMStructureSoap.toSoapModel(returnValue);
 		}

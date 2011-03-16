@@ -1663,7 +1663,23 @@
 			<basic name="uuid">
 				<column name="UUID_" />
 			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="contentKey" />
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="xml" />
+			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureModelImpl">

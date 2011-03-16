@@ -386,7 +386,17 @@ create table CyrusVirtual (
 
 create table DDMContent (
 	uuid_ VARCHAR(75) null,
-	contentId LONG not null primary key
+	contentId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	contentKey VARCHAR(75) null,
+	name STRING null,
+	description STRING null,
+	xml TEXT null
 );
 
 create table DDMStructure (
@@ -400,8 +410,8 @@ create table DDMStructure (
 	modifiedDate DATE null,
 	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description STRING null,
-	xsd TEXT null
+	description VARCHAR(75) null,
+	xsd VARCHAR(75) null
 );
 
 create table DDMStructureLink (

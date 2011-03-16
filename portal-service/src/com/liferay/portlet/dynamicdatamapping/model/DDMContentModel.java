@@ -15,12 +15,17 @@
 package com.liferay.portlet.dynamicdatamapping.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The base model interface for the DDMContent service. Represents a row in the &quot;DDMContent&quot; database table, with each column mapped to a property of this class.
@@ -84,6 +89,224 @@ public interface DDMContentModel extends BaseModel<DDMContent> {
 	 * @param contentId the content ID of this d d m content
 	 */
 	public void setContentId(long contentId);
+
+	/**
+	 * Gets the group ID of this d d m content.
+	 *
+	 * @return the group ID of this d d m content
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this d d m content.
+	 *
+	 * @param groupId the group ID of this d d m content
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Gets the company ID of this d d m content.
+	 *
+	 * @return the company ID of this d d m content
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this d d m content.
+	 *
+	 * @param companyId the company ID of this d d m content
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Gets the user ID of this d d m content.
+	 *
+	 * @return the user ID of this d d m content
+	 */
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this d d m content.
+	 *
+	 * @param userId the user ID of this d d m content
+	 */
+	public void setUserId(long userId);
+
+	/**
+	 * Gets the user uuid of this d d m content.
+	 *
+	 * @return the user uuid of this d d m content
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getUserUuid() throws SystemException;
+
+	/**
+	 * Sets the user uuid of this d d m content.
+	 *
+	 * @param userUuid the user uuid of this d d m content
+	 */
+	public void setUserUuid(String userUuid);
+
+	/**
+	 * Gets the user name of this d d m content.
+	 *
+	 * @return the user name of this d d m content
+	 */
+	@AutoEscape
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this d d m content.
+	 *
+	 * @param userName the user name of this d d m content
+	 */
+	public void setUserName(String userName);
+
+	/**
+	 * Gets the create date of this d d m content.
+	 *
+	 * @return the create date of this d d m content
+	 */
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this d d m content.
+	 *
+	 * @param createDate the create date of this d d m content
+	 */
+	public void setCreateDate(Date createDate);
+
+	/**
+	 * Gets the modified date of this d d m content.
+	 *
+	 * @return the modified date of this d d m content
+	 */
+	public Date getModifiedDate();
+
+	/**
+	 * Sets the modified date of this d d m content.
+	 *
+	 * @param modifiedDate the modified date of this d d m content
+	 */
+	public void setModifiedDate(Date modifiedDate);
+
+	/**
+	 * Gets the content key of this d d m content.
+	 *
+	 * @return the content key of this d d m content
+	 */
+	public String getContentKey();
+
+	/**
+	 * Sets the content key of this d d m content.
+	 *
+	 * @param contentKey the content key of this d d m content
+	 */
+	public void setContentKey(String contentKey);
+
+	/**
+	 * Gets the name of this d d m content.
+	 *
+	 * @return the name of this d d m content
+	 */
+	public String getName();
+
+	/**
+	 * Gets the localized name of this d d m content. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized name for
+	 * @return the localized name of this d d m content
+	 */
+	public String getName(Locale locale);
+
+	/**
+	 * Gets the localized name of this d d m content, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this d d m content. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getName(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized name of this d d m content. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @return the localized name of this d d m content
+	 */
+	public String getName(String languageId);
+
+	/**
+	 * Gets the localized name of this d d m content, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this d d m content
+	 */
+	public String getName(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized name of this d d m content.
+	 *
+	 * @return the locales and localized name
+	 */
+	public Map<Locale, String> getNameMap();
+
+	/**
+	 * Sets the name of this d d m content.
+	 *
+	 * @param name the name of this d d m content
+	 */
+	public void setName(String name);
+
+	/**
+	 * Sets the localized name of this d d m content.
+	 *
+	 * @param name the localized name of this d d m content
+	 * @param locale the locale to set the localized name for
+	 */
+	public void setName(String name, Locale locale);
+
+	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	/**
+	 * Sets the localized names of this d d m content from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this d d m content
+	 */
+	public void setNameMap(Map<Locale, String> nameMap);
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
+
+	/**
+	 * Gets the description of this d d m content.
+	 *
+	 * @return the description of this d d m content
+	 */
+	@AutoEscape
+	public String getDescription();
+
+	/**
+	 * Sets the description of this d d m content.
+	 *
+	 * @param description the description of this d d m content
+	 */
+	public void setDescription(String description);
+
+	/**
+	 * Gets the xml of this d d m content.
+	 *
+	 * @return the xml of this d d m content
+	 */
+	@AutoEscape
+	public String getXml();
+
+	/**
+	 * Sets the xml of this d d m content.
+	 *
+	 * @param xml the xml of this d d m content
+	 */
+	public void setXml(String xml);
 
 	public boolean isNew();
 
