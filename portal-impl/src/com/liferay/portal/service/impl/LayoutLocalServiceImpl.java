@@ -156,10 +156,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Resources
 
+		boolean addGuestPermissions = false;
+
+		if (!privateLayout || type.equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+			addGuestPermissions = true;
+		}
+
 		resourceLocalService.addResources(
 			user.getCompanyId(), groupId, user.getUserId(),
 			Layout.class.getName(), layout.getPlid(), false, true,
-			!privateLayout);
+			addGuestPermissions);
 
 		// Layout set
 
