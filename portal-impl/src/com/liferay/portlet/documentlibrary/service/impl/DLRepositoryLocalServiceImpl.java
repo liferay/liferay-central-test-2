@@ -875,7 +875,9 @@ public class DLRepositoryLocalServiceImpl
 
 		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		validateFolderName(name);
+		validateFolder(
+			dlFolder.getFolderId(), dlFolder.getGroupId(),
+			dlFolder.getParentFolderId(), name);
 
 		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
 		dlFolder.setName(name);
