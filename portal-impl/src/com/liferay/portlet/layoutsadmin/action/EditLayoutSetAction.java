@@ -154,7 +154,8 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
-			stagingGroupId, privateLayout, layoutSet.getSettingsProperties());
+			stagingGroupId, privateLayout, layoutSet.getSettingsProperties(),
+			layoutSet.getThemeId());
 
 		updateMergePages(actionRequest, liveGroupId);
 
@@ -196,7 +197,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 	protected void updateLookAndFeel(
 			ActionRequest actionRequest, long companyId, long liveGroupId,
 			long stagingGroupId, boolean privateLayout,
-			UnicodeProperties typeSettingsProperties)
+			UnicodeProperties typeSettingsProperties, String oldThemeId)
 		throws Exception {
 
 		String[] devices = StringUtil.split(
@@ -226,22 +227,26 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 					colorSchemeId = colorScheme.getColorSchemeId();
 				}
 
-				UnicodeProperties themeSettingsProperties =
-					PropertiesParamUtil.getProperties(
-						actionRequest, device + "ThemeSettingsProperties--");
+				deleteThemeSettings(typeSettingsProperties, device);
 
-				for (String key : themeSettingsProperties.keySet()) {
-					String defaultValue = theme.getSetting(key);
-					String newValue = themeSettingsProperties.get(key);
+				if (Validator.equals(themeId, oldThemeId)) {
+					UnicodeProperties themeSettingsProperties =
+						PropertiesParamUtil.getProperties(
+							actionRequest, device + "ThemeSettingsProperties--");
 
-					if (!newValue.equals(defaultValue)) {
-						typeSettingsProperties.setProperty(
-							ThemeSettingImpl.namespaceProperty(device, key),
-							newValue);
-					}
-					else {
-						typeSettingsProperties.remove(
-							ThemeSettingImpl.namespaceProperty(device, key));
+					for (String key : themeSettingsProperties.keySet()) {
+						String defaultValue = theme.getSetting(key);
+						String newValue = themeSettingsProperties.get(key);
+
+						if (!newValue.equals(defaultValue)) {
+							typeSettingsProperties.setProperty(
+								ThemeSettingImpl.namespaceProperty(device, key),
+								newValue);
+						}
+						else {
+							typeSettingsProperties.remove(
+								ThemeSettingImpl.namespaceProperty(device, key));
+						}
 					}
 				}
 			}

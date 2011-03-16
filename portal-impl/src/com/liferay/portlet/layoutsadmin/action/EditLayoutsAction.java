@@ -432,6 +432,24 @@ public class EditLayoutsAction extends PortletAction {
 		}
 	}
 
+	protected void deleteThemeSettings(
+		UnicodeProperties properties, String device) {
+
+		String keyPrefix = ThemeSettingImpl.namespaceProperty(device);
+
+		Set<String> keys = properties.keySet();
+
+		Iterator<String> itr = keys.iterator();
+
+		while (itr.hasNext()) {
+			String key = itr.next();
+
+			if (key.startsWith(keyPrefix)) {
+				itr.remove();
+			}
+		}
+	}
+
 	protected Group getGroup(PortletRequest portletRequest) throws Exception {
 		return ActionUtil.getGroup(portletRequest);
 	}
@@ -719,19 +737,7 @@ public class EditLayoutsAction extends PortletAction {
 				themeId = StringPool.BLANK;
 				colorSchemeId = StringPool.BLANK;
 
-				String keyPrefix = ThemeSettingImpl.namespaceProperty(device);
-
-				Set<String> keys = properties.keySet();
-
-				Iterator<String> itr = keys.iterator();
-
-				while (itr.hasNext()) {
-					String key = itr.next();
-
-					if (key.startsWith(keyPrefix)) {
-						itr.remove();
-					}
-				}
+				deleteThemeSettings(properties, device);
 			}
 			else if (Validator.isNotNull(themeId)) {
 				Theme theme = ThemeLocalServiceUtil.getTheme(
