@@ -138,7 +138,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 	<aui:column columnWidth="<%= 75 %>" cssClass="lfr-asset-column lfr-asset-column-details" first="<%= true %>">
 		<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
-		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= fileVersion.getVersion() %>" />
+		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= fileVersion.getVersion() %>" bean="<%= fileEntry %>" model="<%= DLFileEntry.class %>" />
 
 		<div class="lfr-asset-metadata">
 			<div class="lfr-asset-icon lfr-asset-author">
