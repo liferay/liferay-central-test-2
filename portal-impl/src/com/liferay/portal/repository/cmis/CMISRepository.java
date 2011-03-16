@@ -57,11 +57,10 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntryReadCountComparator;
-import com.liferay.portlet.documentlibrary.util.comparator.FileEntrySizeComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelCreateDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelNameComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelSizeComparator;
 
 import java.io.InputStream;
 
@@ -277,16 +276,11 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		List<FileEntry> fileEntries = getFileEntries(folderId);
 
 		if (obc != null) {
-			if (obc instanceof FileEntrySizeComparator ||
+			if (obc instanceof RepositoryModelSizeComparator ||
 				obc instanceof RepositoryModelCreateDateComparator ||
 				obc instanceof RepositoryModelModifiedDateComparator) {
 
 				fileEntries = ListUtil.sort(fileEntries, obc);
-			}
-			else if (obc instanceof FileEntryReadCountComparator) {
-
-				// TODO
-
 			}
 			else if (obc instanceof RepositoryModelNameComparator) {
 				if (!obc.isAscending()) {
@@ -496,7 +490,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		if (obc != null) {
 			if (obc instanceof RepositoryModelCreateDateComparator ||
-				obc instanceof RepositoryModelModifiedDateComparator) {
+				obc instanceof RepositoryModelModifiedDateComparator ||
+				obc instanceof RepositoryModelSizeComparator) {
 
 				foldersAndFileEntries = ListUtil.sort(
 					foldersAndFileEntries, obc);
