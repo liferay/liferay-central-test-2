@@ -57,12 +57,14 @@ public class PortalPreferencesImpl implements PortalPreferences {
 
 	public void resetValues(String namespace) {
 		try {
-			for (Map.Entry<String, Preference> preference :
-					_preferences.getPreferences().entrySet()) {
+			Map<String, Preference> preferences = _preferences.getPreferences();
 
-				String key = preference.getKey();
+			for (Map.Entry<String, Preference> entry : preferences.entrySet()) {
+				String key = entry.getKey();
 
-				if (key.startsWith(namespace) && !_preferences.isReadOnly(key)) {
+				if (key.startsWith(namespace) &&
+					!_preferences.isReadOnly(key)) {
+
 					_preferences.reset(key);
 				}
 			}
