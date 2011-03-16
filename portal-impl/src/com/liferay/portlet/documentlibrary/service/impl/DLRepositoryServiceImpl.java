@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
@@ -472,9 +471,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
-
 		return lockFileEntry(
 			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
@@ -483,7 +479,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			long fileEntryId, String owner, long expirationTime)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
@@ -492,17 +489,12 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 
 		return lockLocalService.lock(
-			user.getUserId(), DLFileEntry.class.getName(), fileEntryId, owner,
+			getUserId(), DLFileEntry.class.getName(), fileEntryId, owner,
 			false, expirationTime);
 	}
 
 	public Lock lockFolder(long folderId)
 		throws PortalException, SystemException {
-
-		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
-
-		DLFolderPermission.check(
-			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		return lockFolder(
 			folderId, null, false, DLFolderImpl.LOCK_EXPIRATION_TIME);
@@ -513,7 +505,10 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			long expirationTime)
 		throws PortalException, SystemException {
 
-		User user = getUser();
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
+
+		DLFolderPermission.check(
+			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
@@ -522,12 +517,10 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 
 		Lock lock = lockLocalService.lock(
-			user.getUserId(), DLFolder.class.getName(), folderId, owner,
-			inheritable, expirationTime);
+			getUserId(), DLFolder.class.getName(), folderId, owner, inheritable,
+			expirationTime);
 
 		Set<Long> fileFileEntryIds = new HashSet<Long>();
-
-		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		long groupId = dlFolder.getGroupId();
 
@@ -768,9 +761,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = getFolder(groupId, parentFolderId, name);
-
-		DLFolderPermission.check(
-			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		unlockFolder(groupId, dlFolder.getFolderId(), lockUuid);
 	}
