@@ -35,12 +35,13 @@
 			);
 		},
 
-		_loadPortletFiles: function(response) {
+		_loadPortletFiles: function(response, loadHTML) {
 			var headerCssPaths = response.headerCssPaths || [];
 			var footerCssPaths = response.footerCssPaths || [];
 
-			var headerJavaScriptPaths = response.headerJavaScriptPaths || [];
-			var footerJavaScriptPaths = response.footerJavaScriptPaths || [];
+			var javascriptPaths = response.headerJavaScriptPaths || [];
+
+			javascriptPaths = javascriptPaths.concat(response.footerJavaScriptPaths || []);
 
 			var head = A.one('head');
 			var body = A.getBody();
@@ -76,17 +77,20 @@
 				);
 			}
 
-			if (headerJavaScriptPaths.length) {
-				A.Get.script(headerJavaScriptPaths);
-			}
+			var responseHTML = response.portletHTML;
 
-			if (footerJavaScriptPaths.length) {
+			if (javascriptPaths.length) {
 				A.Get.script(
-					footerJavaScriptPaths,
+					javascriptPaths,
 					{
-						insertBefore: lastChild
+						onEnd: function(obj) {
+							loadHTML(responseHTML);
+						}
 					}
 				);
+			}
+			else {
+				loadHTML(responseHTML);
 			}
 		},
 
@@ -273,9 +277,7 @@
 									location.reload();
 								}
 								else {
-									addPortletReturn(response.portletHTML);
-
-									Portlet._loadPortletFiles(response);
+									Portlet._loadPortletFiles(response, addPortletReturn);
 								}
 							}
 						}
