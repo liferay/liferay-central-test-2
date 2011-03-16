@@ -511,14 +511,14 @@ public class DocumentImpl implements Document {
 	}
 
 	private static final String _DATE_FORMAT_PATTERN = PropsUtil.get(
-		PropsKeys.INDEX_TIME_FORMAT);
+		PropsKeys.INDEX_DATE_FORMAT_PATTERN);
 
 	private static final String _UID_FIELD = "_FIELD_";
 
 	private static final String _UID_PORTLET = "_PORTLET_";
 
 	private Format _dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
-		_DATE_FORMAT_PATTERN);
+		_DATE_FORMAT);
 
 	private Map<String, Field> _fields = new HashMap<String, Field>();
 

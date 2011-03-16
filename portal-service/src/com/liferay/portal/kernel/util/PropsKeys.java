@@ -713,6 +713,8 @@ public interface PropsKeys {
 
 	public static final String IMAGEMAGICK_GLOBAL_SEARCH_PATH = "imagemagick.global.search.path";
 
+	public static final String INDEX_DATE_FORMAT_PATTERN = "index.date.format.pattern";
+
 	public static final String INDEX_FILTER_SEARCH_LIMIT = "index.filter.search.limit";
 
 	public static final String INDEX_ON_STARTUP = "index.on.startup";
@@ -732,8 +734,6 @@ public interface PropsKeys {
 	public static final String INDEX_SEARCH_LIMIT = "index.search.limit";
 
 	public static final String INDEX_SEARCH_SCORING_ENABLED = "index.search.scoring.enabled";
-
-	public static final String INDEX_TIME_FORMAT = "index.time.format";
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
