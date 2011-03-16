@@ -15,13 +15,17 @@
 package com.liferay.portlet.documentlibrary.util.comparator;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 
 /**
  * @author Alexander Chow
  */
-public class FileEntrySizeComparator extends OrderByComparator {
+public class RepositoryModelSizeComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "size ASC";
 
@@ -29,32 +33,17 @@ public class FileEntrySizeComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"size"};
 
-	public FileEntrySizeComparator() {
+	public RepositoryModelSizeComparator() {
 		this(false);
 	}
 
-	public FileEntrySizeComparator(boolean ascending) {
+	public RepositoryModelSizeComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		Long size1 = null;
-		Long size2 = null;
-
-		if (obj1 instanceof DLFileEntry) {
-			DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
-			DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
-
-			size1 = dlFileEntry1.getSize();
-			size2 = dlFileEntry2.getSize();
-		}
-		else {
-			FileEntry fileEntry1 = (FileEntry)obj1;
-			FileEntry fileEntry2 = (FileEntry)obj2;
-
-			size1 = fileEntry1.getSize();
-			size2 = fileEntry2.getSize();
-		}
+		Long size1 = getSize(obj1);
+		Long size2 = getSize(obj2);
 
 		int value = size1.compareTo(size2);
 
@@ -81,6 +70,37 @@ public class FileEntrySizeComparator extends OrderByComparator {
 
 	public boolean isAscending() {
 		return _ascending;
+	}
+
+	protected long getSize(Object obj) {
+		if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+			return dlFileEntry.getSize();
+		}
+		else if (obj instanceof DLFileShortcut) {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
+
+			long toFileEntryId = dlFileShortcut.getToFileEntryId();
+
+			try {
+				DLFileEntry dlFileEntry =
+					DLRepositoryLocalServiceUtil.getFileEntry(toFileEntryId);
+
+				return dlFileEntry.getSize();
+			}
+			catch (Exception e) {
+				return 0;
+			}
+		}
+		else if (obj instanceof DLFolder || obj instanceof Folder) {
+			return 0;
+		}
+		else {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getSize();
+		}
 	}
 
 	private boolean _ascending;

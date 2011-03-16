@@ -14,13 +14,19 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class FileEntryReadCountComparator extends OrderByComparator {
+public class RepositoryModelReadCountComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "readCount ASC";
 
@@ -28,26 +34,19 @@ public class FileEntryReadCountComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"readCount"};
 
-	public FileEntryReadCountComparator() {
+	public RepositoryModelReadCountComparator() {
 		this(false);
 	}
 
-	public FileEntryReadCountComparator(boolean ascending) {
+	public RepositoryModelReadCountComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
-		DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
+		Long readCount1 = getReadCount(obj1);
+		Long readCount2 = getReadCount(obj2);
 
-		int value = 0;
-
-		if (dlFileEntry1.getReadCount() < dlFileEntry2.getReadCount()) {
-			value = -1;
-		}
-		else if (dlFileEntry1.getReadCount() > dlFileEntry2.getReadCount()) {
-			value = 1;
-		}
+		int value = readCount1.compareTo(readCount2);
 
 		if (_ascending) {
 			return value;
@@ -72,6 +71,37 @@ public class FileEntryReadCountComparator extends OrderByComparator {
 
 	public boolean isAscending() {
 		return _ascending;
+	}
+
+	protected long getReadCount(Object obj) {
+		if (obj instanceof DLFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)obj;
+
+			return dlFileEntry.getReadCount();
+		}
+		else if (obj instanceof DLFileShortcut) {
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)obj;
+
+			long toFileEntryId = dlFileShortcut.getToFileEntryId();
+
+			try {
+				DLFileEntry dlFileEntry =
+					DLRepositoryLocalServiceUtil.getFileEntry(toFileEntryId);
+
+				return dlFileEntry.getReadCount();
+			}
+			catch (Exception e) {
+				return 0;
+			}
+		}
+		else if (obj instanceof DLFolder || obj instanceof Folder) {
+			return 0;
+		}
+		else {
+			FileEntry fileEntry = (FileEntry)obj;
+
+			return fileEntry.getReadCount();
+		}
 	}
 
 	private boolean _ascending;
