@@ -72,9 +72,9 @@ public class ZipReaderImpl implements ZipReader {
 		try {
 			File.umount(_zipFile);
 		}
-		catch (ArchiveBusyWarningException abwee) {
+		catch (ArchiveBusyWarningException abwe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(abwee, abwee);
+				_log.warn(abwe, abwe);
 			}
 		}
 		catch (ArchiveException ae) {
