@@ -583,8 +583,16 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "organizationsSearchContainerPrimaryKeys");
 		long[] roleIds = getLongArray(
 			actionRequest, "rolesSearchContainerPrimaryKeys");
-		List<UserGroupRole> userGroupRoles =
-			EnterpriseAdminUtil.getUserGroupRoles(actionRequest);
+
+		List<UserGroupRole> userGroupRoles = null;
+
+		if ((actionRequest.getParameter("groupRolesRoleIds") != null) ||
+			(actionRequest.getParameter("groupRolesGroupIds") != null)) {
+
+			userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(
+				actionRequest);
+		}
+
 		long[] userGroupIds = getLongArray(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys");
 		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
