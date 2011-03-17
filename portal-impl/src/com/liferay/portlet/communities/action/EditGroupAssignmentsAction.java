@@ -167,18 +167,8 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
-		Group group = GroupServiceUtil.getGroup(groupId);
-
-		if (group.isOrganization()) {
-			UserServiceUtil.addOrganizationUsers(
-				group.getOrganizationId(), addUserIds);
-			UserServiceUtil.unsetOrganizationUsers(
-				group.getOrganizationId(), removeUserIds);
-		}
-		else {
-			UserServiceUtil.addGroupUsers(groupId, addUserIds);
-			UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
-		}
+		UserServiceUtil.addGroupUsers(groupId, addUserIds);
+		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
 
 		LiveUsers.joinGroup(themeDisplay.getCompanyId(), groupId, addUserIds);
 		LiveUsers.leaveGroup(

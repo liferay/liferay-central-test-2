@@ -90,9 +90,8 @@ public class OrganizationLocalServiceImpl
 
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name, String type,
-			int membershipPolicy, boolean recursable, long regionId,
-			long countryId, int statusId, String comments,
-			ServiceContext serviceContext)
+			boolean recursable, long regionId, long countryId, int statusId,
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -127,7 +126,7 @@ public class OrganizationLocalServiceImpl
 
 		Group group = groupLocalService.addGroup(
 			userId, Organization.class.getName(), organizationId, name, null,
-			membershipPolicy, null, true, null);
+			0, null, true, null);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
 
@@ -825,8 +824,8 @@ public class OrganizationLocalServiceImpl
 
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
-			String name, String type, int membershipPolicy, boolean recursable,
-			long regionId, long countryId, int statusId, String comments,
+			String name, String type, boolean recursable, long regionId,
+			long countryId, int statusId, String comments,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -853,14 +852,6 @@ public class OrganizationLocalServiceImpl
 		organization.setComments(comments);
 
 		organizationPersistence.update(organization, false);
-
-		// Group
-
-		Group group = organization.getGroup();
-
-		group.setType(membershipPolicy);
-
-		groupPersistence.update(group, false);
 
 		// Asset
 

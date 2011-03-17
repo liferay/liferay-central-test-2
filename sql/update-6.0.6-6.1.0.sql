@@ -96,8 +96,6 @@ COMMIT_TRANSACTION;
 
 update DLFolder set repositoryId = groupId;
 
-update Group_ set type_ = 3 where type_ = 0;
-
 alter table Layout add createDate DATE null;
 alter table Layout add modifiedDate DATE null;
 alter table Layout add keywords STRING null;

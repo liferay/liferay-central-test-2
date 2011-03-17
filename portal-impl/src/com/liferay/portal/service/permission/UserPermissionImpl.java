@@ -107,11 +107,7 @@ public class UserPermissionImpl implements UserPermission {
 				for (int i = 0; i < organizationIds.length; i++) {
 					long organizationId = organizationIds[i];
 
-					Organization organization =
-						OrganizationServiceUtil.getOrganization(organizationId);
-
-					if (organization.isMembershipPolicyStrong() &&
-						OrganizationPermissionUtil.contains(
+					if (OrganizationPermissionUtil.contains(
 							permissionChecker, organizationId,
 							ActionKeys.MANAGE_USERS)) {
 

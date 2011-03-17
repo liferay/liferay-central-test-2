@@ -62,7 +62,6 @@ import java.util.Locale;
  * @author Scott Lee
  * @author Jorge Ferrer
  * @author Julio Camarero
- * @author Juan Fernández
  */
 public class UserServiceImpl extends UserServiceBaseImpl {
 
@@ -109,46 +108,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void addOrganizationUsers(long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
-		try {
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId,
-				ActionKeys.ASSIGN_MEMBERS);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId,
+			ActionKeys.ASSIGN_MEMBERS);
 
-			validateOrganizationUsers(userIds);
-		}
-		catch (PrincipalException pe) {
-
-			// Allow any user to join weak open organizations
-
-			boolean hasPermission = false;
-
-			if (userIds.length == 0) {
-				hasPermission = true;
-			}
-			else if (userIds.length == 1) {
-				User user = getUser();
-
-				if (user.getUserId() == userIds[0]) {
-					Organization organization =
-						organizationPersistence.findByPrimaryKey(
-							organizationId);
-
-					Group group = organization.getGroup();
-
-					if (user.getCompanyId() == group.getCompanyId()) {
-						int groupType = group.getType();
-
-						if (groupType == GroupConstants.TYPE_COMMUNITY_OPEN) {
-							hasPermission = true;
-						}
-					}
-				}
-			}
-
-			if (!hasPermission) {
-				throw new PrincipalException();
-			}
-		}
+		validateOrganizationUsers(userIds);
 
 		userLocalService.addOrganizationUsers(organizationId, userIds);
 	}
@@ -523,47 +487,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void unsetOrganizationUsers(long organizationId, long[] userIds)
 		throws PortalException, SystemException {
 
-		try {
-			OrganizationPermissionUtil.check(
-				getPermissionChecker(), organizationId,
-				ActionKeys.ASSIGN_MEMBERS);
-		}
-		catch (PrincipalException pe) {
-
-			// Allow any user to leave open and restricted weak organizations
-
-			boolean hasPermission = false;
-
-			if (userIds.length == 0) {
-				hasPermission = true;
-			}
-			else if (userIds.length == 1) {
-				User user = getUser();
-
-				if (user.getUserId() == userIds[0]) {
-					Organization organization =
-						organizationPersistence.findByPrimaryKey(
-							organizationId);
-
-					Group group = organization.getGroup();
-
-					if (user.getCompanyId() == group.getCompanyId()) {
-						int groupType = group.getType();
-
-						if ((groupType == GroupConstants.TYPE_COMMUNITY_OPEN) ||
-							(groupType ==
-								GroupConstants.TYPE_COMMUNITY_RESTRICTED)) {
-
-							hasPermission = true;
-						}
-					}
-				}
-			}
-
-			if (!hasPermission) {
-				throw new PrincipalException();
-			}
-		}
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId,
+			ActionKeys.ASSIGN_MEMBERS);
 
 		userLocalService.unsetOrganizationUsers(organizationId, userIds);
 	}

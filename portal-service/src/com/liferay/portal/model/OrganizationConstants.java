@@ -16,7 +16,6 @@ package com.liferay.portal.model;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Juan Fernández
  */
 public class OrganizationConstants {
 
@@ -27,10 +26,6 @@ public class OrganizationConstants {
 	public static final String LIST_VIEW_FLAT = "flat";
 
 	public static final String LIST_VIEW_TREE = "tree";
-
-	public static final String MEMBERSHIP_POLICY_STRONG = "strong";
-
-	public static final String MEMBERSHIP_POLICY_WEAK = "weak";
 
 	public static final String TYPE_LOCATION = "location";
 

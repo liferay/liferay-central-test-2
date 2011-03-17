@@ -52,7 +52,6 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
- * @author Juan Fernández
  */
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
@@ -198,11 +197,6 @@ public class OrganizationImpl
 		return logoId;
 	}
 
-	public String getMembershipPolicy() {
-		return PropsUtil.get(
-			PropsKeys.ORGANIZATIONS_MEMBERSHIP_POLICY, new Filter(getType()));
-	}
-
 	public Organization getParentOrganization()
 		throws PortalException, SystemException {
 
@@ -328,32 +322,6 @@ public class OrganizationImpl
 
 	public boolean hasSuborganizations() throws SystemException {
 		if (getSuborganizationsSize() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isMembershipPolicyStrong(){
-		String membershipPolicy = getMembershipPolicy();
-
-		if (membershipPolicy.equals(
-				OrganizationConstants.MEMBERSHIP_POLICY_STRONG)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isMembershipPolicyWeak(){
-		String membershipPolicy = getMembershipPolicy();
-
-		if (membershipPolicy.equals(
-				OrganizationConstants.MEMBERSHIP_POLICY_WEAK)) {
-
 			return true;
 		}
 		else {

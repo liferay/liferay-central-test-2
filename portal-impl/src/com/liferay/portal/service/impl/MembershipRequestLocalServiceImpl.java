@@ -181,18 +181,8 @@ public class MembershipRequestLocalServiceImpl
 		if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};
 
-			Group group = groupPersistence.findByPrimaryKey(
-				membershipRequest.getGroupId());
-
-			if (group.isOrganization()) {
-				userLocalService.addOrganizationUsers(
-					group.getOrganizationId(),
-					new long[] {membershipRequest.getUserId()});
-			}
-			else {
-				userLocalService.addGroupUsers(
-					membershipRequest.getGroupId(), addUserIds);
-			}
+			userLocalService.addGroupUsers(
+				membershipRequest.getGroupId(), addUserIds);
 		}
 
 		try {
