@@ -451,7 +451,7 @@
 		</action>
 
 		<action path="/communities/edit_user_group_roles" type="com.liferay.portlet.communities.action.EditUserGroupRolesAction">
-			<forward name="portlet.communities.edit_user_roles" path="portlet.communities.edit_user_group_roles" />
+			<forward name="portlet.communities.edit_user_group_roles" path="portlet.communities.edit_user_group_roles" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
