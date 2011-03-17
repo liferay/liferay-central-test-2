@@ -314,6 +314,32 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	protected void processInput(CharBuffer oldCharBuffer, Writer writer)
+		throws IOException {
+
+		int length = KMPSearch.search(
+			oldCharBuffer, _MARKER_INPUT_OPEN.length + 1, _MARKER_INPUT_CLOSE,
+			_MARKER_INPUT_CLOSE_NEXTS);
+
+		if (length == -1) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Missing />");
+			}
+
+			outputOpenTag(oldCharBuffer, writer, _MARKER_INPUT_OPEN);
+
+			return;
+		}
+
+		length += _MARKER_INPUT_CLOSE.length();
+
+		String content = extractContent(oldCharBuffer, length);
+
+		writer.write(content);
+
+		skipWhiteSpace(oldCharBuffer, writer, true);
+	}
+
 	protected void processJavaScript(
 			CharBuffer charBuffer, Writer writer, char[] openTag)
 		throws IOException {
@@ -469,7 +495,12 @@ public class StripFilter extends BasePortalFilter {
 			writer.write(c);
 
 			if (c == CharPool.LESS_THAN) {
-				if (hasMarker(charBuffer, _MARKER_PRE_OPEN)) {
+				if (hasMarker(charBuffer, _MARKER_INPUT_OPEN)) {
+					processInput(charBuffer, writer);
+
+					continue;
+				}
+				else if (hasMarker(charBuffer, _MARKER_PRE_OPEN)) {
 					processPre(charBuffer, writer);
 
 					continue;
@@ -510,6 +541,13 @@ public class StripFilter extends BasePortalFilter {
 	private static final String _CDATA_OPEN = "/*<![CDATA[*/";
 
 	private static final String _ENSURE_CONTENT_LENGTH = "ensureContentLength";
+
+	private static final String _MARKER_INPUT_CLOSE = "/>";
+
+	private static final int [] _MARKER_INPUT_CLOSE_NEXTS =
+		KMPSearch.generateNexts(_MARKER_INPUT_CLOSE);
+
+	private static final char[] _MARKER_INPUT_OPEN = "input".toCharArray();
 
 	private static final char[] _MARKER_JS_OPEN =
 		"script type=\"text/javascript\">".toCharArray();
