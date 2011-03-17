@@ -40,7 +40,9 @@ boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 long groupId = 0;
 
 if (organization != null) {
-	groupId = organization.getGroup().getGroupId();
+	Group group = organization.getGroup();
+
+	groupId = group.getGroupId();
 }
 %>
 
