@@ -16,7 +16,7 @@ begin
 			:full_exception => log.isDebugEnabled,
 			:syntax => :scss,
 			:load_paths => ['html/'],
-			:ugly
+			:ugly => true
 		}
 	)
 
