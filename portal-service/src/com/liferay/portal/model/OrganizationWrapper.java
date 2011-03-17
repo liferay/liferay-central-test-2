@@ -364,10 +364,6 @@ public class OrganizationWrapper implements Organization {
 		return _organization.getLogoId();
 	}
 
-	public java.lang.String getMembershipPolicy() {
-		return _organization.getMembershipPolicy();
-	}
-
 	public com.liferay.portal.model.Organization getParentOrganization()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -424,14 +420,6 @@ public class OrganizationWrapper implements Organization {
 	public boolean hasSuborganizations()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _organization.hasSuborganizations();
-	}
-
-	public boolean isMembershipPolicyStrong() {
-		return _organization.isMembershipPolicyStrong();
-	}
-
-	public boolean isMembershipPolicyWeak() {
-		return _organization.isMembershipPolicyWeak();
 	}
 
 	public boolean isParentable() {

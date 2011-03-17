@@ -248,14 +248,14 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 
 	public com.liferay.portal.model.Organization addOrganization(long userId,
 		long parentOrganizationId, java.lang.String name,
-		java.lang.String type, int membershipPolicy, boolean recursable,
-		long regionId, long countryId, int statusId, java.lang.String comments,
+		java.lang.String type, boolean recursable, long regionId,
+		long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.addOrganization(userId,
-			parentOrganizationId, name, type, membershipPolicy, recursable,
-			regionId, countryId, statusId, comments, serviceContext);
+			parentOrganizationId, name, type, recursable, regionId, countryId,
+			statusId, comments, serviceContext);
 	}
 
 	public void addOrganizationResources(long userId,
@@ -538,15 +538,14 @@ public class OrganizationLocalServiceWrapper implements OrganizationLocalService
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		long companyId, long organizationId, long parentOrganizationId,
-		java.lang.String name, java.lang.String type, int membershipPolicy,
-		boolean recursable, long regionId, long countryId, int statusId,
-		java.lang.String comments,
+		java.lang.String name, java.lang.String type, boolean recursable,
+		long regionId, long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _organizationLocalService.updateOrganization(companyId,
-			organizationId, parentOrganizationId, name, type, membershipPolicy,
-			recursable, regionId, countryId, statusId, comments, serviceContext);
+			organizationId, parentOrganizationId, name, type, recursable,
+			regionId, countryId, statusId, comments, serviceContext);
 	}
 
 	public OrganizationLocalService getWrappedOrganizationLocalService() {

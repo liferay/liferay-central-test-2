@@ -47,8 +47,6 @@ public interface Organization extends OrganizationModel {
 
 	public long getLogoId();
 
-	public java.lang.String getMembershipPolicy();
-
 	public com.liferay.portal.model.Organization getParentOrganization()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -82,10 +80,6 @@ public interface Organization extends OrganizationModel {
 
 	public boolean hasSuborganizations()
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public boolean isMembershipPolicyStrong();
-
-	public boolean isMembershipPolicyWeak();
 
 	public boolean isParentable();
 
