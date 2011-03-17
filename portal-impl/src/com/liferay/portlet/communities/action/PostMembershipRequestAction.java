@@ -60,7 +60,7 @@ public class PostMembershipRequestAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.communities.error");
+				setForward(actionRequest, "portlet.sites_admin.error");
 			}
 			else if (e instanceof MembershipRequestCommentsException) {
 
@@ -68,7 +68,7 @@ public class PostMembershipRequestAction extends PortletAction {
 
 				setForward(
 					actionRequest,
-					"portlet.communities.post_membership_request");
+					"portlet.sites_admin.post_membership_request");
 			}
 			else {
 				throw e;
@@ -89,7 +89,7 @@ public class PostMembershipRequestAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.sites_admin.error");
 			}
 			else {
 				throw e;
@@ -97,7 +97,7 @@ public class PostMembershipRequestAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.communities.post_membership_request"));
+			renderRequest, "portlet.sites_admin.post_membership_request"));
 	}
 
 }

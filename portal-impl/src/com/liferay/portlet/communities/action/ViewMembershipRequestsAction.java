@@ -46,7 +46,7 @@ public class ViewMembershipRequestsAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.sites_admin.error");
 			}
 			else {
 				throw e;
@@ -54,7 +54,7 @@ public class ViewMembershipRequestsAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.communities.view_membership_requests"));
+			renderRequest, "portlet.sites_admin.view_membership_requests"));
 	}
 
 }

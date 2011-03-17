@@ -89,7 +89,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.communities.error");
+				setForward(actionRequest, "portlet.sites_admin.error");
 			}
 			else {
 				throw e;
@@ -111,7 +111,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.sites_admin.error");
 			}
 			else {
 				throw e;
@@ -119,7 +119,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(renderRequest,
-			"portlet.communities.edit_community_assignments"));
+			"portlet.sites_admin.edit_site_assignments"));
 	}
 
 	protected void updateGroupOrganizations(ActionRequest actionRequest)

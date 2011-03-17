@@ -27,14 +27,14 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 
 <c:if test="<%= supportsFilterByGroup %>">
 	<portlet:renderURL var="selectCommunityURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-		<portlet:param name="struts_action" value="/enterprise_admin/select_community" />
+		<portlet:param name="struts_action" value="/enterprise_admin/select_site" />
 		<portlet:param name="target" value="<%= target %>" />
 		<portlet:param name="includeCompany" value="<%= Boolean.TRUE.toString() %>" />
 		<portlet:param name="includeUserPersonalCommunity" value="<%= Boolean.TRUE.toString() %>" />
 	</portlet:renderURL>
 
 	<%
-	String limitScopeURL = "javascript:var groupWindow = window.open('" + selectCommunityURL + "', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();";
+	String limitScopeURL = "javascript:var groupWindow = window.open('" + selectCommunityURL + "', 'site', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();";
 	%>
 
 	<liferay-ui:icon

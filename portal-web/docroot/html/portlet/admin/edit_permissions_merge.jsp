@@ -104,7 +104,7 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 		editGroupURL.setParameter("redirect", currentURL);
 
 		if (group.isCommunity()) {
-			editGroupURL.setParameter("struts_action", "/admin_server/edit_community");
+			editGroupURL.setParameter("struts_action", "/admin_server/edit_site");
 			editGroupURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		}
 		else if (group.isOrganization()) {

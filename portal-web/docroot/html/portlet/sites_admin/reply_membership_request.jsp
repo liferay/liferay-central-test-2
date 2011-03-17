@@ -33,7 +33,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 %>
 
 <portlet:actionURL var="replyMembershipRequestURL">
-	<portlet:param name="struts_action" value="/communities/reply_membership_request" />
+	<portlet:param name="struts_action" value="/sites_admin/reply_membership_request" />
 </portlet:actionURL>
 
 <aui:form action="<%= replyMembershipRequestURL %>" method="post" name="fm">

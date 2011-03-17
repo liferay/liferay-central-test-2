@@ -71,7 +71,7 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 	<aui:input name="roleId" type="hidden" value="<%= role.getRoleId() %>" />
 
 	<liferay-ui:tabs
-		names="users,communities,organizations,user-groups"
+		names="users,sites,organizations,user-groups"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
 	/>
@@ -81,7 +81,7 @@ request.setAttribute("edit_role_assignments.jsp-portletURL", portletURL);
 			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_users.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("sites") %>'>
-			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_communities.jsp" />
+			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_sites.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("organizations") %>'>
 			<liferay-util:include page="/html/portlet/enterprise_admin/edit_role_assignments_organizations.jsp" />

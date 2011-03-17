@@ -36,7 +36,7 @@ if (group.isOrganization()) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/edit_team_assignments");
+portletURL.setParameter("struts_action", "/sites_admin/edit_team_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
@@ -70,7 +70,7 @@ request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 />
 
 <portlet:actionURL var="editAssignmentsURL">
-	<portlet:param name="struts_action" value="/communities/edit_team_assignments" />
+	<portlet:param name="struts_action" value="/sites_admin/edit_team_assignments" />
 </portlet:actionURL>
 
 <aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">

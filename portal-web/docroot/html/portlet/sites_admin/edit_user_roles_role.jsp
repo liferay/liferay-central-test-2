@@ -74,7 +74,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/communities/edit_user_roles");
+	rowURL.setParameter("struts_action", "/sites_admin/edit_user_roles");
 	rowURL.setParameter("redirect", redirect);
 	rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 	rowURL.setParameter("roleId", String.valueOf(curRole.getRoleId()));

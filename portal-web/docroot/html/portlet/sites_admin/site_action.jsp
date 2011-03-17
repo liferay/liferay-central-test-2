@@ -28,7 +28,7 @@ String tabs1 = (String)objArray[1];
 <liferay-ui:icon-menu>
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
-			<portlet:param name="struts_action" value="/communities/edit_community" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
@@ -55,7 +55,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/communities/edit_layouts" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_layouts" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
@@ -83,7 +83,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_TEAMS) %>">
 		<portlet:renderURL var="manageTeamsURL">
-			<portlet:param name="struts_action" value="/communities/view_teams" />
+			<portlet:param name="struts_action" value="/sites_admin/view_teams" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
@@ -97,7 +97,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL var="assignUserRolesURL">
-			<portlet:param name="struts_action" value="/communities/edit_user_roles" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
@@ -108,7 +108,7 @@ String tabs1 = (String)objArray[1];
 		/>
 
 		<portlet:renderURL var="assignUserGroupRolesURL">
-			<portlet:param name="struts_action" value="/communities/edit_user_group_roles" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_user_group_roles" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
@@ -121,7 +121,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL var="assignMembersURL">
-			<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
@@ -134,7 +134,7 @@ String tabs1 = (String)objArray[1];
 
 		<c:if test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED %>">
 			<portlet:renderURL var="viewMembershipRequestsURL">
-				<portlet:param name="struts_action" value="/communities/view_membership_requests" />
+				<portlet:param name="struts_action" value="/sites_admin/view_membership_requests" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 			</portlet:renderURL>
@@ -151,7 +151,7 @@ String tabs1 = (String)objArray[1];
 		<c:when test='<%= tabs1.equals("sites-owned") || tabs1.equals("sites-joined") %>'>
 			<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
 				<portlet:actionURL var="leaveURL">
-					<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+					<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -170,7 +170,7 @@ String tabs1 = (String)objArray[1];
 					<c:choose>
 						<c:when test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN %>">
 							<portlet:actionURL var="joinURL">
-								<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+								<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 								<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -184,7 +184,7 @@ String tabs1 = (String)objArray[1];
 						</c:when>
 						<c:when test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
 							<portlet:renderURL var="membershipRequestURL">
-								<portlet:param name="struts_action" value="/communities/post_membership_request" />
+								<portlet:param name="struts_action" value="/sites_admin/post_membership_request" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 							</portlet:renderURL>
@@ -206,7 +206,7 @@ String tabs1 = (String)objArray[1];
 				<c:otherwise>
 					<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
 						<portlet:actionURL var="leaveURL">
-							<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+							<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 							<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -225,7 +225,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
 		<portlet:actionURL var="activateURL">
-			<portlet:param name="struts_action" value="/communities/edit_community" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= group.isActive() ? Constants.DEACTIVATE : Constants.RESTORE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
@@ -247,7 +247,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/communities/edit_community" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />

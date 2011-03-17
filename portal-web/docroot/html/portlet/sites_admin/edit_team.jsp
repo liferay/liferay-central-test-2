@@ -40,7 +40,7 @@ if (group.isOrganization()) {
 />
 
 <portlet:actionURL var="editTeamURL">
-	<portlet:param name="struts_action" value="/communities/edit_team" />
+	<portlet:param name="struts_action" value="/sites_admin/edit_team" />
 </portlet:actionURL>
 
 <aui:form action="<%= editTeamURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveTeam();" %>'>

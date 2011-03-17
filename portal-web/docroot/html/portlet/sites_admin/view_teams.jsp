@@ -32,7 +32,7 @@ if (group.isOrganization()) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/view_teams");
+portletURL.setParameter("struts_action", "/sites_admin/view_teams");
 portletURL.setParameter("groupId", String.valueOf(groupId));
 
 pageContext.setAttribute("portletURL", portletURL);
@@ -129,7 +129,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_TEAMS) %>">
 		<portlet:renderURL var="addTeamURL">
-			<portlet:param name="struts_action" value="/communities/edit_team" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_team" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>

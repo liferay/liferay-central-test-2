@@ -32,23 +32,23 @@ long userGroupId = ParamUtil.getLong(request, "userGroupId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/edit_community_assignments");
+portletURL.setParameter("struts_action", "/sites_admin/edit_site_assignments");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-request.setAttribute("edit_community_assignments.jsp-tabs1", tabs1);
-request.setAttribute("edit_community_assignments.jsp-tabs2", tabs2);
+request.setAttribute("edit_site_assignments.jsp-tabs1", tabs1);
+request.setAttribute("edit_site_assignments.jsp-tabs2", tabs2);
 
-request.setAttribute("edit_community_assignments.jsp-cur", cur);
+request.setAttribute("edit_site_assignments.jsp-cur", cur);
 
-request.setAttribute("edit_community_assignments.jsp-redirect", redirect);
+request.setAttribute("edit_site_assignments.jsp-redirect", redirect);
 
-request.setAttribute("edit_community_assignments.jsp-group", group);
-request.setAttribute("edit_community_assignments.jsp-selUser", selUser);
+request.setAttribute("edit_site_assignments.jsp-group", group);
+request.setAttribute("edit_site_assignments.jsp-selUser", selUser);
 
-request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
+request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 %>
 
 <c:choose>
@@ -83,23 +83,23 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 		<c:when test='<%= tabs1.equals("users") %>'>
 			<c:choose>
 				<c:when test="<%= selUser == null %>">
-					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_users.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_users.jsp" />
 				</c:when>
 				<c:otherwise>
-					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_users_roles.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_users_roles.jsp" />
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:when test='<%= tabs1.equals("organizations") %>'>
-			<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_organizations.jsp" />
+			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_organizations.jsp" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("user-groups") %>'>
 			<c:choose>
 				<c:when test="<%= userGroupId == 0 %>">
-					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_user_groups.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_user_groups.jsp" />
 				</c:when>
 				<c:otherwise>
-					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_user_groups_roles.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_user_groups_roles.jsp" />
 				</c:otherwise>
 			</c:choose>
 		</c:when>
@@ -115,7 +115,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace />addOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			document.<portlet:namespace />fm.<portlet:namespace />removeOrganizationIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);
@@ -128,7 +128,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);
@@ -141,7 +141,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);
@@ -154,7 +154,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);
@@ -167,7 +167,7 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /></portlet:actionURL>");
 		},
 		['liferay-util-list-fields']
 	);

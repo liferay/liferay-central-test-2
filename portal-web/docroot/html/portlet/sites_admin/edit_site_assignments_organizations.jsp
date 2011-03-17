@@ -17,13 +17,13 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-String tabs2 = (String)request.getAttribute("edit_community_assignments.jsp-tabs2");
+String tabs2 = (String)request.getAttribute("edit_site_assignments.jsp-tabs2");
 
-int cur = (Integer)request.getAttribute("edit_community_assignments.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
 
-Group group = (Group)request.getAttribute("edit_community_assignments.jsp-group");
+Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignments.jsp-portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
 %>
 
 <aui:input name="addOrganizationIds" type="hidden" />

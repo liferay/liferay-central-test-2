@@ -60,7 +60,7 @@ public class EditTeamAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.communities.error");
+				setForward(actionRequest, "portlet.sites_admin.error");
 			}
 			else if (e instanceof DuplicateTeamException ||
 					 e instanceof NoSuchTeamException ||
@@ -93,7 +93,7 @@ public class EditTeamAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.sites_admin.error");
 			}
 			else {
 				throw e;
@@ -101,7 +101,7 @@ public class EditTeamAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.communities.edit_team"));
+			renderRequest, "portlet.sites_admin.edit_team"));
 	}
 
 	protected void deleteTeam(ActionRequest actionRequest)

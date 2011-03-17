@@ -22,7 +22,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewCommunitiesURL">
-		<portlet:param name="struts_action" value="/communities/view" />
+		<portlet:param name="struts_action" value="/sites_admin/view" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
@@ -31,7 +31,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
 		<portlet:renderURL var="addCommunityURL">
-			<portlet:param name="struts_action" value="/communities/edit_community" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 

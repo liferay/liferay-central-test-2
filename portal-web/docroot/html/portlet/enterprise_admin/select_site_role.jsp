@@ -22,7 +22,7 @@ long userId = ParamUtil.getLong(request, "userId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_community_role");
+portletURL.setParameter("struts_action", "/enterprise_admin/select_site_role");
 portletURL.setParameter("userId", String.valueOf(userId));
 
 User selUser = null;

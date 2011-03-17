@@ -376,7 +376,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/communities/view</value>
+			<value>/sites_admin/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1905,7 +1905,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_admin_communities/view</value>
+			<value>/enterprise_admin_sites/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

@@ -34,7 +34,7 @@ if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES)) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/view");
+portletURL.setParameter("struts_action", "/sites_admin/view");
 portletURL.setParameter("tabs1", tabs1);
 
 pageContext.setAttribute("portletURL", portletURL);
@@ -178,7 +178,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		rowURL.setWindowState(WindowState.NORMAL);
 
-		rowURL.setParameter("struts_action", "/communities/page");
+		rowURL.setParameter("struts_action", "/sites_admin/page");
 		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		rowURL.setParameter("redirect", currentURL);
 
@@ -321,7 +321,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		// Action
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/sites_admin/community_action.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/sites_admin/site_action.jsp");
 
 		// Add result row
 

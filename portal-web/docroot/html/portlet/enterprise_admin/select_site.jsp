@@ -23,7 +23,7 @@ boolean includeUserPersonalCommunity = ParamUtil.getBoolean(request, "includeUse
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
+portletURL.setParameter("struts_action", "/enterprise_admin/select_site");
 portletURL.setParameter("target", target);
 %>
 

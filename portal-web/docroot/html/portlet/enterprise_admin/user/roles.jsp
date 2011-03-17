@@ -223,7 +223,7 @@ userGroupRoles.addAll(organizationRoles);
 	<c:otherwise>
 		<liferay-ui:search-container
 			id='<%= renderResponse.getNamespace() + "communityRolesSearchContainer" %>'
-			headerNames="title,community,null"
+			headerNames="title,site,null"
 		>
 			<liferay-ui:search-container-results
 				results="<%= communityRoles %>"
@@ -309,7 +309,7 @@ userGroupRoles.addAll(organizationRoles);
 	}
 
 	function <portlet:namespace />openCommunityRoleSelector() {
-		<portlet:namespace />openRoleSelector('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community_role" /><portlet:param name="step" value="1" /><portlet:param name="userId" value='<%= (selUser == null) ? "0" : String.valueOf(selUser.getUserId()) %>' /></portlet:renderURL>');
+		<portlet:namespace />openRoleSelector('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_site_role" /><portlet:param name="step" value="1" /><portlet:param name="userId" value='<%= (selUser == null) ? "0" : String.valueOf(selUser.getUserId()) %>' /></portlet:renderURL>');
 	}
 
 	function <portlet:namespace />openOrganizationRoleSelector() {

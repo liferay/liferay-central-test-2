@@ -87,7 +87,7 @@ public class EditGroupAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.communities.error");
+				setForward(actionRequest, "portlet.sites_admin.error");
 			}
 			else if (e instanceof AssetTagException ||
 					 e instanceof DuplicateGroupException ||
@@ -125,7 +125,7 @@ public class EditGroupAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.sites_admin.error");
 			}
 			else {
 				throw e;
@@ -133,7 +133,7 @@ public class EditGroupAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.communities.edit_community"));
+			getForward(renderRequest, "portlet.sites_admin.edit_site"));
 	}
 
 	protected void deleteGroup(ActionRequest actionRequest) throws Exception {
