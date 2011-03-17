@@ -240,8 +240,7 @@ public interface DDMContentLocalService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent addContent(
-		long userId, long groupId, java.lang.String contentKey,
-		boolean autoContentKey, java.lang.String name,
+		long userId, long groupId, java.lang.String name,
 		java.lang.String description, java.lang.String xml,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -252,10 +251,6 @@ public interface DDMContentLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteContent(long groupId, java.lang.String contentKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteContents(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -263,12 +258,6 @@ public interface DDMContentLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getContent(
 		long contentId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.dynamicdatamapping.model.DDMContent getContent(
-		long groupId, java.lang.String contentKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -291,7 +280,7 @@ public interface DDMContentLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMContent updateContent(
-		long groupId, java.lang.String contentKey, java.lang.String name,
+		long groupId, long contentId, java.lang.String name,
 		java.lang.String description, java.lang.String xml,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

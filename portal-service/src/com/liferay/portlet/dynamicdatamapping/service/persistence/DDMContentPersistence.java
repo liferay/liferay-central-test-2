@@ -459,44 +459,6 @@ public interface DDMContentPersistence extends BasePersistence<DDMContent> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchContentException;
 
 	/**
-	* Finds the d d m content where groupId = &#63; and contentKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
-	*
-	* @param groupId the group ID to search with
-	* @param contentKey the content key to search with
-	* @return the matching d d m content
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMContent findByG_C(
-		long groupId, java.lang.String contentKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchContentException;
-
-	/**
-	* Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param contentKey the content key to search with
-	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchByG_C(
-		long groupId, java.lang.String contentKey)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param contentKey the content key to search with
-	* @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchByG_C(
-		long groupId, java.lang.String contentKey, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Finds all the d d m contents.
 	*
 	* @return the d d m contents
@@ -578,17 +540,6 @@ public interface DDMContentPersistence extends BasePersistence<DDMContent> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the d d m content where groupId = &#63; and contentKey = &#63; from the database.
-	*
-	* @param groupId the group ID to search with
-	* @param contentKey the content key to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByG_C(long groupId, java.lang.String contentKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchContentException;
-
-	/**
 	* Removes all the d d m contents from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -635,17 +586,6 @@ public interface DDMContentPersistence extends BasePersistence<DDMContent> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Counts all the d d m contents where groupId = &#63; and contentKey = &#63;.
-	*
-	* @param groupId the group ID to search with
-	* @param contentKey the content key to search with
-	* @return the number of matching d d m contents
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByG_C(long groupId, java.lang.String contentKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

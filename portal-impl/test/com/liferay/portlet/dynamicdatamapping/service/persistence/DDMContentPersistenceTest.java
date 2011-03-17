@@ -72,7 +72,6 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		newDDMContent.setUserName(randomString());
 		newDDMContent.setCreateDate(nextDate());
 		newDDMContent.setModifiedDate(nextDate());
-		newDDMContent.setContentKey(randomString());
 		newDDMContent.setName(randomString());
 		newDDMContent.setDescription(randomString());
 		newDDMContent.setXml(randomString());
@@ -95,8 +94,6 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDDMContent.getModifiedDate()),
 			Time.getShortTimestamp(newDDMContent.getModifiedDate()));
-		assertEquals(existingDDMContent.getContentKey(),
-			newDDMContent.getContentKey());
 		assertEquals(existingDDMContent.getName(), newDDMContent.getName());
 		assertEquals(existingDDMContent.getDescription(),
 			newDDMContent.getDescription());
@@ -181,7 +178,6 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 		ddmContent.setUserName(randomString());
 		ddmContent.setCreateDate(nextDate());
 		ddmContent.setModifiedDate(nextDate());
-		ddmContent.setContentKey(randomString());
 		ddmContent.setName(randomString());
 		ddmContent.setDescription(randomString());
 		ddmContent.setXml(randomString());

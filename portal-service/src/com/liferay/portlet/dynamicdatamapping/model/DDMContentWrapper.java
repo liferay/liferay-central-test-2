@@ -211,24 +211,6 @@ public class DDMContentWrapper implements DDMContent {
 	}
 
 	/**
-	* Gets the content key of this d d m content.
-	*
-	* @return the content key of this d d m content
-	*/
-	public java.lang.String getContentKey() {
-		return _ddmContent.getContentKey();
-	}
-
-	/**
-	* Sets the content key of this d d m content.
-	*
-	* @param contentKey the content key of this d d m content
-	*/
-	public void setContentKey(java.lang.String contentKey) {
-		_ddmContent.setContentKey(contentKey);
-	}
-
-	/**
 	* Gets the name of this d d m content.
 	*
 	* @return the name of this d d m content

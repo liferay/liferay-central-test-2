@@ -265,15 +265,14 @@ public class DDMContentLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent addContent(
-		long userId, long groupId, java.lang.String contentKey,
-		boolean autoContentKey, java.lang.String name,
+		long userId, long groupId, java.lang.String name,
 		java.lang.String description, java.lang.String xml,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addContent(userId, groupId, contentKey, autoContentKey,
-			name, description, xml, serviceContext);
+				   .addContent(userId, groupId, name, description, xml,
+			serviceContext);
 	}
 
 	public static void deleteContent(
@@ -281,12 +280,6 @@ public class DDMContentLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteContent(content);
-	}
-
-	public static void deleteContent(long groupId, java.lang.String contentKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteContent(groupId, contentKey);
 	}
 
 	public static void deleteContents(long groupId)
@@ -300,13 +293,6 @@ public class DDMContentLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getContent(contentId);
-	}
-
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent getContent(
-		long groupId, java.lang.String contentKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getContent(groupId, contentKey);
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMContent> getContents()
@@ -332,13 +318,13 @@ public class DDMContentLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent updateContent(
-		long groupId, java.lang.String contentKey, java.lang.String name,
+		long groupId, long contentId, java.lang.String name,
 		java.lang.String description, java.lang.String xml,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateContent(groupId, contentKey, name, description, xml,
+				   .updateContent(groupId, contentId, name, description, xml,
 			serviceContext);
 	}
 

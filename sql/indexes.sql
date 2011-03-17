@@ -129,7 +129,6 @@ create unique index IX_19DA007B on Country (name);
 
 create index IX_E3BAF436 on DDMContent (companyId);
 create index IX_50BF1038 on DDMContent (groupId);
-create unique index IX_358C7052 on DDMContent (groupId, contentKey);
 create index IX_AE4B50C2 on DDMContent (uuid_);
 create unique index IX_EB9BDE28 on DDMContent (uuid_, groupId);
 

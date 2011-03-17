@@ -191,20 +191,6 @@ public interface DDMContentModel extends BaseModel<DDMContent> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the content key of this d d m content.
-	 *
-	 * @return the content key of this d d m content
-	 */
-	public String getContentKey();
-
-	/**
-	 * Sets the content key of this d d m content.
-	 *
-	 * @param contentKey the content key of this d d m content
-	 */
-	public void setContentKey(String contentKey);
-
-	/**
 	 * Gets the name of this d d m content.
 	 *
 	 * @return the name of this d d m content

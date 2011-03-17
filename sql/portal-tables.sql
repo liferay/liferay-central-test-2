@@ -393,7 +393,6 @@ create table DDMContent (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	contentKey VARCHAR(75) null,
 	name STRING null,
 	description STRING null,
 	xml TEXT null

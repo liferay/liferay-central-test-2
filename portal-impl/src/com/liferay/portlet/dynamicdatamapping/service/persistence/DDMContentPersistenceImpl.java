@@ -118,14 +118,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_C = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_C",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_C = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_C",
-			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -145,13 +137,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-			}, ddmContent);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-			new Object[] {
-				Long.valueOf(ddmContent.getGroupId()),
-				
-			ddmContent.getContentKey()
 			}, ddmContent);
 	}
 
@@ -201,13 +186,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
-			new Object[] {
-				Long.valueOf(ddmContent.getGroupId()),
-				
-			ddmContent.getContentKey()
 			});
 	}
 
@@ -322,13 +300,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				Long.valueOf(ddmContentModelImpl.getGroupId())
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
-			new Object[] {
-				Long.valueOf(ddmContentModelImpl.getGroupId()),
-				
-			ddmContentModelImpl.getContentKey()
-			});
-
 		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey());
 
@@ -392,30 +363,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				}, ddmContent);
 		}
 
-		if (!isNew &&
-				((ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(ddmContent.getContentKey(),
-					ddmContentModelImpl.getOriginalContentKey()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
-				new Object[] {
-					Long.valueOf(ddmContentModelImpl.getOriginalGroupId()),
-					
-				ddmContentModelImpl.getOriginalContentKey()
-				});
-		}
-
-		if (isNew ||
-				((ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(ddmContent.getContentKey(),
-					ddmContentModelImpl.getOriginalContentKey()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-				new Object[] {
-					Long.valueOf(ddmContent.getGroupId()),
-					
-				ddmContent.getContentKey()
-				}, ddmContent);
-		}
-
 		return ddmContent;
 	}
 
@@ -437,7 +384,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		ddmContentImpl.setUserName(ddmContent.getUserName());
 		ddmContentImpl.setCreateDate(ddmContent.getCreateDate());
 		ddmContentImpl.setModifiedDate(ddmContent.getModifiedDate());
-		ddmContentImpl.setContentKey(ddmContent.getContentKey());
 		ddmContentImpl.setName(ddmContent.getName());
 		ddmContentImpl.setDescription(ddmContent.getDescription());
 		ddmContentImpl.setXml(ddmContent.getXml());
@@ -1700,157 +1646,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the d d m content where groupId = &#63; and contentKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param contentKey the content key to search with
-	 * @return the matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDMContent findByG_C(long groupId, String contentKey)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = fetchByG_C(groupId, contentKey);
-
-		if (ddmContent == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", contentKey=");
-			msg.append(contentKey);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchContentException(msg.toString());
-		}
-
-		return ddmContent;
-	}
-
-	/**
-	 * Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param contentKey the content key to search with
-	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDMContent fetchByG_C(long groupId, String contentKey)
-		throws SystemException {
-		return fetchByG_C(groupId, contentKey, true);
-	}
-
-	/**
-	 * Finds the d d m content where groupId = &#63; and contentKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param contentKey the content key to search with
-	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDMContent fetchByG_C(long groupId, String contentKey,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, contentKey };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-			if (contentKey == null) {
-				query.append(_FINDER_COLUMN_G_C_CONTENTKEY_1);
-			}
-			else {
-				if (contentKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (contentKey != null) {
-					qPos.add(contentKey);
-				}
-
-				List<DDMContent> list = q.list();
-
-				result = list;
-
-				DDMContent ddmContent = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-						finderArgs, list);
-				}
-				else {
-					ddmContent = list.get(0);
-
-					cacheResult(ddmContent);
-
-					if ((ddmContent.getGroupId() != groupId) ||
-							(ddmContent.getContentKey() == null) ||
-							!ddmContent.getContentKey().equals(contentKey)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-							finderArgs, ddmContent);
-					}
-				}
-
-				return ddmContent;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (DDMContent)result;
-			}
-		}
-	}
-
-	/**
 	 * Finds all the d d m contents.
 	 *
 	 * @return the d d m contents
@@ -2007,20 +1802,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		for (DDMContent ddmContent : findByCompanyId(companyId)) {
 			ddmContentPersistence.remove(ddmContent);
 		}
-	}
-
-	/**
-	 * Removes the d d m content where groupId = &#63; and contentKey = &#63; from the database.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param contentKey the content key to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByG_C(long groupId, String contentKey)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = findByG_C(groupId, contentKey);
-
-		ddmContentPersistence.remove(ddmContent);
 	}
 
 	/**
@@ -2277,77 +2058,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Counts all the d d m contents where groupId = &#63; and contentKey = &#63;.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param contentKey the content key to search with
-	 * @return the number of matching d d m contents
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByG_C(long groupId, String contentKey)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, contentKey };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_GROUPID_2);
-
-			if (contentKey == null) {
-				query.append(_FINDER_COLUMN_G_C_CONTENTKEY_1);
-			}
-			else {
-				if (contentKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_C_CONTENTKEY_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (contentKey != null) {
-					qPos.add(contentKey);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C, finderArgs,
-					count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
 	 * Counts all the d d m contents.
 	 *
 	 * @return the number of d d m contents
@@ -2441,10 +2151,6 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmContent.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmContent.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "ddmContent.companyId = ?";
-	private static final String _FINDER_COLUMN_G_C_GROUPID_2 = "ddmContent.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_C_CONTENTKEY_1 = "ddmContent.contentKey IS NULL";
-	private static final String _FINDER_COLUMN_G_C_CONTENTKEY_2 = "ddmContent.contentKey = ?";
-	private static final String _FINDER_COLUMN_G_C_CONTENTKEY_3 = "(ddmContent.contentKey IS NULL OR ddmContent.contentKey = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmContent.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMContent exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMContent exists with the key {";

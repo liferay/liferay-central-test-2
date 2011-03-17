@@ -1673,7 +1673,6 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="contentKey" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="xml" />

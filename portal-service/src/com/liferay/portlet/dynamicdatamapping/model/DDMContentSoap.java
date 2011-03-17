@@ -38,7 +38,6 @@ public class DDMContentSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setContentKey(model.getContentKey());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setXml(model.getXml());
@@ -158,14 +157,6 @@ public class DDMContentSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getContentKey() {
-		return _contentKey;
-	}
-
-	public void setContentKey(String contentKey) {
-		_contentKey = contentKey;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -198,7 +189,6 @@ public class DDMContentSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _contentKey;
 	private String _name;
 	private String _description;
 	private String _xml;

@@ -73,12 +73,11 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "contentKey", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "xml", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMContent (uuid_ VARCHAR(75) null,contentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,contentKey VARCHAR(75) null,name STRING null,description STRING null,xml TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table DDMContent (uuid_ VARCHAR(75) null,contentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,xml TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table DDMContent";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -205,27 +204,6 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
-	}
-
-	public String getContentKey() {
-		if (_contentKey == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _contentKey;
-		}
-	}
-
-	public void setContentKey(String contentKey) {
-		if (_originalContentKey == null) {
-			_originalContentKey = _contentKey;
-		}
-
-		_contentKey = contentKey;
-	}
-
-	public String getOriginalContentKey() {
-		return GetterUtil.getString(_originalContentKey);
 	}
 
 	public String getName() {
@@ -392,10 +370,6 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 
 		ddmContentImpl.setModifiedDate(getModifiedDate());
 
-		ddmContentImpl.setContentKey(getContentKey());
-
-		ddmContentModelImpl._originalContentKey = ddmContentModelImpl._contentKey;
-
 		ddmContentImpl.setName(getName());
 
 		ddmContentImpl.setDescription(getDescription());
@@ -448,7 +422,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -466,8 +440,6 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", contentKey=");
-		sb.append(getContentKey());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -480,7 +452,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatamapping.model.DDMContent");
@@ -519,10 +491,6 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>contentKey</column-name><column-value><![CDATA[");
-		sb.append(getContentKey());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -552,8 +520,6 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _contentKey;
-	private String _originalContentKey;
 	private String _name;
 	private String _description;
 	private String _xml;
