@@ -485,6 +485,21 @@ public class EditUserAction extends PortletAction {
 		return StringUtil.split(GetterUtil.getString(value), 0L);
 	}
 
+	protected List<UserGroupRole> getUserGroupRoles(
+		PortletRequest portletRequest) {
+
+		List<UserGroupRole> userGroupRoles = null;
+
+		if ((portletRequest.getParameter("groupRolesGroupIds") != null) ||
+			(portletRequest.getParameter("groupRolesRoleIds") != null)) {
+
+			userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(
+				portletRequest);
+		}
+
+		return userGroupRoles;
+	}
+
 	protected User updateLockout(ActionRequest actionRequest) throws Exception {
 		User user = PortalUtil.getSelectedUser(actionRequest);
 
@@ -586,8 +601,8 @@ public class EditUserAction extends PortletAction {
 
 		List<UserGroupRole> userGroupRoles = null;
 
-		if ((actionRequest.getParameter("groupRolesRoleIds") != null) ||
-			(actionRequest.getParameter("groupRolesGroupIds") != null)) {
+		if ((actionRequest.getParameter("groupRolesGroupIds") != null) ||
+			(actionRequest.getParameter("groupRolesRoleIds") != null)) {
 
 			userGroupRoles = EnterpriseAdminUtil.getUserGroupRoles(
 				actionRequest);
