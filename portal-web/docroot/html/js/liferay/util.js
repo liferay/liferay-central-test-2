@@ -1000,11 +1000,13 @@
 			var formBuilderURL = Liferay.PortletURL.createRenderURL();
 
 			formBuilderURL.setEscapeXML(false);
-			formBuilderURL.setParameter('struts_action', '/forms/edit_structure_entry');
+			formBuilderURL.setParameter('struts_action', '/dynamic_data_mapping/edit_structure');
 			formBuilderURL.setParameter('resourceNamespace', config.namespace);
 			formBuilderURL.setParameter('callback', config.callback);
 			formBuilderURL.setPortletId(166);
 			formBuilderURL.setWindowState('pop_up');
+
+			config.uri = formBuilderURL.toString();
 
 			var dialogConfig = config.dialog;
 
