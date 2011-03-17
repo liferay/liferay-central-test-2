@@ -498,6 +498,8 @@ public class StripFilter extends BasePortalFilter {
 			else if (c == CharPool.GREATER_THAN) {
 				skipWhiteSpace(charBuffer, writer, true);
 			}
+
+			skipWhiteSpace(charBuffer, writer, true);
 		}
 
 		writer.flush();
