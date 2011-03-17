@@ -981,18 +981,6 @@
 		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
 	</definition>
 
-	<!-- My Organizations -->
-
-	<definition name="portlet.my_organizations" extends="portlet" />
-
-	<definition name="portlet.my_organizations.error" extends="portlet.my_organizations">
-		<put name="portlet_content" value="/portlet/my_organizations/error.jsp" />
-	</definition>
-
-	<definition name="portlet.my_organizations.view" extends="portlet.my_organizations">
-		<put name="portlet_content" value="/portlet/my_organizations/view.jsp" />
-	</definition>
-
 	<!-- My Places -->
 
 	<definition name="portlet.my_places.view" path="/portlet/my_places/view.jsp" />

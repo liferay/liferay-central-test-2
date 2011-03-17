@@ -1691,19 +1691,6 @@
 		<css-class-wrapper>portlet-message-boards</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>163</portlet-name>
-		<icon>/html/icons/my_organizations.png</icon>
-		<struts-path>my_organizations</struts-path>
-		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/layouts_admin/css/main.jsp</header-portlet-css>
-		<css-class-wrapper>portlet-communities</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>164</portlet-name>
 		<icon>/html/icons/login.png</icon>
 		<parent-struts-path>login</parent-struts-path>
