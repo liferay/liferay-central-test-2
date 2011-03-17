@@ -14,11 +14,90 @@
 
 package com.liferay.portlet.dynamicdatamapping.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
 import com.liferay.portlet.dynamicdatamapping.service.base.DDMStorageLinkLocalServiceBaseImpl;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class DDMStorageLinkLocalServiceImpl
 	extends DDMStorageLinkLocalServiceBaseImpl {
+
+	public DDMStorageLink addStorageLink(
+			String type, String className, long classPK,
+			ServiceContext serviceContext)
+		throws SystemException {
+
+		long storageLinkId = counterLocalService.increment();
+
+		DDMStorageLink storageLink =
+			ddmStorageLinkPersistence.create(storageLinkId);
+
+		storageLink.setType(type);
+		storageLink.setClassName(className);
+		storageLink.setClassPK(classPK);
+
+		ddmStorageLinkPersistence.update(storageLink, false);
+
+		return storageLink;
+	}
+
+	public void deleteStorageLink(DDMStorageLink storageLink)
+		throws SystemException {
+
+		ddmStorageLinkPersistence.remove(storageLink);
+	}
+
+	public void deleteStorageLink(long storageLinkId)
+		throws PortalException, SystemException {
+
+		DDMStorageLink storageLink =
+			ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
+
+		deleteStorageLink(storageLink);
+	}
+
+	public void deleteStorageLink(String className, long classPK)
+		throws PortalException, SystemException {
+
+		DDMStorageLink storageLink =
+			ddmStorageLinkPersistence.findByC_C(className, classPK);
+
+		deleteStorageLink(storageLink);
+	}
+
+	public DDMStorageLink getStorageLink(long storageLinkId)
+		throws PortalException, SystemException {
+
+		return ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
+	}
+
+	public DDMStorageLink getStorageLink(String className, long classPK)
+		throws PortalException, SystemException {
+
+		return ddmStorageLinkPersistence.findByC_C(className, classPK);
+	}
+
+	public DDMStorageLink updateStorageLink(
+			long storageLinkId, String type, long groupId, String className,
+			long classPK)
+		throws PortalException, SystemException {
+
+		DDMStorageLink storageLink =
+			ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
+
+		storageLink.setType(type);
+		storageLink.setClassName(className);
+		storageLink.setClassPK(classPK);
+
+		ddmStorageLinkPersistence.update(storageLink, false);
+
+		return storageLink;
+	}
+
+
 }
