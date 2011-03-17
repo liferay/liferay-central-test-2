@@ -221,7 +221,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public String getSetting(String key) {
-		String value = StringPool.BLANK;
+		String value = null;
 
 		ThemeSetting themeSetting = _settings.get(key);
 
