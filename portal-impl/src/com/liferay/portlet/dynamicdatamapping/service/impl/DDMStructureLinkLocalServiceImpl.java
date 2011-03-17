@@ -30,7 +30,7 @@ public class DDMStructureLinkLocalServiceImpl
 	extends DDMStructureLinkLocalServiceBaseImpl {
 
 	public DDMStructureLink addStructureLink(
-			String structureKey, String className, long classPK,
+			long classNameId, long classPK, long structureId,
 			ServiceContext serviceContext)
 		throws SystemException {
 
@@ -39,9 +39,9 @@ public class DDMStructureLinkLocalServiceImpl
 		DDMStructureLink structureLink =
 			ddmStructureLinkPersistence.create(structureLinkId);
 
-		structureLink.setStructureKey(structureKey);
-		structureLink.setClassName(className);
+		structureLink.setClassNameId(classNameId);
 		structureLink.setClassPK(classPK);
+		structureLink.setStructureId(structureId);
 
 		ddmStructureLinkPersistence.update(structureLink, false);
 
@@ -64,50 +64,49 @@ public class DDMStructureLinkLocalServiceImpl
 	}
 
 	public void deleteStructureLink(
-			String structureKey, String className, long classPK)
+			long classNameId, long classPK, long structureId)
 		throws PortalException, SystemException {
 
 		DDMStructureLink structureLink =
-			ddmStructureLinkPersistence.findByS_C_C(
-				structureKey, className, classPK);
+			ddmStructureLinkPersistence.findByC_C_S(
+				classNameId, classPK, structureId);
 
 		deleteStructureLink(structureLink);
 	}
 
-	public DDMStructureLink getStructureLink(
-			long structureLinkId)
+	public DDMStructureLink getStructureLink(long structureLinkId)
 		throws PortalException, SystemException {
 
 		return ddmStructureLinkPersistence.findByPrimaryKey(structureLinkId);
 	}
 
 	public DDMStructureLink getStructureLink(
-			String structureKey, String className, long classPK)
+			long classNameId, long classPK, long structureId)
 		throws PortalException, SystemException {
 
-		return ddmStructureLinkPersistence.findByS_C_C(
-			structureKey, className, classPK);
+		return ddmStructureLinkPersistence.findByC_C_S(
+			classNameId, classPK, structureId);
 	}
 
 	public List<DDMStructureLink> getStructureLinks(
-			String structureKey, int start, int end)
+			long structureId, int start, int end)
 		throws SystemException {
 
-		return ddmStructureLinkPersistence.findByStructureKey(
-			structureKey, start, end);
+		return ddmStructureLinkPersistence.findByStructureId(
+			structureId, start, end);
 	}
 
 	public DDMStructureLink updateStructureLink(
-			long structureLinkId, String structureKey, long groupId,
-			String className, long classPK)
+			long structureLinkId, long classNameId, long classPK,
+			long structureId)
 		throws PortalException, SystemException {
 
 		DDMStructureLink structureLink =
 			ddmStructureLinkPersistence.findByPrimaryKey(structureLinkId);
 
-		structureLink.setStructureKey(structureKey);
-		structureLink.setClassName(className);
+		structureLink.setClassNameId(classNameId);
 		structureLink.setClassPK(classPK);
+		structureLink.setStructureId(structureId);
 
 		ddmStructureLinkPersistence.update(structureLink, false);
 

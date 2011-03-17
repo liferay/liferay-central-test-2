@@ -28,18 +28,18 @@ public class DDMStorageLinkLocalServiceImpl
 	extends DDMStorageLinkLocalServiceBaseImpl {
 
 	public DDMStorageLink addStorageLink(
-			String type, String className, long classPK,
+			long classNameId, long classPK, String type,
 			ServiceContext serviceContext)
 		throws SystemException {
 
 		long storageLinkId = counterLocalService.increment();
 
-		DDMStorageLink storageLink =
-			ddmStorageLinkPersistence.create(storageLinkId);
+		DDMStorageLink storageLink = ddmStorageLinkPersistence.create(
+			storageLinkId);
 
-		storageLink.setType(type);
-		storageLink.setClassName(className);
+		storageLink.setClassNameId(classNameId);
 		storageLink.setClassPK(classPK);
+		storageLink.setType(type);
 
 		ddmStorageLinkPersistence.update(storageLink, false);
 
@@ -55,17 +55,17 @@ public class DDMStorageLinkLocalServiceImpl
 	public void deleteStorageLink(long storageLinkId)
 		throws PortalException, SystemException {
 
-		DDMStorageLink storageLink =
-			ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
+		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByPrimaryKey(
+			storageLinkId);
 
 		deleteStorageLink(storageLink);
 	}
 
-	public void deleteStorageLink(String className, long classPK)
+	public void deleteStorageLink(long classNameId, long classPK)
 		throws PortalException, SystemException {
 
-		DDMStorageLink storageLink =
-			ddmStorageLinkPersistence.findByC_C(className, classPK);
+		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByC_C(
+			classNameId, classPK);
 
 		deleteStorageLink(storageLink);
 	}
@@ -76,23 +76,22 @@ public class DDMStorageLinkLocalServiceImpl
 		return ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
 	}
 
-	public DDMStorageLink getStorageLink(String className, long classPK)
+	public DDMStorageLink getStorageLink(long classNameId, long classPK)
 		throws PortalException, SystemException {
 
-		return ddmStorageLinkPersistence.findByC_C(className, classPK);
+		return ddmStorageLinkPersistence.findByC_C(classNameId, classPK);
 	}
 
 	public DDMStorageLink updateStorageLink(
-			long storageLinkId, String type, long groupId, String className,
-			long classPK)
+			long storageLinkId, long classNameId, long classPK, String type)
 		throws PortalException, SystemException {
 
-		DDMStorageLink storageLink =
-			ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
+		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByPrimaryKey(
+			storageLinkId);
 
-		storageLink.setType(type);
-		storageLink.setClassName(className);
+		storageLink.setClassNameId(classNameId);
 		storageLink.setClassPK(classPK);
+		storageLink.setType(type);
 
 		ddmStorageLinkPersistence.update(storageLink, false);
 
