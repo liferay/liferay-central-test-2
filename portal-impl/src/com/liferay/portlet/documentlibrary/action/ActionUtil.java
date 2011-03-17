@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.RepositoryServiceUtil;
@@ -56,7 +57,7 @@ public class ActionUtil {
 			if (fileEntryId > 0) {
 				fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 			}
-			else {
+			else if (Validator.isNotNull(title)) {
 				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, folderId, title);
 			}
