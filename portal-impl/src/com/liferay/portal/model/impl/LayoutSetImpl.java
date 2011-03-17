@@ -100,15 +100,17 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 
 		Theme theme = null;
 
-		boolean isControlPanel = false;
+		boolean controlPanel = false;
 
 		try {
-			isControlPanel =  getGroup().isControlPanel();
+			Group group = getGroup();
+
+			controlPanel = group.isControlPanel();
 		}
 		catch (Exception e) {
 		}
 
-		if (isControlPanel) {
+		if (controlPanel) {
 			String themeId = PrefsPropsUtil.getString(
 				getCompanyId(),
 				PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
