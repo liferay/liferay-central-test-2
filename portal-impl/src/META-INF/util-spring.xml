@@ -75,6 +75,11 @@
 			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
 		</property>
 	</bean>
+	<bean class="com.liferay.portal.kernel.dao.jdbc.CurrentConnectionUtil">
+		<property name="currentConnection">
+			<bean class="com.liferay.portal.dao.jdbc.CurrentConnectionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
 		<property name="mappingSqlQueryFactory">
 			<bean class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
