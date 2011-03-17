@@ -400,7 +400,7 @@ public class WebServerServlet extends HttpServlet {
 			converted = true;
 		}
 
-		String contentType = fileEntry.getMimeType();
+		String contentType = fileEntry.getMimeType(version);
 		long contentLength = 0;
 
 		if (!converted) {
