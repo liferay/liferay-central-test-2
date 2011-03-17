@@ -23,7 +23,6 @@
 
 		<!-- Other fields -->
 
-		<column name="contentKey" type="String" />
 		<column name="name" type="String" localized="true" />
 		<column name="description" type="String" />
 		<column name="xml" type="String" />
@@ -35,10 +34,6 @@
 		</finder>
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
-		</finder>
-		<finder name="G_C" return-type="DDMStructureEntry" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="contentKey" />
 		</finder>
 	</entity>
 	<entity name="DDMStructure" uuid="true" local-service="true" remote-service="true">
@@ -101,8 +96,6 @@
 	</entity>
 	<exceptions>
 		<exception>Content</exception>
-		<exception>ContentDuplicateContentKey</exception>
-		<exception>ContentKey</exception>
 		<exception>ContentName</exception>
 		<exception>ContentXml</exception>
 		<exception>StructureDuplicateElement</exception>
