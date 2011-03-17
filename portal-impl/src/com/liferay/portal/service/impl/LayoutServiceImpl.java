@@ -28,7 +28,9 @@ import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutReference;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -43,6 +45,7 @@ import java.io.InputStream;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -174,6 +177,29 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.exportPortletInfoAsFile(
 			plid, groupId, portletId, parameterMap, startDate, endDate);
+	}
+
+	public long getDefaultPlid(
+			long groupId, boolean privateLayout, String portletId)
+		throws PortalException, SystemException {
+
+		if (groupId > 0) {
+			List<Layout> layouts = layoutPersistence.filterFindByG_P(
+				groupId, privateLayout);
+
+			for (Layout layout : layouts) {
+				if (layout.isTypePortlet()) {
+					LayoutTypePortlet layoutTypePortlet =
+						(LayoutTypePortlet)layout.getLayoutType();
+
+					if (layoutTypePortlet.hasPortletId(portletId)) {
+						return layout.getPlid();
+					}
+				}
+			}
+		}
+
+		return LayoutConstants.DEFAULT_PLID;
 	}
 
 	public String getLayoutName(

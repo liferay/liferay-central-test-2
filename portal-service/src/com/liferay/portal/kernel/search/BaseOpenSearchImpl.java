@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -500,11 +500,11 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception {
 
-		long plid = LayoutLocalServiceUtil.getDefaultPlid(
+		long plid = LayoutServiceUtil.getDefaultPlid(
 			groupId, false, portletId);
 
 		if (plid == 0) {
-			plid = LayoutLocalServiceUtil.getDefaultPlid(
+			plid = LayoutServiceUtil.getDefaultPlid(
 				groupId, true, portletId);
 		}
 
