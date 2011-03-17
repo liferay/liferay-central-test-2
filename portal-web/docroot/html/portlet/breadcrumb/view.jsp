@@ -14,15 +14,6 @@
  */
 --%>
 
-<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalServiceUtil" %>
 <%@ include file="/html/portlet/breadcrumb/init.jsp" %>
 
 <liferay-ui:breadcrumb displayStyle="<%= displayStyle %>" />
-
-<%
-String xml = "<?xml version='1.0' encoding='UTF-8'?><root><Title language-id=\"en_US\">a</Title></root>";
-
-ServiceContext sc = ServiceContextFactory.getInstance(request);
-
-DDMContentLocalServiceUtil.addContent(user.getUserId(), scopeGroupId, "TESTING3", false, "TESTING3", "desc", xml, sc);
-%>
