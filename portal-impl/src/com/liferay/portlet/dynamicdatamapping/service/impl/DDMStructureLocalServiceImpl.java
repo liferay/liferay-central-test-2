@@ -54,7 +54,7 @@ public class DDMStructureLocalServiceImpl
 			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Structure
+		// Dynamic data mapping structure
 
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
@@ -149,7 +149,7 @@ public class DDMStructureLocalServiceImpl
 	public void deleteStructure(DDMStructure structure)
 		throws PortalException, SystemException {
 
-		// Structure
+		// Dynamic data mapping structure
 
 		ddmStructurePersistence.remove(structure);
 

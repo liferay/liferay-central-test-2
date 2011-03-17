@@ -42,10 +42,7 @@ public class DDMContentLocalServiceImpl extends DDMContentLocalServiceBaseImpl {
 			String xml, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Content
-
-		User user = userPersistence.findByPrimaryKey(
-			serviceContext.getUserId());
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		try {
 			xml = DDMXMLUtil.formatXML(xml);
@@ -56,7 +53,7 @@ public class DDMContentLocalServiceImpl extends DDMContentLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		validate(groupId, name, xml);
+		validate(name, xml);
 
 		long contentId = counterLocalService.increment();
 
@@ -78,20 +75,15 @@ public class DDMContentLocalServiceImpl extends DDMContentLocalServiceBaseImpl {
 		return content;
 	}
 
-	public void deleteContent(DDMContent content)
-		throws PortalException, SystemException {
-
-		// Structure
-
+	public void deleteContent(DDMContent content) throws SystemException {
 		ddmContentPersistence.remove(content);
 	}
 
-	public void deleteContents(long groupId)
-		throws PortalException, SystemException {
+	public void deleteContents(long groupId) throws SystemException {
+		List<DDMContent> contents = ddmContentPersistence.findByGroupId(
+			groupId);
 
-		for (DDMContent content :
-			ddmContentPersistence.findByGroupId(groupId)) {
-
+		for (DDMContent content : contents) {
 			deleteContent(content);
 		}
 	}
@@ -121,8 +113,8 @@ public class DDMContentLocalServiceImpl extends DDMContentLocalServiceBaseImpl {
 	}
 
 	public DDMContent updateContent(
-			long groupId, long contentId, String name, String description,
-			String xml, ServiceContext serviceContext)
+			long contentId, String name, String description, String xml,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -132,7 +124,7 @@ public class DDMContentLocalServiceImpl extends DDMContentLocalServiceBaseImpl {
 			throw new ContentXmlException();
 		}
 
-		validate(groupId, name, xml);
+		validate(name, xml);
 
 		DDMContent content = ddmContentPersistence.findByPrimaryKey(contentId);
 
@@ -146,17 +138,11 @@ public class DDMContentLocalServiceImpl extends DDMContentLocalServiceBaseImpl {
 		return content;
 	}
 
-	protected void validate(long groupId, String name, String xml)
-		throws PortalException, SystemException {
-
+	protected void validate(String name, String xml) throws PortalException {
 		if (Validator.isNull(name)) {
 			throw new ContentNameException();
 		}
 
-		validateXml(xml);
-	}
-
-	protected void validateXml(String xml) throws PortalException {
 		if (Validator.isNull(xml)) {
 			throw new ContentException();
 		}

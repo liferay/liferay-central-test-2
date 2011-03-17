@@ -277,14 +277,12 @@ public class DDMContentLocalServiceUtil {
 
 	public static void deleteContent(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent content)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteContent(content);
 	}
 
 	public static void deleteContents(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteContents(groupId);
 	}
 
@@ -318,13 +316,13 @@ public class DDMContentLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent updateContent(
-		long groupId, long contentId, java.lang.String name,
-		java.lang.String description, java.lang.String xml,
+		long contentId, java.lang.String name, java.lang.String description,
+		java.lang.String xml,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateContent(groupId, contentId, name, description, xml,
+				   .updateContent(contentId, name, description, xml,
 			serviceContext);
 	}
 
