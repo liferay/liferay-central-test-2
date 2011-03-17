@@ -98,6 +98,7 @@ public class UpdateLayoutAction extends JSONAction {
 				userId, portletId, columnId, columnPos);
 
 			if (layoutTypePortlet.isPersonalizable() &&
+				layoutTypePortlet.isPersonalizedView() &&
 				!layoutTypePortlet.isColumnDisabled(columnId)) {
 
 				updateLayout = false;
@@ -173,6 +174,7 @@ public class UpdateLayoutAction extends JSONAction {
 				userId, portletId, columnId, columnPos);
 
 			if (layoutTypePortlet.isPersonalizable() &&
+				layoutTypePortlet.isPersonalizedView() &&
 				!layoutTypePortlet.isColumnDisabled(columnId)) {
 
 				updateLayout = false;
