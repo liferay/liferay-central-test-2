@@ -729,7 +729,7 @@
 
 		<action path="/enterprise_admin_sites/edit_site_assignments" type="com.liferay.portlet.communities.action.EditGroupAssignmentsAction">
 			<forward name="portlet.sites_admin.edit_site_assignments" path="portlet.sites_admin.edit_site_assignments" />
-			<forward name="portlet.sites_admin.evrror" path="portlet.sites_admin.error" />
+			<forward name="portlet.sites_admin.error" path="portlet.sites_admin.error" />
 		</action>
 
 		<action path="/enterprise_admin_sites/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
