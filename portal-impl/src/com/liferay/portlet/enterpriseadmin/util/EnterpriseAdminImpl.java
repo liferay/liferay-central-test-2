@@ -850,12 +850,6 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 	public List<UserGroupRole> getUserGroupRoles(PortletRequest portletRequest)
 		throws SystemException, PortalException {
 
-		if ((portletRequest.getParameter("groupRolesGroupIds") == null) ||
-			(portletRequest.getParameter("groupRolesRoleIds") == null)) {
-
-			return null;
-		}
-
 		List<UserGroupRole> userGroupRoles = new UniqueList<UserGroupRole>();
 
 		long[] groupRolesRoleIds= StringUtil.split(ParamUtil.getString(
