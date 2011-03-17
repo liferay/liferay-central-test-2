@@ -39,7 +39,7 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry</model-name>
+		<model-name>com.liferay.portlet.dynamicdatamapping.model.DDMStructure</model-name>
 		<portlet-ref>
 			<portlet-name>166</portlet-name>
 		</portlet-ref>
@@ -62,7 +62,7 @@
 		</permissions>
 	</model-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink</model-name>
+		<model-name>com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink</model-name>
 		<portlet-ref>
 			<portlet-name>166</portlet-name>
 		</portlet-ref>
