@@ -82,6 +82,60 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		_ddmStorageLink.setStorageLinkId(storageLinkId);
 	}
 
+	/**
+	* Gets the type of this d d m storage link.
+	*
+	* @return the type of this d d m storage link
+	*/
+	public java.lang.String getType() {
+		return _ddmStorageLink.getType();
+	}
+
+	/**
+	* Sets the type of this d d m storage link.
+	*
+	* @param type the type of this d d m storage link
+	*/
+	public void setType(java.lang.String type) {
+		_ddmStorageLink.setType(type);
+	}
+
+	/**
+	* Gets the class name of this d d m storage link.
+	*
+	* @return the class name of this d d m storage link
+	*/
+	public java.lang.String getClassName() {
+		return _ddmStorageLink.getClassName();
+	}
+
+	/**
+	* Sets the class name of this d d m storage link.
+	*
+	* @param className the class name of this d d m storage link
+	*/
+	public void setClassName(java.lang.String className) {
+		_ddmStorageLink.setClassName(className);
+	}
+
+	/**
+	* Gets the class p k of this d d m storage link.
+	*
+	* @return the class p k of this d d m storage link
+	*/
+	public long getClassPK() {
+		return _ddmStorageLink.getClassPK();
+	}
+
+	/**
+	* Sets the class p k of this d d m storage link.
+	*
+	* @param classPK the class p k of this d d m storage link
+	*/
+	public void setClassPK(long classPK) {
+		_ddmStorageLink.setClassPK(classPK);
+	}
+
 	public boolean isNew() {
 		return _ddmStorageLink.isNew();
 	}
@@ -123,7 +177,8 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		return new DDMStorageLinkWrapper((DDMStorageLink)_ddmStorageLink.clone());
 	}
 
-	public int compareTo(DDMStorageLink ddmStorageLink) {
+	public int compareTo(
+		com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink ddmStorageLink) {
 		return _ddmStorageLink.compareTo(ddmStorageLink);
 	}
 
@@ -131,7 +186,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		return _ddmStorageLink.hashCode();
 	}
 
-	public DDMStorageLink toEscapedModel() {
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink toEscapedModel() {
 		return new DDMStorageLinkWrapper(_ddmStorageLink.toEscapedModel());
 	}
 

@@ -1421,6 +1421,9 @@
 			<generator class="assigned" />
 		</id>
 		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="className" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureImpl" table="DDMStructure">
 		<cache usage="read-write" />

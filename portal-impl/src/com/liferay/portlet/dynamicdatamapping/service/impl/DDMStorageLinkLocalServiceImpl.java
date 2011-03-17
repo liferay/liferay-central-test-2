@@ -99,5 +99,4 @@ public class DDMStorageLinkLocalServiceImpl
 		return storageLink;
 	}
 
-
 }

@@ -248,6 +248,57 @@ public class DDMStorageLinkLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink addStorageLink(
+		java.lang.String type, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addStorageLink(type, className, classPK, serviceContext);
+	}
+
+	public static void deleteStorageLink(
+		com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink storageLink)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStorageLink(storageLink);
+	}
+
+	public static void deleteStorageLink(long storageLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStorageLink(storageLinkId);
+	}
+
+	public static void deleteStorageLink(java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStorageLink(className, classPK);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLink(
+		long storageLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStorageLink(storageLinkId);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLink(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStorageLink(className, classPK);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink updateStorageLink(
+		long storageLinkId, java.lang.String type, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateStorageLink(storageLinkId, type, groupId, className,
+			classPK);
+	}
+
 	public static DDMStorageLinkLocalService getService() {
 		if (_service == null) {
 			_service = (DDMStorageLinkLocalService)PortalBeanLocatorUtil.locate(DDMStorageLinkLocalService.class.getName());

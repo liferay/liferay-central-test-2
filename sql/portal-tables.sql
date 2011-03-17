@@ -400,7 +400,10 @@ create table DDMContent (
 
 create table DDMStorageLink (
 	uuid_ VARCHAR(75) null,
-	storageLinkId LONG not null primary key
+	storageLinkId LONG not null primary key,
+	type_ VARCHAR(75) null,
+	className VARCHAR(75) null,
+	classPK LONG
 );
 
 create table DDMStructure (
@@ -414,8 +417,8 @@ create table DDMStructure (
 	modifiedDate DATE null,
 	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description STRING null,
-	xsd TEXT null
+	description VARCHAR(75) null,
+	xsd VARCHAR(75) null
 );
 
 create table DDMStructureLink (

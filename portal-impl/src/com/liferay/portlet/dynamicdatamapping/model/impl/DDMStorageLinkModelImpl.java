@@ -55,9 +55,12 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	public static final String TABLE_NAME = "DDMStorageLink";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
-			{ "storageLinkId", Types.BIGINT }
+			{ "storageLinkId", Types.BIGINT },
+			{ "type_", Types.VARCHAR },
+			{ "className", Types.VARCHAR },
+			{ "classPK", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMStorageLink (uuid_ VARCHAR(75) null,storageLinkId LONG not null primary key)";
+	public static final String TABLE_SQL_CREATE = "create table DDMStorageLink (uuid_ VARCHAR(75) null,storageLinkId LONG not null primary key,type_ VARCHAR(75) null,className VARCHAR(75) null,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DDMStorageLink";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -107,6 +110,58 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		_storageLinkId = storageLinkId;
 	}
 
+	public String getType() {
+		if (_type == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _type;
+		}
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
+	public String getClassName() {
+		if (_className == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _className;
+		}
+	}
+
+	public void setClassName(String className) {
+		if (_originalClassName == null) {
+			_originalClassName = _className;
+		}
+
+		_className = className;
+	}
+
+	public String getOriginalClassName() {
+		return GetterUtil.getString(_originalClassName);
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
+		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
+	}
+
 	public DDMStorageLink toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDMStorageLink)this;
@@ -137,6 +192,20 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		ddmStorageLinkImpl.setUuid(getUuid());
 
 		ddmStorageLinkImpl.setStorageLinkId(getStorageLinkId());
+
+		ddmStorageLinkImpl.setType(getType());
+
+		ddmStorageLinkImpl.setClassName(getClassName());
+
+		DDMStorageLinkModelImpl ddmStorageLinkModelImpl = ddmStorageLinkImpl;
+
+		ddmStorageLinkModelImpl._originalClassName = ddmStorageLinkModelImpl._className;
+
+		ddmStorageLinkImpl.setClassPK(getClassPK());
+
+		ddmStorageLinkModelImpl._originalClassPK = ddmStorageLinkModelImpl._classPK;
+
+		ddmStorageLinkModelImpl._setOriginalClassPK = false;
 
 		return ddmStorageLinkImpl;
 	}
@@ -184,19 +253,25 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", storageLinkId=");
 		sb.append(getStorageLinkId());
+		sb.append(", type=");
+		sb.append(getType());
+		sb.append(", className=");
+		sb.append(getClassName());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink");
@@ -210,6 +285,18 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 			"<column><column-name>storageLinkId</column-name><column-value><![CDATA[");
 		sb.append(getStorageLinkId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>type</column-name><column-value><![CDATA[");
+		sb.append(getType());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>className</column-name><column-value><![CDATA[");
+		sb.append(getClassName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append(getClassPK());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -218,5 +305,11 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 	private String _uuid;
 	private long _storageLinkId;
+	private String _type;
+	private String _className;
+	private String _originalClassName;
+	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private transient ExpandoBridge _expandoBridge;
 }

@@ -211,6 +211,44 @@ public interface DDMStorageLinkPersistence extends BasePersistence<DDMStorageLin
 			com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException;
 
 	/**
+	* Finds the d d m storage link where className = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException} if it could not be found.
+	*
+	* @param className the class name to search with
+	* @param classPK the class p k to search with
+	* @return the matching d d m storage link
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink findByC_C(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException;
+
+	/**
+	* Finds the d d m storage link where className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param className the class name to search with
+	* @param classPK the class p k to search with
+	* @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink fetchByC_C(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the d d m storage link where className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param className the class name to search with
+	* @param classPK the class p k to search with
+	* @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink fetchByC_C(
+		java.lang.String className, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the d d m storage links.
 	*
 	* @return the d d m storage links
@@ -263,6 +301,17 @@ public interface DDMStorageLinkPersistence extends BasePersistence<DDMStorageLin
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the d d m storage link where className = &#63; and classPK = &#63; from the database.
+	*
+	* @param className the class name to search with
+	* @param classPK the class p k to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByC_C(java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException;
+
+	/**
 	* Removes all the d d m storage links from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -278,6 +327,17 @@ public interface DDMStorageLinkPersistence extends BasePersistence<DDMStorageLin
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Counts all the d d m storage links where className = &#63; and classPK = &#63;.
+	*
+	* @param className the class name to search with
+	* @param classPK the class p k to search with
+	* @return the number of matching d d m storage links
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_C(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
