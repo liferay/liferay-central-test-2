@@ -10,15 +10,24 @@ log = LogFactoryUtil.getLog(DynamicCSSFilter.java_class)
 begin
 	engine = Sass::Engine.new(
 		$content,
-		:syntax => :scss,
-		:ugly => true,
-		:load_paths => ['html/']
+		{
+			:debug_info => log.isDebugEnabled,
+			:filename => $cssRealPath,
+			:full_exception => log.isDebugEnabled,
+			:syntax => :scss,
+			:load_paths => ['html/'],
+			:ugly
+		}
 	)
 
 	$out.println engine.render
 rescue
 	log.error "Error on #$cssRealPath"
 	log.error $!
+
+	if log.isDebugEnabled
+		log.debug $content
+	end
 
 	$out.println $content
 end
