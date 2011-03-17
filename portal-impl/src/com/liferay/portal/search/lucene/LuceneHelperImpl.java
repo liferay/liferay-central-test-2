@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -172,6 +173,28 @@ public class LuceneHelperImpl implements LuceneHelper {
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
 		}
+	}
+
+	public int countScoredField(Query query, String[] filedNames) {
+
+		String[] nonScoredFieldNames = Field.getNonScoredFieldNames();
+
+		WeightedTerm[] weightedTerms = null;
+
+		int count = 0;
+
+		for (String fieldName : filedNames) {
+			weightedTerms = QueryTermExtractor.getTerms(
+				query, false, fieldName);
+
+			if (weightedTerms.length > 0 &&
+				!ArrayUtil.contains(nonScoredFieldNames, fieldName)) {
+
+				count++;
+			}
+		}
+
+		return count;
 	}
 
 	public void delete(long companyId) {

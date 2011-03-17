@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -38,9 +39,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.document.NumericField;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Explanation;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TopFieldDocs;
 
@@ -84,6 +87,11 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			}
 
 			long startTime = System.currentTimeMillis();
+
+			org.apache.lucene.search.Similarity similarity =
+				new FieldWeightSimilarity();
+
+			indexSearcher.setSimilarity(similarity);
 
 			TopFieldDocs topFieldDocs = indexSearcher.search(
 				QueryTranslator.translate(query), null,
@@ -227,7 +235,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			org.apache.lucene.search.IndexSearcher indexSearcher,
 			TopFieldDocs topFieldDocs, Query query, long startTime,
 			float searchTime, int start, int end)
-		throws IOException {
+		throws IOException, ParseException {
 
 		int length = topFieldDocs.totalHits;
 
@@ -237,6 +245,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 
 		String[] queryTerms = getQueryTerms(query);
+
+		IndexReader ir = indexSearcher.getIndexReader();
+
+		List<String> indexedFieldNames = new ArrayList<String> (
+			ir.getFieldNames(IndexReader.FieldOption.INDEXED));
+
+		org.apache.lucene.search.Query  luceneQuery =
+			QueryTranslator.translate(query);
+
+		int scoredFieldCount = LuceneHelperUtil.countScoredField(luceneQuery,
+			ArrayUtil.toStringArray(indexedFieldNames.toArray()));
 
 		Hits hits = new HitsImpl();
 
@@ -281,9 +300,21 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					subsetSnippets.add(StringPool.BLANK);
 				}
 
-				Float subsetScore = topFieldDocs.scoreDocs[i].score;
+				Float subsetScore =
+					topFieldDocs.scoreDocs[i].score / scoredFieldCount;
 
 				subsetScores.add(subsetScore);
+
+				if (_log.isDebugEnabled()) {
+					try {
+						Explanation explanation = indexSearcher.explain(
+							luceneQuery, topFieldDocs.scoreDocs[i].doc);
+
+						_log.debug(explanation.toString());
+					}
+					catch (Exception e) {
+					}
+				}
 			}
 
 			hits.setStart(startTime);

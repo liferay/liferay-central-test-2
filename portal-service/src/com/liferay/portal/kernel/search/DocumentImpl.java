@@ -229,7 +229,15 @@ public class DocumentImpl implements Document {
 			value = value.toLowerCase();
 		}
 
+		String[] nonScoredFieldNames = Field.getNonScoredFieldNames();
+
 		Field field = new Field(name, value);
+
+		for (String fieldName : nonScoredFieldNames) {
+			if (name.equalsIgnoreCase(fieldName)) {
+				field.setBoost(0);
+			}
+		}
 
 		_fields.put(name, field);
 	}

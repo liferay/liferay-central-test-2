@@ -252,6 +252,10 @@ public class LuceneHelperUtil {
 		getLuceneHelper().addTerm(booleanQuery, field, value, like);
 	}
 
+	public static int countScoredField(Query query, String[] fieldNames) {
+		return getLuceneHelper().countScoredField(query, fieldNames);
+	}
+
 	public static void delete(long companyId) {
 		getLuceneHelper().delete(companyId);
 	}

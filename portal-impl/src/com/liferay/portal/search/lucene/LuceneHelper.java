@@ -51,6 +51,8 @@ public interface LuceneHelper {
 			BooleanQuery booleanQuery, String field, String value, boolean like)
 		throws ParseException;
 
+	public int countScoredField(Query query, String[] fieldNames);
+
 	public void delete(long companyId);
 
 	public void deleteDocuments(long companyId, Term term) throws IOException;
