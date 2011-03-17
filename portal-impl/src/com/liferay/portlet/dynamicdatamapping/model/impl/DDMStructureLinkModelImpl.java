@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureLinkModel;
@@ -59,11 +60,11 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	public static final String TABLE_NAME = "DDMStructureLink";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "structureLinkId", Types.BIGINT },
-			{ "structureKey", Types.VARCHAR },
-			{ "className", Types.VARCHAR },
-			{ "classPK", Types.BIGINT }
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "structureId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMStructureLink (structureLinkId LONG not null primary key,structureKey VARCHAR(75) null,className VARCHAR(75) null,classPK LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DDMStructureLink (structureLinkId LONG not null primary key,classNameId LONG,classPK LONG,structureId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DDMStructureLink";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -85,9 +86,9 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		DDMStructureLink model = new DDMStructureLinkImpl();
 
 		model.setStructureLinkId(soapModel.getStructureLinkId());
-		model.setStructureKey(soapModel.getStructureKey());
-		model.setClassName(soapModel.getClassName());
+		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
+		model.setStructureId(soapModel.getStructureId());
 
 		return model;
 	}
@@ -135,46 +136,30 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		_structureLinkId = structureLinkId;
 	}
 
-	public String getStructureKey() {
-		if (_structureKey == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _structureKey;
-		}
-	}
-
-	public void setStructureKey(String structureKey) {
-		if (_originalStructureKey == null) {
-			_originalStructureKey = _structureKey;
-		}
-
-		_structureKey = structureKey;
-	}
-
-	public String getOriginalStructureKey() {
-		return GetterUtil.getString(_originalStructureKey);
-	}
-
 	public String getClassName() {
-		if (_className == null) {
+		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
 		}
-		else {
-			return _className;
-		}
+
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
-	public void setClassName(String className) {
-		if (_originalClassName == null) {
-			_originalClassName = _className;
-		}
-
-		_className = className;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public String getOriginalClassName() {
-		return GetterUtil.getString(_originalClassName);
+	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
+		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -193,6 +178,24 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 	public long getOriginalClassPK() {
 		return _originalClassPK;
+	}
+
+	public long getStructureId() {
+		return _structureId;
+	}
+
+	public void setStructureId(long structureId) {
+		if (!_setOriginalStructureId) {
+			_setOriginalStructureId = true;
+
+			_originalStructureId = _structureId;
+		}
+
+		_structureId = structureId;
+	}
+
+	public long getOriginalStructureId() {
+		return _originalStructureId;
 	}
 
 	public DDMStructureLink toEscapedModel() {
@@ -224,21 +227,23 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 		ddmStructureLinkImpl.setStructureLinkId(getStructureLinkId());
 
-		ddmStructureLinkImpl.setStructureKey(getStructureKey());
+		ddmStructureLinkImpl.setClassNameId(getClassNameId());
 
 		DDMStructureLinkModelImpl ddmStructureLinkModelImpl = ddmStructureLinkImpl;
 
-		ddmStructureLinkModelImpl._originalStructureKey = ddmStructureLinkModelImpl._structureKey;
+		ddmStructureLinkModelImpl._originalClassNameId = ddmStructureLinkModelImpl._classNameId;
 
-		ddmStructureLinkImpl.setClassName(getClassName());
-
-		ddmStructureLinkModelImpl._originalClassName = ddmStructureLinkModelImpl._className;
-
+		ddmStructureLinkModelImpl._setOriginalClassNameId = false;
 		ddmStructureLinkImpl.setClassPK(getClassPK());
 
 		ddmStructureLinkModelImpl._originalClassPK = ddmStructureLinkModelImpl._classPK;
 
 		ddmStructureLinkModelImpl._setOriginalClassPK = false;
+		ddmStructureLinkImpl.setStructureId(getStructureId());
+
+		ddmStructureLinkModelImpl._originalStructureId = ddmStructureLinkModelImpl._structureId;
+
+		ddmStructureLinkModelImpl._setOriginalStructureId = false;
 
 		return ddmStructureLinkImpl;
 	}
@@ -290,12 +295,12 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 		sb.append("{structureLinkId=");
 		sb.append(getStructureLinkId());
-		sb.append(", structureKey=");
-		sb.append(getStructureKey());
-		sb.append(", className=");
-		sb.append(getClassName());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
+		sb.append(", structureId=");
+		sb.append(getStructureId());
 		sb.append("}");
 
 		return sb.toString();
@@ -314,16 +319,16 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		sb.append(getStructureLinkId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>structureKey</column-name><column-value><![CDATA[");
-		sb.append(getStructureKey());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>className</column-name><column-value><![CDATA[");
-		sb.append(getClassName());
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classPK</column-name><column-value><![CDATA[");
 		sb.append(getClassPK());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>structureId</column-name><column-value><![CDATA[");
+		sb.append(getStructureId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -332,12 +337,14 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	}
 
 	private long _structureLinkId;
-	private String _structureKey;
-	private String _originalStructureKey;
-	private String _className;
-	private String _originalClassName;
+	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
+	private long _structureId;
+	private long _originalStructureId;
+	private boolean _setOriginalStructureId;
 	private transient ExpandoBridge _expandoBridge;
 }

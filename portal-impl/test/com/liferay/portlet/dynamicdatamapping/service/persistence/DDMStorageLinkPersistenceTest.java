@@ -65,9 +65,9 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		DDMStorageLink newDDMStorageLink = _persistence.create(pk);
 
 		newDDMStorageLink.setUuid(randomString());
-		newDDMStorageLink.setType(randomString());
-		newDDMStorageLink.setClassName(randomString());
+		newDDMStorageLink.setClassNameId(nextLong());
 		newDDMStorageLink.setClassPK(nextLong());
+		newDDMStorageLink.setType(randomString());
 
 		_persistence.update(newDDMStorageLink, false);
 
@@ -77,12 +77,12 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 			newDDMStorageLink.getUuid());
 		assertEquals(existingDDMStorageLink.getStorageLinkId(),
 			newDDMStorageLink.getStorageLinkId());
-		assertEquals(existingDDMStorageLink.getType(),
-			newDDMStorageLink.getType());
-		assertEquals(existingDDMStorageLink.getClassName(),
-			newDDMStorageLink.getClassName());
+		assertEquals(existingDDMStorageLink.getClassNameId(),
+			newDDMStorageLink.getClassNameId());
 		assertEquals(existingDDMStorageLink.getClassPK(),
 			newDDMStorageLink.getClassPK());
+		assertEquals(existingDDMStorageLink.getType(),
+			newDDMStorageLink.getType());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -157,9 +157,9 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		DDMStorageLink ddmStorageLink = _persistence.create(pk);
 
 		ddmStorageLink.setUuid(randomString());
-		ddmStorageLink.setType(randomString());
-		ddmStorageLink.setClassName(randomString());
+		ddmStorageLink.setClassNameId(nextLong());
 		ddmStorageLink.setClassPK(nextLong());
+		ddmStorageLink.setType(randomString());
 
 		_persistence.update(ddmStorageLink, false);
 

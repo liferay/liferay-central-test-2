@@ -31,9 +31,9 @@ public class DDMStructureLinkJSONSerializer {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("structureLinkId", model.getStructureLinkId());
-		jsonObject.put("structureKey", model.getStructureKey());
-		jsonObject.put("className", model.getClassName());
+		jsonObject.put("classNameId", model.getClassNameId());
 		jsonObject.put("classPK", model.getClassPK());
+		jsonObject.put("structureId", model.getStructureId());
 
 		return jsonObject;
 	}

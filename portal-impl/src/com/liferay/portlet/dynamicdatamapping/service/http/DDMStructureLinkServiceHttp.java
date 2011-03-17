@@ -55,8 +55,8 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkServiceUti
  */
 public class DDMStructureLinkServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink addStructureLink(
-		HttpPrincipal httpPrincipal, java.lang.String structureKey,
-		java.lang.String className, long classPK,
+		HttpPrincipal httpPrincipal, long classNameId, long classPK,
+		long structureId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -65,7 +65,7 @@ public class DDMStructureLinkServiceHttp {
 					"addStructureLink", _addStructureLinkParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					structureKey, className, classPK, serviceContext);
+					classNameId, classPK, structureId, serviceContext);
 
 			Object returnObj = null;
 
@@ -94,15 +94,15 @@ public class DDMStructureLinkServiceHttp {
 	}
 
 	public static void deleteStructureLink(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String structureKey, long structureLinkId)
+		long structureLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDMStructureLinkServiceUtil.class.getName(),
 					"deleteStructureLink", _deleteStructureLinkParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, structureLinkId);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					structureLinkId);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -127,16 +127,16 @@ public class DDMStructureLinkServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureKey, java.lang.String className, long classPK)
+		HttpPrincipal httpPrincipal, long classNameId, long classPK,
+		long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDMStructureLinkServiceUtil.class.getName(),
 					"getStructureLink", _getStructureLinkParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, className, classPK);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					classNameId, classPK, structureId);
 
 			Object returnObj = null;
 
@@ -165,9 +165,8 @@ public class DDMStructureLinkServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink updateStructureLink(
-		HttpPrincipal httpPrincipal, long structureLinkId,
-		java.lang.String structureKey, long groupId,
-		java.lang.String className, long classPK)
+		HttpPrincipal httpPrincipal, long structureLinkId, long classNameId,
+		long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -175,7 +174,7 @@ public class DDMStructureLinkServiceHttp {
 					"updateStructureLink", _updateStructureLinkParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					structureLinkId, structureKey, groupId, className, classPK);
+					structureLinkId, classNameId, classPK, structureId);
 
 			Object returnObj = null;
 
@@ -205,18 +204,16 @@ public class DDMStructureLinkServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureLinkServiceHttp.class);
 	private static final Class<?>[] _addStructureLinkParameterTypes0 = new Class[] {
-			java.lang.String.class, java.lang.String.class, long.class,
+			long.class, long.class, long.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteStructureLinkParameterTypes1 = new Class[] {
-			long.class, java.lang.String.class, long.class
-		};
-	private static final Class<?>[] _getStructureLinkParameterTypes2 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
 			long.class
 		};
+	private static final Class<?>[] _getStructureLinkParameterTypes2 = new Class[] {
+			long.class, long.class, long.class
+		};
 	private static final Class<?>[] _updateStructureLinkParameterTypes3 = new Class[] {
-			long.class, java.lang.String.class, long.class,
-			java.lang.String.class, long.class
+			long.class, long.class, long.class, long.class
 		};
 }

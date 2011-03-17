@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -73,32 +72,30 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	public static final String FINDER_CLASS_NAME_ENTITY = DDMStructureLinkImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_STRUCTUREKEY = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_STRUCTUREID = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "findByStructureKey",
+			FINDER_CLASS_NAME_LIST, "findByStructureId",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_STRUCTUREKEY = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_STRUCTUREID = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByStructureKey",
-			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_S_C_C = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByStructureId",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C_S = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByS_C_C",
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_C_S",
 			new String[] {
-				String.class.getName(), String.class.getName(),
-				Long.class.getName()
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_S_C_C = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_S = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByS_C_C",
+			FINDER_CLASS_NAME_LIST, "countByC_C_S",
 			new String[] {
-				String.class.getName(), String.class.getName(),
-				Long.class.getName()
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkModelImpl.FINDER_CACHE_ENABLED,
@@ -117,12 +114,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 			DDMStructureLinkImpl.class, ddmStructureLink.getPrimaryKey(),
 			ddmStructureLink);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_S_C_C,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_S,
 			new Object[] {
-				ddmStructureLink.getStructureKey(),
-				
-			ddmStructureLink.getClassName(),
-				Long.valueOf(ddmStructureLink.getClassPK())
+				Long.valueOf(ddmStructureLink.getClassNameId()),
+				Long.valueOf(ddmStructureLink.getClassPK()),
+				Long.valueOf(ddmStructureLink.getStructureId())
 			}, ddmStructureLink);
 	}
 
@@ -170,12 +166,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		EntityCacheUtil.removeResult(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStructureLinkImpl.class, ddmStructureLink.getPrimaryKey());
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_S,
 			new Object[] {
-				ddmStructureLink.getStructureKey(),
-				
-			ddmStructureLink.getClassName(),
-				Long.valueOf(ddmStructureLink.getClassPK())
+				Long.valueOf(ddmStructureLink.getClassNameId()),
+				Long.valueOf(ddmStructureLink.getClassPK()),
+				Long.valueOf(ddmStructureLink.getStructureId())
 			});
 	}
 
@@ -282,12 +277,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 		DDMStructureLinkModelImpl ddmStructureLinkModelImpl = (DDMStructureLinkModelImpl)ddmStructureLink;
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_S,
 			new Object[] {
-				ddmStructureLinkModelImpl.getStructureKey(),
-				
-			ddmStructureLinkModelImpl.getClassName(),
-				Long.valueOf(ddmStructureLinkModelImpl.getClassPK())
+				Long.valueOf(ddmStructureLinkModelImpl.getClassNameId()),
+				Long.valueOf(ddmStructureLinkModelImpl.getClassPK()),
+				Long.valueOf(ddmStructureLinkModelImpl.getStructureId())
 			});
 
 		EntityCacheUtil.removeResult(DDMStructureLinkModelImpl.ENTITY_CACHE_ENABLED,
@@ -328,32 +322,28 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 			ddmStructureLink);
 
 		if (!isNew &&
-				(!Validator.equals(ddmStructureLink.getStructureKey(),
-					ddmStructureLinkModelImpl.getOriginalStructureKey()) ||
-				!Validator.equals(ddmStructureLink.getClassName(),
-					ddmStructureLinkModelImpl.getOriginalClassName()) ||
-				(ddmStructureLink.getClassPK() != ddmStructureLinkModelImpl.getOriginalClassPK()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
+				((ddmStructureLink.getClassNameId() != ddmStructureLinkModelImpl.getOriginalClassNameId()) ||
+				(ddmStructureLink.getClassPK() != ddmStructureLinkModelImpl.getOriginalClassPK()) ||
+				(ddmStructureLink.getStructureId() != ddmStructureLinkModelImpl.getOriginalStructureId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_S,
 				new Object[] {
-					ddmStructureLinkModelImpl.getOriginalStructureKey(),
-					
-				ddmStructureLinkModelImpl.getOriginalClassName(),
-					Long.valueOf(ddmStructureLinkModelImpl.getOriginalClassPK())
+					Long.valueOf(
+						ddmStructureLinkModelImpl.getOriginalClassNameId()),
+					Long.valueOf(ddmStructureLinkModelImpl.getOriginalClassPK()),
+					Long.valueOf(
+						ddmStructureLinkModelImpl.getOriginalStructureId())
 				});
 		}
 
 		if (isNew ||
-				(!Validator.equals(ddmStructureLink.getStructureKey(),
-					ddmStructureLinkModelImpl.getOriginalStructureKey()) ||
-				!Validator.equals(ddmStructureLink.getClassName(),
-					ddmStructureLinkModelImpl.getOriginalClassName()) ||
-				(ddmStructureLink.getClassPK() != ddmStructureLinkModelImpl.getOriginalClassPK()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_S_C_C,
+				((ddmStructureLink.getClassNameId() != ddmStructureLinkModelImpl.getOriginalClassNameId()) ||
+				(ddmStructureLink.getClassPK() != ddmStructureLinkModelImpl.getOriginalClassPK()) ||
+				(ddmStructureLink.getStructureId() != ddmStructureLinkModelImpl.getOriginalStructureId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_S,
 				new Object[] {
-					ddmStructureLink.getStructureKey(),
-					
-				ddmStructureLink.getClassName(),
-					Long.valueOf(ddmStructureLink.getClassPK())
+					Long.valueOf(ddmStructureLink.getClassNameId()),
+					Long.valueOf(ddmStructureLink.getClassPK()),
+					Long.valueOf(ddmStructureLink.getStructureId())
 				}, ddmStructureLink);
 		}
 
@@ -372,9 +362,9 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		ddmStructureLinkImpl.setPrimaryKey(ddmStructureLink.getPrimaryKey());
 
 		ddmStructureLinkImpl.setStructureLinkId(ddmStructureLink.getStructureLinkId());
-		ddmStructureLinkImpl.setStructureKey(ddmStructureLink.getStructureKey());
-		ddmStructureLinkImpl.setClassName(ddmStructureLink.getClassName());
+		ddmStructureLinkImpl.setClassNameId(ddmStructureLink.getClassNameId());
 		ddmStructureLinkImpl.setClassPK(ddmStructureLink.getClassPK());
+		ddmStructureLinkImpl.setStructureId(ddmStructureLink.getStructureId());
 
 		return ddmStructureLinkImpl;
 	}
@@ -465,61 +455,61 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds all the d d m structure links where structureKey = &#63;.
+	 * Finds all the d d m structure links where structureId = &#63;.
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @return the matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureLink> findByStructureKey(String structureKey)
+	public List<DDMStructureLink> findByStructureId(long structureId)
 		throws SystemException {
-		return findByStructureKey(structureKey, QueryUtil.ALL_POS,
+		return findByStructureId(structureId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m structure links where structureKey = &#63;.
+	 * Finds a range of all the d d m structure links where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @param start the lower bound of the range of d d m structure links to return
 	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
 	 * @return the range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureLink> findByStructureKey(String structureKey,
+	public List<DDMStructureLink> findByStructureId(long structureId,
 		int start, int end) throws SystemException {
-		return findByStructureKey(structureKey, start, end, null);
+		return findByStructureId(structureId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m structure links where structureKey = &#63;.
+	 * Finds an ordered range of all the d d m structure links where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @param start the lower bound of the range of d d m structure links to return
 	 * @param end the upper bound of the range of d d m structure links to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMStructureLink> findByStructureKey(String structureKey,
+	public List<DDMStructureLink> findByStructureId(long structureId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
-				structureKey,
+				structureId,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMStructureLink> list = (List<DDMStructureLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREKEY,
+		List<DDMStructureLink> list = (List<DDMStructureLink>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_STRUCTUREID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -535,17 +525,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 			query.append(_SQL_SELECT_DDMSTRUCTURELINK_WHERE);
 
-			if (structureKey == null) {
-				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
-			}
-			else {
-				if (structureKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -563,9 +543,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureKey != null) {
-					qPos.add(structureKey);
-				}
+				qPos.add(structureId);
 
 				list = (List<DDMStructureLink>)QueryUtil.list(q, getDialect(),
 						start, end);
@@ -575,13 +553,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_STRUCTUREKEY,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_STRUCTUREID,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_STRUCTUREKEY,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_STRUCTUREID,
 						finderArgs, list);
 				}
 
@@ -593,22 +571,22 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the first d d m structure link in the ordered set where structureKey = &#63;.
+	 * Finds the first d d m structure link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureLink findByStructureKey_First(String structureKey,
+	public DDMStructureLink findByStructureId_First(long structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
-		List<DDMStructureLink> list = findByStructureKey(structureKey, 0, 1,
+		List<DDMStructureLink> list = findByStructureId(structureId, 0, 1,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -616,8 +594,8 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("structureKey=");
-			msg.append(structureKey);
+			msg.append("structureId=");
+			msg.append(structureId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -629,33 +607,33 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the last d d m structure link in the ordered set where structureKey = &#63;.
+	 * Finds the last d d m structure link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureLink findByStructureKey_Last(String structureKey,
+	public DDMStructureLink findByStructureId_Last(long structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
-		int count = countByStructureKey(structureKey);
+		int count = countByStructureId(structureId);
 
-		List<DDMStructureLink> list = findByStructureKey(structureKey,
-				count - 1, count, orderByComparator);
+		List<DDMStructureLink> list = findByStructureId(structureId, count - 1,
+				count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("structureKey=");
-			msg.append(structureKey);
+			msg.append("structureId=");
+			msg.append(structureId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -667,21 +645,21 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure links before and after the current d d m structure link in the ordered set where structureKey = &#63;.
+	 * Finds the d d m structure links before and after the current d d m structure link in the ordered set where structureId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param structureLinkId the primary key of the current d d m structure link
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a d d m structure link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureLink[] findByStructureKey_PrevAndNext(
-		long structureLinkId, String structureKey,
+	public DDMStructureLink[] findByStructureId_PrevAndNext(
+		long structureLinkId, long structureId,
 		OrderByComparator orderByComparator)
 		throws NoSuchStructureLinkException, SystemException {
 		DDMStructureLink ddmStructureLink = findByPrimaryKey(structureLinkId);
@@ -693,13 +671,13 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 			DDMStructureLink[] array = new DDMStructureLinkImpl[3];
 
-			array[0] = getByStructureKey_PrevAndNext(session, ddmStructureLink,
-					structureKey, orderByComparator, true);
+			array[0] = getByStructureId_PrevAndNext(session, ddmStructureLink,
+					structureId, orderByComparator, true);
 
 			array[1] = ddmStructureLink;
 
-			array[2] = getByStructureKey_PrevAndNext(session, ddmStructureLink,
-					structureKey, orderByComparator, false);
+			array[2] = getByStructureId_PrevAndNext(session, ddmStructureLink,
+					structureId, orderByComparator, false);
 
 			return array;
 		}
@@ -711,8 +689,8 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		}
 	}
 
-	protected DDMStructureLink getByStructureKey_PrevAndNext(Session session,
-		DDMStructureLink ddmStructureLink, String structureKey,
+	protected DDMStructureLink getByStructureId_PrevAndNext(Session session,
+		DDMStructureLink ddmStructureLink, long structureId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -726,17 +704,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 		query.append(_SQL_SELECT_DDMSTRUCTURELINK_WHERE);
 
-		if (structureKey == null) {
-			query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
-		}
-		else {
-			if (structureKey.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
-			}
-		}
+		query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -801,9 +769,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (structureKey != null) {
-			qPos.add(structureKey);
-		}
+		qPos.add(structureId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(ddmStructureLink);
@@ -824,33 +790,33 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link where structureKey = &#63; and className = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException} if it could not be found.
+	 * Finds the d d m structure link where classNameId = &#63; and classPK = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException} if it could not be found.
 	 *
-	 * @param structureKey the structure key to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
+	 * @param structureId the structure ID to search with
 	 * @return the matching d d m structure link
 	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureLink findByS_C_C(String structureKey, String className,
-		long classPK) throws NoSuchStructureLinkException, SystemException {
-		DDMStructureLink ddmStructureLink = fetchByS_C_C(structureKey,
-				className, classPK);
+	public DDMStructureLink findByC_C_S(long classNameId, long classPK,
+		long structureId) throws NoSuchStructureLinkException, SystemException {
+		DDMStructureLink ddmStructureLink = fetchByC_C_S(classNameId, classPK,
+				structureId);
 
 		if (ddmStructureLink == null) {
 			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("structureKey=");
-			msg.append(structureKey);
-
-			msg.append(", className=");
-			msg.append(className);
+			msg.append("classNameId=");
+			msg.append(classNameId);
 
 			msg.append(", classPK=");
 			msg.append(classPK);
+
+			msg.append(", structureId=");
+			msg.append(structureId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -865,36 +831,36 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Finds the d d m structure link where structureKey = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d d m structure link where classNameId = &#63; and classPK = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param structureKey the structure key to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
+	 * @param structureId the structure ID to search with
 	 * @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureLink fetchByS_C_C(String structureKey, String className,
-		long classPK) throws SystemException {
-		return fetchByS_C_C(structureKey, className, classPK, true);
+	public DDMStructureLink fetchByC_C_S(long classNameId, long classPK,
+		long structureId) throws SystemException {
+		return fetchByC_C_S(classNameId, classPK, structureId, true);
 	}
 
 	/**
-	 * Finds the d d m structure link where structureKey = &#63; and className = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d d m structure link where classNameId = &#63; and classPK = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param structureKey the structure key to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
+	 * @param structureId the structure ID to search with
 	 * @return the matching d d m structure link, or <code>null</code> if a matching d d m structure link could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMStructureLink fetchByS_C_C(String structureKey, String className,
-		long classPK, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { structureKey, className, classPK };
+	public DDMStructureLink fetchByC_C_S(long classNameId, long classPK,
+		long structureId, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { classNameId, classPK, structureId };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_S_C_C,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C_S,
 					finderArgs, this);
 		}
 
@@ -903,31 +869,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 			query.append(_SQL_SELECT_DDMSTRUCTURELINK_WHERE);
 
-			if (structureKey == null) {
-				query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_1);
-			}
-			else {
-				if (structureKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_C_C_S_CLASSNAMEID_2);
 
-			if (className == null) {
-				query.append(_FINDER_COLUMN_S_C_C_CLASSNAME_1);
-			}
-			else {
-				if (className.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_S_C_C_CLASSNAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_S_C_C_CLASSNAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_C_C_S_CLASSPK_2);
 
-			query.append(_FINDER_COLUMN_S_C_C_CLASSPK_2);
+			query.append(_FINDER_COLUMN_C_C_S_STRUCTUREID_2);
 
 			String sql = query.toString();
 
@@ -940,15 +886,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureKey != null) {
-					qPos.add(structureKey);
-				}
-
-				if (className != null) {
-					qPos.add(className);
-				}
+				qPos.add(classNameId);
 
 				qPos.add(classPK);
+
+				qPos.add(structureId);
 
 				List<DDMStructureLink> list = q.list();
 
@@ -957,7 +899,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 				DDMStructureLink ddmStructureLink = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_S_C_C,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_S,
 						finderArgs, list);
 				}
 				else {
@@ -965,13 +907,10 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 					cacheResult(ddmStructureLink);
 
-					if ((ddmStructureLink.getStructureKey() == null) ||
-							!ddmStructureLink.getStructureKey()
-												 .equals(structureKey) ||
-							(ddmStructureLink.getClassName() == null) ||
-							!ddmStructureLink.getClassName().equals(className) ||
-							(ddmStructureLink.getClassPK() != classPK)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_S_C_C,
+					if ((ddmStructureLink.getClassNameId() != classNameId) ||
+							(ddmStructureLink.getClassPK() != classPK) ||
+							(ddmStructureLink.getStructureId() != structureId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_S,
 							finderArgs, ddmStructureLink);
 					}
 				}
@@ -983,7 +922,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_S,
 						finderArgs);
 				}
 
@@ -1110,31 +1049,29 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Removes all the d d m structure links where structureKey = &#63; from the database.
+	 * Removes all the d d m structure links where structureId = &#63; from the database.
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByStructureKey(String structureKey)
-		throws SystemException {
-		for (DDMStructureLink ddmStructureLink : findByStructureKey(
-				structureKey)) {
+	public void removeByStructureId(long structureId) throws SystemException {
+		for (DDMStructureLink ddmStructureLink : findByStructureId(structureId)) {
 			ddmStructureLinkPersistence.remove(ddmStructureLink);
 		}
 	}
 
 	/**
-	 * Removes the d d m structure link where structureKey = &#63; and className = &#63; and classPK = &#63; from the database.
+	 * Removes the d d m structure link where classNameId = &#63; and classPK = &#63; and structureId = &#63; from the database.
 	 *
-	 * @param structureKey the structure key to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
+	 * @param structureId the structure ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByS_C_C(String structureKey, String className,
-		long classPK) throws NoSuchStructureLinkException, SystemException {
-		DDMStructureLink ddmStructureLink = findByS_C_C(structureKey,
-				className, classPK);
+	public void removeByC_C_S(long classNameId, long classPK, long structureId)
+		throws NoSuchStructureLinkException, SystemException {
+		DDMStructureLink ddmStructureLink = findByC_C_S(classNameId, classPK,
+				structureId);
 
 		ddmStructureLinkPersistence.remove(ddmStructureLink);
 	}
@@ -1151,17 +1088,16 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Counts all the d d m structure links where structureKey = &#63;.
+	 * Counts all the d d m structure links where structureId = &#63;.
 	 *
-	 * @param structureKey the structure key to search with
+	 * @param structureId the structure ID to search with
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByStructureKey(String structureKey)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { structureKey };
+	public int countByStructureId(long structureId) throws SystemException {
+		Object[] finderArgs = new Object[] { structureId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREKEY,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1169,17 +1105,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 			query.append(_SQL_COUNT_DDMSTRUCTURELINK_WHERE);
 
-			if (structureKey == null) {
-				query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1);
-			}
-			else {
-				if (structureKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 
 			String sql = query.toString();
 
@@ -1192,9 +1118,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureKey != null) {
-					qPos.add(structureKey);
-				}
+				qPos.add(structureId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1206,7 +1130,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREKEY,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_STRUCTUREID,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1217,19 +1141,19 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	}
 
 	/**
-	 * Counts all the d d m structure links where structureKey = &#63; and className = &#63; and classPK = &#63;.
+	 * Counts all the d d m structure links where classNameId = &#63; and classPK = &#63; and structureId = &#63;.
 	 *
-	 * @param structureKey the structure key to search with
-	 * @param className the class name to search with
+	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
+	 * @param structureId the structure ID to search with
 	 * @return the number of matching d d m structure links
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByS_C_C(String structureKey, String className, long classPK)
+	public int countByC_C_S(long classNameId, long classPK, long structureId)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { structureKey, className, classPK };
+		Object[] finderArgs = new Object[] { classNameId, classPK, structureId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_S_C_C,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -1237,31 +1161,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 			query.append(_SQL_COUNT_DDMSTRUCTURELINK_WHERE);
 
-			if (structureKey == null) {
-				query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_1);
-			}
-			else {
-				if (structureKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_S_C_C_STRUCTUREKEY_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_C_C_S_CLASSNAMEID_2);
 
-			if (className == null) {
-				query.append(_FINDER_COLUMN_S_C_C_CLASSNAME_1);
-			}
-			else {
-				if (className.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_S_C_C_CLASSNAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_S_C_C_CLASSNAME_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_C_C_S_CLASSPK_2);
 
-			query.append(_FINDER_COLUMN_S_C_C_CLASSPK_2);
+			query.append(_FINDER_COLUMN_C_C_S_STRUCTUREID_2);
 
 			String sql = query.toString();
 
@@ -1274,15 +1178,11 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (structureKey != null) {
-					qPos.add(structureKey);
-				}
-
-				if (className != null) {
-					qPos.add(className);
-				}
+				qPos.add(classNameId);
 
 				qPos.add(classPK);
+
+				qPos.add(structureId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1294,7 +1194,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_S_C_C,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_S,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1391,16 +1291,10 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	private static final String _SQL_SELECT_DDMSTRUCTURELINK_WHERE = "SELECT ddmStructureLink FROM DDMStructureLink ddmStructureLink WHERE ";
 	private static final String _SQL_COUNT_DDMSTRUCTURELINK = "SELECT COUNT(ddmStructureLink) FROM DDMStructureLink ddmStructureLink";
 	private static final String _SQL_COUNT_DDMSTRUCTURELINK_WHERE = "SELECT COUNT(ddmStructureLink) FROM DDMStructureLink ddmStructureLink WHERE ";
-	private static final String _FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_1 = "ddmStructureLink.structureKey IS NULL";
-	private static final String _FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_2 = "ddmStructureLink.structureKey = ?";
-	private static final String _FINDER_COLUMN_STRUCTUREKEY_STRUCTUREKEY_3 = "(ddmStructureLink.structureKey IS NULL OR ddmStructureLink.structureKey = ?)";
-	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREKEY_1 = "ddmStructureLink.structureKey IS NULL AND ";
-	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREKEY_2 = "ddmStructureLink.structureKey = ? AND ";
-	private static final String _FINDER_COLUMN_S_C_C_STRUCTUREKEY_3 = "(ddmStructureLink.structureKey IS NULL OR ddmStructureLink.structureKey = ?) AND ";
-	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_1 = "ddmStructureLink.className IS NULL AND ";
-	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_2 = "ddmStructureLink.className = ? AND ";
-	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_3 = "(ddmStructureLink.className IS NULL OR ddmStructureLink.className = ?) AND ";
-	private static final String _FINDER_COLUMN_S_C_C_CLASSPK_2 = "ddmStructureLink.classPK = ?";
+	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2 = "ddmStructureLink.structureId = ?";
+	private static final String _FINDER_COLUMN_C_C_S_CLASSNAMEID_2 = "ddmStructureLink.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_S_CLASSPK_2 = "ddmStructureLink.classPK = ? AND ";
+	private static final String _FINDER_COLUMN_C_C_S_STRUCTUREID_2 = "ddmStructureLink.structureId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmStructureLink.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMStructureLink exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMStructureLink exists with the key {";

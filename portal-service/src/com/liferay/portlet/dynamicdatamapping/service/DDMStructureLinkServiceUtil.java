@@ -38,39 +38,35 @@ public class DDMStructureLinkServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLinkServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink addStructureLink(
-		java.lang.String structureKey, java.lang.String className,
-		long classPK, com.liferay.portal.service.ServiceContext serviceContext)
+		long classNameId, long classPK, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addStructureLink(structureKey, className, classPK,
+				   .addStructureLink(classNameId, classPK, structureId,
 			serviceContext);
 	}
 
-	public static void deleteStructureLink(long groupId,
-		java.lang.String structureKey, long structureLinkId)
+	public static void deleteStructureLink(long structureLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructureLink(groupId, structureKey, structureLinkId);
+		getService().deleteStructureLink(structureLinkId);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		long groupId, java.lang.String structureKey,
-		java.lang.String className, long classPK)
+		long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getStructureLink(groupId, structureKey, className, classPK);
+		return getService().getStructureLink(classNameId, classPK, structureId);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink updateStructureLink(
-		long structureLinkId, java.lang.String structureKey, long groupId,
-		java.lang.String className, long classPK)
+		long structureLinkId, long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStructureLink(structureLinkId, structureKey, groupId,
-			className, classPK);
+				   .updateStructureLink(structureLinkId, classNameId, classPK,
+			structureId);
 	}
 
 	public static DDMStructureLinkService getService() {

@@ -249,11 +249,11 @@ public class DDMStructureLinkLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink addStructureLink(
-		java.lang.String structureKey, java.lang.String className,
-		long classPK, com.liferay.portal.service.ServiceContext serviceContext)
+		long classNameId, long classPK, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addStructureLink(structureKey, className, classPK,
+				   .addStructureLink(classNameId, classPK, structureId,
 			serviceContext);
 	}
 
@@ -269,11 +269,11 @@ public class DDMStructureLinkLocalServiceUtil {
 		getService().deleteStructureLink(structureLinkId);
 	}
 
-	public static void deleteStructureLink(java.lang.String structureKey,
-		java.lang.String className, long classPK)
+	public static void deleteStructureLink(long classNameId, long classPK,
+		long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructureLink(structureKey, className, classPK);
+		getService().deleteStructureLink(classNameId, classPK, structureId);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
@@ -284,26 +284,25 @@ public class DDMStructureLinkLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		java.lang.String structureKey, java.lang.String className, long classPK)
+		long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureLink(structureKey, className, classPK);
+		return getService().getStructureLink(classNameId, classPK, structureId);
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink> getStructureLinks(
-		java.lang.String structureKey, int start, int end)
+		long structureId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureLinks(structureKey, start, end);
+		return getService().getStructureLinks(structureId, start, end);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink updateStructureLink(
-		long structureLinkId, java.lang.String structureKey, long groupId,
-		java.lang.String className, long classPK)
+		long structureLinkId, long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStructureLink(structureLinkId, structureKey, groupId,
-			className, classPK);
+				   .updateStructureLink(structureLinkId, classNameId, classPK,
+			structureId);
 	}
 
 	public static DDMStructureLinkLocalService getService() {

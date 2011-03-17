@@ -1687,11 +1687,11 @@
 			<basic name="uuid">
 				<column name="UUID_" />
 			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
-			<basic name="className" />
-			<basic name="classPK" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -1722,9 +1722,9 @@
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureLinkModelImpl">
 		<attributes>
 			<id name="structureLinkId" />
-			<basic name="structureKey" />
-			<basic name="className" />
+			<basic name="classNameId" />
 			<basic name="classPK" />
+			<basic name="structureId" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>

@@ -31,9 +31,9 @@ create table DDMContent (
 create table DDMStorageLink (
 	uuid_ VARCHAR(75) null,
 	storageLinkId LONG not null primary key,
-	type_ VARCHAR(75) null,
-	className VARCHAR(75) null,
-	classPK LONG
+	classNameId LONG,
+	classPK LONG,
+	type_ VARCHAR(75) null
 );
 
 create table DDMStructure (
@@ -47,15 +47,15 @@ create table DDMStructure (
 	modifiedDate DATE null,
 	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description VARCHAR(75) null,
-	xsd VARCHAR(75) null
+	description STRING null,
+	xsd TEXT null
 );
 
 create table DDMStructureLink (
 	structureLinkId LONG not null primary key,
-	structureKey VARCHAR(75) null,
-	className VARCHAR(75) null,
-	classPK LONG
+	classNameId LONG,
+	classPK LONG,
+	structureId LONG
 );
 
 alter table DLFileEntry add repositoryId LONG;

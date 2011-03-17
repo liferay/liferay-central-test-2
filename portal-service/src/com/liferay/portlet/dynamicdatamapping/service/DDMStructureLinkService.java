@@ -42,26 +42,23 @@ public interface DDMStructureLinkService {
 	 * Never modify or reference this interface directly. Always use {@link DDMStructureLinkServiceUtil} to access the d d m structure link remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLinkServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink addStructureLink(
-		java.lang.String structureKey, java.lang.String className,
-		long classPK, com.liferay.portal.service.ServiceContext serviceContext)
+		long classNameId, long classPK, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteStructureLink(long groupId,
-		java.lang.String structureKey, long structureLinkId)
+	public void deleteStructureLink(long structureLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		long groupId, java.lang.String structureKey,
-		java.lang.String className, long classPK)
+		long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink updateStructureLink(
-		long structureLinkId, java.lang.String structureKey, long groupId,
-		java.lang.String className, long classPK)
+		long structureLinkId, long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

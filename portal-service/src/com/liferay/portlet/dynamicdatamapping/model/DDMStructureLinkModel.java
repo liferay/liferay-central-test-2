@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.dynamicdatamapping.model;
 
-import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -71,34 +70,25 @@ public interface DDMStructureLinkModel extends BaseModel<DDMStructureLink> {
 	public void setStructureLinkId(long structureLinkId);
 
 	/**
-	 * Gets the structure key of this d d m structure link.
+	 * Gets the class name of the model instance this d d m structure link is polymorphically associated with.
 	 *
-	 * @return the structure key of this d d m structure link
+	 * @return the class name of the model instance this d d m structure link is polymorphically associated with
 	 */
-	@AutoEscape
-	public String getStructureKey();
-
-	/**
-	 * Sets the structure key of this d d m structure link.
-	 *
-	 * @param structureKey the structure key of this d d m structure link
-	 */
-	public void setStructureKey(String structureKey);
-
-	/**
-	 * Gets the class name of this d d m structure link.
-	 *
-	 * @return the class name of this d d m structure link
-	 */
-	@AutoEscape
 	public String getClassName();
 
 	/**
-	 * Sets the class name of this d d m structure link.
+	 * Gets the class name ID of this d d m structure link.
 	 *
-	 * @param className the class name of this d d m structure link
+	 * @return the class name ID of this d d m structure link
 	 */
-	public void setClassName(String className);
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this d d m structure link.
+	 *
+	 * @param classNameId the class name ID of this d d m structure link
+	 */
+	public void setClassNameId(long classNameId);
 
 	/**
 	 * Gets the class p k of this d d m structure link.
@@ -113,6 +103,20 @@ public interface DDMStructureLinkModel extends BaseModel<DDMStructureLink> {
 	 * @param classPK the class p k of this d d m structure link
 	 */
 	public void setClassPK(long classPK);
+
+	/**
+	 * Gets the structure ID of this d d m structure link.
+	 *
+	 * @return the structure ID of this d d m structure link
+	 */
+	public long getStructureId();
+
+	/**
+	 * Sets the structure ID of this d d m structure link.
+	 *
+	 * @param structureId the structure ID of this d d m structure link
+	 */
+	public void setStructureId(long structureId);
 
 	public boolean isNew();
 

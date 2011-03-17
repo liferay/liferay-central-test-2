@@ -64,9 +64,9 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 
 		DDMStructureLink newDDMStructureLink = _persistence.create(pk);
 
-		newDDMStructureLink.setStructureKey(randomString());
-		newDDMStructureLink.setClassName(randomString());
+		newDDMStructureLink.setClassNameId(nextLong());
 		newDDMStructureLink.setClassPK(nextLong());
+		newDDMStructureLink.setStructureId(nextLong());
 
 		_persistence.update(newDDMStructureLink, false);
 
@@ -74,12 +74,12 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingDDMStructureLink.getStructureLinkId(),
 			newDDMStructureLink.getStructureLinkId());
-		assertEquals(existingDDMStructureLink.getStructureKey(),
-			newDDMStructureLink.getStructureKey());
-		assertEquals(existingDDMStructureLink.getClassName(),
-			newDDMStructureLink.getClassName());
+		assertEquals(existingDDMStructureLink.getClassNameId(),
+			newDDMStructureLink.getClassNameId());
 		assertEquals(existingDDMStructureLink.getClassPK(),
 			newDDMStructureLink.getClassPK());
+		assertEquals(existingDDMStructureLink.getStructureId(),
+			newDDMStructureLink.getStructureId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -154,9 +154,9 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 
 		DDMStructureLink ddmStructureLink = _persistence.create(pk);
 
-		ddmStructureLink.setStructureKey(randomString());
-		ddmStructureLink.setClassName(randomString());
+		ddmStructureLink.setClassNameId(nextLong());
 		ddmStructureLink.setClassPK(nextLong());
+		ddmStructureLink.setStructureId(nextLong());
 
 		_persistence.update(ddmStructureLink, false);
 

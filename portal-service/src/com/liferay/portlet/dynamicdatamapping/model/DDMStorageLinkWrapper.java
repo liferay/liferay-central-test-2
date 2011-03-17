@@ -83,39 +83,30 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 	}
 
 	/**
-	* Gets the type of this d d m storage link.
+	* Gets the class name of the model instance this d d m storage link is polymorphically associated with.
 	*
-	* @return the type of this d d m storage link
-	*/
-	public java.lang.String getType() {
-		return _ddmStorageLink.getType();
-	}
-
-	/**
-	* Sets the type of this d d m storage link.
-	*
-	* @param type the type of this d d m storage link
-	*/
-	public void setType(java.lang.String type) {
-		_ddmStorageLink.setType(type);
-	}
-
-	/**
-	* Gets the class name of this d d m storage link.
-	*
-	* @return the class name of this d d m storage link
+	* @return the class name of the model instance this d d m storage link is polymorphically associated with
 	*/
 	public java.lang.String getClassName() {
 		return _ddmStorageLink.getClassName();
 	}
 
 	/**
-	* Sets the class name of this d d m storage link.
+	* Gets the class name ID of this d d m storage link.
 	*
-	* @param className the class name of this d d m storage link
+	* @return the class name ID of this d d m storage link
 	*/
-	public void setClassName(java.lang.String className) {
-		_ddmStorageLink.setClassName(className);
+	public long getClassNameId() {
+		return _ddmStorageLink.getClassNameId();
+	}
+
+	/**
+	* Sets the class name ID of this d d m storage link.
+	*
+	* @param classNameId the class name ID of this d d m storage link
+	*/
+	public void setClassNameId(long classNameId) {
+		_ddmStorageLink.setClassNameId(classNameId);
 	}
 
 	/**
@@ -134,6 +125,24 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 	*/
 	public void setClassPK(long classPK) {
 		_ddmStorageLink.setClassPK(classPK);
+	}
+
+	/**
+	* Gets the type of this d d m storage link.
+	*
+	* @return the type of this d d m storage link
+	*/
+	public java.lang.String getType() {
+		return _ddmStorageLink.getType();
+	}
+
+	/**
+	* Sets the type of this d d m storage link.
+	*
+	* @param type the type of this d d m storage link
+	*/
+	public void setType(java.lang.String type) {
+		_ddmStorageLink.setType(type);
 	}
 
 	public boolean isNew() {

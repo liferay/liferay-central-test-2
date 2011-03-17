@@ -65,39 +65,30 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 	}
 
 	/**
-	* Gets the structure key of this d d m structure link.
+	* Gets the class name of the model instance this d d m structure link is polymorphically associated with.
 	*
-	* @return the structure key of this d d m structure link
-	*/
-	public java.lang.String getStructureKey() {
-		return _ddmStructureLink.getStructureKey();
-	}
-
-	/**
-	* Sets the structure key of this d d m structure link.
-	*
-	* @param structureKey the structure key of this d d m structure link
-	*/
-	public void setStructureKey(java.lang.String structureKey) {
-		_ddmStructureLink.setStructureKey(structureKey);
-	}
-
-	/**
-	* Gets the class name of this d d m structure link.
-	*
-	* @return the class name of this d d m structure link
+	* @return the class name of the model instance this d d m structure link is polymorphically associated with
 	*/
 	public java.lang.String getClassName() {
 		return _ddmStructureLink.getClassName();
 	}
 
 	/**
-	* Sets the class name of this d d m structure link.
+	* Gets the class name ID of this d d m structure link.
 	*
-	* @param className the class name of this d d m structure link
+	* @return the class name ID of this d d m structure link
 	*/
-	public void setClassName(java.lang.String className) {
-		_ddmStructureLink.setClassName(className);
+	public long getClassNameId() {
+		return _ddmStructureLink.getClassNameId();
+	}
+
+	/**
+	* Sets the class name ID of this d d m structure link.
+	*
+	* @param classNameId the class name ID of this d d m structure link
+	*/
+	public void setClassNameId(long classNameId) {
+		_ddmStructureLink.setClassNameId(classNameId);
 	}
 
 	/**
@@ -116,6 +107,24 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 	*/
 	public void setClassPK(long classPK) {
 		_ddmStructureLink.setClassPK(classPK);
+	}
+
+	/**
+	* Gets the structure ID of this d d m structure link.
+	*
+	* @return the structure ID of this d d m structure link
+	*/
+	public long getStructureId() {
+		return _ddmStructureLink.getStructureId();
+	}
+
+	/**
+	* Sets the structure ID of this d d m structure link.
+	*
+	* @param structureId the structure ID of this d d m structure link
+	*/
+	public void setStructureId(long structureId) {
+		_ddmStructureLink.setStructureId(structureId);
 	}
 
 	public boolean isNew() {
