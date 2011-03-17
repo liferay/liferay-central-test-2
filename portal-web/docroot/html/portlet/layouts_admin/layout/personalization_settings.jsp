@@ -66,24 +66,6 @@ if (selLayout != null) {
 	<liferay-ui:message key="it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" />
 </c:if>
 
-<style type="text/css">
-	.personalization-settings {
-	}
-
-	.personalization-settings .portlet-column {
-		border: 1px solid #CCC;
-		margin: 2px;
-	}
-
-	.personalization-settings .portlet-column .portlet-column-content {
-	}
-
-	.personalization-settings .portlet-column h1 {
-		font-size: 2em;
-		font-weight: bold;
-	}
-</style>
-
 <div class="personalization-settings">
 	<%= content %>
 </div>

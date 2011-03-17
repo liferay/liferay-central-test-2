@@ -17,6 +17,27 @@
 
 	var STR_UNDERSCORE = '_';
 
+	var addPlugin = function(config) {
+		var trigger = config.trigger;
+		var name = config.name;
+
+		delete config.name;
+
+		var module = GROUPS.liferay.modules[trigger];
+
+		var pluginObj = module.plugins;
+
+		if (!pluginObj) {
+			pluginObj = {};
+
+			module.plugins = pluginObj;
+		}
+
+		pluginObj[name] = {
+			condition: config
+		};
+	};
+
 	var createLiferayModules = function() {
 		var modules = {};
 
@@ -25,6 +46,7 @@
 			'asset-tags-selector': ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'datasource-cache', 'liferay-service-datasource', 'substitute'],
 			'auto-fields': ['aui-base', 'aui-data-set', 'aui-io-request', 'aui-parse-content', 'aui-sortable', 'base', 'liferay-undo-manager'],
 			'dockbar': ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'event-touch', 'node-focusmanager'],
+			'dockbar-personalized': ['liferay-dockbar'],
 			'dynamic-select': ['aui-base'],
 			'form': ['aui-base', 'aui-form-validator'],
 			'form-navigator': ['aui-base'],
@@ -87,16 +109,23 @@
 		}
 	};
 
-	GROUPS.liferay.modules['liferay-navigation'].plugins = {
-		'liferay-navigation-touch': {
-			condition: {
-				test: function(A) {
-					return(A.UA.touch)
-				},
-				trigger: 'liferay-navigation'
-			}
+	addPlugin(
+		{
+			name: 'liferay-navigation-touch',
+			test: function(A) {
+				return A.UA.touch;
+			},
+			trigger: 'liferay-navigation'
 		}
-	}
+	);
+
+	addPlugin(
+		{
+			name: 'liferay-dockbar-personalized',
+			test: Liferay.Data.isPersonalizationView,
+			trigger: 'liferay-dockbar'
+		}
+	);
 
 	GROUPS.misc = {
 		base: PATH_MISC,

@@ -89,6 +89,12 @@
 				}
 			},
 
+			Data: {
+				isPersonalizationView: function() {
+					return <%= (layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE)) %>;
+				}
+			},
+
 			ThemeDisplay: {
 				getCompanyId: function() {
 					return "<%= themeDisplay.getCompanyId() %>";

@@ -553,20 +553,6 @@ AUI().add(
 					);
 				}
 
-				var togglePersonalizedView = A.one('#' + namespace + 'togglePersonalizedView');
-
-				if (togglePersonalizedView) {
-					if (togglePersonalizedView.hasClass('has-submenu')) {
-						instance.addMenu(
-							{
-								boundingBox: '#' + namespace + 'togglePersonalizedViewContainer',
-								name: 'personalizedView',
-								trigger: '#' + namespace + 'togglePersonalizedView'
-							}
-						);
-					}
-				}
-
 				if (manageContent){
 					manageContent.get('boundingBox').delegate(
 						'click',

@@ -1437,39 +1437,6 @@
 
 	Liferay.provide(
 		Util,
-		'togglePersonalizedView',
-		function() {
-			var togglePersonalizedViewTrigger = A.one('.toggle-personalized-view');
-
-			if (togglePersonalizedViewTrigger) {
-				togglePersonalizedViewTrigger.on(
-					'click',
-					function(event) {
-						var personalizedViewDisabled = togglePersonalizedViewTrigger.test('.false');
-
-						A.io.request(
-							themeDisplay.getPathMain() + '/portal/update_layout',
-							{
-								data: {
-									cmd: 'toggle_personalized_view',
-									personalized_view: personalizedViewDisabled
-								},
-								on: {
-									success: function(event, id, obj) {
-										window.document.location.reload();
-									}
-								}
-							}
-						);
-					}
-				);
-			}
-		},
-		['aui-io']
-	);
-
-	Liferay.provide(
-		Util,
 		'toggleRadio',
 		function(radioId, showBoxId, hideBoxIds) {
 			var radioButton = A.one('#' + radioId);

@@ -279,9 +279,23 @@
 			}
 		}
 	}
+
+	.personalization-settings {
+		.portlet-column {
+			border: 1px solid #CCC;
+			margin: 2px;
+
+			.portlet-column-content {
+				text-align: center;
+			}
+
+			h1 {
+				font-size: 2em;
+				font-weight: bold;
+			}
+		}
+	}
 }
-
-
 
 .aui-tree-node-selected {
 	background: #eee;
