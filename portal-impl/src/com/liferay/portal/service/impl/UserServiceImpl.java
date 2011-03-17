@@ -109,8 +109,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		OrganizationPermissionUtil.check(
-			getPermissionChecker(), organizationId,
-			ActionKeys.ASSIGN_MEMBERS);
+			getPermissionChecker(), organizationId, ActionKeys.ASSIGN_MEMBERS);
 
 		validateOrganizationUsers(userIds);
 
