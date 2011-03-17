@@ -36,6 +36,12 @@
 			<finder-column name="companyId" />
 		</finder>
 	</entity>
+	<entity name="DDMStorageLink" uuid="true" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="storageLinkId" type="long" primary="true" />
+	</entity>
 	<entity name="DDMStructure" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

@@ -1341,6 +1341,10 @@
 			<hint-collection name="CLOB" />
 		</field>
 	</model>
+	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink">
+		<field name="uuid" type="String" />
+		<field name="storageLinkId" type="long" />
+	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStructure">
 		<field name="uuid" type="String" />
 		<field name="structureId" type="long" />

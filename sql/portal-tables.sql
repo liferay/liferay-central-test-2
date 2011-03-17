@@ -398,6 +398,11 @@ create table DDMContent (
 	xml TEXT null
 );
 
+create table DDMStorageLink (
+	uuid_ VARCHAR(75) null,
+	storageLinkId LONG not null primary key
+);
+
 create table DDMStructure (
 	uuid_ VARCHAR(75) null,
 	structureId LONG not null primary key,

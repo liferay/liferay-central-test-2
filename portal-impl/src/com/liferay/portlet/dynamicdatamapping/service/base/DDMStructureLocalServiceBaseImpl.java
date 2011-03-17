@@ -35,11 +35,13 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
 
@@ -299,6 +301,44 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	public void setDDMContentPersistence(
 		DDMContentPersistence ddmContentPersistence) {
 		this.ddmContentPersistence = ddmContentPersistence;
+	}
+
+	/**
+	 * Gets the d d m storage link local service.
+	 *
+	 * @return the d d m storage link local service
+	 */
+	public DDMStorageLinkLocalService getDDMStorageLinkLocalService() {
+		return ddmStorageLinkLocalService;
+	}
+
+	/**
+	 * Sets the d d m storage link local service.
+	 *
+	 * @param ddmStorageLinkLocalService the d d m storage link local service
+	 */
+	public void setDDMStorageLinkLocalService(
+		DDMStorageLinkLocalService ddmStorageLinkLocalService) {
+		this.ddmStorageLinkLocalService = ddmStorageLinkLocalService;
+	}
+
+	/**
+	 * Gets the d d m storage link persistence.
+	 *
+	 * @return the d d m storage link persistence
+	 */
+	public DDMStorageLinkPersistence getDDMStorageLinkPersistence() {
+		return ddmStorageLinkPersistence;
+	}
+
+	/**
+	 * Sets the d d m storage link persistence.
+	 *
+	 * @param ddmStorageLinkPersistence the d d m storage link persistence
+	 */
+	public void setDDMStorageLinkPersistence(
+		DDMStorageLinkPersistence ddmStorageLinkPersistence) {
+		this.ddmStorageLinkPersistence = ddmStorageLinkPersistence;
 	}
 
 	/**
@@ -618,6 +658,10 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	protected DDMContentLocalService ddmContentLocalService;
 	@BeanReference(type = DDMContentPersistence.class)
 	protected DDMContentPersistence ddmContentPersistence;
+	@BeanReference(type = DDMStorageLinkLocalService.class)
+	protected DDMStorageLinkLocalService ddmStorageLinkLocalService;
+	@BeanReference(type = DDMStorageLinkPersistence.class)
+	protected DDMStorageLinkPersistence ddmStorageLinkPersistence;
 	@BeanReference(type = DDMStructureLocalService.class)
 	protected DDMStructureLocalService ddmStructureLocalService;
 	@BeanReference(type = DDMStructureService.class)
