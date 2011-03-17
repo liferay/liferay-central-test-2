@@ -75,7 +75,6 @@ public interface DDMStructureLinkModel extends BaseModel<DDMStructureLink> {
 	 *
 	 * @return the structure key of this d d m structure link
 	 */
-	@AutoEscape
 	public String getStructureKey();
 
 	/**

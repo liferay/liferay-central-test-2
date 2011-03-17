@@ -409,8 +409,8 @@ create table DDMStructure (
 	modifiedDate DATE null,
 	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description VARCHAR(75) null,
-	xsd VARCHAR(75) null
+	description STRING null,
+	xsd TEXT null
 );
 
 create table DDMStructureLink (
