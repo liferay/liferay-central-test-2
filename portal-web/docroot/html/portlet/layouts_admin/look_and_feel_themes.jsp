@@ -42,28 +42,21 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 			<div class="theme-details">
 				<c:choose>
 					<c:when test="<%= editable %>">
-						<aui:input checked="<%= true %>" cssClass="theme-title" id='<%= device + "SelTheme" %>' label="<%= selTheme.getName() %>" name='<%= device + "ThemeId" %>' type="radio" value="<%= selTheme.getThemeId() %>" />
+						<aui:input checked="<%= true %>" cssClass="selected-theme theme-title" id='<%= device + "SelTheme" %>' label="<%= selTheme.getName() %>" name='<%= device + "ThemeId" %>' type="radio" value="<%= selTheme.getThemeId() %>" />
 					</c:when>
 					<c:otherwise>
-						<div class="theme-title"><%= selTheme.getName() %></div>
+						<div class="selected-theme theme-title"><%= selTheme.getName() %></div>
 					</c:otherwise>
 				</c:choose>
 
-				<dl>
+				<dl class="theme-fields">
 					<c:if test="<%= Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
-						<c:choose>
-							<c:when test="<%= editable %>">
-								<dt>
-									<liferay-ui:message key="description" />
-								</dt>
-								<dd>
-									<%= selPluginPackage.getShortDescription() %>
-								</dd>
-							</c:when>
-							<c:otherwise>
-								<%= selPluginPackage.getShortDescription() %>
-							</c:otherwise>
-						</c:choose>
+						<dt>
+							<liferay-ui:message key="description" />
+						</dt>
+						<dd>
+							<%= selPluginPackage.getShortDescription() %>
+						</dd>
 					</c:if>
 
 					<c:if test="<%= editable && Validator.isNotNull(selPluginPackage.getAuthor()) %>">

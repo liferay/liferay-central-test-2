@@ -51,11 +51,26 @@
 			margin: 0 0 0.5em;
 		}
 
+		.selected-theme {
+			border-bottom: 1px solid #CCC;
+			font-size: 1.5em;
+
+			.aui-field-content {
+            	display: inline-block;
+			}
+		}
+
+
 		.theme-details {
 			padding: 0 2px 0 170px;
 		}
 
+		.theme-fields {
+        	margin-left: 0.5em;
+		}
+
 		.theme-screenshot {
+			border: 1px solid #CCC;
 			float: left;
 			height: 120px;
 			margin: 0 0.5em;
