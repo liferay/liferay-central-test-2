@@ -116,6 +116,13 @@ public class LayoutServiceWrapper implements LayoutService {
 			parameterMap, startDate, endDate);
 	}
 
+	public long getDefaultPlid(long groupId, boolean privateLayout,
+		java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutService.getDefaultPlid(groupId, privateLayout, portletId);
+	}
+
 	public java.lang.String getLayoutName(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.PortalException,

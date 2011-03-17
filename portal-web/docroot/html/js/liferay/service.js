@@ -94,6 +94,7 @@ Liferay.Service.registerClass(
 	{
 		addLayout: true,
 		deleteLayout: true,
+		getDefaultPlid: true,
 		getLayoutName: true,
 		getLayoutReferences: true,
 		setLayouts: true,
