@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.ColorScheme;
@@ -28,6 +29,7 @@ import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.VirtualHostLocalServiceUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.io.IOException;
 
@@ -98,7 +100,23 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 
 		Theme theme = null;
 
-		if (device.equals("regular")) {
+		boolean isControlPanel = false;
+
+		try {
+			isControlPanel =  getGroup().isControlPanel();
+		}
+		catch (Exception e) {
+		}
+
+		if (isControlPanel) {
+			String themeId = PrefsPropsUtil.getString(
+				getCompanyId(),
+				PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
+
+			theme = ThemeLocalServiceUtil.getTheme(
+				getCompanyId(), themeId, !device.equals("regular"));
+		}
+		else if (device.equals("regular")) {
 			theme = getTheme();
 		}
 		else {
