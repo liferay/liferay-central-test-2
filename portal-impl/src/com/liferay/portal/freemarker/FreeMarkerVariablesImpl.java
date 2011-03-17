@@ -73,6 +73,9 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.portlet.PortletRequestUtil;
 
+import freemarker.ext.beans.BeansWrapper;
+import freemarker.template.utility.ObjectConstructor;
+
 import java.util.List;
 import java.util.Map;
 
@@ -113,6 +116,11 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 		// Date util
 
 		freeMarkerContext.put("dateUtil", DateUtil_IW.getInstance());
+
+		// Enum util
+
+		freeMarkerContext.put(
+			"enumUtil", BeansWrapper.getDefaultInstance().getEnumModels());
 
 		// Expando column service
 
@@ -174,6 +182,10 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 		// Locale util
 
 		freeMarkerContext.put("localeUtil", LocaleUtil.getInstance());
+
+		// Object util
+
+		freeMarkerContext.put("objectUtil", new ObjectConstructor());
 
 		// Param util
 
@@ -240,6 +252,12 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		freeMarkerContext.put(
 			"staticFieldGetter", StaticFieldGetter.getInstance());
+
+		// Static class util
+
+		freeMarkerContext.put(
+			"staticUtil",
+			BeansWrapper.getDefaultInstance().getStaticModels());
 
 		// String util
 
