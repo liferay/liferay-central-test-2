@@ -28,10 +28,11 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
  */
 public class CurrentConnectionImpl implements CurrentConnection {
 
-	public Connection getCurrentConnection(DataSource dataSource) {
+	public Connection getConnection(DataSource dataSource) {
 		ConnectionHolder connectionHolder =
 			(ConnectionHolder)TransactionSynchronizationManager.getResource(
 				dataSource);
+
 		if (connectionHolder == null) {
 			return null;
 		}

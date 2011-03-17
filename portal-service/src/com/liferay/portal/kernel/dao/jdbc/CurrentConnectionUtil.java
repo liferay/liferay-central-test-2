@@ -23,8 +23,12 @@ import javax.sql.DataSource;
  */
 public class CurrentConnectionUtil {
 
-	public static Connection getCurrentConnection(DataSource dataSource) {
-		return _currentConnection.getCurrentConnection(dataSource);
+	public static Connection getConnection(DataSource dataSource) {
+		return getCurrentConnection().getConnection(dataSource);
+	}
+
+	public static CurrentConnection getCurrentConnection() {
+		return _currentConnection;
 	}
 
 	public void setCurrentConnection(CurrentConnection currentConnection) {

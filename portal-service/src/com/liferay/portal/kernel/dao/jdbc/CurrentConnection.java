@@ -23,6 +23,6 @@ import javax.sql.DataSource;
  */
 public interface CurrentConnection {
 
-	Connection getCurrentConnection(DataSource dataSource);
+	public Connection getConnection(DataSource dataSource);
 
 }

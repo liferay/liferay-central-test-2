@@ -10,7 +10,7 @@
 	<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.spring.hibernate.PortletHibernateConfiguration">
 		<property name="dataSource" ref="liferayDataSource" />
 	</bean>
-	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.hibernate.PluginSessionFactoryImpl">
+	<bean id="liferaySessionFactory" class="com.liferay.portal.dao.orm.hibernate.PortletSessionFactoryImpl">
 		<property name="dataSource" ref="liferayDataSource" />
 		<property name="sessionFactoryClassLoader" ref="portletClassLoader" />
 		<property name="sessionFactoryImplementor" ref="liferayHibernateSessionFactory" />

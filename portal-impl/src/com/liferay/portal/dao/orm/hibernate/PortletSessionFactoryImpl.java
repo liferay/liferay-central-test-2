@@ -30,18 +30,18 @@ import org.hibernate.engine.SessionFactoryImplementor;
 /**
  * @author Shuyang Zhou
  */
-public class PluginSessionFactoryImpl extends SessionFactoryImpl {
+public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 
 	public Session openSession() throws ORMException {
-
 		SessionFactoryImplementor sessionFactoryImplementor =
 			getSessionFactoryImplementor();
 
 		org.hibernate.Session session = null;
 
 		if (PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED) {
-			Connection connection = CurrentConnectionUtil.getCurrentConnection(
+			Connection connection = CurrentConnectionUtil.getConnection(
 				_dataSource);
+
 			if (connection == null) {
 				session = sessionFactoryImplementor.getCurrentSession();
 			}
@@ -70,7 +70,7 @@ public class PluginSessionFactoryImpl extends SessionFactoryImpl {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		PluginSessionFactoryImpl.class);
+		PortletSessionFactoryImpl.class);
 
 	private DataSource _dataSource;
 
