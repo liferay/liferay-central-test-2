@@ -175,20 +175,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
-	public int countScoredField(Query query, String[] filedNames) {
-
-		String[] nonScoredFieldNames = Field.getNonScoredFieldNames();
-
-		WeightedTerm[] weightedTerms = null;
-
+	public int countScoredFieldNames(Query query, String[] filedNames) {
 		int count = 0;
 
 		for (String fieldName : filedNames) {
-			weightedTerms = QueryTermExtractor.getTerms(
+			WeightedTerm[] weightedTerms = QueryTermExtractor.getTerms(
 				query, false, fieldName);
 
-			if (weightedTerms.length > 0 &&
-				!ArrayUtil.contains(nonScoredFieldNames, fieldName)) {
+			if ((weightedTerms.length > 0) &&
+				!ArrayUtil.contains(Field.UNSCORED_FIELD_NAMES, fieldName)) {
 
 				count++;
 			}

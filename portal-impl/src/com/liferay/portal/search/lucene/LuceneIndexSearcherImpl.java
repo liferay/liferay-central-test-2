@@ -39,8 +39,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.document.NumericField;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Explanation;
@@ -69,6 +69,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			indexSearcher = LuceneHelperUtil.getSearcher(companyId, true);
 
 			indexSearcher.setDefaultFieldSortScoring(true, true);
+			indexSearcher.setSimilarity(new FieldWeightSimilarity());
 
 			if (sorts != null) {
 				SortField[] sortFields = new SortField[sorts.length];
@@ -87,11 +88,6 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			}
 
 			long startTime = System.currentTimeMillis();
-
-			org.apache.lucene.search.Similarity similarity =
-				new FieldWeightSimilarity();
-
-			indexSearcher.setSimilarity(similarity);
 
 			TopFieldDocs topFieldDocs = indexSearcher.search(
 				QueryTranslator.translate(query), null,
@@ -246,16 +242,16 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		String[] queryTerms = getQueryTerms(query);
 
-		IndexReader ir = indexSearcher.getIndexReader();
+		IndexReader indexReader = indexSearcher.getIndexReader();
 
 		List<String> indexedFieldNames = new ArrayList<String> (
-			ir.getFieldNames(IndexReader.FieldOption.INDEXED));
+			indexReader.getFieldNames(IndexReader.FieldOption.INDEXED));
 
-		org.apache.lucene.search.Query  luceneQuery =
-			QueryTranslator.translate(query);
+		org.apache.lucene.search.Query luceneQuery = QueryTranslator.translate(
+			query);
 
-		int scoredFieldCount = LuceneHelperUtil.countScoredField(luceneQuery,
-			ArrayUtil.toStringArray(indexedFieldNames.toArray()));
+		int scoredFieldNamesCount = LuceneHelperUtil.countScoredFieldNames(
+			luceneQuery, ArrayUtil.toStringArray(indexedFieldNames.toArray()));
 
 		Hits hits = new HitsImpl();
 
@@ -301,7 +297,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				}
 
 				Float subsetScore =
-					topFieldDocs.scoreDocs[i].score / scoredFieldCount;
+					topFieldDocs.scoreDocs[i].score / scoredFieldNamesCount;
 
 				subsetScores.add(subsetScore);
 

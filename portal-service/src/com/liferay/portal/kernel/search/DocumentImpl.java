@@ -229,11 +229,9 @@ public class DocumentImpl implements Document {
 			value = value.toLowerCase();
 		}
 
-		String[] nonScoredFieldNames = Field.getNonScoredFieldNames();
-
 		Field field = new Field(name, value);
 
-		for (String fieldName : nonScoredFieldNames) {
+		for (String fieldName : Field.UNSCORED_FIELD_NAMES) {
 			if (name.equalsIgnoreCase(fieldName)) {
 				field.setBoost(0);
 			}

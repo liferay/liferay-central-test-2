@@ -22,19 +22,19 @@ import org.apache.lucene.search.DefaultSimilarity;
 public class FieldWeightSimilarity extends DefaultSimilarity {
 
 	public float coord(int overlap, int maxOverlap) {
-		return 1.0f;
+		return 1;
 	}
 
 	public float idf(int docFreq, int numDocs) {
-		return 1.0f;
+		return 1;
 	}
 
 	public float lengthNorm(String fieldName, int numTerms) {
-		return 1.0f;
+		return 1;
 	}
 
 	public float queryNorm(float sumOfSquaredWeights) {
-		return 1.0f;
+		return 1;
 	}
 
 }

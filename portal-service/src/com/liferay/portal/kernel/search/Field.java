@@ -87,11 +87,11 @@ public class Field implements Serializable {
 
 	public static final String VERSION = "version";
 
-	public static String[] getNonScoredFieldNames() {
-		return new String[] {COMPANY_ID, PORTLET_ID, GROUP_ID, SCOPE_GROUP_ID,
-			USER_ID, FOLDER_ID, ENTRY_CLASS_PK, ROLE_ID, ASSET_CATEGORY_IDS,
-			ENTRY_CLASS_NAME, GROUP_ROLE_ID};
-	}
+	public static final String[] UNSCORED_FIELD_NAMES = {
+		ASSET_CATEGORY_IDS, COMPANY_ID, ENTRY_CLASS_NAME, ENTRY_CLASS_PK,
+		FOLDER_ID, GROUP_ID, GROUP_ROLE_ID, PORTLET_ID, ROLE_ID,
+		SCOPE_GROUP_ID, USER_ID
+	};
 
 	public Field(String name, Map<Locale, String> localizedValues) {
 		_name = name;
