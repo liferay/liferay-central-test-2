@@ -316,51 +316,51 @@
 	<definition name="portlet.communities" extends="portlet" />
 
 	<definition name="portlet.communities.edit_community" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_community.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/edit_community.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_community_assignments" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_community_assignments.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/edit_community_assignments.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_team" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_team.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/edit_team.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_team_assignments" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_team_assignments.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/edit_team_assignments.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_user_group_roles" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_user_group_roles.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/edit_user_group_roles.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/edit_user_roles.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.error" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/error.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/error.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/post_membership_request.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/reply_membership_request.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/reply_membership_request.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.view" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/view.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/view.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.view_membership_requests" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/view_membership_requests.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/view_membership_requests.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.view_teams" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/view_teams.jsp" />
+		<put name="portlet_content" value="/portlet/sites_admin/view_teams.jsp" />
 	</definition>
 
 	<!-- Control Panel Menu -->

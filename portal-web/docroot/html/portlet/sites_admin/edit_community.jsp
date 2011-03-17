@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -27,7 +27,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
 <c:if test="<%= !portletName.equals(PortletKeys.COMMUNITIES) %>">
-	<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
+	<liferay-util:include page="/html/portlet//sites_admin/toolbar.jsp">
 		<liferay-util:param name="toolbarItem" value='<%= (group == null) ? "add" : "view-all" %>' />
 	</liferay-util:include>
 </c:if>

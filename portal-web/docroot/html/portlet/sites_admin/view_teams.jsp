@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -104,7 +104,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		if (TeamPermissionUtil.contains(permissionChecker, team.getTeamId(), ActionKeys.UPDATE)) {
 			rowURL = renderResponse.createRenderURL();
 
-			rowURL.setParameter("struts_action", "/communities/edit_team");
+			rowURL.setParameter("struts_action", "/sites_admin/edit_team");
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 		}
@@ -119,7 +119,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		// Action
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/team_action.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/sites_admin/team_action.jsp");
 
 		// Add result row
 

@@ -96,4 +96,4 @@ Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
-<%@ include file="/html/portlet/communities/init-ext.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init-ext.jsp" %>

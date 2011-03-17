@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -129,7 +129,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Actions
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/membership_request_action.jsp");
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/sites_admin/membership_request_action.jsp");
 
 	// Add result row
 

@@ -14,43 +14,29 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-String tabs1 = (String)request.getAttribute("edit_user_group_roles.jsp-tabs1");
+String tabs2 = (String)request.getAttribute("edit_community_assignments.jsp-tabs2");
 
-int cur = (Integer)request.getAttribute("edit_user_group_roles.jsp-cur");
+int cur = (Integer)request.getAttribute("edit_community_assignments.jsp-cur");
 
-Group group = (Group)request.getAttribute("edit_user_group_roles.jsp-group");
-String groupName = (String)request.getAttribute("edit_user_group_roles.jsp-groupName");
-Role role = (Role)request.getAttribute("edit_user_group_roles.jsp-role");
-long roleId = (Long)request.getAttribute("edit_user_group_roles.jsp-roleId");
-Organization organization = (Organization)request.getAttribute("edit_user_group_roles.jsp-organization");
+Group group = (Group)request.getAttribute("edit_community_assignments.jsp-group");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_group_roles.jsp-portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignments.jsp-portletURL");
 %>
 
 <aui:input name="addUserGroupIds" type="hidden" />
 <aui:input name="removeUserGroupIds" type="hidden" />
 
-<div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
-	<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
-
-	<em>Current</em> signifies current user groups associated with the <em><%= HtmlUtil.escape(role.getTitle(locale)) %></em> role. <em>Available</em> signifies all user groups associated with the <em><%= HtmlUtil.escape(groupName) %></em> <%= (group.isOrganization()) ? "organization" : "site" %>.
-</div>
-
-<br />
-
-<h3><liferay-ui:message key="user-groups" /></h3>
-
 <liferay-ui:tabs
 	names="current,available"
-	param="tabs1"
+	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
 
 <liferay-ui:search-container
-	rowChecker="<%= new UserGroupGroupRoleUserGroupChecker(renderResponse, group, role) %>"
+	rowChecker="<%= new UserGroupGroupChecker(renderResponse, group) %>"
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-form
@@ -62,15 +48,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_group_roles.
 
 	LinkedHashMap userGroupParams = new LinkedHashMap();
 
-	if (group.isOrganization()) {
-		userGroupParams.put("userGroupsOrgs", new Long(organization.getOrganizationId()));
-	}
-	else {
+	if (tabs2.equals("current")) {
 		userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
-	}
-
-	if (tabs1.equals("current")) {
-		userGroupParams.put("userGroupGroupRole", new Long[]{new Long(roleId), new Long(group.getGroupId())});
 	}
 	%>
 
@@ -85,6 +64,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_group_roles.
 		keyProperty="userGroupId"
 		modelVar="userGroup"
 	>
+		<liferay-ui:search-container-row-parameter
+			name="group"
+			value="<%= group %>"
+		/>
+
 		<liferay-ui:search-container-column-text
 			name="name"
 			orderable="<%= true %>"
@@ -96,12 +80,42 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_group_roles.
 			orderable="<%= true %>"
 			property="description"
 		/>
+
+		<c:if test='<%= tabs2.equals("current") %>'>
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="site-roles"
+			>
+
+				<%
+				List<UserGroupGroupRole> userGroupGroupRoles = UserGroupGroupRoleLocalServiceUtil.getUserGroupGroupRoles(userGroup.getUserGroupId(), group.getGroupId());
+
+				for (int i = 0; i < userGroupGroupRoles.size(); i++) {
+					UserGroupGroupRole userGroupGroupRole = userGroupGroupRoles.get(i);
+
+					Role role = RoleLocalServiceUtil.getRole(userGroupGroupRole.getRoleId());
+
+					buffer.append(HtmlUtil.escape(role.getTitle(locale)));
+
+					if ((i + 1) < userGroupGroupRoles.size()) {
+						buffer.append(StringPool.COMMA_AND_SPACE);
+					}
+				}
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/sites_admin/user_group_action.jsp"
+			/>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<div class="separator"><!-- --></div>
 
 	<%
-	String taglibOnClick = renderResponse.getNamespace() + "updateUserGroupGroupRoleUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	String taglibOnClick = renderResponse.getNamespace() + "updateGroupUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 	%>
 
 	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />

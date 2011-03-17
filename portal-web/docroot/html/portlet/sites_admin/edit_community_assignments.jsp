@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet//sites_admin/init.jsp" %>
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
@@ -83,23 +83,23 @@ request.setAttribute("edit_community_assignments.jsp-portletURL", portletURL);
 		<c:when test='<%= tabs1.equals("users") %>'>
 			<c:choose>
 				<c:when test="<%= selUser == null %>">
-					<liferay-util:include page="/html/portlet/communities/edit_community_assignments_users.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_users.jsp" />
 				</c:when>
 				<c:otherwise>
-					<liferay-util:include page="/html/portlet/communities/edit_community_assignments_users_roles.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_users_roles.jsp" />
 				</c:otherwise>
 			</c:choose>
 		</c:when>
 		<c:when test='<%= tabs1.equals("organizations") %>'>
-			<liferay-util:include page="/html/portlet/communities/edit_community_assignments_organizations.jsp" />
+			<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_organizations.jsp" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("user-groups") %>'>
 			<c:choose>
 				<c:when test="<%= userGroupId == 0 %>">
-					<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_user_groups.jsp" />
 				</c:when>
 				<c:otherwise>
-					<liferay-util:include page="/html/portlet/communities/edit_community_assignments_user_groups_roles.jsp" />
+					<liferay-util:include page="/html/portlet/sites_admin/edit_community_assignments_user_groups_roles.jsp" />
 				</c:otherwise>
 			</c:choose>
 		</c:when>

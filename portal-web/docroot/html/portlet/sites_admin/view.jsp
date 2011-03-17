@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "sites-owned");
@@ -53,7 +53,7 @@ pageContext.setAttribute("portletURL", portletURL);
 			/>
 		</c:when>
 		<c:otherwise>
-			<liferay-util:include page="/html/portlet/communities/toolbar.jsp">
+			<liferay-util:include page="/html/portlet/sites_admin/toolbar.jsp">
 				<liferay-util:param name="toolbarItem" value="view-all" />
 			</liferay-util:include>
 		</c:otherwise>
@@ -321,7 +321,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		// Action
 
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/community_action.jsp");
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/sites_admin/community_action.jsp");
 
 		// Add result row
 

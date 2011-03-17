@@ -14,12 +14,12 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-User user2 = (User)row.getObject();
+UserGroup userGroup = (UserGroup)row.getObject();
 
 Group group = (Group)row.getParameter("group");
 %>
@@ -28,13 +28,14 @@ Group group = (Group)row.getParameter("group");
 	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) %>">
 		<portlet:renderURL var="assignURL">
 			<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+			<portlet:param name="tabs1" value="user-groups" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
+			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
-			image="assign_user_roles"
+			image="assign_user_group_roles"
 			url="<%= assignURL %>"
 		/>
 	</c:if>

@@ -14,32 +14,28 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object[] objArray = (Object[])row.getObject();
+User user2 = (User)row.getObject();
 
-User user2 = (User)objArray[0];
-Group group = (Group)objArray[1];
-MembershipRequest membershipRequest = (MembershipRequest)objArray[2];
+Group group = (Group)row.getParameter("group");
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= (membershipRequest.getStatusId() == MembershipRequestConstants.STATUS_PENDING) && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL var="replyRequestURL">
-			<portlet:param name="struts_action" value="/communities/reply_membership_request" />
+	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) %>">
+		<portlet:renderURL var="assignURL">
+			<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-			<portlet:param name="membershipRequestId" value="<%= String.valueOf(membershipRequest.getMembershipRequestId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
-			image="reply"
-			message="reply"
-			url="<%= replyRequestURL %>"
+			image="assign_user_roles"
+			url="<%= assignURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>
