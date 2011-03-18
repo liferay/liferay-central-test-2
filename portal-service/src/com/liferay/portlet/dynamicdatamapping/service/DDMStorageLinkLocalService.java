@@ -243,8 +243,7 @@ public interface DDMStorageLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteStorageLinks(long structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLink(

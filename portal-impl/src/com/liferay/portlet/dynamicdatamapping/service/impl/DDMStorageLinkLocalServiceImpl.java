@@ -73,9 +73,7 @@ public class DDMStorageLinkLocalServiceImpl
 		deleteStorageLink(storageLink);
 	}
 
-	public void deleteStorageLinks(long structureId)
-		throws PortalException, SystemException {
-
+	public void deleteStorageLinks(long structureId) throws SystemException {
 		List<DDMStorageLink> storageLinks =
 			ddmStorageLinkPersistence.findByStructureId(structureId);
 

@@ -269,8 +269,7 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	public void deleteStorageLinks(long structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_ddmStorageLinkLocalService.deleteStorageLinks(structureId);
 	}
 
