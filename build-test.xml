@@ -1406,6 +1406,85 @@
 		</delete>
 	</target>
 
+	<target name="clean-up-java-processes">
+		<loadfile property="java.processes.old" srcfile="java-processes" />
+
+		<delete file="java-processes" />
+
+		<script classpathref="project.classpath" language="beanshell">
+			String outputTxtContent = project.getProperty("java.processes.old");
+
+			if (outputTxtContent.contains("File Not Found")) {
+				outputTxtContent = "";
+			}
+
+			String javaProcessListOld = outputTxtContent.replaceAll("\r\n", ",");
+
+			if (javaProcessListOld.endsWith(",")) {
+				javaProcessListOld = javaProcessListOld.substring(0, javaProcessListOld.length() - 1);
+			}
+
+			project.setProperty("java.process.list.old", javaProcessListOld);
+		</script>
+
+		<exec executable="cmd.exe" outputproperty="java.process.list">
+			<arg line="/c jps -l > java-processes" />
+		</exec>
+
+		<loadfile property="java.processes.new" srcfile="java-processes" />
+
+		<delete file="java-processes" />
+
+		<script classpathref="project.classpath" language="beanshell">
+			String outputTxtContent = project.getProperty("java.processes.new");
+
+			if (outputTxtContent.contains("File Not Found")) {
+				outputTxtContent = "";
+			}
+
+			String javaProcessListNew = outputTxtContent.replaceAll("\r\n", ",");
+
+			if (javaProcessListNew.endsWith(",")) {
+				javaProcessListNew = javaProcessListNew.substring(0, javaProcessListNew.length() - 1);
+			}
+
+			project.setProperty("java.process.list.new", javaProcessListNew);
+		</script>
+
+		<for list="${java.process.list.new}" param="java.process.current.new">
+			<sequential>
+				<if>
+					<or>
+						<contains string="@{java.process.current.new}" substring="Bootstrap" />
+						<contains string="@{java.process.current.new}" substring="selenium-server.jar" />
+					</or>
+					<then>
+						<antcall target="kill-java-process">
+							<param name="java.process.to.kill" value="@{java.process.current.new}" />
+						</antcall>
+					</then>
+					<elseif>
+						<contains string="@{java.process.current.new}" substring="Launcher" />
+						<then>
+							<for list="${java.process.list.old}" param="java.process.current.old">
+								<sequential>
+									<if>
+										<contains string="@{java.process.current.new}" substring="@{java.process.current.old}" />
+										<then>
+											<antcall target="kill-java-process">
+												<param name="java.process.to.kill" value="@{java.process.current.new}" />
+											</antcall>
+										</then>
+									</if>
+								</sequential>
+							</for>
+						</then>
+					</elseif>
+				</if>
+			</sequential>
+		</for>
+	</target>
+
 	<target name="create-ant-script">
 		<loadfile property="template.content" srcfile="portal-web/test-ant-templates/${ant.script.template}">
 			<filterchain>
@@ -1430,6 +1509,25 @@
 		</exec>
 
 		<delete file="execute-remote-command.bat" />
+	</target>
+
+	<target name="kill-java-process">
+		<echo>Killing Java Process "${java.process.to.kill}"</echo>
+		<echo></echo>
+
+		<script classpathref="project.classpath" language="beanshell">
+			String javaProcessToKill = project.getProperty("java.process.to.kill");
+
+			int x = javaProcessToKill.indexOf(" ");
+
+			String javaProcessPid = javaProcessToKill.substring(0, x).trim();
+
+			project.setProperty("java.process.pid", javaProcessPid);
+		</script>
+
+		<exec executable="taskkill.exe">
+			<arg line='/F /FI "PID eq ${java.process.pid}"' />
+		</exec>
 	</target>
 
 	<target name="prepare-common">
@@ -2157,6 +2255,12 @@ file.
 		</exec>
 
 		<delete file="${sql.file}" />
+	</target>
+
+	<target name="record-java-processes">
+		<exec executable="cmd.exe" outputproperty="java.process.list">
+			<arg line="/c jps -q > java-processes" />
+		</exec>
 	</target>
 
 	<target name="replace-remote-file">
