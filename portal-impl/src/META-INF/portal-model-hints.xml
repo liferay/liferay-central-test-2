@@ -1346,6 +1346,7 @@
 		<field name="storageLinkId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
+		<field name="structureId" type="long" />
 		<field name="type" type="String" />
 	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStructure">

@@ -67,6 +67,7 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		newDDMStorageLink.setUuid(randomString());
 		newDDMStorageLink.setClassNameId(nextLong());
 		newDDMStorageLink.setClassPK(nextLong());
+		newDDMStorageLink.setStructureId(nextLong());
 		newDDMStorageLink.setType(randomString());
 
 		_persistence.update(newDDMStorageLink, false);
@@ -81,6 +82,8 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 			newDDMStorageLink.getClassNameId());
 		assertEquals(existingDDMStorageLink.getClassPK(),
 			newDDMStorageLink.getClassPK());
+		assertEquals(existingDDMStorageLink.getStructureId(),
+			newDDMStorageLink.getStructureId());
 		assertEquals(existingDDMStorageLink.getType(),
 			newDDMStorageLink.getType());
 	}
@@ -159,6 +162,7 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		ddmStorageLink.setUuid(randomString());
 		ddmStorageLink.setClassNameId(nextLong());
 		ddmStorageLink.setClassPK(nextLong());
+		ddmStorageLink.setStructureId(nextLong());
 		ddmStorageLink.setType(randomString());
 
 		_persistence.update(ddmStorageLink, false);

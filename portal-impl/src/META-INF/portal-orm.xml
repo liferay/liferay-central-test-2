@@ -1689,6 +1689,7 @@
 			</basic>
 			<basic name="classNameId" />
 			<basic name="classPK" />
+			<basic name="structureId" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>

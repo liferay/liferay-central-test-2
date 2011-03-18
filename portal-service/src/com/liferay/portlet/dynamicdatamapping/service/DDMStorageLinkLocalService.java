@@ -225,9 +225,14 @@ public interface DDMStorageLinkLocalService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink addStorageLink(
-		long classNameId, long classPK, java.lang.String type,
+		long structureId, long classNameId, long classPK,
+		java.lang.String type,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteAllStorageLink(long structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteStorageLink(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink storageLink)

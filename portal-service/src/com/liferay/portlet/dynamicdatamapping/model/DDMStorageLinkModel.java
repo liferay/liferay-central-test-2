@@ -121,6 +121,20 @@ public interface DDMStorageLinkModel extends BaseModel<DDMStorageLink> {
 	public void setClassPK(long classPK);
 
 	/**
+	 * Gets the structure ID of this d d m storage link.
+	 *
+	 * @return the structure ID of this d d m storage link
+	 */
+	public long getStructureId();
+
+	/**
+	 * Sets the structure ID of this d d m storage link.
+	 *
+	 * @param structureId the structure ID of this d d m storage link
+	 */
+	public void setStructureId(long structureId);
+
+	/**
 	 * Gets the type of this d d m storage link.
 	 *
 	 * @return the type of this d d m storage link

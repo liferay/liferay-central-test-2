@@ -33,6 +33,7 @@ create table DDMStorageLink (
 	storageLinkId LONG not null primary key,
 	classNameId LONG,
 	classPK LONG,
+	structureId LONG,
 	type_ VARCHAR(75) null
 );
 

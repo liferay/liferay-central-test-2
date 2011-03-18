@@ -59,9 +59,10 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 			{ "storageLinkId", Types.BIGINT },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
+			{ "structureId", Types.BIGINT },
 			{ "type_", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMStorageLink (uuid_ VARCHAR(75) null,storageLinkId LONG not null primary key,classNameId LONG,classPK LONG,type_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table DDMStorageLink (uuid_ VARCHAR(75) null,storageLinkId LONG not null primary key,classNameId LONG,classPK LONG,structureId LONG,type_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table DDMStorageLink";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -155,6 +156,14 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return _originalClassPK;
 	}
 
+	public long getStructureId() {
+		return _structureId;
+	}
+
+	public void setStructureId(long structureId) {
+		_structureId = structureId;
+	}
+
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -211,6 +220,8 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		ddmStorageLinkModelImpl._originalClassPK = ddmStorageLinkModelImpl._classPK;
 
 		ddmStorageLinkModelImpl._setOriginalClassPK = false;
+		ddmStorageLinkImpl.setStructureId(getStructureId());
+
 		ddmStorageLinkImpl.setType(getType());
 
 		return ddmStorageLinkImpl;
@@ -259,7 +270,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -269,6 +280,8 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
+		sb.append(", structureId=");
+		sb.append(getStructureId());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append("}");
@@ -277,7 +290,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink");
@@ -300,6 +313,10 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>structureId</column-name><column-value><![CDATA[");
+		sb.append(getStructureId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
@@ -317,6 +334,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
+	private long _structureId;
 	private String _type;
 	private transient ExpandoBridge _expandoBridge;
 }

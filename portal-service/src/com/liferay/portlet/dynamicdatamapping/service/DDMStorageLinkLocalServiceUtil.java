@@ -249,11 +249,19 @@ public class DDMStorageLinkLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink addStorageLink(
-		long classNameId, long classPK, java.lang.String type,
+		long structureId, long classNameId, long classPK,
+		java.lang.String type,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addStorageLink(classNameId, classPK, type, serviceContext);
+				   .addStorageLink(structureId, classNameId, classPK, type,
+			serviceContext);
+	}
+
+	public static void deleteAllStorageLink(long structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAllStorageLink(structureId);
 	}
 
 	public static void deleteStorageLink(
