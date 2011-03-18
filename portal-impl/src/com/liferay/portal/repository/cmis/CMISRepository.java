@@ -1600,7 +1600,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	private static OperationContext _operationContext;
 	private static ThreadLocal<Map<Long, List<FileEntry>>> _fileEntriesCache =
 		new AutoResetThreadLocal<Map<Long, List<FileEntry>>>(
 			CMISRepository.class + "._fileEntriesCache",
@@ -1614,6 +1613,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		new AutoResetThreadLocal<Map<Long, List<Folder>>>(
 			CMISRepository.class + "._foldersCache",
 			new HashMap<Long, List<Folder>>());
+	private static OperationContext _operationContext;
 
 	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 
@@ -1649,7 +1649,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		defaultFilterSet.add(PropertyIds.PARENT_ID);
 		defaultFilterSet.add(PropertyIds.PATH);
 
-		// Context
+		// Operation context
 
 		_operationContext = new OperationContextImpl(
 			defaultFilterSet, false, true, false, IncludeRelationships.NONE,
