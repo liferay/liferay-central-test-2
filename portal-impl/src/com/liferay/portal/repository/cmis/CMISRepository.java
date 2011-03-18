@@ -95,6 +95,7 @@ import org.apache.chemistry.opencmis.commons.data.PropertyData;
 import org.apache.chemistry.opencmis.commons.enums.Action;
 import org.apache.chemistry.opencmis.commons.enums.BaseTypeId;
 import org.apache.chemistry.opencmis.commons.enums.BindingType;
+import org.apache.chemistry.opencmis.commons.enums.IncludeRelationships;
 import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisPermissionDeniedException;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisRuntimeException;
@@ -1252,14 +1253,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 			getCmisFolder(session, folderId);
 
-		OperationContext operationContext = new OperationContextImpl();
-
-		operationContext.setFilter(_defaultFilterSet);
-		operationContext.setMaxItemsPerPage(1000);
-		operationContext.setOrderBy("cmis:name ASC");
-
-		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren(
-			operationContext);
+		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren();
 
 		return cmisObjects.iterator();
 	}
@@ -1340,6 +1334,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
+	protected OperationContext getOperationContext() {
+		return _operationContext;
+	}
+
 	protected Session getSession() throws PortalException, RepositoryException {
 		Session session = getCachedSession();
 
@@ -1405,6 +1403,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		checkRepository(parameters, typeSettingsProperties);
 
 		session = _sessionFactory.createSession(parameters);
+
+		session.setDefaultContext(getOperationContext());
 
 		setCachedSession(session);
 
@@ -1598,7 +1598,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	private static Set<String> _defaultFilterSet = new HashSet<String>();
+	private static OperationContext _operationContext;
 	private static ThreadLocal<Map<Long, List<FileEntry>>> _fileEntriesCache =
 		new AutoResetThreadLocal<Map<Long, List<FileEntry>>>(
 			CMISRepository.class + "._fileEntriesCache",
@@ -1619,32 +1619,39 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	private String _sessionKey;
 
 	static {
+		Set<String> defaultFilterSet = new HashSet<String>();
 
 		// Base
 
-		_defaultFilterSet.add(PropertyIds.BASE_TYPE_ID);
-		_defaultFilterSet.add(PropertyIds.CREATED_BY);
-		_defaultFilterSet.add(PropertyIds.CREATION_DATE);
-		_defaultFilterSet.add(PropertyIds.LAST_MODIFIED_BY);
-		_defaultFilterSet.add(PropertyIds.LAST_MODIFICATION_DATE);
-		_defaultFilterSet.add(PropertyIds.NAME);
-		_defaultFilterSet.add(PropertyIds.OBJECT_ID);
-		_defaultFilterSet.add(PropertyIds.OBJECT_TYPE_ID);
+		defaultFilterSet.add(PropertyIds.BASE_TYPE_ID);
+		defaultFilterSet.add(PropertyIds.CREATED_BY);
+		defaultFilterSet.add(PropertyIds.CREATION_DATE);
+		defaultFilterSet.add(PropertyIds.LAST_MODIFIED_BY);
+		defaultFilterSet.add(PropertyIds.LAST_MODIFICATION_DATE);
+		defaultFilterSet.add(PropertyIds.NAME);
+		defaultFilterSet.add(PropertyIds.OBJECT_ID);
+		defaultFilterSet.add(PropertyIds.OBJECT_TYPE_ID);
 
 		// Document
 
-		_defaultFilterSet.add(PropertyIds.CONTENT_STREAM_LENGTH);
-		_defaultFilterSet.add(PropertyIds.CONTENT_STREAM_MIME_TYPE);
-		_defaultFilterSet.add(PropertyIds.IS_VERSION_SERIES_CHECKED_OUT);
-		_defaultFilterSet.add(PropertyIds.VERSION_LABEL);
-		_defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_BY);
-		_defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_ID);
-		_defaultFilterSet.add(PropertyIds.VERSION_SERIES_ID);
+		defaultFilterSet.add(PropertyIds.CONTENT_STREAM_LENGTH);
+		defaultFilterSet.add(PropertyIds.CONTENT_STREAM_MIME_TYPE);
+		defaultFilterSet.add(PropertyIds.IS_VERSION_SERIES_CHECKED_OUT);
+		defaultFilterSet.add(PropertyIds.VERSION_LABEL);
+		defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_BY);
+		defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_ID);
+		defaultFilterSet.add(PropertyIds.VERSION_SERIES_ID);
 
 		// Folder
 
-		_defaultFilterSet.add(PropertyIds.PARENT_ID);
-		_defaultFilterSet.add(PropertyIds.PATH);
+		defaultFilterSet.add(PropertyIds.PARENT_ID);
+		defaultFilterSet.add(PropertyIds.PATH);
+
+		// Context
+
+		_operationContext = new OperationContextImpl(
+			defaultFilterSet, false, true, false, IncludeRelationships.NONE,
+			null, false, "cmis:name ASC", true, 1000);
 	}
 
 }
