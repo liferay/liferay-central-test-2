@@ -150,15 +150,29 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public Folder getFolder() {
+		Folder parentFolder = null;
+
 		try {
-			return CMISRepositoryLocalServiceUtil.toFolder(
+			parentFolder = super.getParentFolder();
+
+			if (parentFolder != null) {
+				return parentFolder;
+			}
+		}
+		catch (Exception e) {
+		}
+
+		try {
+			parentFolder = CMISRepositoryLocalServiceUtil.toFolder(
 				getRepositoryId(), _document.getParents().get(0));
+
+			setParentFolder(parentFolder);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return null;
+		return parentFolder;
 	}
 
 	public long getFolderId() {

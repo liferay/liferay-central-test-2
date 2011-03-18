@@ -14,7 +14,10 @@
 
 package com.liferay.portal.repository.cmis.model;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
@@ -65,6 +68,10 @@ public abstract class CMISModel {
 		return allowableActionsSet.contains(action);
 	}
 
+	protected Folder getParentFolder() throws PortalException, SystemException {
+		return _parentFolder;
+	}
+
 	protected User getUser(String createdBy) {
 		User user = null;
 
@@ -99,9 +106,15 @@ public abstract class CMISModel {
 		return user;
 	}
 
+	public void setParentFolder(Folder parentFolder) {
+		_parentFolder = parentFolder;
+	}
+
 	private static Map<String, Action> _mappedActionKeys =
 		new HashMap<String, Action>();
 	private static Set<String> _unsupportedActionKeys = new HashSet<String>();
+
+	private Folder _parentFolder;
 
 	static {
 		_mappedActionKeys.put(ActionKeys.ACCESS, Action.CAN_GET_FOLDER_TREE);

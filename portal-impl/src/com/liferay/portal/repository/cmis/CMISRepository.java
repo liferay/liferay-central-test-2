@@ -1060,11 +1060,21 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				return;
 			}
 
+			Session session = getSession();
+
+			org.apache.chemistry.opencmis.client.api.Folder cmisParentFolder =
+				getCmisFolder(session, folderId);
+
+			Folder parentFolder = toFolder(cmisParentFolder);
+
 			List<Object> foldersAndFileEntries = new ArrayList<Object>();
 			List<Folder> folders = new ArrayList<Folder>();
 			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
 
-			Iterator<CmisObject> itr = getIterator(folderId);
+			ItemIterable<CmisObject> cmisObjects =
+				cmisParentFolder.getChildren();
+
+			Iterator<CmisObject> itr = cmisObjects.iterator();
 
 			while (itr.hasNext()) {
 				CmisObject cmisObject = itr.next();
@@ -1072,18 +1082,23 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				if (cmisObject instanceof
 						org.apache.chemistry.opencmis.client.api.Folder) {
 
-					Folder folder = toFolder(
+					CMISFolder cmisFolder = (CMISFolder)toFolder(
 						(org.apache.chemistry.opencmis.client.api.Folder)
 							cmisObject);
 
-					foldersAndFileEntries.add(folder);
-					folders.add(folder);
+					cmisFolder.setParentFolder(parentFolder);
+
+					foldersAndFileEntries.add(cmisFolder);
+					folders.add(cmisFolder);
 				}
 				else if (cmisObject instanceof Document) {
-					FileEntry fileEntry = toFileEntry((Document)cmisObject);
+					CMISFileEntry cmisFileEntry = (CMISFileEntry)toFileEntry(
+						(Document)cmisObject);
 
-					foldersAndFileEntries.add(fileEntry);
-					fileEntries.add(fileEntry);
+					cmisFileEntry.setParentFolder(parentFolder);
+
+					foldersAndFileEntries.add(cmisFileEntry);
+					fileEntries.add(cmisFileEntry);
 				}
 			}
 
@@ -1243,19 +1258,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			_foldersAndFileEntriesCache.get();
 
 		return foldersAndFileEntriesCache.get(folderId);
-	}
-
-	protected Iterator<CmisObject> getIterator(long folderId)
-		throws PortalException, SystemException {
-
-		Session session = getSession();
-
-		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-			getCmisFolder(session, folderId);
-
-		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren();
-
-		return cmisObjects.iterator();
 	}
 
 	protected String getLogin() throws RepositoryException {
