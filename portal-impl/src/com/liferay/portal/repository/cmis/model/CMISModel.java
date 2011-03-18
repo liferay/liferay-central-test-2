@@ -68,6 +68,7 @@ public abstract class CMISModel {
 		return allowableActionsSet.contains(action);
 	}
 
+	@SuppressWarnings("unused")
 	protected Folder getParentFolder() throws PortalException, SystemException {
 		return _parentFolder;
 	}

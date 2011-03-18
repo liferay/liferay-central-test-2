@@ -1060,16 +1060,16 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				return;
 			}
 
+			List<Object> foldersAndFileEntries = new ArrayList<Object>();
+			List<Folder> folders = new ArrayList<Folder>();
+			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
+
 			Session session = getSession();
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisParentFolder =
 				getCmisFolder(session, folderId);
 
 			Folder parentFolder = toFolder(cmisParentFolder);
-
-			List<Object> foldersAndFileEntries = new ArrayList<Object>();
-			List<Folder> folders = new ArrayList<Folder>();
-			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
 
 			ItemIterable<CmisObject> cmisObjects =
 				cmisParentFolder.getChildren();
