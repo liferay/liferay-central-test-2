@@ -46,9 +46,14 @@
 
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
+		<column name="structureId" type="long" />
 		<column name="type" type="String" />
 
 		<!-- Finder methods -->
+
+		<finder name="StructureId" return-type="Collection">
+			<finder-column name="structureId" />
+		</finder>
 
 		<finder name="C_C" return-type="DDMStorageLink" unique="true">
 			<finder-column name="classNameId" />

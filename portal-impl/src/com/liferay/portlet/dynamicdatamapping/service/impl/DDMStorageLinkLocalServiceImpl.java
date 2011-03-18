@@ -20,6 +20,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
 import com.liferay.portlet.dynamicdatamapping.service.base.DDMStorageLinkLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
@@ -28,7 +30,7 @@ public class DDMStorageLinkLocalServiceImpl
 	extends DDMStorageLinkLocalServiceBaseImpl {
 
 	public DDMStorageLink addStorageLink(
-			long classNameId, long classPK, String type,
+			long structureId, long classNameId, long classPK, String type,
 			ServiceContext serviceContext)
 		throws SystemException {
 
@@ -39,11 +41,23 @@ public class DDMStorageLinkLocalServiceImpl
 
 		storageLink.setClassNameId(classNameId);
 		storageLink.setClassPK(classPK);
+		storageLink.setStructureId(structureId);
 		storageLink.setType(type);
 
 		ddmStorageLinkPersistence.update(storageLink, false);
 
 		return storageLink;
+	}
+
+	public void deleteAllStorageLink(long structureId)
+		throws PortalException, SystemException {
+
+		List<DDMStorageLink> storageLinks =
+			ddmStorageLinkPersistence.findByStructureId(structureId);
+
+		for (DDMStorageLink storageLink : storageLinks) {
+			deleteStorageLink(storageLink);
+		}
 	}
 
 	public void deleteStorageLink(DDMStorageLink storageLink)
