@@ -50,12 +50,12 @@ public interface PortalService {
 
 	public void test();
 
+	public void testClassName(java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void testClassNameRollback(java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void testCounterRollback()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void testClassName(java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void testClassNameRollback(java.lang.String className)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

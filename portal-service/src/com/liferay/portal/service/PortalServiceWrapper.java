@@ -41,19 +41,19 @@ public class PortalServiceWrapper implements PortalService {
 		_portalService.test();
 	}
 
+	public void testClassName(java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_portalService.testClassName(value);
+	}
+
+	public void testClassNameRollback(java.lang.String value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_portalService.testClassNameRollback(value);
+	}
+
 	public void testCounterRollback()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_portalService.testCounterRollback();
-	}
-
-	public void testClassName(java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_portalService.testClassName(name);
-	}
-
-	public void testClassNameRollback(java.lang.String className)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_portalService.testClassNameRollback(className);
 	}
 
 	public PortalService getWrappedPortalService() {

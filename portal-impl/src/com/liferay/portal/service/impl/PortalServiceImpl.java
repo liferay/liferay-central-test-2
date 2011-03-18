@@ -54,28 +54,28 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		}
 	}
 
+	public void testClassName(String value) throws SystemException {
+		long classNameId = counterLocalService.increment();
+
+		ClassName className = classNamePersistence.create(classNameId);
+
+		className.setValue(value);
+
+		classNamePersistence.update(className, false);
+	}
+
+	public void testClassNameRollback(String value) throws SystemException {
+		testClassName(value);
+
+		throw new SystemException();
+	}
+
 	public void testCounterRollback() throws SystemException {
 		int counterIncrement = PropsValues.COUNTER_INCREMENT;
 
 		for (int i = 0; i < counterIncrement * 2; i++) {
 			counterLocalService.increment();
 		}
-
-		throw new SystemException();
-	}
-
-	public void testClassName(String name) throws SystemException {
-		long classNameId = counterLocalService.increment();
-
-		ClassName className = classNamePersistence.create(classNameId);
-
-		className.setValue(name);
-
-		classNamePersistence.update(className, false);
-	}
-
-	public void testClassNameRollback(String className) throws SystemException {
-		testClassName(className);
 
 		throw new SystemException();
 	}

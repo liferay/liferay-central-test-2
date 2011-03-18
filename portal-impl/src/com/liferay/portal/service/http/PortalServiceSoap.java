@@ -91,33 +91,33 @@ public class PortalServiceSoap {
 		}
 	}
 
+	public static void testClassName(java.lang.String value)
+		throws RemoteException {
+		try {
+			PortalServiceUtil.testClassName(value);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testClassNameRollback(java.lang.String value)
+		throws RemoteException {
+		try {
+			PortalServiceUtil.testClassNameRollback(value);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void testCounterRollback() throws RemoteException {
 		try {
 			PortalServiceUtil.testCounterRollback();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testClassName(java.lang.String name)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testClassName(name);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testClassNameRollback(java.lang.String className)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testClassNameRollback(className);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
