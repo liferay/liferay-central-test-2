@@ -1485,6 +1485,33 @@
 		</for>
 	</target>
 
+	<target name="clean-up-vms">
+		<if>
+			<available file="${vm.drive}\${vm.host}\${vm.host}.vmdk.lck" />
+			<then>
+				<antcall target="stop-vm" />
+			</then>
+		</if>
+		
+		<if>
+			<available file="${vm.drive}\${vm.host.cluster-node-2}\${vm.host.cluster-node-2}.vmdk.lck" />
+			<then>
+				<antcall target="stop-vm">
+					<param name="vm.host" value="${vm.host.cluster-node-2}" />
+				</antcall>
+			</then>
+		</if>
+
+		<if>
+			<available file="${vm.drive}\${vm.host.db}\${vm.host.db}.vmdk.lck" />
+			<then>
+				<antcall target="stop-vm">
+					<param name="vm.host" value="${vm.host.db}" />
+				</antcall>
+			</then>
+		</if>
+	</target>
+
 	<target name="create-ant-script">
 		<loadfile property="template.content" srcfile="portal-web/test-ant-templates/${ant.script.template}">
 			<filterchain>
