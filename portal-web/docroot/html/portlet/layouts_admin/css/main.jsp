@@ -56,7 +56,7 @@
 			font-size: 1.5em;
 
 			.aui-field-content {
-            	display: inline-block;
+				display: inline-block;
 			}
 		}
 
@@ -66,7 +66,7 @@
 		}
 
 		.theme-fields {
-        	margin-left: 0.5em;
+			margin-left: 0.5em;
 		}
 
 		.theme-screenshot {
