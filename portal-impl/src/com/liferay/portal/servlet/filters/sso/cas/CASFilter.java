@@ -78,6 +78,18 @@ public class CASFilter extends BasePortalFilter {
 		return _log;
 	}
 
+	protected void logoutSession(long companyId, HttpServletResponse response,
+			HttpSession session)
+		throws Exception {
+
+		session.invalidate();
+
+		String logoutUrl = PrefsPropsUtil.getString(
+			companyId, PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL);
+
+		response.sendRedirect(logoutUrl);
+	}
+
 	protected TicketValidator getTicketValidator(long companyId)
 		throws Exception {
 
@@ -137,15 +149,16 @@ public class CASFilter extends BasePortalFilter {
 		}
 
 		if (pathInfo.indexOf("/portal/logout") != -1) {
-			session.invalidate();
-
-			String logoutUrl = PrefsPropsUtil.getString(
-				companyId, PropsKeys.CAS_LOGOUT_URL,
-				PropsValues.CAS_LOGOUT_URL);
-
-			response.sendRedirect(logoutUrl);
+			logoutSession(companyId, response, session);
 
 			return;
+		}
+		else if (pathInfo.indexOf("/portal/expire_session") != -1) {
+			if (PropsValues.CAS_LOGOUT_ON_EXPIRE) {
+				logoutSession(companyId, response, session);
+
+				return;
+			}
 		}
 		else {
 			String login = (String)session.getAttribute(WebKeys.CAS_LOGIN);

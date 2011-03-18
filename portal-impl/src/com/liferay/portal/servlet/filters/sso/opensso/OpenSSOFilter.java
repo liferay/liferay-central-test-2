@@ -35,6 +35,7 @@ import javax.servlet.http.HttpSession;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Prashant Dighe
+ * @author Hugo Huijser
  */
 public class OpenSSOFilter extends BasePortalFilter {
 
@@ -71,6 +72,21 @@ public class OpenSSOFilter extends BasePortalFilter {
 		return false;
 	}
 
+	protected void logoutSession(long companyId, HttpServletRequest request,
+			HttpServletResponse response)
+		throws Exception {
+
+		HttpSession session = request.getSession();
+
+		session.invalidate();
+
+		String logoutUrl = PrefsPropsUtil.getString(
+			companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
+			PropsValues.OPEN_SSO_LOGOUT_URL);
+
+		response.sendRedirect(logoutUrl);
+	}
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
@@ -81,9 +97,6 @@ public class OpenSSOFilter extends BasePortalFilter {
 		String loginUrl = PrefsPropsUtil.getString(
 			companyId, PropsKeys.OPEN_SSO_LOGIN_URL,
 			PropsValues.OPEN_SSO_LOGIN_URL);
-		String logoutUrl = PrefsPropsUtil.getString(
-			companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
-			PropsValues.OPEN_SSO_LOGOUT_URL);
 		String serviceUrl = PrefsPropsUtil.getString(
 			companyId, PropsKeys.OPEN_SSO_SERVICE_URL,
 			PropsValues.OPEN_SSO_SERVICE_URL);
@@ -91,11 +104,19 @@ public class OpenSSOFilter extends BasePortalFilter {
 		String requestURI = GetterUtil.getString(request.getRequestURI());
 
 		if (requestURI.endsWith("/portal/logout")) {
-			HttpSession session = request.getSession();
+			logoutSession(companyId, request, response);
 
-			session.invalidate();
+			return;
+		}
 
-			response.sendRedirect(logoutUrl);
+		if (requestURI.endsWith("/portal/expire_session")) {
+			if (PropsValues.OPEN_SSO_LOGOUT_ON_EXPIRE) {
+				logoutSession(companyId, request, response);
+			}
+			else {
+				processFilter(
+					OpenSSOFilter.class, request, response, filterChain);
+			}
 
 			return;
 		}

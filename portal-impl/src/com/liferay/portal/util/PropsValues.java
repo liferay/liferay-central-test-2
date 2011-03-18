@@ -212,6 +212,8 @@ public class PropsValues {
 
 	public static final String CAS_LOGIN_URL = PropsUtil.get(PropsKeys.CAS_LOGIN_URL);
 
+	public static final boolean CAS_LOGOUT_ON_EXPIRE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CAS_LOGOUT_ON_EXPIRE));
+
 	public static final String CAS_LOGOUT_URL = PropsUtil.get(PropsKeys.CAS_LOGOUT_URL);
 
 	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = PropsUtil.get(PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL);
@@ -893,6 +895,8 @@ public class PropsValues {
 	public static final boolean OPEN_SSO_LDAP_IMPORT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED));
 
 	public static final String OPEN_SSO_LOGIN_URL = PropsUtil.get(PropsKeys.OPEN_SSO_LOGIN_URL);
+
+	public static final boolean OPEN_SSO_LOGOUT_ON_EXPIRE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.OPEN_SSO_LOGOUT_ON_EXPIRE));
 
 	public static final String OPEN_SSO_LOGOUT_URL = PropsUtil.get(PropsKeys.OPEN_SSO_LOGOUT_URL);
 

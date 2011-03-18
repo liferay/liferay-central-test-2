@@ -291,6 +291,8 @@ public interface PropsKeys {
 
 	public static final String CAS_LOGIN_URL = "cas.login.url";
 
+	public static final String CAS_LOGOUT_ON_EXPIRE = "cas.logout.on.expire";
+
 	public static final String CAS_LOGOUT_URL = "cas.logout.url";
 
 	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = "cas.no.such.user.redirect.url";
@@ -1314,6 +1316,8 @@ public interface PropsKeys {
 	public static final String OPEN_SSO_LDAP_IMPORT_ENABLED = "open.sso.ldap.import.enabled";
 
 	public static final String OPEN_SSO_LOGIN_URL = "open.sso.login.url";
+
+	public static final String OPEN_SSO_LOGOUT_ON_EXPIRE = "open.sso.logout.on.expire";
 
 	public static final String OPEN_SSO_LOGOUT_URL = "open.sso.logout.url";
 

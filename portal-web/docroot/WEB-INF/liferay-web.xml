@@ -394,6 +394,12 @@
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
+		<filter-name>SSO CAS Filter</filter-name>
+		<url-pattern>/c/portal/expire_session</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
 		<filter-name>SSO Ntlm Filter</filter-name>
 		<url-pattern>/c/portal/login</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
@@ -412,6 +418,12 @@
 	<filter-mapping>
 		<filter-name>SSO Open SSO Filter</filter-name>
 		<url-pattern>/c/portal/logout</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>SSO Open SSO Filter</filter-name>
+		<url-pattern>/c/portal/expire_session</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
