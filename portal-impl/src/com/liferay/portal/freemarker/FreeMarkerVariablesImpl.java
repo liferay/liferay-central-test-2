@@ -74,6 +74,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.portlet.PortletRequestUtil;
 
 import freemarker.ext.beans.BeansWrapper;
+
 import freemarker.template.utility.ObjectConstructor;
 
 import java.util.List;
