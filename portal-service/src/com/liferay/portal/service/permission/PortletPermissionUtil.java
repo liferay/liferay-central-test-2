@@ -26,6 +26,15 @@ public class PortletPermissionUtil {
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, long plid,
+			String portletId, String actionId)
+		throws PortalException, SystemException {
+
+		getPortletPermission().check(
+			permissionChecker, groupId, plid, portletId, actionId);
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, long groupId, long plid,
 			String portletId, String actionId, boolean strict)
 		throws PortalException, SystemException {
 

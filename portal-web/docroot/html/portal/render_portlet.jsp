@@ -80,6 +80,12 @@ PortletPreferencesIds portletPreferencesIds = PortletPreferencesFactoryUtil.getP
 
 PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
 
+long portletItemId = ParamUtil.getLong(request, "p_p_iid");
+
+if (portletItemId > 0) {
+	PortletPreferencesServiceUtil.restoreArchivedPreferences(themeDisplay.getParentGroupId(), portletItemId, portlet.getRootPortletId(), portletPreferences);
+}
+
 PortletConfig portletConfig = PortletConfigFactoryUtil.create(portlet, application);
 PortletContext portletCtx = portletConfig.getPortletContext();
 

@@ -170,6 +170,7 @@
 						if (!portletMetaData.portletUsed) {
 							var plid = portletMetaData.plid;
 							var portletId = portletMetaData.portletId;
+							var portletItemId = portletMetaData.portletItemId;
 							var isInstanceable = portletMetaData.instanceable;
 
 							if (!isInstanceable) {
@@ -220,6 +221,7 @@
 								},
 								plid: plid,
 								portletId: portletId,
+								portletItemId: portletItemId,
 								placeHolder: placeHolder
 							};
 
@@ -266,12 +268,14 @@
 							var instanceable = (portlet.attr('instanceable') == 'true');
 							var plid = portlet.attr('plid');
 							var portletId = portlet.attr('portletId');
+							var portletItemId = portlet.attr('portletItemId');
 							var portletUsed = portlet.hasClass('lfr-portlet-used');
 
 							portletMetaData = {
 								instanceable: instanceable,
 								plid: plid,
 								portletId: portletId,
+								portletItemId: portletItemId,
 								portletUsed: portletUsed
 							};
 

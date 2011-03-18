@@ -143,6 +143,43 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 						</div>
 
 						<input id="<portlet:namespace />portletItem<%= portlet.getPortletId() %>CategoryPath" type="hidden" value="<%= divId.toString().replace(':', '-') %>" />
+
+						<%
+						List<PortletItem> archivedSetups = PortletItemLocalServiceUtil.getPortletItems(themeDisplay.getScopeGroupId(), portlet.getPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
+
+						for (PortletItem portletItem : archivedSetups) {
+
+							divId.setIndex(0);
+
+							divId.append(newCategoryPath);
+							divId.append(":");
+							divId.append(PortalUtil.getPortletTitle(portlet, application, locale));
+							divId.append(":");
+
+							matcher = pattern.matcher(HtmlUtil.escape(portletItem.getName()));
+
+							while (matcher.find()) {
+								divId.append(matcher.group());
+							}
+						%>
+
+							<div
+								class="lfr-portlet-item lfr-archived-setup"
+								id="<portlet:namespace />portletItem<%= portletItem.getPortletItemId() %>"
+								instanceable="<%= portletInstanceable %>"
+								plid="<%= plid %>"
+								portletId="<%= portlet.getPortletId() %>"
+								portletItemId="<%= portletItem.getPortletItemId() %>"
+								title="<%= HtmlUtil.escape(portletItem.getName()) %>"
+							>
+								<p><%= HtmlUtil.escape(portletItem.getName()) %> <a href="javascript:;"><liferay-ui:message key="add" /></a></p>
+							</div>
+
+							<input id="<portlet:namespace />portletItem<%= portletItem.getPortletItemId() %>CategoryPath" type="hidden" value="<%= divId.toString().replace(':', '-') %>" />
+
+						<%
+						}
+						%>
 					</c:when>
 					<c:otherwise>
 						<div>

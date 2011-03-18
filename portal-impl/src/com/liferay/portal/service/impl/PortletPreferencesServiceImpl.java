@@ -23,6 +23,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.PortletPreferencesServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.io.IOException;
@@ -60,15 +61,13 @@ public class PortletPreferencesServiceImpl
 	}
 
 	public void restoreArchivedPreferences(
-			long groupId, String name, String portletId,
+			long groupId, PortletItem portletItem, String portletId,
 			javax.portlet.PortletPreferences preferences)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_ARCHIVED_SETUPS);
-
-		PortletItem portletItem = portletItemLocalService.getPortletItem(
-			groupId, name, portletId, PortletPreferences.class.getName());
+		PortletPermissionUtil.check(
+			getPermissionChecker(), groupId, 0, portletId,
+			ActionKeys.CONFIGURATION);
 
 		long ownerId = portletItem.getPortletItemId();
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
@@ -82,13 +81,38 @@ public class PortletPreferencesServiceImpl
 		copyPreferences(archivedPrefs, preferences);
 	}
 
+	public void restoreArchivedPreferences(
+			long groupId, long portletItemId, String portletId,
+			javax.portlet.PortletPreferences preferences)
+		throws PortalException, SystemException {
+
+		PortletItem portletItem = portletItemLocalService.getPortletItem(
+			portletItemId);
+
+		restoreArchivedPreferences(
+			groupId, portletItem, portletId, preferences);
+	}
+
+	public void restoreArchivedPreferences(
+			long groupId, String name, String portletId,
+			javax.portlet.PortletPreferences preferences)
+		throws PortalException, SystemException {
+
+		PortletItem portletItem = portletItemLocalService.getPortletItem(
+			groupId, name, portletId, PortletPreferences.class.getName());
+
+		restoreArchivedPreferences(
+			groupId, portletItem, portletId, preferences);
+	}
+
 	public void updateArchivePreferences(
 			long userId, long groupId, String name, String portletId,
 			javax.portlet.PortletPreferences preferences)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_ARCHIVED_SETUPS);
+		PortletPermissionUtil.check(
+			getPermissionChecker(), groupId, 0, portletId,
+			ActionKeys.CONFIGURATION);
 
 		PortletItem portletItem = portletItemLocalService.updatePortletItem(
 			userId, groupId, name, portletId,

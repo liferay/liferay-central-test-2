@@ -107,6 +107,7 @@
 
 			var plid = options.plid || themeDisplay.getPlid();
 			var portletId = options.portletId;
+			var portletItemId = options.portletItemId;
 			var doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
 
 			var placeHolder = options.placeHolder;
@@ -155,6 +156,7 @@
 				p_p_col_id: currentColumnId,
 				p_p_col_pos: portletPosition,
 				p_p_id: portletId,
+				p_p_iid: portletItemId,
 				p_p_isolated: true
 			};
 

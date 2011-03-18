@@ -26,6 +26,11 @@ public interface PortletPermission {
 
 	public void check(
 			PermissionChecker permissionChecker, long groupId, long plid,
+			String portletId, String actionId)
+		throws PortalException, SystemException;
+
+	public void check(
+			PermissionChecker permissionChecker, long groupId, long plid,
 			String portletId, String actionId, boolean strict)
 		throws PortalException, SystemException;
 
