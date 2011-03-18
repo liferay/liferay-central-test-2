@@ -2506,7 +2506,7 @@ file.
 
 	<target name="stop-selenium-nanny">
 		<exec executable="taskkill.exe">
-			<arg line="/F /IM selenium-nanny.exe" />
+			<arg line="/F /IM selenium_nanny.exe" />
 		</exec>
 	</target>
 
