@@ -230,8 +230,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			String repositoryImplClassName = PortalUtil.getClassName(
 				classNameId);
 
-			BaseRepository baseRepository =
-				RepositoryFactoryUtil.getInstance(repositoryImplClassName);
+			BaseRepository baseRepository = RepositoryFactoryUtil.getInstance(
+				repositoryImplClassName);
 
 			String[] supportedConfigurations =
 				baseRepository.getSupportedConfigurations();
@@ -399,8 +399,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		baseRepository.setCompanyId(repository.getCompanyId());
 		baseRepository.setCompanyLocalService(companyLocalService);
 		baseRepository.setCounterLocalService(counterLocalService);
-		baseRepository.setDLAppHelperLocalService(
-			dlAppHelperLocalService);
+		baseRepository.setDLAppHelperLocalService(dlAppHelperLocalService);
 		baseRepository.setGroupId(repository.getGroupId());
 		baseRepository.setRepositoryId(repositoryId);
 		baseRepository.setTypeSettingsProperties(

@@ -27,10 +27,11 @@ public class RepositoryFactoryUtil {
 	public static BaseRepository getInstance(String className)
 		throws Exception {
 
-		RepositoryFactory factory = _repositoryFactories.get(className);
+		RepositoryFactory repositoryFactory = _repositoryFactories.get(
+			className);
 
-		if (factory != null) {
-			return factory.getInstance();
+		if (repositoryFactory != null) {
+			return repositoryFactory.getInstance();
 		}
 
 		return null;
@@ -41,9 +42,9 @@ public class RepositoryFactoryUtil {
 	}
 
 	public static void registerRepositoryFactory(
-			String className, RepositoryFactory factory) {
+		String className, RepositoryFactory repositoryFactory) {
 
-		_repositoryFactories.put(className, factory);
+		_repositoryFactories.put(className, repositoryFactory);
 	}
 
 	public static void unregisterRepositoryFactory(String className) {
@@ -56,9 +57,10 @@ public class RepositoryFactoryUtil {
 
 	static {
 		for (String className : PropsValues.DL_REPOSITORY_IMPL) {
-			RepositoryFactory factory = new RepositoryFactoryImpl(className);
+			RepositoryFactory repositoryFactory = new RepositoryFactoryImpl(
+				className);
 
-			_repositoryFactories.put(className, factory);
+			_repositoryFactories.put(className, repositoryFactory);
 		}
 	}
 

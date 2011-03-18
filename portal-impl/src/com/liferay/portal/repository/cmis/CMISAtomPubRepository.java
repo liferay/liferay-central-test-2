@@ -25,22 +25,12 @@ public class CMISAtomPubRepository extends CMISRepository {
 
 	public static final String REPOSITORY_ID = "REPOSITORY_ID";
 
-	public static final String[] SUPPORTED_CONFIGURATIONS = {
-		CONFIGURATION_ATOMPUB
-	};
-
-	public static final String[][] SUPPORTED_PARAMETERS = {
-		new String[] {
-			ATOMPUB_URL, REPOSITORY_ID
-		}
-	};
-
 	public String[] getSupportedConfigurations() {
-		return SUPPORTED_CONFIGURATIONS;
+		return _SUPPORTED_CONFIGURATIONS;
 	}
 
 	public String[][] getSupportedParameters() {
-		return SUPPORTED_PARAMETERS;
+		return _SUPPORTED_PARAMETERS;
 	}
 
 	public boolean isAtomPub() {
@@ -50,5 +40,15 @@ public class CMISAtomPubRepository extends CMISRepository {
 	public boolean isWebServices() {
 		return false;
 	}
+
+	private static final String[] _SUPPORTED_CONFIGURATIONS = {
+		CONFIGURATION_ATOMPUB
+	};
+
+	private static final String[][] _SUPPORTED_PARAMETERS = {
+		new String[] {
+			ATOMPUB_URL, REPOSITORY_ID
+		}
+	};
 
 }

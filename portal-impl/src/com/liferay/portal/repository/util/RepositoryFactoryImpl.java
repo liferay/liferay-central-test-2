@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.ProxyFactory;
 public class RepositoryFactoryImpl implements RepositoryFactory {
 
 	public RepositoryFactoryImpl(String className) {
-
 		_className = className;
 	}
 
@@ -35,11 +34,10 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 
 	public BaseRepository getInstance() throws Exception {
 		if (_classLoader == null) {
-			return (BaseRepository) InstanceFactory.newInstance(
-				_className);
+			return (BaseRepository)InstanceFactory.newInstance(_className);
 		}
 		else {
-			return (BaseRepository) ProxyFactory.newInstance(
+			return (BaseRepository)ProxyFactory.newInstance(
 				_classLoader, BaseRepository.class, _className);
 		}
 	}

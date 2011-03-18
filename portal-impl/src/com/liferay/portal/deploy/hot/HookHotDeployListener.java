@@ -367,6 +367,13 @@ public class HookHotDeployListener
 			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
 		}
 
+		if (portalProperties.containsKey(PropsKeys.DL_REPOSITORY_IMPL)) {
+			DLRepositoryContainer dlRepositoryContainer =
+				_dlRepositoryContainerMap.remove(servletContextName);
+
+			dlRepositoryContainer.unregisterRepositoryFactories();
+		}
+
 		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
 			com.liferay.portal.image.HookFactory.setInstance(null);
 		}
@@ -937,13 +944,6 @@ public class HookHotDeployListener
 
 		if (customJspBag != null) {
 			destroyCustomJspBag(servletContextName, customJspBag);
-		}
-
-		DocumentLibraryRepositoryContainer doclibRepositoryContainer =
-			_documentLibraryRepositoryContainerMap.remove(servletContextName);
-
-		if (doclibRepositoryContainer != null) {
-			doclibRepositoryContainer.unregisterRepositoryFactories();
 		}
 
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
@@ -1538,17 +1538,17 @@ public class HookHotDeployListener
 			String[] dlRepositoryClassNames = StringUtil.split(
 				portalProperties.getProperty(PropsKeys.DL_REPOSITORY_IMPL));
 
-			DocumentLibraryRepositoryContainer doclibRepositoryContainer =
-				new DocumentLibraryRepositoryContainer();
+			DLRepositoryContainer dlRepositoryContainer =
+				new DLRepositoryContainer();
 
-			_documentLibraryRepositoryContainerMap.put(
-				servletContextName, doclibRepositoryContainer);
+			_dlRepositoryContainerMap.put(
+				servletContextName, dlRepositoryContainer);
 
 			for (String dlRepositoryClassName : dlRepositoryClassNames) {
 				RepositoryFactory repositoryFactory = new RepositoryFactoryImpl(
 					dlRepositoryClassName, portletClassLoader);
 
-				doclibRepositoryContainer.registerRepositoryFactory(
+				dlRepositoryContainer.registerRepositoryFactory(
 					dlRepositoryClassName, repositoryFactory);
 			}
 		}
@@ -2070,9 +2070,8 @@ public class HookHotDeployListener
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
-	private Map<String, DocumentLibraryRepositoryContainer>
-		_documentLibraryRepositoryContainerMap =
-			new HashMap<String, DocumentLibraryRepositoryContainer>();
+	private Map<String, DLRepositoryContainer> _dlRepositoryContainerMap =
+		new HashMap<String, DLRepositoryContainer>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
 	private Map<String, HotDeployListenersContainer>
@@ -2270,12 +2269,13 @@ public class HookHotDeployListener
 
 	}
 
-	private class DocumentLibraryRepositoryContainer {
+	private class DLRepositoryContainer {
 
 		public void registerRepositoryFactory(
-			String className, RepositoryFactory factory) {
+			String className, RepositoryFactory repositoryFactory) {
 
-			RepositoryFactoryUtil.registerRepositoryFactory(className, factory);
+			RepositoryFactoryUtil.registerRepositoryFactory(
+				className, repositoryFactory);
 
 			_classNames.add(className);
 		}
