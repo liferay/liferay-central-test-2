@@ -212,7 +212,7 @@ public class PropsValues {
 
 	public static final String CAS_LOGIN_URL = PropsUtil.get(PropsKeys.CAS_LOGIN_URL);
 
-	public static final boolean CAS_LOGOUT_ON_EXPIRE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CAS_LOGOUT_ON_EXPIRE));
+	public static final boolean CAS_LOGOUT_ON_SESSION_EXPIRATION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CAS_LOGOUT_ON_SESSION_EXPIRATION));
 
 	public static final String CAS_LOGOUT_URL = PropsUtil.get(PropsKeys.CAS_LOGOUT_URL);
 

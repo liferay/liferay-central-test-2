@@ -78,11 +78,15 @@ public class CASFilter extends BasePortalFilter {
 		return _log;
 	}
 
-	protected void logoutSession(long companyId, HttpServletResponse response,
-			HttpSession session)
+	protected void logoutSession(
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
+		HttpSession session = request.getSession();
+
 		session.invalidate();
+
+		long companyId = PortalUtil.getCompanyId(request);
 
 		String logoutUrl = PrefsPropsUtil.getString(
 			companyId, PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL);
@@ -148,17 +152,17 @@ public class CASFilter extends BasePortalFilter {
 			return;
 		}
 
-		if (pathInfo.indexOf("/portal/logout") != -1) {
-			logoutSession(companyId, response, session);
-
-			return;
-		}
-		else if (pathInfo.indexOf("/portal/expire_session") != -1) {
-			if (PropsValues.CAS_LOGOUT_ON_EXPIRE) {
-				logoutSession(companyId, response, session);
+		if (pathInfo.contains("/portal/expire_session")) {
+			if (PropsValues.CAS_LOGOUT_ON_SESSION_EXPIRATION) {
+				logoutSession(request, response);
 
 				return;
 			}
+		}
+		else if (pathInfo.contains("/portal/logout")) {
+			logoutSession(request, response);
+
+			return;
 		}
 		else {
 			String login = (String)session.getAttribute(WebKeys.CAS_LOGIN);

@@ -72,13 +72,15 @@ public class OpenSSOFilter extends BasePortalFilter {
 		return false;
 	}
 
-	protected void logoutSession(long companyId, HttpServletRequest request,
-			HttpServletResponse response)
+	protected void logoutSession(
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		HttpSession session = request.getSession();
 
 		session.invalidate();
+
+		long companyId = PortalUtil.getCompanyId(request);
 
 		String logoutUrl = PrefsPropsUtil.getString(
 			companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
@@ -103,20 +105,19 @@ public class OpenSSOFilter extends BasePortalFilter {
 
 		String requestURI = GetterUtil.getString(request.getRequestURI());
 
-		if (requestURI.endsWith("/portal/logout")) {
-			logoutSession(companyId, request, response);
-
-			return;
-		}
-
 		if (requestURI.endsWith("/portal/expire_session")) {
 			if (PropsValues.OPEN_SSO_LOGOUT_ON_EXPIRE) {
-				logoutSession(companyId, request, response);
+				logoutSession(request, response);
 			}
 			else {
 				processFilter(
 					OpenSSOFilter.class, request, response, filterChain);
 			}
+
+			return;
+		}
+		else if (requestURI.endsWith("/portal/logout")) {
+			logoutSession(request, response);
 
 			return;
 		}

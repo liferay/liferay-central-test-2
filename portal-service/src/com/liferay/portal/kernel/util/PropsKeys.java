@@ -291,7 +291,7 @@ public interface PropsKeys {
 
 	public static final String CAS_LOGIN_URL = "cas.login.url";
 
-	public static final String CAS_LOGOUT_ON_EXPIRE = "cas.logout.on.expire";
+	public static final String CAS_LOGOUT_ON_SESSION_EXPIRATION = "cas.logout.on.session.expiration";
 
 	public static final String CAS_LOGOUT_URL = "cas.logout.url";
 
