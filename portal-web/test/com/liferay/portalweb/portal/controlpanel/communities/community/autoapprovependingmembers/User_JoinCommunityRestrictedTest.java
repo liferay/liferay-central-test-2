@@ -44,7 +44,7 @@ public class User_JoinCommunityRestrictedTest extends BaseTestCase {
 		selenium.clickAt("link=Communities I Own", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		selenium.open("/user/selenium01/home/");
 
@@ -69,7 +69,7 @@ public class User_JoinCommunityRestrictedTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		selenium.open("/user/selenium01/home/");
 
@@ -158,7 +158,7 @@ public class User_JoinCommunityRestrictedTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 	}
 }

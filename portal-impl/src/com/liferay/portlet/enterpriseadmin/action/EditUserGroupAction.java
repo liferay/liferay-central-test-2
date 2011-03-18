@@ -28,7 +28,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.communities.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.CommunitiesUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

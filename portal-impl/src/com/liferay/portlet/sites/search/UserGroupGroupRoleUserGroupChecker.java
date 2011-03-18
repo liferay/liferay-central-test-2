@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.search;
+package com.liferay.portlet.sites.search;
 
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.log.Log;
@@ -27,24 +27,24 @@ import javax.portlet.RenderResponse;
 /**
  * @author Brett Swaim
  */
-public class UserGroupGroupRoleRoleChecker extends RowChecker {
+public class UserGroupGroupRoleUserGroupChecker extends RowChecker {
 
-	public UserGroupGroupRoleRoleChecker(
-		RenderResponse renderResponse, UserGroup userGroup, Group group) {
+	public UserGroupGroupRoleUserGroupChecker(
+		RenderResponse renderResponse, Group group, Role role) {
 
 		super(renderResponse);
 
-		_userGroup = userGroup;
 		_group = group;
+		_role = role;
 	}
 
 	public boolean isChecked(Object obj) {
-		Role role = (Role)obj;
+		UserGroup userGroup = (UserGroup)obj;
 
 		try {
 			return UserGroupGroupRoleLocalServiceUtil.hasUserGroupGroupRole(
-				_userGroup.getUserGroupId(), _group.getGroupId(),
-				role.getRoleId());
+				userGroup.getUserGroupId(), _group.getGroupId(),
+				_role.getRoleId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -54,9 +54,9 @@ public class UserGroupGroupRoleRoleChecker extends RowChecker {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		UserGroupGroupRoleRoleChecker.class);
+		UserGroupGroupRoleUserGroupChecker.class);
 
 	private Group _group;
-	private UserGroup _userGroup;
+	private Role _role;
 
 }

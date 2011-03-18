@@ -22,7 +22,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.communities.action.ActionUtil;
+import com.liferay.portlet.sites.action.ActionUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import javax.portlet.PortletConfig;

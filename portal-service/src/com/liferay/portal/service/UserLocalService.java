@@ -1523,7 +1523,7 @@ public interface UserLocalService {
 	* @param name the name of the role (must be a regular role, not an
 	organization, community, or provider role)
 	* @param userId the primary key of the user
-	* @param inherited whether to include roles inherited from communities,
+	* @param inherited whether to include roles inherited from sites,
 	organizations, etc.
 	* @return <code>true</code> if the user has the role; <code>false</code>
 	otherwise

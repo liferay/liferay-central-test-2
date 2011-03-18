@@ -12,20 +12,16 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.sites.action;
 
+import com.liferay.portal.MembershipRequestCommentsException;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserGroupGroupRoleServiceUtil;
+import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -38,36 +34,47 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Brett Swaim
+ * @author Jorge Ferrer
  */
-public class EditUserGroupRolesAction extends PortletAction {
+public class PostMembershipRequestAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
 		try {
-			if (cmd.equals("user_group_group_role_users")) {
-				updateUserGroupGroupRoleUsers(actionRequest);
-			}
+			long groupId = ParamUtil.getLong(actionRequest, "groupId");
+			String comments = ParamUtil.getString(actionRequest, "comments");
+
+			MembershipRequestServiceUtil.addMembershipRequest(
+				groupId, comments);
+
+			SessionMessages.add(actionRequest, "membership_request_sent");
 
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException) {
+			if (e instanceof NoSuchGroupException ||
+				e instanceof PrincipalException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.sites_admin.error");
+			}
+			else if (e instanceof MembershipRequestCommentsException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName());
+
+				setForward(
+					actionRequest,
+					"portlet.sites_admin.post_membership_request");
 			}
 			else {
 				throw e;
 			}
 		}
 	}
-
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -75,23 +82,9 @@ public class EditUserGroupRolesAction extends PortletAction {
 
 		try {
 			ActionUtil.getGroup(renderRequest);
-			ActionUtil.getRole(renderRequest);
-
-			Role role = (Role)renderRequest.getAttribute(WebKeys.ROLE);
-
-			if (role != null) {
-				String name = role.getName();
-
-				if (name.equals(RoleConstants.COMMUNITY_MEMBER) ||
-					name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-
-					throw new NoSuchRoleException();
-				}
-			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
-				e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
@@ -103,26 +96,8 @@ public class EditUserGroupRolesAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(
-				renderRequest, "portlet.sites_admin.edit_user_group_roles"));
-	}
-
-	protected void updateUserGroupGroupRoleUsers(ActionRequest actionRequest)
-		throws Exception {
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long roleId = ParamUtil.getLong(actionRequest, "roleId");
-
-		long[] addUserGroupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
-		long[] removeUserGroupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
-
-		UserGroupGroupRoleServiceUtil.addUserGroupGroupRoles(
-			addUserGroupIds, groupId, roleId);
-		UserGroupGroupRoleServiceUtil.deleteUserGroupGroupRoles(
-			removeUserGroupIds, groupId, roleId);
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.sites_admin.post_membership_request"));
 	}
 
 }

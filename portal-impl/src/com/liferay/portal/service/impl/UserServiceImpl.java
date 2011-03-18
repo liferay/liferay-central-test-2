@@ -74,7 +74,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 		catch (PrincipalException pe) {
 
-			// Allow any user to join open communities
+			// Allow any user to join open sites
 
 			boolean hasPermission = false;
 
@@ -449,7 +449,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 		catch (PrincipalException pe) {
 
-			// Allow any user to leave open and restricted communities
+			// Allow any user to leave open and restricted sites
 
 			boolean hasPermission = false;
 

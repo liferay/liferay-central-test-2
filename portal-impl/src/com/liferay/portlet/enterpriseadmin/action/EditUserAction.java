@@ -78,7 +78,7 @@ import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
-import com.liferay.portlet.communities.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.CommunitiesUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
 
 import java.util.ArrayList;

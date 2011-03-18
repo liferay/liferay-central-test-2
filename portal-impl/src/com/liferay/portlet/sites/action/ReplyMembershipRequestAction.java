@@ -12,16 +12,21 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.sites.action;
 
 import com.liferay.portal.MembershipRequestCommentsException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.liveusers.LiveUsers;
+import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -36,7 +41,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Jorge Ferrer
  */
-public class PostMembershipRequestAction extends PortletAction {
+public class ReplyMembershipRequestAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -44,13 +49,31 @@ public class PostMembershipRequestAction extends PortletAction {
 		throws Exception {
 
 		try {
-			long groupId = ParamUtil.getLong(actionRequest, "groupId");
-			String comments = ParamUtil.getString(actionRequest, "comments");
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			MembershipRequestServiceUtil.addMembershipRequest(
-				groupId, comments);
+			long membershipRequestId = ParamUtil.getLong(
+				actionRequest, "membershipRequestId");
 
-			SessionMessages.add(actionRequest, "membership_request_sent");
+			int statusId = ParamUtil.getInteger(actionRequest, "statusId");
+			String replyComments = ParamUtil.getString(
+				actionRequest, "replyComments");
+
+			MembershipRequest membershipRequest =
+				MembershipRequestServiceUtil.getMembershipRequest(
+					membershipRequestId);
+
+			MembershipRequestServiceUtil.updateStatus(
+				membershipRequestId, replyComments, statusId);
+
+			if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
+				LiveUsers.joinGroup(
+					themeDisplay.getCompanyId(),
+					membershipRequest.getGroupId(),
+					new long[] {membershipRequest.getUserId()});
+			}
+
+			SessionMessages.add(actionRequest, "membership_reply_sent");
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -68,7 +91,7 @@ public class PostMembershipRequestAction extends PortletAction {
 
 				setForward(
 					actionRequest,
-					"portlet.sites_admin.post_membership_request");
+					"portlet.sites_admin.reply_membership_request");
 			}
 			else {
 				throw e;
@@ -97,7 +120,7 @@ public class PostMembershipRequestAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.sites_admin.post_membership_request"));
+			renderRequest, "portlet.sites_admin.reply_membership_request"));
 	}
 
 }

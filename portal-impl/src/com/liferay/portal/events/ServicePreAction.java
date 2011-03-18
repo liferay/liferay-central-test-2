@@ -434,7 +434,7 @@ public class ServicePreAction extends Action {
 				layout = layouts.get(0);
 			}
 
-			// Check the user's communities
+			// Check the user's sites
 
 			if (layout == null) {
 				LinkedHashMap<String, Object> groupParams =
@@ -613,7 +613,7 @@ public class ServicePreAction extends Action {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		// Inactive communities are not viewable
+		// Inactive sites are not viewable
 
 		if (!group.isActive()) {
 			return false;

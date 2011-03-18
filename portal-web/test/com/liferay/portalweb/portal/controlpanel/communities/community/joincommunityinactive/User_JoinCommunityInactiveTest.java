@@ -52,7 +52,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		assertFalse(selenium.isTextPresent("Test Inactive Community"));
 		selenium.open("/user/selenium01/home/");
@@ -78,7 +78,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		assertFalse(selenium.isTextPresent("Test Inactive Community"));
 		selenium.open("/user/selenium01/home/");

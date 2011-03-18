@@ -12,20 +12,18 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.sites.action;
 
-import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.NoSuchTeamException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserGroupRoleServiceUtil;
+import com.liferay.portal.service.UserGroupServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -38,9 +36,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Charles May
+ * @author Brian Wing Shun Chan
  */
-public class EditUserRolesAction extends PortletAction {
+public class EditTeamAssignmentsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -50,14 +48,24 @@ public class EditUserRolesAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("user_group_role_users")) {
-				updateUserGroupRoleUsers(actionRequest);
+			if (cmd.equals("team_user_groups")) {
+				updateTeamUserGroups(actionRequest);
+			}
+			else if (cmd.equals("team_users")) {
+				updateTeamUsers(actionRequest);
 			}
 
-			sendRedirect(actionRequest, actionResponse);
+			if (Validator.isNotNull(cmd)) {
+				String redirect = ParamUtil.getString(
+					actionRequest, "assignmentsRedirect");
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException) {
+			if (e instanceof NoSuchTeamException ||
+				e instanceof PrincipalException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.sites_admin.error");
@@ -74,24 +82,10 @@ public class EditUserRolesAction extends PortletAction {
 		throws Exception {
 
 		try {
-			ActionUtil.getGroup(renderRequest);
-			ActionUtil.getRole(renderRequest);
-
-			Role role = (Role)renderRequest.getAttribute(WebKeys.ROLE);
-
-			if (role != null) {
-				String name = role.getName();
-
-				if (name.equals(RoleConstants.COMMUNITY_MEMBER) ||
-					name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-
-					throw new NoSuchRoleException();
-				}
-			}
+			ActionUtil.getTeam(renderRequest);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchGroupException ||
-				e instanceof NoSuchRoleException ||
+			if (e instanceof NoSuchTeamException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
@@ -103,24 +97,36 @@ public class EditUserRolesAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
-			getForward(renderRequest, "portlet.sites_admin.edit_user_roles"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.sites_admin.edit_team_assignments"));
 	}
 
-	protected void updateUserGroupRoleUsers(ActionRequest actionRequest)
+	protected void updateTeamUserGroups(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long roleId = ParamUtil.getLong(actionRequest, "roleId");
+		long teamId = ParamUtil.getLong(actionRequest, "teamId");
+
+		long[] addUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
+		long[] removeUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
+
+		UserGroupServiceUtil.addTeamUserGroups(teamId, addUserGroupIds);
+		UserGroupServiceUtil.unsetTeamUserGroups(teamId, removeUserGroupIds);
+	}
+
+	protected void updateTeamUsers(ActionRequest actionRequest)
+		throws Exception {
+
+		long teamId = ParamUtil.getLong(actionRequest, "teamId");
 
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
 
-		UserGroupRoleServiceUtil.addUserGroupRoles(addUserIds, groupId, roleId);
-		UserGroupRoleServiceUtil.deleteUserGroupRoles(
-			removeUserIds, groupId, roleId);
+		UserServiceUtil.addTeamUsers(teamId, addUserIds);
+		UserServiceUtil.unsetTeamUsers(teamId, removeUserIds);
 	}
 
 }

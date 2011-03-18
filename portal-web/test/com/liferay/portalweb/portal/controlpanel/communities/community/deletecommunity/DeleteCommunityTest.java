@@ -87,7 +87,7 @@ public class DeleteCommunityTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//tr[3]/td[1]"));
 		assertFalse(selenium.isTextPresent("Community Name"));
 	}

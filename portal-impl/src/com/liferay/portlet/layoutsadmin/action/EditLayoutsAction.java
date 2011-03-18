@@ -77,8 +77,8 @@ import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.communities.action.ActionUtil;
-import com.liferay.portlet.communities.util.CommunitiesUtil;
+import com.liferay.portlet.sites.action.ActionUtil;
+import com.liferay.portlet.sites.util.CommunitiesUtil;
 import com.liferay.util.servlet.UploadException;
 
 import java.util.Iterator;

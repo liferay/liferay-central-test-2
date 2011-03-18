@@ -81,7 +81,7 @@ import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
-import com.liferay.portlet.communities.util.CommunitiesUtil;
+import com.liferay.portlet.sites.util.CommunitiesUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.io.File;

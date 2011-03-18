@@ -27,7 +27,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.communities.action.ActionUtil;
+import com.liferay.portlet.sites.action.ActionUtil;
 
 import java.io.File;
 

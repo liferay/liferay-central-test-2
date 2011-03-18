@@ -12,17 +12,16 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.sites.action;
 
+import com.liferay.portal.DuplicateTeamException;
 import com.liferay.portal.NoSuchTeamException;
+import com.liferay.portal.TeamNameException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.UserGroupServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.service.TeamServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 
 import javax.portlet.ActionRequest;
@@ -38,7 +37,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EditTeamAssignmentsAction extends PortletAction {
+public class EditTeamAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -48,27 +47,31 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("team_user_groups")) {
-				updateTeamUserGroups(actionRequest);
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateTeam(actionRequest);
 			}
-			else if (cmd.equals("team_users")) {
-				updateTeamUsers(actionRequest);
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteTeam(actionRequest);
 			}
 
-			if (Validator.isNotNull(cmd)) {
-				String redirect = ParamUtil.getString(
-					actionRequest, "assignmentsRedirect");
-
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchTeamException ||
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.sites_admin.error");
+			}
+			else if (e instanceof DuplicateTeamException ||
+					 e instanceof NoSuchTeamException ||
+					 e instanceof TeamNameException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName());
+
+				if (cmd.equals(Constants.DELETE)) {
+					actionResponse.sendRedirect(
+						ParamUtil.getString(actionRequest, "redirect"));
+				}
 			}
 			else {
 				throw e;
@@ -98,35 +101,38 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		}
 
 		return mapping.findForward(getForward(
-			renderRequest, "portlet.sites_admin.edit_team_assignments"));
+			renderRequest, "portlet.sites_admin.edit_team"));
 	}
 
-	protected void updateTeamUserGroups(ActionRequest actionRequest)
+	protected void deleteTeam(ActionRequest actionRequest)
 		throws Exception {
 
 		long teamId = ParamUtil.getLong(actionRequest, "teamId");
 
-		long[] addUserGroupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
-		long[] removeUserGroupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
-
-		UserGroupServiceUtil.addTeamUserGroups(teamId, addUserGroupIds);
-		UserGroupServiceUtil.unsetTeamUserGroups(teamId, removeUserGroupIds);
+		TeamServiceUtil.deleteTeam(teamId);
 	}
 
-	protected void updateTeamUsers(ActionRequest actionRequest)
+	protected void updateTeam(ActionRequest actionRequest)
 		throws Exception {
 
 		long teamId = ParamUtil.getLong(actionRequest, "teamId");
 
-		long[] addUserIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
-		long[] removeUserIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 
-		UserServiceUtil.addTeamUsers(teamId, addUserIds);
-		UserServiceUtil.unsetTeamUsers(teamId, removeUserIds);
+		if (teamId <= 0) {
+
+			// Add team
+
+			TeamServiceUtil.addTeam(groupId, name, description);
+		}
+		else {
+
+			// Update team
+
+			TeamServiceUtil.updateTeam(teamId, name, description);
+		}
 	}
 
 }

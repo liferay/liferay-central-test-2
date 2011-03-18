@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.sites.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;

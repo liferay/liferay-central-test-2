@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.util;
+package com.liferay.portlet.sites.util;
 
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
