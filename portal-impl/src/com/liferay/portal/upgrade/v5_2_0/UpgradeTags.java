@@ -192,22 +192,10 @@ public class UpgradeTags extends UpgradeProcess {
 		throws Exception {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-			long resourceCodeId = 0;
-
-			try {
-				ResourceCode resourceCode =
-					ResourceCodeLocalServiceUtil.getResourceCode(
-						companyId, resourceName,
-						ResourceConstants.SCOPE_INDIVIDUAL);
-
-				resourceCodeId = resourceCode.getCodeId();
-			}
-			catch (NoSuchResourceCodeException nsrce) {
-				resourceCodeId = CounterLocalServiceUtil.increment(
-					"com.liferay.portal.model.ResourceCode");
-
-				addResourceCode(resourceCodeId, companyId, resourceName);
-			}
+			ResourceCode resourceCode =
+				ResourceCodeLocalServiceUtil.getResourceCode(
+					companyId, resourceName,
+					ResourceConstants.SCOPE_INDIVIDUAL);
 
 			try {
 				ResourceLocalServiceUtil.getResource(
@@ -215,7 +203,7 @@ public class UpgradeTags extends UpgradeProcess {
 					primKey);
 			}
 			catch (NoSuchResourceException nsre) {
-				addResource(resourceCodeId, primKey);
+				addResource(resourceCode.getCodeId(), primKey);
 			}
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
