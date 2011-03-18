@@ -147,7 +147,7 @@ body #banner .logo a {
 	text-decoration: none;
 }
 
-.ie7 #navigation a {
+.ie6 #navigation a, .ie7 #navigation a {
 	padding: 4px 15px;
 }
 
