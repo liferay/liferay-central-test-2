@@ -212,9 +212,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public String getMimeType(String version) {
 		for (Document document : _document.getAllVersions()) {
 			if (version.equals(document.getVersionLabel())) {
-				ContentStream contentStream = document.getContentStream();
-
-				return contentStream.getMimeType();
+				return document.getContentStreamMimeType();
 			}
 		}
 
