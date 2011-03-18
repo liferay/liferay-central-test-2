@@ -45,7 +45,7 @@ FileVersion fileVersion = fileEntry.getFileVersion();
 
 long assetClassPK = 0;
 
-if ((fileVersion != null) && !fileVersion.isApproved() && (!fileVersion.getVersion().equals(DLFileEntryConstants.DEFAULT_VERSION))) {
+if ((fileVersion != null) && !fileVersion.isApproved() && !fileVersion.getVersion().equals(DLFileEntryConstants.DEFAULT_VERSION)) {
 	assetClassPK = fileVersion.getFileVersionId();
 }
 else if (fileEntry != null) {
