@@ -28,11 +28,11 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
-import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.NoSuchTagException;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
