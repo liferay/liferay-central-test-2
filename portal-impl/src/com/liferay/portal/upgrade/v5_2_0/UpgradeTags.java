@@ -85,7 +85,7 @@ public class UpgradeTags extends UpgradeProcess {
 
 		addResources(
 			companyId, "com.liferay.portlet.tags.model.TagsEntry",
-			Long.toString(entryId));
+			String.valueOf(entryId));
 	}
 
 	protected void addProperty(
@@ -168,9 +168,9 @@ public class UpgradeTags extends UpgradeProcess {
 
 		StringBundler sb = new StringBundler(15);
 
-		sb.append("insert into ResourcePermission (");
-		sb.append("resourcePermissionId, companyId, name, scope, primKey, ");
-		sb.append("roleId, actionIds) values (");
+		sb.append("insert into ResourcePermission (resourcePermissionId, ");
+		sb.append("companyId, name, scope, primKey, roleId, actionIds) ");
+		sb.append("values (");
 		sb.append(increment());
 		sb.append(", ");
 		sb.append(companyId);
@@ -264,7 +264,7 @@ public class UpgradeTags extends UpgradeProcess {
 
 		addResources(
 			companyId, "com.liferay.portlet.tags.model.TagsVocabulary",
-			Long.toString(vocabularyId));
+			String.valueOf(vocabularyId));
 
 		return vocabularyId;
 	}
