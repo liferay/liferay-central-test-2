@@ -1552,7 +1552,7 @@
 		</script>
 
 		<exec executable="taskkill.exe">
-			<arg line="/f /fi \"pid eq ${java.process.pid}\"" />
+			<arg line="/f /fi &quot;pid eq ${java.process.pid}&quot;" />
 		</exec>
 	</target>
 
