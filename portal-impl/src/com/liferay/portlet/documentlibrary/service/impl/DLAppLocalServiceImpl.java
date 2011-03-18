@@ -19,7 +19,6 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -74,8 +73,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 				throw new FileSizeException();
 			}
 
-			InputStream is = new UnsyncBufferedInputStream(
-				new FileInputStream(file));
+			InputStream is = new FileInputStream(file);
 
 			return addFileEntry(
 				userId, repositoryId, folderId, title, description, changeLog,
@@ -459,7 +457,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long size = 0;
 
 			if ((file != null) && file.exists()) {
-				is = new UnsyncBufferedInputStream(new FileInputStream(file));
+				is = new FileInputStream(file);
 				size = file.length();
 			}
 

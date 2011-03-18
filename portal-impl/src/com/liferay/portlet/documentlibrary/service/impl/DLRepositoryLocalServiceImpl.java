@@ -21,7 +21,6 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.util.JCRHook;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
@@ -1627,8 +1626,7 @@ public class DLRepositoryLocalServiceImpl
 
 			if (file != null) {
 				try {
-					is = new UnsyncBufferedInputStream(
-						new FileInputStream(file));
+					is = new FileInputStream(file);
 				}
 				catch (IOException ioe) {
 					throw new SystemException(ioe);
