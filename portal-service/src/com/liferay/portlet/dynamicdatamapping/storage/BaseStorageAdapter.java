@@ -18,5 +18,5 @@ package com.liferay.portlet.dynamicdatamapping.storage;
  * @author Eduardo Lundgren
  * @author Brian Wing Shun Chan
  */
-public abstract class BaseStorage implements Storage {
+public abstract class BaseStorageAdapter implements StorageAdapter {
 }

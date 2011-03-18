@@ -18,5 +18,5 @@ package com.liferay.portlet.dynamicdatamapping.storage;
  * @author Eduardo Lundgren
  * @author Brian Wing Shun Chan
  */
-public class ExpandoStorage extends BaseStorage {
+public interface StorageAdapter {
 }
