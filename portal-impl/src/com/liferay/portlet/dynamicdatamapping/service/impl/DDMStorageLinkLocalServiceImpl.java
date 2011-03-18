@@ -30,7 +30,7 @@ public class DDMStorageLinkLocalServiceImpl
 	extends DDMStorageLinkLocalServiceBaseImpl {
 
 	public DDMStorageLink addStorageLink(
-			long structureId, long classNameId, long classPK, String type,
+			long classNameId, long classPK, long structureId, String type,
 			ServiceContext serviceContext)
 		throws SystemException {
 
@@ -47,17 +47,6 @@ public class DDMStorageLinkLocalServiceImpl
 		ddmStorageLinkPersistence.update(storageLink, false);
 
 		return storageLink;
-	}
-
-	public void deleteAllStorageLink(long structureId)
-		throws PortalException, SystemException {
-
-		List<DDMStorageLink> storageLinks =
-			ddmStorageLinkPersistence.findByStructureId(structureId);
-
-		for (DDMStorageLink storageLink : storageLinks) {
-			deleteStorageLink(storageLink);
-		}
 	}
 
 	public void deleteStorageLink(DDMStorageLink storageLink)
@@ -82,6 +71,17 @@ public class DDMStorageLinkLocalServiceImpl
 			classNameId, classPK);
 
 		deleteStorageLink(storageLink);
+	}
+
+	public void deleteStorageLinks(long structureId)
+		throws PortalException, SystemException {
+
+		List<DDMStorageLink> storageLinks =
+			ddmStorageLinkPersistence.findByStructureId(structureId);
+
+		for (DDMStorageLink storageLink : storageLinks) {
+			deleteStorageLink(storageLink);
+		}
 	}
 
 	public DDMStorageLink getStorageLink(long storageLinkId)
