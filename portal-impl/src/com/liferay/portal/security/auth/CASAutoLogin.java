@@ -76,7 +76,7 @@ public class CASAutoLogin implements AutoLogin {
 
 				String redirect = PrefsPropsUtil.getString(
 					companyId, PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL,
-					PropsKeys.CAS_LOGOUT_URL);
+					PropsValues.CAS_NO_SUCH_USER_REDIRECT_URL);
 
 				request.setAttribute(AutoLogin.AUTO_LOGIN_REDIRECT, redirect);
 
