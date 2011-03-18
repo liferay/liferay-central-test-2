@@ -310,7 +310,7 @@ AUI().add(
 						if (field) {
 							var parent = field.get('parent');
 
-							if (fields.length > 1 || instanceOf(value, FormBuilderField)) {
+							if (fields.length > 1 || instanceOf(parent, FormBuilderField)) {
 								var selectedField = instance.selectedField;
 
 								if (field == selectedField ||
