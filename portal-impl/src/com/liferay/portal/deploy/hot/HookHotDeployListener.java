@@ -81,6 +81,9 @@ import com.liferay.portal.language.LanguageResources;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.repository.util.RepositoryFactory;
+import com.liferay.portal.repository.util.RepositoryFactoryImpl;
+import com.liferay.portal.repository.util.RepositoryFactoryUtil;
 import com.liferay.portal.security.auth.AuthFailure;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.AuthToken;
@@ -178,6 +181,7 @@ public class HookHotDeployListener
 		"default.landing.page.path",
 		"dl.file.entry.drafts.enabled",
 		"dl.hook.impl",
+		"dl.repository.impl",
 		"dl.webdav.hold.lock",
 		"dl.webdav.save.to.single.version",
 		"field.enable.com.liferay.portal.model.Contact.birthday",
@@ -935,6 +939,13 @@ public class HookHotDeployListener
 			destroyCustomJspBag(servletContextName, customJspBag);
 		}
 
+		DocumentLibraryRepositoryContainer doclibRepositoryContainer =
+			_documentLibraryRepositoryContainerMap.remove(servletContextName);
+
+		if (doclibRepositoryContainer != null) {
+			doclibRepositoryContainer.unregisterRepositoryFactories();
+		}
+
 		EventsContainer eventsContainer = _eventsContainerMap.remove(
 			servletContextName);
 
@@ -1523,6 +1534,25 @@ public class HookHotDeployListener
 			com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
 		}
 
+		if (portalProperties.containsKey(PropsKeys.DL_REPOSITORY_IMPL)) {
+			String[] dlRepositoryClassNames = StringUtil.split(
+				portalProperties.getProperty(PropsKeys.DL_REPOSITORY_IMPL));
+
+			DocumentLibraryRepositoryContainer doclibRepositoryContainer =
+				new DocumentLibraryRepositoryContainer();
+
+			_documentLibraryRepositoryContainerMap.put(
+				servletContextName, doclibRepositoryContainer);
+
+			for (String dlRepositoryClassName : dlRepositoryClassNames) {
+				RepositoryFactory repositoryFactory = new RepositoryFactoryImpl(
+					dlRepositoryClassName, portletClassLoader);
+
+				doclibRepositoryContainer.registerRepositoryFactory(
+					dlRepositoryClassName, repositoryFactory);
+			}
+		}
+
 		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
 			String imageHookClassName = portalProperties.getProperty(
 				PropsKeys.IMAGE_HOOK_IMPL);
@@ -2040,6 +2070,9 @@ public class HookHotDeployListener
 		new HashMap<String, AutoLoginsContainer>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
+	private Map<String, DocumentLibraryRepositoryContainer>
+		_documentLibraryRepositoryContainerMap =
+			new HashMap<String, DocumentLibraryRepositoryContainer>();
 	private Map<String, EventsContainer> _eventsContainerMap =
 		new HashMap<String, EventsContainer>();
 	private Map<String, HotDeployListenersContainer>
@@ -2234,6 +2267,28 @@ public class HookHotDeployListener
 		private String _customJspDir;
 		private boolean _customJspGlobal;
 		private List<String> _customJsps;
+
+	}
+
+	private class DocumentLibraryRepositoryContainer {
+
+		public void registerRepositoryFactory(
+			String className, RepositoryFactory factory) {
+
+			RepositoryFactoryUtil.registerRepositoryFactory(className, factory);
+
+			_classNames.add(className);
+		}
+
+		public void unregisterRepositoryFactories() {
+			for (String className : _classNames) {
+				RepositoryFactoryUtil.unregisterRepositoryFactory(className);
+			}
+
+			_classNames.clear();
+		}
+
+		private List<String> _classNames = new ArrayList<String>();
 
 	}
 

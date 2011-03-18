@@ -59,7 +59,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 			<aui:select id="repositoryTypes" label="repository-type" name="className">
 
 				<%
-				for (String dlRepositoryImpl : PropsValues.DL_REPOSITORY_IMPL) {
+				for (String dlRepositoryImpl : RepositoryFactoryUtil.getRepositoryClassNames()) {
 				%>
 
 					<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, dlRepositoryImpl) %>" value="<%= dlRepositoryImpl %>" />
@@ -93,7 +93,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 <div class="aui-helper-hidden" id="<portlet:namespace />settingsSupported">
 
 	<%
-	for (String dlRepositoryImpl : PropsValues.DL_REPOSITORY_IMPL) {
+	for (String dlRepositoryImpl : RepositoryFactoryUtil.getRepositoryClassNames()) {
 		String className = dlRepositoryImpl.substring(dlRepositoryImpl.lastIndexOf(StringPool.PERIOD) + 1);
 
 		long classNameId = PortalUtil.getClassNameId(dlRepositoryImpl);

@@ -20,10 +20,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
+import com.liferay.portal.kernel.repository.BaseRepository;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -32,6 +31,7 @@ import com.liferay.portal.model.RepositoryEntry;
 import com.liferay.portal.model.User;
 import com.liferay.portal.repository.liferayrepository.LiferayLocalRepository;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
+import com.liferay.portal.repository.util.RepositoryFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -46,6 +46,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Alexander Chow
+ * @author Mika Koivisto
  */
 public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
@@ -82,10 +83,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				dlRepositoryService, repositoryId);
 		}
 		else {
-			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
+			BaseRepository baseRepository = createRepositoryImpl(
 				repositoryId, classNameId);
 
-			localRepositoryImpl = baseRepositoryImpl.getLocalRepository();
+			localRepositoryImpl = baseRepository.getLocalRepository();
 		}
 
 		checkRepository(repositoryId);
@@ -118,10 +119,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		if (localRepositoryImpl == null) {
-			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
+			BaseRepository baseRepository = createRepositoryImpl(
 				repositoryEntryId);
 
-			localRepositoryImpl = baseRepositoryImpl.getLocalRepository();
+			localRepositoryImpl = baseRepository.getLocalRepository();
 		}
 		else {
 			checkRepository(localRepositoryImpl.getRepositoryId());
@@ -211,12 +212,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			String repositoryImplClassName = PortalUtil.getClassName(
 				classNameId);
 
-			Class<BaseRepositoryImpl> repositoryImplClass =
-				(Class<BaseRepositoryImpl>)Class.forName(
-					repositoryImplClassName);
+			BaseRepository baseRepository = RepositoryFactoryUtil.getInstance(
+				repositoryImplClassName);
 
-			return (String[])repositoryImplClass.getField(
-				"SUPPORTED_CONFIGURATIONS").get(null);
+			return baseRepository.getSupportedConfigurations();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -231,17 +230,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			String repositoryImplClassName = PortalUtil.getClassName(
 				classNameId);
 
-			Class<BaseRepositoryImpl> repositoryImplClass =
-				(Class<BaseRepositoryImpl>)Class.forName(
-					repositoryImplClassName);
+			BaseRepository baseRepository =
+				RepositoryFactoryUtil.getInstance(repositoryImplClassName);
 
 			String[] supportedConfigurations =
-				(String[])repositoryImplClass.getField(
-					"SUPPORTED_CONFIGURATIONS").get(null);
+				baseRepository.getSupportedConfigurations();
 
 			String[][] supportedParameters =
-				(String[][])repositoryImplClass.getField(
-					"SUPPORTED_PARAMETERS").get(null);
+				baseRepository.getSupportedParameters();
 
 			for (int i = 0; i < supportedConfigurations.length; i++) {
 				if (supportedConfigurations[i].equals(configuration)) {
@@ -365,7 +361,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repositoryPersistence.update(repository, false);
 	}
 
-	protected BaseRepositoryImpl createRepositoryImpl(long repositoryEntryId)
+	protected BaseRepository createRepositoryImpl(long repositoryEntryId)
 		throws PortalException, SystemException {
 
 		RepositoryEntry repositoryEntry =
@@ -373,14 +369,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		long repositoryId = repositoryEntry.getRepositoryId();
 
-		return (BaseRepositoryImpl)getRepositoryImpl(repositoryId);
+		return (BaseRepository)getRepositoryImpl(repositoryId);
 	}
 
-	protected BaseRepositoryImpl createRepositoryImpl(
+	protected BaseRepository createRepositoryImpl(
 			long repositoryId, long classNameId)
 		throws PortalException, SystemException {
 
-		BaseRepositoryImpl baseRepositoryImpl = null;
+		BaseRepository baseRepository = null;
 
 		Repository repository = null;
 
@@ -390,9 +386,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			String repositoryImplClassName = PortalUtil.getClassName(
 				classNameId);
 
-			baseRepositoryImpl =
-				(BaseRepositoryImpl)InstanceFactory.newInstance(
-					repositoryImplClassName);
+			baseRepository = RepositoryFactoryUtil.getInstance(
+				repositoryImplClassName);
 		}
 		catch (Exception e) {
 			throw new RepositoryException(
@@ -401,20 +396,20 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				e);
 		}
 
-		baseRepositoryImpl.setCompanyId(repository.getCompanyId());
-		baseRepositoryImpl.setCompanyLocalService(companyLocalService);
-		baseRepositoryImpl.setCounterLocalService(counterLocalService);
-		baseRepositoryImpl.setDLAppHelperLocalService(
+		baseRepository.setCompanyId(repository.getCompanyId());
+		baseRepository.setCompanyLocalService(companyLocalService);
+		baseRepository.setCounterLocalService(counterLocalService);
+		baseRepository.setDLAppHelperLocalService(
 			dlAppHelperLocalService);
-		baseRepositoryImpl.setGroupId(repository.getGroupId());
-		baseRepositoryImpl.setRepositoryId(repositoryId);
-		baseRepositoryImpl.setTypeSettingsProperties(
+		baseRepository.setGroupId(repository.getGroupId());
+		baseRepository.setRepositoryId(repositoryId);
+		baseRepository.setTypeSettingsProperties(
 			repository.getTypeSettingsProperties());
-		baseRepositoryImpl.setUserLocalService(userLocalService);
+		baseRepository.setUserLocalService(userLocalService);
 
-		baseRepositoryImpl.initRepository();
+		baseRepository.initRepository();
 
-		return baseRepositoryImpl;
+		return baseRepository;
 	}
 
 	protected long getDefaultClassNameId() {

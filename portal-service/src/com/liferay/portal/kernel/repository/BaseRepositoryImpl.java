@@ -40,7 +40,7 @@ import java.util.List;
  * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_CONFIGURATIONS
  * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_PARAMETERS
  */
-public abstract class BaseRepositoryImpl implements Repository {
+public abstract class BaseRepositoryImpl implements BaseRepository {
 
 	public void deleteFileEntry(long folderId, String title)
 		throws PortalException, SystemException {

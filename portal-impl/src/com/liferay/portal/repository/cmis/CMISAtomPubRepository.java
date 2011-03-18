@@ -35,6 +35,14 @@ public class CMISAtomPubRepository extends CMISRepository {
 		}
 	};
 
+	public String[] getSupportedConfigurations() {
+		return SUPPORTED_CONFIGURATIONS;
+	}
+
+	public String[][] getSupportedParameters() {
+		return SUPPORTED_PARAMETERS;
+	}
+
 	public boolean isAtomPub() {
 		return true;
 	}
