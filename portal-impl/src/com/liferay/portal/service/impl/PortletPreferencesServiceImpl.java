@@ -61,7 +61,19 @@ public class PortletPreferencesServiceImpl
 	}
 
 	public void restoreArchivedPreferences(
-			long groupId, PortletItem portletItem, String portletId,
+			long groupId, String portletId, long portletItemId,
+			javax.portlet.PortletPreferences preferences)
+		throws PortalException, SystemException {
+
+		PortletItem portletItem = portletItemLocalService.getPortletItem(
+			portletItemId);
+
+		restoreArchivedPreferences(
+			groupId, portletId, portletItem, preferences);
+	}
+
+	public void restoreArchivedPreferences(
+			long groupId, String portletId, PortletItem portletItem,
 			javax.portlet.PortletPreferences preferences)
 		throws PortalException, SystemException {
 
@@ -73,24 +85,12 @@ public class PortletPreferencesServiceImpl
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
 		long plid = 0;
 
-		javax.portlet.PortletPreferences archivedPrefs =
+		javax.portlet.PortletPreferences archivedPreferences =
 			portletPreferencesLocalService.getPreferences(
 				portletItem.getCompanyId(), ownerId, ownerType, plid,
 				portletId);
 
-		copyPreferences(archivedPrefs, preferences);
-	}
-
-	public void restoreArchivedPreferences(
-			long groupId, long portletItemId, String portletId,
-			javax.portlet.PortletPreferences preferences)
-		throws PortalException, SystemException {
-
-		PortletItem portletItem = portletItemLocalService.getPortletItem(
-			portletItemId);
-
-		restoreArchivedPreferences(
-			groupId, portletItem, portletId, preferences);
+		copyPreferences(archivedPreferences, preferences);
 	}
 
 	public void restoreArchivedPreferences(
@@ -102,7 +102,7 @@ public class PortletPreferencesServiceImpl
 			groupId, name, portletId, PortletPreferences.class.getName());
 
 		restoreArchivedPreferences(
-			groupId, portletItem, portletId, preferences);
+			groupId, portletId, portletItem, preferences);
 	}
 
 	public void updateArchivePreferences(
@@ -122,12 +122,12 @@ public class PortletPreferencesServiceImpl
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
 		long plid = 0;
 
-		javax.portlet.PortletPreferences archivedPrefs =
+		javax.portlet.PortletPreferences archivedPreferences =
 			portletPreferencesLocalService.getPreferences(
 				portletItem.getCompanyId(), ownerId, ownerType, plid,
 				portletId);
 
-		copyPreferences(preferences, archivedPrefs);
+		copyPreferences(preferences, archivedPreferences);
 	}
 
 	protected void copyPreferences(

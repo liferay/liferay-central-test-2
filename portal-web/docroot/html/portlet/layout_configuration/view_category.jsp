@@ -145,10 +145,9 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 						<input id="<portlet:namespace />portletItem<%= portlet.getPortletId() %>CategoryPath" type="hidden" value="<%= divId.toString().replace(':', '-') %>" />
 
 						<%
-						List<PortletItem> archivedSetups = PortletItemLocalServiceUtil.getPortletItems(themeDisplay.getScopeGroupId(), portlet.getPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
+						List<PortletItem> portletItems = PortletItemLocalServiceUtil.getPortletItems(themeDisplay.getScopeGroupId(), portlet.getPortletId(), com.liferay.portal.model.PortletPreferences.class.getName());
 
-						for (PortletItem portletItem : archivedSetups) {
-
+						for (PortletItem portletItem : portletItems) {
 							divId.setIndex(0);
 
 							divId.append(newCategoryPath);
@@ -180,6 +179,7 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 						<%
 						}
 						%>
+
 					</c:when>
 					<c:otherwise>
 						<div>

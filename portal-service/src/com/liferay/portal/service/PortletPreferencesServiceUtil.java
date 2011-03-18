@@ -44,22 +44,23 @@ public class PortletPreferencesServiceUtil {
 	}
 
 	public static void restoreArchivedPreferences(long groupId,
-		com.liferay.portal.model.PortletItem portletItem,
-		java.lang.String portletId, javax.portlet.PortletPreferences preferences)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.restoreArchivedPreferences(groupId, portletItem, portletId,
-			preferences);
-	}
-
-	public static void restoreArchivedPreferences(long groupId,
-		long portletItemId, java.lang.String portletId,
+		java.lang.String portletId, long portletItemId,
 		javax.portlet.PortletPreferences preferences)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.restoreArchivedPreferences(groupId, portletItemId, portletId,
+			.restoreArchivedPreferences(groupId, portletId, portletItemId,
+			preferences);
+	}
+
+	public static void restoreArchivedPreferences(long groupId,
+		java.lang.String portletId,
+		com.liferay.portal.model.PortletItem portletItem,
+		javax.portlet.PortletPreferences preferences)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.restoreArchivedPreferences(groupId, portletId, portletItem,
 			preferences);
 	}
 
