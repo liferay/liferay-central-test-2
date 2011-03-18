@@ -415,7 +415,7 @@
 			var el = event.currentTarget.getDOM();
 			var pressedKey = event.keyCode;
 
-			if(pressedKey == 9) {
+			if(event.isKey('TAB')) {
 				event.halt();
 
 				var oldscroll = el.scrollTop;

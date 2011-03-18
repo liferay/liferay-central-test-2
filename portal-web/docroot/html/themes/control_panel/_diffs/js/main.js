@@ -226,7 +226,7 @@ if (!themeDisplay.isStatePopUp()) {
 					A.getDoc().on(
 						'keyup',
 						function(event) {
-							if (event.keyCode == 27) {
+							if (event.isKey('ESC')) {
 								Liferay.fire('focusSearchBar');
 							}
 						}

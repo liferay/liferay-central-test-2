@@ -145,7 +145,7 @@ AUI().add(
 					button.on(
 						'keydown',
 						function(event) {
-							if (event.keyCode == 40) {
+							if (event.isKey('DOWN')) {
 								focusManager.focus(0);
 							}
 						}
@@ -611,17 +611,15 @@ AUI().add(
 				if (index > -1) {
 					var button;
 
-					var keyCode = event.keyCode;
-
-					if (keyCode == 37 && index > 0) {
+					if (event.isKey('LEFT') && index > 0) {
 						button = menuButtons.item(--index);
 					}
-					else if (keyCode == 39 && (index < lastButtonIndex)) {
+					else if (event.isKey('RIGHT') && (index < lastButtonIndex)) {
 						button = menuButtons.item(++index);
 					}
 
 					if (button) {
-						if (keyCode >= 37 && keyCode <= 40) {
+						if (event.isKeyInRange('LEFT', 'DOWN')) {
 							event.halt();
 						}
 

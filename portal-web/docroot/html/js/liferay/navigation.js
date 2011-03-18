@@ -491,13 +491,11 @@ AUI().add(
 					_onKeypress: function(event) {
 						var instance = this;
 
-						var keyCode = event.keyCode;
-
-						if (keyCode == 13 || keyCode == 27) {
+						if (event.isKeyInSet('ENTER', 'ESC')) {
 							var listItem = event.currentTarget.ancestor('li');
 							var eventType = 'savePage';
 
-							if (keyCode == 27) {
+							if (event.isKey('ESC')) {
 								eventType = 'cancelPage';
 							}
 

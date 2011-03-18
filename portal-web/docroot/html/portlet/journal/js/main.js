@@ -1962,7 +1962,7 @@ AUI().add(
 				var keyPressAddItem = function(event) {
 					var btnScope = event.currentTarget.get('parentNode').one('span.journal-add-field');
 
-					if (event.keyCode == 13) {
+					if (event.isKey('ENTER')) {
 						event.currentTarget = btnScope;
 
 						addListItem.apply(event.currentTarget, arguments);
@@ -2595,19 +2595,13 @@ AUI().add(
 			_onKeypressVariableName: function(event) {
 				var instance = this;
 
-				var allowedKeyCodes = [8, 37, 39, 46];
-				var charCode = event.charCode;
-				var keyCode = event.keyCode;
+				if (!event.isKeyInSet('BACKSPACE', 'DELETE', 'LEFT', 'RIGHT')) {
+					var regex = /^[\w_-]$/;
+					var typed = String.fromCharCode(event.keyCode);
 
-				if ((A.Array.indexOf(allowedKeyCodes, keyCode) != -1)) {
-					return;
-				}
-
-				var regex = /^[\w_-]$/;
-				var typed = String.fromCharCode(keyCode);
-
-				if (!regex.test(typed)) {
-					event.halt();
+					if (!regex.test(typed)) {
+						event.halt();
+					}
 				}
 			},
 
