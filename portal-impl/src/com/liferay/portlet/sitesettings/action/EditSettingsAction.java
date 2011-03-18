@@ -31,8 +31,8 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.sites.action.ActionUtil;
 import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
+import com.liferay.portlet.sites.action.ActionUtil;
 import com.liferay.util.servlet.UploadException;
 
 import javax.portlet.ActionRequest;

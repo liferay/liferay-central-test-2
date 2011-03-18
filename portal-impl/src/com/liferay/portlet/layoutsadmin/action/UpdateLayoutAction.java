@@ -47,9 +47,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 import com.liferay.portlet.sites.action.ActionUtil;
 import com.liferay.portlet.sites.util.CommunitiesUtil;
-import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 
 import java.util.List;
 import java.util.ResourceBundle;

@@ -46,8 +46,8 @@ import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.sites.util.CommunitiesUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
+import com.liferay.portlet.sites.util.CommunitiesUtil;
 
 import java.util.List;
 
