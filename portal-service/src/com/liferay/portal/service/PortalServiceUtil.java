@@ -55,6 +55,16 @@ public class PortalServiceUtil {
 		getService().testCounterRollback();
 	}
 
+	public static void testClassName(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().testClassName(name);
+	}
+
+	public static void testClassNameRollback(java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().testClassNameRollback(className);
+	}
+
 	public static PortalService getService() {
 		if (_service == null) {
 			_service = (PortalService)PortalBeanLocatorUtil.locate(PortalService.class.getName());

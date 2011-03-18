@@ -102,5 +102,29 @@ public class PortalServiceSoap {
 		}
 	}
 
+	public static void testClassName(java.lang.String name)
+		throws RemoteException {
+		try {
+			PortalServiceUtil.testClassName(name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testClassNameRollback(java.lang.String className)
+		throws RemoteException {
+		try {
+			PortalServiceUtil.testClassNameRollback(className);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceSoap.class);
 }

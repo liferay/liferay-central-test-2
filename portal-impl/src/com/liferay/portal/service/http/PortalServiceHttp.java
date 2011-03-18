@@ -158,6 +158,61 @@ public class PortalServiceHttp {
 		}
 	}
 
+	public static void testClassName(HttpPrincipal httpPrincipal,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
+					"testClassName", _testClassNameParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, name);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void testClassNameRollback(HttpPrincipal httpPrincipal,
+		java.lang.String className)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(PortalServiceUtil.class.getName(),
+					"testClassNameRollback",
+					_testClassNameRollbackParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, className);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceHttp.class);
 	private static final Class<?>[] _getAutoDeployDirectoryParameterTypes0 = new Class[] {
 			
@@ -168,5 +223,11 @@ public class PortalServiceHttp {
 	private static final Class<?>[] _testParameterTypes2 = new Class[] {  };
 	private static final Class<?>[] _testCounterRollbackParameterTypes3 = new Class[] {
 			
+		};
+	private static final Class<?>[] _testClassNameParameterTypes4 = new Class[] {
+			java.lang.String.class
+		};
+	private static final Class<?>[] _testClassNameRollbackParameterTypes5 = new Class[] {
+			java.lang.String.class
 		};
 }

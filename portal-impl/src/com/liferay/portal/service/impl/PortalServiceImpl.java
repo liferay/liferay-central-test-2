@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.base.PortalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -59,6 +60,22 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		for (int i = 0; i < counterIncrement * 2; i++) {
 			counterLocalService.increment();
 		}
+
+		throw new SystemException();
+	}
+
+	public void testClassName(String name) throws SystemException {
+		long classNameId = counterLocalService.increment();
+
+		ClassName className = classNamePersistence.create(classNameId);
+
+		className.setValue(name);
+
+		classNamePersistence.update(className, false);
+	}
+
+	public void testClassNameRollback(String className) throws SystemException {
+		testClassName(className);
 
 		throw new SystemException();
 	}
