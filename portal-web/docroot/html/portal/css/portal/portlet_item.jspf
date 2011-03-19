@@ -29,7 +29,7 @@
 
 .lfr-portlet-item.lfr-archived-setup {
 	background-image: url(<%= themeImagesPath %>/add_content/portlet_item_archived_setup.png);
-	margin-left: 8px;
+	margin-left: 20px;
 }
 
 .lfr-portlet-item:hover, .lfr-portlet-item.over {

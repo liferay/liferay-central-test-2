@@ -220,9 +220,9 @@
 									}
 								},
 								plid: plid,
+								placeHolder: placeHolder,
 								portletId: portletId,
-								portletItemId: portletItemId,
-								placeHolder: placeHolder
+								portletItemId: portletItemId
 							};
 
 							Liferay.Portlet.add(portletOptions);
