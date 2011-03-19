@@ -1317,7 +1317,7 @@ public interface PropsKeys {
 
 	public static final String OPEN_SSO_LOGIN_URL = "open.sso.login.url";
 
-	public static final String OPEN_SSO_LOGOUT_ON_EXPIRE = "open.sso.logout.on.expire";
+	public static final String OPEN_SSO_LOGOUT_ON_SESSION_EXPIRATION = "open.sso.logout.on.session.expiration";
 
 	public static final String OPEN_SSO_LOGOUT_URL = "open.sso.logout.url";
 

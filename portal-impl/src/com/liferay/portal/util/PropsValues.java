@@ -896,7 +896,7 @@ public class PropsValues {
 
 	public static final String OPEN_SSO_LOGIN_URL = PropsUtil.get(PropsKeys.OPEN_SSO_LOGIN_URL);
 
-	public static final boolean OPEN_SSO_LOGOUT_ON_EXPIRE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.OPEN_SSO_LOGOUT_ON_EXPIRE));
+	public static final boolean OPEN_SSO_LOGOUT_ON_SESSION_EXPIRATION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.OPEN_SSO_LOGOUT_ON_SESSION_EXPIRATION));
 
 	public static final String OPEN_SSO_LOGOUT_URL = PropsUtil.get(PropsKeys.OPEN_SSO_LOGOUT_URL);
 

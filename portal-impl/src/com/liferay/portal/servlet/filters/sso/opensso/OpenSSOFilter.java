@@ -106,7 +106,7 @@ public class OpenSSOFilter extends BasePortalFilter {
 		String requestURI = GetterUtil.getString(request.getRequestURI());
 
 		if (requestURI.endsWith("/portal/expire_session")) {
-			if (PropsValues.OPEN_SSO_LOGOUT_ON_EXPIRE) {
+			if (PropsValues.OPEN_SSO_LOGOUT_ON_SESSION_EXPIRATION) {
 				logoutSession(request, response);
 			}
 			else {
