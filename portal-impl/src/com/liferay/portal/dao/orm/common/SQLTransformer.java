@@ -112,7 +112,10 @@ public class SQLTransformer {
 		else if (_vendorPostgreSQL) {
 			return matcher.replaceAll("CAST($1 AS TEXT)");
 		}
-		else if (_vendorSQLServer || _vendorSybase) {
+		else if (_vendorSQLServer) {
+			return matcher.replaceAll("CAST($1 AS NVARCHAR(MAX))");
+		}
+		else if (_vendorSybase) {
 			return matcher.replaceAll("CAST($1 AS NVARCHAR)");
 		}
 		else {
