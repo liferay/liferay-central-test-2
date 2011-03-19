@@ -31,14 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used by third-party repository implementations. All classes
- * that extend <code>BaseRepositoryImpl</code> must specify two public static
- * fields: <code>SUPPORTED_CONFIGURATIONS</code> and
- * <code>SUPPORTED_PARAMETERS</code>.
+ * Third-party repository implementations should extend from this class.
  *
  * @author Alexander Chow
- * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_CONFIGURATIONS
- * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_PARAMETERS
  */
 public abstract class BaseRepositoryImpl implements BaseRepository {
 
