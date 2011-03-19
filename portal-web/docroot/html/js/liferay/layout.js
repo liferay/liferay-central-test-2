@@ -202,7 +202,7 @@ AUI().add(
 
 				return A.all(dropNodes);
 			},
-			
+
 			getLastPortletNode: function(column) {
 				var instance = this;
 
