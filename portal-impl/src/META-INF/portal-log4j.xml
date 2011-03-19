@@ -928,6 +928,10 @@
 		<priority value="FATAL" />
 	</category>
 
+    <category name="org.apache.chemistry.opencmis.client.bindings.spi.atompub.HttpUtils">
+        <priority value="ERROR" />
+    </category>
+
 	<category name="org.apache.commons.digester">
 		<priority value="ERROR" />
 	</category>

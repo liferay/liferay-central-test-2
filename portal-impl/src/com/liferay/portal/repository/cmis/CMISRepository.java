@@ -1309,9 +1309,15 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			sb.append("' AND IN_FOLDER('");
 			sb.append(objectId.getId());
 			sb.append("')");
+			
+			String queryString = sb.toString();
+			
+			if (_log.isDebugEnabled()) {
+				_log.debug("Calling query " + queryString);
+			}
 
 			ItemIterable<QueryResult> queryResults = session.query(
-				sb.toString(), false);
+				queryString, false);
 
 			Iterator<QueryResult> itr = queryResults.iterator();
 
