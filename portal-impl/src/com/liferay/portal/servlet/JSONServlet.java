@@ -27,8 +27,11 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
 
+import java.io.IOException;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,8 +50,10 @@ public class JSONServlet extends HttpServlet {
 		_jsonAction = getJSONAction(servletContext);
 	}
 
+	@SuppressWarnings("unused")
 	public void service(
-		HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
 
 		try {
 			String remoteUser = request.getRemoteUser();

@@ -41,34 +41,38 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 	}
 
 	public List<String[]> dumpMappings() {
-
 		List<String[]> mappings = new ArrayList<String[]>();
 
-		for (RESTActionConfigSet configSet : _restActionConfigSets) {
-			List<RESTActionConfig> actionConfigs = configSet.getActionConfigs();
+		for (RESTActionConfigSet restActionConfigSet : _restActionConfigSets) {
+			List<RESTActionConfig> restActionConfigs =
+				restActionConfigSet.getActionConfigs();
 
-			for (RESTActionConfig config : actionConfigs) {
+			for (RESTActionConfig restActionConfig : restActionConfigs) {
+				String[] parameterNames = restActionConfig.getParameterNames();
 
-				String[] paramNames = config.getParameterNames();
+				Class<?> actionClass = restActionConfig.getActionClass();
+				Method actionMethod = restActionConfig.getActionMethod();
 
-				String methodName = config.getActionMethod().getName();
+				String methodName = actionMethod.getName();
+
 				methodName += "(";
 
-				for (int i = 0; i < paramNames.length; i++) {
+				for (int i = 0; i < parameterNames.length; i++) {
 					if (i != 0) {
 						methodName += ", ";
 					}
-					methodName += paramNames[i];
+
+					methodName += parameterNames[i];
 				}
 
 				methodName += ")";
 
-				String[] mappingData = new String[] {
-					config.getMethod(), config.getPath(),
-					config.getActionClass().getName() + '#' + methodName
+				String[] mapping = new String[] {
+					restActionConfig.getMethod(), restActionConfig.getPath(),
+					actionClass.getName() + '#' + methodName
 				};
 
-				mappings.add(mappingData);
+				mappings.add(mapping);
 			}
 		}
 
@@ -76,9 +80,8 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 	}
 
 	public RESTAction lookup(String path, String method) {
-
-		String[] pathChunks = StringUtil
-			.split(path.substring(1), StringPool.SLASH);
+		String[] pathChunks = StringUtil.split(
+			path.substring(1), StringPool.SLASH);
 
 		int low = 0;
 		int high = _restActionConfigSets.size() - 1;

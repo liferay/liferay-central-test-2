@@ -17,17 +17,21 @@ package com.liferay.portal.rest;
 import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.JSONServlet;
 import com.liferay.portal.struts.JSONAction;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import java.util.List;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,13 +40,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RESTServlet extends JSONServlet {
 
-	@Override
 	public void service(
-		HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
 
 		String path = GetterUtil.getString(request.getPathInfo());
 
-		if (path.equals("/--dump")) {
+		if (path.equals("/dump")) {
 			dumpMappings(response);
 		}
 		else {
@@ -50,35 +54,38 @@ public class RESTServlet extends JSONServlet {
 		}
 	}
 
-	protected void dumpMappings(HttpServletResponse response) {
-
-		StringBuilder out = new StringBuilder();
+	protected void dumpMappings(HttpServletResponse response)
+		throws IOException {
 
 		List<String[]> mappings = RESTActionsManagerUtil.dumpMappings();
 
-		for (String[] mapping : mappings) {
+		StringBundler sb = new StringBundler(mappings.size() * 6);
 
-			out.append(mapping[0] == null ? StringPool.STAR : mapping[0]);
-			out.append('\t');
-			out.append(mapping[1]);
-			out.append(" ---> ");
-			out.append(mapping[2]);
-			out.append('\n');
+		for (String[] mapping : mappings) {
+			if (mapping[0] == null) {
+				sb.append(StringPool.STAR);
+			}
+			else {
+				sb.append(mapping[0]);
+			}
+
+			sb.append(CharPool.TAB);
+			sb.append(mapping[1]);
+			sb.append(" ---> ");
+			sb.append(mapping[2]);
+			sb.append(CharPool.NEW_LINE);
 		}
 
 		response.setContentType(ContentTypes.TEXT_PLAIN);
-		response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+		response.setHeader(
+			HttpHeaders.CACHE_CONTROL,
+			HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
 
-		try {
-			PrintWriter printWriter = response.getWriter();
+		PrintWriter printWriter = response.getWriter();
 
-			printWriter.write(out.toString());
+		printWriter.write(sb.toString());
 
-			printWriter.close();
-		}
-		catch (Exception e) {
-		}
-
+		printWriter.close();
 	}
 
 	protected JSONAction getJSONAction(ServletContext servletContext) {
