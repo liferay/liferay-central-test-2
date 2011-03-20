@@ -647,7 +647,7 @@
 	<category name="com.liferay.portal.util.HttpImpl">
 		<priority value="INFO" />
 	</category>
-	
+
 	<category name="com.liferay.portal.util.MaintenanceUtil">
 		<priority value="DEBUG" />
 	</category>
