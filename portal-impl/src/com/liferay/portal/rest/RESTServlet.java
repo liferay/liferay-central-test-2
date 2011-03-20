@@ -14,16 +14,72 @@
 
 package com.liferay.portal.rest;
 
+import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.JSONServlet;
 import com.liferay.portal.struts.JSONAction;
 
+import java.io.PrintWriter;
+
+import java.util.List;
+
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Igor Spasic
  */
 public class RESTServlet extends JSONServlet {
+
+	@Override
+	public void service(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		String path = GetterUtil.getString(request.getPathInfo());
+
+		if (path.equals("/--dump")) {
+			dumpMappings(response);
+		}
+		else {
+			super.service(request, response);
+		}
+	}
+
+	protected void dumpMappings(HttpServletResponse response) {
+
+		StringBuilder out = new StringBuilder();
+
+		List<String[]> mappings = RESTActionsManagerUtil.dumpMappings();
+
+		for (String[] mapping : mappings) {
+
+			out.append(mapping[0] == null ? StringPool.STAR : mapping[0]);
+			out.append('\t');
+			out.append(mapping[1]);
+			out.append(" ---> ");
+			out.append(mapping[2]);
+			out.append('\n');
+		}
+
+		response.setContentType(ContentTypes.TEXT_PLAIN);
+		response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+
+		try {
+			PrintWriter printWriter = response.getWriter();
+
+			printWriter.write(out.toString());
+
+			printWriter.close();
+		}
+		catch (Exception e) {
+		}
+
+	}
 
 	protected JSONAction getJSONAction(ServletContext servletContext) {
 		ClassLoader portletClassLoader =
