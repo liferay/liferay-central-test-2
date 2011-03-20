@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +38,41 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 		_restActionConfigSets = new SortedArrayList<RESTActionConfigSet>();
 		_restActionConfigSetsBinarySearch = BinarySearch.forList(
 			_restActionConfigSets);
+	}
+
+	public List<String[]> dumpMappings() {
+
+		List<String[]> mappings = new ArrayList<String[]>();
+
+		for (RESTActionConfigSet configSet : _restActionConfigSets) {
+			List<RESTActionConfig> actionConfigs = configSet.getActionConfigs();
+
+			for (RESTActionConfig config : actionConfigs) {
+
+				String[] paramNames = config.getParameterNames();
+
+				String methodName = config.getActionMethod().getName();
+				methodName += "(";
+
+				for (int i = 0; i < paramNames.length; i++) {
+					if (i != 0) {
+						methodName += ", ";
+					}
+					methodName += paramNames[i];
+				}
+
+				methodName += ")";
+
+				String[] mappingData = new String[] {
+					config.getMethod(), config.getPath(),
+					config.getActionClass().getName() + '#' + methodName
+				};
+
+				mappings.add(mappingData);
+			}
+		}
+
+		return mappings;
 	}
 
 	public RESTAction lookup(String path, String method) {

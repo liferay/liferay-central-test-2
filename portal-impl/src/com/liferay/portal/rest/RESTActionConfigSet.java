@@ -57,6 +57,10 @@ public class RESTActionConfigSet implements Comparable<RESTActionConfigSet> {
 		return _path.compareTo(restActionConfigSet._path);
 	}
 
+	public List<RESTActionConfig> getActionConfigs() {
+		return _restActionConfigs;
+	}
+
 	public String getPath() {
 		return _path;
 	}

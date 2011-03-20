@@ -16,10 +16,16 @@ package com.liferay.portal.kernel.rest;
 
 import java.lang.reflect.Method;
 
+import java.util.List;
+
 /**
  * @author Igor Spasic
  */
 public class RESTActionsManagerUtil {
+
+	public static List<String[]> dumpMappings() {
+		return _restActionsManager.dumpMappings();
+	}
 
 	public static RESTActionsManager getRESTActionsManager() {
 		return _restActionsManager;
