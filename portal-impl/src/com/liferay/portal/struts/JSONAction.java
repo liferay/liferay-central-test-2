@@ -79,7 +79,9 @@ public abstract class JSONAction extends Action {
 		}
 		else if (Validator.isNotNull(json)) {
 			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-			response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+			response.setHeader(
+				HttpHeaders.CACHE_CONTROL,
+				HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
 
 			PrintWriter printWriter = response.getWriter();
 

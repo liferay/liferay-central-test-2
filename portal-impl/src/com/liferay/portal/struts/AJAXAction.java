@@ -52,13 +52,15 @@ public abstract class AJAXAction extends Action {
 		}
 
 		response.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
-		response.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+		response.setHeader(
+			HttpHeaders.CACHE_CONTROL,
+			HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
 
-		PrintWriter pw = response.getWriter();
+		PrintWriter printWriter = response.getWriter();
 
-		pw.write(text);
+		printWriter.write(text);
 
-		pw.close();
+		printWriter.close();
 
 		return null;
 	}
