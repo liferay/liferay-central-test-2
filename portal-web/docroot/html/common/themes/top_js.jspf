@@ -232,6 +232,9 @@
 							searchExp: '(\\?|&)/([^&]+)'
 						};
 					</c:when>
+					<c:when test="<%= PropsValues.JAVASCRIPT_LOG_ENABLED %>">
+						return 'debug';
+					</c:when>
 					<c:otherwise>
 						return 'raw';
 					</c:otherwise>
@@ -250,7 +253,8 @@
 			comboBase: Liferay.AUI.getComboPath(),
 			fetchCSS: false,
 			filter: Liferay.AUI.getFilter(),
-			root: Liferay.AUI.getRootPath()
+			root: Liferay.AUI.getRootPath(),
+			useBrowserConsole: false
 		};
 
 		<%
@@ -296,10 +300,6 @@
 
 	</c:otherwise>
 </c:choose>
-
-<c:if test="<%= PropsValues.JAVASCRIPT_LOG_ENABLED %>">
-	<script src="<%= themeDisplay.getPathJavaScript() %>/firebug/firebug.js" type="text/javascript"></script>
-</c:if>
 
 <c:if test="<%= themeDisplay.isIncludeServiceJs() %>">
 	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/service.js", javaScriptLastModified)) %>" type="text/javascript"></script>

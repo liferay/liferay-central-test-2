@@ -124,6 +124,10 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 
 </c:if>
 
+<c:if test="<%= PropsValues.JAVASCRIPT_LOG_ENABLED %>">
+	<%@ include file="/html/common/themes/bottom_js_logging.jspf" %>
+</c:if>
+
 <%@ include file="/html/common/themes/bottom_js.jspf" %>
 
 <%@ include file="/html/common/themes/session_timeout.jspf" %>

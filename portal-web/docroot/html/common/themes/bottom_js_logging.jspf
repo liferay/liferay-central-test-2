@@ -1,0 +1,66 @@
+<%
+String id = "liferay_js_console_collapsed";
+String collapsed = GetterUtil.getString(SessionClicks.get(request, id, null), "false");
+%>
+
+<div class="yui3-skin-sam" id="liferayJSConsole"></div>
+
+<aui:script>
+	AUI(
+		{
+			classNamePrefix: 'yui3',
+			fetchCSS: true
+		}
+	).use(
+		'aui-io',
+		'console',
+		'console-filters',
+		function(A) {
+			var maxHeight = '300px';
+			var autoHeight = 'auto';
+
+			var Console = new A.Console(
+				{
+					after: {
+						collapsedChange: function(event) {
+							var instance = this;
+
+							var height = maxHeight;
+
+							if (event.newVal) {
+								height = autoHeight;
+							}
+
+							instance.set('height', height);
+
+							A.io.request(
+								'<%= themeDisplay.getPathMain() %>/portal/session_click',
+								{
+									data: {
+										<%= id %>: String(event.newVal)
+									}
+								}
+							);
+						}
+					},
+					collapsed: <%= collapsed %>,
+					height: (<%= collapsed %>) ? autoHeight : maxHeight,
+					logSource: A.Global,
+					newestOnTop: false,
+					plugins: [A.Plugin.ConsoleFilters],
+					strings: {
+						clear: '<liferay-ui:message key="clear" />',
+						collapse: '<liferay-ui:message key="collapse" />',
+						expand: '<liferay-ui:message key="expand" />',
+						pause: '<liferay-ui:message key="pause" />',
+						title: '<liferay-ui:message key="console" />'
+					},
+					style: 'block',
+					width: '100%'
+				}
+			).render('#liferayJSConsole');
+
+			Liferay.Console = Console;
+		}
+	);
+</aui:script>
