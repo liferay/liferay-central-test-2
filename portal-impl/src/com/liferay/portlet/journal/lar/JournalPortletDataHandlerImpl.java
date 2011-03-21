@@ -136,10 +136,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		content = exportDLFileEntries(
 			portletDataContext, dlFoldersElement, dlFileEntriesElement,
-			dlFileRanksElement, entityElement, content, checkDateRange);
+			dlFileRanksElement, entityElement, content, false);
 		content = exportIGImages(
 			portletDataContext, igFoldersElement, igImagesElement,
-			entityElement, content, checkDateRange);
+			entityElement, content, false);
 		content = exportLayoutFriendlyURLs(portletDataContext, content);
 		content = exportLinksToLayout(portletDataContext, content);
 
