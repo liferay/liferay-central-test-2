@@ -1424,7 +1424,7 @@
 				javaProcessesOldList = javaProcessesOldList.substring(0, javaProcessesOldList.length() - 1);
 			}
 
-			project.setProperty("jjava.processes.old.list", javaProcessesOldList);
+			project.setProperty("java.processes.old.list", javaProcessesOldList);
 		</script>
 
 		<exec executable="cmd.exe">
@@ -1466,7 +1466,7 @@
 					<elseif>
 						<contains string="@{java.processes.new.current}" substring="Launcher" />
 						<then>
-							<for list="${jjava.processes.old.list}" param="java.processes.old.current">
+							<for list="${java.processes.old.list}" param="java.processes.old.current">
 								<sequential>
 									<if>
 										<contains string="@{java.processes.new.current}" substring="@{java.processes.old.current}" />
