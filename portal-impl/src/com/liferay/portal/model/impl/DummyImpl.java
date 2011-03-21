@@ -31,24 +31,24 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 		return new DummyImpl();
 	}
 
+	public int compareTo(Dummy dummy) {
+		return 0;
+	}
+
+	public Class<?> getModelClass() {
+		return DummyImpl.class;
+	}
+
+	public String getModelClassName() {
+		return DummyImpl.class.getName();
+	}
+
 	public Serializable getPrimaryKeyObj() {
 		return StringPool.BLANK;
 	}
 
 	public String toXmlString() {
 		return StringPool.BLANK;
-	}
-
-	public int compareTo(Dummy dummy) {
-		return 0;
-	}
-
-	public Class<?> getModelClass() {
-		return Dummy.class;
-	}
-
-	public String getModelClassName() {
-		return Dummy.class.getName();
 	}
 
 }
