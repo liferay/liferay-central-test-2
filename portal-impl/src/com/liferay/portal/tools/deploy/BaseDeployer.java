@@ -1050,18 +1050,20 @@ public class BaseDeployer implements Deployer {
 		}
 	}
 
-	public String getInvokerFilterContent() {
+	public String getInvokerFilterContent(double webXmlVersion) {
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(getInvokerFilterContent("ERROR"));
-		sb.append(getInvokerFilterContent("FORWARD"));
-		sb.append(getInvokerFilterContent("INCLUDE"));
-		sb.append(getInvokerFilterContent("REQUEST"));
+		sb.append(getInvokerFilterContent("ERROR", webXmlVersion));
+		sb.append(getInvokerFilterContent("FORWARD", webXmlVersion));
+		sb.append(getInvokerFilterContent("INCLUDE", webXmlVersion));
+		sb.append(getInvokerFilterContent("REQUEST", webXmlVersion));
 
 		return sb.toString();
 	}
 
-	public String getInvokerFilterContent(String dispatcher) {
+	public String getInvokerFilterContent
+		(String dispatcher, double webXmlVersion) {
+
 		StringBundler sb = new StringBundler(23);
 
 		sb.append("<filter>");
@@ -1084,9 +1086,12 @@ public class BaseDeployer implements Deployer {
 		sb.append(dispatcher);
 		sb.append("</filter-name>");
 		sb.append("<url-pattern>/*</url-pattern>");
-		sb.append("<dispatcher>");
-		sb.append(dispatcher);
-		sb.append("</dispatcher>");
+
+		if (webXmlVersion > 2.3) {
+			sb.append("<dispatcher>");
+			sb.append(dispatcher);
+			sb.append("</dispatcher>");
+		}
 		sb.append("</filter-mapping>");
 
 		return sb.toString();
@@ -1475,7 +1480,8 @@ public class BaseDeployer implements Deployer {
 		}
 	}
 
-	public String updateLiferayWebXml(File srcFile, String webXmlContent)
+	public String updateLiferayWebXml(
+		File srcFile, String webXmlContent, double webXmlVersion)
 		throws Exception {
 
 		webXmlContent = WebXMLBuilder.organizeWebXML(webXmlContent);
@@ -1504,8 +1510,8 @@ public class BaseDeployer implements Deployer {
 		FileUtil.write(
 			srcFile + "/WEB-INF/liferay-web.xml", liferayWebXmlContent);
 
-		webXmlContent =
-			webXmlContent.substring(0, x) + getInvokerFilterContent() +
+		webXmlContent = webXmlContent.substring(0, x) +
+				getInvokerFilterContent(webXmlVersion) +
 				webXmlContent.substring(y + 17);
 
 		return webXmlContent;
@@ -1556,7 +1562,7 @@ public class BaseDeployer implements Deployer {
 
 		// Update liferay-web.xml
 
-		newContent = updateLiferayWebXml(srcFile, newContent);
+		newContent = updateLiferayWebXml(srcFile, newContent, webXmlVersion);
 
 		// Update web.xml
 
