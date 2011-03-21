@@ -25,7 +25,12 @@ AUI().add(
 
 						var host = instance.get('host');
 						var navigation = host.one('> ul');
-						var hostId = '#' + navigation.guid();
+
+						var hostULId = '#' + navigation.guid();
+
+						instance._directLiChild = hostULId + '> li';
+
+						instance._hostULId = hostULId;
 
 						Liferay.on(
 							['showNavigationMenu', 'hideNavigationMenu'],
@@ -46,7 +51,7 @@ AUI().add(
 						host.plug(
 							A.Plugin.NodeFocusManager,
 							{
-								descendants: '> ul > li > a',
+								descendants: 'a',
 								focusClass: 'active',
 								keys: {
 									next: 'down:40',
@@ -77,38 +82,34 @@ AUI().add(
 					_handleKey: function(event, direction) {
 						var instance = this;
 
-						var focusManager = instance._focusManager;
-
 						var target = event.target;
 
-						var parent = target.ancestor('li');
+						var parent = target.ancestors(instance._directLiChild).item(0);
 
-						var descendants = focusManager._descendants;
-						var length = descendants.size();
+						var fallbackFirst = true;
+						var item;
 
-						var index = focusManager.get(ACTIVE_DESCENDANT);
-						var increment = 0;
-						var fallback;
+						if (direction === DIRECTION_LEFT) {
+							item = parent.previous();
 
-						if (direction == DIRECTION_LEFT) {
-							increment = -1;
-							fallback = length - 1;
+							fallbackFirst = false;
 						}
 						else {
-							increment = 1;
-							fallback = 0;
+							item = parent.next();
 						}
 
-						var tmpIndex = index + increment;
-						var tmp = descendants.item(tmpIndex);
+						if (!item) {
+							var siblings = parent.siblings();
 
-						if (!tmp) {
-							tmpIndex = fallback;
+							if (fallbackFirst) {
+								item = siblings.first();
+							}
+							else {
+								item = siblings.last();
+							}
 						}
 
-						index = tmpIndex;
-
-						focusManager.focus(index);
+						instance._focusManager.focus(item.one('a'));
 					},
 
 					_handleKeyDown: function(event) {
@@ -172,7 +173,7 @@ AUI().add(
 							Liferay.fire('hideNavigationMenu', MAP_HOVER);
 						}
 
-						MAP_HOVER.menu = descendants.item(activeDescendant).ancestor('li');
+						MAP_HOVER.menu = descendants.item(activeDescendant).ancestors(instance._directLiChild);
 
 						Liferay.fire('showNavigationMenu', MAP_HOVER);
 					}

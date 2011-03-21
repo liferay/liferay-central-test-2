@@ -194,7 +194,7 @@ body #banner .logo a {
 	zoom: 1;
 }
 
-#navigation .child-menu li a:hover {
+#navigation .child-menu li a:hover, #navigation li a.active {
 	background-color: #020509;
 }
 
