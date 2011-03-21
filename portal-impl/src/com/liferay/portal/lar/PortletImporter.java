@@ -99,7 +99,7 @@ public class PortletImporter {
 	public void importPortletInfo(
 			long userId, long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, File file)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		boolean deletePortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
@@ -293,7 +293,7 @@ public class PortletImporter {
 
 	protected void deletePortletData(
 			PortletDataContext portletDataContext, String portletId, long plid)
-		throws SystemException {
+		throws Exception {
 
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
@@ -319,7 +319,7 @@ public class PortletImporter {
 	protected String deletePortletData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
-		throws SystemException {
+		throws Exception {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			portletDataContext.getCompanyId(), portletId);
@@ -361,9 +361,6 @@ public class PortletImporter {
 			portletPreferencesImpl =
 				(PortletPreferencesImpl)portletDataHandler.deleteData(
 					portletDataContext, portletId, portletPreferencesImpl);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
 		}
 		finally {
 			portletDataContext.setGroupId(portletDataContext.getScopeGroupId());
@@ -563,7 +560,7 @@ public class PortletImporter {
 	protected void importPortletData(
 			PortletDataContext portletDataContext, String portletId, long plid,
 			Element portletDataElement)
-		throws SystemException {
+		throws Exception {
 
 		long ownerId = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_LAYOUT;
@@ -590,7 +587,7 @@ public class PortletImporter {
 	protected String importPortletData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, Element portletDataElement)
-		throws SystemException {
+		throws Exception {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			portletDataContext.getCompanyId(), portletId);
@@ -712,9 +709,7 @@ public class PortletImporter {
 					portletData);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new SystemException(e);
+			throw e;
 		}
 		finally {
 			portletDataContext.setScopeGroupId(groupId);
@@ -735,7 +730,7 @@ public class PortletImporter {
 			Layout layout, String portletId, Element parentElement,
 			boolean importPortletSetup, boolean importPortletArchivedSetups,
 			boolean importPortletUserPreferences, boolean preserveScopeLayoutId)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 		long plid = 0;
@@ -760,11 +755,11 @@ public class PortletImporter {
 			}
 		}
 
-		List<Element> preferencesElements = parentElement.elements(
+		List<Element> portletPreferencesElements = parentElement.elements(
 			"portlet-preferences");
 
-		for (Element preferencesElement : preferencesElements) {
-			String path = preferencesElement.attributeValue("path");
+		for (Element portletPreferencesElement : portletPreferencesElements) {
+			String path = portletPreferencesElement.attributeValue("path");
 
 			if (portletDataContext.isPathNotProcessed(path)) {
 				String xml = null;
@@ -826,7 +821,8 @@ public class PortletImporter {
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
 					portletId = PortletConstants.getRootPortletId(portletId);
 
-					String userUuid = element.attributeValue("archive-user-uuid");
+					String userUuid = element.attributeValue(
+						"archive-user-uuid");
 					String name = element.attributeValue("archive-name");
 
 					long userId = portletDataContext.getUserId(userUuid);
@@ -861,9 +857,6 @@ public class PortletImporter {
 
 				jxPreferences.store();
 			}
-			catch (Exception e) {
-				throw new PortalException(e);
-			}
 			finally {
 				portletDataContext.setScopeType(scopeType);
 				portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
@@ -872,269 +865,240 @@ public class PortletImporter {
 	}
 
 	protected void readAssetCategories(PortletDataContext portletDataContext)
-		throws SystemException {
+		throws Exception {
 
-		try {
-			String xml = portletDataContext.getZipEntryAsString(
-				portletDataContext.getSourceRootPath() +
-					"/categories-hierarchy.xml");
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() +
+				"/categories-hierarchy.xml");
 
-			if (xml == null) {
-				return;
-			}
-
-			Document document = SAXReaderUtil.read(xml);
-
-			Element rootElement = document.getRootElement();
-
-			Element vocabulariesElement = rootElement.element("vocabularies");
-
-			List<Element> vocabularyElements = vocabulariesElement.elements(
-				"vocabulary");
-
-			Map<Long, Long> vocabularyPKs =
-				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-					AssetVocabulary.class);
-
-			for (Element vocabularyElement : vocabularyElements) {
-				String path = vocabularyElement.attributeValue("path");
-
-				if (!portletDataContext.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				AssetVocabulary assetVocabulary =
-					(AssetVocabulary)portletDataContext.getZipEntryAsObject(
-						path);
-
-				importAssetVocabulary(
-					portletDataContext, vocabularyPKs, vocabularyElement,
-					assetVocabulary);
-			}
-
-			Element categoriesElement = rootElement.element("categories");
-
-			List<Element> categoryElements = categoriesElement.elements(
-				"category");
-
-			Map<Long, Long> assetCategoryPKs =
-				(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-					AssetCategory.class);
-
-			for (Element categoryElement : categoryElements) {
-				String path = categoryElement.attributeValue("path");
-
-				if (!portletDataContext.isPathNotProcessed(path)) {
-					continue;
-				}
-
-				AssetCategory assetCategory =
-					(AssetCategory)portletDataContext.getZipEntryAsObject(path);
-
-				importAssetCategory(
-					portletDataContext, vocabularyPKs, assetCategoryPKs,
-					categoryElement, assetCategory);
-			}
-
-			Element assetsElement = rootElement.element("assets");
-
-			List<Element> assetElements = assetsElement.elements("asset");
-
-			for (Element assetElement : assetElements) {
-				String className = GetterUtil.getString(
-					assetElement.attributeValue("class-name"));
-				long classPK = GetterUtil.getLong(
-					assetElement.attributeValue("class-pk"));
-				String[] assetCategoryUuids = StringUtil.split(
-					GetterUtil.getString(
-						assetElement.attributeValue("category-uuids")));
-
-				long[] assetCategoryIds = new long[0];
-
-				for (String assetCategoryUuid : assetCategoryUuids) {
-					AssetCategory assetCategory =
-						AssetCategoryUtil.fetchByUUID_G(
-							assetCategoryUuid,
-							portletDataContext.getScopeGroupId());
-
-					if (assetCategory != null) {
-						assetCategoryIds = ArrayUtil.append(
-							assetCategoryIds, assetCategory.getCategoryId());
-					}
-				}
-
-				portletDataContext.addAssetCategories(
-					className, classPK, assetCategoryIds);
-			}
+		if (xml == null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		Element assetVocabulariesElement = rootElement.element("vocabularies");
+
+		List<Element> assetVocabularyElements =
+			assetVocabulariesElement.elements("vocabulary");
+
+		Map<Long, Long> assetVocabularyPKs =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				AssetVocabulary.class);
+
+		for (Element assetVocabularyElement : assetVocabularyElements) {
+			String path = assetVocabularyElement.attributeValue("path");
+
+			if (!portletDataContext.isPathNotProcessed(path)) {
+				continue;
+			}
+
+			AssetVocabulary assetVocabulary =
+				(AssetVocabulary)portletDataContext.getZipEntryAsObject(path);
+
+			importAssetVocabulary(
+				portletDataContext, assetVocabularyPKs, assetVocabularyElement,
+				assetVocabulary);
+		}
+
+		Element assetCategoriesElement = rootElement.element("categories");
+
+		List<Element> assetCategoryElements = assetCategoriesElement.elements(
+			"category");
+
+		Map<Long, Long> assetCategoryPKs =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
+				AssetCategory.class);
+
+		for (Element assetCategoryElement : assetCategoryElements) {
+			String path = assetCategoryElement.attributeValue("path");
+
+			if (!portletDataContext.isPathNotProcessed(path)) {
+				continue;
+			}
+
+			AssetCategory assetCategory =
+				(AssetCategory)portletDataContext.getZipEntryAsObject(path);
+
+			importAssetCategory(
+				portletDataContext, assetVocabularyPKs, assetCategoryPKs,
+				assetCategoryElement, assetCategory);
+		}
+
+		Element assetsElement = rootElement.element("assets");
+
+		List<Element> assetElements = assetsElement.elements("asset");
+
+		for (Element assetElement : assetElements) {
+			String className = GetterUtil.getString(
+				assetElement.attributeValue("class-name"));
+			long classPK = GetterUtil.getLong(
+				assetElement.attributeValue("class-pk"));
+			String[] assetCategoryUuids = StringUtil.split(
+				GetterUtil.getString(
+					assetElement.attributeValue("category-uuids")));
+
+			long[] assetCategoryIds = new long[0];
+
+			for (String assetCategoryUuid : assetCategoryUuids) {
+				AssetCategory assetCategory = AssetCategoryUtil.fetchByUUID_G(
+					assetCategoryUuid, portletDataContext.getScopeGroupId());
+
+				if (assetCategory != null) {
+					assetCategoryIds = ArrayUtil.append(
+						assetCategoryIds, assetCategory.getCategoryId());
+				}
+			}
+
+			portletDataContext.addAssetCategories(
+				className, classPK, assetCategoryIds);
 		}
 	}
 
 	protected void readAssetTags(
 			PortletDataContext portletDataContext, Element parentElement)
-		throws SystemException {
+		throws Exception {
 
-		try {
-			String xml = portletDataContext.getZipEntryAsString(
-				portletDataContext.getSourceRootPath() + "/tags.xml");
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() + "/tags.xml");
 
-			if (xml == null) {
-				return;
-			}
-
-			Document document = SAXReaderUtil.read(xml);
-
-			Element rootElement = document.getRootElement();
-
-			List<Element> assetElements = rootElement.elements("asset");
-
-			for (Element assetElement : assetElements) {
-				String className = GetterUtil.getString(
-					assetElement.attributeValue("class-name"));
-				long classPK = GetterUtil.getLong(
-					assetElement.attributeValue("class-pk"));
-				String assetTagNames = GetterUtil.getString(
-					assetElement.attributeValue("tags"));
-
-				portletDataContext.addAssetTags(className, classPK,
-					StringUtil.split(assetTagNames));
-			}
+		if (xml == null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> assetElements = rootElement.elements("asset");
+
+		for (Element assetElement : assetElements) {
+			String className = GetterUtil.getString(
+				assetElement.attributeValue("class-name"));
+			long classPK = GetterUtil.getLong(
+				assetElement.attributeValue("class-pk"));
+			String assetTagNames = GetterUtil.getString(
+				assetElement.attributeValue("tags"));
+
+			portletDataContext.addAssetTags(
+				className, classPK, StringUtil.split(assetTagNames));
 		}
 	}
 
 	protected void readComments(
 			PortletDataContext portletDataContext, Element parentElement)
-		throws SystemException {
+		throws Exception {
 
-		try {
-			String xml = portletDataContext.getZipEntryAsString(
-				portletDataContext.getSourceRootPath() + "/comments.xml");
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() + "/comments.xml");
 
-			if (xml == null) {
-				return;
-			}
-
-			Document document = SAXReaderUtil.read(xml);
-
-			Element rootElement = document.getRootElement();
-
-			List<Element> assetElements = rootElement.elements("asset");
-
-			for (Element assetElement : assetElements) {
-				String path = assetElement.attributeValue("path");
-				String className = assetElement.attributeValue("class-name");
-				long classPK = GetterUtil.getLong(
-					assetElement.attributeValue("class-pk"));
-
-				List<String> zipFolderEntries =
-					portletDataContext.getZipFolderEntries(path);
-
-				List<MBMessage> mbMessages = new ArrayList<MBMessage>();
-
-				for (String zipFolderEntry : zipFolderEntries) {
-					MBMessage mbMessage =
-						(MBMessage)portletDataContext.getZipEntryAsObject(
-							zipFolderEntry);
-
-					if (mbMessage != null) {
-						mbMessages.add(mbMessage);
-					}
-				}
-
-				portletDataContext.addComments(className, classPK, mbMessages);
-			}
+		if (xml == null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> assetElements = rootElement.elements("asset");
+
+		for (Element assetElement : assetElements) {
+			String path = assetElement.attributeValue("path");
+			String className = assetElement.attributeValue("class-name");
+			long classPK = GetterUtil.getLong(
+				assetElement.attributeValue("class-pk"));
+
+			List<String> zipFolderEntries =
+				portletDataContext.getZipFolderEntries(path);
+
+			List<MBMessage> mbMessages = new ArrayList<MBMessage>();
+
+			for (String zipFolderEntry : zipFolderEntries) {
+				MBMessage mbMessage =
+					(MBMessage)portletDataContext.getZipEntryAsObject(
+						zipFolderEntry);
+
+				if (mbMessage != null) {
+					mbMessages.add(mbMessage);
+				}
+			}
+
+			portletDataContext.addComments(className, classPK, mbMessages);
 		}
 	}
 
 	protected void readLocks(
 			PortletDataContext portletDataContext, Element parentElement)
-		throws SystemException {
+		throws Exception {
 
-		try {
-			String xml = portletDataContext.getZipEntryAsString(
-				portletDataContext.getSourceRootPath() + "/locks.xml");
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() + "/locks.xml");
 
-			if (xml == null) {
-				return;
-			}
-
-			Document document = SAXReaderUtil.read(xml);
-
-			Element rootElement = document.getRootElement();
-
-			List<Element> assetElements = rootElement.elements("asset");
-
-			for (Element assetElement : assetElements) {
-				String className = assetElement.attributeValue("class-name");
-				String key = assetElement.attributeValue("key");
-				String path = assetElement.attributeValue("path");
-
-				Lock lock = (Lock)portletDataContext.getZipEntryAsObject(path);
-
-				if (lock != null) {
-					portletDataContext.addLocks(className, key, lock);
-				}
-			}
+		if (xml == null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> assetElements = rootElement.elements("asset");
+
+		for (Element assetElement : assetElements) {
+			String path = assetElement.attributeValue("path");
+			String className = assetElement.attributeValue("class-name");
+			String key = assetElement.attributeValue("key");
+
+			Lock lock = (Lock)portletDataContext.getZipEntryAsObject(path);
+
+			if (lock != null) {
+				portletDataContext.addLocks(className, key, lock);
+			}
 		}
 	}
 
 	protected void readRatingsEntries(
 			PortletDataContext portletDataContext, Element parentElement)
-		throws SystemException {
+		throws Exception {
 
-		try {
-			String xml = portletDataContext.getZipEntryAsString(
-				portletDataContext.getSourceRootPath() + "/ratings.xml");
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() + "/ratings.xml");
 
-			if (xml == null) {
-				return;
-			}
-
-			Document document = SAXReaderUtil.read(xml);
-
-			Element rootElement = document.getRootElement();
-
-			List<Element> assetElements = rootElement.elements("asset");
-
-			for (Element assetElement : assetElements) {
-				String path = assetElement.attributeValue("path");
-				String className = assetElement.attributeValue("class-name");
-				long classPK = GetterUtil.getLong(
-					assetElement.attributeValue("class-pk"));
-
-				List<String> zipFolderEntries =
-					portletDataContext.getZipFolderEntries(path);
-
-				List<RatingsEntry> ratingsEntries =
-					new ArrayList<RatingsEntry>();
-
-				for (String zipFolderEntry : zipFolderEntries) {
-					RatingsEntry ratingsEntry =
-						(RatingsEntry)portletDataContext.getZipEntryAsObject(
-							zipFolderEntry);
-
-					if (ratingsEntry != null) {
-						ratingsEntries.add(ratingsEntry);
-					}
-				}
-
-				portletDataContext.addRatingsEntries(
-					className, classPK, ratingsEntries);
-			}
+		if (xml == null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> assetElements = rootElement.elements("asset");
+
+		for (Element assetElement : assetElements) {
+			String path = assetElement.attributeValue("path");
+			String className = assetElement.attributeValue("class-name");
+			long classPK = GetterUtil.getLong(
+				assetElement.attributeValue("class-pk"));
+
+			List<String> zipFolderEntries =
+				portletDataContext.getZipFolderEntries(path);
+
+			List<RatingsEntry> ratingsEntries = new ArrayList<RatingsEntry>();
+
+			for (String zipFolderEntry : zipFolderEntries) {
+				RatingsEntry ratingsEntry =
+					(RatingsEntry)portletDataContext.getZipEntryAsObject(
+						zipFolderEntry);
+
+				if (ratingsEntry != null) {
+					ratingsEntries.add(ratingsEntry);
+				}
+			}
+
+			portletDataContext.addRatingsEntries(
+				className, classPK, ratingsEntries);
 		}
 	}
 

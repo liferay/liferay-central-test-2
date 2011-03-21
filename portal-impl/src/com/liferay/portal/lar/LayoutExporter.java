@@ -457,11 +457,15 @@ public class LayoutExporter {
 
 		context.setScopeGroupId(previousScopeGroupId);
 
-		// Categories
+		// Asset categories
 
 		if (exportCategories) {
-			exportCategories(context);
+			exportAssetCategories(context);
 		}
+
+		// Asset tags
+
+		_portletExporter.exportAssetTags(context, rootElement);
 
 		// Comments
 
@@ -477,13 +481,9 @@ public class LayoutExporter {
 			_permissionExporter.exportPortletDataPermissions(context);
 		}
 
-		// Ratings
+		// Ratings entries
 
-		_portletExporter.exportRatings(context, rootElement);
-
-		// Tags
-
-		_portletExporter.exportTags(context, rootElement);
+		_portletExporter.exportRatingsEntries(context, rootElement);
 
 		// Look and feel
 
@@ -515,22 +515,23 @@ public class LayoutExporter {
 		}
 	}
 
-	protected void exportCategories(PortletDataContext context)
+	protected void exportAssetCategories(PortletDataContext context)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("categories-hierarchy");
 
-		Element vocabulariesElement = rootElement.addElement("vocabularies");
+		Element assetVocabulariesElement = rootElement.addElement(
+			"vocabularies");
 
 		List<AssetVocabulary> assetVocabularies =
 			AssetVocabularyLocalServiceUtil.getGroupVocabularies(
 				context.getGroupId());
 
 		for (AssetVocabulary assetVocabulary : assetVocabularies) {
-			_portletExporter.exportVocabulary(
-				context, vocabulariesElement, assetVocabulary);
+			_portletExporter.exportAssetVocabulary(
+				context, assetVocabulariesElement, assetVocabulary);
 		}
 
 		Element categoriesElement = rootElement.addElement("categories");
@@ -539,11 +540,12 @@ public class LayoutExporter {
 			AssetCategoryUtil.findByGroupId(context.getGroupId());
 
 		for (AssetCategory assetCategory : assetCategories) {
-			_portletExporter.exportCategory(
-				context, vocabulariesElement, categoriesElement, assetCategory);
+			_portletExporter.exportAssetCategory(
+				context, assetVocabulariesElement, categoriesElement,
+				assetCategory);
 		}
 
-		_portletExporter.exportCategories(context, rootElement);
+		_portletExporter.exportAssetCategories(context, rootElement);
 
 		context.addZipEntry(
 			context.getRootPath() + "/categories-hierarchy.xml",

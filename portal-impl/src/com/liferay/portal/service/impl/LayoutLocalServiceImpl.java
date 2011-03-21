@@ -685,10 +685,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
-		PortletImporter portletImporter = new PortletImporter();
+		try {
+			PortletImporter portletImporter = new PortletImporter();
 
-		portletImporter.importPortletInfo(
-			userId, plid, groupId, portletId, parameterMap, file);
+			portletImporter.importPortletInfo(
+				userId, plid, groupId, portletId, parameterMap, file);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public void importPortletInfo(
