@@ -1556,7 +1556,9 @@ public class BaseDeployer implements Deployer {
 
 		// Update liferay-web.xml
 
-		newContent = updateLiferayWebXml(srcFile, newContent);
+		if (webXmlVersion > 2.3) {
+			newContent = updateLiferayWebXml(srcFile, newContent);
+		}
 
 		// Update web.xml
 
