@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.servlet.JSONServlet;
 import com.liferay.portal.struts.JSONAction;
 
@@ -73,7 +74,12 @@ public class RESTServlet extends JSONServlet {
 			sb.append("</td><td>");
 			sb.append(mapping[1]);
 			sb.append("</td><td>");
-			sb.append(mapping[2]);
+
+			String classMethodName = mapping[2];
+			classMethodName = StringUtil.replace(
+				classMethodName, "com.liferay.portal.", "c.l.p.");
+			sb.append(classMethodName);
+
 			sb.append("</td></tr>");
 		}
 		sb.append("</table></body></html>");

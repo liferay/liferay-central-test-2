@@ -188,20 +188,18 @@ public class RESTConfigurator extends FindClass {
 				continue;
 			}
 
-			_registerRESTAction(actionClass, method, restAnnotation);
+			_registerRESTAction(actionClass, method);
 		}
 	}
 	private void _registerRESTAction(
-			Class<?> implementationClass, Method method, REST restAnnotation)
+			Class<?> implementationClass, Method method)
 		throws Exception {
 
-		String path = restAnnotation.value().trim();
+		RESTMappingResolver mappingResolver = new RESTDefaultMappingResolver();
 
-		String httpMethod = restAnnotation.method().trim();
+		String path = mappingResolver.resolvePath(implementationClass, method);
 
-		if (httpMethod.length() == 0) {
-			httpMethod = null;
-		}
+		String httpMethod = mappingResolver.resolveHttpMethod(method);
 
 		String utilClassName = implementationClass.getName();
 
