@@ -21,6 +21,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -61,6 +64,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			if (selectionStyle.equals("dynamic")) {
 				updateQueryLogic(actionRequest, preferences);
 			}
+
+			updateDefaultAssetPublisher(actionRequest);
 
 			super.processAction(portletConfig, actionRequest, actionResponse);
 		}
@@ -199,6 +204,30 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			displayStyle.equals("view-count-details")) {
 
 			preferences.setValue("displayStyle", "full-content");
+		}
+	}
+
+	protected void updateDefaultAssetPublisher(ActionRequest actionRequest)
+		throws Exception {
+
+		boolean defaultAssetPublisher = ParamUtil.getBoolean(
+			actionRequest, "defaultAssetPublisher");
+
+		if (defaultAssetPublisher) {
+			String portletResource = ParamUtil.getString(
+				actionRequest, "portletResource");
+
+			Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			typeSettingsProperties.setProperty(
+				"default-asset-publisher", portletResource);
+
+			layout = LayoutServiceUtil.updateLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId(), layout.getTypeSettings());
 		}
 	}
 

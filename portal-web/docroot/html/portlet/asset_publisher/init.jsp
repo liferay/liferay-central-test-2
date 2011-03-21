@@ -207,6 +207,13 @@ boolean excludeZeroViewCount = GetterUtil.getBoolean(preferences.getValue("exclu
 int delta = GetterUtil.getInteger(preferences.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String paginationType = GetterUtil.getString(preferences.getValue("paginationType", "none"));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("showAvailableLocales", StringPool.BLANK));
+
+boolean defaultAssetPublisher = false;
+
+if (layout.getTypeSettingsProperties().getProperty("default-asset-publisher", StringPool.BLANK).equals(portletResource)) {
+	defaultAssetPublisher = true;
+}
+
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null));
 boolean enableComments = GetterUtil.getBoolean(preferences.getValue("enableComments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null));
