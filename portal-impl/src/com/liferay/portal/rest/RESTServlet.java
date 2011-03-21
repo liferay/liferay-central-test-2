@@ -17,7 +17,6 @@ package com.liferay.portal.rest;
 import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -59,9 +58,11 @@ public class RESTServlet extends JSONServlet {
 
 		List<String[]> mappings = RESTActionsManagerUtil.dumpMappings();
 
-		StringBundler sb = new StringBundler(mappings.size() * 6);
+		StringBundler sb = new StringBundler(mappings.size() * 6 + 2);
 
+		sb.append("<html><body><table border='1'>");
 		for (String[] mapping : mappings) {
+			sb.append("<tr><td>");
 			if (mapping[0] == null) {
 				sb.append(StringPool.STAR);
 			}
@@ -69,14 +70,15 @@ public class RESTServlet extends JSONServlet {
 				sb.append(mapping[0]);
 			}
 
-			sb.append(CharPool.TAB);
+			sb.append("</td><td>");
 			sb.append(mapping[1]);
-			sb.append(" ---> ");
+			sb.append("</td><td>");
 			sb.append(mapping[2]);
-			sb.append(CharPool.NEW_LINE);
+			sb.append("</td></tr>");
 		}
+		sb.append("</table></body></html>");
 
-		response.setContentType(ContentTypes.TEXT_PLAIN);
+		response.setContentType(ContentTypes.TEXT_HTML);
 		response.setHeader(
 			HttpHeaders.CACHE_CONTROL,
 			HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
