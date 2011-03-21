@@ -28,6 +28,14 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		_userTrackerPath = userTrackerPath;
 	}
 
+	public Class<?> getModelClass() {
+		return UserTrackerPath.class;
+	}
+
+	public String getModelClassName() {
+		return UserTrackerPath.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user tracker path.
 	*

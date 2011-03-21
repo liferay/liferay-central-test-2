@@ -29,6 +29,14 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 		_socialEquityGroupSetting = socialEquityGroupSetting;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialEquityGroupSetting.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquityGroupSetting.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social equity group setting.
 	*

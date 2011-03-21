@@ -28,6 +28,14 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 		_layoutSetBranch = layoutSetBranch;
 	}
 
+	public Class<?> getModelClass() {
+		return LayoutSetBranch.class;
+	}
+
+	public String getModelClassName() {
+		return LayoutSetBranch.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this layout set branch.
 	*

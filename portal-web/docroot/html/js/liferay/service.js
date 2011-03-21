@@ -252,6 +252,8 @@ Liferay.Service.registerClass(
 		getAutoDeployDirectory: true,
 		getBuildNumber: true,
 		test: true,
+		testClassName: true,
+		testClassNameRollback: true,
 		testCounterRollback: true
 	}
 );

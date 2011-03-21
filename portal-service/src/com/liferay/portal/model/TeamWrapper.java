@@ -28,6 +28,14 @@ public class TeamWrapper implements Team {
 		_team = team;
 	}
 
+	public Class<?> getModelClass() {
+		return Team.class;
+	}
+
+	public String getModelClassName() {
+		return Team.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this team.
 	*

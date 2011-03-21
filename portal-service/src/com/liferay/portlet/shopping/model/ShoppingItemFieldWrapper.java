@@ -28,6 +28,14 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 		_shoppingItemField = shoppingItemField;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingItemField.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingItemField.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping item field.
 	*

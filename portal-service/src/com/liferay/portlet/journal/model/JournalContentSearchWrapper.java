@@ -29,6 +29,14 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 		_journalContentSearch = journalContentSearch;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalContentSearch.class;
+	}
+
+	public String getModelClassName() {
+		return JournalContentSearch.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal content search.
 	*

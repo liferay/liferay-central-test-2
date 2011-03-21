@@ -135,6 +135,14 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return MBCategory.class;
+	}
+
+	public String getModelClassName() {
+		return MBCategory.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBCategory"));
 

@@ -28,6 +28,14 @@ public class DLFileVersionWrapper implements DLFileVersion {
 		_dlFileVersion = dlFileVersion;
 	}
 
+	public Class<?> getModelClass() {
+		return DLFileVersion.class;
+	}
+
+	public String getModelClassName() {
+		return DLFileVersion.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d l file version.
 	*

@@ -127,6 +127,14 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Website.class;
+	}
+
+	public String getModelClassName() {
+		return Website.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Website"));
 

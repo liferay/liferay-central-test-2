@@ -28,6 +28,14 @@ public class DDMContentWrapper implements DDMContent {
 		_ddmContent = ddmContent;
 	}
 
+	public Class<?> getModelClass() {
+		return DDMContent.class;
+	}
+
+	public String getModelClassName() {
+		return DDMContent.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d d m content.
 	*

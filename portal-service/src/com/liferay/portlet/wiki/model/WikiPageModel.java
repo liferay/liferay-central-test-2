@@ -17,6 +17,7 @@ package com.liferay.portlet.wiki.model;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -38,7 +39,7 @@ import java.util.Date;
  * @see com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
  * @generated
  */
-public interface WikiPageModel extends BaseModel<WikiPage> {
+public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

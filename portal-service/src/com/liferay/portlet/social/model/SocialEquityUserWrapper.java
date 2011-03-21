@@ -28,6 +28,14 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		_socialEquityUser = socialEquityUser;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialEquityUser.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquityUser.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social equity user.
 	*

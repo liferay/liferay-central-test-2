@@ -28,6 +28,14 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		_scProductEntry = scProductEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return SCProductEntry.class;
+	}
+
+	public String getModelClassName() {
+		return SCProductEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this s c product entry.
 	*

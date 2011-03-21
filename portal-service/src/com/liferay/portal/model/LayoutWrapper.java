@@ -28,6 +28,14 @@ public class LayoutWrapper implements Layout {
 		_layout = layout;
 	}
 
+	public Class<?> getModelClass() {
+		return Layout.class;
+	}
+
+	public String getModelClassName() {
+		return Layout.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this layout.
 	*

@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.model;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +41,8 @@ import java.util.Map;
  * @see com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
  * @generated
  */
-public interface JournalArticleModel extends BaseModel<JournalArticle> {
+public interface JournalArticleModel extends BaseModel<JournalArticle>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

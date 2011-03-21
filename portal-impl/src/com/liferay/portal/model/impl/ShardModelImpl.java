@@ -69,6 +69,15 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Shard"),
 			true);
+
+	public Class<?> getModelClass() {
+		return Shard.class;
+	}
+
+	public String getModelClassName() {
+		return Shard.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Shard"));
 

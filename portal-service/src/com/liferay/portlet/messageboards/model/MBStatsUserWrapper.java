@@ -28,6 +28,14 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		_mbStatsUser = mbStatsUser;
 	}
 
+	public Class<?> getModelClass() {
+		return MBStatsUser.class;
+	}
+
+	public String getModelClassName() {
+		return MBStatsUser.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards stats user.
 	*

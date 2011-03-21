@@ -28,6 +28,14 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		_socialEquityHistory = socialEquityHistory;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialEquityHistory.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquityHistory.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social equity history.
 	*

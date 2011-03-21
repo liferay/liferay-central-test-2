@@ -28,6 +28,14 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		_journalTemplate = journalTemplate;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalTemplate.class;
+	}
+
+	public String getModelClassName() {
+		return JournalTemplate.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal template.
 	*

@@ -28,6 +28,14 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		_mbMessageFlag = mbMessageFlag;
 	}
 
+	public Class<?> getModelClass() {
+		return MBMessageFlag.class;
+	}
+
+	public String getModelClassName() {
+		return MBMessageFlag.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards message flag.
 	*

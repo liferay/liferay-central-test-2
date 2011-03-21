@@ -28,6 +28,14 @@ public class CalEventWrapper implements CalEvent {
 		_calEvent = calEvent;
 	}
 
+	public Class<?> getModelClass() {
+		return CalEvent.class;
+	}
+
+	public String getModelClassName() {
+		return CalEvent.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this cal event.
 	*

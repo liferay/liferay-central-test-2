@@ -28,6 +28,14 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		_bookmarksEntry = bookmarksEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return BookmarksEntry.class;
+	}
+
+	public String getModelClassName() {
+		return BookmarksEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this bookmarks entry.
 	*

@@ -28,6 +28,14 @@ public class PluginSettingWrapper implements PluginSetting {
 		_pluginSetting = pluginSetting;
 	}
 
+	public Class<?> getModelClass() {
+		return PluginSetting.class;
+	}
+
+	public String getModelClassName() {
+		return PluginSetting.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this plugin setting.
 	*

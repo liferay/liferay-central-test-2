@@ -28,6 +28,14 @@ public class ContactWrapper implements Contact {
 		_contact = contact;
 	}
 
+	public Class<?> getModelClass() {
+		return Contact.class;
+	}
+
+	public String getModelClassName() {
+		return Contact.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this contact.
 	*

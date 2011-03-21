@@ -72,6 +72,15 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.UserIdMapper"),
 			true);
+
+	public Class<?> getModelClass() {
+		return UserIdMapper.class;
+	}
+
+	public String getModelClassName() {
+		return UserIdMapper.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserIdMapper"));
 

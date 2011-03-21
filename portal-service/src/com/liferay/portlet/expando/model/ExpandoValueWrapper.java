@@ -28,6 +28,14 @@ public class ExpandoValueWrapper implements ExpandoValue {
 		_expandoValue = expandoValue;
 	}
 
+	public Class<?> getModelClass() {
+		return ExpandoValue.class;
+	}
+
+	public String getModelClassName() {
+		return ExpandoValue.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this expando value.
 	*

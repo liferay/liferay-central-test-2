@@ -64,6 +64,15 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgGroupRole"),
 			true);
+
+	public Class<?> getModelClass() {
+		return OrgGroupRole.class;
+	}
+
+	public String getModelClassName() {
+		return OrgGroupRole.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupRole"));
 

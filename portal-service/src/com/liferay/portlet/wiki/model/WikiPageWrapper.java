@@ -28,6 +28,14 @@ public class WikiPageWrapper implements WikiPage {
 		_wikiPage = wikiPage;
 	}
 
+	public Class<?> getModelClass() {
+		return WikiPage.class;
+	}
+
+	public String getModelClassName() {
+		return WikiPage.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this wiki page.
 	*

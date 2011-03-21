@@ -28,6 +28,14 @@ public class OrgLaborWrapper implements OrgLabor {
 		_orgLabor = orgLabor;
 	}
 
+	public Class<?> getModelClass() {
+		return OrgLabor.class;
+	}
+
+	public String getModelClassName() {
+		return OrgLabor.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this org labor.
 	*

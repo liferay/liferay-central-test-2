@@ -112,6 +112,14 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return PortletPreferences.class;
+	}
+
+	public String getModelClassName() {
+		return PortletPreferences.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PortletPreferences"));
 

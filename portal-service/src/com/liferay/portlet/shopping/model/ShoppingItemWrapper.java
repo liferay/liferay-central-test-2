@@ -28,6 +28,14 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		_shoppingItem = shoppingItem;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingItem.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingItem.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping item.
 	*

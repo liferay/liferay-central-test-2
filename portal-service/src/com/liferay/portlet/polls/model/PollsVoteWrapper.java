@@ -28,6 +28,14 @@ public class PollsVoteWrapper implements PollsVote {
 		_pollsVote = pollsVote;
 	}
 
+	public Class<?> getModelClass() {
+		return PollsVote.class;
+	}
+
+	public String getModelClassName() {
+		return PollsVote.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this polls vote.
 	*

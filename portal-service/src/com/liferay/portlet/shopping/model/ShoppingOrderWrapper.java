@@ -28,6 +28,14 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		_shoppingOrder = shoppingOrder;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingOrder.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingOrder.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping order.
 	*

@@ -28,6 +28,14 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry = dlFileEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return DLFileEntry.class;
+	}
+
+	public String getModelClassName() {
+		return DLFileEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d l file entry.
 	*

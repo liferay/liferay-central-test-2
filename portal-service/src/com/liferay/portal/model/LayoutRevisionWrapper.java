@@ -28,6 +28,14 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		_layoutRevision = layoutRevision;
 	}
 
+	public Class<?> getModelClass() {
+		return LayoutRevision.class;
+	}
+
+	public String getModelClassName() {
+		return LayoutRevision.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this layout revision.
 	*

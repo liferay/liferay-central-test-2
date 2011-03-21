@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.TeamModelImpl
  * @generated
  */
-public interface TeamModel extends BaseModel<Team> {
+public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

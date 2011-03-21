@@ -28,6 +28,14 @@ public class IGImageWrapper implements IGImage {
 		_igImage = igImage;
 	}
 
+	public Class<?> getModelClass() {
+		return IGImage.class;
+	}
+
+	public String getModelClassName() {
+		return IGImage.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this i g image.
 	*

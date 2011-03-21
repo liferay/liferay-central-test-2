@@ -28,6 +28,14 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		_shoppingCoupon = shoppingCoupon;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingCoupon.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingCoupon.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping coupon.
 	*

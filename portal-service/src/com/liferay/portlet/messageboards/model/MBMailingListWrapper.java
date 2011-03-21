@@ -28,6 +28,14 @@ public class MBMailingListWrapper implements MBMailingList {
 		_mbMailingList = mbMailingList;
 	}
 
+	public Class<?> getModelClass() {
+		return MBMailingList.class;
+	}
+
+	public String getModelClassName() {
+		return MBMailingList.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards mailing list.
 	*

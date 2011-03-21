@@ -142,6 +142,14 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetCategory.class;
+	}
+
+	public String getModelClassName() {
+		return AssetCategory.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME = com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
 		com.liferay.portlet.asset.model.impl.AssetEntryModelImpl.FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES;

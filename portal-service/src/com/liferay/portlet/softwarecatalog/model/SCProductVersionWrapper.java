@@ -28,6 +28,14 @@ public class SCProductVersionWrapper implements SCProductVersion {
 		_scProductVersion = scProductVersion;
 	}
 
+	public Class<?> getModelClass() {
+		return SCProductVersion.class;
+	}
+
+	public String getModelClassName() {
+		return SCProductVersion.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this s c product version.
 	*

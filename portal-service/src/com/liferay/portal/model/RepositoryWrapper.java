@@ -28,6 +28,14 @@ public class RepositoryWrapper implements Repository {
 		_repository = repository;
 	}
 
+	public Class<?> getModelClass() {
+		return Repository.class;
+	}
+
+	public String getModelClassName() {
+		return Repository.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this repository.
 	*

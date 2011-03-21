@@ -28,6 +28,14 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		_socialEquitySetting = socialEquitySetting;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialEquitySetting.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquitySetting.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social equity setting.
 	*

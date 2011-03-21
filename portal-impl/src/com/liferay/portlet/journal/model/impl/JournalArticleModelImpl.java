@@ -171,6 +171,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalArticle.class;
+	}
+
+	public String getModelClassName() {
+		return JournalArticle.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticle"));
 

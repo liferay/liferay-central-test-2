@@ -28,6 +28,14 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 		_journalArticleImage = journalArticleImage;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalArticleImage.class;
+	}
+
+	public String getModelClassName() {
+		return JournalArticleImage.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal article image.
 	*

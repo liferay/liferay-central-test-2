@@ -28,6 +28,14 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		_shoppingCategory = shoppingCategory;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingCategory.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingCategory.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping category.
 	*

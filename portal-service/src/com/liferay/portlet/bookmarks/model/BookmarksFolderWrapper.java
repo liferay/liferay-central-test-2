@@ -28,6 +28,14 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		_bookmarksFolder = bookmarksFolder;
 	}
 
+	public Class<?> getModelClass() {
+		return BookmarksFolder.class;
+	}
+
+	public String getModelClassName() {
+		return BookmarksFolder.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this bookmarks folder.
 	*

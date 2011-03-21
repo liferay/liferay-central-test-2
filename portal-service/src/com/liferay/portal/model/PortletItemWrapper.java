@@ -28,6 +28,14 @@ public class PortletItemWrapper implements PortletItem {
 		_portletItem = portletItem;
 	}
 
+	public Class<?> getModelClass() {
+		return PortletItem.class;
+	}
+
+	public String getModelClassName() {
+		return PortletItem.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this portlet item.
 	*

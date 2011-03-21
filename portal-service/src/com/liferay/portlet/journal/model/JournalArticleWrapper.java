@@ -28,6 +28,14 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle = journalArticle;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalArticle.class;
+	}
+
+	public String getModelClassName() {
+		return JournalArticle.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal article.
 	*

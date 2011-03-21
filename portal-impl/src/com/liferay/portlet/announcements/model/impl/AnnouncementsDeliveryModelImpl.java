@@ -118,6 +118,14 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return AnnouncementsDelivery.class;
+	}
+
+	public String getModelClassName() {
+		return AnnouncementsDelivery.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.announcements.model.AnnouncementsDelivery"));
 

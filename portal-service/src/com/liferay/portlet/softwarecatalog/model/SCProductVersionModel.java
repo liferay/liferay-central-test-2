@@ -16,6 +16,7 @@ package com.liferay.portlet.softwarecatalog.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -38,7 +39,8 @@ import java.util.Date;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
  * @generated
  */
-public interface SCProductVersionModel extends BaseModel<SCProductVersion> {
+public interface SCProductVersionModel extends AuditedModel,
+	BaseModel<SCProductVersion> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

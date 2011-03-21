@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.PortletItemModelImpl
  * @generated
  */
-public interface PortletItemModel extends BaseModel<PortletItem> {
+public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

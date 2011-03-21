@@ -28,6 +28,14 @@ public class SCLicenseWrapper implements SCLicense {
 		_scLicense = scLicense;
 	}
 
+	public Class<?> getModelClass() {
+		return SCLicense.class;
+	}
+
+	public String getModelClassName() {
+		return SCLicense.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this s c license.
 	*

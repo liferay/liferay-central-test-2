@@ -125,6 +125,14 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return LayoutSetBranch.class;
+	}
+
+	public String getModelClassName() {
+		return LayoutSetBranch.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.LayoutSetBranch"));
 

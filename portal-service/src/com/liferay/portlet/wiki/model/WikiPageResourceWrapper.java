@@ -28,6 +28,14 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		_wikiPageResource = wikiPageResource;
 	}
 
+	public Class<?> getModelClass() {
+		return WikiPageResource.class;
+	}
+
+	public String getModelClassName() {
+		return WikiPageResource.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this wiki page resource.
 	*

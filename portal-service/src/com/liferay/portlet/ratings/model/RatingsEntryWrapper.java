@@ -28,6 +28,14 @@ public class RatingsEntryWrapper implements RatingsEntry {
 		_ratingsEntry = ratingsEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return RatingsEntry.class;
+	}
+
+	public String getModelClassName() {
+		return RatingsEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this ratings entry.
 	*

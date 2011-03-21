@@ -28,6 +28,14 @@ public class JournalFeedWrapper implements JournalFeed {
 		_journalFeed = journalFeed;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalFeed.class;
+	}
+
+	public String getModelClassName() {
+		return JournalFeed.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal feed.
 	*

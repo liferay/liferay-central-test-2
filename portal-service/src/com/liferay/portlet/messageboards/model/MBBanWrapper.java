@@ -28,6 +28,14 @@ public class MBBanWrapper implements MBBan {
 		_mbBan = mbBan;
 	}
 
+	public Class<?> getModelClass() {
+		return MBBan.class;
+	}
+
+	public String getModelClassName() {
+		return MBBan.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards ban.
 	*

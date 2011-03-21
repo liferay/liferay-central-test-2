@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.SubscriptionModelImpl
  * @generated
  */
-public interface SubscriptionModel extends BaseModel<Subscription> {
+public interface SubscriptionModel extends AuditedModel, BaseModel<Subscription> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

@@ -29,6 +29,14 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 		_userNotificationEvent = userNotificationEvent;
 	}
 
+	public Class<?> getModelClass() {
+		return UserNotificationEvent.class;
+	}
+
+	public String getModelClassName() {
+		return UserNotificationEvent.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user notification event.
 	*

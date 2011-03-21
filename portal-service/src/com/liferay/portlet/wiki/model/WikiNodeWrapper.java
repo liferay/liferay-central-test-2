@@ -28,6 +28,14 @@ public class WikiNodeWrapper implements WikiNode {
 		_wikiNode = wikiNode;
 	}
 
+	public Class<?> getModelClass() {
+		return WikiNode.class;
+	}
+
+	public String getModelClassName() {
+		return WikiNode.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this wiki node.
 	*

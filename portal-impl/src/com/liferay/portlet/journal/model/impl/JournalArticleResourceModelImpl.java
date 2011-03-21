@@ -70,6 +70,15 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticleResource"),
 			true);
+
+	public Class<?> getModelClass() {
+		return JournalArticleResource.class;
+	}
+
+	public String getModelClassName() {
+		return JournalArticleResource.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleResource"));
 

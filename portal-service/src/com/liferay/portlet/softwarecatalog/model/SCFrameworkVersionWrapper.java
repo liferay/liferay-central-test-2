@@ -28,6 +28,14 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		_scFrameworkVersion = scFrameworkVersion;
 	}
 
+	public Class<?> getModelClass() {
+		return SCFrameworkVersion.class;
+	}
+
+	public String getModelClassName() {
+		return SCFrameworkVersion.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this s c framework version.
 	*

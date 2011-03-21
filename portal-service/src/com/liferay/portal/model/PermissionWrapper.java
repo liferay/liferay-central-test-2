@@ -28,6 +28,14 @@ public class PermissionWrapper implements Permission {
 		_permission = permission;
 	}
 
+	public Class<?> getModelClass() {
+		return Permission.class;
+	}
+
+	public String getModelClassName() {
+		return Permission.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this permission.
 	*

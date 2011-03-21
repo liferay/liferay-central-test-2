@@ -28,6 +28,14 @@ public class RegionWrapper implements Region {
 		_region = region;
 	}
 
+	public Class<?> getModelClass() {
+		return Region.class;
+	}
+
+	public String getModelClassName() {
+		return Region.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this region.
 	*

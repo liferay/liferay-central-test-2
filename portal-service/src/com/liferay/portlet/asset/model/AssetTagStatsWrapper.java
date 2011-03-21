@@ -28,6 +28,14 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		_assetTagStats = assetTagStats;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetTagStats.class;
+	}
+
+	public String getModelClassName() {
+		return AssetTagStats.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this asset tag stats.
 	*

@@ -28,6 +28,14 @@ public class LockWrapper implements Lock {
 		_lock = lock;
 	}
 
+	public Class<?> getModelClass() {
+		return Lock.class;
+	}
+
+	public String getModelClassName() {
+		return Lock.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this lock.
 	*

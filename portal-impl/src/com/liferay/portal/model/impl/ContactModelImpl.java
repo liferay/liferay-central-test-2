@@ -162,6 +162,14 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Contact.class;
+	}
+
+	public String getModelClassName() {
+		return Contact.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Contact"));
 

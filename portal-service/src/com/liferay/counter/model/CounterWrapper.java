@@ -28,6 +28,14 @@ public class CounterWrapper implements Counter {
 		_counter = counter;
 	}
 
+	public Class<?> getModelClass() {
+		return Counter.class;
+	}
+
+	public String getModelClassName() {
+		return Counter.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this counter.
 	*

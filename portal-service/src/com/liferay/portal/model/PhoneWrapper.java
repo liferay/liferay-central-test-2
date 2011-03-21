@@ -28,6 +28,14 @@ public class PhoneWrapper implements Phone {
 		_phone = phone;
 	}
 
+	public Class<?> getModelClass() {
+		return Phone.class;
+	}
+
+	public String getModelClassName() {
+		return Phone.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this phone.
 	*

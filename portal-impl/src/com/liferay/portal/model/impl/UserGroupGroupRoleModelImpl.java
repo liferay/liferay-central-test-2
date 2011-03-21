@@ -102,6 +102,14 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return UserGroupGroupRole.class;
+	}
+
+	public String getModelClassName() {
+		return UserGroupGroupRole.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroupGroupRole"));
 

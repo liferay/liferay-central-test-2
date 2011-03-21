@@ -29,6 +29,14 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		_assetCategoryProperty = assetCategoryProperty;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetCategoryProperty.class;
+	}
+
+	public String getModelClassName() {
+		return AssetCategoryProperty.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this asset category property.
 	*

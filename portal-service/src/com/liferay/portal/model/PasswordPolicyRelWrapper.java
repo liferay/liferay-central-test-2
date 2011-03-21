@@ -28,6 +28,14 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		_passwordPolicyRel = passwordPolicyRel;
 	}
 
+	public Class<?> getModelClass() {
+		return PasswordPolicyRel.class;
+	}
+
+	public String getModelClassName() {
+		return PasswordPolicyRel.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this password policy rel.
 	*

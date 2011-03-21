@@ -28,6 +28,14 @@ public class SubscriptionWrapper implements Subscription {
 		_subscription = subscription;
 	}
 
+	public Class<?> getModelClass() {
+		return Subscription.class;
+	}
+
+	public String getModelClassName() {
+		return Subscription.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this subscription.
 	*

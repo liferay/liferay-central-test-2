@@ -138,6 +138,14 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return SCProductEntry.class;
+	}
+
+	public String getModelClassName() {
+		return SCProductEntry.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME = com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES =
 		com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl.FINDER_CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;

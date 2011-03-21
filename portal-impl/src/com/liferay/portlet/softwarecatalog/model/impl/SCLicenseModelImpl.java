@@ -114,6 +114,14 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return SCLicense.class;
+	}
+
+	public String getModelClassName() {
+		return SCLicense.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME = "SCLicenses_SCProductEntries";
 	public static final Object[][] MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_COLUMNS =
 		{

@@ -28,6 +28,14 @@ public class VirtualHostWrapper implements VirtualHost {
 		_virtualHost = virtualHost;
 	}
 
+	public Class<?> getModelClass() {
+		return VirtualHost.class;
+	}
+
+	public String getModelClassName() {
+		return VirtualHost.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this virtual host.
 	*

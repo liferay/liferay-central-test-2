@@ -163,6 +163,14 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Layout.class;
+	}
+
+	public String getModelClassName() {
+		return Layout.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Layout"));
 

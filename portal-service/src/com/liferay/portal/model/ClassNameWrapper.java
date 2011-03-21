@@ -28,6 +28,14 @@ public class ClassNameWrapper implements ClassName {
 		_className = className;
 	}
 
+	public Class<?> getModelClass() {
+		return ClassName.class;
+	}
+
+	public String getModelClassName() {
+		return ClassName.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this class name.
 	*

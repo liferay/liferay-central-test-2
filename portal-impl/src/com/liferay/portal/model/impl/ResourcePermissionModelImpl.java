@@ -114,6 +114,14 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return ResourcePermission.class;
+	}
+
+	public String getModelClassName() {
+		return ResourcePermission.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourcePermission"));
 

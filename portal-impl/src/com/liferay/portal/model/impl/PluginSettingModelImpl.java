@@ -111,6 +111,14 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return PluginSetting.class;
+	}
+
+	public String getModelClassName() {
+		return PluginSetting.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PluginSetting"));
 

@@ -152,6 +152,14 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return CalEvent.class;
+	}
+
+	public String getModelClassName() {
+		return CalEvent.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.calendar.model.CalEvent"));
 

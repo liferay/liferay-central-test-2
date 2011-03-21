@@ -142,6 +142,14 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingCoupon.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingCoupon.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCoupon"));
 

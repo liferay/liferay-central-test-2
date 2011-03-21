@@ -28,6 +28,14 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		_shoppingItemPrice = shoppingItemPrice;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingItemPrice.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingItemPrice.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping item price.
 	*

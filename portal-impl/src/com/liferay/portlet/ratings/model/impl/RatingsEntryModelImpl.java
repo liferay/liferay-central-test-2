@@ -121,6 +121,14 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return RatingsEntry.class;
+	}
+
+	public String getModelClassName() {
+		return RatingsEntry.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsEntry"));
 

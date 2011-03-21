@@ -28,6 +28,14 @@ public class TicketWrapper implements Ticket {
 		_ticket = ticket;
 	}
 
+	public Class<?> getModelClass() {
+		return Ticket.class;
+	}
+
+	public String getModelClassName() {
+		return Ticket.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this ticket.
 	*

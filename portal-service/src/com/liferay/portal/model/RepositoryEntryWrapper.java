@@ -28,6 +28,14 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 		_repositoryEntry = repositoryEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return RepositoryEntry.class;
+	}
+
+	public String getModelClassName() {
+		return RepositoryEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this repository entry.
 	*

@@ -28,6 +28,14 @@ public class SocialRelationWrapper implements SocialRelation {
 		_socialRelation = socialRelation;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialRelation.class;
+	}
+
+	public String getModelClassName() {
+		return SocialRelation.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social relation.
 	*

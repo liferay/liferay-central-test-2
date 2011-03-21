@@ -126,6 +126,14 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingCategory.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingCategory.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCategory"));
 

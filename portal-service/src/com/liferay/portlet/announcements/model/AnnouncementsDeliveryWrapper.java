@@ -29,6 +29,14 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		_announcementsDelivery = announcementsDelivery;
 	}
 
+	public Class<?> getModelClass() {
+		return AnnouncementsDelivery.class;
+	}
+
+	public String getModelClassName() {
+		return AnnouncementsDelivery.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this announcements delivery.
 	*

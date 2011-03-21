@@ -28,6 +28,14 @@ public class IGFolderWrapper implements IGFolder {
 		_igFolder = igFolder;
 	}
 
+	public Class<?> getModelClass() {
+		return IGFolder.class;
+	}
+
+	public String getModelClassName() {
+		return IGFolder.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this i g folder.
 	*

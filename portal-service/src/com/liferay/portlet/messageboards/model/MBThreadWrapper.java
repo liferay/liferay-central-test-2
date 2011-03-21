@@ -28,6 +28,14 @@ public class MBThreadWrapper implements MBThread {
 		_mbThread = mbThread;
 	}
 
+	public Class<?> getModelClass() {
+		return MBThread.class;
+	}
+
+	public String getModelClassName() {
+		return MBThread.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards thread.
 	*

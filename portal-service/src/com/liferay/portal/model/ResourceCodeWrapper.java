@@ -28,6 +28,14 @@ public class ResourceCodeWrapper implements ResourceCode {
 		_resourceCode = resourceCode;
 	}
 
+	public Class<?> getModelClass() {
+		return ResourceCode.class;
+	}
+
+	public String getModelClassName() {
+		return ResourceCode.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this resource code.
 	*

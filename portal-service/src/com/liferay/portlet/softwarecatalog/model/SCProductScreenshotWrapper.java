@@ -28,6 +28,14 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		_scProductScreenshot = scProductScreenshot;
 	}
 
+	public Class<?> getModelClass() {
+		return SCProductScreenshot.class;
+	}
+
+	public String getModelClassName() {
+		return SCProductScreenshot.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this s c product screenshot.
 	*

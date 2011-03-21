@@ -28,6 +28,14 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		_shoppingCart = shoppingCart;
 	}
 
+	public Class<?> getModelClass() {
+		return ShoppingCart.class;
+	}
+
+	public String getModelClassName() {
+		return ShoppingCart.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shopping cart.
 	*

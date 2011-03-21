@@ -1662,8 +1662,8 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @param name the name of the role (must be a regular role, not an
 	organization, community, or provider role)
 	* @param userId the primary key of the user
-	* @param inherited whether to include roles inherited from sites,
-	organizations, etc.
+	* @param inherited whether to include roles inherited from organizations,
+	sites, etc.
 	* @return <code>true</code> if the user has the role; <code>false</code>
 	otherwise
 	* @throws PortalException if a role with the name could not be found

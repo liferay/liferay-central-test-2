@@ -28,6 +28,14 @@ public class MBMessageWrapper implements MBMessage {
 		_mbMessage = mbMessage;
 	}
 
+	public Class<?> getModelClass() {
+		return MBMessage.class;
+	}
+
+	public String getModelClassName() {
+		return MBMessage.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message-boards message.
 	*

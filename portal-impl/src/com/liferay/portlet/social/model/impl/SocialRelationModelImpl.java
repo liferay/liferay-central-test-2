@@ -73,6 +73,15 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialRelation"),
 			true);
+
+	public Class<?> getModelClass() {
+		return SocialRelation.class;
+	}
+
+	public String getModelClassName() {
+		return SocialRelation.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialRelation"));
 

@@ -28,6 +28,14 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		_expandoColumn = expandoColumn;
 	}
 
+	public Class<?> getModelClass() {
+		return ExpandoColumn.class;
+	}
+
+	public String getModelClassName() {
+		return ExpandoColumn.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this expando column.
 	*

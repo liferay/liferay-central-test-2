@@ -28,6 +28,14 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		_dlFileShortcut = dlFileShortcut;
 	}
 
+	public Class<?> getModelClass() {
+		return DLFileShortcut.class;
+	}
+
+	public String getModelClassName() {
+		return DLFileShortcut.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d l file shortcut.
 	*

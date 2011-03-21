@@ -127,6 +127,14 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return WikiNode.class;
+	}
+
+	public String getModelClassName() {
+		return WikiNode.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiNode"));
 

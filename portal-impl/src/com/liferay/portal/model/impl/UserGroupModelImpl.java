@@ -111,6 +111,14 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return UserGroup.class;
+	}
+
+	public String getModelClassName() {
+		return UserGroup.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_GROUPS_USERGROUPS_NAME = com.liferay.portal.model.impl.GroupModelImpl.MAPPING_TABLE_GROUPS_USERGROUPS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_USERGROUPS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS;
 	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_NAME = "UserGroups_Teams";

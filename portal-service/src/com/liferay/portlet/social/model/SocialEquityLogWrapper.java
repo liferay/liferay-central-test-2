@@ -28,6 +28,14 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		_socialEquityLog = socialEquityLog;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialEquityLog.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquityLog.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social equity log.
 	*

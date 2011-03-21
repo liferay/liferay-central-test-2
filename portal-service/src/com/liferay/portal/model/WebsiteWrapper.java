@@ -28,6 +28,14 @@ public class WebsiteWrapper implements Website {
 		_website = website;
 	}
 
+	public Class<?> getModelClass() {
+		return Website.class;
+	}
+
+	public String getModelClassName() {
+		return Website.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this website.
 	*

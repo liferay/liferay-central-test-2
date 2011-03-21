@@ -28,6 +28,14 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		_blogsStatsUser = blogsStatsUser;
 	}
 
+	public Class<?> getModelClass() {
+		return BlogsStatsUser.class;
+	}
+
+	public String getModelClassName() {
+		return BlogsStatsUser.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this blogs stats user.
 	*

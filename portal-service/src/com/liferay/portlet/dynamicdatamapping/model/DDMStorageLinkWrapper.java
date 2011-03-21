@@ -28,6 +28,14 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		_ddmStorageLink = ddmStorageLink;
 	}
 
+	public Class<?> getModelClass() {
+		return DDMStorageLink.class;
+	}
+
+	public String getModelClassName() {
+		return DDMStorageLink.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d d m storage link.
 	*

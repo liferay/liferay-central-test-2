@@ -28,6 +28,14 @@ public class LayoutSetWrapper implements LayoutSet {
 		_layoutSet = layoutSet;
 	}
 
+	public Class<?> getModelClass() {
+		return LayoutSet.class;
+	}
+
+	public String getModelClassName() {
+		return LayoutSet.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this layout set.
 	*

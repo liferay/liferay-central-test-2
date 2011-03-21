@@ -28,6 +28,14 @@ public class ImageWrapper implements Image {
 		_image = image;
 	}
 
+	public Class<?> getModelClass() {
+		return Image.class;
+	}
+
+	public String getModelClassName() {
+		return Image.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this image.
 	*

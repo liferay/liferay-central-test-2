@@ -134,6 +134,14 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return DLFileShortcut.class;
+	}
+
+	public String getModelClassName() {
+		return DLFileShortcut.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileShortcut"));
 

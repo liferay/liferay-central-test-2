@@ -28,6 +28,14 @@ public class UserGroupRoleWrapper implements UserGroupRole {
 		_userGroupRole = userGroupRole;
 	}
 
+	public Class<?> getModelClass() {
+		return UserGroupRole.class;
+	}
+
+	public String getModelClassName() {
+		return UserGroupRole.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user group role.
 	*

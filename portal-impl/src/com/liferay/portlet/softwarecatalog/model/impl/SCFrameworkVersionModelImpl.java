@@ -128,6 +128,14 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return SCFrameworkVersion.class;
+	}
+
+	public String getModelClassName() {
+		return SCFrameworkVersion.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME =
 		"SCFrameworkVersi_SCProductVers";
 	public static final Object[][] MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_COLUMNS =

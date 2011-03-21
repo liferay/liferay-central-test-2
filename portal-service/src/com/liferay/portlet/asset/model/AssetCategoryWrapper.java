@@ -28,6 +28,14 @@ public class AssetCategoryWrapper implements AssetCategory {
 		_assetCategory = assetCategory;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetCategory.class;
+	}
+
+	public String getModelClassName() {
+		return AssetCategory.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this asset category.
 	*

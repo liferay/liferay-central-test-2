@@ -28,6 +28,14 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		_layoutSetPrototype = layoutSetPrototype;
 	}
 
+	public Class<?> getModelClass() {
+		return LayoutSetPrototype.class;
+	}
+
+	public String getModelClassName() {
+		return LayoutSetPrototype.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this layout set prototype.
 	*

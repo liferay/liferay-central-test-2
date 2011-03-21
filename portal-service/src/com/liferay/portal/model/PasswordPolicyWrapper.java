@@ -28,6 +28,14 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 		_passwordPolicy = passwordPolicy;
 	}
 
+	public Class<?> getModelClass() {
+		return PasswordPolicy.class;
+	}
+
+	public String getModelClassName() {
+		return PasswordPolicy.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this password policy.
 	*

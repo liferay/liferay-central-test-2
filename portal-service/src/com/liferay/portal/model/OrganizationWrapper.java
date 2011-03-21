@@ -28,6 +28,14 @@ public class OrganizationWrapper implements Organization {
 		_organization = organization;
 	}
 
+	public Class<?> getModelClass() {
+		return Organization.class;
+	}
+
+	public String getModelClassName() {
+		return Organization.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this organization.
 	*

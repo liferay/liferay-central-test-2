@@ -151,6 +151,14 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetEntry.class;
+	}
+
+	public String getModelClassName() {
+		return AssetEntry.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME = "AssetEntries_AssetCategories";
 	public static final Object[][] MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_COLUMNS =
 		{

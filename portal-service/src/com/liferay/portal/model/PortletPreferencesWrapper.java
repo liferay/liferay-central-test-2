@@ -28,6 +28,14 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		_portletPreferences = portletPreferences;
 	}
 
+	public Class<?> getModelClass() {
+		return PortletPreferences.class;
+	}
+
+	public String getModelClassName() {
+		return PortletPreferences.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this portlet preferences.
 	*

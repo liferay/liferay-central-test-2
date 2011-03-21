@@ -28,6 +28,14 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 		_ddmStructureLink = ddmStructureLink;
 	}
 
+	public Class<?> getModelClass() {
+		return DDMStructureLink.class;
+	}
+
+	public String getModelClassName() {
+		return DDMStructureLink.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d d m structure link.
 	*

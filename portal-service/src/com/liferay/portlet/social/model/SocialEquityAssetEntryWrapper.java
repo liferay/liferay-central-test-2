@@ -29,6 +29,14 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		_socialEquityAssetEntry = socialEquityAssetEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialEquityAssetEntry.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquityAssetEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social equity asset entry.
 	*

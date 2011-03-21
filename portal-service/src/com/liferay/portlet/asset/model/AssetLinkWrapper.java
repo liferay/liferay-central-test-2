@@ -28,6 +28,14 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink = assetLink;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetLink.class;
+	}
+
+	public String getModelClassName() {
+		return AssetLink.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this asset link.
 	*

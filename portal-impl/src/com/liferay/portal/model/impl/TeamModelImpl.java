@@ -121,6 +121,14 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Team.class;
+	}
+
+	public String getModelClassName() {
+		return Team.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_USERS_TEAMS_NAME = com.liferay.portal.model.impl.UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_USERS_TEAMS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_TEAMS;
 	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_NAME = com.liferay.portal.model.impl.UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME;

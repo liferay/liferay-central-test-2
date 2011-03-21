@@ -177,6 +177,14 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return User.class;
+	}
+
+	public String getModelClassName() {
+		return User.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_USERS_GROUPS_NAME = "Users_Groups";
 	public static final Object[][] MAPPING_TABLE_USERS_GROUPS_COLUMNS = {
 			{ "userId", Types.BIGINT },

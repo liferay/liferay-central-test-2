@@ -28,6 +28,14 @@ public class MembershipRequestWrapper implements MembershipRequest {
 		_membershipRequest = membershipRequest;
 	}
 
+	public Class<?> getModelClass() {
+		return MembershipRequest.class;
+	}
+
+	public String getModelClassName() {
+		return MembershipRequest.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this membership request.
 	*

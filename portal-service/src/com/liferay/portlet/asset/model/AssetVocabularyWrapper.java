@@ -28,6 +28,14 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary = assetVocabulary;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetVocabulary.class;
+	}
+
+	public String getModelClassName() {
+		return AssetVocabulary.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this asset vocabulary.
 	*

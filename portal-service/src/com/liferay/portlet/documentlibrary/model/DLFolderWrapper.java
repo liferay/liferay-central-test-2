@@ -28,6 +28,14 @@ public class DLFolderWrapper implements DLFolder {
 		_dlFolder = dlFolder;
 	}
 
+	public Class<?> getModelClass() {
+		return DLFolder.class;
+	}
+
+	public String getModelClassName() {
+		return DLFolder.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d l folder.
 	*

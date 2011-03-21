@@ -124,6 +124,14 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetTagProperty.class;
+	}
+
+	public String getModelClassName() {
+		return AssetTagProperty.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetTagProperty"));
 

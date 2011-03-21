@@ -28,6 +28,14 @@ public class MBCategoryWrapper implements MBCategory {
 		_mbCategory = mbCategory;
 	}
 
+	public Class<?> getModelClass() {
+		return MBCategory.class;
+	}
+
+	public String getModelClassName() {
+		return MBCategory.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards category.
 	*

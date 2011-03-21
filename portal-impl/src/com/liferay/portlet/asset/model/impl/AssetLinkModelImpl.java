@@ -81,6 +81,15 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.asset.model.AssetLink"),
 			true);
+
+	public Class<?> getModelClass() {
+		return AssetLink.class;
+	}
+
+	public String getModelClassName() {
+		return AssetLink.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.asset.model.AssetLink"));
 

@@ -71,6 +71,15 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			true);
+
+	public Class<?> getModelClass() {
+		return MBDiscussion.class;
+	}
+
+	public String getModelClassName() {
+		return MBDiscussion.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBDiscussion"));
 

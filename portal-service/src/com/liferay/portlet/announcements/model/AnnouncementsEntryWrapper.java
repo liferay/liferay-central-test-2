@@ -28,6 +28,14 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		_announcementsEntry = announcementsEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return AnnouncementsEntry.class;
+	}
+
+	public String getModelClassName() {
+		return AnnouncementsEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this announcements entry.
 	*

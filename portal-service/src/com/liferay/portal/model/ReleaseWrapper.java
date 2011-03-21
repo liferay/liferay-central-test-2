@@ -28,6 +28,14 @@ public class ReleaseWrapper implements Release {
 		_release = release;
 	}
 
+	public Class<?> getModelClass() {
+		return Release.class;
+	}
+
+	public String getModelClassName() {
+		return Release.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this release.
 	*

@@ -131,6 +131,14 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return SCProductVersion.class;
+	}
+
+	public String getModelClassName() {
+		return SCProductVersion.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME =
 		com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl.MAPPING_TABLE_SCFRAMEWORKVERSI_SCPRODUCTVERS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS =

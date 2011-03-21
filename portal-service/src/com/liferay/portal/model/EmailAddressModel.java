@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.EmailAddressModelImpl
  * @generated
  */
-public interface EmailAddressModel extends BaseModel<EmailAddress> {
+public interface EmailAddressModel extends AuditedModel, BaseModel<EmailAddress> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

@@ -39,7 +39,8 @@ import java.util.Map;
  * @see com.liferay.portal.model.impl.LayoutRevisionModelImpl
  * @generated
  */
-public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
+public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

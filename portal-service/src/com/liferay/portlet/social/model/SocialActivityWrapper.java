@@ -28,6 +28,14 @@ public class SocialActivityWrapper implements SocialActivity {
 		_socialActivity = socialActivity;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialActivity.class;
+	}
+
+	public String getModelClassName() {
+		return SocialActivity.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social activity.
 	*

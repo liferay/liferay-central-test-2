@@ -28,6 +28,14 @@ public class ResourceActionWrapper implements ResourceAction {
 		_resourceAction = resourceAction;
 	}
 
+	public Class<?> getModelClass() {
+		return ResourceAction.class;
+	}
+
+	public String getModelClassName() {
+		return ResourceAction.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this resource action.
 	*

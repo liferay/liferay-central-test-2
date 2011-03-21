@@ -28,6 +28,14 @@ public class CountryWrapper implements Country {
 		_country = country;
 	}
 
+	public Class<?> getModelClass() {
+		return Country.class;
+	}
+
+	public String getModelClassName() {
+		return Country.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this country.
 	*

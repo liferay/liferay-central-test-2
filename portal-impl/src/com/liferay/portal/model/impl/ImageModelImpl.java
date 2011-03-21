@@ -115,6 +115,14 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Image.class;
+	}
+
+	public String getModelClassName() {
+		return Image.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Image"));
 

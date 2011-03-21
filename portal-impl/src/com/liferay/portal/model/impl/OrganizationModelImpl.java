@@ -125,6 +125,14 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Organization.class;
+	}
+
+	public String getModelClassName() {
+		return Organization.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_GROUPS_ORGS_NAME = com.liferay.portal.model.impl.GroupModelImpl.MAPPING_TABLE_GROUPS_ORGS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ORGS;
 	public static final String MAPPING_TABLE_USERS_ORGS_NAME = com.liferay.portal.model.impl.UserModelImpl.MAPPING_TABLE_USERS_ORGS_NAME;

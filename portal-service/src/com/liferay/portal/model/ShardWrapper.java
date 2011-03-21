@@ -28,6 +28,14 @@ public class ShardWrapper implements Shard {
 		_shard = shard;
 	}
 
+	public Class<?> getModelClass() {
+		return Shard.class;
+	}
+
+	public String getModelClassName() {
+		return Shard.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this shard.
 	*

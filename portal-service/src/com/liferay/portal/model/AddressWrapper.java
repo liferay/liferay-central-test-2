@@ -28,6 +28,14 @@ public class AddressWrapper implements Address {
 		_address = address;
 	}
 
+	public Class<?> getModelClass() {
+		return Address.class;
+	}
+
+	public String getModelClassName() {
+		return Address.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this address.
 	*

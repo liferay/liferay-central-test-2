@@ -28,6 +28,14 @@ public class GroupWrapper implements Group {
 		_group = group;
 	}
 
+	public Class<?> getModelClass() {
+		return Group.class;
+	}
+
+	public String getModelClassName() {
+		return Group.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this group.
 	*

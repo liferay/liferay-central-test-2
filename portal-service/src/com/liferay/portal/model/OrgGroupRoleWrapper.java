@@ -28,6 +28,14 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		_orgGroupRole = orgGroupRole;
 	}
 
+	public Class<?> getModelClass() {
+		return OrgGroupRole.class;
+	}
+
+	public String getModelClassName() {
+		return OrgGroupRole.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this org group role.
 	*

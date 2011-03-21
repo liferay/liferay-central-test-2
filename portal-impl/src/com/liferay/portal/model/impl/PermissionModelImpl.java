@@ -107,6 +107,14 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Permission.class;
+	}
+
+	public String getModelClassName() {
+		return Permission.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_GROUPS_PERMISSIONS_NAME = com.liferay.portal.model.impl.GroupModelImpl.MAPPING_TABLE_GROUPS_PERMISSIONS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_PERMISSIONS;
 	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_NAME = com.liferay.portal.model.impl.RoleModelImpl.MAPPING_TABLE_ROLES_PERMISSIONS_NAME;

@@ -28,6 +28,14 @@ public class DLFileRankWrapper implements DLFileRank {
 		_dlFileRank = dlFileRank;
 	}
 
+	public Class<?> getModelClass() {
+		return DLFileRank.class;
+	}
+
+	public String getModelClassName() {
+		return DLFileRank.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d l file rank.
 	*

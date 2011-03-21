@@ -28,6 +28,14 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 		_resourcePermission = resourcePermission;
 	}
 
+	public Class<?> getModelClass() {
+		return ResourcePermission.class;
+	}
+
+	public String getModelClassName() {
+		return ResourcePermission.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this resource permission.
 	*

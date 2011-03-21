@@ -28,6 +28,14 @@ public class DDMStructureWrapper implements DDMStructure {
 		_ddmStructure = ddmStructure;
 	}
 
+	public Class<?> getModelClass() {
+		return DDMStructure.class;
+	}
+
+	public String getModelClassName() {
+		return DDMStructure.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this d d m structure.
 	*

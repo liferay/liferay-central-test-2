@@ -126,6 +126,14 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Role.class;
+	}
+
+	public String getModelClassName() {
+		return Role.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_GROUPS_ROLES_NAME = com.liferay.portal.model.impl.GroupModelImpl.MAPPING_TABLE_GROUPS_ROLES_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES;
 	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_NAME = "Roles_Permissions";

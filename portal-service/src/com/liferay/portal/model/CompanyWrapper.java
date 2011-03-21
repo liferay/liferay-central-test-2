@@ -28,6 +28,14 @@ public class CompanyWrapper implements Company {
 		_company = company;
 	}
 
+	public Class<?> getModelClass() {
+		return Company.class;
+	}
+
+	public String getModelClassName() {
+		return Company.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this company.
 	*

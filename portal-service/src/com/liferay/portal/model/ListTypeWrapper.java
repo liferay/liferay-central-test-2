@@ -28,6 +28,14 @@ public class ListTypeWrapper implements ListType {
 		_listType = listType;
 	}
 
+	public Class<?> getModelClass() {
+		return ListType.class;
+	}
+
+	public String getModelClassName() {
+		return ListType.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this list type.
 	*

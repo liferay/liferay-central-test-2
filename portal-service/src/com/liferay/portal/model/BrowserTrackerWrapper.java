@@ -28,6 +28,14 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		_browserTracker = browserTracker;
 	}
 
+	public Class<?> getModelClass() {
+		return BrowserTracker.class;
+	}
+
+	public String getModelClassName() {
+		return BrowserTracker.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this browser tracker.
 	*

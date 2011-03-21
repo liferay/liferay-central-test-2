@@ -116,6 +116,14 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return AnnouncementsFlag.class;
+	}
+
+	public String getModelClassName() {
+		return AnnouncementsFlag.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.announcements.model.AnnouncementsFlag"));
 

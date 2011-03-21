@@ -28,6 +28,14 @@ public class RoleWrapper implements Role {
 		_role = role;
 	}
 
+	public Class<?> getModelClass() {
+		return Role.class;
+	}
+
+	public String getModelClassName() {
+		return Role.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this role.
 	*

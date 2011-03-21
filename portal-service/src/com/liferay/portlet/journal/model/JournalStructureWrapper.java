@@ -28,6 +28,14 @@ public class JournalStructureWrapper implements JournalStructure {
 		_journalStructure = journalStructure;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalStructure.class;
+	}
+
+	public String getModelClassName() {
+		return JournalStructure.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal structure.
 	*

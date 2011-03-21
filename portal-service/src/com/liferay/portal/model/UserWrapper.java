@@ -28,6 +28,14 @@ public class UserWrapper implements User {
 		_user = user;
 	}
 
+	public Class<?> getModelClass() {
+		return User.class;
+	}
+
+	public String getModelClassName() {
+		return User.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user.
 	*

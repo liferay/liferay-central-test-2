@@ -28,6 +28,14 @@ public class ResourceWrapper implements Resource {
 		_resource = resource;
 	}
 
+	public Class<?> getModelClass() {
+		return Resource.class;
+	}
+
+	public String getModelClassName() {
+		return Resource.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this resource.
 	*

@@ -73,6 +73,15 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialEquityGroupSetting"),
 			true);
+
+	public Class<?> getModelClass() {
+		return SocialEquityGroupSetting.class;
+	}
+
+	public String getModelClassName() {
+		return SocialEquityGroupSetting.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialEquityGroupSetting"));
 

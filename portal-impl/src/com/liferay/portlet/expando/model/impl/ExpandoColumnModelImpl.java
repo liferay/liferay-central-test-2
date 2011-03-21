@@ -113,6 +113,14 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return ExpandoColumn.class;
+	}
+
+	public String getModelClassName() {
+		return ExpandoColumn.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.expando.model.ExpandoColumn"));
 

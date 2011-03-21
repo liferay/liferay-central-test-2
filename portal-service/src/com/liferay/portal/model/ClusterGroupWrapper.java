@@ -28,6 +28,14 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		_clusterGroup = clusterGroup;
 	}
 
+	public Class<?> getModelClass() {
+		return ClusterGroup.class;
+	}
+
+	public String getModelClassName() {
+		return ClusterGroup.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this cluster group.
 	*

@@ -28,6 +28,14 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		_expandoRow = expandoRow;
 	}
 
+	public Class<?> getModelClass() {
+		return ExpandoRow.class;
+	}
+
+	public String getModelClassName() {
+		return ExpandoRow.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this expando row.
 	*

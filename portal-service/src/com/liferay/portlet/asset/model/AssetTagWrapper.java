@@ -28,6 +28,14 @@ public class AssetTagWrapper implements AssetTag {
 		_assetTag = assetTag;
 	}
 
+	public Class<?> getModelClass() {
+		return AssetTag.class;
+	}
+
+	public String getModelClassName() {
+		return AssetTag.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this asset tag.
 	*

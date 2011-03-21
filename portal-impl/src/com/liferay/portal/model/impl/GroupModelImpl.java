@@ -128,6 +128,14 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return Group.class;
+	}
+
+	public String getModelClassName() {
+		return Group.class.getName();
+	}
+
 	public static final String MAPPING_TABLE_GROUPS_ORGS_NAME = "Groups_Orgs";
 	public static final Object[][] MAPPING_TABLE_GROUPS_ORGS_COLUMNS = {
 			{ "groupId", Types.BIGINT },

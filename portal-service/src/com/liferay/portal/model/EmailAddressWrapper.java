@@ -28,6 +28,14 @@ public class EmailAddressWrapper implements EmailAddress {
 		_emailAddress = emailAddress;
 	}
 
+	public Class<?> getModelClass() {
+		return EmailAddress.class;
+	}
+
+	public String getModelClassName() {
+		return EmailAddress.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this email address.
 	*

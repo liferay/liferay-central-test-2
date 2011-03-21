@@ -28,6 +28,14 @@ public class UserTrackerWrapper implements UserTracker {
 		_userTracker = userTracker;
 	}
 
+	public Class<?> getModelClass() {
+		return UserTracker.class;
+	}
+
+	public String getModelClassName() {
+		return UserTracker.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user tracker.
 	*

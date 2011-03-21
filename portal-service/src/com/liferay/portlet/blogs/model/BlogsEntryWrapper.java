@@ -28,6 +28,14 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		_blogsEntry = blogsEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return BlogsEntry.class;
+	}
+
+	public String getModelClassName() {
+		return BlogsEntry.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this blogs entry.
 	*

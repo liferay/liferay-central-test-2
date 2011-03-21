@@ -28,6 +28,14 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		_webDAVProps = webDAVProps;
 	}
 
+	public Class<?> getModelClass() {
+		return WebDAVProps.class;
+	}
+
+	public String getModelClassName() {
+		return WebDAVProps.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this web d a v props.
 	*

@@ -110,6 +110,14 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return models;
 	}
 
+	public Class<?> getModelClass() {
+		return DDMStructureLink.class;
+	}
+
+	public String getModelClassName() {
+		return DDMStructureLink.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink"));
 

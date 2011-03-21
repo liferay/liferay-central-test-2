@@ -28,6 +28,14 @@ public class UserGroupWrapper implements UserGroup {
 		_userGroup = userGroup;
 	}
 
+	public Class<?> getModelClass() {
+		return UserGroup.class;
+	}
+
+	public String getModelClassName() {
+		return UserGroup.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user group.
 	*

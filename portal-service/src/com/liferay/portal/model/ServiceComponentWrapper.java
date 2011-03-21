@@ -28,6 +28,14 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		_serviceComponent = serviceComponent;
 	}
 
+	public Class<?> getModelClass() {
+		return ServiceComponent.class;
+	}
+
+	public String getModelClassName() {
+		return ServiceComponent.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this service component.
 	*

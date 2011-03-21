@@ -29,6 +29,14 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		_workflowInstanceLink = workflowInstanceLink;
 	}
 
+	public Class<?> getModelClass() {
+		return WorkflowInstanceLink.class;
+	}
+
+	public String getModelClassName() {
+		return WorkflowInstanceLink.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this workflow instance link.
 	*

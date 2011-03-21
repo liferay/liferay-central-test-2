@@ -94,6 +94,15 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
 			true);
+
+	public Class<?> getModelClass() {
+		return DLFileVersion.class;
+	}
+
+	public String getModelClassName() {
+		return DLFileVersion.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersion"));
 

@@ -28,6 +28,14 @@ public class RatingsStatsWrapper implements RatingsStats {
 		_ratingsStats = ratingsStats;
 	}
 
+	public Class<?> getModelClass() {
+		return RatingsStats.class;
+	}
+
+	public String getModelClassName() {
+		return RatingsStats.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this ratings stats.
 	*

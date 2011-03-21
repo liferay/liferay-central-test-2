@@ -69,6 +69,15 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.VirtualHost"),
 			true);
+
+	public Class<?> getModelClass() {
+		return VirtualHost.class;
+	}
+
+	public String getModelClassName() {
+		return VirtualHost.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.VirtualHost"));
 

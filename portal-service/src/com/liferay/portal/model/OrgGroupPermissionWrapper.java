@@ -28,6 +28,14 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		_orgGroupPermission = orgGroupPermission;
 	}
 
+	public Class<?> getModelClass() {
+		return OrgGroupPermission.class;
+	}
+
+	public String getModelClassName() {
+		return OrgGroupPermission.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this org group permission.
 	*

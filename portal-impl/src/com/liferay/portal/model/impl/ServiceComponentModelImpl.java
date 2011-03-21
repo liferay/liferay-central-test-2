@@ -72,6 +72,15 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ServiceComponent"),
 			true);
+
+	public Class<?> getModelClass() {
+		return ServiceComponent.class;
+	}
+
+	public String getModelClassName() {
+		return ServiceComponent.class.getName();
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ServiceComponent"));
 

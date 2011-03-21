@@ -16,6 +16,7 @@ package com.liferay.portlet.ratings.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -38,7 +39,7 @@ import java.util.Date;
  * @see com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl
  * @generated
  */
-public interface RatingsEntryModel extends BaseModel<RatingsEntry> {
+public interface RatingsEntryModel extends AuditedModel, BaseModel<RatingsEntry> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

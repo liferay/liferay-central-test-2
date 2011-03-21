@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.ContactModelImpl
  * @generated
  */
-public interface ContactModel extends BaseModel<Contact> {
+public interface ContactModel extends AuditedModel, BaseModel<Contact> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

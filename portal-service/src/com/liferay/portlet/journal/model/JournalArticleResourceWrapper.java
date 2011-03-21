@@ -29,6 +29,14 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		_journalArticleResource = journalArticleResource;
 	}
 
+	public Class<?> getModelClass() {
+		return JournalArticleResource.class;
+	}
+
+	public String getModelClassName() {
+		return JournalArticleResource.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this journal article resource.
 	*

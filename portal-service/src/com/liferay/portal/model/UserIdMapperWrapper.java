@@ -28,6 +28,14 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		_userIdMapper = userIdMapper;
 	}
 
+	public Class<?> getModelClass() {
+		return UserIdMapper.class;
+	}
+
+	public String getModelClassName() {
+		return UserIdMapper.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this user ID mapper.
 	*

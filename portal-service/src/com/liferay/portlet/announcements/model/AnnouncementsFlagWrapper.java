@@ -28,6 +28,14 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		_announcementsFlag = announcementsFlag;
 	}
 
+	public Class<?> getModelClass() {
+		return AnnouncementsFlag.class;
+	}
+
+	public String getModelClassName() {
+		return AnnouncementsFlag.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this announcements flag.
 	*

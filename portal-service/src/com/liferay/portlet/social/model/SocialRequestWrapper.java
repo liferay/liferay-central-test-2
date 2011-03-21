@@ -28,6 +28,14 @@ public class SocialRequestWrapper implements SocialRequest {
 		_socialRequest = socialRequest;
 	}
 
+	public Class<?> getModelClass() {
+		return SocialRequest.class;
+	}
+
+	public String getModelClassName() {
+		return SocialRequest.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this social request.
 	*

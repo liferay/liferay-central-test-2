@@ -28,6 +28,14 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		_passwordTracker = passwordTracker;
 	}
 
+	public Class<?> getModelClass() {
+		return PasswordTracker.class;
+	}
+
+	public String getModelClassName() {
+		return PasswordTracker.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this password tracker.
 	*

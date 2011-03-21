@@ -28,6 +28,14 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		_expandoTable = expandoTable;
 	}
 
+	public Class<?> getModelClass() {
+		return ExpandoTable.class;
+	}
+
+	public String getModelClassName() {
+		return ExpandoTable.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this expando table.
 	*

@@ -29,6 +29,14 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		_workflowDefinitionLink = workflowDefinitionLink;
 	}
 
+	public Class<?> getModelClass() {
+		return WorkflowDefinitionLink.class;
+	}
+
+	public String getModelClassName() {
+		return WorkflowDefinitionLink.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this workflow definition link.
 	*

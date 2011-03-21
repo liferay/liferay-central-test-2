@@ -28,6 +28,14 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		_mbDiscussion = mbDiscussion;
 	}
 
+	public Class<?> getModelClass() {
+		return MBDiscussion.class;
+	}
+
+	public String getModelClassName() {
+		return MBDiscussion.class.getName();
+	}
+
 	/**
 	* Gets the primary key of this message boards discussion.
 	*
