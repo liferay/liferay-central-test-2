@@ -27,7 +27,7 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 </liferay-portlet:renderURL>
 
 <aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
-	<liferay-portlet:renderURLParams varImpl="portletURL" />
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 	<aui:input name="deleteEntryIds" type="hidden" />
