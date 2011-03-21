@@ -1053,16 +1053,16 @@ public class BaseDeployer implements Deployer {
 	public String getInvokerFilterContent(double webXmlVersion) {
 		StringBundler sb = new StringBundler(4);
 
-		sb.append(getInvokerFilterContent("ERROR", webXmlVersion));
-		sb.append(getInvokerFilterContent("FORWARD", webXmlVersion));
-		sb.append(getInvokerFilterContent("INCLUDE", webXmlVersion));
-		sb.append(getInvokerFilterContent("REQUEST", webXmlVersion));
+		sb.append(getInvokerFilterContent(webXmlVersion, "ERROR"));
+		sb.append(getInvokerFilterContent(webXmlVersion, "FORWARD"));
+		sb.append(getInvokerFilterContent(webXmlVersion, "INCLUDE"));
+		sb.append(getInvokerFilterContent(webXmlVersion, "REQUEST"));
 
 		return sb.toString();
 	}
 
-	public String getInvokerFilterContent
-		(String dispatcher, double webXmlVersion) {
+	public String getInvokerFilterContent(
+		double webXmlVersion, String dispatcher) {
 
 		StringBundler sb = new StringBundler(23);
 
@@ -1092,6 +1092,7 @@ public class BaseDeployer implements Deployer {
 			sb.append(dispatcher);
 			sb.append("</dispatcher>");
 		}
+
 		sb.append("</filter-mapping>");
 
 		return sb.toString();
@@ -1481,7 +1482,7 @@ public class BaseDeployer implements Deployer {
 	}
 
 	public String updateLiferayWebXml(
-		File srcFile, String webXmlContent, double webXmlVersion)
+			double webXmlVersion, File srcFile, String webXmlContent)
 		throws Exception {
 
 		webXmlContent = WebXMLBuilder.organizeWebXML(webXmlContent);
@@ -1510,9 +1511,10 @@ public class BaseDeployer implements Deployer {
 		FileUtil.write(
 			srcFile + "/WEB-INF/liferay-web.xml", liferayWebXmlContent);
 
-		webXmlContent = webXmlContent.substring(0, x) +
+		webXmlContent =
+			webXmlContent.substring(0, x) +
 				getInvokerFilterContent(webXmlVersion) +
-				webXmlContent.substring(y + 17);
+					webXmlContent.substring(y + 17);
 
 		return webXmlContent;
 	}
@@ -1562,7 +1564,7 @@ public class BaseDeployer implements Deployer {
 
 		// Update liferay-web.xml
 
-		newContent = updateLiferayWebXml(srcFile, newContent, webXmlVersion);
+		newContent = updateLiferayWebXml(webXmlVersion, srcFile, newContent);
 
 		// Update web.xml
 
