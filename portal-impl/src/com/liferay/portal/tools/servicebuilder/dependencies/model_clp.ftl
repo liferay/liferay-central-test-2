@@ -32,6 +32,14 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 	public ${entity.name}Clp() {
 	}
 
+	public Class<?> getModelClass() {
+		return ${entity.name}.class;
+	}
+
+	public String getModelClassName() {
+		return ${entity.name}.class.getName();
+	}
+
 	public ${entity.PKClassName} getPrimaryKey() {
 		<#if entity.hasCompoundPK()>
 			return new ${entity.PKClassName}(
