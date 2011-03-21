@@ -114,17 +114,15 @@ AUI().add(
 					_handleKeyDown: function(event) {
 						var instance = this;
 
-						var charCode = event.charCode;
-
 						var handler;
 
-						if (charCode == 37) {
+						if (event.isKey('LEFT')) {
 							handler = '_handleLeft';
 						}
-						else if (charCode == 39) {
+						else if (event.isKey('RIGHT')) {
 							handler = '_handleRight';
 						}
-						else if (charCode == 9 || charCode == 27) {
+						else if (event.isKey('TAB') || event.isKey('ESC')) {
 							handler = '_handleExit';
 						}
 

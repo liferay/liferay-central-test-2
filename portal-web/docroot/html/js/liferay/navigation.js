@@ -314,7 +314,7 @@ AUI().add(
 					_handleKeyDown: function(event) {
 						var instance = this;
 
-						if (event.charCode == 46) {
+						if (event.isKey('DELETE')) {
 							instance._removePage(event);
 						}
 					},
