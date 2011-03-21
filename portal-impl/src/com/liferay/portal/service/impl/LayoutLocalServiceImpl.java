@@ -1227,7 +1227,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		if (firstLayout) {
-			validateFirstLayout(type, hidden);
+			validateFirstLayout(type);
 		}
 
 		if (!PortalUtil.isLayoutParentable(type)) {
@@ -1242,15 +1242,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		validateFriendlyURL(groupId, privateLayout, layoutId, friendlyURL);
 	}
 
-	protected void validateFirstLayout(String type, boolean hidden)
+	protected void validateFirstLayout(String type)
 		throws PortalException {
 
 		if (!PortalUtil.isLayoutFirstPageable(type)) {
 			throw new LayoutTypeException(LayoutTypeException.FIRST_LAYOUT);
-		}
-
-		if (hidden) {
-			throw new LayoutHiddenException();
 		}
 	}
 
@@ -1376,8 +1372,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					Layout secondLayout = layouts.get(1);
 
 					try {
-						validateFirstLayout(
-							secondLayout.getType(), secondLayout.getHidden());
+						validateFirstLayout(secondLayout.getType());
 					}
 					catch (LayoutHiddenException lhe) {
 						throw new LayoutParentLayoutIdException(
