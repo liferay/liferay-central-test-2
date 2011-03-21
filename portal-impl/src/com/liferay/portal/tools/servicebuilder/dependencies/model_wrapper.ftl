@@ -19,6 +19,14 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 		_${entity.varName} = ${entity.varName};
 	}
 
+	public Class<?> getModelClass() {
+		return ${entity.name}.class;
+	}
+
+	public String getModelClassName() {
+		return ${entity.name}.class.getName();
+	}
+
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap)>
 			${serviceBuilder.getJavadocComment(method)}
