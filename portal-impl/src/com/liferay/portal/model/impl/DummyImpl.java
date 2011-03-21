@@ -43,4 +43,12 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 		return 0;
 	}
 
+	public Class<?> getModelClass() {
+		return Dummy.class;
+	}
+
+	public String getModelClassName() {
+		return Dummy.class.getName();
+	}
+
 }
