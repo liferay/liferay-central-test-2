@@ -332,21 +332,22 @@ public class LayoutImporter {
 		LayoutSetLocalServiceUtil.updateLookAndFeel(
 			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 
-		// Read categories, comments, locks, permissions, ratings, and tags to
-		// make them available to the data handlers through the context
+		// Read asset categories, asset tags, comments, locks, permissions, and
+		// ratings entries to make them available to the data handlers through
+		// the context
 
 		if (importPermissions) {
 			_permissionImporter.readPortletDataPermissions(context);
 		}
 
 		if (importCategories) {
-			_portletImporter.readCategories(context);
+			_portletImporter.readAssetCategories(context);
 		}
 
+		_portletImporter.readAssetTags(context, rootElement);
 		_portletImporter.readComments(context, rootElement);
 		_portletImporter.readLocks(context, rootElement);
-		_portletImporter.readRatings(context, rootElement);
-		_portletImporter.readTags(context, rootElement);
+		_portletImporter.readRatingsEntries(context, rootElement);
 
 		// Layouts
 
