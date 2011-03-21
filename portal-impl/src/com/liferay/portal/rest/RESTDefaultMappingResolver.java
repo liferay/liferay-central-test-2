@@ -49,7 +49,14 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 		String path = restAnnotation.value().trim();
 
 		if (path.length() == 0) {
-			path = _methodNameToPath(method);
+			if (_smartMethodNames) {
+				path = _methodNameToPath(method);
+			}
+			else {
+				path = _nameToPathChunk(method.getName());
+				path += StringPool.SLASH;
+				path += _buildParametersChunks(method);
+			}
 		}
 
 		if (path.endsWith(StringPool.SLASH)) {
@@ -72,10 +79,22 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 					pathFromClass = StringPool.SLASH + pathFromClass;
 				}
 
+				if (_fixDuplicateStartingChunks) {
+					if (path.startsWith(pathFromClass + StringPool.SLASH)) {
+						pathFromClass = StringPool.BLANK;
+					}
+				}
+
 				path = pathFromClass + path;
 			}
 		}
 		return path;
+	}
+
+	public void setFixDuplicateStartingChunks(
+		boolean fixDuplicateStartingChunks) {
+
+		this._fixDuplicateStartingChunks = fixDuplicateStartingChunks;
 	}
 
 	public void setIncludeParamNames(boolean includeParamNames) {
@@ -84,6 +103,10 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 
 	public void setParamNameValueSeparator(char paramNameValueSeparator) {
 		this._paramNameValueSeparator = paramNameValueSeparator;
+	}
+
+	public void setSmartMethodNames(boolean smartMethodNames) {
+		this._smartMethodNames = smartMethodNames;
 	}
 
 	private String _buildParametersChunks(Method method) {
@@ -263,7 +286,9 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 		return name;
 	}
 
+	private boolean _fixDuplicateStartingChunks = true;
 	private boolean _includeParamNames = true;
 	private char _paramNameValueSeparator = '/';
+	private boolean _smartMethodNames = true;
 
 }
