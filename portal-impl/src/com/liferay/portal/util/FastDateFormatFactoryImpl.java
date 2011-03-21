@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.FastDateFormatConstants;
 import com.liferay.portal.kernel.util.FastDateFormatFactory;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -33,23 +34,71 @@ import org.apache.commons.lang.time.FastDateFormat;
  */
 public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 
-	public Format getDate(Locale locale) {
-		return getDate(locale, null);
-	}
-
-	public Format getDate(Locale locale, TimeZone timeZone) {
-		String key = getKey(locale, timeZone);
+	public Format getDate(int style, Locale locale, TimeZone timeZone) {
+		String key = getKey(style, locale, timeZone);
 
 		Format format = _dateFormats.get(key);
 
 		if (format == null) {
-			format = FastDateFormat.getDateInstance(
-				FastDateFormat.SHORT, timeZone, locale);
+			format = FastDateFormat.getDateInstance(style, timeZone, locale);
 
 			_dateFormats.put(key, format);
 		}
 
 		return format;
+	}
+
+	public Format getDateTime(
+		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone) {
+
+		String key = getKey(dateStyle, timeStyle, locale, timeZone);
+
+		Format format = _dateTimeFormats.get(key);
+
+		if (format == null) {
+			format = FastDateFormat.getDateTimeInstance(
+				dateStyle, timeStyle, timeZone, locale);
+
+			_dateTimeFormats.put(key, format);
+		}
+
+		return format;
+	}
+
+	public Format getTime(int style, Locale locale, TimeZone timeZone) {
+		String key = getKey(style, locale, timeZone);
+
+		Format format = _timeFormats.get(key);
+
+		if (format == null) {
+			format = FastDateFormat.getTimeInstance(style, timeZone, locale);
+
+			_timeFormats.put(key, format);
+		}
+
+		return format;
+	}
+
+	protected String getKey(Object... arguments) {
+		StringBundler sb = new StringBundler(arguments.length * 2 - 1);
+
+		for (int i = 0; i < arguments.length; i++) {
+			sb.append(arguments[i]);
+
+			if ((i + 1) < arguments.length) {
+				sb.append(StringPool.UNDERLINE);
+			}
+		}
+
+		return sb.toString();
+	}
+
+	public Format getDate(Locale locale) {
+		return getDate(locale, null);
+	}
+
+	public Format getDate(Locale locale, TimeZone timeZone) {
+		return getDate(FastDateFormatConstants.SHORT, locale, timeZone);
 	}
 
 	public Format getDate(TimeZone timeZone) {
@@ -61,18 +110,9 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	public Format getDateTime(Locale locale, TimeZone timeZone) {
-		String key = getKey(locale, timeZone);
-
-		Format format = _dateTimeFormats.get(key);
-
-		if (format == null) {
-			format = FastDateFormat.getDateTimeInstance(
-				FastDateFormat.SHORT, FastDateFormat.SHORT, timeZone, locale);
-
-			_dateTimeFormats.put(key, format);
-		}
-
-		return format;
+		return getDateTime(
+			FastDateFormatConstants.SHORT, FastDateFormatConstants.SHORT,
+			locale, timeZone);
 	}
 
 	public Format getDateTime(TimeZone timeZone) {
@@ -112,39 +152,11 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 	}
 
 	public Format getTime(Locale locale, TimeZone timeZone) {
-		String key = getKey(locale, timeZone);
-
-		Format format = _timeFormats.get(key);
-
-		if (format == null) {
-			format = FastDateFormat.getTimeInstance(
-				FastDateFormat.SHORT, timeZone, locale);
-
-			_timeFormats.put(key, format);
-		}
-
-		return format;
+		return getTime(FastDateFormatConstants.SHORT, locale, timeZone);
 	}
 
 	public Format getTime(TimeZone timeZone) {
 		return getTime(LocaleUtil.getDefault(), timeZone);
-	}
-
-	protected String getKey(Locale locale, TimeZone timeZone) {
-		return String.valueOf(locale).concat(StringPool.UNDERLINE).concat(
-			String.valueOf(timeZone));
-	}
-
-	protected String getKey(String pattern, Locale locale, TimeZone timeZone) {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(pattern);
-		sb.append(StringPool.UNDERLINE);
-		sb.append(String.valueOf(locale));
-		sb.append(StringPool.UNDERLINE);
-		sb.append(String.valueOf(timeZone));
-
-		return sb.toString();
 	}
 
 	private Map<String, Format> _dateFormats =

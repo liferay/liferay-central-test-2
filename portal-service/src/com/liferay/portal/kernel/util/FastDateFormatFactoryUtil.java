@@ -24,6 +24,21 @@ import java.util.TimeZone;
  */
 public class FastDateFormatFactoryUtil {
 
+	public static Format getDate(int style, Locale locale, TimeZone timeZone) {
+		return getFastDateFormatFactory().getDate(style, locale, timeZone);
+	}
+
+	public static Format getDateTime(
+		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone) {
+
+		return getFastDateFormatFactory().getDateTime(
+			dateStyle, timeStyle, locale, timeZone);
+	}
+
+	public static Format getTime(int style, Locale locale, TimeZone timeZone) {
+		return getFastDateFormatFactory().getTime(style, locale, timeZone);
+	}
+
 	public static Format getDate(Locale locale) {
 		return getFastDateFormatFactory().getDate(locale);
 	}
