@@ -6,7 +6,9 @@ package ${packagePath}.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -30,7 +32,18 @@ import java.util.Map;
  * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
-public interface ${entity.name}Model extends BaseModel<${entity.name}> {
+public interface ${entity.name}Model extends
+	<#if entity.isAuditedModel() && !entity.isGroupedModel()>
+		AuditedModel,
+	</#if>
+
+	BaseModel<${entity.name}>
+
+	<#if entity.isGroupedModel()>
+		, GroupedModel
+	</#if>
+
+	{
 
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -414,6 +414,18 @@ public class Entity {
 		return _uuid;
 	}
 
+	public boolean isAuditedModel() {
+		if (hasColumn("companyId") && hasColumn("createDate") &&
+			hasColumn("modifiedDate") && hasColumn("userId") &&
+			hasColumn("userName")) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isCacheEnabled() {
 		return _cacheEnabled;
 	}
@@ -438,6 +450,19 @@ public class Entity {
 
 	public boolean isDefaultTXManager() {
 		if (_txManager.equals(DEFAULT_TX_MANAGER)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isGroupedModel() {
+		String pkVarName = getPKVarName();
+
+		if (isAuditedModel() && hasColumn("groupId") &&
+			!pkVarName.equals("groupId")) {
+
 			return true;
 		}
 		else {

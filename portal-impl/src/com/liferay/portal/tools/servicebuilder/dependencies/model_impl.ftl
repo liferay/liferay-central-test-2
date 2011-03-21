@@ -191,6 +191,14 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 	</#if>
 
+	public Class<?> getModelClass() {
+		return ${entity.name}.class;
+	}
+
+	public String getModelClassName() {
+		return ${entity.name}.class.getName();
+	}
+
 	<#list entity.columnList as column>
 		<#if column.mappingTable??>
 			<#assign entityShortName = stringUtil.shorten(entity.name, 9, "")>

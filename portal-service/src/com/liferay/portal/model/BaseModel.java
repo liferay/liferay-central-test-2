@@ -28,6 +28,10 @@ import java.io.Serializable;
  */
 public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 
+	public Class<?> getModelClass();
+
+	public String getModelClassName();
+
 	/**
 	 * Determines if this model instance does not yet exist in the database.
 	 *
