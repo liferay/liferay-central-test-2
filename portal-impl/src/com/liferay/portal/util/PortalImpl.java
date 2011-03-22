@@ -2816,19 +2816,19 @@ public class PortalImpl implements Portal {
 	}
 
 	public long getScopeGroupId(Layout layout, String portletId) {
+		if (layout == null) {
+			return 0;
+		}
+
+		if (Validator.isNull(portletId)) {
+			return layout.getGroupId();
+		}
+
 		boolean strict = PortletPreferencesThreadLocal.isStrict();
 
 		PortletPreferencesThreadLocal.setStrict(true);
 
 		try {
-			if (layout == null) {
-				return 0;
-			}
-
-			if (Validator.isNull(portletId)) {
-				return layout.getGroupId();
-			}
-
 			PortletPreferences portletSetup =
 				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 					layout, portletId);
