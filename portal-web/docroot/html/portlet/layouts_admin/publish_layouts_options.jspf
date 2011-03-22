@@ -242,7 +242,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
 												<li class="<%= renderResponse.getNamespace() %>handler-control">
-													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
+													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup" name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
 												<c:if test="<%= showRenderControls %>">
