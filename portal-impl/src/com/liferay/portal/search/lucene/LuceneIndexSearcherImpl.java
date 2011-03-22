@@ -260,6 +260,10 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				end = length;
 			}
 
+			if (start > end) {
+				start = end;
+			}
+
 			int subsetTotal = end - start;
 
 			if (subsetTotal > PropsValues.INDEX_SEARCH_LIMIT) {
