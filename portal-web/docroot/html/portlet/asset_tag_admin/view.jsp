@@ -67,7 +67,8 @@
 <aui:script use="liferay-tags-admin">
 	new Liferay.Portlet.AssetTagsAdmin(
 		{
-			portletId: '<%= portletDisplay.getId() %>'
+			portletId: '<%= portletDisplay.getId() %>',
+			scopeGroupId: '<%= themeDisplay.getScopeGroupId() %>'
 		}
 	);
 </aui:script>

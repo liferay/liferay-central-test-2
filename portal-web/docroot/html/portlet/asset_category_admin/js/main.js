@@ -65,6 +65,7 @@ AUI().add(
 						var childrenContainer = A.one(instance._categoryContainerSelector);
 
 						instance.portletId = config.portletId;
+						instance.scopeGroupId = config.scopeGroupId;
 						instance._prefixedPortletId = '_' + config.portletId + '_';
 
 						instance._container = A.one('.vocabulary-container');
@@ -471,6 +472,8 @@ AUI().add(
 								}
 							}
 						}
+
+						url += '&doAsGroupId=' + instance.scopeGroupId;
 
 						return url;
 					},

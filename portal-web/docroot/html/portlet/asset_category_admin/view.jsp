@@ -91,7 +91,8 @@
 <aui:script use="liferay-category-admin">
 	new Liferay.Portlet.AssetCategoryAdmin(
 		{
-			portletId: '<%= portletDisplay.getId() %>'
+			portletId: '<%= portletDisplay.getId() %>',
+			scopeGroupId: '<%= themeDisplay.getScopeGroupId() %>'
 		}
 	);
 </aui:script>
