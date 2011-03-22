@@ -25,7 +25,7 @@ import com.mulesoft.tcat.DeployerFactory;
 import com.mulesoft.tcat.DeploymentVersion;
 import com.mulesoft.tcat.Server;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContext
 
 /**
  * This script replaces the Tcat Deployer and DeployerFactory with the
@@ -51,7 +51,8 @@ public class LiferayDeployer implements Deployer {
 			deployableFileName.contains("-layouttpl") ||
 			deployableFileName.contains("-portlet") ||
 			deployableFileName.contains("-theme") ||
-			deployableFileName.contains("-web")) {
+			deployableFileName.contains("-web") ||
+			deployableFileName.contains("ROOT.war")) {
 
 			println("Deploying Liferay module: " + deployableFileName);
 
@@ -65,11 +66,20 @@ public class LiferayDeployer implements Deployer {
 
             name = name.substring(0, name.lastIndexOf(".war") + 4);
 
-			_fileService.upload("/deploy/" + name, inputStream);
+			if (deployableFileName.contains("ROOT.war")) {
+				_fileService.upload("/webapps/" + name, inputStream);
+			}
+			else {
+				_fileService.upload("/deploy/" + name, inputStream);
+			}
 
 			println(
 				"Completed deployment Liferay module: " + deployableFileName);
         }
+		else if (deployableFileName.contains("ROOT.war")) {
+
+			_deployer.deploy(deployable);
+		}
 		else {
             _deployer.deploy(deployable);
         }
