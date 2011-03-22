@@ -229,8 +229,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				runSQL(
 					"update DLFileVersion set fileEntryId = " + fileEntryId +
-						", mimeType = '" + mimeType + "' where fileVersionId " +
-							"= " + fileVersionId);
+						", mimeType = '" + mimeType +
+							"' where fileVersionId = " + fileVersionId);
 			}
 		}
 		finally {
