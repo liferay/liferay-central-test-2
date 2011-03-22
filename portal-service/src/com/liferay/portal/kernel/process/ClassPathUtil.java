@@ -71,28 +71,55 @@ public class ClassPathUtil {
 	private static String _buildClassPath(
 		ClassLoader classloader, String className) {
 
-		String path = StringUtil.replace(
+		String pathOfClass = StringUtil.replace(
 			className, CharPool.PERIOD, CharPool.SLASH);
 
-		path = path.concat(".class");
+		pathOfClass = pathOfClass.concat(".class");
 
-		URL url = classloader.getResource(path);
+		URL url = classloader.getResource(pathOfClass);
 
-		path = URLCodec.decodeURL(url.getPath());
+		String path = URLCodec.decodeURL(url.getPath());
+
+		File dir = null;
+
+		File classesDir = null;
 
 		int pos = -1;
 
 		if (!path.startsWith("file:") ||
 			((pos = path.indexOf(CharPool.EXCLAMATION)) == -1)) {
 
-			_log.error("Class " + className + " is not loaded from a JAR file");
+			if (!path.endsWith(pathOfClass)) {
+				_log.error(
+					"Class " + className + " is not loaded from a JAR file");
 
-			return StringPool.BLANK;
+				return StringPool.BLANK;
+			}
+
+			String classesDirName =
+				path.substring(0, path.length() - pathOfClass.length());
+
+			classesDir = new File(classesDirName);
+
+			if (!classesDirName.endsWith("/WEB-INF/classes/")) {
+				_log.error("Class " + className + " is not loaded from a " +
+					"standard location (/WEB-INF/classes)");
+
+				return StringPool.BLANK;
+			}
+
+			String libDirName = classesDirName.substring(
+				0, classesDirName.length() - "classes/".length());
+
+			libDirName += "/lib";
+
+			dir = new File(libDirName);
 		}
+		else {
+			pos = path.lastIndexOf(CharPool.SLASH, pos);
 
-		pos = path.lastIndexOf(CharPool.SLASH, pos);
-
-		File dir = new File(path.substring("file:".length(), pos));
+			dir = new File(path.substring("file:".length(), pos));
+		}
 
 		if (!dir.isDirectory()) {
 			_log.error(dir.toString() + " is not a directory");
@@ -102,10 +129,15 @@ public class ClassPathUtil {
 
 		File[] files = dir.listFiles();
 
-		StringBundler sb = new StringBundler(files.length * 2);
+		StringBundler sb = new StringBundler(files.length * 2 + 2);
 
 		for (File file : files) {
 			sb.append(file.getAbsolutePath());
+			sb.append(File.pathSeparator);
+		}
+
+		if (classesDir != null && classesDir.isDirectory()) {
+			sb.append(classesDir.getAbsolutePath());
 			sb.append(File.pathSeparator);
 		}
 
