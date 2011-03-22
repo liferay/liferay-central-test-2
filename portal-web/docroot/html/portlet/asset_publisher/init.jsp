@@ -210,7 +210,11 @@ boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("showA
 
 boolean defaultAssetPublisher = false;
 
-if (layout.getTypeSettingsProperties().getProperty("default-asset-publisher", StringPool.BLANK).equals(portletResource)) {
+UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+
+String defaultAssetPublisherPortletId = typeSettingsProperties.getProperty("default-asset-publisher-portlet-id", StringPool.BLANK);
+
+if (defaultAssetPublisherPortletId.equals(portletResource)) {
 	defaultAssetPublisher = true;
 }
 

@@ -213,22 +213,24 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		boolean defaultAssetPublisher = ParamUtil.getBoolean(
 			actionRequest, "defaultAssetPublisher");
 
-		if (defaultAssetPublisher) {
-			String portletResource = ParamUtil.getString(
-				actionRequest, "portletResource");
-
-			Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
-			UnicodeProperties typeSettingsProperties =
-				layout.getTypeSettingsProperties();
-
-			typeSettingsProperties.setProperty(
-				"default-asset-publisher", portletResource);
-
-			layout = LayoutServiceUtil.updateLayout(
-				layout.getGroupId(), layout.isPrivateLayout(),
-				layout.getLayoutId(), layout.getTypeSettings());
+		if (!defaultAssetPublisher) {
+			return;
 		}
+
+		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			"default-asset-publisher-portlet-id", portletResource);
+
+		layout = LayoutServiceUtil.updateLayout(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			layout.getLayoutId(), layout.getTypeSettings());
 	}
 
 	protected void updateDisplaySettings(ActionRequest actionRequest)
