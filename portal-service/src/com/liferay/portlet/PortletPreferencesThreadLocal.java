@@ -31,6 +31,6 @@ public class PortletPreferencesThreadLocal {
 
 	private static ThreadLocal<Boolean> _strict =
 		new InitialThreadLocal<Boolean>(
-			PortletPreferencesThreadLocal.class + "._strict", true);
+			PortletPreferencesThreadLocal.class + "._strict", false);
 
 }
