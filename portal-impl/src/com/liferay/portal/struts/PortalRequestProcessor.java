@@ -569,15 +569,16 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				_log.error(e, e);
 			}
 
-			String queryString = request.getQueryString();
+			if (Validator.isNull(fullPath)) {
+				String queryString = request.getQueryString();
 
-			if (Validator.isNull(fullPath) &&
-				Validator.isNotNull(queryString)) {
-
-				fullPath = path.concat(StringPool.QUESTION).concat(queryString);
-			}
-			else {
-				fullPath = path;
+				if (Validator.isNotNull(queryString)) {
+					fullPath = path.concat(StringPool.QUESTION).concat(
+						queryString);
+				}
+				else {
+					fullPath = path;
+				}
 			}
 
 			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
