@@ -66,6 +66,7 @@ AUI().add(
 
 						instance.portletId = config.portletId;
 						instance.scopeGroupId = config.scopeGroupId;
+
 						instance._prefixedPortletId = '_' + config.portletId + '_';
 
 						instance._container = A.one('.vocabulary-container');
