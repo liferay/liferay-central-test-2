@@ -126,7 +126,7 @@ public class PasswordPolicyLocalServiceImpl
 
 			addPasswordPolicy(
 				defaultUserId, true, defaultPasswordPolicyName,
-				defaultPasswordPolicyName, true, false, 0, false, true, 0, 6,
+				defaultPasswordPolicyName, true, true, 0, false, true, 0, 6,
 				0, 1, 0, 1, false, 6, false, 8640000, 86400, 0, false, 3, 0,
 				600, 86400);
 		}
