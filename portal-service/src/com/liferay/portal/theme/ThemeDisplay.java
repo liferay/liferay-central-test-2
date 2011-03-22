@@ -376,11 +376,17 @@ public class ThemeDisplay implements Serializable {
 		for (String key : themeSettings.keySet()) {
 			ThemeSetting themeSetting = themeSettings.get(key);
 
+			String value = null;
+
 			if (themeSetting.isConfigurable()) {
-				properties.put(key, getThemeSetting(key));
+				value = getThemeSetting(key);
 			}
 			else {
-				properties.put(key, themeSetting.getValue());
+				value = themeSetting.getValue();
+			}
+
+			if (value != null) {
+				properties.put(key, value);
 			}
 		}
 
