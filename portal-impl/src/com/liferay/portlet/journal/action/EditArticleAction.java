@@ -451,9 +451,6 @@ public class EditArticleAction extends PortletAction {
 		String defaultLanguageId = ParamUtil.getString(
 			uploadRequest, "defaultLanguageId");
 
-		String layoutUuid =
-			ParamUtil.getString(uploadRequest, "defaultLandingPage");
-
 		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 
 		String toLanguageId = ParamUtil.getString(
@@ -482,6 +479,7 @@ public class EditArticleAction extends PortletAction {
 		String type = ParamUtil.getString(uploadRequest, "type");
 		String structureId = ParamUtil.getString(uploadRequest, "structureId");
 		String templateId = ParamUtil.getString(uploadRequest, "templateId");
+		String layoutUuid = ParamUtil.getString(uploadRequest, "layoutUuid");
 
 		int displayDateMonth = ParamUtil.getInteger(
 			uploadRequest, "displayDateMonth");
