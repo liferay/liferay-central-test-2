@@ -94,6 +94,12 @@ public class DDMStorageLinkLocalServiceImpl
 		return ddmStorageLinkPersistence.findByC_C(classNameId, classPK);
 	}
 
+	public List<DDMStorageLink> getStorageLinks(long structureId)
+		throws PortalException, SystemException {
+
+		return ddmStorageLinkPersistence.findByStructureId(structureId);
+	}
+
 	public DDMStorageLink updateStorageLink(
 			long storageLinkId, long classNameId, long classPK, String type)
 		throws PortalException, SystemException {
