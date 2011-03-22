@@ -209,7 +209,7 @@
 
 		String alloyBaseURL = PortalUtil.getPortalURL(request) + alloyRootPath;
 
-		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/combo/", javaScriptLastModified);
+		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNHost() + themeDisplay.getPathContext() + "/combo/", "minifierType=", javaScriptLastModified);
 		%>
 
 		Liferay.AUI = {
