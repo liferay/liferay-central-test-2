@@ -195,11 +195,13 @@ public class RESTConfigurator extends FindClass {
 			Class<?> implementationClass, Method method)
 		throws Exception {
 
-		RESTMappingResolver mappingResolver = new RESTDefaultMappingResolver();
+		RESTMappingResolver restMappingResolver =
+			new RESTDefaultMappingResolver();
 
-		String path = mappingResolver.resolvePath(implementationClass, method);
+		String path = restMappingResolver.resolvePath(
+			implementationClass, method);
 
-		String httpMethod = mappingResolver.resolveHttpMethod(method);
+		String httpMethod = restMappingResolver.resolveHttpMethod(method);
 
 		String utilClassName = implementationClass.getName();
 

@@ -61,9 +61,11 @@ public class RESTServlet extends JSONServlet {
 
 		StringBundler sb = new StringBundler(mappings.size() * 6 + 2);
 
-		sb.append("<html><body><table border='1'>");
+		sb.append("<html><body><table border=\"1\">");
+
 		for (String[] mapping : mappings) {
 			sb.append("<tr><td>");
+
 			if (mapping[0] == null) {
 				sb.append(StringPool.STAR);
 			}
@@ -76,12 +78,14 @@ public class RESTServlet extends JSONServlet {
 			sb.append("</td><td>");
 
 			String classMethodName = mapping[2];
+
 			classMethodName = StringUtil.replace(
 				classMethodName, "com.liferay.portal.", "c.l.p.");
-			sb.append(classMethodName);
 
+			sb.append(classMethodName);
 			sb.append("</td></tr>");
 		}
+
 		sb.append("</table></body></html>");
 
 		response.setContentType(ContentTypes.TEXT_HTML);

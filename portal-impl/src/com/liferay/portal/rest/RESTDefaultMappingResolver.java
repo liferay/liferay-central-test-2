@@ -15,11 +15,15 @@
 package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.rest.REST;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
+
+import org.mortbay.jetty.HttpMethods;
 
 /**
  * @author Igor Spasic
@@ -43,7 +47,6 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 	}
 
 	public String resolvePath(Class<?> clazz, Method method) {
-
 		REST restAnnotation = method.getAnnotation(REST.class);
 
 		String path = restAnnotation.value().trim();
@@ -54,6 +57,7 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 			}
 			else {
 				path = _nameToPathChunk(method.getName());
+
 				path += StringPool.SLASH;
 				path += _buildParametersChunks(method);
 			}
@@ -94,59 +98,64 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 	public void setFixDuplicateStartingChunks(
 		boolean fixDuplicateStartingChunks) {
 
-		this._fixDuplicateStartingChunks = fixDuplicateStartingChunks;
+		_fixDuplicateStartingChunks = fixDuplicateStartingChunks;
 	}
 
-	public void setIncludeParamNames(boolean includeParamNames) {
-		this._includeParamNames = includeParamNames;
+	public void setIncludeParameterNames(boolean includeParameterNames) {
+		_includeParameterNames = includeParameterNames;
 	}
 
-	public void setParamNameValueSeparator(char paramNameValueSeparator) {
-		this._paramNameValueSeparator = paramNameValueSeparator;
+	public void setParameterNameValueSeparator(
+		char parameterNameValueSeparator) {
+
+		_parameterNameValueSeparator = parameterNameValueSeparator;
 	}
 
 	public void setSmartMethodNames(boolean smartMethodNames) {
-		this._smartMethodNames = smartMethodNames;
+		_smartMethodNames = smartMethodNames;
 	}
 
 	private String _buildParametersChunks(Method method) {
-		String[] paramNames =
+		String[] parameterNames =
 			MethodParameterNamesResolverUtil.resolveParameterNames(method);
 
-		return _buildParametersChunks(paramNames);
+		return _buildParametersChunks(parameterNames);
 	}
 
-	private String _buildParametersChunks(String[] paramNames) {
-		StringBuilder result = new StringBuilder();
+	private String _buildParametersChunks(String[] parameterNames) {
+		StringBundler sb = new StringBundler(parameterNames.length * 5 - 1);
 
-		for (int i = 0; i < paramNames.length; i++) {
-			String paramName = paramNames[i];
+		for (int i = 0; i < parameterNames.length; i++) {
+			String parameterName = parameterNames[i];
 
 			String chunk = null;
 
-			if (_includeParamNames) {
-				chunk = _nameToPathChunk(paramName) + _paramNameValueSeparator;
+			if (_includeParameterNames) {
+				chunk =
+					_nameToPathChunk(parameterName) +
+						_parameterNameValueSeparator;
 			}
 			else {
 				chunk = StringPool.BLANK;
 			}
 
 			if (i != 0) {
-				chunk = StringPool.SLASH + chunk;
+				chunk = StringPool.SLASH.concat(chunk);
 			}
 
-			result.append(chunk);
-			result.append("${").append(paramName).append('}');
+			sb.append(chunk);
+			sb.append("${");
+			sb.append(parameterName);
+			sb.append('}');
 		}
 
-		return result.toString();
+		return sb.toString();
 	}
 
 	private String _classNameToPath(Class<?> clazz) {
 		String className = clazz.getSimpleName();
 
 		className = StringUtil.replace(className, "Impl", StringPool.BLANK);
-
 		className = StringUtil.replace(className, "Service", StringPool.BLANK);
 
 		return className.toLowerCase();
@@ -162,6 +171,7 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 
 			i++;
 		}
+
 		return methodName.substring(0, i);
 	}
 
@@ -170,15 +180,9 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 			return false;
 		}
 
-		if (prefix.equals("add")) {
-			return true;
-		}
+		if (prefix.equals("add") || prefix.equals("delete") ||
+			prefix.equals("get")) {
 
-		if (prefix.equals("delete")) {
-			return true;
-		}
-
-		if (prefix.equals("get")) {
 			return true;
 		}
 
@@ -186,8 +190,8 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 	}
 
 	private String _methodNameToPath(Method method) {
-
 		String methodName = method.getName();
+
 		String methodNamePrefix = _cutPrefix(methodName);
 
 		if (_isRemovablePrefix(methodNamePrefix)) {
@@ -198,97 +202,96 @@ public class RESTDefaultMappingResolver implements RESTMappingResolver {
 			}
 		}
 
-		String[] paramNames =
+		String[] parameterNames =
 			MethodParameterNamesResolverUtil.resolveParameterNames(method);
 
-		for (String paramName : paramNames) {
+		for (String parameterName : parameterNames) {
+			parameterName = StringUtil.replace(
+				parameterName, "Id", StringPool.BLANK);
 
-			paramName = StringUtil.replace(paramName, "Id", StringPool.BLANK);
+			parameterName = jodd.util.StringUtil.capitalize(parameterName);
 
-			paramName = jodd.util.StringUtil.capitalize(paramName);
+			int pos = methodName.indexOf(parameterName);
 
-			int index = methodName.indexOf(paramName);
-
-			if (index != -1) {
-				methodName = methodName.substring(0, index) +
-					methodName.substring(index + paramName.length());
+			if (pos != -1) {
+				methodName =
+					methodName.substring(0, pos) +
+						methodName.substring(pos + parameterName.length());
 			}
 		}
 
 		String path = _nameToPathChunk(methodName);
 
 		if (methodName.length() > 0) {
-			path += '/';
+			path += CharPool.SLASH;
 		}
 
-		path += _buildParametersChunks(paramNames);
+		path += _buildParametersChunks(parameterNames);
 
 		return path;
 	}
 
 	private String _nameToPathChunk(String inputName) {
-
 		inputName = jodd.util.StringUtil.camelCaseToWords(inputName);
 
 		String[] names = StringUtil.split(inputName, StringPool.SPACE);
 
-		StringBuilder chunk = new StringBuilder();
+		StringBundler sb = new StringBundler(names.length * 2 - 1);
 
 		for (int i = 0; i < names.length; i++) {
 			String name = names[i];
 
 			if (i != 0) {
-				chunk.append('-');
+				sb.append(CharPool.DASH);
 			}
-			chunk.append(name.toLowerCase());
+
+			sb.append(name.toLowerCase());
 		}
 
-		return chunk.toString();
+		return sb.toString();
 	}
 
 	private String _prefixToHttpMethod(String prefix) {
-
 		if (prefix.equals("add") || prefix.equals("update")) {
-			return "POST";
+			return HttpMethods.POST;
 		}
-
-		if (prefix.equals("delete") || prefix.equals("unset")) {
-			return "DELETE";
+		else if (prefix.equals("delete") || prefix.equals("unset")) {
+			return HttpMethods.DELETE;
 		}
-
-		if (prefix.equals("get")) {
-			return "GET";
+		else if (prefix.equals("get")) {
+			return HttpMethods.GET;
 		}
 
 		return null;
 	}
 
 	private String _stripBySuffix(String name) {
-		int index = 0;
+		int pos = 0;
 
 		while (true) {
-			index = name.indexOf("By", index);
+			pos = name.indexOf("By", pos);
 
-			if (index == -1) {
+			if (pos == -1) {
 				break;
 			}
 
-			if (index + 2 < name.length()) {
-				if (Character.isUpperCase(name.charAt(index + 2))) {
-					name = name.substring(0, index);
+			if (pos + 2 < name.length()) {
+				if (Character.isUpperCase(name.charAt(pos + 2))) {
+					name = name.substring(0, pos);
+
 					break;
 				}
 			}
 
-			index++;
+			pos++;
 		}
 
 		return name;
 	}
 
 	private boolean _fixDuplicateStartingChunks = true;
-	private boolean _includeParamNames = true;
-	private char _paramNameValueSeparator = '/';
+	private boolean _includeParameterNames = true;
+	private char _parameterNameValueSeparator = CharPool.SLASH;
 	private boolean _smartMethodNames = true;
 
 }
