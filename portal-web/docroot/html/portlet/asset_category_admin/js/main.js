@@ -65,7 +65,6 @@ AUI().add(
 						var childrenContainer = A.one(instance._categoryContainerSelector);
 
 						instance.portletId = config.portletId;
-						instance.scopeGroupId = config.scopeGroupId;
 
 						instance._prefixedPortletId = '_' + config.portletId + '_';
 
@@ -474,7 +473,7 @@ AUI().add(
 							}
 						}
 
-						url += '&doAsGroupId=' + instance.scopeGroupId;
+						url.setDoAsGroupId(themeDisplay.getScopeGroupId());
 
 						return url;
 					},
