@@ -1551,6 +1551,7 @@
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="templateId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="layoutUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="displayDate" type="org.hibernate.type.TimestampType" />
 		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 		<property name="reviewDate" type="org.hibernate.type.TimestampType" />

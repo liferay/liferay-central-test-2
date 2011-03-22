@@ -458,6 +458,21 @@ public interface JournalArticleModel extends BaseModel<JournalArticle>,
 	public void setTemplateId(String templateId);
 
 	/**
+	 * Gets the layout uuid of this journal article.
+	 *
+	 * @return the layout uuid of this journal article
+	 */
+	@AutoEscape
+	public String getLayoutUuid();
+
+	/**
+	 * Sets the layout uuid of this journal article.
+	 *
+	 * @param layoutUuid the layout uuid of this journal article
+	 */
+	public void setLayoutUuid(String layoutUuid);
+
+	/**
 	 * Gets the display date of this journal article.
 	 *
 	 * @return the display date of this journal article

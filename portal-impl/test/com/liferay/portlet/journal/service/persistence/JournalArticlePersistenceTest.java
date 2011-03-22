@@ -82,6 +82,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		newJournalArticle.setType(randomString());
 		newJournalArticle.setStructureId(randomString());
 		newJournalArticle.setTemplateId(randomString());
+		newJournalArticle.setLayoutUuid(randomString());
 		newJournalArticle.setDisplayDate(nextDate());
 		newJournalArticle.setExpirationDate(nextDate());
 		newJournalArticle.setReviewDate(nextDate());
@@ -135,6 +136,8 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 			newJournalArticle.getStructureId());
 		assertEquals(existingJournalArticle.getTemplateId(),
 			newJournalArticle.getTemplateId());
+		assertEquals(existingJournalArticle.getLayoutUuid(),
+			newJournalArticle.getLayoutUuid());
 		assertEquals(Time.getShortTimestamp(
 				existingJournalArticle.getDisplayDate()),
 			Time.getShortTimestamp(newJournalArticle.getDisplayDate()));
@@ -251,6 +254,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		journalArticle.setType(randomString());
 		journalArticle.setStructureId(randomString());
 		journalArticle.setTemplateId(randomString());
+		journalArticle.setLayoutUuid(randomString());
 		journalArticle.setDisplayDate(nextDate());
 		journalArticle.setExpirationDate(nextDate());
 		journalArticle.setReviewDate(nextDate());

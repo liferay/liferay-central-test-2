@@ -567,6 +567,24 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
+	* Gets the layout uuid of this journal article.
+	*
+	* @return the layout uuid of this journal article
+	*/
+	public java.lang.String getLayoutUuid() {
+		return _journalArticle.getLayoutUuid();
+	}
+
+	/**
+	* Sets the layout uuid of this journal article.
+	*
+	* @param layoutUuid the layout uuid of this journal article
+	*/
+	public void setLayoutUuid(java.lang.String layoutUuid) {
+		_journalArticle.setLayoutUuid(layoutUuid);
+	}
+
+	/**
 	* Gets the display date of this journal article.
 	*
 	* @return the display date of this journal article

@@ -1858,6 +1858,7 @@
 			</basic>
 			<basic name="structureId" />
 			<basic name="templateId" />
+			<basic name="layoutUuid" />
 			<basic name="displayDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

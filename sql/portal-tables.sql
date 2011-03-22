@@ -680,6 +680,7 @@ create table JournalArticle (
 	type_ VARCHAR(75) null,
 	structureId VARCHAR(75) null,
 	templateId VARCHAR(75) null,
+	layoutUuid VARCHAR(75) null,
 	displayDate DATE null,
 	expirationDate DATE null,
 	reviewDate DATE null,

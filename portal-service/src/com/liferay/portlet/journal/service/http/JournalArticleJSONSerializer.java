@@ -68,6 +68,7 @@ public class JournalArticleJSONSerializer {
 		jsonObject.put("type", model.getType());
 		jsonObject.put("structureId", model.getStructureId());
 		jsonObject.put("templateId", model.getTemplateId());
+		jsonObject.put("layoutUuid", model.getLayoutUuid());
 
 		Date displayDate = model.getDisplayDate();
 

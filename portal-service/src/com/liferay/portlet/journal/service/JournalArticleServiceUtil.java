@@ -43,13 +43,13 @@ public class JournalArticleServiceUtil {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		boolean smallImage, java.lang.String smallImageURL,
+		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<java.lang.String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -57,7 +57,7 @@ public class JournalArticleServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addArticle(groupId, articleId, autoArticleId, titleMap,
-			descriptionMap, content, type, structureId, templateId,
+			descriptionMap, content, type, structureId, templateId, layoutUuid,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -73,19 +73,19 @@ public class JournalArticleServiceUtil {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.lang.String articleURL,
+		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addArticle(groupId, articleId, autoArticleId, titleMap,
-			descriptionMap, content, type, structureId, templateId,
+			descriptionMap, content, type, structureId, templateId, layoutUuid,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -311,13 +311,13 @@ public class JournalArticleServiceUtil {
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.lang.String content,
+		java.lang.String content, java.lang.String layoutUuid,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateArticle(userId, groupId, articleId, version,
-			titleMap, descriptionMap, content, serviceContext);
+			titleMap, descriptionMap, content, layoutUuid, serviceContext);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -326,13 +326,13 @@ public class JournalArticleServiceUtil {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		boolean smallImage, java.lang.String smallImageURL,
+		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<java.lang.String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -340,7 +340,7 @@ public class JournalArticleServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateArticle(groupId, articleId, version, titleMap,
-			descriptionMap, content, type, structureId, templateId,
+			descriptionMap, content, type, structureId, templateId, layoutUuid,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,

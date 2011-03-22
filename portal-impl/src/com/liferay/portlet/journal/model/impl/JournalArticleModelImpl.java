@@ -87,6 +87,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			{ "type_", Types.VARCHAR },
 			{ "structureId", Types.VARCHAR },
 			{ "templateId", Types.VARCHAR },
+			{ "layoutUuid", Types.VARCHAR },
 			{ "displayDate", Types.TIMESTAMP },
 			{ "expirationDate", Types.TIMESTAMP },
 			{ "reviewDate", Types.TIMESTAMP },
@@ -99,7 +100,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title STRING null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title STRING null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,layoutUuid VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static final String ORDER_BY_JPQL = " ORDER BY journalArticle.articleId ASC, journalArticle.version DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY JournalArticle.articleId ASC, JournalArticle.version DESC";
@@ -140,6 +141,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		model.setType(soapModel.getType());
 		model.setStructureId(soapModel.getStructureId());
 		model.setTemplateId(soapModel.getTemplateId());
+		model.setLayoutUuid(soapModel.getLayoutUuid());
 		model.setDisplayDate(soapModel.getDisplayDate());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setReviewDate(soapModel.getReviewDate());
@@ -589,6 +591,19 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_templateId = templateId;
 	}
 
+	public String getLayoutUuid() {
+		if (_layoutUuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _layoutUuid;
+		}
+	}
+
+	public void setLayoutUuid(String layoutUuid) {
+		_layoutUuid = layoutUuid;
+	}
+
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -822,6 +837,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 		journalArticleImpl.setTemplateId(getTemplateId());
 
+		journalArticleImpl.setLayoutUuid(getLayoutUuid());
+
 		journalArticleImpl.setDisplayDate(getDisplayDate());
 
 		journalArticleImpl.setExpirationDate(getExpirationDate());
@@ -904,7 +921,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -942,6 +959,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		sb.append(getStructureId());
 		sb.append(", templateId=");
 		sb.append(getTemplateId());
+		sb.append(", layoutUuid=");
+		sb.append(getLayoutUuid());
 		sb.append(", displayDate=");
 		sb.append(getDisplayDate());
 		sb.append(", expirationDate=");
@@ -970,7 +989,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(94);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.journal.model.JournalArticle");
@@ -1049,6 +1068,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		sb.append(getTemplateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>layoutUuid</column-name><column-value><![CDATA[");
+		sb.append(getLayoutUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>displayDate</column-name><column-value><![CDATA[");
 		sb.append(getDisplayDate());
 		sb.append("]]></column-value></column>");
@@ -1123,6 +1146,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	private String _type;
 	private String _structureId;
 	private String _templateId;
+	private String _layoutUuid;
 	private Date _displayDate;
 	private Date _expirationDate;
 	private Date _reviewDate;

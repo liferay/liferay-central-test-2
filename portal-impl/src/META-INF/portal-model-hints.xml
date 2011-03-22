@@ -1488,6 +1488,7 @@
 		<field name="templateId" type="String">
 			<hint name="auto-escape">false</hint>
 		</field>
+		<field name="layoutUuid" type="String" />
 		<field name="displayDate" type="Date" />
 		<field name="expirationDate" type="Date" />
 		<field name="reviewDate" type="Date" />

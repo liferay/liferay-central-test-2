@@ -636,6 +636,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		journalArticleImpl.setType(journalArticle.getType());
 		journalArticleImpl.setStructureId(journalArticle.getStructureId());
 		journalArticleImpl.setTemplateId(journalArticle.getTemplateId());
+		journalArticleImpl.setLayoutUuid(journalArticle.getLayoutUuid());
 		journalArticleImpl.setDisplayDate(journalArticle.getDisplayDate());
 		journalArticleImpl.setExpirationDate(journalArticle.getExpirationDate());
 		journalArticleImpl.setReviewDate(journalArticle.getReviewDate());

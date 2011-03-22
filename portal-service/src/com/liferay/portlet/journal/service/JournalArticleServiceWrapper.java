@@ -35,13 +35,13 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		boolean smallImage, java.lang.String smallImageURL,
+		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<java.lang.String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -49,13 +49,14 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.addArticle(groupId, articleId,
 			autoArticleId, titleMap, descriptionMap, content, type,
-			structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, smallImage,
-			smallImageURL, smallFile, images, articleURL, serviceContext);
+			structureId, templateId, layoutUuid, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			smallImage, smallImageURL, smallFile, images, articleURL,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
@@ -64,24 +65,25 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.lang.String articleURL,
+		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.addArticle(groupId, articleId,
 			autoArticleId, titleMap, descriptionMap, content, type,
-			structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, articleURL, serviceContext);
+			structureId, templateId, layoutUuid, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			articleURL, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle copyArticle(
@@ -293,12 +295,13 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.lang.String content,
+		java.lang.String content, java.lang.String layoutUuid,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(userId, groupId, articleId,
-			version, titleMap, descriptionMap, content, serviceContext);
+			version, titleMap, descriptionMap, content, layoutUuid,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -307,13 +310,13 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		boolean smallImage, java.lang.String smallImageURL,
+		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<java.lang.String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -321,13 +324,13 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(groupId, articleId,
 			version, titleMap, descriptionMap, content, type, structureId,
-			templateId, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
-			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
-			indexable, smallImage, smallImageURL, smallFile, images,
-			articleURL, serviceContext);
+			templateId, layoutUuid, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, smallImage,
+			smallImageURL, smallFile, images, articleURL, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
