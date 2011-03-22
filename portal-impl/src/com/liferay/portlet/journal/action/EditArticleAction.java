@@ -451,6 +451,9 @@ public class EditArticleAction extends PortletAction {
 		String defaultLanguageId = ParamUtil.getString(
 			uploadRequest, "defaultLanguageId");
 
+		String layoutUuid =
+			ParamUtil.getString(uploadRequest, "defaultLandingPage");
+
 		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 
 		String toLanguageId = ParamUtil.getString(
@@ -573,7 +576,7 @@ public class EditArticleAction extends PortletAction {
 
 			article = JournalArticleServiceUtil.addArticle(
 				groupId, articleId, autoArticleId, titleMap, descriptionMap,
-				content, type, structureId, templateId, StringPool.BLANK,
+				content, type, structureId, templateId, layoutUuid,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
@@ -651,7 +654,7 @@ public class EditArticleAction extends PortletAction {
 
 				article = JournalArticleServiceUtil.updateArticle(
 					groupId, articleId, version, titleMap, descriptionMap,
-					content, type, structureId, templateId, StringPool.BLANK,
+					content, type, structureId, templateId, layoutUuid,
 					displayDateMonth, displayDateDay, displayDateYear,
 					displayDateHour, displayDateMinute, expirationDateMonth,
 					expirationDateDay, expirationDateYear, expirationDateHour,

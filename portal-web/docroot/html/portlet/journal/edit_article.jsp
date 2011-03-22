@@ -234,6 +234,13 @@ if (Validator.isNotNull(content)) {
 
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
+
+String layoutUuid = StringPool.BLANK;
+
+if (article != null) {
+	layoutUuid = article.getLayoutUuid();
+}
+
 %>
 
 <liferay-util:include page="/html/portlet/journal/article_tabs.jsp">
@@ -608,6 +615,28 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							%>
 
 								<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+
+						<aui:select name="defaultLandingPage" showEmptyOption="<%= true %>" helpMessage="content-default-landing-page-help">
+
+							<%
+
+							List<Layout> groupPublicLayouts = LayoutLocalServiceUtil.getLayouts(scopeGroupId, false);
+							List<Layout> groupPrivateLayouts = LayoutLocalServiceUtil.getLayouts(scopeGroupId, true);
+
+							List<Layout> groupLayouts = new ArrayList<Layout>(groupPublicLayouts);
+							groupLayouts.addAll(groupPrivateLayouts);
+
+							for (int i = 0; i < groupLayouts.size(); i++) {
+
+							%>
+
+								<aui:option label="<%= groupLayouts.get(i).getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayouts.get(i).getUuid()) %>" value="<%= groupLayouts.get(i).getUuid() %>" />
 
 							<%
 							}
