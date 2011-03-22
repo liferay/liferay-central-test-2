@@ -185,7 +185,7 @@ StringBuilder friendlyURLBase = new StringBuilder();
 				Liferay.fire(
 					'<portlet:namespace />toggleLayoutTypeFields',
 					{
-						type: type,
+						type: type
 					}
 				);
 			}
