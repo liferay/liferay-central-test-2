@@ -36,6 +36,7 @@
 		<column name="type" type="String" />
 		<column name="structureId" type="String" />
 		<column name="templateId" type="String" />
+		<column name="layoutUuid" type="String" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="reviewDate" type="Date" />

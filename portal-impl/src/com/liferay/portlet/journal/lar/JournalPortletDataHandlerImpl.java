@@ -1584,14 +1584,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					autoArticleId, article.getVersion(), article.getTitleMap(),
 					article.getDescriptionMap(), article.getContent(),
 					article.getType(), parentStructureId, parentTemplateId,
-					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, expirationDateMonth,
-					expirationDateDay, expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, reviewDateMonth,
-					reviewDateDay, reviewDateYear, reviewDateHour,
-					reviewDateMinute, neverReview, article.isIndexable(),
-					article.isSmallImage(), article.getSmallImageURL(),
-					smallFile, images, articleURL, serviceContext);
+					StringPool.BLANK, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					reviewDateMonth, reviewDateDay, reviewDateYear,
+					reviewDateHour, reviewDateMinute, neverReview,
+					article.isIndexable(), article.isSmallImage(),
+					article.getSmallImageURL(), smallFile, images, articleURL,
+					serviceContext);
 			}
 			else {
 				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
@@ -1600,9 +1601,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingArticle.getVersion(), article.getTitleMap(),
 					article.getDescriptionMap(), article.getContent(),
 					article.getType(), parentStructureId, parentTemplateId,
-					displayDateMonth, displayDateDay, displayDateYear,
-					displayDateHour, displayDateMinute, expirationDateMonth,
-					expirationDateDay, expirationDateYear, expirationDateHour,
+					existingArticle.getLayoutUuid(), displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, article.isIndexable(),
@@ -1616,14 +1618,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				autoArticleId, article.getVersion(), article.getTitleMap(),
 				article.getDescriptionMap(), article.getContent(),
 				article.getType(), parentStructureId, parentTemplateId,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, reviewDateMonth,
-				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, article.isIndexable(), article.isSmallImage(),
-				article.getSmallImageURL(), smallFile, images, articleURL,
-				serviceContext);
+				article.getLayoutUuid(), displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+				reviewDateMinute, neverReview, article.isIndexable(),
+				article.isSmallImage(), article.getSmallImageURL(), smallFile,
+				images, articleURL, serviceContext);
 		}
 
 		portletDataContext.importPermissions(

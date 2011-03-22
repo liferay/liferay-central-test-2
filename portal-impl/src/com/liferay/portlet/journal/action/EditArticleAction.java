@@ -573,14 +573,14 @@ public class EditArticleAction extends PortletAction {
 
 			article = JournalArticleServiceUtil.addArticle(
 				groupId, articleId, autoArticleId, titleMap, descriptionMap,
-				content, type, structureId, templateId, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-				reviewDateHour, reviewDateMinute, neverReview, indexable,
-				smallImage, smallImageURL, smallFile, images, articleURL,
-				serviceContext);
+				content, type, structureId, templateId, StringPool.BLANK,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, neverExpire, reviewDateMonth,
+				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
+				neverReview, indexable, smallImage, smallImageURL, smallFile,
+				images, articleURL, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, JournalArticle.class.getName(),
@@ -651,10 +651,10 @@ public class EditArticleAction extends PortletAction {
 
 				article = JournalArticleServiceUtil.updateArticle(
 					groupId, articleId, version, titleMap, descriptionMap,
-					content, type, structureId, templateId, displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
+					content, type, structureId, templateId, StringPool.BLANK,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, indexable, smallImage,
@@ -667,7 +667,8 @@ public class EditArticleAction extends PortletAction {
 
 				article = JournalArticleServiceUtil.updateArticle(
 					themeDisplay.getUserId(), groupId, articleId, version,
-					titleMap, descriptionMap, content, serviceContext);
+					titleMap, descriptionMap, content, StringPool.BLANK,
+					serviceContext);
 			}
 
 			if (!tempOldUrlTitle.equals(article.getUrlTitle())) {
