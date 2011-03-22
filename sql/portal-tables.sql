@@ -359,6 +359,18 @@ create table Contact_ (
 	hoursOfOperation VARCHAR(75) null
 );
 
+create table Content (
+	contentId LONG not null primary key,
+	companyId LONG,
+	portletId LONG null,
+	groupId LONG,
+	repositoryId LONG null,
+	path_ STRING null,
+	version VARCHAR(75) null,
+	data_ BLOB null,
+	size_ LONG null
+);
+
 create table Counter (
 	name VARCHAR(75) not null primary key,
 	currentId LONG

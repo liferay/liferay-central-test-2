@@ -7,6 +7,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
+	<bean id="com.liferay.documentlibrary.service.ContentLocalService" class="com.liferay.documentlibrary.service.impl.ContentLocalServiceImpl" />
+	<bean id="com.liferay.documentlibrary.service.persistence.ContentPersistence" class="com.liferay.documentlibrary.service.persistence.ContentPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.documentlibrary.service.DLLocalService" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" />
 	<bean id="com.liferay.documentlibrary.util.Hook" class="com.liferay.documentlibrary.util.SafeFileNameHookWrapper">
 		<constructor-arg>
