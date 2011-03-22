@@ -2816,7 +2816,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public long getScopeGroupId(Layout layout, String portletId) {
-		boolean isStrict = PortletPreferencesThreadLocal.isStrict();
+		boolean strict = PortletPreferencesThreadLocal.isStrict();
 
 		PortletPreferencesThreadLocal.setStrict(true);
 
@@ -2863,7 +2863,7 @@ public class PortalImpl implements Portal {
 			return layout.getGroupId();
 		}
 		finally {
-			PortletPreferencesThreadLocal.setStrict(isStrict);
+			PortletPreferencesThreadLocal.setStrict(strict);
 		}
 	}
 

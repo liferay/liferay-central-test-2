@@ -309,7 +309,7 @@ public class PortletPreferencesLocalServiceImpl
 			if (portletPreferences == null) {
 				if (PortletPreferencesThreadLocal.isStrict() &&
 					(Validator.isNull(defaultPreferences) ||
-					(portlet != null) && portlet.isUndeployedPortlet())) {
+					 ((portlet != null) && portlet.isUndeployedPortlet()))) {
 
 					return new PortletPreferencesImpl();
 				}
