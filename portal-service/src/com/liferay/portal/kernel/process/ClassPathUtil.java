@@ -98,8 +98,9 @@ public class ClassPathUtil {
 				path.substring(0, path.length() - pathOfClass.length());
 
 			if (!classesDirName.endsWith("/WEB-INF/classes/")) {
-				_log.error("Class " + className + " is not loaded from a " +
-					"standard location (/WEB-INF/classes)");
+				_log.error(
+					"Class " + className + " is not loaded from a standard " +
+						"location (/WEB-INF/classes)");
 
 				return StringPool.BLANK;
 			}
