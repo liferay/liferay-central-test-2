@@ -82,8 +82,6 @@ public class ClassPathUtil {
 
 		File dir = null;
 
-		File classesDir = null;
-
 		int pos = -1;
 
 		if (!path.startsWith("file:") ||
@@ -98,8 +96,6 @@ public class ClassPathUtil {
 
 			String classesDirName =
 				path.substring(0, path.length() - pathOfClass.length());
-
-			classesDir = new File(classesDirName);
 
 			if (!classesDirName.endsWith("/WEB-INF/classes/")) {
 				_log.error("Class " + className + " is not loaded from a " +
@@ -129,15 +125,10 @@ public class ClassPathUtil {
 
 		File[] files = dir.listFiles();
 
-		StringBundler sb = new StringBundler(files.length * 2 + 2);
+		StringBundler sb = new StringBundler(files.length * 2);
 
 		for (File file : files) {
 			sb.append(file.getAbsolutePath());
-			sb.append(File.pathSeparator);
-		}
-
-		if (classesDir != null && classesDir.isDirectory()) {
-			sb.append(classesDir.getAbsolutePath());
 			sb.append(File.pathSeparator);
 		}
 
