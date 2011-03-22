@@ -3131,6 +3131,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getPortletApp());
 
 		portlet.setId(getId());
+		portlet.setUndeployedPortlet(isUndeployedPortlet());
 
 		return portlet;
 	}
