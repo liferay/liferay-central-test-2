@@ -25,7 +25,7 @@ import com.mulesoft.tcat.DeployerFactory;
 import com.mulesoft.tcat.DeploymentVersion;
 import com.mulesoft.tcat.Server;
 
-import org.springframework.context.ApplicationContext
+import org.springframework.context.ApplicationContext;
 
 /**
  * This script replaces the Tcat Deployer and DeployerFactory with the
@@ -76,10 +76,6 @@ public class LiferayDeployer implements Deployer {
 			println(
 				"Completed deployment Liferay module: " + deployableFileName);
         }
-		else if (deployableFileName.contains("ROOT.war")) {
-
-			_deployer.deploy(deployable);
-		}
 		else {
             _deployer.deploy(deployable);
         }
