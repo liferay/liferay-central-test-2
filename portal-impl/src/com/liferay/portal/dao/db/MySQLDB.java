@@ -193,7 +193,7 @@ public class MySQLDB extends BaseDB {
 	private static String[] _MYSQL = {
 		"##", "1", "0",
 		"'1970-01-01'", "now()",
-		" blob", " tinyint", " datetime",
+		" longblob", " tinyint", " datetime",
 		" double", " integer", " bigint",
 		" longtext", " longtext", " varchar",
 		"  auto_increment", "commit"
