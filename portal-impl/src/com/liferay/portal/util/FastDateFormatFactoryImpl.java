@@ -48,6 +48,18 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 		return format;
 	}
 
+	public Format getDate(Locale locale) {
+		return getDate(locale, null);
+	}
+
+	public Format getDate(Locale locale, TimeZone timeZone) {
+		return getDate(FastDateFormatConstants.SHORT, locale, timeZone);
+	}
+
+	public Format getDate(TimeZone timeZone) {
+		return getDate(LocaleUtil.getDefault(), timeZone);
+	}
+
 	public Format getDateTime(
 		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone) {
 
@@ -63,46 +75,6 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 		}
 
 		return format;
-	}
-
-	public Format getTime(int style, Locale locale, TimeZone timeZone) {
-		String key = getKey(style, locale, timeZone);
-
-		Format format = _timeFormats.get(key);
-
-		if (format == null) {
-			format = FastDateFormat.getTimeInstance(style, timeZone, locale);
-
-			_timeFormats.put(key, format);
-		}
-
-		return format;
-	}
-
-	protected String getKey(Object... arguments) {
-		StringBundler sb = new StringBundler(arguments.length * 2 - 1);
-
-		for (int i = 0; i < arguments.length; i++) {
-			sb.append(arguments[i]);
-
-			if ((i + 1) < arguments.length) {
-				sb.append(StringPool.UNDERLINE);
-			}
-		}
-
-		return sb.toString();
-	}
-
-	public Format getDate(Locale locale) {
-		return getDate(locale, null);
-	}
-
-	public Format getDate(Locale locale, TimeZone timeZone) {
-		return getDate(FastDateFormatConstants.SHORT, locale, timeZone);
-	}
-
-	public Format getDate(TimeZone timeZone) {
-		return getDate(LocaleUtil.getDefault(), timeZone);
 	}
 
 	public Format getDateTime(Locale locale) {
@@ -147,6 +119,20 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 		return getSimpleDateFormat(pattern, LocaleUtil.getDefault(), timeZone);
 	}
 
+	public Format getTime(int style, Locale locale, TimeZone timeZone) {
+		String key = getKey(style, locale, timeZone);
+
+		Format format = _timeFormats.get(key);
+
+		if (format == null) {
+			format = FastDateFormat.getTimeInstance(style, timeZone, locale);
+
+			_timeFormats.put(key, format);
+		}
+
+		return format;
+	}
+
 	public Format getTime(Locale locale) {
 		return getTime(locale, null);
 	}
@@ -157,6 +143,20 @@ public class FastDateFormatFactoryImpl implements FastDateFormatFactory {
 
 	public Format getTime(TimeZone timeZone) {
 		return getTime(LocaleUtil.getDefault(), timeZone);
+	}
+
+	protected String getKey(Object... arguments) {
+		StringBundler sb = new StringBundler(arguments.length * 2 - 1);
+
+		for (int i = 0; i < arguments.length; i++) {
+			sb.append(arguments[i]);
+
+			if ((i + 1) < arguments.length) {
+				sb.append(StringPool.UNDERLINE);
+			}
+		}
+
+		return sb.toString();
 	}
 
 	private Map<String, Format> _dateFormats =

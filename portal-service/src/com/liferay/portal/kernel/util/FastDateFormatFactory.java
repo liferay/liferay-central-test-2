@@ -26,16 +26,14 @@ public interface FastDateFormatFactory {
 
 	public Format getDate(int style, Locale locale, TimeZone timeZone);
 
-	public Format getDateTime(
-		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone);
-
-	public Format getTime(int style, Locale locale, TimeZone timeZone);
-
 	public Format getDate(Locale locale);
 
 	public Format getDate(Locale locale, TimeZone timeZone);
 
 	public Format getDate(TimeZone timeZone);
+
+	public Format getDateTime(
+		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone);
 
 	public Format getDateTime(Locale locale);
 
@@ -51,6 +49,8 @@ public interface FastDateFormatFactory {
 		String pattern, Locale locale, TimeZone timeZone);
 
 	public Format getSimpleDateFormat(String pattern, TimeZone timeZone);
+
+	public Format getTime(int style, Locale locale, TimeZone timeZone);
 
 	public Format getTime(Locale locale);
 

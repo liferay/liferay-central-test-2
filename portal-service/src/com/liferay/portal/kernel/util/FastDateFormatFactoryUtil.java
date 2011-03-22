@@ -28,17 +28,6 @@ public class FastDateFormatFactoryUtil {
 		return getFastDateFormatFactory().getDate(style, locale, timeZone);
 	}
 
-	public static Format getDateTime(
-		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone) {
-
-		return getFastDateFormatFactory().getDateTime(
-			dateStyle, timeStyle, locale, timeZone);
-	}
-
-	public static Format getTime(int style, Locale locale, TimeZone timeZone) {
-		return getFastDateFormatFactory().getTime(style, locale, timeZone);
-	}
-
 	public static Format getDate(Locale locale) {
 		return getFastDateFormatFactory().getDate(locale);
 	}
@@ -49,6 +38,13 @@ public class FastDateFormatFactoryUtil {
 
 	public static Format getDate(TimeZone timeZone) {
 		return getFastDateFormatFactory().getDate(timeZone);
+	}
+
+	public static Format getDateTime(
+		int dateStyle, int timeStyle, Locale locale, TimeZone timeZone) {
+
+		return getFastDateFormatFactory().getDateTime(
+			dateStyle, timeStyle, locale, timeZone);
 	}
 
 	public static Format getDateTime(Locale locale) {
@@ -89,6 +85,10 @@ public class FastDateFormatFactoryUtil {
 
 		return getFastDateFormatFactory().getSimpleDateFormat(
 			pattern, timeZone);
+	}
+
+	public static Format getTime(int style, Locale locale, TimeZone timeZone) {
+		return getFastDateFormatFactory().getTime(style, locale, timeZone);
 	}
 
 	public static Format getTime(Locale locale) {
