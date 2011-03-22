@@ -19,10 +19,12 @@ import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.ScriptingException;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -32,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -60,9 +63,21 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		_servletContextName = GetterUtil.getString(
 			_servletContext.getServletContextName());
 
-		_rubyScriptFile = new File(
-			ServletContextUtil.getRealPath(
-				_servletContext, "/WEB-INF/sass/main.rb"));
+		String contextPath = ContextPathUtil.getContextPath(_servletContext);
+
+		if (!contextPath.equals(PortalUtil.getPathContext())) {
+			ServletContext servletContext = ServletContextPool.get(
+				PortalUtil.getPathContext());
+
+			_rubyScriptFile = new File(
+				ServletContextUtil.getRealPath(
+					servletContext, "/WEB-INF/sass/main.rb"));
+		}
+		else {
+			_rubyScriptFile = new File(
+				ServletContextUtil.getRealPath(
+					_servletContext, "/WEB-INF/sass/main.rb"));
+		}
 
 		try {
 
