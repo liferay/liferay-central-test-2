@@ -311,10 +311,12 @@ public class EditFileEntryAction extends PortletAction {
 				title = sourceFileName;
 			}
 
+			serviceContext.setAttribute("contentType", contentType);
+
 			String extension = FileUtil.getExtension(sourceFileName);
 
-			serviceContext.setAttribute("contentType", contentType);
 			serviceContext.setAttribute("extension", extension);
+
 			serviceContext.setAttribute("sourceFileName", sourceFileName);
 
 			// Add file entry
@@ -329,10 +331,12 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		else {
 			if (Validator.isNotNull(sourceFileName)) {
+				serviceContext.setAttribute("contentType", contentType);
+
 				String extension = FileUtil.getExtension(sourceFileName);
 
-				serviceContext.setAttribute("contentType", contentType);
 				serviceContext.setAttribute("extension", extension);
+
 				serviceContext.setAttribute("sourceFileName", sourceFileName);
 			}
 
