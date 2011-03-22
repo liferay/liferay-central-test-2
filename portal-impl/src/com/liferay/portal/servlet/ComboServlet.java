@@ -56,7 +56,7 @@ public class ComboServlet extends HttpServlet {
 
 			return;
 		}
-		
+
 		String firstModulePath = modulePaths[0];
 
 		String extension = FileUtil.getExtension(firstModulePath);
