@@ -65,13 +65,15 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 		String contextPath = ContextPathUtil.getContextPath(_servletContext);
 
-		if (!contextPath.equals(PortalUtil.getPathContext())) {
-			ServletContext servletContext = ServletContextPool.get(
-				PortalUtil.getPathContext());
+		String portalContextPath = PortalUtil.getPathContext();
+
+		if (!contextPath.equals(portalContextPath)) {
+			ServletContext portalServletContext = ServletContextPool.get(
+				portalContextPath);
 
 			_rubyScriptFile = new File(
 				ServletContextUtil.getRealPath(
-					servletContext, "/WEB-INF/sass/main.rb"));
+					portalServletContext, "/WEB-INF/sass/main.rb"));
 		}
 		else {
 			_rubyScriptFile = new File(
