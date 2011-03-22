@@ -356,13 +356,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			boolean sendEmail = false;
 			ServiceContext serviceContext = new ServiceContext();
 
-			userLocalService.addUser(
+			User defaultAdminUser = userLocalService.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
 				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
 				serviceContext);
+
+			userLocalService.updateLastLogin(
+				defaultAdminUser.getUserId(), defaultAdminUser.getLoginIP());
 		}
 
 		// Portlets
