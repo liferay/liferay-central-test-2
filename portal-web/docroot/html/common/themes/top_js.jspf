@@ -312,21 +312,19 @@
 			<%
 			List<Portlet> allPortlets = layoutTypePortlet.getAllPortlets();
 
-			Iterator<Portlet> iterator = allPortlets.iterator();
+			Iterator<Portlet> itr = allPortlets.iterator();
 
-			while (iterator.hasNext()) {
-				Portlet curPortlet = iterator.next();
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
 
-				if (curPortlet.isUndeployedPortlet()) {
-					iterator.remove();
+				if (portlet.isUndeployedPortlet()) {
+					itr.remove();
 				}
 			}
-
-			String[] portletIds = StringUtil.split(ListUtil.toString(allPortlets, "portletId"));
 			%>
 
-			<c:if test="<%= (portletIds.length > 0) && !layoutTypePortlet.hasStateMax() %>">
-				Liferay.Portlet.list = ['<%= StringUtil.merge(portletIds, "','") %>'];
+			<c:if test="<%= !allPortlets.isEmpty() && !layoutTypePortlet.hasStateMax() %>">
+				Liferay.Portlet.list = ['<%= ListUtil.toString(allPortlets, "portletId", "','") %>'];
 			</c:if>
 		</c:if>
 	// ]]>
