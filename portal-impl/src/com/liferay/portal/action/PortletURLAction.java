@@ -69,10 +69,10 @@ public class PortletURLAction extends Action {
 		String cacheability = ParamUtil.getString(request, "cacheability");
 		boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
 			request, "copyCurrentRenderParameters");
+		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 		long doAsUserId = ParamUtil.getLong(request, "doAsUserId");
 		String doAsUserLanguageId = ParamUtil.getString(
 			request, "doAsUserLanguageId");
-		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 		boolean encrypt = ParamUtil.getBoolean(request, "encrypt");
 		boolean escapeXml = ParamUtil.getBoolean(request, "escapeXml");
 		String lifecycle = ParamUtil.getString(request, "lifecycle");
@@ -96,16 +96,16 @@ public class PortletURLAction extends Action {
 
 		portletURL.setCopyCurrentRenderParameters(copyCurrentRenderParameters);
 
+		if (doAsGroupId > 0) {
+			portletURL.setDoAsGroupId(doAsGroupId);
+		}
+
 		if (doAsUserId > 0) {
 			portletURL.setDoAsUserId(doAsUserId);
 		}
 
 		if (Validator.isNotNull(doAsUserLanguageId)) {
 			portletURL.setDoAsUserLanguageId(doAsUserLanguageId);
-		}
-
-		if (doAsGroupId > 0) {
-			portletURL.setDoAsGroupId(doAsGroupId);
 		}
 
 		portletURL.setEncrypt(encrypt);
