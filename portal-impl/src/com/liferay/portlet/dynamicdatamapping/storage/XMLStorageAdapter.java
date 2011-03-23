@@ -17,8 +17,6 @@ package com.liferay.portlet.dynamicdatamapping.storage;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 
-import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +27,7 @@ import java.util.Map;
 public class XMLStorageAdapter extends BaseStorageAdapter {
 
 	protected long doCreate(
-			long companyId, long structureId, Map<String, Serializable> fields,
+			long companyId, long structureId, Fields fields,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -42,29 +40,32 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	protected void doDeleteByStructure(long structureId) throws Exception {
 	}
 
-	protected Map<Long, Map<String, Serializable>> doGetFieldsByClasses(
-		long[] classPKs, List<String> fieldNames) throws Exception {
-
-		return null;
-	}
-
-	protected List<Map<String, Serializable>> doGetFieldsByClasses(
-			long[] classPKs, List<String> fieldNames, OrderByComparator obc)
+	protected List<Fields> doGetFieldsListByClasses(
+			long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
 	}
 
-	protected List<Map<String, Serializable>> doGetFieldsByStructure(
-			long structureId, List<String> fieldNames, OrderByComparator obc)
+	protected List<Fields> doGetFieldsListByStructure(
+			long structureId, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
 	}
 
-	protected List<Map<String, Serializable>> doQuery(
+	protected Map<Long, Fields> doGetFieldsMapByClasses(
+			long[] classPKs, List<String> fieldNames)
+		throws Exception {
+
+		return null;
+	}
+
+	protected List<Fields> doQuery(
 			long structureId, List<String> fieldNames, String whereClause,
-			OrderByComparator obc)
+			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
@@ -77,8 +78,8 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected void doUpdate(
-			long classPK, Map<String, Serializable> fields, boolean merge,
-			ServiceContext serviceContext)
+			long classPK, Fields fields, ServiceContext serviceContext,
+			boolean merge)
 		throws Exception {
 	}
 

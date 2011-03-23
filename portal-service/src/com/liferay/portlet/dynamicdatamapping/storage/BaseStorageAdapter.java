@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
 
-import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 
@@ -28,10 +26,10 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Marcellus Tavares
  */
-public abstract class BaseStorageAdapter implements StorageAdapter  {
+public abstract class BaseStorageAdapter implements StorageAdapter {
 
 	public long create(
-			long companyId, long structureId, Map<String, Serializable> fields,
+			long companyId, long structureId, Fields fields,
 			ServiceContext serviceContext)
 		throws StorageException {
 
@@ -70,35 +68,79 @@ public abstract class BaseStorageAdapter implements StorageAdapter  {
 		}
 	}
 
-	public Map<String, Serializable> getFieldsByClass(long classPK)
-			throws StorageException {
-
-		return getFieldsByClass(classPK, null);
+	public Fields getFields(long classPK) throws StorageException {
+		return getFields(classPK, null);
 	}
 
-	public Map<String, Serializable> getFieldsByClass(
-			long classPK, List<String> fieldNames)
+	public Fields getFields(long classPK, List<String> fieldNames)
 		throws StorageException {
 
-		Map<Long, Map<String, Serializable>> results = getFieldsByClasses(
+		Map<Long, Fields> fieldsMapByClasses = getFieldsMapByClasses(
 			new long[] {classPK}, fieldNames);
 
-		return results.get(classPK);
+		return fieldsMapByClasses.get(classPK);
 	}
 
-	public Map<Long, Map<String, Serializable>> getFieldsByClasses(
-			long[] classPKs)
+	public List<Fields> getFieldsListByClasses(
+			long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		return getFieldsByClasses(classPKs, (List<String>)null);
+		try {
+			return doGetFieldsListByClasses(
+				classPKs, fieldNames, orderByComparator);
+		}
+		catch (StorageException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new StorageException(e);
+		}
 	}
 
-	public Map<Long, Map<String, Serializable>> getFieldsByClasses(
+	public List<Fields> getFieldsListByClasses(
+			long[] classPKs, OrderByComparator orderByComparator)
+		throws StorageException {
+
+		return getFieldsListByClasses(classPKs, null, orderByComparator);
+	}
+
+	public List<Fields> getFieldsListByStructure(
+			long structureId, List<String> fieldNames)
+		throws StorageException {
+
+		return getFieldsListByStructure(structureId, fieldNames, null);
+	}
+
+	public List<Fields> getFieldsListByStructure(
+			long structureId, List<String> fieldNames,
+			OrderByComparator orderByComparator)
+		throws StorageException {
+
+		try {
+			return doGetFieldsListByStructure(
+				structureId, fieldNames, orderByComparator);
+		}
+		catch (StorageException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new StorageException(e);
+		}
+	}
+
+	public Map<Long, Fields> getFieldsMapByClasses(long[] classPKs)
+		throws StorageException {
+
+		return getFieldsMapByClasses(classPKs, null);
+	}
+
+	public Map<Long, Fields> getFieldsMapByClasses(
 			long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
 		try {
-			return doGetFieldsByClasses(classPKs, fieldNames);
+			return doGetFieldsMapByClasses(classPKs, fieldNames);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -108,57 +150,14 @@ public abstract class BaseStorageAdapter implements StorageAdapter  {
 		}
 	}
 
-	public List<Map<String, Serializable>> getFieldsByClasses(
-			long[] classPKs, OrderByComparator obc)
-		throws StorageException {
-
-		return getFieldsByClasses(classPKs, null, obc);
-	}
-
-	public List<Map<String, Serializable>> getFieldsByClasses(
-			long[] classPKs, List<String> fieldNames, OrderByComparator obc)
-		throws StorageException {
-
-		try {
-			return doGetFieldsByClasses(classPKs, fieldNames, obc);
-		}
-		catch (StorageException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new StorageException(e);
-		}
-	}
-
-	public List<Map<String, Serializable>> getFieldsByStructure(
-			long structureId, List<String> fieldNames)
-		throws StorageException {
-
-		return getFieldsByStructure(structureId, fieldNames, null);
-	}
-
-	public List<Map<String, Serializable>> getFieldsByStructure(
-			long structureId, List<String> fieldNames, OrderByComparator obc)
-		throws StorageException {
-
-		try {
-			return doGetFieldsByStructure(structureId, fieldNames, obc);
-		}
-		catch (StorageException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new StorageException(e);
-		}
-	}
-
-	public List<Map<String, Serializable>> query(
+	public List<Fields> query(
 			long structureId, List<String> fieldNames, String whereClause,
-			OrderByComparator obc)
+			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		try {
-			return doQuery(structureId, fieldNames, whereClause, obc);
+			return doQuery(
+				structureId, fieldNames, whereClause, orderByComparator);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -169,7 +168,7 @@ public abstract class BaseStorageAdapter implements StorageAdapter  {
 	}
 
 	public int queryCount(long structureId, String whereClause)
-			throws StorageException {
+		throws StorageException {
 
 		try {
 			return doQueryCount(structureId, whereClause);
@@ -183,20 +182,19 @@ public abstract class BaseStorageAdapter implements StorageAdapter  {
 	}
 
 	public void update(
-			long classPK, Map<String, Serializable> fields,
-			ServiceContext serviceContext)
+			long classPK, Fields fields, ServiceContext serviceContext)
 		throws StorageException {
 
-		update(classPK, fields, false, serviceContext);
+		update(classPK, fields, serviceContext, false);
 	}
 
 	public void update(
-			long classPK, Map<String, Serializable> fields, boolean merge,
-			ServiceContext serviceContext)
+			long classPK, Fields fields, ServiceContext serviceContext,
+			boolean merge)
 		throws StorageException {
 
 		try {
-			doUpdate(classPK, fields, merge, serviceContext);
+			doUpdate(classPK, fields, serviceContext, merge);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -207,7 +205,7 @@ public abstract class BaseStorageAdapter implements StorageAdapter  {
 	}
 
 	protected abstract long doCreate(
-			long companyId, long structureId, Map<String, Serializable> fields,
+			long companyId, long structureId, Fields fields,
 			ServiceContext serviceContext)
 		throws Exception;
 
@@ -216,30 +214,31 @@ public abstract class BaseStorageAdapter implements StorageAdapter  {
 	protected abstract void doDeleteByStructure(long structureId)
 		throws Exception;
 
-	protected abstract Map<Long, Map<String, Serializable>>
-			doGetFieldsByClasses(
-				long[] classPKs, List<String> fieldNames)
+	protected abstract List<Fields> doGetFieldsListByClasses(
+			long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws Exception;
 
-	protected abstract List<Map<String, Serializable>> doGetFieldsByClasses(
-			long[] classPKs, List<String> fieldNames, OrderByComparator obc)
+	protected abstract List<Fields> doGetFieldsListByStructure(
+			long structureId, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws Exception;
 
-	protected abstract List<Map<String, Serializable>> doGetFieldsByStructure(
-			long structureId, List<String> fieldNames, OrderByComparator obc)
+	protected abstract Map<Long, Fields> doGetFieldsMapByClasses(
+			long[] classPKs, List<String> fieldNames)
 		throws Exception;
 
-	protected abstract  List<Map<String, Serializable>> doQuery(
+	protected abstract  List<Fields> doQuery(
 			long structureId, List<String> fieldNames, String whereClause,
-			OrderByComparator obc)
+			OrderByComparator orderByComparator)
 		throws Exception;
 
 	protected abstract int doQueryCount(long structureId, String whereClause)
 		throws Exception;
 
 	protected abstract void doUpdate(
-			long classPK, Map<String, Serializable> fields, boolean merge,
-			ServiceContext serviceContext)
-	throws Exception;
+			long classPK, Fields fields, ServiceContext serviceContext,
+			boolean merge)
+		throws Exception;
 
 }

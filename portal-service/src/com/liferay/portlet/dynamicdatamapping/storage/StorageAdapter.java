@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
 
-import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +29,7 @@ import java.util.Map;
 public interface StorageAdapter {
 
 	public long create(
-			long companyId, long structureId, Map<String, Serializable> fields,
+			long companyId, long structureId, Fields fields,
 			ServiceContext serviceContext)
 		throws StorageException;
 
@@ -39,53 +37,51 @@ public interface StorageAdapter {
 
 	public void deleteByStructure(long structureId) throws StorageException;
 
-	public Map<String, Serializable> getFieldsByClass(long classPK)
+	public Fields getFields(long classPK) throws StorageException;
+
+	public Fields getFields(long classPK, List<String> fieldNames)
 		throws StorageException;
 
-	public Map<String, Serializable> getFieldsByClass(
-			long classPK, List<String> fieldNames)
+	public List<Fields> getFieldsListByClasses(
+			long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public Map<Long, Map<String, Serializable>> getFieldsByClasses(
-			long[] classPKs)
-		throws StorageException;
-
-	public Map<Long, Map<String, Serializable>> getFieldsByClasses(
-			long[] classPKs, List<String> fieldNames)
-		throws StorageException;
-
-	public List<Map<String, Serializable>> getFieldsByClasses(
-			long[] classPKs, List<String> fieldNames, OrderByComparator obc)
-		throws StorageException;
-
-	public List<Map<String, Serializable>> getFieldsByClasses(
+	public List<Fields> getFieldsListByClasses(
 			long[] classPKs, OrderByComparator obc)
 		throws StorageException;
 
-	public List<Map<String, Serializable>> getFieldsByStructure(
+	public List<Fields> getFieldsListByStructure(
 			long structureId, List<String> fieldNames)
 		throws StorageException;
 
-	public List<Map<String, Serializable>> getFieldsByStructure(
-			long structureId, List<String> fieldNames, OrderByComparator obc)
+	public List<Fields> getFieldsListByStructure(
+			long structureId, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public List<Map<String, Serializable>> query(
+	public Map<Long, Fields> getFieldsMapByClasses(long[] classPKs)
+		throws StorageException;
+
+	public Map<Long, Fields> getFieldsMapByClasses(
+			long[] classPKs, List<String> fieldNames)
+		throws StorageException;
+
+	public List<Fields> query(
 			long structureId, List<String> fieldNames, String whereClause,
-			OrderByComparator obc)
+			OrderByComparator orderByComparator)
 		throws StorageException;
 
 	public int queryCount(long structureId, String whereClause)
 		throws StorageException;
 
 	public void update(
-			long classPK, Map<String, Serializable> fields,
-			ServiceContext serviceContext)
-	throws StorageException;
+			long classPK, Fields fields, ServiceContext serviceContext)
+		throws StorageException;
 
 	public void update(
-			long classPK, Map<String, Serializable> fields, boolean merge,
-			ServiceContext serviceContext)
+			long classPK, Fields fields, ServiceContext serviceContext,
+			boolean merge)
 		throws StorageException;
 
 }
