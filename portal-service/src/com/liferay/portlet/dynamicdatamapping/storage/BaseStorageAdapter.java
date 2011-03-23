@@ -17,6 +17,8 @@ package com.liferay.portlet.dynamicdatamapping.storage;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -75,20 +77,14 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	public Fields getFields(long classPK, List<String> fieldNames)
 		throws StorageException {
 
-		Map<Long, Fields> fieldsMapByClasses = getFieldsMapByClasses(
-			new long[] {classPK}, fieldNames);
-
-		return fieldsMapByClasses.get(classPK);
-	}
-
-	public List<Fields> getFieldsListByClasses(
-			long[] classPKs, List<String> fieldNames,
-			OrderByComparator orderByComparator)
-		throws StorageException {
-
 		try {
-			return doGetFieldsListByClasses(
-				classPKs, fieldNames, orderByComparator);
+			DDMStorageLink storageLink =
+				DDMStorageLinkLocalServiceUtil.getStorageLinkByClassPK(classPK);
+
+			Map<Long, Fields> fieldsMapByClasses = getFieldsMapByClasses(
+				storageLink.getStructureId() ,new long[] {classPK}, fieldNames);
+
+			return fieldsMapByClasses.get(classPK);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -99,10 +95,29 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public List<Fields> getFieldsListByClasses(
-			long[] classPKs, OrderByComparator orderByComparator)
+			long structureId, long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		return getFieldsListByClasses(classPKs, null, orderByComparator);
+		try {
+			return doGetFieldsListByClasses(
+				structureId, classPKs, fieldNames, orderByComparator);
+		}
+		catch (StorageException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new StorageException(e);
+		}
+	}
+
+	public List<Fields> getFieldsListByClasses(
+			long structureId, long[] classPKs,
+			OrderByComparator orderByComparator)
+		throws StorageException {
+
+		return getFieldsListByClasses(
+			structureId, classPKs, null, orderByComparator);
 	}
 
 	public List<Fields> getFieldsListByStructure(
@@ -129,18 +144,19 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public Map<Long, Fields> getFieldsMapByClasses(long[] classPKs)
+	public Map<Long, Fields> getFieldsMapByClasses(
+			long structureId, long[] classPKs)
 		throws StorageException {
 
-		return getFieldsMapByClasses(classPKs, null);
+		return getFieldsMapByClasses(structureId, classPKs, null);
 	}
 
 	public Map<Long, Fields> getFieldsMapByClasses(
-			long[] classPKs, List<String> fieldNames)
+			long structureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
 		try {
-			return doGetFieldsMapByClasses(classPKs, fieldNames);
+			return doGetFieldsMapByClasses(structureId, classPKs, fieldNames);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -215,7 +231,7 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws Exception;
 
 	protected abstract List<Fields> doGetFieldsListByClasses(
-			long[] classPKs, List<String> fieldNames,
+			long structureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws Exception;
 
@@ -225,7 +241,7 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws Exception;
 
 	protected abstract Map<Long, Fields> doGetFieldsMapByClasses(
-			long[] classPKs, List<String> fieldNames)
+			long structureId, long[] classPKs, List<String> fieldNames)
 		throws Exception;
 
 	protected abstract  List<Fields> doQuery(

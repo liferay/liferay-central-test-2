@@ -41,7 +41,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected List<Fields> doGetFieldsListByClasses(
-			long[] classPKs, List<String> fieldNames,
+			long structureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws Exception {
 
@@ -57,7 +57,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected Map<Long, Fields> doGetFieldsMapByClasses(
-			long[] classPKs, List<String> fieldNames)
+			long structureId, long[] classPKs, List<String> fieldNames)
 		throws Exception {
 
 		return null;

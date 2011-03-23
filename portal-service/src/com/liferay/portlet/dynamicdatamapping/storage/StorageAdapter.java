@@ -43,12 +43,12 @@ public interface StorageAdapter {
 		throws StorageException;
 
 	public List<Fields> getFieldsListByClasses(
-			long[] classPKs, List<String> fieldNames,
+			long structureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
 	public List<Fields> getFieldsListByClasses(
-			long[] classPKs, OrderByComparator obc)
+			long structureId, long[] classPKs, OrderByComparator obc)
 		throws StorageException;
 
 	public List<Fields> getFieldsListByStructure(
@@ -60,11 +60,12 @@ public interface StorageAdapter {
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public Map<Long, Fields> getFieldsMapByClasses(long[] classPKs)
+	public Map<Long, Fields> getFieldsMapByClasses(
+			long structureId, long[] classPKs)
 		throws StorageException;
 
 	public Map<Long, Fields> getFieldsMapByClasses(
-			long[] classPKs, List<String> fieldNames)
+			long structureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException;
 
 	public List<Fields> query(
