@@ -297,8 +297,7 @@ public class DDMStorageLinkLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink> getStorageLinks(
 		long structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getStorageLinks(structureId);
 	}
 

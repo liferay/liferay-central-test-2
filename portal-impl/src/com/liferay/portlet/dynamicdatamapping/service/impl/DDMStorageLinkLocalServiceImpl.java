@@ -95,7 +95,7 @@ public class DDMStorageLinkLocalServiceImpl
 	}
 
 	public List<DDMStorageLink> getStorageLinks(long structureId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmStorageLinkPersistence.findByStructureId(structureId);
 	}
