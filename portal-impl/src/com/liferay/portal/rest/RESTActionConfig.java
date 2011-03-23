@@ -15,13 +15,44 @@
 package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.lang.reflect.Method;
 
 /**
  * @author Igor Spasic
  */
-public class RESTActionConfig {
+public class RESTActionConfig implements Comparable<RESTActionConfig> {
+
+	public RESTActionConfig(
+		Class<?> actionClass, Method actionMethod, String path, String method) {
+
+		_actionClass = actionClass;
+		_actionMethod = actionMethod;
+		_path = path;
+		_method = method;
+
+		_parameterNames = MethodParameterNamesResolverUtil.
+			resolveParameterNames(actionMethod);
+		_parameterTypes = actionMethod.getParameterTypes();
+
+		StringBundler sb = new StringBundler(_parameterNames.length * 2 + 2);
+
+		sb.append(_path);
+		sb.append('+');
+		sb.append(_parameterNames.length);
+		sb.append('+');
+		for (String parameterName : _parameterNames) {
+			sb.append(parameterName);
+			sb.append('+');
+		}
+
+		_pathForCompare = sb.toString();
+	}
+
+	public int compareTo(RESTActionConfig restActionConfig) {
+		return _pathForCompare.compareTo(restActionConfig._pathForCompare);
+	}
 
 	public Class<?> getActionClass() {
 		return _actionClass;
@@ -47,47 +78,36 @@ public class RESTActionConfig {
 		return _path;
 	}
 
-	public String[] getPathChunks() {
-		return _restActionConfigSet.getPathChunks();
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+
+		sb.append("RESTActionConfig{");
+		sb.append(_actionClass.getSimpleName());
+		sb.append('#');
+		sb.append(_actionMethod.getName());
+		sb.append('(');
+		for (int i = 0; i < _parameterNames.length; i++) {
+			if (i != 0) {
+				sb.append(", ");
+			}
+			sb.append(_parameterNames[i]);
+		}
+		sb.append(')');
+		sb.append("--->");
+		sb.append(_method);
+		sb.append(' ');
+		sb.append(_path);
+		sb.append('}');
+		return sb.toString();
 	}
 
-	public PathMacro[] getPathMacros() {
-		return _restActionConfigSet.getPathMacros();
-	}
-
-	public void setActionClass(Class<?> actionClass) {
-		_actionClass = actionClass;
-	}
-
-	public void setActionMethod(Method actionMethod) {
-		_actionMethod = actionMethod;
-
-		_parameterNames =
-			MethodParameterNamesResolverUtil.resolveParameterNames(
-				actionMethod);
-		_parameterTypes = actionMethod.getParameterTypes();
-	}
-
-	public void setMethod(String method) {
-		_method = method;
-	}
-
-	public void setPath(String path) {
-		_path = path;
-	}
-
-	public void setRESTActionConfigSet(
-		RESTActionConfigSet restActionConfigSet) {
-
-		_restActionConfigSet = restActionConfigSet;
-	}
-
-	private Class<?> _actionClass;
-	private Method _actionMethod;
-	private String _method;
-	private String[] _parameterNames;
-	private Class<?>[] _parameterTypes;
-	private String _path;
-	private RESTActionConfigSet _restActionConfigSet;
+	private final Class<?> _actionClass;
+	private final Method _actionMethod;
+	private final String _method;
+	private final String[] _parameterNames;
+	private final Class<?>[] _parameterTypes;
+	private final String _path;
+	private final String _pathForCompare;
 
 }

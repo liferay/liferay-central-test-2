@@ -191,17 +191,14 @@ public class RESTConfigurator extends FindClass {
 			_registerRESTAction(actionClass, method);
 		}
 	}
+
 	private void _registerRESTAction(
-			Class<?> implementationClass, Method method)
-		throws Exception {
+		Class<?> implementationClass, Method method) throws Exception {
 
-		RESTMappingResolver restMappingResolver =
-			new RESTDefaultMappingResolver();
-
-		String path = restMappingResolver.resolvePath(
+		String path = _restMappingResolver.resolvePath(
 			implementationClass, method);
 
-		String httpMethod = restMappingResolver.resolveHttpMethod(method);
+		String httpMethod = _restMappingResolver.resolveHttpMethod(method);
 
 		String utilClassName = implementationClass.getName();
 
@@ -232,5 +229,7 @@ public class RESTConfigurator extends FindClass {
 	private int _registeredActionsCount;
 	private RESTActionsManager _restActionsManager;
 	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);
+	private RESTMappingResolver _restMappingResolver =
+		new RESTMappingResolver();
 
 }

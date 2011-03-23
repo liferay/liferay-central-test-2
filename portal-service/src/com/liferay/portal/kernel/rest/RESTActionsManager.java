@@ -18,6 +18,8 @@ import java.lang.reflect.Method;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Igor Spasic
  */
@@ -25,7 +27,7 @@ public interface RESTActionsManager {
 
 	public List<String[]> dumpMappings();
 
-	public RESTAction lookup(String path, String method);
+	public RESTAction lookup(HttpServletRequest request);
 
 	public void registerRESTAction(
 		Class<?> actionClass, Method actionMethod, String path, String method);

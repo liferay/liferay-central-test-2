@@ -17,16 +17,15 @@ package com.liferay.portal.rest;
 import com.liferay.portal.kernel.rest.RESTAction;
 import com.liferay.portal.kernel.rest.RESTActionsManager;
 import com.liferay.portal.kernel.util.BinarySearch;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SortedArrayList;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Igor Spasic
@@ -34,221 +33,173 @@ import java.util.regex.Pattern;
 public class RESTActionsManagerImpl implements RESTActionsManager {
 
 	public RESTActionsManagerImpl() {
-		_pathChunksBinarySearch = new PathChunksBinarySearch();
-		_restActionConfigSets = new SortedArrayList<RESTActionConfigSet>();
-		_restActionConfigSetsBinarySearch = BinarySearch.forList(
-			_restActionConfigSets);
+		_restActionConfig = new SortedArrayList<RESTActionConfig>();
+		_pathBinarySearch = new PathBinarySearch();
 	}
 
 	public List<String[]> dumpMappings() {
 		List<String[]> mappings = new ArrayList<String[]>();
 
-		for (RESTActionConfigSet restActionConfigSet : _restActionConfigSets) {
-			List<RESTActionConfig> restActionConfigs =
-				restActionConfigSet.getActionConfigs();
+		for (RESTActionConfig restActionConfig : _restActionConfig) {
 
-			for (RESTActionConfig restActionConfig : restActionConfigs) {
-				String[] parameterNames = restActionConfig.getParameterNames();
+			String[] parameterNames = restActionConfig.getParameterNames();
 
-				Class<?> actionClass = restActionConfig.getActionClass();
-				Method actionMethod = restActionConfig.getActionMethod();
+			Class<?> actionClass = restActionConfig.getActionClass();
+			Method actionMethod = restActionConfig.getActionMethod();
 
-				String methodName = actionMethod.getName();
+			String methodName = actionMethod.getName();
 
-				methodName += "(";
+			methodName += "(";
 
-				for (int i = 0; i < parameterNames.length; i++) {
-					if (i != 0) {
-						methodName += ", ";
-					}
-
-					methodName += parameterNames[i];
+			for (int i = 0; i < parameterNames.length; i++) {
+				if (i != 0) {
+					methodName += ", ";
 				}
 
-				methodName += ")";
-
-				String[] mapping = new String[] {
-					restActionConfig.getMethod(), restActionConfig.getPath(),
-					actionClass.getName() + '#' + methodName
-				};
-
-				mappings.add(mapping);
+				methodName += parameterNames[i];
 			}
+
+			methodName += ")";
+
+			String[] mapping = new String[] {
+				restActionConfig.getMethod(), restActionConfig.getPath(),
+				actionClass.getName() + '#' + methodName
+			};
+
+			mappings.add(mapping);
+
 		}
 
 		return mappings;
 	}
 
-	public RESTAction lookup(String path, String method) {
-		String[] pathChunks = StringUtil.split(
-			path.substring(1), StringPool.SLASH);
+	public RESTAction lookup(HttpServletRequest request) {
 
-		int low = 0;
-		int high = _restActionConfigSets.size() - 1;
+		String path = GetterUtil.getString(request.getPathInfo());
 
-		int pathMacroIndex = 0;
+		String method = GetterUtil.getString(request.getMethod());
 
-		for (int depth = 0; depth < pathChunks.length; depth++) {
-			String pathChunk = pathChunks[depth];
+		String pathParameters = null;
 
-			_pathChunksBinarySearch._depth = depth;
+		int pathParametersIndex = _indexOfPathParameters(path);
 
-			int nextLow = _pathChunksBinarySearch.findFirst(
-				pathChunk, low, high);
+		if (pathParametersIndex != -1) {
+			pathParameters = path.substring(pathParametersIndex);
 
-			if (nextLow < 0) {
-				int pathChunkndex = _getPathChunkIndex(
-					pathChunk, depth, pathMacroIndex, low, high);
-
-				if (pathChunkndex == -1) {
-					low = nextLow;
-
-					break;
-				}
-				else {
-					pathMacroIndex++;
-
-					low = pathChunkndex;
-					high = pathChunkndex;
-				}
-			}
-			else {
-				low = nextLow;
-
-				if (high > low) {
-					high = _pathChunksBinarySearch.findLast(
-						pathChunk, low, high);
-				}
-			}
+			path = path.substring(0, pathParametersIndex);
 		}
 
-		if (low < 0) {
-			return null;
+		RESTActionParameters restActionParameters = new RESTActionParameters();
+
+		restActionParameters.collectAll(request, pathParameters);
+
+		String parameterNames[] = restActionParameters.extractParameterNames();
+
+		int index = _lookup(path, method, parameterNames);
+
+		if (index == -1) {
+			throw new RuntimeException(
+				"No REST action associated with path " + path +
+					" and method " + method);
 		}
 
-		RESTActionConfigSet restActionConfigSet = _restActionConfigSets.get(
-			low);
+		RESTActionConfig restActionConfig = _restActionConfig.get(index);
 
-		RESTActionConfig restActionConfig =
-			restActionConfigSet.getRESTActionConfig(method);
-
-		if (restActionConfig == null) {
-			return null;
-		}
-
-		String[] restActionConfigSetPathChunks =
-			restActionConfigSet.getPathChunks();
-
-		if (restActionConfigSetPathChunks.length != pathChunks.length) {
-			return null;
-		}
-
-		return new RESTActionImpl(restActionConfig, pathChunks);
+		return new RESTActionImpl(restActionConfig, restActionParameters);
 	}
 
 	public void registerRESTAction(
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
-		RESTActionConfig restActionConfig = new RESTActionConfig();
+		RESTActionConfig restActionConfig =
+			new RESTActionConfig(actionClass, actionMethod, path, method);
 
-		restActionConfig.setActionClass(actionClass);
-		restActionConfig.setActionMethod(actionMethod);
-		restActionConfig.setPath(path);
-		restActionConfig.setMethod(method);
-
-		RESTActionConfigSet restActionConfigSet = new RESTActionConfigSet();
-
-		restActionConfigSet.setPath(restActionConfig.getPath());
-
-		int index = _restActionConfigSetsBinarySearch.find(restActionConfigSet);
-
-		if (index < 0) {
-			_restActionConfigSets.add(restActionConfigSet);
-		}
-		else {
-			restActionConfigSet = _restActionConfigSets.get(index);
-		}
-
-		restActionConfigSet.addRESTActionConfig(restActionConfig);
+		_restActionConfig.add(restActionConfig);
 	}
 
-	private int _getPathChunkIndex(
-		String pathChunk, int depth, int pathMacroIndex, int low, int high) {
+	private int _countMatchedElements(
+		String[] targetArray, String[] subjectArray) {
 
-		for (int i = low; i <= high; i++) {
-			RESTActionConfigSet restActionConfigSet = _restActionConfigSets.get(
-				i);
+		int matched = 0;
 
-			PathMacro[] pathMacros = restActionConfigSet.getPathMacros();
+		for (String target : targetArray) {
 
-			if (pathMacroIndex >= pathMacros.length) {
-				continue;
-			}
-
-			PathMacro pathMacro = pathMacros[pathMacroIndex];
-
-			if (pathMacro.getIndex() != depth) {
-				continue;
-			}
-
-			if (!pathChunk.startsWith(pathMacro.getOffsetLeft())) {
-				continue;
-			}
-
-			if (!pathChunk.endsWith(pathMacro.getOffsetRight())) {
-				continue;
-			}
-
-			if (pathMacro.getPattern() != null) {
-				String offsetLeft = pathMacro.getOffsetLeft();
-				String offsetRight = pathMacro.getOffsetRight();
-
-				String value = pathChunk.substring(
-					offsetLeft.length(),
-					pathChunk.length() - offsetRight.length());
-
-				Pattern pattern = pathMacro.getPattern();
-
-				Matcher matcher = pattern.matcher(value);
-
-				if (!matcher.matches()) {
-					continue;
+			for (String subject : subjectArray) {
+				if (subject.equals(target)) {
+					matched++;
+					break;
 				}
 			}
-
-			return i;
 		}
-
-		return -1;
+		return matched;
 	}
 
-	private class PathChunksBinarySearch extends BinarySearch<String> {
+	private int _indexOfPathParameters(String path) {
 
-		protected int compare(int index, String element) {
-			String pathChunk = get(index, _depth);
+		int index = path.indexOf('/', 1);
 
-			return pathChunk.compareTo(element);
+		index = path.indexOf('/', index + 1);
+
+		return index;
+	}
+
+	private int _lookup(String path, String method, String[] parameterNames) {
+
+		int firstIndex = _pathBinarySearch.findFirst(path);
+
+		if (firstIndex == -1) {
+			return -1;
 		}
 
-		protected String get(int index, int depth) {
-			RESTActionConfigSet restActionConfigSet =
-				_restActionConfigSets.get(index);
+		int lastIndex = _pathBinarySearch.findLast(path, firstIndex);
 
-			String[] pathChunks = restActionConfigSet.getPathChunks();
+		if (lastIndex == -1) {
+			lastIndex = firstIndex;
+		}
 
-			return pathChunks[depth];
+		int found = -1;
+
+		int max = -1;
+
+		for (int i = firstIndex; i <= lastIndex; i++) {
+			RESTActionConfig config = _restActionConfig.get(i);
+
+			if (config.getMethod() != null &&
+				!config.getMethod().equals(method)) {
+
+				continue;
+			}
+
+			String[] methodParameterNames = config.getParameterNames();
+
+			int matched =
+				_countMatchedElements(parameterNames, methodParameterNames);
+
+			if (matched > max) {
+				max = matched;
+
+				found = i;
+			}
+		}
+		return found;
+
+	}
+
+	private class PathBinarySearch extends BinarySearch<String> {
+
+		protected int compare(int index, String element) {
+			RESTActionConfig rac = _restActionConfig.get(index);
+
+			return rac.getPath().compareTo(element);
 		}
 
 		protected int getLastIndex() {
-			return _restActionConfigSets.size() - 1;
+			return _restActionConfig.size() - 1;
 		}
 
-		private int _depth;
-
 	}
+	private BinarySearch<String> _pathBinarySearch;
 
-	private PathChunksBinarySearch _pathChunksBinarySearch;
-	private SortedArrayList<RESTActionConfigSet> _restActionConfigSets;
-	private BinarySearch<RESTActionConfigSet> _restActionConfigSetsBinarySearch;
+	private SortedArrayList<RESTActionConfig> _restActionConfig;
 
 }

@@ -18,6 +18,8 @@ import java.lang.reflect.Method;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Igor Spasic
  */
@@ -31,8 +33,8 @@ public class RESTActionsManagerUtil {
 		return _restActionsManager;
 	}
 
-	public static RESTAction lookup(String path, String method) {
-		return getRESTActionsManager().lookup(path, method);
+	public static RESTAction lookup(HttpServletRequest request) {
+		return getRESTActionsManager().lookup(request);
 	}
 
 	public static void registerRESTAction(

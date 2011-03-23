@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.rest.RESTAction;
 import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -55,18 +54,8 @@ public class RESTServiceAction extends JSONServiceAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		String path = GetterUtil.getString(request.getPathInfo());
-
-		String method = GetterUtil.getString(request.getMethod());
-
 		try {
-			RESTAction restAction = RESTActionsManagerUtil.lookup(path, method);
-
-			if (restAction == null) {
-				throw new RuntimeException(
-					"No REST action associated with path " + path +
-						" and method " + method);
-			}
+			RESTAction restAction = RESTActionsManagerUtil.lookup(request);
 
 			Object returnObj = restAction.invoke(request);
 
