@@ -32,9 +32,13 @@ public class RESTMappingResolver {
 	public String resolveHttpMethod(Method method) {
 		REST restAnnotation = method.getAnnotation(REST.class);
 
-		String httpMethod = restAnnotation.method().trim();
+		String httpMethod = null;
 
-		if (httpMethod.length() != 0) {
+		if (restAnnotation != null) {
+			httpMethod = restAnnotation.method().trim();
+		}
+
+		if (httpMethod != null && httpMethod.length() != 0) {
 			return httpMethod;
 		}
 
@@ -48,30 +52,37 @@ public class RESTMappingResolver {
 	public String resolvePath(Class<?> clazz, Method method) {
 		REST restAnnotation = method.getAnnotation(REST.class);
 
-		String path = restAnnotation.value().trim();
+		String path = null;
 
-		if (path.length() == 0) {
+		if (restAnnotation != null) {
+			path = restAnnotation.value().trim();
+		}
+
+		if (path == null || path.length() == 0) {
 			path = _nameToPathChunk(method.getName());
 		}
 
 		if (!path.startsWith(StringPool.SLASH)) {
 			path = StringPool.SLASH + path;
 
+			String pathFromClass = null;
+
 			restAnnotation = clazz.getAnnotation(REST.class);
 
 			if (restAnnotation != null) {
-				String pathFromClass = restAnnotation.value().trim();
-
-				if (pathFromClass.length() == 0) {
-					pathFromClass = _classNameToPath(clazz);
-				}
-
-				if (!pathFromClass.startsWith(StringPool.SLASH)) {
-					pathFromClass = StringPool.SLASH + pathFromClass;
-				}
-
-				path = pathFromClass + path;
+				pathFromClass = restAnnotation.value().trim();
 			}
+
+			if (pathFromClass == null || pathFromClass.length() == 0) {
+				pathFromClass = _classNameToPath(clazz);
+			}
+
+			if (!pathFromClass.startsWith(StringPool.SLASH)) {
+				pathFromClass = StringPool.SLASH + pathFromClass;
+			}
+
+			path = pathFromClass + path;
+
 		}
 		return path;
 	}

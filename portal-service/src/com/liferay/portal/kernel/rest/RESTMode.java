@@ -14,26 +14,15 @@
 
 package com.liferay.portal.kernel.rest;
 
-import com.liferay.portal.kernel.util.StringPool;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 /**
- * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
-public @interface REST {
+public enum RESTMode {
 
-	public String value() default StringPool.BLANK;
+	AUTO,
 
-	public String method() default StringPool.BLANK;
+	MANUAL,
 
-	public RESTMode mode() default RESTMode.AUTO;
+	IGNORE
 
 }

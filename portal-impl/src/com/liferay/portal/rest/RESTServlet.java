@@ -81,6 +81,8 @@ public class RESTServlet extends JSONServlet {
 
 			classMethodName = StringUtil.replace(
 				classMethodName, "com.liferay.portal.", "c.l.p.");
+			classMethodName = StringUtil.replace(
+				classMethodName, "com.liferay.", "c.l.");
 
 			sb.append(classMethodName);
 			sb.append("</td></tr>");

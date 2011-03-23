@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.rest.REST;
 import com.liferay.portal.kernel.rest.RESTActionsManager;
+import com.liferay.portal.kernel.rest.RESTMode;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -30,6 +31,9 @@ import java.lang.reflect.Modifier;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import jodd.io.findfile.FindClass;
 
@@ -172,6 +176,31 @@ public class RESTConfigurator extends FindClass {
 		return false;
 	}
 
+	private Class _loadUtilClass(Class implementationClass)
+		throws ClassNotFoundException {
+
+		Class utilClass = _utilClasses.get(implementationClass);
+
+		if (utilClass == null) {
+			String utilClassName = implementationClass.getName();
+
+			if (utilClassName.endsWith("Impl")) {
+				utilClassName = utilClassName.substring(
+					0, utilClassName.length() - 4);
+
+				utilClassName += "Util";
+			}
+
+			utilClassName = StringUtil.replace(utilClassName, ".impl.", ".");
+
+			utilClass = _classLoader.loadClass(utilClassName);
+
+			_utilClasses.put(implementationClass, utilClass);
+		}
+
+		return utilClass;
+	}
+
 	private void _onRESTClass(String className) throws Exception {
 		Class<?> actionClass = _classLoader.loadClass(className);
 
@@ -179,16 +208,47 @@ public class RESTConfigurator extends FindClass {
 			return;
 		}
 
+		RESTMode classScanMode = RESTMode.MANUAL;
+
+		REST restClassAnnotation = actionClass.getAnnotation(REST.class);
+
+		if (restClassAnnotation != null) {
+			classScanMode = restClassAnnotation.mode();
+		}
+
 		Method[] methods = actionClass.getMethods();
 
 		for (Method method : methods) {
-			REST restAnnotation = method.getAnnotation(REST.class);
 
-			if (restAnnotation == null) {
+			if (!method.getDeclaringClass().equals(actionClass)) {
 				continue;
 			}
 
-			_registerRESTAction(actionClass, method);
+			boolean registerMethod = false;
+
+			REST restMethodAnnotation = method.getAnnotation(REST.class);
+
+			if (classScanMode == RESTMode.AUTO) {
+
+				registerMethod = true;
+
+				if ((restMethodAnnotation != null)
+					&& (restMethodAnnotation.mode() == RESTMode.IGNORE)) {
+
+					registerMethod = false;
+				}
+			} else {
+
+				if (restMethodAnnotation != null
+					&& restMethodAnnotation.mode() != RESTMode.IGNORE) {
+
+					registerMethod = true;
+				}
+			}
+
+			if (registerMethod) {
+				_registerRESTAction(actionClass, method);
+			}
 		}
 	}
 
@@ -200,21 +260,15 @@ public class RESTConfigurator extends FindClass {
 
 		String httpMethod = _restMappingResolver.resolveHttpMethod(method);
 
-		String utilClassName = implementationClass.getName();
+		Class<?> utilClass = _loadUtilClass(implementationClass);
 
-		if (utilClassName.endsWith("Impl")) {
-			utilClassName = utilClassName.substring(
-				0, utilClassName.length() - 4);
-
-			utilClassName += "Util";
+		try {
+			method = utilClass.getMethod(
+				method.getName(), method.getParameterTypes());
 		}
-
-		utilClassName = StringUtil.replace(utilClassName, ".impl.", ".");
-
-		Class<?> utilClass = _classLoader.loadClass(utilClassName);
-
-		method = utilClass.getMethod(
-			method.getName(), method.getParameterTypes());
+		catch (NoSuchMethodException nsme) {
+			return;
+		}
 
 		_restActionsManager.registerRESTAction(
 			method.getDeclaringClass(), method, path, httpMethod);
@@ -231,5 +285,6 @@ public class RESTConfigurator extends FindClass {
 	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);
 	private RESTMappingResolver _restMappingResolver =
 		new RESTMappingResolver();
+	private Map<Class, Class> _utilClasses = new HashMap<Class, Class>();
 
 }
