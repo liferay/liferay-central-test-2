@@ -58,7 +58,7 @@ public class DDMStructureServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureKey, boolean autoStructureKey,
 		java.lang.String name, java.lang.String description,
-		java.lang.String xsd,
+		java.lang.String xsd, java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -68,7 +68,7 @@ public class DDMStructureServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureKey, autoStructureKey, name, description, xsd,
-					serviceContext);
+					storageType, serviceContext);
 
 			Object returnObj = null;
 
@@ -170,6 +170,7 @@ public class DDMStructureServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -178,7 +179,8 @@ public class DDMStructureServiceHttp {
 					"updateStructure", _updateStructureParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, name, description, xsd, serviceContext);
+					structureKey, name, description, xsd, storageType,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -210,7 +212,7 @@ public class DDMStructureServiceHttp {
 	private static final Class<?>[] _addStructureParameterTypes0 = new Class[] {
 			long.class, java.lang.String.class, boolean.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteStructureParameterTypes1 = new Class[] {
@@ -222,6 +224,7 @@ public class DDMStructureServiceHttp {
 	private static final Class<?>[] _updateStructureParameterTypes3 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

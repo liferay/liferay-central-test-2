@@ -47,10 +47,12 @@
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="structureId" type="long" />
-		<column name="type" type="String" />
 
 		<!-- Finder methods -->
 
+		<finder name="ClassPK" return-type="DDMStorageLink" unique="true">
+			<finder-column name="classPK" />
+		</finder>
 		<finder name="StructureId" return-type="Collection">
 			<finder-column name="structureId" />
 		</finder>
@@ -83,6 +85,7 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="xsd" type="String" />
+		<column name="storageType" type="String" />
 
 		<!-- Finder methods -->
 

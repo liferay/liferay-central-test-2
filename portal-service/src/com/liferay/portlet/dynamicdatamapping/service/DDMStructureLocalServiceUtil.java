@@ -268,12 +268,14 @@ public class DDMStructureLocalServiceUtil {
 		long userId, long groupId, java.lang.String structureKey,
 		boolean autoStructureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addStructure(userId, groupId, structureKey,
-			autoStructureKey, name, description, xsd, serviceContext);
+			autoStructureKey, name, description, xsd, storageType,
+			serviceContext);
 	}
 
 	public static void addStructureResources(
@@ -356,12 +358,13 @@ public class DDMStructureLocalServiceUtil {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure updateStructure(
 		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateStructure(groupId, structureKey, name, description,
-			xsd, serviceContext);
+			xsd, storageType, serviceContext);
 	}
 
 	public static DDMStructureLocalService getService() {

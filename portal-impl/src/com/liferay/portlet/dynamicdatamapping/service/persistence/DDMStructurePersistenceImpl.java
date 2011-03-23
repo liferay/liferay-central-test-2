@@ -434,6 +434,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 		ddmStructureImpl.setName(ddmStructure.getName());
 		ddmStructureImpl.setDescription(ddmStructure.getDescription());
 		ddmStructureImpl.setXsd(ddmStructure.getXsd());
+		ddmStructureImpl.setStorageType(ddmStructure.getStorageType());
 
 		return ddmStructureImpl;
 	}

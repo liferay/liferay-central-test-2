@@ -226,7 +226,6 @@ public interface DDMStorageLinkLocalService {
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink addStorageLink(
 		long classNameId, long classPK, long structureId,
-		java.lang.String type,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -239,6 +238,10 @@ public interface DDMStorageLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteStorageLink(long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStorageLinkByClassPK(long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -258,13 +261,18 @@ public interface DDMStorageLinkLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLinkByClassPK(
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink> getStorageLinks(
 		long structureId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink updateStorageLink(
-		long storageLinkId, long classNameId, long classPK,
-		java.lang.String type)
+		long storageLinkId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

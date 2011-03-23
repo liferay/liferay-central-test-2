@@ -134,21 +134,6 @@ public interface DDMStorageLinkModel extends BaseModel<DDMStorageLink> {
 	 */
 	public void setStructureId(long structureId);
 
-	/**
-	 * Gets the type of this d d m storage link.
-	 *
-	 * @return the type of this d d m storage link
-	 */
-	@AutoEscape
-	public String getType();
-
-	/**
-	 * Sets the type of this d d m storage link.
-	 *
-	 * @param type the type of this d d m storage link
-	 */
-	public void setType(String type);
-
 	public boolean isNew();
 
 	public void setNew(boolean n);

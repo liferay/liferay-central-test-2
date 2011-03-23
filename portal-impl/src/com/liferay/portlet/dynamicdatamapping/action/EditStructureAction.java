@@ -188,6 +188,7 @@ public class EditStructureAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
+		String storageType = ParamUtil.getString(actionRequest, "storageType");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDMStructure.class.getName(), actionRequest);
@@ -197,11 +198,12 @@ public class EditStructureAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
 				groupId, structureKey, autoStructureKey, name, description, xsd,
-				serviceContext);
+				storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, name, description, xsd, serviceContext);
+				groupId, structureKey, name, description, xsd, storageType,
+				serviceContext);
 		}
 
 		return structure;

@@ -62,6 +62,7 @@ public class DDMStructureJSONSerializer {
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
 		jsonObject.put("xsd", model.getXsd());
+		jsonObject.put("storageType", model.getStorageType());
 
 		return jsonObject;
 	}

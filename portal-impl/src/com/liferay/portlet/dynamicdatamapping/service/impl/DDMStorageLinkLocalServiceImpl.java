@@ -30,7 +30,7 @@ public class DDMStorageLinkLocalServiceImpl
 	extends DDMStorageLinkLocalServiceBaseImpl {
 
 	public DDMStorageLink addStorageLink(
-			long classNameId, long classPK, long structureId, String type,
+			long classNameId, long classPK, long structureId,
 			ServiceContext serviceContext)
 		throws SystemException {
 
@@ -42,7 +42,6 @@ public class DDMStorageLinkLocalServiceImpl
 		storageLink.setClassNameId(classNameId);
 		storageLink.setClassPK(classPK);
 		storageLink.setStructureId(structureId);
-		storageLink.setType(type);
 
 		ddmStorageLinkPersistence.update(storageLink, false);
 
@@ -73,6 +72,15 @@ public class DDMStorageLinkLocalServiceImpl
 		deleteStorageLink(storageLink);
 	}
 
+	public void deleteStorageLinkByClassPK(long classPK)
+		throws PortalException, SystemException {
+
+		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByClassPK(
+			classPK);
+
+		deleteStorageLink(storageLink);
+	}
+
 	public void deleteStorageLinks(long structureId) throws SystemException {
 		List<DDMStorageLink> storageLinks =
 			ddmStorageLinkPersistence.findByStructureId(structureId);
@@ -94,6 +102,12 @@ public class DDMStorageLinkLocalServiceImpl
 		return ddmStorageLinkPersistence.findByC_C(classNameId, classPK);
 	}
 
+	public DDMStorageLink getStorageLinkByClassPK(long classPK)
+		throws PortalException, SystemException {
+
+		return ddmStorageLinkPersistence.findByClassPK(classPK);
+	}
+
 	public List<DDMStorageLink> getStorageLinks(long structureId)
 		throws SystemException {
 
@@ -101,7 +115,7 @@ public class DDMStorageLinkLocalServiceImpl
 	}
 
 	public DDMStorageLink updateStorageLink(
-			long storageLinkId, long classNameId, long classPK, String type)
+			long storageLinkId, long classNameId, long classPK)
 		throws PortalException, SystemException {
 
 		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByPrimaryKey(
@@ -109,7 +123,6 @@ public class DDMStorageLinkLocalServiceImpl
 
 		storageLink.setClassNameId(classNameId);
 		storageLink.setClassPK(classPK);
-		storageLink.setType(type);
 
 		ddmStorageLinkPersistence.update(storageLink, false);
 

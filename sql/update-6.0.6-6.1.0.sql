@@ -33,8 +33,7 @@ create table DDMStorageLink (
 	storageLinkId LONG not null primary key,
 	classNameId LONG,
 	classPK LONG,
-	structureId LONG,
-	type_ VARCHAR(75) null
+	structureId LONG
 );
 
 create table DDMStructure (
@@ -49,7 +48,8 @@ create table DDMStructure (
 	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
-	xsd TEXT null
+	xsd TEXT null,
+	storageType VARCHAR(75) null
 );
 
 create table DDMStructureLink (

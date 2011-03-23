@@ -43,6 +43,7 @@ public class DDMStructureSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setXsd(model.getXsd());
+		soapModel.setStorageType(model.getStorageType());
 
 		return soapModel;
 	}
@@ -191,6 +192,14 @@ public class DDMStructureSoap implements Serializable {
 		_xsd = xsd;
 	}
 
+	public String getStorageType() {
+		return _storageType;
+	}
+
+	public void setStorageType(String storageType) {
+		_storageType = storageType;
+	}
+
 	private String _uuid;
 	private long _structureId;
 	private long _groupId;
@@ -203,4 +212,5 @@ public class DDMStructureSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private String _xsd;
+	private String _storageType;
 }

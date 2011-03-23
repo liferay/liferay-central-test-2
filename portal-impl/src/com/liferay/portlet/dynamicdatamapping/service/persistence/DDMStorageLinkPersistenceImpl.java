@@ -87,6 +87,14 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 			DDMStorageLinkModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByUuid",
 			new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_CLASSPK = new FinderPath(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStorageLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByClassPK",
+			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_CLASSPK = new FinderPath(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
+			DDMStorageLinkModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByClassPK",
+			new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_STRUCTUREID = new FinderPath(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStorageLinkModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByStructureId",
@@ -123,6 +131,10 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	public void cacheResult(DDMStorageLink ddmStorageLink) {
 		EntityCacheUtil.putResult(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStorageLinkImpl.class, ddmStorageLink.getPrimaryKey(),
+			ddmStorageLink);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
+			new Object[] { Long.valueOf(ddmStorageLink.getClassPK()) },
 			ddmStorageLink);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
@@ -175,6 +187,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	public void clearCache(DDMStorageLink ddmStorageLink) {
 		EntityCacheUtil.removeResult(DDMStorageLinkModelImpl.ENTITY_CACHE_ENABLED,
 			DDMStorageLinkImpl.class, ddmStorageLink.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK,
+			new Object[] { Long.valueOf(ddmStorageLink.getClassPK()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
@@ -289,6 +304,9 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 
 		DDMStorageLinkModelImpl ddmStorageLinkModelImpl = (DDMStorageLinkModelImpl)ddmStorageLink;
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK,
+			new Object[] { Long.valueOf(ddmStorageLinkModelImpl.getClassPK()) });
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
 				Long.valueOf(ddmStorageLinkModelImpl.getClassNameId()),
@@ -339,6 +357,21 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 			ddmStorageLink);
 
 		if (!isNew &&
+				(ddmStorageLink.getClassPK() != ddmStorageLinkModelImpl.getOriginalClassPK())) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK,
+				new Object[] {
+					Long.valueOf(ddmStorageLinkModelImpl.getOriginalClassPK())
+				});
+		}
+
+		if (isNew ||
+				(ddmStorageLink.getClassPK() != ddmStorageLinkModelImpl.getOriginalClassPK())) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
+				new Object[] { Long.valueOf(ddmStorageLink.getClassPK()) },
+				ddmStorageLink);
+		}
+
+		if (!isNew &&
 				((ddmStorageLink.getClassNameId() != ddmStorageLinkModelImpl.getOriginalClassNameId()) ||
 				(ddmStorageLink.getClassPK() != ddmStorageLinkModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
@@ -377,7 +410,6 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 		ddmStorageLinkImpl.setClassNameId(ddmStorageLink.getClassNameId());
 		ddmStorageLinkImpl.setClassPK(ddmStorageLink.getClassPK());
 		ddmStorageLinkImpl.setStructureId(ddmStorageLink.getStructureId());
-		ddmStorageLinkImpl.setType(ddmStorageLink.getType());
 
 		return ddmStorageLinkImpl;
 	}
@@ -819,6 +851,133 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 		}
 		else {
 			return null;
+		}
+	}
+
+	/**
+	 * Finds the d d m storage link where classPK = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException} if it could not be found.
+	 *
+	 * @param classPK the class p k to search with
+	 * @return the matching d d m storage link
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchStorageLinkException if a matching d d m storage link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMStorageLink findByClassPK(long classPK)
+		throws NoSuchStorageLinkException, SystemException {
+		DDMStorageLink ddmStorageLink = fetchByClassPK(classPK);
+
+		if (ddmStorageLink == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("classPK=");
+			msg.append(classPK);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchStorageLinkException(msg.toString());
+		}
+
+		return ddmStorageLink;
+	}
+
+	/**
+	 * Finds the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param classPK the class p k to search with
+	 * @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMStorageLink fetchByClassPK(long classPK)
+		throws SystemException {
+		return fetchByClassPK(classPK, true);
+	}
+
+	/**
+	 * Finds the d d m storage link where classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param classPK the class p k to search with
+	 * @return the matching d d m storage link, or <code>null</code> if a matching d d m storage link could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMStorageLink fetchByClassPK(long classPK, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { classPK };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CLASSPK,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_SELECT_DDMSTORAGELINK_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSPK_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classPK);
+
+				List<DDMStorageLink> list = q.list();
+
+				result = list;
+
+				DDMStorageLink ddmStorageLink = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
+						finderArgs, list);
+				}
+				else {
+					ddmStorageLink = list.get(0);
+
+					cacheResult(ddmStorageLink);
+
+					if ((ddmStorageLink.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
+							finderArgs, ddmStorageLink);
+					}
+				}
+
+				return ddmStorageLink;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DDMStorageLink)result;
+			}
 		}
 	}
 
@@ -1415,6 +1574,19 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	}
 
 	/**
+	 * Removes the d d m storage link where classPK = &#63; from the database.
+	 *
+	 * @param classPK the class p k to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByClassPK(long classPK)
+		throws NoSuchStorageLinkException, SystemException {
+		DDMStorageLink ddmStorageLink = findByClassPK(classPK);
+
+		ddmStorageLinkPersistence.remove(ddmStorageLink);
+	}
+
+	/**
 	 * Removes all the d d m storage links where structureId = &#63; from the database.
 	 *
 	 * @param structureId the structure ID to search with
@@ -1507,6 +1679,59 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d d m storage links where classPK = &#63;.
+	 *
+	 * @param classPK the class p k to search with
+	 * @return the number of matching d d m storage links
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByClassPK(long classPK) throws SystemException {
+		Object[] finderArgs = new Object[] { classPK };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_CLASSPK,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DDMSTORAGELINK_WHERE);
+
+			query.append(_FINDER_COLUMN_CLASSPK_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classPK);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CLASSPK,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1718,6 +1943,7 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddmStorageLink.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddmStorageLink.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddmStorageLink.uuid IS NULL OR ddmStorageLink.uuid = ?)";
+	private static final String _FINDER_COLUMN_CLASSPK_CLASSPK_2 = "ddmStorageLink.classPK = ?";
 	private static final String _FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2 = "ddmStorageLink.structureId = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "ddmStorageLink.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "ddmStorageLink.classPK = ?";

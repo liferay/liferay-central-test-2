@@ -133,6 +133,7 @@ create index IX_AE4B50C2 on DDMContent (uuid_);
 create unique index IX_EB9BDE28 on DDMContent (uuid_, groupId);
 
 create unique index IX_477E84A3 on DDMStorageLink (classNameId, classPK);
+create unique index IX_702D1AD5 on DDMStorageLink (classPK);
 create index IX_81776090 on DDMStorageLink (structureId);
 create index IX_32A18526 on DDMStorageLink (uuid_);
 

@@ -1690,9 +1690,6 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="structureId" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -1716,6 +1713,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="xsd" />
+			<basic name="storageType" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

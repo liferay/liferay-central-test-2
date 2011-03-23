@@ -243,11 +243,10 @@ public class DDMStorageLinkLocalServiceWrapper
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink addStorageLink(
 		long classNameId, long classPK, long structureId,
-		java.lang.String type,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStorageLinkLocalService.addStorageLink(classNameId, classPK,
-			structureId, type, serviceContext);
+			structureId, serviceContext);
 	}
 
 	public void deleteStorageLink(
@@ -266,6 +265,12 @@ public class DDMStorageLinkLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_ddmStorageLinkLocalService.deleteStorageLink(classNameId, classPK);
+	}
+
+	public void deleteStorageLinkByClassPK(long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmStorageLinkLocalService.deleteStorageLinkByClassPK(classPK);
 	}
 
 	public void deleteStorageLinks(long structureId)
@@ -287,6 +292,13 @@ public class DDMStorageLinkLocalServiceWrapper
 		return _ddmStorageLinkLocalService.getStorageLink(classNameId, classPK);
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLinkByClassPK(
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStorageLinkLocalService.getStorageLinkByClassPK(classPK);
+	}
+
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink> getStorageLinks(
 		long structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -294,12 +306,11 @@ public class DDMStorageLinkLocalServiceWrapper
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink updateStorageLink(
-		long storageLinkId, long classNameId, long classPK,
-		java.lang.String type)
+		long storageLinkId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStorageLinkLocalService.updateStorageLink(storageLinkId,
-			classNameId, classPK, type);
+			classNameId, classPK);
 	}
 
 	public DDMStorageLinkLocalService getWrappedDDMStorageLinkLocalService() {

@@ -153,24 +153,6 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		_ddmStorageLink.setStructureId(structureId);
 	}
 
-	/**
-	* Gets the type of this d d m storage link.
-	*
-	* @return the type of this d d m storage link
-	*/
-	public java.lang.String getType() {
-		return _ddmStorageLink.getType();
-	}
-
-	/**
-	* Sets the type of this d d m storage link.
-	*
-	* @param type the type of this d d m storage link
-	*/
-	public void setType(java.lang.String type) {
-		_ddmStorageLink.setType(type);
-	}
-
 	public boolean isNew() {
 		return _ddmStorageLink.isNew();
 	}
@@ -231,6 +213,12 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 
 	public java.lang.String toXmlString() {
 		return _ddmStorageLink.toXmlString();
+	}
+
+	public java.lang.String getStorageType()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStorageLink.getStorageType();
 	}
 
 	public DDMStorageLink getWrappedDDMStorageLink() {

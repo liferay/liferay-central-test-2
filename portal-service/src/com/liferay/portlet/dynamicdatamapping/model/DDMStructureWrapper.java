@@ -290,6 +290,24 @@ public class DDMStructureWrapper implements DDMStructure {
 		_ddmStructure.setXsd(xsd);
 	}
 
+	/**
+	* Gets the storage type of this d d m structure.
+	*
+	* @return the storage type of this d d m structure
+	*/
+	public java.lang.String getStorageType() {
+		return _ddmStructure.getStorageType();
+	}
+
+	/**
+	* Sets the storage type of this d d m structure.
+	*
+	* @param storageType the storage type of this d d m structure
+	*/
+	public void setStorageType(java.lang.String storageType) {
+		_ddmStructure.setStorageType(storageType);
+	}
+
 	public boolean isNew() {
 		return _ddmStructure.isNew();
 	}

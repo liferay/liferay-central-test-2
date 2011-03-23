@@ -51,7 +51,7 @@ public class DDMStructureLocalServiceImpl
 	public DDMStructure addStructure(
 			long userId, long groupId, String structureKey,
 			boolean autoStructureKey, String name, String description,
-			String xsd, ServiceContext serviceContext)
+			String xsd, String storageType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Dynamic data mapping structure
@@ -91,6 +91,7 @@ public class DDMStructureLocalServiceImpl
 		structure.setName(name);
 		structure.setDescription(description);
 		structure.setXsd(xsd);
+		structure.setStorageType(storageType);
 
 		ddmStructurePersistence.update(structure, false);
 
@@ -205,7 +206,7 @@ public class DDMStructureLocalServiceImpl
 
 	public DDMStructure updateStructure(
 			long groupId, String structureKey, String name, String description,
-			String xsd, ServiceContext serviceContext)
+			String xsd, String storageType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -224,6 +225,7 @@ public class DDMStructureLocalServiceImpl
 		structure.setName(name);
 		structure.setDescription(description);
 		structure.setXsd(xsd);
+		structure.setStorageType(storageType);
 
 		ddmStructurePersistence.update(structure, false);
 

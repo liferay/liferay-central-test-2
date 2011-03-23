@@ -1347,7 +1347,6 @@
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="structureId" type="long" />
-		<field name="type" type="String" />
 	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStructure">
 		<field name="uuid" type="String" />
@@ -1372,6 +1371,7 @@
 		<field name="xsd" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="storageType" type="String" />
 	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink">
 		<field name="structureLinkId" type="long" />
