@@ -108,6 +108,10 @@ public class WikiPageWrapper implements WikiPage {
 		_wikiPage.setResourcePrimKey(resourcePrimKey);
 	}
 
+	public boolean isResourceMain() {
+		return _wikiPage.isResourceMain();
+	}
+
 	/**
 	* Gets the group ID of this wiki page.
 	*

@@ -105,6 +105,8 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	 */
 	public void setResourcePrimKey(long resourcePrimKey);
 
+	public boolean isResourceMain();
+
 	/**
 	 * Gets the group ID of this wiki page.
 	 *

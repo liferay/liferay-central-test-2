@@ -236,6 +236,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	public boolean isResourceMain() {
+		return true;
+	}
+
 	public long getGroupId() {
 		return _groupId;
 	}

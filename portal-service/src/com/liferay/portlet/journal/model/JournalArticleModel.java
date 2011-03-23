@@ -107,6 +107,8 @@ public interface JournalArticleModel extends BaseModel<JournalArticle>,
 	 */
 	public void setResourcePrimKey(long resourcePrimKey);
 
+	public boolean isResourceMain();
+
 	/**
 	 * Gets the group ID of this journal article.
 	 *

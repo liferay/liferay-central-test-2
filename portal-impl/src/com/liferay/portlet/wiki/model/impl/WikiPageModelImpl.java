@@ -221,6 +221,10 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		_resourcePrimKey = resourcePrimKey;
 	}
 
+	public boolean isResourceMain() {
+		return true;
+	}
+
 	public long getOriginalResourcePrimKey() {
 		return _originalResourcePrimKey;
 	}

@@ -45,5 +45,7 @@ public interface WikiPage extends WikiPageModel {
 
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectPage();
 
+	public boolean isResourceMain();
+
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 }

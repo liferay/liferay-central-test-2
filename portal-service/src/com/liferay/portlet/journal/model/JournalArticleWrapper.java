@@ -108,6 +108,10 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle.setResourcePrimKey(resourcePrimKey);
 	}
 
+	public boolean isResourceMain() {
+		return _journalArticle.isResourceMain();
+	}
+
 	/**
 	* Gets the group ID of this journal article.
 	*
