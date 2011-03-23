@@ -30,6 +30,8 @@ import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
 
+import java.lang.reflect.Constructor;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -38,6 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
@@ -206,7 +209,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 	public Analyzer getAnalyzer() {
 		try {
-			return (Analyzer)_analyzerClass.newInstance();
+			if (_analyzerClass.equals(StandardAnalyzer.class)) {
+				Constructor<?> constructor = _analyzerClass.getConstructor(
+					Version.class);
+
+				return (Analyzer)constructor.newInstance(Version.LUCENE_30);
+			}
+			else {
+				return (Analyzer)_analyzerClass.newInstance();
+			}
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
