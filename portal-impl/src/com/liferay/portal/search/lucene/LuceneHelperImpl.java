@@ -348,6 +348,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Map<Long, IndexAccessor> _indexAccessorMap =
 		new ConcurrentHashMap<Long, IndexAccessor>();
-	private Version _version = Version.LUCENE_24;
+	private Version _version = Version.LUCENE_30;
 
 }
