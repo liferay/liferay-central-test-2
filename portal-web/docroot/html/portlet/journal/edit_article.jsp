@@ -166,7 +166,7 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 	}
 }
 
-String layoutUuid = BeanParamUtil.getBoolean(article, request, "layoutUuid");
+String layoutUuid = BeanParamUtil.getString(article, request, "layoutUuid");
 
 String languageId = LanguageUtil.getLanguageId(request);
 
