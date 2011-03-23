@@ -532,7 +532,11 @@ public class Entity {
 	}
 
 	public boolean isResourcedModel() {
-		if (hasColumn("resourcePrimKey")) {
+		String pkVarName = getPKVarName();
+
+		if (hasColumn("resourcePrimKey") &&
+			!pkVarName.equals("resourcePrimKey")) {
+
 			return true;
 		}
 		else {
