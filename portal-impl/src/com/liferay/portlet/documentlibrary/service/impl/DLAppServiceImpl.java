@@ -325,9 +325,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long repositoryId, long parentFolderId, int start, int end)
 		throws PortalException, SystemException {
 
-		return getFolders(
-			repositoryId, parentFolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
+		return getFolders(repositoryId, parentFolderId, start, end, null);
 	}
 
 	public List<Folder> getFolders(
