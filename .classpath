@@ -206,7 +206,8 @@
 	<classpathentry kind="lib" path="lib/portal/liferay-rhino.jar"/>
 	<classpathentry kind="lib" path="lib/portal/liferay-yuicompressor.jar"/>
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
-	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
+	<classpathentry kind="lib" path="lib/portal/lucene-analyzers.jar"/>
+	<classpathentry kind="lib" path="lib/portal/lucene-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-memory.jar"/>
 	<classpathentry kind="lib" path="lib/portal/memcached.jar"/>

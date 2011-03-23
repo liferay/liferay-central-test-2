@@ -88,7 +88,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		BooleanQuery booleanQuery, String field, String startValue,
 		String endValue) {
 
-		NumericRangeQuery numericRangeQuery = NumericRangeQuery.newLongRange(
+		NumericRangeQuery<?> numericRangeQuery = NumericRangeQuery.newLongRange(
 			field, GetterUtil.getLong(startValue), GetterUtil.getLong(endValue),
 			true, true);
 
