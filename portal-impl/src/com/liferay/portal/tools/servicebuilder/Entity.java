@@ -531,6 +531,15 @@ public class Entity {
 		return _portalReference;
 	}
 
+	public boolean isResourcedModel() {
+		if (hasColumn("resourcePrimKey")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isWorkflowEnabled() {
 		if (hasColumn("status") && hasColumn("statusByUserId") &&
 			hasColumn("statusByUserName") && hasColumn("statusDate")) {
