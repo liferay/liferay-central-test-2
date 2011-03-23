@@ -244,7 +244,7 @@ AUI().add(
 
 						Liferay.Service.Asset.AssetTag.getGroupsTags(
 							{
-								groupIds: [themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()]
+								groupIds: [themeDisplay.getCompanyGroupId(), themeDisplay.getParentGroupId()]
 							},
 							callback
 						);
@@ -309,7 +309,7 @@ AUI().add(
 								after: {
 									search: function() {
 										var fieldsets = popup.entriesNode.all('fieldset');
-										
+						
 										fieldsets.each(
 											function(item, index, collection) {
 												var visibleEntries = item.one('label:not(.aui-helper-hidden)');

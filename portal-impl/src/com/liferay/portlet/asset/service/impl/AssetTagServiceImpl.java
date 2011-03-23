@@ -61,15 +61,13 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	public List<AssetTag> getGroupsTags(long[] groupIds)
 		throws PortalException, SystemException {
 
-		return filterTags(
-			assetTagLocalService.getGroupsTags(groupIds));
+		return filterTags(assetTagLocalService.getGroupsTags(groupIds));
 	}
 
 	public List<AssetTag> getGroupTags(long groupId)
 		throws PortalException, SystemException {
 
-		return filterTags(
-			assetTagLocalService.getGroupTags(groupId));
+		return filterTags(assetTagLocalService.getGroupTags(groupId));
 	}
 
 	public AssetTag getTag(long tagId) throws PortalException, SystemException {
