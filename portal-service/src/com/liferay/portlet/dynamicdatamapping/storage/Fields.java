@@ -42,7 +42,7 @@ public class Fields {
 		return iterator(null);
 	}
 
-	public Iterator<Field> iterator(Comparator<Serializable> comparator) {
+	public Iterator<Field> iterator(Comparator<Field> comparator) {
 		Collection<Field> fieldsCollection = _fieldsMap.values();
 
 		List<Field> fieldsList = new ArrayList<Field>(fieldsCollection);
