@@ -93,6 +93,21 @@ public class AssetTagServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.asset.model.AssetTagSoap[] getGroupsTags(
+		long[] groupIds) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.asset.model.AssetTag> returnValue =
+				AssetTagServiceUtil.getGroupsTags(groupIds);
+
+			return com.liferay.portlet.asset.model.AssetTagSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTagSoap[] getGroupTags(
 		long groupId) throws RemoteException {
 		try {

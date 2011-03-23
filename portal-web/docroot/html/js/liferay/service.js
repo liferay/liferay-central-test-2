@@ -523,6 +523,7 @@ Liferay.Service.registerClass(
 	{
 		addTag: true,
 		deleteTag: true,
+		getGroupsTags: true,
 		getGroupTags: true,
 		getTag: true,
 		getTags: true,

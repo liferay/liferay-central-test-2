@@ -228,6 +228,18 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		return assetTagFinder.findByEntryId(entryId);
 	}
 
+	public List<AssetTag> getGroupsTags(long[] groupIds)
+		throws PortalException, SystemException {
+
+		List<AssetTag> assetTags = new ArrayList<AssetTag>();
+
+		for (long groupId : groupIds) {
+			assetTags.addAll(getGroupTags(groupId));
+		}
+
+		return assetTags;
+	}
+
 	public List<AssetTag> getGroupTags(long groupId) throws SystemException {
 		return assetTagPersistence.findByGroupId(groupId);
 	}

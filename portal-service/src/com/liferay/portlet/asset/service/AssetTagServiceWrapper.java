@@ -42,6 +42,13 @@ public class AssetTagServiceWrapper implements AssetTagService {
 		_assetTagService.deleteTag(tagId);
 	}
 
+	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupsTags(
+		long[] groupIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetTagService.getGroupsTags(groupIds);
+	}
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,

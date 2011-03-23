@@ -58,6 +58,13 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		assetTagLocalService.deleteTag(tagId);
 	}
 
+	public List<AssetTag> getGroupsTags(long[] groupIds)
+		throws PortalException, SystemException {
+
+		return filterTags(
+			assetTagLocalService.getGroupsTags(groupIds));
+	}
+
 	public List<AssetTag> getGroupTags(long groupId)
 		throws PortalException, SystemException {
 
