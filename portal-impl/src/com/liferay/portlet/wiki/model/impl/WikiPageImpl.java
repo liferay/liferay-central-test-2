@@ -142,6 +142,10 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return page;
 	}
 
+	public boolean isResourceMain() {
+		return isHead();
+	}
+
 	public void setAttachmentsDir(String attachmentsDir) {
 		_attachmentDirs = attachmentsDir;
 	}

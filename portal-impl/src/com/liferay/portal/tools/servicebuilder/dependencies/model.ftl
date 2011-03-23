@@ -191,6 +191,10 @@ public interface ${entity.name}Model extends
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map, Locale defaultLocale);
 		</#if>
 
+		<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
+			public boolean isResourceMain();
+		</#if>
+
 		<#if column.userUuid>
 			/**
 			 * Gets the ${column.userUuidHumanName} of this ${entity.humanName}.
