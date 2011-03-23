@@ -14,6 +14,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.util.Date;
 
 /**
@@ -30,5 +32,7 @@ public interface AuditedModel {
 	public long getUserId();
 
 	public String getUserName();
+	
+	public String getUserUuid() throws SystemException;
 
 }
