@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
@@ -539,6 +540,10 @@ public interface Portal {
 
 	public String getGoogleGadgetURL(
 			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
+	public String getGroupFriendlyURL(
+			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
 	public String[] getGuestPermissions(HttpServletRequest request);

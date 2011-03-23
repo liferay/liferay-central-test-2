@@ -1612,9 +1612,19 @@ public class PortalImpl implements Portal {
 			return null;
 		}
 
-		String layoutFriendlyURL = layout.getFriendlyURL();
+		String groupFriendlyURL = getGroupFriendlyURL(
+			layout.getGroup(), layout.isPrivateLayout(), themeDisplay);
 
-		LayoutSet layoutSet = layout.getLayoutSet();
+		return groupFriendlyURL + layout.getFriendlyURL();
+	}
+
+	public String getGroupFriendlyURL(
+			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		LayoutSet layoutSet =
+			LayoutSetLocalServiceUtil.getLayoutSet(
+				group.getGroupId(), privateLayoutSet);
 
 		long curLayoutSetId =
 			themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
@@ -1630,11 +1640,11 @@ public class PortalImpl implements Portal {
 				!layoutSet.isPrivateLayout()) {
 
 				try {
-					Group group = GroupLocalServiceUtil.getGroup(
+					Group defaultGroup = GroupLocalServiceUtil.getGroup(
 						themeDisplay.getCompanyId(),
 						PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
 
-					if (layoutSet.getGroupId() == group.getGroupId()) {
+					if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
 						Company company = themeDisplay.getCompany();
 
 						virtualHostname = company.getVirtualHostname();
@@ -1655,25 +1665,23 @@ public class PortalImpl implements Portal {
 				String portalDomain = HttpUtil.getDomain(
 					themeDisplay.getPortalURL());
 
+				String suffix = StringPool.BLANK;
+
 				if (virtualHostname.contains(portalDomain)) {
 					if (themeDisplay.isWidget()) {
-						layoutFriendlyURL =
-							PropsValues.WIDGET_SERVLET_MAPPING +
-								layoutFriendlyURL;
+						suffix = PropsValues.WIDGET_SERVLET_MAPPING;
 					}
 
 					if (themeDisplay.isI18n()) {
-						layoutFriendlyURL =
-							themeDisplay.getI18nPath() + layoutFriendlyURL;
+						suffix = themeDisplay.getI18nPath();
 					}
 
-					return virtualHostname + _pathContext + layoutFriendlyURL;
+					return virtualHostname + _pathContext + suffix;
 				}
 			}
 			else {
 				if ((layoutSet.getLayoutSetId() != curLayoutSetId) &&
-					(layout.getGroup().getClassPK() !=
-						themeDisplay.getUserId())) {
+					(group.getClassPK() != themeDisplay.getUserId())) {
 
 					Company company = themeDisplay.getCompany();
 
@@ -1688,11 +1696,9 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		Group group = layout.getGroup();
-
 		String friendlyURL = null;
 
-		if (layout.isPrivateLayout()) {
+		if (privateLayoutSet) {
 			if (group.isUser()) {
 				friendlyURL = _PRIVATE_USER_SERVLET_MAPPING;
 			}
@@ -1712,8 +1718,7 @@ public class PortalImpl implements Portal {
 			friendlyURL = themeDisplay.getI18nPath() + friendlyURL;
 		}
 
-		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL() +
-			layoutFriendlyURL;
+		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL();
 	}
 
 	public String getLayoutFriendlyURL(
