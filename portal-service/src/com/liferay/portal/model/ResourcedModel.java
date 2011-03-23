@@ -14,8 +14,6 @@
 
 package com.liferay.portal.model;
 
-import java.util.Date;
-
 /**
  * @author Brian Wing Shun Chan
  */
