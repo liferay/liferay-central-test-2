@@ -24,7 +24,7 @@
 	UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
 	%>
 
-	<iframe frameborder="0" height="100%" src="<%= typeSettingsProperties.getProperty("url") %>" width="100%" onLoad="resizeIframe();"></iframe>
+	<iframe id="embedded_page_iframe" frameborder="0" height="100%" src="<%= typeSettingsProperties.getProperty("url") %>" width="100%" onLoad="resizeIframe();"></iframe>
 </div>
 
 <%@ include file="/html/portal/layout/view/common.jspf" %>

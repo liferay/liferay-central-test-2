@@ -44,15 +44,28 @@
 				winHeight = document.body.clientHeight;
 			}
 
-			// The value 139 here is derived (tab_height * num_tab_levels) +
-			// height_of_banner + bottom_spacer. 139 just happend to work in
-			// this instance in IE and Firefox at the time.
+			var iframe = A.one('#embedded_page_iframe');
 
-			//var iFrame = document.getElementById('iframe');
+			var height = null;
 
-			//iFrame.style.height = (winHeight - 139);
+			try {
+				height = iframe.attr('contentWindow.document.body.offsetHeight');
 
-			A.all('iframe').setStyle('height', winHeight - 139 + 'px');
+				if (!height) {
+					height = iframe.attr('contentWindow.document.body.scrollHeight');
+				}
+
+				height = height + 50;
+			}
+			catch (e) {
+				// The value 139 here is derived (tab_height * num_tab_levels) +
+				// height_of_banner + bottom_spacer. 139 just happend to work in
+				// this instance in IE and Firefox at the time.
+
+				height = winHeight - 139;
+			}
+
+			A.all('iframe').setStyle('height', height + 'px');
 		},
 		['aui-base']
 	);
