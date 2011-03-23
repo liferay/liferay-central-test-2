@@ -32,7 +32,9 @@ public interface AuditedModel {
 	public long getUserId();
 
 	public String getUserName();
-	
+
 	public String getUserUuid() throws SystemException;
+
+	public void setUserUuid(String userUuid);
 
 }
