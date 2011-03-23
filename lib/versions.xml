@@ -1704,7 +1704,7 @@
 	</library>
 	<library>
 		<file-name>portal/hibernate3.jar</file-name>
-		<version>3.6.0</version>
+		<version>3.6.1</version>
 		<project-name>Hibernate</project-name>
 		<project-url>http://www.hibernate.org</project-url>
 		<licenses>
