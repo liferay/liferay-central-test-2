@@ -61,22 +61,21 @@ public class ComboServlet extends HttpServlet {
 
 		String extension = FileUtil.getExtension(firstModulePath);
 
-		boolean containsCSS = extension.equalsIgnoreCase(_CSS_EXTENSION);
-
 		String p = ParamUtil.getString(request, "p");
+
 		String minifierType = ParamUtil.getString(request, "minifierType");
-
-		int length = modulePaths.length;
-
-		byte[][] bytesArray = new byte[length][];
 
 		if (Validator.isNull(minifierType)) {
 			minifierType = "js";
 
-			if (containsCSS) {
+			if (extension.equalsIgnoreCase(_CSS_EXTENSION)) {
 				minifierType = "css";
 			}
 		}
+
+		int length = modulePaths.length;
+
+		byte[][] bytesArray = new byte[length][];
 
 		for (String modulePath : modulePaths) {
 			byte[] bytes = new byte[0];
@@ -93,7 +92,7 @@ public class ComboServlet extends HttpServlet {
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
 
-		if (containsCSS) {
+		if (extension.equalsIgnoreCase(_CSS_EXTENSION)) {
 			contentType = ContentTypes.TEXT_CSS;
 		}
 
