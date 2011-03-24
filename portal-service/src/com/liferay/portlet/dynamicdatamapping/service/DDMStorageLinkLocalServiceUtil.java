@@ -257,6 +257,12 @@ public class DDMStorageLinkLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void deleteClassStorageLink(long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteClassStorageLink(classPK);
+	}
+
 	public static void deleteStorageLink(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink storageLink)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -269,21 +275,16 @@ public class DDMStorageLinkLocalServiceUtil {
 		getService().deleteStorageLink(storageLinkId);
 	}
 
-	public static void deleteStorageLink(long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStorageLink(classNameId, classPK);
-	}
-
-	public static void deleteStorageLinkByClassPK(long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStorageLinkByClassPK(classPK);
-	}
-
-	public static void deleteStorageLinks(long structureId)
+	public static void deleteStructureStorageLinks(long structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStorageLinks(structureId);
+		getService().deleteStructureStorageLinks(structureId);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getClassStorageLink(
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getClassStorageLink(classPK);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLink(
@@ -293,24 +294,10 @@ public class DDMStorageLinkLocalServiceUtil {
 		return getService().getStorageLink(storageLinkId);
 	}
 
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLink(
-		long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStorageLink(classNameId, classPK);
-	}
-
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink getStorageLinkByClassPK(
-		long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStorageLinkByClassPK(classPK);
-	}
-
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink> getStorageLinks(
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink> getStructureStorageLinks(
 		long structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStorageLinks(structureId);
+		return getService().getStructureStorageLinks(structureId);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink updateStorageLink(

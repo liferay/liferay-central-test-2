@@ -48,6 +48,15 @@ public class DDMStorageLinkLocalServiceImpl
 		return storageLink;
 	}
 
+	public void deleteClassStorageLink(long classPK)
+		throws PortalException, SystemException {
+
+		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByClassPK(
+			classPK);
+
+		deleteStorageLink(storageLink);
+	}
+
 	public void deleteStorageLink(DDMStorageLink storageLink)
 		throws SystemException {
 
@@ -63,25 +72,9 @@ public class DDMStorageLinkLocalServiceImpl
 		deleteStorageLink(storageLink);
 	}
 
-	public void deleteStorageLink(long classNameId, long classPK)
-		throws PortalException, SystemException {
+	public void deleteStructureStorageLinks(long structureId)
+		throws SystemException {
 
-		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByC_C(
-			classNameId, classPK);
-
-		deleteStorageLink(storageLink);
-	}
-
-	public void deleteStorageLinkByClassPK(long classPK)
-		throws PortalException, SystemException {
-
-		DDMStorageLink storageLink = ddmStorageLinkPersistence.findByClassPK(
-			classPK);
-
-		deleteStorageLink(storageLink);
-	}
-
-	public void deleteStorageLinks(long structureId) throws SystemException {
 		List<DDMStorageLink> storageLinks =
 			ddmStorageLinkPersistence.findByStructureId(structureId);
 
@@ -90,25 +83,19 @@ public class DDMStorageLinkLocalServiceImpl
 		}
 	}
 
+	public DDMStorageLink getClassStorageLink(long classPK)
+		throws PortalException, SystemException {
+
+		return ddmStorageLinkPersistence.findByClassPK(classPK);
+	}
+
 	public DDMStorageLink getStorageLink(long storageLinkId)
 		throws PortalException, SystemException {
 
 		return ddmStorageLinkPersistence.findByPrimaryKey(storageLinkId);
 	}
 
-	public DDMStorageLink getStorageLink(long classNameId, long classPK)
-		throws PortalException, SystemException {
-
-		return ddmStorageLinkPersistence.findByC_C(classNameId, classPK);
-	}
-
-	public DDMStorageLink getStorageLinkByClassPK(long classPK)
-		throws PortalException, SystemException {
-
-		return ddmStorageLinkPersistence.findByClassPK(classPK);
-	}
-
-	public List<DDMStorageLink> getStorageLinks(long structureId)
+	public List<DDMStorageLink> getStructureStorageLinks(long structureId)
 		throws SystemException {
 
 		return ddmStorageLinkPersistence.findByStructureId(structureId);

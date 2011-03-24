@@ -56,10 +56,6 @@
 		<finder name="StructureId" return-type="Collection">
 			<finder-column name="structureId" />
 		</finder>
-		<finder name="C_C" return-type="DDMStorageLink" unique="true">
-			<finder-column name="classNameId" />
-			<finder-column name="classPK" />
-		</finder>
 	</entity>
 	<entity name="DDMStructure" uuid="true" local-service="true" remote-service="true">
 

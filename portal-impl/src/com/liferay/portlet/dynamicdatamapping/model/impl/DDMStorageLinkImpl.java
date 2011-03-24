@@ -30,10 +30,10 @@ public class DDMStorageLinkImpl
 	}
 
 	public String getStorageType() throws PortalException, SystemException {
-		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getDDMStructure(getStructureId());
+		DDMStructure structure = DDMStructureLocalServiceUtil.getDDMStructure(
+			getStructureId());
 
-		return ddmStructure.getStorageType();
+		return structure.getStorageType();
 	}
 
 }
