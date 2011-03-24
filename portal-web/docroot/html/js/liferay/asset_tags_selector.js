@@ -309,7 +309,7 @@ AUI().add(
 								after: {
 									search: function() {
 										var fieldsets = popup.entriesNode.all('fieldset');
-						
+
 										fieldsets.each(
 											function(item, index, collection) {
 												var visibleEntries = item.one('label:not(.aui-helper-hidden)');
