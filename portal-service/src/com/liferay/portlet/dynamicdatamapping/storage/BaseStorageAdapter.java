@@ -79,10 +79,10 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 
 		try {
 			DDMStorageLink storageLink =
-				DDMStorageLinkLocalServiceUtil.getStorageLinkByClassPK(classPK);
+				DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
 
 			Map<Long, Fields> fieldsMapByClasses = getFieldsMapByClasses(
-				storageLink.getStructureId() ,new long[] {classPK}, fieldNames);
+				storageLink.getStructureId(), new long[] {classPK}, fieldNames);
 
 			return fieldsMapByClasses.get(classPK);
 		}
