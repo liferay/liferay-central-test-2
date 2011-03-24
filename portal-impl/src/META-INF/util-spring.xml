@@ -487,6 +487,11 @@
 	<bean id="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" class="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil">
 		<property name="storageEngine" ref="com.liferay.portlet.dynamicdatamapping.storage.StorageEngine" />
 	</bean>
+	<bean id="com.liferay.portlet.dynamicdatamapping.storage.query.ConditionFactoryUtil" class="com.liferay.portlet.dynamicdatamapping.storage.query.ConditionFactoryUtil">
+		<property name="conditionFactory">
+			<bean class="com.liferay.portlet.dynamicdatamapping.storage.query.ConditionFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil" class="com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil">
 		<property name="DDMXML">
 			<bean class="com.liferay.portlet.dynamicdatamapping.util.DDMXMLImpl" />
