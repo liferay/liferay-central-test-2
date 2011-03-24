@@ -16,10 +16,12 @@ package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.rest.RESTAction;
 import com.liferay.portal.kernel.rest.RESTActionsManager;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.BinarySearch;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SortedArrayList;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Method;
 
@@ -79,6 +81,8 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 
 		String pathParameters = null;
 
+		JSONRPCRequest jsonRpcRequest = null;
+
 		int pathParametersIndex = _getPathParametersIndex(path);
 
 		if (pathParametersIndex != -1) {
@@ -86,10 +90,25 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 
 			path = path.substring(0, pathParametersIndex);
 		}
+		else {
+			if (method.equals(HttpMethods.POST)) {
+				jsonRpcRequest = new JSONRPCRequest(request);
+
+				if (jsonRpcRequest.isValid()) {
+					path += StringPool.SLASH + jsonRpcRequest.getMethod();
+
+					method = null;
+				}
+				else {
+					jsonRpcRequest = null;
+				}
+			}
+		}
 
 		RESTActionParameters restActionParameters = new RESTActionParameters();
 
-		restActionParameters.collectAll(request, pathParameters);
+		restActionParameters.collectAll(
+			request, pathParameters, jsonRpcRequest);
 
 		String[] parameterNames = restActionParameters.getParameterNames();
 
@@ -138,7 +157,9 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 	private int _getPathParametersIndex(String path) {
 		int index = path.indexOf(CharPool.SLASH, 1);
 
-		index = path.indexOf(CharPool.SLASH, index + 1);
+		if (index != -1) {
+			index = path.indexOf(CharPool.SLASH, index + 1);
+		}
 
 		return index;
 	}
@@ -148,13 +169,13 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 
 		int firstIndex = _pathBinarySearch.findFirst(path);
 
-		if (firstIndex == -1) {
+		if (firstIndex < 0) {
 			return -1;
 		}
 
 		int lastIndex = _pathBinarySearch.findLast(path, firstIndex);
 
-		if (lastIndex == -1) {
+		if (lastIndex < 0) {
 			lastIndex = firstIndex;
 		}
 
@@ -167,10 +188,12 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 
 			String restActionConfigMethod = restActionConfig.getMethod();
 
-			if ((restActionConfigMethod != null) &&
-				!restActionConfigMethod.equals(method)) {
+			if (method != null) {
+				if ((restActionConfigMethod != null) &&
+					!restActionConfigMethod.equals(method)) {
 
-				continue;
+					continue;
+				}
 			}
 
 			String[] restActionConfigParameterNames =
