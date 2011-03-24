@@ -82,19 +82,23 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 				</c:otherwise>
 			</c:choose>
 
-			<aui:select disabled="<%= structure != null %>" name="storageType">
+			<aui:field-wrapper>
 
-				<%
-				for (StorageType type : StorageType.values()) {
-				%>
+				<aui:select disabled="<%= structure != null %>" name="storageType">
 
-					<aui:option label="<%= type %>" value="<%= type %>" />
+					<%
+					for (StorageType type : StorageType.values()) {
+					%>
 
-				<%
-				}
-				%>
+						<aui:option label="<%= type %>" value="<%= type %>" />
 
-			</aui:select>
+					<%
+					}
+					%>
+
+				</aui:select>
+
+			</aui:field-wrapper>
 
 			<aui:input name="description" />
 		</liferay-ui:panel>
@@ -199,7 +203,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 		['aui-base']
 	);
 
-	<c:if test="<%= Validator.isNotNull(structureKey) %>">
+	<c:if test="<%= Validator.isNotNull(callback) && Validator.isNotNull(structureKey) %>">
 		window.parent.<%= HtmlUtil.escapeJS(callback) %>('<%= HtmlUtil.escapeJS(structureKey) %>');
 	</c:if>
 </aui:script>
