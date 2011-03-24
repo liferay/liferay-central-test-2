@@ -77,7 +77,14 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			Object key = entry.getKey();
 
 			if (key instanceof String) {
-				key = ((String)key).toUpperCase();
+				String stringKey = (String)key;
+				
+				if (stringKey.startsWith("destination")) {
+					key = SchedulerEngine.DESTINATION_NAME;
+				}
+				else {
+					key = stringKey.toUpperCase();
+				}
 
 				modifiedKeys = true;
 			}
