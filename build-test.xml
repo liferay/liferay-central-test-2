@@ -184,7 +184,7 @@
 	</target>
 
 	<target name="build-test-ant-scripts">
-		<property name="build-test-ant-scripts.version" value="6" />
+		<property name="build-test-ant-scripts.version" value="7" />
 
 		<if>
 			<available file="portal-web/test-ant-scripts/version" />
@@ -463,6 +463,12 @@
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-announcements-delivery" />
 			<param name="test.ant.script.suite" value="AnnouncementsDelivery" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.5,6.0.6" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.command" value="db-upgrade-bookmarks" />
+			<param name="test.ant.script.suite" value="Bookmarks" />
 			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.5,6.0.6" />
 		</antcall>
 
