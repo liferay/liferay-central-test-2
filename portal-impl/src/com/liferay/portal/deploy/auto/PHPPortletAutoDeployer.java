@@ -29,9 +29,7 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 
 	public PHPPortletAutoDeployer() throws AutoDeployException {
 		try {
-			String[] phpJars = new String[] {
-				"resin.jar", "script-10.jar"
-			};
+			String[] phpJars = {"resin.jar", "script-10.jar"};
 
 			for (int i = 0; i < phpJars.length; i++) {
 				String phpJar = phpJars[i];

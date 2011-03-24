@@ -673,7 +673,7 @@
 		<file-name>development/resin.jar</file-name>
 		<version>4.0.11</version>
 		<project-name>Resin</project-name>
-		<project-url>http://www.caucho.com/resin-4.0/</project-url>
+		<project-url>http://www.caucho.com/resin-4.0</project-url>
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
