@@ -370,6 +370,23 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.toXmlString();
 	}
 
+	public java.lang.String getFieldType(java.lang.String fieldName) {
+		return _ddmStructure.getFieldType(fieldName);
+	}
+
+	public com.liferay.portal.kernel.xml.Document getXsdDocument() {
+		return _ddmStructure.getXsdDocument();
+	}
+
+	public boolean hasField(java.lang.String fieldName) {
+		return _ddmStructure.hasField(fieldName);
+	}
+
+	public void setXsdDocument(
+		com.liferay.portal.kernel.xml.Document xsdDocument) {
+		_ddmStructure.setXsdDocument(xsdDocument);
+	}
+
 	public DDMStructure getWrappedDDMStructure() {
 		return _ddmStructure;
 	}

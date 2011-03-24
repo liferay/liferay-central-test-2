@@ -3321,7 +3321,9 @@
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureImpl" name="DDMStructure">
 		<table name="DDMStructure" />
-		<attributes />
+		<attributes>
+			<transient name="xsdDocument" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureLinkImpl" name="DDMStructureLink">
 		<table name="DDMStructureLink" />

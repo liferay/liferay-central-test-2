@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
@@ -226,6 +227,12 @@ public class DDMStructureLocalServiceImpl
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 		structure.setStorageType(storageType);
+
+		try {
+			structure.setXsdDocument(SAXReaderUtil.read(xsd));
+		}
+		catch (DocumentException de) {
+		}
 
 		ddmStructurePersistence.update(structure, false);
 

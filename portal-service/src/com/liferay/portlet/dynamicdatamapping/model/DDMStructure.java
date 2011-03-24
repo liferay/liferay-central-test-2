@@ -29,4 +29,12 @@ public interface DDMStructure extends DDMStructureModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getFieldType(java.lang.String fieldName);
+
+	public com.liferay.portal.kernel.xml.Document getXsdDocument();
+
+	public boolean hasField(java.lang.String fieldName);
+
+	public void setXsdDocument(
+		com.liferay.portal.kernel.xml.Document xsdDocument);
 }
