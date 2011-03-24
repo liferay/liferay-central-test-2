@@ -13,6 +13,10 @@ AUI().add(
 			name: 'label'
 		};
 
+		var MAP_ATTR_MULTIPLE = {
+			name: 'multiple'
+		};
+
 		var MAP_ATTR_PREDEFINED_VALUE = {
 			name: 'predefinedValue'
 		};
@@ -106,6 +110,7 @@ AUI().add(
 
 					strings: {
 						value: {
+							'stringDefaultMessage': Liferay.Language.get('drop-fields-here'),
 							'stringEmptySelection': Liferay.Language.get('no-field-selected')
 						}
 					}
@@ -212,6 +217,8 @@ AUI().add(
 
 						var label = instance._createDynamicNode('entry', MAP_ATTR_LABEL);
 
+						var multiple = instance._createDynamicNode('entry', MAP_ATTR_MULTIPLE);
+
 						var predefinedValue = instance._createDynamicNode('entry', MAP_ATTR_PREDEFINED_VALUE);
 
 						var showLabel = instance._createDynamicNode('entry', MAP_ATTR_SHOW_LABEL);
@@ -239,6 +246,16 @@ AUI().add(
 							STR_CDATA_OPEN + fieldLabelVal + STR_CDATA_CLOSE,
 							label.closeTag
 						);
+
+						if (instanceOf(field, A.FormBuilderMultipleChoiceField)) {
+							var multipleVal = instance.normalizeValue(field.get('multiple'));
+
+							buffer.push(
+								multiple.openTag,
+								STR_CDATA_OPEN + multipleVal + STR_CDATA_CLOSE,
+								multiple.closeTag
+							);
+						}
 
 						var predefinedValueVal = instance.normalizeValue(field.get('predefinedValue'));
 
@@ -296,35 +313,8 @@ AUI().add(
 
 					_formatOptionsKey: function(s) {
 						return s.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
-					},
-
-					_onClickFieldDelete: function(event) {
-						var instance = this;
-
-						var target = event.currentTarget;
-						var fields = instance.get('fields');
-
-						var fieldBB = target.ancestor('.aui-form-builder-field');
-						var field = fieldBB.getData('field');
-
-						if (field) {
-							var parent = field.get('parent');
-
-							if (fields.length > 1 || instanceOf(parent, FormBuilderField)) {
-								var selectedField = instance.selectedField;
-
-								if (field == selectedField ||
-									field.contains(selectedField, true)) {
-
-									instance._tabs.selectTab(0);
-								}
-
-								parent.removeField(field);
-
-								field.set('selected', false);
-							}
-						}
 					}
+
 				}
 			}
 		);

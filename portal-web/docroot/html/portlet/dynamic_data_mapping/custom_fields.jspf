@@ -1,0 +1,108 @@
+<%--
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+--%>
+
+<aui:script use="liferay-portlet-dynamic-data-mapping,aui-datepicker">
+
+	var DDMDateField = A.Component.create({
+		NAME: 'ddm-list-date',
+
+		EXTENDS: A.FormBuilderInputField,
+
+		prototype: {
+
+			renderUI: function() {
+				var instance = this;
+
+				DDMDateField.superclass.renderUI.apply(instance, arguments);
+
+				instance.datePicker = new A.DatePicker({
+					trigger: instance.get('templateNode')
+				}).render();
+			}
+
+		}
+
+	});
+
+	var DDMDecimalField = A.Component.create({
+		NAME: 'ddm-list-decimal',
+
+		EXTENDS: A.FormBuilderInputField
+	});
+
+	var DDMEmailField = A.Component.create({
+		NAME: 'ddm-list-email',
+
+		EXTENDS: A.FormBuilderInputField
+	});
+
+	var DDMIntegerField = A.Component.create({
+		NAME: 'ddm-list-integer',
+
+		EXTENDS: A.FormBuilderInputField
+	});
+
+	var DDMNumberField = A.Component.create({
+		NAME: 'ddm-list-number',
+
+		EXTENDS: A.FormBuilderInputField
+	});
+
+	var DDMSeparatorField = A.Component.create({
+		NAME: 'ddm-list-separator',
+
+		ATTRS: {
+			templateNode: {
+				valueFn: function() {
+					return A.Node.create('<div class="separator"></div>');
+				}
+			},
+			showLabel: {
+				readOnly: true,
+				value: false
+			}
+		},
+
+		EXTENDS: A.FormBuilderField,
+
+		prototype: {
+
+			renderSettings: function() {
+				var formBuilder = this.get('formBuilder');
+				var formNode = formBuilder.get('settingsFormNode');
+
+				formNode.setContent('');
+			}
+
+		}
+
+	});
+
+	var DDMURLField = A.Component.create({
+		NAME: 'ddm-list-url',
+
+		EXTENDS: A.FormBuilderInputField
+	});
+
+	A.FormBuilder.types['ddm-list-date'] = DDMDateField;
+	A.FormBuilder.types['ddm-list-decimal'] = DDMDecimalField;
+	A.FormBuilder.types['ddm-list-email'] = DDMEmailField;
+	A.FormBuilder.types['ddm-list-integer'] = DDMIntegerField;
+	A.FormBuilder.types['ddm-list-number'] = DDMNumberField;
+	A.FormBuilder.types['ddm-list-separator'] = DDMSeparatorField;
+	A.FormBuilder.types['ddm-list-url'] = DDMURLField;
+
+</aui:script>

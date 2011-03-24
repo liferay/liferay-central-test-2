@@ -153,6 +153,8 @@ public class EditStructureAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String availableFields = ParamUtil.getString(
+			actionRequest, "availableFields");
 		String callback = ParamUtil.getString(actionRequest, "callback");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
@@ -165,6 +167,7 @@ public class EditStructureAction extends PortletAction {
 		portletURL.setParameter(
 			"struts_action", "/dynamic_data_mapping/edit_structure");
 		portletURL.setParameter("redirect", redirect, false);
+		portletURL.setParameter("availableFields", availableFields, false);
 		portletURL.setParameter("callback", callback, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(structure.getGroupId()), false);

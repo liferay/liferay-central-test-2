@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String availableFields = ParamUtil.getString(request, "availableFields");
 String callback = ParamUtil.getString(request, "callback");
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.ADD);
 String resourceNamespace = ParamUtil.getString(request, "resourceNamespace");
@@ -41,6 +42,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
+	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
 	<aui:input name="callback" type="hidden" value="<%= callback %>" />
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="xsd" type="hidden" />
@@ -78,6 +80,20 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 				</c:otherwise>
 			</c:choose>
 
+			<aui:select name="storageType">
+
+				<%
+				for (StorageType type : StorageType.values()) {
+				%>
+
+					<aui:option label="<%= type %>" value="<%= type %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
+
 			<aui:input name="description" />
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
@@ -98,15 +114,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 						</li>
 					</c:when>
 					<c:otherwise>
-						<li class="aui-component aui-form-builder-field aui-widget" id="<portlet:namespace />defaultField">
-							<div class="aui-form-builder-field-content">
-								<label class="aui-field-label"><liferay-ui:message key="text-box" /></label>
-
-								<input class="aui-field-input aui-field-input-text aui-form-builder-field-node" type="text" value="" />
-							</div>
-
-							<ul class="aui-form-builder-drop-zone"></ul>
-						</li>
+						<li class="aui-form-builder-default-message"><liferay-ui:message key="drop-fields-here" /></li>
 					</c:otherwise>
 				</c:choose>
 			</ul>
@@ -123,48 +131,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 
 				<div class="aui-tabview-content aui-widget-bd">
 					<div class="aui-tabview-content-item">
-						<ul class="aui-form-builder-drag-container">
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="text">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-text"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="text-box" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="textarea">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-textarea"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="text-area" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="checkbox">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-checkbox"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="checkbox" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="button">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-button"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="button" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="select">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-select"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="select-option" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="radio">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-radio"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="radio-buttons" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="fileupload">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-fileupload"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="file-upload" /></span>
-							</li>
-							<li class="aui-form-builder-drag-node aui-form-builder-field" data-type="fieldset">
-								<span class="aui-form-builder-field-icon aui-form-builder-field-icon-fieldset"></span>
-
-								<span class="aui-form-builder-label"><liferay-ui:message key="fieldset" /></span>
-							</li>
-						</ul>
+						<ul class="aui-form-builder-drag-container"></ul>
 					</div>
 
 					<div class="aui-helper-hidden aui-tabview-content-item">
@@ -194,26 +161,18 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	<aui:button onClick='<%= renderResponse.getNamespace() + "saveStructure();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
 </aui:button-row>
 
+<%@ include file="/html/portlet/dynamic_data_mapping/custom_fields.jspf" %>
+
 <aui:script use="liferay-portlet-dynamic-data-mapping">
 	var formBuilder = new Liferay.FormBuilder(
 		{
 			boundingBox: '#<portlet:namespace />formBuilder',
-			fields:
-			<c:choose>
-				<c:when test="<%= Validator.isNotNull(xsd) %>">
-					<%= DDMXSDUtil.getJSONArray(xsd) %>
-				</c:when>
-				<c:otherwise>
-					[
-						{
-							boundingBox: '#<portlet:namespace />defaultField',
-							label: '<liferay-ui:message key="text-box" />',
-							srcNode: '#<portlet:namespace />defaultField .aui-form-builder-field-content',
-							type: 'text'
-						}
-					]
-				</c:otherwise>
-			</c:choose>,
+			<c:if test="<%= Validator.isNotNull(availableFields) %>">
+				availableFields: Liferay.Util.getTop().<%= HtmlUtil.escapeJS(availableFields) %>,
+			</c:if>
+			<c:if test="<%= Validator.isNotNull(xsd) %>">
+				fields: <%= DDMXSDUtil.getJSONArray(xsd) %>,
+			</c:if>
 			portletNamespace: '<portlet:namespace />',
 			portletResourceNamespace: '<%= HtmlUtil.escapeJS(resourceNamespace) %>',
 			srcNode: '#<portlet:namespace />formBuilder .aui-form-builder-content'

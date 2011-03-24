@@ -23,4 +23,5 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureXsdException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageType" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>
