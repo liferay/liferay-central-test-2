@@ -65,7 +65,11 @@
 	clip: rect(auto auto auto auto);
 }
 
-.aui-field-focused .aui-field-element, .aui-form-validator-error-container:hover .aui-field-element {
+.aui-field-element {
+	position: relative;
+}
+
+.aui-form-validator-error-container:hover .aui-field-element {
 	position: relative;
 }
 
