@@ -73,6 +73,9 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		if (_page.getFormat().equals("html")) {
 			content = HtmlUtil.stripHtml(content);
 		}
+		else {
+			content = HtmlUtil.escape(content);
+		}
 
 		return content;
 	}
