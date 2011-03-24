@@ -80,7 +80,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 				</c:otherwise>
 			</c:choose>
 
-			<aui:select name="storageType">
+			<aui:select disabled="<%= structure != null %>" name="storageType">
 
 				<%
 				for (StorageType type : StorageType.values()) {
