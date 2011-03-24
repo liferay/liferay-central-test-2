@@ -110,8 +110,8 @@ AUI().add(
 
 					strings: {
 						value: {
-							'stringDefaultMessage': Liferay.Language.get('drop-fields-here'),
-							'stringEmptySelection': Liferay.Language.get('no-field-selected')
+							stringDefaultMessage: Liferay.Language.get('drop-fields-here'),
+							stringEmptySelection: Liferay.Language.get('no-field-selected')
 						}
 					}
 				},
@@ -124,7 +124,7 @@ AUI().add(
 					initializer: function() {
 						var instance = this;
 
-						instance.addTarget(window.parent.Liferay);
+						instance.addTarget(Liferay.Util.getOpener());
 					},
 
 					getXSD: function() {
@@ -314,7 +314,6 @@ AUI().add(
 					_formatOptionsKey: function(s) {
 						return s.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
 					}
-
 				}
 			}
 		);
