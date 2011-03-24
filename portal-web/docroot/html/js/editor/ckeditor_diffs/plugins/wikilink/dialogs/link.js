@@ -14,6 +14,10 @@ CKEDITOR.dialog.add(
 
 			if (element) {
 				href = element.data('cke-saved-href') || element.getAttribute('href');
+
+				if(CKEDITOR.config.wiki_decode_links) {
+					href = decodeURIComponent(href);
+				}
 			}
 
 			var data = {
