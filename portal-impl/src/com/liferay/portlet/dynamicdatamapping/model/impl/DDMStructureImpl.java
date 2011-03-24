@@ -16,14 +16,16 @@ package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -35,61 +37,57 @@ public class DDMStructureImpl
 	}
 
 	public String getFieldType(String fieldName) {
-		Element dynamicElement = _getElement(fieldName);
+		Map<String, String> fieldsTypeMap = _getFieldsTypeMap();
 
-		if (dynamicElement != null) {
-			return dynamicElement.attributeValue("type");
-		}
-
-		return null;
+		return fieldsTypeMap.get(fieldName);
 	}
 
 	public boolean hasField(String fieldName) {
-		Element dynamicElement = _getElement(fieldName);
+		Map<String, String> fieldsTypeMap = _getFieldsTypeMap();
 
-		if (dynamicElement != null) {
-			return true;
-		}
-
-		return false;
+		return fieldsTypeMap.containsKey(fieldName);
 	}
 
 	public void setXsd(String xsd) {
 		super.setXsd(xsd);
 
-		_document = null;
+		_fieldsType = null;
 	}
 
-	private Document _getDocument() throws Exception {
-		if (_document == null) {
-			_document = SAXReaderUtil.read(getXsd());
-		}
+	private Map<String, String> _getFieldsTypeMap() {
+		if (_fieldsType == null) {
+			_fieldsType = new HashMap<String, String>();
 
-		return _document;
-	}
+			try {
+				XPath xPathSelector = SAXReaderUtil.createXPath(
+					"//dynamic-element");
 
-	private Element _getElement(String name) {
-		try {
-			Document document = _getDocument();
+				List<Node> nodes = xPathSelector.selectNodes(
+					SAXReaderUtil.read(getXsd()));
 
-			XPath xPathSelector = SAXReaderUtil.createXPath(
-				"//dynamic-element[@name='" + name + "']");
+				if (nodes != null) {
+					Iterator<Node> itr = nodes.iterator();
 
-			List<Node> nodes = xPathSelector.selectNodes(document);
+					while (itr.hasNext()) {
+						Element element = (Element)itr.next();
 
-			if (nodes.size() == 1) {
-				return (Element)nodes.get(0);
+						String name = element.attributeValue("name");
+						String type = element.attributeValue("type");
+
+						_fieldsType.put(name, type);
+					}
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 
-		return null;
+		return _fieldsType;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
 
-	private Document _document;
+	private Map<String, String> _fieldsType;
 
 }
