@@ -44,7 +44,7 @@
 				winHeight = document.body.clientHeight;
 			}
 
-			var iframe = A.one('#embedded_page_iframe');
+			var iframe = A.one('#embeddedIframe');
 
 			var height = null;
 
@@ -58,6 +58,7 @@
 				height = height + 50;
 			}
 			catch (e) {
+
 				// The value 139 here is derived (tab_height * num_tab_levels) +
 				// height_of_banner + bottom_spacer. 139 just happend to work in
 				// this instance in IE and Firefox at the time.
