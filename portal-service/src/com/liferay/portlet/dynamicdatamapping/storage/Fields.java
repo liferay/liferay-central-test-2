@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -34,6 +35,10 @@ public class Fields {
 
 	public Field get(String name) {
 		return _fieldsMap.get(name);
+	}
+
+	public Set<String> getNames() {
+		return _fieldsMap.keySet();
 	}
 
 	public Iterator<Field> iterator() {

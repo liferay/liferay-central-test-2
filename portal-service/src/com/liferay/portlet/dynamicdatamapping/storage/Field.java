@@ -21,6 +21,14 @@ import java.io.Serializable;
  */
 public class Field {
 
+	public Field() {
+	}
+
+	public Field(String name, Serializable value) {
+		_name = name;
+		_value = value;
+	}
+
 	public String getName() {
 		return _name;
 	}
