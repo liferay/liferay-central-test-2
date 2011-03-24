@@ -78,7 +78,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
 			if (key instanceof String) {
 				String stringKey = (String)key;
-				
+
 				if (stringKey.startsWith("destination")) {
 					key = SchedulerEngine.DESTINATION_NAME;
 				}
