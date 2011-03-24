@@ -69,8 +69,7 @@
 	<classpathentry kind="lib" path="lib/development/persistence.jar"/>
 	<classpathentry kind="lib" path="lib/development/postgresql.jar"/>
 	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
-	<classpathentry kind="lib" path="lib/development/quercus.jar"/>
-	<classpathentry kind="lib" path="lib/development/resin-util.jar"/>
+	<classpathentry kind="lib" path="lib/development/resin.jar"/>
 	<classpathentry kind="lib" path="lib/development/sap.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/script-10.jar"/>

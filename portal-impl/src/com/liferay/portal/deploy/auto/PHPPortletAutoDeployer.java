@@ -30,7 +30,7 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 	public PHPPortletAutoDeployer() throws AutoDeployException {
 		try {
 			String[] phpJars = new String[] {
-				"quercus.jar", "resin-util.jar", "script-10.jar"
+				"resin.jar", "script-10.jar"
 			};
 
 			for (int i = 0; i < phpJars.length; i++) {

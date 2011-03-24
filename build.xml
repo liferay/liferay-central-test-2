@@ -718,7 +718,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 				<copy todir="${app.server.temp.dir}/liferay/com/liferay/portal/deploy/dependencies">
 					<fileset
 						dir="lib/development"
-						includes="quercus.jar,resin-util.jar,script-10.jar"
+						includes="resin.jar,script-10.jar"
 					/>
 				</copy>
 			</then>
