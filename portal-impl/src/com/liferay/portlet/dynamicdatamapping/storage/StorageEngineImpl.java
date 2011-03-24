@@ -21,6 +21,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.query.Condition;
 
 import java.util.HashMap;
 import java.util.List;
@@ -128,22 +129,22 @@ public class StorageEngineImpl implements StorageEngine {
 	}
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, String whereClause,
+			long structureId, List<String> fieldNames, Condition whereCondition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
 
 		return storageAdapter.query(
-			structureId, fieldNames, whereClause, orderByComparator);
+			structureId, fieldNames, whereCondition, orderByComparator);
 	}
 
-	public int queryCount(long structureId, String whereClause)
+	public int queryCount(long structureId, Condition whereCondition)
 		throws StorageException {
 
 		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
 
-		return storageAdapter.queryCount(structureId, whereClause);
+		return storageAdapter.queryCount(structureId, whereCondition);
 	}
 
 	public void setDefaultStorageAdapter(

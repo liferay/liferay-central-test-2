@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatamapping.storage;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
+import com.liferay.portlet.dynamicdatamapping.storage.query.Condition;
 
 import java.util.List;
 import java.util.Map;
@@ -68,11 +69,11 @@ public interface StorageAdapter {
 		throws StorageException;
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, String whereClause,
+			long structureId, List<String> fieldNames, Condition whereCondition,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public int queryCount(long structureId, String whereClause)
+	public int queryCount(long structureId, Condition whereCondition)
 		throws StorageException;
 
 	public void update(

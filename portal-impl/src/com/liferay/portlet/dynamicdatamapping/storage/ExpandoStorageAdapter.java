@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatamapping.storage;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.dynamicdatamapping.storage.query.Condition;
 
 import java.util.List;
 import java.util.Map;
@@ -64,14 +65,14 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected List<Fields> doQuery(
-			long structureId, List<String> fieldNames, String whereClause,
+			long structureId, List<String> fieldNames, Condition whereCondition,
 			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
 	}
 
-	protected int doQueryCount(long structureId, String whereClause)
+	protected int doQueryCount(long structureId, Condition whereCondition)
 		throws Exception {
 
 		return 0;

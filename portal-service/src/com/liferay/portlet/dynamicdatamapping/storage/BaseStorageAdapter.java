@@ -24,6 +24,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.query.Condition;
 
 import java.util.Iterator;
 import java.util.List;
@@ -172,13 +173,13 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, String whereClause,
+			long structureId, List<String> fieldNames, Condition whereCondition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		try {
 			return doQuery(
-				structureId, fieldNames, whereClause, orderByComparator);
+				structureId, fieldNames, whereCondition, orderByComparator);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -188,11 +189,11 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public int queryCount(long structureId, String whereClause)
+	public int queryCount(long structureId, Condition whereCondition)
 		throws StorageException {
 
 		try {
-			return doQueryCount(structureId, whereClause);
+			return doQueryCount(structureId, whereCondition);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -252,11 +253,12 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws Exception;
 
 	protected abstract  List<Fields> doQuery(
-			long structureId, List<String> fieldNames, String whereClause,
+			long structureId, List<String> fieldNames, Condition whereCondition,
 			OrderByComparator orderByComparator)
 		throws Exception;
 
-	protected abstract int doQueryCount(long structureId, String whereClause)
+	protected abstract int doQueryCount(
+			long structureId, Condition whereCondition)
 		throws Exception;
 
 	protected abstract void doUpdate(
