@@ -42,29 +42,28 @@ public interface StorageAdapter {
 	public Fields getFields(long classPK, List<String> fieldNames)
 		throws StorageException;
 
-	public List<Fields> getFieldsListByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames,
-			OrderByComparator orderByComparator)
+	public List<Fields> getFieldsList(long structureId, List<String> fieldNames)
 		throws StorageException;
 
-	public List<Fields> getFieldsListByClasses(
-			long structureId, long[] classPKs, OrderByComparator obc)
-		throws StorageException;
-
-	public List<Fields> getFieldsListByStructure(
-			long structureId, List<String> fieldNames)
-		throws StorageException;
-
-	public List<Fields> getFieldsListByStructure(
+	public List<Fields> getFieldsList(
 			long structureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public Map<Long, Fields> getFieldsMapByClasses(
-			long structureId, long[] classPKs)
+	public List<Fields> getFieldsList(
+			long structureId, long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public Map<Long, Fields> getFieldsMapByClasses(
+	public List<Fields> getFieldsList(
+			long structureId, long[] classPKs,
+			OrderByComparator orderByComparator)
+		throws StorageException;
+
+	public Map<Long, Fields> getFieldsMap(long structureId, long[] classPKs)
+		throws StorageException;
+
+	public Map<Long, Fields> getFieldsMap(
 			long structureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException;
 

@@ -55,54 +55,54 @@ public class StorageEngineUtil {
 		return getStorageEngine().getFields(classPK, fieldNames);
 	}
 
-	public static List<Fields> getFieldsListByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames,
-			OrderByComparator orderByComparator)
-		throws StorageException {
-
-		return getStorageEngine().getFieldsListByClasses(
-			structureId, classPKs, fieldNames, orderByComparator);
-	}
-
-	public static List<Fields> getFieldsListByClasses(
-			long structureId, long[] classPKs,
-			OrderByComparator orderByComparator)
-		throws StorageException {
-
-		return getStorageEngine().getFieldsListByClasses(
-			structureId, classPKs, orderByComparator);
-	}
-
-	public static List<Fields> getFieldsListByStructure(
+	public static List<Fields> getFieldsList(
 			long structureId, List<String> fieldNames)
 		throws StorageException {
 
-		return getStorageEngine().getFieldsListByStructure(
+		return getStorageEngine().getFieldsList(
 			structureId, fieldNames);
 	}
 
-	public static List<Fields> getFieldsListByStructure(
+	public static List<Fields> getFieldsList(
 			long structureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		return getStorageEngine().getFieldsListByStructure(
+		return getStorageEngine().getFieldsList(
 			structureId, fieldNames, orderByComparator);
 	}
 
-	public static Map<Long, Fields> getFieldsMapByClasses(
+	public static List<Fields> getFieldsList(
+			long structureId, long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
+		throws StorageException {
+
+		return getStorageEngine().getFieldsList(
+			structureId, classPKs, fieldNames, orderByComparator);
+	}
+
+	public static List<Fields> getFieldsList(
+			long structureId, long[] classPKs,
+			OrderByComparator orderByComparator)
+		throws StorageException {
+
+		return getStorageEngine().getFieldsList(
+			structureId, classPKs, orderByComparator);
+	}
+
+	public static Map<Long, Fields> getFieldsMap(
 			long structureId, long[] classPKs)
 		throws StorageException {
 
-		return getStorageEngine().getFieldsMapByClasses(
+		return getStorageEngine().getFieldsMap(
 			structureId, classPKs);
 	}
 
-	public static Map<Long, Fields> getFieldsMapByClasses(
+	public static Map<Long, Fields> getFieldsMap(
 			long structureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
-		return getStorageEngine().getFieldsMapByClasses(
+		return getStorageEngine().getFieldsMap(
 			structureId, classPKs, fieldNames);
 	}
 

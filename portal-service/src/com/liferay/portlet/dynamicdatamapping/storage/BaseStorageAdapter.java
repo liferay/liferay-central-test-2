@@ -81,7 +81,7 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 			DDMStorageLink storageLink =
 				DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
 
-			Map<Long, Fields> fieldsMapByClasses = getFieldsMapByClasses(
+			Map<Long, Fields> fieldsMapByClasses = getFieldsMap(
 				storageLink.getStructureId(), new long[] {classPK}, fieldNames);
 
 			return fieldsMapByClasses.get(classPK);
@@ -94,40 +94,13 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public List<Fields> getFieldsListByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames,
-			OrderByComparator orderByComparator)
+	public List<Fields> getFieldsList(long structureId, List<String> fieldNames)
 		throws StorageException {
 
-		try {
-			return doGetFieldsListByClasses(
-				structureId, classPKs, fieldNames, orderByComparator);
-		}
-		catch (StorageException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			throw new StorageException(e);
-		}
+		return getFieldsList(structureId, fieldNames, null);
 	}
 
-	public List<Fields> getFieldsListByClasses(
-			long structureId, long[] classPKs,
-			OrderByComparator orderByComparator)
-		throws StorageException {
-
-		return getFieldsListByClasses(
-			structureId, classPKs, null, orderByComparator);
-	}
-
-	public List<Fields> getFieldsListByStructure(
-			long structureId, List<String> fieldNames)
-		throws StorageException {
-
-		return getFieldsListByStructure(structureId, fieldNames, null);
-	}
-
-	public List<Fields> getFieldsListByStructure(
+	public List<Fields> getFieldsList(
 			long structureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
@@ -144,14 +117,38 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public Map<Long, Fields> getFieldsMapByClasses(
-			long structureId, long[] classPKs)
+	public List<Fields> getFieldsList(
+			long structureId, long[] classPKs, List<String> fieldNames,
+			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		return getFieldsMapByClasses(structureId, classPKs, null);
+		try {
+			return doGetFieldsListByClasses(
+				structureId, classPKs, fieldNames, orderByComparator);
+		}
+		catch (StorageException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new StorageException(e);
+		}
 	}
 
-	public Map<Long, Fields> getFieldsMapByClasses(
+	public List<Fields> getFieldsList(
+			long structureId, long[] classPKs,
+			OrderByComparator orderByComparator)
+		throws StorageException {
+
+		return getFieldsList(structureId, classPKs, null, orderByComparator);
+	}
+
+	public Map<Long, Fields> getFieldsMap(long structureId, long[] classPKs)
+		throws StorageException {
+
+		return getFieldsMap(structureId, classPKs, null);
+	}
+
+	public Map<Long, Fields> getFieldsMap(
 			long structureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
