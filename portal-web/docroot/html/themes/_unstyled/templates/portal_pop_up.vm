@@ -8,9 +8,6 @@
 	<title>$the_title</title>
 
 	$theme.include($top_head_include)
-
-	#css ($css_main_file)
-	#js ($js_main_file)
 </head>
 
 <body class="portal-popup $css_class">
