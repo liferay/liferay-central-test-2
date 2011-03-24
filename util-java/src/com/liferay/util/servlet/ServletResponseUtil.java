@@ -318,7 +318,9 @@ public class ServletResponseUtil {
 				HttpHeaders.CONTENT_LENGTH, String.valueOf(contentLength));
 		}
 
-		StreamUtil.transfer(is, response.getOutputStream());
+		StreamUtil.transfer(is, response.getOutputStream(), false);
+
+		StreamUtil.cleanUp(is);
 	}
 
 	public static void write(HttpServletResponse response, String s)
