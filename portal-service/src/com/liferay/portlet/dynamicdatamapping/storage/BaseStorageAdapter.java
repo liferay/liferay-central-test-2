@@ -14,12 +14,18 @@
 
 package com.liferay.portlet.dynamicdatamapping.storage;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.StorageException;
+import com.liferay.portlet.dynamicdatamapping.StorageFieldNameException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +42,8 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws StorageException {
 
 		try {
+			validateStructureFields(structureId, fields);
+
 			return doCreate(companyId, structureId, fields, serviceContext);
 		}
 		catch (StorageException se) {
@@ -207,6 +215,8 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws StorageException {
 
 		try {
+			validateClassFields(classPK, fields);
+
 			doUpdate(classPK, fields, serviceContext, merge);
 		}
 		catch (StorageException se) {
@@ -253,5 +263,31 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 			long classPK, Fields fields, ServiceContext serviceContext,
 			boolean merge)
 		throws Exception;
+
+	protected void validateClassFields(long classPK, Fields fields)
+		throws PortalException, SystemException {
+
+		DDMStorageLink storageLink =
+			DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
+
+		validateStructureFields(storageLink.getStructureId(), fields);
+	}
+
+	protected void validateStructureFields(long structureId, Fields fields)
+		throws PortalException, SystemException {
+
+		DDMStructure structure = DDMStructureLocalServiceUtil.getDDMStructure(
+			structureId);
+
+		Iterator<Field> itr = fields.iterator();
+
+		while (itr.hasNext()) {
+			Field field = itr.next();
+
+			if (!structure.hasField(field.getName())) {
+				throw new StorageFieldNameException();
+			}
+		}
+	}
 
 }
