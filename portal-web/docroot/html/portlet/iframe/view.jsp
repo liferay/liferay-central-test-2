@@ -131,10 +131,12 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		var height = null;
 
 		try {
-			height = iframe.contentWindow.document.body.offsetHeight;
+			var frameBody = iframe.contentWindow.document.body;
+
+			height = frameBody.offsetHeight;
 
 			if (!height) {
-				height = iframe.contentWindow.document.body.scrollHeight;
+				height = frameBody.scrollHeight;
 			}
 		}
 		catch (e) {
