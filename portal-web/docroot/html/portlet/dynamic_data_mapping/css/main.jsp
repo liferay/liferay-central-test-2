@@ -29,7 +29,7 @@
 		}
 
 		.aui-field-options-item-input {
-			width: 96px;
+			width: 78px;
 		}
 	}
 
