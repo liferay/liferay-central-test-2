@@ -69,10 +69,6 @@
 	position: relative;
 }
 
-.aui-form-validator-error-container:hover .aui-field-element {
-	position: relative;
-}
-
 .ie6 .aui-form-validator-message {
 	color: #777;
 }
