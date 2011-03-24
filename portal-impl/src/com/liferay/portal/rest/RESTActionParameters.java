@@ -78,9 +78,7 @@ public class RESTActionParameters {
 		for (int i = 0; i < length;) {
 			String name = pathParametersParts[i];
 
-			name = name.replace(CharPool.DASH, CharPool.SPACE);
-
-			name = jodd.util.StringUtil.wordsToCamelCase(name);
+			name = jodd.util.StringUtil.wordsToCamelCase(name, CharPool.DASH);
 
 			String value = pathParametersParts[i + 1];
 

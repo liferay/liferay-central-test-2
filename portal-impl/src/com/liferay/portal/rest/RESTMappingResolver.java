@@ -15,14 +15,12 @@
 package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.rest.REST;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
-
-import org.mortbay.jetty.HttpMethods;
 
 /**
  * @author Igor Spasic
@@ -59,7 +57,8 @@ public class RESTMappingResolver {
 		}
 
 		if (path == null || path.length() == 0) {
-			path = _nameToPathChunk(method.getName());
+			path = jodd.util.StringUtil.camelCaseToWords(
+				method.getName(), CharPool.DASH);
 		}
 
 		if (!path.startsWith(StringPool.SLASH)) {
@@ -108,30 +107,6 @@ public class RESTMappingResolver {
 		}
 
 		return methodName.substring(0, i);
-	}
-
-	private String _nameToPathChunk(String inputName) {
-		inputName = jodd.util.StringUtil.camelCaseToWords(inputName);
-
-		String[] names = StringUtil.split(inputName, StringPool.SPACE);
-
-		if (names.length == 0) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(names.length * 2 - 1);
-
-		for (int i = 0; i < names.length; i++) {
-			String name = names[i];
-
-			if (i != 0) {
-				sb.append(CharPool.DASH);
-			}
-
-			sb.append(name.toLowerCase());
-		}
-
-		return sb.toString();
 	}
 
 	private String _prefixToHttpMethod(String prefix) {
