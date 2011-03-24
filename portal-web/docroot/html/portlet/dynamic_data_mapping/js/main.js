@@ -124,7 +124,7 @@ AUI().add(
 					initializer: function() {
 						var instance = this;
 
-						instance.addTarget(Liferay.Util.getOpener());
+						instance.addTarget(Liferay.Util.getOpener().Liferay);
 					},
 
 					getXSD: function() {
