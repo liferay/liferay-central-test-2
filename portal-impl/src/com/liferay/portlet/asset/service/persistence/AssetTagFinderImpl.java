@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.asset.NoSuchTagException;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -66,83 +68,37 @@ public class AssetTagFinderImpl
 	public int countByG_C_N(long groupId, long classNameId, String name)
 		throws SystemException {
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(classNameId);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doCountByG_C_N(groupId, classNameId, name, false);
 	}
 
 	public int countByG_N_P(long groupId, String name, String[] tagProperties)
 		throws SystemException {
 
-		Session session = null;
+		return doCountByG_N_P(groupId, name, tagProperties, false);
+	}
 
-		try {
-			session = openSession();
+	public AssetTag filterFindByG_N(long groupId, String name)
+		throws NoSuchTagException, SystemException {
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_N_P);
+		return doFindByG_N(groupId, name, true);
+	}
 
-			SQLQuery q = session.createSQLQuery(sql);
+	public List<AssetTag> filterFindByG_C_N(
+			long groupId, long classNameId, String name, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
 
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+		return doFindByG_C_N(
+			groupId, classNameId, name, start, end, obc, true);
+	}
 
-			QueryPos qPos = QueryPos.getInstance(q);
+	public List<AssetTag> filterFindByG_N_P(
+			long groupId, String name, String[] tagProperties, int start,
+			int end, OrderByComparator obc)
+		throws SystemException {
 
-			setJoin(qPos, tagProperties);
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doFindByG_N_P(
+			groupId, name, tagProperties, start, end, obc, true);
 	}
 
 	public List<AssetTag> findByEntryId(long entryId)
@@ -177,51 +133,7 @@ public class AssetTagFinderImpl
 	public AssetTag findByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
 
-		name = name.trim().toLowerCase();
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("AssetTag", AssetTagImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(name);
-
-			List<AssetTag> list = q.list();
-
-			if (list.size() == 0) {
-				StringBundler sb = new StringBundler(6);
-
-				sb.append("No AssetTag exists with the key ");
-				sb.append("{groupId=");
-				sb.append(groupId);
-				sb.append(", name=");
-				sb.append(name);
-				sb.append("}");
-
-				throw new NoSuchTagException(sb.toString());
-			}
-			else {
-				return list.get(0);
-			}
-		}
-		catch (NoSuchTagException nste) {
-			throw nste;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doFindByG_N(groupId, name, false);
 	}
 
 	public List<AssetTag> findByC_C(long classNameId, long classPK)
@@ -261,86 +173,21 @@ public class AssetTagFinderImpl
 	}
 
 	public List<AssetTag> findByG_C_N(
-			long groupId, long classNameId, String name)
+			long groupId, long classNameId, String name, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
-		return findByG_C_N(
-			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List<AssetTag> findByG_C_N(
-			long groupId, long classNameId, String name, int start, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("AssetTag", AssetTagImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(classNameId);
-			qPos.add(name);
-			qPos.add(name);
-
-			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<AssetTag> findByG_N_P(
-			long groupId, String name, String[] tagProperties)
-		throws SystemException {
-
-		return findByG_N_P(
-			groupId, name, tagProperties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return doFindByG_C_N(
+			groupId, classNameId, name, start, end, obc, false);
 	}
 
 	public List<AssetTag> findByG_N_P(
 			long groupId, String name, String[] tagProperties, int start,
-			int end)
+			int end, OrderByComparator obc)
 		throws SystemException {
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_N_P);
-
-			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(tagProperties));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("AssetTag", AssetTagImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			setJoin(qPos, tagProperties);
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(name);
-
-			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doFindByG_N_P(
+			groupId, name, tagProperties, start, end, obc, false);
 	}
 
 	protected String getJoin(String[] tagProperties) {
@@ -363,6 +210,244 @@ public class AssetTagFinderImpl
 			}
 
 			return sb.toString();
+		}
+	}
+
+	protected int doCountByG_C_N(
+			long groupId, long classNameId, String name,
+			boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_N);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, AssetTag.class.getName(), "AssetTag.tagId",
+					"AssetTag.userId", groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(classNameId);
+			qPos.add(name);
+			qPos.add(name);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected int doCountByG_N_P(
+			long groupId, String name, String[] tagProperties,
+			boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_N_P);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, AssetTag.class.getName(), "AssetTag.tagId",
+					"AssetTag.userId", groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			setJoin(qPos, tagProperties);
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(name);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected AssetTag doFindByG_N(
+			long groupId, String name, boolean inlineSQLHelper)
+		throws NoSuchTagException, SystemException {
+
+		name = name.trim().toLowerCase();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_N);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, AssetTag.class.getName(), "AssetTag.tagId",
+					"AssetTag.userId", groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetTag", AssetTagImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(name);
+
+			List<AssetTag> list = q.list();
+
+			if (list.size() == 0) {
+				StringBundler sb = new StringBundler(6);
+
+				sb.append("No AssetTag exists with the key ");
+				sb.append("{groupId=");
+				sb.append(groupId);
+				sb.append(", name=");
+				sb.append(name);
+				sb.append("}");
+
+				throw new NoSuchTagException(sb.toString());
+			}
+			else {
+				return list.get(0);
+			}
+		}
+		catch (NoSuchTagException nste) {
+			throw nste;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected List<AssetTag> doFindByG_C_N(
+			long groupId, long classNameId, String name, int start, int end,
+			OrderByComparator obc, boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_N);
+
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, AssetTag.class.getName(), "AssetTag.tagId",
+					"AssetTag.userId", groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetTag", AssetTagImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(classNameId);
+			qPos.add(name);
+			qPos.add(name);
+
+			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected List<AssetTag> doFindByG_N_P(
+			long groupId, String name, String[] tagProperties, int start,
+			int end, OrderByComparator obc, boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_N_P);
+
+			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(tagProperties));
+			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, AssetTag.class.getName(), "AssetTag.tagId",
+					"AssetTag.userId", groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetTag", AssetTagImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			setJoin(qPos, tagProperties);
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(name);
+
+			return (List<AssetTag>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

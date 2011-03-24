@@ -33,6 +33,31 @@ public class AssetTagFinderUtil {
 		return getFinder().countByG_N_P(groupId, name, tagProperties);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetTag filterFindByG_N(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchTagException {
+		return getFinder().filterFindByG_N(groupId, name);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> filterFindByG_C_N(
+		long groupId, long classNameId, java.lang.String name, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_C_N(groupId, classNameId, name, start, end,
+			obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> filterFindByG_N_P(
+		long groupId, java.lang.String name, java.lang.String[] tagProperties,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_N_P(groupId, name, tagProperties, start, end,
+			obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByEntryId(
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -53,28 +78,19 @@ public class AssetTagFinderUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_C_N(
-		long groupId, long classNameId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_C_N(groupId, classNameId, name);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_C_N(
 		long groupId, long classNameId, java.lang.String name, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_C_N(groupId, classNameId, name, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_N_P(
-		long groupId, java.lang.String name, java.lang.String[] tagProperties)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_N_P(groupId, name, tagProperties);
+		return getFinder()
+				   .findByG_C_N(groupId, classNameId, name, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> findByG_N_P(
 		long groupId, java.lang.String name, java.lang.String[] tagProperties,
-		int start, int end)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByG_N_P(groupId, name, tagProperties, start, end);
+		return getFinder()
+				   .findByG_N_P(groupId, name, tagProperties, start, end, obc);
 	}
 
 	public static AssetTagFinder getFinder() {

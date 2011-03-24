@@ -15,6 +15,7 @@
 package com.liferay.portlet.asset.service.impl;
 
 import com.liferay.portal.kernel.cache.ThreadLocalCachable;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexer;
@@ -315,7 +316,9 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	public List<AssetTag> getTags(long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return assetTagFinder.findByG_C_N(groupId, classNameId, name);
+		return assetTagFinder.findByG_C_N(
+			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<AssetTag> getTags(
@@ -323,7 +326,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		throws SystemException {
 
 		return assetTagFinder.findByG_C_N(
-			groupId, classNameId, name, start, end);
+			groupId, classNameId, name, start, end, null);
 	}
 
 	@ThreadLocalCachable
@@ -400,7 +403,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		throws SystemException {
 
 		return assetTagFinder.findByG_N_P(
-			groupId, name, tagProperties, start, end);
+			groupId, name, tagProperties, start, end, null);
 	}
 
 	public AssetTag updateTag(

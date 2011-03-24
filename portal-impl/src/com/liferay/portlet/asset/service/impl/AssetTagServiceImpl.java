@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.impl;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -27,6 +28,7 @@ import com.liferay.portlet.asset.service.permission.AssetPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
 import com.liferay.util.Autocomplete;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -59,15 +61,21 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	}
 
 	public List<AssetTag> getGroupsTags(long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		return filterTags(assetTagLocalService.getGroupsTags(groupIds));
+		List<AssetTag> groupsTags = new ArrayList<AssetTag>();
+
+		for (long groupId : groupIds) {
+			List<AssetTag> groupTags = getGroupTags(groupId);
+
+			groupsTags.addAll(groupTags);
+		}
+
+		return groupsTags;
 	}
 
-	public List<AssetTag> getGroupTags(long groupId)
-		throws PortalException, SystemException {
-
-		return filterTags(assetTagLocalService.getGroupTags(groupId));
+	public List<AssetTag> getGroupTags(long groupId) throws SystemException {
+		return assetTagPersistence.filterFindByGroupId(groupId);
 	}
 
 	public AssetTag getTag(long tagId) throws PortalException, SystemException {
@@ -78,10 +86,11 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	}
 
 	public List<AssetTag> getTags(long groupId, long classNameId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		return filterTags(
-			assetTagLocalService.getTags(groupId, classNameId, name));
+		return assetTagFinder.filterFindByG_C_N(
+			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	public List<AssetTag> getTags(String className, long classPK)
@@ -105,12 +114,10 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	public JSONArray search(
 			long groupId, String name, String[] tagProperties, int start,
 			int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		List<AssetTag> tags = assetTagLocalService.search(
-			groupId, name, tagProperties, start, end);
-
-		tags = filterTags(tags);
+		List<AssetTag> tags = assetTagFinder.filterFindByG_N_P(
+			groupId, name, tagProperties, start, end, null);
 
 		return Autocomplete.listToJson(tags, "name", "name");
 	}
