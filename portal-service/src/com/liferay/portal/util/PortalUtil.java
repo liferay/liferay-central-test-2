@@ -428,7 +428,7 @@ public class PortalUtil {
 		return getPortal().getGroupFriendlyURL(
 			group, privateLayoutSet, themeDisplay);
 	}
-	
+
 	public static String[] getGuestPermissions(HttpServletRequest request) {
 		return getPortal().getGuestPermissions(request);
 	}

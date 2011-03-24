@@ -1427,6 +1427,110 @@ public class PortalImpl implements Portal {
 			portlet, PropsValues.GOOGLE_GADGET_SERVLET_MAPPING, themeDisplay);
 	}
 
+	public String getGroupFriendlyURL(
+			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			group.getGroupId(), privateLayoutSet);
+
+		String portalURL = StringPool.BLANK;
+
+		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
+			String virtualHostname = layoutSet.getVirtualHostname();
+
+			if (Validator.isNull(virtualHostname) &&
+				Validator.isNotNull(
+					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
+				!layoutSet.isPrivateLayout()) {
+
+				try {
+					Group defaultGroup = GroupLocalServiceUtil.getGroup(
+						themeDisplay.getCompanyId(),
+						PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
+
+					if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
+						Company company = themeDisplay.getCompany();
+
+						virtualHostname = company.getVirtualHostname();
+					}
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+
+			if (Validator.isNotNull(virtualHostname) &&
+				!virtualHostname.equalsIgnoreCase(_LOCALHOST)) {
+
+				virtualHostname = getPortalURL(
+					virtualHostname, themeDisplay.getServerPort(),
+					themeDisplay.isSecure());
+
+				String portalDomain = HttpUtil.getDomain(
+					themeDisplay.getPortalURL());
+
+				if (virtualHostname.contains(portalDomain)) {
+					String path = StringPool.BLANK;
+
+					if (themeDisplay.isWidget()) {
+						path = PropsValues.WIDGET_SERVLET_MAPPING;
+					}
+
+					if (themeDisplay.isI18n()) {
+						path = themeDisplay.getI18nPath();
+					}
+
+					return virtualHostname.concat(_pathContext).concat(path);
+				}
+			}
+			else {
+				Layout curLayout = themeDisplay.getLayout();
+
+				LayoutSet curLayoutSet = curLayout.getLayoutSet();
+
+				if ((layoutSet.getLayoutSetId() !=
+						curLayoutSet.getLayoutSetId()) &&
+					(group.getClassPK() != themeDisplay.getUserId())) {
+
+					Company company = themeDisplay.getCompany();
+
+					virtualHostname = company.getVirtualHostname();
+
+					if (!virtualHostname.equalsIgnoreCase(_LOCALHOST)) {
+						portalURL = getPortalURL(
+							virtualHostname, themeDisplay.getServerPort(),
+							themeDisplay.isSecure());
+					}
+				}
+			}
+		}
+
+		String friendlyURL = null;
+
+		if (privateLayoutSet) {
+			if (group.isUser()) {
+				friendlyURL = _PRIVATE_USER_SERVLET_MAPPING;
+			}
+			else {
+				friendlyURL = _PRIVATE_GROUP_SERVLET_MAPPING;
+			}
+		}
+		else {
+			friendlyURL = _PUBLIC_GROUP_SERVLET_MAPPING;
+		}
+
+		if (themeDisplay.isWidget()) {
+			friendlyURL = PropsValues.WIDGET_SERVLET_MAPPING + friendlyURL;
+		}
+
+		if (themeDisplay.isI18n()) {
+			friendlyURL = themeDisplay.getI18nPath() + friendlyURL;
+		}
+
+		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL();
+	}
+
 	public String[] getGuestPermissions(HttpServletRequest request) {
 		return request.getParameterValues("guestPermissions");
 	}
@@ -1615,110 +1719,7 @@ public class PortalImpl implements Portal {
 		String groupFriendlyURL = getGroupFriendlyURL(
 			layout.getGroup(), layout.isPrivateLayout(), themeDisplay);
 
-		return groupFriendlyURL + layout.getFriendlyURL();
-	}
-
-	public String getGroupFriendlyURL(
-			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		LayoutSet layoutSet =
-			LayoutSetLocalServiceUtil.getLayoutSet(
-				group.getGroupId(), privateLayoutSet);
-
-		long curLayoutSetId =
-			themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
-
-		String portalURL = StringPool.BLANK;
-
-		if (!themeDisplay.getServerName().equals(_LOCALHOST)) {
-			String virtualHostname = layoutSet.getVirtualHostname();
-
-			if (Validator.isNull(virtualHostname) &&
-				Validator.isNotNull(
-					PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME) &&
-				!layoutSet.isPrivateLayout()) {
-
-				try {
-					Group defaultGroup = GroupLocalServiceUtil.getGroup(
-						themeDisplay.getCompanyId(),
-						PropsValues.VIRTUAL_HOSTS_DEFAULT_COMMUNITY_NAME);
-
-					if (layoutSet.getGroupId() == defaultGroup.getGroupId()) {
-						Company company = themeDisplay.getCompany();
-
-						virtualHostname = company.getVirtualHostname();
-					}
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
-
-			if (Validator.isNotNull(virtualHostname) &&
-				!virtualHostname.equalsIgnoreCase(_LOCALHOST)) {
-
-				virtualHostname = getPortalURL(
-					virtualHostname, themeDisplay.getServerPort(),
-					themeDisplay.isSecure());
-
-				String portalDomain = HttpUtil.getDomain(
-					themeDisplay.getPortalURL());
-
-				String suffix = StringPool.BLANK;
-
-				if (virtualHostname.contains(portalDomain)) {
-					if (themeDisplay.isWidget()) {
-						suffix = PropsValues.WIDGET_SERVLET_MAPPING;
-					}
-
-					if (themeDisplay.isI18n()) {
-						suffix = themeDisplay.getI18nPath();
-					}
-
-					return virtualHostname + _pathContext + suffix;
-				}
-			}
-			else {
-				if ((layoutSet.getLayoutSetId() != curLayoutSetId) &&
-					(group.getClassPK() != themeDisplay.getUserId())) {
-
-					Company company = themeDisplay.getCompany();
-
-					virtualHostname = company.getVirtualHostname();
-
-					if (!virtualHostname.equalsIgnoreCase(_LOCALHOST)) {
-						portalURL = getPortalURL(
-							virtualHostname, themeDisplay.getServerPort(),
-							themeDisplay.isSecure());
-					}
-				}
-			}
-		}
-
-		String friendlyURL = null;
-
-		if (privateLayoutSet) {
-			if (group.isUser()) {
-				friendlyURL = _PRIVATE_USER_SERVLET_MAPPING;
-			}
-			else {
-				friendlyURL = _PRIVATE_GROUP_SERVLET_MAPPING;
-			}
-		}
-		else {
-			friendlyURL = _PUBLIC_GROUP_SERVLET_MAPPING;
-		}
-
-		if (themeDisplay.isWidget()) {
-			friendlyURL = PropsValues.WIDGET_SERVLET_MAPPING + friendlyURL;
-		}
-
-		if (themeDisplay.isI18n()) {
-			friendlyURL = themeDisplay.getI18nPath() + friendlyURL;
-		}
-
-		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL();
+		return groupFriendlyURL.concat(layout.getFriendlyURL());
 	}
 
 	public String getLayoutFriendlyURL(
