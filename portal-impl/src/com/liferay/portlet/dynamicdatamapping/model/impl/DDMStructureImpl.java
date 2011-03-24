@@ -14,8 +14,9 @@
 
 package com.liferay.portlet.dynamicdatamapping.model.impl;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -34,7 +35,7 @@ public class DDMStructureImpl
 	}
 
 	public String getFieldType(String fieldName) {
-		Element dynamicElement = _getElementByName(getXsdDocument(), fieldName);
+		Element dynamicElement = _getElement(fieldName);
 
 		if (dynamicElement != null) {
 			return dynamicElement.attributeValue("type");
@@ -43,20 +44,8 @@ public class DDMStructureImpl
 		return null;
 	}
 
-	public Document getXsdDocument() {
-		if (_xsdDocument == null) {
-			try {
-				_xsdDocument = SAXReaderUtil.read(getXsd());
-			}
-			catch (DocumentException de) {
-			}
-		}
-
-		return _xsdDocument;
-	}
-
 	public boolean hasField(String fieldName) {
-		Element dynamicElement = _getElementByName(getXsdDocument(), fieldName);
+		Element dynamicElement = _getElement(fieldName);
 
 		if (dynamicElement != null) {
 			return true;
@@ -65,24 +54,42 @@ public class DDMStructureImpl
 		return false;
 	}
 
-	public void setXsdDocument(Document xsdDocument) {
-		_xsdDocument = xsdDocument;
+	public void setXsd(String xsd) {		
+		super.setXsd(xsd);
+		
+		_document = null;
 	}
 
-	private Element _getElementByName(Document document, String fieldName) {
-		XPath xPathSelector = SAXReaderUtil.createXPath(
-			"//dynamic-element[@name='" + fieldName + "']");
-
-		List<Node> nodes = xPathSelector.selectNodes(document);
-
-		if (nodes.size() == 1) {
-			return (Element)nodes.get(0);
+	private Document _getDocument() throws Exception {
+		if (_document == null) {
+			_document = SAXReaderUtil.read(getXsd());
 		}
-		else {
-			return null;
-		}
+
+		return _document;
 	}
 
-	private Document _xsdDocument = null;
+	private Element _getElement(String name) {
+		try {
+			Document document = _getDocument();
+	
+			XPath xPathSelector = SAXReaderUtil.createXPath(
+				"//dynamic-element[@name='" + name + "']");
+	
+			List<Node> nodes = xPathSelector.selectNodes(document);
+	
+			if (nodes.size() == 1) {
+				return (Element)nodes.get(0);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return null;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
+
+	private Document _document;
 
 }

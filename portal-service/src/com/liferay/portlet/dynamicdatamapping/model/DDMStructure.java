@@ -31,10 +31,7 @@ public interface DDMStructure extends DDMStructureModel {
 	 */
 	public java.lang.String getFieldType(java.lang.String fieldName);
 
-	public com.liferay.portal.kernel.xml.Document getXsdDocument();
-
 	public boolean hasField(java.lang.String fieldName);
 
-	public void setXsdDocument(
-		com.liferay.portal.kernel.xml.Document xsdDocument);
+	public void setXsd(java.lang.String xsd);
 }
