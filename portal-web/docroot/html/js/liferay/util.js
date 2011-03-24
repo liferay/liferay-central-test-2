@@ -1001,7 +1001,7 @@
 
 			formBuilderURL.setEscapeXML(false);
 			formBuilderURL.setParameter('struts_action', '/dynamic_data_mapping/edit_structure');
-			formBuilderURL.setParameter('resourceNamespace', config.namespace);
+			formBuilderURL.setParameter('portletResourceNamespace', config.namespace);
 			formBuilderURL.setParameter('availableFields', config.availableFields);
 			formBuilderURL.setParameter('callback', config.callback);
 			formBuilderURL.setPortletId(166);

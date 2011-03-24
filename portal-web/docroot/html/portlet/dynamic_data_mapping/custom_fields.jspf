@@ -14,8 +14,7 @@
  */
 --%>
 
-<aui:script use="liferay-portlet-dynamic-data-mapping,aui-datepicker">
-
+<aui:script use="aui-datepicker,liferay-portlet-dynamic-data-mapping">
 	var DDMDateField = A.Component.create({
 		NAME: 'ddm-list-date',
 
@@ -104,5 +103,4 @@
 	A.FormBuilder.types['ddm-list-number'] = DDMNumberField;
 	A.FormBuilder.types['ddm-list-separator'] = DDMSeparatorField;
 	A.FormBuilder.types['ddm-list-url'] = DDMURLField;
-
 </aui:script>

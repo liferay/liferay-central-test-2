@@ -17,11 +17,13 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
+String cmd = ParamUtil.getString(request, Constants.CMD, Constants.ADD);
+
 String redirect = ParamUtil.getString(request, "redirect");
+
+String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
 String availableFields = ParamUtil.getString(request, "availableFields");
 String callback = ParamUtil.getString(request, "callback");
-String cmd = ParamUtil.getString(request, Constants.CMD, Constants.ADD);
-String resourceNamespace = ParamUtil.getString(request, "resourceNamespace");
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
@@ -40,12 +42,12 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 <aui:form action="<%= editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
 	<aui:input name="callback" type="hidden" value="<%= callback %>" />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="xsd" type="hidden" />
+	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
 	<liferay-ui:error exception="<%= StructureDuplicateStructureKeyException.class %>" message="please-enter-a-unique-id" />
@@ -166,15 +168,18 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 <aui:script use="liferay-portlet-dynamic-data-mapping">
 	var formBuilder = new Liferay.FormBuilder(
 		{
-			boundingBox: '#<portlet:namespace />formBuilder',
 			<c:if test="<%= Validator.isNotNull(availableFields) %>">
 				availableFields: Liferay.Util.getTop().<%= HtmlUtil.escapeJS(availableFields) %>,
 			</c:if>
+
+			boundingBox: '#<portlet:namespace />formBuilder',
+
 			<c:if test="<%= Validator.isNotNull(xsd) %>">
 				fields: <%= DDMXSDUtil.getJSONArray(xsd) %>,
 			</c:if>
+
 			portletNamespace: '<portlet:namespace />',
-			portletResourceNamespace: '<%= HtmlUtil.escapeJS(resourceNamespace) %>',
+			portletResourceNamespace: '<%= HtmlUtil.escapeJS(portletResourceNamespace) %>',
 			srcNode: '#<portlet:namespace />formBuilder .aui-form-builder-content'
 		}
 	).render();
