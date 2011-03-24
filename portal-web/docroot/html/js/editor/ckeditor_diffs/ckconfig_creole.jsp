@@ -73,10 +73,10 @@ CKEDITOR.config.attachments_prefix = '<%= attachmentURLPrefix %>';
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
 
-CKEDITOR.config.wiki_decode_links = true;
-
 CKEDITOR.config.extraPlugins = 'creole,wikilink';
 
 CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
 
 CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
+
+CKEDITOR.config.wiki_decode_links = true;
