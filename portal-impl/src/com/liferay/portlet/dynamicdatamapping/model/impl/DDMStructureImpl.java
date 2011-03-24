@@ -54,9 +54,9 @@ public class DDMStructureImpl
 		return false;
 	}
 
-	public void setXsd(String xsd) {		
+	public void setXsd(String xsd) {
 		super.setXsd(xsd);
-		
+
 		_document = null;
 	}
 
@@ -71,12 +71,12 @@ public class DDMStructureImpl
 	private Element _getElement(String name) {
 		try {
 			Document document = _getDocument();
-	
+
 			XPath xPathSelector = SAXReaderUtil.createXPath(
 				"//dynamic-element[@name='" + name + "']");
-	
+
 			List<Node> nodes = xPathSelector.selectNodes(document);
-	
+
 			if (nodes.size() == 1) {
 				return (Element)nodes.get(0);
 			}
