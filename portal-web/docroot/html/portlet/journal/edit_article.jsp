@@ -617,7 +617,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 						</aui:select>
 
-						<aui:select helpMessage="journal-article-default-landing-page-help" label="default-landing-page" name="layoutUuid" showEmptyOption="<%= true %>">
+						<aui:select helpMessage="default-display-page-help" label="default-display-page" name="layoutUuid" showEmptyOption="<%= true %>">
 
 							<%
 							List<Layout> groupPublicLayouts = LayoutLocalServiceUtil.getLayouts(scopeGroupId, false);
