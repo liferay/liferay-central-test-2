@@ -60,12 +60,11 @@ public class RESTActionImpl implements RESTAction {
 		for (int i = 0; i < parameterNames.length; i++) {
 			String parameterName = parameterNames[i];
 
-			Object value = _restActionParameters.lookupParameter(parameterName);
+			Object value = _restActionParameters.getParameter(parameterName);
 
 			Object parameterValue = null;
 
 			if (value != null) {
-
 				Class<?> parameterType = parameterTypes[i];
 
 				parameterValue = ReflectUtil.castType(value, parameterType);
@@ -77,7 +76,7 @@ public class RESTActionImpl implements RESTAction {
 		return parameters;
 	}
 
-	private final RESTActionConfig _restActionConfig;
-	private final RESTActionParameters _restActionParameters;
+	private RESTActionConfig _restActionConfig;
+	private RESTActionParameters _restActionParameters;
 
 }

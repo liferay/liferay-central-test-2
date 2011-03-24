@@ -19,10 +19,6 @@ package com.liferay.portal.kernel.rest;
  */
 public enum RESTMode {
 
-	AUTO,
-
-	MANUAL,
-
-	IGNORE
+	AUTO, IGNORE, MANUAL
 
 }

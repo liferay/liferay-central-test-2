@@ -176,27 +176,29 @@ public class RESTConfigurator extends FindClass {
 		return false;
 	}
 
-	private Class _loadUtilClass(Class implementationClass)
+	private Class<?> _loadUtilClass(Class<?> implementationClass)
 		throws ClassNotFoundException {
 
-		Class utilClass = _utilClasses.get(implementationClass);
+		Class<?> utilClass = _utilClasses.get(implementationClass);
 
-		if (utilClass == null) {
-			String utilClassName = implementationClass.getName();
-
-			if (utilClassName.endsWith("Impl")) {
-				utilClassName = utilClassName.substring(
-					0, utilClassName.length() - 4);
-
-				utilClassName += "Util";
-			}
-
-			utilClassName = StringUtil.replace(utilClassName, ".impl.", ".");
-
-			utilClass = _classLoader.loadClass(utilClassName);
-
-			_utilClasses.put(implementationClass, utilClass);
+		if (utilClass != null) {
+			return utilClass;
 		}
+
+		String utilClassName = implementationClass.getName();
+
+		if (utilClassName.endsWith("Impl")) {
+			utilClassName = utilClassName.substring(
+				0, utilClassName.length() - 4);
+
+			utilClassName += "Util";
+		}
+
+		utilClassName = StringUtil.replace(utilClassName, ".impl.", ".");
+
+		utilClass = _classLoader.loadClass(utilClassName);
+
+		_utilClasses.put(implementationClass, utilClass);
 
 		return utilClass;
 	}
@@ -208,19 +210,20 @@ public class RESTConfigurator extends FindClass {
 			return;
 		}
 
-		RESTMode classScanMode = RESTMode.MANUAL;
-
 		REST restClassAnnotation = actionClass.getAnnotation(REST.class);
 
+		RESTMode restClassRestMode = RESTMode.MANUAL;
+
 		if (restClassAnnotation != null) {
-			classScanMode = restClassAnnotation.mode();
+			restClassRestMode = restClassAnnotation.mode();
 		}
 
 		Method[] methods = actionClass.getMethods();
 
 		for (Method method : methods) {
+			Class<?> methodDeclaringClass = method.getDeclaringClass();
 
-			if (!method.getDeclaringClass().equals(actionClass)) {
+			if (!methodDeclaringClass.equals(actionClass)) {
 				continue;
 			}
 
@@ -228,21 +231,24 @@ public class RESTConfigurator extends FindClass {
 
 			REST restMethodAnnotation = method.getAnnotation(REST.class);
 
-			if (classScanMode == RESTMode.AUTO) {
-
+			if (restClassRestMode.equals(RESTMode.AUTO)) {
 				registerMethod = true;
 
-				if ((restMethodAnnotation != null)
-					&& (restMethodAnnotation.mode() == RESTMode.IGNORE)) {
+				if (restMethodAnnotation != null) {
+					RESTMode restMethodRestMode = restMethodAnnotation.mode();
 
-					registerMethod = false;
+					if (restMethodRestMode.equals(RESTMode.IGNORE)) {
+						registerMethod = false;
+					}
 				}
-			} else {
+			}
+			else {
+				if (restMethodAnnotation != null) {
+					RESTMode restMethodRestMode = restMethodAnnotation.mode();
 
-				if (restMethodAnnotation != null
-					&& restMethodAnnotation.mode() != RESTMode.IGNORE) {
-
-					registerMethod = true;
+					if (!restMethodRestMode.equals(RESTMode.IGNORE)) {
+						registerMethod = false;
+					}
 				}
 			}
 
@@ -253,7 +259,8 @@ public class RESTConfigurator extends FindClass {
 	}
 
 	private void _registerRESTAction(
-		Class<?> implementationClass, Method method) throws Exception {
+			Class<?> implementationClass, Method method)
+		throws Exception {
 
 		String path = _restMappingResolver.resolvePath(
 			implementationClass, method);
@@ -285,6 +292,7 @@ public class RESTConfigurator extends FindClass {
 	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);
 	private RESTMappingResolver _restMappingResolver =
 		new RESTMappingResolver();
-	private Map<Class, Class> _utilClasses = new HashMap<Class, Class>();
+	private Map<Class<?>, Class<?>> _utilClasses =
+		new HashMap<Class<?>, Class<?>>();
 
 }

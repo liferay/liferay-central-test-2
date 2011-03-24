@@ -14,6 +14,7 @@
 
 package com.liferay.portal.rest;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -36,22 +37,23 @@ public class RESTActionConfig implements Comparable<RESTActionConfig> {
 			resolveParameterNames(actionMethod);
 		_parameterTypes = actionMethod.getParameterTypes();
 
-		StringBundler sb = new StringBundler(_parameterNames.length * 2 + 2);
+		StringBundler sb = new StringBundler(_parameterNames.length * 2 + 4);
 
 		sb.append(_path);
-		sb.append('+');
+		sb.append(CharPool.PLUS);
 		sb.append(_parameterNames.length);
-		sb.append('+');
+		sb.append(CharPool.PLUS);
+
 		for (String parameterName : _parameterNames) {
 			sb.append(parameterName);
-			sb.append('+');
+			sb.append(CharPool.PLUS);
 		}
 
-		_pathForCompare = sb.toString();
+		_fullPath = sb.toString();
 	}
 
 	public int compareTo(RESTActionConfig restActionConfig) {
-		return _pathForCompare.compareTo(restActionConfig._pathForCompare);
+		return _fullPath.compareTo(restActionConfig._fullPath);
 	}
 
 	public Class<?> getActionClass() {
@@ -78,36 +80,34 @@ public class RESTActionConfig implements Comparable<RESTActionConfig> {
 		return _path;
 	}
 
-	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(11);
 
-		sb.append("RESTActionConfig{");
-		sb.append(_actionClass.getSimpleName());
-		sb.append('#');
-		sb.append(_actionMethod.getName());
-		sb.append('(');
-		for (int i = 0; i < _parameterNames.length; i++) {
-			if (i != 0) {
-				sb.append(", ");
-			}
-			sb.append(_parameterNames[i]);
-		}
-		sb.append(')');
-		sb.append("--->");
+		sb.append("{actionClass=");
+		sb.append(_actionClass);
+		sb.append(", actionMethod=");
+		sb.append(_actionMethod);
+		sb.append(", fullPath=");
+		sb.append(_fullPath);
+		sb.append(", method=");
 		sb.append(_method);
-		sb.append(' ');
+		sb.append(", parameterNames=");
+		sb.append(_parameterNames);
+		sb.append(", parameterTypes=");
+		sb.append(_parameterTypes);
+		sb.append(", path=");
 		sb.append(_path);
-		sb.append('}');
+		sb.append("}");
+
 		return sb.toString();
 	}
 
-	private final Class<?> _actionClass;
-	private final Method _actionMethod;
-	private final String _method;
-	private final String[] _parameterNames;
-	private final Class<?>[] _parameterTypes;
-	private final String _path;
-	private final String _pathForCompare;
+	private Class<?> _actionClass;
+	private Method _actionMethod;
+	private String _fullPath;
+	private String _method;
+	private String[] _parameterNames;
+	private Class<?>[] _parameterTypes;
+	private String _path;
 
 }

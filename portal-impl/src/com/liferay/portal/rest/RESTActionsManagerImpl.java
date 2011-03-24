@@ -17,6 +17,7 @@ package com.liferay.portal.rest;
 import com.liferay.portal.kernel.rest.RESTAction;
 import com.liferay.portal.kernel.rest.RESTActionsManager;
 import com.liferay.portal.kernel.util.BinarySearch;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SortedArrayList;
 
@@ -41,7 +42,6 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 		List<String[]> mappings = new ArrayList<String[]>();
 
 		for (RESTActionConfig restActionConfig : _restActionConfig) {
-
 			String[] parameterNames = restActionConfig.getParameterNames();
 
 			Class<?> actionClass = restActionConfig.getActionClass();
@@ -67,21 +67,19 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 			};
 
 			mappings.add(mapping);
-
 		}
 
 		return mappings;
 	}
 
 	public RESTAction lookup(HttpServletRequest request) {
-
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		String method = GetterUtil.getString(request.getMethod());
 
 		String pathParameters = null;
 
-		int pathParametersIndex = _indexOfPathParameters(path);
+		int pathParametersIndex = _getPathParametersIndex(path);
 
 		if (pathParametersIndex != -1) {
 			pathParameters = path.substring(pathParametersIndex);
@@ -93,17 +91,19 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 
 		restActionParameters.collectAll(request, pathParameters);
 
-		String parameterNames[] = restActionParameters.extractParameterNames();
+		String[] parameterNames = restActionParameters.getParameterNames();
 
-		int index = _lookup(path, method, parameterNames);
+		int restActionConfigIndex = _getRESTActionConfigIndex(
+			path, method, parameterNames);
 
-		if (index == -1) {
+		if (restActionConfigIndex == -1) {
 			throw new RuntimeException(
 				"No REST action associated with path " + path +
 					" and method " + method);
 		}
 
-		RESTActionConfig restActionConfig = _restActionConfig.get(index);
+		RESTActionConfig restActionConfig = _restActionConfig.get(
+			restActionConfigIndex);
 
 		return new RESTActionImpl(restActionConfig, restActionParameters);
 	}
@@ -123,27 +123,28 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 		int matched = 0;
 
 		for (String target : targetArray) {
-
 			for (String subject : subjectArray) {
 				if (subject.equals(target)) {
 					matched++;
+
 					break;
 				}
 			}
 		}
+
 		return matched;
 	}
 
-	private int _indexOfPathParameters(String path) {
+	private int _getPathParametersIndex(String path) {
+		int index = path.indexOf(CharPool.SLASH, 1);
 
-		int index = path.indexOf('/', 1);
-
-		index = path.indexOf('/', index + 1);
+		index = path.indexOf(CharPool.SLASH, index + 1);
 
 		return index;
 	}
 
-	private int _lookup(String path, String method, String[] parameterNames) {
+	private int _getRESTActionConfigIndex(
+		String path, String method, String[] parameterNames) {
 
 		int firstIndex = _pathBinarySearch.findFirst(path);
 
@@ -157,40 +158,45 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 			lastIndex = firstIndex;
 		}
 
-		int found = -1;
+		int index = -1;
 
 		int max = -1;
 
 		for (int i = firstIndex; i <= lastIndex; i++) {
-			RESTActionConfig config = _restActionConfig.get(i);
+			RESTActionConfig restActionConfig = _restActionConfig.get(i);
 
-			if (config.getMethod() != null &&
-				!config.getMethod().equals(method)) {
+			String restActionConfigMethod = restActionConfig.getMethod();
+
+			if ((restActionConfigMethod != null) &&
+				!restActionConfigMethod.equals(method)) {
 
 				continue;
 			}
 
-			String[] methodParameterNames = config.getParameterNames();
+			String[] restActionConfigParameterNames =
+				restActionConfig.getParameterNames();
 
-			int matched =
-				_countMatchedElements(parameterNames, methodParameterNames);
+			int count = _countMatchedElements(
+				parameterNames, restActionConfigParameterNames);
 
-			if (matched > max) {
-				max = matched;
+			if (count > max) {
+				max = count;
 
-				found = i;
+				index = i;
 			}
 		}
-		return found;
 
+		return index;
 	}
 
 	private class PathBinarySearch extends BinarySearch<String> {
 
 		protected int compare(int index, String element) {
-			RESTActionConfig rac = _restActionConfig.get(index);
+			RESTActionConfig restActionConfig = _restActionConfig.get(index);
 
-			return rac.getPath().compareTo(element);
+			String path = restActionConfig.getPath();
+
+			return path.compareTo(element);
 		}
 
 		protected int getLastIndex() {
@@ -199,7 +205,6 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 
 	}
 	private BinarySearch<String> _pathBinarySearch;
-
 	private SortedArrayList<RESTActionConfig> _restActionConfig;
 
 }

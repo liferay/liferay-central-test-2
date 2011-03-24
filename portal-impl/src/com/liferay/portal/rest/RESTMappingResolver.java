@@ -135,7 +135,6 @@ public class RESTMappingResolver {
 	}
 
 	private String _prefixToHttpMethod(String prefix) {
-
 		for (String postPrefix : POST_PREFIXES) {
 			if (prefix.equals(postPrefix)) {
 				return HttpMethods.POST;

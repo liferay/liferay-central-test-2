@@ -14,6 +14,8 @@
 
 package com.liferay.portal.rest;
 
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -31,12 +33,35 @@ import javax.servlet.http.HttpServletRequest;
 public class RESTActionParameters {
 
 	public void collectAll(HttpServletRequest request, String pathParameters) {
-		collectFromPath(pathParameters);
-		collectFromRequestParameters(request);
+		_collectFromPath(pathParameters);
+		_collectFromRequestParameters(request);
 	}
 
-	public void collectFromPath(String pathParameters) {
+	public Object getParameter(String name) {
+		for (ObjectValuePair<String, Object> parameter : _parameters) {
+			if (parameter.getKey().equals(name)) {
+				return parameter.getValue();
+			}
+		}
 
+		return null;
+	}
+
+	public String[] getParameterNames() {
+		String[] names = new String[_parameters.size()];
+
+		int i = 0;
+
+		for (ObjectValuePair<String, Object> parameter : _parameters) {
+			names[i] = parameter.getKey();
+
+			i++;
+		}
+
+		return names;
+	}
+
+	private void _collectFromPath(String pathParameters) {
 		if (pathParameters == null) {
 			return;
 		}
@@ -45,37 +70,37 @@ public class RESTActionParameters {
 			pathParameters = pathParameters.substring(1);
 		}
 
-		String[] chunks = StringUtil.split(pathParameters, StringPool.SLASH);
+		String[] pathParametersParts = StringUtil.split(
+			pathParameters, StringPool.SLASH);
 
-		int i = 0;
+		int length = (pathParametersParts.length / 2) * 2;
 
-		int total = (chunks.length / 2) * 2;
+		for (int i = 0; i < length;) {
+			String name = pathParametersParts[i];
 
-		while (i < total) {
-			String name = chunks[i];
-
-			name = name.replace('-', ' ');
+			name = name.replace(CharPool.DASH, CharPool.SPACE);
 
 			name = jodd.util.StringUtil.wordsToCamelCase(name);
 
-			String value = chunks[i + 1];
+			String value = pathParametersParts[i + 1];
 
-			_addNameValue(name, value);
+			ObjectValuePair<String, Object> objectValuePair =
+				new ObjectValuePair<String, Object>(name, value);
+
+			_parameters.add(objectValuePair);
 
 			i += 2;
 		}
 	}
 
-	public void collectFromRequestParameters(HttpServletRequest request) {
+	private void _collectFromRequestParameters(HttpServletRequest request) {
+		Enumeration<String> enu = request.getParameterNames();
 
-		Enumeration<String> paramNamesEnumeration = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String parameterName = enu.nextElement();
 
-		while (paramNamesEnumeration.hasMoreElements()) {
-
-			String parameterName = paramNamesEnumeration.nextElement();
-
-			String[] parameterValues =
-				request.getParameterValues(parameterName);
+			String[] parameterValues = request.getParameterValues(
+				parameterName);
 
 			Object value = null;
 
@@ -86,37 +111,14 @@ public class RESTActionParameters {
 				value = parameterValues;
 			}
 
-			_addNameValue(parameterName, value);
+			ObjectValuePair<String, Object> objectValuePair =
+				new ObjectValuePair<String, Object>(parameterName, value);
+
+			_parameters.add(objectValuePair);
 		}
 	}
 
-	public String[] extractParameterNames() {
-		String[] names = new String[_parameters.size()];
-
-		int i = 0;
-
-		for (NameValue nameValue : _parameters) {
-
-			names[i] = nameValue.getName();
-
-			i++;
-		}
-		return names;
-	}
-
-	public Object lookupParameter(String name) {
-		for (NameValue nameValue : _parameters) {
-			if (nameValue.getName().equals(name)) {
-				return nameValue.getValue();
-			}
-		}
-		return null;
-	}
-
-	private void _addNameValue(String name, Object value) {
-		_parameters.add(new NameValue<Object>(name, value));
-	}
-
-	private final Set<NameValue> _parameters = new HashSet<NameValue>();
+	private Set<ObjectValuePair<String, Object>> _parameters =
+		new HashSet<ObjectValuePair<String, Object>>();
 
 }
