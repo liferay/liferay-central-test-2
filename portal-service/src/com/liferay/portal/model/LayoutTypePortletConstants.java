@@ -16,8 +16,12 @@ package com.liferay.portal.model;
 
 /**
  * @author Alexander Chow
+ * @author Juan Fernández
  */
 public class LayoutTypePortletConstants {
+
+	public static final String DEFAULT_ASSET_PUBLISHER_PORTLET_ID =
+		"default-asset-publisher-portlet-id";
 
 	public static final String LAYOUT_TEMPLATE_ID = "layout-template-id";
 

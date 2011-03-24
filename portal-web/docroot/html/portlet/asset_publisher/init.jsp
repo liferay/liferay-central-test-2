@@ -212,7 +212,7 @@ boolean defaultAssetPublisher = false;
 
 UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
 
-String defaultAssetPublisherPortletId = typeSettingsProperties.getProperty("default-asset-publisher-portlet-id", StringPool.BLANK);
+String defaultAssetPublisherPortletId = typeSettingsProperties.getProperty(LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID, StringPool.BLANK);
 
 if (defaultAssetPublisherPortletId.equals(portletResource)) {
 	defaultAssetPublisher = true;

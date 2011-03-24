@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -226,7 +227,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			layout.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"default-asset-publisher-portlet-id", portletResource);
+			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
+			portletResource);
 
 		layout = LayoutServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(),
