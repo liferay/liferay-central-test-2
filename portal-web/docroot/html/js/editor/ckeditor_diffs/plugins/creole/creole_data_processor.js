@@ -336,6 +336,20 @@
 
 			hrefAttribute = decodeURIComponent(hrefAttribute);
 
+			if (CKEDITOR.env.ie && CKEDITOR.env.version <= 8) {
+				var location = window.location;
+
+				var protocolHostPathname = location.protocol + '//' + location.host + location.pathname;
+
+				protocolHostPathname = protocolHostPathname.substr(0, protocolHostPathname.lastIndexOf('/') + 1);
+
+				var hostPrefix = hrefAttribute.indexOf(protocolHostPathname);
+
+				if (hostPrefix == 0) {
+					hrefAttribute = hrefAttribute.substr(protocolHostPathname.length);
+				}
+			}
+
 			listTagsIn.push('[[', hrefAttribute, STR_PIPE);
 
 			listTagsOut.push(']]');
