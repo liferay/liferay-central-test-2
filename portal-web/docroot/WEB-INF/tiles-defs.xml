@@ -427,6 +427,14 @@
 		<put name="portlet_content" value="/portlet/document_library/view_file_shortcut.jsp" />
 	</definition>
 
+	<!-- Dynamic Data List -->
+
+	<definition name="portlet.dynamic_data_list" extends="portlet" />
+
+	<definition name="portlet.dynamic_data_list.view" extends="portlet.dynamic_data_list">
+		<put name="portlet_content" value="/portlet/dynamic_data_list/view.jsp" />
+	</definition>
+
 	<!-- Dynamic Data Mapping -->
 
 	<definition name="portlet.dynamic_data_mapping" extends="portlet" />
