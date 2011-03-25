@@ -206,6 +206,7 @@ AUI().add(
 						var typeElement = instance._createDynamicNode(
 							'dynamic-element',
 							{
+								dataType: field.get('dataType'),
 								name: encodeURI(field.get('name')),
 								type: field.get('type')
 							}

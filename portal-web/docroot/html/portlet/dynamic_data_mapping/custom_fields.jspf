@@ -24,6 +24,12 @@
 
 			NAME: 'ddm-list-date',
 
+			ATTRS: {
+				dataType: {
+					value: 'long'
+				}
+			},
+
 			prototype: {
 				renderUI: function() {
 					var instance = this;
@@ -45,7 +51,13 @@
 		{
 			EXTENDS: FormBuilderInputField,
 
-			NAME: 'ddm-list-decimal'
+			NAME: 'ddm-list-decimal',
+
+			ATTRS: {
+				dataType: {
+					value: 'double'
+				}
+			}
 
 		}
 	);
@@ -63,7 +75,13 @@
 		{
 			EXTENDS: FormBuilderInputField,
 
-			NAME: 'ddm-list-integer'
+			NAME: 'ddm-list-integer',
+
+			ATTRS: {
+				dataType: {
+					value: 'integer'
+				}
+			}
 		}
 	);
 
@@ -71,7 +89,13 @@
 		{
 			EXTENDS: FormBuilderInputField,
 
-			NAME: 'ddm-list-number'
+			NAME: 'ddm-list-number',
+
+			ATTRS: {
+				dataType: {
+					value: 'double'
+				}
+			}
 		}
 	);
 
