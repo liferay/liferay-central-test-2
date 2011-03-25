@@ -15,6 +15,7 @@
 package com.liferay.portal.json;
 
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONDeserializer;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -50,6 +51,10 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	public JSONArray createJSONArray(String json) throws JSONException {
 		return new JSONArrayImpl(json);
+	}
+
+	public <T> JSONDeserializer<T> createJSONDeserializer() {
+		return new JSONDeserializerImpl<T>();
 	}
 
 	public JSONObject createJSONObject() {

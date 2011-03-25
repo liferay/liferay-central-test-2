@@ -27,6 +27,10 @@ public class JSONFactoryUtil {
 		return getJSONFactory().createJSONArray(json);
 	}
 
+	public static <T> JSONDeserializer<T> createJSONDeserializer() {
+		return getJSONFactory().createJSONDeserializer();
+	}
+
 	public static JSONObject createJSONObject() {
 		return getJSONFactory().createJSONObject();
 	}

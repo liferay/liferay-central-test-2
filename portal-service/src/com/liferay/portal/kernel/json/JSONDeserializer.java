@@ -14,32 +14,17 @@
 
 package com.liferay.portal.kernel.json;
 
+import java.io.Reader;
+
 /**
  * @author Brian Wing Shun Chan
  */
-public interface JSONFactory {
+public interface JSONDeserializer<T> {
 
-	public JSONArray createJSONArray();
+	public T deserialize(Reader input);
 
-	public JSONArray createJSONArray(String json) throws JSONException;
+	public T deserialize(String input);
 
-	public <T> JSONDeserializer<T> createJSONDeserializer();
-
-	public JSONObject createJSONObject();
-
-	public JSONObject createJSONObject(String json) throws JSONException;
-
-	public Object deserialize(JSONObject jsonObj);
-
-	public Object deserialize(String json);
-
-	public Object looseDeserialize(String json);
-
-	public String looseSerialize(Object object);
-
-	public String looseSerialize(
-		Object object, JSONTransformer jsonTransformer, Class<?> clazz);
-
-	public String serialize(Object object);
+	public JSONDeserializer<T> use(String path, Class<?> clazz);
 
 }
