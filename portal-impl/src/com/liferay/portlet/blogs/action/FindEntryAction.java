@@ -86,7 +86,7 @@ public class FindEntryAction extends Action {
 			portletURL.setParameter("struts_action", strutsAction);
 
 			if (!showAllEntries) {
-					portletURL.setParameter("entryId", String.valueOf(entryId));
+				portletURL.setParameter("entryId", String.valueOf(entryId));
 			}
 
 			response.sendRedirect(portletURL.toString());
