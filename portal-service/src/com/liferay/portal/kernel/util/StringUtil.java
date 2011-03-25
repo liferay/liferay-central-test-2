@@ -562,6 +562,26 @@ public class StringUtil {
 		return sb.toString();
 	}
 
+	public static String quote(String s) {
+		return quote(s, CharPool.APOSTROPHE);
+	}
+
+	public static String quote(String s, char quote) {
+		if (s == null) {
+			return null;
+		}
+
+		return quote(s, String.valueOf(quote));
+	}
+
+	public static String quote(String s, String quote) {
+		if (s == null) {
+			return null;
+		}
+
+		return quote.concat(s).concat(quote);
+	}
+
 	public static String randomize(String s) {
 		return Randomizer.getInstance().randomize(s);
 	}
