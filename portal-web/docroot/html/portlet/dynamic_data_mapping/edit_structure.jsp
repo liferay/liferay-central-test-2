@@ -83,7 +83,6 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 			</c:choose>
 
 			<aui:field-wrapper>
-
 				<aui:select disabled="<%= structure != null %>" name="storageType">
 
 					<%
@@ -97,7 +96,6 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 					%>
 
 				</aui:select>
-
 			</aui:field-wrapper>
 
 			<aui:input name="description" />
