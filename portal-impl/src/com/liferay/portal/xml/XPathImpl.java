@@ -16,8 +16,11 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.XPath;
+import com.liferay.portal.xml.xpath.LiferayFunctionContext;
 
 import java.util.List;
+
+import org.jaxen.FunctionContext;
 
 /**
  * @author Brian Wing Shun Chan
@@ -26,6 +29,8 @@ public class XPathImpl implements XPath {
 
 	public XPathImpl(org.dom4j.XPath xPath) {
 		_xPath = xPath;
+
+		_xPath.setFunctionContext(_functionContext);
 	}
 
 	public boolean booleanValueOf(Object context) {
@@ -158,6 +163,9 @@ public class XPathImpl implements XPath {
 			return context;
 		}
 	}
+
+	private static final FunctionContext _functionContext =
+		new LiferayFunctionContext();
 
 	private org.dom4j.XPath _xPath;
 
