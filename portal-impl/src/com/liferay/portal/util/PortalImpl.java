@@ -770,8 +770,7 @@ public class PortalImpl implements Portal {
 
 		String actualURL = null;
 
-		if ((friendlyURL != null) &&
-			friendlyURL.startsWith(
+		if (friendlyURL.startsWith(
 				JournalArticleConstants.CANONICAL_URL_SEPARATOR)) {
 
 			try {
