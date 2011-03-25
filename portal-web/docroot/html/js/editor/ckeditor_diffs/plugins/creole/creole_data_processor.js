@@ -68,7 +68,7 @@
 			if (!instance._creoleParser) {
 				instance._creoleParser = new CKEDITOR.CreoleParser(
 					{
-						imagePrefix: CKEDITOR.config.attachments_prefix
+						imagePrefix: CKEDITOR.config.attachmentURLPrefix
 					}
 				);
 			}
@@ -320,7 +320,7 @@
 			var attrAlt = element.getAttribute('alt');
 			var attrSrc = element.getAttribute('src');
 
-			attrSrc = attrSrc.replace(CKEDITOR.config.attachments_prefix, '');
+			attrSrc = attrSrc.replace(CKEDITOR.config.attachmentURLPrefix, '');
 
 			listTagsIn.push('{{', attrSrc);
 
