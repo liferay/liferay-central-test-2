@@ -27,12 +27,12 @@ public class NestableException extends Exception {
 		super(msg);
 	}
 
-	public NestableException(Throwable cause) {
-		super(cause);
-	}
-
 	public NestableException(String msg, Throwable cause) {
 		super(msg, cause);
+	}
+
+	public NestableException(Throwable cause) {
+		super(cause);
 	}
 
 }
