@@ -18,18 +18,15 @@ package com.liferay.portlet.dynamicdatamapping.storage.query;
  * @author Michael C. Han
  */
 public enum ComparisonOperator {
-	EQUALS("="),
-	EXCLUDES(" EXCLUDES "),
-	GREATER_THAN(">"),
-	GREATER_THAN_EQUAL(">="),
-	IN(" IN "),
-	INCLUDES(" INCLUDES "),
-	JOIN(" = "),
-	LESS_THAN("<"),
-	LESS_THAN_EQUAL("<="),
-	LIKE(" LIKE "),
-	NOT_EQUALS("!="),
-	NOT_IN(" NOT IN ");
+
+	EQUALS("="), EXCLUDES(" EXCLUDES "), GREATER_THAN(">"),
+	GREATER_THAN_OR_EQUAL_TO(">="), IN(" IN "), INCLUDES(" INCLUDES "),
+	JOIN(" = "), LESS_THAN("<"), LESS_THAN_OR_EQUAL_TO("<="), LIKE(" LIKE "),
+	NOT_EQUALS("!="), NOT_IN(" NOT IN ");
+
+	public String getValue() {
+		return _value;
+	}
 
 	public String toString() {
 		return _value;

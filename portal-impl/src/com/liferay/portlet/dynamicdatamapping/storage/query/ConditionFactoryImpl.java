@@ -39,12 +39,17 @@ public class ConditionFactoryImpl implements ConditionFactory {
 
 	public Condition gte(String name, Object value) {
 		return new FieldConditionImpl(
-			name, value, ComparisonOperator.GREATER_THAN_EQUAL);
+			name, value, ComparisonOperator.GREATER_THAN_OR_EQUAL_TO);
 	}
 
 	public Condition in(String name, Object value) {
 		return new FieldConditionImpl(
 			name, value, ComparisonOperator.IN);
+	}
+
+	public Condition like(String name, Object value) {
+		return new FieldConditionImpl(
+			name, value, ComparisonOperator.LIKE);
 	}
 
 	public Condition lt(String name, Object value) {
@@ -54,12 +59,7 @@ public class ConditionFactoryImpl implements ConditionFactory {
 
 	public Condition lte(String name, Object value) {
 		return new FieldConditionImpl(
-			name, value, ComparisonOperator.LESS_THAN_EQUAL);
-	}
-
-	public Condition like(String name, Object value) {
-		return new FieldConditionImpl(
-			name, value, ComparisonOperator.LIKE);
+			name, value, ComparisonOperator.LESS_THAN_OR_EQUAL_TO);
 	}
 
 	public Condition ne(String name, Object value) {

@@ -40,8 +40,10 @@ public class FieldConditionImpl implements FieldCondition {
 	}
 
 	public boolean isJunction() {
-		return false;
+		return _JUNCTION;
 	}
+
+	private static final boolean _JUNCTION = false;
 
 	private ComparisonOperator _comparisonOperator;
 	private String _name;

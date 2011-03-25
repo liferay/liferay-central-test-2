@@ -31,11 +31,11 @@ public interface ConditionFactory {
 
 	public Condition in(String name, Object value);
 
+	public Condition like(String name, Object value);
+
 	public Condition lt(String name, Object value);
 
 	public Condition lte(String name, Object value);
-
-	public Condition like(String name, Object value);
 
 	public Condition ne(String name, Object value);
 

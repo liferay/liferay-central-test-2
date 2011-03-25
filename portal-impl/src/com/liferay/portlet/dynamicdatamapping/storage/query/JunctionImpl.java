@@ -33,19 +33,21 @@ public class JunctionImpl implements Junction {
 		return this;
 	}
 
+	public LogicalOperator getLogicalOperator() {
+		return _logicalOperator;
+	}
+
 	public boolean isJunction() {
-		return true;
+		return _JUNCTION;
 	}
 
 	public Iterator<Condition> iterator() {
 		return _conditions.iterator();
 	}
 
-	public LogicalOperator getLogicalOperator() {
-		return _logicalOperator;
-	}
+	private static final boolean _JUNCTION = true;
 
-	private LogicalOperator _logicalOperator;
 	private List<Condition> _conditions = new ArrayList<Condition>();
+	private LogicalOperator _logicalOperator;
 
 }

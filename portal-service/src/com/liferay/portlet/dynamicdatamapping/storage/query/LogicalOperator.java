@@ -18,8 +18,7 @@ package com.liferay.portlet.dynamicdatamapping.storage.query;
  * @author Michael C. Han
  */
 public enum LogicalOperator {
-	AND,
-	NOT,
-	OR;
+
+	AND, NOT, OR
 
 }
