@@ -362,7 +362,7 @@ create table Contact_ (
 create table Content (
 	contentId LONG not null primary key,
 	companyId LONG,
-	portletId LONG null,
+	portletId VARCHAR(75) null,
 	groupId LONG,
 	repositoryId LONG null,
 	path_ STRING null,
