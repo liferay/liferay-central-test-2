@@ -70,7 +70,7 @@ public class StringType implements CompositeUserType {
 	}
 
 	public Object getPropertyValue(Object component, int property) {
-		return null;
+		return component;
 	}
 
 	public int hashCode(Object x) {
