@@ -99,14 +99,14 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected List<Fields> doQuery(
-			long structureId, List<String> fieldNames, Condition whereCondition,
+			long structureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
 	}
 
-	protected int doQueryCount(long structureId, Condition whereCondition)
+	protected int doQueryCount(long structureId, Condition condition)
 		throws Exception {
 
 		return 0;

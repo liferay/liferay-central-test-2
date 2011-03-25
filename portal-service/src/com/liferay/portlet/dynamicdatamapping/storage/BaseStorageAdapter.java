@@ -173,13 +173,13 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, Condition whereCondition,
+			long structureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		try {
 			return doQuery(
-				structureId, fieldNames, whereCondition, orderByComparator);
+				structureId, fieldNames, condition, orderByComparator);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -189,11 +189,11 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public int queryCount(long structureId, Condition whereCondition)
+	public int queryCount(long structureId, Condition condition)
 		throws StorageException {
 
 		try {
-			return doQueryCount(structureId, whereCondition);
+			return doQueryCount(structureId, condition);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -253,12 +253,11 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws Exception;
 
 	protected abstract  List<Fields> doQuery(
-			long structureId, List<String> fieldNames, Condition whereCondition,
+			long structureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws Exception;
 
-	protected abstract int doQueryCount(
-			long structureId, Condition whereCondition)
+	protected abstract int doQueryCount(long structureId, Condition condition)
 		throws Exception;
 
 	protected abstract void doUpdate(

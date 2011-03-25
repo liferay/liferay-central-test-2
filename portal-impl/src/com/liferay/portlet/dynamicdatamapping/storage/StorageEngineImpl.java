@@ -129,22 +129,22 @@ public class StorageEngineImpl implements StorageEngine {
 	}
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, Condition whereCondition,
+			long structureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
 
 		return storageAdapter.query(
-			structureId, fieldNames, whereCondition, orderByComparator);
+			structureId, fieldNames, condition, orderByComparator);
 	}
 
-	public int queryCount(long structureId, Condition whereCondition)
+	public int queryCount(long structureId, Condition condition)
 		throws StorageException {
 
 		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
 
-		return storageAdapter.queryCount(structureId, whereCondition);
+		return storageAdapter.queryCount(structureId, condition);
 	}
 
 	public void setDefaultStorageAdapter(

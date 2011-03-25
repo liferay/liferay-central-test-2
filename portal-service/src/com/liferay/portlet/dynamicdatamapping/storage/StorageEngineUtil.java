@@ -112,18 +112,18 @@ public class StorageEngineUtil {
 	}
 
 	public static List<Fields> query(
-			long structureId, List<String> fieldNames, Condition whereCondition,
+			long structureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		return getStorageEngine().query(
-			structureId, fieldNames, whereCondition, orderByComparator);
+			structureId, fieldNames, condition, orderByComparator);
 	}
 
-	public static int queryCount(long structureId, Condition whereCondition)
+	public static int queryCount(long structureId, Condition condition)
 		throws StorageException {
 
-		return getStorageEngine().queryCount(structureId, whereCondition);
+		return getStorageEngine().queryCount(structureId, condition);
 	}
 
 	public static void update(

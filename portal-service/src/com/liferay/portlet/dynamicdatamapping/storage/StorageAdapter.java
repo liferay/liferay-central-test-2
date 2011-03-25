@@ -69,11 +69,11 @@ public interface StorageAdapter {
 		throws StorageException;
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, Condition whereCondition,
+			long structureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public int queryCount(long structureId, Condition whereCondition)
+	public int queryCount(long structureId, Condition condition)
 		throws StorageException;
 
 	public void update(
