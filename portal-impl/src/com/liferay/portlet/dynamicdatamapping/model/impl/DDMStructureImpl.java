@@ -37,57 +37,59 @@ public class DDMStructureImpl
 	}
 
 	public String getFieldType(String fieldName) {
-		Map<String, String> fieldsTypeMap = _getFieldsTypeMap();
+		Map<String, String> fieldTypes = _getFieldTypes();
 
-		return fieldsTypeMap.get(fieldName);
+		return fieldTypes.get(fieldName);
 	}
 
 	public boolean hasField(String fieldName) {
-		Map<String, String> fieldsTypeMap = _getFieldsTypeMap();
+		Map<String, String> fieldTypes = _getFieldTypes();
 
-		return fieldsTypeMap.containsKey(fieldName);
+		return fieldTypes.containsKey(fieldName);
 	}
 
 	public void setXsd(String xsd) {
 		super.setXsd(xsd);
 
-		_fieldsType = null;
+		_fieldTypes = null;
 	}
 
-	private Map<String, String> _getFieldsTypeMap() {
-		if (_fieldsType == null) {
-			_fieldsType = new HashMap<String, String>();
+	private Map<String, String> _getFieldTypes() {
+		if (_fieldTypes == null) {
+			synchronized (this) {
+				if (_fieldTypes == null) {
+					_fieldTypes = new HashMap<String, String>();
 
-			try {
-				XPath xPathSelector = SAXReaderUtil.createXPath(
-					"//dynamic-element");
+					try {
+						XPath xPathSelector = SAXReaderUtil.createXPath(
+							"//dynamic-element");
 
-				List<Node> nodes = xPathSelector.selectNodes(
-					SAXReaderUtil.read(getXsd()));
+						List<Node> nodes = xPathSelector.selectNodes(
+							SAXReaderUtil.read(getXsd()));
 
-				if (nodes != null) {
-					Iterator<Node> itr = nodes.iterator();
+						Iterator<Node> itr = nodes.iterator();
 
-					while (itr.hasNext()) {
-						Element element = (Element)itr.next();
+						while (itr.hasNext()) {
+							Element element = (Element)itr.next();
 
-						String name = element.attributeValue("name");
-						String type = element.attributeValue("type");
+							String name = element.attributeValue("name");
+							String type = element.attributeValue("type");
 
-						_fieldsType.put(name, type);
+							_fieldTypes.put(name, type);
+						}
+					}
+					catch (Exception e) {
+						_log.error(e, e);
 					}
 				}
 			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
 		}
 
-		return _fieldsType;
+		return _fieldTypes;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
 
-	private Map<String, String> _fieldsType;
+	private Map<String, String> _fieldTypes;
 
 }
