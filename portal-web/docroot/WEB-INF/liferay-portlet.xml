@@ -907,7 +907,6 @@
 		<render-weight>25</render-weight>
 		<header-portlet-css>/html/portlet/asset_publisher/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-asset-publisher</css-class-wrapper>
-		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>102</portlet-name>

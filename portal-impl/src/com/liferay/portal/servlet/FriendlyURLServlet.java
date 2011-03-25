@@ -248,7 +248,7 @@ public class FriendlyURLServlet extends HttpServlet {
 
 		requestContext.put("request", request);
 
-		return PortalUtil.getActualURL(
+		return PortalUtil.getLayoutActualURL(
 			group.getGroupId(), _private, mainPath, friendlyURL, params,
 			requestContext);
 	}

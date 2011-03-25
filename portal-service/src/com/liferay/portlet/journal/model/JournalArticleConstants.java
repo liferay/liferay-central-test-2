@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
  */
 public class JournalArticleConstants {
 
-	public static final String CANONICAL_URL_SEPARATOR = "/_/";
-
 	public static final double DEFAULT_VERSION = 1.0;
 
 	public static final String PORTLET = "portlet";
