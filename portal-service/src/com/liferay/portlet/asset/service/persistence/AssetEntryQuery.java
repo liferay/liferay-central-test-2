@@ -41,7 +41,7 @@ public class AssetEntryQuery {
 
 	public static String[] ORDER_BY_COLUMNS = new String[] {
 		"title", "createDate", "modifiedDate", "publishDate", "expirationDate",
-		"priority", "viewCount"
+		"priority", "viewCount", "ratings"
 	};
 
 	public static String checkOrderByCol(String orderByCol) {

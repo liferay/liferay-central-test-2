@@ -231,7 +231,7 @@ boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enablePrint", 
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enableFlags", null));
 
 String defaultMetadataFields = StringPool.BLANK;
-String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags";
+String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count,categories,tags,ratings";
 
 String[] metadataFields = StringUtil.split(preferences.getValue("metadataFields", defaultMetadataFields));
 

@@ -178,6 +178,15 @@ public class AssetEntryFinderImpl
 			sb.append("AssetEntries_AssetCategories.categoryId) ");
 		}
 
+		if (entryQuery.getOrderByCol1().equals("ratings") ||
+			entryQuery.getOrderByCol2().equals("ratings")) {
+			sb.append(" INNER JOIN ");
+			sb.append("RatingsEntry ON ");
+			sb.append("(RatingsEntry.classNameId = ");
+			sb.append("AssetEntry.classNameId) AND ");
+			sb.append("(RatingsEntry.classPK = AssetEntry.classPK)");
+		}
+
 		sb.append("WHERE ");
 
 		int whereIndex = sb.index();
@@ -275,8 +284,16 @@ public class AssetEntryFinderImpl
 		sb.append(getClassNameIds(entryQuery.getClassNameIds()));
 
 		if (!count) {
-			sb.append(" ORDER BY AssetEntry.");
-			sb.append(entryQuery.getOrderByCol1());
+			sb.append(" ORDER BY ");
+
+			if (entryQuery.getOrderByCol1().equals("ratings")) {
+				sb.append("RatingsEntry.score");
+			}
+			else {
+				sb.append("AssetEntry.");
+				sb.append(entryQuery.getOrderByCol1());
+			}
+
 			sb.append(StringPool.SPACE);
 			sb.append(entryQuery.getOrderByType1());
 
@@ -284,8 +301,14 @@ public class AssetEntryFinderImpl
 				!entryQuery.getOrderByCol1().equals(
 					entryQuery.getOrderByCol2())) {
 
-				sb.append(", AssetEntry.");
-				sb.append(entryQuery.getOrderByCol2());
+				if (entryQuery.getOrderByCol2().equals("ratings")) {
+					sb.append(", RatingsEntry.score");
+				}
+				else {
+					sb.append(", AssetEntry.");
+					sb.append(entryQuery.getOrderByCol2());
+				}
+
 				sb.append(StringPool.SPACE);
 				sb.append(entryQuery.getOrderByType2());
 			}
