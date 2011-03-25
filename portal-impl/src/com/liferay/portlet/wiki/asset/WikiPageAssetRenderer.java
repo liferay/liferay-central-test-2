@@ -70,7 +70,9 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	public String getSummary(Locale locale) {
 		String content = _page.getContent();
 
-		if (_page.getFormat().equals("html")) {
+		String format = _page.getFormat(); 
+
+		if (format.equals("html")) {
 			content = HtmlUtil.stripHtml(content);
 		}
 		else {
