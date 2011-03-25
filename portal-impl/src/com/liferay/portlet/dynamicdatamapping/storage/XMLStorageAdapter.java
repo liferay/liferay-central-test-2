@@ -427,7 +427,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 
 	private final String _CONNECTOR = " and dynamic-content= ";
 
-	private final String _CONNECTOR_LIKE = " and contains(dynamic-content, ";
+	private final String _CONNECTOR_LIKE = " and matches(dynamic-content, ";
 
 	private final String _DYNAMIC_CONTENT = "dynamic-content";
 
