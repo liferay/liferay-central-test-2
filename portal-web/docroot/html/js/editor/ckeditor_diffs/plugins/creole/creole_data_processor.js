@@ -336,7 +336,7 @@
 
 			hrefAttribute = decodeURIComponent(hrefAttribute);
 
-			if (CKEDITOR.env.ie && CKEDITOR.env.version <= 8) {
+			if (CKEDITOR.env.ie && (CKEDITOR.env.version <= 8)) {
 				var location = window.location;
 
 				var protocolHostPathname = location.protocol + '//' + location.host + location.pathname;
