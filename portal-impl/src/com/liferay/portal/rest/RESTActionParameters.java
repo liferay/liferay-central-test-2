@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +35,7 @@ public class RESTActionParameters {
 	public void collectAll(
 		HttpServletRequest request, String pathParameters,
 		JSONRPCRequest jsonRpcRequest) {
+
 		_collectFromPath(pathParameters);
 		_collectFromRequestParameters(request);
 		_collectFromJSONRPCRequest(jsonRpcRequest);
@@ -44,7 +43,9 @@ public class RESTActionParameters {
 
 	public Object getParameter(String name) {
 		for (ObjectValuePair<String, Object> parameter : _parameters) {
-			if (parameter.getKey().equals(name)) {
+			String key = parameter.getKey();
+
+			if (key.equals(name)) {
 				return parameter.getValue();
 			}
 		}
@@ -71,15 +72,14 @@ public class RESTActionParameters {
 			return;
 		}
 
-		Iterator<Map.Entry<String, String>> iterator =
-			jsonRpcRequest.parametersIterator();
+		Set<String> parameterNames = jsonRpcRequest.getParameterNames();
 
-		while (iterator.hasNext()) {
-			Map.Entry<String, String> param = iterator.next();
+		for (String parameterName : parameterNames) {
+			String parameterValue = jsonRpcRequest.getParameter(parameterName);
 
 			ObjectValuePair<String, Object> objectValuePair =
 				new ObjectValuePair<String, Object>(
-					param.getKey(), param.getValue());
+					parameterName, parameterValue);
 
 			_parameters.add(objectValuePair);
 		}

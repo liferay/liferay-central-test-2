@@ -14,16 +14,18 @@
 
 package com.liferay.portal.rest;
 
+import com.liferay.portal.kernel.json.JSONDeserializer;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import flexjson.JSONDeserializer;
-import jodd.servlet.ServletUtil;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
+import jodd.servlet.ServletUtil;
 
 /**
  * @author Igor Spasic
@@ -31,23 +33,26 @@ import java.util.Map;
 public class JSONRPCRequest {
 
 	public JSONRPCRequest(HttpServletRequest request) {
-		_valid = true;
-
 		try {
 			String requestBody = ServletUtil.readRequestBody(request);
 
-			HashMap map = (HashMap) new JSONDeserializer().
-				use(null, HashMap.class).use("parameters", HashMap.class).
-				deserialize(requestBody);
+			JSONDeserializer<HashMap<Object, Object>> jsonDeserializer =
+				JSONFactoryUtil.createJSONDeserializer();
 
-			_method = (String)map.get("method");
+			jsonDeserializer.use(null, HashMap.class);
+			jsonDeserializer.use("parameters", HashMap.class);
 
-			_parameters = (Map<String, String>)map.get("params");
+			HashMap<Object, Object> requestBodyMap =
+				jsonDeserializer.deserialize(requestBody);
 
+			_method = (String)requestBodyMap.get("method");
+
+			_parameters = (Map<String, String>)requestBodyMap.get("params");
+
+			_valid = true;
 		}
-		catch (IOException ioe) {
-			_log.error(ioe, ioe);
-			_valid = false;
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -58,16 +63,19 @@ public class JSONRPCRequest {
 	public String getParameter(String name) {
 		return _parameters.get(name);
 	}
-	
+
+	public Set<String> getParameterNames() {
+		return _parameters.keySet();
+	}
+
 	public boolean isValid() {
 		return _valid;
 	}
 
-	public Iterator<Map.Entry<String,String>> parametersIterator() {
-		return _parameters.entrySet().iterator();
-	}
 	private static Log _log = LogFactoryUtil.getLog(JSONRPCRequest.class);
+
 	private String _method;
 	private Map<String, String> _parameters;
 	private boolean _valid;
+
 }
