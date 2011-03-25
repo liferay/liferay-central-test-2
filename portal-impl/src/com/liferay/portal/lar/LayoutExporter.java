@@ -342,46 +342,48 @@ public class LayoutExporter {
 				groupId, privateLayout, layoutIds);
 		}
 
-		Layout firstLayout = layouts.get(0);
+		if (!layouts.isEmpty()) {
+			Layout firstLayout = layouts.get(0);
 
-		if (group.isStagingGroup()) {
-			group = group.getLiveGroup();
-		}
-
-		List<Portlet> portlets = getAlwaysExportablePortlets(companyId);
-
-		for (Portlet portlet : portlets) {
-			String portletId = portlet.getRootPortletId();
-
-			if (!group.isStagedPortlet(portletId)) {
-				continue;
+			if (group.isStagingGroup()) {
+				group = group.getLiveGroup();
 			}
 
-			if (portlet.isScopeable() && firstLayout.hasScopeGroup()) {
-				String key = PortletPermissionUtil.getPrimaryKey(
-					firstLayout.getPlid(), portletId);
+			List<Portlet> portlets = getAlwaysExportablePortlets(companyId);
 
-				portletIds.put(
-					key,
-					new Object[] {
-						portletId, firstLayout.getPlid(),
-						firstLayout.getScopeGroup().getGroupId(),
-						StringPool.BLANK, firstLayout.getUuid()
-					}
-				);
-			}
-			else {
-				String key = PortletPermissionUtil.getPrimaryKey(
-					0, portletId);
+			for (Portlet portlet : portlets) {
+				String portletId = portlet.getRootPortletId();
 
-				if (portletIds.get(key) == null) {
+				if (!group.isStagedPortlet(portletId)) {
+					continue;
+				}
+
+				if (portlet.isScopeable() && firstLayout.hasScopeGroup()) {
+					String key = PortletPermissionUtil.getPrimaryKey(
+						firstLayout.getPlid(), portletId);
+
 					portletIds.put(
 						key,
 						new Object[] {
-							portletId, firstLayout.getPlid(), groupId,
-							StringPool.BLANK, StringPool.BLANK
+							portletId, firstLayout.getPlid(),
+							firstLayout.getScopeGroup().getGroupId(),
+							StringPool.BLANK, firstLayout.getUuid()
 						}
 					);
+				}
+				else {
+					String key = PortletPermissionUtil.getPrimaryKey(
+						0, portletId);
+
+					if (portletIds.get(key) == null) {
+						portletIds.put(
+							key,
+							new Object[] {
+								portletId, firstLayout.getPlid(), groupId,
+								StringPool.BLANK, StringPool.BLANK
+							}
+						);
+					}
 				}
 			}
 		}
