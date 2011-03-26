@@ -26,11 +26,8 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  * @see    com.liferay.portal.model.impl.BaseModelImpl
  */
-public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
-
-	public Class<?> getModelClass();
-
-	public String getModelClassName();
+public interface BaseModel<T>
+	extends ClassedModel, Cloneable, Comparable<T>, Serializable {
 
 	/**
 	 * Determines if this model instance does not yet exist in the database.
