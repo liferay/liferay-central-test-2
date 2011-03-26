@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchClassNameException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -136,6 +137,45 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("classNameId", nextLong()));
 
 		List<ClassName> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ClassName newClassName = addClassName();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClassName.class,
+				ClassName.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("classNameId"));
+
+		Object newClassNameId = newClassName.getClassNameId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("classNameId",
+				new Object[] { newClassNameId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingClassNameId = result.get(0);
+
+		assertEquals(existingClassNameId, newClassNameId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ClassName newClassName = addClassName();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClassName.class,
+				ClassName.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("classNameId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("classNameId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

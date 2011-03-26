@@ -17,6 +17,7 @@ package com.liferay.portlet.social.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -165,6 +166,45 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("activityId", nextLong()));
 
 		List<SocialActivity> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		SocialActivity newSocialActivity = addSocialActivity();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialActivity.class,
+				SocialActivity.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("activityId"));
+
+		Object newActivityId = newSocialActivity.getActivityId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("activityId",
+				new Object[] { newActivityId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingActivityId = result.get(0);
+
+		assertEquals(existingActivityId, newActivityId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		SocialActivity newSocialActivity = addSocialActivity();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialActivity.class,
+				SocialActivity.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("activityId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("activityId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

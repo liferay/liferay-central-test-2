@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -154,6 +155,47 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<ResourcePermission> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ResourcePermission newResourcePermission = addResourcePermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourcePermission.class,
+				ResourcePermission.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"resourcePermissionId"));
+
+		Object newResourcePermissionId = newResourcePermission.getResourcePermissionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("resourcePermissionId",
+				new Object[] { newResourcePermissionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingResourcePermissionId = result.get(0);
+
+		assertEquals(existingResourcePermissionId, newResourcePermissionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ResourcePermission newResourcePermission = addResourcePermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourcePermission.class,
+				ResourcePermission.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"resourcePermissionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("resourcePermissionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

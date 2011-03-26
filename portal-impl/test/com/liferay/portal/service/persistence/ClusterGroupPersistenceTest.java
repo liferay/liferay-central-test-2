@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchClusterGroupException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ClusterGroup;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -142,6 +143,47 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("clusterGroupId", nextLong()));
 
 		List<ClusterGroup> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ClusterGroup newClusterGroup = addClusterGroup();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClusterGroup.class,
+				ClusterGroup.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"clusterGroupId"));
+
+		Object newClusterGroupId = newClusterGroup.getClusterGroupId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("clusterGroupId",
+				new Object[] { newClusterGroupId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingClusterGroupId = result.get(0);
+
+		assertEquals(existingClusterGroupId, newClusterGroupId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ClusterGroup newClusterGroup = addClusterGroup();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClusterGroup.class,
+				ClusterGroup.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"clusterGroupId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("clusterGroupId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

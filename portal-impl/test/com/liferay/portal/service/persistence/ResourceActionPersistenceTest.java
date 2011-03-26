@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -144,6 +145,47 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<ResourceAction> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ResourceAction newResourceAction = addResourceAction();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceAction.class,
+				ResourceAction.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"resourceActionId"));
+
+		Object newResourceActionId = newResourceAction.getResourceActionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("resourceActionId",
+				new Object[] { newResourceActionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingResourceActionId = result.get(0);
+
+		assertEquals(existingResourceActionId, newResourceActionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ResourceAction newResourceAction = addResourceAction();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceAction.class,
+				ResourceAction.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"resourceActionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("resourceActionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PortletItem;
@@ -161,6 +162,47 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("portletItemId", nextLong()));
 
 		List<PortletItem> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		PortletItem newPortletItem = addPortletItem();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PortletItem.class,
+				PortletItem.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"portletItemId"));
+
+		Object newPortletItemId = newPortletItem.getPortletItemId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("portletItemId",
+				new Object[] { newPortletItemId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingPortletItemId = result.get(0);
+
+		assertEquals(existingPortletItemId, newPortletItemId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		PortletItem newPortletItem = addPortletItem();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PortletItem.class,
+				PortletItem.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"portletItemId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("portletItemId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

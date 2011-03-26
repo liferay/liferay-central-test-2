@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Lock;
@@ -156,6 +157,45 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("lockId", nextLong()));
 
 		List<Lock> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Lock newLock = addLock();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Lock.class,
+				Lock.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("lockId"));
+
+		Object newLockId = newLock.getLockId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("lockId",
+				new Object[] { newLockId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingLockId = result.get(0);
+
+		assertEquals(existingLockId, newLockId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Lock newLock = addLock();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Lock.class,
+				Lock.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("lockId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("lockId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

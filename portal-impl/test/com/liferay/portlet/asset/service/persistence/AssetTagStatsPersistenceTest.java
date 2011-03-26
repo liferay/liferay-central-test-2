@@ -17,6 +17,7 @@ package com.liferay.portlet.asset.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -144,6 +145,45 @@ public class AssetTagStatsPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("tagStatsId", nextLong()));
 
 		List<AssetTagStats> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		AssetTagStats newAssetTagStats = addAssetTagStats();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTagStats.class,
+				AssetTagStats.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("tagStatsId"));
+
+		Object newTagStatsId = newAssetTagStats.getTagStatsId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("tagStatsId",
+				new Object[] { newTagStatsId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingTagStatsId = result.get(0);
+
+		assertEquals(existingTagStatsId, newTagStatsId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		AssetTagStats newAssetTagStats = addAssetTagStats();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTagStats.class,
+				AssetTagStats.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("tagStatsId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("tagStatsId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

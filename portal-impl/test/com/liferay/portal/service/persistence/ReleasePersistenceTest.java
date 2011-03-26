@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
@@ -153,6 +154,45 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("releaseId", nextLong()));
 
 		List<Release> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Release newRelease = addRelease();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Release.class,
+				Release.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("releaseId"));
+
+		Object newReleaseId = newRelease.getReleaseId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("releaseId",
+				new Object[] { newReleaseId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingReleaseId = result.get(0);
+
+		assertEquals(existingReleaseId, newReleaseId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Release newRelease = addRelease();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Release.class,
+				Release.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("releaseId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("releaseId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

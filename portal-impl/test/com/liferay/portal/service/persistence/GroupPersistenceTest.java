@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -159,6 +160,45 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("groupId", nextLong()));
 
 		List<Group> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Group newGroup = addGroup();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Group.class,
+				Group.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("groupId"));
+
+		Object newGroupId = newGroup.getGroupId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("groupId",
+				new Object[] { newGroupId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingGroupId = result.get(0);
+
+		assertEquals(existingGroupId, newGroupId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Group newGroup = addGroup();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Group.class,
+				Group.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("groupId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("groupId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

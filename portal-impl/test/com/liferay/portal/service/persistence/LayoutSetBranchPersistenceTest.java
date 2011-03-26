@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLayoutSetBranchException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.LayoutSetBranch;
@@ -165,6 +166,47 @@ public class LayoutSetBranchPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<LayoutSetBranch> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		LayoutSetBranch newLayoutSetBranch = addLayoutSetBranch();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetBranch.class,
+				LayoutSetBranch.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"layoutSetBranchId"));
+
+		Object newLayoutSetBranchId = newLayoutSetBranch.getLayoutSetBranchId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutSetBranchId",
+				new Object[] { newLayoutSetBranchId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingLayoutSetBranchId = result.get(0);
+
+		assertEquals(existingLayoutSetBranchId, newLayoutSetBranchId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		LayoutSetBranch newLayoutSetBranch = addLayoutSetBranch();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetBranch.class,
+				LayoutSetBranch.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"layoutSetBranchId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutSetBranchId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

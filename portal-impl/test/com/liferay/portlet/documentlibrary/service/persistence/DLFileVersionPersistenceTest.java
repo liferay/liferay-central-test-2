@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -194,6 +195,47 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileVersionId", nextLong()));
 
 		List<DLFileVersion> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		DLFileVersion newDLFileVersion = addDLFileVersion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileVersion.class,
+				DLFileVersion.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"fileVersionId"));
+
+		Object newFileVersionId = newDLFileVersion.getFileVersionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("fileVersionId",
+				new Object[] { newFileVersionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingFileVersionId = result.get(0);
+
+		assertEquals(existingFileVersionId, newFileVersionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		DLFileVersion newDLFileVersion = addDLFileVersion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileVersion.class,
+				DLFileVersion.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"fileVersionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("fileVersionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

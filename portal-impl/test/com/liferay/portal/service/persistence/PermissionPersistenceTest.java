@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -143,6 +144,47 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("permissionId", nextLong()));
 
 		List<Permission> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Permission newPermission = addPermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Permission.class,
+				Permission.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"permissionId"));
+
+		Object newPermissionId = newPermission.getPermissionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("permissionId",
+				new Object[] { newPermissionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingPermissionId = result.get(0);
+
+		assertEquals(existingPermissionId, newPermissionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Permission newPermission = addPermission();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Permission.class,
+				Permission.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"permissionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("permissionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

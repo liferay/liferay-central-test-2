@@ -20,6 +20,7 @@ import com.liferay.counter.model.Counter;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -135,6 +136,45 @@ public class CounterPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("name", randomString()));
 
 		List<Counter> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Counter newCounter = addCounter();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Counter.class,
+				Counter.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("name"));
+
+		Object newName = newCounter.getName();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("name",
+				new Object[] { newName }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingName = result.get(0);
+
+		assertEquals(existingName, newName);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Counter newCounter = addCounter();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Counter.class,
+				Counter.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("name"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("name",
+				new Object[] { randomString() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

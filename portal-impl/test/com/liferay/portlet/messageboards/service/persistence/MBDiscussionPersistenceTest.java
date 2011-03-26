@@ -17,6 +17,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -144,6 +145,47 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("discussionId", nextLong()));
 
 		List<MBDiscussion> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		MBDiscussion newMBDiscussion = addMBDiscussion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
+				MBDiscussion.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"discussionId"));
+
+		Object newDiscussionId = newMBDiscussion.getDiscussionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("discussionId",
+				new Object[] { newDiscussionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingDiscussionId = result.get(0);
+
+		assertEquals(existingDiscussionId, newDiscussionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		MBDiscussion newMBDiscussion = addMBDiscussion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
+				MBDiscussion.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"discussionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("discussionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -149,6 +150,45 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("companyId", nextLong()));
 
 		List<Company> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Company newCompany = addCompany();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Company.class,
+				Company.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("companyId"));
+
+		Object newCompanyId = newCompany.getCompanyId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("companyId",
+				new Object[] { newCompanyId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingCompanyId = result.get(0);
+
+		assertEquals(existingCompanyId, newCompanyId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Company newCompany = addCompany();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Company.class,
+				Company.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("companyId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("companyId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

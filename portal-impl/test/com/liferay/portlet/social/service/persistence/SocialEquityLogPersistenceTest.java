@@ -17,6 +17,7 @@ package com.liferay.portlet.social.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -168,6 +169,45 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("equityLogId", nextLong()));
 
 		List<SocialEquityLog> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		SocialEquityLog newSocialEquityLog = addSocialEquityLog();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialEquityLog.class,
+				SocialEquityLog.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("equityLogId"));
+
+		Object newEquityLogId = newSocialEquityLog.getEquityLogId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("equityLogId",
+				new Object[] { newEquityLogId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingEquityLogId = result.get(0);
+
+		assertEquals(existingEquityLogId, newEquityLogId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		SocialEquityLog newSocialEquityLog = addSocialEquityLog();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialEquityLog.class,
+				SocialEquityLog.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("equityLogId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("equityLogId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

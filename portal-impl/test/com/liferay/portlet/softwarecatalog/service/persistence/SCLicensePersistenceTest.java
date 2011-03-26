@@ -17,6 +17,7 @@ package com.liferay.portlet.softwarecatalog.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -147,6 +148,45 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("licenseId", nextLong()));
 
 		List<SCLicense> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		SCLicense newSCLicense = addSCLicense();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCLicense.class,
+				SCLicense.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("licenseId"));
+
+		Object newLicenseId = newSCLicense.getLicenseId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("licenseId",
+				new Object[] { newLicenseId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingLicenseId = result.get(0);
+
+		assertEquals(existingLicenseId, newLicenseId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		SCLicense newSCLicense = addSCLicense();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCLicense.class,
+				SCLicense.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("licenseId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("licenseId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

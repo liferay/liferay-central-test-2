@@ -17,6 +17,7 @@ package com.liferay.portlet.blogs.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -161,6 +162,45 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("statsUserId", nextLong()));
 
 		List<BlogsStatsUser> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		BlogsStatsUser newBlogsStatsUser = addBlogsStatsUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BlogsStatsUser.class,
+				BlogsStatsUser.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("statsUserId"));
+
+		Object newStatsUserId = newBlogsStatsUser.getStatsUserId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("statsUserId",
+				new Object[] { newStatsUserId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingStatsUserId = result.get(0);
+
+		assertEquals(existingStatsUserId, newStatsUserId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		BlogsStatsUser newBlogsStatsUser = addBlogsStatsUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BlogsStatsUser.class,
+				BlogsStatsUser.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("statsUserId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("statsUserId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

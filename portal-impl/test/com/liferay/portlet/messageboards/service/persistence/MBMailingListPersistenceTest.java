@@ -17,6 +17,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -209,6 +210,47 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("mailingListId", nextLong()));
 
 		List<MBMailingList> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		MBMailingList newMBMailingList = addMBMailingList();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMailingList.class,
+				MBMailingList.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"mailingListId"));
+
+		Object newMailingListId = newMBMailingList.getMailingListId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("mailingListId",
+				new Object[] { newMailingListId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingMailingListId = result.get(0);
+
+		assertEquals(existingMailingListId, newMailingListId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		MBMailingList newMBMailingList = addMBMailingList();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMailingList.class,
+				MBMailingList.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"mailingListId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("mailingListId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

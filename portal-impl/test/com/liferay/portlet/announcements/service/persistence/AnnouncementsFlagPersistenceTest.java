@@ -17,6 +17,7 @@ package com.liferay.portlet.announcements.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -149,6 +150,45 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("flagId", nextLong()));
 
 		List<AnnouncementsFlag> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		AnnouncementsFlag newAnnouncementsFlag = addAnnouncementsFlag();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsFlag.class,
+				AnnouncementsFlag.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("flagId"));
+
+		Object newFlagId = newAnnouncementsFlag.getFlagId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("flagId",
+				new Object[] { newFlagId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingFlagId = result.get(0);
+
+		assertEquals(existingFlagId, newFlagId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		AnnouncementsFlag newAnnouncementsFlag = addAnnouncementsFlag();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsFlag.class,
+				AnnouncementsFlag.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("flagId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("flagId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

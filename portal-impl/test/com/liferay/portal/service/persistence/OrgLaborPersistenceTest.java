@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -167,6 +168,45 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("orgLaborId", nextLong()));
 
 		List<OrgLabor> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		OrgLabor newOrgLabor = addOrgLabor();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgLabor.class,
+				OrgLabor.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("orgLaborId"));
+
+		Object newOrgLaborId = newOrgLabor.getOrgLaborId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("orgLaborId",
+				new Object[] { newOrgLaborId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingOrgLaborId = result.get(0);
+
+		assertEquals(existingOrgLaborId, newOrgLaborId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		OrgLabor newOrgLabor = addOrgLabor();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgLabor.class,
+				OrgLabor.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("orgLaborId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("orgLaborId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

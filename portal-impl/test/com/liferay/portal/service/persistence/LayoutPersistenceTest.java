@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
@@ -193,6 +194,45 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("plid", nextLong()));
 
 		List<Layout> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Layout newLayout = addLayout();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Layout.class,
+				Layout.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("plid"));
+
+		Object newPlid = newLayout.getPlid();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("plid",
+				new Object[] { newPlid }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingPlid = result.get(0);
+
+		assertEquals(existingPlid, newPlid);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Layout newLayout = addLayout();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Layout.class,
+				Layout.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("plid"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("plid",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatamapping.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -147,6 +148,47 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("storageLinkId", nextLong()));
 
 		List<DDMStorageLink> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		DDMStorageLink newDDMStorageLink = addDDMStorageLink();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DDMStorageLink.class,
+				DDMStorageLink.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"storageLinkId"));
+
+		Object newStorageLinkId = newDDMStorageLink.getStorageLinkId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("storageLinkId",
+				new Object[] { newStorageLinkId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingStorageLinkId = result.get(0);
+
+		assertEquals(existingStorageLinkId, newStorageLinkId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		DDMStorageLink newDDMStorageLink = addDDMStorageLink();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DDMStorageLink.class,
+				DDMStorageLink.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"storageLinkId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("storageLinkId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

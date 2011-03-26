@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLayoutSetPrototypeException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -154,6 +155,47 @@ public class LayoutSetPrototypePersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<LayoutSetPrototype> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		LayoutSetPrototype newLayoutSetPrototype = addLayoutSetPrototype();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetPrototype.class,
+				LayoutSetPrototype.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"layoutSetPrototypeId"));
+
+		Object newLayoutSetPrototypeId = newLayoutSetPrototype.getLayoutSetPrototypeId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutSetPrototypeId",
+				new Object[] { newLayoutSetPrototypeId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingLayoutSetPrototypeId = result.get(0);
+
+		assertEquals(existingLayoutSetPrototypeId, newLayoutSetPrototypeId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		LayoutSetPrototype newLayoutSetPrototype = addLayoutSetPrototype();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetPrototype.class,
+				LayoutSetPrototype.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"layoutSetPrototypeId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutSetPrototypeId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

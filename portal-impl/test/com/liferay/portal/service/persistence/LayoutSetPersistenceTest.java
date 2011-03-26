@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -167,6 +168,45 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("layoutSetId", nextLong()));
 
 		List<LayoutSet> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		LayoutSet newLayoutSet = addLayoutSet();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSet.class,
+				LayoutSet.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("layoutSetId"));
+
+		Object newLayoutSetId = newLayoutSet.getLayoutSetId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutSetId",
+				new Object[] { newLayoutSetId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingLayoutSetId = result.get(0);
+
+		assertEquals(existingLayoutSetId, newLayoutSetId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		LayoutSet newLayoutSet = addLayoutSet();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSet.class,
+				LayoutSet.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("layoutSetId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutSetId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

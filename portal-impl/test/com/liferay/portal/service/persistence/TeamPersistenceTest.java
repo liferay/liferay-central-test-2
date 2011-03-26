@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchTeamException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Team;
@@ -152,6 +153,45 @@ public class TeamPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("teamId", nextLong()));
 
 		List<Team> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Team newTeam = addTeam();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Team.class,
+				Team.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("teamId"));
+
+		Object newTeamId = newTeam.getTeamId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("teamId",
+				new Object[] { newTeamId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingTeamId = result.get(0);
+
+		assertEquals(existingTeamId, newTeamId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Team newTeam = addTeam();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Team.class,
+				Team.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("teamId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("teamId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

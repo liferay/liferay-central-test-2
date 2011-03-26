@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Repository;
@@ -164,6 +165,47 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("repositoryId", nextLong()));
 
 		List<Repository> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Repository newRepository = addRepository();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Repository.class,
+				Repository.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"repositoryId"));
+
+		Object newRepositoryId = newRepository.getRepositoryId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("repositoryId",
+				new Object[] { newRepositoryId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingRepositoryId = result.get(0);
+
+		assertEquals(existingRepositoryId, newRepositoryId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Repository newRepository = addRepository();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Repository.class,
+				Repository.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"repositoryId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("repositoryId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

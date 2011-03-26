@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchUserGroupGroupRoleException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.UserGroupGroupRole;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -148,6 +149,47 @@ public class UserGroupGroupRolePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId", nextLong()));
 
 		List<UserGroupGroupRole> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		UserGroupGroupRole newUserGroupGroupRole = addUserGroupGroupRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupGroupRole.class,
+				UserGroupGroupRole.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"id.userGroupId"));
+
+		Object newUserGroupId = newUserGroupGroupRole.getUserGroupId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("id.userGroupId",
+				new Object[] { newUserGroupId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingUserGroupId = result.get(0);
+
+		assertEquals(existingUserGroupId, newUserGroupId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		UserGroupGroupRole newUserGroupGroupRole = addUserGroupGroupRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupGroupRole.class,
+				UserGroupGroupRole.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"id.userGroupId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("id.userGroupId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

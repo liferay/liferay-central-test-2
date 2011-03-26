@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
@@ -223,6 +224,45 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("userId", nextLong()));
 
 		List<User> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		User newUser = addUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(User.class,
+				User.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("userId"));
+
+		Object newUserId = newUser.getUserId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("userId",
+				new Object[] { newUserId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingUserId = result.get(0);
+
+		assertEquals(existingUserId, newUserId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		User newUser = addUser();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(User.class,
+				User.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("userId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("userId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

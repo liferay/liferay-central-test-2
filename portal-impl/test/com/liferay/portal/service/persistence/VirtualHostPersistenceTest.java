@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchVirtualHostException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -143,6 +144,47 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("virtualHostId", nextLong()));
 
 		List<VirtualHost> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		VirtualHost newVirtualHost = addVirtualHost();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(VirtualHost.class,
+				VirtualHost.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"virtualHostId"));
+
+		Object newVirtualHostId = newVirtualHost.getVirtualHostId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("virtualHostId",
+				new Object[] { newVirtualHostId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingVirtualHostId = result.get(0);
+
+		assertEquals(existingVirtualHostId, newVirtualHostId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		VirtualHost newVirtualHost = addVirtualHost();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(VirtualHost.class,
+				VirtualHost.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"virtualHostId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("virtualHostId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

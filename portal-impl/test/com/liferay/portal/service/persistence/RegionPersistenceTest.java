@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -141,6 +142,45 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("regionId", nextLong()));
 
 		List<Region> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		Region newRegion = addRegion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Region.class,
+				Region.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("regionId"));
+
+		Object newRegionId = newRegion.getRegionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("regionId",
+				new Object[] { newRegionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingRegionId = result.get(0);
+
+		assertEquals(existingRegionId, newRegionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		Region newRegion = addRegion();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Region.class,
+				Region.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("regionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("regionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

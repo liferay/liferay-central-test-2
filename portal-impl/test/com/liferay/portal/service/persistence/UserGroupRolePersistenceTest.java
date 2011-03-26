@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -147,6 +148,45 @@ public class UserGroupRolePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId", nextLong()));
 
 		List<UserGroupRole> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		UserGroupRole newUserGroupRole = addUserGroupRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupRole.class,
+				UserGroupRole.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("id.userId"));
+
+		Object newUserId = newUserGroupRole.getUserId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("id.userId",
+				new Object[] { newUserId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingUserId = result.get(0);
+
+		assertEquals(existingUserId, newUserId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		UserGroupRole newUserGroupRole = addUserGroupRole();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupRole.class,
+				UserGroupRole.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("id.userId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("id.userId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

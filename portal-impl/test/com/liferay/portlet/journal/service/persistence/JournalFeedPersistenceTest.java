@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -195,6 +196,44 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("id", nextLong()));
 
 		List<JournalFeed> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		JournalFeed newJournalFeed = addJournalFeed();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalFeed.class,
+				JournalFeed.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("id"));
+
+		Object newId = newJournalFeed.getId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("id", new Object[] { newId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingId = result.get(0);
+
+		assertEquals(existingId, newId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		JournalFeed newJournalFeed = addJournalFeed();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalFeed.class,
+				JournalFeed.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("id"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("id",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

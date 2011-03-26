@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -149,6 +150,45 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileRankId", nextLong()));
 
 		List<DLFileRank> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		DLFileRank newDLFileRank = addDLFileRank();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileRank.class,
+				DLFileRank.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("fileRankId"));
+
+		Object newFileRankId = newDLFileRank.getFileRankId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("fileRankId",
+				new Object[] { newFileRankId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingFileRankId = result.get(0);
+
+		assertEquals(existingFileRankId, newFileRankId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		DLFileRank newDLFileRank = addDLFileRank();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileRank.class,
+				DLFileRank.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("fileRankId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("fileRankId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

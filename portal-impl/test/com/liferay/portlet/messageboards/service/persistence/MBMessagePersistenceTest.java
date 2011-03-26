@@ -17,6 +17,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -197,6 +198,45 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("messageId", nextLong()));
 
 		List<MBMessage> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		MBMessage newMBMessage = addMBMessage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMessage.class,
+				MBMessage.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("messageId"));
+
+		Object newMessageId = newMBMessage.getMessageId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("messageId",
+				new Object[] { newMessageId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingMessageId = result.get(0);
+
+		assertEquals(existingMessageId, newMessageId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		MBMessage newMBMessage = addMBMessage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMessage.class,
+				MBMessage.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("messageId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("messageId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

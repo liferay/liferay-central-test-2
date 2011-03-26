@@ -17,6 +17,7 @@ package com.liferay.portlet.imagegallery.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -168,6 +169,45 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("imageId", nextLong()));
 
 		List<IGImage> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		IGImage newIGImage = addIGImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGImage.class,
+				IGImage.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("imageId"));
+
+		Object newImageId = newIGImage.getImageId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("imageId",
+				new Object[] { newImageId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingImageId = result.get(0);
+
+		assertEquals(existingImageId, newImageId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		IGImage newIGImage = addIGImage();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGImage.class,
+				IGImage.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("imageId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("imageId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

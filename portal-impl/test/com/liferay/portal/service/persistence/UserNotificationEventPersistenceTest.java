@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchUserNotificationEventException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.UserNotificationEvent;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -158,6 +159,47 @@ public class UserNotificationEventPersistenceTest
 				nextLong()));
 
 		List<UserNotificationEvent> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		UserNotificationEvent newUserNotificationEvent = addUserNotificationEvent();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserNotificationEvent.class,
+				UserNotificationEvent.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"userNotificationEventId"));
+
+		Object newUserNotificationEventId = newUserNotificationEvent.getUserNotificationEventId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("userNotificationEventId",
+				new Object[] { newUserNotificationEventId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingUserNotificationEventId = result.get(0);
+
+		assertEquals(existingUserNotificationEventId, newUserNotificationEventId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		UserNotificationEvent newUserNotificationEvent = addUserNotificationEvent();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserNotificationEvent.class,
+				UserNotificationEvent.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"userNotificationEventId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("userNotificationEventId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

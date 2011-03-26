@@ -17,6 +17,7 @@ package com.liferay.portlet.wiki.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -159,6 +160,45 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("nodeId", nextLong()));
 
 		List<WikiNode> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		WikiNode newWikiNode = addWikiNode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiNode.class,
+				WikiNode.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("nodeId"));
+
+		Object newNodeId = newWikiNode.getNodeId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("nodeId",
+				new Object[] { newNodeId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingNodeId = result.get(0);
+
+		assertEquals(existingNodeId, newNodeId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		WikiNode newWikiNode = addWikiNode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiNode.class,
+				WikiNode.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("nodeId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("nodeId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchPasswordPolicyException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PasswordPolicy;
@@ -231,6 +232,47 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<PasswordPolicy> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		PasswordPolicy newPasswordPolicy = addPasswordPolicy();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordPolicy.class,
+				PasswordPolicy.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"passwordPolicyId"));
+
+		Object newPasswordPolicyId = newPasswordPolicy.getPasswordPolicyId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("passwordPolicyId",
+				new Object[] { newPasswordPolicyId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingPasswordPolicyId = result.get(0);
+
+		assertEquals(existingPasswordPolicyId, newPasswordPolicyId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		PasswordPolicy newPasswordPolicy = addPasswordPolicy();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordPolicy.class,
+				PasswordPolicy.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"passwordPolicyId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("passwordPolicyId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

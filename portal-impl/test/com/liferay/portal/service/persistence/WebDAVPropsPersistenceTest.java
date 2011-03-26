@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchWebDAVPropsException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WebDAVProps;
@@ -153,6 +154,47 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("webDavPropsId", nextLong()));
 
 		List<WebDAVProps> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		WebDAVProps newWebDAVProps = addWebDAVProps();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WebDAVProps.class,
+				WebDAVProps.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"webDavPropsId"));
+
+		Object newWebDavPropsId = newWebDAVProps.getWebDavPropsId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("webDavPropsId",
+				new Object[] { newWebDavPropsId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingWebDavPropsId = result.get(0);
+
+		assertEquals(existingWebDavPropsId, newWebDavPropsId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		WebDAVProps newWebDAVProps = addWebDAVProps();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WebDAVProps.class,
+				WebDAVProps.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"webDavPropsId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("webDavPropsId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

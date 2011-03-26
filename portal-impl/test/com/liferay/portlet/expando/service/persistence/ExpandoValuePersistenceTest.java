@@ -17,6 +17,7 @@ package com.liferay.portlet.expando.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -154,6 +155,45 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("valueId", nextLong()));
 
 		List<ExpandoValue> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ExpandoValue newExpandoValue = addExpandoValue();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoValue.class,
+				ExpandoValue.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("valueId"));
+
+		Object newValueId = newExpandoValue.getValueId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("valueId",
+				new Object[] { newValueId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingValueId = result.get(0);
+
+		assertEquals(existingValueId, newValueId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ExpandoValue newExpandoValue = addExpandoValue();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoValue.class,
+				ExpandoValue.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("valueId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("valueId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

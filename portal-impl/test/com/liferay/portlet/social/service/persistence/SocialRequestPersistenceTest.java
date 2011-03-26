@@ -17,6 +17,7 @@ package com.liferay.portlet.social.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -169,6 +170,45 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("requestId", nextLong()));
 
 		List<SocialRequest> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		SocialRequest newSocialRequest = addSocialRequest();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialRequest.class,
+				SocialRequest.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("requestId"));
+
+		Object newRequestId = newSocialRequest.getRequestId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("requestId",
+				new Object[] { newRequestId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingRequestId = result.get(0);
+
+		assertEquals(existingRequestId, newRequestId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		SocialRequest newSocialRequest = addSocialRequest();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialRequest.class,
+				SocialRequest.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("requestId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("requestId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

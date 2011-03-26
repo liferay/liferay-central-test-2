@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchLayoutRevisionException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.LayoutRevision;
@@ -225,6 +226,47 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<LayoutRevision> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		LayoutRevision newLayoutRevision = addLayoutRevision();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutRevision.class,
+				LayoutRevision.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"layoutRevisionId"));
+
+		Object newLayoutRevisionId = newLayoutRevision.getLayoutRevisionId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutRevisionId",
+				new Object[] { newLayoutRevisionId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingLayoutRevisionId = result.get(0);
+
+		assertEquals(existingLayoutRevisionId, newLayoutRevisionId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		LayoutRevision newLayoutRevision = addLayoutRevision();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutRevision.class,
+				LayoutRevision.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"layoutRevisionId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("layoutRevisionId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

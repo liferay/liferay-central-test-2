@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -192,6 +193,45 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("fileEntryId", nextLong()));
 
 		List<DLFileEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		DLFileEntry newDLFileEntry = addDLFileEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
+				DLFileEntry.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("fileEntryId"));
+
+		Object newFileEntryId = newDLFileEntry.getFileEntryId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("fileEntryId",
+				new Object[] { newFileEntryId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingFileEntryId = result.get(0);
+
+		assertEquals(existingFileEntryId, newFileEntryId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		DLFileEntry newDLFileEntry = addDLFileEntry();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
+				DLFileEntry.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("fileEntryId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("fileEntryId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

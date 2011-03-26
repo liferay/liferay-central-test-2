@@ -17,6 +17,7 @@ package com.liferay.portlet.expando.service.persistence;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -151,6 +152,45 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("columnId", nextLong()));
 
 		List<ExpandoColumn> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ExpandoColumn newExpandoColumn = addExpandoColumn();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoColumn.class,
+				ExpandoColumn.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("columnId"));
+
+		Object newColumnId = newExpandoColumn.getColumnId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("columnId",
+				new Object[] { newColumnId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingColumnId = result.get(0);
+
+		assertEquals(existingColumnId, newColumnId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ExpandoColumn newExpandoColumn = addExpandoColumn();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoColumn.class,
+				ExpandoColumn.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("columnId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("columnId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchResourceCodeException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -141,6 +142,45 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		dynamicQuery.add(RestrictionsFactoryUtil.eq("codeId", nextLong()));
 
 		List<ResourceCode> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		ResourceCode newResourceCode = addResourceCode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceCode.class,
+				ResourceCode.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("codeId"));
+
+		Object newCodeId = newResourceCode.getCodeId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("codeId",
+				new Object[] { newCodeId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingCodeId = result.get(0);
+
+		assertEquals(existingCodeId, newCodeId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		ResourceCode newResourceCode = addResourceCode();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceCode.class,
+				ResourceCode.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("codeId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("codeId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

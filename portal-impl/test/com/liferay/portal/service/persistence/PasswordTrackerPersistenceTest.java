@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.PasswordTracker;
@@ -146,6 +147,47 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<PasswordTracker> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		PasswordTracker newPasswordTracker = addPasswordTracker();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordTracker.class,
+				PasswordTracker.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"passwordTrackerId"));
+
+		Object newPasswordTrackerId = newPasswordTracker.getPasswordTrackerId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("passwordTrackerId",
+				new Object[] { newPasswordTrackerId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingPasswordTrackerId = result.get(0);
+
+		assertEquals(existingPasswordTrackerId, newPasswordTrackerId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		PasswordTracker newPasswordTracker = addPasswordTracker();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordTracker.class,
+				PasswordTracker.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"passwordTrackerId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("passwordTrackerId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}

@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchPasswordPolicyRelException;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -145,6 +146,47 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 				nextLong()));
 
 		List<PasswordPolicyRel> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting()
+		throws Exception {
+		PasswordPolicyRel newPasswordPolicyRel = addPasswordPolicyRel();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordPolicyRel.class,
+				PasswordPolicyRel.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"passwordPolicyRelId"));
+
+		Object newPasswordPolicyRelId = newPasswordPolicyRel.getPasswordPolicyRelId();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("passwordPolicyRelId",
+				new Object[] { newPasswordPolicyRelId }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existingPasswordPolicyRelId = result.get(0);
+
+		assertEquals(existingPasswordPolicyRelId, newPasswordPolicyRelId);
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		PasswordPolicyRel newPasswordPolicyRel = addPasswordPolicyRel();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordPolicyRel.class,
+				PasswordPolicyRel.class.getClassLoader());
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
+				"passwordPolicyRelId"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("passwordPolicyRelId",
+				new Object[] { nextLong() }));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}
