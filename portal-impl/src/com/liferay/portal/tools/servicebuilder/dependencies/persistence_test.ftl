@@ -16,6 +16,7 @@ import ${packagePath}.model.${entity.name};
 import ${beanLocatorUtil};
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
@@ -316,6 +317,66 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 		</#if>
 
 		List<${entity.name}> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(0, result.size());
+	}
+
+	public void testDynamicQueryByProjectionExisting() throws Exception {
+		${entity.name} new${entity.name} = add${entity.name}();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(${entity.name}.class, ${entity.name}.class.getClassLoader());
+
+		<#assign column = entity.PKList[0]>
+
+		<#if entity.hasCompoundPK()>
+			<#assign propertyName = "id.${column.name}">
+		<#else>
+			<#assign propertyName = "${column.name}">
+		</#if>
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("${propertyName}"));
+
+		Object new${column.methodName} = new${entity.name}.get${column.methodName}();
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("${propertyName}", new Object[] {new${column.methodName}}));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
+
+		assertEquals(1, result.size());
+
+		Object existing${column.methodName} = result.get(0);
+
+		assertEquals(existing${column.methodName}, new${column.methodName});
+	}
+
+	public void testDynamicQueryByProjectionMissing() throws Exception {
+		${entity.name} new${entity.name} = add${entity.name}();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(${entity.name}.class, ${entity.name}.class.getClassLoader());
+
+		<#assign column = entity.PKList[0]>
+
+		<#if entity.hasCompoundPK()>
+			<#assign propertyName = "id.${column.name}">
+		<#else>
+			<#assign propertyName = "${column.name}">
+		</#if>
+
+		dynamicQuery.setProjection(ProjectionFactoryUtil.property("${propertyName}"));
+
+		dynamicQuery.add(RestrictionsFactoryUtil.in("${propertyName}", new Object[] {
+
+		<#if column.type == "int">
+			nextInt()
+		<#elseif column.type == "long">
+			nextLong()
+		<#elseif column.type == "String">
+			randomString()
+		</#if>
+
+		}));
+
+		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
 	}
