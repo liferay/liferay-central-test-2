@@ -16,6 +16,7 @@ package com.liferay.portalweb.portal.dbupgrade.sampledata525.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata525.documentlibrary.document.DocumentTests;
+import com.liferay.portalweb.portal.dbupgrade.sampledata525.documentlibrary.documentlock.DocumentLockTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata525.documentlibrary.documentversion.DocumentVersionTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata525.documentlibrary.folder.FolderTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata525.documentlibrary.shortcut.ShortcutTests;
@@ -31,9 +32,10 @@ public class DocumentLibraryTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(FolderTests.suite());
 		testSuite.addTest(DocumentTests.suite());
+		testSuite.addTest(DocumentLockTests.suite());
 		testSuite.addTest(DocumentVersionTests.suite());
+		testSuite.addTest(FolderTests.suite());
 		testSuite.addTest(ShortcutTests.suite());
 
 		return testSuite;

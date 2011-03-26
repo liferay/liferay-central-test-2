@@ -16,6 +16,7 @@ package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.documentlibr
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.documentlibrary.document.DocumentTests;
+import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.documentlibrary.documentlock.DocumentLockTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.documentlibrary.documentversion.DocumentVersionTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.documentlibrary.folder.FolderTests;
 import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.documentlibrary.shortcut.ShortcutTests;
@@ -32,6 +33,7 @@ public class DocumentLibrary606LatestTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(DocumentTests.suite());
+		testSuite.addTest(DocumentLockTests.suite());
 		testSuite.addTest(DocumentVersionTests.suite());
 		testSuite.addTest(FolderTests.suite());
 		testSuite.addTest(ShortcutTests.suite());
