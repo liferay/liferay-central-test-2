@@ -309,6 +309,10 @@ public class EditMessageAction extends PortletAction {
 
 		MBMessage message = null;
 
+		boolean preview = ParamUtil.getBoolean(actionRequest, "preview");
+
+		serviceContext.setAttribute("previewBoolean", preview );
+
 		if (messageId <= 0) {
 			if (PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE) {
 				CaptchaUtil.check(actionRequest);

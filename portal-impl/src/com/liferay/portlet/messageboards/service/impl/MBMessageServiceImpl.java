@@ -108,6 +108,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			files.clear();
 		}
 
+		boolean preview = GetterUtil.getBoolean(
+			serviceContext.getAttribute("previewBoolean"));
+
+		int workFlowAction = serviceContext.getWorkflowAction();
+
+		if ((workFlowAction == WorkflowConstants.STATUS_DRAFT) && !preview) {
+			MBMessagePermission.check(
+				getPermissionChecker(), parentMessageId, ActionKeys.UPDATE);
+		}
+
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), groupId, categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
