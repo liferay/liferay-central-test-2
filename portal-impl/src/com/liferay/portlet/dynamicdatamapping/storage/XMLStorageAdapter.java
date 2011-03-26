@@ -204,7 +204,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 				_appendField(rootElement, fieldName, fieldValue);
 			}
 			else {
-				_appendField(rootElement, fieldName, fieldValue);
+				_updateField(dynamicElement, fieldName, fieldValue);
 			}
 		}
 
