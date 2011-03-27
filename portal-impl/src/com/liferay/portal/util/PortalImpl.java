@@ -4483,7 +4483,8 @@ public class PortalImpl implements Portal {
 		}
 		else {
 			name = ResourceActionsUtil.getPortletBaseResource(rootPortletId);
-			primaryKey = String.valueOf(layout.getGroupId());
+			primaryKey = String.valueOf(
+				getScopeGroupId(layout, portlet.getPortletId()));
 		}
 
 		if (Validator.isNull(name)) {
