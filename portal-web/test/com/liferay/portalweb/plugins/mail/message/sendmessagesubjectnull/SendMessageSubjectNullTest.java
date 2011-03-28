@@ -103,8 +103,5 @@ public class SendMessageSubjectNullTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Sent successfully."),
 			selenium.getText("//span[@class='message portlet-msg-success']"));
-		selenium.type("_1_WAR_mailportlet_subject",
-			RuntimeVariables.replace("Mail Subject"));
-		selenium.saveScreenShotAndSource();
 	}
 }
