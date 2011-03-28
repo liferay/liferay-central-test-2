@@ -308,7 +308,7 @@ AUI().add(
 					_deleteButton: function(obj) {
 						var instance = this;
 
-						obj.append(instance._TPL_DELETE_BUTTON);
+						obj.append(instance.TPL_DELETE_BUTTON);
 					},
 
 					_handleKeyDown: function(event) {
