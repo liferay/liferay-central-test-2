@@ -109,7 +109,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		boolean preview = GetterUtil.getBoolean(
-			serviceContext.getAttribute("previewBoolean"));
+			serviceContext.getAttribute("preview"));
 
 		int workFlowAction = serviceContext.getWorkflowAction();
 
