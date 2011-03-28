@@ -15,6 +15,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.counter.service.persistence.CounterPersistenceTest;
+import com.liferay.documentlibrary.service.persistence.ContentPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceTest;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceTest;
@@ -104,6 +105,7 @@ public class PersistenceTestSuite extends TestSuite {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(CounterPersistenceTest.class);
+		testSuite.addTestSuite(ContentPersistenceTest.class);
 
 		testSuite.addTestSuite(AccountPersistenceTest.class);
 		testSuite.addTestSuite(AddressPersistenceTest.class);

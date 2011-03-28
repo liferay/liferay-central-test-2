@@ -14,6 +14,7 @@
 
 package com.liferay.documentlibrary.service.persistence;
 
+import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -32,19 +33,46 @@ public class ContentUtil {
 			companyId, repositoryId, path, version);
 	}
 
-	public static Content findByC_R_P(
+	public static Content fetchByC_R_P(
 			long companyId, long repositoryId, String path)
 		throws SystemException {
 
-		return getPersistence().findByC_P_N(companyId, repositoryId, path);
+		return getPersistence().fetchByC_R_P(companyId, repositoryId, path);
+	}
+
+	public static Content fetchByC_R_P_V(
+			long companyId, long repositoryId, String path, String version)
+		throws SystemException {
+
+		return getPersistence().fetchByC_R_P_V(
+			companyId, repositoryId, path, version);
+	}
+
+	public static Content fetchByPrimaryKey(long contentId)
+		throws SystemException {
+
+		return getPersistence().fetchByPrimaryKey(contentId);
+	}
+
+	public static Content findByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws NoSuchContentException, SystemException {
+
+		return getPersistence().findByC_R_P(companyId, repositoryId, path);
 	}
 
 	public static Content findByC_R_P_V(
 			long companyId, long repositoryId, String path, String version)
-		throws SystemException {
+		throws NoSuchContentException, SystemException {
 
 		return getPersistence().findByC_R_P_V(
 			companyId, repositoryId, path, version);
+	}
+
+	public static Content findByPrimaryKey(long contentId)
+		throws NoSuchContentException, SystemException {
+
+		return getPersistence().findByPrimaryKey(contentId);
 	}
 
 	public static ContentPersistence getPersistence() {
@@ -57,6 +85,11 @@ public class ContentUtil {
 		}
 
 		return _persistence;
+	}
+
+	public static void remove(long contentId)
+		throws NoSuchContentException, SystemException {
+		getPersistence().remove(contentId);
 	}
 
 	public static boolean removeByC_R_P_V(

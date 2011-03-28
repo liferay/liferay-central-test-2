@@ -14,6 +14,7 @@
 
 package com.liferay.documentlibrary.service.persistence;
 
+import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Dummy;
@@ -28,13 +29,28 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException;
 
-	public Content findByC_P_N(
-			long companyId, long repositoryId, String path)
+	public Content fetchByC_R_P(long companyId, long repositoryId, String path)
 		throws SystemException;
+
+	public Content fetchByC_R_P_V(
+			long companyId, long repositoryId, String path, String version)
+		throws SystemException;
+
+	public Content fetchByPrimaryKey(long contentId) throws SystemException;
+
+	public Content findByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws NoSuchContentException, SystemException;
 
 	public Content findByC_R_P_V(
 			long companyId, long repositoryId, String path, String version)
-		throws SystemException;
+		throws NoSuchContentException, SystemException;
+
+	public Content findByPrimaryKey(long contentId)
+		throws NoSuchContentException, SystemException;
+
+	public void remove(long contentId)
+		throws NoSuchContentException, SystemException;
 
 	public boolean removeByC_R_P_V(
 			long companyId, long repositoryId, String path, String version)

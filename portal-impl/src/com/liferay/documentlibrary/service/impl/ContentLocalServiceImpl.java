@@ -15,6 +15,7 @@
 package com.liferay.documentlibrary.service.impl;
 
 import com.liferay.counter.service.CounterLocalService;
+import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.documentlibrary.service.ContentLocalService;
 import com.liferay.documentlibrary.service.persistence.ContentPersistence;
@@ -73,14 +74,14 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 	}
 
 	public Content getContent(long companyId, long repositoryId, String path)
-		throws SystemException {
+		throws NoSuchContentException, SystemException {
 
-		return _contentPersistence.findByC_P_N(companyId, repositoryId, path);
+		return _contentPersistence.findByC_R_P(companyId, repositoryId, path);
 	}
 
 	public Content getContent(
 			long companyId, long repositoryId, String path, String version)
-		throws SystemException {
+		throws NoSuchContentException, SystemException {
 
 		return _contentPersistence.findByC_R_P_V(
 			companyId, repositoryId, path, version);

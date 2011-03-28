@@ -14,6 +14,10 @@
 
 package com.liferay.documentlibrary.model;
 
+import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
+
 import java.io.Serializable;
 
 import java.sql.Blob;
@@ -39,6 +43,32 @@ public class Content implements Serializable {
 		_version = version;
 		_data = data;
 		_size = size;
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Content)) {
+			return false;
+		}
+
+		Content content = (Content)obj;
+
+		if ((_contentId == content._contentId) &&
+			(_companyId == content._companyId) &&
+			Validator.equals(_portletId, content._portletId) &&
+			(_groupId == content._groupId) &&
+			(_repositoryId == content._repositoryId) &&
+			Validator.equals(_path, content._path) &&
+			Validator.equals(_version, content._version) &&
+			(_size == content._size)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public long getCompanyId() {
@@ -77,6 +107,10 @@ public class Content implements Serializable {
 		return _version;
 	}
 
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
@@ -113,6 +147,45 @@ public class Content implements Serializable {
 		_version = version;
 	}
 
+	public String toString() {
+		return _toString();
+	}
+
+	private String _toString() {
+		if (_toString == null) {
+			StringBundler sb = new StringBundler(19);
+
+			sb.append("{contentId=");
+			sb.append(_contentId);
+			sb.append(", companyId=");
+			sb.append(_companyId);
+			sb.append(", portletId=");
+			sb.append(_portletId);
+			sb.append(", groupId=");
+			sb.append(_groupId);
+			sb.append(", repositoryId=");
+			sb.append(_repositoryId);
+			sb.append(", path=");
+			sb.append(_path);
+			sb.append(", version=");
+			sb.append(_version);
+			sb.append(", dataType=");
+			if (_data instanceof OutputBlob) {
+				sb.append("transient");
+			}
+			else {
+				sb.append("persistent");
+			}
+			sb.append(", size=");
+			sb.append(_size);
+			sb.append("}");
+
+			_toString = sb.toString();
+		}
+
+		return _toString;
+	}
+
 	private long _companyId;
 	private long _contentId;
 	private Blob _data;
@@ -121,6 +194,7 @@ public class Content implements Serializable {
 	private String _portletId;
 	private long _repositoryId;
 	private long _size;
+	private String _toString;
 	private String _version;
 
 }

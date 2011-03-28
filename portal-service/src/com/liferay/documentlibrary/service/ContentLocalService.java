@@ -14,6 +14,7 @@
 
 package com.liferay.documentlibrary.service;
 
+import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -43,11 +44,11 @@ public interface ContentLocalService {
 
 	public Content getContent(
 			long companyId, long repositoryId, String path)
-		throws SystemException;
+		throws NoSuchContentException, SystemException;
 
 	public Content getContent(
 			long companyId, long repositoryId, String path, String version)
-		throws SystemException;
+		throws NoSuchContentException, SystemException;
 
 	public boolean hasContent(
 			long companyId, long repositoryId, String path, String version)
