@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderModel;
+import com.liferay.portlet.documentlibrary.model.DLFolderSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the DLFolder service. Represents a row in the &quot;DLFolder&quot; database table, with each column mapped to a property of this class.
@@ -86,6 +89,49 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFolder"),
 			true);
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static DLFolder toModel(DLFolderSoap soapModel) {
+		DLFolder model = new DLFolderImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setFolderId(soapModel.getFolderId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setRepositoryId(soapModel.getRepositoryId());
+		model.setMountPoint(soapModel.getMountPoint());
+		model.setParentFolderId(soapModel.getParentFolderId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setLastPostDate(soapModel.getLastPostDate());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<DLFolder> toModels(DLFolderSoap[] soapModels) {
+		List<DLFolder> models = new ArrayList<DLFolder>(soapModels.length);
+
+		for (DLFolderSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
 
 	public Class<?> getModelClass() {
 		return DLFolder.class;

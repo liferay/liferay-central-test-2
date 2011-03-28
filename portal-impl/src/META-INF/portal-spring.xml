@@ -238,6 +238,8 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFolderLocalServiceImpl" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService" class="com.liferay.portlet.documentlibrary.service.impl.DLFolderServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLRepositoryLocalServiceImpl" />

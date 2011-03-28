@@ -258,7 +258,7 @@
 			<finder-column name="status" />
 		</finder>
 	</entity>
-	<entity name="DLFolder" uuid="true" local-service="false" remote-service="false">
+	<entity name="DLFolder" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

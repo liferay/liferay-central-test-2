@@ -63,6 +63,8 @@ import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
@@ -318,6 +320,43 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	public void setDLFileVersionPersistence(
 		DLFileVersionPersistence dlFileVersionPersistence) {
 		this.dlFileVersionPersistence = dlFileVersionPersistence;
+	}
+
+	/**
+	 * Gets the d l folder local service.
+	 *
+	 * @return the d l folder local service
+	 */
+	public DLFolderLocalService getDLFolderLocalService() {
+		return dlFolderLocalService;
+	}
+
+	/**
+	 * Sets the d l folder local service.
+	 *
+	 * @param dlFolderLocalService the d l folder local service
+	 */
+	public void setDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	/**
+	 * Gets the d l folder remote service.
+	 *
+	 * @return the d l folder remote service
+	 */
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	/**
+	 * Sets the d l folder remote service.
+	 *
+	 * @param dlFolderService the d l folder remote service
+	 */
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
 	}
 
 	/**
@@ -1448,6 +1487,10 @@ public abstract class DLAppHelperLocalServiceBaseImpl
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
 	@BeanReference(type = DLFileVersionPersistence.class)
 	protected DLFileVersionPersistence dlFileVersionPersistence;
+	@BeanReference(type = DLFolderLocalService.class)
+	protected DLFolderLocalService dlFolderLocalService;
+	@BeanReference(type = DLFolderService.class)
+	protected DLFolderService dlFolderService;
 	@BeanReference(type = DLFolderPersistence.class)
 	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = DLFolderFinder.class)
