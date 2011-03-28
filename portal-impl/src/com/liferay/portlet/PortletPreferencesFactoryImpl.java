@@ -559,7 +559,7 @@ public class PortletPreferencesFactoryImpl
 					readOnly = GetterUtil.getBoolean(value);
 				}
 			}
-			else if (xmlEvent.isEndElement()){
+			else if (xmlEvent.isEndElement()) {
 				EndElement endElement = xmlEvent.asEndElement();
 
 				String elementName = endElement.getName().getLocalPart();

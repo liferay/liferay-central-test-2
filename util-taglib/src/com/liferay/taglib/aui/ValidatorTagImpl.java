@@ -48,7 +48,7 @@ public class ValidatorTagImpl
 		_name = null;
 	}
 
-	public int doAfterBody(){
+	public int doAfterBody() {
 		BodyContent bodyContent = getBodyContent();
 
 		if (bodyContent != null) {

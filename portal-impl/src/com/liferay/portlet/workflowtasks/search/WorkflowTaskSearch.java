@@ -93,7 +93,7 @@ public class WorkflowTaskSearch extends SearchContainer<WorkflowTask> {
 				WorkflowComparatorFactoryUtil.getTaskDueDateComparator(
 					orderByAsc);
 		}
-		else if (orderByCol.equals("name")){
+		else if (orderByCol.equals("name")) {
 			orderByComparator =
 				WorkflowComparatorFactoryUtil.getTaskNameComparator(orderByAsc);
 		}

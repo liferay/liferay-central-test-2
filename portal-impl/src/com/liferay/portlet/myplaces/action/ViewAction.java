@@ -146,7 +146,7 @@ public class ViewAction extends PortletAction {
 				themeDisplay.getPermissionChecker();
 
 			if (LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.VIEW)){
+					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 

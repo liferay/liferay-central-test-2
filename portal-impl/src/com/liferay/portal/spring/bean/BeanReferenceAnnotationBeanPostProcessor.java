@@ -57,7 +57,7 @@ public class BeanReferenceAnnotationBeanPostProcessor
 
 			identifiableBean.setBeanIdentifier(beanName);
 		}
-		else if (beanName.endsWith("Service")){
+		else if (beanName.endsWith("Service")) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					beanName + " should implement " +

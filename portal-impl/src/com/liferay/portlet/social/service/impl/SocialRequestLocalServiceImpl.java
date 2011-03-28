@@ -85,7 +85,7 @@ public class SocialRequestLocalServiceImpl
 		List<SocialRequest> requests =
 			socialRequestPersistence.findByReceiverUserId(receiverUserId);
 
-		for (SocialRequest request : requests){
+		for (SocialRequest request : requests) {
 			deleteRequest(request);
 		}
 	}

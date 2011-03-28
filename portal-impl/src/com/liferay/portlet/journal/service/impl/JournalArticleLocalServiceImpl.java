@@ -195,7 +195,7 @@ public class JournalArticleLocalServiceImpl
 		String defaultLanguageId = GetterUtil.getString(
 			serviceContext.getAttribute("defaultLanguageId"));
 
-		if (Validator.isNotNull(defaultLanguageId)){
+		if (Validator.isNotNull(defaultLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(defaultLanguageId);
 		}
 
@@ -1777,7 +1777,7 @@ public class JournalArticleLocalServiceImpl
 		String defaultLanguageId = GetterUtil.getString(
 			serviceContext.getAttribute("defaultLanguageId"));
 
-		if (Validator.isNotNull(defaultLanguageId)){
+		if (Validator.isNotNull(defaultLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(defaultLanguageId);
 		}
 

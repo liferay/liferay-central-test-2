@@ -52,7 +52,7 @@ public class ShoppingCartLocalServiceImpl
 		List<ShoppingCart> carts = shoppingCartPersistence.findByGroupId(
 			groupId);
 
-		for (ShoppingCart cart : carts){
+		for (ShoppingCart cart : carts) {
 			deleteShoppingCart(cart);
 		}
 	}
@@ -74,7 +74,7 @@ public class ShoppingCartLocalServiceImpl
 		List<ShoppingCart> shoppingCarts = shoppingCartPersistence.findByUserId(
 			userId);
 
-		for (ShoppingCart shoppingCart : shoppingCarts){
+		for (ShoppingCart shoppingCart : shoppingCarts) {
 			deleteShoppingCart(shoppingCart);
 		}
 	}

@@ -185,7 +185,7 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 	}
 
 	protected String getTitle(Map<Locale, String> titleMap) {
-		if (titleMap == null){
+		if (titleMap == null) {
 			return null;
 		}
 

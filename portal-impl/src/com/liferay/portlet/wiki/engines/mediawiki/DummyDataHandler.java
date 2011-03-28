@@ -100,7 +100,7 @@ public class DummyDataHandler implements DataHandler {
 		return null;
 	}
 
-	public List<RoleMap> getRoleMapByRole(String roleName){
+	public List<RoleMap> getRoleMapByRole(String roleName) {
 		return null;
 	}
 
@@ -212,7 +212,7 @@ public class DummyDataHandler implements DataHandler {
 		return 0;
 	}
 
-	public WikiGroup lookupWikiGroup(String groupName){
+	public WikiGroup lookupWikiGroup(String groupName) {
 		return null;
 	}
 

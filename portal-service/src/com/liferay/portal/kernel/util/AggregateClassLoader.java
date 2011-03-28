@@ -75,7 +75,7 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 
 		if ((classLoader instanceof AggregateClassLoader) &&
-			(classLoader.getParent().equals(getParent()))){
+			(classLoader.getParent().equals(getParent()))) {
 
 			AggregateClassLoader aggregateClassLoader =
 				(AggregateClassLoader)classLoader;

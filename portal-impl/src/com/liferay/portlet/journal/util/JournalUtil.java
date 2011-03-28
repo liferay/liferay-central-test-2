@@ -617,7 +617,7 @@ public class JournalUtil {
 					LayoutTypePortletConstants.
 						DEFAULT_ASSET_PUBLISHER_PORTLET_ID, StringPool.BLANK);
 
-			if (Validator.isNotNull(defaultAssetPublisherPortletId)){
+			if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
 				layouts.add(layout);
 			}
 		}

@@ -63,7 +63,7 @@ public class AnnouncementsFlagLocalServiceImpl
 		List<AnnouncementsFlag> flags =
 			announcementsFlagPersistence.findByEntryId(entryId);
 
-		for (AnnouncementsFlag flag : flags){
+		for (AnnouncementsFlag flag : flags) {
 			deleteFlag(flag);
 		}
 	}

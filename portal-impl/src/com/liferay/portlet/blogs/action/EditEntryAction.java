@@ -290,7 +290,7 @@ public class EditEntryAction extends PortletAction {
 
 		String portletName = portletConfig.getPortletName();
 
-		if (portletName.equals(PortletKeys.BLOGS_ADMIN)){
+		if (portletName.equals(PortletKeys.BLOGS_ADMIN)) {
 			portletURL.setParameter("struts_action", "/blogs_admin/edit_entry");
 		}
 		else {

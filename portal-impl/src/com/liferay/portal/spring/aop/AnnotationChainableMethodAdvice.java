@@ -102,7 +102,7 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		return methodTargetClassKey;
 	}
 
-	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey){
+	protected T findAnnotation(MethodTargetClassKey methodTargetClassKey) {
 		Map<MethodTargetClassKey, Annotation[]> annotationsMap =
 			_beanFactoryAnnotations.get(_beanFactory);
 

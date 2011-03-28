@@ -102,7 +102,7 @@ public class SearchContext implements Serializable {
 		return _userId;
 	}
 
-	public boolean isAndSearch(){
+	public boolean isAndSearch() {
 		return _andSearch;
 	}
 

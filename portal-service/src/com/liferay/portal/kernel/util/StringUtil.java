@@ -457,7 +457,7 @@ public class StringUtil {
 
 		StringBundler sb = null;
 
-		if (array.length == 0){
+		if (array.length == 0) {
 			sb = new StringBundler();
 		}
 		else {

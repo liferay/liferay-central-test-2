@@ -111,7 +111,7 @@ public class AssetUtil {
 
 		if (portletBreadcrumbs != null) {
 			for (KeyValuePair portletBreadcrumb : portletBreadcrumbs) {
-				if (title.equals(portletBreadcrumb.getKey())){
+				if (title.equals(portletBreadcrumb.getKey())) {
 					return;
 				}
 			}

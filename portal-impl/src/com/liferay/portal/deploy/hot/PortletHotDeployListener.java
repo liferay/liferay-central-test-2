@@ -143,7 +143,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			IndexerRegistryUtil.unregister(indexer);
 		}
 
-		if (PropsValues.SCHEDULER_ENABLED){
+		if (PropsValues.SCHEDULER_ENABLED) {
 			List<SchedulerEntry> schedulerEntries =
 				portlet.getSchedulerEntries();
 

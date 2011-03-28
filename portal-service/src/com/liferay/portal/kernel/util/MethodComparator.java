@@ -30,7 +30,7 @@ public class MethodComparator implements Comparator<Method> {
 
 		int value = name1.compareTo(name2);
 
-		if (value != 0){
+		if (value != 0) {
 			return value;
 		}
 

@@ -413,7 +413,7 @@ public abstract class BaseIndexer implements Indexer {
 		long[] groupIds = searchContext.getGroupIds();
 
 		if ((groupIds == null) || (groupIds.length == 0) ||
-			((groupIds.length == 1) && (groupIds[0] == 0))){
+			((groupIds.length == 1) && (groupIds[0] == 0))) {
 
 			return;
 		}

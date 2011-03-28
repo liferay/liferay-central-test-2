@@ -49,7 +49,7 @@ public class PanelTag extends IncludeTag {
 
 			parentId = panelFloatingContainerTag.getId();
 		}
-		catch (ClassCastException cce){
+		catch (ClassCastException cce) {
 			try {
 				PanelContainerTag panelContainerTag	=
 					(PanelContainerTag)baseBodyTagSupport;

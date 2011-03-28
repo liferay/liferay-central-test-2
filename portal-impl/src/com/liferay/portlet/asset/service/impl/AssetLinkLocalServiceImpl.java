@@ -81,7 +81,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		List<AssetLink> links = assetLinkPersistence.findByE_E(
 			entryId1, entryId2);
 
-		for (AssetLink link : links){
+		for (AssetLink link : links) {
 			deleteLink(link);
 		}
 	}

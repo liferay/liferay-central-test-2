@@ -190,7 +190,7 @@ public class EditUserAction extends PortletAction {
 					String i18nLanguageId = user.getLanguageId();
 					int pos = i18nLanguageId.indexOf(CharPool.UNDERLINE);
 
-					if (pos != -1){
+					if (pos != -1) {
 						i18nLanguageId = i18nLanguageId.substring(0, pos);
 					}
 

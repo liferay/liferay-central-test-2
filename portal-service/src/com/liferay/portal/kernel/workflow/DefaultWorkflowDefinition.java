@@ -40,7 +40,7 @@ public class DefaultWorkflowDefinition
 		return _optionalAttributes;
 	}
 
-	public String getTitle(){
+	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
 		}

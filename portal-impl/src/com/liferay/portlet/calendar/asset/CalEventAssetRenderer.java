@@ -37,7 +37,7 @@ import javax.portlet.RenderResponse;
  */
 public class CalEventAssetRenderer extends BaseAssetRenderer {
 
-	public CalEventAssetRenderer(CalEvent event){
+	public CalEventAssetRenderer(CalEvent event) {
 		_event = event;
 	}
 

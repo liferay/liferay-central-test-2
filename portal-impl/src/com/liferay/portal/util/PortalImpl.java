@@ -1660,7 +1660,7 @@ public class PortalImpl implements Portal {
 		String defaultAssetPublisherPortletId = properties.get(
 			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
 
-		if (Validator.isNull(defaultAssetPublisherPortletId)){
+		if (Validator.isNull(defaultAssetPublisherPortletId)) {
 			String instanceId = PwdGenerator.getPassword(
 				PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3, 4);
 

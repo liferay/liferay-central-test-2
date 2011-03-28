@@ -434,7 +434,7 @@ public class PortletBagFactory {
 	}
 
 	protected void initSchedulers(Portlet portlet) throws Exception {
-		if (!PropsValues.SCHEDULER_ENABLED){
+		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
 		}
 

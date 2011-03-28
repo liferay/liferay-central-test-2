@@ -299,7 +299,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			description = fixMaxLength(description, DESCRIPTION_MAX_LENGTH);
 
-			if (message == null){
+			if (message == null) {
 				message = new Message();
 			}
 
