@@ -113,9 +113,10 @@ public class IGFolderPermission {
 					break;
 				}
 
+				folderId = folder.getParentFolderId();
+
 				folder = IGFolderLocalServiceUtil.getFolder(folderId);
 
-				folderId = folder.getParentFolderId();
 			}
 
 			return false;

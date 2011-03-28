@@ -131,10 +131,15 @@ public class ShoppingCategoryPermission {
 					break;
 				}
 
-				category = ShoppingCategoryLocalServiceUtil.getCategory(
-					categoryId);
-
 				categoryId = category.getParentCategoryId();
+
+				if (categoryId !=
+						ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+
+					category = ShoppingCategoryLocalServiceUtil.getCategory(
+							categoryId);
+				}
+
 			}
 
 			return false;

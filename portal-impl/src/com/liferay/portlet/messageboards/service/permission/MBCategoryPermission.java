@@ -134,9 +134,10 @@ public class MBCategoryPermission {
 					break;
 				}
 
+				categoryId = category.getParentCategoryId();
+
 				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
-				categoryId = category.getParentCategoryId();
 			}
 
 			return false;

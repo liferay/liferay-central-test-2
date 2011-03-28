@@ -108,9 +108,10 @@ public class BookmarksFolderPermission {
 					break;
 				}
 
+				folderId = folder.getParentFolderId();
+
 				folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
 
-				folderId = folder.getParentFolderId();
 			}
 
 			return false;
