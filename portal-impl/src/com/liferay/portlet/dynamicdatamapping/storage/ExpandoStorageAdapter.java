@@ -51,28 +51,29 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		ExpandoTable table = _getExpandoTable(companyId, structureId, fields);
+		ExpandoTable expandoTable = _getExpandoTable(
+			companyId, structureId, fields);
 
-		ExpandoRow row = ExpandoRowLocalServiceUtil.addRow(
-			table.getTableId(), CounterLocalServiceUtil.increment());
+		ExpandoRow expandoRow = ExpandoRowLocalServiceUtil.addRow(
+			expandoTable.getTableId(), CounterLocalServiceUtil.increment());
 
-		_updateFields(table, row.getClassPK(), fields);
+		_updateFields(expandoTable, expandoRow.getClassPK(), fields);
 
 		DDMStorageLinkLocalServiceUtil.addStorageLink(
-			table.getClassNameId(), row.getRowId(), structureId,
+			expandoTable.getClassNameId(), expandoRow.getRowId(), structureId,
 			serviceContext);
 
-		return row.getRowId();
+		return expandoRow.getRowId();
 	}
 
 	protected void doDeleteByClass(long classPK) throws Exception {
-		_deleteRows(new long[] {classPK});
+		_deleteExpandoRows(new long[] {classPK});
 	}
 
 	protected void doDeleteByStructure(long structureId) throws Exception {
-		long[] rowIds = _getRowIdsByStructure(structureId);
+		long[] expandoRowIds = _getExpandoRowIds(structureId);
 
-		_deleteRows(rowIds);
+		_deleteExpandoRows(expandoRowIds);
 	}
 
 	protected List<Fields> doGetFieldsListByClasses(
@@ -117,94 +118,95 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			boolean merge)
 		throws Exception {
 
-		ExpandoRow row = ExpandoRowLocalServiceUtil.getRow(classPK);
+		ExpandoRow expandoRow = ExpandoRowLocalServiceUtil.getRow(classPK);
 
 		DDMStorageLink ddmStorageLink =
-			DDMStorageLinkLocalServiceUtil.getClassStorageLink(row.getRowId());
+			DDMStorageLinkLocalServiceUtil.getClassStorageLink(
+				expandoRow.getRowId());
 
-		ExpandoTable table = _getExpandoTable(
-			row.getCompanyId(), ddmStorageLink.getStructureId(), fields);
+		ExpandoTable expandoTable = _getExpandoTable(
+			expandoRow.getCompanyId(), ddmStorageLink.getStructureId(), fields);
 
-		List<ExpandoColumn> columns = ExpandoColumnLocalServiceUtil.getColumns(
-			table.getTableId());
+		List<ExpandoColumn> expandoColumns =
+			ExpandoColumnLocalServiceUtil.getColumns(expandoTable.getTableId());
 
 		if (!merge) {
-			for (ExpandoColumn column : columns) {
-				if (!fields.contains(column.getName())) {
+			for (ExpandoColumn expandoColumn : expandoColumns) {
+				if (!fields.contains(expandoColumn.getName())) {
 					ExpandoValueLocalServiceUtil.deleteValue(
-						column.getColumnId(), row.getRowId());
+						expandoColumn.getColumnId(), expandoRow.getRowId());
 				}
 			}
 		}
 
-		_updateFields(table, row.getClassPK(), fields);
+		_updateFields(expandoTable, expandoRow.getClassPK(), fields);
 	}
 
-	private void _checkSchema(ExpandoTable table, Fields fields)
+	private void _checkExpandoColumns(ExpandoTable expandoTable, Fields fields)
 		throws PortalException, SystemException {
 
 		for (String name : fields.getNames()) {
 			try {
 				ExpandoColumnLocalServiceUtil.getColumn(
-					table.getTableId(), name);
+					expandoTable.getTableId(), name);
 			}
 			catch (NoSuchColumnException nsce) {
 				ExpandoColumnLocalServiceUtil.addColumn(
-					table.getTableId(), name,
+					expandoTable.getTableId(), name,
 					ExpandoColumnConstants.STRING);
 			}
 		}
 	}
 
-	private void _deleteRows(long[] rowIds)
+	private void _deleteExpandoRows(long[] expandoRowIds)
 		throws PortalException, SystemException {
 
-		for (long rowId : rowIds) {
+		for (long rowId : expandoRowIds) {
 			ExpandoRowLocalServiceUtil.deleteExpandoRow(rowId);
 		}
+	}
+
+	private long[] _getExpandoRowIds(long structureId) throws SystemException {
+		List<DDMStorageLink> ddmStorageLinks =
+			DDMStorageLinkLocalServiceUtil.getStructureStorageLinks(
+				structureId);
+
+		long[] expandoRowIds = new long[ddmStorageLinks.size()];
+
+		for (int i = 0; i < ddmStorageLinks.size(); i++) {
+			DDMStorageLink ddmStorageLink = ddmStorageLinks.get(i);
+
+			expandoRowIds[i] = ddmStorageLink.getClassPK();
+		}
+
+		return expandoRowIds;
 	}
 
 	private ExpandoTable _getExpandoTable(
 			long companyId, long structureId, Fields fields)
 		throws PortalException, SystemException {
 
-		ExpandoTable table = null;
+		ExpandoTable expandoTable = null;
 
 		long classNameId = PortalUtil.getClassNameId(
 			ExpandoStorageAdapter.class.getName());
 
 		try {
-			table = ExpandoTableLocalServiceUtil.getTable(
+			expandoTable = ExpandoTableLocalServiceUtil.getTable(
 				companyId, classNameId, String.valueOf(structureId));
 		}
 		catch (NoSuchTableException nste) {
-			table = ExpandoTableLocalServiceUtil.addTable(
+			expandoTable = ExpandoTableLocalServiceUtil.addTable(
 				companyId, classNameId, String.valueOf(structureId));
 		}
 
-		_checkSchema(table, fields);
+		_checkExpandoColumns(expandoTable, fields);
 
-		return table;
-	}
-
-	private long[] _getRowIdsByStructure(long structureId)
-		throws SystemException {
-
-		List<DDMStorageLink> ddmStorageLinks =
-			DDMStorageLinkLocalServiceUtil.getStructureStorageLinks(
-				structureId);
-
-		long[] rowIds = new long[ddmStorageLinks.size()];
-
-		for (int i = 0; i < ddmStorageLinks.size(); i++) {
-			rowIds[i] = ddmStorageLinks.get(i).getClassPK();
-		}
-
-		return rowIds;
+		return expandoTable;
 	}
 
 	private void _updateFields(
-			ExpandoTable table, long classPK, Fields fields)
+			ExpandoTable expandoTable, long classPK, Fields fields)
 		throws PortalException, SystemException {
 
 		Iterator<Field> itr = fields.iterator();
@@ -213,8 +215,9 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			Field field = itr.next();
 
 			ExpandoValueServiceUtil.addValue(
-				table.getCompanyId(), ExpandoStorageAdapter.class.getName(),
-				table.getName(), field.getName(), classPK, field.getValue());
+				expandoTable.getCompanyId(),
+				ExpandoStorageAdapter.class.getName(), expandoTable.getName(),
+				field.getName(), classPK, field.getValue());
 		}
 	}
 
