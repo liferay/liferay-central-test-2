@@ -14,8 +14,6 @@
 
 package com.liferay.util;
 
-import java.util.Calendar;
-
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -24,6 +22,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
+
+import java.util.Calendar;
 
 /**
  * @author Brian Wing Shun Chan
@@ -111,15 +111,15 @@ public class CreditCard {
 		return Validator.isLUHN(number);
 	}
 
-	public static boolean isValidExpDate(int ccExpMonth, int ccExpYear){
+	public static boolean isValidExpDate(int ccExpMonth, int ccExpYear) {
 		Calendar curCal = CalendarFactoryUtil.getCalendar(
 			TimeZoneUtil.getDefault(), LocaleUtil.getDefault());
 
-		if(CalendarUtil.isFuture(ccExpMonth, ccExpYear)){
+		if (CalendarUtil.isFuture(ccExpMonth, ccExpYear)) {
 			return true;
 		}
-		else if((ccExpMonth == curCal.get(Calendar.MONTH)) &&
-				(ccExpYear == curCal.get(Calendar.YEAR))){
+		else if ((ccExpMonth == curCal.get(Calendar.MONTH)) &&
+			(ccExpYear == curCal.get(Calendar.YEAR))) {
 
 			return true;
 		}
