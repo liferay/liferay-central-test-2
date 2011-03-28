@@ -155,7 +155,6 @@ public class ContentPersistenceImpl
 	}
 
 	public Content fetchByPrimaryKey(long contentId) throws SystemException {
-
 		Session session = null;
 
 		try {
@@ -181,7 +180,6 @@ public class ContentPersistenceImpl
 			StringBundler msg = new StringBundler(8);
 
 			msg.append("No Content exists with the key {");
-
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", repositoryId=");
@@ -208,7 +206,6 @@ public class ContentPersistenceImpl
 			StringBundler msg = new StringBundler(10);
 
 			msg.append("No Content exists with the key {");
-
 			msg.append("companyId=");
 			msg.append(companyId);
 			msg.append(", repositoryId=");
@@ -217,7 +214,6 @@ public class ContentPersistenceImpl
 			msg.append(path);
 			msg.append(", version=");
 			msg.append(version);
-
 			msg.append("}");
 
 			throw new NoSuchContentException(msg.toString());
@@ -233,13 +229,12 @@ public class ContentPersistenceImpl
 
 		if (content == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Content exists with the primary key " +
-					contentId);
+				_log.warn(
+					"No Content exists with the primary key " + contentId);
 			}
 
 			throw new NoSuchContentException(
-				"No Content exists with the primary key " +
-				contentId);
+				"No Content exists with the primary key " + contentId);
 		}
 
 		return content;

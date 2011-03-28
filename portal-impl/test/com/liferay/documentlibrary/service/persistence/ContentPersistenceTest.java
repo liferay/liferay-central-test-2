@@ -39,22 +39,25 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 	public void testCountByC_R_P_V() throws Exception {
 		Content content = createContent();
 
-		int count = _persistence.countByC_R_P_V(content.getCompanyId(),
-			content.getRepositoryId(), content.getPath(), content.getVersion());
+		int count = _persistence.countByC_R_P_V(
+			content.getCompanyId(), content.getRepositoryId(),
+			content.getPath(), content.getVersion());
 
 		assertEquals(0, count);
 
 		_persistence.update(content);
 
-		count = _persistence.countByC_R_P_V(content.getCompanyId(),
-			content.getRepositoryId(), content.getPath(), content.getVersion());
+		count = _persistence.countByC_R_P_V(
+			content.getCompanyId(), content.getRepositoryId(),
+			content.getPath(), content.getVersion());
 
 		assertEquals(1, count);
 
 		_persistence.remove(content.getContentId());
 
-		count = _persistence.countByC_R_P_V(content.getCompanyId(),
-			content.getRepositoryId(), content.getPath(), content.getVersion());
+		count = _persistence.countByC_R_P_V(
+			content.getCompanyId(), content.getRepositoryId(),
+			content.getPath(), content.getVersion());
 
 		assertEquals(0, count);
 	}
@@ -62,18 +65,19 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 	public void testFetchByC_R_P() throws Exception {
 		Content content1 = addContent();
 
-		int size = (int)content1.getSize();
-
-		Blob blob = new OutputBlob(new ByteArrayInputStream(new byte[size]),
-			size);
-
 		long contentId2 = content1.getContentId() + 1;
+
 		String version2 = content1.getVersion().concat("-2");
 
-		Content content2 = new Content(contentId2, content1.getCompanyId(),
-			content1.getPortletId(), content1.getGroupId(),
-			content1.getRepositoryId(), content1.getPath(), version2, blob,
-			size);
+		int size = (int)content1.getSize();
+
+		Blob data = new OutputBlob(
+			new ByteArrayInputStream(new byte[size]), size);
+
+		Content content2 = new Content(
+			contentId2, content1.getCompanyId(), content1.getPortletId(),
+			content1.getGroupId(), content1.getRepositoryId(),
+			content1.getPath(), version2, data, size);
 
 		_persistence.update(content2);
 
@@ -128,9 +132,9 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testFetchByPrimaryKeyMissing() throws Exception {
-		long pk = nextLong();
+		long contentId = nextLong();
 
-		Content missingContent = _persistence.fetchByPrimaryKey(pk);
+		Content missingContent = _persistence.fetchByPrimaryKey(contentId);
 
 		assertNull(missingContent);
 	}
@@ -138,18 +142,19 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 	public void testFindByC_R_P() throws Exception {
 		Content content1 = addContent();
 
-		int size = (int)content1.getSize();
-
-		Blob blob = new OutputBlob(new ByteArrayInputStream(new byte[size]),
-			size);
-
 		long contentId2 = content1.getContentId() + 1;
+
 		String version2 = content1.getVersion().concat("-2");
 
-		Content content2 = new Content(contentId2, content1.getCompanyId(),
-			content1.getPortletId(), content1.getGroupId(),
-			content1.getRepositoryId(), content1.getPath(), version2, blob,
-			size);
+		int size = (int)content1.getSize();
+
+		Blob data = new OutputBlob(
+			new ByteArrayInputStream(new byte[size]), size);
+
+		Content content2 = new Content(
+			contentId2, content1.getCompanyId(), content1.getPortletId(),
+			content1.getGroupId(), content1.getRepositoryId(),
+			content1.getPath(), version2, data, size);
 
 		_persistence.update(content2);
 
@@ -170,8 +175,9 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		_persistence.remove(existingContent1.getContentId());
 
 		try {
-			_persistence.findByC_R_P(content1.getCompanyId(),
-				content1.getRepositoryId(), content1.getPath());
+			_persistence.findByC_R_P(
+				content1.getCompanyId(), content1.getRepositoryId(),
+				content1.getPath());
 
 			fail("Missing entity did not throw NoSuchContentException");
 		}
@@ -210,10 +216,10 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testFindByPrimaryKeyMissing() throws Exception {
-		long pk = nextLong();
+		long contentId = nextLong();
 
 		try {
-			_persistence.findByPrimaryKey(pk);
+			_persistence.findByPrimaryKey(contentId);
 
 			fail("Missing entity did not throw NoSuchContentException");
 		}
@@ -228,7 +234,6 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 			content.getContentId());
 
 		assertNotNull(existingContent);
-
 		assertTrue(existingContent.equals(content));
 
 		_persistence.remove(content.getContentId());
@@ -262,13 +267,14 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 	public void testUpdateExisting() throws Exception {
 		Content content = addContent();
 
-		byte[] data = new byte[1024];
+		byte[] bytes = new byte[1024];
 
-		Blob blob = new OutputBlob(new ByteArrayInputStream(data), data.length);
+		Blob data = new OutputBlob(
+			new ByteArrayInputStream(bytes), bytes.length);
 
-		Content newContent = new Content(content.getContentId(), nextLong(),
-			randomString(), nextLong(), nextLong(), randomString(),
-			randomString(), blob, blob.length());
+		Content newContent = new Content(
+			content.getContentId(), nextLong(), randomString(), nextLong(),
+			nextLong(), randomString(), randomString(), data, data.length());
 
 		_persistence.update(newContent);
 
@@ -280,24 +286,11 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 
 	public void testUpdateNew() throws Exception {
 		Content content = addContent();
-		Blob blob = content.getData();
 
-		assertFalse(blob.getClass().equals(OutputBlob.class));
-		assertEquals(1024, blob.length());
-	}
+		Blob data = content.getData();
 
-	protected Content createContent() throws Exception {
-		long pk = nextLong();
-
-		byte[] data = new byte[1024];
-
-		Blob blob = new OutputBlob(new ByteArrayInputStream(data), data.length);
-
-		Content content = new Content(pk, nextLong(), randomString(),
-			nextLong(), nextLong(), randomString(), randomString(), blob,
-			blob.length());
-
-		return content;
+		assertFalse(data.getClass().equals(OutputBlob.class));
+		assertEquals(1024, data.length());
 	}
 
 	protected Content addContent() throws Exception {
@@ -306,7 +299,23 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		_persistence.update(content);
 
 		// Reload for a fresh Blob
+
 		content = _persistence.findByPrimaryKey(content.getContentId());
+
+		return content;
+	}
+
+	protected Content createContent() throws Exception {
+		long contentId = nextLong();
+
+		byte[] bytes = new byte[1024];
+
+		Blob data = new OutputBlob(
+			new ByteArrayInputStream(bytes), bytes.length);
+
+		Content content = new Content(
+			contentId, nextLong(), randomString(), nextLong(), nextLong(),
+			randomString(), randomString(), data, data.length());
 
 		return content;
 	}

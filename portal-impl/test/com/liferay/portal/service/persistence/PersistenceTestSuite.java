@@ -105,6 +105,7 @@ public class PersistenceTestSuite extends TestSuite {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(CounterPersistenceTest.class);
+
 		testSuite.addTestSuite(ContentPersistenceTest.class);
 
 		testSuite.addTestSuite(AccountPersistenceTest.class);
