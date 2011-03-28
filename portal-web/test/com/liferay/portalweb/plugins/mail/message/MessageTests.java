@@ -18,6 +18,8 @@ import com.liferay.portalweb.plugins.mail.message.deletemessagenullallmail.Delet
 import com.liferay.portalweb.plugins.mail.message.deletemessagenulldrafts.DeleteMessageNullDraftsTests;
 import com.liferay.portalweb.plugins.mail.message.deletemessagenullinbox.DeleteMessageNullInboxTests;
 import com.liferay.portalweb.plugins.mail.message.deletemessagenullsentmail.DeleteMessageNullSentMailTests;
+import com.liferay.portalweb.plugins.mail.message.sendmessagesubjectnull.SendMessageSubjectNullTests;
+import com.liferay.portalweb.plugins.mail.message.sendmessagetonull.SendMessageToNullTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -35,6 +37,8 @@ public class MessageTests extends BaseTests {
 		testSuite.addTest(DeleteMessageNullDraftsTests.suite());
 		testSuite.addTest(DeleteMessageNullInboxTests.suite());
 		testSuite.addTest(DeleteMessageNullSentMailTests.suite());
+		testSuite.addTest(SendMessageToNullTests.suite());
+		testSuite.addTest(SendMessageSubjectNullTests.suite());
 
 		return testSuite;
 	}
