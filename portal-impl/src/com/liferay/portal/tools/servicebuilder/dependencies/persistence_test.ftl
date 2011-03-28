@@ -350,8 +350,6 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		${entity.name} new${entity.name} = add${entity.name}();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(${entity.name}.class, ${entity.name}.class.getClassLoader());
 
 		<#assign column = entity.PKList[0]>
