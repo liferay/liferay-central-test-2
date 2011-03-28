@@ -28,22 +28,22 @@ import java.util.Map;
 public class StorageEngineUtil {
 
 	public static long create(
-			long companyId, long structureId, Fields fields,
+			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
 		throws StorageException {
 
 		return getStorageEngine().create(
-			companyId, structureId, fields, serviceContext);
+			companyId, ddmStructureId, fields, serviceContext);
 	}
 
 	public static void deleteByClass(long classPK) throws StorageException {
 		getStorageEngine().deleteByClass(classPK);
 	}
 
-	public static void deleteByStructure(long structureId)
+	public static void deleteByDDMStructure(long ddmStructureId)
 		throws StorageException {
 
-		getStorageEngine().deleteByStructure(structureId);
+		getStorageEngine().deleteByDDMStructure(ddmStructureId);
 	}
 
 	public static Fields getFields(long classPK) throws StorageException {
@@ -57,54 +57,54 @@ public class StorageEngineUtil {
 	}
 
 	public static List<Fields> getFieldsList(
-			long structureId, List<String> fieldNames)
+			long ddmStructureId, List<String> fieldNames)
 		throws StorageException {
 
 		return getStorageEngine().getFieldsList(
-			structureId, fieldNames);
+			ddmStructureId, fieldNames);
 	}
 
 	public static List<Fields> getFieldsList(
-			long structureId, List<String> fieldNames,
+			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		return getStorageEngine().getFieldsList(
-			structureId, fieldNames, orderByComparator);
+			ddmStructureId, fieldNames, orderByComparator);
 	}
 
 	public static List<Fields> getFieldsList(
-			long structureId, long[] classPKs, List<String> fieldNames,
+			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		return getStorageEngine().getFieldsList(
-			structureId, classPKs, fieldNames, orderByComparator);
+			ddmStructureId, classPKs, fieldNames, orderByComparator);
 	}
 
 	public static List<Fields> getFieldsList(
-			long structureId, long[] classPKs,
+			long ddmStructureId, long[] classPKs,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		return getStorageEngine().getFieldsList(
-			structureId, classPKs, orderByComparator);
+			ddmStructureId, classPKs, orderByComparator);
 	}
 
 	public static Map<Long, Fields> getFieldsMap(
-			long structureId, long[] classPKs)
+			long ddmStructureId, long[] classPKs)
 		throws StorageException {
 
 		return getStorageEngine().getFieldsMap(
-			structureId, classPKs);
+			ddmStructureId, classPKs);
 	}
 
 	public static Map<Long, Fields> getFieldsMap(
-			long structureId, long[] classPKs, List<String> fieldNames)
+			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
 		return getStorageEngine().getFieldsMap(
-			structureId, classPKs, fieldNames);
+			ddmStructureId, classPKs, fieldNames);
 	}
 
 	public static StorageEngine getStorageEngine() {
@@ -112,18 +112,18 @@ public class StorageEngineUtil {
 	}
 
 	public static List<Fields> query(
-			long structureId, List<String> fieldNames, Condition condition,
+			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		return getStorageEngine().query(
-			structureId, fieldNames, condition, orderByComparator);
+			ddmStructureId, fieldNames, condition, orderByComparator);
 	}
 
-	public static int queryCount(long structureId, Condition condition)
+	public static int queryCount(long ddmStructureId, Condition condition)
 		throws StorageException {
 
-		return getStorageEngine().queryCount(structureId, condition);
+		return getStorageEngine().queryCount(ddmStructureId, condition);
 	}
 
 	public static void update(

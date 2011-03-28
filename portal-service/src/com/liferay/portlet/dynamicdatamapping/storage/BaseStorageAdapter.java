@@ -38,14 +38,14 @@ import java.util.Map;
 public abstract class BaseStorageAdapter implements StorageAdapter {
 
 	public long create(
-			long companyId, long structureId, Fields fields,
+			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
 		throws StorageException {
 
 		try {
-			validateStructureFields(structureId, fields);
+			validateDDMStructureFields(ddmStructureId, fields);
 
-			return doCreate(companyId, structureId, fields, serviceContext);
+			return doCreate(companyId, ddmStructureId, fields, serviceContext);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -67,9 +67,11 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public void deleteByStructure(long structureId) throws StorageException {
+	public void deleteByDDMStructure(long ddmStructureId)
+		throws StorageException {
+
 		try {
-			doDeleteByStructure(structureId);
+			doDeleteByDDMStructure(ddmStructureId);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -104,20 +106,21 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public List<Fields> getFieldsList(long structureId, List<String> fieldNames)
+	public List<Fields> getFieldsList(
+			long ddmStructureId, List<String> fieldNames)
 		throws StorageException {
 
-		return getFieldsList(structureId, fieldNames, null);
+		return getFieldsList(ddmStructureId, fieldNames, null);
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, List<String> fieldNames,
+			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		try {
-			return doGetFieldsListByStructure(
-				structureId, fieldNames, orderByComparator);
+			return doGetFieldsListByDDMStructure(
+				ddmStructureId, fieldNames, orderByComparator);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -128,13 +131,13 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, long[] classPKs, List<String> fieldNames,
+			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		try {
 			return doGetFieldsListByClasses(
-				structureId, classPKs, fieldNames, orderByComparator);
+				ddmStructureId, classPKs, fieldNames, orderByComparator);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -145,25 +148,26 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, long[] classPKs,
+			long ddmStructureId, long[] classPKs,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		return getFieldsList(structureId, classPKs, null, orderByComparator);
+		return getFieldsList(ddmStructureId, classPKs, null, orderByComparator);
 	}
 
-	public Map<Long, Fields> getFieldsMap(long structureId, long[] classPKs)
+	public Map<Long, Fields> getFieldsMap(long ddmStructureId, long[] classPKs)
 		throws StorageException {
 
-		return getFieldsMap(structureId, classPKs, null);
+		return getFieldsMap(ddmStructureId, classPKs, null);
 	}
 
 	public Map<Long, Fields> getFieldsMap(
-			long structureId, long[] classPKs, List<String> fieldNames)
+			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
 		try {
-			return doGetFieldsMapByClasses(structureId, classPKs, fieldNames);
+			return doGetFieldsMapByClasses(
+				ddmStructureId, classPKs, fieldNames);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -174,13 +178,13 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, Condition condition,
+			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
 		try {
 			return doQuery(
-				structureId, fieldNames, condition, orderByComparator);
+				ddmStructureId, fieldNames, condition, orderByComparator);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -190,11 +194,11 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		}
 	}
 
-	public int queryCount(long structureId, Condition condition)
+	public int queryCount(long ddmStructureId, Condition condition)
 		throws StorageException {
 
 		try {
-			return doQueryCount(structureId, condition);
+			return doQueryCount(ddmStructureId, condition);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -230,35 +234,36 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	protected abstract long doCreate(
-			long companyId, long structureId, Fields fields,
+			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
 		throws Exception;
 
 	protected abstract void doDeleteByClass(long classPK) throws Exception;
 
-	protected abstract void doDeleteByStructure(long structureId)
+	protected abstract void doDeleteByDDMStructure(long ddmStructureId)
 		throws Exception;
 
 	protected abstract List<Fields> doGetFieldsListByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames,
+			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws Exception;
 
-	protected abstract List<Fields> doGetFieldsListByStructure(
-			long structureId, List<String> fieldNames,
+	protected abstract List<Fields> doGetFieldsListByDDMStructure(
+			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws Exception;
 
 	protected abstract Map<Long, Fields> doGetFieldsMapByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames)
+			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws Exception;
 
 	protected abstract  List<Fields> doQuery(
-			long structureId, List<String> fieldNames, Condition condition,
+			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws Exception;
 
-	protected abstract int doQueryCount(long structureId, Condition condition)
+	protected abstract int doQueryCount(
+			long ddmStructureId, Condition condition)
 		throws Exception;
 
 	protected abstract void doUpdate(
@@ -272,14 +277,15 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		DDMStorageLink ddmStorageLink =
 			DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
 
-		validateStructureFields(ddmStorageLink.getStructureId(), fields);
+		validateDDMStructureFields(ddmStorageLink.getStructureId(), fields);
 	}
 
-	protected void validateStructureFields(long structureId, Fields fields)
+	protected void validateDDMStructureFields(
+			long ddmStructureId, Fields fields)
 		throws PortalException, SystemException {
 
 		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getDDMStructure(structureId);
+			DDMStructureLocalServiceUtil.getDDMStructure(ddmStructureId);
 
 		Iterator<Field> itr = fields.iterator();
 

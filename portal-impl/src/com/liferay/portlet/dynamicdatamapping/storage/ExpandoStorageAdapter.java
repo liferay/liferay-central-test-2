@@ -47,12 +47,12 @@ import java.util.Map;
 public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
 	protected long doCreate(
-			long companyId, long structureId, Fields fields,
+			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		ExpandoTable expandoTable = _getExpandoTable(
-			companyId, structureId, fields);
+			companyId, ddmStructureId, fields);
 
 		ExpandoRow expandoRow = ExpandoRowLocalServiceUtil.addRow(
 			expandoTable.getTableId(), CounterLocalServiceUtil.increment());
@@ -60,8 +60,8 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		_updateFields(expandoTable, expandoRow.getClassPK(), fields);
 
 		DDMStorageLinkLocalServiceUtil.addStorageLink(
-			expandoTable.getClassNameId(), expandoRow.getRowId(), structureId,
-			serviceContext);
+			expandoTable.getClassNameId(), expandoRow.getRowId(),
+			ddmStructureId, serviceContext);
 
 		return expandoRow.getRowId();
 	}
@@ -70,22 +70,24 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		_deleteExpandoRows(new long[] {classPK});
 	}
 
-	protected void doDeleteByStructure(long structureId) throws Exception {
-		long[] expandoRowIds = _getExpandoRowIds(structureId);
+	protected void doDeleteByDDMStructure(long ddmStructureId)
+		throws Exception {
+
+		long[] expandoRowIds = _getExpandoRowIds(ddmStructureId);
 
 		_deleteExpandoRows(expandoRowIds);
 	}
 
 	protected List<Fields> doGetFieldsListByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames,
+			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
 	}
 
-	protected List<Fields> doGetFieldsListByStructure(
-			long structureId, List<String> fieldNames,
+	protected List<Fields> doGetFieldsListByDDMStructure(
+			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws Exception {
 
@@ -93,21 +95,21 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected Map<Long, Fields> doGetFieldsMapByClasses(
-			long structureId, long[] classPKs, List<String> fieldNames)
+			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws Exception {
 
 		return null;
 	}
 
 	protected List<Fields> doQuery(
-			long structureId, List<String> fieldNames, Condition condition,
+			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws Exception {
 
 		return null;
 	}
 
-	protected int doQueryCount(long structureId, Condition condition)
+	protected int doQueryCount(long ddmStructureId, Condition condition)
 		throws Exception {
 
 		return 0;
@@ -166,10 +168,12 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		}
 	}
 
-	private long[] _getExpandoRowIds(long structureId) throws SystemException {
+	private long[] _getExpandoRowIds(long ddmStructureId)
+		throws SystemException {
+
 		List<DDMStorageLink> ddmStorageLinks =
 			DDMStorageLinkLocalServiceUtil.getStructureStorageLinks(
-				structureId);
+				ddmStructureId);
 
 		long[] expandoRowIds = new long[ddmStorageLinks.size()];
 
@@ -183,7 +187,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	private ExpandoTable _getExpandoTable(
-			long companyId, long structureId, Fields fields)
+			long companyId, long ddmStructureId, Fields fields)
 		throws PortalException, SystemException {
 
 		ExpandoTable expandoTable = null;
@@ -193,11 +197,11 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
 		try {
 			expandoTable = ExpandoTableLocalServiceUtil.getTable(
-				companyId, classNameId, String.valueOf(structureId));
+				companyId, classNameId, String.valueOf(ddmStructureId));
 		}
 		catch (NoSuchTableException nste) {
 			expandoTable = ExpandoTableLocalServiceUtil.addTable(
-				companyId, classNameId, String.valueOf(structureId));
+				companyId, classNameId, String.valueOf(ddmStructureId));
 		}
 
 		_checkExpandoColumns(expandoTable, fields);

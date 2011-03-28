@@ -30,50 +30,52 @@ import java.util.Map;
 public interface StorageAdapter {
 
 	public long create(
-			long companyId, long structureId, Fields fields,
+			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
 		throws StorageException;
 
 	public void deleteByClass(long classPK) throws StorageException;
 
-	public void deleteByStructure(long structureId) throws StorageException;
+	public void deleteByDDMStructure(long ddmStructureId)
+		throws StorageException;
 
 	public Fields getFields(long classPK) throws StorageException;
 
 	public Fields getFields(long classPK, List<String> fieldNames)
 		throws StorageException;
 
-	public List<Fields> getFieldsList(long structureId, List<String> fieldNames)
+	public List<Fields> getFieldsList(
+			long ddmStructureId, List<String> fieldNames)
 		throws StorageException;
 
 	public List<Fields> getFieldsList(
-			long structureId, List<String> fieldNames,
+			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
 	public List<Fields> getFieldsList(
-			long structureId, long[] classPKs, List<String> fieldNames,
+			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
 	public List<Fields> getFieldsList(
-			long structureId, long[] classPKs,
+			long ddmStructureId, long[] classPKs,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public Map<Long, Fields> getFieldsMap(long structureId, long[] classPKs)
+	public Map<Long, Fields> getFieldsMap(long ddmStructureId, long[] classPKs)
 		throws StorageException;
 
 	public Map<Long, Fields> getFieldsMap(
-			long structureId, long[] classPKs, List<String> fieldNames)
+			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException;
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, Condition condition,
+			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException;
 
-	public int queryCount(long structureId, Condition condition)
+	public int queryCount(long ddmStructureId, Condition condition)
 		throws StorageException;
 
 	public void update(

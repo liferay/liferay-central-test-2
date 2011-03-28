@@ -33,14 +33,15 @@ import java.util.Map;
 public class StorageEngineImpl implements StorageEngine {
 
 	public long create(
-			long companyId, long structureId, Fields fields,
+			long companyId, long ddmStructureId, Fields fields,
 			ServiceContext serviceContext)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
 		return storageAdapter.create(
-			companyId, structureId, fields, serviceContext);
+			companyId, ddmStructureId, fields, serviceContext);
 	}
 
 	public void deleteByClass(long classPK) throws StorageException {
@@ -49,12 +50,13 @@ public class StorageEngineImpl implements StorageEngine {
 		storageAdapter.deleteByClass(classPK);
 	}
 
-	public void deleteByStructure(long structureId)
+	public void deleteByDDMStructure(long ddmStructureId)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
-		storageAdapter.deleteByStructure(structureId);
+		storageAdapter.deleteByDDMStructure(ddmStructureId);
 	}
 
 	public Fields getFields(long classPK) throws StorageException {
@@ -70,81 +72,90 @@ public class StorageEngineImpl implements StorageEngine {
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, List<String> fieldNames)
+			long ddmStructureId, List<String> fieldNames)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
-		return storageAdapter.getFieldsList(structureId, fieldNames);
+		return storageAdapter.getFieldsList(ddmStructureId, fieldNames);
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, List<String> fieldNames,
+			long ddmStructureId, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
 		return storageAdapter.getFieldsList(
-			structureId, fieldNames, orderByComparator);
+			ddmStructureId, fieldNames, orderByComparator);
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, long[] classPKs, List<String> fieldNames,
+			long ddmStructureId, long[] classPKs, List<String> fieldNames,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
 		return storageAdapter.getFieldsList(
-			structureId, classPKs, fieldNames, orderByComparator);
+			ddmStructureId, classPKs, fieldNames, orderByComparator);
 	}
 
 	public List<Fields> getFieldsList(
-			long structureId, long[] classPKs,
+			long ddmStructureId, long[] classPKs,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
 		return storageAdapter.getFieldsList(
-			structureId, classPKs, orderByComparator);
+			ddmStructureId, classPKs, orderByComparator);
 	}
 
-	public Map<Long, Fields> getFieldsMap(long structureId, long[] classPKs)
+	public Map<Long, Fields> getFieldsMap(long ddmStructureId, long[] classPKs)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
-		return storageAdapter.getFieldsMap(structureId, classPKs);
+		return storageAdapter.getFieldsMap(ddmStructureId, classPKs);
 	}
 
 	public Map<Long, Fields> getFieldsMap(
-			long structureId, long[] classPKs, List<String> fieldNames)
+			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
-		return storageAdapter.getFieldsMap(structureId, classPKs, fieldNames);
+		return storageAdapter.getFieldsMap(
+			ddmStructureId, classPKs, fieldNames);
 	}
 
 	public List<Fields> query(
-			long structureId, List<String> fieldNames, Condition condition,
+			long ddmStructureId, List<String> fieldNames, Condition condition,
 			OrderByComparator orderByComparator)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
 		return storageAdapter.query(
-			structureId, fieldNames, condition, orderByComparator);
+			ddmStructureId, fieldNames, condition, orderByComparator);
 	}
 
-	public int queryCount(long structureId, Condition condition)
+	public int queryCount(long ddmStructureId, Condition condition)
 		throws StorageException {
 
-		StorageAdapter storageAdapter = getStructureStorageAdapter(structureId);
+		StorageAdapter storageAdapter = getStructureStorageAdapter(
+			ddmStructureId);
 
-		return storageAdapter.queryCount(structureId, condition);
+		return storageAdapter.queryCount(ddmStructureId, condition);
 	}
 
 	public void setDefaultStorageAdapter(
@@ -205,12 +216,12 @@ public class StorageEngineImpl implements StorageEngine {
 		return storageAdapter;
 	}
 
-	protected StorageAdapter getStructureStorageAdapter(long structureId)
+	protected StorageAdapter getStructureStorageAdapter(long ddmStructureId)
 		throws StorageException {
 
 		try {
 			DDMStructure ddmStructure =
-				DDMStructureLocalServiceUtil.getDDMStructure(structureId);
+				DDMStructureLocalServiceUtil.getDDMStructure(ddmStructureId);
 
 			return getStorageAdapter(ddmStructure.getStorageType());
 		}
