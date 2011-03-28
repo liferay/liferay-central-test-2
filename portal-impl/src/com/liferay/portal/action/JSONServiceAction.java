@@ -624,6 +624,17 @@ public class JSONServiceAction extends JSONAction {
 			if (!returnList.isEmpty()) {
 				Object returnItem0 = returnList.get(0);
 
+				if ((returnItem0 instanceof Boolean) ||
+					(returnItem0 instanceof Number) ||
+					(returnItem0 instanceof String)) {
+
+					for (Object o : returnList) {
+						jsonArray.put(o.toString());
+					}
+
+					return jsonArray.toString();
+				}
+
 				if (returnItem0 instanceof RepositoryModel) {
 					RepositoryModel repositoryModel =
 						(RepositoryModel) returnItem0;
