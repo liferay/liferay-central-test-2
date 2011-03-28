@@ -35,6 +35,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.query.Condition;
 import com.liferay.portlet.dynamicdatamapping.storage.query.FieldCondition;
 import com.liferay.portlet.dynamicdatamapping.storage.query.FieldConditionImpl;
 import com.liferay.portlet.dynamicdatamapping.storage.query.Junction;
+import com.liferay.portlet.dynamicdatamapping.storage.query.LogicalOperator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -59,7 +60,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 
 		Document document = SAXReaderUtil.createDocument();
 
-		Element rootElement = document.addElement(_ROOT);
+		Element rootElement = document.addElement("root");
 
 		Iterator<Field> itr = fields.iterator();
 
@@ -82,24 +83,20 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		return ddmContent.getPrimaryKey();
 	}
 
-	protected void doDeleteByClass(long classPK)
-		throws Exception {
-
+	protected void doDeleteByClass(long classPK) throws Exception {
 		DDMContentLocalServiceUtil.deleteDDMContent(classPK);
 
 		DDMStorageLinkLocalServiceUtil.deleteClassStorageLink(classPK);
 	}
 
-	protected void doDeleteByStructure(long structureId)
-		throws Exception {
-
-		List<DDMStorageLink> storageLinks =
+	protected void doDeleteByStructure(long structureId) throws Exception {
+		List<DDMStorageLink> ddmStorageLinks =
 			DDMStorageLinkLocalServiceUtil.getStructureStorageLinks(
 				structureId);
 
-		for (DDMStorageLink storageLink : storageLinks) {
+		for (DDMStorageLink ddmStorageLink : ddmStorageLinks) {
 			DDMContentLocalServiceUtil.deleteDDMContent(
-				storageLink.getClassPK());
+				ddmStorageLink.getClassPK());
 		}
 
 		DDMStorageLinkLocalServiceUtil.deleteStructureStorageLinks(structureId);
@@ -141,32 +138,31 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	protected int doQueryCount(long structureId, Condition condition)
 		throws Exception {
 
-		XPath xPathCondition = null;
+		XPath conditionXPath = null;
 
 		if (condition != null) {
-			xPathCondition = parseCondition(condition);
+			conditionXPath = _parseCondition(condition);
 		}
+
+		int count = 0;
 
 		long[] classPKs = _getStructureClassPKs(structureId);
 
-		DDMContent content = null;
-		Document document = null;
-		int counter = 0;
-
 		for (long classPK : classPKs) {
-			content = DDMContentLocalServiceUtil.getContent(classPK);
+			DDMContent ddmContent = DDMContentLocalServiceUtil.getContent(
+				classPK);
 
-			document = SAXReaderUtil.read(content.getXml());
+			Document document = SAXReaderUtil.read(ddmContent.getXml());
 
-			if ((xPathCondition == null) ||
-				((xPathCondition != null) &&
-				  xPathCondition.booleanValueOf(document))) {
+			if ((conditionXPath == null) ||
+				((conditionXPath != null) &&
+				  conditionXPath.booleanValueOf(document))) {
 
-				counter++;
+				count++;
 			}
 		}
 
-		return counter;
+		return count;
 	}
 
 	protected void doUpdate(
@@ -177,6 +173,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		DDMContent ddmContent = DDMContentLocalServiceUtil.getContent(classPK);
 
 		Document document = null;
+
 		Element rootElement = null;
 
 		if (merge) {
@@ -187,7 +184,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 		else {
 			document = SAXReaderUtil.createDocument();
 
-			rootElement = document.addElement(_ROOT);
+			rootElement = document.addElement("root");
 		}
 
 		Iterator<Field> itr = fields.iterator();
@@ -198,13 +195,14 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			String fieldName = field.getName();
 			String fieldValue = String.valueOf(field.getValue());
 
-			Element dynamicElement = _getElementByName(document, fieldName);
+			Element dynamicElementElement = _getElementByName(
+				document, fieldName);
 
-			if (dynamicElement == null) {
+			if (dynamicElementElement == null) {
 				_appendField(rootElement, fieldName, fieldValue);
 			}
 			else {
-				_updateField(dynamicElement, fieldName, fieldValue);
+				_updateField(dynamicElementElement, fieldName, fieldValue);
 			}
 		}
 
@@ -216,23 +214,17 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			ddmContent.getDescription(), ddmContent.getXml(), serviceContext);
 	}
 
-	protected XPath parseCondition(Condition condition) {
-		return SAXReaderUtil.createXPath(
-			_DYNAMIC_ELEMENT_XPATH.concat(
-				StringPool.OPEN_BRACKET).concat(
-					_toXPath(condition)).concat(StringPool.CLOSE_BRACKET));
-	}
-
 	private Element _appendField(
-		Element rootElement, String fieldName, String value) {
+		Element rootElement, String fieldName, String fieldValue) {
 
-		Element dynamicElement = rootElement.addElement(_DYNAMIC_ELEMENT);
+		Element dynamicElementElement = rootElement.addElement(
+			"dynamic-element");
 
-		dynamicElement.addElement(_DYNAMIC_CONTENT);
+		dynamicElementElement.addElement("dynamic-content");
 
-		_updateField(dynamicElement, fieldName, value);
+		_updateField(dynamicElementElement, fieldName, fieldValue);
 
-		return dynamicElement;
+		return dynamicElementElement;
 	}
 
 	private List<Fields> _doQuery(
@@ -249,16 +241,18 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			long structureId, long[] classPKs, List<String> fieldNames)
 		throws Exception {
 
-		Map<Long, Fields> restuls = new HashMap<Long, Fields>();
+		Map<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
 
-		List<Fields> fields = _doQuery(
+		List<Fields> fieldsList = _doQuery(
 			structureId, classPKs, fieldNames, null, null);
 
-		for (int i = 0; i < fields.size(); i++) {
-			restuls.put(classPKs[i], fields.get(i));
+		for (int i = 0; i < fieldsList.size(); i++) {
+			Fields fields = fieldsList.get(i);
+
+			fieldsMap.put(classPKs[i], fields);
 		}
 
-		return restuls;
+		return fieldsMap;
 	}
 
 	private List<Fields> _doQuery(
@@ -266,55 +260,59 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			Condition condition, OrderByComparator orderByComparator)
 		throws Exception {
 
-		XPath xPathCondition = null;
-		List<Fields> results = new ArrayList<Fields>();
+		List<Fields> fieldsList = new ArrayList<Fields>();
+
+		XPath conditionXPath = null;
 
 		if (condition != null) {
-			xPathCondition = parseCondition(condition);
+			conditionXPath = _parseCondition(condition);
 		}
 
-		DDMContent content = null;
-		Document document = null;
-
 		for (long classPK : classPKs) {
-			content = DDMContentLocalServiceUtil.getContent(classPK);
+			DDMContent ddmContent = DDMContentLocalServiceUtil.getContent(
+				classPK);
 
-			document = SAXReaderUtil.read(content.getXml());
+			Document document = SAXReaderUtil.read(ddmContent.getXml());
 
-			if ((xPathCondition == null) ||
-				((xPathCondition != null) &&
-				  xPathCondition.booleanValueOf(document))) {
+			if ((conditionXPath == null) ||
+				((conditionXPath != null) &&
+				  conditionXPath.booleanValueOf(document))) {
 
 				Fields fields = new Fields();
 
-				List<Element> dynamicElements =
-					document.getRootElement().elements(_DYNAMIC_ELEMENT);
+				Element rootElement = document.getRootElement();
 
-				for (Element dynamicElement : dynamicElements) {
-					String name = dynamicElement.attributeValue(_NAME);
-					String value = dynamicElement.elementText(_DYNAMIC_CONTENT);
+				List<Element> dynamicElementElements = rootElement.elements(
+					"dynamic-element");
 
-					if (((fieldNames == null) ||
-						(fieldNames != null) && fieldNames.contains(name))) {
+				for (Element dynamicElementElement : dynamicElementElements) {
+					String fieldName = dynamicElementElement.attributeValue(
+						"name");
+					String fieldValue = dynamicElementElement.elementText(
+						"dynamic-content");
 
-						fields.put(new Field(name, value));
+					if ((fieldNames == null) ||
+						((fieldNames != null) &&
+						 fieldNames.contains(fieldName))) {
+
+						fields.put(new Field(fieldName, fieldValue));
 					}
 				}
 
-				results.add(fields);
+				fieldsList.add(fields);
 			}
 		}
 
 		if (orderByComparator != null) {
-			Collections.sort(results, orderByComparator);
+			Collections.sort(fieldsList, orderByComparator);
 		}
 
-		return results;
+		return fieldsList;
 	}
 
 	private Element _getElementByName(Document document, String name) {
 		XPath xPathSelector = SAXReaderUtil.createXPath(
-			"//dynamic-element[@name='" + name + "']");
+			"//dynamic-element[@name='".concat(name).concat("']"));
 
 		List<Node> nodes = xPathSelector.selectNodes(document);
 
@@ -331,15 +329,26 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 
 		List<Long> classPKs = new ArrayList<Long>();
 
-		List<DDMStorageLink> storageLinks =
+		List<DDMStorageLink> ddmStorageLinks =
 			DDMStorageLinkLocalServiceUtil.getStructureStorageLinks(
 				structureId);
 
-		for (DDMStorageLink storageLink : storageLinks) {
-			classPKs.add(storageLink.getClassPK());
+		for (DDMStorageLink ddmStorageLink : ddmStorageLinks) {
+			classPKs.add(ddmStorageLink.getClassPK());
 		}
 
 		return ArrayUtil.toArray(classPKs.toArray(new Long[classPKs.size()]));
+	}
+
+	private XPath _parseCondition(Condition condition) {
+		StringBundler sb = new StringBundler(4);
+
+		sb.append("//dynamic-element");
+		sb.append(StringPool.OPEN_BRACKET);
+		sb.append(_toXPath(condition));
+		sb.append(StringPool.CLOSE_BRACKET);
+
+		return SAXReaderUtil.createXPath(sb.toString());
 	}
 
 	private String _toXPath(Condition condition) {
@@ -358,33 +367,33 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	}
 
 	private String _toXPath(FieldCondition fieldCondition) {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(6);
 
-		ComparisonOperator comparisonOperator =
-			fieldCondition.getComparisonOperator();
+		sb.append("(@name=");
 
 		String name = StringUtil.quote(
 			String.valueOf(fieldCondition.getName()));
 
+		sb.append(name);
+
+		ComparisonOperator comparisonOperator =
+			fieldCondition.getComparisonOperator();
+
+		if (comparisonOperator.equals(ComparisonOperator.LIKE)) {
+			sb.append(" and matches(dynamic-content, ");
+		}
+		else {
+			sb.append(" and dynamic-content= ");
+		}
+
 		String value = StringUtil.quote(
 			String.valueOf(fieldCondition.getValue()));
 
-		sb.append(StringPool.OPEN_PARENTHESIS);
-
-		String xpathConnector = _CONNECTOR;
-		String xpathPrefix = _PREFIX_NAME;
-		String xpathSuffix = StringPool.BLANK;
-
-		if (comparisonOperator == ComparisonOperator.LIKE) {
-			xpathConnector = _CONNECTOR_LIKE;
-			xpathSuffix = StringPool.CLOSE_PARENTHESIS;
-		}
-
-		sb.append(xpathPrefix);
-		sb.append(name);
-		sb.append(xpathConnector);
 		sb.append(value);
-		sb.append(xpathSuffix);
+
+		if (comparisonOperator.equals(ComparisonOperator.LIKE)) {
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+		}
 
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
@@ -394,7 +403,9 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	private String _toXPath(Junction junction) {
 		StringBundler sb = new StringBundler();
 
-		String logicalOperator = junction.getLogicalOperator().toString();
+		LogicalOperator logicalOperator = junction.getLogicalOperator();
+
+		String logicalOperatorString = logicalOperator.toString();
 
 		Iterator<Condition> itr = junction.iterator();
 
@@ -405,7 +416,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 
 			if (itr.hasNext()) {
 				sb.append(StringPool.SPACE);
-				sb.append(logicalOperator.toLowerCase());
+				sb.append(logicalOperatorString.toLowerCase());
 				sb.append(StringPool.SPACE);
 			}
 		}
@@ -414,31 +425,16 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	}
 
 	private void _updateField(
-		Element dynamicElement, String fieldName, String value) {
+		Element dynamicElementElement, String fieldName, String value) {
 
-		Element dynamicContent = dynamicElement.element(_DYNAMIC_CONTENT);
+		Element dynamicContentElement = dynamicElementElement.element(
+			"dynamic-content");
 
-		dynamicElement.addAttribute(_NAME, fieldName);
+		dynamicElementElement.addAttribute("name", fieldName);
 
-		dynamicContent.clearContent();
+		dynamicContentElement.clearContent();
 
-		dynamicContent.addCDATA(value);
+		dynamicContentElement.addCDATA(value);
 	}
-
-	private final String _CONNECTOR = " and dynamic-content= ";
-
-	private final String _CONNECTOR_LIKE = " and matches(dynamic-content, ";
-
-	private final String _DYNAMIC_CONTENT = "dynamic-content";
-
-	private final String _DYNAMIC_ELEMENT = "dynamic-element";
-
-	private final String _DYNAMIC_ELEMENT_XPATH = "//dynamic-element";
-
-	private final String _NAME = "name";
-
-	private final String _PREFIX_NAME = "@name=";
-
-	private final String _ROOT = "root";
 
 }
