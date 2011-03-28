@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.RepositoryModel;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -536,6 +537,14 @@ public class JSONServiceAction extends JSONAction {
 
 	protected String getReturnValue(Object returnObj, Class<?> returnType)
 		throws Exception {
+
+		if (returnObj instanceof RepositoryModel) {
+			RepositoryModel repositoryModel = (RepositoryModel) returnObj;
+
+			returnObj = repositoryModel.getModel();
+
+			returnType = repositoryModel.getModelClass();
+		}
 
 		if ((returnObj instanceof Boolean) || (returnObj instanceof Double) ||
 			(returnObj instanceof Integer) || (returnObj instanceof Long) ||
