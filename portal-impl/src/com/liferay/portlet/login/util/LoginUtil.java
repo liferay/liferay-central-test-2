@@ -428,7 +428,7 @@ public class LoginUtil {
 
 		Company company = themeDisplay.getCompany();
 
-		if (!company.isSendPassword()) {
+		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
 			return;
 		}
 
