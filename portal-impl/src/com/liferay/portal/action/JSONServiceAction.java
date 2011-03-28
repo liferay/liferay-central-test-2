@@ -43,6 +43,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -557,10 +558,10 @@ public class JSONServiceAction extends JSONAction {
 			return jsonObject.toString();
 		}
 		else if (returnObj instanceof BaseModel<?>) {
-			String serlializerClassName = getSerializerClassName(returnObj);
+			String serializerClassName = getSerializerClassName(returnObj);
 
 			MethodKey methodKey = new MethodKey(
-				serlializerClassName, "toJSONObject", returnType);
+				serializerClassName, "toJSONObject", returnType);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, returnObj);
@@ -623,11 +624,27 @@ public class JSONServiceAction extends JSONAction {
 			if (!returnList.isEmpty()) {
 				Object returnItem0 = returnList.get(0);
 
-				String serlializerClassName = getSerializerClassName(
+				if (returnItem0 instanceof RepositoryModel) {
+					RepositoryModel repositoryModel =
+						(RepositoryModel) returnItem0;
+
+					returnItem0 = repositoryModel.getModel();
+
+					List<Object> newReturnList =
+						new ArrayList<Object>(returnList.size());
+
+					for (Object o : returnList) {
+						newReturnList.add(((RepositoryModel)o).getModel());
+					}
+
+					returnObj = returnList = newReturnList;
+				}
+
+				String serializerClassName = getSerializerClassName(
 					returnItem0);
 
 				MethodKey methodKey = new MethodKey(
-					serlializerClassName, "toJSONArray", returnType);
+					serializerClassName, "toJSONArray", returnType);
 
 				MethodHandler methodHandler = new MethodHandler(
 					methodKey, returnObj);
