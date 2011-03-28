@@ -162,11 +162,11 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	}
 
 	public Class<?> getModelClass() {
-		return LiferayFileEntry.class;
+		return DLFileEntry.class;
 	}
 
 	public String getModelClassName() {
-		return LiferayFileEntry.class.getName();
+		return DLFileEntry.class.getName();
 	}
 
 	public Date getModifiedDate() {
