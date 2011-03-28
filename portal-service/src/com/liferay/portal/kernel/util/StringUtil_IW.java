@@ -191,6 +191,18 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
+	public java.lang.String quote(java.lang.String s) {
+		return StringUtil.quote(s);
+	}
+
+	public java.lang.String quote(java.lang.String s, char quote) {
+		return StringUtil.quote(s, quote);
+	}
+
+	public java.lang.String quote(java.lang.String s, java.lang.String quote) {
+		return StringUtil.quote(s, quote);
+	}
+
 	public java.lang.String randomize(java.lang.String s) {
 		return StringUtil.randomize(s);
 	}
