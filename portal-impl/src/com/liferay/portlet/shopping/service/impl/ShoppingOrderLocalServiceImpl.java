@@ -818,7 +818,7 @@ public class ShoppingOrderLocalServiceImpl
 			else if (!CreditCard.isValid(ccNumber, ccType)) {
 				throw new CCNumberException();
 			}
-			else if (!CreditCard.isValidExpDate(ccExpMonth, ccExpYear)){
+			else if (!CreditCard.isValidExpDate(ccExpMonth, ccExpYear)) {
 				throw new CCExpirationException();
 			}
 		}
