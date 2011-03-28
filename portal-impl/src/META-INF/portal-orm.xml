@@ -2855,6 +2855,30 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatalist.model.impl.DDLEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<basic name="structureId" />
+			<transient name="nameMap" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
 		<table name="Counter" />
 		<attributes />
@@ -3562,6 +3586,10 @@
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" name="WikiPageResource">
 		<table name="WikiPageResource" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.dynamicdatalist.model.impl.DDLEntryImpl" name="DDLEntry">
+		<table name="DDLEntry" />
 		<attributes />
 	</entity>
 </entity-mappings>

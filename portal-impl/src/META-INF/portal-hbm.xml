@@ -152,6 +152,7 @@
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
+	<import class="com.liferay.portlet.dynamicdatalist.model.DDLEntry" />
 	<class name="com.liferay.counter.model.impl.CounterImpl" table="Counter">
 		<id name="name" type="java.lang.String">
 			<generator class="assigned" />
@@ -2316,5 +2317,21 @@
 		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="nodeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.dynamicdatalist.model.impl.DDLEntryImpl" table="DDLEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

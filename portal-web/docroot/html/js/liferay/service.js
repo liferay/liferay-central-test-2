@@ -1084,3 +1084,5 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
+
+Liferay.Service.register("Liferay.Service.DDL", "com.liferay.portlet.dynamicdatalist.service");
