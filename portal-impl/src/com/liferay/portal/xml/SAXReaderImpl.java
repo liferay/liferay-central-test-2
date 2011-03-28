@@ -291,8 +291,8 @@ public class SAXReaderImpl implements SAXReader {
 		return new TextImpl(DocumentHelper.createText(text));
 	}
 
-	public XPath createXPath(String xpathExpression) {
-		return new XPathImpl(DocumentHelper.createXPath(xpathExpression));
+	public XPath createXPath(String xPathExpression) {
+		return new XPathImpl(DocumentHelper.createXPath(xPathExpression));
 	}
 
 	public List<Node> selectNodes(

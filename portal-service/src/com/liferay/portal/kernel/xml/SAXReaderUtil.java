@@ -97,8 +97,8 @@ public class SAXReaderUtil {
 		return getSAXReader().createText(text);
 	}
 
-	public static XPath createXPath(String xpathExpression) {
-		return getSAXReader().createXPath(xpathExpression);
+	public static XPath createXPath(String xPathExpression) {
+		return getSAXReader().createXPath(xPathExpression);
 	}
 
 	public static SAXReader getSAXReader() {
