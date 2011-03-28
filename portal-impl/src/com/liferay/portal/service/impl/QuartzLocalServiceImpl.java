@@ -329,6 +329,7 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 			super(inputStream);
 		}
 
+		@SuppressWarnings("deprecation")
 		protected ObjectStreamClass readClassDescriptor()
 			throws ClassNotFoundException, IOException {
 
