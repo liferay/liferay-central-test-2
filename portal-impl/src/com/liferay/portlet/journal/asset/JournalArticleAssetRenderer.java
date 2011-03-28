@@ -14,23 +14,22 @@
 
 package com.liferay.portlet.journal.asset;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
-import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
-import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 import java.util.Locale;
 
@@ -131,25 +130,19 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		String languageId = LanguageUtil.getLanguageId(liferayPortletRequest);
+		long groupId = _article.getGroupId();
+		Group group;
 
-		JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(
-			_article.getGroupId(), _article.getArticleId(), null, null,
-			languageId, themeDisplay);
-
-		if (articleDisplay == null) {
-			return StringPool.BLANK;
+		if (themeDisplay.getScopeGroup().getGroupId() == groupId) {
+			group = themeDisplay.getScopeGroup();
+		}
+		else {
+			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 
-		PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-		portletURL.setParameter(
-			"struts_action", "/asset_publisher/view_content");
-		portletURL.setParameter("urlTitle", _article.getUrlTitle());
-		portletURL.setParameter(
-			"type", JournalArticleAssetRendererFactory.TYPE);
-
-		return portletURL.toString();
+		return PortalUtil.getGroupFriendlyURL(group, false, themeDisplay) +
+			JournalArticleConstants.CANONICAL_URL_SEPARATOR +
+			_article.getUrlTitle();
 	}
 
 	public long getUserId() {
