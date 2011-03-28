@@ -35,38 +35,22 @@ import org.jaxen.function.StringFunction;
  */
 public class MatchesFunction implements Function {
 
-	public Object call(Context context, List args)
-		throws FunctionCallException {
+	public static Boolean evaluate(
+		Object stringArgument, Object regexArgument, Navigator navigator) {
 
-		if (args.size() == 2) {
-			return evaluate(
-				args.get(0), args.get(1), context.getNavigator());
-		}
-		else if ((args.size() == 3) && (args.get(2) != null)) {
-			return evaluate(
-				args.get(0), args.get(1), args.get(2),
-				context.getNavigator());
-		}
+		String string = StringFunction.evaluate(stringArgument, navigator);
+		String regex = StringFunction.evaluate(regexArgument, navigator);
 
-		throw new FunctionCallException(
-			"matches() requires two or three arguments.");
+		return evaluate(string, regex, 0, navigator);
 	}
 
 	public static Boolean evaluate(
-		Object strArg, Object regexArg, Navigator nav) {
+		Object stringArg, Object regexArgument, Object flagsArgument,
+		Navigator navigator) {
 
-		String str = StringFunction.evaluate(strArg, nav);
-		String regex = StringFunction.evaluate(regexArg, nav);
-
-		return evaluate(str, regex, 0, nav);
-	}
-
-	public static Boolean evaluate(
-		Object strArg, Object regexArg, Object flagsArg, Navigator nav) {
-
-		String str = StringFunction.evaluate(strArg, nav);
-		String regex = StringFunction.evaluate(regexArg, nav);
-		String flagsString = StringFunction.evaluate(flagsArg, nav);
+		String string = StringFunction.evaluate(stringArg, navigator);
+		String regex = StringFunction.evaluate(regexArgument, navigator);
+		String flagsString = StringFunction.evaluate(flagsArgument, navigator);
 
 		int flags = 0;
 
@@ -85,17 +69,18 @@ public class MatchesFunction implements Function {
 			}
 		}
 
-		return evaluate(str, regex, flags, nav);
+		return evaluate(string, regex, flags, navigator);
 	}
 
 	public static Boolean evaluate(
-		String str, String regex, int flags, Navigator nav) {
+		String string, String regex, int flags, Navigator navigator) {
 
 		ThreadLocalCache<Map<String,Pattern>> threadLocalPatterns =
 			ThreadLocalCacheManager.getThreadLocalCache(
 				Lifecycle.ETERNAL, MatchesFunction.class.getName());
 
-		Map<String,Pattern> patterns = threadLocalPatterns.get(CACHE_KEY);
+		Map<String,Pattern> patterns = threadLocalPatterns.get(
+			_THREAD_LOCAL_PATTERNS_KEY);
 
 		if (patterns == null) {
 			patterns = new HashMap<String,Pattern>();
@@ -104,7 +89,7 @@ public class MatchesFunction implements Function {
 		Pattern pattern = patterns.get(regex);
 
 		if (pattern != null) {
-			Matcher matcher = pattern.matcher(str);
+			Matcher matcher = pattern.matcher(string);
 
 			return matcher.find();
 		}
@@ -113,13 +98,31 @@ public class MatchesFunction implements Function {
 
 		patterns.put(regex, pattern);
 
-		threadLocalPatterns.put(CACHE_KEY, patterns);
+		threadLocalPatterns.put(_THREAD_LOCAL_PATTERNS_KEY, patterns);
 
-		Matcher matcher = pattern.matcher(str);
+		Matcher matcher = pattern.matcher(string);
 
 		return matcher.find();
 	}
 
-	private static final String CACHE_KEY = "matches";
+	@SuppressWarnings("rawtypes")
+	public Object call(Context context, List arguments)
+		throws FunctionCallException {
+
+		if (arguments.size() == 2) {
+			return evaluate(
+				arguments.get(0), arguments.get(1), context.getNavigator());
+		}
+		else if ((arguments.size() == 3) && (arguments.get(2) != null)) {
+			return evaluate(
+				arguments.get(0), arguments.get(1), arguments.get(2),
+				context.getNavigator());
+		}
+
+		throw new FunctionCallException(
+			"matches() requires two or three arguments");
+	}
+
+	private static final String _THREAD_LOCAL_PATTERNS_KEY = "matches";
 
 }
