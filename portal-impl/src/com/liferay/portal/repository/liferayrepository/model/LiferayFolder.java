@@ -89,11 +89,11 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public Class<?> getModelClass() {
-		return LiferayFolder.class;
+		return DLFolder.class;
 	}
 
 	public String getModelClassName() {
-		return LiferayFolder.class.getName();
+		return DLFolder.class.getName();
 	}
 
 	public Date getModifiedDate() {
