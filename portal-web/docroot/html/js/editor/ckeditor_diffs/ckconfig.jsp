@@ -65,7 +65,7 @@ CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
 
 CKEDITOR.config.toolbar_editInPlace = [
 	['Styles'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Bold', 'Italic', 'Underline', 'Strike'],
 	['Subscript', 'Superscript', 'SpecialChar'],
 	['Undo', 'Redo'],
 	['SpellChecker', 'Scayt'],
@@ -73,7 +73,7 @@ CKEDITOR.config.toolbar_editInPlace = [
 ];
 
 CKEDITOR.config.toolbar_email = [
-	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'Strike'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
 	['SpellChecker', 'Scayt'],
 	'/',
@@ -85,7 +85,7 @@ CKEDITOR.config.toolbar_email = [
 
 CKEDITOR.config.toolbar_liferay = [
 	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Bold', 'Italic', 'Underline', 'Strike'],
 	['Subscript', 'Superscript'],
 	'/',
 	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
@@ -100,7 +100,7 @@ CKEDITOR.config.toolbar_liferay = [
 
 CKEDITOR.config.toolbar_liferayArticle = [
 	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Bold', 'Italic', 'Underline', 'Strike'],
 	['Subscript', 'Superscript'],
 	'/',
 	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
