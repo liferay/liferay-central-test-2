@@ -71,6 +71,8 @@ public class FindEntryAction extends Action {
 				plid = getPlid(plid, portletId, entryId);
 			}
 
+			String urlTitle = getUrlTitle(entryId);
+
 			PortletURL portletURL = new PortletURLImpl(
 				request, portletId, plid, PortletRequest.RENDER_PHASE);
 
@@ -86,7 +88,12 @@ public class FindEntryAction extends Action {
 			portletURL.setParameter("struts_action", strutsAction);
 
 			if (!showAllEntries) {
-				portletURL.setParameter("entryId", String.valueOf(entryId));
+				if (Validator.isNotNull(urlTitle)) {
+					portletURL.setParameter("urlTitle", urlTitle);
+				}
+				else {
+					portletURL.setParameter("entryId", String.valueOf(entryId));
+				}
 			}
 
 			response.sendRedirect(portletURL.toString());
@@ -159,6 +166,23 @@ public class FindEntryAction extends Action {
 		}
 
 		return strutsAction;
+	}
+
+	protected String getUrlTitle(long entryId) {
+		String urlTitle = StringPool.BLANK;
+
+		try {
+			BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+
+			urlTitle = entry.getUrlTitle();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		return urlTitle;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FindEntryAction.class);
