@@ -101,6 +101,8 @@ public class MailingListRequest implements Serializable {
 		_userId = id;
 	}
 
+	private static final long serialVersionUID = 8983934222717334170L;
+
 	private long _categoryId;
 	private long _companyId;
 	private long _groupId;

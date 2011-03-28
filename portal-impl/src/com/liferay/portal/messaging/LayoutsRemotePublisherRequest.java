@@ -159,6 +159,8 @@ public class LayoutsRemotePublisherRequest
 		_scheduledFireTime = scheduledFireTime;
 	}
 
+	private static final long serialVersionUID = -8270092763766057207L;
+
 	private String _cronText;
 	private long _userId;
 	private long _sourceGroupId;

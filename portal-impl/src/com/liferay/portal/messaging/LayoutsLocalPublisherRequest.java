@@ -135,6 +135,8 @@ public class LayoutsLocalPublisherRequest implements Serializable {
 		_scheduledFireTime = scheduledFireTime;
 	}
 
+	private static final long serialVersionUID = 5924338343434811142L;
+
 	private String _command;
 	private String _cronText;
 	private long _userId;

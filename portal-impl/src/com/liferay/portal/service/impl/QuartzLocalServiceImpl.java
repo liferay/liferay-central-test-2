@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
+import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
 import com.liferay.portal.service.base.QuartzLocalServiceBaseImpl;
 
 import java.io.IOException;
@@ -336,6 +338,20 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
 			if (name.equals(Message.class.getName())) {
 				return ObjectStreamClass.lookup(Message.class);
+			}
+			else if (name.equals(
+						com.liferay.portlet.communities.messaging.
+							LayoutsLocalPublisherRequest.class.getName())) {
+
+				return ObjectStreamClass.lookup(
+					LayoutsLocalPublisherRequest.class);
+			}
+			else if (name.equals(
+						com.liferay.portlet.communities.messaging.
+							LayoutsRemotePublisherRequest.class.getName())) {
+
+				return ObjectStreamClass.lookup(
+					LayoutsRemotePublisherRequest.class);
 			}
 			else {
 				return objectStreamClass;
