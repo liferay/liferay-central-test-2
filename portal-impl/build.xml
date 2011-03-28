@@ -370,6 +370,12 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</antcall>
 	</target>
 
+	<target name="build-service-portlet-dynamicdatalist">
+		<antcall target="build-service">
+			<param name="service.file" value="${basedir}/src/com/liferay/portlet/dynamicdatalist/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portlet-dynamicdatamapping">
 		<antcall target="build-service">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/dynamicdatamapping/service.xml" />
