@@ -182,10 +182,10 @@ public class StorageEngineImpl implements StorageEngine {
 		throws StorageException {
 
 		try {
-			DDMStorageLink storageLink =
+			DDMStorageLink ddmStorageLink =
 				DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
 
-			return getStorageAdapter(storageLink.getStorageType());
+			return getStorageAdapter(ddmStorageLink.getStorageType());
 		}
 		catch (StorageException se) {
 			throw se;
@@ -209,10 +209,10 @@ public class StorageEngineImpl implements StorageEngine {
 		throws StorageException {
 
 		try {
-			DDMStructure structure =
+			DDMStructure ddmStructure =
 				DDMStructureLocalServiceUtil.getDDMStructure(structureId);
 
-			return getStorageAdapter(structure.getStorageType());
+			return getStorageAdapter(ddmStructure.getStorageType());
 		}
 		catch (StorageException se) {
 			throw se;

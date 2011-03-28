@@ -87,11 +87,12 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws StorageException {
 
 		try {
-			DDMStorageLink storageLink =
+			DDMStorageLink ddmStorageLink =
 				DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
 
 			Map<Long, Fields> fieldsMapByClasses = getFieldsMap(
-				storageLink.getStructureId(), new long[] {classPK}, fieldNames);
+				ddmStorageLink.getStructureId(),
+				new long[] {classPK}, fieldNames);
 
 			return fieldsMapByClasses.get(classPK);
 		}
@@ -268,24 +269,24 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	protected void validateClassFields(long classPK, Fields fields)
 		throws PortalException, SystemException {
 
-		DDMStorageLink storageLink =
+		DDMStorageLink ddmStorageLink =
 			DDMStorageLinkLocalServiceUtil.getClassStorageLink(classPK);
 
-		validateStructureFields(storageLink.getStructureId(), fields);
+		validateStructureFields(ddmStorageLink.getStructureId(), fields);
 	}
 
 	protected void validateStructureFields(long structureId, Fields fields)
 		throws PortalException, SystemException {
 
-		DDMStructure structure = DDMStructureLocalServiceUtil.getDDMStructure(
-			structureId);
+		DDMStructure ddmStructure =
+			DDMStructureLocalServiceUtil.getDDMStructure(structureId);
 
 		Iterator<Field> itr = fields.iterator();
 
 		while (itr.hasNext()) {
 			Field field = itr.next();
 
-			if (!structure.hasField(field.getName())) {
+			if (!ddmStructure.hasField(field.getName())) {
 				throw new StorageFieldNameException();
 			}
 		}
