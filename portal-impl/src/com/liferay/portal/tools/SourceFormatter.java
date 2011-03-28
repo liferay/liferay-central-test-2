@@ -795,6 +795,13 @@ public class SourceFormatter {
 					"\n\n");
 			}
 
+			if (newContent.indexOf("){\n") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"){\n",
+					") {\n");
+			}
+
 			if (newContent.indexOf("*/\npackage ") != -1) {
 				_sourceFormatterHelper.printError(
 					fileName, "package: " + fileName);
