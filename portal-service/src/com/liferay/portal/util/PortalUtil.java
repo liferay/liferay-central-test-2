@@ -71,6 +71,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
+ * @author Juan Fernández
  */
 public class PortalUtil {
 
@@ -172,6 +173,17 @@ public class PortalUtil {
 		HttpServletRequest request, String input) {
 
 		return getPortal().generateRandomKey(request, input);
+	}
+
+	public static String getActualURL(
+			long groupId, boolean privateLayout, String mainPath,
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
+		throws PortalException, SystemException {
+
+		return getPortal().getActualURL(
+			groupId, privateLayout, mainPath, friendlyURL, params,
+			requestContext);
 	}
 
 	public static Set<String> getAuthTokenIgnoreActions() {
@@ -461,6 +473,15 @@ public class PortalUtil {
 		PortletResponse portletResponse) {
 
 		return getPortal().getHttpServletResponse(portletResponse);
+	}
+
+	public static String getJournalArticleActualURL(
+			long groupId, String mainPath, String friendlyURL,
+			Map<String, String[]> params, Map<String, Object> requestContext)
+		throws PortalException, SystemException {
+
+		return getPortal().getJournalArticleActualURL(
+			groupId, mainPath, friendlyURL, params, requestContext);
 	}
 
 	public static String getJsSafePortletId(String portletId) {

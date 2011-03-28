@@ -617,27 +617,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 						</aui:select>
 
-						<aui:select helpMessage="default-display-page-help" label="default-display-page" name="layoutUuid" showEmptyOption="<%= true %>">
-
-							<%
-							List<Layout> groupPublicLayouts = LayoutLocalServiceUtil.getLayouts(scopeGroupId, false);
-							List<Layout> groupPrivateLayouts = LayoutLocalServiceUtil.getLayouts(scopeGroupId, true);
-
-							List<Layout> groupLayouts = new ArrayList<Layout>(groupPublicLayouts);
-
-							groupLayouts.addAll(groupPrivateLayouts);
-
-							for (Layout groupLayout : groupLayouts) {
-							%>
-
-								<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) %>" value="<%= groupLayout.getUuid() %>" />
-
-							<%
-							}
-							%>
-
-						</aui:select>
-
 						<%
 						long classPK = 0;
 
@@ -662,6 +641,75 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</aui:fieldset>
 				</liferay-ui:panel>
 			</c:if>
+
+			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalDisplayPagePanel" persistState="<%= true %>" title="display-page">
+
+				<%
+				List<Layout> privateGroupLayouts = new ArrayList<Layout>();
+				List<Layout> publicGroupLayouts = new ArrayList<Layout>();
+
+				privateGroupLayouts.addAll(JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, true));
+				publicGroupLayouts.addAll(JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, false));
+
+				if ((privateGroupLayouts.size() == 0) && (publicGroupLayouts.size() == 0)) {
+				%>
+
+					<liferay-ui:message key="there-are-no-pages-set-up-to-be-the-display-page" />
+
+				<%
+				}
+				else {
+				%>
+
+					<aui:select helpMessage="default-display-page-help" label="default-display-page" name="layoutUuid" showEmptyOption="<%= true %>">
+
+					<%
+					if (publicGroupLayouts.size() > 0) {
+					%>
+
+						<optgroup label="<liferay-ui:message key="public-pages" />">
+
+					<%
+						for (Layout groupLayout : publicGroupLayouts) {
+					%>
+
+							<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) %>" value="<%= groupLayout.getUuid() %>" />
+
+					<%
+						}
+					%>
+
+						</optgroup>
+
+					<%
+					}
+
+					if (privateGroupLayouts.size() > 0) {
+					%>
+						<optgroup label="<liferay-ui:message key="private-pages" />">
+
+					<%
+						for (Layout groupLayout : privateGroupLayouts) {
+					%>
+
+							<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) %>" value="<%= groupLayout.getUuid() %>" />
+
+					<%
+						}
+					%>
+
+						</optgroup>
+					<%
+					}
+					%>
+
+					</aui:select>
+
+				<%
+				}
+				%>
+
+			</liferay-ui:panel>
 
 			<br />
 

@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
@@ -42,6 +43,7 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -596,6 +598,31 @@ public class JournalUtil {
 			PropsKeys.JOURNAL_EMAIL_FROM_NAME);
 
 		return preferences.getValue("emailFromName", emailFromName);
+	}
+
+	public static List<Layout> getDefaultAssetPublisherLayouts(
+			long groupId, boolean privateLayout)
+		throws SystemException {
+
+		List<Layout> layouts = new ArrayList<Layout>();
+		List<Layout> groupLayouts =
+			LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
+
+		for(Layout layout: groupLayouts) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			String defaultAssetPublisherPortletId =
+				typeSettingsProperties.getProperty(
+					LayoutTypePortletConstants.
+						DEFAULT_ASSET_PUBLISHER_PORTLET_ID, StringPool.BLANK);
+
+			if (Validator.isNotNull(defaultAssetPublisherPortletId)){
+				layouts.add(layout);
+			}
+		}
+
+		return layouts;
 	}
 
 	public static Stack<JournalArticle> getRecentArticles(
