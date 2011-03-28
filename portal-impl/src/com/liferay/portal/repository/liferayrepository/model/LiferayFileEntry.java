@@ -161,12 +161,24 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry;
 	}
 
+	public Class<?> getModelClass() {
+		return LiferayFileEntry.class;
+	}
+
+	public String getModelClassName() {
+		return LiferayFileEntry.class.getName();
+	}
+
 	public Date getModifiedDate() {
 		return _dlFileEntry.getModifiedDate();
 	}
 
 	public long getPrimaryKey() {
 		return _dlFileEntry.getPrimaryKey();
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return getPrimaryKey();
 	}
 
 	public int getReadCount() {

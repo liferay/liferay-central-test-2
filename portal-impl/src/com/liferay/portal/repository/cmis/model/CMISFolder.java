@@ -111,6 +111,14 @@ public class CMISFolder extends CMISModel implements Folder {
 		return _cmisFolder;
 	}
 
+	public Class<?> getModelClass() {
+		return CMISFolder.class;
+	}
+
+	public String getModelClassName() {
+		return CMISFolder.class.getName();
+	}
+
 	public Date getModifiedDate() {
 		Calendar calendar = _cmisFolder.getLastModificationDate();
 
@@ -193,6 +201,10 @@ public class CMISFolder extends CMISModel implements Folder {
 
 	public long getPrimaryKey() {
 		return _folderId;
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return getPrimaryKey();
 	}
 
 	public long getRepositoryId() {

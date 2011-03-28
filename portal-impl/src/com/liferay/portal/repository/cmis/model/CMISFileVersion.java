@@ -110,8 +110,20 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return _document;
 	}
 
+	public Class<?> getModelClass() {
+		return CMISFileVersion.class;
+	}
+
+	public String getModelClassName() {
+		return CMISFileVersion.class.getName();
+	}
+
 	public long getPrimaryKey() {
 		return _fileVersionId;
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return getPrimaryKey();
 	}
 
 	public long getRepositoryId() {

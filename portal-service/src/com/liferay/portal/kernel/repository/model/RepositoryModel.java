@@ -18,11 +18,12 @@ import java.io.Serializable;
 import java.util.Map;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.ClassedModel;
 
 /**
  * @author Alexander Chow
  */
-public interface RepositoryModel<T> {
+public interface RepositoryModel<T> extends ClassedModel {
 
 	public Map<String, Serializable> getAttributes();
 

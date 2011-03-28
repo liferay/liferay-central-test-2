@@ -88,6 +88,14 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder;
 	}
 
+	public Class<?> getModelClass() {
+		return LiferayFolder.class;
+	}
+
+	public String getModelClassName() {
+		return LiferayFolder.class.getName();
+	}
+
 	public Date getModifiedDate() {
 		return _dlFolder.getCreateDate();
 	}
@@ -113,6 +121,10 @@ public class LiferayFolder extends LiferayModel implements Folder {
 
 	public long getPrimaryKey() {
 		return _dlFolder.getPrimaryKey();
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return getPrimaryKey();
 	}
 
 	public long getRepositoryId() {

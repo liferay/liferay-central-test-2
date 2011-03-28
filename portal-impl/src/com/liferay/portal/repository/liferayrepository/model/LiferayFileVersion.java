@@ -100,8 +100,20 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return _dlFileVersion;
 	}
 
+	public Class<?> getModelClass() {
+		return LiferayFileVersion.class;
+	}
+
+	public String getModelClassName() {
+		return LiferayFileVersion.class.getName();
+	}
+
 	public long getPrimaryKey() {
 		return _dlFileVersion.getPrimaryKey();
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return getPrimaryKey();
 	}
 
 	public long getRepositoryId() {

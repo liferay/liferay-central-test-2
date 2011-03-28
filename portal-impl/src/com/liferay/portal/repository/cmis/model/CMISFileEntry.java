@@ -237,12 +237,24 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _document;
 	}
 
+	public Class<?> getModelClass() {
+		return CMISFileEntry.class;
+	}
+
+	public String getModelClassName() {
+		return CMISFileEntry.class.getName();
+	}
+
 	public Date getModifiedDate() {
 		return _document.getLastModificationDate().getTime();
 	}
 
 	public long getPrimaryKey() {
 		return _fileEntryId;
+	}
+
+	public Serializable getPrimaryKeyObj() {
+		return getPrimaryKey();
 	}
 
 	public int getReadCount() {
