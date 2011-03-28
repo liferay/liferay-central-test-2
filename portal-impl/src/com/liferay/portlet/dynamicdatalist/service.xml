@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.dynamicdatalist">
 	<namespace>DDL</namespace>
-	<entity name="DDLEntry" uuid="true" local-service="true" remote-service="false">
+	<entity name="DDLEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

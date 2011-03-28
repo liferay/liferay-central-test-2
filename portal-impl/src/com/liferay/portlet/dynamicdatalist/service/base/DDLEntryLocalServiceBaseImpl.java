@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatalist.model.DDLEntry;
 import com.liferay.portlet.dynamicdatalist.service.DDLEntryLocalService;
+import com.liferay.portlet.dynamicdatalist.service.DDLEntryService;
 import com.liferay.portlet.dynamicdatalist.service.persistence.DDLEntryPersistence;
 
 import java.util.List;
@@ -273,6 +274,24 @@ public abstract class DDLEntryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the d d l entry remote service.
+	 *
+	 * @return the d d l entry remote service
+	 */
+	public DDLEntryService getDDLEntryService() {
+		return ddlEntryService;
+	}
+
+	/**
+	 * Sets the d d l entry remote service.
+	 *
+	 * @param ddlEntryService the d d l entry remote service
+	 */
+	public void setDDLEntryService(DDLEntryService ddlEntryService) {
+		this.ddlEntryService = ddlEntryService;
+	}
+
+	/**
 	 * Gets the d d l entry persistence.
 	 *
 	 * @return the d d l entry persistence
@@ -492,6 +511,8 @@ public abstract class DDLEntryLocalServiceBaseImpl
 
 	@BeanReference(type = DDLEntryLocalService.class)
 	protected DDLEntryLocalService ddlEntryLocalService;
+	@BeanReference(type = DDLEntryService.class)
+	protected DDLEntryService ddlEntryService;
 	@BeanReference(type = DDLEntryPersistence.class)
 	protected DDLEntryPersistence ddlEntryPersistence;
 	@BeanReference(type = CounterLocalService.class)

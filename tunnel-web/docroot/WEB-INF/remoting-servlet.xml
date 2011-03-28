@@ -997,4 +997,16 @@
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService" />
 		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
 	</bean>
+	<bean name="/com_liferay_portlet_dynamicdatalist_service_spring_DDLEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_dynamicdatalist_service_spring_DDLEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_dynamicdatalist_service_spring_DDLEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" />
+	</bean>
 </beans>

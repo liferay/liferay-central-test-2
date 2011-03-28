@@ -396,7 +396,8 @@ public class DDLEntryWrapper implements DDLEntry {
 		return new DDLEntryWrapper((DDLEntry)_ddlEntry.clone());
 	}
 
-	public int compareTo(DDLEntry ddlEntry) {
+	public int compareTo(
+		com.liferay.portlet.dynamicdatalist.model.DDLEntry ddlEntry) {
 		return _ddlEntry.compareTo(ddlEntry);
 	}
 
@@ -404,7 +405,7 @@ public class DDLEntryWrapper implements DDLEntry {
 		return _ddlEntry.hashCode();
 	}
 
-	public DDLEntry toEscapedModel() {
+	public com.liferay.portlet.dynamicdatalist.model.DDLEntry toEscapedModel() {
 		return new DDLEntryWrapper(_ddlEntry.toEscapedModel());
 	}
 

@@ -30,6 +30,7 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.dynamicdatalist.model.DDLEntry;
 import com.liferay.portlet.dynamicdatalist.model.DDLEntryModel;
+import com.liferay.portlet.dynamicdatalist.model.DDLEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -39,7 +40,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -88,6 +91,46 @@ public class DDLEntryModelImpl extends BaseModelImpl<DDLEntry>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.dynamicdatalist.model.DDLEntry"),
 			true);
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static DDLEntry toModel(DDLEntrySoap soapModel) {
+		DDLEntry model = new DDLEntryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setEntryId(soapModel.getEntryId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setStructureId(soapModel.getStructureId());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<DDLEntry> toModels(DDLEntrySoap[] soapModels) {
+		List<DDLEntry> models = new ArrayList<DDLEntry>(soapModels.length);
+
+		for (DDLEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
 
 	public Class<?> getModelClass() {
 		return DDLEntry.class;
