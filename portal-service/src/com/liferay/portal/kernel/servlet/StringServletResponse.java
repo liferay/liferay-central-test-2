@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
@@ -42,15 +41,6 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 
 	public int getBufferSize() {
 		return _bufferSize;
-	}
-
-	public void flushBuffer() throws IOException {
-		if (_servletOutputStream != null) {
-			_unsyncByteArrayOutputStream.flush();
-		}
-		else if (_printWriter != null) {
-			_unsyncStringWriter.flush();
-		}
 	}
 
 	public ServletOutputStream getOutputStream() {

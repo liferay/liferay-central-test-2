@@ -94,6 +94,10 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.addIntHeader(name, value);
 	}
 
+	public void flushBuffer() {
+		_committed = true;
+	}
+
 	public String getContentType() {
 		return _contentType;
 	}
@@ -116,6 +120,10 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 	public int getStatus() {
 		return _status;
+	}
+
+	public boolean isCommitted() {
+		return _committed;
 	}
 
 	public void sendError(int status) throws IOException {
@@ -200,6 +208,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.setStatus(status);
 	}
 
+	private boolean _committed;
 	private String _contentType;
 	private Map<String, List<Header>> _headers =
 		new HashMap<String, List<Header>>();

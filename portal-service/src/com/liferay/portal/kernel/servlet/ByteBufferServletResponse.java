@@ -33,9 +33,6 @@ public class ByteBufferServletResponse extends HeaderCacheServletResponse {
 		super(response);
 	}
 
-	public void flushBuffer() {
-	}
-
 	public int getBufferSize() {
 		if (_byteBuffer != null) {
 			return _byteBuffer.remaining();
