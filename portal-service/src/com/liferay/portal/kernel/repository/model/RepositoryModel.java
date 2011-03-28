@@ -17,13 +17,13 @@ package com.liferay.portal.kernel.repository.model;
 import java.io.Serializable;
 import java.util.Map;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ClassedModel;
+import com.liferay.portal.model.GroupedModel;
 
 /**
  * @author Alexander Chow
  */
-public interface RepositoryModel<T> extends ClassedModel {
+public interface RepositoryModel<T> extends GroupedModel, ClassedModel {
 
 	public Map<String, Serializable> getAttributes();
 
@@ -32,8 +32,6 @@ public interface RepositoryModel<T> extends ClassedModel {
 	public long getPrimaryKey();
 
 	public boolean isEscapedModel();
-
-	public void prepare() throws SystemException;
 
 	public T toEscapedModel();
 

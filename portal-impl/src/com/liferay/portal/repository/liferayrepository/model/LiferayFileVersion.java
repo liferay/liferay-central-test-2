@@ -108,6 +108,10 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return LiferayFileVersion.class.getName();
 	}
 
+	public Date getModifiedDate() {
+		return getCreateDate();
+	}
+
 	public long getPrimaryKey() {
 		return _dlFileVersion.getPrimaryKey();
 	}
@@ -193,8 +197,8 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return _dlFileVersion.isPending();
 	}
 
-	public void prepare() throws SystemException {
-		_dlFileVersion.setUserUuid(getUserUuid());
+	public void setUserUuid(String userUuid) {
+		_dlFileVersion.setUserUuid(userUuid);
 	}
 
 	public FileVersion toEscapedModel() {

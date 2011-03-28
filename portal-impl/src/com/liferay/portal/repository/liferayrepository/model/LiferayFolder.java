@@ -201,8 +201,8 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return true;
 	}
 
-	public void prepare() throws SystemException {
-		_dlFolder.setUserUuid(getUserUuid());
+	public void setUserUuid(String userUuid) {
+		_dlFolder.setUserUuid(userUuid);
 	}
 
 	public Folder toEscapedModel() {

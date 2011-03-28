@@ -98,7 +98,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		fileEntryElement.addAttribute("path", path);
 
-		fileEntry.prepare();
+		fileEntry.setUserUuid(fileEntry.getUserUuid());
 
 		portletDataContext.addLocks(
 			FileEntry.class, String.valueOf(fileEntry.getFileEntryId()));
@@ -527,7 +527,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				folderElement.addAttribute("path", path);
 
-				folder.prepare();
+				folder.setUserUuid(folder.getUserUuid());
 
 				portletDataContext.addPermissions(
 					Folder.class, folder.getFolderId());
@@ -589,7 +589,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			folderElement.addAttribute("path", path);
 
-			folder.prepare();
+			folder.setUserUuid(folder.getUserUuid());
 
 			portletDataContext.addPermissions(
 				Folder.class, folder.getFolderId());

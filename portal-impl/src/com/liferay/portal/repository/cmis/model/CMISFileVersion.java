@@ -31,6 +31,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +64,9 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 	}
 
 	public Date getCreateDate() {
-		return _document.getCreationDate().getTime();
+		Calendar creationDate = _document.getCreationDate();
+
+		return creationDate.getTime();
 	}
 
 	public ExpandoBridge getExpandoBridge() {
@@ -116,6 +119,10 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 
 	public String getModelClassName() {
 		return CMISFileVersion.class.getName();
+	}
+
+	public Date getModifiedDate() {
+		return getCreateDate();
 	}
 
 	public long getPrimaryKey() {
@@ -211,7 +218,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return false;
 	}
 
-	public void prepare() {
+	public void setUserUuid(String userUuid) {
 	}
 
 	public FileVersion toEscapedModel() {
