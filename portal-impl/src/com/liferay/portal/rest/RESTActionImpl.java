@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.portal.service.ServiceContext;
 import jodd.util.ReflectUtil;
 
 /**
@@ -48,7 +49,30 @@ public class RESTActionImpl implements RESTAction {
 
 		Object[] parameters = _prepareParameters();
 
+		_injectServiceContext(parameters);
+
 		return actionMethod.invoke(actionClass, parameters);
+	}
+
+	private void _injectServiceContext(Object[] parameters) {
+		String[] parameterNames = _restActionConfig.getParameterNames();
+		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
+
+		for (int i = 0; i < parameterNames.length; i++) {
+
+			if (parameters[i] != null) {
+				continue;
+			}
+
+			String parameterName = parameterNames[i];
+			Class<?> parameterType = parameterTypes[i];
+
+			if (parameterName.equals("serviceContext") &&
+				parameterType.equals(ServiceContext.class)) {
+
+				parameters[i] = new ServiceContext();
+			}
+		}
 	}
 
 	private Object[] _prepareParameters() {
