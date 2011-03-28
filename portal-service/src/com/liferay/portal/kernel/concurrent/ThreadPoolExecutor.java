@@ -79,7 +79,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		_threadFactory = threadFactory;
 		_threadPoolHandler = threadPoolHandler;
 		_taskQueue = new TaskQueue<Runnable>(maxQueueSize);
-		_workerTasks = new HashSet<WorkerTask>(_maxPoolSize);
+		_workerTasks = new HashSet<WorkerTask>();
 	}
 
 	public void adjustPoolSize(int newCorePoolSize, int newMaxPoolSize) {
