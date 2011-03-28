@@ -182,8 +182,6 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SocialRelation newSocialRelation = addSocialRelation();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialRelation.class,
 				SocialRelation.class.getClassLoader());
 

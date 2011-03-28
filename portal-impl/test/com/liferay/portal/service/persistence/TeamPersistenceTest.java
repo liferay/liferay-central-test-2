@@ -181,8 +181,6 @@ public class TeamPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Team newTeam = addTeam();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Team.class,
 				Team.class.getClassLoader());
 

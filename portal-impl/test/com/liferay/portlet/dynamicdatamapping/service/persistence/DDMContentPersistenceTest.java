@@ -191,8 +191,6 @@ public class DDMContentPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DDMContent newDDMContent = addDDMContent();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DDMContent.class,
 				DDMContent.class.getClassLoader());
 

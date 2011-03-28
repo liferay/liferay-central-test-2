@@ -173,8 +173,6 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		VirtualHost newVirtualHost = addVirtualHost();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(VirtualHost.class,
 				VirtualHost.class.getClassLoader());
 

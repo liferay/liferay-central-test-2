@@ -185,8 +185,6 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Lock newLock = addLock();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Lock.class,
 				Lock.class.getClassLoader());
 

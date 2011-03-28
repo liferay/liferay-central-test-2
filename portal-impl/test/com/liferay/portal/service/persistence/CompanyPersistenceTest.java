@@ -178,8 +178,6 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Company newCompany = addCompany();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Company.class,
 				Company.class.getClassLoader());
 

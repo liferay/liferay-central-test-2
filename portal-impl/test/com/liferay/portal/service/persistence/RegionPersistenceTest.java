@@ -170,8 +170,6 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Region newRegion = addRegion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Region.class,
 				Region.class.getClassLoader());
 

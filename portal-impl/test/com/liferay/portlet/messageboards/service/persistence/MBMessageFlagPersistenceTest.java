@@ -181,8 +181,6 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MBMessageFlag newMBMessageFlag = addMBMessageFlag();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMessageFlag.class,
 				MBMessageFlag.class.getClassLoader());
 

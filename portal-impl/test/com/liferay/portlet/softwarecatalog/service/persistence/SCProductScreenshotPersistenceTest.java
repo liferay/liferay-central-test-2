@@ -185,8 +185,6 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SCProductScreenshot newSCProductScreenshot = addSCProductScreenshot();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductScreenshot.class,
 				SCProductScreenshot.class.getClassLoader());
 

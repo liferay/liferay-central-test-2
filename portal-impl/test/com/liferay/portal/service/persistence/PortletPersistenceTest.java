@@ -168,8 +168,6 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Portlet newPortlet = addPortlet();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Portlet.class,
 				Portlet.class.getClassLoader());
 

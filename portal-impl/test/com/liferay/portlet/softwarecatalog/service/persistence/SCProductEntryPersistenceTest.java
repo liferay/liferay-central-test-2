@@ -213,8 +213,6 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SCProductEntry newSCProductEntry = addSCProductEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductEntry.class,
 				SCProductEntry.class.getClassLoader());
 

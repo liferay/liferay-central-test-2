@@ -197,8 +197,6 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DLFolder newDLFolder = addDLFolder();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFolder.class,
 				DLFolder.class.getClassLoader());
 

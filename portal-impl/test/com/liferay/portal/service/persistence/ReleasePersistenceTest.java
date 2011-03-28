@@ -182,8 +182,6 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Release newRelease = addRelease();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Release.class,
 				Release.class.getClassLoader());
 

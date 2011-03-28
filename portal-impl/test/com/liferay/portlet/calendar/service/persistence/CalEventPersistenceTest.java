@@ -219,8 +219,6 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		CalEvent newCalEvent = addCalEvent();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(CalEvent.class,
 				CalEvent.class.getClassLoader());
 

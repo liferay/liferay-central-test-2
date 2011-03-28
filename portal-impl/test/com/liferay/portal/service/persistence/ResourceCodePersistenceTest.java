@@ -170,8 +170,6 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ResourceCode newResourceCode = addResourceCode();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceCode.class,
 				ResourceCode.class.getClassLoader());
 

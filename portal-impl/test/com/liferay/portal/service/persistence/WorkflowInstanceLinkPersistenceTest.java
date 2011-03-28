@@ -196,8 +196,6 @@ public class WorkflowInstanceLinkPersistenceTest extends BasePersistenceTestCase
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		WorkflowInstanceLink newWorkflowInstanceLink = addWorkflowInstanceLink();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WorkflowInstanceLink.class,
 				WorkflowInstanceLink.class.getClassLoader());
 

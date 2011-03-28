@@ -186,8 +186,6 @@ public class SocialEquityGroupSettingPersistenceTest
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SocialEquityGroupSetting newSocialEquityGroupSetting = addSocialEquityGroupSetting();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialEquityGroupSetting.class,
 				SocialEquityGroupSetting.class.getClassLoader());
 

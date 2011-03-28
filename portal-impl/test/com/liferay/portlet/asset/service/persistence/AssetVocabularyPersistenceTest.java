@@ -201,8 +201,6 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		AssetVocabulary newAssetVocabulary = addAssetVocabulary();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetVocabulary.class,
 				AssetVocabulary.class.getClassLoader());
 

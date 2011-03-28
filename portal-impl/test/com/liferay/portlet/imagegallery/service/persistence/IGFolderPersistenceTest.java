@@ -186,8 +186,6 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		IGFolder newIGFolder = addIGFolder();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGFolder.class,
 				IGFolder.class.getClassLoader());
 

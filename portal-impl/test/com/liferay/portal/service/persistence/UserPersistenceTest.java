@@ -252,8 +252,6 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		User newUser = addUser();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(User.class,
 				User.class.getClassLoader());
 

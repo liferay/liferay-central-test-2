@@ -178,8 +178,6 @@ public class UserGroupGroupRolePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		UserGroupGroupRole newUserGroupGroupRole = addUserGroupGroupRole();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserGroupGroupRole.class,
 				UserGroupGroupRole.class.getClassLoader());
 

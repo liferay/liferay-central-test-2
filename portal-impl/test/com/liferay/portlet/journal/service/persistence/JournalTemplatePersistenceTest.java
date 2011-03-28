@@ -216,8 +216,6 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		JournalTemplate newJournalTemplate = addJournalTemplate();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalTemplate.class,
 				JournalTemplate.class.getClassLoader());
 

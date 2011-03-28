@@ -196,8 +196,6 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MembershipRequest newMembershipRequest = addMembershipRequest();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MembershipRequest.class,
 				MembershipRequest.class.getClassLoader());
 

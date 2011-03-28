@@ -164,8 +164,6 @@ public class CounterPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Counter newCounter = addCounter();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Counter.class,
 				Counter.class.getClassLoader());
 

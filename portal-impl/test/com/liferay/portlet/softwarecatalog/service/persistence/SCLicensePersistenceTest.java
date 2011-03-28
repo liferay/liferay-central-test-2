@@ -176,8 +176,6 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SCLicense newSCLicense = addSCLicense();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCLicense.class,
 				SCLicense.class.getClassLoader());
 

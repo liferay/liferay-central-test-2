@@ -173,8 +173,6 @@ public class AssetTagStatsPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		AssetTagStats newAssetTagStats = addAssetTagStats();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetTagStats.class,
 				AssetTagStats.class.getClassLoader());
 

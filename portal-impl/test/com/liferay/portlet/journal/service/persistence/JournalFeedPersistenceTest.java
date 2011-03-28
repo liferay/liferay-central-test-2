@@ -223,8 +223,6 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		JournalFeed newJournalFeed = addJournalFeed();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalFeed.class,
 				JournalFeed.class.getClassLoader());
 

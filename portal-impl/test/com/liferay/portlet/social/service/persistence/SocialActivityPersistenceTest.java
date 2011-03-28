@@ -194,8 +194,6 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SocialActivity newSocialActivity = addSocialActivity();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialActivity.class,
 				SocialActivity.class.getClassLoader());
 

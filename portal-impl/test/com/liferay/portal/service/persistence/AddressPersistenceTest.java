@@ -200,8 +200,6 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Address newAddress = addAddress();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Address.class,
 				Address.class.getClassLoader());
 

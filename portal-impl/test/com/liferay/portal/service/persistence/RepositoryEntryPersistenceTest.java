@@ -177,8 +177,6 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		RepositoryEntry newRepositoryEntry = addRepositoryEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RepositoryEntry.class,
 				RepositoryEntry.class.getClassLoader());
 

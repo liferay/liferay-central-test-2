@@ -165,8 +165,6 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ClassName newClassName = addClassName();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClassName.class,
 				ClassName.class.getClassLoader());
 

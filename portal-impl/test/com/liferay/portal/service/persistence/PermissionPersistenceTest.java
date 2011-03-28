@@ -173,8 +173,6 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Permission newPermission = addPermission();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Permission.class,
 				Permission.class.getClassLoader());
 

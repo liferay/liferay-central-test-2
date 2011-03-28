@@ -182,8 +182,6 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		AssetLink newAssetLink = addAssetLink();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AssetLink.class,
 				AssetLink.class.getClassLoader());
 

@@ -180,8 +180,6 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		PluginSetting newPluginSetting = addPluginSetting();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PluginSetting.class,
 				PluginSetting.class.getClassLoader());
 

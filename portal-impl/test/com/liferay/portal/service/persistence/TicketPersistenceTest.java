@@ -177,8 +177,6 @@ public class TicketPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Ticket newTicket = addTicket();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Ticket.class,
 				Ticket.class.getClassLoader());
 

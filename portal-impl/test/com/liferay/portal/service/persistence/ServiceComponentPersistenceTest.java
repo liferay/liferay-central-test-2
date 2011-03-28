@@ -177,8 +177,6 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ServiceComponent newServiceComponent = addServiceComponent();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ServiceComponent.class,
 				ServiceComponent.class.getClassLoader());
 

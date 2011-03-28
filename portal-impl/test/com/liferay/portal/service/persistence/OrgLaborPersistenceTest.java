@@ -196,8 +196,6 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		OrgLabor newOrgLabor = addOrgLabor();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(OrgLabor.class,
 				OrgLabor.class.getClassLoader());
 

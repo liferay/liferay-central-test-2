@@ -187,8 +187,6 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Phone newPhone = addPhone();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Phone.class,
 				Phone.class.getClassLoader());
 

@@ -188,8 +188,6 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		WikiNode newWikiNode = addWikiNode();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiNode.class,
 				WikiNode.class.getClassLoader());
 

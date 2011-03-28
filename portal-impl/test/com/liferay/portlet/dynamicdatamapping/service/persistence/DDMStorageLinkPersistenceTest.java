@@ -177,8 +177,6 @@ public class DDMStorageLinkPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DDMStorageLink newDDMStorageLink = addDDMStorageLink();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DDMStorageLink.class,
 				DDMStorageLink.class.getClassLoader());
 

@@ -175,8 +175,6 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DDMStructureLink newDDMStructureLink = addDDMStructureLink();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DDMStructureLink.class,
 				DDMStructureLink.class.getClassLoader());
 

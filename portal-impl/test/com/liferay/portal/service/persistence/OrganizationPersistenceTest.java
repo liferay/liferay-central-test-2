@@ -194,8 +194,6 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Organization newOrganization = addOrganization();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Organization.class,
 				Organization.class.getClassLoader());
 

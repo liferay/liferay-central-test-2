@@ -185,8 +185,6 @@ public class SocialEquityAssetEntryPersistenceTest
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SocialEquityAssetEntry newSocialEquityAssetEntry = addSocialEquityAssetEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialEquityAssetEntry.class,
 				SocialEquityAssetEntry.class.getClassLoader());
 

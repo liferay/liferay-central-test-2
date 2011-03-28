@@ -175,8 +175,6 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		PasswordPolicyRel newPasswordPolicyRel = addPasswordPolicyRel();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordPolicyRel.class,
 				PasswordPolicyRel.class.getClassLoader());
 

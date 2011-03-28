@@ -216,8 +216,6 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		WikiPage newWikiPage = addWikiPage();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WikiPage.class,
 				WikiPage.class.getClassLoader());
 

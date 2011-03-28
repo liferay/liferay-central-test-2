@@ -255,8 +255,6 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		LayoutRevision newLayoutRevision = addLayoutRevision();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutRevision.class,
 				LayoutRevision.class.getClassLoader());
 

@@ -188,8 +188,6 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Group newGroup = addGroup();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Group.class,
 				Group.class.getClassLoader());
 

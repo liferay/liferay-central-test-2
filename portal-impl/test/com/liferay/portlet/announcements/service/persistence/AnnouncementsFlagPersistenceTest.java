@@ -178,8 +178,6 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		AnnouncementsFlag newAnnouncementsFlag = addAnnouncementsFlag();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AnnouncementsFlag.class,
 				AnnouncementsFlag.class.getClassLoader());
 

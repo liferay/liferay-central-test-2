@@ -202,8 +202,6 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SCProductVersion newSCProductVersion = addSCProductVersion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SCProductVersion.class,
 				SCProductVersion.class.getClassLoader());
 

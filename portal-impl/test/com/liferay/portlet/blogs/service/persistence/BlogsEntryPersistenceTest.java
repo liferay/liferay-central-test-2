@@ -225,8 +225,6 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		BlogsEntry newBlogsEntry = addBlogsEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BlogsEntry.class,
 				BlogsEntry.class.getClassLoader());
 

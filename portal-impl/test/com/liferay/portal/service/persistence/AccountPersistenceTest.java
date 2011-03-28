@@ -197,8 +197,6 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Account newAccount = addAccount();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Account.class,
 				Account.class.getClassLoader());
 

@@ -179,8 +179,6 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		RatingsStats newRatingsStats = addRatingsStats();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RatingsStats.class,
 				RatingsStats.class.getClassLoader());
 

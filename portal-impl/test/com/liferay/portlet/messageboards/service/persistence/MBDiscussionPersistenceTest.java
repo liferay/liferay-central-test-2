@@ -174,8 +174,6 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MBDiscussion newMBDiscussion = addMBDiscussion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
 				MBDiscussion.class.getClassLoader());
 

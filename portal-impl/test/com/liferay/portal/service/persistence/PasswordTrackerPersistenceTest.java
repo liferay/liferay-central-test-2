@@ -176,8 +176,6 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		PasswordTracker newPasswordTracker = addPasswordTracker();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PasswordTracker.class,
 				PasswordTracker.class.getClassLoader());
 

@@ -184,8 +184,6 @@ public class LayoutSetPrototypePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		LayoutSetPrototype newLayoutSetPrototype = addLayoutSetPrototype();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetPrototype.class,
 				LayoutSetPrototype.class.getClassLoader());
 

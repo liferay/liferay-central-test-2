@@ -201,8 +201,6 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		PollsQuestion newPollsQuestion = addPollsQuestion();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(PollsQuestion.class,
 				PollsQuestion.class.getClassLoader());
 

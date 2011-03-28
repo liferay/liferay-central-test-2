@@ -183,8 +183,6 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		WebDAVProps newWebDAVProps = addWebDAVProps();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WebDAVProps.class,
 				WebDAVProps.class.getClassLoader());
 

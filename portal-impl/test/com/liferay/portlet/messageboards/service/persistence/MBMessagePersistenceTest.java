@@ -226,8 +226,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MBMessage newMBMessage = addMBMessage();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMessage.class,
 				MBMessage.class.getClassLoader());
 

@@ -239,8 +239,6 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MBMailingList newMBMailingList = addMBMailingList();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBMailingList.class,
 				MBMailingList.class.getClassLoader());
 

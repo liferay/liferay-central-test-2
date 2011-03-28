@@ -176,8 +176,6 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		UserTrackerPath newUserTrackerPath = addUserTrackerPath();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserTrackerPath.class,
 				UserTrackerPath.class.getClassLoader());
 

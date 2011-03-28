@@ -170,8 +170,6 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ExpandoRow newExpandoRow = addExpandoRow();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ExpandoRow.class,
 				ExpandoRow.class.getClassLoader());
 

@@ -167,8 +167,6 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ListType newListType = addListType();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ListType.class,
 				ListType.class.getClassLoader());
 

@@ -194,8 +194,6 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		BookmarksFolder newBookmarksFolder = addBookmarksFolder();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(BookmarksFolder.class,
 				BookmarksFolder.class.getClassLoader());
 

@@ -219,8 +219,6 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ShoppingCoupon newShoppingCoupon = addShoppingCoupon();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingCoupon.class,
 				ShoppingCoupon.class.getClassLoader());
 

@@ -174,8 +174,6 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ResourceAction newResourceAction = addResourceAction();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceAction.class,
 				ResourceAction.class.getClassLoader());
 

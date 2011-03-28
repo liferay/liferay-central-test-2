@@ -188,8 +188,6 @@ public class UserNotificationEventPersistenceTest
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		UserNotificationEvent newUserNotificationEvent = addUserNotificationEvent();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(UserNotificationEvent.class,
 				UserNotificationEvent.class.getClassLoader());
 

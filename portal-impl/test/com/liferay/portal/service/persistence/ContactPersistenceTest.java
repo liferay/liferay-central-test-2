@@ -228,8 +228,6 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		Contact newContact = addContact();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(Contact.class,
 				Contact.class.getClassLoader());
 

@@ -197,8 +197,6 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		IGImage newIGImage = addIGImage();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(IGImage.class,
 				IGImage.class.getClassLoader());
 

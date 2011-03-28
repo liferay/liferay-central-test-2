@@ -177,8 +177,6 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MBStatsUser newMBStatsUser = addMBStatsUser();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBStatsUser.class,
 				MBStatsUser.class.getClassLoader());
 

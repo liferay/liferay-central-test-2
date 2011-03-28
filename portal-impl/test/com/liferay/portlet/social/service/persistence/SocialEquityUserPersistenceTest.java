@@ -189,8 +189,6 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		SocialEquityUser newSocialEquityUser = addSocialEquityUser();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(SocialEquityUser.class,
 				SocialEquityUser.class.getClassLoader());
 

@@ -176,8 +176,6 @@ public class JournalArticleResourcePersistenceTest
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		JournalArticleResource newJournalArticleResource = addJournalArticleResource();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(JournalArticleResource.class,
 				JournalArticleResource.class.getClassLoader());
 

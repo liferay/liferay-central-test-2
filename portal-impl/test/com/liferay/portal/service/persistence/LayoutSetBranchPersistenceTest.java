@@ -195,8 +195,6 @@ public class LayoutSetBranchPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		LayoutSetBranch newLayoutSetBranch = addLayoutSetBranch();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(LayoutSetBranch.class,
 				LayoutSetBranch.class.getClassLoader());
 

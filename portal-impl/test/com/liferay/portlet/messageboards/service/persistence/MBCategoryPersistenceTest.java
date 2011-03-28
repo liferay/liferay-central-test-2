@@ -205,8 +205,6 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		MBCategory newMBCategory = addMBCategory();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(MBCategory.class,
 				MBCategory.class.getClassLoader());
 

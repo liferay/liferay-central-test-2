@@ -221,8 +221,6 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DLFileEntry newDLFileEntry = addDLFileEntry();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
 				DLFileEntry.class.getClassLoader());
 

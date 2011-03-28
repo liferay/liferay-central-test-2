@@ -200,8 +200,6 @@ public class WorkflowDefinitionLinkPersistenceTest
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		WorkflowDefinitionLink newWorkflowDefinitionLink = addWorkflowDefinitionLink();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(WorkflowDefinitionLink.class,
 				WorkflowDefinitionLink.class.getClassLoader());
 

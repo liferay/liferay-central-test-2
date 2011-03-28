@@ -178,8 +178,6 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DLFileRank newDLFileRank = addDLFileRank();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileRank.class,
 				DLFileRank.class.getClassLoader());
 

@@ -176,8 +176,6 @@ public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ShoppingItemField newShoppingItemField = addShoppingItemField();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ShoppingItemField.class,
 				ShoppingItemField.class.getClassLoader());
 

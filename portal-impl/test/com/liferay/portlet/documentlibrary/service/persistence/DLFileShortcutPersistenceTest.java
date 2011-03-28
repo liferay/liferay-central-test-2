@@ -211,8 +211,6 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		DLFileShortcut newDLFileShortcut = addDLFileShortcut();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLFileShortcut.class,
 				DLFileShortcut.class.getClassLoader());
 

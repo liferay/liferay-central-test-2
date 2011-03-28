@@ -172,8 +172,6 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
-		ClusterGroup newClusterGroup = addClusterGroup();
-
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ClusterGroup.class,
 				ClusterGroup.class.getClassLoader());
 
