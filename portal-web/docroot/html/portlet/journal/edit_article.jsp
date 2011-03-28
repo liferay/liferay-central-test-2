@@ -874,18 +874,30 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.getElementById(<portlet:namespace />imageGalleryInput).value = url;
 	}
 
-	function <portlet:namespace />selectStructure(structureId) {
-		if (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
+	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>') && 	document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
+
+			if (dialog) {
+				dialog.close();
+			}
+
 			submitForm(document.<portlet:namespace />fm1);
 		}
 	}
 
-	function <portlet:namespace />selectTemplate(structureId, templateId) {
-		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
-		submitForm(document.<portlet:namespace />fm1);
+	function <portlet:namespace />selectTemplate(structureId, templateId, dialog) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
+			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
+
+			if (dialog) {
+		        dialog.close();
+			}
+
+			submitForm(document.<portlet:namespace />fm1);
+		}
 	}
 
 	Liferay.provide(

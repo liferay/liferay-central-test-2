@@ -302,6 +302,13 @@
 		width: 350px;
 	}
 
+	.lfr-template-editor {
+		.aui-field-element, .aui-field-content, .aui-field-input-text {
+			display: block;
+			height: 400px;
+		}
+	}
+
 	.localization-disabled {
 		.journal-article-language-options, .structure-field .journal-article-localized-checkbox {
 			display: none;

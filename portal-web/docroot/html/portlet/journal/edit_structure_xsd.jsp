@@ -38,10 +38,10 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				<aui:input inputCssClass="codepress html" label="" name="xsdContent" type="textarea" wrap="off" />
+				<aui:input cssClass="lfr-template-editor" inputCssClass="codepress html" label="" name="xsdContent" type="textarea" wrap="off" />
 			</c:when>
 			<c:otherwise>
-				<aui:input inputCssClass="lfr-textarea-container" label="" name="xsdContent" type="textarea" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" wrap="off" />
+				<aui:input cssClass="lfr-template-editor" inputCssClass="lfr-textarea-container" label="" name="xsdContent" type="textarea" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" wrap="off" />
 			</c:otherwise>
 		</c:choose>
 	</aui:fieldset>
@@ -53,7 +53,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xsdContent);" %>' value="select-and-copy" />
 		</c:if>
 
-		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
+		<aui:button type="cancel" />
 	</aui:button-row>
 </aui:form>
 
@@ -63,7 +63,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 <aui:script>
 	function getEditorContent() {
-		return <portlet:namespace />getXsd();
+		return Liferay.Util.getOpener().<portlet:namespace />getXsd();
 	}
 
 	Liferay.provide(
@@ -80,21 +80,10 @@ boolean useEditorCodepress = editorType.equals("codepress");
 			}
 			%>
 
-			var editorForm = A.one(document.<portlet:namespace />editorForm);
-
-			if (editorForm) {
-				var popup = editorForm.ancestor('.aui-widget-bd');
-
-				if (popup) {
-					popup = popup.getDOM();
-				}
-			}
-
 			Liferay.Util.switchEditor(
 				{
-					popup: popup,
 					textarea: '<portlet:namespace />xsdContent',
-					url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
+					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
 				}
 			);
 		},
@@ -105,11 +94,13 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		window,
 		'<portlet:namespace />updateStructureXsd',
 		function() {
-			var A = AUI();
+			var openingWindow = Liferay.Util.getOpener();
+			var openerAUI = openingWindow.AUI();
 
-			document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
+			openingWindow.document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
 
-			var xsdContent = A.one('input[name=<portlet:namespace />xsd]');
+			var xsd = openerAUI.one('input[name=<portlet:namespace />xsd]');
+
 			var content = '';
 
 			<c:choose>
@@ -121,21 +112,30 @@ boolean useEditorCodepress = editorType.equals("codepress");
 				</c:otherwise>
 			</c:choose>
 
-			xsdContent.attr('value', encodeURIComponent(content));
+			xsd.val(encodeURIComponent(content));
 
-			A.DialogManager.closeByChild(document.<portlet:namespace />editorForm);
+			Liferay.Util.getWindow().close();
 
-			submitForm(document.<portlet:namespace />fm1);
+			submitForm(openingWindow.document.<portlet:namespace />fm1);
 		},
 		['aui-dialog']
 	);
+</aui:script>
+
+<aui:script use="aui-base">
+	var textarea = '#<portlet:namespace />xsdContent';
 
 	if (<%= useEditorCodepress %>) {
-		document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent_cp.value = getEditorContent();
+		textarea = '#<portlet:namespace />xsdContent_cp';
 	}
-	else {
-		document.<portlet:namespace />editorForm.<portlet:namespace />xsdContent.value = getEditorContent();
-	}
+
+	A.on(
+		'available',
+		function(event) {
+			A.one(textarea).val(getEditorContent());
+		},
+		textarea
+	);
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
 </aui:script>

@@ -47,7 +47,6 @@
 	<div class="separator"><!-- --></div>
 
 	<%
-
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
@@ -59,13 +58,13 @@
 
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("javascript:opener.");
+		sb.append("javascript:Liferay.Util.getOpener().");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectTemplate('");
 		sb.append(template.getStructureId());
 		sb.append("', '");
 		sb.append(template.getTemplateId());
-		sb.append("'); window.close();");
+		sb.append("'); Liferay.Util.getWindow().close();");
 
 		String rowHREF = sb.toString();
 

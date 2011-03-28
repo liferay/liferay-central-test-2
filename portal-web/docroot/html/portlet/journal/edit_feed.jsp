@@ -348,7 +348,7 @@ if (feed != null) {
 		<c:if test="<%= feed != null %>">
 
 			<%
-			String taglibPreviewButton = "window.open('" + feedURL + "', 'feed');";
+			String taglibPreviewButton = "Liferay.Util.openWindow({uri: '" + feedURL + "', title: '" + UnicodeLanguageUtil.get(pageContext, "feed") + "'});";
 			%>
 
 			<aui:button onClick="<%= taglibPreviewButton %>" value="preview" />
@@ -360,19 +360,29 @@ if (feed != null) {
 
 <aui:script>
 	function <portlet:namespace />openStructureSelector() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>')) {
-			var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-			void('');
-			structureWindow.focus();
-		}
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					stack: false,
+					width: 680
+				},
+				title: '<liferay-ui:message key="structure" />',
+				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
+			}
+		);
 	}
 
 	function <portlet:namespace />openTemplateSelector() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-templates,-and-available-feed-item-content") %>')) {
-			var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-			void('');
-			templateWindow.focus();
-		}
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					stack: false,
+					width: 680
+				},
+				title: '<liferay-ui:message key="template" />',
+				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
+			}
+		);
 	}
 
 	function <portlet:namespace />removeStructure() {
@@ -398,7 +408,7 @@ if (feed != null) {
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
-		if (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>') && document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
@@ -408,9 +418,11 @@ if (feed != null) {
 	}
 
 	function <portlet:namespace />selectTemplate(structureId, templateId) {
-		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
-		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
-		<portlet:namespace />saveFeed();
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
+			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
+			<portlet:namespace />saveFeed();
+		}
 	}
 
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoFeedIdCheckbox','<portlet:namespace />newFeedId', true);

@@ -42,10 +42,10 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 
 		<c:choose>
 			<c:when test="<%= useEditorCodepress %>">
-				 <aui:input inputCssClass="codepress html" label="" name="xslContent" type="textarea" wrap="off" />
+				 <aui:input cssClass="lfr-template-editor" inputCssClass="codepress html" label="" name="xslContent" type="textarea" wrap="off" />
 			</c:when>
 			<c:otherwise>
-				<aui:input inputCssClass="lfr-textarea" label="" name="xslContent" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" wrap="off" />
+				<aui:input cssClass="lfr-template-editor" inputCssClass="lfr-textarea" label="" name="xslContent" onKeyDown="Liferay.Util.checkTab(this); Liferay.Util.disableEsc();" type="textarea" wrap="off" />
 			</c:otherwise>
 		</c:choose>
 	</aui:fieldset>
@@ -57,7 +57,7 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 			<aui:button onClick='<%= "Liferay.Util.selectAndCopy(document." + renderResponse.getNamespace() + "editorForm." + renderResponse.getNamespace() + "xslContent);" %>' value="select-and-copy" />
 		</c:if>
 
-		<aui:button onClick="AUI().DialogManager.closeByChild(this);" value="cancel" />
+		<aui:button type="cancel" />
 	</aui:button-row>
 </aui:form>
 
@@ -67,7 +67,9 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 
 <aui:script>
 	function <portlet:namespace />getEditorContent() {
-		var xslContent = AUI().one('input[name=<portlet:namespace />xslContent]');
+		var openerAUI = Liferay.Util.getOpener().AUI();
+
+		var xslContent = openerAUI.one('input[name=<portlet:namespace />xslContent]');
 
 		if (xslContent) {
 			var content = decodeURIComponent(xslContent.val());
@@ -94,21 +96,10 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 			}
 			%>
 
-			var editorForm = A.one(document.<portlet:namespace />editorForm);
-
-			if (editorForm) {
-				var popup = editorForm.ancestor('.aui-widget-bd');
-
-				if (popup) {
-					popup = popup.getDOM();
-				}
-			}
-
 			Liferay.Util.switchEditor(
 				{
-					popup: popup,
 					textarea: '<portlet:namespace />xslContent',
-					url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
+					uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorType" value="<%= newEditorType %>" /></portlet:renderURL>'
 				}
 			);
 		},
@@ -119,9 +110,11 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		window,
 		'<portlet:namespace />updateTemplateXsl',
 		function() {
-			var A = AUI();
+			var openingWindow = Liferay.Util.getOpener();
 
-			var xslContent = A.one('input[name=<portlet:namespace />xslContent]');
+			var openerAUI = openingWindow.AUI();
+
+			var xslContent = openerAUI.one('input[name=<portlet:namespace />xslContent]');
 			var content = '';
 
 			<c:choose>
@@ -133,19 +126,28 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 				</c:otherwise>
 			</c:choose>
 
-			xslContent.attr('value', encodeURIComponent(content));
+			xslContent.val(encodeURIComponent(content));
 
-			A.DialogManager.closeByChild(document.<portlet:namespace />editorForm);
+			Liferay.Util.getWindow().close();
 		},
 		['aui-dialog']
 	);
+</aui:script>
+
+<aui:script use="aui-base">
+	var textarea = '#<portlet:namespace />xslContent';
 
 	if (<%= useEditorCodepress %>) {
-		document.<portlet:namespace />editorForm.<portlet:namespace />xslContent_cp.value = <portlet:namespace />getEditorContent();
+		textarea = '#<portlet:namespace />xslContent_cp';
 	}
-	else {
-		document.<portlet:namespace />editorForm.<portlet:namespace />xslContent.value = <portlet:namespace />getEditorContent();
-	}
+
+	A.on(
+		'available',
+		function(event) {
+			A.one(textarea).val(<portlet:namespace />getEditorContent());
+		},
+		textarea
+	);
 
 	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 </aui:script>

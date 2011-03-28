@@ -220,10 +220,15 @@
 
 <aui:script>
 	function <portlet:namespace />openTemplateSelector() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
-			var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-			void('');
-			templateWindow.focus();
-		}
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					stack: false,
+					width:680
+				},
+				title: '<liferay-ui:message key="template" />',
+				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" /></portlet:renderURL>'
+			}
+		);
 	}
 </aui:script>

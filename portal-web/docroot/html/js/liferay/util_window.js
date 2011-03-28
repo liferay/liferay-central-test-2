@@ -32,9 +32,9 @@ AUI().add(
 		};
 
 		Util._openWindow = function(config) {
-			var uri = config.uri;
-			var title = config.title;
 			var openingWindow = config.openingWindow;
+			var title = config.title;
+			var uri = config.uri;
 
 			var id = config.id || A.guid();
 
@@ -55,6 +55,7 @@ AUI().add(
 					dialogIframeConfig,
 					{
 						id: id,
+						iframeId: id,
 						uri: uri
 					}
 				);
@@ -64,6 +65,10 @@ AUI().add(
 				}
 
 				dialog = new A.Dialog(dialogConfig).plug(A.Plugin.DialogIframe, dialogIframeConfig);
+
+				Window._map[id] = dialog;
+
+				dialog._opener = openingWindow;
 
 				dialog.after(
 					'destroy',
@@ -81,18 +86,15 @@ AUI().add(
 
 						Util.afterIframeLoaded(event);
 
-						Window._map[id] = dialog;
-
 						var dialogUtil = dialogIframeNode.get('contentWindow.Liferay.Util');
 
 						dialogUtil.Window._opener = openingWindow;
+
 						dialogUtil.Window._name = id;
 					}
 				);
 
 				dialog.render();
-
-				Window._map[id] = dialog;
 			}
 			else {
 				dialog.show();

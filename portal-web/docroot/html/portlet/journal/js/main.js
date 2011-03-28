@@ -1233,9 +1233,16 @@ AUI().add(
 			},
 
 			openPopupWindow: function(url, title) {
-				var popup = window.open(url, title, 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-				popup.focus();
+				Liferay.Util.openWindow(
+					{
+						dialog: {
+							stack: false,
+							width: 680
+						},
+						title: title,
+						uri: url
+					}
+				);
 			},
 
 			openSaveStructureDialog: function() {
@@ -2291,7 +2298,6 @@ AUI().add(
 				}
 
 				var changeStructureButton = instance.getById('changeStructureButton');
-				var changeTemplateButton = instance.getById('changeTemplateButton');
 				var editStructureButton = instance.getById('editStructureButton');
 				var loadDefaultStructureButton = instance.getById('loadDefaultStructure');
 				var saveStructureButton = instance.getById('saveStructureButton');
@@ -2303,25 +2309,9 @@ AUI().add(
 					changeStructureButton.on(
 						'click',
 						function(event) {
-							if (confirm(Liferay.Language.get('selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates'))) {
-								var url = event.target.attr('dataChangeStructureUrl');
+							var url = event.target.attr('dataChangeStructureUrl');
 
-								instance.openPopupWindow(url, 'ChangeStructure');
-							}
-						}
-					);
-				}
-
-				if (changeTemplateButton) {
-					changeTemplateButton.detach('click');
-
-					changeTemplateButton.on(
-						'click',
-						function(event) {
-							if (confirm(Liferay.Language.get('selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates'))) {
-								var url = event.target.attr('dataChangeTemplateUrl');
-								instance.openPopupWindow(url, 'ChangeTemplate');
-							}
+							instance.openPopupWindow(url, 'ChangeStructure');
 						}
 					);
 				}

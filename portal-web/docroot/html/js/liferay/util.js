@@ -249,7 +249,22 @@
 		},
 
 		getOpener: function() {
-			return Window._opener || window.opener || window.parent;
+			var openingWindow = Window._opener;
+
+			if (!openingWindow) {
+				var topUtil = Liferay.Util.getTop().Liferay.Util;
+
+				var windowName = Liferay.Util.getWindowName();
+
+				var dialog = topUtil.Window._map[windowName];
+
+				if (dialog) {
+					openingWindow = topUtil.Window._map[windowName]._opener;
+					Window._opener = openingWindow;
+				}
+			}
+
+			return openingWindow || window.opener || window.parent;
 		},
 
 		getPortletId: function(portletId) {
@@ -287,7 +302,7 @@
 		},
 
 		getWindowName: function() {
-			return Window._name || '';
+			return window.name || Liferay._windowName || '';
 		},
 
 		getURLWithSessionId: function(url) {
@@ -910,47 +925,26 @@
 		Util,
 		'inlineEditor',
 		function(options) {
-			if (options.url && options.button) {
-				var url = options.url;
+			if (options.uri && options.button) {
 				var button = options.button;
-				var width = options.width || 680;
 				var height = options.height || 640;
 				var textarea = options.textarea;
-				var clicked = false;
+				var width = options.width || 680;
+				var uri = options.uri;
+
+				options.dialog = {
+					stack: false
+				};
 
 				var editorButton = A.one(button);
-				var popup = null;
 
 				if (editorButton) {
+					delete options.button;
+
 					editorButton.on(
 						'click',
 						function(event) {
-							if (!clicked) {
-								popup = new A.Dialog(
-									{
-										centered: true,
-										height: 640,
-										title: Liferay.Language.get('editor'),
-										width: 680
-									}
-								).render();
-
-								popup.plug(
-									A.Plugin.IO,
-									{
-										uri: url + '&rt=' + Util.randomInt()
-									}
-								);
-
-								clicked = true;
-							}
-							else {
-								popup.show();
-
-								popup._setAlignCenter(true);
-
-								popup.io.start();
-							}
+							Util.openWindow(options);
 						}
 					);
 				}
@@ -1176,18 +1170,7 @@
 			}
 
 			if (el) {
-				var pageBody;
-
-				if (resizeToInlinePopup) {
-					if (el.get('nodeName').toLowerCase() != 'textarea') {
-						el = A.one('#' + elString + '_cp');
-					}
-
-					pageBody = el.ancestor('.aui-dialog-bd');
-				}
-				else {
-					pageBody = A.getBody();
-				}
+				var pageBody = A.getBody();
 
 				var resize = function() {
 					var pageBodyHeight = pageBody.get('offsetHeight');
@@ -1240,12 +1223,7 @@
 
 				resize();
 
-				if (resizeToInlinePopup) {
-					A.on('popupResize', resize);
-				}
-				else {
-					A.getWin().on('resize', resize);
-				}
+				A.getWin().on('resize', resize);
 			}
 		},
 		['aui-base']
@@ -1334,33 +1312,21 @@
 	 * OPTIONS
 	 *
 	 * Required
-	 * popup {string|object}: A selector or DOM element of the popup that contains the editor.
-	 * textarea {string}: the name of the textarea to auto-resize.
-	 * url {string}: The url to open that sets the editor.
+	 * uri {string}: The url to open that sets the editor.
 	 */
 
 	Liferay.provide(
 		Util,
 		'switchEditor',
 		function(options) {
-			var url = options.url;
-			var popup = A.one(options.popup);
-			var textarea = options.textarea;
+			var uri = options.uri;
 
-			if (popup) {
-				if (!popup.io) {
-					popup.plug(
-						A.Plugin.IO,
-						{
-							uri: url
-						}
-					);
-				}
-				else {
-					popup.io.set('uri', url);
+			var windowName = Liferay.Util.getWindowName();
 
-					popup.io.start();
-				}
+			var dialog = Liferay.Util.getWindow(windowName);
+
+			if (dialog) {
+				dialog.iframe.set('uri', uri);
 			}
 		},
 		['aui-io']

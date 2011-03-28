@@ -373,9 +373,16 @@ int tabIndex = 1;
 	}
 
 	function <portlet:namespace />openParentStructureSelector() {
-		var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
-
-		structureWindow.focus();
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					stack: false,
+					width: 680
+				},
+				title: '<liferay-ui:message key="structure" />',
+				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
+			}
+		);
 	}
 
 	function <portlet:namespace />removeParentStructure() {
@@ -422,7 +429,8 @@ int tabIndex = 1;
 		{
 			button: '#<portlet:namespace />editorButton',
 			textarea: '<portlet:namespace />xsdContent',
-			url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>'
+			title: '<liferay-ui:message key="editor" />',
+			uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>'
 		}
 	);
 
