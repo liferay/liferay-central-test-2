@@ -353,7 +353,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 				_analyzerClass = Class.forName(analyzerName);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
