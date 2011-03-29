@@ -35,12 +35,15 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMListEntryLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMListEntryService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListEntryPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
@@ -288,6 +291,62 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	public void setDDMContentPersistence(
 		DDMContentPersistence ddmContentPersistence) {
 		this.ddmContentPersistence = ddmContentPersistence;
+	}
+
+	/**
+	 * Gets the d d m list entry local service.
+	 *
+	 * @return the d d m list entry local service
+	 */
+	public DDMListEntryLocalService getDDMListEntryLocalService() {
+		return ddmListEntryLocalService;
+	}
+
+	/**
+	 * Sets the d d m list entry local service.
+	 *
+	 * @param ddmListEntryLocalService the d d m list entry local service
+	 */
+	public void setDDMListEntryLocalService(
+		DDMListEntryLocalService ddmListEntryLocalService) {
+		this.ddmListEntryLocalService = ddmListEntryLocalService;
+	}
+
+	/**
+	 * Gets the d d m list entry remote service.
+	 *
+	 * @return the d d m list entry remote service
+	 */
+	public DDMListEntryService getDDMListEntryService() {
+		return ddmListEntryService;
+	}
+
+	/**
+	 * Sets the d d m list entry remote service.
+	 *
+	 * @param ddmListEntryService the d d m list entry remote service
+	 */
+	public void setDDMListEntryService(DDMListEntryService ddmListEntryService) {
+		this.ddmListEntryService = ddmListEntryService;
+	}
+
+	/**
+	 * Gets the d d m list entry persistence.
+	 *
+	 * @return the d d m list entry persistence
+	 */
+	public DDMListEntryPersistence getDDMListEntryPersistence() {
+		return ddmListEntryPersistence;
+	}
+
+	/**
+	 * Sets the d d m list entry persistence.
+	 *
+	 * @param ddmListEntryPersistence the d d m list entry persistence
+	 */
+	public void setDDMListEntryPersistence(
+		DDMListEntryPersistence ddmListEntryPersistence) {
+		this.ddmListEntryPersistence = ddmListEntryPersistence;
 	}
 
 	/**
@@ -645,6 +704,12 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	protected DDMContentLocalService ddmContentLocalService;
 	@BeanReference(type = DDMContentPersistence.class)
 	protected DDMContentPersistence ddmContentPersistence;
+	@BeanReference(type = DDMListEntryLocalService.class)
+	protected DDMListEntryLocalService ddmListEntryLocalService;
+	@BeanReference(type = DDMListEntryService.class)
+	protected DDMListEntryService ddmListEntryService;
+	@BeanReference(type = DDMListEntryPersistence.class)
+	protected DDMListEntryPersistence ddmListEntryPersistence;
 	@BeanReference(type = DDMStorageLinkLocalService.class)
 	protected DDMStorageLinkLocalService ddmStorageLinkLocalService;
 	@BeanReference(type = DDMStorageLinkPersistence.class)
