@@ -95,6 +95,10 @@ public class IGFolderPermission {
 		}
 		else {
 			while (folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+				folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+				folderId = folder.getParentFolderId();
+
 				if (permissionChecker.hasOwnerPermission(
 						folder.getCompanyId(), IGFolder.class.getName(),
 						folder.getFolderId(), folder.getUserId(), actionId)) {
@@ -112,11 +116,6 @@ public class IGFolderPermission {
 				if (actionId.equals(ActionKeys.VIEW)) {
 					break;
 				}
-
-				folderId = folder.getParentFolderId();
-
-				folder = IGFolderLocalServiceUtil.getFolder(folderId);
-
 			}
 
 			return false;
