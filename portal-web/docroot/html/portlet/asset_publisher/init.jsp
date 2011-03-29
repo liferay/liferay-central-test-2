@@ -187,6 +187,12 @@ if (Validator.isNotNull(assetTagName)) {
 	PortalUtil.setPageKeywords(assetTagName, request);
 }
 
+boolean showOnlyLayoutAssets = GetterUtil.getBoolean(preferences.getValue("showOnlyLayoutAssets", null), false);
+
+if (showOnlyLayoutAssets) {
+	assetEntryQuery.setLayout(layout);
+}
+
 boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("mergeUrlTags", null), true);
 
 String displayStyle = GetterUtil.getString(preferences.getValue("displayStyle", "abstracts"));

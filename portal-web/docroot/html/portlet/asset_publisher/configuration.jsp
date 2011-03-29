@@ -425,6 +425,8 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							</aui:fieldset>
 						</div>
 
+						<aui:input label='<%= LanguageUtil.format(pageContext, "show-only-assets-whose-display-page-is-x", layout.getName(locale), false)%>' name="preferences--showOnlyLayoutAssets--" type="checkbox" value="<%= showOnlyLayoutAssets %>" />
+
 						<aui:input label="include-tags-specified-in-the-url" name="preferences--mergeUrlTags--" type="checkbox" value="<%= mergeUrlTags %>" />
 
 						<aui:script use="liferay-auto-fields">

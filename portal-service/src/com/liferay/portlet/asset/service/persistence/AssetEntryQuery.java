@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -36,6 +37,7 @@ import javax.portlet.PortletRequest;
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public class AssetEntryQuery {
 
@@ -145,6 +147,10 @@ public class AssetEntryQuery {
 		return _classNameIds;
 	}
 
+	public Layout getLayout() {
+		return _layout;
+	}
+
 	public int getEnd() {
 		return _end;
 	}
@@ -239,6 +245,10 @@ public class AssetEntryQuery {
 		_classNameIds = classNameIds;
 	}
 
+	public void setLayout(Layout layout) {
+		_layout = layout;
+	}
+
 	public void setEnd(int end) {
 		_end = end;
 	}
@@ -327,6 +337,7 @@ public class AssetEntryQuery {
 	private long[] _anyCategoryIds = new long[0];
 	private long[] _anyTagIds = new long[0];
 	private long[] _classNameIds = new long[0];
+	private Layout _layout = null;
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeZeroViewCount;
 	private Date _expirationDate;

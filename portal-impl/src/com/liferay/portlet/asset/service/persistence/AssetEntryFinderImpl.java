@@ -200,6 +200,12 @@ public class AssetEntryFinderImpl
 			sb.append(" AND (AssetEntry.viewCount > 0)");
 		}
 
+		// Layout
+
+		if (Validator.isNotNull(entryQuery.getLayout())) {
+			sb.append(" AND (AssetEntry.layoutUuid = ?)");
+		}
+
 		// Category conditions
 
 		if (entryQuery.getAllCategoryIds().length > 0) {
@@ -343,6 +349,10 @@ public class AssetEntryFinderImpl
 
 		if (entryQuery.isVisible() != null) {
 			qPos.add(entryQuery.isVisible().booleanValue());
+		}
+
+		if (Validator.isNotNull(entryQuery.getLayout())) {
+			qPos.add(entryQuery.getLayout().getUuid());
 		}
 
 		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
