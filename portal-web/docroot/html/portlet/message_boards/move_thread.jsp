@@ -86,7 +86,13 @@ boolean quote = false;
 		<aui:input disabled="<%= thread.isLocked() %>" helpMessage='<%= thread.isLocked() ? LanguageUtil.get(pageContext, "unlock-thread-to-add-an-explanation-post") : StringPool.BLANK %>' inlineLabel="left" label="add-explanation-post" name="addExplanationPost" onClick='<%= renderResponse.getNamespace() + "toggleExplanationPost();" %>' type="checkbox" />
 
 		<div id="<portlet:namespace />explanationPost" style="display: none;">
-			<aui:input model="<%= MBMessage.class %>" name="subject" value="" />
+			<aui:input maxlength="75" name="subject" style="width: 350px;" value="">
+				<aui:validator name="required">
+					function() {
+						return A.one('#<portlet:namespace />addExplanationPostCheckbox').get('checked');
+					}
+				</aui:validator>
+			</aui:input>
 
 			<aui:field-wrapper label="body">
 				<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
