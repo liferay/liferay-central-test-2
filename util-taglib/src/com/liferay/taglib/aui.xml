@@ -157,8 +157,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<!--
-	<component name="Fieldset">
+	<component name="Fieldset" bodyContent="true">
 		<attributes>
 			<attribute>
 				<name>column</name>
@@ -183,6 +182,7 @@
 			</attribute>
 		</attributes>
 	</component>
+	<!--
 	<component name="FieldWrapper">
 		<attributes>
 			<attribute>

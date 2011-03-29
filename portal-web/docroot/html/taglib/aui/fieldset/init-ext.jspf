@@ -13,12 +13,3 @@
  * details.
  */
 --%>
-
-<%@ include file="init.jsp" %>
-
-<fieldset class="aui-fieldset <%= cssClass %> <%= column ? "aui-column aui-form-column" : StringPool.BLANK %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
-	<c:if test="<%= Validator.isNotNull(label) %>">
-		<aui:legend label="<%= label %>" />
-	</c:if>
-
-	<div class="aui-fieldset-content <%= column ? "aui-column-content" : StringPool.BLANK %>">
