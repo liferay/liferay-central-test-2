@@ -364,7 +364,8 @@ public interface AssetEntryLocalService {
 		java.util.Date endDate, java.util.Date publishDate,
 		java.util.Date expirationDate, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
-		java.lang.String summary, java.lang.String url, int height, int width,
+		java.lang.String summary, java.lang.String url,
+		java.lang.String layoutUuid, int height, int width,
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

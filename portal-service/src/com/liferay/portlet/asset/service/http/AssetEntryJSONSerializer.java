@@ -106,6 +106,7 @@ public class AssetEntryJSONSerializer {
 		jsonObject.put("description", model.getDescription());
 		jsonObject.put("summary", model.getSummary());
 		jsonObject.put("url", model.getUrl());
+		jsonObject.put("layoutUuid", model.getLayoutUuid());
 		jsonObject.put("height", model.getHeight());
 		jsonObject.put("width", model.getWidth());
 		jsonObject.put("priority", model.getPriority());

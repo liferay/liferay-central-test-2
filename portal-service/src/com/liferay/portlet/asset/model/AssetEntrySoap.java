@@ -51,6 +51,7 @@ public class AssetEntrySoap implements Serializable {
 		soapModel.setDescription(model.getDescription());
 		soapModel.setSummary(model.getSummary());
 		soapModel.setUrl(model.getUrl());
+		soapModel.setLayoutUuid(model.getLayoutUuid());
 		soapModel.setHeight(model.getHeight());
 		soapModel.setWidth(model.getWidth());
 		soapModel.setPriority(model.getPriority());
@@ -271,6 +272,14 @@ public class AssetEntrySoap implements Serializable {
 		_url = url;
 	}
 
+	public String getLayoutUuid() {
+		return _layoutUuid;
+	}
+
+	public void setLayoutUuid(String layoutUuid) {
+		_layoutUuid = layoutUuid;
+	}
+
 	public int getHeight() {
 		return _height;
 	}
@@ -323,6 +332,7 @@ public class AssetEntrySoap implements Serializable {
 	private String _description;
 	private String _summary;
 	private String _url;
+	private String _layoutUuid;
 	private int _height;
 	private int _width;
 	private double _priority;

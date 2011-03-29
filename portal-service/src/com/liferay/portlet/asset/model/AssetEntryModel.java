@@ -377,6 +377,21 @@ public interface AssetEntryModel extends BaseModel<AssetEntry>, GroupedModel {
 	public void setUrl(String url);
 
 	/**
+	 * Gets the layout uuid of this asset entry.
+	 *
+	 * @return the layout uuid of this asset entry
+	 */
+	@AutoEscape
+	public String getLayoutUuid();
+
+	/**
+	 * Sets the layout uuid of this asset entry.
+	 *
+	 * @param layoutUuid the layout uuid of this asset entry
+	 */
+	public void setLayoutUuid(String layoutUuid);
+
+	/**
 	 * Gets the height of this asset entry.
 	 *
 	 * @return the height of this asset entry

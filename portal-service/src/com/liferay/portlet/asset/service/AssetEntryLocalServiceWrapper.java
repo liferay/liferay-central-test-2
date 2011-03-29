@@ -420,14 +420,15 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		java.util.Date endDate, java.util.Date publishDate,
 		java.util.Date expirationDate, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
-		java.lang.String summary, java.lang.String url, int height, int width,
+		java.lang.String summary, java.lang.String url,
+		java.lang.String layoutUuid, int height, int width,
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.updateEntry(userId, groupId, className,
 			classPK, classUuid, categoryIds, tagNames, visible, startDate,
 			endDate, publishDate, expirationDate, mimeType, title, description,
-			summary, url, height, width, priority, sync);
+			summary, url, layoutUuid, height, width, priority, sync);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry updateVisible(

@@ -85,6 +85,7 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		newAssetEntry.setDescription(randomString());
 		newAssetEntry.setSummary(randomString());
 		newAssetEntry.setUrl(randomString());
+		newAssetEntry.setLayoutUuid(randomString());
 		newAssetEntry.setHeight(nextInt());
 		newAssetEntry.setWidth(nextInt());
 		newAssetEntry.setPriority(nextDouble());
@@ -128,6 +129,8 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 			newAssetEntry.getDescription());
 		assertEquals(existingAssetEntry.getSummary(), newAssetEntry.getSummary());
 		assertEquals(existingAssetEntry.getUrl(), newAssetEntry.getUrl());
+		assertEquals(existingAssetEntry.getLayoutUuid(),
+			newAssetEntry.getLayoutUuid());
 		assertEquals(existingAssetEntry.getHeight(), newAssetEntry.getHeight());
 		assertEquals(existingAssetEntry.getWidth(), newAssetEntry.getWidth());
 		assertEquals(existingAssetEntry.getPriority(),
@@ -263,6 +266,7 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		assetEntry.setDescription(randomString());
 		assetEntry.setSummary(randomString());
 		assetEntry.setUrl(randomString());
+		assetEntry.setLayoutUuid(randomString());
 		assetEntry.setHeight(nextInt());
 		assetEntry.setWidth(nextInt());
 		assetEntry.setPriority(nextDouble());

@@ -81,12 +81,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 			{ "description", Types.VARCHAR },
 			{ "summary", Types.VARCHAR },
 			{ "url", Types.VARCHAR },
+			{ "layoutUuid", Types.VARCHAR },
 			{ "height", Types.INTEGER },
 			{ "width", Types.INTEGER },
 			{ "priority", Types.DOUBLE },
 			{ "viewCount", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,classUuid VARCHAR(75) null,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title STRING null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,classUuid VARCHAR(75) null,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title STRING null,description STRING null,summary STRING null,url STRING null,layoutUuid VARCHAR(75) null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -127,6 +128,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		model.setDescription(soapModel.getDescription());
 		model.setSummary(soapModel.getSummary());
 		model.setUrl(soapModel.getUrl());
+		model.setLayoutUuid(soapModel.getLayoutUuid());
 		model.setHeight(soapModel.getHeight());
 		model.setWidth(soapModel.getWidth());
 		model.setPriority(soapModel.getPriority());
@@ -451,6 +453,19 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_url = url;
 	}
 
+	public String getLayoutUuid() {
+		if (_layoutUuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _layoutUuid;
+		}
+	}
+
+	public void setLayoutUuid(String layoutUuid) {
+		_layoutUuid = layoutUuid;
+	}
+
 	public int getHeight() {
 		return _height;
 	}
@@ -530,6 +545,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		assetEntryImpl.setDescription(getDescription());
 		assetEntryImpl.setSummary(getSummary());
 		assetEntryImpl.setUrl(getUrl());
+		assetEntryImpl.setLayoutUuid(getLayoutUuid());
 		assetEntryImpl.setHeight(getHeight());
 		assetEntryImpl.setWidth(getWidth());
 		assetEntryImpl.setPriority(getPriority());
@@ -601,7 +617,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{entryId=");
 		sb.append(getEntryId());
@@ -643,6 +659,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		sb.append(getSummary());
 		sb.append(", url=");
 		sb.append(getUrl());
+		sb.append(", layoutUuid=");
+		sb.append(getLayoutUuid());
 		sb.append(", height=");
 		sb.append(getHeight());
 		sb.append(", width=");
@@ -657,7 +675,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.asset.model.AssetEntry");
@@ -744,6 +762,10 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		sb.append(getUrl());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>layoutUuid</column-name><column-value><![CDATA[");
+		sb.append(getLayoutUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>height</column-name><column-value><![CDATA[");
 		sb.append(getHeight());
 		sb.append("]]></column-value></column>");
@@ -793,6 +815,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	private String _description;
 	private String _summary;
 	private String _url;
+	private String _layoutUuid;
 	private int _height;
 	private int _width;
 	private double _priority;

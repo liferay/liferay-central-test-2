@@ -139,6 +139,7 @@ create table AssetEntry (
 	description STRING null,
 	summary STRING null,
 	url STRING null,
+	layoutUuid VARCHAR(75) null,
 	height INTEGER,
 	width INTEGER,
 	priority DOUBLE,

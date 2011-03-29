@@ -453,6 +453,24 @@ public class AssetEntryWrapper implements AssetEntry {
 	}
 
 	/**
+	* Gets the layout uuid of this asset entry.
+	*
+	* @return the layout uuid of this asset entry
+	*/
+	public java.lang.String getLayoutUuid() {
+		return _assetEntry.getLayoutUuid();
+	}
+
+	/**
+	* Sets the layout uuid of this asset entry.
+	*
+	* @param layoutUuid the layout uuid of this asset entry
+	*/
+	public void setLayoutUuid(java.lang.String layoutUuid) {
+		_assetEntry.setLayoutUuid(layoutUuid);
+	}
+
+	/**
 	* Gets the height of this asset entry.
 	*
 	* @return the height of this asset entry

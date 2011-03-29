@@ -457,6 +457,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		assetEntryImpl.setDescription(assetEntry.getDescription());
 		assetEntryImpl.setSummary(assetEntry.getSummary());
 		assetEntryImpl.setUrl(assetEntry.getUrl());
+		assetEntryImpl.setLayoutUuid(assetEntry.getLayoutUuid());
 		assetEntryImpl.setHeight(assetEntry.getHeight());
 		assetEntryImpl.setWidth(assetEntry.getWidth());
 		assetEntryImpl.setPriority(assetEntry.getPriority());

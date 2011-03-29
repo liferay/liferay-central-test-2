@@ -1266,6 +1266,7 @@
 			<basic name="description" />
 			<basic name="summary" />
 			<basic name="url" />
+			<basic name="layoutUuid" />
 			<basic name="height" />
 			<basic name="width" />
 			<basic name="priority" />
