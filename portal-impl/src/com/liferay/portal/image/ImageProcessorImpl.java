@@ -283,8 +283,21 @@ public class ImageProcessorImpl implements ImageProcessor {
 			type = BufferedImage.TYPE_INT_ARGB;
 		}
 
-		BufferedImage scaledBufferedImage = new BufferedImage(
-			scaledWidth, scaledHeight, type);
+		BufferedImage scaledBufferedImage = null;
+
+		if (type == BufferedImage.TYPE_BYTE_BINARY ||
+			type == BufferedImage.TYPE_BYTE_INDEXED) {
+
+			IndexColorModel indexColorModel =
+				(IndexColorModel)bufferedImage.getColorModel();
+
+			scaledBufferedImage = new BufferedImage(
+				scaledWidth, scaledHeight, type, indexColorModel);
+		}
+		else {
+			scaledBufferedImage = new BufferedImage(
+				scaledWidth, scaledHeight, type);
+		}
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
 
