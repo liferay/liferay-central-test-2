@@ -22,11 +22,7 @@ String backURL = ParamUtil.getString(request, "backURL", redirect);
 
 long ldapServerId = ParamUtil.getLong(request, "ldapServerId", 0);
 
-String postfix = StringPool.BLANK;
-
-if (ldapServerId > 0) {
-	postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-}
+String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
 String ldapServerName = PrefsPropsUtil.getString(company.getCompanyId(), "ldap.server.name" + postfix, StringPool.BLANK);
 String ldapBaseProviderUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + postfix);
