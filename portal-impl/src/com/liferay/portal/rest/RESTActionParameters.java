@@ -14,6 +14,7 @@
 
 package com.liferay.portal.rest;
 
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
@@ -116,21 +117,34 @@ public class RESTActionParameters {
 	}
 
 	private void _collectFromRequestParameters(HttpServletRequest request) {
+		UploadServletRequest uploadServletRequest = null;
+
+		if (request instanceof UploadServletRequest) {
+			uploadServletRequest = (UploadServletRequest) request;
+		}
+
 		Enumeration<String> enu = request.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String parameterName = enu.nextElement();
 
-			String[] parameterValues = request.getParameterValues(
-				parameterName);
-
 			Object value = null;
 
-			if (parameterValues.length == 1) {
-				value = parameterValues[0];
+			if (uploadServletRequest != null &&
+				!uploadServletRequest.isFormField(parameterName)) {
+
+				value = uploadServletRequest.getFile(parameterName);
 			}
 			else {
-				value = parameterValues;
+				String[] parameterValues = request.getParameterValues(
+					parameterName);
+
+				if (parameterValues.length == 1) {
+					value = parameterValues[0];
+				}
+				else {
+					value = parameterValues;
+				}
 			}
 
 			ObjectValuePair<String, Object> objectValuePair =

@@ -17,6 +17,7 @@ package com.liferay.portal.rest;
 import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.servlet.JSONServlet;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,6 +45,14 @@ public class RESTServlet extends JSONServlet {
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
+
+		if (jodd.servlet.ServletUtil.isMultipartRequest(request)) {
+
+			UploadServletRequest uploadServletRequest =
+				PortalUtil.getUploadServletRequest(request);
+
+			request = uploadServletRequest;
+		}
 
 		String path = GetterUtil.getString(request.getPathInfo());
 
