@@ -487,7 +487,6 @@
 			</attribute>
 		</attributes>
 	</component>
-	<!--
 	<component name="Legend">
 		<attributes>
 			<attribute>
@@ -506,6 +505,7 @@
 			</attribute>
 		</attributes>
 	</component>
+	<!--
 	<component name="ModelContext">
 		<attributes>
 			<attribute>

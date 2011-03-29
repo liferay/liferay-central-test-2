@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
@@ -11,16 +12,4 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-
-package com.liferay.taglib.aui;
-
-import com.liferay.taglib.aui.base.BaseLegendTag;
-
-/**
- * @author Julio Camarero
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- */
-public class LegendTag extends BaseLegendTag {
-
-}
+--%>

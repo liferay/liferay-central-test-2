@@ -14,12 +14,6 @@
  */
 --%>
 
-<%@ include file="/html/taglib/init.jsp" %>
-
-<%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:legend:cssClass"));
-Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:legend:dynamicAttributes");
-String label = GetterUtil.getString((String)request.getAttribute("aui:legend:label"));
-%>
+<%@ include file="init.jsp" %>
 
 <legend class="aui-fieldset-legend" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><span class="aui-legend <%= cssClass %>"><liferay-ui:message key="<%= label %>" /></span></legend>
