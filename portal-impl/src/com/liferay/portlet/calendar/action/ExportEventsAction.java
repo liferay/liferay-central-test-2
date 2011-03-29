@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -63,7 +64,7 @@ public class ExportEventsAction extends PortletAction {
 			String exportFileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
 
-			if (exportFileName == null) {
+			if (Validator.isNull(exportFileName)) {
 				exportFileName = "liferay.ics";
 			}
 			else {
