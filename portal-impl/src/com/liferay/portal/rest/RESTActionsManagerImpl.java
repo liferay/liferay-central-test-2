@@ -91,7 +91,9 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 			path = path.substring(0, pathParametersIndex);
 		}
 		else {
-			if (method.equals(HttpMethods.POST)) {
+			if (method.equals(HttpMethods.POST) &&
+				!jodd.servlet.ServletUtil.isMultipartRequest(request)) {
+
 				jsonRpcRequest = new JSONRPCRequest(request);
 
 				if (jsonRpcRequest.isValid()) {
