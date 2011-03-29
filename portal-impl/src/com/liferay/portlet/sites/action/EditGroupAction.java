@@ -174,6 +174,37 @@ public class EditGroupAction extends PortletAction {
 		return refererGroupId;
 	}
 
+	protected void updateActive(ActionRequest actionRequest, String cmd)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		if ((groupId == themeDisplay.getDoAsGroupId()) ||
+			(groupId == themeDisplay.getScopeGroupId()) ||
+			(groupId == getRefererGroupId(themeDisplay))) {
+
+			throw new RequiredGroupException(String.valueOf(groupId));
+		}
+
+		Group group = GroupServiceUtil.getGroup(groupId);
+
+		boolean active = false;
+
+		if (cmd.equals(Constants.RESTORE)) {
+			active = true;
+		}
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			Group.class.getName(), actionRequest);
+
+		GroupServiceUtil.updateGroup(
+			groupId, group.getName(), group.getDescription(), group.getType(),
+			group.getFriendlyURL(), active, serviceContext);
+	}
+
 	protected void updateGroup(ActionRequest actionRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -256,37 +287,6 @@ public class EditGroupAction extends PortletAction {
 		CommunitiesUtil.applyLayoutSetPrototypes(
 			group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
 			serviceContext);
-	}
-
-	protected void updateActive(ActionRequest actionRequest, String cmd)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		if ((groupId == themeDisplay.getDoAsGroupId()) ||
-			(groupId == themeDisplay.getScopeGroupId()) ||
-			(groupId == getRefererGroupId(themeDisplay))) {
-
-			throw new RequiredGroupException(String.valueOf(groupId));
-		}
-
-		Group group = GroupServiceUtil.getGroup(groupId);
-
-		boolean active = false;
-
-		if (cmd.equals(Constants.RESTORE)) {
-			active = true;
-		}
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Group.class.getName(), actionRequest);
-
-		GroupServiceUtil.updateGroup(
-			groupId, group.getName(), group.getDescription(), group.getType(),
-			group.getFriendlyURL(), active, serviceContext);
 	}
 
 }
