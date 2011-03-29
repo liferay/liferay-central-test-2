@@ -208,7 +208,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 					%>
 
 					<span class="install-themes">
-						<a id="<portlet:namespace />installMore" href="<%= installPluginsURL %>"><liferay-ui:message key="install-more" /></a>
+						<a href="<%= installPluginsURL %>" id="<portlet:namespace />installMore"><liferay-ui:message key="install-more" /></a>
 					</span>
 				</c:if>
 			</h3>
