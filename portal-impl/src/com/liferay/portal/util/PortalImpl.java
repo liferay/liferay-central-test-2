@@ -3968,6 +3968,19 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public boolean isMultipartRequest(HttpServletRequest request) {
+		String contentType = request.getHeader(HttpHeaders.CONTENT_TYPE);
+
+		if ((contentType != null) &&
+			contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isOmniadmin(long userId) {
 		return OmniadminUtil.isOmniadmin(userId);
 	}

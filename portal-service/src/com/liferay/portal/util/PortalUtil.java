@@ -1224,6 +1224,10 @@ public class PortalUtil {
 		return getPortal().isMethodPost(portletRequest);
 	}
 
+	public static boolean isMultipartRequest(HttpServletRequest request) {
+		return getPortal().isMultipartRequest(request);
+	}
+
 	public static boolean isOmniadmin(long userId) {
 		return getPortal().isOmniadmin(userId);
 	}

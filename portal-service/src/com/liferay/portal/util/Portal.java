@@ -906,6 +906,8 @@ public interface Portal {
 
 	public boolean isMethodPost(PortletRequest portletRequest);
 
+	public boolean isMultipartRequest(HttpServletRequest request);
+
 	public boolean isOmniadmin(long userId);
 
 	public boolean isReservedParameter(String name);
