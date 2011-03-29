@@ -316,6 +316,32 @@ public class JournalUtil {
 		return orderByComparator;
 	}
 
+	public static List<Layout> getDefaultAssetPublisherLayouts(
+			long groupId, boolean privateLayout)
+		throws SystemException {
+
+		List<Layout> defaultAssetPublisherLayouts = new ArrayList<Layout>();
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout);
+
+		for (Layout layout : layouts) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			String defaultAssetPublisherPortletId =
+				typeSettingsProperties.getProperty(
+					LayoutTypePortletConstants.
+						DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
+
+			if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
+				defaultAssetPublisherLayouts.add(layout);
+			}
+		}
+
+		return defaultAssetPublisherLayouts;
+	}
+
 	public static String getEmailArticleAddedBody(
 		PortletPreferences preferences) {
 
@@ -598,31 +624,6 @@ public class JournalUtil {
 			PropsKeys.JOURNAL_EMAIL_FROM_NAME);
 
 		return preferences.getValue("emailFromName", emailFromName);
-	}
-
-	public static List<Layout> getDefaultAssetPublisherLayouts(
-			long groupId, boolean privateLayout)
-		throws SystemException {
-
-		List<Layout> layouts = new ArrayList<Layout>();
-		List<Layout> groupLayouts =
-			LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
-
-		for(Layout layout: groupLayouts) {
-			UnicodeProperties typeSettingsProperties =
-				layout.getTypeSettingsProperties();
-
-			String defaultAssetPublisherPortletId =
-				typeSettingsProperties.getProperty(
-					LayoutTypePortletConstants.
-						DEFAULT_ASSET_PUBLISHER_PORTLET_ID, StringPool.BLANK);
-
-			if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
-				layouts.add(layout);
-			}
-		}
-
-		return layouts;
 	}
 
 	public static Stack<JournalArticle> getRecentArticles(

@@ -645,13 +645,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalDisplayPagePanel" persistState="<%= true %>" title="display-page">
 
 				<%
-				List<Layout> privateGroupLayouts = new ArrayList<Layout>();
-				List<Layout> publicGroupLayouts = new ArrayList<Layout>();
+				List<Layout> privateGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, true);
+				List<Layout> publicGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, false);
 
-				privateGroupLayouts.addAll(JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, true));
-				publicGroupLayouts.addAll(JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, false));
-
-				if ((privateGroupLayouts.size() == 0) && (publicGroupLayouts.size() == 0)) {
+				if (privateGroupLayouts.isEmpty() && publicGroupLayouts.isEmpty()) {
 				%>
 
 					<liferay-ui:message key="there-are-no-pages-set-up-to-be-the-display-page" />
@@ -664,7 +661,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<aui:select helpMessage="default-display-page-help" label="default-display-page" name="layoutUuid" showEmptyOption="<%= true %>">
 
 					<%
-					if (publicGroupLayouts.size() > 0) {
+					if (!publicGroupLayouts.isEmpty()) {
 					%>
 
 						<optgroup label="<liferay-ui:message key="public-pages" />">
@@ -684,8 +681,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					<%
 					}
 
-					if (privateGroupLayouts.size() > 0) {
+					if (!privateGroupLayouts.isEmpty()) {
 					%>
+
 						<optgroup label="<liferay-ui:message key="private-pages" />">
 
 					<%

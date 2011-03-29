@@ -85,7 +85,6 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
@@ -96,6 +95,7 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.AuthTokenUtil;
@@ -770,14 +770,15 @@ public class PortalImpl implements Portal {
 
 		String actualURL = null;
 
-		if ((friendlyURL != null) && friendlyURL.startsWith(
+		if ((friendlyURL != null) &&
+			friendlyURL.startsWith(
 				JournalArticleConstants.CANONICAL_URL_SEPARATOR)) {
 
 			try {
 				actualURL = getJournalArticleActualURL(
 					groupId, mainPath, friendlyURL, params, requestContext);
 			}
-			catch (PortalException pe) {
+			catch (Exception e) {
 				friendlyURL = null;
 			}
 		}
@@ -1641,51 +1642,66 @@ public class PortalImpl implements Portal {
 
 		String articleUrlTitle = friendlyURL.substring(
 			JournalArticleConstants.CANONICAL_URL_SEPARATOR.length());
-		String layoutActualURL = StringPool.BLANK;
 
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
 				groupId, articleUrlTitle);
 
-		String layoutUuid = article.getLayoutUuid();
+		Layout layout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+			article.getLayoutUuid(), groupId);
 
-		Layout layout =
-			LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-				layoutUuid, groupId);
-
-		UnicodeProperties properties = layout.getTypeSettingsProperties();
-
-		layoutActualURL = getLayoutActualURL(layout, mainPath);
-
-		String defaultAssetPublisherPortletId = properties.get(
-			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
-
-		if (Validator.isNull(defaultAssetPublisherPortletId)) {
-			String instanceId = PwdGenerator.getPassword(
-				PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3, 4);
-
-			defaultAssetPublisherPortletId =
-				PortletKeys.ASSET_PUBLISHER +
-				PortletConstants.INSTANCE_SEPARATOR +
-				instanceId;
-		}
-
-		HttpServletRequest request =
-			(HttpServletRequest)requestContext.get("request");
-
-		String namespace = "_" + defaultAssetPublisherPortletId + "_";
+		String layoutActualURL = getLayoutActualURL(layout, mainPath);
 
 		InheritableMap<String, String[]> actualParams =
-				new InheritableMap<String, String[]>();
+			new InheritableMap<String, String[]>();
 
 		if (params != null) {
 			actualParams.setParentMap(params);
 		}
 
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		String defaultAssetPublisherPortletId = typeSettingsProperties.get(
+			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
+
+		String currentDefaultAssetPublisherPortletId =
+			defaultAssetPublisherPortletId;
+
+		if (Validator.isNull(defaultAssetPublisherPortletId)) {
+			defaultAssetPublisherPortletId =
+				PortletKeys.ASSET_PUBLISHER +
+					LayoutTypePortletImpl.getFullInstanceSeparator();
+		}
+
+		if (Validator.isNull(
+				currentDefaultAssetPublisherPortletId)) {
+
+			HttpServletRequest request =
+				(HttpServletRequest)requestContext.get("request");
+
+			String actualPortletAuthenticationToken = AuthTokenUtil.getToken(
+				request, layout.getPlid(), defaultAssetPublisherPortletId);
+
+			actualParams.put(
+				"p_p_auth", new String[] {actualPortletAuthenticationToken});
+		}
+
 		actualParams.put(
 			"p_p_id", new String[] {defaultAssetPublisherPortletId});
 		actualParams.put("p_p_lifecycle", new String[] {"0"});
+
+		if (Validator.isNull(
+				currentDefaultAssetPublisherPortletId)) {
+
+			actualParams.put(
+				"p_p_state", new String[] {WindowState.MAXIMIZED.toString()});
+		}
+
 		actualParams.put("p_p_mode", new String[] {"view"});
+
+		String namespace = getPortletNamespace(defaultAssetPublisherPortletId);
+
 		actualParams.put(
 			namespace + "struts_action",
 			new String[] {"/asset_publisher/view_content"});
@@ -1693,21 +1709,7 @@ public class PortalImpl implements Portal {
 			namespace + "type",
 			new String[] {JournalArticleAssetRendererFactory.TYPE});
 		actualParams.put(
-			namespace + "urlTitle",
-			new String[] {article.getUrlTitle()});
-
-		if (Validator.isNull(properties.get(
-			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID))) {
-
-			String actualPortletAuthenticationToken = AuthTokenUtil.getToken(
-				request, layout.getPlid(), defaultAssetPublisherPortletId);
-
-			actualParams.put(
-				"p_p_auth", new String[] {actualPortletAuthenticationToken});
-
-			actualParams.put(
-				"p_p_state", new String[] {WindowState.MAXIMIZED.toString()});
-		}
+			namespace + "urlTitle", new String[] {article.getUrlTitle()});
 
 		String queryString = HttpUtil.parameterMapToString(
 			actualParams, false);

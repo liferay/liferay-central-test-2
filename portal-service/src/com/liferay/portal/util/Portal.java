@@ -221,10 +221,10 @@ public interface Portal {
 	public String generateRandomKey(HttpServletRequest request, String input);
 
 	public String getActualURL(
-		long groupId, boolean privateLayout, String mainPath,
-		String friendlyURL, Map<String, String[]> params,
-		Map<String, Object> requestContext)
-	throws PortalException, SystemException;
+			long groupId, boolean privateLayout, String mainPath,
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
+		throws PortalException, SystemException;
 
 	/**
 	 * Gets the set of struts actions that should not be checked for an
