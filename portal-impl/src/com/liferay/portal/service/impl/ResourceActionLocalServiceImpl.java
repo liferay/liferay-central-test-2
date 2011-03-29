@@ -61,6 +61,13 @@ public class ResourceActionLocalServiceImpl
 	public void checkResourceActions(String name, List<String> actionIds)
 		throws SystemException {
 
+		checkResourceActions(name, actionIds, false);
+	}
+
+	public void checkResourceActions(
+			String name, List<String> actionIds, boolean addDefaultActions)
+		throws SystemException {
+
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
 			return;
 		}
@@ -70,7 +77,8 @@ public class ResourceActionLocalServiceImpl
 
 		resourceActions = ListUtil.copy(resourceActions);
 
-		checkResourceActions(name, actionIds, resourceActions);
+		checkResourceActions(
+			name, actionIds, resourceActions, addDefaultActions);
 	}
 
 	public ResourceAction getResourceAction(String name, String actionId)
@@ -95,7 +103,7 @@ public class ResourceActionLocalServiceImpl
 
 	protected void checkResourceActions(
 			String name, List<String> actionIds,
-			List<ResourceAction> resourceActions)
+			List<ResourceAction> resourceActions, boolean addDefaultActions)
 		throws SystemException {
 
 		long lastBitwiseValue = 1;
@@ -151,32 +159,36 @@ public class ResourceActionLocalServiceImpl
 			newResourceActions.add(resourceAction);
 		}
 
-		List<String> communityDefaultActions =
-			ResourceActionsUtil.getModelResourceCommunityDefaultActions(name);
+		if (addDefaultActions) {
+			List<String> communityDefaultActions =
+				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+					name);
 
-		List<String> guestDefaultActions =
-			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+			List<String> guestDefaultActions =
+				ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 
-		for (ResourceAction resourceAction : newResourceActions) {
-			String actionId = resourceAction.getActionId();
+			for (ResourceAction resourceAction : newResourceActions) {
+				String actionId = resourceAction.getActionId();
 
-			if (communityDefaultActions.contains(actionId)) {
+				if (communityDefaultActions.contains(actionId)) {
+					resourcePermissionLocalService.addResourcePermissions(
+						name, RoleConstants.COMMUNITY_MEMBER,
+						ResourceConstants.SCOPE_INDIVIDUAL,
+						resourceAction.getBitwiseValue());
+				}
+
+				if (guestDefaultActions.contains(actionId)) {
+					resourcePermissionLocalService.addResourcePermissions(
+						name, RoleConstants.GUEST,
+						ResourceConstants.SCOPE_INDIVIDUAL,
+						resourceAction.getBitwiseValue());
+				}
+
 				resourcePermissionLocalService.addResourcePermissions(
-					name, RoleConstants.COMMUNITY_MEMBER,
+					name, RoleConstants.OWNER,
 					ResourceConstants.SCOPE_INDIVIDUAL,
 					resourceAction.getBitwiseValue());
 			}
-
-			if (guestDefaultActions.contains(actionId)) {
-				resourcePermissionLocalService.addResourcePermissions(
-					name, RoleConstants.GUEST,
-					ResourceConstants.SCOPE_INDIVIDUAL,
-					resourceAction.getBitwiseValue());
-			}
-
-			resourcePermissionLocalService.addResourcePermissions(
-				name, RoleConstants.OWNER, ResourceConstants.SCOPE_INDIVIDUAL,
-				resourceAction.getBitwiseValue());
 		}
 	}
 

@@ -258,6 +258,12 @@ public class ResourceActionLocalServiceUtil {
 		getService().checkResourceActions(name, actionIds);
 	}
 
+	public static void checkResourceActions(java.lang.String name,
+		java.util.List<java.lang.String> actionIds, boolean addDefaultActions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().checkResourceActions(name, actionIds, addDefaultActions);
+	}
+
 	public static com.liferay.portal.model.ResourceAction getResourceAction(
 		java.lang.String name, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException {

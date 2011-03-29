@@ -46,7 +46,7 @@ public class VerifyPermission extends VerifyProcess {
 			}
 			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				ResourceActionLocalServiceUtil.checkResourceActions(
-					modelName, actionIds);
+					modelName, actionIds, true);
 			}
 		}
 	}
