@@ -18,6 +18,7 @@ import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -27,10 +28,12 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
 import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -143,7 +146,8 @@ public class EditGroupAction extends PortletAction {
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		if ((groupId == themeDisplay.getDoAsGroupId()) ||
-			(groupId == themeDisplay.getScopeGroupId())) {
+			(groupId == themeDisplay.getScopeGroupId()) ||
+			(groupId == getRefererGroupId(themeDisplay))) {
 
 			throw new RequiredGroupException(String.valueOf(groupId));
 		}
@@ -151,6 +155,23 @@ public class EditGroupAction extends PortletAction {
 		GroupServiceUtil.deleteGroup(groupId);
 
 		LiveUsers.deleteGroup(themeDisplay.getCompanyId(), groupId);
+	}
+
+	protected long getRefererGroupId(ThemeDisplay themeDisplay)
+		throws Exception {
+
+		long refererGroupId = -1;
+
+		try {
+			Layout refererLayout = LayoutLocalServiceUtil.getLayout(
+				themeDisplay.getRefererPlid());
+
+			refererGroupId = refererLayout.getGroupId();
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
+
+		return refererGroupId;
 	}
 
 	protected void updateGroup(ActionRequest actionRequest) throws Exception {
@@ -246,7 +267,8 @@ public class EditGroupAction extends PortletAction {
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		if ((groupId == themeDisplay.getDoAsGroupId()) ||
-			(groupId == themeDisplay.getScopeGroupId())) {
+			(groupId == themeDisplay.getScopeGroupId()) ||
+			(groupId == getRefererGroupId(themeDisplay))) {
 
 			throw new RequiredGroupException(String.valueOf(groupId));
 		}
