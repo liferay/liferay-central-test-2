@@ -224,7 +224,7 @@ public class DLAppHelperLocalServiceImpl
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, false, null, null, null, null,
 				mimeType, fileEntry.getTitle(), fileEntry.getDescription(),
-				null, null, 0, 0, null, false);
+				null, null, null, 0, 0, null, false);
 		}
 		else {
 			assetEntryLocalService.updateEntry(
@@ -233,7 +233,8 @@ public class DLAppHelperLocalServiceImpl
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, visible, null, null, null,
 				null, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(), null, null, 0, 0, null, false);
+				fileEntry.getDescription(), null, null, null, 0, 0, null,
+				false);
 
 			List<DLFileShortcut> fileShortcuts =
 				dlFileShortcutPersistence.findByToFileEntryId(
@@ -246,7 +247,8 @@ public class DLAppHelperLocalServiceImpl
 					fileShortcut.getFileShortcutId(), fileShortcut.getUuid(),
 					assetCategoryIds, assetTagNames, true, null, null, null,
 					null, mimeType, fileEntry.getTitle(),
-					fileEntry.getDescription(), null, null, 0, 0, null, false);
+					fileEntry.getDescription(), null, null, null, 0, 0, null,
+					false);
 			}
 		}
 	}
@@ -282,7 +284,7 @@ public class DLAppHelperLocalServiceImpl
 							assetCategoryIds, assetTagNames, true, null, null,
 							null, null, draftAssetEntry.getMimeType(),
 							fileEntry.getTitle(), fileEntry.getDescription(),
-							null, null, 0, 0, null, false);
+							null, null, null, 0, 0, null, false);
 
 						assetEntryLocalService.deleteEntry(
 							draftAssetEntry.getEntryId());

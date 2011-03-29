@@ -726,8 +726,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			userId, event.getGroupId(), CalEvent.class.getName(),
 			event.getEventId(), event.getUuid(), assetCategoryIds,
 			assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
-			event.getTitle(), event.getDescription(), null, null,	0, 0, null,
-			false);
+			event.getTitle(), event.getDescription(), null, null, null, 0, 0,
+			null, false);
 	}
 
 	public CalEvent updateEvent(

@@ -85,7 +85,7 @@ public class SubscriptionLocalServiceImpl
 				assetEntryLocalService.updateEntry(
 					userId, groupId, className, classPK, null,
 					null, null, false, null, null, null, null, null,
-					String.valueOf(groupId), null, null, null, 0, 0, null,
+					String.valueOf(groupId), null, null, null, null, 0, 0, null,
 					false);
 			}
 

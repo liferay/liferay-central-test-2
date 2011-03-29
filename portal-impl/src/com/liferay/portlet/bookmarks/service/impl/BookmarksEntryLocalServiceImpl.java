@@ -312,7 +312,7 @@ public class BookmarksEntryLocalServiceImpl
 			entry.getEntryId(), entry.getUuid(), assetCategoryIds,
 			assetTagNames, true, null, null, null, null,
 			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getDescription(),
-			null, entry.getUrl(), 0, 0, null, false);
+			null, null, entry.getUrl(), 0, 0, null, false);
 	}
 
 	public BookmarksEntry updateEntry(

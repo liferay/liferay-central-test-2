@@ -924,7 +924,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			userId, companyGroup.getGroupId(), Group.class.getName(),
 			group.getGroupId(), null, assetCategoryIds, assetTagNames, false,
 			null, null, null, null, null, group.getDescriptiveName(),
-			group.getDescription(), null, null, 0, 0, null, false);
+			group.getDescription(), null, null,  null, 0, 0, null, false);
 	}
 
 	public Group updateFriendlyURL(long groupId, String friendlyURL)

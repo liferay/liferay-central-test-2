@@ -1917,7 +1917,8 @@ public class JournalArticleLocalServiceImpl
 				article.getPrimaryKey(), article.getUuid(), assetCategoryIds,
 				assetTagNames, false, null, null, displayDate, expirationDate,
 				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), null, null, 0, 0, null, false);
+				article.getDescription(), null, null, article.getLayoutUuid(),
+				0, 0, null, false);
 		}
 		else {
 			assetEntryLocalService.updateEntry(
@@ -1925,8 +1926,8 @@ public class JournalArticleLocalServiceImpl
 				article.getResourcePrimKey(), article.getUuid(),
 				assetCategoryIds, assetTagNames, visible, null, null,
 				displayDate, expirationDate, ContentTypes.TEXT_HTML,
-				article.getTitle(), article.getDescription(), null, null, 0, 0,
-				null, false);
+				article.getTitle(), article.getDescription(), null, null,
+				article.getLayoutUuid(), 0, 0, null, false);
 		}
 	}
 
@@ -2018,7 +2019,7 @@ public class JournalArticleLocalServiceImpl
 							assetCategoryIds, assetTagNames, true, null, null,
 							displayDate, expirationDate, ContentTypes.TEXT_HTML,
 							article.getTitle(), article.getDescription(), null,
-							null, 0, 0, null, false);
+							null, article.getLayoutUuid(), 0, 0, null, false);
 
 						assetEntryLocalService.deleteEntry(
 							JournalArticle.class.getName(),

@@ -818,8 +818,8 @@ public class OrganizationLocalServiceImpl
 			userId, companyGroup.getGroupId(), Organization.class.getName(),
 			organization.getOrganizationId(), null, assetCategoryIds,
 			assetTagNames, false, null, null, null, null, null,
-			organization.getName(), StringPool.BLANK, null, null, 0, 0, null,
-			false);
+			organization.getName(), StringPool.BLANK, null, null, null, 0, 0,
+			null, false);
 	}
 
 	public Organization updateOrganization(

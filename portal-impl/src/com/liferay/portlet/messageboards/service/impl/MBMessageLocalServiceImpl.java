@@ -1214,8 +1214,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			userId, message.getGroupId(), message.getWorkflowClassName(),
 			message.getMessageId(), message.getUuid(), assetCategoryIds,
 			assetTagNames, visible, null, null, null, null,
-			ContentTypes.TEXT_HTML, message.getSubject(), null, null, null, 0,
-			0, null, false);
+			ContentTypes.TEXT_HTML, message.getSubject(), null, null, null,
+			null, 0, 0, null, false);
 	}
 
 	public MBMessage updateDiscussionMessage(

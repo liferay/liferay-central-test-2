@@ -215,7 +215,7 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcut.getFileShortcutId(), fileShortcut.getUuid(),
 			assetCategoryIds, assetTagNames, false, null, null, null, null,
 			fileEntry.getMimeType(), fileEntry.getTitle(),
-			fileEntry.getDescription(), null, null, 0, 0, null, false);
+			fileEntry.getDescription(), null, null, null, 0, 0, null, false);
 	}
 
 	public DLFileShortcut updateFileShortcut(

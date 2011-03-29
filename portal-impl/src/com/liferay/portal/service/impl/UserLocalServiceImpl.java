@@ -3285,7 +3285,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			userId, companyGroup.getGroupId(), User.class.getName(),
 			user.getUserId(), user.getUuid(), assetCategoryIds, assetTagNames,
 			false, null, null, null, null, null, user.getFullName(), null, null,
-			null, 0, 0, null, false);
+			null, null, 0, 0, null, false);
 	}
 
 	/**

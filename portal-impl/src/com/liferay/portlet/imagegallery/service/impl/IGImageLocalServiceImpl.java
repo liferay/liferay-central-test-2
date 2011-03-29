@@ -468,7 +468,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			userId, image.getGroupId(), IGImage.class.getName(),
 			image.getImageId(), image.getUuid(), assetCategoryIds,
 			assetTagNames, true, null, null, null, null, contentType,
-			image.getName(), image.getDescription(), null, null,
+			image.getName(), image.getDescription(), null, null, null,
 			largeImage.getHeight(), largeImage.getWidth(), null, false);
 	}
 
