@@ -25,6 +25,7 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryModel;
+import com.liferay.portlet.documentlibrary.model.DLFileEntrySoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the DLFileEntry service. Represents a row in the &quot;DLFileEntry&quot; database table, with each column mapped to a property of this class.
@@ -93,6 +96,56 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
 			true);
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static DLFileEntry toModel(DLFileEntrySoap soapModel) {
+		DLFileEntry model = new DLFileEntryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setFileEntryId(soapModel.getFileEntryId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setVersionUserId(soapModel.getVersionUserId());
+		model.setVersionUserName(soapModel.getVersionUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setRepositoryId(soapModel.getRepositoryId());
+		model.setFolderId(soapModel.getFolderId());
+		model.setName(soapModel.getName());
+		model.setExtension(soapModel.getExtension());
+		model.setMimeType(soapModel.getMimeType());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setExtraSettings(soapModel.getExtraSettings());
+		model.setVersion(soapModel.getVersion());
+		model.setSize(soapModel.getSize());
+		model.setReadCount(soapModel.getReadCount());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<DLFileEntry> toModels(DLFileEntrySoap[] soapModels) {
+		List<DLFileEntry> models = new ArrayList<DLFileEntry>(soapModels.length);
+
+		for (DLFileEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
 
 	public Class<?> getModelClass() {
 		return DLFileEntry.class;
