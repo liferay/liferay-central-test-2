@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.servlet.JSONServlet;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
@@ -46,10 +47,10 @@ public class RESTServlet extends JSONServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		if (jodd.servlet.ServletUtil.isMultipartRequest(request)) {
+		if (PortalUtil.isMultipartRequest(request)) {
 
 			UploadServletRequest uploadServletRequest =
-				PortalUtil.getUploadServletRequest(request);
+				new UploadServletRequestImpl(request);
 
 			request = uploadServletRequest;
 		}

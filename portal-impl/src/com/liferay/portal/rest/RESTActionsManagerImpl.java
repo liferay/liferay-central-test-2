@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SortedArrayList;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 
 import java.lang.reflect.Method;
 
@@ -92,7 +93,7 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 		}
 		else {
 			if (method.equals(HttpMethods.POST) &&
-				!jodd.servlet.ServletUtil.isMultipartRequest(request)) {
+				!PortalUtil.isMultipartRequest(request)) {
 
 				jsonRpcRequest = new JSONRPCRequest(request);
 
