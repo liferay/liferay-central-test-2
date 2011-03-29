@@ -33,6 +33,7 @@ AUI().add(
 
 		Util._openWindow = function(config) {
 			var openingWindow = config.openingWindow;
+
 			var title = config.title;
 			var uri = config.uri;
 

@@ -260,6 +260,7 @@
 
 				if (dialog) {
 					openingWindow = topUtil.Window._map[windowName]._opener;
+
 					Window._opener = openingWindow;
 				}
 			}
@@ -929,8 +930,8 @@
 				var button = options.button;
 				var height = options.height || 640;
 				var textarea = options.textarea;
-				var width = options.width || 680;
 				var uri = options.uri;
+				var width = options.width || 680;
 
 				options.dialog = {
 					stack: false

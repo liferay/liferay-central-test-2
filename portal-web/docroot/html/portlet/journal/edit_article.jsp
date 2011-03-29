@@ -891,7 +891,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = templateId;
 
 			if (dialog) {
-		        dialog.close();
+				dialog.close();
 			}
 
 			submitForm(document.<portlet:namespace />fm1);

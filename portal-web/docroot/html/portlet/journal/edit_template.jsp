@@ -247,7 +247,7 @@ if (template == null) {
 			{
 				dialog: {
 					stack: false,
-					width: 680 
+					width: 680
 				},
 				title: '<liferay-ui:message key="structure" />',
 				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
