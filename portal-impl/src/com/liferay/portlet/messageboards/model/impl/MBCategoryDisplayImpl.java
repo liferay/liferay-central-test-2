@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.TreeNode;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBCategoryDisplay;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,7 +121,7 @@ public class MBCategoryDisplayImpl implements MBCategoryDisplay {
 	}
 
 	protected void init(long scopeGroupId, long categoryId) throws Exception {
-		_allCategories = MBCategoryLocalServiceUtil.getCategories(scopeGroupId);
+		_allCategories = MBCategoryServiceUtil.getCategories(scopeGroupId);
 
 		_rootCategory = new MBCategoryImpl();
 

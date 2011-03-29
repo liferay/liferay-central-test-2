@@ -321,6 +321,17 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	public int getGroupMessagesCount(long groupId, int status)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return mbMessagePersistence.filterCountByGroupId(groupId);
+		}
+		else {
+			return mbMessagePersistence.filterCountByG_S(groupId, status);
+		}
+	}
+
 	public String getGroupMessagesRSS(
 			long groupId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,

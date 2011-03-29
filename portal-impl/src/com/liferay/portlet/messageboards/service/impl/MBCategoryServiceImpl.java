@@ -65,6 +65,10 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		mbCategoryLocalService.deleteCategory(categoryId);
 	}
 
+	public List<MBCategory> getCategories(long groupId) throws SystemException {
+		return mbCategoryPersistence.filterFindByGroupId(groupId);
+	}
+
 	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int start, int end)
 		throws SystemException {
