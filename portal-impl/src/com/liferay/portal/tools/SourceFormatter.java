@@ -788,18 +788,18 @@ public class SourceFormatter {
 					"while (");
 			}
 
-			if (newContent.indexOf("\n\n\n") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"\n\n\n",
-					"\n\n");
-			}
-
 			if (newContent.indexOf("){\n") != -1) {
 				newContent = StringUtil.replace(
 					newContent,
 					"){\n",
 					") {\n");
+			}
+
+			if (newContent.indexOf("\n\n\n") != -1) {
+				newContent = StringUtil.replace(
+					newContent,
+					"\n\n\n",
+					"\n\n");
 			}
 
 			if (newContent.indexOf("*/\npackage ") != -1) {
