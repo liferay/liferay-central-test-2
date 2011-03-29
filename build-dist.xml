@@ -117,6 +117,12 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-${lp.version}.dmp" />
 	</target>
 
+	<target name="build-dist-tcat-admin">
+	</target>
+
+	<target name="build-dist-tcat-agent">
+	</target>
+
 	<target name="build-dist-tomcat">
 		<antcall target="unzip-tomcat" />
 
@@ -444,6 +450,8 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas" />
 		<antcall target="build-dist-resin" />
+		<antcall target="build-dist-tcat-admin" />
+		<antcall target="build-dist-tcat-agent" />
 		<antcall target="build-dist-tomcat" />
 
 		<antcall target="zip-api" />
@@ -762,6 +770,54 @@ release was successful.</echo>
 		</unzip>
 
 		<mkdir dir="${app.server.parent.dir}/resin-4.0.14/webapps" />
+	</target>
+
+	<target name="unzip-tcat">
+		<delete dir="${app.server.tcat.dir}" />
+
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.tcat.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.tcat.zip.name}"
+					src="${app.server.tcat.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<script classpathref="project.classpath" language="beanshell">
+			String appServerTCatDir = project.getProperty("app.server.tcat.dir");
+
+			int forwardSlashPos = appServerTCatDir.lastIndexOf("/");
+			int backSlashPos = appServerTCatDir.lastIndexOf("\\");
+
+			int pos = forwardSlashPos;
+
+			if ((backSlashPos != -1) &amp;&amp; (backSlashPos > forwardSlashPos)) {
+				pos = backSlashPos;
+			}
+
+			String appServerTCatDirName = appServerTCatDir.substring(pos + 1);
+
+			project.setProperty("app.server.tcat.dir.name", appServerTCatDirName);
+		</script>
+
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.tcat.zip.name}"
+		>
+			<patternset
+				includes="TcatServer-6.4.3/webapps/*.war"
+			/>
+			<mapper
+				type="glob"
+				from="TcatServer-6.4.3/*"
+				to="${app.server.tcat.dir.name}/*"
+			/>
+		</unzip>
 	</target>
 
 	<target name="unzip-tomcat">
