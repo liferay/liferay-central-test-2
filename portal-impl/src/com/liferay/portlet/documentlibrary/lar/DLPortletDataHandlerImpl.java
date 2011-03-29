@@ -232,6 +232,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
+		serviceContext.setAttribute("contentType", fileEntry.getMimeType());
+		serviceContext.setAttribute("extension", fileEntry.getExtension());
+
 		String binPath = fileEntryElement.attributeValue("bin-path");
 
 		InputStream is = null;
