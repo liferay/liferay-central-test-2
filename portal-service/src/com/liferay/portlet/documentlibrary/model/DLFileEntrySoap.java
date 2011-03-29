@@ -21,10 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceSoap}.
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceSoap
  * @generated
  */
 public class DLFileEntrySoap implements Serializable {

@@ -34,7 +34,7 @@
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
-	<entity name="DLFileEntry" uuid="true" local-service="true" remote-service="true">
+	<entity name="DLFileEntry" uuid="true" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -258,7 +258,7 @@
 			<finder-column name="status" />
 		</finder>
 	</entity>
-	<entity name="DLFolder" uuid="true" local-service="true" remote-service="true">
+	<entity name="DLFolder" uuid="true" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
