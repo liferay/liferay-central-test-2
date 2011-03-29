@@ -536,6 +536,14 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/sl/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/sl_SI/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/sv/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -814,6 +822,8 @@
 			<url-pattern>/ru_RU/c/portal/protected</url-pattern>
 			<url-pattern>/sk/c/portal/protected</url-pattern>
 			<url-pattern>/sk_SK/c/portal/protected</url-pattern>
+			<url-pattern>/sl/c/portal/protected</url-pattern>
+			<url-pattern>/sl_SI/c/portal/protected</url-pattern>
 			<url-pattern>/sv/c/portal/protected</url-pattern>
 			<url-pattern>/sv_SE/c/portal/protected</url-pattern>
 			<url-pattern>/tr/c/portal/protected</url-pattern>
