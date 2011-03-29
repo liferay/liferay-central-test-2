@@ -427,60 +427,28 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
 
 		dlFileEntryImpl.setUuid(getUuid());
-
-		DLFileEntryModelImpl dlFileEntryModelImpl = dlFileEntryImpl;
-
-		dlFileEntryModelImpl._originalUuid = dlFileEntryModelImpl._uuid;
-
 		dlFileEntryImpl.setFileEntryId(getFileEntryId());
-
 		dlFileEntryImpl.setGroupId(getGroupId());
-
-		dlFileEntryModelImpl._originalGroupId = dlFileEntryModelImpl._groupId;
-
-		dlFileEntryModelImpl._setOriginalGroupId = false;
 		dlFileEntryImpl.setCompanyId(getCompanyId());
-
 		dlFileEntryImpl.setUserId(getUserId());
-
 		dlFileEntryImpl.setUserName(getUserName());
-
 		dlFileEntryImpl.setVersionUserId(getVersionUserId());
-
 		dlFileEntryImpl.setVersionUserName(getVersionUserName());
-
 		dlFileEntryImpl.setCreateDate(getCreateDate());
-
 		dlFileEntryImpl.setModifiedDate(getModifiedDate());
-
 		dlFileEntryImpl.setRepositoryId(getRepositoryId());
-
 		dlFileEntryImpl.setFolderId(getFolderId());
-
-		dlFileEntryModelImpl._originalFolderId = dlFileEntryModelImpl._folderId;
-
-		dlFileEntryModelImpl._setOriginalFolderId = false;
 		dlFileEntryImpl.setName(getName());
-
-		dlFileEntryModelImpl._originalName = dlFileEntryModelImpl._name;
-
 		dlFileEntryImpl.setExtension(getExtension());
-
 		dlFileEntryImpl.setMimeType(getMimeType());
-
 		dlFileEntryImpl.setTitle(getTitle());
-
-		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
-
 		dlFileEntryImpl.setDescription(getDescription());
-
 		dlFileEntryImpl.setExtraSettings(getExtraSettings());
-
 		dlFileEntryImpl.setVersion(getVersion());
-
 		dlFileEntryImpl.setSize(getSize());
-
 		dlFileEntryImpl.setReadCount(getReadCount());
+
+		dlFileEntryImpl.resetOriginalValues();
 
 		return dlFileEntryImpl;
 	}
@@ -537,6 +505,24 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DLFileEntryModelImpl dlFileEntryModelImpl = this;
+
+		dlFileEntryModelImpl._originalUuid = dlFileEntryModelImpl._uuid;
+
+		dlFileEntryModelImpl._originalGroupId = dlFileEntryModelImpl._groupId;
+
+		dlFileEntryModelImpl._setOriginalGroupId = false;
+
+		dlFileEntryModelImpl._originalFolderId = dlFileEntryModelImpl._folderId;
+
+		dlFileEntryModelImpl._setOriginalFolderId = false;
+
+		dlFileEntryModelImpl._originalName = dlFileEntryModelImpl._name;
+
+		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
 	}
 
 	public String toString() {

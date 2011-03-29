@@ -330,47 +330,21 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		DLFolderImpl dlFolderImpl = new DLFolderImpl();
 
 		dlFolderImpl.setUuid(getUuid());
-
-		DLFolderModelImpl dlFolderModelImpl = dlFolderImpl;
-
-		dlFolderModelImpl._originalUuid = dlFolderModelImpl._uuid;
-
 		dlFolderImpl.setFolderId(getFolderId());
-
 		dlFolderImpl.setGroupId(getGroupId());
-
-		dlFolderModelImpl._originalGroupId = dlFolderModelImpl._groupId;
-
-		dlFolderModelImpl._setOriginalGroupId = false;
 		dlFolderImpl.setCompanyId(getCompanyId());
-
 		dlFolderImpl.setUserId(getUserId());
-
 		dlFolderImpl.setUserName(getUserName());
-
 		dlFolderImpl.setCreateDate(getCreateDate());
-
 		dlFolderImpl.setModifiedDate(getModifiedDate());
-
 		dlFolderImpl.setRepositoryId(getRepositoryId());
-
-		dlFolderModelImpl._originalRepositoryId = dlFolderModelImpl._repositoryId;
-
-		dlFolderModelImpl._setOriginalRepositoryId = false;
 		dlFolderImpl.setMountPoint(getMountPoint());
-
 		dlFolderImpl.setParentFolderId(getParentFolderId());
-
-		dlFolderModelImpl._originalParentFolderId = dlFolderModelImpl._parentFolderId;
-
-		dlFolderModelImpl._setOriginalParentFolderId = false;
 		dlFolderImpl.setName(getName());
-
-		dlFolderModelImpl._originalName = dlFolderModelImpl._name;
-
 		dlFolderImpl.setDescription(getDescription());
-
 		dlFolderImpl.setLastPostDate(getLastPostDate());
+
+		dlFolderImpl.resetOriginalValues();
 
 		return dlFolderImpl;
 	}
@@ -428,6 +402,26 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DLFolderModelImpl dlFolderModelImpl = this;
+
+		dlFolderModelImpl._originalUuid = dlFolderModelImpl._uuid;
+
+		dlFolderModelImpl._originalGroupId = dlFolderModelImpl._groupId;
+
+		dlFolderModelImpl._setOriginalGroupId = false;
+
+		dlFolderModelImpl._originalRepositoryId = dlFolderModelImpl._repositoryId;
+
+		dlFolderModelImpl._setOriginalRepositoryId = false;
+
+		dlFolderModelImpl._originalParentFolderId = dlFolderModelImpl._parentFolderId;
+
+		dlFolderModelImpl._setOriginalParentFolderId = false;
+
+		dlFolderModelImpl._originalName = dlFolderModelImpl._name;
 	}
 
 	public String toString() {
