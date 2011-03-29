@@ -117,6 +117,174 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-${lp.version}.dmp" />
 	</target>
 
+	<target name="build-dist-tcat-admin">
+		<antcall target="zip-tcat-profile" />
+
+		<antcall target="unzip-tcat" />
+
+		<antcall target="unzip-tomcat" />
+
+		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
+
+		<ant target="deploy" inheritAll="false" />
+
+		<replace file="${app.server.dir}/conf/server.xml">
+			<replacetoken><![CDATA[xmlValidation="false" xmlNamespaceAware="false" deployXML="false">]]></replacetoken>
+			<replacevalue><![CDATA[xmlValidation="false" xmlNamespaceAware="false">]]></replacevalue>
+		</replace>
+
+		<antcall target="zip-portal-war">
+			<param name="prepare.tcat" value="true" />		
+		</antcall>
+
+		<delete dir="${lp.plugins.dir}/dist" />
+
+		<ant dir="${lp.plugins.dir}/layouttpl/1-2-1-columns-layouttpl" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/layouttpl/1-3-1-columns-layouttpl" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/layouttpl/1-3-2-columns-layouttpl" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/layouttpl/2-1-2-columns-layouttpl" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/layouttpl/3-2-3-columns-layouttpl" target="all" inheritAll="false" />
+
+		<ant dir="${lp.plugins.dir}/portlets/chat-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/digg-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/flash-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/google-adsense-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/google-maps-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/knowledge-base-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/mail-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/opensocial-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/social-coding-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/social-networking-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/stocks-portlet" target="all" inheritAll="false" />
+		<!--<ant dir="${lp.plugins.dir}/portlets/twitter-portlet" target="all" inheritAll="false" />-->
+		<ant dir="${lp.plugins.dir}/portlets/vimeo-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/weather-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/web-form-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/wsrp-portlet" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/portlets/youtube-portlet" target="all" inheritAll="false" />
+
+		<ant dir="${lp.plugins.dir}/themes/08-gulona-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/beautiful-day-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/bitter-sweet-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/bright-pixel-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/brochure-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/brownie-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/chit-chat-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/cleap-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/coffee-n-cream-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/desktop-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/dirtylicious-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/drupal-garland-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/emerald-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/envision-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/facebook-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/illuminate-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/jedi-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/kort-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/murali-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/night-and-day-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/noir-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/section-508-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/spurt-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/titan-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/tuxedo-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/wordpress-kubrick-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/wordpress-twenty-ten-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/yellow-jacket-theme" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/themes/zenlike-theme" target="all" inheritAll="false" />
+
+		<ant dir="${lp.plugins.dir}/webs/cas-web" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/webs/kaleo-web" target="all" inheritAll="false" />
+		<ant dir="${lp.plugins.dir}/webs/solr-web" target="all" inheritAll="false" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${app.server.tomcat.deploy.dir}/${app.server.tomcat.portal.context}"
+			/>
+		</delete>
+
+		<delete file="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml" />
+
+		<delete dir="${app.server.tomcat.deploy.dir}/tunnel-web" />
+
+		<delete file="app.server.${user.name}.properties" />
+
+		<mkdir dir="${app.server.tomcat.dir}/tcat_init" />
+		<mkdir dir="${app.server.tomcat.dir}/tcat_init/profiles" />
+		<mkdir dir="${app.server.tomcat.dir}/tcat_init/scripts" />
+		<mkdir dir="${app.server.tomcat.dir}/tcat_init/webapps" />
+		<mkdir dir="${app.server.tomcat.dir}/tcat_init/webapps/${lp.version.dtd}" />
+
+		<copy file="dist/liferay-portal-${lp.version}.war" tofile="${app.server.tomcat.dir}/tcat_init/webapps/${lp.version.dtd}/ROOT.war" />
+
+		<copy file="tunnel-web/tunnel-web.war" tofile="${app.server.tomcat.dir}/tcat_init/webapps/${lp.version.dtd}/tunnel-web.war" />
+
+		<copy todir="${app.server.tomcat.dir}/tcat_init/webapps/${lp.version.dtd}">
+			<fileset dir="${lp.plugins.dir}/dist" includes="*.war" />
+		</copy>
+
+		<copy file="tools/servers/tcat/tcat-init.groovy" todir="${app.server.tomcat.dir}" />
+
+		<copy todir="${app.server.tomcat.deploy.dir}">
+			<fileset dir="${app.server.tcat.deploy.dir}" includes="console.war" />
+		</copy>
+
+		<copy file="dist/liferay-portal-tcat-profile-${lp.version}.zip" todir="${app.server.tomcat.dir}/tcat_init/profiles" />
+
+		<copy file="tools/servers/tcat/LiferayDeployerFactory.groovy" todir="${app.server.tomcat.dir}/tcat_init/scripts" />
+
+		<antcall target="zip-tcat-admin" />
+	</target>
+
+	<target name="build-dist-tcat-agent">
+		<antcall target="unzip-tcat" />
+
+		<antcall target="unzip-tomcat" />
+
+		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
+
+		<ant target="deploy" inheritAll="false" />
+
+		<replace file="${app.server.dir}/conf/server.xml">
+			<replacetoken><![CDATA[xmlValidation="false" xmlNamespaceAware="false" deployXML="false">]]></replacetoken>
+			<replacevalue><![CDATA[xmlValidation="false" xmlNamespaceAware="false">]]></replacevalue>
+		</replace>
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${app.server.tomcat.deploy.dir}/${app.server.tomcat.portal.context}"
+			/>
+		</delete>
+
+		<delete file="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml" />
+
+		<delete dir="${app.server.tomcat.deploy.dir}/tunnel-web" />
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMdd" />
+		</tstamp>
+
+		<echo file="${tstamp.value}/agent.xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Context privileged=&quot;true&quot;/&gt;
+		</echo>
+
+		<copy
+			file="${tstamp.value}/agent.xml"
+			tofile="${app.server.dir}/conf/Catalina/localhost/agent.xml"
+			overwrite="true"
+		/>
+
+		<delete dir="${tstamp.value}" />
+
+		<delete file="app.server.${user.name}.properties" />
+
+		<copy todir="${app.server.tomcat.deploy.dir}">
+			<fileset dir="${app.server.tcat.deploy.dir}" includes="agent.war" />
+		</copy>
+
+		<antcall target="zip-tcat-agent" />
+	</target>
+
 	<target name="build-dist-tomcat">
 		<antcall target="unzip-tomcat" />
 
@@ -444,6 +612,8 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas" />
 		<antcall target="build-dist-resin" />
+		<antcall target="build-dist-tcat-admin" />
+		<antcall target="build-dist-tcat-agent" />
 		<antcall target="build-dist-tomcat" />
 
 		<antcall target="zip-api" />
@@ -764,6 +934,54 @@ release was successful.</echo>
 		<mkdir dir="${app.server.parent.dir}/resin-4.0.14/webapps" />
 	</target>
 
+	<target name="unzip-tcat">
+		<delete dir="${app.server.tcat.dir}" />
+
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${app.server.tcat.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${app.server.tcat.zip.name}"
+					src="${app.server.tcat.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<script classpathref="project.classpath" language="beanshell">
+			String appServerTCatDir = project.getProperty("app.server.tcat.dir");
+
+			int forwardSlashPos = appServerTCatDir.lastIndexOf("/");
+			int backSlashPos = appServerTCatDir.lastIndexOf("\\");
+
+			int pos = forwardSlashPos;
+
+			if ((backSlashPos != -1) &amp;&amp; (backSlashPos > forwardSlashPos)) {
+				pos = backSlashPos;
+			}
+
+			String appServerTCatDirName = appServerTCatDir.substring(pos + 1);
+
+			project.setProperty("app.server.tcat.dir.name", appServerTCatDirName);
+		</script>
+
+		<unzip
+			dest="${app.server.parent.dir}"
+			src="${app.server.parent.dir}/${app.server.tcat.zip.name}"
+		>
+			<patternset
+				includes="TcatServer-6.4.3/webapps/*.war"
+			/>
+			<mapper
+				type="glob"
+				from="TcatServer-6.4.3/*"
+				to="${app.server.tcat.dir.name}/*"
+			/>
+		</unzip>
+	</target>
+
 	<target name="unzip-tomcat">
 		<delete dir="${app.server.tomcat.dir}" />
 
@@ -901,27 +1119,52 @@ release was successful.</echo>
 
 		<mkdir dir="dist" />
 
-		<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
-			<zipfileset
-				dir="${zip.executable.dir}"
-				excludes="**/*.sh"
-				prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
-			/>
-			<zipfileset
-				dir="${zip.executable.dir}"
-				filemode="744"
-				includes="**/*.sh"
-				prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
-			/>
-			<zipfileset
-				dir="${zip.executable.dir}/../data"
-				prefix="liferay-portal-${lp.version}/data"
-			/>
-			<zipfileset
-				dir="tools/zip_tmpl"
-				prefix="liferay-portal-${lp.version}"
-			/>
-		</zip>
+		<if>
+			<isset property="zip.tcat" />
+			<then>
+				<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
+					<zipfileset
+						dir="${zip.executable.dir}"
+						excludes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="${zip.executable.dir}"
+						filemode="744"
+						includes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="tools/zip_tmpl"
+						excludes="deploy"
+						prefix="liferay-portal-${lp.version}"
+					/>
+				</zip>
+			</then>
+			<else>
+				<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
+					<zipfileset
+						dir="${zip.executable.dir}"
+						excludes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="${zip.executable.dir}"
+						filemode="744"
+						includes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="${zip.executable.dir}/../data"
+						prefix="liferay-portal-${lp.version}/data"
+					/>
+					<zipfileset
+						dir="tools/zip_tmpl"
+						prefix="liferay-portal-${lp.version}"
+					/>
+				</zip>
+			</else>
+		</if>
 	</target>
 
 	<target name="zip-geronimo">
@@ -1098,6 +1341,13 @@ release was successful.</echo>
 			/>
 		</copy>
 
+		<if>
+			<equals arg1="prepare.tcat" arg2="true" />
+			<then>
+				<copy file="tools/servers/tcat/conf/Catalina/localhost/ROOT.xml" tofile="${tstamp.value}/META-INF/context.xml"/>
+			</then>
+		</if>
+
 		<zip
 			basedir="${tstamp.value}"
 			destfile="dist/liferay-portal-${lp.version}.war"
@@ -1164,6 +1414,60 @@ release was successful.</echo>
 				prefix="liferay-portal-src-${lp.version}"
 			/>
 		</zip>
+	</target>
+
+	<target name="zip-tcat-admin">
+		<antcall target="zip-executable">
+			<param name="zip.executable.file" value="liferay-portal-tcat-admin" />
+			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
+			<param name="zip.tcat" value="true" />
+		</antcall>
+	</target>
+
+	<target name="zip-tcat-agent">
+		<antcall target="zip-executable">
+			<param name="zip.executable.file" value="liferay-portal-tcat-agent" />
+			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
+			<param name="zip.tcat" value="true" />
+		</antcall>
+	</target>
+
+	<target name="zip-tcat-profile">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMdd" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.value}/files" />
+
+		<mkdir dir="${tstamp.value}/files/lib/ext" />
+
+		<copy file="tools/servers/tcat/profile.xml" todir="${tstamp.value}/" />
+
+		<copy todir="${tstamp.value}/files/lib/ext">
+			<fileset dir="lib/development" includes="activation.jar,hsql.jar,jta.jar,jms.jar,jtds.jar,jutf7.jar,mail.jar,mysql.jar,persistence.jar,postgresql.jar" />
+			<fileset dir="lib/global" />
+			<fileset dir="lib/portal" includes="ccpp.jar" />
+		</copy>
+
+		<ant dir="portal-service" target="deploy" inheritAll="false">
+			<property name="deploy.dir" value="../${tstamp.value}/files/lib/ext" />
+		</ant>
+
+		<ant dir="support-tomcat" target="deploy" inheritAll="false">
+			<property name="deploy.dir" value="../${tstamp.value}/files/lib/ext" />
+		</ant>
+
+		<echo file="${tstamp.value}/files/lib/ext/portal-bundle.properties">auto.deploy.deploy.dir=${catalina.base}/deploy</echo>
+
+		<delete file="dist/liferay-portal-tcat-profile-${lp.version}.zip" failonerror="false" />
+
+		<zip destfile="dist/liferay-portal-tcat-profile-${lp.version}.zip">
+			<zipfileset
+				dir="${tstamp.value}"
+			/>
+		</zip>
+
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="zip-tomcat">
