@@ -56,7 +56,25 @@ public class CreditCard {
 		return number;
 	}
 
-	public static boolean isValid(String number, String type) {
+	public static boolean isValidExpirationDate(
+		int expirationMonth, int expirationYear) {
+
+		Calendar calendar = CalendarFactoryUtil.getCalendar(
+			TimeZoneUtil.getDefault(), LocaleUtil.getDefault());
+
+		if (CalendarUtil.isFuture(expirationMonth, expirationYear)) {
+			return true;
+		}
+		else if ((expirationMonth == calendar.get(Calendar.MONTH)) &&
+				 (expirationYear == calendar.get(Calendar.YEAR))) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isValidNumber(String number, String type) {
 		number = StringUtil.extractDigits(number);
 
 		if (type.equals("visa")) {
@@ -109,22 +127,6 @@ public class CreditCard {
 		}
 
 		return Validator.isLUHN(number);
-	}
-
-	public static boolean isValidExpDate(int ccExpMonth, int ccExpYear) {
-		Calendar curCal = CalendarFactoryUtil.getCalendar(
-			TimeZoneUtil.getDefault(), LocaleUtil.getDefault());
-
-		if (CalendarUtil.isFuture(ccExpMonth, ccExpYear)) {
-			return true;
-		}
-		else if ((ccExpMonth == curCal.get(Calendar.MONTH)) &&
-			(ccExpYear == curCal.get(Calendar.YEAR))) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 }

@@ -815,10 +815,10 @@ public class ShoppingOrderLocalServiceImpl
 			else if (Validator.isNull(ccType)) {
 				throw new CCTypeException();
 			}
-			else if (!CreditCard.isValid(ccNumber, ccType)) {
+			else if (!CreditCard.isValidNumber(ccNumber, ccType)) {
 				throw new CCNumberException();
 			}
-			else if (!CreditCard.isValidExpDate(ccExpMonth, ccExpYear)) {
+			else if (!CreditCard.isValidExpirationDate(ccExpMonth, ccExpYear)) {
 				throw new CCExpirationException();
 			}
 		}
