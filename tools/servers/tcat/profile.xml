@@ -1,0 +1,12 @@
+<profile-definition>
+  <name>Liferay 6.1CE</name>
+  <description>This is the Liferay 6.1 CE Portal server profile for use with Tcat Server v6.4.2 and higher.</description>
+  <environmentVariables>
+    <entry>
+      <string>JAVA_OPTS</string>
+      <string>${JAVA_OPTS} -Xmx1024m -XX:MaxPermSize=250m -Dfile.encoding=UTF8 -Duser.timezone=GMT</string>
+    </entry>
+  </environmentVariables>
+  <artifactToVersion>
+  </artifactToVersion>
+</profile-definition>
