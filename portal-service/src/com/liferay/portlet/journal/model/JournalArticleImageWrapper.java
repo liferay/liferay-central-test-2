@@ -273,5 +273,9 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 		return _journalArticleImage;
 	}
 
+	public void resetOriginalValues() {
+		_journalArticleImage.resetOriginalValues();
+	}
+
 	private JournalArticleImage _journalArticleImage;
 }

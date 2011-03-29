@@ -196,24 +196,11 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
 
 		mbDiscussionImpl.setDiscussionId(getDiscussionId());
-
 		mbDiscussionImpl.setClassNameId(getClassNameId());
-
-		MBDiscussionModelImpl mbDiscussionModelImpl = mbDiscussionImpl;
-
-		mbDiscussionModelImpl._originalClassNameId = mbDiscussionModelImpl._classNameId;
-
-		mbDiscussionModelImpl._setOriginalClassNameId = false;
 		mbDiscussionImpl.setClassPK(getClassPK());
-
-		mbDiscussionModelImpl._originalClassPK = mbDiscussionModelImpl._classPK;
-
-		mbDiscussionModelImpl._setOriginalClassPK = false;
 		mbDiscussionImpl.setThreadId(getThreadId());
 
-		mbDiscussionModelImpl._originalThreadId = mbDiscussionModelImpl._threadId;
-
-		mbDiscussionModelImpl._setOriginalThreadId = false;
+		mbDiscussionImpl.resetOriginalValues();
 
 		return mbDiscussionImpl;
 	}
@@ -258,6 +245,22 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBDiscussionModelImpl mbDiscussionModelImpl = this;
+
+		mbDiscussionModelImpl._originalClassNameId = mbDiscussionModelImpl._classNameId;
+
+		mbDiscussionModelImpl._setOriginalClassNameId = false;
+
+		mbDiscussionModelImpl._originalClassPK = mbDiscussionModelImpl._classPK;
+
+		mbDiscussionModelImpl._setOriginalClassPK = false;
+
+		mbDiscussionModelImpl._originalThreadId = mbDiscussionModelImpl._threadId;
+
+		mbDiscussionModelImpl._setOriginalThreadId = false;
 	}
 
 	public String toString() {

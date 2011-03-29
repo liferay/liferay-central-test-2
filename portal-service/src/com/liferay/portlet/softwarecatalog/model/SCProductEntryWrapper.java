@@ -443,5 +443,9 @@ public class SCProductEntryWrapper implements SCProductEntry {
 		return _scProductEntry;
 	}
 
+	public void resetOriginalValues() {
+		_scProductEntry.resetOriginalValues();
+	}
+
 	private SCProductEntry _scProductEntry;
 }

@@ -215,6 +215,8 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				Long.valueOf(socialRelation.getUserId2()),
 				Integer.valueOf(socialRelation.getType())
 			}, socialRelation);
+
+		socialRelation.resetOriginalValues();
 	}
 
 	/**

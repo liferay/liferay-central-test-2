@@ -218,14 +218,12 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		RegionImpl regionImpl = new RegionImpl();
 
 		regionImpl.setRegionId(getRegionId());
-
 		regionImpl.setCountryId(getCountryId());
-
 		regionImpl.setRegionCode(getRegionCode());
-
 		regionImpl.setName(getName());
-
 		regionImpl.setActive(getActive());
+
+		regionImpl.resetOriginalValues();
 
 		return regionImpl;
 	}
@@ -268,6 +266,9 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

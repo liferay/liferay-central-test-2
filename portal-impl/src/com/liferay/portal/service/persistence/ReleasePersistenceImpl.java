@@ -93,6 +93,8 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
 			new Object[] { release.getServletContextName() }, release);
+
+		release.resetOriginalValues();
 	}
 
 	/**

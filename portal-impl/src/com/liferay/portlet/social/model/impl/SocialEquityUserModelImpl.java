@@ -240,30 +240,16 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 		SocialEquityUserImpl socialEquityUserImpl = new SocialEquityUserImpl();
 
 		socialEquityUserImpl.setEquityUserId(getEquityUserId());
-
 		socialEquityUserImpl.setGroupId(getGroupId());
-
-		SocialEquityUserModelImpl socialEquityUserModelImpl = socialEquityUserImpl;
-
-		socialEquityUserModelImpl._originalGroupId = socialEquityUserModelImpl._groupId;
-
-		socialEquityUserModelImpl._setOriginalGroupId = false;
 		socialEquityUserImpl.setCompanyId(getCompanyId());
-
 		socialEquityUserImpl.setUserId(getUserId());
-
-		socialEquityUserModelImpl._originalUserId = socialEquityUserModelImpl._userId;
-
-		socialEquityUserModelImpl._setOriginalUserId = false;
 		socialEquityUserImpl.setContributionK(getContributionK());
-
 		socialEquityUserImpl.setContributionB(getContributionB());
-
 		socialEquityUserImpl.setParticipationK(getParticipationK());
-
 		socialEquityUserImpl.setParticipationB(getParticipationB());
-
 		socialEquityUserImpl.setRank(getRank());
+
+		socialEquityUserImpl.resetOriginalValues();
 
 		return socialEquityUserImpl;
 	}
@@ -308,6 +294,18 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialEquityUserModelImpl socialEquityUserModelImpl = this;
+
+		socialEquityUserModelImpl._originalGroupId = socialEquityUserModelImpl._groupId;
+
+		socialEquityUserModelImpl._setOriginalGroupId = false;
+
+		socialEquityUserModelImpl._originalUserId = socialEquityUserModelImpl._userId;
+
+		socialEquityUserModelImpl._setOriginalUserId = false;
 	}
 
 	public String toString() {

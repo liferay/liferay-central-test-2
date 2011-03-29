@@ -145,6 +145,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 				
 			journalArticleResource.getArticleId()
 			}, journalArticleResource);
+
+		journalArticleResource.resetOriginalValues();
 	}
 
 	/**

@@ -246,5 +246,9 @@ public class SocialRelationWrapper implements SocialRelation {
 		return _socialRelation;
 	}
 
+	public void resetOriginalValues() {
+		_socialRelation.resetOriginalValues();
+	}
+
 	private SocialRelation _socialRelation;
 }

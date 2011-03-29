@@ -229,5 +229,9 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		return _userIdMapper;
 	}
 
+	public void resetOriginalValues() {
+		_userIdMapper.resetOriginalValues();
+	}
+
 	private UserIdMapper _userIdMapper;
 }

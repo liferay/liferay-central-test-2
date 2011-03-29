@@ -140,6 +140,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 		EntityCacheUtil.putResult(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
 			MembershipRequestImpl.class, membershipRequest.getPrimaryKey(),
 			membershipRequest);
+
+		membershipRequest.resetOriginalValues();
 	}
 
 	/**

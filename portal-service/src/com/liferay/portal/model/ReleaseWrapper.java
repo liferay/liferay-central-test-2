@@ -272,5 +272,9 @@ public class ReleaseWrapper implements Release {
 		return _release;
 	}
 
+	public void resetOriginalValues() {
+		_release.resetOriginalValues();
+	}
+
 	private Release _release;
 }

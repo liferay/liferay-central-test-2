@@ -215,5 +215,9 @@ public class PermissionWrapper implements Permission {
 		return _permission;
 	}
 
+	public void resetOriginalValues() {
+		_permission.resetOriginalValues();
+	}
+
 	private Permission _permission;
 }

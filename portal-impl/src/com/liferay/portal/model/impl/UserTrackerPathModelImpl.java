@@ -163,12 +163,11 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		UserTrackerPathImpl userTrackerPathImpl = new UserTrackerPathImpl();
 
 		userTrackerPathImpl.setUserTrackerPathId(getUserTrackerPathId());
-
 		userTrackerPathImpl.setUserTrackerId(getUserTrackerId());
-
 		userTrackerPathImpl.setPath(getPath());
-
 		userTrackerPathImpl.setPathDate(getPathDate());
+
+		userTrackerPathImpl.resetOriginalValues();
 
 		return userTrackerPathImpl;
 	}
@@ -213,6 +212,9 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

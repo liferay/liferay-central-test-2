@@ -193,5 +193,9 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		return _browserTracker;
 	}
 
+	public void resetOriginalValues() {
+		_browserTracker.resetOriginalValues();
+	}
+
 	private BrowserTracker _browserTracker;
 }

@@ -271,36 +271,16 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		SubscriptionImpl subscriptionImpl = new SubscriptionImpl();
 
 		subscriptionImpl.setSubscriptionId(getSubscriptionId());
-
 		subscriptionImpl.setCompanyId(getCompanyId());
-
-		SubscriptionModelImpl subscriptionModelImpl = subscriptionImpl;
-
-		subscriptionModelImpl._originalCompanyId = subscriptionModelImpl._companyId;
-
-		subscriptionModelImpl._setOriginalCompanyId = false;
 		subscriptionImpl.setUserId(getUserId());
-
-		subscriptionModelImpl._originalUserId = subscriptionModelImpl._userId;
-
-		subscriptionModelImpl._setOriginalUserId = false;
 		subscriptionImpl.setUserName(getUserName());
-
 		subscriptionImpl.setCreateDate(getCreateDate());
-
 		subscriptionImpl.setModifiedDate(getModifiedDate());
-
 		subscriptionImpl.setClassNameId(getClassNameId());
-
-		subscriptionModelImpl._originalClassNameId = subscriptionModelImpl._classNameId;
-
-		subscriptionModelImpl._setOriginalClassNameId = false;
 		subscriptionImpl.setClassPK(getClassPK());
-
-		subscriptionModelImpl._originalClassPK = subscriptionModelImpl._classPK;
-
-		subscriptionModelImpl._setOriginalClassPK = false;
 		subscriptionImpl.setFrequency(getFrequency());
+
+		subscriptionImpl.resetOriginalValues();
 
 		return subscriptionImpl;
 	}
@@ -345,6 +325,26 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SubscriptionModelImpl subscriptionModelImpl = this;
+
+		subscriptionModelImpl._originalCompanyId = subscriptionModelImpl._companyId;
+
+		subscriptionModelImpl._setOriginalCompanyId = false;
+
+		subscriptionModelImpl._originalUserId = subscriptionModelImpl._userId;
+
+		subscriptionModelImpl._setOriginalUserId = false;
+
+		subscriptionModelImpl._originalClassNameId = subscriptionModelImpl._classNameId;
+
+		subscriptionModelImpl._setOriginalClassNameId = false;
+
+		subscriptionModelImpl._originalClassPK = subscriptionModelImpl._classPK;
+
+		subscriptionModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

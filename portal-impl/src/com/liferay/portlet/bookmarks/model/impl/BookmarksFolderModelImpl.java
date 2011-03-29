@@ -301,31 +301,17 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		BookmarksFolderImpl bookmarksFolderImpl = new BookmarksFolderImpl();
 
 		bookmarksFolderImpl.setUuid(getUuid());
-
-		BookmarksFolderModelImpl bookmarksFolderModelImpl = bookmarksFolderImpl;
-
-		bookmarksFolderModelImpl._originalUuid = bookmarksFolderModelImpl._uuid;
-
 		bookmarksFolderImpl.setFolderId(getFolderId());
-
 		bookmarksFolderImpl.setGroupId(getGroupId());
-
-		bookmarksFolderModelImpl._originalGroupId = bookmarksFolderModelImpl._groupId;
-
-		bookmarksFolderModelImpl._setOriginalGroupId = false;
 		bookmarksFolderImpl.setCompanyId(getCompanyId());
-
 		bookmarksFolderImpl.setUserId(getUserId());
-
 		bookmarksFolderImpl.setCreateDate(getCreateDate());
-
 		bookmarksFolderImpl.setModifiedDate(getModifiedDate());
-
 		bookmarksFolderImpl.setParentFolderId(getParentFolderId());
-
 		bookmarksFolderImpl.setName(getName());
-
 		bookmarksFolderImpl.setDescription(getDescription());
+
+		bookmarksFolderImpl.resetOriginalValues();
 
 		return bookmarksFolderImpl;
 	}
@@ -383,6 +369,16 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		BookmarksFolderModelImpl bookmarksFolderModelImpl = this;
+
+		bookmarksFolderModelImpl._originalUuid = bookmarksFolderModelImpl._uuid;
+
+		bookmarksFolderModelImpl._originalGroupId = bookmarksFolderModelImpl._groupId;
+
+		bookmarksFolderModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

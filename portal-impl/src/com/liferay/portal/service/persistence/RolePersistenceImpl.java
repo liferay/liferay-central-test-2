@@ -173,6 +173,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				Long.valueOf(role.getClassNameId()),
 				Long.valueOf(role.getClassPK())
 			}, role);
+
+		role.resetOriginalValues();
 	}
 
 	/**

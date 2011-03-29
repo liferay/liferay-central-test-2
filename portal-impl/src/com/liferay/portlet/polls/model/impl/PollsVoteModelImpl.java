@@ -233,22 +233,12 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
 
 		pollsVoteImpl.setVoteId(getVoteId());
-
 		pollsVoteImpl.setUserId(getUserId());
-
-		PollsVoteModelImpl pollsVoteModelImpl = pollsVoteImpl;
-
-		pollsVoteModelImpl._originalUserId = pollsVoteModelImpl._userId;
-
-		pollsVoteModelImpl._setOriginalUserId = false;
 		pollsVoteImpl.setQuestionId(getQuestionId());
-
-		pollsVoteModelImpl._originalQuestionId = pollsVoteModelImpl._questionId;
-
-		pollsVoteModelImpl._setOriginalQuestionId = false;
 		pollsVoteImpl.setChoiceId(getChoiceId());
-
 		pollsVoteImpl.setVoteDate(getVoteDate());
+
+		pollsVoteImpl.resetOriginalValues();
 
 		return pollsVoteImpl;
 	}
@@ -293,6 +283,18 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PollsVoteModelImpl pollsVoteModelImpl = this;
+
+		pollsVoteModelImpl._originalUserId = pollsVoteModelImpl._userId;
+
+		pollsVoteModelImpl._setOriginalUserId = false;
+
+		pollsVoteModelImpl._originalQuestionId = pollsVoteModelImpl._questionId;
+
+		pollsVoteModelImpl._setOriginalQuestionId = false;
 	}
 
 	public String toString() {

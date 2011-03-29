@@ -392,40 +392,25 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		AddressImpl addressImpl = new AddressImpl();
 
 		addressImpl.setAddressId(getAddressId());
-
 		addressImpl.setCompanyId(getCompanyId());
-
 		addressImpl.setUserId(getUserId());
-
 		addressImpl.setUserName(getUserName());
-
 		addressImpl.setCreateDate(getCreateDate());
-
 		addressImpl.setModifiedDate(getModifiedDate());
-
 		addressImpl.setClassNameId(getClassNameId());
-
 		addressImpl.setClassPK(getClassPK());
-
 		addressImpl.setStreet1(getStreet1());
-
 		addressImpl.setStreet2(getStreet2());
-
 		addressImpl.setStreet3(getStreet3());
-
 		addressImpl.setCity(getCity());
-
 		addressImpl.setZip(getZip());
-
 		addressImpl.setRegionId(getRegionId());
-
 		addressImpl.setCountryId(getCountryId());
-
 		addressImpl.setTypeId(getTypeId());
-
 		addressImpl.setMailing(getMailing());
-
 		addressImpl.setPrimary(getPrimary());
+
+		addressImpl.resetOriginalValues();
 
 		return addressImpl;
 	}
@@ -468,6 +453,9 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

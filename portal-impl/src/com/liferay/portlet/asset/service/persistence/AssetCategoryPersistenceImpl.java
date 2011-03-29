@@ -226,6 +226,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			assetCategory.getName(),
 				Long.valueOf(assetCategory.getVocabularyId())
 			}, assetCategory);
+
+		assetCategory.resetOriginalValues();
 	}
 
 	/**

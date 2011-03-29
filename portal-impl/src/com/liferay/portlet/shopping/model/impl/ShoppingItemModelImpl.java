@@ -636,88 +636,41 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		ShoppingItemImpl shoppingItemImpl = new ShoppingItemImpl();
 
 		shoppingItemImpl.setItemId(getItemId());
-
 		shoppingItemImpl.setGroupId(getGroupId());
-
 		shoppingItemImpl.setCompanyId(getCompanyId());
-
-		ShoppingItemModelImpl shoppingItemModelImpl = shoppingItemImpl;
-
-		shoppingItemModelImpl._originalCompanyId = shoppingItemModelImpl._companyId;
-
-		shoppingItemModelImpl._setOriginalCompanyId = false;
 		shoppingItemImpl.setUserId(getUserId());
-
 		shoppingItemImpl.setUserName(getUserName());
-
 		shoppingItemImpl.setCreateDate(getCreateDate());
-
 		shoppingItemImpl.setModifiedDate(getModifiedDate());
-
 		shoppingItemImpl.setCategoryId(getCategoryId());
-
 		shoppingItemImpl.setSku(getSku());
-
-		shoppingItemModelImpl._originalSku = shoppingItemModelImpl._sku;
-
 		shoppingItemImpl.setName(getName());
-
 		shoppingItemImpl.setDescription(getDescription());
-
 		shoppingItemImpl.setProperties(getProperties());
-
 		shoppingItemImpl.setFields(getFields());
-
 		shoppingItemImpl.setFieldsQuantities(getFieldsQuantities());
-
 		shoppingItemImpl.setMinQuantity(getMinQuantity());
-
 		shoppingItemImpl.setMaxQuantity(getMaxQuantity());
-
 		shoppingItemImpl.setPrice(getPrice());
-
 		shoppingItemImpl.setDiscount(getDiscount());
-
 		shoppingItemImpl.setTaxable(getTaxable());
-
 		shoppingItemImpl.setShipping(getShipping());
-
 		shoppingItemImpl.setUseShippingFormula(getUseShippingFormula());
-
 		shoppingItemImpl.setRequiresShipping(getRequiresShipping());
-
 		shoppingItemImpl.setStockQuantity(getStockQuantity());
-
 		shoppingItemImpl.setFeatured(getFeatured());
-
 		shoppingItemImpl.setSale(getSale());
-
 		shoppingItemImpl.setSmallImage(getSmallImage());
-
 		shoppingItemImpl.setSmallImageId(getSmallImageId());
-
-		shoppingItemModelImpl._originalSmallImageId = shoppingItemModelImpl._smallImageId;
-
-		shoppingItemModelImpl._setOriginalSmallImageId = false;
 		shoppingItemImpl.setSmallImageURL(getSmallImageURL());
-
 		shoppingItemImpl.setMediumImage(getMediumImage());
-
 		shoppingItemImpl.setMediumImageId(getMediumImageId());
-
-		shoppingItemModelImpl._originalMediumImageId = shoppingItemModelImpl._mediumImageId;
-
-		shoppingItemModelImpl._setOriginalMediumImageId = false;
 		shoppingItemImpl.setMediumImageURL(getMediumImageURL());
-
 		shoppingItemImpl.setLargeImage(getLargeImage());
-
 		shoppingItemImpl.setLargeImageId(getLargeImageId());
-
-		shoppingItemModelImpl._originalLargeImageId = shoppingItemModelImpl._largeImageId;
-
-		shoppingItemModelImpl._setOriginalLargeImageId = false;
 		shoppingItemImpl.setLargeImageURL(getLargeImageURL());
+
+		shoppingItemImpl.resetOriginalValues();
 
 		return shoppingItemImpl;
 	}
@@ -768,6 +721,28 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ShoppingItemModelImpl shoppingItemModelImpl = this;
+
+		shoppingItemModelImpl._originalCompanyId = shoppingItemModelImpl._companyId;
+
+		shoppingItemModelImpl._setOriginalCompanyId = false;
+
+		shoppingItemModelImpl._originalSku = shoppingItemModelImpl._sku;
+
+		shoppingItemModelImpl._originalSmallImageId = shoppingItemModelImpl._smallImageId;
+
+		shoppingItemModelImpl._setOriginalSmallImageId = false;
+
+		shoppingItemModelImpl._originalMediumImageId = shoppingItemModelImpl._mediumImageId;
+
+		shoppingItemModelImpl._setOriginalMediumImageId = false;
+
+		shoppingItemModelImpl._originalLargeImageId = shoppingItemModelImpl._largeImageId;
+
+		shoppingItemModelImpl._setOriginalLargeImageId = false;
 	}
 
 	public String toString() {

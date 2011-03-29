@@ -294,5 +294,9 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 		return _announcementsDelivery;
 	}
 
+	public void resetOriginalValues() {
+		_announcementsDelivery.resetOriginalValues();
+	}
+
 	private AnnouncementsDelivery _announcementsDelivery;
 }

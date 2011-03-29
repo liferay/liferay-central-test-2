@@ -225,6 +225,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				Long.valueOf(expandoValue.getColumnId()),
 				Long.valueOf(expandoValue.getClassPK())
 			}, expandoValue);
+
+		expandoValue.resetOriginalValues();
 	}
 
 	/**

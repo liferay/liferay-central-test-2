@@ -111,6 +111,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 				
 			portlet.getPortletId()
 			}, portlet);
+
+		portlet.resetOriginalValues();
 	}
 
 	/**

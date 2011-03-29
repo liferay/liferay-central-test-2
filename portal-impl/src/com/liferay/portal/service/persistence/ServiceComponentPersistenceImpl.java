@@ -112,6 +112,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				serviceComponent.getBuildNamespace(),
 				Long.valueOf(serviceComponent.getBuildNumber())
 			}, serviceComponent);
+
+		serviceComponent.resetOriginalValues();
 	}
 
 	/**

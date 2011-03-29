@@ -101,6 +101,8 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 			new Object[] { Long.valueOf(
 					socialEquityAssetEntry.getAssetEntryId()) },
 			socialEquityAssetEntry);
+
+		socialEquityAssetEntry.resetOriginalValues();
 	}
 
 	/**

@@ -161,6 +161,8 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 				
 			assetVocabulary.getName()
 			}, assetVocabulary);
+
+		assetVocabulary.resetOriginalValues();
 	}
 
 	/**

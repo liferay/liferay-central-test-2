@@ -324,5 +324,9 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		return _shoppingCategory;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingCategory.resetOriginalValues();
+	}
+
 	private ShoppingCategory _shoppingCategory;
 }

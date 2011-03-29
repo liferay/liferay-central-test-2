@@ -438,5 +438,9 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet;
 	}
 
+	public void resetOriginalValues() {
+		_layoutSet.resetOriginalValues();
+	}
+
 	private LayoutSet _layoutSet;
 }

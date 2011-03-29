@@ -441,5 +441,9 @@ public class DLFolderWrapper implements DLFolder {
 		return _dlFolder;
 	}
 
+	public void resetOriginalValues() {
+		_dlFolder.resetOriginalValues();
+	}
+
 	private DLFolder _dlFolder;
 }

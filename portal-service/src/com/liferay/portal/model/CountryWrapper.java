@@ -254,5 +254,9 @@ public class CountryWrapper implements Country {
 		return _country;
 	}
 
+	public void resetOriginalValues() {
+		_country.resetOriginalValues();
+	}
+
 	private Country _country;
 }

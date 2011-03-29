@@ -210,5 +210,9 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 		return _repositoryEntry;
 	}
 
+	public void resetOriginalValues() {
+		_repositoryEntry.resetOriginalValues();
+	}
+
 	private RepositoryEntry _repositoryEntry;
 }

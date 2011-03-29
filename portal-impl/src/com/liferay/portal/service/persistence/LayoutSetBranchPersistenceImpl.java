@@ -135,6 +135,8 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 				
 			layoutSetBranch.getName()
 			}, layoutSetBranch);
+
+		layoutSetBranch.resetOriginalValues();
 	}
 
 	/**

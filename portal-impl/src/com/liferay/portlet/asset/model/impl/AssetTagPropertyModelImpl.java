@@ -291,29 +291,16 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		AssetTagPropertyImpl assetTagPropertyImpl = new AssetTagPropertyImpl();
 
 		assetTagPropertyImpl.setTagPropertyId(getTagPropertyId());
-
 		assetTagPropertyImpl.setCompanyId(getCompanyId());
-
 		assetTagPropertyImpl.setUserId(getUserId());
-
 		assetTagPropertyImpl.setUserName(getUserName());
-
 		assetTagPropertyImpl.setCreateDate(getCreateDate());
-
 		assetTagPropertyImpl.setModifiedDate(getModifiedDate());
-
 		assetTagPropertyImpl.setTagId(getTagId());
-
-		AssetTagPropertyModelImpl assetTagPropertyModelImpl = assetTagPropertyImpl;
-
-		assetTagPropertyModelImpl._originalTagId = assetTagPropertyModelImpl._tagId;
-
-		assetTagPropertyModelImpl._setOriginalTagId = false;
 		assetTagPropertyImpl.setKey(getKey());
-
-		assetTagPropertyModelImpl._originalKey = assetTagPropertyModelImpl._key;
-
 		assetTagPropertyImpl.setValue(getValue());
+
+		assetTagPropertyImpl.resetOriginalValues();
 
 		return assetTagPropertyImpl;
 	}
@@ -356,6 +343,16 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AssetTagPropertyModelImpl assetTagPropertyModelImpl = this;
+
+		assetTagPropertyModelImpl._originalTagId = assetTagPropertyModelImpl._tagId;
+
+		assetTagPropertyModelImpl._setOriginalTagId = false;
+
+		assetTagPropertyModelImpl._originalKey = assetTagPropertyModelImpl._key;
 	}
 
 	public String toString() {

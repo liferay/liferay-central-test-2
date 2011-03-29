@@ -145,6 +145,8 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
 			new Object[] { shoppingOrder.getPpTxnId() }, shoppingOrder);
+
+		shoppingOrder.resetOriginalValues();
 	}
 
 	/**

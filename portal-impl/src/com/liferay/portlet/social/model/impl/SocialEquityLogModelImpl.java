@@ -319,49 +319,19 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		SocialEquityLogImpl socialEquityLogImpl = new SocialEquityLogImpl();
 
 		socialEquityLogImpl.setEquityLogId(getEquityLogId());
-
 		socialEquityLogImpl.setGroupId(getGroupId());
-
 		socialEquityLogImpl.setCompanyId(getCompanyId());
-
 		socialEquityLogImpl.setUserId(getUserId());
-
-		SocialEquityLogModelImpl socialEquityLogModelImpl = socialEquityLogImpl;
-
-		socialEquityLogModelImpl._originalUserId = socialEquityLogModelImpl._userId;
-
-		socialEquityLogModelImpl._setOriginalUserId = false;
 		socialEquityLogImpl.setAssetEntryId(getAssetEntryId());
-
-		socialEquityLogModelImpl._originalAssetEntryId = socialEquityLogModelImpl._assetEntryId;
-
-		socialEquityLogModelImpl._setOriginalAssetEntryId = false;
 		socialEquityLogImpl.setActionId(getActionId());
-
-		socialEquityLogModelImpl._originalActionId = socialEquityLogModelImpl._actionId;
-
 		socialEquityLogImpl.setActionDate(getActionDate());
-
-		socialEquityLogModelImpl._originalActionDate = socialEquityLogModelImpl._actionDate;
-
-		socialEquityLogModelImpl._setOriginalActionDate = false;
 		socialEquityLogImpl.setActive(getActive());
-
-		socialEquityLogModelImpl._originalActive = socialEquityLogModelImpl._active;
-
-		socialEquityLogModelImpl._setOriginalActive = false;
 		socialEquityLogImpl.setExpiration(getExpiration());
-
 		socialEquityLogImpl.setType(getType());
-
-		socialEquityLogModelImpl._originalType = socialEquityLogModelImpl._type;
-
-		socialEquityLogModelImpl._setOriginalType = false;
 		socialEquityLogImpl.setValue(getValue());
-
 		socialEquityLogImpl.setExtraData(getExtraData());
 
-		socialEquityLogModelImpl._originalExtraData = socialEquityLogModelImpl._extraData;
+		socialEquityLogImpl.resetOriginalValues();
 
 		return socialEquityLogImpl;
 	}
@@ -406,6 +376,34 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialEquityLogModelImpl socialEquityLogModelImpl = this;
+
+		socialEquityLogModelImpl._originalUserId = socialEquityLogModelImpl._userId;
+
+		socialEquityLogModelImpl._setOriginalUserId = false;
+
+		socialEquityLogModelImpl._originalAssetEntryId = socialEquityLogModelImpl._assetEntryId;
+
+		socialEquityLogModelImpl._setOriginalAssetEntryId = false;
+
+		socialEquityLogModelImpl._originalActionId = socialEquityLogModelImpl._actionId;
+
+		socialEquityLogModelImpl._originalActionDate = socialEquityLogModelImpl._actionDate;
+
+		socialEquityLogModelImpl._setOriginalActionDate = false;
+
+		socialEquityLogModelImpl._originalActive = socialEquityLogModelImpl._active;
+
+		socialEquityLogModelImpl._setOriginalActive = false;
+
+		socialEquityLogModelImpl._originalType = socialEquityLogModelImpl._type;
+
+		socialEquityLogModelImpl._setOriginalType = false;
+
+		socialEquityLogModelImpl._originalExtraData = socialEquityLogModelImpl._extraData;
 	}
 
 	public String toString() {

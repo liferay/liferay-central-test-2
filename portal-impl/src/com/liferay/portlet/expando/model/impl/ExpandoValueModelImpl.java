@@ -274,34 +274,15 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
 
 		expandoValueImpl.setValueId(getValueId());
-
 		expandoValueImpl.setCompanyId(getCompanyId());
-
 		expandoValueImpl.setTableId(getTableId());
-
-		ExpandoValueModelImpl expandoValueModelImpl = expandoValueImpl;
-
-		expandoValueModelImpl._originalTableId = expandoValueModelImpl._tableId;
-
-		expandoValueModelImpl._setOriginalTableId = false;
 		expandoValueImpl.setColumnId(getColumnId());
-
-		expandoValueModelImpl._originalColumnId = expandoValueModelImpl._columnId;
-
-		expandoValueModelImpl._setOriginalColumnId = false;
 		expandoValueImpl.setRowId(getRowId());
-
-		expandoValueModelImpl._originalRowId = expandoValueModelImpl._rowId;
-
-		expandoValueModelImpl._setOriginalRowId = false;
 		expandoValueImpl.setClassNameId(getClassNameId());
-
 		expandoValueImpl.setClassPK(getClassPK());
-
-		expandoValueModelImpl._originalClassPK = expandoValueModelImpl._classPK;
-
-		expandoValueModelImpl._setOriginalClassPK = false;
 		expandoValueImpl.setData(getData());
+
+		expandoValueImpl.resetOriginalValues();
 
 		return expandoValueImpl;
 	}
@@ -380,6 +361,26 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ExpandoValueModelImpl expandoValueModelImpl = this;
+
+		expandoValueModelImpl._originalTableId = expandoValueModelImpl._tableId;
+
+		expandoValueModelImpl._setOriginalTableId = false;
+
+		expandoValueModelImpl._originalColumnId = expandoValueModelImpl._columnId;
+
+		expandoValueModelImpl._setOriginalColumnId = false;
+
+		expandoValueModelImpl._originalRowId = expandoValueModelImpl._rowId;
+
+		expandoValueModelImpl._setOriginalRowId = false;
+
+		expandoValueModelImpl._originalClassPK = expandoValueModelImpl._classPK;
+
+		expandoValueModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

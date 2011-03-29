@@ -411,5 +411,9 @@ public class IGImageWrapper implements IGImage {
 		return _igImage;
 	}
 
+	public void resetOriginalValues() {
+		_igImage.resetOriginalValues();
+	}
+
 	private IGImage _igImage;
 }

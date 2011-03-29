@@ -563,78 +563,39 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 		PasswordPolicyImpl passwordPolicyImpl = new PasswordPolicyImpl();
 
 		passwordPolicyImpl.setPasswordPolicyId(getPasswordPolicyId());
-
 		passwordPolicyImpl.setCompanyId(getCompanyId());
-
-		PasswordPolicyModelImpl passwordPolicyModelImpl = passwordPolicyImpl;
-
-		passwordPolicyModelImpl._originalCompanyId = passwordPolicyModelImpl._companyId;
-
-		passwordPolicyModelImpl._setOriginalCompanyId = false;
 		passwordPolicyImpl.setUserId(getUserId());
-
 		passwordPolicyImpl.setUserName(getUserName());
-
 		passwordPolicyImpl.setCreateDate(getCreateDate());
-
 		passwordPolicyImpl.setModifiedDate(getModifiedDate());
-
 		passwordPolicyImpl.setDefaultPolicy(getDefaultPolicy());
-
-		passwordPolicyModelImpl._originalDefaultPolicy = passwordPolicyModelImpl._defaultPolicy;
-
-		passwordPolicyModelImpl._setOriginalDefaultPolicy = false;
 		passwordPolicyImpl.setName(getName());
-
-		passwordPolicyModelImpl._originalName = passwordPolicyModelImpl._name;
-
 		passwordPolicyImpl.setDescription(getDescription());
-
 		passwordPolicyImpl.setChangeable(getChangeable());
-
 		passwordPolicyImpl.setChangeRequired(getChangeRequired());
-
 		passwordPolicyImpl.setMinAge(getMinAge());
-
 		passwordPolicyImpl.setCheckSyntax(getCheckSyntax());
-
 		passwordPolicyImpl.setAllowDictionaryWords(getAllowDictionaryWords());
-
 		passwordPolicyImpl.setMinAlphanumeric(getMinAlphanumeric());
-
 		passwordPolicyImpl.setMinLength(getMinLength());
-
 		passwordPolicyImpl.setMinLowerCase(getMinLowerCase());
-
 		passwordPolicyImpl.setMinNumbers(getMinNumbers());
-
 		passwordPolicyImpl.setMinSymbols(getMinSymbols());
-
 		passwordPolicyImpl.setMinUpperCase(getMinUpperCase());
-
 		passwordPolicyImpl.setHistory(getHistory());
-
 		passwordPolicyImpl.setHistoryCount(getHistoryCount());
-
 		passwordPolicyImpl.setExpireable(getExpireable());
-
 		passwordPolicyImpl.setMaxAge(getMaxAge());
-
 		passwordPolicyImpl.setWarningTime(getWarningTime());
-
 		passwordPolicyImpl.setGraceLimit(getGraceLimit());
-
 		passwordPolicyImpl.setLockout(getLockout());
-
 		passwordPolicyImpl.setMaxFailure(getMaxFailure());
-
 		passwordPolicyImpl.setLockoutDuration(getLockoutDuration());
-
 		passwordPolicyImpl.setRequireUnlock(getRequireUnlock());
-
 		passwordPolicyImpl.setResetFailureCount(getResetFailureCount());
-
 		passwordPolicyImpl.setResetTicketMaxAge(getResetTicketMaxAge());
+
+		passwordPolicyImpl.resetOriginalValues();
 
 		return passwordPolicyImpl;
 	}
@@ -679,6 +640,20 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PasswordPolicyModelImpl passwordPolicyModelImpl = this;
+
+		passwordPolicyModelImpl._originalCompanyId = passwordPolicyModelImpl._companyId;
+
+		passwordPolicyModelImpl._setOriginalCompanyId = false;
+
+		passwordPolicyModelImpl._originalDefaultPolicy = passwordPolicyModelImpl._defaultPolicy;
+
+		passwordPolicyModelImpl._setOriginalDefaultPolicy = false;
+
+		passwordPolicyModelImpl._originalName = passwordPolicyModelImpl._name;
 	}
 
 	public String toString() {

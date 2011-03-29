@@ -203,5 +203,9 @@ public class ResourceWrapper implements Resource {
 		return _resource;
 	}
 
+	public void resetOriginalValues() {
+		_resource.resetOriginalValues();
+	}
+
 	private Resource _resource;
 }

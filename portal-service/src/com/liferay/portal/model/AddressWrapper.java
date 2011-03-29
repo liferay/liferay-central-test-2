@@ -502,5 +502,9 @@ public class AddressWrapper implements Address {
 		return _address;
 	}
 
+	public void resetOriginalValues() {
+		_address.resetOriginalValues();
+	}
+
 	private Address _address;
 }

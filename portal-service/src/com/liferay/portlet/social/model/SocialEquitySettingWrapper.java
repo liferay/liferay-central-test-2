@@ -323,5 +323,9 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 		return _socialEquitySetting;
 	}
 
+	public void resetOriginalValues() {
+		_socialEquitySetting.resetOriginalValues();
+	}
+
 	private SocialEquitySetting _socialEquitySetting;
 }

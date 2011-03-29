@@ -248,5 +248,9 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		return _mbMessageFlag;
 	}
 
+	public void resetOriginalValues() {
+		_mbMessageFlag.resetOriginalValues();
+	}
+
 	private MBMessageFlag _mbMessageFlag;
 }

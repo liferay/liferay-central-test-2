@@ -330,5 +330,9 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		return _socialEquityUser;
 	}
 
+	public void resetOriginalValues() {
+		_socialEquityUser.resetOriginalValues();
+	}
+
 	private SocialEquityUser _socialEquityUser;
 }

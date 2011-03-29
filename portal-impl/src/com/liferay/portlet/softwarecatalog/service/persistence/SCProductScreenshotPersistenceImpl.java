@@ -140,6 +140,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 				Long.valueOf(scProductScreenshot.getProductEntryId()),
 				Integer.valueOf(scProductScreenshot.getPriority())
 			}, scProductScreenshot);
+
+		scProductScreenshot.resetOriginalValues();
 	}
 
 	/**

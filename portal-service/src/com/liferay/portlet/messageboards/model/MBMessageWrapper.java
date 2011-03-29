@@ -746,5 +746,9 @@ public class MBMessageWrapper implements MBMessage {
 		return _mbMessage;
 	}
 
+	public void resetOriginalValues() {
+		_mbMessage.resetOriginalValues();
+	}
+
 	private MBMessage _mbMessage;
 }

@@ -108,6 +108,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 				Long.valueOf(virtualHost.getCompanyId()),
 				Long.valueOf(virtualHost.getLayoutSetId())
 			}, virtualHost);
+
+		virtualHost.resetOriginalValues();
 	}
 
 	/**

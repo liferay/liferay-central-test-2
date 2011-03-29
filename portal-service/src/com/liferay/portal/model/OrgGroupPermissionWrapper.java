@@ -185,5 +185,9 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		return _orgGroupPermission;
 	}
 
+	public void resetOriginalValues() {
+		_orgGroupPermission.resetOriginalValues();
+	}
+
 	private OrgGroupPermission _orgGroupPermission;
 }

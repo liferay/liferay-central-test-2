@@ -249,16 +249,13 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		SCLicenseImpl scLicenseImpl = new SCLicenseImpl();
 
 		scLicenseImpl.setLicenseId(getLicenseId());
-
 		scLicenseImpl.setName(getName());
-
 		scLicenseImpl.setUrl(getUrl());
-
 		scLicenseImpl.setOpenSource(getOpenSource());
-
 		scLicenseImpl.setActive(getActive());
-
 		scLicenseImpl.setRecommended(getRecommended());
+
+		scLicenseImpl.resetOriginalValues();
 
 		return scLicenseImpl;
 	}
@@ -301,6 +298,9 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

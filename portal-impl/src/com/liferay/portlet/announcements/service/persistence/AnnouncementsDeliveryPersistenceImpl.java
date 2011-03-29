@@ -117,6 +117,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				
 			announcementsDelivery.getType()
 			}, announcementsDelivery);
+
+		announcementsDelivery.resetOriginalValues();
 	}
 
 	/**

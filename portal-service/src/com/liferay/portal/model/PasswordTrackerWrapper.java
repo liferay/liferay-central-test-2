@@ -212,5 +212,9 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 		return _passwordTracker;
 	}
 
+	public void resetOriginalValues() {
+		_passwordTracker.resetOriginalValues();
+	}
+
 	private PasswordTracker _passwordTracker;
 }

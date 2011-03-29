@@ -852,5 +852,9 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		return _shoppingItem;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingItem.resetOriginalValues();
+	}
+
 	private ShoppingItem _shoppingItem;
 }

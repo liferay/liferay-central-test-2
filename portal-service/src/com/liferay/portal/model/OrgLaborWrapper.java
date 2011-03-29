@@ -431,5 +431,9 @@ public class OrgLaborWrapper implements OrgLabor {
 		return _orgLabor;
 	}
 
+	public void resetOriginalValues() {
+		_orgLabor.resetOriginalValues();
+	}
+
 	private OrgLabor _orgLabor;
 }

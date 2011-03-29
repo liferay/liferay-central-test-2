@@ -128,6 +128,8 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
 			new Object[] { Long.valueOf(ddmStorageLink.getClassPK()) },
 			ddmStorageLink);
+
+		ddmStorageLink.resetOriginalValues();
 	}
 
 	/**

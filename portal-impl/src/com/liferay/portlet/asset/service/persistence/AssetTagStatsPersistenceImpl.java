@@ -128,6 +128,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 				Long.valueOf(assetTagStats.getTagId()),
 				Long.valueOf(assetTagStats.getClassNameId())
 			}, assetTagStats);
+
+		assetTagStats.resetOriginalValues();
 	}
 
 	/**

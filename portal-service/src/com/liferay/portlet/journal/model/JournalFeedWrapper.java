@@ -555,5 +555,9 @@ public class JournalFeedWrapper implements JournalFeed {
 		return _journalFeed;
 	}
 
+	public void resetOriginalValues() {
+		_journalFeed.resetOriginalValues();
+	}
+
 	private JournalFeed _journalFeed;
 }

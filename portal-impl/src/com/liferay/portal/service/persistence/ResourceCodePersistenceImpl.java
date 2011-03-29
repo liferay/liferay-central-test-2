@@ -129,6 +129,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				
 			resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
 			}, resourceCode);
+
+		resourceCode.resetOriginalValues();
 	}
 
 	/**

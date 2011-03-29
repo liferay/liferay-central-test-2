@@ -302,5 +302,9 @@ public class AssetTagPropertyWrapper implements AssetTagProperty {
 		return _assetTagProperty;
 	}
 
+	public void resetOriginalValues() {
+		_assetTagProperty.resetOriginalValues();
+	}
+
 	private AssetTagProperty _assetTagProperty;
 }

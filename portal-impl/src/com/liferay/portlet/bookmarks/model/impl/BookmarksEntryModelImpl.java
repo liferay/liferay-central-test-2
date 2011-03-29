@@ -335,37 +335,20 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		BookmarksEntryImpl bookmarksEntryImpl = new BookmarksEntryImpl();
 
 		bookmarksEntryImpl.setUuid(getUuid());
-
-		BookmarksEntryModelImpl bookmarksEntryModelImpl = bookmarksEntryImpl;
-
-		bookmarksEntryModelImpl._originalUuid = bookmarksEntryModelImpl._uuid;
-
 		bookmarksEntryImpl.setEntryId(getEntryId());
-
 		bookmarksEntryImpl.setGroupId(getGroupId());
-
-		bookmarksEntryModelImpl._originalGroupId = bookmarksEntryModelImpl._groupId;
-
-		bookmarksEntryModelImpl._setOriginalGroupId = false;
 		bookmarksEntryImpl.setCompanyId(getCompanyId());
-
 		bookmarksEntryImpl.setUserId(getUserId());
-
 		bookmarksEntryImpl.setCreateDate(getCreateDate());
-
 		bookmarksEntryImpl.setModifiedDate(getModifiedDate());
-
 		bookmarksEntryImpl.setFolderId(getFolderId());
-
 		bookmarksEntryImpl.setName(getName());
-
 		bookmarksEntryImpl.setUrl(getUrl());
-
 		bookmarksEntryImpl.setDescription(getDescription());
-
 		bookmarksEntryImpl.setVisits(getVisits());
-
 		bookmarksEntryImpl.setPriority(getPriority());
+
+		bookmarksEntryImpl.resetOriginalValues();
 
 		return bookmarksEntryImpl;
 	}
@@ -423,6 +406,16 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		BookmarksEntryModelImpl bookmarksEntryModelImpl = this;
+
+		bookmarksEntryModelImpl._originalUuid = bookmarksEntryModelImpl._uuid;
+
+		bookmarksEntryModelImpl._originalGroupId = bookmarksEntryModelImpl._groupId;
+
+		bookmarksEntryModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

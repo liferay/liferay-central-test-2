@@ -118,6 +118,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 				
 			wikiPageResource.getTitle()
 			}, wikiPageResource);
+
+		wikiPageResource.resetOriginalValues();
 	}
 
 	/**

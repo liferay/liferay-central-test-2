@@ -156,6 +156,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				
 			scProductEntry.getRepoArtifactId()
 			}, scProductEntry);
+
+		scProductEntry.resetOriginalValues();
 	}
 
 	/**

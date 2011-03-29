@@ -107,6 +107,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				Long.valueOf(shard.getClassNameId()),
 				Long.valueOf(shard.getClassPK())
 			}, shard);
+
+		shard.resetOriginalValues();
 	}
 
 	/**

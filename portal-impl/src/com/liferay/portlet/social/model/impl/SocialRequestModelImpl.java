@@ -345,52 +345,20 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		SocialRequestImpl socialRequestImpl = new SocialRequestImpl();
 
 		socialRequestImpl.setUuid(getUuid());
-
-		SocialRequestModelImpl socialRequestModelImpl = socialRequestImpl;
-
-		socialRequestModelImpl._originalUuid = socialRequestModelImpl._uuid;
-
 		socialRequestImpl.setRequestId(getRequestId());
-
 		socialRequestImpl.setGroupId(getGroupId());
-
-		socialRequestModelImpl._originalGroupId = socialRequestModelImpl._groupId;
-
-		socialRequestModelImpl._setOriginalGroupId = false;
 		socialRequestImpl.setCompanyId(getCompanyId());
-
 		socialRequestImpl.setUserId(getUserId());
-
-		socialRequestModelImpl._originalUserId = socialRequestModelImpl._userId;
-
-		socialRequestModelImpl._setOriginalUserId = false;
 		socialRequestImpl.setCreateDate(getCreateDate());
-
 		socialRequestImpl.setModifiedDate(getModifiedDate());
-
 		socialRequestImpl.setClassNameId(getClassNameId());
-
-		socialRequestModelImpl._originalClassNameId = socialRequestModelImpl._classNameId;
-
-		socialRequestModelImpl._setOriginalClassNameId = false;
 		socialRequestImpl.setClassPK(getClassPK());
-
-		socialRequestModelImpl._originalClassPK = socialRequestModelImpl._classPK;
-
-		socialRequestModelImpl._setOriginalClassPK = false;
 		socialRequestImpl.setType(getType());
-
-		socialRequestModelImpl._originalType = socialRequestModelImpl._type;
-
-		socialRequestModelImpl._setOriginalType = false;
 		socialRequestImpl.setExtraData(getExtraData());
-
 		socialRequestImpl.setReceiverUserId(getReceiverUserId());
-
-		socialRequestModelImpl._originalReceiverUserId = socialRequestModelImpl._receiverUserId;
-
-		socialRequestModelImpl._setOriginalReceiverUserId = false;
 		socialRequestImpl.setStatus(getStatus());
+
+		socialRequestImpl.resetOriginalValues();
 
 		return socialRequestImpl;
 	}
@@ -443,6 +411,36 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialRequestModelImpl socialRequestModelImpl = this;
+
+		socialRequestModelImpl._originalUuid = socialRequestModelImpl._uuid;
+
+		socialRequestModelImpl._originalGroupId = socialRequestModelImpl._groupId;
+
+		socialRequestModelImpl._setOriginalGroupId = false;
+
+		socialRequestModelImpl._originalUserId = socialRequestModelImpl._userId;
+
+		socialRequestModelImpl._setOriginalUserId = false;
+
+		socialRequestModelImpl._originalClassNameId = socialRequestModelImpl._classNameId;
+
+		socialRequestModelImpl._setOriginalClassNameId = false;
+
+		socialRequestModelImpl._originalClassPK = socialRequestModelImpl._classPK;
+
+		socialRequestModelImpl._setOriginalClassPK = false;
+
+		socialRequestModelImpl._originalType = socialRequestModelImpl._type;
+
+		socialRequestModelImpl._setOriginalType = false;
+
+		socialRequestModelImpl._originalReceiverUserId = socialRequestModelImpl._receiverUserId;
+
+		socialRequestModelImpl._setOriginalReceiverUserId = false;
 	}
 
 	public String toString() {

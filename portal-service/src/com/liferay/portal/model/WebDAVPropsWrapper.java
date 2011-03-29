@@ -284,5 +284,9 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		return _webDAVProps;
 	}
 
+	public void resetOriginalValues() {
+		_webDAVProps.resetOriginalValues();
+	}
+
 	private WebDAVProps _webDAVProps;
 }

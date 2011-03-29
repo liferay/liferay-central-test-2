@@ -437,52 +437,25 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		JournalTemplateImpl journalTemplateImpl = new JournalTemplateImpl();
 
 		journalTemplateImpl.setUuid(getUuid());
-
-		JournalTemplateModelImpl journalTemplateModelImpl = journalTemplateImpl;
-
-		journalTemplateModelImpl._originalUuid = journalTemplateModelImpl._uuid;
-
 		journalTemplateImpl.setId(getId());
-
 		journalTemplateImpl.setGroupId(getGroupId());
-
-		journalTemplateModelImpl._originalGroupId = journalTemplateModelImpl._groupId;
-
-		journalTemplateModelImpl._setOriginalGroupId = false;
 		journalTemplateImpl.setCompanyId(getCompanyId());
-
 		journalTemplateImpl.setUserId(getUserId());
-
 		journalTemplateImpl.setUserName(getUserName());
-
 		journalTemplateImpl.setCreateDate(getCreateDate());
-
 		journalTemplateImpl.setModifiedDate(getModifiedDate());
-
 		journalTemplateImpl.setTemplateId(getTemplateId());
-
-		journalTemplateModelImpl._originalTemplateId = journalTemplateModelImpl._templateId;
-
 		journalTemplateImpl.setStructureId(getStructureId());
-
 		journalTemplateImpl.setName(getName());
-
 		journalTemplateImpl.setDescription(getDescription());
-
 		journalTemplateImpl.setXsl(getXsl());
-
 		journalTemplateImpl.setLangType(getLangType());
-
 		journalTemplateImpl.setCacheable(getCacheable());
-
 		journalTemplateImpl.setSmallImage(getSmallImage());
-
 		journalTemplateImpl.setSmallImageId(getSmallImageId());
-
-		journalTemplateModelImpl._originalSmallImageId = journalTemplateModelImpl._smallImageId;
-
-		journalTemplateModelImpl._setOriginalSmallImageId = false;
 		journalTemplateImpl.setSmallImageURL(getSmallImageURL());
+
+		journalTemplateImpl.resetOriginalValues();
 
 		return journalTemplateImpl;
 	}
@@ -525,6 +498,22 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalTemplateModelImpl journalTemplateModelImpl = this;
+
+		journalTemplateModelImpl._originalUuid = journalTemplateModelImpl._uuid;
+
+		journalTemplateModelImpl._originalGroupId = journalTemplateModelImpl._groupId;
+
+		journalTemplateModelImpl._setOriginalGroupId = false;
+
+		journalTemplateModelImpl._originalTemplateId = journalTemplateModelImpl._templateId;
+
+		journalTemplateModelImpl._originalSmallImageId = journalTemplateModelImpl._smallImageId;
+
+		journalTemplateModelImpl._setOriginalSmallImageId = false;
 	}
 
 	public String toString() {

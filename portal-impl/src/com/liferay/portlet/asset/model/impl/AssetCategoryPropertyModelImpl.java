@@ -292,29 +292,16 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		AssetCategoryPropertyImpl assetCategoryPropertyImpl = new AssetCategoryPropertyImpl();
 
 		assetCategoryPropertyImpl.setCategoryPropertyId(getCategoryPropertyId());
-
 		assetCategoryPropertyImpl.setCompanyId(getCompanyId());
-
 		assetCategoryPropertyImpl.setUserId(getUserId());
-
 		assetCategoryPropertyImpl.setUserName(getUserName());
-
 		assetCategoryPropertyImpl.setCreateDate(getCreateDate());
-
 		assetCategoryPropertyImpl.setModifiedDate(getModifiedDate());
-
 		assetCategoryPropertyImpl.setCategoryId(getCategoryId());
-
-		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = assetCategoryPropertyImpl;
-
-		assetCategoryPropertyModelImpl._originalCategoryId = assetCategoryPropertyModelImpl._categoryId;
-
-		assetCategoryPropertyModelImpl._setOriginalCategoryId = false;
 		assetCategoryPropertyImpl.setKey(getKey());
-
-		assetCategoryPropertyModelImpl._originalKey = assetCategoryPropertyModelImpl._key;
-
 		assetCategoryPropertyImpl.setValue(getValue());
+
+		assetCategoryPropertyImpl.resetOriginalValues();
 
 		return assetCategoryPropertyImpl;
 	}
@@ -357,6 +344,16 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = this;
+
+		assetCategoryPropertyModelImpl._originalCategoryId = assetCategoryPropertyModelImpl._categoryId;
+
+		assetCategoryPropertyModelImpl._setOriginalCategoryId = false;
+
+		assetCategoryPropertyModelImpl._originalKey = assetCategoryPropertyModelImpl._key;
 	}
 
 	public String toString() {

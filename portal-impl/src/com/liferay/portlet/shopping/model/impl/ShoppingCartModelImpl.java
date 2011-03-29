@@ -271,34 +271,18 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
 		shoppingCartImpl.setCartId(getCartId());
-
 		shoppingCartImpl.setGroupId(getGroupId());
-
-		ShoppingCartModelImpl shoppingCartModelImpl = shoppingCartImpl;
-
-		shoppingCartModelImpl._originalGroupId = shoppingCartModelImpl._groupId;
-
-		shoppingCartModelImpl._setOriginalGroupId = false;
 		shoppingCartImpl.setCompanyId(getCompanyId());
-
 		shoppingCartImpl.setUserId(getUserId());
-
-		shoppingCartModelImpl._originalUserId = shoppingCartModelImpl._userId;
-
-		shoppingCartModelImpl._setOriginalUserId = false;
 		shoppingCartImpl.setUserName(getUserName());
-
 		shoppingCartImpl.setCreateDate(getCreateDate());
-
 		shoppingCartImpl.setModifiedDate(getModifiedDate());
-
 		shoppingCartImpl.setItemIds(getItemIds());
-
 		shoppingCartImpl.setCouponCodes(getCouponCodes());
-
 		shoppingCartImpl.setAltShipping(getAltShipping());
-
 		shoppingCartImpl.setInsure(getInsure());
+
+		shoppingCartImpl.resetOriginalValues();
 
 		return shoppingCartImpl;
 	}
@@ -343,6 +327,18 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ShoppingCartModelImpl shoppingCartModelImpl = this;
+
+		shoppingCartModelImpl._originalGroupId = shoppingCartModelImpl._groupId;
+
+		shoppingCartModelImpl._setOriginalGroupId = false;
+
+		shoppingCartModelImpl._originalUserId = shoppingCartModelImpl._userId;
+
+		shoppingCartModelImpl._setOriginalUserId = false;
 	}
 
 	public String toString() {

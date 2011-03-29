@@ -1272,5 +1272,9 @@ public class LayoutWrapper implements Layout {
 		return _layout;
 	}
 
+	public void resetOriginalValues() {
+		_layout.resetOriginalValues();
+	}
+
 	private Layout _layout;
 }

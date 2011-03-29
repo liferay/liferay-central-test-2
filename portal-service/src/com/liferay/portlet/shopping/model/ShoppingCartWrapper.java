@@ -366,5 +366,9 @@ public class ShoppingCartWrapper implements ShoppingCart {
 		return _shoppingCart;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingCart.resetOriginalValues();
+	}
+
 	private ShoppingCart _shoppingCart;
 }

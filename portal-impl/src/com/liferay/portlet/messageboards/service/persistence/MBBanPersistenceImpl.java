@@ -137,6 +137,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				Long.valueOf(mbBan.getGroupId()),
 				Long.valueOf(mbBan.getBanUserId())
 			}, mbBan);
+
+		mbBan.resetOriginalValues();
 	}
 
 	/**

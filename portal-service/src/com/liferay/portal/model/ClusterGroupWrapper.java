@@ -204,5 +204,9 @@ public class ClusterGroupWrapper implements ClusterGroup {
 		return _clusterGroup;
 	}
 
+	public void resetOriginalValues() {
+		_clusterGroup.resetOriginalValues();
+	}
+
 	private ClusterGroup _clusterGroup;
 }

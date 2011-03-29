@@ -97,6 +97,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 				Long.valueOf(webDAVProps.getClassNameId()),
 				Long.valueOf(webDAVProps.getClassPK())
 			}, webDAVProps);
+
+		webDAVProps.resetOriginalValues();
 	}
 
 	/**

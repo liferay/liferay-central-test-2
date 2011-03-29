@@ -337,5 +337,9 @@ public class WikiNodeWrapper implements WikiNode {
 		return _wikiNode;
 	}
 
+	public void resetOriginalValues() {
+		_wikiNode.resetOriginalValues();
+	}
+
 	private WikiNode _wikiNode;
 }

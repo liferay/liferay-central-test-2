@@ -357,33 +357,18 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		DDMContentImpl ddmContentImpl = new DDMContentImpl();
 
 		ddmContentImpl.setUuid(getUuid());
-
-		DDMContentModelImpl ddmContentModelImpl = ddmContentImpl;
-
-		ddmContentModelImpl._originalUuid = ddmContentModelImpl._uuid;
-
 		ddmContentImpl.setContentId(getContentId());
-
 		ddmContentImpl.setGroupId(getGroupId());
-
-		ddmContentModelImpl._originalGroupId = ddmContentModelImpl._groupId;
-
-		ddmContentModelImpl._setOriginalGroupId = false;
 		ddmContentImpl.setCompanyId(getCompanyId());
-
 		ddmContentImpl.setUserId(getUserId());
-
 		ddmContentImpl.setUserName(getUserName());
-
 		ddmContentImpl.setCreateDate(getCreateDate());
-
 		ddmContentImpl.setModifiedDate(getModifiedDate());
-
 		ddmContentImpl.setName(getName());
-
 		ddmContentImpl.setDescription(getDescription());
-
 		ddmContentImpl.setXml(getXml());
+
+		ddmContentImpl.resetOriginalValues();
 
 		return ddmContentImpl;
 	}
@@ -428,6 +413,16 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DDMContentModelImpl ddmContentModelImpl = this;
+
+		ddmContentModelImpl._originalUuid = ddmContentModelImpl._uuid;
+
+		ddmContentModelImpl._originalGroupId = ddmContentModelImpl._groupId;
+
+		ddmContentModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

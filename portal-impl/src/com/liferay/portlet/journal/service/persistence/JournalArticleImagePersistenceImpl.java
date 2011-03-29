@@ -163,6 +163,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				
 			journalArticleImage.getLanguageId()
 			}, journalArticleImage);
+
+		journalArticleImage.resetOriginalValues();
 	}
 
 	/**

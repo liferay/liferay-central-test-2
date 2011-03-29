@@ -125,6 +125,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				Long.valueOf(pollsVote.getQuestionId()),
 				Long.valueOf(pollsVote.getUserId())
 			}, pollsVote);
+
+		pollsVote.resetOriginalValues();
 	}
 
 	/**

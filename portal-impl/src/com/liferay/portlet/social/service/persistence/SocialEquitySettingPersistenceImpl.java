@@ -130,6 +130,8 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 			socialEquitySetting.getActionId(),
 				Integer.valueOf(socialEquitySetting.getType())
 			}, socialEquitySetting);
+
+		socialEquitySetting.resetOriginalValues();
 	}
 
 	/**

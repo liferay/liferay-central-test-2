@@ -138,6 +138,8 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			portletItem.getPortletId(),
 				Long.valueOf(portletItem.getClassNameId())
 			}, portletItem);
+
+		portletItem.resetOriginalValues();
 	}
 
 	/**

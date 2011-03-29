@@ -382,5 +382,9 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure;
 	}
 
+	public void resetOriginalValues() {
+		_ddmStructure.resetOriginalValues();
+	}
+
 	private DDMStructure _ddmStructure;
 }

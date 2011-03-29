@@ -225,5 +225,9 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		return _ddmStorageLink;
 	}
 
+	public void resetOriginalValues() {
+		_ddmStorageLink.resetOriginalValues();
+	}
+
 	private DDMStorageLink _ddmStorageLink;
 }

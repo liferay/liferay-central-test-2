@@ -784,106 +784,45 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		UserImpl userImpl = new UserImpl();
 
 		userImpl.setUuid(getUuid());
-
 		userImpl.setUserId(getUserId());
-
-		UserModelImpl userModelImpl = userImpl;
-
-		userModelImpl._originalUserId = userModelImpl._userId;
-
-		userModelImpl._setOriginalUserId = false;
 		userImpl.setCompanyId(getCompanyId());
-
-		userModelImpl._originalCompanyId = userModelImpl._companyId;
-
-		userModelImpl._setOriginalCompanyId = false;
 		userImpl.setCreateDate(getCreateDate());
-
 		userImpl.setModifiedDate(getModifiedDate());
-
 		userImpl.setDefaultUser(getDefaultUser());
-
-		userModelImpl._originalDefaultUser = userModelImpl._defaultUser;
-
-		userModelImpl._setOriginalDefaultUser = false;
 		userImpl.setContactId(getContactId());
-
-		userModelImpl._originalContactId = userModelImpl._contactId;
-
-		userModelImpl._setOriginalContactId = false;
 		userImpl.setPassword(getPassword());
-
 		userImpl.setPasswordEncrypted(getPasswordEncrypted());
-
 		userImpl.setPasswordReset(getPasswordReset());
-
 		userImpl.setPasswordModifiedDate(getPasswordModifiedDate());
-
 		userImpl.setDigest(getDigest());
-
 		userImpl.setReminderQueryQuestion(getReminderQueryQuestion());
-
 		userImpl.setReminderQueryAnswer(getReminderQueryAnswer());
-
 		userImpl.setGraceLoginCount(getGraceLoginCount());
-
 		userImpl.setScreenName(getScreenName());
-
-		userModelImpl._originalScreenName = userModelImpl._screenName;
-
 		userImpl.setEmailAddress(getEmailAddress());
-
-		userModelImpl._originalEmailAddress = userModelImpl._emailAddress;
-
 		userImpl.setFacebookId(getFacebookId());
-
-		userModelImpl._originalFacebookId = userModelImpl._facebookId;
-
-		userModelImpl._setOriginalFacebookId = false;
 		userImpl.setOpenId(getOpenId());
-
-		userModelImpl._originalOpenId = userModelImpl._openId;
-
 		userImpl.setPortraitId(getPortraitId());
-
-		userModelImpl._originalPortraitId = userModelImpl._portraitId;
-
-		userModelImpl._setOriginalPortraitId = false;
 		userImpl.setLanguageId(getLanguageId());
-
 		userImpl.setTimeZoneId(getTimeZoneId());
-
 		userImpl.setGreeting(getGreeting());
-
 		userImpl.setComments(getComments());
-
 		userImpl.setFirstName(getFirstName());
-
 		userImpl.setMiddleName(getMiddleName());
-
 		userImpl.setLastName(getLastName());
-
 		userImpl.setJobTitle(getJobTitle());
-
 		userImpl.setLoginDate(getLoginDate());
-
 		userImpl.setLoginIP(getLoginIP());
-
 		userImpl.setLastLoginDate(getLastLoginDate());
-
 		userImpl.setLastLoginIP(getLastLoginIP());
-
 		userImpl.setLastFailedLoginDate(getLastFailedLoginDate());
-
 		userImpl.setFailedLoginAttempts(getFailedLoginAttempts());
-
 		userImpl.setLockout(getLockout());
-
 		userImpl.setLockoutDate(getLockoutDate());
-
 		userImpl.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
-
 		userImpl.setStatus(getStatus());
+
+		userImpl.resetOriginalValues();
 
 		return userImpl;
 	}
@@ -928,6 +867,40 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		UserModelImpl userModelImpl = this;
+
+		userModelImpl._originalUserId = userModelImpl._userId;
+
+		userModelImpl._setOriginalUserId = false;
+
+		userModelImpl._originalCompanyId = userModelImpl._companyId;
+
+		userModelImpl._setOriginalCompanyId = false;
+
+		userModelImpl._originalDefaultUser = userModelImpl._defaultUser;
+
+		userModelImpl._setOriginalDefaultUser = false;
+
+		userModelImpl._originalContactId = userModelImpl._contactId;
+
+		userModelImpl._setOriginalContactId = false;
+
+		userModelImpl._originalScreenName = userModelImpl._screenName;
+
+		userModelImpl._originalEmailAddress = userModelImpl._emailAddress;
+
+		userModelImpl._originalFacebookId = userModelImpl._facebookId;
+
+		userModelImpl._setOriginalFacebookId = false;
+
+		userModelImpl._originalOpenId = userModelImpl._openId;
+
+		userModelImpl._originalPortraitId = userModelImpl._portraitId;
+
+		userModelImpl._setOriginalPortraitId = false;
 	}
 
 	public String toString() {

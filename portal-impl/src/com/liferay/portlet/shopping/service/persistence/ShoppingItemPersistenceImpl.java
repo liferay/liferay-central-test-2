@@ -155,6 +155,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 				
 			shoppingItem.getSku()
 			}, shoppingItem);
+
+		shoppingItem.resetOriginalValues();
 	}
 
 	/**

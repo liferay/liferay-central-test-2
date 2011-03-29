@@ -184,18 +184,11 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		ResourceActionImpl resourceActionImpl = new ResourceActionImpl();
 
 		resourceActionImpl.setResourceActionId(getResourceActionId());
-
 		resourceActionImpl.setName(getName());
-
-		ResourceActionModelImpl resourceActionModelImpl = resourceActionImpl;
-
-		resourceActionModelImpl._originalName = resourceActionModelImpl._name;
-
 		resourceActionImpl.setActionId(getActionId());
-
-		resourceActionModelImpl._originalActionId = resourceActionModelImpl._actionId;
-
 		resourceActionImpl.setBitwiseValue(getBitwiseValue());
+
+		resourceActionImpl.resetOriginalValues();
 
 		return resourceActionImpl;
 	}
@@ -252,6 +245,14 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ResourceActionModelImpl resourceActionModelImpl = this;
+
+		resourceActionModelImpl._originalName = resourceActionModelImpl._name;
+
+		resourceActionModelImpl._originalActionId = resourceActionModelImpl._actionId;
 	}
 
 	public String toString() {

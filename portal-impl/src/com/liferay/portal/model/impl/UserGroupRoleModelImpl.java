@@ -178,10 +178,10 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 		UserGroupRoleImpl userGroupRoleImpl = new UserGroupRoleImpl();
 
 		userGroupRoleImpl.setUserId(getUserId());
-
 		userGroupRoleImpl.setGroupId(getGroupId());
-
 		userGroupRoleImpl.setRoleId(getRoleId());
+
+		userGroupRoleImpl.resetOriginalValues();
 
 		return userGroupRoleImpl;
 	}
@@ -218,6 +218,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

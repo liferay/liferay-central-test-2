@@ -189,23 +189,11 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		ResourceCodeImpl resourceCodeImpl = new ResourceCodeImpl();
 
 		resourceCodeImpl.setCodeId(getCodeId());
-
 		resourceCodeImpl.setCompanyId(getCompanyId());
-
-		ResourceCodeModelImpl resourceCodeModelImpl = resourceCodeImpl;
-
-		resourceCodeModelImpl._originalCompanyId = resourceCodeModelImpl._companyId;
-
-		resourceCodeModelImpl._setOriginalCompanyId = false;
 		resourceCodeImpl.setName(getName());
-
-		resourceCodeModelImpl._originalName = resourceCodeModelImpl._name;
-
 		resourceCodeImpl.setScope(getScope());
 
-		resourceCodeModelImpl._originalScope = resourceCodeModelImpl._scope;
-
-		resourceCodeModelImpl._setOriginalScope = false;
+		resourceCodeImpl.resetOriginalValues();
 
 		return resourceCodeImpl;
 	}
@@ -250,6 +238,20 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ResourceCodeModelImpl resourceCodeModelImpl = this;
+
+		resourceCodeModelImpl._originalCompanyId = resourceCodeModelImpl._companyId;
+
+		resourceCodeModelImpl._setOriginalCompanyId = false;
+
+		resourceCodeModelImpl._originalName = resourceCodeModelImpl._name;
+
+		resourceCodeModelImpl._originalScope = resourceCodeModelImpl._scope;
+
+		resourceCodeModelImpl._setOriginalScope = false;
 	}
 
 	public String toString() {

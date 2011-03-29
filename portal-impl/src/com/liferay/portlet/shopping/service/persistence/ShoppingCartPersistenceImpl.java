@@ -125,6 +125,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 				Long.valueOf(shoppingCart.getGroupId()),
 				Long.valueOf(shoppingCart.getUserId())
 			}, shoppingCart);
+
+		shoppingCart.resetOriginalValues();
 	}
 
 	/**

@@ -219,30 +219,14 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		SocialRelationImpl socialRelationImpl = new SocialRelationImpl();
 
 		socialRelationImpl.setUuid(getUuid());
-
 		socialRelationImpl.setRelationId(getRelationId());
-
 		socialRelationImpl.setCompanyId(getCompanyId());
-
 		socialRelationImpl.setCreateDate(getCreateDate());
-
 		socialRelationImpl.setUserId1(getUserId1());
-
-		SocialRelationModelImpl socialRelationModelImpl = socialRelationImpl;
-
-		socialRelationModelImpl._originalUserId1 = socialRelationModelImpl._userId1;
-
-		socialRelationModelImpl._setOriginalUserId1 = false;
 		socialRelationImpl.setUserId2(getUserId2());
-
-		socialRelationModelImpl._originalUserId2 = socialRelationModelImpl._userId2;
-
-		socialRelationModelImpl._setOriginalUserId2 = false;
 		socialRelationImpl.setType(getType());
 
-		socialRelationModelImpl._originalType = socialRelationModelImpl._type;
-
-		socialRelationModelImpl._setOriginalType = false;
+		socialRelationImpl.resetOriginalValues();
 
 		return socialRelationImpl;
 	}
@@ -287,6 +271,22 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialRelationModelImpl socialRelationModelImpl = this;
+
+		socialRelationModelImpl._originalUserId1 = socialRelationModelImpl._userId1;
+
+		socialRelationModelImpl._setOriginalUserId1 = false;
+
+		socialRelationModelImpl._originalUserId2 = socialRelationModelImpl._userId2;
+
+		socialRelationModelImpl._setOriginalUserId2 = false;
+
+		socialRelationModelImpl._originalType = socialRelationModelImpl._type;
+
+		socialRelationModelImpl._setOriginalType = false;
 	}
 
 	public String toString() {

@@ -122,6 +122,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				Long.valueOf(announcementsFlag.getEntryId()),
 				Integer.valueOf(announcementsFlag.getValue())
 			}, announcementsFlag);
+
+		announcementsFlag.resetOriginalValues();
 	}
 
 	/**

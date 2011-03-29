@@ -307,5 +307,9 @@ public class TeamWrapper implements Team {
 		return _team;
 	}
 
+	public void resetOriginalValues() {
+		_team.resetOriginalValues();
+	}
+
 	private Team _team;
 }

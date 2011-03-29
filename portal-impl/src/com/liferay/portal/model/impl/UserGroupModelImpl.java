@@ -244,21 +244,12 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		UserGroupImpl userGroupImpl = new UserGroupImpl();
 
 		userGroupImpl.setUserGroupId(getUserGroupId());
-
 		userGroupImpl.setCompanyId(getCompanyId());
-
-		UserGroupModelImpl userGroupModelImpl = userGroupImpl;
-
-		userGroupModelImpl._originalCompanyId = userGroupModelImpl._companyId;
-
-		userGroupModelImpl._setOriginalCompanyId = false;
 		userGroupImpl.setParentUserGroupId(getParentUserGroupId());
-
 		userGroupImpl.setName(getName());
-
-		userGroupModelImpl._originalName = userGroupModelImpl._name;
-
 		userGroupImpl.setDescription(getDescription());
+
+		userGroupImpl.resetOriginalValues();
 
 		return userGroupImpl;
 	}
@@ -301,6 +292,16 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		UserGroupModelImpl userGroupModelImpl = this;
+
+		userGroupModelImpl._originalCompanyId = userGroupModelImpl._companyId;
+
+		userGroupModelImpl._setOriginalCompanyId = false;
+
+		userGroupModelImpl._originalName = userGroupModelImpl._name;
 	}
 
 	public String toString() {

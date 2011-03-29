@@ -122,6 +122,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				Long.valueOf(ratingsEntry.getClassNameId()),
 				Long.valueOf(ratingsEntry.getClassPK())
 			}, ratingsEntry);
+
+		ratingsEntry.resetOriginalValues();
 	}
 
 	/**

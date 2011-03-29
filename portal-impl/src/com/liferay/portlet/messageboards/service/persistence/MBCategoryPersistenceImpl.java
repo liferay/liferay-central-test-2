@@ -157,6 +157,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			new Object[] {
 				mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
 			}, mbCategory);
+
+		mbCategory.resetOriginalValues();
 	}
 
 	/**

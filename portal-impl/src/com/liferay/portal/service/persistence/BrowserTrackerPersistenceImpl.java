@@ -96,6 +96,8 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
 			new Object[] { Long.valueOf(browserTracker.getUserId()) },
 			browserTracker);
+
+		browserTracker.resetOriginalValues();
 	}
 
 	/**

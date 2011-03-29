@@ -395,44 +395,25 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
 
 		shoppingCouponImpl.setCouponId(getCouponId());
-
 		shoppingCouponImpl.setGroupId(getGroupId());
-
 		shoppingCouponImpl.setCompanyId(getCompanyId());
-
 		shoppingCouponImpl.setUserId(getUserId());
-
 		shoppingCouponImpl.setUserName(getUserName());
-
 		shoppingCouponImpl.setCreateDate(getCreateDate());
-
 		shoppingCouponImpl.setModifiedDate(getModifiedDate());
-
 		shoppingCouponImpl.setCode(getCode());
-
-		ShoppingCouponModelImpl shoppingCouponModelImpl = shoppingCouponImpl;
-
-		shoppingCouponModelImpl._originalCode = shoppingCouponModelImpl._code;
-
 		shoppingCouponImpl.setName(getName());
-
 		shoppingCouponImpl.setDescription(getDescription());
-
 		shoppingCouponImpl.setStartDate(getStartDate());
-
 		shoppingCouponImpl.setEndDate(getEndDate());
-
 		shoppingCouponImpl.setActive(getActive());
-
 		shoppingCouponImpl.setLimitCategories(getLimitCategories());
-
 		shoppingCouponImpl.setLimitSkus(getLimitSkus());
-
 		shoppingCouponImpl.setMinOrder(getMinOrder());
-
 		shoppingCouponImpl.setDiscount(getDiscount());
-
 		shoppingCouponImpl.setDiscountType(getDiscountType());
+
+		shoppingCouponImpl.resetOriginalValues();
 
 		return shoppingCouponImpl;
 	}
@@ -476,6 +457,12 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ShoppingCouponModelImpl shoppingCouponModelImpl = this;
+
+		shoppingCouponModelImpl._originalCode = shoppingCouponModelImpl._code;
 	}
 
 	public String toString() {

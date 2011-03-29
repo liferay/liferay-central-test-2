@@ -244,33 +244,14 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		JournalContentSearchImpl journalContentSearchImpl = new JournalContentSearchImpl();
 
 		journalContentSearchImpl.setContentSearchId(getContentSearchId());
-
 		journalContentSearchImpl.setGroupId(getGroupId());
-
-		JournalContentSearchModelImpl journalContentSearchModelImpl = journalContentSearchImpl;
-
-		journalContentSearchModelImpl._originalGroupId = journalContentSearchModelImpl._groupId;
-
-		journalContentSearchModelImpl._setOriginalGroupId = false;
 		journalContentSearchImpl.setCompanyId(getCompanyId());
-
 		journalContentSearchImpl.setPrivateLayout(getPrivateLayout());
-
-		journalContentSearchModelImpl._originalPrivateLayout = journalContentSearchModelImpl._privateLayout;
-
-		journalContentSearchModelImpl._setOriginalPrivateLayout = false;
 		journalContentSearchImpl.setLayoutId(getLayoutId());
-
-		journalContentSearchModelImpl._originalLayoutId = journalContentSearchModelImpl._layoutId;
-
-		journalContentSearchModelImpl._setOriginalLayoutId = false;
 		journalContentSearchImpl.setPortletId(getPortletId());
-
-		journalContentSearchModelImpl._originalPortletId = journalContentSearchModelImpl._portletId;
-
 		journalContentSearchImpl.setArticleId(getArticleId());
 
-		journalContentSearchModelImpl._originalArticleId = journalContentSearchModelImpl._articleId;
+		journalContentSearchImpl.resetOriginalValues();
 
 		return journalContentSearchImpl;
 	}
@@ -315,6 +296,26 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalContentSearchModelImpl journalContentSearchModelImpl = this;
+
+		journalContentSearchModelImpl._originalGroupId = journalContentSearchModelImpl._groupId;
+
+		journalContentSearchModelImpl._setOriginalGroupId = false;
+
+		journalContentSearchModelImpl._originalPrivateLayout = journalContentSearchModelImpl._privateLayout;
+
+		journalContentSearchModelImpl._setOriginalPrivateLayout = false;
+
+		journalContentSearchModelImpl._originalLayoutId = journalContentSearchModelImpl._layoutId;
+
+		journalContentSearchModelImpl._setOriginalLayoutId = false;
+
+		journalContentSearchModelImpl._originalPortletId = journalContentSearchModelImpl._portletId;
+
+		journalContentSearchModelImpl._originalArticleId = journalContentSearchModelImpl._articleId;
 	}
 
 	public String toString() {

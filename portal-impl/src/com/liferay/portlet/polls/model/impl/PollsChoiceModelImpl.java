@@ -288,21 +288,12 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 		PollsChoiceImpl pollsChoiceImpl = new PollsChoiceImpl();
 
 		pollsChoiceImpl.setUuid(getUuid());
-
 		pollsChoiceImpl.setChoiceId(getChoiceId());
-
 		pollsChoiceImpl.setQuestionId(getQuestionId());
-
-		PollsChoiceModelImpl pollsChoiceModelImpl = pollsChoiceImpl;
-
-		pollsChoiceModelImpl._originalQuestionId = pollsChoiceModelImpl._questionId;
-
-		pollsChoiceModelImpl._setOriginalQuestionId = false;
 		pollsChoiceImpl.setName(getName());
-
-		pollsChoiceModelImpl._originalName = pollsChoiceModelImpl._name;
-
 		pollsChoiceImpl.setDescription(getDescription());
+
+		pollsChoiceImpl.resetOriginalValues();
 
 		return pollsChoiceImpl;
 	}
@@ -359,6 +350,16 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PollsChoiceModelImpl pollsChoiceModelImpl = this;
+
+		pollsChoiceModelImpl._originalQuestionId = pollsChoiceModelImpl._questionId;
+
+		pollsChoiceModelImpl._setOriginalQuestionId = false;
+
+		pollsChoiceModelImpl._originalName = pollsChoiceModelImpl._name;
 	}
 
 	public String toString() {

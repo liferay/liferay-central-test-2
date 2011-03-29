@@ -299,26 +299,18 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 		EmailAddressImpl emailAddressImpl = new EmailAddressImpl();
 
 		emailAddressImpl.setEmailAddressId(getEmailAddressId());
-
 		emailAddressImpl.setCompanyId(getCompanyId());
-
 		emailAddressImpl.setUserId(getUserId());
-
 		emailAddressImpl.setUserName(getUserName());
-
 		emailAddressImpl.setCreateDate(getCreateDate());
-
 		emailAddressImpl.setModifiedDate(getModifiedDate());
-
 		emailAddressImpl.setClassNameId(getClassNameId());
-
 		emailAddressImpl.setClassPK(getClassPK());
-
 		emailAddressImpl.setAddress(getAddress());
-
 		emailAddressImpl.setTypeId(getTypeId());
-
 		emailAddressImpl.setPrimary(getPrimary());
+
+		emailAddressImpl.resetOriginalValues();
 
 		return emailAddressImpl;
 	}
@@ -361,6 +353,9 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

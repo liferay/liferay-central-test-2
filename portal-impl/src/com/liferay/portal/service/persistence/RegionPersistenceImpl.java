@@ -120,6 +120,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	public void cacheResult(Region region) {
 		EntityCacheUtil.putResult(RegionModelImpl.ENTITY_CACHE_ENABLED,
 			RegionImpl.class, region.getPrimaryKey(), region);
+
+		region.resetOriginalValues();
 	}
 
 	/**

@@ -123,6 +123,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A3,
 			new Object[] { country.getA3() }, country);
+
+		country.resetOriginalValues();
 	}
 
 	/**

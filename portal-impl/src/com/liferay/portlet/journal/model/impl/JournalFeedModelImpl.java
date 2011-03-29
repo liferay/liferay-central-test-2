@@ -498,59 +498,30 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		JournalFeedImpl journalFeedImpl = new JournalFeedImpl();
 
 		journalFeedImpl.setUuid(getUuid());
-
-		JournalFeedModelImpl journalFeedModelImpl = journalFeedImpl;
-
-		journalFeedModelImpl._originalUuid = journalFeedModelImpl._uuid;
-
 		journalFeedImpl.setId(getId());
-
 		journalFeedImpl.setGroupId(getGroupId());
-
-		journalFeedModelImpl._originalGroupId = journalFeedModelImpl._groupId;
-
-		journalFeedModelImpl._setOriginalGroupId = false;
 		journalFeedImpl.setCompanyId(getCompanyId());
-
 		journalFeedImpl.setUserId(getUserId());
-
 		journalFeedImpl.setUserName(getUserName());
-
 		journalFeedImpl.setCreateDate(getCreateDate());
-
 		journalFeedImpl.setModifiedDate(getModifiedDate());
-
 		journalFeedImpl.setFeedId(getFeedId());
-
-		journalFeedModelImpl._originalFeedId = journalFeedModelImpl._feedId;
-
 		journalFeedImpl.setName(getName());
-
 		journalFeedImpl.setDescription(getDescription());
-
 		journalFeedImpl.setType(getType());
-
 		journalFeedImpl.setStructureId(getStructureId());
-
 		journalFeedImpl.setTemplateId(getTemplateId());
-
 		journalFeedImpl.setRendererTemplateId(getRendererTemplateId());
-
 		journalFeedImpl.setDelta(getDelta());
-
 		journalFeedImpl.setOrderByCol(getOrderByCol());
-
 		journalFeedImpl.setOrderByType(getOrderByType());
-
 		journalFeedImpl.setTargetLayoutFriendlyUrl(getTargetLayoutFriendlyUrl());
-
 		journalFeedImpl.setTargetPortletId(getTargetPortletId());
-
 		journalFeedImpl.setContentField(getContentField());
-
 		journalFeedImpl.setFeedType(getFeedType());
-
 		journalFeedImpl.setFeedVersion(getFeedVersion());
+
+		journalFeedImpl.resetOriginalValues();
 
 		return journalFeedImpl;
 	}
@@ -593,6 +564,18 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalFeedModelImpl journalFeedModelImpl = this;
+
+		journalFeedModelImpl._originalUuid = journalFeedModelImpl._uuid;
+
+		journalFeedModelImpl._originalGroupId = journalFeedModelImpl._groupId;
+
+		journalFeedModelImpl._setOriginalGroupId = false;
+
+		journalFeedModelImpl._originalFeedId = journalFeedModelImpl._feedId;
 	}
 
 	public String toString() {

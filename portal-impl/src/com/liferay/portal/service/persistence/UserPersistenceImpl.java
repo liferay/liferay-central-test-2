@@ -254,6 +254,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_O,
 			new Object[] { Long.valueOf(user.getCompanyId()), user.getOpenId() },
 			user);
+
+		user.resetOriginalValues();
 	}
 
 	/**

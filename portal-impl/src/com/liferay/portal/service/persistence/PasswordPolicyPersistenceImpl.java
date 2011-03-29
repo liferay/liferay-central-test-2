@@ -114,6 +114,8 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				
 			passwordPolicy.getName()
 			}, passwordPolicy);
+
+		passwordPolicy.resetOriginalValues();
 	}
 
 	/**

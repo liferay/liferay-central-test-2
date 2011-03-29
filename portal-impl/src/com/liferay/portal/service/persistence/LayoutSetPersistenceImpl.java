@@ -109,6 +109,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				Long.valueOf(layoutSet.getGroupId()),
 				Boolean.valueOf(layoutSet.getPrivateLayout())
 			}, layoutSet);
+
+		layoutSet.resetOriginalValues();
 	}
 
 	/**

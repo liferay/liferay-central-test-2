@@ -220,24 +220,17 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		ShoppingItemPriceImpl shoppingItemPriceImpl = new ShoppingItemPriceImpl();
 
 		shoppingItemPriceImpl.setItemPriceId(getItemPriceId());
-
 		shoppingItemPriceImpl.setItemId(getItemId());
-
 		shoppingItemPriceImpl.setMinQuantity(getMinQuantity());
-
 		shoppingItemPriceImpl.setMaxQuantity(getMaxQuantity());
-
 		shoppingItemPriceImpl.setPrice(getPrice());
-
 		shoppingItemPriceImpl.setDiscount(getDiscount());
-
 		shoppingItemPriceImpl.setTaxable(getTaxable());
-
 		shoppingItemPriceImpl.setShipping(getShipping());
-
 		shoppingItemPriceImpl.setUseShippingFormula(getUseShippingFormula());
-
 		shoppingItemPriceImpl.setStatus(getStatus());
+
+		shoppingItemPriceImpl.resetOriginalValues();
 
 		return shoppingItemPriceImpl;
 	}
@@ -302,6 +295,9 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

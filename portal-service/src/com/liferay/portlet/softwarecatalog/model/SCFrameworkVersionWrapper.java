@@ -347,5 +347,9 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		return _scFrameworkVersion;
 	}
 
+	public void resetOriginalValues() {
+		_scFrameworkVersion.resetOriginalValues();
+	}
+
 	private SCFrameworkVersion _scFrameworkVersion;
 }

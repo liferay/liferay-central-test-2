@@ -215,24 +215,15 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		ReleaseImpl releaseImpl = new ReleaseImpl();
 
 		releaseImpl.setReleaseId(getReleaseId());
-
 		releaseImpl.setCreateDate(getCreateDate());
-
 		releaseImpl.setModifiedDate(getModifiedDate());
-
 		releaseImpl.setServletContextName(getServletContextName());
-
-		ReleaseModelImpl releaseModelImpl = releaseImpl;
-
-		releaseModelImpl._originalServletContextName = releaseModelImpl._servletContextName;
-
 		releaseImpl.setBuildNumber(getBuildNumber());
-
 		releaseImpl.setBuildDate(getBuildDate());
-
 		releaseImpl.setVerified(getVerified());
-
 		releaseImpl.setTestString(getTestString());
+
+		releaseImpl.resetOriginalValues();
 
 		return releaseImpl;
 	}
@@ -277,6 +268,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ReleaseModelImpl releaseModelImpl = this;
+
+		releaseModelImpl._originalServletContextName = releaseModelImpl._servletContextName;
 	}
 
 	public String toString() {

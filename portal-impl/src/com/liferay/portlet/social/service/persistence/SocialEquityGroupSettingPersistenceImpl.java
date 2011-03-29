@@ -110,6 +110,8 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 				Long.valueOf(socialEquityGroupSetting.getClassNameId()),
 				Integer.valueOf(socialEquityGroupSetting.getType())
 			}, socialEquityGroupSetting);
+
+		socialEquityGroupSetting.resetOriginalValues();
 	}
 
 	/**

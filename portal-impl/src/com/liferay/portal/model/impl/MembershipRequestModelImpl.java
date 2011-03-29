@@ -287,24 +287,17 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
 		membershipRequestImpl.setMembershipRequestId(getMembershipRequestId());
-
 		membershipRequestImpl.setGroupId(getGroupId());
-
 		membershipRequestImpl.setCompanyId(getCompanyId());
-
 		membershipRequestImpl.setUserId(getUserId());
-
 		membershipRequestImpl.setCreateDate(getCreateDate());
-
 		membershipRequestImpl.setComments(getComments());
-
 		membershipRequestImpl.setReplyComments(getReplyComments());
-
 		membershipRequestImpl.setReplyDate(getReplyDate());
-
 		membershipRequestImpl.setReplierUserId(getReplierUserId());
-
 		membershipRequestImpl.setStatusId(getStatusId());
+
+		membershipRequestImpl.resetOriginalValues();
 
 		return membershipRequestImpl;
 	}
@@ -350,6 +343,9 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

@@ -219,20 +219,15 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		UserNotificationEventImpl userNotificationEventImpl = new UserNotificationEventImpl();
 
 		userNotificationEventImpl.setUuid(getUuid());
-
 		userNotificationEventImpl.setUserNotificationEventId(getUserNotificationEventId());
-
 		userNotificationEventImpl.setCompanyId(getCompanyId());
-
 		userNotificationEventImpl.setUserId(getUserId());
-
 		userNotificationEventImpl.setType(getType());
-
 		userNotificationEventImpl.setTimestamp(getTimestamp());
-
 		userNotificationEventImpl.setDeliverBy(getDeliverBy());
-
 		userNotificationEventImpl.setPayload(getPayload());
+
+		userNotificationEventImpl.resetOriginalValues();
 
 		return userNotificationEventImpl;
 	}
@@ -283,6 +278,9 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

@@ -208,22 +208,14 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		TicketImpl ticketImpl = new TicketImpl();
 
 		ticketImpl.setTicketId(getTicketId());
-
 		ticketImpl.setCompanyId(getCompanyId());
-
 		ticketImpl.setCreateDate(getCreateDate());
-
 		ticketImpl.setClassNameId(getClassNameId());
-
 		ticketImpl.setClassPK(getClassPK());
-
 		ticketImpl.setKey(getKey());
-
-		TicketModelImpl ticketModelImpl = ticketImpl;
-
-		ticketModelImpl._originalKey = ticketModelImpl._key;
-
 		ticketImpl.setExpirationDate(getExpirationDate());
+
+		ticketImpl.resetOriginalValues();
 
 		return ticketImpl;
 	}
@@ -274,6 +266,12 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		TicketModelImpl ticketModelImpl = this;
+
+		ticketModelImpl._originalKey = ticketModelImpl._key;
 	}
 
 	public String toString() {

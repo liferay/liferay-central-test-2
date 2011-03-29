@@ -188,6 +188,8 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				
 			journalTemplate.getTemplateId()
 			}, journalTemplate);
+
+		journalTemplate.resetOriginalValues();
 	}
 
 	/**

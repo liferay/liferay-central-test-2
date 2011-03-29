@@ -376,6 +376,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			new Object[] {
 				mbMessage.getUuid(), Long.valueOf(mbMessage.getGroupId())
 			}, mbMessage);
+
+		mbMessage.resetOriginalValues();
 	}
 
 	/**

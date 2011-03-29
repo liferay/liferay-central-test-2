@@ -300,5 +300,9 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice;
 	}
 
+	public void resetOriginalValues() {
+		_pollsChoice.resetOriginalValues();
+	}
+
 	private PollsChoice _pollsChoice;
 }

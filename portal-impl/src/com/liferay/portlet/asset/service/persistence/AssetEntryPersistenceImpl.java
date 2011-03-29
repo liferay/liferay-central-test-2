@@ -149,6 +149,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				Long.valueOf(assetEntry.getClassNameId()),
 				Long.valueOf(assetEntry.getClassPK())
 			}, assetEntry);
+
+		assetEntry.resetOriginalValues();
 	}
 
 	/**

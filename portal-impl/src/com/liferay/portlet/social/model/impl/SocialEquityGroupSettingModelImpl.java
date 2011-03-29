@@ -218,27 +218,13 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		SocialEquityGroupSettingImpl socialEquityGroupSettingImpl = new SocialEquityGroupSettingImpl();
 
 		socialEquityGroupSettingImpl.setEquityGroupSettingId(getEquityGroupSettingId());
-
 		socialEquityGroupSettingImpl.setGroupId(getGroupId());
-
-		SocialEquityGroupSettingModelImpl socialEquityGroupSettingModelImpl = socialEquityGroupSettingImpl;
-
-		socialEquityGroupSettingModelImpl._originalGroupId = socialEquityGroupSettingModelImpl._groupId;
-
-		socialEquityGroupSettingModelImpl._setOriginalGroupId = false;
 		socialEquityGroupSettingImpl.setCompanyId(getCompanyId());
-
 		socialEquityGroupSettingImpl.setClassNameId(getClassNameId());
-
-		socialEquityGroupSettingModelImpl._originalClassNameId = socialEquityGroupSettingModelImpl._classNameId;
-
-		socialEquityGroupSettingModelImpl._setOriginalClassNameId = false;
 		socialEquityGroupSettingImpl.setType(getType());
-
-		socialEquityGroupSettingModelImpl._originalType = socialEquityGroupSettingModelImpl._type;
-
-		socialEquityGroupSettingModelImpl._setOriginalType = false;
 		socialEquityGroupSettingImpl.setEnabled(getEnabled());
+
+		socialEquityGroupSettingImpl.resetOriginalValues();
 
 		return socialEquityGroupSettingImpl;
 	}
@@ -283,6 +269,22 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialEquityGroupSettingModelImpl socialEquityGroupSettingModelImpl = this;
+
+		socialEquityGroupSettingModelImpl._originalGroupId = socialEquityGroupSettingModelImpl._groupId;
+
+		socialEquityGroupSettingModelImpl._setOriginalGroupId = false;
+
+		socialEquityGroupSettingModelImpl._originalClassNameId = socialEquityGroupSettingModelImpl._classNameId;
+
+		socialEquityGroupSettingModelImpl._setOriginalClassNameId = false;
+
+		socialEquityGroupSettingModelImpl._originalType = socialEquityGroupSettingModelImpl._type;
+
+		socialEquityGroupSettingModelImpl._setOriginalType = false;
 	}
 
 	public String toString() {

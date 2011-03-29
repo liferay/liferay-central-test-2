@@ -269,36 +269,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		JournalArticleImageImpl journalArticleImageImpl = new JournalArticleImageImpl();
 
 		journalArticleImageImpl.setArticleImageId(getArticleImageId());
-
 		journalArticleImageImpl.setGroupId(getGroupId());
-
-		JournalArticleImageModelImpl journalArticleImageModelImpl = journalArticleImageImpl;
-
-		journalArticleImageModelImpl._originalGroupId = journalArticleImageModelImpl._groupId;
-
-		journalArticleImageModelImpl._setOriginalGroupId = false;
 		journalArticleImageImpl.setArticleId(getArticleId());
-
-		journalArticleImageModelImpl._originalArticleId = journalArticleImageModelImpl._articleId;
-
 		journalArticleImageImpl.setVersion(getVersion());
-
-		journalArticleImageModelImpl._originalVersion = journalArticleImageModelImpl._version;
-
-		journalArticleImageModelImpl._setOriginalVersion = false;
 		journalArticleImageImpl.setElInstanceId(getElInstanceId());
-
-		journalArticleImageModelImpl._originalElInstanceId = journalArticleImageModelImpl._elInstanceId;
-
 		journalArticleImageImpl.setElName(getElName());
-
-		journalArticleImageModelImpl._originalElName = journalArticleImageModelImpl._elName;
-
 		journalArticleImageImpl.setLanguageId(getLanguageId());
-
-		journalArticleImageModelImpl._originalLanguageId = journalArticleImageModelImpl._languageId;
-
 		journalArticleImageImpl.setTempImage(getTempImage());
+
+		journalArticleImageImpl.resetOriginalValues();
 
 		return journalArticleImageImpl;
 	}
@@ -343,6 +322,26 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalArticleImageModelImpl journalArticleImageModelImpl = this;
+
+		journalArticleImageModelImpl._originalGroupId = journalArticleImageModelImpl._groupId;
+
+		journalArticleImageModelImpl._setOriginalGroupId = false;
+
+		journalArticleImageModelImpl._originalArticleId = journalArticleImageModelImpl._articleId;
+
+		journalArticleImageModelImpl._originalVersion = journalArticleImageModelImpl._version;
+
+		journalArticleImageModelImpl._setOriginalVersion = false;
+
+		journalArticleImageModelImpl._originalElInstanceId = journalArticleImageModelImpl._elInstanceId;
+
+		journalArticleImageModelImpl._originalElName = journalArticleImageModelImpl._elName;
+
+		journalArticleImageModelImpl._originalLanguageId = journalArticleImageModelImpl._languageId;
 	}
 
 	public String toString() {

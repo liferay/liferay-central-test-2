@@ -611,5 +611,9 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry;
 	}
 
+	public void resetOriginalValues() {
+		_dlFileEntry.resetOriginalValues();
+	}
+
 	private DLFileEntry _dlFileEntry;
 }

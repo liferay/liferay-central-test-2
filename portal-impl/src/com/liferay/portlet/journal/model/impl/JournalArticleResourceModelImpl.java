@@ -193,21 +193,11 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		JournalArticleResourceImpl journalArticleResourceImpl = new JournalArticleResourceImpl();
 
 		journalArticleResourceImpl.setUuid(getUuid());
-
-		JournalArticleResourceModelImpl journalArticleResourceModelImpl = journalArticleResourceImpl;
-
-		journalArticleResourceModelImpl._originalUuid = journalArticleResourceModelImpl._uuid;
-
 		journalArticleResourceImpl.setResourcePrimKey(getResourcePrimKey());
-
 		journalArticleResourceImpl.setGroupId(getGroupId());
-
-		journalArticleResourceModelImpl._originalGroupId = journalArticleResourceModelImpl._groupId;
-
-		journalArticleResourceModelImpl._setOriginalGroupId = false;
 		journalArticleResourceImpl.setArticleId(getArticleId());
 
-		journalArticleResourceModelImpl._originalArticleId = journalArticleResourceModelImpl._articleId;
+		journalArticleResourceImpl.resetOriginalValues();
 
 		return journalArticleResourceImpl;
 	}
@@ -252,6 +242,18 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalArticleResourceModelImpl journalArticleResourceModelImpl = this;
+
+		journalArticleResourceModelImpl._originalUuid = journalArticleResourceModelImpl._uuid;
+
+		journalArticleResourceModelImpl._originalGroupId = journalArticleResourceModelImpl._groupId;
+
+		journalArticleResourceModelImpl._setOriginalGroupId = false;
+
+		journalArticleResourceModelImpl._originalArticleId = journalArticleResourceModelImpl._articleId;
 	}
 
 	public String toString() {

@@ -124,6 +124,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				Long.valueOf(mbDiscussion.getClassNameId()),
 				Long.valueOf(mbDiscussion.getClassPK())
 			}, mbDiscussion);
+
+		mbDiscussion.resetOriginalValues();
 	}
 
 	/**

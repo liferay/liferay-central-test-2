@@ -207,6 +207,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void cacheResult(MBThread mbThread) {
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
+
+		mbThread.resetOriginalValues();
 	}
 
 	/**

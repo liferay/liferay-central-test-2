@@ -336,5 +336,9 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		return _bookmarksFolder;
 	}
 
+	public void resetOriginalValues() {
+		_bookmarksFolder.resetOriginalValues();
+	}
+
 	private BookmarksFolder _bookmarksFolder;
 }

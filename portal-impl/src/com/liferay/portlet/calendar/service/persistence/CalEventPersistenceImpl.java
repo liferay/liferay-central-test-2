@@ -206,6 +206,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { calEvent.getUuid(), Long.valueOf(
 					calEvent.getGroupId()) }, calEvent);
+
+		calEvent.resetOriginalValues();
 	}
 
 	/**

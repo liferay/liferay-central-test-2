@@ -356,39 +356,20 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		DDMStructureImpl ddmStructureImpl = new DDMStructureImpl();
 
 		ddmStructureImpl.setUuid(getUuid());
-
-		DDMStructureModelImpl ddmStructureModelImpl = ddmStructureImpl;
-
-		ddmStructureModelImpl._originalUuid = ddmStructureModelImpl._uuid;
-
 		ddmStructureImpl.setStructureId(getStructureId());
-
 		ddmStructureImpl.setGroupId(getGroupId());
-
-		ddmStructureModelImpl._originalGroupId = ddmStructureModelImpl._groupId;
-
-		ddmStructureModelImpl._setOriginalGroupId = false;
 		ddmStructureImpl.setCompanyId(getCompanyId());
-
 		ddmStructureImpl.setUserId(getUserId());
-
 		ddmStructureImpl.setUserName(getUserName());
-
 		ddmStructureImpl.setCreateDate(getCreateDate());
-
 		ddmStructureImpl.setModifiedDate(getModifiedDate());
-
 		ddmStructureImpl.setStructureKey(getStructureKey());
-
-		ddmStructureModelImpl._originalStructureKey = ddmStructureModelImpl._structureKey;
-
 		ddmStructureImpl.setName(getName());
-
 		ddmStructureImpl.setDescription(getDescription());
-
 		ddmStructureImpl.setXsd(getXsd());
-
 		ddmStructureImpl.setStorageType(getStorageType());
+
+		ddmStructureImpl.resetOriginalValues();
 
 		return ddmStructureImpl;
 	}
@@ -433,6 +414,18 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DDMStructureModelImpl ddmStructureModelImpl = this;
+
+		ddmStructureModelImpl._originalUuid = ddmStructureModelImpl._uuid;
+
+		ddmStructureModelImpl._originalGroupId = ddmStructureModelImpl._groupId;
+
+		ddmStructureModelImpl._setOriginalGroupId = false;
+
+		ddmStructureModelImpl._originalStructureKey = ddmStructureModelImpl._structureKey;
 	}
 
 	public String toString() {

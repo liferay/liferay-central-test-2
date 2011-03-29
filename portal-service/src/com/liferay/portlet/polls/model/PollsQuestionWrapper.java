@@ -538,5 +538,9 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion;
 	}
 
+	public void resetOriginalValues() {
+		_pollsQuestion.resetOriginalValues();
+	}
+
 	private PollsQuestion _pollsQuestion;
 }

@@ -322,5 +322,9 @@ public class BlogsStatsUserWrapper implements BlogsStatsUser {
 		return _blogsStatsUser;
 	}
 
+	public void resetOriginalValues() {
+		_blogsStatsUser.resetOriginalValues();
+	}
+
 	private BlogsStatsUser _blogsStatsUser;
 }

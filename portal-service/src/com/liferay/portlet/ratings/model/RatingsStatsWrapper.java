@@ -237,5 +237,9 @@ public class RatingsStatsWrapper implements RatingsStats {
 		return _ratingsStats;
 	}
 
+	public void resetOriginalValues() {
+		_ratingsStats.resetOriginalValues();
+	}
+
 	private RatingsStats _ratingsStats;
 }

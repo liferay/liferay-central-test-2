@@ -336,5 +336,9 @@ public class IGFolderWrapper implements IGFolder {
 		return _igFolder;
 	}
 
+	public void resetOriginalValues() {
+		_igFolder.resetOriginalValues();
+	}
+
 	private IGFolder _igFolder;
 }

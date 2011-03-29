@@ -239,6 +239,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				
 			layout.getFriendlyURL()
 			}, layout);
+
+		layout.resetOriginalValues();
 	}
 
 	/**

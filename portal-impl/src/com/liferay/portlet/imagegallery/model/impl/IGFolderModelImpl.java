@@ -317,36 +317,17 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		IGFolderImpl igFolderImpl = new IGFolderImpl();
 
 		igFolderImpl.setUuid(getUuid());
-
-		IGFolderModelImpl igFolderModelImpl = igFolderImpl;
-
-		igFolderModelImpl._originalUuid = igFolderModelImpl._uuid;
-
 		igFolderImpl.setFolderId(getFolderId());
-
 		igFolderImpl.setGroupId(getGroupId());
-
-		igFolderModelImpl._originalGroupId = igFolderModelImpl._groupId;
-
-		igFolderModelImpl._setOriginalGroupId = false;
 		igFolderImpl.setCompanyId(getCompanyId());
-
 		igFolderImpl.setUserId(getUserId());
-
 		igFolderImpl.setCreateDate(getCreateDate());
-
 		igFolderImpl.setModifiedDate(getModifiedDate());
-
 		igFolderImpl.setParentFolderId(getParentFolderId());
-
-		igFolderModelImpl._originalParentFolderId = igFolderModelImpl._parentFolderId;
-
-		igFolderModelImpl._setOriginalParentFolderId = false;
 		igFolderImpl.setName(getName());
-
-		igFolderModelImpl._originalName = igFolderModelImpl._name;
-
 		igFolderImpl.setDescription(getDescription());
+
+		igFolderImpl.resetOriginalValues();
 
 		return igFolderImpl;
 	}
@@ -404,6 +385,22 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		IGFolderModelImpl igFolderModelImpl = this;
+
+		igFolderModelImpl._originalUuid = igFolderModelImpl._uuid;
+
+		igFolderModelImpl._originalGroupId = igFolderModelImpl._groupId;
+
+		igFolderModelImpl._setOriginalGroupId = false;
+
+		igFolderModelImpl._originalParentFolderId = igFolderModelImpl._parentFolderId;
+
+		igFolderModelImpl._setOriginalParentFolderId = false;
+
+		igFolderModelImpl._originalName = igFolderModelImpl._name;
 	}
 
 	public String toString() {

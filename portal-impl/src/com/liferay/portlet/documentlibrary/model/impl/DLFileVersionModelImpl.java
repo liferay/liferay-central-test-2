@@ -432,51 +432,27 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
 
 		dlFileVersionImpl.setFileVersionId(getFileVersionId());
-
 		dlFileVersionImpl.setGroupId(getGroupId());
-
 		dlFileVersionImpl.setCompanyId(getCompanyId());
-
 		dlFileVersionImpl.setUserId(getUserId());
-
 		dlFileVersionImpl.setUserName(getUserName());
-
 		dlFileVersionImpl.setCreateDate(getCreateDate());
-
 		dlFileVersionImpl.setRepositoryId(getRepositoryId());
-
 		dlFileVersionImpl.setFileEntryId(getFileEntryId());
-
-		DLFileVersionModelImpl dlFileVersionModelImpl = dlFileVersionImpl;
-
-		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
-
-		dlFileVersionModelImpl._setOriginalFileEntryId = false;
 		dlFileVersionImpl.setExtension(getExtension());
-
 		dlFileVersionImpl.setMimeType(getMimeType());
-
 		dlFileVersionImpl.setTitle(getTitle());
-
 		dlFileVersionImpl.setDescription(getDescription());
-
 		dlFileVersionImpl.setChangeLog(getChangeLog());
-
 		dlFileVersionImpl.setExtraSettings(getExtraSettings());
-
 		dlFileVersionImpl.setVersion(getVersion());
-
-		dlFileVersionModelImpl._originalVersion = dlFileVersionModelImpl._version;
-
 		dlFileVersionImpl.setSize(getSize());
-
 		dlFileVersionImpl.setStatus(getStatus());
-
 		dlFileVersionImpl.setStatusByUserId(getStatusByUserId());
-
 		dlFileVersionImpl.setStatusByUserName(getStatusByUserName());
-
 		dlFileVersionImpl.setStatusDate(getStatusDate());
+
+		dlFileVersionImpl.resetOriginalValues();
 
 		return dlFileVersionImpl;
 	}
@@ -538,6 +514,16 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DLFileVersionModelImpl dlFileVersionModelImpl = this;
+
+		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
+
+		dlFileVersionModelImpl._setOriginalFileEntryId = false;
+
+		dlFileVersionModelImpl._originalVersion = dlFileVersionModelImpl._version;
 	}
 
 	public String toString() {

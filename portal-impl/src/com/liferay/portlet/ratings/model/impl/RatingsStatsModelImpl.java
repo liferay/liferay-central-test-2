@@ -204,24 +204,13 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		RatingsStatsImpl ratingsStatsImpl = new RatingsStatsImpl();
 
 		ratingsStatsImpl.setStatsId(getStatsId());
-
 		ratingsStatsImpl.setClassNameId(getClassNameId());
-
-		RatingsStatsModelImpl ratingsStatsModelImpl = ratingsStatsImpl;
-
-		ratingsStatsModelImpl._originalClassNameId = ratingsStatsModelImpl._classNameId;
-
-		ratingsStatsModelImpl._setOriginalClassNameId = false;
 		ratingsStatsImpl.setClassPK(getClassPK());
-
-		ratingsStatsModelImpl._originalClassPK = ratingsStatsModelImpl._classPK;
-
-		ratingsStatsModelImpl._setOriginalClassPK = false;
 		ratingsStatsImpl.setTotalEntries(getTotalEntries());
-
 		ratingsStatsImpl.setTotalScore(getTotalScore());
-
 		ratingsStatsImpl.setAverageScore(getAverageScore());
+
+		ratingsStatsImpl.resetOriginalValues();
 
 		return ratingsStatsImpl;
 	}
@@ -266,6 +255,18 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		RatingsStatsModelImpl ratingsStatsModelImpl = this;
+
+		ratingsStatsModelImpl._originalClassNameId = ratingsStatsModelImpl._classNameId;
+
+		ratingsStatsModelImpl._setOriginalClassNameId = false;
+
+		ratingsStatsModelImpl._originalClassPK = ratingsStatsModelImpl._classPK;
+
+		ratingsStatsModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

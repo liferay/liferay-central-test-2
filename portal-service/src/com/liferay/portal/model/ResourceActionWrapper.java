@@ -191,5 +191,9 @@ public class ResourceActionWrapper implements ResourceAction {
 		return _resourceAction;
 	}
 
+	public void resetOriginalValues() {
+		_resourceAction.resetOriginalValues();
+	}
+
 	private ResourceAction _resourceAction;
 }

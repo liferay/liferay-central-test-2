@@ -189,22 +189,11 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
 
 		virtualHostImpl.setVirtualHostId(getVirtualHostId());
-
 		virtualHostImpl.setCompanyId(getCompanyId());
-
-		VirtualHostModelImpl virtualHostModelImpl = virtualHostImpl;
-
-		virtualHostModelImpl._originalCompanyId = virtualHostModelImpl._companyId;
-
-		virtualHostModelImpl._setOriginalCompanyId = false;
 		virtualHostImpl.setLayoutSetId(getLayoutSetId());
-
-		virtualHostModelImpl._originalLayoutSetId = virtualHostModelImpl._layoutSetId;
-
-		virtualHostModelImpl._setOriginalLayoutSetId = false;
 		virtualHostImpl.setHostname(getHostname());
 
-		virtualHostModelImpl._originalHostname = virtualHostModelImpl._hostname;
+		virtualHostImpl.resetOriginalValues();
 
 		return virtualHostImpl;
 	}
@@ -249,6 +238,20 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		VirtualHostModelImpl virtualHostModelImpl = this;
+
+		virtualHostModelImpl._originalCompanyId = virtualHostModelImpl._companyId;
+
+		virtualHostModelImpl._setOriginalCompanyId = false;
+
+		virtualHostModelImpl._originalLayoutSetId = virtualHostModelImpl._layoutSetId;
+
+		virtualHostModelImpl._setOriginalLayoutSetId = false;
+
+		virtualHostModelImpl._originalHostname = virtualHostModelImpl._hostname;
 	}
 
 	public String toString() {

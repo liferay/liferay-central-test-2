@@ -246,5 +246,9 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 		return _scProductScreenshot;
 	}
 
+	public void resetOriginalValues() {
+		_scProductScreenshot.resetOriginalValues();
+	}
+
 	private SCProductScreenshot _scProductScreenshot;
 }

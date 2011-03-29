@@ -164,5 +164,9 @@ public class ClassNameWrapper implements ClassName {
 		return _className;
 	}
 
+	public void resetOriginalValues() {
+		_className.resetOriginalValues();
+	}
+
 	private ClassName _className;
 }

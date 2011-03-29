@@ -196,22 +196,11 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		ShardImpl shardImpl = new ShardImpl();
 
 		shardImpl.setShardId(getShardId());
-
 		shardImpl.setClassNameId(getClassNameId());
-
-		ShardModelImpl shardModelImpl = shardImpl;
-
-		shardModelImpl._originalClassNameId = shardModelImpl._classNameId;
-
-		shardModelImpl._setOriginalClassNameId = false;
 		shardImpl.setClassPK(getClassPK());
-
-		shardModelImpl._originalClassPK = shardModelImpl._classPK;
-
-		shardModelImpl._setOriginalClassPK = false;
 		shardImpl.setName(getName());
 
-		shardModelImpl._originalName = shardModelImpl._name;
+		shardImpl.resetOriginalValues();
 
 		return shardImpl;
 	}
@@ -256,6 +245,20 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ShardModelImpl shardModelImpl = this;
+
+		shardModelImpl._originalClassNameId = shardModelImpl._classNameId;
+
+		shardModelImpl._setOriginalClassNameId = false;
+
+		shardModelImpl._originalClassPK = shardModelImpl._classPK;
+
+		shardModelImpl._setOriginalClassPK = false;
+
+		shardModelImpl._originalName = shardModelImpl._name;
 	}
 
 	public String toString() {

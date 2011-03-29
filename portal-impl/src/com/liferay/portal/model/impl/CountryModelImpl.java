@@ -277,26 +277,14 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		CountryImpl countryImpl = new CountryImpl();
 
 		countryImpl.setCountryId(getCountryId());
-
 		countryImpl.setName(getName());
-
-		CountryModelImpl countryModelImpl = countryImpl;
-
-		countryModelImpl._originalName = countryModelImpl._name;
-
 		countryImpl.setA2(getA2());
-
-		countryModelImpl._originalA2 = countryModelImpl._a2;
-
 		countryImpl.setA3(getA3());
-
-		countryModelImpl._originalA3 = countryModelImpl._a3;
-
 		countryImpl.setNumber(getNumber());
-
 		countryImpl.setIdd(getIdd());
-
 		countryImpl.setActive(getActive());
+
+		countryImpl.resetOriginalValues();
 
 		return countryImpl;
 	}
@@ -339,6 +327,16 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		CountryModelImpl countryModelImpl = this;
+
+		countryModelImpl._originalName = countryModelImpl._name;
+
+		countryModelImpl._originalA2 = countryModelImpl._a2;
+
+		countryModelImpl._originalA3 = countryModelImpl._a3;
 	}
 
 	public String toString() {

@@ -234,24 +234,11 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		DDMStructureLinkImpl ddmStructureLinkImpl = new DDMStructureLinkImpl();
 
 		ddmStructureLinkImpl.setStructureLinkId(getStructureLinkId());
-
 		ddmStructureLinkImpl.setClassNameId(getClassNameId());
-
-		DDMStructureLinkModelImpl ddmStructureLinkModelImpl = ddmStructureLinkImpl;
-
-		ddmStructureLinkModelImpl._originalClassNameId = ddmStructureLinkModelImpl._classNameId;
-
-		ddmStructureLinkModelImpl._setOriginalClassNameId = false;
 		ddmStructureLinkImpl.setClassPK(getClassPK());
-
-		ddmStructureLinkModelImpl._originalClassPK = ddmStructureLinkModelImpl._classPK;
-
-		ddmStructureLinkModelImpl._setOriginalClassPK = false;
 		ddmStructureLinkImpl.setStructureId(getStructureId());
 
-		ddmStructureLinkModelImpl._originalStructureId = ddmStructureLinkModelImpl._structureId;
-
-		ddmStructureLinkModelImpl._setOriginalStructureId = false;
+		ddmStructureLinkImpl.resetOriginalValues();
 
 		return ddmStructureLinkImpl;
 	}
@@ -296,6 +283,22 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DDMStructureLinkModelImpl ddmStructureLinkModelImpl = this;
+
+		ddmStructureLinkModelImpl._originalClassNameId = ddmStructureLinkModelImpl._classNameId;
+
+		ddmStructureLinkModelImpl._setOriginalClassNameId = false;
+
+		ddmStructureLinkModelImpl._originalClassPK = ddmStructureLinkModelImpl._classPK;
+
+		ddmStructureLinkModelImpl._setOriginalClassPK = false;
+
+		ddmStructureLinkModelImpl._originalStructureId = ddmStructureLinkModelImpl._structureId;
+
+		ddmStructureLinkModelImpl._setOriginalStructureId = false;
 	}
 
 	public String toString() {

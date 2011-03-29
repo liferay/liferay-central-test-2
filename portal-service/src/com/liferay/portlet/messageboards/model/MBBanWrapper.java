@@ -303,5 +303,9 @@ public class MBBanWrapper implements MBBan {
 		return _mbBan;
 	}
 
+	public void resetOriginalValues() {
+		_mbBan.resetOriginalValues();
+	}
+
 	private MBBan _mbBan;
 }

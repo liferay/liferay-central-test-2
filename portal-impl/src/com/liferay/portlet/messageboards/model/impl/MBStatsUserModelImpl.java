@@ -207,22 +207,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
 		mbStatsUserImpl.setStatsUserId(getStatsUserId());
-
 		mbStatsUserImpl.setGroupId(getGroupId());
-
-		MBStatsUserModelImpl mbStatsUserModelImpl = mbStatsUserImpl;
-
-		mbStatsUserModelImpl._originalGroupId = mbStatsUserModelImpl._groupId;
-
-		mbStatsUserModelImpl._setOriginalGroupId = false;
 		mbStatsUserImpl.setUserId(getUserId());
-
-		mbStatsUserModelImpl._originalUserId = mbStatsUserModelImpl._userId;
-
-		mbStatsUserModelImpl._setOriginalUserId = false;
 		mbStatsUserImpl.setMessageCount(getMessageCount());
-
 		mbStatsUserImpl.setLastPostDate(getLastPostDate());
+
+		mbStatsUserImpl.resetOriginalValues();
 
 		return mbStatsUserImpl;
 	}
@@ -275,6 +265,18 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBStatsUserModelImpl mbStatsUserModelImpl = this;
+
+		mbStatsUserModelImpl._originalGroupId = mbStatsUserModelImpl._groupId;
+
+		mbStatsUserModelImpl._setOriginalGroupId = false;
+
+		mbStatsUserModelImpl._originalUserId = mbStatsUserModelImpl._userId;
+
+		mbStatsUserModelImpl._setOriginalUserId = false;
 	}
 
 	public String toString() {

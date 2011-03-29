@@ -254,28 +254,13 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		MBMessageFlagImpl mbMessageFlagImpl = new MBMessageFlagImpl();
 
 		mbMessageFlagImpl.setMessageFlagId(getMessageFlagId());
-
 		mbMessageFlagImpl.setUserId(getUserId());
-
-		MBMessageFlagModelImpl mbMessageFlagModelImpl = mbMessageFlagImpl;
-
-		mbMessageFlagModelImpl._originalUserId = mbMessageFlagModelImpl._userId;
-
-		mbMessageFlagModelImpl._setOriginalUserId = false;
 		mbMessageFlagImpl.setModifiedDate(getModifiedDate());
-
 		mbMessageFlagImpl.setThreadId(getThreadId());
-
 		mbMessageFlagImpl.setMessageId(getMessageId());
-
-		mbMessageFlagModelImpl._originalMessageId = mbMessageFlagModelImpl._messageId;
-
-		mbMessageFlagModelImpl._setOriginalMessageId = false;
 		mbMessageFlagImpl.setFlag(getFlag());
 
-		mbMessageFlagModelImpl._originalFlag = mbMessageFlagModelImpl._flag;
-
-		mbMessageFlagModelImpl._setOriginalFlag = false;
+		mbMessageFlagImpl.resetOriginalValues();
 
 		return mbMessageFlagImpl;
 	}
@@ -320,6 +305,22 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBMessageFlagModelImpl mbMessageFlagModelImpl = this;
+
+		mbMessageFlagModelImpl._originalUserId = mbMessageFlagModelImpl._userId;
+
+		mbMessageFlagModelImpl._setOriginalUserId = false;
+
+		mbMessageFlagModelImpl._originalMessageId = mbMessageFlagModelImpl._messageId;
+
+		mbMessageFlagModelImpl._setOriginalMessageId = false;
+
+		mbMessageFlagModelImpl._originalFlag = mbMessageFlagModelImpl._flag;
+
+		mbMessageFlagModelImpl._setOriginalFlag = false;
 	}
 
 	public String toString() {

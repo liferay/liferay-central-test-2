@@ -397,42 +397,23 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
 		scProductEntryImpl.setProductEntryId(getProductEntryId());
-
 		scProductEntryImpl.setGroupId(getGroupId());
-
 		scProductEntryImpl.setCompanyId(getCompanyId());
-
 		scProductEntryImpl.setUserId(getUserId());
-
 		scProductEntryImpl.setUserName(getUserName());
-
 		scProductEntryImpl.setCreateDate(getCreateDate());
-
 		scProductEntryImpl.setModifiedDate(getModifiedDate());
-
 		scProductEntryImpl.setName(getName());
-
 		scProductEntryImpl.setType(getType());
-
 		scProductEntryImpl.setTags(getTags());
-
 		scProductEntryImpl.setShortDescription(getShortDescription());
-
 		scProductEntryImpl.setLongDescription(getLongDescription());
-
 		scProductEntryImpl.setPageURL(getPageURL());
-
 		scProductEntryImpl.setAuthor(getAuthor());
-
 		scProductEntryImpl.setRepoGroupId(getRepoGroupId());
-
-		SCProductEntryModelImpl scProductEntryModelImpl = scProductEntryImpl;
-
-		scProductEntryModelImpl._originalRepoGroupId = scProductEntryModelImpl._repoGroupId;
-
 		scProductEntryImpl.setRepoArtifactId(getRepoArtifactId());
 
-		scProductEntryModelImpl._originalRepoArtifactId = scProductEntryModelImpl._repoArtifactId;
+		scProductEntryImpl.resetOriginalValues();
 
 		return scProductEntryImpl;
 	}
@@ -486,6 +467,14 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SCProductEntryModelImpl scProductEntryModelImpl = this;
+
+		scProductEntryModelImpl._originalRepoGroupId = scProductEntryModelImpl._repoGroupId;
+
+		scProductEntryModelImpl._originalRepoArtifactId = scProductEntryModelImpl._repoArtifactId;
 	}
 
 	public String toString() {

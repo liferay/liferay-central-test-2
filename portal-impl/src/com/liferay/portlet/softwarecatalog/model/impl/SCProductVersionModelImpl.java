@@ -330,32 +330,19 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		SCProductVersionImpl scProductVersionImpl = new SCProductVersionImpl();
 
 		scProductVersionImpl.setProductVersionId(getProductVersionId());
-
 		scProductVersionImpl.setCompanyId(getCompanyId());
-
 		scProductVersionImpl.setUserId(getUserId());
-
 		scProductVersionImpl.setUserName(getUserName());
-
 		scProductVersionImpl.setCreateDate(getCreateDate());
-
 		scProductVersionImpl.setModifiedDate(getModifiedDate());
-
 		scProductVersionImpl.setProductEntryId(getProductEntryId());
-
 		scProductVersionImpl.setVersion(getVersion());
-
 		scProductVersionImpl.setChangeLog(getChangeLog());
-
 		scProductVersionImpl.setDownloadPageURL(getDownloadPageURL());
-
 		scProductVersionImpl.setDirectDownloadURL(getDirectDownloadURL());
-
-		SCProductVersionModelImpl scProductVersionModelImpl = scProductVersionImpl;
-
-		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
-
 		scProductVersionImpl.setRepoStoreArtifact(getRepoStoreArtifact());
+
+		scProductVersionImpl.resetOriginalValues();
 
 		return scProductVersionImpl;
 	}
@@ -401,6 +388,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SCProductVersionModelImpl scProductVersionModelImpl = this;
+
+		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
 	}
 
 	public String toString() {

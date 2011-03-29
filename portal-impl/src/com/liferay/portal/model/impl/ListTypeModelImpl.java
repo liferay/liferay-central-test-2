@@ -177,10 +177,10 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		ListTypeImpl listTypeImpl = new ListTypeImpl();
 
 		listTypeImpl.setListTypeId(getListTypeId());
-
 		listTypeImpl.setName(getName());
-
 		listTypeImpl.setType(getType());
+
+		listTypeImpl.resetOriginalValues();
 
 		return listTypeImpl;
 	}
@@ -224,6 +224,9 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 	public int hashCode() {
 		return getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

@@ -186,16 +186,13 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		SocialEquityHistoryImpl socialEquityHistoryImpl = new SocialEquityHistoryImpl();
 
 		socialEquityHistoryImpl.setEquityHistoryId(getEquityHistoryId());
-
 		socialEquityHistoryImpl.setGroupId(getGroupId());
-
 		socialEquityHistoryImpl.setCompanyId(getCompanyId());
-
 		socialEquityHistoryImpl.setUserId(getUserId());
-
 		socialEquityHistoryImpl.setCreateDate(getCreateDate());
-
 		socialEquityHistoryImpl.setPersonalEquity(getPersonalEquity());
+
+		socialEquityHistoryImpl.resetOriginalValues();
 
 		return socialEquityHistoryImpl;
 	}
@@ -240,6 +237,9 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

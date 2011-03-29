@@ -222,6 +222,8 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 				Integer.valueOf(socialActivity.getType()),
 				Long.valueOf(socialActivity.getReceiverUserId())
 			}, socialActivity);
+
+		socialActivity.resetOriginalValues();
 	}
 
 	/**

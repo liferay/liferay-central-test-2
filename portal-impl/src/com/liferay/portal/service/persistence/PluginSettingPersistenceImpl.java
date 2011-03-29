@@ -121,6 +121,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				
 			pluginSetting.getPluginType()
 			}, pluginSetting);
+
+		pluginSetting.resetOriginalValues();
 	}
 
 	/**

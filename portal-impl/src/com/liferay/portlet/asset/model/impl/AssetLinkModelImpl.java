@@ -220,22 +220,16 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		AssetLinkImpl assetLinkImpl = new AssetLinkImpl();
 
 		assetLinkImpl.setLinkId(getLinkId());
-
 		assetLinkImpl.setCompanyId(getCompanyId());
-
 		assetLinkImpl.setUserId(getUserId());
-
 		assetLinkImpl.setUserName(getUserName());
-
 		assetLinkImpl.setCreateDate(getCreateDate());
-
 		assetLinkImpl.setEntryId1(getEntryId1());
-
 		assetLinkImpl.setEntryId2(getEntryId2());
-
 		assetLinkImpl.setType(getType());
-
 		assetLinkImpl.setWeight(getWeight());
+
+		assetLinkImpl.resetOriginalValues();
 
 		return assetLinkImpl;
 	}
@@ -286,6 +280,9 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

@@ -183,22 +183,11 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
 
 		expandoTableImpl.setTableId(getTableId());
-
 		expandoTableImpl.setCompanyId(getCompanyId());
-
-		ExpandoTableModelImpl expandoTableModelImpl = expandoTableImpl;
-
-		expandoTableModelImpl._originalCompanyId = expandoTableModelImpl._companyId;
-
-		expandoTableModelImpl._setOriginalCompanyId = false;
 		expandoTableImpl.setClassNameId(getClassNameId());
-
-		expandoTableModelImpl._originalClassNameId = expandoTableModelImpl._classNameId;
-
-		expandoTableModelImpl._setOriginalClassNameId = false;
 		expandoTableImpl.setName(getName());
 
-		expandoTableModelImpl._originalName = expandoTableModelImpl._name;
+		expandoTableImpl.resetOriginalValues();
 
 		return expandoTableImpl;
 	}
@@ -243,6 +232,20 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ExpandoTableModelImpl expandoTableModelImpl = this;
+
+		expandoTableModelImpl._originalCompanyId = expandoTableModelImpl._companyId;
+
+		expandoTableModelImpl._setOriginalCompanyId = false;
+
+		expandoTableModelImpl._originalClassNameId = expandoTableModelImpl._classNameId;
+
+		expandoTableModelImpl._setOriginalClassNameId = false;
+
+		expandoTableModelImpl._originalName = expandoTableModelImpl._name;
 	}
 
 	public String toString() {

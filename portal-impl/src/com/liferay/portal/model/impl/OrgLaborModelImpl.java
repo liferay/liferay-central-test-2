@@ -323,38 +323,24 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 		OrgLaborImpl orgLaborImpl = new OrgLaborImpl();
 
 		orgLaborImpl.setOrgLaborId(getOrgLaborId());
-
 		orgLaborImpl.setOrganizationId(getOrganizationId());
-
 		orgLaborImpl.setTypeId(getTypeId());
-
 		orgLaborImpl.setSunOpen(getSunOpen());
-
 		orgLaborImpl.setSunClose(getSunClose());
-
 		orgLaborImpl.setMonOpen(getMonOpen());
-
 		orgLaborImpl.setMonClose(getMonClose());
-
 		orgLaborImpl.setTueOpen(getTueOpen());
-
 		orgLaborImpl.setTueClose(getTueClose());
-
 		orgLaborImpl.setWedOpen(getWedOpen());
-
 		orgLaborImpl.setWedClose(getWedClose());
-
 		orgLaborImpl.setThuOpen(getThuOpen());
-
 		orgLaborImpl.setThuClose(getThuClose());
-
 		orgLaborImpl.setFriOpen(getFriOpen());
-
 		orgLaborImpl.setFriClose(getFriClose());
-
 		orgLaborImpl.setSatOpen(getSatOpen());
-
 		orgLaborImpl.setSatClose(getSatClose());
+
+		orgLaborImpl.resetOriginalValues();
 
 		return orgLaborImpl;
 	}
@@ -419,6 +405,9 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

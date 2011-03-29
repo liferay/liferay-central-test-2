@@ -246,5 +246,9 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 		return _resourcePermission;
 	}
 
+	public void resetOriginalValues() {
+		_resourcePermission.resetOriginalValues();
+	}
+
 	private ResourcePermission _resourcePermission;
 }

@@ -222,20 +222,11 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		PermissionImpl permissionImpl = new PermissionImpl();
 
 		permissionImpl.setPermissionId(getPermissionId());
-
 		permissionImpl.setCompanyId(getCompanyId());
-
 		permissionImpl.setActionId(getActionId());
-
-		PermissionModelImpl permissionModelImpl = permissionImpl;
-
-		permissionModelImpl._originalActionId = permissionModelImpl._actionId;
-
 		permissionImpl.setResourceId(getResourceId());
 
-		permissionModelImpl._originalResourceId = permissionModelImpl._resourceId;
-
-		permissionModelImpl._setOriginalResourceId = false;
+		permissionImpl.resetOriginalValues();
 
 		return permissionImpl;
 	}
@@ -280,6 +271,16 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PermissionModelImpl permissionModelImpl = this;
+
+		permissionModelImpl._originalActionId = permissionModelImpl._actionId;
+
+		permissionModelImpl._originalResourceId = permissionModelImpl._resourceId;
+
+		permissionModelImpl._setOriginalResourceId = false;
 	}
 
 	public String toString() {

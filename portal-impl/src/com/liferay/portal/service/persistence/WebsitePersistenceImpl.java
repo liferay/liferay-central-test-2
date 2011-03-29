@@ -152,6 +152,8 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	public void cacheResult(Website website) {
 		EntityCacheUtil.putResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteImpl.class, website.getPrimaryKey(), website);
+
+		website.resetOriginalValues();
 	}
 
 	/**

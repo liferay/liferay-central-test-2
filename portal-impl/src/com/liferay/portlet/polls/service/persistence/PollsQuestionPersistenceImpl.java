@@ -132,6 +132,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				pollsQuestion.getUuid(),
 				Long.valueOf(pollsQuestion.getGroupId())
 			}, pollsQuestion);
+
+		pollsQuestion.resetOriginalValues();
 	}
 
 	/**

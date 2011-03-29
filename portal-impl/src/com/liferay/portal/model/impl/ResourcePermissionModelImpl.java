@@ -280,33 +280,14 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
 
 		resourcePermissionImpl.setResourcePermissionId(getResourcePermissionId());
-
 		resourcePermissionImpl.setCompanyId(getCompanyId());
-
-		ResourcePermissionModelImpl resourcePermissionModelImpl = resourcePermissionImpl;
-
-		resourcePermissionModelImpl._originalCompanyId = resourcePermissionModelImpl._companyId;
-
-		resourcePermissionModelImpl._setOriginalCompanyId = false;
 		resourcePermissionImpl.setName(getName());
-
-		resourcePermissionModelImpl._originalName = resourcePermissionModelImpl._name;
-
 		resourcePermissionImpl.setScope(getScope());
-
-		resourcePermissionModelImpl._originalScope = resourcePermissionModelImpl._scope;
-
-		resourcePermissionModelImpl._setOriginalScope = false;
 		resourcePermissionImpl.setPrimKey(getPrimKey());
-
-		resourcePermissionModelImpl._originalPrimKey = resourcePermissionModelImpl._primKey;
-
 		resourcePermissionImpl.setRoleId(getRoleId());
-
-		resourcePermissionModelImpl._originalRoleId = resourcePermissionModelImpl._roleId;
-
-		resourcePermissionModelImpl._setOriginalRoleId = false;
 		resourcePermissionImpl.setActionIds(getActionIds());
+
+		resourcePermissionImpl.resetOriginalValues();
 
 		return resourcePermissionImpl;
 	}
@@ -351,6 +332,26 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ResourcePermissionModelImpl resourcePermissionModelImpl = this;
+
+		resourcePermissionModelImpl._originalCompanyId = resourcePermissionModelImpl._companyId;
+
+		resourcePermissionModelImpl._setOriginalCompanyId = false;
+
+		resourcePermissionModelImpl._originalName = resourcePermissionModelImpl._name;
+
+		resourcePermissionModelImpl._originalScope = resourcePermissionModelImpl._scope;
+
+		resourcePermissionModelImpl._setOriginalScope = false;
+
+		resourcePermissionModelImpl._originalPrimKey = resourcePermissionModelImpl._primKey;
+
+		resourcePermissionModelImpl._originalRoleId = resourcePermissionModelImpl._roleId;
+
+		resourcePermissionModelImpl._setOriginalRoleId = false;
 	}
 
 	public String toString() {

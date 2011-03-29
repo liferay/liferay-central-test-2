@@ -148,6 +148,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				Long.valueOf(subscription.getClassNameId()),
 				Long.valueOf(subscription.getClassPK())
 			}, subscription);
+
+		subscription.resetOriginalValues();
 	}
 
 	/**

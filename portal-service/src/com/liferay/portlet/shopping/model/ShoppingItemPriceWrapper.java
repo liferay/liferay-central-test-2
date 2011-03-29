@@ -318,5 +318,9 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 		return _shoppingItemPrice;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingItemPrice.resetOriginalValues();
+	}
+
 	private ShoppingItemPrice _shoppingItemPrice;
 }

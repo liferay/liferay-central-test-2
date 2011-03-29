@@ -190,19 +190,12 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		DDMStorageLinkImpl ddmStorageLinkImpl = new DDMStorageLinkImpl();
 
 		ddmStorageLinkImpl.setUuid(getUuid());
-
 		ddmStorageLinkImpl.setStorageLinkId(getStorageLinkId());
-
 		ddmStorageLinkImpl.setClassNameId(getClassNameId());
-
 		ddmStorageLinkImpl.setClassPK(getClassPK());
-
-		DDMStorageLinkModelImpl ddmStorageLinkModelImpl = ddmStorageLinkImpl;
-
-		ddmStorageLinkModelImpl._originalClassPK = ddmStorageLinkModelImpl._classPK;
-
-		ddmStorageLinkModelImpl._setOriginalClassPK = false;
 		ddmStorageLinkImpl.setStructureId(getStructureId());
+
+		ddmStorageLinkImpl.resetOriginalValues();
 
 		return ddmStorageLinkImpl;
 	}
@@ -247,6 +240,14 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DDMStorageLinkModelImpl ddmStorageLinkModelImpl = this;
+
+		ddmStorageLinkModelImpl._originalClassPK = ddmStorageLinkModelImpl._classPK;
+
+		ddmStorageLinkModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

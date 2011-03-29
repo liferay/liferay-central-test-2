@@ -200,5 +200,9 @@ public class ShardWrapper implements Shard {
 		return _shard;
 	}
 
+	public void resetOriginalValues() {
+		_shard.resetOriginalValues();
+	}
+
 	private Shard _shard;
 }

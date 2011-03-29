@@ -285,5 +285,9 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 		return _userNotificationEvent;
 	}
 
+	public void resetOriginalValues() {
+		_userNotificationEvent.resetOriginalValues();
+	}
+
 	private UserNotificationEvent _userNotificationEvent;
 }

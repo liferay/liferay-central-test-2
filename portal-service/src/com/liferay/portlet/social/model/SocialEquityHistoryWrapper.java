@@ -248,5 +248,9 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		return _socialEquityHistory;
 	}
 
+	public void resetOriginalValues() {
+		_socialEquityHistory.resetOriginalValues();
+	}
+
 	private SocialEquityHistory _socialEquityHistory;
 }

@@ -234,18 +234,14 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		ImageImpl imageImpl = new ImageImpl();
 
 		imageImpl.setImageId(getImageId());
-
 		imageImpl.setModifiedDate(getModifiedDate());
-
 		imageImpl.setText(getText());
-
 		imageImpl.setType(getType());
-
 		imageImpl.setHeight(getHeight());
-
 		imageImpl.setWidth(getWidth());
-
 		imageImpl.setSize(getSize());
+
+		imageImpl.resetOriginalValues();
 
 		return imageImpl;
 	}
@@ -296,6 +292,9 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

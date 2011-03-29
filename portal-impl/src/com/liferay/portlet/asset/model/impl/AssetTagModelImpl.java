@@ -268,22 +268,16 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		AssetTagImpl assetTagImpl = new AssetTagImpl();
 
 		assetTagImpl.setTagId(getTagId());
-
 		assetTagImpl.setGroupId(getGroupId());
-
 		assetTagImpl.setCompanyId(getCompanyId());
-
 		assetTagImpl.setUserId(getUserId());
-
 		assetTagImpl.setUserName(getUserName());
-
 		assetTagImpl.setCreateDate(getCreateDate());
-
 		assetTagImpl.setModifiedDate(getModifiedDate());
-
 		assetTagImpl.setName(getName());
-
 		assetTagImpl.setAssetCount(getAssetCount());
+
+		assetTagImpl.resetOriginalValues();
 
 		return assetTagImpl;
 	}
@@ -326,6 +320,9 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

@@ -421,5 +421,9 @@ public class DDMContentWrapper implements DDMContent {
 		return _ddmContent;
 	}
 
+	public void resetOriginalValues() {
+		_ddmContent.resetOriginalValues();
+	}
+
 	private DDMContent _ddmContent;
 }

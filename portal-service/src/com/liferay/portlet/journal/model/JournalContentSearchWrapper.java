@@ -256,5 +256,9 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 		return _journalContentSearch;
 	}
 
+	public void resetOriginalValues() {
+		_journalContentSearch.resetOriginalValues();
+	}
+
 	private JournalContentSearch _journalContentSearch;
 }

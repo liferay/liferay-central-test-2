@@ -138,6 +138,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				Long.valueOf(mbStatsUser.getGroupId()),
 				Long.valueOf(mbStatsUser.getUserId())
 			}, mbStatsUser);
+
+		mbStatsUser.resetOriginalValues();
 	}
 
 	/**

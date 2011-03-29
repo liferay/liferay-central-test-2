@@ -379,5 +379,9 @@ public class PhoneWrapper implements Phone {
 		return _phone;
 	}
 
+	public void resetOriginalValues() {
+		_phone.resetOriginalValues();
+	}
+
 	private Phone _phone;
 }

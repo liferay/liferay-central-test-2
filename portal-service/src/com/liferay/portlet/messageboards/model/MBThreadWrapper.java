@@ -509,5 +509,9 @@ public class MBThreadWrapper implements MBThread {
 		return _mbThread;
 	}
 
+	public void resetOriginalValues() {
+		_mbThread.resetOriginalValues();
+	}
+
 	private MBThread _mbThread;
 }

@@ -562,64 +562,37 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		ContactImpl contactImpl = new ContactImpl();
 
 		contactImpl.setContactId(getContactId());
-
 		contactImpl.setCompanyId(getCompanyId());
-
 		contactImpl.setUserId(getUserId());
-
 		contactImpl.setUserName(getUserName());
-
 		contactImpl.setCreateDate(getCreateDate());
-
 		contactImpl.setModifiedDate(getModifiedDate());
-
 		contactImpl.setAccountId(getAccountId());
-
 		contactImpl.setParentContactId(getParentContactId());
-
 		contactImpl.setFirstName(getFirstName());
-
 		contactImpl.setMiddleName(getMiddleName());
-
 		contactImpl.setLastName(getLastName());
-
 		contactImpl.setPrefixId(getPrefixId());
-
 		contactImpl.setSuffixId(getSuffixId());
-
 		contactImpl.setMale(getMale());
-
 		contactImpl.setBirthday(getBirthday());
-
 		contactImpl.setSmsSn(getSmsSn());
-
 		contactImpl.setAimSn(getAimSn());
-
 		contactImpl.setFacebookSn(getFacebookSn());
-
 		contactImpl.setIcqSn(getIcqSn());
-
 		contactImpl.setJabberSn(getJabberSn());
-
 		contactImpl.setMsnSn(getMsnSn());
-
 		contactImpl.setMySpaceSn(getMySpaceSn());
-
 		contactImpl.setSkypeSn(getSkypeSn());
-
 		contactImpl.setTwitterSn(getTwitterSn());
-
 		contactImpl.setYmSn(getYmSn());
-
 		contactImpl.setEmployeeStatusId(getEmployeeStatusId());
-
 		contactImpl.setEmployeeNumber(getEmployeeNumber());
-
 		contactImpl.setJobTitle(getJobTitle());
-
 		contactImpl.setJobClass(getJobClass());
-
 		contactImpl.setHoursOfOperation(getHoursOfOperation());
+
+		contactImpl.resetOriginalValues();
 
 		return contactImpl;
 	}
@@ -664,6 +637,9 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

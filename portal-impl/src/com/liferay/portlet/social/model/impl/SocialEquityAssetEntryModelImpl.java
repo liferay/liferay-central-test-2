@@ -203,23 +203,14 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		SocialEquityAssetEntryImpl socialEquityAssetEntryImpl = new SocialEquityAssetEntryImpl();
 
 		socialEquityAssetEntryImpl.setEquityAssetEntryId(getEquityAssetEntryId());
-
 		socialEquityAssetEntryImpl.setGroupId(getGroupId());
-
 		socialEquityAssetEntryImpl.setCompanyId(getCompanyId());
-
 		socialEquityAssetEntryImpl.setUserId(getUserId());
-
 		socialEquityAssetEntryImpl.setAssetEntryId(getAssetEntryId());
-
-		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = socialEquityAssetEntryImpl;
-
-		socialEquityAssetEntryModelImpl._originalAssetEntryId = socialEquityAssetEntryModelImpl._assetEntryId;
-
-		socialEquityAssetEntryModelImpl._setOriginalAssetEntryId = false;
 		socialEquityAssetEntryImpl.setInformationK(getInformationK());
-
 		socialEquityAssetEntryImpl.setInformationB(getInformationB());
+
+		socialEquityAssetEntryImpl.resetOriginalValues();
 
 		return socialEquityAssetEntryImpl;
 	}
@@ -264,6 +255,14 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = this;
+
+		socialEquityAssetEntryModelImpl._originalAssetEntryId = socialEquityAssetEntryModelImpl._assetEntryId;
+
+		socialEquityAssetEntryModelImpl._setOriginalAssetEntryId = false;
 	}
 
 	public String toString() {

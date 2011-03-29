@@ -130,6 +130,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				Long.valueOf(passwordPolicyRel.getClassNameId()),
 				Long.valueOf(passwordPolicyRel.getClassPK())
 			}, passwordPolicyRel);
+
+		passwordPolicyRel.resetOriginalValues();
 	}
 
 	/**

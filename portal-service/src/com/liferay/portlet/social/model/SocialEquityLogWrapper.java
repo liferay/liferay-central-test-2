@@ -369,5 +369,9 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 		return _socialEquityLog;
 	}
 
+	public void resetOriginalValues() {
+		_socialEquityLog.resetOriginalValues();
+	}
+
 	private SocialEquityLog _socialEquityLog;
 }

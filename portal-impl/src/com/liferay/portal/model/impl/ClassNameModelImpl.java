@@ -194,12 +194,9 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		ClassNameImpl classNameImpl = new ClassNameImpl();
 
 		classNameImpl.setClassNameId(getClassNameId());
-
 		classNameImpl.setValue(getValue());
 
-		ClassNameModelImpl classNameModelImpl = classNameImpl;
-
-		classNameModelImpl._originalValue = classNameModelImpl._value;
+		classNameImpl.resetOriginalValues();
 
 		return classNameImpl;
 	}
@@ -244,6 +241,12 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ClassNameModelImpl classNameModelImpl = this;
+
+		classNameModelImpl._originalValue = classNameModelImpl._value;
 	}
 
 	public String toString() {

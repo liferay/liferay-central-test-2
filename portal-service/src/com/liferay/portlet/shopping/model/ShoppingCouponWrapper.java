@@ -485,5 +485,9 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		return _shoppingCoupon;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingCoupon.resetOriginalValues();
+	}
+
 	private ShoppingCoupon _shoppingCoupon;
 }

@@ -350,5 +350,9 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		return _layoutSetPrototype;
 	}
 
+	public void resetOriginalValues() {
+		_layoutSetPrototype.resetOriginalValues();
+	}
+
 	private LayoutSetPrototype _layoutSetPrototype;
 }

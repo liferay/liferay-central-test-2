@@ -176,12 +176,11 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
 
 		passwordTrackerImpl.setPasswordTrackerId(getPasswordTrackerId());
-
 		passwordTrackerImpl.setUserId(getUserId());
-
 		passwordTrackerImpl.setCreateDate(getCreateDate());
-
 		passwordTrackerImpl.setPassword(getPassword());
+
+		passwordTrackerImpl.resetOriginalValues();
 
 		return passwordTrackerImpl;
 	}
@@ -243,6 +242,9 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

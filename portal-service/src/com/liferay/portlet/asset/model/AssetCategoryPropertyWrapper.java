@@ -303,5 +303,9 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		return _assetCategoryProperty;
 	}
 
+	public void resetOriginalValues() {
+		_assetCategoryProperty.resetOriginalValues();
+	}
+
 	private AssetCategoryProperty _assetCategoryProperty;
 }

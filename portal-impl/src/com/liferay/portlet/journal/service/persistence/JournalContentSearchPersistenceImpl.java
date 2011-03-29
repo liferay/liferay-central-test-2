@@ -209,6 +209,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				
 			journalContentSearch.getArticleId()
 			}, journalContentSearch);
+
+		journalContentSearch.resetOriginalValues();
 	}
 
 	/**

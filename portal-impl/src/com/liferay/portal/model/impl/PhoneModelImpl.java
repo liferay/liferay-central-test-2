@@ -312,28 +312,19 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		PhoneImpl phoneImpl = new PhoneImpl();
 
 		phoneImpl.setPhoneId(getPhoneId());
-
 		phoneImpl.setCompanyId(getCompanyId());
-
 		phoneImpl.setUserId(getUserId());
-
 		phoneImpl.setUserName(getUserName());
-
 		phoneImpl.setCreateDate(getCreateDate());
-
 		phoneImpl.setModifiedDate(getModifiedDate());
-
 		phoneImpl.setClassNameId(getClassNameId());
-
 		phoneImpl.setClassPK(getClassPK());
-
 		phoneImpl.setNumber(getNumber());
-
 		phoneImpl.setExtension(getExtension());
-
 		phoneImpl.setTypeId(getTypeId());
-
 		phoneImpl.setPrimary(getPrimary());
+
+		phoneImpl.resetOriginalValues();
 
 		return phoneImpl;
 	}
@@ -376,6 +367,9 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

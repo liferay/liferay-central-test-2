@@ -291,29 +291,16 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		TeamImpl teamImpl = new TeamImpl();
 
 		teamImpl.setTeamId(getTeamId());
-
 		teamImpl.setCompanyId(getCompanyId());
-
 		teamImpl.setUserId(getUserId());
-
 		teamImpl.setUserName(getUserName());
-
 		teamImpl.setCreateDate(getCreateDate());
-
 		teamImpl.setModifiedDate(getModifiedDate());
-
 		teamImpl.setGroupId(getGroupId());
-
-		TeamModelImpl teamModelImpl = teamImpl;
-
-		teamModelImpl._originalGroupId = teamModelImpl._groupId;
-
-		teamModelImpl._setOriginalGroupId = false;
 		teamImpl.setName(getName());
-
-		teamModelImpl._originalName = teamModelImpl._name;
-
 		teamImpl.setDescription(getDescription());
+
+		teamImpl.resetOriginalValues();
 
 		return teamImpl;
 	}
@@ -356,6 +343,16 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		TeamModelImpl teamModelImpl = this;
+
+		teamModelImpl._originalGroupId = teamModelImpl._groupId;
+
+		teamModelImpl._setOriginalGroupId = false;
+
+		teamModelImpl._originalName = teamModelImpl._name;
 	}
 
 	public String toString() {

@@ -110,6 +110,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A,
 			new Object[] { resourceAction.getName(), resourceAction.getActionId() },
 			resourceAction);
+
+		resourceAction.resetOriginalValues();
 	}
 
 	/**

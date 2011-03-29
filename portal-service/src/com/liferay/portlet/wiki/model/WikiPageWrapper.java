@@ -672,5 +672,9 @@ public class WikiPageWrapper implements WikiPage {
 		return _wikiPage;
 	}
 
+	public void resetOriginalValues() {
+		_wikiPage.resetOriginalValues();
+	}
+
 	private WikiPage _wikiPage;
 }

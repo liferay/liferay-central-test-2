@@ -234,21 +234,12 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		PortletImpl portletImpl = new PortletImpl();
 
 		portletImpl.setId(getId());
-
 		portletImpl.setCompanyId(getCompanyId());
-
-		PortletModelImpl portletModelImpl = portletImpl;
-
-		portletModelImpl._originalCompanyId = portletModelImpl._companyId;
-
-		portletModelImpl._setOriginalCompanyId = false;
 		portletImpl.setPortletId(getPortletId());
-
-		portletModelImpl._originalPortletId = portletModelImpl._portletId;
-
 		portletImpl.setRoles(getRoles());
-
 		portletImpl.setActive(getActive());
+
+		portletImpl.resetOriginalValues();
 
 		return portletImpl;
 	}
@@ -293,6 +284,16 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PortletModelImpl portletModelImpl = this;
+
+		portletModelImpl._originalCompanyId = portletModelImpl._companyId;
+
+		portletModelImpl._setOriginalCompanyId = false;
+
+		portletModelImpl._originalPortletId = portletModelImpl._portletId;
 	}
 
 	public String toString() {

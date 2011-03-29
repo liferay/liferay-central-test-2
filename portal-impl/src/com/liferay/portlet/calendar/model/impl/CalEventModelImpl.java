@@ -462,57 +462,30 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		CalEventImpl calEventImpl = new CalEventImpl();
 
 		calEventImpl.setUuid(getUuid());
-
-		CalEventModelImpl calEventModelImpl = calEventImpl;
-
-		calEventModelImpl._originalUuid = calEventModelImpl._uuid;
-
 		calEventImpl.setEventId(getEventId());
-
 		calEventImpl.setGroupId(getGroupId());
-
-		calEventModelImpl._originalGroupId = calEventModelImpl._groupId;
-
-		calEventModelImpl._setOriginalGroupId = false;
 		calEventImpl.setCompanyId(getCompanyId());
-
 		calEventImpl.setUserId(getUserId());
-
 		calEventImpl.setUserName(getUserName());
-
 		calEventImpl.setCreateDate(getCreateDate());
-
 		calEventImpl.setModifiedDate(getModifiedDate());
-
 		calEventImpl.setTitle(getTitle());
-
 		calEventImpl.setDescription(getDescription());
-
 		calEventImpl.setLocation(getLocation());
-
 		calEventImpl.setStartDate(getStartDate());
-
 		calEventImpl.setEndDate(getEndDate());
-
 		calEventImpl.setDurationHour(getDurationHour());
-
 		calEventImpl.setDurationMinute(getDurationMinute());
-
 		calEventImpl.setAllDay(getAllDay());
-
 		calEventImpl.setTimeZoneSensitive(getTimeZoneSensitive());
-
 		calEventImpl.setType(getType());
-
 		calEventImpl.setRepeating(getRepeating());
-
 		calEventImpl.setRecurrence(getRecurrence());
-
 		calEventImpl.setRemindBy(getRemindBy());
-
 		calEventImpl.setFirstReminder(getFirstReminder());
-
 		calEventImpl.setSecondReminder(getSecondReminder());
+
+		calEventImpl.resetOriginalValues();
 
 		return calEventImpl;
 	}
@@ -562,6 +535,16 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		CalEventModelImpl calEventModelImpl = this;
+
+		calEventModelImpl._originalUuid = calEventModelImpl._uuid;
+
+		calEventModelImpl._originalGroupId = calEventModelImpl._groupId;
+
+		calEventModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

@@ -534,59 +534,30 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		BlogsEntryImpl blogsEntryImpl = new BlogsEntryImpl();
 
 		blogsEntryImpl.setUuid(getUuid());
-
-		BlogsEntryModelImpl blogsEntryModelImpl = blogsEntryImpl;
-
-		blogsEntryModelImpl._originalUuid = blogsEntryModelImpl._uuid;
-
 		blogsEntryImpl.setEntryId(getEntryId());
-
 		blogsEntryImpl.setGroupId(getGroupId());
-
-		blogsEntryModelImpl._originalGroupId = blogsEntryModelImpl._groupId;
-
-		blogsEntryModelImpl._setOriginalGroupId = false;
 		blogsEntryImpl.setCompanyId(getCompanyId());
-
 		blogsEntryImpl.setUserId(getUserId());
-
 		blogsEntryImpl.setUserName(getUserName());
-
 		blogsEntryImpl.setCreateDate(getCreateDate());
-
 		blogsEntryImpl.setModifiedDate(getModifiedDate());
-
 		blogsEntryImpl.setTitle(getTitle());
-
 		blogsEntryImpl.setUrlTitle(getUrlTitle());
-
-		blogsEntryModelImpl._originalUrlTitle = blogsEntryModelImpl._urlTitle;
-
 		blogsEntryImpl.setDescription(getDescription());
-
 		blogsEntryImpl.setContent(getContent());
-
 		blogsEntryImpl.setDisplayDate(getDisplayDate());
-
 		blogsEntryImpl.setAllowPingbacks(getAllowPingbacks());
-
 		blogsEntryImpl.setAllowTrackbacks(getAllowTrackbacks());
-
 		blogsEntryImpl.setTrackbacks(getTrackbacks());
-
 		blogsEntryImpl.setSmallImage(getSmallImage());
-
 		blogsEntryImpl.setSmallImageId(getSmallImageId());
-
 		blogsEntryImpl.setSmallImageURL(getSmallImageURL());
-
 		blogsEntryImpl.setStatus(getStatus());
-
 		blogsEntryImpl.setStatusByUserId(getStatusByUserId());
-
 		blogsEntryImpl.setStatusByUserName(getStatusByUserName());
-
 		blogsEntryImpl.setStatusDate(getStatusDate());
+
+		blogsEntryImpl.resetOriginalValues();
 
 		return blogsEntryImpl;
 	}
@@ -631,6 +602,18 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		BlogsEntryModelImpl blogsEntryModelImpl = this;
+
+		blogsEntryModelImpl._originalUuid = blogsEntryModelImpl._uuid;
+
+		blogsEntryModelImpl._originalGroupId = blogsEntryModelImpl._groupId;
+
+		blogsEntryModelImpl._setOriginalGroupId = false;
+
+		blogsEntryModelImpl._originalUrlTitle = blogsEntryModelImpl._urlTitle;
 	}
 
 	public String toString() {

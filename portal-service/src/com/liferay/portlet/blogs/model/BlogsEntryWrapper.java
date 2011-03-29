@@ -653,5 +653,9 @@ public class BlogsEntryWrapper implements BlogsEntry {
 		return _blogsEntry;
 	}
 
+	public void resetOriginalValues() {
+		_blogsEntry.resetOriginalValues();
+	}
+
 	private BlogsEntry _blogsEntry;
 }

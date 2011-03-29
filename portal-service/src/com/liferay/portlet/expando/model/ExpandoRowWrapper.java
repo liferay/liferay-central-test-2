@@ -192,5 +192,9 @@ public class ExpandoRowWrapper implements ExpandoRow {
 		return _expandoRow;
 	}
 
+	public void resetOriginalValues() {
+		_expandoRow.resetOriginalValues();
+	}
+
 	private ExpandoRow _expandoRow;
 }

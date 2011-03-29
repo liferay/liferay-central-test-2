@@ -218,5 +218,9 @@ public class RegionWrapper implements Region {
 		return _region;
 	}
 
+	public void resetOriginalValues() {
+		_region.resetOriginalValues();
+	}
+
 	private Region _region;
 }

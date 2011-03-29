@@ -128,6 +128,8 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 				
 			pollsChoice.getName()
 			}, pollsChoice);
+
+		pollsChoice.resetOriginalValues();
 	}
 
 	/**

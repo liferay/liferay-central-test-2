@@ -160,6 +160,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				bookmarksFolder.getUuid(),
 				Long.valueOf(bookmarksFolder.getGroupId())
 			}, bookmarksFolder);
+
+		bookmarksFolder.resetOriginalValues();
 	}
 
 	/**

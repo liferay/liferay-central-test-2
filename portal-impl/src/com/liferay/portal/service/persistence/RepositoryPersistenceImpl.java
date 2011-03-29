@@ -97,6 +97,8 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	public void cacheResult(Repository repository) {
 		EntityCacheUtil.putResult(RepositoryModelImpl.ENTITY_CACHE_ENABLED,
 			RepositoryImpl.class, repository.getPrimaryKey(), repository);
+
+		repository.resetOriginalValues();
 	}
 
 	/**

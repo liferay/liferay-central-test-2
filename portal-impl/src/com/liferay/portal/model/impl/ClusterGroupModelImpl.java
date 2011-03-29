@@ -170,12 +170,11 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
 		clusterGroupImpl.setClusterGroupId(getClusterGroupId());
-
 		clusterGroupImpl.setName(getName());
-
 		clusterGroupImpl.setClusterNodeIds(getClusterNodeIds());
-
 		clusterGroupImpl.setWholeCluster(getWholeCluster());
+
+		clusterGroupImpl.resetOriginalValues();
 
 		return clusterGroupImpl;
 	}
@@ -220,6 +219,9 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

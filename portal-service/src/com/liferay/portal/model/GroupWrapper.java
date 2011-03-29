@@ -519,5 +519,9 @@ public class GroupWrapper implements Group {
 		return _group;
 	}
 
+	public void resetOriginalValues() {
+		_group.resetOriginalValues();
+	}
+
 	private Group _group;
 }

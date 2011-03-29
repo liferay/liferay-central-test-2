@@ -195,21 +195,12 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
 		serviceComponentImpl.setServiceComponentId(getServiceComponentId());
-
 		serviceComponentImpl.setBuildNamespace(getBuildNamespace());
-
-		ServiceComponentModelImpl serviceComponentModelImpl = serviceComponentImpl;
-
-		serviceComponentModelImpl._originalBuildNamespace = serviceComponentModelImpl._buildNamespace;
-
 		serviceComponentImpl.setBuildNumber(getBuildNumber());
-
-		serviceComponentModelImpl._originalBuildNumber = serviceComponentModelImpl._buildNumber;
-
-		serviceComponentModelImpl._setOriginalBuildNumber = false;
 		serviceComponentImpl.setBuildDate(getBuildDate());
-
 		serviceComponentImpl.setData(getData());
+
+		serviceComponentImpl.resetOriginalValues();
 
 		return serviceComponentImpl;
 	}
@@ -271,6 +262,16 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ServiceComponentModelImpl serviceComponentModelImpl = this;
+
+		serviceComponentModelImpl._originalBuildNamespace = serviceComponentModelImpl._buildNamespace;
+
+		serviceComponentModelImpl._originalBuildNumber = serviceComponentModelImpl._buildNumber;
+
+		serviceComponentModelImpl._setOriginalBuildNumber = false;
 	}
 
 	public String toString() {

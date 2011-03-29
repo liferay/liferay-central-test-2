@@ -361,5 +361,9 @@ public class EmailAddressWrapper implements EmailAddress {
 		return _emailAddress;
 	}
 
+	public void resetOriginalValues() {
+		_emailAddress.resetOriginalValues();
+	}
+
 	private EmailAddress _emailAddress;
 }

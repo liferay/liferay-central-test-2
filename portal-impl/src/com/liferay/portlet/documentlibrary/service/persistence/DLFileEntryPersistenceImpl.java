@@ -225,6 +225,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				
 			dlFileEntry.getTitle()
 			}, dlFileEntry);
+
+		dlFileEntry.resetOriginalValues();
 	}
 
 	/**

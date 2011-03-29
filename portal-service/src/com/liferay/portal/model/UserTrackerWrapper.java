@@ -303,5 +303,9 @@ public class UserTrackerWrapper implements UserTracker {
 		return _userTracker;
 	}
 
+	public void resetOriginalValues() {
+		_userTracker.resetOriginalValues();
+	}
+
 	private UserTracker _userTracker;
 }

@@ -230,5 +230,9 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 		return _announcementsFlag;
 	}
 
+	public void resetOriginalValues() {
+		_announcementsFlag.resetOriginalValues();
+	}
+
 	private AnnouncementsFlag _announcementsFlag;
 }

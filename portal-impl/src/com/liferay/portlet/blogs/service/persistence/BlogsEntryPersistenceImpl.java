@@ -341,6 +341,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				
 			blogsEntry.getUrlTitle()
 			}, blogsEntry);
+
+		blogsEntry.resetOriginalValues();
 	}
 
 	/**

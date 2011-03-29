@@ -505,37 +505,19 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		AssetVocabularyImpl assetVocabularyImpl = new AssetVocabularyImpl();
 
 		assetVocabularyImpl.setUuid(getUuid());
-
-		AssetVocabularyModelImpl assetVocabularyModelImpl = assetVocabularyImpl;
-
-		assetVocabularyModelImpl._originalUuid = assetVocabularyModelImpl._uuid;
-
 		assetVocabularyImpl.setVocabularyId(getVocabularyId());
-
 		assetVocabularyImpl.setGroupId(getGroupId());
-
-		assetVocabularyModelImpl._originalGroupId = assetVocabularyModelImpl._groupId;
-
-		assetVocabularyModelImpl._setOriginalGroupId = false;
 		assetVocabularyImpl.setCompanyId(getCompanyId());
-
 		assetVocabularyImpl.setUserId(getUserId());
-
 		assetVocabularyImpl.setUserName(getUserName());
-
 		assetVocabularyImpl.setCreateDate(getCreateDate());
-
 		assetVocabularyImpl.setModifiedDate(getModifiedDate());
-
 		assetVocabularyImpl.setName(getName());
-
-		assetVocabularyModelImpl._originalName = assetVocabularyModelImpl._name;
-
 		assetVocabularyImpl.setTitle(getTitle());
-
 		assetVocabularyImpl.setDescription(getDescription());
-
 		assetVocabularyImpl.setSettings(getSettings());
+
+		assetVocabularyImpl.resetOriginalValues();
 
 		return assetVocabularyImpl;
 	}
@@ -578,6 +560,18 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AssetVocabularyModelImpl assetVocabularyModelImpl = this;
+
+		assetVocabularyModelImpl._originalUuid = assetVocabularyModelImpl._uuid;
+
+		assetVocabularyModelImpl._originalGroupId = assetVocabularyModelImpl._groupId;
+
+		assetVocabularyModelImpl._setOriginalGroupId = false;
+
+		assetVocabularyModelImpl._originalName = assetVocabularyModelImpl._name;
 	}
 
 	public String toString() {

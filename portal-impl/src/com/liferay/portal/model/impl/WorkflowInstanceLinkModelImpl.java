@@ -238,24 +238,17 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		WorkflowInstanceLinkImpl workflowInstanceLinkImpl = new WorkflowInstanceLinkImpl();
 
 		workflowInstanceLinkImpl.setWorkflowInstanceLinkId(getWorkflowInstanceLinkId());
-
 		workflowInstanceLinkImpl.setGroupId(getGroupId());
-
 		workflowInstanceLinkImpl.setCompanyId(getCompanyId());
-
 		workflowInstanceLinkImpl.setUserId(getUserId());
-
 		workflowInstanceLinkImpl.setUserName(getUserName());
-
 		workflowInstanceLinkImpl.setCreateDate(getCreateDate());
-
 		workflowInstanceLinkImpl.setModifiedDate(getModifiedDate());
-
 		workflowInstanceLinkImpl.setClassNameId(getClassNameId());
-
 		workflowInstanceLinkImpl.setClassPK(getClassPK());
-
 		workflowInstanceLinkImpl.setWorkflowInstanceId(getWorkflowInstanceId());
+
+		workflowInstanceLinkImpl.resetOriginalValues();
 
 		return workflowInstanceLinkImpl;
 	}
@@ -301,6 +294,9 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

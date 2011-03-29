@@ -331,6 +331,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			journalArticle.getArticleId(),
 				Double.valueOf(journalArticle.getVersion())
 			}, journalArticle);
+
+		journalArticle.resetOriginalValues();
 	}
 
 	/**

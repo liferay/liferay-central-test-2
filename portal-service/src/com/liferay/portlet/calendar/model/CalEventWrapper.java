@@ -589,5 +589,9 @@ public class CalEventWrapper implements CalEvent {
 		return _calEvent;
 	}
 
+	public void resetOriginalValues() {
+		_calEvent.resetOriginalValues();
+	}
+
 	private CalEvent _calEvent;
 }

@@ -253,5 +253,9 @@ public class ImageWrapper implements Image {
 		return _image;
 	}
 
+	public void resetOriginalValues() {
+		_image.resetOriginalValues();
+	}
+
 	private Image _image;
 }

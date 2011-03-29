@@ -1156,5 +1156,9 @@ public class UserWrapper implements User {
 		return _user;
 	}
 
+	public void resetOriginalValues() {
+		_user.resetOriginalValues();
+	}
+
 	private User _user;
 }

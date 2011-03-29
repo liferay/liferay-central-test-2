@@ -216,23 +216,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		UserIdMapperImpl userIdMapperImpl = new UserIdMapperImpl();
 
 		userIdMapperImpl.setUserIdMapperId(getUserIdMapperId());
-
 		userIdMapperImpl.setUserId(getUserId());
-
-		UserIdMapperModelImpl userIdMapperModelImpl = userIdMapperImpl;
-
-		userIdMapperModelImpl._originalUserId = userIdMapperModelImpl._userId;
-
-		userIdMapperModelImpl._setOriginalUserId = false;
 		userIdMapperImpl.setType(getType());
-
-		userIdMapperModelImpl._originalType = userIdMapperModelImpl._type;
-
 		userIdMapperImpl.setDescription(getDescription());
-
 		userIdMapperImpl.setExternalUserId(getExternalUserId());
 
-		userIdMapperModelImpl._originalExternalUserId = userIdMapperModelImpl._externalUserId;
+		userIdMapperImpl.resetOriginalValues();
 
 		return userIdMapperImpl;
 	}
@@ -277,6 +266,18 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		UserIdMapperModelImpl userIdMapperModelImpl = this;
+
+		userIdMapperModelImpl._originalUserId = userIdMapperModelImpl._userId;
+
+		userIdMapperModelImpl._setOriginalUserId = false;
+
+		userIdMapperModelImpl._originalType = userIdMapperModelImpl._type;
+
+		userIdMapperModelImpl._originalExternalUserId = userIdMapperModelImpl._externalUserId;
 	}
 
 	public String toString() {

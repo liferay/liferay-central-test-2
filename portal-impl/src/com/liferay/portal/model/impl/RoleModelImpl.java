@@ -404,35 +404,16 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		RoleImpl roleImpl = new RoleImpl();
 
 		roleImpl.setRoleId(getRoleId());
-
 		roleImpl.setCompanyId(getCompanyId());
-
-		RoleModelImpl roleModelImpl = roleImpl;
-
-		roleModelImpl._originalCompanyId = roleModelImpl._companyId;
-
-		roleModelImpl._setOriginalCompanyId = false;
 		roleImpl.setClassNameId(getClassNameId());
-
-		roleModelImpl._originalClassNameId = roleModelImpl._classNameId;
-
-		roleModelImpl._setOriginalClassNameId = false;
 		roleImpl.setClassPK(getClassPK());
-
-		roleModelImpl._originalClassPK = roleModelImpl._classPK;
-
-		roleModelImpl._setOriginalClassPK = false;
 		roleImpl.setName(getName());
-
-		roleModelImpl._originalName = roleModelImpl._name;
-
 		roleImpl.setTitle(getTitle());
-
 		roleImpl.setDescription(getDescription());
-
 		roleImpl.setType(getType());
-
 		roleImpl.setSubtype(getSubtype());
+
+		roleImpl.resetOriginalValues();
 
 		return roleImpl;
 	}
@@ -475,6 +456,24 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		RoleModelImpl roleModelImpl = this;
+
+		roleModelImpl._originalCompanyId = roleModelImpl._companyId;
+
+		roleModelImpl._setOriginalCompanyId = false;
+
+		roleModelImpl._originalClassNameId = roleModelImpl._classNameId;
+
+		roleModelImpl._setOriginalClassNameId = false;
+
+		roleModelImpl._originalClassPK = roleModelImpl._classPK;
+
+		roleModelImpl._setOriginalClassPK = false;
+
+		roleModelImpl._originalName = roleModelImpl._name;
 	}
 
 	public String toString() {

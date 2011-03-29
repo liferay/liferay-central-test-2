@@ -117,6 +117,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] { Long.valueOf(team.getGroupId()), team.getName() },
 			team);
+
+		team.resetOriginalValues();
 	}
 
 	/**

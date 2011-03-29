@@ -328,5 +328,9 @@ public class PortletItemWrapper implements PortletItem {
 		return _portletItem;
 	}
 
+	public void resetOriginalValues() {
+		_portletItem.resetOriginalValues();
+	}
+
 	private PortletItem _portletItem;
 }

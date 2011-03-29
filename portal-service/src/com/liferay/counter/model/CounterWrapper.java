@@ -155,5 +155,9 @@ public class CounterWrapper implements Counter {
 		return _counter;
 	}
 
+	public void resetOriginalValues() {
+		_counter.resetOriginalValues();
+	}
+
 	private Counter _counter;
 }

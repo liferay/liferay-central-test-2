@@ -93,6 +93,8 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_VALUE,
 			new Object[] { className.getValue() }, className);
+
+		className.resetOriginalValues();
 	}
 
 	/**

@@ -121,6 +121,8 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	public void cacheResult(SCLicense scLicense) {
 		EntityCacheUtil.putResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey(), scLicense);
+
+		scLicense.resetOriginalValues();
 	}
 
 	/**

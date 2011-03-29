@@ -243,30 +243,16 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		BlogsStatsUserImpl blogsStatsUserImpl = new BlogsStatsUserImpl();
 
 		blogsStatsUserImpl.setStatsUserId(getStatsUserId());
-
 		blogsStatsUserImpl.setGroupId(getGroupId());
-
-		BlogsStatsUserModelImpl blogsStatsUserModelImpl = blogsStatsUserImpl;
-
-		blogsStatsUserModelImpl._originalGroupId = blogsStatsUserModelImpl._groupId;
-
-		blogsStatsUserModelImpl._setOriginalGroupId = false;
 		blogsStatsUserImpl.setCompanyId(getCompanyId());
-
 		blogsStatsUserImpl.setUserId(getUserId());
-
-		blogsStatsUserModelImpl._originalUserId = blogsStatsUserModelImpl._userId;
-
-		blogsStatsUserModelImpl._setOriginalUserId = false;
 		blogsStatsUserImpl.setEntryCount(getEntryCount());
-
 		blogsStatsUserImpl.setLastPostDate(getLastPostDate());
-
 		blogsStatsUserImpl.setRatingsTotalEntries(getRatingsTotalEntries());
-
 		blogsStatsUserImpl.setRatingsTotalScore(getRatingsTotalScore());
-
 		blogsStatsUserImpl.setRatingsAverageScore(getRatingsAverageScore());
+
+		blogsStatsUserImpl.resetOriginalValues();
 
 		return blogsStatsUserImpl;
 	}
@@ -319,6 +305,18 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		BlogsStatsUserModelImpl blogsStatsUserModelImpl = this;
+
+		blogsStatsUserModelImpl._originalGroupId = blogsStatsUserModelImpl._groupId;
+
+		blogsStatsUserModelImpl._setOriginalGroupId = false;
+
+		blogsStatsUserModelImpl._originalUserId = blogsStatsUserModelImpl._userId;
+
+		blogsStatsUserModelImpl._setOriginalUserId = false;
 	}
 
 	public String toString() {

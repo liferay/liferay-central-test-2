@@ -201,5 +201,9 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		return _mbDiscussion;
 	}
 
+	public void resetOriginalValues() {
+		_mbDiscussion.resetOriginalValues();
+	}
+
 	private MBDiscussion _mbDiscussion;
 }

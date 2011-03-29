@@ -373,36 +373,23 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		AccountImpl accountImpl = new AccountImpl();
 
 		accountImpl.setAccountId(getAccountId());
-
 		accountImpl.setCompanyId(getCompanyId());
-
 		accountImpl.setUserId(getUserId());
-
 		accountImpl.setUserName(getUserName());
-
 		accountImpl.setCreateDate(getCreateDate());
-
 		accountImpl.setModifiedDate(getModifiedDate());
-
 		accountImpl.setParentAccountId(getParentAccountId());
-
 		accountImpl.setName(getName());
-
 		accountImpl.setLegalName(getLegalName());
-
 		accountImpl.setLegalId(getLegalId());
-
 		accountImpl.setLegalType(getLegalType());
-
 		accountImpl.setSicCode(getSicCode());
-
 		accountImpl.setTickerSymbol(getTickerSymbol());
-
 		accountImpl.setIndustry(getIndustry());
-
 		accountImpl.setType(getType());
-
 		accountImpl.setSize(getSize());
+
+		accountImpl.resetOriginalValues();
 
 		return accountImpl;
 	}
@@ -447,6 +434,9 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

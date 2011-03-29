@@ -113,6 +113,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
 			new Object[] { shoppingCoupon.getCode() }, shoppingCoupon);
+
+		shoppingCoupon.resetOriginalValues();
 	}
 
 	/**

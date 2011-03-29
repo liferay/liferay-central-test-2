@@ -258,25 +258,13 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		PluginSettingImpl pluginSettingImpl = new PluginSettingImpl();
 
 		pluginSettingImpl.setPluginSettingId(getPluginSettingId());
-
 		pluginSettingImpl.setCompanyId(getCompanyId());
-
-		PluginSettingModelImpl pluginSettingModelImpl = pluginSettingImpl;
-
-		pluginSettingModelImpl._originalCompanyId = pluginSettingModelImpl._companyId;
-
-		pluginSettingModelImpl._setOriginalCompanyId = false;
 		pluginSettingImpl.setPluginId(getPluginId());
-
-		pluginSettingModelImpl._originalPluginId = pluginSettingModelImpl._pluginId;
-
 		pluginSettingImpl.setPluginType(getPluginType());
-
-		pluginSettingModelImpl._originalPluginType = pluginSettingModelImpl._pluginType;
-
 		pluginSettingImpl.setRoles(getRoles());
-
 		pluginSettingImpl.setActive(getActive());
+
+		pluginSettingImpl.resetOriginalValues();
 
 		return pluginSettingImpl;
 	}
@@ -321,6 +309,18 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PluginSettingModelImpl pluginSettingModelImpl = this;
+
+		pluginSettingModelImpl._originalCompanyId = pluginSettingModelImpl._companyId;
+
+		pluginSettingModelImpl._setOriginalCompanyId = false;
+
+		pluginSettingModelImpl._originalPluginId = pluginSettingModelImpl._pluginId;
+
+		pluginSettingModelImpl._originalPluginType = pluginSettingModelImpl._pluginType;
 	}
 
 	public String toString() {

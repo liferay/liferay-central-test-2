@@ -416,48 +416,20 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		GroupImpl groupImpl = new GroupImpl();
 
 		groupImpl.setGroupId(getGroupId());
-
 		groupImpl.setCompanyId(getCompanyId());
-
-		GroupModelImpl groupModelImpl = groupImpl;
-
-		groupModelImpl._originalCompanyId = groupModelImpl._companyId;
-
-		groupModelImpl._setOriginalCompanyId = false;
 		groupImpl.setCreatorUserId(getCreatorUserId());
-
 		groupImpl.setClassNameId(getClassNameId());
-
-		groupModelImpl._originalClassNameId = groupModelImpl._classNameId;
-
-		groupModelImpl._setOriginalClassNameId = false;
 		groupImpl.setClassPK(getClassPK());
-
-		groupModelImpl._originalClassPK = groupModelImpl._classPK;
-
-		groupModelImpl._setOriginalClassPK = false;
 		groupImpl.setParentGroupId(getParentGroupId());
-
 		groupImpl.setLiveGroupId(getLiveGroupId());
-
-		groupModelImpl._originalLiveGroupId = groupModelImpl._liveGroupId;
-
-		groupModelImpl._setOriginalLiveGroupId = false;
 		groupImpl.setName(getName());
-
-		groupModelImpl._originalName = groupModelImpl._name;
-
 		groupImpl.setDescription(getDescription());
-
 		groupImpl.setType(getType());
-
 		groupImpl.setTypeSettings(getTypeSettings());
-
 		groupImpl.setFriendlyURL(getFriendlyURL());
-
-		groupModelImpl._originalFriendlyURL = groupModelImpl._friendlyURL;
-
 		groupImpl.setActive(getActive());
+
+		groupImpl.resetOriginalValues();
 
 		return groupImpl;
 	}
@@ -500,6 +472,30 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		GroupModelImpl groupModelImpl = this;
+
+		groupModelImpl._originalCompanyId = groupModelImpl._companyId;
+
+		groupModelImpl._setOriginalCompanyId = false;
+
+		groupModelImpl._originalClassNameId = groupModelImpl._classNameId;
+
+		groupModelImpl._setOriginalClassNameId = false;
+
+		groupModelImpl._originalClassPK = groupModelImpl._classPK;
+
+		groupModelImpl._setOriginalClassPK = false;
+
+		groupModelImpl._originalLiveGroupId = groupModelImpl._liveGroupId;
+
+		groupModelImpl._setOriginalLiveGroupId = false;
+
+		groupModelImpl._originalName = groupModelImpl._name;
+
+		groupModelImpl._originalFriendlyURL = groupModelImpl._friendlyURL;
 	}
 
 	public String toString() {

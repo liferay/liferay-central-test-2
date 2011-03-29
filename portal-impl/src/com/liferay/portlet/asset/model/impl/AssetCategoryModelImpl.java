@@ -552,50 +552,22 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		AssetCategoryImpl assetCategoryImpl = new AssetCategoryImpl();
 
 		assetCategoryImpl.setUuid(getUuid());
-
-		AssetCategoryModelImpl assetCategoryModelImpl = assetCategoryImpl;
-
-		assetCategoryModelImpl._originalUuid = assetCategoryModelImpl._uuid;
-
 		assetCategoryImpl.setCategoryId(getCategoryId());
-
 		assetCategoryImpl.setGroupId(getGroupId());
-
-		assetCategoryModelImpl._originalGroupId = assetCategoryModelImpl._groupId;
-
-		assetCategoryModelImpl._setOriginalGroupId = false;
 		assetCategoryImpl.setCompanyId(getCompanyId());
-
 		assetCategoryImpl.setUserId(getUserId());
-
 		assetCategoryImpl.setUserName(getUserName());
-
 		assetCategoryImpl.setCreateDate(getCreateDate());
-
 		assetCategoryImpl.setModifiedDate(getModifiedDate());
-
 		assetCategoryImpl.setParentCategoryId(getParentCategoryId());
-
-		assetCategoryModelImpl._originalParentCategoryId = assetCategoryModelImpl._parentCategoryId;
-
-		assetCategoryModelImpl._setOriginalParentCategoryId = false;
 		assetCategoryImpl.setLeftCategoryId(getLeftCategoryId());
-
 		assetCategoryImpl.setRightCategoryId(getRightCategoryId());
-
 		assetCategoryImpl.setName(getName());
-
-		assetCategoryModelImpl._originalName = assetCategoryModelImpl._name;
-
 		assetCategoryImpl.setTitle(getTitle());
-
 		assetCategoryImpl.setDescription(getDescription());
-
 		assetCategoryImpl.setVocabularyId(getVocabularyId());
 
-		assetCategoryModelImpl._originalVocabularyId = assetCategoryModelImpl._vocabularyId;
-
-		assetCategoryModelImpl._setOriginalVocabularyId = false;
+		assetCategoryImpl.resetOriginalValues();
 
 		return assetCategoryImpl;
 	}
@@ -638,6 +610,26 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AssetCategoryModelImpl assetCategoryModelImpl = this;
+
+		assetCategoryModelImpl._originalUuid = assetCategoryModelImpl._uuid;
+
+		assetCategoryModelImpl._originalGroupId = assetCategoryModelImpl._groupId;
+
+		assetCategoryModelImpl._setOriginalGroupId = false;
+
+		assetCategoryModelImpl._originalParentCategoryId = assetCategoryModelImpl._parentCategoryId;
+
+		assetCategoryModelImpl._setOriginalParentCategoryId = false;
+
+		assetCategoryModelImpl._originalName = assetCategoryModelImpl._name;
+
+		assetCategoryModelImpl._originalVocabularyId = assetCategoryModelImpl._vocabularyId;
+
+		assetCategoryModelImpl._setOriginalVocabularyId = false;
 	}
 
 	public String toString() {

@@ -133,6 +133,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 				Long.valueOf(workflowDefinitionLink.getCompanyId()),
 				Long.valueOf(workflowDefinitionLink.getClassNameId())
 			}, workflowDefinitionLink);
+
+		workflowDefinitionLink.resetOriginalValues();
 	}
 
 	/**

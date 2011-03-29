@@ -442,5 +442,9 @@ public class OrganizationWrapper implements Organization {
 		return _organization;
 	}
 
+	public void resetOriginalValues() {
+		_organization.resetOriginalValues();
+	}
+
 	private Organization _organization;
 }

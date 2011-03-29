@@ -185,19 +185,11 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
 
 		wikiPageResourceImpl.setUuid(getUuid());
-
 		wikiPageResourceImpl.setResourcePrimKey(getResourcePrimKey());
-
 		wikiPageResourceImpl.setNodeId(getNodeId());
-
-		WikiPageResourceModelImpl wikiPageResourceModelImpl = wikiPageResourceImpl;
-
-		wikiPageResourceModelImpl._originalNodeId = wikiPageResourceModelImpl._nodeId;
-
-		wikiPageResourceModelImpl._setOriginalNodeId = false;
 		wikiPageResourceImpl.setTitle(getTitle());
 
-		wikiPageResourceModelImpl._originalTitle = wikiPageResourceModelImpl._title;
+		wikiPageResourceImpl.resetOriginalValues();
 
 		return wikiPageResourceImpl;
 	}
@@ -242,6 +234,16 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = this;
+
+		wikiPageResourceModelImpl._originalNodeId = wikiPageResourceModelImpl._nodeId;
+
+		wikiPageResourceModelImpl._setOriginalNodeId = false;
+
+		wikiPageResourceModelImpl._originalTitle = wikiPageResourceModelImpl._title;
 	}
 
 	public String toString() {

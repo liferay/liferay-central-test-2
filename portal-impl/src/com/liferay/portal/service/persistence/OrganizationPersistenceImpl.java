@@ -148,6 +148,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				
 			organization.getName()
 			}, organization);
+
+		organization.resetOriginalValues();
 	}
 
 	/**

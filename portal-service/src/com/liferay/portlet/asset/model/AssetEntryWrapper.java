@@ -617,5 +617,9 @@ public class AssetEntryWrapper implements AssetEntry {
 		return _assetEntry;
 	}
 
+	public void resetOriginalValues() {
+		_assetEntry.resetOriginalValues();
+	}
+
 	private AssetEntry _assetEntry;
 }

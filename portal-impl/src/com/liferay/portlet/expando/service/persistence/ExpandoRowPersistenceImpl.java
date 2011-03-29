@@ -113,6 +113,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 				Long.valueOf(expandoRow.getTableId()),
 				Long.valueOf(expandoRow.getClassPK())
 			}, expandoRow);
+
+		expandoRow.resetOriginalValues();
 	}
 
 	/**

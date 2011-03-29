@@ -144,6 +144,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				
 			journalFeed.getFeedId()
 			}, journalFeed);
+
+		journalFeed.resetOriginalValues();
 	}
 
 	/**

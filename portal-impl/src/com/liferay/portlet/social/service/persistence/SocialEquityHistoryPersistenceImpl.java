@@ -86,6 +86,8 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 		EntityCacheUtil.putResult(SocialEquityHistoryModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityHistoryImpl.class, socialEquityHistory.getPrimaryKey(),
 			socialEquityHistory);
+
+		socialEquityHistory.resetOriginalValues();
 	}
 
 	/**

@@ -281,37 +281,17 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		PortletItemImpl portletItemImpl = new PortletItemImpl();
 
 		portletItemImpl.setPortletItemId(getPortletItemId());
-
 		portletItemImpl.setGroupId(getGroupId());
-
-		PortletItemModelImpl portletItemModelImpl = portletItemImpl;
-
-		portletItemModelImpl._originalGroupId = portletItemModelImpl._groupId;
-
-		portletItemModelImpl._setOriginalGroupId = false;
 		portletItemImpl.setCompanyId(getCompanyId());
-
 		portletItemImpl.setUserId(getUserId());
-
 		portletItemImpl.setUserName(getUserName());
-
 		portletItemImpl.setCreateDate(getCreateDate());
-
 		portletItemImpl.setModifiedDate(getModifiedDate());
-
 		portletItemImpl.setName(getName());
-
-		portletItemModelImpl._originalName = portletItemModelImpl._name;
-
 		portletItemImpl.setPortletId(getPortletId());
-
-		portletItemModelImpl._originalPortletId = portletItemModelImpl._portletId;
-
 		portletItemImpl.setClassNameId(getClassNameId());
 
-		portletItemModelImpl._originalClassNameId = portletItemModelImpl._classNameId;
-
-		portletItemModelImpl._setOriginalClassNameId = false;
+		portletItemImpl.resetOriginalValues();
 
 		return portletItemImpl;
 	}
@@ -356,6 +336,22 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PortletItemModelImpl portletItemModelImpl = this;
+
+		portletItemModelImpl._originalGroupId = portletItemModelImpl._groupId;
+
+		portletItemModelImpl._setOriginalGroupId = false;
+
+		portletItemModelImpl._originalName = portletItemModelImpl._name;
+
+		portletItemModelImpl._originalPortletId = portletItemModelImpl._portletId;
+
+		portletItemModelImpl._originalClassNameId = portletItemModelImpl._classNameId;
+
+		portletItemModelImpl._setOriginalClassNameId = false;
 	}
 
 	public String toString() {

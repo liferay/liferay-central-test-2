@@ -248,26 +248,12 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		AnnouncementsFlagImpl announcementsFlagImpl = new AnnouncementsFlagImpl();
 
 		announcementsFlagImpl.setFlagId(getFlagId());
-
 		announcementsFlagImpl.setUserId(getUserId());
-
-		AnnouncementsFlagModelImpl announcementsFlagModelImpl = announcementsFlagImpl;
-
-		announcementsFlagModelImpl._originalUserId = announcementsFlagModelImpl._userId;
-
-		announcementsFlagModelImpl._setOriginalUserId = false;
 		announcementsFlagImpl.setCreateDate(getCreateDate());
-
 		announcementsFlagImpl.setEntryId(getEntryId());
-
-		announcementsFlagModelImpl._originalEntryId = announcementsFlagModelImpl._entryId;
-
-		announcementsFlagModelImpl._setOriginalEntryId = false;
 		announcementsFlagImpl.setValue(getValue());
 
-		announcementsFlagModelImpl._originalValue = announcementsFlagModelImpl._value;
-
-		announcementsFlagModelImpl._setOriginalValue = false;
+		announcementsFlagImpl.resetOriginalValues();
 
 		return announcementsFlagImpl;
 	}
@@ -325,6 +311,22 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = this;
+
+		announcementsFlagModelImpl._originalUserId = announcementsFlagModelImpl._userId;
+
+		announcementsFlagModelImpl._setOriginalUserId = false;
+
+		announcementsFlagModelImpl._originalEntryId = announcementsFlagModelImpl._entryId;
+
+		announcementsFlagModelImpl._setOriginalEntryId = false;
+
+		announcementsFlagModelImpl._originalValue = announcementsFlagModelImpl._value;
+
+		announcementsFlagModelImpl._setOriginalValue = false;
 	}
 
 	public String toString() {

@@ -387,5 +387,9 @@ public class RoleWrapper implements Role {
 		return _role;
 	}
 
+	public void resetOriginalValues() {
+		_role.resetOriginalValues();
+	}
+
 	private Role _role;
 }

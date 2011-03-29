@@ -132,10 +132,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
 
 		orgGroupRoleImpl.setOrganizationId(getOrganizationId());
-
 		orgGroupRoleImpl.setGroupId(getGroupId());
-
 		orgGroupRoleImpl.setRoleId(getRoleId());
+
+		orgGroupRoleImpl.resetOriginalValues();
 
 		return orgGroupRoleImpl;
 	}
@@ -172,6 +172,9 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

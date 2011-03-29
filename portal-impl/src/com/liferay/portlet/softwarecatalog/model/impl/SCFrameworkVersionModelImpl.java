@@ -310,26 +310,18 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		SCFrameworkVersionImpl scFrameworkVersionImpl = new SCFrameworkVersionImpl();
 
 		scFrameworkVersionImpl.setFrameworkVersionId(getFrameworkVersionId());
-
 		scFrameworkVersionImpl.setGroupId(getGroupId());
-
 		scFrameworkVersionImpl.setCompanyId(getCompanyId());
-
 		scFrameworkVersionImpl.setUserId(getUserId());
-
 		scFrameworkVersionImpl.setUserName(getUserName());
-
 		scFrameworkVersionImpl.setCreateDate(getCreateDate());
-
 		scFrameworkVersionImpl.setModifiedDate(getModifiedDate());
-
 		scFrameworkVersionImpl.setName(getName());
-
 		scFrameworkVersionImpl.setUrl(getUrl());
-
 		scFrameworkVersionImpl.setActive(getActive());
-
 		scFrameworkVersionImpl.setPriority(getPriority());
+
+		scFrameworkVersionImpl.resetOriginalValues();
 
 		return scFrameworkVersionImpl;
 	}
@@ -374,6 +366,9 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

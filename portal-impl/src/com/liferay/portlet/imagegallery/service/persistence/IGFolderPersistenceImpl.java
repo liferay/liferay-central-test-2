@@ -178,6 +178,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				
 			igFolder.getName()
 			}, igFolder);
+
+		igFolder.resetOriginalValues();
 	}
 
 	/**

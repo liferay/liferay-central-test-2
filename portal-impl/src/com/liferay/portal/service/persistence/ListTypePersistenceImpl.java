@@ -95,6 +95,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	public void cacheResult(ListType listType) {
 		EntityCacheUtil.putResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 			ListTypeImpl.class, listType.getPrimaryKey(), listType);
+
+		listType.resetOriginalValues();
 	}
 
 	/**

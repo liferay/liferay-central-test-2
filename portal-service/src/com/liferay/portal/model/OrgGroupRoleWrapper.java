@@ -184,5 +184,9 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		return _orgGroupRole;
 	}
 
+	public void resetOriginalValues() {
+		_orgGroupRole.resetOriginalValues();
+	}
+
 	private OrgGroupRole _orgGroupRole;
 }

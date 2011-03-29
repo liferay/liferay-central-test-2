@@ -191,5 +191,9 @@ public class ResourceCodeWrapper implements ResourceCode {
 		return _resourceCode;
 	}
 
+	public void resetOriginalValues() {
+		_resourceCode.resetOriginalValues();
+	}
+
 	private ResourceCode _resourceCode;
 }

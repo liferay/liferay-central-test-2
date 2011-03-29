@@ -951,76 +951,34 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		LayoutImpl layoutImpl = new LayoutImpl();
 
 		layoutImpl.setUuid(getUuid());
-
-		LayoutModelImpl layoutModelImpl = layoutImpl;
-
-		layoutModelImpl._originalUuid = layoutModelImpl._uuid;
-
 		layoutImpl.setPlid(getPlid());
-
 		layoutImpl.setGroupId(getGroupId());
-
-		layoutModelImpl._originalGroupId = layoutModelImpl._groupId;
-
-		layoutModelImpl._setOriginalGroupId = false;
 		layoutImpl.setCompanyId(getCompanyId());
-
 		layoutImpl.setCreateDate(getCreateDate());
-
 		layoutImpl.setModifiedDate(getModifiedDate());
-
 		layoutImpl.setPrivateLayout(getPrivateLayout());
-
-		layoutModelImpl._originalPrivateLayout = layoutModelImpl._privateLayout;
-
-		layoutModelImpl._setOriginalPrivateLayout = false;
 		layoutImpl.setLayoutId(getLayoutId());
-
-		layoutModelImpl._originalLayoutId = layoutModelImpl._layoutId;
-
-		layoutModelImpl._setOriginalLayoutId = false;
 		layoutImpl.setParentLayoutId(getParentLayoutId());
-
 		layoutImpl.setName(getName());
-
 		layoutImpl.setTitle(getTitle());
-
 		layoutImpl.setDescription(getDescription());
-
 		layoutImpl.setKeywords(getKeywords());
-
 		layoutImpl.setRobots(getRobots());
-
 		layoutImpl.setType(getType());
-
 		layoutImpl.setTypeSettings(getTypeSettings());
-
 		layoutImpl.setHidden(getHidden());
-
 		layoutImpl.setFriendlyURL(getFriendlyURL());
-
-		layoutModelImpl._originalFriendlyURL = layoutModelImpl._friendlyURL;
-
 		layoutImpl.setIconImage(getIconImage());
-
 		layoutImpl.setIconImageId(getIconImageId());
-
-		layoutModelImpl._originalIconImageId = layoutModelImpl._iconImageId;
-
-		layoutModelImpl._setOriginalIconImageId = false;
 		layoutImpl.setThemeId(getThemeId());
-
 		layoutImpl.setColorSchemeId(getColorSchemeId());
-
 		layoutImpl.setWapThemeId(getWapThemeId());
-
 		layoutImpl.setWapColorSchemeId(getWapColorSchemeId());
-
 		layoutImpl.setCss(getCss());
-
 		layoutImpl.setPriority(getPriority());
-
 		layoutImpl.setLayoutPrototypeId(getLayoutPrototypeId());
+
+		layoutImpl.resetOriginalValues();
 
 		return layoutImpl;
 	}
@@ -1085,6 +1043,30 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		LayoutModelImpl layoutModelImpl = this;
+
+		layoutModelImpl._originalUuid = layoutModelImpl._uuid;
+
+		layoutModelImpl._originalGroupId = layoutModelImpl._groupId;
+
+		layoutModelImpl._setOriginalGroupId = false;
+
+		layoutModelImpl._originalPrivateLayout = layoutModelImpl._privateLayout;
+
+		layoutModelImpl._setOriginalPrivateLayout = false;
+
+		layoutModelImpl._originalLayoutId = layoutModelImpl._layoutId;
+
+		layoutModelImpl._setOriginalLayoutId = false;
+
+		layoutModelImpl._originalFriendlyURL = layoutModelImpl._friendlyURL;
+
+		layoutModelImpl._originalIconImageId = layoutModelImpl._iconImageId;
+
+		layoutModelImpl._setOriginalIconImageId = false;
 	}
 
 	public String toString() {

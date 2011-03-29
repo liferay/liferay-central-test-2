@@ -211,26 +211,12 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		RepositoryEntryImpl repositoryEntryImpl = new RepositoryEntryImpl();
 
 		repositoryEntryImpl.setUuid(getUuid());
-
-		RepositoryEntryModelImpl repositoryEntryModelImpl = repositoryEntryImpl;
-
-		repositoryEntryModelImpl._originalUuid = repositoryEntryModelImpl._uuid;
-
 		repositoryEntryImpl.setRepositoryEntryId(getRepositoryEntryId());
-
 		repositoryEntryImpl.setGroupId(getGroupId());
-
-		repositoryEntryModelImpl._originalGroupId = repositoryEntryModelImpl._groupId;
-
-		repositoryEntryModelImpl._setOriginalGroupId = false;
 		repositoryEntryImpl.setRepositoryId(getRepositoryId());
-
-		repositoryEntryModelImpl._originalRepositoryId = repositoryEntryModelImpl._repositoryId;
-
-		repositoryEntryModelImpl._setOriginalRepositoryId = false;
 		repositoryEntryImpl.setMappedId(getMappedId());
 
-		repositoryEntryModelImpl._originalMappedId = repositoryEntryModelImpl._mappedId;
+		repositoryEntryImpl.resetOriginalValues();
 
 		return repositoryEntryImpl;
 	}
@@ -275,6 +261,22 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		RepositoryEntryModelImpl repositoryEntryModelImpl = this;
+
+		repositoryEntryModelImpl._originalUuid = repositoryEntryModelImpl._uuid;
+
+		repositoryEntryModelImpl._originalGroupId = repositoryEntryModelImpl._groupId;
+
+		repositoryEntryModelImpl._setOriginalGroupId = false;
+
+		repositoryEntryModelImpl._originalRepositoryId = repositoryEntryModelImpl._repositoryId;
+
+		repositoryEntryModelImpl._setOriginalRepositoryId = false;
+
+		repositoryEntryModelImpl._originalMappedId = repositoryEntryModelImpl._mappedId;
 	}
 
 	public String toString() {

@@ -161,6 +161,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				bookmarksEntry.getUuid(),
 				Long.valueOf(bookmarksEntry.getGroupId())
 			}, bookmarksEntry);
+
+		bookmarksEntry.resetOriginalValues();
 	}
 
 	/**

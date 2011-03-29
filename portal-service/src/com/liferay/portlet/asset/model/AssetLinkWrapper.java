@@ -301,5 +301,9 @@ public class AssetLinkWrapper implements AssetLink {
 		return _assetLink;
 	}
 
+	public void resetOriginalValues() {
+		_assetLink.resetOriginalValues();
+	}
+
 	private AssetLink _assetLink;
 }

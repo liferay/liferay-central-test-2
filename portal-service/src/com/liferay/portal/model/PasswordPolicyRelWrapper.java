@@ -201,5 +201,9 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel {
 		return _passwordPolicyRel;
 	}
 
+	public void resetOriginalValues() {
+		_passwordPolicyRel.resetOriginalValues();
+	}
+
 	private PasswordPolicyRel _passwordPolicyRel;
 }

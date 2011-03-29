@@ -192,5 +192,9 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		return _userTrackerPath;
 	}
 
+	public void resetOriginalValues() {
+		_userTrackerPath.resetOriginalValues();
+	}
+
 	private UserTrackerPath _userTrackerPath;
 }

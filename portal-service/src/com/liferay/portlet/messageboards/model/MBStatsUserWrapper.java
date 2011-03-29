@@ -250,5 +250,9 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		return _mbStatsUser;
 	}
 
+	public void resetOriginalValues() {
+		_mbStatsUser.resetOriginalValues();
+	}
+
 	private MBStatsUser _mbStatsUser;
 }

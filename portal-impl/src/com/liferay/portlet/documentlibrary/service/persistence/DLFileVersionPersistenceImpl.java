@@ -130,6 +130,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				
 			dlFileVersion.getVersion()
 			}, dlFileVersion);
+
+		dlFileVersion.resetOriginalValues();
 	}
 
 	/**

@@ -202,6 +202,8 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 				Boolean.valueOf(layoutRevision.getHead()),
 				Long.valueOf(layoutRevision.getPlid())
 			}, layoutRevision);
+
+		layoutRevision.resetOriginalValues();
 	}
 
 	/**

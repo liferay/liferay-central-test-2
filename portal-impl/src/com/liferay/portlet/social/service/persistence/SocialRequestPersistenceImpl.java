@@ -241,6 +241,8 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 				Integer.valueOf(socialRequest.getType()),
 				Long.valueOf(socialRequest.getReceiverUserId())
 			}, socialRequest);
+
+		socialRequest.resetOriginalValues();
 	}
 
 	/**

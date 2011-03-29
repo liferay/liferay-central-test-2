@@ -167,6 +167,8 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public void cacheResult(AssetLink assetLink) {
 		EntityCacheUtil.putResult(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkImpl.class, assetLink.getPrimaryKey(), assetLink);
+
+		assetLink.resetOriginalValues();
 	}
 
 	/**

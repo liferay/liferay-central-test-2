@@ -119,6 +119,8 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 				
 			expandoColumn.getName()
 			}, expandoColumn);
+
+		expandoColumn.resetOriginalValues();
 	}
 
 	/**

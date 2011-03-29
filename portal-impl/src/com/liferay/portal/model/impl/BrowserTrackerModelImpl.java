@@ -166,15 +166,10 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
 
 		browserTrackerImpl.setBrowserTrackerId(getBrowserTrackerId());
-
 		browserTrackerImpl.setUserId(getUserId());
-
-		BrowserTrackerModelImpl browserTrackerModelImpl = browserTrackerImpl;
-
-		browserTrackerModelImpl._originalUserId = browserTrackerModelImpl._userId;
-
-		browserTrackerModelImpl._setOriginalUserId = false;
 		browserTrackerImpl.setBrowserKey(getBrowserKey());
+
+		browserTrackerImpl.resetOriginalValues();
 
 		return browserTrackerImpl;
 	}
@@ -219,6 +214,14 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		BrowserTrackerModelImpl browserTrackerModelImpl = this;
+
+		browserTrackerModelImpl._originalUserId = browserTrackerModelImpl._userId;
+
+		browserTrackerModelImpl._setOriginalUserId = false;
 	}
 
 	public String toString() {

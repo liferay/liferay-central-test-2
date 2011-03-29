@@ -492,5 +492,9 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		return _journalTemplate;
 	}
 
+	public void resetOriginalValues() {
+		_journalTemplate.resetOriginalValues();
+	}
+
 	private JournalTemplate _journalTemplate;
 }

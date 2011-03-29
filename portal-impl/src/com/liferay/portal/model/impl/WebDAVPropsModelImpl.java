@@ -219,26 +219,14 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
 		webDAVPropsImpl.setWebDavPropsId(getWebDavPropsId());
-
 		webDAVPropsImpl.setCompanyId(getCompanyId());
-
 		webDAVPropsImpl.setCreateDate(getCreateDate());
-
 		webDAVPropsImpl.setModifiedDate(getModifiedDate());
-
 		webDAVPropsImpl.setClassNameId(getClassNameId());
-
-		WebDAVPropsModelImpl webDAVPropsModelImpl = webDAVPropsImpl;
-
-		webDAVPropsModelImpl._originalClassNameId = webDAVPropsModelImpl._classNameId;
-
-		webDAVPropsModelImpl._setOriginalClassNameId = false;
 		webDAVPropsImpl.setClassPK(getClassPK());
-
-		webDAVPropsModelImpl._originalClassPK = webDAVPropsModelImpl._classPK;
-
-		webDAVPropsModelImpl._setOriginalClassPK = false;
 		webDAVPropsImpl.setProps(getProps());
+
+		webDAVPropsImpl.resetOriginalValues();
 
 		return webDAVPropsImpl;
 	}
@@ -283,6 +271,18 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		WebDAVPropsModelImpl webDAVPropsModelImpl = this;
+
+		webDAVPropsModelImpl._originalClassNameId = webDAVPropsModelImpl._classNameId;
+
+		webDAVPropsModelImpl._setOriginalClassNameId = false;
+
+		webDAVPropsModelImpl._originalClassPK = webDAVPropsModelImpl._classPK;
+
+		webDAVPropsModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

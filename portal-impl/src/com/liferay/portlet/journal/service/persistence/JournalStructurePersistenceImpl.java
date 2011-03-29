@@ -175,6 +175,8 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				
 			journalStructure.getStructureId()
 			}, journalStructure);
+
+		journalStructure.resetOriginalValues();
 	}
 
 	/**

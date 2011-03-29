@@ -240,24 +240,17 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
 
 		shoppingOrderItemImpl.setOrderItemId(getOrderItemId());
-
 		shoppingOrderItemImpl.setOrderId(getOrderId());
-
 		shoppingOrderItemImpl.setItemId(getItemId());
-
 		shoppingOrderItemImpl.setSku(getSku());
-
 		shoppingOrderItemImpl.setName(getName());
-
 		shoppingOrderItemImpl.setDescription(getDescription());
-
 		shoppingOrderItemImpl.setProperties(getProperties());
-
 		shoppingOrderItemImpl.setPrice(getPrice());
-
 		shoppingOrderItemImpl.setQuantity(getQuantity());
-
 		shoppingOrderItemImpl.setShippedDate(getShippedDate());
+
+		shoppingOrderItemImpl.resetOriginalValues();
 
 		return shoppingOrderItemImpl;
 	}
@@ -306,6 +299,9 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

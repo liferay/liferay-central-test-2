@@ -228,5 +228,9 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		return _portletPreferences;
 	}
 
+	public void resetOriginalValues() {
+		_portletPreferences.resetOriginalValues();
+	}
+
 	private PortletPreferences _portletPreferences;
 }

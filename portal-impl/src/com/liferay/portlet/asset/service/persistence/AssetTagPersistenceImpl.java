@@ -108,6 +108,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	public void cacheResult(AssetTag assetTag) {
 		EntityCacheUtil.putResult(AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagImpl.class, assetTag.getPrimaryKey(), assetTag);
+
+		assetTag.resetOriginalValues();
 	}
 
 	/**

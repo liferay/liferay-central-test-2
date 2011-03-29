@@ -971,5 +971,9 @@ public class JournalArticleWrapper implements JournalArticle {
 		return _journalArticle;
 	}
 
+	public void resetOriginalValues() {
+		_journalArticle.resetOriginalValues();
+	}
+
 	private JournalArticle _journalArticle;
 }

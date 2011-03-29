@@ -143,6 +143,8 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 				
 			assetTagProperty.getKey()
 			}, assetTagProperty);
+
+		assetTagProperty.resetOriginalValues();
 	}
 
 	/**

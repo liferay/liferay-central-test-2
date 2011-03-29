@@ -879,112 +879,58 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
 		shoppingOrderImpl.setOrderId(getOrderId());
-
 		shoppingOrderImpl.setGroupId(getGroupId());
-
 		shoppingOrderImpl.setCompanyId(getCompanyId());
-
 		shoppingOrderImpl.setUserId(getUserId());
-
 		shoppingOrderImpl.setUserName(getUserName());
-
 		shoppingOrderImpl.setCreateDate(getCreateDate());
-
 		shoppingOrderImpl.setModifiedDate(getModifiedDate());
-
 		shoppingOrderImpl.setNumber(getNumber());
-
-		ShoppingOrderModelImpl shoppingOrderModelImpl = shoppingOrderImpl;
-
-		shoppingOrderModelImpl._originalNumber = shoppingOrderModelImpl._number;
-
 		shoppingOrderImpl.setTax(getTax());
-
 		shoppingOrderImpl.setShipping(getShipping());
-
 		shoppingOrderImpl.setAltShipping(getAltShipping());
-
 		shoppingOrderImpl.setRequiresShipping(getRequiresShipping());
-
 		shoppingOrderImpl.setInsure(getInsure());
-
 		shoppingOrderImpl.setInsurance(getInsurance());
-
 		shoppingOrderImpl.setCouponCodes(getCouponCodes());
-
 		shoppingOrderImpl.setCouponDiscount(getCouponDiscount());
-
 		shoppingOrderImpl.setBillingFirstName(getBillingFirstName());
-
 		shoppingOrderImpl.setBillingLastName(getBillingLastName());
-
 		shoppingOrderImpl.setBillingEmailAddress(getBillingEmailAddress());
-
 		shoppingOrderImpl.setBillingCompany(getBillingCompany());
-
 		shoppingOrderImpl.setBillingStreet(getBillingStreet());
-
 		shoppingOrderImpl.setBillingCity(getBillingCity());
-
 		shoppingOrderImpl.setBillingState(getBillingState());
-
 		shoppingOrderImpl.setBillingZip(getBillingZip());
-
 		shoppingOrderImpl.setBillingCountry(getBillingCountry());
-
 		shoppingOrderImpl.setBillingPhone(getBillingPhone());
-
 		shoppingOrderImpl.setShipToBilling(getShipToBilling());
-
 		shoppingOrderImpl.setShippingFirstName(getShippingFirstName());
-
 		shoppingOrderImpl.setShippingLastName(getShippingLastName());
-
 		shoppingOrderImpl.setShippingEmailAddress(getShippingEmailAddress());
-
 		shoppingOrderImpl.setShippingCompany(getShippingCompany());
-
 		shoppingOrderImpl.setShippingStreet(getShippingStreet());
-
 		shoppingOrderImpl.setShippingCity(getShippingCity());
-
 		shoppingOrderImpl.setShippingState(getShippingState());
-
 		shoppingOrderImpl.setShippingZip(getShippingZip());
-
 		shoppingOrderImpl.setShippingCountry(getShippingCountry());
-
 		shoppingOrderImpl.setShippingPhone(getShippingPhone());
-
 		shoppingOrderImpl.setCcName(getCcName());
-
 		shoppingOrderImpl.setCcType(getCcType());
-
 		shoppingOrderImpl.setCcNumber(getCcNumber());
-
 		shoppingOrderImpl.setCcExpMonth(getCcExpMonth());
-
 		shoppingOrderImpl.setCcExpYear(getCcExpYear());
-
 		shoppingOrderImpl.setCcVerNumber(getCcVerNumber());
-
 		shoppingOrderImpl.setComments(getComments());
-
 		shoppingOrderImpl.setPpTxnId(getPpTxnId());
-
-		shoppingOrderModelImpl._originalPpTxnId = shoppingOrderModelImpl._ppTxnId;
-
 		shoppingOrderImpl.setPpPaymentStatus(getPpPaymentStatus());
-
 		shoppingOrderImpl.setPpPaymentGross(getPpPaymentGross());
-
 		shoppingOrderImpl.setPpReceiverEmail(getPpReceiverEmail());
-
 		shoppingOrderImpl.setPpPayerEmail(getPpPayerEmail());
-
 		shoppingOrderImpl.setSendOrderEmail(getSendOrderEmail());
-
 		shoppingOrderImpl.setSendShippingEmail(getSendShippingEmail());
+
+		shoppingOrderImpl.resetOriginalValues();
 
 		return shoppingOrderImpl;
 	}
@@ -1030,6 +976,14 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ShoppingOrderModelImpl shoppingOrderModelImpl = this;
+
+		shoppingOrderModelImpl._originalNumber = shoppingOrderModelImpl._number;
+
+		shoppingOrderModelImpl._originalPpTxnId = shoppingOrderModelImpl._ppTxnId;
 	}
 
 	public String toString() {

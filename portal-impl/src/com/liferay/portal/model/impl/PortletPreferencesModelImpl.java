@@ -262,29 +262,13 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		PortletPreferencesImpl portletPreferencesImpl = new PortletPreferencesImpl();
 
 		portletPreferencesImpl.setPortletPreferencesId(getPortletPreferencesId());
-
 		portletPreferencesImpl.setOwnerId(getOwnerId());
-
-		PortletPreferencesModelImpl portletPreferencesModelImpl = portletPreferencesImpl;
-
-		portletPreferencesModelImpl._originalOwnerId = portletPreferencesModelImpl._ownerId;
-
-		portletPreferencesModelImpl._setOriginalOwnerId = false;
 		portletPreferencesImpl.setOwnerType(getOwnerType());
-
-		portletPreferencesModelImpl._originalOwnerType = portletPreferencesModelImpl._ownerType;
-
-		portletPreferencesModelImpl._setOriginalOwnerType = false;
 		portletPreferencesImpl.setPlid(getPlid());
-
-		portletPreferencesModelImpl._originalPlid = portletPreferencesModelImpl._plid;
-
-		portletPreferencesModelImpl._setOriginalPlid = false;
 		portletPreferencesImpl.setPortletId(getPortletId());
-
-		portletPreferencesModelImpl._originalPortletId = portletPreferencesModelImpl._portletId;
-
 		portletPreferencesImpl.setPreferences(getPreferences());
+
+		portletPreferencesImpl.resetOriginalValues();
 
 		return portletPreferencesImpl;
 	}
@@ -329,6 +313,24 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PortletPreferencesModelImpl portletPreferencesModelImpl = this;
+
+		portletPreferencesModelImpl._originalOwnerId = portletPreferencesModelImpl._ownerId;
+
+		portletPreferencesModelImpl._setOriginalOwnerId = false;
+
+		portletPreferencesModelImpl._originalOwnerType = portletPreferencesModelImpl._ownerType;
+
+		portletPreferencesModelImpl._setOriginalOwnerType = false;
+
+		portletPreferencesModelImpl._originalPlid = portletPreferencesModelImpl._plid;
+
+		portletPreferencesModelImpl._setOriginalPlid = false;
+
+		portletPreferencesModelImpl._originalPortletId = portletPreferencesModelImpl._portletId;
 	}
 
 	public String toString() {

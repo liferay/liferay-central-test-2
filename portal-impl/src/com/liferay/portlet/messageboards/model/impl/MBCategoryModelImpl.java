@@ -360,41 +360,22 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
 
 		mbCategoryImpl.setUuid(getUuid());
-
-		MBCategoryModelImpl mbCategoryModelImpl = mbCategoryImpl;
-
-		mbCategoryModelImpl._originalUuid = mbCategoryModelImpl._uuid;
-
 		mbCategoryImpl.setCategoryId(getCategoryId());
-
 		mbCategoryImpl.setGroupId(getGroupId());
-
-		mbCategoryModelImpl._originalGroupId = mbCategoryModelImpl._groupId;
-
-		mbCategoryModelImpl._setOriginalGroupId = false;
 		mbCategoryImpl.setCompanyId(getCompanyId());
-
 		mbCategoryImpl.setUserId(getUserId());
-
 		mbCategoryImpl.setUserName(getUserName());
-
 		mbCategoryImpl.setCreateDate(getCreateDate());
-
 		mbCategoryImpl.setModifiedDate(getModifiedDate());
-
 		mbCategoryImpl.setParentCategoryId(getParentCategoryId());
-
 		mbCategoryImpl.setName(getName());
-
 		mbCategoryImpl.setDescription(getDescription());
-
 		mbCategoryImpl.setDisplayStyle(getDisplayStyle());
-
 		mbCategoryImpl.setThreadCount(getThreadCount());
-
 		mbCategoryImpl.setMessageCount(getMessageCount());
-
 		mbCategoryImpl.setLastPostDate(getLastPostDate());
+
+		mbCategoryImpl.resetOriginalValues();
 
 		return mbCategoryImpl;
 	}
@@ -452,6 +433,16 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBCategoryModelImpl mbCategoryModelImpl = this;
+
+		mbCategoryModelImpl._originalUuid = mbCategoryModelImpl._uuid;
+
+		mbCategoryModelImpl._originalGroupId = mbCategoryModelImpl._groupId;
+
+		mbCategoryModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

@@ -219,28 +219,13 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		DLFileRankImpl dlFileRankImpl = new DLFileRankImpl();
 
 		dlFileRankImpl.setFileRankId(getFileRankId());
-
 		dlFileRankImpl.setGroupId(getGroupId());
-
 		dlFileRankImpl.setCompanyId(getCompanyId());
-
-		DLFileRankModelImpl dlFileRankModelImpl = dlFileRankImpl;
-
-		dlFileRankModelImpl._originalCompanyId = dlFileRankModelImpl._companyId;
-
-		dlFileRankModelImpl._setOriginalCompanyId = false;
 		dlFileRankImpl.setUserId(getUserId());
-
-		dlFileRankModelImpl._originalUserId = dlFileRankModelImpl._userId;
-
-		dlFileRankModelImpl._setOriginalUserId = false;
 		dlFileRankImpl.setCreateDate(getCreateDate());
-
 		dlFileRankImpl.setFileEntryId(getFileEntryId());
 
-		dlFileRankModelImpl._originalFileEntryId = dlFileRankModelImpl._fileEntryId;
-
-		dlFileRankModelImpl._setOriginalFileEntryId = false;
+		dlFileRankImpl.resetOriginalValues();
 
 		return dlFileRankImpl;
 	}
@@ -285,6 +270,22 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DLFileRankModelImpl dlFileRankModelImpl = this;
+
+		dlFileRankModelImpl._originalCompanyId = dlFileRankModelImpl._companyId;
+
+		dlFileRankModelImpl._setOriginalCompanyId = false;
+
+		dlFileRankModelImpl._originalUserId = dlFileRankModelImpl._userId;
+
+		dlFileRankModelImpl._setOriginalUserId = false;
+
+		dlFileRankModelImpl._originalFileEntryId = dlFileRankModelImpl._fileEntryId;
+
+		dlFileRankModelImpl._setOriginalFileEntryId = false;
 	}
 
 	public String toString() {

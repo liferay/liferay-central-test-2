@@ -141,6 +141,8 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 				
 			repositoryEntry.getMappedId()
 			}, repositoryEntry);
+
+		repositoryEntry.resetOriginalValues();
 	}
 
 	/**

@@ -487,35 +487,19 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		PollsQuestionImpl pollsQuestionImpl = new PollsQuestionImpl();
 
 		pollsQuestionImpl.setUuid(getUuid());
-
-		PollsQuestionModelImpl pollsQuestionModelImpl = pollsQuestionImpl;
-
-		pollsQuestionModelImpl._originalUuid = pollsQuestionModelImpl._uuid;
-
 		pollsQuestionImpl.setQuestionId(getQuestionId());
-
 		pollsQuestionImpl.setGroupId(getGroupId());
-
-		pollsQuestionModelImpl._originalGroupId = pollsQuestionModelImpl._groupId;
-
-		pollsQuestionModelImpl._setOriginalGroupId = false;
 		pollsQuestionImpl.setCompanyId(getCompanyId());
-
 		pollsQuestionImpl.setUserId(getUserId());
-
 		pollsQuestionImpl.setUserName(getUserName());
-
 		pollsQuestionImpl.setCreateDate(getCreateDate());
-
 		pollsQuestionImpl.setModifiedDate(getModifiedDate());
-
 		pollsQuestionImpl.setTitle(getTitle());
-
 		pollsQuestionImpl.setDescription(getDescription());
-
 		pollsQuestionImpl.setExpirationDate(getExpirationDate());
-
 		pollsQuestionImpl.setLastVoteDate(getLastVoteDate());
+
+		pollsQuestionImpl.resetOriginalValues();
 
 		return pollsQuestionImpl;
 	}
@@ -561,6 +545,16 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PollsQuestionModelImpl pollsQuestionModelImpl = this;
+
+		pollsQuestionModelImpl._originalUuid = pollsQuestionModelImpl._uuid;
+
+		pollsQuestionModelImpl._originalGroupId = pollsQuestionModelImpl._groupId;
+
+		pollsQuestionModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

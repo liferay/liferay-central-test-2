@@ -195,24 +195,11 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		PasswordPolicyRelImpl passwordPolicyRelImpl = new PasswordPolicyRelImpl();
 
 		passwordPolicyRelImpl.setPasswordPolicyRelId(getPasswordPolicyRelId());
-
 		passwordPolicyRelImpl.setPasswordPolicyId(getPasswordPolicyId());
-
-		PasswordPolicyRelModelImpl passwordPolicyRelModelImpl = passwordPolicyRelImpl;
-
-		passwordPolicyRelModelImpl._originalPasswordPolicyId = passwordPolicyRelModelImpl._passwordPolicyId;
-
-		passwordPolicyRelModelImpl._setOriginalPasswordPolicyId = false;
 		passwordPolicyRelImpl.setClassNameId(getClassNameId());
-
-		passwordPolicyRelModelImpl._originalClassNameId = passwordPolicyRelModelImpl._classNameId;
-
-		passwordPolicyRelModelImpl._setOriginalClassNameId = false;
 		passwordPolicyRelImpl.setClassPK(getClassPK());
 
-		passwordPolicyRelModelImpl._originalClassPK = passwordPolicyRelModelImpl._classPK;
-
-		passwordPolicyRelModelImpl._setOriginalClassPK = false;
+		passwordPolicyRelImpl.resetOriginalValues();
 
 		return passwordPolicyRelImpl;
 	}
@@ -257,6 +244,22 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		PasswordPolicyRelModelImpl passwordPolicyRelModelImpl = this;
+
+		passwordPolicyRelModelImpl._originalPasswordPolicyId = passwordPolicyRelModelImpl._passwordPolicyId;
+
+		passwordPolicyRelModelImpl._setOriginalPasswordPolicyId = false;
+
+		passwordPolicyRelModelImpl._originalClassNameId = passwordPolicyRelModelImpl._classNameId;
+
+		passwordPolicyRelModelImpl._setOriginalClassNameId = false;
+
+		passwordPolicyRelModelImpl._originalClassPK = passwordPolicyRelModelImpl._classPK;
+
+		passwordPolicyRelModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

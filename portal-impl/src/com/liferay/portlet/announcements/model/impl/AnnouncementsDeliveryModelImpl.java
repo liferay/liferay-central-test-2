@@ -271,25 +271,14 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		AnnouncementsDeliveryImpl announcementsDeliveryImpl = new AnnouncementsDeliveryImpl();
 
 		announcementsDeliveryImpl.setDeliveryId(getDeliveryId());
-
 		announcementsDeliveryImpl.setCompanyId(getCompanyId());
-
 		announcementsDeliveryImpl.setUserId(getUserId());
-
-		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = announcementsDeliveryImpl;
-
-		announcementsDeliveryModelImpl._originalUserId = announcementsDeliveryModelImpl._userId;
-
-		announcementsDeliveryModelImpl._setOriginalUserId = false;
 		announcementsDeliveryImpl.setType(getType());
-
-		announcementsDeliveryModelImpl._originalType = announcementsDeliveryModelImpl._type;
-
 		announcementsDeliveryImpl.setEmail(getEmail());
-
 		announcementsDeliveryImpl.setSms(getSms());
-
 		announcementsDeliveryImpl.setWebsite(getWebsite());
+
+		announcementsDeliveryImpl.resetOriginalValues();
 
 		return announcementsDeliveryImpl;
 	}
@@ -334,6 +323,16 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = this;
+
+		announcementsDeliveryModelImpl._originalUserId = announcementsDeliveryModelImpl._userId;
+
+		announcementsDeliveryModelImpl._setOriginalUserId = false;
+
+		announcementsDeliveryModelImpl._originalType = announcementsDeliveryModelImpl._type;
 	}
 
 	public String toString() {

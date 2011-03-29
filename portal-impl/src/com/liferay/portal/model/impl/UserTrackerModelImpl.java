@@ -224,20 +224,15 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		UserTrackerImpl userTrackerImpl = new UserTrackerImpl();
 
 		userTrackerImpl.setUserTrackerId(getUserTrackerId());
-
 		userTrackerImpl.setCompanyId(getCompanyId());
-
 		userTrackerImpl.setUserId(getUserId());
-
 		userTrackerImpl.setModifiedDate(getModifiedDate());
-
 		userTrackerImpl.setSessionId(getSessionId());
-
 		userTrackerImpl.setRemoteAddr(getRemoteAddr());
-
 		userTrackerImpl.setRemoteHost(getRemoteHost());
-
 		userTrackerImpl.setUserAgent(getUserAgent());
+
+		userTrackerImpl.resetOriginalValues();
 
 		return userTrackerImpl;
 	}
@@ -282,6 +277,9 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

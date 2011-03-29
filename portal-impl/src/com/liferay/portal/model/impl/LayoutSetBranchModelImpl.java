@@ -314,34 +314,17 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		LayoutSetBranchImpl layoutSetBranchImpl = new LayoutSetBranchImpl();
 
 		layoutSetBranchImpl.setLayoutSetBranchId(getLayoutSetBranchId());
-
 		layoutSetBranchImpl.setGroupId(getGroupId());
-
-		LayoutSetBranchModelImpl layoutSetBranchModelImpl = layoutSetBranchImpl;
-
-		layoutSetBranchModelImpl._originalGroupId = layoutSetBranchModelImpl._groupId;
-
-		layoutSetBranchModelImpl._setOriginalGroupId = false;
 		layoutSetBranchImpl.setCompanyId(getCompanyId());
-
 		layoutSetBranchImpl.setUserId(getUserId());
-
 		layoutSetBranchImpl.setUserName(getUserName());
-
 		layoutSetBranchImpl.setCreateDate(getCreateDate());
-
 		layoutSetBranchImpl.setModifiedDate(getModifiedDate());
-
 		layoutSetBranchImpl.setPrivateLayout(getPrivateLayout());
-
-		layoutSetBranchModelImpl._originalPrivateLayout = layoutSetBranchModelImpl._privateLayout;
-
-		layoutSetBranchModelImpl._setOriginalPrivateLayout = false;
 		layoutSetBranchImpl.setName(getName());
-
-		layoutSetBranchModelImpl._originalName = layoutSetBranchModelImpl._name;
-
 		layoutSetBranchImpl.setDescription(getDescription());
+
+		layoutSetBranchImpl.resetOriginalValues();
 
 		return layoutSetBranchImpl;
 	}
@@ -384,6 +367,20 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		LayoutSetBranchModelImpl layoutSetBranchModelImpl = this;
+
+		layoutSetBranchModelImpl._originalGroupId = layoutSetBranchModelImpl._groupId;
+
+		layoutSetBranchModelImpl._setOriginalGroupId = false;
+
+		layoutSetBranchModelImpl._originalPrivateLayout = layoutSetBranchModelImpl._privateLayout;
+
+		layoutSetBranchModelImpl._setOriginalPrivateLayout = false;
+
+		layoutSetBranchModelImpl._originalName = layoutSetBranchModelImpl._name;
 	}
 
 	public String toString() {

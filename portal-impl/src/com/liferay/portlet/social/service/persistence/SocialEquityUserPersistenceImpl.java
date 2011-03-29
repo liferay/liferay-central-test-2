@@ -167,6 +167,8 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 				Long.valueOf(socialEquityUser.getGroupId()),
 				Long.valueOf(socialEquityUser.getUserId())
 			}, socialEquityUser);
+
+		socialEquityUser.resetOriginalValues();
 	}
 
 	/**

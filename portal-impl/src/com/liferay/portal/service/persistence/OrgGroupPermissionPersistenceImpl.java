@@ -110,6 +110,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		EntityCacheUtil.putResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey(),
 			orgGroupPermission);
+
+		orgGroupPermission.resetOriginalValues();
 	}
 
 	/**

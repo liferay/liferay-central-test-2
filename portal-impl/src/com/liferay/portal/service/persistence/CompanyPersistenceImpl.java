@@ -123,6 +123,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
 			new Object[] { Long.valueOf(company.getLogoId()) }, company);
+
+		company.resetOriginalValues();
 	}
 
 	/**

@@ -276,29 +276,15 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		MBBanImpl mbBanImpl = new MBBanImpl();
 
 		mbBanImpl.setBanId(getBanId());
-
 		mbBanImpl.setGroupId(getGroupId());
-
-		MBBanModelImpl mbBanModelImpl = mbBanImpl;
-
-		mbBanModelImpl._originalGroupId = mbBanModelImpl._groupId;
-
-		mbBanModelImpl._setOriginalGroupId = false;
 		mbBanImpl.setCompanyId(getCompanyId());
-
 		mbBanImpl.setUserId(getUserId());
-
 		mbBanImpl.setUserName(getUserName());
-
 		mbBanImpl.setCreateDate(getCreateDate());
-
 		mbBanImpl.setModifiedDate(getModifiedDate());
-
 		mbBanImpl.setBanUserId(getBanUserId());
 
-		mbBanModelImpl._originalBanUserId = mbBanModelImpl._banUserId;
-
-		mbBanModelImpl._setOriginalBanUserId = false;
+		mbBanImpl.resetOriginalValues();
 
 		return mbBanImpl;
 	}
@@ -343,6 +329,18 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBBanModelImpl mbBanModelImpl = this;
+
+		mbBanModelImpl._originalGroupId = mbBanModelImpl._groupId;
+
+		mbBanModelImpl._setOriginalGroupId = false;
+
+		mbBanModelImpl._originalBanUserId = mbBanModelImpl._banUserId;
+
+		mbBanModelImpl._setOriginalBanUserId = false;
 	}
 
 	public String toString() {

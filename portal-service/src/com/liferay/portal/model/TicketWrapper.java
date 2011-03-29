@@ -258,5 +258,9 @@ public class TicketWrapper implements Ticket {
 		return _ticket;
 	}
 
+	public void resetOriginalValues() {
+		_ticket.resetOriginalValues();
+	}
+
 	private Ticket _ticket;
 }

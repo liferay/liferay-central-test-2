@@ -457,64 +457,32 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
 
 		mbMailingListImpl.setUuid(getUuid());
-
-		MBMailingListModelImpl mbMailingListModelImpl = mbMailingListImpl;
-
-		mbMailingListModelImpl._originalUuid = mbMailingListModelImpl._uuid;
-
 		mbMailingListImpl.setMailingListId(getMailingListId());
-
 		mbMailingListImpl.setGroupId(getGroupId());
-
-		mbMailingListModelImpl._originalGroupId = mbMailingListModelImpl._groupId;
-
-		mbMailingListModelImpl._setOriginalGroupId = false;
 		mbMailingListImpl.setCompanyId(getCompanyId());
-
 		mbMailingListImpl.setUserId(getUserId());
-
 		mbMailingListImpl.setUserName(getUserName());
-
 		mbMailingListImpl.setCreateDate(getCreateDate());
-
 		mbMailingListImpl.setModifiedDate(getModifiedDate());
-
 		mbMailingListImpl.setCategoryId(getCategoryId());
-
-		mbMailingListModelImpl._originalCategoryId = mbMailingListModelImpl._categoryId;
-
-		mbMailingListModelImpl._setOriginalCategoryId = false;
 		mbMailingListImpl.setEmailAddress(getEmailAddress());
-
 		mbMailingListImpl.setInProtocol(getInProtocol());
-
 		mbMailingListImpl.setInServerName(getInServerName());
-
 		mbMailingListImpl.setInServerPort(getInServerPort());
-
 		mbMailingListImpl.setInUseSSL(getInUseSSL());
-
 		mbMailingListImpl.setInUserName(getInUserName());
-
 		mbMailingListImpl.setInPassword(getInPassword());
-
 		mbMailingListImpl.setInReadInterval(getInReadInterval());
-
 		mbMailingListImpl.setOutEmailAddress(getOutEmailAddress());
-
 		mbMailingListImpl.setOutCustom(getOutCustom());
-
 		mbMailingListImpl.setOutServerName(getOutServerName());
-
 		mbMailingListImpl.setOutServerPort(getOutServerPort());
-
 		mbMailingListImpl.setOutUseSSL(getOutUseSSL());
-
 		mbMailingListImpl.setOutUserName(getOutUserName());
-
 		mbMailingListImpl.setOutPassword(getOutPassword());
-
 		mbMailingListImpl.setActive(getActive());
+
+		mbMailingListImpl.resetOriginalValues();
 
 		return mbMailingListImpl;
 	}
@@ -559,6 +527,20 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBMailingListModelImpl mbMailingListModelImpl = this;
+
+		mbMailingListModelImpl._originalUuid = mbMailingListModelImpl._uuid;
+
+		mbMailingListModelImpl._originalGroupId = mbMailingListModelImpl._groupId;
+
+		mbMailingListModelImpl._setOriginalGroupId = false;
+
+		mbMailingListModelImpl._originalCategoryId = mbMailingListModelImpl._categoryId;
+
+		mbMailingListModelImpl._setOriginalCategoryId = false;
 	}
 
 	public String toString() {

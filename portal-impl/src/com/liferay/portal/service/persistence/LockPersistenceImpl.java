@@ -122,6 +122,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_K,
 			new Object[] { lock.getClassName(), lock.getKey() }, lock);
+
+		lock.resetOriginalValues();
 	}
 
 	/**

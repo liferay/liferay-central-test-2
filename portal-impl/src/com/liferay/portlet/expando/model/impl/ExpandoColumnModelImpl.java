@@ -243,25 +243,14 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
 
 		expandoColumnImpl.setColumnId(getColumnId());
-
 		expandoColumnImpl.setCompanyId(getCompanyId());
-
 		expandoColumnImpl.setTableId(getTableId());
-
-		ExpandoColumnModelImpl expandoColumnModelImpl = expandoColumnImpl;
-
-		expandoColumnModelImpl._originalTableId = expandoColumnModelImpl._tableId;
-
-		expandoColumnModelImpl._setOriginalTableId = false;
 		expandoColumnImpl.setName(getName());
-
-		expandoColumnModelImpl._originalName = expandoColumnModelImpl._name;
-
 		expandoColumnImpl.setType(getType());
-
 		expandoColumnImpl.setDefaultData(getDefaultData());
-
 		expandoColumnImpl.setTypeSettings(getTypeSettings());
+
+		expandoColumnImpl.resetOriginalValues();
 
 		return expandoColumnImpl;
 	}
@@ -304,6 +293,16 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ExpandoColumnModelImpl expandoColumnModelImpl = this;
+
+		expandoColumnModelImpl._originalTableId = expandoColumnModelImpl._tableId;
+
+		expandoColumnModelImpl._setOriginalTableId = false;
+
+		expandoColumnModelImpl._originalName = expandoColumnModelImpl._name;
 	}
 
 	public String toString() {

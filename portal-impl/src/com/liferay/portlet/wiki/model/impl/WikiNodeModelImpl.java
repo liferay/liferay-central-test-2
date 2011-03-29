@@ -322,35 +322,18 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
 
 		wikiNodeImpl.setUuid(getUuid());
-
-		WikiNodeModelImpl wikiNodeModelImpl = wikiNodeImpl;
-
-		wikiNodeModelImpl._originalUuid = wikiNodeModelImpl._uuid;
-
 		wikiNodeImpl.setNodeId(getNodeId());
-
 		wikiNodeImpl.setGroupId(getGroupId());
-
-		wikiNodeModelImpl._originalGroupId = wikiNodeModelImpl._groupId;
-
-		wikiNodeModelImpl._setOriginalGroupId = false;
 		wikiNodeImpl.setCompanyId(getCompanyId());
-
 		wikiNodeImpl.setUserId(getUserId());
-
 		wikiNodeImpl.setUserName(getUserName());
-
 		wikiNodeImpl.setCreateDate(getCreateDate());
-
 		wikiNodeImpl.setModifiedDate(getModifiedDate());
-
 		wikiNodeImpl.setName(getName());
-
-		wikiNodeModelImpl._originalName = wikiNodeModelImpl._name;
-
 		wikiNodeImpl.setDescription(getDescription());
-
 		wikiNodeImpl.setLastPostDate(getLastPostDate());
+
+		wikiNodeImpl.resetOriginalValues();
 
 		return wikiNodeImpl;
 	}
@@ -394,6 +377,18 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		WikiNodeModelImpl wikiNodeModelImpl = this;
+
+		wikiNodeModelImpl._originalUuid = wikiNodeModelImpl._uuid;
+
+		wikiNodeModelImpl._originalGroupId = wikiNodeModelImpl._groupId;
+
+		wikiNodeModelImpl._setOriginalGroupId = false;
+
+		wikiNodeModelImpl._originalName = wikiNodeModelImpl._name;
 	}
 
 	public String toString() {

@@ -311,5 +311,9 @@ public class RatingsEntryWrapper implements RatingsEntry {
 		return _ratingsEntry;
 	}
 
+	public void resetOriginalValues() {
+		_ratingsEntry.resetOriginalValues();
+	}
+
 	private RatingsEntry _ratingsEntry;
 }

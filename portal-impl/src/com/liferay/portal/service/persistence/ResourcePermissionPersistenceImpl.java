@@ -159,6 +159,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			resourcePermission.getPrimKey(),
 				Long.valueOf(resourcePermission.getRoleId())
 			}, resourcePermission);
+
+		resourcePermission.resetOriginalValues();
 	}
 
 	/**

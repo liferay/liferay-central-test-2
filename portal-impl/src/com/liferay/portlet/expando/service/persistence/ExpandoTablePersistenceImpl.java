@@ -123,6 +123,8 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 				
 			expandoTable.getName()
 			}, expandoTable);
+
+		expandoTable.resetOriginalValues();
 	}
 
 	/**

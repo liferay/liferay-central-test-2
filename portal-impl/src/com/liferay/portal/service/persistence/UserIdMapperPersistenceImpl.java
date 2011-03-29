@@ -126,6 +126,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				
 			userIdMapper.getExternalUserId()
 			}, userIdMapper);
+
+		userIdMapper.resetOriginalValues();
 	}
 
 	/**

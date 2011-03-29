@@ -170,6 +170,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				Long.valueOf(blogsStatsUser.getGroupId()),
 				Long.valueOf(blogsStatsUser.getUserId())
 			}, blogsStatsUser);
+
+		blogsStatsUser.resetOriginalValues();
 	}
 
 	/**

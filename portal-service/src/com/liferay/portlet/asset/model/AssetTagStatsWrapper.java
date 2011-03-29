@@ -201,5 +201,9 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		return _assetTagStats;
 	}
 
+	public void resetOriginalValues() {
+		_assetTagStats.resetOriginalValues();
+	}
+
 	private AssetTagStats _assetTagStats;
 }

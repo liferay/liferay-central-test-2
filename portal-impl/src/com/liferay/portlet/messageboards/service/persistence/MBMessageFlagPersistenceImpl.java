@@ -191,6 +191,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 				Long.valueOf(mbMessageFlag.getMessageId()),
 				Integer.valueOf(mbMessageFlag.getFlag())
 			}, mbMessageFlag);
+
+		mbMessageFlag.resetOriginalValues();
 	}
 
 	/**

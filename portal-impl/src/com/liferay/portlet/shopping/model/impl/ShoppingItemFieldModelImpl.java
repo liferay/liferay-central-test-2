@@ -183,14 +183,12 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 		ShoppingItemFieldImpl shoppingItemFieldImpl = new ShoppingItemFieldImpl();
 
 		shoppingItemFieldImpl.setItemFieldId(getItemFieldId());
-
 		shoppingItemFieldImpl.setItemId(getItemId());
-
 		shoppingItemFieldImpl.setName(getName());
-
 		shoppingItemFieldImpl.setValues(getValues());
-
 		shoppingItemFieldImpl.setDescription(getDescription());
+
+		shoppingItemFieldImpl.resetOriginalValues();
 
 		return shoppingItemFieldImpl;
 	}
@@ -248,6 +246,9 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

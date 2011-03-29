@@ -274,32 +274,18 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		LockImpl lockImpl = new LockImpl();
 
 		lockImpl.setUuid(getUuid());
-
 		lockImpl.setLockId(getLockId());
-
 		lockImpl.setCompanyId(getCompanyId());
-
 		lockImpl.setUserId(getUserId());
-
 		lockImpl.setUserName(getUserName());
-
 		lockImpl.setCreateDate(getCreateDate());
-
 		lockImpl.setClassName(getClassName());
-
-		LockModelImpl lockModelImpl = lockImpl;
-
-		lockModelImpl._originalClassName = lockModelImpl._className;
-
 		lockImpl.setKey(getKey());
-
-		lockModelImpl._originalKey = lockModelImpl._key;
-
 		lockImpl.setOwner(getOwner());
-
 		lockImpl.setInheritable(getInheritable());
-
 		lockImpl.setExpirationDate(getExpirationDate());
+
+		lockImpl.resetOriginalValues();
 
 		return lockImpl;
 	}
@@ -344,6 +330,14 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		LockModelImpl lockModelImpl = this;
+
+		lockModelImpl._originalClassName = lockModelImpl._className;
+
+		lockModelImpl._originalKey = lockModelImpl._key;
 	}
 
 	public String toString() {

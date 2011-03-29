@@ -191,5 +191,9 @@ public class VirtualHostWrapper implements VirtualHost {
 		return _virtualHost;
 	}
 
+	public void resetOriginalValues() {
+		_virtualHost.resetOriginalValues();
+	}
+
 	private VirtualHost _virtualHost;
 }

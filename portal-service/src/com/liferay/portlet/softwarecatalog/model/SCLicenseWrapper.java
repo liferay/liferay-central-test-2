@@ -255,5 +255,9 @@ public class SCLicenseWrapper implements SCLicense {
 		return _scLicense;
 	}
 
+	public void resetOriginalValues() {
+		_scLicense.resetOriginalValues();
+	}
+
 	private SCLicense _scLicense;
 }

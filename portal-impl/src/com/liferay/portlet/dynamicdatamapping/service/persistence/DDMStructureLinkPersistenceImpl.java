@@ -122,6 +122,8 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 				Long.valueOf(ddmStructureLink.getClassPK()),
 				Long.valueOf(ddmStructureLink.getStructureId())
 			}, ddmStructureLink);
+
+		ddmStructureLink.resetOriginalValues();
 	}
 
 	/**

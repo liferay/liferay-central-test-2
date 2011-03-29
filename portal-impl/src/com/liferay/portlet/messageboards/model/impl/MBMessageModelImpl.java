@@ -538,61 +538,32 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
 		mbMessageImpl.setUuid(getUuid());
-
-		MBMessageModelImpl mbMessageModelImpl = mbMessageImpl;
-
-		mbMessageModelImpl._originalUuid = mbMessageModelImpl._uuid;
-
 		mbMessageImpl.setMessageId(getMessageId());
-
 		mbMessageImpl.setGroupId(getGroupId());
-
-		mbMessageModelImpl._originalGroupId = mbMessageModelImpl._groupId;
-
-		mbMessageModelImpl._setOriginalGroupId = false;
 		mbMessageImpl.setCompanyId(getCompanyId());
-
 		mbMessageImpl.setUserId(getUserId());
-
 		mbMessageImpl.setUserName(getUserName());
-
 		mbMessageImpl.setCreateDate(getCreateDate());
-
 		mbMessageImpl.setModifiedDate(getModifiedDate());
-
 		mbMessageImpl.setClassNameId(getClassNameId());
-
 		mbMessageImpl.setClassPK(getClassPK());
-
 		mbMessageImpl.setCategoryId(getCategoryId());
-
 		mbMessageImpl.setThreadId(getThreadId());
-
 		mbMessageImpl.setRootMessageId(getRootMessageId());
-
 		mbMessageImpl.setParentMessageId(getParentMessageId());
-
 		mbMessageImpl.setSubject(getSubject());
-
 		mbMessageImpl.setBody(getBody());
-
 		mbMessageImpl.setFormat(getFormat());
-
 		mbMessageImpl.setAttachments(getAttachments());
-
 		mbMessageImpl.setAnonymous(getAnonymous());
-
 		mbMessageImpl.setPriority(getPriority());
-
 		mbMessageImpl.setAllowPingbacks(getAllowPingbacks());
-
 		mbMessageImpl.setStatus(getStatus());
-
 		mbMessageImpl.setStatusByUserId(getStatusByUserId());
-
 		mbMessageImpl.setStatusByUserName(getStatusByUserName());
-
 		mbMessageImpl.setStatusDate(getStatusDate());
+
+		mbMessageImpl.resetOriginalValues();
 
 		return mbMessageImpl;
 	}
@@ -649,6 +620,16 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		MBMessageModelImpl mbMessageModelImpl = this;
+
+		mbMessageModelImpl._originalUuid = mbMessageModelImpl._uuid;
+
+		mbMessageModelImpl._originalGroupId = mbMessageModelImpl._groupId;
+
+		mbMessageModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

@@ -401,41 +401,22 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		DLFileShortcutImpl dlFileShortcutImpl = new DLFileShortcutImpl();
 
 		dlFileShortcutImpl.setUuid(getUuid());
-
-		DLFileShortcutModelImpl dlFileShortcutModelImpl = dlFileShortcutImpl;
-
-		dlFileShortcutModelImpl._originalUuid = dlFileShortcutModelImpl._uuid;
-
 		dlFileShortcutImpl.setFileShortcutId(getFileShortcutId());
-
 		dlFileShortcutImpl.setGroupId(getGroupId());
-
-		dlFileShortcutModelImpl._originalGroupId = dlFileShortcutModelImpl._groupId;
-
-		dlFileShortcutModelImpl._setOriginalGroupId = false;
 		dlFileShortcutImpl.setCompanyId(getCompanyId());
-
 		dlFileShortcutImpl.setUserId(getUserId());
-
 		dlFileShortcutImpl.setUserName(getUserName());
-
 		dlFileShortcutImpl.setCreateDate(getCreateDate());
-
 		dlFileShortcutImpl.setModifiedDate(getModifiedDate());
-
 		dlFileShortcutImpl.setRepositoryId(getRepositoryId());
-
 		dlFileShortcutImpl.setFolderId(getFolderId());
-
 		dlFileShortcutImpl.setToFileEntryId(getToFileEntryId());
-
 		dlFileShortcutImpl.setStatus(getStatus());
-
 		dlFileShortcutImpl.setStatusByUserId(getStatusByUserId());
-
 		dlFileShortcutImpl.setStatusByUserName(getStatusByUserName());
-
 		dlFileShortcutImpl.setStatusDate(getStatusDate());
+
+		dlFileShortcutImpl.resetOriginalValues();
 
 		return dlFileShortcutImpl;
 	}
@@ -480,6 +461,16 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = this;
+
+		dlFileShortcutModelImpl._originalUuid = dlFileShortcutModelImpl._uuid;
+
+		dlFileShortcutModelImpl._originalGroupId = dlFileShortcutModelImpl._groupId;
+
+		dlFileShortcutModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {

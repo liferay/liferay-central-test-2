@@ -298,33 +298,16 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
 
 		ratingsEntryImpl.setEntryId(getEntryId());
-
 		ratingsEntryImpl.setCompanyId(getCompanyId());
-
 		ratingsEntryImpl.setUserId(getUserId());
-
-		RatingsEntryModelImpl ratingsEntryModelImpl = ratingsEntryImpl;
-
-		ratingsEntryModelImpl._originalUserId = ratingsEntryModelImpl._userId;
-
-		ratingsEntryModelImpl._setOriginalUserId = false;
 		ratingsEntryImpl.setUserName(getUserName());
-
 		ratingsEntryImpl.setCreateDate(getCreateDate());
-
 		ratingsEntryImpl.setModifiedDate(getModifiedDate());
-
 		ratingsEntryImpl.setClassNameId(getClassNameId());
-
-		ratingsEntryModelImpl._originalClassNameId = ratingsEntryModelImpl._classNameId;
-
-		ratingsEntryModelImpl._setOriginalClassNameId = false;
 		ratingsEntryImpl.setClassPK(getClassPK());
-
-		ratingsEntryModelImpl._originalClassPK = ratingsEntryModelImpl._classPK;
-
-		ratingsEntryModelImpl._setOriginalClassPK = false;
 		ratingsEntryImpl.setScore(getScore());
+
+		ratingsEntryImpl.resetOriginalValues();
 
 		return ratingsEntryImpl;
 	}
@@ -369,6 +352,22 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		RatingsEntryModelImpl ratingsEntryModelImpl = this;
+
+		ratingsEntryModelImpl._originalUserId = ratingsEntryModelImpl._userId;
+
+		ratingsEntryModelImpl._setOriginalUserId = false;
+
+		ratingsEntryModelImpl._originalClassNameId = ratingsEntryModelImpl._classNameId;
+
+		ratingsEntryModelImpl._setOriginalClassNameId = false;
+
+		ratingsEntryModelImpl._originalClassPK = ratingsEntryModelImpl._classPK;
+
+		ratingsEntryModelImpl._setOriginalClassPK = false;
 	}
 
 	public String toString() {

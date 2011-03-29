@@ -144,6 +144,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				Long.valueOf(dlFileRank.getUserId()),
 				Long.valueOf(dlFileRank.getFileEntryId())
 			}, dlFileRank);
+
+		dlFileRank.resetOriginalValues();
 	}
 
 	/**

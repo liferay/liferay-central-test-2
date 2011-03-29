@@ -588,5 +588,9 @@ public class AssetCategoryWrapper implements AssetCategory {
 		return _assetCategory;
 	}
 
+	public void resetOriginalValues() {
+		_assetCategory.resetOriginalValues();
+	}
+
 	private AssetCategory _assetCategory;
 }

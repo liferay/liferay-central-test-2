@@ -388,6 +388,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				
 			wikiPage.getTitle(), Double.valueOf(wikiPage.getVersion())
 			}, wikiPage);
+
+		wikiPage.resetOriginalValues();
 	}
 
 	/**

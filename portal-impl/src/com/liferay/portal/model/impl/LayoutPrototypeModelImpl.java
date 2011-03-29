@@ -315,16 +315,13 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		LayoutPrototypeImpl layoutPrototypeImpl = new LayoutPrototypeImpl();
 
 		layoutPrototypeImpl.setLayoutPrototypeId(getLayoutPrototypeId());
-
 		layoutPrototypeImpl.setCompanyId(getCompanyId());
-
 		layoutPrototypeImpl.setName(getName());
-
 		layoutPrototypeImpl.setDescription(getDescription());
-
 		layoutPrototypeImpl.setSettings(getSettings());
-
 		layoutPrototypeImpl.setActive(getActive());
+
+		layoutPrototypeImpl.resetOriginalValues();
 
 		return layoutPrototypeImpl;
 	}
@@ -369,6 +366,9 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

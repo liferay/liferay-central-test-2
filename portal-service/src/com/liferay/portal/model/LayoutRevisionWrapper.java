@@ -1268,5 +1268,9 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		return _layoutRevision;
 	}
 
+	public void resetOriginalValues() {
+		_layoutRevision.resetOriginalValues();
+	}
+
 	private LayoutRevision _layoutRevision;
 }

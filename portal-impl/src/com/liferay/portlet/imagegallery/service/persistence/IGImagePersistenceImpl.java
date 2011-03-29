@@ -212,6 +212,8 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
 			new Object[] { Long.valueOf(igImage.getCustom2ImageId()) }, igImage);
+
+		igImage.resetOriginalValues();
 	}
 
 	/**

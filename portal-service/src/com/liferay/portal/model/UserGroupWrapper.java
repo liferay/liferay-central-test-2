@@ -239,5 +239,9 @@ public class UserGroupWrapper implements UserGroup {
 		return _userGroup;
 	}
 
+	public void resetOriginalValues() {
+		_userGroup.resetOriginalValues();
+	}
+
 	private UserGroup _userGroup;
 }

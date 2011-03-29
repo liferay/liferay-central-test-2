@@ -192,5 +192,9 @@ public class WikiPageResourceWrapper implements WikiPageResource {
 		return _wikiPageResource;
 	}
 
+	public void resetOriginalValues() {
+		_wikiPageResource.resetOriginalValues();
+	}
+
 	private WikiPageResource _wikiPageResource;
 }

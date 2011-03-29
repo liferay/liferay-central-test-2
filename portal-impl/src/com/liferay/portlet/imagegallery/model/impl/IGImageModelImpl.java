@@ -379,52 +379,21 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		IGImageImpl igImageImpl = new IGImageImpl();
 
 		igImageImpl.setUuid(getUuid());
-
-		IGImageModelImpl igImageModelImpl = igImageImpl;
-
-		igImageModelImpl._originalUuid = igImageModelImpl._uuid;
-
 		igImageImpl.setImageId(getImageId());
-
 		igImageImpl.setGroupId(getGroupId());
-
-		igImageModelImpl._originalGroupId = igImageModelImpl._groupId;
-
-		igImageModelImpl._setOriginalGroupId = false;
 		igImageImpl.setCompanyId(getCompanyId());
-
 		igImageImpl.setUserId(getUserId());
-
 		igImageImpl.setCreateDate(getCreateDate());
-
 		igImageImpl.setModifiedDate(getModifiedDate());
-
 		igImageImpl.setFolderId(getFolderId());
-
 		igImageImpl.setName(getName());
-
 		igImageImpl.setDescription(getDescription());
-
 		igImageImpl.setSmallImageId(getSmallImageId());
-
-		igImageModelImpl._originalSmallImageId = igImageModelImpl._smallImageId;
-
-		igImageModelImpl._setOriginalSmallImageId = false;
 		igImageImpl.setLargeImageId(getLargeImageId());
-
-		igImageModelImpl._originalLargeImageId = igImageModelImpl._largeImageId;
-
-		igImageModelImpl._setOriginalLargeImageId = false;
 		igImageImpl.setCustom1ImageId(getCustom1ImageId());
-
-		igImageModelImpl._originalCustom1ImageId = igImageModelImpl._custom1ImageId;
-
-		igImageModelImpl._setOriginalCustom1ImageId = false;
 		igImageImpl.setCustom2ImageId(getCustom2ImageId());
 
-		igImageModelImpl._originalCustom2ImageId = igImageModelImpl._custom2ImageId;
-
-		igImageModelImpl._setOriginalCustom2ImageId = false;
+		igImageImpl.resetOriginalValues();
 
 		return igImageImpl;
 	}
@@ -475,6 +444,32 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		IGImageModelImpl igImageModelImpl = this;
+
+		igImageModelImpl._originalUuid = igImageModelImpl._uuid;
+
+		igImageModelImpl._originalGroupId = igImageModelImpl._groupId;
+
+		igImageModelImpl._setOriginalGroupId = false;
+
+		igImageModelImpl._originalSmallImageId = igImageModelImpl._smallImageId;
+
+		igImageModelImpl._setOriginalSmallImageId = false;
+
+		igImageModelImpl._originalLargeImageId = igImageModelImpl._largeImageId;
+
+		igImageModelImpl._setOriginalLargeImageId = false;
+
+		igImageModelImpl._originalCustom1ImageId = igImageModelImpl._custom1ImageId;
+
+		igImageModelImpl._setOriginalCustom1ImageId = false;
+
+		igImageModelImpl._originalCustom2ImageId = igImageModelImpl._custom2ImageId;
+
+		igImageModelImpl._setOriginalCustom2ImageId = false;
 	}
 
 	public String toString() {

@@ -626,5 +626,9 @@ public class MBMailingListWrapper implements MBMailingList {
 		return _mbMailingList;
 	}
 
+	public void resetOriginalValues() {
+		_mbMailingList.resetOriginalValues();
+	}
+
 	private MBMailingList _mbMailingList;
 }

@@ -127,8 +127,9 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		CounterImpl counterImpl = new CounterImpl();
 
 		counterImpl.setName(getName());
-
 		counterImpl.setCurrentId(getCurrentId());
+
+		counterImpl.resetOriginalValues();
 
 		return counterImpl;
 	}
@@ -165,6 +166,9 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

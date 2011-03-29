@@ -144,6 +144,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				Long.valueOf(mbMailingList.getGroupId()),
 				Long.valueOf(mbMailingList.getCategoryId())
 			}, mbMailingList);
+
+		mbMailingList.resetOriginalValues();
 	}
 
 	/**

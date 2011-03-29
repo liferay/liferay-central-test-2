@@ -196,6 +196,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				
 			dlFolder.getName()
 			}, dlFolder);
+
+		dlFolder.resetOriginalValues();
 	}
 
 	/**

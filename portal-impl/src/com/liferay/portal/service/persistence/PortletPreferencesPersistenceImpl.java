@@ -151,6 +151,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				
 			portletPreferences.getPortletId()
 			}, portletPreferences);
+
+		portletPreferences.resetOriginalValues();
 	}
 
 	/**

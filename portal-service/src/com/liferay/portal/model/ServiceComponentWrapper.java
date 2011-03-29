@@ -222,5 +222,9 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		return _serviceComponent;
 	}
 
+	public void resetOriginalValues() {
+		_serviceComponent.resetOriginalValues();
+	}
+
 	private ServiceComponent _serviceComponent;
 }

@@ -97,6 +97,8 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		EntityCacheUtil.putResult(PasswordTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordTrackerImpl.class, passwordTracker.getPrimaryKey(),
 			passwordTracker);
+
+		passwordTracker.resetOriginalValues();
 	}
 
 	/**

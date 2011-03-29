@@ -263,5 +263,9 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		return _expandoColumn;
 	}
 
+	public void resetOriginalValues() {
+		_expandoColumn.resetOriginalValues();
+	}
+
 	private ExpandoColumn _expandoColumn;
 }

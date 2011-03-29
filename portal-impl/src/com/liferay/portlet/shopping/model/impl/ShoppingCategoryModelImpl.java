@@ -283,24 +283,17 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		ShoppingCategoryImpl shoppingCategoryImpl = new ShoppingCategoryImpl();
 
 		shoppingCategoryImpl.setCategoryId(getCategoryId());
-
 		shoppingCategoryImpl.setGroupId(getGroupId());
-
 		shoppingCategoryImpl.setCompanyId(getCompanyId());
-
 		shoppingCategoryImpl.setUserId(getUserId());
-
 		shoppingCategoryImpl.setUserName(getUserName());
-
 		shoppingCategoryImpl.setCreateDate(getCreateDate());
-
 		shoppingCategoryImpl.setModifiedDate(getModifiedDate());
-
 		shoppingCategoryImpl.setParentCategoryId(getParentCategoryId());
-
 		shoppingCategoryImpl.setName(getName());
-
 		shoppingCategoryImpl.setDescription(getDescription());
+
+		shoppingCategoryImpl.resetOriginalValues();
 
 		return shoppingCategoryImpl;
 	}
@@ -358,6 +351,9 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

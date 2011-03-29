@@ -359,39 +359,20 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		JournalStructureImpl journalStructureImpl = new JournalStructureImpl();
 
 		journalStructureImpl.setUuid(getUuid());
-
-		JournalStructureModelImpl journalStructureModelImpl = journalStructureImpl;
-
-		journalStructureModelImpl._originalUuid = journalStructureModelImpl._uuid;
-
 		journalStructureImpl.setId(getId());
-
 		journalStructureImpl.setGroupId(getGroupId());
-
-		journalStructureModelImpl._originalGroupId = journalStructureModelImpl._groupId;
-
-		journalStructureModelImpl._setOriginalGroupId = false;
 		journalStructureImpl.setCompanyId(getCompanyId());
-
 		journalStructureImpl.setUserId(getUserId());
-
 		journalStructureImpl.setUserName(getUserName());
-
 		journalStructureImpl.setCreateDate(getCreateDate());
-
 		journalStructureImpl.setModifiedDate(getModifiedDate());
-
 		journalStructureImpl.setStructureId(getStructureId());
-
-		journalStructureModelImpl._originalStructureId = journalStructureModelImpl._structureId;
-
 		journalStructureImpl.setParentStructureId(getParentStructureId());
-
 		journalStructureImpl.setName(getName());
-
 		journalStructureImpl.setDescription(getDescription());
-
 		journalStructureImpl.setXsd(getXsd());
+
+		journalStructureImpl.resetOriginalValues();
 
 		return journalStructureImpl;
 	}
@@ -434,6 +415,18 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalStructureModelImpl journalStructureModelImpl = this;
+
+		journalStructureModelImpl._originalUuid = journalStructureModelImpl._uuid;
+
+		journalStructureModelImpl._originalGroupId = journalStructureModelImpl._groupId;
+
+		journalStructureModelImpl._setOriginalGroupId = false;
+
+		journalStructureModelImpl._originalStructureId = journalStructureModelImpl._structureId;
 	}
 
 	public String toString() {

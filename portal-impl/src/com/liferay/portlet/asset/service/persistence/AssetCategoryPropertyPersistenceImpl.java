@@ -143,6 +143,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				
 			assetCategoryProperty.getKey()
 			}, assetCategoryProperty);
+
+		assetCategoryProperty.resetOriginalValues();
 	}
 
 	/**

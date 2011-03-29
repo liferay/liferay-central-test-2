@@ -310,5 +310,9 @@ public class SubscriptionWrapper implements Subscription {
 		return _subscription;
 	}
 
+	public void resetOriginalValues() {
+		_subscription.resetOriginalValues();
+	}
+
 	private Subscription _subscription;
 }

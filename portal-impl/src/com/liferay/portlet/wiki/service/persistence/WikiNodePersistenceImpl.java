@@ -153,6 +153,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] { Long.valueOf(wikiNode.getGroupId()), wikiNode.getName() },
 			wikiNode);
+
+		wikiNode.resetOriginalValues();
 	}
 
 	/**

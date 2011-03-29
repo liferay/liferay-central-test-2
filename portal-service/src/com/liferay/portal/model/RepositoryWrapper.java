@@ -335,5 +335,9 @@ public class RepositoryWrapper implements Repository {
 		return _repository;
 	}
 
+	public void resetOriginalValues() {
+		_repository.resetOriginalValues();
+	}
+
 	private Repository _repository;
 }

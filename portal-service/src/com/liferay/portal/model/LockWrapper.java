@@ -358,5 +358,9 @@ public class LockWrapper implements Lock {
 		return _lock;
 	}
 
+	public void resetOriginalValues() {
+		_lock.resetOriginalValues();
+	}
+
 	private Lock _lock;
 }

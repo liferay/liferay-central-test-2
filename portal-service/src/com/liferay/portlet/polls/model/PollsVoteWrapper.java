@@ -235,5 +235,9 @@ public class PollsVoteWrapper implements PollsVote {
 		return _pollsVote;
 	}
 
+	public void resetOriginalValues() {
+		_pollsVote.resetOriginalValues();
+	}
+
 	private PollsVote _pollsVote;
 }

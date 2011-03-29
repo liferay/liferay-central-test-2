@@ -238,6 +238,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 				
 			group.getName()
 			}, group);
+
+		group.resetOriginalValues();
 	}
 
 	/**

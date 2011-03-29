@@ -205,17 +205,10 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		ResourceImpl resourceImpl = new ResourceImpl();
 
 		resourceImpl.setResourceId(getResourceId());
-
 		resourceImpl.setCodeId(getCodeId());
-
-		ResourceModelImpl resourceModelImpl = resourceImpl;
-
-		resourceModelImpl._originalCodeId = resourceModelImpl._codeId;
-
-		resourceModelImpl._setOriginalCodeId = false;
 		resourceImpl.setPrimKey(getPrimKey());
 
-		resourceModelImpl._originalPrimKey = resourceModelImpl._primKey;
+		resourceImpl.resetOriginalValues();
 
 		return resourceImpl;
 	}
@@ -260,6 +253,16 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		ResourceModelImpl resourceModelImpl = this;
+
+		resourceModelImpl._originalCodeId = resourceModelImpl._codeId;
+
+		resourceModelImpl._setOriginalCodeId = false;
+
+		resourceModelImpl._originalPrimKey = resourceModelImpl._primKey;
 	}
 
 	public String toString() {

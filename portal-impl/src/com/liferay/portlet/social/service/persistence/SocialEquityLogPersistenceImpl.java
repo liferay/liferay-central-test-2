@@ -212,6 +212,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				
 			socialEquityLog.getExtraData()
 			}, socialEquityLog);
+
+		socialEquityLog.resetOriginalValues();
 	}
 
 	/**

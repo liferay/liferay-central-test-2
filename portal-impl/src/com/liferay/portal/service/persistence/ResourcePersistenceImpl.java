@@ -111,6 +111,8 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				
 			resource.getPrimKey()
 			}, resource);
+
+		resource.resetOriginalValues();
 	}
 
 	/**

@@ -293,26 +293,18 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		RepositoryImpl repositoryImpl = new RepositoryImpl();
 
 		repositoryImpl.setRepositoryId(getRepositoryId());
-
 		repositoryImpl.setGroupId(getGroupId());
-
 		repositoryImpl.setCompanyId(getCompanyId());
-
 		repositoryImpl.setCreateDate(getCreateDate());
-
 		repositoryImpl.setModifiedDate(getModifiedDate());
-
 		repositoryImpl.setClassNameId(getClassNameId());
-
 		repositoryImpl.setName(getName());
-
 		repositoryImpl.setDescription(getDescription());
-
 		repositoryImpl.setPortletId(getPortletId());
-
 		repositoryImpl.setTypeSettings(getTypeSettings());
-
 		repositoryImpl.setDlFolderId(getDlFolderId());
+
+		repositoryImpl.resetOriginalValues();
 
 		return repositoryImpl;
 	}
@@ -357,6 +349,9 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

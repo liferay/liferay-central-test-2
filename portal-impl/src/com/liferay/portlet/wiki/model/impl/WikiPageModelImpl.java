@@ -562,68 +562,30 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		WikiPageImpl wikiPageImpl = new WikiPageImpl();
 
 		wikiPageImpl.setUuid(getUuid());
-
-		WikiPageModelImpl wikiPageModelImpl = wikiPageImpl;
-
-		wikiPageModelImpl._originalUuid = wikiPageModelImpl._uuid;
-
 		wikiPageImpl.setPageId(getPageId());
-
 		wikiPageImpl.setResourcePrimKey(getResourcePrimKey());
-
-		wikiPageModelImpl._originalResourcePrimKey = wikiPageModelImpl._resourcePrimKey;
-
-		wikiPageModelImpl._setOriginalResourcePrimKey = false;
 		wikiPageImpl.setGroupId(getGroupId());
-
-		wikiPageModelImpl._originalGroupId = wikiPageModelImpl._groupId;
-
-		wikiPageModelImpl._setOriginalGroupId = false;
 		wikiPageImpl.setCompanyId(getCompanyId());
-
 		wikiPageImpl.setUserId(getUserId());
-
 		wikiPageImpl.setUserName(getUserName());
-
 		wikiPageImpl.setCreateDate(getCreateDate());
-
 		wikiPageImpl.setModifiedDate(getModifiedDate());
-
 		wikiPageImpl.setNodeId(getNodeId());
-
-		wikiPageModelImpl._originalNodeId = wikiPageModelImpl._nodeId;
-
-		wikiPageModelImpl._setOriginalNodeId = false;
 		wikiPageImpl.setTitle(getTitle());
-
-		wikiPageModelImpl._originalTitle = wikiPageModelImpl._title;
-
 		wikiPageImpl.setVersion(getVersion());
-
-		wikiPageModelImpl._originalVersion = wikiPageModelImpl._version;
-
-		wikiPageModelImpl._setOriginalVersion = false;
 		wikiPageImpl.setMinorEdit(getMinorEdit());
-
 		wikiPageImpl.setContent(getContent());
-
 		wikiPageImpl.setSummary(getSummary());
-
 		wikiPageImpl.setFormat(getFormat());
-
 		wikiPageImpl.setHead(getHead());
-
 		wikiPageImpl.setParentTitle(getParentTitle());
-
 		wikiPageImpl.setRedirectTitle(getRedirectTitle());
-
 		wikiPageImpl.setStatus(getStatus());
-
 		wikiPageImpl.setStatusByUserId(getStatusByUserId());
-
 		wikiPageImpl.setStatusByUserName(getStatusByUserName());
-
 		wikiPageImpl.setStatusDate(getStatusDate());
+
+		wikiPageImpl.resetOriginalValues();
 
 		return wikiPageImpl;
 	}
@@ -697,6 +659,30 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		WikiPageModelImpl wikiPageModelImpl = this;
+
+		wikiPageModelImpl._originalUuid = wikiPageModelImpl._uuid;
+
+		wikiPageModelImpl._originalResourcePrimKey = wikiPageModelImpl._resourcePrimKey;
+
+		wikiPageModelImpl._setOriginalResourcePrimKey = false;
+
+		wikiPageModelImpl._originalGroupId = wikiPageModelImpl._groupId;
+
+		wikiPageModelImpl._setOriginalGroupId = false;
+
+		wikiPageModelImpl._originalNodeId = wikiPageModelImpl._nodeId;
+
+		wikiPageModelImpl._setOriginalNodeId = false;
+
+		wikiPageModelImpl._originalTitle = wikiPageModelImpl._title;
+
+		wikiPageModelImpl._originalVersion = wikiPageModelImpl._version;
+
+		wikiPageModelImpl._setOriginalVersion = false;
 	}
 
 	public String toString() {

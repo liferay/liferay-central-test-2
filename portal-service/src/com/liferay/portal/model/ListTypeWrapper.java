@@ -173,5 +173,9 @@ public class ListTypeWrapper implements ListType {
 		return _listType;
 	}
 
+	public void resetOriginalValues() {
+		_listType.resetOriginalValues();
+	}
+
 	private ListType _listType;
 }

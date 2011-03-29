@@ -407,5 +407,9 @@ public class CompanyWrapper implements Company {
 		return _company;
 	}
 
+	public void resetOriginalValues() {
+		_company.resetOriginalValues();
+	}
+
 	private Company _company;
 }

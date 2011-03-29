@@ -426,5 +426,9 @@ public class MBCategoryWrapper implements MBCategory {
 		return _mbCategory;
 	}
 
+	public void resetOriginalValues() {
+		_mbCategory.resetOriginalValues();
+	}
+
 	private MBCategory _mbCategory;
 }

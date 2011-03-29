@@ -218,5 +218,9 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 		return _shoppingItemField;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingItemField.resetOriginalValues();
+	}
+
 	private ShoppingItemField _shoppingItemField;
 }

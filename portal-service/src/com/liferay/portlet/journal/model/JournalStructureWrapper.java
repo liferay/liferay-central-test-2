@@ -378,5 +378,9 @@ public class JournalStructureWrapper implements JournalStructure {
 		return _journalStructure;
 	}
 
+	public void resetOriginalValues() {
+		_journalStructure.resetOriginalValues();
+	}
+
 	private JournalStructure _journalStructure;
 }

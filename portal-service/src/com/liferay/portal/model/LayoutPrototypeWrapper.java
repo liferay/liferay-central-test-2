@@ -332,5 +332,9 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 		return _layoutPrototype;
 	}
 
+	public void resetOriginalValues() {
+		_layoutPrototype.resetOriginalValues();
+	}
+
 	private LayoutPrototype _layoutPrototype;
 }

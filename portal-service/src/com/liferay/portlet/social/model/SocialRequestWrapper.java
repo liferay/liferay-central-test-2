@@ -403,5 +403,9 @@ public class SocialRequestWrapper implements SocialRequest {
 		return _socialRequest;
 	}
 
+	public void resetOriginalValues() {
+		_socialRequest.resetOriginalValues();
+	}
+
 	private SocialRequest _socialRequest;
 }

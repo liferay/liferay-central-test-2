@@ -300,5 +300,9 @@ public class ShoppingOrderItemWrapper implements ShoppingOrderItem {
 		return _shoppingOrderItem;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingOrderItem.resetOriginalValues();
+	}
+
 	private ShoppingOrderItem _shoppingOrderItem;
 }

@@ -143,6 +143,8 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				
 			ddmStructure.getStructureKey()
 			}, ddmStructure);
+
+		ddmStructure.resetOriginalValues();
 	}
 
 	/**

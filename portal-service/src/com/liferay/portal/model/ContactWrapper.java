@@ -692,5 +692,9 @@ public class ContactWrapper implements Contact {
 		return _contact;
 	}
 
+	public void resetOriginalValues() {
+		_contact.resetOriginalValues();
+	}
+
 	private Contact _contact;
 }

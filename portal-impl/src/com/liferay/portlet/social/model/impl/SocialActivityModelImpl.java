@@ -334,53 +334,18 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 		SocialActivityImpl socialActivityImpl = new SocialActivityImpl();
 
 		socialActivityImpl.setActivityId(getActivityId());
-
 		socialActivityImpl.setGroupId(getGroupId());
-
-		SocialActivityModelImpl socialActivityModelImpl = socialActivityImpl;
-
-		socialActivityModelImpl._originalGroupId = socialActivityModelImpl._groupId;
-
-		socialActivityModelImpl._setOriginalGroupId = false;
 		socialActivityImpl.setCompanyId(getCompanyId());
-
 		socialActivityImpl.setUserId(getUserId());
-
-		socialActivityModelImpl._originalUserId = socialActivityModelImpl._userId;
-
-		socialActivityModelImpl._setOriginalUserId = false;
 		socialActivityImpl.setCreateDate(getCreateDate());
-
-		socialActivityModelImpl._originalCreateDate = socialActivityModelImpl._createDate;
-
-		socialActivityModelImpl._setOriginalCreateDate = false;
 		socialActivityImpl.setMirrorActivityId(getMirrorActivityId());
-
-		socialActivityModelImpl._originalMirrorActivityId = socialActivityModelImpl._mirrorActivityId;
-
-		socialActivityModelImpl._setOriginalMirrorActivityId = false;
 		socialActivityImpl.setClassNameId(getClassNameId());
-
-		socialActivityModelImpl._originalClassNameId = socialActivityModelImpl._classNameId;
-
-		socialActivityModelImpl._setOriginalClassNameId = false;
 		socialActivityImpl.setClassPK(getClassPK());
-
-		socialActivityModelImpl._originalClassPK = socialActivityModelImpl._classPK;
-
-		socialActivityModelImpl._setOriginalClassPK = false;
 		socialActivityImpl.setType(getType());
-
-		socialActivityModelImpl._originalType = socialActivityModelImpl._type;
-
-		socialActivityModelImpl._setOriginalType = false;
 		socialActivityImpl.setExtraData(getExtraData());
-
 		socialActivityImpl.setReceiverUserId(getReceiverUserId());
 
-		socialActivityModelImpl._originalReceiverUserId = socialActivityModelImpl._receiverUserId;
-
-		socialActivityModelImpl._setOriginalReceiverUserId = false;
+		socialActivityImpl.resetOriginalValues();
 
 		return socialActivityImpl;
 	}
@@ -433,6 +398,42 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialActivityModelImpl socialActivityModelImpl = this;
+
+		socialActivityModelImpl._originalGroupId = socialActivityModelImpl._groupId;
+
+		socialActivityModelImpl._setOriginalGroupId = false;
+
+		socialActivityModelImpl._originalUserId = socialActivityModelImpl._userId;
+
+		socialActivityModelImpl._setOriginalUserId = false;
+
+		socialActivityModelImpl._originalCreateDate = socialActivityModelImpl._createDate;
+
+		socialActivityModelImpl._setOriginalCreateDate = false;
+
+		socialActivityModelImpl._originalMirrorActivityId = socialActivityModelImpl._mirrorActivityId;
+
+		socialActivityModelImpl._setOriginalMirrorActivityId = false;
+
+		socialActivityModelImpl._originalClassNameId = socialActivityModelImpl._classNameId;
+
+		socialActivityModelImpl._setOriginalClassNameId = false;
+
+		socialActivityModelImpl._originalClassPK = socialActivityModelImpl._classPK;
+
+		socialActivityModelImpl._setOriginalClassPK = false;
+
+		socialActivityModelImpl._originalType = socialActivityModelImpl._type;
+
+		socialActivityModelImpl._setOriginalType = false;
+
+		socialActivityModelImpl._originalReceiverUserId = socialActivityModelImpl._receiverUserId;
+
+		socialActivityModelImpl._setOriginalReceiverUserId = false;
 	}
 
 	public String toString() {

@@ -248,5 +248,9 @@ public class DLFileRankWrapper implements DLFileRank {
 		return _dlFileRank;
 	}
 
+	public void resetOriginalValues() {
+		_dlFileRank.resetOriginalValues();
+	}
+
 	private DLFileRank _dlFileRank;
 }

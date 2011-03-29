@@ -81,6 +81,8 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	public void cacheResult(ClusterGroup clusterGroup) {
 		EntityCacheUtil.putResult(ClusterGroupModelImpl.ENTITY_CACHE_ENABLED,
 			ClusterGroupImpl.class, clusterGroup.getPrimaryKey(), clusterGroup);
+
+		clusterGroup.resetOriginalValues();
 	}
 
 	/**

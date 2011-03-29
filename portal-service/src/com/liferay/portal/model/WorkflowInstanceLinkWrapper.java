@@ -330,5 +330,9 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 		return _workflowInstanceLink;
 	}
 
+	public void resetOriginalValues() {
+		_workflowInstanceLink.resetOriginalValues();
+	}
+
 	private WorkflowInstanceLink _workflowInstanceLink;
 }

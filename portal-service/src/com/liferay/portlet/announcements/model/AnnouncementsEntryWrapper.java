@@ -470,5 +470,9 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 		return _announcementsEntry;
 	}
 
+	public void resetOriginalValues() {
+		_announcementsEntry.resetOriginalValues();
+	}
+
 	private AnnouncementsEntry _announcementsEntry;
 }

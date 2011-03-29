@@ -272,35 +272,17 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		WorkflowDefinitionLinkImpl workflowDefinitionLinkImpl = new WorkflowDefinitionLinkImpl();
 
 		workflowDefinitionLinkImpl.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
-
 		workflowDefinitionLinkImpl.setGroupId(getGroupId());
-
-		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = workflowDefinitionLinkImpl;
-
-		workflowDefinitionLinkModelImpl._originalGroupId = workflowDefinitionLinkModelImpl._groupId;
-
-		workflowDefinitionLinkModelImpl._setOriginalGroupId = false;
 		workflowDefinitionLinkImpl.setCompanyId(getCompanyId());
-
-		workflowDefinitionLinkModelImpl._originalCompanyId = workflowDefinitionLinkModelImpl._companyId;
-
-		workflowDefinitionLinkModelImpl._setOriginalCompanyId = false;
 		workflowDefinitionLinkImpl.setUserId(getUserId());
-
 		workflowDefinitionLinkImpl.setUserName(getUserName());
-
 		workflowDefinitionLinkImpl.setCreateDate(getCreateDate());
-
 		workflowDefinitionLinkImpl.setModifiedDate(getModifiedDate());
-
 		workflowDefinitionLinkImpl.setClassNameId(getClassNameId());
-
-		workflowDefinitionLinkModelImpl._originalClassNameId = workflowDefinitionLinkModelImpl._classNameId;
-
-		workflowDefinitionLinkModelImpl._setOriginalClassNameId = false;
 		workflowDefinitionLinkImpl.setWorkflowDefinitionName(getWorkflowDefinitionName());
-
 		workflowDefinitionLinkImpl.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
+
+		workflowDefinitionLinkImpl.resetOriginalValues();
 
 		return workflowDefinitionLinkImpl;
 	}
@@ -344,6 +326,22 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = this;
+
+		workflowDefinitionLinkModelImpl._originalGroupId = workflowDefinitionLinkModelImpl._groupId;
+
+		workflowDefinitionLinkModelImpl._setOriginalGroupId = false;
+
+		workflowDefinitionLinkModelImpl._originalCompanyId = workflowDefinitionLinkModelImpl._companyId;
+
+		workflowDefinitionLinkModelImpl._setOriginalCompanyId = false;
+
+		workflowDefinitionLinkModelImpl._originalClassNameId = workflowDefinitionLinkModelImpl._classNameId;
+
+		workflowDefinitionLinkModelImpl._setOriginalClassNameId = false;
 	}
 
 	public String toString() {

@@ -138,6 +138,8 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			new Object[] {
 				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
 			}, ddmContent);
+
+		ddmContent.resetOriginalValues();
 	}
 
 	/**

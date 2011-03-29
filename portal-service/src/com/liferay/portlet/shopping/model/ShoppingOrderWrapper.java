@@ -1103,5 +1103,9 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		return _shoppingOrder;
 	}
 
+	public void resetOriginalValues() {
+		_shoppingOrder.resetOriginalValues();
+	}
+
 	private ShoppingOrder _shoppingOrder;
 }

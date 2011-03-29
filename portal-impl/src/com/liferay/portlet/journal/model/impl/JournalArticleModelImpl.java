@@ -794,76 +794,37 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		JournalArticleImpl journalArticleImpl = new JournalArticleImpl();
 
 		journalArticleImpl.setUuid(getUuid());
-
-		JournalArticleModelImpl journalArticleModelImpl = journalArticleImpl;
-
-		journalArticleModelImpl._originalUuid = journalArticleModelImpl._uuid;
-
 		journalArticleImpl.setId(getId());
-
 		journalArticleImpl.setResourcePrimKey(getResourcePrimKey());
-
 		journalArticleImpl.setGroupId(getGroupId());
-
-		journalArticleModelImpl._originalGroupId = journalArticleModelImpl._groupId;
-
-		journalArticleModelImpl._setOriginalGroupId = false;
 		journalArticleImpl.setCompanyId(getCompanyId());
-
 		journalArticleImpl.setUserId(getUserId());
-
 		journalArticleImpl.setUserName(getUserName());
-
 		journalArticleImpl.setCreateDate(getCreateDate());
-
 		journalArticleImpl.setModifiedDate(getModifiedDate());
-
 		journalArticleImpl.setArticleId(getArticleId());
-
-		journalArticleModelImpl._originalArticleId = journalArticleModelImpl._articleId;
-
 		journalArticleImpl.setVersion(getVersion());
-
-		journalArticleModelImpl._originalVersion = journalArticleModelImpl._version;
-
-		journalArticleModelImpl._setOriginalVersion = false;
 		journalArticleImpl.setTitle(getTitle());
-
 		journalArticleImpl.setUrlTitle(getUrlTitle());
-
 		journalArticleImpl.setDescription(getDescription());
-
 		journalArticleImpl.setContent(getContent());
-
 		journalArticleImpl.setType(getType());
-
 		journalArticleImpl.setStructureId(getStructureId());
-
 		journalArticleImpl.setTemplateId(getTemplateId());
-
 		journalArticleImpl.setLayoutUuid(getLayoutUuid());
-
 		journalArticleImpl.setDisplayDate(getDisplayDate());
-
 		journalArticleImpl.setExpirationDate(getExpirationDate());
-
 		journalArticleImpl.setReviewDate(getReviewDate());
-
 		journalArticleImpl.setIndexable(getIndexable());
-
 		journalArticleImpl.setSmallImage(getSmallImage());
-
 		journalArticleImpl.setSmallImageId(getSmallImageId());
-
 		journalArticleImpl.setSmallImageURL(getSmallImageURL());
-
 		journalArticleImpl.setStatus(getStatus());
-
 		journalArticleImpl.setStatusByUserId(getStatusByUserId());
-
 		journalArticleImpl.setStatusByUserName(getStatusByUserName());
-
 		journalArticleImpl.setStatusDate(getStatusDate());
+
+		journalArticleImpl.resetOriginalValues();
 
 		return journalArticleImpl;
 	}
@@ -922,6 +883,22 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		JournalArticleModelImpl journalArticleModelImpl = this;
+
+		journalArticleModelImpl._originalUuid = journalArticleModelImpl._uuid;
+
+		journalArticleModelImpl._originalGroupId = journalArticleModelImpl._groupId;
+
+		journalArticleModelImpl._setOriginalGroupId = false;
+
+		journalArticleModelImpl._originalArticleId = journalArticleModelImpl._articleId;
+
+		journalArticleModelImpl._originalVersion = journalArticleModelImpl._version;
+
+		journalArticleModelImpl._setOriginalVersion = false;
 	}
 
 	public String toString() {

@@ -133,6 +133,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				
 			userGroup.getName()
 			}, userGroup);
+
+		userGroup.resetOriginalValues();
 	}
 
 	/**

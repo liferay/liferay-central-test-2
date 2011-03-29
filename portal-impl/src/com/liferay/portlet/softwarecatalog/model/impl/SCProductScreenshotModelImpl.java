@@ -225,33 +225,14 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
 		scProductScreenshotImpl.setProductScreenshotId(getProductScreenshotId());
-
 		scProductScreenshotImpl.setCompanyId(getCompanyId());
-
 		scProductScreenshotImpl.setGroupId(getGroupId());
-
 		scProductScreenshotImpl.setProductEntryId(getProductEntryId());
-
-		SCProductScreenshotModelImpl scProductScreenshotModelImpl = scProductScreenshotImpl;
-
-		scProductScreenshotModelImpl._originalProductEntryId = scProductScreenshotModelImpl._productEntryId;
-
-		scProductScreenshotModelImpl._setOriginalProductEntryId = false;
 		scProductScreenshotImpl.setThumbnailId(getThumbnailId());
-
-		scProductScreenshotModelImpl._originalThumbnailId = scProductScreenshotModelImpl._thumbnailId;
-
-		scProductScreenshotModelImpl._setOriginalThumbnailId = false;
 		scProductScreenshotImpl.setFullImageId(getFullImageId());
-
-		scProductScreenshotModelImpl._originalFullImageId = scProductScreenshotModelImpl._fullImageId;
-
-		scProductScreenshotModelImpl._setOriginalFullImageId = false;
 		scProductScreenshotImpl.setPriority(getPriority());
 
-		scProductScreenshotModelImpl._originalPriority = scProductScreenshotModelImpl._priority;
-
-		scProductScreenshotModelImpl._setOriginalPriority = false;
+		scProductScreenshotImpl.resetOriginalValues();
 
 		return scProductScreenshotImpl;
 	}
@@ -316,6 +297,26 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SCProductScreenshotModelImpl scProductScreenshotModelImpl = this;
+
+		scProductScreenshotModelImpl._originalProductEntryId = scProductScreenshotModelImpl._productEntryId;
+
+		scProductScreenshotModelImpl._setOriginalProductEntryId = false;
+
+		scProductScreenshotModelImpl._originalThumbnailId = scProductScreenshotModelImpl._thumbnailId;
+
+		scProductScreenshotModelImpl._setOriginalThumbnailId = false;
+
+		scProductScreenshotModelImpl._originalFullImageId = scProductScreenshotModelImpl._fullImageId;
+
+		scProductScreenshotModelImpl._setOriginalFullImageId = false;
+
+		scProductScreenshotModelImpl._originalPriority = scProductScreenshotModelImpl._priority;
+
+		scProductScreenshotModelImpl._setOriginalPriority = false;
 	}
 
 	public String toString() {

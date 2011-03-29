@@ -385,34 +385,22 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		MBThreadImpl mbThreadImpl = new MBThreadImpl();
 
 		mbThreadImpl.setThreadId(getThreadId());
-
 		mbThreadImpl.setGroupId(getGroupId());
-
 		mbThreadImpl.setCompanyId(getCompanyId());
-
 		mbThreadImpl.setCategoryId(getCategoryId());
-
 		mbThreadImpl.setRootMessageId(getRootMessageId());
-
 		mbThreadImpl.setRootMessageUserId(getRootMessageUserId());
-
 		mbThreadImpl.setMessageCount(getMessageCount());
-
 		mbThreadImpl.setViewCount(getViewCount());
-
 		mbThreadImpl.setLastPostByUserId(getLastPostByUserId());
-
 		mbThreadImpl.setLastPostDate(getLastPostDate());
-
 		mbThreadImpl.setPriority(getPriority());
-
 		mbThreadImpl.setStatus(getStatus());
-
 		mbThreadImpl.setStatusByUserId(getStatusByUserId());
-
 		mbThreadImpl.setStatusByUserName(getStatusByUserName());
-
 		mbThreadImpl.setStatusDate(getStatusDate());
+
+		mbThreadImpl.resetOriginalValues();
 
 		return mbThreadImpl;
 	}
@@ -473,6 +461,9 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

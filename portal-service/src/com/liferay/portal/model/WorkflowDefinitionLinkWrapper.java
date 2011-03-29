@@ -331,5 +331,9 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 		return _workflowDefinitionLink;
 	}
 
+	public void resetOriginalValues() {
+		_workflowDefinitionLink.resetOriginalValues();
+	}
+
 	private WorkflowDefinitionLink _workflowDefinitionLink;
 }

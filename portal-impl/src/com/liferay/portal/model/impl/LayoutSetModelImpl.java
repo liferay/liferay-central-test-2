@@ -350,40 +350,21 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		LayoutSetImpl layoutSetImpl = new LayoutSetImpl();
 
 		layoutSetImpl.setLayoutSetId(getLayoutSetId());
-
 		layoutSetImpl.setGroupId(getGroupId());
-
-		LayoutSetModelImpl layoutSetModelImpl = layoutSetImpl;
-
-		layoutSetModelImpl._originalGroupId = layoutSetModelImpl._groupId;
-
-		layoutSetModelImpl._setOriginalGroupId = false;
 		layoutSetImpl.setCompanyId(getCompanyId());
-
 		layoutSetImpl.setPrivateLayout(getPrivateLayout());
-
-		layoutSetModelImpl._originalPrivateLayout = layoutSetModelImpl._privateLayout;
-
-		layoutSetModelImpl._setOriginalPrivateLayout = false;
 		layoutSetImpl.setLogo(getLogo());
-
 		layoutSetImpl.setLogoId(getLogoId());
-
 		layoutSetImpl.setThemeId(getThemeId());
-
 		layoutSetImpl.setColorSchemeId(getColorSchemeId());
-
 		layoutSetImpl.setWapThemeId(getWapThemeId());
-
 		layoutSetImpl.setWapColorSchemeId(getWapColorSchemeId());
-
 		layoutSetImpl.setCss(getCss());
-
 		layoutSetImpl.setPageCount(getPageCount());
-
 		layoutSetImpl.setSettings(getSettings());
-
 		layoutSetImpl.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
+
+		layoutSetImpl.resetOriginalValues();
 
 		return layoutSetImpl;
 	}
@@ -428,6 +409,18 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		LayoutSetModelImpl layoutSetModelImpl = this;
+
+		layoutSetModelImpl._originalGroupId = layoutSetModelImpl._groupId;
+
+		layoutSetModelImpl._setOriginalGroupId = false;
+
+		layoutSetModelImpl._originalPrivateLayout = layoutSetModelImpl._privateLayout;
+
+		layoutSetModelImpl._setOriginalPrivateLayout = false;
 	}
 
 	public String toString() {

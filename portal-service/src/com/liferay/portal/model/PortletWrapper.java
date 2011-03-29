@@ -2710,5 +2710,9 @@ public class PortletWrapper implements Portlet {
 		return _portlet;
 	}
 
+	public void resetOriginalValues() {
+		_portlet.resetOriginalValues();
+	}
+
 	private Portlet _portlet;
 }

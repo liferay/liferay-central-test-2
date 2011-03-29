@@ -326,38 +326,19 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		OrganizationImpl organizationImpl = new OrganizationImpl();
 
 		organizationImpl.setOrganizationId(getOrganizationId());
-
 		organizationImpl.setCompanyId(getCompanyId());
-
-		OrganizationModelImpl organizationModelImpl = organizationImpl;
-
-		organizationModelImpl._originalCompanyId = organizationModelImpl._companyId;
-
-		organizationModelImpl._setOriginalCompanyId = false;
 		organizationImpl.setParentOrganizationId(getParentOrganizationId());
-
-		organizationModelImpl._originalParentOrganizationId = organizationModelImpl._parentOrganizationId;
-
-		organizationModelImpl._setOriginalParentOrganizationId = false;
 		organizationImpl.setLeftOrganizationId(getLeftOrganizationId());
-
 		organizationImpl.setRightOrganizationId(getRightOrganizationId());
-
 		organizationImpl.setName(getName());
-
-		organizationModelImpl._originalName = organizationModelImpl._name;
-
 		organizationImpl.setType(getType());
-
 		organizationImpl.setRecursable(getRecursable());
-
 		organizationImpl.setRegionId(getRegionId());
-
 		organizationImpl.setCountryId(getCountryId());
-
 		organizationImpl.setStatusId(getStatusId());
-
 		organizationImpl.setComments(getComments());
+
+		organizationImpl.resetOriginalValues();
 
 		return organizationImpl;
 	}
@@ -400,6 +381,20 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		OrganizationModelImpl organizationModelImpl = this;
+
+		organizationModelImpl._originalCompanyId = organizationModelImpl._companyId;
+
+		organizationModelImpl._setOriginalCompanyId = false;
+
+		organizationModelImpl._originalParentOrganizationId = organizationModelImpl._parentOrganizationId;
+
+		organizationModelImpl._setOriginalParentOrganizationId = false;
+
+		organizationModelImpl._originalName = organizationModelImpl._name;
 	}
 
 	public String toString() {

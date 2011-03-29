@@ -381,38 +381,24 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 		AnnouncementsEntryImpl announcementsEntryImpl = new AnnouncementsEntryImpl();
 
 		announcementsEntryImpl.setUuid(getUuid());
-
 		announcementsEntryImpl.setEntryId(getEntryId());
-
 		announcementsEntryImpl.setCompanyId(getCompanyId());
-
 		announcementsEntryImpl.setUserId(getUserId());
-
 		announcementsEntryImpl.setUserName(getUserName());
-
 		announcementsEntryImpl.setCreateDate(getCreateDate());
-
 		announcementsEntryImpl.setModifiedDate(getModifiedDate());
-
 		announcementsEntryImpl.setClassNameId(getClassNameId());
-
 		announcementsEntryImpl.setClassPK(getClassPK());
-
 		announcementsEntryImpl.setTitle(getTitle());
-
 		announcementsEntryImpl.setContent(getContent());
-
 		announcementsEntryImpl.setUrl(getUrl());
-
 		announcementsEntryImpl.setType(getType());
-
 		announcementsEntryImpl.setDisplayDate(getDisplayDate());
-
 		announcementsEntryImpl.setExpirationDate(getExpirationDate());
-
 		announcementsEntryImpl.setPriority(getPriority());
-
 		announcementsEntryImpl.setAlert(getAlert());
+
+		announcementsEntryImpl.resetOriginalValues();
 
 		return announcementsEntryImpl;
 	}
@@ -470,6 +456,9 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

@@ -1018,75 +1018,37 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
 		layoutRevisionImpl.setLayoutRevisionId(getLayoutRevisionId());
-
 		layoutRevisionImpl.setGroupId(getGroupId());
-
 		layoutRevisionImpl.setCompanyId(getCompanyId());
-
 		layoutRevisionImpl.setUserId(getUserId());
-
 		layoutRevisionImpl.setUserName(getUserName());
-
 		layoutRevisionImpl.setCreateDate(getCreateDate());
-
 		layoutRevisionImpl.setModifiedDate(getModifiedDate());
-
 		layoutRevisionImpl.setLayoutSetBranchId(getLayoutSetBranchId());
-
-		LayoutRevisionModelImpl layoutRevisionModelImpl = layoutRevisionImpl;
-
-		layoutRevisionModelImpl._originalLayoutSetBranchId = layoutRevisionModelImpl._layoutSetBranchId;
-
-		layoutRevisionModelImpl._setOriginalLayoutSetBranchId = false;
 		layoutRevisionImpl.setParentLayoutRevisionId(getParentLayoutRevisionId());
-
 		layoutRevisionImpl.setHead(getHead());
-
-		layoutRevisionModelImpl._originalHead = layoutRevisionModelImpl._head;
-
-		layoutRevisionModelImpl._setOriginalHead = false;
 		layoutRevisionImpl.setMajor(getMajor());
-
 		layoutRevisionImpl.setPlid(getPlid());
-
-		layoutRevisionModelImpl._originalPlid = layoutRevisionModelImpl._plid;
-
-		layoutRevisionModelImpl._setOriginalPlid = false;
 		layoutRevisionImpl.setPrivateLayout(getPrivateLayout());
-
 		layoutRevisionImpl.setName(getName());
-
 		layoutRevisionImpl.setTitle(getTitle());
-
 		layoutRevisionImpl.setDescription(getDescription());
-
 		layoutRevisionImpl.setKeywords(getKeywords());
-
 		layoutRevisionImpl.setRobots(getRobots());
-
 		layoutRevisionImpl.setTypeSettings(getTypeSettings());
-
 		layoutRevisionImpl.setIconImage(getIconImage());
-
 		layoutRevisionImpl.setIconImageId(getIconImageId());
-
 		layoutRevisionImpl.setThemeId(getThemeId());
-
 		layoutRevisionImpl.setColorSchemeId(getColorSchemeId());
-
 		layoutRevisionImpl.setWapThemeId(getWapThemeId());
-
 		layoutRevisionImpl.setWapColorSchemeId(getWapColorSchemeId());
-
 		layoutRevisionImpl.setCss(getCss());
-
 		layoutRevisionImpl.setStatus(getStatus());
-
 		layoutRevisionImpl.setStatusByUserId(getStatusByUserId());
-
 		layoutRevisionImpl.setStatusByUserName(getStatusByUserName());
-
 		layoutRevisionImpl.setStatusDate(getStatusDate());
+
+		layoutRevisionImpl.resetOriginalValues();
 
 		return layoutRevisionImpl;
 	}
@@ -1139,6 +1101,22 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		LayoutRevisionModelImpl layoutRevisionModelImpl = this;
+
+		layoutRevisionModelImpl._originalLayoutSetBranchId = layoutRevisionModelImpl._layoutSetBranchId;
+
+		layoutRevisionModelImpl._setOriginalLayoutSetBranchId = false;
+
+		layoutRevisionModelImpl._originalHead = layoutRevisionModelImpl._head;
+
+		layoutRevisionModelImpl._setOriginalHead = false;
+
+		layoutRevisionModelImpl._originalPlid = layoutRevisionModelImpl._plid;
+
+		layoutRevisionModelImpl._setOriginalPlid = false;
 	}
 
 	public String toString() {

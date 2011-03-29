@@ -298,26 +298,18 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		WebsiteImpl websiteImpl = new WebsiteImpl();
 
 		websiteImpl.setWebsiteId(getWebsiteId());
-
 		websiteImpl.setCompanyId(getCompanyId());
-
 		websiteImpl.setUserId(getUserId());
-
 		websiteImpl.setUserName(getUserName());
-
 		websiteImpl.setCreateDate(getCreateDate());
-
 		websiteImpl.setModifiedDate(getModifiedDate());
-
 		websiteImpl.setClassNameId(getClassNameId());
-
 		websiteImpl.setClassPK(getClassPK());
-
 		websiteImpl.setUrl(getUrl());
-
 		websiteImpl.setTypeId(getTypeId());
-
 		websiteImpl.setPrimary(getPrimary());
+
+		websiteImpl.resetOriginalValues();
 
 		return websiteImpl;
 	}
@@ -360,6 +352,9 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

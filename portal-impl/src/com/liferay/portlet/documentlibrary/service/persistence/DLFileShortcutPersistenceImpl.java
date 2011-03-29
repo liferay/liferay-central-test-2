@@ -164,6 +164,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				dlFileShortcut.getUuid(),
 				Long.valueOf(dlFileShortcut.getGroupId())
 			}, dlFileShortcut);
+
+		dlFileShortcut.resetOriginalValues();
 	}
 
 	/**

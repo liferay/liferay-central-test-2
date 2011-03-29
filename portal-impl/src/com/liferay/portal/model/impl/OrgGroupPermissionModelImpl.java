@@ -132,10 +132,10 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		OrgGroupPermissionImpl orgGroupPermissionImpl = new OrgGroupPermissionImpl();
 
 		orgGroupPermissionImpl.setOrganizationId(getOrganizationId());
-
 		orgGroupPermissionImpl.setGroupId(getGroupId());
-
 		orgGroupPermissionImpl.setPermissionId(getPermissionId());
+
+		orgGroupPermissionImpl.resetOriginalValues();
 
 		return orgGroupPermissionImpl;
 	}
@@ -172,6 +172,9 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
+	}
+
+	public void resetOriginalValues() {
 	}
 
 	public String toString() {

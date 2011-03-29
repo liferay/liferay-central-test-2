@@ -188,20 +188,11 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
 
 		assetTagStatsImpl.setTagStatsId(getTagStatsId());
-
 		assetTagStatsImpl.setTagId(getTagId());
-
-		AssetTagStatsModelImpl assetTagStatsModelImpl = assetTagStatsImpl;
-
-		assetTagStatsModelImpl._originalTagId = assetTagStatsModelImpl._tagId;
-
-		assetTagStatsModelImpl._setOriginalTagId = false;
 		assetTagStatsImpl.setClassNameId(getClassNameId());
-
-		assetTagStatsModelImpl._originalClassNameId = assetTagStatsModelImpl._classNameId;
-
-		assetTagStatsModelImpl._setOriginalClassNameId = false;
 		assetTagStatsImpl.setAssetCount(getAssetCount());
+
+		assetTagStatsImpl.resetOriginalValues();
 
 		return assetTagStatsImpl;
 	}
@@ -254,6 +245,18 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AssetTagStatsModelImpl assetTagStatsModelImpl = this;
+
+		assetTagStatsModelImpl._originalTagId = assetTagStatsModelImpl._tagId;
+
+		assetTagStatsModelImpl._setOriginalTagId = false;
+
+		assetTagStatsModelImpl._originalClassNameId = assetTagStatsModelImpl._classNameId;
+
+		assetTagStatsModelImpl._setOriginalClassNameId = false;
 	}
 
 	public String toString() {

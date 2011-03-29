@@ -267,5 +267,9 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		return _socialEquityAssetEntry;
 	}
 
+	public void resetOriginalValues() {
+		_socialEquityAssetEntry.resetOriginalValues();
+	}
+
 	private SocialEquityAssetEntry _socialEquityAssetEntry;
 }

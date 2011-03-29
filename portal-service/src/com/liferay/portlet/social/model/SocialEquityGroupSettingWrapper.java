@@ -247,5 +247,9 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 		return _socialEquityGroupSetting;
 	}
 
+	public void resetOriginalValues() {
+		_socialEquityGroupSetting.resetOriginalValues();
+	}
+
 	private SocialEquityGroupSetting _socialEquityGroupSetting;
 }

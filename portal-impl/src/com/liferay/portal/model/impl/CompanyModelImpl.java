@@ -292,31 +292,16 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		CompanyImpl companyImpl = new CompanyImpl();
 
 		companyImpl.setCompanyId(getCompanyId());
-
 		companyImpl.setAccountId(getAccountId());
-
 		companyImpl.setWebId(getWebId());
-
-		CompanyModelImpl companyModelImpl = companyImpl;
-
-		companyModelImpl._originalWebId = companyModelImpl._webId;
-
 		companyImpl.setKey(getKey());
-
 		companyImpl.setMx(getMx());
-
-		companyModelImpl._originalMx = companyModelImpl._mx;
-
 		companyImpl.setHomeURL(getHomeURL());
-
 		companyImpl.setLogoId(getLogoId());
-
-		companyModelImpl._originalLogoId = companyModelImpl._logoId;
-
-		companyModelImpl._setOriginalLogoId = false;
 		companyImpl.setSystem(getSystem());
-
 		companyImpl.setMaxUsers(getMaxUsers());
+
+		companyImpl.resetOriginalValues();
 
 		return companyImpl;
 	}
@@ -361,6 +346,18 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		CompanyModelImpl companyModelImpl = this;
+
+		companyModelImpl._originalWebId = companyModelImpl._webId;
+
+		companyModelImpl._originalMx = companyModelImpl._mx;
+
+		companyModelImpl._originalLogoId = companyModelImpl._logoId;
+
+		companyModelImpl._setOriginalLogoId = false;
 	}
 
 	public String toString() {

@@ -361,5 +361,9 @@ public class WebsiteWrapper implements Website {
 		return _website;
 	}
 
+	public void resetOriginalValues() {
+		_website.resetOriginalValues();
+	}
+
 	private Website _website;
 }

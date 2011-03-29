@@ -118,6 +118,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				permission.getActionId(),
 				Long.valueOf(permission.getResourceId())
 			}, permission);
+
+		permission.resetOriginalValues();
 	}
 
 	/**

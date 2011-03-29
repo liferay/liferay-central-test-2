@@ -267,37 +267,17 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		SocialEquitySettingImpl socialEquitySettingImpl = new SocialEquitySettingImpl();
 
 		socialEquitySettingImpl.setEquitySettingId(getEquitySettingId());
-
 		socialEquitySettingImpl.setGroupId(getGroupId());
-
-		SocialEquitySettingModelImpl socialEquitySettingModelImpl = socialEquitySettingImpl;
-
-		socialEquitySettingModelImpl._originalGroupId = socialEquitySettingModelImpl._groupId;
-
-		socialEquitySettingModelImpl._setOriginalGroupId = false;
 		socialEquitySettingImpl.setCompanyId(getCompanyId());
-
 		socialEquitySettingImpl.setClassNameId(getClassNameId());
-
-		socialEquitySettingModelImpl._originalClassNameId = socialEquitySettingModelImpl._classNameId;
-
-		socialEquitySettingModelImpl._setOriginalClassNameId = false;
 		socialEquitySettingImpl.setActionId(getActionId());
-
-		socialEquitySettingModelImpl._originalActionId = socialEquitySettingModelImpl._actionId;
-
 		socialEquitySettingImpl.setDailyLimit(getDailyLimit());
-
 		socialEquitySettingImpl.setLifespan(getLifespan());
-
 		socialEquitySettingImpl.setType(getType());
-
-		socialEquitySettingModelImpl._originalType = socialEquitySettingModelImpl._type;
-
-		socialEquitySettingModelImpl._setOriginalType = false;
 		socialEquitySettingImpl.setUniqueEntry(getUniqueEntry());
-
 		socialEquitySettingImpl.setValue(getValue());
+
+		socialEquitySettingImpl.resetOriginalValues();
 
 		return socialEquitySettingImpl;
 	}
@@ -342,6 +322,24 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		SocialEquitySettingModelImpl socialEquitySettingModelImpl = this;
+
+		socialEquitySettingModelImpl._originalGroupId = socialEquitySettingModelImpl._groupId;
+
+		socialEquitySettingModelImpl._setOriginalGroupId = false;
+
+		socialEquitySettingModelImpl._originalClassNameId = socialEquitySettingModelImpl._classNameId;
+
+		socialEquitySettingModelImpl._setOriginalClassNameId = false;
+
+		socialEquitySettingModelImpl._originalActionId = socialEquitySettingModelImpl._actionId;
+
+		socialEquitySettingModelImpl._originalType = socialEquitySettingModelImpl._type;
+
+		socialEquitySettingModelImpl._setOriginalType = false;
 	}
 
 	public String toString() {

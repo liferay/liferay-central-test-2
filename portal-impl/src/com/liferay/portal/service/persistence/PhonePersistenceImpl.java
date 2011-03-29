@@ -152,6 +152,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public void cacheResult(Phone phone) {
 		EntityCacheUtil.putResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
 			PhoneImpl.class, phone.getPrimaryKey(), phone);
+
+		phone.resetOriginalValues();
 	}
 
 	/**

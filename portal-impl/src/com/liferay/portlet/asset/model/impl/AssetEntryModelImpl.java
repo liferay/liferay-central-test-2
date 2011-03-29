@@ -511,65 +511,31 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
 		assetEntryImpl.setEntryId(getEntryId());
-
 		assetEntryImpl.setGroupId(getGroupId());
-
-		AssetEntryModelImpl assetEntryModelImpl = assetEntryImpl;
-
-		assetEntryModelImpl._originalGroupId = assetEntryModelImpl._groupId;
-
-		assetEntryModelImpl._setOriginalGroupId = false;
 		assetEntryImpl.setCompanyId(getCompanyId());
-
 		assetEntryImpl.setUserId(getUserId());
-
 		assetEntryImpl.setUserName(getUserName());
-
 		assetEntryImpl.setCreateDate(getCreateDate());
-
 		assetEntryImpl.setModifiedDate(getModifiedDate());
-
 		assetEntryImpl.setClassNameId(getClassNameId());
-
-		assetEntryModelImpl._originalClassNameId = assetEntryModelImpl._classNameId;
-
-		assetEntryModelImpl._setOriginalClassNameId = false;
 		assetEntryImpl.setClassPK(getClassPK());
-
-		assetEntryModelImpl._originalClassPK = assetEntryModelImpl._classPK;
-
-		assetEntryModelImpl._setOriginalClassPK = false;
 		assetEntryImpl.setClassUuid(getClassUuid());
-
-		assetEntryModelImpl._originalClassUuid = assetEntryModelImpl._classUuid;
-
 		assetEntryImpl.setVisible(getVisible());
-
 		assetEntryImpl.setStartDate(getStartDate());
-
 		assetEntryImpl.setEndDate(getEndDate());
-
 		assetEntryImpl.setPublishDate(getPublishDate());
-
 		assetEntryImpl.setExpirationDate(getExpirationDate());
-
 		assetEntryImpl.setMimeType(getMimeType());
-
 		assetEntryImpl.setTitle(getTitle());
-
 		assetEntryImpl.setDescription(getDescription());
-
 		assetEntryImpl.setSummary(getSummary());
-
 		assetEntryImpl.setUrl(getUrl());
-
 		assetEntryImpl.setHeight(getHeight());
-
 		assetEntryImpl.setWidth(getWidth());
-
 		assetEntryImpl.setPriority(getPriority());
-
 		assetEntryImpl.setViewCount(getViewCount());
+
+		assetEntryImpl.resetOriginalValues();
 
 		return assetEntryImpl;
 	}
@@ -614,6 +580,24 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 	public int hashCode() {
 		return (int)getPrimaryKey();
+	}
+
+	public void resetOriginalValues() {
+		AssetEntryModelImpl assetEntryModelImpl = this;
+
+		assetEntryModelImpl._originalGroupId = assetEntryModelImpl._groupId;
+
+		assetEntryModelImpl._setOriginalGroupId = false;
+
+		assetEntryModelImpl._originalClassNameId = assetEntryModelImpl._classNameId;
+
+		assetEntryModelImpl._setOriginalClassNameId = false;
+
+		assetEntryModelImpl._originalClassPK = assetEntryModelImpl._classPK;
+
+		assetEntryModelImpl._setOriginalClassPK = false;
+
+		assetEntryModelImpl._originalClassUuid = assetEntryModelImpl._classUuid;
 	}
 
 	public String toString() {
