@@ -12,6 +12,7 @@ package ${packagePath}.service.persistence;
 
 import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
+import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import ${beanLocatorUtil};
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -19,7 +20,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -378,6 +381,34 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(0, result.size());
 	}
+
+	<#assign uniqueFinderList = entity.getUniqueFinderList()>
+
+	<#if uniqueFinderList?size != 0>
+		public void testResetOriginalValues() throws Exception {
+			if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+				return;
+			}
+
+			${entity.name} new${entity.name} = add${entity.name}();
+
+			_persistence.clearCache();
+
+			${entity.name}ModelImpl existing${entity.name}ModelImpl = (${entity.name}ModelImpl)_persistence.findByPrimaryKey(new${entity.name}.getPrimaryKey());
+
+			<#list uniqueFinderList as finder>
+				<#assign finderColsList = finder.getColumns()>
+
+				<#list finderColsList as finderCol>
+					<#if finderCol.isPrimitiveType()>
+						assertEquals(existing${entity.name}ModelImpl.get${finderCol.methodName}(), existing${entity.name}ModelImpl.getOriginal${finderCol.methodName}());
+					<#else>
+						assertTrue(Validator.equals(existing${entity.name}ModelImpl.get${finderCol.methodName}(), existing${entity.name}ModelImpl.getOriginal${finderCol.methodName}()));
+					</#if>
+				</#list>
+			</#list>
+		}
+	</#if>
 
 	protected ${entity.name} add${entity.name}() throws Exception {
 		<#if entity.hasCompoundPK()>
