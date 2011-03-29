@@ -45,7 +45,7 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 		templateId = DAOParamUtil.getString(portletRequest, TEMPLATE_ID);
 		title = DAOParamUtil.getLike(portletRequest, TITLE);
 		type = DAOParamUtil.getString(portletRequest, TYPE);
-		version = ParamUtil.getDouble(portletRequest, VERSION);
+		version = ParamUtil.getDouble(portletRequest, VERSION, -1);
 	}
 
 	public Date getReviewDate() {
