@@ -388,12 +388,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-forms">
-		<antcall target="build-service">
-			<param name="service.file" value="${basedir}/src/com/liferay/portlet/forms/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-imagegallery">
 		<antcall target="build-service">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/imagegallery/service.xml" />
@@ -464,7 +458,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		<antcall target="build-service-portlet-dynamicdatamapping" />
 		<antcall target="build-service-portlet-expando" />
 		<antcall target="build-service-portlet-flags" />
-		<antcall target="build-service-portlet-forms" />
 		<antcall target="build-service-portlet-imagegallery" />
 		<antcall target="build-service-portlet-journal" />
 		<antcall target="build-service-portlet-messageboards" />
