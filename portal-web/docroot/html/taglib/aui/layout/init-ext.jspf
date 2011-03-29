@@ -1,3 +1,4 @@
+<%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
@@ -11,26 +12,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+--%>
+<%
+String cssClasses = StringPool.BLANK;
 
-package com.liferay.taglib.aui;
-
-import com.liferay.taglib.aui.base.BaseLayoutTag;
-
-import javax.servlet.jsp.JspWriter;
-
-/**
- * @author Julio Camarero
- * @author Jorge Ferrer
- * @author Brian Wing Shun Chan
- */
-public class LayoutTag extends BaseLayoutTag {
-
-	protected int processEndTag() throws Exception {
-		JspWriter jspWriter = pageContext.getOut();
-
-		jspWriter.write("</div></div>");
-
-		return EVAL_PAGE;
+if (Validator.isNotNull(cssClass)) {
+	for (String curCssClass : StringUtil.split(cssClass, StringPool.SPACE)) {
+		cssClasses += curCssClass + "-content ";
 	}
-
 }
+%>
