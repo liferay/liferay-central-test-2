@@ -48,6 +48,12 @@ public class CMISRepositoryLocalServiceWrapper
 		_cmisRepositoryLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	public java.lang.Object getSession(long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _cmisRepositoryLocalService.getSession(repositoryId);
+	}
+
 	public com.liferay.portal.kernel.repository.model.FileEntry toFileEntry(
 		long repositoryId, java.lang.Object object)
 		throws com.liferay.portal.kernel.exception.PortalException,

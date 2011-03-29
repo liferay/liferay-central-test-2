@@ -541,6 +541,79 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		return count;
 	}
 
+	public Session getSession() throws PortalException, RepositoryException {
+		Session session = getCachedSession();
+
+		if (session != null) {
+			return session;
+		}
+
+		String password = PrincipalThreadLocal.getPassword();
+		String login = getLogin();
+
+		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(SessionParameter.USER, login);
+		parameters.put(SessionParameter.PASSWORD, password);
+		parameters.put(SessionParameter.LOCALE_ISO3166_COUNTRY,
+			LocaleUtil.getDefault().getCountry());
+		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
+			LocaleUtil.getDefault().getLanguage());
+
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
+		if (isAtomPub()) {
+			parameters.put(
+				SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+
+			putParameter(
+				parameters, SessionParameter.ATOMPUB_URL,
+				CMISAtomPubRepository.ATOMPUB_URL);
+		}
+		else {
+			parameters.put(
+				SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
+
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_ACL_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_ACL_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_DISCOVERY_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_DISCOVERY_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_MULTIFILING_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_MULTIFILING_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_NAVIGATION_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_NAVIGATION_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_OBJECT_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_OBJECT_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_POLICY_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_POLICY_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_RELATIONSHIP_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_RELATIONSHIP_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_REPOSITORY_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_REPOSITORY_SERVICE);
+			putParameter(
+				parameters, SessionParameter.WEBSERVICES_VERSIONING_SERVICE,
+				CMISWebServicesRepository.WEBSERVICES_VERSIONING_SERVICE);
+		}
+
+		checkRepository(parameters, typeSettingsProperties);
+
+		session = _sessionFactory.createSession(parameters);
+
+		session.setDefaultContext(getOperationContext());
+
+		setCachedSession(session);
+
+		return session;
+	}
+
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException {
 
@@ -1344,79 +1417,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	protected OperationContext getOperationContext() {
 		return _operationContext;
-	}
-
-	protected Session getSession() throws PortalException, RepositoryException {
-		Session session = getCachedSession();
-
-		if (session != null) {
-			return session;
-		}
-
-		String password = PrincipalThreadLocal.getPassword();
-		String login = getLogin();
-
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		parameters.put(SessionParameter.USER, login);
-		parameters.put(SessionParameter.PASSWORD, password);
-		parameters.put(SessionParameter.LOCALE_ISO3166_COUNTRY,
-			LocaleUtil.getDefault().getCountry());
-		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
-			LocaleUtil.getDefault().getLanguage());
-
-		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
-
-		if (isAtomPub()) {
-			parameters.put(
-				SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
-
-			putParameter(
-				parameters, SessionParameter.ATOMPUB_URL,
-				CMISAtomPubRepository.ATOMPUB_URL);
-		}
-		else {
-			parameters.put(
-				SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
-
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_ACL_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_ACL_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_DISCOVERY_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_DISCOVERY_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_MULTIFILING_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_MULTIFILING_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_NAVIGATION_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_NAVIGATION_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_OBJECT_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_OBJECT_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_POLICY_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_POLICY_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_RELATIONSHIP_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_RELATIONSHIP_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_REPOSITORY_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_REPOSITORY_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_VERSIONING_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_VERSIONING_SERVICE);
-		}
-
-		checkRepository(parameters, typeSettingsProperties);
-
-		session = _sessionFactory.createSession(parameters);
-
-		session.setDefaultContext(getOperationContext());
-
-		setCachedSession(session);
-
-		return session;
 	}
 
 	protected void getSubfolderIds(

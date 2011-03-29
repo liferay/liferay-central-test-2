@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
@@ -37,6 +38,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.chemistry.opencmis.client.api.CmisObject;
+import org.apache.chemistry.opencmis.client.api.Session;
 
 /**
  * @author Alexander Chow
@@ -172,8 +176,15 @@ public class CMISFolder extends CMISModel implements Folder {
 			}
 		}
 		else {
-			org.apache.chemistry.opencmis.client.api.Folder parentCmisFolder =
-				_cmisFolder.getFolderParent();
+			String path = _cmisFolder.getPath();
+
+			path = path.substring(0, path.lastIndexOf(CharPool.SLASH));
+
+			Session session =
+				(Session)CMISRepositoryLocalServiceUtil.getSession(
+					getRepositoryId());
+
+			CmisObject parentCmisFolder = session.getObjectByPath(path);
 
 			parentFolder = CMISRepositoryLocalServiceUtil.toFolder(
 				getRepositoryId(), parentCmisFolder);
