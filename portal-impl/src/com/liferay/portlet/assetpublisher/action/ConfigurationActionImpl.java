@@ -212,11 +212,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		throws Exception {
 
 		boolean defaultAssetPublisher = ParamUtil.getBoolean(
-			actionRequest, "defaultAssetPublisher");
-
-		if (!defaultAssetPublisher) {
-			return;
-		}
+			actionRequest, "defaultAssetPublisher", false);
 
 		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
@@ -226,9 +222,22 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
 
-		typeSettingsProperties.setProperty(
-			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
-			portletResource);
+		if (!defaultAssetPublisher) {
+			String defaultAssetPublisherPortletId =
+				typeSettingsProperties.getProperty(
+				LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
+
+			if (defaultAssetPublisherPortletId.equals(portletResource)) {
+				typeSettingsProperties.setProperty(
+					LayoutTypePortletConstants.
+						DEFAULT_ASSET_PUBLISHER_PORTLET_ID, StringPool.BLANK);
+			}
+		}
+		else {
+			typeSettingsProperties.setProperty(
+				LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
+				portletResource);
+		}
 
 		layout = LayoutServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(),
