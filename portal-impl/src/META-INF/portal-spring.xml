@@ -402,7 +402,4 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService" class="com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.dynamicdatalist.service.DDLEntryLocalService" class="com.liferay.portlet.dynamicdatalist.service.impl.DDLEntryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatalist.service.DDLEntryService" class="com.liferay.portlet.dynamicdatalist.service.impl.DDLEntryServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatalist.service.persistence.DDLEntryPersistence" class="com.liferay.portlet.dynamicdatalist.service.persistence.DDLEntryPersistenceImpl" parent="basePersistence" />
 </beans>
