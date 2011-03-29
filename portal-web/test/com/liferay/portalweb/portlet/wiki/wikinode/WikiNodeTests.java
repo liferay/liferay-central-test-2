@@ -23,6 +23,7 @@ import com.liferay.portalweb.portlet.wiki.wikinode.addwikinodenamenumber.AddWiki
 import com.liferay.portalweb.portlet.wiki.wikinode.addwikinodenamesymbol.AddWikiNodeNameSymbolTests;
 import com.liferay.portalweb.portlet.wiki.wikinode.deletewikinode.DeleteWikiNodeTests;
 import com.liferay.portalweb.portlet.wiki.wikinode.editwikinode.EditWikiNodeTests;
+import com.liferay.portalweb.portlet.wiki.wikinode.viewwikinodefrontpage.ViewWikiNodeFrontPageTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -43,6 +44,7 @@ public class WikiNodeTests extends BaseTests {
 		testSuite.addTest(AddWikiNodeNameSymbolTests.suite());
 		testSuite.addTest(DeleteWikiNodeTests.suite());
 		testSuite.addTest(EditWikiNodeTests.suite());
+		testSuite.addTest(ViewWikiNodeFrontPageTests.suite());
 
 		return testSuite;
 	}
