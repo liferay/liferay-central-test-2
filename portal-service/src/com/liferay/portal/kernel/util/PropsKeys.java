@@ -565,6 +565,8 @@ public interface PropsKeys {
 
 	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
 
+	public static final String DL_REPOSITORY_CMIS_DELETE_DEPTH = "dl.repository.cmis.delete.depth";
+
 	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";
 
 	public static final String DL_WEBDAV_SAVE_TO_SINGLE_VERSION = "dl.webdav.save.to.single.version";

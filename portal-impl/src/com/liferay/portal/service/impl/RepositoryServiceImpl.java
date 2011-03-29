@@ -307,10 +307,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryId;
 	}
 
-	/**
-	 * This method unmounts all repositories associated with this group. It
-	 * deletes the data from only Liferay repositories.
-	 */
 	public void unmountRepositories(long groupId)
 		throws PortalException, SystemException {
 
@@ -344,6 +340,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			}
 
 			repositoryPersistence.remove(repository);
+
+			repositoryEntryPersistence.removeByRepositoryId(repositoryId);
 		}
 	}
 

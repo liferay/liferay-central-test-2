@@ -442,6 +442,8 @@ public class PropsValues {
 
 	public static final String[] DL_REPOSITORY_IMPL = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL);
 
+	public static final int DL_REPOSITORY_CMIS_DELETE_DEPTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_REPOSITORY_CMIS_DELETE_DEPTH));
+
 	public static boolean DL_WEBDAV_HOLD_LOCK = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_HOLD_LOCK));
 
 	public static boolean DL_WEBDAV_SAVE_TO_SINGLE_VERSION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_SAVE_TO_SINGLE_VERSION));

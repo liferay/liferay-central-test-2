@@ -51,6 +51,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portal.service.persistence.RepositoryUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -115,6 +116,12 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  *         CMIS Type Mutability proposal</a>
  */
 public abstract class CMISRepository extends BaseRepositoryImpl {
+
+	public static final int DELETE_DEEP = -1;
+
+	public static final int DELETE_NONE = 0;
+
+	public static final int DELETE_SHALLOW = 1;
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
@@ -231,6 +238,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 			Document document = (Document)session.getObject(objectId);
 
+			deleteMappedFileEntry(document);
+
 			document.deleteAllVersions();
 		}
 		catch (PortalException pe) {
@@ -254,6 +263,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, folderId);
+
+			deleteMappedFolder(cmisFolder);
 
 			cmisFolder.deleteTree(true, UnfileObject.DELETE, false);
 		}
@@ -1242,6 +1253,72 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		if (contentStream != null) {
 			if (!allowableActionsSet.contains(Action.CAN_SET_CONTENT_STREAM)) {
 				throw new PrincipalException();
+			}
+		}
+	}
+
+	protected void deleteMappedFileEntry(Document document)
+		throws SystemException {
+
+		if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == DELETE_NONE) {
+			return;
+		}
+
+		List<Document> versions = document.getAllVersions();
+
+		for (Document version : versions) {
+			try {
+				RepositoryEntryUtil.removeByR_M(
+					getRepositoryId(), version.getId());
+			}
+			catch (NoSuchRepositoryEntryException nsree) {
+			}
+		}
+
+		try {
+			RepositoryEntryUtil.removeByR_M(
+				getRepositoryId(), document.getId());
+		}
+		catch (NoSuchRepositoryEntryException nsree) {
+		}
+	}
+
+	protected void deleteMappedFolder(
+			org.apache.chemistry.opencmis.client.api.Folder cmisFolder)
+		throws SystemException {
+
+		if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == DELETE_NONE) {
+			return;
+		}
+
+		Iterator<CmisObject> children = cmisFolder.getChildren().iterator();
+
+		while (children.hasNext()) {
+			CmisObject child = children.next();
+
+			if (child instanceof Document) {
+				Document document = (Document)child;
+
+				deleteMappedFileEntry(document);
+			}
+			else if (child instanceof
+						org.apache.chemistry.opencmis.client.api.Folder) {
+
+				org.apache.chemistry.opencmis.client.api.Folder subFolder =
+					(org.apache.chemistry.opencmis.client.api.Folder)child;
+
+				try {
+					RepositoryEntryUtil.removeByR_M(
+						getRepositoryId(), child.getId());
+
+					if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH ==
+							DELETE_DEEP) {
+
+						deleteMappedFolder(subFolder);
+					}
+				}
+				catch (NoSuchRepositoryEntryException nsree) {
+				}
 			}
 		}
 	}
