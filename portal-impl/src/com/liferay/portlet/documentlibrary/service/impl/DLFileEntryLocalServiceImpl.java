@@ -17,23 +17,8 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 
 /**
- * The implementation of the d l file entry local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil
  */
-public class DLFileEntryLocalServiceImpl extends DLFileEntryLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil} to access the d l file entry local service.
-	 */
+public class DLFileEntryLocalServiceImpl
+	extends DLFileEntryLocalServiceBaseImpl {
 }

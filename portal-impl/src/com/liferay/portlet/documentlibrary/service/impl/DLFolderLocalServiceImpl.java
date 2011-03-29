@@ -17,23 +17,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl;
 
 /**
- * The implementation of the d l folder local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.documentlibrary.service.DLFolderLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBaseImpl
- * @see com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil
  */
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil} to access the d l folder local service.
-	 */
 }

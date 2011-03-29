@@ -17,23 +17,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl;
 
 /**
- * The implementation of the d l folder remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.documentlibrary.service.DLFolderService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl
- * @see com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil
  */
 public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil} to access the d l folder remote service.
-	 */
 }
