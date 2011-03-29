@@ -37,7 +37,11 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 	<td class="lfr-top" width="70%">
 
 		<%
-		String attachmentURLPrefix = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
+		String attachmentURLPrefix = StringPool.BLANK;
+
+		if (wikiPage != null) {
+			attachmentURLPrefix = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
+		}
 
 		Map<String,String> configParams = new HashMap();
 
