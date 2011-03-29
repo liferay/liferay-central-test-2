@@ -1,4 +1,5 @@
 alter table AssetCategory add description STRING null;
+alter table AssetEntry add layoutUuid VARCHAR(75) null;
 
 alter table BlogsEntry add description STRING null;
 alter table BlogsEntry add smallImage BOOLEAN null;

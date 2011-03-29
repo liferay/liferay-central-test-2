@@ -479,8 +479,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		return updateEntry(
 			userId, groupId, className, classPK, null, categoryIds, tagNames,
-			true, null, null, null, null, null, null, null, null, null, 0, 0,
-			null, false);
+			true, null, null, null, null, null, null, null, null, null, null, 0,
+			0, null, false);
 	}
 
 	public AssetEntry updateEntry(
@@ -488,8 +488,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			String classUuid, long[] categoryIds, String[] tagNames,
 			boolean visible, Date startDate, Date endDate, Date publishDate,
 			Date expirationDate, String mimeType, String title,
-			String description, String summary, String url, int height,
-			int width, Integer priority, boolean sync)
+			String description, String summary, String url, String layoutUuid,
+			int height, int width, Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -540,6 +540,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		entry.setDescription(description);
 		entry.setSummary(summary);
 		entry.setUrl(url);
+		entry.setLayoutUuid(layoutUuid);
 		entry.setHeight(height);
 		entry.setWidth(width);
 

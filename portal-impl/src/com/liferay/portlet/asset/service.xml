@@ -146,6 +146,7 @@
 		<column name="description" type="String" />
 		<column name="summary" type="String" />
 		<column name="url" type="String" />
+		<column name="layoutUuid" type="String" />
 		<column name="height" type="int" />
 		<column name="width" type="int" />
 		<column name="priority" type="double" />

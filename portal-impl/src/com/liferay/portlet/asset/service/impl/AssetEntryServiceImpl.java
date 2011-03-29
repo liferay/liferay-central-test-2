@@ -161,14 +161,15 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			long[] categoryIds, String[] tagNames, boolean visible,
 			Date startDate, Date endDate, Date publishDate, Date expirationDate,
 			String mimeType, String title, String description, String summary,
-			String url, int height, int width, Integer priority, boolean sync)
+			String url, String layoutUuid, int height, int width,
+			Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		return assetEntryLocalService.updateEntry(
 			getUserId(), groupId, className, classPK, classUuid, categoryIds,
 			tagNames, visible, startDate, endDate, publishDate, expirationDate,
-			mimeType, title, description, summary, url, height, width, priority,
-			sync);
+			mimeType, title, description, summary, url, layoutUuid, height,
+			width, priority, sync);
 	}
 
 	protected String exportToRSS(
