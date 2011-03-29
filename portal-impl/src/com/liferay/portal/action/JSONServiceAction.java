@@ -540,7 +540,7 @@ public class JSONServiceAction extends JSONAction {
 		throws Exception {
 
 		if (returnObj instanceof RepositoryModel) {
-			RepositoryModel repositoryModel = (RepositoryModel)returnObj;
+			RepositoryModel<?> repositoryModel = (RepositoryModel<?>)returnObj;
 
 			returnObj = repositoryModel.getModel();
 
@@ -628,27 +628,32 @@ public class JSONServiceAction extends JSONAction {
 					(returnItem0 instanceof Number) ||
 					(returnItem0 instanceof String)) {
 
-					for (Object o : returnList) {
-						jsonArray.put(o.toString());
+					for (Object returnItem : returnList) {
+						jsonArray.put(returnItem.toString());
 					}
 
 					return jsonArray.toString();
 				}
 
 				if (returnItem0 instanceof RepositoryModel) {
-					RepositoryModel repositoryModel =
-						(RepositoryModel) returnItem0;
+					RepositoryModel<?> repositoryModel =
+						(RepositoryModel<?>)returnItem0;
 
 					returnItem0 = repositoryModel.getModel();
 
-					List<Object> newReturnList =
-						new ArrayList<Object>(returnList.size());
+					List<Object> newReturnList = new ArrayList<Object>(
+						returnList.size());
 
-					for (Object o : returnList) {
-						newReturnList.add(((RepositoryModel)o).getModel());
+					for (Object returnItem : returnList) {
+						RepositoryModel<?> curRepositoryModel =
+							(RepositoryModel<?>)returnItem;
+
+						Object curReturnItem = curRepositoryModel.getModel();
+
+						newReturnList.add(curReturnItem);
 					}
 
-					returnObj = returnList = newReturnList;
+					returnObj = newReturnList;
 				}
 
 				String serializerClassName = getSerializerClassName(
@@ -693,12 +698,12 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected String getSerializerClassName(Object obj) {
-		String serlializerClassName = StringUtil.replace(
+		String serializerClassName = StringUtil.replace(
 			obj.getClass().getName(),
 			new String[] {".model.impl.", "Impl"},
 			new String[] {".service.http.", "JSONSerializer"});
 
-		return serlializerClassName;
+		return serializerClassName;
 	}
 
 	protected String[] getStringArrayFromJSON(
