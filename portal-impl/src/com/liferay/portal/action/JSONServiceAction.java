@@ -540,7 +540,7 @@ public class JSONServiceAction extends JSONAction {
 		throws Exception {
 
 		if (returnObj instanceof RepositoryModel) {
-			RepositoryModel repositoryModel = (RepositoryModel) returnObj;
+			RepositoryModel repositoryModel = (RepositoryModel)returnObj;
 
 			returnObj = repositoryModel.getModel();
 
