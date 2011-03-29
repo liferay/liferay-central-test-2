@@ -218,7 +218,11 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 		<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
 			public boolean isResourceMain() {
-				return true;
+				return _resourceMain;
+			}
+
+			public void setResourceMain(boolean resourceMain) {
+				_resourceMain = resourceMain;
 			}
 		</#if>
 
@@ -484,6 +488,10 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
+
+		<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
+			private boolean _resourceMain;
+		</#if>
 
 		<#if column.userUuid>
 			private String _${column.userUuidName};

@@ -260,6 +260,14 @@ public class ClpSerializer {
 							method${column_index}.invoke(oldModel, (Object[])null);
 
 							newModel.set${column.methodName}(value${column_index});
+
+							<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
+								Method methodIsResourceMain = oldModelClass.getMethod("isResourceMain");
+
+								Boolean resourceMain = (Boolean)methodIsResourceMain.invoke(oldModel, (Object[])null);
+
+								newModel.setResourceMain(resourceMain);
+							</#if>
 						</#list>
 
 						return newModel;
