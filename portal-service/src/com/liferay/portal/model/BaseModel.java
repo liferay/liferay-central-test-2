@@ -121,7 +121,7 @@ public interface BaseModel<T>
 	/**
 	 * Reset all original fields to current values.
 	 */
-	public void reset();
+	public void resetOriginalValues();
 
 	/**
 	 * Gets a copy of this entity as an escaped model instance by wrapping it

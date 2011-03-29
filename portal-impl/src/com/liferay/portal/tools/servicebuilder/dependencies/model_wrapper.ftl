@@ -86,8 +86,8 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 		return _${entity.varName};
 	}
 
-	public void reset() {
-		_${entity.varName}.reset();
+	public void resetOriginalValues() {
+		_${entity.varName}.resetOriginalValues();
 	}
 
 	private ${entity.name} _${entity.varName};

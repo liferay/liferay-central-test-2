@@ -546,7 +546,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			);
 		</#list>
 
-		${entity.varName}Impl.reset();
+		${entity.varName}Impl.resetOriginalValues();
 
 		return ${entity.varName}Impl;
 	}
@@ -656,7 +656,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		</#if>
 	}
 
-	public void reset() {
+	public void resetOriginalValues() {
 		<#list entity.regularColList as column>
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 				<#if !cloneCastModelImpl??>
