@@ -108,6 +108,21 @@ public class MBCategoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategorySoap[] getCategories(
+		long groupId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.messageboards.model.MBCategory> returnValue =
+				MBCategoryServiceUtil.getCategories(groupId);
+
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap[] getCategories(
 		long groupId, long parentCategoryId, int start, int end)
 		throws RemoteException {
 		try {

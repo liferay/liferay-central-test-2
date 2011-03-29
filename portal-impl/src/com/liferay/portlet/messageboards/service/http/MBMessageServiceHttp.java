@@ -408,6 +408,39 @@ public class MBMessageServiceHttp {
 		}
 	}
 
+	public static int getGroupMessagesCount(HttpPrincipal httpPrincipal,
+		long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"getGroupMessagesCount",
+					_getGroupMessagesCountParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					status);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.lang.String getGroupMessagesRSS(
 		HttpPrincipal httpPrincipal, long groupId, int status, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
@@ -417,7 +450,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"getGroupMessagesRSS", _getGroupMessagesRSSParameterTypes9);
+					"getGroupMessagesRSS", _getGroupMessagesRSSParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status, max, type, version, displayStyle, feedURL,
@@ -459,7 +492,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"getGroupMessagesRSS", _getGroupMessagesRSSParameterTypes10);
+					"getGroupMessagesRSS", _getGroupMessagesRSSParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					userId, status, max, type, version, displayStyle, feedURL,
@@ -497,7 +530,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"getMessage", _getMessageParameterTypes11);
+					"getMessage", _getMessageParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
@@ -534,7 +567,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"getMessageDisplay", _getMessageDisplayParameterTypes12);
+					"getMessageDisplay", _getMessageDisplayParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					messageId, status, threadView, includePrevAndNext);
@@ -571,7 +604,7 @@ public class MBMessageServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"getThreadMessages", _getThreadMessagesParameterTypes13);
+					"getThreadMessages", _getThreadMessagesParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, threadId, status, start, end);
@@ -604,7 +637,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getThreadMessagesCount",
-					_getThreadMessagesCountParameterTypes14);
+					_getThreadMessagesCountParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, threadId, status);
@@ -641,7 +674,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"getThreadMessagesRSS",
-					_getThreadMessagesRSSParameterTypes15);
+					_getThreadMessagesRSSParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					threadId, status, max, type, version, displayStyle,
@@ -679,7 +712,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"subscribeMessage", _subscribeMessageParameterTypes16);
+					"subscribeMessage", _subscribeMessageParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
@@ -711,7 +744,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"unsubscribeMessage", _unsubscribeMessageParameterTypes17);
+					"unsubscribeMessage", _unsubscribeMessageParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
@@ -748,7 +781,7 @@ public class MBMessageServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
 					"updateDiscussionMessage",
-					_updateDiscussionMessageParameterTypes18);
+					_updateDiscussionMessageParameterTypes19);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK, permissionClassName, permissionClassPK,
@@ -791,7 +824,7 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"updateMessage", _updateMessageParameterTypes19);
+					"updateMessage", _updateMessageParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					messageId, subject, body, files, existingFiles, priority,
@@ -866,46 +899,49 @@ public class MBMessageServiceHttp {
 			double.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
 		};
-	private static final Class<?>[] _getGroupMessagesRSSParameterTypes9 = new Class[] {
+	private static final Class<?>[] _getGroupMessagesCountParameterTypes9 = new Class[] {
+			long.class, int.class
+		};
+	private static final Class<?>[] _getGroupMessagesRSSParameterTypes10 = new Class[] {
 			long.class, int.class, int.class, java.lang.String.class,
 			double.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
 		};
-	private static final Class<?>[] _getGroupMessagesRSSParameterTypes10 = new Class[] {
+	private static final Class<?>[] _getGroupMessagesRSSParameterTypes11 = new Class[] {
 			long.class, long.class, int.class, int.class, java.lang.String.class,
 			double.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
 		};
-	private static final Class<?>[] _getMessageParameterTypes11 = new Class[] {
+	private static final Class<?>[] _getMessageParameterTypes12 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getMessageDisplayParameterTypes12 = new Class[] {
+	private static final Class<?>[] _getMessageDisplayParameterTypes13 = new Class[] {
 			long.class, int.class, java.lang.String.class, boolean.class
 		};
-	private static final Class<?>[] _getThreadMessagesParameterTypes13 = new Class[] {
+	private static final Class<?>[] _getThreadMessagesParameterTypes14 = new Class[] {
 			long.class, long.class, long.class, int.class, int.class, int.class
 		};
-	private static final Class<?>[] _getThreadMessagesCountParameterTypes14 = new Class[] {
+	private static final Class<?>[] _getThreadMessagesCountParameterTypes15 = new Class[] {
 			long.class, long.class, long.class, int.class
 		};
-	private static final Class<?>[] _getThreadMessagesRSSParameterTypes15 = new Class[] {
+	private static final Class<?>[] _getThreadMessagesRSSParameterTypes16 = new Class[] {
 			long.class, int.class, int.class, java.lang.String.class,
 			double.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
 		};
-	private static final Class<?>[] _subscribeMessageParameterTypes16 = new Class[] {
+	private static final Class<?>[] _subscribeMessageParameterTypes17 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _unsubscribeMessageParameterTypes17 = new Class[] {
+	private static final Class<?>[] _unsubscribeMessageParameterTypes18 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateDiscussionMessageParameterTypes18 = new Class[] {
+	private static final Class<?>[] _updateDiscussionMessageParameterTypes19 = new Class[] {
 			java.lang.String.class, long.class, java.lang.String.class,
 			long.class, long.class, long.class, java.lang.String.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateMessageParameterTypes19 = new Class[] {
+	private static final Class<?>[] _updateMessageParameterTypes20 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.util.List.class, java.util.List.class, double.class,
 			boolean.class, com.liferay.portal.service.ServiceContext.class

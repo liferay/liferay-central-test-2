@@ -133,6 +133,11 @@ public class MBMessageServiceUtil {
 			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
+	public static int getGroupMessagesCount(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupMessagesCount(groupId, status);
+	}
+
 	public static java.lang.String getGroupMessagesRSS(long groupId,
 		int status, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,

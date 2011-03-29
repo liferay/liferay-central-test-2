@@ -890,6 +890,7 @@ Liferay.Service.registerClass(
 		deleteMessage: true,
 		getCategoryMessages: true,
 		getCategoryMessagesCount: true,
+		getGroupMessagesCount: true,
 		getMessage: true,
 		getMessageDisplay: true,
 		getThreadMessages: true,

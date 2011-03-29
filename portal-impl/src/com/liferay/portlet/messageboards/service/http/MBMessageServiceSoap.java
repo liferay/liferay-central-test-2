@@ -190,6 +190,21 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static int getGroupMessagesCount(long groupId, int status)
+		throws RemoteException {
+		try {
+			int returnValue = MBMessageServiceUtil.getGroupMessagesCount(groupId,
+					status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap getMessage(
 		long messageId) throws RemoteException {
 		try {

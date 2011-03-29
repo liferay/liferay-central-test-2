@@ -120,6 +120,11 @@ public class MBMessageServiceWrapper implements MBMessageService {
 			type, version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
+	public int getGroupMessagesCount(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbMessageService.getGroupMessagesCount(groupId, status);
+	}
+
 	public java.lang.String getGroupMessagesRSS(long groupId, int status,
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
