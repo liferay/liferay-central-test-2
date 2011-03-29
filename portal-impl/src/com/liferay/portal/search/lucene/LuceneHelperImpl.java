@@ -78,6 +78,7 @@ import org.apache.lucene.util.Version;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public class LuceneHelperImpl implements LuceneHelper {
 
