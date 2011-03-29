@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl;
 
 import java.util.List;
 
@@ -199,6 +202,28 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		WikiNode newWikiNode = addWikiNode();
+
+		_persistence.clearCache();
+
+		WikiNodeModelImpl existingWikiNodeModelImpl = (WikiNodeModelImpl)_persistence.findByPrimaryKey(newWikiNode.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingWikiNodeModelImpl.getUuid(),
+				existingWikiNodeModelImpl.getOriginalUuid()));
+		assertEquals(existingWikiNodeModelImpl.getGroupId(),
+			existingWikiNodeModelImpl.getOriginalGroupId());
+
+		assertEquals(existingWikiNodeModelImpl.getGroupId(),
+			existingWikiNodeModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(existingWikiNodeModelImpl.getName(),
+				existingWikiNodeModelImpl.getOriginalName()));
 	}
 
 	protected WikiNode addWikiNode() throws Exception {

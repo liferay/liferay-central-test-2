@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -199,6 +202,54 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Group newGroup = addGroup();
+
+		_persistence.clearCache();
+
+		GroupModelImpl existingGroupModelImpl = (GroupModelImpl)_persistence.findByPrimaryKey(newGroup.getPrimaryKey());
+
+		assertEquals(existingGroupModelImpl.getLiveGroupId(),
+			existingGroupModelImpl.getOriginalLiveGroupId());
+
+		assertEquals(existingGroupModelImpl.getCompanyId(),
+			existingGroupModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingGroupModelImpl.getName(),
+				existingGroupModelImpl.getOriginalName()));
+
+		assertEquals(existingGroupModelImpl.getCompanyId(),
+			existingGroupModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingGroupModelImpl.getFriendlyURL(),
+				existingGroupModelImpl.getOriginalFriendlyURL()));
+
+		assertEquals(existingGroupModelImpl.getCompanyId(),
+			existingGroupModelImpl.getOriginalCompanyId());
+		assertEquals(existingGroupModelImpl.getClassNameId(),
+			existingGroupModelImpl.getOriginalClassNameId());
+		assertEquals(existingGroupModelImpl.getClassPK(),
+			existingGroupModelImpl.getOriginalClassPK());
+
+		assertEquals(existingGroupModelImpl.getCompanyId(),
+			existingGroupModelImpl.getOriginalCompanyId());
+		assertEquals(existingGroupModelImpl.getLiveGroupId(),
+			existingGroupModelImpl.getOriginalLiveGroupId());
+		assertTrue(Validator.equals(existingGroupModelImpl.getName(),
+				existingGroupModelImpl.getOriginalName()));
+
+		assertEquals(existingGroupModelImpl.getCompanyId(),
+			existingGroupModelImpl.getOriginalCompanyId());
+		assertEquals(existingGroupModelImpl.getClassNameId(),
+			existingGroupModelImpl.getOriginalClassNameId());
+		assertEquals(existingGroupModelImpl.getLiveGroupId(),
+			existingGroupModelImpl.getOriginalLiveGroupId());
+		assertTrue(Validator.equals(existingGroupModelImpl.getName(),
+				existingGroupModelImpl.getOriginalName()));
 	}
 
 	protected Group addGroup() throws Exception {

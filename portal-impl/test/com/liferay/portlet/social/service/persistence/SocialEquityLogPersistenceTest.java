@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchEquityLogException;
 import com.liferay.portlet.social.model.SocialEquityLog;
+import com.liferay.portlet.social.model.impl.SocialEquityLogModelImpl;
 
 import java.util.List;
 
@@ -208,6 +211,35 @@ public class SocialEquityLogPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialEquityLog newSocialEquityLog = addSocialEquityLog();
+
+		_persistence.clearCache();
+
+		SocialEquityLogModelImpl existingSocialEquityLogModelImpl = (SocialEquityLogModelImpl)_persistence.findByPrimaryKey(newSocialEquityLog.getPrimaryKey());
+
+		assertEquals(existingSocialEquityLogModelImpl.getUserId(),
+			existingSocialEquityLogModelImpl.getOriginalUserId());
+		assertEquals(existingSocialEquityLogModelImpl.getAssetEntryId(),
+			existingSocialEquityLogModelImpl.getOriginalAssetEntryId());
+		assertTrue(Validator.equals(
+				existingSocialEquityLogModelImpl.getActionId(),
+				existingSocialEquityLogModelImpl.getOriginalActionId()));
+		assertEquals(existingSocialEquityLogModelImpl.getActionDate(),
+			existingSocialEquityLogModelImpl.getOriginalActionDate());
+		assertEquals(existingSocialEquityLogModelImpl.getActive(),
+			existingSocialEquityLogModelImpl.getOriginalActive());
+		assertEquals(existingSocialEquityLogModelImpl.getType(),
+			existingSocialEquityLogModelImpl.getOriginalType());
+		assertTrue(Validator.equals(
+				existingSocialEquityLogModelImpl.getExtraData(),
+				existingSocialEquityLogModelImpl.getOriginalExtraData()));
 	}
 
 	protected SocialEquityLog addSocialEquityLog() throws Exception {

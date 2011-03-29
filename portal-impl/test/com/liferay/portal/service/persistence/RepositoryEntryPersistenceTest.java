@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.RepositoryEntry;
+import com.liferay.portal.model.impl.RepositoryEntryModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -189,6 +192,30 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		RepositoryEntry newRepositoryEntry = addRepositoryEntry();
+
+		_persistence.clearCache();
+
+		RepositoryEntryModelImpl existingRepositoryEntryModelImpl = (RepositoryEntryModelImpl)_persistence.findByPrimaryKey(newRepositoryEntry.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingRepositoryEntryModelImpl.getUuid(),
+				existingRepositoryEntryModelImpl.getOriginalUuid()));
+		assertEquals(existingRepositoryEntryModelImpl.getGroupId(),
+			existingRepositoryEntryModelImpl.getOriginalGroupId());
+
+		assertEquals(existingRepositoryEntryModelImpl.getRepositoryId(),
+			existingRepositoryEntryModelImpl.getOriginalRepositoryId());
+		assertTrue(Validator.equals(
+				existingRepositoryEntryModelImpl.getMappedId(),
+				existingRepositoryEntryModelImpl.getOriginalMappedId()));
 	}
 
 	protected RepositoryEntry addRepositoryEntry() throws Exception {

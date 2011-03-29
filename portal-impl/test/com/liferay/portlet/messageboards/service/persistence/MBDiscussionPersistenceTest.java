@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl;
 
 import java.util.List;
 
@@ -186,6 +188,26 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBDiscussion newMBDiscussion = addMBDiscussion();
+
+		_persistence.clearCache();
+
+		MBDiscussionModelImpl existingMBDiscussionModelImpl = (MBDiscussionModelImpl)_persistence.findByPrimaryKey(newMBDiscussion.getPrimaryKey());
+
+		assertEquals(existingMBDiscussionModelImpl.getThreadId(),
+			existingMBDiscussionModelImpl.getOriginalThreadId());
+
+		assertEquals(existingMBDiscussionModelImpl.getClassNameId(),
+			existingMBDiscussionModelImpl.getOriginalClassNameId());
+		assertEquals(existingMBDiscussionModelImpl.getClassPK(),
+			existingMBDiscussionModelImpl.getOriginalClassPK());
 	}
 
 	protected MBDiscussion addMBDiscussion() throws Exception {

@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.ResourceModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -178,6 +181,23 @@ public class ResourcePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Resource newResource = addResource();
+
+		_persistence.clearCache();
+
+		ResourceModelImpl existingResourceModelImpl = (ResourceModelImpl)_persistence.findByPrimaryKey(newResource.getPrimaryKey());
+
+		assertEquals(existingResourceModelImpl.getCodeId(),
+			existingResourceModelImpl.getOriginalCodeId());
+		assertTrue(Validator.equals(existingResourceModelImpl.getPrimKey(),
+				existingResourceModelImpl.getOriginalPrimKey()));
 	}
 
 	protected Resource addResource() throws Exception {

@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.dynamicdatamapping.NoSuchStructureLinkException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink;
+import com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureLinkModelImpl;
 
 import java.util.List;
 
@@ -187,6 +189,25 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DDMStructureLink newDDMStructureLink = addDDMStructureLink();
+
+		_persistence.clearCache();
+
+		DDMStructureLinkModelImpl existingDDMStructureLinkModelImpl = (DDMStructureLinkModelImpl)_persistence.findByPrimaryKey(newDDMStructureLink.getPrimaryKey());
+
+		assertEquals(existingDDMStructureLinkModelImpl.getClassNameId(),
+			existingDDMStructureLinkModelImpl.getOriginalClassNameId());
+		assertEquals(existingDDMStructureLinkModelImpl.getClassPK(),
+			existingDDMStructureLinkModelImpl.getOriginalClassPK());
+		assertEquals(existingDDMStructureLinkModelImpl.getStructureId(),
+			existingDDMStructureLinkModelImpl.getOriginalStructureId());
 	}
 
 	protected DDMStructureLink addDDMStructureLink() throws Exception {

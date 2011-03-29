@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalTemplateModelImpl;
 
 import java.util.List;
 
@@ -227,6 +230,33 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		JournalTemplate newJournalTemplate = addJournalTemplate();
+
+		_persistence.clearCache();
+
+		JournalTemplateModelImpl existingJournalTemplateModelImpl = (JournalTemplateModelImpl)_persistence.findByPrimaryKey(newJournalTemplate.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingJournalTemplateModelImpl.getUuid(),
+				existingJournalTemplateModelImpl.getOriginalUuid()));
+		assertEquals(existingJournalTemplateModelImpl.getGroupId(),
+			existingJournalTemplateModelImpl.getOriginalGroupId());
+
+		assertEquals(existingJournalTemplateModelImpl.getSmallImageId(),
+			existingJournalTemplateModelImpl.getOriginalSmallImageId());
+
+		assertEquals(existingJournalTemplateModelImpl.getGroupId(),
+			existingJournalTemplateModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingJournalTemplateModelImpl.getTemplateId(),
+				existingJournalTemplateModelImpl.getOriginalTemplateId()));
 	}
 
 	protected JournalTemplate addJournalTemplate() throws Exception {

@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchEquityUserException;
 import com.liferay.portlet.social.model.SocialEquityUser;
+import com.liferay.portlet.social.model.impl.SocialEquityUserModelImpl;
 
 import java.util.List;
 
@@ -201,6 +203,23 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialEquityUser newSocialEquityUser = addSocialEquityUser();
+
+		_persistence.clearCache();
+
+		SocialEquityUserModelImpl existingSocialEquityUserModelImpl = (SocialEquityUserModelImpl)_persistence.findByPrimaryKey(newSocialEquityUser.getPrimaryKey());
+
+		assertEquals(existingSocialEquityUserModelImpl.getGroupId(),
+			existingSocialEquityUserModelImpl.getOriginalGroupId());
+		assertEquals(existingSocialEquityUserModelImpl.getUserId(),
+			existingSocialEquityUserModelImpl.getOriginalUserId());
 	}
 
 	protected SocialEquityUser addSocialEquityUser() throws Exception {

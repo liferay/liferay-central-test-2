@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchRequestException;
 import com.liferay.portlet.social.model.SocialRequest;
+import com.liferay.portlet.social.model.impl.SocialRequestModelImpl;
 
 import java.util.List;
 
@@ -209,6 +212,34 @@ public class SocialRequestPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialRequest newSocialRequest = addSocialRequest();
+
+		_persistence.clearCache();
+
+		SocialRequestModelImpl existingSocialRequestModelImpl = (SocialRequestModelImpl)_persistence.findByPrimaryKey(newSocialRequest.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingSocialRequestModelImpl.getUuid(),
+				existingSocialRequestModelImpl.getOriginalUuid()));
+		assertEquals(existingSocialRequestModelImpl.getGroupId(),
+			existingSocialRequestModelImpl.getOriginalGroupId());
+
+		assertEquals(existingSocialRequestModelImpl.getUserId(),
+			existingSocialRequestModelImpl.getOriginalUserId());
+		assertEquals(existingSocialRequestModelImpl.getClassNameId(),
+			existingSocialRequestModelImpl.getOriginalClassNameId());
+		assertEquals(existingSocialRequestModelImpl.getClassPK(),
+			existingSocialRequestModelImpl.getOriginalClassPK());
+		assertEquals(existingSocialRequestModelImpl.getType(),
+			existingSocialRequestModelImpl.getOriginalType());
+		assertEquals(existingSocialRequestModelImpl.getReceiverUserId(),
+			existingSocialRequestModelImpl.getOriginalReceiverUserId());
 	}
 
 	protected SocialRequest addSocialRequest() throws Exception {

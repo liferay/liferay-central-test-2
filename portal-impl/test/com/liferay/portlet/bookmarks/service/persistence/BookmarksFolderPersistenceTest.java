@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl;
 
 import java.util.List;
 
@@ -205,6 +208,24 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		BookmarksFolder newBookmarksFolder = addBookmarksFolder();
+
+		_persistence.clearCache();
+
+		BookmarksFolderModelImpl existingBookmarksFolderModelImpl = (BookmarksFolderModelImpl)_persistence.findByPrimaryKey(newBookmarksFolder.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingBookmarksFolderModelImpl.getUuid(),
+				existingBookmarksFolderModelImpl.getOriginalUuid()));
+		assertEquals(existingBookmarksFolderModelImpl.getGroupId(),
+			existingBookmarksFolderModelImpl.getOriginalGroupId());
 	}
 
 	protected BookmarksFolder addBookmarksFolder() throws Exception {

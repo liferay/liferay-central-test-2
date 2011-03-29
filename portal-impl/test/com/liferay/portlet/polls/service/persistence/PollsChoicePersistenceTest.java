@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
+import com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl;
 
 import java.util.List;
 
@@ -185,6 +188,23 @@ public class PollsChoicePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		PollsChoice newPollsChoice = addPollsChoice();
+
+		_persistence.clearCache();
+
+		PollsChoiceModelImpl existingPollsChoiceModelImpl = (PollsChoiceModelImpl)_persistence.findByPrimaryKey(newPollsChoice.getPrimaryKey());
+
+		assertEquals(existingPollsChoiceModelImpl.getQuestionId(),
+			existingPollsChoiceModelImpl.getOriginalQuestionId());
+		assertTrue(Validator.equals(existingPollsChoiceModelImpl.getName(),
+				existingPollsChoiceModelImpl.getOriginalName()));
 	}
 
 	protected PollsChoice addPollsChoice() throws Exception {

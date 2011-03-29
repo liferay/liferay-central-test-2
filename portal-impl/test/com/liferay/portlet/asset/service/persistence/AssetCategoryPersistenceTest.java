@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.impl.AssetCategoryModelImpl;
 
 import java.util.List;
 
@@ -217,6 +220,30 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		AssetCategory newAssetCategory = addAssetCategory();
+
+		_persistence.clearCache();
+
+		AssetCategoryModelImpl existingAssetCategoryModelImpl = (AssetCategoryModelImpl)_persistence.findByPrimaryKey(newAssetCategory.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingAssetCategoryModelImpl.getUuid(),
+				existingAssetCategoryModelImpl.getOriginalUuid()));
+		assertEquals(existingAssetCategoryModelImpl.getGroupId(),
+			existingAssetCategoryModelImpl.getOriginalGroupId());
+
+		assertEquals(existingAssetCategoryModelImpl.getParentCategoryId(),
+			existingAssetCategoryModelImpl.getOriginalParentCategoryId());
+		assertTrue(Validator.equals(existingAssetCategoryModelImpl.getName(),
+				existingAssetCategoryModelImpl.getOriginalName()));
+		assertEquals(existingAssetCategoryModelImpl.getVocabularyId(),
+			existingAssetCategoryModelImpl.getOriginalVocabularyId());
 	}
 
 	protected AssetCategory addAssetCategory() throws Exception {

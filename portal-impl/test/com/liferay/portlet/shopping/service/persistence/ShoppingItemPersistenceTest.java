@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemModelImpl;
 
 import java.util.List;
 
@@ -273,6 +276,32 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ShoppingItem newShoppingItem = addShoppingItem();
+
+		_persistence.clearCache();
+
+		ShoppingItemModelImpl existingShoppingItemModelImpl = (ShoppingItemModelImpl)_persistence.findByPrimaryKey(newShoppingItem.getPrimaryKey());
+
+		assertEquals(existingShoppingItemModelImpl.getSmallImageId(),
+			existingShoppingItemModelImpl.getOriginalSmallImageId());
+
+		assertEquals(existingShoppingItemModelImpl.getMediumImageId(),
+			existingShoppingItemModelImpl.getOriginalMediumImageId());
+
+		assertEquals(existingShoppingItemModelImpl.getLargeImageId(),
+			existingShoppingItemModelImpl.getOriginalLargeImageId());
+
+		assertEquals(existingShoppingItemModelImpl.getCompanyId(),
+			existingShoppingItemModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingShoppingItemModelImpl.getSku(),
+				existingShoppingItemModelImpl.getOriginalSku()));
 	}
 
 	protected ShoppingItem addShoppingItem() throws Exception {

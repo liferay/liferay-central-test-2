@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchEquitySettingException;
 import com.liferay.portlet.social.model.SocialEquitySetting;
+import com.liferay.portlet.social.model.impl.SocialEquitySettingModelImpl;
 
 import java.util.List;
 
@@ -205,6 +208,28 @@ public class SocialEquitySettingPersistenceTest extends BasePersistenceTestCase 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialEquitySetting newSocialEquitySetting = addSocialEquitySetting();
+
+		_persistence.clearCache();
+
+		SocialEquitySettingModelImpl existingSocialEquitySettingModelImpl = (SocialEquitySettingModelImpl)_persistence.findByPrimaryKey(newSocialEquitySetting.getPrimaryKey());
+
+		assertEquals(existingSocialEquitySettingModelImpl.getGroupId(),
+			existingSocialEquitySettingModelImpl.getOriginalGroupId());
+		assertEquals(existingSocialEquitySettingModelImpl.getClassNameId(),
+			existingSocialEquitySettingModelImpl.getOriginalClassNameId());
+		assertTrue(Validator.equals(
+				existingSocialEquitySettingModelImpl.getActionId(),
+				existingSocialEquitySettingModelImpl.getOriginalActionId()));
+		assertEquals(existingSocialEquitySettingModelImpl.getType(),
+			existingSocialEquitySettingModelImpl.getOriginalType());
 	}
 
 	protected SocialEquitySetting addSocialEquitySetting()

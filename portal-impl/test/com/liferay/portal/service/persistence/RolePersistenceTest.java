@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -189,6 +192,30 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Role newRole = addRole();
+
+		_persistence.clearCache();
+
+		RoleModelImpl existingRoleModelImpl = (RoleModelImpl)_persistence.findByPrimaryKey(newRole.getPrimaryKey());
+
+		assertEquals(existingRoleModelImpl.getCompanyId(),
+			existingRoleModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingRoleModelImpl.getName(),
+				existingRoleModelImpl.getOriginalName()));
+
+		assertEquals(existingRoleModelImpl.getCompanyId(),
+			existingRoleModelImpl.getOriginalCompanyId());
+		assertEquals(existingRoleModelImpl.getClassNameId(),
+			existingRoleModelImpl.getOriginalClassNameId());
+		assertEquals(existingRoleModelImpl.getClassPK(),
+			existingRoleModelImpl.getOriginalClassPK());
 	}
 
 	protected Role addRole() throws Exception {

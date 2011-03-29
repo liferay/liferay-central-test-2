@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl;
 
 import java.util.List;
 
@@ -327,6 +330,26 @@ public class ShoppingOrderPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ShoppingOrder newShoppingOrder = addShoppingOrder();
+
+		_persistence.clearCache();
+
+		ShoppingOrderModelImpl existingShoppingOrderModelImpl = (ShoppingOrderModelImpl)_persistence.findByPrimaryKey(newShoppingOrder.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingShoppingOrderModelImpl.getNumber(),
+				existingShoppingOrderModelImpl.getOriginalNumber()));
+
+		assertTrue(Validator.equals(
+				existingShoppingOrderModelImpl.getPpTxnId(),
+				existingShoppingOrderModelImpl.getOriginalPpTxnId()));
 	}
 
 	protected ShoppingOrder addShoppingOrder() throws Exception {

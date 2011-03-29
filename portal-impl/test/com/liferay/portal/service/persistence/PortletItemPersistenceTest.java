@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.PortletItem;
+import com.liferay.portal.model.impl.PortletItemModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -203,6 +206,28 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		PortletItem newPortletItem = addPortletItem();
+
+		_persistence.clearCache();
+
+		PortletItemModelImpl existingPortletItemModelImpl = (PortletItemModelImpl)_persistence.findByPrimaryKey(newPortletItem.getPrimaryKey());
+
+		assertEquals(existingPortletItemModelImpl.getGroupId(),
+			existingPortletItemModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(existingPortletItemModelImpl.getName(),
+				existingPortletItemModelImpl.getOriginalName()));
+		assertTrue(Validator.equals(
+				existingPortletItemModelImpl.getPortletId(),
+				existingPortletItemModelImpl.getOriginalPortletId()));
+		assertEquals(existingPortletItemModelImpl.getClassNameId(),
+			existingPortletItemModelImpl.getOriginalClassNameId());
 	}
 
 	protected PortletItem addPortletItem() throws Exception {

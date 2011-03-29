@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.announcements.NoSuchDeliveryException;
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
+import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl;
 
 import java.util.List;
 
@@ -194,6 +197,24 @@ public class AnnouncementsDeliveryPersistenceTest
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		AnnouncementsDelivery newAnnouncementsDelivery = addAnnouncementsDelivery();
+
+		_persistence.clearCache();
+
+		AnnouncementsDeliveryModelImpl existingAnnouncementsDeliveryModelImpl = (AnnouncementsDeliveryModelImpl)_persistence.findByPrimaryKey(newAnnouncementsDelivery.getPrimaryKey());
+
+		assertEquals(existingAnnouncementsDeliveryModelImpl.getUserId(),
+			existingAnnouncementsDeliveryModelImpl.getOriginalUserId());
+		assertTrue(Validator.equals(
+				existingAnnouncementsDeliveryModelImpl.getType(),
+				existingAnnouncementsDeliveryModelImpl.getOriginalType()));
 	}
 
 	protected AnnouncementsDelivery addAnnouncementsDelivery()

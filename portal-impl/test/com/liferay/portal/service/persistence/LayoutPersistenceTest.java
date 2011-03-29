@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.impl.LayoutModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -233,6 +236,40 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Layout newLayout = addLayout();
+
+		_persistence.clearCache();
+
+		LayoutModelImpl existingLayoutModelImpl = (LayoutModelImpl)_persistence.findByPrimaryKey(newLayout.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingLayoutModelImpl.getUuid(),
+				existingLayoutModelImpl.getOriginalUuid()));
+		assertEquals(existingLayoutModelImpl.getGroupId(),
+			existingLayoutModelImpl.getOriginalGroupId());
+
+		assertEquals(existingLayoutModelImpl.getIconImageId(),
+			existingLayoutModelImpl.getOriginalIconImageId());
+
+		assertEquals(existingLayoutModelImpl.getGroupId(),
+			existingLayoutModelImpl.getOriginalGroupId());
+		assertEquals(existingLayoutModelImpl.getPrivateLayout(),
+			existingLayoutModelImpl.getOriginalPrivateLayout());
+		assertEquals(existingLayoutModelImpl.getLayoutId(),
+			existingLayoutModelImpl.getOriginalLayoutId());
+
+		assertEquals(existingLayoutModelImpl.getGroupId(),
+			existingLayoutModelImpl.getOriginalGroupId());
+		assertEquals(existingLayoutModelImpl.getPrivateLayout(),
+			existingLayoutModelImpl.getOriginalPrivateLayout());
+		assertTrue(Validator.equals(existingLayoutModelImpl.getFriendlyURL(),
+				existingLayoutModelImpl.getOriginalFriendlyURL()));
 	}
 
 	protected Layout addLayout() throws Exception {

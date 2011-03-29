@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl;
 
 import java.util.List;
 
@@ -190,6 +192,23 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		RatingsStats newRatingsStats = addRatingsStats();
+
+		_persistence.clearCache();
+
+		RatingsStatsModelImpl existingRatingsStatsModelImpl = (RatingsStatsModelImpl)_persistence.findByPrimaryKey(newRatingsStats.getPrimaryKey());
+
+		assertEquals(existingRatingsStatsModelImpl.getClassNameId(),
+			existingRatingsStatsModelImpl.getOriginalClassNameId());
+		assertEquals(existingRatingsStatsModelImpl.getClassPK(),
+			existingRatingsStatsModelImpl.getOriginalClassPK());
 	}
 
 	protected RatingsStats addRatingsStats() throws Exception {

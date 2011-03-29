@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.PortletModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -179,6 +182,23 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Portlet newPortlet = addPortlet();
+
+		_persistence.clearCache();
+
+		PortletModelImpl existingPortletModelImpl = (PortletModelImpl)_persistence.findByPrimaryKey(newPortlet.getPrimaryKey());
+
+		assertEquals(existingPortletModelImpl.getCompanyId(),
+			existingPortletModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingPortletModelImpl.getPortletId(),
+				existingPortletModelImpl.getOriginalPortletId()));
 	}
 
 	protected Portlet addPortlet() throws Exception {

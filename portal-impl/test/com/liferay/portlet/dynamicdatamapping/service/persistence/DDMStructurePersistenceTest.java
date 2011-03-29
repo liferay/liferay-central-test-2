@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureModelImpl;
 
 import java.util.List;
 
@@ -211,6 +214,29 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DDMStructure newDDMStructure = addDDMStructure();
+
+		_persistence.clearCache();
+
+		DDMStructureModelImpl existingDDMStructureModelImpl = (DDMStructureModelImpl)_persistence.findByPrimaryKey(newDDMStructure.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingDDMStructureModelImpl.getUuid(),
+				existingDDMStructureModelImpl.getOriginalUuid()));
+		assertEquals(existingDDMStructureModelImpl.getGroupId(),
+			existingDDMStructureModelImpl.getOriginalGroupId());
+
+		assertEquals(existingDDMStructureModelImpl.getGroupId(),
+			existingDDMStructureModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingDDMStructureModelImpl.getStructureKey(),
+				existingDDMStructureModelImpl.getOriginalStructureKey()));
 	}
 
 	protected DDMStructure addDDMStructure() throws Exception {

@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl;
 
 import java.util.List;
 
@@ -201,6 +203,25 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		RatingsEntry newRatingsEntry = addRatingsEntry();
+
+		_persistence.clearCache();
+
+		RatingsEntryModelImpl existingRatingsEntryModelImpl = (RatingsEntryModelImpl)_persistence.findByPrimaryKey(newRatingsEntry.getPrimaryKey());
+
+		assertEquals(existingRatingsEntryModelImpl.getUserId(),
+			existingRatingsEntryModelImpl.getOriginalUserId());
+		assertEquals(existingRatingsEntryModelImpl.getClassNameId(),
+			existingRatingsEntryModelImpl.getOriginalClassNameId());
+		assertEquals(existingRatingsEntryModelImpl.getClassPK(),
+			existingRatingsEntryModelImpl.getOriginalClassPK());
 	}
 
 	protected RatingsEntry addRatingsEntry() throws Exception {

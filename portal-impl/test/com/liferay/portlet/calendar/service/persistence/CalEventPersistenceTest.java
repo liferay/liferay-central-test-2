@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.impl.CalEventModelImpl;
 
 import java.util.List;
 
@@ -230,6 +233,23 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		CalEvent newCalEvent = addCalEvent();
+
+		_persistence.clearCache();
+
+		CalEventModelImpl existingCalEventModelImpl = (CalEventModelImpl)_persistence.findByPrimaryKey(newCalEvent.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingCalEventModelImpl.getUuid(),
+				existingCalEventModelImpl.getOriginalUuid()));
+		assertEquals(existingCalEventModelImpl.getGroupId(),
+			existingCalEventModelImpl.getOriginalGroupId());
 	}
 
 	protected CalEvent addCalEvent() throws Exception {

@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -263,6 +266,54 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		User newUser = addUser();
+
+		_persistence.clearCache();
+
+		UserModelImpl existingUserModelImpl = (UserModelImpl)_persistence.findByPrimaryKey(newUser.getPrimaryKey());
+
+		assertEquals(existingUserModelImpl.getContactId(),
+			existingUserModelImpl.getOriginalContactId());
+
+		assertEquals(existingUserModelImpl.getPortraitId(),
+			existingUserModelImpl.getOriginalPortraitId());
+
+		assertEquals(existingUserModelImpl.getCompanyId(),
+			existingUserModelImpl.getOriginalCompanyId());
+		assertEquals(existingUserModelImpl.getUserId(),
+			existingUserModelImpl.getOriginalUserId());
+
+		assertEquals(existingUserModelImpl.getCompanyId(),
+			existingUserModelImpl.getOriginalCompanyId());
+		assertEquals(existingUserModelImpl.getDefaultUser(),
+			existingUserModelImpl.getOriginalDefaultUser());
+
+		assertEquals(existingUserModelImpl.getCompanyId(),
+			existingUserModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingUserModelImpl.getScreenName(),
+				existingUserModelImpl.getOriginalScreenName()));
+
+		assertEquals(existingUserModelImpl.getCompanyId(),
+			existingUserModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingUserModelImpl.getEmailAddress(),
+				existingUserModelImpl.getOriginalEmailAddress()));
+
+		assertEquals(existingUserModelImpl.getCompanyId(),
+			existingUserModelImpl.getOriginalCompanyId());
+		assertEquals(existingUserModelImpl.getFacebookId(),
+			existingUserModelImpl.getOriginalFacebookId());
+
+		assertEquals(existingUserModelImpl.getCompanyId(),
+			existingUserModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingUserModelImpl.getOpenId(),
+				existingUserModelImpl.getOriginalOpenId()));
 	}
 
 	protected User addUser() throws Exception {

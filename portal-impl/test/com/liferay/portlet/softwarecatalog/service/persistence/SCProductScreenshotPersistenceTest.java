@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductScreenshotException;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl;
 
 import java.util.List;
 
@@ -197,6 +199,29 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SCProductScreenshot newSCProductScreenshot = addSCProductScreenshot();
+
+		_persistence.clearCache();
+
+		SCProductScreenshotModelImpl existingSCProductScreenshotModelImpl = (SCProductScreenshotModelImpl)_persistence.findByPrimaryKey(newSCProductScreenshot.getPrimaryKey());
+
+		assertEquals(existingSCProductScreenshotModelImpl.getThumbnailId(),
+			existingSCProductScreenshotModelImpl.getOriginalThumbnailId());
+
+		assertEquals(existingSCProductScreenshotModelImpl.getFullImageId(),
+			existingSCProductScreenshotModelImpl.getOriginalFullImageId());
+
+		assertEquals(existingSCProductScreenshotModelImpl.getProductEntryId(),
+			existingSCProductScreenshotModelImpl.getOriginalProductEntryId());
+		assertEquals(existingSCProductScreenshotModelImpl.getPriority(),
+			existingSCProductScreenshotModelImpl.getOriginalPriority());
 	}
 
 	protected SCProductScreenshot addSCProductScreenshot()

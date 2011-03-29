@@ -22,7 +22,9 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WebDAVProps;
+import com.liferay.portal.model.impl.WebDAVPropsModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -195,6 +197,23 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		WebDAVProps newWebDAVProps = addWebDAVProps();
+
+		_persistence.clearCache();
+
+		WebDAVPropsModelImpl existingWebDAVPropsModelImpl = (WebDAVPropsModelImpl)_persistence.findByPrimaryKey(newWebDAVProps.getPrimaryKey());
+
+		assertEquals(existingWebDAVPropsModelImpl.getClassNameId(),
+			existingWebDAVPropsModelImpl.getOriginalClassNameId());
+		assertEquals(existingWebDAVPropsModelImpl.getClassPK(),
+			existingWebDAVPropsModelImpl.getOriginalClassPK());
 	}
 
 	protected WebDAVProps addWebDAVProps() throws Exception {

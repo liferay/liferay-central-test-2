@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -206,6 +209,23 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Organization newOrganization = addOrganization();
+
+		_persistence.clearCache();
+
+		OrganizationModelImpl existingOrganizationModelImpl = (OrganizationModelImpl)_persistence.findByPrimaryKey(newOrganization.getPrimaryKey());
+
+		assertEquals(existingOrganizationModelImpl.getCompanyId(),
+			existingOrganizationModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingOrganizationModelImpl.getName(),
+				existingOrganizationModelImpl.getOriginalName()));
 	}
 
 	protected Organization addOrganization() throws Exception {

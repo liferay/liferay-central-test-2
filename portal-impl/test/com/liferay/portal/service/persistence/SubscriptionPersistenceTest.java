@@ -22,7 +22,9 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.impl.SubscriptionModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -203,6 +205,27 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Subscription newSubscription = addSubscription();
+
+		_persistence.clearCache();
+
+		SubscriptionModelImpl existingSubscriptionModelImpl = (SubscriptionModelImpl)_persistence.findByPrimaryKey(newSubscription.getPrimaryKey());
+
+		assertEquals(existingSubscriptionModelImpl.getCompanyId(),
+			existingSubscriptionModelImpl.getOriginalCompanyId());
+		assertEquals(existingSubscriptionModelImpl.getUserId(),
+			existingSubscriptionModelImpl.getOriginalUserId());
+		assertEquals(existingSubscriptionModelImpl.getClassNameId(),
+			existingSubscriptionModelImpl.getOriginalClassNameId());
+		assertEquals(existingSubscriptionModelImpl.getClassPK(),
+			existingSubscriptionModelImpl.getOriginalClassPK());
 	}
 
 	protected Subscription addSubscription() throws Exception {

@@ -21,7 +21,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.BrowserTracker;
+import com.liferay.portal.model.impl.BrowserTrackerModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -183,6 +185,21 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		BrowserTracker newBrowserTracker = addBrowserTracker();
+
+		_persistence.clearCache();
+
+		BrowserTrackerModelImpl existingBrowserTrackerModelImpl = (BrowserTrackerModelImpl)_persistence.findByPrimaryKey(newBrowserTracker.getPrimaryKey());
+
+		assertEquals(existingBrowserTrackerModelImpl.getUserId(),
+			existingBrowserTrackerModelImpl.getOriginalUserId());
 	}
 
 	protected BrowserTracker addBrowserTracker() throws Exception {

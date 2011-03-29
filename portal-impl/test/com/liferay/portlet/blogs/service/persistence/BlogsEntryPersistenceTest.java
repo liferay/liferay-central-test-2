@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl;
 
 import java.util.List;
 
@@ -236,6 +239,28 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		BlogsEntry newBlogsEntry = addBlogsEntry();
+
+		_persistence.clearCache();
+
+		BlogsEntryModelImpl existingBlogsEntryModelImpl = (BlogsEntryModelImpl)_persistence.findByPrimaryKey(newBlogsEntry.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingBlogsEntryModelImpl.getUuid(),
+				existingBlogsEntryModelImpl.getOriginalUuid()));
+		assertEquals(existingBlogsEntryModelImpl.getGroupId(),
+			existingBlogsEntryModelImpl.getOriginalGroupId());
+
+		assertEquals(existingBlogsEntryModelImpl.getGroupId(),
+			existingBlogsEntryModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(existingBlogsEntryModelImpl.getUrlTitle(),
+				existingBlogsEntryModelImpl.getOriginalUrlTitle()));
 	}
 
 	protected BlogsEntry addBlogsEntry() throws Exception {

@@ -21,7 +21,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.PasswordPolicyRel;
+import com.liferay.portal.model.impl.PasswordPolicyRelModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -187,6 +189,30 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		PasswordPolicyRel newPasswordPolicyRel = addPasswordPolicyRel();
+
+		_persistence.clearCache();
+
+		PasswordPolicyRelModelImpl existingPasswordPolicyRelModelImpl = (PasswordPolicyRelModelImpl)_persistence.findByPrimaryKey(newPasswordPolicyRel.getPrimaryKey());
+
+		assertEquals(existingPasswordPolicyRelModelImpl.getClassNameId(),
+			existingPasswordPolicyRelModelImpl.getOriginalClassNameId());
+		assertEquals(existingPasswordPolicyRelModelImpl.getClassPK(),
+			existingPasswordPolicyRelModelImpl.getOriginalClassPK());
+
+		assertEquals(existingPasswordPolicyRelModelImpl.getPasswordPolicyId(),
+			existingPasswordPolicyRelModelImpl.getOriginalPasswordPolicyId());
+		assertEquals(existingPasswordPolicyRelModelImpl.getClassNameId(),
+			existingPasswordPolicyRelModelImpl.getOriginalClassNameId());
+		assertEquals(existingPasswordPolicyRelModelImpl.getClassPK(),
+			existingPasswordPolicyRelModelImpl.getOriginalClassPK());
 	}
 
 	protected PasswordPolicyRel addPasswordPolicyRel()

@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl;
 
 import java.util.List;
 
@@ -189,6 +191,25 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DLFileRank newDLFileRank = addDLFileRank();
+
+		_persistence.clearCache();
+
+		DLFileRankModelImpl existingDLFileRankModelImpl = (DLFileRankModelImpl)_persistence.findByPrimaryKey(newDLFileRank.getPrimaryKey());
+
+		assertEquals(existingDLFileRankModelImpl.getCompanyId(),
+			existingDLFileRankModelImpl.getOriginalCompanyId());
+		assertEquals(existingDLFileRankModelImpl.getUserId(),
+			existingDLFileRankModelImpl.getOriginalUserId());
+		assertEquals(existingDLFileRankModelImpl.getFileEntryId(),
+			existingDLFileRankModelImpl.getOriginalFileEntryId());
 	}
 
 	protected DLFileRank addDLFileRank() throws Exception {

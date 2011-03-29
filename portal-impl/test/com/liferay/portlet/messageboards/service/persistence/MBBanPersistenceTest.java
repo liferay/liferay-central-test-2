@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchBanException;
 import com.liferay.portlet.messageboards.model.MBBan;
+import com.liferay.portlet.messageboards.model.impl.MBBanModelImpl;
 
 import java.util.List;
 
@@ -190,6 +192,23 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBBan newMBBan = addMBBan();
+
+		_persistence.clearCache();
+
+		MBBanModelImpl existingMBBanModelImpl = (MBBanModelImpl)_persistence.findByPrimaryKey(newMBBan.getPrimaryKey());
+
+		assertEquals(existingMBBanModelImpl.getGroupId(),
+			existingMBBanModelImpl.getOriginalGroupId());
+		assertEquals(existingMBBanModelImpl.getBanUserId(),
+			existingMBBanModelImpl.getOriginalBanUserId());
 	}
 
 	protected MBBan addMBBan() throws Exception {

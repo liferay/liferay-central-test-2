@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl;
 
 import java.util.List;
 
@@ -196,6 +199,31 @@ public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		JournalContentSearch newJournalContentSearch = addJournalContentSearch();
+
+		_persistence.clearCache();
+
+		JournalContentSearchModelImpl existingJournalContentSearchModelImpl = (JournalContentSearchModelImpl)_persistence.findByPrimaryKey(newJournalContentSearch.getPrimaryKey());
+
+		assertEquals(existingJournalContentSearchModelImpl.getGroupId(),
+			existingJournalContentSearchModelImpl.getOriginalGroupId());
+		assertEquals(existingJournalContentSearchModelImpl.getPrivateLayout(),
+			existingJournalContentSearchModelImpl.getOriginalPrivateLayout());
+		assertEquals(existingJournalContentSearchModelImpl.getLayoutId(),
+			existingJournalContentSearchModelImpl.getOriginalLayoutId());
+		assertTrue(Validator.equals(
+				existingJournalContentSearchModelImpl.getPortletId(),
+				existingJournalContentSearchModelImpl.getOriginalPortletId()));
+		assertTrue(Validator.equals(
+				existingJournalContentSearchModelImpl.getArticleId(),
+				existingJournalContentSearchModelImpl.getOriginalArticleId()));
 	}
 
 	protected JournalContentSearch addJournalContentSearch()

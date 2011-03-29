@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl;
 
 import java.util.List;
 
@@ -197,6 +200,30 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		IGFolder newIGFolder = addIGFolder();
+
+		_persistence.clearCache();
+
+		IGFolderModelImpl existingIGFolderModelImpl = (IGFolderModelImpl)_persistence.findByPrimaryKey(newIGFolder.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingIGFolderModelImpl.getUuid(),
+				existingIGFolderModelImpl.getOriginalUuid()));
+		assertEquals(existingIGFolderModelImpl.getGroupId(),
+			existingIGFolderModelImpl.getOriginalGroupId());
+
+		assertEquals(existingIGFolderModelImpl.getGroupId(),
+			existingIGFolderModelImpl.getOriginalGroupId());
+		assertEquals(existingIGFolderModelImpl.getParentFolderId(),
+			existingIGFolderModelImpl.getOriginalParentFolderId());
+		assertTrue(Validator.equals(existingIGFolderModelImpl.getName(),
+				existingIGFolderModelImpl.getOriginalName()));
 	}
 
 	protected IGFolder addIGFolder() throws Exception {

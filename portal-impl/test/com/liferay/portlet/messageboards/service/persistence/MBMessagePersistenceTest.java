@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl;
 
 import java.util.List;
 
@@ -237,6 +240,23 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBMessage newMBMessage = addMBMessage();
+
+		_persistence.clearCache();
+
+		MBMessageModelImpl existingMBMessageModelImpl = (MBMessageModelImpl)_persistence.findByPrimaryKey(newMBMessage.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingMBMessageModelImpl.getUuid(),
+				existingMBMessageModelImpl.getOriginalUuid()));
+		assertEquals(existingMBMessageModelImpl.getGroupId(),
+			existingMBMessageModelImpl.getOriginalGroupId());
 	}
 
 	protected MBMessage addMBMessage() throws Exception {

@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl;
 
 import java.util.List;
 
@@ -232,6 +235,37 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DLFileEntry newDLFileEntry = addDLFileEntry();
+
+		_persistence.clearCache();
+
+		DLFileEntryModelImpl existingDLFileEntryModelImpl = (DLFileEntryModelImpl)_persistence.findByPrimaryKey(newDLFileEntry.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingDLFileEntryModelImpl.getUuid(),
+				existingDLFileEntryModelImpl.getOriginalUuid()));
+		assertEquals(existingDLFileEntryModelImpl.getGroupId(),
+			existingDLFileEntryModelImpl.getOriginalGroupId());
+
+		assertEquals(existingDLFileEntryModelImpl.getGroupId(),
+			existingDLFileEntryModelImpl.getOriginalGroupId());
+		assertEquals(existingDLFileEntryModelImpl.getFolderId(),
+			existingDLFileEntryModelImpl.getOriginalFolderId());
+		assertTrue(Validator.equals(existingDLFileEntryModelImpl.getName(),
+				existingDLFileEntryModelImpl.getOriginalName()));
+
+		assertEquals(existingDLFileEntryModelImpl.getGroupId(),
+			existingDLFileEntryModelImpl.getOriginalGroupId());
+		assertEquals(existingDLFileEntryModelImpl.getFolderId(),
+			existingDLFileEntryModelImpl.getOriginalFolderId());
+		assertTrue(Validator.equals(existingDLFileEntryModelImpl.getTitle(),
+				existingDLFileEntryModelImpl.getOriginalTitle()));
 	}
 
 	protected DLFileEntry addDLFileEntry() throws Exception {

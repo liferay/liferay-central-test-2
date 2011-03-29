@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.model.impl.CountryModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -185,6 +188,27 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Country newCountry = addCountry();
+
+		_persistence.clearCache();
+
+		CountryModelImpl existingCountryModelImpl = (CountryModelImpl)_persistence.findByPrimaryKey(newCountry.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingCountryModelImpl.getName(),
+				existingCountryModelImpl.getOriginalName()));
+
+		assertTrue(Validator.equals(existingCountryModelImpl.getA2(),
+				existingCountryModelImpl.getOriginalA2()));
+
+		assertTrue(Validator.equals(existingCountryModelImpl.getA3(),
+				existingCountryModelImpl.getOriginalA3()));
 	}
 
 	protected Country addCountry() throws Exception {

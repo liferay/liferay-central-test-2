@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.NoSuchRowException;
 import com.liferay.portlet.expando.model.ExpandoRow;
+import com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl;
 
 import java.util.List;
 
@@ -181,6 +183,23 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ExpandoRow newExpandoRow = addExpandoRow();
+
+		_persistence.clearCache();
+
+		ExpandoRowModelImpl existingExpandoRowModelImpl = (ExpandoRowModelImpl)_persistence.findByPrimaryKey(newExpandoRow.getPrimaryKey());
+
+		assertEquals(existingExpandoRowModelImpl.getTableId(),
+			existingExpandoRowModelImpl.getOriginalTableId());
+		assertEquals(existingExpandoRowModelImpl.getClassPK(),
+			existingExpandoRowModelImpl.getOriginalClassPK());
 	}
 
 	protected ExpandoRow addExpandoRow() throws Exception {

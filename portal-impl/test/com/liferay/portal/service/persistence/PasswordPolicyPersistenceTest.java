@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.impl.PasswordPolicyModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -273,6 +276,28 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		PasswordPolicy newPasswordPolicy = addPasswordPolicy();
+
+		_persistence.clearCache();
+
+		PasswordPolicyModelImpl existingPasswordPolicyModelImpl = (PasswordPolicyModelImpl)_persistence.findByPrimaryKey(newPasswordPolicy.getPrimaryKey());
+
+		assertEquals(existingPasswordPolicyModelImpl.getCompanyId(),
+			existingPasswordPolicyModelImpl.getOriginalCompanyId());
+		assertEquals(existingPasswordPolicyModelImpl.getDefaultPolicy(),
+			existingPasswordPolicyModelImpl.getOriginalDefaultPolicy());
+
+		assertEquals(existingPasswordPolicyModelImpl.getCompanyId(),
+			existingPasswordPolicyModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingPasswordPolicyModelImpl.getName(),
+				existingPasswordPolicyModelImpl.getOriginalName()));
 	}
 
 	protected PasswordPolicy addPasswordPolicy() throws Exception {

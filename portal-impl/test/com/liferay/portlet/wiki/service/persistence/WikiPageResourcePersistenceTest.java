@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
 import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl;
 
 import java.util.List;
 
@@ -187,6 +190,24 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		WikiPageResource newWikiPageResource = addWikiPageResource();
+
+		_persistence.clearCache();
+
+		WikiPageResourceModelImpl existingWikiPageResourceModelImpl = (WikiPageResourceModelImpl)_persistence.findByPrimaryKey(newWikiPageResource.getPrimaryKey());
+
+		assertEquals(existingWikiPageResourceModelImpl.getNodeId(),
+			existingWikiPageResourceModelImpl.getOriginalNodeId());
+		assertTrue(Validator.equals(
+				existingWikiPageResourceModelImpl.getTitle(),
+				existingWikiPageResourceModelImpl.getOriginalTitle()));
 	}
 
 	protected WikiPageResource addWikiPageResource() throws Exception {

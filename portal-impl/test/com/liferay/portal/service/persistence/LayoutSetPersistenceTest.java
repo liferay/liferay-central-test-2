@@ -21,7 +21,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.impl.LayoutSetModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -207,6 +209,23 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		LayoutSet newLayoutSet = addLayoutSet();
+
+		_persistence.clearCache();
+
+		LayoutSetModelImpl existingLayoutSetModelImpl = (LayoutSetModelImpl)_persistence.findByPrimaryKey(newLayoutSet.getPrimaryKey());
+
+		assertEquals(existingLayoutSetModelImpl.getGroupId(),
+			existingLayoutSetModelImpl.getOriginalGroupId());
+		assertEquals(existingLayoutSetModelImpl.getPrivateLayout(),
+			existingLayoutSetModelImpl.getOriginalPrivateLayout());
 	}
 
 	protected LayoutSet addLayoutSet() throws Exception {

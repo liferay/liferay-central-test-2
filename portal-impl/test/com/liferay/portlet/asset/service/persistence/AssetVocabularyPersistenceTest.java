@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.NoSuchVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl;
 
 import java.util.List;
 
@@ -213,6 +216,30 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		AssetVocabulary newAssetVocabulary = addAssetVocabulary();
+
+		_persistence.clearCache();
+
+		AssetVocabularyModelImpl existingAssetVocabularyModelImpl = (AssetVocabularyModelImpl)_persistence.findByPrimaryKey(newAssetVocabulary.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingAssetVocabularyModelImpl.getUuid(),
+				existingAssetVocabularyModelImpl.getOriginalUuid()));
+		assertEquals(existingAssetVocabularyModelImpl.getGroupId(),
+			existingAssetVocabularyModelImpl.getOriginalGroupId());
+
+		assertEquals(existingAssetVocabularyModelImpl.getGroupId(),
+			existingAssetVocabularyModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingAssetVocabularyModelImpl.getName(),
+				existingAssetVocabularyModelImpl.getOriginalName()));
 	}
 
 	protected AssetVocabulary addAssetVocabulary() throws Exception {

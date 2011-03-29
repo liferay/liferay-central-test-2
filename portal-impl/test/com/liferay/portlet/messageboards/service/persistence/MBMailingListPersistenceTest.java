@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBMailingList;
+import com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl;
 
 import java.util.List;
 
@@ -251,6 +254,28 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBMailingList newMBMailingList = addMBMailingList();
+
+		_persistence.clearCache();
+
+		MBMailingListModelImpl existingMBMailingListModelImpl = (MBMailingListModelImpl)_persistence.findByPrimaryKey(newMBMailingList.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingMBMailingListModelImpl.getUuid(),
+				existingMBMailingListModelImpl.getOriginalUuid()));
+		assertEquals(existingMBMailingListModelImpl.getGroupId(),
+			existingMBMailingListModelImpl.getOriginalGroupId());
+
+		assertEquals(existingMBMailingListModelImpl.getGroupId(),
+			existingMBMailingListModelImpl.getOriginalGroupId());
+		assertEquals(existingMBMailingListModelImpl.getCategoryId(),
+			existingMBMailingListModelImpl.getOriginalCategoryId());
 	}
 
 	protected MBMailingList addMBMailingList() throws Exception {

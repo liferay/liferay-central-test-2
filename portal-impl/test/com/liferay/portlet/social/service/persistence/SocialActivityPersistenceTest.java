@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
+import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 
 import java.util.List;
 
@@ -205,6 +207,36 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialActivity newSocialActivity = addSocialActivity();
+
+		_persistence.clearCache();
+
+		SocialActivityModelImpl existingSocialActivityModelImpl = (SocialActivityModelImpl)_persistence.findByPrimaryKey(newSocialActivity.getPrimaryKey());
+
+		assertEquals(existingSocialActivityModelImpl.getMirrorActivityId(),
+			existingSocialActivityModelImpl.getOriginalMirrorActivityId());
+
+		assertEquals(existingSocialActivityModelImpl.getGroupId(),
+			existingSocialActivityModelImpl.getOriginalGroupId());
+		assertEquals(existingSocialActivityModelImpl.getUserId(),
+			existingSocialActivityModelImpl.getOriginalUserId());
+		assertEquals(existingSocialActivityModelImpl.getCreateDate(),
+			existingSocialActivityModelImpl.getOriginalCreateDate());
+		assertEquals(existingSocialActivityModelImpl.getClassNameId(),
+			existingSocialActivityModelImpl.getOriginalClassNameId());
+		assertEquals(existingSocialActivityModelImpl.getClassPK(),
+			existingSocialActivityModelImpl.getOriginalClassPK());
+		assertEquals(existingSocialActivityModelImpl.getType(),
+			existingSocialActivityModelImpl.getOriginalType());
+		assertEquals(existingSocialActivityModelImpl.getReceiverUserId(),
+			existingSocialActivityModelImpl.getOriginalReceiverUserId());
 	}
 
 	protected SocialActivity addSocialActivity() throws Exception {

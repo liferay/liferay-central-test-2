@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.shopping.NoSuchCartException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl;
 
 import java.util.List;
 
@@ -208,6 +210,23 @@ public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ShoppingCart newShoppingCart = addShoppingCart();
+
+		_persistence.clearCache();
+
+		ShoppingCartModelImpl existingShoppingCartModelImpl = (ShoppingCartModelImpl)_persistence.findByPrimaryKey(newShoppingCart.getPrimaryKey());
+
+		assertEquals(existingShoppingCartModelImpl.getGroupId(),
+			existingShoppingCartModelImpl.getOriginalGroupId());
+		assertEquals(existingShoppingCartModelImpl.getUserId(),
+			existingShoppingCartModelImpl.getOriginalUserId());
 	}
 
 	protected ShoppingCart addShoppingCart() throws Exception {

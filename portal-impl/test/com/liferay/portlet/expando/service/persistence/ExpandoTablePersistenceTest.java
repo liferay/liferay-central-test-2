@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl;
 
 import java.util.List;
 
@@ -183,6 +186,25 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ExpandoTable newExpandoTable = addExpandoTable();
+
+		_persistence.clearCache();
+
+		ExpandoTableModelImpl existingExpandoTableModelImpl = (ExpandoTableModelImpl)_persistence.findByPrimaryKey(newExpandoTable.getPrimaryKey());
+
+		assertEquals(existingExpandoTableModelImpl.getCompanyId(),
+			existingExpandoTableModelImpl.getOriginalCompanyId());
+		assertEquals(existingExpandoTableModelImpl.getClassNameId(),
+			existingExpandoTableModelImpl.getOriginalClassNameId());
+		assertTrue(Validator.equals(existingExpandoTableModelImpl.getName(),
+				existingExpandoTableModelImpl.getOriginalName()));
 	}
 
 	protected ExpandoTable addExpandoTable() throws Exception {

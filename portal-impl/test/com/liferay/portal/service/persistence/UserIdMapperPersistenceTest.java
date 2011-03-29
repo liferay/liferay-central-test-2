@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.UserIdMapper;
+import com.liferay.portal.model.impl.UserIdMapperModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -187,6 +190,29 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		UserIdMapper newUserIdMapper = addUserIdMapper();
+
+		_persistence.clearCache();
+
+		UserIdMapperModelImpl existingUserIdMapperModelImpl = (UserIdMapperModelImpl)_persistence.findByPrimaryKey(newUserIdMapper.getPrimaryKey());
+
+		assertEquals(existingUserIdMapperModelImpl.getUserId(),
+			existingUserIdMapperModelImpl.getOriginalUserId());
+		assertTrue(Validator.equals(existingUserIdMapperModelImpl.getType(),
+				existingUserIdMapperModelImpl.getOriginalType()));
+
+		assertTrue(Validator.equals(existingUserIdMapperModelImpl.getType(),
+				existingUserIdMapperModelImpl.getOriginalType()));
+		assertTrue(Validator.equals(
+				existingUserIdMapperModelImpl.getExternalUserId(),
+				existingUserIdMapperModelImpl.getOriginalExternalUserId()));
 	}
 
 	protected UserIdMapper addUserIdMapper() throws Exception {

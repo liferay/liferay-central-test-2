@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchArticleResourceException;
 import com.liferay.portlet.journal.model.JournalArticleResource;
+import com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl;
 
 import java.util.List;
 
@@ -188,6 +191,30 @@ public class JournalArticleResourcePersistenceTest
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		JournalArticleResource newJournalArticleResource = addJournalArticleResource();
+
+		_persistence.clearCache();
+
+		JournalArticleResourceModelImpl existingJournalArticleResourceModelImpl = (JournalArticleResourceModelImpl)_persistence.findByPrimaryKey(newJournalArticleResource.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingJournalArticleResourceModelImpl.getUuid(),
+				existingJournalArticleResourceModelImpl.getOriginalUuid()));
+		assertEquals(existingJournalArticleResourceModelImpl.getGroupId(),
+			existingJournalArticleResourceModelImpl.getOriginalGroupId());
+
+		assertEquals(existingJournalArticleResourceModelImpl.getGroupId(),
+			existingJournalArticleResourceModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingJournalArticleResourceModelImpl.getArticleId(),
+				existingJournalArticleResourceModelImpl.getOriginalArticleId()));
 	}
 
 	protected JournalArticleResource addJournalArticleResource()

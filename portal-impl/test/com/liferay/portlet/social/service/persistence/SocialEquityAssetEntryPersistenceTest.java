@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchEquityAssetEntryException;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
+import com.liferay.portlet.social.model.impl.SocialEquityAssetEntryModelImpl;
 
 import java.util.List;
 
@@ -197,6 +199,21 @@ public class SocialEquityAssetEntryPersistenceTest
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialEquityAssetEntry newSocialEquityAssetEntry = addSocialEquityAssetEntry();
+
+		_persistence.clearCache();
+
+		SocialEquityAssetEntryModelImpl existingSocialEquityAssetEntryModelImpl = (SocialEquityAssetEntryModelImpl)_persistence.findByPrimaryKey(newSocialEquityAssetEntry.getPrimaryKey());
+
+		assertEquals(existingSocialEquityAssetEntryModelImpl.getAssetEntryId(),
+			existingSocialEquityAssetEntryModelImpl.getOriginalAssetEntryId());
 	}
 
 	protected SocialEquityAssetEntry addSocialEquityAssetEntry()

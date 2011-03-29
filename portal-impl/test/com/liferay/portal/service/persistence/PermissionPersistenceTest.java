@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -185,6 +188,23 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Permission newPermission = addPermission();
+
+		_persistence.clearCache();
+
+		PermissionModelImpl existingPermissionModelImpl = (PermissionModelImpl)_persistence.findByPrimaryKey(newPermission.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingPermissionModelImpl.getActionId(),
+				existingPermissionModelImpl.getOriginalActionId()));
+		assertEquals(existingPermissionModelImpl.getResourceId(),
+			existingPermissionModelImpl.getOriginalResourceId());
 	}
 
 	protected Permission addPermission() throws Exception {

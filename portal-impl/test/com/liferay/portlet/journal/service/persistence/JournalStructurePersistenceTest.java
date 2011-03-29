@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.impl.JournalStructureModelImpl;
 
 import java.util.List;
 
@@ -213,6 +216,30 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		JournalStructure newJournalStructure = addJournalStructure();
+
+		_persistence.clearCache();
+
+		JournalStructureModelImpl existingJournalStructureModelImpl = (JournalStructureModelImpl)_persistence.findByPrimaryKey(newJournalStructure.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingJournalStructureModelImpl.getUuid(),
+				existingJournalStructureModelImpl.getOriginalUuid()));
+		assertEquals(existingJournalStructureModelImpl.getGroupId(),
+			existingJournalStructureModelImpl.getOriginalGroupId());
+
+		assertEquals(existingJournalStructureModelImpl.getGroupId(),
+			existingJournalStructureModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingJournalStructureModelImpl.getStructureId(),
+				existingJournalStructureModelImpl.getOriginalStructureId()));
 	}
 
 	protected JournalStructure addJournalStructure() throws Exception {

@@ -19,10 +19,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl;
 
 import java.util.List;
 
@@ -198,6 +201,35 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		JournalArticleImage newJournalArticleImage = addJournalArticleImage();
+
+		_persistence.clearCache();
+
+		JournalArticleImageModelImpl existingJournalArticleImageModelImpl = (JournalArticleImageModelImpl)_persistence.findByPrimaryKey(newJournalArticleImage.getPrimaryKey());
+
+		assertEquals(existingJournalArticleImageModelImpl.getGroupId(),
+			existingJournalArticleImageModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(
+				existingJournalArticleImageModelImpl.getArticleId(),
+				existingJournalArticleImageModelImpl.getOriginalArticleId()));
+		assertEquals(existingJournalArticleImageModelImpl.getVersion(),
+			existingJournalArticleImageModelImpl.getOriginalVersion());
+		assertTrue(Validator.equals(
+				existingJournalArticleImageModelImpl.getElInstanceId(),
+				existingJournalArticleImageModelImpl.getOriginalElInstanceId()));
+		assertTrue(Validator.equals(
+				existingJournalArticleImageModelImpl.getElName(),
+				existingJournalArticleImageModelImpl.getOriginalElName()));
+		assertTrue(Validator.equals(
+				existingJournalArticleImageModelImpl.getLanguageId(),
+				existingJournalArticleImageModelImpl.getOriginalLanguageId()));
 	}
 
 	protected JournalArticleImage addJournalArticleImage()

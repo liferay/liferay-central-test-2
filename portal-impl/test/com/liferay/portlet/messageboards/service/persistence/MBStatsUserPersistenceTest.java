@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl;
 
 import java.util.List;
 
@@ -188,6 +190,23 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBStatsUser newMBStatsUser = addMBStatsUser();
+
+		_persistence.clearCache();
+
+		MBStatsUserModelImpl existingMBStatsUserModelImpl = (MBStatsUserModelImpl)_persistence.findByPrimaryKey(newMBStatsUser.getPrimaryKey());
+
+		assertEquals(existingMBStatsUserModelImpl.getGroupId(),
+			existingMBStatsUserModelImpl.getOriginalGroupId());
+		assertEquals(existingMBStatsUserModelImpl.getUserId(),
+			existingMBStatsUserModelImpl.getOriginalUserId());
 	}
 
 	protected MBStatsUser addMBStatsUser() throws Exception {

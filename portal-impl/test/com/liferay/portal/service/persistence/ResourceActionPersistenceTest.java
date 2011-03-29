@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.impl.ResourceActionModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -186,6 +189,24 @@ public class ResourceActionPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ResourceAction newResourceAction = addResourceAction();
+
+		_persistence.clearCache();
+
+		ResourceActionModelImpl existingResourceActionModelImpl = (ResourceActionModelImpl)_persistence.findByPrimaryKey(newResourceAction.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingResourceActionModelImpl.getName(),
+				existingResourceActionModelImpl.getOriginalName()));
+		assertTrue(Validator.equals(
+				existingResourceActionModelImpl.getActionId(),
+				existingResourceActionModelImpl.getOriginalActionId()));
 	}
 
 	protected ResourceAction addResourceAction() throws Exception {

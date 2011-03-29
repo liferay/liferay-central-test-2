@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.model.impl.ReleaseModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -193,6 +196,22 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Release newRelease = addRelease();
+
+		_persistence.clearCache();
+
+		ReleaseModelImpl existingReleaseModelImpl = (ReleaseModelImpl)_persistence.findByPrimaryKey(newRelease.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingReleaseModelImpl.getServletContextName(),
+				existingReleaseModelImpl.getOriginalServletContextName()));
 	}
 
 	protected Release addRelease() throws Exception {

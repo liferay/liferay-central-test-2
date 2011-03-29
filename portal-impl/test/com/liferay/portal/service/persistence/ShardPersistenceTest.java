@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Shard;
+import com.liferay.portal.model.impl.ShardModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -179,6 +182,26 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Shard newShard = addShard();
+
+		_persistence.clearCache();
+
+		ShardModelImpl existingShardModelImpl = (ShardModelImpl)_persistence.findByPrimaryKey(newShard.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingShardModelImpl.getName(),
+				existingShardModelImpl.getOriginalName()));
+
+		assertEquals(existingShardModelImpl.getClassNameId(),
+			existingShardModelImpl.getOriginalClassNameId());
+		assertEquals(existingShardModelImpl.getClassPK(),
+			existingShardModelImpl.getOriginalClassPK());
 	}
 
 	protected Shard addShard() throws Exception {

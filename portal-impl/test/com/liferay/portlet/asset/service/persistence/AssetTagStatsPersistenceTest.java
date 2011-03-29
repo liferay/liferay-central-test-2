@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.NoSuchTagStatsException;
 import com.liferay.portlet.asset.model.AssetTagStats;
+import com.liferay.portlet.asset.model.impl.AssetTagStatsModelImpl;
 
 import java.util.List;
 
@@ -184,6 +186,23 @@ public class AssetTagStatsPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		AssetTagStats newAssetTagStats = addAssetTagStats();
+
+		_persistence.clearCache();
+
+		AssetTagStatsModelImpl existingAssetTagStatsModelImpl = (AssetTagStatsModelImpl)_persistence.findByPrimaryKey(newAssetTagStats.getPrimaryKey());
+
+		assertEquals(existingAssetTagStatsModelImpl.getTagId(),
+			existingAssetTagStatsModelImpl.getOriginalTagId());
+		assertEquals(existingAssetTagStatsModelImpl.getClassNameId(),
+			existingAssetTagStatsModelImpl.getOriginalClassNameId());
 	}
 
 	protected AssetTagStats addAssetTagStats() throws Exception {

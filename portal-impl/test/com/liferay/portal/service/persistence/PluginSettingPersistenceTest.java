@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.impl.PluginSettingModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -192,6 +195,27 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		PluginSetting newPluginSetting = addPluginSetting();
+
+		_persistence.clearCache();
+
+		PluginSettingModelImpl existingPluginSettingModelImpl = (PluginSettingModelImpl)_persistence.findByPrimaryKey(newPluginSetting.getPrimaryKey());
+
+		assertEquals(existingPluginSettingModelImpl.getCompanyId(),
+			existingPluginSettingModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(
+				existingPluginSettingModelImpl.getPluginId(),
+				existingPluginSettingModelImpl.getOriginalPluginId()));
+		assertTrue(Validator.equals(
+				existingPluginSettingModelImpl.getPluginType(),
+				existingPluginSettingModelImpl.getOriginalPluginType()));
 	}
 
 	protected PluginSetting addPluginSetting() throws Exception {

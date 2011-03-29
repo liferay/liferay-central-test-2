@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl;
 
 import java.util.List;
 
@@ -216,6 +219,23 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBCategory newMBCategory = addMBCategory();
+
+		_persistence.clearCache();
+
+		MBCategoryModelImpl existingMBCategoryModelImpl = (MBCategoryModelImpl)_persistence.findByPrimaryKey(newMBCategory.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingMBCategoryModelImpl.getUuid(),
+				existingMBCategoryModelImpl.getOriginalUuid()));
+		assertEquals(existingMBCategoryModelImpl.getGroupId(),
+			existingMBCategoryModelImpl.getOriginalGroupId());
 	}
 
 	protected MBCategory addMBCategory() throws Exception {

@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 
 import java.util.List;
 
@@ -208,6 +211,33 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DLFolder newDLFolder = addDLFolder();
+
+		_persistence.clearCache();
+
+		DLFolderModelImpl existingDLFolderModelImpl = (DLFolderModelImpl)_persistence.findByPrimaryKey(newDLFolder.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingDLFolderModelImpl.getUuid(),
+				existingDLFolderModelImpl.getOriginalUuid()));
+		assertEquals(existingDLFolderModelImpl.getGroupId(),
+			existingDLFolderModelImpl.getOriginalGroupId());
+
+		assertEquals(existingDLFolderModelImpl.getRepositoryId(),
+			existingDLFolderModelImpl.getOriginalRepositoryId());
+
+		assertEquals(existingDLFolderModelImpl.getGroupId(),
+			existingDLFolderModelImpl.getOriginalGroupId());
+		assertEquals(existingDLFolderModelImpl.getParentFolderId(),
+			existingDLFolderModelImpl.getOriginalParentFolderId());
+		assertTrue(Validator.equals(existingDLFolderModelImpl.getName(),
+				existingDLFolderModelImpl.getOriginalName()));
 	}
 
 	protected DLFolder addDLFolder() throws Exception {

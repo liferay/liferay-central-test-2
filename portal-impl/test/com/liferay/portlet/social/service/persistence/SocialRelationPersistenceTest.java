@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
+import com.liferay.portlet.social.model.impl.SocialRelationModelImpl;
 
 import java.util.List;
 
@@ -193,6 +195,25 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SocialRelation newSocialRelation = addSocialRelation();
+
+		_persistence.clearCache();
+
+		SocialRelationModelImpl existingSocialRelationModelImpl = (SocialRelationModelImpl)_persistence.findByPrimaryKey(newSocialRelation.getPrimaryKey());
+
+		assertEquals(existingSocialRelationModelImpl.getUserId1(),
+			existingSocialRelationModelImpl.getOriginalUserId1());
+		assertEquals(existingSocialRelationModelImpl.getUserId2(),
+			existingSocialRelationModelImpl.getOriginalUserId2());
+		assertEquals(existingSocialRelationModelImpl.getType(),
+			existingSocialRelationModelImpl.getOriginalType());
 	}
 
 	protected SocialRelation addSocialRelation() throws Exception {

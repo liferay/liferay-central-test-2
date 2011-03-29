@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.blogs.NoSuchStatsUserException;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
+import com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl;
 
 import java.util.List;
 
@@ -201,6 +203,23 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		BlogsStatsUser newBlogsStatsUser = addBlogsStatsUser();
+
+		_persistence.clearCache();
+
+		BlogsStatsUserModelImpl existingBlogsStatsUserModelImpl = (BlogsStatsUserModelImpl)_persistence.findByPrimaryKey(newBlogsStatsUser.getPrimaryKey());
+
+		assertEquals(existingBlogsStatsUserModelImpl.getGroupId(),
+			existingBlogsStatsUserModelImpl.getOriginalGroupId());
+		assertEquals(existingBlogsStatsUserModelImpl.getUserId(),
+			existingBlogsStatsUserModelImpl.getOriginalUserId());
 	}
 
 	protected BlogsStatsUser addBlogsStatsUser() throws Exception {

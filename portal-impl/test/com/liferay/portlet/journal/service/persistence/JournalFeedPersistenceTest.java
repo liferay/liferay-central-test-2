@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchFeedException;
 import com.liferay.portlet.journal.model.JournalFeed;
+import com.liferay.portlet.journal.model.impl.JournalFeedModelImpl;
 
 import java.util.List;
 
@@ -234,6 +237,28 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		JournalFeed newJournalFeed = addJournalFeed();
+
+		_persistence.clearCache();
+
+		JournalFeedModelImpl existingJournalFeedModelImpl = (JournalFeedModelImpl)_persistence.findByPrimaryKey(newJournalFeed.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingJournalFeedModelImpl.getUuid(),
+				existingJournalFeedModelImpl.getOriginalUuid()));
+		assertEquals(existingJournalFeedModelImpl.getGroupId(),
+			existingJournalFeedModelImpl.getOriginalGroupId());
+
+		assertEquals(existingJournalFeedModelImpl.getGroupId(),
+			existingJournalFeedModelImpl.getOriginalGroupId());
+		assertTrue(Validator.equals(existingJournalFeedModelImpl.getFeedId(),
+				existingJournalFeedModelImpl.getOriginalFeedId()));
 	}
 
 	protected JournalFeed addJournalFeed() throws Exception {

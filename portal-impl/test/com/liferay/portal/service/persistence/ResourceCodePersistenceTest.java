@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.impl.ResourceCodeModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -181,6 +184,25 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ResourceCode newResourceCode = addResourceCode();
+
+		_persistence.clearCache();
+
+		ResourceCodeModelImpl existingResourceCodeModelImpl = (ResourceCodeModelImpl)_persistence.findByPrimaryKey(newResourceCode.getPrimaryKey());
+
+		assertEquals(existingResourceCodeModelImpl.getCompanyId(),
+			existingResourceCodeModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(existingResourceCodeModelImpl.getName(),
+				existingResourceCodeModelImpl.getOriginalName()));
+		assertEquals(existingResourceCodeModelImpl.getScope(),
+			existingResourceCodeModelImpl.getOriginalScope());
 	}
 
 	protected ResourceCode addResourceCode() throws Exception {

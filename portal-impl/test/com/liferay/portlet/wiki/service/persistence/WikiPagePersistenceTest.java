@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageModelImpl;
 
 import java.util.List;
 
@@ -227,6 +230,37 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		WikiPage newWikiPage = addWikiPage();
+
+		_persistence.clearCache();
+
+		WikiPageModelImpl existingWikiPageModelImpl = (WikiPageModelImpl)_persistence.findByPrimaryKey(newWikiPage.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingWikiPageModelImpl.getUuid(),
+				existingWikiPageModelImpl.getOriginalUuid()));
+		assertEquals(existingWikiPageModelImpl.getGroupId(),
+			existingWikiPageModelImpl.getOriginalGroupId());
+
+		assertEquals(existingWikiPageModelImpl.getResourcePrimKey(),
+			existingWikiPageModelImpl.getOriginalResourcePrimKey());
+		assertEquals(existingWikiPageModelImpl.getNodeId(),
+			existingWikiPageModelImpl.getOriginalNodeId());
+		assertEquals(existingWikiPageModelImpl.getVersion(),
+			existingWikiPageModelImpl.getOriginalVersion());
+
+		assertEquals(existingWikiPageModelImpl.getNodeId(),
+			existingWikiPageModelImpl.getOriginalNodeId());
+		assertTrue(Validator.equals(existingWikiPageModelImpl.getTitle(),
+				existingWikiPageModelImpl.getOriginalTitle()));
+		assertEquals(existingWikiPageModelImpl.getVersion(),
+			existingWikiPageModelImpl.getOriginalVersion());
 	}
 
 	protected WikiPage addWikiPage() throws Exception {

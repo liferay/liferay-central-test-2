@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
+import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl;
 
 import java.util.List;
 
@@ -214,6 +217,22 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		SCProductVersion newSCProductVersion = addSCProductVersion();
+
+		_persistence.clearCache();
+
+		SCProductVersionModelImpl existingSCProductVersionModelImpl = (SCProductVersionModelImpl)_persistence.findByPrimaryKey(newSCProductVersion.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingSCProductVersionModelImpl.getDirectDownloadURL(),
+				existingSCProductVersionModelImpl.getOriginalDirectDownloadURL()));
 	}
 
 	protected SCProductVersion addSCProductVersion() throws Exception {

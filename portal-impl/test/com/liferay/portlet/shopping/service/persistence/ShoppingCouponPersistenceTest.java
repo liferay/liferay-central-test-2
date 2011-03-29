@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
+import com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl;
 
 import java.util.List;
 
@@ -230,6 +233,21 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ShoppingCoupon newShoppingCoupon = addShoppingCoupon();
+
+		_persistence.clearCache();
+
+		ShoppingCouponModelImpl existingShoppingCouponModelImpl = (ShoppingCouponModelImpl)_persistence.findByPrimaryKey(newShoppingCoupon.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingShoppingCouponModelImpl.getCode(),
+				existingShoppingCouponModelImpl.getOriginalCode()));
 	}
 
 	protected ShoppingCoupon addShoppingCoupon() throws Exception {

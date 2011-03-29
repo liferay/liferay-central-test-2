@@ -20,10 +20,13 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.NoSuchTagPropertyException;
 import com.liferay.portlet.asset.model.AssetTagProperty;
+import com.liferay.portlet.asset.model.impl.AssetTagPropertyModelImpl;
 
 import java.util.List;
 
@@ -204,6 +207,24 @@ public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		AssetTagProperty newAssetTagProperty = addAssetTagProperty();
+
+		_persistence.clearCache();
+
+		AssetTagPropertyModelImpl existingAssetTagPropertyModelImpl = (AssetTagPropertyModelImpl)_persistence.findByPrimaryKey(newAssetTagProperty.getPrimaryKey());
+
+		assertEquals(existingAssetTagPropertyModelImpl.getTagId(),
+			existingAssetTagPropertyModelImpl.getOriginalTagId());
+		assertTrue(Validator.equals(
+				existingAssetTagPropertyModelImpl.getKey(),
+				existingAssetTagPropertyModelImpl.getOriginalKey()));
 	}
 
 	protected AssetTagProperty addAssetTagProperty() throws Exception {

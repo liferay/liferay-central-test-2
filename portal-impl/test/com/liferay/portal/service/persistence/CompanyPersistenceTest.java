@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.impl.CompanyModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -189,6 +192,27 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		Company newCompany = addCompany();
+
+		_persistence.clearCache();
+
+		CompanyModelImpl existingCompanyModelImpl = (CompanyModelImpl)_persistence.findByPrimaryKey(newCompany.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingCompanyModelImpl.getWebId(),
+				existingCompanyModelImpl.getOriginalWebId()));
+
+		assertTrue(Validator.equals(existingCompanyModelImpl.getMx(),
+				existingCompanyModelImpl.getOriginalMx()));
+
+		assertEquals(existingCompanyModelImpl.getLogoId(),
+			existingCompanyModelImpl.getOriginalLogoId());
 	}
 
 	protected Company addCompany() throws Exception {

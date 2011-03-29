@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ServiceComponent;
+import com.liferay.portal.model.impl.ServiceComponentModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -189,6 +192,24 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ServiceComponent newServiceComponent = addServiceComponent();
+
+		_persistence.clearCache();
+
+		ServiceComponentModelImpl existingServiceComponentModelImpl = (ServiceComponentModelImpl)_persistence.findByPrimaryKey(newServiceComponent.getPrimaryKey());
+
+		assertTrue(Validator.equals(
+				existingServiceComponentModelImpl.getBuildNamespace(),
+				existingServiceComponentModelImpl.getOriginalBuildNamespace()));
+		assertEquals(existingServiceComponentModelImpl.getBuildNumber(),
+			existingServiceComponentModelImpl.getOriginalBuildNumber());
 	}
 
 	protected ServiceComponent addServiceComponent() throws Exception {

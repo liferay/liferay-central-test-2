@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl;
 
 import java.util.List;
 
@@ -193,6 +195,25 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		MBMessageFlag newMBMessageFlag = addMBMessageFlag();
+
+		_persistence.clearCache();
+
+		MBMessageFlagModelImpl existingMBMessageFlagModelImpl = (MBMessageFlagModelImpl)_persistence.findByPrimaryKey(newMBMessageFlag.getPrimaryKey());
+
+		assertEquals(existingMBMessageFlagModelImpl.getUserId(),
+			existingMBMessageFlagModelImpl.getOriginalUserId());
+		assertEquals(existingMBMessageFlagModelImpl.getMessageId(),
+			existingMBMessageFlagModelImpl.getOriginalMessageId());
+		assertEquals(existingMBMessageFlagModelImpl.getFlag(),
+			existingMBMessageFlagModelImpl.getOriginalFlag());
 	}
 
 	protected MBMessageFlag addMBMessageFlag() throws Exception {

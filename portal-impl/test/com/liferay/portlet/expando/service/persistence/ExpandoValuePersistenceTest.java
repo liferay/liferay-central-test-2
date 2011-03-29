@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.NoSuchValueException;
 import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl;
 
 import java.util.List;
 
@@ -194,6 +196,30 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		ExpandoValue newExpandoValue = addExpandoValue();
+
+		_persistence.clearCache();
+
+		ExpandoValueModelImpl existingExpandoValueModelImpl = (ExpandoValueModelImpl)_persistence.findByPrimaryKey(newExpandoValue.getPrimaryKey());
+
+		assertEquals(existingExpandoValueModelImpl.getColumnId(),
+			existingExpandoValueModelImpl.getOriginalColumnId());
+		assertEquals(existingExpandoValueModelImpl.getRowId(),
+			existingExpandoValueModelImpl.getOriginalRowId());
+
+		assertEquals(existingExpandoValueModelImpl.getTableId(),
+			existingExpandoValueModelImpl.getOriginalTableId());
+		assertEquals(existingExpandoValueModelImpl.getColumnId(),
+			existingExpandoValueModelImpl.getOriginalColumnId());
+		assertEquals(existingExpandoValueModelImpl.getClassPK(),
+			existingExpandoValueModelImpl.getOriginalClassPK());
 	}
 
 	protected ExpandoValue addExpandoValue() throws Exception {
