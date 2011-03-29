@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.servlet.JspFactorySwapper;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.plugin.PluginPackageIndexer;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.lang.PortalSecurityManager;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
@@ -164,6 +165,10 @@ public class StartupAction extends SimpleAction {
 		// Liferay JspFactory
 
 		JspFactorySwapper.swap();
+
+		// Lucene
+
+		LuceneHelperUtil.startup();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);

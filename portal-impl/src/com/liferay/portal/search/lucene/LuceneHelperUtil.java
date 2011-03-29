@@ -317,6 +317,10 @@ public class LuceneHelperUtil {
 		getLuceneHelper().shutdown();
 	}
 
+	public static void startup() {
+		getLuceneHelper().startup();
+	}
+
 	public void setLuceneHelper(LuceneHelper luceneHelper) {
 		_luceneHelper = luceneHelper;
 	}

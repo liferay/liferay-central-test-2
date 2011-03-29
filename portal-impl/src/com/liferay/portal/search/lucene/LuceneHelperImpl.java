@@ -14,18 +14,30 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
+import com.liferay.portal.kernel.executor.PortalExecutorManagerUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEntry;
+import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.StorageType;
+import com.liferay.portal.kernel.scheduler.TimeUnit;
+import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.search.lucene.messaging.CleanUpMessageListener;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
@@ -307,8 +319,28 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void shutdown() {
+		if (_luceneIndexThreadPoolExecutor != null) {
+			_luceneIndexThreadPoolExecutor.shutdownNow();
+
+			try {
+				_luceneIndexThreadPoolExecutor.awaitTermination(
+					60, java.util.concurrent.TimeUnit.SECONDS);
+			}
+			catch (InterruptedException ie) {
+				_log.error("Lucene indexer shutdown interrupted", ie);
+			}
+		}
+
 		for (IndexAccessor indexAccessor : _indexAccessorMap.values()) {
 			indexAccessor.close();
+		}
+	}
+
+	public void startup() {
+		long[] companyIds = PortalInstances.getCompanyIds();
+
+		for (long companyId : companyIds) {
+			_startup(companyId);
 		}
 	}
 
@@ -322,6 +354,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 			catch (Exception e) {
 				_log.error(e);
 			}
+		}
+
+		if (PropsValues.INDEX_ON_STARTUP && PropsValues.INDEX_WITH_THREAD) {
+			_luceneIndexThreadPoolExecutor =
+				PortalExecutorManagerUtil.getPortalExecutor(
+					LuceneHelperImpl.class.getName());
 		}
 	}
 
@@ -343,11 +381,49 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return indexAccessor;
 	}
 
+	private void _startup(long companyId) {
+		if (PropsValues.INDEX_ON_STARTUP) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Indexing Lucene on startup");
+			}
+
+			LuceneIndexer luceneIndexer = new LuceneIndexer(companyId);
+
+			if (PropsValues.INDEX_WITH_THREAD) {
+				_luceneIndexThreadPoolExecutor.execute(luceneIndexer);
+			}
+			else {
+				luceneIndexer.reindex();
+			}
+		}
+
+		if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED) {
+			SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+			schedulerEntry.setEventListenerClass(
+				CleanUpMessageListener.class.getName());
+			schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+			schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+			schedulerEntry.setTriggerValue(
+				PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
+
+			try {
+				SchedulerEngineUtil.schedule(
+					schedulerEntry, StorageType.MEMORY,
+					PortalClassLoaderUtil.getClassLoader(), 0);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
 
 	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Map<Long, IndexAccessor> _indexAccessorMap =
 		new ConcurrentHashMap<Long, IndexAccessor>();
+	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
 	private Version _version = Version.LUCENE_30;
 
 }
