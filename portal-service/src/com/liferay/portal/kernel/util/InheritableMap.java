@@ -33,6 +33,7 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 
 	public void clear() {
 		super.clear();
+
 		_parentMap = null;
 	}
 
