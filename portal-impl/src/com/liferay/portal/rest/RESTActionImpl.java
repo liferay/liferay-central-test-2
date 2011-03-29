@@ -15,12 +15,12 @@
 package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.rest.RESTAction;
+import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.service.ServiceContext;
 import jodd.util.ReflectUtil;
 
 /**
@@ -59,7 +59,6 @@ public class RESTActionImpl implements RESTAction {
 		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
 
 		for (int i = 0; i < parameterNames.length; i++) {
-
 			if (parameters[i] != null) {
 				continue;
 			}
