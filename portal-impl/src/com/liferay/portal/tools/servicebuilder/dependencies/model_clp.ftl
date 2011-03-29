@@ -216,6 +216,12 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			}
 		</#if>
 
+		<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
+			public boolean isResourceMain() {
+				return true;
+			}
+		</#if>
+
 		<#if column.userUuid>
 			public String get${column.methodUserUuidName}() throws SystemException {
 				return PortalUtil.getUserValue(get${column.methodName}(), "uuid", _${column.userUuidName});
