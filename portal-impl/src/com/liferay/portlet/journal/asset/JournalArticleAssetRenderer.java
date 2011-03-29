@@ -130,19 +130,15 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		long groupId = _article.getGroupId();
-		Group group;
+		Group group = themeDisplay.getScopeGroup();
 
-		if (themeDisplay.getScopeGroup().getGroupId() == groupId) {
-			group = themeDisplay.getScopeGroup();
-		}
-		else {
-			group = GroupLocalServiceUtil.getGroup(groupId);
+		if (group.getGroupId() != _article.getGroupId()) {
+			group = GroupLocalServiceUtil.getGroup(_article.getGroupId());
 		}
 
 		return PortalUtil.getGroupFriendlyURL(group, false, themeDisplay) +
 			JournalArticleConstants.CANONICAL_URL_SEPARATOR +
-			_article.getUrlTitle();
+				_article.getUrlTitle();
 	}
 
 	public long getUserId() {
