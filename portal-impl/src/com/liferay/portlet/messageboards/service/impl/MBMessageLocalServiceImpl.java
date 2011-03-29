@@ -1907,6 +1907,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						subscriptionSenderPrototype);
 
 				sourceMailingListSubscriptionSender.setBulk(false);
+				sourceMailingListSubscriptionSender.initialize();
 
 				sourceMailingListSubscriptionSender.addMailingListSubscriber(
 					message.getGroupId(), categoryId);
