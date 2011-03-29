@@ -302,7 +302,7 @@
 		},
 
 		getWindowName: function() {
-			return window.name || Liferay._windowName || '';
+			return window.name || Window._name || '';
 		},
 
 		getURLWithSessionId: function(url) {

@@ -99,7 +99,7 @@ boolean useEditorCodepress = editorType.equals("codepress");
 
 			openingWindow.document.<portlet:namespace />fm1.scroll.value = "<portlet:namespace />xsd";
 
-			var xsd = openerAUI.one('input[name=<portlet:namespace />xsd]');
+			var xsdContent = openerAUI.one('input[name=<portlet:namespace />xsd]');
 
 			var content = '';
 
@@ -112,14 +112,20 @@ boolean useEditorCodepress = editorType.equals("codepress");
 				</c:otherwise>
 			</c:choose>
 
-			xsd.val(encodeURIComponent(content));
+			xsdContent.val(encodeURIComponent(content));
 
-			Liferay.Util.getWindow().close();
+			var dialog = Liferay.Util.getWindow();
+
+			if (dialog) {
+				dialog.close();
+			}
 
 			submitForm(openingWindow.document.<portlet:namespace />fm1);
 		},
 		['aui-dialog']
 	);
+
+	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
 </aui:script>
 
 <aui:script use="aui-base">
@@ -136,6 +142,4 @@ boolean useEditorCodepress = editorType.equals("codepress");
 		},
 		textarea
 	);
-
-	Liferay.Util.resizeTextarea('<portlet:namespace />xsdContent', <%= useEditorCodepress %>, true);
 </aui:script>

@@ -61,7 +61,7 @@
 		sb.append(structure.getStructureId());
 		sb.append("', '");
 		sb.append(structure.getName());
-		sb.append("'); Liferay.Util.getWindow().close();");
+		sb.append("', Liferay.Util.getWindow());");
 
 		String rowHREF = sb.toString();
 

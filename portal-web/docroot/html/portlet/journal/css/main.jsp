@@ -305,6 +305,9 @@
 	.lfr-template-editor {
 		.aui-field-element, .aui-field-content, .aui-field-input-text {
 			display: block;
+		}
+
+		.aui-field-input-text {
 			height: 400px;
 		}
 	}

@@ -407,20 +407,30 @@ if (feed != null) {
 		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = rendererTemplateId;
 	}
 
-	function <portlet:namespace />selectStructure(structureId) {
+	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>') && document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />contentField.value = "<%= JournalFeedConstants.WEB_CONTENT_DESCRIPTION %>";
+
+			if (dialog) {
+				dialog.close();
+			}
+
 			<portlet:namespace />saveFeed();
 		}
 	}
 
-	function <portlet:namespace />selectTemplate(structureId, templateId) {
+	function <portlet:namespace />selectTemplate(structureId, templateId, dialog) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
+
+			if (dialog) {
+				dialog.close();
+			}
+
 			<portlet:namespace />saveFeed();
 		}
 	}

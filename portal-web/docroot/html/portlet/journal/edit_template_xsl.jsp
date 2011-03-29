@@ -128,10 +128,16 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 
 			xslContent.val(encodeURIComponent(content));
 
-			Liferay.Util.getWindow().close();
+			var dialog = Liferay.Util.getWindow();
+
+			if (dialog) {
+				dialog.close();
+			}
 		},
 		['aui-dialog']
 	);
+
+	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 </aui:script>
 
 <aui:script use="aui-base">
@@ -148,6 +154,4 @@ String defaultContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE
 		},
 		textarea
 	);
-
-	Liferay.Util.resizeTextarea('<portlet:namespace />xslContent', <%= useEditorCodepress %>, true);
 </aui:script>

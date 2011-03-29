@@ -412,7 +412,7 @@ int tabIndex = 1;
 		submitForm(document.<portlet:namespace />fm1);
 	}
 
-	function <portlet:namespace />selectStructure(parentStructureId, parentStructureName) {
+	function <portlet:namespace />selectStructure(parentStructureId, parentStructureName, dialog) {
 		document.<portlet:namespace />fm1.<portlet:namespace />parentStructureId.value = parentStructureId;
 
 		var nameEl = document.getElementById("<portlet:namespace />parentStructureName");
@@ -421,6 +421,10 @@ int tabIndex = 1;
 		nameEl.innerHTML = parentStructureName + "&nbsp;";
 
 		document.getElementById("<portlet:namespace />removeParentStructureButton").disabled = false;
+
+		if (dialog) {
+			dialog.close();
+		}
 	}
 
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoStructureIdCheckbox','<portlet:namespace />newStructureId', true);

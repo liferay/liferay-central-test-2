@@ -281,7 +281,7 @@ if (template == null) {
 		submitForm(document.<portlet:namespace />fm1);
 	}
 
-	function <portlet:namespace />selectStructure(structureId, structureName) {
+	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
 		document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 
 		var nameEl = document.getElementById("<portlet:namespace />structureName");
@@ -290,6 +290,10 @@ if (template == null) {
 		nameEl.innerHTML = structureName + "&nbsp;";
 
 		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;
+
+		if (dialog) {
+			dialog.close();
+		}
 	}
 
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoTemplateIdCheckbox','<portlet:namespace />newTemplateId', true);

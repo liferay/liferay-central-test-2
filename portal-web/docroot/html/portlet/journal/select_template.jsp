@@ -64,7 +64,7 @@
 		sb.append(template.getStructureId());
 		sb.append("', '");
 		sb.append(template.getTemplateId());
-		sb.append("'); Liferay.Util.getWindow().close();");
+		sb.append("', Liferay.Util.getWindow());");
 
 		String rowHREF = sb.toString();
 
