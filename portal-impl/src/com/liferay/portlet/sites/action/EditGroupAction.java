@@ -160,7 +160,7 @@ public class EditGroupAction extends PortletAction {
 	protected long getRefererGroupId(ThemeDisplay themeDisplay)
 		throws Exception {
 
-		long refererGroupId = -1;
+		long refererGroupId = 0;
 
 		try {
 			Layout refererLayout = LayoutLocalServiceUtil.getLayout(
