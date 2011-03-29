@@ -47,6 +47,9 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 		return StringPool.BLANK;
 	}
 
+	public void reset() {
+	}
+
 	public String toXmlString() {
 		return StringPool.BLANK;
 	}

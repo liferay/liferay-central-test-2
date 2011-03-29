@@ -119,6 +119,11 @@ public interface BaseModel<T>
 	public Object clone();
 
 	/**
+	 * Reset all original fields to current values.
+	 */
+	public void reset();
+
+	/**
 	 * Gets a copy of this entity as an escaped model instance by wrapping it
 	 * with an {@link com.liferay.portal.kernel.bean.AutoEscapeBeanHandler}.
 	 *

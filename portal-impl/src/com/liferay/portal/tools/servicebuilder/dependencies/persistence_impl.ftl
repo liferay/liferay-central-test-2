@@ -195,6 +195,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				},
 				${entity.varName});
 		</#list>
+
+		${entity.varName}.reset();
 	}
 
 	/**

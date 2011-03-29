@@ -63,6 +63,9 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 
 	public abstract Object clone();
 
+	public void reset() {
+	}
+
 	public T toEscapedModel() {
 		throw new UnsupportedOperationException();
 	}

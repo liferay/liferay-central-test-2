@@ -86,6 +86,10 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 		return _${entity.varName};
 	}
 
+	public void reset() {
+		_${entity.varName}.reset();
+	}
+
 	private ${entity.name} _${entity.varName};
 
 }

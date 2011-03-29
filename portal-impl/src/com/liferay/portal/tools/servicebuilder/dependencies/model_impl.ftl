@@ -544,21 +544,9 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			</#if>
 
 			);
-
-			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
-				<#if !cloneCastModelImpl??>
-					<#assign cloneCastModelImpl = true>
-
-					${entity.name}ModelImpl ${entity.varName}ModelImpl = ${entity.varName}Impl;
-				</#if>
-
-				${entity.varName}ModelImpl._original${column.methodName} = ${entity.varName}ModelImpl._${column.name};
-
-				<#if column.isPrimitiveType()>
-					${entity.varName}ModelImpl._setOriginal${column.methodName} = false;
-				</#if>
-			</#if>
 		</#list>
+
+		${entity.varName}Impl.reset();
 
 		return ${entity.varName}Impl;
 	}
@@ -666,6 +654,24 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		<#else>
 			return getPrimaryKey().hashCode();
 		</#if>
+	}
+
+	public void reset() {
+		<#list entity.regularColList as column>
+			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+				<#if !cloneCastModelImpl??>
+					<#assign cloneCastModelImpl = true>
+
+					${entity.name}ModelImpl ${entity.varName}ModelImpl = this;
+				</#if>
+
+				${entity.varName}ModelImpl._original${column.methodName} = ${entity.varName}ModelImpl._${column.name};
+
+				<#if column.isPrimitiveType()>
+					${entity.varName}ModelImpl._setOriginal${column.methodName} = false;
+				</#if>
+			</#if>
+		</#list>
 	}
 
 	public String toString() {
