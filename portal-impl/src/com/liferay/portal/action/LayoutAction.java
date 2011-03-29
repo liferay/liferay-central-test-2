@@ -237,7 +237,9 @@ public class LayoutAction extends Action {
 			CacheResponseUtil.setHeaders(
 				response, headerCacheServletResponse.getHeaders());
 
-			response.setContentType(contentType);
+			if (contentType != null) {
+				response.setContentType(contentType);
+			}
 
 			return actionForward;
 		}
@@ -369,7 +371,9 @@ public class LayoutAction extends Action {
 
 		requestDispatcher.include(request, pipingServletResponse);
 
-		pipingServletResponse.setContentType(contentType);
+		if (contentType != null) {
+			pipingServletResponse.setContentType(contentType);
+		}
 
 		request.setAttribute(
 			WebKeys.LAYOUT_CONTENT, unsyncStringWriter.getStringBundler());
