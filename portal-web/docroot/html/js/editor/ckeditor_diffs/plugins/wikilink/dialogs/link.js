@@ -10,19 +10,29 @@ CKEDITOR.dialog.add(
 		var parseLink = function(editor, element) {
 			var instance = this;
 
-			var href = '';
+			var data = {
+				address: ''
+			};
 
 			if (element) {
-				href = element.data('cke-saved-href') || element.getAttribute('href');
+				var href = element.data('cke-saved-href') || element.getAttribute('href');
 
 				if (CKEDITOR.config.decodeLinks) {
-					href = decodeURIComponent(href);
+					data.address = decodeURIComponent(href);
 				}
 			}
+			else {
+				var selection = editor.getSelection();
 
-			var data = {
-				address: href
-			};
+				if (CKEDITOR.env.ie && CKEDITOR.env.version <= 8) {
+					selection.unlock(true);
+					data.address = selection.getNative().createRange().text;
+					selection.lock();
+				}
+				else {
+					data.address = selection.getNative().toString();
+				}
+			}
 
 			instance._.selectedElement = element;
 
