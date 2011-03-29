@@ -197,7 +197,10 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 				<c:if test="<%= permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
 
 					<%
-					PortletURL installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+					PortletURL installPluginsURL = PortletURLFactoryUtil.create(request, PortletKeys.PLUGIN_INSTALLER, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+					installPluginsURL.setWindowState(LiferayWindowState.MAXIMIZED);
+					installPluginsURL.setPortletMode(PortletMode.VIEW);
 
 					installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
 					installPluginsURL.setParameter("backURL", currentURL);
@@ -205,7 +208,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 					%>
 
 					<span class="install-themes">
-						<a href="<%= installPluginsURL %>"><liferay-ui:message key="install-more" /></a>
+						<a id="<portlet:namespace />installMore" href="<%= installPluginsURL %>"><liferay-ui:message key="install-more" /></a>
 					</span>
 				</c:if>
 			</h3>
@@ -238,3 +241,19 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 		</div>
 	</c:if>
 </div>
+
+<c:if test="<%= editable && permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
+	<aui:script use="aui-base">
+		if (window.parent) {
+			var installMoreLink = A.one('#<portlet:namespace />installMore');
+
+			if (installMoreLink) {
+				installMoreLink.on('click', function(event) {
+		            event.preventDefault();
+
+					window.parent.location = installMoreLink.attr('href');
+				});
+			}
+		}
+	</aui:script>
+</c:if>
