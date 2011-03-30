@@ -120,7 +120,7 @@ public class RESTActionParameters {
 		UploadServletRequest uploadServletRequest = null;
 
 		if (request instanceof UploadServletRequest) {
-			uploadServletRequest = (UploadServletRequest) request;
+			uploadServletRequest = (UploadServletRequest)request;
 		}
 
 		Enumeration<String> enu = request.getParameterNames();
@@ -130,7 +130,7 @@ public class RESTActionParameters {
 
 			Object value = null;
 
-			if (uploadServletRequest != null &&
+			if ((uploadServletRequest != null) &&
 				!uploadServletRequest.isFormField(parameterName)) {
 
 				value = uploadServletRequest.getFile(parameterName);

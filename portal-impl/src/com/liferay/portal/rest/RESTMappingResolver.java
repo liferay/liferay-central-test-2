@@ -110,7 +110,7 @@ public class RESTMappingResolver {
 	}
 
 	private String _prefixToHttpMethod(String prefix) {
-		for (String postPrefix : GET_PREFIXES) {
+		for (String postPrefix : _GET_PREFIXES) {
 			if (prefix.equals(postPrefix)) {
 				return HttpMethods.GET;
 			}
@@ -119,7 +119,7 @@ public class RESTMappingResolver {
 		return HttpMethods.POST;
 	}
 
-	private static final String[] GET_PREFIXES = new String[] {
+	private static final String[] _GET_PREFIXES = new String[] {
 		"get", "is",
 	};
 

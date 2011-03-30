@@ -48,7 +48,6 @@ public class RESTServlet extends JSONServlet {
 		throws IOException, ServletException {
 
 		if (PortalUtil.isMultipartRequest(request)) {
-
 			UploadServletRequest uploadServletRequest =
 				new UploadServletRequestImpl(request);
 
