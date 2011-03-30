@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -39,6 +40,7 @@ import javax.portlet.PortletPreferences;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
 public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
@@ -233,7 +235,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					LayoutTypePortletConstants.
 						DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
 
-			if (defaultAssetPublisherPortletId.equals(portletResource)) {
+			if (Validator.isNotNull(defaultAssetPublisherPortletId) &&
+				defaultAssetPublisherPortletId.equals(portletResource)) {
 				typeSettingsProperties.setProperty(
 					LayoutTypePortletConstants.
 						DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
