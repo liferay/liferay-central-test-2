@@ -41,9 +41,9 @@
 
 	<aui:input cssClass="hidden-field show-context-link" name="preferences--showContextLink--" type="checkbox" value="<%= showContextLink %>" />
 
-	<aui:select cssClass="hidden-field asset-link-behaviour" name="preferences--assetLinkBehaviour--">
-		<aui:option label="show-full-content" selected='<%= assetLinkBehaviour.equals("showFullContent") %>' value="showFullContent" />
-		<aui:option label="view-in-a-specific-portlet" selected='<%= assetLinkBehaviour.equals("viewInPortlet") %>' value="viewInPortlet" />
+	<aui:select cssClass="hidden-field asset-link-behaviour" label="show-full-content-in" name="preferences--assetLinkBehaviour--">
+		<aui:option label="this-page" selected='<%= assetLinkBehaviour.equals("viewInThisPage") %>' value="viewInThisPage" />
+		<aui:option label="an-associated-page" selected='<%= assetLinkBehaviour.equals("viewInAnAssociatedPage") %>' value="viewInAnAssociatedPage" />
 	</aui:select>
 
 	<c:if test='<%= selectionStyle.equals("dynamic") %>'>

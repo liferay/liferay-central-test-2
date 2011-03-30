@@ -204,7 +204,7 @@ if (Validator.isNull(displayStyle)) {
 boolean showAssetTitle = GetterUtil.getBoolean(preferences.getValue("showAssetTitle", null), true);
 boolean showContextLink = GetterUtil.getBoolean(preferences.getValue("showContextLink", null), true);
 int abstractLength = GetterUtil.getInteger(preferences.getValue("abstractLength", StringPool.BLANK), 200);
-String assetLinkBehaviour = GetterUtil.getString(preferences.getValue("assetLinkBehaviour", "showFullContent"));
+String assetLinkBehaviour = GetterUtil.getString(preferences.getValue("assetLinkBehaviour", "viewInThisPage"));
 String orderByColumn1 = GetterUtil.getString(preferences.getValue("orderByColumn1", "modifiedDate"));
 String orderByColumn2 = GetterUtil.getString(preferences.getValue("orderByColumn2", "title"));
 String orderByType1 = GetterUtil.getString(preferences.getValue("orderByType1", "DESC"));
@@ -249,7 +249,7 @@ String rssName = preferences.getValue("rssName", portletDisplay.getTitle());
 
 String[] assetEntryXmls = preferences.getValues("assetEntryXml", new String[0]);
 
-boolean viewInContext = assetLinkBehaviour.equals("viewInPortlet");
+boolean viewInContext = assetLinkBehaviour.equals("viewInAnAssociatedPage");
 
 boolean showPortletWithNoResults = false;
 boolean groupByClass = (assetVocabularyId == -1);
