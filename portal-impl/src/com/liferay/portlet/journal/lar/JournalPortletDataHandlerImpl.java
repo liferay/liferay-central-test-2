@@ -1655,6 +1655,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 							importedArticle.getArticleId());
 			}
 		}
+
+		if (smallFile != null) {
+			smallFile.delete();
+		}
 	}
 
 	protected static String importDLFileEntries(
@@ -2238,6 +2242,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						"exists. The new generated ID is " +
 							existingTemplate.getTemplateId());
 			}
+		}
+
+		if (smallFile != null) {
+			smallFile.delete();
 		}
 	}
 
