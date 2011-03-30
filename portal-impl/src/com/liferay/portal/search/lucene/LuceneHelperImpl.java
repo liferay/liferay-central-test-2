@@ -40,6 +40,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.lang.reflect.Constructor;
 
@@ -219,6 +221,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		indexAccessor.deleteDocuments(term);
 	}
 
+	public void dumpIndex(long companyId, OutputStream outputStream)
+		throws IOException {
+
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+
+		indexAccessor.dumpIndex(outputStream);
+	}
+
 	public Analyzer getAnalyzer() {
 		try {
 			if (_analyzerClass.equals(StandardAnalyzer.class)) {
@@ -308,6 +318,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 	public Version getVersion() {
 		return _version;
+	}
+
+	public void loadIndex(long companyId, InputStream inputStream)
+		throws IOException {
+
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+
+		indexAccessor.loadIndex(inputStream);
 	}
 
 	public void updateDocument(long companyId, Term term, Document document)

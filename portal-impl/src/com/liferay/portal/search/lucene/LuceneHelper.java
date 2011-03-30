@@ -15,6 +15,8 @@
 package com.liferay.portal.search.lucene;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
@@ -27,6 +29,7 @@ import org.apache.lucene.util.Version;
 
 /**
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public interface LuceneHelper {
 
@@ -57,6 +60,9 @@ public interface LuceneHelper {
 
 	public void deleteDocuments(long companyId, Term term) throws IOException;
 
+	public void dumpIndex(long companyId, OutputStream outputStream)
+		throws IOException;
+
 	public Analyzer getAnalyzer();
 
 	public String[] getQueryTerms(Query query);
@@ -71,6 +77,9 @@ public interface LuceneHelper {
 		throws IOException;
 
 	public Version getVersion();
+
+	public void loadIndex(long companyId, InputStream inputStream)
+		throws IOException;
 
 	public void shutdown();
 

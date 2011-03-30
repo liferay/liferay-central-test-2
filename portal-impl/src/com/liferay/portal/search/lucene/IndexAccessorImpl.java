@@ -24,11 +24,15 @@ import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.search.lucene.dump.DumpIndexDeletionPolicy;
+import com.liferay.portal.search.lucene.dump.IndexCommitSerializationUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -40,6 +44,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.sql.DataSource;
 
@@ -59,6 +65,7 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
  * @author Harry Mark
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public class IndexAccessorImpl implements IndexAccessor {
 
@@ -96,25 +103,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 		close();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
-		}
-
-		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
-			_deleteFile();
-		}
-		else if (PropsValues.LUCENE_STORE_TYPE.equals(
-					_LUCENE_STORE_TYPE_JDBC)) {
-
-			_deleteJdbc();
-		}
-		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
-			_deleteRam();
-		}
-		else {
-			throw new RuntimeException(
-				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
-		}
+		_deleteDirectory();
 
 		_initIndexWriter();
 	}
@@ -132,6 +121,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 		finally {
 			_commit();
 		}
+	}
+
+	public void dumpIndex(OutputStream outputStream) throws IOException {
+		_dumpIndexDeletionPolicy.dump(outputStream, _indexWriter, _commitLock);
 	}
 
 	public long getCompanyId() {
@@ -158,6 +151,27 @@ public class IndexAccessorImpl implements IndexAccessor {
 			throw new RuntimeException(
 				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
+	}
+
+	public void loadIndex(InputStream inputStream) throws IOException {
+		File file = FileUtil.createTempFile();
+
+		Directory tempDirectory = FSDirectory.open(file);
+
+		IndexCommitSerializationUtil.deserializeIndex(
+			inputStream, tempDirectory);
+
+		close();
+
+		_deleteDirectory();
+
+		Directory.copy(tempDirectory, getLuceneDir(), true);
+
+		_initIndexWriter();
+
+		tempDirectory.close();
+
+		FileUtil.deltree(file);
 	}
 
 	public void updateDocument(Term term, Document document)
@@ -192,6 +206,28 @@ public class IndexAccessorImpl implements IndexAccessor {
 			(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _batchCount)) {
 
 			_doCommit();
+		}
+	}
+
+	private void _deleteDirectory() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lucene store type " + PropsValues.LUCENE_STORE_TYPE);
+		}
+
+		if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_FILE)) {
+			_deleteFile();
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(
+					_LUCENE_STORE_TYPE_JDBC)) {
+
+			_deleteJdbc();
+		}
+		else if (PropsValues.LUCENE_STORE_TYPE.equals(_LUCENE_STORE_TYPE_RAM)) {
+			_deleteRam();
+		}
+		else {
+			throw new RuntimeException(
+				"Invalid store type " + PropsValues.LUCENE_STORE_TYPE);
 		}
 	}
 
@@ -253,7 +289,14 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private void _doCommit() throws IOException {
 		if (_indexWriter != null) {
-			_indexWriter.commit();
+			_commitLock.lock();
+			// Protect concurrent commiting while recording dump IndexCommit
+			try {
+				_indexWriter.commit();
+			}
+			finally {
+				_commitLock.unlock();
+			}
 		}
 
 		_batchCount = 0;
@@ -435,9 +478,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private void _initIndexWriter() {
 		try {
+			_dumpIndexDeletionPolicy = new DumpIndexDeletionPolicy();
 			_indexWriter = new IndexWriter(
 				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
-				IndexWriter.MaxFieldLength.LIMITED);
+				_dumpIndexDeletionPolicy, IndexWriter.MaxFieldLength.LIMITED);
 
 			_indexWriter.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
 			_indexWriter.setRAMBufferSizeMB(PropsValues.LUCENE_BUFFER_SIZE);
@@ -534,7 +578,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private int _batchCount;
 	private long _companyId;
+	private Lock _commitLock = new ReentrantLock();
 	private Dialect _dialect;
+	private DumpIndexDeletionPolicy _dumpIndexDeletionPolicy;
 	private IndexWriter _indexWriter;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();

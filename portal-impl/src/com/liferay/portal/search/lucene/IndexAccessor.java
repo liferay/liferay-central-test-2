@@ -15,6 +15,8 @@
 package com.liferay.portal.search.lucene;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
@@ -22,6 +24,7 @@ import org.apache.lucene.store.Directory;
 
 /**
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public interface IndexAccessor {
 
@@ -33,9 +36,13 @@ public interface IndexAccessor {
 
 	public void deleteDocuments(Term term) throws IOException;
 
+	public void dumpIndex(OutputStream outputStream) throws IOException;
+
 	public long getCompanyId();
 
 	public Directory getLuceneDir();
+
+	public void loadIndex(InputStream inputStream) throws IOException;
 
 	public void updateDocument(Term term, Document document) throws IOException;
 

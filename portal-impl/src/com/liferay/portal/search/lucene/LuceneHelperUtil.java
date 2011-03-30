@@ -17,6 +17,8 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.util.Date;
 
@@ -33,6 +35,7 @@ import org.apache.lucene.util.Version;
  * @author Brian Wing Shun Chan
  * @author Harry Mark
  * @author Bruno Farache
+ * @author Shuyang Zhou
  */
 public class LuceneHelperUtil {
 
@@ -266,6 +269,12 @@ public class LuceneHelperUtil {
 		getLuceneHelper().deleteDocuments(companyId, term);
 	}
 
+	public static void dumpIndex(long companyId, OutputStream outputStream)
+		throws IOException {
+
+		getLuceneHelper().dumpIndex(companyId, outputStream);
+	}
+
 	public static Analyzer getAnalyzer() {
 		return getLuceneHelper().getAnalyzer();
 	}
@@ -304,6 +313,12 @@ public class LuceneHelperUtil {
 
 	public static Version getVersion() {
 		return getLuceneHelper().getVersion();
+	}
+
+	public static void loadIndex(long companyId, InputStream inputStream)
+		throws IOException {
+
+		getLuceneHelper().loadIndex(companyId, inputStream);
 	}
 
 	public static void updateDocument(
