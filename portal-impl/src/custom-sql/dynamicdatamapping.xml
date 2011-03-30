@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder.countByC_G_CN_S_ST_D">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT structureId) AS COUNT_VALUE
+			FROM
+				DDMStructure
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(classNameId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(storageType = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(structureKey = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder.findByC_G_CN_S_ST_D">
+		<![CDATA[
+			SELECT
+				{DDMStructure.*}
+			FROM
+				DDMStructure
+			WHERE
+				(companyId = ?) AND
+				(groupId = ?) AND
+				(
+					(classNameId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(storageType = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(structureKey = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(description) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+			ORDER BY
+				DDMStructure.structureId DESC
+		]]>
+	</sql>
+</custom-sql>

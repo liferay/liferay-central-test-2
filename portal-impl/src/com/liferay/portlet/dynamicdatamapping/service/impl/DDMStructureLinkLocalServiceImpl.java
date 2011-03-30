@@ -48,6 +48,15 @@ public class DDMStructureLinkLocalServiceImpl
 		return structureLink;
 	}
 
+	public void deleteClassStructureLink(long classPK)
+		throws PortalException, SystemException {
+
+		DDMStructureLink structureLink =
+			ddmStructureLinkPersistence.findByClassPK(classPK);
+
+		deleteStructureLink(structureLink);
+	}
+
 	public void deleteStructureLink(DDMStructureLink structureLink)
 		throws SystemException {
 
@@ -63,29 +72,33 @@ public class DDMStructureLinkLocalServiceImpl
 		deleteStructureLink(structureLink);
 	}
 
-	public void deleteStructureLink(
-			long classNameId, long classPK, long structureId)
+	public void deleteStructureStructureLinks(long structureId)
 		throws PortalException, SystemException {
 
-		DDMStructureLink structureLink =
-			ddmStructureLinkPersistence.findByC_C_S(
-				classNameId, classPK, structureId);
+		List<DDMStructureLink> structureLinks =
+			ddmStructureLinkPersistence.findByStructureId(structureId);
 
-		deleteStructureLink(structureLink);
+		for (DDMStructureLink structureLink : structureLinks) {
+			deleteStructureLink(structureLink);
+		}
+	}
+
+	public DDMStructureLink getClassStructureLink(long classPK)
+		throws PortalException, SystemException {
+
+		return ddmStructureLinkPersistence.findByClassPK(classPK);
+	}
+
+	public List<DDMStructureLink> getClassStructureLinks(long classNameId)
+		throws PortalException, SystemException {
+
+		return ddmStructureLinkPersistence.findByStructureId(classNameId);
 	}
 
 	public DDMStructureLink getStructureLink(long structureLinkId)
 		throws PortalException, SystemException {
 
 		return ddmStructureLinkPersistence.findByPrimaryKey(structureLinkId);
-	}
-
-	public DDMStructureLink getStructureLink(
-			long classNameId, long classPK, long structureId)
-		throws PortalException, SystemException {
-
-		return ddmStructureLinkPersistence.findByC_C_S(
-			classNameId, classPK, structureId);
 	}
 
 	public List<DDMStructureLink> getStructureLinks(

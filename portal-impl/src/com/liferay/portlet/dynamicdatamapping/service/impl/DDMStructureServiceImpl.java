@@ -32,8 +32,8 @@ public class DDMStructureServiceImpl
 
 	public DDMStructure addStructure(
 			long groupId, String structureKey, boolean autoStructureKey,
-			String name, String description, String xsd, String storageType,
-			ServiceContext serviceContext)
+			long classNameId, String name, String description, String xsd,
+			String storageType, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMPermission.check(
@@ -41,8 +41,8 @@ public class DDMStructureServiceImpl
 			ActionKeys.ADD_STRUCTURE_ENTRY);
 
 		return ddmStructureLocalService.addStructure(
-			getUserId(), groupId, structureKey, autoStructureKey, name,
-			description, xsd, storageType, serviceContext);
+			getUserId(), groupId, structureKey, autoStructureKey, classNameId,
+			name, description, xsd, storageType, serviceContext);
 	}
 
 	public void deleteStructure(long groupId, String structureKey)
