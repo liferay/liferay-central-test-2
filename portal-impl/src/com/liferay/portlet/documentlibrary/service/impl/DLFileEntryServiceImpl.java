@@ -17,23 +17,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
 
 /**
- * The implementation of the d l file entry remote service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.documentlibrary.service.DLFileEntryService} interface.
- *
- * <p>
- * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil
  */
 public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil} to access the d l file entry remote service.
-	 */
 }
