@@ -54,7 +54,6 @@ public class BaseLayoutTag extends com.liferay.taglib.util.IncludeTag {
 		return _START_PAGE;
 	}
 
-
 	protected void setAttributes(HttpServletRequest request) {
 		setNamespacedAttribute(request, "cssClass", _cssClass);
 	}

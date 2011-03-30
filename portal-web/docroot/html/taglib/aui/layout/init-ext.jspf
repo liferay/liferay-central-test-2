@@ -13,6 +13,7 @@
  * details.
  */
 --%>
+
 <%
 String cssClasses = StringPool.BLANK;
 
