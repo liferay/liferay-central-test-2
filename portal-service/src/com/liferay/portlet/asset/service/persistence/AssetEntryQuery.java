@@ -337,7 +337,7 @@ public class AssetEntryQuery {
 	private long[] _anyCategoryIds = new long[0];
 	private long[] _anyTagIds = new long[0];
 	private long[] _classNameIds = new long[0];
-	private Layout _layout = null;
+	private Layout _layout;
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeZeroViewCount;
 	private Date _expirationDate;

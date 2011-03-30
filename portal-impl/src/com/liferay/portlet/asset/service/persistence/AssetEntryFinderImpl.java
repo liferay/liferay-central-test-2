@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -202,7 +203,9 @@ public class AssetEntryFinderImpl
 
 		// Layout
 
-		if (Validator.isNotNull(entryQuery.getLayout())) {
+		Layout layout = entryQuery.getLayout();
+
+		if (layout != null) {
 			sb.append(" AND (AssetEntry.layoutUuid = ?)");
 		}
 
@@ -348,11 +351,11 @@ public class AssetEntryFinderImpl
 		QueryPos qPos = QueryPos.getInstance(q);
 
 		if (entryQuery.isVisible() != null) {
-			qPos.add(entryQuery.isVisible().booleanValue());
+			qPos.add(entryQuery.isVisible());
 		}
 
-		if (Validator.isNotNull(entryQuery.getLayout())) {
-			qPos.add(entryQuery.getLayout().getUuid());
+		if (layout != null) {
+			qPos.add(layout.getUuid());
 		}
 
 		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
