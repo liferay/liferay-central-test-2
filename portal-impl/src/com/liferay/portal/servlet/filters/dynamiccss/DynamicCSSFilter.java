@@ -19,14 +19,14 @@ import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -63,23 +62,10 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		_servletContextName = GetterUtil.getString(
 			_servletContext.getServletContextName());
 
-		String contextPath = ContextPathUtil.getContextPath(_servletContext);
+		String basePath = WebDirDetector.getRootDir(
+			PortalClassLoaderUtil.getClassLoader());
 
-		String portalContextPath = PortalUtil.getPathContext();
-
-		if (!contextPath.equals(portalContextPath)) {
-			ServletContext portalServletContext = ServletContextPool.get(
-				portalContextPath);
-
-			_rubyScriptFile = new File(
-				ServletContextUtil.getRealPath(
-					portalServletContext, "/WEB-INF/sass/main.rb"));
-		}
-		else {
-			_rubyScriptFile = new File(
-				ServletContextUtil.getRealPath(
-					_servletContext, "/WEB-INF/sass/main.rb"));
-		}
+		_rubyScriptFile = new File(basePath + "WEB-INF/sass/main.rb");
 
 		try {
 
