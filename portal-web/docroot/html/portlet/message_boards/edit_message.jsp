@@ -432,8 +432,8 @@ if (Validator.isNull(redirect)) {
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
 
 		if (!draft) {
-			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
 			document.<portlet:namespace />fm.<portlet:namespace />preview.value = <%= preview %>;
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
 		}
 
 		submitForm(document.<portlet:namespace />fm);
