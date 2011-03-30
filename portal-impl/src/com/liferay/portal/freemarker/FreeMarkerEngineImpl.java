@@ -71,7 +71,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		_configuration.setDefaultEncoding(StringPool.UTF8);
 		_configuration.setLocalizedLookup(
 			PropsValues.FREEMARKER_ENGINE_LOCALIZED_LOOKUP);
-		_configuration.setObjectWrapper(new DefaultObjectWrapper());
+		_configuration.setObjectWrapper(new LiferayObjectWrapper());
 		_configuration.setSetting(
 			"auto_import", PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY);
 		_configuration.setSetting(
