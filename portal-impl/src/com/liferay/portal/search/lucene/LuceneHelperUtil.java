@@ -317,8 +317,8 @@ public class LuceneHelperUtil {
 		getLuceneHelper().shutdown();
 	}
 
-	public static void startup() {
-		getLuceneHelper().startup();
+	public static void startup(long companyId) {
+		getLuceneHelper().startup(companyId);
 	}
 
 	public void setLuceneHelper(LuceneHelper luceneHelper) {

@@ -32,6 +32,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.VirtualHost;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
@@ -110,14 +111,14 @@ public class PortalInstances {
 
 	private PortalInstances() {
 		_companyIds = new long[0];
-		_autoLoginIgnoreHosts = SetUtil.fromArray(PropsUtil.getArray(
-			PropsKeys.AUTO_LOGIN_IGNORE_HOSTS));
-		_autoLoginIgnorePaths = SetUtil.fromArray(PropsUtil.getArray(
-			PropsKeys.AUTO_LOGIN_IGNORE_PATHS));
-		_virtualHostsIgnoreHosts = SetUtil.fromArray(PropsUtil.getArray(
-			PropsKeys.VIRTUAL_HOSTS_IGNORE_HOSTS));
-		_virtualHostsIgnorePaths = SetUtil.fromArray(PropsUtil.getArray(
-			PropsKeys.VIRTUAL_HOSTS_IGNORE_PATHS));
+		_autoLoginIgnoreHosts = SetUtil.fromArray(
+			PropsUtil.getArray(PropsKeys.AUTO_LOGIN_IGNORE_HOSTS));
+		_autoLoginIgnorePaths = SetUtil.fromArray(
+			PropsUtil.getArray(PropsKeys.AUTO_LOGIN_IGNORE_PATHS));
+		_virtualHostsIgnoreHosts = SetUtil.fromArray(
+			PropsUtil.getArray(PropsKeys.VIRTUAL_HOSTS_IGNORE_HOSTS));
+		_virtualHostsIgnorePaths = SetUtil.fromArray(
+			PropsUtil.getArray(PropsKeys.VIRTUAL_HOSTS_IGNORE_PATHS));
 	}
 
 	private void _addCompanyId(long companyId) {
@@ -367,6 +368,10 @@ public class PortalInstances {
 		}
 
 		CompanyThreadLocal.setCompanyId(companyId);
+
+		// Lucene
+
+		LuceneHelperUtil.startup(companyId);
 
 		// Initialize display
 

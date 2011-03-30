@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.messaging.CleanUpMessageListener;
-import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
@@ -337,11 +336,40 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
-	public void startup() {
-		long[] companyIds = PortalInstances.getCompanyIds();
+	public void startup(long companyId) {
+		if (PropsValues.INDEX_ON_STARTUP) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Indexing Lucene on startup");
+			}
 
-		for (long companyId : companyIds) {
-			_startup(companyId);
+			LuceneIndexer luceneIndexer = new LuceneIndexer(companyId);
+
+			if (PropsValues.INDEX_WITH_THREAD) {
+				_luceneIndexThreadPoolExecutor.execute(luceneIndexer);
+			}
+			else {
+				luceneIndexer.reindex();
+			}
+		}
+
+		if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED) {
+			SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
+
+			schedulerEntry.setEventListenerClass(
+				CleanUpMessageListener.class.getName());
+			schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+			schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+			schedulerEntry.setTriggerValue(
+				PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
+
+			try {
+				SchedulerEngineUtil.schedule(
+					schedulerEntry, StorageType.MEMORY,
+					PortalClassLoaderUtil.getClassLoader(), 0);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 	}
 
@@ -380,43 +408,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		return indexAccessor;
-	}
-
-	private void _startup(long companyId) {
-		if (PropsValues.INDEX_ON_STARTUP) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Indexing Lucene on startup");
-			}
-
-			LuceneIndexer luceneIndexer = new LuceneIndexer(companyId);
-
-			if (PropsValues.INDEX_WITH_THREAD) {
-				_luceneIndexThreadPoolExecutor.execute(luceneIndexer);
-			}
-			else {
-				luceneIndexer.reindex();
-			}
-		}
-
-		if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED) {
-			SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
-
-			schedulerEntry.setEventListenerClass(
-				CleanUpMessageListener.class.getName());
-			schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-			schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-			schedulerEntry.setTriggerValue(
-				PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
-
-			try {
-				SchedulerEngineUtil.schedule(
-					schedulerEntry, StorageType.MEMORY,
-					PortalClassLoaderUtil.getClassLoader(), 0);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);

@@ -74,7 +74,7 @@ public interface LuceneHelper {
 
 	public void shutdown();
 
-	public void startup();
+	public void startup(long companyId);
 
 	public void updateDocument(long companyId, Term term, Document document)
 		throws IOException;
