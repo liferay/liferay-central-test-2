@@ -159,8 +159,9 @@ public class ConfigurationImpl
 
 			// Add to configList of AggregatedProperties itself
 
-			Field field2 = aggregatedProperties.getClass().getDeclaredField(
-				"baseConf");
+			Class<?> clazz = aggregatedProperties.getClass();
+
+			Field field2 = clazz.getDeclaredField("baseConf");
 
 			field2.setAccessible(true);
 
@@ -178,7 +179,9 @@ public class ConfigurationImpl
 	}
 
 	public boolean contains(String key) {
-		return getComponentProperties().containsKey(key);
+		ComponentProperties componentProperties = getComponentProperties();
+
+		return componentProperties.containsKey(key);
 	}
 
 	public String get(String key) {
@@ -191,16 +194,21 @@ public class ConfigurationImpl
 			}
 		}
 
-		return getComponentProperties().getString(key);
+		ComponentProperties componentProperties = getComponentProperties();
+
+		return componentProperties.getString(key);
 	}
 
 	public String get(String key, Filter filter) {
-		return getComponentProperties().getString(
-			key, getEasyConfFilter(filter));
+		ComponentProperties componentProperties = getComponentProperties();
+
+		return componentProperties.getString(key, getEasyConfFilter(filter));
 	}
 
 	public String[] getArray(String key) {
-		String[] array = getComponentProperties().getStringArray(key);
+		ComponentProperties componentProperties = getComponentProperties();
+
+		String[] array = componentProperties.getStringArray(key);
 
 		if (array == null) {
 			return new String[0];
@@ -225,7 +233,9 @@ public class ConfigurationImpl
 	}
 
 	public String[] getArray(String key, Filter filter) {
-		return getComponentProperties().getStringArray(
+		ComponentProperties componentProperties = getComponentProperties();
+
+		return componentProperties.getStringArray(
 			key, getEasyConfFilter(filter));
 	}
 
@@ -243,11 +253,11 @@ public class ConfigurationImpl
 
 		ComponentProperties componentProperties = getComponentProperties();
 
-		Iterator<Map.Entry<Object, Object>> itr =
-			componentProperties.getProperties().entrySet().iterator();
+		Properties componentPropertiesProperties =
+			componentProperties.getProperties();
 
-		while (itr.hasNext()) {
-			Map.Entry<Object, Object> entry = itr.next();
+		for (Map.Entry<Object, Object> entry :
+				componentPropertiesProperties.entrySet()) {
 
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();
@@ -259,10 +269,9 @@ public class ConfigurationImpl
 	}
 
 	public Properties getProperties(String prefix, boolean removePrefix) {
-		Properties allProperties = getProperties();
+		Properties properties = getProperties();
 
-		return PropertiesUtil.getProperties(
-			allProperties, prefix, removePrefix);
+		return PropertiesUtil.getProperties(properties, prefix, removePrefix);
 	}
 
 	public void removeProperties(Properties properties) {
@@ -273,8 +282,9 @@ public class ConfigurationImpl
 			AggregatedProperties aggregatedProperties =
 				(AggregatedProperties)componentProperties.toConfiguration();
 
-			Field field1 = aggregatedProperties.getClass().getDeclaredField(
-				"baseConf");
+			Class<?> clazz = aggregatedProperties.getClass();
+
+			Field field1 = clazz.getDeclaredField("baseConf");
 
 			field1.setAccessible(true);
 
@@ -314,7 +324,9 @@ public class ConfigurationImpl
 	}
 
 	public void set(String key, String value) {
-		getComponentProperties().setProperty(key, value);
+		ComponentProperties componentProperties = getComponentProperties();
+
+		componentProperties.setProperty(key, value);
 	}
 
 	protected ComponentProperties getComponentProperties() {
@@ -370,7 +382,9 @@ public class ConfigurationImpl
 	}
 
 	protected void printSources(long companyId, String webId) {
-		List<String> sources = getComponentProperties().getLoadedSources();
+		ComponentProperties componentProperties = getComponentProperties();
+
+		List<String> sources = componentProperties.getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
 			String source = sources.get(i);
