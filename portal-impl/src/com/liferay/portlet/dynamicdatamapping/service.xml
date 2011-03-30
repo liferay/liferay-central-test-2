@@ -36,11 +36,11 @@
 			<finder-column name="companyId" />
 		</finder>
 	</entity>
-	<entity name="DDMListEntry" uuid="true" local-service="true" remote-service="true">
+	<entity name="DDMList" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="listEntryId" type="long" primary="true" />
+		<column name="listId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
