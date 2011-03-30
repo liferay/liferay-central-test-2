@@ -248,11 +248,14 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 			var installMoreLink = A.one('#<portlet:namespace />installMore');
 
 			if (installMoreLink) {
-				installMoreLink.on('click', function(event) {
-		            event.preventDefault();
+				installMoreLink.on(
+					'click',
+					function(event) {
+						event.preventDefault();
 
-					window.parent.location = installMoreLink.attr('href');
-				});
+						window.parent.location = installMoreLink.attr('href');
+					}
+				);
 			}
 		}
 	</aui:script>
