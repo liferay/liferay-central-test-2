@@ -6,6 +6,7 @@ AUI().add(
 			sessionTimeout: 0,
 			sessionTimeoutWarning: 0,
 			redirectOnExpire: false,
+			redirectUrl: '',
 
 			init: function(params) {
 				var instance = this;
@@ -23,6 +24,8 @@ AUI().add(
 				instance._currentTime = instance.sessionTimeoutWarning;
 
 				instance.redirectOnExpire = params.redirectOnExpire || instance.redirectOnExpire;
+
+				instance.redirectUrl = params.redirectUrl || instance.redirectUrl;
 
 				instance._cookieKey = 'LFR_SESSION_STATE_' + themeDisplay.getUserId();
 
@@ -108,7 +111,7 @@ AUI().add(
 						on: {
 							success: function(event, id, obj) {
 								if (instance.redirectOnExpire) {
-									location.href = themeDisplay.getURLHome();
+									location.href = instance.redirectUrl;
 								}
 
 								Liferay.fire('sessionExpired');

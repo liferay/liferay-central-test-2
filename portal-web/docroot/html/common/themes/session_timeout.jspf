@@ -29,6 +29,20 @@
 		int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 		int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
+		boolean sessionRedirectOnExpire = PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE;
+		String sessionRedirectUrl = themeDisplay.getURLHome();
+
+		long companyId = themeDisplay.getCompanyId();
+
+		if (PropsValues.CAS_AUTH_ENABLED && PropsValues.CAS_LOGOUT_ON_SESSION_EXPIRATION) {
+			sessionRedirectOnExpire = true;
+			sessionRedirectUrl = PrefsPropsUtil.getString(companyId, PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL);
+		}
+		else if (PropsValues.OPEN_SSO_AUTH_ENABLED && PropsValues.OPEN_SSO_LOGOUT_ON_SESSION_EXPIRATION) {
+			sessionRedirectOnExpire = true;
+			sessionRedirectUrl = PrefsPropsUtil.getString(companyId, PropsKeys.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL);
+		}
+
 		Calendar sessionTimeoutCal = CalendarFactoryUtil.getCalendar(timeZone);
 
 		sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutMinute);
@@ -41,7 +55,8 @@
 						autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
 						timeout: <%= sessionTimeout %>,
 						timeoutWarning: <%= sessionTimeoutWarning %>,
-						redirectOnExpire: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
+						redirectOnExpire: <%= sessionRedirectOnExpire %>,
+						redirectUrl: '<%= sessionRedirectUrl %>'
 					}
 				);
 			</aui:script>
