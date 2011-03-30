@@ -113,3 +113,13 @@ List<SocialRequest> requests = (List<SocialRequest>)request.getAttribute(WebKeys
 
 	</table>
 </c:if>
+
+<c:if test="<%= requests == null %>">
+	<aui:script use="aui-base">
+		var portlet = A.one('#p_p_id<portlet:namespace />');
+
+		if (portlet) {
+			portlet.hide();
+		}
+	</aui:script>
+</c:if>
