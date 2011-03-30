@@ -33,6 +33,8 @@ import com.liferay.portlet.dynamicdatamapping.StructureNameException;
 import com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureXsdException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -65,6 +67,9 @@ public class EditStructureAction extends PortletAction {
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				structure = updateStructure(actionRequest);
+			}
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteStructure(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -145,6 +150,19 @@ public class EditStructureAction extends PortletAction {
 				"portlet.dynamic_data_mapping.edit_structure"));
 	}
 
+	protected void deleteStructure(ActionRequest actionRequest)
+		throws Exception {
+
+		long structureId = ParamUtil.getLong(actionRequest, "structureId");
+
+		if (structureId > 0) {
+			DDMStructureLinkLocalServiceUtil.deleteStructureStructureLinks(
+				structureId);
+
+			DDMStructureLocalServiceUtil.deleteDDMStructure(structureId);
+		}
+	}
+
 	protected String getSaveAndContinueRedirect(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			DDMStructure structure, String redirect)
@@ -177,13 +195,13 @@ public class EditStructureAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected DDMStructure updateStructure(
-			ActionRequest actionRequest)
+	protected DDMStructure updateStructure(ActionRequest actionRequest)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
 		String structureKey = ParamUtil.getString(
 			actionRequest, "structureKey");
 		boolean autoStructureKey = ParamUtil.getBoolean(
@@ -200,8 +218,8 @@ public class EditStructureAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
-				groupId, structureKey, autoStructureKey, name, description, xsd,
-				storageType, serviceContext);
+				groupId, structureKey, autoStructureKey, classNameId, name,
+				description, xsd, storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
