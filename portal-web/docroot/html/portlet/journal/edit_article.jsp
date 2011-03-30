@@ -126,6 +126,7 @@ if (Validator.isNotNull(structureId)) {
 		structureName = structure.getName();
 		structureDescription = structure.getDescription();
 		structureXSD = structure.getMergedXsd();
+		structureGroupdId = structure.getGroupId();
 	}
 }
 

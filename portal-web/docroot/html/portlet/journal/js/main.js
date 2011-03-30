@@ -883,6 +883,7 @@ AUI().add(
 
 					var form = instance.getPrincipalForm();
 
+					var structureGroupId = instance.getByName(form, 'structureGroupId');
 					var structureIdInput = instance.getByName(form, 'structureId');
 					var structureNameInput = instance.getByName(form, 'structureName');
 					var structureDescriptionInput = instance.getByName(form, 'structureDescription');
@@ -916,6 +917,7 @@ AUI().add(
 						}
 						else {
 							instance.updateStructure(
+								dialogFields.dialogStructureGroupId.val(),
 								instance.getParentStructureId(),
 								dialogFields.dialogStructureId.val(),
 								dialogFields.dialogStructureName.val(),
@@ -953,6 +955,7 @@ AUI().add(
 						contentXSD: '',
 						dialogDescription: instance.getById('saveStructureStructureDescription'),
 						dialogStructureId: instance.getById('saveStructureStructureId'),
+						dialogStructureGroupId: instance.getById('saveStructureStructureGroupId'),
 						dialogStructureName: instance.getById('saveStructureStructureName'),
 						idInput: instance.getById('saveStructureStructureId'),
 						loadDefaultStructure: instance.getById('loadDefaultStructure'),
@@ -976,6 +979,7 @@ AUI().add(
 							storedStructureXSD.val(encodeURIComponent(dialogFields.contentXSD));
 
 							dialogFields.dialogStructureId.val(message.structureId);
+							dialogFields.dialogStructureGroupId.val(message.structureGroupId);
 							dialogFields.dialogStructureName.val(message.name);
 							dialogFields.dialogDescription.val(message.description);
 							dialogFields.structureNameLabel.html(message.name);
@@ -1619,10 +1623,7 @@ AUI().add(
 				fieldInstance.set('variableName', variableName);
 			},
 
-			updateStructure: function(parentStructureId, structureId, name, description, xsd, callback) {
-				var instance = this;
-
-				var groupId = instance.getGroupId();
+			updateStructure: function(groupId, parentStructureId, structureId, name, description, xsd, callback) {
 
 				var serviceParameterTypes = [
 					'long',

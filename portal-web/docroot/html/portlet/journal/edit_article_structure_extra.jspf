@@ -25,6 +25,8 @@
 
 			<aui:input cssClass="save-structure-description" cols="80" label="description" name="saveStructureStructureDescription" rows="6" type="textarea" />
 
+			<aui:input name="saveStructureStructureGroupId" type="hidden" value="<%= structureGroupdId %>"/>
+
 			<aui:a href="#" id="showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</aui:a>
 
 			<div class="journal-structureid-field aui-helper-hidden" id="<portlet:namespace />structureIdContainer">
