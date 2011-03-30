@@ -32,7 +32,7 @@ public class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag {
 		return super.doStartTag();
 	}
 
-	public java.lang.Boolean getColumn() {
+	public boolean getColumn() {
 		return _column;
 	}
 
@@ -44,7 +44,7 @@ public class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag {
 		return _label;
 	}
 
-	public void setColumn(java.lang.Boolean column) {
+	public void setColumn(boolean column) {
 		_column = column;
 
 		setScopedAttribute("column", column);
@@ -63,7 +63,7 @@ public class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag {
 	}
 
 	protected void cleanUp() {
-		_column = null;
+		_column = false;
 		_cssClass = null;
 		_label = null;
 	}
@@ -75,7 +75,6 @@ public class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag {
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
-
 
 	protected void setAttributes(HttpServletRequest request) {
 		setNamespacedAttribute(request, "column", _column);
@@ -91,7 +90,7 @@ public class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/fieldset/start.jsp";
 
-	protected java.lang.Boolean _column;
+	protected boolean _column;
 	protected java.lang.String _cssClass;
 	protected java.lang.String _label;
 

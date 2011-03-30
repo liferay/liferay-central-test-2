@@ -28,7 +28,7 @@ Map<String, Object> _options = new HashMap<String, Object>();
 _options.putAll(scopedAttributes);
 _options.putAll(dynamicAttributes);
 
-java.lang.Boolean column = GetterUtil.getBoolean((java.lang.Boolean)request.getAttribute("aui:fieldset:column"));
+boolean column = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:fieldset:column")));
 java.lang.String cssClass = GetterUtil.getString((java.lang.String)request.getAttribute("aui:fieldset:cssClass"));
 java.lang.String label = GetterUtil.getString((java.lang.String)request.getAttribute("aui:fieldset:label"));
 

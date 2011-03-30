@@ -160,8 +160,8 @@
 		<attributes>
 			<attribute>
 				<name>column</name>
-				<inputType>java.lang.Boolean</inputType>
-				<outputType>java.lang.Boolean</outputType>
+				<inputType>boolean</inputType>
+				<outputType>boolean</outputType>
 				<defaultValue></defaultValue>
 				<description></description>
 			</attribute>
