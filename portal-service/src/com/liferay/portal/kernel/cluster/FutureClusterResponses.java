@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.cluster;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Future;
@@ -85,8 +86,8 @@ public class FutureClusterResponses implements Future<ClusterNodeResponses> {
 		}
 	}
 
-	public ClusterNodeResponses getPartialResults() {
-		return _clusterNodeResponses;
+	public BlockingQueue<ClusterNodeResponse> getPartialResults() {
+		return _clusterNodeResponses.getClusterResponses();
 	}
 
 	public boolean isCancelled() {

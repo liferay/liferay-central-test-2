@@ -16,9 +16,10 @@ package com.liferay.portal.kernel.cluster;
 
 import java.io.Serializable;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Michael C. Han
@@ -33,6 +34,7 @@ public class ClusterNodeResponses implements Serializable {
 			clusterNodeResponse.getAddress(), clusterNodeResponse);
 		_clusterResponsesByClusterNode.put(
 			clusterNodeResponse.getClusterNode(), clusterNodeResponse);
+		_clusterResponsesQueue.offer(clusterNodeResponse);
 	}
 
 	public ClusterNodeResponse getClusterResponse(Address address) {
@@ -43,8 +45,8 @@ public class ClusterNodeResponses implements Serializable {
 		return _clusterResponsesByClusterNode.get(clusterNode);
 	}
 
-	public Map<ClusterNode, ClusterNodeResponse> getClusterResponses() {
-		return Collections.unmodifiableMap(_clusterResponsesByClusterNode);
+	public BlockingQueue<ClusterNodeResponse> getClusterResponses() {
+		return _clusterResponsesQueue;
 	}
 
 	public int size() {
@@ -56,5 +58,7 @@ public class ClusterNodeResponses implements Serializable {
 	private Map<ClusterNode, ClusterNodeResponse>
 		_clusterResponsesByClusterNode =
 			new HashMap<ClusterNode, ClusterNodeResponse>();
+	private BlockingQueue<ClusterNodeResponse> _clusterResponsesQueue =
+		new LinkedBlockingQueue<ClusterNodeResponse>();
 
 }
