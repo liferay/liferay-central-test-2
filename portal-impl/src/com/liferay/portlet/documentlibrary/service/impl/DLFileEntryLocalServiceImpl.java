@@ -19,5 +19,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceB
 /**
  * @author Brian Wing Shun Chan
  */
-public class DLFileEntryLocalServiceImpl extends DLFileEntryLocalServiceBaseImpl {
+public class DLFileEntryLocalServiceImpl
+	extends DLFileEntryLocalServiceBaseImpl {
 }
