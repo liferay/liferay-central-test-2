@@ -123,14 +123,13 @@
 				<description></description>
 			</attribute>
 		</attributes>
-	</component>
-	-->
+	</component>-->
 	<component name="Column" bodyContent="true">
 		<attributes>
 			<attribute>
 				<name>columnWidth</name>
-				<inputType>java.lang.Integer</inputType>
-				<outputType>java.lang.Integer</outputType>
+				<inputType>int</inputType>
+				<outputType>int</outputType>
 				<defaultValue></defaultValue>
 				<description></description>
 			</attribute>
@@ -143,15 +142,15 @@
 			</attribute>
 			<attribute>
 				<name>first</name>
-				<inputType>java.lang.Boolean</inputType>
-				<outputType>java.lang.Boolean</outputType>
+				<inputType>boolean</inputType>
+				<outputType>boolean</outputType>
 				<defaultValue></defaultValue>
 				<description></description>
 			</attribute>
 			<attribute>
 				<name>last</name>
-				<inputType>java.lang.Boolean</inputType>
-				<outputType>java.lang.Boolean</outputType>
+				<inputType>boolean</inputType>
+				<outputType>boolean</outputType>
 				<defaultValue></defaultValue>
 				<description></description>
 			</attribute>
@@ -182,8 +181,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<!--
-	<component name="FieldWrapper">
+	<!--<component name="FieldWrapper">
 		<attributes>
 			<attribute>
 				<name>cssClass</name>
@@ -474,8 +472,7 @@
 				<description></description>
 			</attribute>
 		</attributes>
-	</component>
-	-->
+	</component>-->
 	<component name="Layout" bodyContent="true">
 		<attributes>
 			<attribute>
@@ -505,8 +502,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<!--
-	<component name="ModelContext">
+	<!--<component name="ModelContext">
 		<attributes>
 			<attribute>
 				<name>bean</name>

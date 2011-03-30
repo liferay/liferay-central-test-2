@@ -28,10 +28,10 @@ Map<String, Object> _options = new HashMap<String, Object>();
 _options.putAll(scopedAttributes);
 _options.putAll(dynamicAttributes);
 
-java.lang.Integer columnWidth = GetterUtil.getInteger(String.valueOf(request.getAttribute("aui:column:columnWidth")));
+int columnWidth = GetterUtil.getInteger(String.valueOf(request.getAttribute("aui:column:columnWidth")));
 java.lang.String cssClass = GetterUtil.getString((java.lang.String)request.getAttribute("aui:column:cssClass"));
-java.lang.Boolean first = GetterUtil.getBoolean((java.lang.Boolean)request.getAttribute("aui:column:first"));
-java.lang.Boolean last = GetterUtil.getBoolean((java.lang.Boolean)request.getAttribute("aui:column:last"));
+boolean first = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:column:first")));
+boolean last = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:column:last")));
 
 _updateOptions(_options, "columnWidth", columnWidth);
 _updateOptions(_options, "cssClass", cssClass);

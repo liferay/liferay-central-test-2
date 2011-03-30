@@ -32,7 +32,7 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 		return super.doStartTag();
 	}
 
-	public java.lang.Integer getColumnWidth() {
+	public int getColumnWidth() {
 		return _columnWidth;
 	}
 
@@ -40,15 +40,15 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 		return _cssClass;
 	}
 
-	public java.lang.Boolean getFirst() {
+	public boolean getFirst() {
 		return _first;
 	}
 
-	public java.lang.Boolean getLast() {
+	public boolean getLast() {
 		return _last;
 	}
 
-	public void setColumnWidth(java.lang.Integer columnWidth) {
+	public void setColumnWidth(int columnWidth) {
 		_columnWidth = columnWidth;
 
 		setScopedAttribute("columnWidth", columnWidth);
@@ -60,23 +60,23 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 		setScopedAttribute("cssClass", cssClass);
 	}
 
-	public void setFirst(java.lang.Boolean first) {
+	public void setFirst(boolean first) {
 		_first = first;
 
 		setScopedAttribute("first", first);
 	}
 
-	public void setLast(java.lang.Boolean last) {
+	public void setLast(boolean last) {
 		_last = last;
 
 		setScopedAttribute("last", last);
 	}
 
 	protected void cleanUp() {
-		_columnWidth = null;
+		_columnWidth = 0;
 		_cssClass = null;
-		_first = null;
-		_last = null;
+		_first = false;
+		_last = false;
 	}
 
 	protected String getEndPage() {
@@ -86,7 +86,6 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
-
 
 	protected void setAttributes(HttpServletRequest request) {
 		setNamespacedAttribute(request, "columnWidth", _columnWidth);
@@ -103,9 +102,9 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/column/start.jsp";
 
-	protected java.lang.Integer _columnWidth;
+	protected int _columnWidth;
 	protected java.lang.String _cssClass;
-	protected java.lang.Boolean _first;
-	protected java.lang.Boolean _last;
+	protected boolean _first;
+	protected boolean _last;
 
 }
