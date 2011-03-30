@@ -297,11 +297,12 @@ public class EditFileEntryAction extends PortletAction {
 			uploadRequest, "majorVersion");
 
 		File file = uploadRequest.getFile("file");
-		String contentType = uploadRequest.getContentType("file");
 
 		if (Validator.isNotNull(sourceFileName) && !file.exists()) {
 			file.createNewFile();
 		}
+
+		String contentType = uploadRequest.getContentType("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
@@ -316,8 +317,6 @@ public class EditFileEntryAction extends PortletAction {
 			String extension = FileUtil.getExtension(sourceFileName);
 
 			serviceContext.setAttribute("extension", extension);
-
-			serviceContext.setAttribute("sourceFileName", sourceFileName);
 
 			// Add file entry
 
@@ -336,8 +335,6 @@ public class EditFileEntryAction extends PortletAction {
 				String extension = FileUtil.getExtension(sourceFileName);
 
 				serviceContext.setAttribute("extension", extension);
-
-				serviceContext.setAttribute("sourceFileName", sourceFileName);
 			}
 
 			// Update file entry
