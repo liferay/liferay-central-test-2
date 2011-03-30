@@ -241,7 +241,7 @@ public interface DDMStructureLocalService {
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
 		long userId, long groupId, java.lang.String structureKey,
-		boolean autoStructureKey, java.lang.String name,
+		boolean autoStructureKey, long classNameId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -261,16 +261,33 @@ public interface DDMStructureLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteStructureEntries(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteStructure(
 		com.liferay.portlet.dynamicdatamapping.model.DDMStructure structure)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteStructure(long groupId, java.lang.String structureKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntries(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructureEntries(
+		long classNameId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(
+		long structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(
+		long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -293,14 +310,36 @@ public interface DDMStructureLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(
-		long structureId)
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> search(
+		long companyId, long groupId, java.lang.String[] classNameIds,
+		java.lang.String[] structureKeys, java.lang.String[] storageTypes,
+		java.lang.String keywords, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure(
-		long groupId, java.lang.String structureKey)
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> search(
+		long companyId, long groupId, java.lang.String[] classNameIds,
+		java.lang.String[] structureKeys, java.lang.String[] storageTypes,
+		java.lang.String[] names, java.lang.String[] descriptions,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCount(long companyId, long groupId,
+		java.lang.String[] classNameIds, java.lang.String[] structureKeys,
+		java.lang.String[] storageTypes, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCount(long companyId, long groupId,
+		java.lang.String[] classNameIds, java.lang.String[] structureKeys,
+		java.lang.String[] storageTypes, java.lang.String[] names,
+		java.lang.String[] descriptions, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

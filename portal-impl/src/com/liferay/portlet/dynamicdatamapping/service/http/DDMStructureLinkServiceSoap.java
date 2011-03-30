@@ -96,12 +96,10 @@ public class DDMStructureLinkServiceSoap {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLinkSoap getStructureLink(
-		long classNameId, long classPK, long structureId)
-		throws RemoteException {
+		long structureLinkId) throws RemoteException {
 		try {
 			com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink returnValue =
-				DDMStructureLinkServiceUtil.getStructureLink(classNameId,
-					classPK, structureId);
+				DDMStructureLinkServiceUtil.getStructureLink(structureLinkId);
 
 			return com.liferay.portlet.dynamicdatamapping.model.DDMStructureLinkSoap.toSoapModel(returnValue);
 		}
