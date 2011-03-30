@@ -27,9 +27,9 @@ PortletResponse portletResponse = (PortletResponse)request.getAttribute(JavaCons
 
 String namespace = StringPool.BLANK;
 
-boolean useNamespace = GetterUtil.getBoolean((String)request.getAttribute("aui:form:useNamespace"), true);
+boolean formUseNamespace = GetterUtil.getBoolean((String)request.getAttribute("aui:form:useNamespace"), true);
 
-if ((portletResponse != null) && useNamespace) {
+if ((portletResponse != null) && formUseNamespace) {
 	namespace = portletResponse.getNamespace();
 }
 

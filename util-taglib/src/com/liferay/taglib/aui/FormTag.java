@@ -16,7 +16,7 @@ package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.taglib.util.IncludeTag;
+import com.liferay.taglib.aui.base.BaseFormTag;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,53 +31,19 @@ import javax.servlet.http.HttpServletRequest;
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  */
-public class FormTag extends IncludeTag {
-
-	public String getName() {
-		return _name;
-	}
+public class FormTag extends BaseFormTag {
 
 	public void setAction(PortletURL portletURL) {
 		if (portletURL != null) {
-			_action = portletURL.toString();
+			setAction(portletURL.toString());
 		}
 	}
 
-	public void setAction(String action) {
-		_action = action;
-	}
-
-	public void setCssClass(String cssClass) {
-		_cssClass = cssClass;
-	}
-
-	public void setEscapeXml(boolean escapeXml) {
-		_escapeXml = escapeXml;
-	}
-
-	public void setInlineLabels(boolean inlineLabels) {
-		_inlineLabels = inlineLabels;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public void setOnSubmit(String onSubmit) {
-		_onSubmit = onSubmit;
-	}
-
-	public void setUseNamespace(boolean useNamespace) {
-		_useNamespace = useNamespace;
-	}
-
 	protected void cleanUp() {
-		_action = null;
-		_cssClass = null;
+		super.cleanUp();
+
 		_escapeXml = true;
-		_inlineLabels = false;
 		_name = "fm";
-		_onSubmit = null;
 		_useNamespace = true;
 
 		if (_validatorTagsMap != null) {
@@ -93,52 +59,23 @@ public class FormTag extends IncludeTag {
 		}
 	}
 
-	protected String getEndPage() {
-		return _END_PAGE;
-	}
-
-	protected String getStartPage() {
-		return _START_PAGE;
-	}
-
-	protected boolean isCleanUpSetAttributes() {
-		return _CLEAN_UP_SET_ATTRIBUTES;
-	}
-
 	protected void setAttributes(HttpServletRequest request) {
-		String action = _action;
+		super.setAttributes(request);
 
 		if (_escapeXml) {
-			action = HtmlUtil.escape(action);
+			super.setAction(HtmlUtil.escape(_action));
 		}
 
-		request.setAttribute("aui:form:action", action);
-		request.setAttribute("aui:form:cssClass", _cssClass);
 		request.setAttribute(
-			"aui:form:dynamicAttributes", getDynamicAttributes());
+				"aui:form:inlineLabels", String.valueOf(_inlineLabels));
 		request.setAttribute(
-			"aui:form:inlineLabels", String.valueOf(_inlineLabels));
-		request.setAttribute("aui:form:name", _name);
-		request.setAttribute("aui:form:onSubmit", _onSubmit);
-		request.setAttribute(
-			"aui:form:useNamespace", String.valueOf(_useNamespace));
+				"aui:form:useNamespace", String.valueOf(_useNamespace));
 		request.setAttribute("aui:form:validatorTagsMap", _validatorTagsMap);
 	}
 
-	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
-
-	private static final String _END_PAGE = "/html/taglib/aui/form/end.jsp";
-
-	private static final String _START_PAGE = "/html/taglib/aui/form/start.jsp";
-
-	private String _action;
-	private String _cssClass;
-	private boolean _escapeXml = true;
-	private boolean _inlineLabels;
-	private String _name = "fm";
-	private String _onSubmit;
-	private boolean _useNamespace = true;
 	private Map<String, List<ValidatorTag>> _validatorTagsMap =
 		new HashMap<String, List<ValidatorTag>>();
+
+	protected boolean _useNamespace = true;
 
 }

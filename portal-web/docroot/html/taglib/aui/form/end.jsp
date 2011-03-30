@@ -14,15 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/taglib/init.jsp" %>
-
-<%@ page import="com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag" %>
-
-<%
-String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"));
-String onSubmit = GetterUtil.getString((String)request.getAttribute("aui:form:onSubmit"));
-Map<String, List<ValidatorTag>> validatorTagsMap = (Map<String, List<ValidatorTag>>)request.getAttribute("aui:form:validatorTagsMap");
-%>
+<%@ include file="init.jsp" %>
 
 </form>
 

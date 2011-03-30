@@ -14,6 +14,8 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ page import="com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag" %>
 
-<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "aui-field-labels-inline" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+<%
+Map<String, List<ValidatorTag>> validatorTagsMap = (Map<String, List<ValidatorTag>>)request.getAttribute("aui:form:validatorTagsMap");
+%>
