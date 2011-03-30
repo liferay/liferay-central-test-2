@@ -285,8 +285,8 @@ public class ImageProcessorImpl implements ImageProcessor {
 
 		BufferedImage scaledBufferedImage = null;
 
-		if (type == BufferedImage.TYPE_BYTE_BINARY ||
-			type == BufferedImage.TYPE_BYTE_INDEXED) {
+		if ((type == BufferedImage.TYPE_BYTE_BINARY) ||
+			(type == BufferedImage.TYPE_BYTE_INDEXED)) {
 
 			IndexColorModel indexColorModel =
 				(IndexColorModel)bufferedImage.getColorModel();
