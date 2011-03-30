@@ -918,8 +918,8 @@ AUI().add(
 						else {
 							instance.updateStructure(
 								dialogFields.dialogStructureGroupId.val(),
-								instance.getParentStructureId(),
 								dialogFields.dialogStructureId.val(),
+								instance.getParentStructureId(),
 								dialogFields.dialogStructureName.val(),
 								dialogFields.dialogDescription.val(),
 								dialogFields.contentXSD,
@@ -954,8 +954,8 @@ AUI().add(
 						autoGenerateIdMessage: Liferay.Language.get('autogenerate-id'),
 						contentXSD: '',
 						dialogDescription: instance.getById('saveStructureStructureDescription'),
-						dialogStructureId: instance.getById('saveStructureStructureId'),
 						dialogStructureGroupId: instance.getById('saveStructureStructureGroupId'),
+						dialogStructureId: instance.getById('saveStructureStructureId'),
 						dialogStructureName: instance.getById('saveStructureStructureName'),
 						idInput: instance.getById('saveStructureStructureId'),
 						loadDefaultStructure: instance.getById('loadDefaultStructure'),
@@ -978,8 +978,8 @@ AUI().add(
 							structureNameInput.val(message.name);
 							storedStructureXSD.val(encodeURIComponent(dialogFields.contentXSD));
 
-							dialogFields.dialogStructureId.val(message.structureId);
 							dialogFields.dialogStructureGroupId.val(message.structureGroupId);
+							dialogFields.dialogStructureId.val(message.structureId);
 							dialogFields.dialogStructureName.val(message.name);
 							dialogFields.dialogDescription.val(message.description);
 							dialogFields.structureNameLabel.html(message.name);
@@ -1623,7 +1623,7 @@ AUI().add(
 				fieldInstance.set('variableName', variableName);
 			},
 
-			updateStructure: function(groupId, parentStructureId, structureId, name, description, xsd, callback) {
+			updateStructure: function(groupId, structureId, parentStructureId, name, description, xsd, callback) {
 
 				var serviceParameterTypes = [
 					'long',

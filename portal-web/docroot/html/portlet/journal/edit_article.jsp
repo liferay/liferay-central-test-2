@@ -122,11 +122,11 @@ if (Validator.isNotNull(structureId)) {
 	}
 
 	if (structure != null) {
+		structureGroupdId = structure.getGroupId();
 		parentStructureId = structure.getParentStructureId();
 		structureName = structure.getName();
 		structureDescription = structure.getDescription();
 		structureXSD = structure.getMergedXsd();
-		structureGroupdId = structure.getGroupId();
 	}
 }
 

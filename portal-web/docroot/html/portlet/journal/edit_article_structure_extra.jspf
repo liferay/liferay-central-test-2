@@ -21,17 +21,18 @@
 				<liferay-ui:message key="your-request-processed-successfully" />
 			</div>
 
+			<aui:input name="saveStructureStructureGroupId" type="hidden" value="<%= structureGroupdId %>"/>
+
 			<aui:input cssClass="save-structure-name lfr-input-text-container" label="structure-name" name="saveStructureStructureName" size="50" type="text" />
 
 			<aui:input cssClass="save-structure-description" cols="80" label="description" name="saveStructureStructureDescription" rows="6" type="textarea" />
-
-			<aui:input name="saveStructureStructureGroupId" type="hidden" value="<%= structureGroupdId %>"/>
 
 			<aui:a href="#" id="showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</aui:a>
 
 			<div class="journal-structureid-field aui-helper-hidden" id="<portlet:namespace />structureIdContainer">
 				<aui:field-wrapper label="structure-id">
 					<aui:input cssClas="lfr-input-text-container" label="" name="saveStructureStructureId" type="text" />
+
 					<aui:input label="" name="saveStructureAutogenerateId" type="checkbox" value="<%= true %>" />
 				</aui:field-wrapper>
 			</div>
