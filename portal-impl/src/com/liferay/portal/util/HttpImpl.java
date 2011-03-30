@@ -819,6 +819,33 @@ public class HttpImpl implements Http {
 		return URLtoByteArray(options);
 	}
 
+	public InputStream URLtoInputStream(Http.Options options) throws IOException {
+		return URLtoInputStream(
+			options.getLocation(), options.getMethod(), options.getHeaders(),
+			options.getCookies(), options.getAuth(), options.getBody(),
+			options.getParts(), options.getResponse(),
+			options.isFollowRedirects());
+	}
+
+	public InputStream URLtoInputStream(String location) throws IOException {
+		Http.Options options = new Http.Options();
+
+		options.setLocation(location);
+
+		return URLtoInputStream(options);
+	}
+
+	public InputStream URLtoInputStream(String location, boolean post)
+		throws IOException {
+
+		Http.Options options = new Http.Options();
+
+		options.setLocation(location);
+		options.setPost(post);
+
+		return URLtoInputStream(options);
+	}
+
 	public String URLtoString(Http.Options options) throws IOException {
 		return new String(URLtoByteArray(options));
 	}
@@ -968,6 +995,25 @@ public class HttpImpl implements Http {
 
 		byte[] bytes = null;
 
+		InputStream is = URLtoInputStream(
+			location, method, headers, cookies, auth, body, parts, response,
+			followRedirects);
+
+		if (is != null) {
+			bytes = FileUtil.getBytes(is);
+
+			is.close();
+		}
+
+		return bytes;
+	}
+
+	protected InputStream URLtoInputStream(
+			String location, Http.Method method, Map<String, String> headers,
+			Cookie[] cookies, Http.Auth auth, Http.Body body, Map<String,
+			String> parts, Http.Response response, boolean followRedirects)
+		throws IOException {
+
 		HttpMethod httpMethod = null;
 		HttpState httpState = null;
 
@@ -975,7 +1021,7 @@ public class HttpImpl implements Http {
 			_cookies.set(null);
 
 			if (location == null) {
-				return bytes;
+				return null;
 			}
 			else if (!location.startsWith(Http.HTTP_WITH_SLASH) &&
 					 !location.startsWith(Http.HTTPS_WITH_SLASH)) {
@@ -1100,7 +1146,7 @@ public class HttpImpl implements Http {
 				String redirect = locationHeader.getValue();
 
 				if (followRedirects) {
-					return URLtoByteArray(
+					return URLtoInputStream(
 						redirect, Http.Method.GET, headers,
 						cookies, auth, body, parts, response, followRedirects);
 				}
@@ -1109,34 +1155,7 @@ public class HttpImpl implements Http {
 				}
 			}
 
-			InputStream is = httpMethod.getResponseBodyAsStream();
-
-			if (is != null) {
-				Header contentLength = httpMethod.getResponseHeader(
-					HttpHeaders.CONTENT_LENGTH);
-
-				if (contentLength != null) {
-					response.setContentLength(
-						GetterUtil.getInteger(contentLength.getValue()));
-				}
-
-				Header contentType = httpMethod.getResponseHeader(
-					HttpHeaders.CONTENT_TYPE);
-
-				if (contentType != null) {
-					response.setContentType(contentType.getValue());
-				}
-
-				bytes = FileUtil.getBytes(is);
-
-				is.close();
-			}
-
-			for (Header header : httpMethod.getResponseHeaders()) {
-				response.addHeader(header.getName(), header.getValue());
-			}
-
-			return bytes;
+			return httpMethod.getResponseBodyAsStream();
 		}
 		finally {
 			try {
