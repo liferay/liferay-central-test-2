@@ -38,6 +38,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPer
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceTest;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistenceTest;
@@ -197,6 +198,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(DLFolderPersistenceTest.class);
 
 		testSuite.addTestSuite(DDMContentPersistenceTest.class);
+		testSuite.addTestSuite(DDMListPersistenceTest.class);
 		testSuite.addTestSuite(DDMStorageLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructureLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructurePersistenceTest.class);
