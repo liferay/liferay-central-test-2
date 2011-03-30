@@ -323,10 +323,6 @@ public class PortletURLImpl
 		return _anchor;
 	}
 
-	public boolean isCopyCurrentPublicRenderParameters() {
-		return _copyCurrentPublicRenderParameters;
-	}
-
 	public boolean isCopyCurrentRenderParameters() {
 		return _copyCurrentRenderParameters;
 	}
@@ -418,12 +414,6 @@ public class PortletURLImpl
 		_cacheability = cacheability;
 
 		clearCache();
-	}
-
-	public void setCopyCurrentPublicRenderParameters(
-		boolean copyCurrentPublicRenderParameters) {
-
-		_copyCurrentPublicRenderParameters = copyCurrentPublicRenderParameters;
 	}
 
 	public void setCopyCurrentRenderParameters(
@@ -947,10 +937,6 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
-		if (_copyCurrentPublicRenderParameters) {
-			mergePublicRenderParameters();
-		}
-
 		if (_copyCurrentRenderParameters) {
 			mergeRenderParameters();
 		}
@@ -1115,10 +1101,6 @@ public class PortletURLImpl
 			}
 		}
 
-		if (_copyCurrentPublicRenderParameters) {
-			mergePublicRenderParameters();
-		}
-
 		if (_copyCurrentRenderParameters) {
 			mergeRenderParameters();
 		}
@@ -1212,41 +1194,6 @@ public class PortletURLImpl
 		}
 		else {
 			return false;
-		}
-	}
-
-	protected void mergePublicRenderParameters() {
-		Map<String, String[]> publicRenderParameters =
-			PublicRenderParametersPool.get(_request, _layout.getPlid());
-
-		Iterator<Map.Entry<String, String[]>> itr =
-			publicRenderParameters.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, String[]> entry = itr.next();
-
-			String name = entry.getKey();
-
-			name = PortletQNameUtil.getPublicRenderParameterIdentifier(name);
-
-			if (Validator.isNull(name)) {
-				continue;
-			}
-
-			String[] oldValues = entry.getValue();
-			String[] newValues = _params.get(name);
-
-			if (newValues == null) {
-				_params.put(name, oldValues);
-			}
-			else if (isBlankValue(newValues)) {
-				_params.remove(name);
-			}
-			else {
-				newValues = ArrayUtil.append(newValues, oldValues);
-
-				_params.put(name, newValues);
-			}
 		}
 	}
 
@@ -1376,7 +1323,6 @@ public class PortletURLImpl
 
 	private boolean _anchor = true;
 	private String _cacheability = ResourceURL.PAGE;
-	private boolean _copyCurrentPublicRenderParameters;
 	private boolean _copyCurrentRenderParameters;
 	private long _doAsGroupId;
 	private long _doAsUserId;

@@ -355,11 +355,9 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			portletURLImpl.setCopyCurrentPublicRenderParameters(true);
 		}
 
 		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			portletURLImpl.setCopyCurrentPublicRenderParameters(true);
 			portletURLImpl.setCopyCurrentRenderParameters(true);
 		}
 
