@@ -95,7 +95,6 @@
 	<import class="com.liferay.portlet.documentlibrary.model.DLFolder" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLRepository" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMContent" />
-	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMListEntry" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink" />
@@ -1416,22 +1415,6 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xml" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListEntryImpl" table="DDMListEntry">
-		<cache usage="read-write" />
-		<id name="listEntryId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStorageLinkImpl" table="DDMStorageLink">
 		<cache usage="read-write" />
