@@ -433,6 +433,7 @@ if (Validator.isNull(redirect)) {
 
 		if (!draft) {
 			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+			document.<portlet:namespace />fm.<portlet:namespace />preview.value = <%= preview %>;
 		}
 
 		submitForm(document.<portlet:namespace />fm);

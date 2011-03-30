@@ -574,8 +574,18 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
 
-		MBMessagePermission.check(
-			getPermissionChecker(), messageId, ActionKeys.UPDATE);
+		boolean preview = GetterUtil.getBoolean(
+			serviceContext.getAttribute("preview"));
+
+		if (preview) {
+			checkReplyToPermission(
+				message.getGroupId(), message.getCategoryId(),
+				message.getParentMessageId());
+		}
+		else {
+			MBMessagePermission.check(
+				getPermissionChecker(), messageId, ActionKeys.UPDATE);
+		}
 
 		if (lockLocalService.isLocked(
 				MBThread.class.getName(), message.getThreadId())) {
@@ -601,7 +611,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, subject, body, files, existingFiles,
+			getGuestOrUserId(), messageId, subject, body, files, existingFiles,
 			priority, allowPingbacks, serviceContext);
 	}
 
