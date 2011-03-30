@@ -72,6 +72,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -116,12 +117,6 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  *         CMIS Type Mutability proposal</a>
  */
 public abstract class CMISRepository extends BaseRepositoryImpl {
-
-	public static final int DELETE_DEEP = -1;
-
-	public static final int DELETE_NONE = 0;
-
-	public static final int DELETE_SHALLOW = 1;
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
@@ -559,17 +554,23 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			return session;
 		}
 
-		String password = PrincipalThreadLocal.getPassword();
-		String login = getLogin();
-
 		Map<String, String> parameters = new HashMap<String, String>();
 
-		parameters.put(SessionParameter.USER, login);
-		parameters.put(SessionParameter.PASSWORD, password);
-		parameters.put(SessionParameter.LOCALE_ISO3166_COUNTRY,
-			LocaleUtil.getDefault().getCountry());
+		Locale locale = LocaleUtil.getDefault();
+
+		parameters.put(
+			SessionParameter.LOCALE_ISO3166_COUNTRY,
+			locale.getCountry());
 		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
-			LocaleUtil.getDefault().getLanguage());
+			locale.getLanguage());
+
+		String password = PrincipalThreadLocal.getPassword();
+
+		parameters.put(SessionParameter.PASSWORD, password);
+
+		String login = getLogin();
+
+		parameters.put(SessionParameter.USER, login);
 
 		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
@@ -631,10 +632,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		try {
 			List<Long> subfolderIds = new ArrayList<Long>();
 
-			List<Folder> subFolders = getFolders(
+			List<Folder> subfolders = getFolders(
 				folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-			getSubfolderIds(subfolderIds, subFolders, recurse);
+			getSubfolderIds(subfolderIds, subfolders, recurse);
 
 			return subfolderIds;
 		}
@@ -1260,13 +1261,13 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	protected void deleteMappedFileEntry(Document document)
 		throws SystemException {
 
-		if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == DELETE_NONE) {
+		if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_NONE) {
 			return;
 		}
 
-		List<Document> versions = document.getAllVersions();
+		List<Document> documentVersions = document.getAllVersions();
 
-		for (Document version : versions) {
+		for (Document version : documentVersions) {
 			try {
 				RepositoryEntryUtil.removeByR_M(
 					getRepositoryId(), version.getId());
@@ -1287,34 +1288,36 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder)
 		throws SystemException {
 
-		if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == DELETE_NONE) {
+		if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH == _DELETE_NONE) {
 			return;
 		}
 
-		Iterator<CmisObject> children = cmisFolder.getChildren().iterator();
+		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren();
 
-		while (children.hasNext()) {
-			CmisObject child = children.next();
+		Iterator<CmisObject> itr = cmisObjects.iterator();
 
-			if (child instanceof Document) {
-				Document document = (Document)child;
+		while (itr.hasNext()) {
+			CmisObject cmisObject = itr.next();
+
+			if (cmisObject instanceof Document) {
+				Document document = (Document)cmisObject;
 
 				deleteMappedFileEntry(document);
 			}
-			else if (child instanceof
+			else if (cmisObject instanceof
 						org.apache.chemistry.opencmis.client.api.Folder) {
 
-				org.apache.chemistry.opencmis.client.api.Folder subFolder =
-					(org.apache.chemistry.opencmis.client.api.Folder)child;
+				org.apache.chemistry.opencmis.client.api.Folder cmisSubfolder =
+					(org.apache.chemistry.opencmis.client.api.Folder)cmisObject;
 
 				try {
 					RepositoryEntryUtil.removeByR_M(
-						getRepositoryId(), child.getId());
+						getRepositoryId(), cmisObject.getId());
 
 					if (PropsValues.DL_REPOSITORY_CMIS_DELETE_DEPTH ==
-							DELETE_DEEP) {
+							_DELETE_DEEP) {
 
-						deleteMappedFolder(subFolder);
+						deleteMappedFolder(cmisSubfolder);
 					}
 				}
 				catch (NoSuchRepositoryEntryException nsree) {
@@ -1682,6 +1685,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			throw new DuplicateFolderNameException(title);
 		}
 	}
+
+	private static final int _DELETE_DEEP = -1;
+
+	private static final int _DELETE_NONE = 0;
 
 	private static ThreadLocal<Map<Long, List<FileEntry>>> _fileEntriesCache =
 		new AutoResetThreadLocal<Map<Long, List<FileEntry>>>(

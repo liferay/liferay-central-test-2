@@ -30,15 +30,15 @@ import org.apache.chemistry.opencmis.client.api.Document;
 public class CMISRepositoryLocalServiceImpl
 	extends CMISRepositoryLocalServiceBaseImpl {
 
-	public Object getSession(long repositoryId) 
+	public Object getSession(long repositoryId)
 		throws PortalException, SystemException {
-		
+
 		CMISRepository cmisRepository =
 			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
 
 		return cmisRepository.getSession();
 	}
-	
+
 	public FileEntry toFileEntry(long repositoryId, Object object)
 		throws PortalException, SystemException {
 
