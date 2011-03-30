@@ -124,14 +124,12 @@ public class ServerDetector {
 			_webSphere = true;
 		}
 
-		if (_isJetty()) {
-			if (_serverId == null) {
+		if (_serverId == null) {
+			if (_isJetty()) {
 				_serverId = JETTY_ID;
 				_jetty = true;
 			}
-		}
-		else if (_isTomcat()) {
-			if (_serverId == null) {
+			else if (_isTomcat()) {
 				_serverId = TOMCAT_ID;
 				_tomcat = true;
 			}
@@ -174,13 +172,8 @@ public class ServerDetector {
 		}
 	}
 
-	private boolean _isGeronimo() {
-		return _detect(
-			"/org/apache/geronimo/system/main/Daemon.class");
-	}
-
-	private boolean _isGlassfish() {
-		String value = System.getProperty("com.sun.aas.instanceRoot");
+	private boolean _hasSystemProperty(String key) {
+		String value = System.getProperty(key);
 
 		if (value != null) {
 			return true;
@@ -190,22 +183,24 @@ public class ServerDetector {
 		}
 	}
 
+	private boolean _isGeronimo() {
+		return _hasSystemProperty("org.apache.geronimo.home.dir");
+	}
+
+	private boolean _isGlassfish() {
+		return _hasSystemProperty("com.sun.aas.instanceRoot");
+	}
+
 	private boolean _isJBoss() {
-		return _detect("/org/jboss/Main.class");
+		return _hasSystemProperty("jboss.home.dir");
 	}
 
 	private boolean _isJetty() {
-		return _detect("/org/mortbay/jetty/Server.class");
+		return _hasSystemProperty("jetty.home");
 	}
 
 	private boolean _isJOnAS() {
-		boolean jonas = _detect("/org/objectweb/jonas/server/Server.class");
-
-		if (!_jonas && (System.getProperty("jonas.root") != null)) {
-			jonas = true;
-		}
-
-		return jonas;
+		return _hasSystemProperty("jonas.base");
 	}
 
 	private boolean _isOC4J() {
@@ -213,18 +208,11 @@ public class ServerDetector {
 	}
 
 	private boolean _isResin() {
-		return _detect("/com/caucho/server/resin/Resin.class");
+		return _hasSystemProperty("resin.home");
 	}
 
 	private boolean _isTomcat() {
-		boolean tomcat = _detect(
-			"/org/apache/catalina/startup/Bootstrap.class");
-
-		if (!tomcat) {
-			tomcat = _detect("/org/apache/catalina/startup/Embedded.class");
-		}
-
-		return tomcat;
+		return _hasSystemProperty("catalina.base");
 	}
 
 	private boolean _isWebLogic() {

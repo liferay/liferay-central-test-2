@@ -94,6 +94,10 @@ public class PropsUtil {
 
 			String liferayHome = _get(PropsKeys.LIFERAY_HOME);
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Configured Liferay home " + liferayHome);
+			}
+
 			SystemProperties.set(PropsKeys.LIFERAY_HOME, liferayHome);
 
 			SystemProperties.set(
@@ -192,7 +196,7 @@ public class PropsUtil {
 			defaultLiferayHome = SystemProperties.get("catalina.base") + "/..";
 		}
 		else {
-			defaultLiferayHome = SystemProperties.get("user.home") + "/liferay";
+			defaultLiferayHome = SystemProperties.get("user.dir") + "/liferay";
 		}
 
 		defaultLiferayHome = StringUtil.replace(
@@ -208,6 +212,10 @@ public class PropsUtil {
 			if (pos != -1) {
 				defaultLiferayHome = defaultLiferayHome.substring(0, pos);
 			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Default Liferay home " + defaultLiferayHome);
 		}
 
 		return defaultLiferayHome;
