@@ -26,6 +26,8 @@
 		<ant dir="portal-web" target="clean" inheritAll="false" />
 		<ant dir="tunnel-web" target="clean" inheritAll="false" />
 
+		<ant dir="sql" target="clean" inheritAll="false" />
+
 		<delete dir="${doc.dir}" />
 
 		<delete>

@@ -113,7 +113,7 @@ public class DBBuilder {
 			DB db = DBFactoryUtil.getDB(_databaseTypes[i]);
 
 			if (db != null) {
-				if (sqlDir.equals("../sql")) {
+				if (!sqlDir.endsWith("/WEB-INF/sql")) {
 					db.buildCreateFile(sqlDir, _databaseName);
 				}
 				else {

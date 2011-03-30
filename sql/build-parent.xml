@@ -17,6 +17,16 @@
 		</java>
 	</target>
 
+	<target name="clean">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="."
+				excludes="*.sql,*.vm"
+				includes="create*/**,indexes/**,log/**,portal*/**,sequences/**,update*/**"
+			/>
+		</delete>
+	</target>
+
 	<target name="export-oracle">
 		<exec executable="${oracle.export.executable}">
 			<arg line="${oracle.export.arg.line}" />
