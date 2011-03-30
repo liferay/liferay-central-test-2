@@ -1460,6 +1460,7 @@
 		<portlet-name>148</portlet-name>
 		<icon>/html/icons/asset_tags_cloud.png</icon>
 		<struts-path>asset_tags_cloud</struts-path>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>

@@ -2151,6 +2151,10 @@
 		<display-name>Asset Tags Cloud</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
+			<name>config-jsp</name>
+			<value>/html/portlet/asset_tags_navigation/configuration.jsp</value>
+		</init-param>
+		<init-param>
 			<name>view-action</name>
 			<value>/asset_tags_cloud/view</value>
 		</init-param>
