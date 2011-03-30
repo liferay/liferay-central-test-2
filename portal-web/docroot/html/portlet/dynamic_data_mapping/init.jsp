@@ -16,12 +16,24 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMList" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.search.DDMStructureDisplayTerms" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.search.DDMStructureSearch" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.search.DDMStructureSearchTerms" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.permission.DDMStructurePermission" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageType" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureDuplicateElementException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureNameException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.StructureXsdException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageType" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>
+<%@ page import="javax.portlet.PortletURL" %>

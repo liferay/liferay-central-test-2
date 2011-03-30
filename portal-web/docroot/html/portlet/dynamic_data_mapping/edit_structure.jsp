@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
-String cmd = ParamUtil.getString(request, Constants.CMD, Constants.ADD);
-
 String redirect = ParamUtil.getString(request, "redirect");
 
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
@@ -40,7 +38,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 </liferay-portlet:actionURL>
 
 <aui:form action="<%= editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (structure != null) ? Constants.UPDATE : Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
 	<aui:input name="callback" type="hidden" value="<%= callback %>" />
@@ -61,6 +59,38 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 
 	<liferay-ui:panel-container cssClass="lfr-structure-entry-details-container" extended="<%= false %>" id="structureDetailsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="structureDetailsSectionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "details") %>'>
+			<aui:layout cssClass="lfr-ddm-types-form-column">
+
+				<aui:column first="true">
+					<aui:field-wrapper>
+						<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
+							<aui:option label='<%= "model.resource." + DDMList.class.getName() %>' value="<%= PortalUtil.getClassNameId(DDMList.class.getName()) %>" />
+						</aui:select>
+					</aui:field-wrapper>
+				</aui:column>
+
+				<aui:column>
+					<aui:field-wrapper>
+						<aui:select disabled="<%= structure != null %>" name="storageType">
+
+							<%
+							for (StorageType type : StorageType.values()) {
+							%>
+
+								<aui:option label="<%= type %>" value="<%= type %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
+					</aui:field-wrapper>
+				</aui:column>
+
+			</aui:layout>
+
+			<aui:input name="description" />
+
 			<c:choose>
 				<c:when test="<%= structure == null %>">
 					<c:choose>
@@ -81,24 +111,6 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 					</aui:field-wrapper>
 				</c:otherwise>
 			</c:choose>
-
-			<aui:field-wrapper>
-				<aui:select disabled="<%= structure != null %>" name="storageType">
-
-					<%
-					for (StorageType type : StorageType.values()) {
-					%>
-
-						<aui:option label="<%= type %>" value="<%= type %>" />
-
-					<%
-					}
-					%>
-
-				</aui:select>
-			</aui:field-wrapper>
-
-			<aui:input name="description" />
 		</liferay-ui:panel>
 	</liferay-ui:panel-container>
 </aui:form>
@@ -163,6 +175,10 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 
 <aui:button-row>
 	<aui:button onClick='<%= renderResponse.getNamespace() + "saveStructure();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
+
+	<c:if test="<%= Validator.isNull(portletResourceNamespace) %>">
+		<aui:button onClick="<%= redirect %>" type="cancel" />
+	</c:if>
 </aui:button-row>
 
 <%@ include file="/html/portlet/dynamic_data_mapping/custom_fields.jspf" %>
@@ -171,7 +187,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	var formBuilder = new Liferay.FormBuilder(
 		{
 			<c:if test="<%= Validator.isNotNull(availableFields) %>">
-				availableFields: Liferay.Util.getTop().<%= HtmlUtil.escapeJS(availableFields) %>,
+				availableFields: AUI().Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
 			</c:if>
 
 			boundingBox: '#<portlet:namespace />formBuilder',
