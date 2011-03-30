@@ -41,10 +41,10 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
-import com.liferay.portlet.dynamicdatamapping.NoSuchContentException;
-import com.liferay.portlet.dynamicdatamapping.model.DDMContent;
-import com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl;
-import com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentModelImpl;
+import com.liferay.portlet.dynamicdatamapping.NoSuchListException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMList;
+import com.liferay.portlet.dynamicdatamapping.model.impl.DDMListImpl;
+import com.liferay.portlet.dynamicdatamapping.model.impl.DDMListModelImpl;
 
 import java.io.Serializable;
 
@@ -53,29 +53,29 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence implementation for the d d m content service.
+ * The persistence implementation for the d d m list service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see DDMContentPersistence
- * @see DDMContentUtil
+ * @see DDMListPersistence
+ * @see DDMListUtil
  * @generated
  */
-public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
-	implements DDMContentPersistence {
+public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
+	implements DDMListPersistence {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link DDMContentUtil} to access the d d m content persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link DDMListUtil} to access the d d m list persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = DDMContentImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = DDMListImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -83,19 +83,19 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByUUID_G",
 			new String[] { String.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUUID_G",
 			new String[] { String.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_GROUPID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByGroupId",
 			new String[] {
 				Long.class.getName(),
@@ -103,11 +103,11 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByCompanyId",
 			new String[] {
 				Long.class.getName(),
@@ -115,50 +115,49 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
 	/**
-	 * Caches the d d m content in the entity cache if it is enabled.
+	 * Caches the d d m list in the entity cache if it is enabled.
 	 *
-	 * @param ddmContent the d d m content to cache
+	 * @param ddmList the d d m list to cache
 	 */
-	public void cacheResult(DDMContent ddmContent) {
-		EntityCacheUtil.putResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentImpl.class, ddmContent.getPrimaryKey(), ddmContent);
+	public void cacheResult(DDMList ddmList) {
+		EntityCacheUtil.putResult(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListImpl.class, ddmList.getPrimaryKey(), ddmList);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
-				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-			}, ddmContent);
+			new Object[] { ddmList.getUuid(), Long.valueOf(ddmList.getGroupId()) },
+			ddmList);
 
-		ddmContent.resetOriginalValues();
+		ddmList.resetOriginalValues();
 	}
 
 	/**
-	 * Caches the d d m contents in the entity cache if it is enabled.
+	 * Caches the d d m lists in the entity cache if it is enabled.
 	 *
-	 * @param ddmContents the d d m contents to cache
+	 * @param ddmLists the d d m lists to cache
 	 */
-	public void cacheResult(List<DDMContent> ddmContents) {
-		for (DDMContent ddmContent : ddmContents) {
+	public void cacheResult(List<DDMList> ddmLists) {
+		for (DDMList ddmList : ddmLists) {
 			if (EntityCacheUtil.getResult(
-						DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-						DDMContentImpl.class, ddmContent.getPrimaryKey(), this) == null) {
-				cacheResult(ddmContent);
+						DDMListModelImpl.ENTITY_CACHE_ENABLED,
+						DDMListImpl.class, ddmList.getPrimaryKey(), this) == null) {
+				cacheResult(ddmList);
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all d d m contents.
+	 * Clears the cache for all d d m lists.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
@@ -166,93 +165,91 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 */
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
-			CacheRegistryUtil.clear(DDMContentImpl.class.getName());
+			CacheRegistryUtil.clear(DDMListImpl.class.getName());
 		}
 
-		EntityCacheUtil.clearCache(DDMContentImpl.class.getName());
+		EntityCacheUtil.clearCache(DDMListImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	/**
-	 * Clears the cache for the d d m content.
+	 * Clears the cache for the d d m list.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
-	public void clearCache(DDMContent ddmContent) {
-		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentImpl.class, ddmContent.getPrimaryKey());
+	public void clearCache(DDMList ddmList) {
+		EntityCacheUtil.removeResult(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListImpl.class, ddmList.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
-				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-			});
+			new Object[] { ddmList.getUuid(), Long.valueOf(ddmList.getGroupId()) });
 	}
 
 	/**
-	 * Creates a new d d m content with the primary key. Does not add the d d m content to the database.
+	 * Creates a new d d m list with the primary key. Does not add the d d m list to the database.
 	 *
-	 * @param contentId the primary key for the new d d m content
-	 * @return the new d d m content
+	 * @param listId the primary key for the new d d m list
+	 * @return the new d d m list
 	 */
-	public DDMContent create(long contentId) {
-		DDMContent ddmContent = new DDMContentImpl();
+	public DDMList create(long listId) {
+		DDMList ddmList = new DDMListImpl();
 
-		ddmContent.setNew(true);
-		ddmContent.setPrimaryKey(contentId);
+		ddmList.setNew(true);
+		ddmList.setPrimaryKey(listId);
 
 		String uuid = PortalUUIDUtil.generate();
 
-		ddmContent.setUuid(uuid);
+		ddmList.setUuid(uuid);
 
-		return ddmContent;
+		return ddmList;
 	}
 
 	/**
-	 * Removes the d d m content with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d m list with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d d m content to remove
-	 * @return the d d m content that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a d d m content with the primary key could not be found
+	 * @param primaryKey the primary key of the d d m list to remove
+	 * @return the d d m list that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent remove(Serializable primaryKey)
+	public DDMList remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Removes the d d m content with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d m list with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param contentId the primary key of the d d m content to remove
-	 * @return the d d m content that was removed
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @param listId the primary key of the d d m list to remove
+	 * @return the d d m list that was removed
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent remove(long contentId)
-		throws NoSuchContentException, SystemException {
+	public DDMList remove(long listId)
+		throws NoSuchListException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMContent ddmContent = (DDMContent)session.get(DDMContentImpl.class,
-					Long.valueOf(contentId));
+			DDMList ddmList = (DDMList)session.get(DDMListImpl.class,
+					Long.valueOf(listId));
 
-			if (ddmContent == null) {
+			if (ddmList == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + contentId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listId);
 				}
 
-				throw new NoSuchContentException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					contentId);
+				throw new NoSuchListException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					listId);
 			}
 
-			return ddmContentPersistence.remove(ddmContent);
+			return ddmListPersistence.remove(ddmList);
 		}
-		catch (NoSuchContentException nsee) {
+		catch (NoSuchListException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -264,26 +261,25 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Removes the d d m content from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d m list from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmContent the d d m content to remove
-	 * @return the d d m content that was removed
+	 * @param ddmList the d d m list to remove
+	 * @return the d d m list that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent remove(DDMContent ddmContent) throws SystemException {
-		return super.remove(ddmContent);
+	public DDMList remove(DDMList ddmList) throws SystemException {
+		return super.remove(ddmList);
 	}
 
-	protected DDMContent removeImpl(DDMContent ddmContent)
-		throws SystemException {
-		ddmContent = toUnwrappedModel(ddmContent);
+	protected DDMList removeImpl(DDMList ddmList) throws SystemException {
+		ddmList = toUnwrappedModel(ddmList);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BatchSessionUtil.delete(session, ddmContent);
+			BatchSessionUtil.delete(session, ddmList);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -294,33 +290,33 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		DDMContentModelImpl ddmContentModelImpl = (DDMContentModelImpl)ddmContent;
+		DDMListModelImpl ddmListModelImpl = (DDMListModelImpl)ddmList;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				ddmContentModelImpl.getUuid(),
-				Long.valueOf(ddmContentModelImpl.getGroupId())
+				ddmListModelImpl.getUuid(),
+				Long.valueOf(ddmListModelImpl.getGroupId())
 			});
 
-		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentImpl.class, ddmContent.getPrimaryKey());
+		EntityCacheUtil.removeResult(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListImpl.class, ddmList.getPrimaryKey());
 
-		return ddmContent;
+		return ddmList;
 	}
 
-	public DDMContent updateImpl(
-		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent,
+	public DDMList updateImpl(
+		com.liferay.portlet.dynamicdatamapping.model.DDMList ddmList,
 		boolean merge) throws SystemException {
-		ddmContent = toUnwrappedModel(ddmContent);
+		ddmList = toUnwrappedModel(ddmList);
 
-		boolean isNew = ddmContent.isNew();
+		boolean isNew = ddmList.isNew();
 
-		DDMContentModelImpl ddmContentModelImpl = (DDMContentModelImpl)ddmContent;
+		DDMListModelImpl ddmListModelImpl = (DDMListModelImpl)ddmList;
 
-		if (Validator.isNull(ddmContent.getUuid())) {
+		if (Validator.isNull(ddmList.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
-			ddmContent.setUuid(uuid);
+			ddmList.setUuid(uuid);
 		}
 
 		Session session = null;
@@ -328,9 +324,9 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		try {
 			session = openSession();
 
-			BatchSessionUtil.update(session, ddmContent, merge);
+			BatchSessionUtil.update(session, ddmList, merge);
 
-			ddmContent.setNew(false);
+			ddmList.setNew(false);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -341,187 +337,186 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.putResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-			DDMContentImpl.class, ddmContent.getPrimaryKey(), ddmContent);
+		EntityCacheUtil.putResult(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListImpl.class, ddmList.getPrimaryKey(), ddmList);
 
 		if (!isNew &&
-				(!Validator.equals(ddmContent.getUuid(),
-					ddmContentModelImpl.getOriginalUuid()) ||
-				(ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()))) {
+				(!Validator.equals(ddmList.getUuid(),
+					ddmListModelImpl.getOriginalUuid()) ||
+				(ddmList.getGroupId() != ddmListModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
-					ddmContentModelImpl.getOriginalUuid(),
-					Long.valueOf(ddmContentModelImpl.getOriginalGroupId())
+					ddmListModelImpl.getOriginalUuid(),
+					Long.valueOf(ddmListModelImpl.getOriginalGroupId())
 				});
 		}
 
 		if (isNew ||
-				(!Validator.equals(ddmContent.getUuid(),
-					ddmContentModelImpl.getOriginalUuid()) ||
-				(ddmContent.getGroupId() != ddmContentModelImpl.getOriginalGroupId()))) {
+				(!Validator.equals(ddmList.getUuid(),
+					ddmListModelImpl.getOriginalUuid()) ||
+				(ddmList.getGroupId() != ddmListModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
-					ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-				}, ddmContent);
+					ddmList.getUuid(), Long.valueOf(ddmList.getGroupId())
+				}, ddmList);
 		}
 
-		return ddmContent;
+		return ddmList;
 	}
 
-	protected DDMContent toUnwrappedModel(DDMContent ddmContent) {
-		if (ddmContent instanceof DDMContentImpl) {
-			return ddmContent;
+	protected DDMList toUnwrappedModel(DDMList ddmList) {
+		if (ddmList instanceof DDMListImpl) {
+			return ddmList;
 		}
 
-		DDMContentImpl ddmContentImpl = new DDMContentImpl();
+		DDMListImpl ddmListImpl = new DDMListImpl();
 
-		ddmContentImpl.setNew(ddmContent.isNew());
-		ddmContentImpl.setPrimaryKey(ddmContent.getPrimaryKey());
+		ddmListImpl.setNew(ddmList.isNew());
+		ddmListImpl.setPrimaryKey(ddmList.getPrimaryKey());
 
-		ddmContentImpl.setUuid(ddmContent.getUuid());
-		ddmContentImpl.setContentId(ddmContent.getContentId());
-		ddmContentImpl.setGroupId(ddmContent.getGroupId());
-		ddmContentImpl.setCompanyId(ddmContent.getCompanyId());
-		ddmContentImpl.setUserId(ddmContent.getUserId());
-		ddmContentImpl.setUserName(ddmContent.getUserName());
-		ddmContentImpl.setCreateDate(ddmContent.getCreateDate());
-		ddmContentImpl.setModifiedDate(ddmContent.getModifiedDate());
-		ddmContentImpl.setName(ddmContent.getName());
-		ddmContentImpl.setDescription(ddmContent.getDescription());
-		ddmContentImpl.setXml(ddmContent.getXml());
+		ddmListImpl.setUuid(ddmList.getUuid());
+		ddmListImpl.setListId(ddmList.getListId());
+		ddmListImpl.setGroupId(ddmList.getGroupId());
+		ddmListImpl.setCompanyId(ddmList.getCompanyId());
+		ddmListImpl.setUserId(ddmList.getUserId());
+		ddmListImpl.setUserName(ddmList.getUserName());
+		ddmListImpl.setCreateDate(ddmList.getCreateDate());
+		ddmListImpl.setModifiedDate(ddmList.getModifiedDate());
+		ddmListImpl.setName(ddmList.getName());
+		ddmListImpl.setDescription(ddmList.getDescription());
+		ddmListImpl.setStructureId(ddmList.getStructureId());
 
-		return ddmContentImpl;
+		return ddmListImpl;
 	}
 
 	/**
-	 * Finds the d d m content with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Finds the d d m list with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m content to find
-	 * @return the d d m content
-	 * @throws com.liferay.portal.NoSuchModelException if a d d m content with the primary key could not be found
+	 * @param primaryKey the primary key of the d d m list to find
+	 * @return the d d m list
+	 * @throws com.liferay.portal.NoSuchModelException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByPrimaryKey(Serializable primaryKey)
+	public DDMList findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the d d m content with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	 * Finds the d d m list with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListException} if it could not be found.
 	 *
-	 * @param contentId the primary key of the d d m content to find
-	 * @return the d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @param listId the primary key of the d d m list to find
+	 * @return the d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByPrimaryKey(long contentId)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = fetchByPrimaryKey(contentId);
+	public DDMList findByPrimaryKey(long listId)
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = fetchByPrimaryKey(listId);
 
-		if (ddmContent == null) {
+		if (ddmList == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + contentId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listId);
 			}
 
-			throw new NoSuchContentException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				contentId);
+			throw new NoSuchListException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				listId);
 		}
 
-		return ddmContent;
+		return ddmList;
 	}
 
 	/**
-	 * Finds the d d m content with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the d d m list with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m content to find
-	 * @return the d d m content, or <code>null</code> if a d d m content with the primary key could not be found
+	 * @param primaryKey the primary key of the d d m list to find
+	 * @return the d d m list, or <code>null</code> if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent fetchByPrimaryKey(Serializable primaryKey)
+	public DDMList fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the d d m content with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the d d m list with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param contentId the primary key of the d d m content to find
-	 * @return the d d m content, or <code>null</code> if a d d m content with the primary key could not be found
+	 * @param listId the primary key of the d d m list to find
+	 * @return the d d m list, or <code>null</code> if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent fetchByPrimaryKey(long contentId)
-		throws SystemException {
-		DDMContent ddmContent = (DDMContent)EntityCacheUtil.getResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
-				DDMContentImpl.class, contentId, this);
+	public DDMList fetchByPrimaryKey(long listId) throws SystemException {
+		DDMList ddmList = (DDMList)EntityCacheUtil.getResult(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+				DDMListImpl.class, listId, this);
 
-		if (ddmContent == null) {
+		if (ddmList == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ddmContent = (DDMContent)session.get(DDMContentImpl.class,
-						Long.valueOf(contentId));
+				ddmList = (DDMList)session.get(DDMListImpl.class,
+						Long.valueOf(listId));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (ddmContent != null) {
-					cacheResult(ddmContent);
+				if (ddmList != null) {
+					cacheResult(ddmList);
 				}
 
 				closeSession(session);
 			}
 		}
 
-		return ddmContent;
+		return ddmList;
 	}
 
 	/**
-	 * Finds all the d d m contents where uuid = &#63;.
+	 * Finds all the d d m lists where uuid = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @return the matching d d m contents
+	 * @return the matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByUuid(String uuid) throws SystemException {
+	public List<DDMList> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m contents where uuid = &#63;.
+	 * Finds a range of all the d d m lists where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
-	 * @return the range of matching d d m contents
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
+	 * @return the range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByUuid(String uuid, int start, int end)
+	public List<DDMList> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m contents where uuid = &#63;.
+	 * Finds an ordered range of all the d d m lists where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching d d m contents
+	 * @return the ordered range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByUuid(String uuid, int start, int end,
+	public List<DDMList> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
@@ -530,7 +525,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMContent> list = (List<DDMContent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+		List<DDMList> list = (List<DDMList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -544,7 +539,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				query = new StringBundler(2);
 			}
 
-			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+			query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_UUID_1);
@@ -578,8 +573,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 					qPos.add(uuid);
 				}
 
-				list = (List<DDMContent>)QueryUtil.list(q, getDialect(), start,
-						end);
+				list = (List<DDMList>)QueryUtil.list(q, getDialect(), start, end);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -604,7 +598,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the first d d m content in the ordered set where uuid = &#63;.
+	 * Finds the first d d m list in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -612,14 +606,14 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 *
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the first matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByUuid_First(String uuid,
+	public DDMList findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
-		List<DDMContent> list = findByUuid(uuid, 0, 1, orderByComparator);
+		throws NoSuchListException, SystemException {
+		List<DDMList> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -631,7 +625,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -639,7 +633,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the last d d m content in the ordered set where uuid = &#63;.
+	 * Finds the last d d m list in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -647,16 +641,16 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 *
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the last matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByUuid_Last(String uuid,
+	public DDMList findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
+		throws NoSuchListException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<DDMContent> list = findByUuid(uuid, count - 1, count,
+		List<DDMList> list = findByUuid(uuid, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -669,7 +663,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -677,37 +671,37 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the d d m contents before and after the current d d m content in the ordered set where uuid = &#63;.
+	 * Finds the d d m lists before and after the current d d m list in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param contentId the primary key of the current d d m content
+	 * @param listId the primary key of the current d d m list
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @return the previous, current, and next d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent[] findByUuid_PrevAndNext(long contentId, String uuid,
+	public DDMList[] findByUuid_PrevAndNext(long listId, String uuid,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = findByPrimaryKey(contentId);
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = findByPrimaryKey(listId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMContent[] array = new DDMContentImpl[3];
+			DDMList[] array = new DDMListImpl[3];
 
-			array[0] = getByUuid_PrevAndNext(session, ddmContent, uuid,
+			array[0] = getByUuid_PrevAndNext(session, ddmList, uuid,
 					orderByComparator, true);
 
-			array[1] = ddmContent;
+			array[1] = ddmList;
 
-			array[2] = getByUuid_PrevAndNext(session, ddmContent, uuid,
+			array[2] = getByUuid_PrevAndNext(session, ddmList, uuid,
 					orderByComparator, false);
 
 			return array;
@@ -720,9 +714,8 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		}
 	}
 
-	protected DDMContent getByUuid_PrevAndNext(Session session,
-		DDMContent ddmContent, String uuid,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected DDMList getByUuid_PrevAndNext(Session session, DDMList ddmList,
+		String uuid, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -733,7 +726,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+		query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 		if (uuid == null) {
 			query.append(_FINDER_COLUMN_UUID_UUID_1);
@@ -815,14 +808,14 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(ddmContent);
+			Object[] values = orderByComparator.getOrderByValues(ddmList);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<DDMContent> list = q.list();
+		List<DDMList> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -833,19 +826,19 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the d d m content where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchContentException} if it could not be found.
+	 * Finds the d d m list where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListException} if it could not be found.
 	 *
 	 * @param uuid the uuid to search with
 	 * @param groupId the group ID to search with
-	 * @return the matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByUUID_G(String uuid, long groupId)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = fetchByUUID_G(uuid, groupId);
+	public DDMList findByUUID_G(String uuid, long groupId)
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = fetchByUUID_G(uuid, groupId);
 
-		if (ddmContent == null) {
+		if (ddmList == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
@@ -862,34 +855,34 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 
-		return ddmContent;
+		return ddmList;
 	}
 
 	/**
-	 * Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d d m list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid to search with
 	 * @param groupId the group ID to search with
-	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	 * @return the matching d d m list, or <code>null</code> if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent fetchByUUID_G(String uuid, long groupId)
+	public DDMList fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 		return fetchByUUID_G(uuid, groupId, true);
 	}
 
 	/**
-	 * Finds the d d m content where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d d m list where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid to search with
 	 * @param groupId the group ID to search with
-	 * @return the matching d d m content, or <code>null</code> if a matching d d m content could not be found
+	 * @return the matching d d m list, or <code>null</code> if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent fetchByUUID_G(String uuid, long groupId,
+	public DDMList fetchByUUID_G(String uuid, long groupId,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { uuid, groupId };
 
@@ -903,7 +896,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		if (result == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+			query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -936,30 +929,30 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 				qPos.add(groupId);
 
-				List<DDMContent> list = q.list();
+				List<DDMList> list = q.list();
 
 				result = list;
 
-				DDMContent ddmContent = null;
+				DDMList ddmList = null;
 
 				if (list.isEmpty()) {
 					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 						finderArgs, list);
 				}
 				else {
-					ddmContent = list.get(0);
+					ddmList = list.get(0);
 
-					cacheResult(ddmContent);
+					cacheResult(ddmList);
 
-					if ((ddmContent.getUuid() == null) ||
-							!ddmContent.getUuid().equals(uuid) ||
-							(ddmContent.getGroupId() != groupId)) {
+					if ((ddmList.getUuid() == null) ||
+							!ddmList.getUuid().equals(uuid) ||
+							(ddmList.getGroupId() != groupId)) {
 						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-							finderArgs, ddmContent);
+							finderArgs, ddmList);
 					}
 				}
 
-				return ddmContent;
+				return ddmList;
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -978,56 +971,55 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				return null;
 			}
 			else {
-				return (DDMContent)result;
+				return (DDMList)result;
 			}
 		}
 	}
 
 	/**
-	 * Finds all the d d m contents where groupId = &#63;.
+	 * Finds all the d d m lists where groupId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
-	 * @return the matching d d m contents
+	 * @return the matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByGroupId(long groupId)
-		throws SystemException {
+	public List<DDMList> findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m contents where groupId = &#63;.
+	 * Finds a range of all the d d m lists where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
-	 * @return the range of matching d d m contents
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
+	 * @return the range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByGroupId(long groupId, int start, int end)
+	public List<DDMList> findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 		return findByGroupId(groupId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m contents where groupId = &#63;.
+	 * Finds an ordered range of all the d d m lists where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching d d m contents
+	 * @return the ordered range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByGroupId(long groupId, int start, int end,
+	public List<DDMList> findByGroupId(long groupId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				groupId,
@@ -1036,7 +1028,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMContent> list = (List<DDMContent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
+		List<DDMList> list = (List<DDMList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_GROUPID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1050,7 +1042,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				query = new StringBundler(2);
 			}
 
-			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+			query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1072,8 +1064,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 				qPos.add(groupId);
 
-				list = (List<DDMContent>)QueryUtil.list(q, getDialect(), start,
-						end);
+				list = (List<DDMList>)QueryUtil.list(q, getDialect(), start, end);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1098,7 +1089,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the first d d m content in the ordered set where groupId = &#63;.
+	 * Finds the first d d m list in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1106,14 +1097,14 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the first matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByGroupId_First(long groupId,
+	public DDMList findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
-		List<DDMContent> list = findByGroupId(groupId, 0, 1, orderByComparator);
+		throws NoSuchListException, SystemException {
+		List<DDMList> list = findByGroupId(groupId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1125,7 +1116,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -1133,7 +1124,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the last d d m content in the ordered set where groupId = &#63;.
+	 * Finds the last d d m list in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1141,16 +1132,16 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the last matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByGroupId_Last(long groupId,
+	public DDMList findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
+		throws NoSuchListException, SystemException {
 		int count = countByGroupId(groupId);
 
-		List<DDMContent> list = findByGroupId(groupId, count - 1, count,
+		List<DDMList> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1163,7 +1154,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -1171,37 +1162,37 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the d d m contents before and after the current d d m content in the ordered set where groupId = &#63;.
+	 * Finds the d d m lists before and after the current d d m list in the ordered set where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param contentId the primary key of the current d d m content
+	 * @param listId the primary key of the current d d m list
 	 * @param groupId the group ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @return the previous, current, and next d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent[] findByGroupId_PrevAndNext(long contentId, long groupId,
+	public DDMList[] findByGroupId_PrevAndNext(long listId, long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = findByPrimaryKey(contentId);
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = findByPrimaryKey(listId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMContent[] array = new DDMContentImpl[3];
+			DDMList[] array = new DDMListImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, ddmContent, groupId,
+			array[0] = getByGroupId_PrevAndNext(session, ddmList, groupId,
 					orderByComparator, true);
 
-			array[1] = ddmContent;
+			array[1] = ddmList;
 
-			array[2] = getByGroupId_PrevAndNext(session, ddmContent, groupId,
+			array[2] = getByGroupId_PrevAndNext(session, ddmList, groupId,
 					orderByComparator, false);
 
 			return array;
@@ -1214,9 +1205,9 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		}
 	}
 
-	protected DDMContent getByGroupId_PrevAndNext(Session session,
-		DDMContent ddmContent, long groupId,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected DDMList getByGroupId_PrevAndNext(Session session,
+		DDMList ddmList, long groupId, OrderByComparator orderByComparator,
+		boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -1227,7 +1218,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+		query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1297,14 +1288,14 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		qPos.add(groupId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(ddmContent);
+			Object[] values = orderByComparator.getOrderByValues(ddmList);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<DDMContent> list = q.list();
+		List<DDMList> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1315,51 +1306,51 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds all the d d m contents where companyId = &#63;.
+	 * Finds all the d d m lists where companyId = &#63;.
 	 *
 	 * @param companyId the company ID to search with
-	 * @return the matching d d m contents
+	 * @return the matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByCompanyId(long companyId)
+	public List<DDMList> findByCompanyId(long companyId)
 		throws SystemException {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
 
 	/**
-	 * Finds a range of all the d d m contents where companyId = &#63;.
+	 * Finds a range of all the d d m lists where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
-	 * @return the range of matching d d m contents
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
+	 * @return the range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByCompanyId(long companyId, int start, int end)
+	public List<DDMList> findByCompanyId(long companyId, int start, int end)
 		throws SystemException {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m contents where companyId = &#63;.
+	 * Finds an ordered range of all the d d m lists where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching d d m contents
+	 * @return the ordered range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findByCompanyId(long companyId, int start, int end,
+	public List<DDMList> findByCompanyId(long companyId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				companyId,
@@ -1368,7 +1359,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMContent> list = (List<DDMContent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+		List<DDMList> list = (List<DDMList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1382,7 +1373,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				query = new StringBundler(2);
 			}
 
-			query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+			query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -1404,8 +1395,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 				qPos.add(companyId);
 
-				list = (List<DDMContent>)QueryUtil.list(q, getDialect(), start,
-						end);
+				list = (List<DDMList>)QueryUtil.list(q, getDialect(), start, end);
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -1430,7 +1420,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the first d d m content in the ordered set where companyId = &#63;.
+	 * Finds the first d d m list in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1438,15 +1428,14 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the first matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByCompanyId_First(long companyId,
+	public DDMList findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
-		List<DDMContent> list = findByCompanyId(companyId, 0, 1,
-				orderByComparator);
+		throws NoSuchListException, SystemException {
+		List<DDMList> list = findByCompanyId(companyId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -1458,7 +1447,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -1466,7 +1455,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the last d d m content in the ordered set where companyId = &#63;.
+	 * Finds the last d d m list in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1474,16 +1463,16 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a matching d d m content could not be found
+	 * @return the last matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent findByCompanyId_Last(long companyId,
+	public DDMList findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
+		throws NoSuchListException, SystemException {
 		int count = countByCompanyId(companyId);
 
-		List<DDMContent> list = findByCompanyId(companyId, count - 1, count,
+		List<DDMList> list = findByCompanyId(companyId, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -1496,7 +1485,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchContentException(msg.toString());
+			throw new NoSuchListException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -1504,38 +1493,38 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds the d d m contents before and after the current d d m content in the ordered set where companyId = &#63;.
+	 * Finds the d d m lists before and after the current d d m list in the ordered set where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param contentId the primary key of the current d d m content
+	 * @param listId the primary key of the current d d m list
 	 * @param companyId the company ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next d d m content
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchContentException if a d d m content with the primary key could not be found
+	 * @return the previous, current, and next d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMContent[] findByCompanyId_PrevAndNext(long contentId,
-		long companyId, OrderByComparator orderByComparator)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = findByPrimaryKey(contentId);
+	public DDMList[] findByCompanyId_PrevAndNext(long listId, long companyId,
+		OrderByComparator orderByComparator)
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = findByPrimaryKey(listId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMContent[] array = new DDMContentImpl[3];
+			DDMList[] array = new DDMListImpl[3];
 
-			array[0] = getByCompanyId_PrevAndNext(session, ddmContent,
-					companyId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session, ddmList, companyId,
+					orderByComparator, true);
 
-			array[1] = ddmContent;
+			array[1] = ddmList;
 
-			array[2] = getByCompanyId_PrevAndNext(session, ddmContent,
-					companyId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session, ddmList, companyId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1547,9 +1536,9 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		}
 	}
 
-	protected DDMContent getByCompanyId_PrevAndNext(Session session,
-		DDMContent ddmContent, long companyId,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected DDMList getByCompanyId_PrevAndNext(Session session,
+		DDMList ddmList, long companyId, OrderByComparator orderByComparator,
+		boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -1560,7 +1549,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_DDMCONTENT_WHERE);
+		query.append(_SQL_SELECT_DDMLIST_WHERE);
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -1630,14 +1619,14 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		qPos.add(companyId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(ddmContent);
+			Object[] values = orderByComparator.getOrderByValues(ddmList);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<DDMContent> list = q.list();
+		List<DDMList> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1648,53 +1637,52 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Finds all the d d m contents.
+	 * Finds all the d d m lists.
 	 *
-	 * @return the d d m contents
+	 * @return the d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findAll() throws SystemException {
+	public List<DDMList> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m contents.
+	 * Finds a range of all the d d m lists.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
-	 * @return the range of d d m contents
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
+	 * @return the range of d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findAll(int start, int end)
-		throws SystemException {
+	public List<DDMList> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m contents.
+	 * Finds an ordered range of all the d d m lists.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m contents to return
-	 * @param end the upper bound of the range of d d m contents to return (not inclusive)
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of d d m contents
+	 * @return the ordered range of d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMContent> findAll(int start, int end,
+	public List<DDMList> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMContent> list = (List<DDMContent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<DDMList> list = (List<DDMList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1705,7 +1693,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				query = new StringBundler(2 +
 						(orderByComparator.getOrderByFields().length * 3));
 
-				query.append(_SQL_SELECT_DDMCONTENT);
+				query.append(_SQL_SELECT_DDMLIST);
 
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 					orderByComparator);
@@ -1713,7 +1701,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				sql = query.toString();
 			}
 			else {
-				sql = _SQL_SELECT_DDMCONTENT;
+				sql = _SQL_SELECT_DDMLIST;
 			}
 
 			Session session = null;
@@ -1724,13 +1712,13 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				Query q = session.createQuery(sql);
 
 				if (orderByComparator == null) {
-					list = (List<DDMContent>)QueryUtil.list(q, getDialect(),
+					list = (List<DDMList>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
 				}
 				else {
-					list = (List<DDMContent>)QueryUtil.list(q, getDialect(),
+					list = (List<DDMList>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 			}
@@ -1757,71 +1745,71 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Removes all the d d m contents where uuid = &#63; from the database.
+	 * Removes all the d d m lists where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
-		for (DDMContent ddmContent : findByUuid(uuid)) {
-			ddmContentPersistence.remove(ddmContent);
+		for (DDMList ddmList : findByUuid(uuid)) {
+			ddmListPersistence.remove(ddmList);
 		}
 	}
 
 	/**
-	 * Removes the d d m content where uuid = &#63; and groupId = &#63; from the database.
+	 * Removes the d d m list where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
 	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUUID_G(String uuid, long groupId)
-		throws NoSuchContentException, SystemException {
-		DDMContent ddmContent = findByUUID_G(uuid, groupId);
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = findByUUID_G(uuid, groupId);
 
-		ddmContentPersistence.remove(ddmContent);
+		ddmListPersistence.remove(ddmList);
 	}
 
 	/**
-	 * Removes all the d d m contents where groupId = &#63; from the database.
+	 * Removes all the d d m lists where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
-		for (DDMContent ddmContent : findByGroupId(groupId)) {
-			ddmContentPersistence.remove(ddmContent);
+		for (DDMList ddmList : findByGroupId(groupId)) {
+			ddmListPersistence.remove(ddmList);
 		}
 	}
 
 	/**
-	 * Removes all the d d m contents where companyId = &#63; from the database.
+	 * Removes all the d d m lists where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
-		for (DDMContent ddmContent : findByCompanyId(companyId)) {
-			ddmContentPersistence.remove(ddmContent);
+		for (DDMList ddmList : findByCompanyId(companyId)) {
+			ddmListPersistence.remove(ddmList);
 		}
 	}
 
 	/**
-	 * Removes all the d d m contents from the database.
+	 * Removes all the d d m lists from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeAll() throws SystemException {
-		for (DDMContent ddmContent : findAll()) {
-			ddmContentPersistence.remove(ddmContent);
+		for (DDMList ddmList : findAll()) {
+			ddmListPersistence.remove(ddmList);
 		}
 	}
 
 	/**
-	 * Counts all the d d m contents where uuid = &#63;.
+	 * Counts all the d d m lists where uuid = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @return the number of matching d d m contents
+	 * @return the number of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByUuid(String uuid) throws SystemException {
@@ -1833,7 +1821,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+			query.append(_SQL_COUNT_DDMLIST_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_UUID_1);
@@ -1883,11 +1871,11 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Counts all the d d m contents where uuid = &#63; and groupId = &#63;.
+	 * Counts all the d d m lists where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid to search with
 	 * @param groupId the group ID to search with
-	 * @return the number of matching d d m contents
+	 * @return the number of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByUUID_G(String uuid, long groupId)
@@ -1900,7 +1888,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+			query.append(_SQL_COUNT_DDMLIST_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
@@ -1954,10 +1942,10 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Counts all the d d m contents where groupId = &#63;.
+	 * Counts all the d d m lists where groupId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
-	 * @return the number of matching d d m contents
+	 * @return the number of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByGroupId(long groupId) throws SystemException {
@@ -1969,7 +1957,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+			query.append(_SQL_COUNT_DDMLIST_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2007,10 +1995,10 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Counts all the d d m contents where companyId = &#63;.
+	 * Counts all the d d m lists where companyId = &#63;.
 	 *
 	 * @param companyId the company ID to search with
-	 * @return the number of matching d d m contents
+	 * @return the number of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByCompanyId(long companyId) throws SystemException {
@@ -2022,7 +2010,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_DDMCONTENT_WHERE);
+			query.append(_SQL_COUNT_DDMLIST_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2060,9 +2048,9 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Counts all the d d m contents.
+	 * Counts all the d d m lists.
 	 *
-	 * @return the number of d d m contents
+	 * @return the number of d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countAll() throws SystemException {
@@ -2077,7 +2065,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_DDMCONTENT);
+				Query q = session.createQuery(_SQL_COUNT_DDMLIST);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -2100,19 +2088,19 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	/**
-	 * Initializes the d d m content persistence.
+	 * Initializes the d d m list persistence.
 	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
-						"value.object.listener.com.liferay.portlet.dynamicdatamapping.model.DDMContent")));
+						"value.object.listener.com.liferay.portlet.dynamicdatamapping.model.DDMList")));
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener<DDMContent>> listenersList = new ArrayList<ModelListener<DDMContent>>();
+				List<ModelListener<DDMList>> listenersList = new ArrayList<ModelListener<DDMList>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<DDMContent>)InstanceFactory.newInstance(
+					listenersList.add((ModelListener<DDMList>)InstanceFactory.newInstance(
 							listenerClassName));
 				}
 
@@ -2125,7 +2113,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	}
 
 	public void destroy() {
-		EntityCacheUtil.removeCache(DDMContentImpl.class.getName());
+		EntityCacheUtil.removeCache(DDMListImpl.class.getName());
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
@@ -2144,22 +2132,22 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	private static final String _SQL_SELECT_DDMCONTENT = "SELECT ddmContent FROM DDMContent ddmContent";
-	private static final String _SQL_SELECT_DDMCONTENT_WHERE = "SELECT ddmContent FROM DDMContent ddmContent WHERE ";
-	private static final String _SQL_COUNT_DDMCONTENT = "SELECT COUNT(ddmContent) FROM DDMContent ddmContent";
-	private static final String _SQL_COUNT_DDMCONTENT_WHERE = "SELECT COUNT(ddmContent) FROM DDMContent ddmContent WHERE ";
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddmContent.uuid IS NULL";
-	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddmContent.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddmContent.uuid IS NULL OR ddmContent.uuid = ?)";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "ddmContent.uuid IS NULL AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "ddmContent.uuid = ? AND ";
-	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(ddmContent.uuid IS NULL OR ddmContent.uuid = ?) AND ";
-	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmContent.groupId = ?";
-	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmContent.groupId = ?";
-	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "ddmContent.companyId = ?";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmContent.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMContent exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMContent exists with the key {";
+	private static final String _SQL_SELECT_DDMLIST = "SELECT ddmList FROM DDMList ddmList";
+	private static final String _SQL_SELECT_DDMLIST_WHERE = "SELECT ddmList FROM DDMList ddmList WHERE ";
+	private static final String _SQL_COUNT_DDMLIST = "SELECT COUNT(ddmList) FROM DDMList ddmList";
+	private static final String _SQL_COUNT_DDMLIST_WHERE = "SELECT COUNT(ddmList) FROM DDMList ddmList WHERE ";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddmList.uuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddmList.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddmList.uuid IS NULL OR ddmList.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "ddmList.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "ddmList.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(ddmList.uuid IS NULL OR ddmList.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmList.groupId = ?";
+	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmList.groupId = ?";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "ddmList.companyId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmList.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMList exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMList exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
-	private static Log _log = LogFactoryUtil.getLog(DDMContentPersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DDMListPersistenceImpl.class);
 }

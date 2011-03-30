@@ -673,6 +673,18 @@
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLRepositoryService" />
 		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.DLRepositoryService" />
 	</bean>
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMListService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMListService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMListService" />
+	</bean>
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMListService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMListService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMListService" />
+	</bean>
+	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMListService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMListService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMListService" />
+	</bean>
 	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />
 		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />

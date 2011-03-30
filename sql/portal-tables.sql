@@ -411,6 +411,20 @@ create table DDMContent (
 	xml TEXT null
 );
 
+create table DDMList (
+	uuid_ VARCHAR(75) null,
+	listId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name STRING null,
+	description STRING null,
+	structureId LONG
+);
+
 create table DDMStorageLink (
 	uuid_ VARCHAR(75) null,
 	storageLinkId LONG not null primary key,
