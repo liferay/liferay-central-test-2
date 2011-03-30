@@ -300,11 +300,17 @@ public class DLAppHelperLocalServiceImpl
 
 			// Social
 
+			int activityType = DLActivityKeys.UPDATE_FILE_ENTRY;
+
+			if (latestFileVersion.getVersion().equals("1.0")) {
+				activityType = DLActivityKeys.ADD_FILE_ENTRY;
+			}
+
 			socialActivityLocalService.addUniqueActivity(
 				latestFileVersion.getStatusByUserId(),
 				fileEntry.getGroupId(), latestFileVersion.getCreateDate(),
 				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
-				DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
+				activityType, StringPool.BLANK, 0);
 		}
 		else {
 
