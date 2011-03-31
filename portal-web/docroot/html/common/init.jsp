@@ -100,6 +100,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.DateFormatFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.DateUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.FastDateFormatConstants" %>
 <%@ page import="com.liferay.portal.kernel.util.FastDateFormatFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.FileUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
