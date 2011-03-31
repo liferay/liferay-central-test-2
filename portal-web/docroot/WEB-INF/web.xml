@@ -595,6 +595,10 @@
 		<url-pattern>/language/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
+		<servlet-name>Lucene Servlet</servlet-name>
+		<url-pattern>/lucene/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>Netvibes Servlet</servlet-name>
 		<url-pattern>/netvibes/*</url-pattern>
 	</servlet-mapping>

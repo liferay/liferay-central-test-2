@@ -95,6 +95,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_HTML) ||
 			friendlyURL.startsWith(_PATH_IMAGE) ||
 			friendlyURL.startsWith(_PATH_LANGUAGE) ||
+			friendlyURL.startsWith(_PATH_LUCENE) ||
 			friendlyURL.startsWith(_PATH_NETVIBES) ||
 			friendlyURL.startsWith(_PATH_PBHS) ||
 			friendlyURL.startsWith(_PATH_POLLER) ||
@@ -311,6 +312,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static final String _PATH_IMAGE = "/image/";
 
 	private static final String _PATH_LANGUAGE = "/language/";
+
+	private static final String _PATH_LUCENE = "/lucene/";
 
 	private static final String _PATH_NETVIBES = "/netvibes/";
 
