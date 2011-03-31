@@ -23,4 +23,10 @@ import com.liferay.taglib.aui.base.BaseLegendTag;
  */
 public class LegendTag extends BaseLegendTag {
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
+
 }

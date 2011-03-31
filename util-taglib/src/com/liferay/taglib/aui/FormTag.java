@@ -55,6 +55,10 @@ public class FormTag extends BaseFormTag {
 		}
 	}
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 
@@ -66,6 +70,8 @@ public class FormTag extends BaseFormTag {
 
 		request.setAttribute("aui:form:validatorTagsMap", _validatorTagsMap);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private Map<String, List<ValidatorTag>> _validatorTagsMap =
 		new HashMap<String, List<ValidatorTag>>();

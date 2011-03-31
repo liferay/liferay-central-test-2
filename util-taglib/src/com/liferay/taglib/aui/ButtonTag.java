@@ -26,6 +26,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ButtonTag extends BaseButtonTag {
 
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 
@@ -47,5 +51,7 @@ public class ButtonTag extends BaseButtonTag {
 
 		setNamespacedAttribute(request, "value", value);
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 }
