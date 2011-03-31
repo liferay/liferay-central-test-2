@@ -1265,6 +1265,8 @@ public interface PropsKeys {
 
 	public static final String MSN_PASSWORD = "msn.password";
 
+	public static final String MULTI_VALUE_MAP = "multi.value.map.";
+
 	public static final String MY_PLACES_DISPLAY_STYLE = "my.places.display.style";
 
 	public static final String MY_PLACES_MAX_ELEMENTS = "my.places.max.elements";

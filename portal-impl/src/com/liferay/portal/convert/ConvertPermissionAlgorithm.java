@@ -28,10 +28,13 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MultiValueMap;
+import com.liferay.portal.kernel.util.MultiValueMapFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -77,8 +80,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.collections.map.MultiValueMap;
 
 /**
  * <p>
@@ -346,7 +347,10 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			return;
 		}
 
-		MultiValueMap mvp = new MultiValueMap();
+		MultiValueMap<Tuple, String> mvp =
+			(MultiValueMap<Tuple, String>)
+				MultiValueMapFactoryUtil.getMultiValueMap(
+					_CONVERT_RESOURCE_PERMISSION_MAP);
 
 		try {
 			resourcePermissionReader = new UnsyncBufferedReader(
@@ -386,7 +390,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			long roleId = (Long)key.getObject(3);
 
 			String[] actionIdArray =
-				(String[])mvp.getCollection(key).toArray(new String[0]);
+				(String[])mvp.getAll(key).toArray(new String[0]);
 
 			long actionIds = 0;
 
@@ -435,7 +439,10 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			// Group by resource id
 
-			MultiValueMap mvp = new MultiValueMap();
+			MultiValueMap<Long, String[]> mvp =
+				(MultiValueMap<Long, String[]>)
+					MultiValueMapFactoryUtil.getMultiValueMap(
+						_CONVERT_ROLES_MAP);
 
 			String line = null;
 
@@ -451,7 +458,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			for (Long key : (Set<Long>)mvp.keySet()) {
 				List<String[]> valuesList = new ArrayList<String[]>(
-					mvp.getCollection(key));
+					mvp.getAll(key));
 
 				String[] values = valuesList.get(0);
 
@@ -759,6 +766,14 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 		return GetterUtil.getBoolean(parameterValues[0]);
 	}
+
+	private static final String _CONVERT_RESOURCE_PERMISSION_MAP =
+		PropsKeys.MULTI_VALUE_MAP + ConvertPermissionAlgorithm.class.getName() +
+			".convertResourcePermissionMap";
+
+	private static final String _CONVERT_ROLES_MAP =
+		PropsKeys.MULTI_VALUE_MAP + ConvertPermissionAlgorithm.class.getName() +
+			".convertRolesMap";
 
 	private static final String _EXT_OTHER_ROLES = ".others_roles";
 
