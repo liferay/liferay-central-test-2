@@ -15,7 +15,7 @@
 package com.liferay.portal.search.lucene.dump;
 
 import com.liferay.portal.search.lucene.IndexAccessorImpl;
-import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.ByteArrayInputStream;
@@ -31,7 +31,7 @@ import org.apache.lucene.search.TopDocs;
 /**
  * @author Shuyang Zhou
  */
-public class IndexAccessorImplTest extends BaseServiceTestCase {
+public class IndexAccessorImplTest extends BaseTestCase {
 
 	public void setUp() throws Exception {
 		super.setUp();
