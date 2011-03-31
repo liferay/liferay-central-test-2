@@ -28,7 +28,8 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class ToggleValueTag extends TagSupport {
 
-	public static void doTag(String id, PageContext pageContext)
+	public static void doTag(
+			String id, String defaultValue, PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -37,7 +38,7 @@ public class ToggleValueTag extends TagSupport {
 		String value = SessionClicks.get(request, id, StringPool.BLANK);
 
 		if (value.equals(StringPool.BLANK)) {
-			value = "block";
+			value = defaultValue;
 		}
 
 		JspWriter jspWriter = pageContext.getOut();
@@ -52,12 +53,12 @@ public class ToggleValueTag extends TagSupport {
 			String id, PageContext pageContext, HttpServletRequest request)
 		throws Exception {
 
-		doTag(id, pageContext);
+		doTag(id, "block", pageContext);
 	}
 
 	public int doEndTag() throws JspException {
 		try {
-			doTag(_id, pageContext);
+			doTag(_id, _defaultValue, pageContext);
 
 			return EVAL_PAGE;
 		}
@@ -66,10 +67,15 @@ public class ToggleValueTag extends TagSupport {
 		}
 	}
 
+	public void setDefaultValue(String defaultValue) {
+		_defaultValue = defaultValue;
+	}
+
 	public void setId(String id) {
 		_id = id;
 	}
 
+	private String _defaultValue = "block";
 	private String _id;
 
 }
