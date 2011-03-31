@@ -716,6 +716,16 @@ Liferay.Service.registerClass(
 Liferay.Service.register("Liferay.Service.DDM", "com.liferay.portlet.dynamicdatamapping.service");
 
 Liferay.Service.registerClass(
+	Liferay.Service.DDM, "DDMList",
+	{
+		addList: true,
+		deleteList: true,
+		getList: true,
+		updateList: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.DDM, "DDMStructure",
 	{
 		addStructure: true,

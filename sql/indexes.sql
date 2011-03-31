@@ -134,6 +134,7 @@ create unique index IX_EB9BDE28 on DDMContent (uuid_, groupId);
 
 create index IX_5B41F477 on DDMList (companyId);
 create index IX_DEDB2CB9 on DDMList (groupId);
+create unique index IX_80E1D738 on DDMList (groupId, listKey);
 create index IX_2169983 on DDMList (uuid_);
 create unique index IX_7F5FDE87 on DDMList (uuid_, groupId);
 

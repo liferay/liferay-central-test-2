@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EntryStructureException extends PortalException {
+public class ListDuplicateListKeyException extends PortalException {
 
-	public EntryStructureException() {
+	public ListDuplicateListKeyException() {
 		super();
 	}
 
-	public EntryStructureException(String msg) {
+	public ListDuplicateListKeyException(String msg) {
 		super(msg);
 	}
 
-	public EntryStructureException(String msg, Throwable cause) {
+	public ListDuplicateListKeyException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public EntryStructureException(Throwable cause) {
+	public ListDuplicateListKeyException(Throwable cause) {
 		super(cause);
 	}
 

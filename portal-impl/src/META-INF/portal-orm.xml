@@ -1698,6 +1698,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="listKey" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="structureId" />

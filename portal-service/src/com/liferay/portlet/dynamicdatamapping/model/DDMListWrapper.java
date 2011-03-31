@@ -219,6 +219,24 @@ public class DDMListWrapper implements DDMList {
 	}
 
 	/**
+	* Gets the list key of this d d m list.
+	*
+	* @return the list key of this d d m list
+	*/
+	public java.lang.String getListKey() {
+		return _ddmList.getListKey();
+	}
+
+	/**
+	* Sets the list key of this d d m list.
+	*
+	* @param listKey the list key of this d d m list
+	*/
+	public void setListKey(java.lang.String listKey) {
+		_ddmList.setListKey(listKey);
+	}
+
+	/**
 	* Gets the name of this d d m list.
 	*
 	* @return the name of this d d m list

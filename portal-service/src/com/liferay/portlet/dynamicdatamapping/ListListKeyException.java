@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EntryNameException extends PortalException {
+public class ListListKeyException extends PortalException {
 
-	public EntryNameException() {
+	public ListListKeyException() {
 		super();
 	}
 
-	public EntryNameException(String msg) {
+	public ListListKeyException(String msg) {
 		super(msg);
 	}
 
-	public EntryNameException(String msg, Throwable cause) {
+	public ListListKeyException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public EntryNameException(Throwable cause) {
+	public ListListKeyException(Throwable cause) {
 		super(cause);
 	}
 
