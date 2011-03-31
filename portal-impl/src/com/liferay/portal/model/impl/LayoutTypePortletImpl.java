@@ -600,28 +600,6 @@ public class LayoutTypePortletImpl
 			LayoutTypePortletConstants.STATE_MIN);
 	}
 
-	public String getThemeId() {
-		String themeId = null;
-
-		try {
-			Layout layout = getLayout();
-
-			Theme theme = layout.getTheme();
-
-			if (theme != null) {
-				themeId = theme.getThemeId();
-			}
-			else {
-				themeId = layout.getThemeId();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return themeId;
-	}
-
 	public boolean hasDefaultScopePortletId(long groupId, String portletId)
 		throws PortalException, SystemException {
 
@@ -1422,6 +1400,28 @@ public class LayoutTypePortletImpl
 		}
 
 		return _templateLayout.getTypeSettingsProperties().getProperty(key);
+	}
+
+	protected String getThemeId() {
+		String themeId = null;
+
+		try {
+			Layout layout = getLayout();
+
+			Theme theme = layout.getTheme();
+
+			if (theme != null) {
+				themeId = theme.getThemeId();
+			}
+			else {
+				themeId = layout.getThemeId();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return themeId;
 	}
 
 	protected String getUserPreference(String key) {
