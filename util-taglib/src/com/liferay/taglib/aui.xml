@@ -261,7 +261,7 @@
 				<name>escapeXml</name>
 				<inputType>boolean</inputType>
 				<outputType>boolean</outputType>
-				<defaultValue></defaultValue>
+				<defaultValue>true</defaultValue>
 				<description></description>
 			</attribute>
 			<attribute>

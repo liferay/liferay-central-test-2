@@ -42,10 +42,6 @@ public class FormTag extends BaseFormTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_escapeXml = true;
-		_name = "fm";
-		_useNamespace = true;
-
 		if (_validatorTagsMap != null) {
 			for (List<ValidatorTag> validatorTags :
 					_validatorTagsMap.values()) {
@@ -62,20 +58,16 @@ public class FormTag extends BaseFormTag {
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 
-		if (_escapeXml) {
-			super.setAction(HtmlUtil.escape(_action));
+		if (getEscapeXml()) {
+			String action = getAction();
+
+			super.setAction(HtmlUtil.escape(action));
 		}
 
-		request.setAttribute(
-				"aui:form:inlineLabels", String.valueOf(_inlineLabels));
-		request.setAttribute(
-				"aui:form:useNamespace", String.valueOf(_useNamespace));
 		request.setAttribute("aui:form:validatorTagsMap", _validatorTagsMap);
 	}
 
 	private Map<String, List<ValidatorTag>> _validatorTagsMap =
 		new HashMap<String, List<ValidatorTag>>();
-
-	protected boolean _useNamespace = true;
 
 }

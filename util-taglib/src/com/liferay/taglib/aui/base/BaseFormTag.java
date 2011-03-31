@@ -105,7 +105,7 @@ public class BaseFormTag extends com.liferay.taglib.util.IncludeTag {
 	protected void cleanUp() {
 		_action = null;
 		_cssClass = null;
-		_escapeXml = false;
+		_escapeXml = true;
 		_inlineLabels = false;
 		_name = "fm";
 		_onSubmit = null;
@@ -138,12 +138,12 @@ public class BaseFormTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/form/start.jsp";
 
-	protected java.lang.String _action;
-	protected java.lang.String _cssClass;
-	protected boolean _escapeXml;
-	protected boolean _inlineLabels;
-	protected java.lang.String _name;
-	protected java.lang.String _onSubmit;
-	protected boolean _useNamespace;
+	private java.lang.String _action;
+	private java.lang.String _cssClass;
+	private boolean _escapeXml;
+	private boolean _inlineLabels;
+	private java.lang.String _name;
+	private java.lang.String _onSubmit;
+	private boolean _useNamespace;
 
 }
