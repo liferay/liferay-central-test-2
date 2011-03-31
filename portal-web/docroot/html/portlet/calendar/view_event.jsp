@@ -263,6 +263,7 @@ PortalUtil.setPageSubtitle(event.getTitle(), request);
 PortalUtil.setPageDescription(event.getDescription(), request);
 
 List<AssetTag> assetTags = AssetTagLocalServiceUtil.getTags(CalEvent.class.getName(), event.getEventId());
+
 PortalUtil.setPageKeywords(ListUtil.toString(assetTags, "name"), request);
 
 PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.unescape(event.getTitle()), currentURL);
