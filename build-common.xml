@@ -273,6 +273,15 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</then>
 	</if>
 
+	<if>
+		<not>
+			<equals arg1="${junit.debug}" arg2="true" />
+		</not>
+		<then>
+			<var name="junit.debug.jpda" value="" />
+		</then>
+	</if>
+
 	<target name="compile">
 	</target>
 
@@ -319,15 +328,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	<target name="setproxy" if="setproxy.proxy.host">
 		<setproxy proxyhost="${setproxy.proxy.host}" proxyport="${setproxy.proxy.port}" />
 	</target>
-
-	<if>
-		<not>
-			<equals arg1="${debug}" arg2="true" />
-		</not>
-		<then>
-			<var name="junit.debug.jpda" value="" />
-		</then>
-	</if>
 
 	<target name="test">
 		<delete dir="test-classes" />
