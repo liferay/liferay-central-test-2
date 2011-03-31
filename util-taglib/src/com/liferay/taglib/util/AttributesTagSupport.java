@@ -79,9 +79,10 @@ public class AttributesTagSupport
 	}
 
 	public void setNamespacedAttribute(
-		HttpServletRequest request, String key, Object  value) {
+		HttpServletRequest request, String key, Object value) {
 
-		request.setAttribute(_attributeNamespace.concat(key), value);
+		request.setAttribute(
+			_attributeNamespace.concat(key), String.valueOf(value));
 	}
 
 	public void setScopedAttribute(String name, Object value) {
