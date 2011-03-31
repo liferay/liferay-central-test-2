@@ -20,7 +20,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -37,9 +36,10 @@ public class IndexAccessImplTest extends BaseServiceTestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		_documentNumber = PropsValues.LUCENE_COMMIT_BATCH_SIZE;
-		if (_documentNumber == 0) {
-			_documentNumber = 1;
+		_documentsCount = PropsValues.LUCENE_COMMIT_BATCH_SIZE;
+
+		if (_documentsCount == 0) {
+			_documentsCount = 1;
 		}
 
 		_indexAccessorImpl = new IndexAccessorImpl(_TEST_COMPANY_ID);
@@ -52,49 +52,33 @@ public class IndexAccessImplTest extends BaseServiceTestCase {
 		_indexAccessorImpl.close();
 	}
 
-	public void testEmptyDump() throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	public void testEmptyDump() throws Exception {
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		_indexAccessorImpl.dumpIndex(baos);
+		_indexAccessorImpl.dumpIndex(byteArrayOutputStream);
 
-		_indexAccessorImpl.loadIndex(new ByteArrayInputStream(
-			baos.toByteArray()));
+		_indexAccessorImpl.loadIndex(
+			new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
 	}
 
-	public void testOneCommitDump() throws IOException {
+	public void testOneCommitDump() throws Exception {
 		_addDocuments("test");
 
 		_assertHits("test", true);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		_indexAccessorImpl.dumpIndex(baos);
+		_indexAccessorImpl.dumpIndex(byteArrayOutputStream);
 
-		_indexAccessorImpl.loadIndex(new ByteArrayInputStream(
-			baos.toByteArray()));
+		_indexAccessorImpl.loadIndex(
+			new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
 
 		_assertHits("test", true);
 	}
 
-	public void testTwoCommitsDump() throws IOException {
-		_addDocuments("test1");
-		_addDocuments("test2");
-
-		_assertHits("test1", true);
-		_assertHits("test2", true);
-
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-		_indexAccessorImpl.dumpIndex(baos);
-
-		_indexAccessorImpl.loadIndex(new ByteArrayInputStream(
-			baos.toByteArray()));
-
-		_assertHits("test1", true);
-		_assertHits("test2", true);
-	}
-
-	public void testThreeCommitsDump() throws IOException {
+	public void testThreeCommitsDump() throws Exception {
 		_addDocuments("test1");
 		_addDocuments("test2");
 		_addDocuments("test3");
@@ -103,19 +87,20 @@ public class IndexAccessImplTest extends BaseServiceTestCase {
 		_assertHits("test2", true);
 		_assertHits("test3", true);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		_indexAccessorImpl.dumpIndex(baos);
+		_indexAccessorImpl.dumpIndex(byteArrayOutputStream);
 
-		_indexAccessorImpl.loadIndex(new ByteArrayInputStream(
-			baos.toByteArray()));
+		_indexAccessorImpl.loadIndex(
+			new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
 
 		_assertHits("test1", true);
 		_assertHits("test2", true);
 		_assertHits("test3", true);
 	}
 
-	public void testThreeCommitsOneDeletionDump() throws IOException {
+	public void testThreeCommitsOneDeletionDump() throws Exception {
 		_addDocuments("test1");
 		_addDocuments("test2");
 		_addDocuments("test3");
@@ -126,19 +111,20 @@ public class IndexAccessImplTest extends BaseServiceTestCase {
 		_assertHits("test2", false);
 		_assertHits("test3", true);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		_indexAccessorImpl.dumpIndex(baos);
+		_indexAccessorImpl.dumpIndex(byteArrayOutputStream);
 
-		_indexAccessorImpl.loadIndex(new ByteArrayInputStream(
-			baos.toByteArray()));
+		_indexAccessorImpl.loadIndex(
+			new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
 
 		_assertHits("test1", true);
 		_assertHits("test2", false);
 		_assertHits("test3", true);
 	}
 
-	public void testThreeCommitsTwoDeletionsDump() throws IOException {
+	public void testThreeCommitsTwoDeletionsDump() throws Exception {
 		_addDocuments("test1");
 		_addDocuments("test2");
 		_addDocuments("test3");
@@ -150,36 +136,63 @@ public class IndexAccessImplTest extends BaseServiceTestCase {
 		_assertHits("test2", false);
 		_assertHits("test3", false);
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
-		_indexAccessorImpl.dumpIndex(baos);
+		_indexAccessorImpl.dumpIndex(byteArrayOutputStream);
 
-		_indexAccessorImpl.loadIndex(new ByteArrayInputStream(
-			baos.toByteArray()));
+		_indexAccessorImpl.loadIndex(
+			new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
 
 		_assertHits("test1", true);
 		_assertHits("test2", false);
 		_assertHits("test3", false);
 	}
 
-	private void _addDocuments(String key) throws IOException {
-		for (int i = 0; i < _documentNumber; i++) {
+	public void testTwoCommitsDump() throws Exception {
+		_addDocuments("test1");
+		_addDocuments("test2");
+
+		_assertHits("test1", true);
+		_assertHits("test2", true);
+
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		_indexAccessorImpl.dumpIndex(byteArrayOutputStream);
+
+		_indexAccessorImpl.loadIndex(
+			new ByteArrayInputStream(byteArrayOutputStream.toByteArray()));
+
+		_assertHits("test1", true);
+		_assertHits("test2", true);
+	}
+
+	private void _addDocuments(String key) throws Exception {
+		for (int i = 0; i < _documentsCount; i++) {
 			Document document = new Document();
-			document.add(new Field("name", key + i, Field.Store.YES,
-				Field.Index.ANALYZED));
+
+			Field field = new Field(
+				"name", key + i, Field.Store.YES, Field.Index.ANALYZED);
+
+			document.add(field);
 
 			_indexAccessorImpl.addDocument(document);
 		}
 	}
 
-	private void _assertHits(String key, boolean expectHit) throws IOException {
+	private void _assertHits(String key, boolean expectHit) throws Exception {
 		IndexSearcher indexSearcher = new IndexSearcher(
 			_indexAccessorImpl.getLuceneDir());
-		for (int i = 0; i < _documentNumber * 2; i++) {
+
+		for (int i = 0; i < _documentsCount * 2; i++) {
 			Term term = new Term("name", key + i);
+
 			TermQuery termQuery = new TermQuery(term);
+
 			TopDocs topDocs = indexSearcher.search(termQuery, 1);
-			if (i < _documentNumber) {
+
+			if (i < _documentsCount) {
 				if (expectHit) {
 					assertEquals(1, topDocs.totalHits);
 				}
@@ -193,15 +206,17 @@ public class IndexAccessImplTest extends BaseServiceTestCase {
 		}
 	}
 
-	private void _deleteDocuments(String key) throws IOException {
-		for (int i = 0; i < _documentNumber; i++) {
-			_indexAccessorImpl.deleteDocuments(new Term("name", key + i));
+	private void _deleteDocuments(String key) throws Exception {
+		for (int i = 0; i < _documentsCount; i++) {
+			Term term = new Term("name", key + i);
+
+			_indexAccessorImpl.deleteDocuments(term);
 		}
 	}
 
 	private static final long _TEST_COMPANY_ID = 1000;
 
-	private int _documentNumber;
+	private int _documentsCount;
 	private IndexAccessorImpl _indexAccessorImpl;
 
 }

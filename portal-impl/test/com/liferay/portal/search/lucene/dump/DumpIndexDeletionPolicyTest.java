@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.test.TestCase;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 
 import java.util.Arrays;
 import java.util.concurrent.locks.ReentrantLock;
@@ -41,362 +40,300 @@ import org.apache.lucene.util.Version;
  */
 public class DumpIndexDeletionPolicyTest extends TestCase {
 
-	public void setUp() throws IOException {
-		_directory = new RAMDirectory();
+	public void setUp() throws Exception {
+		_sourceDirectory = new RAMDirectory();
 		_dumpIndexDeletionPolicy = new DumpIndexDeletionPolicy();
-		_indexWriter = new IndexWriter(_directory,
-			new StandardAnalyzer(Version.LUCENE_30),
+
+		_indexWriter = new IndexWriter(
+			_sourceDirectory, new StandardAnalyzer(Version.LUCENE_30),
 			_dumpIndexDeletionPolicy, IndexWriter.MaxFieldLength.UNLIMITED);
 	}
 
-	public void testEmptyDump() throws IOException {
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
+	public void testEmptyDump() throws Exception {
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
 
-		_assertSameDirectory(_directory, newDirectory);
-
-		_indexWriter.close();
-	}
-
-	public void testOneCommitDump() throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 0);
-
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
-
-		_assertSameDirectory(_directory, newDirectory);
-
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 0);
+		_assertDirectory(_sourceDirectory, targetDirectory);
 
 		_indexWriter.close();
 	}
 
-	public void testTwoCommitsDump() throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
+	public void testOneCommitDump() throws Exception {
+		_addDocument("name", "test1");
 
-		_indexWriter.addDocument(document);
 		_indexWriter.commit();
 
-		document = new Document();
-		document.add(new Field("name", "test2", Field.Store.YES,
-			Field.Index.ANALYZED));
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 0);
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
 
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 1);
-		_assertHit(_directory, "name", "test3", 0);
+		_assertDirectory(_sourceDirectory, targetDirectory);
 
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
-
-		_assertSameDirectory(_directory, newDirectory);
-
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 1);
-		_assertHit(newDirectory, "name", "test3", 0);
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 0);
 
 		_indexWriter.close();
 	}
 
-	public void testThreeCommitsDump() throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
+	public void testThreeCommitsDump() throws Exception {
+		_addDocument("name", "test1");
+		_addDocument("name", "test2");
+		_addDocument("name", "test3");
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 1);
+		_assertHits(_sourceDirectory, "name", "test3", 1);
+		_assertHits(_sourceDirectory, "name", "test4", 0);
 
-		document = new Document();
-		document.add(new Field("name", "test2", Field.Store.YES,
-			Field.Index.ANALYZED));
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		_assertDirectory(_sourceDirectory, targetDirectory);
 
-		document = new Document();
-		document.add(new Field("name", "test3", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 1);
-		_assertHit(_directory, "name", "test3", 1);
-		_assertHit(_directory, "name", "test4", 0);
-
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
-
-		_assertSameDirectory(_directory, newDirectory);
-
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 1);
-		_assertHit(newDirectory, "name", "test3", 1);
-		_assertHit(newDirectory, "name", "test4", 0);
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 1);
+		_assertHits(targetDirectory, "name", "test3", 1);
+		_assertHits(targetDirectory, "name", "test4", 0);
 
 		_indexWriter.close();
 	}
 
-	public void testThreeCommitsWithOptimizationDump() throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
+	public void testThreeCommitsOneDeletionDump() throws Exception {
+		_addDocument("name", "test1");
+		_addDocument("name", "test2");
+		_addDocument("name", "test3");
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		_deleteDocument("name", "test2");
 
-		document = new Document();
-		document.add(new Field("name", "test2", Field.Store.YES,
-			Field.Index.ANALYZED));
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 0);
+		_assertHits(_sourceDirectory, "name", "test3", 1);
+		_assertHits(_sourceDirectory, "name", "test4", 0);
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
 
-		document = new Document();
-		document.add(new Field("name", "test3", Field.Store.YES,
-			Field.Index.ANALYZED));
+		_assertDirectory(_sourceDirectory, targetDirectory);
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		_indexWriter.optimize();
-		_indexWriter.commit();
-
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 1);
-		_assertHit(_directory, "name", "test3", 1);
-		_assertHit(_directory, "name", "test4", 0);
-
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
-
-		_assertSameDirectory(_directory, newDirectory);
-
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 1);
-		_assertHit(newDirectory, "name", "test3", 1);
-		_assertHit(newDirectory, "name", "test4", 0);
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 0);
+		_assertHits(targetDirectory, "name", "test3", 1);
+		_assertHits(targetDirectory, "name", "test4", 0);
 
 		_indexWriter.close();
 	}
 
-	public void testThreeCommitsOneDeletionDump() throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
+	public void testThreeCommitsTwoDeletionsDump() throws Exception {
+		_addDocument("name", "test1");
+		_addDocument("name", "test2");
+		_addDocument("name", "test3");
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		_deleteDocument("name", "test2");
+		_deleteDocument("name", "test3");
 
-		document = new Document();
-		document.add(new Field("name", "test2", Field.Store.YES,
-			Field.Index.ANALYZED));
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 0);
+		_assertHits(_sourceDirectory, "name", "test3", 0);
+		_assertHits(_sourceDirectory, "name", "test4", 0);
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
 
-		document = new Document();
-		document.add(new Field("name", "test3", Field.Store.YES,
-			Field.Index.ANALYZED));
+		_assertDirectory(_sourceDirectory, targetDirectory);
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		_indexWriter.deleteDocuments(new Term("name", "test2"));
-		_indexWriter.commit();
-
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 0);
-		_assertHit(_directory, "name", "test3", 1);
-		_assertHit(_directory, "name", "test4", 0);
-
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
-
-		_assertSameDirectory(_directory, newDirectory);
-
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 0);
-		_assertHit(newDirectory, "name", "test3", 1);
-		_assertHit(newDirectory, "name", "test4", 0);
-
-		_indexWriter.close();
-	}
-
-	public void testThreeCommitsTwoDeletionsDump() throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		document = new Document();
-		document.add(new Field("name", "test2", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		document = new Document();
-		document.add(new Field("name", "test3", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		_indexWriter.deleteDocuments(new Term("name", "test2"));
-		_indexWriter.commit();
-
-		_indexWriter.deleteDocuments(new Term("name", "test3"));
-		_indexWriter.commit();
-
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 0);
-		_assertHit(_directory, "name", "test3", 0);
-		_assertHit(_directory, "name", "test4", 0);
-
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
-
-		_assertSameDirectory(_directory, newDirectory);
-
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 0);
-		_assertHit(newDirectory, "name", "test3", 0);
-		_assertHit(newDirectory, "name", "test4", 0);
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 0);
+		_assertHits(targetDirectory, "name", "test3", 0);
+		_assertHits(targetDirectory, "name", "test4", 0);
 
 		_indexWriter.close();
 	}
 
 	public void testThreeCommitsTwoDeletionsWithOptimizationDump()
-		throws IOException {
-		Document document = new Document();
-		document.add(new Field("name", "test1", Field.Store.YES,
-			Field.Index.ANALYZED));
+		throws Exception {
 
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
+		_addDocument("name", "test1");
+		_addDocument("name", "test2");
+		_addDocument("name", "test3");
 
-		document = new Document();
-		document.add(new Field("name", "test2", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		document = new Document();
-		document.add(new Field("name", "test3", Field.Store.YES,
-			Field.Index.ANALYZED));
-
-		_indexWriter.addDocument(document);
-		_indexWriter.commit();
-
-		_indexWriter.deleteDocuments(new Term("name", "test2"));
-		_indexWriter.commit();
-
-		_indexWriter.deleteDocuments(new Term("name", "test3"));
-		_indexWriter.commit();
+		_deleteDocument("name", "test2");
+		_deleteDocument("name", "test3");
 
 		_indexWriter.optimize();
+
 		_indexWriter.commit();
 
-		_assertHit(_directory, "name", "test1", 1);
-		_assertHit(_directory, "name", "test2", 0);
-		_assertHit(_directory, "name", "test3", 0);
-		_assertHit(_directory, "name", "test4", 0);
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 0);
+		_assertHits(_sourceDirectory, "name", "test3", 0);
+		_assertHits(_sourceDirectory, "name", "test4", 0);
 
-		Directory newDirectory = _dumpToNewDirectory(_indexWriter);
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
 
-		_assertSameDirectory(_directory, newDirectory);
+		_assertDirectory(_sourceDirectory, targetDirectory);
 
-		_assertHit(newDirectory, "name", "test1", 1);
-		_assertHit(newDirectory, "name", "test2", 0);
-		_assertHit(newDirectory, "name", "test3", 0);
-		_assertHit(newDirectory, "name", "test4", 0);
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 0);
+		_assertHits(targetDirectory, "name", "test3", 0);
+		_assertHits(targetDirectory, "name", "test4", 0);
 
 		_indexWriter.close();
 	}
 
-	private void _assertSameDirectory(
-		Directory sourceDirectory, Directory newDirectory) throws IOException {
-		String[] sourceFileNames = sourceDirectory.listAll();
-		Arrays.sort(sourceFileNames);
+	public void testThreeCommitsWithOptimizationDump() throws Exception {
+		_addDocument("name", "test1");
+		_addDocument("name", "test2");
+		_addDocument("name", "test3");
 
-		String[] newFileNames = newDirectory.listAll();
-		Arrays.sort(newFileNames);
+		_indexWriter.optimize();
 
-		if (sourceFileNames.length != newFileNames.length) {
-			fail("Source and new directory file names do not match, "
-				+ "source directory : " + Arrays.toString(sourceFileNames) +
-				", new directory : " + Arrays.toString(newFileNames));
-		}
+		_indexWriter.commit();
 
-		for (String fileName : sourceFileNames) {
-			long sourceLength = sourceDirectory.fileLength(fileName);
-			long newLength = newDirectory.fileLength(fileName);
-			if (sourceLength != newLength) {
-				fail("Files length do not match, name : " + fileName +
-					", source length : " + sourceLength + ", new length : " +
-					newLength);
-			}
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 1);
+		_assertHits(_sourceDirectory, "name", "test3", 1);
+		_assertHits(_sourceDirectory, "name", "test4", 0);
 
-			_assertSameContent(fileName,
-				sourceDirectory.openInput(fileName),
-				newDirectory.openInput(fileName));
-		}
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
+
+		_assertDirectory(_sourceDirectory, targetDirectory);
+
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 1);
+		_assertHits(targetDirectory, "name", "test3", 1);
+		_assertHits(targetDirectory, "name", "test4", 0);
+
+		_indexWriter.close();
 	}
 
-	private void _assertSameContent(
+	public void testTwoCommitsDump() throws Exception {
+		_addDocument("name", "test1");
+		_addDocument("name", "test2");
+
+		_assertHits(_sourceDirectory, "name", "test1", 1);
+		_assertHits(_sourceDirectory, "name", "test2", 1);
+		_assertHits(_sourceDirectory, "name", "test3", 0);
+
+		Directory targetDirectory = _dumpToTargetDirectory(_indexWriter);
+
+		_assertDirectory(_sourceDirectory, targetDirectory);
+
+		_assertHits(targetDirectory, "name", "test1", 1);
+		_assertHits(targetDirectory, "name", "test2", 1);
+		_assertHits(targetDirectory, "name", "test3", 0);
+
+		_indexWriter.close();
+	}
+
+	private void _addDocument(String fieldName, String fieldValue)
+		throws Exception {
+
+		Document document = new Document();
+
+		Field field = new Field(
+			fieldName, fieldValue, Field.Store.YES, Field.Index.ANALYZED);
+
+		document.add(field);
+
+		_indexWriter.addDocument(document);
+
+		_indexWriter.commit();
+	}
+
+	private void _assertContent(
 			String fileName, IndexInput sourceIndexInput,
-			IndexInput newIndexInput)
-		throws IOException {
+			IndexInput targetIndexInput)
+		throws Exception {
+
 		for (long i = 0; i < sourceIndexInput.length(); i++) {
-			if (sourceIndexInput.readByte() != newIndexInput.readByte()) {
-				fail("Files content do not match, name : " + fileName +
-					", position : " + i);
+			if (sourceIndexInput.readByte() != targetIndexInput.readByte()) {
+				fail(
+					fileName +
+						" has different source and target byte value at " + i);
 			}
 		}
 
 		sourceIndexInput.close();
-		newIndexInput.close();
+		targetIndexInput.close();
 	}
 
-	private void _assertHit(
-			Directory directory, String name, String value, int hitTimes)
-		throws IOException {
+	private void _assertDirectory(
+			Directory sourceDirectory, Directory targetDirectory)
+		throws Exception {
+
+		String[] sourceFileNames = sourceDirectory.listAll();
+
+		Arrays.sort(sourceFileNames);
+
+		String[] targetFileNames = targetDirectory.listAll();
+
+		Arrays.sort(targetFileNames);
+
+		if (sourceFileNames.length != targetFileNames.length) {
+			fail(
+				Arrays.toString(sourceFileNames) +
+					" does not have the same length as " +
+						Arrays.toString(targetFileNames));
+		}
+
+		for (String fileName : sourceFileNames) {
+			long sourceLength = sourceDirectory.fileLength(fileName);
+			long targetLength = targetDirectory.fileLength(fileName);
+
+			if (sourceLength != targetLength) {
+				fail(fileName + " has different source and target lengths");
+			}
+
+			_assertContent(
+				fileName, sourceDirectory.openInput(fileName),
+				targetDirectory.openInput(fileName));
+		}
+	}
+
+	private void _assertHits(
+			Directory directory, String fieldName, String fieldValue,
+			int totalHits)
+		throws Exception {
+
 		IndexSearcher indexSearcher = new IndexSearcher(directory);
-		Term term = new Term(name, value);
+
+		Term term = new Term(fieldName, fieldValue);
+
 		TermQuery termQuery = new TermQuery(term);
+
 		TopDocs topDocs = indexSearcher.search(termQuery, 1);
-		assertEquals(hitTimes, topDocs.totalHits);
+
+		assertEquals(totalHits, topDocs.totalHits);
 	}
 
-	private Directory _dumpToNewDirectory(IndexWriter indexWriter)
-		throws IOException {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	private void _deleteDocument(String fieldName, String fieldValue)
+		throws Exception {
 
-		_dumpIndexDeletionPolicy.dump(baos, indexWriter, new ReentrantLock());
+		Term term = new Term(fieldName, fieldValue);
 
-		byte[] data = baos.toByteArray();
+		_indexWriter.deleteDocuments(term);
 
-		Directory newDirectory = new RAMDirectory();
+		_indexWriter.commit();
+	}
+
+	private Directory _dumpToTargetDirectory(IndexWriter indexWriter)
+		throws Exception {
+
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		_dumpIndexDeletionPolicy.dump(
+			byteArrayOutputStream, indexWriter, new ReentrantLock());
+
+		byte[] bytes = byteArrayOutputStream.toByteArray();
+
+		Directory targetDirectory = new RAMDirectory();
 
 		IndexCommitSerializationUtil.deserializeIndex(
-			new ByteArrayInputStream(data), newDirectory);
+			new ByteArrayInputStream(bytes), targetDirectory);
 
-		return newDirectory;
+		return targetDirectory;
 	}
 
-	private Directory _directory;
 	private DumpIndexDeletionPolicy _dumpIndexDeletionPolicy;
 	private IndexWriter _indexWriter;
+	private Directory _sourceDirectory;
 
 }

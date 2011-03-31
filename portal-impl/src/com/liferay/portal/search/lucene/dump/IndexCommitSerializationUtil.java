@@ -16,7 +16,7 @@ package com.liferay.portal.search.lucene.dump;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.search.lucene.dump.IndexCommitMetaInfo.FileInfo;
+import com.liferay.portal.search.lucene.dump.IndexCommitMetaInfo.Segment;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
@@ -40,53 +40,51 @@ import org.apache.lucene.store.IndexOutput;
  */
 public class IndexCommitSerializationUtil {
 
-	public static void deserializeIndex(InputStream is, Directory directory)
+	public static void deserializeIndex(
+			InputStream inputStream, Directory directory)
 		throws IOException {
 
-		if (PropsValues.INDEX_DUMP_GZIP_ENABLE) {
-			is = new GZIPInputStream(is);
+		if (PropsValues.INDEX_DUMP_COMPRESSION_ENABLED) {
+			inputStream = new GZIPInputStream(inputStream);
 		}
 
 		ObjectInputStream objectInputStream = null;
 
 		try {
-			objectInputStream = new ObjectInputStream(is);
+			objectInputStream = new ObjectInputStream(inputStream);
 
 			IndexCommitMetaInfo indexCommitMetaInfo = null;
+
 			try {
 				indexCommitMetaInfo =
 					(IndexCommitMetaInfo)objectInputStream.readObject();
 			}
 			catch (ClassNotFoundException cnfe) {
-				throw new IOException(
-					"Failed to retrieve indexCommitMetaInfo : "
-						+ cnfe.getCause());
+				throw new IOException(cnfe.getMessage());
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Deserializing IndexCommitMetaInfo : " +
-					indexCommitMetaInfo);
+				_log.debug("Deserializing " + indexCommitMetaInfo);
 			}
 
 			if (indexCommitMetaInfo.isEmpty()) {
 				return;
 			}
 
-			List<FileInfo> fileInfoList = indexCommitMetaInfo.getFileInfoList();
+			List<Segment> segments = indexCommitMetaInfo.getSegments();
 
-			for (FileInfo fileInfo : fileInfoList) {
+			for (Segment segment : segments) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Deserializing segment file name : " +
-						fileInfo.getFileName() + ", size : " +
-						fileInfo.getFileSize());
+					_log.debug("Deserializing segment " + segment);
 				}
-				deserializeSegmentFile(objectInputStream,
-					fileInfo.getFileSize(),
-					directory.createOutput(fileInfo.getFileName()));
+
+				deserializeSegment(
+					objectInputStream, segment.getFileSize(),
+					directory.createOutput(segment.getFileName()));
 			}
 
-			createSegmentsGenFile(directory,
-				indexCommitMetaInfo.getGeneration());
+			writeSegmentsGen(
+				directory, indexCommitMetaInfo.getGeneration());
 		}
 		finally {
 			if (objectInputStream != null) {
@@ -99,65 +97,47 @@ public class IndexCommitSerializationUtil {
 			IndexCommit indexCommit, OutputStream outputStream)
 		throws IOException {
 
-		if (PropsValues.INDEX_DUMP_GZIP_ENABLE) {
+		if (PropsValues.INDEX_DUMP_COMPRESSION_ENABLED) {
 			outputStream = new GZIPOutputStream(outputStream);
 		}
 
 		ObjectOutputStream objectOputStream = new ObjectOutputStream(
 			outputStream);
 
-		IndexCommitMetaInfo indexCommitMetaInfo =
-			new IndexCommitMetaInfo(indexCommit);
+		IndexCommitMetaInfo indexCommitMetaInfo = new IndexCommitMetaInfo(
+			indexCommit);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Serializing IndexCommitMetaInfo : " +
-				indexCommitMetaInfo);
+			_log.debug("Serializing " + indexCommitMetaInfo);
 		}
 
 		objectOputStream.writeObject(indexCommitMetaInfo);
 
-		List<FileInfo> fileInfoList =
-			indexCommitMetaInfo.getFileInfoList();
+		List<Segment> segments = indexCommitMetaInfo.getSegments();
 
 		Directory directory = indexCommit.getDirectory();
 
-		for (FileInfo fileInfo : fileInfoList) {
+		for (Segment segment : segments) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Serializing segment file name : " +
-					fileInfo.getFileName() + ", size : " +
-					fileInfo.getFileSize());
+				_log.debug("Serializing segment " + segment);
 			}
-			serializeSegmentFile(directory.openInput(fileInfo.getFileName()),
-				fileInfo.getFileSize(), objectOputStream);
+
+			serializeSegment(
+				directory.openInput(segment.getFileName()),
+				segment.getFileSize(), objectOputStream);
 		}
 
 		objectOputStream.flush();
 
-		if (PropsValues.INDEX_DUMP_GZIP_ENABLE) {
-			((GZIPOutputStream)outputStream).finish();
+		if (PropsValues.INDEX_DUMP_COMPRESSION_ENABLED) {
+			GZIPOutputStream gZipOutputStream = (GZIPOutputStream)outputStream;
+
+			gZipOutputStream.finish();
 		}
 	}
 
-	private static void createSegmentsGenFile(
-			Directory directory, long generation)
-		throws IOException {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating file " + _SEGMENTS_GEN_NAME +
-				" with generation number : " + generation);
-		}
-		IndexOutput indexOutput = directory.createOutput(_SEGMENTS_GEN_NAME);
-		try {
-			indexOutput.writeInt(SegmentInfos.FORMAT_LOCKLESS);
-			indexOutput.writeLong(generation);
-			indexOutput.writeLong(generation);
-		}
-		finally {
-			indexOutput.close();
-		}
-	}
-
-	private static void deserializeSegmentFile(
-			InputStream is, long length, IndexOutput indexOutput)
+	private static void deserializeSegment(
+			InputStream inputStream, long length, IndexOutput indexOutput)
 		throws IOException {
 
 		try {
@@ -168,13 +148,13 @@ public class IndexCommitSerializationUtil {
 			long received = 0;
 
 			while (received < length) {
-				int trySize = _BUFFER_SIZE;
+				int bufferSize = _BUFFER_SIZE;
 
-				if (received + _BUFFER_SIZE > length) {
-					trySize = (int)(length - received);
+				if ((received + _BUFFER_SIZE) > length) {
+					bufferSize = (int)(length - received);
 				}
 
-				int actualSize = is.read(buffer, 0, trySize);
+				int actualSize = inputStream.read(buffer, 0, bufferSize);
 
 				indexOutput.writeBytes(buffer, actualSize);
 
@@ -186,9 +166,10 @@ public class IndexCommitSerializationUtil {
 		}
 	}
 
-	private static void serializeSegmentFile(
+	private static void serializeSegment(
 			IndexInput indexInput, long length, OutputStream outputStream)
 		throws IOException {
+
 		byte[] buffer = new byte[_BUFFER_SIZE];
 
 		int count = (int)(length / _BUFFER_SIZE);
@@ -208,10 +189,34 @@ public class IndexCommitSerializationUtil {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		IndexCommitSerializationUtil.class);
+	private static void writeSegmentsGen(
+			Directory directory, long generation)
+		throws IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Writing " + _SEGMENTS_GEN_FILE_NAME + " with generation " +
+					generation);
+		}
+
+		IndexOutput indexOutput = directory.createOutput(
+			_SEGMENTS_GEN_FILE_NAME);
+
+		try {
+			indexOutput.writeInt(SegmentInfos.FORMAT_LOCKLESS);
+			indexOutput.writeLong(generation);
+			indexOutput.writeLong(generation);
+		}
+		finally {
+			indexOutput.close();
+		}
+	}
 
 	private static final int _BUFFER_SIZE = 8192;
-	private static final String _SEGMENTS_GEN_NAME = "segments.gen";
+
+	private static final String _SEGMENTS_GEN_FILE_NAME = "segments.gen";
+
+	private static Log _log = LogFactoryUtil.getLog(
+		IndexCommitSerializationUtil.class);
 
 }

@@ -34,73 +34,71 @@ public class IndexCommitMetaInfo implements Serializable {
 	public IndexCommitMetaInfo(IndexCommit indexCommit) throws IOException {
 		if (indexCommit == null) {
 			_empty = true;
+
 			return;
 		}
 
-		_empty = false;
-
-		List<String> fileNameLists = new ArrayList<String>(
+		List<String> fileNames = new ArrayList<String>(
 			indexCommit.getFileNames());
 
-		_fileInfoList = new ArrayList<FileInfo>(fileNameLists.size());
+		_segments = new ArrayList<Segment>(fileNames.size());
 
 		Directory directory = indexCommit.getDirectory();
 
-		for (String fileName : fileNameLists) {
-			FileInfo fileInfo = new FileInfo(fileName,
-				directory.fileLength(fileName));
-			_fileInfoList.add(fileInfo);
+		for (String fileName : fileNames) {
+			Segment segment = new Segment(
+				fileName, directory.fileLength(fileName));
+
+			_segments.add(segment);
 		}
 
 		_generation = indexCommit.getGeneration();
-
-	}
-
-	public boolean isEmpty() {
-		return _empty;
-	}
-
-	public List<FileInfo> getFileInfoList() {
-		return _fileInfoList;
 	}
 
 	public long getGeneration() {
 		return _generation;
 	}
 
+	public List<Segment> getSegments() {
+		return _segments;
+	}
+
+	public boolean isEmpty() {
+		return _empty;
+	}
+
 	public String toString() {
 		if (_empty) {
-			return "{empty}";
+			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(_fileInfoList.size() * 5 + 4);
+		StringBundler sb = new StringBundler(_segments.size() * 5 + 3);
 
-		sb.append("{generation=");
-		sb.append(_generation);
-		sb.append(", fileInfos[");
+		sb.append("{fileInfos[");
 
-		for (FileInfo fileInfo : _fileInfoList) {
-			sb.append("name=");
+		for (int i = 0; i < _segments.size(); i++) {
+			Segment fileInfo = _segments.get(i);
+
+			sb.append("fileName=");
 			sb.append(fileInfo._fileName);
 			sb.append(", fileSize=");
 			sb.append(fileInfo._fileSize);
-			sb.append(StringPool.COLON);
+
+			if ((i + 1) < _segments.size()) {
+				sb.append(", ");
+			}
 		}
 
-		sb.append("]}");
+		sb.append("], generation=");
+		sb.append(_generation);
+		sb.append("}");
 
 		return sb.toString();
 	}
 
-	private boolean _empty;
-	private List<FileInfo> _fileInfoList;
-	private long _generation;
+	public class Segment implements Serializable {
 
-	public static final String SEGMENTS_GEN = "segments.gen";
-
-	public static class FileInfo implements Serializable {
-
-		public FileInfo(String fileName, long fileSize) {
+		public Segment(String fileName, long fileSize) {
 			_fileName = fileName;
 			_fileSize = fileSize;
 		}
@@ -113,9 +111,25 @@ public class IndexCommitMetaInfo implements Serializable {
 			return _fileSize;
 		}
 
+		public String toString() {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("{_fileName=");
+			sb.append(_fileName);
+			sb.append(", _fileSize=");
+			sb.append(_fileSize);
+			sb.append("}");
+
+			return sb.toString();
+		}
+
 		private String _fileName;
 		private long _fileSize;
 
 	}
+
+	private boolean _empty;
+	private long _generation;
+	private List<Segment> _segments;
 
 }

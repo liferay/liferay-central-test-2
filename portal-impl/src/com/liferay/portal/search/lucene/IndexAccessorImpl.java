@@ -154,9 +154,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	public void loadIndex(InputStream inputStream) throws IOException {
-		File file = FileUtil.createTempFile();
+		File tempFile = FileUtil.createTempFile();
 
-		Directory tempDirectory = FSDirectory.open(file);
+		Directory tempDirectory = FSDirectory.open(tempFile);
 
 		IndexCommitSerializationUtil.deserializeIndex(
 			inputStream, tempDirectory);
@@ -171,7 +171,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 		tempDirectory.close();
 
-		FileUtil.deltree(file);
+		FileUtil.deltree(tempFile);
 	}
 
 	public void updateDocument(Term term, Document document)
@@ -290,7 +290,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private void _doCommit() throws IOException {
 		if (_indexWriter != null) {
 			_commitLock.lock();
-			// Protect concurrent commiting while recording dump IndexCommit
+
 			try {
 				_indexWriter.commit();
 			}
@@ -478,7 +478,6 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private void _initIndexWriter() {
 		try {
-			_dumpIndexDeletionPolicy = new DumpIndexDeletionPolicy();
 			_indexWriter = new IndexWriter(
 				getLuceneDir(), LuceneHelperUtil.getAnalyzer(),
 				_dumpIndexDeletionPolicy, IndexWriter.MaxFieldLength.LIMITED);
@@ -577,10 +576,11 @@ public class IndexAccessorImpl implements IndexAccessor {
 	private static Log _log = LogFactoryUtil.getLog(IndexAccessorImpl.class);
 
 	private int _batchCount;
-	private long _companyId;
 	private Lock _commitLock = new ReentrantLock();
+	private long _companyId;
 	private Dialect _dialect;
-	private DumpIndexDeletionPolicy _dumpIndexDeletionPolicy;
+	private DumpIndexDeletionPolicy _dumpIndexDeletionPolicy =
+		new DumpIndexDeletionPolicy();
 	private IndexWriter _indexWriter;
 	private Map<String, Directory> _jdbcDirectories =
 		new ConcurrentHashMap<String, Directory>();

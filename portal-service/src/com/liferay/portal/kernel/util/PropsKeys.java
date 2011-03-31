@@ -719,7 +719,7 @@ public interface PropsKeys {
 
 	public static final String INDEX_DATE_FORMAT_PATTERN = "index.date.format.pattern";
 
-	public static final String INDEX_DUMP_GZIP_ENABLE = "index.dump.gzip.enabled";
+	public static final String INDEX_DUMP_COMPRESSION_ENABLED = "index.dump.compression.enabled";
 
 	public static final String INDEX_FILTER_SEARCH_LIMIT = "index.filter.search.limit";
 

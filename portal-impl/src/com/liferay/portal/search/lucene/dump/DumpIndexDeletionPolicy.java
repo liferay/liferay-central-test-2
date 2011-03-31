@@ -30,40 +30,24 @@ import org.apache.lucene.index.IndexWriter;
  */
 public class DumpIndexDeletionPolicy implements IndexDeletionPolicy {
 
-	public void onInit(List<? extends IndexCommit> list) throws IOException {
-		onCommit(list);
-	}
-
-	public void onCommit(List<? extends IndexCommit> list) throws IOException {
-		_lastIndexCommit = list.get(list.size() - 1);
-
-		for (int i = 0; i < list.size() - 1; i++) {
-			IndexCommit indexCommit = list.get(i);
-			if (!_dumpingSegmensFiletNames.contains(
-				indexCommit.getSegmentsFileName())) {
-				indexCommit.delete();
-			}
-		}
-	}
-
 	public void dump(
-			OutputStream outputStream,
-			IndexWriter indexWriter, Lock commitLock)
+			OutputStream outputStream, IndexWriter indexWriter, Lock commitLock)
 		throws IOException {
 
 		IndexCommit indexCommit = null;
+
 		String segmentsFileName = null;
 
-		// Lock up to stop external commits while recording dump IndexCommit
 		commitLock.lock();
+
 		try {
-			// Commit all pending changes to ensure dumped index is integrated
 			indexWriter.commit();
-			// Record IndexCommit, then release the lock to other dumpers and
-			// committers to move on
+
 			indexCommit = _lastIndexCommit;
+
 			segmentsFileName = indexCommit.getSegmentsFileName();
-			_dumpingSegmensFiletNames.add(segmentsFileName);
+
+			_segmentsFileNames.add(segmentsFileName);
 		}
 		finally {
 			commitLock.unlock();
@@ -74,14 +58,30 @@ public class DumpIndexDeletionPolicy implements IndexDeletionPolicy {
 				indexCommit, outputStream);
 		}
 		finally {
-			// Clear the dumping segments file name, so the old index can be
-			// removed.
-			_dumpingSegmensFiletNames.remove(segmentsFileName);
+			_segmentsFileNames.remove(segmentsFileName);
 		}
 	}
 
+	public void onCommit(List<? extends IndexCommit> indexCommits) {
+		_lastIndexCommit = indexCommits.get(indexCommits.size() - 1);
+
+		for (int i = 0; i < indexCommits.size() - 1; i++) {
+			IndexCommit indexCommit = indexCommits.get(i);
+
+			if (!_segmentsFileNames.contains(
+					indexCommit.getSegmentsFileName())) {
+
+				indexCommit.delete();
+			}
+		}
+	}
+
+	public void onInit(List<? extends IndexCommit> indexCommits) {
+		onCommit(indexCommits);
+	}
+
 	private IndexCommit _lastIndexCommit;
-	private List<String> _dumpingSegmensFiletNames =
+	private List<String> _segmentsFileNames =
 		new CopyOnWriteArrayList<String>();
 
 }
