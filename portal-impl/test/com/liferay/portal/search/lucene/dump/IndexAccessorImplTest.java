@@ -31,7 +31,7 @@ import org.apache.lucene.search.TopDocs;
 /**
  * @author Shuyang Zhou
  */
-public class IndexAccessImplTest extends BaseServiceTestCase {
+public class IndexAccessorImplTest extends BaseServiceTestCase {
 
 	public void setUp() throws Exception {
 		super.setUp();
