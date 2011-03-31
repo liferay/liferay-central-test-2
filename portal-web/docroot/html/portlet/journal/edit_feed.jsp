@@ -38,14 +38,23 @@ if (Validator.isNotNull(structureId)) {
 
 		structureName = structure.getName();
 	}
-	catch (NoSuchStructureException nsse) {
+	catch (NoSuchStructureException nsse1) {
+		try {
+			structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+
+			structureName = structure.getName();
+		}
+		catch (NoSuchStructureException nsse2) {
+		}
 	}
 }
 
 List<JournalTemplate> templates = new ArrayList<JournalTemplate>();
 
 if (structure != null) {
-	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
+	templates.addAll(JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId));
+
+	templates.addAll(JournalTemplateLocalServiceUtil.getStructureTemplates(themeDisplay.getCompanyGroupId(), structureId));
 }
 
 String templateId = BeanParamUtil.getString(feed, request, "templateId");
@@ -55,16 +64,36 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 
 	try {
 		template = JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
+	}
+	catch (NoSuchTemplateException nste1) {
+		try {
+			template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), templateId);
+		}
+		catch (NoSuchTemplateException nste2) {
+		}
+	}
 
+	if (template != null)  {
 		structureId = template.getStructureId();
 
-		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+		try {
+			structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
 
-		structureName = structure.getName();
+			structureName = structure.getName();
 
-		templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
-	}
-	catch (NoSuchTemplateException nste) {
+			templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
+		}
+		catch (NoSuchStructureException nsse1) {
+			try {
+				structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+
+				structureName = structure.getName();
+
+				templates = JournalTemplateLocalServiceUtil.getStructureTemplates(themeDisplay.getCompanyGroupId(), structureId);
+			}
+			catch (NoSuchStructureException nsse2) {
+			}
+		}
 	}
 }
 
