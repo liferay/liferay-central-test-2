@@ -29,16 +29,18 @@ public class ButtonTag extends BaseButtonTag {
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 
-		String value = _value;
+		String value = getValue();
 
 		if (Validator.isNull(value)) {
-			if (_type.equals("submit")) {
+			String type = getType();
+
+			if (type.equals("submit")) {
 				value = "save";
 			}
-			else if (_type.equals("cancel")) {
+			else if (type.equals("cancel")) {
 				value = "cancel";
 			}
-			else if (_type.equals("reset")) {
+			else if (type.equals("reset")) {
 				value = "reset";
 			}
 		}

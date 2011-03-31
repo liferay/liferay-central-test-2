@@ -143,13 +143,13 @@ public class BaseButtonTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/aui/button/page.jsp";
 
-	protected java.lang.String _cssClass;
-	protected java.lang.Object _data;
-	protected boolean _disabled;
-	protected java.lang.String _inputCssClass;
-	protected java.lang.String _name;
-	protected java.lang.String _onClick;
-	protected java.lang.String _type;
-	protected java.lang.String _value;
+	private java.lang.String _cssClass;
+	private java.lang.Object _data;
+	private boolean _disabled;
+	private java.lang.String _inputCssClass;
+	private java.lang.String _name;
+	private java.lang.String _onClick;
+	private java.lang.String _type;
+	private java.lang.String _value;
 
 }
