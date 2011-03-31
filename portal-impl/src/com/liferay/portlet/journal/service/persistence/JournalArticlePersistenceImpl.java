@@ -188,6 +188,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_A",
 			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_L = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByG_L",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_L = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_L",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_S",
@@ -4013,6 +4026,744 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		if (articleId != null) {
 			qPos.add(articleId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Finds all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByG_L(long groupId, String layoutUuid)
+		throws SystemException {
+		return findByG_L(groupId, layoutUuid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByG_L(long groupId, String layoutUuid,
+		int start, int end) throws SystemException {
+		return findByG_L(groupId, layoutUuid, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByG_L(long groupId, String layoutUuid,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, layoutUuid,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_L,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+
+			if (layoutUuid == null) {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_1);
+			}
+			else {
+				if (layoutUuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (layoutUuid != null) {
+					qPos.add(layoutUuid);
+				}
+
+				list = (List<JournalArticle>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_L,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_L,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first journal article in the ordered set where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByG_L_First(long groupId, String layoutUuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		List<JournalArticle> list = findByG_L(groupId, layoutUuid, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", layoutUuid=");
+			msg.append(layoutUuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last journal article in the ordered set where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByG_L_Last(long groupId, String layoutUuid,
+		OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		int count = countByG_L(groupId, layoutUuid);
+
+		List<JournalArticle> list = findByG_L(groupId, layoutUuid, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", layoutUuid=");
+			msg.append(layoutUuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle[] findByG_L_PrevAndNext(long id, long groupId,
+		String layoutUuid, OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByPrimaryKey(id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			JournalArticle[] array = new JournalArticleImpl[3];
+
+			array[0] = getByG_L_PrevAndNext(session, journalArticle, groupId,
+					layoutUuid, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByG_L_PrevAndNext(session, journalArticle, groupId,
+					layoutUuid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByG_L_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String layoutUuid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+
+		if (layoutUuid == null) {
+			query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_1);
+		}
+		else {
+			if (layoutUuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (layoutUuid != null) {
+			qPos.add(layoutUuid);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @return the matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> filterFindByG_L(long groupId, String layoutUuid)
+		throws SystemException {
+		return filterFindByG_L(groupId, layoutUuid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> filterFindByG_L(long groupId,
+		String layoutUuid, int start, int end) throws SystemException {
+		return filterFindByG_L(groupId, layoutUuid, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> filterFindByG_L(long groupId,
+		String layoutUuid, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_L(groupId, layoutUuid, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(4 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+
+		if (layoutUuid == null) {
+			query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_1);
+		}
+		else {
+			if (layoutUuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(JournalArticleModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				JournalArticle.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, JournalArticleImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, JournalArticleImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (layoutUuid != null) {
+				qPos.add(layoutUuid);
+			}
+
+			return (List<JournalArticle>)QueryUtil.list(q, getDialect(), start,
+				end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle[] filterFindByG_L_PrevAndNext(long id, long groupId,
+		String layoutUuid, OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_L_PrevAndNext(id, groupId, layoutUuid,
+				orderByComparator);
+		}
+
+		JournalArticle journalArticle = findByPrimaryKey(id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			JournalArticle[] array = new JournalArticleImpl[3];
+
+			array[0] = filterGetByG_L_PrevAndNext(session, journalArticle,
+					groupId, layoutUuid, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = filterGetByG_L_PrevAndNext(session, journalArticle,
+					groupId, layoutUuid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected JournalArticle filterGetByG_L_PrevAndNext(Session session,
+		JournalArticle journalArticle, long groupId, String layoutUuid,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+
+		if (layoutUuid == null) {
+			query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_1);
+		}
+		else {
+			if (layoutUuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(JournalArticleModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				JournalArticle.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, JournalArticleImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, JournalArticleImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (layoutUuid != null) {
+			qPos.add(layoutUuid);
 		}
 
 		if (orderByComparator != null) {
@@ -9222,6 +9973,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Removes all the journal articles where groupId = &#63; and layoutUuid = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_L(long groupId, String layoutUuid)
+		throws SystemException {
+		for (JournalArticle journalArticle : findByG_L(groupId, layoutUuid)) {
+			journalArticlePersistence.remove(journalArticle);
+		}
+	}
+
+	/**
 	 * Removes all the journal articles where groupId = &#63; and structureId = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
@@ -9928,6 +10693,143 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			if (articleId != null) {
 				qPos.add(articleId);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Counts all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_L(long groupId, String layoutUuid)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, layoutUuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_L,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+
+			if (layoutUuid == null) {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_1);
+			}
+			else {
+				if (layoutUuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (layoutUuid != null) {
+					qPos.add(layoutUuid);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_L, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the journal articles where groupId = &#63; and layoutUuid = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param layoutUuid the layout uuid to search with
+	 * @return the number of matching journal articles that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByG_L(long groupId, String layoutUuid)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_L(groupId, layoutUuid);
+		}
+
+		StringBundler query = new StringBundler(3);
+
+		query.append(_FILTER_SQL_COUNT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+
+		if (layoutUuid == null) {
+			query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_1);
+		}
+		else {
+			if (layoutUuid.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_L_LAYOUTUUID_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				JournalArticle.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (layoutUuid != null) {
+				qPos.add(layoutUuid);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -11031,6 +11933,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_A_ARTICLEID_1 = "journalArticle.articleId IS NULL";
 	private static final String _FINDER_COLUMN_G_A_ARTICLEID_2 = "journalArticle.articleId = ?";
 	private static final String _FINDER_COLUMN_G_A_ARTICLEID_3 = "(journalArticle.articleId IS NULL OR journalArticle.articleId = ?)";
+	private static final String _FINDER_COLUMN_G_L_GROUPID_2 = "journalArticle.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_L_LAYOUTUUID_1 = "journalArticle.layoutUuid IS NULL";
+	private static final String _FINDER_COLUMN_G_L_LAYOUTUUID_2 = "journalArticle.layoutUuid = ?";
+	private static final String _FINDER_COLUMN_G_L_LAYOUTUUID_3 = "(journalArticle.layoutUuid IS NULL OR journalArticle.layoutUuid = ?)";
 	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "journalArticle.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "journalArticle.structureId IS NULL";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "journalArticle.structureId = ?";

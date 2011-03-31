@@ -395,6 +395,14 @@ public class JournalArticleLocalServiceWrapper
 		_journalArticleLocalService.deleteArticles(groupId);
 	}
 
+	public void deleteLayoutContentReferences(long groupId,
+		java.lang.String layoutUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleLocalService.deleteLayoutContentReferences(groupId,
+			layoutUuid);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle expireArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.lang.String articleURL,

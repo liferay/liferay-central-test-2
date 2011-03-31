@@ -199,7 +199,11 @@ import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
+import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
+import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
@@ -3649,6 +3653,82 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 	}
 
 	/**
+	 * Gets the journal article local service.
+	 *
+	 * @return the journal article local service
+	 */
+	public JournalArticleLocalService getJournalArticleLocalService() {
+		return journalArticleLocalService;
+	}
+
+	/**
+	 * Sets the journal article local service.
+	 *
+	 * @param journalArticleLocalService the journal article local service
+	 */
+	public void setJournalArticleLocalService(
+		JournalArticleLocalService journalArticleLocalService) {
+		this.journalArticleLocalService = journalArticleLocalService;
+	}
+
+	/**
+	 * Gets the journal article remote service.
+	 *
+	 * @return the journal article remote service
+	 */
+	public JournalArticleService getJournalArticleService() {
+		return journalArticleService;
+	}
+
+	/**
+	 * Sets the journal article remote service.
+	 *
+	 * @param journalArticleService the journal article remote service
+	 */
+	public void setJournalArticleService(
+		JournalArticleService journalArticleService) {
+		this.journalArticleService = journalArticleService;
+	}
+
+	/**
+	 * Gets the journal article persistence.
+	 *
+	 * @return the journal article persistence
+	 */
+	public JournalArticlePersistence getJournalArticlePersistence() {
+		return journalArticlePersistence;
+	}
+
+	/**
+	 * Sets the journal article persistence.
+	 *
+	 * @param journalArticlePersistence the journal article persistence
+	 */
+	public void setJournalArticlePersistence(
+		JournalArticlePersistence journalArticlePersistence) {
+		this.journalArticlePersistence = journalArticlePersistence;
+	}
+
+	/**
+	 * Gets the journal article finder.
+	 *
+	 * @return the journal article finder
+	 */
+	public JournalArticleFinder getJournalArticleFinder() {
+		return journalArticleFinder;
+	}
+
+	/**
+	 * Sets the journal article finder.
+	 *
+	 * @param journalArticleFinder the journal article finder
+	 */
+	public void setJournalArticleFinder(
+		JournalArticleFinder journalArticleFinder) {
+		this.journalArticleFinder = journalArticleFinder;
+	}
+
+	/**
 	 * Gets the journal content search local service.
 	 *
 	 * @return the journal content search local service
@@ -4201,6 +4281,14 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = JournalArticleLocalService.class)
+	protected JournalArticleLocalService journalArticleLocalService;
+	@BeanReference(type = JournalArticleService.class)
+	protected JournalArticleService journalArticleService;
+	@BeanReference(type = JournalArticlePersistence.class)
+	protected JournalArticlePersistence journalArticlePersistence;
+	@BeanReference(type = JournalArticleFinder.class)
+	protected JournalArticleFinder journalArticleFinder;
 	@BeanReference(type = JournalContentSearchLocalService.class)
 	protected JournalContentSearchLocalService journalContentSearchLocalService;
 	@BeanReference(type = JournalContentSearchPersistence.class)
