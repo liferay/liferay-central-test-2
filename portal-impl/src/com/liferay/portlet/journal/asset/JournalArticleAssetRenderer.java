@@ -48,7 +48,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public JournalArticle getArticle() {
-		return _article;	
+		return _article;
 	}
 
 	public String[] getAvailableLocales() {
