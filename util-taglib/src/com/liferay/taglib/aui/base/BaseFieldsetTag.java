@@ -90,8 +90,8 @@ public class BaseFieldsetTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/fieldset/start.jsp";
 
-	private boolean _column;
-	private java.lang.String _cssClass;
-	private java.lang.String _label;
+	private boolean _column = false;
+	private java.lang.String _cssClass = null;
+	private java.lang.String _label = null;
 
 }

@@ -66,6 +66,6 @@ public class BaseLayoutTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/layout/start.jsp";
 
-	private java.lang.String _cssClass;
+	private java.lang.String _cssClass = null;
 
 }

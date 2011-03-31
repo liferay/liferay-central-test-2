@@ -102,9 +102,9 @@ public class BaseColumnTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/column/start.jsp";
 
-	private int _columnWidth;
-	private java.lang.String _cssClass;
-	private boolean _first;
-	private boolean _last;
+	private int _columnWidth = 0;
+	private java.lang.String _cssClass = null;
+	private boolean _first = false;
+	private boolean _last = false;
 
 }

@@ -71,7 +71,7 @@ public class BaseLegendTag extends com.liferay.taglib.util.IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/aui/legend/page.jsp";
 
-	private java.lang.String _cssClass;
-	private java.lang.String _label;
+	private java.lang.String _cssClass = null;
+	private java.lang.String _label = null;
 
 }
