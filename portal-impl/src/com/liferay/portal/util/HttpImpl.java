@@ -819,7 +819,9 @@ public class HttpImpl implements Http {
 		return URLtoByteArray(options);
 	}
 
-	public InputStream URLtoInputStream(Http.Options options) throws IOException {
+	public InputStream URLtoInputStream(Http.Options options)
+		throws IOException {
+
 		return URLtoInputStream(
 			options.getLocation(), options.getMethod(), options.getHeaders(),
 			options.getCookies(), options.getAuth(), options.getBody(),
@@ -881,24 +883,28 @@ public class HttpImpl implements Http {
 				return URLtoString(url.toString());
 			}
 
-			URLConnection con = url.openConnection();
+			URLConnection urlConnection = url.openConnection();
 
-			InputStream is = con.getInputStream();
+			InputStream inputStream = urlConnection.getInputStream();
 
-			UnsyncByteArrayOutputStream ubaos =
+			UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream();
+
 			byte[] bytes = new byte[512];
 
-			for (int i = is.read(bytes, 0, 512); i != -1;
-					i = is.read(bytes, 0, 512)) {
+			for (int i = inputStream.read(bytes, 0, 512); i != -1;
+					i = inputStream.read(bytes, 0, 512)) {
 
-				ubaos.write(bytes, 0, i);
+				unsyncByteArrayOutputStream.write(bytes, 0, i);
 			}
 
-			xml = new String(ubaos.unsafeGetByteArray(), 0, ubaos.size());
+			xml = new String(
+				unsyncByteArrayOutputStream.unsafeGetByteArray(), 0,
+				unsyncByteArrayOutputStream.size());
 
-			is.close();
-			ubaos.close();
+			inputStream.close();
+
+			unsyncByteArrayOutputStream.close();
 		}
 
 		return xml;
@@ -995,14 +1001,14 @@ public class HttpImpl implements Http {
 
 		byte[] bytes = null;
 
-		InputStream is = URLtoInputStream(
+		InputStream inputStream = URLtoInputStream(
 			location, method, headers, cookies, auth, body, parts, response,
 			followRedirects);
 
-		if (is != null) {
-			bytes = FileUtil.getBytes(is);
+		if (inputStream != null) {
+			bytes = FileUtil.getBytes(inputStream);
 
-			is.close();
+			inputStream.close();
 		}
 
 		return bytes;

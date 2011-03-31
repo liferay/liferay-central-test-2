@@ -264,7 +264,9 @@ public class HttpUtil {
 		return getHttp().URLtoInputStream(options);
 	}
 
-	public static InputStream URLtoInputStream(String location) throws IOException {
+	public static InputStream URLtoInputStream(String location)
+		throws IOException {
+
 		return getHttp().URLtoInputStream(location);
 	}
 
