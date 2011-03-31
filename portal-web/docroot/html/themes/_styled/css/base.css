@@ -42,6 +42,10 @@ html {
 	overflow-y: scroll;
 }
 
+html.aui-dialog-iframe-root-node {
+	overflow: auto;
+}
+
 body {
 	background: #FFF;
 	font: 62.5%/1.4 Arial, Helvetica, Verdana, sans-serif;
