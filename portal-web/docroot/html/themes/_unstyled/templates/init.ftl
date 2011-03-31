@@ -169,6 +169,8 @@
 
 	<#assign the_title = languageUtil.get(locale, the_title, page.getName(locale)) />
 
+	<#assign is_portlet_page = false/>
+
 	<#if page.getType() = "portlet">
 		<#assign is_portlet_page = true/>
 	</#if>
