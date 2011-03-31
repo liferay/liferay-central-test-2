@@ -386,6 +386,7 @@ if (feed != null) {
 	}
 
 	function <portlet:namespace />removeStructure() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.NO_ACTION %>";
 		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
@@ -409,6 +410,7 @@ if (feed != null) {
 
 	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>') && document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.NO_ACTION %>";
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
@@ -418,12 +420,13 @@ if (feed != null) {
 				dialog.close();
 			}
 
-			<portlet:namespace />saveFeed();
+			submitForm(document.<portlet:namespace />fm);
 		}
 	}
 
 	function <portlet:namespace />selectTemplate(structureId, templateId, dialog) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.NO_ACTION %>";
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
 
@@ -431,7 +434,7 @@ if (feed != null) {
 				dialog.close();
 			}
 
-			<portlet:namespace />saveFeed();
+			submitForm(document.<portlet:namespace />fm);
 		}
 	}
 
