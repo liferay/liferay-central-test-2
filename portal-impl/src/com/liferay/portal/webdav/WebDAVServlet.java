@@ -114,17 +114,17 @@ public class WebDAVServlet extends HttpServlet {
 			catch (WebDAVException wde) {
 				boolean logError = false;
 
-				Throwable currentCause = wde;
+				Throwable cause = wde;
 
-				while (currentCause != null) {
-					if (currentCause instanceof PrincipalException) {
+				while (cause != null) {
+					if (cause instanceof PrincipalException) {
 						logError = true;
 					}
 
-					currentCause = currentCause.getCause();
+					cause = cause.getCause();
 				}
 
-				if (logError && _log.isErrorEnabled()) {
+				if (logError) {
 					_log.error(wde, wde);
 				}
 				else if (_log.isWarnEnabled()) {
