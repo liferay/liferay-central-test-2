@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -27,31 +28,23 @@ import java.util.TreeMap;
  */
 public class TransientTokenUtil {
 
-	public static String createToken(long timeTolive) {
-		long currentTime = System.currentTimeMillis();
-		long expireTime = currentTime + timeTolive;
-
-		expungeExpiredToken(currentTime);
-
-		Token token = new Token(expireTime);
-
-		_tokenSortedMap.put(expireTime, token);
-
-		return token.getTokenString();
-	}
-
-	public static boolean checkToken(String tokenString) {
+	public static boolean checkToken(String token) {
 		long currentTime = System.currentTimeMillis();
 
 		expungeExpiredToken(currentTime);
 
-		Iterator<Map.Entry<Long,Token>> iterator =
-			_tokenSortedMap.entrySet().iterator();
+		Set<Map.Entry<Long, String>> tokens = _tokens.entrySet();
 
-		while (iterator.hasNext()) {
-			Map.Entry<Long,Token> entry = iterator.next();
-			if (entry.getValue().getTokenString().equals(tokenString)) {
-				iterator.remove();
+		Iterator<Map.Entry<Long, String>> itr = tokens.iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Long, String> entry = itr.next();
+
+			String curToken = entry.getValue();
+
+			if (token.equals(curToken)) {
+				itr.remove();
+
 				return true;
 			}
 		}
@@ -60,33 +53,30 @@ public class TransientTokenUtil {
 	}
 
 	public static void clearAll() {
-		_tokenSortedMap.clear();
+		_tokens.clear();
+	}
+
+	public static String createToken(long timeTolive) {
+		long currentTime = System.currentTimeMillis();
+
+		long expireTime = currentTime + timeTolive;
+
+		expungeExpiredToken(currentTime);
+
+		String token = PortalUUIDUtil.generate();
+
+		_tokens.put(expireTime, token);
+
+		return token;
 	}
 
 	private static void expungeExpiredToken(long currentTime) {
-		_tokenSortedMap.headMap(currentTime).clear();
+		SortedMap<Long, String> headMap = _tokens.headMap(currentTime);
+
+		headMap.clear();
 	}
 
-	private static class Token {
-
-		public Token(long expireTime) {
-			_tokenString = PortalUUIDUtil.generate();
-			_expireTime = expireTime;
-		}
-
-		public long getExpireTime() {
-			return _expireTime;
-		}
-
-		public String getTokenString() {
-			return _tokenString;
-		}
-
-		private String _tokenString;
-		private long _expireTime;
-	}
-
-	private static final SortedMap<Long, Token> _tokenSortedMap =
-		Collections.synchronizedSortedMap(new TreeMap<Long, Token>());
+	private static final SortedMap<Long, String> _tokens =
+		Collections.synchronizedSortedMap(new TreeMap<Long, String>());
 
 }
