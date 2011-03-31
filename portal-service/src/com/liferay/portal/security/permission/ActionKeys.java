@@ -70,6 +70,8 @@ public class ActionKeys {
 
 	public static final String ADD_LICENSE = "ADD_LICENSE";
 
+	public static final String ADD_LIST = "ADD_LIST";
+
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";
 
 	public static final String ADD_NODE = "ADD_NODE";
