@@ -192,6 +192,8 @@ Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 
 String content = null;
 
+boolean preselectCurrentLayout = false;
+
 if (article != null) {
 	content = ParamUtil.getString(request, "content");
 
@@ -208,6 +210,18 @@ if (article != null) {
 }
 else {
 	content = ParamUtil.getString(request, "content");
+
+	UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+	long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
+
+	if (Validator.isNotNull(refererPlid)) {
+		Layout refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
+		typeSettingsProperties = refererLayout.getTypeSettingsProperties();
+
+		if (Validator.isNotNull(typeSettingsProperties.getProperty(LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID))) {
+			preselectCurrentLayout = true;
+		}
+	}
 }
 
 Document contentDoc = null;
@@ -671,7 +685,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						for (Layout groupLayout : publicGroupLayouts) {
 					%>
 
-							<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) %>" value="<%= groupLayout.getUuid() %>" />
+							<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) || preselectCurrentLayout %>" value="<%= groupLayout.getUuid() %>" />
 
 					<%
 						}
@@ -691,7 +705,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						for (Layout groupLayout : privateGroupLayouts) {
 					%>
 
-							<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) %>" value="<%= groupLayout.getUuid() %>" />
+							<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) || preselectCurrentLayout %>" value="<%= groupLayout.getUuid() %>" />
 
 					<%
 						}
