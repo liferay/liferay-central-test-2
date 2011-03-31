@@ -56,17 +56,23 @@ public class PwdGenerator {
 	private static String _getPassword(
 		String key, int length, boolean useAllKeys) {
 
-		int keysCount =
-			(key.contains(KEY1) ? 1 : 0) +
-			(key.contains(KEY2) ? 1 : 0) +
-			(key.contains(KEY3) ? 1 : 0);
+		int keysCount = 0;
+
+		if (key.contains(KEY1)) {
+			keysCount++;
+		}
+
+		if (key.contains(KEY2)) {
+			keysCount++;
+		}
+
+		if (key.contains(KEY3)) {
+			keysCount++;
+		}
 
 		if (keysCount > length) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"A password using all keys with length = " + length +
-						" could not be created, using length = " + keysCount +
-							" instead");
+				_log.warn("Length is too short");
 			}
 
 			length = keysCount;
