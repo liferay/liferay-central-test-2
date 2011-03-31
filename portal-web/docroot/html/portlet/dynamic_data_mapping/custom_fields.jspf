@@ -15,12 +15,12 @@
 --%>
 
 <aui:script use="aui-datepicker,liferay-portlet-dynamic-data-mapping">
-	var FormBuilderInputField = A.FormBuilderInputField;
+	var FormBuilderTextField = A.FormBuilderTextField;
 	var FormBuilderTypes = A.FormBuilder.types;
 
 	var DDMDateField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: FormBuilderTextField,
 
 			NAME: 'ddm-list-date',
 
@@ -49,7 +49,7 @@
 
 	var DDMDecimalField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: FormBuilderTextField,
 
 			NAME: 'ddm-list-decimal',
 
@@ -62,18 +62,9 @@
 		}
 	);
 
-	var DDMEmailField = A.Component.create(
-		{
-			EXTENDS: FormBuilderInputField,
-
-			NAME: 'ddm-list-email'
-
-		}
-	);
-
 	var DDMIntegerField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: FormBuilderTextField,
 
 			NAME: 'ddm-list-integer',
 
@@ -87,7 +78,7 @@
 
 	var DDMNumberField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: FormBuilderTextField,
 
 			NAME: 'ddm-list-number',
 
@@ -128,19 +119,9 @@
 		}
 	);
 
-	var DDMURLField = A.Component.create(
-		{
-			EXTENDS: FormBuilderInputField,
-
-			NAME: 'ddm-list-url'
-		}
-	);
-
 	FormBuilderTypes['ddm-list-date'] = DDMDateField;
 	FormBuilderTypes['ddm-list-decimal'] = DDMDecimalField;
-	FormBuilderTypes['ddm-list-email'] = DDMEmailField;
 	FormBuilderTypes['ddm-list-integer'] = DDMIntegerField;
 	FormBuilderTypes['ddm-list-number'] = DDMNumberField;
 	FormBuilderTypes['ddm-list-separator'] = DDMSeparatorField;
-	FormBuilderTypes['ddm-list-url'] = DDMURLField;
 </aui:script>

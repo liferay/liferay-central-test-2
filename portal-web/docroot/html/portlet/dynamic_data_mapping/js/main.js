@@ -327,19 +327,17 @@ AUI().add(
 			DDM: {
 				'checkbox': {
 					fieldLabel: Liferay.Language.get('boolean'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
 					label: Liferay.Language.get('boolean')
 				},
 				'ddm-list-date': {
 					fieldLabel: Liferay.Language.get('date'),
+					iconClass: 'aui-form-builder-field-icon aui-icon aui-icon-calendar',
 					label: Liferay.Language.get('date')
 				},
 				'ddm-list-decimal': {
 					fieldLabel: Liferay.Language.get('decimal'),
 					label: Liferay.Language.get('decimal')
-				},
-				'ddm-list-email': {
-					fieldLabel: Liferay.Language.get('email'),
-					label: Liferay.Language.get('email')
 				},
 				'ddm-list-integer': {
 					fieldLabel: Liferay.Language.get('integer'),
@@ -349,21 +347,28 @@ AUI().add(
 					fieldLabel: Liferay.Language.get('number'),
 					label: Liferay.Language.get('number')
 				},
+				'ddm-list-separator': {
+					fieldLabel: Liferay.Language.get('separator'),
+					iconClass: 'aui-form-builder-field-icon ddm-field-icon-separator',
+					label: Liferay.Language.get('separator')
+				},
 				'radio': {
 					fieldLabel: Liferay.Language.get('radio'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
 					label: Liferay.Language.get('radio')
 				},
 				'select': {
 					fieldLabel: Liferay.Language.get('select'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-select',
 					label: Liferay.Language.get('select')
 				},
-				'ddm-list-separator': {
-					fieldLabel: Liferay.Language.get('separator'),
-					label: Liferay.Language.get('separator')
+				'text': {
+					fieldLabel: Liferay.Language.get('text'),
+					label: Liferay.Language.get('text')
 				},
-				'ddm-list-url': {
-					fieldLabel: Liferay.Language.get('url'),
-					label: Liferay.Language.get('url')
+				'textarea': {
+					fieldLabel: Liferay.Language.get('text-box'),
+					label: Liferay.Language.get('text-box')
 				}
 			}
 		};
