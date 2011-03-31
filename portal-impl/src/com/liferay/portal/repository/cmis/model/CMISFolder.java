@@ -180,6 +180,10 @@ public class CMISFolder extends CMISModel implements Folder {
 
 			path = path.substring(0, path.lastIndexOf(CharPool.SLASH));
 
+			if (path.length() == 0) {
+				path = StringPool.SLASH;
+			}
+
 			Session session =
 				(Session)CMISRepositoryLocalServiceUtil.getSession(
 					getRepositoryId());
