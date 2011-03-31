@@ -12,13 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.amazonrankings.portlet;
+package com.liferay.portalweb.portlet.amazonrankings.portlet.removeportletar;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.amazonrankings.portlet.addportletar.AddPortletARTests;
-import com.liferay.portalweb.portlet.amazonrankings.portlet.addportletarduplicate.AddPortletARDuplicateTests;
-import com.liferay.portalweb.portlet.amazonrankings.portlet.removeportletar.RemovePortletARTests;
-import com.liferay.portalweb.portlet.amazonrankings.portlet.viewportletarlookandfeel.ViewPortletARLookAndFeelTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -26,15 +22,15 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PortletTests extends BaseTests {
+public class RemovePortletARTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletARTests.suite());
-		testSuite.addTest(AddPortletARDuplicateTests.suite());
-		testSuite.addTest(RemovePortletARTests.suite());
-		testSuite.addTest(ViewPortletARLookAndFeelTests.suite());
+		testSuite.addTestSuite(AddPageARTest.class);
+		testSuite.addTestSuite(AddPortletARTest.class);
+		testSuite.addTestSuite(RemovePortletARTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
