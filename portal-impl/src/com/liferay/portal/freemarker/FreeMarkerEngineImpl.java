@@ -29,7 +29,6 @@ import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
 
 import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
 import java.io.IOException;

@@ -18,6 +18,7 @@ import com.liferay.portlet.journal.util.TemplateNode;
 
 import freemarker.ext.beans.BeanModel;
 import freemarker.ext.beans.BeansWrapper;
+
 import freemarker.template.ObjectWrapper;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateModel;
@@ -28,27 +29,24 @@ import freemarker.template.TemplateModelException;
  */
 public class LiferayTemplateModel extends SimpleHash {
 
-	public LiferayTemplateModel(TemplateNode node, ObjectWrapper wrapper) {
-		super(node, wrapper);
+	public LiferayTemplateModel(
+		TemplateNode templateNode, ObjectWrapper objectWrapper) {
 
-		_beanModel = new BeanModel(node, (BeansWrapper)wrapper);
-		_node = node;
-		_wrapper = wrapper;
+		super(templateNode, objectWrapper);
+
+		_beanModel = new BeanModel(templateNode, (BeansWrapper)objectWrapper);
 	}
 
 	public TemplateModel get(String key) throws TemplateModelException {
+		TemplateModel templateModel = super.get(key);
 
-		TemplateModel result = super.get(key);
-
-		if (result != null) {
-			return result;
+		if (templateModel != null) {
+			return templateModel;
 		}
 
 		return _beanModel.get(key);
 	}
 
 	private BeanModel _beanModel;
-	private TemplateNode _node;
-	private ObjectWrapper _wrapper;
 
 }

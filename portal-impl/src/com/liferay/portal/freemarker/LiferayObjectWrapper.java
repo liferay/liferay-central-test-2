@@ -25,12 +25,12 @@ import freemarker.template.TemplateModelException;
  */
 public class LiferayObjectWrapper extends DefaultObjectWrapper {
 
-	public TemplateModel wrap(Object obj) throws TemplateModelException {
-		if (obj instanceof TemplateNode) {
-			return new LiferayTemplateModel((TemplateNode) obj, this);
+	public TemplateModel wrap(Object object) throws TemplateModelException {
+		if (object instanceof TemplateNode) {
+			return new LiferayTemplateModel((TemplateNode)object, this);
 		}
 
-		return super.wrap(obj);
+		return super.wrap(object);
 	}
 
 }
