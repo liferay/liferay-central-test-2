@@ -98,7 +98,7 @@ public class EditListAction extends PortletAction {
 			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getStructure(renderRequest);
+				ActionUtil.getList(renderRequest);
 			}
 		}
 		catch (NoSuchListException nsle) {
