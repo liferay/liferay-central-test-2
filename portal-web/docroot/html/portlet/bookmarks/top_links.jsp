@@ -53,8 +53,10 @@ portletURL.setParameter("tag", StringPool.BLANK);
 
 			<liferay-ui:icon
 				cssClass='<%= "top-link" + (themeDisplay.isSignedIn() ? StringPool.BLANK : " last") %>'
-				image="../aui/clock" label="<%= true %>"
-				message="recent-entries" url='<%= (topLink.equals("recent-entries") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
+				image="../aui/clock"
+				label="<%= true %>"
+				message="recent-entries"
+				url='<%= (topLink.equals("recent-entries") && !useAssetEntryQuery) ? StringPool.BLANK : portletURL.toString() %>'
 			/>
 
 			<c:if test="<%= themeDisplay.isSignedIn() %>">
