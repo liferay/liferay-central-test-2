@@ -145,7 +145,7 @@ catch (NoSuchMailingListException nsmle) {
 
 				<aui:model-context bean="<%= mailingList %>" model="<%= MBMailingList.class %>" />
 
-				<aui:input label="active" name="mailingListActive" type="checkbox" />
+				<aui:input name="active" />
 
 				<div id="<portlet:namespace />mailingListSettings">
 					<aui:input name="emailAddress" />
@@ -243,7 +243,7 @@ catch (NoSuchMailingListException nsmle) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</c:if>
 
-	Liferay.Util.toggleBoxes('<portlet:namespace />mailingListActiveCheckbox', '<portlet:namespace />mailingListSettings');
+	Liferay.Util.toggleBoxes('<portlet:namespace />activeCheckbox', '<portlet:namespace />mailingListSettings');
 	Liferay.Util.toggleBoxes('<portlet:namespace />outCustomCheckbox', '<portlet:namespace />outCustomSettings');
 </aui:script>
 
