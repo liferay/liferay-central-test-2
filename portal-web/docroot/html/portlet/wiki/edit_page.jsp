@@ -420,6 +420,26 @@ if (Validator.isNull(redirect)) {
 
 <aui:script>
 	function <portlet:namespace />changeFormat(formatSel) {
+		var currentFormat = (formatSel.options[window.<portlet:namespace />currentFormatIndex].value).toUpperCase();
+
+		var shouldConfirm = currentFormat == "HTML";
+
+		if (shouldConfirm) {
+			var newFormat = formatSel.options[formatSel.selectedIndex].text;
+
+			var confirmMessage = '<liferay-ui:message key="you-may-loose-formattings-on-switching-from-x-to-x" />';
+
+			confirmMessage = confirmMessage.replace(/\{0\}/, currentFormat).replace(/\{1\}/, newFormat);
+
+			var confirmed = window.confirm(confirmMessage);
+
+			if (!confirmed) {
+				formatSel.selectedIndex = window.<portlet:namespace />currentFormatIndex;
+
+				return;
+			}
+		}
+
 		if (window.<portlet:namespace />editor) {
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
 		}
@@ -468,6 +488,12 @@ if (Validator.isNull(redirect)) {
 
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	(function <portlet:namespace />setCurrentFormat() {
+		var selectFormat = document.getElementById('<portlet:namespace />format');
+
+		window.<portlet:namespace />currentFormatIndex = selectFormat.selectedIndex;
+	})();
 
 	<c:if test="<%= editable && !preview %>">
 		if (!window.<portlet:namespace />editor) {
