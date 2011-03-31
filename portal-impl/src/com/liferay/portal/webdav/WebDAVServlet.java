@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.kernel.webdav.WebDAVStorage;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -111,7 +112,22 @@ public class WebDAVServlet extends HttpServlet {
 				status = method.process(webDavRequest);
 			}
 			catch (WebDAVException wde) {
-				if (_log.isWarnEnabled()) {
+				boolean logError = false;
+
+				Throwable currentCause = wde;
+
+				while (currentCause != null) {
+					if (currentCause instanceof PrincipalException) {
+						logError = true;
+					}
+
+					currentCause = currentCause.getCause();
+				}
+
+				if (logError && _log.isErrorEnabled()) {
+					_log.error(wde, wde);
+				}
+				else if (_log.isWarnEnabled()) {
 					_log.warn(wde, wde);
 				}
 
