@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<#include init/>
+<#include init />
 
 <html class="<@liferay.language key="lang.dir" />" dir="<@liferay.language key="lang.dir" />" lang="${w3c_language_id}">
 
@@ -15,7 +15,7 @@
 ${theme.include(body_top_include)}
 
 <#if is_signed_in>
-	<@liferay.dockbar/>
+	<@liferay.dockbar />
 </#if>
 
 <div id="wrapper">
@@ -61,7 +61,7 @@ ${theme.include(body_top_include)}
 				<span><@liferay.language key="breadcrumbs" /></span>
 			</h1>
 
-			<@liferay.breadcrumbs/>
+			<@liferay.breadcrumbs />
 		</nav>
 
 		<#if selectable>

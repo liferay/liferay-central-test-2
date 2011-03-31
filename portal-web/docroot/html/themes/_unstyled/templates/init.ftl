@@ -1,7 +1,7 @@
 <#-- ---------- Common variables ---------- -->
 
-<#assign theme_display = themeDisplay/>
-<#assign portlet_display = portletDisplay/>
+<#assign theme_display = themeDisplay />
+<#assign portlet_display = portletDisplay />
 
 <#assign theme_timestamp = themeDisplay.getTheme().getTimestamp() />
 <#assign theme_settings = themeDisplay.getThemeSettings() />
@@ -40,8 +40,8 @@
 <#assign javascript_folder = theme_display.getPathThemeJavaScript() />
 <#assign templates_folder = theme_display.getPathThemeTemplates() />
 
-<#assign full_css_path = fullCssPath/>
-<#assign full_templates_path = fullTemplatesPath/>
+<#assign full_css_path = fullCssPath />
+<#assign full_templates_path = fullTemplatesPath />
 
 <#assign css_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${css_folder}/main.css")) />
 <#assign js_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${javascript_folder}/main.js")) />
@@ -162,17 +162,17 @@
 <#assign page_javascript_3 = "" />
 
 <#if layout??>
-	<#assign page = layout/>
+	<#assign page = layout />
 
 	<#assign is_first_child = page.isFirstChild() />
 	<#assign is_first_parent = page.isFirstParent() />
 
 	<#assign the_title = languageUtil.get(locale, the_title, page.getName(locale)) />
 
-	<#assign is_portlet_page = false/>
+	<#assign is_portlet_page = false />
 
 	<#if page.getType() = "portlet">
-		<#assign is_portlet_page = true/>
+		<#assign is_portlet_page = true />
 	</#if>
 
 	<#if is_portlet_page && theme_display.isWapTheme()>
@@ -191,7 +191,7 @@
 	<#assign typeSettingsProperties = layout.getTypeSettingsProperties() />
 
 	<#if typeSettingsProperties??>
-		<#assign page_javascript = typeSettingsProperties["javascript"]!/>
+		<#assign page_javascript = typeSettingsProperties["javascript"]! />
 	</#if>
 
 	<#assign community_name = htmlUtil.escape(page_group.getDescriptiveName()) />
@@ -231,10 +231,10 @@
 
 	<#assign community_default_private_url = htmlUtil.escape(my_places_portlet_url.toString()) />
 
-	<#assign community_default_url = community_default_public_url/>
+	<#assign community_default_url = community_default_public_url />
 
 	<#if layout.isPrivateLayout()>
-		<#assign community_default_url = community_default_private_url/>
+		<#assign community_default_url = community_default_private_url />
 	</#if>
 </#if>
 
@@ -245,11 +245,11 @@
 </#if>
 
 <#if pageTitle??>
-	<#assign the_title = pageTitle/>
+	<#assign the_title = pageTitle />
 </#if>
 
 <#if pageSubtitle??>
-	<#assign the_title = pageSubtitle + " - " + the_title/>
+	<#assign the_title = pageSubtitle + " - " + the_title />
 </#if>
 
 <#if tilesTitle != "">
@@ -259,7 +259,7 @@
 <#assign the_title = htmlUtil.escape(the_title) />
 
 <#if layouts??>
-	<#assign pages = layouts/>
+	<#assign pages = layouts />
 </#if>
 
 <#-- ---------- Navigation ---------- -->
@@ -267,7 +267,7 @@
 <#assign has_navigation = false />
 
 <#if navItems??>
-	<#assign nav_items = navItems/>
+	<#assign nav_items = navItems />
 	<#assign has_navigation = (nav_items?size > 0) />
 </#if>
 
@@ -298,14 +298,14 @@
 <#assign body_bottom_include = "${dir_include}/common/themes/body_bottom.jsp" />
 <#assign body_top_include = "${dir_include}/common/themes/body_top.jsp" />
 <#assign bottom_include = "${dir_include}/common/themes/bottom.jsp" />
-<#assign bottom_ext_include = bottom_include/>
+<#assign bottom_ext_include = bottom_include />
 <#assign content_include = "${dir_include}${tilesContent}" />
 <#assign top_head_include = "${dir_include}/common/themes/top_head.jsp" />
 <#assign top_messages_include = "${dir_include}/common/themes/top_messages.jsp" />
 
 <#-- ---------- Date ---------- -->
 
-<#assign date = dateUtil/>
+<#assign date = dateUtil />
 <#assign current_time = date.newDate() />
 <#assign the_year = current_time?date?string("yyyy") />
 
