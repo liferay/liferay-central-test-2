@@ -237,6 +237,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 			if (Validator.isNotNull(defaultAssetPublisherPortletId) &&
 				defaultAssetPublisherPortletId.equals(portletResource)) {
+
 				typeSettingsProperties.setProperty(
 					LayoutTypePortletConstants.
 						DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
