@@ -110,10 +110,6 @@ public class RepositoryServiceUtil {
 			description, portletId, typeSettingsProperties, serviceContext);
 	}
 
-	/**
-	* This method unmounts all repositories associated with this group. It
-	* deletes the data from only Liferay repositories.
-	*/
 	public static void unmountRepositories(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

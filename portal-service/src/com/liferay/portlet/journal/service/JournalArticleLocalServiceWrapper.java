@@ -395,11 +395,10 @@ public class JournalArticleLocalServiceWrapper
 		_journalArticleLocalService.deleteArticles(groupId);
 	}
 
-	public void deleteLayoutContentReferences(long groupId,
+	public void deleteLayoutArticleReferences(long groupId,
 		java.lang.String layoutUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_journalArticleLocalService.deleteLayoutContentReferences(groupId,
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleLocalService.deleteLayoutArticleReferences(groupId,
 			layoutUuid);
 	}
 

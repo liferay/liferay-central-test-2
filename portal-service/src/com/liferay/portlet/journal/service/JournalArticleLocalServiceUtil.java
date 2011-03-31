@@ -405,11 +405,10 @@ public class JournalArticleLocalServiceUtil {
 		getService().deleteArticles(groupId);
 	}
 
-	public static void deleteLayoutContentReferences(long groupId,
+	public static void deleteLayoutArticleReferences(long groupId,
 		java.lang.String layoutUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteLayoutContentReferences(groupId, layoutUuid);
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteLayoutArticleReferences(groupId, layoutUuid);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle expireArticle(
