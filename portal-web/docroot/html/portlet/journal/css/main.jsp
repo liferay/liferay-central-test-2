@@ -298,6 +298,14 @@
 		top: 0;
 	}
 
+	.repeatable-field-delete {
+		display: none;
+	}
+
+	.repeated-field .repeatable-field-delete {
+		display: inline;
+	}
+
 	.lfr-textarea {
 		width: 350px;
 	}
@@ -411,6 +419,10 @@
 			padding-top: 5px;
 			position: relative;
 		}
+	}
+
+	.repeatable-field-delete {
+		display: inline;
 	}
 
 	.journal-article-buttons {
