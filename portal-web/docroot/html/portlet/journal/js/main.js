@@ -1624,6 +1624,7 @@ AUI().add(
 			},
 
 			updateStructure: function(groupId, structureId, parentStructureId, name, description, xsd, callback) {
+				var instance = this;
 
 				var serviceParameterTypes = [
 					'long',
