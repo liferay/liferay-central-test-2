@@ -243,6 +243,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getLayoutId());
 
+		// Journal default display pages
+
+		journalArticleLocalService.deleteLayoutContentReferences(
+			layout.getGroupId(), layout.getUuid());
+
 		// Expando
 
 		expandoValueLocalService.deleteValues(

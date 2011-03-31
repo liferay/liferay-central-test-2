@@ -78,6 +78,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
+		<finder name="G_L" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="layoutUuid" />
+		</finder>
 		<finder name="G_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />

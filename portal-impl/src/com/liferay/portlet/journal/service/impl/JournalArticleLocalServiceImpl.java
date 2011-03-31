@@ -703,6 +703,18 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public void deleteLayoutContentReferences (long groupId, String layoutUuid)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> layoutArticles =
+			journalArticlePersistence.findByG_L(groupId, layoutUuid);
+
+		for (JournalArticle article: layoutArticles) {
+			article.setLayoutUuid(StringPool.BLANK);
+			journalArticlePersistence.update(article, false);
+		}
+	}
+
 	public JournalArticle expireArticle(
 			long userId, long groupId, String articleId, double version,
 			String articleURL, ServiceContext serviceContext)
