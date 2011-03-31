@@ -52,7 +52,7 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 
 		<aui:input name="content" type="hidden" />
 	</td>
-	<td class="syntax-help" id="toggle_id_wiki_edit_wiki_syntax_help" style="display: <liferay-ui:toggle-value id="toggle_id_wiki_edit_wiki_syntax_help" />" valign="top">
+	<td class="syntax-help" id="toggle_id_wiki_edit_wiki_syntax_help" style="display: <liferay-ui:toggle-value defaultValue="none" id="toggle_id_wiki_edit_wiki_syntax_help" />" valign="top">
 		<h3>
 			<liferay-ui:message key="syntax-help" />
 		</h3>
