@@ -23,12 +23,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.BaseRepository;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.RepositoryEntry;
 import com.liferay.portal.model.User;
+import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.repository.liferayrepository.LiferayLocalRepository;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.repository.util.RepositoryFactoryUtil;
@@ -394,15 +396,19 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				e);
 		}
 
-		baseRepository.setCompanyId(repository.getCompanyId());
-		baseRepository.setCompanyLocalService(companyLocalService);
-		baseRepository.setCounterLocalService(counterLocalService);
-		baseRepository.setDLAppHelperLocalService(dlAppHelperLocalService);
-		baseRepository.setGroupId(repository.getGroupId());
-		baseRepository.setRepositoryId(repositoryId);
-		baseRepository.setTypeSettingsProperties(
-			repository.getTypeSettingsProperties());
-		baseRepository.setUserLocalService(userLocalService);
+		if (baseRepository instanceof CMISRepositoryWrapper) {
+			CMISRepositoryWrapper cmisRepositoryWrapper =
+				(CMISRepositoryWrapper)baseRepository;
+
+			CMISRepository cmisRepository = new CMISRepository(
+				cmisRepositoryWrapper);
+
+			cmisRepositoryWrapper.setCmisRepository(cmisRepository);
+
+			setupRepository(repositoryId, repository, cmisRepository);
+		}
+
+		setupRepository(repositoryId, repository, baseRepository);
 
 		baseRepository.initRepository();
 
@@ -471,6 +477,20 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		return repositoryEntryId;
+	}
+
+	protected void setupRepository(
+		long repositoryId, Repository repository, BaseRepository baseRepository)
+	{
+		baseRepository.setCompanyId(repository.getCompanyId());
+		baseRepository.setCompanyLocalService(companyLocalService);
+		baseRepository.setCounterLocalService(counterLocalService);
+		baseRepository.setDLAppHelperLocalService(dlAppHelperLocalService);
+		baseRepository.setGroupId(repository.getGroupId());
+		baseRepository.setRepositoryId(repositoryId);
+		baseRepository.setTypeSettingsProperties(
+			repository.getTypeSettingsProperties());
+		baseRepository.setUserLocalService(userLocalService);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

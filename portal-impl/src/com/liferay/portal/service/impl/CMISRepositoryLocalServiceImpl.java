@@ -16,6 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -33,8 +34,7 @@ public class CMISRepositoryLocalServiceImpl
 	public Object getSession(long repositoryId)
 		throws PortalException, SystemException {
 
-		CMISRepository cmisRepository =
-			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
+		CMISRepository cmisRepository = getCmisRepository(repositoryId);
 
 		return cmisRepository.getSession();
 	}
@@ -42,8 +42,7 @@ public class CMISRepositoryLocalServiceImpl
 	public FileEntry toFileEntry(long repositoryId, Object object)
 		throws PortalException, SystemException {
 
-		CMISRepository cmisRepository =
-			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
+		CMISRepository cmisRepository = getCmisRepository(repositoryId);
 
 		Document document = (Document)object;
 
@@ -53,8 +52,7 @@ public class CMISRepositoryLocalServiceImpl
 	public FileVersion toFileVersion(long repositoryId, Object object)
 		throws PortalException, SystemException {
 
-		CMISRepository cmisRepository =
-			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
+		CMISRepository cmisRepository = getCmisRepository(repositoryId);
 
 		Document document = (Document)object;
 
@@ -64,13 +62,25 @@ public class CMISRepositoryLocalServiceImpl
 	public Folder toFolder(long repositoryId, Object object)
 		throws PortalException, SystemException {
 
-		CMISRepository cmisRepository =
-			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
+		CMISRepository cmisRepository = getCmisRepository(repositoryId);
 
 		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 			(org.apache.chemistry.opencmis.client.api.Folder)object;
 
 		return cmisRepository.toFolder(cmisFolder);
+	}
+
+	protected CMISRepository getCmisRepository(long repositoryId)
+		throws PortalException, SystemException {
+
+		CMISRepositoryWrapper cmisRepositoryWrapper =
+			(CMISRepositoryWrapper)repositoryService.getRepositoryImpl(
+				repositoryId);
+
+		CMISRepository cmisRepository =
+			(CMISRepository)cmisRepositoryWrapper.getCmisRepository();
+
+		return cmisRepository;
 	}
 
 }

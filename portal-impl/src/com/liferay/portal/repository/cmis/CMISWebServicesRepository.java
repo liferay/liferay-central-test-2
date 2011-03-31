@@ -14,41 +14,92 @@
 
 package com.liferay.portal.repository.cmis;
 
+import com.liferay.portal.InvalidRepositoryException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.chemistry.opencmis.client.api.Session;
+import org.apache.chemistry.opencmis.commons.SessionParameter;
+import org.apache.chemistry.opencmis.commons.enums.BindingType;
+
 /**
  * @author Alexander Chow
  */
-public class CMISWebServicesRepository extends CMISRepository {
+public class CMISWebServicesRepository extends CMISRepositoryWrapper {
 
-	public static final String CONFIGURATION_WEBSERVICES = "WEBSERVICES";
+	public Object getSession()
+		throws PortalException, RepositoryException {
 
-	public static final String REPOSITORY_ID = "REPOSITORY_ID";
+		Session session = null;
 
-	public static final String WEBSERVICES_ACL_SERVICE =
-		"WEBSERVICES_ACL_SERVICE";
+		Map<String, String> parameters = new HashMap<String, String>();
 
-	public static final String WEBSERVICES_DISCOVERY_SERVICE =
-		"WEBSERVICES_DISCOVERY_SERVICE";
+		Locale locale = LocaleUtil.getDefault();
 
-	public static final String WEBSERVICES_MULTIFILING_SERVICE =
-		"WEBSERVICES_MULTIFILING_SERVICE";
+		parameters.put(
+			SessionParameter.LOCALE_ISO3166_COUNTRY,
+			locale.getCountry());
+		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
+			locale.getLanguage());
 
-	public static final String WEBSERVICES_NAVIGATION_SERVICE =
-		"WEBSERVICES_NAVIGATION_SERVICE";
+		String password = PrincipalThreadLocal.getPassword();
 
-	public static final String WEBSERVICES_OBJECT_SERVICE =
-		"WEBSERVICES_OBJECT_SERVICE";
+		parameters.put(SessionParameter.PASSWORD, password);
 
-	public static final String WEBSERVICES_POLICY_SERVICE =
-		"WEBSERVICES_POLICY_SERVICE";
+		String login = getLogin();
 
-	public static final String WEBSERVICES_RELATIONSHIP_SERVICE =
-		"WEBSERVICES_RELATIONSHIP_SERVICE";
+		parameters.put(SessionParameter.USER, login);
 
-	public static final String WEBSERVICES_REPOSITORY_SERVICE =
-		"WEBSERVICES_REPOSITORY_SERVICE";
+		parameters.put(
+			SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
 
-	public static final String WEBSERVICES_VERSIONING_SERVICE =
-		"WEBSERVICES_VERSIONING_SERVICE";
+		parameters.put(
+			SessionParameter.WEBSERVICES_ACL_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_ACL_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_DISCOVERY_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_DISCOVERY_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_MULTIFILING_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_MULTIFILING_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_NAVIGATION_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_NAVIGATION_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_OBJECT_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_OBJECT_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_POLICY_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_POLICY_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_RELATIONSHIP_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_RELATIONSHIP_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_REPOSITORY_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_REPOSITORY_SERVICE));
+		parameters.put(
+			SessionParameter.WEBSERVICES_VERSIONING_SERVICE,
+			getTypeSettingsValue(_WEBSERVICES_VERSIONING_SERVICE));
+
+		CMISRepositoryUtil.checkRepository(
+			getRepositoryId(), parameters, getTypeSettingsProperties(),
+			_REPOSITORY_ID);
+
+		session = CMISRepositoryUtil.getSessionFactory().createSession(
+			parameters);
+
+		session.setDefaultContext(CMISRepositoryUtil.getOperationContext());
+
+		return session;
+	}
 
 	public String[] getSupportedConfigurations() {
 		return _SUPPORTED_CONFIGURATIONS;
@@ -58,25 +109,57 @@ public class CMISWebServicesRepository extends CMISRepository {
 		return _SUPPORTED_PARAMETERS;
 	}
 
-	public boolean isAtomPub() {
-		return false;
+	protected String getTypeSettingsValue(String typeSettingsKey)
+		throws InvalidRepositoryException {
+
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
+		return CMISRepositoryUtil.getTypeSettingsValue(
+			typeSettingsProperties, typeSettingsKey);
 	}
 
-	public boolean isWebServices() {
-		return true;
-	}
+	public static final String _CONFIGURATION_WEBSERVICES = "WEBSERVICES";
+
+	public static final String _REPOSITORY_ID = "REPOSITORY_ID";
+
+	public static final String _WEBSERVICES_ACL_SERVICE =
+		"WEBSERVICES_ACL_SERVICE";
+
+	public static final String _WEBSERVICES_DISCOVERY_SERVICE =
+		"WEBSERVICES_DISCOVERY_SERVICE";
+
+	public static final String _WEBSERVICES_MULTIFILING_SERVICE =
+		"WEBSERVICES_MULTIFILING_SERVICE";
+
+	public static final String _WEBSERVICES_NAVIGATION_SERVICE =
+		"WEBSERVICES_NAVIGATION_SERVICE";
+
+	public static final String _WEBSERVICES_OBJECT_SERVICE =
+		"WEBSERVICES_OBJECT_SERVICE";
+
+	public static final String _WEBSERVICES_POLICY_SERVICE =
+		"WEBSERVICES_POLICY_SERVICE";
+
+	public static final String _WEBSERVICES_RELATIONSHIP_SERVICE =
+		"WEBSERVICES_RELATIONSHIP_SERVICE";
+
+	public static final String _WEBSERVICES_REPOSITORY_SERVICE =
+		"WEBSERVICES_REPOSITORY_SERVICE";
+
+	public static final String _WEBSERVICES_VERSIONING_SERVICE =
+		"WEBSERVICES_VERSIONING_SERVICE";
 
 	private static final String[] _SUPPORTED_CONFIGURATIONS = {
-		CONFIGURATION_WEBSERVICES
+		_CONFIGURATION_WEBSERVICES
 	};
 
 	private static final String[][] _SUPPORTED_PARAMETERS = {
 		new String[] {
-			REPOSITORY_ID, WEBSERVICES_ACL_SERVICE,
-			WEBSERVICES_DISCOVERY_SERVICE, WEBSERVICES_MULTIFILING_SERVICE,
-			WEBSERVICES_NAVIGATION_SERVICE, WEBSERVICES_OBJECT_SERVICE,
-			WEBSERVICES_POLICY_SERVICE, WEBSERVICES_RELATIONSHIP_SERVICE,
-			WEBSERVICES_REPOSITORY_SERVICE, WEBSERVICES_VERSIONING_SERVICE
+			_REPOSITORY_ID, _WEBSERVICES_ACL_SERVICE,
+			_WEBSERVICES_DISCOVERY_SERVICE, _WEBSERVICES_MULTIFILING_SERVICE,
+			_WEBSERVICES_NAVIGATION_SERVICE, _WEBSERVICES_OBJECT_SERVICE,
+			_WEBSERVICES_POLICY_SERVICE, _WEBSERVICES_RELATIONSHIP_SERVICE,
+			_WEBSERVICES_REPOSITORY_SERVICE, _WEBSERVICES_VERSIONING_SERVICE
 		}
 	};
 

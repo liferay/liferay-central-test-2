@@ -14,16 +14,61 @@
 
 package com.liferay.portal.repository.cmis;
 
+import com.liferay.portal.InvalidRepositoryException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import org.apache.chemistry.opencmis.client.api.Session;
+import org.apache.chemistry.opencmis.commons.SessionParameter;
+import org.apache.chemistry.opencmis.commons.enums.BindingType;
+
 /**
  * @author Alexander Chow
  */
-public class CMISAtomPubRepository extends CMISRepository {
+public class CMISAtomPubRepository extends CMISRepositoryWrapper {
 
-	public static final String ATOMPUB_URL = "ATOMPUB_URL";
+	public Object getSession() throws PortalException, RepositoryException {
+		Session session = null;
 
-	public static final String CONFIGURATION_ATOMPUB = "ATOMPUB";
+		Map<String, String> parameters = new HashMap<String, String>();
 
-	public static final String REPOSITORY_ID = "REPOSITORY_ID";
+		String login = getLogin();
+		String password = PrincipalThreadLocal.getPassword();
+		Locale locale = LocaleUtil.getDefault();
+
+		parameters.put(SessionParameter.USER, login);
+		parameters.put(SessionParameter.PASSWORD, password);
+		parameters.put(
+			SessionParameter.LOCALE_ISO3166_COUNTRY,
+			locale.getCountry());
+		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
+			locale.getLanguage());
+		
+		parameters.put(
+			SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+
+		parameters.put(
+			SessionParameter.ATOMPUB_URL, getTypeSettingsValue(_ATOMPUB_URL));
+
+		CMISRepositoryUtil.checkRepository(
+			getRepositoryId(), parameters, getTypeSettingsProperties(),
+			_REPOSITORY_ID);
+
+		session = CMISRepositoryUtil.getSessionFactory().createSession(
+			parameters);
+
+		session.setDefaultContext(CMISRepositoryUtil.getOperationContext());
+
+		return session;
+	}
 
 	public String[] getSupportedConfigurations() {
 		return _SUPPORTED_CONFIGURATIONS;
@@ -33,21 +78,28 @@ public class CMISAtomPubRepository extends CMISRepository {
 		return _SUPPORTED_PARAMETERS;
 	}
 
-	public boolean isAtomPub() {
-		return true;
+	protected String getTypeSettingsValue(String typeSettingsKey)
+		throws InvalidRepositoryException {
+
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
+		return CMISRepositoryUtil.getTypeSettingsValue(
+			typeSettingsProperties, typeSettingsKey);
 	}
 
-	public boolean isWebServices() {
-		return false;
-	}
+	private static final String _ATOMPUB_URL = "ATOMPUB_URL";
+
+	private static final String _CONFIGURATION_ATOMPUB = "ATOMPUB";
+
+	private static final String _REPOSITORY_ID = "REPOSITORY_ID";
 
 	private static final String[] _SUPPORTED_CONFIGURATIONS = {
-		CONFIGURATION_ATOMPUB
+		_CONFIGURATION_ATOMPUB
 	};
 
 	private static final String[][] _SUPPORTED_PARAMETERS = {
 		new String[] {
-			ATOMPUB_URL, REPOSITORY_ID
+			_ATOMPUB_URL, _REPOSITORY_ID
 		}
 	};
 

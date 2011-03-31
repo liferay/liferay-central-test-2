@@ -15,7 +15,6 @@
 package com.liferay.portal.repository.cmis;
 
 import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -24,33 +23,26 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TransientValue;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Lock;
-import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.RepositoryEntry;
-import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.model.CMISFileEntry;
 import com.liferay.portal.repository.cmis.model.CMISFileVersion;
 import com.liferay.portal.repository.cmis.model.CMISFolder;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
-import com.liferay.portal.service.persistence.RepositoryUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -69,10 +61,8 @@ import java.math.BigInteger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -82,22 +72,15 @@ import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.ItemIterable;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
-import org.apache.chemistry.opencmis.client.api.OperationContext;
 import org.apache.chemistry.opencmis.client.api.QueryResult;
 import org.apache.chemistry.opencmis.client.api.Session;
-import org.apache.chemistry.opencmis.client.api.SessionFactory;
 import org.apache.chemistry.opencmis.client.runtime.ObjectIdImpl;
-import org.apache.chemistry.opencmis.client.runtime.OperationContextImpl;
-import org.apache.chemistry.opencmis.client.runtime.SessionFactoryImpl;
 import org.apache.chemistry.opencmis.commons.PropertyIds;
-import org.apache.chemistry.opencmis.commons.SessionParameter;
 import org.apache.chemistry.opencmis.commons.data.AllowableActions;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
 import org.apache.chemistry.opencmis.commons.data.PropertyData;
 import org.apache.chemistry.opencmis.commons.enums.Action;
 import org.apache.chemistry.opencmis.commons.enums.BaseTypeId;
-import org.apache.chemistry.opencmis.commons.enums.BindingType;
-import org.apache.chemistry.opencmis.commons.enums.IncludeRelationships;
 import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisPermissionDeniedException;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisRuntimeException;
@@ -116,7 +99,11 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  *         href="http://www.oasis-open.org/committees/document.php?document_id=39631">
  *         CMIS Type Mutability proposal</a>
  */
-public abstract class CMISRepository extends BaseRepositoryImpl {
+public class CMISRepository extends BaseRepositoryImpl {
+
+	public CMISRepository(CMISRepositoryWrapper wrapper) {
+		_wrapper = wrapper;
+	}
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
@@ -554,72 +541,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			return session;
 		}
 
-		Map<String, String> parameters = new HashMap<String, String>();
-
-		Locale locale = LocaleUtil.getDefault();
-
-		parameters.put(
-			SessionParameter.LOCALE_ISO3166_COUNTRY,
-			locale.getCountry());
-		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
-			locale.getLanguage());
-
-		String password = PrincipalThreadLocal.getPassword();
-
-		parameters.put(SessionParameter.PASSWORD, password);
-
-		String login = getLogin();
-
-		parameters.put(SessionParameter.USER, login);
-
-		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
-
-		if (isAtomPub()) {
-			parameters.put(
-				SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
-
-			putParameter(
-				parameters, SessionParameter.ATOMPUB_URL,
-				CMISAtomPubRepository.ATOMPUB_URL);
-		}
-		else {
-			parameters.put(
-				SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
-
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_ACL_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_ACL_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_DISCOVERY_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_DISCOVERY_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_MULTIFILING_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_MULTIFILING_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_NAVIGATION_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_NAVIGATION_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_OBJECT_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_OBJECT_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_POLICY_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_POLICY_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_RELATIONSHIP_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_RELATIONSHIP_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_REPOSITORY_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_REPOSITORY_SERVICE);
-			putParameter(
-				parameters, SessionParameter.WEBSERVICES_VERSIONING_SERVICE,
-				CMISWebServicesRepository.WEBSERVICES_VERSIONING_SERVICE);
-		}
-
-		checkRepository(parameters, typeSettingsProperties);
-
-		session = _sessionFactory.createSession(parameters);
-
-		session.setDefaultContext(getOperationContext());
+		session = (Session)_wrapper.getSession();
 
 		setCachedSession(session);
 
@@ -647,6 +569,14 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
+	public String[] getSupportedConfigurations() {
+		return _wrapper.getSupportedConfigurations();
+	}
+
+	public String[][] getSupportedParameters() {
+		return _wrapper.getSupportedParameters();
+	}
+
 	public void initRepository() throws PortalException, SystemException {
 		try {
 			_sessionKey =
@@ -671,10 +601,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 					getRepositoryId(), e);
 		}
 	}
-
-	public abstract boolean isAtomPub();
-
-	public abstract boolean isWebServices();
 
 	public void lockFileEntry(long fileEntryId) {
 		try {
@@ -1206,40 +1132,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	protected void checkRepository(
-			Map<String, String> parameters,
-			UnicodeProperties typeSettingsProperties)
-		throws PortalException, RepositoryException {
-
-		String parameterKey = CMISAtomPubRepository.REPOSITORY_ID;
-
-		if (isWebServices()) {
-			parameterKey = CMISWebServicesRepository.REPOSITORY_ID;
-		}
-
-		if (!typeSettingsProperties.containsKey(parameterKey)) {
-			org.apache.chemistry.opencmis.client.api.Repository cmisRepository =
-				_sessionFactory.getRepositories(parameters).get(0);
-
-			typeSettingsProperties.setProperty(
-				parameterKey, cmisRepository.getId());
-
-			try {
-				Repository repository = RepositoryUtil.findByPrimaryKey(
-					getRepositoryId());
-
-				repository.setTypeSettingsProperties(typeSettingsProperties);
-
-				RepositoryUtil.update(repository, false);
-			}
-			catch (Exception e) {
-				throw new RepositoryException(e);
-			}
-		}
-
-		putParameter(parameters, SessionParameter.REPOSITORY_ID, parameterKey);
-	}
-
 	protected void checkUpdatable(
 			Set<Action> allowableActionsSet, Map<String, Object> properties,
 			ContentStream contentStream)
@@ -1413,32 +1305,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		return foldersAndFileEntriesCache.get(folderId);
 	}
 
-	protected String getLogin() throws RepositoryException {
-		String login = PrincipalThreadLocal.getName();
-
-		try {
-			String authType = companyLocalService.getCompany(
-				getCompanyId()).getAuthType();
-
-			if (!authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-				User user = userLocalService.getUser(
-					GetterUtil.getLong(login));
-
-				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-					login = user.getEmailAddress();
-				}
-				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-					login = user.getScreenName();
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new RepositoryException(e);
-		}
-
-		return login;
-	}
-
 	protected String getObjectId(
 			Session session, long folderId, boolean fileEntry, String name)
 		throws SystemException {
@@ -1495,10 +1361,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	protected OperationContext getOperationContext() {
-		return _operationContext;
-	}
-
 	protected void getSubfolderIds(
 			List<Long> subfolderIds, List<Folder> subfolders, boolean recurse)
 		throws SystemException {
@@ -1525,29 +1387,13 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			String message = e.getMessage();
 
 			try {
-				message = "Unable to login with user " + getLogin();
+				message = "Unable to login with user " + _wrapper.getLogin();
 			}
 			catch (Exception e2) {
 			}
 
 			throw new PrincipalException(message, e);
 		}
-	}
-
-	protected void putParameter(
-			Map<String, String> parameters, String chemistryKey,
-			String typeSettingsKey)
-		throws PortalException {
-
-		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
-
-		String value = typeSettingsProperties.getProperty(typeSettingsKey);
-
-		if (Validator.isNull(value)) {
-			throw new InvalidRepositoryException();
-		}
-
-		parameters.put(chemistryKey, value);
 	}
 
 	protected void setCachedSession(Session session) {
@@ -1703,47 +1549,11 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		new AutoResetThreadLocal<Map<Long, List<Folder>>>(
 			CMISRepository.class + "._foldersCache",
 			new HashMap<Long, List<Folder>>());
-	private static OperationContext _operationContext;
 
 	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 
-	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 	private String _sessionKey;
 
-	static {
-		Set<String> defaultFilterSet = new HashSet<String>();
-
-		// Base
-
-		defaultFilterSet.add(PropertyIds.BASE_TYPE_ID);
-		defaultFilterSet.add(PropertyIds.CREATED_BY);
-		defaultFilterSet.add(PropertyIds.CREATION_DATE);
-		defaultFilterSet.add(PropertyIds.LAST_MODIFIED_BY);
-		defaultFilterSet.add(PropertyIds.LAST_MODIFICATION_DATE);
-		defaultFilterSet.add(PropertyIds.NAME);
-		defaultFilterSet.add(PropertyIds.OBJECT_ID);
-		defaultFilterSet.add(PropertyIds.OBJECT_TYPE_ID);
-
-		// Document
-
-		defaultFilterSet.add(PropertyIds.CONTENT_STREAM_LENGTH);
-		defaultFilterSet.add(PropertyIds.CONTENT_STREAM_MIME_TYPE);
-		defaultFilterSet.add(PropertyIds.IS_VERSION_SERIES_CHECKED_OUT);
-		defaultFilterSet.add(PropertyIds.VERSION_LABEL);
-		defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_BY);
-		defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_ID);
-		defaultFilterSet.add(PropertyIds.VERSION_SERIES_ID);
-
-		// Folder
-
-		defaultFilterSet.add(PropertyIds.PARENT_ID);
-		defaultFilterSet.add(PropertyIds.PATH);
-
-		// Operation context
-
-		_operationContext = new OperationContextImpl(
-			defaultFilterSet, false, true, false, IncludeRelationships.NONE,
-			null, false, "cmis:name ASC", true, 1000);
-	}
+	private CMISRepositoryWrapper _wrapper = null;
 
 }
