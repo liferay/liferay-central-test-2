@@ -204,6 +204,8 @@ public class IndexAccessorImplTest extends BaseTestCase {
 				assertEquals(0, topDocs.totalHits);
 			}
 		}
+
+		indexSearcher.close();
 	}
 
 	private void _deleteDocuments(String key) throws Exception {
