@@ -652,7 +652,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				if (privateGroupLayouts.isEmpty() && publicGroupLayouts.isEmpty()) {
 				%>
 
-					<liferay-ui:message key="there-are-no-pages-set-up-to-be-the-display-page" />
+					<liferay-ui:message key="there-are-no-pages-configured-to-be-the-display-page" />
 
 				<%
 				}
