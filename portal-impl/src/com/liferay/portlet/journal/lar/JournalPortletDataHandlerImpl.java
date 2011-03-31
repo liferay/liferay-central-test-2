@@ -1628,6 +1628,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				images, articleURL, serviceContext);
 		}
 
+		if (smallFile != null) {
+			smallFile.delete();
+		}
+
 		portletDataContext.importPermissions(
 			JournalArticle.class, article.getResourcePrimKey(),
 			importedArticle.getResourcePrimKey());
@@ -1654,10 +1658,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						"exists. The new generated ID is " +
 							importedArticle.getArticleId());
 			}
-		}
-
-		if (smallFile != null) {
-			smallFile.delete();
 		}
 	}
 
@@ -2225,6 +2225,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext);
 		}
 
+		if (smallFile != null) {
+			smallFile.delete();
+		}
+
 		Map<String, String> templateIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				JournalTemplate.class);
@@ -2242,10 +2246,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						"exists. The new generated ID is " +
 							existingTemplate.getTemplateId());
 			}
-		}
-
-		if (smallFile != null) {
-			smallFile.delete();
 		}
 	}
 
