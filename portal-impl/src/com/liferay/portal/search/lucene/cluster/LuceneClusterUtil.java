@@ -18,19 +18,19 @@ import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
+import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.auth.TransientTokenUtil;
-import com.liferay.portal.servlet.LuceneServlet;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.net.InetAddress;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -44,44 +44,40 @@ public class LuceneClusterUtil {
 
 	public static void loadIndexesFromCluster(long companyId)
 		throws SystemException {
-		ObjectValuePair<String, URL> bootupNodeInfo = _getBootupNodeInfo();
 
-		String token = bootupNodeInfo.getKey();
-		URL bootupURL = bootupNodeInfo.getValue();
-
-		InputStream is = null;
+		InputStream inputStream = null;
 
 		try {
-			URLConnection connection = bootupURL.openConnection();
+			ObjectValuePair<String, URL> bootupClusterNodeObjectValuePair =
+				_getBootupClusterNodeObjectValuePair();
 
-			connection.setDoOutput(true);
+			URL url = bootupClusterNodeObjectValuePair.getValue();
+
+			URLConnection urlConnection = url.openConnection();
+
+			urlConnection.setDoOutput(true);
 
 			UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
-				connection.getOutputStream());
+				urlConnection.getOutputStream());
 
-			unsyncPrintWriter.write(LuceneServlet.LUCENE_DUMP_INDEX_TOKEN);
-			unsyncPrintWriter.write(StringPool.EQUAL);
-			unsyncPrintWriter.write(token);
-
-			unsyncPrintWriter.write(StringPool.AMPERSAND);
-
-			unsyncPrintWriter.write(LuceneServlet.LUCENE_DUMP_INDEX_COMPANY_ID);
-			unsyncPrintWriter.write(StringPool.EQUAL);
+			unsyncPrintWriter.write("transientToken=");
+			unsyncPrintWriter.write(bootupClusterNodeObjectValuePair.getKey());
+			unsyncPrintWriter.write("&companyId=");
 			unsyncPrintWriter.write(String.valueOf(companyId));
 
 			unsyncPrintWriter.close();
 
-			is = connection.getInputStream();
+			inputStream = urlConnection.getInputStream();
 
-			LuceneHelperUtil.loadIndex(companyId, is);
+			LuceneHelperUtil.loadIndex(companyId, inputStream);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
 		finally {
-			if (is != null) {
+			if (inputStream != null) {
 				try {
-					is.close();
+					inputStream.close();
 				}
 				catch (IOException ioe) {
 					throw new SystemException(ioe);
@@ -90,37 +86,46 @@ public class LuceneClusterUtil {
 		}
 	}
 
-	private static ObjectValuePair<String, URL> _getBootupNodeInfo()
+	private static ObjectValuePair<String, URL>
+			_getBootupClusterNodeObjectValuePair()
 		throws SystemException {
+
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
-			new MethodHandler(_createTokenMethodKey, _TOKEN_KEEP_ALIVE_TIME),
+			new MethodHandler(
+				_createTokenMethodKey, _TRANSIENT_TOKEN_KEEP_ALIVE_TIME),
 			true);
 
+		FutureClusterResponses futureClusterResponses =
+			ClusterExecutorUtil.execute(clusterRequest);
+
 		BlockingQueue<ClusterNodeResponse> clusterNodeResponses =
-			ClusterExecutorUtil.execute(clusterRequest).getPartialResults();
+			futureClusterResponses.getPartialResults();
 
 		try {
 			ClusterNodeResponse clusterNodeResponse = clusterNodeResponses.poll(
-				_BOOTUP_NODE_RESPONSE_TIMEOUT, TimeUnit.MILLISECONDS);
+				_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT, TimeUnit.MILLISECONDS);
 
-			ClusterNode bootupNode = clusterNodeResponse.getClusterNode();
+			ClusterNode bootupClusterNode =
+				clusterNodeResponse.getClusterNode();
 
-			String token = (String)clusterNodeResponse.getResult();
+			String transientToken = (String)clusterNodeResponse.getResult();
 
-			URL dumpIndexURL = new URL("http",
-				bootupNode.getInetAddress().getHostAddress(),
-				bootupNode.getPort(), LuceneServlet.LUCENE_DUMP_INDEX_URL_PATH);
+			InetAddress inetAddress = bootupClusterNode.getInetAddress();
 
-			return new ObjectValuePair<String, URL>(token, dumpIndexURL);
+			URL url = new URL(
+				"http", inetAddress.getHostAddress(),
+				bootupClusterNode.getPort(), "/dump");
+
+			return new ObjectValuePair<String, URL>(transientToken, url);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
 
-	private static final long _BOOTUP_NODE_RESPONSE_TIMEOUT = 10000;
+	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
 
-	private static final long _TOKEN_KEEP_ALIVE_TIME = 10000;
+	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
 
 	private static MethodKey _createTokenMethodKey =
 		new MethodKey(TransientTokenUtil.class.getName(), "createToken",
