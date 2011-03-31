@@ -212,7 +212,7 @@ public class ATag extends IncludeTag {
 		String namespace = StringPool.BLANK;
 
 		boolean useNamespace = GetterUtil.getBoolean(
-			(String)request.getAttribute("aui:form:useNamespace"), true);
+			(Boolean)request.getAttribute("aui:form:useNamespace"), true);
 
 		if ((portletResponse != null) && useNamespace) {
 			namespace = portletResponse.getNamespace();
