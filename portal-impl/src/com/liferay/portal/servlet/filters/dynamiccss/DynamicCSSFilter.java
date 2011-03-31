@@ -62,10 +62,10 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		_servletContextName = GetterUtil.getString(
 			_servletContext.getServletContextName());
 
-		String basePath = WebDirDetector.getRootDir(
+		String rootDir = WebDirDetector.getRootDir(
 			PortalClassLoaderUtil.getClassLoader());
 
-		_rubyScriptFile = new File(basePath + "WEB-INF/sass/main.rb");
+		_rubyScriptFile = new File(rootDir + "WEB-INF/sass/main.rb");
 
 		try {
 
