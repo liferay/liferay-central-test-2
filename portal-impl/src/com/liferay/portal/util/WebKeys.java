@@ -72,6 +72,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CONFIGURATION_ACTION_PATH = "CONFIGURATION_ACTION_PATH";
 
+	public static final String DEVICE = "DEVICE";
+
 	public static final String DIFF_HTML_RESULTS = "DIFF_HTML_RESULTS";
 
 	public static final String DIFF_RESULTS = "DIFF_RESULTS";

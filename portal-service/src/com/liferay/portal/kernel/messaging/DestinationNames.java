@@ -36,6 +36,8 @@ public interface DestinationNames {
 
 	public static final String CONVERT_PROCESS = "liferay/convert_process";
 
+	public static final String DEVICE_RECOGNITION_PROVIDER = "liferay/device_recognition_provider";
+
 	public static final String DOCUMENT_LIBRARY_HOOK =
 		"liferay/document_library_hook";
 
@@ -108,18 +110,12 @@ public interface DestinationNames {
 
 	public static final String SCHEDULER_ENGINE = "liferay/scheduler_engine";
 
-	public static final String SCHEDULER_ENGINE_RESPONSE =
-		"liferay/scheduler_engine/response";
-
 	public static final String SCHEDULER_SCRIPTING =
 		"liferay/scheduler_scripting";
 
 	public static final String SCRIPTING = "liferay/scripting";
 
 	public static final String SEARCH_READER = "liferay/search_reader";
-
-	public static final String SEARCH_READER_RESPONSE =
-		"liferay/search_reader/response";
 
 	public static final String SEARCH_WRITER = "liferay/search_writer";
 

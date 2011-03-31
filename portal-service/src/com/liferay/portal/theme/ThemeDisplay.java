@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.mobile.device.Device;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -114,6 +115,10 @@ public class ThemeDisplay implements Serializable {
 
 	public long getDefaultUserId() throws PortalException, SystemException {
 		return getDefaultUser().getUserId();
+	}
+
+	public Device getDevice() {
+		return _device;
 	}
 
 	public long getDoAsGroupId() {
@@ -681,6 +686,10 @@ public class ThemeDisplay implements Serializable {
 		_contact = contact;
 	}
 
+	public void setDevice(Device device) {
+		_device = device;
+	}
+
 	public void setDoAsGroupId(long doAsGroupId) {
 		_doAsGroupId = doAsGroupId;
 	}
@@ -1172,6 +1181,7 @@ public class ThemeDisplay implements Serializable {
 	private int _companyLogoWidth;
 	private Contact _contact;
 	private User _defaultUser;
+	private Device _device;
 	private long _doAsGroupId = 0;
 	private String _doAsUserId = StringPool.BLANK;
 	private String _doAsUserLanguageId = StringPool.BLANK;

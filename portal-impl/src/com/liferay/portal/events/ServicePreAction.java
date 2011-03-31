@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.mobile.device.Device;
+import com.liferay.portal.kernel.mobile.device.DeviceDetectionUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
@@ -1134,6 +1136,15 @@ public class ServicePreAction extends Action {
 			timeZone = company.getTimeZone();
 		}
 
+		// Device Detection
+		Device device = (Device)session.getAttribute(WebKeys.DEVICE);
+
+		if (device == null) {
+			device = DeviceDetectionUtil.detectDevice(request);
+
+			session.setAttribute(WebKeys.DEVICE, device);
+		}
+
 		// Layouts
 
 		if (signedIn) {
@@ -1487,6 +1498,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPortalURL(portalURL);
 		themeDisplay.setFacebookCanvasPageURL(facebookCanvasPageURL);
 		themeDisplay.setWidget(widget);
+		themeDisplay.setDevice(device);
 
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);
