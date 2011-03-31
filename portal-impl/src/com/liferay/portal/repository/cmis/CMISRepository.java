@@ -927,6 +927,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			document.refresh();
 
+			String oldTitle = document.getName();
+
 			AllowableActions allowableActions = document.getAllowableActions();
 
 			Set<Action> allowableActionsSet =
@@ -939,8 +941,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 			}
 
 			document = document.getObjectOfLatestVersion(false);
-
-			String oldTitle = document.getName();
 
 			Map<String, Object> properties = null;
 
