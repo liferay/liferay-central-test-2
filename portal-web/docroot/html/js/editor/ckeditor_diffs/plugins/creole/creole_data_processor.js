@@ -46,13 +46,16 @@
 					}
 				);
 
-				editor.on('paste', function(evt) {
-					var data = evt.data.html;
+				editor.on(
+					'paste',
+					function(e) {
+						var data = e.data.html;
 
-					data = CKEDITOR.htmlDataProcessor.prototype.toDataFormat(data);
+						data = CKEDITOR.htmlDataProcessor.prototype.toDataFormat(data);
 
-					evt.data.html = data;
-				}, editor.element.$);
+						e.data.html = data;
+					},
+					editor.element.$);
 
 				editor.fire('customDataProcessorLoaded');
 			}
