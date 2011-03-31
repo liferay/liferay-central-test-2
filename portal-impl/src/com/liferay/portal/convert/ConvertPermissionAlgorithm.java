@@ -505,6 +505,11 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 					Role defaultRole = null;
 
 					if (type == RoleConstants.TYPE_REGULAR) {
+						if (defaultActions instanceof UnmodifiableList) {
+							defaultActions = new ArrayList<String>(
+								defaultActions);
+						}
+
 						Collections.sort(actionsIds);
 						Collections.sort(defaultActions);
 
