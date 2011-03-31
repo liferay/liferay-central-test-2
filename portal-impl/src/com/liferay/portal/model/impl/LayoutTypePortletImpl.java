@@ -439,9 +439,11 @@ public class LayoutTypePortletImpl
 	}
 
 	public LayoutTemplate getLayoutTemplate() {
+		String themeId = getThemeId();
+
 		LayoutTemplate layoutTemplate =
 			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
-				getLayoutTemplateId(), false, null);
+				getLayoutTemplateId(), false, themeId);
 
 		if (layoutTemplate == null) {
 			layoutTemplate = new LayoutTemplateImpl(
@@ -596,6 +598,28 @@ public class LayoutTypePortletImpl
 	public String getStateMin() {
 		return getTypeSettingsProperties().getProperty(
 			LayoutTypePortletConstants.STATE_MIN);
+	}
+
+	public String getThemeId() {
+		String themeId = null;
+
+		try {
+			Layout layout = getLayout();
+
+			Theme theme = layout.getTheme();
+
+			if (theme != null) {
+				themeId = theme.getThemeId();
+			}
+			else {
+				themeId = layout.getThemeId();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return themeId;
 	}
 
 	public boolean hasDefaultScopePortletId(long groupId, String portletId)
@@ -1148,23 +1172,7 @@ public class LayoutTypePortletImpl
 		getTypeSettingsProperties().setProperty(
 			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
 
-		String themeId = null;
-
-		try {
-			Layout layout = getLayout();
-
-			Theme theme = layout.getTheme();
-
-			if (theme != null) {
-				themeId = theme.getThemeId();
-			}
-			else {
-				themeId = layout.getThemeId();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		String themeId = getThemeId();
 
 		LayoutTemplate oldLayoutTemplate =
 			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
