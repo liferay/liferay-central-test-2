@@ -43,8 +43,6 @@
 		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.ClusterSchedulerEngineService" />
 	</bean>
 
-	<bean id="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" />
-
 	<!-- Messaging -->
 
 	<bean id="destination.scheduler_dispatch" class="com.liferay.portal.kernel.messaging.ParallelDestination">
@@ -57,7 +55,9 @@
 		<property name="name" value="liferay/scheduler_scripting" />
 	</bean>
 	<bean id="messageListener.scheduler_engine" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
-		<property name="manager" ref="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" />
+		<property name="manager">
+			<bean class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" />
+		</property>
 	</bean>
 	<bean id="messageListener.scheduler_scripting" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
 		<property name="className" value="com.liferay.portal.scheduler.messaging.ScriptingMessageListener" />
