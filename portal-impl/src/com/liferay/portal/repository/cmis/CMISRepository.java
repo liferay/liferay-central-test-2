@@ -720,7 +720,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 				cmisFolder =
 					(org.apache.chemistry.opencmis.client.api.Folder)
 						cmisFolder.move(
-							new ObjectIdImpl(sourceFolderId), 
+							new ObjectIdImpl(sourceFolderId),
 							new ObjectIdImpl(targetFolderId));
 			}
 

@@ -42,7 +42,6 @@ public class CMISWebServicesRepository extends CMISRepositoryHandler {
 
 		parameters.put(
 			SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
-
 		parameters.put(SessionParameter.COMPRESSION, Boolean.TRUE.toString());
 
 		Locale locale = LocaleUtil.getDefault();
