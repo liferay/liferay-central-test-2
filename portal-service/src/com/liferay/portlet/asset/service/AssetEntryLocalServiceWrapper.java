@@ -378,14 +378,22 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long[] groupIds, java.lang.String portletId, java.lang.String userName,
-		java.lang.String title, java.lang.String description,
-		java.lang.String assetCategoryIds, java.lang.String assetTagNames,
-		boolean andSearch, int start, int end)
+		long[] groupIds, long userId, java.lang.String portletId,
+		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetEntryLocalService.search(companyId, groupIds, portletId,
-			userName, title, description, assetCategoryIds, assetTagNames,
-			andSearch, start, end);
+		return _assetEntryLocalService.search(companyId, groupIds, userId,
+			portletId, keywords, start, end);
+	}
+
+	public com.liferay.portal.kernel.search.Hits search(long companyId,
+		long[] groupIds, long userId, java.lang.String portletId,
+		java.lang.String userName, java.lang.String title,
+		java.lang.String description, java.lang.String assetCategoryIds,
+		java.lang.String assetTagNames, boolean andSearch, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.search(companyId, groupIds, userId,
+			portletId, userName, title, description, assetCategoryIds,
+			assetTagNames, andSearch, start, end);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
