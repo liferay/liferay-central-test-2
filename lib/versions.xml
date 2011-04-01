@@ -1191,56 +1191,56 @@
 	</library>
 	<library>
 		<file-name>portal/chemistry-opencmis-client-api.jar</file-name>
-		<version>0.2</version>
+		<version>0.3</version>
 		<project-name>OpenCMIS</project-name>
-		<project-url>http://incubator.apache.org/chemistry/opencmis.html</project-url>
+		<project-url>http://chemistry.apache.org/java/opencmis.html</project-url>
 		<licenses>
 			<license>
-				<license-name> Apache License 2.0 </license-name>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/chemistry-opencmis-client-bindings.jar</file-name>
-		<version>0.2</version>
+		<version>0.3</version>
 		<project-name>OpenCMIS</project-name>
-		<project-url>http://incubator.apache.org/chemistry/opencmis.html</project-url>
+		<project-url>http://chemistry.apache.org/java/opencmis.html</project-url>
 		<licenses>
 			<license>
-				<license-name> Apache License 2.0 </license-name>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/chemistry-opencmis-client-impl.jar</file-name>
-		<version>0.2</version>
+		<version>0.3</version>
 		<project-name>OpenCMIS</project-name>
-		<project-url>http://incubator.apache.org/chemistry/opencmis.html</project-url>
+		<project-url>http://chemistry.apache.org/java/opencmis.html</project-url>
 		<licenses>
 			<license>
-				<license-name> Apache License 2.0 </license-name>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/chemistry-opencmis-commons-api.jar</file-name>
-		<version>0.2</version>
+		<version>0.3</version>
 		<project-name>OpenCMIS</project-name>
-		<project-url>http://incubator.apache.org/chemistry/opencmis.html</project-url>
+		<project-url>http://chemistry.apache.org/java/opencmis.html</project-url>
 		<licenses>
 			<license>
-				<license-name> Apache License 2.0 </license-name>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>portal/chemistry-opencmis-commons-impl.jar </file-name>
-		<version>0.2</version>
+		<version>0.3</version>
 		<project-name>OpenCMIS</project-name>
-		<project-url>http://incubator.apache.org/chemistry/opencmis.html</project-url>
+		<project-url>http://chemistry.apache.org/java/opencmis.html</project-url>
 		<licenses>
 			<license>
-				<license-name> Apache License 2.0 </license-name>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>

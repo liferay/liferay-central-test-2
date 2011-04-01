@@ -188,14 +188,14 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
-			ObjectId destFolderObjectId = toFolderId(session, destFolderId);
+			String versionSeriesId = toFileEntryId(fileEntryId);
+			String destFolderObjectId = toFolderId(session, destFolderId);
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
 			validateTitle(session, destFolderId, document.getName());
 
-			document.copy(destFolderObjectId);
+			document.copy(new ObjectIdImpl(destFolderObjectId));
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -216,7 +216,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId objectId = toFileEntryId(fileEntryId);
+			String objectId = toFileEntryId(fileEntryId);
 
 			Document document = (Document)session.getObject(objectId);
 
@@ -327,8 +327,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			String objectId = getObjectId(session, folderId, true, title);
 
 			if (objectId != null) {
-				CmisObject cmisObject = session.getObject(
-					new ObjectIdImpl(objectId));
+				CmisObject cmisObject = session.getObject(objectId);
 
 				Document document = (Document)cmisObject;
 
@@ -358,7 +357,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			RepositoryEntry repositoryEntry = RepositoryEntryUtil.findByUUID_G(
 				uuid, getGroupId());
 
-			ObjectId objectId = new ObjectIdImpl(repositoryEntry.getMappedId());
+			String objectId = repositoryEntry.getMappedId();
 
 			return toFileEntry((Document)session.getObject(objectId));
 		}
@@ -427,8 +426,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 				session, parentFolderId, false, title);
 
 			if (objectId != null) {
-				CmisObject cmisObject = session.getObject(
-					new ObjectIdImpl(objectId));
+				CmisObject cmisObject = session.getObject(objectId);
 
 				return toFolder(
 					(org.apache.chemistry.opencmis.client.api.Folder)
@@ -606,7 +604,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+			String versionSeriesId = toFileEntryId(fileEntryId);
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
@@ -646,8 +644,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
-			ObjectId newFolderObjectId = toFolderId(session, newFolderId);
+			String versionSeriesId = toFileEntryId(fileEntryId);
+			String newFolderObjectId = toFolderId(session, newFolderId);
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
@@ -655,17 +653,17 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			String oldFolderObjectId = document.getParents().get(0).getId();
 
-			if (oldFolderObjectId.equals(newFolderObjectId.toString())) {
+			if (oldFolderObjectId.equals(newFolderObjectId)) {
 				return toFileEntry(document);
 			}
 
 			document = (Document)document.move(
-				new ObjectIdImpl(oldFolderObjectId), newFolderObjectId);
+				new ObjectIdImpl(oldFolderObjectId), 
+				new ObjectIdImpl(newFolderObjectId));
 
-			ObjectId newObjectId = new ObjectIdImpl(
-				document.getVersionSeriesId());
+			String newObjectId = document.getVersionSeriesId();
 
-			if (!versionSeriesId.toString().equals(newObjectId.toString())) {
+			if (!versionSeriesId.equals(newObjectId)) {
 				document = (Document)session.getObject(newObjectId);
 
 				updateMappedId(fileEntryId, document.getVersionSeriesId());
@@ -697,7 +695,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId objectId = toFolderId(session, folderId);
+			String objectId = toFolderId(session, folderId);
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				(org.apache.chemistry.opencmis.client.api.Folder)
@@ -713,17 +711,18 @@ public class CMISRepository extends BaseRepositoryImpl {
 					"Cannot move CMIS root folder " + folderId);
 			}
 
-			ObjectId sourceFolderId = new ObjectIdImpl(
-				parentCmisFolder.getId());
+			String sourceFolderId = parentCmisFolder.getId();
 
-			ObjectId targetFolderId = toFolderId(session, parentFolderId);
+			String targetFolderId = toFolderId(session, parentFolderId);
 
-			if (!sourceFolderId.getId().equals(targetFolderId.getId()) &&
-				!targetFolderId.getId().equals(objectId.getId())) {
+			if (!sourceFolderId.equals(targetFolderId) &&
+				!targetFolderId.equals(objectId)) {
 
 				cmisFolder =
 					(org.apache.chemistry.opencmis.client.api.Folder)
-						cmisFolder.move(sourceFolderId, targetFolderId);
+						cmisFolder.move(
+							new ObjectIdImpl(sourceFolderId), 
+							new ObjectIdImpl(targetFolderId));
 			}
 
 			return toFolder(cmisFolder);
@@ -760,7 +759,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+			String versionSeriesId = toFileEntryId(fileEntryId);
 
 			document = (Document)session.getObject(versionSeriesId);
 
@@ -881,7 +880,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+			String versionSeriesId = toFileEntryId(fileEntryId);
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
@@ -921,7 +920,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+			String versionSeriesId = toFileEntryId(fileEntryId);
 
 			document = (Document)session.getObject(versionSeriesId);
 
@@ -1012,7 +1011,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			ObjectId objectId = toFolderId(session, folderId);
+			String objectId = toFolderId(session, folderId);
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				(org.apache.chemistry.opencmis.client.api.Folder)
@@ -1026,15 +1025,15 @@ public class CMISRepository extends BaseRepositoryImpl {
 				properties.put(PropertyIds.NAME, title);
 			}
 
-			ObjectId newObjectId = cmisFolder.updateProperties(
-				properties, true);
+			String newObjectId = cmisFolder.updateProperties(
+				properties, true).getId();
 
-			if (!objectId.toString().equals(newObjectId.toString())) {
+			if (!objectId.equals(newObjectId)) {
 				cmisFolder =
 					(org.apache.chemistry.opencmis.client.api.Folder)
 						session.getObject(newObjectId);
 
-				updateMappedId(folderId, newObjectId.toString());
+				updateMappedId(folderId, newObjectId);
 			}
 
 			return toFolder(cmisFolder);
@@ -1261,7 +1260,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 	protected FileEntry getFileEntry(Session session, long fileEntryId)
 		throws PortalException, SystemException {
 
-		ObjectId objectId = toFileEntryId(fileEntryId);
+		String objectId = toFileEntryId(fileEntryId);
 
 		Document document = (Document)session.getObject(objectId);
 
@@ -1271,7 +1270,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 	protected FileVersion getFileVersion(Session session, long fileVersionId)
 		throws PortalException, SystemException {
 
-		ObjectId objectId = toFileVersionId(fileVersionId);
+		String objectId = toFileVersionId(fileVersionId);
 
 		return toFileVersion((Document)session.getObject(objectId));
 	}
@@ -1279,7 +1278,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 	protected Folder getFolder(Session session, long folderId)
 		throws PortalException, SystemException {
 
-		ObjectId objectId = toFolderId(session, folderId);
+		String objectId = toFolderId(session, folderId);
 
 		CmisObject cmisObject = session.getObject(objectId);
 
@@ -1310,7 +1309,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		throws SystemException {
 
 		try {
-			ObjectId objectId = toFolderId(session, folderId);
+			String objectId = toFolderId(session, folderId);
 
 			StringBundler sb = new StringBundler(7);
 
@@ -1326,7 +1325,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			sb.append("WHERE cmis:name = '");
 			sb.append(name);
 			sb.append("' AND IN_FOLDER('");
-			sb.append(objectId.getId());
+			sb.append(objectId);
 			sb.append("')");
 
 			String query = sb.toString();
@@ -1413,7 +1412,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			_sessionKey, new TransientValue<Session>(session));
 	}
 
-	protected ObjectId toFileEntryId(long fileEntryId)
+	protected String toFileEntryId(long fileEntryId)
 		throws PortalException, SystemException {
 
 		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByPrimaryKey(
@@ -1424,10 +1423,10 @@ public class CMISRepository extends BaseRepositoryImpl {
 				"No CMIS file entry with {fileEntryId=" + fileEntryId + "}");
 		}
 
-		return new ObjectIdImpl(repositoryEntry.getMappedId());
+		return repositoryEntry.getMappedId();
 	}
 
-	protected ObjectId toFileVersionId(long fileVersionId)
+	protected String toFileVersionId(long fileVersionId)
 		throws PortalException, SystemException {
 
 		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByPrimaryKey(
@@ -1439,10 +1438,10 @@ public class CMISRepository extends BaseRepositoryImpl {
 					"}");
 		}
 
-		return new ObjectIdImpl(repositoryEntry.getMappedId());
+		return repositoryEntry.getMappedId();
 	}
 
-	protected ObjectId toFolderId(Session session, long folderId)
+	protected String toFolderId(Session session, long folderId)
 		throws PortalException, SystemException {
 
 		RepositoryEntry repositoryEntry =
@@ -1479,7 +1478,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			}
 		}
 
-		return new ObjectIdImpl(repositoryEntry.getMappedId());
+		return repositoryEntry.getMappedId();
 	}
 
 	protected Object toFolderOrFileEntry(CmisObject cmisObject)
