@@ -149,7 +149,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<c:if test="<%= showContextLink && !print && assetEntry.isVisible() %>">
 				<div class="asset-more">
-					<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
+					<a href="<%= assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContent) %>"><liferay-ui:message key="<%= assetRenderer.getViewInContextMessage() %>" /> &raquo;</a>
 				</div>
 			</c:if>
 
