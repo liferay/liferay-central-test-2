@@ -54,10 +54,10 @@ public class DDMStructureLinkServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		long classNameId, long classPK, long structureId)
+		long structureLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureLink(classNameId, classPK, structureId);
+		return getService().getStructureLink(structureLinkId);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink updateStructureLink(

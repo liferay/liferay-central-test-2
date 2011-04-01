@@ -38,15 +38,17 @@ public class DDMStructureServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure addStructure(
-		long groupId, java.lang.String structureKey, boolean autoStructureKey,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.String storageType,
+		long groupId, long classNameId, java.lang.String structureKey,
+		boolean autoStructureKey, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addStructure(groupId, structureKey, autoStructureKey, name,
-			description, xsd, storageType, serviceContext);
+				   .addStructure(groupId, classNameId, structureKey,
+			autoStructureKey, name, description, xsd, storageType,
+			serviceContext);
 	}
 
 	public static void deleteStructure(long groupId,

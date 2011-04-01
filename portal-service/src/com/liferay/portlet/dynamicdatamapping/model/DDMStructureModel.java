@@ -190,6 +190,27 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the class name of the model instance this d d m structure is polymorphically associated with.
+	 *
+	 * @return the class name of the model instance this d d m structure is polymorphically associated with
+	 */
+	public String getClassName();
+
+	/**
+	 * Gets the class name ID of this d d m structure.
+	 *
+	 * @return the class name ID of this d d m structure
+	 */
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this d d m structure.
+	 *
+	 * @param classNameId the class name ID of this d d m structure
+	 */
+	public void setClassNameId(long classNameId);
+
+	/**
 	 * Gets the structure key of this d d m structure.
 	 *
 	 * @return the structure key of this d d m structure

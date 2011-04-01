@@ -420,6 +420,7 @@ create table DDMList (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	listKey VARCHAR(75) null,
 	name STRING null,
 	description STRING null,
 	structureId LONG
@@ -442,6 +443,7 @@ create table DDMStructure (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
 	structureKey VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,

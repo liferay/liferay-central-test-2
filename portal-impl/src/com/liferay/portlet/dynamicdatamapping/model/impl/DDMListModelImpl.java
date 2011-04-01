@@ -76,11 +76,12 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "listKey", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "structureId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDMList (uuid_ VARCHAR(75) null,listId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,structureId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DDMList (uuid_ VARCHAR(75) null,listId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,listKey VARCHAR(75) null,name STRING null,description STRING null,structureId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DDMList";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -109,6 +110,7 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setListKey(soapModel.getListKey());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setStructureId(soapModel.getStructureId());
@@ -258,6 +260,27 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getListKey() {
+		if (_listKey == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _listKey;
+		}
+	}
+
+	public void setListKey(String listKey) {
+		if (_originalListKey == null) {
+			_originalListKey = _listKey;
+		}
+
+		_listKey = listKey;
+	}
+
+	public String getOriginalListKey() {
+		return GetterUtil.getString(_originalListKey);
+	}
+
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -401,6 +424,7 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 		ddmListImpl.setUserName(getUserName());
 		ddmListImpl.setCreateDate(getCreateDate());
 		ddmListImpl.setModifiedDate(getModifiedDate());
+		ddmListImpl.setListKey(getListKey());
 		ddmListImpl.setName(getName());
 		ddmListImpl.setDescription(getDescription());
 		ddmListImpl.setStructureId(getStructureId());
@@ -460,10 +484,12 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 		ddmListModelImpl._originalGroupId = ddmListModelImpl._groupId;
 
 		ddmListModelImpl._setOriginalGroupId = false;
+
+		ddmListModelImpl._originalListKey = ddmListModelImpl._listKey;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -481,6 +507,8 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", listKey=");
+		sb.append(getListKey());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
@@ -493,7 +521,7 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatamapping.model.DDMList");
@@ -532,6 +560,10 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>listKey</column-name><column-value><![CDATA[");
+		sb.append(getListKey());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -561,6 +593,8 @@ public class DDMListModelImpl extends BaseModelImpl<DDMList>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private String _listKey;
+	private String _originalListKey;
 	private String _name;
 	private String _description;
 	private long _structureId;

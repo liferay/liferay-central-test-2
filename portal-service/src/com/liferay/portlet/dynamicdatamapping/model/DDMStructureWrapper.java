@@ -219,6 +219,33 @@ public class DDMStructureWrapper implements DDMStructure {
 	}
 
 	/**
+	* Gets the class name of the model instance this d d m structure is polymorphically associated with.
+	*
+	* @return the class name of the model instance this d d m structure is polymorphically associated with
+	*/
+	public java.lang.String getClassName() {
+		return _ddmStructure.getClassName();
+	}
+
+	/**
+	* Gets the class name ID of this d d m structure.
+	*
+	* @return the class name ID of this d d m structure
+	*/
+	public long getClassNameId() {
+		return _ddmStructure.getClassNameId();
+	}
+
+	/**
+	* Sets the class name ID of this d d m structure.
+	*
+	* @param classNameId the class name ID of this d d m structure
+	*/
+	public void setClassNameId(long classNameId) {
+		_ddmStructure.setClassNameId(classNameId);
+	}
+
+	/**
 	* Gets the structure key of this d d m structure.
 	*
 	* @return the structure key of this d d m structure

@@ -76,6 +76,7 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		newDDMStructure.setUserName(randomString());
 		newDDMStructure.setCreateDate(nextDate());
 		newDDMStructure.setModifiedDate(nextDate());
+		newDDMStructure.setClassNameId(nextLong());
 		newDDMStructure.setStructureKey(randomString());
 		newDDMStructure.setName(randomString());
 		newDDMStructure.setDescription(randomString());
@@ -103,6 +104,8 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDDMStructure.getModifiedDate()),
 			Time.getShortTimestamp(newDDMStructure.getModifiedDate()));
+		assertEquals(existingDDMStructure.getClassNameId(),
+			newDDMStructure.getClassNameId());
 		assertEquals(existingDDMStructure.getStructureKey(),
 			newDDMStructure.getStructureKey());
 		assertEquals(existingDDMStructure.getName(), newDDMStructure.getName());
@@ -251,6 +254,7 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		ddmStructure.setUserName(randomString());
 		ddmStructure.setCreateDate(nextDate());
 		ddmStructure.setModifiedDate(nextDate());
+		ddmStructure.setClassNameId(nextLong());
 		ddmStructure.setStructureKey(randomString());
 		ddmStructure.setName(randomString());
 		ddmStructure.setDescription(randomString());

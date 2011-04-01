@@ -256,6 +256,7 @@
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLinkLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLinkServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceImpl" parent="basePersistence" />

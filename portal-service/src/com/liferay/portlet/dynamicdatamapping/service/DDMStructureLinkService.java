@@ -53,7 +53,7 @@ public interface DDMStructureLinkService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		long classNameId, long classPK, long structureId)
+		long structureLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

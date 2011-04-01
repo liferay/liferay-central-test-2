@@ -58,6 +58,7 @@ public class DDMListJSONSerializer {
 		}
 
 		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("listKey", model.getListKey());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
 		jsonObject.put("structureId", model.getStructureId());

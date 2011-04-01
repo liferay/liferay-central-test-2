@@ -157,17 +157,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	}
 
 	public void setClassNameId(long classNameId) {
-		if (!_setOriginalClassNameId) {
-			_setOriginalClassNameId = true;
-
-			_originalClassNameId = _classNameId;
-		}
-
 		_classNameId = classNameId;
-	}
-
-	public long getOriginalClassNameId() {
-		return _originalClassNameId;
 	}
 
 	public long getClassPK() {
@@ -193,17 +183,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	}
 
 	public void setStructureId(long structureId) {
-		if (!_setOriginalStructureId) {
-			_setOriginalStructureId = true;
-
-			_originalStructureId = _structureId;
-		}
-
 		_structureId = structureId;
-	}
-
-	public long getOriginalStructureId() {
-		return _originalStructureId;
 	}
 
 	public DDMStructureLink toEscapedModel() {
@@ -288,17 +268,9 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	public void resetOriginalValues() {
 		DDMStructureLinkModelImpl ddmStructureLinkModelImpl = this;
 
-		ddmStructureLinkModelImpl._originalClassNameId = ddmStructureLinkModelImpl._classNameId;
-
-		ddmStructureLinkModelImpl._setOriginalClassNameId = false;
-
 		ddmStructureLinkModelImpl._originalClassPK = ddmStructureLinkModelImpl._classPK;
 
 		ddmStructureLinkModelImpl._setOriginalClassPK = false;
-
-		ddmStructureLinkModelImpl._originalStructureId = ddmStructureLinkModelImpl._structureId;
-
-		ddmStructureLinkModelImpl._setOriginalStructureId = false;
 	}
 
 	public String toString() {
@@ -349,13 +321,9 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 	private long _structureLinkId;
 	private long _classNameId;
-	private long _originalClassNameId;
-	private boolean _setOriginalClassNameId;
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private long _structureId;
-	private long _originalStructureId;
-	private boolean _setOriginalStructureId;
 	private transient ExpandoBridge _expandoBridge;
 }

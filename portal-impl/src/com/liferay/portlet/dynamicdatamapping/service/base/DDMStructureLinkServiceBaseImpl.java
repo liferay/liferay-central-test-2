@@ -42,6 +42,7 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
 
@@ -250,6 +251,24 @@ public abstract class DDMStructureLinkServiceBaseImpl extends PrincipalBean
 	public void setDDMStructurePersistence(
 		DDMStructurePersistence ddmStructurePersistence) {
 		this.ddmStructurePersistence = ddmStructurePersistence;
+	}
+
+	/**
+	 * Gets the d d m structure finder.
+	 *
+	 * @return the d d m structure finder
+	 */
+	public DDMStructureFinder getDDMStructureFinder() {
+		return ddmStructureFinder;
+	}
+
+	/**
+	 * Sets the d d m structure finder.
+	 *
+	 * @param ddmStructureFinder the d d m structure finder
+	 */
+	public void setDDMStructureFinder(DDMStructureFinder ddmStructureFinder) {
+		this.ddmStructureFinder = ddmStructureFinder;
 	}
 
 	/**
@@ -529,6 +548,8 @@ public abstract class DDMStructureLinkServiceBaseImpl extends PrincipalBean
 	protected DDMStructureService ddmStructureService;
 	@BeanReference(type = DDMStructurePersistence.class)
 	protected DDMStructurePersistence ddmStructurePersistence;
+	@BeanReference(type = DDMStructureFinder.class)
+	protected DDMStructureFinder ddmStructureFinder;
 	@BeanReference(type = DDMStructureLinkLocalService.class)
 	protected DDMStructureLinkLocalService ddmStructureLinkLocalService;
 	@BeanReference(type = DDMStructureLinkService.class)
