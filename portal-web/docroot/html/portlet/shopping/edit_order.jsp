@@ -597,7 +597,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 <aui:script>
 	function <portlet:namespace />deleteOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escape(redirect) %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escapeURL(redirect) %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 

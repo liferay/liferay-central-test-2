@@ -57,7 +57,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 			<aui:button type="submit" />
 
 			<%
-			String taglibOnClick = "parent.location = '" + HtmlUtil.escape(redirect) + "';";
+			String taglibOnClick = "parent.location = '" + HtmlUtil.escapeURL(redirect) + "';";
 			%>
 
 			<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
