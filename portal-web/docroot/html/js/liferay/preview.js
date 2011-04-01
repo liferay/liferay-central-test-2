@@ -373,6 +373,9 @@ AUI().add(
 						if (isNaN(value)) {
 							value = A.Attribute.INVALID_VALUE;
 						}
+						else {
+							value = Math.min(Math.max(value, 0), instance.get('maxIndex') - 1);
+						}
 
 						return value;
 					},
@@ -383,7 +386,6 @@ AUI().add(
 						var currentIndex = instance.get('currentIndex');
 
 						currentIndex += increment;
-						currentIndex = Math.min(Math.max(currentIndex, 0), instance.get('maxIndex'));
 
 						instance.set('currentIndex', currentIndex);
 					},
