@@ -108,8 +108,10 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _fileEntryId;
 	}
 
-	public FileVersion getFileVersion() {
-		return new CMISFileVersion(_cmisRepository, _fileEntryId, _document);
+	public FileVersion getFileVersion()
+		throws PortalException, SystemException {
+
+		return getLatestFileVersion();
 	}
 
 	public FileVersion getFileVersion(String version)
@@ -192,8 +194,12 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public FileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return CMISRepositoryLocalServiceUtil.toFileVersion(
-			getRepositoryId(), _document.getObjectOfLatestVersion(false));
+		if (_latestFileVersion == null) {
+			_latestFileVersion = CMISRepositoryLocalServiceUtil.toFileVersion(
+				getRepositoryId(), _document.getObjectOfLatestVersion(false));
+		}
+
+		return _latestFileVersion;
 	}
 
 	public Lock getLock() {
@@ -377,6 +383,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	private CMISRepository _cmisRepository;
 	private Document _document;
 	private long _fileEntryId;
+	private FileVersion _latestFileVersion;
 	private String _uuid;
 
 }

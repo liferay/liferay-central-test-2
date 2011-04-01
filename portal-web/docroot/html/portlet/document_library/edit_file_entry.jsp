@@ -108,7 +108,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	title='<%= (fileEntry != null) ? fileEntry.getTitle() : "new-document" %>'
+	title='<%= (fileVersion != null) ? fileVersion.getTitle() : "new-document" %>'
 />
 
 <c:if test="<%= fileEntry == null %>">

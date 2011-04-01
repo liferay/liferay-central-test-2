@@ -71,6 +71,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.ItemIterable;
+import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.apache.chemistry.opencmis.client.api.QueryResult;
 import org.apache.chemistry.opencmis.client.api.Session;
 import org.apache.chemistry.opencmis.client.runtime.ObjectIdImpl;
@@ -302,7 +303,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			return getFileEntry(session, fileEntryId);
+			String objectId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(objectId);
+
+			return toFileEntry(document);
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -751,18 +756,12 @@ public class CMISRepository extends BaseRepositoryImpl {
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Document document = null;
-
-		boolean checkedOut = false;
-
 		try {
 			Session session = getSession();
 
 			String versionSeriesId = toFileEntryId(fileEntryId);
 
-			document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
+			Document document = (Document)session.getObject(versionSeriesId);
 
 			Document oldVersion = null;
 
@@ -786,47 +785,13 @@ public class CMISRepository extends BaseRepositoryImpl {
 			String title = oldVersion.getName();
 			ContentStream contentStream = oldVersion.getContentStream();
 
-			AllowableActions allowableActions = document.getAllowableActions();
+			serviceContext.setAttribute(
+				"contentType", oldVersion.getContentStreamMimeType());
 
-			Set<Action> allowableActionsSet =
-				allowableActions.getAllowableActions();
-
-			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
-				document.checkOut();
-
-				checkedOut = true;
-			}
-
-			document = document.getObjectOfLatestVersion(false);
-
-			String oldTitle = document.getName();
-
-			Map<String, Object> properties = null;
-
-			if (Validator.isNotNull(title) && !title.equals(oldTitle)) {
-				properties = new HashMap<String, Object>();
-
-				properties.put(PropertyIds.NAME, title);
-			}
-
-			checkUpdatable(allowableActionsSet, properties, contentStream);
-
-			if (checkedOut) {
-				document.checkIn(true, properties, contentStream, changeLog);
-
-				checkedOut = false;
-			}
-			else {
-				if (properties != null) {
-					document = (Document)document.updateProperties(properties);
-				}
-
-				document.setContentStream(contentStream, true);
-			}
-
-			document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
+			updateFileEntry(
+				fileEntryId, contentStream.getFileName(), title,
+				StringPool.BLANK, changeLog, true, contentStream.getStream(),
+				contentStream.getLength(), serviceContext);
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -838,11 +803,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 			processException(e);
 
 			throw new RepositoryException(e);
-		}
-		finally {
-			if (checkedOut) {
-				document.cancelCheckOut();
-			}
 		}
 	}
 
@@ -883,8 +843,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
-			document.refresh();
-
 			document = document.getObjectOfLatestVersion(false);
 
 			document.checkIn(false, null, null, StringPool.BLANK);
@@ -914,7 +872,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 		Document document = null;
 
-		boolean checkedOut = false;
+		ObjectId pwcId = null;
 
 		try {
 			Session session = getSession();
@@ -923,9 +881,9 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			document = (Document)session.getObject(versionSeriesId);
 
-			document.refresh();
+			document = document.getObjectOfLatestVersion(false);
 
-			String oldTitle = document.getName();
+			String currentTitle = document.getName();
 
 			AllowableActions allowableActions = document.getAllowableActions();
 
@@ -933,18 +891,16 @@ public class CMISRepository extends BaseRepositoryImpl {
 				allowableActions.getAllowableActions();
 
 			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
-				document.checkOut();
+				pwcId = document.checkOut();
 
-				checkedOut = true;
+				document = (Document)session.getObject(pwcId);
 			}
-
-			document = document.getObjectOfLatestVersion(false);
 
 			Map<String, Object> properties = null;
 
 			ContentStream contentStream = null;
 
-			if (Validator.isNotNull(title) && !title.equals(oldTitle)) {
+			if (Validator.isNotNull(title) && !title.equals(currentTitle)) {
 				properties = new HashMap<String, Object>();
 
 				properties.put(PropertyIds.NAME, title);
@@ -960,11 +916,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			checkUpdatable(allowableActionsSet, properties, contentStream);
 
-			if (checkedOut) {
+			if (pwcId != null) {
 				document.checkIn(
 					majorVersion, properties, contentStream, changeLog);
 
-				checkedOut = false;
+				pwcId = null;
 			}
 			else {
 				if (properties != null) {
@@ -972,17 +928,13 @@ public class CMISRepository extends BaseRepositoryImpl {
 				}
 
 				if (contentStream != null) {
-					document.setContentStream(contentStream, true);
+					document.setContentStream(contentStream, true, false);
 				}
 			}
 
 			document = (Document)session.getObject(versionSeriesId);
 
-			document.refresh();
-
-			FileEntry fileEntry = toFileEntry(document);
-
-			return fileEntry;
+			return toFileEntry(document);
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -996,7 +948,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			throw new RepositoryException(e);
 		}
 		finally {
-			if (checkedOut) {
+			if (pwcId != null) {
 				document.cancelCheckOut();
 			}
 		}
@@ -1016,11 +968,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 				(org.apache.chemistry.opencmis.client.api.Folder)
 					session.getObject(objectId);
 
-			String oldTitle = cmisFolder.getName();
+			String currentTitle = cmisFolder.getName();
 
 			Map<String, Object> properties = new HashMap<String, Object>();
 
-			if (Validator.isNotNull(title) && !title.equals(oldTitle)) {
+			if (Validator.isNotNull(title) && !title.equals(currentTitle)) {
 				properties.put(PropertyIds.NAME, title);
 			}
 
@@ -1254,16 +1206,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 			_fileEntriesCache.get();
 
 		return fileEntriesCache.get(folderId);
-	}
-
-	protected FileEntry getFileEntry(Session session, long fileEntryId)
-		throws PortalException, SystemException {
-
-		String objectId = toFileEntryId(fileEntryId);
-
-		Document document = (Document)session.getObject(objectId);
-
-		return toFileEntry(document.getObjectOfLatestVersion(false));
 	}
 
 	protected FileVersion getFileVersion(Session session, long fileVersionId)

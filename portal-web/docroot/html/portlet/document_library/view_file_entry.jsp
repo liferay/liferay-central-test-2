@@ -94,16 +94,16 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 <c:if test="<%= folder != null %>">
 
 	<%
-	String versionText = LanguageUtil.format(pageContext, "version-x", fileEntry.getVersion());
+	String versionText = LanguageUtil.format(pageContext, "version-x", fileVersion.getVersion());
 
-	if (Validator.isNull(fileEntry.getVersion())) {
+	if (Validator.isNull(fileVersion.getVersion())) {
 		versionText = LanguageUtil.get(pageContext, "not-approved");
 	}
 	%>
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		title="<%= fileEntry.getTitle() %>"
+		title="<%= fileVersion.getTitle() %>"
 	/>
 </c:if>
 
