@@ -362,6 +362,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			int start, int end)
 		throws SystemException {
 
+		return search(companyId, groupIds, 0, portletId, keywords, start, end);
+	}
+
+	public Hits search(
+			long companyId, long[] groupIds, long userId, String portletId, 
+			String keywords, int start, int end)
+		throws SystemException {
+
 		try {
 			SearchContext searchContext = new SearchContext();
 
@@ -379,6 +387,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setQueryConfig(queryConfig);
 
 			searchContext.setStart(start);
+			searchContext.setUserId(userId);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 
@@ -390,9 +399,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long[] groupIds, String portletId, String userName,
-			String title, String description, String assetCategoryIds,
-			String assetTagNames, boolean andSearch, int start, int end)
+			long companyId, long[] groupIds, long userId, String portletId,
+			String userName, String title, String description,
+			String assetCategoryIds, String assetTagNames, boolean andSearch,
+			int start, int end)
 		throws SystemException {
 
 		try {
@@ -420,6 +430,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setQueryConfig(queryConfig);
 
 			searchContext.setStart(start);
+			searchContext.setUserId(userId);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 

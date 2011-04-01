@@ -17,8 +17,6 @@
 <%
 String modelResourceName = ResourceActionsUtil.getModelResource(locale, typeSelection);
 
-long userId = 0;
-
 int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 
 String keywords = ParamUtil.getString(request, "keywords");
