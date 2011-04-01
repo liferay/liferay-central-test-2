@@ -56,17 +56,15 @@ public class DDMStructureLinkServiceImpl
 		ddmStructureLinkLocalService.deleteStructureLink(structureLinkId);
 	}
 
-	public DDMStructureLink getStructureLink(long structureLinkId)
+	public DDMStructureLink getStructureLink(
+			long classNameId, long classPK, long structureId)
 		throws PortalException, SystemException {
 
-		DDMStructureLink structureLink =
-			ddmStructureLinkPersistence.findByPrimaryKey(structureLinkId);
-
 		DDMStructurePermission.check(
-			getPermissionChecker(), structureLink.getStructureId(),
-			ActionKeys.VIEW);
+			getPermissionChecker(), structureId, ActionKeys.VIEW);
 
-		return structureLink;
+		return ddmStructureLinkLocalService.getStructureLink(
+			classNameId, classPK, structureId);
 	}
 
 	public DDMStructureLink updateStructureLink(

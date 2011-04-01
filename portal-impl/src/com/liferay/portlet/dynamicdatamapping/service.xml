@@ -110,7 +110,6 @@
 
 		<!-- Other fields -->
 
-		<column name="classNameId" type="long" />
 		<column name="structureKey" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
@@ -119,9 +118,6 @@
 
 		<!-- Finder methods -->
 
-		<finder name="ClassNameId" return-type="Collection">
-			<finder-column name="classNameId" />
-		</finder>
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
@@ -144,13 +140,12 @@
 
 		<!-- Finder methods -->
 
-		<finder name="ClassNameId" return-type="Collection">
-			<finder-column name="classNameId" />
-		</finder>
-		<finder name="ClassPK" return-type="DDMStorageLink" unique="true">
-			<finder-column name="classPK" />
-		</finder>
 		<finder name="StructureId" return-type="Collection">
+			<finder-column name="structureId" />
+		</finder>
+		<finder name="C_C_S" return-type="DDMStructureLink" unique="true">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
 			<finder-column name="structureId" />
 		</finder>
 	</entity>
