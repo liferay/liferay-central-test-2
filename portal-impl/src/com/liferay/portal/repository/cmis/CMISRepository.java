@@ -657,7 +657,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			}
 
 			document = (Document)document.move(
-				new ObjectIdImpl(oldFolderObjectId), 
+				new ObjectIdImpl(oldFolderObjectId),
 				new ObjectIdImpl(newFolderObjectId));
 
 			String newObjectId = document.getVersionSeriesId();
