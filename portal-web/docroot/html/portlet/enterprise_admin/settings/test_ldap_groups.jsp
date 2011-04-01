@@ -56,14 +56,16 @@ String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
 List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, groupFilter, searchResults);
-
 String groupMappingsParam =
 	"groupName=" + ParamUtil.getString(request, "groupMappingGroupName") +
 	"\ndescription=" + ParamUtil.getString(request, "groupMappingDescription") +
 	"\nuser=" + ParamUtil.getString(request, "groupMappingUser");
 
 Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
+
+String[] attributeIds = StringUtil.split(StringUtil.merge(groupMappings.values()));
+
+PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, groupFilter, attributeIds, searchResults);
 %>
 
 <liferay-ui:message key="test-ldap-groups" />
@@ -74,7 +76,7 @@ Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
 
 <br /><br />
 
-<table class="lfr-table">
+<table class="lfr-table" width="100%">
 
 <%
 boolean showMissingAttributeMessage = false;
