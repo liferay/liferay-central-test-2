@@ -541,6 +541,7 @@ public class EditLayoutsAction extends PortletAction {
 
 		Layout layout = null;
 		String oldFriendlyURL = StringPool.BLANK;
+		UnicodeProperties layoutTypeSettingsProperties = null;
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -599,6 +600,8 @@ public class EditLayoutsAction extends PortletAction {
 					titleMap, descriptionMap, keywordsMap, robotsMap, type,
 					hidden, friendlyURL, serviceContext);
 			}
+
+			layoutTypeSettingsProperties = layout.getTypeSettingsProperties();
 		}
 		else {
 
@@ -619,6 +622,8 @@ public class EditLayoutsAction extends PortletAction {
 				oldFriendlyURL = StringPool.BLANK;
 			}
 
+			layoutTypeSettingsProperties = layout.getTypeSettingsProperties();
+
 			UnicodeProperties formTypeSettingsProperties =
 				PropertiesParamUtil.getProperties(
 					actionRequest, "TypeSettingsProperties--");
@@ -638,9 +643,8 @@ public class EditLayoutsAction extends PortletAction {
 							groupId, privateLayout, copyLayoutId);
 
 						if (copyLayout.isTypePortlet()) {
-							LayoutServiceUtil.updateLayout(
-								groupId, privateLayout, layoutId,
-								copyLayout.getTypeSettings());
+							layoutTypeSettingsProperties =
+								copyLayout.getTypeSettingsProperties();
 
 							ActionUtil.copyPreferences(
 								actionRequest, layout, copyLayout);
@@ -652,9 +656,6 @@ public class EditLayoutsAction extends PortletAction {
 					}
 				}
 				else {
-					UnicodeProperties layoutTypeSettingsProperties =
-						layout.getTypeSettingsProperties();
-
 					layoutTypeSettingsProperties.putAll(
 						formTypeSettingsProperties);
 
@@ -684,7 +685,7 @@ public class EditLayoutsAction extends PortletAction {
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
 			stagingGroupId, privateLayout, layout.getLayoutId(),
-			layout.getTypeSettingsProperties());
+			layoutTypeSettingsProperties);
 
 		return new Object[] {layout, oldFriendlyURL};
 	}
