@@ -35,6 +35,13 @@ public class DeviceDetectionUtil {
 		return knownDevices.getBrands();
 	}
 
+	public static Set<VersionableName> getKnownBrowsers() {
+		KnownDevices knownDevices =
+			_deviceRecognitionProvider.getKnownDevices();
+
+		return knownDevices.getBrowsers();
+	}
+
 	public static Set<String> getKnownDeviceIdsByCapability(
 		Capability capability) {
 
@@ -58,13 +65,6 @@ public class DeviceDetectionUtil {
 			_deviceRecognitionProvider.getKnownDevices();
 
 		return knownDevices.getPointingMethods();
-	}
-
-	public Set<VersionableName> getKnownBrowsers() {
-		KnownDevices knownDevices =
-			_deviceRecognitionProvider.getKnownDevices();
-
-		return knownDevices.getBrowsers();
 	}
 
 	public void setDeviceRecognitionProvider(
