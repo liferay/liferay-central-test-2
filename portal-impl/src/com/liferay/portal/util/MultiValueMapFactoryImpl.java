@@ -27,16 +27,6 @@ import java.io.Serializable;
  */
 public class MultiValueMapFactoryImpl implements MultiValueMapFactory {
 
-	public MultiValueMap<?, ?> getMultiValueMap(String name) {
-		int type = GetterUtil.getInteger(PropsUtil.get(name));
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Using type " + type + " for " + name);
-		}
-
-		return getMultiValueMap(type);
-	}
-
 	public MultiValueMap<?, ?> getMultiValueMap(int type) {
 		if (type == MultiValueMapFactory.FILE) {
 			return new FileMultiValueMap<Serializable, Serializable>();
@@ -44,6 +34,16 @@ public class MultiValueMapFactoryImpl implements MultiValueMapFactory {
 		else {
 			return new MemoryMultiValueMap<Serializable, Serializable>();
 		}
+	}
+
+	public MultiValueMap<?, ?> getMultiValueMap(String propertyKey) {
+		int type = GetterUtil.getInteger(PropsUtil.get(propertyKey));
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Using type " + type + " for " + propertyKey);
+		}
+
+		return getMultiValueMap(type);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

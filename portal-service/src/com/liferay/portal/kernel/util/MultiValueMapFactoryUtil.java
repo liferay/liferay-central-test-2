@@ -19,12 +19,12 @@ package com.liferay.portal.kernel.util;
  */
 public class MultiValueMapFactoryUtil {
 
-	public static MultiValueMap<?, ?> getMultiValueMap(String name) {
-		return getMultiValueMapFactory().getMultiValueMap(name);
-	}
-
 	public static MultiValueMap<?, ?> getMultiValueMap(int type) {
 		return getMultiValueMapFactory().getMultiValueMap(type);
+	}
+
+	public static MultiValueMap<?, ?> getMultiValueMap(String propertyKey) {
+		return getMultiValueMapFactory().getMultiValueMap(propertyKey);
 	}
 
 	public static MultiValueMapFactory getMultiValueMapFactory() {

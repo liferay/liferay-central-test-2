@@ -350,7 +350,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		MultiValueMap<Tuple, String> mvp =
 			(MultiValueMap<Tuple, String>)
 				MultiValueMapFactoryUtil.getMultiValueMap(
-					_CONVERT_RESOURCE_PERMISSION_MAP);
+					_CONVERT_RESOURCE_PERMISSION);
 
 		try {
 			resourcePermissionReader = new UnsyncBufferedReader(
@@ -380,7 +380,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			FileUtil.delete(resourcePermissionFile);
 		}
 
-		for (Tuple key : (Set<Tuple>)mvp.keySet()) {
+		for (Tuple key : mvp.keySet()) {
 			long resourcePermissionId = CounterLocalServiceUtil.increment(
 				ResourcePermission.class.getName());
 
@@ -389,12 +389,9 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			String primKey = (String)key.getObject(2);
 			long roleId = (Long)key.getObject(3);
 
-			String[] actionIdArray =
-				(String[])mvp.getAll(key).toArray(new String[0]);
-
 			long actionIds = 0;
 
-			for (String actionId : actionIdArray) {
+			for (String actionId : mvp.getAll(key)) {
 				try {
 					ResourceAction resourceAction =
 						ResourceActionLocalServiceUtil.getResourceAction(
@@ -441,8 +438,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			MultiValueMap<Long, String[]> mvp =
 				(MultiValueMap<Long, String[]>)
-					MultiValueMapFactoryUtil.getMultiValueMap(
-						_CONVERT_ROLES_MAP);
+					MultiValueMapFactoryUtil.getMultiValueMap(_CONVERT_ROLES);
 
 			String line = null;
 
@@ -456,7 +452,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 
 			// Assign role for each grouping
 
-			for (Long key : (Set<Long>)mvp.keySet()) {
+			for (Long key : mvp.keySet()) {
 				List<String[]> valuesList = new ArrayList<String[]>(
 					mvp.getAll(key));
 
@@ -772,13 +768,13 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		return GetterUtil.getBoolean(parameterValues[0]);
 	}
 
-	private static final String _CONVERT_RESOURCE_PERMISSION_MAP =
+	private static final String _CONVERT_RESOURCE_PERMISSION =
 		PropsKeys.MULTI_VALUE_MAP + ConvertPermissionAlgorithm.class.getName() +
-			".convertResourcePermissionMap";
+			".convertResourcePermission";
 
-	private static final String _CONVERT_ROLES_MAP =
+	private static final String _CONVERT_ROLES =
 		PropsKeys.MULTI_VALUE_MAP + ConvertPermissionAlgorithm.class.getName() +
-			".convertRolesMap";
+			".convertRoles";
 
 	private static final String _EXT_OTHER_ROLES = ".others_roles";
 

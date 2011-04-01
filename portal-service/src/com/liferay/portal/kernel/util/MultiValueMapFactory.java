@@ -23,8 +23,8 @@ public interface MultiValueMapFactory {
 
 	public static final int MEMORY = 0;
 
-	public MultiValueMap<?, ?> getMultiValueMap(String name);
-
 	public MultiValueMap<?, ?> getMultiValueMap(int type);
+
+	public MultiValueMap<?, ?> getMultiValueMap(String propertyKey);
 
 }
