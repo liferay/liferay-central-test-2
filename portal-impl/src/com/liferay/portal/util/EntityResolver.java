@@ -378,13 +378,13 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
-			"-//Liferay//DTD Resource Actions 6.0.0//EN",
-			"liferay-resource-actions_6_0_0.dtd"
+			"-//Liferay//DTD Resource Action Mapping 6.0.0//EN",
+			"liferay-resource-action-mapping_6_0_0.dtd"
 		),
 
 		new KeyValuePair(
-			"-//Liferay//DTD Resource Actions 6.1.0//EN",
-			"liferay-resource-actions_6_1_0.dtd"
+			"-//Liferay//DTD Resource Action Mapping 6.1.0//EN",
+			"liferay-resource-action-mapping_6_1_0.dtd"
 		),
 
 		new KeyValuePair(
