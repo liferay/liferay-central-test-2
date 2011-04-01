@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -375,6 +376,8 @@ public class PermissionImporter {
 
 			Role role = null;
 
+			int type = Integer.valueOf(roleEl.attributeValue("type"));
+
 			if (name.startsWith(PermissionExporter.ROLE_TEAM_PREFIX)) {
 				name = name.substring(
 					PermissionExporter.ROLE_TEAM_PREFIX.length());
@@ -398,21 +401,81 @@ public class PermissionImporter {
 				role = layoutCache.getRole(companyId, name);
 			}
 
+			if ((type == RoleConstants.TYPE_COMMUNITY) &&
+				group.isOrganization()) {
+
+				type = RoleConstants.TYPE_ORGANIZATION;
+
+				if ((role != null) &&
+					(role.getType() != RoleConstants.TYPE_ORGANIZATION)) {
+
+					role = null;
+
+					if (name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR)) {
+						name = RoleConstants.ORGANIZATION_ADMINISTRATOR;
+					}
+					else if (name.equals(RoleConstants.COMMUNITY_MEMBER)) {
+						name = RoleConstants.ORGANIZATION_MEMBER;
+					}
+					else if (name.equals(RoleConstants.COMMUNITY_OWNER)) {
+						name = RoleConstants.ORGANIZATION_OWNER;
+					}
+					else {
+						if (name.contains("Community")) {
+							name = StringUtil.replace(
+								name, "Community", "Organization");
+						}
+						else {
+							name = "Organization ".concat(name);
+						}
+					}
+
+					try {
+						role = RoleLocalServiceUtil.getRole(companyId, name);
+					}
+					catch (PortalException pe) {
+					}
+				}
+			}
+			else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
+					 group.isCommunity()) {
+
+				type = RoleConstants.TYPE_COMMUNITY;
+
+				if ((role != null) &&
+					(role.getType() != RoleConstants.TYPE_COMMUNITY)) {
+
+					role = null;
+
+					if (name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
+						name = RoleConstants.COMMUNITY_ADMINISTRATOR;
+					}
+					else if (name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
+						name = RoleConstants.COMMUNITY_MEMBER;
+					}
+					else if (name.equals(RoleConstants.ORGANIZATION_OWNER)) {
+						name = RoleConstants.COMMUNITY_OWNER;
+					}
+					else {
+						if (name.contains("Organization")) {
+							name = StringUtil.replace(
+								name, "Organization", "Community");
+						}
+						else {
+							name = "Community ".concat(name);
+						}
+					}
+
+					try {
+						role = RoleLocalServiceUtil.getRole(companyId, name);
+					}
+					catch (PortalException pe) {
+					}
+				}
+			}
+
 			if (role == null) {
 				String description = roleEl.attributeValue("description");
-				int type = Integer.valueOf(roleEl.attributeValue("type"));
-
-				if ((type == RoleConstants.TYPE_COMMUNITY) &&
-					group.isOrganization()) {
-
-					type = RoleConstants.TYPE_ORGANIZATION;
-				}
-				else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
-						 group.isCommunity()) {
-
-					type = RoleConstants.TYPE_COMMUNITY;
-				}
-
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, description, type);
 			}
