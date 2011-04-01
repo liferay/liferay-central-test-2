@@ -90,10 +90,9 @@ public class CMISRepositoryUtil {
 		return value;
 	}
 
+	private static OperationContext _operationContext;
 	private static SessionFactory _sessionFactory =
 		SessionFactoryImpl.newInstance();
-
-	private static OperationContext _operationContext;
 
 	static {
 		Set<String> defaultFilterSet = new HashSet<String>();

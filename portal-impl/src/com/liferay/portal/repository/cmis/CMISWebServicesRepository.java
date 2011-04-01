@@ -17,7 +17,7 @@ package com.liferay.portal.repository.cmis;
 import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -33,14 +33,15 @@ import org.apache.chemistry.opencmis.commons.enums.BindingType;
 /**
  * @author Alexander Chow
  */
-public class CMISWebServicesRepository extends CMISRepositoryWrapper {
+public class CMISWebServicesRepository extends CMISRepositoryHandler {
 
 	public Object getSession()
 		throws PortalException, RepositoryException {
 
-		Session session = null;
-
 		Map<String, String> parameters = new HashMap<String, String>();
+
+		parameters.put(
+			SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
 
 		Locale locale = LocaleUtil.getDefault();
 
@@ -57,9 +58,6 @@ public class CMISWebServicesRepository extends CMISRepositoryWrapper {
 		String login = getLogin();
 
 		parameters.put(SessionParameter.USER, login);
-
-		parameters.put(
-			SessionParameter.BINDING_TYPE, BindingType.WEBSERVICES.value());
 
 		parameters.put(
 			SessionParameter.WEBSERVICES_ACL_SERVICE,
@@ -93,7 +91,7 @@ public class CMISWebServicesRepository extends CMISRepositoryWrapper {
 			getRepositoryId(), parameters, getTypeSettingsProperties(),
 			_REPOSITORY_ID);
 
-		session = CMISRepositoryUtil.getSessionFactory().createSession(
+		Session session = CMISRepositoryUtil.getSessionFactory().createSession(
 			parameters);
 
 		session.setDefaultContext(CMISRepositoryUtil.getOperationContext());
@@ -118,35 +116,35 @@ public class CMISWebServicesRepository extends CMISRepositoryWrapper {
 			typeSettingsProperties, typeSettingsKey);
 	}
 
-	public static final String _CONFIGURATION_WEBSERVICES = "WEBSERVICES";
+	private static final String _CONFIGURATION_WEBSERVICES = "WEBSERVICES";
 
-	public static final String _REPOSITORY_ID = "REPOSITORY_ID";
+	private static final String _REPOSITORY_ID = "REPOSITORY_ID";
 
-	public static final String _WEBSERVICES_ACL_SERVICE =
+	private static final String _WEBSERVICES_ACL_SERVICE =
 		"WEBSERVICES_ACL_SERVICE";
 
-	public static final String _WEBSERVICES_DISCOVERY_SERVICE =
+	private static final String _WEBSERVICES_DISCOVERY_SERVICE =
 		"WEBSERVICES_DISCOVERY_SERVICE";
 
-	public static final String _WEBSERVICES_MULTIFILING_SERVICE =
+	private static final String _WEBSERVICES_MULTIFILING_SERVICE =
 		"WEBSERVICES_MULTIFILING_SERVICE";
 
-	public static final String _WEBSERVICES_NAVIGATION_SERVICE =
+	private static final String _WEBSERVICES_NAVIGATION_SERVICE =
 		"WEBSERVICES_NAVIGATION_SERVICE";
 
-	public static final String _WEBSERVICES_OBJECT_SERVICE =
+	private static final String _WEBSERVICES_OBJECT_SERVICE =
 		"WEBSERVICES_OBJECT_SERVICE";
 
-	public static final String _WEBSERVICES_POLICY_SERVICE =
+	private static final String _WEBSERVICES_POLICY_SERVICE =
 		"WEBSERVICES_POLICY_SERVICE";
 
-	public static final String _WEBSERVICES_RELATIONSHIP_SERVICE =
+	private static final String _WEBSERVICES_RELATIONSHIP_SERVICE =
 		"WEBSERVICES_RELATIONSHIP_SERVICE";
 
-	public static final String _WEBSERVICES_REPOSITORY_SERVICE =
+	private static final String _WEBSERVICES_REPOSITORY_SERVICE =
 		"WEBSERVICES_REPOSITORY_SERVICE";
 
-	public static final String _WEBSERVICES_VERSIONING_SERVICE =
+	private static final String _WEBSERVICES_VERSIONING_SERVICE =
 		"WEBSERVICES_VERSIONING_SERVICE";
 
 	private static final String[] _SUPPORTED_CONFIGURATIONS = {
@@ -154,7 +152,7 @@ public class CMISWebServicesRepository extends CMISRepositoryWrapper {
 	};
 
 	private static final String[][] _SUPPORTED_PARAMETERS = {
-		new String[] {
+		{
 			_REPOSITORY_ID, _WEBSERVICES_ACL_SERVICE,
 			_WEBSERVICES_DISCOVERY_SERVICE, _WEBSERVICES_MULTIFILING_SERVICE,
 			_WEBSERVICES_NAVIGATION_SERVICE, _WEBSERVICES_OBJECT_SERVICE,

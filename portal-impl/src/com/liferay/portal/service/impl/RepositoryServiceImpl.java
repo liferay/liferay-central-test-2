@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.BaseRepository;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -396,14 +396,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				e);
 		}
 
-		if (baseRepository instanceof CMISRepositoryWrapper) {
-			CMISRepositoryWrapper cmisRepositoryWrapper =
-				(CMISRepositoryWrapper)baseRepository;
+		if (baseRepository instanceof CMISRepositoryHandler) {
+			CMISRepositoryHandler cmisRepositoryHandler =
+				(CMISRepositoryHandler)baseRepository;
 
 			CMISRepository cmisRepository = new CMISRepository(
-				cmisRepositoryWrapper);
+				cmisRepositoryHandler);
 
-			cmisRepositoryWrapper.setCmisRepository(cmisRepository);
+			cmisRepositoryHandler.setCmisRepository(cmisRepository);
 
 			setupRepository(repositoryId, repository, cmisRepository);
 		}
@@ -480,8 +480,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	protected void setupRepository(
-		long repositoryId, Repository repository, BaseRepository baseRepository)
-	{
+		long repositoryId, Repository repository,
+		BaseRepository baseRepository) {
+
 		baseRepository.setCompanyId(repository.getCompanyId());
 		baseRepository.setCompanyLocalService(companyLocalService);
 		baseRepository.setCounterLocalService(counterLocalService);

@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -101,8 +101,8 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  */
 public class CMISRepository extends BaseRepositoryImpl {
 
-	public CMISRepository(CMISRepositoryWrapper wrapper) {
-		_wrapper = wrapper;
+	public CMISRepository(CMISRepositoryHandler cmisRepositoryHandler) {
+		_cmisRepositoryHandler = cmisRepositoryHandler;
 	}
 
 	public FileEntry addFileEntry(
@@ -541,7 +541,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			return session;
 		}
 
-		session = (Session)_wrapper.getSession();
+		session = (Session)_cmisRepositoryHandler.getSession();
 
 		setCachedSession(session);
 
@@ -570,11 +570,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public String[] getSupportedConfigurations() {
-		return _wrapper.getSupportedConfigurations();
+		return _cmisRepositoryHandler.getSupportedConfigurations();
 	}
 
 	public String[][] getSupportedParameters() {
-		return _wrapper.getSupportedParameters();
+		return _cmisRepositoryHandler.getSupportedParameters();
 	}
 
 	public void initRepository() throws PortalException, SystemException {
@@ -1387,7 +1387,9 @@ public class CMISRepository extends BaseRepositoryImpl {
 			String message = e.getMessage();
 
 			try {
-				message = "Unable to login with user " + _wrapper.getLogin();
+				message =
+					"Unable to login with user " +
+						_cmisRepositoryHandler.getLogin();
 			}
 			catch (Exception e2) {
 			}
@@ -1552,8 +1554,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 
+	private CMISRepositoryHandler _cmisRepositoryHandler;
 	private String _sessionKey;
-
-	private CMISRepositoryWrapper _wrapper = null;
 
 }

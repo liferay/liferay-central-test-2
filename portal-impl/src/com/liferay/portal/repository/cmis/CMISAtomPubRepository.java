@@ -17,7 +17,7 @@ package com.liferay.portal.repository.cmis;
 import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -33,36 +33,38 @@ import org.apache.chemistry.opencmis.commons.enums.BindingType;
 /**
  * @author Alexander Chow
  */
-public class CMISAtomPubRepository extends CMISRepositoryWrapper {
+public class CMISAtomPubRepository extends CMISRepositoryHandler {
 
 	public Object getSession() throws PortalException, RepositoryException {
-		Session session = null;
-
 		Map<String, String> parameters = new HashMap<String, String>();
-
-		String login = getLogin();
-		String password = PrincipalThreadLocal.getPassword();
-		Locale locale = LocaleUtil.getDefault();
-
-		parameters.put(SessionParameter.USER, login);
-		parameters.put(SessionParameter.PASSWORD, password);
-		parameters.put(
-			SessionParameter.LOCALE_ISO3166_COUNTRY,
-			locale.getCountry());
-		parameters.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
-			locale.getLanguage());
-		
-		parameters.put(
-			SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
 
 		parameters.put(
 			SessionParameter.ATOMPUB_URL, getTypeSettingsValue(_ATOMPUB_URL));
+
+		parameters.put(
+			SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
+
+		Locale locale = LocaleUtil.getDefault();
+
+		parameters.put(
+			SessionParameter.LOCALE_ISO3166_COUNTRY,
+			locale.getCountry());
+		parameters.put(
+			SessionParameter.LOCALE_ISO639_LANGUAGE, locale.getLanguage());
+
+		String password = PrincipalThreadLocal.getPassword();
+
+		parameters.put(SessionParameter.PASSWORD, password);
+
+		String login = getLogin();
+
+		parameters.put(SessionParameter.USER, login);
 
 		CMISRepositoryUtil.checkRepository(
 			getRepositoryId(), parameters, getTypeSettingsProperties(),
 			_REPOSITORY_ID);
 
-		session = CMISRepositoryUtil.getSessionFactory().createSession(
+		Session session = CMISRepositoryUtil.getSessionFactory().createSession(
 			parameters);
 
 		session.setDefaultContext(CMISRepositoryUtil.getOperationContext());
@@ -98,9 +100,7 @@ public class CMISAtomPubRepository extends CMISRepositoryWrapper {
 	};
 
 	private static final String[][] _SUPPORTED_PARAMETERS = {
-		new String[] {
-			_ATOMPUB_URL, _REPOSITORY_ID
-		}
+		{_ATOMPUB_URL, _REPOSITORY_ID}
 	};
 
 }

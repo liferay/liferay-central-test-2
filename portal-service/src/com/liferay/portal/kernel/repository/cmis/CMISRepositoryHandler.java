@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * @author Alexander Chow
  */
-public abstract class CMISRepositoryWrapper extends BaseRepositoryImpl {
+public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
@@ -81,7 +81,7 @@ public abstract class CMISRepositoryWrapper extends BaseRepositoryImpl {
 	public BaseRepository getCmisRepository() {
 		return _cmisRepository;
 	}
-	
+
 	public List<FileEntry> getFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
