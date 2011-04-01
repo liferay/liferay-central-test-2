@@ -45,6 +45,7 @@ DDMStructureDisplayTerms displayTerms = new DDMStructureDisplayTerms(renderReque
 		</aui:column>
 
 		<aui:column>
+
 			<aui:select name="storageType">
 
 				<%
@@ -58,6 +59,7 @@ DDMStructureDisplayTerms displayTerms = new DDMStructureDisplayTerms(renderReque
 				%>
 
 			</aui:select>
+
 		</aui:column>
 	</aui:fieldset>
 </liferay-ui:search-toggle>

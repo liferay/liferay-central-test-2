@@ -60,6 +60,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	<liferay-ui:panel-container cssClass="lfr-structure-entry-details-container" extended="<%= false %>" id="structureDetailsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="structureDetailsSectionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "details") %>'>
 			<aui:layout cssClass="lfr-ddm-types-form-column">
+
 				<aui:column first="true">
 					<aui:field-wrapper>
 						<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
@@ -85,6 +86,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 						</aui:select>
 					</aui:field-wrapper>
 				</aui:column>
+
 			</aui:layout>
 
 			<aui:input name="description" />
@@ -185,7 +187,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	var formBuilder = new Liferay.FormBuilder(
 		{
 			<c:if test="<%= Validator.isNotNull(availableFields) %>">
-				availableFields: A.Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
+				availableFields: AUI().Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
 			</c:if>
 
 			boundingBox: '#<portlet:namespace />formBuilder',
