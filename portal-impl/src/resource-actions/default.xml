@@ -11,7 +11,6 @@
 	<resource file="resource-actions/cms.xml" />
 	<resource file="resource-actions/communities.xml" />
 	<resource file="resource-actions/documentlibrary.xml" />
-	<resource file="resource-actions/dynamicdatalist.xml" />
 	<resource file="resource-actions/dynamicdatamapping.xml" />
 	<resource file="resource-actions/expando.xml" />
 	<resource file="resource-actions/imagegallery.xml" />

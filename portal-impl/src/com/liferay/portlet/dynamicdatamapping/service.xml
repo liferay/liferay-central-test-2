@@ -56,7 +56,6 @@
 
 		<!-- Other fields -->
 
-		<column name="listKey" type="String" />
 		<column name="name" type="String" localized="true" />
 		<column name="description" type="String" />
 		<column name="structureId" type="long" />
@@ -66,9 +65,8 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_L" return-type="DDMList" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="listKey" />
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
 		</finder>
 	</entity>
 	<entity name="DDMStorageLink" uuid="true" local-service="true" remote-service="false">
@@ -160,10 +158,8 @@
 		<exception>Content</exception>
 		<exception>ContentName</exception>
 		<exception>ContentXml</exception>
-		<exception>ListDuplicateListKey</exception>
-		<exception>ListListKey</exception>
-		<exception>ListName</exception>
-		<exception>ListStructure</exception>
+		<exception>EntryName</exception>
+		<exception>EntryStructure</exception>
 		<exception>Storage</exception>
 		<exception>StorageFieldName</exception>
 		<exception>StructureDuplicateElement</exception>
