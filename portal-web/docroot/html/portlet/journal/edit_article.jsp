@@ -212,13 +212,17 @@ else {
 	content = ParamUtil.getString(request, "content");
 
 	UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+
 	long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
-	if (Validator.isNotNull(refererPlid)) {
+	if (refererPlid > 0) {
 		Layout refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
+
 		typeSettingsProperties = refererLayout.getTypeSettingsProperties();
 
-		if (Validator.isNotNull(typeSettingsProperties.getProperty(LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID))) {
+		String defaultAssetPublisherPortletId = typeSettingsProperties.getProperty(LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID);
+
+		if (Validator.isNotNull(defaultAssetPublisherPortletId)) {
 			preselectCurrentLayout = true;
 		}
 	}
