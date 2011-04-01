@@ -16,7 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.repository.cmis.CMISRepositoryWrapper;
+import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -73,12 +73,12 @@ public class CMISRepositoryLocalServiceImpl
 	protected CMISRepository getCmisRepository(long repositoryId)
 		throws PortalException, SystemException {
 
-		CMISRepositoryWrapper cmisRepositoryWrapper =
-			(CMISRepositoryWrapper)repositoryService.getRepositoryImpl(
+		CMISRepositoryHandler cmisRepositoryHandler =
+			(CMISRepositoryHandler)repositoryService.getRepositoryImpl(
 				repositoryId);
 
 		CMISRepository cmisRepository =
-			(CMISRepository)cmisRepositoryWrapper.getCmisRepository();
+			(CMISRepository)cmisRepositoryHandler.getCmisRepository();
 
 		return cmisRepository;
 	}

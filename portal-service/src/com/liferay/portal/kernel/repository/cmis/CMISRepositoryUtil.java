@@ -14,11 +14,8 @@
 
 package com.liferay.portal.kernel.repository.cmis;
 
-import com.liferay.portal.InvalidRepositoryException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -31,9 +28,8 @@ import java.util.Map;
 public class CMISRepositoryUtil {
 
 	public static void checkRepository(
-			long repositoryId, Map<String, String> parameters,
-			UnicodeProperties typeSettingsProperties, String typeSettingsKey)
-		throws PortalException, RepositoryException {
+		long repositoryId, Map<String, String> parameters,
+		UnicodeProperties typeSettingsProperties, String typeSettingsKey) {
 
 		try {
 			PortalClassInvoker.invoke(
@@ -82,8 +78,7 @@ public class CMISRepositoryUtil {
 	}
 
 	public static String getTypeSettingsValue(
-			UnicodeProperties typeSettingsProperties, String typeSettingsKey)
-		throws InvalidRepositoryException {
+		UnicodeProperties typeSettingsProperties, String typeSettingsKey) {
 
 		String value = null;
 
