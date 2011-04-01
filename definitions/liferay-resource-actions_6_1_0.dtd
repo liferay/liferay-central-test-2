@@ -6,33 +6,30 @@ This is the DTD for defining Actions supported on Resources for Liferay Portal.
 	"http://www.liferay.com/dtd/liferay-resource-actions_6_1_0.dtd">
 -->
 
-<!-- 
-The resource-action-mapping is the root of the deployment descriptor for a 
-resource action descriptor that is used to define actions that are supported 
+<!--
+The resource-action-mapping is the root of the deployment descriptor for a
+resource action descriptor that is used to define actions that are supported
 on portal resources such as portlets and models.
 -->
 <!ELEMENT resource-action-mapping (portlet-resource*, model-resource*,
 resource*) >
 
-<!-- 
-The portlet-resource element defines the actions that are supported by the named
-portlet. The portlet-resource also defines the default permissions granted to 
-community members, guests and layout managers.
+<!--
+The portlet-resource element defines the permissions of the portlet.
 -->
 <!ELEMENT portlet-resource (portlet-name, permissions?) >
 
 <!--
-The portlet-name element is the name of the portlet to which these permission
-definitions will apply.
+The portlet-name element is the name of the portlet.
 -->
 <!ELEMENT portlet-name (#PCDATA) >
 
 <!--
 The permissions define the default permissions granted and unsupported to
-community members, guests users and layout managers.
+community members, guests users, and layout managers.
 -->
-<!ELEMENT permissions (supports, community-defaults?,
-guest-defaults?, guest-unsupported?, layout-manager?, owner-defaults?) >
+<!ELEMENT permissions (supports, community-defaults?, guest-defaults?,
+guest-unsupported?, layout-manager?, owner-defaults?) >
 
 <!--
 The supports element defines the actions supported by this resource.
@@ -40,11 +37,9 @@ The supports element defines the actions supported by this resource.
 <!ELEMENT supports (action-key*) >
 
 <!--
-The action-key element defines the name of the action. The name should have
-key-format to be translated in a language bundle resource. Many
-actions such as VIEW, EDIT, CONFIGURATION, etc. are defined in the portal 
-language bundles. Any new action keys must be defined in a language bundle and
-have the form action.${action-key}.
+The action-key element defines the name of the action. The name will be
+translated as specified in Language.properties. For example, if the action key
+is "VIEW", then the key in Language.properties will be "action.VIEW".
 -->
 
 <!ELEMENT action-key (#PCDATA) >
@@ -62,58 +57,54 @@ to perform by default.
 <!ELEMENT guest-defaults (action-key*) >
 
 <!--
-The guest-unsupported element specifies the actions that guests are not 
+The guest-unsupported element specifies the actions that guests are never
 permitted to perform. This disables the ability to assign permissions for these
-actions. Only define actions here if you wish to prevent anyone from granting 
+actions. Only define actions here if you wish to prevent anyone from granting
 permissions to perform these actions.
 -->
 <!ELEMENT guest-unsupported (action-key*) >
 
 <!--
-The layout-manager element specifies the actions that layout managers are 
-permitted to perform. If omitted layout-managers are granted permissions on all
-supported actions. If included then layout managers can only perform actions 
-specified in this element.
+The layout-manager element specifies the actions that layout managers are
+permitted to perform. If omitted, then layout-managers are granted permissions
+on all supported actions. If included, then layout managers can only perform
+actions specified in this element.
 -->
 <!ELEMENT layout-manager (action-key*) >
 
 <!--
-The owner-defaults element specifies the actions that creator of the resource
-are permitted to perform. If omitted owners are granted on all supported
-actions.
+The owner-defaults element specifies the actions that the creator of the
+resource is permitted to perform. If omitted, then owners are granted
+permissions on all supported actions.
 -->
 <!ELEMENT owner-defaults (action-key*) >
 
 <!--
-The model-resource element defines actions that are supported by the given
-service builder generated models. The model-resource also defines default
-permissions granted to community members, guests, layout managers. This element
-can also specify default social equity rules on a model.
+The model-resource element defines the permissions and social equity rules of
+the model.
 -->
 <!ELEMENT model-resource (model-name, portlet-ref, permissions?,
 social-equity?) >
 
 <!--
-The model-name element is the package name for the model to which these rules
-will apply.
+The model-name element is the name of the model.
 -->
 <!ELEMENT model-name (#PCDATA) >
 
 <!--
-The portlet-ref element is the name of the portlet in which these rules will be
-applied.
+The portlet-ref element is the name of the portlet that the model belongs to.
 -->
 <!ELEMENT portlet-ref (portlet-name) >
 
 <!--
 The social-equity element specifies the social equity mappings for different
-actions that can be performed on the containing model resource.
+actions that can be performed on the the model.
 -->
 <!ELEMENT social-equity (social-equity-mapping*) >
 
 <!--
 The social-equity-mapping element specifies the social equity values that
-can be applied to a particular action on this model resource
+can be applied to a particular action on the model.
 -->
 <!ELEMENT social-equity-mapping (action-key, information-daily-limit?,
 information-value?, information-lifespan?, participation-daily-limit?,
@@ -132,7 +123,7 @@ The information-value specifies the value of contributing information.
 
 <!--
 The information-lifespan entity specifies the length of time this value can be
-applied towards a users social score.
+applied toward a user's social score.
 -->
 <!ELEMENT information-lifespan (#PCDATA) >
 
@@ -147,7 +138,7 @@ The participation-value entity specifies the value of participation.
 -->
 <!ELEMENT participation-value (#PCDATA) >
 
-<!-- 
+<!--
 The participation-lifespan entity specifies the length of time this value can
 be applied to a user's participation score.
 -->
@@ -155,18 +146,18 @@ be applied to a user's participation score.
 
 <!--
 The unique element specifies if the action will provide value to the user's
-score can if it is performed more than once.
+score if it is performed more than once.
 -->
 <!ELEMENT unique (#PCDATA) >
 
 <!--
-The resource element specifies an external file that contains 
+The resource element specifies an external file that contains
 resource-action-mappings.
 -->
 <!ELEMENT resource EMPTY >
 
 <!--
-The attribute file specifies the external file that should be loaded to define 
+The attribute file specifies the external file that should be loaded to define
 resource actions.
 -->
 <!ATTLIST resource file CDATA #REQUIRED >
