@@ -595,42 +595,6 @@ public class CustomSQL {
 		return sql;
 	}
 
-	public String replaceOrderBy(
-		String sql, OrderByComparator obc, String tableName) {
-
-		if (obc == null) {
-			return sql;
-		}
-
-		String[] obcs = StringUtil.split(obc.getOrderBy());
-
-		StringBundler sb = new StringBundler(obcs.length * 5);
-
-		for (int i = 0; i < obcs.length; i++) {
-			sb.append(StringPool.SPACE);
-			sb.append(tableName);
-			sb.append(StringPool.PERIOD);
-			sb.append(obcs[i].trim());
-
-			if (i != obcs.length - 1) {
-				sb.append(StringPool.COMMA);
-			}
-		}
-
-		int pos = sql.indexOf(_ORDER_BY_CLAUSE);
-
-		if ((pos != -1) && (pos < sql.length())) {
-			
-			sql = sql.substring(0, pos + _ORDER_BY_CLAUSE.length()).concat(
-				sb.toString());
-		}
-		else {
-			sql = sql.concat(_ORDER_BY_CLAUSE).concat(sb.toString());
-		}
-
-		return sql;
-	}
-
 	protected String[] getConfigs() {
 		if (PortalClassLoaderUtil.getClassLoader() ==
 				CustomSQL.class.getClassLoader()) {

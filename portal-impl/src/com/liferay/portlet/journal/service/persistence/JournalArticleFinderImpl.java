@@ -691,14 +691,7 @@ public class JournalArticleFinderImpl
 					sql, "[$GROUP_BY_CLAUSE$]", "GROUP BY groupId, articleId");
 			}
 
-			if (CustomSQLUtil.isVendorOracle()) {
-				sql = CustomSQLUtil.replaceOrderBy(
-					sql, orderByComparator,
-					JournalArticle.class.getSimpleName());
-			}
-			else {
-				sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
-			}
+			sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
