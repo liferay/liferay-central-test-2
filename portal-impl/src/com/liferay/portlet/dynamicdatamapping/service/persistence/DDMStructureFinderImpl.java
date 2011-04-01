@@ -12,29 +12,14 @@
  * details.
  */
 
-package com.liferay.portlet.dynamicdatamapping;
+package com.liferay.portlet.dynamicdatamapping.service.persistence;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
-public class EntryStructureException extends PortalException {
-
-	public EntryStructureException() {
-		super();
-	}
-
-	public EntryStructureException(String msg) {
-		super(msg);
-	}
-
-	public EntryStructureException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public EntryStructureException(Throwable cause) {
-		super(cause);
-	}
-
+public class DDMStructureFinderImpl
+	extends BasePersistenceImpl<DDMStructure> implements DDMStructureFinder {
 }

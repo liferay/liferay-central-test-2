@@ -8,6 +8,7 @@
 	<sql file="custom-sql/bookmarks.xml" />
 	<sql file="custom-sql/calendar.xml" />
 	<sql file="custom-sql/documentlibrary.xml" />
+	<sql file="custom-sql/dynamicdatamapping.xml" />
 	<sql file="custom-sql/expando.xml" />
 	<sql file="custom-sql/imagegallery.xml" />
 	<sql file="custom-sql/journal.xml" />

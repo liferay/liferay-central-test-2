@@ -1351,7 +1351,13 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" localized="true" />
+		<field name="listKey" type="String">
+			<hint name="upper-case">true</hint>
+			<hint name="auto-escape">false</hint>
+		</field>
+		<field name="name" type="String" localized="true">
+			<validator name="required" />
+		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 			<validator name="required" />
@@ -1374,6 +1380,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
 		<field name="structureKey" type="String">
 			<hint name="upper-case">true</hint>
 			<hint name="auto-escape">false</hint>
