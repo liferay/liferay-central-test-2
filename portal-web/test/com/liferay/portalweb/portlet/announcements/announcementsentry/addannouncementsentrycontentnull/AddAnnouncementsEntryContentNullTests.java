@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.announcements;
+package com.liferay.portalweb.portlet.announcements.announcementsentry.addannouncementsentrycontentnull;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.announcements.announcementsentry.AnnouncementsEntryTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,12 +22,18 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AnnouncementsTests extends BaseTests {
+public class AddAnnouncementsEntryContentNullTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AnnouncementsEntryTests.suite());
+		testSuite.addTestSuite(SelectTimeZonePacificStandardTimeTest.class);
+		testSuite.addTestSuite(AddPageAnnouncementsTest.class);
+		testSuite.addTestSuite(AddPortletAnnouncementsTest.class);
+		testSuite.addTestSuite(AddAnnouncementsEntryContentNullTest.class);
+		testSuite.addTestSuite(TearDownAnnouncementsEntryTest.class);
+		testSuite.addTestSuite(TearDownTimeZoneTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
