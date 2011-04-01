@@ -115,10 +115,6 @@ public class CustomSQLUtil {
 		return _instance._customSQL.replaceOrderBy(sql, obc);
 	}
 
-	public static String replaceOrderBy(String sql, OrderByComparator obc, String tableName) {
-		return _instance._customSQL.replaceOrderBy(sql, obc, tableName);
-	}
-
 	private CustomSQLUtil() {
 		try {
 			_customSQL = new CustomSQL();
