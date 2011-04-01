@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.dbupgrade.sampledata523.stagingcommunity;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.dbupgrade.sampledata523.stagingcommunity.quartz.QuartzTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata523.stagingcommunity.webcontentdisplay.WebContentDisplayTests;
 
 import junit.framework.Test;
@@ -28,6 +29,7 @@ public class StagingCommunityTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(QuartzTests.suite());
 		testSuite.addTest(WebContentDisplayTests.suite());
 
 		return testSuite;
