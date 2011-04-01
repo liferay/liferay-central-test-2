@@ -20,30 +20,14 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Contract for device recognition providers. Implementors should be able to
- * provide information about all known devices and must be able to recognize
- * user's device form provided {@link HttpServletRequest} object.
- *
  * @author Milen Dyankov
  * @author Michael C. Han
  */
 @MessagingProxy(mode = ProxyMode.SYNC)
 public interface DeviceRecognitionProvider {
 
-	/**
-	 * Detects the mobile device based on information provided in the
-	 * HttpServletRequest
-	 *
-	 * @param httpServletRequest the servlet request containing device details
-	 * @return the detected device
-	 */
-	public Device detectDevice(HttpServletRequest httpServletRequest);
+	public Device detectDevice(HttpServletRequest request);
 
-	/**
-	 * Obtains all know devices for this provider
-	 *
-	 * @return all known devices for this provider
-	 */
 	public KnownDevices getKnownDevices();
 
 }

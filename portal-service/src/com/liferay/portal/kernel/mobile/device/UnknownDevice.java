@@ -24,10 +24,20 @@ import java.util.Map;
  */
 public class UnknownDevice extends AbstractDevice {
 
-	public static final String UNKNOWN = "unknown";
-
 	public static UnknownDevice getInstance() {
 		return _instance;
+	}
+
+	public String getBrand() {
+		return VersionableName.UNKNOWN.getName();
+	}
+
+	public String getBrowser() {
+		return VersionableName.UNKNOWN.getName();
+	}
+
+	public String getBrowserVersion() {
+		return VersionableName.UNKNOWN.getName();
 	}
 
 	public Map<String, Capability> getCapabilities() {
@@ -38,44 +48,32 @@ public class UnknownDevice extends AbstractDevice {
 		return null;
 	}
 
-	public String getBrand() {
-		return UNKNOWN;
-	}
-
 	public String getModel() {
-		return UNKNOWN;
+		return VersionableName.UNKNOWN.getName();
 	}
 
 	public String getOS() {
-		return UNKNOWN;
+		return VersionableName.UNKNOWN.getName();
 	}
 
 	public String getOSVersion() {
-		return UNKNOWN;
-	}
-
-	public String getBrowser() {
-		return UNKNOWN;
-	}
-
-	public String getBrowserVersion() {
-		return UNKNOWN;
+		return VersionableName.UNKNOWN.getName();
 	}
 
 	public String getPointingMethod() {
-		return UNKNOWN;
+		return VersionableName.UNKNOWN.getName();
 	}
 
 	public String getScreenSize() {
-		return UNKNOWN;
-	}
-
-	public boolean isTablet() {
-		return false;
+		return VersionableName.UNKNOWN.getName();
 	}
 
 	public boolean hasQwertyKeyboard() {
 		return true;
+	}
+
+	public boolean isTablet() {
+		return false;
 	}
 
 	private UnknownDevice() {

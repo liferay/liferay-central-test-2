@@ -27,11 +27,12 @@ import javax.servlet.http.HttpServletRequest;
 public class DeviceRecognitionProviderProxyBean
 	extends BaseProxyBean implements DeviceRecognitionProvider {
 
-	public Device detectDevice(HttpServletRequest httpServletRequest) {
+	public Device detectDevice(HttpServletRequest request) {
 		throw new UnsupportedOperationException();
 	}
 
 	public KnownDevices getKnownDevices() {
 		throw new UnsupportedOperationException();
 	}
+
 }

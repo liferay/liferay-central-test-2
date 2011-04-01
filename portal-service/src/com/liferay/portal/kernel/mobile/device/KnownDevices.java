@@ -18,47 +18,19 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Implementations should provide information about all client devices known to
- * particular {@link com.liferay.portal.kernel.mobile.device.DeviceRecognitionProvider}
- *
  * @author Milen Dyankov
  * @author Michael C. Han
  */
 public interface KnownDevices {
 
-	/**
-	 * Returns a map containing all known devices having given capability values
-	 *
-	 * @return a map containing all known devices having given capability values
-	 */
-	public Map<Capability, Set<String>> getDeviceIdsByCapabilities();
+	public Map<Capability, Set<String>> getDeviceIds();
 
-	/**
-	 * Returns all known brands
-	 *
-	 * @return all known brands
-	 */
 	public Set<VersionableName> getBrands();
 
-	/**
-	 * Returns all known operating systems
-	 *
-	 * @return all known operating systems
-	 */
 	public Set<VersionableName> getOperatingSystems();
 
-	/**
-	 * Returns all known browsers
-	 *
-	 * @return all known browsers
-	 */
 	public Set<VersionableName> getBrowsers();
 
-	/**
-	 * Returns all known pointing methods
-	 *
-	 * @return all known pointing methods
-	 */
 	public Set<String> getPointingMethods();
 
 }

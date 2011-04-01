@@ -36,7 +36,8 @@ public interface DestinationNames {
 
 	public static final String CONVERT_PROCESS = "liferay/convert_process";
 
-	public static final String DEVICE_RECOGNITION_PROVIDER = "liferay/device_recognition_provider";
+	public static final String DEVICE_RECOGNITION_PROVIDER =
+		"liferay/device_recognition_provider";
 
 	public static final String DOCUMENT_LIBRARY_HOOK =
 		"liferay/document_library_hook";

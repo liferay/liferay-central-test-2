@@ -25,19 +25,22 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Represents versionable name (a name and a set of versions)
- *
  * @author Milen Dyankov
  * @author Michael C. Han
  */
 public class VersionableName
 	implements Comparable<VersionableName>, Serializable {
 
-	public VersionableName(String name, Set<String> versions) {
+	public static final VersionableName UNKNOWN = new VersionableName(
+		"unknown", "unknown");
 
+	public VersionableName(String name) {
+		this(name, (Set<String>)null);
+	}
+
+	public VersionableName(String name, Set<String> versions) {
 		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException(
-				"Can not create VersionableName without name!");
+			throw new IllegalArgumentException("Name is null");
 		}
 
 		_name = name;
@@ -47,11 +50,7 @@ public class VersionableName
 	public VersionableName(String name, String version) {
 		this(name, new HashSet<String>());
 
-		_versions.add(version);
-	}
-
-	public VersionableName(String name) {
-		this(name, (Set<String>) null);
+		addVersion(version);
 	}
 
 	public void addVersion(String version) {
@@ -71,18 +70,23 @@ public class VersionableName
 			versionableName.getName().toUpperCase());
 	}
 
-	public boolean equals(Object object) {
-		if (this == object) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
 
-		if ((object == null) || (getClass() != object.getClass())) {
+		if (!(obj instanceof VersionableName)) {
 			return false;
 		}
 
-		VersionableName versionableName = (VersionableName) object;
+		VersionableName versionableName = (VersionableName)obj;
 
-		return _name.equals(versionableName.getName());
+		if (Validator.equals(_name, versionableName._name)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public String getName() {
@@ -98,7 +102,12 @@ public class VersionableName
 	}
 
 	public int hashCode() {
-		return _name != null ? _name.hashCode() : 0;
+		if (_name != null) {
+			return _name.hashCode();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public String toString() {

@@ -20,8 +20,6 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * This class provides convenient methods for device recognition
- *
  * @author Milen Dyankov
  */
 public class DeviceDetectionUtil {
@@ -30,12 +28,6 @@ public class DeviceDetectionUtil {
 		return _deviceRecognitionProvider.detectDevice(request);
 	}
 
-	/**
-	 * Obtains a list of available brand versions.  The list contains the brand
-	 * and version numbers
-	 *
-	 * @return all known brands and models
-	 */
 	public static Set<VersionableName> getKnownBrands() {
 		KnownDevices knownDevices =
 			_deviceRecognitionProvider.getKnownDevices();
@@ -43,42 +35,17 @@ public class DeviceDetectionUtil {
 		return knownDevices.getBrands();
 	}
 
-	/**
-	 * Obtains a list of known mobile browsers.
-	 *
-	 * @return all known browsers and versions
-	 */
-	public Set<VersionableName> getKnownBrowsers() {
-		KnownDevices knownDevices =
-			_deviceRecognitionProvider.getKnownDevices();
-
-		return knownDevices.getBrowsers();
-	}
-
-	/**
-	 * Obtains all known devices with a specified capability value
-	 *
-	 * @param capability the name and value of the capability
-	 * @return all known devices having given capability value
-	 */
 	public static Set<String> getKnownDeviceIdsByCapability(
 		Capability capability) {
 
 		KnownDevices knownDevices =
 			_deviceRecognitionProvider.getKnownDevices();
 
-		Map<Capability, Set<String>> capabilityDeviceIdsMap =
-			knownDevices.getDeviceIdsByCapabilities();
+		Map<Capability, Set<String>> deviceIds = knownDevices.getDeviceIds();
 
-		return capabilityDeviceIdsMap.get(capability);
+		return deviceIds.get(capability);
 	}
 
-	/**
-	 * Obtain a list of known operating systems.  List comprised of OS name and
-	 * version
-	 *
-	 * @return all known operating systems and versions
-	 */
 	public static Set<VersionableName> getKnownOperatingSystems() {
 		KnownDevices knownDevices =
 			_deviceRecognitionProvider.getKnownDevices();
@@ -86,16 +53,18 @@ public class DeviceDetectionUtil {
 		return knownDevices.getOperatingSystems();
 	}
 
-	/**
-	 * Obtains a list of known pointing methods.
-	 *
-	 * @return all known pointing methods
-	 */
 	public static Set<String> getKnownPointingMethods() {
 		KnownDevices knownDevices =
 			_deviceRecognitionProvider.getKnownDevices();
 
 		return knownDevices.getPointingMethods();
+	}
+
+	public Set<VersionableName> getKnownBrowsers() {
+		KnownDevices knownDevices =
+			_deviceRecognitionProvider.getKnownDevices();
+
+		return knownDevices.getBrowsers();
 	}
 
 	public void setDeviceRecognitionProvider(

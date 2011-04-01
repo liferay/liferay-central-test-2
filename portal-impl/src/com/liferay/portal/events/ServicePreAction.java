@@ -1136,7 +1136,8 @@ public class ServicePreAction extends Action {
 			timeZone = company.getTimeZone();
 		}
 
-		// Device Detection
+		// Device
+
 		Device device = (Device)session.getAttribute(WebKeys.DEVICE);
 
 		if (device == null) {
@@ -1498,7 +1499,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPortalURL(portalURL);
 		themeDisplay.setFacebookCanvasPageURL(facebookCanvasPageURL);
 		themeDisplay.setWidget(widget);
-		themeDisplay.setDevice(device);
 
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);
@@ -1529,6 +1529,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setI18nLanguageId(i18nLanguageId);
 		themeDisplay.setI18nPath(i18nPath);
 		themeDisplay.setTimeZone(timeZone);
+		themeDisplay.setDevice(device);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);
 		themeDisplay.setThemeImagesFastLoad(themeImagesFastLoad);

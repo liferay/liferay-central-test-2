@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 public abstract class AbstractDevice implements Device {
 
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{brand=");
 		sb.append(getBrand());
@@ -35,10 +35,6 @@ public abstract class AbstractDevice implements Device {
 		sb.append(getBrowserVersion());
 		sb.append(", capabiltiies=");
 		sb.append(getCapabilities());
-		sb.append(", hasQwertyKeyboard=");
-		sb.append(hasQwertyKeyboard());
-		sb.append(", isTablet=");
-		sb.append(isTablet());
 		sb.append(", model=");
 		sb.append(getModel());
 		sb.append(", os=");
@@ -47,8 +43,12 @@ public abstract class AbstractDevice implements Device {
 		sb.append(getOSVersion());
 		sb.append(", pointingMethod=");
 		sb.append(getPointingMethod());
+		sb.append(", qwertyKeyboard=");
+		sb.append(hasQwertyKeyboard());
 		sb.append(", screenSize=");
 		sb.append(getScreenSize());
+		sb.append(", tablet=");
+		sb.append(isTablet());
 		sb.append("}");
 
 		return sb.toString();

@@ -31,44 +31,50 @@ public class NoKnownDevices implements KnownDevices {
 		return _instance;
 	}
 
-	public Map<Capability, Set<String>> getDeviceIdsByCapabilities() {
-		return Collections.emptyMap();
-	}
-
 	public Set<VersionableName> getBrands() {
-		return Collections.unmodifiableSet(_brands);
-	}
-
-	public Set<VersionableName> getOperatingSystems() {
-		return Collections.unmodifiableSet(_oses);
+		return _brands;
 	}
 
 	public Set<VersionableName> getBrowsers() {
-		return Collections.unmodifiableSet(_browsers);
+		return _browsers;
+	}
+
+	public Map<Capability, Set<String>> getDeviceIds() {
+		return Collections.emptyMap();
+	}
+
+	public Set<VersionableName> getOperatingSystems() {
+		return _operatingSystems;
 	}
 
 	public Set<String> getPointingMethods() {
-		return Collections.unmodifiableSet(_pointingMethods);
+		return _pointingMethods;
 	}
 
 	private NoKnownDevices() {
-		_brands.add(
-			new VersionableName(UnknownDevice.UNKNOWN, UnknownDevice.UNKNOWN));
+		_brands.add(VersionableName.UNKNOWN);
 
-		_browsers.add(
-			new VersionableName(UnknownDevice.UNKNOWN, UnknownDevice.UNKNOWN));
+		_brands = Collections.unmodifiableSet(_brands);
 
-		_oses.add(
-			new VersionableName(UnknownDevice.UNKNOWN, UnknownDevice.UNKNOWN));
+		_browsers.add(VersionableName.UNKNOWN);
 
-		_pointingMethods.add(UnknownDevice.UNKNOWN);
+		_browsers = Collections.unmodifiableSet(_browsers);
+
+		_operatingSystems.add(VersionableName.UNKNOWN);
+
+		_operatingSystems = Collections.unmodifiableSet(_operatingSystems);
+
+		_pointingMethods.add(VersionableName.UNKNOWN.getName());
+
+		_pointingMethods = Collections.unmodifiableSet(_pointingMethods);
 	}
 
 	private static NoKnownDevices _instance = new NoKnownDevices();
 
 	private Set<VersionableName> _brands = new HashSet<VersionableName>();
 	private Set<VersionableName> _browsers = new HashSet<VersionableName>();
-	private Set<VersionableName> _oses = new HashSet<VersionableName>();
+	private Set<VersionableName> _operatingSystems =
+		new HashSet<VersionableName>();
 	private Set<String> _pointingMethods = new HashSet<String>();
 
 }

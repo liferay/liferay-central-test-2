@@ -25,42 +25,40 @@ import java.io.Serializable;
  */
 public class Capability implements Serializable {
 
-	public Capability(String capabilityValue, String capabilityName) {
-		_capabilityValue = capabilityValue;
-
-		_capabilityName = capabilityName;
+	public Capability(String name, String value) {
+		_name = name;
+		_value = value;
 	}
 
 	public boolean equals(Object obj) {
-		if (obj == this) {
+		if (this == obj) {
 			return true;
 		}
 
-		Capability capability = (Capability) obj;
-		if (!_capabilityName.equals(capability.getCapabilityName())) {
+		if (!(obj instanceof Capability)) {
 			return false;
 		}
 
-		if (Validator.isNotNull(_capabilityValue)) {
-			return _capabilityValue.equals(capability.getCapabilityValue());
+		Capability capability = (Capability)obj;
+
+		if (Validator.equals(_name, capability._name) &&
+			Validator.equals(_value, capability._value)) {
+
+			return true;
 		}
 
-		if (Validator.isNotNull(capability.getCapabilityValue())) {
-			return capability.getCapabilityValue().equals(_capabilityValue);
-		}
-
-		return true;
+		return false;
 	}
 
-	public String getCapabilityName() {
-		return _capabilityName;
+	public String getName() {
+		return _name;
 	}
 
-	public String getCapabilityValue() {
-		return _capabilityValue;
+	public String getValue() {
+		return _value;
 	}
 
-	private String _capabilityName;
-	private String _capabilityValue;
+	private String _name;
+	private String _value;
 
 }

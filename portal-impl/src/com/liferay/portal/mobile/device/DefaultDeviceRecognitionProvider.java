@@ -30,14 +30,9 @@ import javax.servlet.http.HttpServletRequest;
 public class DefaultDeviceRecognitionProvider
 	implements DeviceRecognitionProvider {
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DefaultDeviceRecognitionProvider.class);
-
-	public Device detectDevice(HttpServletRequest httpServletRequest) {
+	public Device detectDevice(HttpServletRequest request) {
 		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"DEVICE RECOGNITION PROVIDER NOT INSTALLED! " +
-				"LIST OF KNOWN DEVICES IS NOT AVAILABLE!");
+			_log.warn("Device recognition provider is not available");
 		}
 
 		return UnknownDevice.getInstance();
@@ -45,11 +40,13 @@ public class DefaultDeviceRecognitionProvider
 
 	public KnownDevices getKnownDevices() {
 		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"DEVICE RECOGNITION PROVIDER NOT INSTALLED! " +
-				"LIST OF KNOWN DEVICES IS NOT AVAILABLE!");
+			_log.warn("Device recognition provider is not available");
 		}
 
 		return NoKnownDevices.getInstance();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		DefaultDeviceRecognitionProvider.class);
+
 }
