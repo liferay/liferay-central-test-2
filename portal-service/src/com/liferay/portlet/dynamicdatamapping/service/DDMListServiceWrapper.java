@@ -28,6 +28,54 @@ public class DDMListServiceWrapper implements DDMListService {
 		_ddmListService = ddmListService;
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList addList(
+		long groupId, java.lang.String listKey, boolean autoListKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.lang.String description, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmListService.addList(groupId, listKey, autoListKey, nameMap,
+			description, structureId, serviceContext);
+	}
+
+	public void deleteList(long listId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmListService.deleteList(listId);
+	}
+
+	public void deleteList(long groupId, java.lang.String listKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmListService.deleteList(groupId, listKey);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList getList(
+		long listId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmListService.getList(listId);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList getList(
+		long groupId, java.lang.String listKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmListService.getList(groupId, listKey);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList updateList(
+		long groupId, java.lang.String listKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.lang.String description, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmListService.updateList(groupId, listKey, nameMap,
+			description, structureId, serviceContext);
+	}
+
 	public DDMListService getWrappedDDMListService() {
 		return _ddmListService;
 	}

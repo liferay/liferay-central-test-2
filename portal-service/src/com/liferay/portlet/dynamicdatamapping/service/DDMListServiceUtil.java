@@ -37,6 +37,56 @@ public class DDMListServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMListServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMList addList(
+		long groupId, java.lang.String listKey, boolean autoListKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.lang.String description, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addList(groupId, listKey, autoListKey, nameMap,
+			description, structureId, serviceContext);
+	}
+
+	public static void deleteList(long listId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteList(listId);
+	}
+
+	public static void deleteList(long groupId, java.lang.String listKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteList(groupId, listKey);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMList getList(
+		long listId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getList(listId);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMList getList(
+		long groupId, java.lang.String listKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getList(groupId, listKey);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMList updateList(
+		long groupId, java.lang.String listKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.lang.String description, long structureId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateList(groupId, listKey, nameMap, description,
+			structureId, serviceContext);
+	}
+
 	public static DDMListService getService() {
 		if (_service == null) {
 			_service = (DDMListService)PortalBeanLocatorUtil.locate(DDMListService.class.getName());
