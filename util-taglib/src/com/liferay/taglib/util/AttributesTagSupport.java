@@ -81,8 +81,14 @@ public class AttributesTagSupport
 	public void setNamespacedAttribute(
 		HttpServletRequest request, String key, Object value) {
 
-		request.setAttribute(
-			_attributeNamespace.concat(key), String.valueOf(value));
+		if (value instanceof Boolean) {
+			value = String.valueOf(value);
+		}
+		else if (value instanceof Number) {
+			value = String.valueOf(value);
+		}
+
+		request.setAttribute(_attributeNamespace.concat(key), value);
 	}
 
 	public void setScopedAttribute(String name, Object value) {
