@@ -353,42 +353,109 @@ public interface DDMListPersistence extends BasePersistence<DDMList> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchListException;
 
 	/**
-	* Finds the d d m list where groupId = &#63; and listKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListException} if it could not be found.
+	* Finds all the d d m lists where companyId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param listKey the list key to search with
-	* @return the matching d d m list
+	* @param companyId the company ID to search with
+	* @return the matching d d m lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMList> findByCompanyId(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds a range of all the d d m lists where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param start the lower bound of the range of d d m lists to return
+	* @param end the upper bound of the range of d d m lists to return (not inclusive)
+	* @return the range of matching d d m lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMList> findByCompanyId(
+		long companyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds an ordered range of all the d d m lists where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param start the lower bound of the range of d d m lists to return
+	* @param end the upper bound of the range of d d m lists to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d d m lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMList> findByCompanyId(
+		long companyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the first d d m list in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d d m list
 	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMList findByG_L(
-		long groupId, java.lang.String listKey)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList findByCompanyId_First(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchListException;
 
 	/**
-	* Finds the d d m list where groupId = &#63; and listKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Finds the last d d m list in the ordered set where companyId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param listKey the list key to search with
-	* @return the matching d d m list, or <code>null</code> if a matching d d m list could not be found
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d d m list
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMList fetchByG_L(
-		long groupId, java.lang.String listKey)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList findByCompanyId_Last(
+		long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchListException;
 
 	/**
-	* Finds the d d m list where groupId = &#63; and listKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Finds the d d m lists before and after the current d d m list in the ordered set where companyId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param listKey the list key to search with
-	* @return the matching d d m list, or <code>null</code> if a matching d d m list could not be found
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param listId the primary key of the current d d m list
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d d m list
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMList fetchByG_L(
-		long groupId, java.lang.String listKey, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList[] findByCompanyId_PrevAndNext(
+		long listId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchListException;
 
 	/**
 	* Finds all the d d m lists.
@@ -463,15 +530,13 @@ public interface DDMListPersistence extends BasePersistence<DDMList> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the d d m list where groupId = &#63; and listKey = &#63; from the database.
+	* Removes all the d d m lists where companyId = &#63; from the database.
 	*
-	* @param groupId the group ID to search with
-	* @param listKey the list key to search with
+	* @param companyId the company ID to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByG_L(long groupId, java.lang.String listKey)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListException;
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Removes all the d d m lists from the database.
@@ -513,14 +578,13 @@ public interface DDMListPersistence extends BasePersistence<DDMList> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m lists where groupId = &#63; and listKey = &#63;.
+	* Counts all the d d m lists where companyId = &#63;.
 	*
-	* @param groupId the group ID to search with
-	* @param listKey the list key to search with
+	* @param companyId the company ID to search with
 	* @return the number of matching d d m lists
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_L(long groupId, java.lang.String listKey)
+	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

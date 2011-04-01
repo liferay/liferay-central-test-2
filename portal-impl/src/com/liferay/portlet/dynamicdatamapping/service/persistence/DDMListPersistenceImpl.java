@@ -106,14 +106,18 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
 			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByGroupId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_L = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByG_L",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_L = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_COMPANYID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
 			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_L",
-			new String[] { Long.class.getName(), String.class.getName() });
+			"findByCompanyId",
+			new String[] {
+				Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByCompanyId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMListModelImpl.ENTITY_CACHE_ENABLED,
 			DDMListModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -133,13 +137,6 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { ddmList.getUuid(), Long.valueOf(ddmList.getGroupId()) },
 			ddmList);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_L,
-			new Object[] {
-				Long.valueOf(ddmList.getGroupId()),
-				
-			ddmList.getListKey()
-			}, ddmList);
 
 		ddmList.resetOriginalValues();
 	}
@@ -189,13 +186,6 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { ddmList.getUuid(), Long.valueOf(ddmList.getGroupId()) });
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_L,
-			new Object[] {
-				Long.valueOf(ddmList.getGroupId()),
-				
-			ddmList.getListKey()
-			});
 	}
 
 	/**
@@ -308,13 +298,6 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 				Long.valueOf(ddmListModelImpl.getGroupId())
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_L,
-			new Object[] {
-				Long.valueOf(ddmListModelImpl.getGroupId()),
-				
-			ddmListModelImpl.getListKey()
-			});
-
 		EntityCacheUtil.removeResult(DDMListModelImpl.ENTITY_CACHE_ENABLED,
 			DDMListImpl.class, ddmList.getPrimaryKey());
 
@@ -378,30 +361,6 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 				}, ddmList);
 		}
 
-		if (!isNew &&
-				((ddmList.getGroupId() != ddmListModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(ddmList.getListKey(),
-					ddmListModelImpl.getOriginalListKey()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_L,
-				new Object[] {
-					Long.valueOf(ddmListModelImpl.getOriginalGroupId()),
-					
-				ddmListModelImpl.getOriginalListKey()
-				});
-		}
-
-		if (isNew ||
-				((ddmList.getGroupId() != ddmListModelImpl.getOriginalGroupId()) ||
-				!Validator.equals(ddmList.getListKey(),
-					ddmListModelImpl.getOriginalListKey()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_L,
-				new Object[] {
-					Long.valueOf(ddmList.getGroupId()),
-					
-				ddmList.getListKey()
-				}, ddmList);
-		}
-
 		return ddmList;
 	}
 
@@ -423,7 +382,6 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 		ddmListImpl.setUserName(ddmList.getUserName());
 		ddmListImpl.setCreateDate(ddmList.getCreateDate());
 		ddmListImpl.setModifiedDate(ddmList.getModifiedDate());
-		ddmListImpl.setListKey(ddmList.getListKey());
 		ddmListImpl.setName(ddmList.getName());
 		ddmListImpl.setDescription(ddmList.getDescription());
 		ddmListImpl.setStructureId(ddmList.getStructureId());
@@ -1348,90 +1306,80 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 	}
 
 	/**
-	 * Finds the d d m list where groupId = &#63; and listKey = &#63; or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListException} if it could not be found.
+	 * Finds all the d d m lists where companyId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param listKey the list key to search with
-	 * @return the matching d d m list
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
+	 * @param companyId the company ID to search with
+	 * @return the matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMList findByG_L(long groupId, String listKey)
-		throws NoSuchListException, SystemException {
-		DDMList ddmList = fetchByG_L(groupId, listKey);
-
-		if (ddmList == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", listKey=");
-			msg.append(listKey);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchListException(msg.toString());
-		}
-
-		return ddmList;
-	}
-
-	/**
-	 * Finds the d d m list where groupId = &#63; and listKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param listKey the list key to search with
-	 * @return the matching d d m list, or <code>null</code> if a matching d d m list could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DDMList fetchByG_L(long groupId, String listKey)
+	public List<DDMList> findByCompanyId(long companyId)
 		throws SystemException {
-		return fetchByG_L(groupId, listKey, true);
+		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 	}
 
 	/**
-	 * Finds the d d m list where groupId = &#63; and listKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds a range of all the d d m lists where companyId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param listKey the list key to search with
-	 * @return the matching d d m list, or <code>null</code> if a matching d d m list could not be found
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
+	 * @return the range of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMList fetchByG_L(long groupId, String listKey,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, listKey };
+	public List<DDMList> findByCompanyId(long companyId, int start, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, start, end, null);
+	}
 
-		Object result = null;
+	/**
+	 * Finds an ordered range of all the d d m lists where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param start the lower bound of the range of d d m lists to return
+	 * @param end the upper bound of the range of d d m lists to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching d d m lists
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<DDMList> findByCompanyId(long companyId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
 
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_L,
-					finderArgs, this);
-		}
+		List<DDMList> list = (List<DDMList>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_COMPANYID,
+				finderArgs, this);
 
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
 
 			query.append(_SQL_SELECT_DDMLIST_WHERE);
 
-			query.append(_FINDER_COLUMN_G_L_GROUPID_2);
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
-			if (listKey == null) {
-				query.append(_FINDER_COLUMN_G_L_LISTKEY_1);
-			}
-			else {
-				if (listKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_L_LISTKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_L_LISTKEY_2);
-				}
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
 			}
 
 			String sql = query.toString();
@@ -1445,56 +1393,246 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
+				qPos.add(companyId);
 
-				if (listKey != null) {
-					qPos.add(listKey);
-				}
-
-				List<DDMList> list = q.list();
-
-				result = list;
-
-				DDMList ddmList = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_L,
-						finderArgs, list);
-				}
-				else {
-					ddmList = list.get(0);
-
-					cacheResult(ddmList);
-
-					if ((ddmList.getGroupId() != groupId) ||
-							(ddmList.getListKey() == null) ||
-							!ddmList.getListKey().equals(listKey)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_L,
-							finderArgs, ddmList);
-					}
-				}
-
-				return ddmList;
+				list = (List<DDMList>)QueryUtil.list(q, getDialect(), start, end);
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_L,
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_COMPANYID,
 						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_COMPANYID,
+						finderArgs, list);
 				}
 
 				closeSession(session);
 			}
 		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first d d m list in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMList findByCompanyId_First(long companyId,
+		OrderByComparator orderByComparator)
+		throws NoSuchListException, SystemException {
+		List<DDMList> list = findByCompanyId(companyId, 0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchListException(msg.toString());
+		}
 		else {
-			if (result instanceof List<?>) {
-				return null;
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last d d m list in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a matching d d m list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMList findByCompanyId_Last(long companyId,
+		OrderByComparator orderByComparator)
+		throws NoSuchListException, SystemException {
+		int count = countByCompanyId(companyId);
+
+		List<DDMList> list = findByCompanyId(companyId, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchListException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the d d m lists before and after the current d d m list in the ordered set where companyId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param listId the primary key of the current d d m list
+	 * @param companyId the company ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next d d m list
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListException if a d d m list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDMList[] findByCompanyId_PrevAndNext(long listId, long companyId,
+		OrderByComparator orderByComparator)
+		throws NoSuchListException, SystemException {
+		DDMList ddmList = findByPrimaryKey(listId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DDMList[] array = new DDMListImpl[3];
+
+			array[0] = getByCompanyId_PrevAndNext(session, ddmList, companyId,
+					orderByComparator, true);
+
+			array[1] = ddmList;
+
+			array[2] = getByCompanyId_PrevAndNext(session, ddmList, companyId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected DDMList getByCompanyId_PrevAndNext(Session session,
+		DDMList ddmList, long companyId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DDMLIST_WHERE);
+
+		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
 			}
-			else {
-				return (DDMList)result;
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
 			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(ddmList);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<DDMList> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -1645,17 +1783,15 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 	}
 
 	/**
-	 * Removes the d d m list where groupId = &#63; and listKey = &#63; from the database.
+	 * Removes all the d d m lists where companyId = &#63; from the database.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param listKey the list key to search with
+	 * @param companyId the company ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_L(long groupId, String listKey)
-		throws NoSuchListException, SystemException {
-		DDMList ddmList = findByG_L(groupId, listKey);
-
-		ddmListPersistence.remove(ddmList);
+	public void removeByCompanyId(long companyId) throws SystemException {
+		for (DDMList ddmList : findByCompanyId(companyId)) {
+			ddmListPersistence.remove(ddmList);
+		}
 	}
 
 	/**
@@ -1859,38 +1995,24 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 	}
 
 	/**
-	 * Counts all the d d m lists where groupId = &#63; and listKey = &#63;.
+	 * Counts all the d d m lists where companyId = &#63;.
 	 *
-	 * @param groupId the group ID to search with
-	 * @param listKey the list key to search with
+	 * @param companyId the company ID to search with
 	 * @return the number of matching d d m lists
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_L(long groupId, String listKey)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, listKey };
+	public int countByCompanyId(long companyId) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_L,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_COMPANYID,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(2);
 
 			query.append(_SQL_COUNT_DDMLIST_WHERE);
 
-			query.append(_FINDER_COLUMN_G_L_GROUPID_2);
-
-			if (listKey == null) {
-				query.append(_FINDER_COLUMN_G_L_LISTKEY_1);
-			}
-			else {
-				if (listKey.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_L_LISTKEY_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_L_LISTKEY_2);
-				}
-			}
+			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 			String sql = query.toString();
 
@@ -1903,11 +2025,7 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(groupId);
-
-				if (listKey != null) {
-					qPos.add(listKey);
-				}
+				qPos.add(companyId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1919,8 +2037,8 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_L, finderArgs,
-					count);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -2026,10 +2144,7 @@ public class DDMListPersistenceImpl extends BasePersistenceImpl<DDMList>
 	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(ddmList.uuid IS NULL OR ddmList.uuid = ?) AND ";
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddmList.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "ddmList.groupId = ?";
-	private static final String _FINDER_COLUMN_G_L_GROUPID_2 = "ddmList.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_L_LISTKEY_1 = "ddmList.listKey IS NULL";
-	private static final String _FINDER_COLUMN_G_L_LISTKEY_2 = "ddmList.listKey = ?";
-	private static final String _FINDER_COLUMN_G_L_LISTKEY_3 = "(ddmList.listKey IS NULL OR ddmList.listKey = ?)";
+	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "ddmList.companyId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmList.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMList exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMList exists with the key {";

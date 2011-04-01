@@ -39,7 +39,6 @@ public class DDMListSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setListKey(model.getListKey());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setStructureId(model.getStructureId());
@@ -159,14 +158,6 @@ public class DDMListSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getListKey() {
-		return _listKey;
-	}
-
-	public void setListKey(String listKey) {
-		_listKey = listKey;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -199,7 +190,6 @@ public class DDMListSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _listKey;
 	private String _name;
 	private String _description;
 	private long _structureId;

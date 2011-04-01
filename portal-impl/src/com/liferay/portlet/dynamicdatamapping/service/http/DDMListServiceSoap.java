@@ -14,13 +14,6 @@
 
 package com.liferay.portlet.dynamicdatamapping.service.http;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import com.liferay.portlet.dynamicdatamapping.service.DDMListServiceUtil;
-
-import java.rmi.RemoteException;
-
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -65,57 +58,4 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class DDMListServiceSoap {
-	public static void deleteList(long listId) throws RemoteException {
-		try {
-			DDMListServiceUtil.deleteList(listId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteList(long groupId, java.lang.String listKey)
-		throws RemoteException {
-		try {
-			DDMListServiceUtil.deleteList(groupId, listKey);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMListSoap getList(
-		long listId) throws RemoteException {
-		try {
-			com.liferay.portlet.dynamicdatamapping.model.DDMList returnValue = DDMListServiceUtil.getList(listId);
-
-			return com.liferay.portlet.dynamicdatamapping.model.DDMListSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.dynamicdatamapping.model.DDMListSoap getList(
-		long groupId, java.lang.String listKey) throws RemoteException {
-		try {
-			com.liferay.portlet.dynamicdatamapping.model.DDMList returnValue = DDMListServiceUtil.getList(groupId,
-					listKey);
-
-			return com.liferay.portlet.dynamicdatamapping.model.DDMListSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(DDMListServiceSoap.class);
 }

@@ -1351,15 +1351,10 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="listKey" type="String">
-			<hint name="upper-case">true</hint>
-			<hint name="auto-escape">false</hint>
-		</field>
-		<field name="name" type="String" localized="true">
-			<validator name="required" />
-		</field>
+		<field name="name" type="String" localized="true" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="structureId" type="long" />
 	</model>
@@ -1389,6 +1384,7 @@
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
+			<validator name="required" />
 		</field>
 		<field name="xsd" type="String">
 			<hint-collection name="CLOB" />

@@ -43,7 +43,6 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
@@ -360,24 +359,6 @@ public abstract class DDMContentLocalServiceBaseImpl
 	 */
 	public void setDDMListPersistence(DDMListPersistence ddmListPersistence) {
 		this.ddmListPersistence = ddmListPersistence;
-	}
-
-	/**
-	 * Gets the d d m list finder.
-	 *
-	 * @return the d d m list finder
-	 */
-	public DDMListFinder getDDMListFinder() {
-		return ddmListFinder;
-	}
-
-	/**
-	 * Sets the d d m list finder.
-	 *
-	 * @param ddmListFinder the d d m list finder
-	 */
-	public void setDDMListFinder(DDMListFinder ddmListFinder) {
-		this.ddmListFinder = ddmListFinder;
 	}
 
 	/**
@@ -759,8 +740,6 @@ public abstract class DDMContentLocalServiceBaseImpl
 	protected DDMListService ddmListService;
 	@BeanReference(type = DDMListPersistence.class)
 	protected DDMListPersistence ddmListPersistence;
-	@BeanReference(type = DDMListFinder.class)
-	protected DDMListFinder ddmListFinder;
 	@BeanReference(type = DDMStorageLinkLocalService.class)
 	protected DDMStorageLinkLocalService ddmStorageLinkLocalService;
 	@BeanReference(type = DDMStorageLinkPersistence.class)

@@ -192,21 +192,6 @@ public interface DDMListModel extends BaseModel<DDMList>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Gets the list key of this d d m list.
-	 *
-	 * @return the list key of this d d m list
-	 */
-	@AutoEscape
-	public String getListKey();
-
-	/**
-	 * Sets the list key of this d d m list.
-	 *
-	 * @param listKey the list key of this d d m list
-	 */
-	public void setListKey(String listKey);
-
-	/**
 	 * Gets the name of this d d m list.
 	 *
 	 * @return the name of this d d m list

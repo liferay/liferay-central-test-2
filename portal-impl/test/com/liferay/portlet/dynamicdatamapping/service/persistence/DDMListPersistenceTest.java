@@ -76,7 +76,6 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 		newDDMList.setUserName(randomString());
 		newDDMList.setCreateDate(nextDate());
 		newDDMList.setModifiedDate(nextDate());
-		newDDMList.setListKey(randomString());
 		newDDMList.setName(randomString());
 		newDDMList.setDescription(randomString());
 		newDDMList.setStructureId(nextLong());
@@ -95,7 +94,6 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDDMList.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingDDMList.getModifiedDate()),
 			Time.getShortTimestamp(newDDMList.getModifiedDate()));
-		assertEquals(existingDDMList.getListKey(), newDDMList.getListKey());
 		assertEquals(existingDDMList.getName(), newDDMList.getName());
 		assertEquals(existingDDMList.getDescription(),
 			newDDMList.getDescription());
@@ -221,11 +219,6 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 				existingDDMListModelImpl.getOriginalUuid()));
 		assertEquals(existingDDMListModelImpl.getGroupId(),
 			existingDDMListModelImpl.getOriginalGroupId());
-
-		assertEquals(existingDDMListModelImpl.getGroupId(),
-			existingDDMListModelImpl.getOriginalGroupId());
-		assertTrue(Validator.equals(existingDDMListModelImpl.getListKey(),
-				existingDDMListModelImpl.getOriginalListKey()));
 	}
 
 	protected DDMList addDDMList() throws Exception {
@@ -240,7 +233,6 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 		ddmList.setUserName(randomString());
 		ddmList.setCreateDate(nextDate());
 		ddmList.setModifiedDate(nextDate());
-		ddmList.setListKey(randomString());
 		ddmList.setName(randomString());
 		ddmList.setDescription(randomString());
 		ddmList.setStructureId(nextLong());
