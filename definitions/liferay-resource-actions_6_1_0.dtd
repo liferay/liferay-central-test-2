@@ -1,7 +1,7 @@
 <!--
 This is the DTD for defining Actions supported on Resources for Liferay Portal.
 
-<!DOCTYPE liferay-resource-actions PUBLIC
+<!DOCTYPE resource-action-mapping PUBLIC
 	"-//Liferay//DTD Resource Actions 6.1.0//EN"
 	"http://www.liferay.com/dtd/liferay-resource-actions_6_1_0.dtd">
 -->
@@ -94,7 +94,7 @@ The model-name element is the name of the model.
 <!--
 The portlet-ref element is the name of the portlet that the model belongs to.
 -->
-<!ELEMENT portlet-ref (portlet-name) >
+<!ELEMENT portlet-ref (portlet-name*) >
 
 <!--
 The social-equity element specifies the social equity mappings for different
@@ -108,7 +108,7 @@ can be applied to a particular action on the model.
 -->
 <!ELEMENT social-equity-mapping (action-key, information-daily-limit?,
 information-value?, information-lifespan?, participation-daily-limit?,
-participation-value?, participation-lifespan?, unique?) >
+participation-value?, participation-lifespan?, social-activity-mapping?, unique?) >
 
 <!--
 The information-daily-limit entity specifies the amount of added information
@@ -143,6 +143,12 @@ The participation-lifespan entity specifies the length of time this value can
 be applied to a user's participation score.
 -->
 <!ELEMENT participation-lifespan (#PCDATA) >
+
+<!--
+-->
+<!ELEMENT social-activity-mapping (#PCDATA) >
+
+<!ATTLIST social-activity-mapping class CDATA #REQUIRED >
 
 <!--
 The unique element specifies if the action will provide value to the user's
