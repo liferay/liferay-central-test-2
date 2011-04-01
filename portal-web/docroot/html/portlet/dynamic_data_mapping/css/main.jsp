@@ -59,12 +59,4 @@
 			padding: 10px;
 		}
 	}
-
-	.lfr-ddm-types-form-column .aui-column-content-first {
-		margin-right: 10px;
-	}
-
-	.lfr-ddm-search-form .aui-column {
-		margin-right: 10px;
-	}
 }
