@@ -399,12 +399,6 @@ AUI().add(
 				);
 			},
 
-			articleChanged: function() {
-				var instance = this;
-
-				return window[instance.portletNamespace + 'contentChangedFlag'];
-			},
-
 			buildHTMLEditor: function(fieldInstance) {
 				var instance = this;
 
@@ -428,7 +422,6 @@ AUI().add(
 
 				var url = [];
 				var initMethod = instance.portletNamespace + 'initEditor' + fieldInstance.get('variableName');
-				var onChangeMethod = instance.portletNamespace + 'editorContentChanged';
 
 				window[initMethod] = instance._emptyFunction;
 
@@ -444,8 +437,6 @@ AUI().add(
 				url.push('&toolbarSet=liferay-article');
 				url.push('&initMethod=');
 				url.push(initMethod);
-				url.push('&onChangeMethod=');
-				url.push(onChangeMethod);
 				url.push('&cssPath=');
 				url.push(Journal.PROXY.pathThemeCss);
 				url.push('&cssClasses=portlet ');
@@ -2372,13 +2363,6 @@ AUI().add(
 						}
 					);
 				}
-
-				containerInputs.on(
-					'change',
-					function() {
-						window[instance.portletNamespace + 'contentChanged']();
-					}
-				);
 			},
 
 			_createDynamicNode: function(nodeName, attributeMap) {

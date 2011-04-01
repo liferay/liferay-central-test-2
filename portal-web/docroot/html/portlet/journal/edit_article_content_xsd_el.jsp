@@ -125,7 +125,6 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
 						toolbarSet="liferay-article"
 						initMethod='<%= renderResponse.getNamespace() + "initEditor" + elInstanceId %>'
-						onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>'
 						height="460"
 						width="500"
 					/>
@@ -337,7 +336,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("link_to_layout") %>'>
-					<aui:select label="" name='<%= "structure_el" + count.getValue() + "_content" %>' onChange='<%= renderResponse.getNamespace() + "contentChanged();" %>' showEmptyOption="<%= true %>">
+					<aui:select label="" name='<%= "structure_el" + count.getValue() + "_content" %>' showEmptyOption="<%= true %>">
 
 						<%
 						boolean privateLayout = false;

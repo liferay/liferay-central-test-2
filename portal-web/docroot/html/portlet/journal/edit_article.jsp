@@ -497,7 +497,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											</label>
 
 											<div class="journal-article-component-container">
-												<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
+												<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" width="100%" />
 											</div>
 
 											<aui:input cssClass="journal-article-localized-checkbox" label="localizable" name="localized" type="hidden" value="<%= true %>" />
@@ -840,11 +840,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 <aui:script>
 	var <portlet:namespace />documentLibraryInput = null;
 	var <portlet:namespace />imageGalleryInput = null;
-	var <portlet:namespace />contentChangedFlag = false;
-
-	function <portlet:namespace />contentChanged() {
-		<portlet:namespace />contentChangedFlag = true;
-	}
 
 	function <portlet:namespace />deleteArticle() {
 		<c:choose>
@@ -860,10 +855,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 			submitForm(document.<portlet:namespace />fm1);
 		}
-	}
-
-	function <portlet:namespace />editorContentChanged(text) {
-		<portlet:namespace />contentChanged();
 	}
 
 	function <portlet:namespace />expireArticle() {
