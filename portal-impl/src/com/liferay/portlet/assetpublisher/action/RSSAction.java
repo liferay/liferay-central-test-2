@@ -16,6 +16,8 @@ package com.liferay.portlet.assetpublisher.action;
 
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
@@ -76,9 +78,17 @@ public class RSSAction extends PortletAction {
 
 		StringBundler sb = new StringBundler(7);
 
-		sb.append(themeDisplay.getPortalURL());
-		sb.append(themeDisplay.getPathContext());
-		sb.append(PortalUtil.getLayoutURL(layout, themeDisplay));
+		String layoutFriendlyURL = GetterUtil.getString(
+			PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
+
+		if (!layoutFriendlyURL.startsWith(Http.HTTP_WITH_SLASH) &&
+			!layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+			sb.append(themeDisplay.getPortalURL());
+			sb.append(themeDisplay.getPathContext());
+		}
+
+		sb.append(layoutFriendlyURL);
 		sb.append(Portal.FRIENDLY_URL_SEPARATOR);
 		sb.append("asset_publisher/");
 		sb.append(portletDisplay.getInstanceId());
