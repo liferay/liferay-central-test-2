@@ -15,6 +15,7 @@
 package com.liferay.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DirectoryNameException;
+import com.liferay.documentlibrary.FileExtensionException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
@@ -373,7 +374,7 @@ public class DLLocalServiceImpl
 			}
 
 			if (!validFileExtension) {
-				throw new FileNameException(fileName);
+				throw new FileExtensionException(fileName);
 			}
 		}
 	}

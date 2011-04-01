@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileExtensionException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
@@ -122,6 +123,7 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
+					 e instanceof FileExtensionException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof NoSuchFolderException ||
@@ -133,6 +135,13 @@ public class EditFileEntryAction extends PortletAction {
 
 					response.setStatus(
 						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION);
+				}
+				else if (e instanceof FileExtensionException) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(actionResponse);
+
+					response.setStatus(
+						ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION);
 				}
 				else if (e instanceof FileNameException) {
 					HttpServletResponse response =

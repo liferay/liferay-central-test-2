@@ -6,7 +6,7 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
-		 * allowedFileTypes {string}: A comma-seperated list of allowable filetypes.
+		 * allowedFileTypes {string}: A comma-separated list of allowable filetypes.
 		 * container {string|object}: The container where the uploader will be placed.
 		 * maxFileSize {number}: The maximum file size that can be uploaded.
 		 * uploadFile {string}: The URL to where the file will be uploaded.
@@ -82,6 +82,7 @@ AUI().add(
 			instance._fileListPendingText = Liferay.Language.get('x-files-ready-to-be-uploaded');
 			instance._fileListText = Liferay.Language.get('file-list');
 			instance._fileTypesDescriptionText = options.fileDescription || instance._allowedFileTypes;
+			instance._invalidFileExtensionText = Liferay.Language.get('document-names-must-end-with-one-of-the-following-extensions') + instance._allowedFileTypes;
 			instance._invalidFileNameText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-name');
 			instance._invalidFileSizeText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-size');
 			instance._unexpectedErrorText = Liferay.Language.get('an-unexpected-error-occurred-while-uploading-your-file');
@@ -90,9 +91,10 @@ AUI().add(
 			instance._uploadFilesText = Liferay.Language.get('upload-files');
 
 			instance._errorMessages = {
-				'1000': Liferay.Language.get('please-enter-a-unique-document-name'),
-				'1001': Liferay.Language.get('please-enter-a-file-with-a-valid-file-name'),
-				'1002': instance._invalidFileSizeText
+				'1000': instance._duplicateFileText,
+				'1001': instance._invalidFileExtensionText,
+				'1002': instance._invalidFileNameText,
+				'1003': instance._invalidFileSizeText
 			};
 
 			if (instance._fallbackContainer) {

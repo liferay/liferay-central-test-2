@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.documentlibrary.FileExtensionException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.NoSuchUserException;
@@ -96,7 +97,8 @@ public class EditDiscussionAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
-			else if (e instanceof FileNameException ||
+			else if (e instanceof FileExtensionException ||
+					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException) {

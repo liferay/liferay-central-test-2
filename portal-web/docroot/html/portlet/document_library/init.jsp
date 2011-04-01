@@ -19,6 +19,7 @@
 <%@ page import="com.liferay.documentlibrary.DirectoryNameException" %>
 <%@ page import="com.liferay.documentlibrary.DuplicateDirectoryException" %>
 <%@ page import="com.liferay.documentlibrary.DuplicateFileException" %>
+<%@ page import="com.liferay.documentlibrary.FileExtensionException" %>
 <%@ page import="com.liferay.documentlibrary.FileNameException" %>
 <%@ page import="com.liferay.documentlibrary.FileSizeException" %>
 <%@ page import="com.liferay.documentlibrary.NoSuchDirectoryException" %>

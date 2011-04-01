@@ -220,7 +220,10 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 				else if (causeString.indexOf("ImageNameException") != -1) {
 					returnValue = "205";
 				}
-				else if (causeString.indexOf("FileNameException") != -1) {
+				else if ((causeString.indexOf(
+							"FileExtensionException") != -1) ||
+					 	 (causeString.indexOf("FileNameException") != -1)) {
+
 					returnValue = "206";
 				}
 				else if (causeString.indexOf("PrincipalException") != -1) {

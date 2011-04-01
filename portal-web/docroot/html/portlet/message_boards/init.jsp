@@ -16,6 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.documentlibrary.FileExtensionException" %>
 <%@ page import="com.liferay.documentlibrary.FileNameException" %>
 <%@ page import="com.liferay.documentlibrary.FileSizeException" %>
 <%@ page import="com.liferay.documentlibrary.service.DLLocalServiceUtil" %>

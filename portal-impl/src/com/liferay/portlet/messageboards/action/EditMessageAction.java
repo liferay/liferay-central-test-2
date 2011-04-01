@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.documentlibrary.FileExtensionException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException;
@@ -134,6 +135,7 @@ public class EditMessageAction extends PortletAction {
 			}
 			else if (e instanceof CaptchaMaxChallengesException ||
 					 e instanceof CaptchaTextException ||
+					 e instanceof FileExtensionException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof LockedThreadException ||

@@ -12,19 +12,29 @@
  * details.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.documentlibrary;
+
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Hugo Huijser
  */
-public interface ServletResponseConstants {
+public class FileExtensionException extends PortalException {
 
-	public static final int SC_DUPLICATE_FILE_EXCEPTION = 1000;
+	public FileExtensionException() {
+		super();
+	}
 
-	public static final int SC_FILE_EXTENSION_EXCEPTION = 1001;
+	public FileExtensionException(String msg) {
+		super(msg);
+	}
 
-	public static final int SC_FILE_NAME_EXCEPTION = 1002;
+	public FileExtensionException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public static final int SC_FILE_SIZE_EXCEPTION = 1003;
+	public FileExtensionException(Throwable cause) {
+		super(cause);
+	}
 
 }
