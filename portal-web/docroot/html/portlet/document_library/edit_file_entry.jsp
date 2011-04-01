@@ -157,7 +157,6 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= FileNameException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
-
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
 	<liferay-ui:error exception="<%= SourceFileNameException.class %>">

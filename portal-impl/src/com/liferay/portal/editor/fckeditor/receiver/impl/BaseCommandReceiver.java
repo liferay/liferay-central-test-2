@@ -100,13 +100,13 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			if (cause != null) {
 				String causeString = GetterUtil.getString(cause.toString());
 
-				if (causeString.indexOf("DuplicateFolderNameException") != -1) {
+				if (causeString.contains("DuplicateFolderNameException")) {
 					returnValue = "101";
 				}
-				else if (causeString.indexOf("FolderNameException") != -1) {
+				else if (causeString.contains("FolderNameException")) {
 					returnValue = "102";
 				}
-				else if (causeString.indexOf("NoSuchGroupException") != -1) {
+				else if (causeString.contains("NoSuchGroupException")) {
 					returnValue = "103";
 				}
 				else {
@@ -212,29 +212,28 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			if (cause != null) {
 				String causeString = GetterUtil.getString(cause.toString());
 
-				if ((causeString.indexOf("NoSuchFolderException") != -1) ||
-					(causeString.indexOf("NoSuchGroupException") != -1)) {
+				if (causeString.contains("NoSuchFolderException")||
+					causeString.contains("NoSuchGroupException")) {
 
 					returnValue = "204";
 				}
-				else if (causeString.indexOf("ImageNameException") != -1) {
+				else if (causeString.contains("ImageNameException")) {
 					returnValue = "205";
 				}
-				else if ((causeString.indexOf(
-							"FileExtensionException") != -1) ||
-					 	 (causeString.indexOf("FileNameException") != -1)) {
+				else if (causeString.contains("FileExtensionException") ||
+						 causeString.contains("FileNameException")) {
 
 					returnValue = "206";
 				}
-				else if (causeString.indexOf("PrincipalException") != -1) {
+				else if (causeString.contains("PrincipalException")) {
 					returnValue = "207";
 				}
-				else if ((causeString.indexOf("ImageSizeException") != -1) ||
-						 (causeString.indexOf("FileSizeException") != -1)) {
+				else if (causeString.contains("ImageSizeException") ||
+						 causeString.contains("FileSizeException")) {
 
 					returnValue = "208";
 				}
-				else if (causeString.indexOf("SystemException") != -1) {
+				else if (causeString.contains("SystemException")) {
 					returnValue = "209";
 				}
 				else {

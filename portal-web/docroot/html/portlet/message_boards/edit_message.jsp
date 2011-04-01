@@ -169,7 +169,6 @@ if (Validator.isNull(redirect)) {
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= FileNameException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
-
 	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
 	<liferay-ui:asset-tags-error />
