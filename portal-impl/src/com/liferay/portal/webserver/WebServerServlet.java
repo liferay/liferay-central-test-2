@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -529,13 +530,17 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	private static User _getUser(HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession();
+
+		if (PortalSessionThreadLocal.getHttpSession() == null) {
+			PortalSessionThreadLocal.setHttpSession(session);
+		}
+
 		User user = PortalUtil.getUser(request);
 
 		if (user != null) {
 			return user;
 		}
-
-		HttpSession session = request.getSession();
 
 		String userIdString = (String)session.getAttribute("j_username");
 		String password = (String)session.getAttribute("j_password");
