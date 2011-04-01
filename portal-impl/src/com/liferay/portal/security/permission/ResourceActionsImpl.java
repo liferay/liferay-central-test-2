@@ -602,7 +602,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			_log.debug("Loading " + source);
 		}
 
-		Document document = SAXReaderUtil.read(inputStream);
+		Document document = SAXReaderUtil.read(inputStream, true);
 
 		Element rootElement = document.getRootElement();
 
@@ -622,7 +622,7 @@ public class ResourceActionsImpl implements ResourceActions {
 	public void read(String servletContextName, InputStream inputStream)
 		throws Exception {
 
-		Document document = SAXReaderUtil.read(inputStream);
+		Document document = SAXReaderUtil.read(inputStream, true);
 
 		read(servletContextName, document);
 	}
