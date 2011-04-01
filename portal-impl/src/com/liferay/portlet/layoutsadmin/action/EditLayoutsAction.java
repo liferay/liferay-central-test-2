@@ -540,8 +540,8 @@ public class EditLayoutsAction extends PortletAction {
 			Layout.class.getName(), actionRequest);
 
 		Layout layout = null;
-		String oldFriendlyURL = StringPool.BLANK;
 		UnicodeProperties layoutTypeSettingsProperties = null;
+		String oldFriendlyURL = StringPool.BLANK;
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -618,11 +618,11 @@ public class EditLayoutsAction extends PortletAction {
 				type, hidden, friendlyURL, Boolean.valueOf(iconImage),
 				iconBytes, serviceContext);
 
+			layoutTypeSettingsProperties = layout.getTypeSettingsProperties();
+
 			if (oldFriendlyURL.equals(layout.getFriendlyURL())) {
 				oldFriendlyURL = StringPool.BLANK;
 			}
-
-			layoutTypeSettingsProperties = layout.getTypeSettingsProperties();
 
 			UnicodeProperties formTypeSettingsProperties =
 				PropertiesParamUtil.getProperties(
