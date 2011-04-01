@@ -48,14 +48,17 @@
 
 				editor.on(
 					'paste',
-					function(e) {
-						var data = e.data.html;
+					function(event) {
+						var data = event.data;
 
-						data = CKEDITOR.htmlDataProcessor.prototype.toDataFormat(data);
+						var htmlData = data.html;
 
-						e.data.html = data;
+						htmlData = CKEDITOR.htmlDataProcessor.prototype.toDataFormat(htmlData);
+
+						data.html = htmlData;
 					},
-					editor.element.$);
+					editor.element.$
+				);
 
 				editor.fire('customDataProcessorLoaded');
 			}
