@@ -14,10 +14,85 @@
 
 package com.liferay.portlet.dynamicdatamapping.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.dynamicdatamapping.model.DDMList;
 import com.liferay.portlet.dynamicdatamapping.service.base.DDMListServiceBaseImpl;
+import com.liferay.portlet.dynamicdatamapping.service.permission.DDMListPermission;
+import com.liferay.portlet.dynamicdatamapping.service.permission.DDMPermission;
+
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Marcellus Tavares
  */
 public class DDMListServiceImpl extends DDMListServiceBaseImpl {
+
+	public DDMList addList(
+			long groupId, String listKey, boolean autoListKey,
+			Map<Locale, String> nameMap, String description, long structureId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDMPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_LIST);
+
+		return ddmListLocalService.addList(
+			getUserId(), groupId, listKey, autoListKey, nameMap, description,
+			structureId, serviceContext);
+	}
+
+	public void deleteList(long listId)
+		throws PortalException, SystemException {
+
+		DDMListPermission.check(
+			getPermissionChecker(), listId, ActionKeys.DELETE);
+
+		ddmListLocalService.deleteList(listId);
+	}
+
+	public void deleteList(long groupId, String listKey)
+		throws PortalException, SystemException {
+
+		DDMListPermission.check(
+			getPermissionChecker(), groupId, listKey, ActionKeys.DELETE);
+
+		ddmListLocalService.deleteList(groupId, listKey);
+	}
+
+	public DDMList getList(long listId)
+		throws PortalException, SystemException {
+
+		DDMListPermission.check(
+			getPermissionChecker(), listId, ActionKeys.VIEW);
+
+		return ddmListLocalService.getList(listId);
+	}
+
+	public DDMList getList(long groupId, String listKey)
+		throws PortalException, SystemException {
+
+		DDMListPermission.check(
+			getPermissionChecker(), groupId, listKey, ActionKeys.VIEW);
+
+		return ddmListLocalService.getList(groupId, listKey);
+	}
+
+	public DDMList updateList(
+			long groupId, String listKey, Map<Locale, String> nameMap,
+			String description, long structureId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDMListPermission.check(
+			getPermissionChecker(), groupId, listKey, ActionKeys.UPDATE);
+
+		return ddmListLocalService.updateList(
+			groupId, listKey, nameMap, description, structureId,
+			serviceContext);
+	}
+
 }
