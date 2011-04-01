@@ -162,6 +162,7 @@
 		<dtd publicId="-//Liferay//DTD Portlet Application 5.2.0//EN" location="${definitions.dir}/liferay-portlet-app_5_2_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Portlet Application 6.0.0//EN" location="${definitions.dir}/liferay-portlet-app_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Portlet Application 6.1.0//EN" location="${definitions.dir}/liferay-portlet-app_6_1_0.dtd" />
+		<dtd publicId="-//Liferay//DTD Resource Actions 6.0.0//EN" location="${definitions.dir}/liferay-resource-actions_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Resource Actions 6.1.0//EN" location="${definitions.dir}/liferay-resource-actions_6_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 3.5.0//EN" location="${definitions.dir}/liferay-service-builder_3_5_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Service Builder 3.6.1//EN" location="${definitions.dir}/liferay-service-builder_3_6_1.dtd" />
