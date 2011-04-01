@@ -44,6 +44,8 @@ public class CMISAtomPubRepository extends CMISRepositoryHandler {
 		parameters.put(
 			SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
 
+		parameters.put(SessionParameter.COMPRESSION, Boolean.TRUE.toString());
+
 		Locale locale = LocaleUtil.getDefault();
 
 		parameters.put(
