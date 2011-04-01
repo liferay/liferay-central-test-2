@@ -45,10 +45,11 @@ public class DDMStructureLinkServiceWrapper implements DDMStructureLinkService {
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		long structureLinkId)
+		long classNameId, long classPK, long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmStructureLinkService.getStructureLink(structureLinkId);
+		return _ddmStructureLinkService.getStructureLink(classNameId, classPK,
+			structureId);
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink updateStructureLink(

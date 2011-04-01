@@ -202,8 +202,12 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 
 		DDMStructureLinkModelImpl existingDDMStructureLinkModelImpl = (DDMStructureLinkModelImpl)_persistence.findByPrimaryKey(newDDMStructureLink.getPrimaryKey());
 
+		assertEquals(existingDDMStructureLinkModelImpl.getClassNameId(),
+			existingDDMStructureLinkModelImpl.getOriginalClassNameId());
 		assertEquals(existingDDMStructureLinkModelImpl.getClassPK(),
 			existingDDMStructureLinkModelImpl.getOriginalClassPK());
+		assertEquals(existingDDMStructureLinkModelImpl.getStructureId(),
+			existingDDMStructureLinkModelImpl.getOriginalStructureId());
 	}
 
 	protected DDMStructureLink addDDMStructureLink() throws Exception {

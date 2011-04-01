@@ -127,7 +127,8 @@ public class DDMStructureLinkServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink getStructureLink(
-		HttpPrincipal httpPrincipal, long structureLinkId)
+		HttpPrincipal httpPrincipal, long classNameId, long classPK,
+		long structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -135,7 +136,7 @@ public class DDMStructureLinkServiceHttp {
 					"getStructureLink", _getStructureLinkParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					structureLinkId);
+					classNameId, classPK, structureId);
 
 			Object returnObj = null;
 
@@ -210,7 +211,7 @@ public class DDMStructureLinkServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getStructureLinkParameterTypes2 = new Class[] {
-			long.class
+			long.class, long.class, long.class
 		};
 	private static final Class<?>[] _updateStructureLinkParameterTypes3 = new Class[] {
 			long.class, long.class, long.class, long.class
