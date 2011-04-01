@@ -59,8 +59,6 @@ public interface Constants {
 
 	public static final String MOVE = "move";
 
-	public static final String NO_ACTION = "no_action";
-
 	public static final String PREVIEW = "preview";
 
 	public static final String PRINT = "print";

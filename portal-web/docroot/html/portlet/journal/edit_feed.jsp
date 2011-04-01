@@ -415,7 +415,8 @@ if (feed != null) {
 	}
 
 	function <portlet:namespace />removeStructure() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.NO_ACTION %>";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />structureId.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 		document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
@@ -425,6 +426,7 @@ if (feed != null) {
 
 	function <portlet:namespace />saveFeed() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= redirect %>";
 
 		<c:if test="<%= feed == null %>">
 			document.<portlet:namespace />fm.<portlet:namespace />feedId.value = document.<portlet:namespace />fm.<portlet:namespace />newFeedId.value;
@@ -439,7 +441,8 @@ if (feed != null) {
 
 	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>') && document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.NO_ACTION %>";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";
@@ -455,7 +458,8 @@ if (feed != null) {
 
 	function <portlet:namespace />selectTemplate(structureId, templateId, dialog) {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.NO_ACTION %>";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
 

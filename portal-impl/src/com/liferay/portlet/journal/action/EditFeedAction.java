@@ -66,9 +66,6 @@ public class EditFeedAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFeeds(actionRequest);
 			}
-			else if (cmd.equals(Constants.NO_ACTION)) {
-				return;
-			}
 
 			sendRedirect(actionRequest, actionResponse);
 		}
