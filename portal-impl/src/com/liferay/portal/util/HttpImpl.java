@@ -992,10 +992,10 @@ public class HttpImpl implements Http {
 
 			HttpClient httpClient = getClient(hostConfiguration);
 
-			if ((method == Http.Method.POST) ||
-				(method == Http.Method.PUT)) {
+			if (method.equals(Http.Method.POST) ||
+				method.equals(Http.Method.PUT)) {
 
-				if (method == Http.Method.POST) {
+				if (method.equals(Http.Method.POST)) {
 					httpMethod = new PostMethod(location);
 				}
 				else {
@@ -1013,7 +1013,7 @@ public class HttpImpl implements Http {
 					entityEnclosingMethod.setRequestEntity(requestEntity);
 				}
 				else if ((parts != null) && (parts.size() > 0) &&
-						 (method == Http.Method.POST)) {
+						 method.equals(Http.Method.POST)) {
 
 					List<NameValuePair> nvpList =
 						new ArrayList<NameValuePair>();
@@ -1039,10 +1039,10 @@ public class HttpImpl implements Http {
 						ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED_UTF8);
 				}
 			}
-			else if (method == Http.Method.DELETE) {
+			else if (method.equals(Http.Method.DELETE)) {
 				httpMethod = new DeleteMethod(location);
 			}
-			else if (method == Http.Method.HEAD) {
+			else if (method.equals(Http.Method.HEAD)) {
 				httpMethod = new HeadMethod(location);
 			}
 			else {
@@ -1056,7 +1056,8 @@ public class HttpImpl implements Http {
 				}
 			}
 
-			if ((method == Http.Method.POST) || (method == Http.Method.PUT) &&
+			if ((method.equals(Http.Method.POST) ||
+				 method.equals(Http.Method.PUT)) &&
 				(body != null)) {
 			}
 			else if (!_hasRequestHeader(httpMethod, HttpHeaders.CONTENT_TYPE)) {
@@ -1113,9 +1114,9 @@ public class HttpImpl implements Http {
 				}
 			}
 
-			InputStream is = httpMethod.getResponseBodyAsStream();
+			InputStream inputStream = httpMethod.getResponseBodyAsStream();
 
-			if (is != null) {
+			if (inputStream != null) {
 				Header contentLength = httpMethod.getResponseHeader(
 					HttpHeaders.CONTENT_LENGTH);
 
@@ -1131,9 +1132,9 @@ public class HttpImpl implements Http {
 					response.setContentType(contentType.getValue());
 				}
 
-				bytes = FileUtil.getBytes(is);
+				bytes = FileUtil.getBytes(inputStream);
 
-				is.close();
+				inputStream.close();
 			}
 
 			for (Header header : httpMethod.getResponseHeaders()) {
