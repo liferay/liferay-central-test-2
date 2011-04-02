@@ -14,15 +14,15 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -44,9 +44,6 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.IOException;
-
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -68,10 +65,10 @@ public class PermissionExporter {
 
 	protected Element exportGroupPermissions(
 			long companyId, long groupId, String resourceName,
-			String resourcePrimKey, Element parentEl, String elName)
-		throws SystemException {
+			String resourcePrimKey, Element parentElement, String elementName)
+		throws Exception {
 
-		Element el = parentEl.addElement(elName);
+		Element element = parentElement.addElement(elementName);
 
 		List<Permission> permissions =
 			PermissionLocalServiceUtil.getGroupPermissions(
@@ -80,200 +77,192 @@ public class PermissionExporter {
 
 		List<String> actions = ResourceActionsUtil.getActions(permissions);
 
-		for (int i = 0; i < actions.size(); i++) {
-			String action = actions.get(i);
+		for (String action : actions) {
+			Element actionKeyElement = element.addElement("action-key");
 
-			Element actionKeyEl = el.addElement("action-key");
-
-			actionKeyEl.addText(action);
+			actionKeyElement.addText(action);
 		}
 
-		return el;
+		return element;
 	}
 
 	protected void exportGroupRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String entityName, Element parentEl)
-		throws SystemException {
+			String resourceName, String entityName, Element parentElement)
+		throws Exception {
 
 		List<Role> roles = layoutCache.getGroupRoles_1to4(groupId);
 
-		Element groupEl = exportRoles(
+		Element groupElement = exportRoles(
 			companyId, resourceName, ResourceConstants.SCOPE_GROUP,
-			String.valueOf(groupId), parentEl, entityName + "-roles", roles);
+			String.valueOf(groupId), parentElement, entityName + "-roles",
+			roles);
 
-		if (groupEl.elements().isEmpty()) {
-			parentEl.remove(groupEl);
+		if (groupElement.elements().isEmpty()) {
+			parentElement.remove(groupElement);
 		}
 	}
 
 	protected void exportInheritedPermissions(
 			LayoutCache layoutCache, long companyId, String resourceName,
-			String resourcePrimKey, Element parentEl, String entityName)
-		throws PortalException, SystemException {
+			String resourcePrimKey, Element parentElement, String entityName)
+		throws Exception {
 
-		Element entityPermissionsEl = SAXReaderUtil.createElement(
+		Element entityPermissionsElement = SAXReaderUtil.createElement(
 			entityName + "-permissions");
 
 		Map<String, Long> entityMap = layoutCache.getEntityMap(
 			companyId, entityName);
 
-		Iterator<Map.Entry<String, Long>> itr = entityMap.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Long> entry = itr.next();
-
-			String name = entry.getKey().toString();
+		for (Map.Entry<String, Long> entry : entityMap.entrySet()) {
+			String name = entry.getKey();
 
 			long entityGroupId = entry.getValue();
 
-			Element entityEl = exportGroupPermissions(
+			Element entityElement = exportGroupPermissions(
 				companyId, entityGroupId, resourceName, resourcePrimKey,
-				entityPermissionsEl, entityName + "-actions");
+				entityPermissionsElement, entityName + "-actions");
 
-			if (entityEl.elements().isEmpty()) {
-				entityPermissionsEl.remove(entityEl);
+			if (entityElement.elements().isEmpty()) {
+				entityPermissionsElement.remove(entityElement);
 			}
 			else {
-				entityEl.addAttribute("name", name);
+				entityElement.addAttribute("name", name);
 			}
 		}
 
-		if (!entityPermissionsEl.elements().isEmpty()) {
-			parentEl.add(entityPermissionsEl);
+		if (!entityPermissionsElement.elements().isEmpty()) {
+			parentElement.add(entityPermissionsElement);
 		}
 	}
 
 	protected void exportInheritedRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String entityName, Element parentEl)
-		throws PortalException, SystemException {
+			String resourceName, String entityName, Element parentElement)
+		throws Exception {
 
-		Element entityRolesEl = SAXReaderUtil.createElement(
+		Element entityRolesElement = SAXReaderUtil.createElement(
 			entityName + "-roles");
 
 		Map<String, Long> entityMap = layoutCache.getEntityMap(
 			companyId, entityName);
 
-		Iterator<Map.Entry<String, Long>> itr = entityMap.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Long> entry = itr.next();
-
-			String name = entry.getKey().toString();
+		for (Map.Entry<String, Long> entry : entityMap.entrySet()) {
+			String name = entry.getKey();
 
 			long entityGroupId = entry.getValue();
 
 			List<Role> entityRoles = layoutCache.getGroupRoles_1to4(
 				entityGroupId);
 
-			Element entityEl = exportRoles(
+			Element entityElement = exportRoles(
 				companyId, resourceName, ResourceConstants.SCOPE_GROUP,
-				String.valueOf(groupId), entityRolesEl, entityName,
+				String.valueOf(groupId), entityRolesElement, entityName,
 				entityRoles);
 
-			if (entityEl.elements().isEmpty()) {
-				entityRolesEl.remove(entityEl);
+			if (entityElement.elements().isEmpty()) {
+				entityRolesElement.remove(entityElement);
 			}
 			else {
-				entityEl.addAttribute("name", name);
+				entityElement.addAttribute("name", name);
 			}
 		}
 
-		if (!entityRolesEl.elements().isEmpty()) {
-			parentEl.add(entityRolesEl);
+		if (!entityRolesElement.elements().isEmpty()) {
+			parentElement.add(entityRolesElement);
 		}
 	}
 
 	protected void exportLayoutPermissions(
-			PortletDataContext context, LayoutCache layoutCache, long companyId,
-			long groupId, Layout layout, Element layoutEl,
+			PortletDataContext portletDataContext, LayoutCache layoutCache,
+			long companyId, long groupId, Layout layout, Element layoutElement,
 			boolean exportUserPermissions)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		String resourceName = Layout.class.getName();
 		String resourcePrimKey = String.valueOf(layout.getPlid());
 
-		Element permissionsEl = layoutEl.addElement("permissions");
+		Element permissionsElement = layoutElement.addElement("permissions");
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			exportPermissions_5(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, false);
+				permissionsElement, false);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			exportPermissions_6(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, false);
+				permissionsElement, false);
 		}
 		else {
 			exportPermissions_1to4(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, exportUserPermissions);
+				permissionsElement, exportUserPermissions);
 		}
 	}
 
 	protected void exportLayoutRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Element rolesEl)
-		throws PortalException, SystemException {
+			Element rolesElement)
+		throws Exception {
 
 		String resourceName = Layout.class.getName();
 
 		exportGroupRoles(
 			layoutCache, companyId, groupId, resourceName, "community",
-			rolesEl);
+			rolesElement);
 
-		exportUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
+		exportUserRoles(
+			layoutCache, companyId, groupId, resourceName, rolesElement);
 
 		exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "organization",
-			rolesEl);
+			rolesElement);
 
 		exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "user-group",
-			rolesEl);
+			rolesElement);
 	}
 
 	protected void exportPermissions_1to4(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element permissionsEl,
-			boolean exportUserPermissions)
-		throws PortalException, SystemException {
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean exportUserPermissions)
+		throws Exception {
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			companyId, GroupConstants.GUEST);
 
 		exportGroupPermissions(
-			companyId, groupId, resourceName, resourcePrimKey, permissionsEl,
-			"community-actions");
+			companyId, groupId, resourceName, resourcePrimKey,
+			permissionsElement, "community-actions");
 
 		if (groupId != guestGroup.getGroupId()) {
 			exportGroupPermissions(
 				companyId, guestGroup.getGroupId(), resourceName,
-				resourcePrimKey, permissionsEl, "guest-actions");
+				resourcePrimKey, permissionsElement, "guest-actions");
 		}
 
 		if (exportUserPermissions) {
 			exportUserPermissions(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl);
+				permissionsElement);
 		}
 
 		exportInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "organization");
+			permissionsElement, "organization");
 
 		exportInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "user-group");
+			permissionsElement, "user-group");
 	}
 
 	protected void exportPermissions_5(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element permissionsEl,
-			boolean portletActions)
-		throws PortalException, SystemException {
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean portletActions)
+		throws Exception {
 
 		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName,
@@ -287,11 +276,11 @@ public class PermissionExporter {
 				continue;
 			}
 
-			Element roleEl = permissionsEl.addElement("role");
+			Element roleElement = permissionsElement.addElement("role");
 
-			roleEl.addAttribute("name", role.getName());
-			roleEl.addAttribute("description", role.getDescription());
-			roleEl.addAttribute("type", String.valueOf(role.getType()));
+			roleElement.addAttribute("name", role.getName());
+			roleElement.addAttribute("description", role.getDescription());
+			roleElement.addAttribute("type", String.valueOf(role.getType()));
 
 			List<Permission> permissions =
 				PermissionLocalServiceUtil.getRolePermissions(
@@ -300,18 +289,18 @@ public class PermissionExporter {
 			List<String> actions = ResourceActionsUtil.getActions(permissions);
 
 			for (String action : actions) {
-				Element actionKeyEl = roleEl.addElement("action-key");
+				Element actionKeyElement = roleElement.addElement("action-key");
 
-				actionKeyEl.addText(action);
+				actionKeyElement.addText(action);
 			}
 		}
 	}
 
 	protected void exportPermissions_6(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element permissionsEl,
-			boolean portletActions)
-		throws PortalException, SystemException {
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean portletActions)
+		throws Exception {
 
 		List<Role> roles = layoutCache.getGroupRoles_5(groupId, resourceName);
 
@@ -320,11 +309,11 @@ public class PermissionExporter {
 				continue;
 			}
 
-			Element roleEl = permissionsEl.addElement("role");
+			Element roleElement = permissionsElement.addElement("role");
 
-			roleEl.addAttribute("name", role.getName());
-			roleEl.addAttribute("description", role.getDescription());
-			roleEl.addAttribute("type", String.valueOf(role.getType()));
+			roleElement.addAttribute("name", role.getName());
+			roleElement.addAttribute("description", role.getDescription());
+			roleElement.addAttribute("type", String.valueOf(role.getType()));
 
 			List<String> actionIds = null;
 
@@ -345,175 +334,172 @@ public class PermissionExporter {
 						role.getRoleId(), actionIds);
 
 			for (String action : actions) {
-				Element actionKeyEl = roleEl.addElement("action-key");
+				Element actionKeyElement = roleElement.addElement("action-key");
 
-				actionKeyEl.addText(action);
+				actionKeyElement.addText(action);
 			}
 		}
 	}
 
-	protected void exportPortletDataPermissions(PortletDataContext context)
-		throws SystemException {
+	protected void exportPortletDataPermissions(
+			PortletDataContext portletDataContext)
+		throws Exception {
 
-		try {
-			Document doc = SAXReaderUtil.createDocument();
+		Document document = SAXReaderUtil.createDocument();
 
-			Element root = doc.addElement("portlet-data-permissions");
+		Element rootElement = document.addElement(
+			"portlet-data-permissions");
 
-			Map<String, List<KeyValuePair>> permissionsMap =
-				context.getPermissions();
+		Map<String, List<KeyValuePair>> permissionsMap =
+			portletDataContext.getPermissions();
 
-			for (Map.Entry<String, List<KeyValuePair>> entry :
-					permissionsMap.entrySet()) {
+		for (Map.Entry<String, List<KeyValuePair>> entry :
+				permissionsMap.entrySet()) {
 
-				String[] permissionEntry = entry.getKey().split(
-					StringPool.POUND);
+			String[] permissionParts = StringUtil.split(
+				entry.getKey(), StringPool.POUND);
 
-				Element portletDataEl = root.addElement("portlet-data");
+			String resourceName = permissionParts[0];
+			long resourcePK = GetterUtil.getLong(permissionParts[1]);
 
-				portletDataEl.addAttribute("resource-name", permissionEntry[0]);
-				portletDataEl.addAttribute("resource-pk", permissionEntry[1]);
+			Element portletDataElement = rootElement.addElement(
+				"portlet-data");
 
-				List<KeyValuePair> permissions = entry.getValue();
+			portletDataElement.addAttribute("resource-name", resourceName);
+			portletDataElement.addAttribute(
+				"resource-pk", String.valueOf(resourcePK));
 
-				for (KeyValuePair permission : permissions) {
-					String roleName = permission.getKey();
-					String actions = permission.getValue();
+			List<KeyValuePair> permissions = entry.getValue();
 
-					Element permissionsEl = portletDataEl.addElement(
-						"permissions");
+			for (KeyValuePair permission : permissions) {
+				String roleName = permission.getKey();
+				String actions = permission.getValue();
 
-					permissionsEl.addAttribute("role-name", roleName);
-					permissionsEl.addAttribute("actions", actions);
-				}
+				Element permissionsElement = portletDataElement.addElement(
+					"permissions");
+
+				permissionsElement.addAttribute("role-name", roleName);
+				permissionsElement.addAttribute("actions", actions);
 			}
+		}
 
-			context.addZipEntry(
-				context.getRootPath() + "/portlet-data-permissions.xml",
-				doc.formattedString());
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		portletDataContext.addZipEntry(
+			portletDataContext.getRootPath() + "/portlet-data-permissions.xml",
+			document.formattedString());
 	}
 
 	protected void exportPortletPermissions(
-			PortletDataContext context, LayoutCache layoutCache,
-			String portletId, Layout layout, Element portletEl)
-		throws PortalException, SystemException {
+			PortletDataContext portletDataContext, LayoutCache layoutCache,
+			String portletId, Layout layout, Element portletElement)
+		throws Exception {
 
-		long companyId = context.getCompanyId();
-		long groupId = context.getGroupId();
+		long companyId = portletDataContext.getCompanyId();
+		long groupId = portletDataContext.getGroupId();
 
 		String resourceName = PortletConstants.getRootPortletId(portletId);
 		String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 			layout.getPlid(), portletId);
 
-		Element permissionsEl = portletEl.addElement("permissions");
+		Element permissionsElement = portletElement.addElement("permissions");
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			exportPermissions_5(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, true);
+				permissionsElement, true);
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			exportPermissions_6(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, true);
+				permissionsElement, true);
 		}
 		else {
 			boolean exportUserPermissions = MapUtil.getBoolean(
-				context.getParameterMap(),
+				portletDataContext.getParameterMap(),
 				PortletDataHandlerKeys.USER_PERMISSIONS);
 
 			exportPermissions_1to4(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, exportUserPermissions);
+				permissionsElement, exportUserPermissions);
 
-			Element rolesEl = portletEl.addElement("roles");
+			Element rolesElement = portletElement.addElement("roles");
 
 			exportPortletRoles(
-				layoutCache, companyId, groupId, portletId, rolesEl);
+				layoutCache, companyId, groupId, portletId, rolesElement);
 		}
 	}
 
 	protected void exportPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String portletId, Element rolesEl)
-		throws PortalException, SystemException {
+			String portletId, Element rolesElement)
+		throws Exception {
 
 		String resourceName = PortletConstants.getRootPortletId(
 			portletId);
 
-		Element portletEl = rolesEl.addElement("portlet");
+		Element portletElement = rolesElement.addElement("portlet");
 
-		portletEl.addAttribute("portlet-id", portletId);
+		portletElement.addAttribute("portlet-id", portletId);
 
 		exportGroupRoles(
 			layoutCache, companyId, groupId, resourceName, "community",
-			portletEl);
+			portletElement);
 
 		exportUserRoles(
-			layoutCache, companyId, groupId, resourceName, portletEl);
+			layoutCache, companyId, groupId, resourceName, portletElement);
 
 		exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "organization",
-			portletEl);
+			portletElement);
 
 		exportInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "user-group",
-			portletEl);
+			portletElement);
 
-		if (portletEl.elements().isEmpty()) {
-			rolesEl.remove(portletEl);
+		if (portletElement.elements().isEmpty()) {
+			rolesElement.remove(portletElement);
 		}
 	}
 
 	protected Element exportRoles(
 			long companyId, String resourceName, int scope,
-			String resourcePrimKey, Element parentEl, String elName,
+			String resourcePrimKey, Element parentElement, String elName,
 			List<Role> roles)
-		throws SystemException {
+		throws Exception {
 
-		Element el = parentEl.addElement(elName);
+		Element element = parentElement.addElement(elName);
 
 		Map<String, List<String>> resourceRoles =
 			RoleLocalServiceUtil.getResourceRoles(
 				companyId, resourceName, scope, resourcePrimKey);
 
-		Iterator<Map.Entry<String, List<String>>> itr =
-			resourceRoles.entrySet().iterator();
+		for (Map.Entry<String, List<String>> entry : resourceRoles.entrySet()) {
+			String roleName = entry.getKey();
 
-		while (itr.hasNext()) {
-			Map.Entry<String, List<String>> entry = itr.next();
+			if (!hasRole(roles, roleName)) {
+				continue;
+			}
 
-			String roleName = entry.getKey().toString();
+			Element roleElement = element.addElement("role");
 
-			if (hasRole(roles, roleName)) {
-				Element roleEl = el.addElement("role");
+			roleElement.addAttribute("name", roleName);
 
-				roleEl.addAttribute("name", roleName);
+			List<String> actions = entry.getValue();
 
-				List<String> actions = entry.getValue();
+			for (String action : actions) {
+				Element actionKeyElement = roleElement.addElement("action-key");
 
-				for (int i = 0; i < actions.size(); i++) {
-					String action = actions.get(i);
-
-					Element actionKeyEl = roleEl.addElement("action-key");
-
-					actionKeyEl.addText(action);
-					actionKeyEl.addAttribute("scope", String.valueOf(scope));
-				}
+				actionKeyElement.addText(action);
+				actionKeyElement.addAttribute("scope", String.valueOf(scope));
 			}
 		}
 
-		return el;
+		return element;
 	}
 
 	protected void exportUserPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element parentEl)
-		throws SystemException {
+			String resourceName, String resourcePrimKey, Element parentElement)
+		throws Exception {
 
 		StopWatch stopWatch = null;
 
@@ -523,7 +509,7 @@ public class PermissionExporter {
 			stopWatch.start();
 		}
 
-		Element userPermissionsEl = SAXReaderUtil.createElement(
+		Element userPermissionsElement = SAXReaderUtil.createElement(
 			"user-permissions");
 
 		List<User> users = layoutCache.getGroupUsers(groupId);
@@ -531,7 +517,8 @@ public class PermissionExporter {
 		for (User user : users) {
 			String uuid = user.getUuid();
 
-			Element userActionsEl = SAXReaderUtil.createElement("user-actions");
+			Element userActionsElement = SAXReaderUtil.createElement(
+				"user-actions");
 
 			List<Permission> permissions =
 				PermissionLocalServiceUtil.getUserPermissions(
@@ -541,19 +528,20 @@ public class PermissionExporter {
 			List<String> actions = ResourceActionsUtil.getActions(permissions);
 
 			for (String action : actions) {
-				Element actionKeyEl = userActionsEl.addElement("action-key");
+				Element actionKeyElement = userActionsElement.addElement(
+					"action-key");
 
-				actionKeyEl.addText(action);
+				actionKeyElement.addText(action);
 			}
 
-			if (!userActionsEl.elements().isEmpty()) {
-				userActionsEl.addAttribute("uuid", uuid);
-				userPermissionsEl.add(userActionsEl);
+			if (!userActionsElement.elements().isEmpty()) {
+				userActionsElement.addAttribute("uuid", uuid);
+				userPermissionsElement.add(userActionsElement);
 			}
 		}
 
-		if (!userPermissionsEl.elements().isEmpty()) {
-			parentEl.add(userPermissionsEl);
+		if (!userPermissionsElement.elements().isEmpty()) {
+			parentElement.add(userPermissionsElement);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -566,10 +554,10 @@ public class PermissionExporter {
 
 	protected void exportUserRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, Element parentEl)
-		throws SystemException {
+			String resourceName, Element parentElement)
+		throws Exception {
 
-		Element userRolesEl = SAXReaderUtil.createElement("user-roles");
+		Element userRolesElement = SAXReaderUtil.createElement("user-roles");
 
 		List<User> users = layoutCache.getGroupUsers(groupId);
 
@@ -579,20 +567,20 @@ public class PermissionExporter {
 
 			List<Role> userRoles = layoutCache.getUserRoles(userId);
 
-			Element userEl = exportRoles(
+			Element userElement = exportRoles(
 				companyId, resourceName, ResourceConstants.SCOPE_GROUP,
-				String.valueOf(groupId), userRolesEl, "user", userRoles);
+				String.valueOf(groupId), userRolesElement, "user", userRoles);
 
-			if (userEl.elements().isEmpty()) {
-				userRolesEl.remove(userEl);
+			if (userElement.elements().isEmpty()) {
+				userRolesElement.remove(userElement);
 			}
 			else {
-				userEl.addAttribute("uuid", uuid);
+				userElement.addAttribute("uuid", uuid);
 			}
 		}
 
-		if (!userRolesEl.elements().isEmpty()) {
-			parentEl.add(userRolesEl);
+		if (!userRolesElement.elements().isEmpty()) {
+			parentElement.add(userRolesElement);
 		}
 	}
 
@@ -602,7 +590,7 @@ public class PermissionExporter {
 		}
 
 		for (Role role : roles) {
-			if (role.getName().equals(roleName)) {
+			if (roleName.equals(role.getName())) {
 				return true;
 			}
 		}

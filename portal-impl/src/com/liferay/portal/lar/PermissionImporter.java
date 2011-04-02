@@ -15,8 +15,6 @@
 package com.liferay.portal.lar;
 
 import com.liferay.portal.NoSuchTeamException;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -47,7 +45,6 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -63,15 +60,13 @@ import java.util.List;
  */
 public class PermissionImporter {
 
-	protected List<String> getActions(Element el) {
+	protected List<String> getActions(Element element) {
 		List<String> actions = new ArrayList<String>();
 
-		Iterator<Element> itr = el.elements("action-key").iterator();
+		List<Element> actionKeyElements = element.elements("action-key");
 
-		while (itr.hasNext()) {
-			Element actionEl = itr.next();
-
-			actions.add(actionEl.getText());
+		for (Element actionKeyElement : actionKeyElements) {
+			actions.add(actionKeyElement.getText());
 		}
 
 		return actions;
@@ -79,17 +74,17 @@ public class PermissionImporter {
 
 	protected void importGroupPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element parentEl,
-			String elName, boolean portletActions)
-		throws PortalException, SystemException {
+			String resourceName, String resourcePrimKey, Element parentElement,
+			String elementName, boolean portletActions)
+		throws Exception {
 
-		Element actionEl = parentEl.element(elName);
+		Element actionElement = parentElement.element(elementName);
 
-		if (actionEl == null) {
+		if (actionElement == null) {
 			return;
 		}
 
-		List<String> actions = getActions(actionEl);
+		List<String> actions = getActions(actionElement);
 
 		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName,
@@ -104,40 +99,41 @@ public class PermissionImporter {
 	protected void importGroupRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String entityName,
-			Element parentEl)
-		throws PortalException, SystemException {
+			Element parentElement)
+		throws Exception {
 
-		Element entityRolesEl = parentEl.element(entityName + "-roles");
+		Element entityRolesElement = parentElement.element(
+			entityName + "-roles");
 
-		if (entityRolesEl == null) {
+		if (entityRolesElement == null) {
 			return;
 		}
 
 		importRolePermissions(
 			layoutCache, companyId, resourceName, ResourceConstants.SCOPE_GROUP,
-			String.valueOf(groupId), entityRolesEl, true);
+			String.valueOf(groupId), entityRolesElement, true);
 	}
 
 	protected void importInheritedPermissions(
 			LayoutCache layoutCache, long companyId, String resourceName,
-			String resourcePrimKey, Element permissionsEl, String entityName,
-			boolean portletActions)
-		throws PortalException, SystemException {
+			String resourcePrimKey, Element permissionsElement,
+			String entityName, boolean portletActions)
+		throws Exception {
 
-		Element entityPermissionsEl = permissionsEl.element(
+		Element entityPermissionsElement = permissionsElement.element(
 			entityName + "-permissions");
 
-		if (entityPermissionsEl == null) {
+		if (entityPermissionsElement == null) {
 			return;
 		}
 
-		List<Element> actionsEls = entityPermissionsEl.elements(
+		List<Element> actionsElements = entityPermissionsElement.elements(
 			entityName + "-actions");
 
-		for (int i = 0; i < actionsEls.size(); i++) {
-			Element actionEl = actionsEls.get(i);
+		for (int i = 0; i < actionsElements.size(); i++) {
+			Element actionElement = actionsElements.get(i);
 
-			String name = actionEl.attributeValue("name");
+			String name = actionElement.attributeValue("name");
 
 			long entityGroupId = layoutCache.getEntityGroupId(
 				companyId, entityName, name);
@@ -148,13 +144,13 @@ public class PermissionImporter {
 						" with name " + name);
 			}
 			else {
-				Element parentEl = SAXReaderUtil.createElement("parent");
+				Element parentElement = SAXReaderUtil.createElement("parent");
 
-				parentEl.add(actionEl.createCopy());
+				parentElement.add(actionElement.createCopy());
 
 				importGroupPermissions(
 					layoutCache, companyId, entityGroupId, resourceName,
-					resourcePrimKey, parentEl, entityName + "-actions",
+					resourcePrimKey, parentElement, entityName + "-actions",
 					portletActions);
 			}
 		}
@@ -162,21 +158,20 @@ public class PermissionImporter {
 
 	protected void importInheritedRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String entityName, Element parentEl)
-		throws PortalException, SystemException {
+			String resourceName, String entityName, Element parentElement)
+		throws Exception {
 
-		Element entityRolesEl = parentEl.element(entityName + "-roles");
+		Element entityRolesElement = parentElement.element(
+			entityName + "-roles");
 
-		if (entityRolesEl == null) {
+		if (entityRolesElement == null) {
 			return;
 		}
 
-		List<Element> entityEls = entityRolesEl.elements(entityName);
+		List<Element> entityElements = entityRolesElement.elements(entityName);
 
-		for (int i = 0; i < entityEls.size(); i++) {
-			Element entityEl = entityEls.get(i);
-
-			String name = entityEl.attributeValue("name");
+		for (Element entityElement : entityElements) {
+			String name = entityElement.attributeValue("name");
 
 			long entityGroupId = layoutCache.getEntityGroupId(
 				companyId, entityName, name);
@@ -190,32 +185,32 @@ public class PermissionImporter {
 				importRolePermissions(
 					layoutCache, companyId, resourceName,
 					ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
-					entityEl, false);
+					entityElement, false);
 			}
 		}
 	}
 
 	protected void importLayoutPermissions(
 			LayoutCache layoutCache, long companyId, long groupId, long userId,
-			Layout layout, Element layoutEl, Element parentEl,
+			Layout layout, Element layoutElement, Element parentElement,
 			boolean importUserPermissions)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		Element permissionsEl = layoutEl.element("permissions");
+		Element permissionsElement = layoutElement.element("permissions");
 
-		if (permissionsEl != null) {
+		if (permissionsElement != null) {
 			String resourceName = Layout.class.getName();
 			String resourcePrimKey = String.valueOf(layout.getPlid());
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 				importPermissions_5(
 					layoutCache, companyId, groupId, userId, resourceName,
-					resourcePrimKey, permissionsEl, false);
+					resourcePrimKey, permissionsElement, false);
 			}
 			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				importPermissions_6(
 					layoutCache, companyId, groupId, userId, resourceName,
-					resourcePrimKey, permissionsEl, false);
+					resourcePrimKey, permissionsElement, false);
 			}
 			else {
 				Group guestGroup = GroupLocalServiceUtil.getGroup(
@@ -223,79 +218,80 @@ public class PermissionImporter {
 
 				importLayoutPermissions_1to4(
 					layoutCache, companyId, groupId, guestGroup, layout,
-					resourceName, resourcePrimKey, permissionsEl,
+					resourceName, resourcePrimKey, permissionsElement,
 					importUserPermissions);
 			}
 		}
 
-		Element rolesEl = parentEl.element("roles");
+		Element rolesElement = parentElement.element("roles");
 
 		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) &&
-			(rolesEl != null)) {
+			(rolesElement != null)) {
 
-			importLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+			importLayoutRoles(layoutCache, companyId, groupId, rolesElement);
 		}
 	}
 
 	protected void importLayoutPermissions_1to4(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout, String resourceName,
-			String resourcePrimKey, Element permissionsEl,
+			String resourcePrimKey, Element permissionsElement,
 			boolean importUserPermissions)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		importGroupPermissions(
 			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-			permissionsEl, "community-actions", false);
+			permissionsElement, "community-actions", false);
 
 		if (groupId != guestGroup.getGroupId()) {
 			importGroupPermissions(
 				layoutCache, companyId, guestGroup.getGroupId(), resourceName,
-				resourcePrimKey, permissionsEl, "guest-actions", false);
+				resourcePrimKey, permissionsElement, "guest-actions", false);
 		}
 
 		if (importUserPermissions) {
 			importUserPermissions(
 				layoutCache, companyId, groupId, resourceName, resourcePrimKey,
-				permissionsEl, false);
+				permissionsElement, false);
 		}
 
 		importInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "organization", false);
+			permissionsElement, "organization", false);
 
 		importInheritedPermissions(
 			layoutCache, companyId, resourceName, resourcePrimKey,
-			permissionsEl, "user-group", false);
+			permissionsElement, "user-group", false);
 	}
 
 	protected void importLayoutRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Element rolesEl)
-		throws PortalException, SystemException {
+			Element rolesElement)
+		throws Exception {
 
 		String resourceName = Layout.class.getName();
 
 		importGroupRoles(
 			layoutCache, companyId, groupId, resourceName, "community",
-			rolesEl);
+			rolesElement);
 
-		importUserRoles(layoutCache, companyId, groupId, resourceName, rolesEl);
+		importUserRoles(
+			layoutCache, companyId, groupId, resourceName, rolesElement);
 
 		importInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "organization",
-			rolesEl);
+			rolesElement);
 
 		importInheritedRoles(
 			layoutCache, companyId, groupId, resourceName, "user-group",
-			rolesEl);
+			rolesElement);
 	}
 
 	protected void importPermissions_5(
 			LayoutCache layoutCache, long companyId, long groupId, long userId,
-			String resourceName, String resourcePrimKey, Element permissionsEl,
-			boolean portletActions)
-		throws PortalException, SystemException {
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean portletActions)
+		throws Exception {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -304,10 +300,10 @@ public class PermissionImporter {
 			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
 			portletActions);
 
-		List<Element> roleEls = permissionsEl.elements("role");
+		List<Element> roleElements = permissionsElement.elements("role");
 
-		for (Element roleEl : roleEls) {
-			String name = roleEl.attributeValue("name");
+		for (Element roleElement : roleElements) {
+			String name = roleElement.attributeValue("name");
 
 			Role role = null;
 
@@ -315,7 +311,7 @@ public class PermissionImporter {
 				name = name.substring(
 					PermissionExporter.ROLE_TEAM_PREFIX.length());
 
-				String description = roleEl.attributeValue("description");
+				String description = roleElement.attributeValue("description");
 
 				Team team = null;
 
@@ -335,8 +331,8 @@ public class PermissionImporter {
 			}
 
 			if (role == null) {
-				String description = roleEl.attributeValue("description");
-				int type = Integer.valueOf(roleEl.attributeValue("type"));
+				String description = roleElement.attributeValue("description");
+				int type = Integer.valueOf(roleElement.attributeValue("type"));
 
 				if ((type == RoleConstants.TYPE_COMMUNITY) &&
 					group.isOrganization()) {
@@ -353,7 +349,7 @@ public class PermissionImporter {
 					userId, companyId, name, null, description, type);
 			}
 
-			List<String> actions = getActions(roleEl);
+			List<String> actions = getActions(roleElement);
 
 			PermissionLocalServiceUtil.setRolePermissions(
 				role.getRoleId(), actions.toArray(new String[actions.size()]),
@@ -363,17 +359,18 @@ public class PermissionImporter {
 
 	protected void importPermissions_6(
 			LayoutCache layoutCache, long companyId, long groupId, long userId,
-			String resourceName, String resourcePrimKey, Element permissionsEl,
-			boolean portletActions)
-		throws PortalException, SystemException {
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean portletActions)
+		throws Exception {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		List<Element> roleEls = permissionsEl.elements("role");
+		List<Element> roleElements = permissionsElement.elements("role");
 
-		for (Element roleEl : roleEls) {
-			String name = roleEl.attributeValue("name");
-			int type = GetterUtil.getInteger(roleEl.attributeValue("type"));
+		for (Element roleElement : roleElements) {
+			String name = roleElement.attributeValue("name");
+			int type = GetterUtil.getInteger(
+				roleElement.attributeValue("type"));
 
 			Role role = null;
 
@@ -381,7 +378,7 @@ public class PermissionImporter {
 				name = name.substring(
 					PermissionExporter.ROLE_TEAM_PREFIX.length());
 
-				String description = roleEl.attributeValue("description");
+				String description = roleElement.attributeValue("description");
 
 				Team team = null;
 
@@ -432,7 +429,7 @@ public class PermissionImporter {
 					try {
 						role = RoleLocalServiceUtil.getRole(companyId, name);
 					}
-					catch (PortalException pe) {
+					catch (Exception e) {
 					}
 				}
 			}
@@ -468,19 +465,19 @@ public class PermissionImporter {
 					try {
 						role = RoleLocalServiceUtil.getRole(companyId, name);
 					}
-					catch (PortalException pe) {
+					catch (Exception e) {
 					}
 				}
 			}
 
 			if (role == null) {
-				String description = roleEl.attributeValue("description");
+				String description = roleElement.attributeValue("description");
 
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, description, type);
 			}
 
-			List<String> actions = getActions(roleEl);
+			List<String> actions = getActions(roleElement);
 
 			ResourcePermissionLocalServiceUtil.setResourcePermissions(
 				companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
@@ -491,13 +488,13 @@ public class PermissionImporter {
 
 	protected void importPortletPermissions(
 			LayoutCache layoutCache, long companyId, long groupId, long userId,
-			Layout layout, Element portletEl, String portletId,
+			Layout layout, Element portletElement, String portletId,
 			boolean importUserPermissions)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		Element permissionsEl = portletEl.element("permissions");
+		Element permissionsElement = portletElement.element("permissions");
 
-		if (permissionsEl != null) {
+		if (permissionsElement != null) {
 			String resourceName = PortletConstants.getRootPortletId(portletId);
 
 			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
@@ -506,12 +503,12 @@ public class PermissionImporter {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 				importPermissions_5(
 					layoutCache, companyId, groupId, userId, resourceName,
-					resourcePrimKey, permissionsEl, true);
+					resourcePrimKey, permissionsElement, true);
 			}
 			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				importPermissions_6(
 					layoutCache, companyId, groupId, userId, resourceName,
-					resourcePrimKey, permissionsEl, true);
+					resourcePrimKey, permissionsElement, true);
 			}
 			else {
 				Group guestGroup = GroupLocalServiceUtil.getGroup(
@@ -519,33 +516,31 @@ public class PermissionImporter {
 
 				importPortletPermissions_1to4(
 					layoutCache, companyId, groupId, guestGroup, layout,
-					permissionsEl, importUserPermissions);
+					permissionsElement, importUserPermissions);
 			}
 		}
 
-		Element rolesEl = portletEl.element("roles");
+		Element rolesElement = portletElement.element("roles");
 
 		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) &&
-			(rolesEl != null)) {
+			(rolesElement != null)) {
 
-			importPortletRoles(layoutCache, companyId, groupId, portletEl);
+			importPortletRoles(layoutCache, companyId, groupId, portletElement);
 			importPortletRoles(
-				layoutCache, companyId, groupId, portletId, rolesEl);
+				layoutCache, companyId, groupId, portletId, rolesElement);
 		}
 	}
 
 	protected void importPortletPermissions_1to4(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Group guestGroup, Layout layout, Element permissionsEl,
+			Group guestGroup, Layout layout, Element permissionsElement,
 			boolean importUserPermissions)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		Iterator<Element> itr = permissionsEl.elements("portlet").iterator();
+		List<Element> portletElements = permissionsElement.elements("portlet");
 
-		while (itr.hasNext()) {
-			Element portletEl = itr.next();
-
-			String portletId = portletEl.attributeValue("portlet-id");
+		for (Element portletElement : portletElements) {
+			String portletId = portletElement.attributeValue("portlet-id");
 
 			String resourceName = PortletConstants.getRootPortletId(portletId);
 			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
@@ -564,36 +559,36 @@ public class PermissionImporter {
 			else {
 				importGroupPermissions(
 					layoutCache, companyId, groupId, resourceName,
-					resourcePrimKey, portletEl, "community-actions", true);
+					resourcePrimKey, portletElement, "community-actions", true);
 
 				if (groupId != guestGroup.getGroupId()) {
 					importGroupPermissions(
 						layoutCache, companyId, guestGroup.getGroupId(),
-						resourceName, resourcePrimKey, portletEl,
+						resourceName, resourcePrimKey, portletElement,
 						"guest-actions", true);
 				}
 
 				if (importUserPermissions) {
 					importUserPermissions(
 						layoutCache, companyId, groupId, resourceName,
-						resourcePrimKey, portletEl, true);
+						resourcePrimKey, portletElement, true);
 				}
 
 				importInheritedPermissions(
 					layoutCache, companyId, resourceName, resourcePrimKey,
-					portletEl, "organization", true);
+					portletElement, "organization", true);
 
 				importInheritedPermissions(
 					layoutCache, companyId, resourceName, resourcePrimKey,
-					portletEl, "user-group", true);
+					portletElement, "user-group", true);
 			}
 		}
 	}
 
 	protected void importPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String portletId, Element rolesEl)
-		throws PortalException, SystemException {
+			String portletId, Element rolesElement)
+		throws Exception {
 
 		String resourceName = PortletConstants.getRootPortletId(portletId);
 
@@ -610,32 +605,30 @@ public class PermissionImporter {
 		else {
 			importGroupRoles(
 				layoutCache, companyId, groupId, resourceName, "community",
-				rolesEl);
+				rolesElement);
 
 			importUserRoles(
-				layoutCache, companyId, groupId, resourceName, rolesEl);
+				layoutCache, companyId, groupId, resourceName, rolesElement);
 
 			importInheritedRoles(
 				layoutCache, companyId, groupId, resourceName,
-				"organization", rolesEl);
+				"organization", rolesElement);
 
 			importInheritedRoles(
 				layoutCache, companyId, groupId, resourceName, "user-group",
-				rolesEl);
+				rolesElement);
 		}
 	}
 
 	protected void importPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Element rolesEl)
-		throws PortalException, SystemException {
+			Element rolesElement)
+		throws Exception {
 
-		Iterator<Element> itr = rolesEl.elements("portlet").iterator();
+		List<Element> portletElements = rolesElement.elements("portlet");
 
-		while (itr.hasNext()) {
-			Element portletEl = itr.next();
-
-			String portletId = portletEl.attributeValue("portlet-id");
+		for (Element portletElement : portletElements) {
+			String portletId = portletElement.attributeValue("portlet-id");
 
 			String resourceName = PortletConstants.getRootPortletId(portletId);
 
@@ -652,34 +645,33 @@ public class PermissionImporter {
 			else {
 				importGroupRoles(
 					layoutCache, companyId, groupId, resourceName, "community",
-					portletEl);
+					portletElement);
 
 				importUserRoles(
-					layoutCache, companyId, groupId, resourceName, portletEl);
+					layoutCache, companyId, groupId, resourceName,
+					portletElement);
 
 				importInheritedRoles(
 					layoutCache, companyId, groupId, resourceName,
-					"organization", portletEl);
+					"organization", portletElement);
 
 				importInheritedRoles(
 					layoutCache, companyId, groupId, resourceName, "user-group",
-					portletEl);
+					portletElement);
 			}
 		}
 	}
 
 	protected void importRolePermissions(
 			LayoutCache layoutCache, long companyId, String resourceName,
-			int scope, String resourcePrimKey, Element parentEl,
+			int scope, String resourcePrimKey, Element parentElement,
 			boolean communityRole)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		List<Element> roleEls = parentEl.elements("role");
+		List<Element> roleElements = parentElement.elements("role");
 
-		for (int i = 0; i < roleEls.size(); i++) {
-			Element roleEl = roleEls.get(i);
-
-			String roleName = roleEl.attributeValue("name");
+		for (Element roleElement : roleElements) {
+			String roleName = roleElement.attributeValue("name");
 
 			Role role = layoutCache.getRole(companyId, roleName);
 
@@ -688,7 +680,7 @@ public class PermissionImporter {
 					"Ignoring permissions for role with name " + roleName);
 			}
 			else {
-				List<String> actions = getActions(roleEl);
+				List<String> actions = getActions(roleElement);
 
 				PermissionLocalServiceUtil.setRolePermissions(
 					role.getRoleId(), companyId, resourceName, scope,
@@ -707,23 +699,22 @@ public class PermissionImporter {
 
 	protected void importUserPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, String resourcePrimKey, Element parentEl,
+			String resourceName, String resourcePrimKey, Element parentElement,
 			boolean portletActions)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		Element userPermissionsEl = parentEl.element("user-permissions");
+		Element userPermissionsElement = parentElement.element(
+			"user-permissions");
 
-		if (userPermissionsEl == null) {
+		if (userPermissionsElement == null) {
 			return;
 		}
 
-		List<Element> userActionsEls = userPermissionsEl.elements(
+		List<Element> userActionsElements = userPermissionsElement.elements(
 			"user-actions");
 
-		for (int i = 0; i < userActionsEls.size(); i++) {
-			Element userActionsEl = userActionsEls.get(i);
-
-			String uuid = userActionsEl.attributeValue("uuid");
+		for (Element userActionsElement : userActionsElements) {
+			String uuid = userActionsElement.attributeValue("uuid");
 
 			User user = layoutCache.getUser(companyId, groupId, uuid);
 
@@ -734,7 +725,7 @@ public class PermissionImporter {
 				}
 			}
 			else {
-				List<String> actions = getActions(userActionsEl);
+				List<String> actions = getActions(userActionsElement);
 
 				Resource resource = layoutCache.getResource(
 					companyId, groupId, resourceName,
@@ -751,21 +742,19 @@ public class PermissionImporter {
 
 	protected void importUserRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			String resourceName, Element parentEl)
-		throws PortalException, SystemException {
+			String resourceName, Element parentElement)
+		throws Exception {
 
-		Element userRolesEl = parentEl.element("user-roles");
+		Element userRolesElement = parentElement.element("user-roles");
 
-		if (userRolesEl == null) {
+		if (userRolesElement == null) {
 			return;
 		}
 
-		List<Element> userEls = userRolesEl.elements("user");
+		List<Element> userElements = userRolesElement.elements("user");
 
-		for (int i = 0; i < userEls.size(); i++) {
-			Element userEl = userEls.get(i);
-
-			String uuid = userEl.attributeValue("uuid");
+		for (Element userElement : userElements) {
+			String uuid = userElement.attributeValue("uuid");
 
 			User user = layoutCache.getUser(companyId, groupId, uuid);
 
@@ -778,54 +767,53 @@ public class PermissionImporter {
 				importRolePermissions(
 					layoutCache, companyId, resourceName,
 					ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
-					userEl, false);
+					userElement, false);
 			}
 		}
 	}
 
-	protected void readPortletDataPermissions(PortletDataContext context)
-		throws SystemException {
+	protected void readPortletDataPermissions(
+			PortletDataContext portletDataContext)
+		throws Exception {
 
-		try {
-			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/portlet-data-permissions.xml");
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() +
+				"/portlet-data-permissions.xml");
 
-			if (xml == null) {
-				return;
-			}
-
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			List<Element> portletDataEls = root.elements("portlet-data");
-
-			for (Element portletDataEl : portletDataEls) {
-				String resourceName = portletDataEl.attributeValue(
-					"resource-name");
-				long resourcePK = GetterUtil.getLong(
-					portletDataEl.attributeValue("resource-pk"));
-
-				List<KeyValuePair> permissions = new ArrayList<KeyValuePair>();
-
-				List<Element> permissionsEls = portletDataEl.elements(
-					"permissions");
-
-				for (Element permissionsEl : permissionsEls) {
-					String roleName = permissionsEl.attributeValue("role-name");
-					String actions = permissionsEl.attributeValue("actions");
-
-					KeyValuePair permission = new KeyValuePair(
-						roleName, actions);
-
-					permissions.add(permission);
-				}
-
-				context.addPermissions(resourceName, resourcePK, permissions);
-			}
+		if (xml == null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> portletDataElements = rootElement.elements(
+			"portlet-data");
+
+		for (Element portletDataElement : portletDataElements) {
+			String resourceName = portletDataElement.attributeValue(
+				"resource-name");
+			long resourcePK = GetterUtil.getLong(
+				portletDataElement.attributeValue("resource-pk"));
+
+			List<KeyValuePair> permissions = new ArrayList<KeyValuePair>();
+
+			List<Element> permissionsElements = portletDataElement.elements(
+				"permissions");
+
+			for (Element permissionsElement : permissionsElements) {
+				String roleName = permissionsElement.attributeValue(
+					"role-name");
+				String actions = permissionsElement.attributeValue("actions");
+
+				KeyValuePair permission = new KeyValuePair(roleName, actions);
+
+				permissions.add(permission);
+			}
+
+			portletDataContext.addPermissions(
+				resourceName, resourcePK, permissions);
 		}
 	}
 
