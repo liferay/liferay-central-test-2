@@ -123,6 +123,8 @@ public interface DestinationNames {
 	public static final String SUBSCRIPTION_SENDER =
 		"liferay/subscription_sender";
 
+	public static final String TEST_TRANSACTION = "liferay/test_transaction";
+
 	/**
 	 * @deprecated {@link #SUBSCRIPTION_SENDER}
 	 */

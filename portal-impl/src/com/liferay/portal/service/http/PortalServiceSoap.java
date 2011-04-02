@@ -53,17 +53,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class PortalServiceSoap {
-	public static void cleanUpClassName() throws RemoteException {
-		try {
-			PortalServiceUtil.cleanUpClassName();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static java.lang.String getAutoDeployDirectory()
 		throws RemoteException {
 		try {
@@ -91,93 +80,105 @@ public class PortalServiceSoap {
 		}
 	}
 
-	public static boolean hasClassName() throws RemoteException {
+	public static void testAddClassName_Rollback(
+		java.lang.String classNameValue) throws RemoteException {
 		try {
-			boolean returnValue = PortalServiceUtil.hasClassName();
+			PortalServiceUtil.testAddClassName_Rollback(classNameValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testAddClassName_Success(java.lang.String classNameValue)
+		throws RemoteException {
+		try {
+			PortalServiceUtil.testAddClassName_Success(classNameValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testAddClassNameAndTestTransactionPortletBar_PortalRollback(
+		java.lang.String transactionPortletBarText) throws RemoteException {
+		try {
+			PortalServiceUtil.testAddClassNameAndTestTransactionPortletBar_PortalRollback(transactionPortletBarText);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testAddClassNameAndTestTransactionPortletBar_PortletRollback(
+		java.lang.String transactionPortletBarText) throws RemoteException {
+		try {
+			PortalServiceUtil.testAddClassNameAndTestTransactionPortletBar_PortletRollback(transactionPortletBarText);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testAddClassNameAndTestTransactionPortletBar_Success(
+		java.lang.String transactionPortletBarText) throws RemoteException {
+		try {
+			PortalServiceUtil.testAddClassNameAndTestTransactionPortletBar_Success(transactionPortletBarText);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testCounterIncrement_Rollback()
+		throws RemoteException {
+		try {
+			PortalServiceUtil.testCounterIncrement_Rollback();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testDeleteClassName() throws RemoteException {
+		try {
+			PortalServiceUtil.testDeleteClassName();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void testGetUserId() throws RemoteException {
+		try {
+			PortalServiceUtil.testGetUserId();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean testHasClassName() throws RemoteException {
+		try {
+			boolean returnValue = PortalServiceUtil.testHasClassName();
 
 			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void test() throws RemoteException {
-		try {
-			PortalServiceUtil.test();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testAddBar(java.lang.String barText)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testAddBar(barText);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testAddBarPortalRollback(java.lang.String barText)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testAddBarPortalRollback(barText);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testAddBarPortletRollback(java.lang.String barText)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testAddBarPortletRollback(barText);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testClassName(java.lang.String value)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testClassName(value);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testClassNameRollback(java.lang.String value)
-		throws RemoteException {
-		try {
-			PortalServiceUtil.testClassNameRollback(value);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void testCounterRollback() throws RemoteException {
-		try {
-			PortalServiceUtil.testCounterRollback();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

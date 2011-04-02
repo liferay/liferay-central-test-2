@@ -249,17 +249,17 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Portal",
 	{
-		cleanUpClassName: true,
 		getAutoDeployDirectory: true,
 		getBuildNumber: true,
-		hasClassName: true,
-		test: true,
-		testAddBar: true,
-		testAddBarPortalRollback: true,
-		testAddBarPortletRollback: true,
-		testClassName: true,
-		testClassNameRollback: true,
-		testCounterRollback: true
+		testAddClassName_Rollback: true,
+		testAddClassName_Success: true,
+		testAddClassNameAndTestTransactionPortletBar_PortalRollback: true,
+		testAddClassNameAndTestTransactionPortletBar_PortletRollback: true,
+		testAddClassNameAndTestTransactionPortletBar_Success: true,
+		testCounterIncrement_Rollback: true,
+		testDeleteClassName: true,
+		testGetUserId: true,
+		testHasClassName: true
 	}
 );
 

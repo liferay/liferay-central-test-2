@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.sender.DirectSynchronousMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
@@ -35,11 +36,6 @@ import com.liferay.portal.util.PropsValues;
  */
 public class PortalServiceImpl extends PortalServiceBaseImpl {
 
-	public void cleanUpClassName()
-		throws PortalException, SystemException {
-		classNamePersistence.removeByValue(PortalService.class.getName());
-	}
-
 	public String getAutoDeployDirectory() throws SystemException {
 		return PrefsPropsUtil.getString(
 			PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
@@ -50,19 +46,66 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		return ReleaseInfo.getBuildNumber();
 	}
 
-	public boolean hasClassName() throws SystemException {
-		int count = classNamePersistence.countByValue(
-			PortalService.class.getName());
+	public void testAddClassName_Rollback(String classNameValue)
+		throws SystemException {
 
-		if (count > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		addClassName(classNameValue);
+
+		throw new SystemException();
 	}
 
-	public void test() {
+	public void testAddClassName_Success(String classNameValue)
+		throws SystemException {
+
+		addClassName(classNameValue);
+	}
+
+	public void testAddClassNameAndTestTransactionPortletBar_PortalRollback(
+			String transactionPortletBarText)
+		throws SystemException {
+
+		addClassName(PortalService.class.getName());
+
+		addTransactionPortletBar(transactionPortletBarText, false);
+
+		throw new SystemException();
+	}
+
+	public void testAddClassNameAndTestTransactionPortletBar_PortletRollback(
+			String transactionPortletBarText)
+		throws SystemException {
+
+		addClassName(PortalService.class.getName());
+
+		addTransactionPortletBar(transactionPortletBarText, true);
+	}
+
+	public void testAddClassNameAndTestTransactionPortletBar_Success(
+			String transactionPortletBarText)
+		throws SystemException {
+
+		addClassName(PortalService.class.getName());
+
+		addTransactionPortletBar(transactionPortletBarText, false);
+	}
+
+	public void testCounterIncrement_Rollback() throws SystemException {
+		int counterIncrement = PropsValues.COUNTER_INCREMENT;
+
+		for (int i = 0; i < counterIncrement * 2; i++) {
+			counterLocalService.increment();
+		}
+
+		throw new SystemException();
+	}
+
+	public void testDeleteClassName()
+		throws PortalException, SystemException {
+
+		classNamePersistence.removeByValue(PortalService.class.getName());
+	}
+
+	public void testGetUserId() {
 		long userId = 0;
 
 		try {
@@ -77,74 +120,49 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		}
 	}
 
-	public void testAddBar(String barText) throws SystemException {
-		testClassName(PortalService.class.getName());
+	public boolean testHasClassName() throws SystemException {
+		int count = classNamePersistence.countByValue(
+			PortalService.class.getName());
 
-		_addBar(barText, false);
+		if (count > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
-	public void testAddBarPortalRollback(String barText)
-		throws SystemException {
-		testClassName(PortalService.class.getName());
-
-		_addBar(barText, false);
-
-		throw new SystemException();
-	}
-
-	public void testAddBarPortletRollback(String barText)
-		throws SystemException {
-		testClassName(PortalService.class.getName());
-
-		_addBar(barText, true);
-	}
-
-	public void testClassName(String value) throws SystemException {
+	protected void addClassName(String classNameValue) throws SystemException {
 		long classNameId = counterLocalService.increment();
 
 		ClassName className = classNamePersistence.create(classNameId);
 
-		className.setValue(value);
+		className.setValue(classNameValue);
 
 		classNamePersistence.update(className, false);
 	}
 
-	public void testClassNameRollback(String value) throws SystemException {
-		testClassName(value);
-
-		throw new SystemException();
-	}
-
-	public void testCounterRollback() throws SystemException {
-		int counterIncrement = PropsValues.COUNTER_INCREMENT;
-
-		for (int i = 0; i < counterIncrement * 2; i++) {
-			counterLocalService.increment();
-		}
-
-		throw new SystemException();
-	}
-
-	private void _addBar(String barText, boolean rollback)
+	protected void addTransactionPortletBar(
+			String transactionPortletBarText, boolean rollback)
 		throws SystemException {
-		Message message = new Message();
 
-		message.setPayload(barText);
-
-		message.put("ROLLBACK", rollback);
-
-		SynchronousMessageSender synchronousMessageSender =
-			(SynchronousMessageSender)PortalBeanLocatorUtil.locate(
-				DirectSynchronousMessageSender.class.getName());
 		try {
-			synchronousMessageSender.send(_DESTINATION_NAME, message);
+			Message message = new Message();
+
+			message.put("rollback", rollback);
+			message.put("text", transactionPortletBarText);
+
+			SynchronousMessageSender synchronousMessageSender =
+				(SynchronousMessageSender)PortalBeanLocatorUtil.locate(
+					DirectSynchronousMessageSender.class.getName());
+
+			synchronousMessageSender.send(
+				DestinationNames.TEST_TRANSACTION, message);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
-
-	private static final String _DESTINATION_NAME = "liferay/test_transaction";
 
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceImpl.class);
 

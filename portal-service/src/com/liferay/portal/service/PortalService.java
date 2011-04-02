@@ -41,10 +41,6 @@ public interface PortalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PortalServiceUtil} to access the portal remote service. Add custom service methods to {@link com.liferay.portal.service.impl.PortalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public void cleanUpClassName()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getAutoDeployDirectory()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -52,27 +48,33 @@ public interface PortalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBuildNumber();
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasClassName()
+	public void testAddClassName_Rollback(java.lang.String classNameValue)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void test();
-
-	public void testAddBar(java.lang.String barText)
+	public void testAddClassName_Success(java.lang.String classNameValue)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void testAddBarPortalRollback(java.lang.String barText)
+	public void testAddClassNameAndTestTransactionPortletBar_PortalRollback(
+		java.lang.String transactionPortletBarText)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void testAddBarPortletRollback(java.lang.String barText)
+	public void testAddClassNameAndTestTransactionPortletBar_PortletRollback(
+		java.lang.String transactionPortletBarText)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void testClassName(java.lang.String value)
+	public void testAddClassNameAndTestTransactionPortletBar_Success(
+		java.lang.String transactionPortletBarText)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void testClassNameRollback(java.lang.String value)
+	public void testCounterIncrement_Rollback()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void testCounterRollback()
+	public void testDeleteClassName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void testGetUserId();
+
+	public boolean testHasClassName()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

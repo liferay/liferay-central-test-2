@@ -23,11 +23,11 @@ import com.liferay.portal.service.PortalServiceUtil;
  */
 public class CounterLocalServiceTest extends BaseServiceTestCase {
 
-	public void testCounterRollback() throws Exception {
+	public void testCounterIncrement_Rollback() throws Exception {
 		long counterValue = nextLong() + 1;
 
 		try {
-			PortalServiceUtil.testCounterRollback();
+			PortalServiceUtil.testCounterIncrement_Rollback();
 		}
 		catch (SystemException e) {
 		}
