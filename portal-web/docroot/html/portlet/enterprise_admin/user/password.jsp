@@ -21,11 +21,18 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute("user.passwordPolicy");
 
+boolean passwordResetDisabled = false;
+
+if ((selUser.getLastLoginDate() == null) && passwordPolicy.isChangeable() && passwordPolicy.isChangeRequired()) {
+	passwordResetDisabled = true;
+}
+
 boolean passwordReset = false;
 
-if ((selUser.getLastLoginDate() == null) && passwordPolicy.isChangeRequired() && passwordPolicy.isChangeable()){
+if (passwordResetDisabled) {
 	passwordReset = true;
-} else {
+}
+else {
 	passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordReset");
 }
 %>
@@ -92,8 +99,8 @@ if ((selUser.getLastLoginDate() == null) && passwordPolicy.isChangeRequired() &&
 		</aui:validator>
 	</aui:input>
 
-	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
-		<aui:input inlineLabel="left" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" disabled="<%= passwordReset %>" />
+	<c:if test="<%= user.getUserId() != selUser.getUserId() %>">
+		<aui:input disabled="<%= passwordResetDisabled %>" inlineLabel="left" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" />
 	</c:if>
 </aui:fieldset>
 

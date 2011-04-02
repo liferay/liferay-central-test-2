@@ -620,10 +620,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordUnencrypted(password1);
 		}
 
+		user.setPasswordEncrypted(true);
+
 		PasswordPolicy passwordPolicy = defaultUser.getPasswordPolicy();
 
-		user.setPasswordEncrypted(true);
-		user.setPasswordReset(passwordPolicy.isChangeRequired() && passwordPolicy.isChangeable());
+		if (passwordPolicy.isChangeable() &&
+			passwordPolicy.isChangeRequired()) {
+
+			user.setPasswordReset(true);
+		}
+		else {
+			user.setPasswordReset(false);
+		}
+
 		user.setDigest(StringPool.BLANK);
 		user.setScreenName(screenName);
 		user.setEmailAddress(emailAddress);
@@ -1310,10 +1319,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Check if user should be forced to change password on first login
 
-		if (passwordPolicy.isChangeRequired() &&
-			passwordPolicy.isChangeable()) {
+		if (passwordPolicy.isChangeable() &&
+			passwordPolicy.isChangeRequired()) {
 
-			if ((user.getLastLoginDate() == null) && user.getPasswordReset()) {
+			if ((user.getLastLoginDate() == null)) {
 				user.setPasswordReset(true);
 
 				userPersistence.update(user, false);
