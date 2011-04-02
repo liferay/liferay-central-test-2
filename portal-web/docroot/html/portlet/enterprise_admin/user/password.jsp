@@ -21,7 +21,13 @@ User selUser = (User)request.getAttribute("user.selUser");
 
 PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute("user.passwordPolicy");
 
-boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordReset");
+boolean passwordReset = false;
+
+if ((selUser.getLastLoginDate() == null) && passwordPolicy.isChangeRequired() && passwordPolicy.isChangeable()){
+	passwordReset = true;
+} else {
+	passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordReset");
+}
 %>
 
 <liferay-ui:error-marker key="errorSection" value="password" />
@@ -87,7 +93,7 @@ boolean passwordReset = BeanParamUtil.getBoolean(selUser, request, "passwordRese
 	</aui:input>
 
 	<c:if test="<%= (selUser != null) && (user.getUserId() != selUser.getUserId()) %>">
-		<aui:input inlineLabel="left" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" />
+		<aui:input inlineLabel="left" label="password-reset-required" name="passwordReset" type="checkbox" value="<%= passwordReset %>" disabled="<%= passwordReset %>" />
 	</c:if>
 </aui:fieldset>
 
