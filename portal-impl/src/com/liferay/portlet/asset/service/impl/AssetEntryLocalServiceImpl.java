@@ -366,7 +366,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long[] groupIds, long userId, String portletId, 
+			long companyId, long[] groupIds, long userId, String portletId,
 			String keywords, int start, int end)
 		throws SystemException {
 

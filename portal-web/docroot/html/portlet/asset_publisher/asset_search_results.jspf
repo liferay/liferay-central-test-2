@@ -19,14 +19,11 @@ Hits results = null;
 
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
 
-long userId = PortalUtil.getUserId(request);
-
 if (searchTerms.isAdvancedSearch()) {
-	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), new long[] {searchTerms.getGroupId()}, userId, assetRendererFactory.getPortletId(), searchTerms.getUserName(), searchTerms.getTitle(), searchTerms.getDescription(), null, null, searchTerms.isAndOperator(),searchContainer.getStart(), searchContainer.getEnd());
-
+	results = AssetEntryLocalServiceUtil.search(themeDisplay.getCompanyId(), new long[] {searchTerms.getGroupId()}, themeDisplay.getUserId(), assetRendererFactory.getPortletId(), searchTerms.getUserName(), searchTerms.getTitle(), searchTerms.getDescription(), null, null, searchTerms.isAndOperator(),searchContainer.getStart(), searchContainer.getEnd());
 }
 else {
-	results = AssetEntryLocalServiceUtil.search(company.getCompanyId(), groupIds, userId, assetRendererFactory.getPortletId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd());
+	results = AssetEntryLocalServiceUtil.search(themeDisplay.getCompanyId(), groupIds, themeDisplay.getUserId(), assetRendererFactory.getPortletId(), searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
 int total = results.getLength();
