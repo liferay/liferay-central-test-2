@@ -882,7 +882,7 @@ public class HttpImpl implements Http {
 	}
 
 	protected boolean hasRequestHeader(HttpMethod httpMethod, String name) {
-		Header[] headers = httpMethod.getRequestHeaders(name); 
+		Header[] headers = httpMethod.getRequestHeaders(name);
 
 		if (headers.length == 0) {
 			return false;
