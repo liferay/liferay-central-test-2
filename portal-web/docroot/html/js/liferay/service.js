@@ -249,9 +249,14 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Portal",
 	{
+		cleanUpClassName: true,
 		getAutoDeployDirectory: true,
 		getBuildNumber: true,
+		hasClassName: true,
 		test: true,
+		testAddBar: true,
+		testAddBarPortalRollback: true,
+		testAddBarPortletRollback: true,
 		testClassName: true,
 		testClassNameRollback: true,
 		testCounterRollback: true

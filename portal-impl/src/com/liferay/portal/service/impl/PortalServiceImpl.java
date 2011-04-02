@@ -14,12 +14,18 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.sender.DirectSynchronousMessageSender;
+import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.ClassName;
+import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.base.PortalServiceBaseImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -29,6 +35,11 @@ import com.liferay.portal.util.PropsValues;
  */
 public class PortalServiceImpl extends PortalServiceBaseImpl {
 
+	public void cleanUpClassName()
+		throws PortalException, SystemException {
+		classNamePersistence.removeByValue(PortalService.class.getName());
+	}
+
 	public String getAutoDeployDirectory() throws SystemException {
 		return PrefsPropsUtil.getString(
 			PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
@@ -37,6 +48,18 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 
 	public int getBuildNumber() {
 		return ReleaseInfo.getBuildNumber();
+	}
+
+	public boolean hasClassName() throws SystemException {
+		int count = classNamePersistence.countByValue(
+			PortalService.class.getName());
+
+		if (count > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void test() {
@@ -52,6 +75,28 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		if (_log.isInfoEnabled()) {
 			_log.info("User id " + userId);
 		}
+	}
+
+	public void testAddBar(String barText) throws SystemException {
+		testClassName(PortalService.class.getName());
+
+		_addBar(barText, false);
+	}
+
+	public void testAddBarPortalRollback(String barText)
+		throws SystemException {
+		testClassName(PortalService.class.getName());
+
+		_addBar(barText, false);
+
+		throw new SystemException();
+	}
+
+	public void testAddBarPortletRollback(String barText)
+		throws SystemException {
+		testClassName(PortalService.class.getName());
+
+		_addBar(barText, true);
 	}
 
 	public void testClassName(String value) throws SystemException {
@@ -79,6 +124,27 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 
 		throw new SystemException();
 	}
+
+	private void _addBar(String barText, boolean rollback)
+		throws SystemException {
+		Message message = new Message();
+
+		message.setPayload(barText);
+
+		message.put("ROLLBACK", rollback);
+
+		SynchronousMessageSender synchronousMessageSender =
+			(SynchronousMessageSender)PortalBeanLocatorUtil.locate(
+				DirectSynchronousMessageSender.class.getName());
+		try {
+			synchronousMessageSender.send(_DESTINATION_NAME, message);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	private static final String _DESTINATION_NAME = "liferay/test_transaction";
 
 	private static Log _log = LogFactoryUtil.getLog(PortalServiceImpl.class);
 

@@ -28,6 +28,12 @@ public class PortalServiceWrapper implements PortalService {
 		_portalService = portalService;
 	}
 
+	public void cleanUpClassName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_portalService.cleanUpClassName();
+	}
+
 	public java.lang.String getAutoDeployDirectory()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portalService.getAutoDeployDirectory();
@@ -37,8 +43,28 @@ public class PortalServiceWrapper implements PortalService {
 		return _portalService.getBuildNumber();
 	}
 
+	public boolean hasClassName()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portalService.hasClassName();
+	}
+
 	public void test() {
 		_portalService.test();
+	}
+
+	public void testAddBar(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_portalService.testAddBar(barText);
+	}
+
+	public void testAddBarPortalRollback(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_portalService.testAddBarPortalRollback(barText);
+	}
+
+	public void testAddBarPortletRollback(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_portalService.testAddBarPortletRollback(barText);
 	}
 
 	public void testClassName(java.lang.String value)

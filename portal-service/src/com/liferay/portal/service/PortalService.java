@@ -41,6 +41,10 @@ public interface PortalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PortalServiceUtil} to access the portal remote service. Add custom service methods to {@link com.liferay.portal.service.impl.PortalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public void cleanUpClassName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String getAutoDeployDirectory()
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -48,7 +52,20 @@ public interface PortalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getBuildNumber();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasClassName()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void test();
+
+	public void testAddBar(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void testAddBarPortalRollback(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void testAddBarPortletRollback(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void testClassName(java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException;

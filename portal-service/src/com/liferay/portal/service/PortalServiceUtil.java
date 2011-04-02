@@ -37,6 +37,12 @@ public class PortalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.PortalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static void cleanUpClassName()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().cleanUpClassName();
+	}
+
 	public static java.lang.String getAutoDeployDirectory()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getAutoDeployDirectory();
@@ -46,8 +52,28 @@ public class PortalServiceUtil {
 		return getService().getBuildNumber();
 	}
 
+	public static boolean hasClassName()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasClassName();
+	}
+
 	public static void test() {
 		getService().test();
+	}
+
+	public static void testAddBar(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().testAddBar(barText);
+	}
+
+	public static void testAddBarPortalRollback(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().testAddBarPortalRollback(barText);
+	}
+
+	public static void testAddBarPortletRollback(java.lang.String barText)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().testAddBarPortletRollback(barText);
 	}
 
 	public static void testClassName(java.lang.String value)
