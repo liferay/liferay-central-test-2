@@ -74,9 +74,14 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 	<c:choose>
 		<c:when test="<%= fileEntry != null %>">
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
+
+				<%
+				FileVersion fileVersion = fileEntry.getFileVersion();
+				%>
+
 				<liferay-ui:icon
 					image="download"
-					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getFileVersion().getSize(), locale) + "k)" %>'
+					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileVersion.getSize(), locale) + "k)" %>'
 					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) %>'
 				/>
 			</c:if>
@@ -149,9 +154,14 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			%>
 
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
+
+				<%
+				FileVersion fileVersion = fileEntry.getFileVersion();
+				%>
+
 				<liferay-ui:icon
 					image="download"
-					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getFileVersion().getSize(), locale) + "k)" %>'
+					message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileVersion.getSize(), locale) + "k)" %>'
 					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileShortcut.getFileShortcutId() %>'
 				/>
 			</c:if>

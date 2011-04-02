@@ -872,7 +872,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 		Document document = null;
 
-		ObjectId pwcId = null;
+		ObjectId checkOutDocumentObjectId = null;
 
 		try {
 			Session session = getSession();
@@ -891,9 +891,10 @@ public class CMISRepository extends BaseRepositoryImpl {
 				allowableActions.getAllowableActions();
 
 			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
-				pwcId = document.checkOut();
+				checkOutDocumentObjectId = document.checkOut();
 
-				document = (Document)session.getObject(pwcId);
+				document = (Document)session.getObject(
+					checkOutDocumentObjectId);
 			}
 
 			Map<String, Object> properties = null;
@@ -916,11 +917,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			checkUpdatable(allowableActionsSet, properties, contentStream);
 
-			if (pwcId != null) {
+			if (checkOutDocumentObjectId != null) {
 				document.checkIn(
 					majorVersion, properties, contentStream, changeLog);
 
-				pwcId = null;
+				checkOutDocumentObjectId = null;
 			}
 			else {
 				if (properties != null) {
@@ -948,7 +949,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			throw new RepositoryException(e);
 		}
 		finally {
-			if (pwcId != null) {
+			if (checkOutDocumentObjectId != null) {
 				document.cancelCheckOut();
 			}
 		}
