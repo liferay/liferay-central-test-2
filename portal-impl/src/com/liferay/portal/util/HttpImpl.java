@@ -881,6 +881,17 @@ public class HttpImpl implements Http {
 		return xml;
 	}
 
+	protected boolean hasRequestHeader(HttpMethod httpMethod, String name) {
+		Header[] headers = httpMethod.getRequestHeaders(name); 
+
+		if (headers.length == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	protected org.apache.commons.httpclient.Cookie toCommonsCookie(
 		Cookie cookie) {
 
@@ -1060,13 +1071,13 @@ public class HttpImpl implements Http {
 				 method.equals(Http.Method.PUT)) &&
 				(body != null)) {
 			}
-			else if (!_hasRequestHeader(httpMethod, HttpHeaders.CONTENT_TYPE)) {
+			else if (!hasRequestHeader(httpMethod, HttpHeaders.CONTENT_TYPE)) {
 				httpMethod.addRequestHeader(
 					HttpHeaders.CONTENT_TYPE,
 					ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED);
 			}
 
-			if (!_hasRequestHeader(httpMethod, HttpHeaders.USER_AGENT)) {
+			if (!hasRequestHeader(httpMethod, HttpHeaders.USER_AGENT)) {
 				httpMethod.addRequestHeader(
 					HttpHeaders.USER_AGENT, _DEFAULT_USER_AGENT);
 			}
@@ -1161,15 +1172,6 @@ public class HttpImpl implements Http {
 			catch (Exception e) {
 				_log.error(e, e);
 			}
-		}
-	}
-
-	private boolean _hasRequestHeader(HttpMethod httpMethod, String name) {
-		if (httpMethod.getRequestHeaders(name).length == 0) {
-			return false;
-		}
-		else {
-			return true;
 		}
 	}
 
