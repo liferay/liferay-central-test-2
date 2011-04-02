@@ -57,8 +57,6 @@ if (Validator.isNull(ParamUtil.getString(request, "userMappingScreenName")) ||
 
 String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
-List<SearchResult> searchResults = new ArrayList<SearchResult>();
-
 String userMappingsParams =
 	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
 	"\npassword=" + ParamUtil.getString(request, "userMappingPassword") +
@@ -73,6 +71,8 @@ Properties userMappings = PropertiesUtil.load(userMappingsParams);
 
 String[] attributeIds = StringUtil.split(StringUtil.merge(userMappings.values()));
 
+List<SearchResult> searchResults = new ArrayList<SearchResult>();
+
 PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, attributeIds, searchResults);
 %>
 
@@ -84,7 +84,7 @@ PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 2
 
 <br /><br />
 
-<table class="lfr-table">
+<table class="lfr-table" width="100%">
 
 <%
 boolean showMissingAttributeMessage = false;

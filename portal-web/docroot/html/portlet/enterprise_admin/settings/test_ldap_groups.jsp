@@ -54,8 +54,6 @@ if (Validator.isNull(ParamUtil.getString(request, "groupMappingGroupName")) ||
 
 String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
-List<SearchResult> searchResults = new ArrayList<SearchResult>();
-
 String groupMappingsParam =
 	"groupName=" + ParamUtil.getString(request, "groupMappingGroupName") +
 	"\ndescription=" + ParamUtil.getString(request, "groupMappingDescription") +
@@ -64,6 +62,8 @@ String groupMappingsParam =
 Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
 
 String[] attributeIds = StringUtil.split(StringUtil.merge(groupMappings.values()));
+
+List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
 PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, groupFilter, attributeIds, searchResults);
 %>
