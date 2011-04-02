@@ -54,7 +54,7 @@ if (layout != null) {
 }
 %>
 
-<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && !themeDisplay.isStatePopUp() && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) || (layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE))) %>">
+<c:if test="<%= (layout != null) && !themeDisplay.isStatePopUp() && (!group.hasStagingGroup() || group.isStagingGroup()) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) || (layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE))) %>">
 	<aui:script use="liferay-layout,liferay-navigation">
 		var layoutOptions = {};
 
