@@ -373,10 +373,9 @@ public class PermissionImporter {
 
 		for (Element roleEl : roleEls) {
 			String name = roleEl.attributeValue("name");
+			int type = GetterUtil.getInteger(roleEl.attributeValue("type"));
 
 			Role role = null;
-
-			int type = Integer.valueOf(roleEl.attributeValue("type"));
 
 			if (name.startsWith(PermissionExporter.ROLE_TEAM_PREFIX)) {
 				name = name.substring(
@@ -476,6 +475,7 @@ public class PermissionImporter {
 
 			if (role == null) {
 				String description = roleEl.attributeValue("description");
+
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, description, type);
 			}
