@@ -104,7 +104,7 @@ public class CMISRepositoryUtil {
 		"com.liferay.portal.repository.cmis.CMISRepositoryUtil";
 
 	private static MethodKey _checkRepository = new MethodKey(
-		_CLASS_NAME, "checkRepository", Long.class, Map.class,
+		_CLASS_NAME, "checkRepository", long.class, Map.class,
 		UnicodeProperties.class, String.class);
 
 	private static MethodKey _getOperationContext = new MethodKey(

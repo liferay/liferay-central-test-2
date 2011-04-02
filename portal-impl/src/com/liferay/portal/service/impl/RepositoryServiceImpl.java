@@ -16,6 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryException;
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -41,6 +42,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.RepositoryNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
+import java.lang.reflect.Proxy;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -396,10 +398,25 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				e);
 		}
 
-		if (baseRepository instanceof CMISRepositoryHandler) {
-			CMISRepositoryHandler cmisRepositoryHandler =
-				(CMISRepositoryHandler)baseRepository;
+		CMISRepositoryHandler cmisRepositoryHandler = null;
 
+		if (baseRepository instanceof CMISRepositoryHandler) {
+			cmisRepositoryHandler =
+				(CMISRepositoryHandler)baseRepository;
+		}
+		else if (Proxy.isProxyClass(baseRepository.getClass())) {
+			ClassLoaderBeanHandler classLoaderBeanHandler =
+				(ClassLoaderBeanHandler)Proxy.getInvocationHandler(
+					baseRepository);
+
+			Object bean = classLoaderBeanHandler.getBean();
+
+			if (bean instanceof CMISRepositoryHandler) {
+				cmisRepositoryHandler = (CMISRepositoryHandler)bean;
+			}
+		}
+
+		if (cmisRepositoryHandler != null) {
 			CMISRepository cmisRepository = new CMISRepository(
 				cmisRepositoryHandler);
 
