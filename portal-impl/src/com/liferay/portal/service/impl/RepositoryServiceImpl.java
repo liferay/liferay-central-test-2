@@ -43,6 +43,7 @@ import com.liferay.portlet.documentlibrary.RepositoryNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 import java.lang.reflect.Proxy;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -401,8 +402,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		CMISRepositoryHandler cmisRepositoryHandler = null;
 
 		if (baseRepository instanceof CMISRepositoryHandler) {
-			cmisRepositoryHandler =
-				(CMISRepositoryHandler)baseRepository;
+			cmisRepositoryHandler = (CMISRepositoryHandler)baseRepository;
 		}
 		else if (Proxy.isProxyClass(baseRepository.getClass())) {
 			ClassLoaderBeanHandler classLoaderBeanHandler =
