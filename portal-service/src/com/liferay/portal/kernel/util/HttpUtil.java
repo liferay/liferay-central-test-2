@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.net.URL;
 
@@ -256,24 +255,6 @@ public class HttpUtil {
 		throws IOException {
 
 		return getHttp().URLtoByteArray(location, post);
-	}
-
-	public static InputStream URLtoInputStream(Http.Options options)
-		throws IOException {
-
-		return getHttp().URLtoInputStream(options);
-	}
-
-	public static InputStream URLtoInputStream(String location)
-		throws IOException {
-
-		return getHttp().URLtoInputStream(location);
-	}
-
-	public static InputStream URLtoInputStream(String location, boolean post)
-		throws IOException {
-
-		return getHttp().URLtoInputStream(location, post);
 	}
 
 	public static String URLtoString(Http.Options options) throws IOException {

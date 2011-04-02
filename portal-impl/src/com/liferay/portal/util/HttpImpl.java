@@ -819,35 +819,6 @@ public class HttpImpl implements Http {
 		return URLtoByteArray(options);
 	}
 
-	public InputStream URLtoInputStream(Http.Options options)
-		throws IOException {
-
-		return URLtoInputStream(
-			options.getLocation(), options.getMethod(), options.getHeaders(),
-			options.getCookies(), options.getAuth(), options.getBody(),
-			options.getParts(), options.getResponse(),
-			options.isFollowRedirects());
-	}
-
-	public InputStream URLtoInputStream(String location) throws IOException {
-		Http.Options options = new Http.Options();
-
-		options.setLocation(location);
-
-		return URLtoInputStream(options);
-	}
-
-	public InputStream URLtoInputStream(String location, boolean post)
-		throws IOException {
-
-		Http.Options options = new Http.Options();
-
-		options.setLocation(location);
-		options.setPost(post);
-
-		return URLtoInputStream(options);
-	}
-
 	public String URLtoString(Http.Options options) throws IOException {
 		return new String(URLtoByteArray(options));
 	}
@@ -1001,25 +972,6 @@ public class HttpImpl implements Http {
 
 		byte[] bytes = null;
 
-		InputStream inputStream = URLtoInputStream(
-			location, method, headers, cookies, auth, body, parts, response,
-			followRedirects);
-
-		if (inputStream != null) {
-			bytes = FileUtil.getBytes(inputStream);
-
-			inputStream.close();
-		}
-
-		return bytes;
-	}
-
-	protected InputStream URLtoInputStream(
-			String location, Http.Method method, Map<String, String> headers,
-			Cookie[] cookies, Http.Auth auth, Http.Body body, Map<String,
-			String> parts, Http.Response response, boolean followRedirects)
-		throws IOException {
-
 		HttpMethod httpMethod = null;
 		HttpState httpState = null;
 
@@ -1152,7 +1104,7 @@ public class HttpImpl implements Http {
 				String redirect = locationHeader.getValue();
 
 				if (followRedirects) {
-					return URLtoInputStream(
+					return URLtoByteArray(
 						redirect, Http.Method.GET, headers,
 						cookies, auth, body, parts, response, followRedirects);
 				}
@@ -1161,7 +1113,34 @@ public class HttpImpl implements Http {
 				}
 			}
 
-			return httpMethod.getResponseBodyAsStream();
+			InputStream is = httpMethod.getResponseBodyAsStream();
+
+			if (is != null) {
+				Header contentLength = httpMethod.getResponseHeader(
+					HttpHeaders.CONTENT_LENGTH);
+
+				if (contentLength != null) {
+					response.setContentLength(
+						GetterUtil.getInteger(contentLength.getValue()));
+				}
+
+				Header contentType = httpMethod.getResponseHeader(
+					HttpHeaders.CONTENT_TYPE);
+
+				if (contentType != null) {
+					response.setContentType(contentType.getValue());
+				}
+
+				bytes = FileUtil.getBytes(is);
+
+				is.close();
+			}
+
+			for (Header header : httpMethod.getResponseHeaders()) {
+				response.addHeader(header.getName(), header.getValue());
+			}
+
+			return bytes;
 		}
 		finally {
 			try {
