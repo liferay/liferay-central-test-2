@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageListenerException;
 import com.liferay.portal.kernel.messaging.SynchronousDestination;
@@ -31,7 +32,8 @@ import java.util.Set;
 public class DirectSynchronousMessageSender
 	implements SynchronousMessageSender {
 
-	public Object send(String destinationName, Message message) {
+	public Object send(String destinationName, Message message)
+		throws MessageBusException {
 		Destination destination = _messageBus.getDestination(destinationName);
 
 		if (destination == null) {
@@ -65,7 +67,7 @@ public class DirectSynchronousMessageSender
 					messageListener.receive(message);
 				}
 				catch (MessageListenerException mle) {
-					_log.error("Unable to process message " + message, mle);
+					throw new MessageBusException(mle);
 				}
 			}
 		}
@@ -73,7 +75,8 @@ public class DirectSynchronousMessageSender
 		return message.getResponse();
 	}
 
-	public Object send(String destinationName, Message message, long timeout) {
+	public Object send(String destinationName, Message message, long timeout)
+		throws MessageBusException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
 				DirectSynchronousMessageSender.class.getName() +
