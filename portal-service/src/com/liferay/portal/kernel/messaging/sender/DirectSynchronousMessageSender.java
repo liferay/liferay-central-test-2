@@ -34,6 +34,7 @@ public class DirectSynchronousMessageSender
 
 	public Object send(String destinationName, Message message)
 		throws MessageBusException {
+
 		Destination destination = _messageBus.getDestination(destinationName);
 
 		if (destination == null) {
@@ -77,6 +78,7 @@ public class DirectSynchronousMessageSender
 
 	public Object send(String destinationName, Message message, long timeout)
 		throws MessageBusException {
+
 		if (_log.isWarnEnabled()) {
 			_log.warn(
 				DirectSynchronousMessageSender.class.getName() +
