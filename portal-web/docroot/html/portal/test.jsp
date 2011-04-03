@@ -31,7 +31,7 @@ request.setAttribute("users", users);
 System.out.println(request.getClass().getName());
 System.out.println("request.getRemoteUser() " + request.getRemoteUser());
 
-PortalServiceUtil.test();
+PortalServiceUtil.testGetUserId();
 %>
 
 Test
