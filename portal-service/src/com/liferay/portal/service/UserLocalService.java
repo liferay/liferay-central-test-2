@@ -461,11 +461,11 @@ public interface UserLocalService {
 	a succesful authentication the user's primary key will be placed
 	under the key <code>userId</code>.
 	* @return the authentication status. This can be {@link
-	com.liferay.portal.security.auth.Authenticator.FAILURE}
+	com.liferay.portal.security.auth.Authenticator#FAILURE}
 	indicating that the user's credentials are invalid, {@link
-	com.liferay.portal.security.auth.Authenticator.SUCCESS}
+	com.liferay.portal.security.auth.Authenticator#SUCCESS}
 	indicating a successful login, or {@link
-	com.liferay.portal.security.auth.Authenticator.DNE} indicating
+	com.liferay.portal.security.auth.Authenticator#DNE} indicating
 	that a user with that login does not exist.
 	* @throws PortalException if <code>emailAddress</code> or
 	<code>password</code> was <code>null</code>
@@ -493,11 +493,11 @@ public interface UserLocalService {
 	a succesful authentication the user's primary key will be placed
 	under the key <code>userId</code>.
 	* @return the authentication status. This can be {@link
-	com.liferay.portal.security.auth.Authenticator.FAILURE}
+	com.liferay.portal.security.auth.Authenticator#FAILURE}
 	indicating that the user's credentials are invalid, {@link
-	com.liferay.portal.security.auth.Authenticator.SUCCESS}
+	com.liferay.portal.security.auth.Authenticator#SUCCESS}
 	indicating a successful login, or {@link
-	com.liferay.portal.security.auth.Authenticator.DNE} indicating
+	com.liferay.portal.security.auth.Authenticator#DNE} indicating
 	that a user with that login does not exist.
 	* @throws PortalException if <code>screenName</code> or
 	<code>password</code> was <code>null</code>
@@ -525,11 +525,11 @@ public interface UserLocalService {
 	a succesful authentication the user's primary key will be placed
 	under the key <code>userId</code>.
 	* @return the authentication status. This can be {@link
-	com.liferay.portal.security.auth.Authenticator.FAILURE}
+	com.liferay.portal.security.auth.Authenticator#FAILURE}
 	indicating that the user's credentials are invalid, {@link
-	com.liferay.portal.security.auth.Authenticator.SUCCESS}
+	com.liferay.portal.security.auth.Authenticator#SUCCESS}
 	indicating a successful login, or {@link
-	com.liferay.portal.security.auth.Authenticator.DNE} indicating
+	com.liferay.portal.security.auth.Authenticator#DNE} indicating
 	that a user with that login does not exist.
 	* @throws PortalException if <code>userId</code> or <code>password</code>
 	was <code>null</code>
@@ -575,11 +575,11 @@ public interface UserLocalService {
 	key depending on the value of <code>authType</code>
 	* @param password the user's password
 	* @return the authentication status. This can be {@link
-	com.liferay.portal.security.auth.Authenticator.FAILURE}
+	com.liferay.portal.security.auth.Authenticator#FAILURE}
 	indicating that the user's credentials are invalid, {@link
-	com.liferay.portal.security.auth.Authenticator.SUCCESS}
+	com.liferay.portal.security.auth.Authenticator#SUCCESS}
 	indicating a successful login, or {@link
-	com.liferay.portal.security.auth.Authenticator.DNE} indicating
+	com.liferay.portal.security.auth.Authenticator#DNE} indicating
 	that a user with that login does not exist.
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
