@@ -41,8 +41,8 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 	 * repositories, this may be the latest content regardless of workflow
 	 * state.
 	 *
-	 * @see #getFileVersion()
 	 * @return content stream of the current file version
+	 * @see    #getFileVersion()
 	 */
 	public InputStream getContentStream()
 		throws PortalException, SystemException;
@@ -62,9 +62,9 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 	 * Retrieves the current file version. The workflow state of the latest file
 	 * version may affect what is returned by this method. In a Liferay
 	 * repository, this will return the latest approved version; the latest
-	 * version regardless of workflow state can be retrieved by
-	 * {@link #getLatestFileVersion()}. In third-party repositories, these two
-	 * methods may function identically.
+	 * version regardless of workflow state can be retrieved by {@link
+	 * #getLatestFileVersion()}. In third-party repositories, these two methods
+	 * may function identically.
 	 *
 	 * @return current file version
 	 */
@@ -87,8 +87,8 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 	/**
 	 * Retrieves the latest file version. In a Liferay repository, this means
 	 * the latest version regardless of workflow state. In third-party
-	 * repositories, this may have an identical functionality with
-	 * {@link #getFileVersion()}.
+	 * repositories, this may have an identical functionality with {@link
+	 * #getFileVersion()}.
 	 *
 	 * @return latest file version
 	 */
