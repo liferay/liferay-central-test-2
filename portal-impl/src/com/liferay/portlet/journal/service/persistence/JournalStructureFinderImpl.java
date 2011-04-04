@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,7 +46,7 @@ public class JournalStructureFinderImpl
 	public static String FIND_BY_C_G_S_N_D =
 		JournalStructureFinder.class.getName() + ".findByC_G_S_N_D";
 
-	public int countByKeywords(long companyId, long groupId, String keywords)
+	public int countByKeywords(long companyId, long[] groupIds, String keywords)
 		throws SystemException {
 
 		String[] structureIds = null;
@@ -63,21 +64,21 @@ public class JournalStructureFinderImpl
 		}
 
 		return countByC_G_S_N_D(
-			companyId, groupId, structureIds, names, descriptions, andOperator);
+			companyId, groupIds, structureIds, names, descriptions, andOperator);
 	}
 
 	public int countByC_G_S_N_D(
-			long companyId, long groupId, String structureId, String name,
+			long companyId, long[] groupIds, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
 		return countByC_G_S_N_D(
-			companyId, groupId, new String[] {structureId}, new String[] {name},
+			companyId, groupIds, new String[] {structureId}, new String[] {name},
 			new String[] {description}, andOperator);
 	}
 
 	public int countByC_G_S_N_D(
-			long companyId, long groupId, String[] structureIds, String[] names,
+			long companyId, long[] groupIds, String[] structureIds, String[] names,
 			String[] descriptions, boolean andOperator)
 		throws SystemException {
 
@@ -92,9 +93,8 @@ public class JournalStructureFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_S_N_D);
 
-			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
-			}
+			sql = StringUtil.replace(
+				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "structureId", StringPool.LIKE, false, structureIds);
@@ -113,8 +113,8 @@ public class JournalStructureFinderImpl
 
 			qPos.add(companyId);
 
-			if (groupId > 0) {
-				qPos.add(groupId);
+			if (groupIds.length > 0) {
+				qPos.add(groupIds);
 			}
 
 			qPos.add(structureIds, 2);
@@ -142,7 +142,7 @@ public class JournalStructureFinderImpl
 	}
 
 	public List<JournalStructure> findByKeywords(
-			long companyId, long groupId, String keywords, int start, int end,
+			long companyId, long[] groupIds, String keywords, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
@@ -161,25 +161,25 @@ public class JournalStructureFinderImpl
 		}
 
 		return findByC_G_S_N_D(
-			companyId, groupId, structureIds, names, descriptions, andOperator,
+			companyId, groupIds, structureIds, names, descriptions, andOperator,
 			start, end, obc);
 	}
 
 	public List<JournalStructure> findByC_G_S_N_D(
-			long companyId, long groupId, String structureId, String name,
+			long companyId, long[] groupIds, String structureId, String name,
 			String description, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_G_S_N_D(
-			companyId, groupId, new String[] {structureId}, new String[] {name},
+			companyId, groupIds, new String[] {structureId}, new String[] {name},
 			new String[] {description}, andOperator, start, end, obc);
 	}
 
 	public List<JournalStructure> findByC_G_S_N_D(
-			long companyId, long groupId, String[] structureIds, String[] names,
-			String[] descriptions, boolean andOperator, int start, int end,
-			OrderByComparator obc)
+			long companyId, long[] groupIds, String[] structureIds,
+			String[] names, String[] descriptions, boolean andOperator,
+			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		structureIds = CustomSQLUtil.keywords(structureIds, false);
@@ -193,9 +193,8 @@ public class JournalStructureFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_S_N_D);
 
-			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
-			}
+			sql = StringUtil.replace(
+				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "structureId", StringPool.LIKE, false, structureIds);
@@ -215,8 +214,8 @@ public class JournalStructureFinderImpl
 
 			qPos.add(companyId);
 
-			if (groupId > 0) {
-				qPos.add(groupId);
+			if (groupIds.length > 0) {
+				qPos.add(groupIds);
 			}
 
 			qPos.add(structureIds, 2);
@@ -232,6 +231,24 @@ public class JournalStructureFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected String getGroupIds(long[] groupIds) {
+		if (groupIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(groupIds.length + 2);
+
+		sb.append(" (groupId = ? ");
+
+		for (int i = 1; i < groupIds.length; i++) {
+			sb.append(" OR groupId = ? ");
+		}
+
+		sb.append(") AND ");
+
+		return sb.toString();
 	}
 
 }

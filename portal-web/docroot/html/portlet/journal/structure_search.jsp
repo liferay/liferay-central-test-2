@@ -44,12 +44,14 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 
 		<c:if test='<%= strutsAction.equalsIgnoreCase("/journal/select_structure") %>'>
 			<aui:column>
-				<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>">
+				<aui:select label="my-places" name="<%= displayTerms.GROUP_IDS %>">
 					<c:if test="<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>">
-						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
+						<aui:option label="" value="<%= displayTerms.getDefaultGroupIds(renderRequest) %>" />
+
+						<aui:option label="global" selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == themeDisplay.getCompanyGroupId()) %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 					</c:if>
 
-					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= displayTerms.getGroupId() == themeDisplay.getParentGroupId() %>" value="<%= themeDisplay.getParentGroupId() %>" />
+					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == themeDisplay.getParentGroupId()) %>" value="<%= themeDisplay.getParentGroupId() %>" />
 
 					<%
 					Layout scopeLayout = themeDisplay.getScopeLayout();
@@ -61,7 +63,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 						Group scopeGroup = scopeLayout.getScopeGroup();
 						%>
 
-						<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
+						<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == scopeGroup.getGroupId()) %>" value="<%= scopeGroup.getGroupId() %>" />
 					</c:if>
 				</aui:select>
 			</aui:column>

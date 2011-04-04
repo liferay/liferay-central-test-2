@@ -372,39 +372,39 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public List<JournalStructure> search(
-			long companyId, long groupId, String keywords, int start, int end,
+			long companyId, long[] groupIds, String keywords, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalStructureFinder.findByKeywords(
-			companyId, groupId, keywords, start, end, obc);
+			companyId, groupIds, keywords, start, end, obc);
 	}
 
 	public List<JournalStructure> search(
-			long companyId, long groupId, String structureId, String name,
+			long companyId, long[] groupIds, String structureId, String name,
 			String description, boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return journalStructureFinder.findByC_G_S_N_D(
-			companyId, groupId, structureId, name, description, andOperator,
+			companyId, groupIds, structureId, name, description, andOperator,
 			start, end, obc);
 	}
 
-	public int searchCount(long companyId, long groupId, String keywords)
+	public int searchCount(long companyId, long[] groupIds, String keywords)
 		throws SystemException {
 
 		return journalStructureFinder.countByKeywords(
-			companyId, groupId, keywords);
+			companyId, groupIds, keywords);
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String structureId, String name,
+			long companyId, long[] groupIds, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
 		return journalStructureFinder.countByC_G_S_N_D(
-			companyId, groupId, structureId, name, description, andOperator);
+			companyId, groupIds, structureId, name, description, andOperator);
 	}
 
 	public JournalStructure updateStructure(

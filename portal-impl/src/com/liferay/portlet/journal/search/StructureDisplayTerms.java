@@ -16,6 +16,9 @@ package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
@@ -28,7 +31,7 @@ public class StructureDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public static final String GROUP_ID = "groupId";
+	public static final String GROUP_IDS = "groupIds";
 
 	public static final String NAME = "name";
 
@@ -37,12 +40,8 @@ public class StructureDisplayTerms extends DisplayTerms {
 	public StructureDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
-		groupId = ParamUtil.getLong(
-			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
+		groupIds = obtainGroupIds(portletRequest);
 		name = ParamUtil.getString(portletRequest, NAME);
 		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
 	}
@@ -51,8 +50,8 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
-	public long getGroupId() {
-		return groupId;
+	public long[] getGroupIds() {
+		return groupIds;
 	}
 
 	public String getName() {
@@ -63,8 +62,34 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return structureId;
 	}
 
+	public String getDefaultGroupIds(PortletRequest portletRequest) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String strutsAction = ParamUtil.getString(
+			portletRequest, "struts_action");
+
+		StringBundler sb = new StringBundler();
+
+		sb.append(themeDisplay.getScopeGroupId());
+
+		if (strutsAction.equalsIgnoreCase("/journal/select_structure")) {
+			sb.append(StringPool.COMMA);
+			sb.append(themeDisplay.getCompanyGroupId());
+		}
+
+		return sb.toString();
+	}
+
+	protected long[] obtainGroupIds(PortletRequest portletRequest) {
+		String groupIdsParams = ParamUtil.getString(
+			portletRequest, GROUP_IDS, getDefaultGroupIds(portletRequest));
+
+		return StringUtil.split(groupIdsParams, 0L);
+	}
+
 	protected String description;
-	protected long groupId;
+	protected long[] groupIds;
 	protected String name;
 	protected String structureId;
 

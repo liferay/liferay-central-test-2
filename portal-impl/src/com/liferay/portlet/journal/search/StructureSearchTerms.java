@@ -29,18 +29,14 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 	public StructureSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		groupId = ParamUtil.getLong(
-			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
+		groupIds = obtainGroupIds(portletRequest);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
 		structureId = DAOParamUtil.getLike(portletRequest, STRUCTURE_ID);
 	}
 
-	public void setGroupId(long groupId) {
-		this.groupId = groupId;
+	public void setGroupIds(long[] groupIds) {
+		this.groupIds = groupIds;
 	}
 
 }

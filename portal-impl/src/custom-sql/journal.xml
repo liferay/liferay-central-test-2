@@ -148,7 +148,7 @@
 				JournalStructure
 			WHERE
 				(companyId = ?) AND
-				(groupId = ?) AND
+				[$GROUP_IDS]
 				(
 					(structureId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -164,7 +164,7 @@
 				JournalStructure
 			WHERE
 				(companyId = ?) AND
-				(groupId = ?) AND
+				[$GROUP_IDS]
 				(
 					(structureId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
