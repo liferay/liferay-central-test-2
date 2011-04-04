@@ -407,7 +407,4 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService" class="com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.shorturl.service.ShortURLLocalService" class="com.liferay.portlet.shorturl.service.impl.ShortURLLocalServiceImpl" />
-	<bean id="com.liferay.portlet.shorturl.service.ShortURLService" class="com.liferay.portlet.shorturl.service.impl.ShortURLServiceImpl" />
-	<bean id="com.liferay.portlet.shorturl.service.persistence.ShortURLPersistence" class="com.liferay.portlet.shorturl.service.persistence.ShortURLPersistenceImpl" parent="basePersistence" />
 </beans>

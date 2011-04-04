@@ -2882,21 +2882,6 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.shorturl.model.impl.ShortURLModelImpl">
-		<attributes>
-			<id name="shortURLId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="originalURL" />
-			<basic name="hash" />
-			<basic name="descriptor" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
 		<table name="Counter" />
 		<attributes />
@@ -3608,14 +3593,6 @@
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" name="WikiPageResource">
 		<table name="WikiPageResource" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.shortenurl.model.impl.ShortURLImpl" name="ShortURL">
-		<table name="ShortURL" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.shorturl.model.impl.ShortURLImpl" name="ShortURL">
-		<table name="ShortURL" />
 		<attributes />
 	</entity>
 </entity-mappings>

@@ -102,7 +102,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_REST) ||
 			friendlyURL.startsWith(_PATH_ROBOTS_TXT) ||
 			friendlyURL.startsWith(_PATH_SHAREPOINT) ||
-			friendlyURL.startsWith(_PATH_SHORT_URL) ||
 			friendlyURL.startsWith(_PATH_SITEMAP_XML) ||
 			friendlyURL.startsWith(_PATH_SOFTWARE_CATALOG) ||
 			friendlyURL.startsWith(_PATH_VTI) ||
@@ -327,8 +326,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static final String _PATH_ROBOTS_TXT = "/robots.txt";
 
 	private static final String _PATH_SHAREPOINT = "/sharepoint/";
-
-	private static final String _PATH_SHORT_URL = "/u/";
 
 	private static final String _PATH_SITEMAP_XML = "/sitemap.xml";
 

@@ -1100,12 +1100,3 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
-
-Liferay.Service.register("Liferay.Service.ShortURL", "com.liferay.portlet.shorturl.service");
-
-Liferay.Service.registerClass(
-	Liferay.Service.ShortURL, "ShortURL",
-	{
-		addShortURL: true
-	}
-);

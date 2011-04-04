@@ -153,7 +153,6 @@
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
-	<import class="com.liferay.portlet.shorturl.model.ShortURL" />
 	<class name="com.liferay.counter.model.impl.CounterImpl" table="Counter">
 		<id name="name" type="java.lang.String">
 			<generator class="assigned" />
@@ -2337,16 +2336,5 @@
 		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="nodeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.portlet.shorturl.model.impl.ShortURLImpl" table="ShortURL">
-		<cache usage="read-write" />
-		<id name="shortURLId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="originalURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="hash" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="descriptor" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>
