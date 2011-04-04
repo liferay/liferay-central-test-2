@@ -182,7 +182,7 @@
 				JournalTemplate
 			WHERE
 				(companyId = ?) AND
-				(groupId = ?) AND
+				[$GROUP_IDS]
 				(
 					(templateId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -199,7 +199,7 @@
 				JournalTemplate
 			WHERE
 				(companyId = ?) AND
-				(groupId = ?) AND
+				[$GROUP_IDS]
 				(
 					(templateId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(structureId = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]

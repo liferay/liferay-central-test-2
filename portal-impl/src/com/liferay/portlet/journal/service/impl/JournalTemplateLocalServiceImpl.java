@@ -445,44 +445,46 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public List<JournalTemplate> search(
-			long companyId, long groupId, String keywords, String structureId,
-			String structureIdComparator, int start, int end,
-			OrderByComparator obc)
+			long companyId, long[] groupIds, String keywords,
+			String structureId, String structureIdComparator, int start,
+			int end, OrderByComparator obc)
 		throws SystemException {
 
 		return journalTemplateFinder.findByKeywords(
-			companyId, groupId, keywords, structureId, structureIdComparator,
+			companyId, groupIds, keywords, structureId, structureIdComparator,
 			start, end, obc);
 	}
 
 	public List<JournalTemplate> search(
-			long companyId, long groupId, String templateId, String structureId,
-			String structureIdComparator, String name, String description,
-			boolean andOperator, int start, int end, OrderByComparator obc)
+			long companyId, long[] groupIds, String templateId,
+			String structureId, String structureIdComparator, String name,
+			String description, boolean andOperator, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return journalTemplateFinder.findByC_G_T_S_N_D(
-			companyId, groupId, templateId, structureId, structureIdComparator,
+			companyId, groupIds, templateId, structureId, structureIdComparator,
 			name, description, andOperator, start, end, obc);
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String keywords, String structureId,
-			String structureIdComparator)
+			long companyId, long[] groupIds, String keywords,
+			String structureId, String structureIdComparator)
 		throws SystemException {
 
 		return journalTemplateFinder.countByKeywords(
-			companyId, groupId, keywords, structureId, structureIdComparator);
+			companyId, groupIds, keywords, structureId, structureIdComparator);
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String templateId, String structureId,
-			String structureIdComparator, String name, String description,
+			long companyId, long[] groupIds, String templateId,
+			String structureId, String structureIdComparator, String name,
+			String description,
 			boolean andOperator)
 		throws SystemException {
 
 		return journalTemplateFinder.countByC_G_T_S_N_D(
-			companyId, groupId, templateId, structureId, structureIdComparator,
+			companyId, groupIds, templateId, structureId, structureIdComparator,
 			name, description, andOperator);
 	}
 

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -48,8 +49,8 @@ public class JournalTemplateFinderImpl
 		JournalTemplateFinder.class.getName() + ".findByC_G_T_S_N_D";
 
 	public int countByKeywords(
-			long companyId, long groupId, String keywords, String structureId,
-			String structureIdComparator)
+			long companyId, long[] groupIds, String keywords,
+			String structureId, String structureIdComparator)
 		throws SystemException {
 
 		String[] templateIds = null;
@@ -67,24 +68,24 @@ public class JournalTemplateFinderImpl
 		}
 
 		return countByC_G_T_S_N_D(
-			companyId, groupId, templateIds, structureId, structureIdComparator,
-			names, descriptions, andOperator);
+			companyId, groupIds, templateIds, structureId,
+			structureIdComparator, names, descriptions, andOperator);
 	}
 
 	public int countByC_G_T_S_N_D(
-			long companyId, long groupId, String templateId, String structureId,
-			String structureIdComparator, String name, String description,
-			boolean andOperator)
+			long companyId, long[] groupIds, String templateId,
+			String structureId, String structureIdComparator, String name,
+			String description, boolean andOperator)
 		throws SystemException {
 
 		return countByC_G_T_S_N_D(
-			companyId, groupId, new String[] {templateId}, structureId,
+			companyId, groupIds, new String[] {templateId}, structureId,
 			structureIdComparator, new String[] {name},
 			new String[] {description}, andOperator);
 	}
 
 	public int countByC_G_T_S_N_D(
-			long companyId, long groupId, String[] templateIds,
+			long companyId, long[] groupIds, String[] templateIds,
 			String structureId, String structureIdComparator, String[] names,
 			String[] descriptions, boolean andOperator)
 		throws SystemException {
@@ -100,9 +101,8 @@ public class JournalTemplateFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_T_S_N_D);
 
-			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
-			}
+			sql = StringUtil.replace(
+				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.LIKE, false, templateIds);
@@ -126,8 +126,8 @@ public class JournalTemplateFinderImpl
 
 			qPos.add(companyId);
 
-			if (groupId > 0) {
-				qPos.add(groupId);
+			if (groupIds.length > 0) {
+				qPos.add(groupIds);
 			}
 
 			qPos.add(templateIds, 2);
@@ -169,9 +169,9 @@ public class JournalTemplateFinderImpl
 	}
 
 	public List<JournalTemplate> findByKeywords(
-			long companyId, long groupId, String keywords, String structureId,
-			String structureIdComparator, int start, int end,
-			OrderByComparator obc)
+			long companyId, long[] groupIds, String keywords,
+			String structureId, String structureIdComparator, int start,
+			int end, OrderByComparator obc)
 		throws SystemException {
 
 		String[] templateIds = null;
@@ -189,24 +189,26 @@ public class JournalTemplateFinderImpl
 		}
 
 		return findByC_G_T_S_N_D(
-			companyId, groupId, templateIds, structureId, structureIdComparator,
-			names, descriptions, andOperator, start, end, obc);
+			companyId, groupIds, templateIds, structureId,
+			structureIdComparator, names, descriptions, andOperator, start, end,
+			obc);
 	}
 
 	public List<JournalTemplate> findByC_G_T_S_N_D(
-			long companyId, long groupId, String templateId, String structureId,
-			String structureIdComparator, String name, String description,
-			boolean andOperator, int start, int end, OrderByComparator obc)
+			long companyId, long[] groupIds, String templateId,
+			String structureId, String structureIdComparator, String name,
+			String description, boolean andOperator, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_G_T_S_N_D(
-			companyId, groupId, new String[] {templateId}, structureId,
+			companyId, groupIds, new String[] {templateId}, structureId,
 			structureIdComparator, new String[] {name},
 			new String[] {description}, andOperator, start, end, obc);
 	}
 
 	public List<JournalTemplate> findByC_G_T_S_N_D(
-			long companyId, long groupId, String[] templateIds,
+			long companyId, long[] groupIds, String[] templateIds,
 			String structureId, String structureIdComparator, String[] names,
 			String[] descriptions, boolean andOperator, int start, int end,
 			OrderByComparator obc)
@@ -223,9 +225,8 @@ public class JournalTemplateFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_T_S_N_D);
 
-			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
-			}
+			sql = StringUtil.replace(
+				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.LIKE, false, templateIds);
@@ -250,8 +251,8 @@ public class JournalTemplateFinderImpl
 
 			qPos.add(companyId);
 
-			if (groupId > 0) {
-				qPos.add(groupId);
+			if (groupIds.length > 0) {
+				qPos.add(groupIds);
 			}
 
 			qPos.add(templateIds, 2);
@@ -307,6 +308,24 @@ public class JournalTemplateFinderImpl
 		}
 
 		return sql;
+	}
+
+	protected String getGroupIds(long[] groupIds) {
+		if (groupIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(groupIds.length + 2);
+
+		sb.append(" (groupId = ? ");
+
+		for (int i = 1; i < groupIds.length; i++) {
+			sb.append(" OR groupId = ? ");
+		}
+
+		sb.append(") AND ");
+
+		return sb.toString();
 	}
 
 }

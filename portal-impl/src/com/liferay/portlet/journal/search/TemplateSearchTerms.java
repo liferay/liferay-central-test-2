@@ -15,9 +15,6 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
 
@@ -29,12 +26,8 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 	public TemplateSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		groupId = ParamUtil.getLong(
-			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
+		groupIds = obtainGroupIds(portletRequest);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
 		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 		templateId = DAOParamUtil.getLike(portletRequest, TEMPLATE_ID);
@@ -44,8 +37,8 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 		return structureIdComparator;
 	}
 
-	public void setGroupId(long groupId) {
-		this.groupId = groupId;
+	public void setGroupIds(long[] groupIds) {
+		this.groupIds = groupIds;
 	}
 
 	public void setStructureId(String structureId) {
