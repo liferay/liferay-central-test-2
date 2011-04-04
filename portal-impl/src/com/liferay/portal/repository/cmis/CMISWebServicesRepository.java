@@ -18,6 +18,7 @@ import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
+import com.liferay.portal.kernel.repository.cmis.Session;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -26,7 +27,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.chemistry.opencmis.client.api.Session;
 import org.apache.chemistry.opencmis.commons.SessionParameter;
 import org.apache.chemistry.opencmis.commons.enums.BindingType;
 
@@ -35,9 +35,7 @@ import org.apache.chemistry.opencmis.commons.enums.BindingType;
  */
 public class CMISWebServicesRepository extends CMISRepositoryHandler {
 
-	public Object getSession()
-		throws PortalException, RepositoryException {
-
+	public Session getSession() throws PortalException, RepositoryException {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(
@@ -92,12 +90,7 @@ public class CMISWebServicesRepository extends CMISRepositoryHandler {
 			getRepositoryId(), parameters, getTypeSettingsProperties(),
 			_REPOSITORY_ID);
 
-		Session session = CMISRepositoryUtil.getSessionFactory().createSession(
-			parameters);
-
-		session.setDefaultContext(CMISRepositoryUtil.getOperationContext());
-
-		return session;
+		return CMISRepositoryUtil.createSession(parameters);
 	}
 
 	public String[] getSupportedConfigurations() {

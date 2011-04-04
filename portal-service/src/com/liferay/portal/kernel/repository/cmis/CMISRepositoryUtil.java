@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.repository.cmis;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -41,34 +42,21 @@ public class CMISRepositoryUtil {
 		}
 	}
 
-	public static Object getOperationContext() {
-		Object value = null;
+	public static Session createSession(Map<String, String> parameters)
+		throws RepositoryException {
+
+		Session value = null;
 
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
-				false, _getOperationContext);
+				false, _createSession, parameters);
 
 			if (returnObj != null) {
-				value = returnObj;
+				value = (Session)returnObj;
 			}
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return value;
-	}
-
-	public static Object getSessionFactory() {
-		Object value = null;
-
-		try {
-			Object returnObj = PortalClassInvoker.invoke(
-				false, _getSessionFactory);
-
-			if (returnObj != null) {
-				value = returnObj;
-			}
+		catch (RepositoryException re) {
+			throw re;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -107,11 +95,8 @@ public class CMISRepositoryUtil {
 		_CLASS_NAME, "checkRepository", long.class, Map.class,
 		UnicodeProperties.class, String.class);
 
-	private static MethodKey _getOperationContext = new MethodKey(
-		_CLASS_NAME, "getOperationContext");
-
-	private static MethodKey _getSessionFactory = new MethodKey(
-		_CLASS_NAME, "getSessionFactory");
+	private static MethodKey _createSession = new MethodKey(
+		_CLASS_NAME, "createSession", Map.class);
 
 	private static MethodKey _getTypeSettingsValue = new MethodKey(
 		_CLASS_NAME, "getTypeSettingsValue", UnicodeProperties.class,

@@ -544,7 +544,10 @@ public class CMISRepository extends BaseRepositoryImpl {
 			return session;
 		}
 
-		session = (Session)_cmisRepositoryHandler.getSession();
+		SessionImpl sessionImpl =
+			(SessionImpl)_cmisRepositoryHandler.getSession();
+
+		session = sessionImpl.getSession();
 
 		setCachedSession(session);
 

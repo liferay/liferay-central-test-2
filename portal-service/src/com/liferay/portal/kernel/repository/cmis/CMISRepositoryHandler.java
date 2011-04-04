@@ -185,7 +185,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return login;
 	}
 
-	public abstract Object getSession()
+	public abstract Session getSession()
 		throws PortalException, RepositoryException;
 
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)

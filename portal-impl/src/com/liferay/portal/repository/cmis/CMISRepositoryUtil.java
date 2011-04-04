@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.chemistry.opencmis.client.api.OperationContext;
+import org.apache.chemistry.opencmis.client.api.Session;
 import org.apache.chemistry.opencmis.client.api.SessionFactory;
 import org.apache.chemistry.opencmis.client.runtime.OperationContextImpl;
 import org.apache.chemistry.opencmis.client.runtime.SessionFactoryImpl;
@@ -69,12 +70,20 @@ public class CMISRepositoryUtil {
 			getTypeSettingsValue(typeSettingsProperties, typeSettingsKey));
 	}
 
-	public static OperationContext getOperationContext() {
-		return _operationContext;
-	}
+	public static com.liferay.portal.kernel.repository.cmis.Session
+			createSession(Map<String, String> parameters)
+		throws RepositoryException {
 
-	public static SessionFactory getSessionFactory() {
-		return _sessionFactory;
+		try {
+			Session session = _sessionFactory.createSession(parameters);
+
+			session.setDefaultContext(_operationContext);
+
+			return new SessionImpl(session);
+		}
+		catch (Exception e) {
+			throw new RepositoryException(e);
+		}
 	}
 
 	public static String getTypeSettingsValue(
