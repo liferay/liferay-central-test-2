@@ -64,7 +64,8 @@ public class JournalStructureFinderImpl
 		}
 
 		return countByC_G_S_N_D(
-			companyId, groupIds, structureIds, names, descriptions, andOperator);
+			companyId, groupIds, structureIds, names, descriptions,
+			andOperator);
 	}
 
 	public int countByC_G_S_N_D(
@@ -73,13 +74,13 @@ public class JournalStructureFinderImpl
 		throws SystemException {
 
 		return countByC_G_S_N_D(
-			companyId, groupIds, new String[] {structureId}, new String[] {name},
-			new String[] {description}, andOperator);
+			companyId, groupIds, new String[] {structureId},
+			new String[] {name}, new String[] {description}, andOperator);
 	}
 
 	public int countByC_G_S_N_D(
-			long companyId, long[] groupIds, String[] structureIds, String[] names,
-			String[] descriptions, boolean andOperator)
+			long companyId, long[] groupIds, String[] structureIds,
+			String[] names, String[] descriptions, boolean andOperator)
 		throws SystemException {
 
 		structureIds = CustomSQLUtil.keywords(structureIds, false);
@@ -142,8 +143,8 @@ public class JournalStructureFinderImpl
 	}
 
 	public List<JournalStructure> findByKeywords(
-			long companyId, long[] groupIds, String keywords, int start, int end,
-			OrderByComparator obc)
+			long companyId, long[] groupIds, String keywords, int start,
+			int end, OrderByComparator obc)
 		throws SystemException {
 
 		String[] structureIds = null;
@@ -172,8 +173,9 @@ public class JournalStructureFinderImpl
 		throws SystemException {
 
 		return findByC_G_S_N_D(
-			companyId, groupIds, new String[] {structureId}, new String[] {name},
-			new String[] {description}, andOperator, start, end, obc);
+			companyId, groupIds, new String[] {structureId},
+			new String[] {name}, new String[] {description}, andOperator, start,
+			end, obc);
 	}
 
 	public List<JournalStructure> findByC_G_S_N_D(

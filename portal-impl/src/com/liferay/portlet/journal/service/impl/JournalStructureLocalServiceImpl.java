@@ -372,8 +372,8 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public List<JournalStructure> search(
-			long companyId, long[] groupIds, String keywords, int start, int end,
-			OrderByComparator obc)
+			long companyId, long[] groupIds, String keywords, int start,
+			int end, OrderByComparator obc)
 		throws SystemException {
 
 		return journalStructureFinder.findByKeywords(
