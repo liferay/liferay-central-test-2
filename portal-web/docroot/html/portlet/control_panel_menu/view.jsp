@@ -128,7 +128,7 @@
 									</c:if>
 
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-site") : HtmlUtil.escape(group.getDescriptiveName()) %></a>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId())) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-site") : HtmlUtil.escape(group.getDescriptiveName()) %></a>
 									</li>
 
 								<%
@@ -169,7 +169,7 @@
 									</c:if>
 
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId()) %>"><%= HtmlUtil.escape(organization.getName()) %></a>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId())) %>"><%= HtmlUtil.escape(organization.getName()) %></a>
 									</li>
 
 								<%
@@ -190,12 +190,12 @@
 							<ul>
 								<c:if test="<%= showGlobal %>">
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>"><liferay-ui:message key="global" /></a>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId())) %>"><liferay-ui:message key="global" /></a>
 									</li>
 								</c:if>
 								<c:if test="<%= showMyCommunity %>">
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId()) %>"><liferay-ui:message key="my-site" /></a>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId())) %>"><liferay-ui:message key="my-site" /></a>
 									</li>
 								</c:if>
 							</ul>
@@ -208,7 +208,7 @@
 						<liferay-ui:panel title="">
 							<ul>
 								<li>
-									<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>"><liferay-ui:message key="default" /></a>
+									<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId())) %>"><liferay-ui:message key="default" /></a>
 								</li>
 
 								<%
@@ -216,7 +216,7 @@
 								%>
 
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId())) %>"><%= HtmlUtil.escape(curScopeLayout.getName(locale)) %></a>
 									</li>
 
 								<%
