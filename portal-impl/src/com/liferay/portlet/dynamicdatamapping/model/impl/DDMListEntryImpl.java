@@ -17,21 +17,12 @@ package com.liferay.portlet.dynamicdatamapping.model.impl;
 import com.liferay.portlet.dynamicdatamapping.model.DDMListEntry;
 
 /**
- * The model implementation for the DDMListEntry service. Represents a row in the &quot;DDMListEntry&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.dynamicdatamapping.model.DDMListEntry} interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
 public class DDMListEntryImpl extends DDMListEntryModelImpl
 	implements DDMListEntry {
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a d d m list entry model instance should use the {@link DDMListEntry} interface instead.
-	 */
+
 	public DDMListEntryImpl() {
 	}
+
 }

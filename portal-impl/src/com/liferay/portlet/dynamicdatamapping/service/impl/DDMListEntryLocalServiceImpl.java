@@ -69,7 +69,7 @@ public class DDMListEntryLocalServiceImpl
 
 		ddmStructureLinkLocalService.deleteClassStructureLink(
 			listEntry.getListEntryId());
-		
+
 		// Storage
 
 		StorageEngineUtil.deleteByClass(listEntry.getClassPK());
@@ -87,7 +87,9 @@ public class DDMListEntryLocalServiceImpl
 	public void deleteListEntries(long listId)
 		throws PortalException, SystemException {
 
-		for (DDMListEntry listEntry : ddmListEntryPersistence.findByListId(listId)) {
+		for (DDMListEntry listEntry :
+				ddmListEntryPersistence.findByListId(listId)) {
+
 			deleteListEntry(listEntry);
 		}
 	}
