@@ -113,35 +113,40 @@ unique?) >
 
 <!--
 The information-daily-limit entity specifies the amount of added information
-that can be applied to a user's social score on a daily basis.
+(information-value) that can be applied to a user's social score for the action
+on an asset and in turn to its owner's contribution score on a daily basis.
 -->
 <!ELEMENT information-daily-limit (#PCDATA) >
 
 <!--
-The information-value specifies the value of contributing information.
+The information-value specifies the value of contributing information added to
+the asset each time the action is perfomed. Information-daily-limit may affect
+this setting.
 -->
 <!ELEMENT information-value (#PCDATA) >
 
 <!--
-The information-lifespan entity specifies the length of time this value can be
-applied toward a user's social score.
+The information-lifespan entity specifies the length of time in days over which
+the corresponding information-value is linearly decreased to zero.
 -->
 <!ELEMENT information-lifespan (#PCDATA) >
 
 <!--
-The participation-daily-limit entity specifies the amount of participation that
-can be applied to a user's participation score on a daily basis.
+The participation-daily-limit entity specifies the amount of participation
+(participation-value) that can be applied to a user's participation score for
+the action on an asset on a daily basis.
 -->
 <!ELEMENT participation-daily-limit (#PCDATA) >
 
 <!--
-The participation-value entity specifies the value of participation.
+The participation-value entity specifies the value added to the user's
+participation score for performing the action.
 -->
 <!ELEMENT participation-value (#PCDATA) >
 
 <!--
-The participation-lifespan entity specifies the length of time this value can
-be applied to a user's participation score.
+The participation-lifespan entity specifies the length of time in days over
+which the corresponding participation-value is linearly decreased to zero.
 -->
 <!ELEMENT participation-lifespan (#PCDATA) >
 
@@ -152,8 +157,9 @@ be applied to a user's participation score.
 <!ATTLIST social-activity-mapping class CDATA #REQUIRED >
 
 <!--
-The unique element specifies if the action will provide value to the user's
-score if it is performed more than once.
+The unique element specifies whether the action will provide value to the
+user's or asset's score if it is performed more than once on the same asset
+by the user.
 -->
 <!ELEMENT unique (#PCDATA) >
 
