@@ -1849,6 +1849,10 @@ public class ServicePreAction extends Action {
 			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
 			myAccountURL.setParameter("backURL", myAccountRedirect);
 
+			if (scopeGroupId > 0) {
+				myAccountURL.setDoAsGroupId(scopeGroupId);
+			}
+
 			themeDisplay.setURLMyAccount(myAccountURL);
 		}
 
