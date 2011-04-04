@@ -415,40 +415,40 @@ public class JournalTemplateLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> search(
-		long companyId, long groupId, java.lang.String keywords,
+		long companyId, long[] groupIds, java.lang.String keywords,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalTemplateLocalService.search(companyId, groupId,
+		return _journalTemplateLocalService.search(companyId, groupIds,
 			keywords, structureId, structureIdComparator, start, end, obc);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> search(
-		long companyId, long groupId, java.lang.String templateId,
+		long companyId, long[] groupIds, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalTemplateLocalService.search(companyId, groupId,
+		return _journalTemplateLocalService.search(companyId, groupIds,
 			templateId, structureId, structureIdComparator, name, description,
 			andOperator, start, end, obc);
 	}
 
-	public int searchCount(long companyId, long groupId,
+	public int searchCount(long companyId, long[] groupIds,
 		java.lang.String keywords, java.lang.String structureId,
 		java.lang.String structureIdComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalTemplateLocalService.searchCount(companyId, groupId,
+		return _journalTemplateLocalService.searchCount(companyId, groupIds,
 			keywords, structureId, structureIdComparator);
 	}
 
-	public int searchCount(long companyId, long groupId,
+	public int searchCount(long companyId, long[] groupIds,
 		java.lang.String templateId, java.lang.String structureId,
 		java.lang.String structureIdComparator, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalTemplateLocalService.searchCount(companyId, groupId,
+		return _journalTemplateLocalService.searchCount(companyId, groupIds,
 			templateId, structureId, structureIdComparator, name, description,
 			andOperator);
 	}
