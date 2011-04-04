@@ -27,6 +27,8 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
@@ -39,12 +41,12 @@ import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletRequest;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -198,6 +200,9 @@ public class ActionUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
 		long roleId = ParamUtil.getLong(request, "roleId");
 
 		Role role = null;
@@ -205,7 +210,10 @@ public class ActionUtil {
 		Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 		if ((group != null) && group.isCommunity()) {
-			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+			if (GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.ASSIGN_USER_ROLES) ||
+				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					themeDisplay.getUserId(), group.getGroupId(),
 					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
@@ -236,7 +244,10 @@ public class ActionUtil {
 
 				long organizationGroupId = organizationGroup.getGroupId();
 
-				if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+				if (GroupPermissionUtil.contains(
+						permissionChecker, organizationGroupId,
+						ActionKeys.ASSIGN_USER_ROLES) ||
+					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 						themeDisplay.getUserId(), organizationGroupId,
 						RoleConstants.ORGANIZATION_ADMINISTRATOR, true) ||
 					UserGroupRoleLocalServiceUtil.hasUserGroupRole(
