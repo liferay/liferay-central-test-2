@@ -32,6 +32,7 @@ import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
@@ -80,11 +81,15 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _cmisRepository.getCompanyId();
 	}
 
-	public InputStream getContentStream() {
+	public InputStream getContentStream()
+		throws PortalException, SystemException {
+
 		return _document.getContentStream().getStream();
 	}
 
-	public InputStream getContentStream(String version) {
+	public InputStream getContentStream(String version)
+		throws PortalException, SystemException {
+
 		for (Document document : _document.getAllVersions()) {
 			if (version.equals(document.getVersionLabel())) {
 				ContentStream contentStream = document.getContentStream();
@@ -93,7 +98,9 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 			}
 		}
 
-		return null;
+		throw new NoSuchFileVersionException(
+			"No CMIS file version with {fileEntryId=" + getFileEntryId() +
+				", version=" + version + "}");
 	}
 
 	public Date getCreateDate() {
@@ -111,7 +118,8 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public FileVersion getFileVersion()
 		throws PortalException, SystemException {
 
-		return getLatestFileVersion();
+		return CMISRepositoryLocalServiceUtil.toFileVersion(
+			getRepositoryId(), _document);
 	}
 
 	public FileVersion getFileVersion(String version)
@@ -124,7 +132,9 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 			}
 		}
 
-		return null;
+		throw new NoSuchFileVersionException(
+			"No CMIS file version with {fileEntryId=" + getFileEntryId() +
+				", version=" + version + "}");
 	}
 
 	public List<FileVersion> getFileVersions(int status)

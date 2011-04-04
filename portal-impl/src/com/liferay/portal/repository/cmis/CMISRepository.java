@@ -46,6 +46,7 @@ import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -1375,7 +1376,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			fileVersionId);
 
 		if (repositoryEntry == null) {
-			throw new NoSuchFileEntryException(
+			throw new NoSuchFileVersionException(
 				"No CMIS file version with {fileVersionId=" + fileVersionId +
 					"}");
 		}
