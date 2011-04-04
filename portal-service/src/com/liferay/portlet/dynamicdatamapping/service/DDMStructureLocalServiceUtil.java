@@ -361,6 +361,50 @@ public class DDMStructureLocalServiceUtil {
 		return getService().getStructureEntriesCount(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> search(
+		long companyId, long groupId, long[] classNameIds,
+		java.lang.String keywords, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, groupId, classNameIds, keywords, start,
+			end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> search(
+		long companyId, long groupId, long[] classNameIds,
+		java.lang.String structureKey, java.lang.String name,
+		java.lang.String description, java.lang.String storageType,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, groupId, classNameIds, structureKey,
+			name, description, storageType, andOperator, start, end,
+			orderByComparator);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		long[] classNameIds, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchCount(companyId, groupId, classNameIds, keywords);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		long[] classNameIds, java.lang.String structureKey,
+		java.lang.String name, java.lang.String description,
+		java.lang.String storageType, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchCount(companyId, groupId, classNameIds, structureKey,
+			name, description, storageType, andOperator);
+	}
+
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure updateStructure(
 		long groupId, java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
