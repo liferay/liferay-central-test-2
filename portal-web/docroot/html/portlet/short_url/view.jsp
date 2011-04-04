@@ -18,21 +18,21 @@
 
 <aui:form>
 	<aui:input type="text" name="url" />
-	<br/>
+	<br />
 	<input type="submit" value="<liferay-ui:message key="shorten" />" />
 </aui:form>
 
 <aui:script use="aui-io-request">
 	var form = A.one('#<portlet:namespace />fm');
-	
+
 	form.on(
 		'submit',
 		function(event) {
 			var input = A.one('#<portlet:namespace/>url');
 			var url = input.get('value');
-			
+
 			A.io.request(
-				'/tunnel-web/json', 
+				'/tunnel-web/json',
 				{
 					data: {
 						serviceClassName: 'com.liferay.portlet.shorturl.service.ShortURLServiceUtil',
