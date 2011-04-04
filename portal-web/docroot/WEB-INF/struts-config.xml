@@ -2064,6 +2064,10 @@
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
 
+		<!-- Short URL -->
+
+		<action path="/short_url/view" forward="portlet.short_url.view" />
+
 		<!-- Site Map -->
 
 		<action path="/site_map/view" forward="portlet.site_map.view" />

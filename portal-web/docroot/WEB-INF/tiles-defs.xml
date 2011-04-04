@@ -1350,6 +1350,14 @@
 		<put name="portlet_content" value="/portlet/shopping/view_item.jsp" />
 	</definition>
 
+	<!-- Short URL -->
+
+	<definition name="portlet.short_url" extends="portlet" />
+
+	<definition name="portlet.short_url.view" extends="portlet.short_url">
+		<put name="portlet_content" value="/portlet/short_url/view.jsp" />
+	</definition>
+
 	<!-- Social Equity Admin -->
 
 	<definition name="portlet.social_equity_admin" extends="portlet" />

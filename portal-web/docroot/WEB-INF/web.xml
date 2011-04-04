@@ -237,6 +237,11 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>Short URL Servlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.ShortURLServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>Sitemap Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.SitemapServlet</servlet-class>
 		<load-on-startup>2</load-on-startup>
@@ -645,6 +650,10 @@
 	<servlet-mapping>
 		<servlet-name>Sharepoint Web Services Servlet</servlet-name>
 		<url-pattern>/_vti_bin/webs.asmx</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Short URL Servlet</servlet-name>
+		<url-pattern>/u/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Software Catalog Servlet</servlet-name>

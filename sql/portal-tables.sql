@@ -1641,6 +1641,15 @@ create table ShoppingOrderItem (
 	shippedDate DATE null
 );
 
+create table ShortURL (
+	shortURLId LONG not null primary key,
+	createDate DATE null,
+	modifiedDate DATE null,
+	originalURL STRING null,
+	hash VARCHAR(255) null,
+	descriptor VARCHAR(255) null
+);
+
 create table SocialActivity (
 	activityId LONG not null primary key,
 	groupId LONG,

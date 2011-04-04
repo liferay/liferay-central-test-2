@@ -573,6 +573,9 @@ create index IX_F474FD89 on ShoppingOrder (ppTxnId);
 
 create index IX_B5F82C7A on ShoppingOrderItem (orderId);
 
+create unique index IX_F05A7D3B on ShortURL (hash);
+create unique index IX_88B0B4B5 on ShortURL (originalURL);
+
 create index IX_82E39A0C on SocialActivity (classNameId);
 create index IX_A853C757 on SocialActivity (classNameId, classPK);
 create index IX_64B1BC66 on SocialActivity (companyId);
