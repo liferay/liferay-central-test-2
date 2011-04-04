@@ -125,6 +125,10 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 
 		ddmListPersistence.remove(list);
 
+		// Dynamic data mapping list entries
+
+		ddmListEntryLocalService.deleteListEntries(list.getListId());
+
 		// Resources
 
 		resourceLocalService.deleteResource(

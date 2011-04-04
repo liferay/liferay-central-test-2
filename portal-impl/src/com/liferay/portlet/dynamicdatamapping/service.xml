@@ -71,6 +71,23 @@
 			<finder-column name="listKey" />
 		</finder>
 	</entity>
+	<entity name="DDMListEntry" uuid="true" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="listEntryId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="listId" type="long" />
+		<column name="classPK" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="ListId" return-type="Collection">
+			<finder-column name="listId" />
+		</finder>
+	</entity>
 	<entity name="DDMStorageLink" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
