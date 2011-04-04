@@ -132,6 +132,11 @@
 			<bean class="com.liferay.portal.image.SpriteProcessorImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.json.JSONBuilderUtil" class="com.liferay.portal.kernel.json.JSONBuilderUtil">
+		<property name="jsonBuilder">
+			<bean class="com.liferay.portal.json.JSONBuilderImpl"/>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.json.JSONFactoryUtil" class="com.liferay.portal.kernel.json.JSONFactoryUtil">
 		<property name="JSONFactory">
 			<bean class="com.liferay.portal.json.JSONFactoryImpl" />
