@@ -27,7 +27,7 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 		super(portletRequest);
 
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		groupIds = obtainGroupIds(portletRequest);
+		groupIds = setGroupIds(portletRequest);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
 		structureId = DAOParamUtil.getString(portletRequest, STRUCTURE_ID);
 		templateId = DAOParamUtil.getLike(portletRequest, TEMPLATE_ID);

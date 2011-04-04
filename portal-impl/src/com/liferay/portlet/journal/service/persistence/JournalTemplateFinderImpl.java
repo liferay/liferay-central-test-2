@@ -102,8 +102,7 @@ public class JournalTemplateFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_T_S_N_D);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
-
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
@@ -125,11 +124,7 @@ public class JournalTemplateFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-
-			if (groupIds.length > 0) {
-				qPos.add(groupIds);
-			}
-
+			qPos.add(groupIds);
 			qPos.add(templateIds, 2);
 
 			if (structureIdComparator.equals(StringPool.EQUAL)) {
@@ -226,8 +221,7 @@ public class JournalTemplateFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_T_S_N_D);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
-
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
@@ -250,11 +244,7 @@ public class JournalTemplateFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-
-			if (groupIds.length > 0) {
-				qPos.add(groupIds);
-			}
-
+			qPos.add(groupIds);
 			qPos.add(templateIds, 2);
 
 			if (structureIdComparator.equals(StringPool.EQUAL)) {
@@ -284,6 +274,24 @@ public class JournalTemplateFinderImpl
 		}
 	}
 
+	protected String getGroupIds(long[] groupIds) {
+		if (groupIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(groupIds.length + 2);
+
+		sb.append(" (groupId = ? ");
+
+		for (int i = 1; i < groupIds.length; i++) {
+			sb.append(" OR groupId = ? ");
+		}
+
+		sb.append(") AND ");
+
+		return sb.toString();
+	}
+
 	protected String replaceStructureIdComparator(String sql) {
 		String insertSQL = "structureId != ? AND structureId IS NOT NULL";
 
@@ -308,24 +316,6 @@ public class JournalTemplateFinderImpl
 		}
 
 		return sql;
-	}
-
-	protected String getGroupIds(long[] groupIds) {
-		if (groupIds.length == 0) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(groupIds.length + 2);
-
-		sb.append(" (groupId = ? ");
-
-		for (int i = 1; i < groupIds.length; i++) {
-			sb.append(" OR groupId = ? ");
-		}
-
-		sb.append(") AND ");
-
-		return sb.toString();
 	}
 
 }
