@@ -1844,14 +1844,15 @@ public class ServicePreAction extends Action {
 
 			myAccountURL.setWindowState(WindowState.MAXIMIZED);
 			myAccountURL.setPortletMode(PortletMode.VIEW);
-			myAccountURL.setRefererPlid(plid);
-
-			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
-			myAccountURL.setParameter("backURL", myAccountRedirect);
 
 			if (scopeGroupId > 0) {
 				myAccountURL.setDoAsGroupId(scopeGroupId);
 			}
+
+			myAccountURL.setRefererPlid(plid);
+
+			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
+			myAccountURL.setParameter("backURL", myAccountRedirect);
 
 			themeDisplay.setURLMyAccount(myAccountURL);
 		}
