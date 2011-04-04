@@ -32,6 +32,7 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMListEntryLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMListLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMListService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
@@ -40,6 +41,7 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListEntryPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
@@ -176,6 +178,44 @@ public abstract class DDMListServiceBaseImpl extends PrincipalBean
 	 */
 	public void setDDMListFinder(DDMListFinder ddmListFinder) {
 		this.ddmListFinder = ddmListFinder;
+	}
+
+	/**
+	 * Gets the d d m list entry local service.
+	 *
+	 * @return the d d m list entry local service
+	 */
+	public DDMListEntryLocalService getDDMListEntryLocalService() {
+		return ddmListEntryLocalService;
+	}
+
+	/**
+	 * Sets the d d m list entry local service.
+	 *
+	 * @param ddmListEntryLocalService the d d m list entry local service
+	 */
+	public void setDDMListEntryLocalService(
+		DDMListEntryLocalService ddmListEntryLocalService) {
+		this.ddmListEntryLocalService = ddmListEntryLocalService;
+	}
+
+	/**
+	 * Gets the d d m list entry persistence.
+	 *
+	 * @return the d d m list entry persistence
+	 */
+	public DDMListEntryPersistence getDDMListEntryPersistence() {
+		return ddmListEntryPersistence;
+	}
+
+	/**
+	 * Sets the d d m list entry persistence.
+	 *
+	 * @param ddmListEntryPersistence the d d m list entry persistence
+	 */
+	public void setDDMListEntryPersistence(
+		DDMListEntryPersistence ddmListEntryPersistence) {
+		this.ddmListEntryPersistence = ddmListEntryPersistence;
 	}
 
 	/**
@@ -559,6 +599,10 @@ public abstract class DDMListServiceBaseImpl extends PrincipalBean
 	protected DDMListPersistence ddmListPersistence;
 	@BeanReference(type = DDMListFinder.class)
 	protected DDMListFinder ddmListFinder;
+	@BeanReference(type = DDMListEntryLocalService.class)
+	protected DDMListEntryLocalService ddmListEntryLocalService;
+	@BeanReference(type = DDMListEntryPersistence.class)
+	protected DDMListEntryPersistence ddmListEntryPersistence;
 	@BeanReference(type = DDMStorageLinkLocalService.class)
 	protected DDMStorageLinkLocalService ddmStorageLinkLocalService;
 	@BeanReference(type = DDMStorageLinkPersistence.class)

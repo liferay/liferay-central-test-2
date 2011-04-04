@@ -426,6 +426,13 @@ create table DDMList (
 	structureId LONG
 );
 
+create table DDMListEntry (
+	uuid_ VARCHAR(75) null,
+	listEntryId LONG not null primary key,
+	listId LONG,
+	classPK LONG
+);
+
 create table DDMStorageLink (
 	uuid_ VARCHAR(75) null,
 	storageLinkId LONG not null primary key,

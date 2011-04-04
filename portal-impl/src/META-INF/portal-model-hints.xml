@@ -1364,6 +1364,12 @@
 		</field>
 		<field name="structureId" type="long" />
 	</model>
+	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMListEntry">
+		<field name="uuid" type="String" />
+		<field name="listEntryId" type="long" />
+		<field name="listId" type="long" />
+		<field name="classPK" type="long" />
+	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink">
 		<field name="uuid" type="String" />
 		<field name="storageLinkId" type="long" />
