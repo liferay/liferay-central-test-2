@@ -1930,7 +1930,8 @@ resource.repositories.root=$${user.home}/liferay</echo>
 		<sleep seconds="60" />
 
 		<echo file="hosts">127.0.0.1	localhost
-127.0.0.1	liferay-b711dd9
+127.0.0.1	liferay-ead7385
+127.0.0.1	${vm.host}
 127.0.0.1	www.able.com
 127.0.0.1	www.baker.com
 127.0.0.1	www.charlie.com

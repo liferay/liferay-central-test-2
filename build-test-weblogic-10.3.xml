@@ -21,6 +21,10 @@
 				dir="lib/development"
 				includes="hsql.jar,jtds.jar,mysql.jar,postgresql.jar"
 			/>
+			<fileset
+				dir="lib/portal"
+				includes="xalan.jar,serializer.jar"
+			/>
 		</copy>
 
 		<if>
@@ -37,6 +41,18 @@
 
 		<exec executable="${pscp.executable}">
 			<arg line="-pw ${vm.password} ${tstamp.value}\*.jar ${vm.username}@${vm.host}:/oracle/middleware/user_projects/domains/base_domain/lib" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c mkdir C:\Oracle\Middleware\jdk160_14_R27.6.5-32\jre\lib\endorsed" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move C:\oracle\middleware\user_projects\domains\base_domain\lib\serializer.jar C:\Oracle\Middleware\jdk160_14_R27.6.5-32\jre\lib\endorsed" />
+		</exec>
+
+		<exec executable="${plink.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move C:\oracle\middleware\user_projects\domains\base_domain\lib\xalan.jar C:\Oracle\Middleware\jdk160_14_R27.6.5-32\jre\lib\endorsed" />
 		</exec>
 
 		<delete dir="${tstamp.value}" />
