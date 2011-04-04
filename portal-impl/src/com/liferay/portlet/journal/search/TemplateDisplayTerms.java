@@ -54,7 +54,7 @@ public class TemplateDisplayTerms extends DisplayTerms {
 	}
 
 	public long getGroupId() {
-		if (groupIds.length > 0) {
+		if (groupIds.length == 1) {
 			return groupIds[0];
 		}
 		else {
