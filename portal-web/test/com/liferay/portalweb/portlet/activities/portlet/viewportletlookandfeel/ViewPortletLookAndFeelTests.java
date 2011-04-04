@@ -30,7 +30,7 @@ public class ViewPortletLookAndFeelTests extends BaseTests {
 		testSuite.addTestSuite(AddPageActivitiesTest.class);
 		testSuite.addTestSuite(AddPortletActivitiesTest.class);
 		testSuite.addTestSuite(ViewPortletLookAndFeelTest.class);
-		testSuite.addTestSuite(TearDownPageTest.class);
+		testSuite.addTestSuite(TearDownMyCommunityPrivatePageTest.class);
 
 		return testSuite;
 	}

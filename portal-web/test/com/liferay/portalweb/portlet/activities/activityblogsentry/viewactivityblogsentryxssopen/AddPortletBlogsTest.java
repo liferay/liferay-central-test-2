@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.activities.portlet.viewportletlookandfeel;
+package com.liferay.portalweb.portlet.activities.activityblogsentry.viewactivityblogsentryxssopen;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,9 +20,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletActivitiesTest extends BaseTestCase {
-	public void testAddPortletActivities() throws Exception {
-		selenium.open("/group/joebloggs/home/");
+public class AddPortletBlogsTest extends BaseTestCase {
+	public void testAddPortletBlogs() throws Exception {
+		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -30,7 +30,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Activities Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -41,8 +41,8 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Activities Test Page",
-			RuntimeVariables.replace("Activities Test Page"));
+		selenium.clickAt("link=Blogs Test Page",
+			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("More\u2026"),
@@ -56,7 +56,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@title='Activities']/p/a")) {
+				if (selenium.isElementPresent("//div[@title='Blogs']/p/a")) {
 					break;
 				}
 			}
@@ -67,7 +67,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Activities']/p/a",
+		selenium.clickAt("//div[@title='Blogs']/p/a",
 			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {

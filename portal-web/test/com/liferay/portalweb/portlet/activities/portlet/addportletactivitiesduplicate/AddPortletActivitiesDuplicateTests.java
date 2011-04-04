@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.activities;
+package com.liferay.portalweb.portlet.activities.portlet.addportletactivitiesduplicate;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.activities.activityblogsentry.ActivityBlogsEntryTests;
-import com.liferay.portalweb.portlet.activities.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -24,13 +22,15 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ActivitiesTests extends BaseTests {
+public class AddPortletActivitiesDuplicateTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ActivityBlogsEntryTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageActivitiesTest.class);
+		testSuite.addTestSuite(AddPortletActivitiesTest.class);
+		testSuite.addTestSuite(AddPortletActivitiesDuplicateTest.class);
+		testSuite.addTestSuite(TearDownMyCommunityPrivatePageTest.class);
 
 		return testSuite;
 	}

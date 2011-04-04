@@ -15,9 +15,9 @@
 package com.liferay.portalweb.portlet.activities.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.activities.portlet.addportlet.AddPortletTests;
-import com.liferay.portalweb.portlet.activities.portlet.addportletduplicate.AddPortletDuplicateTests;
-import com.liferay.portalweb.portlet.activities.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.activities.portlet.addportletactivities.AddPortletActivitiesTests;
+import com.liferay.portalweb.portlet.activities.portlet.addportletactivitiesduplicate.AddPortletActivitiesDuplicateTests;
+import com.liferay.portalweb.portlet.activities.portlet.removeportletactivities.RemovePortletActivitiesTests;
 import com.liferay.portalweb.portlet.activities.portlet.viewportletlookandfeel.ViewPortletLookAndFeelTests;
 
 import junit.framework.Test;
@@ -31,9 +31,9 @@ public class PortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletTests.suite());
-		testSuite.addTest(AddPortletDuplicateTests.suite());
-		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(AddPortletActivitiesTests.suite());
+		testSuite.addTest(AddPortletActivitiesDuplicateTests.suite());
+		testSuite.addTest(RemovePortletActivitiesTests.suite());
 		testSuite.addTest(ViewPortletLookAndFeelTests.suite());
 
 		return testSuite;

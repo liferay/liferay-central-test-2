@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.activities.portlet.viewportletlookandfeel;
+package com.liferay.portalweb.portlet.activities.portlet.addportletactivitiesduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletActivitiesTest extends BaseTestCase {
-	public void testAddPortletActivities() throws Exception {
+public class AddPortletActivitiesDuplicateTest extends BaseTestCase {
+	public void testAddPortletActivitiesDuplicate() throws Exception {
 		selenium.open("/group/joebloggs/home/");
 
 		for (int second = 0;; second++) {
@@ -56,7 +56,8 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@title='Activities']/p/a")) {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
 					break;
 				}
 			}
@@ -67,8 +68,9 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Activities']/p/a",
-			RuntimeVariables.replace("Add"));
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
+			RuntimeVariables.replace("a"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -76,7 +78,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//section")) {
+				if (selenium.isVisible("//div[@title='Activities']")) {
 					break;
 				}
 			}
@@ -87,6 +89,6 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isVisible("//section"));
+		assertFalse(selenium.isVisible("//div[@title='Activities']/p/a"));
 	}
 }

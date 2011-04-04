@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.activities.portlet.viewportletlookandfeel;
+package com.liferay.portalweb.portlet.activities.portlet.addportletactivities;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

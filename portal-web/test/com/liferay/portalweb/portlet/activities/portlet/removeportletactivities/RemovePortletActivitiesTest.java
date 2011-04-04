@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.activities.portlet.viewportletlookandfeel;
+package com.liferay.portalweb.portlet.activities.portlet.removeportletactivities;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletActivitiesTest extends BaseTestCase {
-	public void testAddPortletActivities() throws Exception {
+public class RemovePortletActivitiesTest extends BaseTestCase {
+	public void testRemovePortletActivities() throws Exception {
 		selenium.open("/group/joebloggs/home/");
 
 		for (int second = 0;; second++) {
@@ -45,10 +45,10 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			RuntimeVariables.replace("Activities Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("More\u2026"),
-			selenium.getText("//a[@id='_145_addApplication']"));
-		selenium.clickAt("//a[@id='_145_addApplication']",
-			RuntimeVariables.replace("More\u2026"));
+		selenium.click("//img[@alt='Remove']");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +56,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@title='Activities']/p/a")) {
+				if (!selenium.isElementPresent("//section")) {
 					break;
 				}
 			}
@@ -67,26 +67,6 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Activities']/p/a",
-			RuntimeVariables.replace("Add"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//section")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isVisible("//section"));
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }
