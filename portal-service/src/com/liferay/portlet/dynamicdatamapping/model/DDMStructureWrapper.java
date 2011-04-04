@@ -397,6 +397,10 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.toXmlString();
 	}
 
+	public java.util.Set<java.lang.String> getFieldNames() {
+		return _ddmStructure.getFieldNames();
+	}
+
 	public java.lang.String getFieldType(java.lang.String fieldName) {
 		return _ddmStructure.getFieldType(fieldName);
 	}

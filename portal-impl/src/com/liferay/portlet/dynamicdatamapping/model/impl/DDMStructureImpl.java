@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -34,6 +35,12 @@ public class DDMStructureImpl
 	extends DDMStructureModelImpl implements DDMStructure {
 
 	public DDMStructureImpl() {
+	}
+
+	public Set<String> getFieldNames() {
+		Map<String, String> fieldTypes = _getFieldTypes();
+
+		return fieldTypes.keySet();
 	}
 
 	public String getFieldType(String fieldName) {
