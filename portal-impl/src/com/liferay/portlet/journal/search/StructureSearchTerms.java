@@ -27,7 +27,7 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 		super(portletRequest);
 
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
-		groupIds = obtainGroupIds(portletRequest);
+		groupIds = setGroupIds(portletRequest);
 		name = DAOParamUtil.getLike(portletRequest, NAME);
 		structureId = DAOParamUtil.getLike(portletRequest, STRUCTURE_ID);
 	}

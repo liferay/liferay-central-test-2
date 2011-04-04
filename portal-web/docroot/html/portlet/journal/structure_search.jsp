@@ -46,12 +46,11 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 			<aui:column>
 				<aui:select label="my-places" name="<%= displayTerms.GROUP_IDS %>">
 					<c:if test="<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>">
-						<aui:option label="" value="<%= displayTerms.getDefaultGroupIds(renderRequest) %>" />
-
-						<aui:option label="global" selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == themeDisplay.getCompanyGroupId()) %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
+						<aui:option label="" value="<%= displayTerms.getGroupIds(renderRequest) %>" />
+						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 					</c:if>
 
-					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == themeDisplay.getParentGroupId()) %>" value="<%= themeDisplay.getParentGroupId() %>" />
+					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= displayTerms.getGroupId() == themeDisplay.getParentGroupId() %>" value="<%= themeDisplay.getParentGroupId() %>" />
 
 					<%
 					Layout scopeLayout = themeDisplay.getScopeLayout();

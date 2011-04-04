@@ -95,8 +95,7 @@ public class JournalStructureFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_C_G_S_N_D);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
-
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "structureId", StringPool.LIKE, false, structureIds);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -113,11 +112,7 @@ public class JournalStructureFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-
-			if (groupIds.length > 0) {
-				qPos.add(groupIds);
-			}
-
+			qPos.add(groupIds);
 			qPos.add(structureIds, 2);
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
@@ -196,8 +191,7 @@ public class JournalStructureFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_S_N_D);
 
 			sql = StringUtil.replace(
-				sql, "[$GROUP_IDS]", getGroupIds(groupIds));
-
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "structureId", StringPool.LIKE, false, structureIds);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -215,11 +209,7 @@ public class JournalStructureFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-
-			if (groupIds.length > 0) {
-				qPos.add(groupIds);
-			}
-
+			qPos.add(groupIds);
 			qPos.add(structureIds, 2);
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);

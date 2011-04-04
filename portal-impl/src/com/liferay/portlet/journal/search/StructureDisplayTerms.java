@@ -41,7 +41,7 @@ public class StructureDisplayTerms extends DisplayTerms {
 		super(portletRequest);
 
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
-		groupIds = obtainGroupIds(portletRequest);
+		groupIds = setGroupIds(portletRequest);
 		name = ParamUtil.getString(portletRequest, NAME);
 		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
 	}
@@ -50,19 +50,20 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
+	public long getGroupId() {
+		if (groupIds.length > 0) {
+			return groupIds[0];
+		}
+		else {
+			return 0;
+		}
+	}
+
 	public long[] getGroupIds() {
 		return groupIds;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public String getStructureId() {
-		return structureId;
-	}
-
-	public String getDefaultGroupIds(PortletRequest portletRequest) {
+	public String getGroupIds(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -81,11 +82,19 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return sb.toString();
 	}
 
-	protected long[] obtainGroupIds(PortletRequest portletRequest) {
-		String groupIdsParams = ParamUtil.getString(
-			portletRequest, GROUP_IDS, getDefaultGroupIds(portletRequest));
+	public String getName() {
+		return name;
+	}
 
-		return StringUtil.split(groupIdsParams, 0L);
+	public String getStructureId() {
+		return structureId;
+	}
+
+	protected long[] setGroupIds(PortletRequest portletRequest) {
+		String groupIdsString = ParamUtil.getString(
+			portletRequest, GROUP_IDS, getGroupIds(portletRequest));
+
+		return StringUtil.split(groupIdsString, 0L);
 	}
 
 	protected String description;
