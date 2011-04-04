@@ -19,10 +19,26 @@ import com.liferay.portlet.shorturl.model.ShortURL;
 import com.liferay.portlet.shorturl.service.base.ShortURLServiceBaseImpl;
 
 /**
- * @author David Truong
+ * The implementation of the short u r l remote service.
+ *
+ * <p>
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.shorturl.service.ShortURLService} interface.
+ *
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see com.liferay.portlet.shorturl.service.base.ShortURLServiceBaseImpl
+ * @see com.liferay.portlet.shorturl.service.ShortURLServiceUtil
  */
 public class ShortURLServiceImpl extends ShortURLServiceBaseImpl {
-
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. Always use {@link com.liferay.portlet.shorturl.service.ShortURLServiceUtil} to access the short u r l remote service.
+	 */
+	
 	public ShortURL addShortURL(String url) throws SystemException {
 		return shortURLLocalService.addShortURL(url);
 	}

@@ -17,13 +17,23 @@ package com.liferay.portlet.shorturl.model.impl;
 import com.liferay.portlet.shorturl.model.ShortURL;
 
 /**
- * @author David Truong
+ * The model implementation for the ShortURL service. Represents a row in the &quot;ShortURL&quot; database table, with each column mapped to a property of this class.
+ *
+ * <p>
+ * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.shorturl.model.ShortURL} interface.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
  */
 public class ShortURLImpl extends ShortURLModelImpl implements ShortURL {
-
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this class directly. All methods that expect a short u r l model instance should use the {@link ShortURL} interface instead.
+	 */
 	public ShortURLImpl() {
 	}
-
+	
 	public String getURL() {
 		return getHash() + getDescriptor();
 	}
