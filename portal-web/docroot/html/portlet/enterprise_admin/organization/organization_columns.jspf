@@ -32,11 +32,23 @@
 	buffer.append("</strong>");
 	buffer.append("</a>");
 
-	List suborganizations = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams, 0, 5, searchContainer.getOrderByComparator());
+	List<Organization> suborganizations = new ArrayList<Organization>();
+	int suborganizationsCount = 0;
 
-	if (!suborganizations.isEmpty()) {
-		int suborganizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams);
+	if (PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX) {
+		Sort sort = EnterpriseAdminUtil.getSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
+		Hits hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, organizationParams, 0, 5, sort);
+
+		suborganizations = EnterpriseAdminUtil.getOrganizations(hits);
+		suborganizationsCount = hits.getLength();
+	}
+	else {
+		suborganizations = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams, 0, 5, searchContainer.getOrderByComparator());
+		suborganizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams);
+	}
+
+	if (suborganizationsCount > 0) {
 		buffer.append("<br /><u>");
 		buffer.append(LanguageUtil.get(pageContext, "suborganizations"));
 		buffer.append("</u>: ");
