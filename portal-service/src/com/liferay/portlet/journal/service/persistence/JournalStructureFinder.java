@@ -18,34 +18,34 @@ package com.liferay.portlet.journal.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface JournalStructureFinder {
-	public int countByKeywords(long companyId, long groupId,
+	public int countByKeywords(long companyId, long[] groupIds,
 		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_G_S_N_D(long companyId, long groupId,
+	public int countByC_G_S_N_D(long companyId, long[] groupIds,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_G_S_N_D(long companyId, long groupId,
+	public int countByC_G_S_N_D(long companyId, long[] groupIds,
 		java.lang.String[] structureIds, java.lang.String[] names,
 		java.lang.String[] descriptions, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByKeywords(
-		long companyId, long groupId, java.lang.String keywords, int start,
+		long companyId, long[] groupIds, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByC_G_S_N_D(
-		long companyId, long groupId, java.lang.String structureId,
+		long companyId, long[] groupIds, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByC_G_S_N_D(
-		long companyId, long groupId, java.lang.String[] structureIds,
+		long companyId, long[] groupIds, java.lang.String[] structureIds,
 		java.lang.String[] names, java.lang.String[] descriptions,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)

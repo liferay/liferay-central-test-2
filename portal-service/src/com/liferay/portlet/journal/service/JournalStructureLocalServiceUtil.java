@@ -391,35 +391,36 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
-		long companyId, long groupId, java.lang.String keywords, int start,
+		long companyId, long[] groupIds, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().search(companyId, groupId, keywords, start, end, obc);
+		return getService()
+				   .search(companyId, groupIds, keywords, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
-		long companyId, long groupId, java.lang.String structureId,
+		long companyId, long[] groupIds, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, groupId, structureId, name, description,
+				   .search(companyId, groupIds, structureId, name, description,
 			andOperator, start, end, obc);
 	}
 
-	public static int searchCount(long companyId, long groupId,
+	public static int searchCount(long companyId, long[] groupIds,
 		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().searchCount(companyId, groupId, keywords);
+		return getService().searchCount(companyId, groupIds, keywords);
 	}
 
-	public static int searchCount(long companyId, long groupId,
+	public static int searchCount(long companyId, long[] groupIds,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchCount(companyId, groupId, structureId, name,
+				   .searchCount(companyId, groupIds, structureId, name,
 			description, andOperator);
 	}
 
