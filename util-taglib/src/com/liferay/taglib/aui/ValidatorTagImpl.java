@@ -58,7 +58,7 @@ public class ValidatorTagImpl
 		return SKIP_BODY;
 	}
 
-	public int doStartTag() {
+	public int doEndTag() {
 		InputTag inputTag = (InputTag)findAncestorWithClass(
 			this, InputTag.class);
 
