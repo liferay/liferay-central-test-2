@@ -84,6 +84,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>js-top</name>
+		<tag-class>com.liferay.taglib.util.JsTopTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>src</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>param</name>
 		<tag-class>com.liferay.taglib.util.ParamTag</tag-class>
 		<body-content>JSP</body-content>

@@ -77,10 +77,14 @@ public class BaseBodyTagSupport extends TagSupport {
 						"JspFactorySwapper.");
 			}
 
-			String bodyContentString = bodyContent.getString();
+			String bodyContentString = StringPool.BLANK;
 
-			if (bodyContentString == null) {
-				bodyContentString = StringPool.BLANK;
+			if (bodyContent != null) {
+				bodyContentString = bodyContent.getString();
+
+				if (bodyContentString == null) {
+					bodyContentString = StringPool.BLANK;
+				}
 			}
 
 			return new StringBundler(bodyContentString);
