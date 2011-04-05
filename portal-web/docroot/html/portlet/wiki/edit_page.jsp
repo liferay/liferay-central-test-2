@@ -433,15 +433,16 @@ if (Validator.isNull(redirect)) {
 
 			if (!confirm(confirmMessage)) {
 				formatSelect.selectedIndex = window.<portlet:namespace />currentFormatIndex;
-			}
-		}
-		else {
-			if (window.<portlet:namespace />editor) {
-				document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
-			}
 
-			submitForm(document.<portlet:namespace />fm);
+				return;
+			}
 		}
+
+		if (window.<portlet:namespace />editor) {
+			document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
+		}
+
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />discardDraftPage() {
