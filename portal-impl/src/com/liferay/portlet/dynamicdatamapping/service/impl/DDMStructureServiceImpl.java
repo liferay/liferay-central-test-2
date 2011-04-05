@@ -75,15 +75,14 @@ public class DDMStructureServiceImpl
 
 	public DDMStructure updateStructure(
 			long groupId, String structureKey, String name, String description,
-			String xsd, String storageType, ServiceContext serviceContext)
+			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMStructurePermission.check(
 			getPermissionChecker(), groupId, structureKey, ActionKeys.UPDATE);
 
 		return ddmStructureLocalService.updateStructure(
-			groupId, structureKey, name, description, xsd, storageType,
-			serviceContext);
+			groupId, structureKey, name, description, xsd, serviceContext);
 	}
 
 }

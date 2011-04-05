@@ -218,8 +218,7 @@ public class EditStructureAction extends PortletAction {
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, name, description, xsd, storageType,
-				serviceContext);
+				groupId, structureKey, name, description, xsd, serviceContext);
 		}
 
 		return structure;
