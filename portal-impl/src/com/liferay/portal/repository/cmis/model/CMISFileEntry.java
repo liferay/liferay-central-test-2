@@ -81,14 +81,14 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _cmisRepository.getCompanyId();
 	}
 
-	public InputStream getContentStream()
-		throws PortalException, SystemException {
+	public InputStream getContentStream() {
+		ContentStream contentStream = _document.getContentStream();
 
-		return _document.getContentStream().getStream();
+		return contentStream.getStream();
 	}
 
 	public InputStream getContentStream(String version)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		for (Document document : _document.getAllVersions()) {
 			if (version.equals(document.getVersionLabel())) {

@@ -45,14 +45,14 @@ public class CMISRepositoryUtil {
 	public static Session createSession(Map<String, String> parameters)
 		throws RepositoryException {
 
-		Session value = null;
+		Session session = null;
 
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
 				false, _createSession, parameters);
 
 			if (returnObj != null) {
-				value = (Session)returnObj;
+				session = (Session)returnObj;
 			}
 		}
 		catch (RepositoryException re) {
@@ -62,7 +62,7 @@ public class CMISRepositoryUtil {
 			_log.error(e, e);
 		}
 
-		return value;
+		return session;
 	}
 
 	public static String getTypeSettingsValue(

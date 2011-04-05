@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.repository.cmis.Session;
 
 import java.util.Set;
 
+import org.apache.chemistry.opencmis.client.api.OperationContext;
 import org.apache.chemistry.opencmis.client.runtime.OperationContextImpl;
 import org.apache.chemistry.opencmis.commons.enums.IncludeRelationships;
 
@@ -50,10 +51,12 @@ public class SessionImpl implements Session {
 				includeRelationships);
 		}
 
-		_session.setDefaultContext(new OperationContextImpl(
+		OperationContext operationContext = new OperationContextImpl(
 			filter, includeAcls, includeAllowableActions, includePolicies,
 			includeRelationshipsObj, renditionFilter, includePathSegments,
-			orderBy, cacheEnabled, maxItemsPerPage));
+			orderBy, cacheEnabled, maxItemsPerPage);
+
+		_session.setDefaultContext(operationContext);
 	}
 
 	private org.apache.chemistry.opencmis.client.api.Session _session;
