@@ -31,6 +31,7 @@ if (Validator.isNotNull(portletResource)) {
 
 long classNameId = PrefsParamUtil.getLong(preferences, request, "classNameId");
 String displayStyle = PrefsParamUtil.getString(preferences, request, "displayStyle", "cloud");
+int maxNumTagsShown = PrefsParamUtil.getInteger(preferences, request, "maxNumTagsShown", 10);
 boolean showAssetCount = PrefsParamUtil.getBoolean(preferences, request, "showAssetCount");
 boolean showZeroAssetCount = PrefsParamUtil.getBoolean(preferences, request, "showZeroAssetCount");
 %>

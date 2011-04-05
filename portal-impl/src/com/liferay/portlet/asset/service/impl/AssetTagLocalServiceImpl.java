@@ -247,6 +247,12 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		return assetTagPersistence.findByGroupId(groupId);
 	}
 
+	public List<AssetTag> getGroupTags(long groupId,int maxElements)
+		throws SystemException{
+
+		return assetTagPersistence.findByGroupId(groupId, 0, maxElements);
+	}
+
 	public AssetTag getTag(long tagId) throws PortalException, SystemException {
 		return assetTagPersistence.findByPrimaryKey(tagId);
 	}

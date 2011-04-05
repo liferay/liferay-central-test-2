@@ -78,6 +78,13 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		return assetTagPersistence.filterFindByGroupId(groupId);
 	}
 
+	public List<AssetTag> getGroupTags(long groupId, int maxElements)
+		throws  PortalException, SystemException {
+
+		return filterTags(assetTagLocalService.getGroupTags(
+			groupId,maxElements));
+	}
+
 	public AssetTag getTag(long tagId) throws PortalException, SystemException {
 		AssetTagPermission.check(
 			getPermissionChecker(), tagId, ActionKeys.VIEW);
@@ -91,6 +98,15 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		return assetTagFinder.filterFindByG_C_N(
 			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
+	}
+
+	public List<AssetTag> getTags(
+			long groupId, long classNameId, String name, int maxElements)
+		throws PortalException, SystemException {
+
+		return filterTags(
+			assetTagLocalService.getTags(
+					groupId, classNameId, name, 0, maxElements));
 	}
 
 	public List<AssetTag> getTags(String className, long classPK)

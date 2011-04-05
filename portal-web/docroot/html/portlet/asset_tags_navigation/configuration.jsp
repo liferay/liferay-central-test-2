@@ -63,6 +63,10 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 					</li>
 				</ul>
 			</li>
+
+            <li class="tree-item">
+				<aui:input label="max-num-tags-shown" name="preferences--maxNumTagsShown--" type="text" value="<%= maxNumTagsShown %>" />
+			</li>
 		</ul>
 	</aui:fieldset>
 

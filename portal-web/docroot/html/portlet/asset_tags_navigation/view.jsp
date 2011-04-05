@@ -20,6 +20,7 @@
 	classNameId="<%= classNameId %>"
 	displayStyle="<%= displayStyle %>"
 	hidePortletWhenEmpty="<%= true %>"
+    maxNumTagsShown="<%= maxNumTagsShown %>"
 	showAssetCount="<%= showAssetCount %>"
 	showZeroAssetCount="<%= showZeroAssetCount %>"
 />
