@@ -35,7 +35,7 @@ String newStructureKey = ParamUtil.getString(request, "newStructureKey");
 String xsd = BeanParamUtil.getString(structure, request, "xsd");
 %>
 
-<liferay-portlet:actionURL var="editStructureURL" portletName="<%= PortletKeys.FORMS %>">
+<liferay-portlet:actionURL var="editStructureURL" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>">
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
 </liferay-portlet:actionURL>
 
