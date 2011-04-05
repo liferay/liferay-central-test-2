@@ -17,6 +17,8 @@ package com.liferay.portal.freemarker;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.util.ContextPathUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
@@ -39,8 +41,15 @@ public class ServletTemplateLoader extends URLTemplateLoader {
 		if (pos != -1) {
 			String servletContextName = name.substring(0, pos);
 
-			if (Validator.isNull(servletContextName)) {
-				servletContextName = PortalUtil.getPathContext();
+			String servletContextPath = ContextPathUtil.getContextPath(
+				StringPool.SLASH + servletContextName);
+
+			String pathContext = PortalUtil.getPathContext();
+
+			if (Validator.isNull(servletContextName) ||
+				servletContextPath.equals(pathContext)) {
+
+				servletContextName = pathContext;
 			}
 
 			ServletContext servletContext = ServletContextPool.get(
