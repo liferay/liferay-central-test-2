@@ -203,7 +203,6 @@ public class DDMStructureServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureKey, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
-		java.lang.String storageType,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -212,8 +211,7 @@ public class DDMStructureServiceHttp {
 					"updateStructure", _updateStructureParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureKey, name, description, xsd, storageType,
-					serviceContext);
+					structureKey, name, description, xsd, serviceContext);
 
 			Object returnObj = null;
 
@@ -260,7 +258,6 @@ public class DDMStructureServiceHttp {
 	private static final Class<?>[] _updateStructureParameterTypes4 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }
