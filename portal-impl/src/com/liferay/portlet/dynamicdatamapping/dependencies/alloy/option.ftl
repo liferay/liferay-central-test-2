@@ -1,4 +1,4 @@
-<#include "init.ftl">
+<#include "../init.ftl">
 
 <#if parentType == "select">
 	<@aui.option label=field.name value=field.value />

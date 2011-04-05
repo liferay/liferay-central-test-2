@@ -15,14 +15,28 @@
 --%>
 
 <aui:script use="aui-datepicker,liferay-portlet-dynamic-data-mapping">
-	var FormBuilderInputField = A.FormBuilderInputField;
+	var FormBuilderTextField = A.FormBuilderTextField;
 	var FormBuilderTypes = A.FormBuilder.types;
+
+	var DDMTextField = A.Component.create(
+		{
+			EXTENDS: FormBuilderTextField,
+
+			NAME: 'ddm-text-field',
+
+			ATTRS: {
+				fieldNamespace: {
+					value: 'ddm'
+				}
+			}
+		}
+	);
 
 	var DDMDateField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: DDMTextField,
 
-			NAME: 'ddm-list-date',
+			NAME: 'ddm-date',
 
 			ATTRS: {
 				dataType: {
@@ -49,9 +63,9 @@
 
 	var DDMDecimalField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: DDMTextField,
 
-			NAME: 'ddm-list-decimal',
+			NAME: 'ddm-decimal',
 
 			ATTRS: {
 				dataType: {
@@ -62,20 +76,11 @@
 		}
 	);
 
-	var DDMEmailField = A.Component.create(
-		{
-			EXTENDS: FormBuilderInputField,
-
-			NAME: 'ddm-list-email'
-
-		}
-	);
-
 	var DDMIntegerField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: DDMTextField,
 
-			NAME: 'ddm-list-integer',
+			NAME: 'ddm-integer',
 
 			ATTRS: {
 				dataType: {
@@ -87,9 +92,9 @@
 
 	var DDMNumberField = A.Component.create(
 		{
-			EXTENDS: FormBuilderInputField,
+			EXTENDS: DDMTextField,
 
-			NAME: 'ddm-list-number',
+			NAME: 'ddm-number',
 
 			ATTRS: {
 				dataType: {
@@ -115,7 +120,7 @@
 
 			EXTENDS: A.FormBuilderField,
 
-			NAME: 'ddm-list-separator',
+			NAME: 'ddm-separator',
 
 			prototype: {
 				renderSettings: function() {
@@ -128,19 +133,9 @@
 		}
 	);
 
-	var DDMURLField = A.Component.create(
-		{
-			EXTENDS: FormBuilderInputField,
-
-			NAME: 'ddm-list-url'
-		}
-	);
-
-	FormBuilderTypes['ddm-list-date'] = DDMDateField;
-	FormBuilderTypes['ddm-list-decimal'] = DDMDecimalField;
-	FormBuilderTypes['ddm-list-email'] = DDMEmailField;
-	FormBuilderTypes['ddm-list-integer'] = DDMIntegerField;
-	FormBuilderTypes['ddm-list-number'] = DDMNumberField;
-	FormBuilderTypes['ddm-list-separator'] = DDMSeparatorField;
-	FormBuilderTypes['ddm-list-url'] = DDMURLField;
+	FormBuilderTypes['ddm-date'] = DDMDateField;
+	FormBuilderTypes['ddm-decimal'] = DDMDecimalField;
+	FormBuilderTypes['ddm-integer'] = DDMIntegerField;
+	FormBuilderTypes['ddm-number'] = DDMNumberField;
+	FormBuilderTypes['ddm-separator'] = DDMSeparatorField;
 </aui:script>

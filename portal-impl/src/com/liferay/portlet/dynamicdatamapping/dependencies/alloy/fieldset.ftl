@@ -1,7 +1,7 @@
-<#include "init.ftl">
+<#include "../init.ftl">
 
 <div class="aui-field-wrapper-content lfr-forms-field-wrapper">
-	<@aui.select label=label name=field.name>
+	<@aui.fieldset label=label>
 		${field.children}
-	</@aui.select>
+	</@aui.fieldset>
 </div>

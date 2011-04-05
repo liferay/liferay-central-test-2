@@ -46,6 +46,11 @@
 		}
 	}
 
+	.ddm-field-icon-separator {
+		background-image: url(<%= themeImagesPath %>/journal/selection_break.png);
+		background-position: 0px 6px;
+	}
+
 	.form-fields-loading {
 		list-style: none;
 		padding: 10px 0;
@@ -58,5 +63,13 @@
 		.lfr-panel-content {
 			padding: 10px;
 		}
+	}
+
+	.lfr-ddm-types-form-column .aui-column-content-first {
+		margin-right: 10px;
+	}
+
+	.lfr-ddm-search-form .aui-column {
+		margin-right: 10px;
 	}
 }

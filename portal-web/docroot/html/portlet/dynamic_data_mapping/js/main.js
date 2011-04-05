@@ -48,54 +48,8 @@ AUI().add(
 			{
 				ATTRS: {
 					availableFields: {
-						value: {
-							'text': {
-								fieldLabel: Liferay.Language.get('text-box'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-text',
-								label: Liferay.Language.get('text-box')
-							},
-
-							'textarea': {
-								fieldLabel: Liferay.Language.get('text-area'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-textarea',
-								label: Liferay.Language.get('text-area')
-							},
-
-							'checkbox': {
-								fieldLabel: Liferay.Language.get('checkbox'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
-								label: Liferay.Language.get('checkbox')
-							},
-
-							'button': {
-								fieldLabel: Liferay.Language.get('button'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-button',
-								label: Liferay.Language.get('button')
-							},
-
-							'select': {
-								fieldLabel: Liferay.Language.get('select-option'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-select',
-								label: Liferay.Language.get('select-option')
-							},
-
-							'radio': {
-								fieldLabel: Liferay.Language.get('radio-buttons'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
-								label: Liferay.Language.get('radio-buttons')
-							},
-
-							'fieldset': {
-								fieldLabel: Liferay.Language.get('fieldset'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fieldset',
-								label: Liferay.Language.get('fieldset')
-							},
-
-							'fileupload': {
-								fieldLabel: Liferay.Language.get('file-upload'),
-								iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fileupload',
-								label: Liferay.Language.get('file-upload')
-							}
+						valueFn: function() {
+							return LiferayFormBuilder.AVAILABLE_FIELDS.DEFAULT;
 						},
 						validator: Lang.isObject
 					},
@@ -207,6 +161,7 @@ AUI().add(
 							'dynamic-element',
 							{
 								dataType: field.get('dataType'),
+								fieldNamespace: field.get('fieldNamespace'),
 								name: encodeURI(field.get('name')),
 								type: field.get('type')
 							}
@@ -318,6 +273,106 @@ AUI().add(
 				}
 			}
 		);
+
+		LiferayFormBuilder.AVAILABLE_FIELDS = {
+			DEFAULT: {
+				'text': {
+					fieldLabel: Liferay.Language.get('text-box'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-text',
+					label: Liferay.Language.get('text-box')
+				},
+
+				'textarea': {
+					fieldLabel: Liferay.Language.get('text-area'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-textarea',
+					label: Liferay.Language.get('text-area')
+				},
+
+				'checkbox': {
+					fieldLabel: Liferay.Language.get('checkbox'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
+					label: Liferay.Language.get('checkbox')
+				},
+
+				'button': {
+					fieldLabel: Liferay.Language.get('button'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-button',
+					label: Liferay.Language.get('button')
+				},
+
+				'select': {
+					fieldLabel: Liferay.Language.get('select-option'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-select',
+					label: Liferay.Language.get('select-option')
+				},
+
+				'radio': {
+					fieldLabel: Liferay.Language.get('radio-buttons'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
+					label: Liferay.Language.get('radio-buttons')
+				},
+
+				'fieldset': {
+					fieldLabel: Liferay.Language.get('fieldset'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fieldset',
+					label: Liferay.Language.get('fieldset')
+				},
+
+				'fileupload': {
+					fieldLabel: Liferay.Language.get('file-upload'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fileupload',
+					label: Liferay.Language.get('file-upload')
+				}
+			},
+
+			DDM: {
+				'checkbox': {
+					fieldLabel: Liferay.Language.get('boolean'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
+					label: Liferay.Language.get('boolean')
+				},
+				'ddm-date': {
+					fieldLabel: Liferay.Language.get('date'),
+					iconClass: 'aui-form-builder-field-icon aui-icon aui-icon-calendar',
+					label: Liferay.Language.get('date')
+				},
+				'ddm-decimal': {
+					fieldLabel: Liferay.Language.get('decimal'),
+					label: Liferay.Language.get('decimal')
+				},
+				'ddm-integer': {
+					fieldLabel: Liferay.Language.get('integer'),
+					label: Liferay.Language.get('integer')
+				},
+				'ddm-number': {
+					fieldLabel: Liferay.Language.get('number'),
+					label: Liferay.Language.get('number')
+				},
+				'ddm-separator': {
+					fieldLabel: Liferay.Language.get('separator'),
+					iconClass: 'aui-form-builder-field-icon ddm-field-icon-separator',
+					label: Liferay.Language.get('separator')
+				},
+				'radio': {
+					fieldLabel: Liferay.Language.get('radio'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
+					label: Liferay.Language.get('radio')
+				},
+				'select': {
+					fieldLabel: Liferay.Language.get('select'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-select',
+					label: Liferay.Language.get('select')
+				},
+				'text': {
+					fieldLabel: Liferay.Language.get('text'),
+					label: Liferay.Language.get('text')
+				},
+				'textarea': {
+					fieldLabel: Liferay.Language.get('text-box'),
+					label: Liferay.Language.get('text-box')
+				}
+			}
+		};
 
 		Liferay.FormBuilder = LiferayFormBuilder;
 	},

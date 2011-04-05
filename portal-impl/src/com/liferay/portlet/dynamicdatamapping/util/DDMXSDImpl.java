@@ -22,7 +22,10 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -77,11 +80,23 @@ public class DDMXSDImpl implements DDMXSD {
 			field.put("children", getHTML(pageContext, dynamicElementElement));
 
 			String type = dynamicElementElement.attributeValue("type");
+			String fieldNamespace = dynamicElementElement.attributeValue(
+				"fieldNamespace", _DEFAULT_NAMESPACE);
 
-			String resourcePath = _TPL_PATH.concat(
-				type.toLowerCase()).concat(_TPL_EXT);
+			String templateName = StringUtil.replaceFirst(
+				type, fieldNamespace.concat(StringPool.DASH), StringPool.BLANK);
 
-			sb.append(processFTL(pageContext, freeMarkerContext, resourcePath));
+			StringBundler resourcePath = new StringBundler(5);
+
+			resourcePath.append(_TPL_PATH);
+			resourcePath.append(fieldNamespace.toLowerCase());
+			resourcePath.append(CharPool.SLASH);
+			resourcePath.append(templateName);
+			resourcePath.append(_TPL_EXT);
+
+			sb.append(
+				processFTL(
+					pageContext, freeMarkerContext, resourcePath.toString()));
 		}
 
 		return sb.toString();
@@ -243,6 +258,8 @@ public class DDMXSDImpl implements DDMXSD {
 
 		return ((UnsyncStringWriter)writer).toString();
 	}
+
+	private static final String _DEFAULT_NAMESPACE = "alloy";
 
 	private static final String _TPL_DEFAULT_PATH =
 		"com/liferay/portlet/dynamicdatamapping/dependencies/text.ftl";
