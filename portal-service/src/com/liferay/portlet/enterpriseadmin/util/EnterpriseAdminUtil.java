@@ -158,12 +158,6 @@ public class EnterpriseAdminUtil {
 			organizations);
 	}
 
-	public static List<Organization> getOrganizations(Hits hits)
-		throws PortalException, SystemException {
-
-		return getEnterpriseAdmin().getOrganizations(hits);
-	}
-
 	public static Long[] getOrganizationIds(List<Organization> organizations) {
 		return getEnterpriseAdmin().getOrganizationIds(organizations);
 	}
@@ -172,6 +166,19 @@ public class EnterpriseAdminUtil {
 		String orderByCol, String orderByType) {
 
 		return getEnterpriseAdmin().getOrganizationOrderByComparator(
+			orderByCol, orderByType);
+	}
+
+	public static List<Organization> getOrganizations(Hits hits)
+		throws PortalException, SystemException {
+
+		return getEnterpriseAdmin().getOrganizations(hits);
+	}
+
+	public static Sort getOrganizationSort(
+		String orderByCol, String orderByType) {
+
+		return getEnterpriseAdmin().getOrganizationSort(
 			orderByCol, orderByType);
 	}
 
@@ -197,11 +204,6 @@ public class EnterpriseAdminUtil {
 			orderByCol, orderByType);
 	}
 
-	public static Sort getSort(String orderByCol, String orderByType) {
-
-		return getEnterpriseAdmin().getSort(orderByCol, orderByType);
-	}
-
 	public static OrderByComparator getUserGroupOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -221,6 +223,16 @@ public class EnterpriseAdminUtil {
 
 		return getEnterpriseAdmin().getUserOrderByComparator(
 			orderByCol, orderByType);
+	}
+
+	public static List<User> getUsers(Hits hits)
+		throws PortalException, SystemException {
+
+		return getEnterpriseAdmin().getUsers(hits);
+	}
+
+	public static Sort getUserSort(String orderByCol, String orderByType) {
+		return getEnterpriseAdmin().getUserSort(orderByCol, orderByType);
 	}
 
 	public static List<Website> getWebsites(ActionRequest actionRequest) {

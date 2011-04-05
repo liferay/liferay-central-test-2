@@ -101,13 +101,15 @@ public interface EnterpriseAdmin {
 	public Long[][] getLeftAndRightOrganizationIds(
 		List<Organization> organizations);
 
-	public List<Organization> getOrganizations(Hits hits)
-		throws PortalException, SystemException;
-
 	public Long[] getOrganizationIds(List<Organization> organizations);
 
 	public OrderByComparator getOrganizationOrderByComparator(
 		String orderByCol, String orderByType);
+
+	public List<Organization> getOrganizations(Hits hits)
+		throws PortalException, SystemException;
+
+	public Sort getOrganizationSort(String orderByCol, String orderByType);
 
 	public List<OrgLabor> getOrgLabors(ActionRequest actionRequest);
 
@@ -119,8 +121,6 @@ public interface EnterpriseAdmin {
 	public OrderByComparator getRoleOrderByComparator(
 		String orderByCol, String orderByType);
 
-	public Sort getSort(String orderByCol, String orderByType);
-
 	public OrderByComparator getUserGroupOrderByComparator(
 		String orderByCol, String orderByType);
 
@@ -129,6 +129,11 @@ public interface EnterpriseAdmin {
 
 	public OrderByComparator getUserOrderByComparator(
 		String orderByCol, String orderByType);
+
+	public List<User> getUsers(Hits hits)
+		throws PortalException, SystemException;
+
+	public Sort getUserSort(String orderByCol, String orderByType);
 
 	public List<Website> getWebsites(ActionRequest actionRequest);
 

@@ -15,6 +15,7 @@
 package com.liferay.portlet.enterpriseadmin.util;
 
 import com.liferay.portal.NoSuchOrganizationException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -565,34 +566,6 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return leftAndRightOrganizationIds;
 	}
 
-	public List<Organization> getOrganizations(Hits hits)
-		throws PortalException, SystemException {
-
-		List<Organization> organizations = new ArrayList<Organization>();
-
-		List<Document> documents = hits.toList();
-
-		for (Document document : documents) {
-			long organizationId = GetterUtil.getLong(
-				document.get(Field.ORGANIZATION_ID));
-
-			try {
-				Organization organization =
-					OrganizationLocalServiceUtil.getOrganization(
-						organizationId);
-
-				organizations.add(organization);
-			}
-			catch (NoSuchOrganizationException nsoe) {
-				_log.error(
-					"Organization " + organizationId + " does not exist in " +
-						"the search index");
-			}
-		}
-
-		return organizations;
-	}
-
 	public Long[] getOrganizationIds(List<Organization> organizations) {
 		if ((organizations == null) || organizations.isEmpty()) {
 			return new Long[0];
@@ -631,6 +604,57 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		}
 
 		return orderByComparator;
+	}
+
+	public List<Organization> getOrganizations(Hits hits)
+		throws PortalException, SystemException {
+
+		List<Organization> organizations = new ArrayList<Organization>();
+
+		List<Document> documents = hits.toList();
+
+		for (Document document : documents) {
+			long organizationId = GetterUtil.getLong(
+				document.get(Field.ORGANIZATION_ID));
+
+			try {
+				Organization organization =
+					OrganizationLocalServiceUtil.getOrganization(
+						organizationId);
+
+				organizations.add(organization);
+			}
+			catch (NoSuchOrganizationException nsoe) {
+				_log.error(
+					"Organization " + organizationId + " does not exist in " +
+						"the search index");
+			}
+		}
+
+		return organizations;
+	}
+
+	public Sort getOrganizationSort(String orderByCol, String orderByType) {
+		String sortField = "name";
+
+		if (Validator.isNotNull(orderByCol)) {
+			if (orderByCol.equals("name")) {
+				sortField = "name";
+			}
+			else if (orderByCol.equals("type")) {
+				sortField = "type";
+			}
+			else {
+				sortField = orderByCol;
+			}
+		}
+
+		if (Validator.isNull(orderByType)) {
+			orderByType = "asc";
+		}
+
+		return new Sort(
+			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 	}
 
 	public List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
@@ -800,29 +824,6 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return orderByComparator;
 	}
 
-	public Sort getSort(String orderByCol, String orderByType) {
-		String sortField = "name";
-
-		if (Validator.isNotNull(orderByCol)) {
-			if (orderByCol.equals("name")) {
-				sortField = "name";
-			}
-			else if (orderByCol.equals("type")) {
-				sortField = "type";
-			}
-			else {
-				sortField = orderByCol;
-			}
-		}
-
-		if (Validator.isNull(orderByType)) {
-			orderByType = "asc";
-		}
-
-		return new Sort(
-			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
-	}
-
 	public OrderByComparator getUserGroupOrderByComparator(
 		String orderByCol, String orderByType) {
 
@@ -919,6 +920,62 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		}
 
 		return orderByComparator;
+	}
+
+	public List<User> getUsers(Hits hits)
+		throws PortalException, SystemException {
+
+		List<User> users = new ArrayList<User>();
+
+		List<Document> documents = hits.toList();
+
+		for (Document document : documents) {
+			long userId = GetterUtil.getLong(document.get(Field.USER_ID));
+
+			try {
+				User user = UserLocalServiceUtil.getUser(userId);
+
+				users.add(user);
+			}
+			catch (NoSuchUserException nsue) {
+				_log.error(
+					"User " + userId + " does not exist in the search index");
+			}
+		}
+
+		return users;
+	}
+
+	public Sort getUserSort(String orderByCol, String orderByType) {
+		String sortField = "firstName";
+
+		if (Validator.isNotNull(orderByCol)) {
+			if (orderByCol.equals("email-address")) {
+				sortField = "emailAddress";
+			}
+			else if (orderByCol.equals("first-name")) {
+				sortField = "firstName";
+			}
+			else if (orderByCol.equals("job-title")) {
+				sortField = "jobTitle";
+			}
+			else if (orderByCol.equals("last-name")) {
+				sortField = "lastName";
+			}
+			else if (orderByCol.equals("screen-name")) {
+				sortField = "screenName";
+			}
+			else {
+				sortField = orderByCol;
+			}
+		}
+
+		if (Validator.isNull(orderByType)) {
+			orderByType = "asc";
+		}
+
+		return new Sort(
+			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 	}
 
 	public List<Website> getWebsites(ActionRequest actionRequest) {

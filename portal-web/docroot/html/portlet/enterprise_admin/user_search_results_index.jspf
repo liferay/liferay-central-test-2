@@ -22,7 +22,7 @@
 <%
 userParams.put("expandoAttributes", searchTerms.getKeywords());
 
-Sort sort = _getSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
+Sort sort = EnterpriseAdminUtil.getUserSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 Hits hits = null;
 
@@ -33,63 +33,9 @@ else {
 	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getStatus(), userParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 
-results = _getResults(hits);
+results = EnterpriseAdminUtil.getUsers(hits);
 total = results.size();
 
 pageContext.setAttribute("results", results);
 pageContext.setAttribute("total", total);
-%>
-
-<%!
-private static List<User> _getResults(Hits hits) throws Exception {
-	List<User> users = new ArrayList<User>();
-
-	List<Document> hitsList = hits.toList();
-
-	for (Document doc : hitsList) {
-		long userId = GetterUtil.getLong(doc.get(Field.USER_ID));
-
-		try {
-			users.add(UserLocalServiceUtil.getUserById(userId));
-		}
-		catch (NoSuchUserException nsue) {
-			_log.error("User " + userId + " does not exist in the search index. Please reindex.");
-		}
-	}
-
-	return users;
-}
-
-private static Sort _getSort(String orderByCol, String orderByType) {
-	String sortField = "firstName";
-
-	if (Validator.isNotNull(orderByCol)) {
-		if (orderByCol.equals("email-address")) {
-			sortField = "emailAddress";
-		}
-		else if (orderByCol.equals("first-name")) {
-			sortField = "firstName";
-		}
-		else if (orderByCol.equals("job-title")) {
-			sortField = "jobTitle";
-		}
-		else if (orderByCol.equals("last-name")) {
-			sortField = "lastName";
-		}
-		else if (orderByCol.equals("screen-name")) {
-			sortField = "screenName";
-		}
-		else {
-			sortField = orderByCol;
-		}
-	}
-
-	if (Validator.isNull(orderByType)) {
-		orderByType = "asc";
-	}
-
-	return new Sort(sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
-}
-
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.enterprise_admin.user_search_results_index_jspf");
 %>
