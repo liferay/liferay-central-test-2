@@ -87,6 +87,18 @@ public class DDMStructureServiceSoap {
 		}
 	}
 
+	public static void deleteStructure(long structureId)
+		throws RemoteException {
+		try {
+			DDMStructureServiceUtil.deleteStructure(structureId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteStructure(long groupId,
 		java.lang.String structureKey) throws RemoteException {
 		try {

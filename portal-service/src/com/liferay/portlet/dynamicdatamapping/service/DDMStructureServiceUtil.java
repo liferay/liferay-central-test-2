@@ -51,6 +51,12 @@ public class DDMStructureServiceUtil {
 			serviceContext);
 	}
 
+	public static void deleteStructure(long structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStructure(structureId);
+	}
+
 	public static void deleteStructure(long groupId,
 		java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,

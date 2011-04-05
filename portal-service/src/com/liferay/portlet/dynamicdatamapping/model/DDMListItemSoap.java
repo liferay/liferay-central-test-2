@@ -25,20 +25,21 @@ import java.util.List;
  * @author    Brian Wing Shun Chan
  * @generated
  */
-public class DDMListEntrySoap implements Serializable {
-	public static DDMListEntrySoap toSoapModel(DDMListEntry model) {
-		DDMListEntrySoap soapModel = new DDMListEntrySoap();
+public class DDMListItemSoap implements Serializable {
+	public static DDMListItemSoap toSoapModel(DDMListItem model) {
+		DDMListItemSoap soapModel = new DDMListItemSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setListEntryId(model.getListEntryId());
-		soapModel.setListId(model.getListId());
+		soapModel.setListItemId(model.getListItemId());
+		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
+		soapModel.setListId(model.getListId());
 
 		return soapModel;
 	}
 
-	public static DDMListEntrySoap[] toSoapModels(DDMListEntry[] models) {
-		DDMListEntrySoap[] soapModels = new DDMListEntrySoap[models.length];
+	public static DDMListItemSoap[] toSoapModels(DDMListItem[] models) {
+		DDMListItemSoap[] soapModels = new DDMListItemSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -47,14 +48,14 @@ public class DDMListEntrySoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DDMListEntrySoap[][] toSoapModels(DDMListEntry[][] models) {
-		DDMListEntrySoap[][] soapModels = null;
+	public static DDMListItemSoap[][] toSoapModels(DDMListItem[][] models) {
+		DDMListItemSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new DDMListEntrySoap[models.length][models[0].length];
+			soapModels = new DDMListItemSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new DDMListEntrySoap[0][0];
+			soapModels = new DDMListItemSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -64,25 +65,25 @@ public class DDMListEntrySoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DDMListEntrySoap[] toSoapModels(List<DDMListEntry> models) {
-		List<DDMListEntrySoap> soapModels = new ArrayList<DDMListEntrySoap>(models.size());
+	public static DDMListItemSoap[] toSoapModels(List<DDMListItem> models) {
+		List<DDMListItemSoap> soapModels = new ArrayList<DDMListItemSoap>(models.size());
 
-		for (DDMListEntry model : models) {
+		for (DDMListItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new DDMListEntrySoap[soapModels.size()]);
+		return soapModels.toArray(new DDMListItemSoap[soapModels.size()]);
 	}
 
-	public DDMListEntrySoap() {
+	public DDMListItemSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _listEntryId;
+		return _listItemId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setListEntryId(pk);
+		setListItemId(pk);
 	}
 
 	public String getUuid() {
@@ -93,20 +94,20 @@ public class DDMListEntrySoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getListEntryId() {
-		return _listEntryId;
+	public long getListItemId() {
+		return _listItemId;
 	}
 
-	public void setListEntryId(long listEntryId) {
-		_listEntryId = listEntryId;
+	public void setListItemId(long listItemId) {
+		_listItemId = listItemId;
 	}
 
-	public long getListId() {
-		return _listId;
+	public long getClassNameId() {
+		return _classNameId;
 	}
 
-	public void setListId(long listId) {
-		_listId = listId;
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
 	}
 
 	public long getClassPK() {
@@ -117,8 +118,17 @@ public class DDMListEntrySoap implements Serializable {
 		_classPK = classPK;
 	}
 
+	public long getListId() {
+		return _listId;
+	}
+
+	public void setListId(long listId) {
+		_listId = listId;
+	}
+
 	private String _uuid;
-	private long _listEntryId;
-	private long _listId;
+	private long _listItemId;
+	private long _classNameId;
 	private long _classPK;
+	private long _listId;
 }

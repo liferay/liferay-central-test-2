@@ -41,6 +41,12 @@ public class DDMStructureServiceWrapper implements DDMStructureService {
 			storageType, serviceContext);
 	}
 
+	public void deleteStructure(long structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureService.deleteStructure(structureId);
+	}
+
 	public void deleteStructure(long groupId, java.lang.String structureKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

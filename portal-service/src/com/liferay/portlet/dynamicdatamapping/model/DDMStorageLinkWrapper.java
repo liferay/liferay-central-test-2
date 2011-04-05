@@ -221,6 +221,12 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		return _ddmStorageLink.getStorageType();
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStorageLink.getStructure();
+	}
+
 	public DDMStorageLink getWrappedDDMStorageLink() {
 		return _ddmStorageLink;
 	}

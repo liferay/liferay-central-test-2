@@ -252,8 +252,8 @@
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMListService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMListServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinder" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMListEntryLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMListEntryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListEntryPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListEntryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMListItemLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMListItemLocalServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListItemPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListItemPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStorageLinkLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureLocalServiceImpl" />

@@ -15,21 +15,21 @@
 package com.liferay.portlet.dynamicdatamapping.model;
 
 /**
- * The model interface for the DDMList service. Represents a row in the &quot;DDMList&quot; database table, with each column mapped to a property of this class.
+ * The model interface for the DDMListItem service. Represents a row in the &quot;DDMListItem&quot; database table, with each column mapped to a property of this class.
  *
  * @author Brian Wing Shun Chan
- * @see DDMListModel
- * @see com.liferay.portlet.dynamicdatamapping.model.impl.DDMListImpl
- * @see com.liferay.portlet.dynamicdatamapping.model.impl.DDMListModelImpl
+ * @see DDMListItemModel
+ * @see com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemImpl
+ * @see com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemModelImpl
  * @generated
  */
-public interface DDMList extends DDMListModel {
+public interface DDMListItem extends DDMListItemModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.dynamicdatamapping.model.impl.DDMListImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
+	public com.liferay.portlet.dynamicdatamapping.model.DDMList getList()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

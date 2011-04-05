@@ -12,17 +12,29 @@
  * details.
  */
 
-package com.liferay.portlet.dynamicdatamapping.model.impl;
+package com.liferay.portlet.dynamicdatamapping;
 
-import com.liferay.portlet.dynamicdatamapping.model.DDMListEntry;
+import com.liferay.portal.NoSuchModelException;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class DDMListEntryImpl extends DDMListEntryModelImpl
-	implements DDMListEntry {
+public class NoSuchListItemException extends NoSuchModelException {
 
-	public DDMListEntryImpl() {
+	public NoSuchListItemException() {
+		super();
+	}
+
+	public NoSuchListItemException(String msg) {
+		super(msg);
+	}
+
+	public NoSuchListItemException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public NoSuchListItemException(Throwable cause) {
+		super(cause);
 	}
 
 }

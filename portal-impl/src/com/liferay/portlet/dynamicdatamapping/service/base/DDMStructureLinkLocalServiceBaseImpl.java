@@ -35,7 +35,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMListEntryLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMListItemLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMListLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMListService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
@@ -44,8 +44,8 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListEntryPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinder;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListItemPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
@@ -370,41 +370,41 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d d m list entry local service.
+	 * Gets the d d m list item local service.
 	 *
-	 * @return the d d m list entry local service
+	 * @return the d d m list item local service
 	 */
-	public DDMListEntryLocalService getDDMListEntryLocalService() {
-		return ddmListEntryLocalService;
+	public DDMListItemLocalService getDDMListItemLocalService() {
+		return ddmListItemLocalService;
 	}
 
 	/**
-	 * Sets the d d m list entry local service.
+	 * Sets the d d m list item local service.
 	 *
-	 * @param ddmListEntryLocalService the d d m list entry local service
+	 * @param ddmListItemLocalService the d d m list item local service
 	 */
-	public void setDDMListEntryLocalService(
-		DDMListEntryLocalService ddmListEntryLocalService) {
-		this.ddmListEntryLocalService = ddmListEntryLocalService;
+	public void setDDMListItemLocalService(
+		DDMListItemLocalService ddmListItemLocalService) {
+		this.ddmListItemLocalService = ddmListItemLocalService;
 	}
 
 	/**
-	 * Gets the d d m list entry persistence.
+	 * Gets the d d m list item persistence.
 	 *
-	 * @return the d d m list entry persistence
+	 * @return the d d m list item persistence
 	 */
-	public DDMListEntryPersistence getDDMListEntryPersistence() {
-		return ddmListEntryPersistence;
+	public DDMListItemPersistence getDDMListItemPersistence() {
+		return ddmListItemPersistence;
 	}
 
 	/**
-	 * Sets the d d m list entry persistence.
+	 * Sets the d d m list item persistence.
 	 *
-	 * @param ddmListEntryPersistence the d d m list entry persistence
+	 * @param ddmListItemPersistence the d d m list item persistence
 	 */
-	public void setDDMListEntryPersistence(
-		DDMListEntryPersistence ddmListEntryPersistence) {
-		this.ddmListEntryPersistence = ddmListEntryPersistence;
+	public void setDDMListItemPersistence(
+		DDMListItemPersistence ddmListItemPersistence) {
+		this.ddmListItemPersistence = ddmListItemPersistence;
 	}
 
 	/**
@@ -788,10 +788,10 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 	protected DDMListPersistence ddmListPersistence;
 	@BeanReference(type = DDMListFinder.class)
 	protected DDMListFinder ddmListFinder;
-	@BeanReference(type = DDMListEntryLocalService.class)
-	protected DDMListEntryLocalService ddmListEntryLocalService;
-	@BeanReference(type = DDMListEntryPersistence.class)
-	protected DDMListEntryPersistence ddmListEntryPersistence;
+	@BeanReference(type = DDMListItemLocalService.class)
+	protected DDMListItemLocalService ddmListItemLocalService;
+	@BeanReference(type = DDMListItemPersistence.class)
+	protected DDMListItemPersistence ddmListItemPersistence;
 	@BeanReference(type = DDMStorageLinkLocalService.class)
 	protected DDMStorageLinkLocalService ddmStorageLinkLocalService;
 	@BeanReference(type = DDMStorageLinkPersistence.class)

@@ -17,143 +17,143 @@ package com.liferay.portlet.dynamicdatamapping.service.persistence;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.portlet.dynamicdatamapping.model.DDMListEntry;
+import com.liferay.portlet.dynamicdatamapping.model.DDMListItem;
 
 /**
- * The persistence interface for the d d m list entry service.
+ * The persistence interface for the d d m list item service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see DDMListEntryPersistenceImpl
- * @see DDMListEntryUtil
+ * @see DDMListItemPersistenceImpl
+ * @see DDMListItemUtil
  * @generated
  */
-public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
+public interface DDMListItemPersistence extends BasePersistence<DDMListItem> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link DDMListEntryUtil} to access the d d m list entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
+	 * Never modify or reference this interface directly. Always use {@link DDMListItemUtil} to access the d d m list item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
 
 	/**
-	* Caches the d d m list entry in the entity cache if it is enabled.
+	* Caches the d d m list item in the entity cache if it is enabled.
 	*
-	* @param ddmListEntry the d d m list entry to cache
+	* @param ddmListItem the d d m list item to cache
 	*/
 	public void cacheResult(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry);
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem);
 
 	/**
-	* Caches the d d m list entries in the entity cache if it is enabled.
+	* Caches the d d m list items in the entity cache if it is enabled.
 	*
-	* @param ddmListEntries the d d m list entries to cache
+	* @param ddmListItems the d d m list items to cache
 	*/
 	public void cacheResult(
-		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> ddmListEntries);
+		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> ddmListItems);
 
 	/**
-	* Creates a new d d m list entry with the primary key. Does not add the d d m list entry to the database.
+	* Creates a new d d m list item with the primary key. Does not add the d d m list item to the database.
 	*
-	* @param listEntryId the primary key for the new d d m list entry
-	* @return the new d d m list entry
+	* @param listItemId the primary key for the new d d m list item
+	* @return the new d d m list item
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry create(
-		long listEntryId);
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem create(
+		long listItemId);
 
 	/**
-	* Removes the d d m list entry with the primary key from the database. Also notifies the appropriate model listeners.
+	* Removes the d d m list item with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param listEntryId the primary key of the d d m list entry to remove
-	* @return the d d m list entry that was removed
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	* @param listItemId the primary key of the d d m list item to remove
+	* @return the d d m list item that was removed
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry remove(
-		long listEntryId)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem remove(
+		long listItemId)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry updateImpl(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry,
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem updateImpl(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem,
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d d m list entry with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException} if it could not be found.
+	* Finds the d d m list item with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListItemException} if it could not be found.
 	*
-	* @param listEntryId the primary key of the d d m list entry to find
-	* @return the d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	* @param listItemId the primary key of the d d m list item to find
+	* @return the d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry findByPrimaryKey(
-		long listEntryId)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem findByPrimaryKey(
+		long listItemId)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds the d d m list entry with the primary key or returns <code>null</code> if it could not be found.
+	* Finds the d d m list item with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param listEntryId the primary key of the d d m list entry to find
-	* @return the d d m list entry, or <code>null</code> if a d d m list entry with the primary key could not be found
+	* @param listItemId the primary key of the d d m list item to find
+	* @return the d d m list item, or <code>null</code> if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry fetchByPrimaryKey(
-		long listEntryId)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem fetchByPrimaryKey(
+		long listItemId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds all the d d m list entries where uuid = &#63;.
+	* Finds all the d d m list items where uuid = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @return the matching d d m list entries
+	* @return the matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findByUuid(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findByUuid(
 		java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m list entries where uuid = &#63;.
+	* Finds a range of all the d d m list items where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	* @return the range of matching d d m list entries
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
+	* @return the range of matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findByUuid(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findByUuid(
 		java.lang.String uuid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m list entries where uuid = &#63;.
+	* Finds an ordered range of all the d d m list items where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching d d m list entries
+	* @return the ordered range of matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findByUuid(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findByUuid(
 		java.lang.String uuid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m list entry in the ordered set where uuid = &#63;.
+	* Finds the first d d m list item in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -161,18 +161,18 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 	*
 	* @param uuid the uuid to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	* @return the first matching d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry findByUuid_First(
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem findByUuid_First(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds the last d d m list entry in the ordered set where uuid = &#63;.
+	* Finds the last d d m list item in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -180,84 +180,84 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 	*
 	* @param uuid the uuid to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	* @return the last matching d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry findByUuid_Last(
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem findByUuid_Last(
 		java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds the d d m list entries before and after the current d d m list entry in the ordered set where uuid = &#63;.
+	* Finds the d d m list items before and after the current d d m list item in the ordered set where uuid = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param listEntryId the primary key of the current d d m list entry
+	* @param listItemId the primary key of the current d d m list item
 	* @param uuid the uuid to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	* @return the previous, current, and next d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry[] findByUuid_PrevAndNext(
-		long listEntryId, java.lang.String uuid,
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem[] findByUuid_PrevAndNext(
+		long listItemId, java.lang.String uuid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds all the d d m list entries where listId = &#63;.
+	* Finds all the d d m list items where listId = &#63;.
 	*
 	* @param listId the list ID to search with
-	* @return the matching d d m list entries
+	* @return the matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findByListId(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findByListId(
 		long listId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m list entries where listId = &#63;.
+	* Finds a range of all the d d m list items where listId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param listId the list ID to search with
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	* @return the range of matching d d m list entries
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
+	* @return the range of matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findByListId(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findByListId(
 		long listId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m list entries where listId = &#63;.
+	* Finds an ordered range of all the d d m list items where listId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param listId the list ID to search with
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching d d m list entries
+	* @return the ordered range of matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findByListId(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findByListId(
 		long listId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the first d d m list entry in the ordered set where listId = &#63;.
+	* Finds the first d d m list item in the ordered set where listId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -265,18 +265,18 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 	*
 	* @param listId the list ID to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	* @return the first matching d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry findByListId_First(
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem findByListId_First(
 		long listId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds the last d d m list entry in the ordered set where listId = &#63;.
+	* Finds the last d d m list item in the ordered set where listId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -284,81 +284,81 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 	*
 	* @param listId the list ID to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	* @return the last matching d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry findByListId_Last(
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem findByListId_Last(
 		long listId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds the d d m list entries before and after the current d d m list entry in the ordered set where listId = &#63;.
+	* Finds the d d m list items before and after the current d d m list item in the ordered set where listId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param listEntryId the primary key of the current d d m list entry
+	* @param listItemId the primary key of the current d d m list item
 	* @param listId the list ID to search with
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next d d m list entry
-	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	* @return the previous, current, and next d d m list item
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry[] findByListId_PrevAndNext(
-		long listEntryId, long listId,
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem[] findByListId_PrevAndNext(
+		long listItemId, long listId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
+			com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
 
 	/**
-	* Finds all the d d m list entries.
+	* Finds all the d d m list items.
 	*
-	* @return the d d m list entries
+	* @return the d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findAll()
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds a range of all the d d m list entries.
+	* Finds a range of all the d d m list items.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	* @return the range of d d m list entries
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
+	* @return the range of d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findAll(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findAll(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds an ordered range of all the d d m list entries.
+	* Finds an ordered range of all the d d m list items.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of d d m list entries
+	* @return the ordered range of d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> findAll(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> findAll(
 		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the d d m list entries where uuid = &#63; from the database.
+	* Removes all the d d m list items where uuid = &#63; from the database.
 	*
 	* @param uuid the uuid to search with
 	* @throws SystemException if a system exception occurred
@@ -367,7 +367,7 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the d d m list entries where listId = &#63; from the database.
+	* Removes all the d d m list items where listId = &#63; from the database.
 	*
 	* @param listId the list ID to search with
 	* @throws SystemException if a system exception occurred
@@ -376,7 +376,7 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the d d m list entries from the database.
+	* Removes all the d d m list items from the database.
 	*
 	* @throws SystemException if a system exception occurred
 	*/
@@ -384,34 +384,34 @@ public interface DDMListEntryPersistence extends BasePersistence<DDMListEntry> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m list entries where uuid = &#63;.
+	* Counts all the d d m list items where uuid = &#63;.
 	*
 	* @param uuid the uuid to search with
-	* @return the number of matching d d m list entries
+	* @return the number of matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m list entries where listId = &#63;.
+	* Counts all the d d m list items where listId = &#63;.
 	*
 	* @param listId the list ID to search with
-	* @return the number of matching d d m list entries
+	* @return the number of matching d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByListId(long listId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d d m list entries.
+	* Counts all the d d m list items.
 	*
-	* @return the number of d d m list entries
+	* @return the number of d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public DDMListEntry remove(DDMListEntry ddmListEntry)
+	public DDMListItem remove(DDMListItem ddmListItem)
 		throws SystemException;
 }

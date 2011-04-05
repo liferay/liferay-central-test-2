@@ -16,66 +16,66 @@ package com.liferay.portlet.dynamicdatamapping.service;
 
 /**
  * <p>
- * This class is a wrapper for {@link DDMListEntryLocalService}.
+ * This class is a wrapper for {@link DDMListItemLocalService}.
  * </p>
  *
  * @author    Brian Wing Shun Chan
- * @see       DDMListEntryLocalService
+ * @see       DDMListItemLocalService
  * @generated
  */
-public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService {
-	public DDMListEntryLocalServiceWrapper(
-		DDMListEntryLocalService ddmListEntryLocalService) {
-		_ddmListEntryLocalService = ddmListEntryLocalService;
+public class DDMListItemLocalServiceWrapper implements DDMListItemLocalService {
+	public DDMListItemLocalServiceWrapper(
+		DDMListItemLocalService ddmListItemLocalService) {
+		_ddmListItemLocalService = ddmListItemLocalService;
 	}
 
 	/**
-	* Adds the d d m list entry to the database. Also notifies the appropriate model listeners.
+	* Adds the d d m list item to the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmListEntry the d d m list entry to add
-	* @return the d d m list entry that was added
+	* @param ddmListItem the d d m list item to add
+	* @return the d d m list item that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry addDDMListEntry(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem addDDMListItem(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.addDDMListEntry(ddmListEntry);
+		return _ddmListItemLocalService.addDDMListItem(ddmListItem);
 	}
 
 	/**
-	* Creates a new d d m list entry with the primary key. Does not add the d d m list entry to the database.
+	* Creates a new d d m list item with the primary key. Does not add the d d m list item to the database.
 	*
-	* @param listEntryId the primary key for the new d d m list entry
-	* @return the new d d m list entry
+	* @param listItemId the primary key for the new d d m list item
+	* @return the new d d m list item
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry createDDMListEntry(
-		long listEntryId) {
-		return _ddmListEntryLocalService.createDDMListEntry(listEntryId);
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem createDDMListItem(
+		long listItemId) {
+		return _ddmListItemLocalService.createDDMListItem(listItemId);
 	}
 
 	/**
-	* Deletes the d d m list entry with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the d d m list item with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param listEntryId the primary key of the d d m list entry to delete
-	* @throws PortalException if a d d m list entry with the primary key could not be found
+	* @param listItemId the primary key of the d d m list item to delete
+	* @throws PortalException if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDDMListEntry(long listEntryId)
+	public void deleteDDMListItem(long listItemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_ddmListEntryLocalService.deleteDDMListEntry(listEntryId);
+		_ddmListItemLocalService.deleteDDMListItem(listItemId);
 	}
 
 	/**
-	* Deletes the d d m list entry from the database. Also notifies the appropriate model listeners.
+	* Deletes the d d m list item from the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmListEntry the d d m list entry to delete
+	* @param ddmListItem the d d m list item to delete
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDDMListEntry(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry)
+	public void deleteDDMListItem(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_ddmListEntryLocalService.deleteDDMListEntry(ddmListEntry);
+		_ddmListItemLocalService.deleteDDMListItem(ddmListItem);
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.dynamicQuery(dynamicQuery);
+		return _ddmListItemLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService
 	public java.util.List dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _ddmListItemLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.dynamicQuery(dynamicQuery, start, end,
+		return _ddmListItemLocalService.dynamicQuery(dynamicQuery, start, end,
 			orderByComparator);
 	}
 
@@ -146,79 +146,79 @@ public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService
 	public long dynamicQueryCount(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.dynamicQueryCount(dynamicQuery);
+		return _ddmListItemLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
 	/**
-	* Gets the d d m list entry with the primary key.
+	* Gets the d d m list item with the primary key.
 	*
-	* @param listEntryId the primary key of the d d m list entry to get
-	* @return the d d m list entry
-	* @throws PortalException if a d d m list entry with the primary key could not be found
+	* @param listItemId the primary key of the d d m list item to get
+	* @return the d d m list item
+	* @throws PortalException if a d d m list item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry getDDMListEntry(
-		long listEntryId)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem getDDMListItem(
+		long listItemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.getDDMListEntry(listEntryId);
+		return _ddmListItemLocalService.getDDMListItem(listItemId);
 	}
 
 	/**
-	* Gets a range of all the d d m list entries.
+	* Gets a range of all the d d m list items.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param start the lower bound of the range of d d m list entries to return
-	* @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	* @return the range of d d m list entries
+	* @param start the lower bound of the range of d d m list items to return
+	* @param end the upper bound of the range of d d m list items to return (not inclusive)
+	* @return the range of d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> getDDMListEntries(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> getDDMListItems(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.getDDMListEntries(start, end);
+		return _ddmListItemLocalService.getDDMListItems(start, end);
 	}
 
 	/**
-	* Gets the number of d d m list entries.
+	* Gets the number of d d m list items.
 	*
-	* @return the number of d d m list entries
+	* @return the number of d d m list items
 	* @throws SystemException if a system exception occurred
 	*/
-	public int getDDMListEntriesCount()
+	public int getDDMListItemsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.getDDMListEntriesCount();
+		return _ddmListItemLocalService.getDDMListItemsCount();
 	}
 
 	/**
-	* Updates the d d m list entry in the database. Also notifies the appropriate model listeners.
+	* Updates the d d m list item in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmListEntry the d d m list entry to update
-	* @return the d d m list entry that was updated
+	* @param ddmListItem the d d m list item to update
+	* @return the d d m list item that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry updateDDMListEntry(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem updateDDMListItem(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.updateDDMListEntry(ddmListEntry);
+		return _ddmListItemLocalService.updateDDMListItem(ddmListItem);
 	}
 
 	/**
-	* Updates the d d m list entry in the database. Also notifies the appropriate model listeners.
+	* Updates the d d m list item in the database. Also notifies the appropriate model listeners.
 	*
-	* @param ddmListEntry the d d m list entry to update
-	* @param merge whether to merge the d d m list entry with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
-	* @return the d d m list entry that was updated
+	* @param ddmListItem the d d m list item to update
+	* @param merge whether to merge the d d m list item with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+	* @return the d d m list item that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry updateDDMListEntry(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry,
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem updateDDMListItem(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem,
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.updateDDMListEntry(ddmListEntry, merge);
+		return _ddmListItemLocalService.updateDDMListItem(ddmListItem, merge);
 	}
 
 	/**
@@ -227,7 +227,7 @@ public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService
 	* @return the Spring bean ID for this bean
 	*/
 	public java.lang.String getBeanIdentifier() {
-		return _ddmListEntryLocalService.getBeanIdentifier();
+		return _ddmListItemLocalService.getBeanIdentifier();
 	}
 
 	/**
@@ -236,68 +236,68 @@ public class DDMListEntryLocalServiceWrapper implements DDMListEntryLocalService
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
-		_ddmListEntryLocalService.setBeanIdentifier(beanIdentifier);
+		_ddmListItemLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry addListEntry(
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem addListItem(
 		long listId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.addListEntry(listId, fields,
+		return _ddmListItemLocalService.addListItem(listId, fields,
 			serviceContext);
 	}
 
-	public void deleteListEntry(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry listEntry)
+	public void deleteListItem(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem listItem)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_ddmListEntryLocalService.deleteListEntry(listEntry);
+		_ddmListItemLocalService.deleteListItem(listItem);
 	}
 
-	public void deleteListEntry(long listEntryId)
+	public void deleteListItem(long listItemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_ddmListEntryLocalService.deleteListEntry(listEntryId);
+		_ddmListItemLocalService.deleteListItem(listItemId);
 	}
 
-	public void deleteListEntries(long listId)
+	public void deleteListItems(long listId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_ddmListEntryLocalService.deleteListEntries(listId);
+		_ddmListItemLocalService.deleteListItems(listId);
 	}
 
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry getListEntry(
-		long listEntryId)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem getListItem(
+		long listItemId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.getListEntry(listEntryId);
+		return _ddmListItemLocalService.getListItem(listItemId);
 	}
 
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListEntry> getListEntries(
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMListItem> getListItems(
 		long listId) throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.getListEntries(listId);
+		return _ddmListItemLocalService.getListItems(listId);
 	}
 
-	public com.liferay.portlet.dynamicdatamapping.model.DDMListEntry updateListEntry(
-		long listEntryId,
+	public com.liferay.portlet.dynamicdatamapping.model.DDMListItem updateListItem(
+		long listItemId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListEntryLocalService.updateListEntry(listEntryId, fields,
+		return _ddmListItemLocalService.updateListItem(listItemId, fields,
 			serviceContext);
 	}
 
-	public DDMListEntryLocalService getWrappedDDMListEntryLocalService() {
-		return _ddmListEntryLocalService;
+	public DDMListItemLocalService getWrappedDDMListItemLocalService() {
+		return _ddmListItemLocalService;
 	}
 
-	public void setWrappedDDMListEntryLocalService(
-		DDMListEntryLocalService ddmListEntryLocalService) {
-		_ddmListEntryLocalService = ddmListEntryLocalService;
+	public void setWrappedDDMListItemLocalService(
+		DDMListItemLocalService ddmListItemLocalService) {
+		_ddmListItemLocalService = ddmListItemLocalService;
 	}
 
-	private DDMListEntryLocalService _ddmListEntryLocalService;
+	private DDMListItemLocalService _ddmListItemLocalService;
 }

@@ -12,29 +12,25 @@
  * details.
  */
 
-package com.liferay.portlet.dynamicdatamapping;
+package com.liferay.portlet.dynamicdatamapping.model.impl;
 
-import com.liferay.portal.NoSuchModelException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMList;
+import com.liferay.portlet.dynamicdatamapping.model.DDMListItem;
+import com.liferay.portlet.dynamicdatamapping.service.DDMListLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class NoSuchListEntryException extends NoSuchModelException {
+public class DDMListItemImpl
+	extends DDMListItemModelImpl implements DDMListItem {
 
-	public NoSuchListEntryException() {
-		super();
+	public DDMListItemImpl() {
 	}
 
-	public NoSuchListEntryException(String msg) {
-		super(msg);
-	}
-
-	public NoSuchListEntryException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public NoSuchListEntryException(Throwable cause) {
-		super(cause);
+	public DDMList getList() throws PortalException, SystemException {
+		return DDMListLocalServiceUtil.getList(getListId());
 	}
 
 }

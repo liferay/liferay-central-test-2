@@ -21,26 +21,6 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class DDMStructureFinderUtil {
-	public static int countByC_G_CN_S_ST_D(long companyId, long groupId,
-		long[] classNameIds, java.lang.String structureKey,
-		java.lang.String name, java.lang.String description,
-		java.lang.String storageType, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .countByC_G_CN_S_ST_D(companyId, groupId, classNameIds,
-			structureKey, name, description, storageType, andOperator);
-	}
-
-	public static int countByC_G_CN_S_ST_D(long companyId, long groupId,
-		long[] classNameIds, java.lang.String[] structureKeys,
-		java.lang.String[] names, java.lang.String[] descriptions,
-		java.lang.String[] storageTypes, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .countByC_G_CN_S_ST_D(companyId, groupId, classNameIds,
-			structureKeys, names, descriptions, storageTypes, andOperator);
-	}
-
 	public static int countByKeywords(long companyId, long groupId,
 		long[] classNameIds, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -48,30 +28,24 @@ public class DDMStructureFinderUtil {
 				   .countByKeywords(companyId, groupId, classNameIds, keywords);
 	}
 
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_G_CN_S_ST_D(
-		long companyId, long groupId, long[] classNameIds,
-		java.lang.String structureKey, java.lang.String name,
-		java.lang.String description, java.lang.String storageType,
-		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+	public static int countByC_G_C_S_N_D_S(long companyId, long groupId,
+		long[] classNameIds, java.lang.String structureKey,
+		java.lang.String name, java.lang.String description,
+		java.lang.String storageType, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByC_G_CN_S_ST_D(companyId, groupId, classNameIds,
-			structureKey, name, description, storageType, andOperator, start,
-			end, orderByComparator);
+				   .countByC_G_C_S_N_D_S(companyId, groupId, classNameIds,
+			structureKey, name, description, storageType, andOperator);
 	}
 
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_G_CN_S_ST_D(
-		long companyId, long groupId, long[] classNameIds,
-		java.lang.String[] structureKeys, java.lang.String[] names,
-		java.lang.String[] descriptions, java.lang.String[] storageTypes,
-		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+	public static int countByC_G_C_S_N_D_S(long companyId, long groupId,
+		long[] classNameIds, java.lang.String[] structureKeys,
+		java.lang.String[] names, java.lang.String[] descriptions,
+		java.lang.String[] storageTypes, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByC_G_CN_S_ST_D(companyId, groupId, classNameIds,
-			structureKeys, names, descriptions, storageTypes, andOperator,
-			start, end, orderByComparator);
+				   .countByC_G_C_S_N_D_S(companyId, groupId, classNameIds,
+			structureKeys, names, descriptions, storageTypes, andOperator);
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByKeywords(
@@ -81,6 +55,32 @@ public class DDMStructureFinderUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, classNameIds, keywords,
+			start, end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_G_C_S_N_D_S(
+		long companyId, long groupId, long[] classNameIds,
+		java.lang.String structureKey, java.lang.String name,
+		java.lang.String description, java.lang.String storageType,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByC_G_C_S_N_D_S(companyId, groupId, classNameIds,
+			structureKey, name, description, storageType, andOperator, start,
+			end, orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_G_C_S_N_D_S(
+		long companyId, long groupId, long[] classNameIds,
+		java.lang.String[] structureKeys, java.lang.String[] names,
+		java.lang.String[] descriptions, java.lang.String[] storageTypes,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByC_G_C_S_N_D_S(companyId, groupId, classNameIds,
+			structureKeys, names, descriptions, storageTypes, andOperator,
 			start, end, orderByComparator);
 	}
 

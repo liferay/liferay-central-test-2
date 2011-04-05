@@ -41,10 +41,10 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
-import com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException;
-import com.liferay.portlet.dynamicdatamapping.model.DDMListEntry;
-import com.liferay.portlet.dynamicdatamapping.model.impl.DDMListEntryImpl;
-import com.liferay.portlet.dynamicdatamapping.model.impl.DDMListEntryModelImpl;
+import com.liferay.portlet.dynamicdatamapping.NoSuchListItemException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMListItem;
+import com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemImpl;
+import com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemModelImpl;
 
 import java.io.Serializable;
 
@@ -53,29 +53,29 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * The persistence implementation for the d d m list entry service.
+ * The persistence implementation for the d d m list item service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see DDMListEntryPersistence
- * @see DDMListEntryUtil
+ * @see DDMListItemPersistence
+ * @see DDMListItemUtil
  * @generated
  */
-public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntry>
-	implements DDMListEntryPersistence {
+public class DDMListItemPersistenceImpl extends BasePersistenceImpl<DDMListItem>
+	implements DDMListItemPersistence {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link DDMListEntryUtil} to access the d d m list entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link DDMListItemUtil} to access the d d m list item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static final String FINDER_CLASS_NAME_ENTITY = DDMListEntryImpl.class.getName();
+	public static final String FINDER_CLASS_NAME_ENTITY = DDMListItemImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
-	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_UUID = new FinderPath(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByUuid",
 			new String[] {
 				String.class.getName(),
@@ -83,11 +83,11 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_LISTID = new FinderPath(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_BY_LISTID = new FinderPath(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByListId",
 			new String[] {
 				Long.class.getName(),
@@ -95,46 +95,45 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_LISTID = new FinderPath(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_BY_LISTID = new FinderPath(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByListId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
-	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countAll", new String[0]);
 
 	/**
-	 * Caches the d d m list entry in the entity cache if it is enabled.
+	 * Caches the d d m list item in the entity cache if it is enabled.
 	 *
-	 * @param ddmListEntry the d d m list entry to cache
+	 * @param ddmListItem the d d m list item to cache
 	 */
-	public void cacheResult(DDMListEntry ddmListEntry) {
-		EntityCacheUtil.putResult(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryImpl.class, ddmListEntry.getPrimaryKey(), ddmListEntry);
+	public void cacheResult(DDMListItem ddmListItem) {
+		EntityCacheUtil.putResult(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemImpl.class, ddmListItem.getPrimaryKey(), ddmListItem);
 
-		ddmListEntry.resetOriginalValues();
+		ddmListItem.resetOriginalValues();
 	}
 
 	/**
-	 * Caches the d d m list entries in the entity cache if it is enabled.
+	 * Caches the d d m list items in the entity cache if it is enabled.
 	 *
-	 * @param ddmListEntries the d d m list entries to cache
+	 * @param ddmListItems the d d m list items to cache
 	 */
-	public void cacheResult(List<DDMListEntry> ddmListEntries) {
-		for (DDMListEntry ddmListEntry : ddmListEntries) {
+	public void cacheResult(List<DDMListItem> ddmListItems) {
+		for (DDMListItem ddmListItem : ddmListItems) {
 			if (EntityCacheUtil.getResult(
-						DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-						DDMListEntryImpl.class, ddmListEntry.getPrimaryKey(),
-						this) == null) {
-				cacheResult(ddmListEntry);
+						DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+						DDMListItemImpl.class, ddmListItem.getPrimaryKey(), this) == null) {
+				cacheResult(ddmListItem);
 			}
 		}
 	}
 
 	/**
-	 * Clears the cache for all d d m list entries.
+	 * Clears the cache for all d d m list items.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
@@ -142,88 +141,88 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	 */
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
-			CacheRegistryUtil.clear(DDMListEntryImpl.class.getName());
+			CacheRegistryUtil.clear(DDMListItemImpl.class.getName());
 		}
 
-		EntityCacheUtil.clearCache(DDMListEntryImpl.class.getName());
+		EntityCacheUtil.clearCache(DDMListItemImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 	}
 
 	/**
-	 * Clears the cache for the d d m list entry.
+	 * Clears the cache for the d d m list item.
 	 *
 	 * <p>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
-	public void clearCache(DDMListEntry ddmListEntry) {
-		EntityCacheUtil.removeResult(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryImpl.class, ddmListEntry.getPrimaryKey());
+	public void clearCache(DDMListItem ddmListItem) {
+		EntityCacheUtil.removeResult(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemImpl.class, ddmListItem.getPrimaryKey());
 	}
 
 	/**
-	 * Creates a new d d m list entry with the primary key. Does not add the d d m list entry to the database.
+	 * Creates a new d d m list item with the primary key. Does not add the d d m list item to the database.
 	 *
-	 * @param listEntryId the primary key for the new d d m list entry
-	 * @return the new d d m list entry
+	 * @param listItemId the primary key for the new d d m list item
+	 * @return the new d d m list item
 	 */
-	public DDMListEntry create(long listEntryId) {
-		DDMListEntry ddmListEntry = new DDMListEntryImpl();
+	public DDMListItem create(long listItemId) {
+		DDMListItem ddmListItem = new DDMListItemImpl();
 
-		ddmListEntry.setNew(true);
-		ddmListEntry.setPrimaryKey(listEntryId);
+		ddmListItem.setNew(true);
+		ddmListItem.setPrimaryKey(listItemId);
 
 		String uuid = PortalUUIDUtil.generate();
 
-		ddmListEntry.setUuid(uuid);
+		ddmListItem.setUuid(uuid);
 
-		return ddmListEntry;
+		return ddmListItem;
 	}
 
 	/**
-	 * Removes the d d m list entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d m list item with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the d d m list entry to remove
-	 * @return the d d m list entry that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a d d m list entry with the primary key could not be found
+	 * @param primaryKey the primary key of the d d m list item to remove
+	 * @return the d d m list item that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry remove(Serializable primaryKey)
+	public DDMListItem remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Removes the d d m list entry with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d m list item with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param listEntryId the primary key of the d d m list entry to remove
-	 * @return the d d m list entry that was removed
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	 * @param listItemId the primary key of the d d m list item to remove
+	 * @return the d d m list item that was removed
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry remove(long listEntryId)
-		throws NoSuchListEntryException, SystemException {
+	public DDMListItem remove(long listItemId)
+		throws NoSuchListItemException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMListEntry ddmListEntry = (DDMListEntry)session.get(DDMListEntryImpl.class,
-					Long.valueOf(listEntryId));
+			DDMListItem ddmListItem = (DDMListItem)session.get(DDMListItemImpl.class,
+					Long.valueOf(listItemId));
 
-			if (ddmListEntry == null) {
+			if (ddmListItem == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listEntryId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listItemId);
 				}
 
-				throw new NoSuchListEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					listEntryId);
+				throw new NoSuchListItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					listItemId);
 			}
 
-			return ddmListEntryPersistence.remove(ddmListEntry);
+			return ddmListItemPersistence.remove(ddmListItem);
 		}
-		catch (NoSuchListEntryException nsee) {
+		catch (NoSuchListItemException nsee) {
 			throw nsee;
 		}
 		catch (Exception e) {
@@ -235,27 +234,27 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Removes the d d m list entry from the database. Also notifies the appropriate model listeners.
+	 * Removes the d d m list item from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param ddmListEntry the d d m list entry to remove
-	 * @return the d d m list entry that was removed
+	 * @param ddmListItem the d d m list item to remove
+	 * @return the d d m list item that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry remove(DDMListEntry ddmListEntry)
+	public DDMListItem remove(DDMListItem ddmListItem)
 		throws SystemException {
-		return super.remove(ddmListEntry);
+		return super.remove(ddmListItem);
 	}
 
-	protected DDMListEntry removeImpl(DDMListEntry ddmListEntry)
+	protected DDMListItem removeImpl(DDMListItem ddmListItem)
 		throws SystemException {
-		ddmListEntry = toUnwrappedModel(ddmListEntry);
+		ddmListItem = toUnwrappedModel(ddmListItem);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			BatchSessionUtil.delete(session, ddmListEntry);
+			BatchSessionUtil.delete(session, ddmListItem);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -266,21 +265,21 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.removeResult(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryImpl.class, ddmListEntry.getPrimaryKey());
+		EntityCacheUtil.removeResult(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemImpl.class, ddmListItem.getPrimaryKey());
 
-		return ddmListEntry;
+		return ddmListItem;
 	}
 
-	public DDMListEntry updateImpl(
-		com.liferay.portlet.dynamicdatamapping.model.DDMListEntry ddmListEntry,
+	public DDMListItem updateImpl(
+		com.liferay.portlet.dynamicdatamapping.model.DDMListItem ddmListItem,
 		boolean merge) throws SystemException {
-		ddmListEntry = toUnwrappedModel(ddmListEntry);
+		ddmListItem = toUnwrappedModel(ddmListItem);
 
-		if (Validator.isNull(ddmListEntry.getUuid())) {
+		if (Validator.isNull(ddmListItem.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
 
-			ddmListEntry.setUuid(uuid);
+			ddmListItem.setUuid(uuid);
 		}
 
 		Session session = null;
@@ -288,9 +287,9 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		try {
 			session = openSession();
 
-			BatchSessionUtil.update(session, ddmListEntry, merge);
+			BatchSessionUtil.update(session, ddmListItem, merge);
 
-			ddmListEntry.setNew(false);
+			ddmListItem.setNew(false);
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -301,159 +300,160 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
-		EntityCacheUtil.putResult(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DDMListEntryImpl.class, ddmListEntry.getPrimaryKey(), ddmListEntry);
+		EntityCacheUtil.putResult(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+			DDMListItemImpl.class, ddmListItem.getPrimaryKey(), ddmListItem);
 
-		return ddmListEntry;
+		return ddmListItem;
 	}
 
-	protected DDMListEntry toUnwrappedModel(DDMListEntry ddmListEntry) {
-		if (ddmListEntry instanceof DDMListEntryImpl) {
-			return ddmListEntry;
+	protected DDMListItem toUnwrappedModel(DDMListItem ddmListItem) {
+		if (ddmListItem instanceof DDMListItemImpl) {
+			return ddmListItem;
 		}
 
-		DDMListEntryImpl ddmListEntryImpl = new DDMListEntryImpl();
+		DDMListItemImpl ddmListItemImpl = new DDMListItemImpl();
 
-		ddmListEntryImpl.setNew(ddmListEntry.isNew());
-		ddmListEntryImpl.setPrimaryKey(ddmListEntry.getPrimaryKey());
+		ddmListItemImpl.setNew(ddmListItem.isNew());
+		ddmListItemImpl.setPrimaryKey(ddmListItem.getPrimaryKey());
 
-		ddmListEntryImpl.setUuid(ddmListEntry.getUuid());
-		ddmListEntryImpl.setListEntryId(ddmListEntry.getListEntryId());
-		ddmListEntryImpl.setListId(ddmListEntry.getListId());
-		ddmListEntryImpl.setClassPK(ddmListEntry.getClassPK());
+		ddmListItemImpl.setUuid(ddmListItem.getUuid());
+		ddmListItemImpl.setListItemId(ddmListItem.getListItemId());
+		ddmListItemImpl.setClassNameId(ddmListItem.getClassNameId());
+		ddmListItemImpl.setClassPK(ddmListItem.getClassPK());
+		ddmListItemImpl.setListId(ddmListItem.getListId());
 
-		return ddmListEntryImpl;
+		return ddmListItemImpl;
 	}
 
 	/**
-	 * Finds the d d m list entry with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
+	 * Finds the d d m list item with the primary key or throws a {@link com.liferay.portal.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m list entry to find
-	 * @return the d d m list entry
-	 * @throws com.liferay.portal.NoSuchModelException if a d d m list entry with the primary key could not be found
+	 * @param primaryKey the primary key of the d d m list item to find
+	 * @return the d d m list item
+	 * @throws com.liferay.portal.NoSuchModelException if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry findByPrimaryKey(Serializable primaryKey)
+	public DDMListItem findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the d d m list entry with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException} if it could not be found.
+	 * Finds the d d m list item with the primary key or throws a {@link com.liferay.portlet.dynamicdatamapping.NoSuchListItemException} if it could not be found.
 	 *
-	 * @param listEntryId the primary key of the d d m list entry to find
-	 * @return the d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	 * @param listItemId the primary key of the d d m list item to find
+	 * @return the d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry findByPrimaryKey(long listEntryId)
-		throws NoSuchListEntryException, SystemException {
-		DDMListEntry ddmListEntry = fetchByPrimaryKey(listEntryId);
+	public DDMListItem findByPrimaryKey(long listItemId)
+		throws NoSuchListItemException, SystemException {
+		DDMListItem ddmListItem = fetchByPrimaryKey(listItemId);
 
-		if (ddmListEntry == null) {
+		if (ddmListItem == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listEntryId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + listItemId);
 			}
 
-			throw new NoSuchListEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				listEntryId);
+			throw new NoSuchListItemException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+				listItemId);
 		}
 
-		return ddmListEntry;
+		return ddmListItem;
 	}
 
 	/**
-	 * Finds the d d m list entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the d d m list item with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the d d m list entry to find
-	 * @return the d d m list entry, or <code>null</code> if a d d m list entry with the primary key could not be found
+	 * @param primaryKey the primary key of the d d m list item to find
+	 * @return the d d m list item, or <code>null</code> if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry fetchByPrimaryKey(Serializable primaryKey)
+	public DDMListItem fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
-	 * Finds the d d m list entry with the primary key or returns <code>null</code> if it could not be found.
+	 * Finds the d d m list item with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param listEntryId the primary key of the d d m list entry to find
-	 * @return the d d m list entry, or <code>null</code> if a d d m list entry with the primary key could not be found
+	 * @param listItemId the primary key of the d d m list item to find
+	 * @return the d d m list item, or <code>null</code> if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry fetchByPrimaryKey(long listEntryId)
+	public DDMListItem fetchByPrimaryKey(long listItemId)
 		throws SystemException {
-		DDMListEntry ddmListEntry = (DDMListEntry)EntityCacheUtil.getResult(DDMListEntryModelImpl.ENTITY_CACHE_ENABLED,
-				DDMListEntryImpl.class, listEntryId, this);
+		DDMListItem ddmListItem = (DDMListItem)EntityCacheUtil.getResult(DDMListItemModelImpl.ENTITY_CACHE_ENABLED,
+				DDMListItemImpl.class, listItemId, this);
 
-		if (ddmListEntry == null) {
+		if (ddmListItem == null) {
 			Session session = null;
 
 			try {
 				session = openSession();
 
-				ddmListEntry = (DDMListEntry)session.get(DDMListEntryImpl.class,
-						Long.valueOf(listEntryId));
+				ddmListItem = (DDMListItem)session.get(DDMListItemImpl.class,
+						Long.valueOf(listItemId));
 			}
 			catch (Exception e) {
 				throw processException(e);
 			}
 			finally {
-				if (ddmListEntry != null) {
-					cacheResult(ddmListEntry);
+				if (ddmListItem != null) {
+					cacheResult(ddmListItem);
 				}
 
 				closeSession(session);
 			}
 		}
 
-		return ddmListEntry;
+		return ddmListItem;
 	}
 
 	/**
-	 * Finds all the d d m list entries where uuid = &#63;.
+	 * Finds all the d d m list items where uuid = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @return the matching d d m list entries
+	 * @return the matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findByUuid(String uuid) throws SystemException {
+	public List<DDMListItem> findByUuid(String uuid) throws SystemException {
 		return findByUuid(uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m list entries where uuid = &#63;.
+	 * Finds a range of all the d d m list items where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d m list entries to return
-	 * @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	 * @return the range of matching d d m list entries
+	 * @param start the lower bound of the range of d d m list items to return
+	 * @param end the upper bound of the range of d d m list items to return (not inclusive)
+	 * @return the range of matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findByUuid(String uuid, int start, int end)
+	public List<DDMListItem> findByUuid(String uuid, int start, int end)
 		throws SystemException {
 		return findByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m list entries where uuid = &#63;.
+	 * Finds an ordered range of all the d d m list items where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param start the lower bound of the range of d d m list entries to return
-	 * @param end the upper bound of the range of d d m list entries to return (not inclusive)
+	 * @param start the lower bound of the range of d d m list items to return
+	 * @param end the upper bound of the range of d d m list items to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching d d m list entries
+	 * @return the ordered range of matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findByUuid(String uuid, int start, int end,
+	public List<DDMListItem> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				uuid,
@@ -462,7 +462,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMListEntry> list = (List<DDMListEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
+		List<DDMListItem> list = (List<DDMListItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -476,7 +476,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				query = new StringBundler(2);
 			}
 
-			query.append(_SQL_SELECT_DDMLISTENTRY_WHERE);
+			query.append(_SQL_SELECT_DDMLISTITEM_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_UUID_1);
@@ -510,7 +510,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 					qPos.add(uuid);
 				}
 
-				list = (List<DDMListEntry>)QueryUtil.list(q, getDialect(),
+				list = (List<DDMListItem>)QueryUtil.list(q, getDialect(),
 						start, end);
 			}
 			catch (Exception e) {
@@ -536,7 +536,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds the first d d m list entry in the ordered set where uuid = &#63;.
+	 * Finds the first d d m list item in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -544,14 +544,14 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	 *
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	 * @return the first matching d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry findByUuid_First(String uuid,
+	public DDMListItem findByUuid_First(String uuid,
 		OrderByComparator orderByComparator)
-		throws NoSuchListEntryException, SystemException {
-		List<DDMListEntry> list = findByUuid(uuid, 0, 1, orderByComparator);
+		throws NoSuchListItemException, SystemException {
+		List<DDMListItem> list = findByUuid(uuid, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -563,7 +563,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchListEntryException(msg.toString());
+			throw new NoSuchListItemException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -571,7 +571,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds the last d d m list entry in the ordered set where uuid = &#63;.
+	 * Finds the last d d m list item in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -579,16 +579,16 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	 *
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	 * @return the last matching d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry findByUuid_Last(String uuid,
+	public DDMListItem findByUuid_Last(String uuid,
 		OrderByComparator orderByComparator)
-		throws NoSuchListEntryException, SystemException {
+		throws NoSuchListItemException, SystemException {
 		int count = countByUuid(uuid);
 
-		List<DDMListEntry> list = findByUuid(uuid, count - 1, count,
+		List<DDMListItem> list = findByUuid(uuid, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -601,7 +601,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchListEntryException(msg.toString());
+			throw new NoSuchListItemException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -609,37 +609,37 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds the d d m list entries before and after the current d d m list entry in the ordered set where uuid = &#63;.
+	 * Finds the d d m list items before and after the current d d m list item in the ordered set where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param listEntryId the primary key of the current d d m list entry
+	 * @param listItemId the primary key of the current d d m list item
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	 * @return the previous, current, and next d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry[] findByUuid_PrevAndNext(long listEntryId, String uuid,
+	public DDMListItem[] findByUuid_PrevAndNext(long listItemId, String uuid,
 		OrderByComparator orderByComparator)
-		throws NoSuchListEntryException, SystemException {
-		DDMListEntry ddmListEntry = findByPrimaryKey(listEntryId);
+		throws NoSuchListItemException, SystemException {
+		DDMListItem ddmListItem = findByPrimaryKey(listItemId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMListEntry[] array = new DDMListEntryImpl[3];
+			DDMListItem[] array = new DDMListItemImpl[3];
 
-			array[0] = getByUuid_PrevAndNext(session, ddmListEntry, uuid,
+			array[0] = getByUuid_PrevAndNext(session, ddmListItem, uuid,
 					orderByComparator, true);
 
-			array[1] = ddmListEntry;
+			array[1] = ddmListItem;
 
-			array[2] = getByUuid_PrevAndNext(session, ddmListEntry, uuid,
+			array[2] = getByUuid_PrevAndNext(session, ddmListItem, uuid,
 					orderByComparator, false);
 
 			return array;
@@ -652,8 +652,8 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		}
 	}
 
-	protected DDMListEntry getByUuid_PrevAndNext(Session session,
-		DDMListEntry ddmListEntry, String uuid,
+	protected DDMListItem getByUuid_PrevAndNext(Session session,
+		DDMListItem ddmListItem, String uuid,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -665,7 +665,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_DDMLISTENTRY_WHERE);
+		query.append(_SQL_SELECT_DDMLISTITEM_WHERE);
 
 		if (uuid == null) {
 			query.append(_FINDER_COLUMN_UUID_UUID_1);
@@ -747,14 +747,14 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		}
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(ddmListEntry);
+			Object[] values = orderByComparator.getOrderByValues(ddmListItem);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<DDMListEntry> list = q.list();
+		List<DDMListItem> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -765,50 +765,50 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds all the d d m list entries where listId = &#63;.
+	 * Finds all the d d m list items where listId = &#63;.
 	 *
 	 * @param listId the list ID to search with
-	 * @return the matching d d m list entries
+	 * @return the matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findByListId(long listId)
+	public List<DDMListItem> findByListId(long listId)
 		throws SystemException {
 		return findByListId(listId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m list entries where listId = &#63;.
+	 * Finds a range of all the d d m list items where listId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param listId the list ID to search with
-	 * @param start the lower bound of the range of d d m list entries to return
-	 * @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	 * @return the range of matching d d m list entries
+	 * @param start the lower bound of the range of d d m list items to return
+	 * @param end the upper bound of the range of d d m list items to return (not inclusive)
+	 * @return the range of matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findByListId(long listId, int start, int end)
+	public List<DDMListItem> findByListId(long listId, int start, int end)
 		throws SystemException {
 		return findByListId(listId, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m list entries where listId = &#63;.
+	 * Finds an ordered range of all the d d m list items where listId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param listId the list ID to search with
-	 * @param start the lower bound of the range of d d m list entries to return
-	 * @param end the upper bound of the range of d d m list entries to return (not inclusive)
+	 * @param start the lower bound of the range of d d m list items to return
+	 * @param end the upper bound of the range of d d m list items to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching d d m list entries
+	 * @return the ordered range of matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findByListId(long listId, int start, int end,
+	public List<DDMListItem> findByListId(long listId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				listId,
@@ -817,7 +817,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMListEntry> list = (List<DDMListEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LISTID,
+		List<DDMListItem> list = (List<DDMListItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_LISTID,
 				finderArgs, this);
 
 		if (list == null) {
@@ -831,7 +831,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				query = new StringBundler(2);
 			}
 
-			query.append(_SQL_SELECT_DDMLISTENTRY_WHERE);
+			query.append(_SQL_SELECT_DDMLISTITEM_WHERE);
 
 			query.append(_FINDER_COLUMN_LISTID_LISTID_2);
 
@@ -853,7 +853,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 				qPos.add(listId);
 
-				list = (List<DDMListEntry>)QueryUtil.list(q, getDialect(),
+				list = (List<DDMListItem>)QueryUtil.list(q, getDialect(),
 						start, end);
 			}
 			catch (Exception e) {
@@ -879,7 +879,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds the first d d m list entry in the ordered set where listId = &#63;.
+	 * Finds the first d d m list item in the ordered set where listId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -887,14 +887,14 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	 *
 	 * @param listId the list ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	 * @return the first matching d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry findByListId_First(long listId,
+	public DDMListItem findByListId_First(long listId,
 		OrderByComparator orderByComparator)
-		throws NoSuchListEntryException, SystemException {
-		List<DDMListEntry> list = findByListId(listId, 0, 1, orderByComparator);
+		throws NoSuchListItemException, SystemException {
+		List<DDMListItem> list = findByListId(listId, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(4);
@@ -906,7 +906,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchListEntryException(msg.toString());
+			throw new NoSuchListItemException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -914,7 +914,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds the last d d m list entry in the ordered set where listId = &#63;.
+	 * Finds the last d d m list item in the ordered set where listId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -922,16 +922,16 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	 *
 	 * @param listId the list ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a matching d d m list entry could not be found
+	 * @return the last matching d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a matching d d m list item could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry findByListId_Last(long listId,
+	public DDMListItem findByListId_Last(long listId,
 		OrderByComparator orderByComparator)
-		throws NoSuchListEntryException, SystemException {
+		throws NoSuchListItemException, SystemException {
 		int count = countByListId(listId);
 
-		List<DDMListEntry> list = findByListId(listId, count - 1, count,
+		List<DDMListItem> list = findByListId(listId, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -944,7 +944,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
-			throw new NoSuchListEntryException(msg.toString());
+			throw new NoSuchListItemException(msg.toString());
 		}
 		else {
 			return list.get(0);
@@ -952,37 +952,37 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds the d d m list entries before and after the current d d m list entry in the ordered set where listId = &#63;.
+	 * Finds the d d m list items before and after the current d d m list item in the ordered set where listId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param listEntryId the primary key of the current d d m list entry
+	 * @param listItemId the primary key of the current d d m list item
 	 * @param listId the list ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next d d m list entry
-	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListEntryException if a d d m list entry with the primary key could not be found
+	 * @return the previous, current, and next d d m list item
+	 * @throws com.liferay.portlet.dynamicdatamapping.NoSuchListItemException if a d d m list item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DDMListEntry[] findByListId_PrevAndNext(long listEntryId,
-		long listId, OrderByComparator orderByComparator)
-		throws NoSuchListEntryException, SystemException {
-		DDMListEntry ddmListEntry = findByPrimaryKey(listEntryId);
+	public DDMListItem[] findByListId_PrevAndNext(long listItemId, long listId,
+		OrderByComparator orderByComparator)
+		throws NoSuchListItemException, SystemException {
+		DDMListItem ddmListItem = findByPrimaryKey(listItemId);
 
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DDMListEntry[] array = new DDMListEntryImpl[3];
+			DDMListItem[] array = new DDMListItemImpl[3];
 
-			array[0] = getByListId_PrevAndNext(session, ddmListEntry, listId,
+			array[0] = getByListId_PrevAndNext(session, ddmListItem, listId,
 					orderByComparator, true);
 
-			array[1] = ddmListEntry;
+			array[1] = ddmListItem;
 
-			array[2] = getByListId_PrevAndNext(session, ddmListEntry, listId,
+			array[2] = getByListId_PrevAndNext(session, ddmListItem, listId,
 					orderByComparator, false);
 
 			return array;
@@ -995,8 +995,8 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		}
 	}
 
-	protected DDMListEntry getByListId_PrevAndNext(Session session,
-		DDMListEntry ddmListEntry, long listId,
+	protected DDMListItem getByListId_PrevAndNext(Session session,
+		DDMListItem ddmListItem, long listId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1008,7 +1008,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_DDMLISTENTRY_WHERE);
+		query.append(_SQL_SELECT_DDMLISTITEM_WHERE);
 
 		query.append(_FINDER_COLUMN_LISTID_LISTID_2);
 
@@ -1078,14 +1078,14 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		qPos.add(listId);
 
 		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(ddmListEntry);
+			Object[] values = orderByComparator.getOrderByValues(ddmListItem);
 
 			for (Object value : values) {
 				qPos.add(value);
 			}
 		}
 
-		List<DDMListEntry> list = q.list();
+		List<DDMListItem> list = q.list();
 
 		if (list.size() == 2) {
 			return list.get(1);
@@ -1096,53 +1096,53 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Finds all the d d m list entries.
+	 * Finds all the d d m list items.
 	 *
-	 * @return the d d m list entries
+	 * @return the d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findAll() throws SystemException {
+	public List<DDMListItem> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the d d m list entries.
+	 * Finds a range of all the d d m list items.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m list entries to return
-	 * @param end the upper bound of the range of d d m list entries to return (not inclusive)
-	 * @return the range of d d m list entries
+	 * @param start the lower bound of the range of d d m list items to return
+	 * @param end the upper bound of the range of d d m list items to return (not inclusive)
+	 * @return the range of d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findAll(int start, int end)
+	public List<DDMListItem> findAll(int start, int end)
 		throws SystemException {
 		return findAll(start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the d d m list entries.
+	 * Finds an ordered range of all the d d m list items.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of d d m list entries to return
-	 * @param end the upper bound of the range of d d m list entries to return (not inclusive)
+	 * @param start the lower bound of the range of d d m list items to return
+	 * @param end the upper bound of the range of d d m list items to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of d d m list entries
+	 * @return the ordered range of d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<DDMListEntry> findAll(int start, int end,
+	public List<DDMListItem> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
 			};
 
-		List<DDMListEntry> list = (List<DDMListEntry>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		List<DDMListItem> list = (List<DDMListItem>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);
 
 		if (list == null) {
@@ -1153,7 +1153,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				query = new StringBundler(2 +
 						(orderByComparator.getOrderByFields().length * 3));
 
-				query.append(_SQL_SELECT_DDMLISTENTRY);
+				query.append(_SQL_SELECT_DDMLISTITEM);
 
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 					orderByComparator);
@@ -1161,7 +1161,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				sql = query.toString();
 			}
 			else {
-				sql = _SQL_SELECT_DDMLISTENTRY;
+				sql = _SQL_SELECT_DDMLISTITEM;
 			}
 
 			Session session = null;
@@ -1172,13 +1172,13 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 				Query q = session.createQuery(sql);
 
 				if (orderByComparator == null) {
-					list = (List<DDMListEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<DDMListItem>)QueryUtil.list(q, getDialect(),
 							start, end, false);
 
 					Collections.sort(list);
 				}
 				else {
-					list = (List<DDMListEntry>)QueryUtil.list(q, getDialect(),
+					list = (List<DDMListItem>)QueryUtil.list(q, getDialect(),
 							start, end);
 				}
 			}
@@ -1205,45 +1205,45 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Removes all the d d m list entries where uuid = &#63; from the database.
+	 * Removes all the d d m list items where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
-		for (DDMListEntry ddmListEntry : findByUuid(uuid)) {
-			ddmListEntryPersistence.remove(ddmListEntry);
+		for (DDMListItem ddmListItem : findByUuid(uuid)) {
+			ddmListItemPersistence.remove(ddmListItem);
 		}
 	}
 
 	/**
-	 * Removes all the d d m list entries where listId = &#63; from the database.
+	 * Removes all the d d m list items where listId = &#63; from the database.
 	 *
 	 * @param listId the list ID to search with
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeByListId(long listId) throws SystemException {
-		for (DDMListEntry ddmListEntry : findByListId(listId)) {
-			ddmListEntryPersistence.remove(ddmListEntry);
+		for (DDMListItem ddmListItem : findByListId(listId)) {
+			ddmListItemPersistence.remove(ddmListItem);
 		}
 	}
 
 	/**
-	 * Removes all the d d m list entries from the database.
+	 * Removes all the d d m list items from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void removeAll() throws SystemException {
-		for (DDMListEntry ddmListEntry : findAll()) {
-			ddmListEntryPersistence.remove(ddmListEntry);
+		for (DDMListItem ddmListItem : findAll()) {
+			ddmListItemPersistence.remove(ddmListItem);
 		}
 	}
 
 	/**
-	 * Counts all the d d m list entries where uuid = &#63;.
+	 * Counts all the d d m list items where uuid = &#63;.
 	 *
 	 * @param uuid the uuid to search with
-	 * @return the number of matching d d m list entries
+	 * @return the number of matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByUuid(String uuid) throws SystemException {
@@ -1255,7 +1255,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_DDMLISTENTRY_WHERE);
+			query.append(_SQL_COUNT_DDMLISTITEM_WHERE);
 
 			if (uuid == null) {
 				query.append(_FINDER_COLUMN_UUID_UUID_1);
@@ -1305,10 +1305,10 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Counts all the d d m list entries where listId = &#63;.
+	 * Counts all the d d m list items where listId = &#63;.
 	 *
 	 * @param listId the list ID to search with
-	 * @return the number of matching d d m list entries
+	 * @return the number of matching d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countByListId(long listId) throws SystemException {
@@ -1320,7 +1320,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_DDMLISTENTRY_WHERE);
+			query.append(_SQL_COUNT_DDMLISTITEM_WHERE);
 
 			query.append(_FINDER_COLUMN_LISTID_LISTID_2);
 
@@ -1358,9 +1358,9 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Counts all the d d m list entries.
+	 * Counts all the d d m list items.
 	 *
-	 * @return the number of d d m list entries
+	 * @return the number of d d m list items
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int countAll() throws SystemException {
@@ -1375,7 +1375,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_DDMLISTENTRY);
+				Query q = session.createQuery(_SQL_COUNT_DDMLISTITEM);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -1398,19 +1398,19 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	/**
-	 * Initializes the d d m list entry persistence.
+	 * Initializes the d d m list item persistence.
 	 */
 	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
-						"value.object.listener.com.liferay.portlet.dynamicdatamapping.model.DDMListEntry")));
+						"value.object.listener.com.liferay.portlet.dynamicdatamapping.model.DDMListItem")));
 
 		if (listenerClassNames.length > 0) {
 			try {
-				List<ModelListener<DDMListEntry>> listenersList = new ArrayList<ModelListener<DDMListEntry>>();
+				List<ModelListener<DDMListItem>> listenersList = new ArrayList<ModelListener<DDMListItem>>();
 
 				for (String listenerClassName : listenerClassNames) {
-					listenersList.add((ModelListener<DDMListEntry>)InstanceFactory.newInstance(
+					listenersList.add((ModelListener<DDMListItem>)InstanceFactory.newInstance(
 							listenerClassName));
 				}
 
@@ -1423,7 +1423,7 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	}
 
 	public void destroy() {
-		EntityCacheUtil.removeCache(DDMListEntryImpl.class.getName());
+		EntityCacheUtil.removeCache(DDMListItemImpl.class.getName());
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
@@ -1432,8 +1432,8 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	protected DDMContentPersistence ddmContentPersistence;
 	@BeanReference(type = DDMListPersistence.class)
 	protected DDMListPersistence ddmListPersistence;
-	@BeanReference(type = DDMListEntryPersistence.class)
-	protected DDMListEntryPersistence ddmListEntryPersistence;
+	@BeanReference(type = DDMListItemPersistence.class)
+	protected DDMListItemPersistence ddmListItemPersistence;
 	@BeanReference(type = DDMStorageLinkPersistence.class)
 	protected DDMStorageLinkPersistence ddmStorageLinkPersistence;
 	@BeanReference(type = DDMStructurePersistence.class)
@@ -1444,17 +1444,17 @@ public class DDMListEntryPersistenceImpl extends BasePersistenceImpl<DDMListEntr
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
-	private static final String _SQL_SELECT_DDMLISTENTRY = "SELECT ddmListEntry FROM DDMListEntry ddmListEntry";
-	private static final String _SQL_SELECT_DDMLISTENTRY_WHERE = "SELECT ddmListEntry FROM DDMListEntry ddmListEntry WHERE ";
-	private static final String _SQL_COUNT_DDMLISTENTRY = "SELECT COUNT(ddmListEntry) FROM DDMListEntry ddmListEntry";
-	private static final String _SQL_COUNT_DDMLISTENTRY_WHERE = "SELECT COUNT(ddmListEntry) FROM DDMListEntry ddmListEntry WHERE ";
-	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddmListEntry.uuid IS NULL";
-	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddmListEntry.uuid = ?";
-	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddmListEntry.uuid IS NULL OR ddmListEntry.uuid = ?)";
-	private static final String _FINDER_COLUMN_LISTID_LISTID_2 = "ddmListEntry.listId = ?";
-	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmListEntry.";
-	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMListEntry exists with the primary key ";
-	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMListEntry exists with the key {";
+	private static final String _SQL_SELECT_DDMLISTITEM = "SELECT ddmListItem FROM DDMListItem ddmListItem";
+	private static final String _SQL_SELECT_DDMLISTITEM_WHERE = "SELECT ddmListItem FROM DDMListItem ddmListItem WHERE ";
+	private static final String _SQL_COUNT_DDMLISTITEM = "SELECT COUNT(ddmListItem) FROM DDMListItem ddmListItem";
+	private static final String _SQL_COUNT_DDMLISTITEM_WHERE = "SELECT COUNT(ddmListItem) FROM DDMListItem ddmListItem WHERE ";
+	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddmListItem.uuid IS NULL";
+	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddmListItem.uuid = ?";
+	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddmListItem.uuid IS NULL OR ddmListItem.uuid = ?)";
+	private static final String _FINDER_COLUMN_LISTID_LISTID_2 = "ddmListItem.listId = ?";
+	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmListItem.";
+	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDMListItem exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DDMListItem exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
-	private static Log _log = LogFactoryUtil.getLog(DDMListEntryPersistenceImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(DDMListItemPersistenceImpl.class);
 }

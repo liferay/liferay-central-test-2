@@ -435,6 +435,12 @@ public class DDMListWrapper implements DDMList {
 		return _ddmList.toXmlString();
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmList.getStructure();
+	}
+
 	public DDMList getWrappedDDMList() {
 		return _ddmList;
 	}

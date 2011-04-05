@@ -96,7 +96,7 @@
 	<import class="com.liferay.portlet.documentlibrary.model.DLRepository" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMContent" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMList" />
-	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMListEntry" />
+	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMListItem" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink" />
@@ -1435,14 +1435,15 @@
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="structureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
-	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListEntryImpl" table="DDMListEntry">
+	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemImpl" table="DDMListItem">
 		<cache usage="read-write" />
-		<id name="listEntryId" type="long">
+		<id name="listItemId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="listId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="listId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStorageLinkImpl" table="DDMStorageLink">
 		<cache usage="read-write" />
