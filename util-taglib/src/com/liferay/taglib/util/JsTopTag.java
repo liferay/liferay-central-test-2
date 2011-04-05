@@ -41,8 +41,8 @@ public class JsTopTag extends BaseBodyTagSupport implements BodyTag {
 		StringBundler sb = (StringBundler)request.getAttribute(
 			WebKeys.JS_TOP);
 
-		Set<String> files =
-			(Set<String>)request.getAttribute(WebKeys.JS_FILES_TOP);
+		Set<String> fileNames = (Set<String>)request.getAttribute(
+			WebKeys.JS_TOP_FILE_NAMES);
 
 		if (sb == null) {
 			sb = new StringBundler();
@@ -52,14 +52,14 @@ public class JsTopTag extends BaseBodyTagSupport implements BodyTag {
 
 		sb.append(getBodyContentAsStringBundler());
 
-		if (files == null) {
-			files = new HashSet<String>();
+		if (fileNames == null) {
+			fileNames = new HashSet<String>();
 
-			request.setAttribute(WebKeys.JS_FILES_TOP, files);
+			request.setAttribute(WebKeys.JS_TOP_FILE_NAMES, fileNames);
 		}
 
 		if (Validator.isNotNull(_src)) {
-			files.add(_src);
+			fileNames.add(_src);
 		}
 
 		return EVAL_PAGE;

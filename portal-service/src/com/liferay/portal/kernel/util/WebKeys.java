@@ -41,7 +41,7 @@ public interface WebKeys {
 
 	public static final String JS_TOP = "LIFERAY_SHARED_JAVASCRIPT_TOP";
 
-	public static final String JS_FILES_TOP = "LIFERAY_SHARED_JAVASCRIPT_FILES_TOP";
+	public static final String JS_TOP_FILE_NAMES = "LIFERAY_SHARED_JAVASCRIPT_FILES_TOP";
 
 	public static final String LAST_PATH = "LAST_PATH";
 
