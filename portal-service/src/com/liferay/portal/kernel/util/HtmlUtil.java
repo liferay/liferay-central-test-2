@@ -86,10 +86,6 @@ public class HtmlUtil {
 		return getHtml().unescape(html);
 	}
 
-	public static String unescapeCDATA(String html) {
-		return getHtml().unescapeCDATA(html);
-	}
-
 	public static String wordBreak(String html, int columns) {
 		return getHtml().wordBreak(html, columns);
 	}

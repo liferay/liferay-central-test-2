@@ -346,21 +346,6 @@ public class HtmlImpl implements Html {
 		return text;
 	}
 
-	public String unescapeCDATA(String text) {
-		if (text == null) {
-			return null;
-		}
-
-		if (text.length() == 0) {
-			return StringPool.BLANK;
-		}
-
-		text = StringUtil.replace(text, "&lt;![CDATA[", "<![CDATA[");
-		text = StringUtil.replace(text, "]]&gt;", "]]>");
-
-		return text;
-	}
-
 	public String wordBreak(String text, int columns) {
 		StringBundler sb = new StringBundler();
 

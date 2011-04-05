@@ -224,24 +224,6 @@
 			);
 		},
 
-		escapeCDATA: function(str) {
-			return str.replace(
-				/<!\[CDATA\[|\]\]>/gi,
-				function(match) {
-					var str = '';
-
-					if (match == ']]>') {
-						str = ']]&gt;';
-					}
-					else if (match == '<![CDATA[') {
-						str = '&lt;![CDATA[';
-					}
-
-					return str;
-				}
-			);
-		},
-
 		getColumnId: function(str) {
 			var columnId = str.replace(/layout-column_/, '');
 
