@@ -1146,6 +1146,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			serviceContext.setModifiedDate(auditedModel.getModifiedDate());
 		}
 
+		serviceContext.setCompanyId(getCompanyId());
 		serviceContext.setScopeGroupId(getScopeGroupId());
 
 		return serviceContext;
