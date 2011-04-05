@@ -317,6 +317,12 @@ public class AssetTagLocalServiceUtil {
 		return getService().getGroupTags(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
+		long groupId, int maxElements)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupTags(groupId, maxElements);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTag getTag(long tagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

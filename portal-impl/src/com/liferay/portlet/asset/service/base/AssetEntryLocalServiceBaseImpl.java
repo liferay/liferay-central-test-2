@@ -79,6 +79,10 @@ import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
@@ -1310,6 +1314,43 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the d l file entry local service.
+	 *
+	 * @return the d l file entry local service
+	 */
+	public DLFileEntryLocalService getDLFileEntryLocalService() {
+		return dlFileEntryLocalService;
+	}
+
+	/**
+	 * Sets the d l file entry local service.
+	 *
+	 * @param dlFileEntryLocalService the d l file entry local service
+	 */
+	public void setDLFileEntryLocalService(
+		DLFileEntryLocalService dlFileEntryLocalService) {
+		this.dlFileEntryLocalService = dlFileEntryLocalService;
+	}
+
+	/**
+	 * Gets the d l file entry remote service.
+	 *
+	 * @return the d l file entry remote service
+	 */
+	public DLFileEntryService getDLFileEntryService() {
+		return dlFileEntryService;
+	}
+
+	/**
+	 * Sets the d l file entry remote service.
+	 *
+	 * @param dlFileEntryService the d l file entry remote service
+	 */
+	public void setDLFileEntryService(DLFileEntryService dlFileEntryService) {
+		this.dlFileEntryService = dlFileEntryService;
+	}
+
+	/**
 	 * Gets the d l file entry persistence.
 	 *
 	 * @return the d l file entry persistence
@@ -1344,6 +1385,43 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	 */
 	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
 		this.dlFileEntryFinder = dlFileEntryFinder;
+	}
+
+	/**
+	 * Gets the d l folder local service.
+	 *
+	 * @return the d l folder local service
+	 */
+	public DLFolderLocalService getDLFolderLocalService() {
+		return dlFolderLocalService;
+	}
+
+	/**
+	 * Sets the d l folder local service.
+	 *
+	 * @param dlFolderLocalService the d l folder local service
+	 */
+	public void setDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	/**
+	 * Gets the d l folder remote service.
+	 *
+	 * @return the d l folder remote service
+	 */
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	/**
+	 * Sets the d l folder remote service.
+	 *
+	 * @param dlFolderService the d l folder remote service
+	 */
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
 	}
 
 	/**
@@ -1864,10 +1942,18 @@ public abstract class AssetEntryLocalServiceBaseImpl
 	protected DLAppLocalService dlAppLocalService;
 	@BeanReference(type = DLAppService.class)
 	protected DLAppService dlAppService;
+	@BeanReference(type = DLFileEntryLocalService.class)
+	protected DLFileEntryLocalService dlFileEntryLocalService;
+	@BeanReference(type = DLFileEntryService.class)
+	protected DLFileEntryService dlFileEntryService;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileEntryFinder.class)
 	protected DLFileEntryFinder dlFileEntryFinder;
+	@BeanReference(type = DLFolderLocalService.class)
+	protected DLFolderLocalService dlFolderLocalService;
+	@BeanReference(type = DLFolderService.class)
+	protected DLFolderService dlFolderService;
 	@BeanReference(type = DLFolderPersistence.class)
 	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = DLFolderFinder.class)
