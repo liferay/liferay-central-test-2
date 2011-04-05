@@ -23,7 +23,7 @@
 			/>
 			<fileset
 				dir="lib/portal"
-				includes="xalan.jar,serializer.jar"
+				includes="serializer.jar,xalan.jar"
 			/>
 		</copy>
 
