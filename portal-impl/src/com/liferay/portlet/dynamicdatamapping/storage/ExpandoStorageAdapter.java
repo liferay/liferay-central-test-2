@@ -15,14 +15,23 @@
 package com.liferay.portlet.dynamicdatamapping.storage;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.query.ComparisonOperator;
 import com.liferay.portlet.dynamicdatamapping.storage.query.Condition;
+import com.liferay.portlet.dynamicdatamapping.storage.query.FieldCondition;
+import com.liferay.portlet.dynamicdatamapping.storage.query.Junction;
+import com.liferay.portlet.dynamicdatamapping.storage.query.LogicalOperator;
 import com.liferay.portlet.expando.NoSuchColumnException;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -34,7 +43,17 @@ import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+
+import java.io.Serializable;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -83,7 +102,9 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			OrderByComparator orderByComparator)
 		throws Exception {
 
-		return null;
+		Map<Long, Fields> fieldsMap = _doQuery(classPKs, fieldNames, null);
+
+		return _toList(fieldsMap, orderByComparator);
 	}
 
 	protected List<Fields> doGetFieldsListByDDMStructure(
@@ -91,14 +112,18 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			OrderByComparator orderByComparator)
 		throws Exception {
 
-		return null;
+		long[] expandoRowIds = _getExpandoRowIds(ddmStructureId);
+
+		Map<Long, Fields> fieldsMap = _doQuery(expandoRowIds, fieldNames, null);
+
+		return _toList(fieldsMap, orderByComparator);
 	}
 
 	protected Map<Long, Fields> doGetFieldsMapByClasses(
 			long ddmStructureId, long[] classPKs, List<String> fieldNames)
 		throws Exception {
 
-		return null;
+		return _doQuery(classPKs, fieldNames, null);
 	}
 
 	protected List<Fields> doQuery(
@@ -106,13 +131,20 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			OrderByComparator orderByComparator)
 		throws Exception {
 
-		return null;
+		long[] expandoRowIds = _getExpandoRowIds(ddmStructureId);
+
+		Map<Long, Fields> fieldsMap = _doQuery(
+			expandoRowIds, fieldNames, condition);
+
+		return _toList(fieldsMap, orderByComparator);
 	}
 
 	protected int doQueryCount(long ddmStructureId, Condition condition)
 		throws Exception {
 
-		return 0;
+		long[] expandoRowIds = _getExpandoRowIds(ddmStructureId);
+
+		return _doQueryCount(expandoRowIds, condition);
 	}
 
 	protected void doUpdate(
@@ -168,6 +200,81 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		}
 	}
 
+	private Map<Long, Fields> _doQuery(
+			long[] expandoRowIds, List<String> fieldNames, Condition condition)
+		throws Exception {
+
+		Map<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			stmt = con.createStatement();
+
+			String sql = _toSQL(expandoRowIds, fieldNames, condition, false);
+
+			rs = stmt.executeQuery(sql);
+
+			while (rs.next()) {
+				Long rowId = rs.getLong("rowId_");
+				String data = rs.getString("data_");
+				String name = rs.getString("name");
+				int type = rs.getInt("type_");
+
+				Fields fields = fieldsMap.get(rowId);
+
+				if (fields == null) {
+					fields = new Fields();
+
+					fieldsMap.put(rowId, fields);
+				}
+
+				Serializable value =
+					ExpandoConverterUtil.getAttributeFromString(type, data);
+
+				fields.put(new Field(name, value));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, stmt, rs);
+		}
+
+		return fieldsMap;
+	}
+
+	private int _doQueryCount(
+		long[] expandoRowIds, Condition condition) throws Exception {
+
+		int count = 0;
+
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			stmt = con.createStatement();
+
+			String sql = _toSQL(expandoRowIds, null, condition, true);
+
+			rs = stmt.executeQuery(sql);
+
+			if (rs.next()) {
+				count = rs.getInt("COUNT_VALUE");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, stmt, rs);
+		}
+
+		return count;
+	}
+
 	private long[] _getExpandoRowIds(long ddmStructureId)
 		throws SystemException {
 
@@ -207,6 +314,154 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		_checkExpandoColumns(expandoTable, fields);
 
 		return expandoTable;
+	}
+
+	private List<Fields> _toList(
+		Map<Long, Fields> fieldsMap, OrderByComparator orderByComparator) {
+
+		List<Fields> fieldsList = ListUtil.fromCollection(fieldsMap.values());
+
+		if (orderByComparator != null) {
+			Collections.sort(fieldsList, orderByComparator);
+		}
+
+		return fieldsList;
+	}
+
+	private String _toSQL(
+		long[] expandoRowIds, List<String> fieldNames, Condition condition,
+		boolean count) {
+
+		StringBundler sb = new StringBundler();
+
+		if (count) {
+			sb.append("SELECT COUNT( DISTINCT(ExpandoValue.rowId_) )  ");
+			sb.append("AS COUNT_VALUE ");
+		}
+		else {
+			sb.append("SELECT ExpandoValue.rowId_, ExpandoValue.data_, ");
+			sb.append("ExpandoColumn.name, ExpandoColumn.type_ ");
+		}
+
+		sb.append("FROM ExpandoValue ");
+		sb.append("INNER JOIN ExpandoColumn ON ");
+		sb.append("(ExpandoColumn.columnId = ExpandoValue.columnId) ");
+		sb.append("WHERE ");
+		sb.append("ExpandoValue.rowId_ IN ( ");
+
+		if (condition == null) {
+			sb.append(StringUtil.merge(expandoRowIds));
+		}
+		else {
+			sb.append("SELECT DISTINCT (ExpandoValue.rowId_) ");
+			sb.append("FROM ExpandoValue ");
+			sb.append("INNER JOIN ExpandoColumn ON ");
+			sb.append("(ExpandoColumn.columnId = ExpandoValue.columnId) ");
+			sb.append("WHERE ");
+			sb.append("ExpandoValue.rowId_ IN ( ");
+			sb.append(StringUtil.merge(expandoRowIds));
+			sb.append(") AND ");
+			sb.append(_toSQL(condition));
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		if (fieldNames != null && !fieldNames.isEmpty()) {
+			sb.append(" AND ExpandoColumn.name IN ( ");
+
+			for (int i = 0; i < fieldNames.size(); i++) {
+				sb.append(StringUtil.quote(fieldNames.get(i)));
+
+				if ((i + 1) < fieldNames.size()) {
+					sb.append(StringPool.COMMA);
+				}
+				else {
+					sb.append(StringPool.CLOSE_PARENTHESIS);
+				}
+			}
+		}
+
+		sb.append(StringPool.SPACE);
+
+		return sb.toString();
+	}
+
+	private String _toSQL(Condition condition) {
+		StringBundler sb = new StringBundler();
+
+		if (condition.isJunction()) {
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(_toSQL((Junction)condition));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+		}
+		else {
+			sb.append(_toSQL((FieldCondition)condition));
+		}
+
+		return sb.toString();
+	}
+
+	private String _toSQL(FieldCondition fieldCondition) {
+		StringBundler sb = new StringBundler(10);
+
+		sb.append("(ExpandoColumn.name = '");
+		sb.append(fieldCondition.getName());
+		sb.append("' AND ");
+
+		Object value = fieldCondition.getValue();
+
+		ComparisonOperator comparisonOperator =
+			fieldCondition.getComparisonOperator();
+
+		sb.append("ExpandoValue.data_ ");
+		sb.append(comparisonOperator);
+		sb.append(StringPool.SPACE);
+
+		if ((value.getClass() == String.class) &&
+			(!comparisonOperator.equals(ComparisonOperator.IN))) {
+
+			sb.append(StringPool.APOSTROPHE);
+		}
+		else if (comparisonOperator.equals(ComparisonOperator.IN)) {
+			sb.append(StringPool.OPEN_PARENTHESIS);
+		}
+
+		sb.append(value);
+
+		if ((value.getClass() == String.class) &&
+			(!comparisonOperator.equals(ComparisonOperator.IN))) {
+
+			sb.append(StringPool.APOSTROPHE);
+		}
+		else if (comparisonOperator.equals(ComparisonOperator.IN)) {
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		return sb.toString();
+	}
+
+	private String _toSQL(Junction junction) {
+		StringBundler sb = new StringBundler();
+
+		LogicalOperator logicalOperator = junction.getLogicalOperator();
+
+		Iterator<Condition> itr = junction.iterator();
+
+		while (itr.hasNext()) {
+			Condition condition = itr.next();
+
+			sb.append(_toSQL(condition));
+
+			if (itr.hasNext()) {
+				sb.append(StringPool.SPACE);
+				sb.append(logicalOperator.toString());
+				sb.append(StringPool.SPACE);
+			}
+		}
+
+		return sb.toString();
 	}
 
 	private void _updateFields(
