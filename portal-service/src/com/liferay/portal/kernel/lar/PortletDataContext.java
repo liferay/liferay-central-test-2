@@ -17,9 +17,12 @@ package com.liferay.portal.kernel.lar;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -60,6 +63,11 @@ public interface PortletDataContext extends Serializable {
 	public void addAssetTags(
 		String className, long classPK, String[] assetTagNames);
 
+	public void addClassedModel(
+			Element element, String path, ClassedModel classedModel,
+			String namespace)
+		throws PortalException, SystemException;
+
 	public void addComments(Class<?> classObj, long classPK)
 		throws SystemException;
 
@@ -98,6 +106,12 @@ public interface PortletDataContext extends Serializable {
 
 	public void addZipEntry(String name, StringBuilder sb)
 		throws SystemException;
+
+	public ServiceContext createServiceContext(
+		Element element, ClassedModel classedModel, String namespace);
+
+	public ServiceContext createServiceContext(
+		String path, ClassedModel classedModel, String namespace);
 
 	public Object fromXML(byte[] bytes);
 
@@ -196,6 +210,11 @@ public interface PortletDataContext extends Serializable {
 	public boolean hasNotUniquePerLayout(String dataKey);
 
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey);
+
+	public void importClassedModel(
+			ClassedModel classedModel, ClassedModel newClassedModel,
+			String namespace)
+		throws PortalException, SystemException;
 
 	public void importComments(
 			Class<?> classObj, long classPK, long newClassPK, long groupId)

@@ -185,7 +185,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBCategory category =
 				(MBCategory)portletDataContext.getZipEntryAsObject(path);
 
-			importCategory(portletDataContext, category);
+			importCategory(portletDataContext, path, category);
 		}
 
 		Element messagesElement = rootElement.element("messages");
@@ -238,7 +238,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				MBBan ban = (MBBan)portletDataContext.getZipEntryAsObject(path);
 
-				importBan(portletDataContext, ban);
+				importBan(portletDataContext, userBanElement, ban);
 			}
 		}
 
@@ -262,12 +262,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element userBanElement = userBansElement.addElement("user-ban");
 
-		userBanElement.addAttribute("path", path);
-
 		ban.setBanUserUuid(ban.getBanUserUuid());
-		ban.setUserUuid(ban.getUserUuid());
 
-		portletDataContext.addZipEntry(path, ban);
+		portletDataContext.addClassedModel(
+			userBanElement, path, ban, _NAMESPACE);
 	}
 
 	protected void exportCategory(
@@ -287,14 +285,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				Element categoryElement = categoriesElement.addElement(
 					"category");
 
-				categoryElement.addAttribute("path", path);
-
-				category.setUserUuid(category.getUserUuid());
-
-				portletDataContext.addPermissions(
-					MBCategory.class, category.getCategoryId());
-
-				portletDataContext.addZipEntry(path, category);
+				portletDataContext.addClassedModel(
+					categoryElement, path, category, _NAMESPACE);
 			}
 		}
 
@@ -330,26 +322,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.isPathNotProcessed(path)) {
 			Element messageElement = messagesElement.addElement("message");
 
-			messageElement.addAttribute("path", path);
-
-			message.setUserUuid(message.getUserUuid());
 			message.setPriority(message.getPriority());
-
-			portletDataContext.addPermissions(
-				MBMessage.class, message.getMessageId());
-
-			portletDataContext.addLocks(
-				MBThread.class, String.valueOf(message.getThreadId()));
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-				portletDataContext.addRatingsEntries(
-					MBMessage.class, message.getMessageId());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-				portletDataContext.addAssetTags(
-					MBMessage.class, message.getMessageId());
-			}
 
 			if (portletDataContext.getBooleanParameter(
 					_NAMESPACE, "attachments") &&
@@ -390,7 +363,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			portletDataContext.addZipEntry(path, message);
+			portletDataContext.addClassedModel(
+				messageElement, path, message, _NAMESPACE);
 		}
 	}
 
@@ -408,11 +382,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element messageFlagElement = messageFlagsElement.addElement(
 			"message-flag");
 
-		messageFlagElement.addAttribute("path", path);
-
-		messageFlag.setUserUuid(messageFlag.getUserUuid());
-
-		portletDataContext.addZipEntry(path, messageFlag);
+		portletDataContext.addClassedModel(
+			messageFlagElement, path, messageFlag, _NAMESPACE);
 	}
 
 	protected void exportParentCategory(
@@ -438,14 +409,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.isPathNotProcessed(path)) {
 			Element categoryElement = categoriesElement.addElement("category");
 
-			categoryElement.addAttribute("path", path);
-
-			category.setUserUuid(category.getUserUuid());
-
-			portletDataContext.addPermissions(
-				MBCategory.class, category.getCategoryId());
-
-			portletDataContext.addZipEntry(path, category);
+			portletDataContext.addClassedModel(
+				categoryElement, path, category, _NAMESPACE);
 		}
 	}
 
@@ -536,16 +501,15 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected void importBan(PortletDataContext portletDataContext, MBBan ban)
+	protected void importBan(
+			PortletDataContext portletDataContext, Element userBanElement,
+			MBBan ban)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(ban.getUserUuid());
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setCreateDate(ban.getCreateDate());
-		serviceContext.setModifiedDate(ban.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			userBanElement, ban, _NAMESPACE);
 
 		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
 
@@ -564,7 +528,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importCategory(
-			PortletDataContext portletDataContext, MBCategory category)
+			PortletDataContext portletDataContext, String categoryPath,
+			MBCategory category)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(category.getUserUuid());
@@ -594,13 +559,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		String outPassword = null;
 		boolean mailingListActive = false;
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCreateDate(category.getCreateDate());
-		serviceContext.setModifiedDate(category.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			categoryPath, category, _NAMESPACE);
 
 		if ((parentCategoryId !=
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
@@ -613,7 +573,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBCategory parentCategory =
 				(MBCategory)portletDataContext.getZipEntryAsObject(path);
 
-			importCategory(portletDataContext, parentCategory);
+			importCategory(portletDataContext, path, parentCategory);
 
 			parentCategoryId = MapUtil.getLong(
 				categoryPKs, category.getParentCategoryId(),
@@ -659,12 +619,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				outPassword, mailingListActive, serviceContext);
 		}
 
-		categoryPKs.put(
-			category.getCategoryId(), importedCategory.getCategoryId());
-
-		portletDataContext.importPermissions(
-			MBCategory.class, category.getCategoryId(),
-			importedCategory.getCategoryId());
+		portletDataContext.importClassedModel(
+			category, importedCategory, _NAMESPACE);
 	}
 
 	protected void importMessage(
@@ -724,21 +680,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		String[] assetTagNames = null;
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = portletDataContext.getAssetTagNames(
-				MBMessage.class, message.getMessageId());
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setCreateDate(message.getCreateDate());
-		serviceContext.setModifiedDate(message.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			messageElement, message, _NAMESPACE);
 
 		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -754,7 +697,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBCategory category =
 				(MBCategory)portletDataContext.getZipEntryAsObject(path);
 
-			importCategory(portletDataContext, category);
+			importCategory(portletDataContext, path, category);
 
 			categoryId = MapUtil.getLong(
 				categoryPKs, message.getCategoryId(), message.getCategoryId());
@@ -794,21 +737,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		threadPKs.put(message.getThreadId(), importedMessage.getThreadId());
-		messagePKs.put(message.getMessageId(), importedMessage.getMessageId());
 
-		portletDataContext.importLocks(
-			MBThread.class, String.valueOf(message.getThreadId()),
-			String.valueOf(importedMessage.getThreadId()));
-
-		portletDataContext.importPermissions(
-			MBMessage.class, message.getMessageId(),
-			importedMessage.getMessageId());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.importRatingsEntries(
-				MBMessage.class, message.getMessageId(),
-				importedMessage.getMessageId());
-		}
+		portletDataContext.importClassedModel(
+			message, importedMessage, _NAMESPACE);
 	}
 
 	protected void importMessageFlag(

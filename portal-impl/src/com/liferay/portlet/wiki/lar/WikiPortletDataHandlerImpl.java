@@ -73,14 +73,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (portletDataContext.isPathNotProcessed(path)) {
 				Element nodeElement = nodesElement.addElement("node");
 
-				nodeElement.addAttribute("path", path);
-
-				node.setUserUuid(node.getUserUuid());
-
-				portletDataContext.addPermissions(
-					WikiNode.class, node.getNodeId());
-
-				portletDataContext.addZipEntry(path, node);
+				portletDataContext.addClassedModel(
+					nodeElement, path, node, _NAMESPACE);
 			}
 		}
 
@@ -164,14 +158,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				userId, node.getName(), node.getDescription(), serviceContext);
 		}
 
-		Map<Long, Long> nodePKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				WikiNode.class);
-
-		nodePKs.put(node.getNodeId(), importedNode.getNodeId());
-
-		portletDataContext.importPermissions(
-			WikiNode.class, node.getNodeId(), importedNode.getNodeId());
+		portletDataContext.importClassedModel(node, importedNode, _NAMESPACE);
 	}
 
 	public static void importPage(
@@ -193,31 +180,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		page.setContent(content);
 
-		long[] assetCategoryIds = null;
-		String[] assetTagNames = null;
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories") &&
-			page.isHead()) {
-
-			assetCategoryIds = portletDataContext.getAssetCategoryIds(
-				WikiPage.class, page.getResourcePrimKey());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags") &&
-			page.isHead()) {
-
-			assetTagNames = portletDataContext.getAssetTagNames(
-				WikiPage.class, page.getResourcePrimKey());
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetCategoryIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setCreateDate(page.getCreateDate());
-		serviceContext.setModifiedDate(page.getModifiedDate());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			pageElement, page, _NAMESPACE);
 
 		if (page.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -283,28 +247,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		if (page.isHead()) {
-			portletDataContext.importPermissions(
-				WikiPage.class, page.getResourcePrimKey(),
-				importedPage.getResourcePrimKey());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments") &&
-			page.isHead()) {
-
-			portletDataContext.importComments(
-				WikiPage.class, page.getResourcePrimKey(),
-				importedPage.getResourcePrimKey(),
-				portletDataContext.getScopeGroupId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings") &&
-			page.isHead()) {
-
-			portletDataContext.importRatingsEntries(
-				WikiPage.class, page.getResourcePrimKey(),
-				importedPage.getResourcePrimKey());
-		}
+		portletDataContext.importClassedModel(page, importedPage, _NAMESPACE);
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
@@ -356,13 +299,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element nodeElement = nodesElement.addElement("node");
 
-		nodeElement.addAttribute("path", path);
-
-		node.setUserUuid(node.getUserUuid());
-
-		portletDataContext.addPermissions(WikiNode.class, node.getNodeId());
-
-		portletDataContext.addZipEntry(path, node);
+		portletDataContext.addClassedModel(nodeElement, path, node, _NAMESPACE);
 	}
 
 	protected static void exportPage(
@@ -392,10 +329,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				pageElement = pagesElement.addElement("page");
 			}
 
-			pageElement.addAttribute("path", path);
-
-			page.setUserUuid(page.getUserUuid());
-
 			String content =
 				JournalPortletDataHandlerImpl.exportReferencedContent(
 					portletDataContext, dlFoldersElement, dlFileEntriesElement,
@@ -407,39 +340,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			String imagePath = getPageImagePath(portletDataContext, page);
 
 			pageElement.addAttribute("image-path", imagePath);
-
-			portletDataContext.addPermissions(
-				WikiPage.class, page.getResourcePrimKey());
-
-			if (portletDataContext.getBooleanParameter(
-					_NAMESPACE, "categories") &&
-				page.isHead()) {
-
-				portletDataContext.addAssetCategories(
-					WikiPage.class, page.getResourcePrimKey());
-			}
-
-			if (portletDataContext.getBooleanParameter(
-					_NAMESPACE, "comments") &&
-				page.isHead()) {
-
-				portletDataContext.addComments(
-					WikiPage.class, page.getResourcePrimKey());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings") &&
-				page.isHead()) {
-
-				portletDataContext.addRatingsEntries(
-					WikiPage.class, page.getResourcePrimKey());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags") &&
-				page.isHead()) {
-
-				portletDataContext.addAssetTags(
-					WikiPage.class, page.getResourcePrimKey());
-			}
 
 			if (portletDataContext.getBooleanParameter(
 					_NAMESPACE, "attachments") &&
@@ -467,7 +367,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				page.setAttachmentsDir(page.getAttachmentsDir());
 			}
 
-			portletDataContext.addZipEntry(path, page);
+			portletDataContext.addClassedModel(
+				pageElement, path, page, _NAMESPACE);
 		}
 
 		exportNode(portletDataContext, nodesElement, page.getNodeId());

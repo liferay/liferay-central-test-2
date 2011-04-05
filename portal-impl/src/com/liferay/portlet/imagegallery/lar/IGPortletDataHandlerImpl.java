@@ -83,24 +83,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element imageElement = imagesElement.addElement("image");
 
-		imageElement.addAttribute("path", path);
-
-		image.setUserUuid(image.getUserUuid());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
-			portletDataContext.addAssetCategories(
-				IGImage.class, image.getImageId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.addRatingsEntries(
-				IGImage.class, image.getImageId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			portletDataContext.addAssetTags(IGImage.class, image.getImageId());
-		}
-
 		Image largeImage = ImageUtil.findByPrimaryKey(image.getLargeImageId());
 
 		image.setImageType(largeImage.getType());
@@ -115,7 +97,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.addZipEntry(binPath, largeImage.getTextObj());
 		}
 
-		portletDataContext.addZipEntry(path, image);
+		portletDataContext.addClassedModel(
+			imageElement, path, image, _NAMESPACE);
 	}
 
 	public static String getImagePath(
@@ -144,7 +127,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		IGFolder folder = (IGFolder)portletDataContext.getZipEntryAsObject(
 			path);
 
-		importFolder(portletDataContext, folder);
+		importFolder(portletDataContext, path, folder);
 	}
 
 	public static void importImage(
@@ -161,7 +144,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		IGImage image = (IGImage)portletDataContext.getZipEntryAsObject(path);
 
-		importImage(portletDataContext, image, binPath);
+		importImage(portletDataContext, imageElement, image, binPath);
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
@@ -185,7 +168,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importFolder(
-			PortletDataContext portletDataContext, IGFolder folder)
+			PortletDataContext portletDataContext, String folderPath,
+			IGFolder folder)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(folder.getUserUuid());
@@ -197,13 +181,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCreateDate(folder.getCreateDate());
-		serviceContext.setModifiedDate(folder.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			folderPath, folder, _NAMESPACE);
 
 		if ((parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -214,7 +193,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolder parentFolder =
 				(IGFolder)portletDataContext.getZipEntryAsObject(path);
 
-			importFolder(portletDataContext, parentFolder);
+			importFolder(portletDataContext, path, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),
@@ -262,15 +241,13 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext);
 		}
 
-		folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
-
-		portletDataContext.importPermissions(
-			IGFolder.class, folder.getFolderId(), importedFolder.getFolderId());
+		portletDataContext.importClassedModel(
+			folder, importedFolder, _NAMESPACE);
 	}
 
 	protected static void importImage(
-			PortletDataContext portletDataContext, IGImage image,
-			String binPath)
+			PortletDataContext portletDataContext, Element imageElement,
+			IGImage image, String binPath)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(image.getUserUuid());
@@ -309,27 +286,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		FileUtil.write(imageFile, bytes);
 
-		long[] assetCategoryIds = null;
-		String[] assetTagNames = null;
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = portletDataContext.getAssetCategoryIds(
-				IGImage.class, image.getImageId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = portletDataContext.getAssetTagNames(
-				IGImage.class, image.getImageId());
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetCategoryIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setCreateDate(image.getCreateDate());
-		serviceContext.setModifiedDate(image.getModifiedDate());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			imageElement, image, _NAMESPACE);
 
 		if ((folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == image.getFolderId())) {
@@ -339,7 +297,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolder folder = (IGFolder)portletDataContext.getZipEntryAsObject(
 				path);
 
-			importFolder(portletDataContext, folder);
+			importFolder(portletDataContext, path, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, image.getFolderId(), image.getFolderId());
@@ -423,19 +381,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		portletDataContext.importPermissions(
-			IGImage.class, image.getImageId(), importedImage.getImageId());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.importRatingsEntries(
-				IGImage.class, image.getImageId(), importedImage.getImageId());
-		}
-
-		Map<Long, Long> igImagePKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				IGImage.class);
-
-		igImagePKs.put(image.getImageId(), importedImage.getImageId());
+		portletDataContext.importClassedModel(image, importedImage, _NAMESPACE);
 	}
 
 	protected static void exportFolder(
@@ -453,14 +399,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (portletDataContext.isPathNotProcessed(path)) {
 				Element folderElement = foldersElement.addElement("folder");
 
-				folderElement.addAttribute("path", path);
-
-				folder.setUserUuid(folder.getUserUuid());
-
-				portletDataContext.addPermissions(
-					IGFolder.class, folder.getFolderId());
-
-				portletDataContext.addZipEntry(path, folder);
+				portletDataContext.addClassedModel(
+					folderElement, path, folder, _NAMESPACE);
 			}
 		}
 
@@ -492,14 +432,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.isPathNotProcessed(path)) {
 			Element folderElement = foldersElement.addElement("folder");
 
-			folderElement.addAttribute("path", path);
-
-			folder.setUserUuid(folder.getUserUuid());
-
-			portletDataContext.addPermissions(
-				IGFolder.class, folder.getFolderId());
-
-			portletDataContext.addZipEntry(path, folder);
+			portletDataContext.addClassedModel(
+				folderElement, path, folder, _NAMESPACE);
 		}
 	}
 
@@ -688,7 +622,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolder folder = (IGFolder)portletDataContext.getZipEntryAsObject(
 				path);
 
-			importFolder(portletDataContext, folder);
+			importFolder(portletDataContext, path, folder);
 		}
 
 		Element imagesElement = rootElement.element("images");
@@ -707,7 +641,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			String binPath = imageElement.attributeValue("bin-path");
 
-			importImage(portletDataContext, image, binPath);
+			importImage(portletDataContext, imageElement, image, binPath);
 		}
 
 		return null;

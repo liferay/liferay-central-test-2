@@ -135,8 +135,8 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element questionsElement = rootElement.element("questions");
 
-		for (Element questionEl : questionsElement.elements("question")) {
-			String path = questionEl.attributeValue("path");
+		for (Element questionElement : questionsElement.elements("question")) {
+			String path = questionElement.attributeValue("path");
 
 			if (!portletDataContext.isPathNotProcessed(path)) {
 				continue;
@@ -146,7 +146,7 @@ public class PollsDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				(PollsQuestion)portletDataContext.getZipEntryAsObject(path);
 
 			PollsPortletDataHandlerImpl.importQuestion(
-				portletDataContext, question);
+				portletDataContext, questionElement, question);
 		}
 
 		Element choicesElement = rootElement.element("choices");

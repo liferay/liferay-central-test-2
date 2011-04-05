@@ -75,9 +75,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element choiceElement = questionsElement.addElement("choice");
 
-		choiceElement.addAttribute("path", path);
-
-		portletDataContext.addZipEntry(path, choice);
+		portletDataContext.addClassedModel(
+			choiceElement, path, choice, _NAMESPACE);
 	}
 
 	protected static void exportQuestion(
@@ -98,10 +97,6 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element questionElement = questionsElement.addElement("question");
 
-		questionElement.addAttribute("path", path);
-
-		question.setUserUuid(question.getUserUuid());
-
 		List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
 			question.getQuestionId());
 
@@ -118,10 +113,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		portletDataContext.addPermissions(
-			PollsQuestion.class, question.getQuestionId());
-
-		portletDataContext.addZipEntry(path, question);
+		portletDataContext.addClassedModel(
+			questionElement, path, question, _NAMESPACE);
 	}
 
 	protected static void exportVote(
@@ -135,11 +128,9 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element voteEl = questionsElement.addElement("vote");
+		Element voteElement = questionsElement.addElement("vote");
 
-		voteEl.addAttribute("path", path);
-
-		portletDataContext.addZipEntry(path, vote);
+		portletDataContext.addClassedModel(voteElement, path, vote, _NAMESPACE);
 	}
 
 	protected static String getChoicePath(
@@ -223,19 +214,13 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 				new ServiceContext());
 		}
 
-		Map<Long, Long> choicePKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				PollsChoice.class);
-
-		choicePKs.put(choice.getChoiceId(), importedChoice.getChoiceId());
-
-		portletDataContext.importPermissions(
-			PollsChoice.class, choice.getChoiceId(),
-			importedChoice.getChoiceId());
+		portletDataContext.importClassedModel(
+			choice, importedChoice, _NAMESPACE);
 	}
 
 	protected static void importQuestion(
-			PortletDataContext portletDataContext, PollsQuestion question)
+			PortletDataContext portletDataContext, Element questionElement,
+			PollsQuestion question)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(question.getUserUuid());
@@ -266,13 +251,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCreateDate(question.getCreateDate());
-		serviceContext.setModifiedDate(question.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			questionElement, question, _NAMESPACE);
 
 		PollsQuestion importedQuestion = null;
 
@@ -305,16 +285,8 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 				expirationMinute, neverExpire, null, serviceContext);
 		}
 
-		Map<Long, Long> questionPKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				PollsQuestion.class);
-
-		questionPKs.put(
-			question.getQuestionId(), importedQuestion.getQuestionId());
-
-		portletDataContext.importPermissions(
-			PollsQuestion.class, question.getQuestionId(),
-			importedQuestion.getQuestionId());
+		portletDataContext.importClassedModel(
+			question, importedQuestion, _NAMESPACE);
 	}
 
 	protected static void importVote(
@@ -416,7 +388,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			PollsQuestion question =
 				(PollsQuestion)portletDataContext.getZipEntryAsObject(path);
 
-			importQuestion(portletDataContext, question);
+			importQuestion(portletDataContext, questionElement, question);
 		}
 
 		Element choicesElement = rootElement.element("choices");

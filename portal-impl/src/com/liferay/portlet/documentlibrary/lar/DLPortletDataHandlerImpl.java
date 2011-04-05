@@ -96,36 +96,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element fileEntryElement = fileEntriesElement.addElement("file-entry");
 
-		fileEntryElement.addAttribute("path", path);
-
-		fileEntry.setUserUuid(fileEntry.getUserUuid());
-
-		portletDataContext.addLocks(
-			FileEntry.class, String.valueOf(fileEntry.getFileEntryId()));
-
-		portletDataContext.addPermissions(
-			FileEntry.class, fileEntry.getFileEntryId());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
-			portletDataContext.addAssetCategories(
-				FileEntry.class, fileEntry.getFileEntryId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
-			portletDataContext.addComments(
-				FileEntry.class, fileEntry.getFileEntryId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.addRatingsEntries(
-				FileEntry.class, fileEntry.getFileEntryId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			portletDataContext.addAssetTags(
-				FileEntry.class, fileEntry.getFileEntryId());
-		}
-
 		if (!portletDataContext.isPerformDirectBinaryImport()) {
 			String binPath = getFileEntryBinPath(portletDataContext, fileEntry);
 
@@ -158,8 +128,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		portletDataContext.addZipEntry(path, fileEntry);
-
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ranks")) {
 			List<DLFileRank> fileRanks = DLFileRankUtil.findByFileEntryId(
 				fileEntry.getFileEntryId());
@@ -169,6 +137,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					portletDataContext, fileRanksElement, fileRank);
 			}
 		}
+
+		portletDataContext.addClassedModel(
+			fileEntryElement, path, fileEntry, _NAMESPACE);
 	}
 
 	public static String getFileEntryPath(
@@ -222,15 +193,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				FileEntry.class, fileEntry.getFileEntryId());
 		}
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetCategoryIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setCreateDate(fileEntry.getCreateDate());
-		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			fileEntryElement, fileEntry, _NAMESPACE);
 
 		serviceContext.setAttribute("contentType", fileEntry.getMimeType());
 		serviceContext.setAttribute("extension", fileEntry.getExtension());
@@ -257,7 +221,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Folder folder = (Folder)portletDataContext.getZipEntryAsObject(
 				folderPath);
 
-			importFolder(portletDataContext, folder);
+			importFolder(portletDataContext, folderPath, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
@@ -378,41 +342,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		Map<Long, Long> fileEntryPKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				FileEntry.class);
-
-		fileEntryPKs.put(
-			fileEntry.getFileEntryId(), importedFileEntry.getFileEntryId());
-
 		Map<String, String> fileEntryTitles =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				FileEntry.class.getName() + ".title");
 
 		fileEntryTitles.put(fileEntry.getTitle(), importedFileEntry.getTitle());
 
-		String lockKey = String.valueOf(fileEntry.getFileEntryId());
-
-		String newLockKey = String.valueOf(importedFileEntry.getFileEntryId());
-
-		portletDataContext.importLocks(FileEntry.class, lockKey, newLockKey);
-
-		portletDataContext.importPermissions(
-			FileEntry.class, fileEntry.getFileEntryId(),
-			importedFileEntry.getFileEntryId());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
-			portletDataContext.importComments(
-				FileEntry.class, fileEntry.getFileEntryId(),
-				importedFileEntry.getFileEntryId(),
-				portletDataContext.getScopeGroupId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.importRatingsEntries(
-				FileEntry.class, fileEntry.getFileEntryId(),
-				importedFileEntry.getFileEntryId());
-		}
+		portletDataContext.importClassedModel(
+			fileEntry, importedFileEntry, _NAMESPACE);
 	}
 
 	public static void importFileRank(
@@ -443,7 +380,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Folder folder = (Folder)portletDataContext.getZipEntryAsObject(path);
 
-		importFolder(portletDataContext, folder);
+		importFolder(portletDataContext, path, folder);
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
@@ -481,11 +418,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element fileRankElement = fileRanksElement.addElement("file-rank");
 
-		fileRankElement.addAttribute("path", path);
-
-		fileRank.setUserUuid(fileRank.getUserUuid());
-
-		portletDataContext.addZipEntry(path, fileRank);
+		portletDataContext.addClassedModel(
+			fileRankElement, path, fileRank, _NAMESPACE);
 	}
 
 	protected static void exportFileShortcut(
@@ -502,14 +436,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileShortcutElement = fileShortcutsElement.addElement(
 				"file-shortcut");
 
-			fileShortcutElement.addAttribute("path", path);
-
-			fileShortcut.setUserUuid(fileShortcut.getUserUuid());
-
-			portletDataContext.addPermissions(
-				DLFileShortcut.class, fileShortcut.getFileShortcutId());
-
-			portletDataContext.addZipEntry(path, fileShortcut);
+			portletDataContext.addClassedModel(
+				fileShortcutElement, path, fileShortcut, _NAMESPACE);
 		}
 	}
 
@@ -528,14 +456,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (portletDataContext.isPathNotProcessed(path)) {
 				Element folderElement = foldersElement.addElement("folder");
 
-				folderElement.addAttribute("path", path);
-
-				folder.setUserUuid(folder.getUserUuid());
-
-				portletDataContext.addPermissions(
-					Folder.class, folder.getFolderId());
-
-				portletDataContext.addZipEntry(path, folder);
+				portletDataContext.addClassedModel(
+					folderElement, path, folder, _NAMESPACE);
 			}
 		}
 
@@ -590,14 +512,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.isPathNotProcessed(path)) {
 			Element folderElement = foldersElement.addElement("folder");
 
-			folderElement.addAttribute("path", path);
-
-			folder.setUserUuid(folder.getUserUuid());
-
-			portletDataContext.addPermissions(
-				Folder.class, folder.getFolderId());
-
-			portletDataContext.addZipEntry(path, folder);
+			portletDataContext.addClassedModel(
+				folderElement, path, folder, _NAMESPACE);
 		}
 	}
 
@@ -709,21 +625,21 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importFileRank(
-			PortletDataContext portletDataContext, DLFileRank rank)
+			PortletDataContext portletDataContext, DLFileRank fileRank)
 		throws Exception {
 
-		long userId = portletDataContext.getUserId(rank.getUserUuid());
+		long userId = portletDataContext.getUserId(fileRank.getUserUuid());
 
 		Map<Long, Long> fileEntryPKs =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				FileEntry.class);
 
 		long fileEntryId = MapUtil.getLong(
-			fileEntryPKs, rank.getFileEntryId(), rank.getFileEntryId());
+			fileEntryPKs, fileRank.getFileEntryId(), fileRank.getFileEntryId());
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setCreateDate(rank.getCreateDate());
+		serviceContext.setCreateDate(fileRank.getCreateDate());
 
 		DLAppLocalServiceUtil.updateFileRank(
 			portletDataContext.getScopeGroupId(),
@@ -732,7 +648,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importFileShortcut(
-			PortletDataContext portletDataContext, DLFileShortcut fileShortcut)
+			PortletDataContext portletDataContext, Element fileShortcutElement,
+			DLFileShortcut fileShortcut)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(fileShortcut.getUserUuid());
@@ -752,32 +669,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			groupId = folder.getRepositoryId();
 		}
 
-		long toFileEntryId = fileShortcut.getToFileEntryId();
-
-		FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(toFileEntryId);
-
-		long[] assetCategoryIds = null;
-		String[] assetTagNames = null;
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = portletDataContext.getAssetCategoryIds(
-				FileEntry.class, fileEntry.getFileEntryId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = portletDataContext.getAssetTagNames(
-				FileEntry.class, fileEntry.getFileEntryId());
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetCategoryIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setCreateDate(fileShortcut.getCreateDate());
-		serviceContext.setModifiedDate(fileShortcut.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			fileShortcutElement, fileShortcut, _NAMESPACE);
 
 		DLFileShortcut importedFileShortcut = null;
 
@@ -791,22 +684,23 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				serviceContext.setUuid(fileShortcut.getUuid());
 
 				importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
-					userId, groupId, folderId, toFileEntryId, serviceContext);
+					userId, groupId, folderId, fileShortcut.getToFileEntryId(),
+					serviceContext);
 			}
 			else {
 				importedFileShortcut = DLAppLocalServiceUtil.updateFileShortcut(
 					userId, existingFileShortcut.getFileShortcutId(), folderId,
-					toFileEntryId, serviceContext);
+					fileShortcut.getToFileEntryId(), serviceContext);
 			}
 		}
 		else {
 			importedFileShortcut = DLAppLocalServiceUtil.addFileShortcut(
-				userId, groupId, folderId, toFileEntryId, serviceContext);
+				userId, groupId, folderId, fileShortcut.getToFileEntryId(),
+				serviceContext);
 		}
 
-		portletDataContext.importPermissions(
-			DLFileShortcut.class, fileShortcut.getPrimaryKey(),
-			importedFileShortcut.getPrimaryKey());
+		portletDataContext.importClassedModel(
+			fileShortcut, importedFileShortcut, _NAMESPACE);
 	}
 
 	protected static void importFileShortcut(
@@ -822,11 +716,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		DLFileShortcut fileShortcut =
 			(DLFileShortcut)portletDataContext.getZipEntryAsObject(path);
 
-		importFileShortcut(portletDataContext, fileShortcut);
+		importFileShortcut(
+			portletDataContext, fileShortcutElement, fileShortcut);
 	}
 
 	protected static void importFolder(
-			PortletDataContext portletDataContext, Folder folder)
+			PortletDataContext portletDataContext, String folderPath,
+			Folder folder)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(folder.getUserUuid());
@@ -838,12 +734,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCreateDate(folder.getCreateDate());
-		serviceContext.setModifiedDate(folder.getModifiedDate());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			folderPath, folder, _NAMESPACE);
 
 		if ((parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -854,7 +746,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Folder parentFolder =
 				(Folder)portletDataContext.getZipEntryAsObject(path);
 
-			importFolder(portletDataContext, parentFolder);
+			importFolder(portletDataContext, path, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),
@@ -902,10 +794,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				name, folder.getDescription(), serviceContext);
 		}
 
-		folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
-
-		portletDataContext.importPermissions(
-			Folder.class, folder.getFolderId(), importedFolder.getFolderId());
+		portletDataContext.importClassedModel(
+			folder, importedFolder, _NAMESPACE);
 	}
 
 	protected static boolean isDuplicateFileEntry(

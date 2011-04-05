@@ -124,7 +124,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			CalEvent event = (CalEvent)portletDataContext.getZipEntryAsObject(
 				path);
 
-			importEvent(portletDataContext, event);
+			importEvent(portletDataContext, eventElement, event);
 		}
 
 		return null;
@@ -147,31 +147,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element eventElement = rootElement.addElement("event");
 
-		eventElement.addAttribute("path", path);
-
-		event.setUserUuid(event.getUserUuid());
-
-		portletDataContext.addPermissions(CalEvent.class, event.getEventId());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
-			portletDataContext.addAssetCategories(
-				CalEvent.class, event.getEventId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
-			portletDataContext.addComments(CalEvent.class, event.getEventId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.addRatingsEntries(
-				CalEvent.class, event.getEventId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			portletDataContext.addAssetTags(CalEvent.class, event.getEventId());
-		}
-
-		portletDataContext.addZipEntry(path, event);
+		portletDataContext.addClassedModel(
+			eventElement, path, event, _NAMESPACE);
 	}
 
 	protected String getEventPath(
@@ -188,7 +165,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importEvent(
-			PortletDataContext portletDataContext, CalEvent event)
+			PortletDataContext portletDataContext, Element eventElement,
+			CalEvent event)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(event.getUserUuid());
@@ -233,28 +211,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			endDateYear = endCal.get(Calendar.YEAR);
 		}
 
-		long[] assetCategoryIds = null;
-		String[] assetTagNames = null;
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
-			assetCategoryIds = portletDataContext.getAssetCategoryIds(
-				CalEvent.class, event.getEventId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			assetTagNames = portletDataContext.getAssetTagNames(
-				CalEvent.class, event.getEventId());
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddCommunityPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetCategoryIds(assetCategoryIds);
-		serviceContext.setAssetTagNames(assetTagNames);
-		serviceContext.setCreateDate(event.getCreateDate());
-		serviceContext.setModifiedDate(event.getModifiedDate());
-		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			eventElement, event, _NAMESPACE);
 
 		CalEvent importedEvent = null;
 
@@ -303,19 +261,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 				event.getSecondReminder(), serviceContext);
 		}
 
-		portletDataContext.importPermissions(
-			CalEvent.class, event.getEventId(), importedEvent.getEventId());
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
-			portletDataContext.importComments(
-				CalEvent.class, event.getEventId(), importedEvent.getEventId(),
-				portletDataContext.getScopeGroupId());
-		}
-
-		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-			portletDataContext.importRatingsEntries(
-				CalEvent.class, event.getEventId(), importedEvent.getEventId());
-		}
+		portletDataContext.importClassedModel(event, importedEvent, _NAMESPACE);
 	}
 
 	private static final String _NAMESPACE = "calendar";

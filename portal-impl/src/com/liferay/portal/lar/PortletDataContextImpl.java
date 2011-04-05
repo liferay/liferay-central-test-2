@@ -33,12 +33,16 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.AuditedModel;
+import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcedModel;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Team;
@@ -210,6 +214,46 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		_assetTagNamesMap.put(
 			getPrimaryKeyString(className, classPK), assetTagNames);
+	}
+
+	public void addClassedModel(
+			Element element, String path, ClassedModel classedModel,
+			String namespace)
+		throws PortalException, SystemException {
+
+		element.addAttribute("path", path);
+
+		if (classedModel instanceof AuditedModel) {
+			AuditedModel auditedModel = (AuditedModel)classedModel;
+
+			auditedModel.setUserUuid(auditedModel.getUserUuid());
+		}
+
+		if (isResourceMain(classedModel)) {
+			Class<?> classObj = classedModel.getModelClass();
+			long classPK = getClassPK(classedModel);
+
+			addLocks(classObj, String.valueOf(classPK));
+			addPermissions(classObj, classPK);
+
+			if (getBooleanParameter(namespace, "categories")) {
+				addAssetCategories(classObj, classPK);
+			}
+
+			if (getBooleanParameter(namespace, "comments")) {
+				addComments(classObj, classPK);
+			}
+
+			if (getBooleanParameter(namespace, "ratings")) {
+				addRatingsEntries(classObj, classPK);
+			}
+
+			if (getBooleanParameter(namespace, "tags")) {
+				addAssetTags(classObj, classPK);
+			}
+		}
+
+		addZipEntry(path, classedModel);
 	}
 
 	public void addComments(Class<?> classObj, long classPK)
@@ -385,7 +429,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		try {
-			getZipWriter().addEntry(path, bytes);
+			ZipWriter zipWriter = getZipWriter();
+
+			zipWriter.addEntry(path, bytes);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -400,7 +446,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		try {
-			getZipWriter().addEntry(path, is);
+			ZipWriter zipWriter = getZipWriter();
+
+			zipWriter.addEntry(path, is);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -417,7 +465,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		try {
-			getZipWriter().addEntry(path, s);
+			ZipWriter zipWriter = getZipWriter();
+
+			zipWriter.addEntry(path, s);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -432,11 +482,25 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		try {
-			getZipWriter().addEntry(path, sb);
+			ZipWriter zipWriter = getZipWriter();
+
+			zipWriter.addEntry(path, sb);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	public ServiceContext createServiceContext(
+		Element element, ClassedModel classedModel, String namespace) {
+
+		return createServiceContext(element, null, classedModel, namespace);
+	}
+
+	public ServiceContext createServiceContext(
+		String path, ClassedModel classedModel, String namespace) {
+
+		return createServiceContext(null, path, classedModel, namespace);
 	}
 
 	public Object fromXML(byte[] bytes) {
@@ -666,6 +730,38 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public void importClassedModel(
+			ClassedModel classedModel, ClassedModel newClassedModel,
+			String namespace)
+		throws PortalException, SystemException {
+
+		if (!isResourceMain(classedModel)) {
+			return;
+		}
+
+		Class<?> classObj = classedModel.getModelClass();
+		long classPK = getClassPK(classedModel);
+
+		long newClassPK = getClassPK(newClassedModel);
+
+		Map<Long, Long> newPrimaryKeysMap =
+			(Map<Long, Long>)getNewPrimaryKeysMap(classObj);
+
+		newPrimaryKeysMap.put(classPK, newClassPK);
+
+		importLocks(
+			classObj, String.valueOf(classPK), String.valueOf(newClassPK));
+		importPermissions(classObj, classPK, newClassPK);
+
+		if (getBooleanParameter(namespace, "comments")) {
+			importComments(classObj, classPK, newClassPK, getScopeGroupId());
+		}
+
+		if (getBooleanParameter(namespace, "ratings")) {
+			importRatingsEntries(classObj, classPK, newClassPK);
+		}
 	}
 
 	public void importComments(
@@ -907,8 +1003,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 			serviceContext.setModifiedDate(ratingsEntry.getModifiedDate());
 
 			RatingsEntryLocalServiceUtil.updateEntry(
-				userId, classObj.getName(), ((Long)newClassPK).longValue(),
-				ratingsEntry.getScore(), serviceContext);
+				userId, classObj.getName(), newClassPK, ratingsEntry.getScore(),
+				serviceContext);
 		}
 	}
 
@@ -1016,6 +1112,45 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_startDate = startDate;
 	}
 
+	protected ServiceContext createServiceContext(
+		Element element, String path, ClassedModel classedModel,
+		String namespace) {
+
+		Class<?> classObj = classedModel.getModelClass();
+		long classPK = getClassPK(classedModel);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		if (isResourceMain(classedModel)) {
+			if (getBooleanParameter(namespace, "categories")) {
+				long[] assetCategoryIds = getAssetCategoryIds(
+					classObj, classPK);
+
+				serviceContext.setAssetCategoryIds(assetCategoryIds);
+			}
+
+			if (getBooleanParameter(namespace, "tags")) {
+				String[] assetTagNames = getAssetTagNames(classObj, classPK);
+
+				serviceContext.setAssetTagNames(assetTagNames);
+			}
+		}
+
+		if (classedModel instanceof AuditedModel) {
+			AuditedModel auditedModel = (AuditedModel)classedModel;
+
+			serviceContext.setCreateDate(auditedModel.getCreateDate());
+			serviceContext.setModifiedDate(auditedModel.getModifiedDate());
+		}
+
+		serviceContext.setScopeGroupId(getScopeGroupId());
+
+		return serviceContext;
+	}
+
 	protected String getActionIds(
 			Role role, String className, String primKey)
 		throws PortalException, SystemException {
@@ -1047,6 +1182,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		return StringUtil.merge(actionIds);
+	}
+
+	protected long getClassPK(ClassedModel classedModel) {
+		if (classedModel instanceof ResourcedModel) {
+			ResourcedModel resourcedModel = (ResourcedModel)classedModel;
+
+			return resourcedModel.getResourcePrimKey();
+		}
+		else {
+			return (Long)classedModel.getPrimaryKeyObj();
+		}
 	}
 
 	protected String getPrimaryKeyString(Class<?> classObj, long classPK) {
@@ -1093,6 +1239,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("RatingsEntry", RatingsEntryImpl.class);
 		_xStream.alias("WikiNode", WikiNodeImpl.class);
 		_xStream.alias("WikiPage", WikiPageImpl.class);
+	}
+
+	protected boolean isResourceMain(ClassedModel classedModel) {
+		if (classedModel instanceof ResourcedModel) {
+			ResourcedModel resourcedModel = (ResourcedModel)classedModel;
+
+			return resourcedModel.isResourceMain();
+		}
+
+		return true;
 	}
 
 	protected void validateDateRange(Date startDate, Date endDate)
