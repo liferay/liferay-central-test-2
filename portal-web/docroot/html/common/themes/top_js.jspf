@@ -305,38 +305,8 @@
 	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/liferay/service.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </c:if>
 
-<%
-Set<String> jsTopFileNames = (Set<String>)request.getAttribute(WebKeys.JS_TOP_FILE_NAMES);
-%>
-
-<c:if test="<%= jsTopFileNames != null %>">
-
-	<%
-	for (String jsTopFileName : jsTopFileNames) {
-	%>
-
-		<script src="<%= jsTopFileName %>" type="text/javascript"></script>
-
-	<%
-	}
-	%>
-
-</c:if>
-
-<%
-StringBundler jsTopSB = (StringBundler)request.getAttribute(WebKeys.JS_TOP);
-%>
-
 <script type="text/javascript">
 	// <![CDATA[
-		<c:if test="<%= jsTopSB != null %>">
-
-			<%
-			jsTopSB.writeTo(out);
-			%>
-
-		</c:if>
-
 		<c:if test="<%= (layoutTypePortlet != null) %>">
 
 			<%

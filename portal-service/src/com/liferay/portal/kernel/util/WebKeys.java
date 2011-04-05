@@ -39,10 +39,6 @@ public interface WebKeys {
 
 	public static final String INVOKER_FILTER_URI = "INVOKER_FILTER_URI";
 
-	public static final String JS_TOP = "LIFERAY_SHARED_JAVASCRIPT_TOP";
-
-	public static final String JS_TOP_FILE_NAMES = "LIFERAY_SHARED_JAVASCRIPT_FILES_TOP";
-
 	public static final String LAST_PATH = "LAST_PATH";
 
 	public static final String LAYOUT = "LAYOUT";
