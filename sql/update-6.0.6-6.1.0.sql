@@ -45,6 +45,14 @@ create table DDMList (
 	structureId LONG
 );
 
+create table DDMListItem (
+	uuid_ VARCHAR(75) null,
+	listItemId LONG not null primary key,
+	classNameId LONG,
+	classPK LONG,
+	listId LONG
+);
+
 create table DDMStorageLink (
 	uuid_ VARCHAR(75) null,
 	storageLinkId LONG not null primary key,

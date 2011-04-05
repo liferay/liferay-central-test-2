@@ -48,6 +48,8 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// List
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		listKey = listKey.trim().toUpperCase();
@@ -121,19 +123,19 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 	public void deleteList(DDMList list)
 		throws PortalException, SystemException {
 
-		// Dynamic data mapping list
+		// List
 
 		ddmListPersistence.remove(list);
-
-		// Dynamic data mapping list entries
-
-		ddmListEntryLocalService.deleteListEntries(list.getListId());
 
 		// Resources
 
 		resourceLocalService.deleteResource(
 			list.getCompanyId(), DDMList.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, list.getListId());
+
+		// List items
+
+		ddmListItemLocalService.deleteListItems(list.getListId());
 	}
 
 	public void deleteList(long listId)
