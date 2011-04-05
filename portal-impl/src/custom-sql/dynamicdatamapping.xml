@@ -35,7 +35,7 @@
 				DDMList.listId DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder.countByC_G_CN_S_ST_D">
+	<sql id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder.countByC_G_C_S_N_D_S">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT structureId) AS COUNT_VALUE
@@ -53,7 +53,7 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder.findByC_G_CN_S_ST_D">
+	<sql id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder.findByC_G_C_S_N_D_S">
 		<![CDATA[
 			SELECT
 				{DDMStructure.*}

@@ -38,104 +38,11 @@ import java.util.List;
 public class DDMStructureFinderImpl
 	extends BasePersistenceImpl<DDMStructure> implements DDMStructureFinder {
 
-	public static String FIND_BY_C_G_CN_S_ST_D =
-		DDMStructureFinder.class.getName() + ".findByC_G_CN_S_ST_D";
+	public static String COUNT_BY_C_G_C_S_N_D_S =
+		DDMStructureFinder.class.getName() + ".countByC_G_C_S_N_D_S";
 
-	public static String COUNT_BY_C_G_CN_S_ST_D =
-		DDMStructureFinder.class.getName() + ".countByC_G_CN_S_ST_D";
-
-	public int countByC_G_CN_S_ST_D(
-			long companyId, long groupId, long[] classNameIds,
-			String structureKey, String name, String description,
-			String storageType, boolean andOperator)
-		throws SystemException {
-
-		return countByC_G_CN_S_ST_D(
-			companyId, groupId, classNameIds, new String[] {structureKey},
-			new String[] {name}, new String[] {description},
-			new String[] {storageType}, andOperator);
-	}
-
-	public int countByC_G_CN_S_ST_D(
-			long companyId, long groupId, long[] classNameIds,
-			String[] structureKeys, String[] names, String[] descriptions,
-			String[] storageTypes, boolean andOperator)
-		throws SystemException {
-
-		String[] classNameIdsValues = null;
-
-		if (classNameIds == null) {
-			classNameIdsValues = new String[] {null};
-		}
-		else {
-			classNameIdsValues = StringUtil.split(
-				StringUtil.merge(classNameIds));
-		}
-
-		structureKeys = CustomSQLUtil.keywords(structureKeys, false);
-		names = CustomSQLUtil.keywords(names);
-		descriptions = CustomSQLUtil.keywords(descriptions, false);
-		storageTypes = CustomSQLUtil.keywords(storageTypes, false);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_C_G_CN_S_ST_D);
-
-			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
-			}
-
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "classNameId", StringPool.EQUAL, false,
-				classNameIdsValues);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "structureKey", StringPool.LIKE, false, structureKeys);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(name)", StringPool.LIKE, false, names);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "description", StringPool.LIKE, false,
-				descriptions);
-			sql = CustomSQLUtil.replaceKeywords(
-				sql, "storageType", StringPool.LIKE, true, storageTypes);
-
-			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(groupId);
-			qPos.add(classNameIdsValues, 2);
-			qPos.add(structureKeys, 2);
-			qPos.add(names, 2);
-			qPos.add(descriptions, 2);
-			qPos.add(storageTypes, 2);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
+	public static String FIND_BY_C_G_C_S_N_D_S =
+		DDMStructureFinder.class.getName() + ".findByC_G_C_S_N_D_S";
 
 	public int countByKeywords(
 			long companyId, long groupId, long[] classNameIds, String keywords)
@@ -155,39 +62,36 @@ public class DDMStructureFinderImpl
 			andOperator = true;
 		}
 
-		return countByC_G_CN_S_ST_D(
+		return countByC_G_C_S_N_D_S(
 			companyId, groupId, classNameIds, structureKeys, names,
 			descriptions, null, andOperator);
 	}
 
-	public List<DDMStructure> findByC_G_CN_S_ST_D(
-		long companyId, long groupId, long[] classNameIds,
-		String structureKey, String name, String description,
-		String storageType, boolean andOperator, int start, int end,
-		OrderByComparator orderByComparator)
-	throws SystemException {
-
-		return findByC_G_CN_S_ST_D(
-			companyId, groupId, classNameIds, new String[] {structureKey},
-			new String[] {name}, new String[] {description},
-			new String[] {storageType}, andOperator, start, end,
-			orderByComparator);
-	}
-
-	public List<DDMStructure> findByC_G_CN_S_ST_D(
+	public int countByC_G_C_S_N_D_S(
 			long companyId, long groupId, long[] classNameIds,
-			String[] structureKeys, String[] names, String[] descriptions,
-			String[] storageTypes, boolean andOperator, int start, int end,
-			OrderByComparator orderByComparator)
+			String structureKey, String name, String description,
+			String storageType, boolean andOperator)
 		throws SystemException {
 
-		String[] classNameIdsValues = null;
+		return countByC_G_C_S_N_D_S(
+			companyId, groupId, classNameIds, new String[] {structureKey},
+			new String[] {name}, new String[] {description},
+			new String[] {storageType}, andOperator);
+	}
+
+	public int countByC_G_C_S_N_D_S(
+			long companyId, long groupId, long[] classNameIds,
+			String[] structureKeys, String[] names, String[] descriptions,
+			String[] storageTypes, boolean andOperator)
+		throws SystemException {
+
+		String[] classNameIdsString = null;
 
 		if (classNameIds == null) {
-			classNameIdsValues = new String[] {null};
+			classNameIdsString = new String[] {null};
 		}
 		else {
-			classNameIdsValues = StringUtil.split(
+			classNameIdsString = StringUtil.split(
 				StringUtil.merge(classNameIds));
 		}
 
@@ -201,7 +105,7 @@ public class DDMStructureFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_G_CN_S_ST_D);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_C_S_N_D_S);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
@@ -209,7 +113,7 @@ public class DDMStructureFinderImpl
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "classNameId", StringPool.EQUAL, false,
-				classNameIdsValues);
+				classNameIdsString);
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "structureKey", StringPool.LIKE, false, structureKeys);
 			sql = CustomSQLUtil.replaceKeywords(
@@ -219,33 +123,33 @@ public class DDMStructureFinderImpl
 				descriptions);
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "storageType", StringPool.LIKE, true, storageTypes);
-
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-
-			if (orderByComparator != null) {
-				String orderByFields = StringUtil.merge(
-					orderByComparator.getOrderByFields(), StringPool.COMMA);
-
-				sql = StringUtil.replace(
-					sql, "structureId DESC", orderByFields.concat(" DESC"));
-			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("DDMStructure", DDMStructureImpl.class);
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
 			qPos.add(groupId);
-			qPos.add(classNameIdsValues, 2);
+			qPos.add(classNameIdsString, 2);
 			qPos.add(structureKeys, 2);
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(storageTypes, 2);
 
-			return (List<DDMStructure>)QueryUtil.list(
-				q, getDialect(), start, end);
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -274,10 +178,104 @@ public class DDMStructureFinderImpl
 			andOperator = true;
 		}
 
-		return findByC_G_CN_S_ST_D(
+		return findByC_G_C_S_N_D_S(
 			companyId, groupId, classNameIds, structureKeys, names,
 			descriptions, null, andOperator, start, end,
 			orderByComparator);
+	}
+
+	public List<DDMStructure> findByC_G_C_S_N_D_S(
+			long companyId, long groupId, long[] classNameIds,
+			String structureKey, String name, String description,
+			String storageType, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return findByC_G_C_S_N_D_S(
+			companyId, groupId, classNameIds, new String[] {structureKey},
+			new String[] {name}, new String[] {description},
+			new String[] {storageType}, andOperator, start, end,
+			orderByComparator);
+	}
+
+	public List<DDMStructure> findByC_G_C_S_N_D_S(
+			long companyId, long groupId, long[] classNameIds,
+			String[] structureKeys, String[] names, String[] descriptions,
+			String[] storageTypes, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		String[] classNameIdsString = null;
+
+		if (classNameIds == null) {
+			classNameIdsString = new String[] {null};
+		}
+		else {
+			classNameIdsString = StringUtil.split(
+				StringUtil.merge(classNameIds));
+		}
+
+		structureKeys = CustomSQLUtil.keywords(structureKeys, false);
+		names = CustomSQLUtil.keywords(names);
+		descriptions = CustomSQLUtil.keywords(descriptions, false);
+		storageTypes = CustomSQLUtil.keywords(storageTypes, false);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_C_S_N_D_S);
+
+			if (groupId <= 0) {
+				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "classNameId", StringPool.EQUAL, false,
+				classNameIdsString);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "structureKey", StringPool.LIKE, false, structureKeys);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "lower(name)", StringPool.LIKE, false, names);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "description", StringPool.LIKE, false,
+				descriptions);
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "storageType", StringPool.LIKE, true, storageTypes);
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
+
+			if (orderByComparator != null) {
+				String orderByFields = StringUtil.merge(
+					orderByComparator.getOrderByFields(), StringPool.COMMA);
+
+				sql = StringUtil.replace(
+					sql, "structureId DESC", orderByFields.concat(" DESC"));
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("DDMStructure", DDMStructureImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(groupId);
+			qPos.add(classNameIdsString, 2);
+			qPos.add(structureKeys, 2);
+			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
+			qPos.add(storageTypes, 2);
+
+			return (List<DDMStructure>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 }

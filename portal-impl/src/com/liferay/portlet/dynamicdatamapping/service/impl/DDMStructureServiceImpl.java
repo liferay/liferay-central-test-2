@@ -45,6 +45,15 @@ public class DDMStructureServiceImpl
 			name, description, xsd, storageType, serviceContext);
 	}
 
+	public void deleteStructure(long structureId)
+		throws PortalException, SystemException {
+
+		DDMStructurePermission.check(
+			getPermissionChecker(), structureId, ActionKeys.DELETE);
+
+		ddmStructureLocalService.deleteStructure(structureId);
+	}
+
 	public void deleteStructure(long groupId, String structureKey)
 		throws PortalException, SystemException {
 

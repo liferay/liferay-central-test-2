@@ -56,7 +56,7 @@ public class DDMStructureLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Dynamic data mapping structure
+		// Structure
 
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
@@ -143,7 +143,7 @@ public class DDMStructureLocalServiceImpl
 	public void deleteStructure(DDMStructure structure)
 		throws PortalException, SystemException {
 
-		// Dynamic data mapping structure
+		// Structure
 
 		ddmStructurePersistence.remove(structure);
 
@@ -153,6 +153,20 @@ public class DDMStructureLocalServiceImpl
 			structure.getCompanyId(), DDMStructure.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			structure.getStructureKey());
+
+		// Structure links
+
+		ddmStructureLinkLocalService.deleteStructureStructureLinks(
+			structure.getStructureId());
+	}
+
+	public void deleteStructure(long structureId)
+		throws PortalException, SystemException {
+
+		DDMStructure structure = ddmStructurePersistence.findByPrimaryKey(
+			structureId);
+
+		deleteStructure(structure);
 	}
 
 	public void deleteStructure(long groupId, String structureKey)
@@ -218,7 +232,7 @@ public class DDMStructureLocalServiceImpl
 	public List<DDMStructure> search(
 			long companyId, long groupId, long[] classNameIds, String keywords,
 			int start, int end, OrderByComparator orderByComparator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmStructureFinder.findByKeywords(
 			companyId, groupId, classNameIds, keywords, start, end,
@@ -230,16 +244,16 @@ public class DDMStructureLocalServiceImpl
 			String structureKey, String name, String description,
 			String storageType, boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		return ddmStructureFinder.findByC_G_CN_S_ST_D(
+		return ddmStructureFinder.findByC_G_C_S_N_D_S(
 			companyId, groupId, classNameIds, structureKey, name, description,
 			storageType, andOperator, start, end, orderByComparator);
 	}
 
 	public int searchCount(
 			long companyId, long groupId, long[] classNameIds, String keywords)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmStructureFinder.countByKeywords(
 			companyId, groupId, classNameIds, keywords);
@@ -249,9 +263,9 @@ public class DDMStructureLocalServiceImpl
 			long companyId, long groupId, long[] classNameIds,
 			String structureKey, String name, String description,
 			String storageType, boolean andOperator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		return ddmStructureFinder.countByC_G_CN_S_ST_D(
+		return ddmStructureFinder.countByC_G_C_S_N_D_S(
 			companyId, groupId, classNameIds, structureKey, name, description,
 			storageType, andOperator);
 	}

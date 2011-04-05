@@ -33,8 +33,6 @@ import com.liferay.portlet.dynamicdatamapping.StructureNameException;
 import com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException;
 import com.liferay.portlet.dynamicdatamapping.StructureXsdException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -156,10 +154,7 @@ public class EditStructureAction extends PortletAction {
 		long structureId = ParamUtil.getLong(actionRequest, "structureId");
 
 		if (structureId > 0) {
-			DDMStructureLinkLocalServiceUtil.deleteStructureStructureLinks(
-				structureId);
-
-			DDMStructureLocalServiceUtil.deleteDDMStructure(structureId);
+			DDMStructureServiceUtil.deleteStructure(structureId);
 		}
 	}
 
