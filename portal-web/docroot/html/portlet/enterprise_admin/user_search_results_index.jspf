@@ -34,7 +34,7 @@ else {
 }
 
 results = _getResults(hits);
-total = hits.getLength();
+total = results.size();
 
 pageContext.setAttribute("results", results);
 pageContext.setAttribute("total", total);
