@@ -57,6 +57,11 @@
 		<name>html-top</name>
 		<tag-class>com.liferay.taglib.util.HtmlTopTag</tag-class>
 		<body-content>JSP</body-content>
+		<attribute>
+			<name>applyOnce</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>include</name>
