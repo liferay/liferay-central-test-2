@@ -51,12 +51,10 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkClassNames() throws SystemException {
-		if (_classNames.isEmpty()) {
-			List<ClassName> classNames = classNamePersistence.findAll();
+		List<ClassName> classNames = classNamePersistence.findAll();
 
-			for (ClassName className : classNames) {
-				_classNames.put(className.getValue(), className);
-			}
+		for (ClassName className : classNames) {
+			_classNames.put(className.getValue(), className);
 		}
 
 		List<String> models = ModelHintsUtil.getModels();
