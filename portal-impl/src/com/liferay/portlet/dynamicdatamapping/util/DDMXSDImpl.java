@@ -79,9 +79,9 @@ public class DDMXSDImpl implements DDMXSD {
 
 			field.put("children", getHTML(pageContext, dynamicElementElement));
 
-			String type = dynamicElementElement.attributeValue("type");
 			String fieldNamespace = dynamicElementElement.attributeValue(
 				"fieldNamespace", _DEFAULT_NAMESPACE);
+			String type = dynamicElementElement.attributeValue("type");
 
 			String templateName = StringUtil.replaceFirst(
 				type, fieldNamespace.concat(StringPool.DASH), StringPool.BLANK);
