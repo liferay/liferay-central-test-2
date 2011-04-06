@@ -60,19 +60,21 @@ public class LuceneServlet extends HttpServlet {
 
 		long companyId = ParamUtil.getLong(request, "companyId");
 
-		if (companyId <= 0) {
+		if (companyId < 0) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
 			return;
 		}
 
-		try {
-			CompanyLocalServiceUtil.getCompanyById(companyId);
-		}
-		catch (Exception e) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+		if (companyId > 0) {
+			try {
+				CompanyLocalServiceUtil.getCompanyById(companyId);
+			}
+			catch (Exception e) {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
-			return;
+				return;
+			}
 		}
 
 		LuceneHelperUtil.dumpIndex(companyId, response.getOutputStream());
