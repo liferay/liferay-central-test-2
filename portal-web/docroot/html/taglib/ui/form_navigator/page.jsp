@@ -49,11 +49,13 @@ if (Validator.isNotNull(historyKey)) {
 				for (String section : allSections) {
 					String sectionId = _getSectionId(section);
 					String sectionJsp = jspPath + _getSectionJsp(section) + ".jsp";
+
+					boolean sectionSelected = (curSection.equals(section) || curSection.equals(sectionId));
 				%>
 
 					<!-- Begin fragment <%= sectionId %> -->
 
-					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
+					<div aria-hidden="<%= sectionSelected ? "false" : "true" %>" class="form-section <%= sectionSelected ? "selected" : "aui-helper-hidden" %>" id="<%= sectionId %>">
 						<liferay-util:include page="<%= sectionJsp %>" />
 					</div>
 
@@ -123,7 +125,7 @@ if (Validator.isNotNull(historyKey)) {
 									%>
 
 										<li class="<%= cssClass %>">
-											<a href="#<%= sectionId %>" id="<%= sectionId %>Link">
+											<a aria-controls="<%= sectionId %>" href="#<%= sectionId %>" id="<%= sectionId %>Link">
 
 											<liferay-ui:message key="<%= section %>" />
 

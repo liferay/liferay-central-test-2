@@ -140,10 +140,12 @@ AUI().add(
 
 					li.addClass('selected');
 
-					instance._sections.removeClass('selected').addClass('aui-helper-hidden-accessible');
+					instance._sections.replaceClass('selected', 'aui-helper-hidden');
+					instance._sections.setAttribute('aria-hidden', 'true');
 
 					if (section) {
-						section.addClass('selected').removeClass('aui-helper-hidden-accessible');
+						section.replaceClass('aui-helper-hidden', 'selected');
+						section.setAttribute('aria-hidden', 'false');
 					}
 				}
 			},
