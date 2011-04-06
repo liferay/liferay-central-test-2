@@ -318,9 +318,9 @@ public class AssetTagLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
-		long groupId, int maxElements)
+		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupTags(groupId, maxElements);
+		return getService().getGroupTags(groupId, start, end);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetTag getTag(long tagId)

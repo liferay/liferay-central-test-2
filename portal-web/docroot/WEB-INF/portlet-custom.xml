@@ -2174,7 +2174,7 @@
 				<value>cloud</value>
 			</preference>
 			<preference>
-                <name>maxNumTagsShown</name>
+                <name>maxAssetTags</name>
                 <value>10</value>
             </preference>
 			<preference>

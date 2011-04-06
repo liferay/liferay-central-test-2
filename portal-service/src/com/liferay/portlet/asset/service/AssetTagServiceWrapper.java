@@ -55,10 +55,9 @@ public class AssetTagServiceWrapper implements AssetTagService {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
-		long groupId, int maxElements)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _assetTagService.getGroupTags(groupId, maxElements);
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetTagService.getGroupTags(groupId, start, end);
 	}
 
 	public com.liferay.portlet.asset.model.AssetTag getTag(long tagId)
@@ -74,10 +73,11 @@ public class AssetTagServiceWrapper implements AssetTagService {
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
-		long groupId, long classNameId, java.lang.String name, int maxElements)
+		long groupId, long classNameId, java.lang.String name, int start,
+		int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _assetTagService.getTags(groupId, classNameId, name, maxElements);
+		return _assetTagService.getTags(groupId, classNameId, name, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(

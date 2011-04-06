@@ -109,7 +109,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-            <name>maxNumTagsShown</name>
+            <name>maxAssetTags</name>
             <required>false</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>

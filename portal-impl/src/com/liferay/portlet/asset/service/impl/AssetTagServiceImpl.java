@@ -78,11 +78,10 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		return assetTagPersistence.filterFindByGroupId(groupId);
 	}
 
-	public List<AssetTag> getGroupTags(long groupId, int maxElements)
-		throws  PortalException, SystemException {
+	public List<AssetTag> getGroupTags(long groupId, int start, int end)
+		throws  SystemException {
 
-		return filterTags(assetTagLocalService.getGroupTags(
-			groupId,maxElements));
+		return assetTagPersistence.filterFindByGroupId(groupId, start, end);
 	}
 
 	public AssetTag getTag(long tagId) throws PortalException, SystemException {
@@ -101,12 +100,11 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	}
 
 	public List<AssetTag> getTags(
-			long groupId, long classNameId, String name, int maxElements)
+			long groupId, long classNameId, String name, int start, int end)
 		throws PortalException, SystemException {
 
-		return filterTags(
-			assetTagLocalService.getTags(
-					groupId, classNameId, name, 0, maxElements));
+		return assetTagFinder.filterFindByG_C_N(
+			groupId, classNameId, name, start, end, null);
 	}
 
 	public List<AssetTag> getTags(String className, long classPK)

@@ -187,15 +187,14 @@ public class AssetTagServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
-		HttpPrincipal httpPrincipal, long groupId, int maxElements)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		HttpPrincipal httpPrincipal, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"getGroupTags", _getGroupTagsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					maxElements);
+					start, end);
 
 			Object returnObj = null;
 
@@ -203,10 +202,6 @@ public class AssetTagServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
 					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
@@ -294,7 +289,7 @@ public class AssetTagServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
 		HttpPrincipal httpPrincipal, long groupId, long classNameId,
-		java.lang.String name, int maxElements)
+		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -302,7 +297,7 @@ public class AssetTagServiceHttp {
 					"getTags", _getTagsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					classNameId, name, maxElements);
+					classNameId, name, start, end);
 
 			Object returnObj = null;
 
@@ -487,7 +482,7 @@ public class AssetTagServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getGroupTagsParameterTypes4 = new Class[] {
-			long.class, int.class
+			long.class, int.class, int.class
 		};
 	private static final Class<?>[] _getTagParameterTypes5 = new Class[] {
 			long.class
@@ -496,7 +491,7 @@ public class AssetTagServiceHttp {
 			long.class, long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getTagsParameterTypes7 = new Class[] {
-			long.class, long.class, java.lang.String.class, int.class
+			long.class, long.class, java.lang.String.class, int.class, int.class
 		};
 	private static final Class<?>[] _getTagsParameterTypes8 = new Class[] {
 			java.lang.String.class, long.class
