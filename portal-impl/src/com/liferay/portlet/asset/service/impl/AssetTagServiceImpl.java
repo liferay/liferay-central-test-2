@@ -101,7 +101,7 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 	public List<AssetTag> getTags(
 			long groupId, long classNameId, String name, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetTagFinder.filterFindByG_C_N(
 			groupId, classNameId, name, start, end, null);
