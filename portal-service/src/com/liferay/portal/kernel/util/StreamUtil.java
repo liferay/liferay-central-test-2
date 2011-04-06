@@ -153,6 +153,10 @@ public class StreamUtil {
 				position += sourceChannel.transferTo(
 					position, sourceChannel.size() - position, targetChannel);
 			}
+
+			if (cleanUp) {
+				cleanUp(fileInputStream, fileOutputStream);
+			}
 		}
 		else {
 			try {
