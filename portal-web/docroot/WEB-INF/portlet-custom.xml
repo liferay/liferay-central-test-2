@@ -513,6 +513,7 @@
 		</security-role-ref>
 		<supported-public-render-parameter>categoryId</supported-public-render-parameter>
 		<supported-public-render-parameter>nodeId</supported-public-render-parameter>
+		<supported-public-render-parameter>nodeName</supported-public-render-parameter>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 		<supported-public-render-parameter>title</supported-public-render-parameter>
 	</portlet>
