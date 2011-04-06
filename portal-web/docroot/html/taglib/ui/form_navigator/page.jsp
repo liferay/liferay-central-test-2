@@ -50,7 +50,7 @@ if (Validator.isNotNull(historyKey)) {
 					String sectionId = _getSectionId(section);
 					String sectionJsp = jspPath + _getSectionJsp(section) + ".jsp";
 
-					boolean sectionSelected = (curSection.equals(section) || curSection.equals(sectionId));
+					boolean sectionSelected = curSection.equals(section) || curSection.equals(sectionId);
 				%>
 
 					<!-- Begin fragment <%= sectionId %> -->
