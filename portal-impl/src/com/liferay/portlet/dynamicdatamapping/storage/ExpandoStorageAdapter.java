@@ -206,24 +206,24 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
 		Map<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
 
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = DataAccess.getConnection();
+			connection = DataAccess.getConnection();
 
-			stmt = con.createStatement();
+			statement = connection.createStatement();
 
 			String sql = _toSQL(expandoRowIds, fieldNames, condition, false);
 
-			rs = stmt.executeQuery(sql);
+			resultSet = statement.executeQuery(sql);
 
-			while (rs.next()) {
-				Long rowId = rs.getLong("rowId_");
-				String data = rs.getString("data_");
-				String name = rs.getString("name");
-				int type = rs.getInt("type_");
+			while (resultSet.next()) {
+				long rowId = resultSet.getLong("rowId_");
+				String name = resultSet.getString("name");
+				int type = resultSet.getInt("type_");
+				String data = resultSet.getString("data_");
 
 				Fields fields = fieldsMap.get(rowId);
 
@@ -236,40 +236,42 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 				Serializable value =
 					ExpandoConverterUtil.getAttributeFromString(type, data);
 
-				fields.put(new Field(name, value));
+				Field field = new Field(name, value);
+
+				fields.put(field);
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, stmt, rs);
+			DataAccess.cleanUp(connection, statement, resultSet);
 		}
 
 		return fieldsMap;
 	}
 
-	private int _doQueryCount(
-		long[] expandoRowIds, Condition condition) throws Exception {
+	private int _doQueryCount(long[] expandoRowIds, Condition condition)
+		throws Exception {
 
 		int count = 0;
 
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;
 
 		try {
-			con = DataAccess.getConnection();
+			connection = DataAccess.getConnection();
 
-			stmt = con.createStatement();
+			statement = connection.createStatement();
 
 			String sql = _toSQL(expandoRowIds, null, condition, true);
 
-			rs = stmt.executeQuery(sql);
+			resultSet = statement.executeQuery(sql);
 
-			if (rs.next()) {
-				count = rs.getInt("COUNT_VALUE");
+			if (resultSet.next()) {
+				count = resultSet.getInt("COUNT_VALUE");
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, stmt, rs);
+			DataAccess.cleanUp(connection, statement, resultSet);
 		}
 
 		return count;
@@ -328,77 +330,18 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		return fieldsList;
 	}
 
-	private String _toSQL(
-		long[] expandoRowIds, List<String> fieldNames, Condition condition,
-		boolean count) {
-
-		StringBundler sb = new StringBundler();
-
-		if (count) {
-			sb.append("SELECT COUNT( DISTINCT(ExpandoValue.rowId_) )  ");
-			sb.append("AS COUNT_VALUE ");
-		}
-		else {
-			sb.append("SELECT ExpandoValue.rowId_, ExpandoValue.data_, ");
-			sb.append("ExpandoColumn.name, ExpandoColumn.type_ ");
-		}
-
-		sb.append("FROM ExpandoValue ");
-		sb.append("INNER JOIN ExpandoColumn ON ");
-		sb.append("(ExpandoColumn.columnId = ExpandoValue.columnId) ");
-		sb.append("WHERE ");
-		sb.append("ExpandoValue.rowId_ IN ( ");
-
-		if (condition == null) {
-			sb.append(StringUtil.merge(expandoRowIds));
-		}
-		else {
-			sb.append("SELECT DISTINCT (ExpandoValue.rowId_) ");
-			sb.append("FROM ExpandoValue ");
-			sb.append("INNER JOIN ExpandoColumn ON ");
-			sb.append("(ExpandoColumn.columnId = ExpandoValue.columnId) ");
-			sb.append("WHERE ");
-			sb.append("ExpandoValue.rowId_ IN ( ");
-			sb.append(StringUtil.merge(expandoRowIds));
-			sb.append(") AND ");
-			sb.append(_toSQL(condition));
-		}
-
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-
-		if (fieldNames != null && !fieldNames.isEmpty()) {
-			sb.append(" AND ExpandoColumn.name IN ( ");
-
-			for (int i = 0; i < fieldNames.size(); i++) {
-				sb.append(StringUtil.quote(fieldNames.get(i)));
-
-				if ((i + 1) < fieldNames.size()) {
-					sb.append(StringPool.COMMA);
-				}
-				else {
-					sb.append(StringPool.CLOSE_PARENTHESIS);
-				}
-			}
-		}
-
-		sb.append(StringPool.SPACE);
-
-		return sb.toString();
-	}
-
 	private String _toSQL(Condition condition) {
-		StringBundler sb = new StringBundler();
-
 		if (condition.isJunction()) {
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(_toSQL((Junction)condition));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
+			Junction junction = (Junction)condition;
+
+			return StringPool.OPEN_PARENTHESIS.concat(
+				_toSQL(junction)).concat(StringPool.CLOSE_PARENTHESIS);
 		}
 		else {
-			sb.append(_toSQL((FieldCondition)condition));
-		}
+			FieldCondition fieldCondition = (FieldCondition)condition;
 
-		return sb.toString();
+			return _toSQL(fieldCondition);
+		}
 	}
 
 	private String _toSQL(FieldCondition fieldCondition) {
@@ -460,6 +403,62 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 				sb.append(StringPool.SPACE);
 			}
 		}
+
+		return sb.toString();
+	}
+
+	private String _toSQL(
+		long[] expandoRowIds, List<String> fieldNames, Condition condition,
+		boolean count) {
+
+		StringBundler sb = new StringBundler();
+
+		if (count) {
+			sb.append("SELECT COUNT(DISTINCT(ExpandoValue.rowId_)) AS ");
+			sb.append("COUNT_VALUE ");
+		}
+		else {
+			sb.append("SELECT ExpandoColumn.name, ExpandoColumn.type_, ");
+			sb.append("ExpandoValue.rowId_, ExpandoValue.data_, ");
+		}
+
+		sb.append("FROM ExpandoValue INNER JOIN ExpandoColumn ON (");
+		sb.append("ExpandoColumn.columnId = ExpandoValue.columnId) WHERE ");
+		sb.append("ExpandoValue.rowId_ IN (");
+
+		if (condition == null) {
+			sb.append(StringUtil.merge(expandoRowIds));
+		}
+		else {
+			sb.append("SELECT DISTINCT (ExpandoValue.rowId_) FROM ");
+			sb.append("ExpandoValue INNER JOIN ExpandoColumn ON (");
+			sb.append("ExpandoColumn.columnId = ExpandoValue.columnId) WHERE ");
+			sb.append("ExpandoValue.rowId_ IN (");
+			sb.append(StringUtil.merge(expandoRowIds));
+			sb.append(") AND ");
+			sb.append(_toSQL(condition));
+		}
+
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		if (fieldNames != null && !fieldNames.isEmpty()) {
+			sb.append(" AND ExpandoColumn.name IN (");
+
+			for (int i = 0; i < fieldNames.size(); i++) {
+				String fieldName = fieldNames.get(i);
+
+				sb.append(StringUtil.quote(fieldName));
+
+				if ((i + 1) < fieldNames.size()) {
+					sb.append(StringPool.COMMA);
+				}
+				else {
+					sb.append(StringPool.CLOSE_PARENTHESIS);
+				}
+			}
+		}
+
+		sb.append(StringPool.SPACE);
 
 		return sb.toString();
 	}
