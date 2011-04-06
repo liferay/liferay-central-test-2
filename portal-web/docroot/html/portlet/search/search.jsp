@@ -94,11 +94,12 @@ groupParams.put("active", Boolean.FALSE);
 int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, null, groupParams);
 %>
 
-<portlet:renderURL var="searchURL">
+<liferay-portlet:renderURL varImpl="searchURL">
 	<portlet:param name="struts_action" value="/search/search" />
-</portlet:renderURL>
+</liferay-portlet:renderURL>
 
-<aui:form action="<%= searchURL %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "search();" %>'>
+<aui:form action="<%= searchURL %>" method="get" name="fm" onSubmit='<%= renderResponse.getNamespace() + "search();" %>'>
+	<liferay-portlet:renderURLParams varImpl="searchURL" />
 	<aui:input name="format" type="hidden" value="<%= format %>" />
 
 	<aui:fieldset>

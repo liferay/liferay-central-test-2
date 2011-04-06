@@ -38,9 +38,13 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setPortletMode(PortletMode.VIEW);
 
 portletURL.setParameter("struts_action", "/search/search");
+
+pageContext.setAttribute("portletURL", portletURL);
 %>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
+<form action="<%= portletURL.toString() %>" method="get" name="<%= randomNamespace %><%= namespace %>fm" onSubmit="<%= randomNamespace %><%= namespace %>search(); return false;">
+<liferay-portlet:renderURLParams varImpl="portletURL" />
+
 <input name="<%= namespace %>keywords" size="30" type="text" value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 
 <select name="<%= namespace %>groupId">
