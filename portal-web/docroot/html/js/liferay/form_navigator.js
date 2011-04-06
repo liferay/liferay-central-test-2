@@ -127,7 +127,7 @@ AUI().add(
 						return;
 					}
 
-					Liferay.fire('enterpriseAdmin:reveal'+id[1]);
+					Liferay.fire('enterpriseAdmin:reveal' + id[1]);
 
 					id = '#' + id[1];
 
