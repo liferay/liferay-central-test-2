@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.naming.NamingException;
@@ -593,7 +594,9 @@ public abstract class BaseDB implements DB {
 			s = StringUtil.replace(data, "SPECIFIC_TIMESTAMP_", "");
 		}
 		else {
-			s = TIMESTAMP_PATTERN.matcher(data).replaceAll("CURRENT_TIMESTAMP");
+			Matcher matcher = _timestampPattern.matcher(data);
+
+			s = matcher.replaceAll("CURRENT_TIMESTAMP");
 		}
 
 		return s;
@@ -888,8 +891,11 @@ public abstract class BaseDB implements DB {
 		}
 
 		for (int i = 0; i < TEMPLATE.length; i++) {
-			template = TEMPLATE_PATTERNS[i].matcher(template).replaceAll(
-				actual[i]);
+			Pattern templatePattern = _templatePatterns[i];
+
+			Matcher matcher = templatePattern.matcher(template);
+
+			template = matcher.replaceAll(actual[i]);
 		}
 
 		return template;
@@ -918,25 +924,6 @@ public abstract class BaseDB implements DB {
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};
 
-	protected static Pattern[] TEMPLATE_PATTERNS = new Pattern[TEMPLATE.length];
-
-	protected static Pattern TIMESTAMP_PATTERN = Pattern.compile(
-		"SPECIFIC_TIMESTAMP_\\d+");
-
-	static {
-		for (int i = 0; i < TEMPLATE.length; i++) {
-			if (TEMPLATE[i].equals("##") ||
-				TEMPLATE[i].equals("'01/01/1970'")) {
-
-				TEMPLATE_PATTERNS[i] = Pattern.compile(TEMPLATE[i]);
-			}
-			else {
-				TEMPLATE_PATTERNS[i] = Pattern.compile(
-					"\\b" + TEMPLATE[i] + "\\b");
-			}
-		}
-	}
-
 	private static final boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
 
 	private static final boolean _SUPPORTS_ALTER_COLUMN_TYPE = true;
@@ -951,7 +938,25 @@ public abstract class BaseDB implements DB {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDB.class);
 
+	private static Pattern[] _templatePatterns = new Pattern[TEMPLATE.length];
+	private static Pattern _timestampPattern = Pattern.compile(
+		"SPECIFIC_TIMESTAMP_\\d+");
+
 	private String _type;
 	private boolean _supportsStringCaseSensitiveQuery;
+
+	static {
+		for (int i = 0; i < TEMPLATE.length; i++) {
+			String variable = TEMPLATE[i];
+
+			if (variable.equals("##") || variable.equals("'01/01/1970'")) {
+				_templatePatterns[i] = Pattern.compile(variable);
+			}
+			else {
+				_templatePatterns[i] = Pattern.compile(
+					"\\b" + variable + "\\b");
+			}
+		}
+	}
 
 }
