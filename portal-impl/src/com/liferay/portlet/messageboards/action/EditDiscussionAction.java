@@ -14,9 +14,6 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.documentlibrary.FileExtensionException;
-import com.liferay.documentlibrary.FileNameException;
-import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
@@ -34,7 +31,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
-import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -97,12 +93,7 @@ public class EditDiscussionAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
-			else if (e instanceof FileExtensionException ||
-					 e instanceof FileNameException ||
-					 e instanceof FileSizeException ||
-					 e instanceof MessageBodyException ||
-					 e instanceof MessageSubjectException) {
-
+			else if (e instanceof MessageBodyException) {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				sendRedirect(actionRequest, actionResponse);
