@@ -262,7 +262,7 @@ public class DDMXSDImpl implements DDMXSD {
 	private static final String _DEFAULT_NAMESPACE = "alloy";
 
 	private static final String _TPL_DEFAULT_PATH =
-		"com/liferay/portlet/dynamicdatamapping/dependencies/text.ftl";
+		"com/liferay/portlet/dynamicdatamapping/dependencies/alloy/text.ftl";
 
 	private static final String _TPL_EXT = ".ftl";
 
