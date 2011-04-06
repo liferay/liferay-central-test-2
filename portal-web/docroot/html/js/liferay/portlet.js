@@ -612,7 +612,13 @@
 						onComplete: function(portlet, portletId) {
 							portlet.refreshURL = url;
 
-							Liferay.fire(portlet.portletId + '_refreshed');
+							Liferay.fire(
+								portlet.portletId + ':portletRefreshed',
+								{
+									portlet: portlet,
+									portletId: portletId
+								}
+							);
 						},
 						placeHolder: placeHolder,
 						url: url
