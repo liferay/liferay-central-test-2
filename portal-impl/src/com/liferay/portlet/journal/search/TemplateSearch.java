@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class TemplateSearch extends SearchContainer<JournalTemplate> {
 			TemplateDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			TemplateDisplayTerms.GROUP_IDS,
-			String.valueOf(displayTerms.getGroupIds()));
+			StringUtil.merge(displayTerms.getGroupIds()));
 		iteratorURL.setParameter(
 			TemplateDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(

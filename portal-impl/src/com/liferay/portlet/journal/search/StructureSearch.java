@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class StructureSearch extends SearchContainer<JournalStructure> {
 			StructureDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
 			StructureDisplayTerms.GROUP_IDS,
-			String.valueOf(displayTerms.getGroupIds()));
+			StringUtil.merge(displayTerms.getGroupIds()));
 		iteratorURL.setParameter(
 			StructureDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
