@@ -27,7 +27,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
-import com.liferay.portlet.journal.FeedDescriptionException;
 import com.liferay.portlet.journal.FeedIdException;
 import com.liferay.portlet.journal.FeedNameException;
 import com.liferay.portlet.journal.FeedTargetLayoutFriendlyUrlException;
@@ -79,7 +78,6 @@ public class EditFeedAction extends PortletAction {
 			}
 			else if (e instanceof DuplicateFeedIdException ||
 					 e instanceof FeedContentFieldException ||
-					 e instanceof FeedDescriptionException ||
 					 e instanceof FeedIdException ||
 					 e instanceof FeedNameException ||
 					 e instanceof FeedTargetLayoutFriendlyUrlException ||

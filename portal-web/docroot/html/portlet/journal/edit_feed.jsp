@@ -146,7 +146,6 @@ if (feed != null) {
 
 	<liferay-ui:error exception="<%= DuplicateFeedIdException.class %>" message="please-enter-a-unique-id" />
 	<liferay-ui:error exception="<%= FeedContentFieldException.class %>" message="please-select-a-valid-feed-item-content" />
-	<liferay-ui:error exception="<%= FeedDescriptionException.class %>" message="please-enter-a-valid-description" />
 	<liferay-ui:error exception="<%= FeedIdException.class %>" message="please-enter-a-valid-id" />
 	<liferay-ui:error exception="<%= FeedNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= FeedTargetLayoutFriendlyUrlException.class %>" message="please-enter-a-valid-target-layout-friendly-url" />

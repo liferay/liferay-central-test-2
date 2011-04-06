@@ -32,7 +32,6 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
-import com.liferay.portlet.journal.TemplateDescriptionException;
 import com.liferay.portlet.journal.TemplateIdException;
 import com.liferay.portlet.journal.TemplateNameException;
 import com.liferay.portlet.journal.TemplateSmallImageNameException;
@@ -104,7 +103,6 @@ public class EditTemplateAction extends PortletAction {
 			}
 			else if (e instanceof DuplicateTemplateIdException ||
 					 e instanceof RequiredTemplateException ||
-					 e instanceof TemplateDescriptionException ||
 					 e instanceof TemplateIdException ||
 					 e instanceof TemplateNameException ||
 					 e instanceof TemplateSmallImageNameException ||

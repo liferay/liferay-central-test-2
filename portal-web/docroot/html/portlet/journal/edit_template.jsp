@@ -96,7 +96,6 @@ if (template == null) {
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateTemplateIdException.class %>" message="please-enter-a-unique-id" />
-	<liferay-ui:error exception="<%= TemplateDescriptionException.class %>" message="please-enter-a-valid-description" />
 	<liferay-ui:error exception="<%= TemplateIdException.class %>" message="please-enter-a-valid-id" />
 	<liferay-ui:error exception="<%= TemplateNameException.class %>" message="please-enter-a-valid-name" />
 

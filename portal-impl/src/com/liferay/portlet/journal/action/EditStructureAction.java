@@ -31,7 +31,6 @@ import com.liferay.portlet.journal.DuplicateStructureElementException;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
-import com.liferay.portlet.journal.StructureDescriptionException;
 import com.liferay.portlet.journal.StructureIdException;
 import com.liferay.portlet.journal.StructureInheritanceException;
 import com.liferay.portlet.journal.StructureNameException;
@@ -102,7 +101,6 @@ public class EditStructureAction extends PortletAction {
 			else if (e instanceof DuplicateStructureElementException ||
 					 e instanceof DuplicateStructureIdException ||
 					 e instanceof RequiredStructureException ||
-					 e instanceof StructureDescriptionException ||
 					 e instanceof StructureIdException ||
 					 e instanceof StructureInheritanceException ||
 					 e instanceof StructureNameException ||
