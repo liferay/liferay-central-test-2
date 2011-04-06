@@ -69,7 +69,7 @@ public class DDMStructureImpl
 
 					try {
 						XPath xPathSelector = SAXReaderUtil.createXPath(
-							"//dynamic-element");
+							"//dynamic-element[@dataType]");
 
 						List<Node> nodes = xPathSelector.selectNodes(
 							SAXReaderUtil.read(getXsd()));
