@@ -83,7 +83,7 @@ public class CMISRepositoryLocalServiceImpl
 		CMISRepositoryHandler cmisRepositoryHandler = null;
 
 		if (repositoryImpl instanceof CMISRepositoryHandler) {
-			cmisRepositoryHandler = (CMISRepositoryHandler) repositoryImpl;
+			cmisRepositoryHandler = (CMISRepositoryHandler)repositoryImpl;
 		}
 		else if (Proxy.isProxyClass(repositoryImpl.getClass())) {
 			ClassLoaderBeanHandler classLoaderBeanHandler =
