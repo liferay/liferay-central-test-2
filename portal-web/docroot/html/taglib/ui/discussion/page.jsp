@@ -74,8 +74,7 @@ else {
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
-<div class="aui-helper-hidden lfr-message-response" id="<portlet:namespace />discussion-status-messages">
-</div>
+<div class="aui-helper-hidden lfr-message-response" id="<portlet:namespace />discussion-status-messages"></div>
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
 	<div class="taglib-discussion">
@@ -546,89 +545,10 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.getElementById("<%= randomNamespace %>messageScroll" + messageId).scrollIntoView();
 		}
 
-		function <portlet:namespace />showStatusMessage(type, message) {
-			A = AUI();
-
-			var messageContainer = A.one('#<portlet:namespace />discussion-status-messages');
-
-			var typeClass = 'portlet-msg-' + type;
-
-			messageContainer.removeClass('portlet-msg-error').removeClass('portlet-msg-success');
-			messageContainer.addClass(typeClass);
-			messageContainer.html(message);
-
-			messageContainer.show();
-		}
-
 		function <%= randomNamespace %>showForm(rowId, textAreaId) {
 			document.getElementById(rowId).style.display = "";
 			document.getElementById(textAreaId).focus();
 		}
-
-		Liferay.provide(
-			window,
-			'<portlet:namespace />sendMessage',
-			function(form) {
-				A = AUI();
-
-				var uri = form.getAttribute('action');
-
-				A.io.request(
-					uri,
-					{
-						form: {
-							id: form
-						},
-						dataType: 'json',
-						on: {
-							success: function(event, id, obj) {
-								var response = this.get('responseData');
-
-								var exception = response.exception;
-
-								if (!exception) {
-									Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
-
-									Liferay.after(
-										'<%= portletDisplay.getId() %>_refreshed',
-										function(event) {
-											<portlet:namespace />showStatusMessage('success', '<%= LanguageUtil.get(pageContext, "your-request-processed-successfully") %>');
-
-											location.hash = '#' + response.randomNamespace + 'messageScroll' + response.messageId;
-										}
-									);
-								}
-								else {
-									var errorKey = '';
-
-									if (exception.indexOf('MessageBodyException') > -1) {
-										errorKey = Liferay.Language.get('please-enter-a-valid-message');
-									}
-									else if (exception.indexOf('NoSuchMessageException') > -1) {
-										errorKey = Liferay.Language.get('the-message-could-not-be-found');
-									}
-									else if (exception.indexOf('PrincipalException') > -1) {
-										errorKey = Liferay.Language.get('you-do-not-have-the-required-permissions');
-									}
-									else if (exception.indexOf('RequiredMessageException') > -1) {
-										errorKey = Liferay.Language.get('you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply');
-									}
-									else {
-										errorKey = Liferay.Language.get('your-request-failed-to-complete');
-									}
-
-									<portlet:namespace />showStatusMessage('error', errorKey);
-								}
-							},
-							failure: function(event, id, obj) {
-								<portlet:namespace />showStatusMessage('error', Liferay.Language.get('your-request-failed-to-complete'));
-							}
-						}
-					}
-				);
-			},
-			['aui-io']
-		);
 
 		function <%= randomNamespace %>subscribeToComments(subscribe) {
 			if (subscribe) {
@@ -653,6 +573,91 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
 		}
+
+		Liferay.provide(
+			window,
+			'<portlet:namespace />sendMessage',
+			function(form) {
+				var A = AUI();
+
+				var uri = form.getAttribute('action');
+
+				A.io.request(
+					uri,
+					{
+						form: {
+							id: form
+						},
+						dataType: 'json',
+						on: {
+							success: function(event, id, obj) {
+								var response = this.get('responseData');
+
+								var exception = response.exception;
+
+								if (!exception) {
+									Liferay.after(
+										'<%= portletDisplay.getId() %>:portletRefreshed',
+										function(event) {
+											<portlet:namespace />showStatusMessage('success', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-processed-successfully") %>');
+
+											location.hash = '#' + response.randomNamespace + 'messageScroll' + response.messageId;
+										}
+									);
+
+									Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
+								}
+								else {
+									var errorKey = '';
+
+									if (exception.indexOf('MessageBodyException') > -1) {
+										errorKey = '<%= UnicodeLanguageUtil.get(pageContext, "please-enter-a-valid-message") %>';
+									}
+									else if (exception.indexOf('NoSuchMessageException') > -1) {
+										errorKey = '<%= UnicodeLanguageUtil.get(pageContext, "the-message-could-not-be-found") %>';
+									}
+									else if (exception.indexOf('PrincipalException') > -1) {
+										errorKey = '<%= UnicodeLanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions") %>';
+									}
+									else if (exception.indexOf('RequiredMessageException') > -1) {
+										errorKey = '<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-a-root-message-that-has-more-than-one-immediate-reply") %>';
+									}
+									else {
+										errorKey = '<%= UnicodeLanguageUtil.get(pageContext, "your-request-failed-to-complete") %>';
+									}
+
+									<portlet:namespace />showStatusMessage('error', errorKey);
+								}
+							},
+							failure: function(event, id, obj) {
+								<portlet:namespace />showStatusMessage('error', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-failed-to-complete") %>');
+							}
+						}
+					}
+				);
+			},
+			['aui-io']
+		);
+
+		Liferay.provide(
+			window,
+			'<portlet:namespace />showStatusMessage',
+			function(type, message) {
+				var A = AUI();
+
+				var messageContainer = A.one('#<portlet:namespace />discussion-status-messages');
+
+				messageContainer.removeClass('portlet-msg-error');
+				messageContainer.removeClass('portlet-msg-success');
+
+				messageContainer.addClass('portlet-msg-' + type);
+
+				messageContainer.html(message);
+
+				messageContainer.show();
+			},
+			['aui-base']
+		);
 	</aui:script>
 
 	<aui:script use="aui-event-input">
