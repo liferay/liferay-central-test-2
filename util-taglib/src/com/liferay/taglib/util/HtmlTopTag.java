@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.tagext.BodyTag;
 
@@ -37,52 +34,18 @@ public class HtmlTopTag extends BaseBodyTagSupport implements BodyTag {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		StringBundler content = getBodyContentAsStringBundler();
-
-		boolean append = true;
-
-		if (_applyOnce) {
-			Set<String> pageTopSet = (Set<String>)request.getAttribute(
-				WebKeys.PAGE_TOP_SET);
-
-			if (pageTopSet == null) {
-				pageTopSet = new HashSet<String>();
-
-				request.setAttribute(WebKeys.PAGE_TOP_SET, pageTopSet);
-			}
-
-			if (pageTopSet.contains(content.toString())) {
-				append = false;
-			}
-			else {
-				pageTopSet.add(content.toString());
-			}
-		}
-
-		if (append) {
-			StringBundler sb = (StringBundler)request.getAttribute(
+		StringBundler sb = (StringBundler)request.getAttribute(
 			WebKeys.PAGE_TOP);
 
-			if (sb == null) {
-				sb = new StringBundler();
+		if (sb == null) {
+			sb = new StringBundler();
 
-				request.setAttribute(WebKeys.PAGE_TOP, sb);
-			}
-
-			sb.append(content);
+			request.setAttribute(WebKeys.PAGE_TOP, sb);
 		}
+
+		sb.append(getBodyContentAsStringBundler());
 
 		return EVAL_PAGE;
 	}
-
-	public void setApplyOnce(boolean applyOnce) {
-		_applyOnce = applyOnce;
-	}
-
-	protected void cleanUp() {
-		_applyOnce = false;
-	}
-
-	private boolean _applyOnce = false;
 
 }
