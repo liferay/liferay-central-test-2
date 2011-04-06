@@ -14,14 +14,18 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.service.base.CMISRepositoryLocalServiceBaseImpl;
+
+import java.lang.reflect.Proxy;
 
 import org.apache.chemistry.opencmis.client.api.Document;
 
@@ -73,9 +77,25 @@ public class CMISRepositoryLocalServiceImpl
 	protected CMISRepository getCmisRepository(long repositoryId)
 		throws PortalException, SystemException {
 
-		CMISRepositoryHandler cmisRepositoryHandler =
-			(CMISRepositoryHandler)repositoryService.getRepositoryImpl(
-				repositoryId);
+		Repository repositoryImpl = repositoryService.getRepositoryImpl(
+			repositoryId);
+
+		CMISRepositoryHandler cmisRepositoryHandler = null;
+
+		if (repositoryImpl instanceof CMISRepositoryHandler) {
+			cmisRepositoryHandler = (CMISRepositoryHandler) repositoryImpl;
+		}
+		else if (Proxy.isProxyClass(repositoryImpl.getClass())) {
+			ClassLoaderBeanHandler classLoaderBeanHandler =
+				(ClassLoaderBeanHandler)Proxy.getInvocationHandler(
+					repositoryImpl);
+
+			Object bean = classLoaderBeanHandler.getBean();
+
+			if (bean instanceof CMISRepositoryHandler) {
+				cmisRepositoryHandler = (CMISRepositoryHandler)bean;
+			}
+		}
 
 		CMISRepository cmisRepository =
 			(CMISRepository)cmisRepositoryHandler.getCmisRepository();
