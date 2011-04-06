@@ -141,6 +141,14 @@ public class ClusterExecutorImpl
 		return new ArrayList<ClusterNode>(_addressMap.values());
 	}
 
+	public List<Address> getClusterNodeAddresses() {
+		if (!isEnabled()) {
+			return Collections.emptyList();
+		}
+
+		return getAddresses(_controlChannel);
+	}
+
 	public ClusterNode getLocalClusterNode() throws SystemException {
 		if (!isEnabled()) {
 			return null;

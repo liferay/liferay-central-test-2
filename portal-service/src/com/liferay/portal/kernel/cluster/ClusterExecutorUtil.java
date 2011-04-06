@@ -78,6 +78,18 @@ public class ClusterExecutorUtil {
 		return _clusterExecutor.getClusterNodes();
 	}
 
+	public static List<Address> getClusterNodeAddresses() {
+		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterExecutorUtil has not been initialized");
+			}
+
+			return Collections.emptyList();
+		}
+
+		return _clusterExecutor.getClusterNodeAddresses();
+	}
+
 	public static ClusterNode getLocalClusterNode() throws SystemException {
 		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
 			if (_log.isWarnEnabled()) {
