@@ -51,6 +51,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.naming.NamingException;
 
@@ -592,8 +593,7 @@ public abstract class BaseDB implements DB {
 			s = StringUtil.replace(data, "SPECIFIC_TIMESTAMP_", "");
 		}
 		else {
-			s = data.replaceAll(
-				"SPECIFIC_TIMESTAMP_" + "\\d+", "CURRENT_TIMESTAMP");
+			s = TIMESTAMP_PATTERN.matcher(data).replaceAll("CURRENT_TIMESTAMP");
 		}
 
 		return s;
@@ -888,15 +888,8 @@ public abstract class BaseDB implements DB {
 		}
 
 		for (int i = 0; i < TEMPLATE.length; i++) {
-			if (TEMPLATE[i].equals("##") ||
-				TEMPLATE[i].equals("'01/01/1970'")) {
-
-				template = template.replaceAll(TEMPLATE[i], actual[i]);
-			}
-			else {
-				template = template.replaceAll(
-					"\\b" + TEMPLATE[i] + "\\b", actual[i]);
-			}
+			template = TEMPLATE_PATTERNS[i].matcher(template).replaceAll(
+				actual[i]);
 		}
 
 		return template;
@@ -924,6 +917,25 @@ public abstract class BaseDB implements DB {
 		" STRING", " TEXT", " VARCHAR",
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};
+
+	protected static Pattern[] TEMPLATE_PATTERNS = new Pattern[TEMPLATE.length];
+
+	protected static Pattern TIMESTAMP_PATTERN = Pattern.compile(
+		"SPECIFIC_TIMESTAMP_\\d+");
+
+	static {
+		for (int i = 0; i < TEMPLATE.length; i++) {
+			if (TEMPLATE[i].equals("##") ||
+				TEMPLATE[i].equals("'01/01/1970'")) {
+
+				TEMPLATE_PATTERNS[i] = Pattern.compile(TEMPLATE[i]);
+			}
+			else {
+				TEMPLATE_PATTERNS[i] = Pattern.compile(
+					"\\b" + TEMPLATE[i] + "\\b");
+			}
+		}
+	}
 
 	private static final boolean _SUPPORTS_ALTER_COLUMN_NAME = true;
 
