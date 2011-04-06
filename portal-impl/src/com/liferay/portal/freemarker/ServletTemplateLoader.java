@@ -44,12 +44,12 @@ public class ServletTemplateLoader extends URLTemplateLoader {
 			String servletContextPath = ContextPathUtil.getContextPath(
 				StringPool.SLASH + servletContextName);
 
-			String pathContext = PortalUtil.getPathContext();
+			String contextPath = PortalUtil.getPathContext();
 
 			if (Validator.isNull(servletContextName) ||
-				servletContextPath.equals(pathContext)) {
+				servletContextPath.equals(contextPath)) {
 
-				servletContextName = pathContext;
+				servletContextName = contextPath;
 			}
 
 			ServletContext servletContext = ServletContextPool.get(
