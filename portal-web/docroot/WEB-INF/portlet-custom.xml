@@ -2174,9 +2174,9 @@
 				<value>cloud</value>
 			</preference>
 			<preference>
-                <name>maxAssetTags</name>
-                <value>10</value>
-            </preference>
+				<name>maxAssetTags</name>
+				<value>10</value>
+			</preference>
 			<preference>
 				<name>showAssetCount</name>
 				<value>true</value>
