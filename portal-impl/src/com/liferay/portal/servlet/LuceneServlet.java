@@ -17,6 +17,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.auth.TransientTokenUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -60,13 +61,13 @@ public class LuceneServlet extends HttpServlet {
 
 		long companyId = ParamUtil.getLong(request, "companyId");
 
-		if (companyId < 0) {
+		if (companyId < CompanyConstants.SYSTEM) {
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 
 			return;
 		}
 
-		if (companyId > 0) {
+		if (companyId != CompanyConstants.SYSTEM) {
 			try {
 				CompanyLocalServiceUtil.getCompanyById(companyId);
 			}
