@@ -456,19 +456,16 @@
 		<exception>DuplicateStructureId</exception>
 		<exception>DuplicateTemplateId</exception>
 		<exception>FeedContentField</exception>
-		<exception>FeedDescription</exception>
 		<exception>FeedId</exception>
 		<exception>FeedName</exception>
 		<exception>FeedTargetLayoutFriendlyUrl</exception>
 		<exception>FeedTargetPortletId</exception>
 		<exception>RequiredStructure</exception>
 		<exception>RequiredTemplate</exception>
-		<exception>StructureDescription</exception>
 		<exception>StructureId</exception>
 		<exception>StructureInheritance</exception>
 		<exception>StructureName</exception>
 		<exception>StructureXsd</exception>
-		<exception>TemplateDescription</exception>
 		<exception>TemplateId</exception>
 		<exception>TemplateName</exception>
 		<exception>TemplateSmallImageName</exception>

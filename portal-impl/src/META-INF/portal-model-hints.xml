@@ -1580,7 +1580,6 @@
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
-			<validator name="required" />
 		</field>
 		<field name="type" type="String" />
 		<field name="structureId" type="String">
@@ -1623,7 +1622,6 @@
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
-			<validator name="required" />
 		</field>
 		<field name="xsd" type="String">
 			<hint-collection name="CLOB" />
@@ -1650,7 +1648,6 @@
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
-			<validator name="required" />
 		</field>
 		<field name="xsl" type="String">
 			<hint-collection name="CLOB" />

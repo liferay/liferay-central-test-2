@@ -36,7 +36,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
-import com.liferay.portlet.journal.TemplateDescriptionException;
 import com.liferay.portlet.journal.TemplateIdException;
 import com.liferay.portlet.journal.TemplateNameException;
 import com.liferay.portlet.journal.TemplateSmallImageNameException;
@@ -97,8 +96,8 @@ public class JournalTemplateLocalServiceImpl
 		}
 
 		validate(
-			groupId, templateId, autoTemplateId, name, description, xsl,
-			smallImage, smallImageURL, smallFile, smallBytes);
+			groupId, templateId, autoTemplateId, name, xsl, smallImage,
+			smallImageURL, smallFile, smallBytes);
 
 		if (autoTemplateId) {
 			templateId = String.valueOf(counterLocalService.increment());
@@ -521,9 +520,7 @@ public class JournalTemplateLocalServiceImpl
 		catch (IOException ioe) {
 		}
 
-		validate(
-			name, description, xsl, smallImage, smallImageURL, smallFile,
-			smallBytes);
+		validate(name, xsl, smallImage, smallImageURL, smallFile, smallBytes);
 
 		JournalTemplate template = journalTemplatePersistence.findByG_T(
 			groupId, templateId);
@@ -592,8 +589,8 @@ public class JournalTemplateLocalServiceImpl
 
 	protected void validate(
 			long groupId, String templateId, boolean autoTemplateId,
-			String name, String description, String xsl, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
+			String name, String xsl, boolean smallImage, String smallImageURL,
+			File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (!autoTemplateId) {
@@ -607,21 +604,16 @@ public class JournalTemplateLocalServiceImpl
 			}
 		}
 
-		validate(
-			name, description, xsl, smallImage, smallImageURL, smallFile,
-			smallBytes);
+		validate(name, xsl, smallImage, smallImageURL, smallFile, smallBytes);
 	}
 
 	protected void validate(
-			String name, String description, String xsl, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
+			String name, String xsl, boolean smallImage, String smallImageURL,
+			File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
 			throw new TemplateNameException();
-		}
-		else if (Validator.isNull(description)) {
-			throw new TemplateDescriptionException();
 		}
 		else if (Validator.isNull(xsl)) {
 			throw new TemplateXslException();

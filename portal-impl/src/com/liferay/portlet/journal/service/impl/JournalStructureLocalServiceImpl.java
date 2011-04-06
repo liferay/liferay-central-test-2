@@ -36,7 +36,6 @@ import com.liferay.portlet.journal.DuplicateStructureElementException;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
-import com.liferay.portlet.journal.StructureDescriptionException;
 import com.liferay.portlet.journal.StructureIdException;
 import com.liferay.portlet.journal.StructureInheritanceException;
 import com.liferay.portlet.journal.StructureNameException;
@@ -85,7 +84,7 @@ public class JournalStructureLocalServiceImpl
 
 		validate(
 			groupId, structureId, autoStructureId, parentStructureId, name,
-			description, xsd);
+			xsd);
 
 		long id = counterLocalService.increment();
 
@@ -423,7 +422,7 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		validateParentStructureId(groupId, structureId, parentStructureId);
-		validate(groupId, parentStructureId, name, description, xsd);
+		validate(groupId, parentStructureId, name, xsd);
 
 		JournalStructure structure = journalStructurePersistence.findByG_S(
 			groupId, structureId);
@@ -526,8 +525,7 @@ public class JournalStructureLocalServiceImpl
 
 	protected void validate(
 			long groupId, String structureId, boolean autoStructureId,
-			String parentStructureId, String name, String description,
-			String xsd)
+			String parentStructureId, String name, String xsd)
 		throws PortalException, SystemException {
 
 		if (!autoStructureId) {
@@ -542,19 +540,15 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		validateParentStructureId(groupId, structureId, parentStructureId);
-		validate(groupId, parentStructureId, name, description, xsd);
+		validate(groupId, parentStructureId, name, xsd);
 	}
 
 	protected void validate(
-			long groupId, String parentStructureId, String name,
-			String description, String xsd)
+			long groupId, String parentStructureId, String name, String xsd)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
 			throw new StructureNameException();
-		}
-		else if (Validator.isNull(description)) {
-			throw new StructureDescriptionException();
 		}
 
 		if (Validator.isNull(xsd)) {

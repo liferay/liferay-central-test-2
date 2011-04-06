@@ -30,7 +30,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
-import com.liferay.portlet.journal.FeedDescriptionException;
 import com.liferay.portlet.journal.FeedIdException;
 import com.liferay.portlet.journal.FeedNameException;
 import com.liferay.portlet.journal.FeedTargetLayoutFriendlyUrlException;
@@ -66,8 +65,8 @@ public class JournalFeedLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			user.getCompanyId(), groupId, feedId, autoFeedId, name, description,
-			structureId, targetLayoutFriendlyUrl, contentField);
+			user.getCompanyId(), groupId, feedId, autoFeedId, name, structureId,
+			targetLayoutFriendlyUrl, contentField);
 
 		if (autoFeedId) {
 			feedId = String.valueOf(counterLocalService.increment());
@@ -290,7 +289,7 @@ public class JournalFeedLocalServiceImpl
 		JournalFeed feed = journalFeedPersistence.findByG_F(groupId, feedId);
 
 		validate(
-			feed.getCompanyId(), groupId, name, description, structureId,
+			feed.getCompanyId(), groupId, name, structureId,
 			targetLayoutFriendlyUrl, contentField);
 
 		feed.setModifiedDate(serviceContext.getModifiedDate(null));
@@ -360,8 +359,8 @@ public class JournalFeedLocalServiceImpl
 
 	protected void validate(
 			long companyId, long groupId, String feedId, boolean autoFeedId,
-			String name, String description, String structureId,
-			String targetLayoutFriendlyUrl, String contentField)
+			String name, String structureId, String targetLayoutFriendlyUrl,
+			String contentField)
 		throws PortalException, SystemException {
 
 		if (!autoFeedId) {
@@ -380,22 +379,17 @@ public class JournalFeedLocalServiceImpl
 		}
 
 		validate(
-			companyId, groupId, name, description, structureId,
-			targetLayoutFriendlyUrl, contentField);
+			companyId, groupId, name, structureId, targetLayoutFriendlyUrl,
+			contentField);
 	}
 
 	protected void validate(
-			long companyId, long groupId, String name, String description,
-			String structureId, String targetLayoutFriendlyUrl,
-			String contentField)
+			long companyId, long groupId, String name, String structureId,
+			String targetLayoutFriendlyUrl, String contentField)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
 			throw new FeedNameException();
-		}
-
-		if (Validator.isNull(description)) {
-			throw new FeedDescriptionException();
 		}
 
 		long plid = PortalUtil.getPlidFromFriendlyURL(
