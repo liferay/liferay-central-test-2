@@ -611,6 +611,8 @@
 						data: A.mix(params, data, true),
 						onComplete: function(portlet, portletId) {
 							portlet.refreshURL = url;
+
+							Liferay.fire(portlet.portletId + '_refreshed');
 						},
 						placeHolder: placeHolder,
 						url: url
