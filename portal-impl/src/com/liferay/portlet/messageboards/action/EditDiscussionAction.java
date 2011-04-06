@@ -15,8 +15,11 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
@@ -26,6 +29,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -35,12 +39,15 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -59,6 +66,8 @@ public class EditDiscussionAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
 		try {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
@@ -68,9 +77,19 @@ public class EditDiscussionAction extends PortletAction {
 				String randomNamespace = ParamUtil.getString(
 					actionRequest, "randomNamespace");
 
-				redirect +=
-					"#" + randomNamespace + "messageScroll" +
-						message.getMessageId();
+				jsonObject.put("messageId", message.getMessageId());
+				jsonObject.put("randomNamespace", randomNamespace);
+
+				HttpServletResponse response =
+					PortalUtil.getHttpServletResponse(actionResponse);
+
+				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
+				ServletResponseUtil.write(response, jsonObject.toString());
+
+				setForward(actionRequest, ActionConstants.COMMON_NULL);
+
+				return;
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteMessage(actionRequest);
@@ -85,18 +104,21 @@ public class EditDiscussionAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchMessageException ||
+			if (e instanceof MessageBodyException ||
+				e instanceof NoSuchMessageException ||
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				jsonObject.put("exception", e.getClass() + e.getMessage());
 
-				setForward(actionRequest, "portlet.message_boards.error");
-			}
-			else if (e instanceof MessageBodyException) {
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				HttpServletResponse response =
+					PortalUtil.getHttpServletResponse(actionResponse);
 
-				sendRedirect(actionRequest, actionResponse);
+				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
+				ServletResponseUtil.write(response, jsonObject.toString());
+
+				setForward(actionRequest, ActionConstants.COMMON_NULL);
 			}
 			else {
 				throw e;
