@@ -310,7 +310,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 
 			indexColorModel.getBlues(blues);
 
-			WritableRaster writableRaster = tempBufferedImage.getRaster(); 
+			WritableRaster writableRaster = tempBufferedImage.getRaster();
 
 			int pixel = writableRaster.getSample(0, 0, 0);
 
