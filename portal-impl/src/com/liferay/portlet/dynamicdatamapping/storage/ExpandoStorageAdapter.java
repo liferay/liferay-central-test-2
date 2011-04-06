@@ -419,7 +419,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		}
 		else {
 			sb.append("SELECT ExpandoColumn.name, ExpandoColumn.type_, ");
-			sb.append("ExpandoValue.rowId_, ExpandoValue.data_, ");
+			sb.append("ExpandoValue.rowId_, ExpandoValue.data_ ");
 		}
 
 		sb.append("FROM ExpandoValue INNER JOIN ExpandoColumn ON (");
