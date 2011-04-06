@@ -133,20 +133,20 @@ public class ClusterExecutorImpl
 		return Collections.unmodifiableList(_clusterEventListeners);
 	}
 
-	public List<ClusterNode> getClusterNodes() {
-		if (!isEnabled()) {
-			return Collections.emptyList();
-		}
-
-		return new ArrayList<ClusterNode>(_addressMap.values());
-	}
-
 	public List<Address> getClusterNodeAddresses() {
 		if (!isEnabled()) {
 			return Collections.emptyList();
 		}
 
 		return getAddresses(_controlChannel);
+	}
+
+	public List<ClusterNode> getClusterNodes() {
+		if (!isEnabled()) {
+			return Collections.emptyList();
+		}
+
+		return new ArrayList<ClusterNode>(_addressMap.values());
 	}
 
 	public ClusterNode getLocalClusterNode() throws SystemException {

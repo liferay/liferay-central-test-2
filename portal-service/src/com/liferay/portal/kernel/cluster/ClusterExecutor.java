@@ -33,9 +33,9 @@ public interface ClusterExecutor {
 
 	public List<ClusterEventListener> getClusterEventListeners();
 
-	public List<ClusterNode> getClusterNodes();
-
 	public List<Address> getClusterNodeAddresses();
+
+	public List<ClusterNode> getClusterNodes();
 
 	public ClusterNode getLocalClusterNode() throws SystemException;
 
