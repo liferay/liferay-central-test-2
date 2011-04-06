@@ -291,8 +291,25 @@ public class ImageProcessorImpl implements ImageProcessor {
 			IndexColorModel indexColorModel =
 				(IndexColorModel)bufferedImage.getColorModel();
 
+			BufferedImage tempBufferedImage =
+				new BufferedImage(1, 1, type, indexColorModel);
+
+			int bits = indexColorModel.getPixelSize();
+			int size = indexColorModel.getMapSize();
+			byte[] reds = new byte[size];
+			byte[] greens = new byte[size];
+			byte[] blues = new byte[size];
+			int pixel = tempBufferedImage.getRaster().getSample(0, 0, 0);
+
+			indexColorModel.getReds(reds);
+			indexColorModel.getGreens(greens);
+			indexColorModel.getBlues(blues);
+
+			IndexColorModel scaledIndexColorModel = new IndexColorModel(
+				bits, size, reds, greens, blues, pixel);
+
 			scaledBufferedImage = new BufferedImage(
-				scaledWidth, scaledHeight, type, indexColorModel);
+				scaledWidth, scaledHeight, type, scaledIndexColorModel);
 		}
 		else {
 			scaledBufferedImage = new BufferedImage(
