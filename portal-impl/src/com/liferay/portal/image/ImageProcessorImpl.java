@@ -35,6 +35,7 @@ import java.awt.image.DataBuffer;
 import java.awt.image.IndexColorModel;
 import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
+import java.awt.image.WritableRaster;
 
 import java.io.File;
 import java.io.IOException;
@@ -291,19 +292,27 @@ public class ImageProcessorImpl implements ImageProcessor {
 			IndexColorModel indexColorModel =
 				(IndexColorModel)bufferedImage.getColorModel();
 
-			BufferedImage tempBufferedImage =
-				new BufferedImage(1, 1, type, indexColorModel);
+			BufferedImage tempBufferedImage = new BufferedImage(
+				1, 1, type, indexColorModel);
 
 			int bits = indexColorModel.getPixelSize();
 			int size = indexColorModel.getMapSize();
+
 			byte[] reds = new byte[size];
-			byte[] greens = new byte[size];
-			byte[] blues = new byte[size];
-			int pixel = tempBufferedImage.getRaster().getSample(0, 0, 0);
 
 			indexColorModel.getReds(reds);
+
+			byte[] greens = new byte[size];
+
 			indexColorModel.getGreens(greens);
+
+			byte[] blues = new byte[size];
+
 			indexColorModel.getBlues(blues);
+
+			WritableRaster writableRaster = tempBufferedImage.getRaster(); 
+
+			int pixel = writableRaster.getSample(0, 0, 0);
 
 			IndexColorModel scaledIndexColorModel = new IndexColorModel(
 				bits, size, reds, greens, blues, pixel);
