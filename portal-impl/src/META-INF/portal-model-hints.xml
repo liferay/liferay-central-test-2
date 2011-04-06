@@ -1397,7 +1397,6 @@
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
-			<validator name="required" />
 		</field>
 		<field name="xsd" type="String">
 			<hint-collection name="CLOB" />
