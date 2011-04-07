@@ -137,11 +137,6 @@
 			<bean class="com.liferay.portal.json.JSONFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.json2.JSONSerializerFactoryUtil" class="com.liferay.portal.kernel.json2.JSONSerializerFactoryUtil">
-		<property name="JSONSerializerFactory">
-			<bean class="com.liferay.portal.json2.JSONSerializerFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil">
 		<property name="language">
 			<bean class="com.liferay.portal.language.LanguageImpl" />
