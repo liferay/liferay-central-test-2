@@ -29,5 +29,5 @@ facebookConnectRedirectURL = HttpUtil.addParameter(facebookConnectRedirectURL, "
 	<aui:input name="redirect_uri" type="hidden" value="<%= facebookConnectRedirectURL %>" />
 	<aui:input name="scope" type="hidden" value="email" />
 
-	<aui:button cssClass="facebook-login-button" type="submit" value="log-in-with-facebook" />
+	<aui:button cssClass="facebook-login-button" type="submit" value="sign-in-with-facebook" />
 </aui:form>
