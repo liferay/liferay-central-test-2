@@ -62,7 +62,7 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 			<liferay-ui:error key="emailUserAddedBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body-with-password" helpMessage="account-created-notification-body-with-password-help">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedBodyEditor" %>' name="emailUserAddedBody" toolbarSet="email" width="470" />
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= "initEmailUserAddedBodyEditor" %>' name="emailUserAddedBody" toolbarSet="email" width="470" />
 
 				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY + "--" %>' type="hidden" value="<%= adminEmailUserAddedBody %>" />
 			</aui:field-wrapper>
@@ -70,7 +70,7 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 			<liferay-ui:error key="emailUserAddedNoPasswordBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body-without-password" helpMessage="account-created-notification-body-without-password-help">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedNoPasswordBodyEditor" %>' name="emailUserAddedNoPasswordBody" toolbarSet="email" width="470" />
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= "initEmailUserAddedNoPasswordBodyEditor" %>' name="emailUserAddedNoPasswordBody" toolbarSet="email" width="470" />
 
 				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY + "--" %>' type="hidden" value="<%= adminEmailUserAddedNoPasswordBody %>" />
 			</aui:field-wrapper>
@@ -89,7 +89,7 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 			<liferay-ui:error key="emailPasswordSentBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordSentBodyEditor" %>' name="emailPasswordSentBody" toolbarSet="email" width="470" />
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= "initEmailPasswordSentBodyEditor" %>' name="emailPasswordSentBody" toolbarSet="email" width="470" />
 
 				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY + "--" %>' type="hidden" value="<%= adminEmailPasswordSentBody %>" />
 			</aui:field-wrapper>
@@ -108,7 +108,7 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 			<liferay-ui:error key="emailPasswordResetBody" message="please-enter-a-valid-body" />
 
 			<aui:field-wrapper label="body">
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailPasswordResetBodyEditor" %>' name="emailPasswordResetBody" toolbarSet="email" width="470" />
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= "initEmailPasswordResetBodyEditor" %>' name="emailPasswordResetBody" toolbarSet="email" width="470" />
 
 				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY + "--" %>' type="hidden" value="<%= adminEmailPasswordResetBody %>" />
 			</aui:field-wrapper>

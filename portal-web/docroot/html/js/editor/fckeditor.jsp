@@ -37,10 +37,6 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
-if (Validator.isNotNull(initMethod)) {
-	initMethod = namespace + initMethod;
-}
-
 if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
@@ -68,7 +64,7 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/fckeditor/fckeditor.js" %>' type="text/javascript"></script>
 </liferay-util:html-top>
 
-<script type="text/javascript">
+<aui:script>
 	window['<%= name %>'] = {
 		getHTML: function() {
 			return FCKeditorAPI.GetInstance('<%= name %>').GetXHTML();
@@ -81,17 +77,17 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 		initFckArea: function() {
 			var textArea = document.getElementById('<%= name %>');
 
-			var value = <%= HtmlUtil.escape(initMethod) %>;
-
-			textArea.value = value || '';
+			<c:if test="<%= Validator.isNotNull(initMethod) %>">
+				textArea.value = <%= HtmlUtil.escape(namespace + initMethod) %>();
+			</c:if>
 
 			var fckEditor = new FCKeditor('<%= name %>');
 
-			fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>";
+			fckEditor.Config['CustomConfigurationsPath'] = '<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>';
 
-			fckEditor.BasePath = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/";
-			fckEditor.Width = "100%";
-			fckEditor.Height = "100%";
+			fckEditor.BasePath = '<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/';
+			fckEditor.Width = '100%';
+			fckEditor.Height = '100%';
 			fckEditor.ToolbarSet = '<%= HtmlUtil.escape(toolbarSet) %>';
 
 			fckEditor.ReplaceTextarea();
@@ -148,15 +144,11 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 
 		},
 
-		setHTML: function(value) {
-			FCKeditorAPI.GetInstance('<%= name %>').SetHTML(value);
-		}
-
 		<%
 		if (Validator.isNotNull(onChangeMethod)) {
 		%>
 
-			,onChangeCallback: function() {
+			onChangeCallback: function() {
 				var dirty = FCKeditorAPI.GetInstance('<%= name %>').IsDirty();
 
 				if (dirty) {
@@ -164,16 +156,19 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 
 					FCKeditorAPI.GetInstance('<%= name %>').ResetIsDirty();
 				}
-			}
+			},
 
 		<%
 		}
 		%>
 
+		setHTML: function(value) {
+			FCKeditorAPI.GetInstance('<%= name %>').SetHTML(value);
+		}
 	};
 
 	window['<%= name %>'].initFckArea();
-</script>
+</aui:script>
 
 <div class="<%= cssClass %>">
 	<textarea id="<%= name %>" name="<%= name %>" style="display: none"></textarea>

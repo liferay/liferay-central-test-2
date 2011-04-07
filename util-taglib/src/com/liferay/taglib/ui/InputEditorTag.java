@@ -72,7 +72,7 @@ public class InputEditorTag extends IncludeTag {
 		_cssClass = null;
 		_editorImpl = null;
 		_height = null;
-		_initMethod = "initEditor()";
+		_initMethod = "initEditor";
 		_name = "editor";
 		_onChangeMethod = null;
 		_PAGE = null;
@@ -141,7 +141,7 @@ public class InputEditorTag extends IncludeTag {
 	private String _cssClass;
 	private String _editorImpl;
 	private String _height;
-	private String _initMethod = "initEditor()";
+	private String _initMethod = "initEditor";
 	private String _name = "editor";
 	private String _onChangeMethod;
 	private String _toolbarSet = "liferay";

@@ -124,7 +124,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						name='<%= renderResponse.getNamespace() + "structure_el_" + elInstanceId + "_content" %>'
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
 						toolbarSet="liferay-article"
-						initMethod='<%= "initEditor" + elInstanceId + "()" %>'
+						initMethod='<%= "initEditor" + elInstanceId %>'
 						height="460"
 						width="500"
 					/>

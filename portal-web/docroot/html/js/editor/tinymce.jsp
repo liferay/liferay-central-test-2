@@ -24,10 +24,6 @@ String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:on
 
 String languageId = LocaleUtil.toLanguageId(locale);
 
-if (Validator.isNotNull(initMethod)) {
-	initMethod = namespace + initMethod;
-}
-
 if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
@@ -41,9 +37,9 @@ if (Validator.isNotNull(onChangeMethod)) {
 	<textarea id="<%= name %>" name="<%= name %>" style="height: 100%; width: 100%;"></textarea>
 </div>
 
-<script type="text/javascript">
+<aui:script>
 	window['<%= name %>'] = {
-		onChangeCallbackCounter : 0,
+		onChangeCallbackCounter: 0,
 
 		fileBrowserCallback: function(field_name, url, type) {
 		},
@@ -64,7 +60,9 @@ if (Validator.isNotNull(onChangeMethod)) {
 		},
 
 		initInstanceCallback: function() {
-			window['<%= name %>'].init(<%= HtmlUtil.escape(initMethod) %>);
+			<c:if test="<%= Validator.isNotNull(initMethod) %>">
+				window['<%= name %>'].init(<%= HtmlUtil.escape(namespace + initMethod) %>());
+			</c:if>
 		},
 
 		onChangeCallback: function(tinyMCE) {
@@ -86,9 +84,7 @@ if (Validator.isNotNull(onChangeMethod)) {
 				var onChangeCallbackCounter = window['<%= name %>'].onChangeCallbackCounter;
 
 				if (onChangeCallbackCounter > 0) {
-
 					<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getHTML());
-
 				}
 
 				onChangeCallbackCounter++;
@@ -105,36 +101,36 @@ if (Validator.isNotNull(onChangeMethod)) {
 
 	tinyMCE.init(
 		{
-			convert_urls : false,
-			elements: "<%= name %>",
-			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
-			file_browser_callback : window['<%= name %>'].fileBrowserCallback,
-			init_instance_callback : window['<%= name %>'].initInstanceCallback,
-			invalid_elements: "script",
-			language : "<%= HtmlUtil.escape(languageId) %>",
-			mode : "exact",
+			convert_urls: false,
+			elements: '<%= name %>',
+			extended_valid_elements: 'a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]',
+			file_browser_callback: window['<%= name %>'].fileBrowserCallback,
+			init_instance_callback: window['<%= name %>'].initInstanceCallback,
+			invalid_elements: 'script',
+			language: '<%= HtmlUtil.escape(languageId) %>',
+			mode: 'exact',
 
 			<%
 			if (Validator.isNotNull(onChangeMethod)) {
 			%>
 
-				onchange_callback : window['<%= name %>'].onChangeCallback,
+				onchange_callback: window['<%= name %>'].onChangeCallback,
 
 			<%
 			}
 			%>
 
-			plugins : "table,advhr,advimage,advlink,iespell,preview,media,searchreplace,print,contextmenu",
-			relative_urls : false,
-			remove_script_host : false,
-			theme : "advanced",
-			theme_advanced_buttons1_add_before : "fontselect,fontsizeselect,forecolor,backcolor,separator",
-			theme_advanced_buttons2_add : "separator,media,advhr,separator,preview,print",
-			theme_advanced_buttons2_add_before: "cut,copy,paste,search,replace",
-			theme_advanced_buttons3_add_before : "tablecontrols,separator",
-			theme_advanced_disable : "formatselect,styleselect,help",
-			theme_advanced_toolbar_align : "left",
-			theme_advanced_toolbar_location : "top"
+			plugins: 'table,advhr,advimage,advlink,iespell,preview,media,searchreplace,print,contextmenu',
+			relative_urls: false,
+			remove_script_host: false,
+			theme: 'advanced',
+			theme_advanced_buttons1_add_before: 'fontselect,fontsizeselect,forecolor,backcolor,separator',
+			theme_advanced_buttons2_add: 'separator,media,advhr,separator,preview,print',
+			theme_advanced_buttons2_add_before: 'cut,copy,paste,search,replace',
+			theme_advanced_buttons3_add_before: 'tablecontrols,separator',
+			theme_advanced_disable: 'formatselect,styleselect,help',
+			theme_advanced_toolbar_align: 'left',
+			theme_advanced_toolbar_location: 'top'
 		}
 	);
-</script>
+</aui:script>

@@ -37,10 +37,6 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
-if (Validator.isNotNull(initMethod)) {
-	initMethod = namespace + initMethod;
-}
-
 if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
@@ -77,7 +73,7 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/ckeditor/ckeditor.js" %>' type="text/javascript"></script>
 </liferay-util:html-top>
 
-<script type="text/javascript">
+<aui:script>
 	window['<%= name %>'] = {
 		getCkData: function() {
 			var data = CKEDITOR.instances['<%= name %>'].getData();
@@ -89,48 +85,49 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 			return data;
 		},
 
-	getHTML: function() {
-		return window['<%= name %>'].getCkData();
-	},
+		getHTML: function() {
+			return window['<%= name %>'].getCkData();
+		},
 
-	getText: function() {
-		return window['<%= name %>'].getCkData();
-	},
+		getText: function() {
+			return window['<%= name %>'].getCkData();
+		},
 
-	setHtml: function(value) {
-		CKEDITOR.instances['<%= name %>'].setData(value);
-	}
+		<%
+		if (Validator.isNotNull(onChangeMethod)) {
+		%>
 
-	<%
-	if (Validator.isNotNull(onChangeMethod)) {
-	%>
+			onChangeCallback: function () {
+				var ckEditor = CKEDITOR.instances['<%= name %>'];
+				var dirty = ckEditor.checkDirty();
 
-		,onChangeCallback: function () {
-			var ckEditor = CKEDITOR.instances['<%= name %>'];
-			var dirty = ckEditor.checkDirty();
+				if (dirty) {
+					<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getText());
 
-			if (dirty) {
-				<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getText());
+					ckEditor.resetDirty();
+				}
+			},
 
-				ckEditor.resetDirty();
-			}
+		<%
 		}
+		%>
 
-	<%
-	}
-	%>
-
+		setHtml: function(value) {
+			CKEDITOR.instances['<%= name %>'].setData(value);
+		}
 	};
-</script>
+</aui:script>
 
 <div class="<%= cssClass %>">
 	<textarea id='<%= name %>' name='<%= name %>'></textarea>
 </div>
 
-<script type="text/javascript">
+<aui:script>
 	(function() {
 		function setData() {
-			ckEditor.setData(<%= HtmlUtil.escape(initMethod) %>);
+			<c:if test="<%= Validator.isNotNull(initMethod) %>">
+				ckEditor.setData(<%= HtmlUtil.escape(namespace + initMethod) %>());
+			</c:if>
 		}
 
 		<%
@@ -175,6 +172,7 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 		ckEditor.on(
 			'instanceReady',
 			function() {
+
 				<%
 				if (useCustomDataProcessor) {
 				%>
@@ -196,7 +194,6 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 				}
 
 				if (Validator.isNotNull(onChangeMethod)) {
-
 				%>
 
 					setInterval(
@@ -217,4 +214,4 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 			}
 		);
 	})();
-</script>
+</aui:script>

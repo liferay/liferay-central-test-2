@@ -22,6 +22,8 @@ AUI().add(
 			return (++ A.Env._uidx);
 		};
 
+		var TPL_EDITOR_ELEMENT = '<div id="{name}" name="{name}"></div>';
+
 		var TPL_FIELD_CONTAINER = '<div><li class="structure-field">' +
 				'<span class="journal-article-close"></span>' +
 				'<span class="folder">' +
@@ -60,8 +62,6 @@ AUI().add(
 			'<div class="journal-component"></div>' +
 			'<div class="forbidden-action"></div>' +
 		'</div>';
-
-		var TPL_EDITOR_ELEMENT = '<div id="{name}" name="{name}"></div>';
 
 		var TPL_INSTRUCTIONS_CONTAINER = '<div class="journal-article-instructions-container journal-article-instructions-message portlet-msg-info"></div>';
 
@@ -245,7 +245,7 @@ AUI().add(
 						var fieldInstance = instance._fieldInstanceFactory(componentType);
 
 						if (fieldInstance.get('fieldType') == 'text_area') {
-							var html = instance.buildHTMLEditor(fieldInstance);
+							instance.buildHTMLEditor(fieldInstance);
 						}
 
 						var htmlTemplate = instance._createFieldHTMLTemplate(fieldInstance);
@@ -2396,10 +2396,6 @@ AUI().add(
 				instance.repositionEditFieldOptions();
 			},
 
-			_emptyFunction: function() {
-				return '';
-			},
-
 			_fieldInstanceFactory: function(options) {
 				var instance = this;
 
@@ -2549,11 +2545,11 @@ AUI().add(
 							success: function(event, id, obj) {
 								var response = this.get('responseData');
 
-								var editorEl = A.one('#' + editorId);
+								var editorNode = A.one('#' + editorId);
 
-								editorEl.plug(A.Plugin.ParseContent);
+								editorNode.plug(A.Plugin.ParseContent);
 
-								editorEl.setContent(response);
+								editorNode.setContent(response);
 							}
 						}
 					}

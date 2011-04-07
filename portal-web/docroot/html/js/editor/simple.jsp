@@ -22,10 +22,6 @@ String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMe
 String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
-if (Validator.isNotNull(initMethod)) {
-	initMethod = namespace + initMethod;
-}
-
 if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
@@ -34,15 +30,17 @@ if (Validator.isNotNull(onChangeMethod)) {
 <aui:script>
 	window['<%= name %>'] = {
 		getHTML: function() {
-			return document.getElementById("<%= name %>").value;
+			return document.getElementById('<%= name %>').value;
 		},
 
 		initEditor: function() {
-			<%= name %>.setHTML(<%= initMethod %>);
+			<c:if test="<%= Validator.isNotNull(initMethod) %>">
+				<%= name %>.setHTML(<%= namespace + initMethod %>());
+			</c:if>
 		},
 
 		setHTML: function(value) {
-			document.getElementById("<%= name %>").value = value || '';
+			document.getElementById('<%= name %>').value = value || '';
 		}
 	};
 
