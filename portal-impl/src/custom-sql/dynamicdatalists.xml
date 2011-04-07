@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDMEntryFinder.countByC_G_E_N_D">
+	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryFinder.countByC_G_E_N_D">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT listId) AS COUNT_VALUE
+				COUNT(DISTINCT entryId) AS COUNT_VALUE
 			FROM
-				DDMEntry
+				DDLEntry
 			WHERE
 				(companyId = ?) AND
 				(groupId = ?) AND
@@ -17,12 +17,12 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDMEntryFinder.findByC_G_E_N_D">
+	<sql id="com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryFinder.findByC_G_E_N_D">
 		<![CDATA[
 			SELECT
-				{DDMEntry.*}
+				{DDLEntry.*}
 			FROM
-				DDMEntry
+				DDLEntry
 			WHERE
 				(companyId = ?) AND
 				(groupId = ?) AND
@@ -32,7 +32,7 @@
 					(description LIKE ? [$AND_OR_NULL_CHECK$])
 				)
 			ORDER BY
-				DDMEntry.listId DESC
+				DDLEntry.entryId DESC
 		]]>
 	</sql>
 </custom-sql>

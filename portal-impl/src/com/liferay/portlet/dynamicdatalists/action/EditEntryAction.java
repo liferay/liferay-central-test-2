@@ -58,10 +58,10 @@ public class EditEntryAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateList(actionRequest);
+				updateEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteList(actionRequest);
+				deleteEntry(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -121,19 +121,18 @@ public class EditEntryAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(
-				renderRequest, "portlet.dynamic_data_lists.edit_list"));
+				renderRequest, "portlet.dynamic_data_lists.edit_entry"));
 	}
 
-	protected void deleteList(ActionRequest actionRequest)
+	protected void deleteEntry(ActionRequest actionRequest)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		String entryKey = ParamUtil.getString(actionRequest, "entryKey");
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		DDLEntryServiceUtil.deleteEntry(groupId, entryKey);
+		DDLEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	protected DDLEntry updateList(ActionRequest actionRequest)
+	protected DDLEntry updateEntry(ActionRequest actionRequest)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
