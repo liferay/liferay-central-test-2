@@ -38,9 +38,11 @@
 	if (PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX) {
 		Sort sort = EnterpriseAdminUtil.getOrganizationSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
-		Hits hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, organizationParams, 0, 5, sort);
+		Hits hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, organizationParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
 
 		suborganizations = EnterpriseAdminUtil.getOrganizations(hits);
+		suborganizations = ListUtil.subList(suborganizations, 0, 5);
+
 		suborganizationsCount = suborganizations.size();
 	}
 	else {
