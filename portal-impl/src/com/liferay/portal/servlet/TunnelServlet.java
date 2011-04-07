@@ -54,8 +54,14 @@ public class TunnelServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		ObjectInputStream ois = new ObjectInputStream(
-			request.getInputStream());
+		ObjectInputStream ois;
+
+		try {
+			ois = new ObjectInputStream(request.getInputStream());
+		}
+		catch (IOException e) {
+			return;
+		}
 
 		Object returnObj = null;
 
