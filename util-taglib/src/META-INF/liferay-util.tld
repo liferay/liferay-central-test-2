@@ -10,11 +10,21 @@
 		<name>body-bottom</name>
 		<tag-class>com.liferay.taglib.util.BodyBottomTag</tag-class>
 		<body-content>JSP</body-content>
+		<attribute>
+			<name>outputKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>body-top</name>
 		<tag-class>com.liferay.taglib.util.BodyTopTag</tag-class>
 		<body-content>JSP</body-content>
+		<attribute>
+			<name>outputKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>buffer</name>
@@ -52,11 +62,21 @@
 		<name>html-bottom</name>
 		<tag-class>com.liferay.taglib.util.HtmlBottomTag</tag-class>
 		<body-content>JSP</body-content>
+		<attribute>
+			<name>outputKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>html-top</name>
 		<tag-class>com.liferay.taglib.util.HtmlTopTag</tag-class>
 		<body-content>JSP</body-content>
+		<attribute>
+			<name>outputKey</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>include</name>

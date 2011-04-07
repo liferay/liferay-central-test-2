@@ -14,38 +14,15 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class BodyTopTag extends BaseBodyTagSupport implements BodyTag {
+public class BodyTopTag extends CollectionTag {
 
-	public int doStartTag() {
-		return EVAL_BODY_BUFFERED;
-	}
-
-	public int doEndTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		StringBundler sb = (StringBundler)request.getAttribute(
-			WebKeys.PAGE_BODY_TOP);
-
-		if (sb == null) {
-			sb = new StringBundler();
-
-			request.setAttribute(WebKeys.PAGE_BODY_TOP, sb);
-		}
-
-		sb.append(getBodyContentAsStringBundler());
-
-		return EVAL_PAGE;
+	public BodyTopTag() {
+		super(WebKeys.PAGE_BODY_TOP);
 	}
 
 }
