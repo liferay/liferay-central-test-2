@@ -23,6 +23,12 @@ String refererParam = PortalUtil.escapeRedirect(request.getParameter(WebKeys.REF
 String refererRequest = (String)request.getAttribute(WebKeys.REFERER);
 String refererSession = (String)session.getAttribute(WebKeys.REFERER);
 
+if (themeDisplay.isAddSessionIdToURL()) {
+	refererParam = PortalUtil.getURLWithSessionId(refererParam, themeDisplay.getSessionId());
+	refererRequest = PortalUtil.getURLWithSessionId(refererRequest, themeDisplay.getSessionId());
+	refererSession = PortalUtil.getURLWithSessionId(refererSession, themeDisplay.getSessionId());
+}
+
 if ((refererParam != null) && (!refererParam.equals(StringPool.NULL)) && (!refererParam.equals(StringPool.BLANK))) {
 	referer = refererParam;
 }

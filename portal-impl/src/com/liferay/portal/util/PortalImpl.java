@@ -3329,6 +3329,10 @@ public class PortalImpl implements Portal {
 			return url;
 		}
 
+		if (Validator.isNull(url)) {
+			return url;
+		}
+
 		// LEP-4787
 
 		int x = url.indexOf(CharPool.SEMICOLON);
