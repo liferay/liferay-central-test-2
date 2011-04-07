@@ -266,6 +266,7 @@
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMTemplateLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMTemplateServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplatePersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplatePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplateFinder" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplateFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService" class="com.liferay.portlet.expando.service.impl.ExpandoColumnLocalServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnService" class="com.liferay.portlet.expando.service.impl.ExpandoColumnServiceImpl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceImpl" parent="basePersistence" />

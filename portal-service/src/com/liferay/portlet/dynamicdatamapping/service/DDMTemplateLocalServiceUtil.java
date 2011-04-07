@@ -264,6 +264,100 @@ public class DDMTemplateLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate addTemplate(
+		long structureId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addTemplate(structureId, name, description, type, language,
+			script, serviceContext);
+	}
+
+	public static void addTemplateResources(
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addTemplateResources(template, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static void addTemplateResources(
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.addTemplateResources(template, communityPermissions,
+			guestPermissions);
+	}
+
+	public static void deleteTemplate(
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteTemplate(template);
+	}
+
+	public static void deleteTemplate(long templateId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteTemplate(templateId);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
+		long companyId, long groupId, java.lang.String keywords, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, groupId, keywords, start, end,
+			orderByComparator);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String language, boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .search(companyId, groupId, name, description, type,
+			language, andOperator, start, end, orderByComparator);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().searchCount(companyId, groupId, keywords);
+	}
+
+	public static int searchCount(long companyId, long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .searchCount(companyId, groupId, name, description, type,
+			language, andOperator);
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate updateTemplate(
+		long templateId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateTemplate(templateId, name, description, type,
+			language, script, serviceContext);
+	}
+
 	public static DDMTemplateLocalService getService() {
 		if (_service == null) {
 			_service = (DDMTemplateLocalService)PortalBeanLocatorUtil.locate(DDMTemplateLocalService.class.getName());

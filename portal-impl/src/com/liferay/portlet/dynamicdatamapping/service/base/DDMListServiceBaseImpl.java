@@ -50,6 +50,7 @@ import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLink
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplateFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplatePersistence;
 
 import javax.sql.DataSource;
@@ -447,6 +448,24 @@ public abstract class DDMListServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the d d m template finder.
+	 *
+	 * @return the d d m template finder
+	 */
+	public DDMTemplateFinder getDDMTemplateFinder() {
+		return ddmTemplateFinder;
+	}
+
+	/**
+	 * Sets the d d m template finder.
+	 *
+	 * @param ddmTemplateFinder the d d m template finder
+	 */
+	public void setDDMTemplateFinder(DDMTemplateFinder ddmTemplateFinder) {
+		this.ddmTemplateFinder = ddmTemplateFinder;
+	}
+
+	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -686,6 +705,8 @@ public abstract class DDMListServiceBaseImpl extends PrincipalBean
 	protected DDMTemplateService ddmTemplateService;
 	@BeanReference(type = DDMTemplatePersistence.class)
 	protected DDMTemplatePersistence ddmTemplatePersistence;
+	@BeanReference(type = DDMTemplateFinder.class)
+	protected DDMTemplateFinder ddmTemplateFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

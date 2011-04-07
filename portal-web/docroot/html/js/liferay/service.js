@@ -750,6 +750,15 @@ Liferay.Service.registerClass(
 	}
 );
 
+Liferay.Service.registerClass(
+	Liferay.Service.DDM, "DDMTemplate",
+	{
+		addTemplate: true,
+		deleteTemplate: true,
+		updateTemplate: true
+	}
+);
+
 Liferay.Service.register("Liferay.Service.Expando", "com.liferay.portlet.expando.service");
 
 Liferay.Service.registerClass(

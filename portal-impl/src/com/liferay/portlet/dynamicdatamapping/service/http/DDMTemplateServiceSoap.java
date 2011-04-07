@@ -14,6 +14,13 @@
 
 package com.liferay.portlet.dynamicdatamapping.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -58,4 +65,57 @@ package com.liferay.portlet.dynamicdatamapping.service.http;
  * @generated
  */
 public class DDMTemplateServiceSoap {
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap addTemplate(
+		long structureId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.dynamicdatamapping.model.DDMTemplate returnValue =
+				DDMTemplateServiceUtil.addTemplate(structureId, name,
+					description, type, language, script, serviceContext);
+
+			return com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteTemplate(long templateId)
+		throws RemoteException {
+		try {
+			DDMTemplateServiceUtil.deleteTemplate(templateId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap updateTemplate(
+		long templateId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.dynamicdatamapping.model.DDMTemplate returnValue =
+				DDMTemplateServiceUtil.updateTemplate(templateId, name,
+					description, type, language, script, serviceContext);
+
+			return com.liferay.portlet.dynamicdatamapping.model.DDMTemplateSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DDMTemplateServiceSoap.class);
 }

@@ -256,6 +256,94 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService {
 		_ddmTemplateLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate addTemplate(
+		long structureId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.addTemplate(structureId, name,
+			description, type, language, script, serviceContext);
+	}
+
+	public void addTemplateResources(
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmTemplateLocalService.addTemplateResources(template,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addTemplateResources(
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmTemplateLocalService.addTemplateResources(template,
+			communityPermissions, guestPermissions);
+	}
+
+	public void deleteTemplate(
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate template)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmTemplateLocalService.deleteTemplate(template);
+	}
+
+	public void deleteTemplate(long templateId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddmTemplateLocalService.deleteTemplate(templateId);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
+		long companyId, long groupId, java.lang.String keywords, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.search(companyId, groupId, keywords,
+			start, end, orderByComparator);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String language, boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.search(companyId, groupId, name,
+			description, type, language, andOperator, start, end,
+			orderByComparator);
+	}
+
+	public int searchCount(long companyId, long groupId,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.searchCount(companyId, groupId, keywords);
+	}
+
+	public int searchCount(long companyId, long groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String language, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.searchCount(companyId, groupId, name,
+			description, type, language, andOperator);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate updateTemplate(
+		long templateId, java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String language,
+		java.lang.String script,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.updateTemplate(templateId, name,
+			description, type, language, script, serviceContext);
+	}
+
 	public DDMTemplateLocalService getWrappedDDMTemplateLocalService() {
 		return _ddmTemplateLocalService;
 	}
