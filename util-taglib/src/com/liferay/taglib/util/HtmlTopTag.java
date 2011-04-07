@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 /**
  * @author Brian Wing Shun Chan
  */
-public class HtmlTopTag extends CollectionTag {
+public class HtmlTopTag extends OutputTag {
 
 	public HtmlTopTag() {
 		super(WebKeys.PAGE_TOP);

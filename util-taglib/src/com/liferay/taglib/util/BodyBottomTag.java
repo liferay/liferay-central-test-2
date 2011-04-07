@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 /**
  * @author Brian Wing Shun Chan
  */
-public class BodyBottomTag extends CollectionTag {
+public class BodyBottomTag extends OutputTag {
 
 	public BodyBottomTag() {
 		super(WebKeys.PAGE_BODY_BOTTOM);

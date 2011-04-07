@@ -28,30 +28,14 @@ import javax.servlet.jsp.tagext.BodyTag;
 /**
  * @author Shuyang Zhou
  */
-public class CollectionTag extends BaseBodyTagSupport implements BodyTag {
+public class OutputTag extends BaseBodyTagSupport implements BodyTag {
 
-	public CollectionTag(String webKey) {
-		_webKey = webKey;
-	}
-
-	public int doStartTag() {
-		if (Validator.isNotNull(_outputKey)) {
-
-			Set<String> keySet = getKeySet();
-
-			if (!keySet.add(_outputKey)) {
-				_needOutput=false;
-
-				return SKIP_BODY;
-			}
-		}
-
-		_needOutput = true;
-		return EVAL_BODY_BUFFERED;
+	public OutputTag(String stringBundlerKey) {
+		_webKey = stringBundlerKey;
 	}
 
 	public int doEndTag() {
-		if (!_needOutput) {
+		if (!_output) {
 			return EVAL_PAGE;
 		}
 
@@ -71,29 +55,44 @@ public class CollectionTag extends BaseBodyTagSupport implements BodyTag {
 		return EVAL_PAGE;
 	}
 
+	public int doStartTag() {
+		if (Validator.isNotNull(_outputKey)) {
+			Set<String> outputKeys = getOutputKeys();
+
+			if (!outputKeys.add(_outputKey)) {
+				_output = false;
+
+				return SKIP_BODY;
+			}
+		}
+
+		_output = true;
+
+		return EVAL_BODY_BUFFERED;
+	}
+
 	public void setOutputKey(String outputKey) {
 		_outputKey = outputKey;
 	}
 
-	protected Set<String> getKeySet() {
+	protected Set<String> getOutputKeys() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		Set<String> keySet = (Set<String>)request.getAttribute(_KEYSET_KEY);
-		if (keySet == null) {
-			keySet = new HashSet<String>();
-			request.setAttribute(_KEYSET_KEY, keySet);
+		Set<String> outputKeys = (Set<String>)request.getAttribute(
+			OutputTag.class.getName());
+
+		if (outputKeys == null) {
+			outputKeys = new HashSet<String>();
+
+			request.setAttribute(OutputTag.class.getName(), outputKeys);
 		}
 
-		return keySet;
+		return outputKeys;
 	}
 
-	private static final String _KEYSET_KEY = "KEYSET_KEY";
-
-	private boolean _needOutput;
-
+	private boolean _output;
 	private String _outputKey;
-
-	private final String _webKey;
+	private String _webKey;
 
 }
