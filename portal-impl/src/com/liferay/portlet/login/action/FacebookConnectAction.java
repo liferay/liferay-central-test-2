@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -171,12 +172,18 @@ public class FacebookConnectAction extends PortletAction {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		UserLocalServiceUtil.addUser(
+		User user = UserLocalServiceUtil.addUser(
 			creatorUserId, themeDisplay.getCompanyId(), autoPassword, password1,
 			password2, autoScreenName, screenName, emailAddress, facebookId,
 			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+
+		UserLocalServiceUtil.updateLastLogin(
+			user.getUserId(), user.getLoginIP());
+
+		UserLocalServiceUtil.updatePasswordReset(
+			user.getUserId(), false);
 
 		session.setAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 	}
