@@ -68,6 +68,7 @@
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
