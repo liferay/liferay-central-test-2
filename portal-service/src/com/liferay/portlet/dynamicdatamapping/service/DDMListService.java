@@ -42,9 +42,10 @@ public interface DDMListService {
 	 * Never modify or reference this interface directly. Always use {@link DDMListServiceUtil} to access the d d m list remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatamapping.service.impl.DDMListServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatamapping.model.DDMList addList(
-		long groupId, java.lang.String listKey, boolean autoListKey,
+		long groupId, long structureId, java.lang.String listKey,
+		boolean autoListKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, long structureId,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -70,9 +71,9 @@ public interface DDMListService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMList updateList(
-		long groupId, java.lang.String listKey,
+		long groupId, long structureId, java.lang.String listKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, long structureId,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

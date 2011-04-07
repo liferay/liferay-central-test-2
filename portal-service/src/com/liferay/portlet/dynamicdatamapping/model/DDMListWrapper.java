@@ -219,6 +219,24 @@ public class DDMListWrapper implements DDMList {
 	}
 
 	/**
+	* Gets the structure ID of this d d m list.
+	*
+	* @return the structure ID of this d d m list
+	*/
+	public long getStructureId() {
+		return _ddmList.getStructureId();
+	}
+
+	/**
+	* Sets the structure ID of this d d m list.
+	*
+	* @param structureId the structure ID of this d d m list
+	*/
+	public void setStructureId(long structureId) {
+		_ddmList.setStructureId(structureId);
+	}
+
+	/**
 	* Gets the list key of this d d m list.
 	*
 	* @return the list key of this d d m list
@@ -353,24 +371,6 @@ public class DDMListWrapper implements DDMList {
 	*/
 	public void setDescription(java.lang.String description) {
 		_ddmList.setDescription(description);
-	}
-
-	/**
-	* Gets the structure ID of this d d m list.
-	*
-	* @return the structure ID of this d d m list
-	*/
-	public long getStructureId() {
-		return _ddmList.getStructureId();
-	}
-
-	/**
-	* Sets the structure ID of this d d m list.
-	*
-	* @param structureId the structure ID of this d d m list
-	*/
-	public void setStructureId(long structureId) {
-		_ddmList.setStructureId(structureId);
 	}
 
 	public boolean isNew() {

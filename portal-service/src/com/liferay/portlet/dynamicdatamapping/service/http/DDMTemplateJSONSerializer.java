@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.StringPool;
 
-import com.liferay.portlet.dynamicdatamapping.model.DDMList;
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 
 import java.util.Date;
 import java.util.List;
@@ -28,12 +28,12 @@ import java.util.List;
  * @author    Brian Wing Shun Chan
  * @generated
  */
-public class DDMListJSONSerializer {
-	public static JSONObject toJSONObject(DDMList model) {
+public class DDMTemplateJSONSerializer {
+	public static JSONObject toJSONObject(DDMTemplate model) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("uuid", model.getUuid());
-		jsonObject.put("listId", model.getListId());
+		jsonObject.put("templateId", model.getTemplateId());
 		jsonObject.put("groupId", model.getGroupId());
 		jsonObject.put("companyId", model.getCompanyId());
 		jsonObject.put("userId", model.getUserId());
@@ -59,18 +59,20 @@ public class DDMListJSONSerializer {
 
 		jsonObject.put("modifiedDate", modifiedDateJSON);
 		jsonObject.put("structureId", model.getStructureId());
-		jsonObject.put("listKey", model.getListKey());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
+		jsonObject.put("type", model.getType());
+		jsonObject.put("language", model.getLanguage());
+		jsonObject.put("script", model.getScript());
 
 		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portlet.dynamicdatamapping.model.DDMList[] models) {
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate[] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (DDMList model : models) {
+		for (DDMTemplate model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 
@@ -78,10 +80,10 @@ public class DDMListJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portlet.dynamicdatamapping.model.DDMList[][] models) {
+		com.liferay.portlet.dynamicdatamapping.model.DDMTemplate[][] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (DDMList[] model : models) {
+		for (DDMTemplate[] model : models) {
 			jsonArray.put(toJSONArray(model));
 		}
 
@@ -89,10 +91,10 @@ public class DDMListJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		List<com.liferay.portlet.dynamicdatamapping.model.DDMList> models) {
+		List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (DDMList model : models) {
+		for (DDMTemplate model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

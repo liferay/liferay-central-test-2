@@ -192,6 +192,20 @@ public interface DDMListModel extends BaseModel<DDMList>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the structure ID of this d d m list.
+	 *
+	 * @return the structure ID of this d d m list
+	 */
+	public long getStructureId();
+
+	/**
+	 * Sets the structure ID of this d d m list.
+	 *
+	 * @param structureId the structure ID of this d d m list
+	 */
+	public void setStructureId(long structureId);
+
+	/**
 	 * Gets the list key of this d d m list.
 	 *
 	 * @return the list key of this d d m list
@@ -293,20 +307,6 @@ public interface DDMListModel extends BaseModel<DDMList>, GroupedModel {
 	 * @param description the description of this d d m list
 	 */
 	public void setDescription(String description);
-
-	/**
-	 * Gets the structure ID of this d d m list.
-	 *
-	 * @return the structure ID of this d d m list
-	 */
-	public long getStructureId();
-
-	/**
-	 * Sets the structure ID of this d d m list.
-	 *
-	 * @param structureId the structure ID of this d d m list
-	 */
-	public void setStructureId(long structureId);
 
 	public boolean isNew();
 

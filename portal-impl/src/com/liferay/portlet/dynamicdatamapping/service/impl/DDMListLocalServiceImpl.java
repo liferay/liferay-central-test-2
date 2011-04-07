@@ -43,9 +43,9 @@ import java.util.Map;
 public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 
 	public DDMList addList(
-			long userId, long groupId, String listKey, boolean autoListKey,
-			Map<Locale, String> nameMap, String description, long structureId,
-			ServiceContext serviceContext)
+			long userId, long groupId, long structureId, String listKey,
+			boolean autoListKey, Map<Locale, String> nameMap,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// List
@@ -60,7 +60,7 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 
 		Date now = new Date();
 
-		validate(groupId, listKey, autoListKey, nameMap, structureId);
+		validate(groupId, structureId, listKey, autoListKey, nameMap);
 
 		long listId = counterLocalService.increment();
 
@@ -73,10 +73,10 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 		list.setUserName(user.getFullName());
 		list.setCreateDate(serviceContext.getCreateDate(now));
 		list.setModifiedDate(serviceContext.getModifiedDate(now));
+		list.setStructureId(structureId);
 		list.setListKey(listKey);
 		list.setNameMap(nameMap);
 		list.setDescription(description);
-		list.setStructureId(structureId);
 
 		ddmListPersistence.update(list, false);
 
@@ -203,18 +203,20 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 	}
 
 	public DDMList updateList(
-			long groupId, String listKey, Map<Locale, String> nameMap,
-			String description, long structureId, ServiceContext serviceContext)
+			long groupId, long structureId, String listKey,
+			Map<Locale, String> nameMap, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		validate(nameMap, structureId);
+		validateStructureId(structureId);
+		validateName(nameMap);
 
 		DDMList list = ddmListPersistence.findByG_L(groupId, listKey);
 
 		list.setModifiedDate(serviceContext.getModifiedDate(null));
+		list.setStructureId(structureId);
 		list.setNameMap(nameMap);
 		list.setDescription(description);
-		list.setStructureId(structureId);
 
 		ddmListPersistence.update(list, false);
 
@@ -222,9 +224,11 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long groupId, String listKey, boolean autoListKey,
-			Map<Locale, String> nameMap, long structureId)
+			long groupId, long structureId, String listKey, boolean autoListKey,
+			Map<Locale, String> nameMap)
 		throws PortalException, SystemException {
+
+		validateStructureId(structureId);
 
 		if (!autoListKey) {
 			validateListKey(listKey);
@@ -236,14 +240,7 @@ public class DDMListLocalServiceImpl extends DDMListLocalServiceBaseImpl {
 			}
 		}
 
-		validate(nameMap, structureId);
-	}
-
-	protected void validate(Map<Locale, String> nameMap, long structureId)
-		throws PortalException, SystemException {
-
 		validateName(nameMap);
-		validateStructureId(structureId);
 	}
 
 	protected void validateListKey(String listKey)

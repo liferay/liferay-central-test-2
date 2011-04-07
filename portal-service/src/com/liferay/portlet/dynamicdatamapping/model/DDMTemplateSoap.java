@@ -21,18 +21,18 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.dynamicdatamapping.service.http.DDMListServiceSoap}.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.dynamicdatamapping.service.http.DDMTemplateServiceSoap}.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.dynamicdatamapping.service.http.DDMListServiceSoap
+ * @see       com.liferay.portlet.dynamicdatamapping.service.http.DDMTemplateServiceSoap
  * @generated
  */
-public class DDMListSoap implements Serializable {
-	public static DDMListSoap toSoapModel(DDMList model) {
-		DDMListSoap soapModel = new DDMListSoap();
+public class DDMTemplateSoap implements Serializable {
+	public static DDMTemplateSoap toSoapModel(DDMTemplate model) {
+		DDMTemplateSoap soapModel = new DDMTemplateSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setListId(model.getListId());
+		soapModel.setTemplateId(model.getTemplateId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
@@ -40,15 +40,17 @@ public class DDMListSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setStructureId(model.getStructureId());
-		soapModel.setListKey(model.getListKey());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setType(model.getType());
+		soapModel.setLanguage(model.getLanguage());
+		soapModel.setScript(model.getScript());
 
 		return soapModel;
 	}
 
-	public static DDMListSoap[] toSoapModels(DDMList[] models) {
-		DDMListSoap[] soapModels = new DDMListSoap[models.length];
+	public static DDMTemplateSoap[] toSoapModels(DDMTemplate[] models) {
+		DDMTemplateSoap[] soapModels = new DDMTemplateSoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -57,14 +59,14 @@ public class DDMListSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DDMListSoap[][] toSoapModels(DDMList[][] models) {
-		DDMListSoap[][] soapModels = null;
+	public static DDMTemplateSoap[][] toSoapModels(DDMTemplate[][] models) {
+		DDMTemplateSoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new DDMListSoap[models.length][models[0].length];
+			soapModels = new DDMTemplateSoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new DDMListSoap[0][0];
+			soapModels = new DDMTemplateSoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -74,25 +76,25 @@ public class DDMListSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static DDMListSoap[] toSoapModels(List<DDMList> models) {
-		List<DDMListSoap> soapModels = new ArrayList<DDMListSoap>(models.size());
+	public static DDMTemplateSoap[] toSoapModels(List<DDMTemplate> models) {
+		List<DDMTemplateSoap> soapModels = new ArrayList<DDMTemplateSoap>(models.size());
 
-		for (DDMList model : models) {
+		for (DDMTemplate model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new DDMListSoap[soapModels.size()]);
+		return soapModels.toArray(new DDMTemplateSoap[soapModels.size()]);
 	}
 
-	public DDMListSoap() {
+	public DDMTemplateSoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _listId;
+		return _templateId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setListId(pk);
+		setTemplateId(pk);
 	}
 
 	public String getUuid() {
@@ -103,12 +105,12 @@ public class DDMListSoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getListId() {
-		return _listId;
+	public long getTemplateId() {
+		return _templateId;
 	}
 
-	public void setListId(long listId) {
-		_listId = listId;
+	public void setTemplateId(long templateId) {
+		_templateId = templateId;
 	}
 
 	public long getGroupId() {
@@ -167,14 +169,6 @@ public class DDMListSoap implements Serializable {
 		_structureId = structureId;
 	}
 
-	public String getListKey() {
-		return _listKey;
-	}
-
-	public void setListKey(String listKey) {
-		_listKey = listKey;
-	}
-
 	public String getName() {
 		return _name;
 	}
@@ -191,8 +185,32 @@ public class DDMListSoap implements Serializable {
 		_description = description;
 	}
 
+	public String getType() {
+		return _type;
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
+	public String getLanguage() {
+		return _language;
+	}
+
+	public void setLanguage(String language) {
+		_language = language;
+	}
+
+	public String getScript() {
+		return _script;
+	}
+
+	public void setScript(String script) {
+		_script = script;
+	}
+
 	private String _uuid;
-	private long _listId;
+	private long _templateId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -200,7 +218,9 @@ public class DDMListSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _structureId;
-	private String _listKey;
 	private String _name;
 	private String _description;
+	private String _type;
+	private String _language;
+	private String _script;
 }

@@ -29,14 +29,15 @@ public class DDMListServiceWrapper implements DDMListService {
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMList addList(
-		long groupId, java.lang.String listKey, boolean autoListKey,
+		long groupId, long structureId, java.lang.String listKey,
+		boolean autoListKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, long structureId,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListService.addList(groupId, listKey, autoListKey, nameMap,
-			description, structureId, serviceContext);
+		return _ddmListService.addList(groupId, structureId, listKey,
+			autoListKey, nameMap, description, serviceContext);
 	}
 
 	public void deleteList(long listId)
@@ -66,14 +67,14 @@ public class DDMListServiceWrapper implements DDMListService {
 	}
 
 	public com.liferay.portlet.dynamicdatamapping.model.DDMList updateList(
-		long groupId, java.lang.String listKey,
+		long groupId, long structureId, java.lang.String listKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, long structureId,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddmListService.updateList(groupId, listKey, nameMap,
-			description, structureId, serviceContext);
+		return _ddmListService.updateList(groupId, structureId, listKey,
+			nameMap, description, serviceContext);
 	}
 
 	public DDMListService getWrappedDDMListService() {

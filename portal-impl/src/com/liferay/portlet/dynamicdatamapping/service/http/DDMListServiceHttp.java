@@ -55,10 +55,10 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMListServiceUtil;
  */
 public class DDMListServiceHttp {
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMList addList(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String listKey,
-		boolean autoListKey,
+		HttpPrincipal httpPrincipal, long groupId, long structureId,
+		java.lang.String listKey, boolean autoListKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, long structureId,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -67,7 +67,7 @@ public class DDMListServiceHttp {
 					"addList", _addListParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					listKey, autoListKey, nameMap, description, structureId,
+					structureId, listKey, autoListKey, nameMap, description,
 					serviceContext);
 
 			Object returnObj = null;
@@ -234,9 +234,10 @@ public class DDMListServiceHttp {
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMList updateList(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String listKey,
+		HttpPrincipal httpPrincipal, long groupId, long structureId,
+		java.lang.String listKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, long structureId,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -245,7 +246,7 @@ public class DDMListServiceHttp {
 					"updateList", _updateListParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					listKey, nameMap, description, structureId, serviceContext);
+					structureId, listKey, nameMap, description, serviceContext);
 
 			Object returnObj = null;
 
@@ -275,8 +276,8 @@ public class DDMListServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DDMListServiceHttp.class);
 	private static final Class<?>[] _addListParameterTypes0 = new Class[] {
-			long.class, java.lang.String.class, boolean.class,
-			java.util.Map.class, java.lang.String.class, long.class,
+			long.class, long.class, java.lang.String.class, boolean.class,
+			java.util.Map.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteListParameterTypes1 = new Class[] {
@@ -292,8 +293,8 @@ public class DDMListServiceHttp {
 			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _updateListParameterTypes5 = new Class[] {
-			long.class, java.lang.String.class, java.util.Map.class,
-			java.lang.String.class, long.class,
+			long.class, long.class, java.lang.String.class, java.util.Map.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

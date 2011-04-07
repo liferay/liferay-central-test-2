@@ -76,10 +76,10 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 		newDDMList.setUserName(randomString());
 		newDDMList.setCreateDate(nextDate());
 		newDDMList.setModifiedDate(nextDate());
+		newDDMList.setStructureId(nextLong());
 		newDDMList.setListKey(randomString());
 		newDDMList.setName(randomString());
 		newDDMList.setDescription(randomString());
-		newDDMList.setStructureId(nextLong());
 
 		_persistence.update(newDDMList, false);
 
@@ -95,12 +95,12 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDDMList.getCreateDate()));
 		assertEquals(Time.getShortTimestamp(existingDDMList.getModifiedDate()),
 			Time.getShortTimestamp(newDDMList.getModifiedDate()));
+		assertEquals(existingDDMList.getStructureId(),
+			newDDMList.getStructureId());
 		assertEquals(existingDDMList.getListKey(), newDDMList.getListKey());
 		assertEquals(existingDDMList.getName(), newDDMList.getName());
 		assertEquals(existingDDMList.getDescription(),
 			newDDMList.getDescription());
-		assertEquals(existingDDMList.getStructureId(),
-			newDDMList.getStructureId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -240,10 +240,10 @@ public class DDMListPersistenceTest extends BasePersistenceTestCase {
 		ddmList.setUserName(randomString());
 		ddmList.setCreateDate(nextDate());
 		ddmList.setModifiedDate(nextDate());
+		ddmList.setStructureId(nextLong());
 		ddmList.setListKey(randomString());
 		ddmList.setName(randomString());
 		ddmList.setDescription(randomString());
-		ddmList.setStructureId(nextLong());
 
 		_persistence.update(ddmList, false);
 

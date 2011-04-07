@@ -40,6 +40,8 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalServi
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListItemPersistence;
@@ -48,6 +50,7 @@ import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLink
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplatePersistence;
 
 import javax.sql.DataSource;
 
@@ -388,6 +391,62 @@ public abstract class DDMStructureLinkServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the d d m template local service.
+	 *
+	 * @return the d d m template local service
+	 */
+	public DDMTemplateLocalService getDDMTemplateLocalService() {
+		return ddmTemplateLocalService;
+	}
+
+	/**
+	 * Sets the d d m template local service.
+	 *
+	 * @param ddmTemplateLocalService the d d m template local service
+	 */
+	public void setDDMTemplateLocalService(
+		DDMTemplateLocalService ddmTemplateLocalService) {
+		this.ddmTemplateLocalService = ddmTemplateLocalService;
+	}
+
+	/**
+	 * Gets the d d m template remote service.
+	 *
+	 * @return the d d m template remote service
+	 */
+	public DDMTemplateService getDDMTemplateService() {
+		return ddmTemplateService;
+	}
+
+	/**
+	 * Sets the d d m template remote service.
+	 *
+	 * @param ddmTemplateService the d d m template remote service
+	 */
+	public void setDDMTemplateService(DDMTemplateService ddmTemplateService) {
+		this.ddmTemplateService = ddmTemplateService;
+	}
+
+	/**
+	 * Gets the d d m template persistence.
+	 *
+	 * @return the d d m template persistence
+	 */
+	public DDMTemplatePersistence getDDMTemplatePersistence() {
+		return ddmTemplatePersistence;
+	}
+
+	/**
+	 * Sets the d d m template persistence.
+	 *
+	 * @param ddmTemplatePersistence the d d m template persistence
+	 */
+	public void setDDMTemplatePersistence(
+		DDMTemplatePersistence ddmTemplatePersistence) {
+		this.ddmTemplatePersistence = ddmTemplatePersistence;
+	}
+
+	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -621,6 +680,12 @@ public abstract class DDMStructureLinkServiceBaseImpl extends PrincipalBean
 	protected DDMStructureLinkService ddmStructureLinkService;
 	@BeanReference(type = DDMStructureLinkPersistence.class)
 	protected DDMStructureLinkPersistence ddmStructureLinkPersistence;
+	@BeanReference(type = DDMTemplateLocalService.class)
+	protected DDMTemplateLocalService ddmTemplateLocalService;
+	@BeanReference(type = DDMTemplateService.class)
+	protected DDMTemplateService ddmTemplateService;
+	@BeanReference(type = DDMTemplatePersistence.class)
+	protected DDMTemplatePersistence ddmTemplatePersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

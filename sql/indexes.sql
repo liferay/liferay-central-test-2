@@ -154,6 +154,13 @@ create index IX_D43E4208 on DDMStructureLink (classNameId);
 create unique index IX_C803899D on DDMStructureLink (classPK);
 create index IX_17692B58 on DDMStructureLink (structureId);
 
+create index IX_DB24DDDD on DDMTemplate (groupId);
+create index IX_33BEF579 on DDMTemplate (language);
+create index IX_C9757A51 on DDMTemplate (structureId);
+create index IX_C4F283C8 on DDMTemplate (type_);
+create index IX_F2A243A7 on DDMTemplate (uuid_);
+create unique index IX_1AA75CE3 on DDMTemplate (uuid_, groupId);
+
 create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_F4AF5636 on DLFileEntry (groupId);
 create index IX_93CF8193 on DLFileEntry (groupId, folderId);
