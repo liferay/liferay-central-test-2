@@ -120,9 +120,9 @@ public class DDMTemplateFinderImpl
 			qPos.add(companyId);
 			qPos.add(groupId);
 			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 			qPos.add(types, 2);
 			qPos.add(languages, 2);
-			qPos.add(descriptions, 2);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -178,8 +178,8 @@ public class DDMTemplateFinderImpl
 
 		return findByC_G_N_D_T_L(
 			companyId, groupId, new String[] {name}, new String[] {description},
-			new String[] {type}, new String[] {language},
-			andOperator, start, end, orderByComparator);
+			new String[] {type}, new String[] {language}, andOperator, start,
+			end, orderByComparator);
 	}
 
 	public List<DDMTemplate> findByC_G_N_D_T_L(
@@ -232,9 +232,9 @@ public class DDMTemplateFinderImpl
 			qPos.add(companyId);
 			qPos.add(groupId);
 			qPos.add(names, 2);
+			qPos.add(descriptions, 2);
 			qPos.add(types, 2);
 			qPos.add(languages, 2);
-			qPos.add(descriptions, 2);
 
 			return (List<DDMTemplate>)QueryUtil.list(
 				q, getDialect(), start, end);
