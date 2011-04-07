@@ -31,19 +31,23 @@ if (Validator.isNotNull(onChangeMethod)) {
 }
 %>
 
-<script type="text/javascript">
-	function getHTML() {
-		return document.getElementById("textArea").value;
-	}
+<aui:script>
+	window['<%= name %>'] = {
+		getHTML: function() {
+			return document.getElementById("<%= name %>").value;
+		},
 
-	function initEditor() {
-		setHTML(parent.<%= initMethod %>());
-	}
+		initEditor: function() {
+			<%= name %>.setHTML(<%= initMethod %>);
+		},
 
-	function setHTML(value) {
-		document.getElementById("textArea").value = value;
-	}
-</script>
+		setHTML: function(value) {
+			document.getElementById("<%= name %>").value = value || '';
+		}
+	};
+
+	window['<%= name %>'].initEditor();
+</aui:script>
 
 <div class="<%= cssClass %>">
 	<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">

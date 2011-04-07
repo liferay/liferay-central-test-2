@@ -78,34 +78,39 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 </liferay-util:html-top>
 
 <script type="text/javascript">
-	function getCkData() {
-		var data = CKEDITOR.instances.CKEditor1.getData();
+	window['<%= name %>'] = {
+		getCkData: function() {
+			var data = CKEDITOR.instances['<%= name %>'].getData();
 
-		if (CKEDITOR.env.gecko && (CKEDITOR.tools.trim(data) == '<br />')) {
-			data = '';
-		}
+			if (CKEDITOR.env.gecko && (CKEDITOR.tools.trim(data) == '<br />')) {
+				data = '';
+			}
 
-		return data;
-	}
+			return data;
+		},
 
-	function getHTML() {
-		return getCkData();
-	}
+	getHTML: function() {
+		return window['<%= name %>'].getCkData();
+	},
 
-	function getText() {
-		return getCkData();
+	getText: function() {
+		return window['<%= name %>'].getCkData();
+	},
+
+	setHtml: function(value) {
+		CKEDITOR.instances['<%= name %>'].setData(value);
 	}
 
 	<%
 	if (Validator.isNotNull(onChangeMethod)) {
 	%>
 
-		function onChangeCallback() {
-			var ckEditor = CKEDITOR.instances.CKEditor1;
+		,onChangeCallback: function () {
+			var ckEditor = CKEDITOR.instances['<%= name %>'];
 			var dirty = ckEditor.checkDirty();
 
 			if (dirty) {
-				parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+				<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getText());
 
 				ckEditor.resetDirty();
 			}
@@ -115,9 +120,7 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 	}
 	%>
 
-	function setHTML(value) {
-		CKEDITOR.instances.CKEditor1.setData(value);
-	}
+	};
 </script>
 
 <div class="<%= cssClass %>">
@@ -127,24 +130,24 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 <script type="text/javascript">
 	(function() {
 		function setData() {
-			ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
+			ckEditor.setData(<%= HtmlUtil.escape(initMethod) %>);
 		}
 
 		<%
-		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
+		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(String.valueOf(doAsGroupId)));
 		%>
 
 		CKEDITOR.replace(
-			'CKEditor1',
+			'<%= name %>',
 			{
-				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
+				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
 				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
 			}
 		);
 
-		var ckEditor = CKEDITOR.instances.CKEditor1;
+		var ckEditor = CKEDITOR.instances['<%= name %>'];
 
 		var customDataProcessorLoaded = false;
 
@@ -172,7 +175,6 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 		ckEditor.on(
 			'instanceReady',
 			function() {
-
 				<%
 				if (useCustomDataProcessor) {
 				%>
@@ -194,12 +196,13 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 				}
 
 				if (Validator.isNotNull(onChangeMethod)) {
+
 				%>
 
 					setInterval(
 						function() {
 							try {
-								onChangeCallback();
+								window['<%= name %>'].onChangeCallback();
 							}
 							catch(e) {
 							}

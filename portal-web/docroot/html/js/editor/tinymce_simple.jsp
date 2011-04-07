@@ -37,20 +37,95 @@ if (Validator.isNotNull(onChangeMethod)) {
 	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/tiny_mce/tiny_mce.js" %>' type="text/javascript"></script>
 </liferay-util:html-top>
 
-
+<div class="<%= cssClass %>">
+	<textarea id="<%= name %>" name="<%= name %>" style="height: 100%; width: 100%;"></textarea>
+</div>
 
 <script type="text/javascript">
-	var onChangeCallbackCounter = 0;
+	window['<%= name %>'] = {
+		onChangeCallbackCounter : 0,
+
+		fileBrowserCallback: function(field_name, url, type) {
+		},
+
+		getHTML: function() {
+			return tinyMCE.editors['<%= name %>'].getContent();
+		},
+
+		init: function(value) {
+			if (typeof value == 'string') {
+				value = decodeURIComponent(value);
+			}
+			 else {
+				 value = '';
+			 }
+
+			window['<%= name %>'].setHTML(value);
+		},
+
+		initInstanceCallback: function() {
+			window['<%= name %>'].init(<%= HtmlUtil.escape(initMethod) %>);
+		},
+
+		<%
+		if (Validator.isNotNull(onChangeMethod)) {
+		%>
+
+			onChangeCallback: function(tinyMCE) {
+
+				// This purposely ignores the first callback event because each call
+				// to setContent triggers an undo level which fires the callback
+				// when no changes have yet been made.
+
+				// setContent is not really the correct way of initializing this
+				// editor with content. The content should be placed statically
+				// (from the editor's perspective) within the textarea. This is a
+				// problem from the portal's perspective because it's passing the
+				// content via a javascript method (initMethod).
+
+				var onChangeCallbackCounter = window['<%= name %>'].onChangeCallbackCounter;
+
+				if (onChangeCallbackCounter > 0) {
+
+					<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getHTML());
+
+				}
+
+				onChangeCallbackCounter++;
+
+
+			},
+
+		<%
+		}
+		%>
+
+		setHTML: function(value) {
+			tinyMCE.editors['<%= name %>'].setContent(value);
+		}
+	};
 
 	tinyMCE.init(
 		{
 			convert_urls : false,
+			elements: "<%= name %>",
 			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
-			file_browser_callback : "fileBrowserCallback",
-			init_instance_callback : "initInstanceCallback",
+			file_browser_callback : window['<%= name %>'].fileBrowserCallback,
+			init_instance_callback : window['<%= name %>'].initInstanceCallback,
+			invalid_elements: "script",
 			language : "<%= HtmlUtil.escape(languageId) %>",
 			mode : "textareas",
-			onchange_callback : "onChangeCallback",
+
+			<%
+			if (Validator.isNotNull(onChangeMethod)) {
+			%>
+
+				onchange_callback : window['<%= name %>'].onChangeCallback,
+
+			<%
+			}
+			%>
+
 			plugins : "preview,print,contextmenu",
 			relative_urls : false,
 			remove_script_host : false,
@@ -63,56 +138,4 @@ if (Validator.isNotNull(onChangeMethod)) {
 			theme_advanced_toolbar_location : "top"
 		}
 	);
-
-	function fileBrowserCallback(field_name, url, type) {
-	}
-
-	function getHTML() {
-		return tinyMCE.activeEditor.getContent();
-	}
-
-	function init(value) {
-		setHTML(decodeURIComponent(value));
-	}
-
-	function initInstanceCallback() {
-		init(parent.<%= initMethod %>());
-	}
-
-	function onChangeCallback(tinyMCE) {
-
-		// This purposely ignores the first callback event because each call
-		// to setContent triggers an undo level which fires the callback
-		// when no changes have yet been made.
-
-		// setContent is not really the correct way of initializing this
-		// editor with content. The content should be placed statically
-		// (from the editor's perspective) within the textarea. This is a
-		// problem from the portal's perspective because it's passing the
-		// content via a javascript method (initMethod).
-
-		if (onChangeCallbackCounter > 0) {
-
-			<%
-			if (Validator.isNotNull(onChangeMethod)) {
-			%>
-
-				parent.<%= HtmlUtil.escape(onChangeMethod) %>(getHTML());
-
-			<%
-			}
-			%>
-
-		}
-
-		onChangeCallbackCounter++;
-	}
-
-	function setHTML(value) {
-		tinyMCE.activeEditor.setContent(value);
-	}
 </script>
-
-<div class="<%= cssClass %>">
-	<textarea id="<%= name %>" name="<%= name %>" style="height: 100%; width: 100%;"></textarea>
-</div>

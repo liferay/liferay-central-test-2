@@ -69,35 +69,27 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 </liferay-util:html-top>
 
 <script type="text/javascript">
-	function getHTML() {
-		return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
-	}
+	window['<%= name %>'] = {
+		getHTML: function() {
+			return FCKeditorAPI.GetInstance('<%= name %>').GetXHTML();
+		},
 
-	function getText() {
-		return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
-	}
+		getText: function() {
+			return FCKeditorAPI.GetInstance('<%= name %>').GetXHTML();
+		},
 
-	function initFckArea() {
+		initFckArea: function() {
+			var textArea = document.getElementById('<%= name %>');
 
-		// LEP-3563
+			var value = <%= HtmlUtil.escape(initMethod) %>;
 
-		if (!window.frameElement || (!document.all && window.frameElement.clientWidth == 0)) {
+			textArea.value = value || '';
 
-			// This is hack since FCKEditor doesn't initialize properly in
-			// Gecko if the editor is hidden.
+			var fckEditor = new FCKeditor('<%= name %>');
 
-			setTimeout('initFckArea();',250);
-		}
-		else {
-			var textArea = document.getElementById("FCKeditor1");
+			fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>";
 
-			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
-
-			var fckEditor = new FCKeditor("FCKeditor1");
-
-			fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>";
-
-			fckEditor.BasePath = "fckeditor/";
+			fckEditor.BasePath = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/";
 			fckEditor.Width = "100%";
 			fckEditor.Height = "100%";
 			fckEditor.ToolbarSet = '<%= HtmlUtil.escape(toolbarSet) %>';
@@ -133,48 +125,54 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 						}
 					},
 					500);
+				}
+
+			<%
+			if (Validator.isNotNull(onChangeMethod)) {
+			%>
+
+				setInterval(
+					function() {
+						try {
+							window['<%= name %>'].onChangeCallback();
+						}
+						catch(e) {
+						}
+					},
+					300
+				);
+
+			<%
 			}
+			%>
+
+		},
+
+		setHTML: function(value) {
+			FCKeditorAPI.GetInstance('<%= name %>').SetHTML(value);
 		}
-
-		setInterval(
-			function() {
-				try {
-					onChangeCallback();
-				}
-				catch(e) {
-				}
-			},
-			300
-		);
-	}
-
-	function onChangeCallback() {
 
 		<%
 		if (Validator.isNotNull(onChangeMethod)) {
 		%>
 
-			var dirty = FCKeditorAPI.GetInstance("FCKeditor1").IsDirty();
+			,onChangeCallback: function() {
+				var dirty = FCKeditorAPI.GetInstance('<%= name %>').IsDirty();
 
-			if (dirty) {
-				parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+				if (dirty) {
+					<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getText());
 
-				FCKeditorAPI.GetInstance("FCKeditor1").ResetIsDirty();
+					FCKeditorAPI.GetInstance('<%= name %>').ResetIsDirty();
+				}
 			}
 
 		<%
 		}
 		%>
 
-	}
+	};
 
-	function setHTML(value) {
-		FCKeditorAPI.GetInstance("FCKeditor1").SetHTML(value);
-	}
-
-	window.onload = function() {
-		initFckArea();
-	}
+	window['<%= name %>'].initFckArea();
 </script>
 
 <div class="<%= cssClass %>">
