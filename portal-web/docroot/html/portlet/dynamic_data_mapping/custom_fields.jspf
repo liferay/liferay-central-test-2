@@ -107,6 +107,9 @@
 	var DDMSeparatorField = A.Component.create(
 		{
 			ATTRS: {
+				dataType: {
+					value: undefined
+				},
 				templateNode: {
 					valueFn: function() {
 						return A.Node.create('<div class="separator"></div>');
