@@ -61,7 +61,7 @@ AUI().add(
 			'<div class="forbidden-action"></div>' +
 		'</div>';
 
-		var TPL_EDITOR_ELEMENT = '<div id="{name}" name="{name}"></div>';
+		var TPL_IFRAME = '<iframe frameborder="0" height="460" id="{name}" name="{name}" scrolling="no" src="{url}" width="500"></iframe>';
 
 		var TPL_INSTRUCTIONS_CONTAINER = '<div class="journal-article-instructions-container journal-article-instructions-message portlet-msg-info"></div>';
 
@@ -246,6 +246,8 @@ AUI().add(
 
 						if (fieldInstance.get('fieldType') == 'text_area') {
 							var html = instance.buildHTMLEditor(fieldInstance);
+
+							fieldInstance.set('innerHTML', html);
 						}
 
 						var htmlTemplate = instance._createFieldHTMLTemplate(fieldInstance);
@@ -402,30 +404,44 @@ AUI().add(
 
 				var instanceId = fieldInstance.get('instanceId');
 				var name = instance.portletNamespace + 'structure_el_' + instanceId + '_content';
+				var url = instance.buildHTMLEditorURL(fieldInstance);
 
-				var editorHTML = A.substitute(
-					TPL_EDITOR_ELEMENT,
+				var iframeHTML = A.substitute(
+					TPL_IFRAME,
 					{
-						id: name,
-						name: name
+						name: name,
+						url: url
 					}
 				);
 
-				fieldInstance.set('innerHTML', editorHTML);
-
-				instance._loadEditor(fieldInstance, name);
-
-				return editorHTML;
+				return iframeHTML;
 			},
 
 			buildHTMLEditorURL: function(fieldInstance) {
 				var instance = this;
 
-				var url = Journal.PROXY.editorURL;
+				var url = [];
+				var initMethod = instance.portletNamespace + 'initEditor' + fieldInstance.get('variableName');
 
-				url = url.replace(/LIFERAY_NAME/, A.guid());
+				window[initMethod] = instance._emptyFunction;
 
-				return url;
+				url.push(themeDisplay.getPathContext());
+				url.push('/html/js/editor/editor.jsp?p_l_id=');
+				url.push(themeDisplay.getPlid());
+				url.push('&p_main_path=');
+				url.push(encodeURIComponent(themeDisplay.getPathMain()));
+				url.push('&doAsUserId=');
+				url.push(Journal.PROXY.doAsUserId);
+				url.push('&editorImpl=');
+				url.push(Journal.PROXY.editorImpl);
+				url.push('&toolbarSet=liferay-article');
+				url.push('&initMethod=');
+				url.push(initMethod);
+				url.push('&cssPath=');
+				url.push(Journal.PROXY.pathThemeCss);
+				url.push('&cssClasses=portlet ');
+
+				return url.join('');
 			},
 
 			canDrop: function(source) {
@@ -1337,6 +1353,8 @@ AUI().add(
 
 					if (fieldType == 'text_area') {
 						var html = instance.buildHTMLEditor(fieldInstance);
+
+						fieldInstance.set('innerHTML', html);
 
 						var componentContainer = newSource.one('.journal-article-component-container');
 
@@ -2536,30 +2554,6 @@ AUI().add(
 				};
 			},
 
-			_loadEditor: function(fieldInstance, editorId) {
-				var instance = this;
-
-				var url = instance.buildHTMLEditorURL(fieldInstance);
-
-				A.io.request(
-					url,
-					{
-						method: 'GET',
-						on: {
-							success: function(event, id, obj) {
-								var response = this.get('responseData');
-
-								var editorEl = A.one('#' + editorId);
-
-								editorEl.plug(A.Plugin.ParseContent);
-
-								editorEl.setContent(response);
-							}
-						}
-					}
-				);
-			},
-
 			_onKeyupVariableName: function(event) {
 				var instance = this;
 
@@ -2993,7 +2987,7 @@ AUI().add(
 							content = principalElement.attr('checked');
 						}
 						else if (type == 'text_area') {
-							var editorName = source.one('textarea').attr('name');
+							var editorName = source.one('iframe').attr('name');
 							var editorReference = window[editorName];
 
 							if (editorReference && Lang.isFunction(editorReference.getHTML)) {
@@ -3392,6 +3386,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-io-request', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute']
+		requires: ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute']
 	}
 );
