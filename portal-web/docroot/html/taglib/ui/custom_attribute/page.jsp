@@ -403,46 +403,34 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 					sb.append((Double)value);
 				}
 				else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-					if (!Arrays.equals((double[])value, (double[])defaultValue)) {
-						sb.append(StringUtil.merge((double[])value));
-					}
+					sb.append(StringUtil.merge((double[])value));
 				}
 				else if (type == ExpandoColumnConstants.FLOAT) {
 					sb.append((Float)value);
 				}
 				else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-					if (!Arrays.equals((float[])value, (float[])defaultValue)) {
-						sb.append(StringUtil.merge((float[])value));
-					}
+					sb.append(StringUtil.merge((float[])value));
 				}
 				else if (type == ExpandoColumnConstants.INTEGER) {
 					sb.append((Integer)value);
 				}
 				else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-					if (!Arrays.equals((int[])value, (int[])defaultValue)) {
-						sb.append(StringUtil.merge((int[])value));
-					}
+					sb.append(StringUtil.merge((int[])value));
 				}
 				else if (type == ExpandoColumnConstants.LONG) {
 					sb.append((Long)value);
 				}
 				else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-					if (!Arrays.equals((long[])value, (long[])defaultValue)) {
-						sb.append(StringUtil.merge((long[])value));
-					}
+					sb.append(StringUtil.merge((long[])value));
 				}
 				else if (type == ExpandoColumnConstants.SHORT) {
 					sb.append((Short)value);
 				}
 				else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-					if (!Arrays.equals((short[])value, (short[])defaultValue)) {
-						sb.append(StringUtil.merge((short[])value));
-					}
+					sb.append(StringUtil.merge((short[])value));
 				}
 				else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-					if (!Arrays.deepEquals((String[])value, (String[])defaultValue)) {
-						sb.append(StringUtil.merge((String[])value));
-					}
+					sb.append(StringUtil.merge((String[])value));
 				}
 				else {
 					sb.append((String)value);
