@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -606,12 +607,14 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return orderByComparator;
 	}
 
-	public List<Organization> getOrganizations(Hits hits)
+	public Tuple getOrganizations(Hits hits)
 		throws PortalException, SystemException {
 
 		List<Organization> organizations = new ArrayList<Organization>();
 
 		List<Document> documents = hits.toList();
+
+		boolean indexCorrupt = false;
 
 		for (Document document : documents) {
 			long organizationId = GetterUtil.getLong(
@@ -625,13 +628,15 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				organizations.add(organization);
 			}
 			catch (NoSuchOrganizationException nsoe) {
+				indexCorrupt = true;
+
 				_log.error(
 					"Organization " + organizationId + " does not exist in " +
 						"the search index");
 			}
 		}
 
-		return organizations;
+		return new Tuple(organizations, indexCorrupt);
 	}
 
 	public Sort getOrganizationSort(String orderByCol, String orderByType) {
@@ -922,12 +927,13 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return orderByComparator;
 	}
 
-	public List<User> getUsers(Hits hits)
-		throws PortalException, SystemException {
+	public Tuple getUsers(Hits hits) throws PortalException, SystemException {
 
 		List<User> users = new ArrayList<User>();
 
 		List<Document> documents = hits.toList();
+
+		boolean indexCorrupt = false;
 
 		for (Document document : documents) {
 			long userId = GetterUtil.getLong(document.get(Field.USER_ID));
@@ -938,12 +944,14 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				users.add(user);
 			}
 			catch (NoSuchUserException nsue) {
+				indexCorrupt = true;
+
 				_log.error(
 					"User " + userId + " does not exist in the search index");
 			}
 		}
 
-		return users;
+		return new Tuple(users, indexCorrupt);
 	}
 
 	public Sort getUserSort(String orderByCol, String orderByType) {

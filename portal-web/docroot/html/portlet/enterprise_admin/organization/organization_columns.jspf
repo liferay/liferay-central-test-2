@@ -35,15 +35,24 @@
 	List<Organization> suborganizations = new ArrayList<Organization>();
 	int suborganizationsCount = 0;
 
+	boolean indexCorrupt = false;
+
 	if (PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX) {
 		Sort sort = EnterpriseAdminUtil.getOrganizationSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 		Hits hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, organizationParams, 0, 5, sort);
 
-		suborganizations = EnterpriseAdminUtil.getOrganizations(hits);
-		suborganizationsCount = suborganizations.size();
+		Tuple tuple = EnterpriseAdminUtil.getOrganizations(hits);
+
+		indexCorrupt = (Boolean)tuple.getObject(1);
+
+		if (!indexCorrupt) {
+			suborganizations = (List<Organization>)tuple.getObject(0);
+			suborganizationsCount = hits.getLength();
+		}
 	}
-	else {
+
+	if (!PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX || indexCorrupt) {
 		suborganizations = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams, 0, 5, searchContainer.getOrderByComparator());
 		suborganizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), curOrganization.getOrganizationId(), null, null, null, null, organizationParams);
 	}

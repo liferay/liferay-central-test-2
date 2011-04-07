@@ -18,6 +18,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Sort" %>
+<%@ page import="com.liferay.portal.kernel.util.Tuple" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 
 <%
@@ -34,9 +35,25 @@ else {
 	hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 
-results = EnterpriseAdminUtil.getOrganizations(hits);
-total = results.size();
+Tuple tuple = EnterpriseAdminUtil.getOrganizations(hits);
 
-pageContext.setAttribute("results", results);
-pageContext.setAttribute("total", total);
+boolean indexCorrupt = (Boolean)tuple.getObject(1);
+
+if (!indexCorrupt) {
+	results = (List<User>)tuple.getObject(0);
+	total = hits.getLength();
+
+	pageContext.setAttribute("results", results);
+	pageContext.setAttribute("total", total);
+}
+else {
+
+	%>
+
+	<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
+
+	<%
+
+}
+
 %>

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.Group;
@@ -169,7 +170,7 @@ public class EnterpriseAdminUtil {
 			orderByCol, orderByType);
 	}
 
-	public static List<Organization> getOrganizations(Hits hits)
+	public static Tuple getOrganizations(Hits hits)
 		throws PortalException, SystemException {
 
 		return getEnterpriseAdmin().getOrganizations(hits);
@@ -225,7 +226,7 @@ public class EnterpriseAdminUtil {
 			orderByCol, orderByType);
 	}
 
-	public static List<User> getUsers(Hits hits)
+	public static Tuple getUsers(Hits hits)
 		throws PortalException, SystemException {
 
 		return getEnterpriseAdmin().getUsers(hits);
