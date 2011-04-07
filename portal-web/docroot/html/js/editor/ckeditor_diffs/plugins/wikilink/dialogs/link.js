@@ -24,7 +24,7 @@ CKEDITOR.dialog.add(
 			else {
 				var selection = editor.getSelection();
 
-				if (CKEDITOR.env.ie && CKEDITOR.env.version <= 8) {
+				if (CKEDITOR.env.ie) {
 					selection.unlock(true);
 
 					data.address = selection.getNative().createRange().text;
