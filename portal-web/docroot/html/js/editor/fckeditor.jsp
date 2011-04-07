@@ -14,30 +14,36 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.PropertiesParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
-<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
-<%@ page import="com.liferay.portal.kernel.util.UnicodeProperties" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
-
-<%@ page import="java.util.Map" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-long plid = ParamUtil.getLong(request, "p_l_id");
-String portletId = ParamUtil.getString(request, "p_p_id");
-String mainPath = ParamUtil.getString(request, "p_main_path");
-String doAsUserId = ParamUtil.getString(request, "doAsUserId");
-String doAsGroupId = ParamUtil.getString(request, "doAsGroupId");
-String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
-String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
-String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
-String cssPath = ParamUtil.getString(request, "cssPath");
-String cssClasses = ParamUtil.getString(request, "cssClasses");
-String languageId = ParamUtil.getString(request, "languageId");
+String portletId = portletDisplay.getRootPortletId();
+
+String mainPath = themeDisplay.getPathMain();
+String doAsUserId = themeDisplay.getDoAsUserId();
+
+if (Validator.isNull(doAsUserId)) {
+	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+}
+
+long doAsGroupId = themeDisplay.getDoAsGroupId();
+String cssPath = themeDisplay.getPathThemeCss();
+String languageId = LocaleUtil.toLanguageId(locale);
+
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
+String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
+String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
+
+if (Validator.isNotNull(initMethod)) {
+	initMethod = namespace + initMethod;
+}
+
+if (Validator.isNotNull(onChangeMethod)) {
+	onChangeMethod = namespace + onChangeMethod;
+}
 
 UnicodeProperties properties = PropertiesParamUtil.getProperties(request, "config--");
 
@@ -58,131 +64,119 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 
 %>
 
-<html>
+<liferay-util:html-top outputKey="fckeditor">
+	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/fckeditor/fckeditor.js" %>' type="text/javascript"></script>
+</liferay-util:html-top>
 
-<head>
-	<title>Editor</title>
+<script type="text/javascript">
+	function getHTML() {
+		return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
+	}
 
-	<script src="fckeditor/fckeditor.js" type="text/javascript"></script>
+	function getText() {
+		return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
+	}
 
-	<script type="text/javascript">
-		function getHTML() {
-			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
+	function initFckArea() {
+
+		// LEP-3563
+
+		if (!window.frameElement || (!document.all && window.frameElement.clientWidth == 0)) {
+
+			// This is hack since FCKEditor doesn't initialize properly in
+			// Gecko if the editor is hidden.
+
+			setTimeout('initFckArea();',250);
 		}
+		else {
+			var textArea = document.getElementById("FCKeditor1");
 
-		function getText() {
-			return FCKeditorAPI.GetInstance("FCKeditor1").GetXHTML();
-		}
+			textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
 
-		function initFckArea() {
+			var fckEditor = new FCKeditor("FCKeditor1");
 
-			// LEP-3563
+			fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>";
 
-			if (!window.frameElement || (!document.all && window.frameElement.clientWidth == 0)) {
+			fckEditor.BasePath = "fckeditor/";
+			fckEditor.Width = "100%";
+			fckEditor.Height = "100%";
+			fckEditor.ToolbarSet = '<%= HtmlUtil.escape(toolbarSet) %>';
 
-				// This is hack since FCKEditor doesn't initialize properly in
-				// Gecko if the editor is hidden.
+			fckEditor.ReplaceTextarea();
 
-				setTimeout('initFckArea();',250);
-			}
-			else {
-				var textArea = document.getElementById("FCKeditor1");
+			// LEP-5707
 
-				textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
+			var ua = navigator.userAgent, isFirefox2andBelow = false;
+			var agent = /(Firefox)\/(.+)/.exec(ua);
 
-				var fckEditor = new FCKeditor("FCKeditor1");
-
-				fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>";
-
-				fckEditor.BasePath = "fckeditor/";
-				fckEditor.Width = "100%";
-				fckEditor.Height = "100%";
-				fckEditor.ToolbarSet = '<%= HtmlUtil.escape(toolbarSet) %>';
-
-				fckEditor.ReplaceTextarea();
-
-				// LEP-5707
-
-				var ua = navigator.userAgent, isFirefox2andBelow = false;
-				var agent = /(Firefox)\/(.+)/.exec(ua);
-
-				if (agent && agent.length && (agent.length == 3)) {
-					if (parseInt(agent[2]) && parseInt(agent[2]) < 3) {
-						isFirefox2andBelow = true;
-					}
-				}
-
-				if (isFirefox2andBelow) {
-					var fckInstanceName = fckEditor.InstanceName;
-					var fckIframe = document.getElementById(fckInstanceName + '___Frame');
-
-					var interval = setInterval(
-						function() {
-							var iframe = fckIframe.contentDocument.getElementsByTagName('iframe');
-
-							if (iframe.length) {
-								iframe = iframe[0];
-
-								iframe.onload = function(event) {
-									clearInterval(interval);
-									parent.stop();
-								};
-							}
-						},
-						500);
+			if (agent && agent.length && (agent.length == 3)) {
+				if (parseInt(agent[2]) && parseInt(agent[2]) < 3) {
+					isFirefox2andBelow = true;
 				}
 			}
 
-			setInterval(
-				function() {
-					try {
-						onChangeCallback();
-					}
-					catch(e) {
-					}
-				},
-				300
-			);
-		}
+			if (isFirefox2andBelow) {
+				var fckInstanceName = fckEditor.InstanceName;
+				var fckIframe = document.getElementById(fckInstanceName + '___Frame');
 
-		function onChangeCallback() {
+				var interval = setInterval(
+					function() {
+						var iframe = fckIframe.contentDocument.getElementsByTagName('iframe');
 
-			<%
-			if (Validator.isNotNull(onChangeMethod)) {
-			%>
+						if (iframe.length) {
+							iframe = iframe[0];
 
-				var dirty = FCKeditorAPI.GetInstance("FCKeditor1").IsDirty();
-
-				if (dirty) {
-					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
-
-					FCKeditorAPI.GetInstance("FCKeditor1").ResetIsDirty();
-				}
-
-			<%
+							iframe.onload = function(event) {
+								clearInterval(interval);
+								parent.stop();
+							};
+						}
+					},
+					500);
 			}
-			%>
-
 		}
 
-		function setHTML(value) {
-			FCKeditorAPI.GetInstance("FCKeditor1").SetHTML(value);
+		setInterval(
+			function() {
+				try {
+					onChangeCallback();
+				}
+				catch(e) {
+				}
+			},
+			300
+		);
+	}
+
+	function onChangeCallback() {
+
+		<%
+		if (Validator.isNotNull(onChangeMethod)) {
+		%>
+
+			var dirty = FCKeditorAPI.GetInstance("FCKeditor1").IsDirty();
+
+			if (dirty) {
+				parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+
+				FCKeditorAPI.GetInstance("FCKeditor1").ResetIsDirty();
+			}
+
+		<%
 		}
+		%>
 
-		window.onload = function() {
-			initFckArea();
-		}
-	</script>
-</head>
+	}
 
-<body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
+	function setHTML(value) {
+		FCKeditorAPI.GetInstance("FCKeditor1").SetHTML(value);
+	}
 
-<textarea id="FCKeditor1" name="FCKeditor1" style="display: none"></textarea>
+	window.onload = function() {
+		initFckArea();
+	}
+</script>
 
-</body>
-
-</html>
-
-<%!
-public static final String DEFAULT_INIT_METHOD = "initEditor";
-%>
+<div class="<%= cssClass %>">
+	<textarea id="<%= name %>" name="<%= name %>" style="display: none"></textarea>
+</div>

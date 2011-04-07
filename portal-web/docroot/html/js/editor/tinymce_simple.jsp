@@ -14,113 +14,105 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
-<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
-<%@ page import="java.util.Locale" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
-String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
-String languageId = ParamUtil.getString(request, "languageId");
+String languageId = LocaleUtil.toLanguageId(locale);
 
-Locale locale =  LocaleUtil.fromLanguageId(languageId);
+if (Validator.isNotNull(initMethod)) {
+	initMethod = namespace + initMethod;
+}
 
-languageId = locale.getLanguage();
+if (Validator.isNotNull(onChangeMethod)) {
+	onChangeMethod = namespace + onChangeMethod;
+}
 %>
 
-<html>
+<liferay-util:html-top outputKey="tinymce">
+	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/tiny_mce/tiny_mce.js" %>' type="text/javascript"></script>
+</liferay-util:html-top>
 
-<head>
-	<title>Editor</title>
 
-	<script src="tiny_mce/tiny_mce.js" type="text/javascript"></script>
 
-	<script type="text/javascript">
-		var onChangeCallbackCounter = 0;
+<script type="text/javascript">
+	var onChangeCallbackCounter = 0;
 
-		tinyMCE.init(
-			{
-				convert_urls : false,
-				extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
-				file_browser_callback : "fileBrowserCallback",
-				init_instance_callback : "initInstanceCallback",
-				language : "<%= HtmlUtil.escape(languageId) %>",
-				mode : "textareas",
-				onchange_callback : "onChangeCallback",
-				plugins : "preview,print,contextmenu",
-				relative_urls : false,
-				remove_script_host : false,
-				theme : "advanced",
-				theme_advanced_buttons1_add : "code,preview,print",
-				theme_advanced_buttons2: "",
-				theme_advanced_buttons3: "",
-				theme_advanced_disable : "formatselect,styleselect,help,strikethrough",
-				theme_advanced_toolbar_align : "left",
-				theme_advanced_toolbar_location : "top"
+	tinyMCE.init(
+		{
+			convert_urls : false,
+			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+			file_browser_callback : "fileBrowserCallback",
+			init_instance_callback : "initInstanceCallback",
+			language : "<%= HtmlUtil.escape(languageId) %>",
+			mode : "textareas",
+			onchange_callback : "onChangeCallback",
+			plugins : "preview,print,contextmenu",
+			relative_urls : false,
+			remove_script_host : false,
+			theme : "advanced",
+			theme_advanced_buttons1_add : "code,preview,print",
+			theme_advanced_buttons2: "",
+			theme_advanced_buttons3: "",
+			theme_advanced_disable : "formatselect,styleselect,help,strikethrough",
+			theme_advanced_toolbar_align : "left",
+			theme_advanced_toolbar_location : "top"
+		}
+	);
+
+	function fileBrowserCallback(field_name, url, type) {
+	}
+
+	function getHTML() {
+		return tinyMCE.activeEditor.getContent();
+	}
+
+	function init(value) {
+		setHTML(decodeURIComponent(value));
+	}
+
+	function initInstanceCallback() {
+		init(parent.<%= initMethod %>());
+	}
+
+	function onChangeCallback(tinyMCE) {
+
+		// This purposely ignores the first callback event because each call
+		// to setContent triggers an undo level which fires the callback
+		// when no changes have yet been made.
+
+		// setContent is not really the correct way of initializing this
+		// editor with content. The content should be placed statically
+		// (from the editor's perspective) within the textarea. This is a
+		// problem from the portal's perspective because it's passing the
+		// content via a javascript method (initMethod).
+
+		if (onChangeCallbackCounter > 0) {
+
+			<%
+			if (Validator.isNotNull(onChangeMethod)) {
+			%>
+
+				parent.<%= HtmlUtil.escape(onChangeMethod) %>(getHTML());
+
+			<%
 			}
-		);
+			%>
 
-		function fileBrowserCallback(field_name, url, type) {
 		}
 
-		function getHTML() {
-			return tinyMCE.activeEditor.getContent();
-		}
+		onChangeCallbackCounter++;
+	}
 
-		function init(value) {
-			setHTML(decodeURIComponent(value));
-		}
+	function setHTML(value) {
+		tinyMCE.activeEditor.setContent(value);
+	}
+</script>
 
-		function initInstanceCallback() {
-			init(parent.<%= initMethod %>());
-		}
-
-		function onChangeCallback(tinyMCE) {
-
-			// This purposely ignores the first callback event because each call
-			// to setContent triggers an undo level which fires the callback
-			// when no changes have yet been made.
-
-			// setContent is not really the correct way of initializing this
-			// editor with content. The content should be placed statically
-			// (from the editor's perspective) within the textarea. This is a
-			// problem from the portal's perspective because it's passing the
-			// content via a javascript method (initMethod).
-
-			if (onChangeCallbackCounter > 0) {
-
-				<%
-				if (Validator.isNotNull(onChangeMethod)) {
-				%>
-
-					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getHTML());
-
-				<%
-				}
-				%>
-
-			}
-
-			onChangeCallbackCounter++;
-		}
-
-		function setHTML(value) {
-			tinyMCE.activeEditor.setContent(value);
-		}
-	</script>
-</head>
-
-<body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0">
-
-<textarea id="textArea" name="textArea" style="height: 100%; width: 100%;"></textarea>
-
-</body>
-
-</html>
-
-<%!
-public static final String DEFAULT_INIT_METHOD = "initEditor";
-%>
+<div class="<%= cssClass %>">
+	<textarea id="<%= name %>" name="<%= name %>" style="height: 100%; width: 100%;"></textarea>
+</div>
