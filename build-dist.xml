@@ -122,7 +122,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 
 		<antcall target="build-dist-tcat-admin" />
 
-		<!--<antcall target="build-dist-tcat-agent" />-->
+		<antcall target="build-dist-tcat-agent" />
 	</target>
 
 	<target name="build-dist-tcat-admin">
@@ -222,6 +222,33 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 	</target>
 
 	<target name="build-dist-tcat-agent">
+		<antcall target="prepare-tcat" />
+
+		<antcall target="clean-tcat" />
+
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMdd" />
+		</tstamp>
+
+		<echo file="${tstamp.value}/agent.xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Context privileged=&quot;true&quot;/&gt;
+		</echo>
+
+		<copy
+			file="${tstamp.value}/agent.xml"
+			tofile="${app.server.dir}/conf/Catalina/localhost/agent.xml"
+			overwrite="true"
+		/>
+
+		<delete dir="${tstamp.value}" />
+
+		<delete file="app.server.${user.name}.properties" />
+
+		<copy todir="${app.server.tomcat.deploy.dir}">
+			<fileset dir="${app.server.tcat.deploy.dir}" includes="agent.war" />
+		</copy>
+
+		<antcall target="zip-tcat-agent" />
 	</target>
 
 	<target name="build-dist-tomcat">
@@ -1408,6 +1435,14 @@ release was successful.</echo>
 	<target name="zip-tcat-admin">
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tcat-admin" />
+			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
+			<param name="zip.tcat" value="true" />
+		</antcall>
+	</target>
+
+	<target name="zip-tcat-agent">
+		<antcall target="zip-executable">
+			<param name="zip.executable.file" value="liferay-portal-tcat-agent" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 			<param name="zip.tcat" value="true" />
 		</antcall>
