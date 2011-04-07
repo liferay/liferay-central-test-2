@@ -35,9 +35,9 @@ else {
 }
 
 results = EnterpriseAdminUtil.getOrganizations(hits);
-total = results.size();
-
 results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
+total = results.size();
 
 pageContext.setAttribute("results", results);
 pageContext.setAttribute("total", total);
