@@ -310,6 +310,13 @@ public class DDMTemplateLocalServiceUtil {
 		getService().deleteTemplate(templateId);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate getTemplate(
+		long templateId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTemplate(templateId);
+	}
+
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
 		long companyId, long groupId, java.lang.String keywords, int start,
 		int end,

@@ -299,6 +299,13 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService {
 		_ddmTemplateLocalService.deleteTemplate(templateId);
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMTemplate getTemplate(
+		long templateId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.getTemplate(templateId);
+	}
+
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
 		long companyId, long groupId, java.lang.String keywords, int start,
 		int end,

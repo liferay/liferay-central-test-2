@@ -134,6 +134,12 @@ public class DDMTemplateLocalServiceImpl
 		deleteTemplate(template);
 	}
 
+	public DDMTemplate getTemplate(long templateId)
+		throws PortalException, SystemException {
+
+		return ddmTemplatePersistence.findByPrimaryKey(templateId);
+	}
+
 	public List<DDMTemplate> search(
 			long companyId, long groupId, String keywords, int start, int end,
 			OrderByComparator orderByComparator)
