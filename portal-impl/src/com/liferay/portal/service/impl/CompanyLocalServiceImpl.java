@@ -366,6 +366,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			userLocalService.updateLastLogin(
 				defaultAdminUser.getUserId(), defaultAdminUser.getLoginIP());
+			
+			userLocalService.updatePasswordReset(
+				defaultAdminUser.getUserId(), false);
 		}
 
 		// Portlets
