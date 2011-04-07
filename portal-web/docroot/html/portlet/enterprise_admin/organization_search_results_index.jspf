@@ -18,7 +18,6 @@
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Sort" %>
-<%@ page import="com.liferay.portal.kernel.util.Tuple" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 
 <%
@@ -37,9 +36,9 @@ else {
 
 Tuple tuple = EnterpriseAdminUtil.getOrganizations(hits);
 
-boolean indexCorrupt = (Boolean)tuple.getObject(1);
+boolean corruptIndex = (Boolean)tuple.getObject(1);
 
-if (!indexCorrupt) {
+if (!corruptIndex) {
 	results = (List<User>)tuple.getObject(0);
 	total = hits.getLength();
 
@@ -47,13 +46,10 @@ if (!indexCorrupt) {
 	pageContext.setAttribute("total", total);
 }
 else {
-
-	%>
+%>
 
 	<%@ include file="/html/portlet/enterprise_admin/organization_search_results_database.jspf" %>
 
-	<%
-
+<%
 }
-
 %>

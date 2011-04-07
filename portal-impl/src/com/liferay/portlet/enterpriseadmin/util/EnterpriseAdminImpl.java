@@ -611,10 +611,9 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		throws PortalException, SystemException {
 
 		List<Organization> organizations = new ArrayList<Organization>();
+		boolean corruptIndex = false;
 
 		List<Document> documents = hits.toList();
-
-		boolean indexCorrupt = false;
 
 		for (Document document : documents) {
 			long organizationId = GetterUtil.getLong(
@@ -628,7 +627,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				organizations.add(organization);
 			}
 			catch (NoSuchOrganizationException nsoe) {
-				indexCorrupt = true;
+				corruptIndex = true;
 
 				_log.error(
 					"Organization " + organizationId + " does not exist in " +
@@ -636,7 +635,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 			}
 		}
 
-		return new Tuple(organizations, indexCorrupt);
+		return new Tuple(organizations, corruptIndex);
 	}
 
 	public Sort getOrganizationSort(String orderByCol, String orderByType) {
@@ -928,12 +927,10 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 	}
 
 	public Tuple getUsers(Hits hits) throws PortalException, SystemException {
-
 		List<User> users = new ArrayList<User>();
+		boolean corruptIndex = false;
 
 		List<Document> documents = hits.toList();
-
-		boolean indexCorrupt = false;
 
 		for (Document document : documents) {
 			long userId = GetterUtil.getLong(document.get(Field.USER_ID));
@@ -944,14 +941,14 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 				users.add(user);
 			}
 			catch (NoSuchUserException nsue) {
-				indexCorrupt = true;
+				corruptIndex = true;
 
 				_log.error(
 					"User " + userId + " does not exist in the search index");
 			}
 		}
 
-		return new Tuple(users, indexCorrupt);
+		return new Tuple(users, corruptIndex);
 	}
 
 	public Sort getUserSort(String orderByCol, String orderByType) {
