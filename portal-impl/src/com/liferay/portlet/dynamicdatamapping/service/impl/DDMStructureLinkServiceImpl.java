@@ -37,7 +37,7 @@ public class DDMStructureLinkServiceImpl
 
 		DDMPermission.check(
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
-			ActionKeys.ADD_STRUCTURE_ENTRY);
+			ActionKeys.ADD_STRUCTURE);
 
 		return ddmStructureLinkLocalService.addStructureLink(
 			classNameId, classPK, structureId, serviceContext);

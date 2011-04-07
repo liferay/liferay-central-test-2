@@ -77,7 +77,7 @@ public class DDMStructurePermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DDMStructure structure = DDMStructureLocalServiceUtil.getDDMStructure(
+		DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
 			structureId);
 
 		return contains(permissionChecker, structure, actionId);

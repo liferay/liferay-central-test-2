@@ -38,7 +38,7 @@ public class DDMStructureServiceImpl
 
 		DDMPermission.check(
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
-			ActionKeys.ADD_STRUCTURE_ENTRY);
+			ActionKeys.ADD_STRUCTURE);
 
 		return ddmStructureLocalService.addStructure(
 			getUserId(), groupId, classNameId, structureKey, autoStructureKey,
