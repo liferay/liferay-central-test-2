@@ -68,7 +68,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 		return null;
 	}
 
-	List<AssetTag> orderedTags = ListUtil.sort(tags);
+	tags = ListUtil.sort(tags);
 
 	StringBundler sb = new StringBundler();
 
@@ -87,7 +87,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 	int minCount = 1;
 
 	if (showAssetCount && displayStyle.equals("cloud")) {
-		for (AssetTag tag : orderedTags) {
+		for (AssetTag tag : tags) {
 			int count = tag.getAssetCount();
 
 			if (!showZeroAssetCount && (count == 0)) {
@@ -105,7 +105,7 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 		multiplier = (double)5 / (maxCount - minCount);
 	}
 
-	for (AssetTag tag : orderedTags) {
+	for (AssetTag tag : tags) {
 		String tagName = tag.getName();
 
 		int count = tag.getAssetCount();
