@@ -20,5 +20,6 @@
 <%@ page import="com.liferay.portlet.asset.model.AssetTagStats" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetTagStatsLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.util.comparator.AssetTagCountComparator" %>
 
 <portlet:defineObjects />

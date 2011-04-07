@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
@@ -84,6 +85,14 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		return assetTagPersistence.filterFindByGroupId(groupId, start, end);
 	}
 
+	public List<AssetTag> getGroupTags(
+			long groupId, int start, int end, OrderByComparator obc)
+		throws  SystemException {
+
+		return assetTagPersistence.filterFindByGroupId(
+				groupId, start, end, obc);
+	}
+
 	public AssetTag getTag(long tagId) throws PortalException, SystemException {
 		AssetTagPermission.check(
 			getPermissionChecker(), tagId, ActionKeys.VIEW);
@@ -105,6 +114,15 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 		return assetTagFinder.filterFindByG_C_N(
 			groupId, classNameId, name, start, end, null);
+	}
+
+	public List<AssetTag> getTags(
+			long groupId, long classNameId, String name, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return assetTagFinder.filterFindByG_C_N(
+			groupId, classNameId, name, start, end, obc);
 	}
 
 	public List<AssetTag> getTags(String className, long classPK)
