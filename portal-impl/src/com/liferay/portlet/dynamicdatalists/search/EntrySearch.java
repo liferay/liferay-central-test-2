@@ -26,7 +26,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Marcellus Tavares
  */
-public class DDLEntrySearch extends SearchContainer<DDLEntry> {
+public class EntrySearch extends SearchContainer<DDLEntry> {
 
 	static List<String> headerNames = new ArrayList<String>();
 
@@ -39,23 +39,23 @@ public class DDLEntrySearch extends SearchContainer<DDLEntry> {
 
 	public static final String EMPTY_RESULTS_MESSAGE = "no-lists-were-found";
 
-	public DDLEntrySearch(
+	public EntrySearch(
 		PortletRequest portletRequest, PortletURL iteratorURL) {
 
 		super(
-			portletRequest, new DDLEntryDisplayTerms(portletRequest),
-			new DDLEntrySearchTerms(portletRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new EntryDisplayTerms(portletRequest),
+			new EntrySearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
-		DDLEntryDisplayTerms displayTerms =
-			(DDLEntryDisplayTerms)getDisplayTerms();
+		EntryDisplayTerms displayTerms =
+			(EntryDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			DDLEntryDisplayTerms.DESCRIPTION, displayTerms.getDescription());
+			EntryDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
-			DDLEntryDisplayTerms.ENTRY_KEY, displayTerms.getEntryKey());
+			EntryDisplayTerms.ENTRY_KEY, displayTerms.getEntryKey());
 		iteratorURL.setParameter(
-			DDLEntryDisplayTerms.NAME, String.valueOf(displayTerms.getName()));
+			EntryDisplayTerms.NAME, String.valueOf(displayTerms.getName()));
 	}
 
 }

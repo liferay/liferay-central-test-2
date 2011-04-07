@@ -22,7 +22,7 @@ import javax.portlet.PortletRequest;
 /**
  * @author Marcellus Tavares
  */
-public class DDLEntryDisplayTerms extends DisplayTerms {
+public class EntryDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
@@ -30,7 +30,7 @@ public class DDLEntryDisplayTerms extends DisplayTerms {
 
 	public static final String NAME = "name";
 
-	public DDLEntryDisplayTerms(PortletRequest portletRequest) {
+	public EntryDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);

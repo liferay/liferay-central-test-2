@@ -21,9 +21,9 @@ import javax.portlet.PortletRequest;
 /**
  * @author Marcellus Tavares
  */
-public class DDLEntrySearchTerms extends DDLEntryDisplayTerms {
+public class EntrySearchTerms extends EntryDisplayTerms {
 
-	public DDLEntrySearchTerms(PortletRequest portletRequest) {
+	public EntrySearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
 		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
