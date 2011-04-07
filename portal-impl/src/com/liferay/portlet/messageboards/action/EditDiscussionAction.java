@@ -44,6 +44,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -66,8 +68,6 @@ public class EditDiscussionAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
 		try {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
@@ -77,17 +77,12 @@ public class EditDiscussionAction extends PortletAction {
 				String randomNamespace = ParamUtil.getString(
 					actionRequest, "randomNamespace");
 
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
 				jsonObject.put("messageId", message.getMessageId());
 				jsonObject.put("randomNamespace", randomNamespace);
 
-				HttpServletResponse response =
-					PortalUtil.getHttpServletResponse(actionResponse);
-
-				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-
-				ServletResponseUtil.write(response, jsonObject.toString());
-
-				setForward(actionRequest, ActionConstants.COMMON_NULL);
+				writeJSON(actionRequest, actionResponse, jsonObject.toString());
 
 				return;
 			}
@@ -109,16 +104,11 @@ public class EditDiscussionAction extends PortletAction {
 				e instanceof PrincipalException ||
 				e instanceof RequiredMessageException) {
 
-				jsonObject.put("exception", e.getClass() + e.getMessage());
+				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				HttpServletResponse response =
-					PortalUtil.getHttpServletResponse(actionResponse);
+				jsonObject.put("exception", e.getClass().getName());
 
-				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-
-				ServletResponseUtil.write(response, jsonObject.toString());
-
-				setForward(actionRequest, ActionConstants.COMMON_NULL);
+				writeJSON(actionRequest, actionResponse, jsonObject.toString());
 			}
 			else {
 				throw e;
@@ -283,6 +273,21 @@ public class EditDiscussionAction extends PortletAction {
 			SubscriptionLocalServiceUtil.deleteSubscription(
 				themeDisplay.getUserId(), className, classPK);
 		}
+	}
+
+	protected void writeJSON(
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			String json)
+		throws Exception {
+
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			portletResponse);
+
+		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
+		ServletResponseUtil.write(response, json);
+
+		setForward(portletRequest, ActionConstants.COMMON_NULL);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
