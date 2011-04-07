@@ -345,10 +345,28 @@ public class DDLEntryLocalServiceWrapper implements DDLEntryLocalService {
 			start, end, orderByComparator);
 	}
 
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> search(
+		long companyId, long groupId, java.lang.String entryKey,
+		java.lang.String name, java.lang.String description,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlEntryLocalService.search(companyId, groupId, entryKey, name,
+			description, andOperator, start, end, orderByComparator);
+	}
+
 	public int searchCount(long companyId, long groupId,
 		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddlEntryLocalService.searchCount(companyId, groupId, keywords);
+	}
+
+	public int searchCount(long companyId, long groupId,
+		java.lang.String entryKey, java.lang.String name,
+		java.lang.String description, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlEntryLocalService.searchCount(companyId, groupId, entryKey,
+			name, description, andOperator);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLEntry updateEntry(

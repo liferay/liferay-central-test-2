@@ -27,6 +27,15 @@ public class DDLEntryFinderUtil {
 		return getFinder().countByKeywords(companyId, groupId, keywords);
 	}
 
+	public static int countByC_G_E_N_D(long companyId, long groupId,
+		java.lang.String entryKey, java.lang.String name,
+		java.lang.String description, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .countByC_G_E_N_D(companyId, groupId, entryKey, name,
+			description, andOperator);
+	}
+
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> findByKeywords(
 		long companyId, long groupId, java.lang.String keywords, int start,
 		int end,

@@ -22,6 +22,11 @@ public interface DDLEntryFinder {
 		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByC_G_E_N_D(long companyId, long groupId,
+		java.lang.String entryKey, java.lang.String name,
+		java.lang.String description, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> findByKeywords(
 		long companyId, long groupId, java.lang.String keywords, int start,
 		int end,
