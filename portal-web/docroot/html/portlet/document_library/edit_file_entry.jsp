@@ -33,6 +33,14 @@ FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_F
 long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 long repositoryId = BeanParamUtil.getLong(fileEntry, request, "repositoryId");
+
+if (repositoryId <= 0) {
+
+	// add_asset.jspf only passes in groupId
+
+	repositoryId = BeanParamUtil.getLong(fileEntry, request, "groupId");
+}
+
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String extension = BeanParamUtil.getString(fileEntry, request, "extension");
 
