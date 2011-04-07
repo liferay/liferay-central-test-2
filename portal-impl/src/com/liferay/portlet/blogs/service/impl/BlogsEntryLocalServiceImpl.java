@@ -743,7 +743,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				String suffix = StringPool.DASH + i;
 
 				String prefix = newUrlTitle.substring(
-					0, (newUrlTitle.length() - suffix.length()));
+					0, newUrlTitle.length() - suffix.length());
 
 				newUrlTitle = prefix + suffix;
 			}
