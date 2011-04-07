@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -728,7 +729,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
 
-		String newUrlTitle = urlTitle;
+		String newUrlTitle = ModelHintsUtil.trimString(
+			BlogsEntry.class.getName(), "urlTitle", urlTitle);
 
 		for (int i = 1;; i++) {
 			BlogsEntry entry = blogsEntryPersistence.fetchByG_UT(
@@ -738,7 +740,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				break;
 			}
 			else {
-				newUrlTitle = urlTitle + StringPool.DASH + i;
+				String suffix = StringPool.DASH + i;
+
+				String prefix = newUrlTitle.substring(
+					0, (newUrlTitle.length() - suffix.length()));
+
+				newUrlTitle = prefix + suffix;
 			}
 		}
 
