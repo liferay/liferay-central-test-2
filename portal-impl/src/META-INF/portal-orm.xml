@@ -1719,43 +1719,6 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListModelImpl">
-		<attributes>
-			<id name="listId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="structureId" />
-			<basic name="listKey" />
-			<basic name="name" />
-			<basic name="description" />
-			<transient name="nameMap" />
-			<transient name="primaryKey" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemModelImpl">
-		<attributes>
-			<id name="listItemId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="listId" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStorageLinkModelImpl">
 		<attributes>
 			<id name="storageLinkId" />
@@ -3425,14 +3388,6 @@
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" name="DDMContent">
 		<table name="DDMContent" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListImpl" name="DDMList">
-		<table name="DDMList" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMListItemImpl" name="DDMListItem">
-		<table name="DDMListItem" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStorageLinkImpl" name="DDMStorageLink">

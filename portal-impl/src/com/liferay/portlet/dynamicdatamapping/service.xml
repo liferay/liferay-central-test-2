@@ -36,59 +36,6 @@
 			<finder-column name="companyId" />
 		</finder>
 	</entity>
-	<entity name="DDMList" uuid="true" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="listId" type="long" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="structureId" type="long" />
-		<column name="listKey" type="String" />
-		<column name="name" type="String" localized="true" />
-		<column name="description" type="String" />
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="G_L" return-type="DDMList" unique="true">
-			<finder-column name="groupId" />
-			<finder-column name="listKey" />
-		</finder>
-	</entity>
-	<entity name="DDMListItem" uuid="true" local-service="true" remote-service="false">
-
-		<!-- PK fields -->
-
-		<column name="listItemId" type="long" primary="true" />
-
-		<!-- Other fields -->
-
-		<column name="classNameId" type="long" />
-		<column name="classPK" type="long" />
-		<column name="listId" type="long" />
-
-		<!-- Finder methods -->
-
-		<finder name="ListId" return-type="Collection">
-			<finder-column name="listId" />
-		</finder>
-	</entity>
 	<entity name="DDMStorageLink" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -220,10 +167,6 @@
 		<exception>Content</exception>
 		<exception>ContentName</exception>
 		<exception>ContentXml</exception>
-		<exception>ListDuplicateListKey</exception>
-		<exception>ListListKey</exception>
-		<exception>ListName</exception>
-		<exception>ListStructureId</exception>
 		<exception>Storage</exception>
 		<exception>StorageFieldName</exception>
 		<exception>StructureDuplicateElement</exception>

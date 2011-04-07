@@ -140,14 +140,6 @@ create index IX_50BF1038 on DDMContent (groupId);
 create index IX_AE4B50C2 on DDMContent (uuid_);
 create unique index IX_EB9BDE28 on DDMContent (uuid_, groupId);
 
-create index IX_DEDB2CB9 on DDMList (groupId);
-create unique index IX_80E1D738 on DDMList (groupId, listKey);
-create index IX_2169983 on DDMList (uuid_);
-create unique index IX_7F5FDE87 on DDMList (uuid_, groupId);
-
-create index IX_26EEB391 on DDMListItem (listId);
-create index IX_7560E130 on DDMListItem (uuid_);
-
 create unique index IX_702D1AD5 on DDMStorageLink (classPK);
 create index IX_81776090 on DDMStorageLink (structureId);
 create index IX_32A18526 on DDMStorageLink (uuid_);

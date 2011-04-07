@@ -40,8 +40,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersisten
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryItemPersistenceTest;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceTest;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListItemPersistenceTest;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistenceTest;
@@ -205,8 +203,6 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(DDLEntryPersistenceTest.class);
 
 		testSuite.addTestSuite(DDMContentPersistenceTest.class);
-		testSuite.addTestSuite(DDMListItemPersistenceTest.class);
-		testSuite.addTestSuite(DDMListPersistenceTest.class);
 		testSuite.addTestSuite(DDMStorageLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructureLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructurePersistenceTest.class);

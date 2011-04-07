@@ -35,9 +35,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMListItemLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMListLocalService;
-import com.liferay.portlet.dynamicdatamapping.service.DDMListService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
@@ -46,9 +43,6 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListFinder;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListItemPersistence;
-import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
@@ -298,116 +292,6 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	public void setDDMContentPersistence(
 		DDMContentPersistence ddmContentPersistence) {
 		this.ddmContentPersistence = ddmContentPersistence;
-	}
-
-	/**
-	 * Gets the d d m list local service.
-	 *
-	 * @return the d d m list local service
-	 */
-	public DDMListLocalService getDDMListLocalService() {
-		return ddmListLocalService;
-	}
-
-	/**
-	 * Sets the d d m list local service.
-	 *
-	 * @param ddmListLocalService the d d m list local service
-	 */
-	public void setDDMListLocalService(DDMListLocalService ddmListLocalService) {
-		this.ddmListLocalService = ddmListLocalService;
-	}
-
-	/**
-	 * Gets the d d m list remote service.
-	 *
-	 * @return the d d m list remote service
-	 */
-	public DDMListService getDDMListService() {
-		return ddmListService;
-	}
-
-	/**
-	 * Sets the d d m list remote service.
-	 *
-	 * @param ddmListService the d d m list remote service
-	 */
-	public void setDDMListService(DDMListService ddmListService) {
-		this.ddmListService = ddmListService;
-	}
-
-	/**
-	 * Gets the d d m list persistence.
-	 *
-	 * @return the d d m list persistence
-	 */
-	public DDMListPersistence getDDMListPersistence() {
-		return ddmListPersistence;
-	}
-
-	/**
-	 * Sets the d d m list persistence.
-	 *
-	 * @param ddmListPersistence the d d m list persistence
-	 */
-	public void setDDMListPersistence(DDMListPersistence ddmListPersistence) {
-		this.ddmListPersistence = ddmListPersistence;
-	}
-
-	/**
-	 * Gets the d d m list finder.
-	 *
-	 * @return the d d m list finder
-	 */
-	public DDMListFinder getDDMListFinder() {
-		return ddmListFinder;
-	}
-
-	/**
-	 * Sets the d d m list finder.
-	 *
-	 * @param ddmListFinder the d d m list finder
-	 */
-	public void setDDMListFinder(DDMListFinder ddmListFinder) {
-		this.ddmListFinder = ddmListFinder;
-	}
-
-	/**
-	 * Gets the d d m list item local service.
-	 *
-	 * @return the d d m list item local service
-	 */
-	public DDMListItemLocalService getDDMListItemLocalService() {
-		return ddmListItemLocalService;
-	}
-
-	/**
-	 * Sets the d d m list item local service.
-	 *
-	 * @param ddmListItemLocalService the d d m list item local service
-	 */
-	public void setDDMListItemLocalService(
-		DDMListItemLocalService ddmListItemLocalService) {
-		this.ddmListItemLocalService = ddmListItemLocalService;
-	}
-
-	/**
-	 * Gets the d d m list item persistence.
-	 *
-	 * @return the d d m list item persistence
-	 */
-	public DDMListItemPersistence getDDMListItemPersistence() {
-		return ddmListItemPersistence;
-	}
-
-	/**
-	 * Sets the d d m list item persistence.
-	 *
-	 * @param ddmListItemPersistence the d d m list item persistence
-	 */
-	public void setDDMListItemPersistence(
-		DDMListItemPersistence ddmListItemPersistence) {
-		this.ddmListItemPersistence = ddmListItemPersistence;
 	}
 
 	/**
@@ -857,18 +741,6 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 	protected DDMContentLocalService ddmContentLocalService;
 	@BeanReference(type = DDMContentPersistence.class)
 	protected DDMContentPersistence ddmContentPersistence;
-	@BeanReference(type = DDMListLocalService.class)
-	protected DDMListLocalService ddmListLocalService;
-	@BeanReference(type = DDMListService.class)
-	protected DDMListService ddmListService;
-	@BeanReference(type = DDMListPersistence.class)
-	protected DDMListPersistence ddmListPersistence;
-	@BeanReference(type = DDMListFinder.class)
-	protected DDMListFinder ddmListFinder;
-	@BeanReference(type = DDMListItemLocalService.class)
-	protected DDMListItemLocalService ddmListItemLocalService;
-	@BeanReference(type = DDMListItemPersistence.class)
-	protected DDMListItemPersistence ddmListItemPersistence;
 	@BeanReference(type = DDMStorageLinkLocalService.class)
 	protected DDMStorageLinkLocalService ddmStorageLinkLocalService;
 	@BeanReference(type = DDMStorageLinkPersistence.class)
