@@ -501,6 +501,21 @@ public class ArrayUtil {
 		}
 	}
 
+	public static boolean contains(float[] array, float value) {
+		if ((array == null) || (array.length == 0)) {
+			return false;
+		}
+		else {
+			for (int i = 0; i < array.length; i++) {
+				if (value == array[i]) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+	}
+
 	public static boolean contains(int[] array, int value) {
 		if ((array == null) || (array.length == 0)) {
 			return false;
