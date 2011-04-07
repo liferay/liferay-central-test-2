@@ -2507,11 +2507,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>167</portlet-name>
-		<display-name>Dynamic Data List</display-name>
+		<display-name>Dynamic Data Lists</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/dynamic_data_list/view</value>
+			<value>/dynamic_data_lists/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

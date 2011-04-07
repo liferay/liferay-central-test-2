@@ -1740,7 +1740,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>167</portlet-name>
-		<struts-path>dynamic_data_list</struts-path>
+		<struts-path>dynamic_data_lists</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>15.0</control-panel-entry-weight>
@@ -1749,7 +1749,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<css-class-wrapper>portlet-dynamic-data-list</css-class-wrapper>
+		<css-class-wrapper>portlet-dynamic-data-lists</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

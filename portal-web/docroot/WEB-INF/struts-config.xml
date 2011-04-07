@@ -557,16 +557,16 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<!-- Dynamic Data Lists -->
+
+		<action path="/dynamic_data_lists/view" forward="portlet.dynamic_data_lists.view" />
+
 		<!-- Dynamic Data Mapping -->
 
 		<action path="/dynamic_data_mapping/edit_structure" type="com.liferay.portlet.dynamicdatamapping.action.EditStructureAction">
 			<forward name="portlet.dynamic_data_mapping.edit_structure" path="portlet.dynamic_data_mapping.edit_structure" />
 			<forward name="portlet.dynamic_data_mapping.error" path="portlet.dynamic_data_mapping.error" />
 		</action>
-
-		<!-- Dynamic Data Mapping List -->
-
-		<action path="/dynamic_data_mapping_list/view" forward="portlet.dynamic_data_mapping_list.view" />
 
 		<!-- Enterprise Admin -->
 

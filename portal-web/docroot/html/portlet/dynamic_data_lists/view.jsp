@@ -14,6 +14,6 @@
  */
 --%>
 
-<%@ include file="/html/portlet/dynamic_data_mapping_list/init.jsp" %>
+<%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
 Hello World!
