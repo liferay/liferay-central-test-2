@@ -167,6 +167,10 @@ public class ArrayUtil_IW {
 		return ArrayUtil.contains(array, value);
 	}
 
+	public boolean contains(float[] array, float value) {
+		return ArrayUtil.contains(array, value);
+	}
+
 	public boolean contains(int[] array, int value) {
 		return ArrayUtil.contains(array, value);
 	}
