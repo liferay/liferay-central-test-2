@@ -65,6 +65,16 @@ public class DDLEntryFinderImpl extends BasePersistenceImpl<DDLEntry>
 			companyId, groupId, entryKeys, names, descriptions, andOperator);
 	}
 
+	public int countByC_G_E_N_D(
+			long companyId, long groupId, String entryKey, String name,
+			String description, boolean andOperator)
+		throws SystemException {
+
+		return doCountByC_G_E_N_D(
+			companyId, groupId, new String[] {entryKey}, new String[] {name},
+			new String[] {description}, andOperator);
+	}
+
 	public List<DDLEntry> findByKeywords(
 			long companyId, long groupId, String keywords, int start, int end,
 			OrderByComparator orderByComparator)

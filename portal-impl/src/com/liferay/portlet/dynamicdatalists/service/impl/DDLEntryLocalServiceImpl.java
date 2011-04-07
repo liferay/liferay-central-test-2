@@ -195,11 +195,31 @@ public class DDLEntryLocalServiceImpl extends DDLEntryLocalServiceBaseImpl {
 			companyId, groupId, keywords, start, end, orderByComparator);
 	}
 
+	public List<DDLEntry> search(
+			long companyId, long groupId, String entryKey, String name,
+			String description, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return ddlEntryFinder.findByC_G_E_N_D(
+			companyId, groupId, entryKey, name, description, andOperator, start,
+			end, orderByComparator);
+	}
+
 	public int searchCount(
 			long companyId, long groupId, String keywords)
 		throws SystemException {
 
 		return ddlEntryFinder.countByKeywords(companyId, groupId, keywords);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String entryKey, String name,
+			String description, boolean andOperator)
+		throws SystemException {
+
+		return ddlEntryFinder.countByC_G_E_N_D(
+			companyId, groupId, entryKey, name, description, andOperator);
 	}
 
 	public DDLEntry updateEntry(
