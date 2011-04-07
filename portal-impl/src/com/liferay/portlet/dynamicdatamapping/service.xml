@@ -231,7 +231,7 @@
 		<exception>StructureStructureKey</exception>
 		<exception>StructureName</exception>
 		<exception>StructureXsd</exception>
-		<exception>StructureViewName</exception>
-		<exception>StructureViewXsd</exception>
+		<exception>TemplateName</exception>
+		<exception>TemplateScript</exception>
 	</exceptions>
 </service-builder>

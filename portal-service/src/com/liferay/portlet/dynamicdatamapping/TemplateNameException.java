@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class StructureViewXsdException extends PortalException {
+public class TemplateNameException extends PortalException {
 
-	public StructureViewXsdException() {
+	public TemplateNameException() {
 		super();
 	}
 
-	public StructureViewXsdException(String msg) {
+	public TemplateNameException(String msg) {
 		super(msg);
 	}
 
-	public StructureViewXsdException(String msg, Throwable cause) {
+	public TemplateNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public StructureViewXsdException(Throwable cause) {
+	public TemplateNameException(Throwable cause) {
 		super(cause);
 	}
 
