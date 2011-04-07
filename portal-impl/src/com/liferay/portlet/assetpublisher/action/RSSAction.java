@@ -84,7 +84,6 @@ public class RSSAction extends PortletAction {
 			!layoutFriendlyURL.startsWith(Http.HTTPS_WITH_SLASH)) {
 
 			sb.append(themeDisplay.getPortalURL());
-			sb.append(themeDisplay.getPathContext());
 		}
 
 		sb.append(layoutFriendlyURL);
