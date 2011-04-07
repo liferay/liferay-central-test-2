@@ -170,6 +170,8 @@ web.server.display.node=true</echo>
 
 		<antcall target="deploy-properties" inheritAll="false"/>
 
+		<delete dir="${user.home}/liferay" />
+
 		<if>
 			<or>
 				<equals arg1="${lp.version}" arg2="5.2.5" />
