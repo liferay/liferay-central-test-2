@@ -1658,6 +1658,43 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="DDMStructureId" />
+			<basic name="entryKey" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="nameMap" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryItemModelImpl">
+		<attributes>
+			<id name="entryItemId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="entryId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentModelImpl">
 		<attributes>
 			<id name="contentId" />
@@ -3376,6 +3413,14 @@
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" name="DLFolder">
 		<table name="DLFolder" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryImpl" name="DDLEntry">
+		<table name="DDLEntry" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryItemImpl" name="DDLEntryItem">
+		<table name="DDLEntryItem" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" name="DDMContent">

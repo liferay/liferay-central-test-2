@@ -94,6 +94,8 @@
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileVersion" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFolder" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLRepository" />
+	<import class="com.liferay.portlet.dynamicdatalists.model.DDLEntry" />
+	<import class="com.liferay.portlet.dynamicdatalists.model.DDLEntryItem" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMContent" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMList" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMListItem" />
@@ -1402,6 +1404,33 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastPostDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryImpl" table="DDLEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="DDMStructureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="entryKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryItemImpl" table="DDLEntryItem">
+		<cache usage="read-write" />
+		<id name="entryItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="entryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" table="DDMContent">
 		<cache usage="read-write" />

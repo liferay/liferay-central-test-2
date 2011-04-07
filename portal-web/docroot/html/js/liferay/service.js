@@ -718,6 +718,18 @@ Liferay.Service.registerClass(
 	}
 );
 
+Liferay.Service.register("Liferay.Service.DDL", "com.liferay.portlet.dynamicdatalists.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.DDL, "DDLEntry",
+	{
+		addEntry: true,
+		deleteEntry: true,
+		getEntry: true,
+		updateEntry: true
+	}
+);
+
 Liferay.Service.register("Liferay.Service.DDM", "com.liferay.portlet.dynamicdatamapping.service");
 
 Liferay.Service.registerClass(

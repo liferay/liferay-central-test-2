@@ -397,6 +397,29 @@ create table CyrusVirtual (
 	userId VARCHAR(75) not null
 );
 
+create table DDLEntry (
+	uuid_ VARCHAR(75) null,
+	entryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	DDMStructureId LONG,
+	entryKey VARCHAR(75) null,
+	name STRING null,
+	description STRING null
+);
+
+create table DDLEntryItem (
+	uuid_ VARCHAR(75) null,
+	entryItemId LONG not null primary key,
+	classNameId LONG,
+	classPK LONG,
+	entryId LONG
+);
+
 create table DDMContent (
 	uuid_ VARCHAR(75) null,
 	contentId LONG not null primary key,
