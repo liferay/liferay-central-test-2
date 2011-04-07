@@ -46,7 +46,7 @@ public class ActionUtil {
 			entry = DDLEntryLocalServiceUtil.getEntry(groupId, entryKey);
 		}
 
-		request.setAttribute(WebKeys.DYNAMIC_DATA_LIST_ENTRY, entry);
+		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY, entry);
 	}
 
 	public static void getEntry(PortletRequest portletRequest)
@@ -69,7 +69,7 @@ public class ActionUtil {
 			entryItem = DDLEntryItemLocalServiceUtil.getEntryItem(entryItemId);
 		}
 
-		request.setAttribute(WebKeys.DYNAMIC_DATA_LIST_ENTRY_ITEM, entryItem);
+		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY_ITEM, entryItem);
 	}
 
 	public static void getEntryItem(PortletRequest portletRequest)
