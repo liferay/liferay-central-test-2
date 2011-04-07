@@ -14,61 +14,59 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
-String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
+
+if (Validator.isNotNull(initMethod)) {
+	initMethod = namespace + initMethod;
+}
+
+if (Validator.isNotNull(onChangeMethod)) {
+	onChangeMethod = namespace + onChangeMethod;
+}
 %>
 
-<html>
+<aui:script>
+	window['<%= name %>'] = {
+		getHTML: function() {
+			return document.getElementById("<%= name %>").value;
+		},
 
-<head>
-	<title>Editor</title>
+		initEditor: function() {
+			<%= name %>.setHTML(<%= initMethod %>);
+		},
 
-	<script type="text/javascript">
-		function getHTML() {
-			return document.getElementById("textArea").value;
+		setHTML: function(value) {
+			document.getElementById("<%= name %>").value = value || '';
 		}
+	};
 
-		function initEditor() {
-			setHTML(parent.<%= initMethod %>());
-		}
+	window['<%= name %>'].initEditor();
+</aui:script>
 
-		function setHTML(value) {
-			document.getElementById("textArea").value = value;
-		}
-	</script>
-</head>
+<div class="<%= cssClass %>">
+	<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">
+	<tr>
+		<td bgcolor="#FFFFFF" height="100%">
+			<textarea style="font-family: monospace; height: 100%; width: 100%;" id="<%= name %>" name="<%= name %>"
 
-<body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0" onLoad="initEditor();">
+			<%
+			if (Validator.isNotNull(onChangeMethod)) {
+			%>
 
-<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">
-<tr>
-	<td bgcolor="#FFFFFF" height="100%">
-		<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"
+				onChange="<%= HtmlUtil.escape(onChangeMethod) %>(this.value)"
 
-		<%
-		if (Validator.isNotNull(onChangeMethod)) {
-		%>
+			<%
+			}
+			%>
 
-			onChange="parent.<%= HtmlUtil.escape(onChangeMethod) %>(this.value)"
-
-		<%
-		}
-		%>
-
-		></textarea>
-	</td>
-</tr>
-</table>
-
-</body>
-
-</html>
-
-<%!
-public static final String DEFAULT_INIT_METHOD = "initEditor";
-%>
+			></textarea>
+		</td>
+	</tr>
+	</table>
+</div>

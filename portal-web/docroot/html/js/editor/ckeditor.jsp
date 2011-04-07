@@ -14,41 +14,48 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.PropertiesParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
-<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
-<%@ page import="com.liferay.portal.kernel.util.TextFormatter" %>
-<%@ page import="com.liferay.portal.kernel.util.UnicodeProperties" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
-
-<%@ page import="java.util.Map" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
-long plid = ParamUtil.getLong(request, "p_l_id");
-String portletId = ParamUtil.getString(request, "p_p_id");
-String mainPath = ParamUtil.getString(request, "p_main_path");
-String doAsUserId = ParamUtil.getString(request, "doAsUserId");
-String doAsGroupId = ParamUtil.getString(request, "doAsGroupId");
-String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
-String initMethod =	ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
-String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
-String cssPath = ParamUtil.getString(request, "cssPath");
-String cssClasses = ParamUtil.getString(request, "cssClasses");
-String languageId = ParamUtil.getString(request, "languageId");
+String portletId = portletDisplay.getRootPortletId();
 
-UnicodeProperties properties = PropertiesParamUtil.getProperties(request, "config--");
+String mainPath = themeDisplay.getPathMain();
+String doAsUserId = themeDisplay.getDoAsUserId();
+
+if (Validator.isNull(doAsUserId)) {
+	doAsUserId = Encryptor.encrypt(company.getKeyObj(), String.valueOf(themeDisplay.getUserId()));
+}
+
+long doAsGroupId = themeDisplay.getDoAsGroupId();
+String cssPath = themeDisplay.getPathThemeCss();
+String languageId = LocaleUtil.toLanguageId(locale);
+
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
+String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
+String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
+
+if (Validator.isNotNull(initMethod)) {
+	initMethod = namespace + initMethod;
+}
+
+if (Validator.isNotNull(onChangeMethod)) {
+	onChangeMethod = namespace + onChangeMethod;
+}
 
 StringBundler configParamsSB = new StringBundler();
 
-for (Map.Entry<String, String> property : properties.entrySet()) {
-	configParamsSB.append(StringPool.AMPERSAND);
-	configParamsSB.append(property.getKey());
-	configParamsSB.append(StringPool.EQUAL);
-	configParamsSB.append(HttpUtil.encodeURL(property.getValue()));
+Map<String, String> configParams = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:configParams");
+
+if (configParams != null) {
+	for (Map.Entry<String, String> configParam : configParams.entrySet()) {
+		configParamsSB.append(StringPool.AMPERSAND);
+		configParamsSB.append(configParam.getKey());
+		configParamsSB.append(StringPool.EQUAL);
+		configParamsSB.append(HttpUtil.encodeURL(configParam.getValue()));
+	}
 }
 
 String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFileName", "ckconfig.jsp");
@@ -60,86 +67,87 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 }
 %>
 
-<html>
-
-<head>
+<liferay-util:html-top outputKey="ckeditor">
 	<style type="text/css">
 		table.cke_dialog {
 			position: absolute !important;
 		}
 	</style>
 
-	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/ckeditor/ckeditor.js" %>' type="text/javascript"></script>
+</liferay-util:html-top>
 
-	<script type="text/javascript">
-		function getCkData() {
-			var data = CKEDITOR.instances.CKEditor1.getData();
+<script type="text/javascript">
+	window['<%= name %>'] = {
+		getCkData: function() {
+			var data = CKEDITOR.instances['<%= name %>'].getData();
 
 			if (CKEDITOR.env.gecko && (CKEDITOR.tools.trim(data) == '<br />')) {
 				data = '';
 			}
 
 			return data;
-		}
+		},
 
-		function getHTML() {
-			return getCkData();
-		}
+	getHTML: function() {
+		return window['<%= name %>'].getCkData();
+	},
 
-		function getText() {
-			return getCkData();
-		}
+	getText: function() {
+		return window['<%= name %>'].getCkData();
+	},
 
-		<%
-		if (Validator.isNotNull(onChangeMethod)) {
-		%>
+	setHtml: function(value) {
+		CKEDITOR.instances['<%= name %>'].setData(value);
+	}
 
-			function onChangeCallback() {
-				var ckEditor = CKEDITOR.instances.CKEditor1;
-				var dirty = ckEditor.checkDirty();
+	<%
+	if (Validator.isNotNull(onChangeMethod)) {
+	%>
 
-				if (dirty) {
-					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
+		,onChangeCallback: function () {
+			var ckEditor = CKEDITOR.instances['<%= name %>'];
+			var dirty = ckEditor.checkDirty();
 
-					ckEditor.resetDirty();
-				}
+			if (dirty) {
+				<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getText());
+
+				ckEditor.resetDirty();
 			}
-
-		<%
 		}
-		%>
 
-		function setHTML(value) {
-			CKEDITOR.instances.CKEditor1.setData(value);
-		}
-	</script>
-</head>
+	<%
+	}
+	%>
 
-<body>
+	};
+</script>
 
-<textarea id="CKEditor1" name="CKEditor1"></textarea>
+<div class="<%= cssClass %>">
+	<textarea id='<%= name %>' name='<%= name %>'></textarea>
+</div>
 
 <script type="text/javascript">
 	(function() {
 		function setData() {
-			ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
+			ckEditor.setData(<%= HtmlUtil.escape(initMethod) %>);
 		}
 
 		<%
-		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
+		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(String.valueOf(doAsGroupId)));
 		%>
 
 		CKEDITOR.replace(
-			'CKEditor1',
+			'<%= name %>',
 			{
-				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
+				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
 				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
 			}
 		);
 
-		var ckEditor = CKEDITOR.instances.CKEditor1;
+		var ckEditor = CKEDITOR.instances['<%= name %>'];
 
 		var customDataProcessorLoaded = false;
 
@@ -167,7 +175,6 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 		ckEditor.on(
 			'instanceReady',
 			function() {
-
 				<%
 				if (useCustomDataProcessor) {
 				%>
@@ -189,12 +196,13 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 				}
 
 				if (Validator.isNotNull(onChangeMethod)) {
+
 				%>
 
 					setInterval(
 						function() {
 							try {
-								onChangeCallback();
+								window['<%= name %>'].onChangeCallback();
 							}
 							catch(e) {
 							}
@@ -210,11 +218,3 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 		);
 	})();
 </script>
-
-</body>
-
-</html>
-
-<%!
-public static final String DEFAULT_INIT_METHOD = "initEditor";
-%>

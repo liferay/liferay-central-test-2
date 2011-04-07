@@ -14,6 +14,12 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.Map;
@@ -66,10 +72,11 @@ public class InputEditorTag extends IncludeTag {
 		_cssClass = null;
 		_editorImpl = null;
 		_height = null;
-		_initMethod = null;
-		_name = null;
+		_initMethod = "initEditor()";
+		_name = "editor";
 		_onChangeMethod = null;
-		_toolbarSet = null;
+		_PAGE = null;
+		_toolbarSet = "liferay";
 		_width = null;
 	}
 
@@ -78,10 +85,47 @@ public class InputEditorTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		String editorImpl = _editorImpl;
+
+		if (Validator.isNotNull(editorImpl)) {
+			editorImpl = PropsUtil.get(editorImpl);
+		}
+
+		if (!BrowserSnifferUtil.isRtf(request)) {
+			if (BrowserSnifferUtil.isSafari(request) &&
+				BrowserSnifferUtil.isMobile(request)) {
+
+				editorImpl = "simple";
+			}
+			else if (BrowserSnifferUtil.isSafari(request) &&
+				(editorImpl.indexOf("simple") == -1)) {
+
+				editorImpl = "tinymce_simple";
+			}
+			else {
+				editorImpl = "simple";
+			}
+		}
+
+		if (Validator.isNull(editorImpl)) {
+			editorImpl = PropsValues.EDITOR_WYSIWYG_DEFAULT;
+		}
+
+		_PAGE = "/html/js/editor/" + editorImpl + ".jsp";
+
+		String cssClasses = "portlet ";
+
+		Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+
+		if (portlet != null) {
+			cssClasses += portlet.getCssClassWrapper();
+		}
+
 		request.setAttribute(
 			"liferay-ui:input-editor:configParams", _configParams);
 		request.setAttribute("liferay-ui:input-editor:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:input-editor:editorImpl", _editorImpl);
+		request.setAttribute("liferay-ui:input-editor:cssClasses", cssClasses);
+		request.setAttribute("liferay-ui:input-editor:editorImpl", editorImpl);
 		request.setAttribute("liferay-ui:input-editor:height", _height);
 		request.setAttribute("liferay-ui:input-editor:initMethod", _initMethod);
 		request.setAttribute("liferay-ui:input-editor:name", _name);
@@ -91,16 +135,16 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:width", _width);
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/input_editor/page.jsp";
+	private String _PAGE;
 
 	private Map<String, String> _configParams;
 	private String _cssClass;
 	private String _editorImpl;
 	private String _height;
-	private String _initMethod;
-	private String _name;
+	private String _initMethod = "initEditor()";
+	private String _name = "editor";
 	private String _onChangeMethod;
-	private String _toolbarSet;
+	private String _toolbarSet = "liferay";
 	private String _width;
 
 }

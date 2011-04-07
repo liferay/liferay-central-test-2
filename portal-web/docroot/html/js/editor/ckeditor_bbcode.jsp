@@ -14,6 +14,8 @@
  */
 --%>
 
-<jsp:include page="/html/js/editor/ckeditor.jsp">
-	<jsp:param name="ckEditorConfigFileName" value="ckconfig_bbcode.jsp" />
-</jsp:include>
+<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
+
+<liferay-util:include page="/html/js/editor/ckeditor.jsp">
+	<liferay-util:param name="ckEditorConfigFileName" value="ckconfig_bbcode.jsp" />
+</liferay-util:include>

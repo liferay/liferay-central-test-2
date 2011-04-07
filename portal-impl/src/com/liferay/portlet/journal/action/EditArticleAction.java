@@ -73,8 +73,11 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
@@ -248,6 +251,19 @@ public class EditArticleAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(renderRequest, "portlet.journal.edit_article"));
+	}
+
+	public void serveResource(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws Exception {
+
+		String path = "/html/portlet/journal/editor_taglib.jsp";
+
+		PortletRequestDispatcher portletRequestDispatcher =
+			portletConfig.getPortletContext().getRequestDispatcher(path);
+
+		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
