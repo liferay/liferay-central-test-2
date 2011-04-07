@@ -74,9 +74,8 @@ public class DDMTemplateFinderImpl
 		throws SystemException {
 
 		return countByC_G_N_D_T_L(
-			companyId, groupId, new String[] {name},
-			new String[] {description}, new String[] {type},
-			new String[] {language}, andOperator);
+			companyId, groupId, new String[] {name}, new String[] {description},
+			new String[] {type}, new String[] {language}, andOperator);
 	}
 
 	public int countByC_G_N_D_T_L(

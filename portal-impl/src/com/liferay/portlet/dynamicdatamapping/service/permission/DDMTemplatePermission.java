@@ -27,8 +27,8 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUti
 public class DDMTemplatePermission {
 
 	public static void check(
-			PermissionChecker permissionChecker,
-			DDMTemplate template, String actionId)
+			PermissionChecker permissionChecker, DDMTemplate template,
+			String actionId)
 		throws PortalException {
 
 		if (!contains(permissionChecker, template, actionId)) {
@@ -47,8 +47,8 @@ public class DDMTemplatePermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker,
-		DDMTemplate template, String actionId) {
+		PermissionChecker permissionChecker, DDMTemplate template,
+		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
 			template.getCompanyId(), DDMTemplate.class.getName(),
@@ -67,8 +67,8 @@ public class DDMTemplatePermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DDMTemplate template =
-			DDMTemplateLocalServiceUtil.getDDMTemplate(templateId);
+		DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(
+			templateId);
 
 		return contains(permissionChecker, template, actionId);
 	}

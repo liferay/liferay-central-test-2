@@ -41,19 +41,17 @@ public class DDMTemplateLocalServiceImpl
 			String language, String script, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// View
+		// Template
 
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
-
 		Date now = new Date();
 
 		validate(name);
 
 		long templateId = counterLocalService.increment();
 
-		DDMTemplate template =
-			ddmTemplatePersistence.create(templateId);
+		DDMTemplate template = ddmTemplatePersistence.create(templateId);
 
 		template.setUuid(serviceContext.getUuid());
 		template.setGroupId(serviceContext.getScopeGroupId());
@@ -116,7 +114,7 @@ public class DDMTemplateLocalServiceImpl
 	public void deleteTemplate(DDMTemplate template)
 		throws PortalException, SystemException {
 
-		// View
+		// Template
 
 		ddmTemplatePersistence.remove(template);
 
@@ -130,8 +128,8 @@ public class DDMTemplateLocalServiceImpl
 	public void deleteTemplate(long templateId)
 		throws PortalException, SystemException {
 
-		DDMTemplate template =
-			ddmTemplatePersistence.findByPrimaryKey(templateId);
+		DDMTemplate template = ddmTemplatePersistence.findByPrimaryKey(
+			templateId);
 
 		deleteTemplate(template);
 	}
@@ -178,12 +176,10 @@ public class DDMTemplateLocalServiceImpl
 
 		validate(name);
 
-		Date now = new Date();
+		DDMTemplate template = ddmTemplateLocalService.getDDMTemplate(
+			templateId);
 
-		DDMTemplate template =
-			ddmTemplateLocalService.getDDMTemplate(templateId);
-
-		template.setModifiedDate(serviceContext.getModifiedDate(now));
+		template.setModifiedDate(serviceContext.getModifiedDate(null));
 		template.setName(name);
 		template.setDescription(description);
 		template.setType(type);
@@ -195,9 +191,7 @@ public class DDMTemplateLocalServiceImpl
 		return template;
 	}
 
-	protected void validate(String name)
-		throws PortalException {
-
+	protected void validate(String name) throws PortalException {
 		if (Validator.isNull(name) || Validator.isNumber(name) ||
 			name.contains(StringPool.SPACE)) {
 
