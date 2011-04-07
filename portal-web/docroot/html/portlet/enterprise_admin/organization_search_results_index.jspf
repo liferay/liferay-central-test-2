@@ -28,15 +28,13 @@ Sort sort = EnterpriseAdminUtil.getOrganizationSort(searchContainer.getOrderByCo
 Hits hits = null;
 
 if (searchTerms.isAdvancedSearch()) {
-	hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionName(), searchTerms.getCountryName(), organizationParams, searchTerms.isAndOperator(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+	hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getName(), searchTerms.getType(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionName(), searchTerms.getCountryName(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 else {
-	hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), organizationParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+	hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, searchTerms.getKeywords(), organizationParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 
 results = EnterpriseAdminUtil.getOrganizations(hits);
-results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
-
 total = results.size();
 
 pageContext.setAttribute("results", results);

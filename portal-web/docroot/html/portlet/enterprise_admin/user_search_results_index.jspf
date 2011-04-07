@@ -28,15 +28,13 @@ Sort sort = EnterpriseAdminUtil.getUserSort(searchContainer.getOrderByCol(), sea
 Hits hits = null;
 
 if (searchTerms.isAdvancedSearch()) {
-	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), userParams, searchTerms.isAndOperator(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getScreenName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 else {
-	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getStatus(), userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, sort);
+	hits = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getKeywords(), searchTerms.getStatus(), userParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 
 results = EnterpriseAdminUtil.getUsers(hits);
-results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
-
 total = results.size();
 
 pageContext.setAttribute("results", results);
