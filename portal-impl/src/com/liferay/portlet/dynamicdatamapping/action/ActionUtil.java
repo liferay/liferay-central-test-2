@@ -18,11 +18,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.dynamicdatamapping.model.DDMList;
-import com.liferay.portlet.dynamicdatamapping.model.DDMListItem;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.service.DDMListItemLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.service.DDMListLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
 
 import javax.portlet.PortletRequest;
@@ -35,54 +31,6 @@ import javax.servlet.http.HttpServletRequest;
  * @author Eduardo Lundgren
  */
 public class ActionUtil {
-
-	public static void getList(HttpServletRequest request)
-		throws Exception {
-
-		long groupId = ParamUtil.getLong(request, "groupId");
-		String listKey = ParamUtil.getString(request, "listKey");
-
-		DDMList list = null;
-
-		if (Validator.isNotNull(listKey)) {
-			list = DDMListLocalServiceUtil.getList(groupId, listKey);
-		}
-
-		request.setAttribute(WebKeys.DYNAMIC_DATA_MAPPING_LIST, list);
-	}
-
-	public static void getList(PortletRequest portletRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		getList(request);
-	}
-
-	public static void getListItem(HttpServletRequest request)
-		throws Exception {
-
-		long listItemId = ParamUtil.getLong(request, "listItemId");
-
-		DDMListItem listItem = null;
-
-		if (Validator.isNotNull(listItemId)) {
-			listItem = DDMListItemLocalServiceUtil.getListItem(listItemId);
-		}
-
-		request.setAttribute(
-			WebKeys.DYNAMIC_DATA_MAPPING_LIST_ITEM, listItem);
-	}
-
-	public static void getListItem(PortletRequest portletRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		getListItem(request);
-	}
 
 	public static void getStructure(HttpServletRequest request)
 		throws Exception {
