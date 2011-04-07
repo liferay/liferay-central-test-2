@@ -39,7 +39,6 @@ if (!BrowserSnifferUtil.isRtf(request)) {
 //editorImpl = "ckeditor_bbcode";
 //editorImpl = "ckeditor_creole";
 //editorImpl = "fckeditor";
-//editorImpl = "liferay";
 //editorImpl = "simple";
 //editorImpl = "tinymce";
 //editorImpl = "tinymce_simple";
