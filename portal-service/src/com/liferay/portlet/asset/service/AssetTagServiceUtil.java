@@ -69,6 +69,13 @@ public class AssetTagServiceUtil {
 		return getService().getGroupTags(groupId, start, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupTags(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupTags(groupId, start, end, obc);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTag getTag(long tagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -85,6 +92,13 @@ public class AssetTagServiceUtil {
 		long groupId, long classNameId, java.lang.String name, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTags(groupId, classNameId, name, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
+		long groupId, long classNameId, java.lang.String name, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getTags(groupId, classNameId, name, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
