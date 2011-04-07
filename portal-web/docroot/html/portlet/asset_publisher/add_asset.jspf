@@ -15,8 +15,6 @@
 --%>
 
 <%
-long repositoryId = groupId;
-
 Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, renderResponse, classNameIds, assetEntryQuery.getAllCategoryIds(), allAssetTagNames);
 %>
 
@@ -40,10 +38,6 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "doAsGroupId", groupId);
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
-
-				if (className.equals(DLFileEntry.class.getName())) {
-					addPortletURLString = HttpUtil.addParameter(addPortletURLString, "repositoryId", String.valueOf(repositoryId));
-				}
 
 				String taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.get(pageContext, "model.resource." + className) + "', uri:'" + addPortletURLString + "'});";
 
