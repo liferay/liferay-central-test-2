@@ -43,6 +43,7 @@ import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMListPersist
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistenceTest;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMTemplatePersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceTest;
@@ -204,6 +205,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(DDMStorageLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructureLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructurePersistenceTest.class);
+		testSuite.addTestSuite(DDMTemplatePersistenceTest.class);
 
 		testSuite.addTestSuite(ExpandoColumnPersistenceTest.class);
 		testSuite.addTestSuite(ExpandoRowPersistenceTest.class);

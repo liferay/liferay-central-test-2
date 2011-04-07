@@ -139,13 +139,13 @@ public class EditListAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long structureId = ParamUtil.getLong(actionRequest, "structureId");
 		String listKey = ParamUtil.getString(actionRequest, "listKey");
 		boolean autoListKey = ParamUtil.getBoolean(
 			actionRequest, "autoListKey");
 		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
-		long structureId = ParamUtil.getLong(actionRequest, "structureId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDMList.class.getName(), actionRequest);
@@ -154,12 +154,12 @@ public class EditListAction extends PortletAction {
 
 		if (cmd.equals(Constants.ADD)) {
 			list = DDMListServiceUtil.addList(
-				groupId, listKey, autoListKey, nameMap, description,
-				structureId, serviceContext);
+				groupId, structureId, listKey, autoListKey, nameMap,
+				description, serviceContext);
 		}
 		else {
 			list = DDMListServiceUtil.updateList(
-				groupId, listKey, nameMap, description, structureId,
+				groupId, structureId, listKey, nameMap, description,
 				serviceContext);
 		}
 

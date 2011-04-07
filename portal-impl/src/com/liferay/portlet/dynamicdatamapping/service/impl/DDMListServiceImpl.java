@@ -33,8 +33,8 @@ import java.util.Map;
 public class DDMListServiceImpl extends DDMListServiceBaseImpl {
 
 	public DDMList addList(
-			long groupId, String listKey, boolean autoListKey,
-			Map<Locale, String> nameMap, String description, long structureId,
+			long groupId, long structureId, String listKey, boolean autoListKey,
+			Map<Locale, String> nameMap, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -42,8 +42,8 @@ public class DDMListServiceImpl extends DDMListServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_LIST);
 
 		return ddmListLocalService.addList(
-			getUserId(), groupId, listKey, autoListKey, nameMap, description,
-			structureId, serviceContext);
+			getUserId(), groupId, structureId, listKey, autoListKey, nameMap,
+			description, serviceContext);
 	}
 
 	public void deleteList(long listId)
@@ -83,15 +83,16 @@ public class DDMListServiceImpl extends DDMListServiceBaseImpl {
 	}
 
 	public DDMList updateList(
-			long groupId, String listKey, Map<Locale, String> nameMap,
-			String description, long structureId, ServiceContext serviceContext)
+			long groupId, long structureId, String listKey,
+			Map<Locale, String> nameMap, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDMListPermission.check(
 			getPermissionChecker(), groupId, listKey, ActionKeys.UPDATE);
 
 		return ddmListLocalService.updateList(
-			groupId, listKey, nameMap, description, structureId,
+			groupId, structureId, listKey, nameMap, description,
 			serviceContext);
 	}
 

@@ -39,10 +39,10 @@ create table DDMList (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	structureId LONG,
 	listKey VARCHAR(75) null,
 	name STRING null,
-	description STRING null,
-	structureId LONG
+	description STRING null
 );
 
 create table DDMListItem (
@@ -83,6 +83,23 @@ create table DDMStructureLink (
 	classNameId LONG,
 	classPK LONG,
 	structureId LONG
+);
+
+create table DDMTemplate (
+	uuid_ VARCHAR(75) null,
+	templateId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	structureId LONG,
+	name VARCHAR(75) null,
+	description STRING null,
+	type_ VARCHAR(75) null,
+	language VARCHAR(75) null,
+	script TEXT null
 );
 
 alter table DLFileEntry add repositoryId LONG;
