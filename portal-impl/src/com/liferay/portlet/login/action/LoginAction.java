@@ -95,7 +95,7 @@ public class LoginAction extends PortletAction {
 						actionRequest, cause.getClass().getName());
 				}
 				else {
-					_log.error(e, e);
+					_log.error("Authentication failed");
 
 					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
