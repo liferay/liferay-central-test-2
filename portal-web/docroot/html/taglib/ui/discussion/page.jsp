@@ -37,7 +37,7 @@
 <portlet:defineObjects />
 
 <%
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_discussion_page") + StringPool.UNDERLINE;
 
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
@@ -585,11 +585,14 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				A.io.request(
 					uri,
 					{
+						dataType: 'json',
 						form: {
 							id: form
 						},
-						dataType: 'json',
 						on: {
+							failure: function(event, id, obj) {
+								<portlet:namespace />showStatusMessage('error', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-failed-to-complete") %>');
+							},
 							success: function(event, id, obj) {
 								var response = this.get('responseData');
 
@@ -628,9 +631,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 									<portlet:namespace />showStatusMessage('error', errorKey);
 								}
-							},
-							failure: function(event, id, obj) {
-								<portlet:namespace />showStatusMessage('error', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-failed-to-complete") %>');
 							}
 						}
 					}
