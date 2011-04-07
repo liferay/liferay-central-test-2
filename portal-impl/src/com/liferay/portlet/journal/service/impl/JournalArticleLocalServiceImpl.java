@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -2559,7 +2560,8 @@ public class JournalArticleLocalServiceImpl
 
 		String urlTitle = JournalUtil.getUrlTitle(id, title);
 
-		String newUrlTitle = urlTitle;
+		String newUrlTitle = ModelHintsUtil.trimString(
+			JournalArticle.class.getName(), "urlTitle", urlTitle);
 
 		for (int i = 1;; i++) {
 			JournalArticle article = null;
@@ -2574,7 +2576,12 @@ public class JournalArticleLocalServiceImpl
 				break;
 			}
 			else {
-				newUrlTitle = urlTitle + StringPool.DASH + i;
+				String suffix = StringPool.DASH + i;
+
+				String prefix = newUrlTitle.substring(
+					0, (newUrlTitle.length() - suffix.length()));
+
+				newUrlTitle = prefix + suffix;
 			}
 		}
 
