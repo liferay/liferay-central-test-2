@@ -2891,24 +2891,37 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String firstName = null;
 		String middleName = null;
 		String lastName = null;
+		String fullName = null;
 		String screenName = null;
 		String emailAddress = null;
+		String street = null;
+		String city = null;
+		String zip = null;
+		String region = null;
+		String country = null;
 		boolean andOperator = false;
 
 		if (Validator.isNotNull(keywords)) {
 			firstName = keywords;
 			middleName = keywords;
 			lastName = keywords;
+			fullName = keywords;
 			screenName = keywords;
 			emailAddress = keywords;
+			street = keywords;
+			city = keywords;
+			zip = keywords;
+			region = keywords;
+			country = keywords;
 		}
 		else {
 			andOperator = true;
 		}
 
 		return search(
-			companyId, firstName, middleName, lastName, screenName,
-			emailAddress, status, params, andOperator, start, end, sort);
+			companyId, firstName, middleName, lastName, fullName, screenName,
+			emailAddress, street, city, zip, region, country, status, params,
+			andOperator, start, end, sort);
 	}
 
 	/**
@@ -3007,42 +3020,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean andSearch, int start, int end, Sort sort)
 		throws SystemException {
 
-		try {
-			Map<String, Serializable> attributes =
-				new HashMap<String, Serializable>();
-
-			attributes.put("emailAddress", emailAddress);
-			attributes.put("firstName", firstName);
-			attributes.put("lastName", lastName);
-			attributes.put("middleName", middleName);
-			attributes.put("params", params);
-			attributes.put("screenName", screenName);
-			attributes.put("status", status);
-
-			SearchContext searchContext = new SearchContext();
-
-			searchContext.setAndSearch(andSearch);
-			searchContext.setAttributes(attributes);
-			searchContext.setCompanyId(companyId);
-			searchContext.setEnd(end);
-			searchContext.setSorts(new Sort[] {sort});
-
-			QueryConfig queryConfig = new QueryConfig();
-
-			queryConfig.setHighlightEnabled(false);
-			queryConfig.setScoreEnabled(false);
-
-			searchContext.setQueryConfig(queryConfig);
-
-			searchContext.setStart(start);
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
-
-			return indexer.search(searchContext);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return search(
+			companyId, firstName, middleName, lastName, null, screenName,
+			emailAddress, null, null, null, null, null, status, params,
+			andSearch, start, end, sort);
 	}
 
 	/**
@@ -4881,6 +4862,59 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
+	}
+
+	protected Hits search(
+			long companyId, String firstName, String middleName,
+			String lastName, String fullName, String screenName,
+			String emailAddress, String street, String city, String zip,
+			String region, String country, int status,
+			LinkedHashMap<String, Object> params, boolean andSearch, int start,
+			int end, Sort sort)
+		throws SystemException {
+
+		try {
+			Map<String, Serializable> attributes =
+				new HashMap<String, Serializable>();
+
+			attributes.put("city", city);
+			attributes.put("country", country);
+			attributes.put("emailAddress", emailAddress);
+			attributes.put("firstName", firstName);
+			attributes.put("fullName", fullName);
+			attributes.put("lastName", lastName);
+			attributes.put("middleName", middleName);
+			attributes.put("params", params);
+			attributes.put("region", region);
+			attributes.put("screenName", screenName);
+			attributes.put("street", street);
+			attributes.put("status", status);
+			attributes.put("zip", zip);
+
+			SearchContext searchContext = new SearchContext();
+
+			searchContext.setAndSearch(andSearch);
+			searchContext.setAttributes(attributes);
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setSorts(new Sort[] {sort});
+
+			QueryConfig queryConfig = new QueryConfig();
+
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+
+			searchContext.setQueryConfig(queryConfig);
+
+			searchContext.setStart(start);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+			return indexer.search(searchContext);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	protected void setEmailAddress(

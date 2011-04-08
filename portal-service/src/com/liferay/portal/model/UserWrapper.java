@@ -864,6 +864,11 @@ public class UserWrapper implements User {
 		return _user.toXmlString();
 	}
 
+	public java.util.List<com.liferay.portal.model.Address> getAddresses()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _user.getAddresses();
+	}
+
 	public java.util.Date getBirthday()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
@@ -50,6 +51,7 @@ import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
 import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
+import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -86,6 +88,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class UserImpl extends UserModelImpl implements User {
 
 	public UserImpl() {
+	}
+
+	public List<Address> getAddresses() throws SystemException {
+		return AddressLocalServiceUtil.getAddresses(
+			getCompanyId(), Contact.class.getName(), getContactId());
 	}
 
 	public Date getBirthday() throws PortalException, SystemException {

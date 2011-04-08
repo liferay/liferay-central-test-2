@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.FullNameGenerator;
@@ -51,6 +52,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Raymond Augé
  * @author Zsigmond Rab
+ * @author Hugo Huijser
  */
 public class UserIndexer extends BaseIndexer {
 
@@ -123,6 +125,7 @@ public class UserIndexer extends BaseIndexer {
 		String firstName = user.getFirstName();
 		String middleName = user.getMiddleName();
 		String lastName = user.getLastName();
+		String fullName = user.getFullName();
 		String jobTitle = user.getJobTitle();
 		int status = user.getStatus();
 		long[] groupIds = user.getGroupIds();
@@ -130,6 +133,24 @@ public class UserIndexer extends BaseIndexer {
 		long[] roleIds = user.getRoleIds();
 		long[] teamIds = user.getTeamIds();
 		long[] userGroupIds = user.getUserGroupIds();
+
+		List<Address> addresses = user.getAddresses();
+
+		List<String> streets = new ArrayList<String>();
+		List<String> cities = new ArrayList<String>();
+		List<String> zips = new ArrayList<String>();
+		List<String> regions = new ArrayList<String>();
+		List<String> countries = new ArrayList<String>();
+
+		for (Address address : addresses) {
+			streets.add(address.getStreet1().toLowerCase());
+			streets.add(address.getStreet2().toLowerCase());
+			streets.add(address.getStreet3().toLowerCase());
+			cities.add(address.getCity().toLowerCase());
+			zips.add(address.getZip().toLowerCase());
+			regions.add(address.getRegion().getName().toLowerCase());
+			countries.add(address.getCountry().getName().toLowerCase());
+		}
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			User.class.getName(), userId);
@@ -159,6 +180,7 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("firstName", firstName, true);
 		document.addKeyword("middleName", middleName, true);
 		document.addKeyword("lastName", lastName, true);
+		document.addKeyword("fullName", fullName, true);
 		document.addKeyword("jobTitle", jobTitle);
 		document.addKeyword("status", status);
 		document.addKeyword("groupIds", groupIds);
@@ -169,6 +191,16 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("roleIds", roleIds);
 		document.addKeyword("teamIds", teamIds);
 		document.addKeyword("userGroupIds", userGroupIds);
+		document.addKeyword(
+			"street", streets.toArray(new String[streets.size()]));
+		document.addKeyword(
+			"city", cities.toArray(new String[cities.size()]));
+		document.addKeyword(
+			"zip", zips.toArray(new String[zips.size()]));
+		document.addKeyword(
+			"region", regions.toArray(new String[regions.size()]));
+		document.addKeyword(
+			"country", countries.toArray(new String[countries.size()]));
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
@@ -340,6 +372,28 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
+		String city = (String)searchContext.getAttribute("city");
+
+		if (Validator.isNotNull(city)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("city", city, true);
+			}
+			else {
+				searchQuery.addTerm("city", city, true);
+			}
+		}
+
+		String country = (String)searchContext.getAttribute("country");
+
+		if (Validator.isNotNull(country)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("country", country, true);
+			}
+			else {
+				searchQuery.addTerm("country", country, true);
+			}
+		}
+
 		String emailAddress = (String)searchContext.getAttribute(
 			"emailAddress");
 
@@ -361,6 +415,17 @@ public class UserIndexer extends BaseIndexer {
 			}
 			else {
 				searchQuery.addTerm("firstName", firstName, true);
+			}
+		}
+
+		String fullName = (String)searchContext.getAttribute("fullName");
+
+		if (Validator.isNotNull(fullName)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("fullName", fullName, true);
+			}
+			else {
+				searchQuery.addTerm("fullName", fullName, true);
 			}
 		}
 
@@ -386,6 +451,26 @@ public class UserIndexer extends BaseIndexer {
 			}
 		}
 
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		String expandoAttributes = (String)params.get("expandoAttributes");
+
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+		}
+
+		String region = (String)searchContext.getAttribute("region");
+
+		if (Validator.isNotNull(region)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("region", region, true);
+			}
+			else {
+				searchQuery.addTerm("region", region, true);
+			}
+		}
+
 		String screenName = (String)searchContext.getAttribute("screenName");
 
 		if (Validator.isNotNull(screenName)) {
@@ -397,13 +482,26 @@ public class UserIndexer extends BaseIndexer {
 			}
 		}
 
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+		String street = (String)searchContext.getAttribute("street");
 
-		String expandoAttributes = (String)params.get("expandoAttributes");
+		if (Validator.isNotNull(street)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("street", street, true);
+			}
+			else {
+				searchQuery.addTerm("street", street, true);
+			}
+		}
 
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+		String zip = (String)searchContext.getAttribute("zip");
+
+		if (Validator.isNotNull(zip)) {
+			if (searchContext.isAndSearch()) {
+				searchQuery.addRequiredTerm("zip", zip, true);
+			}
+			else {
+				searchQuery.addTerm("zip", zip, true);
+			}
 		}
 	}
 
