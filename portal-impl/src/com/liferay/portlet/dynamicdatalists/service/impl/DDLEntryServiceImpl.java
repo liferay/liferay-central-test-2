@@ -39,7 +39,7 @@ public class DDLEntryServiceImpl extends DDLEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		DDLPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.ADD_LIST);
+			getPermissionChecker(), groupId, ActionKeys.ADD_ENTRY);
 
 		return ddlEntryLocalService.addEntry(
 			getUserId(), groupId, ddmStructureId, entryKey, autoEntryKey,
