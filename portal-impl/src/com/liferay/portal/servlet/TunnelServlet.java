@@ -59,7 +59,11 @@ public class TunnelServlet extends HttpServlet {
 		try {
 			ois = new ObjectInputStream(request.getInputStream());
 		}
-		catch (IOException e) {
+		catch (IOException ioe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(ioe, ioe);
+			}
+
 			return;
 		}
 
