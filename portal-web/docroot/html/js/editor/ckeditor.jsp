@@ -112,7 +112,7 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 		}
 		%>
 
-		setHtml: function(value) {
+		setHTML: function(value) {
 			CKEDITOR.instances['<%= name %>'].setData(value);
 		}
 	};
