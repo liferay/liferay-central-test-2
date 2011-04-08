@@ -228,25 +228,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				request.setAttribute(WebKeys.LAST_PATH, lastPath);
 
-				StringBundler prefix = new StringBundler(2);
-
-				Group group = GroupLocalServiceUtil.getGroup(
-					layoutSet.getGroupId());
-
-				if (layoutSet.isPrivateLayout()) {
-					if (group.isUser()) {
-						prefix.append(_PRIVATE_USER_SERVLET_MAPPING);
-					}
-					else {
-						prefix.append(_PRIVATE_GROUP_SERVLET_MAPPING);
-					}
-				}
-				else {
-					prefix.append(_PUBLIC_GROUP_SERVLET_MAPPING);
-				}
-
-				prefix.append(group.getFriendlyURL());
-
 				StringBundler forwardURL = new StringBundler(6);
 
 				if (i18nLanguageId != null) {
@@ -267,6 +248,25 @@ public class VirtualHostFilter extends BasePortalFilter {
 					companyId, friendlyURL);
 
 				if (plid <= 0) {
+					StringBundler prefix = new StringBundler(2);
+
+					Group group = GroupLocalServiceUtil.getGroup(
+						layoutSet.getGroupId());
+
+					if (layoutSet.isPrivateLayout()) {
+						if (group.isUser()) {
+							prefix.append(_PRIVATE_USER_SERVLET_MAPPING);
+						}
+						else {
+							prefix.append(_PRIVATE_GROUP_SERVLET_MAPPING);
+						}
+					}
+					else {
+						prefix.append(_PUBLIC_GROUP_SERVLET_MAPPING);
+					}
+
+					prefix.append(group.getFriendlyURL());
+
 					forwardURL.append(prefix);
 				}
 
