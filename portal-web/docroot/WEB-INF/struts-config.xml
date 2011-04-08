@@ -568,6 +568,8 @@
 			<forward name="portlet.dynamic_data_mapping.error" path="portlet.dynamic_data_mapping.error" />
 		</action>
 
+		<action path="/dynamic_data_mapping/view" forward="portlet.dynamic_data_mapping.view" />
+
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">
