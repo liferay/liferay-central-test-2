@@ -62,9 +62,7 @@ portletURL.setParameter("struts_action", "/dynamic_data_mapping/view");
 		>
 
 			<%
-			String className = structure.getClassName();
-
-			buffer.append(ResourceActionsUtil.getModelResource(locale, className));
+			buffer.append(ResourceActionsUtil.getModelResource(locale, structure.getClassName()));
 			%>
 
 		</liferay-ui:search-container-column-text>

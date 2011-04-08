@@ -48,10 +48,10 @@ StructureDisplayTerms displayTerms = new StructureDisplayTerms(renderRequest);
 			<aui:select name="storageType">
 
 				<%
-				for (StorageType type : StorageType.values()) {
+				for (StorageType storageType : StorageType.values()) {
 				%>
 
-					<aui:option label="<%= type %>" selected="<%= type.equals(displayTerms.getStorageType()) %>" value="<%= type %>" />
+					<aui:option label="<%= storageType %>" selected="<%= storageType.equals(displayTerms.getStorageType()) %>" value="<%= storageType %>" />
 
 				<%
 				}
