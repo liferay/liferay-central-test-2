@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.stagingcommunity.blogs.BlogsTests;
-import com.liferay.portalweb.portal.stagingcommunity.controlpanel.ControlPanelTests;
+import com.liferay.portalweb.stagingcommunity.blogs.BlogsTests;
+import com.liferay.portalweb.stagingcommunity.controlpanel.ControlPanelTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

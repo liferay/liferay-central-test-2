@@ -15,7 +15,7 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.DocumentLibraryTests;
+import com.liferay.portalweb.stagingcommunity.documentlibrary.DocumentLibraryTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

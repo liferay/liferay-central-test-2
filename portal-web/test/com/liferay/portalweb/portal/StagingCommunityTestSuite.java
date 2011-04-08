@@ -15,10 +15,11 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portal.stagingcommunity.assetpublisher.AssetPublisherTests;
-import com.liferay.portalweb.portal.stagingcommunity.blogs.BlogsTests;
-import com.liferay.portalweb.portal.stagingcommunity.controlpanel.ControlPanelTests;
-import com.liferay.portalweb.portal.stagingcommunity.webcontentdisplay.WebContentDisplayTests;
+import com.liferay.portalweb.stagingcommunity.assetpublisher.AssetPublisherTests;
+import com.liferay.portalweb.stagingcommunity.blogs.BlogsTests;
+import com.liferay.portalweb.stagingcommunity.controlpanel.ControlPanelTests;
+import com.liferay.portalweb.stagingcommunity.documentlibrary.DocumentLibraryTests;
+import com.liferay.portalweb.stagingcommunity.webcontentdisplay.WebContentDisplayTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -35,6 +36,7 @@ public class StagingCommunityTestSuite extends BaseTests {
 		testSuite.addTest(ControlPanelTests.suite());
 		testSuite.addTest(AssetPublisherTests.suite());
 		testSuite.addTest(BlogsTests.suite());
+		testSuite.addTest(DocumentLibraryTests.suite());
 		testSuite.addTest(WebContentDisplayTests.suite());
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
