@@ -888,6 +888,13 @@ public class PortalUtil {
 		return getPortal().getPreferencesValidator(portlet);
 	}
 
+	public static String getRelativeHomeURL(HttpServletRequest request)
+		throws SystemException, PortalException {
+
+		return getPortal().getRelativeHomeURL(request);
+	}
+
+
 	public static long getScopeGroupId(HttpServletRequest request)
 		throws PortalException, SystemException {
 

@@ -755,6 +755,8 @@ public interface Portal {
 	public PreferencesValidator getPreferencesValidator(
 		Portlet portlet);
 
+	public String getRelativeHomeURL(HttpServletRequest request) throws PortalException, SystemException;
+
 	public long getScopeGroupId(HttpServletRequest request)
 		throws PortalException, SystemException;
 

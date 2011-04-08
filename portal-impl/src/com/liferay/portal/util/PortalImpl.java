@@ -1581,15 +1581,7 @@ public class PortalImpl implements Portal {
 
 		String portalURL = getPortalURL(request);
 
-		Company company = getCompany(request);
-
-		String homeURL = company.getHomeURL();
-
-		if (Validator.isNull(homeURL)) {
-			homeURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
-		}
-
-		return portalURL + _pathContext + homeURL;
+		return portalURL + _pathContext + getRelativeHomeURL(request);
 	}
 
 	public String getHost(HttpServletRequest request) {
@@ -2865,6 +2857,20 @@ public class PortalImpl implements Portal {
 		PortletBag portletBag = PortletBagPool.get(portlet.getRootPortletId());
 
 		return portletBag.getPreferencesValidatorInstance();
+	}
+
+	public String getRelativeHomeURL(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		Company company = getCompany(request);
+
+		String homeURL = company.getHomeURL();
+
+		if (Validator.isNull(homeURL)) {
+			homeURL = PropsValues.COMPANY_DEFAULT_HOME_URL;
+		}
+
+		return homeURL;
 	}
 
 	public long getScopeGroupId(HttpServletRequest request)

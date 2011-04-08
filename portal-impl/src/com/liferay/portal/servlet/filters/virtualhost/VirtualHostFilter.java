@@ -244,6 +244,14 @@ public class VirtualHostFilter extends BasePortalFilter {
 						StringPool.BLANK);
 				}
 
+				if (friendlyURL.equals(StringPool.SLASH)) {
+					String homeURL = PortalUtil.getRelativeHomeURL(request);
+
+					if (Validator.isNotNull(homeURL)) {
+						friendlyURL = homeURL;
+					}
+				}
+
 				long plid = PortalUtil.getPlidFromFriendlyURL(
 					companyId, friendlyURL);
 
