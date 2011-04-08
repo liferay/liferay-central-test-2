@@ -23,6 +23,7 @@ import java.io.Serializable;
  */
 public class Sort implements Serializable {
 
+	@Deprecated
 	public static final int AUTO_TYPE = 2;
 
 	public static final int CUSTOM_TYPE = 9;
@@ -45,7 +46,7 @@ public class Sort implements Serializable {
 	}
 
 	public Sort(String fieldName, boolean reverse) {
-		this(fieldName, AUTO_TYPE, reverse);
+		this(fieldName, STRING_TYPE, reverse);
 	}
 
 	public Sort(String fieldName, int type, boolean reverse) {
