@@ -286,6 +286,12 @@ public class DDLEntryLocalServiceWrapper implements DDLEntryLocalService {
 			guestPermissions);
 	}
 
+	public void deleteEntries(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddlEntryLocalService.deleteEntries(groupId);
+	}
+
 	public void deleteEntry(
 		com.liferay.portlet.dynamicdatalists.model.DDLEntry entry)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -305,10 +311,15 @@ public class DDLEntryLocalServiceWrapper implements DDLEntryLocalService {
 		_ddlEntryLocalService.deleteEntry(groupId, entryKey);
 	}
 
-	public void deleteEntries(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_ddlEntryLocalService.deleteEntries(groupId);
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> getEntries(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlEntryLocalService.getEntries(groupId);
+	}
+
+	public int getEntriesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlEntryLocalService.getEntriesCount(groupId);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLEntry getEntry(
@@ -323,17 +334,6 @@ public class DDLEntryLocalServiceWrapper implements DDLEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlEntryLocalService.getEntry(groupId, entryKey);
-	}
-
-	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> getEntries(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddlEntryLocalService.getEntries(groupId);
-	}
-
-	public int getEntriesCount(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddlEntryLocalService.getEntriesCount(groupId);
 	}
 
 	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> search(

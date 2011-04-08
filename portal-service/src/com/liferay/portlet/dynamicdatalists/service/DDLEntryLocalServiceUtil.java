@@ -297,6 +297,12 @@ public class DDLEntryLocalServiceUtil {
 			.addEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
+	public static void deleteEntries(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteEntries(groupId);
+	}
+
 	public static void deleteEntry(
 		com.liferay.portlet.dynamicdatalists.model.DDLEntry entry)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -316,10 +322,15 @@ public class DDLEntryLocalServiceUtil {
 		getService().deleteEntry(groupId, entryKey);
 	}
 
-	public static void deleteEntries(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteEntries(groupId);
+	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> getEntries(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEntries(groupId);
+	}
+
+	public static int getEntriesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEntriesCount(groupId);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLEntry getEntry(
@@ -334,17 +345,6 @@ public class DDLEntryLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEntry(groupId, entryKey);
-	}
-
-	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> getEntries(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEntries(groupId);
-	}
-
-	public static int getEntriesCount(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEntriesCount(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntry> search(

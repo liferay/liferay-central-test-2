@@ -120,6 +120,16 @@ public class DDLEntryLocalServiceImpl extends DDLEntryLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	public void deleteEntries(long groupId)
+		throws PortalException, SystemException {
+
+		List<DDLEntry> entries = ddlEntryPersistence.findByGroupId(groupId);
+
+		for (DDLEntry entry : entries) {
+			deleteEntry(entry);
+		}
+	}
+
 	public void deleteEntry(DDLEntry entry)
 		throws PortalException, SystemException {
 
@@ -154,14 +164,14 @@ public class DDLEntryLocalServiceImpl extends DDLEntryLocalServiceBaseImpl {
 		deleteEntry(entry);
 	}
 
-	public void deleteEntries(long groupId)
-		throws PortalException, SystemException {
+	public List<DDLEntry> getEntries(long groupId)
+		throws SystemException {
 
-		List<DDLEntry> entries = ddlEntryPersistence.findByGroupId(groupId);
+		return ddlEntryPersistence.findByGroupId(groupId);
+	}
 
-		for (DDLEntry entry : entries) {
-			deleteEntry(entry);
-		}
+	public int getEntriesCount(long groupId) throws SystemException {
+		return ddlEntryPersistence.countByGroupId(groupId);
 	}
 
 	public DDLEntry getEntry(long entryId)
@@ -174,16 +184,6 @@ public class DDLEntryLocalServiceImpl extends DDLEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return ddlEntryPersistence.findByG_E(groupId, entryKey);
-	}
-
-	public List<DDLEntry> getEntries(long groupId)
-		throws SystemException {
-
-		return ddlEntryPersistence.findByGroupId(groupId);
-	}
-
-	public int getEntriesCount(long groupId) throws SystemException {
-		return ddlEntryPersistence.countByGroupId(groupId);
 	}
 
 	public List<DDLEntry> search(

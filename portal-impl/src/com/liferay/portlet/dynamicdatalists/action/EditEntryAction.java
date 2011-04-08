@@ -111,8 +111,7 @@ public class EditEntryAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward(
-					"portlet.dynamic_data_lists.error");
+				return mapping.findForward("portlet.dynamic_data_lists.error");
 			}
 			else {
 				throw e;
@@ -120,8 +119,7 @@ public class EditEntryAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(
-				renderRequest, "portlet.dynamic_data_lists.edit_entry"));
+			getForward(renderRequest, "portlet.dynamic_data_lists.edit_entry"));
 	}
 
 	protected void deleteEntry(ActionRequest actionRequest)
