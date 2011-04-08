@@ -37,7 +37,7 @@ public class EntrySearch extends SearchContainer<DDLEntry> {
 		headerNames.add("modified-date");
 	}
 
-	public static final String EMPTY_RESULTS_MESSAGE = "no-lists-were-found";
+	public static final String EMPTY_RESULTS_MESSAGE = "no-entries-were-found";
 
 	public EntrySearch(
 		PortletRequest portletRequest, PortletURL iteratorURL) {

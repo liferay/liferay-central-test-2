@@ -37,13 +37,12 @@ public class ActionUtil {
 	public static void getEntry(HttpServletRequest request)
 		throws Exception {
 
-		long groupId = ParamUtil.getLong(request, "groupId");
-		String entryKey = ParamUtil.getString(request, "entryKey");
+		long entryId = ParamUtil.getLong(request, "entryId");
 
 		DDLEntry entry = null;
 
-		if (Validator.isNotNull(entryKey)) {
-			entry = DDLEntryLocalServiceUtil.getEntry(groupId, entryKey);
+		if (Validator.isNotNull(entryId)) {
+			entry = DDLEntryLocalServiceUtil.getEntry(entryId);
 		}
 
 		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY, entry);
