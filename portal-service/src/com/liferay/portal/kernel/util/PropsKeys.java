@@ -573,6 +573,8 @@ public interface PropsKeys {
 
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
+	public static final String DYNAMIC_DATA_LISTS_ENTRY_FORCE_AUTOGENERATE_ID = "dynamic.data.lists.entry.force.autogenerate.id";
+
 	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID = "dynamic.data.mapping.structure.force.autogenerate.id";
 
 	public static final String EDITOR_WYSIWYG_DEFAULT = "editor.wysiwyg.default";
