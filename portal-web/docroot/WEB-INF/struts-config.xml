@@ -559,6 +559,13 @@
 
 		<!-- Dynamic Data Lists -->
 
+		<action path="/dynamic_data_lists/edit_entry" type="com.liferay.portlet.dynamicdatalists.action.EditEntryAction">
+			<forward name="portlet.dynamic_data_lists.edit_entry" path="portlet.dynamic_data_lists.edit_entry" />
+			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
+		</action>
+
+		<action path="/dynamic_data_lists/select_structure" forward="portlet.dynamic_data_lists.select_structure" />
+
 		<action path="/dynamic_data_lists/view" forward="portlet.dynamic_data_lists.view" />
 
 		<!-- Dynamic Data Mapping -->

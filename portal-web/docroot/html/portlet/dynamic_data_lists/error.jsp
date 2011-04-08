@@ -16,21 +16,10 @@
 
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
-<%
-String tabs1 = ParamUtil.getString(request, "tabs1", "lists");
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("tabs1", tabs1);
-%>
-
-<liferay-ui:tabs
-	names="lists"
-	portletURL="<%= portletURL %>"
+<liferay-ui:header
+	backURL="javascript:history.go(-1);"
+	title="error"
 />
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("lists") %>'>
-		  <liferay-util:include page="/html/portlet/dynamic_data_lists/view_entries.jsp" />
-	</c:when>
-</c:choose>
+<liferay-ui:error exception="<%= NoSuchEntryException.class %>" message="the-entry-could-not-be-found" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
