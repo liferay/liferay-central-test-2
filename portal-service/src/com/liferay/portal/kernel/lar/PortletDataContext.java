@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -73,6 +74,19 @@ public interface PortletDataContext extends Serializable {
 
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
+
+	public void addCustomAttributes(Class<?> classObj, long classPK)
+		throws PortalException, SystemException;
+
+	public void addCustomAttributes(
+		String className, long classPK,
+		Map<String, Serializable> customAttributes);
+
+	public void addCustomAttributesExpandoColumns(Class<?> classObj)
+		throws PortalException, SystemException;
+
+	public void addCustomAttributesExpandoColumns(
+		String className, List<ExpandoColumn> expandoColumns);
 
 	public void addLocks(Class<?> classObj, String key)
 		throws PortalException, SystemException;
@@ -136,6 +150,10 @@ public interface PortletDataContext extends Serializable {
 	public Map<String, List<MBMessage>> getComments();
 
 	public long getCompanyId();
+
+	public Map<String, Map<String, Serializable>> getCustomAttributes();
+
+	public Map<String, List<ExpandoColumn>> getCustomAttributesExpandoColumns();
 
 	public String getDataStrategy();
 
@@ -218,6 +236,13 @@ public interface PortletDataContext extends Serializable {
 
 	public void importComments(
 			Class<?> classObj, long classPK, long newClassPK, long groupId)
+		throws PortalException, SystemException;
+
+	public void importCustomAttributes(
+			Class<?> classObj, long classPK, long newClassPK)
+		throws PortalException, SystemException;
+
+	public void importCustomAttributesExpandoColumns(Class<?> classObj)
 		throws PortalException, SystemException;
 
 	public void importLocks(Class<?> classObj, String key, String newKey)

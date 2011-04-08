@@ -53,13 +53,14 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_entries, _categories, _comments, _ratings, _tags
+			_entries, _categories, _comments, _customAttributes, _ratings, _tags
 		};
 	}
 
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_entries, _categories, _comments, _ratings, _tags, _wordpress
+			_entries, _categories, _comments, _customAttributes, _ratings,
+			_tags, _wordpress
 		};
 	}
 
@@ -94,6 +95,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.blogs", portletDataContext.getScopeGroupId());
 
+		if (portletDataContext.getBooleanParameter(
+				_NAMESPACE, "custom-attributes")) {
+
+			portletDataContext.addCustomAttributesExpandoColumns(
+				BlogsEntry.class);
+		}
+
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("blogs-data");
@@ -119,6 +127,13 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.importPermissions(
 			"com.liferay.portlet.blogs", portletDataContext.getSourceGroupId(),
 			portletDataContext.getScopeGroupId());
+
+		if (portletDataContext.getBooleanParameter(
+				_NAMESPACE, "custom-attributes")) {
+
+			portletDataContext.importCustomAttributesExpandoColumns(
+				BlogsEntry.class);
+		}
 
 		Document document = SAXReaderUtil.read(data);
 
@@ -310,6 +325,9 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _comments =
 		new PortletDataHandlerBoolean(_NAMESPACE, "comments");
+
+	private static PortletDataHandlerBoolean _customAttributes =
+		new PortletDataHandlerBoolean(_NAMESPACE, "custom-attributes");
 
 	private static PortletDataHandlerBoolean _entries =
 		new PortletDataHandlerBoolean(_NAMESPACE, "entries", true, true);

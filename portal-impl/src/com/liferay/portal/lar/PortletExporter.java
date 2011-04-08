@@ -63,11 +63,13 @@ import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -260,6 +262,11 @@ public class PortletExporter {
 		// Comments
 
 		exportComments(portletDataContext, rootElement);
+
+		// Custom attributes
+
+		exportCustomAttributes(portletDataContext, rootElement);
+		exportCustomAttributesExpandoColumns(portletDataContext, rootElement);
 
 		// Locks
 
@@ -538,6 +545,89 @@ public class PortletExporter {
 
 		portletDataContext.addZipEntry(
 			portletDataContext.getRootPath() + "/comments.xml",
+			document.formattedString());
+	}
+
+	protected void exportCustomAttributes(
+			PortletDataContext portletDataContext, Element parentElement)
+		throws Exception {
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement("custom-attributes");
+
+		Map<String, Map<String, Serializable>> customAttributesMap =
+			portletDataContext.getCustomAttributes();
+
+		for (Map.Entry<String, Map<String, Serializable>> entry :
+				customAttributesMap.entrySet()) {
+
+			String key = entry.getKey();
+			Map<String, Serializable> value = entry.getValue();
+
+			int pos = key.indexOf(CharPool.POUND);
+
+			String className = key.substring(0, pos);
+			String classPK = key.substring(pos + 1);
+
+			String path = getCustomAttributesPath(
+				portletDataContext, className, classPK);
+
+			Element assetElement = rootElement.addElement("asset");
+
+			assetElement.addAttribute("path", path);
+			assetElement.addAttribute("class-name", className);
+			assetElement.addAttribute("class-pk", classPK);
+
+			if (portletDataContext.isPathNotProcessed(path)) {
+				portletDataContext.addZipEntry(path, value);
+			}
+		}
+
+		portletDataContext.addZipEntry(
+			portletDataContext.getRootPath() + "/custom-attributes.xml",
+			document.formattedString());
+	}
+
+	protected void exportCustomAttributesExpandoColumns(
+			PortletDataContext portletDataContext, Element parentElement)
+		throws Exception {
+
+		Document document = SAXReaderUtil.createDocument();
+
+		Element rootElement = document.addElement(
+			"custom-attributes-expando-columns");
+
+		Map<String, List<ExpandoColumn>> customAttributesExpandoColumnsMap =
+			portletDataContext.getCustomAttributesExpandoColumns();
+
+		for (Map.Entry<String, List<ExpandoColumn>> entry :
+				customAttributesExpandoColumnsMap.entrySet()) {
+
+			String className = entry.getKey();
+			List<ExpandoColumn> expandoColumns = entry.getValue();
+
+			String path = getCustomAttributesExpandoColumnsPath(
+				portletDataContext, className);
+
+			Element assetElement = rootElement.addElement("asset");
+
+			assetElement.addAttribute("path", path);
+			assetElement.addAttribute("class-name", className);
+
+			for (ExpandoColumn expandoColumn : expandoColumns) {
+				String curPath = getCustomAttributesExpandoColumnPath(
+					portletDataContext, className, expandoColumn.getColumnId());
+
+				if (portletDataContext.isPathNotProcessed(curPath)) {
+					portletDataContext.addZipEntry(curPath, expandoColumn);
+				}
+			}
+		}
+
+		portletDataContext.addZipEntry(
+			portletDataContext.getRootPath() +
+				"/custom-attributes-expando-columns.xml",
 			document.formattedString());
 	}
 
@@ -1066,6 +1156,50 @@ public class PortletExporter {
 		sb.append(PortalUtil.getClassNameId(className));
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append(classPK);
+		sb.append(CharPool.FORWARD_SLASH);
+
+		return sb.toString();
+	}
+
+	protected String getCustomAttributesPath(
+		PortletDataContext portletDataContext, String className,
+		String classPK) {
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(portletDataContext.getRootPath());
+		sb.append("/custom-attributes/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected String getCustomAttributesExpandoColumnPath(
+		PortletDataContext portletDataContext, String className, long classPK) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(portletDataContext.getRootPath());
+		sb.append("/custom-attributes-expando-columns/");
+		sb.append(PortalUtil.getClassNameId(className));
+		sb.append(CharPool.FORWARD_SLASH);
+		sb.append(classPK);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected String getCustomAttributesExpandoColumnsPath(
+		PortletDataContext portletDataContext, String className) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(portletDataContext.getRootPath());
+		sb.append("/custom-attributes-expando-columns/");
+		sb.append(PortalUtil.getClassNameId(className));
 		sb.append(CharPool.FORWARD_SLASH);
 
 		return sb.toString();
