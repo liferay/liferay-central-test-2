@@ -23,23 +23,26 @@ String refererParam = PortalUtil.escapeRedirect(request.getParameter(WebKeys.REF
 String refererRequest = (String)request.getAttribute(WebKeys.REFERER);
 String refererSession = (String)session.getAttribute(WebKeys.REFERER);
 
-if (themeDisplay.isAddSessionIdToURL()) {
-	refererParam = PortalUtil.getURLWithSessionId(refererParam, themeDisplay.getSessionId());
-	refererRequest = PortalUtil.getURLWithSessionId(refererRequest, themeDisplay.getSessionId());
-	refererSession = PortalUtil.getURLWithSessionId(refererSession, themeDisplay.getSessionId());
-}
+if (Validator.isNotNull(refererParam)) {
+	if (themeDisplay.isAddSessionIdToURL()) {
+		refererParam = PortalUtil.getURLWithSessionId(refererParam, themeDisplay.getSessionId());
+	}
 
-if ((refererParam != null) && (!refererParam.equals(StringPool.NULL)) && (!refererParam.equals(StringPool.BLANK))) {
 	referer = refererParam;
 }
-else if ((refererRequest != null) && (!refererRequest.equals(StringPool.NULL)) && (!refererRequest.equals(StringPool.BLANK))) {
+else if (Validator.isNotNull(refererRequest)) {
+	if (themeDisplay.isAddSessionIdToURL()) {
+		refererRequest = PortalUtil.getURLWithSessionId(refererRequest, themeDisplay.getSessionId());
+	}
+
 	referer = refererRequest;
 }
-else if ((refererSession != null) && (!refererSession.equals(StringPool.NULL)) && (!refererSession.equals(StringPool.BLANK))) {
+else if (Validator.isNotNull(refererSession)) {
+	if (themeDisplay.isAddSessionIdToURL()) {
+		refererSession = PortalUtil.getURLWithSessionId(refererSession, themeDisplay.getSessionId());
+	}
+
 	referer = refererSession;
-}
-else if (themeDisplay != null) {
-	referer = themeDisplay.getPathMain();
 }
 else {
 	referer = PortalUtil.getPathMain();

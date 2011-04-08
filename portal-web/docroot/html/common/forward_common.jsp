@@ -23,17 +23,26 @@ String forwardParam = PortalUtil.escapeRedirect(request.getParameter(WebKeys.FOR
 String forwardRequest = (String)request.getAttribute(WebKeys.FORWARD_URL);
 String forwardSession = (String)session.getAttribute(WebKeys.FORWARD_URL);
 
-if ((forwardParam != null) && (!forwardParam.equals(StringPool.NULL)) && (!forwardParam.equals(StringPool.BLANK))) {
-	forwardURL = forwardParam;
+if (Validator.isNotNull(forwardParam)) {
+	if (themeDisplay.isAddSessionIdToURL()) {
+		forwardParam = PortalUtil.getURLWithSessionId(forwardParam, themeDisplay.getSessionId());
+	}
+
+	forward = forwardParam;
 }
-else if ((forwardRequest != null) && (!forwardRequest.equals(StringPool.NULL)) && (!forwardRequest.equals(StringPool.BLANK))) {
-	forwardURL = forwardRequest;
+else if (Validator.isNotNull(forwardRequest)) {
+	if (themeDisplay.isAddSessionIdToURL()) {
+		forwardRequest = PortalUtil.getURLWithSessionId(forwardRequest, themeDisplay.getSessionId());
+	}
+
+	forward = forwardRequest;
 }
-else if ((forwardSession != null) && (!forwardSession.equals(StringPool.NULL)) && (!forwardSession.equals(StringPool.BLANK))) {
-	forwardURL = forwardSession;
-}
-else if (themeDisplay != null) {
-	forwardURL = themeDisplay.getPathMain();
+else if (Validator.isNotNull(forwardSession)) {
+	if (themeDisplay.isAddSessionIdToURL()) {
+		forwardSession = PortalUtil.getURLWithSessionId(forwardSession, themeDisplay.getSessionId());
+	}
+
+	forward = forwardSession;
 }
 else {
 	forwardURL = PortalUtil.getPathMain();
