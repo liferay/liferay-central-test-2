@@ -24,27 +24,22 @@ String forwardRequest = (String)request.getAttribute(WebKeys.FORWARD_URL);
 String forwardSession = (String)session.getAttribute(WebKeys.FORWARD_URL);
 
 if (Validator.isNotNull(forwardParam)) {
-	if (themeDisplay.isAddSessionIdToURL()) {
-		forwardParam = PortalUtil.getURLWithSessionId(forwardParam, themeDisplay.getSessionId());
-	}
-
-	forward = forwardParam;
+	forwardURL = forwardParam;
 }
 else if (Validator.isNotNull(forwardRequest)) {
-	if (themeDisplay.isAddSessionIdToURL()) {
-		forwardRequest = PortalUtil.getURLWithSessionId(forwardRequest, themeDisplay.getSessionId());
-	}
-
-	forward = forwardRequest;
+	forwardURL = forwardRequest;
 }
 else if (Validator.isNotNull(forwardSession)) {
-	if (themeDisplay.isAddSessionIdToURL()) {
-		forwardSession = PortalUtil.getURLWithSessionId(forwardSession, themeDisplay.getSessionId());
-	}
-
-	forward = forwardSession;
+	forwardURL = forwardSession;
+}
+else if (themeDisplay != null) {
+	forwardURL = themeDisplay.getPathMain();
 }
 else {
 	forwardURL = PortalUtil.getPathMain();
+}
+
+if (!CookieKeys.hasSessionId(request) && Validator.isNotNull(forwardURL)) {
+	forwardURL = PortalUtil.getURLWithSessionId(forwardURL, session.getId());
 }
 %>

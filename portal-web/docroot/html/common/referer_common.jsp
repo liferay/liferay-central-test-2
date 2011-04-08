@@ -24,27 +24,22 @@ String refererRequest = (String)request.getAttribute(WebKeys.REFERER);
 String refererSession = (String)session.getAttribute(WebKeys.REFERER);
 
 if (Validator.isNotNull(refererParam)) {
-	if (themeDisplay.isAddSessionIdToURL()) {
-		refererParam = PortalUtil.getURLWithSessionId(refererParam, themeDisplay.getSessionId());
-	}
-
 	referer = refererParam;
 }
 else if (Validator.isNotNull(refererRequest)) {
-	if (themeDisplay.isAddSessionIdToURL()) {
-		refererRequest = PortalUtil.getURLWithSessionId(refererRequest, themeDisplay.getSessionId());
-	}
-
 	referer = refererRequest;
 }
 else if (Validator.isNotNull(refererSession)) {
-	if (themeDisplay.isAddSessionIdToURL()) {
-		refererSession = PortalUtil.getURLWithSessionId(refererSession, themeDisplay.getSessionId());
-	}
-
 	referer = refererSession;
+}
+else if (themeDisplay != null) {
+	referer = themeDisplay.getPathMain();
 }
 else {
 	referer = PortalUtil.getPathMain();
+}
+
+if (!CookieKeys.hasSessionId(request) && Validator.isNotNull(referer)) {
+	referer = PortalUtil.getURLWithSessionId(referer, session.getId());
 }
 %>
