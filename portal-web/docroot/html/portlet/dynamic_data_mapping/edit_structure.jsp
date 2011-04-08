@@ -60,11 +60,10 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	<liferay-ui:panel-container cssClass="lfr-structure-entry-details-container" extended="<%= false %>" id="structureDetailsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="structureDetailsSectionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "details") %>'>
 			<aui:layout cssClass="lfr-ddm-types-form-column">
-
-				<aui:column first="true">
+				<aui:column first="<%= true %>">
 					<aui:field-wrapper>
 						<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
-							<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DDLEntry.class.getName()) %>' value="<%= PortalUtil.getClassNameId(DDLEntry.class.getName()) %>" />
+							<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DDLEntry.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DDLEntry.class.getName()) %>" />
 						</aui:select>
 					</aui:field-wrapper>
 				</aui:column>
@@ -74,10 +73,10 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 						<aui:select disabled="<%= structure != null %>" name="storageType">
 
 							<%
-							for (StorageType type : StorageType.values()) {
+							for (StorageType storageType : StorageType.values()) {
 							%>
 
-								<aui:option label="<%= type %>" value="<%= type %>" />
+								<aui:option label="<%= type %>" value="<%= storageType %>" />
 
 							<%
 							}
@@ -86,7 +85,6 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 						</aui:select>
 					</aui:field-wrapper>
 				</aui:column>
-
 			</aui:layout>
 
 			<aui:input name="description" />
@@ -187,7 +185,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	var formBuilder = new Liferay.FormBuilder(
 		{
 			<c:if test="<%= Validator.isNotNull(availableFields) %>">
-				availableFields: AUI().Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
+				availableFields: A.Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
 			</c:if>
 
 			boundingBox: '#<portlet:namespace />formBuilder',
