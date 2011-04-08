@@ -75,7 +75,7 @@ AUI().add(
 					timeDiff = currentTime - sessionState;
 
 					if (!instance.autoExtend) {
-						if ((timeDiff + 100) >= instance.sessionTimeoutWarning) {
+						if ((timeDiff + 100) >= instance._timeoutDiff) {
 								instance.warn();
 						}
 						else {
