@@ -17,7 +17,9 @@ package com.liferay.portal.tools.samplesqlbuilder;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.io.CharPipe;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncTeeWriter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -45,8 +47,8 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.Reader;
 import java.io.Writer;
 
 import java.util.HashMap;
@@ -144,17 +146,36 @@ public class SampleSQLBuilder {
 				baseDir, _maxGroupCount, _maxUserToGroupCount, _counter,
 				_permissionCounter, _resourceCounter, _resourceCodeCounter);
 
+			final CharPipe charPipe = new CharPipe(1024 * 1024 * 10);
+
+			Reader pipeReader = charPipe.getReader();
+			final Writer pipeWriter = charPipe.getWriter();
+
 			// Generic
 
-			_writerGeneric = new FileWriter(_outputDir +  "/sample.sql");
+			Thread genericWriterThread = new Thread() {
+				public void run() {
+					try {
+						_writerGeneric = new UnsyncTeeWriter(pipeWriter,
+							new FileWriter(_outputDir +  "/sample.sql"));
 
-			createSample();
+						createSample();
 
-			_writerGeneric.flush();
+						_writerGeneric.close();
+
+						charPipe.close();
+					}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			};
+
+			genericWriterThread.start();
 
 			// Specific
 
-			_writerSpecific = new FileWriter(
+			Writer writerSpecific = new FileWriter(
 				_outputDir +  "/sample-" + dbType + ".sql");
 
 			DB specificDB = DBFactoryUtil.getDB(_dbType);
@@ -162,20 +183,19 @@ public class SampleSQLBuilder {
 			boolean previousBlankLine = false;
 
 			UnsyncBufferedReader unsyncBufferedReader =
-				new UnsyncBufferedReader(
-					new FileReader(_outputDir +  "/sample.sql"));
+				new UnsyncBufferedReader(pipeReader);
 
 			String s = null;
 
 			while ((s = unsyncBufferedReader.readLine()) != null) {
 				s = specificDB.buildSQL(s).trim();
 
-				_writerSpecific.write(s);
+				writerSpecific.write(s);
 
 				if (previousBlankLine && Validator.isNull(s)) {
 				}
 				else {
-					_writerSpecific.write(StringPool.NEW_LINE);
+					writerSpecific.write(StringPool.NEW_LINE);
 				}
 
 				if (Validator.isNull(s)) {
@@ -185,7 +205,9 @@ public class SampleSQLBuilder {
 
 			unsyncBufferedReader.close();
 
-			_writerSpecific.flush();
+			writerSpecific.close();
+
+			genericWriterThread.join();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -431,6 +453,5 @@ public class SampleSQLBuilder {
 	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";
 	private SimpleCounter _userScreenNameIncrementer;
 	private Writer _writerGeneric;
-	private Writer _writerSpecific;
 
 }
