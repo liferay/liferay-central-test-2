@@ -31,7 +31,7 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -42,7 +42,8 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Blogs Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Blogs Test Page",
+			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
@@ -84,9 +85,8 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Display Settings", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Display Settings",
+			RuntimeVariables.replace("Display Settings"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -94,7 +94,7 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_pageDisplayStyle")) {
+				if (selenium.isVisible("//select[@id='_86_pageDisplayStyle']")) {
 					break;
 				}
 			}
@@ -105,11 +105,10 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.select("_86_pageDisplayStyle",
-			RuntimeVariables.replace("label=Full Content"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
+		selenium.select("//select[@id='_86_pageDisplayStyle']",
+			RuntimeVariables.replace("Full Content"));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -120,7 +119,7 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"You have successfully updated the setup.")
 										.equals(selenium.getText(
-								"//div[@id='p_p_id_86_']/div/div"))) {
+								"//div[@class='portlet-msg-success']"))) {
 					break;
 				}
 			}
@@ -133,8 +132,8 @@ public class ConfigurePortletDisplayStyleFullContentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
-			selenium.getText("//div[@id='p_p_id_86_']/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals("Full Content",
-			selenium.getSelectedLabel("_86_pageDisplayStyle"));
+			selenium.getSelectedLabel("//select[@id='_86_pageDisplayStyle']"));
 	}
 }

@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.blogs.entry.EntryTests;
-import com.liferay.portalweb.portlet.blogs.entrycomment.EntryCommentTests;
+import com.liferay.portalweb.portlet.blogs.blogsentry.BlogsEntryTests;
+import com.liferay.portalweb.portlet.blogs.blogsentrycomment.BlogsEntryCommentTests;
 import com.liferay.portalweb.portlet.blogs.lar.LARTests;
 import com.liferay.portalweb.portlet.blogs.portlet.PortletTests;
 
@@ -31,8 +31,8 @@ public class BlogsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(EntryCommentTests.suite());
+		testSuite.addTest(BlogsEntryTests.suite());
+		testSuite.addTest(BlogsEntryCommentTests.suite());
 		testSuite.addTest(LARTests.suite());
 		testSuite.addTest(PortletTests.suite());
 

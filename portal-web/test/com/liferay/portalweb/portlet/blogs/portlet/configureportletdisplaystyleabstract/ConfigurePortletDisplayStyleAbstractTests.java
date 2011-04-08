@@ -29,11 +29,8 @@ public class ConfigurePortletDisplayStyleAbstractTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageBlogsTest.class);
 		testSuite.addTestSuite(AddPortletBlogsTest.class);
-		testSuite.addTestSuite(AddEntryTest.class);
 		testSuite.addTestSuite(ConfigurePortletDisplayStyleAbstractTest.class);
-		testSuite.addTestSuite(ViewEntryDisplayStyleAbstractTest.class);
-		testSuite.addTestSuite(TearDownBlogsConfigurationTest.class);
-		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPortletDisplayStyleTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

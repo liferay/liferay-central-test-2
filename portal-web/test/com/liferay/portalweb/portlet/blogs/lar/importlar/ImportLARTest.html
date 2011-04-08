@@ -14,14 +14,14 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Blogs Test Page</td>
-	<td></td>
+	<td>Blogs Test Page</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>link=Blogs Test Page</td>
-	<td></td>
+	<td>Blogs Test Page</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -39,63 +39,58 @@
 	<td>Export / Import</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>clickAt</td>
 	<td>link=Import</td>
-	<td></td>
+	<td>Import</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>_86_importFileName</td>
-	<td></td>
+	<td>waitForVisible</td>
+	<td>//input[@id='_86_importFileName']</td>
+	<td>Import a LAR file to overwrite the selected data</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_86_importFileName</td>
-	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\blogs\lar\importlar\dependencies\Blogs-Selenium.portlet.lar</td>
+	<td>//input[@id='_86_importFileName']</td>
+	<td>L:\portal\build\portal-web\test\com\liferay\portalweb\portlet\blogs\dependencies\Blogs-Selenium.portlet.lar</td>
 </tr>
 <tr>
 	<td>assertNotChecked</td>
-	<td>_86_DELETE_PORTLET_DATACheckbox</td>
+	<td>//input[@id='_86_DELETE_PORTLET_DATACheckbox']</td>
 	<td>Delete portlet data before importing.</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>_86_DELETE_PORTLET_DATACheckbox</td>
+	<td>//input[@id='_86_DELETE_PORTLET_DATACheckbox']</td>
 	<td>Delete portlet data before importing.</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>_86_DELETE_PORTLET_DATACheckbox</td>
+	<td>//input[@id='_86_DELETE_PORTLET_DATACheckbox']</td>
 	<td>Delete portlet data before importing.</td>
 </tr>
 <tr>
 	<td>assertNotChecked</td>
-	<td>_86_PORTLET_DATACheckbox</td>
+	<td>//input[@id='_86_PORTLET_DATACheckbox']</td>
 	<td>Data</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>_86_PORTLET_DATACheckbox</td>
+	<td>//input[@id='_86_PORTLET_DATACheckbox']</td>
 	<td>Data</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>_86_PORTLET_DATACheckbox</td>
+	<td>//input[@id='_86_PORTLET_DATACheckbox']</td>
 	<td>Data</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Import']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForText</td>
-	<td>//section/div/div/div/div</td>
-	<td>Your request completed successfully.</td>
+	<td>Import</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
 </tr>
 

@@ -28,14 +28,12 @@ public class TearDownPageTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.clickAt("main-content", RuntimeVariables.replace(""));
-				selenium.clickAt("navigation", RuntimeVariables.replace(""));
-				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
+				selenium.clickAt("//div[@id='dockbar']",
+					RuntimeVariables.replace("Dockbar"));
 
-				String guestCommunityName = selenium.getText(
-						"//nav[@id='breadcrumbs']/ul/li/span/a");
-				RuntimeVariables.setValue("guestCommunityName",
-					guestCommunityName);
+				String guestCommunity = selenium.getText(
+						"//nav[@class='site-breadcrumbs']/ul/li[1]/span/a");
+				RuntimeVariables.setValue("guestCommunity", guestCommunity);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -59,9 +57,6 @@ public class TearDownPageTest extends BaseTestCase {
 					RuntimeVariables.replace("Manage Pages"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("main-content", RuntimeVariables.replace(""));
-				selenium.clickAt("navigation", RuntimeVariables.replace(""));
-				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -69,7 +64,7 @@ public class TearDownPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("${guestCommunityName}")
+						if (RuntimeVariables.replace("${guestCommunity}")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
