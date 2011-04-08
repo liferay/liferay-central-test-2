@@ -76,7 +76,7 @@ AUI().add(
 
 					if (!instance.autoExtend) {
 						if ((timeDiff + 100) >= instance._timeoutDiff) {
-								instance.warn();
+							instance.warn();
 						}
 						else {
 							newWaitTime = (instance.sessionTimeoutWarning - timeDiff) + 10000;
