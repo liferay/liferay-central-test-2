@@ -69,15 +69,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.expando.NoSuchColumnException;
-import com.liferay.portlet.expando.NoSuchTableException;
-import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.model.ExpandoTableConstants;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
-import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -111,7 +102,6 @@ import com.thoughtworks.xstream.XStream;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -254,10 +244,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 				addComments(classObj, classPK);
 			}
 
-			if (getBooleanParameter(namespace, "custom-attributes")) {
-				addCustomAttributes(classObj, classPK);
-			}
-
 			if (getBooleanParameter(namespace, "ratings")) {
 				addRatingsEntries(classObj, classPK);
 			}
@@ -306,58 +292,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
-	}
-
-	public void addCustomAttributes(Class<?> classObj, long classPK)
-		throws PortalException, SystemException {
-
-		List<ExpandoColumn> expandoColumns =
-			ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
-				_companyId, classObj.getName());
-
-		Map<String, Serializable> customAttributes =
-			new HashMap<String, Serializable>();
-
-		for (ExpandoColumn expandoColumn : expandoColumns) {
-			Serializable data = ExpandoValueLocalServiceUtil.getData(
-				_companyId, classObj.getName(),
-				ExpandoTableConstants.DEFAULT_TABLE_NAME,
-				expandoColumn.getName(), classPK);
-
-			customAttributes.put(expandoColumn.getName(), data);
-		}
-
-		_customAttributesMap.put(
-			getPrimaryKeyString(classObj, classPK), customAttributes);
-	}
-
-	public void addCustomAttributes(
-		String className, long classPK,
-		Map<String, Serializable> customAttributes) {
-
-		_customAttributesMap.put(
-			getPrimaryKeyString(className, classPK), customAttributes);
-	}
-
-	public void addCustomAttributesExpandoColumns(Class<?> classObj)
-		throws PortalException, SystemException {
-
-		List<ExpandoColumn> expandoColumns =
-			ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
-				_companyId, classObj.getName());
-
-		for (ExpandoColumn expandoColumn : expandoColumns) {
-			addPermissions(ExpandoColumn.class, expandoColumn.getColumnId());
-		}
-
-		_customAttributesExpandoColumnsMap.put(
-			classObj.getName(), expandoColumns);
-	}
-
-	public void addCustomAttributesExpandoColumns(
-		String className, List<ExpandoColumn> expandoColumns) {
-
-		_customAttributesExpandoColumnsMap.put(className, expandoColumns);
 	}
 
 	public void addLocks(Class<?> classObj, String key)
@@ -625,16 +559,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _companyId;
 	}
 
-	public Map<String, Map<String, Serializable>> getCustomAttributes() {
-		return _customAttributesMap;
-	}
-
-	public Map<String, List<ExpandoColumn>>
-		getCustomAttributesExpandoColumns() {
-
-		return _customAttributesExpandoColumnsMap;
-	}
-
 	public String getDataStrategy() {
 		return _dataStrategy;
 	}
@@ -835,10 +759,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			importComments(classObj, classPK, newClassPK, getScopeGroupId());
 		}
 
-		if (getBooleanParameter(namespace, "custom-attributes")) {
-			importCustomAttributes(classObj, classPK, newClassPK);
-		}
-
 		if (getBooleanParameter(namespace, "ratings")) {
 			importRatingsEntries(classObj, classPK, newClassPK);
 		}
@@ -940,82 +860,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			importRatingsEntries(
 				MBMessage.class, message.getPrimaryKey(),
 				messagePKs.get(message.getPrimaryKey()));
-		}
-	}
-
-	public void importCustomAttributes(
-			Class<?> classObj, long classPK, long newClassPK)
-		throws PortalException, SystemException {
-
-		Map<String, Serializable> customAttributes = _customAttributesMap.get(
-			getPrimaryKeyString(classObj, classPK));
-
-		if (customAttributes == null) {
-			return;
-		}
-
-		Iterator<Map.Entry<String, Serializable>> itr =
-			customAttributes.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<String, Serializable> entry = itr.next();
-
-			ExpandoValueLocalServiceUtil.addValue(
-				_companyId, classObj.getName(),
-				ExpandoTableConstants.DEFAULT_TABLE_NAME, entry.getKey(),
-				newClassPK, entry.getValue());
-		}
-	}
-
-	public void importCustomAttributesExpandoColumns(Class<?> classObj)
-		throws PortalException, SystemException {
-
-		List<ExpandoColumn> expandoColumns =
-			_customAttributesExpandoColumnsMap.get(classObj.getName());
-
-		if (expandoColumns == null) {
-			return;
-		}
-
-		ExpandoTable expandoTable = null;
-
-		try {
-			expandoTable = ExpandoTableLocalServiceUtil.getDefaultTable(
-				_companyId, classObj.getName());
-		}
-		catch (NoSuchTableException nste) {
-			expandoTable = ExpandoTableLocalServiceUtil.addDefaultTable(
-				_companyId, classObj.getName());
-		}
-
-		for (ExpandoColumn expandoColumn : expandoColumns) {
-			ExpandoColumn importedExpandoColumn = null;
-
-			try {
-				importedExpandoColumn = ExpandoColumnLocalServiceUtil.getColumn(
-					expandoTable.getTableId(), expandoColumn.getName());
-			}
-			catch (NoSuchColumnException nsce) {
-				importedExpandoColumn = ExpandoColumnLocalServiceUtil.addColumn(
-					expandoTable.getTableId(), expandoColumn.getName(),
-					expandoColumn.getType());
-			}
-
-			importPermissions(
-				ExpandoColumn.class, expandoColumn.getColumnId(),
-				importedExpandoColumn.getColumnId());
-
-			Serializable defaultData =
-				ExpandoConverterUtil.getAttributeFromString(
-					expandoColumn.getType(), expandoColumn.getDefaultData());
-
-			ExpandoColumnLocalServiceUtil.updateColumn(
-				importedExpandoColumn.getColumnId(), expandoColumn.getName(),
-				expandoColumn.getType(), defaultData);
-
-			ExpandoColumnLocalServiceUtil.updateTypeSettings(
-				importedExpandoColumn.getColumnId(),
-				expandoColumn.getTypeSettings());
 		}
 	}
 
@@ -1443,10 +1287,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
 	private long _companyId;
-	Map<String, Map<String, Serializable>> _customAttributesMap =
-		new HashMap<String, Map<String, Serializable>>();
-	Map<String, List<ExpandoColumn>> _customAttributesExpandoColumnsMap =
-		new HashMap<String, List<ExpandoColumn>>();
 	private String _dataStrategy;
 	private Date _endDate;
 	private long _groupId;

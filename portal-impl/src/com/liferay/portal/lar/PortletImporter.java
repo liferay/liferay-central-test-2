@@ -71,13 +71,11 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
-import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.io.File;
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -203,9 +201,9 @@ public class PortletImporter {
 
 		portletDataContext.setSourceGroupId(sourceGroupId);
 
-		// Read asset categories, asset tags, comments, custom attributes,
-		// locks, and ratings entries to make them available to the data
-		// handlers through the context
+		// Read asset categories, asset tags, comments, locks, and ratings
+		// entries to make them available to the data handlers through the
+		// context
 
 		if (importPermissions) {
 			_permissionImporter.readPortletDataPermissions(portletDataContext);
@@ -214,8 +212,6 @@ public class PortletImporter {
 		readAssetCategories(portletDataContext);
 		readAssetTags(portletDataContext, rootElement);
 		readComments(portletDataContext, rootElement);
-		readCustomAttributes(portletDataContext, rootElement);
-		readCustomAttributesExpandoColumns(portletDataContext, rootElement);
 		readLocks(portletDataContext, rootElement);
 		readRatingsEntries(portletDataContext, rootElement);
 
@@ -1030,82 +1026,6 @@ public class PortletImporter {
 			}
 
 			portletDataContext.addComments(className, classPK, mbMessages);
-		}
-	}
-
-	protected void readCustomAttributes(
-			PortletDataContext portletDataContext, Element parentElement)
-		throws Exception {
-
-		String xml = portletDataContext.getZipEntryAsString(
-			portletDataContext.getSourceRootPath() + "/custom-attributes.xml");
-
-		if (xml == null) {
-			return;
-		}
-
-		Document document = SAXReaderUtil.read(xml);
-
-		Element rootElement = document.getRootElement();
-
-		List<Element> assetElements = rootElement.elements("asset");
-
-		for (Element assetElement : assetElements) {
-			String path = assetElement.attributeValue("path");
-			String className = assetElement.attributeValue("class-name");
-			long classPK = GetterUtil.getLong(
-				assetElement.attributeValue("class-pk"));
-
-			Map<String, Serializable> customAttributes =
-				(Map<String, Serializable>)
-					portletDataContext.getZipEntryAsObject(path);
-
-			if (customAttributes != null) {
-				portletDataContext.addCustomAttributes(
-					className, classPK, customAttributes);
-			}
-		}
-	}
-
-	protected void readCustomAttributesExpandoColumns(
-			PortletDataContext portletDataContext, Element parentElement)
-		throws Exception {
-
-		String xml = portletDataContext.getZipEntryAsString(
-			portletDataContext.getSourceRootPath() +
-				"/custom-attributes-expando-columns.xml");
-
-		if (xml == null) {
-			return;
-		}
-
-		Document document = SAXReaderUtil.read(xml);
-
-		Element rootElement = document.getRootElement();
-
-		List<Element> assetElements = rootElement.elements("asset");
-
-		for (Element assetElement : assetElements) {
-			String path = assetElement.attributeValue("path");
-			String className = assetElement.attributeValue("class-name");
-
-			List<String> zipFolderEntries =
-				portletDataContext.getZipFolderEntries(path);
-
-			List<ExpandoColumn> expandoColumns = new ArrayList<ExpandoColumn>();
-
-			for (String zipFolderEntry : zipFolderEntries) {
-				ExpandoColumn expandoColumn =
-					(ExpandoColumn)portletDataContext.getZipEntryAsObject(
-						zipFolderEntry);
-
-				if (expandoColumn != null) {
-					expandoColumns.add(expandoColumn);
-				}
-			}
-
-			portletDataContext.addCustomAttributesExpandoColumns(
-				className, expandoColumns);
 		}
 	}
 
