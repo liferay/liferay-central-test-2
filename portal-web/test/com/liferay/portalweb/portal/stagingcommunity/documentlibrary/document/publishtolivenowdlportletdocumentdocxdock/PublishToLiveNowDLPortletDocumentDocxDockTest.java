@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase {
 	public void testPublishToLiveNowDLPortletDocumentDocxDock()
 		throws Exception {
-		selenium.open("/web/community-name/public-page/");
+		selenium.open("/web/community-name/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -31,7 +31,7 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase 
 			}
 
 			try {
-				if (selenium.isVisible("link=Public Page")) {
+				if (selenium.isVisible("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -42,8 +42,8 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase 
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Public Page",
-			RuntimeVariables.replace("Public Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace("Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
@@ -52,7 +52,14 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase 
 				"//body[@class='blue staging controls-visible signed-in public-page dockbar-ready']"));
 		assertFalse(selenium.isElementPresent("//section"));
 		assertFalse(selenium.isTextPresent("DL Document Title.docx"));
-		selenium.open("/web/community-name-staging/public-page/");
+		selenium.clickAt("link=View Staged Page",
+			RuntimeVariables.replace("View Staged Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace("Document Library Test Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//body[@class='blue staging controls-visible signed-in public-page dockbar-ready']"));
 		assertFalse(selenium.isElementPresent(
@@ -91,7 +98,7 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase 
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
-		selenium.open("/web/community-name/public-page/");
+		selenium.open("/web/community-name/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -99,7 +106,7 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase 
 			}
 
 			try {
-				if (selenium.isVisible("link=Public Page")) {
+				if (selenium.isVisible("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -110,14 +117,15 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTest extends BaseTestCase 
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Public Page",
-			RuntimeVariables.replace("Public Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace("Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//body[@class='blue live-view controls-visible signed-in public-page dockbar-ready']"));
 		assertFalse(selenium.isElementPresent(
 				"//body[@class='blue staging controls-visible signed-in public-page dockbar-ready']"));
+		assertTrue(selenium.isElementPresent("//section"));
 		assertEquals(RuntimeVariables.replace("DL Document Title.docx"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("9.6k"),

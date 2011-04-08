@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class PublishToLiveNowDLDocumentDocxDockTest extends BaseTestCase {
 	public void testPublishToLiveNowDLDocumentDocxDock()
 		throws Exception {
-		selenium.open("/web/community-name/public-page/");
+		selenium.open("/web/community-name/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -31,7 +31,7 @@ public class PublishToLiveNowDLDocumentDocxDockTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Public Page")) {
+				if (selenium.isVisible("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -42,8 +42,8 @@ public class PublishToLiveNowDLDocumentDocxDockTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Public Page",
-			RuntimeVariables.replace("Public Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace("Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
@@ -56,6 +56,10 @@ public class PublishToLiveNowDLDocumentDocxDockTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent("DL Document Title.docx"));
 		selenium.clickAt("link=View Staged Page",
 			RuntimeVariables.replace("View Staged Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace("Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
@@ -96,40 +100,5 @@ public class PublishToLiveNowDLDocumentDocxDockTest extends BaseTestCase {
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
-		selenium.open("/web/community-name/public-page/");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Public Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Public Page",
-			RuntimeVariables.replace("Public Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isElementPresent(
-				"//body[@class='blue live-view controls-visible signed-in public-page dockbar-ready']"));
-		assertFalse(selenium.isElementPresent(
-				"//body[@class='blue staging controls-visible signed-in public-page dockbar-ready']"));
-		assertEquals(RuntimeVariables.replace("DL Document Title.docx"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("9.6k"),
-			selenium.getText("//td[2]/a"));
-		assertEquals(RuntimeVariables.replace("0"),
-			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("No"),
-			selenium.getText("//td[4]/a"));
 	}
 }

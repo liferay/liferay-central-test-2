@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCommunityPublicPagePortletDLTest extends BaseTestCase {
 	public void testAddCommunityPublicPagePortletDL() throws Exception {
-		selenium.open("/web/community-name/public-page/");
+		selenium.open("/web/community-name/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -30,7 +30,7 @@ public class AddCommunityPublicPagePortletDLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Public Page")) {
+				if (selenium.isVisible("link=Document Library Test Page")) {
 					break;
 				}
 			}
@@ -41,11 +41,14 @@ public class AddCommunityPublicPagePortletDLTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Public Page",
-			RuntimeVariables.replace("Public Page"));
+		selenium.clickAt("link=Document Library Test Page",
+			RuntimeVariables.replace("Document Library Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("More\u2026"),
+			selenium.getText("//a[@id='_145_addApplication']"));
+		selenium.clickAt("//a[@id='_145_addApplication']",
+			RuntimeVariables.replace("More\u2026"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -66,7 +69,7 @@ public class AddCommunityPublicPagePortletDLTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@title='Document Library']/p/a",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

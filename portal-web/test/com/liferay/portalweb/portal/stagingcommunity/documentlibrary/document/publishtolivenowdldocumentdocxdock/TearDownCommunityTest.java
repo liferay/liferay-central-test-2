@@ -47,11 +47,11 @@ public class TearDownCommunityTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Communities",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Communities"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
@@ -284,6 +284,8 @@ public class TearDownCommunityTest extends BaseTestCase {
 					continue;
 				}
 
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//tr[4]/td[6]/span/ul/li/strong/a"));
 				selenium.clickAt("//tr[4]/td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
@@ -326,6 +328,8 @@ public class TearDownCommunityTest extends BaseTestCase {
 					continue;
 				}
 
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//tr[4]/td[6]/span/ul/li/strong/a"));
 				selenium.clickAt("//tr[4]/td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
@@ -368,6 +372,8 @@ public class TearDownCommunityTest extends BaseTestCase {
 					continue;
 				}
 
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//tr[4]/td[6]/span/ul/li/strong/a"));
 				selenium.clickAt("//tr[4]/td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
@@ -410,6 +416,8 @@ public class TearDownCommunityTest extends BaseTestCase {
 					continue;
 				}
 
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//tr[4]/td[6]/span/ul/li/strong/a"));
 				selenium.clickAt("//tr[4]/td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 
@@ -452,6 +460,8 @@ public class TearDownCommunityTest extends BaseTestCase {
 					continue;
 				}
 
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//tr[4]/td[6]/span/ul/li/strong/a"));
 				selenium.clickAt("//tr[4]/td[6]/span/ul/li/strong/a",
 					RuntimeVariables.replace("Actions"));
 

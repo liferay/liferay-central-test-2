@@ -28,13 +28,16 @@ public class PublishToLiveNowDLPortletDocumentDocxDockTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddCommunityTest.class);
-		testSuite.addTestSuite(AddCommunityPublicPageTest.class);
+		testSuite.addTestSuite(AddCommunityPublicPageDLTest.class);
 		testSuite.addTestSuite(
 			ConfigureCommunityStagingTypeLocalLiveDLTest.class);
-		testSuite.addTestSuite(AddStageCommunityPublicPagePortletDLTest.class);
-		testSuite.addTestSuite(AddStageDLDocumentDocxTest.class);
+		testSuite.addTestSuite(
+			AddStagingLocalLivePublicPagePortletDLTest.class);
+		testSuite.addTestSuite(AddStagingLocalLiveDLDocumentDocxTest.class);
 		testSuite.addTestSuite(
 			PublishToLiveNowDLPortletDocumentDocxDockTest.class);
+		testSuite.addTestSuite(
+			ViewPublishToLiveNowDLPortletDocumentDocxDockTest.class);
 		testSuite.addTestSuite(TearDownCommunityTest.class);
 
 		return testSuite;

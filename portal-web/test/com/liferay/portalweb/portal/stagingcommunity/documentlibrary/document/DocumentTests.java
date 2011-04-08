@@ -15,9 +15,21 @@
 package com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.addstaginglocallivedldocumentdocx.AddStagingLocalLiveDLDocumentDocxTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.addstaginglocallivedldocumentdocxnodl.AddStagingLocalLiveDLDocumentDocxNoDLTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.copyfromliveaddstaginglivedldocumentdocxmp.CopyFromLiveAddStagingLiveDLDocumentDocxMPTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.copyfromlivedeletedlstaginglivedocumentdocxmp.CopyFromLiveDeleteDLStagingLiveDocumentDocxMPTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.deletedlstaginglocallivedocumentdocxactions.DeleteDLStagingLocalLiveDocumentDocxActionsTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.deletelivepagestaginglocallivedldocumentdocxdock.DeleteLivePageStagingLocalLiveDLDocumentDocxDockTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.deletestaginglocallivedldocumentdocxactions.DeleteStagingLocalLiveDLDocumentDocxActionsTests;
 import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdldocumentdocxdock.PublishToLiveNowDLDocumentDocxDockTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdldocumentdocxnodatadock.PublishToLiveNowDLDocumentDocxNoDataDockTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdldocumentdocxnodldock.PublishToLiveNowDLDocumentDocxNoDLDockTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdldocumentdocxnopagesdock.PublishToLiveNowDLDocumentDocxNoPagesDockTests;
 import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdlpagedocumentdocxdock.PublishToLiveNowDLPageDocumentDocxDockTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdlpagedocumentdocxnopagedock.PublishToLiveNowDLPageDocumentDocxNoPageDockTests;
 import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.publishtolivenowdlportletdocumentdocxdock.PublishToLiveNowDLPortletDocumentDocxDockTests;
+import com.liferay.portalweb.portal.stagingcommunity.documentlibrary.document.viewstaginglivenonelivedldocumentdocx.ViewStagingLiveNoneLiveDLDocumentDocxTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,10 +42,30 @@ public class DocumentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(AddStagingLocalLiveDLDocumentDocxTests.suite());
+		testSuite.addTest(AddStagingLocalLiveDLDocumentDocxNoDLTests.suite());
+		testSuite.addTest(
+			CopyFromLiveAddStagingLiveDLDocumentDocxMPTests.suite());
+		testSuite.addTest(
+			CopyFromLiveDeleteDLStagingLiveDocumentDocxMPTests.suite());
+		testSuite.addTest(
+			DeleteDLStagingLocalLiveDocumentDocxActionsTests.suite());
+		testSuite.addTest(
+			DeleteLivePageStagingLocalLiveDLDocumentDocxDockTests.suite());
+		testSuite.addTest(
+			DeleteStagingLocalLiveDLDocumentDocxActionsTests.suite());
 		testSuite.addTest(PublishToLiveNowDLDocumentDocxDockTests.suite());
+		testSuite.addTest(
+			PublishToLiveNowDLDocumentDocxNoDataDockTests.suite());
+		testSuite.addTest(PublishToLiveNowDLDocumentDocxNoDLDockTests.suite());
+		testSuite.addTest(
+			PublishToLiveNowDLDocumentDocxNoPagesDockTests.suite());
 		testSuite.addTest(PublishToLiveNowDLPageDocumentDocxDockTests.suite());
 		testSuite.addTest(
+			PublishToLiveNowDLPageDocumentDocxNoPageDockTests.suite());
+		testSuite.addTest(
 			PublishToLiveNowDLPortletDocumentDocxDockTests.suite());
+		testSuite.addTest(ViewStagingLiveNoneLiveDLDocumentDocxTests.suite());
 
 		return testSuite;
 	}

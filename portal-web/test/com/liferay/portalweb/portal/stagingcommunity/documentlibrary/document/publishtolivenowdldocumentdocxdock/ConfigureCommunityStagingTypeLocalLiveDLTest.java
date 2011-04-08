@@ -55,7 +55,7 @@ public class ConfigureCommunityStagingTypeLocalLiveDLTest extends BaseTestCase {
 					RuntimeVariables.replace("Communities"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_134_name",
+				selenium.type("//input[@id='_134_name']",
 					RuntimeVariables.replace("Community Name"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
@@ -94,15 +94,35 @@ public class ConfigureCommunityStagingTypeLocalLiveDLTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Settings"),
 					selenium.getText("//ul[1]/li[3]/span/span/a"));
-				selenium.click(RuntimeVariables.replace(
-						"//ul[1]/li[3]/span/span/a"));
+				selenium.clickAt("//ul[1]/li[3]/span/span/a",
+					RuntimeVariables.replace("Settings"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace("link=Staging"));
+				selenium.clickAt("link=Staging",
+					RuntimeVariables.replace("Staging"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.select("_134_stagingType",
+				selenium.select("//select[@id='_134_stagingType']",
 					RuntimeVariables.replace("label=Local Live"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//input[@id='_134_staged-portlet_20Checkbox']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
 
 				boolean documentLibraryChecked = selenium.isChecked(
 						"_134_staged-portlet_20Checkbox");
@@ -113,11 +133,13 @@ public class ConfigureCommunityStagingTypeLocalLiveDLTest extends BaseTestCase {
 					continue;
 				}
 
-				assertFalse(selenium.isChecked("_134_staged-portlet_20Checkbox"));
+				assertFalse(selenium.isChecked(
+						"//input[@id='_134_staged-portlet_20Checkbox']"));
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_134_staged-portlet_20Checkbox",
+				selenium.clickAt("//input[@id='_134_staged-portlet_20Checkbox']",
 					RuntimeVariables.replace("Document Library"));
-				assertTrue(selenium.isChecked("_134_staged-portlet_20Checkbox"));
+				assertTrue(selenium.isChecked(
+						"//input[@id='_134_staged-portlet_20Checkbox']"));
 				selenium.saveScreenShotAndSource();
 
 			case 2:
@@ -130,7 +152,8 @@ public class ConfigureCommunityStagingTypeLocalLiveDLTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
-				assertTrue(selenium.isChecked("_134_staged-portlet_20Checkbox"));
+				assertTrue(selenium.isChecked(
+						"//input[@id='_134_staged-portlet_20Checkbox']"));
 				selenium.saveScreenShotAndSource();
 
 			case 100:
