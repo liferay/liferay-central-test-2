@@ -36,10 +36,6 @@ java.lang.String name = GetterUtil.getString((java.lang.String)request.getAttrib
 java.lang.String onSubmit = GetterUtil.getString((java.lang.String)request.getAttribute("aui:form:onSubmit"));
 boolean useNamespace = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:form:useNamespace")), true);
 
-if (themeDisplay.isAddSessionIdToURL()) {
-	action = PortalUtil.getURLWithSessionId(action, themeDisplay.getSessionId());
-}
-
 _updateOptions(_options, "action", action);
 _updateOptions(_options, "cssClass", cssClass);
 _updateOptions(_options, "escapeXml", escapeXml);
