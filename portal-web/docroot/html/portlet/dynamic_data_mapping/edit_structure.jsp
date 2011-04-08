@@ -76,7 +76,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 							for (StorageType storageType : StorageType.values()) {
 							%>
 
-								<aui:option label="<%= type %>" value="<%= storageType %>" />
+								<aui:option label="<%= storageType %>" value="<%= storageType %>" />
 
 							<%
 							}
