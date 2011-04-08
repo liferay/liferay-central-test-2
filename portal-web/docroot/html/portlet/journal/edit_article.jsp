@@ -293,6 +293,8 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<portlet:param name="structureId" value="<%= structureId %>" />
+	<portlet:param name="templateId" value="<%= templateId %>" />
 </portlet:renderURL>
 
 <aui:form action="<%= editArticleActionURL %>" enctype="multipart/form-data" method="post" name="fm1">
