@@ -149,7 +149,7 @@ boolean anonymousAccount = ParamUtil.getBoolean(request, "anonymousAccount");
 
 <aui:script use="aui-base">
 	if (window.opener) {
-	    var namespace = window.opener.parent.namespace;
+		var namespace = window.opener.parent.namespace;
 		var randomNamespace = window.opener.parent.randomNamespace;
 
 		var afterLogin = window.opener.parent[randomNamespace + 'afterLogin'];
