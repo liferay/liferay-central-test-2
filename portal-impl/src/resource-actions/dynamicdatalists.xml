@@ -30,12 +30,12 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
-				<action-key>ADD_LIST</action-key>
+				<action-key>ADD_ENTRY</action-key>
 			</supports>
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
-				<action-key>ADD_LIST</action-key>
+				<action-key>ADD_ENTRY</action-key>
 			</guest-unsupported>
 		</permissions>
 	</model-resource>
