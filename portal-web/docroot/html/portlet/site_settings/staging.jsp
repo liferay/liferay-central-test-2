@@ -160,7 +160,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 	</div>
 
 	<aui:button-row>
-		<aui:button last="true" name="saveButton" onClick='<%= renderResponse.getNamespace() + "updateStaging();" %>' value="save" />
+		<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "updateStaging();" %>' value="save" />
 	</aui:button-row>
 
 	<aui:script>

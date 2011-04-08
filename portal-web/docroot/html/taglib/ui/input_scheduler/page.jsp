@@ -59,7 +59,7 @@
 		</div>
 
 		<div class="aui-field-row">
-			<aui:input first="true" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="1" />
+			<aui:input first="<%= true %>" inlineField="<%= true %>" label="end-by" name="endDateType" type="radio" value="1" />
 
 			<liferay-ui:input-date
 				dayParam="schedulerEndDateDay"
