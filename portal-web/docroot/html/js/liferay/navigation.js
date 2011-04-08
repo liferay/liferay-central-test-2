@@ -514,7 +514,7 @@ AUI().add(
 							var data = {
 								cmd: 'delete',
 								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								groupId: themeDisplay.getScopeGroupId(),
+								groupId: themeDisplay.getParentGroupId(),
 								layoutId: tab._LFR_layoutId,
 								privateLayout: themeDisplay.isPrivateLayout()
 							};
@@ -563,7 +563,7 @@ AUI().add(
 									data = {
 										cmd: 'name',
 										doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-										groupId: themeDisplay.getScopeGroupId(),
+										groupId: themeDisplay.getParentGroupId(),
 										languageId: themeDisplay.getLanguageId(),
 										layoutId: themeDisplay.getLayoutId(),
 										name: pageTitle,
@@ -603,7 +603,7 @@ AUI().add(
 								data = {
 									cmd: 'add',
 									doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-									groupId: themeDisplay.getScopeGroupId(),
+									groupId: themeDisplay.getParentGroupId(),
 									layoutPrototypeId: layoutPrototypeId,
 									mainPath: themeDisplay.getPathMain(),
 									name: pageTitle,
@@ -669,7 +669,7 @@ AUI().add(
 						var data = {
 							cmd: 'priority',
 							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							groupId: themeDisplay.getScopeGroupId(),
+							groupId: themeDisplay.getParentGroupId(),
 							layoutId: node._LFR_layoutId,
 							priority: priority,
 							privateLayout: themeDisplay.isPrivateLayout()
