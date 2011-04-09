@@ -42,7 +42,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 	%>
 
 	<c:if test="<%= categoriesCount > 0 %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (category != null) ? "subcategories" : "categories") %>'>
+		<liferay-ui:panel collapsible="<%= categoryPanelCollapsible %>" extended="<%= categoryPanelExtended %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (category != null) ? "subcategories" : "categories") %>'>
 			<liferay-ui:search-container
 				curParam="cur1"
 				deltaConfigurable="<%= false %>"

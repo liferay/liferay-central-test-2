@@ -139,6 +139,11 @@ if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil
 	}
 }
 
+boolean categoryPanelCollapsible = true;
+boolean categoryPanelExtended = true;
+boolean threadPanelCollapsible = true;
+boolean threadPanelExtended = true;
+
 boolean childrenMessagesTaggable = true;
 boolean includeFormTag = true;
 boolean showSearch = true;
