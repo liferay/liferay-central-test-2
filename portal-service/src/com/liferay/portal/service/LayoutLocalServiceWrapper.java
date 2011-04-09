@@ -386,6 +386,14 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.getLayoutByIconImageId(iconImageId);
 	}
 
+	public com.liferay.portal.model.Layout getLayoutByFriendlyURL(
+		long groupId, boolean privateLayout, java.lang.String friendlyURL)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.getLayoutByFriendlyURL(groupId,
+			privateLayout, friendlyURL);
+	}
+
 	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException {
