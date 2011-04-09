@@ -531,6 +531,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layoutPersistence.findByIconImageId(iconImageId);
 	}
 
+	public Layout getLayoutByFriendlyURL(
+			long groupId, boolean privateLayout, String friendlyURL)
+		throws PortalException, SystemException {
+
+		return layoutPersistence.fetchByG_P_F(
+			groupId, privateLayout, friendlyURL);
+	}
+
 	public Layout getLayoutByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 
