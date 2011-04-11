@@ -47,14 +47,26 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=User Groups",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("User Groups"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//strong/span", RuntimeVariables.replace(""));
+				selenium.type("//input[@id='_127_name']",
+					RuntimeVariables.replace("User Group Sample Test"));
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace("Search"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("User Group Sample Test"),
+					selenium.getText("//td[2]/a"));
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//strong/span"));
+				selenium.clickAt("//strong/span",
+					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -62,7 +74,9 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Assign Members")) {
+						if (RuntimeVariables.replace("Assign Members")
+												.equals(selenium.getText(
+										"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"))) {
 							break;
 						}
 					}
@@ -73,11 +87,15 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Assign Members",
-					RuntimeVariables.replace(""));
+				assertEquals(RuntimeVariables.replace("Assign Members"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
+				selenium.click(RuntimeVariables.replace(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Available", RuntimeVariables.replace(""));
+				selenium.clickAt("link=Available",
+					RuntimeVariables.replace("Available"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
@@ -93,13 +111,17 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 
 			case 2:
-				selenium.type("_127_keywords",
+				selenium.type("//input[@name='_127_keywords']",
 					RuntimeVariables.replace("Joe Bloggs"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Joe Bloggs"),
+					selenium.getText("//div[4]/table/tbody/tr[3]/td[2]"));
+				assertEquals(RuntimeVariables.replace("joebloggs"),
+					selenium.getText("//div[4]/table/tbody/tr[3]/td[3]"));
 
 				boolean userChecked = selenium.isChecked("_127_rowIds");
 
@@ -109,21 +131,27 @@ public class AssignMembersUserGroupTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("_127_rowIds", RuntimeVariables.replace(""));
+				assertFalse(selenium.isChecked("//input[@name='_127_rowIds']"));
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@name='_127_rowIds']",
+					RuntimeVariables.replace("Checkbox"));
 
 			case 3:
+				assertTrue(selenium.isChecked("//input[@name='_127_rowIds']"));
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Update Associations']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Update Associations"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isTextPresent(
-						"Your request processed successfully."));
+				assertEquals(RuntimeVariables.replace(
+						"Your request processed successfully."),
+					selenium.getText("//div[@class='portlet-msg-success']"));
+				assertTrue(selenium.isChecked("//input[@name='_127_rowIds']"));
+				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-					selenium.getText(
-						"//tr[@class='portlet-section-body results-row']/td[2]"));
+					selenium.getText("//div[4]/table/tbody/tr[3]/td[2]"));
 				assertEquals(RuntimeVariables.replace("joebloggs"),
-					selenium.getText(
-						"//tr[@class='portlet-section-body results-row']/td[3]"));
+					selenium.getText("//div[4]/table/tbody/tr[3]/td[3]"));
 
 			case 100:
 				label = -1;
