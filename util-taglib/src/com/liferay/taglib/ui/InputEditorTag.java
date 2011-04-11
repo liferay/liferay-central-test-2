@@ -75,16 +75,24 @@ public class InputEditorTag extends IncludeTag {
 		_initMethod = "initEditor";
 		_name = "editor";
 		_onChangeMethod = null;
-		_PAGE = null;
+		_page = null;
 		_toolbarSet = "liferay";
 		_width = null;
 	}
 
 	protected String getPage() {
-		return _PAGE;
+		return _page;
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		String cssClasses = "portlet ";
+
+		Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+
+		if (portlet != null) {
+			cssClasses += portlet.getCssClassWrapper();
+		}
+
 		String editorImpl = _editorImpl;
 
 		if (Validator.isNotNull(editorImpl)) {
@@ -111,15 +119,7 @@ public class InputEditorTag extends IncludeTag {
 			editorImpl = PropsValues.EDITOR_WYSIWYG_DEFAULT;
 		}
 
-		_PAGE = "/html/js/editor/" + editorImpl + ".jsp";
-
-		String cssClasses = "portlet ";
-
-		Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
-
-		if (portlet != null) {
-			cssClasses += portlet.getCssClassWrapper();
-		}
+		_page = "/html/js/editor/" + editorImpl + ".jsp";
 
 		request.setAttribute(
 			"liferay-ui:input-editor:configParams", _configParams);
@@ -135,8 +135,6 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:width", _width);
 	}
 
-	private String _PAGE;
-
 	private Map<String, String> _configParams;
 	private String _cssClass;
 	private String _editorImpl;
@@ -144,6 +142,7 @@ public class InputEditorTag extends IncludeTag {
 	private String _initMethod = "initEditor";
 	private String _name = "editor";
 	private String _onChangeMethod;
+	private String _page;
 	private String _toolbarSet = "liferay";
 	private String _width;
 

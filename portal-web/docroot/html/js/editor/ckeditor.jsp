@@ -20,6 +20,7 @@
 String portletId = portletDisplay.getRootPortletId();
 
 String mainPath = themeDisplay.getPathMain();
+
 String doAsUserId = themeDisplay.getDoAsUserId();
 
 if (Validator.isNull(doAsUserId)) {
@@ -27,18 +28,13 @@ if (Validator.isNull(doAsUserId)) {
 }
 
 long doAsGroupId = themeDisplay.getDoAsGroupId();
-String cssPath = themeDisplay.getPathThemeCss();
-String languageId = LocaleUtil.toLanguageId(locale);
 
-String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
-String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
-String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
-String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
-String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
+String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFileName", "ckconfig.jsp");
 
-if (Validator.isNotNull(onChangeMethod)) {
-	onChangeMethod = namespace + onChangeMethod;
+boolean useCustomDataProcessor = false;
+
+if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
+	useCustomDataProcessor = true;
 }
 
 StringBundler configParamsSB = new StringBundler();
@@ -54,23 +50,32 @@ if (configParams != null) {
 	}
 }
 
-String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFileName", "ckconfig.jsp");
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
+String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
+String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
 
-boolean useCustomDataProcessor = false;
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
-if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
-	useCustomDataProcessor = true;
+if (Validator.isNotNull(onChangeMethod)) {
+	onChangeMethod = namespace + onChangeMethod;
 }
+
+String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 %>
 
-<liferay-util:html-top outputKey="ckeditor">
+<liferay-util:html-top outputKey="js_editor_ckeditor">
 	<style type="text/css">
 		table.cke_dialog {
 			position: absolute !important;
 		}
 	</style>
 
-	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/ckeditor/ckeditor.js" %>' type="text/javascript"></script>
+	<%
+	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
+	%>
+
+	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/editor/ckeditor/ckeditor.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </liferay-util:html-top>
 
 <aui:script>
@@ -119,7 +124,7 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 </aui:script>
 
 <div class="<%= cssClass %>">
-	<textarea id='<%= name %>' name='<%= name %>'></textarea>
+	<textarea id="<%= name %>" name="<%= name %>" style="display: none;"></textarea>
 </div>
 
 <aui:script>
@@ -137,8 +142,8 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 		CKEDITOR.replace(
 			'<%= name %>',
 			{
-				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
-				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
+				customConfig: '<%= themeDisplay.getPathJavaScript() %>/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(LocaleUtil.toLanguageId(locale)) %><%= configParamsSB.toString() %>',
+				filebrowserBrowseUrl: '<%= themeDisplay.getPathJavaScript() %>/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
 			}

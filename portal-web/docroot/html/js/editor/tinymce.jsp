@@ -20,17 +20,21 @@
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
 String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
-String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
-String languageId = LocaleUtil.toLanguageId(locale);
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
 if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
 %>
 
-<liferay-util:html-top outputKey="tinymce">
-	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/tiny_mce/tiny_mce.js" %>' type="text/javascript"></script>
+<liferay-util:html-top outputKey="js_editor_tinymce">
+
+	<%
+	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
+	%>
+
+	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/editor/tiny_mce/tiny_mce.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </liferay-util:html-top>
 
 <div class="<%= cssClass %>">
@@ -65,34 +69,36 @@ if (Validator.isNotNull(onChangeMethod)) {
 			</c:if>
 		},
 
-		onChangeCallback: function(tinyMCE) {
+		<%
+		if (Validator.isNotNull(onChangeMethod)) {
+		%>
 
-			// This purposely ignores the first callback event because each call
-			// to setContent triggers an undo level which fires the callback
-			// when no changes have yet been made.
+			onChangeCallback: function(tinyMCE) {
 
-			// setContent is not really the correct way of initializing this
-			// editor with content. The content should be placed statically
-			// (from the editor's perspective) within the textarea. This is a
-			// problem from the portal's perspective because it's passing the
-			// content via a javascript method (initMethod).
+				// This purposely ignores the first callback event because each call
+				// to setContent triggers an undo level which fires the callback
+				// when no changes have yet been made.
 
-			<%
-			if (Validator.isNotNull(onChangeMethod)) {
-			%>
+				// setContent is not really the correct way of initializing this
+				// editor with content. The content should be placed statically
+				// (from the editor's perspective) within the textarea. This is a
+				// problem from the portal's perspective because it's passing the
+				// content via a javascript method (initMethod).
 
 				var onChangeCallbackCounter = window['<%= name %>'].onChangeCallbackCounter;
 
 				if (onChangeCallbackCounter > 0) {
+
 					<%= HtmlUtil.escape(onChangeMethod) %>(window['<%= name %>'].getHTML());
+
 				}
 
 				onChangeCallbackCounter++;
+			},
 
-			<%
-			}
-			%>
-		},
+		<%
+		}
+		%>
 
 		setHTML: function(value) {
 			tinyMCE.editors['<%= name %>'].setContent(value);
@@ -107,7 +113,7 @@ if (Validator.isNotNull(onChangeMethod)) {
 			file_browser_callback: window['<%= name %>'].fileBrowserCallback,
 			init_instance_callback: window['<%= name %>'].initInstanceCallback,
 			invalid_elements: 'script',
-			language: '<%= HtmlUtil.escape(languageId) %>',
+			language: '<%= HtmlUtil.escape(LocaleUtil.toLanguageId(locale)) %>',
 			mode: 'exact',
 
 			<%

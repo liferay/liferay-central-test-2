@@ -19,12 +19,19 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%
-String name = ParamUtil.getString(request, "name");
-String toolbarSet = ParamUtil.getString(request, "toolbarSet");
-String initMethod =	ParamUtil.getString(request, "initMethod");
-String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String editorImpl = ParamUtil.getString(request, "editorImpl");
+String initMethod =	ParamUtil.getString(request, "initMethod");
+String name = ParamUtil.getString(request, "name");
+String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
+String toolbarSet = ParamUtil.getString(request, "toolbarSet");
 %>
 
-<liferay-ui:input-editor cssClass="<%= cssClasses %>" editorImpl="<%= editorImpl %>" initMethod="<%= initMethod %>" name="<%= name %>" onChangeMethod="<%= onChangeMethod %>" toolbarSet="<%= toolbarSet %>" />
+<liferay-ui:input-editor
+	cssClass="<%= cssClasses %>"
+	editorImpl="<%= editorImpl %>"
+	initMethod="<%= initMethod %>"
+	name="<%= name %>"
+	onChangeMethod="<%= onChangeMethod %>"
+	toolbarSet="<%= toolbarSet %>"
+/>

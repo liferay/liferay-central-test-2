@@ -20,6 +20,7 @@
 String portletId = portletDisplay.getRootPortletId();
 
 String mainPath = themeDisplay.getPathMain();
+
 String doAsUserId = themeDisplay.getDoAsUserId();
 
 if (Validator.isNull(doAsUserId)) {
@@ -27,30 +28,32 @@ if (Validator.isNull(doAsUserId)) {
 }
 
 long doAsGroupId = themeDisplay.getDoAsGroupId();
-String cssPath = themeDisplay.getPathThemeCss();
-String languageId = LocaleUtil.toLanguageId(locale);
+
+StringBundler configParamsSB = new StringBundler();
+
+Map<String, String> configParams = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:configParams");
+
+if (configParams != null) {
+	for (Map.Entry<String, String> configParam : configParams.entrySet()) {
+		configParamsSB.append(StringPool.AMPERSAND);
+		configParamsSB.append(configParam.getKey());
+		configParamsSB.append(StringPool.EQUAL);
+		configParamsSB.append(HttpUtil.encodeURL(configParam.getValue()));
+	}
+}
 
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
 String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
-String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
+
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 
 if (Validator.isNotNull(onChangeMethod)) {
 	onChangeMethod = namespace + onChangeMethod;
 }
 
-UnicodeProperties properties = PropertiesParamUtil.getProperties(request, "config--");
-
-StringBundler configParamsSB = new StringBundler();
-
-for (Map.Entry<String, String> property : properties.entrySet()) {
-	configParamsSB.append(StringPool.AMPERSAND);
-	configParamsSB.append(property.getKey());
-	configParamsSB.append(StringPool.EQUAL);
-	configParamsSB.append(property.getValue());
-}
+String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
 // Add custom configuration to fckeditor/fckconfig.jsp. Copy
@@ -60,8 +63,13 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 
 %>
 
-<liferay-util:html-top outputKey="fckeditor">
-	<script src='<%= PortalUtil.getPathContext() + "/html/js/editor/fckeditor/fckeditor.js" %>' type="text/javascript"></script>
+<liferay-util:html-top outputKey="js_editor_fckeditor">
+
+	<%
+	long javaScriptLastModified = ServletContextUtil.getLastModified(application, "/html/js/", true);
+	%>
+
+	<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getPathJavaScript() + "/editor/fckeditor/fckeditor.js", javaScriptLastModified)) %>" type="text/javascript"></script>
 </liferay-util:html-top>
 
 <aui:script>
@@ -83,9 +91,9 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 
 			var fckEditor = new FCKeditor('<%= name %>');
 
-			fckEditor.Config['CustomConfigurationsPath'] = '<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>';
+			fckEditor.Config['CustomConfigurationsPath'] = '<%= themeDisplay.getPathJavaScript() %>/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(LocaleUtil.toLanguageId(locale)) %><%= configParamsSB.toString() %>';
 
-			fckEditor.BasePath = '<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/';
+			fckEditor.BasePath = '<%= themeDisplay.getPathJavaScript() %>/editor/fckeditor/';
 			fckEditor.Width = '100%';
 			fckEditor.Height = '100%';
 			fckEditor.ToolbarSet = '<%= HtmlUtil.escape(toolbarSet) %>';
@@ -171,5 +179,5 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 </aui:script>
 
 <div class="<%= cssClass %>">
-	<textarea id="<%= name %>" name="<%= name %>" style="display: none"></textarea>
+	<textarea id="<%= name %>" name="<%= name %>" style="display: none;"></textarea>
 </div>
