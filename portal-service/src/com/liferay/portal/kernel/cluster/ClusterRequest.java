@@ -29,13 +29,13 @@ import java.util.Set;
  */
 public class ClusterRequest implements Serializable {
 
-	public static ClusterRequest createClusterRequest(
-		ClusterMessageType clusterMessageType,
-		ClusterNode originatingClusterNode) {
+	public static ClusterRequest createClusterNotifyRequest(
+		long expirationTime, ClusterNode originatingClusterNode) {
 
 		ClusterRequest clusterRequest = new ClusterRequest();
 
-		clusterRequest.setClusterMessageType(clusterMessageType);
+		clusterRequest.setClusterMessageType(ClusterMessageType.NOTIFY);
+		clusterRequest.setExpirationTime(expirationTime);
 		clusterRequest.setMulticast(true);
 		clusterRequest.setOriginatingClusterNode(originatingClusterNode);
 		clusterRequest.setSkipLocal(true);
@@ -127,6 +127,10 @@ public class ClusterRequest implements Serializable {
 		return _clusterMessageType;
 	}
 
+	public long getExpirationTime() {
+		return _expirationTime;
+	}
+
 	public MethodHandler getMethodHandler() {
 		return _methodHandler;
 	}
@@ -171,6 +175,10 @@ public class ClusterRequest implements Serializable {
 		_clusterMessageType = clusterMessageType;
 	}
 
+	public void setExpirationTime(long expirationTime) {
+		_expirationTime = expirationTime;
+	}
+
 	public void setFireAndForget(boolean fireAndForget) {
 		_fireAndForget = fireAndForget;
 	}
@@ -213,11 +221,11 @@ public class ClusterRequest implements Serializable {
 		sb.append(", uuid=");
 		sb.append(_uuid);
 
-		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-			_clusterMessageType.equals(ClusterMessageType.UPDATE)) {
-
+		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY)) {
 			sb.append(", originatingClusterNode=");
 			sb.append(_originatingClusterNode);
+			sb.append(", expirationTime=");
+			sb.append(_expirationTime);
 		}
 		else {
 			sb.append(", methodHandler=");
@@ -234,6 +242,7 @@ public class ClusterRequest implements Serializable {
 
 	private String _beanIdentifier;
 	private ClusterMessageType _clusterMessageType;
+	private long _expirationTime;
 	private boolean _fireAndForget;
 	private MethodHandler _methodHandler;
 	private boolean _multicast;

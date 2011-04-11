@@ -102,21 +102,13 @@ public class ClusterNodeResponse implements Serializable {
 		sb.append(", uuid=");
 		sb.append(_uuid);
 
-		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-			_clusterMessageType.equals(ClusterMessageType.UPDATE)) {
-
-			sb.append(", clusterNode=");
-			sb.append(_clusterNode);
+		if (hasException()) {
+			sb.append(", exception=");
+			sb.append(_exception);
 		}
 		else {
-			if (hasException()) {
-				sb.append(", exception=");
-				sb.append(_exception);
-			}
-			else {
-				sb.append(", result=");
-				sb.append(_result);
-			}
+			sb.append(", result=");
+			sb.append(_result);
 		}
 
 		sb.append("}");

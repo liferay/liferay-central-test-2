@@ -30,14 +30,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import org.jgroups.Channel;
 import org.jgroups.ChannelException;
 import org.jgroups.Message;
-import org.jgroups.View;
 
 /**
  * @author Michael C. Han
@@ -94,28 +89,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 	}
 
-	public void viewAccepted(View view) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Accepted view " + view);
-		}
-
-		if (_lastView == null) {
-			_lastView = view;
-
-			return;
-		}
-
-		List<Address> departAddresses = getDepartAddresses(view);
-
-		_lastView = view;
-
-		if (departAddresses.isEmpty()) {
-			return;
-		}
-
-		_clusterExecutorImpl.memberRemoved(departAddresses);
-	}
-
 	protected Object invoke(
 			String servletContextName, String beanIdentifier,
 			MethodHandler methodHandler)
@@ -161,43 +134,32 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 	}
 
-	protected List<Address> getDepartAddresses(View view) {
-		List<Address> departAddresses = new ArrayList<Address>();
-
-		List<org.jgroups.Address> jGroupsAddresses = view.getMembers();
-		List<org.jgroups.Address> lastJGroupsAddresses =
-			_lastView.getMembers();
-
-		List<org.jgroups.Address> tempAddresses =
-			new ArrayList<org.jgroups.Address>(jGroupsAddresses.size());
-
-		tempAddresses.addAll(jGroupsAddresses);
-
-		List<org.jgroups.Address> lastAddresses =
-			new ArrayList<org.jgroups.Address>(lastJGroupsAddresses.size());
-
-		lastAddresses.addAll(lastJGroupsAddresses);
-
-		tempAddresses.retainAll(lastJGroupsAddresses);
-		lastAddresses.removeAll(tempAddresses);
-
-		if (!lastAddresses.isEmpty()) {
-			Iterator<org.jgroups.Address> itr = lastAddresses.iterator();
-
-			while (itr.hasNext()) {
-				departAddresses.add(new AddressImpl(itr.next()));
-			}
-		}
-
-		return departAddresses;
-	}
-
 	protected void processClusterRequest(
 		ClusterRequest clusterRequest, org.jgroups.Address sourceAddress,
 		org.jgroups.Address localAddress) {
 
 		ClusterMessageType clusterMessageType =
 			clusterRequest.getClusterMessageType();
+
+		if (clusterMessageType.equals(ClusterMessageType.NOTIFY)) {
+			ClusterNode originatingClusterNode =
+				clusterRequest.getOriginatingClusterNode();
+
+			if (originatingClusterNode != null) {
+				_clusterExecutorImpl.notify(
+					new AddressImpl(sourceAddress), originatingClusterNode,
+					clusterRequest.getExpirationTime());
+			}
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Content of notify message does not contain cluster " +
+							"node information");
+				}
+			}
+
+			return;
+		}
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 
@@ -213,68 +175,42 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			clusterNodeResponse.setException(e);
 		}
 
-		if (clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-			clusterMessageType.equals(ClusterMessageType.UPDATE)) {
+		clusterNodeResponse.setClusterMessageType(ClusterMessageType.EXECUTE);
+		clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
+		clusterNodeResponse.setUuid(clusterRequest.getUuid());
 
-			ClusterNode originatingClusterNode =
-				clusterRequest.getOriginatingClusterNode();
+		MethodHandler methodHandler = clusterRequest.getMethodHandler();
 
-			if (originatingClusterNode != null) {
-				_clusterExecutorImpl.memberJoined(
-					new AddressImpl(sourceAddress), originatingClusterNode);
+		if (methodHandler != null) {
+			try {
+				ClusterInvokeThreadLocal.setEnabled(false);
 
-				clusterNodeResponse.setClusterMessageType(clusterMessageType);
-			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Content of notify message does not contain cluster " +
-							"node information");
+				Object returnValue = invoke(
+					clusterRequest.getServletContextName(),
+					clusterRequest.getBeanIdentifier(), methodHandler);
+
+				if (returnValue instanceof Serializable) {
+					clusterNodeResponse.setResult(returnValue);
 				}
+				else if (returnValue != null) {
+					clusterNodeResponse.setException(
+						new ClusterException(
+							"Return value is not serializable"));
+				}
+			}
+			catch (Exception e) {
+				clusterNodeResponse.setException(e);
 
-				return;
+				_log.error("Failed to invoke method " + methodHandler, e);
+			}
+			finally {
+				ClusterInvokeThreadLocal.setEnabled(true);
 			}
 		}
 		else {
-			clusterNodeResponse.setClusterMessageType(
-				ClusterMessageType.EXECUTE);
-			clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
-			clusterNodeResponse.setUuid(clusterRequest.getUuid());
-
-			MethodHandler methodHandler = clusterRequest.getMethodHandler();
-
-			if (methodHandler != null) {
-				try {
-					ClusterInvokeThreadLocal.setEnabled(false);
-
-					Object returnValue = invoke(
-						clusterRequest.getServletContextName(),
-						clusterRequest.getBeanIdentifier(), methodHandler);
-
-					if (returnValue instanceof Serializable) {
-						clusterNodeResponse.setResult(returnValue);
-					}
-					else if (returnValue != null) {
-						clusterNodeResponse.setException(
-							new ClusterException(
-								"Return value is not serializable"));
-					}
-				}
-				catch (Exception e) {
-					clusterNodeResponse.setException(e);
-
-					_log.error("Failed to invoke method " + methodHandler, e);
-				}
-				finally {
-					ClusterInvokeThreadLocal.setEnabled(true);
-				}
-			}
-			else {
-				clusterNodeResponse.setException(
-					new ClusterException(
-						"Payload is not of type " +
-							MethodHandler.class.getName()));
-			}
+			clusterNodeResponse.setException(
+				new ClusterException(
+					"Payload is not of type " + MethodHandler.class.getName()));
 		}
 
 		Channel controlChannel = _clusterExecutorImpl.getControlChannel();
@@ -295,30 +231,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 	protected void processClusterResponse(
 		ClusterNodeResponse clusterNodeResponse,
 		org.jgroups.Address sourceAddress, org.jgroups.Address localAddress) {
-
-		ClusterMessageType clusterMessageType =
-			clusterNodeResponse.getClusterMessageType();
-
-		if (clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-			clusterMessageType.equals(ClusterMessageType.UPDATE)) {
-
-			ClusterNode clusterNode = clusterNodeResponse.getClusterNode();
-
-			if (clusterNode != null) {
-				Address joinAddress = new AddressImpl(sourceAddress);
-
-				_clusterExecutorImpl.memberJoined(joinAddress, clusterNode);
-			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Response of notify message does not contain cluster " +
-							"node information");
-				}
-			}
-
-			return;
-		}
 
 		String uuid = clusterNodeResponse.getUuid();
 
@@ -354,32 +266,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			if (clusterRequest.isSkipLocal()) {
 				return true;
 			}
-
-			ClusterMessageType clusterMessageType =
-				clusterRequest.getClusterMessageType();
-
-			if (clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-				clusterMessageType.equals(ClusterMessageType.UPDATE)) {
-
-				ClusterNode originatingClusterNode =
-					clusterRequest.getOriginatingClusterNode();
-
-				if (originatingClusterNode != null) {
-					Address joinAddress = new AddressImpl(sourceAddress);
-
-					_clusterExecutorImpl.memberJoined(
-						joinAddress, originatingClusterNode);
-				}
-				else {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Content of notify message does not contain " +
-								"cluster node information");
-					}
-				}
-
-				return true;
-			}
 		}
 
 		if (_clusterExecutorImpl.isShortcutLocalMethod()) {
@@ -393,6 +279,5 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		ClusterRequestReceiver.class);
 
 	private ClusterExecutorImpl _clusterExecutorImpl;
-	private View _lastView;
 
 }
