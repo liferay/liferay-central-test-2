@@ -38,12 +38,18 @@ public interface IndexAccessor {
 
 	public void dumpIndex(OutputStream outputStream) throws IOException;
 
+	public void enableDumpIndex();
+
 	public long getCompanyId();
+
+	public long getLastGeneration();
 
 	public Directory getLuceneDir();
 
 	public void loadIndex(InputStream inputStream) throws IOException;
 
 	public void updateDocument(Term term, Document document) throws IOException;
+
+	public static final long DEFAULT_LOCAL_LAST_GENERATION = -1;
 
 }

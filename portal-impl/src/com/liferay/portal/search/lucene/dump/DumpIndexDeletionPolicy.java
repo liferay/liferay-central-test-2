@@ -62,6 +62,10 @@ public class DumpIndexDeletionPolicy implements IndexDeletionPolicy {
 		}
 	}
 
+	public long getLastGeneration() {
+		return _lastIndexCommit.getGeneration();
+	}
+
 	public void onCommit(List<? extends IndexCommit> indexCommits) {
 		_lastIndexCommit = indexCommits.get(indexCommits.size() - 1);
 
@@ -80,7 +84,7 @@ public class DumpIndexDeletionPolicy implements IndexDeletionPolicy {
 		onCommit(indexCommits);
 	}
 
-	private IndexCommit _lastIndexCommit;
+	private volatile IndexCommit _lastIndexCommit;
 	private List<String> _segmentsFileNames =
 		new CopyOnWriteArrayList<String>();
 

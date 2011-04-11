@@ -14,6 +14,8 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.cluster.Address;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -279,6 +281,18 @@ public class LuceneHelperUtil {
 		return getLuceneHelper().getAnalyzer();
 	}
 
+	public static long getLastGeneration(long companyId) {
+		return getLuceneHelper().getLastGeneration(companyId);
+	}
+
+	public static InputStream getLoadIndexesInputStreamFromCluster(
+			long companyId, Address bootupAddress)
+		throws SystemException {
+
+		return getLuceneHelper().getLoadIndexesInputStreamFromCluster(
+			companyId, bootupAddress);
+	}
+
 	public static LuceneHelper getLuceneHelper() {
 		return _luceneHelper;
 	}
@@ -321,11 +335,12 @@ public class LuceneHelperUtil {
 		getLuceneHelper().loadIndex(companyId, inputStream);
 	}
 
-	public static void updateDocument(
-			long companyId, Term term, Document document)
-		throws IOException {
+	public static Address selectBootupClusterAddress(
+			long companyId, long localLastGeneration)
+		throws SystemException {
 
-		getLuceneHelper().updateDocument(companyId, term, document);
+		return getLuceneHelper().selectBootupClusterAddress(
+			companyId, localLastGeneration);
 	}
 
 	public static void shutdown() {
@@ -334,6 +349,13 @@ public class LuceneHelperUtil {
 
 	public static void startup(long companyId) {
 		getLuceneHelper().startup(companyId);
+	}
+
+	public static void updateDocument(
+			long companyId, Term term, Document document)
+		throws IOException {
+
+		getLuceneHelper().updateDocument(companyId, term, document);
 	}
 
 	public void setLuceneHelper(LuceneHelper luceneHelper) {

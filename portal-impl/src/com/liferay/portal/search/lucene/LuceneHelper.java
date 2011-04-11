@@ -14,6 +14,9 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.cluster.Address;
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -65,6 +68,12 @@ public interface LuceneHelper {
 
 	public Analyzer getAnalyzer();
 
+	public long getLastGeneration(long companyId);
+
+	public InputStream getLoadIndexesInputStreamFromCluster(
+			long companyId, Address bootupAddress)
+		throws SystemException;
+
 	public String[] getQueryTerms(Query query);
 
 	public IndexSearcher getSearcher(long companyId, boolean readOnly)
@@ -80,6 +89,10 @@ public interface LuceneHelper {
 
 	public void loadIndex(long companyId, InputStream inputStream)
 		throws IOException;
+
+	public Address selectBootupClusterAddress(
+			long companyId, long localLastGeneration)
+		throws SystemException;
 
 	public void shutdown();
 
