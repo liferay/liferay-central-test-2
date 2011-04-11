@@ -45,6 +45,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
@@ -259,7 +260,8 @@ public class DLIndexer extends BaseIndexer {
 	}
 
 	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
+		Document document, Locale locale, String snippet,
+		PortletURL portletURL) {
 
 		return null;
 	}

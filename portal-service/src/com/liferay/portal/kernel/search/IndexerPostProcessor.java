@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import java.util.Locale;
+
 import javax.portlet.PortletURL;
 
 /**
@@ -25,7 +27,8 @@ public interface IndexerPostProcessor {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception;
 
-	public void postProcessDocument(Document document, Object obj)
+	public void postProcessDocument(
+			Document document, Object obj)
 		throws Exception;
 
 	public void postProcessFullQuery(
@@ -37,7 +40,7 @@ public interface IndexerPostProcessor {
 		throws Exception;
 
 	public void postProcessSummary(
-		Summary summary, Document document, String snippet,
+		Summary summary, Document document, Locale locale, String snippet,
 		PortletURL portletURL);
 
 }

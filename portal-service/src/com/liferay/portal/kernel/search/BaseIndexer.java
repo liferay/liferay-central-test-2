@@ -39,6 +39,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -98,17 +99,19 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	public Summary getSummary(
-			Document document, String snippet, PortletURL portletURL)
+			Document document, Locale locale, String snippet,
+			PortletURL portletURL)
 		throws SearchException {
 
 		try {
-			Summary summary = doGetSummary(document, snippet, portletURL);
+			Summary summary = doGetSummary(
+				document, locale, snippet, portletURL);
 
 			for (IndexerPostProcessor indexerPostProcessor :
 					_indexerPostProcessors) {
 
 				indexerPostProcessor.postProcessSummary(
-					summary, document, snippet, portletURL);
+					summary, document, locale, snippet, portletURL);
 			}
 
 			return summary;
