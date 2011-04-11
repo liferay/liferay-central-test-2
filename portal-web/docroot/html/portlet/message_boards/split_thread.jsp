@@ -113,7 +113,7 @@ boolean quote = false;
 				<aui:input name="body" type="hidden" />
 
 				<aui:script use="liferay-bbcode-editor">
-					<portlet:namespace />editor.setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=$NEW_THREAD_URL$]$NEW_THREAD_URL$[/url]", false) %>');
+					<portlet:namespace />editor.setHTML('<%= LanguageUtil.format(pageContext, "the-new-thread-can-be-found-at-x", "[url=${newThreadURL}]${newThreadURL}[/url]", false) %>');
 				</aui:script>
 			</aui:field-wrapper>
 		</div>
