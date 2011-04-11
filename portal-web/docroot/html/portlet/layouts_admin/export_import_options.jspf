@@ -87,10 +87,6 @@
 					<c:otherwise>
 						<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= true %>" />
 
-						<c:if test="<%= !liveGroup.isStaged() %>">
-							<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_ALL %>" type="hidden" value="<%= true %>" />
-						</c:if>
-
 						<%
 						String taglibToggleDataControls = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataControls');";
 						%>
