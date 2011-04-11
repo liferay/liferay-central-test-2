@@ -1,6 +1,8 @@
 AUI().add(
 	'liferay-session',
 	function(A) {
+		var Lang = A.Lang;
+
 		var Session = {
 			autoExtend: false,
 			sessionTimeout: 0,
@@ -28,6 +30,11 @@ AUI().add(
 				instance.redirectUrl = params.redirectUrl || instance.redirectUrl;
 
 				instance._cookieKey = 'LFR_SESSION_STATE_' + themeDisplay.getUserId();
+
+				instance._cookieOptions = {
+					path: '/',
+					secure: A.UA.secure
+				};
 
 				var urlBase = themeDisplay.getPathMain() + '/portal/';
 
@@ -61,7 +68,7 @@ AUI().add(
 			checkState: function() {
 				var instance = this;
 
-				var currentTime = new Date().getTime();
+				var currentTime = Lang.now();
 				var sessionState = instance.getCookie();
 				var newWaitTime = instance.sessionTimeoutWarning;
 				var timeDiff = 0;
@@ -97,7 +104,7 @@ AUI().add(
 			getCookie: function() {
 				var instance = this;
 
-				return A.Cookie.get(instance._cookieKey) || 0;
+				return A.Cookie.get(instance._cookieKey, instance._cookieOptions) || 0;
 			},
 
 			expire: function() {
@@ -160,13 +167,9 @@ AUI().add(
 			setCookie: function(status) {
 				var instance = this;
 
-				var currentTime = new Date().getTime();
+				var currentTime = Lang.now();
 
-				var options = {
-					secure: A.UA.secure
-				};
-
-				A.Cookie.set(instance._cookieKey, status || currentTime, options);
+				A.Cookie.set(instance._cookieKey, currentTime, instance._cookieOptions);
 			},
 
 			warn: function() {
