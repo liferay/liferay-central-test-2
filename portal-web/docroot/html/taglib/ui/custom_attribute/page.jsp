@@ -108,6 +108,14 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								else {
 									valueDate.setTime(new Date());
 								}
+
+								int hourValue = valueDate.get(Calendar.HOUR_OF_DAY);
+
+								String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
+
+								if (timeFormatPattern.indexOf("a") != -1) {
+									hourValue = valueDate.get(Calendar.HOUR);
+								}
 								%>
 
 								<liferay-ui:input-date
@@ -128,7 +136,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									amPmValue="<%= valueDate.get(Calendar.AM_PM) %>"
 									disabled="<%= false %>"
 									hourParam='<%= "ExpandoAttribute--" + name + "--Hour" %>'
-									hourValue="<%= valueDate.get(Calendar.HOUR) %>"
+									hourValue="<%= hourValue %>"
 									minuteParam='<%= "ExpandoAttribute--" + name + "--Minute" %>'
 									minuteValue="<%= valueDate.get(Calendar.MINUTE) %>"
 									minuteInterval="1"
