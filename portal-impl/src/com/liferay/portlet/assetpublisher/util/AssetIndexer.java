@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.model.AssetEntry;
 
+import java.util.Locale;
+
 import javax.portlet.PortletURL;
 
 /**
@@ -48,7 +50,8 @@ public class AssetIndexer extends BaseIndexer {
 	}
 
 	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
+		Document document, Locale locale, String snippet,
+		PortletURL portletURL) {
 
 		return null;
 	}

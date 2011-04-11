@@ -29,6 +29,7 @@ import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 
 import java.util.Date;
+import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
@@ -45,11 +46,11 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 	public abstract String getSearchPath();
 
 	public Summary getSummary(
-			Indexer indexer, Document document, String snippet,
+			Indexer indexer, Document document, Locale locale, String snippet,
 			PortletURL portletURL)
 		throws SearchException {
 
-		return indexer.getSummary(document, snippet, portletURL);
+		return indexer.getSummary(document, locale, snippet, portletURL);
 	}
 
 	public abstract String getTitle(String keywords);
@@ -147,7 +148,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 					request, portletId, resultGroupId);
 
 				Summary summary = getSummary(
-					indexer, result, snippet, portletURL);
+					indexer, result, themeDisplay.getLocale(), snippet,
+					portletURL);
 
 				String title = summary.getTitle();
 				String url = getURL(

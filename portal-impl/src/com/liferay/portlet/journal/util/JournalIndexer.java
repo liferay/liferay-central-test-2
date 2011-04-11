@@ -27,7 +27,8 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -53,6 +54,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -95,9 +98,16 @@ public class JournalIndexer extends BaseIndexer {
 		long resourcePrimKey = article.getResourcePrimKey();
 		String articleId = article.getArticleId();
 		double version = article.getVersion();
-		String title = article.getTitle();
-		String description = article.getDescription();
-		String content = article.getContent();
+		Map<Locale, String> titleMap = article.getTitleMap();
+		Map<Locale, String> descriptionMap = article.getDescriptionMap();
+		String[] availableLocales = LocalizationUtil.getAvailableLocales(
+			article.getContent());
+
+		if (availableLocales.length == 0) {
+			availableLocales = new String[] {
+				LocaleUtil.getDefault().toString()};
+		}
+
 		String type = article.getType();
 
 		String structureId = article.getStructureId();
@@ -146,10 +156,25 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
-		document.addText(Field.TITLE, title);
-		document.addText(
-			Field.CONTENT, processContent(structure, document, content));
-		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
+		document.addLocalizedText(Field.TITLE, titleMap);
+
+		processStructureFields(structure, document, article.getContent());
+
+		for (String languageId : availableLocales) {
+			String content = extractContent(
+				article.getContentByLocale(languageId));
+
+			if (LocaleUtil.getDefault().toString().equals(languageId)) {
+				document.addText(Field.CONTENT, content);
+			}
+
+			document.addText(
+				Field.CONTENT.concat(StringPool.UNDERLINE).concat(languageId),
+				content);
+		}
+
+		document.addLocalizedText(Field.DESCRIPTION, descriptionMap);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
@@ -171,14 +196,16 @@ public class JournalIndexer extends BaseIndexer {
 	}
 
 	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
+		Document document, Locale locale, String snippet,
+		PortletURL portletURL) {
 
-		String title = document.get(Field.TITLE);
+		String title = document.get(locale, Field.TITLE);
 
 		String content = snippet;
 
 		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+			content = StringUtil.shorten(
+				document.get(locale, Field.CONTENT), 200);
 		}
 
 		String groupId = document.get("groupId");
@@ -226,12 +253,22 @@ public class JournalIndexer extends BaseIndexer {
 		return _FIELD_NAMESPACE.concat(StringPool.FORWARD_SLASH).concat(name);
 	}
 
-	protected String getIndexableContent(
+	protected String extractContent(String content) {
+		content = StringUtil.replace(content, "<![CDATA[", StringPool.BLANK);
+		content = StringUtil.replace(content, "]]>", StringPool.BLANK);
+		content = StringUtil.replace(content, "&amp;", "&");
+		content = StringUtil.replace(content, "&lt;", "<");
+		content = StringUtil.replace(content, "&gt;", ">");
+
+		content = HtmlUtil.extractText(content);
+
+		return content;
+	}
+
+	protected void processStructureFields(
 			com.liferay.portal.kernel.xml.Document structureDocument,
 			Document document, Element rootElement)
 		throws Exception {
-
-		StringBundler sb = new StringBundler();
 
 		LinkedList<Element> queue = new LinkedList<Element>(
 			rootElement.elements());
@@ -239,8 +276,6 @@ public class JournalIndexer extends BaseIndexer {
 		Element element = null;
 
 		while ((element = queue.poll()) != null) {
-			String name = element.getName();
-
 			String elName = element.attributeValue("name", StringPool.BLANK);
 			String elType = element.attributeValue("type", StringPool.BLANK);
 			String elIndexType = element.attributeValue(
@@ -262,44 +297,15 @@ public class JournalIndexer extends BaseIndexer {
 				}
 			}
 
-			if (name.equals("static-content")) {
-				String text = element.getText();
-
-				sb.append(text);
-				sb.append(StringPool.SPACE);
-			}
-			else if (Validator.isNotNull(elType)) {
+			if (Validator.isNotNull(elType)) {
 				indexField(document, element, elType, elIndexType);
-
-				for (Element dynamicContentElement : element.elements(
-						"dynamic-content")) {
-
-					if (elType.equals("list") || elType.equals("multi-list")) {
-						for (Element optionElement :
-								dynamicContentElement.elements("option")) {
-
-							String text = optionElement.getText();
-
-							sb.append(text);
-							sb.append(StringPool.SPACE);
-						}
-					}
-					else {
-						String text = dynamicContentElement.getText();
-
-						sb.append(text);
-						sb.append(StringPool.SPACE);
-					}
-				}
 			}
 
 			queue.addAll(element.elements());
 		}
-
-		return sb.toString();
 	}
 
-	protected String getIndexableContent(
+	protected void processStructureFields(
 		JournalStructure structure, Document document, String content) {
 
 		try {
@@ -314,13 +320,11 @@ public class JournalIndexer extends BaseIndexer {
 
 			Element rootElement = contentDocument.getRootElement();
 
-			return getIndexableContent(
+			processStructureFields(
 				structureDocument, document, rootElement);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-
-			return content;
 		}
 	}
 
@@ -381,16 +385,16 @@ public class JournalIndexer extends BaseIndexer {
 			}
 			else if (elIndexType.equals("text")) {
 				if (Validator.isNull(contentLocale)) {
-					document.addKeyword(
+					document.addText(
 						name, StringUtil.merge(value, StringPool.SPACE));
 				}
 				else {
 					if (defaultLocale.equals(contentLocale)) {
-						document.addKeyword(
+						document.addText(
 							name, StringUtil.merge(value, StringPool.SPACE));
 					}
 
-					document.addKeyword(
+					document.addText(
 						name.concat(StringPool.UNDERLINE).concat(contentLocale),
 						StringUtil.merge(value, StringPool.SPACE));
 				}
@@ -407,29 +411,6 @@ public class JournalIndexer extends BaseIndexer {
 		if (Validator.isNotNull(type)) {
 			contextQuery.addRequiredTerm("type", type);
 		}
-	}
-
-	protected String processContent(
-		JournalStructure structure, Document document, String content) {
-
-		if ((content != null) &&
-			((content.indexOf("<dynamic-content") != -1) ||
-			 (content.indexOf("<static-content") != -1))) {
-
-			content = getIndexableContent(structure, document, content);
-
-			content = StringUtil.replace(
-				content, "<![CDATA[", StringPool.BLANK);
-			content = StringUtil.replace(content, "]]>", StringPool.BLANK);
-		}
-
-		content = StringUtil.replace(content, "&amp;", "&");
-		content = StringUtil.replace(content, "&lt;", "<");
-		content = StringUtil.replace(content, "&gt;", ">");
-
-		content = HtmlUtil.extractText(content);
-
-		return content;
 	}
 
 	protected void reindexArticles(long companyId) throws Exception {

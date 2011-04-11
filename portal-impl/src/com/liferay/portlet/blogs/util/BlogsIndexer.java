@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
@@ -121,7 +122,8 @@ public class BlogsIndexer extends BaseIndexer {
 	}
 
 	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
+		Document document, Locale locale, String snippet,
+		PortletURL portletURL) {
 
 		String title = document.get(Field.TITLE);
 
