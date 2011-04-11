@@ -443,23 +443,6 @@ public class DocumentImpl implements Document {
 		return field.getValue();
 	}
 
-	public String get(Locale locale, String name) {
-		String tmpName = name.concat(StringPool.UNDERLINE).concat(
-			locale.toString());
-
-		Field field = _fields.get(tmpName);
-
-		if (field == null) {
-			field = _fields.get(name);
-		}
-
-		if (field == null) {
-			return StringPool.BLANK;
-		}
-
-		return field.getValue();
-	}
-
 	public Date getDate(String name) throws ParseException {
 		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
 			_DATE_FORMAT_PATTERN);

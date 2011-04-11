@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.util.Locale;
-
 import javax.portlet.PortletURL;
 
 /**
@@ -40,11 +38,10 @@ public class IndexerWrapper implements Indexer {
 	}
 
 	public Summary getSummary(
-			Document document, Locale locale, String snippet,
-			PortletURL portletURL)
+			Document document, String snippet, PortletURL portletURL)
 		throws SearchException {
 
-		return _indexer.getSummary(document, locale, snippet, portletURL);
+		return _indexer.getSummary(document, snippet, portletURL);
 	}
 
 	public void registerIndexerPostProcessor(

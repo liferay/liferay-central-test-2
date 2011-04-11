@@ -18,9 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 
 import java.io.Serializable;
 
-import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 
 /**
  * @author Brian Wing Shun Chan
@@ -72,10 +70,6 @@ public class SearchContext implements Serializable {
 		return _keywords;
 	}
 
-	public Locale getLocale() {
-		return _locale;
-	}
-
 	public long[] getNodeIds() {
 		return _nodeIds;
 	}
@@ -102,10 +96,6 @@ public class SearchContext implements Serializable {
 
 	public int getStart() {
 		return _start;
-	}
-
-	public TimeZone getTimeZone() {
-		return _timeZone;
 	}
 
 	public long getUserId() {
@@ -184,10 +174,6 @@ public class SearchContext implements Serializable {
 		_keywords = keywords;
 	}
 
-	public void setLocale(Locale locale) {
-		_locale = locale;
-	}
-
 	public void setNodeIds(long[] nodeIds) {
 		_nodeIds = nodeIds;
 	}
@@ -216,10 +202,6 @@ public class SearchContext implements Serializable {
 		_start = start;
 	}
 
-	public void setTimeZone(TimeZone timeZone) {
-		_timeZone = timeZone;
-	}
-
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
@@ -237,7 +219,6 @@ public class SearchContext implements Serializable {
 	private boolean _includeLiveGroups = true;
 	private boolean _includeStagingGroups = true;
 	private String _keywords;
-	private Locale _locale;
 	private long[] _nodeIds;
 	private long _ownerUserId;
 	private String[] _portletIds;
@@ -245,7 +226,6 @@ public class SearchContext implements Serializable {
 	private boolean _scopeStrict = true;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;
-	private TimeZone _timeZone;
 	private long _userId;
 
 }

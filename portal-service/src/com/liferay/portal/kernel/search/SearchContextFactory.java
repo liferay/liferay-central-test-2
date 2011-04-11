@@ -18,11 +18,13 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,8 +45,6 @@ public class SearchContextFactory {
 		searchContext.setCompanyId(themeDisplay.getCompanyId());
 		searchContext.setGroupIds(new long[] {themeDisplay.getScopeGroupId()});
 		searchContext.setUserId(themeDisplay.getUserId());
-		searchContext.setLocale(themeDisplay.getLocale());
-		searchContext.setTimeZone(themeDisplay.getTimeZone());
 
 		// Attributes
 
@@ -85,7 +85,9 @@ public class SearchContextFactory {
 
 		QueryConfig queryConfig = new QueryConfig();
 
-		queryConfig.setLocale(themeDisplay.getLocale());
+		Locale local = PortalUtil.getLocale(request);
+
+		queryConfig.setLocale(local);
 
 		searchContext.setQueryConfig(queryConfig);
 

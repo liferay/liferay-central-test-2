@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -186,18 +185,12 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 						continue;
 					}
 
-					if (LocaleUtil.getDefault().equals(locale)) {
-						_addLuceneFieldable(
-							luceneDocument, name, numeric, tokenized, boost,
-							value);
-					}
-
-					String localizedName = name.concat(
-						StringPool.UNDERLINE).concat(locale.toString());
+					name = name.concat(StringPool.UNDERLINE).concat(
+						locale.getDisplayName());
 
 					_addLuceneFieldable(
-						luceneDocument, localizedName, numeric, tokenized,
-						boost, value);
+						luceneDocument, name, numeric, tokenized, boost, value);
+
 				}
 			}
 

@@ -36,7 +36,6 @@ import java.io.Serializable;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
@@ -63,12 +62,12 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 	}
 
 	public Summary getSummary(
-			Indexer indexer, Document document, Locale locale, String snippet,
+			Indexer indexer, Document document, String snippet,
 			PortletURL portletURL)
 		throws SearchException {
 
 		Summary summary = super.getSummary(
-			indexer, document, locale, snippet, portletURL);
+			indexer, document, snippet, portletURL);
 
 		portletURL = summary.getPortletURL();
 

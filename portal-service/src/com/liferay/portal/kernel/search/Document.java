@@ -165,8 +165,6 @@ public interface Document extends Serializable {
 
 	public String get(String name);
 
-	public String get(Locale locale, String name);
-
 	public Date getDate(String name) throws ParseException;
 
 	public Map<String, Field> getFields();
