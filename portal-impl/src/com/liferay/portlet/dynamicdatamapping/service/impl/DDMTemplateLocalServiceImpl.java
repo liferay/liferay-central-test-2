@@ -17,14 +17,14 @@ package com.liferay.portlet.dynamicdatamapping.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.dynamicdatamapping.TemplateNameException;
+import com.liferay.portlet.dynamicdatamapping.TemplateScriptException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.base.DDMTemplateLocalServiceBaseImpl;
-import com.liferay.portlet.journal.TemplateNameException;
 
 import java.util.Date;
 import java.util.List;
@@ -47,7 +47,7 @@ public class DDMTemplateLocalServiceImpl
 			serviceContext.getUserId());
 		Date now = new Date();
 
-		validate(name);
+		validate(name, script);
 
 		long templateId = counterLocalService.increment();
 
@@ -180,7 +180,7 @@ public class DDMTemplateLocalServiceImpl
 			String language, String script, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		validate(name);
+		validate(name, script);
 
 		DDMTemplate template = ddmTemplateLocalService.getDDMTemplate(
 			templateId);
@@ -197,11 +197,14 @@ public class DDMTemplateLocalServiceImpl
 		return template;
 	}
 
-	protected void validate(String name) throws PortalException {
-		if (Validator.isNull(name) || Validator.isNumber(name) ||
-			name.contains(StringPool.SPACE)) {
+	protected void validate(String name, String script)
+		throws PortalException {
 
+		if (Validator.isNull(name)) {
 			throw new TemplateNameException();
+		}
+		else if (Validator.isNull(script)) {
+			throw new TemplateScriptException();
 		}
 	}
 

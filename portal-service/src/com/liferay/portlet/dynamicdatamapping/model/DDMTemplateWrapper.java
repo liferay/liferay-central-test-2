@@ -388,6 +388,12 @@ public class DDMTemplateWrapper implements DDMTemplate {
 		return _ddmTemplate.toXmlString();
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getStructure()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplate.getStructure();
+	}
+
 	public DDMTemplate getWrappedDDMTemplate() {
 		return _ddmTemplate;
 	}
