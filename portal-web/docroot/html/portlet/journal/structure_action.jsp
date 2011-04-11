@@ -84,7 +84,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 	<portlet:renderURL var="viewArticleURL">
 		<portlet:param name="struts_action" value="/journal/view" />
 		<portlet:param name="tabs1" value="web-content" />
-		<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
+		<portlet:param name="groupId" value="<%= (themeDisplay.getCompanyGroupId() == structure.getGroupId()) ? StringPool.BLANK : String.valueOf(structure.getGroupId()) %>" />
 		<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 	</portlet:renderURL>
 

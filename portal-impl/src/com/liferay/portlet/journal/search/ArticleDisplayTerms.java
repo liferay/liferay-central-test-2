@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.search;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 
@@ -62,14 +63,14 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
 		content = ParamUtil.getString(portletRequest, CONTENT);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
-		groupId = ParamUtil.getLong(
-			portletRequest, GROUP_ID, themeDisplay.getScopeGroupId());
 		status = ParamUtil.getString(portletRequest, STATUS);
 		structureId = ParamUtil.getString(portletRequest, STRUCTURE_ID);
 		templateId = ParamUtil.getString(portletRequest, TEMPLATE_ID);
 		title = ParamUtil.getString(portletRequest, TITLE);
 		type = ParamUtil.getString(portletRequest, TYPE);
 		version = ParamUtil.getDouble(portletRequest, VERSION, -1);
+
+		groupId = setGroupId(portletRequest);
 	}
 
 	public String getArticleId() {
@@ -135,6 +136,22 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public void setDisplayDateLT(Date displayDateLT) {
 		this.displayDateLT = displayDateLT;
+	}
+
+	public long setGroupId(PortletRequest portletRequest) {
+		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
+
+		if (Validator.isNull(groupId) && Validator.isNull(structureId) &&
+				Validator.isNull(templateId)){
+
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			groupId = themeDisplay.getScopeGroupId();
+		}
+
+		return groupId;
 	}
 
 	public void setStatus(String status) {

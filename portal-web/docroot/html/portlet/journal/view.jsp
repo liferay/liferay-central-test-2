@@ -35,7 +35,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("web-content") %>'>
-			<aui:input name="groupId" type="hidden" />
 			<aui:input name="deleteArticleIds" type="hidden" />
 			<aui:input name="expireArticleIds" type="hidden" />
 
@@ -48,7 +47,13 @@ portletURL.setParameter("tabs1", tabs1);
 			headerNames.add(StringPool.BLANK);
 
 			searchContainer.setRowChecker(new RowChecker(renderResponse));
+
+			ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDisplayTerms();
 			%>
+
+			<c:if test="<%= portletName.equals(PortletKeys.JOURNAL) && !((themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId()))) %>">
+				<aui:input name="groupId" type="hidden" />
+			</c:if>
 
 			<liferay-ui:search-form
 				page="/html/portlet/journal/article_search.jsp"

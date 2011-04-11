@@ -73,7 +73,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 		<portlet:renderURL var="viewArticlesURL">
 			<portlet:param name="struts_action" value="/journal/view" />
 			<portlet:param name="tabs1" value="web-content" />
-			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
+			<portlet:param name="groupId" value="<%= (themeDisplay.getCompanyGroupId() == template.getGroupId()) ? StringPool.BLANK : String.valueOf(template.getGroupId()) %>" />
 			<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 		</portlet:renderURL>
 
