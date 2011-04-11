@@ -16,6 +16,7 @@ package com.liferay.portalweb.portal.dbupgrade.sampledata606.groups;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata606.groups.groupsorgs.GroupsOrgsTests;
+import com.liferay.portalweb.portal.dbupgrade.sampledata606.groups.groupsroles.GroupsRolesTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata606.groups.groupsusergroups.GroupsUserGroupsTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata606.groups.pagelayout.PageLayoutTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata606.groups.pagescope.PageScopeTests;
@@ -33,6 +34,7 @@ public class GroupsTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(GroupsOrgsTests.suite());
+		testSuite.addTest(GroupsRolesTests.suite());
 		testSuite.addTest(GroupsUserGroupsTests.suite());
 		testSuite.addTest(PageLayoutTests.suite());
 		testSuite.addTest(PageScopeTests.suite());
