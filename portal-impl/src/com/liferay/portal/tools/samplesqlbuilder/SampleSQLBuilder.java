@@ -18,12 +18,14 @@ import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.io.CharPipe;
+import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncTeeWriter;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -47,16 +49,25 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import java.nio.channels.FileChannel;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class SampleSQLBuilder {
 
@@ -146,68 +157,29 @@ public class SampleSQLBuilder {
 				baseDir, _maxGroupCount, _maxUserToGroupCount, _counter,
 				_permissionCounter, _resourceCounter, _resourceCodeCounter);
 
-			final CharPipe charPipe = new CharPipe(1024 * 1024 * 10);
+			_specificDB = DBFactoryUtil.getDB(_dbType);
 
-			Reader pipeReader = charPipe.getReader();
-			final Writer pipeWriter = charPipe.getWriter();
+			final CharPipe charPipe = new CharPipe(1024 * 1024 * 10);
 
 			// Generic
 
-			Thread genericWriterThread = new Thread() {
-				public void run() {
-					try {
-						_writerGeneric = new UnsyncTeeWriter(pipeWriter,
-							new FileWriter(_outputDir +  "/sample.sql"));
+			generateGenericSQL(charPipe);
 
-						createSample();
+			File tempDir = new File(_outputDir, _TEMP_DIR);
+			tempDir.mkdirs();
 
-						_writerGeneric.close();
+			try {
+				// Specific
 
-						charPipe.close();
-					}
-					catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			};
+				translateSpecificSQL(charPipe.getReader());
 
-			genericWriterThread.start();
+				// Merge
 
-			// Specific
-
-			Writer writerSpecific = new FileWriter(
-				_outputDir +  "/sample-" + dbType + ".sql");
-
-			DB specificDB = DBFactoryUtil.getDB(_dbType);
-
-			boolean previousBlankLine = false;
-
-			UnsyncBufferedReader unsyncBufferedReader =
-				new UnsyncBufferedReader(pipeReader);
-
-			String s = null;
-
-			while ((s = unsyncBufferedReader.readLine()) != null) {
-				s = specificDB.buildSQL(s).trim();
-
-				writerSpecific.write(s);
-
-				if (previousBlankLine && Validator.isNull(s)) {
-				}
-				else {
-					writerSpecific.write(StringPool.NEW_LINE);
-				}
-
-				if (Validator.isNull(s)) {
-					previousBlankLine = true;
-				}
+				mergeFinalSQL();
 			}
-
-			unsyncBufferedReader.close();
-
-			writerSpecific.close();
-
-			genericWriterThread.join();
+			finally {
+				FileUtil.deltree(tempDir);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -405,6 +377,38 @@ public class SampleSQLBuilder {
 		return new FileWriter(new File(_outputDir + "/" + fileName));
 	}
 
+	protected void processInsertSQL(String insertSQL) throws IOException {
+		String tableName = insertSQL.substring(0, insertSQL.indexOf(' '));
+
+		int valuesPosition = insertSQL.indexOf(" values ") + 8;
+
+		String values = insertSQL.substring(
+			valuesPosition, insertSQL.length() - 1);
+
+		StringBundler sb = _insertMap.get(tableName);
+		if (sb == null) {
+			sb = new StringBundler();
+			_insertMap.put(tableName, sb);
+
+			sb.append("insert into ");
+			sb.append(insertSQL.substring(0, valuesPosition));
+			sb.append("\n");
+		}
+		else {
+			sb.append(",\n");
+		}
+
+		sb.append(values);
+
+		if (sb.index() >= _OPTIMIZE_BUFFER_SIZE) {
+			String sql = _specificDB.buildSQL(sb.toString());
+
+			sb.setIndex(0);
+
+			writeToTempFile(tableName, sql);
+		}
+	}
+
 	protected void processTemplate(String name, Map<String, Object> context)
 		throws Exception {
 
@@ -415,12 +419,123 @@ public class SampleSQLBuilder {
 		context.put(key, value);
 	}
 
+	private void mergeFinalSQL() throws IOException {
+		String tempDir = _outputDir + "/" + _TEMP_DIR;
+
+		FileOutputStream fileOutputStream = new FileOutputStream(
+			_outputDir + "/sample-" + _dbType + ".sql");
+
+		FileChannel fileChannel = fileOutputStream.getChannel();
+
+		Iterator<Map.Entry<String, StringBundler>> tempSQLsIterator =
+			_insertMap.entrySet().iterator();
+
+		while (tempSQLsIterator.hasNext()) {
+			Map.Entry<String, StringBundler> tempSQLs = tempSQLsIterator.next();
+
+			String tableName = tempSQLs.getKey();
+
+			String sql = _specificDB.buildSQL(tempSQLs.getValue().toString());
+
+			writeToTempFile(tableName, sql);
+
+			Writer tempWriter = _tempFileWriters.remove(tableName);
+			tempWriter.write(";\n");
+			tempWriter.close();
+
+			FileChannel tempSQLChannel = new FileInputStream(
+				new File(tempDir, tableName)).getChannel();
+
+			tempSQLChannel.transferTo(0, tempSQLChannel.size(), fileChannel);
+
+			tempSQLChannel.close();
+
+			tempSQLsIterator.remove();
+		}
+
+		Writer writerSpecific = new OutputStreamWriter(fileOutputStream);
+
+		for (String sql : _otherSQLs) {
+			sql = _specificDB.buildSQL(sql);
+			writerSpecific.write(sql);
+			writerSpecific.write(StringPool.NEW_LINE);
+		}
+
+		writerSpecific.close();
+	}
+
+	private void generateGenericSQL(final CharPipe charPipe) {
+		final Writer writer = charPipe.getWriter();
+
+		new Thread() {
+			public void run() {
+				try {
+					_writerGeneric = new UnsyncTeeWriter(writer,
+						new FileWriter(_outputDir +  "/sample.sql"));
+
+					createSample();
+
+					_writerGeneric.close();
+
+					charPipe.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
+	}
+
+	private void translateSpecificSQL(Reader reader) throws IOException {
+		UnsyncBufferedReader unsyncBufferedReader =
+			new UnsyncBufferedReader(reader);
+
+		String s = null;
+
+		while ((s = unsyncBufferedReader.readLine()) != null) {
+			s = s.trim();
+
+			if (s.length() > 0) {
+
+				if (s.startsWith("insert into ")) {
+					processInsertSQL(s.substring("insert into ".length()));
+				}
+				else if (s.length() > 0) {
+					_otherSQLs.add(s);
+				}
+			}
+
+		}
+
+		unsyncBufferedReader.close();
+	}
+
+	private void writeToTempFile(String tableName, String sql)
+		throws IOException {
+		Writer writer = _tempFileWriters.get(tableName);
+
+		if (writer == null) {
+			writer = new FileWriter(_outputDir + "/" + _TEMP_DIR + "/" +
+				tableName);
+
+			_tempFileWriters.put(tableName, writer);
+		}
+
+		writer.write(sql);
+	}
+
+	private static final int _OPTIMIZE_BUFFER_SIZE = 8192;
+
+	private static final String _TEMP_DIR = "temp";
+
 	private static final String _TPL_ROOT =
 		"com/liferay/portal/tools/samplesqlbuilder/dependencies/";
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
 	private String _dbType;
+	private Map<String, StringBundler> _insertMap =
+		new ConcurrentHashMap<String, StringBundler>();
 	private int _maxBlogsEntryCommentCount;
 	private int _maxBlogsEntryCount;
 	private int _maxGroupCount;
@@ -432,11 +547,15 @@ public class SampleSQLBuilder {
 	private int _maxWikiNodeCount;
 	private int _maxWikiPageCommentCount;
 	private int _maxWikiPageCount;
+	private List<String> _otherSQLs = new ArrayList<String>();
 	private String _outputDir;
 	private SimpleCounter _permissionCounter;
 	private SimpleCounter _resourceCodeCounter;
 	private SimpleCounter _resourceCounter;
 	private boolean _securityEnabled;
+	private DB _specificDB;
+	private Map<String, Writer> _tempFileWriters =
+		new ConcurrentHashMap<String, Writer>();
 	private String _tplAssetEntry = _TPL_ROOT + "asset_entry.ftl";
 	private String _tplGroup = _TPL_ROOT + "group.ftl";
 	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";

@@ -953,8 +953,7 @@ public abstract class BaseDB implements DB {
 				_templatePatterns[i] = Pattern.compile(variable);
 			}
 			else {
-				_templatePatterns[i] = Pattern.compile(
-					"\\b" + variable + "\\b");
+				_templatePatterns[i] = Pattern.compile(variable + "\\b");
 			}
 		}
 	}
