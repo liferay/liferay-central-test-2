@@ -16,6 +16,8 @@ package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -37,35 +39,57 @@ public class DDMStructureImpl
 	public DDMStructureImpl() {
 	}
 
-	public Set<String> getFieldNames() {
-		Map<String, String> fieldTypes = _getFieldTypes();
+	public String getFieldDataType(String fieldName) {
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
 
-		return fieldTypes.keySet();
+		Map<String, String> field = fieldsMap.get(fieldName);
+
+		return field.get("dataType");
+	}
+
+	public String getFieldLabel(String fieldName) {
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
+
+		Map<String, String> field = fieldsMap.get(fieldName);
+
+		return GetterUtil.getString(field.get("label"), fieldName);
+	}
+
+	public Set<String> getFieldNames() {
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
+
+		return fieldsMap.keySet();
+	}
+
+	public Map<String, Map<String, String>> getFieldsMap() {
+		return _getFieldsMap();
 	}
 
 	public String getFieldType(String fieldName) {
-		Map<String, String> fieldTypes = _getFieldTypes();
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
 
-		return fieldTypes.get(fieldName);
+		Map<String, String> field = fieldsMap.get(fieldName);
+
+		return field.get("type");
 	}
 
 	public boolean hasField(String fieldName) {
-		Map<String, String> fieldTypes = _getFieldTypes();
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
 
-		return fieldTypes.containsKey(fieldName);
+		return fieldsMap.containsKey(fieldName);
 	}
 
 	public void setXsd(String xsd) {
 		super.setXsd(xsd);
 
-		_fieldTypes = null;
+		_fieldsMap = null;
 	}
 
-	private Map<String, String> _getFieldTypes() {
-		if (_fieldTypes == null) {
+	private Map<String, Map<String, String>> _getFieldsMap() {
+		if (_fieldsMap == null) {
 			synchronized (this) {
-				if (_fieldTypes == null) {
-					_fieldTypes = new HashMap<String, String>();
+				if (_fieldsMap == null) {
+					_fieldsMap = new HashMap<String, Map<String, String>>();
 
 					try {
 						XPath xPathSelector = SAXReaderUtil.createXPath(
@@ -80,9 +104,8 @@ public class DDMStructureImpl
 							Element element = (Element)itr.next();
 
 							String name = element.attributeValue("name");
-							String type = element.attributeValue("type");
 
-							_fieldTypes.put(name, type);
+							_fieldsMap.put(name, getField(element));
 						}
 					}
 					catch (Exception e) {
@@ -92,11 +115,31 @@ public class DDMStructureImpl
 			}
 		}
 
-		return _fieldTypes;
+		return _fieldsMap;
+	}
+
+	protected Map<String, String> getField(Element element) {
+		Map<String, String> field = new HashMap<String, String>();
+
+		Element metadataElement = element.element("meta-data");
+
+		if (metadataElement != null) {
+			for (Element metadataEntry : metadataElement.elements()) {
+				field.put(
+					metadataEntry.attributeValue("name"),
+					metadataEntry.getText());
+			}
+		}
+
+		for (Attribute attribute : element.attributes()) {
+			field.put(attribute.getName(), attribute.getValue());
+		}
+
+		return field;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
 
-	private Map<String, String> _fieldTypes;
+	private Map<String, Map<String, String>> _fieldsMap;
 
 }
