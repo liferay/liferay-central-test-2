@@ -23,7 +23,7 @@
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
 				<span class="aui-search-bar">
-					<aui:input id="<%= id + displayTerms.KEYWORDS %>" inlineField="<%= true %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
+					<aui:input id="<%= id + displayTerms.KEYWORDS %>" inlineField="<%= true %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= displayTerms.getKeywords() %>" />
 
 					<aui:button type="submit" value="<%= buttonLabel %>" />
 				</span>
@@ -33,7 +33,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<aui:input id="<%= id + displayTerms.KEYWORDS %>" label="search" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= HtmlUtil.escape(displayTerms.getKeywords()) %>" />
+				<aui:input id="<%= id + displayTerms.KEYWORDS %>" label="search" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= displayTerms.getKeywords() %>" />
 
 				&nbsp;<aui:a href="javascript:;" tabindex="-1"><liferay-ui:message key="advanced" /> &raquo;</aui:a>
 			</c:otherwise>
