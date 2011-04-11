@@ -14,7 +14,11 @@
 
 package com.liferay.portlet.dynamicdatamapping.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -23,6 +27,12 @@ public class DDMTemplateImpl
 	extends DDMTemplateModelImpl implements DDMTemplate {
 
 	public DDMTemplateImpl() {
+	}
+
+	public DDMStructure getStructure()
+		throws PortalException, SystemException {
+
+		return DDMStructureLocalServiceUtil.getStructure(getStructureId());
 	}
 
 }
