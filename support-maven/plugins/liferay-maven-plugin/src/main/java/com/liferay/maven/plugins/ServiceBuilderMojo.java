@@ -14,14 +14,15 @@
 
 package com.liferay.maven.plugins;
 
-import com.liferay.maven.plugins.ServiceBuilderMojo;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.File;
+
 import java.lang.reflect.Method;
+
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -80,17 +81,22 @@ public class ServiceBuilderMojo extends AbstractMojo {
 
 	protected void initClassLoader() throws Exception {
 		synchronized (ServiceBuilderMojo.class) {
-			URLClassLoader classLoader =
-				(URLClassLoader) getClass().getClassLoader();
+			Class<?> clazz = getClass();
+
+			URLClassLoader classLoader = clazz.getClassLoader();
 
 			Method method = URLClassLoader.class.getDeclaredMethod(
 				"addURL", URL.class);
 			method.setAccessible(true);
 
 			for (Object object : project.getCompileClasspathElements()) {
-				String path = (String) object;
+				String path = (String)object;
 
-				method.invoke(classLoader, new File(path).toURI().toURL());
+				File file = new File(path);
+
+				URI uri = file.getURI();
+
+				method.invoke(classLoader, uri.toURL());
 			}
 		}
 	}
