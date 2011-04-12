@@ -579,6 +579,11 @@ portletURL.setParameter("tabs1", tabs1);
 		window,
 		'<portlet:namespace />expireArticles',
 		function() {
+			if (Liferay.Util.containsArticleUnderWorkflowProcess(Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds"), document.<portlet:namespace />fm, '<%= LanguageUtil.get(pageContext, WorkflowConstants.toLabel(WorkflowConstants.STATUS_PENDING)) %>')) {
+				alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-expire-article-what-is-currently-in-the-workflow") %>');
+				return false;
+			}
+
 			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-expire-the-selected-web-content") %>')) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
 				document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";

@@ -173,6 +173,33 @@
 			}
 		},
 
+		containsArticleUnderWorkflowProcess: function(articleIds, form, pendingString) {
+			articleIds = articleIds.split(',');
+
+			var foundPendingArticle = false;
+			var statusColumnClass = 'col-4';
+			var articleIdColumnClass = 'col-2';
+
+			form = AUI().one(form);
+
+			if (form) {
+				form.all('td[class*=' + articleIdColumnClass + ']').each(
+					function(item, index, collection) {
+						if (isArray(articleIds)) {
+							for (i = 0; i < articleIds.length; i++) {
+								if ((articleIds[i].indexOf(item.text().trim()) != -1) && (item.next('td[class*=' + statusColumnClass + ']').text().trim() == pendingString)) {
+									foundPendingArticle = true;
+									break;
+								}
+							}
+						}
+					}
+				);
+			}
+
+			return foundPendingArticle;
+		},
+
 		disableEsc: function() {
 			if ((document.all) && (event.keyCode == 27)) {
 				event.returnValue = false;
