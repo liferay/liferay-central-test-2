@@ -60,6 +60,7 @@ String newArticleId = ParamUtil.getString(request, "newArticleId");
 String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3;
 
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleConstants.DEFAULT_VERSION);
+double editVersion = (article == null) ? version : article.getVersion();
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
@@ -307,7 +308,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
-	<aui:input name="version" type="hidden" value="<%= version %>" />
+	<aui:input name="version" type="hidden" value="<%= editVersion %>" />
 	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 	<aui:input name="content" type="hidden" />
 	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
