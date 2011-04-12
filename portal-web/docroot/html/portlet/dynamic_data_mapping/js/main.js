@@ -326,7 +326,7 @@ AUI().add(
 				}
 			],
 
-			DDM: [
+			DDM_STRUCTURE: [
 				{
 					fieldLabel: Liferay.Language.get('boolean'),
 					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-checkbox',
@@ -355,12 +355,6 @@ AUI().add(
 					type: 'ddm-number'
 				},
 				{
-					fieldLabel: Liferay.Language.get('separator'),
-					iconClass: 'aui-form-builder-field-icon ddm-field-icon-separator',
-					label: Liferay.Language.get('separator'),
-					type: 'ddm-separator'
-				},
-				{
 					fieldLabel: Liferay.Language.get('radio'),
 					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-radio',
 					label: Liferay.Language.get('radio'),
@@ -381,6 +375,27 @@ AUI().add(
 					fieldLabel: Liferay.Language.get('text-box'),
 					label: Liferay.Language.get('text-box'),
 					type: 'textarea'
+				}
+			],
+			
+			DDM_TEMPLATE: [
+				{
+					fieldLabel: Liferay.Language.get('button'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-button',
+					label: Liferay.Language.get('button'),
+					type: 'button'
+				},
+				{
+					fieldLabel: Liferay.Language.get('separator'),
+					iconClass: 'aui-form-builder-field-icon ddm-field-icon-separator',
+					label: Liferay.Language.get('separator'),
+					type: 'ddm-separator'
+				},
+				{
+					fieldLabel: Liferay.Language.get('fieldset'),
+					iconClass: 'aui-form-builder-field-icon aui-form-builder-field-icon-fieldset',
+					label: Liferay.Language.get('fieldset'),
+					type: 'fieldset'
 				}
 			]
 		};

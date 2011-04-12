@@ -27,14 +27,30 @@ DDMStructure structure = (DDMStructure)row.getObject();
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="availableFields" value="Liferay.FormBuilder.AVAILABLE_FIELDS.DDM" />
 			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
 			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
+			<portlet:param name="availableFields" value="Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
 			image="edit"
 			url="<%= editURL %>"
+		/>
+	</c:if>
+
+	<c:if test="<%= DDMStructurePermission.contains(permissionChecker, structure, ActionKeys.UPDATE) %>">
+		<portlet:renderURL var="manageViewURL">
+			<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
+			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="view"
+			message="manage-templates"
+			url="<%= manageViewURL %>"
 		/>
 	</c:if>
 

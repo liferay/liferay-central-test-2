@@ -585,7 +585,16 @@
 			<forward name="portlet.dynamic_data_mapping.error" path="portlet.dynamic_data_mapping.error" />
 		</action>
 
+		<action path="/dynamic_data_mapping/edit_template" type="com.liferay.portlet.dynamicdatamapping.action.EditTemplateAction">
+			<forward name="portlet.dynamic_data_mapping.edit_template" path="portlet.dynamic_data_mapping.edit_template" />
+			<forward name="portlet.dynamic_data_mapping.error" path="portlet.dynamic_data_mapping.error" />
+		</action>
+		
+		<action path="/dynamic_data_mapping/edit_template_script" forward="portlet.dynamic_data_mapping.edit_template_script" />
+
 		<action path="/dynamic_data_mapping/view" forward="portlet.dynamic_data_mapping.view" />
+
+		<action path="/dynamic_data_mapping/view_template" forward="portlet.dynamic_data_mapping.view_template" />
 
 		<!-- Enterprise Admin -->
 

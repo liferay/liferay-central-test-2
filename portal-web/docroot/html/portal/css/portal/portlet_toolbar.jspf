@@ -62,6 +62,10 @@
 	background-image: url(<%= themeImagesPath %>/common/add.png);
 }
 
+.lfr-portlet-toolbar .lfr-toolbar-button.add-template a {
+	background-image: url(<%= themeImagesPath %>/common/add_template.png);
+}
+
 .lfr-portlet-toolbar .lfr-toolbar-button.custom-attributes-button a {
 	background-image: url(<%= themeImagesPath %>/common/attributes.png);
 }
@@ -72,4 +76,8 @@
 
 .lfr-portlet-toolbar .lfr-toolbar-button.export-button a {
 	background-image: url(<%= themeImagesPath %>/common/export.png);
+}
+
+.lfr-portlet-toolbar .lfr-toolbar-button.view-templates a {
+	background-image: url(<%= themeImagesPath %>/common/view_templates.png);
 }

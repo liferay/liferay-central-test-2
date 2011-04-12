@@ -72,4 +72,14 @@
 	.lfr-ddm-search-form .aui-column {
 		margin-right: 10px;
 	}
+
+	.lfr-template-editor {
+		.aui-field-element, .aui-field-content, .aui-field-input-text {
+			display: block;
+		}
+
+		.aui-field-input-text {
+			height: 400px;
+		}
+	}
 }

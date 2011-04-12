@@ -17,46 +17,64 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "structures");
+String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
+
+String backURL = ParamUtil.getString(request, "backURL");
+
+String structureKey = ParamUtil.getString(request, "structureKey");
+
+DDMStructure structure = null;
+
+if (Validator.isNotNull(structureKey)) {
+	structure = DDMStructureLocalServiceUtil.getStructure(scopeGroupId, structureKey);
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/dynamic_data_mapping/view");
+portletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("structureKey", structureKey);
 %>
 
+<c:if test="<%= (structure != null) %>">
+	<liferay-ui:header
+		title='<%= LanguageUtil.format(pageContext, "templates-for-structure-x", structure.getName(), false) %>'
+		backURL="<%= backURL %>"
+	/>
+</c:if>
+
 <liferay-ui:tabs
-	names="structures"
+	names="templates"
 	portletURL="<%= portletURL %>"
 />
 
-<liferay-util:include page="/html/portlet/dynamic_data_mapping/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="view-all" />
+<liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">
+	<liferay-util:param name="structureKey" value="<%= structureKey %>" />
 </liferay-util:include>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<liferay-ui:search-form
-		page="/html/portlet/dynamic_data_mapping/structure_search.jsp"
+		page="/html/portlet/dynamic_data_mapping/template_search.jsp"
 	/>
 </aui:form>
 
 <div class="separator"></div>
 
 <liferay-ui:search-container
-	searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
+	searchContainer="<%= new TemplateSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-container-results>
-		<%@ include file="/html/portlet/dynamic_data_mapping/structure_search_results.jspf" %>
+		<%@ include file="/html/portlet/dynamic_data_mapping/template_search_results.jspf" %>
 	</liferay-ui:search-container-results>
 
 	<liferay-ui:search-container-row
-		className="com.liferay.portlet.dynamicdatamapping.model.DDMStructure"
-		keyProperty="structureId"
-		modelVar="structure"
+		className="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate"
+		keyProperty="templateId"
+		modelVar="template"
 	>
 		<liferay-ui:search-container-column-text
 			name="id"
-			property="structureKey"
+			property="templateId"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -65,20 +83,14 @@ portletURL.setParameter("tabs1", tabs1);
 		/>
 
 		<liferay-ui:search-container-column-text
-			name="storage-type"
-			value="<%= LanguageUtil.get(pageContext, structure.getStorageType()) %>"
+			name="type"
+			value="<%= LanguageUtil.get(pageContext, template.getType()) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			name="type"
-		>
-
-			<%
-			buffer.append(ResourceActionsUtil.getModelResource(locale, structure.getClassName()));
-			%>
-
-		</liferay-ui:search-container-column-text>
+			name="language"
+			value="<%= LanguageUtil.get(pageContext, template.getLanguage()) %>"
+		/>
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"
@@ -86,14 +98,14 @@ portletURL.setParameter("tabs1", tabs1);
 		>
 
 			<%
-			buffer.append(dateFormatDateTime.format(structure.getModifiedDate()));
+			buffer.append(dateFormatDateTime.format(template.getModifiedDate()));
 			%>
 
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-jsp
 			align="right"
-			path="/html/portlet/dynamic_data_mapping/structure_action.jsp"
+			path="/html/portlet/dynamic_data_mapping/template_action.jsp"
 		/>
 	</liferay-ui:search-container-row>
 

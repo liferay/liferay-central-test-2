@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
 String availableFields = ParamUtil.getString(request, "availableFields");
@@ -30,7 +31,7 @@ long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId
 String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
 String newStructureKey = ParamUtil.getString(request, "newStructureKey");
 
-String xsd = BeanParamUtil.getString(structure, request, "xsd");
+String script = BeanParamUtil.getString(structure, request, "xsd");
 %>
 
 <liferay-portlet:actionURL var="editStructureURL" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>">
@@ -44,7 +45,7 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	<aui:input name="callback" type="hidden" value="<%= callback %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
-	<aui:input name="xsd" type="hidden" />
+	<aui:input name="script" type="hidden" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
@@ -53,24 +54,30 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
+	<liferay-ui:header
+		title='<%= (structure != null) ? structure.getName() : "new-structure"  %>'
+		backURL="<%= backURL %>"
+	/>
+
 	<aui:model-context bean="<%= structure %>" model="<%= DDMStructure.class %>" />
 
-	<aui:input name="name" />
+	<aui:fieldset>
+		<aui:input name="name" />
 
-	<liferay-ui:panel-container cssClass="lfr-structure-entry-details-container" extended="<%= false %>" id="structureDetailsPanelContainer" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="structureDetailsSectionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "details") %>'>
-			<aui:layout cssClass="lfr-ddm-types-form-column">
-				<aui:column first="<%= true %>">
-					<aui:field-wrapper>
-						<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
-							<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DDLEntry.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DDLEntry.class.getName()) %>" />
-						</aui:select>
-					</aui:field-wrapper>
-				</aui:column>
+		<liferay-ui:panel-container cssClass="lfr-structure-entry-details-container" extended="<%= false %>" id="structureDetailsPanelContainer" persistState="<%= true %>">
+			<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="structureDetailsSectionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "details") %>'>
+				<aui:layout cssClass="lfr-ddm-types-form-column">
+					<aui:column first="<%= true %>">
+						<aui:field-wrapper>
+							<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
+								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DDLEntry.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DDLEntry.class.getName()) %>" />
+							</aui:select>
+						</aui:field-wrapper>
+					</aui:column>
 
-				<aui:column>
-					<aui:field-wrapper>
-						<aui:select disabled="<%= structure != null %>" name="storageType">
+					<aui:column>
+						<aui:field-wrapper>
+							<aui:select disabled="<%= structure != null %>" name="storageType">
 
 							<%
 							for (StorageType storageType : StorageType.values()) {
@@ -82,94 +89,39 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 							}
 							%>
 
-						</aui:select>
-					</aui:field-wrapper>
-				</aui:column>
-			</aui:layout>
+							</aui:select>
+						</aui:field-wrapper>
+					</aui:column>
+				</aui:layout>
 
-			<aui:input name="description" />
+				<aui:input name="description" />
 
-			<c:choose>
-				<c:when test="<%= structure == null %>">
-					<c:choose>
-						<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
-							<aui:input name="newStructureKey" type="hidden" />
-							<aui:input name="autoStructureKey" type="hidden" value="<%= true %>" />
-						</c:when>
-						<c:otherwise>
-							<aui:input cssClass="lfr-input-text-container" field="structureKey" fieldParam="newStructureKey" label="id" name="newStructureKey" value="<%= newStructureKey %>" />
-
-							<aui:input label="autogenerate-id" name="autoStructureKey" type="checkbox" value="<%= true %>" />
-						</c:otherwise>
-					</c:choose>
-				</c:when>
-				<c:otherwise>
-					<aui:field-wrapper label="id">
-						<%= structureKey %>
-					</aui:field-wrapper>
-				</c:otherwise>
-			</c:choose>
-		</liferay-ui:panel>
-	</liferay-ui:panel-container>
-</aui:form>
-
-<div class="separator"><!-- --></div>
-
-<div class="aui-widget aui-component aui-form-builder" id="<portlet:namespace />formBuilder">
-	<div class="aui-form-builder-content">
-		<div class="aui-widget-bd aui-helper-clearfix">
-			<ul class="aui-form-builder-drop-container">
 				<c:choose>
-					<c:when test="<%= Validator.isNotNull(xsd) %>">
-						<li class="form-fields-loading">
-							<div class="aui-loadingmask-message">
-								<div class="aui-loadingmask-message-content"><liferay-ui:message key="loading" />...</div>
-							</div>
-						</li>
+					<c:when test="<%= structure == null %>">
+						<c:choose>
+							<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
+								<aui:input name="newStructureKey" type="hidden" />
+								<aui:input name="autoStructureKey" type="hidden" value="<%= true %>" />
+							</c:when>
+							<c:otherwise>
+								<aui:input cssClass="lfr-input-text-container" field="structureKey" fieldParam="newStructureKey" label="id" name="newStructureKey" value="<%= newStructureKey %>" />
+
+								<aui:input label="autogenerate-id" name="autoStructureKey" type="checkbox" value="<%= true %>" />
+							</c:otherwise>
+						</c:choose>
 					</c:when>
 					<c:otherwise>
-						<li class="aui-form-builder-default-message"><liferay-ui:message key="drop-fields-here" /></li>
+						<aui:field-wrapper label="id">
+							<%= structureKey %>
+						</aui:field-wrapper>
 					</c:otherwise>
 				</c:choose>
-			</ul>
+			</liferay-ui:panel>
+		</liferay-ui:panel-container>
+	</aui:fieldset>
+</aui:form>
 
-			<div class="aui-form-builder-tabs-container">
-				<ul class="aui-tabview-list aui-widget-hd">
-					<li class="aui-component aui-form-builder-tab-add aui-state-active aui-state-default aui-tab aui-tab-active aui-widget">
-						<span class="aui-tab-content"><a class="aui-tab-label" href="javascript:;"><liferay-ui:message key="add-field" /></a></span>
-					</li>
-					<li class="aui-component aui-form-builder-tab-settings aui-tab aui-state-default aui-widget">
-						<span class="aui-tab-content"><a class="aui-tab-label" href="javascript:;"><liferay-ui:message key="field-settings" /></a></span>
-					</li>
-				</ul>
-
-				<div class="aui-tabview-content aui-widget-bd">
-					<div class="aui-tabview-content-item">
-						<ul class="aui-form-builder-drag-container"></ul>
-					</div>
-
-					<div class="aui-helper-hidden aui-tabview-content-item">
-						<form class="aui-form-builder-settings"></form>
-
-						<div class="aui-button-row aui-form-builder-settings-buttons">
-							<span class="aui-button aui-button-submit aui-priority-primary aui-state-positive">
-								<span class="aui-button-content">
-									<input type="button" value="<liferay-ui:message key="save" />" class="aui-button-input aui-form-builder-button-save">
-								</span>
-							</span>
-
-							<span class="aui-button aui-button-submit aui-priority-secondary aui-state-positive">
-								<span class="aui-button-content">
-									<input class="aui-button-input aui-form-builder-button-close" type="button" value="<liferay-ui:message key="close" />">
-								</span>
-							</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<%@ include file="/html/portlet/dynamic_data_mapping/form_builder.jspf" %>
 
 <aui:button-row>
 	<aui:button onClick='<%= renderResponse.getNamespace() + "saveStructure();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
@@ -179,32 +131,12 @@ String xsd = BeanParamUtil.getString(structure, request, "xsd");
 	</c:if>
 </aui:button-row>
 
-<%@ include file="/html/portlet/dynamic_data_mapping/custom_fields.jspf" %>
-
 <aui:script use="liferay-portlet-dynamic-data-mapping">
-	var formBuilder = new Liferay.FormBuilder(
-		{
-			<c:if test="<%= Validator.isNotNull(availableFields) %>">
-				availableFields: A.Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
-			</c:if>
-
-			boundingBox: '#<portlet:namespace />formBuilder',
-
-			<c:if test="<%= Validator.isNotNull(xsd) %>">
-				fields: <%= DDMXSDUtil.getJSONArray(xsd) %>,
-			</c:if>
-
-			portletNamespace: '<portlet:namespace />',
-			portletResourceNamespace: '<%= HtmlUtil.escapeJS(portletResourceNamespace) %>',
-			srcNode: '#<portlet:namespace />formBuilder .aui-form-builder-content'
-		}
-	).render();
-
 	Liferay.provide(
 		window,
 		'<portlet:namespace />saveStructure',
 		function() {
-			document.<portlet:namespace />fm.<portlet:namespace />xsd.value = formBuilder.getXSD();
+			document.<portlet:namespace />fm.<portlet:namespace />script.value = window.<portlet:namespace />formBuilder.getXSD();
 
 			<c:if test="<%= structure == null %>">
 				document.<portlet:namespace />fm.<portlet:namespace />structureKey.value = document.<portlet:namespace />fm.<portlet:namespace />newStructureKey.value;
