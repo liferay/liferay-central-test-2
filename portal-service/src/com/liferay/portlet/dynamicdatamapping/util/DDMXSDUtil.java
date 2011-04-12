@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import javax.servlet.jsp.PageContext;
 
@@ -38,6 +39,13 @@ public class DDMXSDUtil {
 		return getDDMXSD().getHTML(pageContext, document);
 	}
 
+	public static String getHTML(
+			PageContext pageContext, Document document, Fields fields)
+		throws Exception {
+
+		return getDDMXSD().getHTML(pageContext, document, fields);
+	}
+
 	public static String getHTML(PageContext pageContext, Element element)
 		throws Exception {
 
@@ -48,6 +56,13 @@ public class DDMXSDUtil {
 		throws Exception {
 
 		return getDDMXSD().getHTML(pageContext, xml);
+	}
+
+	public static String getHTML(
+			PageContext pageContext, String xml, Fields fields)
+		throws Exception {
+
+		return getDDMXSD().getHTML(pageContext, xml, fields);
 	}
 
 	public static JSONArray getJSONArray(Document document)

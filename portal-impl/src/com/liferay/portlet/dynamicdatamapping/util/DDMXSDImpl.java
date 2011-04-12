@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
@@ -62,7 +63,21 @@ public class DDMXSDImpl implements DDMXSD {
 		return getHTML(pageContext, document.getRootElement());
 	}
 
+	public String getHTML(
+			PageContext pageContext, Document document, Fields fields)
+		throws Exception {
+
+		return getHTML(pageContext, document.getRootElement(), fields);
+	}
+
 	public String getHTML(PageContext pageContext, Element element)
+		throws Exception {
+
+		return getHTML(pageContext, element, null);
+	}
+
+	public String getHTML(
+			PageContext pageContext, Element element, Fields fields)
 		throws Exception {
 
 		StringBundler sb = new StringBundler();
@@ -74,10 +89,17 @@ public class DDMXSDImpl implements DDMXSD {
 			FreeMarkerContext freeMarkerContext = getFreeMarkerContext(
 				dynamicElementElement);
 
+			if (fields != null) {
+				freeMarkerContext.put("fields", fields);
+			}
+
 			Map<String, Object> field =
 				(Map<String, Object>)freeMarkerContext.get("field");
 
-			field.put("children", getHTML(pageContext, dynamicElementElement));
+			String childrenHTML =
+				getHTML(pageContext, dynamicElementElement, fields);
+
+			field.put("children", childrenHTML);
 
 			String fieldNamespace = dynamicElementElement.attributeValue(
 				"fieldNamespace", _DEFAULT_NAMESPACE);
@@ -105,7 +127,13 @@ public class DDMXSDImpl implements DDMXSD {
 	public String getHTML(PageContext pageContext, String xml)
 		throws Exception {
 
-		return getHTML(pageContext, SAXReaderUtil.read(xml));
+		return getHTML(pageContext, xml, null);
+	}
+
+	public String getHTML(PageContext pageContext, String xml, Fields fields)
+		throws Exception {
+
+		return getHTML(pageContext, SAXReaderUtil.read(xml), fields);
 	}
 
 	public JSONArray getJSONArray(Document document) throws JSONException {
