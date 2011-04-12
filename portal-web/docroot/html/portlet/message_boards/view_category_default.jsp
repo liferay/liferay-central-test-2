@@ -36,7 +36,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	%>
 
 	<c:if test="<%= categoriesCount > 0 %>">
-		<liferay-ui:panel collapsible="<%= categoryPanelCollapsible %>" extended="<%= categoryPanelExtended %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (category != null) ? "subcategories" : "categories") %>'>
+		<liferay-ui:panel collapsible="<%= categoriesPanelCollapsible %>" extended="<%= categoriesPanelExtended %>" id="messageBoardsCategoriesPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, (category != null) ? "subcategories" : "categories") %>'>
 			<liferay-ui:search-container
 				curParam="cur1"
 				deltaConfigurable="<%= false %>"
@@ -69,7 +69,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		</liferay-ui:panel>
 	</c:if>
 
-	<liferay-ui:panel collapsible="<%= threadPanelCollapsible %>" cssClass="threads-panel" extended="<%=  threadPanelExtended %>" id="messageBoardsThreadsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "threads") %>'>
+	<liferay-ui:panel collapsible="<%= threadsPanelCollapsible %>" cssClass="threads-panel" extended="<%= threadsPanelExtended %>" id="messageBoardsThreadsPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "threads") %>'>
 		<liferay-ui:search-container
 			curParam="cur2"
 			emptyResultsMessage="there-are-no-threads-in-this-category"
