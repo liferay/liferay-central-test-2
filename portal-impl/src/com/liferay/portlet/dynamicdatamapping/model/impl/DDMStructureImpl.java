@@ -85,6 +85,29 @@ public class DDMStructureImpl
 		_fieldsMap = null;
 	}
 
+	private Map<String, String> _getField(Element element) {
+		Map<String, String> field = new HashMap<String, String>();
+
+		Element metaDataElement = element.element("meta-data");
+
+		if (metaDataElement != null) {
+			List<Element> childMetaDataElements = metaDataElement.elements();
+
+			for (Element childMetaDataElement : childMetaDataElements) {
+				String name = childMetaDataElement.attributeValue("name");
+				String value = childMetaDataElement.getText();
+
+				field.put(name, value);
+			}
+		}
+
+		for (Attribute attribute : element.attributes()) {
+			field.put(attribute.getName(), attribute.getValue());
+		}
+
+		return field;
+	}
+
 	private Map<String, Map<String, String>> _getFieldsMap() {
 		if (_fieldsMap == null) {
 			synchronized (this) {
@@ -105,7 +128,7 @@ public class DDMStructureImpl
 
 							String name = element.attributeValue("name");
 
-							_fieldsMap.put(name, getField(element));
+							_fieldsMap.put(name, _getField(element));
 						}
 					}
 					catch (Exception e) {
@@ -116,26 +139,6 @@ public class DDMStructureImpl
 		}
 
 		return _fieldsMap;
-	}
-
-	protected Map<String, String> getField(Element element) {
-		Map<String, String> field = new HashMap<String, String>();
-
-		Element metadataElement = element.element("meta-data");
-
-		if (metadataElement != null) {
-			for (Element metadataEntry : metadataElement.elements()) {
-				field.put(
-					metadataEntry.attributeValue("name"),
-					metadataEntry.getText());
-			}
-		}
-
-		for (Attribute attribute : element.attributes()) {
-			field.put(attribute.getName(), attribute.getValue());
-		}
-
-		return field;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
