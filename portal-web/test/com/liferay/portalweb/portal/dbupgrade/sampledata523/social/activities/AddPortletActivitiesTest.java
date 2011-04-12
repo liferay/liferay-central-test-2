@@ -52,8 +52,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='Social-Activities']/p/a")) {
+				if (selenium.isElementPresent("//div[@title='Activities']/p/a")) {
 					break;
 				}
 			}
@@ -64,7 +63,7 @@ public class AddPortletActivitiesTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@id='Social-Activities']/p/a",
+		selenium.clickAt("//div[@title='Activities']/p/a",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
