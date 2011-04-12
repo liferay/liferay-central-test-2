@@ -19,7 +19,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -55,6 +57,30 @@ public class ActionUtil {
 			portletRequest);
 
 		getStructure(request);
+	}
+
+	public static void getTemplate(HttpServletRequest request)
+		throws Exception {
+
+		long templateId = ParamUtil.getLong(request, "templateId");
+
+		DDMTemplate template = null;
+
+		if (templateId > 0) {
+			template = DDMTemplateLocalServiceUtil.getDDMTemplate(templateId);
+		}
+
+		request.setAttribute(
+			WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_VIEW, template);
+	}
+
+	public static void getTemplate(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getTemplate(request);
 	}
 
 }

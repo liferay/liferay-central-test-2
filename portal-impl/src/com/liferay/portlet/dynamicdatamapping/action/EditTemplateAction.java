@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -23,17 +24,19 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
-import com.liferay.portlet.dynamicdatamapping.StructureDuplicateElementException;
-import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
-import com.liferay.portlet.dynamicdatamapping.StructureNameException;
-import com.liferay.portlet.dynamicdatamapping.StructureStructureKeyException;
-import com.liferay.portlet.dynamicdatamapping.StructureXsdException;
+import com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
+import com.liferay.portlet.dynamicdatamapping.TemplateNameException;
+import com.liferay.portlet.dynamicdatamapping.TemplateScriptException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateServiceUtil;
+import com.liferay.util.JS;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -47,11 +50,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Brian Wing Shun Chan
- * @author Bruno Basto
  * @author Eduardo Lundgren
  */
-public class EditStructureAction extends PortletAction {
+public class EditTemplateAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -60,28 +61,27 @@ public class EditStructureAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		DDMStructure structure = null;
+		DDMTemplate template = null;
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				structure = updateStructure(actionRequest);
+				template = updateTemplate(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteStructure(actionRequest);
+				deleteTemplate(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
 				String redirect = ParamUtil.getString(
 					actionRequest, "redirect");
 
-				if (structure != null) {
+				if (template != null) {
 					boolean saveAndContinue = ParamUtil.getBoolean(
 						actionRequest, "saveAndContinue");
 
 					if (saveAndContinue) {
 						redirect = getSaveAndContinueRedirect(
-							portletConfig, actionRequest, structure,
-							redirect);
+							portletConfig, actionRequest, template, redirect);
 					}
 				}
 
@@ -89,18 +89,15 @@ public class EditStructureAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchStructureException ||
+			if (e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.dynamic_data_mapping.error");
 			}
-			else if (e instanceof StructureDuplicateElementException ||
-					 e instanceof StructureDuplicateStructureKeyException ||
-					 e instanceof StructureNameException ||
-					 e instanceof StructureStructureKeyException ||
-					 e instanceof StructureXsdException) {
+			else if (e instanceof TemplateNameException ||
+					 e instanceof TemplateScriptException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
@@ -118,14 +115,16 @@ public class EditStructureAction extends PortletAction {
 		try {
 			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
+			ActionUtil.getStructure(renderRequest);
+
 			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getStructure(renderRequest);
+				ActionUtil.getTemplate(renderRequest);
 			}
 		}
-		catch (NoSuchStructureException nsse) {
+		catch (NoSuchTemplateException nssve) {
 
-			// Let this slide because the user can manually input a structure
-			// key for a new structure that does not yet exist
+			// Let this slide because the user can manually input a
+			// templateId for a new template that does not yet exist
 
 		}
 		catch (Exception e) {
@@ -145,22 +144,22 @@ public class EditStructureAction extends PortletAction {
 		return mapping.findForward(
 			getForward(
 				renderRequest,
-				"portlet.dynamic_data_mapping.edit_structure"));
+				"portlet.dynamic_data_mapping.edit_template"));
 	}
 
-	protected void deleteStructure(ActionRequest actionRequest)
+	protected void deleteTemplate(ActionRequest actionRequest)
 		throws Exception {
 
-		long structureId = ParamUtil.getLong(actionRequest, "structureId");
+		long templateId = ParamUtil.getLong(actionRequest, "templateId");
 
-		if (structureId > 0) {
-			DDMStructureServiceUtil.deleteStructure(structureId);
+		if (templateId > 0) {
+			DDMTemplateServiceUtil.deleteTemplate(templateId);
 		}
 	}
 
 	protected String getSaveAndContinueRedirect(
 			PortletConfig portletConfig, ActionRequest actionRequest,
-			DDMStructure structure, String redirect)
+			DDMTemplate template, String redirect)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -169,6 +168,8 @@ public class EditStructureAction extends PortletAction {
 		String availableFields = ParamUtil.getString(
 			actionRequest, "availableFields");
 		String callback = ParamUtil.getString(actionRequest, "callback");
+		String structureKey = ParamUtil.getString(
+			actionRequest, "structureKey");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
@@ -178,51 +179,69 @@ public class EditStructureAction extends PortletAction {
 
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter(
-			"struts_action", "/dynamic_data_mapping/edit_structure");
+			"struts_action", "/dynamic_data_mapping/edit_template");
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter("availableFields", availableFields, false);
 		portletURL.setParameter("callback", callback, false);
 		portletURL.setParameter(
-			"groupId", String.valueOf(structure.getGroupId()), false);
+			"groupId", String.valueOf(template.getGroupId()), false);
+		portletURL.setParameter("structureKey", structureKey, false);
 		portletURL.setParameter(
-			"structureKey", structure.getStructureKey(), false);
+			"templateId", String.valueOf(template.getTemplateId()), false);
+		portletURL.setParameter("type", template.getType(), false);
 
 		return portletURL.toString();
 	}
 
-	protected DDMStructure updateStructure(ActionRequest actionRequest)
+	protected DDMTemplate updateTemplate(ActionRequest actionRequest)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long classNameId = ParamUtil.getLong(actionRequest, "classNameId");
+		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
+
+		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
+
 		String structureKey = ParamUtil.getString(
-			actionRequest, "structureKey");
-		boolean autoStructureKey = ParamUtil.getBoolean(
-			actionRequest, "autoStructureKey");
-		String name = ParamUtil.getString(actionRequest, "name");
-		String description = ParamUtil.getString(actionRequest, "description");
-		String script = ParamUtil.getString(actionRequest, "script");
-		String storageType = ParamUtil.getString(actionRequest, "storageType");
+			uploadRequest, "structureKey");
+		long templateId = ParamUtil.getLong(uploadRequest, "templateId");
+		String name = ParamUtil.getString(uploadRequest, "name");
+		String description = ParamUtil.getString(uploadRequest, "description");
+
+		String type = ParamUtil.getString(uploadRequest, "type");
+
+		String script = ParamUtil.getString(uploadRequest, "script");
+		String scriptContent = JS.decodeURIComponent(
+			ParamUtil.getString(uploadRequest, "scriptContent"));
+
+		if (Validator.isNull(script)) {
+			script = scriptContent;
+		}
+
+		String language = ParamUtil.getString(
+			uploadRequest, "language", DDMTemplateConstants.LANG_TYPE_VM);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DDMStructure.class.getName(), actionRequest);
+			DDMTemplate.class.getName(), actionRequest);
 
-		DDMStructure structure = null;
+		DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
+			groupId, structureKey);
+
+		DDMTemplate template = null;
 
 		if (cmd.equals(Constants.ADD)) {
-			structure = DDMStructureServiceUtil.addStructure(
-				groupId, classNameId, structureKey, autoStructureKey, name,
-				description, script, storageType, serviceContext);
+			template = DDMTemplateServiceUtil.addTemplate(
+				structure.getStructureId(), name, description, type, language,
+				script, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
-			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, name, description, script,
+			template = DDMTemplateServiceUtil.updateTemplate(
+				templateId, name, description, type, language, script,
 				serviceContext);
 		}
 
-		return structure;
+		return template;
 	}
 
 }

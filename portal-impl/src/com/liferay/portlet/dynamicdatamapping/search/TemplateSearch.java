@@ -15,7 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping.search;
 
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Eduardo Lundgren
  */
-public class StructureSearch extends SearchContainer<DDMStructure> {
+public class TemplateSearch extends SearchContainer<DDMTemplate> {
 
 	static List<String> headerNames = new ArrayList<String>();
 	static Map<String, String> orderableHeaders = new HashMap<String, String>();
@@ -36,39 +36,29 @@ public class StructureSearch extends SearchContainer<DDMStructure> {
 	static {
 		headerNames.add("id");
 		headerNames.add("name");
-		headerNames.add("classNameId");
-		headerNames.add("storageType");
+		headerNames.add("type");
+		headerNames.add("language");
 		headerNames.add("modified-date");
 	}
 
-	public static final String EMPTY_RESULTS_MESSAGE =
-		"there-are-no-structures";
+	public static final String EMPTY_RESULTS_MESSAGE = "there-are-no-templates";
 
-	public StructureSearch(
+	public TemplateSearch(
 		PortletRequest portletRequest, PortletURL iteratorURL) {
 
 		super(
-			portletRequest, new StructureDisplayTerms(portletRequest),
-			new StructureSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
+			portletRequest, new TemplateDisplayTerms(portletRequest),
+			new TemplateSearchTerms(portletRequest), DEFAULT_CUR_PARAM,
 			DEFAULT_DELTA, iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
 
-		StructureDisplayTerms displayTerms =
-			(StructureDisplayTerms)getDisplayTerms();
+		TemplateDisplayTerms displayTerms =
+			(TemplateDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			StructureDisplayTerms.CLASS_NAME_ID,
-			String.valueOf(displayTerms.getClassNameId()));
+			TemplateDisplayTerms.NAME, displayTerms.getName());
 		iteratorURL.setParameter(
-			StructureDisplayTerms.DESCRIPTION,
+			TemplateDisplayTerms.DESCRIPTION,
 			displayTerms.getDescription());
-		iteratorURL.setParameter(
-			StructureDisplayTerms.NAME, displayTerms.getName());
-		iteratorURL.setParameter(
-			StructureDisplayTerms.STORAGE_TYPE,
-			displayTerms.getStorageType());
-		iteratorURL.setParameter(
-			StructureDisplayTerms.STRUCTURE_KEY,
-			displayTerms.getStructureKey());
 	}
 
 }
