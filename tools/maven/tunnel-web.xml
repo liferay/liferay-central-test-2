@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<name>Liferay Tunnel Web<</name>
 	<version>@version@</version>
-	<description>Contains the portal remote interfaces.</description>
+	<description>Contains the remote endpoints for the portal services.</description>
 	<url>http://www.liferay.com</url>
 	<developers>
 		<developer>
