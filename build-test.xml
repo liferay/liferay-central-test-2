@@ -2566,6 +2566,8 @@ file.
 			<property name="class" value="ServiceTestSuite" />
 		</ant>
 
+		<antcall target="rebuild-database" inheritAll="false" />
+
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="PersistenceTestSuite" />
 		</ant>
