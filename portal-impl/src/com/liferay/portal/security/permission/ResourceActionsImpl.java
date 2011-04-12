@@ -87,6 +87,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		_portletModelResources = new HashMap<String, Set<String>>();
 		_portletResourceActions = new HashMap<String, List<String>>();
+		_portletResourceActionsFromFile = new HashMap<String, List<String>>();
 		_portletResourceCommunityDefaultActions =
 			new HashMap<String, List<String>>();
 		_portletResourceGuestDefaultActions =
@@ -333,9 +334,11 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 
 		synchronized (this) {
-			actions = getPortletMimeTypeActions(name);
+			actions.addAll(getActions(_portletResourceActionsFromFile, name));
 
 			if (!name.equals(PortletKeys.PORTAL)) {
+				actions.addAll(getPortletMimeTypeActions(name));
+
 				checkPortletActions(name, actions);
 			}
 
@@ -1015,7 +1018,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		name = portal.getJsSafePortletId(name);
 
 		List<String> supportsActions = readSupportsActions(
-			portletResourceElement, _portletResourceActions, name);
+			portletResourceElement, _portletResourceActionsFromFile, name);
 
 		supportsActions.addAll(getPortletMimeTypeActions(name));
 
@@ -1024,7 +1027,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 
 		supportsActions = setActions(
-			_portletResourceActions, name, supportsActions);
+				_portletResourceActionsFromFile, name, supportsActions);
 
 		readCommunityDefaultActions(
 			portletResourceElement, _portletResourceCommunityDefaultActions,
@@ -1181,6 +1184,7 @@ public class ResourceActionsImpl implements ResourceActions {
 	private Set<String> _portalModelResources;
 	private Map<String, Set<String>> _portletModelResources;
 	private Map<String, List<String>> _portletResourceActions;
+	private Map<String, List<String>> _portletResourceActionsFromFile;
 	private Map<String, List<String>> _portletResourceCommunityDefaultActions;
 	private Map<String, List<String>> _portletResourceGuestDefaultActions;
 	private Map<String, List<String>> _portletResourceGuestUnsupportedActions;
