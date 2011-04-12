@@ -96,8 +96,8 @@ public class DDMXSDImpl implements DDMXSD {
 			Map<String, Object> field =
 				(Map<String, Object>)freeMarkerContext.get("field");
 
-			String childrenHTML =
-				getHTML(pageContext, dynamicElementElement, fields);
+			String childrenHTML = getHTML(
+				pageContext, dynamicElementElement, fields);
 
 			field.put("children", childrenHTML);
 
