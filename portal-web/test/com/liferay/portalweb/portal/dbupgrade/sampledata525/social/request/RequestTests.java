@@ -27,21 +27,24 @@ public class RequestTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddUserSRlTest.class);
-		testSuite.addTestSuite(AddUserSRlPasswordTest.class);
-		testSuite.addTestSuite(AddUserSRl2Test.class);
-		testSuite.addTestSuite(AddUserSRl2PasswordTest.class);
+		testSuite.addTestSuite(AddUserSRqTest.class);
+		testSuite.addTestSuite(AddUserSRqPasswordTest.class);
+		testSuite.addTestSuite(AddUserSRq2Test.class);
+		testSuite.addTestSuite(AddUserSRq2PasswordTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(SRl_SignInTest.class);
-		testSuite.addTestSuite(SRl_AddPageSummaryTest.class);
-		testSuite.addTestSuite(SRl_AddPortletSummaryTest.class);
-		testSuite.addTestSuite(SRl_AddPageRequestsTest.class);
-		testSuite.addTestSuite(SRl_AddPortletRequestsTest.class);
-		testSuite.addTestSuite(SRl_AddPageFriendsTest.class);
-		testSuite.addTestSuite(SRl_AddPortletFriendsTest.class);
+		testSuite.addTestSuite(SRq_SignInTest.class);
+		testSuite.addTestSuite(SRq_AddPageSummaryTest.class);
+		testSuite.addTestSuite(SRq_AddPortletSummaryTest.class);
+		testSuite.addTestSuite(SRq_AddPageRequestsTest.class);
+		testSuite.addTestSuite(SRq_AddPortletRequestsTest.class);
+		testSuite.addTestSuite(SRq_AddPageFriendsTest.class);
+		testSuite.addTestSuite(SRq_AddPortletFriendsTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(SRl_SignInTest.class);
-		testSuite.addTestSuite(SRl_ViewFriendRequestTest.class);
+		testSuite.addTestSuite(SRq2_SignInTest.class);
+		testSuite.addTestSuite(SRq2_AddAsFriendTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(SRq_SignInTest.class);
+		testSuite.addTestSuite(SRq_ViewRequestsTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(SignInTest.class);
 
