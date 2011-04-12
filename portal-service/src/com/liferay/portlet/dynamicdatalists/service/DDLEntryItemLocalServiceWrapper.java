@@ -281,6 +281,19 @@ public class DDLEntryItemLocalServiceWrapper implements DDLEntryItemLocalService
 		return _ddlEntryItemLocalService.getEntryItems(entryId);
 	}
 
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntryItem> getEntryItems(
+		long entryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlEntryItemLocalService.getEntryItems(entryId, start, end,
+			orderByComparator);
+	}
+
+	public int getEntryItemsCount(long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlEntryItemLocalService.getEntryItemsCount(entryId);
+	}
+
 	public com.liferay.portlet.dynamicdatalists.model.DDLEntryItem updateEntryItem(
 		long entryItemId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,

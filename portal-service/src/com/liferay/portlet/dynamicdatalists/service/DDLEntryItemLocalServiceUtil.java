@@ -289,6 +289,18 @@ public class DDLEntryItemLocalServiceUtil {
 		return getService().getEntryItems(entryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntryItem> getEntryItems(
+		long entryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEntryItems(entryId, start, end, orderByComparator);
+	}
+
+	public static int getEntryItemsCount(long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEntryItemsCount(entryId);
+	}
+
 	public static com.liferay.portlet.dynamicdatalists.model.DDLEntryItem updateEntryItem(
 		long entryItemId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,

@@ -255,6 +255,16 @@ public interface DDLEntryItemLocalService {
 		long entryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLEntryItem> getEntryItems(
+		long entryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getEntryItemsCount(long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portlet.dynamicdatalists.model.DDLEntryItem updateEntryItem(
 		long entryItemId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
