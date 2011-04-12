@@ -21,7 +21,7 @@ EntryDisplayTerms displayTerms = new EntryDisplayTerms(renderRequest);
 %>
 
 <liferay-ui:search-toggle
-	id="toggle_id_entry_search"
+	id="toggle_id_dynamic_data_lists_entry_search"
 	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
 >

@@ -564,7 +564,7 @@
 			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
 		</action>
 
-		<action path="/dynamic_data_lists/select_structure" forward="portlet.dynamic_data_lists.select_structure" />
+		<action path="/dynamic_data_lists/select_dynamic_data_mapping_structure" forward="portlet.dynamic_data_lists.select_dynamic_data_mapping_structure" />
 
 		<action path="/dynamic_data_lists/view" forward="portlet.dynamic_data_lists.view" />
 

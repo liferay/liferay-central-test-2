@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
 <liferay-portlet:renderURL varImpl="portletURL">
-	<portlet:param name="struts_action" value="/dynamic_data_lists/select_structure" />
+	<portlet:param name="struts_action" value="/dynamic_data_lists/select_dynamic_data_mapping_structure" />
 </liferay-portlet:renderURL>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
@@ -35,7 +35,6 @@
 	<liferay-ui:search-container
 		searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 	>
-
 		<liferay-ui:search-container-results>
 			<%@ include file="/html/portlet/dynamic_data_mapping/structure_search_results.jspf" %>
 		</liferay-ui:search-container-results>

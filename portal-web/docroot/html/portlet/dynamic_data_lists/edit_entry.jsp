@@ -23,10 +23,8 @@ String backURL = ParamUtil.getString(request, "backURL");
 DDLEntry entry = (DDLEntry)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
-long groupId = BeanParamUtil.getLong(entry, request, "groupId", scopeGroupId);
 
-String entryKey = BeanParamUtil.getString(entry, request, "entryKey");
-String newEntryKey = ParamUtil.getString(request, "newEntryKey");
+long groupId = BeanParamUtil.getLong(entry, request, "groupId", scopeGroupId);
 
 long ddmStructureId = ParamUtil.getLong(request, "ddmStructureId");
 
@@ -34,22 +32,25 @@ if (entry != null) {
 	ddmStructureId = entry.getDDMStructureId();
 }
 
-String structureName = StringPool.BLANK;
+String ddmStructureName = StringPool.BLANK;
 
 if (Validator.isNotNull(ddmStructureId)) {
 	try {
-		DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(ddmStructureId);
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(ddmStructureId);
 
-		structureName = structure.getName();
+		ddmStructureName = ddmStructure.getName();
 	}
 	catch (NoSuchStructureException nsse) {
 	}
 }
+
+String entryKey = BeanParamUtil.getString(entry, request, "entryKey");
+String newEntryKey = ParamUtil.getString(request, "newEntryKey");
 %>
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	title='<%= (entry != null) ? entry.getName(locale) : "new-list-entry" %>'
+	title='<%= (entry != null) ? entry.getName(locale) : "new-list" %>'
 />
 
 <portlet:actionURL var="editEntryURL">
@@ -60,9 +61,9 @@ if (Validator.isNotNull(ddmStructureId)) {
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
-	<aui:input name="entryKey" type="hidden" value="<%= entryKey %>" />
-	<aui:input name="ddmStructureId" type="hidden" value="<%= ddmStructureId %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="ddmStructureId" type="hidden" value="<%= ddmStructureId %>" />
+	<aui:input name="entryKey" type="hidden" value="<%= entryKey %>" />
 
 	<liferay-ui:error exception="<%= EntryDDMStructureIdException.class %>" message="please-enter-valid-definition" />
 	<liferay-ui:error exception="<%= EntryDuplicateEntryKeyException.class %>" message="please-enter-a-unique-id" />
@@ -101,16 +102,14 @@ if (Validator.isNotNull(ddmStructureId)) {
 
 		<aui:field-wrapper label="definition">
 			<span id="<portlet:namespace />ddmStructureNameDisplay">
-
-				 <%= structureName %>
-
+				 <%= ddmStructureName %>
 			</span>
 
 			<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMStructureSelector();" %>' value="select" />
 		</aui:field-wrapper>
 
 		<aui:button-row>
-			<aui:button name="saveButton"  type="submit" value="save" />
+			<aui:button name="saveButton" type="submit" value="save" />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
@@ -126,7 +125,7 @@ if (Validator.isNotNull(ddmStructureId)) {
 					width:680
 				},
 				title: '<liferay-ui:message key="definition" />',
-				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_lists/select_structure" /></portlet:renderURL>'
+				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_lists/select_dynamic_data_mapping_structure" /></portlet:renderURL>'
 			}
 		);
 	}
@@ -173,6 +172,6 @@ if (entry != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-entry"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-list"), currentURL);
 }
 %>

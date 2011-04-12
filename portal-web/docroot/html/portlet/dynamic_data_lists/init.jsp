@@ -21,17 +21,17 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.EntryDuplicateEntryKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.EntryEntryKeyException" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.EntryNameException" %>
-<%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLEntry" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.NoSuchEntryException" %>
-<%@ page import="com.liferay.portlet.dynamicdatalists.search.EntrySearchTerms" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLEntry" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.EntryDisplayTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.EntrySearch" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.search.EntrySearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.permission.DDLEntryPermission" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
 
 <%
