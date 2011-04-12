@@ -194,10 +194,8 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("userGroupIds", userGroupIds);
 		document.addKeyword(
 			"street", streets.toArray(new String[streets.size()]));
-		document.addKeyword(
-			"city", cities.toArray(new String[cities.size()]));
-		document.addKeyword(
-			"zip", zips.toArray(new String[zips.size()]));
+		document.addKeyword("city", cities.toArray(new String[cities.size()]));
+		document.addKeyword("zip", zips.toArray(new String[zips.size()]));
 		document.addKeyword(
 			"region", regions.toArray(new String[regions.size()]));
 		document.addKeyword(
