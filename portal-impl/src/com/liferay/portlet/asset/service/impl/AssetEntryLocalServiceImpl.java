@@ -422,6 +422,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setGroupIds(groupIds);
 			searchContext.setPortletIds(getPortletIds(portletId));
 
+			searchContext.setAssetCategoryIds(
+				StringUtil.split(assetCategoryIds, 0L));
+
+			searchContext.setAssetTagNames(StringUtil.split(assetTagNames));
+
 			QueryConfig queryConfig = new QueryConfig();
 
 			queryConfig.setHighlightEnabled(false);
