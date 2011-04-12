@@ -183,9 +183,9 @@ public class MapUtil {
 				}
 				else {
 					try {
-						Class<?> classObj = Class.forName(type);
+						Class<?> clazz = Class.forName(type);
 
-						Constructor<?> constructor = classObj.getConstructor(
+						Constructor<?> constructor = clazz.getConstructor(
 							new Class<?>[] {String.class});
 
 						map.put(kvp[0], constructor.newInstance(kvp[1]));

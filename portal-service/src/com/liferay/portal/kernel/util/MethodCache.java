@@ -66,8 +66,8 @@ public class MethodCache {
 		return _instance._put(methodKey, method);
 	}
 
-	public static void remove(Class<?> classObj) {
-		_instance._remove(classObj);
+	public static void remove(Class<?> clazz) {
+		_instance._remove(clazz);
 	}
 
 	public static void reset() {
@@ -99,20 +99,20 @@ public class MethodCache {
 			String methodName = methodKey.getMethodName();
 			Class<?>[] parameterTypes = methodKey.getParameterTypes();
 
-			Class<?> classObj = classesMap.get(className);
+			Class<?> clazz = classesMap.get(className);
 
-			if (classObj == null) {
+			if (clazz == null) {
 				Thread currentThread = Thread.currentThread();
 
 				ClassLoader contextClassLoader =
 					currentThread.getContextClassLoader();
 
-				classObj = contextClassLoader.loadClass(className);
+				clazz = contextClassLoader.loadClass(className);
 
-				classesMap.put(className, classObj);
+				classesMap.put(className, clazz);
 			}
 
-			method = classObj.getMethod(methodName, parameterTypes);
+			method = clazz.getMethod(methodName, parameterTypes);
 
 			methodsMap.put(methodKey, method);
 		}
@@ -124,10 +124,10 @@ public class MethodCache {
 		return _methodsMap.put(methodKey, method);
 	}
 
-	private void _remove(Class<?> classObj) {
-		_classesMap.remove(classObj.getName());
+	private void _remove(Class<?> clazz) {
+		_classesMap.remove(clazz.getName());
 
-		for (Method method : classObj.getMethods()) {
+		for (Method method : clazz.getMethods()) {
 			_methodsMap.remove(new MethodKey(method));
 		}
 	}

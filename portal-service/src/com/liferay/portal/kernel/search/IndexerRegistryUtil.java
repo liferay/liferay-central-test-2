@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class IndexerRegistryUtil {
 
-	public static Indexer getIndexer(Class<?> classObj) {
-		return getIndexerRegistry().getIndexer(classObj.getName());
+	public static Indexer getIndexer(Class<?> clazz) {
+		return getIndexerRegistry().getIndexer(clazz.getName());
 	}
 
 	public static Indexer getIndexer(String className) {

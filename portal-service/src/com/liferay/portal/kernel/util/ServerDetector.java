@@ -161,9 +161,9 @@ public class ServerDetector {
 			return true;
 		}
 		catch (ClassNotFoundException cnfe) {
-			Class<?> classObj = getClass();
+			Class<?> clazz = getClass();
 
-			if (classObj.getResource(className) != null) {
+			if (clazz.getResource(className) != null) {
 				return true;
 			}
 			else {

@@ -22,10 +22,10 @@ import java.lang.reflect.Method;
  */
 public class ReflectionUtil {
 
-	public static Field getDeclaredField(Class<?> classObj, String name)
+	public static Field getDeclaredField(Class<?> clazz, String name)
 		throws Exception {
 
-		Field field = classObj.getDeclaredField(name);
+		Field field = clazz.getDeclaredField(name);
 
 		field.setAccessible(true);
 
@@ -33,10 +33,10 @@ public class ReflectionUtil {
 	}
 
 	public static Method getDeclaredMethod(
-			Class<?> classObj, String name, Class<?> ... parameterTypes)
+			Class<?> clazz, String name, Class<?> ... parameterTypes)
 		throws Exception {
 
-		Method method = classObj.getDeclaredMethod(name, parameterTypes);
+		Method method = clazz.getDeclaredMethod(name, parameterTypes);
 
 		method.setAccessible(true);
 
