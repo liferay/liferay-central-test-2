@@ -183,10 +183,20 @@
 			</filterset>
 		</copy>
 
+		<if>
+			<equals arg1="${artifact.id}" arg2="portal-web" />
+			<then>
+				<property name="artifact.file" value="dist/liferay-portal-${lp.version}.war" />
+			</then>
+			<else>
+				<property name="artifact.file" value="${artifact.id}/${artifact.id}.${packaging}"/>
+			</else>
+		</if>
+
 		<exec dir="." executable="${maven.executable}" failonerror="true">
 			<arg value="install:install-file" />
 			<arg value="-DartifactId=${artifact.id}" />
-			<arg value="-Dfile=${artifact.id}/${artifact.id}.${packaging}" />
+			<arg value="-Dfile=${artifact.file}" />
 			<arg value="-DgroupId=com.liferay.portal" />
 			<arg value="-Dpackaging=${packaging}" />
 			<arg value="-DpomFile=tools/maven/${artifact.id}.pom" />
