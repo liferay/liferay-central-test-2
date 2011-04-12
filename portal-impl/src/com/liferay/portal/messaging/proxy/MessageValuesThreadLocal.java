@@ -26,35 +26,35 @@ import java.util.Map;
 public class MessageValuesThreadLocal {
 
 	public static Object getValue(String key) {
-		Map<String, Object> messageValuesMap = _messageValuesThreadLocal.get();
+		Map<String, Object> messageValues = _messageValuesThreadLocal.get();
 
-		if (messageValuesMap == null) {
+		if (messageValues == null) {
 			return null;
 		}
 
-		return messageValuesMap.get(key);
+		return messageValues.get(key);
 	}
 
 	public static Map<String, Object> getValues() {
-		Map<String, Object> messageValuesMap = _messageValuesThreadLocal.get();
+		Map<String, Object> messageValues = _messageValuesThreadLocal.get();
 
-		if (messageValuesMap == null) {
+		if (messageValues == null) {
 			return Collections.EMPTY_MAP;
 		}
 
-		return messageValuesMap;
+		return messageValues;
 	}
 
 	public static void setValue(String key, Object value) {
-		Map<String, Object> messageValuesMap = _messageValuesThreadLocal.get();
+		Map<String, Object> messageValues = _messageValuesThreadLocal.get();
 
-		if (messageValuesMap == null) {
-			messageValuesMap = new HashMap<String, Object>();
+		if (messageValues == null) {
+			messageValues = new HashMap<String, Object>();
 
-			_messageValuesThreadLocal.set(messageValuesMap);
+			_messageValuesThreadLocal.set(messageValues);
 		}
 
-		messageValuesMap.put(key, value);
+		messageValues.put(key, value);
 	}
 
 	private static ThreadLocal<Map<String, Object>> _messageValuesThreadLocal =

@@ -329,14 +329,14 @@ public class LuceneHelperUtil {
 		return getLuceneHelper().getVersion();
 	}
 
+	public static boolean isLoadIndexFromClusterEnabled() {
+		return getLuceneHelper().isLoadIndexFromClusterEnabled();
+	}
+
 	public static void loadIndex(long companyId, InputStream inputStream)
 		throws IOException {
 
 		getLuceneHelper().loadIndex(companyId, inputStream);
-	}
-
-	public static boolean isLoadIndexFromClusterEnabled() {
-		return getLuceneHelper().isLoadIndexFromClusterEnabled();
 	}
 
 	public static Address selectBootupClusterAddress(

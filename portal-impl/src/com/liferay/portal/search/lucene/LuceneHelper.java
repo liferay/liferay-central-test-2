@@ -87,10 +87,10 @@ public interface LuceneHelper {
 
 	public Version getVersion();
 
+	public boolean isLoadIndexFromClusterEnabled();
+
 	public void loadIndex(long companyId, InputStream inputStream)
 		throws IOException;
-
-	public boolean isLoadIndexFromClusterEnabled();
 
 	public Address selectBootupClusterAddress(
 			long companyId, long localLastGeneration)

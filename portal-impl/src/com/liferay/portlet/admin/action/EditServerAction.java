@@ -274,7 +274,7 @@ public class EditServerAction extends PortletAction {
 
 		if (LuceneHelperUtil.isLoadIndexFromClusterEnabled()) {
 			MessageValuesThreadLocal.setValue(
-				ClusterLinkUtil._CLUSTER_FORWARD_MESSAGE, true);
+				ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE, true);
 		}
 
 		if (Validator.isNull(portletId)) {
@@ -317,13 +317,14 @@ public class EditServerAction extends PortletAction {
 		}
 
 		if (LuceneHelperUtil.isLoadIndexFromClusterEnabled()) {
-			Address localAddress =
+			Address localClusterNodeAddress =
 				ClusterExecutorUtil.getLocalClusterNodeAddress();
 
 			ClusterRequest clusterRequest =
 				ClusterRequest.createMulticastRequest(
 					new MethodHandler(
-						_LOAD_INDEXES_FROM_CLUSTER, companyIds, localAddress),
+						_loadIndexesFromClusterMethodKey, companyIds,
+						localClusterNodeAddress),
 					true);
 
 			ClusterExecutorUtil.execute(clusterRequest);
@@ -646,11 +647,10 @@ public class EditServerAction extends PortletAction {
 		ServiceComponentLocalServiceUtil.verifyDB();
 	}
 
-	private static final MethodKey _LOAD_INDEXES_FROM_CLUSTER =
-		new MethodKey(
-			LuceneClusterUtil.class.getName(), "loadIndexesFromCluster",
-			long[].class, Address.class);
-
 	private static Log _log = LogFactoryUtil.getLog(EditServerAction.class);
+
+	private static MethodKey _loadIndexesFromClusterMethodKey = new MethodKey(
+		LuceneClusterUtil.class.getName(), "loadIndexesFromCluster",
+		long[].class, Address.class);
 
 }

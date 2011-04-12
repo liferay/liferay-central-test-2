@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class ClusterLinkUtil {
 
-	public static final String _CLUSTER_FORWARD_MESSAGE =
+	public static final String CLUSTER_FORWARD_MESSAGE =
 		"CLUSTER_FORWARD_MESSAGE";
 
 	public static Address getAddress(Message message) {
@@ -70,7 +70,7 @@ public class ClusterLinkUtil {
 	}
 
 	public static boolean isForwardMessage(Message message) {
-		return message.getBoolean(_CLUSTER_FORWARD_MESSAGE);
+		return message.getBoolean(CLUSTER_FORWARD_MESSAGE);
 	}
 
 	public static void sendMulticastMessage(
@@ -118,7 +118,7 @@ public class ClusterLinkUtil {
 	}
 
 	public static void setForwardMessage(Message message) {
-		message.put(_CLUSTER_FORWARD_MESSAGE, true);
+		message.put(CLUSTER_FORWARD_MESSAGE, true);
 	}
 
 	public void setClusterLink(ClusterLink clusterLink) {

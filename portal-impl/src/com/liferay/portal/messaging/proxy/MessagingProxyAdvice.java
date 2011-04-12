@@ -42,11 +42,12 @@ public class MessagingProxyAdvice {
 
 		message.setPayload(proxyRequest);
 
-		Map<String, Object> messageVlues = MessageValuesThreadLocal.getValues();
+		Map<String, Object> messageValues =
+			MessageValuesThreadLocal.getValues();
 
-		if (!messageVlues.isEmpty()) {
-			for (String key : messageVlues.keySet()) {
-				message.put(key, messageVlues.get(key));
+		if (!messageValues.isEmpty()) {
+			for (String key : messageValues.keySet()) {
+				message.put(key, messageValues.get(key));
 			}
 		}
 

@@ -33,7 +33,7 @@ public class LuceneClusterUtil {
 		Address bootupAddress = LuceneHelperUtil.selectBootupClusterAddress(
 			companyId, LuceneHelperUtil.getLastGeneration(companyId));
 
-		loadIndexesFromCluster(new long[]{companyId}, bootupAddress);
+		loadIndexesFromCluster(new long[] {companyId}, bootupAddress);
 	}
 
 	public static void loadIndexesFromCluster(
