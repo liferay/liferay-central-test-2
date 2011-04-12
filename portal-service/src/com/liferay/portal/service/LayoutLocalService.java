@@ -335,12 +335,6 @@ public interface LayoutLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.Layout getLayoutByFriendlyURL(
-		long groupId, boolean privateLayout, java.lang.String friendlyURL)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException;
