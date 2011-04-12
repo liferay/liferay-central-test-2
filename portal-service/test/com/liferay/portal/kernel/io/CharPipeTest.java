@@ -16,13 +16,13 @@ package com.liferay.portal.kernel.io;
 
 import com.liferay.portal.kernel.test.TestCase;
 
-import java.util.Arrays;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
 import java.nio.CharBuffer;
+
+import java.util.Arrays;
 
 /**
  * @author Shuyang Zhou
