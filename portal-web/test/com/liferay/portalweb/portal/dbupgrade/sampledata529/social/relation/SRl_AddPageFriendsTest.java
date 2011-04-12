@@ -23,7 +23,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SRl_AddPageFriendsTest extends BaseTestCase {
 	public void testSRl_AddPageFriends() throws Exception {
 		selenium.open("/web/socialrelationsn1/home/");
-		selenium.open("/web/socialrelationsn1/home/");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -43,7 +42,7 @@ public class SRl_AddPageFriendsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@id='add-page']/a/span",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Add Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +63,7 @@ public class SRl_AddPageFriendsTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("new_page", RuntimeVariables.replace("Friends Test Page"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Save", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Save", RuntimeVariables.replace("Save"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,7 +82,8 @@ public class SRl_AddPageFriendsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Friends Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Friends Test Page",
+			RuntimeVariables.replace("Friends Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 	}

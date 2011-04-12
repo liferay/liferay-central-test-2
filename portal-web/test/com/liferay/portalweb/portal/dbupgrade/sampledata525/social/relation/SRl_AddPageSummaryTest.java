@@ -42,7 +42,7 @@ public class SRl_AddPageSummaryTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@id='add-page']/a/span",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Add Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +63,7 @@ public class SRl_AddPageSummaryTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("new_page", RuntimeVariables.replace("Summary Test Page"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Save", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Save", RuntimeVariables.replace("Save"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +82,8 @@ public class SRl_AddPageSummaryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Summary Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Summary Test Page",
+			RuntimeVariables.replace("Summary Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 	}

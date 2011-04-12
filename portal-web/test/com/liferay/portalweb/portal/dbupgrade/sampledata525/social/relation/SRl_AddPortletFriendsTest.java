@@ -41,10 +41,12 @@ public class SRl_AddPortletFriendsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Friends Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Friends Test Page",
+			RuntimeVariables.replace("Friends Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Add Application", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add Application",
+			RuntimeVariables.replace("Add Application"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -64,7 +66,7 @@ public class SRl_AddPortletFriendsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@title='Friends']/p/a",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

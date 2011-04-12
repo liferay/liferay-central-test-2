@@ -41,67 +41,47 @@ public class AddUserSRl2Test extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Users")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Users", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Users", RuntimeVariables.replace("Users"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add", RuntimeVariables.replace("Add"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.select("_125_prefixId", RuntimeVariables.replace("label=Mrs."));
-		selenium.type("_125_screenName",
+		selenium.type("//input[@id='_125_screenName']",
 			RuntimeVariables.replace("socialrelationsn2"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_125_emailAddress",
+		selenium.type("//input[@id='_125_emailAddress']",
 			RuntimeVariables.replace("socialrelationea2@liferay.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_125_firstName",
+		selenium.type("//input[@id='_125_firstName']",
 			RuntimeVariables.replace("socialrelationfn2"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_125_middleName",
+		selenium.type("//input[@id='_125_middleName']",
 			RuntimeVariables.replace("socialrelationmn2"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_125_lastName",
+		selenium.type("//input[@id='_125_lastName']",
 			RuntimeVariables.replace("socialrelationln2"));
 		selenium.saveScreenShotAndSource();
-		selenium.select("_125_suffixId", RuntimeVariables.replace("label=Sr."));
-		selenium.select("_125_birthdayMonth",
-			RuntimeVariables.replace("label=September"));
-		selenium.select("_125_birthdayDay", RuntimeVariables.replace("label=24"));
-		selenium.select("_125_birthdayYear",
-			RuntimeVariables.replace("label=1984"));
-		selenium.select("_125_male", RuntimeVariables.replace("label=Female"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request processed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals("socialrelationsn2", selenium.getValue("_125_screenName"));
+		assertEquals("socialrelationsn2",
+			selenium.getValue("//input[@id='_125_screenName']"));
 		assertEquals("socialrelationea2@liferay.com",
-			selenium.getValue("_125_emailAddress"));
-		assertEquals("socialrelationfn2", selenium.getValue("_125_firstName"));
-		assertEquals("socialrelationmn2", selenium.getValue("_125_middleName"));
-		assertEquals("socialrelationln2", selenium.getValue("_125_lastName"));
+			selenium.getValue("//input[@id='_125_emailAddress']"));
+		assertEquals("socialrelationfn2",
+			selenium.getValue("//input[@id='_125_firstName']"));
+		assertEquals("socialrelationmn2",
+			selenium.getValue("//input[@id='_125_middleName']"));
+		assertEquals("socialrelationln2",
+			selenium.getValue("//input[@id='_125_lastName']"));
 	}
 }

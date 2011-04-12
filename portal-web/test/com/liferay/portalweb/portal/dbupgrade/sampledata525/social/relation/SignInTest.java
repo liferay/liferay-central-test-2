@@ -45,9 +45,10 @@ public class SignInTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_58_rememberMeCheckbox", RuntimeVariables.replace(""));
+		selenium.clickAt("_58_rememberMeCheckbox",
+			RuntimeVariables.replace("Checkbox"));
 		selenium.clickAt("//input[@value='Sign In']",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 	}

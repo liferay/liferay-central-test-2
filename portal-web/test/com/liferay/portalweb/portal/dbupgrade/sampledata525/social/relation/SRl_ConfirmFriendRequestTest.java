@@ -41,28 +41,9 @@ public class SRl_ConfirmFriendRequestTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Requests Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Requests Test Page",
+			RuntimeVariables.replace("Requests Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (RuntimeVariables.replace(
-							"socialrelationfn2 socialrelationmn2 socialrelationln2")
-										.equals(selenium.getText("//div/a[2]"))) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"socialrelationfn2 socialrelationmn2 socialrelationln2"),

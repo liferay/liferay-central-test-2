@@ -52,9 +52,9 @@ public class SRl_SignInTest extends BaseTestCase {
 				selenium.type("_58_password", RuntimeVariables.replace("test"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("_58_rememberMeCheckbox",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Checkbox"));
 				selenium.clickAt("//input[@value='Sign In']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
@@ -67,7 +67,7 @@ public class SRl_SignInTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("//input[@value='I Agree']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("I Agree"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
@@ -86,7 +86,7 @@ public class SRl_SignInTest extends BaseTestCase {
 					RuntimeVariables.replace("test"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
