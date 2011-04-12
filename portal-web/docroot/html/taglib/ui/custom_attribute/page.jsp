@@ -31,6 +31,7 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:custo
 boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute:editable"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute:label"));
 String name = (String)request.getAttribute("liferay-ui:custom-attribute:name");
+String fieldParam = "ExpandoAttribute--" + name + "--"; 
 
 ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), className, classPK);
 %>
@@ -84,6 +85,8 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 							if (curValue == null) {
 								curValue = (Boolean)defaultValue;
 							}
+
+							curValue = ParamUtil.getBoolean(request, "ExpandoAttribute--" + escapedName + "--", curValue);
 							%>
 
 							<select id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--">
@@ -109,36 +112,76 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									valueDate.setTime(new Date());
 								}
 
-								int hourValue = valueDate.get(Calendar.HOUR_OF_DAY);
+								int day = ParamUtil.getInteger(request, fieldParam + "Day", -1);
+
+								if ((day == -1) && (valueDate != null)) {
+									day = valueDate.get(Calendar.DATE);
+								}
+
+								int month = ParamUtil.getInteger(request, fieldParam + "Month", -1);
+
+								if ((month == -1) && (valueDate != null)) {
+									month = valueDate.get(Calendar.MONTH);
+								}
+
+								int year = ParamUtil.getInteger(request, fieldParam + "Year", -1);
+
+								if ((year == -1) && (valueDate != null)) {
+									year = valueDate.get(Calendar.YEAR);
+								}
 
 								String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
 
-								if (timeFormatPattern.contains("a")) {
-									hourValue = valueDate.get(Calendar.HOUR);
+								boolean timeFormatAmPm = timeFormatPattern.contains("a");
+
+								int hour = ParamUtil.getInteger(request, fieldParam + "Hour", -1);
+
+								if ((hour == -1) && (valueDate != null)) {
+									hour = valueDate.get(Calendar.HOUR_OF_DAY);
+
+									if (timeFormatAmPm) {
+										hour = valueDate.get(Calendar.HOUR);
+									}
+								}
+
+								int minute = ParamUtil.getInteger(request, fieldParam + "Minute", -1);
+
+								if ((minute == -1) && (valueDate != null)) {
+									minute = valueDate.get(Calendar.MINUTE);
+								}
+
+								int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
+
+								if ((amPm == -1) && (valueDate != null)) {
+									amPm = Calendar.AM;
+
+									if (timeFormatAmPm) {
+										amPm = valueDate.get(Calendar.AM_PM);
+									}
 								}
 								%>
 
 								<liferay-ui:input-date
-									dayParam='<%= "ExpandoAttribute--" + name + "--Day" %>'
-									dayValue="<%= valueDate.get(Calendar.DATE) %>"
+									dayParam='<%= fieldParam + "Day" %>'
+									dayValue="<%= day %>"
 									disabled="<%= false %>"
 									firstDayOfWeek="<%= valueDate.getFirstDayOfWeek() - 1 %>"
-									monthParam='<%= "ExpandoAttribute--" + name + "--Month" %>'
-									monthValue='<%= valueDate.get(Calendar.MONTH) %>'
-									yearParam='<%= "ExpandoAttribute--" + name + "--Year" %>'
-									yearValue="<%= valueDate.get(Calendar.YEAR) %>"
+									monthParam='<%= fieldParam + "Month" %>'
+									monthValue='<%= month %>'
+									yearParam='<%= fieldParam + "Year" %>'
+									yearValue="<%= year %>"
 									yearRangeStart="<%= valueDate.get(Calendar.YEAR) - 100 %>"
 									yearRangeEnd="<%= valueDate.get(Calendar.YEAR) + 100 %>"
 								/>
 
 								<liferay-ui:input-time
-									amPmParam='<%= "ExpandoAttribute--" + name + "--AmPm" %>'
-									amPmValue="<%= valueDate.get(Calendar.AM_PM) %>"
+									amPmParam='<%= fieldParam + "AmPm" %>'
+									amPmValue="<%= amPm %>"
 									disabled="<%= false %>"
-									hourParam='<%= "ExpandoAttribute--" + name + "--Hour" %>'
-									hourValue="<%= hourValue %>"
-									minuteParam='<%= "ExpandoAttribute--" + name + "--Minute" %>'
-									minuteValue="<%= valueDate.get(Calendar.MINUTE) %>"
+									hourParam='<%= fieldParam + "Hour" %>'
+									hourValue="<%= hour %>"
+									minuteParam='<%= fieldParam + "Minute" %>'
+									minuteValue="<%= minute %>"
 									minuteInterval="1"
 								/>
 							</span>
@@ -170,9 +213,11 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									if (value == null) {
 										value = defaultValue;
 									}
+
+									double[] values = ParamUtil.getDoubleValues(request, "ExpandoAttribute--" + escapedName + "--", (double[])value);
 									%>
 
-									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge((double[])value, StringPool.NEW_LINE) %></textarea>
+									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge(values, StringPool.NEW_LINE) %></textarea>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -201,9 +246,11 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									if (value == null) {
 										value = defaultValue;
 									}
+
+									float[] values = ParamUtil.getFloatValues(request, "ExpandoAttribute--" + escapedName + "--", (float[])value);
 									%>
 
-									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge((float[])value, StringPool.NEW_LINE) %></textarea>
+									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute(<%= escapedName %>)"><%= StringUtil.merge(values, StringPool.NEW_LINE) %></textarea>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -232,9 +279,11 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									if (value == null) {
 										value = defaultValue;
 									}
+
+									int[] values = ParamUtil.getIntegerValues(request, "ExpandoAttribute--" + escapedName + "--", (int[])value);
 									%>
 
-									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge((int[])value, StringPool.NEW_LINE) %></textarea>
+									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge(values, StringPool.NEW_LINE) %></textarea>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -263,9 +312,11 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									if (value == null) {
 										value = defaultValue;
 									}
+
+									long[] values = ParamUtil.getLongValues(request, "ExpandoAttribute--" + escapedName + "--", (long[])value);
 									%>
 
-									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge((long[])value, StringPool.NEW_LINE) %></textarea>
+									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge(values, StringPool.NEW_LINE) %></textarea>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -294,9 +345,11 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									if (value == null) {
 										value = defaultValue;
 									}
+
+									short[] values = ParamUtil.getShortValues(request, "ExpandoAttribute--" + escapedName + "--", (short[])value);
 									%>
 
-									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge((short[])value, StringPool.NEW_LINE) %></textarea>
+									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= StringUtil.merge(values, StringPool.NEW_LINE) %></textarea>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -328,12 +381,20 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								<c:otherwise>
 
 									<%
+									String paramValue = ParamUtil.getString(request, "ExpandoAttribute--" + name + "--");
+
 									if (value == null) {
 										value = defaultValue;
 									}
+
+									String[] values = (String[])value;
+
+									if (Validator.isNotNull(paramValue)) {
+										values = new String[] {paramValue};
+									}
 									%>
 
-									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= HtmlUtil.escape(StringUtil.merge((String[])value, StringPool.NEW_LINE)) %></textarea>
+									<textarea class="lfr-textarea" id="<%= randomNamespace %><%= escapedName %>" name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--"><%= HtmlUtil.escape(StringUtil.merge(values, StringPool.NEW_LINE)) %></textarea>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
