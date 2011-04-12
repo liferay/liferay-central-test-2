@@ -182,7 +182,7 @@ if (Validator.isNotNull(historyKey)) {
 	%>
 
 	<c:if test="<%= Validator.isNotNull(errorSection) %>">
-		<portlet:namespace />formNavigator._revealSection('#<%= errorSection %>', '');
+		<portlet:namespace />formNavigator._revealSection('#<portlet:namespace /><%= errorSection %>', '');
 	</c:if>
 </aui:script>
 
