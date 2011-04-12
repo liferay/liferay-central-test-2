@@ -121,7 +121,6 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 				</aui:select>
 			</aui:column>
 		</c:if>
-
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

@@ -141,8 +141,8 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public long setGroupId(PortletRequest portletRequest) {
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 
-		if (Validator.isNull(groupId) && Validator.isNull(structureId) &&
-				Validator.isNull(templateId)){
+		if ((groupId == 0) && Validator.isNull(structureId) &&
+			Validator.isNull(templateId)) {
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)portletRequest.getAttribute(
