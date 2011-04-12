@@ -31,8 +31,8 @@ public class TemplateDisplayTerms extends DisplayTerms {
 	public TemplateDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		name = ParamUtil.getString(portletRequest, NAME);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
+		name = ParamUtil.getString(portletRequest, NAME);
 	}
 
 	public String getDescription() {
@@ -43,7 +43,7 @@ public class TemplateDisplayTerms extends DisplayTerms {
 		return name;
 	}
 
-	protected String name;
 	protected String description;
+	protected String name;
 
 }

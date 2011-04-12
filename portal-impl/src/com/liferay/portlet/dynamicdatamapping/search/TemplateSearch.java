@@ -55,10 +55,9 @@ public class TemplateSearch extends SearchContainer<DDMTemplate> {
 			(TemplateDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			TemplateDisplayTerms.NAME, displayTerms.getName());
+			TemplateDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
-			TemplateDisplayTerms.DESCRIPTION,
-			displayTerms.getDescription());
+			TemplateDisplayTerms.NAME, displayTerms.getName());
 	}
 
 }

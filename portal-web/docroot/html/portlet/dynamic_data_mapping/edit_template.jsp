@@ -30,13 +30,13 @@ if (Validator.isNull(availableFields)) {
 }
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
-DDMTemplate template = (DDMTemplate)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_VIEW);
-
-String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
+DDMTemplate template = (DDMTemplate)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_TEMPLATE);
 
 long groupId = BeanParamUtil.getLong(template, request, "groupId", scopeGroupId);
-String script = BeanParamUtil.getString(template, request, "script");
+
+String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
 long templateId = BeanParamUtil.getLong(template, request, "templateId");
+String script = BeanParamUtil.getString(template, request, "script");
 
 String title = null;
 

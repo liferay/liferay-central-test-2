@@ -71,7 +71,7 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(
-			WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_VIEW, template);
+			WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_TEMPLATE, template);
 	}
 
 	public static void getTemplate(PortletRequest portletRequest)

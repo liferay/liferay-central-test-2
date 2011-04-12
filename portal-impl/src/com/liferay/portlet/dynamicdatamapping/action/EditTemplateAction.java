@@ -208,7 +208,6 @@ public class EditTemplateAction extends PortletAction {
 		long templateId = ParamUtil.getLong(uploadRequest, "templateId");
 		String name = ParamUtil.getString(uploadRequest, "name");
 		String description = ParamUtil.getString(uploadRequest, "description");
-
 		String type = ParamUtil.getString(uploadRequest, "type");
 
 		String script = ParamUtil.getString(uploadRequest, "script");
