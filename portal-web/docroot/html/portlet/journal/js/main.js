@@ -474,6 +474,10 @@ AUI().add(
 
 				if (fields && fields.size() > 1) {
 					if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-field-and-all-its-children'))) {
+						var fieldInstance = instance.getFieldInstance(source);
+
+						fieldInstance.destroy();
+
 						instance.closeRepeatedSiblings(source);
 						instance.closeEditFieldOptions();
 
@@ -2913,6 +2917,27 @@ AUI().add(
 								instance.after(item + 'Change', propagateAttr);
 							}
 						);
+					},
+
+					destructor: function() {
+						var instance = this;
+
+						var fieldType = instance.get('fieldType');
+
+						if (fieldType == 'text_area') {
+							var source = instance.get('source');
+
+							var textarea = source.one('textarea');
+
+							if (textarea) {
+								var editorName = textarea.attr('name');
+								var editorReference = window[editorName];
+
+								if (editorReference && Lang.isFunction(editorReference.destroy)) {
+									editorReference.destroy();
+								}
+							}
+						}
 					},
 
 					canDrop: function() {
