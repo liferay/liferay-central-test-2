@@ -295,7 +295,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public long getLastGeneration(long companyId) {
-		if (!_isLoadIndexFromClusterEnabled()) {
+		if (!isLoadIndexFromClusterEnabled()) {
 			return IndexAccessor.DEFAULT_LAST_GENERATION;
 		}
 
@@ -312,7 +312,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			long companyId, Address bootupAddress)
 		throws SystemException {
 
-		if (!_isLoadIndexFromClusterEnabled()) {
+		if (!isLoadIndexFromClusterEnabled()) {
 			return null;
 		}
 
@@ -424,7 +424,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void loadIndex(long companyId, InputStream inputStream)
 		throws IOException {
 
-		if (!_isLoadIndexFromClusterEnabled()) {
+		if (!isLoadIndexFromClusterEnabled()) {
 			return;
 		}
 
@@ -437,11 +437,25 @@ public class LuceneHelperImpl implements LuceneHelper {
 		indexAccessor.loadIndex(inputStream);
 	}
 
+	public boolean isLoadIndexFromClusterEnabled() {
+		if (PropsValues.CLUSTER_LINK_ENABLED &&
+			PropsValues.LUCENE_REPLICATE_WRITE) {
+
+			return true;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Load index from cluster is not enabled");
+		}
+
+		return false;
+	}
+
 	public Address selectBootupClusterAddress(
 			long companyId, long localLastGeneration)
 		throws SystemException {
 
-		if (!_isLoadIndexFromClusterEnabled()) {
+		if (!isLoadIndexFromClusterEnabled()) {
 			return null;
 		}
 
@@ -542,7 +556,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			}
 		}
 
-		if (_isLoadIndexFromClusterEnabled()) {
+		if (isLoadIndexFromClusterEnabled()) {
 			ClusterExecutorUtil.removeClusterEventListener(
 				_loadIndexClusterEventListener);
 		}
@@ -615,7 +629,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 					LuceneHelperImpl.class.getName());
 		}
 
-		if (_isLoadIndexFromClusterEnabled()) {
+		if (isLoadIndexFromClusterEnabled()) {
 			_loadIndexClusterEventListener =
 				new LoadIndexClusterEventListener();
 
@@ -678,7 +692,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			}
 		}
 
-		if (!_isLoadIndexFromClusterEnabled()) {
+		if (!isLoadIndexFromClusterEnabled()) {
 			return indexAccessor;
 		}
 
@@ -720,20 +734,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		return indexAccessor;
-	}
-
-	private boolean _isLoadIndexFromClusterEnabled() {
-		if (PropsValues.CLUSTER_LINK_ENABLED &&
-			PropsValues.LUCENE_REPLICATE_WRITE) {
-
-			return true;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Load index from cluster is not enabled");
-		}
-
-		return false;
 	}
 
 	private class LoadIndexClusterEventListener

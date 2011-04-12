@@ -14,12 +14,15 @@
 
 package com.liferay.portal.messaging.proxy;
 
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 import com.liferay.portal.kernel.messaging.proxy.ProxyResponse;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationSynchronousMessageSender;
 import com.liferay.util.aspectj.AspectJUtil;
+
+import java.util.Map;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -35,16 +38,28 @@ public class MessagingProxyAdvice {
 
 		ProxyRequest proxyRequest = createProxyRequest(proceedingJoinPoint);
 
+		Message message = new Message();
+
+		message.setPayload(proxyRequest);
+
+		Map<String, Object> messageVlues = MessageValuesThreadLocal.getValues();
+
+		if (!messageVlues.isEmpty()) {
+			for (String key : messageVlues.keySet()) {
+				message.put(key, messageVlues.get(key));
+			}
+		}
+
 		BaseProxyBean baseProxyBean =
 			(BaseProxyBean)proceedingJoinPoint.getTarget();
 
 		if (proxyRequest.isSynchronous() ||
 			ProxyModeThreadLocal.isForceSync()) {
 
-			return doInvokeSynchronous(proxyRequest, baseProxyBean);
+			return doInvokeSynchronous(message, baseProxyBean);
 		}
 		else {
-			doInvokeAsynchronous(proxyRequest, baseProxyBean);
+			doInvokeAsynchronous(message, baseProxyBean);
 
 			return null;
 		}
@@ -60,7 +75,7 @@ public class MessagingProxyAdvice {
 	}
 
 	protected void doInvokeAsynchronous(
-		ProxyRequest proxyRequest, BaseProxyBean baseProxyBean) {
+		Message message, BaseProxyBean baseProxyBean) {
 
 		SingleDestinationMessageSender messageSender =
 			baseProxyBean.getSingleDestinationMessageSender();
@@ -71,11 +86,11 @@ public class MessagingProxyAdvice {
 					baseProxyBean.getClass().getName());
 		}
 
-		messageSender.send(proxyRequest);
+		messageSender.send(message);
 	}
 
 	protected Object doInvokeSynchronous(
-			ProxyRequest proxyRequest, BaseProxyBean baseProxyBean)
+			Message message, BaseProxyBean baseProxyBean)
 		throws Exception {
 
 		SingleDestinationSynchronousMessageSender messageSender =
@@ -88,7 +103,7 @@ public class MessagingProxyAdvice {
 		}
 
 		ProxyResponse proxyResponse = (ProxyResponse)messageSender.send(
-			proxyRequest);
+			message);
 
 		if (proxyResponse == null) {
 			return null;

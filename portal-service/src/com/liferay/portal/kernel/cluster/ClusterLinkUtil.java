@@ -26,6 +26,9 @@ import java.util.List;
  */
 public class ClusterLinkUtil {
 
+	public static final String _CLUSTER_FORWARD_MESSAGE =
+		"CLUSTER_FORWARD_MESSAGE";
+
 	public static Address getAddress(Message message) {
 		return (Address)message.get(_ADDRESS);
 	}
@@ -123,9 +126,6 @@ public class ClusterLinkUtil {
 	}
 
 	private static final String _ADDRESS = "CLUSTER_ADDRESS";
-
-	private static final String _CLUSTER_FORWARD_MESSAGE =
-		"CLUSTER_FORWARD_MESSAGE";
 
 	private static Log _log = LogFactoryUtil.getLog(ClusterLinkUtil.class);
 

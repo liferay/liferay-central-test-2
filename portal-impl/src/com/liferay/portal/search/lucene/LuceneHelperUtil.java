@@ -335,6 +335,10 @@ public class LuceneHelperUtil {
 		getLuceneHelper().loadIndex(companyId, inputStream);
 	}
 
+	public static boolean isLoadIndexFromClusterEnabled() {
+		return getLuceneHelper().isLoadIndexFromClusterEnabled();
+	}
+
 	public static Address selectBootupClusterAddress(
 			long companyId, long localLastGeneration)
 		throws SystemException {

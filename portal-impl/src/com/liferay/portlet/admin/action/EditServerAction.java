@@ -23,6 +23,10 @@ import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.cluster.Address;
+import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.cluster.ClusterLinkUtil;
+import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
@@ -38,6 +42,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,8 +52,11 @@ import com.liferay.portal.kernel.util.ThreadUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
+import com.liferay.portal.messaging.proxy.MessageValuesThreadLocal;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.search.lucene.LuceneIndexer;
+import com.liferay.portal.search.lucene.cluster.LuceneClusterUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -263,6 +272,11 @@ public class EditServerAction extends PortletAction {
 
 		long[] companyIds = PortalInstances.getCompanyIds();
 
+		if (LuceneHelperUtil.isLoadIndexFromClusterEnabled()) {
+			MessageValuesThreadLocal.setValue(
+				ClusterLinkUtil._CLUSTER_FORWARD_MESSAGE, true);
+		}
+
 		if (Validator.isNull(portletId)) {
 			for (long companyId : companyIds) {
 				try {
@@ -300,6 +314,21 @@ public class EditServerAction extends PortletAction {
 					_log.error(e, e);
 				}
 			}
+		}
+
+		if (LuceneHelperUtil.isLoadIndexFromClusterEnabled()) {
+			Address localAddress =
+				ClusterExecutorUtil.getLocalClusterNodeAddress();
+
+			ClusterRequest clusterRequest =
+				ClusterRequest.createMulticastRequest(
+					new MethodHandler(
+						_LOAD_INDEXES_FROM_CLUSTER, companyIds, localAddress),
+					true);
+
+			ClusterExecutorUtil.execute(clusterRequest);
+
+			return;
 		}
 	}
 
@@ -616,6 +645,11 @@ public class EditServerAction extends PortletAction {
 	protected void verifyPluginTables() throws Exception {
 		ServiceComponentLocalServiceUtil.verifyDB();
 	}
+
+	private static final MethodKey _LOAD_INDEXES_FROM_CLUSTER =
+		new MethodKey(
+			LuceneClusterUtil.class.getName(), "loadIndexesFromCluster",
+			long[].class, Address.class);
 
 	private static Log _log = LogFactoryUtil.getLog(EditServerAction.class);
 

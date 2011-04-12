@@ -33,11 +33,11 @@ public class LuceneClusterUtil {
 		Address bootupAddress = LuceneHelperUtil.selectBootupClusterAddress(
 			companyId, LuceneHelperUtil.getLastGeneration(companyId));
 
-		loadIndexesFromCluster(companyId, bootupAddress);
+		loadIndexesFromCluster(new long[]{companyId}, bootupAddress);
 	}
 
 	public static void loadIndexesFromCluster(
-			long companyId, Address bootupAddress)
+			long[] companyIds, Address bootupAddress)
 		throws SystemException {
 
 		if (bootupAddress == null) {
@@ -46,25 +46,28 @@ public class LuceneClusterUtil {
 
 		InputStream inputStream = null;
 
-		try {
-			inputStream = LuceneHelperUtil.getLoadIndexesInputStreamFromCluster(
-				companyId, bootupAddress);
+		for (long companyId : companyIds) {
+			try {
+				inputStream =
+					LuceneHelperUtil.getLoadIndexesInputStreamFromCluster(
+						companyId, bootupAddress);
 
-			LuceneHelperUtil.loadIndex(companyId, inputStream);
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
-		finally {
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				}
-				catch (IOException ioe) {
-					throw new SystemException(ioe);
+				LuceneHelperUtil.loadIndex(companyId, inputStream);
+			}
+			catch (SystemException se) {
+				throw se;
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
+			finally {
+				if (inputStream != null) {
+					try {
+						inputStream.close();
+					}
+					catch (IOException ioe) {
+						throw new SystemException(ioe);
+					}
 				}
 			}
 		}
