@@ -31,7 +31,6 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:custo
 boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute:editable"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:custom-attribute:label"));
 String name = (String)request.getAttribute("liferay-ui:custom-attribute:name");
-String fieldParam = "ExpandoAttribute--" + name + "--"; 
 
 ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.getCompanyId(), className, classPK);
 %>
@@ -112,6 +111,8 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									valueDate.setTime(new Date());
 								}
 
+								String fieldParam = "ExpandoAttribute--" + name + "--";
+
 								int day = ParamUtil.getInteger(request, fieldParam + "Day", -1);
 
 								if ((day == -1) && (valueDate != null)) {
@@ -134,6 +135,16 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 
 								boolean timeFormatAmPm = timeFormatPattern.contains("a");
 
+								int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
+
+								if ((amPm == -1) && (valueDate != null)) {
+									amPm = Calendar.AM;
+
+									if (timeFormatAmPm) {
+										amPm = valueDate.get(Calendar.AM_PM);
+									}
+								}
+
 								int hour = ParamUtil.getInteger(request, fieldParam + "Hour", -1);
 
 								if ((hour == -1) && (valueDate != null)) {
@@ -148,16 +159,6 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 
 								if ((minute == -1) && (valueDate != null)) {
 									minute = valueDate.get(Calendar.MINUTE);
-								}
-
-								int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
-
-								if ((amPm == -1) && (valueDate != null)) {
-									amPm = Calendar.AM;
-
-									if (timeFormatAmPm) {
-										amPm = valueDate.get(Calendar.AM_PM);
-									}
 								}
 								%>
 
