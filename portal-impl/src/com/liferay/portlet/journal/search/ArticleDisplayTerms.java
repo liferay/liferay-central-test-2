@@ -57,9 +57,6 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public ArticleDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		articleId = ParamUtil.getString(portletRequest, ARTICLE_ID);
 		content = ParamUtil.getString(portletRequest, CONTENT);
 		description = ParamUtil.getString(portletRequest, DESCRIPTION);
