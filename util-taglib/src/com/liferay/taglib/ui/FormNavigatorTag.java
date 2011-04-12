@@ -47,12 +47,12 @@ public class FormNavigatorTag extends IncludeTag {
 		_htmlTop = htmlTop;
 	}
 
-	public void setShowButtons(boolean showButtons) {
-		_showButtons = showButtons;
-	}
-
 	public void setJspPath(String jspPath) {
 		_jspPath = jspPath;
+	}
+
+	public void setShowButtons(boolean showButtons) {
+		_showButtons = showButtons;
 	}
 
 	protected void cleanUp() {
