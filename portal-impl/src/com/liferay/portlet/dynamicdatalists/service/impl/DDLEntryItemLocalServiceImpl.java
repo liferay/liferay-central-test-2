@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatalists.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLEntry;
@@ -117,6 +118,21 @@ public class DDLEntryItemLocalServiceImpl
 		throws SystemException {
 
 		return ddlEntryItemPersistence.findByEntryId(entryId);
+	}
+
+	public List<DDLEntryItem> getEntryItems(
+			long entryId, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return ddlEntryItemPersistence.findByEntryId(
+			entryId, start, end, orderByComparator);
+	}
+
+	public int getEntryItemsCount(long entryId)
+		throws SystemException {
+
+		return ddlEntryItemPersistence.countByEntryId(entryId);
 	}
 
 	public DDLEntryItem updateEntryItem(
