@@ -100,14 +100,6 @@ public class JournalIndexer extends BaseIndexer {
 		double version = article.getVersion();
 		Map<Locale, String> titleMap = article.getTitleMap();
 		Map<Locale, String> descriptionMap = article.getDescriptionMap();
-		String[] availableLocales = LocalizationUtil.getAvailableLocales(
-			article.getContent());
-
-		if (availableLocales.length == 0) {
-			availableLocales = new String[] {
-				LocaleUtil.getDefault().toString()};
-		}
-
 		String type = article.getType();
 
 		String structureId = article.getStructureId();
@@ -156,16 +148,25 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
-		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addLocalizedText(Field.TITLE, titleMap);
 
-		processStructureFields(structure, document, article.getContent());
+		processStructure(structure, document, article.getContent());
 
-		for (String languageId : availableLocales) {
+		String defaultLangaugeId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
+
+		String[] languageIds = LocalizationUtil.getAvailableLocales(
+			article.getContent());
+
+		if (languageIds.length == 0) {
+			languageIds = new String[] {defaultLangaugeId};
+		}
+
+		for (String languageId : languageIds) {
 			String content = extractContent(
 				article.getContentByLocale(languageId));
 
-			if (LocaleUtil.getDefault().toString().equals(languageId)) {
+			if (languageId.equals(defaultLangaugeId)) {
 				document.addText(Field.CONTENT, content);
 			}
 
@@ -265,69 +266,6 @@ public class JournalIndexer extends BaseIndexer {
 		return content;
 	}
 
-	protected void processStructureFields(
-			com.liferay.portal.kernel.xml.Document structureDocument,
-			Document document, Element rootElement)
-		throws Exception {
-
-		LinkedList<Element> queue = new LinkedList<Element>(
-			rootElement.elements());
-
-		Element element = null;
-
-		while ((element = queue.poll()) != null) {
-			String elName = element.attributeValue("name", StringPool.BLANK);
-			String elType = element.attributeValue("type", StringPool.BLANK);
-			String elIndexType = element.attributeValue(
-				"index-type", StringPool.BLANK);
-
-			if (structureDocument != null) {
-				String path = element.getPath().concat(
-					"[@name='").concat(elName).concat("']");
-
-				Node structureNode = structureDocument.selectSingleNode(path);
-
-				if (structureNode != null) {
-					Element structureElement = (Element)structureNode;
-
-					elType = structureElement.attributeValue(
-						"type", StringPool.BLANK);
-					elIndexType = structureElement.attributeValue(
-						"index-type", StringPool.BLANK);
-				}
-			}
-
-			if (Validator.isNotNull(elType)) {
-				indexField(document, element, elType, elIndexType);
-			}
-
-			queue.addAll(element.elements());
-		}
-	}
-
-	protected void processStructureFields(
-		JournalStructure structure, Document document, String content) {
-
-		try {
-			com.liferay.portal.kernel.xml.Document structureDocument = null;
-
-			if (structure != null) {
-				structureDocument = SAXReaderUtil.read(structure.getXsd());
-			}
-
-			com.liferay.portal.kernel.xml.Document contentDocument =
-				SAXReaderUtil.read(content);
-
-			Element rootElement = contentDocument.getRootElement();
-
-			processStructureFields(
-				structureDocument, document, rootElement);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}
@@ -410,6 +348,68 @@ public class JournalIndexer extends BaseIndexer {
 
 		if (Validator.isNotNull(type)) {
 			contextQuery.addRequiredTerm("type", type);
+		}
+	}
+
+	protected void processStructure(
+			com.liferay.portal.kernel.xml.Document structureDocument,
+			Document document, Element rootElement)
+		throws Exception {
+
+		LinkedList<Element> queue = new LinkedList<Element>(
+			rootElement.elements());
+
+		Element element = null;
+
+		while ((element = queue.poll()) != null) {
+			String elName = element.attributeValue("name", StringPool.BLANK);
+			String elType = element.attributeValue("type", StringPool.BLANK);
+			String elIndexType = element.attributeValue(
+				"index-type", StringPool.BLANK);
+
+			if (structureDocument != null) {
+				String path = element.getPath().concat(
+					"[@name='").concat(elName).concat("']");
+
+				Node structureNode = structureDocument.selectSingleNode(path);
+
+				if (structureNode != null) {
+					Element structureElement = (Element)structureNode;
+
+					elType = structureElement.attributeValue(
+						"type", StringPool.BLANK);
+					elIndexType = structureElement.attributeValue(
+						"index-type", StringPool.BLANK);
+				}
+			}
+
+			if (Validator.isNotNull(elType)) {
+				indexField(document, element, elType, elIndexType);
+			}
+
+			queue.addAll(element.elements());
+		}
+	}
+
+	protected void processStructure(
+		JournalStructure structure, Document document, String content) {
+
+		try {
+			com.liferay.portal.kernel.xml.Document structureDocument = null;
+
+			if (structure != null) {
+				structureDocument = SAXReaderUtil.read(structure.getXsd());
+			}
+
+			com.liferay.portal.kernel.xml.Document contentDocument =
+				SAXReaderUtil.read(content);
+
+			Element rootElement = contentDocument.getRootElement();
+
+			processStructure(structureDocument, document, rootElement);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 

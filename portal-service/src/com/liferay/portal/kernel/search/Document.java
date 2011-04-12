@@ -163,9 +163,9 @@ public interface Document extends Serializable {
 		String portletId, String field1, String field2, String field3,
 		String field4);
 
-	public String get(String name);
-
 	public String get(Locale locale, String name);
+
+	public String get(String name);
 
 	public Date getDate(String name) throws ParseException;
 

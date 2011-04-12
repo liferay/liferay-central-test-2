@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -45,6 +46,15 @@ import java.util.Map;
  * @author Bruno Farache
  */
 public class DocumentImpl implements Document {
+
+	public static String getLocalizedName(Locale locale, String name) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		String localizedName = name.concat(StringPool.UNDERLINE).concat(
+			languageId);
+
+		return localizedName;
+	}
 
 	public void add(Field field) {
 		_fields.put(field.getName(), field);
@@ -433,8 +443,14 @@ public class DocumentImpl implements Document {
 		addKeyword(Field.UID, uid);
 	}
 
-	public String get(String name) {
-		Field field = _fields.get(name);
+	public String get(Locale locale, String name) {
+		String localizedName = getLocalizedName(locale, name);
+
+		Field field = _fields.get(localizedName);
+
+		if (field == null) {
+			field = _fields.get(name);
+		}
 
 		if (field == null) {
 			return StringPool.BLANK;
@@ -443,15 +459,8 @@ public class DocumentImpl implements Document {
 		return field.getValue();
 	}
 
-	public String get(Locale locale, String name) {
-		String tmpName = name.concat(StringPool.UNDERLINE).concat(
-			locale.toString());
-
-		Field field = _fields.get(tmpName);
-
-		if (field == null) {
-			field = _fields.get(name);
-		}
+	public String get(String name) {
+		Field field = _fields.get(name);
 
 		if (field == null) {
 			return StringPool.BLANK;

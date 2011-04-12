@@ -17,11 +17,11 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
@@ -179,21 +179,27 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 				for (Map.Entry<Locale, String> entry :
 						localizedValues.entrySet()) {
 
-					Locale locale = entry.getKey();
 					String value = entry.getValue();
 
 					if (Validator.isNull(value)) {
 						continue;
 					}
 
-					if (LocaleUtil.getDefault().equals(locale)) {
+					Locale locale = entry.getKey();
+
+					String languageId = LocaleUtil.toLanguageId(locale);
+
+					String defaultLanguageId = LocaleUtil.toLanguageId(
+						LocaleUtil.getDefault());
+
+					if (languageId.equals(defaultLanguageId)) {
 						_addLuceneFieldable(
 							luceneDocument, name, numeric, tokenized, boost,
 							value);
 					}
 
-					String localizedName = name.concat(
-						StringPool.UNDERLINE).concat(locale.toString());
+					String localizedName = DocumentImpl.getLocalizedName(
+						locale, name);
 
 					_addLuceneFieldable(
 						luceneDocument, localizedName, numeric, tokenized,

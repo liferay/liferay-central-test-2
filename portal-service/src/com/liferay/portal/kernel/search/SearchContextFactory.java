@@ -42,9 +42,9 @@ public class SearchContextFactory {
 
 		searchContext.setCompanyId(themeDisplay.getCompanyId());
 		searchContext.setGroupIds(new long[] {themeDisplay.getScopeGroupId()});
-		searchContext.setUserId(themeDisplay.getUserId());
 		searchContext.setLocale(themeDisplay.getLocale());
 		searchContext.setTimeZone(themeDisplay.getTimeZone());
+		searchContext.setUserId(themeDisplay.getUserId());
 
 		// Attributes
 
