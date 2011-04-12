@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.io;
 
 import com.liferay.portal.kernel.test.TestCase;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
+import java.util.Arrays;
 
 import java.io.IOException;
 import java.io.Reader;
