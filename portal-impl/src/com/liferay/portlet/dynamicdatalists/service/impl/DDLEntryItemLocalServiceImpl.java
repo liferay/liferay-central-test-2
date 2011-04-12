@@ -129,9 +129,7 @@ public class DDLEntryItemLocalServiceImpl
 			entryId, start, end, orderByComparator);
 	}
 
-	public int getEntryItemsCount(long entryId)
-		throws SystemException {
-
+	public int getEntryItemsCount(long entryId) throws SystemException {
 		return ddlEntryItemPersistence.countByEntryId(entryId);
 	}
 
