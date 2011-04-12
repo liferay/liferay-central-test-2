@@ -197,6 +197,24 @@
 			return (str.lastIndexOf(x) === (str.length - x.length));
 		},
 
+		escapeCDATA: function(str) {
+			return str.replace(
+				/<!\[CDATA\[|\]\]>/gi,
+				function(match) {
+					var str = '';
+
+					if (match == ']]>') {
+						str = ']]&gt;';
+					}
+					else if (match == '<![CDATA[') {
+						str = '&lt;![CDATA[';
+					}
+
+					return str;
+				}
+			);
+		},
+
 		escapeHTML: function(str) {
 			return str.replace(
 				/<|>|&/gi,

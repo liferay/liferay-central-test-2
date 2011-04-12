@@ -1893,7 +1893,7 @@ AUI().add(
 										buffer.push(option.openTag);
 									}
 
-									buffer.push('<![CDATA[' + optionValue + ']]>');
+									buffer.push('<![CDATA[' + Liferay.Util.escapeCDATA(optionValue) + ']]>');
 
 									if (multiList) {
 										buffer.push(option.closeTag);
@@ -3054,6 +3054,10 @@ AUI().add(
 							if (principalElement) {
 								content = principalElement.val();
 							}
+						}
+
+						if ((type == 'list') || (type == 'multi-list') || (type == 'text') || (type == 'text_box')) {
+							content = Liferay.Util.escapeCDATA(content);
 						}
 
 						instance.set('content', content);
