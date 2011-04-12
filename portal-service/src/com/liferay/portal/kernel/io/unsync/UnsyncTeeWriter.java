@@ -30,19 +30,23 @@ public class UnsyncTeeWriter extends Writer {
 	public Writer append(char c) throws IOException {
 		_writer1.append(c);
 		_writer2.append(c);
+
 		return this;
 	}
 
 	public Writer append(CharSequence charSequence) throws IOException {
 		_writer1.append(charSequence);
 		_writer2.append(charSequence);
+
 		return this;
 	}
 
 	public Writer append(CharSequence charSequence, int start, int end)
 		throws IOException {
+
 		_writer1.append(charSequence, start, end);
 		_writer2.append(charSequence, start, end);
+
 		return this;
 	}
 
@@ -61,9 +65,9 @@ public class UnsyncTeeWriter extends Writer {
 		_writer2.write(chars);
 	}
 
-	public void write(char[] chars, int off, int len) throws IOException {
-		_writer1.write(chars, off, len);
-		_writer2.write(chars, off, len);
+	public void write(char[] chars, int offset, int length) throws IOException {
+		_writer1.write(chars, offset, length);
+		_writer2.write(chars, offset, length);
 	}
 
 	public void write(int c) throws IOException {
@@ -76,12 +80,14 @@ public class UnsyncTeeWriter extends Writer {
 		_writer2.write(string);
 	}
 
-	public void write(String string, int off, int len) throws IOException {
-		_writer1.write(string, off, len);
-		_writer2.write(string, off, len);
+	public void write(String string, int offset, int length)
+		throws IOException {
+
+		_writer1.write(string, offset, length);
+		_writer2.write(string, offset, length);
 	}
 
-	private final Writer _writer1;
-	private final Writer _writer2;
+	private Writer _writer1;
+	private Writer _writer2;
 
 }

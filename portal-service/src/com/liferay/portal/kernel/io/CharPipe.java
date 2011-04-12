@@ -32,7 +32,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CharPipe {
 
 	public CharPipe() {
-		this(DEFAULT_BUFFER_SIZE);
+		this(_DEFAULT_BUFFER_SIZE);
 	}
 
 	public CharPipe(int bufferSize) {
@@ -56,7 +56,7 @@ public class CharPipe {
 		else {
 			bufferLock.lock();
 
-			finished= true;
+			finished = true;
 
 			try {
 				notEmpty.signalAll();
@@ -75,26 +75,23 @@ public class CharPipe {
 		return _pipeWriter;
 	}
 
-	public static final int DEFAULT_BUFFER_SIZE = 1024 * 8;
-
 	protected char[] buffer;
-	protected final Lock bufferLock = new ReentrantLock();
+	protected Lock bufferLock = new ReentrantLock();
 	protected int count;
 	protected boolean finished;
-	protected final Condition notEmpty = bufferLock.newCondition();
-	protected final Condition notFull = bufferLock.newCondition();
+	protected Condition notEmpty = bufferLock.newCondition();
+	protected Condition notFull = bufferLock.newCondition();
 	protected int readIndex;
 	protected int writeIndex;
 
-	private final PipeReader _pipeReader = new PipeReader();
-	private final PipeWriter _pipeWriter = new PipeWriter();
-
-	protected class PipeReader extends Reader {
+	private class PipeReader extends Reader {
 
 		public void close() {
 			bufferLock.lock();
+
 			try {
-				closed = true;
+				_closed = true;
+
 				notEmpty.signalAll();
 			}
 			finally {
@@ -103,7 +100,7 @@ public class CharPipe {
 		}
 
 		public void mark(int readAheadLimit) throws IOException {
-			throw new IOException("mark() not supported");
+			throw new IOException("Mark is not supported");
 		}
 
 		public boolean markSupported() {
@@ -111,11 +108,12 @@ public class CharPipe {
 		}
 
 		public int read() throws IOException {
-			if (closed) {
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
 			bufferLock.lock();
+
 			try {
 				if (waitUntilNotEmpty()) {
 					return -1;
@@ -138,14 +136,17 @@ public class CharPipe {
 
 		public int read(char[] chars, int offset, int length)
 			throws IOException {
-			if (closed) {
+
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
+
 			if (length <= 0) {
 				return 0;
 			}
 
 			bufferLock.lock();
+
 			try {
 				if (waitUntilNotEmpty()) {
 					return -1;
@@ -157,19 +158,23 @@ public class CharPipe {
 					read = count;
 				}
 
-				if (buffer.length - readIndex >= read) {
+				if ((buffer.length - readIndex) >= read) {
+
 					// One step read
+
 					System.arraycopy(buffer, readIndex, chars, offset, read);
 				}
 				else {
-					// Two steps read
+
+					// Two step read
+
 					int tailLength = buffer.length - readIndex;
 					int headLength = read - tailLength;
 
-					System.arraycopy(buffer, readIndex, chars, offset,
-						tailLength);
-					System.arraycopy(buffer, 0, chars, offset + tailLength,
-						headLength);
+					System.arraycopy(
+						buffer, readIndex, chars, offset, tailLength);
+					System.arraycopy(
+						buffer, 0, chars, offset + tailLength, headLength);
 				}
 
 				increaseReadIndex(read);
@@ -182,7 +187,7 @@ public class CharPipe {
 		}
 
 		public int read(CharBuffer charBuffer) throws IOException {
-			if (closed) {
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
@@ -194,21 +199,22 @@ public class CharPipe {
 
 			char[] tempBuffer = new char[length];
 
-			int n = read(tempBuffer, 0, length);
+			int read = read(tempBuffer, 0, length);
 
-			if (n > 0) {
-				charBuffer.put(tempBuffer, 0, n);
+			if (read > 0) {
+				charBuffer.put(tempBuffer, 0, read);
 			}
 
-			return n;
+			return read;
 		}
 
 		public boolean ready() throws IOException {
-			if (closed) {
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
 			bufferLock.lock();
+
 			try {
 				return count > 0;
 			}
@@ -218,30 +224,34 @@ public class CharPipe {
 		}
 
 		public void reset() throws IOException {
-			throw new IOException("reset() not supported");
+			throw new IOException("Reset is not supported");
 		}
 
 		public long skip(long skip) throws IOException {
 			if (skip < 0) {
-				throw new IllegalArgumentException("skip value is negative");
+				throw new IllegalArgumentException("Skip value is negative");
 			}
 
-			if (closed) {
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
 			int skipBufferSize = (int)Math.min(skip, _MAX_SKIP_BUFFER_SIZE);
 
 			bufferLock.lock();
+
 			try {
-				if ((_skipBuffer == null)
-					|| (_skipBuffer.length < skipBufferSize)) {
+				if ((_skipBuffer == null) ||
+					(_skipBuffer.length < skipBufferSize)) {
+
 					_skipBuffer = new char[skipBufferSize];
 				}
 
 				long remaining = skip;
+
 				while (remaining > 0) {
-					int skipped = read(_skipBuffer, 0,
+					int skipped = read(
+						_skipBuffer, 0,
 						(int)Math.min(remaining, skipBufferSize));
 
 					if (skipped == -1) {
@@ -255,6 +265,23 @@ public class CharPipe {
 			}
 			finally {
 				bufferLock.unlock();
+			}
+		}
+
+		protected boolean waitUntilNotEmpty() throws IOException {
+			while ((count == 0) && !finished) {
+				notEmpty.awaitUninterruptibly();
+
+				if (_closed) {
+					throw new IOException("Stream closed");
+				}
+			}
+
+			if ((count == 0) && finished) {
+				return true;
+			}
+			else {
+				return false;
 			}
 		}
 
@@ -272,29 +299,14 @@ public class CharPipe {
 			count -= consumed;
 		}
 
-		protected boolean waitUntilNotEmpty() throws IOException {
-			while ((count == 0) && !finished) {
-				notEmpty.awaitUninterruptibly();
-
-				if (closed) {
-					throw new IOException("Stream closed");
-				}
-			}
-
-			if ((count == 0) && finished) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-
 		private static final int _MAX_SKIP_BUFFER_SIZE = 8192;
+
+		private volatile boolean _closed;
 		private char[] _skipBuffer;
-		protected volatile boolean closed;
+
 	}
 
-	protected class PipeWriter extends Writer {
+	private class PipeWriter extends Writer {
 
 		public Writer append(char c) throws IOException {
 			write(c);
@@ -319,6 +331,7 @@ public class CharPipe {
 
 		public Writer append(CharSequence charSequence, int start, int end)
 			throws IOException {
+
 			String string = null;
 
 			if (charSequence == null) {
@@ -335,8 +348,10 @@ public class CharPipe {
 
 		public void close() {
 			bufferLock.lock();
+
 			try {
-				closed = true;
+				_closed = true;
+
 				notFull.signalAll();
 			}
 			finally {
@@ -353,7 +368,8 @@ public class CharPipe {
 
 		public void write(char[] chars, int offset, int length)
 			throws IOException {
-			if (closed) {
+
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
@@ -362,6 +378,7 @@ public class CharPipe {
 			}
 
 			bufferLock.lock();
+
 			try {
 				int remaining = length;
 
@@ -370,26 +387,31 @@ public class CharPipe {
 
 					int write = remaining;
 
-					if (remaining > buffer.length - count) {
+					if (remaining > (buffer.length - count)) {
 						write = buffer.length - count;
 					}
 
 					int sourceBegin = offset + length - remaining;
 
-					if (buffer.length - writeIndex >= write) {
+					if ((buffer.length - writeIndex) >= write) {
+
 						// One step write
-						System.arraycopy(chars, sourceBegin, buffer,
-							writeIndex, write);
+
+						System.arraycopy(
+							chars, sourceBegin, buffer, writeIndex, write);
 					}
 					else {
-						// Two steps write
+
+						// Two step write
+
 						int tailLength = buffer.length - writeIndex;
 						int headLength = write - tailLength;
 
-						System.arraycopy(chars, sourceBegin, buffer,
-							writeIndex, tailLength);
-						System.arraycopy(chars, sourceBegin + tailLength,
-							buffer, 0, headLength);
+						System.arraycopy(
+							chars, sourceBegin, buffer, writeIndex, tailLength);
+						System.arraycopy(
+							chars, sourceBegin + tailLength, buffer, 0,
+							headLength);
 					}
 
 					increaseWriteIndex(write);
@@ -403,11 +425,12 @@ public class CharPipe {
 		}
 
 		public void write(int c) throws IOException {
-			if (closed) {
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
 			bufferLock.lock();
+
 			try {
 				waitUntilNotFull();
 
@@ -426,7 +449,8 @@ public class CharPipe {
 
 		public void write(String string, int offset, int length)
 			throws IOException {
-			if (closed) {
+
+			if (_closed) {
 				throw new IOException("Stream closed");
 			}
 
@@ -435,6 +459,7 @@ public class CharPipe {
 			}
 
 			bufferLock.lock();
+
 			try {
 				int remaining = length;
 
@@ -449,19 +474,26 @@ public class CharPipe {
 
 					int sourceBegin = offset + length - remaining;
 
-					if (buffer.length - writeIndex >= write) {
+					if ((buffer.length - writeIndex) >= write) {
+
 						// One step write
-						string.getChars(sourceBegin, sourceBegin + write,
-							buffer, writeIndex);
+
+						string.getChars(
+							sourceBegin, sourceBegin + write, buffer,
+							writeIndex);
 					}
 					else {
-						// Two steps write
+
+						// Two step write
+
 						int tailLength = buffer.length - writeIndex;
 						int headLength = write - tailLength;
 
-						string.getChars(sourceBegin, sourceBegin + tailLength,
-							buffer, writeIndex);
-						string.getChars(sourceBegin + tailLength,
+						string.getChars(
+							sourceBegin, sourceBegin + tailLength, buffer,
+							writeIndex);
+						string.getChars(
+							sourceBegin + tailLength,
 							sourceBegin + tailLength + headLength, buffer, 0);
 					}
 
@@ -472,6 +504,16 @@ public class CharPipe {
 			}
 			finally {
 				bufferLock.unlock();
+			}
+		}
+
+		protected void waitUntilNotFull() throws IOException {
+			while (count == buffer.length) {
+				notFull.awaitUninterruptibly();
+
+				if (_closed) {
+					throw new IOException("Stream closed");
+				}
 			}
 		}
 
@@ -489,18 +531,13 @@ public class CharPipe {
 			count += produced;
 		}
 
-		protected void waitUntilNotFull() throws IOException {
-			while (count == buffer.length) {
-				notFull.awaitUninterruptibly();
-
-				if (closed) {
-					throw new IOException("Stream closed");
-				}
-			}
-		}
-
-		protected volatile boolean closed;
+		private volatile boolean _closed;
 
 	}
+
+	private static final int _DEFAULT_BUFFER_SIZE = 1024 * 8;
+
+	private PipeReader _pipeReader = new PipeReader();
+	private PipeWriter _pipeWriter = new PipeWriter();
 
 }

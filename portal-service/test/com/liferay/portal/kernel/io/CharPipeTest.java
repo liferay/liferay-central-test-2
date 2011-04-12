@@ -40,70 +40,100 @@ public class CharPipeTest extends TestCase {
 		assertFalse(charPipe.finished);
 
 		try {
-			charPipe.getReader().read();
+			Reader reader = charPipe.getReader();
+
+			reader.read();
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getReader().read(new char[1]);
+			Reader reader = charPipe.getReader();
+
+			reader.read(new char[1]);
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getReader().read(CharBuffer.allocate(1));
+			Reader reader = charPipe.getReader();
+
+			reader.read(CharBuffer.allocate(1));
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getReader().ready();
+			Reader reader = charPipe.getReader();
+
+			reader.ready();
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getReader().skip(1);
+			Reader reader = charPipe.getReader();
+
+			reader.skip(1);
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getWriter().append('a');
+			Writer writer = charPipe.getWriter();
+
+			writer.append('a');
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getWriter().append("a");
+			Writer writer = charPipe.getWriter();
+
+			writer.append("a");
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getWriter().write("abc".toCharArray());
+			Writer writer = charPipe.getWriter();
+
+			writer.write("abc".toCharArray());
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getWriter().write((int)'a');
+			Writer writer = charPipe.getWriter();
+
+			writer.write('a');
+
 			fail();
 		}
 		catch (IOException ioe) {
 		}
 
 		try {
-			charPipe.getWriter().write("a");
+			Writer writer = charPipe.getWriter();
+
+			writer.write("a");
+
 			fail();
 		}
 		catch (IOException ioe) {
@@ -115,30 +145,32 @@ public class CharPipeTest extends TestCase {
 
 		Reader reader = charPipe.getReader();
 
-		Thread closeThread =  new Thread() {
+		Thread thread = new Thread() {
+
 			public void run() {
 				try {
 					Thread.sleep(100);
+
 					charPipe.close();
 				}
 				catch (Exception e) {
 					fail(e.getMessage());
 				}
 			}
+
 		};
 
 		long startTime = System.currentTimeMillis();
 
-		closeThread.start();
+		thread.start();
 
 		int result = reader.read();
 
-		closeThread.join();
+		thread.join();
 
 		long duration = System.currentTimeMillis() - startTime;
 
 		assertEquals(-1, result);
-
 		assertTrue(duration > 100);
 	}
 
@@ -152,7 +184,9 @@ public class CharPipeTest extends TestCase {
 		assertNotNull(charPipe.buffer);
 		assertTrue(charPipe.finished);
 
-		assertEquals(-1, charPipe.getReader().read());
+		Reader reader = charPipe.getReader();
+
+		assertEquals(-1, reader.read());
 	}
 
 	public void testClosePeacefullyNotEmpty() throws IOException {
@@ -167,21 +201,19 @@ public class CharPipeTest extends TestCase {
 		assertNotNull(charPipe.buffer);
 		assertTrue(charPipe.finished);
 
-		char[] readBuffer = new char[5];
+		char[] buffer = new char[5];
 
 		Reader reader = charPipe.getReader();
 
-		int result = reader.read(readBuffer);
+		int result = reader.read(buffer);
 
 		assertEquals(4, result);
-		assertEquals('a', readBuffer[0]);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
-		assertEquals('d', readBuffer[3]);
-		assertEquals(0, readBuffer[4]);
-
+		assertEquals('a', buffer[0]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
+		assertEquals('d', buffer[3]);
+		assertEquals(0, buffer[4]);
 		assertEquals(-1, reader.read());
-
 	}
 
 	public void testConstructor() {
@@ -217,11 +249,11 @@ public class CharPipeTest extends TestCase {
 		Reader reader2 = charPipe.getReader();
 
 		assertSame(reader1, reader2);
-
 		assertFalse(reader1.markSupported());
 
 		try {
 			reader1.mark(1);
+
 			fail();
 		}
 		catch (IOException ioe) {
@@ -229,6 +261,7 @@ public class CharPipeTest extends TestCase {
 
 		try {
 			reader1.reset();
+
 			fail();
 		}
 		catch (IOException ioe) {
@@ -254,24 +287,21 @@ public class CharPipeTest extends TestCase {
 		CharPipe charPipe = new CharPipe(4);
 
 		Reader reader = charPipe.getReader();
-		Writer writer = charPipe.getWriter();
 
 		assertFalse(reader.ready());
+
+		Writer writer = charPipe.getWriter();
 
 		writer.write('a');
 
 		assertTrue(reader.ready());
-
 		assertEquals('a', reader.read());
-
 		assertFalse(reader.ready());
 
 		writer.append('b');
 
 		assertTrue(reader.ready());
-
 		assertEquals('b', reader.read());
-
 		assertFalse(reader.ready());
 
 		charPipe.close();
@@ -280,21 +310,27 @@ public class CharPipeTest extends TestCase {
 	public void testPipingCharArray() throws IOException {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
 		char[] data = "abcd".toCharArray();
-		char[] readBuffer = new char[4];
 
 		writer.write(data);
-		int result = reader.read(readBuffer);
+
+		char[] buffer = new char[4];
+
+		Reader reader = charPipe.getReader();
+
+		int result = reader.read(buffer);
+
 		assertEquals(4, result);
-		assertTrue(Arrays.equals(data, readBuffer));
+		assertTrue(Arrays.equals(data, buffer));
 
 		writer.append(new String(data));
-		result = reader.read(readBuffer);
+
+		result = reader.read(buffer);
+
 		assertEquals(4, result);
-		assertTrue(Arrays.equals(data, readBuffer));
+		assertTrue(Arrays.equals(data, buffer));
 
 		charPipe.close();
 	}
@@ -302,65 +338,84 @@ public class CharPipeTest extends TestCase {
 	public void testPipingCharArrayWithOffset() throws IOException {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
 		char[] data = "abcd".toCharArray();
-		char[] readBuffer = new char[4];
 
 		writer.write(data, 0, 0);
+
+		Reader reader = charPipe.getReader();
+
 		assertFalse(reader.ready());
 
 		writer.write(data, 1, 2);
-		int result = reader.read(readBuffer, 1, 0);
+
+		char[] buffer = new char[4];
+
+		int result = reader.read(buffer, 1, 0);
+
 		assertEquals(0, result);
-		result = reader.read(readBuffer, 1, 3);
+
+		result = reader.read(buffer, 1, 3);
+
 		assertEquals(2, result);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
 
 		writer.append(new String(data), 1, 3);
-		result = reader.read(readBuffer, 1, 0);
+
+		result = reader.read(buffer, 1, 0);
+
 		assertEquals(0, result);
-		result = reader.read(readBuffer, 1, 3);
+
+		result = reader.read(buffer, 1, 3);
+
 		assertEquals(2, result);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
 
 		charPipe.close();
 	}
 
-	public void testPipingCharArrayWithOffsetTwoSteps() throws IOException {
+	public void testPipingCharArrayWithOffsetTwoStep() throws IOException {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
 		char[] data = "abcd".toCharArray();
-		char[] readBuffer = new char[4];
 
 		writer.write(data);
-		int result = reader.read(readBuffer, 0, 3);
+
+		Reader reader = charPipe.getReader();
+
+		char[] buffer = new char[4];
+
+		int result = reader.read(buffer, 0, 3);
+
 		assertEquals(3, result);
-		assertEquals('a', readBuffer[0]);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
+		assertEquals('a', buffer[0]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
 
 		writer.write(data, 0, 3);
-		result = reader.read(readBuffer);
+
+		result = reader.read(buffer);
+
 		assertEquals(4, result);
-		assertEquals('d', readBuffer[0]);
-		assertEquals('a', readBuffer[1]);
-		assertEquals('b', readBuffer[2]);
-		assertEquals('c', readBuffer[3]);
+		assertEquals('d', buffer[0]);
+		assertEquals('a', buffer[1]);
+		assertEquals('b', buffer[2]);
+		assertEquals('c', buffer[3]);
 
 		writer.write(data);
-		result = reader.read(readBuffer);
+
+		result = reader.read(buffer);
+
 		assertEquals(4, result);
-		assertEquals('a', readBuffer[0]);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
-		assertEquals('d', readBuffer[3]);
+		assertEquals('a', buffer[0]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
+		assertEquals('d', buffer[3]);
 
 		charPipe.close();
 	}
@@ -368,21 +423,22 @@ public class CharPipeTest extends TestCase {
 	public void testPipingCharBuffer() throws IOException {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
-		String string = "abcd";
-
-		writer.write(string);
+		writer.write("abcd");
 
 		CharBuffer charBuffer = CharBuffer.allocate(0);
 
+		Reader reader = charPipe.getReader();
+
 		int result = reader.read(charBuffer);
+
 		assertEquals(0, result);
 
 		charBuffer = CharBuffer.allocate(2);
 
 		result = reader.read(charBuffer);
+
 		assertEquals(2, result);
 
 		charBuffer.flip();
@@ -399,13 +455,14 @@ public class CharPipeTest extends TestCase {
 		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
-		String string = "abcd";
-		char[] readBuffer = new char[4];
+		writer.write("abcd");
 
-		writer.write(string);
-		int result = reader.read(readBuffer);
+		char[] buffer = new char[4];
+
+		int result = reader.read(buffer);
+
 		assertEquals(4, result);
-		assertEquals(string, new String(readBuffer));
+		assertEquals("abcd", new String(buffer));
 
 		charPipe.close();
 	}
@@ -413,58 +470,69 @@ public class CharPipeTest extends TestCase {
 	public void testPipingStringWithOffset() throws IOException {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
-		String string = "abcd";
-		char[] readBuffer = new char[4];
+		writer.write("abcd", 0, 0);
 
-		writer.write(string, 0, 0);
+		Reader reader = charPipe.getReader();
+
 		assertFalse(reader.ready());
 
-		writer.write(string, 1, 3);
-		int result = reader.read(readBuffer, 1, 0);
+		writer.write("abcd", 1, 3);
+
+		char[] buffer = new char[4];
+
+		int result = reader.read(buffer, 1, 0);
+
 		assertEquals(0, result);
-		result = reader.read(readBuffer, 1, 3);
+
+		result = reader.read(buffer, 1, 3);
+
 		assertEquals(3, result);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
-		assertEquals('d', readBuffer[3]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
+		assertEquals('d', buffer[3]);
 
 		charPipe.close();
 	}
 
-	public void testPipingStringWithOffsetTwoSteps() throws IOException {
+	public void testPipingStringWithOffsetTwoStep() throws IOException {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
 
-		String string = "abcd";
-		char[] readBuffer = new char[4];
+		writer.write("abcd");
 
-		writer.write(string);
-		int result = reader.read(readBuffer, 0, 3);
+		char[] buffer = new char[4];
+
+		Reader reader = charPipe.getReader();
+
+		int result = reader.read(buffer, 0, 3);
+
 		assertEquals(3, result);
-		assertEquals('a', readBuffer[0]);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
+		assertEquals('a', buffer[0]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
 
-		writer.write(string, 0, 3);
-		result = reader.read(readBuffer);
-		assertEquals(4, result);
-		assertEquals('d', readBuffer[0]);
-		assertEquals('a', readBuffer[1]);
-		assertEquals('b', readBuffer[2]);
-		assertEquals('c', readBuffer[3]);
+		writer.write("abcd", 0, 3);
 
-		writer.write(string);
-		result = reader.read(readBuffer);
+		result = reader.read(buffer);
+
 		assertEquals(4, result);
-		assertEquals('a', readBuffer[0]);
-		assertEquals('b', readBuffer[1]);
-		assertEquals('c', readBuffer[2]);
-		assertEquals('d', readBuffer[3]);
+		assertEquals('d', buffer[0]);
+		assertEquals('a', buffer[1]);
+		assertEquals('b', buffer[2]);
+		assertEquals('c', buffer[3]);
+
+		writer.write("abcd");
+
+		result = reader.read(buffer);
+
+		assertEquals(4, result);
+		assertEquals('a', buffer[0]);
+		assertEquals('b', buffer[1]);
+		assertEquals('c', buffer[2]);
+		assertEquals('d', buffer[3]);
 
 		charPipe.close();
 	}
@@ -473,28 +541,31 @@ public class CharPipeTest extends TestCase {
 		CharPipe charPipe = new CharPipe(4);
 
 		Reader reader = charPipe.getReader();
-		Writer writer = charPipe.getWriter();
 
 		try {
 			reader.skip(-1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
+		Writer writer = charPipe.getWriter();
+
 		SlowWriterJob slowWriterJob = new SlowWriterJob(writer, 4, false);
 
-		Thread writerThread = new Thread(slowWriterJob);
+		Thread thread = new Thread(slowWriterJob);
 
-		writerThread.start();
+		thread.start();
 
 		for (int i = 0; i < 10; i++) {
-			assertTrue(timedSkip(reader, 2) > 50);
-			assertTrue(timedSkip(reader, 2) < 50);
+			assertTrue(_timedSkip(reader, 2) > 50);
+			assertTrue(_timedSkip(reader, 2) < 50);
 		}
 
 		charPipe.close();
-		writerThread.join();
+
+		thread.join();
 
 		assertFalse(slowWriterJob.isFailed());
 	}
@@ -503,27 +574,30 @@ public class CharPipeTest extends TestCase {
 		CharPipe charPipe = new CharPipe(4);
 
 		Reader reader = charPipe.getReader();
+
+		SlowReaderJob slowReaderJob = new SlowReaderJob(
+			reader, 4, false, false);
+
+		Thread thread = new Thread(slowReaderJob);
+
 		Writer writer = charPipe.getWriter();
 
-		SlowReaderJob slowReaderJob = new SlowReaderJob(reader, 4, false,
-			false);
+		assertTrue(_timedWrite(writer, "abcd") < 100);
 
-		Thread readerThread = new Thread(slowReaderJob);
-		assertTrue(timedWrite(writer, "abcd") < 100);
-
-		readerThread.start();
+		thread.start();
 
 		for (int i = 0; i < 5; i++) {
 			if ((i % 2) == 0) {
-				assertTrue(timedWrite(writer, "abcdefgh") > 100);
+				assertTrue(_timedWrite(writer, "abcdefgh") > 100);
 			}
 			else {
-				assertTrue(timedWrite(writer, "abcdefgh".toCharArray()) > 100);
+				assertTrue(_timedWrite(writer, "abcdefgh".toCharArray()) > 100);
 			}
 		}
 
 		charPipe.close();
-		readerThread.join();
+
+		thread.join();
 
 		assertFalse(slowReaderJob.isFailed());
 	}
@@ -532,21 +606,24 @@ public class CharPipeTest extends TestCase {
 		CharPipe charPipe = new CharPipe(4);
 
 		Reader reader = charPipe.getReader();
-		Writer writer = charPipe.getWriter();
 
 		SlowReaderJob slowReaderJob = new SlowReaderJob(reader, 4, true, true);
 
-		Thread readerThread = new Thread(slowReaderJob);
-		assertTrue(timedWrite(writer, "abcd") < 100);
+		Thread thread = new Thread(slowReaderJob);
 
-		readerThread.start();
+		Writer writer = charPipe.getWriter();
+
+		assertTrue(_timedWrite(writer, "abcd") < 100);
+
+		thread.start();
 
 		for (int i = 0; i < 2; i++) {
-			assertTrue(timedWrite(writer, "abcdefgh") > 100);
+			assertTrue(_timedWrite(writer, "abcdefgh") > 100);
 		}
 
 		charPipe.close(true);
-		readerThread.join();
+
+		thread.join();
 
 		assertFalse(slowReaderJob.isFailed());
 	}
@@ -555,21 +632,24 @@ public class CharPipeTest extends TestCase {
 		CharPipe charPipe = new CharPipe(4);
 
 		Reader reader = charPipe.getReader();
-		Writer writer = charPipe.getWriter();
 
 		SlowReaderJob slowReaderJob = new SlowReaderJob(reader, 4, true, false);
 
-		Thread readerThread = new Thread(slowReaderJob);
-		assertTrue(timedWrite(writer, "abcd") < 100);
+		Thread thread = new Thread(slowReaderJob);
 
-		readerThread.start();
+		Writer writer = charPipe.getWriter();
+
+		assertTrue(_timedWrite(writer, "abcd") < 100);
+
+		thread.start();
 
 		for (int i = 0; i < 2; i++) {
-			assertTrue(timedWrite(writer, "abcdefgh") > 100);
+			assertTrue(_timedWrite(writer, "abcdefgh") > 100);
 		}
 
 		charPipe.close();
-		readerThread.join();
+
+		thread.join();
 
 		assertFalse(slowReaderJob.isFailed());
 	}
@@ -577,23 +657,25 @@ public class CharPipeTest extends TestCase {
 	public void testSlowWriter() throws Exception {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
-
-		char[] readBuffer = new char[8];
 
 		SlowWriterJob slowWriterJob = new SlowWriterJob(writer, 4, false);
 
-		Thread writerThread = new Thread(slowWriterJob);
+		Thread thread = new Thread(slowWriterJob);
 
-		writerThread.start();
+		thread.start();
 
 		for (int i = 0; i < 10; i++) {
-			assertTrue(timedRead(reader, readBuffer) > 50);
+			Reader reader = charPipe.getReader();
+
+			char[] buffer = new char[8];
+
+			assertTrue(_timedRead(reader, buffer) > 50);
 		}
 
 		charPipe.close();
-		writerThread.join();
+
+		thread.join();
 
 		assertFalse(slowWriterJob.isFailed());
 	}
@@ -601,50 +683,62 @@ public class CharPipeTest extends TestCase {
 	public void testSlowWriterOnClose() throws Exception {
 		CharPipe charPipe = new CharPipe(4);
 
-		Reader reader = charPipe.getReader();
 		Writer writer = charPipe.getWriter();
-
-		char[] readBuffer = new char[8];
 
 		SlowWriterJob slowWriterJob = new SlowWriterJob(writer, 4, true);
 
-		Thread writerThread = new Thread(slowWriterJob);
+		Thread thread = new Thread(slowWriterJob);
 
-		writerThread.start();
+		thread.start();
 
 		for (int i = 0; i < 5; i++) {
-			assertTrue(timedRead(reader, readBuffer) > 50);
+			Reader reader = charPipe.getReader();
+
+			char[] buffer = new char[8];
+
+			assertTrue(_timedRead(reader, buffer) > 50);
 		}
 
 		charPipe.close();
-		writerThread.join();
+
+		thread.join();
 
 		assertFalse(slowWriterJob.isFailed());
 	}
 
-	private long timedRead(Reader reader, char[] readBuffer)
+	private long _timedRead(Reader reader, char[] buffer)
 		throws IOException {
+
 		long startTime = System.currentTimeMillis();
-		reader.read(readBuffer);
+
+		reader.read(buffer);
+
 		return System.currentTimeMillis() - startTime;
 	}
 
-	private long timedSkip(Reader reader, int skipSize)
+	private long _timedSkip(Reader reader, int skipSize)
 		throws IOException {
+
 		long startTime = System.currentTimeMillis();
+
 		reader.skip(skipSize);
+
 		return System.currentTimeMillis() - startTime;
 	}
 
-	private long timedWrite(Writer writer, char[] data) throws IOException {
+	private long _timedWrite(Writer writer, char[] data) throws IOException {
 		long startTime = System.currentTimeMillis();
+
 		writer.write(data);
+
 		return System.currentTimeMillis() - startTime;
 	}
 
-	private long timedWrite(Writer writer, String data) throws IOException {
+	private long _timedWrite(Writer writer, String data) throws IOException {
 		long startTime = System.currentTimeMillis();
+
 		writer.write(data);
+
 		return System.currentTimeMillis() - startTime;
 	}
 
@@ -652,10 +746,11 @@ public class CharPipeTest extends TestCase {
 
 		public SlowReaderJob(
 			Reader reader, int bufferSize, boolean close, boolean force) {
+
+			_reader = reader;
+			_buffer = new char[bufferSize];
 			_close = close;
 			_force = force;
-			_readBuffer = new char[bufferSize];
-			_reader = reader;
 		}
 
 		public boolean isFailed() {
@@ -667,9 +762,9 @@ public class CharPipeTest extends TestCase {
 				for (int i = 0; i < 10; i++) {
 					Thread.sleep(100);
 
-					int result = _reader.read(_readBuffer);
+					int result = _reader.read(_buffer);
 
-					if (result == _readBuffer.length) {
+					if (result == _buffer.length) {
 						continue;
 					}
 					else if (_close && !_force && (result == -1)) {
@@ -677,6 +772,7 @@ public class CharPipeTest extends TestCase {
 					}
 					else {
 						_failed = true;
+
 						break;
 					}
 				}
@@ -692,11 +788,11 @@ public class CharPipeTest extends TestCase {
 			}
 		}
 
-		private final boolean _close;
-		private final boolean _force;
+		private char[] _buffer;
+		private boolean _close;
 		private boolean _failed;
-		private final char[] _readBuffer;
-		private final Reader _reader;
+		private boolean _force;
+		private Reader _reader;
 
 	}
 
@@ -704,9 +800,10 @@ public class CharPipeTest extends TestCase {
 
 		public SlowWriterJob(
 			Writer writer, int dataSize, boolean expectException) {
+
+			_writer = writer;
 			_dataSize = dataSize;
 			_expectException = expectException;
-			_writer = writer;
 		}
 
 		public boolean isFailed() {
@@ -730,12 +827,13 @@ public class CharPipeTest extends TestCase {
 					_failed = true;
 				}
 			}
+
 		}
 
-		private final int _dataSize;
-		private final boolean _expectException;
+		private int _dataSize;
+		private boolean _expectException;
 		private boolean _failed;
-		private final Writer _writer;
+		private Writer _writer;
 
 	}
 

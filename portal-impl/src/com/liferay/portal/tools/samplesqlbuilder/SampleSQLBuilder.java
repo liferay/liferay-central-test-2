@@ -60,9 +60,9 @@ import java.nio.channels.FileChannel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -157,28 +157,30 @@ public class SampleSQLBuilder {
 				baseDir, _maxGroupCount, _maxUserToGroupCount, _counter,
 				_permissionCounter, _resourceCounter, _resourceCodeCounter);
 
-			_specificDB = DBFactoryUtil.getDB(_dbType);
-
-			final CharPipe charPipe = new CharPipe(1024 * 1024 * 10);
+			_db = DBFactoryUtil.getDB(_dbType);
 
 			// Generic
 
-			generateGenericSQL(charPipe);
+			_tempDir = new File(_outputDir, "temp");
 
-			File tempDir = new File(_outputDir, _TEMP_DIR);
-			tempDir.mkdirs();
+			_tempDir.mkdirs();
+
+			final CharPipe charPipe = new CharPipe(1024 * 1024 * 10);
+
+			generateSQL(charPipe);
 
 			try {
+
 				// Specific
 
-				translateSpecificSQL(charPipe.getReader());
+				compressSQL(charPipe.getReader());
 
 				// Merge
 
-				mergeFinalSQL();
+				mergeSQL();
 			}
 			finally {
-				FileUtil.deltree(tempDir);
+				FileUtil.deltree(_tempDir);
 			}
 		}
 		catch (Exception e) {
@@ -323,25 +325,110 @@ public class SampleSQLBuilder {
 		processTemplate(_tplWikiPage, context);
 	}
 
-	protected void createSample() throws Exception {
-		Map<String, Object> context = getContext();
+	protected void compressInsertSQL(String insertSQL) throws IOException {
+		String tableName = insertSQL.substring(0, insertSQL.indexOf(' '));
 
-		Writer blogsEntriesCsvWriter = getWriter("blogs_entries.csv");
-		Writer mbMessagesCsvWriter = getWriter("mb_messages.csv");
-		Writer usersCsvWriter = getWriter("users.csv");
-		Writer wikiPagesCsvWriter = getWriter("wiki_pages.csv");
+		int pos = insertSQL.indexOf(" values ") + 8;
 
-		put(context, "blogsEntriesCsvWriter", blogsEntriesCsvWriter);
-		put(context, "mbMessagesCsvWriter", mbMessagesCsvWriter);
-		put(context, "usersCsvWriter", usersCsvWriter);
-		put(context, "wikiPagesCsvWriter", wikiPagesCsvWriter);
+		String values = insertSQL.substring(pos, insertSQL.length() - 1);
 
-		processTemplate(_tplSample, context);
+		StringBundler sb = _insertSQLs.get(tableName);
 
-		blogsEntriesCsvWriter.flush();
-		mbMessagesCsvWriter.flush();
-		usersCsvWriter.flush();
-		wikiPagesCsvWriter.flush();
+		if (sb == null) {
+			sb = new StringBundler();
+
+			_insertSQLs.put(tableName, sb);
+
+			sb.append("insert into ");
+			sb.append(insertSQL.substring(0, pos));
+			sb.append("\n");
+		}
+		else {
+			sb.append(",\n");
+		}
+
+		sb.append(values);
+
+		if (sb.index() >= _OPTIMIZE_BUFFER_SIZE) {
+			String sql = _db.buildSQL(sb.toString());
+
+			sb.setIndex(0);
+
+			writeToInsertSQLFile(tableName, sql);
+		}
+	}
+
+	protected void compressSQL(Reader reader) throws IOException {
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			reader);
+
+		String s = null;
+
+		while ((s = unsyncBufferedReader.readLine()) != null) {
+			s = s.trim();
+
+			if (s.length() > 0) {
+				if (s.startsWith("insert into ")) {
+					compressInsertSQL(s.substring(12));
+				}
+				else if (s.length() > 0) {
+					_otherSQLs.add(s);
+				}
+			}
+		}
+
+		unsyncBufferedReader.close();
+	}
+
+	protected void generateSQL(final CharPipe charPipe) {
+		final Writer writer = charPipe.getWriter();
+
+		Thread thread = new Thread() {
+
+			public void run() {
+				try {
+					_writer = new UnsyncTeeWriter(
+						writer, new FileWriter(_outputDir +  "/sample.sql"));
+
+					createSample();
+
+					_writer.close();
+
+					charPipe.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			protected void createSample() throws Exception {
+				Map<String, Object> context = getContext();
+
+				Writer blogsEntriesCsvWriter = getWriter("blogs_entries.csv");
+				Writer mbMessagesCsvWriter = getWriter("mb_messages.csv");
+				Writer usersCsvWriter = getWriter("users.csv");
+				Writer wikiPagesCsvWriter = getWriter("wiki_pages.csv");
+
+				put(context, "blogsEntriesCsvWriter", blogsEntriesCsvWriter);
+				put(context, "mbMessagesCsvWriter", mbMessagesCsvWriter);
+				put(context, "usersCsvWriter", usersCsvWriter);
+				put(context, "wikiPagesCsvWriter", wikiPagesCsvWriter);
+
+				processTemplate(_tplSample, context);
+
+				blogsEntriesCsvWriter.flush();
+				mbMessagesCsvWriter.flush();
+				usersCsvWriter.flush();
+				wikiPagesCsvWriter.flush();
+			}
+
+			protected Writer getWriter(String fileName) throws Exception {
+				return new FileWriter(new File(_outputDir + "/" + fileName));
+			}
+
+		};
+
+		thread.start();
 	}
 
 	protected Map<String, Object> getContext() {
@@ -373,152 +460,79 @@ public class SampleSQLBuilder {
 		return context;
 	}
 
-	protected Writer getWriter(String fileName) throws Exception {
-		return new FileWriter(new File(_outputDir + "/" + fileName));
+	protected File getInsertSQLFile(String tableName) {
+		return new File(_tempDir, tableName);
 	}
 
-	protected void processInsertSQL(String insertSQL) throws IOException {
-		String tableName = insertSQL.substring(0, insertSQL.indexOf(' '));
+	protected void mergeSQL() throws IOException {
+		FileOutputStream fileOutputStream = new FileOutputStream(
+			_outputDir + "/sample-" + _dbType + ".sql");
 
-		int valuesPosition = insertSQL.indexOf(" values ") + 8;
+		FileChannel fileChannel = fileOutputStream.getChannel();
 
-		String values = insertSQL.substring(
-			valuesPosition, insertSQL.length() - 1);
+		Set<Map.Entry<String, StringBundler>> insertSQLs =
+			_insertSQLs.entrySet();
 
-		StringBundler sb = _insertMap.get(tableName);
-		if (sb == null) {
-			sb = new StringBundler();
-			_insertMap.put(tableName, sb);
+		for (Map.Entry<String, StringBundler> entry : insertSQLs) {
+			String tableName = entry.getKey();
 
-			sb.append("insert into ");
-			sb.append(insertSQL.substring(0, valuesPosition));
-			sb.append("\n");
+			String sql = _db.buildSQL(entry.getValue().toString());
+
+			writeToInsertSQLFile(tableName, sql);
+
+			Writer insertSQLWriter = _insertSQLWriters.remove(tableName);
+
+			insertSQLWriter.write(";\n");
+
+			insertSQLWriter.close();
+
+			File insertSQLFile = getInsertSQLFile(tableName);
+
+			FileInputStream insertSQLFileInputStream = new FileInputStream(
+				insertSQLFile);
+
+			FileChannel insertSQLFileChannel =
+				insertSQLFileInputStream.getChannel();
+
+			insertSQLFileChannel.transferTo(
+				0, insertSQLFileChannel.size(), fileChannel);
+
+			insertSQLFileChannel.close();
 		}
-		else {
-			sb.append(",\n");
+
+		Writer writer = new OutputStreamWriter(fileOutputStream);
+
+		for (String sql : _otherSQLs) {
+			sql = _db.buildSQL(sql);
+
+			writer.write(sql);
+			writer.write(StringPool.NEW_LINE);
 		}
 
-		sb.append(values);
-
-		if (sb.index() >= _OPTIMIZE_BUFFER_SIZE) {
-			String sql = _specificDB.buildSQL(sb.toString());
-
-			sb.setIndex(0);
-
-			writeToTempFile(tableName, sql);
-		}
+		writer.close();
 	}
 
 	protected void processTemplate(String name, Map<String, Object> context)
 		throws Exception {
 
-		FreeMarkerUtil.process(name, context, _writerGeneric);
+		FreeMarkerUtil.process(name, context, _writer);
 	}
 
 	protected void put(Map<String, Object> context, String key, Object value) {
 		context.put(key, value);
 	}
 
-	private void mergeFinalSQL() throws IOException {
-		String tempDir = _outputDir + "/" + _TEMP_DIR;
-
-		FileOutputStream fileOutputStream = new FileOutputStream(
-			_outputDir + "/sample-" + _dbType + ".sql");
-
-		FileChannel fileChannel = fileOutputStream.getChannel();
-
-		Iterator<Map.Entry<String, StringBundler>> tempSQLsIterator =
-			_insertMap.entrySet().iterator();
-
-		while (tempSQLsIterator.hasNext()) {
-			Map.Entry<String, StringBundler> tempSQLs = tempSQLsIterator.next();
-
-			String tableName = tempSQLs.getKey();
-
-			String sql = _specificDB.buildSQL(tempSQLs.getValue().toString());
-
-			writeToTempFile(tableName, sql);
-
-			Writer tempWriter = _tempFileWriters.remove(tableName);
-			tempWriter.write(";\n");
-			tempWriter.close();
-
-			FileChannel tempSQLChannel = new FileInputStream(
-				new File(tempDir, tableName)).getChannel();
-
-			tempSQLChannel.transferTo(0, tempSQLChannel.size(), fileChannel);
-
-			tempSQLChannel.close();
-
-			tempSQLsIterator.remove();
-		}
-
-		Writer writerSpecific = new OutputStreamWriter(fileOutputStream);
-
-		for (String sql : _otherSQLs) {
-			sql = _specificDB.buildSQL(sql);
-			writerSpecific.write(sql);
-			writerSpecific.write(StringPool.NEW_LINE);
-		}
-
-		writerSpecific.close();
-	}
-
-	private void generateGenericSQL(final CharPipe charPipe) {
-		final Writer writer = charPipe.getWriter();
-
-		new Thread() {
-			public void run() {
-				try {
-					_writerGeneric = new UnsyncTeeWriter(writer,
-						new FileWriter(_outputDir +  "/sample.sql"));
-
-					createSample();
-
-					_writerGeneric.close();
-
-					charPipe.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}.start();
-	}
-
-	private void translateSpecificSQL(Reader reader) throws IOException {
-		UnsyncBufferedReader unsyncBufferedReader =
-			new UnsyncBufferedReader(reader);
-
-		String s = null;
-
-		while ((s = unsyncBufferedReader.readLine()) != null) {
-			s = s.trim();
-
-			if (s.length() > 0) {
-
-				if (s.startsWith("insert into ")) {
-					processInsertSQL(s.substring("insert into ".length()));
-				}
-				else if (s.length() > 0) {
-					_otherSQLs.add(s);
-				}
-			}
-
-		}
-
-		unsyncBufferedReader.close();
-	}
-
-	private void writeToTempFile(String tableName, String sql)
+	protected void writeToInsertSQLFile(String tableName, String sql)
 		throws IOException {
-		Writer writer = _tempFileWriters.get(tableName);
+
+		Writer writer = _insertSQLWriters.get(tableName);
 
 		if (writer == null) {
-			writer = new FileWriter(_outputDir + "/" + _TEMP_DIR + "/" +
-				tableName);
+			File file = getInsertSQLFile(tableName);
 
-			_tempFileWriters.put(tableName, writer);
+			writer = new FileWriter(file);
+
+			_insertSQLWriters.put(tableName, writer);
 		}
 
 		writer.write(sql);
@@ -526,16 +540,17 @@ public class SampleSQLBuilder {
 
 	private static final int _OPTIMIZE_BUFFER_SIZE = 8192;
 
-	private static final String _TEMP_DIR = "temp";
-
 	private static final String _TPL_ROOT =
 		"com/liferay/portal/tools/samplesqlbuilder/dependencies/";
 
 	private SimpleCounter _counter;
 	private DataFactory _dataFactory;
+	private DB _db;
 	private String _dbType;
-	private Map<String, StringBundler> _insertMap =
+	private Map<String, StringBundler> _insertSQLs =
 		new ConcurrentHashMap<String, StringBundler>();
+	private Map<String, Writer> _insertSQLWriters =
+		new ConcurrentHashMap<String, Writer>();
 	private int _maxBlogsEntryCommentCount;
 	private int _maxBlogsEntryCount;
 	private int _maxGroupCount;
@@ -553,13 +568,11 @@ public class SampleSQLBuilder {
 	private SimpleCounter _resourceCodeCounter;
 	private SimpleCounter _resourceCounter;
 	private boolean _securityEnabled;
-	private DB _specificDB;
-	private Map<String, Writer> _tempFileWriters =
-		new ConcurrentHashMap<String, Writer>();
+	private File _tempDir;
 	private String _tplAssetEntry = _TPL_ROOT + "asset_entry.ftl";
-	private String _tplGroup = _TPL_ROOT + "group.ftl";
 	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";
 	private String _tplBlogsStatsUser = _TPL_ROOT + "blogs_stats_user.ftl";
+	private String _tplGroup = _TPL_ROOT + "group.ftl";
 	private String _tplMBCategory = _TPL_ROOT + "mb_category.ftl";
 	private String _tplMBDiscussion = _TPL_ROOT + "mb_discussion.ftl";
 	private String _tplMBMessage = _TPL_ROOT + "mb_message.ftl";
@@ -571,6 +584,6 @@ public class SampleSQLBuilder {
 	private String _tplWikiNode = _TPL_ROOT + "wiki_node.ftl";
 	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";
 	private SimpleCounter _userScreenNameIncrementer;
-	private Writer _writerGeneric;
+	private Writer _writer;
 
 }
