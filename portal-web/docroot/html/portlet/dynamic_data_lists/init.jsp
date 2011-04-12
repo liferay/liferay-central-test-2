@@ -23,9 +23,11 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.EntryNameException" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLEntry" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLEntryItem" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.EntryDisplayTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.EntrySearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.EntrySearchTerms" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLEntryItemLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.permission.DDLEntryPermission" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
@@ -33,6 +35,10 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Fields" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMFieldConstants" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>
 
 <%
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);

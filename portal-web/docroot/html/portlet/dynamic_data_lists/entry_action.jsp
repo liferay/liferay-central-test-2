@@ -27,6 +27,20 @@ DDLEntry entry = (DDLEntry)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
+	<c:if test="<%= DDLEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
+		<portlet:renderURL var="viewEntryURL">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/view_entry" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="view"
+			url="<%= viewEntryURL %>"
+		/>
+	</c:if>
+
 	<c:if test="<%= DDLEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editEntryURL">
 			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry" />

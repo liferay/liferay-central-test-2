@@ -564,9 +564,19 @@
 			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
 		</action>
 
+		<action path="/dynamic_data_lists/edit_entry_item" type="com.liferay.portlet.dynamicdatalists.action.EditEntryItemAction">
+			<forward name="portlet.dynamic_data_lists.edit_entry_item" path="portlet.dynamic_data_lists.edit_entry_item" />
+			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
+		</action>
+
 		<action path="/dynamic_data_lists/select_dynamic_data_mapping_structure" forward="portlet.dynamic_data_lists.select_dynamic_data_mapping_structure" />
 
 		<action path="/dynamic_data_lists/view" forward="portlet.dynamic_data_lists.view" />
+
+		<action path="/dynamic_data_lists/view_entry" type="com.liferay.portlet.dynamicdatalists.action.EditEntryAction">
+			<forward name="portlet.dynamic_data_lists.edit_entry" path="portlet.dynamic_data_lists.view_entry" />
+			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
+		</action>
 
 		<!-- Dynamic Data Mapping -->
 
