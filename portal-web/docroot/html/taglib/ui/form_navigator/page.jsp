@@ -52,13 +52,13 @@ if (Validator.isNotNull(historyKey)) {
 					String sectionJsp = jspPath + _getSectionJsp(section) + ".jsp";
 				%>
 
-					<!-- Begin fragment <%= sectionId %> -->
+					<!-- Begin fragment <%= namespace + sectionId %> -->
 
-					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<portlet:namespace /><%= sectionId %>">
+					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= namespace + sectionId %>">
 						<liferay-util:include page="<%= sectionJsp %>" />
 					</div>
 
-					<!-- End fragment <%= sectionId %> -->
+					<!-- End fragment <%= namespace + sectionId %> -->
 
 				<%
 				}
@@ -124,7 +124,7 @@ if (Validator.isNotNull(historyKey)) {
 									%>
 
 										<li class="<%= cssClass %>">
-											<a href="#<portlet:namespace /><%= sectionId %>" id="<portlet:namespace /><%= sectionId %>Link">
+											<a href="#<%= namespace + sectionId %>" id="<%= namespace + sectionId %>Link">
 
 											<liferay-ui:message key="<%= section %>" />
 
