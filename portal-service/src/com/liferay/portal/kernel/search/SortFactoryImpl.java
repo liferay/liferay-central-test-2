@@ -14,9 +14,9 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.util.List;
-
 import com.liferay.portal.kernel.util.Validator;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan

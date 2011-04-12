@@ -151,14 +151,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
-		addRequiredTerm(booleanQuery, field, new String[]{value}, like);
+		addRequiredTerm(booleanQuery, field, new String[] {value}, like);
 	}
 
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String[] values,
 		boolean like) {
 
-		BooleanQuery subQuery = new BooleanQuery();
+		BooleanQuery query = new BooleanQuery();
 
 		if (like) {
 			for (String value : values) {
@@ -170,7 +170,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 				WildcardQuery wildcardQuery = new WildcardQuery(
 					new Term(field, value));
 
-				subQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
+				query.add(wildcardQuery, BooleanClause.Occur.SHOULD);
 			}
 		}
 		else {
@@ -178,11 +178,11 @@ public class LuceneHelperImpl implements LuceneHelper {
 				Term term = new Term(field, value);
 				TermQuery termQuery = new TermQuery(term);
 
-				subQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+				query.add(termQuery, BooleanClause.Occur.SHOULD);
 			}
 		}
 
-		booleanQuery.add(subQuery, BooleanClause.Occur.MUST);
+		booleanQuery.add(query, BooleanClause.Occur.MUST);
 	}
 
 	public void addTerm(

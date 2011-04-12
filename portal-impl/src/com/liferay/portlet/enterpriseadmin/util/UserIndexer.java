@@ -207,30 +207,24 @@ public class UserIndexer extends BaseIndexer {
 	}
 
 	protected String doGetSortField(String orderByCol) {
-		String sortField = "firstName";
-
-		if (Validator.isNotNull(orderByCol)) {
-			if (orderByCol.equals("email-address")) {
-				sortField = "emailAddress";
-			}
-			else if (orderByCol.equals("first-name")) {
-				sortField = "firstName";
-			}
-			else if (orderByCol.equals("job-title")) {
-				sortField = "jobTitle";
-			}
-			else if (orderByCol.equals("last-name")) {
-				sortField = "lastName";
-			}
-			else if (orderByCol.equals("screen-name")) {
-				sortField = "screenName";
-			}
-			else {
-				sortField = orderByCol;
-			}
+		if (orderByCol.equals("email-address")) {
+			return "emailAddress";
 		}
-
-		return sortField;
+		else if (orderByCol.equals("first-name")) {
+			return "firstName";
+		}
+		else if (orderByCol.equals("job-title")) {
+			return "jobTitle";
+		}
+		else if (orderByCol.equals("last-name")) {
+			return "lastName";
+		}
+		else if (orderByCol.equals("screen-name")) {
+			return "screenName";
+		}
+		else {
+			return orderByCol;
+		}
 	}
 
 	protected Summary doGetSummary(
@@ -399,16 +393,16 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		super.addSearchTerm(searchQuery, searchContext, "city");
-		super.addSearchTerm(searchQuery, searchContext, "country");
-		super.addSearchTerm(searchQuery, searchContext, "emailAddress");
-		super.addSearchTerm(searchQuery, searchContext, "firstName");
-		super.addSearchTerm(searchQuery, searchContext, "fullName");
-		super.addSearchTerm(searchQuery, searchContext, "lastName");
-		super.addSearchTerm(searchQuery, searchContext, "middleName");
-		super.addSearchTerm(searchQuery, searchContext, "screenName");
-		super.addSearchTerm(searchQuery, searchContext, "street");
-		super.addSearchTerm(searchQuery, searchContext, "zip");
+		addSearchTerm(searchQuery, searchContext, "city");
+		addSearchTerm(searchQuery, searchContext, "country");
+		addSearchTerm(searchQuery, searchContext, "emailAddress");
+		addSearchTerm(searchQuery, searchContext, "firstName");
+		addSearchTerm(searchQuery, searchContext, "fullName");
+		addSearchTerm(searchQuery, searchContext, "lastName");
+		addSearchTerm(searchQuery, searchContext, "middleName");
+		addSearchTerm(searchQuery, searchContext, "screenName");
+		addSearchTerm(searchQuery, searchContext, "street");
+		addSearchTerm(searchQuery, searchContext, "zip");
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");

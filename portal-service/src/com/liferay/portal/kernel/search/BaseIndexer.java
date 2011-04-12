@@ -584,18 +584,21 @@ public abstract class BaseIndexer implements Indexer {
 			String field)
 		throws Exception {
 
-		if (Validator.isNotNull(field)) {
-			String attributeValue = (String)searchContext.getAttribute(field);
+		if (Validator.isNull(field)) {
+			return;
+		}
 
-			if (Validator.isNotNull(attributeValue)) {
-				if (searchContext.isAndSearch()) {
-					searchQuery.addRequiredTerm(
-						field, attributeValue, true, true);
-				}
-				else {
-					searchQuery.addTerm(field, attributeValue, true, true);
-				}
-			}
+		String value = (String)searchContext.getAttribute(field);
+
+		if (Validator.isNull(value)) {
+			return;
+		}
+
+		if (searchContext.isAndSearch()) {
+			searchQuery.addRequiredTerm(field, value, true, true);
+		}
+		else {
+			searchQuery.addTerm(field, value, true, true);
 		}
 	}
 
@@ -694,7 +697,9 @@ public abstract class BaseIndexer implements Indexer {
 
 	protected abstract Document doGetDocument(Object obj) throws Exception;
 
-	protected abstract String doGetSortField(String orderByCol);
+	protected String doGetSortField(String orderByCol) {
+		return orderByCol;
+	}
 
 	protected abstract Summary doGetSummary(
 			Document document, Locale locale, String snippet,

@@ -39,6 +39,10 @@ public class IndexerWrapper implements Indexer {
 		return _indexer.getDocument(obj);
 	}
 
+	public String getSortField(String orderByCol) {
+		return _indexer.getSortField(orderByCol);
+	}
+
 	public Summary getSummary(
 			Document document, Locale locale, String snippet,
 			PortletURL portletURL)

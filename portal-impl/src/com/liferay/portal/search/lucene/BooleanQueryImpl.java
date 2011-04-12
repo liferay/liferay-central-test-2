@@ -221,8 +221,8 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		LuceneHelperUtil.addRequiredTerm(_booleanQuery, field, value, like);
 	}
 
-	public void addRequiredTerm(String field, String value, boolean like,
-		boolean advancedSearch) {
+	public void addRequiredTerm(
+		String field, String value, boolean like, boolean parseKeywords) {
 
 		if (Validator.isNull(value)) {
 			return;
@@ -230,11 +230,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 		String[] values = null;
 
-		if (advancedSearch) {
-			values = getKeywords(value);
+		if (parseKeywords) {
+			values = parseKeywords(value);
 		}
 		else {
-			values = new String[]{value};
+			values = new String[] {value};
 		}
 
 		LuceneHelperUtil.addRequiredTerm(
@@ -270,8 +270,8 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		}
 	}
 
-	public void addTerm(String field, String value, boolean like,
-			boolean advancedSearch)
+	public void addTerm(
+			String field, String value, boolean like, boolean parseKeywords)
 		throws ParseException {
 
 		if (Validator.isNull(value)) {
@@ -280,11 +280,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 		String[] values = null;
 
-		if (advancedSearch) {
-			values = getKeywords(value);
+		if (parseKeywords) {
+			values = parseKeywords(value);
 		}
 		else {
-			values = new String[]{value};
+			values = new String[] {value};
 		}
 
 		try {

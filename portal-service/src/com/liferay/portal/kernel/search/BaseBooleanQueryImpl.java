@@ -69,53 +69,6 @@ public abstract class BaseBooleanQueryImpl
 		}
 	}
 
-	protected String[] getKeywords(String value) {
-		String [] result = null;
-
-		if (!value.contains(StringPool.QUOTE)) {
-			result = StringUtil.split(value, StringPool.SPACE);
-		}
-		else {
-			List<String> values = new ArrayList<String>();
-
-			while (value.length() > 0) {
-				if (value.startsWith(StringPool.QUOTE)) {
-					value = value.substring(1);
-
-					if (value.contains(StringPool.QUOTE)) {
-						values.add(value.substring(0, value.indexOf(
-							StringPool.QUOTE)));
-
-						value = value.substring(value.indexOf(
-							StringPool.QUOTE) + 1);
-
-						value = value.trim();
-					}
-				}
-				else {
-					if (value.contains(StringPool.SPACE)) {
-						values.add(value.substring(0, value.indexOf(
-							StringPool.SPACE)));
-
-						value = value.substring(value.indexOf(
-							StringPool.SPACE) + 1);
-
-						value = value.trim();
-					}
-					else {
-						values.add(value);
-
-						break;
-					}
-				}
-			}
-
-			result = values.toArray(new String[values.size()]);
-		}
-
-		return result;
-	}
-
 	protected String getTermFieldRemainderValues(
 			String field, String values, List<String> valuesList,
 			String pattern, String replacement) {
@@ -185,6 +138,46 @@ public abstract class BaseBooleanQueryImpl
 		termFieldsValuesMap.put("no_field", valuesList);
 
 		return termFieldsValuesMap;
+	}
+
+	protected String[] parseKeywords(String values) {
+		if (!values.contains(StringPool.QUOTE)) {
+			return StringUtil.split(values, StringPool.SPACE);
+		}
+
+		List<String> keywords = new ArrayList<String>();
+
+		while (values.length() > 0) {
+			if (values.startsWith(StringPool.QUOTE)) {
+				values = values.substring(1);
+
+				if (values.contains(StringPool.QUOTE)) {
+					int pos = values.indexOf(StringPool.QUOTE);
+
+					keywords.add(values.substring(0, pos));
+
+					values = values.substring(pos + 1);
+					values = values.trim();
+				}
+			}
+			else {
+				if (values.contains(StringPool.SPACE)) {
+					int pos = values.indexOf(StringPool.SPACE);
+
+					keywords.add(values.substring(0, pos));
+
+					values = values.substring(pos + 1);
+					values = values.trim();
+				}
+				else {
+					keywords.add(values);
+
+					break;
+				}
+			}
+		}
+
+		return keywords.toArray(new String[keywords.size()]);
 	}
 
 }

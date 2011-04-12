@@ -186,21 +186,15 @@ public class OrganizationIndexer extends BaseIndexer {
 	}
 
 	protected String doGetSortField(String orderByCol) {
-		String sortField = "name";
-
-		if (Validator.isNotNull(orderByCol)) {
-			if (orderByCol.equals("name")) {
-				sortField = "name";
-			}
-			else if (orderByCol.equals("type")) {
-				sortField = "type";
-			}
-			else {
-				sortField = orderByCol;
-			}
+		if (orderByCol.equals("name")) {
+			return "name";
 		}
-
-		return sortField;
+		else if (orderByCol.equals("type")) {
+			return "type";
+		}
+		else {
+			return orderByCol;
+		}
 	}
 
 	protected Summary doGetSummary(
@@ -332,14 +326,14 @@ public class OrganizationIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		super.addSearchTerm(searchQuery, searchContext, "city");
-		super.addSearchTerm(searchQuery, searchContext, "country");
-		super.addSearchTerm(searchQuery, searchContext, "name");
-		super.addSearchTerm(searchQuery, searchContext, "parentOrganizationId");
-		super.addSearchTerm(searchQuery, searchContext, "region");
-		super.addSearchTerm(searchQuery, searchContext, "street");
-		super.addSearchTerm(searchQuery, searchContext, "type");
-		super.addSearchTerm(searchQuery, searchContext, "zip");
+		addSearchTerm(searchQuery, searchContext, "city");
+		addSearchTerm(searchQuery, searchContext, "country");
+		addSearchTerm(searchQuery, searchContext, "name");
+		addSearchTerm(searchQuery, searchContext, "parentOrganizationId");
+		addSearchTerm(searchQuery, searchContext, "region");
+		addSearchTerm(searchQuery, searchContext, "street");
+		addSearchTerm(searchQuery, searchContext, "type");
+		addSearchTerm(searchQuery, searchContext, "zip");
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
