@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.messageboards;
+package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.messageboards.mbban;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.messageboards.subscription.SubscriptionTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,12 +22,17 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MessageBoards6011LatestTests extends BaseTests {
+public class MBBanTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(SubscriptionTests.suite());
+		testSuite.addTestSuite(ViewBannedUsersUserTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(MB_SignInTest.class);
+		testSuite.addTestSuite(MB_ViewMBPortletBanTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(SignInTest.class);
 
 		return testSuite;
 	}

@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.dbupgrade.sampledata606.messageboards;
 
 import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.dbupgrade.sampledata606.messageboards.mbban.MBBanTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata606.messageboards.subscription.SubscriptionTests;
 
 import junit.framework.Test;
@@ -28,6 +29,7 @@ public class MessageBoardsTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(MBBanTests.suite());
 		testSuite.addTest(SubscriptionTests.suite());
 
 		return testSuite;
