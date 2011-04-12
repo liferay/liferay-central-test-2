@@ -206,6 +206,33 @@ public class UserIndexer extends BaseIndexer {
 		return document;
 	}
 
+	protected String doGetSortField(String orderByCol) {
+		String sortField = "firstName";
+
+		if (Validator.isNotNull(orderByCol)) {
+			if (orderByCol.equals("email-address")) {
+				sortField = "emailAddress";
+			}
+			else if (orderByCol.equals("first-name")) {
+				sortField = "firstName";
+			}
+			else if (orderByCol.equals("job-title")) {
+				sortField = "jobTitle";
+			}
+			else if (orderByCol.equals("last-name")) {
+				sortField = "lastName";
+			}
+			else if (orderByCol.equals("screen-name")) {
+				sortField = "screenName";
+			}
+			else {
+				sortField = orderByCol;
+			}
+		}
+
+		return sortField;
+	}
+
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -372,84 +399,16 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		String city = (String)searchContext.getAttribute("city");
-
-		if (Validator.isNotNull(city)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("city", city, true);
-			}
-			else {
-				searchQuery.addTerm("city", city, true);
-			}
-		}
-
-		String country = (String)searchContext.getAttribute("country");
-
-		if (Validator.isNotNull(country)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("country", country, true);
-			}
-			else {
-				searchQuery.addTerm("country", country, true);
-			}
-		}
-
-		String emailAddress = (String)searchContext.getAttribute(
-			"emailAddress");
-
-		if (Validator.isNotNull(emailAddress)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(
-					"emailAddress", emailAddress, true);
-			}
-			else {
-				searchQuery.addTerm("emailAddress", emailAddress, true);
-			}
-		}
-
-		String firstName = (String)searchContext.getAttribute("firstName");
-
-		if (Validator.isNotNull(firstName)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("firstName", firstName, true);
-			}
-			else {
-				searchQuery.addTerm("firstName", firstName, true);
-			}
-		}
-
-		String fullName = (String)searchContext.getAttribute("fullName");
-
-		if (Validator.isNotNull(fullName)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("fullName", fullName, true);
-			}
-			else {
-				searchQuery.addTerm("fullName", fullName, true);
-			}
-		}
-
-		String lastName = (String)searchContext.getAttribute("lastName");
-
-		if (Validator.isNotNull(lastName)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("lastName", lastName, true);
-			}
-			else {
-				searchQuery.addTerm("lastName", lastName, true);
-			}
-		}
-
-		String middleName = (String)searchContext.getAttribute("middleName");
-
-		if (Validator.isNotNull(middleName)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("middleName", middleName, true);
-			}
-			else {
-				searchQuery.addTerm("middleName", middleName, true);
-			}
-		}
+		super.addSearchTerm(searchQuery, searchContext, "city");
+		super.addSearchTerm(searchQuery, searchContext, "country");
+		super.addSearchTerm(searchQuery, searchContext, "emailAddress");
+		super.addSearchTerm(searchQuery, searchContext, "firstName");
+		super.addSearchTerm(searchQuery, searchContext, "fullName");
+		super.addSearchTerm(searchQuery, searchContext, "lastName");
+		super.addSearchTerm(searchQuery, searchContext, "middleName");
+		super.addSearchTerm(searchQuery, searchContext, "screenName");
+		super.addSearchTerm(searchQuery, searchContext, "street");
+		super.addSearchTerm(searchQuery, searchContext, "zip");
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
@@ -458,50 +417,6 @@ public class UserIndexer extends BaseIndexer {
 
 		if (Validator.isNotNull(expandoAttributes)) {
 			addSearchExpando(searchQuery, searchContext, expandoAttributes);
-		}
-
-		String region = (String)searchContext.getAttribute("region");
-
-		if (Validator.isNotNull(region)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("region", region, true);
-			}
-			else {
-				searchQuery.addTerm("region", region, true);
-			}
-		}
-
-		String screenName = (String)searchContext.getAttribute("screenName");
-
-		if (Validator.isNotNull(screenName)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("screenName", screenName, true);
-			}
-			else {
-				searchQuery.addTerm("screenName", screenName, true);
-			}
-		}
-
-		String street = (String)searchContext.getAttribute("street");
-
-		if (Validator.isNotNull(street)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("street", street, true);
-			}
-			else {
-				searchQuery.addTerm("street", street, true);
-			}
-		}
-
-		String zip = (String)searchContext.getAttribute("zip");
-
-		if (Validator.isNotNull(zip)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("zip", zip, true);
-			}
-			else {
-				searchQuery.addTerm("zip", zip, true);
-			}
 		}
 	}
 

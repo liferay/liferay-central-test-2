@@ -638,29 +638,6 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return new Tuple(organizations, corruptIndex);
 	}
 
-	public Sort getOrganizationSort(String orderByCol, String orderByType) {
-		String sortField = "name";
-
-		if (Validator.isNotNull(orderByCol)) {
-			if (orderByCol.equals("name")) {
-				sortField = "name";
-			}
-			else if (orderByCol.equals("type")) {
-				sortField = "type";
-			}
-			else {
-				sortField = orderByCol;
-			}
-		}
-
-		if (Validator.isNull(orderByType)) {
-			orderByType = "asc";
-		}
-
-		return new Sort(
-			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
-	}
-
 	public List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
 		List<OrgLabor> orgLabors = new ArrayList<OrgLabor>();
 
@@ -949,38 +926,6 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		}
 
 		return new Tuple(users, corruptIndex);
-	}
-
-	public Sort getUserSort(String orderByCol, String orderByType) {
-		String sortField = "firstName";
-
-		if (Validator.isNotNull(orderByCol)) {
-			if (orderByCol.equals("email-address")) {
-				sortField = "emailAddress";
-			}
-			else if (orderByCol.equals("first-name")) {
-				sortField = "firstName";
-			}
-			else if (orderByCol.equals("job-title")) {
-				sortField = "jobTitle";
-			}
-			else if (orderByCol.equals("last-name")) {
-				sortField = "lastName";
-			}
-			else if (orderByCol.equals("screen-name")) {
-				sortField = "screenName";
-			}
-			else {
-				sortField = orderByCol;
-			}
-		}
-
-		if (Validator.isNull(orderByType)) {
-			orderByType = "asc";
-		}
-
-		return new Sort(
-			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 	}
 
 	public List<Website> getWebsites(ActionRequest actionRequest) {

@@ -176,13 +176,6 @@ public class EnterpriseAdminUtil {
 		return getEnterpriseAdmin().getOrganizations(hits);
 	}
 
-	public static Sort getOrganizationSort(
-		String orderByCol, String orderByType) {
-
-		return getEnterpriseAdmin().getOrganizationSort(
-			orderByCol, orderByType);
-	}
-
 	public static List<OrgLabor> getOrgLabors(ActionRequest actionRequest) {
 		return getEnterpriseAdmin().getOrgLabors(actionRequest);
 	}
@@ -230,10 +223,6 @@ public class EnterpriseAdminUtil {
 		throws PortalException, SystemException {
 
 		return getEnterpriseAdmin().getUsers(hits);
-	}
-
-	public static Sort getUserSort(String orderByCol, String orderByType) {
-		return getEnterpriseAdmin().getUserSort(orderByCol, orderByType);
 	}
 
 	public static List<Website> getWebsites(ActionRequest actionRequest) {

@@ -64,6 +64,10 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	public String getSortField(String orderByCol) {
+		return doGetSortField(orderByCol);
+	}
+
 	public Document getDocument(Object obj) throws SearchException {
 		try {
 			Document document = doGetDocument(obj);
@@ -575,6 +579,26 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	protected void addSearchTerm(
+			BooleanQuery searchQuery, SearchContext searchContext,
+			String field)
+		throws Exception {
+
+		if (Validator.isNotNull(field)) {
+			String attributeValue = (String)searchContext.getAttribute(field);
+
+			if (Validator.isNotNull(attributeValue)) {
+				if (searchContext.isAndSearch()) {
+					searchQuery.addRequiredTerm(
+						field, attributeValue, true, true);
+				}
+				else {
+					searchQuery.addTerm(field, attributeValue, true, true);
+				}
+			}
+		}
+	}
+
 	protected void addStagingGroupKeyword(Document document, long groupId)
 		throws Exception {
 
@@ -669,6 +693,8 @@ public abstract class BaseIndexer implements Indexer {
 	protected abstract void doDelete(Object obj) throws Exception;
 
 	protected abstract Document doGetDocument(Object obj) throws Exception;
+
+	protected abstract String doGetSortField(String orderByCol);
 
 	protected abstract Summary doGetSummary(
 			Document document, Locale locale, String snippet,

@@ -18,12 +18,13 @@
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
 <%@ page import="com.liferay.portal.kernel.search.Sort" %>
+<%@ page import="com.liferay.portal.kernel.search.SortFactoryUtil" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 
 <%
 organizationParams.put("expandoAttributes", searchTerms.getKeywords());
 
-Sort sort = EnterpriseAdminUtil.getOrganizationSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
+Sort sort = SortFactoryUtil.getSort(Organization.class, searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 Hits hits = null;
 

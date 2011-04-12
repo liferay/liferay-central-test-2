@@ -34,6 +34,12 @@ public class SortFactoryUtil {
 		return getSortFactory().getDefaultSorts();
 	}
 
+	public static Sort getSort(
+		Class<?> classObj, String orderByCol, String orderByType) {
+
+		return getSortFactory().getSort(classObj, orderByCol, orderByType);
+	}
+
 	public static SortFactory getSortFactory() {
 		return _sortFactory;
 	}

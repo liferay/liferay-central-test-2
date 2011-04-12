@@ -110,8 +110,6 @@ public interface EnterpriseAdmin {
 	public Tuple getOrganizations(Hits hits)
 		throws PortalException, SystemException;
 
-	public Sort getOrganizationSort(String orderByCol, String orderByType);
-
 	public List<OrgLabor> getOrgLabors(ActionRequest actionRequest);
 
 	public OrderByComparator getPasswordPolicyOrderByComparator(
@@ -132,8 +130,6 @@ public interface EnterpriseAdmin {
 		String orderByCol, String orderByType);
 
 	public Tuple getUsers(Hits hits) throws PortalException, SystemException;
-
-	public Sort getUserSort(String orderByCol, String orderByType);
 
 	public List<Website> getWebsites(ActionRequest actionRequest);
 

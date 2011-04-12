@@ -38,7 +38,7 @@
 	boolean corruptIndex = false;
 
 	if (PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX) {
-		Sort sort = EnterpriseAdminUtil.getOrganizationSort(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
+		Sort sort = SortFactoryUtil.getSort(Organization.class, searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
 		Hits hits = OrganizationLocalServiceUtil.search(company.getCompanyId(), curOrganization.getOrganizationId(), null, organizationParams, 0, 5, sort);
 

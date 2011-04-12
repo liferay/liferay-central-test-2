@@ -16,9 +16,12 @@ package com.liferay.portal.kernel.search;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Hugo Huijser
  */
 public class SortFactoryImpl implements SortFactory {
 
@@ -32,6 +35,21 @@ public class SortFactoryImpl implements SortFactory {
 
 	public Sort[] getDefaultSorts() {
 		return _DEFAULT_SORTS;
+	}
+
+	public Sort getSort(
+		Class<?> classObj, String orderByCol, String orderByType) {
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(classObj);
+
+		String sortField = indexer.getSortField(orderByCol);
+
+		if (Validator.isNull(orderByType)) {
+			orderByType = "asc";
+		}
+
+		return new Sort(
+			sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 	}
 
 	public Sort[] toArray(List<Sort> sorts) {

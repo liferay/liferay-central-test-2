@@ -33,6 +33,8 @@ public interface Indexer {
 
 	public Document getDocument(Object obj) throws SearchException;
 
+	public String getSortField(String orderByCol);
+
 	public Summary getSummary(
 			Document document, Locale locale, String snippet,
 			PortletURL portletURL)

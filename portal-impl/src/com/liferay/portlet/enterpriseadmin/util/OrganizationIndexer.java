@@ -185,6 +185,24 @@ public class OrganizationIndexer extends BaseIndexer {
 		return document;
 	}
 
+	protected String doGetSortField(String orderByCol) {
+		String sortField = "name";
+
+		if (Validator.isNotNull(orderByCol)) {
+			if (orderByCol.equals("name")) {
+				sortField = "name";
+			}
+			else if (orderByCol.equals("type")) {
+				sortField = "type";
+			}
+			else {
+				sortField = orderByCol;
+			}
+		}
+
+		return sortField;
+	}
+
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -314,38 +332,14 @@ public class OrganizationIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		String city = (String)searchContext.getAttribute("city");
-
-		if (Validator.isNotNull(city)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("city", city, true);
-			}
-			else {
-				searchQuery.addTerm("city", city, true);
-			}
-		}
-
-		String country = (String)searchContext.getAttribute("country");
-
-		if (Validator.isNotNull(country)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("country", country, true);
-			}
-			else {
-				searchQuery.addTerm("country", country, true);
-			}
-		}
-
-		String name = (String)searchContext.getAttribute("name");
-
-		if (Validator.isNotNull(name)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("name", name, true);
-			}
-			else {
-				searchQuery.addTerm("name", name, true);
-			}
-		}
+		super.addSearchTerm(searchQuery, searchContext, "city");
+		super.addSearchTerm(searchQuery, searchContext, "country");
+		super.addSearchTerm(searchQuery, searchContext, "name");
+		super.addSearchTerm(searchQuery, searchContext, "parentOrganizationId");
+		super.addSearchTerm(searchQuery, searchContext, "region");
+		super.addSearchTerm(searchQuery, searchContext, "street");
+		super.addSearchTerm(searchQuery, searchContext, "type");
+		super.addSearchTerm(searchQuery, searchContext, "zip");
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
@@ -354,64 +348,6 @@ public class OrganizationIndexer extends BaseIndexer {
 
 		if (Validator.isNotNull(expandoAttributes)) {
 			addSearchExpando(searchQuery, searchContext, expandoAttributes);
-		}
-
-		String parentOrganizationId = (String)searchContext.getAttribute(
-			"parentOrganizationId");
-
-		if (Validator.isNotNull(parentOrganizationId)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(
-					"parentOrganizationId", parentOrganizationId, true);
-			}
-			else {
-				searchQuery.addTerm(
-					"parentOrganizationId", parentOrganizationId, true);
-			}
-		}
-
-		String region = (String)searchContext.getAttribute("region");
-
-		if (Validator.isNotNull(region)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("region", region, true);
-			}
-			else {
-				searchQuery.addTerm("region", region, true);
-			}
-		}
-
-		String street = (String)searchContext.getAttribute("street");
-
-		if (Validator.isNotNull(street)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("street", street, true);
-			}
-			else {
-				searchQuery.addTerm("street", street, true);
-			}
-		}
-
-		String type = (String)searchContext.getAttribute("type");
-
-		if (Validator.isNotNull(type)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("type", type, true);
-			}
-			else {
-				searchQuery.addTerm("type", type, true);
-			}
-		}
-
-		String zip = (String)searchContext.getAttribute("zip");
-
-		if (Validator.isNotNull(zip)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm("zip", zip, true);
-			}
-			else {
-				searchQuery.addTerm("zip", zip, true);
-			}
 		}
 	}
 
