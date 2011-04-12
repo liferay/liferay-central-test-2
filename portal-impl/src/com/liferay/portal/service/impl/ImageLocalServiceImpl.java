@@ -329,6 +329,10 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 				bytes = FileUtil.getBytes(is);
 			}
 
+			if (bytes == null) {
+				return null;
+			}
+
 			ImageBag imageBag = ImageProcessorUtil.read(bytes);
 
 			RenderedImage renderedImage = imageBag.getRenderedImage();
