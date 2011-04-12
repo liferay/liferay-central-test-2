@@ -189,7 +189,7 @@
 				<property name="artifact.file" value="dist/liferay-portal-${lp.version}.war" />
 			</then>
 			<else>
-				<property name="artifact.file" value="${artifact.id}/${artifact.id}.${packaging}"/>
+				<property name="artifact.file" value="${artifact.id}/${artifact.id}.${packaging}" />
 			</else>
 		</if>
 
