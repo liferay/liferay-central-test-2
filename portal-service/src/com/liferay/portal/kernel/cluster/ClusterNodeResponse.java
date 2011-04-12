@@ -97,20 +97,22 @@ public class ClusterNodeResponse implements Serializable {
 
 		sb.append("{clusterMessageType=");
 		sb.append(_clusterMessageType);
-		sb.append(", multicast=");
-		sb.append(_multicast);
-		sb.append(", uuid=");
-		sb.append(_uuid);
 
 		if (hasException()) {
 			sb.append(", exception=");
 			sb.append(_exception);
 		}
-		else {
+
+		sb.append(", multicast=");
+		sb.append(_multicast);
+
+		if (!hasException()) {
 			sb.append(", result=");
 			sb.append(_result);
 		}
 
+		sb.append(", uuid=");
+		sb.append(_uuid);
 		sb.append("}");
 
 		return sb.toString();

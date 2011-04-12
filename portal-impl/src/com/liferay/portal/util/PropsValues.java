@@ -228,6 +228,8 @@ public class PropsValues {
 
 	public static final String CDN_HOST_HTTPS = PropsUtil.get(PropsKeys.CDN_HOST_HTTPS);
 
+	public static final long CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL = GetterUtil.getLong(PropsUtil.get(PropsKeys.CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL));
+
 	public static final boolean CLUSTER_EXECUTOR_DEBUG_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CLUSTER_EXECUTOR_DEBUG_ENABLED));
 
 	public static final String CLUSTER_LINK_AUTODETECT_ADDRESS = PropsUtil.get(PropsKeys.CLUSTER_LINK_AUTODETECT_ADDRESS);

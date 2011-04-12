@@ -208,22 +208,12 @@ public class ClusterRequest implements Serializable {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{clusterMessageType=");
 		sb.append(_clusterMessageType);
-		sb.append(", multicast=");
-		sb.append(_multicast);
-		sb.append(", servletContextName=");
-		sb.append(_servletContextName);
-		sb.append(", skipLocal=");
-		sb.append(_skipLocal);
-		sb.append(", uuid=");
-		sb.append(_uuid);
 
 		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY)) {
-			sb.append(", originatingClusterNode=");
-			sb.append(_originatingClusterNode);
 			sb.append(", expirationTime=");
 			sb.append(_expirationTime);
 		}
@@ -232,6 +222,20 @@ public class ClusterRequest implements Serializable {
 			sb.append(_methodHandler);
 		}
 
+		sb.append(", multicast=");
+		sb.append(_multicast);
+
+		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY)) {
+			sb.append(", originatingClusterNode=");
+			sb.append(_originatingClusterNode);
+		}
+
+		sb.append(", servletContextName=");
+		sb.append(_servletContextName);
+		sb.append(", skipLocal=");
+		sb.append(_skipLocal);
+		sb.append(", uuid=");
+		sb.append(_uuid);
 		sb.append("}");
 
 		return sb.toString();

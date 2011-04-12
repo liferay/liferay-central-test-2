@@ -163,7 +163,11 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 
-		clusterNodeResponse.setAddress(new AddressImpl(localAddress));
+		Address address = new AddressImpl(localAddress);
+
+		clusterNodeResponse.setAddress(address);
+
+		clusterNodeResponse.setClusterMessageType(ClusterMessageType.EXECUTE);
 
 		try {
 			ClusterNode localClusterNode =
@@ -175,7 +179,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			clusterNodeResponse.setException(e);
 		}
 
-		clusterNodeResponse.setClusterMessageType(ClusterMessageType.EXECUTE);
 		clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
 		clusterNodeResponse.setUuid(clusterRequest.getUuid());
 

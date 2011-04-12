@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InetAddressUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
@@ -91,6 +90,7 @@ public class ClusterExecutorImpl
 		}
 
 		_scheduledExecutorService.shutdownNow();
+
 		_controlChannel.close();
 	}
 
@@ -109,7 +109,7 @@ public class ClusterExecutorImpl
 		if (!clusterRequest.isFireAndForget()) {
 			String uuid = clusterRequest.getUuid();
 
-			_executionResultMap.put(uuid, futureClusterResponses);
+			_futureClusterResponses.put(uuid, futureClusterResponses);
 		}
 
 		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod &&
@@ -147,9 +147,9 @@ public class ClusterExecutorImpl
 			return Collections.emptyList();
 		}
 
-		clearExpiredInstances();
+		removeExpiredInstances();
 
-		return new ArrayList<Address>(_clusterNodeIdMap.values());
+		return new ArrayList<Address>(_clusterNodeAddresses.values());
 	}
 
 	public List<ClusterNode> getClusterNodes() {
@@ -157,24 +157,24 @@ public class ClusterExecutorImpl
 			return Collections.emptyList();
 		}
 
-		clearExpiredInstances();
+		removeExpiredInstances();
 
-		Set<ObjectValuePair<Address, ClusterNode>> aliveInstances =
-			_checkInInstanceMap.keySet();
+		Set<ObjectValuePair<Address, ClusterNode>> liveInstances =
+			_liveInstances.keySet();
 
-		List<ClusterNode> aliveClusterNodes = new ArrayList<ClusterNode>(
-			aliveInstances.size());
+		List<ClusterNode> liveClusterNodes = new ArrayList<ClusterNode>(
+			liveInstances.size());
 
-		for(ObjectValuePair<Address, ClusterNode> aliveInstance :
-			aliveInstances) {
+		for (ObjectValuePair<Address, ClusterNode> liveInstance :
+				liveInstances) {
 
-			aliveClusterNodes.add(aliveInstance.getValue());
+			liveClusterNodes.add(liveInstance.getValue());
 		}
 
-		return aliveClusterNodes;
+		return liveClusterNodes;
 	}
 
-	public ClusterNode getLocalClusterNode()  {
+	public ClusterNode getLocalClusterNode() {
 		if (!isEnabled()) {
 			return null;
 		}
@@ -210,8 +210,9 @@ public class ClusterExecutorImpl
 			new ObjectValuePair<Address, ClusterNode>(
 				_localAddress, _localClusterNode);
 
-		_checkInInstanceMap.put(localInstance, Long.MAX_VALUE);
-		_clusterNodeIdMap.put(
+		_liveInstances.put(localInstance, Long.MAX_VALUE);
+
+		_clusterNodeAddresses.put(
 			_localClusterNode.getClusterNodeId(), _localAddress);
 
 		_scheduledExecutorService = Executors.newScheduledThreadPool(
@@ -221,7 +222,9 @@ public class ClusterExecutorImpl
 				Thread.currentThread().getContextClassLoader()));
 
 		_scheduledExecutorService.scheduleWithFixedDelay(
-			new CheckInTask(), 0, _CHECK_IN_INTERVAL, TimeUnit.MILLISECONDS);
+			new HeartbeatTask(), 0,
+			PropsValues.CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL,
+			TimeUnit.MILLISECONDS);
 	}
 
 	public boolean isClusterNodeAlive(Address address) {
@@ -229,9 +232,9 @@ public class ClusterExecutorImpl
 			return false;
 		}
 
-		clearExpiredInstances();
+		removeExpiredInstances();
 
-		return _clusterNodeIdMap.containsValue(address);
+		return _clusterNodeAddresses.containsValue(address);
 	}
 
 	public boolean isClusterNodeAlive(String clusterNodeId) {
@@ -239,9 +242,9 @@ public class ClusterExecutorImpl
 			return false;
 		}
 
-		clearExpiredInstances();
+		removeExpiredInstances();
 
-		return _clusterNodeIdMap.containsKey(clusterNodeId);
+		return _clusterNodeAddresses.containsKey(clusterNodeId);
 	}
 
 	public boolean isEnabled() {
@@ -284,68 +287,6 @@ public class ClusterExecutorImpl
 		_shortcutLocalMethod = shortcutLocalMethod;
 	}
 
-	protected void notify (
-		Address address, ClusterNode clusterNode, long expirationTime) {
-
-		clearExpiredInstances();
-
-		if (System.currentTimeMillis() > expirationTime) {
-			return;
-		}
-
-		ObjectValuePair<Address, ClusterNode> checkInInstance =
-			new ObjectValuePair<Address, ClusterNode>(address, clusterNode);
-
-		Long oldExpirationTime = _checkInInstanceMap.put(
-			checkInInstance, expirationTime);
-
-		if (oldExpirationTime != null ||
-			((_localAddress != null) && _localAddress.equals(address))) {
-
-			return;
-		}
-
-		_clusterNodeIdMap.put(clusterNode.getClusterNodeId(), address);
-
-		ClusterEvent clusterEvent = ClusterEvent.join(clusterNode);
-
-		fireClusterEvent(clusterEvent);
-	}
-
-	protected void clearExpiredInstances() {
-		if (_checkInInstanceMap.isEmpty()) {
-			return;
-		}
-
-		Iterator<Map.Entry<ObjectValuePair<Address, ClusterNode>, Long>>
-			itr = _checkInInstanceMap.entrySet().iterator();
-
-		long now = System.currentTimeMillis();
-
-		while (itr.hasNext()) {
-			Map.Entry<ObjectValuePair<Address, ClusterNode>, Long> entry =
-				itr.next();
-
-			long expirationTime = entry.getValue().longValue();
-			ClusterNode departingClusterNode = entry.getKey().getValue();
-
-			if (now < expirationTime ||
-				_localClusterNode.equals(departingClusterNode)) {
-
-				continue;
-			}
-
-			_clusterNodeIdMap.remove(departingClusterNode.getClusterNodeId());
-
-			itr.remove();
-
-			ClusterEvent clusterEvent = ClusterEvent.depart(
-				departingClusterNode);
-
-			fireClusterEvent(clusterEvent);
-		}
-	}
-
 	protected void fireClusterEvent(ClusterEvent clusterEvent) {
 		for (ClusterEventListener listener : _clusterEventListeners) {
 			listener.processClusterEvent(clusterEvent);
@@ -357,7 +298,7 @@ public class ClusterExecutorImpl
 	}
 
 	protected FutureClusterResponses getExecutionResults(String uuid) {
-		return _executionResultMap.get(uuid);
+		return _futureClusterResponses.get(uuid);
 	}
 
 	protected void initChannels() {
@@ -382,7 +323,7 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	protected void initLocalClusterNode() throws SystemException{
+	protected void initLocalClusterNode() throws SystemException {
 		_localClusterNode = new ClusterNode(PortalUUIDUtil.generate());
 
 		_localClusterNode.setPort(PortalUtil.getPortalPort());
@@ -408,6 +349,34 @@ public class ClusterExecutorImpl
 		return _shortcutLocalMethod;
 	}
 
+	protected void notify(
+		Address address, ClusterNode clusterNode, long expirationTime) {
+
+		removeExpiredInstances();
+
+		if (System.currentTimeMillis() > expirationTime) {
+			return;
+		}
+
+		ObjectValuePair<Address, ClusterNode> liveInstance =
+			new ObjectValuePair<Address, ClusterNode>(address, clusterNode);
+
+		Long oldExpirationTime = _liveInstances.put(
+			liveInstance, expirationTime);
+
+		if ((oldExpirationTime != null) ||
+			((_localAddress != null) && _localAddress.equals(address))) {
+
+			return;
+		}
+
+		_clusterNodeAddresses.put(clusterNode.getClusterNodeId(), address);
+
+		ClusterEvent clusterEvent = ClusterEvent.join(clusterNode);
+
+		fireClusterEvent(clusterEvent);
+	}
+
 	protected List<Address> prepareAddresses(ClusterRequest clusterRequest) {
 		boolean isMulticast = clusterRequest.isMulticast();
 
@@ -431,7 +400,7 @@ public class ClusterExecutorImpl
 
 			if (clusterNodeIds != null) {
 				for (String clusterNodeId : clusterNodeIds) {
-					Address address = _clusterNodeIdMap.get(clusterNodeId);
+					Address address = _clusterNodeAddresses.get(clusterNodeId);
 
 					addresses.add(address);
 				}
@@ -441,9 +410,48 @@ public class ClusterExecutorImpl
 		return addresses;
 	}
 
-	protected ClusterNodeResponse runLocalMethod(MethodHandler methodHandler)
-		throws SystemException {
+	protected void removeExpiredInstances() {
+		if (_liveInstances.isEmpty()) {
+			return;
+		}
 
+		Set<Map.Entry<ObjectValuePair<Address, ClusterNode>, Long>>
+			liveInstances = _liveInstances.entrySet();
+
+		Iterator<Map.Entry<ObjectValuePair<Address, ClusterNode>, Long>> itr =
+			liveInstances.iterator();
+
+		long now = System.currentTimeMillis();
+
+		while (itr.hasNext()) {
+			Map.Entry<ObjectValuePair<Address, ClusterNode>, Long> entry =
+				itr.next();
+
+			long expirationTime = entry.getValue();
+
+			if (now < expirationTime) {
+				continue;
+			}
+
+			ObjectValuePair<Address, ClusterNode> liveInstance = entry.getKey();
+
+			ClusterNode clusterNode = liveInstance.getValue();
+
+			if (_localClusterNode.equals(clusterNode)) {
+				continue;
+			}
+
+			_clusterNodeAddresses.remove(clusterNode.getClusterNodeId());
+
+			itr.remove();
+
+			ClusterEvent clusterEvent = ClusterEvent.depart(clusterNode);
+
+			fireClusterEvent(clusterEvent);
+		}
+	}
+
+	protected ClusterNodeResponse runLocalMethod(MethodHandler methodHandler) {
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
 
 		ClusterNode localClusterNode = getLocalClusterNode();
@@ -514,34 +522,31 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	private static final long _CHECK_IN_INTERVAL = GetterUtil.getLong(
-			PropsUtil.get(PropsKeys.CLUSTER_EXECUTOR_CHECK_IN_INTERVAL));
 	private static final String _DEFAULT_CLUSTER_NAME =
 		"LIFERAY-CONTROL-CHANNEL";
 
 	private static Log _log = LogFactoryUtil.getLog(ClusterExecutorImpl.class);
 
-	private Map<ObjectValuePair<Address, ClusterNode>, Long>
-		_checkInInstanceMap =
-			new ConcurrentHashMap<
-				ObjectValuePair<Address, ClusterNode>, Long>();
+	public ScheduledExecutorService _scheduledExecutorService;
 	private CopyOnWriteArrayList<ClusterEventListener> _clusterEventListeners =
 		new CopyOnWriteArrayList<ClusterEventListener>();
-	private Map<String, Address> _clusterNodeIdMap =
+	private Map<String, Address> _clusterNodeAddresses =
 		new ConcurrentHashMap<String, Address>();
 	private JChannel _controlChannel;
-	private Map<String, FutureClusterResponses> _executionResultMap =
+	private Map<String, FutureClusterResponses> _futureClusterResponses =
 		new WeakValueConcurrentHashMap<String, FutureClusterResponses>();
+	private Map<ObjectValuePair<Address, ClusterNode>, Long> _liveInstances =
+		new ConcurrentHashMap<ObjectValuePair<Address, ClusterNode>, Long>();
 	private Address _localAddress;
 	private ClusterNode _localClusterNode;
-	public ScheduledExecutorService _scheduledExecutorService;
 	private boolean _shortcutLocalMethod;
 
-	private class CheckInTask implements Runnable {
+	private class HeartbeatTask implements Runnable {
 
 		public void run() {
-			long expirationTime = System.currentTimeMillis() +
-				_CHECK_IN_INTERVAL * 2;
+			long expirationTime =
+				System.currentTimeMillis() +
+					(PropsValues.CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL * 2);
 
 			try {
 				ClusterRequest clusterNotifyRequest =
@@ -552,14 +557,12 @@ public class ClusterExecutorImpl
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"unable to send check in request, will reschedule "
-							+ "this task",
-						e);
+					_log.debug("Unable to send check in request", e);
 				}
 
 				_scheduledExecutorService.scheduleWithFixedDelay(
-					new CheckInTask(), 0, _CHECK_IN_INTERVAL,
+					new HeartbeatTask(), 0,
+					PropsValues.CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL,
 					TimeUnit.MILLISECONDS);
 			}
 		}
