@@ -45,6 +45,10 @@ if (Validator.isNotNull(onChangeMethod)) {
 	window['<%= name %>'] = {
 		onChangeCallbackCounter: 0,
 
+		destroy: function() {
+			tinyMCE.editors['<%= name %>'].destroy();
+		},
+
 		fileBrowserCallback: function(field_name, url, type) {
 		},
 

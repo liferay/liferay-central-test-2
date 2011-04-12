@@ -74,6 +74,25 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 
 <aui:script>
 	window['<%= name %>'] = {
+		destroy: function() {
+			var fckEditor = FCKeditorAPI.GetInstance('<%= name %>');
+
+			if (fckEditor) {
+				var configEl = document.getElementById('<%= name %>__Config');
+				var frameEl = document.getElementById('<%= name %>__Frame');
+
+				if (configEl) {
+					configEl.parentNode.removeChild(configEl);
+				}
+
+				if (frameEl) {
+					frameEl.parentNode.removeChild(frameEl);
+				}
+
+				delete FCKeditorAPI.__Instances['<%= name %>'];
+			}
+		},
+
 		getHTML: function() {
 			return FCKeditorAPI.GetInstance('<%= name %>').GetXHTML();
 		},

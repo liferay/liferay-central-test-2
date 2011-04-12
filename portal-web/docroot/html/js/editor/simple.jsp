@@ -30,6 +30,14 @@ if (Validator.isNotNull(onChangeMethod)) {
 
 <aui:script>
 	window['<%= name %>'] = {
+		destroy: function() {
+			var editorEl = document.getElementById('<%= name %>');
+
+			if (editorEl) {
+				editorEl.parentNode.removeChild(editorEl);
+			}
+		},
+
 		getHTML: function() {
 			return document.getElementById('<%= name %>').value;
 		},
