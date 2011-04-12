@@ -68,6 +68,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
@@ -110,7 +111,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void addDocument(long companyId, Document document)
 		throws IOException {
 
-		IndexAccessor indexAccessor = _createIndexAccessorIfAbsent(companyId);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
 		indexAccessor.addDocument(document);
 	}
@@ -234,7 +235,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void delete(long companyId) {
-		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
 		if (indexAccessor == null) {
 			return;
@@ -244,7 +245,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void deleteDocuments(long companyId, Term term) throws IOException {
-		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
 		if (indexAccessor == null) {
 			return;
@@ -256,18 +257,18 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void dumpIndex(long companyId, OutputStream outputStream)
 		throws IOException {
 
-		if (!_loadIndexFromClusterEnabled() ||
-			(getLastGeneration(companyId) ==
-				IndexAccessor.DEFAULT_LOCAL_LAST_GENERATION)) {
+		long lastGeneration = getLastGeneration(companyId);
 
+		if (lastGeneration == IndexAccessor.DEFAULT_LAST_GENERATION) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Dump index from cluster is not enabled");
+				_log.debug(
+					"Dump index from cluster is not enabled for " + companyId);
 			}
 
 			return;
 		}
 
-		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
 		if (indexAccessor == null) {
 			return;
@@ -294,18 +295,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public long getLastGeneration(long companyId) {
-		if (!_loadIndexFromClusterEnabled()) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Load index from cluster is not enabled");
-			}
-
-			return IndexAccessor.DEFAULT_LOCAL_LAST_GENERATION;
+		if (!_isLoadIndexFromClusterEnabled()) {
+			return IndexAccessor.DEFAULT_LAST_GENERATION;
 		}
 
-		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
 		if (indexAccessor == null) {
-			return IndexAccessor.DEFAULT_LOCAL_LAST_GENERATION;
+			return IndexAccessor.DEFAULT_LAST_GENERATION;
 		}
 
 		return indexAccessor.getLastGeneration();
@@ -315,11 +312,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			long companyId, Address bootupAddress)
 		throws SystemException {
 
-		if (!_loadIndexFromClusterEnabled()) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Load index from cluster is not enabled");
-			}
-
+		if (!_isLoadIndexFromClusterEnabled()) {
 			return null;
 		}
 
@@ -383,7 +376,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
-		IndexAccessor indexAccessor = _createIndexAccessorIfAbsent(companyId);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
 		return new IndexSearcher(indexAccessor.getLuceneDir(), readOnly);
 	}
@@ -431,15 +424,11 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void loadIndex(long companyId, InputStream inputStream)
 		throws IOException {
 
-		if (!_loadIndexFromClusterEnabled()) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Load index from cluster is not enabled");
-			}
-
+		if (!_isLoadIndexFromClusterEnabled()) {
 			return;
 		}
 
-		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
 		if (indexAccessor == null) {
 			return;
@@ -452,29 +441,27 @@ public class LuceneHelperImpl implements LuceneHelper {
 			long companyId, long localLastGeneration)
 		throws SystemException {
 
-		if (!_loadIndexFromClusterEnabled()) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Load index from cluster is not enabled");
-			}
-
+		if (!_isLoadIndexFromClusterEnabled()) {
 			return null;
 		}
 
-		int clusterMembers =
-			ClusterExecutorUtil.getClusterNodeAddresses().size();
+		List<Address> clusterNodeAddresses =
+			ClusterExecutorUtil.getClusterNodeAddresses();
 
-		if (clusterMembers <= 1) {
+		int clusterNodeAddressesCount = clusterNodeAddresses.size();
+
+		if (clusterNodeAddressesCount <= 1) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"One or zero portal instance in cluster now, do not " +
-						"need to load index from cluster");
+					"Do not load indexes because there is either one portal " +
+						"instance or no portal instances in the cluster");
 			}
 
 			return null;
 		}
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
-			new MethodHandler(_GET_LAST_GENERATION_METHOD_KEY, companyId),
+			new MethodHandler(_getLastGenerationMethodKey, companyId),
 			true);
 
 		BlockingQueue<ClusterNodeResponse> clusterNodeResponses =
@@ -483,15 +470,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		Address bootupAddress = null;
 
 		do{
-			clusterMembers--;
+			clusterNodeAddressesCount--;
 
 			ClusterNodeResponse clusterNodeResponse = null;
 
 			try {
-				clusterNodeResponse =
-					clusterNodeResponses.poll(
-						_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT,
-						java.util.concurrent.TimeUnit.MILLISECONDS);
+				clusterNodeResponse = clusterNodeResponses.poll(
+					_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT,
+					java.util.concurrent.TimeUnit.MILLISECONDS);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -513,7 +499,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			if (clusterNode.getPort() > 0) {
 				try {
 					long remoteLastGeneration =
-						((Long)clusterNodeResponse.getResult()).longValue();
+						(Long)clusterNodeResponse.getResult();
 
 					if (remoteLastGeneration > localLastGeneration) {
 						bootupAddress = clusterNodeResponse.getAddress();
@@ -525,7 +511,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Suppress exception caused by remote method " +
-								"invocation", e);
+								"invocation",
+							e);
 					}
 
 					continue;
@@ -534,11 +521,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 			else {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Port of ClusterNode(" + clusterNode + ") is invalid");
+						"Cluster node " + clusterNode + " has invalid port");
 				}
 			}
-
-		} while (bootupAddress == null && clusterMembers > 1);
+		} while ((bootupAddress == null) && (clusterNodeAddressesCount > 1));
 
 		return bootupAddress;
 	}
@@ -556,12 +542,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 			}
 		}
 
-		if (_loadIndexFromClusterEnabled()) {
+		if (_isLoadIndexFromClusterEnabled()) {
 			ClusterExecutorUtil.removeClusterEventListener(
 				_loadIndexClusterEventListener);
 		}
 
-		for (IndexAccessor indexAccessor : _indexAccessorMap.values()) {
+		for (IndexAccessor indexAccessor : _indexAccessors.values()) {
 			indexAccessor.close();
 		}
 	}
@@ -606,7 +592,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void updateDocument(long companyId, Term term, Document document)
 		throws IOException {
 
-		IndexAccessor indexAccessor = _createIndexAccessorIfAbsent(companyId);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
 		indexAccessor.updateDocument(term, document);
 	}
@@ -629,7 +615,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 					LuceneHelperImpl.class.getName());
 		}
 
-		if (_loadIndexFromClusterEnabled()) {
+		if (_isLoadIndexFromClusterEnabled()) {
 			_loadIndexClusterEventListener =
 				new LoadIndexClusterEventListener();
 
@@ -638,74 +624,13 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
-	private IndexAccessor _createIndexAccessorIfAbsent(long companyId) {
-		IndexAccessor indexAccessor = _indexAccessorMap.get(companyId);
-
-		if (indexAccessor != null) {
-			return indexAccessor;
-		}
-
-		synchronized (this) {
-			indexAccessor = _indexAccessorMap.get(companyId);
-
-			if (indexAccessor== null) {
-				indexAccessor = new IndexAccessorImpl(companyId);
-
-				_indexAccessorMap.put(companyId, indexAccessor);
-			}
-		}
-
-		if (!_loadIndexFromClusterEnabled()) {
-			return indexAccessor;
-		}
-
-		synchronized (indexAccessor) {
-			InputStream inputStream = null;
-
-			try {
-				Address bootupAddress = selectBootupClusterAddress(
-					companyId, IndexAccessor.DEFAULT_LOCAL_LAST_GENERATION);
-
-				if (bootupAddress != null) {
-					inputStream = getLoadIndexesInputStreamFromCluster(
-						companyId, bootupAddress);
-
-					indexAccessor.loadIndex(inputStream);
-				}
-
-				indexAccessor.enableDumpIndex();
-			}
-			catch (Exception e) {
-				_log.error(
-					"Unable to load index for company: " +
-						indexAccessor.getCompanyId(),
-					e);
-			}
-			finally {
-				if (inputStream != null) {
-					try {
-						inputStream.close();
-					}
-					catch (IOException ioe) {
-						_log.error(
-							"Unable to close inputstream: " +
-								indexAccessor.getCompanyId(),
-							ioe);
-					}
-				}
-			}
-		}
-
-		return indexAccessor;
-	}
-
 	private ObjectValuePair<String, URL>
 			_getBootupClusterNodeObjectValuePair(Address bootupAddress)
 		throws SystemException {
 
 		ClusterRequest clusterRequest = ClusterRequest.createUnicastRequest(
 			new MethodHandler(
-				_CREATE_TOKEN_METHOD_KEY, _TRANSIENT_TOKEN_KEEP_ALIVE_TIME),
+				_createTokenMethodKey, _TRANSIENT_TOKEN_KEEP_ALIVE_TIME),
 			bootupAddress);
 
 		FutureClusterResponses futureClusterResponses =
@@ -737,36 +662,79 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	private IndexAccessor _getIndexAccessor(long companyId) {
-		return _indexAccessorMap.get(companyId);
+		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
+
+		if (indexAccessor != null) {
+			return indexAccessor;
+		}
+
+		synchronized (this) {
+			indexAccessor = _indexAccessors.get(companyId);
+
+			if (indexAccessor == null) {
+				indexAccessor = new IndexAccessorImpl(companyId);
+
+				_indexAccessors.put(companyId, indexAccessor);
+			}
+		}
+
+		if (!_isLoadIndexFromClusterEnabled()) {
+			return indexAccessor;
+		}
+
+		synchronized (indexAccessor) {
+			InputStream inputStream = null;
+
+			try {
+				Address bootupAddress = selectBootupClusterAddress(
+					companyId, IndexAccessor.DEFAULT_LAST_GENERATION);
+
+				if (bootupAddress != null) {
+					inputStream = getLoadIndexesInputStreamFromCluster(
+						companyId, bootupAddress);
+
+					indexAccessor.loadIndex(inputStream);
+				}
+
+				indexAccessor.enableDumpIndex();
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unable to load index for company " +
+						indexAccessor.getCompanyId(),
+					e);
+			}
+			finally {
+				if (inputStream != null) {
+					try {
+						inputStream.close();
+					}
+					catch (IOException ioe) {
+						_log.error(
+							"Unable to close input stream for company " +
+								indexAccessor.getCompanyId(),
+							ioe);
+					}
+				}
+			}
+		}
+
+		return indexAccessor;
 	}
 
-	private boolean _loadIndexFromClusterEnabled() {
+	private boolean _isLoadIndexFromClusterEnabled() {
 		if (PropsValues.CLUSTER_LINK_ENABLED &&
 			PropsValues.LUCENE_REPLICATE_WRITE) {
 
 			return true;
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Load index from cluster is not enabled");
+		}
+
 		return false;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
-
-	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
-	private static final MethodKey _CREATE_TOKEN_METHOD_KEY =
-		new MethodKey(TransientTokenUtil.class.getName(), "createToken",
-		long.class);
-	private static final MethodKey _GET_LAST_GENERATION_METHOD_KEY =
-		new MethodKey(LuceneHelperUtil.class.getName(), "getLastGeneration",
-		long.class);
-	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
-
-	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
-	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
-	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
-	private Map<Long, IndexAccessor> _indexAccessorMap =
-		new ConcurrentHashMap<Long, IndexAccessor>();
-	private Version _version = Version.LUCENE_30;
 
 	private class LoadIndexClusterEventListener
 		implements ClusterEventListener {
@@ -779,15 +747,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 				return;
 			}
 
-			int currentMembers =
-				ClusterExecutorUtil.getClusterNodeAddresses().size();
-			int joinMembers = clusterEvent.getClusterNodes().size();
-			int initMembers = currentMembers - joinMembers;
+			List<Address> clusterNodeAddresses =
+				ClusterExecutorUtil.getClusterNodeAddresses();
+			List<ClusterNode> clusterNodes = clusterEvent.getClusterNodes();
 
-			if (initMembers > 1) {
+			if ((clusterNodeAddresses.size() - clusterNodes.size()) > 1) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Original number of cluster member is bigger than one");
+						"Number of original cluster members is greater than " +
+							"one");
 				}
 
 				return;
@@ -803,14 +771,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		private void loadIndexes(long companyId) {
-			if (getLastGeneration(companyId) ==
-				IndexAccessor.DEFAULT_LOCAL_LAST_GENERATION) {
+			long lastGeneration = getLastGeneration(companyId);
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Load index from cluster for company: " +
-						companyId + " is not enabled");
-				}
-
+			if (lastGeneration == IndexAccessor.DEFAULT_LAST_GENERATION) {
 				return;
 			}
 
@@ -819,10 +782,30 @@ public class LuceneHelperImpl implements LuceneHelper {
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to load index for company: " + companyId, e);
+					"Unable to load indexes for company " + companyId, e);
 			}
 		}
 
 	}
+
+	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
+
+	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
+
+	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
+
+	private static MethodKey _createTokenMethodKey =
+		new MethodKey(TransientTokenUtil.class.getName(), "createToken",
+		long.class);
+	private static MethodKey _getLastGenerationMethodKey =
+		new MethodKey(LuceneHelperUtil.class.getName(), "getLastGeneration",
+		long.class);
+
+	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
+	private Map<Long, IndexAccessor> _indexAccessors =
+		new ConcurrentHashMap<Long, IndexAccessor>();
+	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
+	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
+	private Version _version = Version.LUCENE_30;
 
 }

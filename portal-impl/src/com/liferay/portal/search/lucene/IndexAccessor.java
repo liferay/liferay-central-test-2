@@ -28,6 +28,8 @@ import org.apache.lucene.store.Directory;
  */
 public interface IndexAccessor {
 
+	public static final long DEFAULT_LAST_GENERATION = -1;
+
 	public void addDocument(Document document) throws IOException;
 
 	public void close();
@@ -49,7 +51,5 @@ public interface IndexAccessor {
 	public void loadIndex(InputStream inputStream) throws IOException;
 
 	public void updateDocument(Term term, Document document) throws IOException;
-
-	public static final long DEFAULT_LOCAL_LAST_GENERATION = -1;
 
 }
