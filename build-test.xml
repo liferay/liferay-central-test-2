@@ -2566,37 +2566,25 @@ file.
 			<property name="class" value="ServiceTestSuite" />
 		</ant>
 
-		<antcall target="rebuild-database" inheritAll="false" />
-
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="PersistenceTestSuite" />
 		</ant>
-
-		<antcall target="rebuild-database" inheritAll="false" />
 
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="CMISTestSuite" />
 		</ant>
 
-		<antcall target="rebuild-database" inheritAll="false" />
-
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="RepositoryTestSuite" />
 		</ant>
-
-		<antcall target="rebuild-database" inheritAll="false" />
 
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="WebDAVTestSuite" />
 		</ant>
 
-		<antcall target="rebuild-database" inheritAll="false" />
-
 		<ant dir="portal-impl" target="test-class" inheritAll="false">
 			<property name="class" value="MiscTestSuite" />
 		</ant>
-
-		<antcall target="rebuild-database" inheritAll="false" />
 
 		<ant dir="portal-service" target="test" inheritAll="false" />
 
