@@ -47,6 +47,10 @@ public class FormNavigatorTag extends IncludeTag {
 		_htmlTop = htmlTop;
 	}
 
+	public void setShowButtons(boolean showButtons) {
+		_showButtons = showButtons;
+	}
+
 	public void setJspPath(String jspPath) {
 		_jspPath = jspPath;
 	}
@@ -58,6 +62,7 @@ public class FormNavigatorTag extends IncludeTag {
 		_htmlBottom = null;
 		_htmlTop = null;
 		_jspPath = null;
+		_showButtons = true;
 	}
 
 	protected String getPage() {
@@ -74,6 +79,9 @@ public class FormNavigatorTag extends IncludeTag {
 			"liferay-ui:form-navigator:htmlBottom", _htmlBottom);
 		request.setAttribute("liferay-ui:form-navigator:htmlTop", _htmlTop);
 		request.setAttribute("liferay-ui:form-navigator:jspPath", _jspPath);
+		request.setAttribute(
+			"liferay-ui:form-navigator:showButtons",
+			String.valueOf(_showButtons));
 	}
 
 	private static final String _PAGE =
@@ -85,5 +93,6 @@ public class FormNavigatorTag extends IncludeTag {
 	private String _htmlBottom;
 	private String _htmlTop;
 	private String _jspPath;
+	private boolean _showButtons = true;
 
 }

@@ -23,6 +23,7 @@ String[] categoryNames = (String[])request.getAttribute("liferay-ui:form-navigat
 String htmlBottom = (String)request.getAttribute("liferay-ui:form-navigator:htmlBottom");
 String htmlTop = (String)request.getAttribute("liferay-ui:form-navigator:htmlTop");
 String jspPath = (String)request.getAttribute("liferay-ui:form-navigator:jspPath");
+boolean showButtons = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:form-navigator:showButtons"));
 
 String[] allSections = new String[0];
 
@@ -148,15 +149,17 @@ if (Validator.isNotNull(historyKey)) {
 					}
 					%>
 
-					<aui:button-row>
-						<aui:button type="submit" />
+					<c:if test="<%= showButtons %>">
+						<aui:button-row>
+							<aui:button type="submit" />
 
-						<%
-						String taglibOnClick = Validator.isNull(backURL) ? "location.href = '';" : backURL;
-						%>
+							<%
+							String taglibOnClick = Validator.isNull(backURL) ? "location.href = '';" : backURL;
+							%>
 
-						<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
-					</aui:button-row>
+							<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
+						</aui:button-row>
+					</c:if>
 
 					<%= Validator.isNotNull(htmlBottom) ? htmlBottom : StringPool.BLANK  %>
 				</div>
