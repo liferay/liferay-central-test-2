@@ -235,6 +235,13 @@ public class LuceneHelperUtil {
 		getLuceneHelper().addRequiredTerm(booleanQuery, field, value, like);
 	}
 
+	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, String[] values,
+		boolean like) {
+
+		getLuceneHelper().addRequiredTerm(booleanQuery, field, values, like);
+	}
+
 	public static void addTerm(
 			BooleanQuery booleanQuery, String field, long value)
 		throws ParseException {
@@ -255,6 +262,14 @@ public class LuceneHelperUtil {
 		throws ParseException {
 
 		getLuceneHelper().addTerm(booleanQuery, field, value, like);
+	}
+
+	public static void addTerm(
+			BooleanQuery booleanQuery, String field, String[] values,
+			boolean like)
+		throws ParseException {
+
+		getLuceneHelper().addTerm(booleanQuery, field, values, like);
 	}
 
 	public static int countScoredFieldNames(Query query, String[] fieldNames) {

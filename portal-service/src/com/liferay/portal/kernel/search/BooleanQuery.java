@@ -102,11 +102,18 @@ public interface BooleanQuery extends Query {
 
 	public void addRequiredTerm(String field, String value, boolean like);
 
+	public void addRequiredTerm(
+		String field, String value, boolean like, boolean advancedSearch);
+
 	public void addTerm(String field, long value) throws ParseException;
 
 	public void addTerm(String field, String value) throws ParseException;
 
 	public void addTerm(String field, String value, boolean like)
+		throws ParseException;
+
+	public void addTerm(
+			String field, String value, boolean like, boolean advancedSearch)
 		throws ParseException;
 
 	public void addTerms(String[] fields, String values) throws ParseException;

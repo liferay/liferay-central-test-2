@@ -14,11 +14,18 @@
 
 package com.liferay.portal.search.generic;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseBooleanQueryImpl;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +33,7 @@ import java.util.List;
 
 /**
  * @author Michael C. Han
+ * @author Hugo Huijser
  */
 public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
@@ -208,18 +216,51 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRequiredTerm(String field, String value, boolean like) {
-		Query query = null;
+		addRequiredTerm(field, value, like, false);
+	}
 
-		if (like) {
-			query = new WildcardQueryImpl(
-				new QueryTermImpl(field, String.valueOf(value)));
+	public void addRequiredTerm(String field, String value, boolean like,
+		boolean advancedSearch) {
+
+		String[] values = null;
+
+		if (advancedSearch) {
+			values = getKeywords(value);
 		}
 		else {
-			query = new TermQueryImpl(
-				new QueryTermImpl(field, String.valueOf(value)));
+			values = new String[]{value};
 		}
 
-		add(query , BooleanClauseOccur.MUST);
+		addRequiredTerm(field, values, like);
+	}
+
+	protected void addRequiredTerm(
+		String field, String[] values, boolean like) {
+
+		BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
+
+		for (String value : values) {
+			Query subQuery = null;
+
+			if (like) {
+				subQuery = new WildcardQueryImpl(
+					new QueryTermImpl(field, String.valueOf(value)));
+			}
+			else {
+				subQuery = new TermQueryImpl(
+					new QueryTermImpl(field, String.valueOf(value)));
+			}
+
+			try {
+				booleanQuery.add(subQuery, BooleanClauseOccur.SHOULD);
+			} catch (ParseException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("ParseException thrown, skipping subquery", pe);
+				}
+			}
+		}
+
+		add(booleanQuery, BooleanClauseOccur.MUST);
 	}
 
 	public void addTerm(String field, long value) {
@@ -245,9 +286,26 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		add(query , BooleanClauseOccur.SHOULD);
 	}
 
+	public void addTerm(String field, String value, boolean like,
+		boolean advancedSearch) {
+
+		if (advancedSearch) {
+			String[] keywords = getKeywords(value);
+
+			for (String keyword : keywords) {
+				addTerm(field, keyword, like);
+			}
+		}
+		else {
+			addTerm(field, value, like);
+		}
+	}
+
 	public List<BooleanClause> clauses() {
 		return Collections.unmodifiableList(_clauses);
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(BooleanQueryImpl.class);
 
 	private List<BooleanClause> _clauses = new ArrayList<BooleanClause>();
 

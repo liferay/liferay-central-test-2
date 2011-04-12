@@ -105,6 +105,7 @@ import org.apache.lucene.util.Version;
  * @author Bruno Farache
  * @author Shuyang Zhou
  * @author Tina Tian
+ * @author Hugo Huijser
  */
 public class LuceneHelperImpl implements LuceneHelper {
 
@@ -150,25 +151,38 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
+		addRequiredTerm(booleanQuery, field, new String[]{value}, like);
+	}
+
+	public void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, String[] values,
+		boolean like) {
+
+		BooleanQuery subQuery = new BooleanQuery();
+
 		if (like) {
-			value = StringUtil.replace(
-				value, CharPool.PERCENT, CharPool.STAR);
+			for (String value : values) {
+				value = StringUtil.replace(
+					value, CharPool.PERCENT, CharPool.STAR);
 
-			value = value.toLowerCase();
+				value = value.toLowerCase();
 
-			WildcardQuery wildcardQuery = new WildcardQuery(
-				new Term(field, value));
+				WildcardQuery wildcardQuery = new WildcardQuery(
+					new Term(field, value));
 
-			booleanQuery.add(wildcardQuery, BooleanClause.Occur.MUST);
+				subQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
+			}
 		}
 		else {
-			//text = KeywordsUtil.escape(value);
+			for (String value : values) {
+				Term term = new Term(field, value);
+				TermQuery termQuery = new TermQuery(term);
 
-			Term term = new Term(field, value);
-			TermQuery termQuery = new TermQuery(term);
-
-			booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
+				subQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+			}
 		}
+
+		booleanQuery.add(subQuery, BooleanClause.Occur.MUST);
 	}
 
 	public void addTerm(
@@ -214,6 +228,16 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
+		}
+	}
+
+	public void addTerm(
+			BooleanQuery booleanQuery, String field, String[] values,
+			boolean like)
+		throws ParseException {
+
+		for (String value : values) {
+			addTerm(booleanQuery, field, value, like);
 		}
 	}
 

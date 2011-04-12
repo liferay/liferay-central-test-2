@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Hugo Huijser
  */
 public abstract class BaseBooleanQueryImpl
 	extends BaseQueryImpl implements BooleanQuery {
@@ -65,6 +67,53 @@ public abstract class BaseBooleanQueryImpl
 				addTerm(field, value);
 			}
 		}
+	}
+
+	protected String[] getKeywords(String value) {
+		String [] result = null;
+
+		if (!value.contains(StringPool.QUOTE)) {
+			result = StringUtil.split(value, StringPool.SPACE);
+		}
+		else {
+			List<String> values = new ArrayList<String>();
+
+			while (value.length() > 0) {
+				if (value.startsWith(StringPool.QUOTE)) {
+					value = value.substring(1);
+
+					if (value.contains(StringPool.QUOTE)) {
+						values.add(value.substring(0, value.indexOf(
+							StringPool.QUOTE)));
+
+						value = value.substring(value.indexOf(
+							StringPool.QUOTE) + 1);
+
+						value = value.trim();
+					}
+				}
+				else {
+					if (value.contains(StringPool.SPACE)) {
+						values.add(value.substring(0, value.indexOf(
+							StringPool.SPACE)));
+
+						value = value.substring(value.indexOf(
+							StringPool.SPACE) + 1);
+
+						value = value.trim();
+					}
+					else {
+						values.add(value);
+
+						break;
+					}
+				}
+			}
+
+			result = values.toArray(new String[values.size()]);
+		}
+
+		return result;
 	}
 
 	protected String getTermFieldRemainderValues(

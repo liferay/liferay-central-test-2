@@ -53,8 +53,16 @@ public interface LuceneHelper {
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like);
 
+	public void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, String[] values, boolean like);
+
 	public void addTerm(
 			BooleanQuery booleanQuery, String field, String value, boolean like)
+		throws ParseException;
+
+	public void addTerm(
+			BooleanQuery booleanQuery, String field, String[] values,
+			boolean like)
 		throws ParseException;
 
 	public int countScoredFieldNames(Query query, String[] fieldNames);
