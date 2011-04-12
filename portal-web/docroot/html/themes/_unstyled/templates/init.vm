@@ -29,7 +29,7 @@
 	#set ($css_class = $css_class + " controls-hidden")
 #end
 
-#if($liferay_dockbar_pinned == "true")
+#if ($liferay_dockbar_pinned == "true")
 	#set ($css_class = $css_class + " lfr-dockbar-pinned")
 #end
 
