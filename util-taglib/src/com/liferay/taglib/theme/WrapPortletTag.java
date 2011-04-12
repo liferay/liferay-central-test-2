@@ -16,6 +16,7 @@ package com.liferay.taglib.theme;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
+import com.liferay.portal.kernel.util.ThemeHelper;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
@@ -65,8 +66,18 @@ public class WrapPortletTag
 
 		// Page
 
-		String content = ThemeUtil.includeVM(
-			servletContext, request, pageContext, wrapPage, theme, false);
+		String extension = theme.getTemplateExtension();
+
+		String content = null;
+
+		if (extension.equals(ThemeHelper.TEMPLATE_EXTENSION_FTL)) {
+			content = ThemeUtil.includeFTL(
+				servletContext, request, pageContext, wrapPage, theme, false);
+		}
+		else if (extension.equals(ThemeHelper.TEMPLATE_EXTENSION_VM)) {
+			content = ThemeUtil.includeVM(
+				servletContext, request, pageContext, wrapPage, theme, false);
+		}
 
 		return _CONTENT_WRAPPER_PRE.concat(content).concat(
 			_CONTENT_WRAPPER_POST);
