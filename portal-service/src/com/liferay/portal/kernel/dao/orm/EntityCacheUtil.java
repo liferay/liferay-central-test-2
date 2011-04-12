@@ -38,11 +38,11 @@ public class EntityCacheUtil {
 	}
 
 	public static Object getResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, SessionFactory sessionFactory) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		SessionFactory sessionFactory) {
 
 		return getEntityCache().getResult(
-			entityCacheEnabled, classObj, primaryKeyObj, sessionFactory);
+			entityCacheEnabled, clazz, primaryKey, sessionFactory);
 	}
 
 	public static void invalidate() {
@@ -50,19 +50,19 @@ public class EntityCacheUtil {
 	}
 
 	public static Object loadResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, SessionFactory sessionFactory) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		SessionFactory sessionFactory) {
 
 		return getEntityCache().loadResult(
-			entityCacheEnabled, classObj, primaryKeyObj, sessionFactory);
+			entityCacheEnabled, clazz, primaryKey, sessionFactory);
 	}
 
 	public static void putResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, Object result) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		Object result) {
 
 		getEntityCache().putResult(
-			entityCacheEnabled, classObj, primaryKeyObj, result);
+			entityCacheEnabled, clazz, primaryKey, result);
 	}
 
 	public static void removeCache(String className) {
@@ -70,11 +70,9 @@ public class EntityCacheUtil {
 	}
 
 	public static void removeResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey) {
 
-		getEntityCache().removeResult(
-			entityCacheEnabled, classObj, primaryKeyObj);
+		getEntityCache().removeResult(entityCacheEnabled, clazz, primaryKey);
 	}
 
 	public void setEntityCache(EntityCache finderCache) {

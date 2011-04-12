@@ -190,16 +190,16 @@ public class MethodInvoker {
 			method = MethodCache.get(methodKey);
 		}
 		catch (NoSuchMethodException nsme) {
-			Class<?> classObject = null;
+			Class<?> clazz = null;
 
 			if (targetObject == null) {
-				classObject = contextClassLoader.loadClass(className);
+				clazz = contextClassLoader.loadClass(className);
 			}
 			else {
-				classObject = targetObject.getClass();
+				clazz = targetObject.getClass();
 			}
 
-			Method[] methods = classObject.getMethods();
+			Method[] methods = clazz.getMethods();
 
 			for (int i = 0; i < methods.length; i++) {
 				Class<?>[] methodParameterTypes =

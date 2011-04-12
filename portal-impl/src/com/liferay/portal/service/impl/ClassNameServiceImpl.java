@@ -34,8 +34,8 @@ public class ClassNameServiceImpl extends ClassNameServiceBaseImpl {
 		return classNameLocalService.getClassName(value);
 	}
 
-	public long getClassNameId(Class<?> classObj) {
-		return classNameLocalService.getClassNameId(classObj);
+	public long getClassNameId(Class<?> clazz) {
+		return classNameLocalService.getClassNameId(clazz);
 	}
 
 	public long getClassNameId(String value) {

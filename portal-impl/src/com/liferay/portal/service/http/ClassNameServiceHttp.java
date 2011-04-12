@@ -121,13 +121,13 @@ public class ClassNameServiceHttp {
 	}
 
 	public static long getClassNameId(HttpPrincipal httpPrincipal,
-		java.lang.Class<?> classObj)
+		java.lang.Class<?> clazz)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ClassNameServiceUtil.class.getName(),
 					"getClassNameId", _getClassNameIdParameterTypes2);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, classObj);
+			MethodHandler methodHandler = new MethodHandler(methodKey, clazz);
 
 			Object returnObj = null;
 

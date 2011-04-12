@@ -316,15 +316,14 @@ public class IncludeTag extends AttributesTagSupport {
 		else {
 			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
-			Class<?> classObj = classLoader.loadClass(
-				_LIFERAY_REQUEST_DISPATCHER);
+			Class<?> clazz = classLoader.loadClass(_LIFERAY_REQUEST_DISPATCHER);
 
-			Constructor<?> constructor = classObj.getConstructor(
+			Constructor<?> constructor = clazz.getConstructor(
 				RequestDispatcher.class, String.class);
 
 			Object obj = constructor.newInstance(requestDispatcher, page);
 
-			Method method = classObj.getMethod(
+			Method method = clazz.getMethod(
 				"include", ServletRequest.class, ServletResponse.class,
 				boolean.class);
 

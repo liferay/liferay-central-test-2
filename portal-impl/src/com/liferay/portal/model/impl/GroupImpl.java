@@ -420,10 +420,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return LayoutConstants.DEFAULT_PLID;
 	}
 
-	protected boolean hasClassName(Class<?> classObj) {
+	protected boolean hasClassName(Class<?> clazz) {
 		long classNameId = getClassNameId();
 
-		if (classNameId == PortalUtil.getClassNameId(classObj)) {
+		if (classNameId == PortalUtil.getClassNameId(clazz)) {
 			return true;
 		}
 		else {

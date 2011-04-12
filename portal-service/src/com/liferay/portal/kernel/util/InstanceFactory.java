@@ -49,19 +49,19 @@ public class InstanceFactory {
 			classLoader = currentThread.getContextClassLoader();
 		}
 
-		Class<?> classObject = classLoader.loadClass(className);
+		Class<?> clazz = classLoader.loadClass(className);
 
 		if ((parameterTypes != null) && (arguments != null) &&
 			(parameterTypes.length > 0) && (arguments.length > 0) &&
 			(parameterTypes.length == arguments.length)) {
 
-			Constructor<?> constructor = classObject.getConstructor(
+			Constructor<?> constructor = clazz.getConstructor(
 				parameterTypes);
 
 			return constructor.newInstance(arguments);
 		}
 		else {
-			return classObject.newInstance();
+			return clazz.newInstance();
 		}
 	}
 

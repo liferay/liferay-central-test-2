@@ -77,9 +77,9 @@ public class LayoutLocalServiceStagingAdvice
 		}
 		else {
 			try {
-				Class<?> classObject = getClass();
+				Class<?> clazz = getClass();
 
-				Method localMethod = classObject.getMethod(
+				Method localMethod = clazz.getMethod(
 					methodName, method.getParameterTypes());
 
 				returnValue = localMethod.invoke(this, arguments);

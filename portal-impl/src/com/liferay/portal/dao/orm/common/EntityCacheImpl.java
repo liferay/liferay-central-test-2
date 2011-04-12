@@ -80,8 +80,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public Object getResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, SessionFactory sessionFactory) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		SessionFactory sessionFactory) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
 			!entityCacheEnabled || !CacheRegistryUtil.isActive()) {
@@ -98,15 +98,15 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		if (_localCacheAvailable) {
 			localCache = _localCache.get();
 
-			localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+			localCacheKey = _encodeLocalCacheKey(clazz, primaryKey);
 
 			result = localCache.get(localCacheKey);
 		}
 
 		if (result == null) {
-			PortalCache portalCache = _getPortalCache(classObj.getName(), true);
+			PortalCache portalCache = _getPortalCache(clazz.getName(), true);
 
-			String cacheKey = _encodeCacheKey(primaryKeyObj);
+			String cacheKey = _encodeCacheKey(primaryKey);
 
 			result = portalCache.get(cacheKey);
 
@@ -133,8 +133,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public Object loadResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, SessionFactory sessionFactory) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		SessionFactory sessionFactory) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
 			!entityCacheEnabled || !CacheRegistryUtil.isActive()) {
@@ -144,7 +144,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			try {
 				session = sessionFactory.openSession();
 
-				return session.load(classObj, primaryKeyObj);
+				return session.load(clazz, primaryKey);
 			}
 			finally {
 				sessionFactory.closeSession(session);
@@ -160,7 +160,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		if (_localCacheAvailable) {
 			localCache = _localCache.get();
 
-			localCacheKey = _encodeLocalCacheKey(classObj, primaryKeyObj);
+			localCacheKey = _encodeLocalCacheKey(clazz, primaryKey);
 
 			result = localCache.get(localCacheKey);
 		}
@@ -168,17 +168,16 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		boolean load = false;
 
 		if (result == null) {
-			PortalCache portalCache = _getPortalCache(classObj.getName(), true);
+			PortalCache portalCache = _getPortalCache(clazz.getName(), true);
 
-			String cacheKey = _encodeCacheKey(primaryKeyObj);
+			String cacheKey = _encodeCacheKey(primaryKey);
 
 			result = portalCache.get(cacheKey);
 
 			if (result == null) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Load " + classObj + " " + primaryKeyObj +
-							" from session");
+						"Load " + clazz + " " + primaryKey + " from session");
 				}
 
 				load = true;
@@ -188,7 +187,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 				try {
 					session = sessionFactory.openSession();
 
-					result = session.load(classObj, primaryKeyObj);
+					result = session.load(clazz, primaryKey);
 				}
 				finally {
 					if (result == null) {
@@ -222,8 +221,8 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void putResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, Object result) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		Object result) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
 			!entityCacheEnabled || !CacheRegistryUtil.isActive() ||
@@ -237,15 +236,14 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
-			String localCacheKey = _encodeLocalCacheKey(
-				classObj, primaryKeyObj);
+			String localCacheKey = _encodeLocalCacheKey(clazz, primaryKey);
 
 			localCache.put(localCacheKey, result);
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName(), true);
+		PortalCache portalCache = _getPortalCache(clazz.getName(), true);
 
-		String cacheKey = _encodeCacheKey(primaryKeyObj);
+		String cacheKey = _encodeCacheKey(primaryKey);
 
 		portalCache.put(cacheKey, result);
 	}
@@ -258,8 +256,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	}
 
 	public void removeResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj) {
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey) {
 
 		if (!PropsValues.VALUE_OBJECT_ENTITY_CACHE_ENABLED ||
 			!entityCacheEnabled || !CacheRegistryUtil.isActive()) {
@@ -270,15 +267,14 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		if (_localCacheAvailable) {
 			Map<String, Object> localCache = _localCache.get();
 
-			String localCacheKey = _encodeLocalCacheKey(
-				classObj, primaryKeyObj);
+			String localCacheKey = _encodeLocalCacheKey(clazz, primaryKey);
 
 			localCache.remove(localCacheKey);
 		}
 
-		PortalCache portalCache = _getPortalCache(classObj.getName(), true);
+		PortalCache portalCache = _getPortalCache(clazz.getName(), true);
 
-		String cacheKey = _encodeCacheKey(primaryKeyObj);
+		String cacheKey = _encodeCacheKey(primaryKey);
 
 		portalCache.remove(cacheKey);
 	}
@@ -287,25 +283,25 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		_multiVMPool = multiVMPool;
 	}
 
-	private String _encodeCacheKey(Serializable primaryKeyObj) {
+	private String _encodeCacheKey(Serializable primaryKey) {
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
 		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
-		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
+		cacheKeyGenerator.append(StringUtil.toHexString(primaryKey));
 
 		return cacheKeyGenerator.finish();
 	}
 
 	private String _encodeLocalCacheKey(
-		Class<?> classObj, Serializable primaryKeyObj) {
+		Class<?> clazz, Serializable primaryKey) {
 
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(CACHE_NAME);
 
 		cacheKeyGenerator.append(ShardUtil.getCurrentShardName());
-		cacheKeyGenerator.append(classObj.getName());
-		cacheKeyGenerator.append(StringUtil.toHexString(primaryKeyObj));
+		cacheKeyGenerator.append(clazz.getName());
+		cacheKeyGenerator.append(StringUtil.toHexString(primaryKey));
 
 		return cacheKeyGenerator.finish();
 	}

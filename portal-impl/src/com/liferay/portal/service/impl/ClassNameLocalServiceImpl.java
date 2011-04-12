@@ -91,8 +91,8 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 	}
 
 	@Transactional(enabled = false)
-	public long getClassNameId(Class<?> classObj) {
-		return getClassNameId(classObj.getName());
+	public long getClassNameId(Class<?> clazz) {
+		return getClassNameId(clazz.getName());
 	}
 
 	@Transactional(enabled = false)

@@ -352,10 +352,10 @@ public class GetterUtil {
 	public static boolean[] getBooleanValues(
 		Serializable value, boolean[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getBooleanValues((String[])value, defaultValue);
@@ -417,10 +417,10 @@ public class GetterUtil {
 	public static Date[] getDateValues(
 		Serializable value, DateFormat dateFormat, Date[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getDateValues((String[])value, dateFormat, defaultValue);
@@ -476,10 +476,10 @@ public class GetterUtil {
 	public static double[] getDoubleValues(
 		Serializable value, double[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getDoubleValues((String[])value, defaultValue);
@@ -535,10 +535,10 @@ public class GetterUtil {
 	public static float[] getFloatValues(
 		Serializable value, float[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getFloatValues((String[])value, defaultValue);
@@ -594,10 +594,10 @@ public class GetterUtil {
 	public static int[] getIntegerValues(
 		Serializable value, int[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getIntegerValues((String[])value, defaultValue);
@@ -651,10 +651,10 @@ public class GetterUtil {
 	public static long[] getLongValues(
 		Serializable value, long[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getLongValues((String[])value, defaultValue);
@@ -736,10 +736,10 @@ public class GetterUtil {
 	public static short[] getShortValues(
 		Serializable value, short[] defaultValue) {
 
-		Class<?> classObject = value.getClass();
+		Class<?> clazz = value.getClass();
 
-		if (classObject.isArray()) {
-			Class<?> componentType = classObject.getComponentType();
+		if (clazz.isArray()) {
+			Class<?> componentType = clazz.getComponentType();
 
 			if (componentType.isAssignableFrom(String.class)) {
 				return getShortValues((String[])value, defaultValue);

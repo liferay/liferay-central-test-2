@@ -87,7 +87,7 @@ public class ClassLoaderProxy {
 		try {
 			currentThread.setContextClassLoader(_classLoader);
 
-			Class<?> classObj = Class.forName(_className, true, _classLoader);
+			Class<?> clazz = Class.forName(_className, true, _classLoader);
 
 			List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
 
@@ -123,12 +123,12 @@ public class ClassLoaderProxy {
 			Method method = null;
 
 			try {
-				method = classObj.getMethod(
+				method = clazz.getMethod(
 					methodName,
 					parameterTypes.toArray(new Class[parameterTypes.size()]));
 			}
 			catch (NoSuchMethodException nsme) {
-				Method[] methods = ((Class<?>)classObj).getMethods();
+				Method[] methods = ((Class<?>)clazz).getMethods();
 
 				for (int i = 0; i < methods.length; i++) {
 					Class<?>[] methodParameterTypes =
@@ -217,9 +217,9 @@ public class ClassLoaderProxy {
 			String name = methodHandler.getMethodName();
 			Class<?>[] parameterTypes = methodHandler.getArgumentsClasses();
 
-			Class<?> classObj = Class.forName(_className, true, _classLoader);
+			Class<?> clazz = Class.forName(_className, true, _classLoader);
 
-			for (Method method : classObj.getMethods()) {
+			for (Method method : clazz.getMethods()) {
 				String curName = method.getName();
 				Class<?>[] curParameterTypes = method.getParameterTypes();
 

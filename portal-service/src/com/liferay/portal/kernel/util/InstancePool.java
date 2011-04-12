@@ -69,9 +69,9 @@ public class InstancePool {
 				PortalClassLoaderUtil.getClassLoader();
 
 			try {
-				Class<?> classObj = portalClassLoader.loadClass(className);
+				Class<?> clazz = portalClassLoader.loadClass(className);
 
-				obj = classObj.newInstance();
+				obj = clazz.newInstance();
 
 				_put(className, obj);
 			}
@@ -89,9 +89,9 @@ public class InstancePool {
 					currentThread.getContextClassLoader();
 
 				try {
-					Class<?> classObj = contextClassLoader.loadClass(className);
+					Class<?> clazz = contextClassLoader.loadClass(className);
 
-					obj = classObj.newInstance();
+					obj = clazz.newInstance();
 
 					_put(className, obj);
 				}

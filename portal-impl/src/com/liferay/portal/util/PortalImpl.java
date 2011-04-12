@@ -973,8 +973,8 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public long getClassNameId(Class<?> classObj) {
-		return ClassNameLocalServiceUtil.getClassNameId(classObj);
+	public long getClassNameId(Class<?> clazz) {
+		return ClassNameLocalServiceUtil.getClassNameId(clazz);
 	}
 
 	public long getClassNameId(String value) {

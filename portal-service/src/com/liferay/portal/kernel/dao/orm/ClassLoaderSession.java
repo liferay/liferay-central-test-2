@@ -182,9 +182,7 @@ public class ClassLoaderSession implements Session {
 		}
 	}
 
-	public Object get(Class<?> classObject, Serializable id)
-		throws ORMException {
-
+	public Object get(Class<?> clazz, Serializable id) throws ORMException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -194,7 +192,7 @@ public class ClassLoaderSession implements Session {
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _session.get(classObject, id);
+			return _session.get(clazz, id);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
@@ -203,7 +201,7 @@ public class ClassLoaderSession implements Session {
 		}
 	}
 
-	public Object get(Class<?> classObject, Serializable id, LockMode lockMode)
+	public Object get(Class<?> clazz, Serializable id, LockMode lockMode)
 		throws ORMException {
 
 		Thread currentThread = Thread.currentThread();
@@ -215,7 +213,7 @@ public class ClassLoaderSession implements Session {
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _session.get(classObject, id, lockMode);
+			return _session.get(clazz, id, lockMode);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {
@@ -243,9 +241,7 @@ public class ClassLoaderSession implements Session {
 		}
 	}
 
-	public Object load(Class<?> classObject, Serializable id)
-		throws ORMException {
-
+	public Object load(Class<?> clazz, Serializable id) throws ORMException {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
@@ -255,7 +251,7 @@ public class ClassLoaderSession implements Session {
 				currentThread.setContextClassLoader(_classLoader);
 			}
 
-			return _session.load(classObject, id);
+			return _session.load(clazz, id);
 		}
 		finally {
 			if (contextClassLoader != _classLoader) {

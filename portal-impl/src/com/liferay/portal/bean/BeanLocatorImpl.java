@@ -90,10 +90,10 @@ public class BeanLocatorImpl implements BeanLocator {
 
 				List<Class<?>> interfacesList = new ArrayList<Class<?>>();
 
-				for (Class<?> classObj : interfaces) {
+				for (Class<?> clazz : interfaces) {
 					try {
 						interfacesList.add(
-							_classLoader.loadClass(classObj.getName()));
+							_classLoader.loadClass(clazz.getName()));
 					}
 					catch (ClassNotFoundException cnfe) {
 					}

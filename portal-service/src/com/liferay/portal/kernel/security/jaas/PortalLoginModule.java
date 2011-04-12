@@ -32,10 +32,10 @@ public class PortalLoginModule implements LoginModule {
 
 	public PortalLoginModule() {
 		try {
-			Class<?> classObj = Class.forName(
+			Class<?> clazz = Class.forName(
 				_CLASS_NAME, true, PortalClassLoaderUtil.getClassLoader());
 
-			_loginModule = (LoginModule)classObj.newInstance();
+			_loginModule = (LoginModule)clazz.newInstance();
 		}
 		catch (Exception e) {
 			_log.error(e);

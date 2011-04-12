@@ -252,8 +252,8 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 		return _classNameLocalService.getClassName(value);
 	}
 
-	public long getClassNameId(java.lang.Class<?> classObj) {
-		return _classNameLocalService.getClassNameId(classObj);
+	public long getClassNameId(java.lang.Class<?> clazz) {
+		return _classNameLocalService.getClassNameId(clazz);
 	}
 
 	public long getClassNameId(java.lang.String value) {

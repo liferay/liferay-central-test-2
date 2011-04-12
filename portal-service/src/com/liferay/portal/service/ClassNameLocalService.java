@@ -233,7 +233,7 @@ public interface ClassNameLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getClassNameId(java.lang.Class<?> classObj);
+	public long getClassNameId(java.lang.Class<?> clazz);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getClassNameId(java.lang.String value);

@@ -176,14 +176,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected void initClass() {
-		classObject = getClass();
-		classLoader = classObject.getClassLoader();
+		clazz = getClass();
+		classLoader = clazz.getClassLoader();
 	}
 
 	protected void initMethods() {
 		methodsMap = new HashMap<String, Method>();
 
-		Method[] methods = classObject.getMethods();
+		Method[] methods = clazz.getMethods();
 
 		for (Method method : methods) {
 			String methodKey = getMethodKey(
@@ -320,7 +320,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected ActionResponse actionResponse;
 	protected AlloyPortlet alloyPortlet;
 	protected ClassLoader classLoader;
-	protected Class<?> classObject;
+	protected Class<?> clazz;
 	protected String controllerPath;
 	protected EventRequest eventRequest;
 	protected EventResponse eventResponse;

@@ -92,10 +92,10 @@ public class ClassNameServiceSoap {
 		}
 	}
 
-	public static long getClassNameId(java.lang.Class<?> classObj)
+	public static long getClassNameId(java.lang.Class<?> clazz)
 		throws RemoteException {
 		try {
-			long returnValue = ClassNameServiceUtil.getClassNameId(classObj);
+			long returnValue = ClassNameServiceUtil.getClassNameId(clazz);
 
 			return returnValue;
 		}

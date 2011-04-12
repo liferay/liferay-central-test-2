@@ -51,13 +51,13 @@ public interface PortletDataContext extends Serializable {
 
 	public static final String ROOT_PATH_PORTLETS = "/portlets/";
 
-	public void addAssetCategories(Class<?> classObj, long classPK)
+	public void addAssetCategories(Class<?> clazz, long classPK)
 		throws SystemException;
 
 	public void addAssetCategories(
 		String className, long classPK, long[] assetCategoryIds);
 
-	public void addAssetTags(Class<?> classObj, long classPK)
+	public void addAssetTags(Class<?> clazz, long classPK)
 		throws SystemException;
 
 	public void addAssetTags(
@@ -68,18 +68,18 @@ public interface PortletDataContext extends Serializable {
 			String namespace)
 		throws PortalException, SystemException;
 
-	public void addComments(Class<?> classObj, long classPK)
+	public void addComments(Class<?> clazz, long classPK)
 		throws SystemException;
 
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
 
-	public void addLocks(Class<?> classObj, String key)
+	public void addLocks(Class<?> clazz, String key)
 		throws PortalException, SystemException;
 
 	public void addLocks(String className, String key, Lock lock);
 
-	public void addPermissions(Class<?> classObj, long classPK)
+	public void addPermissions(Class<?> clazz, long classPK)
 		throws PortalException, SystemException;
 
 	public void addPermissions(String resourceName, long resourcePK)
@@ -88,9 +88,9 @@ public interface PortletDataContext extends Serializable {
 	public void addPermissions(
 		String resourceName, long resourcePK, List<KeyValuePair> permissions);
 
-	public boolean addPrimaryKey(Class<?> classObj, String primaryKey);
+	public boolean addPrimaryKey(Class<?> clazz, String primaryKey);
 
-	public void addRatingsEntries(Class<?> classObj, long classPK)
+	public void addRatingsEntries(Class<?> clazz, long classPK)
 		throws SystemException;
 
 	public void addRatingsEntries(
@@ -117,13 +117,13 @@ public interface PortletDataContext extends Serializable {
 
 	public Object fromXML(String xml);
 
-	public long[] getAssetCategoryIds(Class<?> classObj, long classPK);
+	public long[] getAssetCategoryIds(Class<?> clazz, long classPK);
 
 	public Map<String, long[]> getAssetCategoryIdsMap();
 
 	public Map<String, String[]> getAssetCategoryUuidsMap();
 
-	public String[] getAssetTagNames(Class<?> classObj, long classPK);
+	public String[] getAssetTagNames(Class<?> clazz, long classPK);
 
 	public String[] getAssetTagNames(String className, long classPK);
 
@@ -147,7 +147,7 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, Lock> getLocks();
 
-	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj);
+	public Map<?, ?> getNewPrimaryKeysMap(Class<?> clazz);
 
 	public Map<?, ?> getNewPrimaryKeysMap(String className);
 
@@ -209,7 +209,7 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean hasNotUniquePerLayout(String dataKey);
 
-	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey);
+	public boolean hasPrimaryKey(Class<?> clazz, String primaryKey);
 
 	public void importClassedModel(
 			ClassedModel classedModel, ClassedModel newClassedModel,
@@ -217,14 +217,14 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	public void importComments(
-			Class<?> classObj, long classPK, long newClassPK, long groupId)
+			Class<?> clazz, long classPK, long newClassPK, long groupId)
 		throws PortalException, SystemException;
 
-	public void importLocks(Class<?> classObj, String key, String newKey)
+	public void importLocks(Class<?> clazz, String key, String newKey)
 		throws PortalException, SystemException;
 
 	public void importPermissions(
-			Class<?> classObj, long classPK, long newClassPK)
+			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException;
 
 	public void importPermissions(
@@ -232,7 +232,7 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	public void importRatingsEntries(
-			Class<?> classObj, long classPK, long newClassPK)
+			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException;
 
 	public boolean isDataStrategyMirror();

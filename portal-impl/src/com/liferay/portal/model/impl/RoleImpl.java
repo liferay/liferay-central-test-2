@@ -84,10 +84,10 @@ public class RoleImpl extends RoleModelImpl implements Role {
 		return hasClassName(Team.class);
 	}
 
-	protected boolean hasClassName(Class<?> classObj) {
+	protected boolean hasClassName(Class<?> clazz) {
 		long classNameId = getClassNameId();
 
-		if (classNameId == PortalUtil.getClassNameId(classObj)) {
+		if (classNameId == PortalUtil.getClassNameId(clazz)) {
 			return true;
 		}
 		else {

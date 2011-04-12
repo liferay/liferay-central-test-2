@@ -256,8 +256,8 @@ public class PortalUtil {
 		return getPortal().getClassName(classNameId);
 	}
 
-	public static long getClassNameId(Class<?> classObj) {
-		return getPortal().getClassNameId(classObj);
+	public static long getClassNameId(Class<?> clazz) {
+		return getPortal().getClassNameId(clazz);
 	}
 
 	public static long getClassNameId(String value) {

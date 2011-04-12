@@ -168,22 +168,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 		initXStream();
 	}
 
-	public void addAssetCategories(Class<?> classObj, long classPK)
+	public void addAssetCategories(Class<?> clazz, long classPK)
 		throws SystemException {
 
 		List<AssetCategory> assetCategories =
 			AssetCategoryLocalServiceUtil.getCategories(
-				classObj.getName(), classPK);
+				clazz.getName(), classPK);
 
 		if (assetCategories.isEmpty()) {
 			return;
 		}
 
 		_assetCategoryUuidsMap.put(
-			getPrimaryKeyString(classObj, classPK),
+			getPrimaryKeyString(clazz, classPK),
 			StringUtil.split(ListUtil.toString(assetCategories, "uuid")));
 		_assetCategoryIdsMap.put(
-			getPrimaryKeyString(classObj, classPK),
+			getPrimaryKeyString(clazz, classPK),
 			StringUtil.split(
 				ListUtil.toString(assetCategories, "categoryId"), 0L));
 	}
@@ -195,18 +195,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), assetCategoryIds);
 	}
 
-	public void addAssetTags(Class<?> classObj, long classPK)
+	public void addAssetTags(Class<?> clazz, long classPK)
 		throws SystemException {
 
 		String[] tagNames = AssetTagLocalServiceUtil.getTagNames(
-			classObj.getName(), classPK);
+			clazz.getName(), classPK);
 
 		if (tagNames.length == 0) {
 			return;
 		}
 
-		_assetTagNamesMap.put(
-			getPrimaryKeyString(classObj, classPK), tagNames);
+		_assetTagNamesMap.put(getPrimaryKeyString(clazz, classPK), tagNames);
 	}
 
 	public void addAssetTags(
@@ -230,36 +229,36 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		if (isResourceMain(classedModel)) {
-			Class<?> classObj = classedModel.getModelClass();
+			Class<?> clazz = classedModel.getModelClass();
 			long classPK = getClassPK(classedModel);
 
-			addLocks(classObj, String.valueOf(classPK));
-			addPermissions(classObj, classPK);
+			addLocks(clazz, String.valueOf(classPK));
+			addPermissions(clazz, classPK);
 
 			if (getBooleanParameter(namespace, "categories")) {
-				addAssetCategories(classObj, classPK);
+				addAssetCategories(clazz, classPK);
 			}
 
 			if (getBooleanParameter(namespace, "comments")) {
-				addComments(classObj, classPK);
+				addComments(clazz, classPK);
 			}
 
 			if (getBooleanParameter(namespace, "ratings")) {
-				addRatingsEntries(classObj, classPK);
+				addRatingsEntries(clazz, classPK);
 			}
 
 			if (getBooleanParameter(namespace, "tags")) {
-				addAssetTags(classObj, classPK);
+				addAssetTags(clazz, classPK);
 			}
 		}
 
 		addZipEntry(path, classedModel);
 	}
 
-	public void addComments(Class<?> classObj, long classPK)
+	public void addComments(Class<?> clazz, long classPK)
 		throws SystemException {
 
-		long classNameId = PortalUtil.getClassNameId(classObj);
+		long classNameId = PortalUtil.getClassNameId(clazz);
 
 		MBDiscussion discussion = MBDiscussionUtil.fetchByC_C(
 			classNameId, classPK);
@@ -285,7 +284,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			addRatingsEntries(MBMessage.class, message.getPrimaryKey());
 		}
 
-		_commentsMap.put(getPrimaryKeyString(classObj, classPK), messages);
+		_commentsMap.put(getPrimaryKeyString(clazz, classPK), messages);
 	}
 
 	public void addComments(
@@ -294,15 +293,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
 	}
 
-	public void addLocks(Class<?> classObj, String key)
+	public void addLocks(Class<?> clazz, String key)
 		throws PortalException, SystemException {
 
-		if (!_locksMap.containsKey(getPrimaryKeyString(classObj, key)) &&
-			LockLocalServiceUtil.isLocked(classObj.getName(), key)) {
+		if (!_locksMap.containsKey(getPrimaryKeyString(clazz, key)) &&
+			LockLocalServiceUtil.isLocked(clazz.getName(), key)) {
 
-			Lock lock = LockLocalServiceUtil.getLock(classObj.getName(), key);
+			Lock lock = LockLocalServiceUtil.getLock(clazz.getName(), key);
 
-			addLocks(classObj.getName(), key, lock);
+			addLocks(clazz.getName(), key, lock);
 		}
 	}
 
@@ -310,10 +309,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_locksMap.put(getPrimaryKeyString(className, key), lock);
 	}
 
-	public void addPermissions(Class<?> classObj, long classPK)
+	public void addPermissions(Class<?> clazz, long classPK)
 		throws PortalException, SystemException {
 
-		addPermissions(classObj.getName(), classPK);
+		addPermissions(clazz.getName(), classPK);
 	}
 
 	public void addPermissions(String resourceName, long resourcePK)
@@ -383,22 +382,21 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(resourceName, resourcePK), permissions);
 	}
 
-	public boolean addPrimaryKey(Class<?> classObj, String primaryKey) {
-		boolean value = hasPrimaryKey(classObj, primaryKey);
+	public boolean addPrimaryKey(Class<?> clazz, String primaryKey) {
+		boolean value = hasPrimaryKey(clazz, primaryKey);
 
 		if (!value) {
-			_primaryKeys.add(getPrimaryKeyString(classObj, primaryKey));
+			_primaryKeys.add(getPrimaryKeyString(clazz, primaryKey));
 		}
 
 		return value;
 	}
 
-	public void addRatingsEntries(Class<?> classObj, long classPK)
+	public void addRatingsEntries(Class<?> clazz, long classPK)
 		throws SystemException {
 
 		List<RatingsEntry> ratingsEntries =
-			RatingsEntryLocalServiceUtil.getEntries(
-				classObj.getName(), classPK);
+			RatingsEntryLocalServiceUtil.getEntries(clazz.getName(), classPK);
 
 		if (ratingsEntries.size() == 0) {
 			return;
@@ -413,7 +411,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		_ratingsEntriesMap.put(
-			getPrimaryKeyString(classObj, classPK), ratingsEntries);
+			getPrimaryKeyString(clazz, classPK), ratingsEntries);
 	}
 
 	public void addRatingsEntries(
@@ -511,9 +509,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _xStream.fromXML(xml);
 	}
 
-	public long[] getAssetCategoryIds(Class<?> classObj, long classPK) {
+	public long[] getAssetCategoryIds(Class<?> clazz, long classPK) {
 		return _assetCategoryIdsMap.get(
-			getPrimaryKeyString(classObj, classPK));
+			getPrimaryKeyString(clazz, classPK));
 	}
 
 	public Map<String, long[]> getAssetCategoryIdsMap() {
@@ -524,8 +522,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _assetCategoryUuidsMap;
 	}
 
-	public String[] getAssetTagNames(Class<?> classObj, long classPK) {
-		return _assetTagNamesMap.get(getPrimaryKeyString(classObj, classPK));
+	public String[] getAssetTagNames(Class<?> clazz, long classPK) {
+		return _assetTagNamesMap.get(getPrimaryKeyString(clazz, classPK));
 	}
 
 	public String[] getAssetTagNames(String className, long classPK) {
@@ -579,8 +577,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _locksMap;
 	}
 
-	public Map<?, ?> getNewPrimaryKeysMap(Class<?> classObj) {
-		return getNewPrimaryKeysMap(classObj.getName());
+	public Map<?, ?> getNewPrimaryKeysMap(Class<?> clazz) {
+		return getNewPrimaryKeysMap(clazz.getName());
 	}
 
 	public Map<?, ?> getNewPrimaryKeysMap(String className) {
@@ -728,8 +726,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _notUniquePerLayout.contains(dataKey);
 	}
 
-	public boolean hasPrimaryKey(Class<?> classObj, String primaryKey) {
-		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	public boolean hasPrimaryKey(Class<?> clazz, String primaryKey) {
+		return _primaryKeys.contains(getPrimaryKeyString(clazz, primaryKey));
 	}
 
 	public void importClassedModel(
@@ -741,38 +739,37 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		Class<?> classObj = classedModel.getModelClass();
+		Class<?> clazz = classedModel.getModelClass();
 		long classPK = getClassPK(classedModel);
 
 		long newClassPK = getClassPK(newClassedModel);
 
 		Map<Long, Long> newPrimaryKeysMap =
-			(Map<Long, Long>)getNewPrimaryKeysMap(classObj);
+			(Map<Long, Long>)getNewPrimaryKeysMap(clazz);
 
 		newPrimaryKeysMap.put(classPK, newClassPK);
 
-		importLocks(
-			classObj, String.valueOf(classPK), String.valueOf(newClassPK));
-		importPermissions(classObj, classPK, newClassPK);
+		importLocks(clazz, String.valueOf(classPK), String.valueOf(newClassPK));
+		importPermissions(clazz, classPK, newClassPK);
 
 		if (getBooleanParameter(namespace, "comments")) {
-			importComments(classObj, classPK, newClassPK, getScopeGroupId());
+			importComments(clazz, classPK, newClassPK, getScopeGroupId());
 		}
 
 		if (getBooleanParameter(namespace, "ratings")) {
-			importRatingsEntries(classObj, classPK, newClassPK);
+			importRatingsEntries(clazz, classPK, newClassPK);
 		}
 	}
 
 	public void importComments(
-			Class<?> classObj, long classPK, long newClassPK, long groupId)
+			Class<?> clazz, long classPK, long newClassPK, long groupId)
 		throws PortalException, SystemException {
 
 		Map<Long, Long> messagePKs = new HashMap<Long, Long>();
 		Map<Long, Long> threadPKs = new HashMap<Long, Long>();
 
 		List<MBMessage> messages = _commentsMap.get(
-			getPrimaryKeyString(classObj, classPK));
+			getPrimaryKeyString(clazz, classPK));
 
 		if (messages == null) {
 			return;
@@ -782,7 +779,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		try {
 			discussion = MBDiscussionLocalServiceUtil.getDiscussion(
-				classObj.getName(), newClassPK);
+				clazz.getName(), newClassPK);
 		}
 		catch (NoSuchDiscussionException nsde) {
 		}
@@ -829,7 +826,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 						importedMessage =
 							MBMessageLocalServiceUtil.addDiscussionMessage(
 								userId, message.getUserName(), groupId,
-								classObj.getName(), newClassPK, threadId,
+								clazz.getName(), newClassPK, threadId,
 								parentMessageId, message.getSubject(),
 								message.getBody(), serviceContext);
 					}
@@ -837,7 +834,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 						importedMessage =
 							MBMessageLocalServiceUtil.updateDiscussionMessage(
 								userId, existingMessage.getMessageId(),
-								classObj.getName(), newClassPK,
+								clazz.getName(), newClassPK,
 								message.getSubject(), message.getBody(),
 								WorkflowConstants.ACTION_PUBLISH);
 					}
@@ -846,7 +843,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 					importedMessage =
 						MBMessageLocalServiceUtil.addDiscussionMessage(
 							userId, message.getUserName(), groupId,
-							classObj.getName(), newClassPK, threadId,
+							clazz.getName(), newClassPK, threadId,
 							parentMessageId, message.getSubject(),
 							message.getBody(), serviceContext);
 				}
@@ -863,10 +860,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public void importLocks(Class<?> classObj, String key, String newKey)
+	public void importLocks(Class<?> clazz, String key, String newKey)
 		throws PortalException, SystemException {
 
-		Lock lock = _locksMap.get(getPrimaryKeyString(classObj, key));
+		Lock lock = _locksMap.get(getPrimaryKeyString(clazz, key));
 
 		if (lock == null) {
 			return;
@@ -883,15 +880,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		LockLocalServiceUtil.lock(
-			userId, classObj.getName(), newKey, lock.getOwner(),
-			lock.getInheritable(), expirationTime);
+			userId, clazz.getName(), newKey, lock.getOwner(),
+			lock.isInheritable(), expirationTime);
 	}
 
 	public void importPermissions(
-			Class<?> classObj, long classPK, long newClassPK)
+			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException {
 
-		importPermissions(classObj.getName(), classPK, newClassPK);
+		importPermissions(clazz.getName(), classPK, newClassPK);
 	}
 
 	public void importPermissions(
@@ -984,11 +981,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void importRatingsEntries(
-			Class<?> classObj, long classPK, long newClassPK)
+			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException {
 
 		List<RatingsEntry> ratingsEntries = _ratingsEntriesMap.get(
-			getPrimaryKeyString(classObj, classPK));
+			getPrimaryKeyString(clazz, classPK));
 
 		if (ratingsEntries == null) {
 			return;
@@ -1003,7 +1000,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			serviceContext.setModifiedDate(ratingsEntry.getModifiedDate());
 
 			RatingsEntryLocalServiceUtil.updateEntry(
-				userId, classObj.getName(), newClassPK, ratingsEntry.getScore(),
+				userId, clazz.getName(), newClassPK, ratingsEntry.getScore(),
 				serviceContext);
 		}
 	}
@@ -1116,7 +1113,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		Element element, String path, ClassedModel classedModel,
 		String namespace) {
 
-		Class<?> classObj = classedModel.getModelClass();
+		Class<?> clazz = classedModel.getModelClass();
 		long classPK = getClassPK(classedModel);
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -1127,13 +1124,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 		if (isResourceMain(classedModel)) {
 			if (getBooleanParameter(namespace, "categories")) {
 				long[] assetCategoryIds = getAssetCategoryIds(
-					classObj, classPK);
+					clazz, classPK);
 
 				serviceContext.setAssetCategoryIds(assetCategoryIds);
 			}
 
 			if (getBooleanParameter(namespace, "tags")) {
-				String[] assetTagNames = getAssetTagNames(classObj, classPK);
+				String[] assetTagNames = getAssetTagNames(clazz, classPK);
 
 				serviceContext.setAssetTagNames(assetTagNames);
 			}
@@ -1196,12 +1193,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	protected String getPrimaryKeyString(Class<?> classObj, long classPK) {
-		return getPrimaryKeyString(classObj.getName(), String.valueOf(classPK));
+	protected String getPrimaryKeyString(Class<?> clazz, long classPK) {
+		return getPrimaryKeyString(clazz.getName(), String.valueOf(classPK));
 	}
 
-	protected String getPrimaryKeyString(Class<?> classObj, String primaryKey) {
-		return getPrimaryKeyString(classObj.getName(), primaryKey);
+	protected String getPrimaryKeyString(Class<?> clazz, String primaryKey) {
+		return getPrimaryKeyString(clazz.getName(), primaryKey);
 	}
 
 	protected String getPrimaryKeyString(String className, long classPK) {

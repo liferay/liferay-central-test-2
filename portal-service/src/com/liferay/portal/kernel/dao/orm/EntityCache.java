@@ -28,23 +28,22 @@ public interface EntityCache {
 	public void clearLocalCache();
 
 	public Object getResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, SessionFactory sessionFactory);
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		SessionFactory sessionFactory);
 
 	public void invalidate();
 
 	public Object loadResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, SessionFactory sessionFactory);
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		SessionFactory sessionFactory);
 
 	public void putResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj, Object result);
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
+		Object result);
 
 	public void removeCache(String className);
 
 	public void removeResult(
-		boolean entityCacheEnabled, Class<?> classObj,
-		Serializable primaryKeyObj);
+		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey);
 
 }

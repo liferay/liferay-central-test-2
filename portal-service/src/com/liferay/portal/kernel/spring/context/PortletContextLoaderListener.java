@@ -26,10 +26,10 @@ public class PortletContextLoaderListener
 	extends PortalClassLoaderServletContextListener {
 
 	protected ServletContextListener getInstance() throws Exception {
-		Class<?> classObj = Class.forName(
+		Class<?> clazz = Class.forName(
 			_CLASS_NAME, true, PortalClassLoaderUtil.getClassLoader());
 
-		return (ServletContextListener)classObj.newInstance();
+		return (ServletContextListener)clazz.newInstance();
 	}
 
 	private static final String _CLASS_NAME =

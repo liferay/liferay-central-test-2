@@ -99,10 +99,10 @@ public class JSONServiceAction extends JSONAction {
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		Class<?> classObj = contextClassLoader.loadClass(className);
+		Class<?> clazz = contextClassLoader.loadClass(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
-			classObj, methodName, serviceParameters, serviceParameterTypes);
+			clazz, methodName, serviceParameters, serviceParameterTypes);
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
@@ -111,19 +111,18 @@ public class JSONServiceAction extends JSONAction {
 
 			for (int i = 0; i < serviceParameters.length; i++) {
 				args[i] = getArgValue(
-					request, classObj, methodName, serviceParameters[i],
+					request, clazz, methodName, serviceParameters[i],
 					parameterTypes[i]);
 			}
 
 			try {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Invoking " + classObj + " on method " +
-							method.getName() + " with args " +
-								Arrays.toString(args));
+						"Invoking " + clazz + " on method " + method.getName() +
+							" with args " + Arrays.toString(args));
 				}
 
-				Object returnObj = method.invoke(classObj, args);
+				Object returnObj = method.invoke(clazz, args);
 
 				if (returnObj != null) {
 					return getReturnValue(returnObj, method.getReturnType());
@@ -137,9 +136,8 @@ public class JSONServiceAction extends JSONAction {
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Invoked " + classObj + " on method " +
-							method.getName() + " with args " +
-								Arrays.toString(args),
+						"Invoked " + clazz + " on method " + method.getName() +
+							" with args " + Arrays.toString(args),
 						e);
 				}
 
@@ -160,7 +158,7 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected Object getArgValue(
-			HttpServletRequest request, Class<?> classObj, String methodName,
+			HttpServletRequest request, Class<?> clazz, String methodName,
 			String parameter, Type parameterType)
 		throws Exception {
 
@@ -401,24 +399,24 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else {
 			_log.error(
-				"Unsupported parameter type for class " + classObj +
-					", method " + methodName + ", parameter " + parameter +
-						", and type " + typeNameOrClassDescriptor);
+				"Unsupported parameter type for class " + clazz + ", method " +
+					methodName + ", parameter " + parameter + ", and type " +
+						typeNameOrClassDescriptor);
 
 			return null;
 		}
 	}
 
 	protected Object[] getMethodAndParameterTypes(
-			Class<?> classObj, String methodName, String[] parameters,
+			Class<?> clazz, String methodName, String[] parameters,
 			String[] parameterTypes)
 		throws Exception {
 
 		String parameterNames = StringUtil.merge(parameters);
 
 		String key =
-			classObj.getName() + "_METHOD_NAME_" + methodName +
-				"_PARAMETERS_" + parameterNames;
+			clazz.getName() + "_METHOD_NAME_" + methodName + "_PARAMETERS_" +
+				parameterNames;
 
 		Object[] methodAndParameterTypes = _methodCache.get(key);
 
@@ -429,7 +427,7 @@ public class JSONServiceAction extends JSONAction {
 		Method method = null;
 		Type[] methodParameterTypes = null;
 
-		Method[] methods = classObj.getMethods();
+		Method[] methods = clazz.getMethods();
 
 		for (Method curMethod : methods) {
 			if (curMethod.getName().equals(methodName)) {
@@ -460,7 +458,7 @@ public class JSONServiceAction extends JSONAction {
 					}
 					else if (method != null) {
 						_log.error(
-							"Obscure method name for class " + classObj +
+							"Obscure method name for class " + clazz +
 								", method " + methodName + ", and parameters " +
 									parameterNames);
 
@@ -485,7 +483,7 @@ public class JSONServiceAction extends JSONAction {
 		}
 		else {
 			_log.error(
-				"No method found for class " + classObj + ", method " +
+				"No method found for class " + clazz + ", method " +
 					methodName + ", and parameters " + parameterNames);
 
 			return null;

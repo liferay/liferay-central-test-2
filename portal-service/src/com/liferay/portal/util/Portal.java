@@ -354,10 +354,10 @@ public interface Portal {
 	/**
 	 * Gets the ID of the class from its class object.
 	 *
-	 * @param  classObj the class object
+	 * @param  clazz the class object
 	 * @return the ID of the class
 	 */
-	public long getClassNameId(Class<?> classObj);
+	public long getClassNameId(Class<?> clazz);
 
 	/**
 	 * Gets the ID of the class from its fully qualified name.

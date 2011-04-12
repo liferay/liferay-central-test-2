@@ -37,10 +37,8 @@ public class SortFactoryImpl implements SortFactory {
 		return _DEFAULT_SORTS;
 	}
 
-	public Sort getSort(
-		Class<?> classObj, String orderByCol, String orderByType) {
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(classObj);
+	public Sort getSort(Class<?> clazz, String orderByCol, String orderByType) {
+		Indexer indexer = IndexerRegistryUtil.getIndexer(clazz);
 
 		String sortField = indexer.getSortField(orderByCol);
 

@@ -40,8 +40,8 @@ public class ClassNameServiceWrapper implements ClassNameService {
 		return _classNameService.getClassName(value);
 	}
 
-	public long getClassNameId(java.lang.Class<?> classObj) {
-		return _classNameService.getClassNameId(classObj);
+	public long getClassNameId(java.lang.Class<?> clazz) {
+		return _classNameService.getClassNameId(clazz);
 	}
 
 	public long getClassNameId(java.lang.String value) {

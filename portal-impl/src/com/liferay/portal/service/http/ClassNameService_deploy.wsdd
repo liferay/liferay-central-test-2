@@ -4,7 +4,7 @@
 	<service name="Portal_ClassNameService" provider="java:RPC" style="rpc" use="encoded">
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:ClassNameSoap" type="java:com.liferay.portal.model.ClassNameSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getClassNameId" qname="operNS:getClassNameId" returnQName="getClassNameIdReturn" returnType="rtns:long" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classObj" type="tns:anyType"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="clazz" type="tns:anyType"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getClassNameId" qname="operNS:getClassNameId" returnQName="getClassNameIdReturn" returnType="rtns:long" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="value" type="tns:string"></parameter>

@@ -50,8 +50,8 @@ public class ClassNameServiceUtil {
 		return getService().getClassName(value);
 	}
 
-	public static long getClassNameId(java.lang.Class<?> classObj) {
-		return getService().getClassNameId(classObj);
+	public static long getClassNameId(java.lang.Class<?> clazz) {
+		return getService().getClassNameId(clazz);
 	}
 
 	public static long getClassNameId(java.lang.String value) {
