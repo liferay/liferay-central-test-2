@@ -113,7 +113,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 
 								String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
 
-								if (timeFormatPattern.indexOf("a") != -1) {
+								if (timeFormatPattern.contains("a")) {
 									hourValue = valueDate.get(Calendar.HOUR);
 								}
 								%>
