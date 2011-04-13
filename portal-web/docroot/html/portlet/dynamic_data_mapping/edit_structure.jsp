@@ -21,17 +21,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
 
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
-String availableFields = ParamUtil.getString(request, "availableFields");
-String callback = ParamUtil.getString(request, "callback");
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
-
 String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
 String newStructureKey = ParamUtil.getString(request, "newStructureKey");
-
 String script = BeanParamUtil.getString(structure, request, "xsd");
+
+String availableFields = ParamUtil.getString(request, "availableFields");
+String callback = ParamUtil.getString(request, "callback");
 %>
 
 <liferay-portlet:actionURL var="editStructureURL" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>">
@@ -41,11 +40,11 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 <aui:form action="<%= editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (structure != null) ? Constants.UPDATE : Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
-	<aui:input name="callback" type="hidden" value="<%= callback %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="structureKey" type="hidden" value="<%= structureKey %>" />
 	<aui:input name="script" type="hidden" />
+	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
+	<aui:input name="callback" type="hidden" value="<%= callback %>" />
 	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
@@ -55,7 +54,7 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 	<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
 	<liferay-ui:header
-		title='<%= (structure != null) ? structure.getName() : "new-structure"  %>'
+		title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
 		backURL="<%= backURL %>"
 	/>
 

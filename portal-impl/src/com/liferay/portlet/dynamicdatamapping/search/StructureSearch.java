@@ -36,8 +36,8 @@ public class StructureSearch extends SearchContainer<DDMStructure> {
 	static {
 		headerNames.add("id");
 		headerNames.add("name");
-		headerNames.add("classNameId");
-		headerNames.add("storageType");
+		headerNames.add("class-name-id");
+		headerNames.add("storage-type");
 		headerNames.add("modified-date");
 	}
 

@@ -70,8 +70,7 @@ public class ActionUtil {
 			template = DDMTemplateLocalServiceUtil.getDDMTemplate(templateId);
 		}
 
-		request.setAttribute(
-			WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_TEMPLATE, template);
+		request.setAttribute(WebKeys.DYNAMIC_DATA_MAPPING_TEMPLATE, template);
 	}
 
 	public static void getTemplate(PortletRequest portletRequest)

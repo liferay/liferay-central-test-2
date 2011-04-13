@@ -20,6 +20,7 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 DDMTemplate template = (DDMTemplate)row.getObject();
+
 DDMStructure structure = template.getStructure();
 %>
 
@@ -29,11 +30,11 @@ DDMStructure structure = template.getStructure();
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
-			<portlet:param name="availableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />
 			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 			<portlet:param name="structureKey" value="<%= structure.getStructureKey() %>" />
 			<portlet:param name="templateId" value="<%= String.valueOf(template.getTemplateId()) %>" />
 			<portlet:param name="type" value="<%= template.getType() %>" />
+			<portlet:param name="availableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

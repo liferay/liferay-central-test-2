@@ -113,22 +113,11 @@ public class EditTemplateAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
-
 			ActionUtil.getStructure(renderRequest);
-
-			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getTemplate(renderRequest);
-			}
-		}
-		catch (NoSuchTemplateException nssve) {
-
-			// Let this slide because the user can manually input a
-			// templateId for a new template that does not yet exist
-
+			ActionUtil.getTemplate(renderRequest);
 		}
 		catch (Exception e) {
-			if (//e instanceof NoSuchStructureException ||
+			if (e instanceof NoSuchTemplateException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
@@ -165,11 +154,11 @@ public class EditTemplateAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String structureKey = ParamUtil.getString(
+			actionRequest, "structureKey");
 		String availableFields = ParamUtil.getString(
 			actionRequest, "availableFields");
 		String callback = ParamUtil.getString(actionRequest, "callback");
-		String structureKey = ParamUtil.getString(
-			actionRequest, "structureKey");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
@@ -181,14 +170,14 @@ public class EditTemplateAction extends PortletAction {
 		portletURL.setParameter(
 			"struts_action", "/dynamic_data_mapping/edit_template");
 		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter("availableFields", availableFields, false);
-		portletURL.setParameter("callback", callback, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
 		portletURL.setParameter("structureKey", structureKey, false);
+		portletURL.setParameter("type", template.getType(), false);
+		portletURL.setParameter("availableFields", availableFields, false);
+		portletURL.setParameter("callback", callback, false);
 		portletURL.setParameter(
 			"templateId", String.valueOf(template.getTemplateId()), false);
-		portletURL.setParameter("type", template.getType(), false);
 
 		return portletURL.toString();
 	}
@@ -201,14 +190,16 @@ public class EditTemplateAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
-		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
+		long templateId = ParamUtil.getLong(uploadRequest, "templateId");
 
+		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 		String structureKey = ParamUtil.getString(
 			uploadRequest, "structureKey");
-		long templateId = ParamUtil.getLong(uploadRequest, "templateId");
 		String name = ParamUtil.getString(uploadRequest, "name");
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String type = ParamUtil.getString(uploadRequest, "type");
+		String language = ParamUtil.getString(
+			uploadRequest, "language", DDMTemplateConstants.LANG_TYPE_VM);
 
 		String script = ParamUtil.getString(uploadRequest, "script");
 		String scriptContent = JS.decodeURIComponent(
@@ -218,23 +209,20 @@ public class EditTemplateAction extends PortletAction {
 			script = scriptContent;
 		}
 
-		String language = ParamUtil.getString(
-			uploadRequest, "language", DDMTemplateConstants.LANG_TYPE_VM);
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDMTemplate.class.getName(), actionRequest);
 
-		DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
-			groupId, structureKey);
-
 		DDMTemplate template = null;
 
-		if (cmd.equals(Constants.ADD)) {
+		if (templateId <= 0) {
+			DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
+				groupId, structureKey);
+
 			template = DDMTemplateServiceUtil.addTemplate(
 				structure.getStructureId(), name, description, type, language,
 				script, serviceContext);
 		}
-		else if (cmd.equals(Constants.UPDATE)) {
+		else {
 			template = DDMTemplateServiceUtil.updateTemplate(
 				templateId, name, description, type, language, script,
 				serviceContext);

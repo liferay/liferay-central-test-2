@@ -180,12 +180,12 @@ public class EditStructureAction extends PortletAction {
 		portletURL.setParameter(
 			"struts_action", "/dynamic_data_mapping/edit_structure");
 		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter("availableFields", availableFields, false);
-		portletURL.setParameter("callback", callback, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(structure.getGroupId()), false);
 		portletURL.setParameter(
 			"structureKey", structure.getStructureKey(), false);
+		portletURL.setParameter("availableFields", availableFields, false);
+		portletURL.setParameter("callback", callback, false);
 
 		return portletURL.toString();
 	}
@@ -203,7 +203,7 @@ public class EditStructureAction extends PortletAction {
 			actionRequest, "autoStructureKey");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
-		String script = ParamUtil.getString(actionRequest, "script");
+		String xsd = ParamUtil.getString(actionRequest, "script");
 		String storageType = ParamUtil.getString(actionRequest, "storageType");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -214,12 +214,11 @@ public class EditStructureAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			structure = DDMStructureServiceUtil.addStructure(
 				groupId, classNameId, structureKey, autoStructureKey, name,
-				description, script, storageType, serviceContext);
+				description, xsd, storageType, serviceContext);
 		}
 		else if (cmd.equals(Constants.UPDATE)) {
 			structure = DDMStructureServiceUtil.updateStructure(
-				groupId, structureKey, name, description, script,
-				serviceContext);
+				groupId, structureKey, name, description, xsd, serviceContext);
 		}
 
 		return structure;

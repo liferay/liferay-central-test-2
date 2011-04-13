@@ -21,27 +21,29 @@ if (Validator.isNull(script)) {
 
 Set<String> fieldNames = structure.getFieldNames();
 
-Iterator<String> itrFieldNames = fieldNames.iterator();
+JSONArray structureAvailableFieldsJSONArray = JSONFactoryUtil.createJSONArray();
 
-JSONArray structureAvailableFields = JSONFactoryUtil.createJSONArray();
+Iterator<String> itr = fieldNames.iterator();
 
-while (itrFieldNames.hasNext()) {
-	String fieldName = itrFieldNames.next();
+while (itr.hasNext()) {
+	String fieldName = itr.next();
 
 	StringBundler sb = new StringBundler(5);
+
 	sb.append(structure.getFieldLabel(fieldName));
 	sb.append(CharPool.SPACE);
 	sb.append(CharPool.OPEN_PARENTHESIS);
 	sb.append(structure.getFieldDataType(fieldName));
 	sb.append(CharPool.CLOSE_PARENTHESIS);
 
-	JSONObject field = JSONFactoryUtil.createJSONObject();
-	field.put("fieldLabel", fieldName);
-	field.put("label", sb.toString());
-	field.put("name", fieldName);
-	field.put("type", structure.getFieldType(fieldName));
+	JSONObject fieldJSONObject = JSONFactoryUtil.createJSONObject();
 
-	structureAvailableFields.put(field);
+	fieldJSONObject.put("fieldLabel", fieldName);
+	fieldJSONObject.put("label", sb.toString());
+	fieldJSONObject.put("name", fieldName);
+	fieldJSONObject.put("type", structure.getFieldType(fieldName));
+
+	structureAvailableFieldsJSONArray.put(fieldJSONObject);
 }
 %>
 
@@ -49,7 +51,7 @@ while (itrFieldNames.hasNext()) {
 <aui:input name="script" type="hidden" />
 
 <aui:script use="liferay-portlet-dynamic-data-mapping">
-	window.<portlet:namespace />structureAvailableFields = A.Array(<%= structureAvailableFields.toString() %>).concat(Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_TEMPLATE);
+	window.<portlet:namespace />structureAvailableFields = A.Array(<%= structureAvailableFieldsJSONArray.toString() %>).concat(Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_TEMPLATE);
 
 	Liferay.provide(
 		window,

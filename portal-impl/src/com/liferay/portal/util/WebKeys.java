@@ -94,7 +94,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE = "DYNAMIC_DATA_MAPPING_STRUCTURE";
 
-	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE_TEMPLATE = "DYNAMIC_DATA_MAPPING_STRUCTURE_TEMPLATE";
+	public static final String DYNAMIC_DATA_MAPPING_TEMPLATE = "DYNAMIC_DATA_MAPPING_TEMPLATE";
 
 	public static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
 

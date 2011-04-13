@@ -377,7 +377,7 @@ AUI().add(
 					type: 'textarea'
 				}
 			],
-			
+
 			DDM_TEMPLATE: [
 				{
 					fieldLabel: Liferay.Language.get('button'),
