@@ -21,6 +21,9 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "general");
 String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 String redirect = ParamUtil.getString(request, "redirect");
+
+String emailFromName = ParamUtil.getString(request, "emailFromName", LoginUtil.getEmailFromName(preferences));
+String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", LoginUtil.getEmailFromAddress(preferences));
 %>
 
 <liferay-portlet:renderURL var="portletURL" portletConfiguration="true">
@@ -47,9 +50,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<c:when test='<%= tabs1.equals("email-notifications") %>'>
 
 			<%
-			String emailFromName = PrefsParamUtil.getString(preferences, request, "emailFromName");
-			String emailFromAddress = PrefsParamUtil.getString(preferences, request, "emailFromAddress");
-
 			String editorParam = StringPool.BLANK;
 			String editorContent = StringPool.BLANK;
 			%>
@@ -60,12 +60,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 				url="<%= portletURL %>"
 			/>
 
-			<div class="portlet-msg-info">
-				<liferay-ui:message key="enter-custom-values-or-leave-it-blank-to-use-the-default-portal-settings" />
-			</div>
+			<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
+			<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
 
 			<c:choose>
 				<c:when test='<%= tabs2.equals("password-changed-notification") || tabs2.equals("password-reset-notification") %>'>
+
+				<div class="portlet-msg-info">
+					<liferay-ui:message key="enter-custom-values-or-leave-it-blank-to-use-the-default-portal-settings" />
+				</div>
 
 					<%
 					String emailParam = "emailPasswordSent";
@@ -124,13 +127,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 								[$FROM_ADDRESS$]
 							</dt>
 							<dd>
-								<%= preferences.getValue("emailFromAddress", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS)) %>
+								<%= HtmlUtil.escape(emailFromAddress) %>
 							</dd>
 							<dt>
 								[$FROM_NAME$]
 							</dt>
 							<dd>
-								<%= preferences.getValue("emailFromName", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME)) %>
+								<%= HtmlUtil.escape(emailFromName) %>
 							</dd>
 
 							<c:if test='<%= tabs2.equals("password-reset-notification") %>'>
@@ -209,8 +212,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<c:otherwise>
 					<aui:fieldset>
 						<aui:input cssClass="lfr-input-text-container" label="name" name="preferences--emailFromName--" value="<%= emailFromName %>" />
-
-						<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 
 						<aui:input cssClass="lfr-input-text-container" label="address" name="preferences--emailFromAddress--" value="<%= emailFromAddress %>" />
 					</aui:fieldset>

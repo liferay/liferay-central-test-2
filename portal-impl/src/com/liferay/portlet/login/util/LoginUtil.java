@@ -54,6 +54,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
@@ -168,6 +169,18 @@ public class LoginUtil {
 		}
 
 		return userId;
+	}
+
+	public static String getEmailFromAddress(PortletPreferences preferences) {
+		String emailFromAddress = PropsValues.LOGIN_EMAIL_FROM_ADDRESS;
+
+		return preferences.getValue("emailFromAddress", emailFromAddress);
+	}
+
+	public static String getEmailFromName(PortletPreferences preferences) {
+		String emailFromName = PropsValues.LOGIN_EMAIL_FROM_NAME;
+
+		return preferences.getValue("emailFromName", emailFromName);
 	}
 
 	public static String getLogin(

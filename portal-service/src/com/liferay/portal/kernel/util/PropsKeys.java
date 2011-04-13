@@ -1093,6 +1093,10 @@ public interface PropsKeys {
 
 	public static final String LOGIN_CREATE_ACCOUNT_ALLOW_CUSTOM_PASSWORD = "login.create.account.allow.custom.password";
 
+	public static final String LOGIN_EMAIL_FROM_ADDRESS = "login.email.from.address";
+
+	public static final String LOGIN_EMAIL_FROM_NAME = "login.email.from.name";
+
 	public static final String LOGIN_EVENTS_POST = "login.events.post";
 
 	public static final String LOGIN_EVENTS_PRE = "login.events.pre";
