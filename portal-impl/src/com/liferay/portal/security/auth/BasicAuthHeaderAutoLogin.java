@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.login.util.LoginUtil;
 
 import java.util.StringTokenizer;
 
@@ -109,12 +109,13 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 				return credentials;
 			}
 
-			long userId = GetterUtil.getLong(
+			String login = GetterUtil.getString(
 				decodedCredentials.substring(0, pos));
 			String password = decodedCredentials.substring(pos + 1);
 
 			try {
-				UserLocalServiceUtil.getUserById(userId);
+				long userId = LoginUtil.getAuthenticatedUserId(
+					request, login, password, null);
 
 				credentials = new String[3];
 
@@ -122,9 +123,9 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 				credentials[1] = password;
 				credentials[2] = Boolean.TRUE.toString();
 			}
-			catch (NoSuchUserException nsue) {
+			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(userId + " is not a valid user id");
+					_log.warn(login + " is not a valid login");
 				}
 			}
 
