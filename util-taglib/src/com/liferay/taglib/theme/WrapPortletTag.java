@@ -66,9 +66,9 @@ public class WrapPortletTag
 
 		// Page
 
-		String extension = theme.getTemplateExtension();
-
 		String content = null;
+
+		String extension = theme.getTemplateExtension();
 
 		if (extension.equals(ThemeHelper.TEMPLATE_EXTENSION_FTL)) {
 			content = ThemeUtil.includeFTL(
