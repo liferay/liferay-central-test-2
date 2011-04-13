@@ -172,15 +172,13 @@ public class LoginUtil {
 	}
 
 	public static String getEmailFromAddress(PortletPreferences preferences) {
-		String emailFromAddress = PropsValues.LOGIN_EMAIL_FROM_ADDRESS;
-
-		return preferences.getValue("emailFromAddress", emailFromAddress);
+		return preferences.getValue(
+			"emailFromAddress", PropsValues.LOGIN_EMAIL_FROM_ADDRESS);
 	}
 
 	public static String getEmailFromName(PortletPreferences preferences) {
-		String emailFromName = PropsValues.LOGIN_EMAIL_FROM_NAME;
-
-		return preferences.getValue("emailFromName", emailFromName);
+		return preferences.getValue(
+			"emailFromName", PropsValues.LOGIN_EMAIL_FROM_NAME);
 	}
 
 	public static String getLogin(
