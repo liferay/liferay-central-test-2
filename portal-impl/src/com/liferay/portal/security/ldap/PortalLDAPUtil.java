@@ -592,8 +592,8 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean hasUser(
-			long ldapServerId, long companyId, String emailAddress,
-			String screenName)
+			long ldapServerId, long companyId, String screenName,
+			String emailAddress)
 		throws Exception {
 
 		if (getUser(
