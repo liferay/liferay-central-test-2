@@ -681,6 +681,19 @@ public class SeleneseToJavaBuilder {
 
 				sb.append(";");
 			}
+			else if (param1.equals("storeAttribute")) {
+				sb.append("String ");
+				sb.append(param3);
+				sb.append(" = selenium.getAttribute(\"");
+				sb.append(param2);
+				sb.append("\");");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param3);
+				sb.append("\", ");
+				sb.append(param3);
+				sb.append(");");
+			}
 			else if (param1.equals("storeCurrentDay")) {
 				sb.append("String ");
 				sb.append(param2);
