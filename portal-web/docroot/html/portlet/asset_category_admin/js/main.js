@@ -165,6 +165,7 @@ AUI().add(
 						var instance = this;
 
 						var boundingBox = contextPanel.get('boundingBox');
+
 						var autoFieldsTriggers = boundingBox.all('.lfr-floating-trigger');
 
 						autoFieldsTriggers.each(
@@ -182,6 +183,7 @@ AUI().add(
 						var instance = this;
 
 						contextPanel.get('draggable');
+
 						var dragInstance = contextPanel.get('dragInstance');
 
 						dragInstance.on('end', function(event){
