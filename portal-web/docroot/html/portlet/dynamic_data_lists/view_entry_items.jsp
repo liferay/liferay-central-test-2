@@ -71,7 +71,7 @@ for (int i = 0; i < results.size(); i++) {
 		String value = null;
 
 		if (fieldsModel.contains(name)) {
-			Field field = fieldsModel.get(name);
+			com.liferay.portlet.dynamicdatamapping.storage.Field field = fieldsModel.get(name);
 
 			value = String.valueOf(field.getValue());
 		}
