@@ -161,7 +161,7 @@ if (step == 1) {
 			</liferay-ui:search-container>
 
 			<aui:script>
-				function <portlet:namespace />selectOrganization(groupId, organizationId) {
+				function <portlet:namespace />selectOrganization(organizationId, groupId) {
 					document.<portlet:namespace />fm.<portlet:namespace />organizationId.value = organizationId;
 
 					<%
