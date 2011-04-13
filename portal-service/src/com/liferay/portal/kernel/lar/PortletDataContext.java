@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -140,6 +141,8 @@ public interface PortletDataContext extends Serializable {
 	public String getDataStrategy();
 
 	public Date getEndDate();
+
+	public Map<String, List<ExpandoColumn>> getExpandoColumns();
 
 	public long getGroupId();
 

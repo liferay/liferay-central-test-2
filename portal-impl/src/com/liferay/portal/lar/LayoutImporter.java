@@ -347,6 +347,7 @@ public class LayoutImporter {
 
 		_portletImporter.readAssetTags(portletDataContext);
 		_portletImporter.readComments(portletDataContext);
+		_portletImporter.readExpandoTables(portletDataContext);
 		_portletImporter.readLocks(portletDataContext);
 		_portletImporter.readRatingsEntries(portletDataContext);
 

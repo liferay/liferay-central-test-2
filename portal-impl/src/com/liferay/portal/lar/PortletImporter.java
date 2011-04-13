@@ -71,11 +71,19 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
+import com.liferay.portlet.expando.NoSuchColumnException;
+import com.liferay.portlet.expando.NoSuchTableException;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.io.File;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -212,6 +220,7 @@ public class PortletImporter {
 		readAssetCategories(portletDataContext);
 		readAssetTags(portletDataContext);
 		readComments(portletDataContext);
+		readExpandoTables(portletDataContext);
 		readLocks(portletDataContext);
 		readRatingsEntries(portletDataContext);
 
@@ -1024,6 +1033,82 @@ public class PortletImporter {
 			}
 
 			portletDataContext.addComments(className, classPK, mbMessages);
+		}
+	}
+
+	protected void readExpandoTables(PortletDataContext portletDataContext)
+		throws Exception {
+
+		String xml = portletDataContext.getZipEntryAsString(
+			portletDataContext.getSourceRootPath() + "/expando-tables.xml");
+
+		if (xml == null) {
+			return;
+		}
+
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		List<Element> expandoTableElements = rootElement.elements(
+			"expando-table");
+
+		for (Element expandoTableElement : expandoTableElements) {
+			String className = expandoTableElement.attributeValue(
+				"class-name");
+
+			ExpandoTable expandoTable = null;
+
+			try {
+				expandoTable = ExpandoTableLocalServiceUtil.getDefaultTable(
+					portletDataContext.getCompanyId(), className);
+			}
+			catch (NoSuchTableException nste) {
+				expandoTable =
+					ExpandoTableLocalServiceUtil.addDefaultTable(
+						portletDataContext.getCompanyId(), className);
+			}
+
+			List<Element> expandoColumnElements =
+				expandoTableElement.elements("expando-column");
+
+			for (Element expandoColumnElement : expandoColumnElements) {
+				long columnId = GetterUtil.getLong(
+					expandoColumnElement.attributeValue("column-id"));
+				String name = expandoColumnElement.attributeValue("name");
+				int type = GetterUtil.getInteger(
+					expandoColumnElement.attributeValue("type"));
+				String defaultData = expandoColumnElement.elementText(
+					"default-data");
+				String typeSettings = expandoColumnElement.elementText(
+					"type-settings");
+
+				Serializable defaultDataObject =
+					ExpandoConverterUtil.getAttributeFromString(
+						type, defaultData);
+
+				ExpandoColumn expandoColumn = null;
+
+				try {
+					expandoColumn = ExpandoColumnLocalServiceUtil.getColumn(
+						expandoTable.getTableId(), name);
+
+					ExpandoColumnLocalServiceUtil.updateColumn(
+						expandoColumn.getColumnId(), name, type,
+						defaultDataObject);
+				}
+				catch (NoSuchColumnException nsce) {
+					expandoColumn = ExpandoColumnLocalServiceUtil.addColumn(
+						expandoTable.getTableId(), name, type,
+						defaultDataObject);
+				}
+
+				ExpandoColumnLocalServiceUtil.updateTypeSettings(
+					expandoColumn.getColumnId(), typeSettings);
+
+				portletDataContext.importPermissions(
+					ExpandoColumn.class, columnId, expandoColumn.getColumnId());
+			}
 		}
 	}
 

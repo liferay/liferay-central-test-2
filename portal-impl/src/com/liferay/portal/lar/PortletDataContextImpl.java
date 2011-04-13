@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
@@ -69,6 +70,9 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -102,6 +106,7 @@ import com.thoughtworks.xstream.XStream;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -232,6 +237,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			Class<?> clazz = classedModel.getModelClass();
 			long classPK = getClassPK(classedModel);
 
+			addExpando(element, path, classedModel);
 			addLocks(clazz, String.valueOf(classPK));
 			addPermissions(clazz, classPK);
 
@@ -563,6 +569,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Date getEndDate() {
 		return _endDate;
+	}
+
+	public Map<String, List<ExpandoColumn>> getExpandoColumns() {
+		return _expandoColumnsMap;
 	}
 
 	public long getGroupId() {
@@ -1109,6 +1119,41 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_startDate = startDate;
 	}
 
+	protected void addExpando(
+			Element element, String path, ClassedModel classedModel)
+		throws PortalException, SystemException {
+
+		Class<?> clazz = classedModel.getModelClass();
+
+		String className = clazz.getName();
+
+		if (!_expandoColumnsMap.containsKey(className)) {
+			List<ExpandoColumn> expandoColumns =
+				ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
+					_companyId, className);
+
+			for (ExpandoColumn expandoColumn : expandoColumns) {
+				addPermissions(
+				ExpandoColumn.class, expandoColumn.getColumnId());
+			}
+
+			_expandoColumnsMap.put(className, expandoColumns);
+		}
+
+		ExpandoBridge expandoBridge = classedModel.getExpandoBridge();
+
+		Map<String, Serializable> expandoBridgeAttributes =
+			expandoBridge.getAttributes();
+
+		if (!expandoBridgeAttributes.isEmpty()) {
+			String expandoPath = getExpandoPath(path);
+
+			element.addAttribute("expando-path", expandoPath);
+
+			addZipEntry(expandoPath, expandoBridgeAttributes);
+		}
+	}
+
 	protected ServiceContext createServiceContext(
 		Element element, String path, ClassedModel classedModel,
 		String namespace) {
@@ -1152,6 +1197,24 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 				serviceContext.setAssetTagNames(assetTagNames);
 			}
+		}
+
+		// Expando
+
+		String expandoPath = null;
+
+		if (element != null) {
+			expandoPath = element.attributeValue("expando-path");
+		}
+		else {
+			expandoPath = getExpandoPath(path);
+		}
+
+		if (Validator.isNotNull(expandoPath)) {
+			Map<String, Serializable> expandoBridgeAttributes =
+				(Map<String, Serializable>)getZipEntryAsObject(expandoPath);
+
+			serviceContext.setExpandoBridgeAttributes(expandoBridgeAttributes);
 		}
 
 		return serviceContext;
@@ -1199,6 +1262,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 		else {
 			return (Long)classedModel.getPrimaryKeyObj();
 		}
+	}
+
+	protected String getExpandoPath(String path) {
+		int pos = path.lastIndexOf(".xml");
+
+		if (pos == -1) {
+			throw new IllegalArgumentException(
+				path + " does not end with .xml");
+		}
+
+		return path.substring(0, pos).concat("-expando").concat(
+			path.substring(pos, path.length()));
 	}
 
 	protected String getPrimaryKeyString(Class<?> clazz, long classPK) {
@@ -1294,6 +1369,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyId;
 	private String _dataStrategy;
 	private Date _endDate;
+	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
+		new HashMap<String, List<ExpandoColumn>>();
 	private long _groupId;
 	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =
