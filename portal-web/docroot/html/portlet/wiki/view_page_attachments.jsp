@@ -49,7 +49,7 @@ headerNames.add("file-name");
 headerNames.add("size");
 headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-page-does-not-have-any-file-attachments");
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, currentURLObj, headerNames, "this-page-does-not-have-any-file-attachments");
 
 int total = attachments.length;
 
