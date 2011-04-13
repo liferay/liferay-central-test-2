@@ -117,7 +117,7 @@ if (Validator.isNotNull(onChangeMethod)) {
 			file_browser_callback: window['<%= name %>'].fileBrowserCallback,
 			init_instance_callback: window['<%= name %>'].initInstanceCallback,
 			invalid_elements: 'script',
-			language: '<%= HtmlUtil.escape(LocaleUtil.toLanguageId(locale)) %>',
+			language: '<%= HtmlUtil.escape(locale.getLanguage()) %>',
 			mode: 'textareas',
 
 			<%
