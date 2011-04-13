@@ -99,27 +99,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 	<c:when test='<%= topLink.equals("bookmarks-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">
-
-				<%
-				long parentFolderId = defaultFolderId;
-				String parentFolderName = LanguageUtil.get(pageContext, "bookmarks-home");
-
-				if (!folder.isRoot()) {
-					BookmarksFolder parentFolder = folder.getParentFolder();
-
-					parentFolderId = parentFolder.getFolderId();
-					parentFolderName = parentFolder.getName();
-				}
-				%>
-
-				<portlet:renderURL var="backURL">
-					<portlet:param name="struts_action" value="/bookmarks/view" />
-					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
-				</portlet:renderURL>
-
 				<liferay-ui:header
-					backLabel="<%= parentFolderName %>"
-					backURL="<%= backURL.toString() %>"
 					title="<%= folder.getName() %>"
 				/>
 			</c:if>
@@ -178,6 +158,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 									<liferay-portlet:renderURL varImpl="rowURL">
 										<portlet:param name="struts_action" value="/bookmarks/view" />
 										<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
 									</liferay-portlet:renderURL>
 
 									<%@ include file="/html/portlet/bookmarks/folder_columns.jspf" %>

@@ -41,6 +41,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="struts_action" value="/image_gallery/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 
 		<liferay-ui:search-container-column-text

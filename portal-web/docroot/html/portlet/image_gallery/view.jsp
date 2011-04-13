@@ -119,27 +119,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 	<c:when test='<%= topLink.equals("images-home") %>'>
 		<aui:layout>
 			<c:if test="<%= folder != null %>">
-
-				<%
-				long parentFolderId = defaultFolderId;
-				String parentFolderName = LanguageUtil.get(pageContext, "images-home");
-
-				if (!folder.isRoot()) {
-					IGFolder parentFolder = folder.getParentFolder();
-
-					parentFolderId = parentFolder.getFolderId();
-					parentFolderName = parentFolder.getName();
-				}
-				%>
-
-				<portlet:renderURL var="backURL">
-					<portlet:param name="struts_action" value="/image_gallery/view" />
-					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
-				</portlet:renderURL>
-
 				<liferay-ui:header
-					backLabel="<%= parentFolderName %>"
-					backURL="<%= backURL.toString() %>"
 					title="<%= folder.getName() %>"
 				/>
 			</c:if>

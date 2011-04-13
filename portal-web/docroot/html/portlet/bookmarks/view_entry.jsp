@@ -31,22 +31,7 @@ request.setAttribute("view_entry.jsp-entry", entry);
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
 
 <c:if test="<%= folder != null %>">
-	<portlet:renderURL var="backURL">
-		<portlet:param name="struts_action" value="/bookmarks/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
-	</portlet:renderURL>
-
-	<%
-	String folderName = LanguageUtil.get(pageContext, "bookmarks-home");
-
-	if (Validator.isNotNull(folder.getName())) {
-		folderName = folder.getName();
-	}
-	%>
-
 	<liferay-ui:header
-		backLabel="<%= folderName %>"
-		backURL="<%= backURL.toString() %>"
 		title="<%= entry.getName() %>"
 	/>
 </c:if>
