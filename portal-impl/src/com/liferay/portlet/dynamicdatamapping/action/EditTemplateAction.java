@@ -188,8 +188,6 @@ public class EditTemplateAction extends PortletAction {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
-
 		long templateId = ParamUtil.getLong(uploadRequest, "templateId");
 
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
