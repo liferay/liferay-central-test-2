@@ -1186,57 +1186,57 @@
 		<put name="portlet_content" value="/portlet/site_settings/error.jsp" />
 	</definition>
 
-    <!-- Sites Admin -->
+	<!-- Sites Admin -->
 
-    <definition name="portlet.sites_admin" extends="portlet" />
+	<definition name="portlet.sites_admin" extends="portlet" />
 
-    <definition name="portlet.sites_admin.edit_site" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/edit_site.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.edit_site" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/edit_site.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.edit_site_assignments" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/edit_site_assignments.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.edit_site_assignments" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/edit_site_assignments.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.edit_team" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/edit_team.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.edit_team" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/edit_team.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.edit_team_assignments" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/edit_team_assignments.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.edit_team_assignments" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/edit_team_assignments.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.edit_user_group_roles" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/edit_user_group_roles.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.edit_user_group_roles" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/edit_user_group_roles.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.edit_user_roles" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/edit_user_roles.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.edit_user_roles" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/edit_user_roles.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.error" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/error.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.error" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/error.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.post_membership_request" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/post_membership_request.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.post_membership_request" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/post_membership_request.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.reply_membership_request" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/reply_membership_request.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.reply_membership_request" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/reply_membership_request.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.view" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/view.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.view" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/view.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.view_membership_requests" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/view_membership_requests.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.view_membership_requests" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/view_membership_requests.jsp" />
+	</definition>
 
-    <definition name="portlet.sites_admin.view_teams" extends="portlet.sites_admin">
-        <put name="portlet_content" value="/portlet/sites_admin/view_teams.jsp" />
-    </definition>
+	<definition name="portlet.sites_admin.view_teams" extends="portlet.sites_admin">
+		<put name="portlet_content" value="/portlet/sites_admin/view_teams.jsp" />
+	</definition>
 
 	<!-- Software Catalog -->
 
