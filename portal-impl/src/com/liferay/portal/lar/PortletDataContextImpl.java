@@ -1118,8 +1118,26 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		// Theme display
+
+		serviceContext.setCompanyId(getCompanyId());
+		serviceContext.setScopeGroupId(getScopeGroupId());
+
+		// Dates
+
+		if (classedModel instanceof AuditedModel) {
+			AuditedModel auditedModel = (AuditedModel)classedModel;
+
+			serviceContext.setCreateDate(auditedModel.getCreateDate());
+			serviceContext.setModifiedDate(auditedModel.getModifiedDate());
+		}
+
+		// Permissions
+
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+
+		// Asset
 
 		if (isResourceMain(classedModel)) {
 			if (getBooleanParameter(namespace, "categories")) {
@@ -1135,16 +1153,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 				serviceContext.setAssetTagNames(assetTagNames);
 			}
 		}
-
-		if (classedModel instanceof AuditedModel) {
-			AuditedModel auditedModel = (AuditedModel)classedModel;
-
-			serviceContext.setCreateDate(auditedModel.getCreateDate());
-			serviceContext.setModifiedDate(auditedModel.getModifiedDate());
-		}
-
-		serviceContext.setCompanyId(getCompanyId());
-		serviceContext.setScopeGroupId(getScopeGroupId());
 
 		return serviceContext;
 	}
