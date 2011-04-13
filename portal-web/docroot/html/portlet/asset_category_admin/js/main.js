@@ -79,7 +79,7 @@ AUI().add(
 						childrenContainer.placeBefore(instance._categoryMessageContainer);
 
 						instance._dialogAlignConfig = {
-							node: childrenContainer,
+							node: instance._vocabularyContent,
 							points: ['tc', 'tc']
 						};
 
@@ -159,6 +159,34 @@ AUI().add(
 						var dropNode = event.target.get('node');
 
 						dropNode.removeClass(CSS_ACTIVE_AREA);
+					},
+
+					_alignFloatingPanels: function(contextPanel) {
+						var instance = this;
+
+						var boundingBox = contextPanel.get('boundingBox');
+						var autoFieldsTriggers = boundingBox.all('.lfr-floating-trigger');
+
+						autoFieldsTriggers.each(
+							function(item, index, collection) {
+								var panelInstance = item.getData('panelInstance');
+
+								if (!panelInstance._positionHelper.test(':hidden')) {
+									panelInstance.position(item);
+								}
+							}
+						);
+					},
+
+					_bindAlignFloatingPanelsEvent: function(contextPanel) {
+						var instance = this;
+
+						contextPanel.get('draggable');
+						var dragInstance = contextPanel.get('dragInstance');
+
+						dragInstance.on('end', function(event){
+							instance._alignFloatingPanels(contextPanel);
+						});
 					},
 
 					_bindCloseEvent: function(contextPanel) {
@@ -244,6 +272,8 @@ AUI().add(
 
 						instance._categoryPanelAdd.hide();
 
+						instance._bindAlignFloatingPanelsEvent(instance._categoryPanelAdd);
+
 						instance._bindCloseEvent(instance._categoryPanelAdd);
 
 						instance._categoryPanelAdd.on(
@@ -323,6 +353,8 @@ AUI().add(
 
 						instance._vocabularyPanelAdd.hide();
 
+						instance._bindAlignFloatingPanelsEvent(instance._vocabularyPanelAdd);
+
 						instance._bindCloseEvent(instance._vocabularyPanelAdd);
 
 						instance._vocabularyPanelAdd.on(
@@ -362,6 +394,8 @@ AUI().add(
 						instance._panelEdit = new A.Dialog(config).render();
 
 						instance._panelEdit.hide();
+
+						instance._bindAlignFloatingPanelsEvent(instance._panelEdit);
 
 						instance._bindCloseEvent(instance._panelEdit);
 
