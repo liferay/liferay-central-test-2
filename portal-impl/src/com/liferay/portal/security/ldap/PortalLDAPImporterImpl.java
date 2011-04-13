@@ -1035,15 +1035,18 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
 		int birthdayYear = birthdayCal.get(Calendar.YEAR);
 
-		if (ldapUser.isUpdatePassword()) {
-			UserLocalServiceUtil.updatePassword(
-				user.getUserId(), password, password,
-				ldapUser.isPasswordReset(), true);
+		boolean passwordReset = ldapUser.isPasswordReset();
+
+		if (PrefsPropsUtil.getBoolean(companyId,
+				PropsKeys.LDAP_EXPORT_ENABLED,
+				PropsValues.LDAP_EXPORT_ENABLED)) {
+
+			passwordReset = user.isPasswordReset();
 		}
 
 		user = UserLocalServiceUtil.updateUser(
 			user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
-			ldapUser.isPasswordReset(), ldapUser.getReminderQueryQuestion(),
+			passwordReset, ldapUser.getReminderQueryQuestion(),
 			ldapUser.getReminderQueryAnswer(), ldapUser.getScreenName(),
 			ldapUser.getEmailAddress(), ldapUser.getFacebookId(),
 			ldapUser.getOpenId(), ldapUser.getLanguageId(),
