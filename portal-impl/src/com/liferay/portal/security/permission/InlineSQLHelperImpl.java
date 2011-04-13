@@ -39,6 +39,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			return false;
 		}
 
+		if (!PropsValues.PERMISSIONS_INLINE_SQL_CHECK_ENABLED) {
+			return false;
+		}
+
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
@@ -64,6 +68,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 	public boolean isEnabled(long[] groupIds) {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			return false;
+		}
+
+		if (!PropsValues.PERMISSIONS_INLINE_SQL_CHECK_ENABLED) {
 			return false;
 		}
 
