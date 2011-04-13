@@ -11,6 +11,7 @@
 		<ant antfile="build-test-glassfish.xml" target="run-selenium-glassfish">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -24,6 +25,7 @@
 		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -44,6 +46,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -61,6 +64,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -74,6 +78,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -87,6 +92,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.browser" value="googlechrome" />
 			<property name="test.name" value="${test.ant.script.suite}" />
@@ -101,6 +107,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.browser" value="iehta" />
 			<property name="test.name" value="${test.ant.script.suite}" />
@@ -122,6 +129,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -145,6 +153,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -169,6 +178,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
@@ -193,6 +203,7 @@
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
+			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>

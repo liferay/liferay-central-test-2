@@ -31,22 +31,42 @@
 
 	<target name="build-test-ant-script">
 		<if>
-			<isset property="test.ant.script.plugin.hooks" />
+			<isset property="test.ant.script.social.office" />
 			<then>
-				<property name="test.ant.script.file.plugin.hooks" value="&lt;property name=&quot;hook.plugins.includes&quot; value=&quot;${test.ant.script.plugin.hooks}&quot; /&gt;" />
+				<property name="test.ant.script.file.plugin.hooks" value="&lt;property name=&quot;hook.plugins.includes&quot; value=&quot;so-hook&quot; /&gt;" />
+				<property name="test.ant.script.file.plugin.portlets" value="&lt;property name=&quot;portlet.plugins.includes&quot; value=&quot;chat-portlet,contacts-portlet,microblogs-portlet,private-messaging-portlet,so-portlet,tasks-portlet,todays-events-portlet,weather-portlet,wysiwyg-portlet&quot; /&gt;" />
+				<property name="test.ant.script.file.plugin.themes" value="&lt;property name=&quot;theme.plugins.includes&quot; value=&quot;so-theme&quot; /&gt;" />
 			</then>
 			<else>
-				<property name="test.ant.script.file.plugin.hooks" value=" " />
-			</else>
-		</if>
+				<if>
+					<isset property="test.ant.script.plugin.hooks" />
+					<then>
+						<property name="test.ant.script.file.plugin.hooks" value="&lt;property name=&quot;hook.plugins.includes&quot; value=&quot;${test.ant.script.plugin.hooks}&quot; /&gt;" />
+					</then>
+					<else>
+						<property name="test.ant.script.file.plugin.hooks" value=" " />
+					</else>
+				</if>
 
-		<if>
-			<isset property="test.ant.script.plugin.portlets" />
-			<then>
-				<property name="test.ant.script.file.plugin.portlets" value="&lt;property name=&quot;portlet.plugins.includes&quot; value=&quot;${test.ant.script.plugin.portlets}&quot; /&gt;" />
-			</then>
-			<else>
-				<property name="test.ant.script.file.plugin.portlets" value=" " />
+				<if>
+					<isset property="test.ant.script.plugin.portlets" />
+					<then>
+						<property name="test.ant.script.file.plugin.portlets" value="&lt;property name=&quot;portlet.plugins.includes&quot; value=&quot;${test.ant.script.plugin.portlets}&quot; /&gt;" />
+					</then>
+					<else>
+						<property name="test.ant.script.file.plugin.portlets" value=" " />
+					</else>
+				</if>
+
+				<if>
+					<isset property="test.ant.script.plugin.themes" />
+					<then>
+						<property name="test.ant.script.file.plugin.themes" value="&lt;property name=&quot;theme.plugins.includes&quot; value=&quot;${test.ant.script.plugin.themes}&quot; /&gt;" />
+					</then>
+					<else>
+						<property name="test.ant.script.file.plugin.themes" value=" " />
+					</else>
+				</if>
 			</else>
 		</if>
 
@@ -1351,6 +1371,66 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="smoke-test" />
 			<param name="test.ant.script.suite" value="SmokeTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-chat" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeChatTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-contacts" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeContactsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-microblogs" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeMicroblogsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-private-messaging" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficePrivateMessagingTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-smoke-test" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeSmokeTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-so" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeSOTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-tasks" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeTasksTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-todays-events" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeTodaysEventsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-weather" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeWeatherTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-wysiwyg" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeWYSIWYGTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
