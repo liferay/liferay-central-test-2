@@ -25,6 +25,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -44,6 +46,19 @@ public abstract class CMISModel {
 
 	public String getDescription() {
 		return StringPool.BLANK;
+	}
+
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(
+			getCompanyId(), getModelClassName(), getPrimaryKey());
+	}
+
+	public abstract String getModelClassName();
+
+	public abstract long getPrimaryKey();
+
+	public void setParentFolder(Folder parentFolder) {
+		_parentFolder = parentFolder;
 	}
 
 	protected boolean containsPermission(CmisObject cmisObject, String actionId)
@@ -105,10 +120,6 @@ public abstract class CMISModel {
 		}
 
 		return user;
-	}
-
-	public void setParentFolder(Folder parentFolder) {
-		_parentFolder = parentFolder;
 	}
 
 	private static Map<String, Action> _mappedActionKeys =

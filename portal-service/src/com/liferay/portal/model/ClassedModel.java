@@ -16,10 +16,14 @@ package com.liferay.portal.model;
 
 import java.io.Serializable;
 
+import com.liferay.portlet.expando.model.ExpandoBridge;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public interface ClassedModel {
+
+	public ExpandoBridge getExpandoBridge();
 
 	public Class<?> getModelClass();
 

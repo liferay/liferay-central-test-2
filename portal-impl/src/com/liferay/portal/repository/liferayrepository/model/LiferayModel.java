@@ -15,9 +15,23 @@
 package com.liferay.portal.repository.liferayrepository.model;
 
 import com.liferay.portal.repository.liferayrepository.util.LiferayBase;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 /**
  * @author Alexander Chow
  */
 public abstract class LiferayModel extends LiferayBase {
+
+	public abstract long getCompanyId();
+
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(
+			getCompanyId(), getModelClassName(), getPrimaryKey());
+	}
+
+	public abstract String getModelClassName();
+
+	public abstract long getPrimaryKey();
+
 }
