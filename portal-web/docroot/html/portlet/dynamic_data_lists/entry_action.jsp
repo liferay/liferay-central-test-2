@@ -30,9 +30,9 @@ DDLEntry entry = (DDLEntry)row.getObject();
 	<c:if test="<%= DDLEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW) %>">
 		<portlet:renderURL var="viewEntryURL">
 			<portlet:param name="struts_action" value="/dynamic_data_lists/view_entry" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -44,9 +44,9 @@ DDLEntry entry = (DDLEntry)row.getObject();
 	<c:if test="<%= DDLEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editEntryURL">
 			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

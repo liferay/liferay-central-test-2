@@ -29,9 +29,9 @@ DDLEntryItem entryItem = (DDLEntryItem)row.getObject();
 <liferay-ui:icon-menu>
 	<portlet:renderURL var="editEntryItemURL">
 		<portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry_item" />
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="entryItemId" value="<%= String.valueOf(entryItem.getEntryItemId()) %>" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon
@@ -41,9 +41,9 @@ DDLEntryItem entryItem = (DDLEntryItem)row.getObject();
 
 	<portlet:actionURL var="deleteEntryItemURL">
 		<portlet:param name="struts_action" value="/dynamic_data_mapping_list/edit_entry_item" />
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="entryItemId" value="<%= String.valueOf(entryItem.getEntryItemId()) %>" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteEntryItemURL %>" />

@@ -23,6 +23,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 DDLEntryItem entryItem = (DDLEntryItem)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY_ITEM);
 
 long entryItemId = BeanParamUtil.getLong(entryItem, request, "entryItemId");
+
 long entryId = BeanParamUtil.getLong(entryItem, request, "entryId");
 %>
 
@@ -47,19 +48,19 @@ long entryId = BeanParamUtil.getLong(entryItem, request, "entryId");
 		<%
 		DDLEntry entry = DDLEntryLocalServiceUtil.getEntry(entryId);
 
-		DDMStructure structure = entry.getDDMStructure();
+		DDMStructure ddmStructure = entry.getDDMStructure();
 
 		Fields fields = null;
 
 		if (entryItem != null) {
 			fields = StorageEngineUtil.getFields(entryItem.getClassPK());
 		}
-
-		out.print(DDMXSDUtil.getHTML(pageContext, structure.getXsd(), fields));
 		%>
 
+		<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields) %>
+
 		<aui:button-row>
-			<aui:button name="saveButton"  type="submit" value="save" />
+			<aui:button name="saveButton" type="submit" value="save" />
 
 			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
 		</aui:button-row>
