@@ -247,12 +247,12 @@ public class LayoutExporter {
 
 		ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
 
-		PortletDataContext context = new PortletDataContextImpl(
+		PortletDataContext portletDataContext = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), startDate,
 			endDate, zipWriter);
 
-		context.setPortetDataContextListener(
-			new PortletDataContextListenerImpl(context));
+		portletDataContext.setPortetDataContextListener(
+			new PortletDataContextListenerImpl(portletDataContext));
 
 		Document document = SAXReaderUtil.createDocument();
 
@@ -264,11 +264,12 @@ public class LayoutExporter {
 			"build-number", String.valueOf(ReleaseInfo.getBuildNumber()));
 		headerElement.addAttribute("export-date", Time.getRFC822());
 
-		if (context.hasDateRange()) {
+		if (portletDataContext.hasDateRange()) {
 			headerElement.addAttribute(
-				"start-date", String.valueOf(context.getStartDate()));
+				"start-date",
+				String.valueOf(portletDataContext.getStartDate()));
 			headerElement.addAttribute(
-				"end-date", String.valueOf(context.getEndDate()));
+				"end-date", String.valueOf(portletDataContext.getEndDate()));
 		}
 
 		headerElement.addAttribute("type", "layout-set");
@@ -290,17 +291,17 @@ public class LayoutExporter {
 
 			if (publishToRemote) {
 				String path = getLayoutSetPrototype(
-					context, layoutSetPrototypeUuid);
+					portletDataContext, layoutSetPrototypeUuid);
 
 				File layoutSetPrototypeFile =
 					CommunitiesUtil.exportLayoutSetPrototype(
 						layoutSetPrototype, serviceContext);
 
 				try {
-					context.addZipEntry(
+					portletDataContext.addZipEntry(
 						path.concat(".lar"),
 						new FileInputStream(layoutSetPrototypeFile));
-					context.addZipEntry(
+					portletDataContext.addZipEntry(
 						path.concat(".xml"), layoutSetPrototype);
 				}
 				finally {
@@ -321,7 +322,8 @@ public class LayoutExporter {
 
 		Portlet layoutConfigurationPortlet =
 			PortletLocalServiceUtil.getPortletById(
-				context.getCompanyId(), PortletKeys.LAYOUT_CONFIGURATION);
+				portletDataContext.getCompanyId(),
+				PortletKeys.LAYOUT_CONFIGURATION);
 
 		Map<String, Object[]> portletIds =
 			new LinkedHashMap<String, Object[]>();
@@ -386,8 +388,8 @@ public class LayoutExporter {
 
 		for (Layout layout : layouts) {
 			exportLayout(
-				context, layoutConfigurationPortlet, layoutCache, portletIds,
-				exportPermissions, exportUserPermissions, layout,
+				portletDataContext, layoutConfigurationPortlet, layoutCache,
+				portletIds, exportPermissions, exportUserPermissions, layout,
 				layoutsElement);
 		}
 
@@ -400,7 +402,7 @@ public class LayoutExporter {
 			}
 		}
 
-		long previousScopeGroupId = context.getScopeGroupId();
+		long previousScopeGroupId = portletDataContext.getScopeGroupId();
 
 		Element portletsElement = rootElement.addElement("portlets");
 
@@ -431,39 +433,41 @@ public class LayoutExporter {
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			context.setPlid(layout.getPlid());
-			context.setOldPlid(layout.getPlid());
-			context.setScopeGroupId(scopeGroupId);
-			context.setScopeType(scopeType);
-			context.setScopeLayoutUuid(scopeLayoutUuid);
+			portletDataContext.setPlid(layout.getPlid());
+			portletDataContext.setOldPlid(layout.getPlid());
+			portletDataContext.setScopeGroupId(scopeGroupId);
+			portletDataContext.setScopeType(scopeType);
+			portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
 
 			boolean[] exportPortletControls = getExportPortletControls(
-				companyId, portletId, context, parameterMap);
+				companyId, portletId, portletDataContext, parameterMap);
 
 			_portletExporter.exportPortlet(
-				context, layoutCache, portletId, layout, portletsElement,
-				defaultUserId, exportPermissions, exportPortletArchivedSetups,
-				exportPortletControls[0], exportPortletControls[1],
-				exportPortletUserPreferences, exportUserPermissions);
+				portletDataContext, layoutCache, portletId, layout,
+				portletsElement, defaultUserId, exportPermissions,
+				exportPortletArchivedSetups, exportPortletControls[0],
+				exportPortletControls[1], exportPortletUserPreferences,
+				exportUserPermissions);
 		}
 
-		context.setScopeGroupId(previousScopeGroupId);
+		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
 		if (exportCategories) {
-			exportAssetCategories(context);
+			exportAssetCategories(portletDataContext);
 		}
 
-		_portletExporter.exportAssetTags(context);
-		_portletExporter.exportComments(context);
-		_portletExporter.exportLocks(context);
+		_portletExporter.exportAssetTags(portletDataContext);
+		_portletExporter.exportComments(portletDataContext);
+		_portletExporter.exportLocks(portletDataContext);
 
 		if (exportPermissions) {
-			_permissionExporter.exportPortletDataPermissions(context);
+			_permissionExporter.exportPortletDataPermissions(
+				portletDataContext);
 		}
 
-		_portletExporter.exportRatingsEntries(context, rootElement);
+		_portletExporter.exportRatingsEntries(portletDataContext, rootElement);
 
-		if (exportTheme && !context.isPerformDirectBinaryImport()) {
+		if (exportTheme && !portletDataContext.isPerformDirectBinaryImport()) {
 			exportTheme(layoutSet, zipWriter);
 		}
 
@@ -477,7 +481,8 @@ public class LayoutExporter {
 			}
 		}
 
-		context.addZipEntry("/manifest.xml", document.formattedString());
+		portletDataContext.addZipEntry(
+			"/manifest.xml", document.formattedString());
 
 		try {
 			return zipWriter.getFile();
@@ -487,7 +492,7 @@ public class LayoutExporter {
 		}
 	}
 
-	protected void exportAssetCategories(PortletDataContext context)
+	protected void exportAssetCategories(PortletDataContext portletDataContext)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
@@ -499,42 +504,43 @@ public class LayoutExporter {
 
 		List<AssetVocabulary> assetVocabularies =
 			AssetVocabularyLocalServiceUtil.getGroupVocabularies(
-				context.getGroupId());
+				portletDataContext.getGroupId());
 
 		for (AssetVocabulary assetVocabulary : assetVocabularies) {
 			_portletExporter.exportAssetVocabulary(
-				context, assetVocabulariesElement, assetVocabulary);
+				portletDataContext, assetVocabulariesElement, assetVocabulary);
 		}
 
 		Element categoriesElement = rootElement.addElement("categories");
 
 		List<AssetCategory> assetCategories =
-			AssetCategoryUtil.findByGroupId(context.getGroupId());
+			AssetCategoryUtil.findByGroupId(portletDataContext.getGroupId());
 
 		for (AssetCategory assetCategory : assetCategories) {
 			_portletExporter.exportAssetCategory(
-				context, assetVocabulariesElement, categoriesElement,
+				portletDataContext, assetVocabulariesElement, categoriesElement,
 				assetCategory);
 		}
 
-		_portletExporter.exportAssetCategories(context, rootElement);
+		_portletExporter.exportAssetCategories(portletDataContext, rootElement);
 
-		context.addZipEntry(
-			context.getRootPath() + "/categories-hierarchy.xml",
+		portletDataContext.addZipEntry(
+			portletDataContext.getRootPath() + "/categories-hierarchy.xml",
 			document.formattedString());
 	}
 
 	protected void exportLayout(
-			PortletDataContext context, Portlet layoutConfigurationPortlet,
-			LayoutCache layoutCache, Map<String, Object[]> portletIds,
-			boolean exportPermissions, boolean exportUserPermissions,
-			Layout layout, Element layoutsElement)
+			PortletDataContext portletDataContext,
+			Portlet layoutConfigurationPortlet, LayoutCache layoutCache,
+			Map<String, Object[]> portletIds, boolean exportPermissions,
+			boolean exportUserPermissions, Layout layout,
+			Element layoutsElement)
 		throws Exception {
 
-		String path = context.getLayoutPath(
+		String path = portletDataContext.getLayoutPath(
 			layout.getLayoutId()) + "/layout.xml";
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
@@ -567,7 +573,7 @@ public class LayoutExporter {
 		}
 
 		boolean deleteLayout = MapUtil.getBoolean(
-			context.getParameterMap(), "delete_" + layout.getPlid());
+			portletDataContext.getParameterMap(), "delete_" + layout.getPlid());
 
 		if (deleteLayout) {
 			layoutElement.addAttribute("delete", String.valueOf(true));
@@ -575,30 +581,33 @@ public class LayoutExporter {
 			return;
 		}
 
-		context.setPlid(layout.getPlid());
+		portletDataContext.setPlid(layout.getPlid());
 
 		if (layout.isIconImage()) {
 			Image image = ImageLocalServiceUtil.getImage(
 				layout.getIconImageId());
 
 			if (image != null) {
-				String iconPath = getLayoutIconPath(context, layout, image);
+				String iconPath = getLayoutIconPath(
+					portletDataContext, layout, image);
 
 				layoutElement.addElement("icon-image-path").addText(iconPath);
 
-				context.addZipEntry(iconPath, image.getTextObj());
+				portletDataContext.addZipEntry(iconPath, image.getTextObj());
 			}
 		}
 
 		_portletExporter.exportPortletData(
-			context, layoutConfigurationPortlet, layout, null, layoutElement);
+			portletDataContext, layoutConfigurationPortlet, layout, null,
+			layoutElement);
 
 		// Layout permissions
 
 		if (exportPermissions) {
 			_permissionExporter.exportLayoutPermissions(
-				context, layoutCache, context.getCompanyId(),
-				context.getScopeGroupId(), layout, layoutElement,
+				portletDataContext, layoutCache,
+				portletDataContext.getCompanyId(),
+				portletDataContext.getScopeGroupId(), layout, layoutElement,
 				exportUserPermissions);
 		}
 
@@ -616,7 +625,7 @@ public class LayoutExporter {
 				String scopeLayoutUuid = GetterUtil.getString(
 					jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
-				long scopeGroupId = context.getScopeGroupId();
+				long scopeGroupId = portletDataContext.getScopeGroupId();
 
 				if (Validator.isNotNull(scopeType)) {
 					Group scopeGroup = null;
@@ -629,10 +638,10 @@ public class LayoutExporter {
 						Layout scopeLayout = null;
 
 						try {
-							scopeLayout =
-								LayoutLocalServiceUtil.
-									getLayoutByUuidAndGroupId(
-										scopeLayoutUuid, context.getGroupId());
+							scopeLayout = LayoutLocalServiceUtil.
+								getLayoutByUuidAndGroupId(
+									scopeLayoutUuid,
+									portletDataContext.getGroupId());
 						}
 						catch (NoSuchLayoutException nsle) {
 							if (_log.isWarnEnabled()) {
@@ -677,13 +686,13 @@ public class LayoutExporter {
 			if (linkToLayoutId > 0) {
 				try {
 					Layout linkedToLayout = LayoutLocalServiceUtil.getLayout(
-						context.getScopeGroupId(), layout.isPrivateLayout(),
-						linkToLayoutId);
+						portletDataContext.getScopeGroupId(),
+						layout.isPrivateLayout(), linkToLayoutId);
 
 					exportLayout(
-						context, layoutConfigurationPortlet, layoutCache,
-						portletIds,	exportPermissions, exportUserPermissions,
-						linkedToLayout, layoutsElement);
+						portletDataContext, layoutConfigurationPortlet,
+						layoutCache, portletIds, exportPermissions,
+						exportUserPermissions, linkedToLayout, layoutsElement);
 				}
 				catch (NoSuchLayoutException nsle) {
 				}
@@ -694,7 +703,7 @@ public class LayoutExporter {
 
 		layoutElement.addAttribute("path", path);
 
-		context.addZipEntry(path, layout);
+		portletDataContext.addZipEntry(path, layout);
 	}
 
 	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)
@@ -848,7 +857,8 @@ public class LayoutExporter {
 	}
 
 	protected boolean[] getExportPortletControls(
-			long companyId, String portletId, PortletDataContext context,
+			long companyId, String portletId,
+			PortletDataContext portletDataContext,
 			Map<String, String[]> parameterMap)
 		throws Exception {
 
@@ -920,11 +930,11 @@ public class LayoutExporter {
 	}
 
 	protected String getLayoutIconPath(
-		PortletDataContext context, Layout layout, Image image) {
+		PortletDataContext portletDataContext, Layout layout, Image image) {
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(context.getLayoutPath(layout.getLayoutId()));
+		sb.append(portletDataContext.getLayoutPath(layout.getLayoutId()));
 		sb.append("/icons/");
 		sb.append(image.getImageId());
 		sb.append(StringPool.PERIOD);
@@ -934,11 +944,11 @@ public class LayoutExporter {
 	}
 
 	protected String getLayoutSetPrototype(
-		PortletDataContext context, String layoutSetPrototypeUuid) {
+		PortletDataContext portletDataContext, String layoutSetPrototypeUuid) {
 
 		StringBundler sb = new StringBundler(3);
 
-		sb.append(context.getRootPath());
+		sb.append(portletDataContext.getRootPath());
 		sb.append("/layout-set-prototype/");
 		sb.append(layoutSetPrototypeUuid);
 

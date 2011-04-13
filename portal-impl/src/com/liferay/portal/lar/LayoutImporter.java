@@ -588,11 +588,11 @@ public class LayoutImporter {
 	}
 
 	protected String getLayoutSetPrototype(
-		PortletDataContext context, String layoutSetPrototypeUuid) {
+		PortletDataContext portletDataContext, String layoutSetPrototypeUuid) {
 
 		StringBundler sb = new StringBundler(3);
 
-		sb.append(context.getSourceRootPath());
+		sb.append(portletDataContext.getSourceRootPath());
 		sb.append("/layout-set-prototype/");
 		sb.append(layoutSetPrototypeUuid);
 
@@ -647,7 +647,7 @@ public class LayoutImporter {
 	}
 
 	protected AssetVocabulary getAssetVocabulary(
-			PortletDataContext context, String vocabularyUuid,
+			PortletDataContext portletDataContext, String vocabularyUuid,
 			String vocabularyName, String userUuid,
 			ServiceContext serviceContext)
 		throws Exception {
@@ -655,14 +655,14 @@ public class LayoutImporter {
 		AssetVocabulary assetVocabulary = null;
 
 		try {
-			if (context.getDataStrategy().equals(
+			if (portletDataContext.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
-				context.getDataStrategy().equals(
+				portletDataContext.getDataStrategy().equals(
 					PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE)) {
 
 				AssetVocabulary existingAssetVocabulary =
 					AssetVocabularyUtil.fetchByUUID_G(
-						vocabularyUuid, context.getGroupId());
+						vocabularyUuid, portletDataContext.getGroupId());
 
 				if (existingAssetVocabulary == null) {
 					Map<Locale, String> titleMap =
@@ -674,8 +674,9 @@ public class LayoutImporter {
 
 					assetVocabulary =
 						AssetVocabularyLocalServiceUtil.addVocabulary(
-							context.getUserId(userUuid), StringPool.BLANK,
-							titleMap, null, StringPool.BLANK, serviceContext);
+							portletDataContext.getUserId(userUuid),
+							StringPool.BLANK, titleMap, null, StringPool.BLANK,
+							serviceContext);
 				}
 				else {
 					assetVocabulary =
@@ -694,30 +695,31 @@ public class LayoutImporter {
 				titleMap.put(LocaleUtil.getDefault(), vocabularyName);
 
 				assetVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
-					context.getUserId(userUuid), StringPool.BLANK, titleMap,
-					null, StringPool.BLANK, serviceContext);
+					portletDataContext.getUserId(userUuid), StringPool.BLANK,
+					titleMap, null, StringPool.BLANK, serviceContext);
 			}
 		}
 		catch (DuplicateVocabularyException dve) {
 			assetVocabulary =
 				AssetVocabularyLocalServiceUtil.getGroupVocabulary(
-					context.getGroupId(), vocabularyName);
+					portletDataContext.getGroupId(), vocabularyName);
 		}
 
 		return assetVocabulary;
 	}
 
 	protected void importLayout(
-			PortletDataContext context, User user, LayoutCache layoutCache,
-			List<Layout> previousLayouts, List<Layout> newLayouts,
-			Map<Long, Layout> newLayoutsMap, Set<Long> newLayoutIds,
-			String portletsMergeMode, String themeId, String colorSchemeId,
-			String layoutsImportMode, boolean privateLayout,
-			boolean importPermissions, boolean importUserPermissions,
-			boolean useThemeZip, Element rootElement, Element layoutElement)
+			PortletDataContext portletDataContext, User user,
+			LayoutCache layoutCache, List<Layout> previousLayouts,
+			List<Layout> newLayouts, Map<Long, Layout> newLayoutsMap,
+			Set<Long> newLayoutIds, String portletsMergeMode, String themeId,
+			String colorSchemeId, String layoutsImportMode,
+			boolean privateLayout, boolean importPermissions,
+			boolean importUserPermissions, boolean useThemeZip,
+			Element rootElement, Element layoutElement)
 		throws Exception {
 
-		long groupId = context.getGroupId();
+		long groupId = portletDataContext.getGroupId();
 
 		String layoutUuid = GetterUtil.getString(
 			layoutElement.attributeValue("layout-uuid"));
@@ -753,11 +755,11 @@ public class LayoutImporter {
 
 		String path = layoutElement.attributeValue("path");
 
-		if (!context.isPathNotProcessed(path)) {
+		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
-		Layout layout = (Layout)context.getZipEntryAsObject(path);
+		Layout layout = (Layout)portletDataContext.getZipEntryAsObject(path);
 
 		Layout existingLayout = null;
 		Layout importedLayout = null;
@@ -862,9 +864,9 @@ public class LayoutImporter {
 			(parentLayoutNode != null)) {
 
 			importLayout(
-				context, user, layoutCache, previousLayouts, newLayouts,
-				newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
-				colorSchemeId, layoutsImportMode, privateLayout,
+				portletDataContext, user, layoutCache, previousLayouts,
+				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
+				themeId, colorSchemeId, layoutsImportMode, privateLayout,
 				importPermissions, importUserPermissions, useThemeZip,
 				rootElement, (Element)parentLayoutNode);
 
@@ -917,11 +919,12 @@ public class LayoutImporter {
 
 				if (linkedLayoutNode != null) {
 					importLayout(
-						context, user, layoutCache, previousLayouts, newLayouts,
-						newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
-						colorSchemeId, layoutsImportMode, privateLayout,
-						importPermissions, importUserPermissions, useThemeZip,
-						rootElement, (Element)linkedLayoutNode);
+						portletDataContext, user, layoutCache, previousLayouts,
+						newLayouts, newLayoutsMap, newLayoutIds,
+						portletsMergeMode, themeId, colorSchemeId,
+						layoutsImportMode, privateLayout, importPermissions,
+						importUserPermissions, useThemeZip, rootElement,
+						(Element)linkedLayoutNode);
 
 					Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
 
@@ -973,7 +976,8 @@ public class LayoutImporter {
 		if (layout.isIconImage()) {
 			String iconImagePath = layoutElement.elementText("icon-image-path");
 
-			byte[] iconBytes = context.getZipEntryAsByteArray(iconImagePath);
+			byte[] iconBytes = portletDataContext.getZipEntryAsByteArray(
+				iconImagePath);
 
 			if ((iconBytes != null) && (iconBytes.length > 0)) {
 				importedLayout.setIconImage(true);
@@ -988,8 +992,8 @@ public class LayoutImporter {
 
 		LayoutUtil.update(importedLayout, false);
 
-		context.setPlid(importedLayout.getPlid());
-		context.setOldPlid(layout.getPlid());
+		portletDataContext.setPlid(importedLayout.getPlid());
+		portletDataContext.setOldPlid(layout.getPlid());
 
 		newLayoutIds.add(importedLayout.getLayoutId());
 
@@ -999,21 +1003,23 @@ public class LayoutImporter {
 
 		if (importPermissions) {
 			_permissionImporter.importLayoutPermissions(
-				layoutCache, context.getCompanyId(), groupId, user.getUserId(),
-				importedLayout, layoutElement, rootElement,
+				layoutCache, portletDataContext.getCompanyId(), groupId,
+				user.getUserId(), importedLayout, layoutElement, rootElement,
 				importUserPermissions);
 		}
 
 		_portletImporter.importPortletData(
-			context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutElement);
+			portletDataContext, PortletKeys.LAYOUT_CONFIGURATION, null,
+			layoutElement);
 	}
 
 	protected void importLayoutSetPrototype(
-			PortletDataContext context, User user,
+			PortletDataContext portletDataContext, User user,
 			String layoutSetPrototypeUuid, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		String path = getLayoutSetPrototype(context, layoutSetPrototypeUuid);
+		String path = getLayoutSetPrototype(
+			portletDataContext, layoutSetPrototypeUuid);
 
 		LayoutSetPrototype layoutSetPrototype = null;
 
@@ -1027,7 +1033,7 @@ public class LayoutImporter {
 
 		if (layoutSetPrototype == null) {
 			layoutSetPrototype =
-				(LayoutSetPrototype)context.getZipEntryAsObject(
+				(LayoutSetPrototype)portletDataContext.getZipEntryAsObject(
 					path.concat(".xml"));
 
 			serviceContext.setUuid(layoutSetPrototypeUuid);
@@ -1040,7 +1046,7 @@ public class LayoutImporter {
 					layoutSetPrototype.getActive(), serviceContext);
 		}
 
-		InputStream inputStream = context.getZipEntryAsInputStream(
+		InputStream inputStream = portletDataContext.getZipEntryAsInputStream(
 			path.concat(".lar"));
 
 		CommunitiesUtil.importLayoutSetPrototype(
