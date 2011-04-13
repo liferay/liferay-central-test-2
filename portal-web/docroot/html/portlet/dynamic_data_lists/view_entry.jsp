@@ -43,9 +43,7 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 <aui:script>
 	function <portlet:namespace />addEntryItem() {
-		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="entryId" value="<%= String.valueOf(entryId) %>" /></liferay-portlet:renderURL>';
-
-		submitForm(document.<portlet:namespace />fm, url);
+		submitForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="entryId" value="<%= String.valueOf(entryId) %>" /></liferay-portlet:renderURL>');
 	}
 </aui:script>
 
