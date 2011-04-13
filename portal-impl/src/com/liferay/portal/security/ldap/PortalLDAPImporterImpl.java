@@ -1044,6 +1044,12 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			passwordReset = user.isPasswordReset();
 		}
 
+		if (ldapUser.isUpdatePassword()) {
+			UserLocalServiceUtil.updatePassword(
+				user.getUserId(), password, password,
+				passwordReset, true);
+		}
+
 		user = UserLocalServiceUtil.updateUser(
 			user.getUserId(), password, StringPool.BLANK, StringPool.BLANK,
 			passwordReset, ldapUser.getReminderQueryQuestion(),
