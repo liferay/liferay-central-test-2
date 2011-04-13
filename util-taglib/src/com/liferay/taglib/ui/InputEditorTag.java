@@ -15,11 +15,11 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.Map;
@@ -116,7 +116,7 @@ public class InputEditorTag extends IncludeTag {
 		}
 
 		if (Validator.isNull(editorImpl)) {
-			editorImpl = PropsValues.EDITOR_WYSIWYG_DEFAULT;
+			editorImpl = _EDITOR_WYSIWYG_DEFAULT;
 		}
 
 		_page = "/html/js/editor/" + editorImpl + ".jsp";
@@ -134,6 +134,9 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
 		request.setAttribute("liferay-ui:input-editor:width", _width);
 	}
+
+	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
+		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
 	private Map<String, String> _configParams;
 	private String _cssClass;
