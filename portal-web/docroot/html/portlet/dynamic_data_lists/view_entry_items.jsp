@@ -17,41 +17,43 @@
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
 <%
-DDLEntry entry = (DDLEntry)request.getAttribute("view_entry_items.jsp-entry");
+DDLEntry entry = (DDLEntry)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/dynamic_data_lists/view_entry");
 portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
-DDMStructure structure = entry.getDDMStructure();
+DDMStructure ddmStructure = entry.getDDMStructure();
 
-Map<String, Map<String, String>> fieldsMap = structure.getFieldsMap();
-
-List<Map<String, String>> fieldsList = new ArrayList(fieldsMap.values());
+Map<String, Map<String, String>> fieldsMap = ddmStructure.getFieldsMap();
 
 List<String> headerNames = new ArrayList();
 
-for (Map<String, String> field : fieldsList) {
-	headerNames.add(field.get(DDMFieldConstants.LABEL));
+for (Map<String, String> fields : fieldsMap.values()) {
+	String label = fields.get(DDMFieldConstants.LABEL);
+
+	headerNames.add(label);
 }
 
 headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, portletURL, headerNames, "no-list-items-were-found");
 
-List<DDLEntryItem> entryItems = DDLEntryItemLocalServiceUtil.getEntryItems(entry.getEntryId(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-
 int total = DDLEntryItemLocalServiceUtil.getEntryItemsCount(entry.getEntryId());
 
 searchContainer.setTotal(total);
 
+List<DDLEntryItem> results = DDLEntryItemLocalServiceUtil.getEntryItems(entry.getEntryId(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+
+searchContainer.setResults(results);
+
 List resultRows = searchContainer.getResultRows();
 
-for (int i = 0; i < entryItems.size(); i++) {
-	DDLEntryItem entryItem = entryItems.get(i);
+for (int i = 0; i < results.size(); i++) {
+	DDLEntryItem entryItem = results.get(i);
 
-	Fields fields = StorageEngineUtil.getFields(entryItem.getClassPK());
+	Fields fieldsModel = StorageEngineUtil.getFields(entryItem.getClassPK());
 
 	ResultRow row = new ResultRow(entryItem, entryItem.getEntryItemId(), i);
 
@@ -63,14 +65,15 @@ for (int i = 0; i < entryItems.size(); i++) {
 
 	// Columns
 
-	String name = null;
-	String value = null;
+	for (Map<String, String> fields : fieldsMap.values()) {
+		String name = fields.get(DDMFieldConstants.NAME);
 
-	for (Map<String, String> field : fieldsList) {
-		name = field.get(DDMFieldConstants.NAME);
+		String value = null;
 
-		if (fields.get(name) != null) {
-			value = String.valueOf(fields.get(name).getValue());
+		if (fieldsModel.contains(name)) {
+			Field field = fieldsModel.get(name);
+
+			value = String.valueOf(field.getValue());
 		}
 		else {
 			value = StringPool.BLANK;

@@ -22,8 +22,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 DDLEntry entry = (DDLEntry)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
-
-request.setAttribute("view_entry_items.jsp-entry", entry);
 %>
 
 <liferay-ui:header
@@ -35,8 +33,7 @@ request.setAttribute("view_entry_items.jsp-entry", entry);
 	<portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry" />
 </portlet:actionURL>
 
-<aui:form action="<%= editEntryURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
-
+<aui:form action="<%= editEntryURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
 	<aui:button onClick='<%= renderResponse.getNamespace() + "addEntryItem();" %>' value="add-list-item" />
 
 	<div class="separator"><!-- --></div>
@@ -48,7 +45,7 @@ request.setAttribute("view_entry_items.jsp-entry", entry);
 	function <portlet:namespace />addEntryItem() {
 		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry_item" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="entryId" value="<%= String.valueOf(entryId) %>" /></liferay-portlet:renderURL>';
 
-		submitForm(document.<portlet:namespace />fm1, url);
+		submitForm(document.<portlet:namespace />fm, url);
 	}
 </aui:script>
 
