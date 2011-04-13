@@ -1577,7 +1577,8 @@
 				SocialRelation ON
 					(SocialRelation.userId2 = User_.userId)
 			WHERE
-				(SocialRelation.userId1 = ?)
+				(SocialRelation.userId1 = ?) AND
+				(SocialRelation.type_ != 9)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationType">
