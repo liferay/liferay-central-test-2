@@ -87,7 +87,7 @@ for (int i = 0; i < choices.size(); i++) {
 		<strong><%= choice.getName() %>.</strong>
 	</td>
 	<td width="99%">
-		<%= choice.getDescription(locale) %>
+		<%= HtmlUtil.escape(choice.getDescription(locale)) %>
 	</td>
 </tr>
 
