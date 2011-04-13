@@ -210,10 +210,10 @@ public class PortletImporter {
 		}
 
 		readAssetCategories(portletDataContext);
-		readAssetTags(portletDataContext, rootElement);
-		readComments(portletDataContext, rootElement);
-		readLocks(portletDataContext, rootElement);
-		readRatingsEntries(portletDataContext, rootElement);
+		readAssetTags(portletDataContext);
+		readComments(portletDataContext);
+		readLocks(portletDataContext);
+		readRatingsEntries(portletDataContext);
 
 		// Delete portlet data
 
@@ -957,8 +957,7 @@ public class PortletImporter {
 		}
 	}
 
-	protected void readAssetTags(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void readAssetTags(PortletDataContext portletDataContext)
 		throws Exception {
 
 		String xml = portletDataContext.getZipEntryAsString(
@@ -987,8 +986,7 @@ public class PortletImporter {
 		}
 	}
 
-	protected void readComments(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void readComments(PortletDataContext portletDataContext)
 		throws Exception {
 
 		String xml = portletDataContext.getZipEntryAsString(
@@ -1029,8 +1027,7 @@ public class PortletImporter {
 		}
 	}
 
-	protected void readLocks(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void readLocks(PortletDataContext portletDataContext)
 		throws Exception {
 
 		String xml = portletDataContext.getZipEntryAsString(
@@ -1059,8 +1056,7 @@ public class PortletImporter {
 		}
 	}
 
-	protected void readRatingsEntries(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void readRatingsEntries(PortletDataContext portletDataContext)
 		throws Exception {
 
 		String xml = portletDataContext.getZipEntryAsString(

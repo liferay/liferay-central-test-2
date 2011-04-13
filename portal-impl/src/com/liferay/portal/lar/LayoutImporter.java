@@ -191,14 +191,14 @@ public class LayoutImporter {
 
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
-		PortletDataContext context = new PortletDataContextImpl(
+		PortletDataContext portletDataContext = new PortletDataContextImpl(
 			companyId, groupId, parameterMap, new HashSet<String>(), strategy,
 			zipReader);
 
-		context.setPortetDataContextListener(
-			new PortletDataContextListenerImpl(context));
+		portletDataContext.setPortetDataContextListener(
+			new PortletDataContextListenerImpl(portletDataContext));
 
-		context.setPrivateLayout(privateLayout);
+		portletDataContext.setPrivateLayout(privateLayout);
 
 		// Zip
 
@@ -207,7 +207,7 @@ public class LayoutImporter {
 
 		// Manifest
 
-		String xml = context.getZipEntryAsString("/manifest.xml");
+		String xml = portletDataContext.getZipEntryAsString("/manifest.xml");
 
 		if (xml == null) {
 			throw new LARFileException("manifest.xml not found in the LAR");
@@ -251,7 +251,7 @@ public class LayoutImporter {
 		long sourceGroupId = GetterUtil.getLong(
 			headerElement.attributeValue("group-id"));
 
-		context.setSourceGroupId(sourceGroupId);
+		portletDataContext.setSourceGroupId(sourceGroupId);
 
 		// Layout set prototype
 
@@ -266,7 +266,8 @@ public class LayoutImporter {
 					ServiceContextThreadLocal.getServiceContext();
 
 				importLayoutSetPrototype(
-					context, user, layoutSetPrototypeUuid, serviceContext);
+					portletDataContext, user, layoutSetPrototypeUuid,
+					serviceContext);
 			}
 
 			UnicodeProperties settingsProperties =
@@ -285,7 +286,7 @@ public class LayoutImporter {
 		// Look and feel
 
 		if (importTheme) {
-			themeZip = context.getZipEntryAsInputStream("theme.zip");
+			themeZip = portletDataContext.getZipEntryAsInputStream("theme.zip");
 		}
 
 		// Look and feel
@@ -337,17 +338,17 @@ public class LayoutImporter {
 		// the context
 
 		if (importPermissions) {
-			_permissionImporter.readPortletDataPermissions(context);
+			_permissionImporter.readPortletDataPermissions(portletDataContext);
 		}
 
 		if (importCategories) {
-			_portletImporter.readAssetCategories(context);
+			_portletImporter.readAssetCategories(portletDataContext);
 		}
 
-		_portletImporter.readAssetTags(context, rootElement);
-		_portletImporter.readComments(context, rootElement);
-		_portletImporter.readLocks(context, rootElement);
-		_portletImporter.readRatingsEntries(context, rootElement);
+		_portletImporter.readAssetTags(portletDataContext);
+		_portletImporter.readComments(portletDataContext);
+		_portletImporter.readLocks(portletDataContext);
+		_portletImporter.readRatingsEntries(portletDataContext);
 
 		// Layouts
 
@@ -359,7 +360,8 @@ public class LayoutImporter {
 		Set<Long> newLayoutIds = new HashSet<Long>();
 
 		Map<Long, Layout> newLayoutsMap =
-			(Map<Long, Layout>)context.getNewPrimaryKeysMap(Layout.class);
+			(Map<Long, Layout>)portletDataContext.getNewPrimaryKeysMap(
+				Layout.class);
 
 		Element layoutsElement = rootElement.element("layouts");
 
@@ -373,9 +375,9 @@ public class LayoutImporter {
 
 		for (Element layoutElement : layoutElements) {
 			importLayout(
-				context, user, layoutCache, previousLayouts, newLayouts,
-				newLayoutsMap, newLayoutIds, portletsMergeMode, themeId,
-				colorSchemeId, layoutsImportMode, privateLayout,
+				portletDataContext, user, layoutCache, previousLayouts,
+				newLayouts, newLayoutsMap, newLayoutIds, portletsMergeMode,
+				themeId, colorSchemeId, layoutsImportMode, privateLayout,
 				importPermissions, importUserPermissions, useThemeZip,
 				rootElement, layoutElement);
 		}
@@ -399,9 +401,10 @@ public class LayoutImporter {
 					portletElement.attributeValue("layout-id"));
 				long plid = newLayoutsMap.get(layoutId).getPlid();
 
-				context.setPlid(plid);
+				portletDataContext.setPlid(plid);
 
-				_portletImporter.deletePortletData(context, portletId, plid);
+				_portletImporter.deletePortletData(
+					portletDataContext, portletId, plid);
 			}
 		}
 
@@ -423,7 +426,7 @@ public class LayoutImporter {
 				portletElement.attributeValue("old-plid"));
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				context.getCompanyId(), portletId);
+				portletDataContext.getCompanyId(), portletId);
 
 			if (!portlet.isActive() || portlet.isUndeployedPortlet()) {
 				continue;
@@ -438,11 +441,11 @@ public class LayoutImporter {
 				continue;
 			}
 
-			context.setPlid(plid);
-			context.setOldPlid(oldPlid);
+			portletDataContext.setPlid(plid);
+			portletDataContext.setOldPlid(oldPlid);
 
 			Document portletDocument = SAXReaderUtil.read(
-				context.getZipEntryAsString(portletPath));
+				portletDataContext.getZipEntryAsString(portletPath));
 
 			portletElement = portletDocument.getRootElement();
 
@@ -454,10 +457,10 @@ public class LayoutImporter {
 			// Portlet preferences
 
 			_portletImporter.importPortletPreferences(
-				context, layoutSet.getCompanyId(), layout.getGroupId(),
-				layout, null, portletElement, importPortletSetup,
-				importPortletArchivedSetups, importPortletUserPreferences,
-				false);
+				portletDataContext, layoutSet.getCompanyId(),
+				layout.getGroupId(), layout, null, portletElement,
+				importPortletSetup, importPortletArchivedSetups,
+				importPortletUserPreferences, false);
 
 			// Portlet data scope
 
@@ -466,8 +469,8 @@ public class LayoutImporter {
 			String scopeLayoutUuid = GetterUtil.getString(
 				portletElement.attributeValue("scope-layout-uuid"));
 
-			context.setScopeType(scopeType);
-			context.setScopeLayoutUuid(scopeLayoutUuid);
+			portletDataContext.setScopeType(scopeType);
+			portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
 
 			// Portlet data
 
@@ -475,7 +478,7 @@ public class LayoutImporter {
 
 			if (importPortletData && (portletDataElement != null)) {
 				_portletImporter.importPortletData(
-					context, portletId, plid, portletDataElement);
+					portletDataContext, portletId, plid, portletDataElement);
 			}
 
 			// Portlet permissions
@@ -489,9 +492,10 @@ public class LayoutImporter {
 			// Archived setups
 
 			_portletImporter.importPortletPreferences(
-				context, layoutSet.getCompanyId(), groupId, null, null,
-				portletElement, importPortletSetup, importPortletArchivedSetups,
-				importPortletUserPreferences, false);
+				portletDataContext, layoutSet.getCompanyId(), groupId, null,
+				null, portletElement, importPortletSetup,
+				importPortletArchivedSetups, importPortletUserPreferences,
+				false);
 		}
 
 		// Delete missing layouts
@@ -519,8 +523,8 @@ public class LayoutImporter {
 
 			if (Validator.isNotNull(articleId)) {
 				Map<String, String> articleIds =
-					(Map<String, String>)context.getNewPrimaryKeysMap(
-						JournalArticle.class);
+					(Map<String, String>)portletDataContext.
+						getNewPrimaryKeysMap(JournalArticle.class);
 
 				typeSettingsProperties.setProperty(
 					"article-id",
