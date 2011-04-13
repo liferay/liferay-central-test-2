@@ -152,7 +152,14 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, 5, portletURL, null, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
 
 		if (Validator.isNotNull(primarySearch) && portlet.getOpenSearchClass().equals(primarySearch)) {
-			searchContainer.setDelta(SearchContainer.DEFAULT_DELTA);
+			int delta = ParamUtil.getInteger(request, SearchContainer.DEFAULT_DELTA_PARAM + i);
+
+			if (delta > 0) {
+				searchContainer.setDelta(delta);
+			}
+			else {
+				searchContainer.setDelta(SearchContainer.DEFAULT_DELTA);
+			}
 		}
 
 		String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
