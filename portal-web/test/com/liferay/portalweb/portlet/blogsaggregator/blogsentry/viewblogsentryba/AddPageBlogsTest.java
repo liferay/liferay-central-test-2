@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator.portlet.configureportletdisplaystyletitle;
+package com.liferay.portalweb.portlet.blogsaggregator.blogsentry.viewblogsentryba;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,10 +20,11 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
-	public void testConfigurePortletDisplayStyleTitle()
-		throws Exception {
+public class AddPageBlogsTest extends BaseTestCase {
+	public void testAddPageBlogs() throws Exception {
 		selenium.open("/web/guest/home/");
+		selenium.clickAt("//nav[@id='navigation']",
+			RuntimeVariables.replace("Navigation"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -31,7 +32,7 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Blogs Aggregator Test Page")) {
+				if (selenium.isVisible("//a[@id='addPage']")) {
 					break;
 				}
 			}
@@ -42,13 +43,8 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Blogs Aggregator Test Page",
-			RuntimeVariables.replace("Blogs Aggregator Test Page"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Options"),
-			selenium.getText("//strong/a"));
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
+		selenium.clickAt("//a[@id='addPage']",
+			RuntimeVariables.replace("Add Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,8 +52,7 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+				if (selenium.isVisible("//input")) {
 					break;
 				}
 			}
@@ -68,38 +63,31 @@ public class ConfigurePortletDisplayStyleTitleTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Configuration"),
-			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
-		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//select[@id='_86_displayStyle']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		selenium.type("//input", RuntimeVariables.replace("Blogs Test Page"));
 		selenium.saveScreenShotAndSource();
-		selenium.select("//select[@id='_86_displayStyle']",
-			RuntimeVariables.replace("label=Title"));
-		selenium.clickAt("//input[@value='Save']",
+		selenium.clickAt("//button[@id='save']",
 			RuntimeVariables.replace("Save"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Blogs Test Page",
+			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"You have successfully updated the setup."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals("Title",
-			selenium.getSelectedLabel("//select[@id='_86_displayStyle']"));
 	}
 }

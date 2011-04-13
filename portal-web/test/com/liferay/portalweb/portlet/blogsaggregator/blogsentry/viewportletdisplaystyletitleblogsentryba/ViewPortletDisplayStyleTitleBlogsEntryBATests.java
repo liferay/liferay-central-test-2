@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator;
+package com.liferay.portalweb.portlet.blogsaggregator.blogsentry.viewportletdisplaystyletitleblogsentryba;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.blogsaggregator.blogsentry.BlogsEntryTests;
-import com.liferay.portalweb.portlet.blogsaggregator.portlet.PortletTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -24,13 +22,21 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class BlogsAggregatorTests extends BaseTests {
+public class ViewPortletDisplayStyleTitleBlogsEntryBATests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(BlogsEntryTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageBATest.class);
+		testSuite.addTestSuite(AddPortletBATest.class);
+		testSuite.addTestSuite(AddPageBlogsTest.class);
+		testSuite.addTestSuite(AddPortletBlogsTest.class);
+		testSuite.addTestSuite(AddBlogsEntryTest.class);
+		testSuite.addTestSuite(ConfigurePortletDisplayStyleTitleTest.class);
+		testSuite.addTestSuite(
+			ViewPortletDisplayStyleTitleBlogsEntryBATest.class);
+		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

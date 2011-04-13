@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddPortletBATest</title>
+<title>ViewPortletDisplayStyleTitleBlogsEntryBATest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddPortletBATest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewPortletDisplayStyleTitleBlogsEntryBATest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -25,33 +25,28 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//a[@id='_145_addApplication']</td>
-	<td>More…</td>
+	<td>//span[@class='entry-title']/a</td>
+	<td>Blogs Entry Title</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//a[@id='_145_addApplication']</td>
-	<td>More…</td>
+	<td>assertTextNotPresent</td>
+	<td>Blogs Entry Content</td>
+	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@title='Blogs Aggregator']/p/a</td>
-	<td>Add</td>
+	<td>clickAtAndWait</td>
+	<td>//div/span[@class='entry-title']/a</td>
+	<td>Blogs Entry Title</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//div[@title='Blogs Aggregator']/p/a</td>
-	<td>Add</td>
+	<td>assertText</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td>Blogs Entry Title</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//section</td>
-	<td>Portlet</td>
-</tr>
-<tr>
-	<td>assertVisible</td>
-	<td>//section</td>
-	<td>Portlet</td>
+	<td>assertText</td>
+	<td>//div[@class='entry-body']/p</td>
+	<td>Blogs Entry Content</td>
 </tr>
 
 </tbody></table>

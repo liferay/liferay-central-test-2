@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogsaggregator.portlet.configureportletdisplaystyletitle;
+package com.liferay.portalweb.portlet.blogsaggregator.blogsentry.viewblogsentryba;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

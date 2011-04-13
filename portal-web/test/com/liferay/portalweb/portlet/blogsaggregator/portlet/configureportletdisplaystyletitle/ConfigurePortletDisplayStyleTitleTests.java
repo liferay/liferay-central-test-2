@@ -29,11 +29,7 @@ public class ConfigurePortletDisplayStyleTitleTests extends BaseTests {
 
 		testSuite.addTestSuite(AddPageBATest.class);
 		testSuite.addTestSuite(AddPortletBATest.class);
-		testSuite.addTestSuite(AddPageBlogsTest.class);
-		testSuite.addTestSuite(AddPortletBlogsTest.class);
-		testSuite.addTestSuite(AddBlogsEntryTest.class);
 		testSuite.addTestSuite(ConfigurePortletDisplayStyleTitleTest.class);
-		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
