@@ -254,8 +254,6 @@ public class LayoutExporter {
 		context.setPortetDataContextListener(
 			new PortletDataContextListenerImpl(context));
 
-		// Build compatibility
-
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("root");
@@ -321,13 +319,9 @@ public class LayoutExporter {
 
 		cssElement.addCDATA(layoutSet.getCss());
 
-		// Layout configuration portlet
-
 		Portlet layoutConfigurationPortlet =
 			PortletLocalServiceUtil.getPortletById(
 				context.getCompanyId(), PortletKeys.LAYOUT_CONFIGURATION);
-
-		// Layouts
 
 		Map<String, Object[]> portletIds =
 			new LinkedHashMap<String, Object[]>();
@@ -400,15 +394,11 @@ public class LayoutExporter {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
 			Element rolesElement = rootElement.addElement("roles");
 
-			// Layout roles
-
 			if (exportPermissions) {
 				_permissionExporter.exportLayoutRoles(
 					layoutCache, companyId, groupId, rolesElement);
 			}
 		}
-
-		// Export portlets
 
 		long previousScopeGroupId = context.getScopeGroupId();
 
@@ -459,41 +449,23 @@ public class LayoutExporter {
 
 		context.setScopeGroupId(previousScopeGroupId);
 
-		// Asset categories
-
 		if (exportCategories) {
 			exportAssetCategories(context);
 		}
 
-		// Asset tags
-
-		_portletExporter.exportAssetTags(context, rootElement);
-
-		// Comments
-
-		_portletExporter.exportComments(context, rootElement);
-
-		// Locks
-
-		_portletExporter.exportLocks(context, rootElement);
-
-		// Portlet data permissions
+		_portletExporter.exportAssetTags(context);
+		_portletExporter.exportComments(context);
+		_portletExporter.exportLocks(context);
 
 		if (exportPermissions) {
 			_permissionExporter.exportPortletDataPermissions(context);
 		}
 
-		// Ratings entries
-
 		_portletExporter.exportRatingsEntries(context, rootElement);
-
-		// Look and feel
 
 		if (exportTheme && !context.isPerformDirectBinaryImport()) {
 			exportTheme(layoutSet, zipWriter);
 		}
-
-		// Log
 
 		if (_log.isInfoEnabled()) {
 			if (stopWatch != null) {
@@ -504,8 +476,6 @@ public class LayoutExporter {
 				_log.info("Exporting layouts is finished");
 			}
 		}
-
-		// Zip
 
 		context.addZipEntry("/manifest.xml", document.formattedString());
 

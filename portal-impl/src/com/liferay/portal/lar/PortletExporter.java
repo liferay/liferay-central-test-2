@@ -212,8 +212,6 @@ public class PortletExporter {
 		portletDataContext.setScopeType(scopeType);
 		portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
 
-		// Build compatibility
-
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("root");
@@ -239,50 +237,30 @@ public class PortletExporter {
 		headerElement.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 
-		// Portlet
-
 		exportPortlet(
 			portletDataContext, layoutCache, portletId, layout, rootElement,
 			defaultUserId, exportPermissions, exportPortletArchivedSetups,
 			exportPortletData, exportPortletSetup, exportPortletUserPreferences,
 			exportUserPermissions);
 
-		// Asset categories
-
 		if (exportCategories) {
 			exportAssetCategories(portletDataContext);
 		}
 
-		// Asset tags
-
-		exportAssetTags(portletDataContext, rootElement);
-
-		// Comments
-
-		exportComments(portletDataContext, rootElement);
-
-		// Locks
-
-		exportLocks(portletDataContext, rootElement);
-
-		// Portlet data permissions
+		exportAssetTags(portletDataContext);
+		exportComments(portletDataContext);
+		exportLocks(portletDataContext);
 
 		if (exportPermissions) {
 			_permissionExporter.exportPortletDataPermissions(
 				portletDataContext);
 		}
 
-		// Ratings entries
-
 		exportRatingsEntries(portletDataContext, rootElement);
-
-		// Log
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Exporting portlet took " + stopWatch.getTime() + " ms");
 		}
-
-		// Zip
 
 		try {
 			portletDataContext.addZipEntry(
@@ -427,8 +405,7 @@ public class PortletExporter {
 		}
 	}
 
-	protected void exportAssetTags(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void exportAssetTags(PortletDataContext portletDataContext)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
@@ -495,8 +472,7 @@ public class PortletExporter {
 			portletDataContext, assetVocabulariesElement, assetVocabulary);
 	}
 
-	protected void exportComments(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void exportComments(PortletDataContext portletDataContext)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
@@ -541,8 +517,7 @@ public class PortletExporter {
 			document.formattedString());
 	}
 
-	protected void exportLocks(
-			PortletDataContext portletDataContext, Element parentElement)
+	protected void exportLocks(PortletDataContext portletDataContext)
 		throws Exception {
 
 		Document document = SAXReaderUtil.createDocument();
