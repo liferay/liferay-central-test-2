@@ -153,7 +153,7 @@
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="sql.dir=${basedir}" />
 			<arg value="sample.sql.base.dir=${basedir}/../benchmarks" />
-			<arg value="sample.sql.output.dir=${basedir}/../benchmarks"/>
+			<arg value="sample.sql.output.dir=${basedir}/temp"/>
 			<arg value="sample.sql.db.type=hypersonic" />
 			<arg value="sample.sql.blogs.entry.comment.count=1" />
 			<arg value="sample.sql.blogs.entry.count=1" />
