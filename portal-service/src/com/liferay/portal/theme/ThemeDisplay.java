@@ -797,10 +797,6 @@ public class ThemeDisplay implements Serializable {
 		_locale = locale;
 	}
 
-	public void setMainJournalArticle(JournalArticle mainJournalArticle) {
-		_mainJournalArticle = mainJournalArticle;
-	}
-
 	public void setLookAndFeel(
 		String contextPath, Theme theme, ColorScheme colorScheme) {
 
@@ -834,6 +830,10 @@ public class ThemeDisplay implements Serializable {
 
 	public void setLookAndFeel(Theme theme, ColorScheme colorScheme) {
 		setLookAndFeel(getPathContext(), theme, colorScheme);
+	}
+
+	public void setMainJournalArticle(JournalArticle mainJournalArticle) {
+		_mainJournalArticle = mainJournalArticle;
 	}
 
 	public void setParentGroupId(long parentGroupId) {

@@ -481,6 +481,7 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_t_lifecycle");
 		_reservedParams.add("p_o_p_id");
 		_reservedParams.add("p_f_id");
+		_reservedParams.add("p_j_a_id");
 		_reservedParams.add("saveLastPath");
 		_reservedParams.add("scroll");
 	}
@@ -1636,12 +1637,12 @@ public class PortalImpl implements Portal {
 		String articleUrlTitle = friendlyURL.substring(
 			JournalArticleConstants.CANONICAL_URL_SEPARATOR.length());
 
-		JournalArticle article =
+		JournalArticle journalArticle =
 			JournalArticleLocalServiceUtil.getArticleByUrlTitle(
 				groupId, articleUrlTitle);
 
 		Layout layout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-			article.getLayoutUuid(), groupId);
+			journalArticle.getLayoutUuid(), groupId);
 
 		String layoutActualURL = getLayoutActualURL(layout, mainPath);
 
@@ -1684,10 +1685,6 @@ public class PortalImpl implements Portal {
 			"p_p_id", new String[] {defaultAssetPublisherPortletId});
 		actualParams.put("p_p_lifecycle", new String[] {"0"});
 
-		actualParams.put(
-			"mainJournalArticleId",
-			new String[] {String.valueOf(article.getId())});
-
 		if (Validator.isNull(
 				currentDefaultAssetPublisherPortletId)) {
 
@@ -1696,6 +1693,8 @@ public class PortalImpl implements Portal {
 		}
 
 		actualParams.put("p_p_mode", new String[] {"view"});
+		actualParams.put(
+			"p_j_a_id", new String[] {String.valueOf(journalArticle.getId())});
 
 		String namespace = getPortletNamespace(defaultAssetPublisherPortletId);
 
@@ -1706,7 +1705,8 @@ public class PortalImpl implements Portal {
 			namespace + "type",
 			new String[] {JournalArticleAssetRendererFactory.TYPE});
 		actualParams.put(
-			namespace + "urlTitle", new String[] {article.getUrlTitle()});
+			namespace + "urlTitle",
+			new String[] {journalArticle.getUrlTitle()});
 
 		String queryString = HttpUtil.parameterMapToString(
 			actualParams, false);

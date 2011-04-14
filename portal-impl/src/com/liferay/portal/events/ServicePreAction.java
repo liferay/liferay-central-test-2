@@ -1563,25 +1563,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathMain(mainPath);
 		themeDisplay.setPathSound(contextPath.concat("/html/sound"));
 
-		// Main Journal Article
-
-		long mainJournalArticleId =
-			ParamUtil.getLong(request, "mainJournalArticleId", 0);
-
-		if (mainJournalArticleId > 0) {
-			try{
-				JournalArticle mainArticle =
-					JournalArticleServiceUtil.getArticle(mainJournalArticleId);
-
-				themeDisplay.setMainJournalArticle(mainArticle);
-			}
-			catch (NoSuchArticleException nsae) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsae.getMessage());
-				}
-			}
-		}
-
 		// Icons
 
 		themeDisplay.setShowAddContentIcon(false);
@@ -1957,6 +1938,25 @@ public class ServicePreAction extends Action {
 
 		request.setAttribute(
 			WebKeys.PORTLET_PARALLEL_RENDER, parallelRenderEnableObj);
+
+		// Main Journal article
+
+		long mainJournalArticleId = ParamUtil.getLong(
+			request, "p_j_a_id");
+
+		if (mainJournalArticleId > 0) {
+			try{
+				JournalArticle mainJournalArticle =
+					JournalArticleServiceUtil.getArticle(mainJournalArticleId);
+
+				themeDisplay.setMainJournalArticle(mainJournalArticle);
+			}
+			catch (NoSuchArticleException nsae) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsae.getMessage());
+				}
+			}
+		}
 	}
 
 	protected void updateUserLayouts(User user) throws Exception {
