@@ -436,10 +436,10 @@ public abstract class BaseDB implements DB {
 	protected BaseDB(String type) {
 		_type = type;
 
-		String[] actualTypes = getTemplate();
+		String[] actual = getTemplate();
 
 		for (int i = 0; i < TEMPLATE.length; i++) {
-			_replaceMap.put(TEMPLATE[i], actualTypes[i]);
+			_templateMap.put(TEMPLATE[i], actual[i]);
 		}
 	}
 
@@ -896,11 +896,11 @@ public abstract class BaseDB implements DB {
 			return template;
 		}
 
-		Matcher matcher = _bundledPattern.matcher(template);
-
 		StringBundler sb = new StringBundler();
 
 		int endIndex = 0;
+
+		Matcher matcher = _templatePattern.matcher(template);
 
 		while (matcher.find()) {
 			int startIndex = matcher.start();
@@ -911,7 +911,7 @@ public abstract class BaseDB implements DB {
 
 			String matched = template.substring(startIndex, endIndex);
 
-			sb.append(_replaceMap.get(matched));
+			sb.append(_templateMap.get(matched));
 		}
 
 		if (template.length() > endIndex) {
@@ -958,11 +958,11 @@ public abstract class BaseDB implements DB {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDB.class);
 
-	private static Pattern _bundledPattern;
-	private Map<String, String> _replaceMap = new HashMap<String, String>();
+	private static Pattern _templatePattern;
 	private static Pattern _timestampPattern = Pattern.compile(
 		"SPECIFIC_TIMESTAMP_\\d+");
 
+	private Map<String, String> _templateMap = new HashMap<String, String>();
 	private String _type;
 	private boolean _supportsStringCaseSensitiveQuery;
 
@@ -985,7 +985,7 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		_bundledPattern = Pattern.compile(sb.toString());
+		_templatePattern = Pattern.compile(sb.toString());
 	}
 
 }
