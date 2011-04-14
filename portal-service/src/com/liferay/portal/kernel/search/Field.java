@@ -73,6 +73,8 @@ public class Field implements Serializable {
 
 	public static final String STAGING_GROUP = "stagingGroup";
 
+	public static final String STATUS = "status";
+
 	public static final String TITLE = "title";
 
 	public static final String TYPE = "type";

@@ -16,7 +16,15 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -27,8 +35,11 @@ import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 import java.io.File;
+import java.io.Serializable;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -309,6 +320,79 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			companyId, groupId, articleId, version, title, description, content,
 			type, structureIds, templateIds, displayDateGT, displayDateLT,
 			status, reviewDate, andOperator, start, end, obc);
+	}
+
+	public Hits search(
+			long companyId, long groupId, String keywords,
+			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
+		throws SystemException {
+
+		String articleId = null;
+		String title = null;
+		String description = null;
+		String content = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			articleId = keywords;
+			title = keywords;
+			description = keywords;
+			content = keywords;
+		}
+		else {
+			andOperator = true;
+		}
+
+		return search(
+			companyId, groupId, articleId, title, description, content, null,
+			null, params, andOperator, start, end, sort);
+	}
+
+	public Hits search(
+			long companyId, long groupId, String articleId, String title,
+			String description, String content, String type, String status,
+			LinkedHashMap<String, Object> params, boolean andSearch, int start,
+			int end, Sort sort)
+		throws SystemException {
+
+		try {
+			Map<String, Serializable> attributes =
+				new HashMap<String, Serializable>();
+
+			attributes.put(Field.ENTRY_CLASS_PK, articleId);
+			attributes.put(Field.TITLE, title);
+			attributes.put(Field.DESCRIPTION, description);
+			attributes.put(Field.CONTENT, content);
+			attributes.put(Field.TYPE, type);
+			attributes.put(Field.STATUS, status);
+			attributes.put("params", params);
+
+			SearchContext searchContext = new SearchContext();
+
+			searchContext.setAndSearch(andSearch);
+			searchContext.setAttributes(attributes);
+			searchContext.setCompanyId(companyId);
+			searchContext.setGroupIds(new long[] {groupId});
+			searchContext.setEnd(end);
+			searchContext.setSorts(new Sort[] {sort});
+
+			QueryConfig queryConfig = new QueryConfig();
+
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+
+			searchContext.setQueryConfig(queryConfig);
+
+			searchContext.setStart(start);
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				JournalArticle.class);
+
+			return indexer.search(searchContext);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	public int searchCount(

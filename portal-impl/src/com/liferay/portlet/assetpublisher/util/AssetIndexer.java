@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.model.AssetEntry;
 
@@ -77,40 +76,9 @@ public class AssetIndexer extends BaseIndexer {
 			return;
 		}
 
-		String description = (String)searchContext.getAttribute(
-			Field.DESCRIPTION);
-
-		if (Validator.isNotNull(description)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(
-					Field.DESCRIPTION, description, true);
-			}
-			else {
-				searchQuery.addTerm(Field.DESCRIPTION, description, true);
-			}
-		}
-
-		String title = (String)searchContext.getAttribute(Field.TITLE);
-
-		if (Validator.isNotNull(title)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(Field.TITLE, title, true);
-			}
-			else {
-				searchQuery.addTerm(Field.TITLE, title, true);
-			}
-		}
-
-		String userName = (String)searchContext.getAttribute(Field.USER_NAME);
-
-		if (Validator.isNotNull(userName)) {
-			if (searchContext.isAndSearch()) {
-				searchQuery.addRequiredTerm(Field.USER_NAME, userName, true);
-			}
-			else {
-				searchQuery.addTerm(Field.USER_NAME, userName, true);
-			}
-		}
+		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION);
+		addSearchTerm(searchQuery, searchContext, Field.TITLE);
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME);
 	}
 
 }

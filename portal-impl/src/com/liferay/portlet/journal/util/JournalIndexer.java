@@ -52,6 +52,7 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -64,6 +65,7 @@ import javax.portlet.PortletURL;
  * @author Harry Mark
  * @author Bruno Farache
  * @author Raymond Augé
+ * @author Hugo Huijser
  */
 public class JournalIndexer extends BaseIndexer {
 
@@ -100,6 +102,7 @@ public class JournalIndexer extends BaseIndexer {
 		double version = article.getVersion();
 		Map<Locale, String> titleMap = article.getTitleMap();
 		Map<Locale, String> descriptionMap = article.getDescriptionMap();
+		long status = article.getStatus();
 		String type = article.getType();
 
 		String structureId = article.getStructureId();
@@ -185,6 +188,7 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.ENTRY_CLASS_PK, articleId);
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		document.addKeyword(Field.VERSION, version);
+		document.addKeyword(Field.STATUS, status);
 		document.addKeyword(Field.TYPE, type);
 
 		document.addKeyword("structureId", structureId);
@@ -194,6 +198,24 @@ public class JournalIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected String doGetSortField(String orderByCol) {
+		if (orderByCol.equals("modified-date")) {
+			return Field.MODIFIED;
+		}
+		else if (orderByCol.equals("id")) {
+			return Field.ENTRY_CLASS_PK;
+		}
+		else if (orderByCol.equals("title")) {
+			return Field.TITLE;
+		}
+		else if (orderByCol.equals("display-date")) {
+			return "displayDate";
+		}
+		else {
+			return orderByCol;
+		}
 	}
 
 	protected Summary doGetSummary(
@@ -336,6 +358,29 @@ public class JournalIndexer extends BaseIndexer {
 						name.concat(StringPool.UNDERLINE).concat(contentLocale),
 						StringUtil.merge(value, StringPool.SPACE));
 				}
+			}
+		}
+	}
+
+	protected void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK);
+		addSearchTerm(searchQuery, searchContext, Field.TITLE);
+		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION);
+		addSearchTerm(searchQuery, searchContext, Field.CONTENT);
+		addSearchTerm(searchQuery, searchContext, Field.TYPE);
+		addSearchTerm(searchQuery, searchContext, Field.STATUS);
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (Validator.isNotNull(params)) {
+			String expandoAttributes = (String)params.get("expandoAttributes");
+
+			if (Validator.isNotNull(expandoAttributes)) {
+				addSearchExpando(searchQuery, searchContext, expandoAttributes);
 			}
 		}
 	}

@@ -150,6 +150,8 @@ type = ParamUtil.getString(request, "type", type);
 	ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
 	searchTerms.setVersion(-1);
+
+	List results = null;
 	%>
 
 	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>

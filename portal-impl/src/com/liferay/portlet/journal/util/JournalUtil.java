@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,6 +34,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Attribute;
@@ -55,12 +58,14 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
@@ -89,6 +94,7 @@ import javax.portlet.PortletSession;
  * @author Raymond Augé
  * @author Wesley Gong
  * @author Angelo Jefferson
+ * @author Hugo Huijser
  */
 public class JournalUtil {
 
@@ -314,6 +320,37 @@ public class JournalUtil {
 		}
 
 		return orderByComparator;
+	}
+
+	public static Tuple getArticles(
+		Hits hits) throws PortalException, SystemException {
+
+		List<JournalArticle> articles = new ArrayList<JournalArticle>();
+		boolean corruptIndex = false;
+
+		List<com.liferay.portal.kernel.search.Document> documents =
+			hits.toList();
+
+		for (com.liferay.portal.kernel.search.Document document : documents) {
+			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
+			String articleId = document.get(Field.ENTRY_CLASS_PK);
+
+			try {
+				JournalArticle article =
+					JournalArticleLocalServiceUtil.getArticle(
+						groupId, articleId);
+
+				articles.add(article);
+			}
+			catch (NoSuchArticleException nsae) {
+				corruptIndex = true;
+
+				_log.error("Article " + articleId +
+					" does not exist in the search index");
+			}
+		}
+
+		return new Tuple(articles, corruptIndex);
 	}
 
 	public static List<Layout> getDefaultAssetPublisherLayouts(

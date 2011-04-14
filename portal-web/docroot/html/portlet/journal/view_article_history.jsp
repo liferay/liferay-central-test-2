@@ -65,6 +65,8 @@ portletURL.setParameter("articleId", article.getArticleId());
 
 	searchTerms.setAdvancedSearch(true);
 	searchTerms.setArticleId(article.getArticleId());
+
+	List results = null;
 	%>
 
 	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>

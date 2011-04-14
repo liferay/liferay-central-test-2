@@ -56,6 +56,19 @@ public abstract class BaseBooleanQueryImpl
 		addTerms(fields, termFieldsValuesMap);
 	}
 
+	public void addTerms(
+			String[] fields, String value, boolean like, boolean parseKeywords)
+		throws ParseException {
+
+		if (Validator.isNull(value)) {
+			return;
+		}
+
+		for (String field : fields) {
+			addTerm(field, value, like, parseKeywords);
+		}
+	}
+
 	protected void addTerms(
 			String[] fields, Map<String, List<String>> termFieldsValuesMap)
 		throws ParseException {
