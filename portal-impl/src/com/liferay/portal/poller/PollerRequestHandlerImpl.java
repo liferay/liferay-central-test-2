@@ -407,7 +407,7 @@ public class PollerRequestHandlerImpl
 		String fixedPollerRequestString = fixPollerRequestString(
 			pollerRequestString);
 
-		return (Map<String, Object>[]) JSONFactoryUtil.deserialize(
+		return (Map<String, Object>[])JSONFactoryUtil.deserialize(
 			fixedPollerRequestString);
 	}
 
