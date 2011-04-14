@@ -400,6 +400,7 @@ public class UserIndexer extends BaseIndexer {
 		addSearchTerm(searchQuery, searchContext, "fullName");
 		addSearchTerm(searchQuery, searchContext, "lastName");
 		addSearchTerm(searchQuery, searchContext, "middleName");
+		addSearchTerm(searchQuery, searchContext, "region");
 		addSearchTerm(searchQuery, searchContext, "screenName");
 		addSearchTerm(searchQuery, searchContext, "street");
 		addSearchTerm(searchQuery, searchContext, "zip");
