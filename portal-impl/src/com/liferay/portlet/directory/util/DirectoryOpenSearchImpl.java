@@ -88,12 +88,18 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 			Map<String, Serializable> attributes =
 				new HashMap<String, Serializable>();
 
+			attributes.put("country", keywords);
+			attributes.put("city", keywords);
 			attributes.put("emailAddress", keywords);
 			attributes.put("firstName", keywords);
+			attributes.put("fullName", keywords);
 			attributes.put("lastName", keywords);
 			attributes.put("middleName", keywords);
 			attributes.put("params", getUserParams(companyId, keywords));
+			attributes.put("region", keywords);
 			attributes.put("screenName", keywords);
+			attributes.put("street", keywords);
+			attributes.put("zip", keywords);
 
 			searchContext.setAttributes(attributes);
 		}
