@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.FileImpl;
 
+import java.io.FileReader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,6 +40,53 @@ import org.apache.derby.tools.ij;
  * @author Brian Wing Shun Chan
  */
 public class DBLoader {
+
+	public static void loadHypersonic(Connection con, String fileName)
+		throws Exception {
+
+		StringBundler sb = new StringBundler();
+
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new FileReader(fileName));
+
+		String line = null;
+
+		while ((line = unsyncBufferedReader.readLine()) != null) {
+			if (!line.startsWith("//")) {
+				sb.append(line);
+
+				if (line.endsWith(";")) {
+					String sql = sb.toString();
+
+					sql =
+						StringUtil.replace(
+							sql,
+							new String[] {
+								"\\\"",
+								"\\\\",
+								"\\n",
+								"\\r"
+							},
+							new String[] {
+								"\"",
+								"\\",
+								"\\u000a",
+								"\\u000a"
+							});
+
+					sb.setIndex(0);
+
+					PreparedStatement ps = con.prepareStatement(sql);
+
+					ps.executeUpdate();
+
+					ps.close();
+				}
+			}
+		}
+
+		unsyncBufferedReader.close();
+	}
 
 	public static void main(String[] args) {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
@@ -171,11 +220,11 @@ public class DBLoader {
 			"sa", "");
 
 		if (Validator.isNull(_fileName)) {
-			_loadHypersonic(con, _sqlDir + "/portal/portal-hypersonic.sql");
-			_loadHypersonic(con, _sqlDir + "/indexes.sql");
+			loadHypersonic(con, _sqlDir + "/portal/portal-hypersonic.sql");
+			loadHypersonic(con, _sqlDir + "/indexes.sql");
 		}
 		else {
-			_loadHypersonic(con, _sqlDir + "/" + _fileName);
+			loadHypersonic(con, _sqlDir + "/" + _fileName);
 		}
 
 		// Shutdown Hypersonic
@@ -197,53 +246,6 @@ public class DBLoader {
 		content = StringUtil.replace(content, "\\u005cu", "\\u");
 
 		_fileUtil.write(_sqlDir + "/" + _databaseName + ".script", content);
-	}
-
-	private void _loadHypersonic(Connection con, String fileName)
-		throws Exception {
-
-		StringBundler sb = new StringBundler();
-
-		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
-			new UnsyncStringReader(_fileUtil.read(fileName)));
-
-		String line = null;
-
-		while ((line = unsyncBufferedReader.readLine()) != null) {
-			if (!line.startsWith("//")) {
-				sb.append(line);
-
-				if (line.endsWith(";")) {
-					String sql = sb.toString();
-
-					sql =
-						StringUtil.replace(
-							sql,
-							new String[] {
-								"\\\"",
-								"\\\\",
-								"\\n",
-								"\\r"
-							},
-							new String[] {
-								"\"",
-								"\\",
-								"\\u000a",
-								"\\u000a"
-							});
-
-					sb.setIndex(0);
-
-					PreparedStatement ps = con.prepareStatement(sql);
-
-					ps.executeUpdate();
-
-					ps.close();
-				}
-			}
-		}
-
-		unsyncBufferedReader.close();
 	}
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();

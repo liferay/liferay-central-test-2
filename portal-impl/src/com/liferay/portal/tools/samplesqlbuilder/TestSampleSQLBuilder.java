@@ -14,16 +14,11 @@
 
 package com.liferay.portal.tools.samplesqlbuilder;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.tools.ArgumentsUtil;
-
-import java.io.FileReader;
+import com.liferay.portal.tools.DBLoader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 import java.util.Map;
@@ -38,17 +33,17 @@ public class TestSampleSQLBuilder {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
 		String sqlDir = arguments.get("sql.dir");
-		String workDir = arguments.get("sample.sql.output.dir");
+		String outputDir = arguments.get("sample.sql.output.dir");
 
 		SampleSQLBuilder.main(args);
 
-		new TestSampleSQLBuilder(sqlDir, workDir);
+		new TestSampleSQLBuilder(sqlDir, outputDir);
 	}
 
-	public TestSampleSQLBuilder(String sqlDir, String workDir) {
+	public TestSampleSQLBuilder(String sqlDir, String outputDir) {
 		try {
 			_sqlDir = sqlDir;
-			_workDir = workDir;
+			_outputDir = outputDir;
 
 			_loadHypersonic();
 		}
@@ -63,12 +58,11 @@ public class TestSampleSQLBuilder {
 		Connection con = DriverManager.getConnection(
 			"jdbc:hsqldb:mem:testSampleSQLBuilderDB;shutdown=true", "sa", "");
 
-		_loadHypersonic(
+		DBLoader.loadHypersonic(
 			con, _sqlDir + "/portal-minimal/portal-minimal-hypersonic.sql");
-		_loadHypersonic(con, _sqlDir + "/indexes/indexes-hypersonic.sql");
-		_loadHypersonic(con, _workDir + "/sample-hypersonic.sql");
-
-		// Shutdown Hypersonic
+		DBLoader.loadHypersonic(
+			con, _sqlDir + "/indexes/indexes-hypersonic.sql");
+		DBLoader.loadHypersonic(con, _outputDir + "/sample-hypersonic.sql");
 
 		Statement statement = con.createStatement();
 
@@ -79,54 +73,7 @@ public class TestSampleSQLBuilder {
 		con.close();
 	}
 
-	private void _loadHypersonic(Connection con, String fileName)
-		throws Exception {
-
-		StringBundler sb = new StringBundler();
-
-		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
-			new FileReader(fileName));
-
-		String line = null;
-
-		while ((line = unsyncBufferedReader.readLine()) != null) {
-			if (!line.startsWith("//")) {
-				sb.append(line);
-
-				if (line.endsWith(";")) {
-					String sql = sb.toString();
-
-					sb.setIndex(0);
-
-					sql =
-						StringUtil.replace(
-							sql,
-							new String[] {
-								"\\\"",
-								"\\\\",
-								"\\n",
-								"\\r"
-							},
-							new String[] {
-								"\"",
-								"\\",
-								"\\u000a",
-								"\\u000a"
-							});
-
-					PreparedStatement ps = con.prepareStatement(sql);
-
-					ps.executeUpdate();
-
-					ps.close();
-				}
-			}
-		}
-
-		unsyncBufferedReader.close();
-	}
-
+	private String _outputDir;
 	private String _sqlDir;
-	private String _workDir;
 
 }
