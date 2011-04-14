@@ -12,26 +12,20 @@
  * details.
  */
 
-package com.liferay.portlet.asset;
+package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.taglib.util.IncludeTag;
 
 /**
  * @author Juan Fernández
  */
-public class AssetCategoryException extends PortalException {
+public class AssetCategoriesErrorTag extends IncludeTag {
 
-	public static final int AT_LEAST_ONE_CATEGORY = 1;
-
-	public static final int TOO_MANY_CATEGORIES = 2;
-
-	public AssetCategoryException(int type) {
-		_type = type;
+	protected String getPage() {
+		return _PAGE;
 	}
 
-	public int getType() {
-		return _type;
-	}
+	private static final String _PAGE =
+		"/html/taglib/ui/asset_categories_error/page.jsp";
 
-	private int _type;
 }

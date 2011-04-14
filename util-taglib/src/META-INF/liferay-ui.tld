@@ -10,6 +10,11 @@
 	<short-name>liferay-ui</short-name>
 	<uri>http://liferay.com/tld/ui</uri>
 	<tag>
+		<name>asset-categories-error</name>
+		<tag-class>com.liferay.taglib.ui.AssetCategoriesErrorTag</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	<tag>
 		<name>asset-categories-navigation</name>
 		<tag-class>com.liferay.taglib.ui.AssetCategoriesNavigationTag</tag-class>
 		<body-content>JSP</body-content>
