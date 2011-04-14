@@ -34,4 +34,5 @@ public class AssetCategoryException extends PortalException {
 	}
 
 	private int _type;
+
 }
