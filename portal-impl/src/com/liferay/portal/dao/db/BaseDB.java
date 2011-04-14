@@ -435,6 +435,12 @@ public abstract class BaseDB implements DB {
 
 	protected BaseDB(String type) {
 		_type = type;
+
+		String[] actualTypes = getTemplate();
+
+		for (int i = 0; i < TEMPLATE.length; i++) {
+			_replaceMap.put(TEMPLATE[i], actualTypes[i]);
+		}
 	}
 
 	protected void addIndexes(String indexesSQL, Set<String> validIndexNames)
@@ -890,15 +896,29 @@ public abstract class BaseDB implements DB {
 			return template;
 		}
 
-		for (int i = 0; i < TEMPLATE.length; i++) {
-			Pattern templatePattern = _templatePatterns[i];
+		Matcher matcher = _bundledPattern.matcher(template);
 
-			Matcher matcher = templatePattern.matcher(template);
+		StringBundler sb = new StringBundler();
 
-			template = matcher.replaceAll(actual[i]);
+		int endIndex = 0;
+
+		while (matcher.find()) {
+			int startIndex = matcher.start();
+
+			sb.append(template.substring(endIndex, startIndex));
+
+			endIndex = matcher.end();
+
+			String matched = template.substring(startIndex, endIndex);
+
+			sb.append(_replaceMap.get(matched));
 		}
 
-		return template;
+		if (template.length() > endIndex) {
+			sb.append(template.substring(endIndex));
+		}
+
+		return sb.toString();
 	}
 
 	protected abstract String reword(String data) throws IOException;
@@ -938,7 +958,8 @@ public abstract class BaseDB implements DB {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDB.class);
 
-	private static Pattern[] _templatePatterns = new Pattern[TEMPLATE.length];
+	private static Pattern _bundledPattern;
+	private Map<String, String> _replaceMap = new HashMap<String, String>();
 	private static Pattern _timestampPattern = Pattern.compile(
 		"SPECIFIC_TIMESTAMP_\\d+");
 
@@ -946,16 +967,25 @@ public abstract class BaseDB implements DB {
 	private boolean _supportsStringCaseSensitiveQuery;
 
 	static {
+		StringBundler sb = new StringBundler(TEMPLATE.length * 3 - 3);
+
 		for (int i = 0; i < TEMPLATE.length; i++) {
 			String variable = TEMPLATE[i];
 
 			if (variable.equals("##") || variable.equals("'01/01/1970'")) {
-				_templatePatterns[i] = Pattern.compile(variable);
+				sb.append(variable);
 			}
 			else {
-				_templatePatterns[i] = Pattern.compile(variable + "\\b");
+				sb.append(variable);
+				sb.append("\\b");
+			}
+
+			if (i < TEMPLATE.length - 1) {
+				sb.append(StringPool.PIPE);
 			}
 		}
+
+		_bundledPattern = Pattern.compile(sb.toString());
 	}
 
 }
