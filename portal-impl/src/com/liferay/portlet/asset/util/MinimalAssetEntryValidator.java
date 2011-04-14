@@ -15,20 +15,24 @@
 package com.liferay.portlet.asset.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.asset.AssetTagException;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class MinimalAssetEntryValidator implements AssetEntryValidator {
+public class MinimalAssetEntryValidator extends BaseAssetEntryValidator {
 
 	public void validate(
-			String className, long[] categoryIds, String[] tagNames)
-		throws PortalException {
+			long groupId, String className, long[] categoryIds,
+			String[] tagNames)
+		throws PortalException, SystemException {
 
 		if ((tagNames == null) || (tagNames.length == 0)) {
 			throw new AssetTagException(AssetTagException.AT_LEAST_ONE_TAG);
 		}
+
+		super.validate(groupId, className, categoryIds, tagNames);
 	}
 
 }

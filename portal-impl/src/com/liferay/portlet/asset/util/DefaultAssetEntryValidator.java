@@ -14,13 +14,19 @@
 
 package com.liferay.portlet.asset.util;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
 /**
  * @author Brian Wing Shun Chan
  */
-public class DefaultAssetEntryValidator implements AssetEntryValidator {
+public class DefaultAssetEntryValidator extends BaseAssetEntryValidator {
 
 	public void validate(
-		String className, long[] categoryIds, String[] tagNames) {
-	}
+			long groupId, String className, long[] categoryIds,
+			String[] tagNames)
+		throws SystemException, PortalException {
 
+		super.validate(groupId, className, categoryIds, tagNames);
+	}
 }

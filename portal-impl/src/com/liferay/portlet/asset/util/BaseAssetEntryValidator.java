@@ -18,13 +18,13 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
-public interface AssetEntryValidator {
+public class BaseAssetEntryValidator implements AssetEntryValidator {
 
 	public void validate(
 			long groupId, String className, long[] categoryIds,
 			String[] entryNames)
-		throws PortalException, SystemException;
-
+		throws PortalException, SystemException {		
+	}
 }

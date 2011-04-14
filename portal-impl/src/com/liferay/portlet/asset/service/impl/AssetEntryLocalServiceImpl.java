@@ -514,7 +514,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		title = StringUtil.shorten(title, 300, StringPool.BLANK);
 		Date now = new Date();
 
-		validate(className, categoryIds, tagNames);
+		validate(groupId, className, categoryIds, tagNames);
 
 		AssetEntry entry = assetEntryPersistence.fetchByC_C(
 			classNameId, classPK);
@@ -729,13 +729,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public void validate(
-			String className, long[] categoryIds, String[] tagNames)
-		throws PortalException {
+			long groupId, String className, long[] categoryIds,
+			String[] tagNames)
+		throws PortalException, SystemException {
 
 		AssetEntryValidator validator = (AssetEntryValidator)InstancePool.get(
 			PropsValues.ASSET_ENTRY_VALIDATOR);
 
-		validator.validate(className, categoryIds, tagNames);
+		validator.validate(groupId, className, categoryIds, tagNames);
 	}
 
 	protected AssetEntry getEntry(Document document)
