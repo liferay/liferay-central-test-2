@@ -208,7 +208,7 @@
 			</license>
 		</licenses>
 		<comments>
-			See LPS-7314.
+			This was recompiled for compatibility with JDK 5.
 		</comments>
 	</library>
 	<library>
