@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -557,10 +558,13 @@ public class PortletExporter {
 					expandoColumnElement, "default-data",
 					expandoColumn.getDefaultData());
 
-				Element typeSettingsElement =
-					expandoColumnElement.addElement("type-settings");
-				typeSettingsElement.addCDATA(
-						expandoColumn.getTypeSettingsProperties().toString());
+				Element typeSettingsElement = expandoColumnElement.addElement(
+					"type-settings");
+
+				UnicodeProperties typeSettingsProperties =
+					expandoColumn.getTypeSettingsProperties();
+
+				typeSettingsElement.addCDATA(typeSettingsProperties.toString());
 			}
 		}
 
