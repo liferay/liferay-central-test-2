@@ -241,7 +241,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								<c:when test="<%= propertyDisplayType.equals(ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX) %>">
 
 									<%
-									if (((double [])value).length == 0 ) {
+									if (value.length == 0) {
 										value = defaultValue;
 									}
 
@@ -304,7 +304,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								<c:when test="<%= propertyDisplayType.equals(ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX) %>">
 
 									<%
-									if (((float [])value).length == 0 ) {
+									if (value.length == 0) {
 										value = defaultValue;
 									}
 
@@ -367,7 +367,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								<c:when test="<%= propertyDisplayType.equals(ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX) %>">
 
 									<%
-									if (((int [])value).length == 0 ) {
+									if (value.length == 0) {
 										value = defaultValue;
 									}
 
@@ -430,7 +430,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								<c:when test="<%= propertyDisplayType.equals(ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX) %>">
 
 									<%
-									if (((long [])value).length == 0 ) {
+									if (value.length == 0) {
 										value = defaultValue;
 									}
 
@@ -494,7 +494,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								<c:when test="<%= propertyDisplayType.equals(ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX) %>">
 
 									<%
-									if (((short [])value).length == 0 ) {
+									if (value.length == 0) {
 										value = defaultValue;
 									}
 
