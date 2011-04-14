@@ -37,7 +37,7 @@ public class StringBundler {
 
 	public StringBundler(int initialCapacity) {
 		if (initialCapacity <= 0) {
-			throw new IllegalArgumentException();
+			initialCapacity = _DEFAULT_ARRAY_CAPACITY;
 		}
 
 		_array = new String[initialCapacity];
