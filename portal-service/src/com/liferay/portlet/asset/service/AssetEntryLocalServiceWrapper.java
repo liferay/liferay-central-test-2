@@ -446,10 +446,12 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 		return _assetEntryLocalService.updateVisible(className, classPK, visible);
 	}
 
-	public void validate(java.lang.String className, long[] categoryIds,
-		java.lang.String[] tagNames)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		_assetEntryLocalService.validate(className, categoryIds, tagNames);
+	public void validate(long groupId, java.lang.String className,
+		long[] categoryIds, java.lang.String[] tagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_assetEntryLocalService.validate(groupId, className, categoryIds,
+			tagNames);
 	}
 
 	public AssetEntryLocalService getWrappedAssetEntryLocalService() {

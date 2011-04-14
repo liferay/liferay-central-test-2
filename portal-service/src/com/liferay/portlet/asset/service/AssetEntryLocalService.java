@@ -381,7 +381,8 @@ public interface AssetEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void validate(java.lang.String className, long[] categoryIds,
-		java.lang.String[] tagNames)
-		throws com.liferay.portal.kernel.exception.PortalException;
+	public void validate(long groupId, java.lang.String className,
+		long[] categoryIds, java.lang.String[] tagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }
