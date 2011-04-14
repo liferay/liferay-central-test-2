@@ -168,15 +168,14 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	public JournalArticle getArticle(long id)
 		throws PortalException, SystemException {
 
-		JournalArticle article =
-			journalArticleLocalService.getArticle(id);
+		JournalArticle article = journalArticleLocalService.getArticle(id);
 
 		JournalArticlePermission.check(
 			getPermissionChecker(), article, ActionKeys.VIEW);
 
 		return article;
 	}
-	
+
 	public JournalArticle getArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
