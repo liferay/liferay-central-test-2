@@ -557,9 +557,10 @@ public class PortletExporter {
 					expandoColumnElement, "default-data",
 					expandoColumn.getDefaultData());
 
-				DocUtil.add(
-					expandoColumnElement, "type-settings",
-					expandoColumn.getTypeSettings());
+				Element typeSettingsElement =
+					expandoColumnElement.addElement("type-settings");
+				typeSettingsElement.addCDATA(
+						expandoColumn.getTypeSettingsProperties().toString());
 			}
 		}
 
