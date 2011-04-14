@@ -156,7 +156,7 @@ if (organization != null) {
 <%
 Organization parentOrganization = null;
 
-if ((parentOrganizationId == OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) && !permissionChecker.isCompanyAdmin()) {
+if ((organization == null) && (parentOrganizationId == OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) && !permissionChecker.isCompanyAdmin()) {
 	List<Organization> manageableOrganizations = new ArrayList<Organization>();
 
 	for (Organization curOrganization : user.getOrganizations()) {
