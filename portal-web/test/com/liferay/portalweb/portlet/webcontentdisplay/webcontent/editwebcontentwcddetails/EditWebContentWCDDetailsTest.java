@@ -56,6 +56,7 @@ public class EditWebContentWCDDetailsTest extends BaseTestCase {
 		selenium.type("_15_title",
 			RuntimeVariables.replace("WCD Web Content Test Title Edit"));
 		selenium.saveScreenShotAndSource();
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,40 +64,8 @@ public class EditWebContentWCDDetailsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"_15_structure_el_TextAreaField_content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isVisible(
+							"//td[@id='cke_contents__15__15_structure_el_TextAreaField_content']/iframe")) {
 					break;
 				}
 			}
@@ -108,8 +77,7 @@ public class EditWebContentWCDDetailsTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.selectFrame(
-			"//iframe[@id='_15_structure_el_TextAreaField_content']");
-		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
+			"//td[@id='cke_contents__15__15_structure_el_TextAreaField_content']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a test wcd web content. Edit."));
 		selenium.selectFrame("relative=top");
