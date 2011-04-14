@@ -53,8 +53,26 @@ public class AddBlogsEntry2Test extends BaseTestCase {
 			RuntimeVariables.replace("Blogs2 Entry2 Title2"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
-		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//td[@id='cke_contents__33_editor']/iframe")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.selectFrame("//td[@id='cke_contents__33_editor']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("Blogs2 Entry2 Content2."));
 		selenium.selectFrame("relative=top");

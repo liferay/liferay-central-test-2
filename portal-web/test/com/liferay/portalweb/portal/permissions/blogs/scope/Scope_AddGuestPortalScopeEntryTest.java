@@ -80,39 +80,8 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_33_editor")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isVisible(
+							"//td[@id='cke_contents__33_editor']/iframe")) {
 					break;
 				}
 			}
@@ -123,8 +92,7 @@ public class Scope_AddGuestPortalScopeEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.selectFrame("//iframe[@id='_33_editor']");
-		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
+		selenium.selectFrame("//td[@id='cke_contents__33_editor']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is a guest portal scope permissions blogs entry"));
