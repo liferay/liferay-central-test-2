@@ -20,7 +20,7 @@ PortletPreferences preferences = renderRequest.getPreferences();
 long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
 
 boolean multiValued = true;
-boolean allRequired = false;
+boolean required = false;
 
 long[] selectedClassNameIds = null;
 long[] requiredClassNameIds = null;
@@ -34,7 +34,7 @@ if (vocabulary != null) {
 	requiredClassNameIds = StringUtil.split(settingsProperties.getProperty("requiredClassNameIds"), 0L);
 
 	if ((requiredClassNameIds != null) && _isDefaultClassNameIds(requiredClassNameIds)) {
-		allRequired = true;
+		required = true;
 	}
 }
 
@@ -75,7 +75,7 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 
 					</aui:select>
 
-					<aui:input cssClass="vocabulary-checkbox" name="required" type="checkbox" value="<%= allRequired %>" />
+					<aui:input cssClass="vocabulary-checkbox" name="required" type="checkbox" value="<%= required %>" />
 				</div>
 			</div>
 
