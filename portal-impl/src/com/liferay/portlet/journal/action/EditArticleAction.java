@@ -213,6 +213,7 @@ public class EditArticleAction extends PortletAction {
 			}
 			else if (e instanceof AssetCategoryException ||
 					 e instanceof AssetTagException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

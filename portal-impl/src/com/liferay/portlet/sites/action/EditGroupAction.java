@@ -93,7 +93,7 @@ public class EditGroupAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.sites_admin.error");
 			}
-			else if (e instanceof AssetCategoryException || 
+			else if (e instanceof AssetCategoryException ||
 					 e instanceof AssetTagException ||
 					 e instanceof DuplicateGroupException ||
 					 e instanceof GroupFriendlyURLException ||
