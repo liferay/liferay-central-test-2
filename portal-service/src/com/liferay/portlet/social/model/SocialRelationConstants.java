@@ -38,9 +38,9 @@ public class SocialRelationConstants {
 
 	public static final int TYPE_UNI_PARENT = 7;
 
-	public static final int TYPE_UNI_SUPERVISOR = 10;
+	public static final int TYPE_UNI_SUBORDINATE = 10;
 
-	public static final int TYPE_UNI_SUBORDINATE = 11;
+	public static final int TYPE_UNI_SUPERVISOR = 11;
 
 	public static boolean isTypeBi(int type) {
 		return !isTypeUni(type);
