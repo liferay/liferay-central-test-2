@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  */
 public class BaseAssetEntryValidator implements AssetEntryValidator {
 
+	@SuppressWarnings("unused")
 	public void validate(
 			long groupId, String className, long[] categoryIds,
 			String[] entryNames)
