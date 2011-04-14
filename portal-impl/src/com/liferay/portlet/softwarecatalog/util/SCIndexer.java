@@ -142,10 +142,10 @@ public class SCIndexer extends BaseIndexer {
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
-		document.addText(Field.USER_NAME, userName);
+		document.addKeyword(Field.USER_NAME, userName, true);
 
-		document.addText(Field.TITLE, name);
-		document.addText(Field.CONTENT, content);
+		document.addKeyword(Field.TITLE, name, true);
+		document.addKeyword(Field.CONTENT, content, true);
 
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());

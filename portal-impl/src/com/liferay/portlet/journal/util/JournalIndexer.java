@@ -151,7 +151,9 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
-		document.addLocalizedText(Field.TITLE, titleMap);
+		document.addLocalizedText("titleMap", titleMap);
+		document.addKeyword(
+			Field.TITLE, article.getTitle(LocaleUtil.getDefault()), true);
 
 		processStructure(structure, document, article.getContent());
 
@@ -170,15 +172,19 @@ public class JournalIndexer extends BaseIndexer {
 				article.getContentByLocale(languageId));
 
 			if (languageId.equals(defaultLangaugeId)) {
-				document.addText(Field.CONTENT, content);
+				document.addKeyword(Field.CONTENT, content, true);
 			}
 
-			document.addText(
+			document.addKeyword(
 				Field.CONTENT.concat(StringPool.UNDERLINE).concat(languageId),
-				content);
+				content, true);
 		}
 
-		document.addLocalizedText(Field.DESCRIPTION, descriptionMap);
+		document.addLocalizedText("descriptionMap", descriptionMap);
+		document.addKeyword(
+			Field.DESCRIPTION, article.getDescription(LocaleUtil.getDefault()),
+			true);
+
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);

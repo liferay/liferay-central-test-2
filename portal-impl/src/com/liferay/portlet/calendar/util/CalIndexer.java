@@ -102,10 +102,10 @@ public class CalIndexer extends BaseIndexer {
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
-		document.addText(Field.USER_NAME, userName);
+		document.addKeyword(Field.USER_NAME, userName, true);
 
-		document.addText(Field.TITLE, title);
-		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.TITLE, title, true);
+		document.addKeyword(Field.DESCRIPTION, description, true);
 		document.addKeyword(Field.TYPE, type);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
