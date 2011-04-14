@@ -38,15 +38,21 @@ public class SocialRelationConstants {
 
 	public static final int TYPE_UNI_PARENT = 7;
 
+	public static final int TYPE_UNI_SUPERVISOR = 10;
+
+	public static final int TYPE_UNI_SUBORDINATE = 11;
+
 	public static boolean isTypeBi(int type) {
 		return !isTypeUni(type);
 	}
 
 	public static boolean isTypeUni(int type) {
-		if ((type == SocialRelationConstants.TYPE_UNI_ENEMY) ||
-			(type == SocialRelationConstants.TYPE_UNI_CHILD) ||
+		if ((type == SocialRelationConstants.TYPE_UNI_CHILD) ||
+			(type == SocialRelationConstants.TYPE_UNI_ENEMY) ||
 			(type == SocialRelationConstants.TYPE_UNI_FOLLOWER) ||
-			(type == SocialRelationConstants.TYPE_UNI_PARENT)) {
+			(type == SocialRelationConstants.TYPE_UNI_PARENT) ||
+			(type == SocialRelationConstants.TYPE_UNI_SUBORDINATE) ||
+			(type == SocialRelationConstants.TYPE_UNI_SUPERVISOR)) {
 
 			return true;
 		}
