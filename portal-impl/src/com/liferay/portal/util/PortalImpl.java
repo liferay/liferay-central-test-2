@@ -161,6 +161,7 @@ import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
@@ -4399,14 +4400,11 @@ public class PortalImpl implements Portal {
 	}
 
 	public String transformCustomSQL(String sql) {
-		if ((_customSqlClassNames == null) ||
-			(_customSqlClassNameIds == null)) {
-
+		if ((_customSqlKeys == null) || (_customSqlValues == null)) {
 			_initCustomSQL();
 		}
 
-		return StringUtil.replace(
-			sql, _customSqlClassNames, _customSqlClassNameIds);
+		return StringUtil.replace(sql, _customSqlKeys, _customSqlValues);
 	}
 
 	public PortletMode updatePortletMode(
@@ -4943,7 +4941,7 @@ public class PortalImpl implements Portal {
 	}
 
 	private void _initCustomSQL() {
-		_customSqlClassNames = new String[] {
+		_customSqlKeys = new String[] {
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.GROUP$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.LAYOUT$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
@@ -4960,29 +4958,53 @@ public class PortalImpl implements Portal {
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL." +
 				"MBMESSAGE$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]",
+			"[$SOCIAL_RELATION_TYPE_BI_COWORKER$]",
+			"[$SOCIAL_RELATION_TYPE_BI_FRIEND$]",
+			"[$SOCIAL_RELATION_TYPE_BI_ROMANTIC_PARTNER$]",
+			"[$SOCIAL_RELATION_TYPE_BI_SIBLING$]",
+			"[$SOCIAL_RELATION_TYPE_BI_SPOUSE$]",
+			"[$SOCIAL_RELATION_TYPE_UNI_CHILD$]",
+			"[$SOCIAL_RELATION_TYPE_UNI_ENEMY$]",
+			"[$SOCIAL_RELATION_TYPE_UNI_FOLLOWER$]",
+			"[$SOCIAL_RELATION_TYPE_UNI_PARENT$]",
+			"[$SOCIAL_RELATION_TYPE_UNI_SUBORDINATE$]",
+			"[$SOCIAL_RELATION_TYPE_UNI_SUPERVISOR$]",
 			"[$FALSE$]",
 			"[$TRUE$]"
 		};
 
 		DB db = DBFactoryUtil.getDB();
 
-		_customSqlClassNameIds = new String[] {
-			String.valueOf(PortalUtil.getClassNameId(Group.class)),
-			String.valueOf(PortalUtil.getClassNameId(Layout.class)),
-			String.valueOf(PortalUtil.getClassNameId(Organization.class)),
-			String.valueOf(PortalUtil.getClassNameId(Role.class)),
-			String.valueOf(PortalUtil.getClassNameId(User.class)),
-			String.valueOf(PortalUtil.getClassNameId(UserGroup.class)),
-			String.valueOf(PortalUtil.getClassNameId(BlogsEntry.class)),
-			String.valueOf(PortalUtil.getClassNameId(BookmarksEntry.class)),
-			String.valueOf(PortalUtil.getClassNameId(CalEvent.class)),
-			String.valueOf(PortalUtil.getClassNameId(DLFileEntry.class)),
-			String.valueOf(PortalUtil.getClassNameId(IGImage.class)),
-			String.valueOf(PortalUtil.getClassNameId(MBMessage.class)),
-			String.valueOf(PortalUtil.getClassNameId(WikiPage.class)),
+		Object[] customSqlValues = new Object[] {
+			PortalUtil.getClassNameId(Group.class),
+			PortalUtil.getClassNameId(Layout.class),
+			PortalUtil.getClassNameId(Organization.class),
+			PortalUtil.getClassNameId(Role.class),
+			PortalUtil.getClassNameId(User.class),
+			PortalUtil.getClassNameId(UserGroup.class),
+			PortalUtil.getClassNameId(BlogsEntry.class),
+			PortalUtil.getClassNameId(BookmarksEntry.class),
+			PortalUtil.getClassNameId(CalEvent.class),
+			PortalUtil.getClassNameId(DLFileEntry.class),
+			PortalUtil.getClassNameId(IGImage.class),
+			PortalUtil.getClassNameId(MBMessage.class),
+			PortalUtil.getClassNameId(WikiPage.class),
+			SocialRelationConstants.TYPE_BI_COWORKER,
+			SocialRelationConstants.TYPE_BI_FRIEND,
+			SocialRelationConstants.TYPE_BI_ROMANTIC_PARTNER,
+			SocialRelationConstants.TYPE_BI_SIBLING,
+			SocialRelationConstants.TYPE_BI_SPOUSE,
+			SocialRelationConstants.TYPE_UNI_CHILD,
+			SocialRelationConstants.TYPE_UNI_ENEMY,
+			SocialRelationConstants.TYPE_UNI_FOLLOWER,
+			SocialRelationConstants.TYPE_UNI_PARENT,
+			SocialRelationConstants.TYPE_UNI_SUBORDINATE,
+			SocialRelationConstants.TYPE_UNI_SUPERVISOR,
 			db.getTemplateFalse(),
 			db.getTemplateTrue()
 		};
+
+		_customSqlValues = ArrayUtil.toStringArray(customSqlValues);
 	}
 
 	private static final String _J_SECURITY_CHECK = "j_security_check";
@@ -5020,8 +5042,8 @@ public class PortalImpl implements Portal {
 	private String _cdnHostHttps;
 	private String _computerAddress;
 	private String _computerName;
-	private String[] _customSqlClassNameIds;
-	private String[] _customSqlClassNames;
+	private String[] _customSqlKeys;
+	private String[] _customSqlValues;
 	private String _globalLibDir;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;
