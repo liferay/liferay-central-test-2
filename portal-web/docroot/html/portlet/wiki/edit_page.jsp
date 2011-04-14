@@ -196,6 +196,8 @@ if (Validator.isNull(redirect)) {
 	<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-title" />
 	<liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
 
+	<liferay-ui:asset-categories-error />
+
 	<liferay-ui:asset-tags-error />
 
 	<c:if test="<%= newPage %>">

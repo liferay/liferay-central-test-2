@@ -39,6 +39,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.blogs.EntryContentException;
@@ -205,7 +206,8 @@ public class EditEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof AssetTagException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

@@ -171,6 +171,8 @@ if (Validator.isNull(redirect)) {
 	<liferay-ui:error exception="<%= FileNameException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
 	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
+	<liferay-ui:asset-categories-error />
+
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= message %>" model="<%= MBMessage.class %>" />

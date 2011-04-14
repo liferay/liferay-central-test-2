@@ -90,6 +90,8 @@ if (image != null) {
 	<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
+	<liferay-ui:asset-categories-error />
+
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= image %>" model="<%= IGImage.class %>" />

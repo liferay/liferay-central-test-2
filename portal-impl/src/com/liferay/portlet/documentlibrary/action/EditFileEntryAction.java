@@ -35,6 +35,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -160,7 +161,8 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof AssetTagException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

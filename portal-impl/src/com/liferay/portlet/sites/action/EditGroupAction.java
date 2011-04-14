@@ -42,6 +42,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.sites.util.CommunitiesUtil;
 
@@ -92,7 +93,8 @@ public class EditGroupAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.sites_admin.error");
 			}
-			else if (e instanceof AssetTagException ||
+			else if (e instanceof AssetCategoryException || 
+					 e instanceof AssetTagException ||
 					 e instanceof DuplicateGroupException ||
 					 e instanceof GroupFriendlyURLException ||
 					 e instanceof GroupNameException ||

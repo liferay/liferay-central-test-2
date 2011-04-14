@@ -70,6 +70,8 @@ String newEntryKey = ParamUtil.getString(request, "newEntryKey");
 	<liferay-ui:error exception="<%= EntryEntryKeyException.class %>" message="please-enter-a-valid-id" />
 	<liferay-ui:error exception="<%= EntryNameException.class %>" message="please-enter-a-valid-name" />
 
+	<liferay-ui:asset-categories-error />
+
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= entry %>" model="<%= DDLEntry.class %>" />

@@ -118,6 +118,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	<liferay-ui:error exception="<%= EventStartDateException.class %>" message="please-enter-a-valid-start-date" />
 	<liferay-ui:error exception="<%= EventTitleException.class %>" message="please-enter-a-valid-title" />
 
+	<liferay-ui:asset-categories-error />
+
+	<liferay-ui:asset-tags-error />
+
 	<aui:model-context bean="<%= event %>" model="<%= CalEvent.class %>" />
 
 	<aui:fieldset>

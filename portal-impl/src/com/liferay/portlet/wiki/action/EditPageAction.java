@@ -30,6 +30,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -122,7 +123,8 @@ public class EditPageAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof AssetTagException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {

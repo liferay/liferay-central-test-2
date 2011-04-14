@@ -54,6 +54,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 
+	<liferay-ui:asset-categories-error />
+
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />

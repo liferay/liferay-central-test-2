@@ -173,6 +173,8 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
 
+	<liferay-ui:asset-categories-error />
+
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
