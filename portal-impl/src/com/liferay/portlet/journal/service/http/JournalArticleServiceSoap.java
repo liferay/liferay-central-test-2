@@ -146,6 +146,20 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
+		long id) throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(id);
+
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
 		long groupId, java.lang.String articleId) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(groupId,

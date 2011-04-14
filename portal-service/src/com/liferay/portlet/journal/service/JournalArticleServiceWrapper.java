@@ -132,6 +132,12 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			serviceContext);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticle getArticle(long id)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleService.getArticle(id);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,

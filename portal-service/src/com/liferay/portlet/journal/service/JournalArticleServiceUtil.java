@@ -144,6 +144,13 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
+		long id)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArticle(id);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
