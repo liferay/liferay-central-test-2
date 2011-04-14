@@ -1684,6 +1684,10 @@ public class PortalImpl implements Portal {
 			"p_p_id", new String[] {defaultAssetPublisherPortletId});
 		actualParams.put("p_p_lifecycle", new String[] {"0"});
 
+		actualParams.put(
+			"mainJournalArticleId",
+			new String[] {String.valueOf(article.getId())});
+
 		if (Validator.isNull(
 				currentDefaultAssetPublisherPortletId)) {
 

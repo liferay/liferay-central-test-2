@@ -37,6 +37,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.io.Serializable;
 
@@ -175,6 +176,10 @@ public class ThemeDisplay implements Serializable {
 
 	public Locale getLocale() {
 		return _locale;
+	}
+
+	public JournalArticle getMainJournalArticle() {
+		return _mainJournalArticle;
 	}
 
 	public long getParentGroupId() {
@@ -792,6 +797,10 @@ public class ThemeDisplay implements Serializable {
 		_locale = locale;
 	}
 
+	public void setMainJournalArticle(JournalArticle mainJournalArticle) {
+		_mainJournalArticle = mainJournalArticle;
+	}
+
 	public void setLookAndFeel(
 		String contextPath, Theme theme, ColorScheme colorScheme) {
 
@@ -1205,6 +1214,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _lifecycleRender;
 	private boolean _lifecycleResource;
 	private Locale _locale;
+	private JournalArticle _mainJournalArticle;
 	private Group _parentGroup;
 	private long _parentGroupId;
 	private String _pathApplet = StringPool.BLANK;

@@ -99,6 +99,9 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.journal.NoSuchArticleException;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 
 import java.io.File;
 
@@ -1559,6 +1562,25 @@ public class ServicePreAction extends Action {
 			cdnHost.concat(contextPath).concat("/html/js"));
 		themeDisplay.setPathMain(mainPath);
 		themeDisplay.setPathSound(contextPath.concat("/html/sound"));
+
+		// Main Journal Article
+
+		long mainJournalArticleId =
+			ParamUtil.getLong(request, "mainJournalArticleId", 0);
+
+		if (mainJournalArticleId > 0) {
+			try{
+				JournalArticle mainArticle =
+					JournalArticleServiceUtil.getArticle(mainJournalArticleId);
+
+				themeDisplay.setMainJournalArticle(mainArticle);
+			}
+			catch (NoSuchArticleException nsae) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsae.getMessage());
+				}
+			}
+		}
 
 		// Icons
 
