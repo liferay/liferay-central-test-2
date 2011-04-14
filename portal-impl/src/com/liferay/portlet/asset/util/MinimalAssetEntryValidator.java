@@ -31,8 +31,6 @@ public class MinimalAssetEntryValidator extends BaseAssetEntryValidator {
 		if ((tagNames == null) || (tagNames.length == 0)) {
 			throw new AssetTagException(AssetTagException.AT_LEAST_ONE_TAG);
 		}
-
-		super.validate(groupId, className, categoryIds, tagNames);
 	}
 
 }
