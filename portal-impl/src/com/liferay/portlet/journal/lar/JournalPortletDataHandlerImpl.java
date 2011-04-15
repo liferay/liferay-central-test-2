@@ -1572,6 +1572,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.importClassedModel(
 			article, importedArticle, _NAMESPACE);
 
+		articleIds.put(article.getArticleId(), importedArticle.getArticleId());
+
 		if (!articleId.equals(importedArticle.getArticleId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
@@ -1994,6 +1996,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.importClassedModel(
 			structure, importedStructure, _NAMESPACE);
 
+		structureIds.put(structureId, importedStructure.getStructureId());
+
 		if (!structureId.equals(importedStructure.getStructureId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
@@ -2038,6 +2042,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			autoTemplateId = true;
 		}
+
+		Map<String, String> templateIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalTemplate.class);
 
 		Map<String, String> structureIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
@@ -2141,6 +2149,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(
 			template, importedTemplate, _NAMESPACE);
+
+		templateIds.put(
+			template.getTemplateId(), importedTemplate.getTemplateId());
 
 		if (!templateId.equals(importedTemplate.getTemplateId())) {
 			if (_log.isWarnEnabled()) {

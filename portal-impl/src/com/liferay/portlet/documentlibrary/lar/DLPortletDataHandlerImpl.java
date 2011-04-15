@@ -801,6 +801,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(
 			folder, importedFolder, _NAMESPACE);
+
+		folderPKs.put(folder.getFolderId(), importedFolder.getFolderId());
 	}
 
 	protected static boolean isDuplicateFileEntry(
