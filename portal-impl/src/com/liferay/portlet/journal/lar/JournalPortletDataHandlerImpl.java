@@ -1350,6 +1350,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					structureUuid, portletDataContext.getScopeGroupId());
 
 			if (existingStructure == null) {
+				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+					portletDataContext.getCompanyId());
+
+				long companyGroupId = companyGroup.getGroupId();
+
+				existingStructure = JournalStructureUtil.fetchByUUID_G(
+					structureUuid, companyGroupId);
+			}
+
+			if (existingStructure == null) {
 				String newStructureId = structureIds.get(
 					article.getStructureId());
 
@@ -1386,6 +1396,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			JournalTemplate existingTemplate =
 				JournalTemplateUtil.fetchByUUID_G(
 					templateUuid, portletDataContext.getScopeGroupId());
+
+			if (existingTemplate == null) {
+				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+					portletDataContext.getCompanyId());
+
+				long companyGroupId = companyGroup.getGroupId();
+
+				existingTemplate = JournalTemplateUtil.fetchByUUID_G(
+					templateUuid, companyGroupId);
+			}
 
 			if (existingTemplate == null) {
 				String newTemplateId = templateIds.get(article.getTemplateId());
@@ -1494,6 +1514,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				JournalArticleResourceUtil.fetchByUUID_G(
 					articleResourceUuid, portletDataContext.getScopeGroupId());
 
+			if (articleResource == null) {
+				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+					portletDataContext.getCompanyId());
+
+				long companyGroupId = companyGroup.getGroupId();
+
+				articleResource = JournalArticleResourceUtil.fetchByUUID_G(
+					articleResourceUuid, companyGroupId);
+			}
+
 			serviceContext.setUuid(articleResourceUuid);
 
 			JournalArticle existingArticle = null;
@@ -1573,6 +1603,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			article, importedArticle, _NAMESPACE);
 
 		articleIds.put(article.getArticleId(), importedArticle.getArticleId());
+
+		articleElement.addAttribute(
+			"imported-article-group-id",
+			String.valueOf(importedArticle.getGroupId()));
 
 		if (!articleId.equals(importedArticle.getArticleId())) {
 			if (_log.isWarnEnabled()) {
@@ -1967,6 +2001,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					structure.getUuid(), portletDataContext.getScopeGroupId());
 
 			if (existingStructure == null) {
+				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+					portletDataContext.getCompanyId());
+
+				long companyGroupId = companyGroup.getGroupId();
+
+				existingStructure = JournalStructureUtil.fetchByUUID_G(
+					structure.getUuid(), companyGroupId);
+			}
+
+			if (existingStructure == null) {
 				serviceContext.setUuid(structure.getUuid());
 
 				importedStructure =
@@ -2109,6 +2153,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			JournalTemplate existingTemplate =
 				JournalTemplateUtil.fetchByUUID_G(
 					template.getUuid(), portletDataContext.getScopeGroupId());
+
+			if (existingTemplate == null) {
+				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+					portletDataContext.getCompanyId());
+
+				long companyGroupId = companyGroup.getGroupId();
+
+				existingTemplate = JournalTemplateUtil.fetchByUUID_G(
+					template.getUuid(), companyGroupId);
+			}
 
 			if (existingTemplate == null) {
 				serviceContext.setUuid(template.getUuid());
