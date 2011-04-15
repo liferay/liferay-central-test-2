@@ -82,22 +82,13 @@ public class ExpandoColumnConstants {
 
 	public static final String LONG_LABEL = "custom.field.long";
 
-	public static final String PROPERTY_DISPLAY_TYPE = "display-type";
-
-	public static final String PROPERTY_DISPLAY_TYPE_CHECKBOX = "checkbox";
-
-	public static final String PROPERTY_DISPLAY_TYPE_RADIO = "radio";
-
-	public static final String PROPERTY_DISPLAY_TYPE_SELECTION_LIST =
-		"selection-list";
-
-	public static final String PROPERTY_DISPLAY_TYPE_TEXT_BOX = "text-box";
-
 	public static final String PROPERTY_HEIGHT = "height";
 
 	public static final String PROPERTY_HIDDEN = "hidden";
 
 	public static final String PROPERTY_SECRET = "secret";
+
+	public static final String PROPERTY_SELECTION = "selection";
 
 	public static final String PROPERTY_VISIBLE_WITH_UPDATE_PERMISSION =
 		"visible-with-update-permission";

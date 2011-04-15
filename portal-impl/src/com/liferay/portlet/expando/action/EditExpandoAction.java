@@ -260,20 +260,20 @@ public class EditExpandoAction extends PortletAction {
 		if (preset.equals("PresetSelectionIntegerArray()")) {
 			type = ExpandoColumnConstants.INTEGER_ARRAY;
 			properties.setProperty(
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE,
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_SELECTION_LIST);
+				ExpandoColumnConstants.PROPERTY_SELECTION,
+				Boolean.TRUE.toString());
 		}
 		else if (preset.equals("PresetSelectionDoubleArray()")) {
 			type = ExpandoColumnConstants.DOUBLE_ARRAY;
 			properties.setProperty(
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE,
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_SELECTION_LIST);
+				ExpandoColumnConstants.PROPERTY_SELECTION,
+				Boolean.TRUE.toString());
 		}
 		else if (preset.equals("PresetSelectionStringArray()")) {
 			type = ExpandoColumnConstants.STRING_ARRAY;
 			properties.setProperty(
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE,
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_SELECTION_LIST);
+				ExpandoColumnConstants.PROPERTY_SELECTION,
+				Boolean.TRUE.toString());
 		}
 		else if (preset.equals("PresetTextBox()")) {
 			type = ExpandoColumnConstants.STRING;
