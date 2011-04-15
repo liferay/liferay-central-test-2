@@ -107,7 +107,7 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setParameter("articleId", article.getArticleId());
 			%>
 
-				<%@ include file="/html/portlet/journal/article_columns.jsp" %>
+				<%@ include file="/html/portlet/journal/article_columns.jspf" %>
 
 			<%
 
