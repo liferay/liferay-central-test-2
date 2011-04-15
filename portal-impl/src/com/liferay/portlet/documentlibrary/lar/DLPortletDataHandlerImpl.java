@@ -212,6 +212,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			is = portletDataContext.getZipEntryAsInputStream(binPath);
 		}
 
+		String folderUuid = StringPool.BLANK;
+
 		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == fileEntry.getFolderId())) {
 
@@ -222,6 +224,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				folderPath);
 
 			importFolder(portletDataContext, folderPath, folder);
+
+			folderUuid = folder.getUuid();
 
 			folderId = MapUtil.getLong(
 				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
@@ -285,7 +289,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					titleWithExtension, fileEntry.getDescription(), null,
 					is, fileEntry.getSize(), serviceContext);
 			}
-			else if (!isDuplicateFileEntry(fileEntry, existingFileEntry)) {
+			else if (!isDuplicateFileEntry(
+						fileEntry, folderUuid, existingFileEntry)) {
 				importedFileEntry = DLAppLocalServiceUtil.updateFileEntry(
 					userId, existingFileEntry.getFileEntryId(),
 					fileEntry.getTitle(), fileEntry.getTitle(),
@@ -799,13 +804,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static boolean isDuplicateFileEntry(
-		FileEntry fileEntry1, FileEntry fileEntry2) {
+		FileEntry fileEntry1, String folderUuid, FileEntry fileEntry2) {
 
 		try {
-			Folder folder1 = fileEntry1.getFolder();
 			Folder folder2 = fileEntry2.getFolder();
 
-			if ((folder1.getUuid().equals(folder2.getUuid())) &&
+			if ((folderUuid.equals(folder2.getUuid())) &&
 				(fileEntry1.getSize() == fileEntry2.getSize()) &&
 				(DLUtil.compareVersions(
 					fileEntry1.getVersion(), fileEntry2.getVersion()) == 0) &&
