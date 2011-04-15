@@ -76,7 +76,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		catch (Exception e) {
 			 _log.error(e, e);
 
-			throw new IllegalStateException("Unable to deserialize oject", e);
+			throw new IllegalStateException("Unable to deserialize object", e);
 		}
 	}
 
@@ -87,7 +87,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		catch (Exception e) {
 			 _log.error(e, e);
 
-			throw new IllegalStateException("Unable to deserialize oject", e);
+			throw new IllegalStateException("Unable to deserialize object", e);
 		}
 	}
 
