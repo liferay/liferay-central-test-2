@@ -105,34 +105,11 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 				rowURL.setParameter("articleId", article.getArticleId());
+			%>
 
-				// Article id
+				<%@ include file="/html/portlet/journal/article_columns.jsp" %>
 
-				row.addText(article.getArticleId(), rowURL);
-
-				// Title
-
-				row.addText(article.getTitle(locale), rowURL);
-
-				// Status
-
-				row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(article.getStatus())), rowURL);
-
-				// Modified date
-
-				row.addText(dateFormatDateTime.format(article.getModifiedDate()), rowURL);
-
-				// Display date
-
-				row.addText(dateFormatDateTime.format(article.getDisplayDate()), rowURL);
-
-				// Author
-
-				row.addText(HtmlUtil.escape(PortalUtil.getUserName(article.getUserId(), article.getUserName())), rowURL);
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/article_action.jsp");
+			<%
 
 				// Add result row
 
