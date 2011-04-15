@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.hellovelocity.portlet.addportletduplicate;
+package com.liferay.portalweb.portlet.hellovelocity.portlet.addportlethvduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletHVTest extends BaseTestCase {
-	public void testAddPortletHV() throws Exception {
+public class AddPortletHVDuplicateTest extends BaseTestCase {
+	public void testAddPortletHVDuplicate() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -42,10 +42,13 @@ public class AddPortletHVTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Hello Velocity Test Page",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Hello Velocity Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("More\u2026"),
+			selenium.getText("//a[@id='_145_addApplication']"));
+		selenium.clickAt("//a[@id='_145_addApplication']",
+			RuntimeVariables.replace("More\u2026"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,7 +56,8 @@ public class AddPortletHVTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("layout_configuration_content")) {
+				if (selenium.isVisible(
+							"//input[@id='layout_configuration_content']")) {
 					break;
 				}
 			}
@@ -64,7 +68,7 @@ public class AddPortletHVTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("layout_configuration_content",
+		selenium.typeKeys("//input[@id='layout_configuration_content']",
 			RuntimeVariables.replace("h"));
 		selenium.saveScreenShotAndSource();
 
@@ -74,7 +78,7 @@ public class AddPortletHVTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//div[@title='Hello Velocity']/p/a")) {
+				if (selenium.isVisible("//div[@title='Hello Velocity']")) {
 					break;
 				}
 			}
@@ -85,26 +89,6 @@ public class AddPortletHVTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Hello Velocity']/p/a",
-			RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//section")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isVisible("//section"));
+		assertFalse(selenium.isVisible("//div[@title='Hello Velocity']/p/a"));
 	}
 }

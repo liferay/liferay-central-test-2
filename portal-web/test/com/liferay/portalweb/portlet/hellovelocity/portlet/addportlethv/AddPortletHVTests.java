@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.hellovelocity.portlet.addportlet;
+package com.liferay.portalweb.portlet.hellovelocity.portlet.addportlethv;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,7 +22,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletTests extends BaseTests {
+public class AddPortletHVTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();

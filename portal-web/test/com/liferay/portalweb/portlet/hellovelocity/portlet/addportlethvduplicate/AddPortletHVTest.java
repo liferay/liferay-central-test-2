@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.hellovelocity.portlet.removeportlet;
+package com.liferay.portalweb.portlet.hellovelocity.portlet.addportlethvduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RemovePortletHVTest extends BaseTestCase {
-	public void testRemovePortletHV() throws Exception {
+public class AddPortletHVTest extends BaseTestCase {
+	public void testAddPortletHV() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -42,13 +42,13 @@ public class RemovePortletHVTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Hello Velocity Test Page",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Hello Velocity Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("//img[@alt='Remove']");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
-		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("More\u2026"),
+			selenium.getText("//a[@id='_145_addApplication']"));
+		selenium.clickAt("//a[@id='_145_addApplication']",
+			RuntimeVariables.replace("More\u2026"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +56,8 @@ public class RemovePortletHVTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("//section")) {
+				if (selenium.isElementPresent(
+							"//div[@title='Hello Velocity']/p/a")) {
 					break;
 				}
 			}
@@ -67,6 +68,26 @@ public class RemovePortletHVTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isElementPresent("//section"));
+		selenium.clickAt("//div[@title='Hello Velocity']/p/a",
+			RuntimeVariables.replace("Add"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

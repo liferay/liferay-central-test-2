@@ -15,9 +15,9 @@
 package com.liferay.portalweb.portlet.hellovelocity.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.hellovelocity.portlet.addportlet.AddPortletTests;
-import com.liferay.portalweb.portlet.hellovelocity.portlet.addportletduplicate.AddPortletDuplicateTests;
-import com.liferay.portalweb.portlet.hellovelocity.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.hellovelocity.portlet.addportlethv.AddPortletHVTests;
+import com.liferay.portalweb.portlet.hellovelocity.portlet.addportlethvduplicate.AddPortletHVDuplicateTests;
+import com.liferay.portalweb.portlet.hellovelocity.portlet.removeportlethv.RemovePortletHVTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,9 +30,9 @@ public class PortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletTests.suite());
-		testSuite.addTest(AddPortletDuplicateTests.suite());
-		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(AddPortletHVTests.suite());
+		testSuite.addTest(AddPortletHVDuplicateTests.suite());
+		testSuite.addTest(RemovePortletHVTests.suite());
 
 		return testSuite;
 	}

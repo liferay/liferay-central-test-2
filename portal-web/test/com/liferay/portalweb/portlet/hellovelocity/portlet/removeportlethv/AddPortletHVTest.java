@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.hellovelocity.portlet.removeportlet;
+package com.liferay.portalweb.portlet.hellovelocity.portlet.removeportlethv;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -42,10 +42,13 @@ public class AddPortletHVTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Hello Velocity Test Page",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Hello Velocity Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_145_addApplication", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("More\u2026"),
+			selenium.getText("//a[@id='_145_addApplication']"));
+		selenium.clickAt("//a[@id='_145_addApplication']",
+			RuntimeVariables.replace("More\u2026"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,28 +56,8 @@ public class AddPortletHVTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("layout_configuration_content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("layout_configuration_content",
-			RuntimeVariables.replace("h"));
-		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@title='Hello Velocity']/p/a")) {
+				if (selenium.isElementPresent(
+							"//div[@title='Hello Velocity']/p/a")) {
 					break;
 				}
 			}
@@ -86,7 +69,7 @@ public class AddPortletHVTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//div[@title='Hello Velocity']/p/a",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

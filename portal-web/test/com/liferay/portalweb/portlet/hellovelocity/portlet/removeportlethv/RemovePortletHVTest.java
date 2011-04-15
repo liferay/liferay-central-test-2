@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.hellovelocity.portlet.addportlet;
+package com.liferay.portalweb.portlet.hellovelocity.portlet.removeportlethv;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,53 +20,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPageHVTest extends BaseTestCase {
-	public void testAddPageHV() throws Exception {
+public class RemovePortletHVTest extends BaseTestCase {
+	public void testRemovePortletHV() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.clickAt("main-content", RuntimeVariables.replace(""));
-		selenium.clickAt("dockbar", RuntimeVariables.replace(""));
-		selenium.clickAt("navigation", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("addPage")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addPage", RuntimeVariables.replace(""));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.type("//input",
-			RuntimeVariables.replace("Hello Velocity Test Page"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("save", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,8 +42,31 @@ public class AddPageHVTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Hello Velocity Test Page",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Hello Velocity Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		selenium.click("//img[@alt='Remove']");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("//section")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isElementPresent("//section"));
 	}
 }
