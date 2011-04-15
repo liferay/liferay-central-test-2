@@ -143,7 +143,7 @@ public class FileMultiValueMap<K extends Serializable, V extends Serializable>
 		try {
 			con = _getConnection();
 
-			ps = con.prepareStatement("SELECT DISTINCT (key_) FROM Map ");
+			ps = con.prepareStatement("SELECT key_ FROM Map ");
 
 			rs = ps.executeQuery();
 
@@ -368,8 +368,7 @@ public class FileMultiValueMap<K extends Serializable, V extends Serializable>
 	}
 
 	private static final String _CREATE_SQL =
-		"CREATE TABLE Map (key_ BLOB not null, value_ BLOB not null, primary " +
-			"key (key_, value_))";
+		"CREATE TABLE Map (key_ BLOB not null, value_ BLOB not null)";
 
 	private static final String _KEY = "key_";
 
