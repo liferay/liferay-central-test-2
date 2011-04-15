@@ -109,6 +109,9 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				return doGetPermissionQuery_6(
 					companyId, groupIds, userId, className, query);
 			}
+			else {
+				return query;
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
