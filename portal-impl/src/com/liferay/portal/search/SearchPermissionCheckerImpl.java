@@ -109,15 +109,12 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				return doGetPermissionQuery_6(
 					companyId, groupIds, userId, className, query);
 			}
-			else {
-				return query;
-			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return null;
+		return query;
 	}
 
 	public void updatePermissionFields(long resourceId) {
