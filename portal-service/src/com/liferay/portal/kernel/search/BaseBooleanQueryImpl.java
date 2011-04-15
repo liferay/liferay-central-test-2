@@ -83,8 +83,8 @@ public abstract class BaseBooleanQueryImpl
 	}
 
 	protected String getTermFieldRemainderValues(
-			String field, String values, List<String> valuesList,
-			String pattern, String replacement) {
+		String field, String values, List<String> valuesList, String pattern,
+		String replacement) {
 
 		if (Validator.isNull(values)) {
 			return values;
