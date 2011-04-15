@@ -143,7 +143,7 @@ public class FileMultiValueMap<K extends Serializable, V extends Serializable>
 		try {
 			con = _getConnection();
 
-			ps = con.prepareStatement("SELECT key_ FROM Map ");
+			ps = con.prepareStatement("SELECT key_ FROM Map");
 
 			rs = ps.executeQuery();
 
