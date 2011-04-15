@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.helloworld.portlet.addportlet;
+package com.liferay.portalweb.portlet.helloworld.portlet.removeportlethw;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,13 +22,14 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletTests extends BaseTests {
+public class RemovePortletHWTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddPageHWTest.class);
 		testSuite.addTestSuite(AddPortletHWTest.class);
+		testSuite.addTestSuite(RemovePortletHWTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

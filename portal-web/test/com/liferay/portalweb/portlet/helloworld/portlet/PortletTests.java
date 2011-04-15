@@ -15,9 +15,9 @@
 package com.liferay.portalweb.portlet.helloworld.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.helloworld.portlet.addportlet.AddPortletTests;
-import com.liferay.portalweb.portlet.helloworld.portlet.addportletduplicate.AddPortletDuplicateTests;
-import com.liferay.portalweb.portlet.helloworld.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.helloworld.portlet.addportlethw.AddPortletHWTests;
+import com.liferay.portalweb.portlet.helloworld.portlet.addportlethwduplicate.AddPortletHWDuplicateTests;
+import com.liferay.portalweb.portlet.helloworld.portlet.removeportlethw.RemovePortletHWTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,9 +30,9 @@ public class PortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletTests.suite());
-		testSuite.addTest(AddPortletDuplicateTests.suite());
-		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(AddPortletHWTests.suite());
+		testSuite.addTest(AddPortletHWDuplicateTests.suite());
+		testSuite.addTest(RemovePortletHWTests.suite());
 
 		return testSuite;
 	}

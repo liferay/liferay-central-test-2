@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.helloworld.portlet.addportletduplicate;
+package com.liferay.portalweb.portlet.helloworld.portlet.addportlethwduplicate;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,7 +22,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletDuplicateTests extends BaseTests {
+public class AddPortletHWDuplicateTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();

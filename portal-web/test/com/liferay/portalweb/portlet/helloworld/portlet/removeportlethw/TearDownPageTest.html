@@ -15,23 +15,13 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>main-content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>navigation</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>dockbar</td>
-	<td></td>
+	<td>//div[@id='dockbar']</td>
+	<td>Dockbar</td>
 </tr>
 <tr>
 	<td>storeText</td>
-	<td>//nav[@id='breadcrumbs']/ul/li/span/a</td>
-	<td>guestCommunityName</td>
+	<td>//nav[@class='site-breadcrumbs']/ul/li[1]/span/a</td>
+	<td>guestCommunity</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -44,24 +34,9 @@
 	<td>Manage Pages</td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>main-content</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>navigation</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>dockbar</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForText</td>
 	<td>//div/div[3]/a</td>
-	<td>${guestCommunityName}</td>
+	<td>${guestCommunity}</td>
 </tr>
 <tr>
 	<td>store</td>
@@ -111,7 +86,7 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -146,7 +121,7 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -181,7 +156,7 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -216,7 +191,7 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -251,7 +226,7 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
