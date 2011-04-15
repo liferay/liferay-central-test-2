@@ -182,8 +182,6 @@ AUI().add(
 					_bindAlignFloatingPanelsEvent: function(contextPanel) {
 						var instance = this;
 
-						contextPanel.get('draggable');
-
 						var dragInstance = contextPanel.get('dragInstance');
 
 						dragInstance.on('end', function(event){
