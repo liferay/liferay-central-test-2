@@ -381,6 +381,10 @@ public class ResultRow {
 		return _restricted;
 	}
 
+	public void removeSearchEntry(int pos) {
+		_searchEntries.remove(pos);
+	}
+
 	public void setBold(boolean bold) {
 		_bold = bold;
 	}
