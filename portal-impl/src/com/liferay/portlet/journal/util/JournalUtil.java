@@ -322,8 +322,8 @@ public class JournalUtil {
 		return orderByComparator;
 	}
 
-	public static Tuple getArticles(
-		Hits hits) throws PortalException, SystemException {
+	public static Tuple getArticles(Hits hits)
+		throws PortalException, SystemException {
 
 		List<JournalArticle> articles = new ArrayList<JournalArticle>();
 		boolean corruptIndex = false;
@@ -345,8 +345,9 @@ public class JournalUtil {
 			catch (NoSuchArticleException nsae) {
 				corruptIndex = true;
 
-				_log.error("Article " + articleId +
-					" does not exist in the search index");
+				_log.error(
+					"Article " + articleId +
+						" does not exist in the search index");
 			}
 		}
 

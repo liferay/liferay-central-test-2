@@ -102,7 +102,6 @@ public class JournalIndexer extends BaseIndexer {
 		double version = article.getVersion();
 		Map<Locale, String> titleMap = article.getTitleMap();
 		Map<Locale, String> descriptionMap = article.getDescriptionMap();
-		long status = article.getStatus();
 		String type = article.getType();
 
 		String structureId = article.getStructureId();
@@ -128,6 +127,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		String templateId = article.getTemplateId();
 		Date displayDate = article.getDisplayDate();
+		long status = article.getStatus();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			JournalArticle.class.getName(), resourcePrimKey);
@@ -151,14 +151,14 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		document.addKeyword(Field.TITLE, article.getTitle(defaultLocale), true);
 		document.addLocalizedText("titleMap", titleMap);
-		document.addKeyword(
-			Field.TITLE, article.getTitle(LocaleUtil.getDefault()), true);
 
 		processStructure(structure, document, article.getContent());
 
-		String defaultLangaugeId = LocaleUtil.toLanguageId(
-			LocaleUtil.getDefault());
+		String defaultLangaugeId = LocaleUtil.toLanguageId(defaultLocale);
 
 		String[] languageIds = LocalizationUtil.getAvailableLocales(
 			article.getContent());
@@ -180,10 +180,9 @@ public class JournalIndexer extends BaseIndexer {
 				content, true);
 		}
 
-		document.addLocalizedText("descriptionMap", descriptionMap);
 		document.addKeyword(
-			Field.DESCRIPTION, article.getDescription(LocaleUtil.getDefault()),
-			true);
+			Field.DESCRIPTION, article.getDescription(defaultLocale), true);
+		document.addLocalizedText("descriptionMap", descriptionMap);
 
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
@@ -194,8 +193,8 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.ENTRY_CLASS_PK, articleId);
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
 		document.addKeyword(Field.VERSION, version);
-		document.addKeyword(Field.STATUS, status);
 		document.addKeyword(Field.TYPE, type);
+		document.addKeyword(Field.STATUS, status);
 
 		document.addKeyword("structureId", structureId);
 		document.addKeyword("templateId", templateId);
@@ -207,17 +206,17 @@ public class JournalIndexer extends BaseIndexer {
 	}
 
 	protected String doGetSortField(String orderByCol) {
-		if (orderByCol.equals("modified-date")) {
-			return Field.MODIFIED;
+		if (orderByCol.equals("display-date")) {
+			return "displayDate";
 		}
 		else if (orderByCol.equals("id")) {
 			return Field.ENTRY_CLASS_PK;
 		}
+		else if (orderByCol.equals("modified-date")) {
+			return Field.MODIFIED;
+		}
 		else if (orderByCol.equals("title")) {
 			return Field.TITLE;
-		}
-		else if (orderByCol.equals("display-date")) {
-			return "displayDate";
 		}
 		else {
 			return orderByCol;
@@ -368,14 +367,25 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
+	protected void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		String type = (String)searchContext.getAttribute("type");
+
+		if (Validator.isNotNull(type)) {
+			contextQuery.addRequiredTerm("type", type);
+		}
+	}
+
 	protected void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
+		addSearchTerm(searchQuery, searchContext, Field.CONTENT);
+		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK);
 		addSearchTerm(searchQuery, searchContext, Field.TITLE);
-		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION);
-		addSearchTerm(searchQuery, searchContext, Field.CONTENT);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE);
 		addSearchTerm(searchQuery, searchContext, Field.STATUS);
 
@@ -388,17 +398,6 @@ public class JournalIndexer extends BaseIndexer {
 			if (Validator.isNotNull(expandoAttributes)) {
 				addSearchExpando(searchQuery, searchContext, expandoAttributes);
 			}
-		}
-	}
-
-	protected void postProcessContextQuery(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		String type = (String)searchContext.getAttribute("type");
-
-		if (Validator.isNotNull(type)) {
-			contextQuery.addRequiredTerm("type", type);
 		}
 	}
 

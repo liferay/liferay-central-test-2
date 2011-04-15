@@ -76,7 +76,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 		searchTerms.setVersion(version);
 		searchTerms.setAdvancedSearch(true);
 
-		results = null;
+		List<JournalArticle> results = null;
 		%>
 
 		<c:choose>
@@ -92,7 +92,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			JournalArticle article = (JournalArticle)results.get(i);
+			JournalArticle article = results.get(i);
 
 			article = article.toEscapedModel();
 

@@ -65,7 +65,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			searchTerms.setVersion(-1);
 
-			List results = null;
+			List<JournalArticle> results = null;
 			%>
 
 			<c:choose>
@@ -93,7 +93,7 @@ portletURL.setParameter("tabs1", tabs1);
 			List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				JournalArticle article = (JournalArticle)results.get(i);
+				JournalArticle article = results.get(i);
 
 				article = article.toEscapedModel();
 

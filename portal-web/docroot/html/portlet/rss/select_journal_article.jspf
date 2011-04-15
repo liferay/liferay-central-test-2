@@ -48,7 +48,7 @@ ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTe
 
 searchTerms.setVersion(-1);
 
-List results = null;
+List<JournalArticle> results = null;
 %>
 
 <%@ include file="/html/portlet/journal/article_search_results.jspf" %>
@@ -57,7 +57,7 @@ List results = null;
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
-	JournalArticle article = (JournalArticle)results.get(i);
+	JournalArticle article = results.get(i);
 
 	long articleResourceId = article.getResourcePrimKey();
 

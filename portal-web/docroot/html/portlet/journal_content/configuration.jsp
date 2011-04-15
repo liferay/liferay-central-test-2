@@ -151,7 +151,7 @@ type = ParamUtil.getString(request, "type", type);
 
 	searchTerms.setVersion(-1);
 
-	List results = null;
+	List<JournalArticle> results = null;
 	%>
 
 	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
@@ -160,7 +160,7 @@ type = ParamUtil.getString(request, "type", type);
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		JournalArticle curArticle = (JournalArticle)results.get(i);
+		JournalArticle curArticle = results.get(i);
 
 		curArticle = curArticle.toEscapedModel();
 

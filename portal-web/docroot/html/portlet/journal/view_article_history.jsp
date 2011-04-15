@@ -66,7 +66,7 @@ portletURL.setParameter("articleId", article.getArticleId());
 	searchTerms.setAdvancedSearch(true);
 	searchTerms.setArticleId(article.getArticleId());
 
-	List results = null;
+	List<JournalArticle> results = null;
 	%>
 
 	<%@ include file="/html/portlet/journal/article_search_results.jspf" %>
@@ -87,7 +87,7 @@ portletURL.setParameter("articleId", article.getArticleId());
 	List resultRows = searchContainer.getResultRows();
 
 	for (int i = 0; i < results.size(); i++) {
-		JournalArticle articleVersion = (JournalArticle)results.get(i);
+		JournalArticle articleVersion = results.get(i);
 
 		articleVersion = articleVersion.toEscapedModel();
 
