@@ -287,6 +287,7 @@ String[][] categorySections = {mainSections};
 	<liferay-ui:form-navigator
 		categoryNames="<%= _CATEGORY_NAMES %>"
 		categorySections="<%= categorySections %>"
+		formId='<%= renderResponse.getNamespace() + "fm" %>'
 		jspPath="/html/portlet/layouts_admin/layout_set/"
 	/>
 </aui:form>

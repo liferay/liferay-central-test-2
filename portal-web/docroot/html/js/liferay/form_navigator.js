@@ -1,33 +1,33 @@
 AUI().add(
 	'liferay-form-navigator',
 	function(A) {
+		var AUI_HELPER_HIDDEN_ACCESSIBLE = 'aui-helper-hidden-accessible';
+
+		var FORM_SECTION = '.form-section';
+
+		var LIST_ITEM_SELECTED = 'li.selected';
+
+		var SECTION_ERROR = 'section-error';
+
+		var SELECTED = 'selected';
+
 		var FormNavigator = function(options) {
 			var instance = this;
 
 			instance._container = A.one(options.container);
 
+			Liferay.on(
+				'form:formRegistered',
+				A.bind(instance._onFormRegistered, instance, options)
+			);
+
 			instance._navigation = instance._container.one('.form-navigator');
-			instance._sections = instance._container.all('.form-section');
+			instance._sections = instance._container.all(FORM_SECTION);
 
 			if (instance._navigation) {
 				instance._navigation.delegate(
 					'click',
-					function(event) {
-						event.preventDefault();
-
-						var target = event.currentTarget;
-						var li = target.get('parentNode');
-
-						if (li && !li.test('.selected')) {
-							instance._revealSection(target.attr('href'), li);
-
-							var currentSection = target.attr('href').split('#');
-
-							if (currentSection[1]) {
-								A.later(0, instance, instance._updateHash, [currentSection[1]]);
-							}
-						}
-					},
+					A.bind(instance._onClick, instance),
 					'li a'
 				);
 			}
@@ -55,9 +55,7 @@ AUI().add(
 
 			A.on(
 				'formNavigator:trackChanges',
-				function(element) {
-					instance._trackChanges(element);
-				}
+				A.bind(instance._trackChanges, instance)
 			);
 
 			var inputs = instance._container.all('input, select, textarea');
@@ -111,6 +109,43 @@ AUI().add(
 				return id;
 			},
 
+			_onClick: function(event) {
+				var instance = this;
+
+				event.preventDefault();
+
+				var target = event.currentTarget;
+				var li = target.get('parentNode');
+
+				if (li && !li.test('.selected')) {
+					instance._revealSection(target.attr('href'), li);
+
+					var currentSection = target.attr('href').split('#');
+
+					if (currentSection[1]) {
+						A.later(0, instance, instance._updateHash, [currentSection[1]]);
+					}
+				}
+			},
+
+			_onFormRegistered: function(options, event) {
+				var instance = this;
+
+				if (event.formId === options.formId) {
+					var formValidator = event.form.formValidator;
+
+					instance._formValidator = formValidator;
+
+					formValidator.on('errorField', function(event){
+						instance._updateSectionStatus();
+					});
+
+					formValidator.on('validField', function(event){
+						instance._updateSectionStatus();
+					});
+				}
+			},
+
 			_revealSection: function(id, currentNavItem) {
 				var instance = this;
 
@@ -132,18 +167,18 @@ AUI().add(
 					id = '#' + id[1];
 
 					var section = A.one(id);
-					var selected = instance._navigation.one('li.selected');
+					var selected = instance._navigation.one(LIST_ITEM_SELECTED);
 
 					if (selected) {
-						selected.removeClass('selected');
+						selected.removeClass(SELECTED);
 					}
 
-					li.addClass('selected');
+					li.addClass(SELECTED);
 
-					instance._sections.removeClass('selected').addClass('aui-helper-hidden-accessible');
+					instance._sections.removeClass(SELECTED).addClass(AUI_HELPER_HIDDEN_ACCESSIBLE);
 
 					if (section) {
-						section.addClass('selected').removeClass('aui-helper-hidden-accessible');
+						section.addClass(SELECTED).removeClass(AUI_HELPER_HIDDEN_ACCESSIBLE);
 					}
 				}
 			},
@@ -151,7 +186,7 @@ AUI().add(
 			_trackChanges: function(el) {
 				var instance = this;
 
-				var currentSection = A.one(el).ancestor('.form-section').attr('id');
+				var currentSection = A.one(el).ancestor(FORM_SECTION).attr('id');
 
 				var currentSectionLink = A.one('#' + currentSection + 'Link');
 
@@ -166,6 +201,36 @@ AUI().add(
 				var instance = this;
 
 				location.hash = instance._hashKey + section;
+			},
+
+			_updateSectionStatus: function() {
+				var instance = this;
+
+				var selectedSectionNode = instance._navigation.one(LIST_ITEM_SELECTED);
+
+				if (selectedSectionNode) {
+					if (instance._formValidator.hasErrors()) {
+						var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+						var errors = instance._formValidator.errors;
+
+						for (var item in errors) {
+							if (hasOwnProperty.call(errors, item)) {
+								var section = A.one('#' + item).ancestor(FORM_SECTION);
+
+								if ( section && section.hasClass(SELECTED)) {
+									selectedSectionNode.addClass(SECTION_ERROR);
+									return;
+								}
+
+								selectedSectionNode.removeClass(SECTION_ERROR);
+							}
+						}
+					}
+					else {
+						 selectedSectionNode.removeClass(SECTION_ERROR);
+					}
+				}
 			},
 
 			_hashKey: '_LFR_FN_'

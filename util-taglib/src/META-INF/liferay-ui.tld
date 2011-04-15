@@ -650,6 +650,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>formId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>htmlBottom</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
