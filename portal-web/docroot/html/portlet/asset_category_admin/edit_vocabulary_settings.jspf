@@ -85,10 +85,10 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 			for (int index = 0; index < selectedClassNameIds.length; index++) {
 				indexes.add(String.valueOf(index));
 
-				boolean required = false;
+				boolean requiredIndex = false;
 
 				if (ArrayUtil.contains(requiredClassNameIds, selectedClassNameIds[index])) {
-					required = true;
+					requiredIndex = true;
 				}
 		%>
 
@@ -116,7 +116,7 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 
 						</aui:select>
 
-						<aui:input cssClass="vocabulary-checkbox" label="required" name='<%= "required" + index %>' type="checkbox" value="<%= required %>" />
+						<aui:input cssClass="vocabulary-checkbox" label="required" name='<%= "required" + index %>' type="checkbox" value="<%= requiredIndex %>" />
 					</div>
 				</div>
 
