@@ -57,7 +57,6 @@ request.setAttribute("websites.classPK", company.getAccountId());
 	<liferay-ui:form-navigator
 		categoryNames="<%= _CATEGORY_NAMES %>"
 		categorySections="<%= categorySections %>"
-		formId='<%= renderResponse.getNamespace() + "fm" %>'
 		htmlTop="<%= htmlTop %>"
 		jspPath="/html/portlet/enterprise_admin/settings/"
 	/>

@@ -244,7 +244,6 @@ String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace
 	<liferay-ui:form-navigator
 		categoryNames="<%= _CATEGORY_NAMES %>"
 		categorySections="<%= categorySections %>"
-		formId='<%= renderResponse.getNamespace() + "fm" %>'
 		htmlBottom="<%= htmlBottom %>"
 		htmlTop="<%= htmlTop %>"
 		jspPath="/html/portlet/enterprise_admin/user/"
