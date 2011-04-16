@@ -12,12 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.webproxy.portlet;
+package com.liferay.portalweb.portlet.xslcontent.portlet.addportletxslcmultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.webproxy.portlet.addportletwp.AddPortletWPTests;
-import com.liferay.portalweb.portlet.webproxy.portlet.addportletwpmultiple.AddPortletWPMultipleTests;
-import com.liferay.portalweb.portlet.webproxy.portlet.removeportletwp.RemovePortletWPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -25,14 +22,16 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PortletTests extends BaseTests {
+public class AddPortletXSLCMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletWPTests.suite());
-		testSuite.addTest(AddPortletWPMultipleTests.suite());
-		testSuite.addTest(RemovePortletWPTests.suite());
+		testSuite.addTestSuite(AddPageXSLCTest.class);
+		testSuite.addTestSuite(AddPortletXSLC1Test.class);
+		testSuite.addTestSuite(AddPortletXSLC2Test.class);
+		testSuite.addTestSuite(AddPortletXSLC3Test.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

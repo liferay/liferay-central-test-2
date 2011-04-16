@@ -15,9 +15,9 @@
 package com.liferay.portalweb.portlet.words.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.words.portlet.addportlet.AddPortletTests;
-import com.liferay.portalweb.portlet.words.portlet.addportletduplicate.AddPortletDuplicateTests;
-import com.liferay.portalweb.portlet.words.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.words.portlet.addportletwords.AddPortletWordsTests;
+import com.liferay.portalweb.portlet.words.portlet.addportletwordsduplicate.AddPortletWordsDuplicateTests;
+import com.liferay.portalweb.portlet.words.portlet.removeportletwords.RemovePortletWordsTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,9 +30,9 @@ public class PortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletTests.suite());
-		testSuite.addTest(AddPortletDuplicateTests.suite());
-		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(AddPortletWordsTests.suite());
+		testSuite.addTest(AddPortletWordsDuplicateTests.suite());
+		testSuite.addTest(RemovePortletWordsTests.suite());
 
 		return testSuite;
 	}
