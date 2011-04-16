@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
 import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.kernel.poller.PollerHeader;
 import com.liferay.portal.kernel.poller.PollerResponse;
 
