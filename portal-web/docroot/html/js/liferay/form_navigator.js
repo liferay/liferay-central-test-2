@@ -115,6 +115,7 @@ AUI().add(
 				event.preventDefault();
 
 				var target = event.currentTarget;
+
 				var li = target.get('parentNode');
 
 				if (li && !li.test('.selected')) {

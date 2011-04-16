@@ -203,8 +203,8 @@ AUI().add(
 					Liferay.fire(
 						'form:formRegistered',
 						{
-							formId: formId,
-							form: form
+							form: form,
+							formId: formId
 						}
 					);
 

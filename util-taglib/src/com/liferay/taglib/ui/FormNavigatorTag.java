@@ -39,8 +39,8 @@ public class FormNavigatorTag extends IncludeTag {
 		_categorySections = categorySections;
 	}
 
-	public void setFormId(String formId) {
-		_formId = formId;
+	public void setFormName(String formName) {
+		_formName = formName;
 	}
 
 	public void setHtmlBottom(String htmlBottom) {
@@ -63,7 +63,7 @@ public class FormNavigatorTag extends IncludeTag {
 		_backURL = null;
 		_categoryNames = null;
 		_categorySections = null;
-		_formId = null;
+		_formName = "fm";
 		_htmlBottom = null;
 		_htmlTop = null;
 		_jspPath = null;
@@ -80,7 +80,7 @@ public class FormNavigatorTag extends IncludeTag {
 			"liferay-ui:form-navigator:categoryNames", _categoryNames);
 		request.setAttribute(
 			"liferay-ui:form-navigator:categorySections", _categorySections);
-		request.setAttribute("liferay-ui:form-navigator:formId", _formId);
+		request.setAttribute("liferay-ui:form-navigator:formName", _formName);
 		request.setAttribute(
 			"liferay-ui:form-navigator:htmlBottom", _htmlBottom);
 		request.setAttribute("liferay-ui:form-navigator:htmlTop", _htmlTop);
@@ -96,7 +96,7 @@ public class FormNavigatorTag extends IncludeTag {
 	private String _backURL;
 	private String[] _categoryNames;
 	private String[][] _categorySections;
-	private String _formId;
+	private String _formName = "fm";
 	private String _htmlBottom;
 	private String _htmlTop;
 	private String _jspPath;

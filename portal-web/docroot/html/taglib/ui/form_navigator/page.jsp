@@ -20,7 +20,7 @@
 String backURL = (String)request.getAttribute("liferay-ui:form-navigator:backURL");
 String[][] categorySections = (String[][])request.getAttribute("liferay-ui:form-navigator:categorySections");
 String[] categoryNames = (String[])request.getAttribute("liferay-ui:form-navigator:categoryNames");
-String formId = GetterUtil.getString((String)request.getAttribute("liferay-ui:form-navigator:formId"));
+String formName = GetterUtil.getString((String)request.getAttribute("liferay-ui:form-navigator:formName"));
 String htmlBottom = (String)request.getAttribute("liferay-ui:form-navigator:htmlBottom");
 String htmlTop = (String)request.getAttribute("liferay-ui:form-navigator:htmlTop");
 String jspPath = (String)request.getAttribute("liferay-ui:form-navigator:jspPath");
@@ -174,7 +174,7 @@ if (Validator.isNotNull(historyKey)) {
 		{
 			container: '#<portlet:namespace />sectionsContainer',
 			defaultModifiedSections: <%= JS.toScript(modifiedSections) %>,
-			formId: '<%= formId %>',
+			formId: '<portlet:namespace /><%= formName %>',
 			modifiedSections: '<portlet:namespace />modifiedSections'
 		}
 	);
