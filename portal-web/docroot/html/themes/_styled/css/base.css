@@ -42,7 +42,7 @@ html {
 	overflow-y: scroll;
 }
 
-html.aui-dialog-iframe-root-node {
+html.yui3-aui-dialog-iframe-root-node {
 	overflow: auto;
 }
 
@@ -56,7 +56,7 @@ body.portal-popup {
 	padding: 10px;
 }
 
-body.aui-dialog-iframe-popup {
+body.yui3-aui-dialog-iframe-popup {
 	padding-bottom: 0;
 }
 

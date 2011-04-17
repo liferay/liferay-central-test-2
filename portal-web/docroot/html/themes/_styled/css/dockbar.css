@@ -143,11 +143,11 @@ html > .lfr-dockbar-pinned {
 
 /* ---------- Menus ---------- */
 
-.aui-dockbarmenu-hidden {
+.yui3-aui-dockbarmenu-hidden {
 	visibility: hidden;
 }
 
-.dockbar .aui-toolbar {
+.dockbar .yui3-aui-toolbar {
 	float: left;
 }
 
@@ -155,16 +155,16 @@ html > .lfr-dockbar-pinned {
 	float: right;
 }
 
-.aui-underlay .portal-add-content {
+.yui3-aui-underlay .portal-add-content {
 	background-color: transparent;
 	font-size: 11px;
 }
 
-.aui-underlay .portal-add-content .portlet-dd-placeholder {
+.yui3-aui-underlay .portal-add-content .portlet-dd-placeholder {
 	display: none;
 }
 
-.add-application .aui-widget-bd, .dockbar-messages .aui-widget-bd {
+.add-application .yui3-widget-bd, .dockbar-messages .yui3-widget-bd {
 	padding: 0 10px 10px;
 }
 
