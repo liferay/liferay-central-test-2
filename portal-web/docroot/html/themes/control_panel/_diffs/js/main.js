@@ -28,9 +28,9 @@ if (!themeDisplay.isStatePopUp()) {
 
 			var ATTR_DATA_NODE_STATUS = 'data-nodeStatus';
 
-			var CSS_ICON_CLOSE = 'aui-icon-closethick';
+			var CSS_ICON_CLOSE = 'yui3-aui-icon-closethick';
 
-			var CSS_ICON_HELP = 'aui-icon-help';
+			var CSS_ICON_HELP = 'yui3-aui-icon-help';
 
 			var CSS_PANELS_MINIMIZED = 'panels-minimized';
 
@@ -60,7 +60,7 @@ if (!themeDisplay.isStatePopUp()) {
 
 							var contentBox = instance.get('contentBox');
 
-							instance._icon = contentBox.one('.aui-icon');
+							instance._icon = contentBox.one('.yui3-aui-icon');
 
 							instance._hideNoticesControl = contentBox.one('.hide-notices-control');
 							instance._hideAllNotices = instance._hideNoticesControl.one('.hide-all-notices');
