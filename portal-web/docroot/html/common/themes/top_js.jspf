@@ -251,7 +251,7 @@
 		window.YUI_config = {
 			base: Liferay.AUI.getBaseURL(),
 			comboBase: Liferay.AUI.getComboPath(),
-			fetchCSS: false,
+			fetchCSS: true,
 			filter: Liferay.AUI.getFilter(),
 			root: Liferay.AUI.getRootPath(),
 			useBrowserConsole: false
