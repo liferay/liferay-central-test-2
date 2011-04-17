@@ -30,7 +30,7 @@ AUI().add(
 
 		var NODE = 'node';
 
-		var TPL_PORTLET_MESSAGES = '<div class="aui-helper-hidden lfr-message-response" id="portletMessages" />';
+		var TPL_PORTLET_MESSAGES = '<div class="yui3-aui-helper-hidden lfr-message-response" id="portletMessages" />';
 
 		var TPL_TAG_LIST = '<li class="tag-item-container results-row {cssClassSelected}" data-tag="{name}" data-tagId="{tagId}" tabIndex="0">' +
 			'<div class="tags-admin-content-wrapper">' +
@@ -41,7 +41,7 @@ AUI().add(
 			'</div>' +
 		'</li>';
 
-		var TPL_TAGS_MESSAGES = '<div class="aui-helper-hidden lfr-message-response portlet-msg-info" id="tagsMessages" />';
+		var TPL_TAGS_MESSAGES = '<div class="yui3-aui-helper-hidden lfr-message-response portlet-msg-info" id="tagsMessages" />';
 
 		var AssetTagsAdmin = A.Component.create(
 			{
@@ -528,7 +528,7 @@ AUI().add(
 
 						instance._tagFormAdd = tagFormAdd;
 
-						var closeButton = tagFormAdd.one('.aui-button-input-cancel');
+						var closeButton = tagFormAdd.one('.yui3-aui-button-input-cancel');
 
 						closeButton.on(
 							EVENT_CLICK,
@@ -568,7 +568,7 @@ AUI().add(
 
 						tagFormEdit.on(EVENT_SUBMIT, instance._onTagFormSubmit, instance, tagFormEdit);
 
-						var closeButton = tagFormEdit.one('.aui-button-input-cancel');
+						var closeButton = tagFormEdit.one('.yui3-aui-button-input-cancel');
 
 						closeButton.on(
 							EVENT_CLICK,
