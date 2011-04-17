@@ -53,7 +53,7 @@ AUI().add(
 
 						instance._renderIcons();
 
-						instance.inputContainer.addClass('aui-helper-hidden-accessible');
+						instance.inputContainer.addClass('yui3-aui-helper-hidden-accessible');
 					},
 
 					bindUI: function() {
@@ -186,7 +186,7 @@ AUI().add(
 										results,
 										function(item, index, collection) {
 											var nodeWidget = A.Widget.getByNode(item.node);
-											var nodeVisible = nodeWidget.get('boundingBox').hasClass('aui-helper-hidden');
+											var nodeVisible = nodeWidget.get('boundingBox').hasClass('yui3-aui-helper-hidden');
 
 											if (!nodeVisible) {
 												nodeWidget.eachParent(
@@ -200,10 +200,10 @@ AUI().add(
 								}
 							},
 							data: function(node) {
-								return node.one('.aui-tree-label').html();
+								return node.one('.yui3-aui-tree-label').html();
 							},
 							input: popup.searchField.get('node'),
-							nodes: popup.entriesNode.all('.aui-tree-node')
+							nodes: popup.entriesNode.all('.yui3-aui-tree-node')
 						};
 
 						if (popup.liveSearch) {

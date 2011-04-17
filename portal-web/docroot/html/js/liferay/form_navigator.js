@@ -1,7 +1,7 @@
 AUI().add(
 	'liferay-form-navigator',
 	function(A) {
-		var AUI_HELPER_HIDDEN_ACCESSIBLE = 'aui-helper-hidden-accessible';
+		var AUI_HELPER_HIDDEN_ACCESSIBLE = 'yui3-aui-helper-hidden-accessible';
 
 		var FORM_SECTION = '.form-section';
 

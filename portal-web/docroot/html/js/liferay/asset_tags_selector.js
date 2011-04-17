@@ -173,7 +173,7 @@ AUI().add(
 									bodyContent: TPL_LOADING,
 									constrain2view: true,
 									draggable: true,
-									hideClass: 'aui-helper-hidden-accessible',
+									hideClass: 'yui3-aui-helper-hidden-accessible',
 									preventOverlap: true,
 									stack: true,
 									title: '',
@@ -312,7 +312,7 @@ AUI().add(
 
 										fieldsets.each(
 											function(item, index, collection) {
-												var visibleEntries = item.one('label:not(.aui-helper-hidden)');
+												var visibleEntries = item.one('label:not(.yui3-aui-helper-hidden)');
 
 												var action = 'addClass';
 

@@ -24,7 +24,7 @@ AUI().add(
 
 				instance._window.on('resize', instance._positionActiveMenu, instance);
 
-				var hideClass = 'aui-helper-hidden-accessible';
+				var hideClass = 'yui3-aui-helper-hidden-accessible';
 
 				instance._body.delegate(
 					'click',
@@ -106,7 +106,7 @@ AUI().add(
 					var extended = (cssClass.indexOf('lfr-extended') > -1);
 
 					if (extended) {
-						instance._active.trigger.removeClass('aui-state-active');
+						instance._active.trigger.removeClass('yui3-aui-state-active');
 					}
 
 					instance._active.trigger = null;
@@ -121,7 +121,7 @@ AUI().add(
 					{
 						circular: true,
 						descendants: 'a',
-						focusClass: 'aui-focus',
+						focusClass: 'yui3-aui-focus',
 						keys: {
 							next: 'down:40',
 							previous: 'down:38'
@@ -265,7 +265,7 @@ AUI().add(
 					var extended = (cssClass.indexOf('lfr-extended') > -1);
 
 					if (extended) {
-						trigger.addClass('aui-state-active');
+						trigger.addClass('yui3-aui-state-active');
 					}
 
 					instance._active = {

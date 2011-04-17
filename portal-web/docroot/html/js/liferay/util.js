@@ -622,9 +622,9 @@
 
 			var iframeBody = iframePlugin.node.get('contentWindow.document.body');
 
-			iframeBody.addClass('aui-dialog-iframe-popup');
+			iframeBody.addClass('yui3-aui-dialog-iframe-popup');
 
-			var closeButton = iframeBody.one('.aui-button-input-cancel');
+			var closeButton = iframeBody.one('.yui3-aui-button-input-cancel');
 
 			if (closeButton) {
 				var dialog = iframePlugin.get('host');
