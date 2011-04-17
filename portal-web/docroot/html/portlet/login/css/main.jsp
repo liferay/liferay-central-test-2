@@ -17,14 +17,14 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-login {
-	.aui-form {
+	.yui3-aui-form {
 		fieldset {
 			border-width: 0;
 			margin-bottom: 0;
 			padding: 0;
 		}
 
-		.aui-button-holder, .aui-form-column {
+		.yui3-aui-button-holder, .yui3-aui-form-column {
 			margin-bottom: 10px;
 		}
 	}
@@ -34,12 +34,12 @@
 		margin-top: 300px;
 		text-align: center;
 
-		.aui-button-content {
+		.yui3-aui-button-content {
 			background: url(<%= themeImagesPath %>/login/facebook_login_button.png) no-repeat scroll 0 50%;
 			padding: 5px 5px 5px 30px;
 		}
 
-		.aui-button-input {
+		.yui3-aui-button-input {
 			background: transparent none;
 			border-width: 0;
 			color: #FFF;

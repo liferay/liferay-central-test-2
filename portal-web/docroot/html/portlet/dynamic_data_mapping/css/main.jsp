@@ -17,31 +17,31 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-dynamic-data-mapping {
-	.aui-form-builder-drop-container {
+	.yui3-aui-form-builder-drop-container {
 		width: 70%;
 	}
 
-	.aui-form-builder-tabs-container {
+	.yui3-aui-form-builder-tabs-container {
 		width: 30%;
 
-		.aui-field-input-text {
+		.yui3-aui-field-input-text {
 			width: 98%;
 		}
 
-		.aui-field-options-item-input {
+		.yui3-aui-field-options-item-input {
 			width: 78px;
 		}
 	}
 
-	.aui-form-builder-settings .aui-field-input-checkbox {
+	.yui3-aui-form-builder-settings .yui3-aui-field-input-checkbox {
 		margin: 0 3px 0 0;
 	}
 
-	.aui-field-labels-inline {
+	.yui3-aui-field-labels-inline {
 		clear: both;
 		display: block;
 
-		.aui-field-label {
+		.yui3-aui-field-label {
 			margin-top: 0;
 		}
 	}
@@ -65,20 +65,20 @@
 		}
 	}
 
-	.lfr-ddm-types-form-column .aui-column-content-first {
+	.lfr-ddm-types-form-column .yui3-aui-column-content-first {
 		margin-right: 10px;
 	}
 
-	.lfr-ddm-search-form .aui-column {
+	.lfr-ddm-search-form .yui3-aui-column {
 		margin-right: 10px;
 	}
 
 	.lfr-template-editor {
-		.aui-field-element, .aui-field-content, .aui-field-input-text {
+		.yui3-aui-field-element, .yui3-aui-field-content, .yui3-aui-field-input-text {
 			display: block;
 		}
 
-		.aui-field-input-text {
+		.yui3-aui-field-input-text {
 			height: 400px;
 		}
 	}

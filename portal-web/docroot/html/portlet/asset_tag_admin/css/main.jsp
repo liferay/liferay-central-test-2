@@ -39,11 +39,11 @@
 	}
 
 	.tags-admin-search {
-		.aui-field-content {
+		.yui3-aui-field-content {
 			display: inline-block;
 		}
 
-		.aui-field-input {
+		.yui3-aui-field-input {
 			background-image: url(<%= themeImagesPath %>/common/search.png);
 			background-repeat: no-repeat;
 			background-position: 5px 50%;
@@ -56,7 +56,7 @@
 		position: relative;
 	}
 
-	.tags-admin-content-wrapper, .header-title, .aui-tree-node-content .aui-tree-label  {
+	.tags-admin-content-wrapper, .header-title, .yui3-aui-tree-node-content .yui3-aui-tree-label  {
 		word-wrap: break-word;
 	}
 
@@ -179,7 +179,7 @@
 }
 
 .portlet-asset-tag-admin-dialog {
-	.aui-fieldset {
+	.yui3-aui-fieldset {
 		margin-bottom: 0;
 	}
 
@@ -188,16 +188,16 @@
 		border-width: 0;
 	}
 
-	.asset-tag-layer .aui-overlay {
+	.asset-tag-layer .yui3-aui-overlay {
 		overflow: visible;
 		width: 230px;
 	}
 
-	.aui-widget-bd {
+	.yui3-widget-bd {
 		.asset-tag-layer {
 			padding: 0 10px;
 
-			.aui-field-content {
+			.yui3-aui-field-content {
 				margin-bottom: 10px;
 			}
 
@@ -206,7 +206,7 @@
 				font-weight: bold;
 			}
 
-			.aui-field {
+			.yui3-aui-field {
 				input, select {
 					width: 200px;
 				}
@@ -243,7 +243,7 @@
 	}
 
 	.portlet-asset-tag-admin-dialog {
-		.aui-widget-bd .asset-tag-layer .aui-field {
+		.yui3-widget-bd .asset-tag-layer .yui3-aui-field {
 			width: 200px;
 		}
 	}

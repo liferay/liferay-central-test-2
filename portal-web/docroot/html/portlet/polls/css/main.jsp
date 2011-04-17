@@ -28,7 +28,7 @@
 			margin: 0.5em 0.5em 0 0;
 		}
 
-		.aui-field {
+		.yui3-aui-field {
 			float: left;
 		}
 	}
