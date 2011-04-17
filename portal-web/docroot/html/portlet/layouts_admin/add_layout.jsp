@@ -31,7 +31,7 @@ PortletURL portletURL = ((PortletURL)request.getAttribute("edit_pages.jsp-portle
 List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 %>
 
-<div class="aui-helper-hidden" id="<portlet:namespace />addLayout">
+<div class="yui3-aui-helper-hidden" id="<portlet:namespace />addLayout">
 	<aui:model-context model="<%= Layout.class %>" />
 
 	<portlet:actionURL var="editPageURL">

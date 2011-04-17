@@ -34,7 +34,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	<aui:input name="updateRecentLayoutRevisionId" type="hidden" value="<%= false %>" />
 
 	<div class="dockbar dockbar-staging" id="<portlet:namespace />dockbarStaging">
-		<ul class="aui-toolbar">
+		<ul class="yui3-aui-toolbar">
 			<li class="select-branch" id="<portlet:namespace />selectBranch">
 
 				<%

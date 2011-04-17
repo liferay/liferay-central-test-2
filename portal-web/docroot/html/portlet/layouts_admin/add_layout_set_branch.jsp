@@ -23,7 +23,7 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 PortletURL portletURL = ((PortletURL)request.getAttribute("edit_pages.jsp-portletURL"));
 %>
 
-<div class="aui-helper-hidden" data-namespace="<portlet:namespace />" id="addBranch">
+<div class="yui3-aui-helper-hidden" data-namespace="<portlet:namespace />" id="addBranch">
 	<aui:model-context model="<%= LayoutSetBranch.class %>" />
 
 	<portlet:actionURL var="editLayoutSetBranchURL">

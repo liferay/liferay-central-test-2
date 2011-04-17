@@ -224,7 +224,7 @@ if (Validator.isNull(redirect)) {
 								<%= existingName %>
 							</span>
 
-							<aui:input cssClass="aui-helper-hidden" label="" name='<%= "msgFile" + (i + 1) %>' size="70" type="file" />
+							<aui:input cssClass="yui3-aui-helper-hidden" label="" name='<%= "msgFile" + (i + 1) %>' size="70" type="file" />
 						</td>
 						<td>
 							<img id="<portlet:namespace />removeExisting<%= i + 1 %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
@@ -480,7 +480,7 @@ if (Validator.isNull(redirect)) {
 					}
 
 					if (file) {
-						file.ancestor('.aui-field').show();
+						file.ancestor('.yui3-aui-field').show();
 					}
 				}
 			);

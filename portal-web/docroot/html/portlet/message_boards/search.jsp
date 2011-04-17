@@ -185,7 +185,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 	%>
 
 
-		<span class="aui-search-bar">
+		<span class="yui3-aui-search-bar">
 			<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-messages" type="text" value="<%= keywords %>" />
 
 			<aui:button type="submit" value="search" />

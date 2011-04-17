@@ -47,7 +47,7 @@ if (image != null) {
 		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
 	</div>
 
-	<div class="lfr-fallback aui-helper-hidden" id="<portlet:namespace />fallback">
+	<div class="lfr-fallback yui3-aui-helper-hidden" id="<portlet:namespace />fallback">
 
 	<aui:script use="liferay-upload">
 		new Liferay.Upload(

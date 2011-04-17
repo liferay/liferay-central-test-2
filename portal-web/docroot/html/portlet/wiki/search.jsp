@@ -143,7 +143,7 @@ boolean createNewPage = true;
 		}
 	%>
 
-		<span class="aui-search-bar">
+		<span class="yui3-aui-search-bar">
 			<aui:input inlineField="<%= true %>" label="" name="keywords" size="30" title="search-pages" type="text" value="<%= keywords %>" />
 
 			<aui:button type="submit" value="search" />

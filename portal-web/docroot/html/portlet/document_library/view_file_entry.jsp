@@ -181,7 +181,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 									<div class="lfr-preview-file-image-container">
 										<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFileImage" src="<%= previewFileURL + "1" %>" />
 									</div>
-									<span class="lfr-preview-file-actions aui-helper-hidden" id="<portlet:namespace />previewFileActions">
+									<span class="lfr-preview-file-actions yui3-aui-helper-hidden" id="<portlet:namespace />previewFileActions">
 										<span class="lfr-preview-file-toolbar" id="<portlet:namespace />previewToolbar"></span>
 
 										<span class="lfr-preview-file-info">

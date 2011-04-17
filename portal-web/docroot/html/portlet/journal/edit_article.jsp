@@ -261,7 +261,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<liferay-util:param name="tabs1" value="content" />
 </liferay-util:include>
 
-<div class="portlet-msg-info aui-helper-hidden" id="<portlet:namespace />translationsMessage">
+<div class="portlet-msg-info yui3-aui-helper-hidden" id="<portlet:namespace />translationsMessage">
 	<liferay-ui:message key="the-changes-in-your-translations-will-be-available-once-the-content-is-published" />
 </div>
 
@@ -409,7 +409,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 								<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
 
-								<aui:select inputCssClass="aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
+								<aui:select inputCssClass="yui3-aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
 
 									<%
 									Locale[] locales = LanguageUtil.getAvailableLocales();
@@ -451,7 +451,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 									<aui:input name="toLanguageId" type="hidden" value="<%= toLanguageId %>" />
 								</c:when>
 								<c:otherwise>
-									<span class='available-translations<%= (translations.length > 1) ? "" : " aui-helper-hidden" %>' id="<portlet:namespace />availableTranslationsLinks">
+									<span class='available-translations<%= (translations.length > 1) ? "" : " yui3-aui-helper-hidden" %>' id="<portlet:namespace />availableTranslationsLinks">
 										<label><liferay-ui:message key="available-translations" /></label>
 
 											<%
@@ -515,7 +515,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 												<aui:button cssClass="edit-button" value="edit-options" />
 
-												<aui:button cssClass="repeatable-button aui-helper-hidden" value="repeat" />
+												<aui:button cssClass="repeatable-button yui3-aui-helper-hidden" value="repeat" />
 											</div>
 										</div>
 

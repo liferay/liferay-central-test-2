@@ -43,7 +43,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 </c:if>
 
 <div class="dockbar" data-namespace="<portlet:namespace />" id="dockbar">
-	<ul class="aui-toolbar">
+	<ul class="yui3-aui-toolbar">
 		<li class="pin-dockbar">
 			<a href="javascript:;"><img alt='<liferay-ui:message key="pin-the-dockbar" />' src="<%= HtmlUtil.escape(themeDisplay.getPathThemeImages()) %>/spacer.png" /></a>
 		</li>
@@ -56,8 +56,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu add-content-menu aui-overlaycontext-hidden" id="<portlet:namespace />addContentContainer">
-					<div class="aui-menu-content">
+				<div class="yui3-aui-menu add-content-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />addContentContainer">
+					<div class="yui3-aui-menu-content">
 						<ul>
 							<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && !group.isLayoutPrototype() %>">
 								<li class="first add-page">
@@ -69,9 +69,9 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 							<c:if test="<%= !themeDisplay.isStateMaximized() %>">
 								<li class="last common-items">
-									<div class="aui-menugroup">
-										<div class="aui-menugroup-content">
-											<span class="aui-menu-label"><liferay-ui:message key="applications" /></span>
+									<div class="yui3-aui-menugroup">
+										<div class="yui3-aui-menugroup-content">
+											<span class="yui3-aui-menu-label"><liferay-ui:message key="applications" /></span>
 
 											<ul>
 
@@ -127,8 +127,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu manage-content-menu aui-overlaycontext-hidden" id="<portlet:namespace />manageContentContainer">
-					<div class="aui-menu-content">
+				<div class="yui3-aui-menu manage-content-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />manageContentContainer">
+					<div class="yui3-aui-menu-content">
 						<ul>
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 								<li class="first manage-page use-dialog">
@@ -173,15 +173,15 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu staging-menu aui-overlaycontext-hidden" id="<portlet:namespace />stagingContainer">
-					<div class="aui-menu-content">
+				<div class="yui3-aui-menu staging-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />stagingContainer">
+					<div class="yui3-aui-menu-content">
 						<liferay-ui:staging />
 					</div>
 				</div>
 			</li>
 		</c:if>
 
-		<li class="aui-toolbar-separator">
+		<li class="yui3-aui-toolbar-separator">
 			<span></span>
 		</li>
 
@@ -193,7 +193,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</li>
 
 			<c:if test="<%= layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE) %>">
-				<li class="aui-toolbar-separator">
+				<li class="yui3-aui-toolbar-separator">
 					<span></span>
 				</li>
 
@@ -205,8 +205,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</a>
 
 					<c:if test="<%= layoutTypePortlet.isPersonalizedView() %>">
-						<div class="aui-menu toggle-personalized-view-menu aui-overlaycontext-hidden" id="<portlet:namespace />togglePersonalizedViewContainer">
-							<div class="aui-menu-content">
+						<div class="yui3-aui-menu toggle-personalized-view-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />togglePersonalizedViewContainer">
+							<div class="yui3-aui-menu-content">
 								<ul>
 									<li class="first last reset-personalized-view" id="<portlet:namespace />resetPersonalizedView">
 										<liferay-portlet:actionURL portletName="<%= PortletKeys.LAYOUTS_ADMIN %>" var="resetPersonalizationViewURL">
@@ -279,7 +279,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 		</c:if>
 	</ul>
 
-	<ul class="aui-toolbar user-toolbar">
+	<ul class="yui3-aui-toolbar user-toolbar">
 		<c:if test="<%= user.hasMyPlaces() %>">
 			<li class="my-places has-submenu" id="<portlet:namespace />myPlaces">
 				<a class="menu-button" href="javascript:;">
@@ -288,15 +288,15 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					</span>
 				</a>
 
-				<div class="aui-menu my-places-menu aui-overlaycontext-hidden" id="<portlet:namespace />myPlacesContainer">
-					<div class="aui-menu-content">
+				<div class="yui3-aui-menu my-places-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />myPlacesContainer">
+					<div class="yui3-aui-menu-content">
 						<liferay-ui:my-places />
 					</div>
 				</div>
 			</li>
 		</c:if>
 
-		<li class="aui-toolbar-separator">
+		<li class="yui3-aui-toolbar-separator">
 			<span></span>
 		</li>
 
@@ -314,8 +314,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</span>
 
 			<c:if test="<%= themeDisplay.isImpersonated() %>">
-				<div class="aui-menu impersonation-menu aui-overlaycontext-hidden" id="<portlet:namespace />userOptionsContainer">
-					<div class="aui-menu-content">
+				<div class="yui3-aui-menu impersonation-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />userOptionsContainer">
+					<div class="yui3-aui-menu-content">
 						<div class="notice-message portlet-msg-info">
 							<c:choose>
 								<c:when test="<%= themeDisplay.isSignedIn() %>">
@@ -365,11 +365,11 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	</ul>
 
 	<div class="dockbar-messages" id="<portlet:namespace />dockbarMessages">
-		<div class="aui-header"></div>
+		<div class="yui3-aui-header"></div>
 
-		<div class="aui-body"></div>
+		<div class="yui3-aui-body"></div>
 
-		<div class="aui-footer"></div>
+		<div class="yui3-aui-footer"></div>
 	</div>
 
 	<%
@@ -377,7 +377,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	%>
 
 	<c:if test="<%= !layoutPrototypes.isEmpty() %>">
-		<div id="layoutPrototypeTemplate" class="aui-html-template">
+		<div id="layoutPrototypeTemplate" class="yui3-aui-html-template">
 			<ul>
 
 				<%
