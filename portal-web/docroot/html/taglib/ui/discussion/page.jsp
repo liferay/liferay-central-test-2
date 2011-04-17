@@ -74,7 +74,7 @@ else {
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
-<div class="aui-helper-hidden lfr-message-response" id="<portlet:namespace />discussion-status-messages"></div>
+<div class="yui3-aui-helper-hidden lfr-message-response" id="<portlet:namespace />discussion-status-messages"></div>
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
 	<div class="taglib-discussion">
@@ -681,10 +681,10 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							button.set('disabled', !currentValue.length);
 
 							if (currentValue.length) {
-								button.ancestor('.aui-button').removeClass('aui-button-disabled');
+								button.ancestor('.yui3-aui-button').removeClass('yui3-aui-button-disabled');
 							}
 							else {
-								button.ancestor('.aui-button').addClass('aui-button-disabled');
+								button.ancestor('.yui3-aui-button').addClass('yui3-aui-button-disabled');
 							}
 						}
 					}

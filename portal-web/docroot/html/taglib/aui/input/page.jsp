@@ -114,13 +114,13 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 
 <c:if test='<%= !type.equals("hidden") %>'>
 	<span class="<%= fieldCss %>">
-		<span class="aui-field-content">
+		<span class="yui3-aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
 				<label <%= labelTag %>>
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= required %>">
-						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+						<span class="yui3-aui-label-required">(<liferay-ui:message key="required" />)</span>
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -128,16 +128,16 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 					</c:if>
 
 					<c:if test="<%= changesContext %>">
-						<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
+						<span class="yui3-aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 					</c:if>
 				</label>
 			</c:if>
 
 			<c:if test="<%= Validator.isNotNull(prefix) %>">
-				<span class="aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
+				<span class="yui3-aui-prefix"><liferay-ui:message key="<%= prefix %>" /></span>
 			</c:if>
 
-			<span class='aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "aui-field-label-right" : StringPool.BLANK %>'>
+			<span class='yui3-aui-field-element <%= Validator.isNotNull(label) && inlineLabel.equals("right") ? "yui3-aui-field-label-right" : StringPool.BLANK %>'>
 </c:if>
 
 <c:choose>
@@ -213,7 +213,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 	</c:when>
 	<c:when test='<%= type.equals("timeZone") %>'>
 		<span class="<%= fieldCss %>">
-			<span class="aui-field-content">
+			<span class="yui3-aui-field-content">
 
 				<%
 				int displayStyle = TimeZone.LONG;
@@ -267,7 +267,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			</span>
 
 			<c:if test="<%= Validator.isNotNull(suffix) %>">
-				<span class="aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
+				<span class="yui3-aui-suffix"><liferay-ui:message key="<%= suffix %>" /></span>
 			</c:if>
 
 			<c:if test='<%= Validator.isNotNull(label) && inlineLabel.equals("right") %>'>
@@ -275,7 +275,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 					<liferay-ui:message key="<%= label %>" />
 
 					<c:if test="<%= required %>">
-						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
+						<span class="yui3-aui-label-required">(<liferay-ui:message key="required" />)</span>
 					</c:if>
 
 					<c:if test="<%= Validator.isNotNull(helpMessage) %>">
@@ -283,7 +283,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 					</c:if>
 
 					<c:if test="<%= changesContext %>">
-						<span class="aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
+						<span class="yui3-aui-helper-hidden-accessible"><liferay-ui:message key="changing-the-value-of-this-field-will-reload-the-page" />)</span>
 					</c:if>
 				</label>
 			</c:if>

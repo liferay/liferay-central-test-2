@@ -16,4 +16,4 @@
 
 <%@ include file="init.jsp" %>
 
-<form action="<%= action %>" class="aui-form <%= cssClass %> <%= inlineLabels ? "aui-field-labels-inline" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+<form action="<%= action %>" class="yui3-aui-form <%= cssClass %> <%= inlineLabels ? "yui3-aui-field-labels-inline" : StringPool.BLANK %>" id="<%= namespace + name %>" name="<%= namespace + name %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>

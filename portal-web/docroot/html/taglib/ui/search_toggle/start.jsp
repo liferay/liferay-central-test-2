@@ -19,10 +19,10 @@
 <div class="taglib-search-toggle">
 	<aui:input id="<%= id + displayTerms.ADVANCED_SEARCH %>" name="<%= displayTerms.ADVANCED_SEARCH %>" type="hidden" value='<%= clickValue.equals("basic") ? false : true %>' />
 
-	<div class="<%= clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>basic">
+	<div class="<%= clickValue.equals("basic") ? "" : "yui3-aui-helper-hidden" %>" id="<%= id %>basic">
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(buttonLabel) %>">
-				<span class="aui-search-bar">
+				<span class="yui3-aui-search-bar">
 					<aui:input id="<%= id + displayTerms.KEYWORDS %>" inlineField="<%= true %>" label="" name="<%= displayTerms.KEYWORDS %>" size="30" value="<%= displayTerms.getKeywords() %>" />
 
 					<aui:button type="submit" value="<%= buttonLabel %>" />
@@ -40,7 +40,7 @@
 		</c:choose>
 	</div>
 
-	<div class="<%= !clickValue.equals("basic") ? "" : "aui-helper-hidden" %>" id="<%= id %>advanced">
+	<div class="<%= !clickValue.equals("basic") ? "" : "yui3-aui-helper-hidden" %>" id="<%= id %>advanced">
 		<liferay-util:buffer var="andOperator">
 			<aui:select cssClass="inline-control" inlineField="<%= true %>" label="" name="<%= displayTerms.AND_OPERATOR %>">
 				<aui:option label="all" selected="<%= displayTerms.isAndOperator() %>" value="1" />
