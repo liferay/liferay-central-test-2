@@ -445,6 +445,27 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setOutPassword(String outPassword);
 
 	/**
+	 * Gets the allow anonymous of this message boards mailing list.
+	 *
+	 * @return the allow anonymous of this message boards mailing list
+	 */
+	public boolean getAllowAnonymous();
+
+	/**
+	 * Determines if this message boards mailing list is allow anonymous.
+	 *
+	 * @return <code>true</code> if this message boards mailing list is allow anonymous; <code>false</code> otherwise
+	 */
+	public boolean isAllowAnonymous();
+
+	/**
+	 * Sets whether this message boards mailing list is allow anonymous.
+	 *
+	 * @param allowAnonymous the allow anonymous of this message boards mailing list
+	 */
+	public void setAllowAnonymous(boolean allowAnonymous);
+
+	/**
 	 * Gets the active of this message boards mailing list.
 	 *
 	 * @return the active of this message boards mailing list
@@ -464,27 +485,6 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 * @param active the active of this message boards mailing list
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Gets the allow anonymous email of this message boards mailing list.
-	 *
-	 * @return the allow anonymous email of this message boards mailing list
-	 */
-	public boolean getAllowAnonymousEmail();
-
-	/**
-	 * Determines if this message boards mailing list is allow anonymous email.
-	 *
-	 * @return <code>true</code> if this message boards mailing list is allow anonymous email; <code>false</code> otherwise
-	 */
-	public boolean isAllowAnonymousEmail();
-
-	/**
-	 * Sets whether this message boards mailing list is allow anonymous email.
-	 *
-	 * @param allowAnonymousEmail the allow anonymous email of this message boards mailing list
-	 */
-	public void setAllowAnonymousEmail(boolean allowAnonymousEmail);
 
 	public boolean isNew();
 

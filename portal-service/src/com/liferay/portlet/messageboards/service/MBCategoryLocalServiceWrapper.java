@@ -265,8 +265,8 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean mailingListActive,
-		boolean allowAnonymousEmail,
+		java.lang.String outPassword, boolean allowAnonymous,
+		boolean mailingListActive,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -274,8 +274,8 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			name, description, displayStyle, emailAddress, inProtocol,
 			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 			inReadInterval, outEmailAddress, outCustom, outServerName,
-			outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, allowAnonymousEmail, serviceContext);
+			outServerPort, outUseSSL, outUserName, outPassword, allowAnonymous,
+			mailingListActive, serviceContext);
 	}
 
 	public void addCategoryResources(long categoryId,
@@ -431,8 +431,8 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean mailingListActive,
-		boolean allowAnonymousEmail, boolean mergeWithParentCategory,
+		java.lang.String outPassword, boolean allowAnonymous,
+		boolean mailingListActive, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -441,7 +441,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, allowAnonymousEmail, mergeWithParentCategory,
+			allowAnonymous, mailingListActive, mergeWithParentCategory,
 			serviceContext);
 	}
 

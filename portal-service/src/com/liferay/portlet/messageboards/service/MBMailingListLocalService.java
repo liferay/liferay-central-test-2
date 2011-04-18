@@ -247,8 +247,7 @@ public interface MBMailingListLocalService {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean active,
-		boolean allowAnonymousEmail,
+		java.lang.String outPassword, boolean allowAnonymous, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -280,7 +279,7 @@ public interface MBMailingListLocalService {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean active, boolean allowAnonymousEmail,
+		boolean allowAnonymous, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

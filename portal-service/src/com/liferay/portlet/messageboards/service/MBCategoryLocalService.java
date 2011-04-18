@@ -248,8 +248,8 @@ public interface MBCategoryLocalService {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean mailingListActive,
-		boolean allowAnonymousEmail,
+		java.lang.String outPassword, boolean allowAnonymous,
+		boolean mailingListActive,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -365,8 +365,8 @@ public interface MBCategoryLocalService {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean mailingListActive,
-		boolean allowAnonymousEmail, boolean mergeWithParentCategory,
+		java.lang.String outPassword, boolean allowAnonymous,
+		boolean mailingListActive, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

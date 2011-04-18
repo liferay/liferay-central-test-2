@@ -1788,8 +1788,8 @@
 		<property name="outUseSSL" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="outUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="outPassword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="allowAnonymous" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="allowAnonymousEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" table="MBMessage">
 		<cache usage="read-write" />

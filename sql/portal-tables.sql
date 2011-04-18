@@ -1020,8 +1020,8 @@ create table MBMailingList (
 	outUseSSL BOOLEAN,
 	outUserName VARCHAR(75) null,
 	outPassword VARCHAR(75) null,
-	active_ BOOLEAN,
-	allowAnonymousEmail BOOLEAN
+	allowAnonymous BOOLEAN,
+	active_ BOOLEAN
 );
 
 create table MBMessage (

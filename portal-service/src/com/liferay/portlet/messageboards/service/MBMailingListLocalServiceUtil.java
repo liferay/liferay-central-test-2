@@ -272,8 +272,7 @@ public class MBMailingListLocalServiceUtil {
 		int inReadInterval, java.lang.String outEmailAddress,
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
-		java.lang.String outPassword, boolean active,
-		boolean allowAnonymousEmail,
+		java.lang.String outPassword, boolean allowAnonymous, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -282,7 +281,7 @@ public class MBMailingListLocalServiceUtil {
 			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			active, allowAnonymousEmail, serviceContext);
+			allowAnonymous, active, serviceContext);
 	}
 
 	public static void deleteCategoryMailingList(long groupId, long categoryId)
@@ -319,7 +318,7 @@ public class MBMailingListLocalServiceUtil {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean active, boolean allowAnonymousEmail,
+		boolean allowAnonymous, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -327,8 +326,8 @@ public class MBMailingListLocalServiceUtil {
 				   .updateMailingList(mailingListId, emailAddress, inProtocol,
 			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 			inReadInterval, outEmailAddress, outCustom, outServerName,
-			outServerPort, outUseSSL, outUserName, outPassword, active,
-			allowAnonymousEmail, serviceContext);
+			outServerPort, outUseSSL, outUserName, outPassword, allowAnonymous,
+			active, serviceContext);
 	}
 
 	public static MBMailingListLocalService getService() {

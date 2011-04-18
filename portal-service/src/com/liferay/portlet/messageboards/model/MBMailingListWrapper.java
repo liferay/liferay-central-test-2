@@ -534,6 +534,33 @@ public class MBMailingListWrapper implements MBMailingList {
 	}
 
 	/**
+	* Gets the allow anonymous of this message boards mailing list.
+	*
+	* @return the allow anonymous of this message boards mailing list
+	*/
+	public boolean getAllowAnonymous() {
+		return _mbMailingList.getAllowAnonymous();
+	}
+
+	/**
+	* Determines if this message boards mailing list is allow anonymous.
+	*
+	* @return <code>true</code> if this message boards mailing list is allow anonymous; <code>false</code> otherwise
+	*/
+	public boolean isAllowAnonymous() {
+		return _mbMailingList.isAllowAnonymous();
+	}
+
+	/**
+	* Sets whether this message boards mailing list is allow anonymous.
+	*
+	* @param allowAnonymous the allow anonymous of this message boards mailing list
+	*/
+	public void setAllowAnonymous(boolean allowAnonymous) {
+		_mbMailingList.setAllowAnonymous(allowAnonymous);
+	}
+
+	/**
 	* Gets the active of this message boards mailing list.
 	*
 	* @return the active of this message boards mailing list
@@ -558,33 +585,6 @@ public class MBMailingListWrapper implements MBMailingList {
 	*/
 	public void setActive(boolean active) {
 		_mbMailingList.setActive(active);
-	}
-
-	/**
-	* Gets the allow anonymous email of this message boards mailing list.
-	*
-	* @return the allow anonymous email of this message boards mailing list
-	*/
-	public boolean getAllowAnonymousEmail() {
-		return _mbMailingList.getAllowAnonymousEmail();
-	}
-
-	/**
-	* Determines if this message boards mailing list is allow anonymous email.
-	*
-	* @return <code>true</code> if this message boards mailing list is allow anonymous email; <code>false</code> otherwise
-	*/
-	public boolean isAllowAnonymousEmail() {
-		return _mbMailingList.isAllowAnonymousEmail();
-	}
-
-	/**
-	* Sets whether this message boards mailing list is allow anonymous email.
-	*
-	* @param allowAnonymousEmail the allow anonymous email of this message boards mailing list
-	*/
-	public void setAllowAnonymousEmail(boolean allowAnonymousEmail) {
-		_mbMailingList.setAllowAnonymousEmail(allowAnonymousEmail);
 	}
 
 	public boolean isNew() {

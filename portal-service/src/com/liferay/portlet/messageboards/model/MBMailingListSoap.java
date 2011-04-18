@@ -54,8 +54,8 @@ public class MBMailingListSoap implements Serializable {
 		soapModel.setOutUseSSL(model.getOutUseSSL());
 		soapModel.setOutUserName(model.getOutUserName());
 		soapModel.setOutPassword(model.getOutPassword());
+		soapModel.setAllowAnonymous(model.getAllowAnonymous());
 		soapModel.setActive(model.getActive());
-		soapModel.setAllowAnonymousEmail(model.getAllowAnonymousEmail());
 
 		return soapModel;
 	}
@@ -312,6 +312,18 @@ public class MBMailingListSoap implements Serializable {
 		_outPassword = outPassword;
 	}
 
+	public boolean getAllowAnonymous() {
+		return _allowAnonymous;
+	}
+
+	public boolean isAllowAnonymous() {
+		return _allowAnonymous;
+	}
+
+	public void setAllowAnonymous(boolean allowAnonymous) {
+		_allowAnonymous = allowAnonymous;
+	}
+
 	public boolean getActive() {
 		return _active;
 	}
@@ -322,18 +334,6 @@ public class MBMailingListSoap implements Serializable {
 
 	public void setActive(boolean active) {
 		_active = active;
-	}
-
-	public boolean getAllowAnonymousEmail() {
-		return _allowAnonymousEmail;
-	}
-
-	public boolean isAllowAnonymousEmail() {
-		return _allowAnonymousEmail;
-	}
-
-	public void setAllowAnonymousEmail(boolean allowAnonymousEmail) {
-		_allowAnonymousEmail = allowAnonymousEmail;
 	}
 
 	private String _uuid;
@@ -360,6 +360,6 @@ public class MBMailingListSoap implements Serializable {
 	private boolean _outUseSSL;
 	private String _outUserName;
 	private String _outPassword;
+	private boolean _allowAnonymous;
 	private boolean _active;
-	private boolean _allowAnonymousEmail;
 }
