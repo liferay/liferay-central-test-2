@@ -33,7 +33,6 @@ public interface KnownDevices {
 
 	public Set<String> getPointingMethods();
 
-	public void reload()
-		throws Exception;
+	public void reload() throws Exception;
 
 }
