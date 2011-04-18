@@ -53,7 +53,7 @@ public class RateWebContentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"xPath=(//div[@class='aui-rating-label-element'])[2]")) {
+							"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]")) {
 					break;
 				}
 			}
@@ -66,7 +66,7 @@ public class RateWebContentTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 
 		String voteCount = selenium.getFirstNumberIncrement(
-				"xPath=(//div[@class='aui-rating-label-element'])[2]");
+				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]");
 		RuntimeVariables.setValue("voteCount", voteCount);
 		selenium.clickAt("//a[5]", RuntimeVariables.replace(""));
 
@@ -77,7 +77,7 @@ public class RateWebContentTest extends BaseTestCase {
 
 			try {
 				if (selenium.isPartialText(
-							"xPath=(//div[@class='aui-rating-label-element'])[2]",
+							"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
 							RuntimeVariables.getValue("voteCount"))) {
 					break;
 				}
@@ -90,7 +90,7 @@ public class RateWebContentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"xPath=(//div[@class='aui-rating-label-element'])[2]",
+				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
 				RuntimeVariables.getValue("voteCount")));
 	}
 }

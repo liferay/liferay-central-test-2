@@ -28,12 +28,6 @@ public class TearDownPageTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.clickAt("//div[@id='dockbar']",
-					RuntimeVariables.replace("Dockbar"));
-
-				String guestCommunity = selenium.getText(
-						"//nav[@class='site-breadcrumbs']/ul/li[1]/span/a");
-				RuntimeVariables.setValue("guestCommunity", guestCommunity);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -41,8 +35,7 @@ public class TearDownPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div/div[3]/div/ul/li[1]/a")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -53,8 +46,17 @@ public class TearDownPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace("Manage Pages"));
+
+				String guestCommunity = selenium.getText(
+						"//nav[@id='breadcrumbs']/ul/li[1]/span/a");
+				RuntimeVariables.setValue("guestCommunity", guestCommunity);
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace("Control Panel"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("link=Pages", RuntimeVariables.replace("Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -84,7 +86,7 @@ public class TearDownPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[1]",
+				selenium.clickAt("//div[3]/ul/li/div/div[1]",
 					RuntimeVariables.replace("Drop Down Arrow"));
 
 			case 2:
@@ -118,7 +120,8 @@ public class TearDownPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.clickAt("//li[2]/div/div[3]/a",
+					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
@@ -140,7 +143,8 @@ public class TearDownPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.clickAt("//li[2]/div/div[3]/a",
+					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
@@ -162,7 +166,8 @@ public class TearDownPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.clickAt("//li[2]/div/div[3]/a",
+					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
@@ -184,7 +189,8 @@ public class TearDownPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.clickAt("//li[2]/div/div[3]/a",
+					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
@@ -206,7 +212,8 @@ public class TearDownPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("//li[2]/div/div[3]/a"));
+				selenium.clickAt("//li[2]/div/div[3]/a",
+					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
