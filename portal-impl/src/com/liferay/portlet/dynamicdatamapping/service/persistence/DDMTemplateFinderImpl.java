@@ -38,13 +38,14 @@ import java.util.List;
 public class DDMTemplateFinderImpl
 	extends BasePersistenceImpl<DDMTemplate> implements DDMTemplateFinder {
 
-	public static String COUNT_BY_C_G_N_D_T_L =
-		DDMTemplateFinder.class.getName() + ".countByC_G_N_D_T_L";
+	public static String COUNT_BY_C_G_S_N_D_T_L =
+		DDMTemplateFinder.class.getName() + ".countByC_G_S_N_D_T_L";
 
-	public static String FIND_BY_C_G_N_D_T_L =
-		DDMTemplateFinder.class.getName() + ".findByC_G_N_D_T_L";
+	public static String FIND_BY_C_G_S_N_D_T_L =
+		DDMTemplateFinder.class.getName() + ".findByC_G_S_N_D_T_L";
 
-	public int countByKeywords(long companyId, long groupId, String keywords)
+	public int countByKeywords(
+			long companyId, long groupId, long structureId, String keywords)
 		throws SystemException {
 
 		String[] names = null;
@@ -63,23 +64,25 @@ public class DDMTemplateFinderImpl
 			andOperator = true;
 		}
 
-		return countByC_G_N_D_T_L(
-			companyId, groupId, names, descriptions, types, languages,
-			andOperator);
+		return countByC_G_S_N_D_T_L(
+			companyId, groupId, structureId, names, descriptions, types,
+			languages, andOperator);
 	}
 
-	public int countByC_G_N_D_T_L(
-			long companyId, long groupId, String name, String description,
-			String type, String language, boolean andOperator)
+	public int countByC_G_S_N_D_T_L(
+			long companyId, long groupId, long structureId, String name,
+			String description, String type, String language,
+			boolean andOperator)
 		throws SystemException {
 
-		return countByC_G_N_D_T_L(
-			companyId, groupId, new String[] {name}, new String[] {description},
-			new String[] {type}, new String[] {language}, andOperator);
+		return countByC_G_S_N_D_T_L(
+			companyId, groupId, structureId, new String[] {name},
+			new String[] {description}, new String[] {type},
+			new String[] {language}, andOperator);
 	}
 
-	public int countByC_G_N_D_T_L(
-			long companyId, long groupId, String[] names,
+	public int countByC_G_S_N_D_T_L(
+			long companyId, long groupId, long structureId, String[] names,
 			String[] descriptions, String[] types, String[] languages,
 			boolean andOperator)
 		throws SystemException {
@@ -94,10 +97,14 @@ public class DDMTemplateFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_G_N_D_T_L);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_S_N_D_T_L);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
+			if (structureId <= 0) {
+				sql = StringUtil.replace(sql, "(structureId = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -117,7 +124,15 @@ public class DDMTemplateFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
+			if (structureId > 0) {
+				qPos.add(structureId);
+			}
+
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(types, 2);
@@ -144,8 +159,8 @@ public class DDMTemplateFinderImpl
 	}
 
 	public List<DDMTemplate> findByKeywords(
-			long companyId, long groupId, String keywords, int start, int end,
-			OrderByComparator orderByComparator)
+			long companyId, long groupId, long structureId, String keywords,
+			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		String[] names = null;
@@ -164,25 +179,27 @@ public class DDMTemplateFinderImpl
 			andOperator = true;
 		}
 
-		return findByC_G_N_D_T_L(
-			companyId, groupId, names, descriptions, types, languages,
-			andOperator, start, end, orderByComparator);
+		return findByC_G_S_N_D_T_L(
+			companyId, groupId, structureId, names, descriptions, types,
+			languages, andOperator, start, end, orderByComparator);
 	}
 
-	public List<DDMTemplate> findByC_G_N_D_T_L(
-			long companyId, long groupId, String name, String description,
-			String type, String language, boolean andOperator, int start,
-			int end, OrderByComparator orderByComparator)
+	public List<DDMTemplate> findByC_G_S_N_D_T_L(
+			long companyId, long groupId, long structureId, String name,
+			String description, String type, String language,
+			boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return findByC_G_N_D_T_L(
-			companyId, groupId, new String[] {name}, new String[] {description},
-			new String[] {type}, new String[] {language}, andOperator, start,
-			end, orderByComparator);
+		return findByC_G_S_N_D_T_L(
+			companyId, groupId, structureId, new String[] {name},
+			new String[] {description}, new String[] {type},
+			new String[] {language}, andOperator, start, end,
+			orderByComparator);
 	}
 
-	public List<DDMTemplate> findByC_G_N_D_T_L(
-			long companyId, long groupId, String[] names,
+	public List<DDMTemplate> findByC_G_S_N_D_T_L(
+			long companyId, long groupId, long structureId, String[] names,
 			String[] descriptions, String[] types, String[] languages,
 			boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
@@ -198,10 +215,14 @@ public class DDMTemplateFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_G_N_D_T_L);
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_S_N_D_T_L);
 
 			if (groupId <= 0) {
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+			}
+
+			if (structureId <= 0) {
+				sql = StringUtil.replace(sql, "(structureId = ?) AND", "");
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -229,7 +250,15 @@ public class DDMTemplateFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
-			qPos.add(groupId);
+
+			if (groupId > 0) {
+				qPos.add(groupId);
+			}
+
+			if (structureId > 0) {
+				qPos.add(structureId);
+			}
+
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 			qPos.add(types, 2);
