@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
@@ -48,6 +49,8 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 		List<AssetVocabulary> groupVocabularies =
 			AssetVocabularyLocalServiceUtil.getGroupVocabularies(groupId);
 
+		groupVocabularies = ListUtil.copy(groupVocabularies);
+
 		Group group = GroupServiceUtil.getGroup(groupId);
 
 		if (!group.isCompany()) {
@@ -58,7 +61,9 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
 				companyGroup.getGroupId());
 
-			groupVocabularies.addAll(globalVocabularies);
+			groupVocabularies.addAll(
+				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
+				companyGroup.getGroupId()));
 		}
 
 		long classNameId = ClassNameServiceUtil.getClassNameId(className);
