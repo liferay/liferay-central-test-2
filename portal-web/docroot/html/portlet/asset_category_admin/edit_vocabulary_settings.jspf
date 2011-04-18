@@ -56,11 +56,12 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 		List<String> indexes = new ArrayList<String>();
 
 		if (_isDefaultClassNameIds(selectedClassNameIds)) {
+			indexes.add("0");
 		%>
 
 			<div class="lfr-form-row lfr-form-row-inline">
 				<div class="row-fields">
-					<aui:select label="choose-asset-type" name="classNameId">
+					<aui:select label="choose-asset-type" name="classNameId0">
 						<aui:option label="all-asset-types" selected="<%= true %>" value="0" />
 
 						<%
@@ -75,7 +76,7 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 
 					</aui:select>
 
-					<aui:input cssClass="vocabulary-checkbox" name="required" type="checkbox" value="<%= required %>" />
+					<aui:input cssClass="vocabulary-checkbox" name="required0" label="required" type="checkbox" value="<%= required %>" />
 				</div>
 			</div>
 
