@@ -234,6 +234,15 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, null, languageId, themeDisplay);
 	}
 
+	public JournalArticle getLatestArticle(long resourcePrimKey)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(),resourcePrimKey, ActionKeys.VIEW);
+
+		return journalArticleLocalService.getLatestArticle(resourcePrimKey);
+	}
+
 	public JournalArticle getLatestArticle(
 			long groupId, String articleId, int status)
 		throws PortalException, SystemException {
