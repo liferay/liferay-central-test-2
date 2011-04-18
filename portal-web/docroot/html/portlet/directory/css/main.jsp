@@ -105,16 +105,6 @@
 		}
 	}
 
-	.property-list
-
-	.property-list dd, .property-list
-
-	ul.property-list
-
-	.property-list
-
-	.property-list
-
 	.section {
 		float: left;
 		margin-left: 10px;
