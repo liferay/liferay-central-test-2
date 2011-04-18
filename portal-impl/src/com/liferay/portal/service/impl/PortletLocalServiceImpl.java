@@ -1416,23 +1416,27 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				footerPortletJavaScriptElement.getText());
 		}
 
-		portletModel.setCssClassWrapper(GetterUtil.getString(
-			portletElement.elementText("css-class-wrapper"),
-			portletModel.getCssClassWrapper()));
-		portletModel.setFacebookIntegration(GetterUtil.getString(
-			portletElement.elementText("facebook-integration"),
-			portletModel.getFacebookIntegration()));
-		portletModel.setAddDefaultResource(GetterUtil.getBoolean(
-			portletElement.elementText("add-default-resource"),
-			portletModel.isAddDefaultResource()));
-		portletModel.setSystem(GetterUtil.getBoolean(
-			portletElement.elementText("system"),
-			portletModel.isSystem()));
-		portletModel.setActive(GetterUtil.getBoolean(
-			portletElement.elementText("active"),
-			portletModel.isActive()));
-		portletModel.setInclude(GetterUtil.getBoolean(
-			portletElement.elementText("include"),
+		portletModel.setCssClassWrapper(
+			GetterUtil.getString(
+				portletElement.elementText("css-class-wrapper"),
+				portletModel.getCssClassWrapper()));
+		portletModel.setFacebookIntegration(
+			GetterUtil.getString(
+				portletElement.elementText("facebook-integration"),
+				portletModel.getFacebookIntegration()));
+		portletModel.setAddDefaultResource(
+			GetterUtil.getBoolean(
+				portletElement.elementText("add-default-resource"),
+				portletModel.isAddDefaultResource()));
+		portletModel.setSystem(
+			GetterUtil.getBoolean(
+				portletElement.elementText("system"), portletModel.isSystem()));
+		portletModel.setActive(
+			GetterUtil.getBoolean(
+				portletElement.elementText("active"), portletModel.isActive()));
+		portletModel.setInclude(
+			GetterUtil.getBoolean(
+				portletElement.elementText("include"),
 			portletModel.isInclude()));
 
 		if (Validator.isNull(servletContextName)) {
