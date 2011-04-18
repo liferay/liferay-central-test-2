@@ -1,35 +1,30 @@
 AUI().add(
 	'liferay-form-navigator',
 	function(A) {
-		var AUI_HELPER_HIDDEN_ACCESSIBLE = 'yui3-aui-helper-hidden-accessible';
+		var CSS_HIDDEN = 'yui3-aui-helper-hidden-accessible';
 
-		var FORM_SECTION = '.form-section';
+		var CSS_SECTION_ERROR = 'section-error';
 
-		var LIST_ITEM_SELECTED = 'li.selected';
+		var CSS_SELECTED = 'selected';
 
-		var SECTION_ERROR = 'section-error';
+		var SELECTOR_FORM_SECTION = '.form-section';
 
-		var SELECTED = 'selected';
+		var SELECTOR_LIST_ITEM_SELECTED = 'li.selected';
 
 		var FormNavigator = function(options) {
 			var instance = this;
 
 			instance._container = A.one(options.container);
 
-			Liferay.on(
-				'form:formRegistered',
-				A.bind(instance._onFormRegistered, instance, options)
-			);
+			instance._formId = options.formId;
+
+			Liferay.after('form:registered', instance._afterFormRegistered, instance);
 
 			instance._navigation = instance._container.one('.form-navigator');
-			instance._sections = instance._container.all(FORM_SECTION);
+			instance._sections = instance._container.all(SELECTOR_FORM_SECTION);
 
 			if (instance._navigation) {
-				instance._navigation.delegate(
-					'click',
-					A.bind(instance._onClick, instance),
-					'li a'
-				);
+				instance._navigation.delegate('click', instance._onClick, 'li a', instance)
 			}
 
 			if (options.modifiedSections) {
@@ -37,6 +32,7 @@ AUI().add(
 
 				if (!instance._modifiedSections) {
 					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections + '" type="hidden" />');
+
 					instance._container.append(instance._modifiedSections);
 				}
 			}
@@ -53,10 +49,7 @@ AUI().add(
 
 			instance._revealSection(location.href);
 
-			A.on(
-				'formNavigator:trackChanges',
-				A.bind(instance._trackChanges, instance)
-			);
+			A.on('formNavigator:trackChanges', instance._trackChanges, instance);
 
 			var inputs = instance._container.all('input, select, textarea');
 
@@ -85,6 +78,19 @@ AUI().add(
 
 				if (A.Array.indexOf(section, instance._modifiedSectionsArray) == -1) {
 					instance._modifiedSectionsArray.push(section);
+				}
+			},
+
+			_afterFormRegistered: function(event) {
+				var instance = this;
+
+				if (event.formId === instance._formId) {
+					var formValidator = event.target.formValidator;
+
+					instance._formValidator = formValidator;
+
+					formValidator.on('errorField', instance._updateSectionStatus, instance);
+					formValidator.on('validField', instance._updateSectionStatus, instance);
 				}
 			},
 
@@ -119,31 +125,17 @@ AUI().add(
 				var li = target.get('parentNode');
 
 				if (li && !li.test('.selected')) {
-					instance._revealSection(target.attr('href'), li);
+					var href = target.attr('href');
 
-					var currentSection = target.attr('href').split('#');
+					instance._revealSection(href, li);
 
-					if (currentSection[1]) {
-						A.later(0, instance, instance._updateHash, [currentSection[1]]);
+					var hash = href.split('#');
+
+					var hashValue = hash[1];
+
+					if (hashValue) {
+						A.later(0, instance, instance._updateHash, [hashValue]);
 					}
-				}
-			},
-
-			_onFormRegistered: function(options, event) {
-				var instance = this;
-
-				if (event.formId === options.formId) {
-					var formValidator = event.form.formValidator;
-
-					instance._formValidator = formValidator;
-
-					formValidator.on('errorField', function(event){
-						instance._updateSectionStatus();
-					});
-
-					formValidator.on('validField', function(event){
-						instance._updateSectionStatus();
-					});
 				}
 			},
 
@@ -168,18 +160,18 @@ AUI().add(
 					id = '#' + id[1];
 
 					var section = A.one(id);
-					var selected = instance._navigation.one(LIST_ITEM_SELECTED);
+					var selected = instance._navigation.one(SELECTOR_LIST_ITEM_SELECTED);
 
 					if (selected) {
-						selected.removeClass(SELECTED);
+						selected.removeClass(CSS_SELECTED);
 					}
 
-					li.addClass(SELECTED);
+					li.addClass(CSS_SELECTED);
 
-					instance._sections.removeClass(SELECTED).addClass(AUI_HELPER_HIDDEN_ACCESSIBLE);
+					instance._sections.removeClass(CSS_SELECTED).addClass(CSS_HIDDEN);
 
 					if (section) {
-						section.addClass(SELECTED).removeClass(AUI_HELPER_HIDDEN_ACCESSIBLE);
+						section.addClass(CSS_SELECTED).removeClass(CSS_HIDDEN);
 					}
 				}
 			},
@@ -187,7 +179,7 @@ AUI().add(
 			_trackChanges: function(el) {
 				var instance = this;
 
-				var currentSection = A.one(el).ancestor(FORM_SECTION).attr('id');
+				var currentSection = A.one(el).ancestor(SELECTOR_FORM_SECTION).attr('id');
 
 				var currentSectionLink = A.one('#' + currentSection + 'Link');
 
@@ -207,7 +199,7 @@ AUI().add(
 			_updateSectionStatus: function() {
 				var instance = this;
 
-				var selectedSectionNode = instance._navigation.one(LIST_ITEM_SELECTED);
+				var selectedSectionNode = instance._navigation.one(SELECTOR_LIST_ITEM_SELECTED);
 
 				if (selectedSectionNode) {
 					if (instance._formValidator.hasErrors()) {
@@ -217,20 +209,18 @@ AUI().add(
 
 						for (var item in errors) {
 							if (hasOwnProperty.call(errors, item)) {
-								var section = A.one('#' + item).ancestor(FORM_SECTION);
+								var section = A.one('#' + item).ancestor(SELECTOR_FORM_SECTION);
 
-								if ( section && section.hasClass(SELECTED)) {
-									selectedSectionNode.addClass(SECTION_ERROR);
+								if (section && section.hasClass(CSS_SELECTED)) {
+									selectedSectionNode.addClass(CSS_SECTION_ERROR);
+
 									return;
 								}
-
-								selectedSectionNode.removeClass(SECTION_ERROR);
 							}
 						}
 					}
-					else {
-						 selectedSectionNode.removeClass(SECTION_ERROR);
-					}
+
+					selectedSectionNode.removeClass(CSS_SECTION_ERROR);
 				}
 			},
 
