@@ -689,6 +689,19 @@ AUI().add(
 												internalNode.set('offsetHeight', info.offsetHeight);
 											}
 
+											var topperNode = portletNode.one('.portlet-topper');
+											var contentNode = portletNode.one('.portlet-content');
+											var containerNode = portletNode.one('.portlet-content-container');
+
+											var topperHeight = topperNode.get('offsetHeight');
+											var paddingTop = parseInt(contentNode.getStyle('paddingTop'));
+											var paddingBottom = parseInt(contentNode.getStyle('paddingBottom'));
+											var containerHeight = info.offsetHeight - topperHeight - paddingTop - paddingBottom;
+
+											if (containerNode) {
+												containerNode.setStyle('height', containerHeight);
+											}
+
 											instance.savePosition(portletNode);
 										}
 									},
