@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.iframe.portlet.addportletmultiple;
+package com.liferay.portalweb.portlet.iframe.portlet.addportletiframemultiple;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,7 +22,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletMultipleTests extends BaseTests {
+public class AddPortletIFrameMultipleTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();

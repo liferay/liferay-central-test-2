@@ -30,7 +30,7 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=IFrame Test Page")) {
+				if (selenium.isVisible("link=IFrame Test Page")) {
 					break;
 				}
 			}
@@ -41,9 +41,12 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=IFrame Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=IFrame Test Page",
+			RuntimeVariables.replace("IFrame Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Options"),
+			selenium.getText("//strong/a"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
@@ -75,7 +78,7 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_86_src")) {
+				if (selenium.isVisible("//input[@id='_86_src']")) {
 					break;
 				}
 			}
@@ -86,9 +89,11 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_86_src", RuntimeVariables.replace("www.liferay.com"));
+		selenium.type("//input[@id='_86_src']",
+			RuntimeVariables.replace("www.liferay.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
@@ -113,7 +118,8 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=IFrame Test Page", RuntimeVariables.replace(""));
+		selenium.clickAt("link=IFrame Test Page",
+			RuntimeVariables.replace("IFrame Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 
@@ -123,7 +129,8 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("logo")) {
+				if (RuntimeVariables.replace("Liferay.com")
+										.equals(selenium.getText("logo"))) {
 					break;
 				}
 			}
@@ -134,6 +141,7 @@ public class ConfigurePortletSourceURLTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isElementPresent("logo"));
+		assertEquals(RuntimeVariables.replace("Liferay.com"),
+			selenium.getText("logo"));
 	}
 }

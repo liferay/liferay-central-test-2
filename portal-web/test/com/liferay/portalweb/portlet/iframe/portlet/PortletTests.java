@@ -15,10 +15,10 @@
 package com.liferay.portalweb.portlet.iframe.portlet;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.iframe.portlet.addportlet.AddPortletTests;
-import com.liferay.portalweb.portlet.iframe.portlet.addportletmultiple.AddPortletMultipleTests;
+import com.liferay.portalweb.portlet.iframe.portlet.addportletiframe.AddPortletIFrameTests;
+import com.liferay.portalweb.portlet.iframe.portlet.addportletiframemultiple.AddPortletIFrameMultipleTests;
 import com.liferay.portalweb.portlet.iframe.portlet.configureportletsourceurl.ConfigurePortletSourceURLTests;
-import com.liferay.portalweb.portlet.iframe.portlet.removeportlet.RemovePortletTests;
+import com.liferay.portalweb.portlet.iframe.portlet.removeportletiframe.RemovePortletIFrameTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -31,10 +31,10 @@ public class PortletTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddPortletTests.suite());
-		testSuite.addTest(AddPortletMultipleTests.suite());
+		testSuite.addTest(AddPortletIFrameTests.suite());
+		testSuite.addTest(AddPortletIFrameMultipleTests.suite());
 		testSuite.addTest(ConfigurePortletSourceURLTests.suite());
-		testSuite.addTest(RemovePortletTests.suite());
+		testSuite.addTest(RemovePortletIFrameTests.suite());
 
 		return testSuite;
 	}
