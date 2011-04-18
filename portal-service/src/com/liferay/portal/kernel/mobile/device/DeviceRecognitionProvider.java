@@ -30,4 +30,6 @@ public interface DeviceRecognitionProvider {
 
 	public KnownDevices getKnownDevices();
 
+	public void reload() throws Exception;
+
 }

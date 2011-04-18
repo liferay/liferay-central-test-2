@@ -46,6 +46,9 @@ public class DefaultDeviceRecognitionProvider
 		return NoKnownDevices.getInstance();
 	}
 
+	public void reload() {
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		DefaultDeviceRecognitionProvider.class);
 

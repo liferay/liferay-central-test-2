@@ -35,4 +35,8 @@ public class DeviceRecognitionProviderProxyBean
 		throw new UnsupportedOperationException();
 	}
 
+	public void reload() {
+		throw new UnsupportedOperationException();
+	}
+
 }
