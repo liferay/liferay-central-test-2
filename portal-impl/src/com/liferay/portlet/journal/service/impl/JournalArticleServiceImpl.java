@@ -238,7 +238,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(),resourcePrimKey, ActionKeys.VIEW);
+			getPermissionChecker(), resourcePrimKey, ActionKeys.VIEW);
 
 		return journalArticleLocalService.getLatestArticle(resourcePrimKey);
 	}
