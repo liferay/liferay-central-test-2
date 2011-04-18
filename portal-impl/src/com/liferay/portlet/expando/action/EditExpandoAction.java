@@ -14,17 +14,12 @@
 
 package com.liferay.portlet.expando.action;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -43,14 +38,12 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -62,99 +55,6 @@ import org.apache.struts.action.ActionMapping;
  * @author Raymond Augé
  */
 public class EditExpandoAction extends PortletAction {
-
-	public static Serializable getValue(
-			PortletRequest portletRequest, String name, int type)
-		throws PortalException, SystemException {
-
-		Serializable value = null;
-
-		if (type == ExpandoColumnConstants.BOOLEAN) {
-			value = ParamUtil.getBoolean(portletRequest, name);
-		}
-		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-		}
-		else if (type == ExpandoColumnConstants.DATE) {
-			User user = PortalUtil.getUser(portletRequest);
-
-			int valueDateMonth = ParamUtil.getInteger(
-				portletRequest, name + "Month");
-			int valueDateDay = ParamUtil.getInteger(
-				portletRequest, name + "Day");
-			int valueDateYear = ParamUtil.getInteger(
-				portletRequest, name + "Year");
-			int valueDateHour = ParamUtil.getInteger(
-				portletRequest, name + "Hour");
-			int valueDateMinute = ParamUtil.getInteger(
-				portletRequest, name + "Minute");
-			int valueDateAmPm = ParamUtil.getInteger(
-				portletRequest, name + "AmPm");
-
-			if (valueDateAmPm == Calendar.PM) {
-				valueDateHour += 12;
-			}
-
-			value = PortalUtil.getDate(
-				valueDateMonth, valueDateDay, valueDateYear, valueDateHour,
-				valueDateMinute, user.getTimeZone(), new ValueDataException());
-		}
-		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-		}
-		else if (type == ExpandoColumnConstants.DOUBLE) {
-			value = ParamUtil.getDouble(portletRequest, name);
-		}
-		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-
-			value = GetterUtil.getDoubleValues(values);
-		}
-		else if (type == ExpandoColumnConstants.FLOAT) {
-			value = ParamUtil.getFloat(portletRequest, name);
-		}
-		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-
-			value = GetterUtil.getFloatValues(values);
-		}
-		else if (type == ExpandoColumnConstants.INTEGER) {
-			value = ParamUtil.getInteger(portletRequest, name);
-		}
-		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-
-			value = GetterUtil.getIntegerValues(values);
-		}
-		else if (type == ExpandoColumnConstants.LONG) {
-			value = ParamUtil.getLong(portletRequest, name);
-		}
-		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-
-			value = GetterUtil.getLongValues(values);
-		}
-		else if (type == ExpandoColumnConstants.SHORT) {
-			value = ParamUtil.getShort(portletRequest, name);
-		}
-		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-
-			value = GetterUtil.getShortValues(values);
-		}
-		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-			value = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
-		}
-		else {
-			value = ParamUtil.getString(portletRequest, name);
-		}
-
-		return value;
-	}
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -328,8 +228,8 @@ public class EditExpandoAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		int type = ParamUtil.getInteger(actionRequest, "type");
 
-		Serializable defaultValue = getValue(
-			actionRequest, "defaultValue", type);
+		Serializable defaultValue = PortalUtil.getExpandoValue(
+			actionRequest, "defaultValue", type, StringPool.BLANK);
 
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			themeDisplay.getCompanyId(), modelResource, resourcePrimKey);
