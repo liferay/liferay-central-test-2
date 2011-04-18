@@ -43,6 +43,18 @@ public class TestCase extends junit.framework.TestCase {
 		}
 	}
 
+	protected void assertEqualsIgnoreCase(String expected, String actual) {
+		if (expected != null) {
+			expected = expected.toLowerCase();
+		}
+
+		if (actual != null) {
+			actual = actual.toLowerCase();
+		}
+
+		assertEquals(expected, actual);
+	}
+
 	protected void assertLessThan(double expected, double actual)
 		throws Exception {
 
