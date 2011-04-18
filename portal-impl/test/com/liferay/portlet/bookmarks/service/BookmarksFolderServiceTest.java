@@ -93,9 +93,11 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 			assertEquals(groupId, GetterUtil.getLong(doc.get(Field.GROUP_ID)));
 
-			assertEquals(entry.getName(), doc.get(Field.TITLE));
+			assertEquals(entry.getName().toLowerCase(), doc.get(Field.TITLE));
 			assertEquals(entry.getUrl(), doc.get(Field.URL));
-			assertEquals(entry.getDescription(), doc.get(Field.DESCRIPTION));
+			assertEquals(
+				entry.getDescription().toLowerCase(),
+				doc.get(Field.DESCRIPTION));
 
 			assertEquals(folderId, GetterUtil.getLong(doc.get("folderId")));
 			assertEquals(
