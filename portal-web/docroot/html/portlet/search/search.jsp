@@ -265,6 +265,8 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 						JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryScopeGroupId, articleId);
 
+						entryTitle = article.getTitle(locale);
+
 						if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
 							total--;
 
