@@ -171,7 +171,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 			if (hash) {
 				var src = '';
 
-				if (hash.indexOf('http://') != 0) {
+				if (!(/^https?\:\/\//.test(hash))) {
 					src = '<%= baseSrc %>';
 				}
 
