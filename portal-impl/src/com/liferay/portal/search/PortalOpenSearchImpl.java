@@ -33,12 +33,16 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.util.Date;
@@ -171,31 +175,47 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		String articleId = result.get(Field.ENTRY_CLASS_PK);
 		String version = result.get("version");
 
-		List<Long> hitLayoutIds =
-			JournalContentSearchLocalServiceUtil.getLayoutIds(
-				layout.getGroupId(), layout.isPrivateLayout(), articleId);
+		JournalArticle article = JournalArticleServiceUtil.getArticle(
+			groupId, articleId);
 
-		if (hitLayoutIds.size() > 0) {
-			Long hitLayoutId = hitLayoutIds.get(0);
+		if (Validator.isNotNull(article.getLayoutUuid())) {
+			StringBundler sb = new StringBundler(3);
 
-			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-				layout.getGroupId(), layout.isPrivateLayout(),
-				hitLayoutId.longValue());
-
-			return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-		}
-		else {
-			StringBundler sb = new StringBundler(7);
-
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/journal/view_article_content?groupId=");
-			sb.append(groupId);
-			sb.append("&articleId=");
-			sb.append(articleId);
-			sb.append("&version=");
-			sb.append(version);
+			sb.append(PortalUtil.getGroupFriendlyURL(
+				GroupLocalServiceUtil.getGroup(article.getGroupId()),
+				false, themeDisplay));			
+			sb.append(JournalArticleConstants.CANONICAL_URL_SEPARATOR);
+			sb.append(article.getUrlTitle());
 
 			return sb.toString();
+		}
+		else {
+			List<Long> hitLayoutIds =
+				JournalContentSearchLocalServiceUtil.getLayoutIds(
+					layout.getGroupId(), layout.isPrivateLayout(), articleId);
+
+			if (hitLayoutIds.size() > 0) {
+				Long hitLayoutId = hitLayoutIds.get(0);
+
+				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					hitLayoutId.longValue());
+
+				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+			}
+			else {
+				StringBundler sb = new StringBundler(7);
+
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/journal/view_article_content?groupId=");
+				sb.append(groupId);
+				sb.append("&articleId=");
+				sb.append(articleId);
+				sb.append("&version=");
+				sb.append(version);
+
+				return sb.toString();
+			}
 		}
 	}
 
