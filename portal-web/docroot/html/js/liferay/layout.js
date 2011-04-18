@@ -683,6 +683,7 @@ AUI().add(
 											var info = event.info;
 
 											var portletNode = this.get('node');
+
 											var internalNode = portletNode.one('.portlet');
 
 											if (internalNode) {
@@ -690,13 +691,17 @@ AUI().add(
 											}
 
 											var topperNode = portletNode.one('.portlet-topper');
-											var contentNode = portletNode.one('.portlet-content');
-											var containerNode = portletNode.one('.portlet-content-container');
 
 											var topperHeight = topperNode.get('offsetHeight');
+
+											var contentNode = portletNode.one('.portlet-content');
+
 											var paddingTop = parseInt(contentNode.getStyle('paddingTop'));
 											var paddingBottom = parseInt(contentNode.getStyle('paddingBottom'));
+
 											var containerHeight = info.offsetHeight - topperHeight - paddingTop - paddingBottom;
+
+											var containerNode = portletNode.one('.portlet-content-container');
 
 											if (containerNode) {
 												containerNode.setStyle('height', containerHeight);
