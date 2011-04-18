@@ -51,7 +51,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
 			String outPassword, boolean mailingListActive,
-			ServiceContext serviceContext)
+			boolean allowAnonymousEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
@@ -103,7 +103,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 			inReadInterval, outEmailAddress, outCustom, outServerName,
 			outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, serviceContext);
+			mailingListActive, allowAnonymousEmail, serviceContext);
 
 		// Expando
 
@@ -376,7 +376,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			int inReadInterval, String outEmailAddress, boolean outCustom,
 			String outServerName, int outServerPort, boolean outUseSSL,
 			String outUserName,	String outPassword, boolean mailingListActive,
-			boolean mergeWithParentCategory, ServiceContext serviceContext)
+			boolean allowAnonymousEmail, boolean mergeWithParentCategory,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Merge categories
@@ -426,7 +427,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,
 				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive, serviceContext);
+				mailingListActive, allowAnonymousEmail, serviceContext);
 		}
 		else {
 			mbMailingListLocalService.addMailingList(
@@ -435,7 +436,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,
 				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive, serviceContext);
+				mailingListActive, allowAnonymousEmail, serviceContext);
 		}
 
 		// Expando

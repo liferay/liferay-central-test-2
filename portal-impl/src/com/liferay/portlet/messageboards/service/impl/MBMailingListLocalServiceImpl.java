@@ -53,7 +53,7 @@ public class MBMailingListLocalServiceImpl
 			int inReadInterval, String outEmailAddress, boolean outCustom,
 			String outServerName, int outServerPort, boolean outUseSSL,
 			String outUserName, String outPassword, boolean active,
-			ServiceContext serviceContext)
+			boolean allowAnonymousEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Mailing list
@@ -94,6 +94,7 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setOutUserName(outUserName);
 		mailingList.setOutPassword(outPassword);
 		mailingList.setActive(active);
+		mailingList.setAllowAnonymousEmail(allowAnonymousEmail);
 
 		mbMailingListPersistence.update(mailingList, false);
 
@@ -144,7 +145,8 @@ public class MBMailingListLocalServiceImpl
 			String inUserName, String inPassword, int inReadInterval,
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
-			String outPassword, boolean active, ServiceContext serviceContext)
+			String outPassword, boolean active, boolean allowAnonymousEmail,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Mailing list
@@ -173,6 +175,7 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setOutUserName(outUserName);
 		mailingList.setOutPassword(outPassword);
 		mailingList.setActive(active);
+		mailingList.setAllowAnonymousEmail(allowAnonymousEmail);
 
 		mbMailingListPersistence.update(mailingList, false);
 
@@ -218,6 +221,8 @@ public class MBMailingListLocalServiceImpl
 		mailingListRequest.setInUseSSL(mailingList.getInUseSSL());
 		mailingListRequest.setInUserName(mailingList.getInUserName());
 		mailingListRequest.setInPassword(mailingList.getInPassword());
+		mailingListRequest.setAllowAnonymousEmail(
+			mailingList.getAllowAnonymousEmail());
 
 		SchedulerEngineUtil.schedule(
 			trigger, StorageType.MEMORY_CLUSTERED, null,

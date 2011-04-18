@@ -57,6 +57,10 @@ public class MailingListRequest implements Serializable {
 		return _inUseSSL;
 	}
 
+	public boolean isAllowAnonymousEmail() {
+		return _allowAnonymousEmail;
+	}
+
 	public long getUserId() {
 		return _userId;
 	}
@@ -97,6 +101,10 @@ public class MailingListRequest implements Serializable {
 		_inUseSSL = inUseSSL;
 	}
 
+	public void setAllowAnonymousEmail(boolean allowAnonymousEmail) {
+		_allowAnonymousEmail = allowAnonymousEmail;
+	}
+
 	public void setUserId(long id) {
 		_userId = id;
 	}
@@ -112,6 +120,7 @@ public class MailingListRequest implements Serializable {
 	private int _inServerPort;
 	private String _inUserName;
 	private boolean _inUseSSL;
+	private boolean _allowAnonymousEmail;
 	private long _userId;
 
 }

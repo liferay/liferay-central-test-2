@@ -169,6 +169,8 @@ public class MailingListMessageListener extends BaseMessageListener {
 		long companyId = mailingListRequest.getCompanyId();
 		long groupId = mailingListRequest.getGroupId();
 		long categoryId = mailingListRequest.getCategoryId();
+		boolean allowAnonymousEmail =
+			mailingListRequest.isAllowAnonymousEmail();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Category id " + categoryId);
@@ -184,6 +186,10 @@ public class MailingListMessageListener extends BaseMessageListener {
 		}
 		catch (NoSuchUserException nsue) {
 			anonymous = true;
+		}
+
+		if (anonymous && !allowAnonymousEmail) {
+			return;
 		}
 
 		long parentMessageId = MBUtil.getParentMessageId(mailMessage);

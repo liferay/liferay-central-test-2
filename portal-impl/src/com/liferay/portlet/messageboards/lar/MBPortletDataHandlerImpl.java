@@ -558,6 +558,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		String outUserName = null;
 		String outPassword = null;
 		boolean mailingListActive = false;
+		boolean allowAnonymousEmail = false;
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			categoryPath, category, _NAMESPACE);
@@ -596,7 +597,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					inUseSSL, inUserName, inPassword, inReadInterval,
 					outEmailAddress, outCustom, outServerName, outServerPort,
 					outUseSSL, outUserName, outPassword, mailingListActive,
-					serviceContext);
+					allowAnonymousEmail, serviceContext);
 			}
 			else {
 				importedCategory = MBCategoryLocalServiceUtil.updateCategory(
@@ -606,7 +607,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					inServerName, inServerPort, inUseSSL, inUserName,
 					inPassword, inReadInterval, outEmailAddress, outCustom,
 					outServerName, outServerPort, outUseSSL, outUserName,
-					outPassword, mailingListActive, false, serviceContext);
+					outPassword, mailingListActive, allowAnonymousEmail,
+					false, serviceContext);
 			}
 		}
 		else {
@@ -616,7 +618,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 				inUserName, inPassword, inReadInterval, outEmailAddress,
 				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-				outPassword, mailingListActive, serviceContext);
+				outPassword, mailingListActive, allowAnonymousEmail,
+				serviceContext);
 		}
 
 		portletDataContext.importClassedModel(
