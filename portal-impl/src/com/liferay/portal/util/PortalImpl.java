@@ -152,8 +152,10 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.action.EditExpandoAction;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.asset.JournalArticleAssetRendererFactory;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -1410,13 +1412,138 @@ public class PortalImpl implements Portal {
 		for (String name : names) {
 			int type = expandoBridge.getAttributeType(name);
 
-			Serializable value = EditExpandoAction.getValue(
-				portletRequest, "ExpandoAttribute--" + name + "--", type);
+			UnicodeProperties properties = expandoBridge.getAttributeProperties(
+				name);
+
+			String displayType = properties.getProperty(
+				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE);
+
+			Serializable value = getExpandoValue(
+				portletRequest, "ExpandoAttribute--" + name + "--", type,
+				displayType);
 
 			attributes.put(name, value);
 		}
 
 		return attributes;
+	}
+
+	public Serializable getExpandoValue(
+			PortletRequest portletRequest, String name, int type,
+			String displayType)
+		throws PortalException, SystemException {
+
+		Serializable value = null;
+
+		if (type == ExpandoColumnConstants.BOOLEAN) {
+			value = ParamUtil.getBoolean(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
+		}
+		else if (type == ExpandoColumnConstants.DATE) {
+			User user = PortalUtil.getUser(portletRequest);
+
+			int valueDateMonth = ParamUtil.getInteger(
+				portletRequest, name + "Month");
+			int valueDateDay = ParamUtil.getInteger(
+				portletRequest, name + "Day");
+			int valueDateYear = ParamUtil.getInteger(
+				portletRequest, name + "Year");
+			int valueDateHour = ParamUtil.getInteger(
+				portletRequest, name + "Hour");
+			int valueDateMinute = ParamUtil.getInteger(
+				portletRequest, name + "Minute");
+			int valueDateAmPm = ParamUtil.getInteger(
+				portletRequest, name + "AmPm");
+
+			if (valueDateAmPm == Calendar.PM) {
+				valueDateHour += 12;
+			}
+
+			value = PortalUtil.getDate(
+				valueDateMonth, valueDateDay, valueDateYear, valueDateHour,
+				valueDateMinute, user.getTimeZone(), new ValueDataException());
+		}
+		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE) {
+			value = ParamUtil.getDouble(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
+			String[] values = portletRequest.getParameterValues(name);
+
+			if (displayType.equals(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX)) {
+
+				values = StringUtil.split(values[0], StringPool.NEW_LINE);
+			}
+
+			value = GetterUtil.getDoubleValues(values);
+		}
+		else if (type == ExpandoColumnConstants.FLOAT) {
+			value = ParamUtil.getFloat(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
+			String[] values = portletRequest.getParameterValues(name);
+
+			if (displayType.equals(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX)) {
+
+				values = StringUtil.split(values[0], StringPool.NEW_LINE);
+			}
+
+			value = GetterUtil.getFloatValues(values);
+		}
+		else if (type == ExpandoColumnConstants.INTEGER) {
+			value = ParamUtil.getInteger(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
+			String[] values = portletRequest.getParameterValues(name);
+
+			if (displayType.equals(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX)) {
+
+				values = StringUtil.split(values[0], StringPool.NEW_LINE);
+			}
+
+			value = GetterUtil.getIntegerValues(values);
+		}
+		else if (type == ExpandoColumnConstants.LONG) {
+			value = ParamUtil.getLong(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
+			String[] values = portletRequest.getParameterValues(name);
+
+			if (displayType.equals(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX)) {
+
+				values = StringUtil.split(values[0], StringPool.NEW_LINE);
+			}
+
+			value = GetterUtil.getLongValues(values);
+		}
+		else if (type == ExpandoColumnConstants.SHORT) {
+			value = ParamUtil.getShort(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
+			String[] values = portletRequest.getParameterValues(name);
+
+			if (displayType.equals(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX)) {
+
+				values = StringUtil.split(values[0], StringPool.NEW_LINE);
+			}
+
+			value = GetterUtil.getShortValues(values);
+		}
+		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
+			value = portletRequest.getParameterValues(name);
+		}
+		else {
+			value = ParamUtil.getString(portletRequest, name);
+		}
+
+		return value;
 	}
 
 	public String getFacebookURL(

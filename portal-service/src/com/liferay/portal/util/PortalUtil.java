@@ -409,6 +409,15 @@ public class PortalUtil {
 			expandoBridge, portletRequest);
 	}
 
+	public static Serializable getExpandoValue(
+			PortletRequest portletRequest, String name, int type,
+			String displayType)
+		throws PortalException, SystemException{
+
+		return getPortal().getExpandoValue(
+			portletRequest, name, type, displayType);
+	}
+
 	public static String getFacebookURL(
 			Portlet portlet, String facebookCanvasPageURL,
 			ThemeDisplay themeDisplay)
