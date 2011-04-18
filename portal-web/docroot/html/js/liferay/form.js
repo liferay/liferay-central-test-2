@@ -201,7 +201,7 @@ AUI().add(
 					instance._INSTANCES[formId] = form;
 
 					Liferay.fire(
-						'form:formRegistered',
+						'form:registered',
 						{
 							form: form,
 							formId: formId

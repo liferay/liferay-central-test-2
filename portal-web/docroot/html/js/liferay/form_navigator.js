@@ -85,7 +85,7 @@ AUI().add(
 				var instance = this;
 
 				if (event.formId === instance._formId) {
-					var formValidator = event.target.formValidator;
+					var formValidator = event.form.formValidator;
 
 					instance._formValidator = formValidator;
 
