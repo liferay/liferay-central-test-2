@@ -318,39 +318,40 @@ public class DDMTemplateLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
-		long companyId, long groupId, java.lang.String keywords, int start,
-		int end,
+		long companyId, long groupId, long structureId,
+		java.lang.String keywords, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, groupId, keywords, start, end,
-			orderByComparator);
+				   .search(companyId, groupId, structureId, keywords, start,
+			end, orderByComparator);
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
-		long companyId, long groupId, java.lang.String name,
+		long companyId, long groupId, long structureId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String language, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, groupId, name, description, type,
-			language, andOperator, start, end, orderByComparator);
+				   .search(companyId, groupId, structureId, name, description,
+			type, language, andOperator, start, end, orderByComparator);
 	}
 
 	public static int searchCount(long companyId, long groupId,
-		java.lang.String keywords)
+		long structureId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().searchCount(companyId, groupId, keywords);
+		return getService()
+				   .searchCount(companyId, groupId, structureId, keywords);
 	}
 
 	public static int searchCount(long companyId, long groupId,
-		java.lang.String name, java.lang.String description,
+		long structureId, java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String language, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchCount(companyId, groupId, name, description, type,
-			language, andOperator);
+				   .searchCount(companyId, groupId, structureId, name,
+			description, type, language, andOperator);
 	}
 
 	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate updateTemplate(
