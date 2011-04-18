@@ -28,8 +28,6 @@ String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:a
 boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:asset-tags-selector:focus"));
 String contentCallback = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-tags-selector:contentCallback"));
 
-boolean allowSuggestions = PropsValues.ASSET_TAG_SUGGESTIONS_ENABLED;
-
 if (Validator.isNotNull(className) && (classPK > 0)) {
 	List<AssetTag> tags = AssetTagServiceUtil.getTags(className, classPK);
 
@@ -52,10 +50,10 @@ if (curTagsParam != null) {
 <aui:script use="liferay-asset-tags-selector">
 	new Liferay.AssetTagsSelector(
 		{
-			allowSuggestions: <%= allowSuggestions %>,
+			allowSuggestions: <%= PropsValues.ASSET_TAG_SUGGESTIONS_ENABLED %>,
 			contentBox: '#<%= namespace + randomNamespace %>assetTagsSelector',
 
-			<c:if test="<%= allowSuggestions && Validator.isNotNull(contentCallback) %>">
+			<c:if test="<%= PropsValues.ASSET_TAG_SUGGESTIONS_ENABLED && Validator.isNotNull(contentCallback) %>">
 				contentCallback: function() {
 					if (window.<%= contentCallback %>) {
 						return <%= contentCallback %>();

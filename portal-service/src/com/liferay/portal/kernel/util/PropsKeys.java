@@ -95,9 +95,9 @@ public interface PropsKeys {
 
 	public static final String ASSET_RENDERER_ENABLED = "asset.renderer.enabled.";
 
-	public static final String ASSET_TAG_SUGGESTIONS_ENABLED = "asset.tag.suggestions.enabled";
-
 	public static final String ASSET_TAG_PROPERTIES_DEFAULT = "asset.tag.properties.default";
+
+	public static final String ASSET_TAG_SUGGESTIONS_ENABLED = "asset.tag.suggestions.enabled";
 
 	public static final String ASSET_VOCABULARY_DEFAULT = "asset.vocabulary.default";
 
