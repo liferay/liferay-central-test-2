@@ -68,7 +68,7 @@ import org.springframework.web.context.ContextLoaderListener;
  */
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
-	public void contextInitialized(ServletContextEvent event) {
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		HotDeployUtil.reset();
 		InstancePool.reset();
 		MethodCache.reset();
@@ -78,7 +78,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		InitUtil.init();
 
-		ClassPathUtil.initializeClassPaths(event.getServletContext());
+		ClassPathUtil.initializeClassPaths(
+			servletContextEvent.getServletContext());
 
 		DirectServletRegistry.clearServlets();
 
@@ -90,7 +91,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		PortalContextLoaderLifecycleThreadLocal.setInitializing(true);
 
 		try {
-			super.contextInitialized(event);
+			super.contextInitialized(servletContextEvent);
 		}
 		finally {
 			PortalContextLoaderLifecycleThreadLocal.setInitializing(false);

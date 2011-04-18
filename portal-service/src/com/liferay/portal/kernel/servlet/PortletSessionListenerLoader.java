@@ -32,11 +32,11 @@ public class PortletSessionListenerLoader implements ServletContextListener {
 		_listener = listener;
 	}
 
-	public void contextInitialized(ServletContextEvent event) {
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		PortletSessionListenerManager.addListener(_listener);
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		PortletSessionListenerManager.removeListener(_listener);
 
 		_listener = null;

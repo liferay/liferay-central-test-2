@@ -47,10 +47,10 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 			StringPool.PERIOD).concat(servletContext.getContextPath());
 	}
 
-	public void contextDestroyed(ServletContextEvent event) {
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
-		ServletContext servletContext = event.getServletContext();
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		try {
 			Class<?> beanLocatorUtilClass = Class.forName(
@@ -72,17 +72,18 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 			}
 		}
 
-		super.contextDestroyed(event);
+		super.contextDestroyed(servletContextEvent);
 	}
 
-	public void contextInitialized(ServletContextEvent event) {
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		MethodCache.reset();
 
 		try {
-			super.contextInitialized(event);
+			super.contextInitialized(servletContextEvent);
 		}
 		finally {
-			ServletContext servletContext = event.getServletContext();
+			ServletContext servletContext =
+				servletContextEvent.getServletContext();
 
 			String lockKey = getLockKey(servletContext);
 
@@ -93,7 +94,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
-		ServletContext servletContext = event.getServletContext();
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		ApplicationContext applicationContext =
 			WebApplicationContextUtils.getWebApplicationContext(servletContext);

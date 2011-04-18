@@ -27,8 +27,8 @@ import javax.servlet.ServletContextListener;
  */
 public class ThemeContextListener implements ServletContextListener {
 
-	public void contextInitialized(ServletContextEvent event) {
-		ServletContext servletContext = event.getServletContext();
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
 		Thread currentThread = Thread.currentThread();
 
