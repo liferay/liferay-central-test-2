@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Time;
 
 /**
@@ -135,9 +136,11 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(19);
 
-		sb.append("{description=");
+		sb.append("{contextPath=");
+		sb.append(_contextPath);
+		sb.append(", description=");
 		sb.append(_description);
 		sb.append(", eventListener=");
 		sb.append(_eventListener);

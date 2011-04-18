@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Method;
 
@@ -40,6 +41,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @see    PortletContextLoader
  */
 public class PortletContextLoaderListener extends ContextLoaderListener {
+
+	public static String getLockKey(ServletContext servletContext) {
+		return PortletContextLoaderListener.class.getName().concat(
+			StringPool.PERIOD).concat(servletContext.getContextPath());
+	}
 
 	public void contextDestroyed(ServletContextEvent event) {
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
@@ -76,9 +82,11 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 			super.contextInitialized(event);
 		}
 		finally {
-			String contextPath = event.getServletContext().getContextPath();
+			ServletContext servletContext = event.getServletContext();
 
-			LockRegistry.freeLock(contextPath, contextPath, true);
+			String lockKey = getLockKey(servletContext);
+
+			LockRegistry.freeLock(lockKey, lockKey, true);
 		}
 
 		PortletBeanFactoryCleaner.readBeans();

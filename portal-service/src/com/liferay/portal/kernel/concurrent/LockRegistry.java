@@ -60,7 +60,8 @@ public class LockRegistry {
 	public static void freeAllLock(boolean unlock) {
 		if (unlock == true) {
 			for (Map<String, ReentrantLock> lockGroup :
-				_lockGroupMap.values()) {
+					_lockGroupMap.values()) {
+
 				for (ReentrantLock lock : lockGroup.values()) {
 					lock.unlock();
 				}
@@ -76,6 +77,7 @@ public class LockRegistry {
 
 	public static Map<String, ReentrantLock> freeLock(
 		String groupName, boolean unlock) {
+
 		Map<String, ReentrantLock> lockGroup = _lockGroupMap.remove(groupName);
 
 		if (lockGroup == null) {
@@ -97,6 +99,7 @@ public class LockRegistry {
 
 	public static ReentrantLock freeLock(
 		String groupName, String key, boolean unlock) {
+
 		Map<String, ReentrantLock> lockGroup = _lockGroupMap.get(groupName);
 
 		if (lockGroup == null) {

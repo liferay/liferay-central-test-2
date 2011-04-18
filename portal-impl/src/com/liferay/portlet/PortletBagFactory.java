@@ -443,8 +443,6 @@ public class PortletBagFactory {
 		}
 
 		for (SchedulerEntry schedulerEntry : schedulerEntries) {
-			schedulerEntry.setContextPath(portlet.getContextPath());
-
 			initScheduler(schedulerEntry);
 		}
 	}

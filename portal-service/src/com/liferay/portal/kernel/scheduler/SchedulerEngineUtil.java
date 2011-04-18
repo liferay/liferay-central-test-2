@@ -673,11 +673,10 @@ public class SchedulerEngineUtil {
 		Message message = new Message();
 
 		message.put(
+			SchedulerEngine.EXECUTION_LOCK, schedulerEntry.getContextPath());
+		message.put(
 			SchedulerEngine.MESSAGE_LISTENER_UUID,
 			schedulerEventListenerWrapper.getMessageListenerUUID());
-
-		message.put(
-			SchedulerEngine.EXECUTION_LOCK, schedulerEntry.getContextPath());
 
 		_schedule(
 			schedulerEntry.getTrigger(), storageType,
