@@ -179,6 +179,13 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleService.getLatestArticle(resourcePrimKey);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
 		long groupId, java.lang.String articleId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

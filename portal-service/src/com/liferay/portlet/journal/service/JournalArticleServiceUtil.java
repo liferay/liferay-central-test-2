@@ -193,6 +193,13 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLatestArticle(resourcePrimKey);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
 		long groupId, java.lang.String articleId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
