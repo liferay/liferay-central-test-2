@@ -16,7 +16,7 @@ AUI().add(
 
 			instance._container = A.one(options.container);
 
-			instance._formId = options.formId;
+			instance._formName = options.formName;
 
 			Liferay.after('form:registered', instance._afterFormRegistered, instance);
 
@@ -84,7 +84,7 @@ AUI().add(
 			_afterFormRegistered: function(event) {
 				var instance = this;
 
-				if (event.formId === instance._formId) {
+				if (event.formName === instance._formName) {
 					var formValidator = event.form.formValidator;
 
 					instance._formValidator = formValidator;

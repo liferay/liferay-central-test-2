@@ -196,15 +196,15 @@ AUI().add(
 
 					var form = new Liferay.Form(config);
 
-					var formId = config.id || config.namespace;
+					var formName = config.id || config.namespace;
 
-					instance._INSTANCES[formId] = form;
+					instance._INSTANCES[formName] = form;
 
 					Liferay.fire(
 						'form:registered',
 						{
 							form: form,
-							formId: formId
+							formName: formName
 						}
 					);
 
