@@ -57,8 +57,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		boolean outUseSSL = false;
 		String outUserName = null;
 		String outPassword = null;
+		boolean allowAnonymous = false;
 		boolean mailingListActive = false;
-		boolean allowAnonymousEmail = false;
 
 		Group group = GroupLocalServiceUtil.getGroup(
 			TestPropsValues.COMPANY_ID, GroupConstants.GUEST);
@@ -76,8 +76,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			displayStyle, emailAddress, inProtocol, inServerName, inServerPort,
 			inUseSSL, inUserName, inPassword, inReadInterval, outEmailAddress,
 			outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-			outPassword, mailingListActive, allowAnonymousEmail,
-			serviceContext);
+			outPassword, allowAnonymous, mailingListActive, serviceContext);
 
 		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
 	}
