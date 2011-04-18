@@ -676,6 +676,9 @@ public class SchedulerEngineUtil {
 			SchedulerEngine.MESSAGE_LISTENER_UUID,
 			schedulerEventListenerWrapper.getMessageListenerUUID());
 
+		message.put(
+			SchedulerEngine.EXECUTION_LOCK, schedulerEntry.getContextPath());
+
 		_schedule(
 			schedulerEntry.getTrigger(), storageType,
 			schedulerEntry.getDescription(),

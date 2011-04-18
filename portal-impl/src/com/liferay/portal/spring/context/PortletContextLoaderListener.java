@@ -17,6 +17,7 @@ package com.liferay.portal.spring.context;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.concurrent.LockRegistry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
@@ -71,7 +72,14 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent event) {
 		MethodCache.reset();
 
-		super.contextInitialized(event);
+		try {
+			super.contextInitialized(event);
+		}
+		finally {
+			String contextPath = event.getServletContext().getContextPath();
+
+			LockRegistry.freeLock(contextPath, contextPath, true);
+		}
 
 		PortletBeanFactoryCleaner.readBeans();
 

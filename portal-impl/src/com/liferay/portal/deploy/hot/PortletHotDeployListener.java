@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
+import com.liferay.portal.kernel.concurrent.LockRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
@@ -84,6 +85,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
 
 import javax.portlet.PortletURLGenerationListener;
 
@@ -199,6 +201,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
+
+		// Spring initialization lock
+
+		String contextPath = servletContext.getContextPath();
+
+		Lock springLock = LockRegistry.allocateLock(contextPath, contextPath);
+
+		springLock.lock();
 
 		// Company ids
 

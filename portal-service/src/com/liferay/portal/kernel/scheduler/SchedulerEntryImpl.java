@@ -23,6 +23,10 @@ import com.liferay.portal.kernel.util.Time;
  */
 public class SchedulerEntryImpl implements SchedulerEntry {
 
+	public String getContextPath() {
+		return _contextPath;
+	}
+
 	public String getDescription() {
 		return _description;
 	}
@@ -90,6 +94,10 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		return _triggerValue;
 	}
 
+	public void setContextPath(String contextPath) {
+		_contextPath = contextPath;
+	}
+
 	public void setDescription(String description) {
 		_description = description;
 	}
@@ -150,6 +158,7 @@ public class SchedulerEntryImpl implements SchedulerEntry {
 		return sb.toString();
 	}
 
+	private String _contextPath;
 	private String _description;
 	private transient MessageListener _eventListener;
 	private String _eventListenerClass;

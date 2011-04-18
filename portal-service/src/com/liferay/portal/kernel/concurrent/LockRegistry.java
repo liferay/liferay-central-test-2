@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.concurrent;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -24,14 +23,14 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class LockRegistry {
 
-	public static Lock allocateLock(String groupName, String key) {
-		ConcurrentHashMap<String, Lock> lockGroup = _lockGroupMap.get(
+	public static ReentrantLock allocateLock(String groupName, String key) {
+		ConcurrentHashMap<String, ReentrantLock> lockGroup = _lockGroupMap.get(
 			groupName);
 
 		if (lockGroup == null) {
-			lockGroup = new ConcurrentHashMap<String, Lock>();
+			lockGroup = new ConcurrentHashMap<String, ReentrantLock>();
 
-			ConcurrentHashMap<String, Lock> oldLockGroup =
+			ConcurrentHashMap<String, ReentrantLock> oldLockGroup =
 				_lockGroupMap.putIfAbsent(groupName, lockGroup);
 
 			if (oldLockGroup != null) {
@@ -39,12 +38,12 @@ public class LockRegistry {
 			}
 		}
 
-		Lock lock = lockGroup.get(key);
+		ReentrantLock lock = lockGroup.get(key);
 
 		if (lock == null) {
 			lock = new ReentrantLock();
 
-			Lock oldLock = lockGroup.putIfAbsent(key, lock);
+			ReentrantLock oldLock = lockGroup.putIfAbsent(key, lock);
 
 			if (oldLock != null) {
 				lock = oldLock;
@@ -60,8 +59,9 @@ public class LockRegistry {
 
 	public static void freeAllLock(boolean unlock) {
 		if (unlock == true) {
-			for (Map<String, Lock> lockGroup : _lockGroupMap.values()) {
-				for (Lock lock : lockGroup.values()) {
+			for (Map<String, ReentrantLock> lockGroup :
+				_lockGroupMap.values()) {
+				for (ReentrantLock lock : lockGroup.values()) {
 					lock.unlock();
 				}
 			}
@@ -70,19 +70,20 @@ public class LockRegistry {
 		_lockGroupMap.clear();
 	}
 
-	public static Map<String, Lock> freeLock(String groupName) {
+	public static Map<String, ReentrantLock> freeLock(String groupName) {
 		return freeLock(groupName, false);
 	}
 
-	public static Map<String, Lock> freeLock(String groupName, boolean unlock) {
-		Map<String, Lock> lockGroup = _lockGroupMap.remove(groupName);
+	public static Map<String, ReentrantLock> freeLock(
+		String groupName, boolean unlock) {
+		Map<String, ReentrantLock> lockGroup = _lockGroupMap.remove(groupName);
 
 		if (lockGroup == null) {
 			return null;
 		}
 
 		if (unlock == true) {
-			for (Lock lock : lockGroup.values()) {
+			for (ReentrantLock lock : lockGroup.values()) {
 				lock.unlock();
 			}
 		}
@@ -90,18 +91,19 @@ public class LockRegistry {
 		return lockGroup;
 	}
 
-	public static Lock freeLock(String groupName, String key) {
+	public static ReentrantLock freeLock(String groupName, String key) {
 		return freeLock(groupName, key, false);
 	}
 
-	public static Lock freeLock(String groupName, String key, boolean unlock) {
-		Map<String, Lock> lockGroup = _lockGroupMap.get(groupName);
+	public static ReentrantLock freeLock(
+		String groupName, String key, boolean unlock) {
+		Map<String, ReentrantLock> lockGroup = _lockGroupMap.get(groupName);
 
 		if (lockGroup == null) {
 			return null;
 		}
 
-		Lock lock = lockGroup.remove(key);
+		ReentrantLock lock = lockGroup.remove(key);
 
 		if (lock == null) {
 			return null;
@@ -114,8 +116,21 @@ public class LockRegistry {
 		return lock;
 	}
 
-	private static ConcurrentHashMap<String, ConcurrentHashMap<String, Lock>>
-		_lockGroupMap =
-			new ConcurrentHashMap<String, ConcurrentHashMap<String, Lock>>();
+	public static ReentrantLock getLock(String groupName, String key) {
+		ConcurrentHashMap<String, ReentrantLock> lockGroup = _lockGroupMap.get(
+			groupName);
+
+		if (lockGroup == null) {
+			return null;
+		}
+
+		return lockGroup.get(key);
+	}
+
+	private static ConcurrentHashMap
+		<String, ConcurrentHashMap<String, ReentrantLock>>
+			_lockGroupMap =
+				new ConcurrentHashMap
+					<String, ConcurrentHashMap<String, ReentrantLock>>();
 
 }

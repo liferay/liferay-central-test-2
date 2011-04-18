@@ -45,6 +45,8 @@ public interface SchedulerEngine {
 
 	public static final String EXCEPTIONS_MAX_SIZE = "EXCEPTIONS_MAX_SIZE";
 
+	public static final String EXECUTION_LOCK = "EXECUTION_LOCK";
+
 	public static final String FINAL_FIRE_TIME = "FINAL_FIRE_TIME";
 
 	public static final int GROUP_NAME_MAX_LENGTH = GetterUtil.getInteger(
