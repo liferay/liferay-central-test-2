@@ -76,7 +76,7 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 
 					</aui:select>
 
-					<aui:input cssClass="vocabulary-checkbox" name="required0" label="required" type="checkbox" value="<%= required %>" />
+					<aui:input cssClass="vocabulary-checkbox" label="required" name="required0" type="checkbox" value="<%= required %>" />
 				</div>
 			</div>
 
