@@ -42,7 +42,7 @@ public interface Device extends Serializable {
 
 	public String getPointingMethod();
 
-	public String getScreenSize();
+	public Dimensions getScreenSize();
 
 	public boolean hasQwertyKeyboard();
 

@@ -64,8 +64,8 @@ public class UnknownDevice extends AbstractDevice {
 		return VersionableName.UNKNOWN.getName();
 	}
 
-	public String getScreenSize() {
-		return VersionableName.UNKNOWN.getName();
+	public Dimensions getScreenSize() {
+		return Dimensions.UNKNOWN;
 	}
 
 	public boolean hasQwertyKeyboard() {
