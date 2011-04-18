@@ -100,64 +100,63 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 			PortletURL portletURL)
 		throws Exception {
 
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		Layout layout = themeDisplay.getLayout();
-
 		String articleId = result.get(Field.ENTRY_CLASS_PK);
-		String version = result.get("version");
 
 		JournalArticle article = JournalArticleServiceUtil.getArticle(
 			groupId, articleId);
 
 		if (Validator.isNotNull(article.getLayoutUuid())) {
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(PortalUtil.getGroupFriendlyURL(
+			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
 				GroupLocalServiceUtil.getGroup(article.getGroupId()),
-				false, themeDisplay));
-			sb.append(JournalArticleConstants.CANONICAL_URL_SEPARATOR);
-			sb.append(article.getUrlTitle());
+				false, themeDisplay);
 
-			return sb.toString();
+			return groupFriendlyURL.concat(
+				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
+					article.getUrlTitle());
 		}
-		else {
-			List<Long> hitLayoutIds =
-				JournalContentSearchLocalServiceUtil.getLayoutIds(
-					layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
-			for (Long hitLayoutId : hitLayoutIds) {
-				if (LayoutPermissionUtil.contains(
-						permissionChecker, layout.getGroupId(),
-						layout.isPrivateLayout(), hitLayoutId, ActionKeys.VIEW)) {
+		Layout layout = themeDisplay.getLayout();
 
-					Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-						layout.getGroupId(), layout.isPrivateLayout(),
-						hitLayoutId.longValue());
+		List<Long> hitLayoutIds =
+			JournalContentSearchLocalServiceUtil.getLayoutIds(
+				layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
-					return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-				}
+		for (Long hitLayoutId : hitLayoutIds) {
+			PermissionChecker permissionChecker =
+				themeDisplay.getPermissionChecker();
+
+			if (LayoutPermissionUtil.contains(
+					permissionChecker, layout.getGroupId(),
+					layout.isPrivateLayout(), hitLayoutId, ActionKeys.VIEW)) {
+
+				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					hitLayoutId.longValue());
+
+				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 			}
-
-			String layoutURL = getLayoutURL(themeDisplay, articleId);
-
-			if (layoutURL != null) {
-				return layoutURL;
-			}
-
-			StringBundler sb = new StringBundler(7);
-
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/journal/view_article_content?groupId=");
-			sb.append(groupId);
-			sb.append("&articleId=");
-			sb.append(articleId);
-			sb.append("&version=");
-			sb.append(version);
-
-			return sb.toString();
 		}
+
+		String layoutURL = getLayoutURL(themeDisplay, articleId);
+
+		if (layoutURL != null) {
+			return layoutURL;
+		}
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/journal/view_article_content?groupId=");
+		sb.append(groupId);
+		sb.append("&articleId=");
+		sb.append(articleId);
+		sb.append("&version=");
+
+		String version = result.get("version");
+
+		sb.append(version);
+
+		return sb.toString();
 	}
 
 }

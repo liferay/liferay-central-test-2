@@ -170,53 +170,51 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			ThemeDisplay themeDisplay, long groupId, Document result)
 		throws Exception {
 
-		Layout layout = themeDisplay.getLayout();
-
 		String articleId = result.get(Field.ENTRY_CLASS_PK);
-		String version = result.get("version");
 
 		JournalArticle article = JournalArticleServiceUtil.getArticle(
 			groupId, articleId);
 
 		if (Validator.isNotNull(article.getLayoutUuid())) {
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(PortalUtil.getGroupFriendlyURL(
+			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
 				GroupLocalServiceUtil.getGroup(article.getGroupId()),
-				false, themeDisplay));			
-			sb.append(JournalArticleConstants.CANONICAL_URL_SEPARATOR);
-			sb.append(article.getUrlTitle());
+				false, themeDisplay);
 
-			return sb.toString();
+			return groupFriendlyURL.concat(
+				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
+					article.getUrlTitle());
 		}
-		else {
-			List<Long> hitLayoutIds =
-				JournalContentSearchLocalServiceUtil.getLayoutIds(
-					layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
-			if (hitLayoutIds.size() > 0) {
-				Long hitLayoutId = hitLayoutIds.get(0);
+		Layout layout = themeDisplay.getLayout();
 
-				Layout hitLayout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					hitLayoutId.longValue());
+		List<Long> hitLayoutIds =
+			JournalContentSearchLocalServiceUtil.getLayoutIds(
+				layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
-				return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-			}
-			else {
-				StringBundler sb = new StringBundler(7);
+		if (!hitLayoutIds.isEmpty()) {
+			Long hitLayoutId = hitLayoutIds.get(0);
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/journal/view_article_content?groupId=");
-				sb.append(groupId);
-				sb.append("&articleId=");
-				sb.append(articleId);
-				sb.append("&version=");
-				sb.append(version);
+			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				hitLayoutId.longValue());
 
-				return sb.toString();
-			}
+			return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 		}
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/journal/view_article_content?groupId=");
+		sb.append(groupId);
+		sb.append("&articleId=");
+		sb.append(articleId);
+		sb.append("&version=");
+
+		String version = result.get("version");
+
+		sb.append(version);
+
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortalOpenSearchImpl.class);
