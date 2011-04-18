@@ -51,6 +51,9 @@ public class NoKnownDevices implements KnownDevices {
 		return _pointingMethods;
 	}
 
+	public void reload() {		
+	}
+
 	private NoKnownDevices() {
 		_brands.add(VersionableName.UNKNOWN);
 
