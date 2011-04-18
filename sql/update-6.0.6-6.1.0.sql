@@ -3,7 +3,7 @@ alter table AssetCategory add description STRING null;
 alter table AssetEntry add layoutUuid VARCHAR(75) null;
 
 alter table BlogsEntry add description STRING null;
-alter table BlogsEntry add smallImage BOOLEAN null;
+alter table BlogsEntry add smallImage BOOLEAN;
 alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
@@ -134,7 +134,7 @@ COMMIT_TRANSACTION;
 update DLFileVersion set repositoryId = groupId;
 
 alter table DLFolder add repositoryId LONG;
-alter table DLFolder add mountPoint BOOLEAN null;
+alter table DLFolder add mountPoint BOOLEAN;
 
 COMMIT_TRANSACTION;
 
