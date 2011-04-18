@@ -168,15 +168,17 @@ AUI().add(
 
 						var autoFieldsTriggers = boundingBox.all('.lfr-floating-trigger');
 
-						autoFieldsTriggers.each(
-							function(item, index, collection) {
-								var panelInstance = item.getData('panelInstance');
+						autoFieldsTriggers.each(instance._alignToTriggers, instance);
+					},
 
-								if (!panelInstance._positionHelper.test(':hidden')) {
-									panelInstance.position(item);
-								}
-							}
-						);
+					_alignToTriggers: function(item, index, collection) {
+						var instance = this;
+
+						var panelInstance = item.getData('panelInstance');
+
+						if (!panelInstance._positionHelper.test(':hidden')) {
+							panelInstance.position(item);
+						}
 					},
 
 					_bindAlignFloatingPanelsEvent: function(contextPanel) {
@@ -184,9 +186,12 @@ AUI().add(
 
 						var dragInstance = contextPanel.get('dragInstance');
 
-						dragInstance.on('end', function(event){
-							instance._alignFloatingPanels(contextPanel);
-						});
+						dragInstance.on(
+							'end',
+							function(event){
+								instance._alignFloatingPanels(contextPanel);
+							}
+						);
 					},
 
 					_bindCloseEvent: function(contextPanel) {
