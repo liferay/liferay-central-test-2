@@ -209,10 +209,10 @@ public class EditCategoryAction extends PortletAction {
 		boolean outUseSSL = ParamUtil.getBoolean(actionRequest, "outUseSSL");
 		String outUserName = ParamUtil.getString(actionRequest, "outUserName");
 		String outPassword = ParamUtil.getString(actionRequest, "outPassword");
+		boolean allowAnonymous = ParamUtil.getBoolean(
+			actionRequest, "allowAnonymous");
 		boolean mailingListActive = ParamUtil.getBoolean(
 			actionRequest, "mailingListActive");
-		boolean allowAnonymousEmail = ParamUtil.getBoolean(
-			actionRequest, "allowAnonymousEmail");
 
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentCategory");
@@ -234,8 +234,7 @@ public class EditCategoryAction extends PortletAction {
 				inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 				inPassword, inReadInterval, outEmailAddress, outCustom,
 				outServerName, outServerPort, outUseSSL, outUserName,
-				outPassword, mailingListActive, allowAnonymousEmail,
-				serviceContext);
+				outPassword, allowAnonymous, mailingListActive, serviceContext);
 		}
 		else {
 
@@ -246,7 +245,7 @@ public class EditCategoryAction extends PortletAction {
 				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 				inUserName, inPassword, inReadInterval, outEmailAddress,
 				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-				outPassword, mailingListActive, allowAnonymousEmail,
+				outPassword, allowAnonymous, mailingListActive,
 				mergeWithParentCategory, serviceContext);
 		}
 	}

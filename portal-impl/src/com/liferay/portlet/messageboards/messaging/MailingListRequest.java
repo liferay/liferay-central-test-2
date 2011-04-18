@@ -53,16 +53,20 @@ public class MailingListRequest implements Serializable {
 		return _inUserName;
 	}
 
+	public boolean isAllowAnonymous() {
+		return _allowAnonymous;
+	}
+
 	public boolean isInUseSSL() {
 		return _inUseSSL;
 	}
 
-	public boolean isAllowAnonymousEmail() {
-		return _allowAnonymousEmail;
-	}
-
 	public long getUserId() {
 		return _userId;
+	}
+
+	public void setAllowAnonymous(boolean allowAnonymous) {
+		_allowAnonymous = allowAnonymous;
 	}
 
 	public void setCategoryId(long id) {
@@ -101,16 +105,13 @@ public class MailingListRequest implements Serializable {
 		_inUseSSL = inUseSSL;
 	}
 
-	public void setAllowAnonymousEmail(boolean allowAnonymousEmail) {
-		_allowAnonymousEmail = allowAnonymousEmail;
-	}
-
 	public void setUserId(long id) {
 		_userId = id;
 	}
 
 	private static final long serialVersionUID = 8983934222717334170L;
 
+	private boolean _allowAnonymous;
 	private long _categoryId;
 	private long _companyId;
 	private long _groupId;
@@ -120,7 +121,6 @@ public class MailingListRequest implements Serializable {
 	private int _inServerPort;
 	private String _inUserName;
 	private boolean _inUseSSL;
-	private boolean _allowAnonymousEmail;
 	private long _userId;
 
 }

@@ -50,8 +50,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			String inUserName, String inPassword, int inReadInterval,
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
-			String outPassword, boolean mailingListActive,
-			boolean allowAnonymousEmail, ServiceContext serviceContext)
+			String outPassword, boolean allowAnonymous,
+			boolean mailingListActive, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Category
@@ -102,8 +102,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			userId, groupId, category.getCategoryId(), emailAddress, inProtocol,
 			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 			inReadInterval, outEmailAddress, outCustom, outServerName,
-			outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, allowAnonymousEmail, serviceContext);
+			outServerPort, outUseSSL, outUserName, outPassword, allowAnonymous,
+			mailingListActive, serviceContext);
 
 		// Expando
 
@@ -375,8 +375,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			boolean inUseSSL, String inUserName, String inPassword,
 			int inReadInterval, String outEmailAddress, boolean outCustom,
 			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName,	String outPassword, boolean mailingListActive,
-			boolean allowAnonymousEmail, boolean mergeWithParentCategory,
+			String outUserName,	String outPassword, boolean allowAnonymous,
+			boolean mailingListActive, boolean mergeWithParentCategory,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -427,7 +427,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,
 				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive, allowAnonymousEmail, serviceContext);
+				allowAnonymous, mailingListActive, serviceContext);
 		}
 		else {
 			mbMailingListLocalService.addMailingList(
@@ -436,7 +436,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 				inReadInterval, outEmailAddress, outCustom, outServerName,
 				outServerPort, outUseSSL, outUserName, outPassword,
-				mailingListActive, allowAnonymousEmail, serviceContext);
+				allowAnonymous, mailingListActive, serviceContext);
 		}
 
 		// Expando

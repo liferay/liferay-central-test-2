@@ -147,7 +147,7 @@ catch (NoSuchMailingListException nsmle) {
 
 				<aui:input fieldParam="mailingListActive" name="active" />
 
-				<aui:input inlineLabel="left" label="allow-anonymous-emails" name="allowAnonymousEmail" />
+				<aui:input inlineLabel="left" label="allow-anonymous-emails" name="allowAnonymous" />
 
 				<div id="<portlet:namespace />mailingListSettings">
 					<aui:input name="emailAddress" />

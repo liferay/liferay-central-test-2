@@ -52,8 +52,8 @@ public class MBMailingListLocalServiceImpl
 			boolean inUseSSL, String inUserName, String inPassword,
 			int inReadInterval, String outEmailAddress, boolean outCustom,
 			String outServerName, int outServerPort, boolean outUseSSL,
-			String outUserName, String outPassword, boolean active,
-			boolean allowAnonymousEmail, ServiceContext serviceContext)
+			String outUserName, String outPassword, boolean allowAnonymous,
+			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Mailing list
@@ -93,8 +93,8 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setOutUseSSL(outUseSSL);
 		mailingList.setOutUserName(outUserName);
 		mailingList.setOutPassword(outPassword);
+		mailingList.setAllowAnonymous(allowAnonymous);
 		mailingList.setActive(active);
-		mailingList.setAllowAnonymousEmail(allowAnonymousEmail);
 
 		mbMailingListPersistence.update(mailingList, false);
 
@@ -145,7 +145,7 @@ public class MBMailingListLocalServiceImpl
 			String inUserName, String inPassword, int inReadInterval,
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
-			String outPassword, boolean active, boolean allowAnonymousEmail,
+			String outPassword, boolean allowAnonymous, boolean active,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -174,8 +174,8 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setOutUseSSL(outUseSSL);
 		mailingList.setOutUserName(outUserName);
 		mailingList.setOutPassword(outPassword);
+		mailingList.setAllowAnonymous(allowAnonymous);
 		mailingList.setActive(active);
-		mailingList.setAllowAnonymousEmail(allowAnonymousEmail);
 
 		mbMailingListPersistence.update(mailingList, false);
 
@@ -221,8 +221,7 @@ public class MBMailingListLocalServiceImpl
 		mailingListRequest.setInUseSSL(mailingList.getInUseSSL());
 		mailingListRequest.setInUserName(mailingList.getInUserName());
 		mailingListRequest.setInPassword(mailingList.getInPassword());
-		mailingListRequest.setAllowAnonymousEmail(
-			mailingList.getAllowAnonymousEmail());
+		mailingListRequest.setAllowAnonymous(mailingList.getAllowAnonymous());
 
 		SchedulerEngineUtil.schedule(
 			trigger, StorageType.MEMORY_CLUSTERED, null,

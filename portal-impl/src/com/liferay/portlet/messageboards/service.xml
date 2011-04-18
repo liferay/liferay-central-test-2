@@ -157,8 +157,8 @@
 		<column name="outUseSSL" type="boolean" />
 		<column name="outUserName" type="String" />
 		<column name="outPassword" type="String" />
+		<column name="allowAnonymous" type="boolean" />
 		<column name="active" type="boolean" />
-		<column name="allowAnonymousEmail" type="boolean" />
 
 		<!-- Finder methods -->
 
