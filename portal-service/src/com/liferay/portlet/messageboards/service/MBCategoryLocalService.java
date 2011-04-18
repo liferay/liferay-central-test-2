@@ -249,6 +249,7 @@ public interface MBCategoryLocalService {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
+		boolean allowAnonymousEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -365,7 +366,7 @@ public interface MBCategoryLocalService {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
-		boolean mergeWithParentCategory,
+		boolean allowAnonymousEmail, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

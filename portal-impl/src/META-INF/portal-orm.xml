@@ -2176,6 +2176,7 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<basic name="allowAnonymousEmail" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

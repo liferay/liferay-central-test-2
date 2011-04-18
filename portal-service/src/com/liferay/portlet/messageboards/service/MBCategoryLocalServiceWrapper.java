@@ -266,6 +266,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
+		boolean allowAnonymousEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -274,7 +275,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			inServerName, inServerPort, inUseSSL, inUserName, inPassword,
 			inReadInterval, outEmailAddress, outCustom, outServerName,
 			outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, serviceContext);
+			mailingListActive, allowAnonymousEmail, serviceContext);
 	}
 
 	public void addCategoryResources(long categoryId,
@@ -431,7 +432,7 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
-		boolean mergeWithParentCategory,
+		boolean allowAnonymousEmail, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -440,7 +441,8 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService {
 			inProtocol, inServerName, inServerPort, inUseSSL, inUserName,
 			inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, mergeWithParentCategory, serviceContext);
+			mailingListActive, allowAnonymousEmail, mergeWithParentCategory,
+			serviceContext);
 	}
 
 	public MBCategoryLocalService getWrappedMBCategoryLocalService() {

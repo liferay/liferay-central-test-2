@@ -82,9 +82,10 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 			{ "outUseSSL", Types.BOOLEAN },
 			{ "outUserName", Types.VARCHAR },
 			{ "outPassword", Types.VARCHAR },
-			{ "active_", Types.BOOLEAN }
+			{ "active_", Types.BOOLEAN },
+			{ "allowAnonymousEmail", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMailingList (uuid_ VARCHAR(75) null,mailingListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,emailAddress VARCHAR(75) null,inProtocol VARCHAR(75) null,inServerName VARCHAR(75) null,inServerPort INTEGER,inUseSSL BOOLEAN,inUserName VARCHAR(75) null,inPassword VARCHAR(75) null,inReadInterval INTEGER,outEmailAddress VARCHAR(75) null,outCustom BOOLEAN,outServerName VARCHAR(75) null,outServerPort INTEGER,outUseSSL BOOLEAN,outUserName VARCHAR(75) null,outPassword VARCHAR(75) null,active_ BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table MBMailingList (uuid_ VARCHAR(75) null,mailingListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,emailAddress VARCHAR(75) null,inProtocol VARCHAR(75) null,inServerName VARCHAR(75) null,inServerPort INTEGER,inUseSSL BOOLEAN,inUserName VARCHAR(75) null,inPassword VARCHAR(75) null,inReadInterval INTEGER,outEmailAddress VARCHAR(75) null,outCustom BOOLEAN,outServerName VARCHAR(75) null,outServerPort INTEGER,outUseSSL BOOLEAN,outUserName VARCHAR(75) null,outPassword VARCHAR(75) null,active_ BOOLEAN,allowAnonymousEmail BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table MBMailingList";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -429,6 +430,18 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		_active = active;
 	}
 
+	public boolean getAllowAnonymousEmail() {
+		return _allowAnonymousEmail;
+	}
+
+	public boolean isAllowAnonymousEmail() {
+		return _allowAnonymousEmail;
+	}
+
+	public void setAllowAnonymousEmail(boolean allowAnonymousEmail) {
+		_allowAnonymousEmail = allowAnonymousEmail;
+	}
+
 	public MBMailingList toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMailingList)this;
@@ -481,6 +494,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		mbMailingListImpl.setOutUserName(getOutUserName());
 		mbMailingListImpl.setOutPassword(getOutPassword());
 		mbMailingListImpl.setActive(getActive());
+		mbMailingListImpl.setAllowAnonymousEmail(getAllowAnonymousEmail());
 
 		mbMailingListImpl.resetOriginalValues();
 
@@ -544,7 +558,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -596,13 +610,15 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		sb.append(getOutPassword());
 		sb.append(", active=");
 		sb.append(getActive());
+		sb.append(", allowAnonymousEmail=");
+		sb.append(getAllowAnonymousEmail());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(79);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBMailingList");
@@ -708,6 +724,10 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>allowAnonymousEmail</column-name><column-value><![CDATA[");
+		sb.append(getAllowAnonymousEmail());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -745,5 +765,6 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	private String _outUserName;
 	private String _outPassword;
 	private boolean _active;
+	private boolean _allowAnonymousEmail;
 	private transient ExpandoBridge _expandoBridge;
 }

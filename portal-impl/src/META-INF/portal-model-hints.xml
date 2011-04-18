@@ -1746,6 +1746,7 @@
 			<hint name="secret">true</hint>
 		</field>
 		<field name="active" type="boolean" />
+		<field name="allowAnonymousEmail" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessage">
 		<field name="uuid" type="String" />

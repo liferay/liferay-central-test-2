@@ -64,7 +64,7 @@ public class MBCategoryServiceHttp {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive,
+		boolean mailingListActive, boolean allowAnonymousEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -78,7 +78,7 @@ public class MBCategoryServiceHttp {
 					inUseSSL, inUserName, inPassword, inReadInterval,
 					outEmailAddress, outCustom, outServerName, outServerPort,
 					outUseSSL, outUserName, outPassword, mailingListActive,
-					serviceContext);
+					allowAnonymousEmail, serviceContext);
 
 			Object returnObj = null;
 
@@ -545,7 +545,8 @@ public class MBCategoryServiceHttp {
 		java.lang.String outEmailAddress, boolean outCustom,
 		java.lang.String outServerName, int outServerPort, boolean outUseSSL,
 		java.lang.String outUserName, java.lang.String outPassword,
-		boolean mailingListActive, boolean mergeWithParentCategory,
+		boolean mailingListActive, boolean allowAnonymousEmail,
+		boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -559,7 +560,8 @@ public class MBCategoryServiceHttp {
 					inServerPort, inUseSSL, inUserName, inPassword,
 					inReadInterval, outEmailAddress, outCustom, outServerName,
 					outServerPort, outUseSSL, outUserName, outPassword,
-					mailingListActive, mergeWithParentCategory, serviceContext);
+					mailingListActive, allowAnonymousEmail,
+					mergeWithParentCategory, serviceContext);
 
 			Object returnObj = null;
 
@@ -596,7 +598,7 @@ public class MBCategoryServiceHttp {
 			int.class, java.lang.String.class, boolean.class,
 			java.lang.String.class, int.class, boolean.class,
 			java.lang.String.class, java.lang.String.class, boolean.class,
-			com.liferay.portal.service.ServiceContext.class
+			boolean.class, com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteCategoryParameterTypes1 = new Class[] {
 			long.class, long.class
@@ -644,7 +646,7 @@ public class MBCategoryServiceHttp {
 			java.lang.String.class, java.lang.String.class, int.class,
 			java.lang.String.class, boolean.class, java.lang.String.class,
 			int.class, boolean.class, java.lang.String.class,
-			java.lang.String.class, boolean.class, boolean.class,
+			java.lang.String.class, boolean.class, boolean.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

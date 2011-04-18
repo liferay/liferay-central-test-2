@@ -41,7 +41,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			String outEmailAddress, boolean outCustom, String outServerName,
 			int outServerPort, boolean outUseSSL, String outUserName,
 			String outPassword, boolean mailingListActive,
-			ServiceContext serviceContext)
+			boolean allowAnonymousEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -53,7 +53,7 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, serviceContext);
+			mailingListActive, allowAnonymousEmail, serviceContext);
 	}
 
 	public void deleteCategory(long groupId, long categoryId)
@@ -199,7 +199,8 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			int inReadInterval, String outEmailAddress, boolean outCustom,
 			String outServerName, int outServerPort, boolean outUseSSL,
 			String outUserName,	String outPassword, boolean mailingListActive,
-			boolean mergeWithParentCategory, ServiceContext serviceContext)
+			boolean allowAnonymousEmail, boolean mergeWithParentCategory,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		MBCategory category = mbCategoryLocalService.getCategory(categoryId);
@@ -212,7 +213,8 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
 			inUserName,	inPassword, inReadInterval, outEmailAddress, outCustom,
 			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-			mailingListActive, mergeWithParentCategory, serviceContext);
+			mailingListActive, allowAnonymousEmail, mergeWithParentCategory,
+			serviceContext);
 	}
 
 }

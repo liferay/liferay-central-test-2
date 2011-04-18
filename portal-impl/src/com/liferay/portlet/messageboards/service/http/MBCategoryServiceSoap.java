@@ -76,6 +76,7 @@ public class MBCategoryServiceSoap {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
+		boolean allowAnonymousEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -84,7 +85,8 @@ public class MBCategoryServiceSoap {
 					inServerName, inServerPort, inUseSSL, inUserName,
 					inPassword, inReadInterval, outEmailAddress, outCustom,
 					outServerName, outServerPort, outUseSSL, outUserName,
-					outPassword, mailingListActive, serviceContext);
+					outPassword, mailingListActive, allowAnonymousEmail,
+					serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
@@ -296,7 +298,7 @@ public class MBCategoryServiceSoap {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
-		boolean mergeWithParentCategory,
+		boolean allowAnonymousEmail, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -306,7 +308,7 @@ public class MBCategoryServiceSoap {
 					inUseSSL, inUserName, inPassword, inReadInterval,
 					outEmailAddress, outCustom, outServerName, outServerPort,
 					outUseSSL, outUserName, outPassword, mailingListActive,
-					mergeWithParentCategory, serviceContext);
+					allowAnonymousEmail, mergeWithParentCategory, serviceContext);
 
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}

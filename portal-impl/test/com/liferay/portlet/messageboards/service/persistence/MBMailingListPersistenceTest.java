@@ -93,6 +93,7 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		newMBMailingList.setOutUserName(randomString());
 		newMBMailingList.setOutPassword(randomString());
 		newMBMailingList.setActive(randomBoolean());
+		newMBMailingList.setAllowAnonymousEmail(randomBoolean());
 
 		_persistence.update(newMBMailingList, false);
 
@@ -149,6 +150,8 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 			newMBMailingList.getOutPassword());
 		assertEquals(existingMBMailingList.getActive(),
 			newMBMailingList.getActive());
+		assertEquals(existingMBMailingList.getAllowAnonymousEmail(),
+			newMBMailingList.getAllowAnonymousEmail());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -307,6 +310,7 @@ public class MBMailingListPersistenceTest extends BasePersistenceTestCase {
 		mbMailingList.setOutUserName(randomString());
 		mbMailingList.setOutPassword(randomString());
 		mbMailingList.setActive(randomBoolean());
+		mbMailingList.setAllowAnonymousEmail(randomBoolean());
 
 		_persistence.update(mbMailingList, false);
 

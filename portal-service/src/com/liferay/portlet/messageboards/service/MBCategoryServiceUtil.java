@@ -47,6 +47,7 @@ public class MBCategoryServiceUtil {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
+		boolean allowAnonymousEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -55,7 +56,7 @@ public class MBCategoryServiceUtil {
 			displayStyle, emailAddress, inProtocol, inServerName, inServerPort,
 			inUseSSL, inUserName, inPassword, inReadInterval, outEmailAddress,
 			outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-			outPassword, mailingListActive, serviceContext);
+			outPassword, mailingListActive, allowAnonymousEmail, serviceContext);
 	}
 
 	public static void deleteCategory(long groupId, long categoryId)
@@ -144,7 +145,7 @@ public class MBCategoryServiceUtil {
 		boolean outCustom, java.lang.String outServerName, int outServerPort,
 		boolean outUseSSL, java.lang.String outUserName,
 		java.lang.String outPassword, boolean mailingListActive,
-		boolean mergeWithParentCategory,
+		boolean allowAnonymousEmail, boolean mergeWithParentCategory,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -154,7 +155,7 @@ public class MBCategoryServiceUtil {
 			inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
 			outEmailAddress, outCustom, outServerName, outServerPort,
 			outUseSSL, outUserName, outPassword, mailingListActive,
-			mergeWithParentCategory, serviceContext);
+			allowAnonymousEmail, mergeWithParentCategory, serviceContext);
 	}
 
 	public static MBCategoryService getService() {
