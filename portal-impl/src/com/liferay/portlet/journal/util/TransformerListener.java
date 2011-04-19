@@ -24,38 +24,38 @@ public abstract class TransformerListener {
 	public TransformerListener() {
 	}
 
-	public boolean isTemplateDriven() {
-		return _templateDriven;
-	}
-
-	public void setTemplateDriven(boolean templateDriven) {
-		_templateDriven = templateDriven;
-	}
-
 	public String getLanguageId() {
 		return _languageId;
-	}
-
-	public void setLanguageId(String languageId) {
-		_languageId = languageId;
 	}
 
 	public Map<String, String> getTokens() {
 		return _tokens;
 	}
 
+	public boolean isTemplateDriven() {
+		return _templateDriven;
+	}
+
+	public abstract String onOutput(String s);
+
+	public abstract String onScript(String s);
+
+	public abstract String onXml(String s);
+
+	public void setLanguageId(String languageId) {
+		_languageId = languageId;
+	}
+
+	public void setTemplateDriven(boolean templateDriven) {
+		_templateDriven = templateDriven;
+	}
+
 	public void setTokens(Map<String, String> tokens) {
 		_tokens = tokens;
 	}
 
-	public abstract String onXml(String s);
-
-	public abstract String onScript(String s);
-
-	public abstract String onOutput(String s);
-
-	private boolean _templateDriven;
 	private String _languageId;
+	private boolean _templateDriven;
 	private Map<String, String> _tokens;
 
 }
