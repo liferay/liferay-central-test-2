@@ -141,13 +141,13 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	public List<DDMTemplate> getTemplates(long structureId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmTemplatePersistence.findByStructureId(structureId);
 	}
 
 	public List<DDMTemplate> getTemplates(long structureId, String type)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return ddmTemplatePersistence.findByS_T(structureId, type);
 	}
