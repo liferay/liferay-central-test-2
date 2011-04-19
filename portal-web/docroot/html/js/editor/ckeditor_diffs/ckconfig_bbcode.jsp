@@ -24,6 +24,7 @@
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
+String imagesPath = ParamUtil.getString(request, "imagesPath");
 String jsPath = ParamUtil.getString(request, "jsPath");
 String languageId = ParamUtil.getString(request, "languageId");
 %>
@@ -56,14 +57,14 @@ CKEDITOR.config.removePlugins = [
 CKEDITOR.config.toolbar_bbcode = [
 	['Bold', 'Italic', 'Underline', 'Strike', '-', 'Link', 'Unlink'],
 	['Image', 'Smiley', '-', 'TextColor', '-', 'NumberedList', 'BulletedList'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote'],
+	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote', '-', 'Code'],
 	'/',
 	['Font', 'FontSize', '-', 'Format', '-', 'Table', '-', 'Undo', 'Redo', '-', 'Source']
 ];
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
 
-CKEDITOR.config.contentsCss = '<%= jsPath %>/editor/ckeditor/plugins/bbcode/css/main.css';
+CKEDITOR.config.contentsCss = '<%= jsPath %>/editor/ckeditor/plugins/bbcode/css/main.jsp';
 
 CKEDITOR.config.extraPlugins = 'bbcode,wikilink';
 
@@ -80,6 +81,8 @@ CKEDITOR.config.filebrowserUploadUrl = '';
 CKEDITOR.config.fontSize_sizes = '10/10px;12/12px;16/16px;18/18px;24/24px;32/32px;48/48px';
 
 CKEDITOR.config.format_tags = 'p;pre';
+
+CKEDITOR.config.imagesPath = '<%= imagesPath %>/message_boards/';
 
 CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
 
