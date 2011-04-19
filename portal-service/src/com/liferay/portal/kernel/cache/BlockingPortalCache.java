@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.cache;
 
+import com.liferay.portal.kernel.cache.listener.CacheListener;
+import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
 
 import java.io.Serializable;
@@ -171,6 +173,19 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
+	public void registerCacheListener(CacheListener cacheListener)
+		throws PortalCacheException {
+
+		_portalCache.registerCacheListener(cacheListener);
+	}
+
+	public void registerCacheListener(
+			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
+		throws PortalCacheException {
+
+		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
+	}
+
 	public void remove(String key) {
 		_portalCache.remove(key);
 
@@ -184,6 +199,14 @@ public class BlockingPortalCache implements PortalCache {
 	public void removeAll() {
 		_portalCache.removeAll();
 		_competeLatchMap.clear();
+	}
+
+	public void unregisterAllCacheListeners() {
+		_portalCache.unregisterAllCacheListeners();
+	}
+
+	public void unregisterCacheListener(CacheListener cacheListener) {
+		_portalCache.unregisterCacheListener(cacheListener);
 	}
 
 	public void setDebug(boolean debug) {

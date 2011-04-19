@@ -15,6 +15,8 @@
 package com.liferay.portal.cache.memcached;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
+import com.liferay.portal.kernel.cache.listener.CacheListener;
+import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -202,6 +204,18 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		}
 	}
 
+	public void registerCacheListener(CacheListener cacheListener) {
+
+		registerCacheListener(cacheListener, CacheListenerScope.ALL);
+	}
+
+	public void registerCacheListener(
+		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
+
+		throw new UnsupportedOperationException(
+			"This cache doesn't support cache listeners");
+	}
+
 	public void remove(String key) {
 		MemcachedClientIF memcachedClient = null;
 
@@ -247,6 +261,12 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 
 	public void setTimeToLive(int timeToLive) {
 		_timeToLive = timeToLive;
+	}
+
+	public void unregisterAllCacheListeners() {
+	}
+
+	public void unregisterCacheListener(CacheListener cacheListener) {
 	}
 
 	protected void cleanupClient(MemcachedClientIF memcachedClient) {

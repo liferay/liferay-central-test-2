@@ -15,18 +15,27 @@
 package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
+import com.liferay.portal.kernel.cache.PortalCacheException;
+import com.liferay.portal.kernel.cache.listener.CacheListener;
+import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
+import net.sf.ehcache.event.CacheEventListener;
+import net.sf.ehcache.event.NotificationScope;
+import net.sf.ehcache.event.RegisteredEventListeners;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Edward Han
  */
 public class EhcachePortalCache extends BasePortalCache {
 
@@ -85,6 +94,35 @@ public class EhcachePortalCache extends BasePortalCache {
 		_cache.put(element);
 	}
 
+	public void registerCacheListener(CacheListener cacheListener)
+		throws PortalCacheException {
+
+		registerCacheListener(cacheListener, CacheListenerScope.ALL);
+	}
+
+	public void registerCacheListener(
+			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
+		throws PortalCacheException {
+
+		if (_cacheListenersMap.containsKey(cacheListener)) {
+			return;
+		}
+
+		CacheEventListener cacheEventListener =
+			new WrappedCacheEventListener(cacheListener, this);
+
+		_cacheListenersMap.put(cacheListener, cacheEventListener);
+
+		NotificationScope notificationScope =
+			convertCacheListenerScope(cacheListenerScope);
+
+		RegisteredEventListeners registeredEventListeners =
+			_cache.getCacheEventNotificationService();
+
+		registeredEventListeners.registerListener(
+			cacheEventListener, notificationScope);
+	}
+
 	public void remove(String key) {
 		String processedKey = processKey(key);
 
@@ -93,6 +131,49 @@ public class EhcachePortalCache extends BasePortalCache {
 
 	public void removeAll() {
 		_cache.removeAll();
+	}
+
+	public void unregisterAllCacheListeners() {
+		RegisteredEventListeners registeredEventListeners =
+			_cache.getCacheEventNotificationService();
+
+		for (CacheEventListener cacheEventListener :
+				_cacheListenersMap.values()) {
+
+			registeredEventListeners.unregisterListener(cacheEventListener);
+		}
+
+		_cacheListenersMap.clear();
+	}
+
+	public void unregisterCacheListener(CacheListener cacheListener)
+		throws PortalCacheException {
+
+		CacheEventListener cacheEventListener = _cacheListenersMap.get(
+			cacheListener);
+
+		if (cacheEventListener != null) {
+			RegisteredEventListeners registeredEventListeners =
+				_cache.getCacheEventNotificationService();
+
+			registeredEventListeners.unregisterListener(cacheEventListener);
+		}
+
+		_cacheListenersMap.remove(cacheListener);
+	}
+
+	protected NotificationScope convertCacheListenerScope(
+			CacheListenerScope scope) {
+
+		if (scope == CacheListenerScope.ALL) {
+			return NotificationScope.ALL;
+		}
+		else if (scope == CacheListenerScope.LOCAL) {
+			return NotificationScope.LOCAL;
+		}
+		else {
+			return NotificationScope.REMOTE;
+		}
 	}
 
 	protected Element createElement(String key, Object obj) {
@@ -104,5 +185,7 @@ public class EhcachePortalCache extends BasePortalCache {
 	}
 
 	private Ehcache _cache;
+	private Map<CacheListener, CacheEventListener> _cacheListenersMap =
+		new ConcurrentHashMap<CacheListener, CacheEventListener>();
 
 }

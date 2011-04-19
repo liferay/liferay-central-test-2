@@ -16,6 +16,9 @@ package com.liferay.portal.cache.transactional;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.PortalCacheException;
+import com.liferay.portal.kernel.cache.listener.CacheListener;
+import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 
 import java.io.Serializable;
 
@@ -25,6 +28,7 @@ import java.util.List;
 
 /**
  * @author Shuyang Zhou
+ * @author Edward Han
  */
 public class TransactionalPortalCache extends BasePortalCache {
 
@@ -112,6 +116,19 @@ public class TransactionalPortalCache extends BasePortalCache {
 		}
 	}
 
+	public void registerCacheListener(CacheListener cacheListener)
+		throws PortalCacheException {
+
+		_portalCache.registerCacheListener(cacheListener);
+	}
+
+	public void registerCacheListener(
+			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
+		throws PortalCacheException {
+
+		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
+	}
+
 	public void remove(String key) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			TransactionalPortalCacheHelper.remove(_portalCache, key);
@@ -126,6 +143,14 @@ public class TransactionalPortalCache extends BasePortalCache {
 		}
 
 		_portalCache.removeAll();
+	}
+
+	public void unregisterAllCacheListeners() {
+		_portalCache.unregisterAllCacheListeners();
+	}
+
+	public void unregisterCacheListener(CacheListener cacheListener) {
+		_portalCache.unregisterCacheListener(cacheListener);
 	}
 
 	private static Serializable _nullHolder = new String();
