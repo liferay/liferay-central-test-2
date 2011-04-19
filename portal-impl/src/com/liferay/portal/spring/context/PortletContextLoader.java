@@ -26,6 +26,9 @@ import org.springframework.web.context.ContextLoader;
  */
 public class PortletContextLoader extends ContextLoader {
 
+	public static final String PORTAL_CONFIG_LOCATION_PARAM =
+		"portalContextConfigLocation";
+
 	protected void customizeContext(
 		ServletContext servletContext,
 		ConfigurableWebApplicationContext applicationContext) {
@@ -39,8 +42,5 @@ public class PortletContextLoader extends ContextLoader {
 	protected Class<?> determineContextClass(ServletContext servletContext) {
 		return PortletApplicationContext.class;
 	}
-
-	public static final String PORTAL_CONFIG_LOCATION_PARAM =
-		"portalContextConfigLocation";
 
 }
