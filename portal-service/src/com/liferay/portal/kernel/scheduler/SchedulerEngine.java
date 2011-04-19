@@ -45,7 +45,7 @@ public interface SchedulerEngine {
 
 	public static final String EXCEPTIONS_MAX_SIZE = "EXCEPTIONS_MAX_SIZE";
 
-	public static final String EXECUTION_LOCK = "EXECUTION_LOCK";
+	public static final String EXECUTION_LOCK_KEY = "EXECUTION_LOCK_KEY";
 
 	public static final String FINAL_FIRE_TIME = "FINAL_FIRE_TIME";
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListen
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.spring.context.PortletContextLoaderListener;
 
 import java.lang.reflect.Proxy;
 
@@ -673,7 +674,9 @@ public class SchedulerEngineUtil {
 		Message message = new Message();
 
 		message.put(
-			SchedulerEngine.EXECUTION_LOCK, schedulerEntry.getContextPath());
+			SchedulerEngine.EXECUTION_LOCK_KEY,
+			PortletContextLoaderListener.getLockKey(
+				schedulerEntry.getContextPath()));
 		message.put(
 			SchedulerEngine.MESSAGE_LISTENER_UUID,
 			schedulerEventListenerWrapper.getMessageListenerUUID());

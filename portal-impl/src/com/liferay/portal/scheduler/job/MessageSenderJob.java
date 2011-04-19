@@ -76,12 +76,12 @@ public class MessageSenderJob implements Job {
 			message = (Message)JSONFactoryUtil.deserialize(messageJSON);
 		}
 
-		String lockName = message.getString(SchedulerEngine.EXECUTION_LOCK);
+		String lockKey = message.getString(SchedulerEngine.EXECUTION_LOCK_KEY);
 
 		ReentrantLock executionLock = null;
 
-		if (lockName != null) {
-			executionLock = LockRegistry.getLock(lockName, lockName);
+		if (lockKey != null) {
+			executionLock = LockRegistry.getLock(lockKey, lockKey);
 
 			if (executionLock != null) {
 				if (executionLock.hasQueuedThreads()) {

@@ -43,8 +43,12 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class PortletContextLoaderListener extends ContextLoaderListener {
 
 	public static String getLockKey(ServletContext servletContext) {
+		return getLockKey(servletContext.getContextPath());
+	}
+
+	public static String getLockKey(String contextPath) {
 		return PortletContextLoaderListener.class.getName().concat(
-			StringPool.PERIOD).concat(servletContext.getContextPath());
+			StringPool.PERIOD).concat(contextPath);
 	}
 
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
