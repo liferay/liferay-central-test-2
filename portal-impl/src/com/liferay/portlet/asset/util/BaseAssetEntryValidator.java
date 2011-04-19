@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.util;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -34,112 +33,103 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * @author Juan Fernández
  */
 public class BaseAssetEntryValidator implements AssetEntryValidator {
 
-	@SuppressWarnings("unused")
 	public void validate(
 			long groupId, String className, long[] categoryIds,
 			String[] entryNames)
 		throws PortalException, SystemException {
 
-		List<AssetVocabulary> groupVocabularies =
+		List<AssetVocabulary> vocabularies =
 			AssetVocabularyLocalServiceUtil.getGroupVocabularies(
 				groupId, false);
 
 		Group group = GroupServiceUtil.getGroup(groupId);
 
 		if (!group.isCompany()) {
-			try {
-				Group companyGroup =
-					GroupLocalServiceUtil.getCompanyGroup(group.getCompanyId());
+			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+				group.getCompanyId());
 
-				groupVocabularies = ListUtil.copy(groupVocabularies);
-				
-				groupVocabularies.addAll(
-					AssetVocabularyLocalServiceUtil.getGroupVocabularies(
-						companyGroup.getGroupId()));
-			} catch (NoSuchGroupException nsge) {
-			}
+			vocabularies = ListUtil.copy(vocabularies);
+
+			vocabularies.addAll(
+				AssetVocabularyLocalServiceUtil.getGroupVocabularies(
+					companyGroup.getGroupId()));
 		}
 
 		long classNameId = ClassNameServiceUtil.getClassNameId(className);
 
-		for(AssetVocabulary vocabulary : groupVocabularies) {
-			UnicodeProperties settingsProperties =
-				vocabulary.getSettingsProperties();
+		for (AssetVocabulary vocabulary : vocabularies) {
+			validate(classNameId, categoryIds, vocabulary);
+		}
+	}
 
-			long[] selectedClassNameIds = StringUtil.split(
-				settingsProperties.getProperty("selectedClassNameIds"), 0L);
+	protected void validate(
+			long classNameId, long[] categoryIds, AssetVocabulary vocabulary)
+		throws PortalException, SystemException {
 
-			if ((selectedClassNameIds.length > 0) &&
-				((selectedClassNameIds[0] == 0) ||
-				ArrayUtil.contains(selectedClassNameIds, classNameId))) {
+		UnicodeProperties settingsProperties =
+			vocabulary.getSettingsProperties();
 
-				// Check required
+		long[] selectedClassNameIds = StringUtil.split(
+			settingsProperties.getProperty("selectedClassNameIds"), 0L);
 
-				long[] requiredClassNameIds = StringUtil.split(
-					settingsProperties.getProperty("requiredClassNameIds"), 0L);
+		if (selectedClassNameIds.length == 0) {
+			return;
+		}
 
-				List<AssetCategory> vocabularyCategories =
-					AssetCategoryLocalServiceUtil.getVocabularyCategories(
-						vocabulary.getVocabularyId(), QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS, null);
+		if ((selectedClassNameIds[0] != 0) &&
+			!ArrayUtil.contains(selectedClassNameIds, classNameId)) {
 
-				if ((requiredClassNameIds.length > 0) &&
-					((requiredClassNameIds[0] == 0) ||
-					ArrayUtil.contains(requiredClassNameIds, classNameId))) {
+			return;
+		}
 
-					boolean found = false;
+		long[] requiredClassNameIds = StringUtil.split(
+			settingsProperties.getProperty("requiredClassNameIds"), 0L);
 
-					int i = 0;
+		List<AssetCategory> categories =
+			AssetCategoryLocalServiceUtil.getVocabularyCategories(
+				vocabulary.getVocabularyId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
-					while (i < vocabularyCategories.size() && !found) {
+		if ((requiredClassNameIds.length > 0) &&
+			((requiredClassNameIds[0] == 0) ||
+			 ArrayUtil.contains(requiredClassNameIds, classNameId))) {
 
-						if (ArrayUtil.contains(categoryIds,
-							vocabularyCategories.get(i).getCategoryId())) {
-							found = true;
-						}
+			boolean found = false;
 
-						i++;
-					}
+			for (AssetCategory category : categories) {
+				if (ArrayUtil.contains(categoryIds, category.getCategoryId())) {
+					found = true;
 
-					if (!found && (vocabularyCategories.size() > 0)) {
-						throw new AssetCategoryException(
-							AssetCategoryException.AT_LEAST_ONE_CATEGORY);
-					}
+					break;
 				}
+			}
 
-				// Check single valued
+			if (!found && !categories.isEmpty()) {
+				throw new AssetCategoryException(
+					AssetCategoryException.AT_LEAST_ONE_CATEGORY);
+			}
+		}
 
-				boolean multiValued = GetterUtil.getBoolean(
-					settingsProperties.getProperty("multiValued"), true);
+		boolean multiValued = GetterUtil.getBoolean(
+			settingsProperties.getProperty("multiValued"));
 
-				if (!multiValued) {
-					ListIterator vocabularyCategoriesIterator =
-						vocabularyCategories.listIterator();
+		if (!multiValued) {
+			boolean duplicate = false;
 
-					boolean existed = false;
-
-					while (vocabularyCategoriesIterator.hasNext()) {
-						AssetCategory category =
-							(AssetCategory)vocabularyCategoriesIterator.next();
-
-						if (ArrayUtil.contains(
-								categoryIds, category.getCategoryId())) {
-
-							if (!existed) {
-								existed = true;
-							}
-							else {
-								throw new AssetCategoryException(
-									AssetCategoryException.TOO_MANY_CATEGORIES);
-							}
-						}
+			for (AssetCategory category : categories) {
+				if (ArrayUtil.contains(categoryIds, category.getCategoryId())) {
+					if (!duplicate) {
+						duplicate = true;
+					}
+					else {
+						throw new AssetCategoryException(
+							AssetCategoryException.TOO_MANY_CATEGORIES);
 					}
 				}
 			}
