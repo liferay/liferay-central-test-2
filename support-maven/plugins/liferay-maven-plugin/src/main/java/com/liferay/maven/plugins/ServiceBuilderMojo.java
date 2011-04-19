@@ -24,6 +24,7 @@ import java.io.File;
 
 import java.lang.reflect.Method;
 
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -37,6 +38,7 @@ import org.apache.maven.project.MavenProject;
 import org.apache.maven.shared.invoker.DefaultInvocationRequest;
 import org.apache.maven.shared.invoker.InvocationRequest;
 import org.apache.maven.shared.invoker.InvocationResult;
+import org.apache.maven.shared.invoker.Invoker;
 import org.apache.maven.shared.invoker.MavenCommandLineBuilder;
 
 /**
@@ -110,7 +112,7 @@ public class ServiceBuilderMojo extends AbstractMojo {
 		synchronized (ServiceBuilderMojo.class) {
 			Class<?> clazz = getClass();
 
-			URLClassLoader classLoader = clazz.getClassLoader();
+			URLClassLoader classLoader = (URLClassLoader)clazz.getClassLoader();
 
 			Method method = URLClassLoader.class.getDeclaredMethod(
 				"addURL", URL.class);
@@ -122,7 +124,7 @@ public class ServiceBuilderMojo extends AbstractMojo {
 
 				File file = new File(path);
 
-				URI uri = file.getURI();
+				URI uri = file.toURI();
 
 				method.invoke(classLoader, uri.toURL());
 			}
@@ -181,11 +183,12 @@ public class ServiceBuilderMojo extends AbstractMojo {
 		MavenCommandLineBuilder mavenCommandLineBuilder =
 			new MavenCommandLineBuilder();
 
-		getLog().info("Executing " + mavenCommandLineBuilder.build(request));
+		getLog().info(
+			"Executing " + mavenCommandLineBuilder.build(invocationRequest));
 
-		InvocationResult invocationResult = invoker.execute(request);
+		InvocationResult invocationResult = invoker.execute(invocationRequest);
 
-		if (result.getExecutionException() != null) {
+		if (invocationResult.getExecutionException() != null) {
 			throw invocationResult.getExecutionException();
 		}
 		else if (invocationResult.getExitCode() != 0) {
