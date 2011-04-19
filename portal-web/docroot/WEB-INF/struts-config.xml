@@ -345,6 +345,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.blogs.error" />
 		</action>
 
+		<action path="/blogs_aggregator/rss" type="com.liferay.portlet.blogs.action.RSSAction" />
+
 		<action path="/blogs_aggregator/view" forward="portlet.blogs_aggregator.view" />
 
 		<action path="/blogs_aggregator/view_entry" type="com.liferay.portlet.blogs.action.EditEntryAction">

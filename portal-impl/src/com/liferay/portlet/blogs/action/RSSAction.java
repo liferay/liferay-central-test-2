@@ -27,14 +27,18 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.RSSUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.OutputStream;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -42,6 +46,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class RSSAction extends PortletAction {
 
+	@Override
 	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
@@ -59,26 +64,50 @@ public class RSSAction extends PortletAction {
 		}
 	}
 
+	@Override
+	public ActionForward strutsExecute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
+		throws Exception {
+
+		try {
+			ServletResponseUtil.sendFile(
+				request, response, null, getRSS(request),
+				ContentTypes.TEXT_XML_UTF8);
+
+			return null;
+		}
+		catch (Exception e) {
+			PortalUtil.sendError(e, request, response);
+
+			return null;
+		}
+	}
+
 	protected byte[] getRSS(ResourceRequest resourceRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
+		return getRSS(PortalUtil.getHttpServletRequest(resourceRequest));
+	}
+
+	protected byte[] getRSS(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		long plid = ParamUtil.getLong(resourceRequest, "p_l_id");
-		long companyId = ParamUtil.getLong(resourceRequest, "companyId");
-		long groupId = ParamUtil.getLong(resourceRequest, "groupId");
+		long plid = ParamUtil.getLong(request, "p_l_id");
+		long companyId = ParamUtil.getLong(request, "companyId");
+		long groupId = ParamUtil.getLong(request, "groupId");
 		long organizationId = ParamUtil.getLong(
-			resourceRequest, "organizationId");
+			request, "organizationId");
 		int status = WorkflowConstants.STATUS_APPROVED;
 		int max = ParamUtil.getInteger(
-			resourceRequest, "max", SearchContainer.DEFAULT_DELTA);
+			request, "max", SearchContainer.DEFAULT_DELTA);
 		String type = ParamUtil.getString(
-			resourceRequest, "type", RSSUtil.DEFAULT_TYPE);
+			request, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
-			resourceRequest, "version", RSSUtil.DEFAULT_VERSION);
+			request, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			resourceRequest, "displayStyle",
+			request, "displayStyle",
 			RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
@@ -129,6 +158,7 @@ public class RSSAction extends PortletAction {
 		return rss.getBytes(StringPool.UTF8);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

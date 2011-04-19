@@ -39,22 +39,18 @@
 <c:if test="<%= enableRssSubscription %>">
 
 	<%
-	ResourceURL rssURL = new PortletURLImpl(request, PortletKeys.BLOGS, layout.getPlid(), PortletRequest.RESOURCE_PHASE);
-
-	rssURL.setCacheability(ResourceURL.FULL);
-
-	rssURL.setParameter("struts_action", "/blogs/rss");
+	String rssURLParams = new String();
 
 	if (selectionMethod.equals("users")) {
 		if (organizationId > 0) {
-			rssURL.setParameter("organizationId", String.valueOf(organizationId));
+			rssURLParams = rssURLParams.concat("&organizationId" + StringPool.EQUAL + organizationId);
 		}
 		else {
-			rssURL.setParameter("companyId", String.valueOf(company.getCompanyId()));
+			rssURLParams = rssURLParams.concat("&companyId" + StringPool.EQUAL + company.getCompanyId());
 		}
 	}
 	else {
-		rssURL.setParameter("groupId", String.valueOf(themeDisplay.getScopeGroupId()));
+		rssURLParams = rssURLParams.concat("&groupId" + StringPool.EQUAL + themeDisplay.getScopeGroupId());
 	}
 	%>
 
@@ -63,7 +59,7 @@
 		label="<%= true %>"
 		method="get"
 		target="_blank"
-		url="<%= rssURL.toString() %>"
+		url='<%= themeDisplay.getPathMain() + "/blogs_aggregator/rss?p_l_id=" + plid + rssURLParams %>'
 	/>
 </c:if>
 
