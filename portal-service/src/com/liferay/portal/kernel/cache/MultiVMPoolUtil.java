@@ -53,28 +53,28 @@ public class MultiVMPoolUtil {
 		return getMultiVMPool().getCache(name, blocking);
 	}
 
-	public static void put(String name, String key, Object obj) {
-		getMultiVMPool().put(name, key, obj);
+	public static void put(String name, String key, Object value) {
+		getMultiVMPool().put(name, key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public static void put(PortalCache portalCache, String key, Object obj) {
-		getMultiVMPool().put(portalCache, key, obj);
+	public static void put(PortalCache portalCache, String key, Object value) {
+		getMultiVMPool().put(portalCache, key, value);
 	}
 
-	public static void put(String name, String key, Serializable obj) {
-		getMultiVMPool().put(name, key, obj);
+	public static void put(String name, String key, Serializable value) {
+		getMultiVMPool().put(name, key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public static void put(
-		PortalCache portalCache, String key, Serializable obj) {
+		PortalCache portalCache, String key, Serializable value) {
 
-		getMultiVMPool().put(portalCache, key, obj);
+		getMultiVMPool().put(portalCache, key, value);
 	}
 
 	public static void remove(String name, String key) {

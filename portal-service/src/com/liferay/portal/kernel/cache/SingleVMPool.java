@@ -37,31 +37,31 @@ public interface SingleVMPool {
 
 	public PortalCache getCache(String name, boolean blocking);
 
-	public void put(String name, String key, Object obj);
+	public void put(String name, String key, Object value);
 
 	/**
 	 * @deprecated
 	 */
-	public void put(PortalCache portalCache, String key, Object obj);
-
-	/**
-	 * @deprecated
-	 */
-	public void put(
-		PortalCache portalCache, String key, Object obj, int timeToLive);
-
-	public void put(String name, String key, Serializable obj);
-
-	/**
-	 * @deprecated
-	 */
-	public void put(PortalCache portalCache, String key, Serializable obj);
+	public void put(PortalCache portalCache, String key, Object value);
 
 	/**
 	 * @deprecated
 	 */
 	public void put(
-		PortalCache portalCache, String key, Serializable obj, int timeToLive);
+		PortalCache portalCache, String key, Object value, int timeToLive);
+
+	public void put(String name, String key, Serializable value);
+
+	/**
+	 * @deprecated
+	 */
+	public void put(PortalCache portalCache, String key, Serializable value);
+
+	/**
+	 * @deprecated
+	 */
+	public void put(
+		PortalCache portalCache, String key, Serializable value, int timeToLive);
 
 	public void remove(String name, String key);
 

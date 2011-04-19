@@ -57,30 +57,30 @@ public class MultiVMPoolImpl implements MultiVMPool {
 		return _portalCacheManager.getCache(name, blocking);
 	}
 
-	public void put(String name, String key, Object obj) {
+	public void put(String name, String key, Object value) {
 		PortalCache portalCache = getCache(name);
 
-		portalCache.put(key, obj);
+		portalCache.put(key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public void put(PortalCache portalCache, String key, Object obj) {
-		portalCache.put(key, obj);
+	public void put(PortalCache portalCache, String key, Object value) {
+		portalCache.put(key, value);
 	}
 
-	public void put(String name, String key, Serializable obj) {
+	public void put(String name, String key, Serializable value) {
 		PortalCache portalCache = getCache(name);
 
-		portalCache.put(key, obj);
+		portalCache.put(key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public void put(PortalCache portalCache, String key, Serializable obj) {
-		portalCache.put(key, obj);
+	public void put(PortalCache portalCache, String key, Serializable value) {
+		portalCache.put(key, value);
 	}
 
 	public void remove(String name, String key) {

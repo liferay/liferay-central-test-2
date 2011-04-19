@@ -37,19 +37,19 @@ public interface MultiVMPool {
 
 	public PortalCache getCache(String name, boolean blocking);
 
-	public void put(String name, String key, Object obj);
+	public void put(String name, String key, Object value);
 
 	/**
 	 * @deprecated
 	 */
-	public void put(PortalCache portalCache, String key, Object obj);
+	public void put(PortalCache portalCache, String key, Object value);
 
-	public void put(String name, String key, Serializable obj);
+	public void put(String name, String key, Serializable value);
 
 	/**
 	 * @deprecated
 	 */
-	public void put(PortalCache portalCache, String key, Serializable obj);
+	public void put(PortalCache portalCache, String key, Serializable value);
 
 	public void remove(String name, String key);
 

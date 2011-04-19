@@ -53,46 +53,47 @@ public class SingleVMPoolUtil {
 		return _singleVMPool;
 	}
 
-	public static void put(String name, String key, Object obj) {
-		getSingleVMPool().put(name, key, obj);
+	public static void put(String name, String key, Object value) {
+		getSingleVMPool().put(name, key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
-	public static void put(PortalCache portalCache, String key, Object obj) {
-		getSingleVMPool().put(portalCache, key, obj);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public static void put(
-		PortalCache portalCache, String key, Object obj, int timeToLive) {
-
-		getSingleVMPool().put(portalCache, key, obj, timeToLive);
-	}
-
-	public static void put(String name, String key, Serializable obj) {
-		getSingleVMPool().put(name, key, obj);
+	public static void put(PortalCache portalCache, String key, Object value) {
+		getSingleVMPool().put(portalCache, key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public static void put(
-		PortalCache portalCache, String key, Serializable obj) {
+		PortalCache portalCache, String key, Object value, int timeToLive) {
 
-		getSingleVMPool().put(portalCache, key, obj);
+		getSingleVMPool().put(portalCache, key, value, timeToLive);
+	}
+
+	public static void put(String name, String key, Serializable value) {
+		getSingleVMPool().put(name, key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public static void put(
-		PortalCache portalCache, String key, Serializable obj, int timeToLive) {
+		PortalCache portalCache, String key, Serializable value) {
 
-		getSingleVMPool().put(portalCache, key, obj, timeToLive);
+		getSingleVMPool().put(portalCache, key, value);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void put(
+		PortalCache portalCache, String key, Serializable value,
+		int timeToLive) {
+
+		getSingleVMPool().put(portalCache, key, value, timeToLive);
 	}
 
 	public static void remove(String name, String key) {
