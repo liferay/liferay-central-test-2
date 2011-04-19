@@ -14,10 +14,13 @@
 
 package com.liferay.portal.kernel.velocity;
 
-import com.liferay.portal.kernel.transformation.TransformationContext;
-
 /**
  * @author Raymond Augé
  */
-public interface VelocityContext extends TransformationContext {
+public interface VelocityContext {
+
+	public Object get(String key);
+
+	public void put(String key, Object value);
+
 }

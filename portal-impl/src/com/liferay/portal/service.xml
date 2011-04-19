@@ -2379,7 +2379,6 @@
 		<exception>OldServiceComponent</exception>
 		<exception>SendPassword</exception>
 		<exception>TeamName</exception>
-		<exception>Transform</exception>
 		<exception>UserActive</exception>
 		<exception>UserEmailAddress</exception>
 		<exception>UserGroupName</exception>

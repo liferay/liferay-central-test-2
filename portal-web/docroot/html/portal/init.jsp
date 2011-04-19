@@ -28,7 +28,6 @@
 <%@ page import="com.liferay.portal.RequiredLayoutException" %>
 <%@ page import="com.liferay.portal.RequiredRoleException" %>
 <%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %>
-<%@ page import="com.liferay.portal.TransformException" %>
 <%@ page import="com.liferay.portal.UserActiveException" %>
 <%@ page import="com.liferay.portal.UserEmailAddressException" %>
 <%@ page import="com.liferay.portal.UserPasswordException" %>
@@ -40,6 +39,7 @@
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
+<%@ page import="com.liferay.portlet.journal.TransformException" %>
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 

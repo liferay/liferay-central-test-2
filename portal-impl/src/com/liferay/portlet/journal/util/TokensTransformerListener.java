@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.transformation.BaseTransformerListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -30,7 +29,7 @@ import java.util.Set;
 /**
  * @author Brian Wing Shun Chan
  */
-public class TokensTransformerListener extends BaseTransformerListener {
+public class TokensTransformerListener extends TransformerListener {
 
 	public static final String TEMP_ESCAPED_AT_OPEN =
 		"[$TEMP_ESCAPED_AT_OPEN$]";

@@ -14,23 +14,19 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.configuration.Filter;
-import com.liferay.portal.kernel.transformation.BaseTransformer;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.journal.TransformException;
+
+import java.util.Map;
 
 /**
- * @author Marcellus Tavares
+ * @author Brian Wing Shun Chan
  */
-public class JournalTransformer extends BaseTransformer {
+public interface TemplateParser {
 
-	protected String getTemplateParserClassName(String langType) {
-		return PropsUtil.get(
-			PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_PARSER, new Filter(langType));
-	}
-
-	protected String[] getTransformerListenersClassNames() {
-		return PropsUtil.getArray(PropsKeys.JOURNAL_TRANSFORMER_LISTENER);
-	}
+	public String transform(
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, String xml, String script)
+		throws TransformException;
 
 }

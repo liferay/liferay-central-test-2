@@ -12,14 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.kernel.transformation;
+package com.liferay.portlet.journal.util;
 
 import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public abstract class BaseTransformerListener implements TransformerListener {
+public abstract class TransformerListener {
+
+	public TransformerListener() {
+	}
 
 	public boolean isTemplateDriven() {
 		return _templateDriven;

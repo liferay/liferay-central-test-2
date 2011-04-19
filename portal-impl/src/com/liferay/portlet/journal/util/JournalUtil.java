@@ -21,13 +21,15 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.transformation.Transformer;
-import com.liferay.portal.kernel.transformation.TransformerListener;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -57,6 +59,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
+import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
@@ -1023,8 +1026,139 @@ public class JournalUtil {
 			String langType)
 		throws Exception {
 
-		return _transformer.transform(
-			themeDisplay, tokens, viewMode, languageId, xml, script, langType);
+		// Setup Listeners
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Language " + languageId);
+		}
+
+		if (Validator.isNull(viewMode)) {
+			viewMode = Constants.VIEW;
+		}
+
+		if (_logTokens.isDebugEnabled()) {
+			String tokensString = PropertiesUtil.list(tokens);
+
+			_logTokens.debug(tokensString);
+		}
+
+		if (_logTransformBefore.isDebugEnabled()) {
+			_logTransformBefore.debug(xml);
+		}
+
+		List<TransformerListener> listenersList =
+			new ArrayList<TransformerListener>();
+
+		String[] listeners = PropsUtil.getArray(
+			PropsKeys.JOURNAL_TRANSFORMER_LISTENER);
+
+		for (int i = 0; i < listeners.length; i++) {
+			TransformerListener listener = null;
+
+			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Instantiate listener " + listeners[i]);
+				}
+
+				boolean templateDriven = Validator.isNotNull(langType);
+
+				listener = (TransformerListener)Class.forName(
+					listeners[i]).newInstance();
+
+				listener.setTemplateDriven(templateDriven);
+				listener.setLanguageId(languageId);
+				listener.setTokens(tokens);
+
+				listenersList.add(listener);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			// Modify XML
+
+			if (_logXmlBeforeListener.isDebugEnabled()) {
+				_logXmlBeforeListener.debug(xml);
+			}
+
+			if (listener != null) {
+				xml = listener.onXml(xml);
+
+				if (_logXmlAfterListener.isDebugEnabled()) {
+					_logXmlAfterListener.debug(xml);
+				}
+			}
+
+			// Modify script
+
+			if (_logScriptBeforeListener.isDebugEnabled()) {
+				_logScriptBeforeListener.debug(script);
+			}
+
+			if (listener != null) {
+				script = listener.onScript(script);
+
+				if (_logScriptAfterListener.isDebugEnabled()) {
+					_logScriptAfterListener.debug(script);
+				}
+			}
+		}
+
+		// Transform
+
+		String output = null;
+
+		if (Validator.isNull(langType)) {
+			output = LocalizationUtil.getLocalization(xml, languageId);
+		}
+		else {
+			String templateParserClassName = PropsUtil.get(
+				PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_PARSER,
+				new Filter(langType));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Template parser class name " + templateParserClassName);
+			}
+
+			if (Validator.isNotNull(templateParserClassName)) {
+				TemplateParser templateParser =
+					(TemplateParser)InstancePool.get(templateParserClassName);
+
+				if (templateParser == null) {
+					throw new TransformException(
+						"No template parser found for " +
+							templateParserClassName);
+				}
+
+				output = templateParser.transform(
+					themeDisplay, tokens, viewMode, languageId, xml, script);
+			}
+		}
+
+		// Postprocess output
+
+		for (int i = 0; i < listenersList.size(); i++) {
+			TransformerListener listener = listenersList.get(i);
+
+			// Modify output
+
+			if (_logOutputBeforeListener.isDebugEnabled()) {
+				_logOutputBeforeListener.debug(output);
+			}
+
+			output = listener.onOutput(output);
+
+			if (_logOutputAfterListener.isDebugEnabled()) {
+				_logOutputAfterListener.debug(output);
+			}
+		}
+
+		if (_logTransfromAfter.isDebugEnabled()) {
+			_logTransfromAfter.debug(output);
+		}
+
+		return output;
 	}
 
 	private static void _addElementOptions (
@@ -1499,7 +1633,24 @@ public class JournalUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(JournalUtil.class);
 
-	private static Transformer _transformer = new JournalTransformer();
+	private static Log _logOutputAfterListener = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".OutputAfterListener");
+	private static Log _logOutputBeforeListener = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".OutputBeforeListener");
+	private static Log _logScriptAfterListener = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".ScriptAfterListener");
+	private static Log _logScriptBeforeListener = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".ScriptBeforeListener");
+	private static Log _logTokens = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".Tokens");
+	private static Log _logTransformBefore = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".TransformBefore");
+	private static Log _logTransfromAfter = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".TransformAfter");
+	private static Log _logXmlAfterListener = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".XmlAfterListener");
+	private static Log _logXmlBeforeListener = LogFactoryUtil.getLog(
+		JournalUtil.class.getName() + ".XmlBeforeListener");
 
 	private static Map<String, String> _customTokens;
 

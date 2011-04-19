@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.transformation.BaseTransformerListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -31,7 +30,7 @@ import java.util.Properties;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PropertiesTransformerListener extends BaseTransformerListener {
+public class PropertiesTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {

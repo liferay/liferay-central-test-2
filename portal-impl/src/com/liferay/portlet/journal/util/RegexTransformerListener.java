@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.transformation.BaseTransformerListener;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,7 +24,7 @@ import java.util.regex.Pattern;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RegexTransformerListener extends BaseTransformerListener {
+public class RegexTransformerListener extends TransformerListener {
 
 	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {

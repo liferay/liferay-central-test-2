@@ -14,10 +14,13 @@
 
 package com.liferay.portal.kernel.freemarker;
 
-import com.liferay.portal.kernel.transformation.TransformationContext;
-
 /**
  * @author Mika Koivisto
  */
-public interface FreeMarkerContext extends TransformationContext {
+public interface FreeMarkerContext {
+
+	public Object get(String key);
+
+	public void put(String key, Object value);
+
 }
