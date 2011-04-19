@@ -25,7 +25,6 @@ String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
 String imagesPath = ParamUtil.getString(request, "imagesPath");
-String jsPath = ParamUtil.getString(request, "jsPath");
 String languageId = ParamUtil.getString(request, "languageId");
 %>
 
@@ -64,7 +63,7 @@ CKEDITOR.config.toolbar_bbcode = [
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
 
-CKEDITOR.config.contentsCss = '<%= jsPath %>/editor/ckeditor/plugins/bbcode/css/main.jsp';
+CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 
 CKEDITOR.config.extraPlugins = 'bbcode,wikilink';
 

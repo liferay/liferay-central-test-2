@@ -42,9 +42,6 @@ body.yui3-aui-dialog-iframe-popup {
 body.portal-iframe {
 }
 
-body.html-editor {
-}
-
 blockquote, ul, ol, dl {
 }
 
@@ -104,6 +101,17 @@ h4, h5, h6 {
 }
 
 h1, h2, h3, h4, h5, h6, strong {
+}
+
+/* ---------- HTML Editor ---------- */
+
+body.html-editor {
+}
+
+.html-editor.portlet-message-boards blockquote {
+}
+
+.html-editor.portlet-message-boards blockquote:after {
 }
 
 /* ---------- Text formatting ---------- */

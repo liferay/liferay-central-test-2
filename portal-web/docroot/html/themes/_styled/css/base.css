@@ -64,11 +64,6 @@ body.portal-iframe {
 	padding: 0;
 }
 
-body.html-editor {
-	background: #FFF;
-	color: #000;
-}
-
 blockquote, ul, ol, dl {
 	margin: 1em;
 }
@@ -145,6 +140,32 @@ h4, h5, h6 {
 
 h1, h2, h3, h4, h5, h6, strong {
 	font-weight: bold;
+}
+
+/* ---------- HTML Editor ---------- */
+
+body.html-editor {
+	background: #FFF;
+	color: #000;
+}
+
+.html-editor.portlet-message-boards blockquote {
+	background: #EEF0F2 url(../images/message_boards/quoteleft.png) no-repeat 5px 5px;
+	border: 1px solid #777;
+	position: relative;
+	padding: 5px 45px;
+}
+
+.html-editor.portlet-message-boards blockquote:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 31px;
+	height: 24px;
+	background: url(../images/message_boards/quoteright.png) no-repeat 50%;
+	right: 5px;
+	bottom: 5px;
+	z-index: 999;
 }
 
 /* ---------- Text formatting ---------- */
