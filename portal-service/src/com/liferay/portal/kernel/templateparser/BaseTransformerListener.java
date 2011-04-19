@@ -12,17 +12,14 @@
  * details.
  */
 
-package com.liferay.portlet.journal.util;
+package com.liferay.portal.kernel.templateparser;
 
 import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public abstract class TransformerListener {
-
-	public TransformerListener() {
-	}
+public abstract class BaseTransformerListener implements TransformerListener {
 
 	public String getLanguageId() {
 		return _languageId;

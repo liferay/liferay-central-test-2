@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.templateparser.BaseTransformerListener;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * @author Raymond Augé
  */
-public class LocaleTransformerListener extends TransformerListener {
+public class LocaleTransformerListener extends BaseTransformerListener {
 
 	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
