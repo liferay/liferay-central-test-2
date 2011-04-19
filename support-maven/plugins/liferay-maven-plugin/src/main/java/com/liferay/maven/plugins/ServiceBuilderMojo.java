@@ -131,6 +131,7 @@ public class ServiceBuilderMojo extends AbstractMojo {
 
 	protected void invokeDependencyBuild() throws Exception {
 		if (!postBuildDependencyModules) {
+			return;
 		}
 
 		List<Dependency> dependencies = new ArrayList<Dependency>();
