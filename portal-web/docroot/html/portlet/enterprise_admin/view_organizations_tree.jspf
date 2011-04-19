@@ -197,8 +197,6 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 		<aui:input name="organizationsRedirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 		<%
-		String keywords = ParamUtil.getString(request, "keywords");
-
 		SearchContainer organizationSearch = new OrganizationSearch(renderRequest, currentURLObj);
 
 		organizationSearch.setRowChecker(new RowChecker(renderResponse));
@@ -222,7 +220,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 			%>
 
 			<c:choose>
-				<c:when test="<%= Validator.isNull(keywords) %>">
+				<c:when test="<%= searchTerms.hasEmptySearchTerms() %>">
 					<liferay-ui:search-container-results>
 						<c:choose>
 							<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">

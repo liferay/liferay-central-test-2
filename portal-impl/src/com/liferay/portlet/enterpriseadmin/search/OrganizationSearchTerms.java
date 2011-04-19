@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.service.CountryServiceUtil;
@@ -103,6 +104,25 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		}
 
 		return regionName;
+	}
+
+	public boolean hasEmptySearchTerms() {
+		if (isAdvancedSearch()) {
+			if (Validator.isNotNull(city) || countryId > 0 ||
+				Validator.isNotNull(name) || regionId > 0 ||
+				Validator.isNotNull(street) || Validator.isNotNull(type) ||
+				Validator.isNotNull(zip)) {
+
+				return false;
+			}
+		}
+		else {
+			if (Validator.isNotNull(keywords)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
