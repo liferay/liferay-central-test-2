@@ -61,7 +61,8 @@ public interface SingleVMPool {
 	 * @deprecated
 	 */
 	public void put(
-		PortalCache portalCache, String key, Serializable value, int timeToLive);
+		PortalCache portalCache, String key, Serializable value,
+		int timeToLive);
 
 	public void remove(String name, String key);
 
