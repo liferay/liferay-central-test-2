@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.templateparser.TemplateParser;
 import com.liferay.portal.kernel.templateparser.TransformException;
 import com.liferay.portal.theme.ThemeDisplay;
 

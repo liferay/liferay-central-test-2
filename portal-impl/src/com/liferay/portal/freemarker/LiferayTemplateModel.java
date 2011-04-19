@@ -14,7 +14,7 @@
 
 package com.liferay.portal.freemarker;
 
-import com.liferay.portlet.journal.util.TemplateNode;
+import com.liferay.portal.kernel.templateparser.TemplateNode;
 
 import freemarker.ext.beans.BeanModel;
 import freemarker.ext.beans.BeansWrapper;

@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portlet.journal.util;
+package com.liferay.portal.kernel.templateparser;
 
-import com.liferay.portal.kernel.templateparser.TransformException;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Map;
