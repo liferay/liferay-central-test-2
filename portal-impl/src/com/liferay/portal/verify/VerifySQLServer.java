@@ -25,6 +25,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.ArrayList;
+
 /**
  * @author Douglas Wong
  */
@@ -75,6 +77,10 @@ public class VerifySQLServer extends VerifyProcess {
 					convertTextColumn(
 						tableName, columnName, length, nullable);
 				}
+			}
+
+			for (int i = 0; i < _PKStatements.size(); i++) {
+				runSQL(_PKStatements.get(i));
 			}
 		}
 		catch (Exception e) {
@@ -162,9 +168,10 @@ public class VerifySQLServer extends VerifyProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(11);
+			StringBundler sb = new StringBundler(12);
 
 			sb.append("select distinct sysobjects.name as table_name, ");
+			sb.append("syscolumns.name as column_name, ");
 			sb.append("sysindexes.name as index_name FROM sysobjects inner ");
 			sb.append("join sysindexes on sysobjects.id = sysindexes.id ");
 			sb.append("inner join syscolumns on sysobjects.id = ");
@@ -188,12 +195,23 @@ public class VerifySQLServer extends VerifyProcess {
 			while (rs.next()) {
 				String tableName = rs.getString("table_name");
 				String indexName = rs.getString("index_name");
+				String columnName = rs.getString("column_name");
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Dropping index " + tableName + "." + indexName);
 				}
 
-				runSQL("drop index " + indexName + " on " + tableName);
+				if (indexName.startsWith("PK")) {
+					runSQL(
+						"alter table " + tableName + " drop constraint " +
+							indexName);
+
+					_PKStatements.add("alter table " + tableName + 
+						" add primary key (" + columnName + ")");
+				}
+				else {
+					runSQL("drop index " + indexName + " on " + tableName);
+				}
 			}
 		}
 		catch (Exception e) {
@@ -210,6 +228,8 @@ public class VerifySQLServer extends VerifyProcess {
 
 	private static final String _FILTER_NONUNICODE_DATA_TYPES =
 		"((systypes.name = 'varchar') OR (systypes.name = 'text'))";
+
+	private static ArrayList<String> _PKStatements = new ArrayList<String>();
 
 	private static Log _log = LogFactoryUtil.getLog(VerifySQLServer.class);
 
