@@ -903,39 +903,40 @@ public class JournalArticleLocalServiceImpl
 		String xml = article.getContent();
 
 		try {
-			Document doc = null;
+			Document document = null;
 
-			Element root = null;
+			Element rootElement = null;
 
 			if (article.isTemplateDriven()) {
-				doc = SAXReaderUtil.read(xml);
+				document = SAXReaderUtil.read(xml);
 
-				root = doc.getRootElement();
+				rootElement = document.getRootElement();
 
-				Document request = SAXReaderUtil.read(xmlRequest);
+				Document requestDocument = SAXReaderUtil.read(xmlRequest);
 
-				List<Element> pages = root.elements("page");
+				List<Element> pages = rootElement.elements("page");
 
-				if (pages.size() > 0) {
+				if (!pages.isEmpty()) {
 					pageFlow = true;
 
-					String targetPage = request.valueOf(
+					String targetPage = requestDocument.valueOf(
 						"/request/parameters/parameter[name='targetPage']/" +
 							"value");
 
-					Element pageEl = null;
+					Element pageElement = null;
 
 					if (Validator.isNotNull(targetPage)) {
 						XPath xpathSelector = SAXReaderUtil.createXPath(
 							"/root/page[@id = '" + targetPage + "']");
 
-						pageEl = (Element)xpathSelector.selectSingleNode(doc);
+						pageElement = (Element)xpathSelector.selectSingleNode(
+							document);
 					}
 
-					if (pageEl != null) {
-						doc = SAXReaderUtil.createDocument(pageEl);
+					if (pageElement != null) {
+						document = SAXReaderUtil.createDocument(pageElement);
 
-						root = doc.getRootElement();
+						rootElement = document.getRootElement();
 
 						numberOfPages = pages.size();
 					}
@@ -944,22 +945,22 @@ public class JournalArticleLocalServiceImpl
 							page = 1;
 						}
 
-						pageEl = pages.get(page - 1);
+						pageElement = pages.get(page - 1);
 
-						doc = SAXReaderUtil.createDocument(pageEl);
+						document = SAXReaderUtil.createDocument(pageElement);
 
-						root = doc.getRootElement();
+						rootElement = document.getRootElement();
 
 						numberOfPages = pages.size();
 						paginate = true;
 					}
 				}
 
-				root.add(request.getRootElement().createCopy());
+				rootElement.add(requestDocument.getRootElement().createCopy());
 
-				JournalUtil.addAllReservedEls(root, tokens, article);
+				JournalUtil.addAllReservedEls(rootElement, tokens, article);
 
-				xml = DDMXMLUtil.formatXML(doc);
+				xml = DDMXMLUtil.formatXML(document);
 			}
 		}
 		catch (DocumentException de) {

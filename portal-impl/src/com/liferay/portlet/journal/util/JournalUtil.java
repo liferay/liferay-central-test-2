@@ -101,53 +101,56 @@ public class JournalUtil {
 	public static final int MAX_STACK_SIZE = 20;
 
 	public static void addAllReservedEls(
-		Element root, Map<String, String> tokens, JournalArticle article) {
+		Element rootElement, Map<String, String> tokens,
+		JournalArticle article) {
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_ID,
+			rootElement, tokens, JournalStructureConstants.RESERVED_ARTICLE_ID,
 			article.getArticleId());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_VERSION,
+			rootElement, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_VERSION,
 			article.getVersion());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_TITLE,
+			rootElement, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_TITLE,
 			article.getTitle());
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_URL_TITLE,
 			article.getUrlTitle());
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_DESCRIPTION,
 			article.getDescription());
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_TYPE,
-			article.getType());
+			rootElement, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_TYPE, article.getType());
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_CREATE_DATE,
 			article.getCreateDate());
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_MODIFIED_DATE,
 			article.getModifiedDate());
 
 		if (article.getDisplayDate() != null) {
 			JournalUtil.addReservedEl(
-				root, tokens,
+				rootElement, tokens,
 				JournalStructureConstants.RESERVED_ARTICLE_DISPLAY_DATE,
 				article.getDisplayDate());
 		}
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_SMALL_IMAGE_URL,
 			article.getSmallImageURL());
 
@@ -161,12 +164,13 @@ public class JournalUtil {
 		}
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_ASSET_TAG_NAMES,
 			StringUtil.merge(assetTagNames));
 
 		JournalUtil.addReservedEl(
-			root, tokens, JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
+			rootElement, tokens,
+			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_ID,
 			String.valueOf(article.getUserId()));
 
 		String userName = StringPool.BLANK;
@@ -190,21 +194,21 @@ public class JournalUtil {
 		}
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_NAME, userName);
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
 			userEmailAddress);
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_COMMENTS,
 			userComments);
 
 		JournalUtil.addReservedEl(
-			root, tokens,
+			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_AUTHOR_JOB_TITLE,
 			userJobTitle);
 	}
@@ -240,39 +244,48 @@ public class JournalUtil {
 	}
 
 	public static void addReservedEl(
-		Element root, Map<String, String> tokens, String name, Date value) {
+		Element rootElement, Map<String, String> tokens, String name,
+		Date value) {
 
-		addReservedEl(root, tokens, name, Time.getRFC822(value));
+		addReservedEl(rootElement, tokens, name, Time.getRFC822(value));
 	}
 
 	public static void addReservedEl(
-		Element root, Map<String, String> tokens, String name, double value) {
+		Element rootElement, Map<String, String> tokens, String name,
+		double value) {
 
-		addReservedEl(root, tokens, name, String.valueOf(value));
+		addReservedEl(rootElement, tokens, name, String.valueOf(value));
 	}
 
 	public static void addReservedEl(
-		Element root, Map<String, String> tokens, String name, String value) {
+		Element rootElement, Map<String, String> tokens, String name,
+		String value) {
 
 		// XML
 
-		if (root != null) {
-			Element dynamicEl = SAXReaderUtil.createElement("dynamic-element");
+		if (rootElement != null) {
+			Element dynamicElementElement = SAXReaderUtil.createElement(
+				"dynamic-element");
 
-			dynamicEl.add(
-				SAXReaderUtil.createAttribute(dynamicEl, "name", name));
-			dynamicEl.add(
-				SAXReaderUtil.createAttribute(dynamicEl, "type", "text"));
+			Attribute nameAttribute = SAXReaderUtil.createAttribute(
+				dynamicElementElement, "name", name);
 
-			Element dynamicContent = SAXReaderUtil.createElement(
+			dynamicElementElement.add(nameAttribute);
+
+			Attribute typeAttribute = SAXReaderUtil.createAttribute(
+				dynamicElementElement, "type", "text");
+
+			dynamicElementElement.add(typeAttribute);
+
+			Element dynamicContentElement = SAXReaderUtil.createElement(
 				"dynamic-content");
 
-			//dynamicContent.setText("<![CDATA[" + value + "]]>");
-			dynamicContent.setText(value);
+			//dynamicContentElement.setText("<![CDATA[" + value + "]]>");
+			dynamicContentElement.setText(value);
 
-			dynamicEl.add(dynamicContent);
+			dynamicElementElement.add(dynamicContentElement);
 
-			root.add(dynamicEl);
+			rootElement.add(dynamicElementElement);
 		}
 
 		// Tokens
@@ -834,22 +847,22 @@ public class JournalUtil {
 			Document curDocument = SAXReaderUtil.read(curContent);
 			Document newDocument = SAXReaderUtil.read(newContent);
 
-			Element curRoot = curDocument.getRootElement();
-			Element newRoot = newDocument.getRootElement();
+			Element curRootElement = curDocument.getRootElement();
+			Element newRootElement = newDocument.getRootElement();
 
-			curRoot.addAttribute(
+			curRootElement.addAttribute(
 				"default-locale",
-				newRoot.attributeValue("default-locale"));
-			curRoot.addAttribute(
+				newRootElement.attributeValue("default-locale"));
+			curRootElement.addAttribute(
 				"available-locales",
-				newRoot.attributeValue("available-locales"));
+				newRootElement.attributeValue("available-locales"));
 
 			_mergeArticleContentUpdate(
-				curDocument, newRoot,
+				curDocument, newRootElement,
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
 			if (removeNullElements) {
-				_mergeArticleContentDelete(curRoot, newDocument);
+				_mergeArticleContentDelete(curRootElement, newDocument);
 			}
 
 			curContent = DDMXMLUtil.formatXML(curDocument);
@@ -861,29 +874,31 @@ public class JournalUtil {
 		return curContent;
 	}
 
-	public static void removeArticleLocale(Element el, String languageId)
+	public static void removeArticleLocale(Element element, String languageId)
 		throws PortalException, SystemException {
 
-		for (Element dynamicEl : el.elements("dynamic-element")) {
-			for (Element dynamicContentEl :
-					dynamicEl.elements("dynamic-content")) {
+		for (Element dynamicElementElement :
+				element.elements("dynamic-element")) {
+
+			for (Element dynamicContentElement :
+					dynamicElementElement.elements("dynamic-content")) {
 
 				String curLanguageId = GetterUtil.getString(
-					dynamicContentEl.attributeValue("language-id"));
+					dynamicContentElement.attributeValue("language-id"));
 
 				if (curLanguageId.equals(languageId)) {
 					long id = GetterUtil.getLong(
-						dynamicContentEl.attributeValue("id"));
+						dynamicContentElement.attributeValue("id"));
 
 					if (id > 0) {
 						ImageLocalServiceUtil.deleteImage(id);
 					}
 
-					dynamicContentEl.detach();
+					dynamicContentElement.detach();
 				}
 			}
 
-			removeArticleLocale(dynamicEl, languageId);
+			removeArticleLocale(dynamicElementElement, languageId);
 		}
 	}
 
@@ -891,11 +906,12 @@ public class JournalUtil {
 		String content, String languageId) {
 
 		try {
-			Document doc = SAXReaderUtil.read(content);
+			Document document = SAXReaderUtil.read(content);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			String availableLocales = root.attributeValue("available-locales");
+			String availableLocales = rootElement.attributeValue(
+				"available-locales");
 
 			if (availableLocales == null) {
 				return content;
@@ -908,11 +924,11 @@ public class JournalUtil {
 					0, availableLocales.length() - 1);
 			}
 
-			root.addAttribute("available-locales", availableLocales);
+			rootElement.addAttribute("available-locales", availableLocales);
 
-			removeArticleLocale(root, languageId);
+			removeArticleLocale(rootElement, languageId);
 
-			content = DDMXMLUtil.formatXML(doc);
+			content = DDMXMLUtil.formatXML(document);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1407,14 +1423,14 @@ public class JournalUtil {
 			Map<String, String> tokens, long groupId, String xmlRequest)
 		throws Exception {
 
-		Document request = SAXReaderUtil.read(xmlRequest);
+		Document requestDocument = SAXReaderUtil.read(xmlRequest);
 
-		Element root = request.getRootElement();
+		Element rootElement = requestDocument.getRootElement();
 
-		Element themeDisplayEl = root.element("theme-display");
+		Element themeDisplayElement = rootElement.element("theme-display");
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(
-			GetterUtil.getLong(themeDisplayEl.elementText("plid")));
+			GetterUtil.getLong(themeDisplayElement.elementText("plid")));
 
 		Group group = layout.getGroup();
 
@@ -1423,15 +1439,15 @@ public class JournalUtil {
 		String friendlyUrlCurrent = null;
 
 		if (layout.isPublicLayout()) {
-			friendlyUrlCurrent = themeDisplayEl.elementText(
+			friendlyUrlCurrent = themeDisplayElement.elementText(
 				"path-friendly-url-public");
 		}
 		else if (group.isUserGroup()) {
-			friendlyUrlCurrent = themeDisplayEl.elementText(
+			friendlyUrlCurrent = themeDisplayElement.elementText(
 				"path-friendly-url-private-user");
 		}
 		else {
-			friendlyUrlCurrent = themeDisplayEl.elementText(
+			friendlyUrlCurrent = themeDisplayElement.elementText(
 				"path-friendly-url-private-group");
 		}
 
@@ -1441,39 +1457,43 @@ public class JournalUtil {
 
 		if (Validator.isNull(virtualHostname) ||
 			!virtualHostname.equals(
-				themeDisplayEl.elementText("server-name"))) {
+				themeDisplayElement.elementText("server-name"))) {
 
 			layoutSetFriendlyUrl = friendlyUrlCurrent + group.getFriendlyURL();
 		}
 
-		tokens.put("cdn_host", themeDisplayEl.elementText("cdn-host"));
-		tokens.put("company_id", themeDisplayEl.elementText("company-id"));
+		tokens.put("cdn_host", themeDisplayElement.elementText("cdn-host"));
+		tokens.put("company_id", themeDisplayElement.elementText("company-id"));
 		tokens.put("friendly_url_current", friendlyUrlCurrent);
 		tokens.put(
 			"friendly_url_private_group",
-			themeDisplayEl.elementText("path-friendly-url-private-group"));
+			themeDisplayElement.elementText("path-friendly-url-private-group"));
 		tokens.put(
 			"friendly_url_private_user",
-			themeDisplayEl.elementText("path-friendly-url-private-user"));
+			themeDisplayElement.elementText("path-friendly-url-private-user"));
 		tokens.put(
 			"friendly_url_public",
-			themeDisplayEl.elementText("path-friendly-url-public"));
+			themeDisplayElement.elementText("path-friendly-url-public"));
 		tokens.put("group_friendly_url", group.getFriendlyURL());
 		tokens.put("group_id", String.valueOf(groupId));
-		tokens.put("image_path", themeDisplayEl.elementText("path-image"));
+		tokens.put("image_path", themeDisplayElement.elementText("path-image"));
 		tokens.put("layout_set_friendly_url", layoutSetFriendlyUrl);
-		tokens.put("main_path", themeDisplayEl.elementText("path-main"));
-		tokens.put("portal_ctx", themeDisplayEl.elementText("path-context"));
+		tokens.put("main_path", themeDisplayElement.elementText("path-main"));
+		tokens.put(
+			"portal_ctx", themeDisplayElement.elementText("path-context"));
 		tokens.put(
 			"portal_url",
-			HttpUtil.removeProtocol(themeDisplayEl.elementText("url-portal")));
+			HttpUtil.removeProtocol(
+				themeDisplayElement.elementText("url-portal")));
 		tokens.put(
 			"protocol",
-			HttpUtil.getProtocol(themeDisplayEl.elementText("url-portal")));
-		tokens.put("root_path", themeDisplayEl.elementText("path-context"));
+			HttpUtil.getProtocol(
+				themeDisplayElement.elementText("url-portal")));
+		tokens.put(
+			"root_path", themeDisplayElement.elementText("path-context"));
 		tokens.put(
 			"theme_image_path",
-			themeDisplayEl.elementText("path-theme-images"));
+			themeDisplayElement.elementText("path-theme-images"));
 
 		_populateCustomTokens(tokens);
 
@@ -1481,12 +1501,13 @@ public class JournalUtil {
 
 		tokens.put(
 			"friendly_url",
-			themeDisplayEl.elementText("path-friendly-url-public"));
+			themeDisplayElement.elementText("path-friendly-url-public"));
 		tokens.put(
 			"friendly_url_private",
-			themeDisplayEl.elementText("path-friendly-url-private-group"));
+			themeDisplayElement.elementText("path-friendly-url-private-group"));
 		tokens.put(
-			"page_url", themeDisplayEl.elementText("path-friendly-url-public"));
+			"page_url",
+			themeDisplayElement.elementText("path-friendly-url-public"));
 	}
 
 	private static void _populateTokens(
@@ -1557,30 +1578,31 @@ public class JournalUtil {
 	}
 
 	private static void _removeOldContent(
-			Stack<String> path, Element contentEl, Document xsdDoc)
+			Stack<String> path, Element contentElement, Document xsdDocument)
 		throws SystemException {
 
-		String elPath = "";
+		String elementPath = "";
 
 		for (int i = 0; i < path.size(); i++) {
-			elPath += "/" + path.elementAt(i);
+			elementPath += "/" + path.elementAt(i);
 		}
 
-		for (int i = 0; i < contentEl.nodeCount(); i++) {
-			Node contentNode = contentEl.node(i);
+		for (int i = 0; i < contentElement.nodeCount(); i++) {
+			Node contentNode = contentElement.node(i);
 
 			if (contentNode instanceof Element) {
-				_removeOldContent(path, (Element)contentNode, xsdDoc, elPath);
+				_removeOldContent(
+					path, (Element)contentNode, xsdDocument, elementPath);
 			}
 		}
 	}
 
 	private static void _removeOldContent(
-			Stack<String> path, Element contentEl, Document xsdDoc,
-			String elPath)
+			Stack<String> path, Element contentElement, Document xsdDocument,
+			String elementPath)
 		throws SystemException {
 
-		String name = contentEl.attributeValue("name");
+		String name = contentElement.attributeValue("name");
 
 		if (Validator.isNull(name)) {
 			return;
@@ -1588,19 +1610,19 @@ public class JournalUtil {
 
 		String localPath = "dynamic-element[@name='" + name + "']";
 
-		String fullPath = elPath + "/" + localPath;
+		String fullPath = elementPath + "/" + localPath;
 
 		XPath xPathSelector = SAXReaderUtil.createXPath(fullPath);
 
-		List<Node> curNodes = xPathSelector.selectNodes(xsdDoc);
+		List<Node> curNodes = xPathSelector.selectNodes(xsdDocument);
 
 		if (curNodes.size() == 0) {
-			contentEl.detach();
+			contentElement.detach();
 		}
 
 		path.push(localPath);
 
-		_removeOldContent(path, contentEl, xsdDoc);
+		_removeOldContent(path, contentElement, xsdDocument);
 
 		path.pop();
 	}
@@ -1613,28 +1635,20 @@ public class JournalUtil {
 
 	private static Log _logOutputAfterListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".OutputAfterListener");
-
 	private static Log _logOutputBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".OutputBeforeListener");
-
 	private static Log _logScriptAfterListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".ScriptAfterListener");
-
 	private static Log _logScriptBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".ScriptBeforeListener");
-
 	private static Log _logTokens = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".Tokens");
-
 	private static Log _logTransformBefore = LogFactoryUtil.getLog(
-		JournalUtil.class.getName() + ".BeforeTransform");
-
+		JournalUtil.class.getName() + ".TransformBefore");
 	private static Log _logTransfromAfter = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".TransformAfter");
-
 	private static Log _logXmlAfterListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".XmlAfterListener");
-
 	private static Log _logXmlBeforeListener = LogFactoryUtil.getLog(
 		JournalUtil.class.getName() + ".XmlBeforeListener");
 
