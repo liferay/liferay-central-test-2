@@ -306,6 +306,20 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService {
 		return _ddmTemplateLocalService.getTemplate(templateId);
 	}
 
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplates(
+		long structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.getTemplates(structureId);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplates(
+		long structureId, java.lang.String type)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddmTemplateLocalService.getTemplates(structureId, type);
+	}
+
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> search(
 		long companyId, long groupId, long structureId,
 		java.lang.String keywords, int start, int end,
