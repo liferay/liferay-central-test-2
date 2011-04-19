@@ -51,7 +51,7 @@ public class NoKnownDevices implements KnownDevices {
 		return _pointingMethods;
 	}
 
-	public void reload() {		
+	public void reload() {
 	}
 
 	private NoKnownDevices() {
