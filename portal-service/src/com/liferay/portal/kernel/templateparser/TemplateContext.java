@@ -12,12 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.kernel.velocity;
-
-import com.liferay.portal.kernel.templateparser.TemplateContext;
+package com.liferay.portal.kernel.templateparser;
 
 /**
- * @author Raymond Augé
+ * @author Marcellus Tavares
+ * @author Brian Wing Shun Chan
  */
-public interface VelocityContext extends TemplateContext {
+public interface TemplateContext {
+
+	public Object get(String key);
+
+	public void put(String key, Object value);
+
 }
