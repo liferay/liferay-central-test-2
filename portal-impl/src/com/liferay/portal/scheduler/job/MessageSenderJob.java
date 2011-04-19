@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.spring.context.PortletContextLoaderListener;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.concurrent.locks.ReentrantLock;
@@ -76,7 +77,10 @@ public class MessageSenderJob implements Job {
 			message = (Message)JSONFactoryUtil.deserialize(messageJSON);
 		}
 
-		String lockKey = message.getString(SchedulerEngine.EXECUTION_LOCK_KEY);
+		String contextPath = message.getString(SchedulerEngine.CONTEXT_PATH);
+
+		String lockKey = PortletContextLoaderListener.getLockKey(
+			contextPath);
 
 		ReentrantLock executionLock = null;
 
