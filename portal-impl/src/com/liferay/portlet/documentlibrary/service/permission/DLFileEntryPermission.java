@@ -29,7 +29,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -98,7 +98,7 @@ public class DLFileEntryPermission {
 			if (dlFileEntry.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
+				DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(
 					dlFileEntry.getFolderId());
 
 				if (!DLFolderPermission.contains(

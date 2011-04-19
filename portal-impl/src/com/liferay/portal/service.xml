@@ -1411,7 +1411,8 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLAppHelper" />
-		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLRepository" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileEntry" />
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFolder" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<entity name="RepositoryEntry" uuid="true" local-service="false" remote-service="false">

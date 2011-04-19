@@ -24,7 +24,7 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -146,7 +146,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	public String getMimeType(String version) {
 		try {
 			DLFileVersion dlFileVersion =
-				DLRepositoryLocalServiceUtil.getFileVersion(
+				DLFileEntryLocalServiceUtil.getFileVersion(
 					_dlFileEntry.getFileEntryId(), version);
 
 			return dlFileVersion.getMimeType();

@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.action.EditExpandoAction;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -105,7 +105,7 @@ public class EditDocumentLibraryExtraSettingsAction extends EditExpandoAction {
 				themeDisplay.getCompanyId(), keys[i], presets[i]);
 		}
 
-		DLRepositoryLocalServiceUtil.convertExtraSettings(keys);
+		DLFileEntryLocalServiceUtil.convertExtraSettings(keys);
 	}
 
 }

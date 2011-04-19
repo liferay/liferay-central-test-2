@@ -26,8 +26,10 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,25 +41,33 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 
 	public LiferayRepositoryBase(
 		RepositoryService repositoryService,
-		DLRepositoryLocalService dlRepositoryLocalService,
-		DLRepositoryService dlRepositoryService, long repositoryId) {
+		DLFileEntryLocalService dlFileEntryLocalService,
+		DLFileEntryService dlFileEntryService,
+		DLFolderLocalService dlFolderLocalService,
+		DLFolderService dlFolderService, long repositoryId) {
 
 		this.repositoryService = repositoryService;
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
-		this.dlRepositoryService = dlRepositoryService;
+		this.dlFileEntryLocalService = dlFileEntryLocalService;
+		this.dlFileEntryService = dlFileEntryService;
+		this.dlFolderLocalService = dlFolderLocalService;
+		this.dlFolderService = dlFolderService;
 
 		initByRepositoryId(repositoryId);
 	}
 
 	public LiferayRepositoryBase(
 		RepositoryService repositoryService,
-		DLRepositoryLocalService dlRepositoryLocalService,
-		DLRepositoryService dlRepositoryService, long folderId,
-		long fileEntryId, long fileVersionId) {
+		DLFileEntryLocalService dlFileEntryLocalService,
+		DLFileEntryService dlFileEntryService,
+		DLFolderLocalService dlFolderLocalService,
+		DLFolderService dlFolderService, long folderId, long fileEntryId,
+		long fileVersionId) {
 
 		this.repositoryService = repositoryService;
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
-		this.dlRepositoryService = dlRepositoryService;
+		this.dlFileEntryLocalService = dlFileEntryLocalService;
+		this.dlFileEntryService = dlFileEntryService;
+		this.dlFolderLocalService = dlFolderLocalService;
+		this.dlFolderService = dlFolderService;
 
 		if (folderId != 0) {
 			initByFolderId(folderId);
@@ -80,7 +90,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 
 	protected void initByFileEntryId(long fileEntryId) {
 		try {
-			DLFileEntry dlFileEntry = dlRepositoryLocalService.getFileEntry(
+			DLFileEntry dlFileEntry = dlFileEntryLocalService.getFileEntry(
 				fileEntryId);
 
 			initByRepositoryId(dlFileEntry.getRepositoryId());
@@ -100,7 +110,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 	protected void initByFileVersionId(long fileVersionId) {
 		try {
 			DLFileVersion dlFileVersion =
-				dlRepositoryLocalService.getFileVersion(fileVersionId);
+				dlFileEntryLocalService.getFileVersion(fileVersionId);
 
 			initByRepositoryId(dlFileVersion.getRepositoryId());
 		}
@@ -118,7 +128,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 
 	protected void initByFolderId(long folderId) {
 		try {
-			DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
+			DLFolder dlFolder = dlFolderLocalService.getFolder(folderId);
 
 			initByRepositoryId(dlFolder.getRepositoryId());
 		}
@@ -180,8 +190,10 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		return toFolderIds;
 	}
 
-	protected DLRepositoryLocalService dlRepositoryLocalService;
-	protected DLRepositoryService dlRepositoryService;
+	protected DLFileEntryLocalService dlFileEntryLocalService;
+	protected DLFileEntryService dlFileEntryService;
+	protected DLFolderLocalService dlFolderLocalService;
+	protected DLFolderService dlFolderService;
 	protected RepositoryService repositoryService;
 
 	private static Log _log = LogFactoryUtil.getLog(

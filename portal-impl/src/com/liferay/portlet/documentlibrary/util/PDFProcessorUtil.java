@@ -33,7 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.util.SystemProperties;
 
 import java.awt.image.BufferedImage;
@@ -133,7 +133,7 @@ public class PDFProcessorUtil {
 
 			if (extension.equals("pdf")) {
 				InputStream inputStream =
-					DLRepositoryLocalServiceUtil.getFileAsStream(
+					DLFileEntryLocalServiceUtil.getFileAsStream(
 						fileEntry.getUserId(), fileEntry.getFileEntryId(),
 						fileEntry.getVersion(), false);
 
@@ -141,7 +141,7 @@ public class PDFProcessorUtil {
 			}
 			else if (DocumentConversionUtil.isEnabled()) {
 				InputStream inputStream =
-					DLRepositoryLocalServiceUtil.getFileAsStream(
+					DLFileEntryLocalServiceUtil.getFileAsStream(
 						fileEntry.getUserId(), fileEntry.getFileEntryId(),
 						fileEntry.getVersion(), false);
 

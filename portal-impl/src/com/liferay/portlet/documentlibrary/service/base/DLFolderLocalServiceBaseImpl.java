@@ -16,6 +16,8 @@ package com.liferay.portlet.documentlibrary.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
 
+import com.liferay.documentlibrary.service.DLLocalService;
+
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -24,14 +26,24 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.LockLocalService;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.WebDAVPropsLocalService;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalService;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
+import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
@@ -44,8 +56,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
@@ -53,6 +63,9 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPer
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 import java.util.List;
 
@@ -587,43 +600,6 @@ public abstract class DLFolderLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l repository local service.
-	 *
-	 * @return the d l repository local service
-	 */
-	public DLRepositoryLocalService getDLRepositoryLocalService() {
-		return dlRepositoryLocalService;
-	}
-
-	/**
-	 * Sets the d l repository local service.
-	 *
-	 * @param dlRepositoryLocalService the d l repository local service
-	 */
-	public void setDLRepositoryLocalService(
-		DLRepositoryLocalService dlRepositoryLocalService) {
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
-	}
-
-	/**
-	 * Gets the d l repository remote service.
-	 *
-	 * @return the d l repository remote service
-	 */
-	public DLRepositoryService getDLRepositoryService() {
-		return dlRepositoryService;
-	}
-
-	/**
-	 * Sets the d l repository remote service.
-	 *
-	 * @param dlRepositoryService the d l repository remote service
-	 */
-	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
-		this.dlRepositoryService = dlRepositoryService;
-	}
-
-	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -639,6 +615,132 @@ public abstract class DLFolderLocalServiceBaseImpl
 	 */
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
+	}
+
+	/**
+	 * Gets the d l local service.
+	 *
+	 * @return the d l local service
+	 */
+	public DLLocalService getDLLocalService() {
+		return dlLocalService;
+	}
+
+	/**
+	 * Sets the d l local service.
+	 *
+	 * @param dlLocalService the d l local service
+	 */
+	public void setDLLocalService(DLLocalService dlLocalService) {
+		this.dlLocalService = dlLocalService;
+	}
+
+	/**
+	 * Gets the group local service.
+	 *
+	 * @return the group local service
+	 */
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	/**
+	 * Sets the group local service.
+	 *
+	 * @param groupLocalService the group local service
+	 */
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	/**
+	 * Gets the group remote service.
+	 *
+	 * @return the group remote service
+	 */
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	/**
+	 * Sets the group remote service.
+	 *
+	 * @param groupService the group remote service
+	 */
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	/**
+	 * Gets the group persistence.
+	 *
+	 * @return the group persistence
+	 */
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	/**
+	 * Sets the group persistence.
+	 *
+	 * @param groupPersistence the group persistence
+	 */
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	/**
+	 * Gets the group finder.
+	 *
+	 * @return the group finder
+	 */
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	/**
+	 * Sets the group finder.
+	 *
+	 * @param groupFinder the group finder
+	 */
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
+	/**
+	 * Gets the lock local service.
+	 *
+	 * @return the lock local service
+	 */
+	public LockLocalService getLockLocalService() {
+		return lockLocalService;
+	}
+
+	/**
+	 * Sets the lock local service.
+	 *
+	 * @param lockLocalService the lock local service
+	 */
+	public void setLockLocalService(LockLocalService lockLocalService) {
+		this.lockLocalService = lockLocalService;
+	}
+
+	/**
+	 * Gets the lock persistence.
+	 *
+	 * @return the lock persistence
+	 */
+	public LockPersistence getLockPersistence() {
+		return lockPersistence;
+	}
+
+	/**
+	 * Sets the lock persistence.
+	 *
+	 * @param lockPersistence the lock persistence
+	 */
+	public void setLockPersistence(LockPersistence lockPersistence) {
+		this.lockPersistence = lockPersistence;
 	}
 
 	/**
@@ -787,6 +889,138 @@ public abstract class DLFolderLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the web d a v props local service.
+	 *
+	 * @return the web d a v props local service
+	 */
+	public WebDAVPropsLocalService getWebDAVPropsLocalService() {
+		return webDAVPropsLocalService;
+	}
+
+	/**
+	 * Sets the web d a v props local service.
+	 *
+	 * @param webDAVPropsLocalService the web d a v props local service
+	 */
+	public void setWebDAVPropsLocalService(
+		WebDAVPropsLocalService webDAVPropsLocalService) {
+		this.webDAVPropsLocalService = webDAVPropsLocalService;
+	}
+
+	/**
+	 * Gets the web d a v props persistence.
+	 *
+	 * @return the web d a v props persistence
+	 */
+	public WebDAVPropsPersistence getWebDAVPropsPersistence() {
+		return webDAVPropsPersistence;
+	}
+
+	/**
+	 * Sets the web d a v props persistence.
+	 *
+	 * @param webDAVPropsPersistence the web d a v props persistence
+	 */
+	public void setWebDAVPropsPersistence(
+		WebDAVPropsPersistence webDAVPropsPersistence) {
+		this.webDAVPropsPersistence = webDAVPropsPersistence;
+	}
+
+	/**
+	 * Gets the workflow instance link local service.
+	 *
+	 * @return the workflow instance link local service
+	 */
+	public WorkflowInstanceLinkLocalService getWorkflowInstanceLinkLocalService() {
+		return workflowInstanceLinkLocalService;
+	}
+
+	/**
+	 * Sets the workflow instance link local service.
+	 *
+	 * @param workflowInstanceLinkLocalService the workflow instance link local service
+	 */
+	public void setWorkflowInstanceLinkLocalService(
+		WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService) {
+		this.workflowInstanceLinkLocalService = workflowInstanceLinkLocalService;
+	}
+
+	/**
+	 * Gets the workflow instance link persistence.
+	 *
+	 * @return the workflow instance link persistence
+	 */
+	public WorkflowInstanceLinkPersistence getWorkflowInstanceLinkPersistence() {
+		return workflowInstanceLinkPersistence;
+	}
+
+	/**
+	 * Sets the workflow instance link persistence.
+	 *
+	 * @param workflowInstanceLinkPersistence the workflow instance link persistence
+	 */
+	public void setWorkflowInstanceLinkPersistence(
+		WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence) {
+		this.workflowInstanceLinkPersistence = workflowInstanceLinkPersistence;
+	}
+
+	/**
+	 * Gets the expando value local service.
+	 *
+	 * @return the expando value local service
+	 */
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	/**
+	 * Sets the expando value local service.
+	 *
+	 * @param expandoValueLocalService the expando value local service
+	 */
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	/**
+	 * Gets the expando value remote service.
+	 *
+	 * @return the expando value remote service
+	 */
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	/**
+	 * Sets the expando value remote service.
+	 *
+	 * @param expandoValueService the expando value remote service
+	 */
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	/**
+	 * Gets the expando value persistence.
+	 *
+	 * @return the expando value persistence
+	 */
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	/**
+	 * Sets the expando value persistence.
+	 *
+	 * @param expandoValuePersistence the expando value persistence
+	 */
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
+	/**
 	 * Gets the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
@@ -857,12 +1091,22 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = DLFolderFinder.class)
 	protected DLFolderFinder dlFolderFinder;
-	@BeanReference(type = DLRepositoryLocalService.class)
-	protected DLRepositoryLocalService dlRepositoryLocalService;
-	@BeanReference(type = DLRepositoryService.class)
-	protected DLRepositoryService dlRepositoryService;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = DLLocalService.class)
+	protected DLLocalService dlLocalService;
+	@BeanReference(type = GroupLocalService.class)
+	protected GroupLocalService groupLocalService;
+	@BeanReference(type = GroupService.class)
+	protected GroupService groupService;
+	@BeanReference(type = GroupPersistence.class)
+	protected GroupPersistence groupPersistence;
+	@BeanReference(type = GroupFinder.class)
+	protected GroupFinder groupFinder;
+	@BeanReference(type = LockLocalService.class)
+	protected LockLocalService lockLocalService;
+	@BeanReference(type = LockPersistence.class)
+	protected LockPersistence lockPersistence;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)
@@ -879,5 +1123,19 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	@BeanReference(type = WebDAVPropsLocalService.class)
+	protected WebDAVPropsLocalService webDAVPropsLocalService;
+	@BeanReference(type = WebDAVPropsPersistence.class)
+	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@BeanReference(type = WorkflowInstanceLinkLocalService.class)
+	protected WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
+	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
+	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	@BeanReference(type = ExpandoValueLocalService.class)
+	protected ExpandoValueLocalService expandoValueLocalService;
+	@BeanReference(type = ExpandoValueService.class)
+	protected ExpandoValueService expandoValueService;
+	@BeanReference(type = ExpandoValuePersistence.class)
+	protected ExpandoValuePersistence expandoValuePersistence;
 	private String _beanIdentifier;
 }

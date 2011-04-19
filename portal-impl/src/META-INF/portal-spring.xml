@@ -244,8 +244,6 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService" class="com.liferay.portlet.documentlibrary.service.impl.DLFolderServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLRepositoryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.documentlibrary.service.DLRepositoryService" class="com.liferay.portlet.documentlibrary.service.impl.DLRepositoryServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatalists.service.DDLEntryLocalService" class="com.liferay.portlet.dynamicdatalists.service.impl.DDLEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" class="com.liferay.portlet.dynamicdatalists.service.impl.DDLEntryServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryPersistence" class="com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryPersistenceImpl" parent="basePersistence" />

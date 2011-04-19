@@ -17,7 +17,7 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 	protected void removeOrphanedFileEntries() throws Exception {
 		List<DLFileEntry> fileEntries =
-			DLRepositoryLocalServiceUtil.getOrphanedFileEntries();
+			DLFileEntryLocalServiceUtil.getOrphanedFileEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -44,7 +44,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			try {
-				DLRepositoryLocalServiceUtil.deleteFileEntry(
+				DLFileEntryLocalServiceUtil.deleteFileEntry(
 					fileEntry.getFileEntryId());
 			}
 			catch (Exception e) {
@@ -64,7 +64,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 	protected void updateAssets() throws Exception {
 		List<DLFileEntry> fileEntries =
-			DLRepositoryLocalServiceUtil.getNoAssetFileEntries();
+			DLFileEntryLocalServiceUtil.getNoAssetFileEntries();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -74,7 +74,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		for (DLFileEntry fileEntry : fileEntries) {
 			try {
-				DLRepositoryLocalServiceUtil.updateAsset(
+				DLFileEntryLocalServiceUtil.updateAsset(
 					fileEntry.getUserId(), fileEntry, null, null, null);
 			}
 			catch (Exception e) {

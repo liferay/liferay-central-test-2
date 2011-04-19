@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -71,8 +71,7 @@ public class DLFileVersionImpl
 	}
 
 	public DLFileEntry getFileEntry() throws PortalException, SystemException {
-		return DLRepositoryLocalServiceUtil.getFileEntry(
-			getFileEntryId());
+		return DLFileEntryLocalServiceUtil.getFileEntry(getFileEntryId());
 	}
 
 	public String getIcon() {

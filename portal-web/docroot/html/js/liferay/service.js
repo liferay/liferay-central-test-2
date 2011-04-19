@@ -667,6 +667,31 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLFileEntry",
+	{
+		copyFileEntry: true,
+		deleteFileEntry: true,
+		getFileEntries: true,
+		getFileEntriesCount: true,
+		getFileEntry: true,
+		getFileEntryByUuidAndGroupId: true,
+		getFileEntryLock: true,
+		getFileVersion: true,
+		getFoldersFileEntriesCount: true,
+		getGroupFileEntries: true,
+		getGroupFileEntriesCount: true,
+		hasFileEntryLock: true,
+		isFileEntryLocked: true,
+		lockFileEntry: true,
+		moveFileEntry: true,
+		refreshFileEntryLock: true,
+		revertFileEntry: true,
+		unlockFileEntry: true,
+		verifyFileEntryLock: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileShortcut",
 	{
 		addFileShortcut: true,
@@ -677,43 +702,25 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLRepository",
+	Liferay.Service.DL, "DLFolder",
 	{
 		addFolder: true,
-		copyFileEntry: true,
-		deleteFileEntry: true,
 		deleteFolder: true,
-		getFileEntries: true,
 		getFileEntriesAndFileShortcutsCount: true,
-		getFileEntriesCount: true,
-		getFileEntry: true,
-		getFileEntryByUuidAndGroupId: true,
-		getFileEntryLock: true,
-		getFileVersion: true,
 		getFolder: true,
+		getFolderIds: true,
 		getFolders: true,
 		getFoldersAndFileEntriesAndFileShortcutsCount: true,
 		getFoldersCount: true,
-		getFoldersFileEntriesCount: true,
-		getGroupFileEntries: true,
-		getGroupFileEntriesCount: true,
 		getSubfolderIds: true,
-		hasFileEntryLock: true,
 		hasFolderLock: true,
 		hasInheritableLock: true,
-		isFileEntryLocked: true,
 		isFolderLocked: true,
-		lockFileEntry: true,
 		lockFolder: true,
-		moveFileEntry: true,
 		moveFolder: true,
-		refreshFileEntryLock: true,
 		refreshFolderLock: true,
-		revertFileEntry: true,
-		unlockFileEntry: true,
 		unlockFolder: true,
 		updateFolder: true,
-		verifyFileEntryLock: true,
 		verifyInheritableLock: true
 	}
 );

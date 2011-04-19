@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 			return null;
 		}
 
-		return DLRepositoryLocalServiceUtil.getFolder(getParentFolderId());
+		return DLFolderLocalServiceUtil.getFolder(getParentFolderId());
 	}
 
 	public String getPath() throws PortalException, SystemException {
@@ -87,7 +87,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 	public boolean hasInheritableLock() {
 		try {
-			return DLRepositoryServiceUtil.hasInheritableLock(getFolderId());
+			return DLFolderServiceUtil.hasInheritableLock(getFolderId());
 		}
 		catch (Exception e) {
 		}
@@ -97,7 +97,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 	public boolean hasLock() {
 		try {
-			return DLRepositoryServiceUtil.hasFolderLock(getFolderId());
+			return DLFolderServiceUtil.hasFolderLock(getFolderId());
 		}
 		catch (Exception e) {
 		}
@@ -107,7 +107,7 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 	public boolean isLocked() {
 		try {
-			return DLRepositoryServiceUtil.isFolderLocked(getFolderId());
+			return DLFolderServiceUtil.isFolderLocked(getFolderId());
 		}
 		catch (Exception e) {
 		}

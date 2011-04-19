@@ -52,8 +52,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
@@ -599,43 +597,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the d l repository local service.
-	 *
-	 * @return the d l repository local service
-	 */
-	public DLRepositoryLocalService getDLRepositoryLocalService() {
-		return dlRepositoryLocalService;
-	}
-
-	/**
-	 * Sets the d l repository local service.
-	 *
-	 * @param dlRepositoryLocalService the d l repository local service
-	 */
-	public void setDLRepositoryLocalService(
-		DLRepositoryLocalService dlRepositoryLocalService) {
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
-	}
-
-	/**
-	 * Gets the d l repository remote service.
-	 *
-	 * @return the d l repository remote service
-	 */
-	public DLRepositoryService getDLRepositoryService() {
-		return dlRepositoryService;
-	}
-
-	/**
-	 * Sets the d l repository remote service.
-	 *
-	 * @param dlRepositoryService the d l repository remote service
-	 */
-	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
-		this.dlRepositoryService = dlRepositoryService;
-	}
-
-	/**
 	 * Gets the counter local service.
 	 *
 	 * @return the counter local service
@@ -1016,10 +977,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = DLFolderFinder.class)
 	protected DLFolderFinder dlFolderFinder;
-	@BeanReference(type = DLRepositoryLocalService.class)
-	protected DLRepositoryLocalService dlRepositoryLocalService;
-	@BeanReference(type = DLRepositoryService.class)
-	protected DLRepositoryService dlRepositoryService;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = ResourceLocalService.class)

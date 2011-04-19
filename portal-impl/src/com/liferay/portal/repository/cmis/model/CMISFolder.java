@@ -28,7 +28,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -138,7 +138,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		if (_cmisFolder.isRootFolder()) {
 			try {
 				DLFolder dlFolder =
-					DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
+					DLFolderLocalServiceUtil.getFolderByRepositoryId(
 						getRepositoryId());
 
 				return dlFolder.getName();
@@ -166,7 +166,7 @@ public class CMISFolder extends CMISModel implements Folder {
 
 		if (_cmisFolder.isRootFolder()) {
 			DLFolder dlFolder =
-				DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
+				DLFolderLocalServiceUtil.getFolderByRepositoryId(
 					getRepositoryId());
 
 			DLFolder parentDLFolder = dlFolder.getParentFolder();

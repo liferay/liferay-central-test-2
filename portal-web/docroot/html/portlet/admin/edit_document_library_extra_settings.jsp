@@ -22,7 +22,7 @@ DLFileEntry dlFileEntry = null;
 List<String> keys = null;
 List<String> expandoBridgeAttributeNames = null;
 
-List<DLFileEntry> dlFileEntries = DLRepositoryLocalServiceUtil.getExtraSettingsFileEntries(0, 1);
+List<DLFileEntry> dlFileEntries = DLFileEntryLocalServiceUtil.getExtraSettingsFileEntries(0, 1);
 
 if (!dlFileEntries.isEmpty()) {
 	dlFileEntry = dlFileEntries.get(0);

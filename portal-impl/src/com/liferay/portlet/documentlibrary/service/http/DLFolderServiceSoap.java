@@ -14,6 +14,13 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -58,4 +65,287 @@ package com.liferay.portlet.documentlibrary.service.http;
  * @generated
  */
 public class DLFolderServiceSoap {
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
+		long groupId, long repositoryId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
+					repositoryId, parentFolderId, name, description,
+					serviceContext);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteFolder(long folderId) throws RemoteException {
+		try {
+			DLFolderServiceUtil.deleteFolder(folderId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteFolder(long groupId, long parentFolderId,
+		java.lang.String name) throws RemoteException {
+		try {
+			DLFolderServiceUtil.deleteFolder(groupId, parentFolderId, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFileEntriesAndFileShortcutsCount(long groupId,
+		long folderId, int status) throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFileEntriesAndFileShortcutsCount(groupId,
+					folderId, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
+		long folderId) throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(groupId,
+					parentFolderId, name);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long[] getFolderIds(long groupId, long folderId)
+		throws RemoteException {
+		try {
+			long[] returnValue = DLFolderServiceUtil.getFolderIds(groupId,
+					folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap[] getFolders(
+		long groupId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
+				DLFolderServiceUtil.getFolders(groupId, parentFolderId, start,
+					end, obc);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
+		long groupId, long folderId, int status) throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
+					folderId, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersCount(long groupId, long parentFolderId)
+		throws RemoteException {
+		try {
+			int returnValue = DLFolderServiceUtil.getFoldersCount(groupId,
+					parentFolderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.Long[] getSubfolderIds(long groupId, long folderId,
+		boolean recurse) throws RemoteException {
+		try {
+			java.util.List<java.lang.Long> returnValue = DLFolderServiceUtil.getSubfolderIds(groupId,
+					folderId, recurse);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean hasFolderLock(long folderId)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.hasFolderLock(folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean hasInheritableLock(long folderId)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.hasInheritableLock(folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean isFolderLocked(long folderId)
+		throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.isFolderLocked(folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap moveFolder(
+		long folderId, long parentFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.moveFolder(folderId,
+					parentFolderId, serviceContext);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unlockFolder(long groupId, long folderId,
+		java.lang.String lockUuid) throws RemoteException {
+		try {
+			DLFolderServiceUtil.unlockFolder(groupId, folderId, lockUuid);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unlockFolder(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String lockUuid)
+		throws RemoteException {
+		try {
+			DLFolderServiceUtil.unlockFolder(groupId, parentFolderId, name,
+				lockUuid);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
+		long folderId, java.lang.String name, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.updateFolder(folderId,
+					name, description, serviceContext);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean verifyInheritableLock(long folderId,
+		java.lang.String lockUuid) throws RemoteException {
+		try {
+			boolean returnValue = DLFolderServiceUtil.verifyInheritableLock(folderId,
+					lockUuid);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DLFolderServiceSoap.class);
 }

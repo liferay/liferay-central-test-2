@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 /**
  * @author Alexander Chow
@@ -85,7 +85,7 @@ public class RepositoryModelSizeComparator extends OrderByComparator {
 
 			try {
 				DLFileEntry dlFileEntry =
-					DLRepositoryLocalServiceUtil.getFileEntry(toFileEntryId);
+					DLFileEntryLocalServiceUtil.getFileEntry(toFileEntryId);
 
 				return dlFileEntry.getSize();
 			}

@@ -193,8 +193,14 @@ import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -3409,40 +3415,150 @@ public abstract class RepositoryServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Gets the d l repository local service.
+	 * Gets the d l file entry local service.
 	 *
-	 * @return the d l repository local service
+	 * @return the d l file entry local service
 	 */
-	public DLRepositoryLocalService getDLRepositoryLocalService() {
-		return dlRepositoryLocalService;
+	public DLFileEntryLocalService getDLFileEntryLocalService() {
+		return dlFileEntryLocalService;
 	}
 
 	/**
-	 * Sets the d l repository local service.
+	 * Sets the d l file entry local service.
 	 *
-	 * @param dlRepositoryLocalService the d l repository local service
+	 * @param dlFileEntryLocalService the d l file entry local service
 	 */
-	public void setDLRepositoryLocalService(
-		DLRepositoryLocalService dlRepositoryLocalService) {
-		this.dlRepositoryLocalService = dlRepositoryLocalService;
+	public void setDLFileEntryLocalService(
+		DLFileEntryLocalService dlFileEntryLocalService) {
+		this.dlFileEntryLocalService = dlFileEntryLocalService;
 	}
 
 	/**
-	 * Gets the d l repository remote service.
+	 * Gets the d l file entry remote service.
 	 *
-	 * @return the d l repository remote service
+	 * @return the d l file entry remote service
 	 */
-	public DLRepositoryService getDLRepositoryService() {
-		return dlRepositoryService;
+	public DLFileEntryService getDLFileEntryService() {
+		return dlFileEntryService;
 	}
 
 	/**
-	 * Sets the d l repository remote service.
+	 * Sets the d l file entry remote service.
 	 *
-	 * @param dlRepositoryService the d l repository remote service
+	 * @param dlFileEntryService the d l file entry remote service
 	 */
-	public void setDLRepositoryService(DLRepositoryService dlRepositoryService) {
-		this.dlRepositoryService = dlRepositoryService;
+	public void setDLFileEntryService(DLFileEntryService dlFileEntryService) {
+		this.dlFileEntryService = dlFileEntryService;
+	}
+
+	/**
+	 * Gets the d l file entry persistence.
+	 *
+	 * @return the d l file entry persistence
+	 */
+	public DLFileEntryPersistence getDLFileEntryPersistence() {
+		return dlFileEntryPersistence;
+	}
+
+	/**
+	 * Sets the d l file entry persistence.
+	 *
+	 * @param dlFileEntryPersistence the d l file entry persistence
+	 */
+	public void setDLFileEntryPersistence(
+		DLFileEntryPersistence dlFileEntryPersistence) {
+		this.dlFileEntryPersistence = dlFileEntryPersistence;
+	}
+
+	/**
+	 * Gets the d l file entry finder.
+	 *
+	 * @return the d l file entry finder
+	 */
+	public DLFileEntryFinder getDLFileEntryFinder() {
+		return dlFileEntryFinder;
+	}
+
+	/**
+	 * Sets the d l file entry finder.
+	 *
+	 * @param dlFileEntryFinder the d l file entry finder
+	 */
+	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
+		this.dlFileEntryFinder = dlFileEntryFinder;
+	}
+
+	/**
+	 * Gets the d l folder local service.
+	 *
+	 * @return the d l folder local service
+	 */
+	public DLFolderLocalService getDLFolderLocalService() {
+		return dlFolderLocalService;
+	}
+
+	/**
+	 * Sets the d l folder local service.
+	 *
+	 * @param dlFolderLocalService the d l folder local service
+	 */
+	public void setDLFolderLocalService(
+		DLFolderLocalService dlFolderLocalService) {
+		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	/**
+	 * Gets the d l folder remote service.
+	 *
+	 * @return the d l folder remote service
+	 */
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	/**
+	 * Sets the d l folder remote service.
+	 *
+	 * @param dlFolderService the d l folder remote service
+	 */
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
+	}
+
+	/**
+	 * Gets the d l folder persistence.
+	 *
+	 * @return the d l folder persistence
+	 */
+	public DLFolderPersistence getDLFolderPersistence() {
+		return dlFolderPersistence;
+	}
+
+	/**
+	 * Sets the d l folder persistence.
+	 *
+	 * @param dlFolderPersistence the d l folder persistence
+	 */
+	public void setDLFolderPersistence(DLFolderPersistence dlFolderPersistence) {
+		this.dlFolderPersistence = dlFolderPersistence;
+	}
+
+	/**
+	 * Gets the d l folder finder.
+	 *
+	 * @return the d l folder finder
+	 */
+	public DLFolderFinder getDLFolderFinder() {
+		return dlFolderFinder;
+	}
+
+	/**
+	 * Sets the d l folder finder.
+	 *
+	 * @param dlFolderFinder the d l folder finder
+	 */
+	public void setDLFolderFinder(DLFolderFinder dlFolderFinder) {
+		this.dlFolderFinder = dlFolderFinder;
 	}
 
 	/**
@@ -3882,10 +3998,22 @@ public abstract class RepositoryServiceBaseImpl extends PrincipalBean
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = DLAppHelperLocalService.class)
 	protected DLAppHelperLocalService dlAppHelperLocalService;
-	@BeanReference(type = DLRepositoryLocalService.class)
-	protected DLRepositoryLocalService dlRepositoryLocalService;
-	@BeanReference(type = DLRepositoryService.class)
-	protected DLRepositoryService dlRepositoryService;
+	@BeanReference(type = DLFileEntryLocalService.class)
+	protected DLFileEntryLocalService dlFileEntryLocalService;
+	@BeanReference(type = DLFileEntryService.class)
+	protected DLFileEntryService dlFileEntryService;
+	@BeanReference(type = DLFileEntryPersistence.class)
+	protected DLFileEntryPersistence dlFileEntryPersistence;
+	@BeanReference(type = DLFileEntryFinder.class)
+	protected DLFileEntryFinder dlFileEntryFinder;
+	@BeanReference(type = DLFolderLocalService.class)
+	protected DLFolderLocalService dlFolderLocalService;
+	@BeanReference(type = DLFolderService.class)
+	protected DLFolderService dlFolderService;
+	@BeanReference(type = DLFolderPersistence.class)
+	protected DLFolderPersistence dlFolderPersistence;
+	@BeanReference(type = DLFolderFinder.class)
+	protected DLFolderFinder dlFolderFinder;
 	@BeanReference(type = ExpandoValueLocalService.class)
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(type = ExpandoValueService.class)

@@ -16,7 +16,7 @@ package com.liferay.portal.convert;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 /**
  * @author Alexander Chow
@@ -33,7 +33,7 @@ public class ConvertDocumentLibraryExtraSettings extends ConvertProcess {
 
 	public boolean isEnabled() {
 		try {
-			return DLRepositoryLocalServiceUtil.hasExtraSettings();
+			return DLFileEntryLocalServiceUtil.hasExtraSettings();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

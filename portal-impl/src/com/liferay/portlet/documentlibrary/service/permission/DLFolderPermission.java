@@ -26,7 +26,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -84,7 +84,7 @@ public class DLFolderPermission {
 
 		if (actionId.equals(ActionKeys.VIEW)) {
 			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				dlFolder = DLRepositoryLocalServiceUtil.getFolder(folderId);
+				dlFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 				folderId = dlFolder.getParentFolderId();
 
@@ -108,7 +108,7 @@ public class DLFolderPermission {
 		}
 		else {
 			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				dlFolder = DLRepositoryLocalServiceUtil.getFolder(folderId);
+				dlFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 				folderId = dlFolder.getParentFolderId();
 

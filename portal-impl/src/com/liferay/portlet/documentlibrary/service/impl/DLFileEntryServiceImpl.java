@@ -14,10 +14,476 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.portal.ExpiredLockException;
+import com.liferay.portal.InvalidLockException;
+import com.liferay.portal.NoSuchLockException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Lock;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
+
+import java.io.InputStream;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
+
+	public DLFileEntry addFileEntry(
+			long groupId, long repositoryId, long folderId, String title,
+			String description, String changeLog, InputStream is, long size,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
+
+		return dlFileEntryLocalService.addFileEntry(
+			getUserId(), groupId, repositoryId, folderId, title, description,
+			changeLog, is, size, serviceContext);
+	}
+
+	public void copyFileEntry(
+			long groupId, long repositoryId, long fileEntryId,
+			long destFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
+
+		InputStream inputStream = dlLocalService.getFileAsStream(
+			dlFileEntry.getCompanyId(), dlFileEntry.getFolderId(),
+			dlFileEntry.getName());
+
+		addFileEntry(
+			groupId, repositoryId, destFolderId, dlFileEntry.getTitle(),
+			dlFileEntry.getDescription(), null, inputStream,
+			dlFileEntry.getSize(), serviceContext);
+	}
+
+	public void deleteFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.DELETE);
+
+		boolean hasLock = hasFileEntryLock(fileEntryId);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(fileEntryId);
+		}
+
+		try {
+			dlFileEntryLocalService.deleteFileEntry(fileEntryId);
+		}
+		finally {
+
+			// Unlock
+
+			unlockFileEntry(fileEntryId);
+		}
+	}
+
+	public void deleteFileEntry(long groupId, long folderId, String title)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = getFileEntry(groupId, folderId, title);
+
+		deleteFileEntry(dlFileEntry.getFileEntryId());
+	}
+
+	public InputStream getFileAsStream(long fileEntryId, String version)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.VIEW);
+
+		return dlFileEntryLocalService.getFileAsStream(
+			getGuestOrUserId(), fileEntryId, version);
+	}
+
+	public List<DLFileEntry> getFileEntries(
+			long groupId, long folderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return dlFileEntryPersistence.filterFindByG_F(
+			groupId, folderId, start, end, obc);
+	}
+
+	public int getFileEntriesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return dlFileEntryPersistence.filterCountByG_F(groupId, folderId);
+	}
+
+	public DLFileEntry getFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.VIEW);
+
+		return dlFileEntryLocalService.getFileEntry(fileEntryId);
+	}
+
+	public DLFileEntry getFileEntry(long groupId, long folderId, String title)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = dlFileEntryLocalService.getFileEntry(
+			groupId, folderId, title);
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), dlFileEntry, ActionKeys.VIEW);
+
+		return dlFileEntry;
+	}
+
+	public DLFileEntry getFileEntryByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByUUID_G(
+			uuid, groupId);
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), dlFileEntry, ActionKeys.VIEW);
+
+		return dlFileEntry;
+	}
+
+	public Lock getFileEntryLock(long fileEntryId) {
+		try {
+			return lockLocalService.getLock(
+				DLFileEntry.class.getName(), fileEntryId);
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+
+	public DLFileVersion getFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion = dlFileEntryLocalService.getFileVersion(
+			fileVersionId);
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileVersion.getFileEntryId(),
+			ActionKeys.VIEW);
+
+		return fileVersion;
+	}
+
+	public int getFoldersFileEntriesCount(
+			long groupId, List<Long> folderIds, int status)
+		throws SystemException {
+
+		if (folderIds.size() <= PropsValues.SQL_DATA_MAX_PARAMETERS) {
+			return dlFileEntryFinder.filterCountByG_F_S(
+				groupId, folderIds, status);
+		}
+		else {
+			int start = 0;
+			int end = PropsValues.SQL_DATA_MAX_PARAMETERS;
+
+			int filesCount = dlFileEntryFinder.filterCountByG_F_S(
+				groupId, folderIds.subList(start, end), status);
+
+			folderIds.subList(start, end).clear();
+
+			filesCount += getFoldersFileEntriesCount(
+				groupId, folderIds, status);
+
+			return filesCount;
+		}
+	}
+
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, long userId, long rootFolderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		long[] folderIds = dlFolderService.getFolderIds(groupId, rootFolderId);
+
+		if (folderIds.length == 0) {
+			return Collections.emptyList();
+		}
+		else if (userId <= 0) {
+			return dlFileEntryPersistence.filterFindByG_F(
+				groupId, folderIds, start, end, obc);
+		}
+		else {
+			return dlFileEntryPersistence.filterFindByG_U_F(
+				groupId, userId, folderIds, start, end, obc);
+		}
+	}
+
+	public int getGroupFileEntriesCount(
+			long groupId, long userId, long rootFolderId)
+		throws SystemException {
+
+		long[] folderIds = dlFolderService.getFolderIds(groupId, rootFolderId);
+
+		if (folderIds.length == 0) {
+			return 0;
+		}
+		else if (userId <= 0) {
+			return dlFileEntryPersistence.filterCountByG_F(groupId, folderIds);
+		}
+		else {
+			return dlFileEntryPersistence.filterCountByG_U_F(
+				groupId, userId, folderIds);
+		}
+	}
+
+	public boolean hasFileEntryLock(long fileEntryId)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = dlFileEntryLocalService.getFileEntry(
+			fileEntryId);
+
+		long folderId = dlFileEntry.getFolderId();
+
+		boolean hasLock = lockLocalService.hasLock(
+			getUserId(), DLFileEntry.class.getName(), fileEntryId);
+
+		if ((!hasLock) &&
+			(folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
+
+			hasLock = dlFolderService.hasInheritableLock(folderId);
+		}
+
+		return hasLock;
+	}
+
+	public boolean isFileEntryLocked(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return lockLocalService.isLocked(
+			DLFileEntry.class.getName(), fileEntryId);
+	}
+
+	public Lock lockFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return lockFileEntry(
+			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
+	}
+
+	public Lock lockFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
+		if ((expirationTime <= 0) ||
+			(expirationTime > DLFileEntryImpl.LOCK_EXPIRATION_TIME)) {
+
+			expirationTime = DLFileEntryImpl.LOCK_EXPIRATION_TIME;
+		}
+
+		return lockLocalService.lock(
+			getUserId(), DLFileEntry.class.getName(), fileEntryId, owner,
+			false, expirationTime);
+	}
+
+	public DLFileEntry moveFileEntry(
+			long fileEntryId, long newFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
+		boolean hasLock = hasFileEntryLock(fileEntryId);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(fileEntryId);
+		}
+
+		DLFileEntry dlFileEntry = null;
+
+		try {
+			dlFileEntry = dlFileEntryLocalService.moveFileEntry(
+				getUserId(), fileEntryId, newFolderId, serviceContext);
+		}
+		finally {
+			if (!hasLock) {
+
+				// Unlock
+
+				unlockFileEntry(fileEntryId);
+			}
+		}
+
+		return dlFileEntry;
+	}
+
+	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
+		throws PortalException, SystemException {
+
+		return lockLocalService.refresh(lockUuid, expirationTime);
+	}
+
+	public void revertFileEntry(
+			long fileEntryId, String version, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
+		boolean hasLock = hasFileEntryLock(fileEntryId);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(fileEntryId);
+		}
+
+		try {
+			dlFileEntryLocalService.revertFileEntry(
+				getUserId(), fileEntryId, version, serviceContext);
+		}
+		finally {
+
+			// Unlock
+
+			unlockFileEntry(fileEntryId);
+		}
+	}
+
+	public void unlockFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
+	}
+
+	public void unlockFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+
+		if (Validator.isNotNull(lockUuid)) {
+			try {
+				Lock lock = lockLocalService.getLock(
+					DLFileEntry.class.getName(), fileEntryId);
+
+				if (!lock.getUuid().equals(lockUuid)) {
+					throw new InvalidLockException("UUIDs do not match");
+				}
+			}
+			catch (PortalException pe) {
+				if ((pe instanceof ExpiredLockException) ||
+					(pe instanceof NoSuchLockException)) {
+				}
+				else {
+					throw pe;
+				}
+			}
+		}
+
+		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
+	}
+
+	public DLFileEntry updateFileEntry(
+			long fileEntryId, String sourceFileName, String title,
+			String description, String changeLog, boolean majorVersion,
+			InputStream is, long size, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
+		boolean hasLock = hasFileEntryLock(fileEntryId);
+
+		if (!hasLock) {
+
+			// Lock
+
+			lockFileEntry(fileEntryId);
+		}
+
+		DLFileEntry dlFileEntry = null;
+
+		try {
+			dlFileEntry = dlFileEntryLocalService.updateFileEntry(
+				getUserId(), fileEntryId, sourceFileName, title, description,
+				changeLog, majorVersion, is, size, serviceContext);
+		}
+		finally {
+			if (!hasLock) {
+
+				// Unlock
+
+				unlockFileEntry(fileEntryId);
+			}
+		}
+
+		return dlFileEntry;
+	}
+
+	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		boolean verified = false;
+
+		try {
+			Lock lock = lockLocalService.getLock(
+				DLFileEntry.class.getName(), fileEntryId);
+
+			if (lock.getUuid().equals(lockUuid)) {
+				verified = true;
+			}
+		}
+		catch (PortalException pe) {
+			if ((pe instanceof ExpiredLockException) ||
+				(pe instanceof NoSuchLockException)) {
+
+				DLFileEntry dlFileEntry = dlFileEntryLocalService.getFileEntry(
+					fileEntryId);
+
+				verified = dlFolderService.verifyInheritableLock(
+					dlFileEntry.getFolderId(), lockUuid);
+			}
+			else {
+				throw pe;
+			}
+		}
+
+		return verified;
+	}
+
 }

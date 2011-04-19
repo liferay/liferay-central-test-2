@@ -26,7 +26,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -96,7 +96,7 @@ public class TagsAssetGroupIdUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			return bookmarksEntry.getFolder().getGroupId();
 		}
 		else if (className.equals(DLFileEntry.class.getName())) {
-			DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 				classPK);
 
 			return dlFileEntry.getFolder().getGroupId();

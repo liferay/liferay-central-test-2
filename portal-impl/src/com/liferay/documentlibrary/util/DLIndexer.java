@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
@@ -99,11 +99,11 @@ public class DLIndexer extends BaseIndexer {
 
 		try {
 			if (fileEntryId > 0) {
-				fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 					fileEntryId);
 			}
 			else {
-				fileEntry = DLRepositoryLocalServiceUtil.getFileEntryByName(
+				fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByName(
 					scopeGroupId, folderId, fileName);
 			}
 		}

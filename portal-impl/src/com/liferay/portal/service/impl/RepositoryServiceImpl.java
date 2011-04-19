@@ -84,8 +84,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		if (classNameId == getDefaultClassNameId()) {
 			localRepositoryImpl = new LiferayLocalRepository(
-				repositoryService, dlRepositoryLocalService,
-				dlRepositoryService, repositoryId);
+				repositoryService, dlFileEntryLocalService, dlFileEntryService,
+				dlFolderLocalService, dlFolderService, repositoryId);
 		}
 		else {
 			BaseRepository baseRepository = createRepositoryImpl(
@@ -116,8 +116,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		localRepositoryImpl = new LiferayLocalRepository(
-			repositoryService, dlRepositoryLocalService, dlRepositoryService,
-			folderId, fileEntryId, fileVersionId);
+			repositoryService, dlFileEntryLocalService, dlFileEntryService,
+			dlFolderLocalService, dlFolderService, folderId, fileEntryId,
+			fileVersionId);
 
 		if (localRepositoryImpl.getRepositoryId() == 0) {
 			localRepositoryImpl = null;
@@ -162,8 +163,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				PortalUtil.getClassNameId(LiferayRepository.class.getName())) {
 
 			repositoryImpl = new LiferayRepository(
-				repositoryService, dlRepositoryLocalService,
-				dlRepositoryService, repositoryId);
+				repositoryService, dlFileEntryLocalService, dlFileEntryService,
+				dlFolderLocalService, dlFolderService, repositoryId);
 		}
 		else {
 			repositoryImpl = createRepositoryImpl(repositoryId, classNameId);
@@ -191,8 +192,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		repositoryImpl = new LiferayRepository(
-			repositoryService, dlRepositoryLocalService, dlRepositoryService,
-			folderId, fileEntryId, fileVersionId);
+			repositoryService, dlFileEntryLocalService, dlFileEntryService,
+			dlFolderLocalService, dlFolderService, folderId, fileEntryId,
+			fileVersionId);
 
 		if (repositoryImpl.getRepositoryId() == 0) {
 			repositoryImpl = null;
@@ -324,7 +326,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			unmountRepository(repositoryId);
 		}
 
-		dlRepositoryLocalService.deleteAll(groupId);
+		dlFolderLocalService.deleteAll(groupId);
 	}
 
 	public void unmountRepository(long repositoryId)
@@ -338,7 +340,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				Repository.class.getName(), repositoryId);
 
 			try {
-				dlRepositoryLocalService.deleteFolder(
+				dlFolderLocalService.deleteFolder(
 					repository.getDlFolderId());
 			}
 			catch (NoSuchFolderException nsfe) {
@@ -452,7 +454,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		serviceContext.setAttribute("mountPoint", Boolean.TRUE);
 
-		DLFolder dlFolder = dlRepositoryLocalService.addFolder(
+		DLFolder dlFolder = dlFolderLocalService.addFolder(
 			user.getUserId(), groupId, repositoryId, parentFolderId, name,
 			description, serviceContext);
 

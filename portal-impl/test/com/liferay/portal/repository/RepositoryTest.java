@@ -30,7 +30,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.io.InputStream;
 
@@ -55,7 +55,7 @@ public class RepositoryTest extends TestCase {
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
 			new ServiceContext());
 
-		DLFolder dlFolder = DLRepositoryServiceUtil.addFolder(
+		DLFolder dlFolder = DLFolderServiceUtil.addFolder(
 			getGroupId(), getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder", "Folder",
 			new ServiceContext());

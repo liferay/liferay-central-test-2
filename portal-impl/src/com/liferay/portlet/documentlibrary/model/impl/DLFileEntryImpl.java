@@ -29,8 +29,9 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.IOException;
@@ -59,7 +60,7 @@ public class DLFileEntryImpl
 	public InputStream getContentStream(String version)
 		throws PortalException, SystemException {
 
-		return DLRepositoryServiceUtil.getFileAsStream(
+		return DLFileEntryServiceUtil.getFileAsStream(
 			getFileEntryId(), version);
 	}
 
@@ -101,14 +102,14 @@ public class DLFileEntryImpl
 	public DLFileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
 
-		return DLRepositoryLocalServiceUtil.getFileVersion(
+		return DLFileEntryLocalServiceUtil.getFileVersion(
 			getFileEntryId(), version);
 	}
 
 	public List<DLFileVersion> getFileVersions(int status)
 		throws SystemException {
 
-		return DLRepositoryLocalServiceUtil.getFileVersions(
+		return DLFileEntryLocalServiceUtil.getFileVersions(
 			getFileEntryId(), status);
 	}
 
@@ -117,7 +118,7 @@ public class DLFileEntryImpl
 
 		if (getFolderId() > 0) {
 			try {
-				folder = DLRepositoryLocalServiceUtil.getFolder(getFolderId());
+				folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
 			}
 			catch (Exception e) {
 				folder = new DLFolderImpl();
@@ -139,7 +140,7 @@ public class DLFileEntryImpl
 	public DLFileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return DLRepositoryLocalServiceUtil.getLatestFileVersion(
+		return DLFileEntryLocalServiceUtil.getLatestFileVersion(
 			getFileEntryId());
 	}
 
@@ -181,7 +182,7 @@ public class DLFileEntryImpl
 
 	public boolean hasLock() {
 		try {
-			return DLRepositoryServiceUtil.hasFileEntryLock(getFileEntryId());
+			return DLFileEntryServiceUtil.hasFileEntryLock(getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -191,7 +192,7 @@ public class DLFileEntryImpl
 
 	public boolean isLocked() {
 		try {
-			return DLRepositoryServiceUtil.isFileEntryLocked(getFileEntryId());
+			return DLFileEntryServiceUtil.isFileEntryLocked(getFileEntryId());
 		}
 		catch (Exception e) {
 		}

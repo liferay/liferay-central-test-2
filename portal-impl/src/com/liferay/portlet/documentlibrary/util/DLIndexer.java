@@ -37,7 +37,8 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 import java.util.Date;
@@ -165,7 +166,7 @@ public class DLIndexer extends BaseIndexer {
 	}
 
 	protected void doReindex(String className, long classPK) throws Exception {
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 			classPK);
 
 		doReindex(fileEntry);
@@ -196,7 +197,7 @@ public class DLIndexer extends BaseIndexer {
 	}
 
 	protected void reindexFolders(long companyId) throws Exception {
-		int folderCount = DLRepositoryLocalServiceUtil.getCompanyFoldersCount(
+		int folderCount = DLFolderLocalServiceUtil.getCompanyFoldersCount(
 			companyId);
 
 		int folderPages = folderCount / Indexer.DEFAULT_INTERVAL;
@@ -213,7 +214,7 @@ public class DLIndexer extends BaseIndexer {
 			long companyId, int folderStart, int folderEnd)
 		throws Exception {
 
-		List<DLFolder> folders = DLRepositoryLocalServiceUtil.getCompanyFolders(
+		List<DLFolder> folders = DLFolderLocalServiceUtil.getCompanyFolders(
 			companyId, folderStart, folderEnd);
 
 		for (DLFolder folder : folders) {

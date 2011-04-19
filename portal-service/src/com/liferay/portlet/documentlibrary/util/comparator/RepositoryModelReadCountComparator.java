@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -86,7 +86,7 @@ public class RepositoryModelReadCountComparator extends OrderByComparator {
 
 			try {
 				DLFileEntry dlFileEntry =
-					DLRepositoryLocalServiceUtil.getFileEntry(toFileEntryId);
+					DLFileEntryLocalServiceUtil.getFileEntry(toFileEntryId);
 
 				return dlFileEntry.getReadCount();
 			}

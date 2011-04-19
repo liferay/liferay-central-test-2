@@ -40,6 +40,8 @@ import com.liferay.portal.model.impl.RepositoryImpl;
 import com.liferay.portal.model.impl.RepositoryModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
 import java.io.Serializable;
@@ -1096,6 +1098,10 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	@BeanReference(type = DLFileEntryPersistence.class)
+	protected DLFileEntryPersistence dlFileEntryPersistence;
+	@BeanReference(type = DLFolderPersistence.class)
+	protected DLFolderPersistence dlFolderPersistence;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
 	private static final String _SQL_SELECT_REPOSITORY = "SELECT repository FROM Repository repository";
