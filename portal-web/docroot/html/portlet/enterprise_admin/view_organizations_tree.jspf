@@ -220,7 +220,7 @@ int organizationsCount = OrganizationLocalServiceUtil.searchCount(company.getCom
 			%>
 
 			<c:choose>
-				<c:when test="<%= searchTerms.hasEmptySearchTerms() %>">
+				<c:when test="<%= !searchTerms.hasSearchTerms() %>">
 					<liferay-ui:search-container-results>
 						<c:choose>
 							<c:when test="<%= PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX %>">

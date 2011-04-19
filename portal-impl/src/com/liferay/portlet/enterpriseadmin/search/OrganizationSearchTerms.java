@@ -106,23 +106,23 @@ public class OrganizationSearchTerms extends OrganizationDisplayTerms {
 		return regionName;
 	}
 
-	public boolean hasEmptySearchTerms() {
+	public boolean hasSearchTerms() {
 		if (isAdvancedSearch()) {
 			if (Validator.isNotNull(city) || countryId > 0 ||
 				Validator.isNotNull(name) || regionId > 0 ||
 				Validator.isNotNull(street) || Validator.isNotNull(type) ||
 				Validator.isNotNull(zip)) {
 
-				return false;
+				return true;
 			}
 		}
 		else {
 			if (Validator.isNotNull(keywords)) {
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
