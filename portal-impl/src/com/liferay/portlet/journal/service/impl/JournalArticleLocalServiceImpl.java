@@ -1002,7 +1002,7 @@ public class JournalArticleLocalServiceImpl
 							companyGroup.getGroupId(), templateId);
 
 						tokens.put(
-							"group_id",
+							"company_group_id",
 							String.valueOf(companyGroup.getGroupId()));
 					}
 					catch (NoSuchTemplateException nste2) {
