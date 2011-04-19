@@ -190,13 +190,14 @@ public class AssetVocabularyLocalServiceImpl
 		return vocabularies;
 	}
 
-	public List<AssetVocabulary> getGroupVocabularies(long groupId)
+	public List<AssetVocabulary> getGroupVocabularies(
+			long groupId, boolean createDefaultVocabulary)
 		throws PortalException, SystemException {
 
 		List<AssetVocabulary> vocabularies =
 			assetVocabularyPersistence.findByGroupId(groupId);
 
-		if (vocabularies.isEmpty()) {
+		if (createDefaultVocabulary && vocabularies.isEmpty()) {
 			Group group = groupLocalService.getGroup(groupId);
 
 			long defaultUserId = userLocalService.getDefaultUserId(
@@ -222,6 +223,12 @@ public class AssetVocabularyLocalServiceImpl
 		}
 
 		return vocabularies;
+	}
+
+	public List<AssetVocabulary> getGroupVocabularies(long groupId)
+		throws PortalException, SystemException {
+
+		return getGroupVocabularies(groupId, true);
 	}
 
 	public AssetVocabulary getGroupVocabulary(long groupId, String name)
