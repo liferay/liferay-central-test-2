@@ -105,6 +105,14 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			try {
 				String freeMarkerTemplateId = companyId + groupId + templateId;
 
+				long companyGroupId = GetterUtil.getLong(
+					tokens.get("company_group_id"));
+
+				if (companyGroupId > 0) {
+					freeMarkerTemplateId =
+						companyId + companyGroupId + templateId;
+				}
+
 				load = FreeMarkerEngineUtil.mergeTemplate(
 					freeMarkerTemplateId, script, freeMarkerContext,
 					unsyncStringWriter);

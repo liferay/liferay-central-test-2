@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -94,7 +93,6 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String randomNamespace =
 				PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 					StringPool.UNDERLINE;
-			String companyGroupId = tokens.get("company_group_id");
 
 			velocityContext.put("company", company);
 			velocityContext.put("companyId", String.valueOf(companyId));
@@ -111,11 +109,15 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			script = injectEditInPlace(xml, script);
 
 			try {
-				if (Validator.isNotNull(companyGroupId)) {
-					groupId = GetterUtil.getLong(companyGroupId);
-				}
-
 				String velocityTemplateId = companyId + groupId + templateId;
+
+				long companyGroupId = GetterUtil.getLong(
+					tokens.get("company_group_id"));
+
+				if (companyGroupId > 0) {
+					velocityTemplateId =
+						companyId + companyGroupId + templateId;
+				}
 
 				load = VelocityEngineUtil.mergeTemplate(
 					velocityTemplateId, script, velocityContext,
