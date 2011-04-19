@@ -314,6 +314,13 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 			folderIds, status);
 	}
 
+	public com.liferay.portal.kernel.repository.model.Folder getMountFolder(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppLocalService.getMountFolder(repositoryId);
+	}
+
 	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

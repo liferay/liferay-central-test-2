@@ -187,12 +187,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
 	}
 
-	public DLFolder getFolderByRepositoryId(long repositoryId)
-		throws PortalException, SystemException {
-
-		return dlFolderPersistence.findByRepositoryId(repositoryId);
-	}
-
 	public long getFolderId(long companyId, long folderId)
 		throws SystemException {
 
@@ -268,6 +262,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 			return filesCount;
 		}
+	}
+
+	public DLFolder getMountFolder(long repositoryId)
+		throws PortalException, SystemException {
+
+		return dlFolderPersistence.findByRepositoryId(repositoryId);
 	}
 
 	public DLFolder moveFolder(

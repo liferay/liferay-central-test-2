@@ -328,13 +328,6 @@ public class DLFolderLocalServiceUtil {
 		return getService().getFolder(groupId, parentFolderId, name);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolderByRepositoryId(
-		long repositoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFolderByRepositoryId(repositoryId);
-	}
-
 	public static long getFolderId(long companyId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFolderId(companyId, folderId);
@@ -380,6 +373,13 @@ public class DLFolderLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getFoldersFileEntriesCount(groupId, folderIds, status);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFolder getMountFolder(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMountFolder(repositoryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder moveFolder(

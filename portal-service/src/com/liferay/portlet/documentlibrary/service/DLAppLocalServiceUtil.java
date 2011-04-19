@@ -332,6 +332,13 @@ public class DLAppLocalServiceUtil {
 				   .getFoldersFileEntriesCount(repositoryId, folderIds, status);
 	}
 
+	public static com.liferay.portal.kernel.repository.model.Folder getMountFolder(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMountFolder(repositoryId);
+	}
+
 	public static com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

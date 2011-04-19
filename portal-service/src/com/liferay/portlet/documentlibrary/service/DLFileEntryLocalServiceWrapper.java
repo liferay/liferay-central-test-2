@@ -274,16 +274,16 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		_dlFileEntryLocalService.convertExtraSettings(keys);
 	}
 
-	public void deleteFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.deleteFileEntry(fileEntryId);
-	}
-
 	public void deleteFileEntries(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryLocalService.deleteFileEntries(groupId, folderId);
+	}
+
+	public void deleteFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntryLocalService.deleteFileEntry(fileEntryId);
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(

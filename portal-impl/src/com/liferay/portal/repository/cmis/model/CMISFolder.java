@@ -23,12 +23,10 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
-import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -137,11 +135,10 @@ public class CMISFolder extends CMISModel implements Folder {
 	public String getName() {
 		if (_cmisFolder.isRootFolder()) {
 			try {
-				DLFolder dlFolder =
-					DLFolderLocalServiceUtil.getFolderByRepositoryId(
-						getRepositoryId());
+				Folder folder = DLAppLocalServiceUtil.getMountFolder(
+					getRepositoryId());
 
-				return dlFolder.getName();
+				return folder.getName();
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -165,15 +162,10 @@ public class CMISFolder extends CMISModel implements Folder {
 		}
 
 		if (_cmisFolder.isRootFolder()) {
-			DLFolder dlFolder =
-				DLFolderLocalServiceUtil.getFolderByRepositoryId(
-					getRepositoryId());
+			Folder folder = DLAppLocalServiceUtil.getMountFolder(
+				getRepositoryId());
 
-			DLFolder parentDLFolder = dlFolder.getParentFolder();
-
-			if (parentDLFolder != null) {
-				parentFolder = new LiferayFolder(parentDLFolder);
-			}
+			parentFolder = folder.getParentFolder();
 		}
 		else {
 			String path = _cmisFolder.getPath();
