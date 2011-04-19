@@ -34,6 +34,7 @@ import java.io.OutputStream;
 import javax.portlet.PortletConfig;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,7 +47,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class RSSAction extends PortletAction {
 
-	@Override
 	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
@@ -64,7 +64,6 @@ public class RSSAction extends PortletAction {
 		}
 	}
 
-	@Override
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -84,10 +83,6 @@ public class RSSAction extends PortletAction {
 		}
 	}
 
-	protected byte[] getRSS(ResourceRequest resourceRequest) throws Exception {
-		return getRSS(PortalUtil.getHttpServletRequest(resourceRequest));
-	}
-
 	protected byte[] getRSS(HttpServletRequest request) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -97,8 +92,7 @@ public class RSSAction extends PortletAction {
 		long plid = ParamUtil.getLong(request, "p_l_id");
 		long companyId = ParamUtil.getLong(request, "companyId");
 		long groupId = ParamUtil.getLong(request, "groupId");
-		long organizationId = ParamUtil.getLong(
-			request, "organizationId");
+		long organizationId = ParamUtil.getLong(request, "organizationId");
 		int status = WorkflowConstants.STATUS_APPROVED;
 		int max = ParamUtil.getInteger(
 			request, "max", SearchContainer.DEFAULT_DELTA);
@@ -107,8 +101,7 @@ public class RSSAction extends PortletAction {
 		double version = ParamUtil.getDouble(
 			request, "version", RSSUtil.DEFAULT_VERSION);
 		String displayStyle = ParamUtil.getString(
-			request, "displayStyle",
-			RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
 		String feedURL =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
@@ -158,7 +151,13 @@ public class RSSAction extends PortletAction {
 		return rss.getBytes(StringPool.UTF8);
 	}
 
-	@Override
+	protected byte[] getRSS(ResourceRequest resourceRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			resourceRequest);
+
+		return getRSS(request);
+	}
+
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

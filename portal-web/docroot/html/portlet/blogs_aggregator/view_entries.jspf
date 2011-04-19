@@ -39,18 +39,21 @@
 <c:if test="<%= enableRssSubscription %>">
 
 	<%
-	String rssURLParams = new String();
+	StringBundler rssURLParams = new StringBundler();
 
 	if (selectionMethod.equals("users")) {
 		if (organizationId > 0) {
-			rssURLParams = rssURLParams.concat("&organizationId" + StringPool.EQUAL + organizationId);
+			rssURLParams.append("&organizationId=");
+			rssURLParams.append(organizationId);
 		}
 		else {
-			rssURLParams = rssURLParams.concat("&companyId" + StringPool.EQUAL + company.getCompanyId());
+			rssURLParams.append("&companyId=");
+			rssURLParams.append(company.getCompanyId());
 		}
 	}
 	else {
-		rssURLParams = rssURLParams.concat("&groupId" + StringPool.EQUAL + themeDisplay.getScopeGroupId());
+		rssURLParams.append("&groupId=");
+		rssURLParams.append(themeDisplay.getScopeGroupId());
 	}
 	%>
 
