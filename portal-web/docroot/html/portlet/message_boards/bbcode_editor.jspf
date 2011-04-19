@@ -18,6 +18,17 @@
 Map<String,String> configParams = new HashMap();
 
 configParams.put("emoticonsPath", HttpUtil.encodeURL(themeDisplay.getPathThemeImages() + "/emoticons"));
+
+if (quote && Validator.isNull(body) && (curParentMessage != null)) {
+	StringBundler sb = new StringBundler(5);
+	sb.append("[quote=");
+	sb.append(parentAuthor);
+	sb.append("]");
+	sb.append(curParentMessage.getBody(false));
+	sb.append("[/quote]");
+
+	body = sb.toString();
+}
 %>
 
 <liferay-ui:input-editor configParams="<%= configParams %>" editorImpl="<%= BB_CODE_EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="bbcode" />
