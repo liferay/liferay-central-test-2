@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.templateparser.TransformException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -33,7 +34,6 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
-import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.CDATAUtil;

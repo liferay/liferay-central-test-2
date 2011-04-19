@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.templateparser.TransformException;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portlet.journal.TransformException;
 
 import java.util.List;
 import java.util.Map;
