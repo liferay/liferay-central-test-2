@@ -37,7 +37,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;
 
@@ -207,14 +206,14 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			String type = el.attributeValue("type", "");
 
 			TemplateNode node = new TemplateNode(
-				themeDisplay, name, CDATAUtil.strip(data), type);
+				themeDisplay, name, stripCDATA(data), type);
 
 			if (el.element("dynamic-element") != null) {
 				node.appendChildren(extractDynamicContents(themeDisplay, el));
 			}
 			else if ((content != null) && (content.element("option") != null)) {
 				for (Element option : content.elements("option")) {
-					node.appendOption(CDATAUtil.strip(option.getText()));
+					node.appendOption(stripCDATA(option.getText()));
 				}
 			}
 
@@ -299,6 +298,18 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		}
 
 		return map;
+	}
+
+	protected String stripCDATA(String s) {
+		if (s.startsWith(StringPool.CDATA_OPEN) &&
+			s.endsWith(StringPool.CDATA_CLOSE)) {
+
+			s = s.substring(
+				StringPool.CDATA_OPEN.length(),
+				s.length() - StringPool.CDATA_CLOSE.length());
+		}
+
+		return s;
 	}
 
 	protected String wrapField(
