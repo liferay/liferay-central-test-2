@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 import com.liferay.portal.kernel.concurrent.CompeteLatch;
 
 import java.io.Serializable;
@@ -41,10 +39,10 @@ public class BlockingPortalCache implements PortalCache {
 	}
 
 	public Object get(String key) {
-		Object obj = _portalCache.get(key);
+		Object value = _portalCache.get(key);
 
-		if (obj != null) {
-			return obj;
+		if (value != null) {
+			return value;
 		}
 
 		CompeteLatch lastCompeteLatch = _competeLatch.get();
@@ -79,22 +77,22 @@ public class BlockingPortalCache implements PortalCache {
 
 			_competeLatch.set(null);
 
-			obj = _portalCache.get(key);
+			value = _portalCache.get(key);
 		}
 
-		return obj;
+		return value;
 	}
 
-	public void put(String key, Object obj) {
+	public void put(String key, Object value) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
 		}
 
-		if (obj == null) {
-			throw new IllegalArgumentException("Object is null");
+		if (value == null) {
+			throw new IllegalArgumentException("Value is null");
 		}
 
-		_portalCache.put(key, obj);
+		_portalCache.put(key, value);
 
 		CompeteLatch competeLatch = _competeLatch.get();
 
@@ -107,16 +105,16 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
+	public void put(String key, Object value, int timeToLive) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
 		}
 
-		if (obj == null) {
-			throw new IllegalArgumentException("Object is null");
+		if (value == null) {
+			throw new IllegalArgumentException("Value is null");
 		}
 
-		_portalCache.put(key, obj, timeToLive);
+		_portalCache.put(key, value, timeToLive);
 
 		CompeteLatch competeLatch = _competeLatch.get();
 
@@ -129,16 +127,16 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
-	public void put(String key, Serializable obj) {
+	public void put(String key, Serializable value) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
 		}
 
-		if (obj == null) {
-			throw new IllegalArgumentException("Object is null");
+		if (value == null) {
+			throw new IllegalArgumentException("Value is null");
 		}
 
-		_portalCache.put(key, obj);
+		_portalCache.put(key, value);
 
 		CompeteLatch competeLatch = _competeLatch.get();
 
@@ -151,16 +149,16 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
-	public void put(String key, Serializable obj, int timeToLive) {
+	public void put(String key, Serializable value, int timeToLive) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
 		}
 
-		if (obj == null) {
-			throw new IllegalArgumentException("Object is null");
+		if (value == null) {
+			throw new IllegalArgumentException("Value is null");
 		}
 
-		_portalCache.put(key, obj, timeToLive);
+		_portalCache.put(key, value, timeToLive);
 
 		CompeteLatch competeLatch = _competeLatch.get();
 
@@ -201,12 +199,12 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.clear();
 	}
 
-	public void unregisterAllCacheListeners() {
-		_portalCache.unregisterAllCacheListeners();
-	}
-
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		_portalCache.unregisterCacheListener(cacheListener);
+	}
+
+	public void unregisterCacheListeners() {
+		_portalCache.unregisterCacheListeners();
 	}
 
 	public void setDebug(boolean debug) {

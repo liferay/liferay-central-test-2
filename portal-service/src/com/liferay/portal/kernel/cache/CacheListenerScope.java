@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.kernel.cache.listener;
+package com.liferay.portal.kernel.cache;
 
 /**
  * @author Edward Han
  */
 public enum CacheListenerScope {
-	ALL,
-	LOCAL,
-	REMOTE
+
+	ALL, LOCAL, REMOTE
+
 }

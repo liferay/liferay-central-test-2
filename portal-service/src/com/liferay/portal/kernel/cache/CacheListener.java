@@ -12,30 +12,34 @@
  * details.
  */
 
-package com.liferay.portal.kernel.cache.listener;
-
-import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.PortalCacheException;
+package com.liferay.portal.kernel.cache;
 
 /**
  * @author Edward Han
  */
 public interface CacheListener {
-	void notifyEntryEvicted(PortalCache cache, String key, Object value)
+
+	public void notifyEntryEvicted(
+			PortalCache portalCache, String key, Object value)
 		throws PortalCacheException;
 
-	void notifyEntryExpired(PortalCache cache, String key, Object value)
+	public void notifyEntryExpired(
+			PortalCache portalCache, String key, Object value)
 		throws PortalCacheException;
 
-    void notifyEntryPut(PortalCache cache, String key, Object value)
+	public void notifyEntryPut(
+			PortalCache portalCache, String key, Object value)
 		throws PortalCacheException;
 
-	void notifyEntryRemoved(PortalCache cache, String key, Object value)
+	public void notifyEntryRemoved(
+			PortalCache portalCache, String key, Object value)
 		throws PortalCacheException;
 
-    void notifyEntryUpdated(PortalCache cache, String key, Object value)
+	public void notifyEntryUpdated(
+			PortalCache portalCache, String key, Object value)
 		throws PortalCacheException;
 
-    void notifyRemoveAll(PortalCache cache)
+	public void notifyRemoveAll(PortalCache portalCache)
 		throws PortalCacheException;
+
 }

@@ -15,10 +15,10 @@
 package com.liferay.portal.cache.transactional;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
+import com.liferay.portal.kernel.cache.CacheListener;
+import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheException;
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 
 import java.io.Serializable;
 
@@ -64,55 +64,55 @@ public class TransactionalPortalCache extends BasePortalCache {
 		return result;
 	}
 
-	public void put(String key, Object obj) {
+	public void put(String key, Object value) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
+			if (value == null) {
+				value = _nullHolder;
 			}
 
-			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, value);
 		}
 		else {
-			_portalCache.put(key, obj);
+			_portalCache.put(key, value);
 		}
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
+	public void put(String key, Object value, int timeToLive) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
+			if (value == null) {
+				value = _nullHolder;
 			}
 
-			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, value);
 		}
 		else {
-			_portalCache.put(key, obj, timeToLive);
+			_portalCache.put(key, value, timeToLive);
 		}
 	}
 
-	public void put(String key, Serializable obj) {
+	public void put(String key, Serializable value) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
+			if (value == null) {
+				value = _nullHolder;
 			}
 
-			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, value);
 		}
 		else {
-			_portalCache.put(key, obj);
+			_portalCache.put(key, value);
 		}
 	}
 
-	public void put(String key, Serializable obj, int timeToLive) {
+	public void put(String key, Serializable value, int timeToLive) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
-			if (obj == null) {
-				obj = _nullHolder;
+			if (value == null) {
+				value = _nullHolder;
 			}
 
-			TransactionalPortalCacheHelper.put(_portalCache, key, obj);
+			TransactionalPortalCacheHelper.put(_portalCache, key, value);
 		}
 		else {
-			_portalCache.put(key, obj, timeToLive);
+			_portalCache.put(key, value, timeToLive);
 		}
 	}
 
@@ -145,12 +145,12 @@ public class TransactionalPortalCache extends BasePortalCache {
 		_portalCache.removeAll();
 	}
 
-	public void unregisterAllCacheListeners() {
-		_portalCache.unregisterAllCacheListeners();
-	}
-
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		_portalCache.unregisterCacheListener(cacheListener);
+	}
+
+	public void unregisterCacheListeners() {
+		_portalCache.unregisterCacheListeners();
 	}
 
 	private static Serializable _nullHolder = new String();

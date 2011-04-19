@@ -15,9 +15,9 @@
 package com.liferay.portal.cache.memory;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
+import com.liferay.portal.kernel.cache.CacheListener;
+import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.cache.PortalCacheException;
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 
 import java.io.Serializable;
 
@@ -58,56 +58,57 @@ public class MemoryPortalCache extends BasePortalCache {
 		return _map.get(processedKey);
 	}
 
-	public void put(String key, Object obj) {
+	public void put(String key, Object value) {
 		String processedKey = processKey(key);
 
 		boolean updated = _map.containsKey(key);
 
-		_map.put(processedKey, obj);
+		_map.put(processedKey, value);
 
-		notifyPutEvents(key, obj, updated);
+		notifyPutEvents(key, value, updated);
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
+	public void put(String key, Object value, int timeToLive) {
 		String processedKey = processKey(key);
 
 		boolean updated = _map.containsKey(key);
 
-		_map.put(processedKey, obj);
+		_map.put(processedKey, value);
 
-		notifyPutEvents(key, obj, updated);
+		notifyPutEvents(key, value, updated);
 	}
 
-	public void put(String key, Serializable obj) {
+	public void put(String key, Serializable value) {
 		String processedKey = processKey(key);
 
 		boolean updated = _map.containsKey(key);
 
-		_map.put(processedKey, obj);
+		_map.put(processedKey, value);
 
-		notifyPutEvents(key, obj, updated);
+		notifyPutEvents(key, value, updated);
 	}
 
-	public void put(String key, Serializable obj, int timeToLive) {
+	public void put(String key, Serializable value, int timeToLive) {
 		String processedKey = processKey(key);
 
 		boolean updated = _map.containsKey(processedKey);
 
-		_map.put(processedKey, obj);
+		_map.put(processedKey, value);
 
-		notifyPutEvents(key, obj, updated);
+		notifyPutEvents(key, value, updated);
 	}
 
 	public void registerCacheListener(CacheListener cacheListener)
-			throws PortalCacheException {
+		throws PortalCacheException {
 
-		Lock writeLock = _cacheListenersRWLock.writeLock();
+		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
 
 		try {
 			writeLock.lock();
 
 			_cacheListeners.add(cacheListener);
-		} finally {
+		}
+		finally {
 			writeLock.unlock();
 		}
 	}
@@ -122,17 +123,18 @@ public class MemoryPortalCache extends BasePortalCache {
 	public void remove(String key) {
 		String processedKey = processKey(key);
 
-		Object data = _map.remove(processedKey);
+		Object value = _map.remove(processedKey);
 
-		Lock readLock = _cacheListenersRWLock.readLock();
+		Lock readLock = _cacheListenersReadWriteLock.readLock();
 
 		try {
 			readLock.lock();
 
 			for (CacheListener cacheListener : _cacheListeners) {
-				cacheListener.notifyEntryRemoved(this, key, data);
+				cacheListener.notifyEntryRemoved(this, key, value);
 			}
-		} finally {
+		}
+		finally {
 			readLock.unlock();
 		}
 	}
@@ -140,7 +142,7 @@ public class MemoryPortalCache extends BasePortalCache {
 	public void removeAll() {
 		_map.clear();
 
-		Lock readLock = _cacheListenersRWLock.readLock();
+		Lock readLock = _cacheListenersReadWriteLock.readLock();
 
 		try {
 			readLock.lock();
@@ -148,58 +150,63 @@ public class MemoryPortalCache extends BasePortalCache {
 			for (CacheListener cacheListener : _cacheListeners) {
 				cacheListener.notifyRemoveAll(this);
 			}
-		} finally {
+		}
+		finally {
 			readLock.unlock();
 		}
 	}
 
-	public void unregisterAllCacheListeners() {
-		Lock writeLock = _cacheListenersRWLock.writeLock();
-
-		try {
-			writeLock.lock();
-
-			_cacheListeners.clear();
-		} finally {
-			writeLock.unlock();
-		}
-	}
-
 	public void unregisterCacheListener(CacheListener cacheListener) {
-		Lock writeLock = _cacheListenersRWLock.writeLock();
+		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
 
 		try {
 			writeLock.lock();
 
 			_cacheListeners.remove(cacheListener);
-		} finally {
+		}
+		finally {
 			writeLock.unlock();
 		}
 	}
 
-	protected void notifyPutEvents(String key, Object obj, boolean updated) {
-		Lock readLock = _cacheListenersRWLock.readLock();
+	public void unregisterCacheListeners() {
+		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
+
+		try {
+			writeLock.lock();
+
+			_cacheListeners.clear();
+		}
+		finally {
+			writeLock.unlock();
+		}
+	}
+
+	protected void notifyPutEvents(String key, Object value, boolean updated) {
+		Lock readLock = _cacheListenersReadWriteLock.readLock();
 
 		try {
 			readLock.lock();
 
 			if (updated) {
 				for (CacheListener cacheListener : _cacheListeners) {
-					cacheListener.notifyEntryUpdated(this, key, obj);
+					cacheListener.notifyEntryUpdated(this, key, value);
 				}
 			}
 			else {
 				for (CacheListener cacheListener : _cacheListeners) {
-					cacheListener.notifyEntryPut(this, key, obj);
+					cacheListener.notifyEntryPut(this, key, value);
 				}
 			}
-		} finally {
+		}
+		finally {
 			readLock.unlock();
 		}
 	}
 
 	private Set<CacheListener> _cacheListeners = new HashSet<CacheListener>();
-	private ReadWriteLock _cacheListenersRWLock = new ReentrantReadWriteLock();
+	private ReadWriteLock _cacheListenersReadWriteLock =
+		new ReentrantReadWriteLock();
 	private Map<String, Object> _map;
 
 }

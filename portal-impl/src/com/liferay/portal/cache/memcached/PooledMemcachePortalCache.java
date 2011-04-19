@@ -15,8 +15,8 @@
 package com.liferay.portal.cache.memcached;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
+import com.liferay.portal.kernel.cache.CacheListener;
+import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -146,11 +146,11 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		}
 	}
 
-	public void put(String key, Object obj) {
-		put(key, obj, _timeToLive);
+	public void put(String key, Object value) {
+		put(key, value, _timeToLive);
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
+	public void put(String key, Object value, int timeToLive) {
 		MemcachedClientIF memcachedClient = null;
 
 		try {
@@ -163,7 +163,7 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		String processedKey = processKey(_name.concat(key));
 
 		try {
-			memcachedClient.set(processedKey, timeToLive, obj);
+			memcachedClient.set(processedKey, timeToLive, value);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -175,11 +175,11 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		}
 	}
 
-	public void put(String key, Serializable obj) {
-		put(key, obj, _timeToLive);
+	public void put(String key, Serializable value) {
+		put(key, value, _timeToLive);
 	}
 
-	public void put(String key, Serializable obj, int timeToLive) {
+	public void put(String key, Serializable value, int timeToLive) {
 		MemcachedClientIF memcachedClient = null;
 
 		try {
@@ -192,7 +192,7 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		String processedKey = processKey(_name.concat(key));
 
 		try {
-			memcachedClient.set(processedKey, timeToLive, obj);
+			memcachedClient.set(processedKey, timeToLive, value);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -205,15 +205,13 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 	}
 
 	public void registerCacheListener(CacheListener cacheListener) {
-
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
-		throw new UnsupportedOperationException(
-			"This cache doesn't support cache listeners");
+		throw new UnsupportedOperationException();
 	}
 
 	public void remove(String key) {
@@ -233,7 +231,7 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error deleting value with key " + key, iae);
+				_log.warn("Unable to delete value with key " + key, iae);
 			}
 		}
 		finally {
@@ -263,10 +261,10 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		_timeToLive = timeToLive;
 	}
 
-	public void unregisterAllCacheListeners() {
+	public void unregisterCacheListener(CacheListener cacheListener) {
 	}
 
-	public void unregisterCacheListener(CacheListener cacheListener) {
+	public void unregisterCacheListeners() {
 	}
 
 	protected void cleanupClient(MemcachedClientIF memcachedClient) {

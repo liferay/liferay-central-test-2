@@ -15,9 +15,9 @@
 package com.liferay.portal.cache.ehcache;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
+import com.liferay.portal.kernel.cache.CacheListener;
+import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.cache.PortalCacheException;
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
 
 import java.io.Serializable;
 
@@ -39,14 +39,14 @@ import net.sf.ehcache.event.RegisteredEventListeners;
  */
 public class EhcachePortalCache extends BasePortalCache {
 
-	public EhcachePortalCache(Ehcache cache) {
-		_cache = cache;
+	public EhcachePortalCache(Ehcache ehcache) {
+		_ehcache = ehcache;
 	}
 
 	public Object get(String key) {
 		String processedKey = processKey(key);
 
-		Element element = _cache.get(processedKey);
+		Element element = _ehcache.get(processedKey);
 
 		if (element == null) {
 			return null;
@@ -66,32 +66,32 @@ public class EhcachePortalCache extends BasePortalCache {
 		return values;
 	}
 
-	public void put(String key, Object obj) {
-		Element element = createElement(key, obj);
+	public void put(String key, Object value) {
+		Element element = createElement(key, value);
 
-		_cache.put(element);
+		_ehcache.put(element);
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
-		Element element = createElement(key, obj);
+	public void put(String key, Object value, int timeToLive) {
+		Element element = createElement(key, value);
 
 		element.setTimeToLive(timeToLive);
 
-		_cache.put(element);
+		_ehcache.put(element);
 	}
 
-	public void put(String key, Serializable obj) {
-		Element element = createElement(key, obj);
+	public void put(String key, Serializable value) {
+		Element element = createElement(key, value);
 
-		_cache.put(element);
+		_ehcache.put(element);
 	}
 
-	public void put(String key, Serializable obj, int timeToLive) {
-		Element element = createElement(key, obj);
+	public void put(String key, Serializable value, int timeToLive) {
+		Element element = createElement(key, value);
 
 		element.setTimeToLive(timeToLive);
 
-		_cache.put(element);
+		_ehcache.put(element);
 	}
 
 	public void registerCacheListener(CacheListener cacheListener)
@@ -104,20 +104,20 @@ public class EhcachePortalCache extends BasePortalCache {
 			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
 		throws PortalCacheException {
 
-		if (_cacheListenersMap.containsKey(cacheListener)) {
+		if (_cacheEventListeners.containsKey(cacheListener)) {
 			return;
 		}
 
 		CacheEventListener cacheEventListener =
-			new WrappedCacheEventListener(cacheListener, this);
+			new PortalCacheCacheEventListener(cacheListener, this);
 
-		_cacheListenersMap.put(cacheListener, cacheEventListener);
+		_cacheEventListeners.put(cacheListener, cacheEventListener);
 
-		NotificationScope notificationScope =
-			convertCacheListenerScope(cacheListenerScope);
+		NotificationScope notificationScope = getNotificationScope(
+			cacheListenerScope);
 
 		RegisteredEventListeners registeredEventListeners =
-			_cache.getCacheEventNotificationService();
+			_ehcache.getCacheEventNotificationService();
 
 		registeredEventListeners.registerListener(
 			cacheEventListener, notificationScope);
@@ -126,49 +126,57 @@ public class EhcachePortalCache extends BasePortalCache {
 	public void remove(String key) {
 		String processedKey = processKey(key);
 
-		_cache.remove(processedKey);
+		_ehcache.remove(processedKey);
 	}
 
 	public void removeAll() {
-		_cache.removeAll();
-	}
-
-	public void unregisterAllCacheListeners() {
-		RegisteredEventListeners registeredEventListeners =
-			_cache.getCacheEventNotificationService();
-
-		for (CacheEventListener cacheEventListener :
-				_cacheListenersMap.values()) {
-
-			registeredEventListeners.unregisterListener(cacheEventListener);
-		}
-
-		_cacheListenersMap.clear();
+		_ehcache.removeAll();
 	}
 
 	public void unregisterCacheListener(CacheListener cacheListener)
 		throws PortalCacheException {
 
-		CacheEventListener cacheEventListener = _cacheListenersMap.get(
+		CacheEventListener cacheEventListener = _cacheEventListeners.get(
 			cacheListener);
 
 		if (cacheEventListener != null) {
 			RegisteredEventListeners registeredEventListeners =
-				_cache.getCacheEventNotificationService();
+				_ehcache.getCacheEventNotificationService();
 
 			registeredEventListeners.unregisterListener(cacheEventListener);
 		}
 
-		_cacheListenersMap.remove(cacheListener);
+		_cacheEventListeners.remove(cacheListener);
 	}
 
-	protected NotificationScope convertCacheListenerScope(
-			CacheListenerScope scope) {
+	public void unregisterCacheListeners() {
+		RegisteredEventListeners registeredEventListeners =
+			_ehcache.getCacheEventNotificationService();
 
-		if (scope == CacheListenerScope.ALL) {
+		for (CacheEventListener cacheEventListener :
+				_cacheEventListeners.values()) {
+
+			registeredEventListeners.unregisterListener(cacheEventListener);
+		}
+
+		_cacheEventListeners.clear();
+	}
+
+	protected Element createElement(String key, Object value) {
+		String processedKey = processKey(key);
+
+		Element element = new Element(processedKey, value);
+
+		return element;
+	}
+
+	protected NotificationScope getNotificationScope(
+		CacheListenerScope cacheListenerScope) {
+
+		if (cacheListenerScope.equals(CacheListenerScope.ALL)) {
 			return NotificationScope.ALL;
 		}
-		else if (scope == CacheListenerScope.LOCAL) {
+		else if (cacheListenerScope.equals(CacheListenerScope.LOCAL)) {
 			return NotificationScope.LOCAL;
 		}
 		else {
@@ -176,16 +184,8 @@ public class EhcachePortalCache extends BasePortalCache {
 		}
 	}
 
-	protected Element createElement(String key, Object obj) {
-		String processedKey = processKey(key);
-
-		Element element = new Element(processedKey, obj);
-
-		return element;
-	}
-
-	private Ehcache _cache;
-	private Map<CacheListener, CacheEventListener> _cacheListenersMap =
+	private Map<CacheListener, CacheEventListener> _cacheEventListeners =
 		new ConcurrentHashMap<CacheListener, CacheEventListener>();
+	private Ehcache _ehcache;
 
 }

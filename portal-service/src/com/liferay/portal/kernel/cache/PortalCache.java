@@ -14,9 +14,6 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
-
 import java.io.Serializable;
 
 import java.util.Collection;
@@ -33,13 +30,13 @@ public interface PortalCache {
 
 	public Object get(String key);
 
-	public void put(String key, Object obj);
+	public void put(String key, Object value);
 
-	public void put(String key, Object obj, int timeToLive);
+	public void put(String key, Object value, int timeToLive);
 
-	public void put(String key, Serializable obj);
+	public void put(String key, Serializable value);
 
-	public void put(String key, Serializable obj, int timeToLive);
+	public void put(String key, Serializable value, int timeToLive);
 
 	public void registerCacheListener(CacheListener cacheListener);
 
@@ -52,8 +49,8 @@ public interface PortalCache {
 
 	public void setDebug(boolean debug);
 
-	public void unregisterAllCacheListeners();
-
 	public void unregisterCacheListener(CacheListener cacheListener);
+
+	public void unregisterCacheListeners();
 
 }

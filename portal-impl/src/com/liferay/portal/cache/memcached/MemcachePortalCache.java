@@ -15,8 +15,8 @@
 package com.liferay.portal.cache.memcached;
 
 import com.liferay.portal.kernel.cache.BasePortalCache;
-import com.liferay.portal.kernel.cache.listener.CacheListener;
-import com.liferay.portal.kernel.cache.listener.CacheListenerScope;
+import com.liferay.portal.kernel.cache.CacheListener;
+import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -120,15 +120,15 @@ public class MemcachePortalCache extends BasePortalCache {
 		return value;
 	}
 
-	public void put(String key, Object obj) {
-		put(key, obj, _timeToLive);
+	public void put(String key, Object value) {
+		put(key, value, _timeToLive);
 	}
 
-	public void put(String key, Object obj, int timeToLive) {
+	public void put(String key, Object value, int timeToLive) {
 		String processedKey = processKey(_name.concat(key));
 
 		try {
-			_memcachedClient.set(processedKey, timeToLive, obj);
+			_memcachedClient.set(processedKey, timeToLive, value);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -137,15 +137,15 @@ public class MemcachePortalCache extends BasePortalCache {
 		}
 	}
 
-	public void put(String key, Serializable obj) {
-		put(key, obj, _timeToLive);
+	public void put(String key, Serializable value) {
+		put(key, value, _timeToLive);
 	}
 
-	public void put(String key, Serializable obj, int timeToLive) {
+	public void put(String key, Serializable value, int timeToLive) {
 		String processedKey = processKey(_name.concat(key));
 
 		try {
-			_memcachedClient.set(processedKey, timeToLive, obj);
+			_memcachedClient.set(processedKey, timeToLive, value);
 		}
 		catch (IllegalArgumentException iae) {
 			if (_log.isWarnEnabled()) {
@@ -155,15 +155,13 @@ public class MemcachePortalCache extends BasePortalCache {
 	}
 
 	public void registerCacheListener(CacheListener cacheListener) {
-
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
-		throw new UnsupportedOperationException(
-			"This cache doesn't support cache listeners");
+		throw new UnsupportedOperationException();
 	}
 
 	public void remove(String key) {
@@ -187,10 +185,10 @@ public class MemcachePortalCache extends BasePortalCache {
 		_timeToLive = timeToLive;
 	}
 
-	public void unregisterAllCacheListeners() {
+	public void unregisterCacheListener(CacheListener cacheListener) {
 	}
 
-	public void unregisterCacheListener(CacheListener cacheListener) {
+	public void unregisterCacheListeners() {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MemcachePortalCache.class);

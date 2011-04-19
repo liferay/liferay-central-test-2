@@ -14,10 +14,12 @@
 
 package com.liferay.portal.cache.ehcache;
 
+import com.liferay.portal.kernel.cache.CacheListener;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.listener.CacheListener;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.io.Serializable;
 
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.Ehcache;
@@ -27,72 +29,80 @@ import net.sf.ehcache.event.CacheEventListener;
 /**
  * @author Edward C. Han
  */
-public class WrappedCacheEventListener implements CacheEventListener {
-	public WrappedCacheEventListener(
+public class PortalCacheCacheEventListener implements CacheEventListener {
+
+	public PortalCacheCacheEventListener(
 		CacheListener cacheListener, PortalCache portalCache) {
 
 		_cacheListener = cacheListener;
 		_portalCache = portalCache;
 	}
 
+	public Object clone() {
+		return new PortalCacheCacheEventListener(_cacheListener, _portalCache);
+	}
+
+	public void dispose() {
+	}
+
 	public void notifyElementEvicted(Ehcache ehcache, Element element) {
+		Serializable key = element.getKey();
+
 		_cacheListener.notifyEntryEvicted(
-			_portalCache, element.getKey().toString(),
-			element.getObjectValue());
+			_portalCache, String.valueOf(key), element.getObjectValue());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(ehcache.getName() + " - notifyElementEvicted: "
-				+ element.getKey());
+			_log.debug("Evicted " + key + " from " + ehcache.getName());
 		}
 	}
 
 	public void notifyElementExpired(Ehcache ehcache, Element element) {
+		Serializable key = element.getKey();
+
 		_cacheListener.notifyEntryExpired(
-			_portalCache, element.getKey().toString(),
-			element.getObjectValue());
+			_portalCache, String.valueOf(key), element.getObjectValue());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(ehcache.getName() + " - notifyElementExpired: "
-				+ element.getKey());
+			_log.debug("Expired " + key + " from " + ehcache.getName());
 		}
 	}
 
 	public void notifyElementPut(Ehcache ehcache, Element element)
 		throws CacheException {
 
+		Serializable key = element.getKey();
+
 		_cacheListener.notifyEntryPut(
-			_portalCache, element.getKey().toString(),
-			element.getObjectValue());
+			_portalCache, String.valueOf(key), element.getObjectValue());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(ehcache.getName() + " - notifyElementPut: "
-				+ element.getKey());
+			_log.debug("Inserted " + key + " into " + ehcache.getName());
 		}
 	}
 
 	public void notifyElementRemoved(Ehcache ehcache, Element element)
 		throws CacheException {
 
+		Serializable key = element.getKey();
+
 		_cacheListener.notifyEntryRemoved(
-			_portalCache, element.getKey().toString(),
-			element.getObjectValue());
+			_portalCache, String.valueOf(key), element.getObjectValue());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(ehcache.getName() + " - notifyElementRemoved: "
-				+ element.getKey());
+			_log.debug("Removed " + key + " from " + ehcache.getName());
 		}
 	}
 
 	public void notifyElementUpdated(Ehcache ehcache, Element element)
 		throws CacheException {
 
+		Serializable key = element.getKey();
+
 		_cacheListener.notifyEntryUpdated(
-			_portalCache, element.getKey().toString(),
-			element.getObjectValue());
+			_portalCache, String.valueOf(key), element.getObjectValue());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(ehcache.getName() + " - notifyElementUpdated: "
-				+ element.getKey());
+			_log.debug("Updated " + key + " in " + ehcache.getName());
 		}
 	}
 
@@ -100,19 +110,12 @@ public class WrappedCacheEventListener implements CacheEventListener {
 		_cacheListener.notifyRemoveAll(_portalCache);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(ehcache.getName() + " - notifyRemoveAll");
+			_log.debug("Cleared " + ehcache.getName());
 		}
 	}
 
-	public Object clone() throws CloneNotSupportedException {
-		return new WrappedCacheEventListener(_cacheListener, _portalCache);
-	}
-
-	public void dispose() {
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		WrappedCacheEventListener.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PortalCacheCacheEventListener.class);
 
 	private CacheListener _cacheListener;
 	private PortalCache _portalCache;
