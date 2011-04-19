@@ -393,17 +393,17 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		addSearchTerm(searchQuery, searchContext, "city");
-		addSearchTerm(searchQuery, searchContext, "country");
-		addSearchTerm(searchQuery, searchContext, "emailAddress");
-		addSearchTerm(searchQuery, searchContext, "firstName");
-		addSearchTerm(searchQuery, searchContext, "fullName");
-		addSearchTerm(searchQuery, searchContext, "lastName");
-		addSearchTerm(searchQuery, searchContext, "middleName");
-		addSearchTerm(searchQuery, searchContext, "region");
-		addSearchTerm(searchQuery, searchContext, "screenName");
-		addSearchTerm(searchQuery, searchContext, "street");
-		addSearchTerm(searchQuery, searchContext, "zip");
+		addSearchTerm(searchQuery, searchContext, "city", true);
+		addSearchTerm(searchQuery, searchContext, "country", true);
+		addSearchTerm(searchQuery, searchContext, "emailAddress", true);
+		addSearchTerm(searchQuery, searchContext, "firstName", true);
+		addSearchTerm(searchQuery, searchContext, "fullName", true);
+		addSearchTerm(searchQuery, searchContext, "lastName", true);
+		addSearchTerm(searchQuery, searchContext, "middleName", true);
+		addSearchTerm(searchQuery, searchContext, "region", true);
+		addSearchTerm(searchQuery, searchContext, "screenName", true);
+		addSearchTerm(searchQuery, searchContext, "street", true);
+		addSearchTerm(searchQuery, searchContext, "zip", true);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");

@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -228,6 +230,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 			return;
 		}
 
+		if (like) {
+			value = StringUtil.replace(
+				value, StringPool.PERCENT, StringPool.BLANK);
+		}
+
 		String[] values = null;
 
 		if (parseKeywords) {
@@ -276,6 +283,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 		if (Validator.isNull(value)) {
 			return;
+		}
+
+		if (like) {
+			value = StringUtil.replace(
+				value, StringPool.PERCENT, StringPool.BLANK);
 		}
 
 		String[] values = null;

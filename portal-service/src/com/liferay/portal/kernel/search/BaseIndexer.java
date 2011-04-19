@@ -581,7 +581,7 @@ public abstract class BaseIndexer implements Indexer {
 
 	protected void addSearchTerm(
 			BooleanQuery searchQuery, SearchContext searchContext,
-			String field)
+			String field, boolean like)
 		throws Exception {
 
 		if (Validator.isNull(field)) {
@@ -595,10 +595,10 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		if (searchContext.isAndSearch()) {
-			searchQuery.addRequiredTerm(field, value, true, true);
+			searchQuery.addRequiredTerm(field, value, like, true);
 		}
 		else {
-			searchQuery.addTerm(field, value, true, true);
+			searchQuery.addTerm(field, value, like, true);
 		}
 	}
 

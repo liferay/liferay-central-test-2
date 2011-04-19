@@ -162,13 +162,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		if (like) {
 			for (String value : values) {
-				value = StringUtil.replace(
-					value, CharPool.PERCENT, CharPool.STAR);
-
 				value = value.toLowerCase();
 
 				WildcardQuery wildcardQuery = new WildcardQuery(
-					new Term(field, value));
+					new Term(
+						field,
+						StringPool.STAR.concat(value).concat(StringPool.STAR)));
 
 				query.add(wildcardQuery, BooleanClause.Occur.SHOULD);
 			}
@@ -194,9 +193,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		if (like) {
-			value = StringUtil.replace(
-				value, StringPool.PERCENT, StringPool.BLANK);
-
 			value = value.toLowerCase();
 
 			Term term = new Term(

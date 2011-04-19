@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryTerm;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -221,6 +223,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	public void addRequiredTerm(
 		String field, String value, boolean like, boolean parseKeywords) {
 
+		if (like) {
+			value = StringUtil.replace(
+				value, StringPool.PERCENT, StringPool.BLANK);
+		}
+
 		String[] values = null;
 
 		if (parseKeywords) {
@@ -283,6 +290,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 	public void addTerm(
 		String field, String value, boolean like, boolean parseKeywords) {
+
+		if (like) {
+			value = StringUtil.replace(
+				value, StringPool.PERCENT, StringPool.BLANK);
+		}
 
 		if (parseKeywords) {
 			String[] keywords = parseKeywords(value);

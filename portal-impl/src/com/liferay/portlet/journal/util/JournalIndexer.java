@@ -382,12 +382,12 @@ public class JournalIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		addSearchTerm(searchQuery, searchContext, Field.CONTENT);
-		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION);
-		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK);
-		addSearchTerm(searchQuery, searchContext, Field.TITLE);
-		addSearchTerm(searchQuery, searchContext, Field.TYPE);
-		addSearchTerm(searchQuery, searchContext, Field.STATUS);
+		addSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
+		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
+		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
+		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
+		addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
