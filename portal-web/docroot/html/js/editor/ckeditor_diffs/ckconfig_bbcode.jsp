@@ -23,8 +23,9 @@
 <%
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
-String languageId = ParamUtil.getString(request, "languageId");
 String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
+String jsPath = ParamUtil.getString(request, "jsPath");
+String languageId = ParamUtil.getString(request, "languageId");
 %>
 
 CKEDITOR.config.height = 265;
@@ -61,6 +62,8 @@ CKEDITOR.config.toolbar_bbcode = [
 ];
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
+
+CKEDITOR.config.contentsCss = '<%= jsPath %>/editor/ckeditor/plugins/bbcode/css/main.css';
 
 CKEDITOR.config.extraPlugins = 'bbcode,wikilink';
 
