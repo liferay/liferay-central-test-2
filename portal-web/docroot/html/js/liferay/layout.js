@@ -690,20 +690,23 @@ AUI().add(
 												internalNode.set('offsetHeight', info.offsetHeight);
 											}
 
-											var topperNode = portletNode.one('.portlet-topper');
-
-											var topperHeight = topperNode.get('offsetHeight');
-
-											var contentNode = portletNode.one('.portlet-content');
-
-											var paddingTop = parseInt(contentNode.getStyle('paddingTop'));
-											var paddingBottom = parseInt(contentNode.getStyle('paddingBottom'));
-
-											var containerHeight = info.offsetHeight - topperHeight - paddingTop - paddingBottom;
-
 											var containerNode = portletNode.one('.portlet-content-container');
 
 											if (containerNode) {
+												var containerHeight = info.offsetHeight;
+
+												var topperNode = portletNode.one('.portlet-topper');
+
+												if (topperNode) {
+													containerHeight -= topperNode.get('offsetHeight');
+												}
+
+												var contentNode = portletNode.one('.portlet-content');
+
+												if (contentNode) {
+													containerHeight -= contentNode.getPadding('tb');
+												}
+
 												containerNode.setStyle('height', containerHeight);
 											}
 
