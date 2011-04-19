@@ -140,6 +140,18 @@ public class DDMTemplateLocalServiceImpl
 		return ddmTemplatePersistence.findByPrimaryKey(templateId);
 	}
 
+	public List<DDMTemplate> getTemplates(long structureId)
+		throws PortalException, SystemException {
+
+		return ddmTemplatePersistence.findByStructureId(structureId);
+	}
+
+	public List<DDMTemplate> getTemplates(long structureId, String type)
+		throws PortalException, SystemException {
+
+		return ddmTemplatePersistence.findByS_T(structureId, type);
+	}
+
 	public List<DDMTemplate> search(
 			long companyId, long groupId, long structureId, String keywords,
 			int start, int end, OrderByComparator orderByComparator)
