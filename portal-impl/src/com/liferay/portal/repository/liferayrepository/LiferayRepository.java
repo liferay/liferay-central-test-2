@@ -135,9 +135,8 @@ public class LiferayRepository
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		List<DLFileEntry> dlFileEntries =
-			dlFileEntryService.getFileEntries(
-				getGroupId(), toFolderId(folderId), start, end, obc);
+		List<DLFileEntry> dlFileEntries = dlFileEntryService.getFileEntries(
+			getGroupId(), toFolderId(folderId), start, end, obc);
 
 		return toFileEntries(dlFileEntries);
 	}
@@ -187,8 +186,7 @@ public class LiferayRepository
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry =
-			dlFileEntryService.getFileEntryByUuidAndGroupId(
-				uuid, getGroupId());
+			dlFileEntryService.getFileEntryByUuidAndGroupId(uuid, getGroupId());
 
 		return new LiferayFileEntry(dlFileEntry);
 	}
@@ -200,8 +198,8 @@ public class LiferayRepository
 	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
-		DLFileVersion dlFileVersion =
-			dlFileEntryService.getFileVersion(fileVersionId);
+		DLFileVersion dlFileVersion = dlFileEntryService.getFileVersion(
+			fileVersionId);
 
 		return new LiferayFileVersion(dlFileVersion);
 	}
@@ -209,8 +207,7 @@ public class LiferayRepository
 	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder dlFolder = dlFolderService.getFolder(
-			toFolderId(folderId));
+		DLFolder dlFolder = dlFolderService.getFolder(toFolderId(folderId));
 
 		return new LiferayFolder(dlFolder);
 	}
@@ -337,8 +334,7 @@ public class LiferayRepository
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlFolderService.moveFolder(
-			toFolderId(folderId), toFolderId(parentFolderId),
-			serviceContext);
+			toFolderId(folderId), toFolderId(parentFolderId), serviceContext);
 
 		return new LiferayFolder(dlFolder);
 	}
@@ -353,8 +349,7 @@ public class LiferayRepository
 	public Lock refreshFolderLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
-		return dlFolderService.refreshFolderLock(
-			lockUuid, expirationTime);
+		return dlFolderService.refreshFolderLock(lockUuid, expirationTime);
 	}
 
 	public void revertFileEntry(
@@ -418,8 +413,7 @@ public class LiferayRepository
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
-		return dlFileEntryService.verifyFileEntryLock(
-			fileEntryId, lockUuid);
+		return dlFileEntryService.verifyFileEntryLock(fileEntryId, lockUuid);
 	}
 
 	public boolean verifyInheritableLock(long folderId, String lockUuid)

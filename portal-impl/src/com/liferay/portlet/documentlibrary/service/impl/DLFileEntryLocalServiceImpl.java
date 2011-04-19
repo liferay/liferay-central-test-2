@@ -210,14 +210,6 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	public void deleteFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
-
-		deleteFileEntry(dlFileEntry);
-	}
-
 	public void deleteFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
@@ -227,6 +219,14 @@ public class DLFileEntryLocalServiceImpl
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			deleteFileEntry(dlFileEntry);
 		}
+	}
+
+	public void deleteFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
+
+		deleteFileEntry(dlFileEntry);
 	}
 
 	public List<DLFileEntry> getExtraSettingsFileEntries(int start, int end)
