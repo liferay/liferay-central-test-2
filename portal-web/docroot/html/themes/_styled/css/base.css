@@ -157,14 +157,14 @@ body.html-editor {
 }
 
 .html-editor.portlet-message-boards blockquote:after {
+	background: url(../images/message_boards/quoteright.png) no-repeat 50%;
+	bottom: 5px;
 	content: '';
 	display: block;
-	position: absolute;
-	width: 31px;
 	height: 24px;
-	background: url(../images/message_boards/quoteright.png) no-repeat 50%;
+	position: absolute;
 	right: 5px;
-	bottom: 5px;
+	width: 31px;
 	z-index: 999;
 }
 

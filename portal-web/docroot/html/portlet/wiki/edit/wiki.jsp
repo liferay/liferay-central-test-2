@@ -27,8 +27,8 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 	<liferay-ui:toggle
 		defaultShowContent="<%= false %>"
 		id="toggle_id_wiki_edit_wiki_syntax_help"
-		showMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "show-syntax-help") %>'
 		hideMessage='<%= LanguageUtil.get(pageContext, "hide-syntax-help") + " &raquo;" %>'
+		showMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "show-syntax-help") %>'
 	/>
 </div>
 
@@ -45,7 +45,7 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 
 		Map<String,String> configParams = new HashMap();
 
-		configParams.put("attachmentURLPrefix", HttpUtil.encodeURL(attachmentURLPrefix));
+		configParams.put("attachmentURLPrefix", attachmentURLPrefix);
 		%>
 
 		<liferay-ui:input-editor configParams="<%= configParams %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="creole" width="100%" />

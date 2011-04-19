@@ -32,8 +32,6 @@
 				editor.ui.addButton(
 					'Code',
 					{
-						label : 'Code',
-						icon: CKEDITOR.config.imagesPath + 'code.png',
 						click : function() {
 							editor.focus();
 							editor.fire('saveSnapshot');
@@ -54,7 +52,9 @@
 								},
 								0
 							);
-						}
+						},
+						icon: CKEDITOR.config.imagesPath + 'code.png',
+						label : 'Code'
 					}
 				);
 			}

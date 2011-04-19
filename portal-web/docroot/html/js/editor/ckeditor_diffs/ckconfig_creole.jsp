@@ -22,7 +22,7 @@
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String languageId = ParamUtil.getString(request, "languageId");
-String attachmentURLPrefix = HttpUtil.decodeURL(ParamUtil.getString(request, "attachmentURLPrefix"));
+String attachmentURLPrefix = ParamUtil.getString(request, "attachmentURLPrefix");
 %>
 
 CKEDITOR.config.height = 265;
@@ -69,7 +69,7 @@ CKEDITOR.config.toolbar_creole = [
 	['Source']
 ];
 
-CKEDITOR.config.attachmentURLPrefix = '<%= attachmentURLPrefix %>';
+CKEDITOR.config.attachmentURLPrefix = '<%= HtmlUtil.escape(attachmentURLPrefix) %>';
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
 

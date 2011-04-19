@@ -23,9 +23,9 @@
 <%
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
-String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
 String imagesPath = ParamUtil.getString(request, "imagesPath");
 String languageId = ParamUtil.getString(request, "languageId");
+String emoticonsPath = ParamUtil.getString(request, "emoticonsPath");
 %>
 
 CKEDITOR.config.height = 265;
@@ -81,7 +81,7 @@ CKEDITOR.config.fontSize_sizes = '10/10px;12/12px;16/16px;18/18px;24/24px;32/32p
 
 CKEDITOR.config.format_tags = 'p;pre';
 
-CKEDITOR.config.imagesPath = '<%= imagesPath %>/message_boards/';
+CKEDITOR.config.imagesPath = '<%= HtmlUtil.escape(imagesPath) %>/message_boards/';
 
 CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
 
@@ -89,6 +89,6 @@ CKEDITOR.config.smiley_descriptions = ['<%= StringUtil.merge(BBCodeUtil.EMOTICON
 
 CKEDITOR.config.smiley_images = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_FILES, "','") %>'];
 
-CKEDITOR.config.smiley_path = '<%= emoticonsPath %>' + '/';
+CKEDITOR.config.smiley_path = '<%= HtmlUtil.escape(emoticonsPath) %>' + '/';
 
 CKEDITOR.config.smiley_symbols = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_SYMBOLS, "','") %>'];
