@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 
 import java.net.URL;
 import java.net.URLClassLoader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +114,7 @@ public class ServiceBuilderMojo extends AbstractMojo {
 
 			Method method = URLClassLoader.class.getDeclaredMethod(
 				"addURL", URL.class);
+
 			method.setAccessible(true);
 
 			for (Object object : project.getCompileClasspathElements()) {
@@ -128,57 +130,66 @@ public class ServiceBuilderMojo extends AbstractMojo {
 	}
 
 	protected void invokeDependencyBuild() throws Exception {
+		if (!postBuildDependencyModules) {
+		}
+
 		List<Dependency> dependencies = new ArrayList<Dependency>();
 
 		MavenProject parentProject = project.getParent();
 
-		if (parentProject == null || !postBuildDependencyModules) {
+		if (parentProject == null) {
 			return;
 		}
+
+		String groupId = project.getGroupId();
 
 		List<String> modules = parentProject.getModules();
 
 		List<String> reactorIncludes = new ArrayList<String>();
 
-		for (Object obj : project.getDependencies()) {
-			Dependency dependency = (Dependency)obj;
-			System.out.println(obj.getClass().getName() + ": " + obj);
+		for (Object dependencyObj : project.getDependencies()) {
+			Dependency dependency = (Dependency)dependencyObj;
 
-			if (project.getGroupId().equals(dependency.getGroupId()) &&
+			if (groupId.equals(dependency.getGroupId()) &&
 				modules.contains(dependency.getArtifactId())) {
 
 				reactorIncludes.add(dependency.getArtifactId() + "/pom.xml");
 			}
 		}
 
-		File parentBaseDir = project.getParent().getBasedir();
+		if (reactorIncludes.isEmpty()) {
+			return;
+		}
+
+		InvocationRequest invocationRequest = new DefaultInvocationRequest();
+
+		invocationRequest.activateReactor(
+			reactorIncludes.toArray(new String[0]), null);
+
+		invocationRequest.setBaseDirectory(parentProject.getBasedir());
 
 		if (postBuildGoals == null) {
 			postBuildGoals = new ArrayList<String>();
+
 			postBuildGoals.add("install");
 		}
 
-		if (reactorIncludes.size() > 0) {
-			InvocationRequest request = new DefaultInvocationRequest();
+		invocationRequest.setGoals(postBuildGoals);
+		invocationRequest.setRecursive(false);
 
-			request.setBaseDirectory(parentBaseDir);
-			request.activateReactor(
-				reactorIncludes.toArray(new String[] {}), null);
-			request.setGoals(postBuildGoals);
-			request.setRecursive(false);
+		MavenCommandLineBuilder mavenCommandLineBuilder =
+			new MavenCommandLineBuilder();
 
-			getLog().info(
-				"Executing: " + new MavenCommandLineBuilder().build(request));
+		getLog().info("Executing " + mavenCommandLineBuilder.build(request));
 
-			InvocationResult result = invoker.execute(request);
+		InvocationResult invocationResult = invoker.execute(request);
 
-			if (result.getExecutionException() != null) {
-				throw result.getExecutionException();
-			}
-			else if (result.getExitCode() != 0) {
-				throw new MojoExecutionException(
-					"Exit code was " + result.getExitCode());
-			}
+		if (result.getExecutionException() != null) {
+			throw invocationResult.getExecutionException();
+		}
+		else if (invocationResult.getExitCode() != 0) {
+			throw new MojoExecutionException(
+				"Exit code " + invocationResult.getExitCode());
 		}
 	}
 
@@ -211,8 +222,7 @@ public class ServiceBuilderMojo extends AbstractMojo {
 	private String beanLocatorUtil;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/portlet-hbm.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/portlet-hbm.xml"
 	 * @required
 	 */
 	private String hbmFileName;
@@ -229,22 +239,19 @@ public class ServiceBuilderMojo extends AbstractMojo {
 	private Invoker invoker;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/webapp/html/js/liferay/service.js"
+	 * @parameter default-value="${basedir}/src/main/webapp/html/js/liferay/service.js"
 	 * @required
 	 */
 	private String jsonFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/portlet-model-hints.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/portlet-model-hints.xml"
 	 * @required
 	 */
 	private String modelHintsFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/portlet-orm.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/portlet-orm.xml"
 	 * @required
 	 */
 	private String ormFileName;
@@ -256,7 +263,7 @@ public class ServiceBuilderMojo extends AbstractMojo {
 	private String pluginName;
 
 	/**
-	 * @parameter expression="${postBuildDependencyModules}" default-value="true"
+	 * @parameter default-value="true" expression="${postBuildDependencyModules}"
 	 * @required
 	 */
 	private boolean postBuildDependencyModules;
@@ -292,43 +299,37 @@ public class ServiceBuilderMojo extends AbstractMojo {
 	private String serviceFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/base-spring.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/base-spring.xml"
 	 * @required
 	 */
 	private String springBaseFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/dynamic-data-source-spring.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/dynamic-data-source-spring.xml"
 	 * @required
 	 */
 	private String springDynamicDataSourceFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/portlet-spring.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/portlet-spring.xml"
 	 * @required
 	 */
 	private String springFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/hibernate-spring.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/hibernate-spring.xml"
 	 * @required
 	 */
 	private String springHibernateFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/infrastructure-spring.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/infrastructure-spring.xml"
 	 * @required
 	 */
 	private String springInfrastructureFileName;
 
 	/**
-	 * @parameter default-value=
-				  "${basedir}/src/main/resources/META-INF/shard-data-source-spring.xml"
+	 * @parameter default-value="${basedir}/src/main/resources/META-INF/shard-data-source-spring.xml"
 	 * @required
 	 */
 	private String springShardDataSourceFileName;
