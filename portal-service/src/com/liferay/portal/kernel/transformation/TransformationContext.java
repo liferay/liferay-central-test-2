@@ -12,29 +12,15 @@
  * details.
  */
 
-package com.liferay.portlet.journal;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.kernel.transformation;
 
 /**
- * @author Alexander Chow
+ * @author Marcellus Tavares
  */
-public class TransformException extends PortalException {
+public interface TransformationContext {
 
-	public TransformException() {
-		super();
-	}
+	public Object get(String key);
 
-	public TransformException(String msg) {
-		super(msg);
-	}
-
-	public TransformException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public TransformException(Throwable cause) {
-		super(cause);
-	}
+	public void put(String key, Object value);
 
 }

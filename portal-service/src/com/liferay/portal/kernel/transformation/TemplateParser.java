@@ -12,41 +12,21 @@
  * details.
  */
 
-package com.liferay.portlet.journal.util;
+package com.liferay.portal.kernel.transformation;
 
+import com.liferay.portal.TransformException;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portlet.journal.TransformException;
 
 import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public abstract class BaseTemplateParser implements TemplateParser {
+public interface TemplateParser {
 
 	public String transform(
 			ThemeDisplay themeDisplay, Map<String, String> tokens,
 			String viewMode, String languageId, String xml, String script)
-		throws TransformException {
-
-		try {
-			return doTransform(
-				themeDisplay, tokens, viewMode, languageId, xml, script);
-		}
-		catch (TransformException te) {
-			throw te;
-		}
-		catch (Exception e) {
-			throw new TransformException(e);
-		}
-	}
-
-	protected String doTransform(
-			ThemeDisplay themeDisplay, Map<String, String> tokens,
-			String viewMode, String languageId, String xml, String script)
-		throws Exception {
-
-		return null;
-	}
+		throws TransformException;
 
 }

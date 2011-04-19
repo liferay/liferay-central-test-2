@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.transformation.TemplateParser;
+
 import java.util.Map;
 
 /**

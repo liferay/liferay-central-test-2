@@ -12,12 +12,29 @@
  * details.
  */
 
-package com.liferay.portal.kernel.velocity;
+package com.liferay.portal;
 
-import com.liferay.portal.kernel.transformation.TransformationContext;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author Raymond Augé
+ * @author Alexander Chow
  */
-public interface VelocityContext extends TransformationContext {
+public class TransformException extends PortalException {
+
+	public TransformException() {
+		super();
+	}
+
+	public TransformException(String msg) {
+		super(msg);
+	}
+
+	public TransformException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public TransformException(Throwable cause) {
+		super(cause);
+	}
+
 }

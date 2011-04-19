@@ -12,12 +12,31 @@
  * details.
  */
 
-package com.liferay.portal.kernel.velocity;
+package com.liferay.portal.kernel.transformation;
 
-import com.liferay.portal.kernel.transformation.TransformationContext;
+import java.util.Map;
 
 /**
- * @author Raymond Augé
+ * @author Marcellus Tavares
  */
-public interface VelocityContext extends TransformationContext {
+public interface TransformerListener {
+
+	public String getLanguageId();
+
+	public boolean isTemplateDriven();
+
+	public Map<String, String> getTokens();
+
+	public String onXml(String s);
+
+	public String onScript(String s);
+
+	public String onOutput(String s);
+
+	public void setTemplateDriven(boolean templateDriven);
+
+	public void setLanguageId(String languageId);
+
+	public void setTokens(Map<String, String> tokens);
+
 }

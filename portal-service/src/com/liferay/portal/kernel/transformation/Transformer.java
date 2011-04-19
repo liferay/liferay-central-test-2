@@ -12,12 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.kernel.velocity;
+package com.liferay.portal.kernel.transformation;
 
-import com.liferay.portal.kernel.transformation.TransformationContext;
+import com.liferay.portal.theme.ThemeDisplay;
+
+import java.util.Map;
 
 /**
- * @author Raymond Augé
+ * @author Marcellus Tavares
  */
-public interface VelocityContext extends TransformationContext {
+public interface Transformer {
+
+	public String transform(
+			ThemeDisplay themeDisplay, Map<String, String> tokens,
+			String viewMode, String languageId, String xml, String script,
+			String langType)
+		throws Exception;
+
 }
