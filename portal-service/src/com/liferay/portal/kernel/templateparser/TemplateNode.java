@@ -47,39 +47,46 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		put("options", new ArrayList<String>());
 	}
 
-	public void appendChild(TemplateNode child) {
-		_children.put(child.getName(), child);
-		put(child.getName(), child);
+	public void appendChild(TemplateNode templateNode) {
+		_childTemplateNodes.put(templateNode.getName(), templateNode);
+
+		put(templateNode.getName(), templateNode);
 	}
 
-	public void appendChildren(List<TemplateNode> children) {
-		for (TemplateNode child : children) {
-			appendChild(child);
+	public void appendChildren(List<TemplateNode> templateNodes) {
+		for (TemplateNode templateNode : templateNodes) {
+			appendChild(templateNode);
 		}
 	}
 
 	public void appendOption(String option) {
-		getOptions().add(option);
+		List<String> options = getOptions();
+
+		options.add(option);
 	}
 
 	public void appendOptions(List<String> options) {
-		getOptions().addAll(options);
+		List<String> curOptions = getOptions();
+
+		curOptions.addAll(options);
 	}
 
-	public void appendSibling(TemplateNode sibling) {
-		_siblings.add(sibling);
+	public void appendSibling(TemplateNode templateNode) {
+		_siblingTemplateNodes.add(templateNode);
 	}
 
 	public TemplateNode getChild(String name) {
-		return _children.get(name);
+		return _childTemplateNodes.get(name);
 	}
 
 	public List<TemplateNode> getChildren() {
-		return new ArrayList<TemplateNode>(_children.values());
+		return new ArrayList<TemplateNode>(_childTemplateNodes.values());
 	}
 
 	public String getData() {
-		if (getType().equals("link_to_layout")) {
+		String type = getType();
+
+		if (type.equals("link_to_layout")) {
 			String data = (String)get("data");
 
 			int pos = data.indexOf(CharPool.AT);
@@ -100,31 +107,32 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 			return getUrl();
 		}
 
-		if (getType().equals("link_to_layout")) {
-			String layoutType = getLayoutType();
+		String type = getType();
 
-			long layoutId = getLayoutId();
-
-			boolean privateLayout = layoutType.startsWith("private");
-
-			try {
-				Layout layout = LayoutLocalServiceUtil.getLayout(
-					_themeDisplay.getScopeGroupId(), privateLayout, layoutId);
-
-				return PortalUtil.getLayoutFriendlyURL(layout, _themeDisplay);
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Error finding friendly Url on page " +
-							_themeDisplay.getURLCurrent(), e);
-				}
-
-				return getUrl();
-			}
+		if (!type.equals("link_to_layout")) {
+			return StringPool.BLANK;
 		}
 
-		return StringPool.BLANK;
+		String layoutType = getLayoutType();
+
+		boolean privateLayout = layoutType.startsWith("private");
+
+		try {
+			Layout layout = LayoutLocalServiceUtil.getLayout(
+				_themeDisplay.getScopeGroupId(), privateLayout, getLayoutId());
+
+			return PortalUtil.getLayoutFriendlyURL(layout, _themeDisplay);
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Error finding friendly URL on page " +
+						_themeDisplay.getURLCurrent(),
+					e);
+			}
+
+			return getUrl();
+		}
 	}
 
 	public String getName() {
@@ -136,7 +144,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	}
 
 	public List<TemplateNode> getSiblings() {
-		return _siblings;
+		return _siblingTemplateNodes;
 	}
 
 	public String getType() {
@@ -144,33 +152,35 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 	}
 
 	public String getUrl() {
-		if (getType().equals("link_to_layout")) {
-			StringBundler sb = new StringBundler(5);
+		String type = getType();
 
-			String layoutType = getLayoutType();
-
-			if (layoutType.equals(_LAYOUT_TYPE_PRIVATE_GROUP)) {
-				sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
-			}
-			else if (layoutType.equals(_LAYOUT_TYPE_PRIVATE_USER)) {
-				sb.append(PortalUtil.getPathFriendlyURLPrivateUser());
-			}
-			else if (layoutType.equals(_LAYOUT_TYPE_PUBLIC)) {
-				sb.append(PortalUtil.getPathFriendlyURLPublic());
-			}
-			else {
-				sb.append("@friendly_url_current@");
-			}
-
-			sb.append(StringPool.SLASH);
-			sb.append("@group_id@");
-			sb.append(StringPool.SLASH);
-			sb.append(getLayoutId());
-
-			return sb.toString();
+		if (!type.equals("link_to_layout")) {
+			return StringPool.BLANK;
 		}
 
-		return StringPool.BLANK;
+		StringBundler sb = new StringBundler(5);
+
+		String layoutType = getLayoutType();
+
+		if (layoutType.equals(_LAYOUT_TYPE_PRIVATE_GROUP)) {
+			sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+		}
+		else if (layoutType.equals(_LAYOUT_TYPE_PRIVATE_USER)) {
+			sb.append(PortalUtil.getPathFriendlyURLPrivateUser());
+		}
+		else if (layoutType.equals(_LAYOUT_TYPE_PUBLIC)) {
+			sb.append(PortalUtil.getPathFriendlyURLPublic());
+		}
+		else {
+			sb.append("@friendly_url_current@");
+		}
+
+		sb.append(StringPool.SLASH);
+		sb.append("@group_id@");
+		sb.append(StringPool.SLASH);
+		sb.append(getLayoutId());
+
+		return sb.toString();
 	}
 
 	protected long getLayoutId() {
@@ -205,9 +215,10 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 
 	private static Log _log = LogFactoryUtil.getLog(TemplateNode.class);
 
-	private Map<String, TemplateNode> _children =
+	private Map<String, TemplateNode> _childTemplateNodes =
 		new LinkedHashMap<String, TemplateNode>();
-	private List<TemplateNode> _siblings = new ArrayList<TemplateNode>();
+	private List<TemplateNode> _siblingTemplateNodes =
+		new ArrayList<TemplateNode>();
 	private ThemeDisplay _themeDisplay;
 
 }
