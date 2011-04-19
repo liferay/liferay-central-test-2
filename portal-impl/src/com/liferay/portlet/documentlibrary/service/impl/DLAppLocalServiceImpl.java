@@ -32,7 +32,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLAppLocalServiceBaseImpl;
 
 import java.io.File;
@@ -409,8 +408,9 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	public Folder getMountFolder(long repositoryId)
 		throws PortalException, SystemException {
 
-		return new LiferayFolder(DLFolderLocalServiceUtil.getMountFolder(
-			repositoryId));
+		DLFolder dlFolder = dlFolderLocalService.getMountFolder(repositoryId);
+
+		return new LiferayFolder(dlFolder);
 	}
 
 	public FileEntry moveFileEntry(
