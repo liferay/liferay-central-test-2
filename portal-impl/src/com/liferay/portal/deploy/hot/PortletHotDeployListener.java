@@ -55,6 +55,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
+import com.liferay.portal.spring.context.PortletContextLoader;
 import com.liferay.portal.spring.context.PortletContextLoaderListener;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
@@ -205,12 +206,17 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Spring initialization lock
 
-		String lockKey = PortletContextLoaderListener.getLockKey(
-			servletContext);
+		String configLocation = servletContext.getInitParameter(
+			PortletContextLoader.PORTAL_CONFIG_LOCATION_PARAM);
 
-		Lock lock = LockRegistry.allocateLock(lockKey, lockKey);
+		if (Validator.isNotNull(configLocation)) {
+			String lockKey = PortletContextLoaderListener.getLockKey(
+				servletContext);
 
-		lock.lock();
+			Lock lock = LockRegistry.allocateLock(lockKey, lockKey);
+
+			lock.lock();
+		}
 
 		// Company ids
 

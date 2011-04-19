@@ -31,7 +31,7 @@ public class PortletContextLoader extends ContextLoader {
 		ConfigurableWebApplicationContext applicationContext) {
 
 		String configLocation = servletContext.getInitParameter(
-			_PORTAL_CONFIG_LOCATION_PARAM);
+			PORTAL_CONFIG_LOCATION_PARAM);
 
 		applicationContext.setConfigLocation(configLocation);
 	}
@@ -40,7 +40,7 @@ public class PortletContextLoader extends ContextLoader {
 		return PortletApplicationContext.class;
 	}
 
-	private static final String _PORTAL_CONFIG_LOCATION_PARAM =
+	public static final String PORTAL_CONFIG_LOCATION_PARAM =
 		"portalContextConfigLocation";
 
 }
