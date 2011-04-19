@@ -114,6 +114,9 @@ body.html-editor {
 .html-editor.portlet-message-boards blockquote:after {
 }
 
+.html-editor.portlet-message-boards pre {
+}
+
 /* ---------- Text formatting ---------- */
 
 b, strong {
