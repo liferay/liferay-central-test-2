@@ -16,7 +16,6 @@ package com.liferay.portlet.asset.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -184,42 +183,10 @@ public class AssetVocabularyLocalServiceImpl
 		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 
 		for (long groupId : groupIds) {
-			vocabularies.addAll(getGroupVocabularies(groupId));
-		}
+			List<AssetVocabulary> groupVocabularies = getGroupVocabularies(
+				groupId);
 
-		return vocabularies;
-	}
-
-	public List<AssetVocabulary> getGroupVocabularies(
-			long groupId, boolean createDefaultVocabulary)
-		throws PortalException, SystemException {
-
-		List<AssetVocabulary> vocabularies =
-			assetVocabularyPersistence.findByGroupId(groupId);
-
-		if (createDefaultVocabulary && vocabularies.isEmpty()) {
-			Group group = groupLocalService.getGroup(groupId);
-
-			long defaultUserId = userLocalService.getDefaultUserId(
-				group.getCompanyId());
-
-			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setScopeGroupId(groupId);
-
-			Map<Locale, String> titleMap = new HashMap<Locale, String>();
-
-			titleMap.put(
-				LocaleUtil.getDefault(), PropsValues.ASSET_VOCABULARY_DEFAULT);
-
-			AssetVocabulary vocabulary =
-				assetVocabularyLocalService.addVocabulary(
-					defaultUserId, StringPool.BLANK, titleMap, null,
-					StringPool.BLANK, serviceContext);
-
-			vocabularies = ListUtil.copy(vocabularies);
-
-			vocabularies.add(vocabulary);
+			vocabularies.addAll(groupVocabularies);
 		}
 
 		return vocabularies;
@@ -229,6 +196,42 @@ public class AssetVocabularyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return getGroupVocabularies(groupId, true);
+	}
+
+	public List<AssetVocabulary> getGroupVocabularies(
+			long groupId, boolean createDefaultVocabulary)
+		throws PortalException, SystemException {
+
+		List<AssetVocabulary> vocabularies =
+			assetVocabularyPersistence.findByGroupId(groupId);
+
+		if (!vocabularies.isEmpty() || !createDefaultVocabulary) {
+			return vocabularies;
+		}
+
+		Group group = groupLocalService.getGroup(groupId);
+
+		long defaultUserId = userLocalService.getDefaultUserId(
+			group.getCompanyId());
+
+		Map<Locale, String> titleMap = new HashMap<Locale, String>();
+
+		titleMap.put(
+			LocaleUtil.getDefault(), PropsValues.ASSET_VOCABULARY_DEFAULT);
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setScopeGroupId(groupId);
+
+		AssetVocabulary vocabulary = assetVocabularyLocalService.addVocabulary(
+			defaultUserId, StringPool.BLANK, titleMap, null, StringPool.BLANK,
+			serviceContext);
+
+		vocabularies = new ArrayList<AssetVocabulary>();
+
+		vocabularies.add(vocabulary);
+
+		return vocabularies;
 	}
 
 	public AssetVocabulary getGroupVocabulary(long groupId, String name)
