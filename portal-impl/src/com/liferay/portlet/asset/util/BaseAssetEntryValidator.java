@@ -55,14 +55,14 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 			try {
 				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 					group.getCompanyId());
-	
+
 				vocabularies = ListUtil.copy(vocabularies);
-	
+
 				vocabularies.addAll(
 					AssetVocabularyLocalServiceUtil.getGroupVocabularies(
 						companyGroup.getGroupId()));
 			}
-			catch (NoSuchGroupException nsge) {				
+			catch (NoSuchGroupException nsge) {
 			}
 		}
 
