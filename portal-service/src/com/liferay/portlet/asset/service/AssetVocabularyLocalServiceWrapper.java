@@ -332,18 +332,18 @@ public class AssetVocabularyLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyLocalService.getGroupVocabularies(groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId, boolean createDefaultVocabulary)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetVocabularyLocalService.getGroupVocabularies(groupId,
 			createDefaultVocabulary);
-	}
-
-	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _assetVocabularyLocalService.getGroupVocabularies(groupId);
 	}
 
 	public com.liferay.portlet.asset.model.AssetVocabulary getGroupVocabulary(
