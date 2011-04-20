@@ -29,7 +29,7 @@ import java.util.Map;
  */
 public class TestSampleSQLBuilder {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
 		String sqlDir = arguments.get("sql.dir");
@@ -40,16 +40,13 @@ public class TestSampleSQLBuilder {
 		new TestSampleSQLBuilder(sqlDir, outputDir);
 	}
 
-	public TestSampleSQLBuilder(String sqlDir, String outputDir) {
-		try {
-			_sqlDir = sqlDir;
-			_outputDir = outputDir;
+	public TestSampleSQLBuilder(String sqlDir, String outputDir)
+		throws Exception {
 
-			_loadHypersonic();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		_sqlDir = sqlDir;
+		_outputDir = outputDir;
+
+		_loadHypersonic();
 	}
 
 	private void _loadHypersonic() throws Exception {
