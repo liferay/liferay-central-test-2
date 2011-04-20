@@ -17,7 +17,8 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
-import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
+import com.liferay.portal.kernel.cache.PortalCache;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -649,7 +650,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		Long userGroupId = null;
 
-		if (PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE > 0) {
+		if (PropsValues.LDAP_IMPORT_GROUP_CACHE_ENABLED) {
 			StringBundler sb = new StringBundler(5);
 
 			sb.append(ldapServerId);
@@ -660,7 +661,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			userGroupIdKey = sb.toString();
 
-			userGroupId = _userGroupIds.get(userGroupIdKey);
+			userGroupId = (Long) _userGroupIds.get(userGroupIdKey);
 		}
 
 		if (userGroupId != null) {
@@ -690,7 +691,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			userGroupId = userGroup.getUserGroupId();
 
-			if (PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE > 0) {
+			if (PropsValues.LDAP_IMPORT_GROUP_CACHE_ENABLED) {
 				_userGroupIds.put(userGroupIdKey, userGroupId);
 			}
 		}
@@ -1121,8 +1122,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		PortalLDAPImporterImpl.class);
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
-	private ConcurrentLRUCache<String, Long> _userGroupIds =
-		new ConcurrentLRUCache<String, Long>(
-			PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE);
+	private PortalCache _userGroupIds =
+		SingleVMPoolUtil.getCache(PortalLDAPImporter.class.getName(), false);
 
 }
