@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncTeeWriter;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
@@ -47,6 +48,8 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -105,7 +108,7 @@ public class SampleSQLBuilder {
 			arguments.get("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
-			baseDir, outputDir, dbType, maxBlogsEntryCommentCount,
+			arguments, baseDir, outputDir, dbType, maxBlogsEntryCommentCount,
 			maxBlogsEntryCount,	maxGroupCount, maxMBCategoryCount,
 			maxMBMessageCount, maxMBThreadCount, maxUserCount,
 			maxUserToGroupCount, maxWikiNodeCount, maxWikiPageCommentCount,
@@ -113,8 +116,8 @@ public class SampleSQLBuilder {
 	}
 
 	public SampleSQLBuilder(
-		String baseDir, String outputDir, String dbType,
-		int maxBlogsEntryCommentCount, int maxBlogsEntryCount,
+		Map<String, String> arguments, String baseDir, String outputDir,
+		String dbType, int maxBlogsEntryCommentCount, int maxBlogsEntryCount,
 		int maxGroupCount, int maxMBCategoryCount, int maxMBMessageCount,
 		int maxMBThreadCount, int maxUserCount, int maxUserToGroupCount,
 		int maxWikiNodeCount, int maxWikiPageCommentCount, int maxWikiPageCount,
@@ -183,30 +186,28 @@ public class SampleSQLBuilder {
 				FileUtil.deltree(_tempDir);
 			}
 
-			StringBundler dataSetInfo = new StringBundler(12);
+			StringBundler sb = new StringBundler();
 
-			dataSetInfo.append("user.count=");
-			dataSetInfo.append(_maxUserCount);
+			List<String> keys = ListUtil.fromCollection(arguments.keySet());
 
-			dataSetInfo.append("\nblogs.count=");
-			dataSetInfo.append(_maxBlogsEntryCount);
+			Collections.sort(keys);
 
-			dataSetInfo.append("\nmessageboards.category.count=");
-			dataSetInfo.append(_maxMBCategoryCount);
-			dataSetInfo.append("\nmessageboards.thread.count=");
-			dataSetInfo.append(_maxMBThreadCount);
+			for (String key : keys) {
+				if (!key.startsWith("sample.sql")) {
+					continue;
+				}
 
-			dataSetInfo.append("\nwiki.node.count=");
-			dataSetInfo.append(_maxWikiNodeCount);
-			dataSetInfo.append("\nwiki.page.count=");
-			dataSetInfo.append(_maxWikiPageCount);
+				String value = arguments.get(key);
 
-			Writer dataSetInfoWriter = new FileWriter(
-				new File(_outputDir, "dataset_info.properties"));
+				sb.append(key);
+				sb.append(StringPool.EQUAL);
+				sb.append(value);
+				sb.append(StringPool.NEW_LINE);
+			}
 
-			dataSetInfo.writeTo(dataSetInfoWriter);
-
-			dataSetInfoWriter.close();
+			FileUtil.write(
+				new File(_outputDir, "benchmarks-actual.properties"),
+				sb.toString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
