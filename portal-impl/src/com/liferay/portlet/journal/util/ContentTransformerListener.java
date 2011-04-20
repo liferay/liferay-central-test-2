@@ -20,14 +20,17 @@ import com.liferay.portal.kernel.templateparser.BaseTransformerListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,15 +43,17 @@ public class ContentTransformerListener extends BaseTransformerListener {
 			_log.debug("onXml");
 		}
 
-		s = replace(s);
+		xml = replace(s);
 
-		return s;
+		return xml;
 	}
 
 	public String onScript(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onScript");
 		}
+
+		s = injectEditInPlace(xml, s);
 
 		return s;
 	}
@@ -59,6 +64,34 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		}
 
 		return s;
+	}
+
+	protected String injectEditInPlace(String xml, String script) {
+		try {
+			Document doc = SAXReaderUtil.read(xml);
+
+			List<Node> nodes = doc.selectNodes("//dynamic-element");
+
+			for (Node node : nodes) {
+				Element el = (Element)node;
+
+				String name = GetterUtil.getString(el.attributeValue("name"));
+				String type = GetterUtil.getString(el.attributeValue("type"));
+
+				if ((!name.startsWith("reserved-")) &&
+					(type.equals("text") || type.equals("text_box") ||
+					 type.equals("text_area"))) {
+
+					script = wrapField(script, name, type, "data");
+					script = wrapField(script, name, type, "getData()");
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.warn(e.getMessage());
+		}
+
+		return script;
 	}
 
 	/**
@@ -137,6 +170,19 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		}
 	}
 
+	protected String wrapField(
+		String script, String name, String type, String call) {
+
+		String field = "$" + name + "." + call;
+		String wrappedField =
+			"<span class=\"journal-content-eip-" + type + "\" " +
+				"id=\"journal-content-field-name-" + name + "\">" + field +
+					"</span>";
+
+		return StringUtil.replace(
+			script, "$editInPlace(" + field + ")", wrappedField);
+	}
+
 	private String _getDynamicContent(String xml, String elementName) {
 		String content = null;
 
@@ -161,6 +207,8 @@ public class ContentTransformerListener extends BaseTransformerListener {
 
 		return GetterUtil.getString(content);
 	}
+
+	private String xml;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ContentTransformerListener.class);
