@@ -49,8 +49,6 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.SimpleCounter;
 
-import edu.emory.mathcs.backport.java.util.Collections;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -62,6 +60,7 @@ import java.io.Writer;
 import java.nio.channels.FileChannel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
