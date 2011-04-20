@@ -382,19 +382,10 @@ if (Validator.isNull(redirect)) {
 		<aui:button disabled="<%= pending %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_FILE) %>">
-
-			<%
-			String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "attachments.value = '" + !attachments + "'; submitForm(document." + renderResponse.getNamespace() + "fm);";
-			%>
-
-			<aui:button onClick="<%= taglibOnClick %>" value='<%= ((attachments) ? "remove" : "attach") + "-files" %>' />
+			<aui:button onClick='<%= renderResponse.getNamespace() + "manageAttachments(" + !attachments + ");" %>' value='<%= ((attachments) ? "remove" : "attach") + "-files" %>' />
 		</c:if>
 
-		<%
-		String taglibOnClick = "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "body.value = " + renderResponse.getNamespace() + "getHTML(); document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "preview.value = 'true'; " + renderResponse.getNamespace() + "saveMessage(true);";
-		%>
-
-		<aui:button onClick="<%= taglibOnClick %>" value="preview" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "previewMessage();" %>' value="preview" />
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
 	</aui:button-row>
@@ -428,6 +419,20 @@ if (Validator.isNull(redirect)) {
 		content += <portlet:namespace />getHTML();
 
 		return content;
+	}
+
+	function <portlet:namespace />manageAttachments(removeAttachments) {
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
+		document.<portlet:namespace />fm.<portlet:namespace />attachments.value = removeAttachments;
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />previewMessage() {
+		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
+		document.<portlet:namespace />fm.<portlet:namespace />preview.value = 'true';
+
+		<portlet:namespace />saveMessage(true);
 	}
 
 	function <portlet:namespace />saveMessage(draft) {
