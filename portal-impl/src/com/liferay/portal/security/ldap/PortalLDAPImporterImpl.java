@@ -1121,7 +1121,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		PortalLDAPImporterImpl.class);
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
-	private Map<String, Long> _userGroupIds =
+	private ConcurrentLRUCache<String, Long> _userGroupIds =
 		new ConcurrentLRUCache<String, Long>(
 			PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE);
 
