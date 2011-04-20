@@ -182,6 +182,31 @@ public class SampleSQLBuilder {
 			finally {
 				FileUtil.deltree(_tempDir);
 			}
+
+			StringBundler dataSetInfo = new StringBundler(12);
+
+			dataSetInfo.append("user.count=");
+			dataSetInfo.append(_maxUserCount);
+
+			dataSetInfo.append("\nblogs.count=");
+			dataSetInfo.append(_maxBlogsEntryCount);
+
+			dataSetInfo.append("\nmessageboards.category.count=");
+			dataSetInfo.append(_maxMBCategoryCount);
+			dataSetInfo.append("\nmessageboards.thread.count=");
+			dataSetInfo.append(_maxMBThreadCount);
+
+			dataSetInfo.append("\nwiki.node.count=");
+			dataSetInfo.append(_maxWikiNodeCount);
+			dataSetInfo.append("\nwiki.page.count=");
+			dataSetInfo.append(_maxWikiPageCount);
+
+			Writer dataSetInfoWriter = new FileWriter(
+				"dataset_info.properties");
+
+			dataSetInfo.writeTo(dataSetInfoWriter);
+
+			dataSetInfoWriter.close();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
