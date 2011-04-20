@@ -2018,7 +2018,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						userId, portletDataContext.getScopeGroupId(),
 						structureId, autoStructureId, parentStructureId,
 						structure.getName(), structure.getDescription(),
-						structure.getXsd(), serviceContext);
+						structure.isWebContentType(), structure.getXsd(),
+						serviceContext);
 			}
 			else {
 				importedStructure =
@@ -2026,15 +2027,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						existingStructure.getGroupId(),
 						existingStructure.getStructureId(), parentStructureId,
 						structure.getName(), structure.getDescription(),
-						structure.getXsd(), serviceContext);
+						structure.isWebContentType(), structure.getXsd(),
+						serviceContext);
 			}
 		}
 		else {
 			importedStructure = JournalStructureLocalServiceUtil.addStructure(
 				userId, portletDataContext.getScopeGroupId(), structureId,
 				autoStructureId, parentStructureId, structure.getName(),
-				structure.getDescription(), structure.getXsd(),
-				serviceContext);
+				structure.getDescription(), structure.isWebContentType(),
+				structure.getXsd(), serviceContext);
 		}
 
 		portletDataContext.importClassedModel(

@@ -214,6 +214,8 @@ public class EditStructureAction extends PortletAction {
 			actionRequest, "parentStructureId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
+		boolean isWebContentType =
+			ParamUtil.getBoolean(actionRequest, "isWebContentType");
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -227,7 +229,7 @@ public class EditStructureAction extends PortletAction {
 
 			structure = JournalStructureServiceUtil.addStructure(
 				groupId, structureId, autoStructureId, parentStructureId, name,
-				description, xsd, serviceContext);
+				description, isWebContentType, xsd, serviceContext);
 		}
 		else {
 
@@ -235,7 +237,7 @@ public class EditStructureAction extends PortletAction {
 
 			structure = JournalStructureServiceUtil.updateStructure(
 				groupId, structureId, parentStructureId, name, description,
-				xsd, serviceContext);
+				isWebContentType, xsd, serviceContext);
 		}
 
 		// Recent structures
