@@ -1123,6 +1123,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
 	private PortalCache _userGroupIds = SingleVMPoolUtil.getCache(
-		PortalLDAPImporter.class.getName());
+		PortalLDAPImporter.class.getName(), false);
 
 }
