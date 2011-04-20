@@ -294,15 +294,16 @@
 		},
 
 		getTop: function() {
-			var win = window;
-			var parent = win.parent;
 			var topWindow = Util._topWindow;
-			var parentThemeDisplay;
 
 			if (!topWindow) {
-				while (parent != win) {
+				var parentWindow = window.parent;
+
+				var parentThemeDisplay;
+
+				while (parentWindow != window) {
 					try {
-						if (typeof parent.location.href == 'undefined') {
+						if (typeof parentWindow.location.href == 'undefined') {
 							break;
 						}
 					}
@@ -310,20 +311,20 @@
 						break;
 					}
 
-					parentThemeDisplay = parent.themeDisplay;
+					parentThemeDisplay = parentWindow.themeDisplay;
 
 					if (!parentThemeDisplay) {
 						break;
 					}
 					else if (!parentThemeDisplay.isStatePopUp()) {
-						topWindow = parent;
+						topWindow = parentWindow;
 
 						break;
 					}
 				}
 
 				if (!topWindow) {
-					topWindow = win;
+					topWindow = window;
 				}
 
 				Util._topWindow = topWindow;
