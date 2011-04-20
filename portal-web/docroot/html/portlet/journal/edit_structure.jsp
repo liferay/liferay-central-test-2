@@ -32,6 +32,8 @@ JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOUR
 
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
 
+boolean isWebContentType = BeanParamUtil.getBoolean(structure, request, "webContentType", false);
+
 Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 String structureId = BeanParamUtil.getString(structure, request, "structureId");
@@ -130,6 +132,8 @@ int tabIndex = 1;
 		<aui:input name="name" />
 
 		<aui:input name="description" />
+
+		<aui:input helpMessage="web-content-type-help" label="web-content-type" name="isWebContentType" type="checkbox" value="<%= isWebContentType %>" />
 
 		<aui:field-wrapper label="parent-structure">
 			<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
