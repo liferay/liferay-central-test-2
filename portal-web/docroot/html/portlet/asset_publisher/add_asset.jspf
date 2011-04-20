@@ -30,13 +30,6 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			<%
 			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 				String className = entry.getKey();
-				String message = "model.resource." + className;
-
-				if (className.contains(StringPool.UNDERLINE)) {
-					message = className.substring(className.indexOf(StringPool.UNDERLINE) + 1, className.length());
-					className = className.substring(0, className.indexOf(StringPool.UNDERLINE));
-				}
-
 				PortletURL addPortletURL = entry.getValue();
 
 				addPortletURL.setParameter("groupId", String.valueOf(groupId));
@@ -52,7 +45,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			%>
 
 				<liferay-ui:icon
-					message='<%= message %>'
+					message='<%= "model.resource." + className %>'
 					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
 					url='<%= taglibEditURL %>'
 				/>
@@ -66,7 +59,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(RenderRequest renderRequest, RenderResponse renderResponse, String className, String structureId, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
+public PortletURL getAddPortletURL(RenderRequest renderRequest, RenderResponse renderResponse, String className, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
@@ -101,10 +94,6 @@ public PortletURL getAddPortletURL(RenderRequest renderRequest, RenderResponse r
 
 				addPortletURL.setParameter("assetCategoryIds", StringUtil.merge(allAssetCategoryIds));
 				addPortletURL.setParameter("assetTagNames", StringUtil.merge(allAssetTagNames));
-
-				if (Validator.isNotNull(structureId)) {
-					addPortletURL.setParameter("structureId", structureId);
-				}
 			}
 		}
 	}
@@ -117,33 +106,13 @@ public Map<String, PortletURL> getAddPortletURLs(RenderRequest renderRequest, Re
 
 	Map<String, PortletURL> addPortletURLs = new TreeMap<String, PortletURL>(new ModelResourceComparator(themeDisplay.getLocale()));
 
-	ClassName className = null;
-	
 	for (long classNameId : classNameIds) {
-		className = ClassNameServiceUtil.getClassName(classNameId);
+		ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-		PortletURL addPortletURL = getAddPortletURL(renderRequest, renderResponse, className.getValue(), StringPool.BLANK, allAssetCategoryIds, allAssetTagNames);
+		PortletURL addPortletURL = getAddPortletURL(renderRequest, renderResponse, className.getValue(), allAssetCategoryIds, allAssetTagNames);
 
 		if (addPortletURL != null) {
 			addPortletURLs.put(className.getValue(), addPortletURL);
-		}
-	}
-
-	// Web content types
-
-	List<JournalStructure> webContentTypes = JournalStructureLocalServiceUtil.getWebContentTypes(themeDisplay.getScopeGroupId());
-
-	className = ClassNameServiceUtil.getClassName(JournalArticle.class.getName());
-
-	Iterator it = webContentTypes.listIterator();
-
-	while (it.hasNext()) {
-		JournalStructure webContentType = (JournalStructure) it.next();
-
-		PortletURL addPortletURL = getAddPortletURL(renderRequest, renderResponse, className.getValue(), webContentType.getStructureId(), allAssetCategoryIds, allAssetTagNames);
-
-		if (addPortletURL != null) {
-			addPortletURLs.put(className.getValue() + StringPool.UNDERLINE + webContentType.getName(), addPortletURL);
 		}
 	}
 
