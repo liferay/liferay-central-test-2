@@ -97,18 +97,29 @@ public class EditLDAPServerAction extends PortletAction {
 
 		String[] keys = properties.keySet().toArray(new String[0]);
 
+		String defaultPostfix = LDAPSettingsUtil.getPropertyPostfix(0);
+
+		String[] defaultKeys = new String[_KEYS.length];
+
+		for (int i = 0; i < _KEYS.length; i++) {
+			defaultKeys[i] = _KEYS[i] + defaultPostfix;
+		}
+
 		for (String key : keys) {
-			if (ArrayUtil.contains(_KEYS, key)) {
+			if (ArrayUtil.contains(defaultKeys, key)) {
 				String value = properties.remove(key);
 
-				if (key.equals(PropsKeys.LDAP_SECURITY_CREDENTIALS) &&
+				if (key.equals(
+					PropsKeys.LDAP_SECURITY_CREDENTIALS + defaultPostfix) &&
 					value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
 
 					value = PrefsPropsUtil.getString(
 						PropsKeys.LDAP_SECURITY_CREDENTIALS);
 				}
 
-				properties.setProperty(key + postfix, value);
+				key = key.replace(defaultPostfix, postfix);
+
+				properties.setProperty(key, value);
 			}
 		}
 
