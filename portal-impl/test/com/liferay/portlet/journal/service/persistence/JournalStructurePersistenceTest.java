@@ -80,6 +80,7 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		newJournalStructure.setParentStructureId(randomString());
 		newJournalStructure.setName(randomString());
 		newJournalStructure.setDescription(randomString());
+		newJournalStructure.setWebContentType(randomBoolean());
 		newJournalStructure.setXsd(randomString());
 
 		_persistence.update(newJournalStructure, false);
@@ -112,6 +113,8 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 			newJournalStructure.getName());
 		assertEquals(existingJournalStructure.getDescription(),
 			newJournalStructure.getDescription());
+		assertEquals(existingJournalStructure.getWebContentType(),
+			newJournalStructure.getWebContentType());
 		assertEquals(existingJournalStructure.getXsd(),
 			newJournalStructure.getXsd());
 	}
@@ -258,6 +261,7 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		journalStructure.setParentStructureId(randomString());
 		journalStructure.setName(randomString());
 		journalStructure.setDescription(randomString());
+		journalStructure.setWebContentType(randomBoolean());
 		journalStructure.setXsd(randomString());
 
 		_persistence.update(journalStructure, false);

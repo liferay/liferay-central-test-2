@@ -1642,6 +1642,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="webContentType" type="boolean" />
 		<field name="xsd" type="String">
 			<hint-collection name="CLOB" />
 		</field>

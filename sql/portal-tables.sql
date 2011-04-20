@@ -803,6 +803,7 @@ create table JournalStructure (
 	parentStructureId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
+	webContentType BOOLEAN,
 	xsd TEXT null
 );
 
