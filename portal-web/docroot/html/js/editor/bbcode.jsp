@@ -18,8 +18,8 @@
 
 <%
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
-String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String name = namespace + GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"));
 %>
 
 <div class="lfr-textarea message-edit <%= cssClass %>">
