@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.journal.util;
+package com.liferay.portal.kernel.templateparser;
 
 import com.liferay.portal.kernel.templateparser.TemplateParser;
 import com.liferay.portal.kernel.templateparser.TransformException;
