@@ -17,14 +17,13 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
+import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.kernel.util.LRUMap;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -646,15 +645,11 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			List<Long> newUserGroupIds)
 		throws Exception {
 
-		Map<String, Long> userGroupIds = null;
-
 		String userGroupIdKey = null;
 
 		Long userGroupId = null;
 
 		if (PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE > 0) {
-			userGroupIds = _userGroupIds.get();
-
 			StringBundler sb = new StringBundler(5);
 
 			sb.append(ldapServerId);
@@ -665,7 +660,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			userGroupIdKey = sb.toString();
 
-			userGroupId = userGroupIds.get(userGroupIdKey);
+			userGroupId = _userGroupIds.get(userGroupIdKey);
 		}
 
 		if (userGroupId != null) {
@@ -696,7 +691,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			userGroupId = userGroup.getUserGroupId();
 
 			if (PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE > 0) {
-				userGroupIds.put(userGroupIdKey, userGroupId);
+				_userGroupIds.put(userGroupIdKey, userGroupId);
 			}
 		}
 
@@ -1126,9 +1121,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		PortalLDAPImporterImpl.class);
 
 	private LDAPToPortalConverter _ldapToPortalConverter;
-	private InitialThreadLocal<Map<String, Long>> _userGroupIds =
-		new InitialThreadLocal<Map<String, Long>>(
-			PortalLDAPImporterImpl.class.getName() + "._userGroupIds",
-			new LRUMap<String, Long>(PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE));
+	private Map<String, Long> _userGroupIds =
+		new ConcurrentLRUCache<String, Long>(
+			PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE);
 
 }
