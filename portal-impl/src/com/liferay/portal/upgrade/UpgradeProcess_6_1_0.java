@@ -20,6 +20,7 @@ import com.liferay.portal.upgrade.v6_1_0.UpgradeAdminPortlets;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeDocumentLibrary;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeJournal;
+import com.liferay.portal.upgrade.v6_1_0.UpgradeJournalStructure;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeLayout;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeLock;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeMessageBoards;
@@ -46,6 +47,7 @@ public class UpgradeProcess_6_1_0 extends UpgradeProcess {
 		upgrade(UpgradeAdminPortlets.class);
 		upgrade(UpgradeDocumentLibrary.class);
 		upgrade(UpgradeJournal.class);
+		upgrade(UpgradeJournalStructure.class);
 		upgrade(UpgradeLayout.class);
 		upgrade(UpgradeLock.class);
 		upgrade(UpgradeMessageBoards.class);

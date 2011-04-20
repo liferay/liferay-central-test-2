@@ -9,6 +9,8 @@ alter table BlogsEntry add smallImageURL STRING null;
 
 alter table BookmarksEntry add description VARCHAR(75) null;
 
+alter table JournalStructure add webContentType BOOLEAN;
+
 COMMIT_TRANSACTION;
 
 update BookmarksEntry set description = comments;
