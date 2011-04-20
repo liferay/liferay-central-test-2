@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
+import com.liferay.portal.kernel.util.LRUMap;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -61,11 +62,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.naming.Binding;
 import javax.naming.NameNotFoundException;
@@ -156,10 +155,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			return;
 		}
 
-		if (!PropsValues.LDAP_IMPORT_GROUP_CACHE_ENABLED) {
-			_localGroupDNCache.set(new HashMap<String, Long>());
-		}
-
 		try {
 			Properties userMappings = LDAPSettingsUtil.getUserMappings(
 				ldapServerId, companyId);
@@ -194,8 +189,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			_log.error("Error importing LDAP users and groups", e);
 		}
 		finally {
-			_localGroupDNCache.remove();
-
 			if (ldapContext != null) {
 				ldapContext.close();
 			}
@@ -653,41 +646,36 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			List<Long> newUserGroupIds)
 		throws Exception {
 
-		Map<String, Long> groupDNCache = null;
+		Map<String, Long> userGroupIds = null;
 
-		if (PropsValues.LDAP_IMPORT_GROUP_CACHE_ENABLED) {
-			groupDNCache = _groupDNCache;
-		}
-		else {
-			groupDNCache = _localGroupDNCache.get();
-		}
+		String userGroupIdKey = null;
 
 		Long userGroupId = null;
 
-		String cacheKey = null;
+		if (PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE > 0) {
+			userGroupIds = _userGroupIds.get();
 
-		if (groupDNCache != null) {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(String.valueOf(ldapServerId));
+			sb.append(ldapServerId);
 			sb.append(StringPool.UNDERLINE);
-			sb.append(String.valueOf(companyId));
+			sb.append(companyId);
 			sb.append(StringPool.UNDERLINE);
 			sb.append(fullGroupDN);
 
-			cacheKey = sb.toString();
+			userGroupIdKey = sb.toString();
 
-			userGroupId = _groupDNCache.get(cacheKey);
+			userGroupId = userGroupIds.get(userGroupIdKey);
 		}
 
 		if (userGroupId != null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Skipping re-import of fullGroupDN " + fullGroupDN);
+				_log.debug("Skipping reimport of full group DN " + fullGroupDN);
 			}
 		}
 		else {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Importing fullGroupDN " + fullGroupDN);
+				_log.debug("Importing full froup DN " + fullGroupDN);
 			}
 
 			Attributes groupAttributes = null;
@@ -698,7 +686,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
-					"LDAP group not found with fullGroupDN " + fullGroupDN,
+					"LDAP group not found with full group DN " + fullGroupDN,
 					nnfe);
 			}
 
@@ -707,8 +695,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 			userGroupId = userGroup.getUserGroupId();
 
-			if (groupDNCache != null) {
-				groupDNCache.put(cacheKey, userGroupId);
+			if (PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE > 0) {
+				userGroupIds.put(userGroupIdKey, userGroupId);
 			}
 		}
 
@@ -1137,14 +1125,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalLDAPImporterImpl.class);
 
-	private Map<String, Long> _groupDNCache =
-		new ConcurrentHashMap<String, Long>();
-
-	private InitialThreadLocal<Map<String, Long>> _localGroupDNCache =
-		new InitialThreadLocal<Map<String, Long>>(
-			PortalLDAPImporterImpl.class.getName() + "._localGroupDNCache",
-			null);
-
 	private LDAPToPortalConverter _ldapToPortalConverter;
+	private InitialThreadLocal<Map<String, Long>> _userGroupIds =
+		new InitialThreadLocal<Map<String, Long>>(
+			PortalLDAPImporterImpl.class.getName() + "._userGroupIds",
+			new LRUMap<String, Long>(PropsValues.LDAP_IMPORT_GROUP_CACHE_SIZE));
 
 }

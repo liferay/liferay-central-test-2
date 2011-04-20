@@ -1041,7 +1041,7 @@ public interface PropsKeys {
 
 	public static final String LDAP_IMPORT_ENABLED = "ldap.import.enabled";
 
-	public static final String LDAP_IMPORT_GROUP_CACHE_ENABLED = "ldap.import.group.cache.enabled";
+	public static final String LDAP_IMPORT_GROUP_CACHE_SIZE = "ldap.import.group.cache.size";
 
 	public static final String LDAP_IMPORT_GROUP_SEARCH_FILTER = "ldap.import.group.search.filter";
 
