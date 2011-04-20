@@ -91,12 +91,6 @@ public class EditLDAPServerAction extends PortletAction {
 			long companyId, UnicodeProperties properties)
 		throws Exception {
 
-		long ldapServerId = CounterLocalServiceUtil.increment();
-
-		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
-
-		String[] keys = properties.keySet().toArray(new String[0]);
-
 		String defaultPostfix = LDAPSettingsUtil.getPropertyPostfix(0);
 
 		String[] defaultKeys = new String[_KEYS.length];
@@ -105,12 +99,18 @@ public class EditLDAPServerAction extends PortletAction {
 			defaultKeys[i] = _KEYS[i] + defaultPostfix;
 		}
 
+		long ldapServerId = CounterLocalServiceUtil.increment();
+
+		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+		String[] keys = properties.keySet().toArray(new String[0]);
+
 		for (String key : keys) {
 			if (ArrayUtil.contains(defaultKeys, key)) {
 				String value = properties.remove(key);
 
 				if (key.equals(
-					PropsKeys.LDAP_SECURITY_CREDENTIALS + defaultPostfix) &&
+						PropsKeys.LDAP_SECURITY_CREDENTIALS + defaultPostfix) &&
 					value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
 
 					value = PrefsPropsUtil.getString(
