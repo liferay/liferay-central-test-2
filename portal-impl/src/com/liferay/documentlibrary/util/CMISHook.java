@@ -49,6 +49,7 @@ import java.util.Map;
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
 import org.apache.chemistry.opencmis.client.api.Folder;
+import org.apache.chemistry.opencmis.client.api.ItemIterable;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.apache.chemistry.opencmis.client.api.Repository;
 import org.apache.chemistry.opencmis.client.api.Session;
@@ -77,8 +78,8 @@ public class CMISHook extends BaseHook {
 		}
 	}
 
-	public void addDirectory(long companyId, long repositoryId, String dirName)
-		throws PortalException {
+	public void addDirectory(
+		long companyId, long repositoryId, String dirName) {
 
 		Folder folder = getRepositoryFolder(companyId, repositoryId);
 
@@ -111,8 +112,7 @@ public class CMISHook extends BaseHook {
 	}
 
 	public void deleteDirectory(
-			long companyId, String portletId, long repositoryId, String dirName)
-		throws PortalException {
+		long companyId, String portletId, long repositoryId, String dirName) {
 
 		Folder repositoryFolder = getRepositoryFolder(companyId, repositoryId);
 
@@ -190,8 +190,7 @@ public class CMISHook extends BaseHook {
 	}
 
 	public String[] getFileNames(
-			long companyId, long repositoryId, String dirName)
-		throws PortalException {
+		long companyId, long repositoryId, String dirName) {
 
 		Folder folder = getRepositoryFolder(companyId, repositoryId);
 
@@ -209,10 +208,12 @@ public class CMISHook extends BaseHook {
 
 		List<Folder> folders = getFolders(folder);
 
-		String [] fileNames = new String[folders.size()];
+		String[] fileNames = new String[folders.size()];
 
 		for (int i = 0; i < folders.size(); i++) {
-			String fileName = folders.get(i).getName();
+			Folder curFolder = folders.get(i);
+
+			String fileName = curFolder.getName();
 
 			fileNames[i] = dirName.concat(StringPool.SLASH).concat(fileName);
 		}
@@ -260,9 +261,8 @@ public class CMISHook extends BaseHook {
 	}
 
 	public boolean hasFile(
-			long companyId, long repositoryId, String fileName,
-			String versionNumber)
-		throws PortalException {
+		long companyId, long repositoryId, String fileName,
+		String versionNumber) {
 
 		Folder versioningFolder = getVersioningFolder(
 			companyId, repositoryId, fileName, true);
@@ -500,13 +500,17 @@ public class CMISHook extends BaseHook {
 	}
 
 	protected Document getDocument(Folder parentFolder, String name) {
-		Iterator<CmisObject> iterator = parentFolder.getChildren().iterator();
+		ItemIterable<CmisObject> cmisObjects = parentFolder.getChildren();
 
-		while (iterator.hasNext()) {
-			CmisObject object = iterator.next();
+		Iterator<CmisObject> itr = cmisObjects.iterator();
 
-			if (object.getName().equals(name) && object instanceof Document) {
-				return (Document)object;
+		while (itr.hasNext()) {
+			CmisObject cmisObject = itr.next();
+
+			if (name.equals(cmisObject.getName()) &&
+				cmisObject instanceof Document) {
+
+				return (Document)cmisObject;
 			}
 		}
 
@@ -514,13 +518,17 @@ public class CMISHook extends BaseHook {
 	}
 
 	protected Folder getFolder(Folder parentFolder, String name) {
-		Iterator<CmisObject> iterator = parentFolder.getChildren().iterator();
+		ItemIterable<CmisObject> cmisObjects = parentFolder.getChildren();
 
-		while (iterator.hasNext()) {
-			CmisObject object = iterator.next();
+		Iterator<CmisObject> itr = cmisObjects.iterator();
 
-			if (object.getName().equals(name) && object instanceof Folder) {
-				return (Folder)object;
+		while (itr.hasNext()) {
+			CmisObject cmisObject = itr.next();
+
+			if (name.equals(cmisObject.getName()) &&
+				cmisObject instanceof Folder) {
+
+				return (Folder)cmisObject;
 			}
 		}
 
@@ -530,13 +538,15 @@ public class CMISHook extends BaseHook {
 	protected List<Folder> getFolders(Folder folder) {
 		List<Folder> folders = new ArrayList<Folder>();
 
-		Iterator<CmisObject> iterator = folder.getChildren().iterator();
+		ItemIterable<CmisObject> cmisObjects = folder.getChildren();
 
-		while (iterator.hasNext()) {
-			CmisObject object = iterator.next();
+		Iterator<CmisObject> itr = cmisObjects.iterator();
 
-			if (object instanceof Folder) {
-				folders.add((Folder)object);
+		while (itr.hasNext()) {
+			CmisObject cmisObject = itr.next();
+
+			if (cmisObject instanceof Folder) {
+				folders.add((Folder)cmisObject);
 			}
 		}
 
@@ -603,7 +613,6 @@ public class CMISHook extends BaseHook {
 	private static Log _log = LogFactoryUtil.getLog(CMISHook.class);
 
 	private static Session _session;
-
 	private static Folder _systemRootDir;
 
 	static {

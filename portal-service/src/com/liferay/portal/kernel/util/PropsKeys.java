@@ -309,9 +309,9 @@ public interface PropsKeys {
 
 	public static final String CDN_HOST_HTTPS = "cdn.host.https";
 
-	public static final String CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL = "cluster.executor.heartbeat.interval";
-
 	public static final String CLUSTER_EXECUTOR_DEBUG_ENABLED = "cluster.executor.debug.enabled";
+
+	public static final String CLUSTER_EXECUTOR_HEARTBEAT_INTERVAL = "cluster.executor.heartbeat.interval";
 
 	public static final String CLUSTER_LINK_AUTODETECT_ADDRESS = "cluster.link.autodetect.address";
 
@@ -565,9 +565,9 @@ public interface PropsKeys {
 
 	public static final String DL_PUBLISH_TO_LIVE_BY_DEFAULT = "dl.publish.to.live.by.default";
 
-	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
-
 	public static final String DL_REPOSITORY_CMIS_DELETE_DEPTH = "dl.repository.cmis.delete.depth";
+
+	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
 
 	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";
 
@@ -805,9 +805,9 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_FORM_ADD = "journal.article.form.add";
 
-	public static final String JOURNAL_ARTICLE_FORM_UPDATE = "journal.article.form.update";
-
 	public static final String JOURNAL_ARTICLE_FORM_TRANSLATE = "journal.article.form.translate";
+
+	public static final String JOURNAL_ARTICLE_FORM_UPDATE = "journal.article.form.update";
 
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = "journal.article.token.page.break";
 
