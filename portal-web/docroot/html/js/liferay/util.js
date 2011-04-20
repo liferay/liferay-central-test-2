@@ -296,20 +296,40 @@
 		getTop: function() {
 			var win = window;
 			var parent = win.parent;
-			var top = win;
+			var topWindow = Util._topWindow;
 			var parentThemeDisplay;
 
-			while (parent != win) {
-				parentThemeDisplay = parent.themeDisplay;
+			if (!topWindow) {
+				while (parent != win) {
+					try {
+						if (typeof parent.location.href == 'undefined') {
+							break;
+						}
+					}
+					catch (e) {
+						break;
+					}
 
-				if (parentThemeDisplay && !parentThemeDisplay.isStatePopUp()) {
-					top = parent;
+					parentThemeDisplay = parent.themeDisplay;
 
-					break;
+					if (!parentThemeDisplay) {
+						break;
+					}
+					else if (!parentThemeDisplay.isStatePopUp()) {
+						topWindow = parent;
+
+						break;
+					}
 				}
+
+				if (!topWindow) {
+					topWindow = win;
+				}
+
+				Util._topWindow = topWindow;
 			}
 
-			return top;
+			return topWindow;
 		},
 
 		getWindow: function(id) {
