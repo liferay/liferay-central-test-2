@@ -86,7 +86,7 @@ AUI().add(
 							instance.warn();
 						}
 						else {
-							newWaitTime = (instance.sessionTimeoutWarning - timeDiff) + 10000;
+							newWaitTime = (instance._timeoutDiff - timeDiff) + 10000;
 
 							instance._stateCheck = setTimeout(
 								function() {
