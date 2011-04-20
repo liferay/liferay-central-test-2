@@ -558,6 +558,8 @@ AUI().add(
 
 				A.getBody().removeClass('portlet-journal-edit-mode');
 
+				var editStructureLinkId = instance._getNamespacedId('editStructureLink');
+				var editStructureLink = A.one(editStructureLinkId);
 				var editStructureButton = instance.getById('editStructureButton');
 				var journalComponentList = instance.getById('#journalComponentList');
 				var saveStructureButton = instance.getById('saveStructureButton');
@@ -569,7 +571,8 @@ AUI().add(
 
 				var structureButtonText = Liferay.Language.get('edit');
 
-				editStructureButton.val(structureButtonText);
+				editStructureLink.show();
+				editStructureButton.ancestor('.yui3-aui-button').hide();
 
 				A.all('input.journal-list-label').attr('disabled', 'disabled');
 
@@ -641,6 +644,8 @@ AUI().add(
 
 				A.getBody().addClass('portlet-journal-edit-mode');
 
+				var editStructureLinkId = instance._getNamespacedId('editStructureLink');
+				var editStructureLink = A.one(editStructureLinkId);
 				var editStructureButton = instance.getById('editStructureButton');
 				var journalComponentList = instance.getById('#journalComponentList');
 				var saveStructureButton = instance.getById('saveStructureButton');
@@ -652,9 +657,9 @@ AUI().add(
 				journalComponentList.show();
 
 				var structureTree = instance.getById('#structureTree');
-				var structureButtonText = Liferay.Language.get('stop-editing');
 
-				editStructureButton.val(structureButtonText);
+				editStructureLink.hide();
+				editStructureButton.ancestor('.yui3-aui-button').show();
 
 				structureTree.all('.journal-list-label').attr('disabled', '');
 
@@ -2290,6 +2295,8 @@ AUI().add(
 				}
 
 				var changeStructureButton = instance.getById('changeStructureButton');
+				var editStructureLinkId = instance._getNamespacedId('editStructureLink');
+				var editStructureLink = A.one(editStructureLinkId);
 				var editStructureButton = instance.getById('editStructureButton');
 				var loadDefaultStructureButton = instance.getById('loadDefaultStructure');
 				var saveStructureButton = instance.getById('saveStructureButton');
@@ -2301,7 +2308,9 @@ AUI().add(
 					changeStructureButton.on(
 						'click',
 						function(event) {
-							var url = event.target.attr('dataChangeStructureUrl');
+							event.preventDefault();
+
+							var url = event.currentTarget.attr('href');
 
 							instance.openPopupWindow(url, 'ChangeStructure');
 						}
@@ -2351,14 +2360,20 @@ AUI().add(
 					editStructureButton.on(
 						'click',
 						function(event) {
-							if (body.hasClass('portlet-journal-edit-mode')) {
-								Liferay.reset('controlPanelSidebarHidden');
-								instance.disableEditMode();
-							}
-							else {
-								Liferay.set('controlPanelSidebarHidden', true);
-								instance.enableEditMode();
-							}
+							Liferay.reset('controlPanelSidebarHidden');
+							instance.disableEditMode();
+						}
+					);
+				}
+
+				if (editStructureLink) {
+				    editStructureLink.detach('click');
+
+					editStructureLink.on(
+						'click',
+						function(event) {
+							Liferay.set('controlPanelSidebarHidden', true);
+							instance.enableEditMode();
 						}
 					);
 				}
@@ -3430,6 +3445,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'aui-data-set', 'aui-datatype', 'aui-dialog', 'aui-io-request', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute']
+		requires: ['aui-base', 'aui-data-set', 'aui-datatype','aui-dialog', 'aui-dialog-iframe', 'aui-io-request', 'aui-nested-list', 'aui-overlay-context-panel', 'json', 'substitute']
 	}
 );
