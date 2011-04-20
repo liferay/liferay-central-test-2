@@ -347,7 +347,7 @@
 				if (!parentNode.getAttribute(TAG_CITE)) {
 					var endResult = instance._endResult;
 
-					for(var i = (endResult.length - 1); i >= 0; i--) {
+					for (var i = (endResult.length - 1); i >= 0; i--) {
 						if (endResult[i] === '[quote]') {
 							endResult[i] = '[quote=';
 
