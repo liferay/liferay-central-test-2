@@ -5,5 +5,5 @@ insert into MBCategory values ('${portalUUIDUtil.generate()}', ${mbCategory.cate
 <#if (mbCategory.categoryId != 0)>
 	${sampleSQLBuilder.insertSecurity("com.liferay.portlet.messageboards.model.MBCategory", mbCategory.categoryId)}
 
-	insert into MBMailingList values ('${portalUUIDUtil.generate()}', ${counter.get()}, ${mbCategory.groupId}, ${companyId}, ${mbCategory.userId}, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${mbCategory.categoryId}, '', 'pop3', '', 110, FALSE, '', '', 5, '', FALSE, '', 25, FALSE, '', '', FALSE);
+	insert into MBMailingList values ('${portalUUIDUtil.generate()}', ${counter.get()}, ${mbCategory.groupId}, ${companyId}, ${mbCategory.userId}, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ${mbCategory.categoryId}, '', 'pop3', '', 110, FALSE, '', '', 5, '', FALSE, '', 25, FALSE, '', '', FALSE, FALSE);
 </#if>
