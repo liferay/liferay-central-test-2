@@ -86,6 +86,14 @@ public class CMISRepositoryUtil {
 		}
 	}
 
+	public static OperationContext getOperationContext() {
+		return _operationContext;
+	}
+
+	public static SessionFactory getSessionFactory() {
+		return _sessionFactory;
+	}
+
 	public static String getTypeSettingsValue(
 			UnicodeProperties typeSettingsProperties, String typeSettingsKey)
 		throws InvalidRepositoryException {

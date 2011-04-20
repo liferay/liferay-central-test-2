@@ -323,16 +323,6 @@ public interface PropsKeys {
 
 	public static final String CLUSTER_LINK_ENABLED = "cluster.link.enabled";
 
-	public static final String CMIS_CREDENTIALS_PASSWORD = "cmis.credentials.password";
-
-	public static final String CMIS_CREDENTIALS_USERNAME = "cmis.credentials.username";
-
-	public static final String CMIS_REPOSITORY_URL = "cmis.repository.url";
-
-	public static final String CMIS_REPOSITORY_VERSION = "cmis.repository.version";
-
-	public static final String CMIS_SYSTEM_ROOT_DIR = "cmis.system.root.dir";
-
 	public static final String COMBO_CHECK_TIMESTAMP = "combo.check.timestamp";
 
 	public static final String COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE = "communities.control.panel.members.visible";
@@ -548,6 +538,14 @@ public interface PropsKeys {
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 
 	public static final String DL_FILE_RANK_ENABLED = "dl.file.rank.enabled";
+
+	public static final String DL_HOOK_CMIS_CREDENTIALS_PASSWORD = "dl.hook.cmis.credentials.password";
+
+	public static final String DL_HOOK_CMIS_CREDENTIALS_USERNAME = "dl.hook.cmis.credentials.username";
+
+	public static final String DL_HOOK_CMIS_REPOSITORY_URL = "dl.hook.cmis.repository.url";
+
+	public static final String DL_HOOK_CMIS_SYSTEM_ROOT_DIR = "dl.hook.cmis.system.root.dir";
 
 	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
 

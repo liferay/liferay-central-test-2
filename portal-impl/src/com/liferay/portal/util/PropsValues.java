@@ -240,16 +240,6 @@ public class PropsValues {
 
 	public static final boolean CLUSTER_LINK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CLUSTER_LINK_ENABLED));
 
-	public static final String CMIS_CREDENTIALS_PASSWORD = PropsUtil.get(PropsKeys.CMIS_CREDENTIALS_PASSWORD);
-
-	public static final String CMIS_CREDENTIALS_USERNAME = PropsUtil.get(PropsKeys.CMIS_CREDENTIALS_USERNAME);
-
-	public static final String CMIS_REPOSITORY_URL = PropsUtil.get(PropsKeys.CMIS_REPOSITORY_URL);
-
-	public static final String CMIS_REPOSITORY_VERSION = PropsUtil.get(PropsKeys.CMIS_REPOSITORY_VERSION);
-
-	public static final String CMIS_SYSTEM_ROOT_DIR = PropsUtil.get(PropsKeys.CMIS_SYSTEM_ROOT_DIR);
-
 	public static final boolean COMBO_CHECK_TIMESTAMP = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMBO_CHECK_TIMESTAMP));
 
 	public static final boolean COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE));
@@ -433,6 +423,14 @@ public class PropsValues {
 	public static final long DL_FILE_MAX_SIZE = GetterUtil.getLong(PropsUtil.get(PropsKeys.DL_FILE_MAX_SIZE));
 
 	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
+
+	public static final String DL_HOOK_CMIS_CREDENTIALS_PASSWORD = PropsUtil.get(PropsKeys.DL_HOOK_CMIS_CREDENTIALS_PASSWORD);
+
+	public static final String DL_HOOK_CMIS_CREDENTIALS_USERNAME = PropsUtil.get(PropsKeys.DL_HOOK_CMIS_CREDENTIALS_USERNAME);
+
+	public static final String DL_HOOK_CMIS_REPOSITORY_URL = PropsUtil.get(PropsKeys.DL_HOOK_CMIS_REPOSITORY_URL);
+
+	public static final String DL_HOOK_CMIS_SYSTEM_ROOT_DIR = PropsUtil.get(PropsKeys.DL_HOOK_CMIS_SYSTEM_ROOT_DIR);
 
 	public static String DL_HOOK_IMPL = PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
 
