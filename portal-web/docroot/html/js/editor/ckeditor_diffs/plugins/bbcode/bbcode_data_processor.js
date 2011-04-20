@@ -203,7 +203,7 @@
 
 				fontSize = parseFloat(fontSize, 10);
 				fontSize = Math.round((fontSize * bodySize)) + 'px';
-				
+
 				return instance._getFontSize(fontSize);
 			}
 			else if (REGEX_PERCENT.test(fontSize)) {
@@ -211,7 +211,7 @@
 
 				fontSize = parseFloat(fontSize, 10);
 				fontSize = Math.round(((fontSize * bodySize) / 100)) + 'px';
-				
+
 				return instance._getFontSize(fontSize);
 			}
 
@@ -343,11 +343,11 @@
 
 			var parentNode = element.parentNode;
 
-			if (parentNode && parentNode.tagName.toLowerCase() === TAG_BLOCKQUOTE) {
+			if (parentNode && (parentNode.tagName.toLowerCase() === TAG_BLOCKQUOTE)) {
 				if (!parentNode.getAttribute(TAG_CITE)) {
 					var endResult = instance._endResult;
 
-					for(var i = endResult.length - 1; i >= 0; i--) {
+					for(var i = (endResult.length - 1); i >= 0; i--) {
 						if (endResult[i] === '[quote]') {
 							endResult[i] = '[quote=';
 
