@@ -1254,8 +1254,11 @@ AUI().add(
 
 						dialogFields.dialogStructureName.val(structureNameInput.val());
 						dialogFields.dialogDescription.val(structureDescriptionInput.val());
-						dialogFields.dialogIsWebContentType.val(structureIsWebContentTypeInput.val());
 						dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
+
+						if (structureIsWebContentTypeInput) {
+							dialogFields.dialogIsWebContentType.val(structureIsWebContentTypeInput.val());
+						}
 
 						if (structureId) {
 							dialogFields.saveStructureAutogenerateId.hide();
