@@ -21,7 +21,11 @@
 
 	var REGEX_PX = /px$/i;
 
+	var TAG_BLOCKQUOTE = 'blockquote';
+
 	var TAG_CODE = 'code';
+
+	var TAG_CITE = 'cite';
 
 	var TAG_DIV = 'div';
 
@@ -334,6 +338,30 @@
 			}
 		},
 
+		_handleCite: function(element, listTagsIn, listTagsOut) {
+			var instance = this;
+
+			var parentNode = element.parentNode;
+
+			if (parentNode && parentNode.tagName.toLowerCase() === TAG_BLOCKQUOTE) {
+				var cite = parentNode.getAttribute(TAG_CITE);
+
+				if (!cite) {
+					var endResult = instance._endResult;
+
+					for( var i = endResult.length - 1; i >= 0; i--) {
+						if (endResult[i] === '[quote]') {
+							endResult[i] = '[quote=';
+
+							listTagsOut.push(']');
+
+							break;
+						}
+					}
+				}
+			}
+		},
+
 		_handleData: function(data, element) {
 			var instance = this;
 
@@ -400,8 +428,11 @@
 				else if (tagName == 'font') {
 					instance._handleFont(element, listTagsIn, listTagsOut);
 				}
-				else if (tagName == 'blockquote') {
+				else if (tagName == TAG_BLOCKQUOTE) {
 					instance._handleQuote(element, listTagsIn, listTagsOut);
+				}
+				else if (tagName == TAG_CITE) {
+					instance._handleCite(element, listTagsIn, listTagsOut);
 				}
 				else if (tagName == 'ul') {
 					instance._handleUnorderedList(element, listTagsIn, listTagsOut);
@@ -546,7 +577,15 @@
 		},
 
 		_handleQuote: function(element, listTagsIn, listTagsOut) {
-			listTagsIn.push('[quote]');
+			var cite = element.getAttribute(TAG_CITE);
+
+			if (cite) {
+				listTagsIn.push('[quote=', cite, ']');
+			}
+			else {
+				listTagsIn.push('[quote]');
+			}
+
 			listTagsOut.push('[/quote]');
 		},
 

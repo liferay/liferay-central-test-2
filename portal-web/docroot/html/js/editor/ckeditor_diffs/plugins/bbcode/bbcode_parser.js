@@ -270,8 +270,8 @@
 
 			var result = '<blockquote>';
 
-			if (tagOption && tagOption.length && REGEX_URI.test(tagOption)) {
-				result = '<blockquote cite="' + tagOption + STR_TAG_ATTR_CLOSE;
+			if (tagOption && tagOption.length) {
+				result = '<blockquote><cite>' + tagOption + '</cite>';
 			}
 
 			return result;
