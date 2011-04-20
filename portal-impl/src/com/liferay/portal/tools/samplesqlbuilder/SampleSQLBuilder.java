@@ -202,7 +202,7 @@ public class SampleSQLBuilder {
 			dataSetInfo.append(_maxWikiPageCount);
 
 			Writer dataSetInfoWriter = new FileWriter(
-				"dataset_info.properties");
+				new File(_outputDir, "dataset_info.properties"));
 
 			dataSetInfo.writeTo(dataSetInfoWriter);
 
