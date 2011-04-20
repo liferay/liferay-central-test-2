@@ -344,12 +344,10 @@
 			var parentNode = element.parentNode;
 
 			if (parentNode && parentNode.tagName.toLowerCase() === TAG_BLOCKQUOTE) {
-				var cite = parentNode.getAttribute(TAG_CITE);
-
-				if (!cite) {
+				if (!parentNode.getAttribute(TAG_CITE)) {
 					var endResult = instance._endResult;
 
-					for( var i = endResult.length - 1; i >= 0; i--) {
+					for(var i = endResult.length - 1; i >= 0; i--) {
 						if (endResult[i] === '[quote]') {
 							endResult[i] = '[quote=';
 
@@ -579,12 +577,16 @@
 		_handleQuote: function(element, listTagsIn, listTagsOut) {
 			var cite = element.getAttribute(TAG_CITE);
 
+			var openTag;
+
 			if (cite) {
-				listTagsIn.push('[quote=', cite, ']');
+				openTag = '[quote=', cite, ']';
 			}
 			else {
-				listTagsIn.push('[quote]');
+				openTag = '[quote]';
 			}
+
+			listTagsIn.push(openTag);
 
 			listTagsOut.push('[/quote]');
 		},
