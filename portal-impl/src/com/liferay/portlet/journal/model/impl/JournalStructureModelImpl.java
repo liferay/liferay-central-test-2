@@ -73,10 +73,9 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 			{ "parentStructureId", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
-			{ "webContentType", Types.BOOLEAN },
 			{ "xsd", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,parentStructureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,webContentType BOOLEAN,xsd TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,parentStructureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalStructure";
 	public static final String ORDER_BY_JPQL = " ORDER BY journalStructure.structureId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY JournalStructure.structureId ASC";
@@ -111,7 +110,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		model.setParentStructureId(soapModel.getParentStructureId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
-		model.setWebContentType(soapModel.getWebContentType());
 		model.setXsd(soapModel.getXsd());
 
 		return model;
@@ -320,18 +318,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_description = description;
 	}
 
-	public boolean getWebContentType() {
-		return _webContentType;
-	}
-
-	public boolean isWebContentType() {
-		return _webContentType;
-	}
-
-	public void setWebContentType(boolean webContentType) {
-		_webContentType = webContentType;
-	}
-
 	public String getXsd() {
 		if (_xsd == null) {
 			return StringPool.BLANK;
@@ -384,7 +370,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		journalStructureImpl.setParentStructureId(getParentStructureId());
 		journalStructureImpl.setName(getName());
 		journalStructureImpl.setDescription(getDescription());
-		journalStructureImpl.setWebContentType(getWebContentType());
 		journalStructureImpl.setXsd(getXsd());
 
 		journalStructureImpl.resetOriginalValues();
@@ -445,7 +430,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -471,8 +456,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
-		sb.append(", webContentType=");
-		sb.append(getWebContentType());
 		sb.append(", xsd=");
 		sb.append(getXsd());
 		sb.append("}");
@@ -481,7 +464,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.journal.model.JournalStructure");
@@ -536,10 +519,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>webContentType</column-name><column-value><![CDATA[");
-		sb.append(getWebContentType());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>xsd</column-name><column-value><![CDATA[");
 		sb.append(getXsd());
 		sb.append("]]></column-value></column>");
@@ -566,7 +545,6 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	private String _parentStructureId;
 	private String _name;
 	private String _description;
-	private boolean _webContentType;
 	private String _xsd;
 	private transient ExpandoBridge _expandoBridge;
 }

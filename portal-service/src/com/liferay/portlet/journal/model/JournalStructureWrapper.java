@@ -291,33 +291,6 @@ public class JournalStructureWrapper implements JournalStructure {
 	}
 
 	/**
-	* Gets the web content type of this journal structure.
-	*
-	* @return the web content type of this journal structure
-	*/
-	public boolean getWebContentType() {
-		return _journalStructure.getWebContentType();
-	}
-
-	/**
-	* Determines if this journal structure is web content type.
-	*
-	* @return <code>true</code> if this journal structure is web content type; <code>false</code> otherwise
-	*/
-	public boolean isWebContentType() {
-		return _journalStructure.isWebContentType();
-	}
-
-	/**
-	* Sets whether this journal structure is web content type.
-	*
-	* @param webContentType the web content type of this journal structure
-	*/
-	public void setWebContentType(boolean webContentType) {
-		_journalStructure.setWebContentType(webContentType);
-	}
-
-	/**
 	* Gets the xsd of this journal structure.
 	*
 	* @return the xsd of this journal structure

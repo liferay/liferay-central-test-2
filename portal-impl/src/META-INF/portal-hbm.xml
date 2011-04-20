@@ -1692,7 +1692,6 @@
 		<property name="parentStructureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="webContentType" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="xsd" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" table="JournalTemplate">

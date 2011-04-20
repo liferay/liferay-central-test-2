@@ -58,8 +58,7 @@ public class JournalStructureServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, boolean isWebContentType,
-		java.lang.String xsd,
+		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -69,7 +68,7 @@ public class JournalStructureServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, autoStructureId, parentStructureId, name,
-					description, isWebContentType, xsd, serviceContext);
+					description, xsd, serviceContext);
 
 			Object returnObj = null;
 
@@ -210,7 +209,7 @@ public class JournalStructureServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
-		boolean isWebContentType, java.lang.String xsd,
+		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -219,8 +218,8 @@ public class JournalStructureServiceHttp {
 					"updateStructure", _updateStructureParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId, parentStructureId, name, description,
-					isWebContentType, xsd, serviceContext);
+					structureId, parentStructureId, name, description, xsd,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -252,7 +251,7 @@ public class JournalStructureServiceHttp {
 	private static final Class<?>[] _addStructureParameterTypes0 = new Class[] {
 			long.class, java.lang.String.class, boolean.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, boolean.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _copyStructureParameterTypes1 = new Class[] {
@@ -267,7 +266,7 @@ public class JournalStructureServiceHttp {
 		};
 	private static final Class<?>[] _updateStructureParameterTypes4 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, boolean.class,
+			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};

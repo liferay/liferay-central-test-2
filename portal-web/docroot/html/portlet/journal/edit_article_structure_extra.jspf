@@ -27,8 +27,6 @@
 
 			<aui:input cssClass="save-structure-description" cols="80" label="description" name="saveStructureStructureDescription" rows="6" type="textarea" />
 
-			<aui:input helpMessage="web-content-type-help" label="web-content-type" name="saveStructureIsWebContentType" type="checkbox" />
-
 			<aui:a href="#" id="showStructureIdContainer"><liferay-ui:message key="change-structure-id" /> &raquo;</aui:a>
 
 			<div class="journal-structureid-field yui3-aui-helper-hidden" id="<portlet:namespace />structureIdContainer">

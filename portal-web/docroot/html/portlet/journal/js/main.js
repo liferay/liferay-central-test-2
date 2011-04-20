@@ -352,7 +352,7 @@ AUI().add(
 		};
 
 		Journal.prototype = {
-			addStructure: function(structureId, autoStructureId, name, description, isWebContentType, xsd, callback) {
+			addStructure: function(structureId, autoStructureId, name, description, xsd, callback) {
 				var instance = this;
 
 				var groupId = instance.getGroupId();
@@ -367,7 +367,6 @@ AUI().add(
 					'java.lang.String',
 					'java.lang.String',
 					'java.lang.String',
-					'boolean',
 					'java.lang.String',
 					'com.liferay.portal.service.ServiceContext'
 				];
@@ -380,7 +379,6 @@ AUI().add(
 						parentStructureId: parentStructureId,
 						name: name,
 						description: description,
-						isWebContentType: isWebContentType,
 						xsd: xsd,
 						serviceContext: A.JSON.stringify(
 							{
@@ -897,7 +895,6 @@ AUI().add(
 								autoGenerateId,
 								dialogFields.dialogStructureName.val(),
 								dialogFields.dialogDescription.val(),
-								dialogFields.dialogIsWebContentType.val(),
 								dialogFields.contentXSD,
 								serviceCallback
 							);
@@ -909,7 +906,6 @@ AUI().add(
 								instance.getParentStructureId(),
 								dialogFields.dialogStructureName.val(),
 								dialogFields.dialogDescription.val(),
-								dialogFields.dialogIsWebContentType.val(),
 								dialogFields.contentXSD,
 								serviceCallback
 							);
@@ -942,7 +938,6 @@ AUI().add(
 						autoGenerateIdMessage: Liferay.Language.get('autogenerate-id'),
 						contentXSD: '',
 						dialogDescription: instance.getById('saveStructureStructureDescription'),
-						dialogIsWebContentType: instance.getById('saveStructureIsWebContentType'),
 						dialogStructureGroupId: instance.getById('saveStructureStructureGroupId'),
 						dialogStructureId: instance.getById('saveStructureStructureId'),
 						dialogStructureName: instance.getById('saveStructureStructureName'),
@@ -971,7 +966,6 @@ AUI().add(
 							dialogFields.dialogStructureId.val(message.structureId);
 							dialogFields.dialogStructureName.val(message.name);
 							dialogFields.dialogDescription.val(message.description);
-							dialogFields.dialogIsWebContentType.val(message.isWebContentType);
 							dialogFields.structureNameLabel.html(message.name);
 							dialogFields.saveStructureAutogenerateIdCheckbox.hide();
 
@@ -1247,7 +1241,6 @@ AUI().add(
 				var structureIdInput = instance.getByName(form, 'structureId');
 				var structureNameInput = instance.getByName(form, 'structureName');
 				var structureDescriptionInput = instance.getByName(form, 'structureDescription');
-				var structureIsWebContentTypeInput = instance.getByName(form, 'webContentType');
 
 				var structureId = structureIdInput.val();
 
@@ -1259,11 +1252,8 @@ AUI().add(
 
 						dialogFields.dialogStructureName.val(structureNameInput.val());
 						dialogFields.dialogDescription.val(structureDescriptionInput.val());
+						dialogFields.dialogIsWebContentType.val(structureIsWebContentTypeInput.val());
 						dialogFields.dialogStructureId.attr('disabled', 'disabled').val(dialogFields.autoGenerateIdMessage);
-
-						if (structureIsWebContentTypeInput) {
-							dialogFields.dialogIsWebContentType.val(structureIsWebContentTypeInput.val());
-						}
 
 						if (structureId) {
 							dialogFields.saveStructureAutogenerateId.hide();
@@ -1616,7 +1606,7 @@ AUI().add(
 				fieldInstance.set('variableName', variableName);
 			},
 
-			updateStructure: function(groupId, structureId, parentStructureId, name, description, isWebContentType, xsd, callback) {
+			updateStructure: function(groupId, structureId, parentStructureId, name, description, xsd, callback) {
 				var instance = this;
 
 				var serviceParameterTypes = [
@@ -1625,7 +1615,6 @@ AUI().add(
 					'java.lang.String',
 					'java.lang.String',
 					'java.lang.String',
-					'boolean',
 					'java.lang.String',
 					'com.liferay.portal.service.ServiceContext'
 				];
@@ -1637,7 +1626,6 @@ AUI().add(
 						parentStructureId: parentStructureId || '',
 						name: name,
 						description: description,
-						isWebContentType: isWebContentType,
 						xsd: xsd,
 						serviceContext: A.JSON.stringify(
 							{

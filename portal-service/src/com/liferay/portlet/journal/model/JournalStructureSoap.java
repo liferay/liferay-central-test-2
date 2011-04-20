@@ -43,7 +43,6 @@ public class JournalStructureSoap implements Serializable {
 		soapModel.setParentStructureId(model.getParentStructureId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
-		soapModel.setWebContentType(model.getWebContentType());
 		soapModel.setXsd(model.getXsd());
 
 		return soapModel;
@@ -195,18 +194,6 @@ public class JournalStructureSoap implements Serializable {
 		_description = description;
 	}
 
-	public boolean getWebContentType() {
-		return _webContentType;
-	}
-
-	public boolean isWebContentType() {
-		return _webContentType;
-	}
-
-	public void setWebContentType(boolean webContentType) {
-		_webContentType = webContentType;
-	}
-
 	public String getXsd() {
 		return _xsd;
 	}
@@ -227,6 +214,5 @@ public class JournalStructureSoap implements Serializable {
 	private String _parentStructureId;
 	private String _name;
 	private String _description;
-	private boolean _webContentType;
 	private String _xsd;
 }

@@ -62,7 +62,6 @@ public class JournalStructureJSONSerializer {
 		jsonObject.put("parentStructureId", model.getParentStructureId());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
-		jsonObject.put("webContentType", model.getWebContentType());
 		jsonObject.put("xsd", model.getXsd());
 
 		return jsonObject;

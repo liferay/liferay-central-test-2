@@ -61,8 +61,8 @@ public class JournalStructureLocalServiceImpl
 	public JournalStructure addStructure(
 			long userId, long groupId, String structureId,
 			boolean autoStructureId, String parentStructureId,
-			String name, String description, boolean isWebContentType,
-			String xsd, ServiceContext serviceContext)
+			String name, String description, String xsd,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Structure
@@ -101,7 +101,6 @@ public class JournalStructureLocalServiceImpl
 		structure.setParentStructureId(parentStructureId);
 		structure.setName(name);
 		structure.setDescription(description);
-		structure.setWebContentType(isWebContentType);
 		structure.setXsd(xsd);
 
 		journalStructurePersistence.update(structure, false);
@@ -371,11 +370,6 @@ public class JournalStructureLocalServiceImpl
 		return journalStructurePersistence.countByGroupId(groupId);
 	}
 
-	public List<JournalStructure> getWebContentTypes(long groupId)
-			throws SystemException {
-		return journalStructurePersistence.findByG_W(groupId, true);
-	}
-
 	public List<JournalStructure> search(
 			long companyId, long[] groupIds, String keywords, int start,
 			int end, OrderByComparator obc)
@@ -414,8 +408,8 @@ public class JournalStructureLocalServiceImpl
 
 	public JournalStructure updateStructure(
 			long groupId, String structureId, String parentStructureId,
-			String name, String description, boolean isWebContentType,
-			String xsd, ServiceContext serviceContext)
+			String name, String description, String xsd,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
@@ -437,7 +431,6 @@ public class JournalStructureLocalServiceImpl
 		structure.setParentStructureId(parentStructureId);
 		structure.setName(name);
 		structure.setDescription(description);
-		structure.setWebContentType(isWebContentType);
 		structure.setXsd(xsd);
 
 		journalStructurePersistence.update(structure, false);

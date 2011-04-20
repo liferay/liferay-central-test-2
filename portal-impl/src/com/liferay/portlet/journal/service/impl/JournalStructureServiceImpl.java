@@ -33,7 +33,7 @@ public class JournalStructureServiceImpl
 	public JournalStructure addStructure(
 			long groupId, String structureId, boolean autoStructureId,
 			String parentStructureId, String name, String description,
-			boolean isWebContentType, String xsd, ServiceContext serviceContext)
+			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JournalPermission.check(
@@ -41,8 +41,7 @@ public class JournalStructureServiceImpl
 
 		return journalStructureLocalService.addStructure(
 			getUserId(), groupId, structureId, autoStructureId,
-			parentStructureId, name, description, isWebContentType, xsd,
-			serviceContext);
+			parentStructureId, name, description, xsd, serviceContext);
 	}
 
 	public JournalStructure copyStructure(
@@ -78,16 +77,16 @@ public class JournalStructureServiceImpl
 
 	public JournalStructure updateStructure(
 			long groupId, String structureId, String parentStructureId,
-			String name, String description, boolean isWebContentType,
-			String xsd, ServiceContext serviceContext)
+			String name, String description, String xsd,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
 		return journalStructureLocalService.updateStructure(
-			groupId, structureId, parentStructureId, name, description,
-			isWebContentType, xsd, serviceContext);
+			groupId, structureId, parentStructureId, name, description, xsd,
+			serviceContext);
 	}
 
 }

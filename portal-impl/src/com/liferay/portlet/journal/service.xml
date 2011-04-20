@@ -345,7 +345,6 @@
 		<column name="parentStructureId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="webContentType" type="boolean" />
 		<column name="xsd" type="String" />
 
 		<!-- Order -->
@@ -369,10 +368,6 @@
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="parentStructureId" />
-		</finder>
-		<finder name="G_W" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="webContentType" />
 		</finder>
 
 		<!-- References -->

@@ -306,7 +306,6 @@ create unique index IX_39031F51 on JournalFeed (uuid_, groupId);
 create index IX_B97F5608 on JournalStructure (groupId);
 create index IX_CA0BD48C on JournalStructure (groupId, parentStructureId);
 create unique index IX_AB6E9996 on JournalStructure (groupId, structureId);
-create index IX_2099BF1B on JournalStructure (groupId, webContentType);
 create index IX_8831E4FC on JournalStructure (structureId);
 create index IX_6702CA92 on JournalStructure (uuid_);
 create unique index IX_42E86E58 on JournalStructure (uuid_, groupId);

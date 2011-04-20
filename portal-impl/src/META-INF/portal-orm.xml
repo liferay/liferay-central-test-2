@@ -2047,7 +2047,6 @@
 			<basic name="parentStructureId" />
 			<basic name="name" />
 			<basic name="description" />
-			<basic name="webContentType" />
 			<basic name="xsd" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />

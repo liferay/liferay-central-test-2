@@ -263,13 +263,13 @@ public class JournalStructureLocalServiceWrapper
 		long userId, long groupId, java.lang.String structureId,
 		boolean autoStructureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
-		boolean isWebContentType, java.lang.String xsd,
+		java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.addStructure(userId, groupId,
 			structureId, autoStructureId, parentStructureId, name, description,
-			isWebContentType, xsd, serviceContext);
+			xsd, serviceContext);
 	}
 
 	public void addStructureResources(
@@ -379,12 +379,6 @@ public class JournalStructureLocalServiceWrapper
 		return _journalStructureLocalService.getStructuresCount(groupId);
 	}
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getWebContentTypes(
-		long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalStructureLocalService.getWebContentTypes(groupId);
-	}
-
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
 		long companyId, long[] groupIds, java.lang.String keywords, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -421,14 +415,13 @@ public class JournalStructureLocalServiceWrapper
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		long groupId, java.lang.String structureId,
 		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, boolean isWebContentType,
-		java.lang.String xsd,
+		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureLocalService.updateStructure(groupId,
-			structureId, parentStructureId, name, description,
-			isWebContentType, xsd, serviceContext);
+			structureId, parentStructureId, name, description, xsd,
+			serviceContext);
 	}
 
 	public JournalStructureLocalService getWrappedJournalStructureLocalService() {

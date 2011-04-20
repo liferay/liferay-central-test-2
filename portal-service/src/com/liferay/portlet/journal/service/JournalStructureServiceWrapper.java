@@ -32,14 +32,13 @@ public class JournalStructureServiceWrapper implements JournalStructureService {
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long groupId, java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, boolean isWebContentType,
-		java.lang.String xsd,
+		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureService.addStructure(groupId, structureId,
-			autoStructureId, parentStructureId, name, description,
-			isWebContentType, xsd, serviceContext);
+			autoStructureId, parentStructureId, name, description, xsd,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure copyStructure(
@@ -67,14 +66,12 @@ public class JournalStructureServiceWrapper implements JournalStructureService {
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		long groupId, java.lang.String structureId,
 		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, boolean isWebContentType,
-		java.lang.String xsd,
+		java.lang.String description, java.lang.String xsd,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureService.updateStructure(groupId, structureId,
-			parentStructureId, name, description, isWebContentType, xsd,
-			serviceContext);
+			parentStructureId, name, description, xsd, serviceContext);
 	}
 
 	public JournalStructureService getWrappedJournalStructureService() {
