@@ -117,9 +117,8 @@ public class EditLDAPServerAction extends PortletAction {
 						PropsKeys.LDAP_SECURITY_CREDENTIALS);
 				}
 
-				key = key.replace(defaultPostfix, postfix);
-
-				properties.setProperty(key, value);
+				properties.setProperty(
+					key.replace(defaultPostfix, postfix), value);
 			}
 		}
 
