@@ -15,17 +15,57 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Manage Pages</td>
-	<td></td>
+	<td>link=Control Panel</td>
+	<td>Control Panel</td>
+</tr>
+<tr>
+	<td>storeText</td>
+	<td>//nav[@id='breadcrumbs']/ul/li[1]/span/a</td>
+	<td>guestCommunity</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Manage Pages</td>
-	<td></td>
+	<td>link=Control Panel</td>
+	<td>Control Panel</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Pages</td>
+	<td>Pages</td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
+	<td>//div/div[3]/a</td>
+	<td>${guestCommunity}</td>
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div/ul/li/ul/li[2]/a/span'))</td>
+	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
+	<td>welcomePresent</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${welcomePresent}</td>
+	<td>WelcomePresent</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[3]/ul/li/div/div[1]</td>
+	<td>Drop Down Arrow</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>WelcomePresent</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//li/ul/li[1]/div/div[3]/a</td>
+	<td>Welcome</td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
 	<td>page1Present</td>
 </tr>
 <tr>
@@ -35,18 +75,18 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div/ul/li/ul/li[2]/a/span</td>
-	<td></td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -60,7 +100,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div/ul/li/ul/li[2]/a/span'))</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
 	<td>page2Present</td>
 </tr>
 <tr>
@@ -70,18 +110,18 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div/ul/li/ul/li[2]/a/span</td>
-	<td></td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -95,7 +135,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div/ul/li/ul/li[2]/a/span'))</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
 	<td>page3Present</td>
 </tr>
 <tr>
@@ -105,18 +145,18 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div/ul/li/ul/li[2]/a/span</td>
-	<td></td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -130,7 +170,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div/ul/li/ul/li[2]/a/span'))</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
 	<td>page4Present</td>
 </tr>
 <tr>
@@ -140,18 +180,18 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div/ul/li/ul/li[2]/a/span</td>
-	<td></td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
@@ -165,7 +205,7 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div/ul/li/ul/li[2]/a/span'))</td>
+	<td>eval(selenium.isElementPresent('//li[2]/div/div[3]/a'))</td>
 	<td>page5Present</td>
 </tr>
 <tr>
@@ -175,18 +215,18 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div/ul/li/ul/li[2]/a/span</td>
-	<td></td>
+	<td>//li[2]/div/div[3]/a</td>
+	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Page</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
-	<td></td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>

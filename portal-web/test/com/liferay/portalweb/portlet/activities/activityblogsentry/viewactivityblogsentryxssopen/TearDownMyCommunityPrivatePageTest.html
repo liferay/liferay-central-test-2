@@ -14,49 +14,54 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>//div[@id='dockbar']</td>
-	<td>Dockbar</td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
-	<td>//div/div[3]/div/ul/li[1]/a</td>
-	<td>Manage Pages</td>
+	<td>link=Control Panel</td>
+	<td>Control Panel</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div/div[3]/div/ul/li[1]/a</td>
-	<td>Manage Pages</td>
+	<td>link=Control Panel</td>
+	<td>Control Panel</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>clickAtAndWait</td>
+	<td>link=Pages</td>
+	<td>Pages</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Private Pages</td>
+	<td>Private Pages</td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
 	<td>//div/div[3]/a</td>
 	<td>Joe Bloggs</td>
 </tr>
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('//li/ul/li[1]/div/div[3]/a'))</td>
-	<td>homePresent</td>
+	<td>welcomePresent</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>${homePresent}</td>
-	<td>HomePresent</td>
+	<td>${welcomePresent}</td>
+	<td>WelcomePresent</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[2]/ul/li/div/div[1]</td>
+	<td>//div[3]/ul/li/div/div[1]</td>
 	<td>Drop Down Arrow</td>
 </tr>
 <tr>
 	<td>label</td>
-	<td>HomePresent</td>
+	<td>WelcomePresent</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForText</td>
 	<td>//li/ul/li[1]/div/div[3]/a</td>
-	<td>Home</td>
+	<td>Welcome</td>
 </tr>
 <tr>
 	<td>store</td>
@@ -74,13 +79,13 @@
 	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//td[2]/ul/li[1]/span/span/a</td>
-	<td>Page</td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
+	<td>//button[3]</td>
 	<td>Delete</td>
 </tr>
 <tr>
@@ -109,13 +114,13 @@
 	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//td[2]/ul/li[1]/span/span/a</td>
-	<td>Page</td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
+	<td>//button[3]</td>
 	<td>Delete</td>
 </tr>
 <tr>
@@ -144,13 +149,13 @@
 	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//td[2]/ul/li[1]/span/span/a</td>
-	<td>Page</td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
+	<td>//button[3]</td>
 	<td>Delete</td>
 </tr>
 <tr>
@@ -179,13 +184,13 @@
 	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//td[2]/ul/li[1]/span/span/a</td>
-	<td>Page</td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
+	<td>//button[3]</td>
 	<td>Delete</td>
 </tr>
 <tr>
@@ -214,13 +219,13 @@
 	<td>Page Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//td[2]/ul/li[1]/span/span/a</td>
-	<td>Page</td>
+	<td>assertText</td>
+	<td>//button[3]</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//input[@value='Delete']</td>
+	<td>//button[3]</td>
 	<td>Delete</td>
 </tr>
 <tr>

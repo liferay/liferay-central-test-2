@@ -28,8 +28,6 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/group/joebloggs/home/");
-				selenium.clickAt("//div[@id='dockbar']",
-					RuntimeVariables.replace("Dockbar"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -37,8 +35,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div/div[3]/div/ul/li[1]/a")) {
+						if (selenium.isElementPresent("link=Control Panel")) {
 							break;
 						}
 					}
@@ -49,8 +46,15 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace("Manage Pages"));
+				selenium.clickAt("link=Control Panel",
+					RuntimeVariables.replace("Control Panel"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("link=Pages", RuntimeVariables.replace("Pages"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("link=Private Pages",
+					RuntimeVariables.replace("Private Pages"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
@@ -60,9 +64,8 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Joe Bloggs")
-												.equals(selenium.getText(
-										"//div/div[3]/a"))) {
+						if (selenium.isPartialText("//div/div[3]/a",
+									"Joe Bloggs")) {
 							break;
 						}
 					}
@@ -74,16 +77,16 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 
-				boolean homePresent = selenium.isElementPresent(
+				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
 
-				if (homePresent) {
+				if (welcomePresent) {
 					label = 2;
 
 					continue;
 				}
 
-				selenium.clickAt("//div[2]/ul/li/div/div[1]",
+				selenium.clickAt("//div[3]/ul/li/div/div[1]",
 					RuntimeVariables.replace("Drop Down Arrow"));
 
 			case 2:
@@ -94,7 +97,7 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Home")
+						if (RuntimeVariables.replace("Welcome")
 												.equals(selenium.getText(
 										"//li/ul/li[1]/div/div[3]/a"))) {
 							break;
@@ -121,12 +124,9 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
-					RuntimeVariables.replace("Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText("//button[3]"));
+				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
@@ -147,12 +147,9 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
-					RuntimeVariables.replace("Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText("//button[3]"));
+				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
@@ -173,12 +170,9 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
-					RuntimeVariables.replace("Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText("//button[3]"));
+				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
@@ -199,12 +193,9 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
-					RuntimeVariables.replace("Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText("//button[3]"));
+				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
@@ -225,12 +216,9 @@ public class TearDownMyCommunityPrivatePageTest extends BaseTestCase {
 					RuntimeVariables.replace("Page Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//td[2]/ul/li[1]/span/span/a",
-					RuntimeVariables.replace("Page"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace(
-						"//input[@value='Delete']"));
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText("//button[3]"));
+				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
