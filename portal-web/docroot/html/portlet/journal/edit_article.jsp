@@ -159,6 +159,10 @@ String[][] categorySections = {mainSections};
 	<tr>
 		<td class="lfr-top">
 			<c:if test="<%= Validator.isNull(toLanguageId) %>">
+				<c:if test="<%= article != null %>">
+					<aui:workflow-status id="<%= String.valueOf(article.getArticleId()) %>" status="<%= article.getStatus() %>" version="<%= String.valueOf(article.getVersion()) %>" />
+				</c:if>
+
 				<liferay-util:include page="/html/portlet/journal/article_toolbar.jsp" />
 
 				<liferay-ui:asset-categories-error />

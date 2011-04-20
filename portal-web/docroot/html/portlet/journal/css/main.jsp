@@ -312,6 +312,10 @@
 		margin-right: 0.5em;
 	}
 
+	.taglib-workflow-status {
+    	margin: 0 0 1em 0;
+	}
+
 	.default-link {
 		font-size: 0.9em;
 		font-weight: normal;

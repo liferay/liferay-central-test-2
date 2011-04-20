@@ -187,26 +187,19 @@ if (Validator.isNotNull(content)) {
 		<table class="lfr-table journal-article-header-edit" id="<portlet:namespace />articleHeaderEdit">
 		<tr>
 			<td>
-				<c:choose>
-					<c:when test="<%= article == null %>">
-						<c:choose>
-							<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
-								<aui:input name="newArticleId" type="hidden" />
-								<aui:input name="autoArticleId" type="hidden" value="<%= true %>" />
-							</c:when>
-							<c:otherwise>
-								<aui:input cssClass="lfr-input-text-container" field="articleId" fieldParam="newArticleId" label="id" name="newArticleId" value="<%= newArticleId %>" />
+				<c:if test="<%= article == null %>">
+					<c:choose>
+						<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
+							<aui:input name="newArticleId" type="hidden" />
+							<aui:input name="autoArticleId" type="hidden" value="<%= true %>" />
+						</c:when>
+						<c:otherwise>
+							<aui:input cssClass="lfr-input-text-container" field="articleId" fieldParam="newArticleId" label="id" name="newArticleId" value="<%= newArticleId %>" />
 
-								<aui:input label="autogenerate-id" name="autoArticleId" type="checkbox" />
-							</c:otherwise>
-						</c:choose>
-					</c:when>
-					<c:otherwise>
-						<c:if test="<%= Validator.isNull(toLanguageId) %>">
-							<aui:workflow-status id="<%= String.valueOf(article.getArticleId()) %>" status="<%= article.getStatus() %>" version="<%= String.valueOf(article.getVersion()) %>" />
-						</c:if>
-					</c:otherwise>
-				</c:choose>
+							<aui:input label="autogenerate-id" name="autoArticleId" type="checkbox" />
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 			</td>
 		</tr>
 
