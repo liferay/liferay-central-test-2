@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.templateparser;
 
-import com.liferay.portal.kernel.templateparser.TemplateParser;
-import com.liferay.portal.kernel.templateparser.TransformException;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Map;
