@@ -675,7 +675,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 		else {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Importing full froup DN " + fullGroupDN);
+				_log.debug("Importing full group DN " + fullGroupDN);
 			}
 
 			Attributes groupAttributes = null;
