@@ -218,12 +218,6 @@ public class JournalContentPortletDataHandlerImpl
 		String articleId = portletPreferences.getValue("articleId", null);
 
 		if (Validator.isNotNull(articleId)) {
-			Map<String, String> articleIds =
-				(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-					JournalArticle.class);
-
-			articleId = MapUtil.getString(articleIds, articleId, articleId);
-
 			String importedArticleGroupId = articleElement.attributeValue(
 				"imported-article-group-id");
 
@@ -233,6 +227,13 @@ public class JournalContentPortletDataHandlerImpl
 			}
 
 			portletPreferences.setValue("groupId", importedArticleGroupId);
+
+			Map<String, String> articleIds =
+				(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+					JournalArticle.class);
+
+			articleId = MapUtil.getString(articleIds, articleId, articleId);
+
 			portletPreferences.setValue("articleId", articleId);
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(
