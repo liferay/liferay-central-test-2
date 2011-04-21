@@ -85,6 +85,7 @@
 			}
 
 			var process = instance._process;
+
 			var processed = false;
 
 			var result = data.replace(
