@@ -100,9 +100,9 @@ public class MemoryPortalCache extends BasePortalCache {
 	public void registerCacheListener(CacheListener cacheListener) {
 		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
 
-		try {
-			writeLock.lock();
+		writeLock.lock();
 
+		try {
 			_cacheListeners.add(cacheListener);
 		}
 		finally {
@@ -123,9 +123,9 @@ public class MemoryPortalCache extends BasePortalCache {
 
 		Lock readLock = _cacheListenersReadWriteLock.readLock();
 
-		try {
-			readLock.lock();
+		readLock.lock();
 
+		try {
 			for (CacheListener cacheListener : _cacheListeners) {
 				cacheListener.notifyEntryRemoved(this, key, value);
 			}
@@ -140,9 +140,9 @@ public class MemoryPortalCache extends BasePortalCache {
 
 		Lock readLock = _cacheListenersReadWriteLock.readLock();
 
-		try {
-			readLock.lock();
+		readLock.lock();
 
+		try {
 			for (CacheListener cacheListener : _cacheListeners) {
 				cacheListener.notifyRemoveAll(this);
 			}
@@ -155,9 +155,9 @@ public class MemoryPortalCache extends BasePortalCache {
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
 
-		try {
-			writeLock.lock();
+		writeLock.lock();
 
+		try {
 			_cacheListeners.remove(cacheListener);
 		}
 		finally {
@@ -168,9 +168,9 @@ public class MemoryPortalCache extends BasePortalCache {
 	public void unregisterCacheListeners() {
 		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
 
-		try {
-			writeLock.lock();
+		writeLock.lock();
 
+		try {
 			_cacheListeners.clear();
 		}
 		finally {
@@ -181,9 +181,9 @@ public class MemoryPortalCache extends BasePortalCache {
 	protected void notifyPutEvents(String key, Object value, boolean updated) {
 		Lock readLock = _cacheListenersReadWriteLock.readLock();
 
-		try {
-			readLock.lock();
+		readLock.lock();
 
+		try {
 			if (updated) {
 				for (CacheListener cacheListener : _cacheListeners) {
 					cacheListener.notifyEntryUpdated(this, key, value);
