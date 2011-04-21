@@ -101,8 +101,6 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 				PermissionThreadLocal.getPermissionChecker());
 			freeMarkerContext.put("randomNamespace", randomNamespace);
 
-			script = injectEditInPlace(xml, script);
-
 			try {
 				String freeMarkerTemplateId = companyId + groupId + templateId;
 

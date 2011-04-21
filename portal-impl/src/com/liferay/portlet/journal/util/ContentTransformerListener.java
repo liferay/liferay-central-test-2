@@ -110,8 +110,9 @@ public class ContentTransformerListener extends BaseTransformerListener {
 					(type.equals("text") || type.equals("text_area") ||
 					 type.equals("text_box"))) {
 
-					script = wrapField(script, name, type, "data");
-					script = wrapField(script, name, type, "getData()");
+					script = wrapEditInPlaceField(script, name, type, "data");
+					script = wrapEditInPlaceField(
+						script, name, type, "getData()");
 				}
 			}
 		}
@@ -198,7 +199,7 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		return xml;
 	}
 
-	protected String wrapField(
+	protected String wrapEditInPlaceField(
 		String script, String name, String type, String call) {
 
 		String field = "$" + name + "." + call;
