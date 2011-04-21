@@ -63,12 +63,16 @@
 					<div class="portlet-msg-success">
 						<c:choose>
 							<c:when test="<%= company.isStrangersVerify() || Validator.isNull(userPassword) %>">
-								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
+								<%= LanguageUtil.get(pageContext, "thank-you-for-creating-an-account") %>
 							</c:when>
 							<c:otherwise>
-								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
+								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", userPassword, false) %>
 							</c:otherwise>
 						</c:choose>
+
+						<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED) %>">
+							<%= LanguageUtil.format(pageContext, "your-password-has-been-sent-to-x", userEmailAddress) %>
+						</c:if>
 					</div>
 				</c:when>
 				<c:when test='<%= SessionMessages.contains(request, "user_pending") %>'>
