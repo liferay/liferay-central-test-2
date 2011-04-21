@@ -110,7 +110,7 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 						"link=Test Localized Structure"));
 				selenium.type("_15_xsl",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontentdisplay\\dependencies\\LocalizedTemplate.htm"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\webcontentdisplay\\dependencies\\LocalizedTemplate.html"));
 				selenium.saveScreenShotAndSource();
 				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
