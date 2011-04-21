@@ -10,10 +10,10 @@
 
 		<table class="portlet-layout">
 		<tr>
-			<td class="aui-w50 portlet-column portlet-column-first" id="column-2">
+			<td class="yui3-aui-w50 portlet-column portlet-column-first" id="column-2">
 				$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
 			</td>
-			<td class="aui-w50 portlet-column portlet-column-last" id="column-3">
+			<td class="yui3-aui-w50 portlet-column portlet-column-last" id="column-3">
 				$processor.processColumn("column-3", "portlet-column-content portlet-column-content-last")
 			</td>
 		</tr>
@@ -34,11 +34,11 @@
 		</div>
 
 		<div class="portlet-layout">
-			<div class="aui-w50 portlet-column portlet-column-first" id="column-2">
+			<div class="yui3-aui-w50 portlet-column portlet-column-first" id="column-2">
 				$processor.processColumn("column-2", "portlet-column-content portlet-column-content-first")
 			</div>
 
-			<div class="aui-w50 portlet-column portlet-column-last" id="column-3">
+			<div class="yui3-aui-w50 portlet-column portlet-column-last" id="column-3">
 				$processor.processColumn("column-3", "portlet-column-content portlet-column-content-last")
 			</div>
 		</div>
