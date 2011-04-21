@@ -66,7 +66,7 @@
 								<%= LanguageUtil.get(pageContext, "thank-you-for-creating-an-account") %>
 							</c:when>
 							<c:otherwise>
-								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", userPassword, false) %>
+								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account.-your-password-is-x", userPassword, false) %>
 							</c:otherwise>
 						</c:choose>
 
