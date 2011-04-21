@@ -30,8 +30,7 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=Web Content Display Test Page")) {
+				if (selenium.isVisible("link=Web Content Display Test Page")) {
 					break;
 				}
 			}
@@ -43,11 +42,14 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Web Content Display Test Page",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace(
+				"Select existing web content or add some web content to be displayed in this portlet."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("//img[@alt='Select Web Content']",
-			RuntimeVariables.replace(""));
+			RuntimeVariables.replace("Select Web Content"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -55,7 +57,7 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Hello World Localized Article")) {
+				if (selenium.isVisible("link=Web Content Name")) {
 					break;
 				}
 			}
@@ -66,8 +68,8 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Hello World Localized Article",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Web Content Name",
+			RuntimeVariables.replace("Web Content Name"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +79,7 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 			try {
 				if (selenium.isPartialText(
 							"//form[@id='_86_fm1']/div[1]/span[2]",
-							"Displaying Content:")) {
+							"Displaying Content: Web Content Name")) {
 					break;
 				}
 			}
@@ -89,8 +91,10 @@ public class SelectWebContentLocalizedTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
-				"//form[@id='_86_fm1']/div[1]/span[2]", "Displaying Content:"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+				"//form[@id='_86_fm1']/div[1]/span[2]",
+				"Displaying Content: Web Content Name"));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(

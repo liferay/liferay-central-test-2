@@ -50,12 +50,9 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Add Structure']",
+		selenium.clickAt("//input[@value=\"Add Structure\"]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		selenium.type("_15_newStructureId",
-			RuntimeVariables.replace("LOCALIZED"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Test Localized Structure"));
@@ -64,6 +61,7 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test localized structure."));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_15_editorButton", RuntimeVariables.replace(""));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +80,6 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.type("_15_xsdContent",
 			RuntimeVariables.replace(
 				"<root> \n\n <dynamic-element name='page-name' type='text'></dynamic-element> \n\n <dynamic-element name='page-description' type='text'></dynamic-element> \n\n</root>"));
@@ -92,10 +89,10 @@ public class AddStructureLocalizedTest extends BaseTestCase {
 		assertEquals("page-name", selenium.getValue("_15_structure_el0_name"));
 		assertEquals("page-description",
 			selenium.getValue("_15_structure_el1_name"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value=\"Save\"]",
+			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isElementPresent("link=LOCALIZED"));
 		assertTrue(selenium.isTextPresent("Test Localized Structure"));
 	}
 }

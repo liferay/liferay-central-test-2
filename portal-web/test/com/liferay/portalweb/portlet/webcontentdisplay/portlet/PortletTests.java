@@ -18,6 +18,9 @@ import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletenablecommentratings.ConfigurePortletEnableCommentRatingsTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletenablecomments.ConfigurePortletEnableCommentsTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletenableratings.ConfigurePortletEnableRatingsTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletscopecurrentpage.ConfigurePortletScopeCurrentPageTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletscopedefault.ConfigurePortletScopeDefaultTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletscopepage2.ConfigurePortletScopePage2Tests;
 import com.liferay.portalweb.portlet.webcontentdisplay.portlet.configureportletshowavailablelocales.ConfigurePortletShowAvailableLocalesTests;
 
 import junit.framework.Test;
@@ -34,6 +37,9 @@ public class PortletTests extends BaseTests {
 		testSuite.addTest(ConfigurePortletEnableCommentRatingsTests.suite());
 		testSuite.addTest(ConfigurePortletEnableCommentsTests.suite());
 		testSuite.addTest(ConfigurePortletEnableRatingsTests.suite());
+		testSuite.addTest(ConfigurePortletScopeCurrentPageTests.suite());
+		testSuite.addTest(ConfigurePortletScopeDefaultTests.suite());
+		testSuite.addTest(ConfigurePortletScopePage2Tests.suite());
 		testSuite.addTest(ConfigurePortletShowAvailableLocalesTests.suite());
 
 		return testSuite;
