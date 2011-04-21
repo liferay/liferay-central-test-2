@@ -281,7 +281,7 @@ public abstract class BaseIndexer implements Indexer {
 			TermQuery termQuery = TermQueryFactoryUtil.create(
 				Field.ASSET_CATEGORY_IDS, assetCategoryId);
 
-			 assetCategoryIdsQuery.add(termQuery, BooleanClauseOccur.MUST);
+			assetCategoryIdsQuery.add(termQuery, BooleanClauseOccur.MUST);
 		}
 
 		if (!assetCategoryIdsQuery.clauses().isEmpty()) {
@@ -533,7 +533,7 @@ public abstract class BaseIndexer implements Indexer {
 			contextQuery.addRequiredTerm(Field.STAGING_GROUP, true);
 		}
 		else if (searchContext.isIncludeLiveGroups() &&
-				 !searchContext.isIncludeStagingGroups()) {
+				!searchContext.isIncludeStagingGroups()) {
 
 			contextQuery.addRequiredTerm(Field.STAGING_GROUP, false);
 		}
