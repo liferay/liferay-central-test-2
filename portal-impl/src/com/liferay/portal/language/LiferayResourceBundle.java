@@ -47,6 +47,16 @@ public class LiferayResourceBundle extends ResourceBundle {
 	public LiferayResourceBundle(InputStream inputStream, String charsetName)
 		throws IOException {
 
+		this(null, inputStream, charsetName);
+	}
+
+	public LiferayResourceBundle(
+			ResourceBundle parentResourceBundle, InputStream inputStream,
+			String charsetName)
+		throws IOException {
+
+		setParent(parentResourceBundle);
+
 		_map = new HashMap<String, String>();
 
 		Properties properties = PropertiesUtil.load(inputStream, charsetName);

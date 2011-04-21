@@ -264,6 +264,7 @@ public class PortletBagFactory {
 
 			resourceBundles = new HashMap<String, ResourceBundle>();
 
+			initResourceBundle(resourceBundles, portlet, null);
 			initResourceBundle(
 				resourceBundles, portlet, LocaleUtil.getDefault());
 
@@ -343,11 +344,13 @@ public class PortletBagFactory {
 
 			sb.append(resourceBundleName);
 
-			String localeName = locale.toString();
+			if (locale != null) {
+				String localeName = locale.toString();
 
-			if (localeName.length() > 0) {
-				sb.append(StringPool.UNDERLINE);
-				sb.append(localeName);
+				if (localeName.length() > 0) {
+					sb.append(StringPool.UNDERLINE);
+					sb.append(localeName);
+				}
 			}
 
 			sb.append(".properties");
@@ -361,14 +364,16 @@ public class PortletBagFactory {
 			inputStream = _classLoader.getResourceAsStream(
 				localizedResourceBundleName);
 
-			newLocale = LanguageResources.getSuperLocale(locale);
+			if (locale != null) {
+				newLocale = LanguageResources.getSuperLocale(locale);
 
-			if (newLocale == null) {
-				break;
-			}
+				if (newLocale == null) {
+					break;
+				}
 
-			if (newLocale.equals(locale)) {
-				break;
+				if (newLocale.equals(locale)) {
+					break;
+				}
 			}
 		}
 
@@ -384,13 +389,22 @@ public class PortletBagFactory {
 				portlet.getResourceBundle(), locale);
 
 			if (inputStream != null) {
+				ResourceBundle parentResourceBundle = null;
+
+				if (locale != null) {
+					parentResourceBundle = resourceBundles.get(null);
+				}
+
 				ResourceBundle resourceBundle = new LiferayResourceBundle(
-					inputStream, StringPool.UTF8);
+					parentResourceBundle, inputStream, StringPool.UTF8);
 
-				inputStream.close();
+				String languageId = null;
 
-				resourceBundles.put(
-					LocaleUtil.toLanguageId(locale), resourceBundle);
+				if (locale != null) {
+					languageId = LocaleUtil.toLanguageId(locale);
+				}
+
+				resourceBundles.put(languageId, resourceBundle);
 			}
 		}
 		catch (Exception e) {

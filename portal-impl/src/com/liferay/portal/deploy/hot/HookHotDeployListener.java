@@ -551,6 +551,8 @@ public class HookHotDeployListener
 		List<Element> languagePropertiesElements = rootElement.elements(
 			"language-properties");
 
+		Map<String, String> baseLanguageMap = null;
+
 		for (Element languagePropertiesElement : languagePropertiesElements) {
 			String languagePropertiesLocation =
 				languagePropertiesElement.getText();
@@ -572,6 +574,10 @@ public class HookHotDeployListener
 
 				Map<String, String> languageMap = new HashMap<String, String>();
 
+				if (baseLanguageMap != null) {
+					languageMap.putAll(baseLanguageMap);
+				}
+
 				for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();
@@ -585,6 +591,9 @@ public class HookHotDeployListener
 
 				if (locale != null) {
 					languagesContainer.addLanguage(locale, languageMap);
+				}
+				else if (!languageMap.isEmpty()) {
+					baseLanguageMap = languageMap;
 				}
 			}
 			catch (Exception e) {
