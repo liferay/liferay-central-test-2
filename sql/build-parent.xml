@@ -97,6 +97,8 @@
 			<arg value="db.sql.dir=${basedir}" />
 			<arg value="db.file.name=indexes.sql" />
 		</java>
+
+		<delete dir="${database.name}.tmp" failonerror="false" />
 	</target>
 
 	<target name="rebuild-mysql">
