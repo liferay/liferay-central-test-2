@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -172,7 +173,6 @@ public class VerifySQLServer extends VerifyProcess {
 			StringBundler sb = new StringBundler(12);
 
 			sb.append("select distinct sysobjects.name as table_name, ");
-			sb.append("syscolumns.name as column_name, ");
 			sb.append("sysindexes.name as index_name FROM sysobjects inner ");
 			sb.append("join sysindexes on sysobjects.id = sysindexes.id ");
 			sb.append("inner join syscolumns on sysobjects.id = ");
@@ -195,7 +195,6 @@ public class VerifySQLServer extends VerifyProcess {
 
 			while (rs.next()) {
 				String tableName = rs.getString("table_name");
-				String columnName = rs.getString("column_name");
 				String indexName = rs.getString("index_name");
 
 				if (_log.isInfoEnabled()) {
@@ -203,13 +202,16 @@ public class VerifySQLServer extends VerifyProcess {
 				}
 
 				if (indexName.startsWith("PK")) {
+
+					String columnNames = getPKColumnNames(indexName);
+
 					runSQL(
 						"alter table " + tableName + " drop constraint " +
 							indexName);
 
 					_addPrimaryKeySQLs.add(
 						"alter table " + tableName + " add primary key (" +
-							columnName + ")");
+						columnNames + ")");
 				}
 				else {
 					runSQL("drop index " + indexName + " on " + tableName);
@@ -222,6 +224,49 @@ public class VerifySQLServer extends VerifyProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected String getPKColumnNames(String indexName) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String columns = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(9);
+
+			sb.append("select distinct syscolumns.name as column_name from ");
+			sb.append("sysobjects inner join syscolumns on sysobjects.id = ");
+			sb.append("syscolumns.id inner join sysindexes ");
+			sb.append("on sysobjects.id = sysindexes.id ");
+			sb.append("inner join sysindexkeys on ((sysobjects.id = ");
+			sb.append("sysindexkeys.id) and(syscolumns.colid = ");
+			sb.append("sysindexkeys.colid) and (sysindexes.indid = ");
+			sb.append("sysindexkeys.indid)) where sysindexes.name = ");
+			sb.append("'"+indexName+"'");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			List<String> listOfColumns = new ArrayList<String>();
+
+			while (rs.next()) {
+				listOfColumns.add(rs.getString("column_name"));
+			}
+
+			columns = StringUtil.merge(listOfColumns);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return columns;
 	}
 
 	private static final String _FILTER_EXCLUDED_TABLES =
