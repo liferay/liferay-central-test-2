@@ -56,6 +56,20 @@
 					}
 				);
 
+				editor.on(
+					'paste',
+					function(event) {
+						var data = event.data;
+
+						var htmlData = data.html;
+
+						htmlData = CKEDITOR.htmlDataProcessor.prototype.toDataFormat(htmlData);
+
+						data.html = htmlData;
+					},
+					editor.element.$
+				);
+
 				editor.fire('customDataProcessorLoaded');
 			}
 		}
