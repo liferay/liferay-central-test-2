@@ -30,10 +30,6 @@ public class MultiVMPoolUtil {
 		getMultiVMPool().clear(name);
 	}
 
-	public static Object get(String name, String key) {
-		return getMultiVMPool().get(name, key);
-	}
-
 	/**
 	 * @deprecated
 	 */
@@ -41,8 +37,8 @@ public class MultiVMPoolUtil {
 		return getMultiVMPool().get(portalCache, key);
 	}
 
-	public static MultiVMPool getMultiVMPool() {
-		return _multiVMPool;
+	public static Object get(String name, String key) {
+		return getMultiVMPool().get(name, key);
 	}
 
 	public static PortalCache getCache(String name) {
@@ -53,8 +49,8 @@ public class MultiVMPoolUtil {
 		return getMultiVMPool().getCache(name, blocking);
 	}
 
-	public static void put(String name, String key, Object value) {
-		getMultiVMPool().put(name, key, value);
+	public static MultiVMPool getMultiVMPool() {
+		return _multiVMPool;
 	}
 
 	/**
@@ -62,10 +58,6 @@ public class MultiVMPoolUtil {
 	 */
 	public static void put(PortalCache portalCache, String key, Object value) {
 		getMultiVMPool().put(portalCache, key, value);
-	}
-
-	public static void put(String name, String key, Serializable value) {
-		getMultiVMPool().put(name, key, value);
 	}
 
 	/**
@@ -77,8 +69,12 @@ public class MultiVMPoolUtil {
 		getMultiVMPool().put(portalCache, key, value);
 	}
 
-	public static void remove(String name, String key) {
-		getMultiVMPool().remove(name, key);
+	public static void put(String name, String key, Object value) {
+		getMultiVMPool().put(name, key, value);
+	}
+
+	public static void put(String name, String key, Serializable value) {
+		getMultiVMPool().put(name, key, value);
 	}
 
 	/**
@@ -86,6 +82,10 @@ public class MultiVMPoolUtil {
 	 */
 	public static void remove(PortalCache portalCache, String key) {
 		getMultiVMPool().remove(portalCache, key);
+	}
+
+	public static void remove(String name, String key) {
+		getMultiVMPool().remove(name, key);
 	}
 
 	public static void removeCache(String name) {

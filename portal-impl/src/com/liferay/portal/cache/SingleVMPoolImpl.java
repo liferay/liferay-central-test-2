@@ -36,16 +36,16 @@ public class SingleVMPoolImpl implements SingleVMPool {
 		portalCache.removeAll();
 	}
 
-	public Object get(String name, String key) {
-		PortalCache portalCache = getCache(name);
-
-		return portalCache.get(key);
-	}
-
 	/**
 	 * @deprecated
 	 */
 	public Object get(PortalCache portalCache, String key) {
+		return portalCache.get(key);
+	}
+
+	public Object get(String name, String key) {
+		PortalCache portalCache = getCache(name);
+
 		return portalCache.get(key);
 	}
 
@@ -55,12 +55,6 @@ public class SingleVMPoolImpl implements SingleVMPool {
 
 	public PortalCache getCache(String name, boolean blocking) {
 		return _portalCacheManager.getCache(name, blocking);
-	}
-
-	public void put(String name, String key, Object value) {
-		PortalCache portalCache = getCache(name);
-
-		portalCache.put(key, value);
 	}
 
 	/**
@@ -77,12 +71,6 @@ public class SingleVMPoolImpl implements SingleVMPool {
 		PortalCache portalCache, String key, Object value, int timeToLive) {
 
 		portalCache.put(key, value, timeToLive);
-	}
-
-	public void put(String name, String key, Serializable value) {
-		PortalCache portalCache = getCache(name);
-
-		portalCache.put(key, value);
 	}
 
 	/**
@@ -102,16 +90,28 @@ public class SingleVMPoolImpl implements SingleVMPool {
 		portalCache.put(key, value, timeToLive);
 	}
 
-	public void remove(String name, String key) {
+	public void put(String name, String key, Object value) {
 		PortalCache portalCache = getCache(name);
 
-		portalCache.remove(key);
+		portalCache.put(key, value);
+	}
+
+	public void put(String name, String key, Serializable value) {
+		PortalCache portalCache = getCache(name);
+
+		portalCache.put(key, value);
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public void remove(PortalCache portalCache, String key) {
+		portalCache.remove(key);
+	}
+
+	public void remove(String name, String key) {
+		PortalCache portalCache = getCache(name);
+
 		portalCache.remove(key);
 	}
 

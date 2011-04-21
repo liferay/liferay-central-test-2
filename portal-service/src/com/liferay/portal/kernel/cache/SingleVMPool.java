@@ -26,18 +26,16 @@ public interface SingleVMPool {
 
 	public void clear(String name);
 
-	public Object get(String name, String key);
-
 	/**
 	 * @deprecated
 	 */
 	public Object get(PortalCache portalCache, String key);
 
+	public Object get(String name, String key);
+
 	public PortalCache getCache(String name);
 
 	public PortalCache getCache(String name, boolean blocking);
-
-	public void put(String name, String key, Object value);
 
 	/**
 	 * @deprecated
@@ -49,8 +47,6 @@ public interface SingleVMPool {
 	 */
 	public void put(
 		PortalCache portalCache, String key, Object value, int timeToLive);
-
-	public void put(String name, String key, Serializable value);
 
 	/**
 	 * @deprecated
@@ -64,12 +60,16 @@ public interface SingleVMPool {
 		PortalCache portalCache, String key, Serializable value,
 		int timeToLive);
 
-	public void remove(String name, String key);
+	public void put(String name, String key, Object value);
+
+	public void put(String name, String key, Serializable value);
 
 	/**
 	 * @deprecated
 	 */
 	public void remove(PortalCache portalCache, String key);
+
+	public void remove(String name, String key);
 
 	public void removeCache(String name);
 
