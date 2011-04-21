@@ -32,7 +32,14 @@ public class LiferayResourceCacheUtil {
 	}
 
 	public static Resource get(String key) {
-		return (Resource)_multiVMKeyPoolPortalCache.get(key);
+		Object obj = _multiVMKeyPoolPortalCache.get(key);
+
+		if ((obj != null) && (obj instanceof Resource)) {
+			return (Resource)obj;
+		}
+		else {
+			return null;
+		}
 	}
 
 	public static void put(String key, Resource resource) {
