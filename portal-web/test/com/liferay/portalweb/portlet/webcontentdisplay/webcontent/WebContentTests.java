@@ -25,8 +25,8 @@ import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.localizewcwebc
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.localizewcwebcontentwcd.LocalizeWCWebContentWCDTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.ratewcdwebcontent.RateWCDWebContentTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.searchwcdwebcontent.SearchWCDWebContentTests;
-import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.selectwcwebcontent.SelectWCWebContentTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.selectportletscopepage2wcwebcontentwcd.SelectPortletScopePage2WCWebContentWCDTests;
+import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.selectwcwebcontent.SelectWCWebContentTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.viewlocalizewebcontentlanguagewcd.ViewLocalizeWebContentLanguageWCDTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.viewlocalizewebcontenttemplatelanguagewcd.ViewLocalizeWebContentTemplateLanguageWCDTests;
 import com.liferay.portalweb.portlet.webcontentdisplay.webcontent.viewportletshowlocaleswebcontenttemplatewcd.ViewPortletShowLocalesWebContentTemplateWCDTests;
@@ -54,8 +54,8 @@ public class WebContentTests extends BaseTests {
 		testSuite.addTest(LocalizeWCWebContentWCDTests.suite());
 		testSuite.addTest(RateWCDWebContentTests.suite());
 		testSuite.addTest(SearchWCDWebContentTests.suite());
-		testSuite.addTest(SelectWCWebContentTests.suite());
 		testSuite.addTest(SelectPortletScopePage2WCWebContentWCDTests.suite());
+		testSuite.addTest(SelectWCWebContentTests.suite());
 		testSuite.addTest(ViewLocalizeWebContentLanguageWCDTests.suite());
 		testSuite.addTest(
 			ViewLocalizeWebContentTemplateLanguageWCDTests.suite());
