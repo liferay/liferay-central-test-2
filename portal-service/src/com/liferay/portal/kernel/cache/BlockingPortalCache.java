@@ -171,15 +171,12 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
-	public void registerCacheListener(CacheListener cacheListener)
-		throws PortalCacheException {
-
+	public void registerCacheListener(CacheListener cacheListener) {
 		_portalCache.registerCacheListener(cacheListener);
 	}
 
 	public void registerCacheListener(
-			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
-		throws PortalCacheException {
+		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
 		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
 	}

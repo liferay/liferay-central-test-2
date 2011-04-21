@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.CacheListener;
 import com.liferay.portal.kernel.cache.CacheListenerScope;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.PortalCacheException;
 
 import java.io.Serializable;
 
@@ -116,15 +115,12 @@ public class TransactionalPortalCache extends BasePortalCache {
 		}
 	}
 
-	public void registerCacheListener(CacheListener cacheListener)
-		throws PortalCacheException {
-
+	public void registerCacheListener(CacheListener cacheListener) {
 		_portalCache.registerCacheListener(cacheListener);
 	}
 
 	public void registerCacheListener(
-			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
-		throws PortalCacheException {
+		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
 		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
 	}

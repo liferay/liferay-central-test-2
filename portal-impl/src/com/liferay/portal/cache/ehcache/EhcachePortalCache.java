@@ -17,7 +17,6 @@ package com.liferay.portal.cache.ehcache;
 import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.CacheListener;
 import com.liferay.portal.kernel.cache.CacheListenerScope;
-import com.liferay.portal.kernel.cache.PortalCacheException;
 
 import java.io.Serializable;
 
@@ -94,15 +93,12 @@ public class EhcachePortalCache extends BasePortalCache {
 		_ehcache.put(element);
 	}
 
-	public void registerCacheListener(CacheListener cacheListener)
-		throws PortalCacheException {
-
+	public void registerCacheListener(CacheListener cacheListener) {
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
 	public void registerCacheListener(
-			CacheListener cacheListener, CacheListenerScope cacheListenerScope)
-		throws PortalCacheException {
+		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
 		if (_cacheEventListeners.containsKey(cacheListener)) {
 			return;
@@ -133,9 +129,7 @@ public class EhcachePortalCache extends BasePortalCache {
 		_ehcache.removeAll();
 	}
 
-	public void unregisterCacheListener(CacheListener cacheListener)
-		throws PortalCacheException {
-
+	public void unregisterCacheListener(CacheListener cacheListener) {
 		CacheEventListener cacheEventListener = _cacheEventListeners.get(
 			cacheListener);
 
