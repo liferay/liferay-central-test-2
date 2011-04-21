@@ -367,10 +367,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public String[] getQueryTerms(Query query) {
-		String[] fieldNames = new String[] {
-			Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES, Field.TITLE,
-			Field.USER_NAME
-		};
+		String[] fieldNames = Field.KEYWORDS_FIELDS;
 
 		WeightedTerm[] weightedTerms = null;
 

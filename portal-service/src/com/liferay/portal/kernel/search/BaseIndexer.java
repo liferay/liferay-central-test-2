@@ -478,7 +478,7 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		searchQuery.addTerms(_KEYWORDS_FIELDS, keywords, true, true);
+		searchQuery.addTerms(Field.KEYWORDS_FIELDS, keywords, true, true);
 
 		searchQuery.addExactTerm(Field.ASSET_CATEGORY_NAMES, keywords);
 		searchQuery.addExactTerm(Field.ASSET_TAG_NAMES, keywords);
@@ -832,11 +832,6 @@ public abstract class BaseIndexer implements Indexer {
 
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
-
-	private static final String[] _KEYWORDS_FIELDS = {
-		Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES,
-		Field.TITLE, Field.URL, Field.USER_NAME
-	};
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 

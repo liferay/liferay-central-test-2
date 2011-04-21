@@ -53,6 +53,11 @@ public class Field implements Serializable {
 
 	public static final String GROUP_ROLE_ID = "groupRoleId";
 
+	public static final String[] KEYWORDS_FIELDS = {
+		Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES,
+		Field.TITLE, Field.URL, Field.USER_NAME
+	};
+
 	public static final String MODIFIED = "modified";
 
 	public static final String NAME = "name";
