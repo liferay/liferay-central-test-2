@@ -256,15 +256,17 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize social equity log scheduler");
-		}
+		if (PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Initialize social equity log scheduler");
+			}
 
-		try {
-			initSocialEquityLogScheduler();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			try {
+				initSocialEquityLogScheduler();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 
 		if (_log.isDebugEnabled()) {
