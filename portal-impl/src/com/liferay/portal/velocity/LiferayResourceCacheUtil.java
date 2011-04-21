@@ -14,9 +14,8 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.MultiVMKeyPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 
 import org.apache.velocity.runtime.resource.Resource;
 
@@ -29,43 +28,22 @@ public class LiferayResourceCacheUtil {
 		LiferayResourceCacheUtil.class.getName();
 
 	public static void clear() {
-		_multiVMPortalCache.removeAll();
-		_singleVMPortalCache.removeAll();
+		_multiVMKeyPoolPortalCache.removeAll();
 	}
 
 	public static Resource get(String key) {
-		Object obj = _singleVMPortalCache.get(key);
-
-		if ((obj != null) && (obj instanceof Resource)) {
-			Resource resource = (Resource)obj;
-
-			Long lastModified = (Long)_multiVMPortalCache.get(key);
-
-			if ((lastModified != null) &&
-				lastModified.equals(resource.getLastModified())) {
-
-				return resource;
-			}
-
-			_singleVMPortalCache.remove(key);
-		}
-
-		return null;
+		return (Resource)_multiVMKeyPoolPortalCache.get(key);
 	}
 
 	public static void put(String key, Resource resource) {
-		_multiVMPortalCache.put(key, resource.getLastModified());
-		_singleVMPortalCache.put(key, resource);
+		_multiVMKeyPoolPortalCache.put(key, resource);
 	}
 
 	public static void remove(String key) {
-		_multiVMPortalCache.remove(key);
-		_singleVMPortalCache.remove(key);
+		_multiVMKeyPoolPortalCache.remove(key);
 	}
 
-	private static PortalCache _multiVMPortalCache = MultiVMPoolUtil.getCache(
-		CACHE_NAME);
-	private static PortalCache _singleVMPortalCache = SingleVMPoolUtil.getCache(
-		CACHE_NAME);
+	private static PortalCache _multiVMKeyPoolPortalCache =
+		MultiVMKeyPoolUtil.getCache(CACHE_NAME);
 
 }
