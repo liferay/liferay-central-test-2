@@ -810,11 +810,11 @@ release was successful.</echo>
 			src="${app.server.parent.dir}/${app.server.tcat.zip.name}"
 		>
 			<patternset
-				includes="TcatServer-6.4.3/webapps/*.war"
+				includes="TcatServer-6.4.4/webapps/*.war"
 			/>
 			<mapper
 				type="glob"
-				from="TcatServer-6.4.3/*"
+				from="TcatServer-6.4.4/*"
 				to="${app.server.tcat.dir.name}/*"
 			/>
 		</unzip>
