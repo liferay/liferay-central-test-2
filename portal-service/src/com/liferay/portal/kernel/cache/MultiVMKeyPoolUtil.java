@@ -14,58 +14,9 @@
 
 package com.liferay.portal.kernel.cache;
 
-import java.io.Serializable;
-
 /**
  * @author Edward Han
  * @author Brian Wing Shun Chan
  */
-public class MultiVMKeyPoolUtil {
-
-	public static void clear() {
-		getMultiVMPool().clear();
-	}
-
-	public static void clear(String name) {
-		getMultiVMPool().clear(name);
-	}
-
-	public static Object get(String name, String key) {
-		return getMultiVMPool().get(name, key);
-	}
-
-	public static PortalCache getCache(String name) {
-		return getMultiVMPool().getCache(name);
-	}
-
-	public static PortalCache getCache(String name, boolean blocking) {
-		return getMultiVMPool().getCache(name, blocking);
-	}
-
-	public static MultiVMPool getMultiVMPool() {
-		return _multiVMPool;
-	}
-
-	public static void put(String name, String key, Object value) {
-		getMultiVMPool().put(name, key, value);
-	}
-
-	public static void put(String name, String key, Serializable value) {
-		getMultiVMPool().put(name, key, value);
-	}
-
-	public static void remove(String name, String key) {
-		getMultiVMPool().remove(name, key);
-	}
-
-	public static void removeCache(String name) {
-		getMultiVMPool().removeCache(name);
-	}
-
-	public void setMultiVMPool(MultiVMPool multiVMPool) {
-		_multiVMPool = multiVMPool;
-	}
-
-	private static MultiVMPool _multiVMPool;
-
+public class MultiVMKeyPoolUtil extends MultiVMPoolUtil {
 }
