@@ -295,15 +295,11 @@ public class ListUtil {
 	public static String toString(
 		List<?> list, String param, String delimiter) {
 
-		StringBundler sb = null;
-
-		if (list == null || list.isEmpty()) {
-			sb = new StringBundler();
-
-			return sb.toString();
+		if ((list == null) || list.isEmpty()) {
+			return StringPool.BLANK;
 		}
 
-		sb = new StringBundler(2 * list.size() - 1);
+		StringBundler sb = new StringBundler(2 * list.size() - 1);
 
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
