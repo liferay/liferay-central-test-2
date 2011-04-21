@@ -1211,7 +1211,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<String, String> articleIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalArticle.class);
+				JournalArticle.class + ".articleId");
 
 		String newArticleId = articleIds.get(articleId);
 
@@ -1725,14 +1725,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<String, String> structureIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalStructure.class);
+				JournalStructure.class + ".structureId");
 
 		String parentStructureId = MapUtil.getString(
 			structureIds, feed.getStructureId(), feed.getStructureId());
 
 		Map<String, String> templateIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalTemplate.class);
+				JournalTemplate.class + ".templateId");
 
 		String parentTemplateId = MapUtil.getString(
 			templateIds, feed.getTemplateId(), feed.getTemplateId());
@@ -1948,7 +1948,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<String, String> structureIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalStructure.class);
+				JournalStructure.class + ".structureId");
 
 		String parentStructureId = MapUtil.getString(
 			structureIds, structure.getParentStructureId(),
@@ -2087,13 +2087,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			autoTemplateId = true;
 		}
 
-		Map<String, String> templateIds =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalTemplate.class);
-
 		Map<String, String> structureIds =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalStructure.class);
+				JournalStructure.class + ".structureId");
 
 		String parentStructureId = MapUtil.getString(
 			structureIds, template.getStructureId(), template.getStructureId());
@@ -2203,6 +2199,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(
 			template, importedTemplate, _NAMESPACE);
+
+		Map<String, String> templateIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalTemplate.class + ".templateId");
 
 		templateIds.put(
 			template.getTemplateId(), importedTemplate.getTemplateId());
