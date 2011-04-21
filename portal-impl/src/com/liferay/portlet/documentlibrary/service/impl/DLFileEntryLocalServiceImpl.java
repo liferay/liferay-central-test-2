@@ -929,9 +929,8 @@ public class DLFileEntryLocalServiceImpl
 
 		// Lock
 
-		String lockId = String.valueOf(dlFileEntry.getFileEntryId());
-
-		lockLocalService.unlock(DLFileEntry.class.getName(), lockId);
+		lockLocalService.unlock(
+			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
 
 		// DLApp
 
