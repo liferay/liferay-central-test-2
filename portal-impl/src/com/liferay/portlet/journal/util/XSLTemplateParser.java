@@ -14,23 +14,14 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
-import com.liferay.portal.kernel.templateparser.BaseTemplateParser;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.ContentUtil;
-import com.liferay.util.PwdGenerator;
 
 import java.util.Locale;
-import java.util.Map;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -41,93 +32,96 @@ import javax.xml.transform.stream.StreamSource;
  * @author Alexander Chow
  * @author Raymond Augé
  */
-public class XSLTemplateParser extends BaseTemplateParser {
+public class XSLTemplateParser extends VelocityTemplateParser {
 
-	protected String doTransform(
-			ThemeDisplay themeDisplay, Map<String, String> tokens,
-			String viewMode, String languageId, String xml, String script)
+	protected TemplateContext getTemplateContext() throws Exception {
+		return _getTemplateContext(getScript());
+	}
+
+	protected boolean mergeTemplate(
+			TemplateContext templateContext,
+			UnsyncStringWriter unsyncStringWriter)
 		throws Exception {
 
-		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-			new UnsyncByteArrayOutputStream();
+		StreamSource xmlSource = new StreamSource(
+			new UnsyncStringReader(getXML()));
 
-		long companyId = GetterUtil.getLong(tokens.get("company_id"));
-		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-		long groupId = GetterUtil.getLong(tokens.get("group_id"));
-		String journalTemplatesPath =
-			VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
-				companyId + StringPool.SLASH + groupId;
-		String randomNamespace =
-			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
-				StringPool.UNDERLINE;
-		Locale locale = LocaleUtil.fromLanguageId(languageId);
+		XSLContext xslContext = (XSLContext)templateContext;
 
-		XSLErrorListener xslErrorListener = new XSLErrorListener(locale);
-
-		StreamSource xmlSource = new StreamSource(new UnsyncStringReader(xml));
-
-		TransformerFactory transformerFactory =
-			TransformerFactory.newInstance();
-
-		transformerFactory.setURIResolver(new URIResolver(tokens, languageId));
-		transformerFactory.setErrorListener(xslErrorListener);
+		Transformer transformer = xslContext.getTransformer();
 
 		try {
-			StreamSource scriptSource = new StreamSource(
-				new UnsyncStringReader(script));
-
-			Transformer transformer = transformerFactory.newTransformer(
-				scriptSource);
-
-			transformer.setParameter("company", company);
-			transformer.setParameter("companyId", new Long(companyId));
-			transformer.setParameter("groupId", String.valueOf(groupId));
-			transformer.setParameter(
-				"journalTemplatesPath", journalTemplatesPath);
-			transformer.setParameter("viewMode", viewMode);
-			transformer.setParameter("locale", locale);
-			transformer.setParameter(
-				"permissionChecker",
-				PermissionThreadLocal.getPermissionChecker());
-			transformer.setParameter("randomNamespace", randomNamespace);
-
 			transformer.transform(
-				xmlSource, new StreamResult(unsyncByteArrayOutputStream));
+				xmlSource, new StreamResult(unsyncStringWriter));
 		}
-		catch (Exception e1) {
-			String errorTemplate = ContentUtil.get(
+		catch (Exception e) {
+			String errorTemplateContent = ContentUtil.get(
 				PropsValues.JOURNAL_ERROR_TEMPLATE_XSL);
 
-			StreamSource scriptSource = new StreamSource(
-				new UnsyncStringReader(errorTemplate));
+			XSLContext errorXSLContext = (XSLContext)_getTemplateContext(
+				errorTemplateContent);
 
-			Transformer transformer = transformerFactory.newTransformer(
-				scriptSource);
+			populateTemplateContext(errorXSLContext);
 
-			transformer.setParameter("company", company);
-			transformer.setParameter("companyId", new Long(companyId));
-			transformer.setParameter("groupId", String.valueOf(groupId));
-			transformer.setParameter(
-				"journalTemplatesPath", journalTemplatesPath);
-			transformer.setParameter("locale", locale);
-			transformer.setParameter("randomNamespace", randomNamespace);
+			Transformer errorTransformer = errorXSLContext.getTransformer();
 
-			transformer.setParameter(
+			XSLErrorListener xslErrorListener = _getXSLErrorListener();
+
+			errorTransformer.setParameter(
 				"exception", xslErrorListener.getMessageAndLocation());
-			transformer.setParameter("script", script);
+			errorTransformer.setParameter("script", getScript());
 
 			if (xslErrorListener.getLocation() != null) {
-				transformer.setParameter(
+				errorTransformer.setParameter(
 					"column", new Integer(xslErrorListener.getColumnNumber()));
-				transformer.setParameter(
+				errorTransformer.setParameter(
 					"line", new Integer(xslErrorListener.getLineNumber()));
 			}
 
-			transformer.transform(
-				xmlSource, new StreamResult(unsyncByteArrayOutputStream));
+			unsyncStringWriter.reset();
+
+			errorTransformer.transform(
+				xmlSource, new StreamResult(unsyncStringWriter));
 		}
 
-		return unsyncByteArrayOutputStream.toString(StringPool.UTF8);
+		return false;
 	}
+
+	private TemplateContext _getTemplateContext(String script)
+		throws Exception {
+
+		TransformerFactory transformerFactory = _getTransformerFactory();
+
+		StreamSource scriptSource = new StreamSource(
+			new UnsyncStringReader(script));
+
+		return new XSLContext(transformerFactory.newTransformer(scriptSource));
+	}
+
+	private TransformerFactory _getTransformerFactory() {
+		if (_transformerFactory == null) {
+			TransformerFactory transformerFactory =
+				TransformerFactory.newInstance();
+
+			transformerFactory.setErrorListener(_getXSLErrorListener());
+			transformerFactory.setURIResolver(
+				new URIResolver(getTokens(), getLanguageId()));
+		}
+
+		return _transformerFactory;
+	}
+
+	private XSLErrorListener _getXSLErrorListener() {
+		if (_xslErrorListener == null) {
+			Locale locale = LocaleUtil.fromLanguageId(getLanguageId());
+
+			_xslErrorListener = new XSLErrorListener(locale);
+		}
+
+		return _xslErrorListener;
+	}
+
+	private TransformerFactory _transformerFactory;
+	private XSLErrorListener _xslErrorListener;
 
 }

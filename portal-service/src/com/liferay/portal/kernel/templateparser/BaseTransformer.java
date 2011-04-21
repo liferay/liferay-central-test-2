@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstanceFactory;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -142,17 +141,25 @@ public abstract class BaseTransformer implements Transformer {
 			}
 
 			if (Validator.isNotNull(templateParserClassName)) {
-				TemplateParser templateParser =
-					(TemplateParser)InstancePool.get(templateParserClassName);
+				TemplateParser templateParser = null;
 
-				if (templateParser == null) {
-					throw new TransformException(
-						"No template parser found for " +
+				try {
+					templateParser =
+						(TemplateParser)InstanceFactory.newInstance(
 							templateParserClassName);
 				}
+				catch (Exception e) {
+					throw new TransformException(e);
+				}
 
-				output = templateParser.transform(
-					themeDisplay, tokens, viewMode, languageId, xml, script);
+				templateParser.setLanguageId(languageId);
+				templateParser.setScript(script);
+				templateParser.setThemeDisplay(themeDisplay);
+				templateParser.setTokens(tokens);
+				templateParser.setViewMode(viewMode);
+				templateParser.setXML(xml);
+
+				output = templateParser.transform();
 			}
 		}
 
