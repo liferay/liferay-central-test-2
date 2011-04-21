@@ -29,55 +29,13 @@
 		clear: both;
 	}
 
-	.lfr-table .journal-metadata {
-		background: #EEE;
-		border: 1px solid #979798;
-		border-color: #979798 #FAFAFB #FAFAFB #BDBDBE;
-		min-height: 1.8em;
-
-		-moz-border-radius: 4px;
-		-webkit-border-radius: 4px;
-		border-radius: 4px;
-
-		-moz-box-shadow: 1px 1px 8px #CCC inset;
-		-webkit-box-shadow: 1px 1px 8px #CCC inset;
-		box-shadow: 1px 1px 8px #CCC inset;
-	}
-
-	.lfr-table .article-structure-template-toolbar {
-		/*background-color: #DFF4FF;
-		border: 1px solid #A7CEDF;*/
-		color: #34404F;
-		display: block;
-		margin: 0 auto;
-		padding: 0.5em;
-
-		label {
-			font-weight: bold;
-		}
-
-		.article-structure-toolbar, .article-template-toolbar {
-			display: inline;
-			margin-left: 0.5em;
-			margin-bottom: 0;
-		}
-
-		.article-template-label {
-			vertical-align: top;
-		}
-
-		.article-template-image {
-			max-height: 50px;
-			max-width: 50px;
-			vertical-align: middle;
-		}
-	}
-
 	.lfr-table .article-translation-toolbar {
+		background: #DFF4FF url(<%= themeImagesPath %>/journal/language.png) no-repeat 6px 50%;
+		border: 1px solid #A7CEDF;
 		color: #34404F;
 		display: block;
-		margin: 0 auto;
-		padding: 0.5em;
+		margin: 2px auto 14px;
+		padding: 6px 6px 6px 30px;
 
 		label {
 			font-weight: bold;
@@ -119,11 +77,6 @@
 		}
 	}
 
-	.lfr-table .journal-article-header-edit {
-		margin: 1em 0;
-		width: 95%;
-	}
-
 	.subscribe-link {
 		float: right;
 		margin-bottom: 1em;
@@ -152,6 +105,14 @@
 
 		.lfr-tag-selector-input {
 			width: 100%;
+		}
+	}
+
+	.journal-extras {
+		border-width: 0;
+
+		.lfr-panel {
+			margin-bottom: 1em;
 		}
 	}
 
@@ -309,11 +270,12 @@
 	}
 
 	.structure-links {
-		margin-right: 0.5em;
-	}
+		display: block;
+		margin-top: 5px;
 
-	.taglib-workflow-status {
-    	margin: 0 0 1em 0;
+		a {
+			margin-right: 10px;
+		}
 	}
 
 	.default-link {
@@ -366,26 +328,6 @@
 
 	.journal-article-buttons {
 		display: none;
-	}
-
-	.form-navigator {
-		.article-info {
-			font-weight: bold;
-			margin-bottom: 15px;
-
-			.article-name {
-				color: #036;
-				display: block;
-				font-size: 14px;
-			}
-
-			.article-image {
-				float: left;
-				margin-right: 10px;
-				padding: 0;
-				width: 35px;
-			}
-		}
 	}
 }
 
@@ -500,18 +442,6 @@
 	}
 
 	.portlet-journal .structure-field .journal-article-localized-checkbox {
-		display: none;
-	}
-
-	.lfr-table .journal-article-header-edit {
-		width: 100%;
-	}
-
-	.taglib-form-navigator .form-section.selected {
-		width: 100%;
-	}
-
-	.taglib-form-navigator .form-navigator, .lfr-table .article-translation-toolbar, .journal-article-general-fields, .article-toolbar {
 		display: none;
 	}
 }
@@ -724,6 +654,10 @@
 
 .structure-message {
 	margin-top: 5px;
+}
+
+.structure-name-label {
+	font-weight: bold;
 }
 
 .save-structure-template-dialog textarea {
