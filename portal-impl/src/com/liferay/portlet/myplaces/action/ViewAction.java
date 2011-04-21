@@ -71,7 +71,7 @@ public class ViewAction extends PortletAction {
 
 			SessionErrors.add(
 				request, NoSuchGroupException.class.getName(),
-				new NoSuchGroupException("groupId=" + groupId));
+				new NoSuchGroupException("{groupId=" + groupId + "}"));
 		}
 
 		response.sendRedirect(redirect);
@@ -98,7 +98,7 @@ public class ViewAction extends PortletAction {
 
 			SessionErrors.add(
 				actionRequest, NoSuchGroupException.class.getName(),
-				new NoSuchGroupException("groupId=" + groupId));
+				new NoSuchGroupException("{groupId=" + groupId + "}"));
 		}
 
 		actionResponse.sendRedirect(redirect);
@@ -146,9 +146,9 @@ public class ViewAction extends PortletAction {
 			PermissionChecker permissionChecker =
 				themeDisplay.getPermissionChecker();
 
-			if ((!layout.isHidden()) &&
-				(LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.VIEW))) {
+			if (!layout.isHidden() &&
+				LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
