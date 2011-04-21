@@ -297,12 +297,13 @@ public class ListUtil {
 
 		StringBundler sb = null;
 
-		if (list.isEmpty()) {
+		if (list == null || list.isEmpty()) {
 			sb = new StringBundler();
+
+			return sb.toString();
 		}
-		else {
-			sb = new StringBundler(2 * list.size() - 1);
-		}
+
+		sb = new StringBundler(2 * list.size() - 1);
 
 		for (int i = 0; i < list.size(); i++) {
 			Object bean = list.get(i);
