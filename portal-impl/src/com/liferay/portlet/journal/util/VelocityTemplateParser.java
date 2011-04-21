@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.util.ContentUtil;
+import com.liferay.util.PwdGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -167,6 +168,12 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		super.populateTemplateContext(templateContext);
 
 		templateContext.put("journalTemplatesPath", getJournalTemplatesPath());
+
+		String randomNamespace =
+			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
+				StringPool.UNDERLINE;
+
+		templateContext.put("randomNamespace", randomNamespace);
 	}
 
 	protected String stripCDATA(String s) {

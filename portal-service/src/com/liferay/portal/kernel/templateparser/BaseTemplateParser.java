@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.templateparser;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -26,7 +25,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.util.PwdGenerator;
 
 import java.io.IOException;
 
@@ -241,12 +239,6 @@ public abstract class BaseTemplateParser implements TemplateParser {
 
 		templateContext.put(
 			"permissionChecker", PermissionThreadLocal.getPermissionChecker());
-
-		String randomNamespace =
-			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
-				StringPool.UNDERLINE;
-
-		templateContext.put("randomNamespace", randomNamespace);
 
 		templateContext.put("viewMode", _viewMode);
 	}
