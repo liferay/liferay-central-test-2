@@ -32,12 +32,10 @@ import java.util.List;
  */
 public class LocaleTransformerListener extends BaseTransformerListener {
 
-	public String onXml(String s) {
+	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
+			_log.debug("onOutput");
 		}
-
-		s = replace(s);
 
 		return s;
 	}
@@ -52,12 +50,36 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 		return s;
 	}
 
-	public String onOutput(String s) {
+	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onOutput");
+			_log.debug("onXml");
 		}
 
+		s = replace(s);
+
 		return s;
+	}
+
+	protected void replace(Element root) {
+		List<Element> elements = root.elements();
+
+		int listIndex = elements.size() - 1;
+
+		while (listIndex >= 0) {
+			Element element = elements.get(listIndex);
+
+			String languageId = element.attributeValue(
+				"language-id", getLanguageId());
+
+			if (!languageId.equalsIgnoreCase(getLanguageId())) {
+				root.remove(element);
+			}
+			else{
+				replace(element);
+			}
+
+			listIndex--;
+		}
 	}
 
 	protected String replace(String xml) {
@@ -68,64 +90,43 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 		_requestedLocale = getLanguageId();
 
 		try {
-			Document doc = SAXReaderUtil.read(xml);
+			Document document = SAXReaderUtil.read(xml);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
 			String defaultLanguageId = LocaleUtil.toLanguageId(
 				LocaleUtil.getDefault());
 
 			String[] availableLocales = StringUtil.split(
-				root.attributeValue("available-locales", defaultLanguageId));
+				rootElement.attributeValue(
+					"available-locales", defaultLanguageId));
 
-			String defaultLocale = root.attributeValue(
+			String defaultLocale = rootElement.attributeValue(
 				"default-locale", defaultLanguageId);
 
-			boolean isSupportedLocale = false;
+			boolean supportedLocale = false;
 
-			for (int i = 0; i < availableLocales.length; i++) {
-				if (availableLocales[i].equalsIgnoreCase(getLanguageId())) {
-					isSupportedLocale = true;
+			for (String availableLocale : availableLocales) {
+				if (availableLocale.equalsIgnoreCase(getLanguageId())) {
+					supportedLocale = true;
 
 					break;
 				}
 			}
 
-			if (!isSupportedLocale) {
+			if (!supportedLocale) {
 				setLanguageId(defaultLocale);
 			}
 
-			replace(root);
+			replace(rootElement);
 
-			xml = DDMXMLUtil.formatXML(doc);
+			xml = DDMXMLUtil.formatXML(document);
 		}
 		catch (Exception e) {
 			_log.error(e);
 		}
 
 		return xml;
-	}
-
-	protected void replace(Element root) {
-		List<Element> children = root.elements();
-
-		int listIndex = children.size() - 1;
-
-		while (listIndex >= 0) {
-			Element child = children.get(listIndex);
-
-			String languageId = child.attributeValue(
-				"language-id", getLanguageId());
-
-			if (!languageId.equalsIgnoreCase(getLanguageId())) {
-				root.remove(child);
-			}
-			else{
-				replace(child);
-			}
-
-			listIndex--;
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

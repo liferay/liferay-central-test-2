@@ -28,12 +28,12 @@ import java.util.Map;
  */
 public class ViewCounterTransformerListener extends BaseTransformerListener {
 
-	public String onXml(String s) {
+	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
+			_log.debug("onOutput");
 		}
 
-		return s;
+		return replace(s);
 	}
 
 	public String onScript(String s) {
@@ -44,12 +44,12 @@ public class ViewCounterTransformerListener extends BaseTransformerListener {
 		return s;
 	}
 
-	public String onOutput(String s) {
+	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onOutput");
+			_log.debug("onXml");
 		}
 
-		return replace(s);
+		return s;
 	}
 
 	/**

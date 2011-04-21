@@ -27,10 +27,12 @@ import java.util.regex.Pattern;
  */
 public class RegexTransformerListener extends BaseTransformerListener {
 
-	public String onXml(String s) {
+	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
+			_log.debug("onOutput");
 		}
+
+		s = replace(s);
 
 		return s;
 	}
@@ -45,12 +47,10 @@ public class RegexTransformerListener extends BaseTransformerListener {
 		return s;
 	}
 
-	public String onOutput(String s) {
+	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onOutput");
+			_log.debug("onXml");
 		}
-
-		s = replace(s);
 
 		return s;
 	}

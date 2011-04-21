@@ -33,10 +33,12 @@ import java.util.Properties;
  */
 public class PropertiesTransformerListener extends BaseTransformerListener {
 
-	public String onXml(String s) {
+	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
+			_log.debug("onOutput");
 		}
+
+		s = replace(s);
 
 		return s;
 	}
@@ -51,12 +53,10 @@ public class PropertiesTransformerListener extends BaseTransformerListener {
 		return s;
 	}
 
-	public String onOutput(String s) {
+	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onOutput");
+			_log.debug("onXml");
 		}
-
-		s = replace(s);
 
 		return s;
 	}
@@ -103,7 +103,7 @@ public class PropertiesTransformerListener extends BaseTransformerListener {
 			}
 		}
 
-		if (properties.size() == 0) {
+		if (properties.isEmpty()) {
 			return s;
 		}
 

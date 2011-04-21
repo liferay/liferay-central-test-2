@@ -38,26 +38,6 @@ import java.util.Map;
  */
 public class ContentTransformerListener extends BaseTransformerListener {
 
-	public String onXml(String s) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
-		}
-
-		xml = replace(s);
-
-		return xml;
-	}
-
-	public String onScript(String s) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("onScript");
-		}
-
-		s = injectEditInPlace(xml, s);
-
-		return s;
-	}
-
 	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onOutput");
@@ -66,21 +46,69 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		return s;
 	}
 
+	public String onScript(String s) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("onScript");
+		}
+
+		s = injectEditInPlace(_xml, s);
+
+		return s;
+	}
+
+	public String onXml(String s) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("onXml");
+		}
+
+		_xml = replace(s);
+
+		return _xml;
+	}
+
+	protected String getDynamicContent(String xml, String elementName) {
+		String content = null;
+
+		try {
+			Document document = SAXReaderUtil.read(xml);
+
+			Element rootElement = document.getRootElement();
+
+			for (Element element : rootElement.elements()) {
+				String curElementName = element.attributeValue(
+					"name", StringPool.BLANK);
+
+				if (curElementName.equals(elementName)) {
+					content = element.elementText("dynamic-content");
+
+					break;
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return GetterUtil.getString(content);
+	}
+
 	protected String injectEditInPlace(String xml, String script) {
 		try {
-			Document doc = SAXReaderUtil.read(xml);
+			Document document = SAXReaderUtil.read(xml);
 
-			List<Node> nodes = doc.selectNodes("//dynamic-element");
+			List<Node> nodes = document.selectNodes("//dynamic-element");
 
 			for (Node node : nodes) {
-				Element el = (Element)node;
+				Element element = (Element)node;
 
-				String name = GetterUtil.getString(el.attributeValue("name"));
-				String type = GetterUtil.getString(el.attributeValue("type"));
+				String name = GetterUtil.getString(
+					element.attributeValue("name"));
+				String type = GetterUtil.getString(
+					element.attributeValue("type"));
 
 				if ((!name.startsWith("reserved-")) &&
-					(type.equals("text") || type.equals("text_box") ||
-					 type.equals("text_area"))) {
+					(type.equals("text") || type.equals("text_area") ||
+					 type.equals("text_box"))) {
 
 					script = wrapField(script, name, type, "data");
 					script = wrapField(script, name, type, "getData()");
@@ -92,29 +120,6 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		}
 
 		return script;
-	}
-
-	/**
-	 * Fill one article with content from another approved article. See the
-	 * article DOCUMENTATION-INSTALLATION-BORLAND for a sample use case.
-	 *
-	 * @return the processed string
-	 */
-	protected String replace(String xml) {
-		try {
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			replace(root);
-
-			xml = DDMXMLUtil.formatXML(doc);
-		}
-		catch (Exception e) {
-			_log.warn(e.getMessage());
-		}
-
-		return xml;
 	}
 
 	protected void replace(Element root) throws Exception {
@@ -152,7 +157,7 @@ public class ContentTransformerListener extends BaseTransformerListener {
 
 						dynamicContent.clearContent();
 						dynamicContent.addCDATA(
-							_getDynamicContent(
+							getDynamicContent(
 								article.getContent(), elementName));
 					}
 				}
@@ -170,6 +175,29 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		}
 	}
 
+	/**
+	 * Fill one article with content from another approved article. See the
+	 * article DOCUMENTATION-INSTALLATION-BORLAND for a sample use case.
+	 *
+	 * @return the processed string
+	 */
+	protected String replace(String xml) {
+		try {
+			Document document = SAXReaderUtil.read(xml);
+
+			Element rootElement = document.getRootElement();
+
+			replace(rootElement);
+
+			xml = DDMXMLUtil.formatXML(document);
+		}
+		catch (Exception e) {
+			_log.warn(e.getMessage());
+		}
+
+		return xml;
+	}
+
 	protected String wrapField(
 		String script, String name, String type, String call) {
 
@@ -183,34 +211,9 @@ public class ContentTransformerListener extends BaseTransformerListener {
 			script, "$editInPlace(" + field + ")", wrappedField);
 	}
 
-	private String _getDynamicContent(String xml, String elementName) {
-		String content = null;
-
-		try {
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			for (Element el : root.elements()) {
-				String elName = el.attributeValue("name", StringPool.BLANK);
-
-				if (elName.equals(elementName)) {
-					content = el.elementText("dynamic-content");
-
-					break;
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return GetterUtil.getString(content);
-	}
-
-	private String xml;
-
 	private static Log _log = LogFactoryUtil.getLog(
 		ContentTransformerListener.class);
+
+	private String _xml;
 
 }

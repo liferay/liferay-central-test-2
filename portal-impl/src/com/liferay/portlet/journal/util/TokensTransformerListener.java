@@ -32,18 +32,18 @@ import java.util.Set;
  */
 public class TokensTransformerListener extends BaseTransformerListener {
 
-	public static final String TEMP_ESCAPED_AT_OPEN =
-		"[$TEMP_ESCAPED_AT_OPEN$]";
-
 	public static final String TEMP_ESCAPED_AT_CLOSE =
 		"[$_TEMP_ESCAPED_AT_CLOSE$]";
 
-	public String onXml(String s) {
+	public static final String TEMP_ESCAPED_AT_OPEN =
+		"[$TEMP_ESCAPED_AT_OPEN$]";
+
+	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
+			_log.debug("onOutput");
 		}
 
-		return s;
+		return replace(s);
 	}
 
 	public String onScript(String s) {
@@ -54,12 +54,12 @@ public class TokensTransformerListener extends BaseTransformerListener {
 		return replace(s);
 	}
 
-	public String onOutput(String s) {
+	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
-			_log.debug("onOutput");
+			_log.debug("onXml");
 		}
 
-		return replace(s);
+		return s;
 	}
 
 	/**
