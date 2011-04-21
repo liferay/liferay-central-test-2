@@ -25,6 +25,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
@@ -114,11 +115,11 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Class<?> getModelClass() {
-		return CMISFolder.class;
+		return DLFolder.class;
 	}
 
 	public String getModelClassName() {
-		return CMISFolder.class.getName();
+		return DLFolder.class.getName();
 	}
 
 	public Date getModifiedDate() {

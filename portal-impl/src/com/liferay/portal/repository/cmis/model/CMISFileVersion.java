@@ -26,6 +26,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -114,11 +115,11 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 	}
 
 	public Class<?> getModelClass() {
-		return CMISFileVersion.class;
+		return DLFileVersion.class;
 	}
 
 	public String getModelClassName() {
-		return CMISFileVersion.class.getName();
+		return DLFileVersion.class.getName();
 	}
 
 	public Date getModifiedDate() {
