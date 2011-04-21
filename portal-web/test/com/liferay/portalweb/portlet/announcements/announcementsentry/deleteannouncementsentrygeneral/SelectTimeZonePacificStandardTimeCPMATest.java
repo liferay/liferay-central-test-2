@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.announcements.announcementsentry.showannouncementsentrygeneral;
+package com.liferay.portalweb.portlet.announcements.announcementsentry.deleteannouncementsentrygeneral;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SelectTimeZonePacificStandardTimeTest extends BaseTestCase {
-	public void testSelectTimeZonePacificStandardTime()
+public class SelectTimeZonePacificStandardTimeCPMATest extends BaseTestCase {
+	public void testSelectTimeZonePacificStandardTimeCPMA()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 
@@ -46,7 +46,7 @@ public class SelectTimeZonePacificStandardTimeTest extends BaseTestCase {
 			RuntimeVariables.replace("Joe Bloggs"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//a[@id='displaySettingsLink']",
+		selenium.clickAt("//a[@id='_2_displaySettingsLink']",
 			RuntimeVariables.replace("Display Settings"));
 
 		for (int second = 0;; second++) {

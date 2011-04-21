@@ -45,7 +45,7 @@ public class TearDownTimeZoneTest extends BaseTestCase {
 			RuntimeVariables.replace("Joe Bloggs"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//a[@id='displaySettingsLink']",
+		selenium.clickAt("//a[@id='_2_displaySettingsLink']",
 			RuntimeVariables.replace("Display Settings"));
 
 		for (int second = 0;; second++) {
