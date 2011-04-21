@@ -85,10 +85,13 @@
 			}
 
 			var process = instance._process;
+			var processed = false;
 
 			var result = data.replace(
 				REGEX_MAIN,
 				function() {
+					processed = true;
+
 					return process.apply(instance, arguments);
 				}
 			);
@@ -103,7 +106,11 @@
 				if ( lastBBTag == 'url') {
 					openTags.pop();
 
-					endTags.push(STR_TAG_ATTR_CLOSE, data.substr(instance._urlStart, data.length - instance._urlStart), '</a>');
+					var url = data.substr(instance._urlStart, data.length - instance._urlStart);
+
+					url = CKEDITOR.tools.htmlEncodeAttr(url);
+
+					endTags.push(STR_TAG_ATTR_CLOSE, url, '</a>');
 				}
 				else if (lastBBTag == 'img') {
 					openTags.pop();
@@ -120,6 +127,10 @@
 
 			if (endTags.length) {
 				result =  result + endTags.join('');
+			}
+
+			if (!processed) {
+				result = CKEDITOR.tools.htmlEncode(result);
 			}
 
 			return result;
@@ -176,6 +187,8 @@
 
 		_handleFont: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
+
+			tagOption = CKEDITOR.tools.htmlEncodeAttr(tagOption);
 
 			var result = STR_TAG_ATTR_STYLE_OPEN + 'font-family: ' + tagOption + STR_TAG_ATTR_CLOSE;
 
@@ -271,6 +284,8 @@
 			var result = '<blockquote>';
 
 			if (tagOption && tagOption.length) {
+				tagOption = CKEDITOR.tools.htmlEncode(tagOption);
+
 				result = '<blockquote><cite>' + tagOption + '</cite>';
 			}
 
@@ -452,6 +467,8 @@
 			if (tagOption && REGEX_URI.test(tagOption)) {
 				instance._urlStart = -1;
 
+				tagOption = CKEDITOR.tools.htmlEncodeAttr(tagOption);
+
 				result = '<a href="' + tagOption + STR_TAG_ATTR_CLOSE;
 			}
 			else {
@@ -508,7 +525,7 @@
 			}
 
 			if (result === null) {
-				result = matchedStr;
+				result = CKEDITOR.tools.htmlEncode(matchedStr);
 			}
 
 			return result;
@@ -544,7 +561,11 @@
 					}
 					else if (closeTag == 'url') {
 						if (instance._urlStart > 0) {
-							result = STR_TAG_ATTR_CLOSE + str.substr(instance._urlStart, offset - instance._urlStart) + openTags.pop().endTag;
+							var url = str.substr(instance._urlStart, offset - instance._urlStart);
+
+							url = CKEDITOR.tools.htmlEncodeAttr(url);
+
+							result = STR_TAG_ATTR_CLOSE + url + openTags.pop().endTag;
 						}
 						else {
 							result = openTags.pop().endTag;
