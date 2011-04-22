@@ -202,8 +202,8 @@ public class VerifySQLServer extends VerifyProcess {
 				}
 
 				if (indexName.startsWith("PK")) {
-
-					String columnNames = getPKColumnNames(indexName);
+					String primaryKeyColumnNames = StringUtil.merge(
+						getPrimaryKeyColumnNames(indexName));
 
 					runSQL(
 						"alter table " + tableName + " drop constraint " +
@@ -211,7 +211,7 @@ public class VerifySQLServer extends VerifyProcess {
 
 					_addPrimaryKeySQLs.add(
 						"alter table " + tableName + " add primary key (" +
-						columnNames + ")");
+							primaryKeyColumnNames + ")");
 				}
 				else {
 					runSQL("drop index " + indexName + " on " + tableName);
@@ -226,27 +226,28 @@ public class VerifySQLServer extends VerifyProcess {
 		}
 	}
 
-	protected String getPKColumnNames(String indexName) {
+	protected List<String> getPrimaryKeyColumnNames(String indexName) {
+		List<String> columnNames = new ArrayList<String>();
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String columns = null;
-
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(10);
 
 			sb.append("select distinct syscolumns.name as column_name from ");
 			sb.append("sysobjects inner join syscolumns on sysobjects.id = ");
-			sb.append("syscolumns.id inner join sysindexes ");
-			sb.append("on sysobjects.id = sysindexes.id ");
-			sb.append("inner join sysindexkeys on ((sysobjects.id = ");
-			sb.append("sysindexkeys.id) and(syscolumns.colid = ");
-			sb.append("sysindexkeys.colid) and (sysindexes.indid = ");
-			sb.append("sysindexkeys.indid)) where sysindexes.name = ");
-			sb.append("'"+indexName+"'");
+			sb.append("syscolumns.id inner join sysindexes on ");
+			sb.append("sysobjects.id = sysindexes.id inner join sysindexkeys ");
+			sb.append("on ((sysobjects.id = sysindexkeys.id) and ");
+			sb.append("(syscolumns.colid = sysindexkeys.colid) and ");
+			sb.append("(sysindexes.indid = sysindexkeys.indid)) where ");
+			sb.append("sysindexes.name = '");
+			sb.append(indexName);
+			sb.append("'");
 
 			String sql = sb.toString();
 
@@ -254,19 +255,20 @@ public class VerifySQLServer extends VerifyProcess {
 
 			rs = ps.executeQuery();
 
-			List<String> listOfColumns = new ArrayList<String>();
-
 			while (rs.next()) {
-				listOfColumns.add(rs.getString("column_name"));
-			}
+				String columnName = rs.getString("column_name");
 
-			columns = StringUtil.merge(listOfColumns);
+				columnNames.add(columnName);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 
-		return columns;
+		return columnNames;
 	}
 
 	private static final String _FILTER_EXCLUDED_TABLES =
