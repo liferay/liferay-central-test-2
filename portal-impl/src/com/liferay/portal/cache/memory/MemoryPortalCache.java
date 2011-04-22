@@ -17,23 +17,21 @@ package com.liferay.portal.cache.memory;
 import com.liferay.portal.kernel.cache.BasePortalCache;
 import com.liferay.portal.kernel.cache.CacheListener;
 import com.liferay.portal.kernel.cache.CacheListenerScope;
+import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Edward Han
+ * @author Shuyang Zhou
  */
 public class MemoryPortalCache extends BasePortalCache {
 
@@ -98,16 +96,7 @@ public class MemoryPortalCache extends BasePortalCache {
 	}
 
 	public void registerCacheListener(CacheListener cacheListener) {
-		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
-
-		writeLock.lock();
-
-		try {
-			_cacheListeners.add(cacheListener);
-		}
-		finally {
-			writeLock.unlock();
-		}
+		_cacheListeners.add(cacheListener);
 	}
 
 	public void registerCacheListener(
@@ -121,88 +110,42 @@ public class MemoryPortalCache extends BasePortalCache {
 
 		Object value = _map.remove(processedKey);
 
-		Lock readLock = _cacheListenersReadWriteLock.readLock();
-
-		readLock.lock();
-
-		try {
-			for (CacheListener cacheListener : _cacheListeners) {
-				cacheListener.notifyEntryRemoved(this, key, value);
-			}
-		}
-		finally {
-			readLock.unlock();
+		for (CacheListener cacheListener : _cacheListeners) {
+			cacheListener.notifyEntryRemoved(this, key, value);
 		}
 	}
 
 	public void removeAll() {
 		_map.clear();
 
-		Lock readLock = _cacheListenersReadWriteLock.readLock();
-
-		readLock.lock();
-
-		try {
-			for (CacheListener cacheListener : _cacheListeners) {
-				cacheListener.notifyRemoveAll(this);
-			}
-		}
-		finally {
-			readLock.unlock();
+		for (CacheListener cacheListener : _cacheListeners) {
+			cacheListener.notifyRemoveAll(this);
 		}
 	}
 
 	public void unregisterCacheListener(CacheListener cacheListener) {
-		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
-
-		writeLock.lock();
-
-		try {
-			_cacheListeners.remove(cacheListener);
-		}
-		finally {
-			writeLock.unlock();
-		}
+		_cacheListeners.remove(cacheListener);
 	}
 
 	public void unregisterCacheListeners() {
-		Lock writeLock = _cacheListenersReadWriteLock.writeLock();
-
-		writeLock.lock();
-
-		try {
-			_cacheListeners.clear();
-		}
-		finally {
-			writeLock.unlock();
-		}
+		_cacheListeners.clear();
 	}
 
 	protected void notifyPutEvents(String key, Object value, boolean updated) {
-		Lock readLock = _cacheListenersReadWriteLock.readLock();
-
-		readLock.lock();
-
-		try {
-			if (updated) {
-				for (CacheListener cacheListener : _cacheListeners) {
-					cacheListener.notifyEntryUpdated(this, key, value);
-				}
-			}
-			else {
-				for (CacheListener cacheListener : _cacheListeners) {
-					cacheListener.notifyEntryPut(this, key, value);
-				}
+		if (updated) {
+			for (CacheListener cacheListener : _cacheListeners) {
+				cacheListener.notifyEntryUpdated(this, key, value);
 			}
 		}
-		finally {
-			readLock.unlock();
+		else {
+			for (CacheListener cacheListener : _cacheListeners) {
+				cacheListener.notifyEntryPut(this, key, value);
+			}
 		}
 	}
 
-	private Set<CacheListener> _cacheListeners = new HashSet<CacheListener>();
-	private ReadWriteLock _cacheListenersReadWriteLock =
-		new ReentrantReadWriteLock();
+	private Set<CacheListener> _cacheListeners =
+		new ConcurrentHashSet<CacheListener>();
 	private Map<String, Object> _map;
 
 }
