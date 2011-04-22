@@ -146,7 +146,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("<projectDescription>\n");
 		sb.append("\t<name>");
 		sb.append(projectName);
-		sb.append("</name>\n");
+		sb.append("-trunk</name>\n");
 		sb.append("\t<comment></comment>\n");
 		sb.append("\t<projects></projects>\n");
 		sb.append("\t<buildSpec>\n");
