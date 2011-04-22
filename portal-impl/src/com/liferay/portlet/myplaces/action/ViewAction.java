@@ -66,7 +66,7 @@ public class ViewAction extends PortletAction {
 
 		List<Layout> layouts = getLayouts(groupId, privateLayoutParam);
 
-		if (layouts.size() == 0) {
+		if (layouts.isEmpty()) {
 			SessionErrors.add(
 				request, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
@@ -99,7 +99,7 @@ public class ViewAction extends PortletAction {
 
 		List<Layout> layouts = getLayouts(groupId, privateLayoutParam);
 
-		if (layouts.size() == 0) {
+		if (layouts.isEmpty()) {
 			SessionErrors.add(
 				actionRequest, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
@@ -135,7 +135,7 @@ public class ViewAction extends PortletAction {
 		if (Validator.isNull(privateLayoutParam)) {
 			layouts = getLayouts(groupId, false);
 
-			if (layouts.size() == 0) {
+			if (layouts.isEmpty()) {
 				layouts = getLayouts(groupId, true);
 			}
 		}
