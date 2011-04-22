@@ -18,10 +18,13 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -46,6 +49,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Hugo Huijser
  */
 public class ViewAction extends PortletAction {
 
@@ -60,17 +64,21 @@ public class ViewAction extends PortletAction {
 		long groupId = ParamUtil.getLong(request, "groupId");
 		String privateLayoutParam = request.getParameter("privateLayout");
 
-		String redirect = getRedirect(
-			themeDisplay, groupId, privateLayoutParam);
+		List<Layout> layouts = getLayouts(groupId, privateLayoutParam);
 
-		if (redirect == null) {
-			redirect = ParamUtil.getString(request, "redirect");
-
+		if (layouts.size() == 0) {
 			SessionErrors.add(
 				request, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
 					"{groupId=" + groupId + ",privateLayout=" +
 						privateLayoutParam + "}"));
+		}
+
+		String redirect = getRedirect(
+			themeDisplay, layouts, groupId, privateLayoutParam);
+
+		if (Validator.isNull(redirect)) {
+			redirect = ParamUtil.getString(request, "redirect");
 		}
 
 		response.sendRedirect(redirect);
@@ -89,17 +97,21 @@ public class ViewAction extends PortletAction {
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		String privateLayoutParam = actionRequest.getParameter("privateLayout");
 
-		String redirect = getRedirect(
-			themeDisplay, groupId, privateLayoutParam);
+		List<Layout> layouts = getLayouts(groupId, privateLayoutParam);
 
-		if (redirect == null) {
-			redirect = ParamUtil.getString(actionRequest, "redirect");
-
+		if (layouts.size() == 0) {
 			SessionErrors.add(
 				actionRequest, NoSuchLayoutSetException.class.getName(),
 				new NoSuchLayoutSetException(
 					"{groupId=" + groupId + ",privateLayout=" +
 						privateLayoutParam + "}"));
+		}
+
+		String redirect = getRedirect(
+			themeDisplay, layouts, groupId, privateLayoutParam);
+
+		if (Validator.isNull(redirect)) {
+			redirect = ParamUtil.getString(actionRequest, "redirect");
 		}
 
 		actionResponse.sendRedirect(redirect);
@@ -113,6 +125,29 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.my_places.view");
 	}
 
+	protected List<Layout> getLayouts(long groupId, String privateLayoutParam)
+		throws Exception {
+
+		List<Layout> layouts = null;
+
+		boolean privateLayout = false;
+
+		if (Validator.isNull(privateLayoutParam)) {
+			layouts = getLayouts(groupId, false);
+
+			if (layouts.size() == 0) {
+				layouts = getLayouts(groupId, true);
+			}
+		}
+		else {
+			privateLayout = GetterUtil.getBoolean(privateLayoutParam);
+
+			layouts = getLayouts(groupId, privateLayout);
+		}
+
+		return layouts;
+	}
+
 	protected List<Layout> getLayouts(long groupId, boolean privateLayout)
 		throws Exception {
 
@@ -121,23 +156,9 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected String getRedirect(
-			ThemeDisplay themeDisplay, long groupId, String privateLayoutParam)
+			ThemeDisplay themeDisplay, List<Layout> layouts, long groupId,
+			String privateLayoutParam)
 		throws Exception {
-
-		List<Layout> layouts = null;
-
-		if (privateLayoutParam == null) {
-			layouts = getLayouts(groupId, false);
-
-			if (layouts.size() == 0) {
-				layouts = getLayouts(groupId, true);
-			}
-		}
-		else {
-			boolean privateLayout = GetterUtil.getBoolean(privateLayoutParam);
-
-			layouts = getLayouts(groupId, privateLayout);
-		}
 
 		String redirect = null;
 
@@ -145,13 +166,21 @@ public class ViewAction extends PortletAction {
 			PermissionChecker permissionChecker =
 				themeDisplay.getPermissionChecker();
 
-			if (LayoutPermissionUtil.contains(
+			if (!layout.isHidden() &&
+				LayoutPermissionUtil.contains(
 					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
 				break;
 			}
+		}
+
+		if (Validator.isNull(redirect)) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			redirect = PortalUtil.getGroupFriendlyURL(
+				group, GetterUtil.getBoolean(privateLayoutParam), themeDisplay);
 		}
 
 		return redirect;
