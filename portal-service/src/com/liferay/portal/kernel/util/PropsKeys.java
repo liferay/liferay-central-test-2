@@ -113,6 +113,10 @@ public interface PropsKeys {
 
 	public static final String AUTH_LOGIN_COMMUNITY_URL = "auth.login.community.url";
 
+	public static final String AUTH_LOGIN_DISABLED = "auth.login.disabled";
+
+	public static final String AUTH_LOGIN_DISABLED_PATH = "auth.login.disabled.path";
+
 	public static final String AUTH_LOGIN_PORTLET_NAME = "auth.login.portlet.name";
 
 	public static final String AUTH_LOGIN_URL = "auth.login.url";

@@ -57,6 +57,14 @@ public class LoginAction extends Action {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		if (PropsValues.AUTH_LOGIN_DISABLED) {
+			response.sendRedirect(
+				themeDisplay.getPathMain() +
+					PropsValues.AUTH_LOGIN_DISABLED_PATH);
+
+			return null;
+		}
+
 		String login = ParamUtil.getString(request, "login");
 		String password = request.getParameter("password");
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");

@@ -84,6 +84,10 @@ public class PropsValues {
 
 	public static final String AUTH_LOGIN_COMMUNITY_URL = PropsUtil.get(PropsKeys.AUTH_LOGIN_COMMUNITY_URL);
 
+	public static final boolean AUTH_LOGIN_DISABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_LOGIN_DISABLED));
+
+	public static final String AUTH_LOGIN_DISABLED_PATH = PropsUtil.get(PropsKeys.AUTH_LOGIN_DISABLED_PATH);
+
 	public static final String AUTH_LOGIN_PORTLET_NAME = PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME);
 
 	public static final String AUTH_LOGIN_URL = PropsUtil.get(PropsKeys.AUTH_LOGIN_URL);

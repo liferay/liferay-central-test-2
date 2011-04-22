@@ -33,6 +33,11 @@
 		<put name="selectable" value="true" />
 	</definition>
 
+	<definition name="portal.login_disabled" extends="portal">
+		<put name="title" value="login-disabled" />
+		<put name="content" value="/portal/login_disabled.jsp" />
+	</definition>
+
 	<definition name="portal.portlet_access_denied" extends="portlet">
 		<put name="portlet_content" value="/portal/portlet_access_denied.jsp" />
 	</definition>

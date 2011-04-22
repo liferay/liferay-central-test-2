@@ -55,6 +55,8 @@
 
 		<action path="/portal/login" type="com.liferay.portal.action.LoginAction" />
 
+		<action path="/portal/login_disabled" forward="portal.login_disabled" />
+
 		<action path="/portal/logout" type="com.liferay.portal.action.LogoutAction" />
 
 		<action path="/portal/portlet_url" type="com.liferay.portal.action.PortletURLAction" />

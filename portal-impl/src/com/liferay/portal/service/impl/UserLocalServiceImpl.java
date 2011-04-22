@@ -924,6 +924,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String authType, String login, String password)
 		throws PortalException, SystemException {
 
+		if (PropsValues.AUTH_LOGIN_DISABLED) {
+			return 0;
+		}
+
 		try {
 			User user = null;
 
@@ -1004,6 +1008,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String method, String uri, String response)
 		throws PortalException, SystemException {
 
+		if (PropsValues.AUTH_LOGIN_DISABLED) {
+			return 0;
+		}
+
 		// Get User
 
 		User user = null;
@@ -1080,6 +1088,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean authenticateForJAAS(long userId, String encPassword) {
+		if (PropsValues.AUTH_LOGIN_DISABLED) {
+			return false;
+		}
+
 		try {
 			User user = userPersistence.findByPrimaryKey(userId);
 
@@ -4266,6 +4278,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap,
 			Map<String, Object> resultsMap)
 		throws PortalException, SystemException {
+
+		if (PropsValues.AUTH_LOGIN_DISABLED) {
+			return Authenticator.FAILURE;
+		}
 
 		login = login.trim().toLowerCase();
 

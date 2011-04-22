@@ -65,6 +65,14 @@ public class LoginAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		if (PropsValues.AUTH_LOGIN_DISABLED) {
+			actionResponse.sendRedirect(
+				themeDisplay.getPathMain() +
+					PropsValues.AUTH_LOGIN_DISABLED_PATH);
+
+			return;
+		}
+
 		/*if (actionRequest.getRemoteUser() != null) {
 			actionResponse.sendRedirect(themeDisplay.getPathMain());
 
