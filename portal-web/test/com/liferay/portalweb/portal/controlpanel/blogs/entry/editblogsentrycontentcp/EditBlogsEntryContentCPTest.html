@@ -30,17 +30,32 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
-	<td>Blogs Entry Content</td>
+	<td>//td[2]/a</td>
+	<td>Blogs Entry Title</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span/a/span</td>
+	<td>xPath=(//strong/a)[2]</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>xPath=(//strong/a)[2]</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>waitForText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
 	<td>Edit</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//span/a/span</td>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a</td>
 	<td>Edit</td>
 </tr>
 <tr>
@@ -50,12 +65,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//td[@id='cke_contents__33_editor']/iframe</td>
+	<td>//td[@id='cke_contents__161_editor']/iframe</td>
 	<td>CK Editor</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//td[@id='cke_contents__33_editor']/iframe</td>
+	<td>//td[@id='cke_contents__161_editor']/iframe</td>
 	<td>CK Editor</td>
 </tr>
 <tr>
@@ -76,12 +91,7 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request processed successfully.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
-	<td>Blogs Entry Content Edited</td>
+	<td>Your request completed successfully.</td>
 </tr>
 
 </tbody></table>

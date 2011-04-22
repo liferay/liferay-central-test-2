@@ -47,33 +47,17 @@ public class AddNullFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/div/div[2]/ul/li[2]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace(
-				"//div[2]/div/div[2]/ul/li[2]/a"));
+		assertEquals(RuntimeVariables.replace("Add Folder"),
+			selenium.getText("//div[2]/div/div[2]/div/div[2]/ul/li[2]/a"));
+		selenium.clickAt("//div[2]/div/div[2]/div/div[2]/ul/li[2]/a",
+			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertFalse(selenium.isTextPresent("This field is required."));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

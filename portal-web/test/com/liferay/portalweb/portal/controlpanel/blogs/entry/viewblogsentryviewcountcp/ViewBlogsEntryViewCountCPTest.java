@@ -48,8 +48,8 @@ public class ViewBlogsEntryViewCountCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		selenium.clickAt("//div[@class='entry-title']/a",
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -78,8 +78,8 @@ public class ViewBlogsEntryViewCountCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		selenium.clickAt("//div[@class='entry-title']/a",
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -113,8 +113,8 @@ public class ViewBlogsEntryViewCountCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		selenium.clickAt("//div[@class='entry-title']/a",
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

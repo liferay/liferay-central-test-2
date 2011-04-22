@@ -86,7 +86,7 @@ public class EditEntryTest extends BaseTestCase {
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.narutofan.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_28_comments",
+		selenium.type("_28_description",
 			RuntimeVariables.replace("This is an edited test bookmark!"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

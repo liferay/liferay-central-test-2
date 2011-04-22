@@ -65,25 +65,9 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/div/div[2]/ul/li[2]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[2]/div/div[2]/ul/li[2]/a",
+		assertEquals(RuntimeVariables.replace("Add Folder"),
+			selenium.getText("//div[2]/div/div[2]/div/div[2]/ul/li[2]/a"));
+		selenium.clickAt("//div[2]/div/div[2]/div/div[2]/ul/li[2]/a",
 			RuntimeVariables.replace("Add Folder"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -92,7 +76,6 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test folder!"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

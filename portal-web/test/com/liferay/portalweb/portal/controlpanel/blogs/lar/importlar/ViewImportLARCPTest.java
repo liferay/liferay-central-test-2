@@ -48,11 +48,8 @@ public class ViewImportLARCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test Entry"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		assertEquals(RuntimeVariables.replace("This is a test entry."),
-			selenium.getText("//div[@class='entry-body']/p"));
-		selenium.clickAt("//div[@class='entry-title']/a",
-			RuntimeVariables.replace("Test Entry"));
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Test Entry"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test Entry"),

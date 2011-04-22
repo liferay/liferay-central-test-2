@@ -66,6 +66,8 @@ public class ImportLARTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Export / Import"),
+			selenium.getText("link=Export / Import"));
 		selenium.clickAt("link=Export / Import", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

@@ -47,8 +47,7 @@ public class AddBlogsEntryTitleNullCPTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Add Blog Entry']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add", RuntimeVariables.replace("Add"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
@@ -60,7 +59,7 @@ public class AddBlogsEntryTitleNullCPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//td[@id='cke_contents__33_editor']/iframe")) {
+							"//td[@id='cke_contents__161_editor']/iframe")) {
 					break;
 				}
 			}
@@ -71,7 +70,7 @@ public class AddBlogsEntryTitleNullCPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.selectFrame("//td[@id='cke_contents__33_editor']/iframe");
+		selenium.selectFrame("//td[@id='cke_contents__161_editor']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Blogs Entry Content"));
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
@@ -80,7 +79,7 @@ public class AddBlogsEntryTitleNullCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace("Please enter a valid title."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));

@@ -30,12 +30,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Add Blog Entry']</td>
-	<td></td>
+	<td>link=Add</td>
+	<td>Add</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_33_title</td>
+	<td>//input[@id='_161_title']</td>
 	<td><!--Html Escape Character Test--></td>
 </tr>
 <tr>
@@ -45,12 +45,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//td[@id='cke_contents__33_editor']/iframe</td>
+	<td>//td[@id='cke_contents__161_editor']/iframe</td>
 	<td>CK Editor</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//td[@id='cke_contents__33_editor']/iframe</td>
+	<td>//td[@id='cke_contents__161_editor']/iframe</td>
 	<td>CK Editor</td>
 </tr>
 <tr>
@@ -76,17 +76,12 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request processed successfully.</td>
+	<td>Your request completed successfully.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entry-title']/a</td>
+	<td>//td[2]/a</td>
 	<td><!--Html Escape Character Test--></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='entry-body']/p</td>
-	<td>Blogs Entry Content</td>
 </tr>
 
 </tbody></table>

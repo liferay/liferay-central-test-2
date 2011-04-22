@@ -47,7 +47,7 @@ public class SearchBlogsEntryCPTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_33_keywords",
+		selenium.type("_161_keywords",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",

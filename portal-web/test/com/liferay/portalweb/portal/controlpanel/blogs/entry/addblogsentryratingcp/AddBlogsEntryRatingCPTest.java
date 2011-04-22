@@ -47,6 +47,12 @@ public class AddBlogsEntryRatingCPTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
+			RuntimeVariables.replace("Blogs Entry Title"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText(
 				"xPath=(//div[@class='yui3-aui-rating-label-element'])[2]",
 				"0 Votes"));

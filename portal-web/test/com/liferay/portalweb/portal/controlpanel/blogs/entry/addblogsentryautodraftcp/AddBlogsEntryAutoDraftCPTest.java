@@ -47,11 +47,11 @@ public class AddBlogsEntryAutoDraftCPTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Add Blog Entry']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Add", RuntimeVariables.replace("Add"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_33_title", RuntimeVariables.replace("Blogs Entry Title"));
+		selenium.type("//input[@id='_161_title']",
+			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 
@@ -62,7 +62,7 @@ public class AddBlogsEntryAutoDraftCPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//td[@id='cke_contents__33_editor']/iframe")) {
+							"//td[@id='cke_contents__161_editor']/iframe")) {
 					break;
 				}
 			}
@@ -73,7 +73,7 @@ public class AddBlogsEntryAutoDraftCPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.selectFrame("//td[@id='cke_contents__33_editor']/iframe");
+		selenium.selectFrame("//td[@id='cke_contents__161_editor']/iframe");
 		selenium.type("//body", RuntimeVariables.replace("Blogs Entry Content"));
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
@@ -128,8 +128,6 @@ public class AddBlogsEntryAutoDraftCPTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Draft"),
 			selenium.getText("//div[@class='entry-content']/h3"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//div[@class='entry-body']/p"));
+			selenium.getText("//td[2]/a"));
 	}
 }

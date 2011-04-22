@@ -30,12 +30,12 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Add Blog Entry']</td>
-	<td></td>
+	<td>link=Add</td>
+	<td>Add</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_33_title</td>
+	<td>//input[@id='_161_title']</td>
 	<td>Blogs Entry Title</td>
 </tr>
 <tr>
@@ -45,12 +45,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//td[@id='cke_contents__33_editor']/iframe</td>
+	<td>//td[@id='cke_contents__161_editor']/iframe</td>
 	<td>CK Editor</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//td[@id='cke_contents__33_editor']/iframe</td>
+	<td>//td[@id='cke_contents__161_editor']/iframe</td>
 	<td>CK Editor</td>
 </tr>
 <tr>
@@ -71,7 +71,7 @@
 <tr>
 	<td>assertText</td>
 	<td>//div[@class='portlet-msg-error']</td>
-	<td>You have entered invalid data. Please try again.</td>
+	<td>Your request failed to complete.</td>
 </tr>
 <tr>
 	<td>open</td>

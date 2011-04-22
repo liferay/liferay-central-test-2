@@ -47,14 +47,14 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Blogs", RuntimeVariables.replace(""));
+				selenium.clickAt("link=Blogs", RuntimeVariables.replace("Blogs"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
-				boolean entry1Present = selenium.isElementPresent("link=Delete");
+				boolean entry1Present = selenium.isElementPresent("//td[2]/a");
 
 				if (!entry1Present) {
 					label = 2;
@@ -62,15 +62,17 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("_161_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 
 			case 2:
 
-				boolean entry2Present = selenium.isElementPresent("link=Delete");
+				boolean entry2Present = selenium.isElementPresent("//td[2]/a");
 
 				if (!entry2Present) {
 					label = 3;
@@ -78,15 +80,17 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("_161_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 
 			case 3:
 
-				boolean entry3Present = selenium.isElementPresent("link=Delete");
+				boolean entry3Present = selenium.isElementPresent("//td[2]/a");
 
 				if (!entry3Present) {
 					label = 4;
@@ -94,15 +98,17 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("_161_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 
 			case 4:
 
-				boolean entry4Present = selenium.isElementPresent("link=Delete");
+				boolean entry4Present = selenium.isElementPresent("//td[2]/a");
 
 				if (!entry4Present) {
 					label = 5;
@@ -110,15 +116,17 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("_161_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 
 			case 5:
 
-				boolean entry5Present = selenium.isElementPresent("link=Delete");
+				boolean entry5Present = selenium.isElementPresent("//td[2]/a");
 
 				if (!entry5Present) {
 					label = 6;
@@ -126,10 +134,12 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.click(RuntimeVariables.replace("link=Delete"));
+				selenium.clickAt("_161_allRowIds", RuntimeVariables.replace(""));
+				selenium.clickAt("//input[@value='Delete']",
+					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 				selenium.saveScreenShotAndSource();
 
 			case 6:

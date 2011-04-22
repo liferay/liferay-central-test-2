@@ -75,12 +75,9 @@ public class AddIncorrectURLTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_28_url", RuntimeVariables.replace("www.movies.com"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
+		assertEquals(RuntimeVariables.replace("Please enter a valid URL."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message url']"));
 	}
 }

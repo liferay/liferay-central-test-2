@@ -48,8 +48,8 @@ public class AddBlogsEntryCommentCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		selenium.clickAt("//div[@class='entry-title']/a",
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -66,7 +66,7 @@ public class AddBlogsEntryCommentCPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_33_postReplyBody0")) {
+				if (selenium.isVisible("_161_postReplyBody0")) {
 					break;
 				}
 			}
@@ -77,17 +77,33 @@ public class AddBlogsEntryCommentCPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_33_postReplyBody0",
+		selenium.type("_161_postReplyBody0",
 			RuntimeVariables.replace("Blogs Entry Comment Body"));
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\48"));
-		selenium.keyPress("_33_postReplyBody0", RuntimeVariables.replace("\\8"));
+		selenium.keyPress("_161_postReplyBody0",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_161_postReplyBody0", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("1 Comment")
+										.equals(selenium.getText(
+								"//span[@class='comments']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("1 Comment"),
 			selenium.getText("//span[@class='comments']"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Comment Body"),

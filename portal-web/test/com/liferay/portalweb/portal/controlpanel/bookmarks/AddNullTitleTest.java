@@ -76,7 +76,6 @@ public class AddNullTitleTest extends BaseTestCase {
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.movies.com"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

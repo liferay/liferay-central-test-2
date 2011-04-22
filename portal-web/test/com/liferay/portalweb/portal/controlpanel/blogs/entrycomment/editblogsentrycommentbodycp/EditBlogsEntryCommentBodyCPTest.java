@@ -48,8 +48,8 @@ public class EditBlogsEntryCommentBodyCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		selenium.clickAt("//div[@class='entry-title']/a",
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -68,7 +68,7 @@ public class EditBlogsEntryCommentBodyCPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_33_editReplyBody1")) {
+				if (selenium.isVisible("_161_editReplyBody1")) {
 					break;
 				}
 			}
@@ -79,19 +79,15 @@ public class EditBlogsEntryCommentBodyCPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_33_editReplyBody1",
+		selenium.type("_161_editReplyBody1",
 			RuntimeVariables.replace("Blogs Entry Comment Body Edited"));
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\48"));
-		selenium.keyPress("_33_editReplyBody1", RuntimeVariables.replace("\\8"));
+		selenium.keyPress("_161_editReplyBody1",
+			RuntimeVariables.replace("\\48"));
+		selenium.keyPress("_161_editReplyBody1", RuntimeVariables.replace("\\8"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isVisible("_33_editReplyBody1"));
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertFalse(selenium.isVisible("_161_editReplyBody1"));
 		assertEquals(RuntimeVariables.replace("1 Comment"),
 			selenium.getText("//span[@class='comments']"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Comment Body Edited"),

@@ -48,8 +48,8 @@ public class DeleteBlogsEntryCommentCPTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
-			selenium.getText("//div[@class='entry-title']/a"));
-		selenium.clickAt("//div[@class='entry-title']/a",
+			selenium.getText("//td[2]/a"));
+		selenium.clickAt("//td[2]/a",
 			RuntimeVariables.replace("Blogs Entry Title"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -59,15 +59,28 @@ public class DeleteBlogsEntryCommentCPTest extends BaseTestCase {
 			selenium.getText("//form/div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText("//div[3]/div/div[5]/div/span/a/span"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[3]/div/div[5]/div/span/a/span"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.clickAt("//div[3]/div/div[5]/div/span/a/span",
+			RuntimeVariables.replace("Delete"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("0 Comments")
+										.equals(selenium.getText(
+								"//span[@class='comments']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("0 Comments"),
 			selenium.getText("//span[@class='comments']"));
 		assertFalse(selenium.isTextPresent("Blogs Entry Comment Body"));
