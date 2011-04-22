@@ -129,7 +129,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 				value = String.valueOf(assetEntry.getPriority());
 			}
 			else if (metadataFields[m].equals("author")) {
-				value = HtmlUtil.escape(assetEntry.getUserName());
+				value = HtmlUtil.escape(PortalUtil.getUserName(assetEntry.getUserId(), assetEntry.getUserName()));
 			}
 			else if (metadataFields[m].equals("view-count")) {
 				value = String.valueOf(assetEntry.getViewCount());
