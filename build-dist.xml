@@ -117,10 +117,160 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-${lp.version}.dmp" />
 	</target>
 
+	<target name="build-dist-tcat">
+		<property name="tcat.dir" value="${app.server.parent.dir}/tcat-6.4.4" />
+		<property name="tcat.zip.name" value="TcatServer-6.4.4.zip" />
+		<property name="tcat.zip.url" value="http://files.liferay.com/public/bundles/trunk/${tcat.zip.name}" />
+
+		<delete dir="${tcat.dir}" />
+
+		<antcall target="build-dist-tcat-profile" />
+
+		<antcall target="build-dist-tcat-tomcat" />
+
+		<if>
+			<not>
+				<available file="${app.server.parent.dir}/${tcat.zip.name}" />
+			</not>
+			<then>
+				<get
+					dest="${app.server.parent.dir}/${tcat.zip.name}"
+					src="${tcat.zip.url}"
+					verbose="true"
+				/>
+			</then>
+		</if>
+
+		<antcall target="build-dist-tcat-admin" />
+		<antcall target="build-dist-tcat-agent" />
+	</target>
+
 	<target name="build-dist-tcat-admin">
+		<copy file="tools/servers/tcat/tcat-init.groovy" todir="${tcat.dir}/admin" />
+
+		<unzip
+			dest="${tcat.dir}/admin/webapps"
+			src="${app.server.parent.dir}/${tcat.zip.name}"
+		>
+			<patternset
+				includes="**/console.war"
+			/>
+			<flattenmapper />
+		</unzip>
+
+		<mkdir dir="${tcat.dir}/admin/tcat_init/profiles" />
+
+		<copy file="dist/liferay-portal-tcat-profile-${lp.version}.zip" todir="${tcat.dir}/admin/tcat_init/profiles" />
+
+		<mkdir dir="${tcat.dir}/admin/tcat_init/scripts" />
+
+		<copy file="tools/servers/tcat/LiferayDeployerFactory.groovy" todir="${tcat.dir}/admin/tcat_init/scripts" />
+
+		<antcall target="build-dist-tcat-admin-webapps-plugins" />
+		<antcall target="build-dist-tcat-admin-webapps-portal" />
+	</target>
+
+	<target name="build-dist-tcat-admin-webapps-plugins">
+		<copy file="tunnel-web/tunnel-web.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/tunnel-web.war" />
+
+		<copy todir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}">
+			<fileset dir="${lp.plugins.dir}/dist" includes="*.war" />
+		</copy>
+	</target>
+
+	<target name="build-dist-tcat-admin-webapps-portal">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMdd" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.value}/META-INF" />
+
+		<echo file="${tstamp.value}/META-INF/context.xml"><![CDATA[<?xml version="1.0"?>
+			<Context path="" crossContext="true">
+				<Realm
+					className="org.apache.catalina.realm.JAASRealm"
+					appName="PortalRealm"
+					userClassNames="com.liferay.portal.kernel.security.jaas.PortalPrincipal"
+					roleClassNames="com.liferay.portal.kernel.security.jaas.PortalRole"
+				/>
+			</Context>]]>
+		</echo>
+
+		<mkdir dir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}" />
+
+		<copy file="dist/liferay-portal-${lp.version}.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/ROOT.war" />
+
+		<zip
+			basedir="${tstamp.value}"
+			destfile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/ROOT.war"
+			update="yes"
+		/>
+
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="build-dist-tcat-agent">
+		<echo file="${tcat.dir}/agent/conf/Catalina/localhost/agent.xml"><![CDATA[<?xml version="1.0"?>
+			<Context privileged="true" />]]>
+		</echo>
+
+		<unzip
+			dest="${tcat.dir}/agent/webapps"
+			src="${app.server.parent.dir}/${tcat.zip.name}"
+		>
+			<patternset
+				includes="**/agent.war"
+			/>
+			<flattenmapper />
+		</unzip>
+	</target>
+
+	<target name="build-dist-tcat-profile">
+		<mkdir dir="${tcat.dir}/profile/lib/ext" />
+
+		<copy file="tools/servers/tcat/profile.xml" todir="${tcat.dir}/profile">
+			<filterset>
+				<filter token="lp.version" value="${lp.version}" />
+			</filterset>
+		</copy>
+
+		<copy todir="${tcat.dir}/profile/lib/ext">
+			<fileset dir="${app.server.tomcat.dir}/lib/ext" />
+		</copy>
+
+		<echo file="${tcat.dir}/profile/lib/ext/portal-bundle.properties">auto.deploy.deploy.dir=${catalina.base}/deploy</echo>
+
+		<delete file="dist/liferay-portal-tcat-profile-${lp.version}.zip" failonerror="false" />
+
+		<zip destfile="dist/liferay-portal-tcat-profile-${lp.version}.zip">
+			<zipfileset
+				dir="${tcat.dir}/profile"
+			/>
+		</zip>
+	</target>
+
+	<target name="build-dist-tcat-tomcat">
+		<mkdir dir="${tcat.dir}/tomcat" />
+
+		<copy todir="${tcat.dir}/tomcat">
+			<fileset
+				dir="${app.server.tomcat.dir}"
+				excludes="**/ROOT.xml,logs/**,temp/**,webapps/**,work/**"
+			/>
+		</copy>
+
+		<replace file="${tcat.dir}/tomcat/conf/server.xml">
+			<replacetoken><![CDATA[xmlValidation="false" xmlNamespaceAware="false" deployXML="false">]]></replacetoken>
+			<replacevalue><![CDATA[xmlValidation="false" xmlNamespaceAware="false">]]></replacevalue>
+		</replace>
+
+		<move file="${tcat.dir}/tomcat" tofile="${tcat.dir}/admin" />
+
+		<mkdir dir="${tcat.dir}/agent" />
+
+		<copy todir="${tcat.dir}/agent">
+			<fileset dir="${tcat.dir}/admin" />
+		</copy>
 	</target>
 
 	<target name="build-dist-tomcat">
@@ -450,8 +600,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas" />
 		<antcall target="build-dist-resin" />
-		<antcall target="build-dist-tcat-admin" />
-		<antcall target="build-dist-tcat-agent" />
+		<antcall target="build-dist-tcat" />
 		<antcall target="build-dist-tomcat" />
 
 		<antcall target="zip-api" />
@@ -465,6 +614,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
+		<antcall target="zip-tcat" />
 		<antcall target="zip-tomcat" />
 
 		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
@@ -772,54 +922,6 @@ release was successful.</echo>
 		<mkdir dir="${app.server.parent.dir}/resin-4.0.16/webapps" />
 	</target>
 
-	<target name="unzip-tcat">
-		<delete dir="${app.server.tcat.dir}" />
-
-		<if>
-			<not>
-				<available file="${app.server.parent.dir}/${app.server.tcat.zip.name}" />
-			</not>
-			<then>
-				<get
-					dest="${app.server.parent.dir}/${app.server.tcat.zip.name}"
-					src="${app.server.tcat.zip.url}"
-					verbose="true"
-				/>
-			</then>
-		</if>
-
-		<script classpathref="project.classpath" language="beanshell">
-			String appServerTCatDir = project.getProperty("app.server.tcat.dir");
-
-			int forwardSlashPos = appServerTCatDir.lastIndexOf("/");
-			int backSlashPos = appServerTCatDir.lastIndexOf("\\");
-
-			int pos = forwardSlashPos;
-
-			if ((backSlashPos != -1) &amp;&amp; (backSlashPos > forwardSlashPos)) {
-				pos = backSlashPos;
-			}
-
-			String appServerTCatDirName = appServerTCatDir.substring(pos + 1);
-
-			project.setProperty("app.server.tcat.dir.name", appServerTCatDirName);
-		</script>
-
-		<unzip
-			dest="${app.server.parent.dir}"
-			src="${app.server.parent.dir}/${app.server.tcat.zip.name}"
-		>
-			<patternset
-				includes="TcatServer-6.4.4/webapps/*.war"
-			/>
-			<mapper
-				type="glob"
-				from="TcatServer-6.4.4/*"
-				to="${app.server.tcat.dir.name}/*"
-			/>
-		</unzip>
-	</target>
-
 	<target name="unzip-tomcat">
 		<delete dir="${app.server.tomcat.dir}" />
 
@@ -957,27 +1059,51 @@ release was successful.</echo>
 
 		<mkdir dir="dist" />
 
-		<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
-			<zipfileset
-				dir="${zip.executable.dir}"
-				excludes="**/*.sh"
-				prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
-			/>
-			<zipfileset
-				dir="${zip.executable.dir}"
-				filemode="744"
-				includes="**/*.sh"
-				prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
-			/>
-			<zipfileset
-				dir="${zip.executable.dir}/../data"
-				prefix="liferay-portal-${lp.version}/data"
-			/>
-			<zipfileset
-				dir="tools/zip_tmpl"
-				prefix="liferay-portal-${lp.version}"
-			/>
-		</zip>
+		<if>
+			<available file="${zip.executable.dir}/../data" />
+			<then>
+				<zip
+					destfile="dist/${zip.executable.file}-${lp.version}.zip"
+				>
+					<zipfileset
+						dir="${zip.executable.dir}"
+						excludes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="${zip.executable.dir}"
+						filemode="744"
+						includes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="${zip.executable.dir}/../data"
+						prefix="liferay-portal-${lp.version}/data"
+					/>
+					<zipfileset
+						dir="tools/zip_tmpl"
+						prefix="liferay-portal-${lp.version}"
+					/>
+				</zip>
+			</then>
+			<else>
+				<zip
+					destfile="dist/${zip.executable.file}-${lp.version}.zip"
+				>
+					<zipfileset
+						dir="${zip.executable.dir}"
+						excludes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+					<zipfileset
+						dir="${zip.executable.dir}"
+						filemode="744"
+						includes="**/*.sh"
+						prefix="liferay-portal-${lp.version}/${zip.executable.dir.name}"
+					/>
+				</zip>
+			</else>
+		</if>
 	</target>
 
 	<target name="zip-geronimo">
@@ -1220,6 +1346,18 @@ release was successful.</echo>
 				prefix="liferay-portal-src-${lp.version}"
 			/>
 		</zip>
+	</target>
+
+	<target name="zip-tcat">
+		<antcall target="zip-executable">
+			<param name="zip.executable.file" value="liferay-portal-tcat-admin" />
+			<param name="zip.executable.dir" value="${tcat.dir}/admin" />
+		</antcall>
+
+		<antcall target="zip-executable">
+			<param name="zip.executable.file" value="liferay-portal-tcat-agent" />
+			<param name="zip.executable.dir" value="${tcat.dir}/agent" />
+		</antcall>
 	</target>
 
 	<target name="zip-tomcat">
