@@ -28,7 +28,6 @@ public class AddUserPasswordTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AddUserTest.class);
-		testSuite.addTestSuite(AddUserPasswordTest.class);
 		testSuite.addTestSuite(TearDownUserTest.class);
 
 		return testSuite;

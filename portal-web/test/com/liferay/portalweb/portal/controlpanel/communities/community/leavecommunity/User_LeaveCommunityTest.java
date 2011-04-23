@@ -30,7 +30,7 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Communities I Own")) {
+				if (selenium.isVisible("link=Sites I Own")) {
 					break;
 				}
 			}
@@ -41,10 +41,10 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities I Own", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites I Own", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		selenium.open("/user/selenium01/home/");
 
@@ -54,7 +54,7 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Communities I Have Joined")) {
+				if (selenium.isVisible("link=Sites I Have Joined")) {
 					break;
 				}
 			}
@@ -65,7 +65,7 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities I Have Joined",
+		selenium.clickAt("link=Sites I Have Joined",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -108,7 +108,7 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Communities I Own")) {
+				if (selenium.isVisible("link=Sites I Own")) {
 					break;
 				}
 			}
@@ -119,10 +119,10 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities I Own", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites I Own", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		selenium.open("/user/selenium01/home/");
 
@@ -132,7 +132,7 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Communities I Have Joined")) {
+				if (selenium.isVisible("link=Sites I Have Joined")) {
 					break;
 				}
 			}
@@ -143,11 +143,11 @@ public class User_LeaveCommunityTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities I Have Joined",
+		selenium.clickAt("link=Sites I Have Joined",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 	}
 }

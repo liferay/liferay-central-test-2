@@ -30,7 +30,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Available Communities")) {
+				if (selenium.isVisible("link=Available Sites")) {
 					break;
 				}
 			}
@@ -41,8 +41,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Available Communities",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Available Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_29_name",
@@ -52,7 +51,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		assertFalse(selenium.isTextPresent("Test Inactive Community"));
 		selenium.open("/user/selenium01/home/");
@@ -63,7 +62,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Communities I Have Joined")) {
+				if (selenium.isVisible("link=Sites I Have Joined")) {
 					break;
 				}
 			}
@@ -74,11 +73,11 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities I Have Joined",
+		selenium.clickAt("link=Sites I Have Joined",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No communities were found."),
+		assertEquals(RuntimeVariables.replace("No sites were found."),
 			selenium.getText("//div[1]/section/div/div/div/form/div[3]"));
 		assertFalse(selenium.isTextPresent("Test Inactive Community"));
 		selenium.open("/user/selenium01/home/");
@@ -89,7 +88,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Available Communities")) {
+				if (selenium.isVisible("link=Available Sites")) {
 					break;
 				}
 			}
@@ -100,8 +99,7 @@ public class User_JoinCommunityInactiveTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Available Communities",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Available Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("Test Inactive Community"));

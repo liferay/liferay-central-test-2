@@ -30,7 +30,7 @@ public class User_ViewCommunityRestrictedTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Communities I Have Joined")) {
+				if (selenium.isVisible("link=Sites I Have Joined")) {
 					break;
 				}
 			}
@@ -41,7 +41,7 @@ public class User_ViewCommunityRestrictedTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities I Have Joined",
+		selenium.clickAt("link=Sites I Have Joined",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
