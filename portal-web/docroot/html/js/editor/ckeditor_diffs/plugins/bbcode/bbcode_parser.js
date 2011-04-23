@@ -139,10 +139,12 @@
 		_escapeData: function(data) {
 			var instance = this;
 
+			var htmlEncode = CKEDITOR.tools.htmlEncode;
+
 			var dataMap = instance._dataMap;
 
 			if (dataMap.length === 0) {
-				data = CKEDITOR.tools.htmlEncode(data);
+				data = htmlEncode(data);
 
 				return data;
 			}
@@ -158,7 +160,7 @@
 
 				tmp = data.substring(j, item.startIndex);
 
-				tmp = CKEDITOR.tools.htmlEncode(tmp);
+				tmp = htmlEncode(tmp);
 				result.push(tmp);
 
 				tmp = data.substr(item.startIndex, item.length);
@@ -172,7 +174,7 @@
 			if (lastTagOffset < data.length) {
 				tmp = data.substr(lastTagOffset);
 
-				tmp = CKEDITOR.tools.htmlEncode(tmp);
+				tmp = htmlEncode(tmp);
 				result.push(tmp);
 			}
 
