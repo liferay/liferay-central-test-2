@@ -35,7 +35,7 @@
 
 	var STR_TAG_SPAN_CLOSE = '</span>';
 
-	var TPL_LIST_ITEM = STR_TAG_INVALID_OPEN + STR_BBCODE_OPEN + LIST + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
+	var TPL_LIST_INVALID = STR_TAG_INVALID_OPEN + STR_BBCODE_OPEN + LIST + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 
 	var MAP_FONT_SIZE = {
 		1: 10,
@@ -78,6 +78,9 @@
 			var endTags = instance._endTags;
 			var openTags = instance._openTags;
 
+			instance._dataOffset = 0;
+			instance._dataMap = [];
+
 			if (!openTags || openTags.length) {
 				openTags = [];
 
@@ -86,13 +89,9 @@
 
 			var process = instance._process;
 
-			var processed = false;
-
 			var result = data.replace(
 				REGEX_MAIN,
 				function() {
-					processed = true;
-
 					return process.apply(instance, arguments);
 				}
 			);
@@ -126,15 +125,58 @@
 				}
 			}
 
+			if (endTags.length) {
+				result = result + endTags.join('');
+			}
+
+			result = instance._escapeData(result);
+
 			instance._reset();
 
-			if (endTags.length) {
-				result =  result + endTags.join('');
+			return result;
+		},
+
+		_escapeData: function(data) {
+			var instance = this;
+
+			var dataMap = instance._dataMap;
+
+			if (dataMap.length === 0) {
+				data = CKEDITOR.tools.htmlEncode(data);
+
+				return data;
 			}
 
-			if (!processed) {
-				result = CKEDITOR.tools.htmlEncode(result);
+			var item;
+
+			var tmp;
+
+			var result = [];
+
+			for (var i = 0, j = 0, length = dataMap.length; i < length; i++) {
+				item = dataMap[i];
+
+				tmp = data.substring(j, item.startIndex);
+
+				tmp = CKEDITOR.tools.htmlEncode(tmp);
+				result.push(tmp);
+
+				tmp = data.substr(item.startIndex, item.length);
+				result.push(tmp);
+
+				j = item.startIndex + item.length;
 			}
+
+			var lastTagOffset = item.startIndex + item.length;
+
+			if (lastTagOffset < data.length) {
+				tmp = data.substr(lastTagOffset);
+
+				tmp = CKEDITOR.tools.htmlEncode(tmp);
+				result.push(tmp);
+			}
+
+			result = result.join('');
 
 			return result;
 		},
@@ -254,20 +296,9 @@
 			var result = null;
 
 			if (!instance._hasOpenTag(LIST)) {
-				result = TPL_LIST_ITEM;
+				result = TPL_LIST_INVALID;
 			}
 			else {
-				if (instance._hasOpenTag(openTag)) {
-					instance._processEndTag(matchedStr, crlf, openTag, tagOption, '*', offset, str);
-				}
-
-				instance._openTags.push(
-					{
-						bbTag: openTag,
-						endTag: '</li>'
-					}
-				);
-
 				result = '<li>';
 			}
 
@@ -527,10 +558,6 @@
 				}
 			}
 
-			if (result === null) {
-				result = CKEDITOR.tools.htmlEncode(matchedStr);
-			}
-
 			return result;
 		},
 
@@ -539,7 +566,6 @@
 
 			var openTags = instance._openTags;
 			var result = null;
-			var tmp;
 
 			if (instance._isValidTag(closeTag)) {
 				if (instance._noParse) {
@@ -553,12 +579,6 @@
 					}
 				}
 				else {
-					if (closeTag === LIST && instance._hasOpenTag('*')) {
-						openTags.pop();
-
-						tmp = '</li>';
-					}
-
 					if (!openTags.length || openTags[openTags.length - 1].bbTag != closeTag) {
 						result = STR_TAG_INVALID_OPEN + STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 					}
@@ -582,8 +602,8 @@
 				}
 			}
 
-			if (tmp) {
-				result = tmp + result;
+			if (result) {
+				instance._updateDataMap(matchedStr, result, offset);
 			}
 
 			return result;
@@ -604,6 +624,8 @@
 					throw 'Internal error. Invalid regular expression';
 				}
 			}
+
+			instance._updateDataMap(matchedStr, result, offset);
 
 			return result;
 		},
@@ -688,6 +710,10 @@
 					}
 
 					result = handler.apply(instance, arguments);
+
+					if (result) {
+						instance._updateDataMap(matchedStr, result, offset);
+					}
 				}
 			}
 
@@ -697,11 +723,26 @@
 		_reset: function() {
 			var instance = this;
 
+			instance._dataMap = [];
+			instance._dataOffset = 0;
 			instance._endTags = [];
 			instance._fontStart = -1;
 			instance._noParse = false;
 			instance._openTags = null;
 			instance._urlStart = -1;
+		},
+
+		_updateDataMap: function(matchedStr, tagHTML, offset) {
+			var instance = this;
+
+			instance._dataMap.push(
+				{
+					startIndex: offset + instance._dataOffset,
+					length: tagHTML.length
+				}
+			);
+
+			instance._dataOffset += tagHTML.length - matchedStr.length;
 		}
 	};
 
