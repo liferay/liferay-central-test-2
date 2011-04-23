@@ -34,7 +34,7 @@
 	</definition>
 
 	<definition name="portal.login_disabled" extends="portal">
-		<put name="title" value="login-disabled" />
+		<put name="title" value="sign-in-disabled" />
 		<put name="content" value="/portal/login_disabled.jsp" />
 	</definition>
 

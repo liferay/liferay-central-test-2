@@ -14,4 +14,8 @@
  */
 --%>
 
-Login Disabled
+<%@ include file="/html/portal/init.jsp" %>
+
+<div class="portlet-msg-info">
+	<liferay-ui:message key="the-sign-in-process-is-currently-disabled-because-the-portal-is-undergoing-a-routine-maintenance-upgrade" />
+</div>
