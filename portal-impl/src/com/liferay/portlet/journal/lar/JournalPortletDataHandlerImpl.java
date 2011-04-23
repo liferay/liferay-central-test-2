@@ -502,36 +502,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					}
 					else if (pathArray.length > 4) {
 						map.put("folderId", pathArray[3]);
-
-						String name = pathArray[4];
-
-						name = HttpUtil.decodeURL(name);
-
-						map.put("name", name);
+						map.put("name", pathArray[4]);
 					}
 				}
 				else {
 					oldParameters = oldParameters.substring(
 						oldParameters.indexOf(CharPool.QUESTION) + 1);
 
-					String[] params = oldParameters.split(StringPool.AMPERSAND);
-
-					for (String param : params) {
-						String key = param;
-						String value = StringPool.BLANK;
-
-						int pos = param.indexOf(CharPool.EQUAL);
-
-						if (pos != -1) {
-							key = param.substring(0, pos);
-							value = param.substring(pos + 1);
-						}
-
-						key = HttpUtil.decodeURL(key);
-						value = HttpUtil.decodeURL(value);
-
-						map.put(key, value);
-					}
+					map = MapUtil.toLinkedHashMap(
+						oldParameters.split(StringPool.AMPERSAND),
+						StringPool.EQUAL);
 				}
 
 				FileEntry fileEntry = null;
