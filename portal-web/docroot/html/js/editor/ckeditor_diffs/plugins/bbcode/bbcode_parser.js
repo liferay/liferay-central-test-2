@@ -151,19 +151,19 @@
 
 			var item;
 
-			var tmp;
-
 			var result = [];
 
 			for (var i = 0, j = 0, length = dataMap.length; i < length; i++) {
 				item = dataMap[i];
 
-				tmp = data.substring(j, item.startIndex);
+				var tmp = data.substring(j, item.startIndex);
 
 				tmp = htmlEncode(tmp);
+
 				result.push(tmp);
 
 				tmp = data.substr(item.startIndex, item.length);
+
 				result.push(tmp);
 
 				j = item.startIndex + item.length;
@@ -172,9 +172,10 @@
 			var lastTagOffset = item.startIndex + item.length;
 
 			if (lastTagOffset < data.length) {
-				tmp = data.substr(lastTagOffset);
+				var tmp = data.substr(lastTagOffset);
 
 				tmp = htmlEncode(tmp);
+
 				result.push(tmp);
 			}
 
@@ -739,8 +740,8 @@
 
 			instance._dataMap.push(
 				{
-					startIndex: offset + instance._dataOffset,
-					length: tagHTML.length
+					length: tagHTML.length,
+					startIndex: offset + instance._dataOffset
 				}
 			);
 
