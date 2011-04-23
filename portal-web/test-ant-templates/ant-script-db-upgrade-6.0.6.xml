@@ -22,7 +22,7 @@
 			<param name="lp.version" value="6.0.6" />
 			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}606TestSuite" />
-			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.29" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.32" />
 		</antcall>
 
 		<antcall target="prepare-db-db2-common">
@@ -53,7 +53,7 @@
 			<param name="lp.version" value="6.0.6" />
 			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}606TestSuite" />
-			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.29" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.32" />
 		</antcall>
 
 		<antcall target="prepare-db-mysql-common">
@@ -87,7 +87,7 @@
 			<param name="lp.version" value="6.0.6" />
 			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}606TestSuite" />
-			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.29" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.32" />
 		</antcall>
 
 		<antcall target="prepare-db-oracle-common">
@@ -125,7 +125,7 @@
 			<param name="lp.version" value="6.0.6" />
 			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}606TestSuite" />
-			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.29" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.32" />
 		</antcall>
 
 		<antcall target="prepare-db-postgresql-common">
@@ -163,7 +163,7 @@
 			<param name="lp.version" value="6.0.6" />
 			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}606TestSuite" />
-			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.29" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.32" />
 		</antcall>
 
 		<antcall target="prepare-db-sql-server-common">
@@ -201,7 +201,7 @@
 			<param name="lp.version" value="6.0.6" />
 			${test.ant.script.file.plugin.portlets.ee}
 			<param name="test.name" value="DBUpgrade${test.ant.script.suite}606TestSuite" />
-			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.29" />
+			<param name="tomcat.folder.dir" value="liferay-portal-6.0.6/tomcat-6.0.32" />
 		</antcall>
 
 		<antcall target="prepare-db-sybase-common">
