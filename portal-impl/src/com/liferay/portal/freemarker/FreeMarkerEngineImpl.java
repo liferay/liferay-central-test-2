@@ -108,7 +108,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			FreeMarkerContext freeMarkerContext, Writer writer)
 		throws Exception {
 
-		if ((Validator.isNotNull(freemarkerTemplateContent)) &&
+		if (Validator.isNotNull(freemarkerTemplateContent) &&
 			(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
 			 !stringTemplateExists(freeMarkerTemplateId))) {
 
