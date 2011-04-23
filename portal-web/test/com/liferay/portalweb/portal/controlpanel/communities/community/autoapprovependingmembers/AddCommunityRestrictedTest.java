@@ -44,7 +44,7 @@ public class AddCommunityRestrictedTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
@@ -57,21 +57,28 @@ public class AddCommunityRestrictedTest extends BaseTestCase {
 			RuntimeVariables.replace("This is an restricted test community!"));
 		selenium.saveScreenShotAndSource();
 		selenium.select("_134_type", RuntimeVariables.replace("Restricted"));
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		selenium.type("_134_name", RuntimeVariables.replace("Test"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Test Restricted Community"),
-			selenium.getText("//tr[4]/td[1]"));
+			selenium.getText("//tr[3]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Restricted"),
-			selenium.getText("//tr[4]/td[2]"));
+			selenium.getText("//tr[3]/td[2]"));
 		assertEquals(RuntimeVariables.replace("1"),
-			selenium.getText("//tr[4]/td[3]"));
+			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace("0"),
-			selenium.getText("//tr[4]/td[4]"));
+			selenium.getText("//tr[3]/td[4]"));
 		assertEquals(RuntimeVariables.replace("Yes"),
-			selenium.getText("//tr[4]/td[5]"));
+			selenium.getText("//tr[3]/td[5]"));
 	}
 }

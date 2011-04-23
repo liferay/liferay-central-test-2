@@ -29,7 +29,6 @@ public class LeaveCommunityTests extends BaseTests {
 
 		testSuite.addTestSuite(AddCommunityOpenTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
-		testSuite.addTestSuite(AddUserPasswordTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(User_SignInTest.class);
 		testSuite.addTestSuite(User_JoinCommunityOpenTest.class);

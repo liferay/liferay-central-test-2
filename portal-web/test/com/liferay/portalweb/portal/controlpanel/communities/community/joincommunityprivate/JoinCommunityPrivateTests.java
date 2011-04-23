@@ -29,7 +29,6 @@ public class JoinCommunityPrivateTests extends BaseTests {
 
 		testSuite.addTestSuite(AddCommunityPrivateTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
-		testSuite.addTestSuite(AddUserPasswordTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(User_SignInTest.class);
 		testSuite.addTestSuite(User_JoinCommunityPrivateTest.class);

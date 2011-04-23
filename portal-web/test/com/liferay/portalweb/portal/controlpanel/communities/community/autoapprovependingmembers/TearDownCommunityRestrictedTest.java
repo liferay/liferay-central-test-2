@@ -47,11 +47,10 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Control Panel",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Communities",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("link=Sites", RuntimeVariables.replace("Sites"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name",
@@ -81,7 +80,7 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a")) {
 							break;
 						}
 					}
@@ -94,9 +93,9 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -123,7 +122,7 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a")) {
 							break;
 						}
 					}
@@ -136,9 +135,9 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -165,7 +164,7 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a")) {
 							break;
 						}
 					}
@@ -178,9 +177,9 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -207,7 +206,7 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a")) {
 							break;
 						}
 					}
@@ -220,9 +219,9 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -249,7 +248,7 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a")) {
 							break;
 						}
 					}
@@ -262,9 +261,9 @@ public class TearDownCommunityRestrictedTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

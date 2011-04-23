@@ -41,10 +41,11 @@ public class ImportLARTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace("Sites"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name", RuntimeVariables.replace("Community Name"));
@@ -88,7 +89,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_importFileName",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\lar\\importlar\\dependencies\\Communities-Selenium.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\communities\\lar\\importlar\\dependencies\\Sites-Selenium.lar"));
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isChecked("_134_DELETE_MISSING_LAYOUTSCheckbox"));
 		selenium.saveScreenShotAndSource();

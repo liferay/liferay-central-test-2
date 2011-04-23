@@ -51,7 +51,7 @@ public class SetTimezoneTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("displaySettingsLink")) {
+				if (selenium.isVisible("//a[@id='_2_displaySettingsLink']")) {
 					break;
 				}
 			}
@@ -62,7 +62,8 @@ public class SetTimezoneTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_2_displaySettingsLink']",
+			RuntimeVariables.replace("Display Settings"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
