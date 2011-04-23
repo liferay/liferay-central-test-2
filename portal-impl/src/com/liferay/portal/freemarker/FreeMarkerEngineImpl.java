@@ -108,10 +108,9 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			FreeMarkerContext freeMarkerContext, Writer writer)
 		throws Exception {
 
-		if ((Validator.isNotNull(freeMarkerTemplateId)) &&
-			(Validator.isNotNull(freemarkerTemplateContent)) &&
+		if ((Validator.isNotNull(freemarkerTemplateContent)) &&
 			(!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED ||
-			 !resourceExists(freeMarkerTemplateId))) {
+			 !stringTemplateExists(freeMarkerTemplateId))) {
 
 			_stringTemplateLoader.putTemplate(
 				freeMarkerTemplateId, freemarkerTemplateContent);
@@ -119,7 +118,7 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Added " + freeMarkerTemplateId +
-						" to the FreeMarker template repository");
+						" to the string based FreeMarker template repository");
 			}
 		}
 
@@ -152,6 +151,17 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
 			return false;
 		}
+	}
+
+	protected boolean stringTemplateExists(String freeMarkerTemplateId) {
+		Object templateSource = _stringTemplateLoader.findTemplateSource(
+			freeMarkerTemplateId);
+
+		if (templateSource == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FreeMarkerEngineImpl.class);
