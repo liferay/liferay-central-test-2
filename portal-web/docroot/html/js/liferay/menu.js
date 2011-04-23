@@ -44,7 +44,7 @@ AUI().add(
 							menu.appendChild(list);
 							menu.hide();
 
-							instance._body.appendChild(menu);
+							instance._body.prepend(menu);
 
 							Liferay.Util.createFlyouts(
 								{
