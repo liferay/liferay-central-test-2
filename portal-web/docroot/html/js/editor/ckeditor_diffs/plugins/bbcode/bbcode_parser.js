@@ -107,7 +107,9 @@
 				if ( lastBBTag == 'url') {
 					openTags.pop();
 
-					var url = data.substr(instance._urlStart, data.length - instance._urlStart);
+					var urlStart = instance._urlStart;
+
+					var url = data.substr(urlStart, data.length - urlStart);
 
 					url = CKEDITOR.tools.htmlEncodeAttr(url);
 
@@ -561,8 +563,10 @@
 						result = STR_TAG_INVALID_OPEN + STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 					}
 					else if (closeTag == 'url') {
-						if (instance._urlStart > 0) {
-							var url = str.substr(instance._urlStart, offset - instance._urlStart);
+						var urlStart = instance._urlStart;
+
+						if (urlStart > 0) {
+							var url = str.substr(urlStart, offset - urlStart);
 
 							url = CKEDITOR.tools.htmlEncodeAttr(url);
 
