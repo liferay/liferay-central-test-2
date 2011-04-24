@@ -153,10 +153,12 @@
 
 			var result = [];
 
+			var tmp;
+
 			for (var i = 0, j = 0, length = dataMap.length; i < length; i++) {
 				item = dataMap[i];
 
-				var tmp = data.substring(j, item.startIndex);
+				tmp = data.substring(j, item.startIndex);
 
 				tmp = htmlEncode(tmp);
 
@@ -172,7 +174,7 @@
 			var lastTagOffset = item.startIndex + item.length;
 
 			if (lastTagOffset < data.length) {
-				var tmp = data.substr(lastTagOffset);
+				tmp = data.substr(lastTagOffset);
 
 				tmp = htmlEncode(tmp);
 
