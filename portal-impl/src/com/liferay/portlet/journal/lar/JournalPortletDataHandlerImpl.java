@@ -700,8 +700,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
 
-				Map<String, String[]> map =
-					HttpUtil.parameterMapFromString(oldParameters);
+				Map<String, String[]> map = HttpUtil.parameterMapFromString(
+					oldParameters);
 
 				IGImage image = null;
 
