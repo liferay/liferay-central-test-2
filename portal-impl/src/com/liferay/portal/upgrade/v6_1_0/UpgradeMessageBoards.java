@@ -16,6 +16,7 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,6 +28,63 @@ import java.sql.ResultSet;
 public class UpgradeMessageBoards extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		updateMessage();
+		updateThread();
+	}
+
+	protected void updateMessage() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select messageId, body from MBMessage where (body like " +
+					"'%<3%') or (body like '%>_>%') or (body like '%<_<%')");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long messageId = rs.getLong("messageId");
+				String body = rs.getString("body");
+
+				body = StringUtil.replace(
+					body,
+					new String[] {"<3", ">_>", "<_<"},
+					new String[] {":love:", ":glare:", ":dry:"});
+
+				updateMessage(messageId, body);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateMessage(long messageId, String body)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update MBMessage set body = ? where messageId = " + messageId);
+
+			ps.setString(1, body);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void updateThread() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
