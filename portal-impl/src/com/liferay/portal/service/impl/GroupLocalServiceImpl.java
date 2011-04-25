@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -67,6 +68,8 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
+import com.liferay.portal.theme.ThemeLoader;
+import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -359,6 +362,32 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		layoutSetBranchLocalService.deleteLayoutSetBranches(
 			group.getGroupId(), false);
+
+		// Themes
+
+		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
+
+		if (themeLoader != null) {
+			String themePath =
+				themeLoader.getFileStorage() + StringPool.SLASH +
+				String.valueOf(group.getGroupId());
+
+			try {
+				layoutSetLocalService.getLayoutSet(group.getGroupId(), true);
+
+				FileUtil.deltree(themePath + "-private");
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+
+			try {
+				layoutSetLocalService.getLayoutSet(group.getGroupId(), false);
+
+				FileUtil.deltree(themePath + "-public");
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+		}
 
 		// Layout sets
 
