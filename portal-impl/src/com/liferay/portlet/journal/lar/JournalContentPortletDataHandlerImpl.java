@@ -230,7 +230,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			Map<String, String> articleIds =
 				(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-					JournalArticle.class);
+					JournalArticle.class + ".articleId");
 
 			articleId = MapUtil.getString(articleIds, articleId, articleId);
 
@@ -249,7 +249,7 @@ public class JournalContentPortletDataHandlerImpl
 		if (Validator.isNotNull(templateId)) {
 			Map<String, String> templateIds =
 				(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-					JournalTemplate.class);
+					JournalTemplate.class + ".templateId");
 
 			templateId = MapUtil.getString(templateIds, templateId, templateId);
 
