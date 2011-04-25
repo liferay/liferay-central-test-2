@@ -226,22 +226,25 @@ List<Group> myPlaces = user.getMyPlaces(max);
 						<c:if test="<%= showPublicPlace && publicLayoutsPageCount > 0 %>">
 							<li class="<%= cssClass %>">
 								<a href="<%= HtmlUtil.escape(portletURL.toString()) %>" onclick="Liferay.Util.forcePost(this); return false;">
-									<span class="site-name">
-										<c:choose>
-											<c:when test="<%= organizationCommunity %>">
-												<%= HtmlUtil.escape(organization.getName()) %>
-											</c:when>
-											<c:when test="<%= userCommunity %>">
-												<liferay-ui:message key="my-public-pages" />
-											</c:when>
-											<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
-												<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
-											</c:when>
-											<c:otherwise>
-												<%= myPlace.getName() %>
-											</c:otherwise>
-										</c:choose>
-									</span>
+
+									<%
+									String siteName = StringPool.BLANK;
+
+									if (organizationCommunity) {
+										siteName = HtmlUtil.escape(organization.getName());
+									}
+									else if (userCommunity) {
+										siteName = LanguageUtil.get(pageContext, "my-public-pages");
+									}
+									else if (myPlace.getName().equals(GroupConstants.GUEST)) {
+										siteName = HtmlUtil.escape(themeDisplay.getAccount().getName());
+									}
+									else {
+										siteName = myPlace.getName();
+									}
+									%>
+
+									<%@ include file="/html/taglib/ui/my_places/page_site_name.jspf" %>
 
 									<c:if test="<%= privateLayoutsPageCount > 0 %>">
 										<span class="site-type"><liferay-ui:message key="public" /></span>
@@ -273,22 +276,25 @@ List<Group> myPlaces = user.getMyPlaces(max);
 						<c:if test="<%= showPrivatePlace && privateLayoutsPageCount > 0 %>">
 							<li class="<%= cssClass %>">
 								<a href="<%= HtmlUtil.escape(portletURL.toString()) %>" onclick="Liferay.Util.forcePost(this); return false;">
-									<span class="site-name">
-										<c:choose>
-											<c:when test="<%= organizationCommunity %>">
-												<%= HtmlUtil.escape(organization.getName()) %>
-											</c:when>
-											<c:when test="<%= userCommunity %>">
-												<liferay-ui:message key="my-private-pages" />
-											</c:when>
-											<c:when test="<%= myPlace.getName().equals(GroupConstants.GUEST) %>">
-												<%= HtmlUtil.escape(themeDisplay.getAccount().getName()) %>
-											</c:when>
-											<c:otherwise>
-												<%= myPlace.getName() %>
-											</c:otherwise>
-										</c:choose>
-									</span>
+
+									<%
+									String siteName = StringPool.BLANK;
+
+									if (organizationCommunity) {
+										siteName = HtmlUtil.escape(organization.getName());
+									}
+									else if (userCommunity) {
+										siteName = LanguageUtil.get(pageContext, "my-private-pages");
+									}
+									else if (myPlace.getName().equals(GroupConstants.GUEST)) {
+										siteName = HtmlUtil.escape(themeDisplay.getAccount().getName());
+									}
+									else {
+										siteName = myPlace.getName();
+									}
+									%>
+
+									<%@ include file="/html/taglib/ui/my_places/page_site_name.jspf" %>
 
 									<c:if test="<%= publicLayoutsPageCount > 0 %>">
 										<span class="site-type"><liferay-ui:message key="private" /></span>
