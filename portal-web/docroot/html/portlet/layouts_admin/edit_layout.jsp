@@ -35,8 +35,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
-//Sections
-
 String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
 if (!group.isUser() && selLayout.isTypePortlet()) {
