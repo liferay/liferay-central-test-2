@@ -12,28 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.kernel.cache;
+package com.liferay.portal.cache.key;
+
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
+import com.liferay.portal.kernel.util.StringBundler;
 
 /**
- * @author Michael C. Han
+ * @author Shuyang Zhou
  */
-public abstract class BasePortalCache implements PortalCache {
+public class SimpleCacheKeyGenerator extends BaseCacheKeyGenerator {
 
-	public void destroy() {
+	public CacheKeyGenerator clone() {
+		return new SimpleCacheKeyGenerator();
 	}
 
-	public boolean isDebug() {
-		return _debug;
-	}
-
-	public void setDebug(boolean debug) {
-		_debug = debug;
-	}
-
-	protected String processKey(String key) {
+	public String getCacheKey(String key) {
 		return key;
 	}
 
-	private boolean _debug;
+	public String getCacheKey(String[] keys) {
+		StringBundler sb = new StringBundler(keys);
+
+		return sb.toString();
+	}
+
+	public String getCacheKey(StringBundler sb) {
+		return sb.toString();
+	}
 
 }
