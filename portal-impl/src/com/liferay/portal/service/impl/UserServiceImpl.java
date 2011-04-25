@@ -422,40 +422,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.hasRoleUser(companyId, name, userId, inherited);
 	}
 
-	public User mergeUser(
-			long companyId, boolean autoPassword, String screenName,
-			String emailAddress, long facebookId, String openId,
-			String firstName, String middleName, String lastName, int prefixId,
-			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, boolean sendEmail,
-			boolean updateInformation, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Company company = companyPersistence.findByPrimaryKey(companyId);
-
-		long creatorUserId = 0;
-
-		try {
-			creatorUserId = getUserId();
-		}
-		catch (PrincipalException pe) {
-		}
-
-		if (creatorUserId == 0) {
-			if (!company.isStrangersWithMx() &&
-				company.hasCompanyMx(emailAddress)) {
-
-				throw new ReservedUserEmailAddressException();
-			}
-		}
-
-		return userLocalService.mergeUser(
-			creatorUserId, companyId, autoPassword, screenName, emailAddress,
-			facebookId, openId, firstName, middleName, lastName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			sendEmail, updateInformation, serviceContext);
-	}
-
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
