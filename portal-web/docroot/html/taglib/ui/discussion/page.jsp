@@ -504,15 +504,9 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	%>
 
 	<aui:script>
-		function <%= randomNamespace %>afterLogin(emailAddress, anonymousAccount) {
+		function <%= randomNamespace %>afterLogin(emailAddress, randomNamespace) {
 			document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
-
-			if (anonymousAccount) {
-				<portlet:namespace />sendMessage(document.<portlet:namespace /><%= formName %>);
-			}
-			else {
-				<portlet:namespace />sendMessage(document.<portlet:namespace /><%= formName %>, true);
-			}
+			<portlet:namespace />sendMessage(document.<portlet:namespace /><%= formName %>);
 		}
 
 		function <%= randomNamespace %>deleteMessage(i) {
@@ -532,7 +526,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
 
 			if (!themeDisplay.isSignedIn()) {
-				window.namespace = '<%= namespace %>';
 				window.randomNamespace = '<%= randomNamespace %>';
 
 				Liferay.Util.openWindow(
@@ -584,7 +577,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		Liferay.provide(
 			window,
 			'<portlet:namespace />sendMessage',
-			function(form, refreshPage) {
+			function(form) {
 				var A = AUI();
 
 				var uri = form.getAttribute('action');
@@ -615,12 +608,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										}
 									);
 
-									if (refreshPage) {
-										window.location.reload();
-									}
-									else {
-										Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
-									}
+									Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
 								}
 								else {
 									var errorKey = '';
