@@ -1105,10 +1105,6 @@ public class LayoutImporter {
 		for (String zipEntry : zipEntries) {
 			String key = zipEntry;
 
-			if (key.contains(StringPool.SLASH)) {
-				key = key.substring(key.lastIndexOf(CharPool.SLASH));
-			}
-
 			if (key.equals("liferay-look-and-feel.xml")) {
 				FileUtil.write(
 					themeLoader.getFileStorage() + StringPool.SLASH + themeId +
