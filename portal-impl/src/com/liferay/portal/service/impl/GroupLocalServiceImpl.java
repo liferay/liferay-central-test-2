@@ -355,39 +355,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				String.valueOf(group.getGroupId()));
 		}
 
-		// Layout branches
+		// Layout set branches
 
 		layoutSetBranchLocalService.deleteLayoutSetBranches(
 			group.getGroupId(), true);
 
 		layoutSetBranchLocalService.deleteLayoutSetBranches(
 			group.getGroupId(), false);
-
-		// Themes
-
-		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
-
-		if (themeLoader != null) {
-			String themePath =
-				themeLoader.getFileStorage() + StringPool.SLASH +
-				String.valueOf(group.getGroupId());
-
-			try {
-				layoutSetLocalService.getLayoutSet(group.getGroupId(), true);
-
-				FileUtil.deltree(themePath + "-private");
-			}
-			catch (NoSuchLayoutSetException nslse) {
-			}
-
-			try {
-				layoutSetLocalService.getLayoutSet(group.getGroupId(), false);
-
-				FileUtil.deltree(themePath + "-public");
-			}
-			catch (NoSuchLayoutSetException nslse) {
-			}
-		}
 
 		// Layout sets
 
@@ -437,6 +411,32 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		if (group.hasStagingGroup()) {
 			deleteGroup(group.getStagingGroup().getGroupId());
+		}
+
+		// Themes
+
+		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
+
+		if (themeLoader != null) {
+			String themePath =
+				themeLoader.getFileStorage() + StringPool.SLASH +
+					group.getGroupId();
+
+			try {
+				layoutSetLocalService.getLayoutSet(group.getGroupId(), true);
+
+				FileUtil.deltree(themePath + "-private");
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
+
+			try {
+				layoutSetLocalService.getLayoutSet(group.getGroupId(), false);
+
+				FileUtil.deltree(themePath + "-public");
+			}
+			catch (NoSuchLayoutSetException nslse) {
+			}
 		}
 
 		// Asset
