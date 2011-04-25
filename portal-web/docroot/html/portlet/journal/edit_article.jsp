@@ -257,7 +257,7 @@ boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
-<liferay-util:include page="/html/portlet/journal/article_tabs.jsp">
+<liferay-util:include page="/html/portlet/journal/article_header.jsp">
 	<liferay-util:param name="tabs1" value="content" />
 </liferay-util:include>
 
@@ -321,6 +321,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<table class="lfr-table" id="<portlet:namespace />journalArticleWrapper" width="100%">
 	<tr>
 		<td class="lfr-top">
+			<c:if test="<%= Validator.isNull(toLanguageId) %>">
+				<liferay-util:include page="/html/portlet/journal/article_toolbar.jsp" />
+			</c:if>
+
 			<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 			<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 			<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
@@ -779,12 +783,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, JournalArticle.class.getName())) {
 					publishButtonLabel = "submit-for-publication";
 				}
-
-				String deleteButtonLabel = "delete-this-version";
-
-				if ((article != null) && article.isDraft()) {
-					deleteButtonLabel = "discard-draft";
-				}
 				%>
 
 				<c:choose>
@@ -793,22 +791,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
 
 							<aui:button disabled="<%= pending %>" name="publishButton" value="<%= publishButtonLabel %>" />
-						</c:if>
-
-						<c:if test="<%= Validator.isNotNull(structureId) %>">
-							<aui:button name="previewArticleButton" value="preview" />
-						</c:if>
-
-								<c:if test="<%= structure != null %>">
-							<aui:button name="downloadArticleContentButton" value="download" />
-						</c:if>
-
-						<c:if test="<%= (article != null) && !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-							<aui:button disabled="<%= !article.isApproved() %>" onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire-this-version" />
-						</c:if>
-
-						<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-							<aui:button disabled="<%= !article.isApproved() && !article.isDraft() %>" onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="<%= deleteButtonLabel %>" />
 						</c:if>
 					</c:when>
 					<c:otherwise>
