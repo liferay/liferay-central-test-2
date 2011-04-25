@@ -904,6 +904,10 @@
 		<put name="portlet_content" value="/portlet/login/login_redirect.jsp" />
 	</definition>
 
+	<definition name="portlet.login.merge_account" extends="portlet.login">
+		<put name="portlet_content" value="/portlet/login/merge_account.jsp" />
+	</definition>
+
 	<definition name="portlet.login.open_id" extends="portlet.login">
 		<put name="portlet_content" value="/portlet/login/open_id.jsp" />
 	</definition>
