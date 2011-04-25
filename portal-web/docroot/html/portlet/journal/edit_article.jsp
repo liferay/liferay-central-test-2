@@ -130,7 +130,7 @@ if (Validator.isNotNull(structureId)) {
 	}
 }
 
-List templates = new ArrayList();
+List<JournalTemplate> templates = new ArrayList();
 
 if (structure != null) {
 	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(structureGroupdId, structureId);
@@ -360,6 +360,136 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</c:choose>
 				</td>
 			</tr>
+
+			<c:if test="<%= Validator.isNull(toLanguageId) %>">
+				<tr>
+					<td class="article-structure-template-toolbar journal-metadata">
+						<aui:layout>
+							<aui:column cssClass="article-structure" columnWidth="50">
+							<label class="article-structure-label"><liferay-ui:message key="structure" />:</label>
+
+							<aui:fieldset cssClass="article-structure-toolbar">
+								<div class="journal-form-presentation-label">
+									<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+									<aui:input name="structureName" type="hidden" value="<%= structureName %>" />
+									<aui:input name="structureDescription" type="hidden" value="<%= structureDescription %>" />
+									<aui:input name="structureXSD" type="hidden" value="<%= JS.encodeURIComponent(structureXSD) %>" />
+
+									<span id="<portlet:namespace />structureNameLabel" class="structure-name-label">
+										<%= HtmlUtil.escape(structureName) %>
+									</span>
+
+									<liferay-ui:icon id="editStructureLink" image="edit" url="javascript:;" />
+
+									<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeStructureURL">
+										<portlet:param name="struts_action" value="/journal/select_structure" />
+										<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
+									</portlet:renderURL>
+
+									<span class="structure-links">
+										<liferay-ui:icon id="changeStructureButton" image="configuration" message="change" url="<%= changeStructureURL %>" />
+									</span>
+
+									<c:if test="<%= Validator.isNotNull(structureId) %>">
+										<span class="default-link">(<a href="javascript:;" id="<portlet:namespace />loadDefaultStructure"><liferay-ui:message key="use-default" /></a>)</span>
+									</c:if>
+
+									<span class="structure-controls">
+										<span class="structure-buttons">
+											<aui:button cssClass="save-structure-button yui3-aui-helper-hidden" name="saveStructureButton" value="save" />
+
+											<aui:button cssClass="edit-structure-button yui3-aui-helper-hidden" name="editStructureButton" value="stop-editing" />
+										</span>
+									</span>
+
+									<span id="<portlet:namespace />structureMessage" class="portlet-msg-alert structure-message yui3-aui-helper-hidden">
+										<liferay-ui:message key="this-structure-has-not-been-saved" />
+										<liferay-ui:message key="click-here-to-save-it-now" arguments='<%= new Object[] {"journal-save-structure-trigger", "#"} %>' />
+									</span>
+								</div>
+							</aui:fieldset>
+						</aui:column>
+
+						<aui:column cssClass="article-template" columnWidth="50">
+							<label class="article-template-label"><liferay-ui:message key="template" />:</label>
+
+							<aui:fieldset cssClass="article-template-toolbar">
+								<div class="journal-form-presentation-label">
+									<c:choose>
+										<c:when test="<%= templates.isEmpty() %>">
+											<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
+
+											<div id="selectTemplateMessage"></div>
+
+											<span class="template-name-label">
+												<liferay-ui:message key="none" />
+											</span>
+
+											<liferay-ui:icon id="selectTemplateLink" image="configuration" message="choose" url="javascript:;" />
+										</c:when>
+										<c:when test="<%= templates.size() == 1 %>">
+											<%
+											JournalTemplate template = templates.get(0);
+											%>
+
+											<span class="template-name-label">
+												<%= HtmlUtil.escape(template.getName()) %>
+											</span>
+
+											<c:if test="<%= template.isSmallImage() %>">
+												<img class="article-template-image" id="<portlet:namespace />templateImage" src="<%= _getTemplateImage(themeDisplay, template) %>" />
+											</c:if>
+
+											<portlet:renderURL var="templateURL">
+												<portlet:param name="struts_action" value="/journal/edit_template" />
+												<portlet:param name="redirect" value="<%= currentURL %>" />
+												<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
+												<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
+											</portlet:renderURL>
+
+											<liferay-ui:icon url="<%= templateURL %>" image="edit" />
+										</c:when>
+										<c:otherwise>
+											<aui:select inlineField="<%= true %>" label="" name="templateId">
+
+												<%
+												for (JournalTemplate template : templates) {
+													String imageURL = _getTemplateImage(themeDisplay, template);
+												%>
+													<portlet:renderURL var="templateURL">
+														<portlet:param name="struts_action" value="/journal/edit_template" />
+														<portlet:param name="redirect" value="<%= currentURL %>" />
+														<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
+														<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
+													</portlet:renderURL>
+
+													<aui:option
+														data-img="<%=  imageURL != null ? imageURL : StringPool.BLANK %>"
+														data-url="<%= templateURL %>"
+														label="<%= HtmlUtil.escape(template.getName()) %>"
+														selected="<%= templateId.equals(template.getTemplateId()) %>"
+														value="<%= template.getTemplateId() %>"
+													/>
+
+												<%
+												}
+												%>
+
+											</aui:select>
+
+											<img border="0" class="yui3-aui-helper-hidden article-template-image" hspace="0" id="<portlet:namespace />templateImage" src="" vspace="0" />
+
+											<liferay-ui:icon id="editTemplateLink" url="javascript:;" image="edit" />
+										</c:otherwise>
+									</c:choose>
+								</div>
+							</aui:fieldset>
+						</aui:column>
+						</aui:layout>
+					</td>
+				</tr>
+			</c:if>
+
 			<tr>
 				<td class="article-translation-toolbar">
 					<div>
@@ -1002,6 +1132,69 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 </aui:script>
 
 <aui:script use="aui-base,liferay-portlet-journal">
+	var selectTemplateLink = A.one('#<portlet:namespace />selectTemplateLink');
+
+	if (selectTemplateLink) {
+		selectTemplateLink.on(
+			'click',
+			function() {
+				Liferay.Util.openWindow(
+					{
+						dialog: {
+							stack: false,
+							width:680
+						},
+						title: '<liferay-ui:message key="template" />',
+						uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" /></portlet:renderURL>'
+					}
+				);
+			}
+		);
+	}
+
+	var templateIdSelector = A.one('select#<portlet:namespace />templateId');
+
+	if (templateIdSelector) {
+		var options = templateIdSelector.get('options');
+
+		var editTemplateLink = A.one('#<portlet:namespace />editTemplateLink');
+		var templateImage = A.one('#<portlet:namespace />templateImage');
+
+		var changeTemplate = function() {
+			var selectedOption = options.item(templateIdSelector.get('selectedIndex'));
+
+			var imageURL = selectedOption.attr('data-img');
+			var templateURL = selectedOption.attr('data-url');
+
+			if (imageURL) {
+				templateImage.attr('src', imageURL);
+				templateImage.show();
+			}
+			else {
+				templateImage.hide();
+			}
+
+			editTemplateLink.attr('href', templateURL);
+		}
+
+		changeTemplate();
+
+		if (editTemplateLink) {
+			templateIdSelector.on(
+				'change',
+				changeTemplate
+			);
+
+			editTemplateLink.on(
+				'click',
+				function() {
+					var selectedOption = options.item(templateIdSelector.get('selectedIndex'))
+
+					window.location = selectedOption.attr('data-url');
+				}
+			);
+		}
+	}
 
 	<%
 	String doAsUserId = themeDisplay.getDoAsUserId();
@@ -1065,6 +1258,21 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";
+
+private String _getTemplateImage(ThemeDisplay themeDisplay, JournalTemplate template) {
+	String imageURL = null;
+
+	if (template.isSmallImage()) {
+		if (Validator.isNotNull(template.getSmallImageURL())) {
+			imageURL = template.getSmallImageURL();
+		}
+		else {
+			imageURL = themeDisplay.getPathImage() + "/journal/template?img_id=" + template.getSmallImageId() + "&t=" + ImageServletTokenUtil.getToken(template.getSmallImageId());
+		}
+	}
+
+	return imageURL;
+}
 
 private void _format(long groupId, Element contentParentElement, Element xsdParentElement, IntegerWrapper count, Integer depth, boolean repeatablePrototype, PageContext pageContext, HttpServletRequest request) throws Exception {
 	depth = new Integer(depth.intValue() + 1);
