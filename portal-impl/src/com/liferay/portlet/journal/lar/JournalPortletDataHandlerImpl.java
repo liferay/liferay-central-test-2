@@ -539,7 +539,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						long folderId = GetterUtil.getLong(folderIdString);
 						String name = MapUtil.getString(map, "name");
 
-						String groupIdString = MapUtil.getString(map, "groupId");
+						String groupIdString = MapUtil.getString(
+							map, "groupId");
 
 						long groupId = GetterUtil.getLong(groupIdString);
 
