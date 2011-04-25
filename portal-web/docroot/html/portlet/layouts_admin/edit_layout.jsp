@@ -80,7 +80,7 @@ String[][] categorySections = {mainSections};
 			var="permissionURL"
 		/>
 
-		<aui:script use="aui-dialog,aui-dialog-iframe">
+		<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar">
 			var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
 
 			var permissionPopUp = null;
