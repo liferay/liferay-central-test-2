@@ -45,7 +45,7 @@ public class PollerCometHandler extends BaseCometHandler {
 				ChannelHubManagerUtil.unregisterChannelListener(
 					_companyId, _userId, _channelListener);
 			}
-			catch (UnknownChannelException e) {
+			catch (UnknownChannelException uce) {
 			}
 		}
 	}
@@ -70,11 +70,11 @@ public class PollerCometHandler extends BaseCometHandler {
 				ChannelHubManagerUtil.registerChannelListener(
 					_companyId, _userId, _channelListener);
 			}
-			catch (UnknownChannelException e) {
+			catch (UnknownChannelException uce) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"User session already ended, terminating request: "
-							+ _userId);
+						"Terminating request for " + _userId +
+							" because user session ended");
 				}
 
 				cometSession.close();
@@ -85,8 +85,7 @@ public class PollerCometHandler extends BaseCometHandler {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		PollerCometHandler.class);
+	private static Log _log = LogFactoryUtil.getLog(PollerCometHandler.class);
 
 	private ChannelListener _channelListener;
 	private long _companyId;

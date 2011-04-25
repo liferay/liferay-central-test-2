@@ -50,7 +50,7 @@ public class PollerCometChannelListener implements ChannelListener {
 			ChannelHubManagerUtil.unregisterChannelListener(
 				cometRequest.getCompanyId(), cometRequest.getUserId(), this);
 		}
-		catch (UnknownChannelException e) {
+		catch (UnknownChannelException uce) {
 		}
 		catch (ChannelException ce) {
 			if (_log.isWarnEnabled()) {

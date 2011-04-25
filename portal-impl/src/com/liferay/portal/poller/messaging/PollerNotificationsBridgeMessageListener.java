@@ -62,10 +62,11 @@ public class PollerNotificationsBridgeMessageListener
 				pollerHeader.getCompanyId(), pollerHeader.getUserId(),
 				notificationEvent);
 		}
-		catch (UnknownChannelException e) {
+		catch (UnknownChannelException uce) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to complete processing, user session ended", e);
+					"Unable to complete processing because user session ended",
+					uce);
 			}
 		}
 	}

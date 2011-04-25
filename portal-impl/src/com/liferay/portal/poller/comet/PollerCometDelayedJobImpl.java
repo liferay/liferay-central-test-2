@@ -53,7 +53,7 @@ public class PollerCometDelayedJobImpl
 					_pollerCometDelayedTasks) {
 
 				try {
-					pollerCometDelayedTask.doTask();
+					pollerCometDelayedTask.executeTask();
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
@@ -81,7 +81,7 @@ public class PollerCometDelayedJobImpl
 						_pollerCometDelayedTasks) {
 
 					try {
-						pollerCometDelayedTask.doTask();
+						pollerCometDelayedTask.executeTask();
 					}
 					catch (Exception e) {
 						if (_log.isWarnEnabled()) {

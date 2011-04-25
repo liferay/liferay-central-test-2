@@ -47,11 +47,12 @@ public class ChannelSessionDestroyAction extends SessionAction {
 						ChannelHubManagerUtil.destroyChannel(
 							user.getCompanyId(), user.getUserId());
 					}
-					catch (UnknownChannelException e) {
+					catch (UnknownChannelException uce) {
 						if (_log.isDebugEnabled()) {
 							_log.debug(
-								"User channel already unregistered: " + userId,
-								e);
+								"User channel " + userId +
+									" is already unregistered",
+								uce);
 						}
 					}
 				}

@@ -65,16 +65,17 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		catch (InterruptedException ie) {
 		}
 
-		List<NotificationEvent> notificationEvents;
+		List<NotificationEvent> notificationEvents = null;
 
 		try {
 			notificationEvents = ChannelHubManagerUtil.getNotificationEvents(
 				_companyId, _userId, true);
 		}
-		catch (UnknownChannelException e) {
+		catch (UnknownChannelException uce) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to complete processing, user session ended", e);
+					"Unable to complete processing because user session ended",
+					uce);
 			}
 
 			return null;
@@ -97,7 +98,7 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		this.notify();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		SynchronousPollerChannelListener.class);
 
 	private long _companyId;

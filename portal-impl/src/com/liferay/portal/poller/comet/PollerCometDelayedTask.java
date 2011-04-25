@@ -40,7 +40,7 @@ public class PollerCometDelayedTask {
 		_pollerResponseHeaderJSONObject = pollerResponseHeaderJSONObject;
 	}
 
-	public void doTask() throws Exception{
+	public void executeTask() throws Exception {
 		CometRequest cometRequest = _cometSession.getCometRequest();
 
 		try {
@@ -67,10 +67,11 @@ public class PollerCometDelayedTask {
 				cometRequest.getCompanyId(), cometRequest.getUserId(),
 				notificationEvents);
 		}
-		catch (UnknownChannelException e) {
+		catch (UnknownChannelException uce) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Unable to complete processing, user session ended", e);
+					"Unable to complete processing because user session ended",
+					uce);
 			}
 		}
 		finally {
@@ -78,7 +79,7 @@ public class PollerCometDelayedTask {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		PollerCometDelayedTask.class);
 
 	private CometSession _cometSession;
