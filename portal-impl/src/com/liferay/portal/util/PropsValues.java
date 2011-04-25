@@ -596,9 +596,9 @@ public class PropsValues {
 
 	public static String[] JOURNAL_ARTICLE_FORM_ADD = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_FORM_ADD);
 
-	public static String[] JOURNAL_ARTICLE_FORM_UPDATE = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_FORM_UPDATE);
-
 	public static String[] JOURNAL_ARTICLE_FORM_TRANSLATE = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_FORM_TRANSLATE);
+
+	public static String[] JOURNAL_ARTICLE_FORM_UPDATE = PropsUtil.getArray(PropsKeys.JOURNAL_ARTICLE_FORM_UPDATE);
 
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 

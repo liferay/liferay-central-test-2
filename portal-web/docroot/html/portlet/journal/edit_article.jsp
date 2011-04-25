@@ -97,13 +97,6 @@ else {
 	}
 }
 
-request.setAttribute("edit_article.jsp-structure", structure);
-
-request.setAttribute("edit_article.jsp-defaultLanguageId", defaultLanguageId);
-request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
-request.setAttribute("edit_article.jsp-languageId", languageId);
-request.setAttribute("edit_article.jsp-redirect", redirect);
-
 String[] mainSections = PropsValues.JOURNAL_ARTICLE_FORM_ADD;
 
 if (Validator.isNotNull(toLanguageId)) {
@@ -114,6 +107,14 @@ else if (article != null) {
 }
 
 String[][] categorySections = {mainSections};
+
+request.setAttribute("edit_article.jsp-redirect", redirect);
+
+request.setAttribute("edit_article.jsp-structure", structure);
+
+request.setAttribute("edit_article.jsp-languageId", languageId);
+request.setAttribute("edit_article.jsp-defaultLanguageId", defaultLanguageId);
+request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 %>
 
 <liferay-util:include page="/html/portlet/journal/article_header.jsp" />
@@ -368,10 +369,6 @@ String[][] categorySections = {mainSections};
 <%!
 private static String[] _CATEGORY_NAMES = {""};
 
-private String _getSectionJsp(String name) {
-	return TextFormatter.format(name, TextFormatter.N);
-}
-
 private String _getArticleImage(ThemeDisplay themeDisplay, JournalArticle article) {
 	String imageURL = null;
 
@@ -385,5 +382,9 @@ private String _getArticleImage(ThemeDisplay themeDisplay, JournalArticle articl
 	}
 
 	return imageURL;
+}
+
+private String _getSectionJsp(String name) {
+	return TextFormatter.format(name, TextFormatter.N);
 }
 %>

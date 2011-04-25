@@ -42,9 +42,6 @@ if (article == null) {
 		}
 	}
 }
-
-List<Layout> privateGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, true);
-List<Layout> publicGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, false);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="display-page" />
@@ -54,6 +51,9 @@ List<Layout> publicGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(sc
 <h3><liferay-ui:message key="display-page" /></h3>
 
 <%
+List<Layout> privateGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, true);
+List<Layout> publicGroupLayouts = JournalUtil.getDefaultAssetPublisherLayouts(scopeGroupId, false);
+
 if (privateGroupLayouts.isEmpty() && publicGroupLayouts.isEmpty()) {
 %>
 

@@ -19,8 +19,6 @@
 <%
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
-String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
-
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
@@ -33,7 +31,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 <liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
-<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
+	<%
+	String[] imageExtensions = PrefsPropsUtil.getStringArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
+	%>
+
+	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 </liferay-ui:error>
 
 <liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
