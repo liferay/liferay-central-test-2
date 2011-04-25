@@ -17,8 +17,11 @@ package com.liferay.portal.poller.comet;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.kernel.poller.comet.CometRequest;
 import com.liferay.portal.kernel.poller.comet.CometResponse;
 import com.liferay.portal.kernel.poller.comet.CometSession;
@@ -40,30 +43,43 @@ public class PollerCometDelayedTask {
 	public void doTask() throws Exception{
 		CometRequest cometRequest = _cometSession.getCometRequest();
 
-		List<NotificationEvent> notificationEvents =
-			ChannelHubManagerUtil.getNotificationEvents(
-				cometRequest.getCompanyId(), cometRequest.getUserId(), false);
+		try {
+			List<NotificationEvent> notificationEvents =
+				ChannelHubManagerUtil.getNotificationEvents(
+					cometRequest.getCompanyId(), cometRequest.getUserId(),
+					false);
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+			JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		if (_pollerResponseHeaderJSONObject != null) {
-			jsonArray.put(_pollerResponseHeaderJSONObject);
+			if (_pollerResponseHeaderJSONObject != null) {
+				jsonArray.put(_pollerResponseHeaderJSONObject);
+			}
+
+			for (NotificationEvent notificationEvent : notificationEvents) {
+				jsonArray.put(notificationEvent.toJSONObject());
+			}
+
+			CometResponse cometResponse = _cometSession.getCometResponse();
+
+			cometResponse.writeData(jsonArray.toString());
+
+			ChannelHubManagerUtil.removeTransientNotificationEvents(
+				cometRequest.getCompanyId(), cometRequest.getUserId(),
+				notificationEvents);
 		}
-
-		for (NotificationEvent notificationEvent : notificationEvents) {
-			jsonArray.put(notificationEvent.toJSONObject());
+		catch (UnknownChannelException e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Unable to complete processing, user session ended", e);
+			}
 		}
-
-		CometResponse cometResponse = _cometSession.getCometResponse();
-
-		cometResponse.writeData(jsonArray.toString());
-
-		ChannelHubManagerUtil.removeTransientNotificationEvents(
-			cometRequest.getCompanyId(), cometRequest.getUserId(),
-			notificationEvents);
-
-		_cometSession.close();
+		finally {
+			_cometSession.close();
+		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		PollerCometDelayedTask.class);
 
 	private CometSession _cometSession;
 	private JSONObject _pollerResponseHeaderJSONObject;

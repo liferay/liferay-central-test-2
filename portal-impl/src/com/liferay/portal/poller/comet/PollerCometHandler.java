@@ -15,8 +15,11 @@
 package com.liferay.portal.poller.comet;
 
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.ChannelListener;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.kernel.poller.comet.BaseCometHandler;
 import com.liferay.portal.kernel.poller.comet.CometHandler;
 import com.liferay.portal.kernel.poller.comet.CometRequest;
@@ -38,8 +41,12 @@ public class PollerCometHandler extends BaseCometHandler {
 
 	protected void doDestroy() throws Exception {
 		if (_channelListener != null) {
-			ChannelHubManagerUtil.unregisterChannelListener(
-				_companyId, _userId, _channelListener);
+			try {
+				ChannelHubManagerUtil.unregisterChannelListener(
+					_companyId, _userId, _channelListener);
+			}
+			catch (UnknownChannelException e) {
+			}
 		}
 	}
 
@@ -59,13 +66,27 @@ public class PollerCometHandler extends BaseCometHandler {
 			 _channelListener = new PollerCometChannelListener(
 				 cometSession, pollerResponseHeaderJSONObject);
 
-			ChannelHubManagerUtil.registerChannelListener(
-				_companyId, _userId, _channelListener);
+			try {
+				ChannelHubManagerUtil.registerChannelListener(
+					_companyId, _userId, _channelListener);
+			}
+			catch (UnknownChannelException e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"User session already ended, terminating request: "
+							+ _userId);
+				}
+
+				cometSession.close();
+			}
 		}
 		else {
 			cometSession.close();
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		PollerCometHandler.class);
 
 	private ChannelListener _channelListener;
 	private long _companyId;

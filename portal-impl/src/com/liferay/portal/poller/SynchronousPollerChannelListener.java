@@ -17,10 +17,13 @@ package com.liferay.portal.poller;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelException;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.ChannelListener;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
@@ -62,9 +65,20 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		catch (InterruptedException ie) {
 		}
 
-		List<NotificationEvent> notificationEvents =
-			ChannelHubManagerUtil.getNotificationEvents(
+		List<NotificationEvent> notificationEvents;
+
+		try {
+			notificationEvents = ChannelHubManagerUtil.getNotificationEvents(
 				_companyId, _userId, true);
+		}
+		catch (UnknownChannelException e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Unable to complete processing, user session ended", e);
+			}
+
+			return null;
+		}
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -82,6 +96,9 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 
 		this.notify();
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		SynchronousPollerChannelListener.class);
 
 	private long _companyId;
 	private boolean _complete;

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
 import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.kernel.poller.PollerHeader;
 import com.liferay.portal.kernel.poller.PollerResponse;
 
@@ -56,9 +57,17 @@ public class PollerNotificationsBridgeMessageListener
 				PollerNotificationsBridgeMessageListener.class.getName(),
 				pollerResponse.toJSONObject());
 
-		ChannelHubManagerUtil.sendNotificationEvent(
-			pollerHeader.getCompanyId(), pollerHeader.getUserId(),
-			notificationEvent);
+		try {
+			ChannelHubManagerUtil.sendNotificationEvent(
+				pollerHeader.getCompanyId(), pollerHeader.getUserId(),
+				notificationEvent);
+		}
+		catch (UnknownChannelException e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Unable to complete processing, user session ended", e);
+			}
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

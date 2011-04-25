@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelException;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.ChannelListener;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.kernel.poller.comet.CometRequest;
 import com.liferay.portal.kernel.poller.comet.CometSession;
 
@@ -48,6 +49,8 @@ public class PollerCometChannelListener implements ChannelListener {
 		try {
 			ChannelHubManagerUtil.unregisterChannelListener(
 				cometRequest.getCompanyId(), cometRequest.getUserId(), this);
+		}
+		catch (UnknownChannelException e) {
 		}
 		catch (ChannelException ce) {
 			if (_log.isWarnEnabled()) {

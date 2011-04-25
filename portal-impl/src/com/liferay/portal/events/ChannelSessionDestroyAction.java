@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
+import com.liferay.portal.kernel.notifications.UnknownChannelException;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -42,8 +43,17 @@ public class ChannelSessionDestroyAction extends SessionAction {
 						_log.debug("Destroying channel " + user.getUserId());
 					}
 
-					ChannelHubManagerUtil.destroyChannel(
-						user.getCompanyId(), user.getUserId());
+					try {
+						ChannelHubManagerUtil.destroyChannel(
+							user.getCompanyId(), user.getUserId());
+					}
+					catch (UnknownChannelException e) {
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"User channel already unregistered: " + userId,
+								e);
+						}
+					}
 				}
 			}
 		}
