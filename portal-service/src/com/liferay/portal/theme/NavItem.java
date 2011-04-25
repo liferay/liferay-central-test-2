@@ -90,13 +90,13 @@ public class NavItem implements Serializable {
 		String regularURL = getRegularURL();
 
 		if (StringUtil.startsWith(regularURL, portalURL) ||
-    		Validator.isUrl(regularURL)) {
+			Validator.isUrl(regularURL)) {
 
-    		return regularURL;
-    	}
-    	else {
-    		return portalURL.concat(regularURL);
-    	}
+			return regularURL;
+		}
+		else {
+			return portalURL.concat(regularURL);
+		}
 	}
 
 	public String getRegularURL() throws Exception {
