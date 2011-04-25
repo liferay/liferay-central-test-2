@@ -490,36 +490,37 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
 
-				Map<String, String> map = new HashMap<String, String>();
+				Map<String, String[]> map = new HashMap<String, String[]>();
 
 				if (oldParameters.startsWith("/documents/")) {
 					String[] pathArray = oldParameters.split(StringPool.SLASH);
 
-					map.put("groupId", pathArray[2]);
+					map.put("groupId", new String[] {pathArray[2]});
 
 					if (pathArray.length == 4) {
-						map.put("uuid", pathArray[3]);
+						map.put("uuid", new String[] {pathArray[3]});
 					}
 					else if (pathArray.length > 4) {
-						map.put("folderId", pathArray[3]);
-						map.put("name", pathArray[4]);
+						map.put("folderId", new String[] {pathArray[3]});
+
+						String name = HttpUtil.decodeURL(pathArray[4]);
+
+						map.put("name", new String[] {name});
 					}
 				}
 				else {
 					oldParameters = oldParameters.substring(
 						oldParameters.indexOf(CharPool.QUESTION) + 1);
 
-					map = MapUtil.toLinkedHashMap(
-						oldParameters.split(StringPool.AMPERSAND),
-						StringPool.EQUAL);
+					map = HttpUtil.parameterMapFromString(oldParameters);
 				}
 
 				FileEntry fileEntry = null;
 
-				String uuid = map.get("uuid");
+				String uuid = MapUtil.getString(map, "uuid");
 
-				if (uuid != null) {
-					String groupIdString = map.get("groupId");
+				if (Validator.isNotNull(uuid)) {
+					String groupIdString = MapUtil.getString(map, "groupId");
 
 					long groupId = GetterUtil.getLong(groupIdString);
 
@@ -532,13 +533,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 							uuid, groupId);
 				}
 				else {
-					String folderIdString = map.get("folderId");
+					String folderIdString = MapUtil.getString(map, "folderId");
 
-					if (folderIdString != null) {
+					if (Validator.isNotNull(folderIdString)) {
 						long folderId = GetterUtil.getLong(folderIdString);
-						String name = map.get("name");
+						String name = MapUtil.getString(map, "name");
 
-						String groupIdString = map.get("groupId");
+						String groupIdString = MapUtil.getString(map, "groupId");
 
 						long groupId = GetterUtil.getLong(groupIdString);
 
@@ -699,16 +700,15 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 				}
 
-				Map<String, String> map = MapUtil.toLinkedHashMap(
-					oldParameters.split(StringPool.AMPERSAND),
-					StringPool.EQUAL);
+				Map<String, String[]> map =
+					HttpUtil.parameterMapFromString(oldParameters);
 
 				IGImage image = null;
 
 				if (map.containsKey("uuid")) {
-					String uuid = map.get("uuid");
+					String uuid = MapUtil.getString(map, "uuid");
 
-					String groupIdString = map.get("groupId");
+					String groupIdString = MapUtil.getString(map, "groupId");
 
 					long groupId = GetterUtil.getLong(groupIdString);
 
@@ -723,13 +723,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 						 map.containsKey("img_id") ||
 						 map.containsKey("i_id")) {
 
-					long imageId = GetterUtil.getLong(map.get("image_id"));
+					long imageId = MapUtil.getLong(map, "image_id");
 
 					if (imageId <= 0) {
-						imageId = GetterUtil.getLong(map.get("img_id"));
+						imageId = MapUtil.getLong(map, "img_id");
 
 						if (imageId <= 0) {
-							imageId = GetterUtil.getLong(map.get("i_id"));
+							imageId = MapUtil.getLong(map, "i_id");
 						}
 					}
 
