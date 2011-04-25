@@ -2726,6 +2726,98 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
+	 * Merges an existing "anonymous" user and starts the workflow.
+	 *
+	 * @param  creatorUserId the primary key of the creator
+	 * @param  companyId the primary key of the company the user belongs to
+	 * @param  autoPassword whether a password should be automatically generated
+	 *         for the user
+	 * @param  screenName the user's screen name
+	 * @param  emailAddress the user's email address
+	 * @param  facebookId the user's facebook ID
+	 * @param  openId the user's OpenID
+	 * @param  firstName the user's first name
+	 * @param  middleName the user's middle name
+	 * @param  lastName the user's last name
+	 * @param  prefixId the user's name prefix ID
+	 * @param  suffixId the user's name suffix ID
+	 * @param  male whether the user is male
+	 * @param  birthdayMonth the user's birthday month (0-based, meaning 0 for
+	 *         January)
+	 * @param  birthdayDay the user's birthday day
+	 * @param  birthdayYear the user's birthday year
+	 * @param  jobTitle the user's job title
+	 * @param  sendEmail whether to send the user an email notification about
+	 *         their new account
+	 * @param  serviceContext the service context for the user
+	 * @return the new user
+	 * @throws PortalException if the user's information is invalid
+	 * @throws SystemException if a system exception occurred
+	 */
+	public User mergeUser(
+			long creatorUserId, long companyId, boolean autoPassword,
+			String screenName, String emailAddress, long facebookId,
+			String openId, String firstName, String middleName, String lastName,
+			int prefixId, int suffixId, boolean male, int birthdayMonth,
+			int birthdayDay, int birthdayYear, String jobTitle,
+			boolean sendEmail, boolean updateInformation,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User defaultUser = getDefaultUser(companyId);
+
+		User user = getUserByEmailAddress(companyId, emailAddress);
+
+		if (updateInformation) {
+			Date birthday = PortalUtil.getDate(
+				birthdayMonth, birthdayDay, birthdayYear,
+				new ContactBirthdayException());
+
+			user.setScreenName(screenName);
+			user.setFacebookId(facebookId);
+			user.setOpenId(openId);
+			user.setFirstName(firstName);
+			user.setMiddleName(middleName);
+			user.setLastName(lastName);
+			user.setJobTitle(jobTitle);
+
+			Contact contact = user.getContact();
+
+			contact.setFirstName(firstName);
+			contact.setMiddleName(middleName);
+			contact.setLastName(lastName);
+			contact.setPrefixId(prefixId);
+			contact.setSuffixId(suffixId);
+			contact.setMale(male);
+			contact.setBirthday(birthday);
+			contact.setJobTitle(jobTitle);
+
+			contactPersistence.update(contact, false, serviceContext);
+		}
+
+		user.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+		userPersistence.update(user, false, serviceContext);
+
+		serviceContext.setAttribute("autoPassword", autoPassword);
+		serviceContext.setAttribute("sendEmail", sendEmail);
+
+		long userId = user.getUserId();
+
+		long workflowUserId = creatorUserId;
+
+		if (workflowUserId == userId) {
+			workflowUserId = defaultUser.getUserId();
+		}
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			companyId, defaultUser.getUserId(), User.class.getName(), userId,
+			user, serviceContext);
+
+		return getUserByEmailAddress(companyId, emailAddress);
+	}
+
+	/**
 	 * Searches for an ordered range of all the users with the status who match
 	 * the keywords, without using the indexer. It is preferable to use the
 	 * indexed version {@link #search(long, String, int, LinkedHashMap, int,
