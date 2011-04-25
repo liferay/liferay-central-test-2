@@ -64,7 +64,6 @@ if ((article != null) && article.isDraft()) {
 
 					{
 					handler: function(event) {
-						console.log('permissions', '<%= permissionsURL %>');
 						if (!permissionPopUp) {
 							permissionPopUp = new A.Dialog(
 								{
