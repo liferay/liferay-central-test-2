@@ -16,7 +16,6 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,51 +54,6 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select MBMessage.messageId, MBMessage.body from MBMessage");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long messageId = rs.getLong("messageId");
-				String body = rs.getString("body");
-
-				updateBodySmileys(messageId, body);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateBodySmileys(long messageId, String body)
-		throws Exception {
-
-		body = StringUtil.replace(
-			body,
-			new String[] {"<3", ">_>", "<_<"},
-			new String[] {":love:", ":glare:", ":dry:"});
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update MBMessage set body = ? where messageId = " + messageId);
-
-			ps.setString(1, body);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
 		}
 	}
 
