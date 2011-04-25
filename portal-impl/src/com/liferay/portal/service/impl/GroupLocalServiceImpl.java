@@ -422,21 +422,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				themeLoader.getFileStorage() + StringPool.SLASH +
 					group.getGroupId();
 
-			try {
-				layoutSetLocalService.getLayoutSet(group.getGroupId(), true);
-
-				FileUtil.deltree(themePath + "-private");
-			}
-			catch (NoSuchLayoutSetException nslse) {
-			}
-
-			try {
-				layoutSetLocalService.getLayoutSet(group.getGroupId(), false);
-
-				FileUtil.deltree(themePath + "-public");
-			}
-			catch (NoSuchLayoutSetException nslse) {
-			}
+			FileUtil.deltree(themePath + "-private");
+			FileUtil.deltree(themePath + "-public");
 		}
 
 		// Asset
