@@ -572,7 +572,7 @@ public class HttpImpl implements Http {
 				String value = StringPool.BLANK;
 
 				if (kvp.length > 1) {
-					value = kvp[1];
+					value = decodeURL(kvp[1]);
 				}
 
 				List<String> values = tempParameterMap.get(key);
