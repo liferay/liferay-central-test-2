@@ -14,13 +14,10 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.freemarker.JournalTemplateLoader;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ContentUtil;
 
@@ -33,16 +30,12 @@ import freemarker.template.TemplateException;
  */
 public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
-	protected String getJournalTemplatesPath() {
-		StringBundler sb = new StringBundler(5);
+	protected String getErrorTemplateContent() {
+		return ContentUtil.get(PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
+	}
 
-		sb.append(JournalTemplateLoader.JOURNAL_SEPARATOR);
-		sb.append(StringPool.SLASH);
-		sb.append(getCompanyId());
-		sb.append(StringPool.SLASH);
-		sb.append(getGroupId());
-
-		return sb.toString();
+	protected String getErrorTemplateId() {
+		return PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
 	}
 
 	protected TemplateContext getTemplateContext() {
@@ -66,10 +59,8 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			if (e instanceof ParseException ||
 				e instanceof TemplateException) {
 
-				String errorTemplateId =
-					PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
-				String errorTemplateContent = ContentUtil.get(
-					PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
+				String errorTemplateId = getErrorTemplateId();
+				String errorTemplateContent = getErrorTemplateContent();
 
 				freeMarkerContext.put("exception", e.getMessage());
 				freeMarkerContext.put("script", getScript());

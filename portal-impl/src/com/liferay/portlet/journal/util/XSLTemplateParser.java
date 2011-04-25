@@ -34,6 +34,10 @@ import javax.xml.transform.stream.StreamSource;
  */
 public class XSLTemplateParser extends VelocityTemplateParser {
 
+	protected String getErrorTemplateContent() {
+		return ContentUtil.get(PropsValues.JOURNAL_ERROR_TEMPLATE_XSL);
+	}
+
 	protected TemplateContext getTemplateContext() throws Exception {
 		return _getTemplateContext(getScript());
 	}
@@ -55,8 +59,7 @@ public class XSLTemplateParser extends VelocityTemplateParser {
 				xmlSource, new StreamResult(unsyncStringWriter));
 		}
 		catch (Exception e) {
-			String errorTemplateContent = ContentUtil.get(
-				PropsValues.JOURNAL_ERROR_TEMPLATE_XSL);
+			String errorTemplateContent = getErrorTemplateContent();
 
 			XSLContext errorXSLContext = (XSLContext)_getTemplateContext(
 				errorTemplateContent);
