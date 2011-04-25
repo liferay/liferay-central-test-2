@@ -116,16 +116,14 @@ else if (article != null) {
 String[][] categorySections = {mainSections};
 %>
 
-<liferay-util:include page="/html/portlet/journal/article_header.jsp">
-	<liferay-util:param name="tabs1" value="content" />
-</liferay-util:include>
+<liferay-util:include page="/html/portlet/journal/article_header.jsp" />
 
-<aui:form enctype="multipart/form-data" method="post" name="fm2">
-	<input name="groupId" type="hidden" value="" />
-	<input name="articleId" type="hidden" value="" />
-	<input name="version" type="hidden" value="" />
-	<input name="title" type="hidden" value="" />
-	<input name="xml" type="hidden" value="" />
+<aui:form enctype="multipart/form-data" method="post" name="fm2" useNamespace="<%= false %>">
+	<aui:input name="groupId" type="hidden" />
+	<aui:input name="articleId" type="hidden" />
+	<aui:input name="version" type="hidden" />
+	<aui:input name="title" type="hidden" />
+	<aui:input name="xml" type="hidden" />
 </aui:form>
 
 <portlet:actionURL var="editArticleActionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">

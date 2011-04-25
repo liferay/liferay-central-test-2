@@ -31,9 +31,7 @@ portletURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 portletURL.setParameter("articleId", article.getArticleId());
 %>
 
-<liferay-util:include page="/html/portlet/journal/article_header.jsp">
-	<liferay-util:param name="tabs1" value="history" />
-</liferay-util:include>
+<liferay-util:include page="/html/portlet/journal/article_header.jsp" />
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
