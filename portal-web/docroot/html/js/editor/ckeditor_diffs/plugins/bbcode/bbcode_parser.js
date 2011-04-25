@@ -151,9 +151,9 @@
 
 			var item;
 
-			var result = [];
-
 			var tmp;
+
+			var result = [];
 
 			for (var i = 0, j = 0, length = dataMap.length; i < length; i++) {
 				item = dataMap[i];
