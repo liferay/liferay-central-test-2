@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.PortalUtil;
@@ -88,12 +89,14 @@ public class NavItem implements Serializable {
 
 		String regularURL = getRegularURL();
 
-		if (StringUtil.startsWith(regularURL, portalURL)) {
-			return regularURL;
-		}
-		else {
-			return portalURL.concat(regularURL);
-		}
+		if (StringUtil.startsWith(regularURL, portalURL) ||
+    		Validator.isUrl(regularURL)) {
+
+    		return regularURL;
+    	}
+    	else {
+    		return portalURL.concat(regularURL);
+    	}
 	}
 
 	public String getRegularURL() throws Exception {
