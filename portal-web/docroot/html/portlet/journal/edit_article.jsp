@@ -102,6 +102,7 @@ request.setAttribute("edit_article.jsp-structure", structure);
 request.setAttribute("edit_article.jsp-defaultLanguageId", defaultLanguageId);
 request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 request.setAttribute("edit_article.jsp-languageId", languageId);
+request.setAttribute("edit_article.jsp-redirect", redirect);
 
 String[] mainSections = PropsValues.JOURNAL_ARTICLE_FORM_ADD;
 
@@ -159,6 +160,10 @@ String[][] categorySections = {mainSections};
 	<tr>
 		<td class="lfr-top">
 			<c:if test="<%= Validator.isNull(toLanguageId) %>">
+				<c:if test="<%= article != null %>">
+					<aui:workflow-status id="<%= String.valueOf(article.getArticleId()) %>" status="<%= article.getStatus() %>" version="<%= String.valueOf(article.getVersion()) %>" />
+				</c:if>
+
 				<liferay-util:include page="/html/portlet/journal/article_toolbar.jsp" />
 
 				<liferay-ui:asset-categories-error />
