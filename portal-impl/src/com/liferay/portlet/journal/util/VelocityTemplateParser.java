@@ -44,6 +44,14 @@ import org.apache.velocity.exception.VelocityException;
  */
 public class VelocityTemplateParser extends BaseTemplateParser {
 
+	protected String getErrorTemplateContent() {
+		return ContentUtil.get(PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY);
+	}
+
+	protected String getErrorTemplateId() {
+		return PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY;
+	}
+
 	protected String getJournalTemplatesPath() {
 		StringBundler sb = new StringBundler(5);
 
@@ -139,10 +147,8 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 				unsyncStringWriter);
 		}
 		catch (VelocityException ve) {
-			String errorTemplateId =
-				PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY;
-			String errorTemplateContent = ContentUtil.get(
-				PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY);
+			String errorTemplateId = getErrorTemplateId();
+			String errorTemplateContent = getErrorTemplateContent();
 
 			velocityContext.put("exception", ve.getMessage());
 			velocityContext.put("script", getScript());

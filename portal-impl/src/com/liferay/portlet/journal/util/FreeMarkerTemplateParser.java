@@ -33,6 +33,14 @@ import freemarker.template.TemplateException;
  */
 public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 
+	protected String getErrorTemplateContent() {
+		return ContentUtil.get(PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
+	}
+
+	protected String getErrorTemplateId() {
+		return PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
+	}
+
 	protected String getJournalTemplatesPath() {
 		StringBundler sb = new StringBundler(5);
 
@@ -66,10 +74,8 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			if (e instanceof ParseException ||
 				e instanceof TemplateException) {
 
-				String errorTemplateId =
-					PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
-				String errorTemplateContent = ContentUtil.get(
-					PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
+				String errorTemplateId = getErrorTemplateId();
+				String errorTemplateContent = getErrorTemplateContent();
 
 				freeMarkerContext.put("exception", e.getMessage());
 				freeMarkerContext.put("script", getScript());
