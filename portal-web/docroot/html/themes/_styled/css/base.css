@@ -168,6 +168,11 @@ body.html-editor {
 	z-index: 999;
 }
 
+.html-editor.portlet-message-boards blockquote cite {
+	display: block;
+	font-weight: bold;
+}
+
 .html-editor.portlet-message-boards pre {
 	background: #F9F9F9;
 	border: 1px solid #777;
