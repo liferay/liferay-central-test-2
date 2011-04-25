@@ -533,31 +533,33 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 								<label for="<portlet:namespace />defaultLanguageId"><liferay-ui:message key="web-content-default-language" /></label>:
 
-								<span class="article-default-language journal-article-default-translation" id="<portlet:namespace />textLanguageId">
-									<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png" %>' />
+								<span class="nobr">
+									<span class="article-default-language journal-article-default-translation" id="<portlet:namespace />textLanguageId">
+										<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png" %>' />
 
-									<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
+										<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
+									</span>
+
+									<liferay-ui:icon-help message="default-language-help" />
+
+									<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
+
+									<aui:select inputCssClass="yui3-aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
+
+										<%
+										Locale[] locales = LanguageUtil.getAvailableLocales();
+
+										for (int i = 0; i < locales.length; i++) {
+										%>
+
+											<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= defaultLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+
+										<%
+										}
+										%>
+
+									</aui:select>
 								</span>
-
-								<liferay-ui:icon-help message="default-language-help" />
-
-								<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
-
-								<aui:select inputCssClass="yui3-aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
-
-									<%
-									Locale[] locales = LanguageUtil.getAvailableLocales();
-
-									for (int i = 0; i < locales.length; i++) {
-									%>
-
-										<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= defaultLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
-
-									<%
-									}
-									%>
-
-								</aui:select>
 							</c:when>
 							<c:otherwise>
 								<aui:input id="defaultLocale" name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
