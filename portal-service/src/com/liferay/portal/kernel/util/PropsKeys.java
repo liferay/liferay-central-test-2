@@ -807,6 +807,12 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
 
+	public static final String JOURNAL_ARTICLE_FORM_ADD = "journal.article.form.add";
+
+	public static final String JOURNAL_ARTICLE_FORM_UPDATE = "journal.article.form.update";
+
+	public static final String JOURNAL_ARTICLE_FORM_TRANSLATE = "journal.article.form.translate";
+
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = "journal.article.token.page.break";
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
