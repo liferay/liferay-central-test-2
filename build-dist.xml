@@ -259,6 +259,8 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 			/>
 		</copy>
 
+		<mkdir dir="${tcat.dir}/tomcat/temp" />
+
 		<replace file="${tcat.dir}/tomcat/conf/server.xml">
 			<replacetoken><![CDATA[xmlValidation="false" xmlNamespaceAware="false" deployXML="false">]]></replacetoken>
 			<replacevalue><![CDATA[xmlValidation="false" xmlNamespaceAware="false">]]></replacevalue>
@@ -1349,6 +1351,8 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-tcat">
+		<property name="tcat.dir" value="${app.server.parent.dir}/tcat-6.4.4" />
+
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tcat-admin" />
 			<param name="zip.executable.dir" value="${tcat.dir}/admin" />
