@@ -3,7 +3,7 @@
 <#assign fieldName = field.name>
 
 <#if parentField.name??>
-	<#assign fieldName = parentName>
+	<#assign fieldName = parentField.name!"">
 </#if>
 
 <#assign fieldValue = "">
