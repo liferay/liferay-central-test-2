@@ -72,7 +72,9 @@ public class DLFileEntryImpl
 
 	public ExpandoBridge getExpandoBridge() {
 		try {
-			return getFileVersion().getExpandoBridge();
+			DLFileVersion dlFileVersion = getFileVersion();
+
+			return dlFileVersion.getExpandoBridge();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -126,23 +128,23 @@ public class DLFileEntryImpl
 	}
 
 	public DLFolder getFolder() {
-		DLFolder folder = null;
+		DLFolder dlFolder = null;
 
 		if (getFolderId() > 0) {
 			try {
-				folder = DLFolderLocalServiceUtil.getFolder(getFolderId());
+				dlFolder = DLFolderLocalServiceUtil.getFolder(getFolderId());
 			}
 			catch (Exception e) {
-				folder = new DLFolderImpl();
+				dlFolder = new DLFolderImpl();
 
 				_log.error(e, e);
 			}
 		}
 		else {
-			folder = new DLFolderImpl();
+			dlFolder = new DLFolderImpl();
 		}
 
-		return folder;
+		return dlFolder;
 	}
 
 	public String getIcon() {

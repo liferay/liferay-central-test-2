@@ -55,7 +55,9 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public Map<String, Serializable> getAttributes() {
-		return getExpandoBridge().getAttributes();
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		return expandoBridge.getAttributes();
 	}
 
 	public long getCompanyId() {
