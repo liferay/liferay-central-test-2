@@ -1,14 +1,4 @@
 (function() {
-	var HTML_CHARS = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#x27;',
-        '/': '&#x2F;',
-        '`': '&#x60;'
-    };
-
 	var LIST = 'list';
 
 	var REGEX_COLOR = /^(:?aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|purple|red|silver|teal|white|yellow|#(?:[0-9a-f]{3})?[0-9a-f]{3})$/i;
@@ -206,14 +196,7 @@
 			return result;
 		},
 
-		_escapeHTML: function(data) {
-			return data.replace(
-				/[&<>"'\/`]/g,
-				function (match) {
-					return HTML_CHARS[match];
-				}
-			);
-		},
+		_escapeHTML: Liferay.Util.escapeHTML,
 
 		_getFontSize: function(fontSize) {
 			return MAP_FONT_SIZE[fontSize] || MAP_FONT_SIZE.defaultSize;
