@@ -39,6 +39,8 @@ public interface DLFileEntry extends DLFileEntryModel {
 
 	public long getDataRepositoryId();
 
+	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge();
+
 	public java.lang.String getExtraSettings();
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getExtraSettingsProperties();

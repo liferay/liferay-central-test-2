@@ -1739,7 +1739,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	}
 
 	/**
-	* Updates an existing "anonymous" user and starts the workflow.
+	* Updates an "anonymous" user and starts the workflow.
 	*
 	* @param creatorUserId the primary key of the creator
 	* @param companyId the primary key of the company the user belongs to
