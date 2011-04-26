@@ -4,18 +4,18 @@
 	<service name="Portlet_DDL_DDLEntryService" provider="java:RPC" style="rpc" use="encoded">
 		<typeMapping xmlns:ns="http://model.dynamicdatalists.portlet.liferay.com" qname="ns:DDLEntrySoap" type="java:com.liferay.portlet.dynamicdatalists.model.DDLEntrySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<operation xmlns:operNS="urn:http.service.dynamicdatalists.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="in0" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.dynamicdatalists.portlet.liferay.com" name="deleteEntry" qname="operNS:deleteEntry" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryKey" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="in0" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="in1" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.dynamicdatalists.portlet.liferay.com" xmlns:rtns="http://model.dynamicdatalists.portlet.liferay.com" name="getEntry" qname="operNS:getEntry" returnQName="getEntryReturn" returnType="rtns:DDLEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="in0" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.dynamicdatalists.portlet.liferay.com" xmlns:rtns="http://model.dynamicdatalists.portlet.liferay.com" name="getEntry" qname="operNS:getEntry" returnQName="getEntryReturn" returnType="rtns:DDLEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="entryKey" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="in0" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="in1" type="tns:string"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="deleteEntry getEntry" />
 		<parameter name="className" value="com.liferay.portlet.dynamicdatalists.service.http.DDLEntryServiceSoap" />

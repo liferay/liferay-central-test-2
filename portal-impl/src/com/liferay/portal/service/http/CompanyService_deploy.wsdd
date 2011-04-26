@@ -72,7 +72,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addCompany deleteLogo getCompanyById getCompanyByLogoId getCompanyByMx getCompanyByVirtualHost getCompanyByWebId removePreferences updateCompany updateDisplay updateSecurity" />
 		<parameter name="className" value="com.liferay.portal.service.http.CompanyServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="CompanyServiceSoap" />
 		<parameter name="wsdlServiceElement" value="CompanyServiceSoapService" />

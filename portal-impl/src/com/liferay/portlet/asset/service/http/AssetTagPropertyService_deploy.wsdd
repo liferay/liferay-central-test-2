@@ -26,7 +26,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addTagProperty deleteTagProperty getTagProperties getTagPropertyValues updateTagProperty" />
 		<parameter name="className" value="com.liferay.portlet.asset.service.http.AssetTagPropertyServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.asset.portlet.liferay.com,http://model.asset.portlet.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.asset.portlet.liferay.com,urn:http.service.asset.portlet.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="AssetTagPropertyServiceSoap" />
 		<parameter name="wsdlServiceElement" value="AssetTagPropertyServiceSoapService" />
