@@ -16,6 +16,7 @@
 package com.liferay.portal.cache.key;
 
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import edu.emory.mathcs.backport.java.util.Arrays;
 
@@ -28,6 +29,21 @@ import junit.framework.TestCase;
  * @author Shuyang Zhou
  */
 public class BaseCacheKeyGeneratorTest extends TestCase {
+
+	public void testConsistency() {
+		StringBundler sb = new StringBundler(_KEYS);
+
+		String combinedKey = sb.toString();
+
+		String hashCode1 = cacheKeyGenerator.getCacheKey(combinedKey);
+
+		String hashCode2 = cacheKeyGenerator.getCacheKey(_KEYS);
+
+		String hashCode3 = cacheKeyGenerator.getCacheKey(sb);
+
+		assertEquals(hashCode1, hashCode2);
+		assertEquals(hashCode2, hashCode3);
+	}
 
 	public void testScan() {
 		Map<String, String> checkMap = new HashMap<String, String>();
@@ -61,6 +77,8 @@ public class BaseCacheKeyGeneratorTest extends TestCase {
 			}
 		}
 	}
+
+	private static String[] _KEYS = {"test1", "test2", "test3", "test4"};
 
 	private static final String[][] _SPECIAL_CASES = {
 		{"fetchByT_C_C_P_.java.lang.Long.java.lang.Long.java.lang.Long_A_", ".",
