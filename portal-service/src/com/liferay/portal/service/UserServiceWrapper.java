@@ -250,6 +250,23 @@ public class UserServiceWrapper implements UserService {
 		return _userService.hasRoleUser(companyId, name, userId, inherited);
 	}
 
+	public com.liferay.portal.model.User mergeUser(long companyId,
+		boolean autoPassword, java.lang.String screenName,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle, boolean sendEmail,
+		boolean updateInformation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _userService.mergeUser(companyId, autoPassword, screenName,
+			emailAddress, facebookId, openId, firstName, middleName, lastName,
+			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, sendEmail, updateInformation, serviceContext);
+	}
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
