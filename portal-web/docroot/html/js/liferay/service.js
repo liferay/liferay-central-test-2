@@ -386,7 +386,6 @@ Liferay.Service.registerClass(
 		getUserIdByScreenName: true,
 		hasGroupUser: true,
 		hasRoleUser: true,
-		mergeUser: true,
 		setRoleUsers: true,
 		setUserGroupUsers: true,
 		unsetGroupUsers: true,
