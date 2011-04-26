@@ -17,6 +17,7 @@ package com.liferay.util.ant;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.xml.Attribute;
@@ -191,13 +192,23 @@ public class Java2WsddTask {
 				if (name.equals("allowedMethods")) {
 					Attribute valueAttribute = element.attribute("value");
 
-					String[] allowedMethods = StringUtil.split(
-						valueAttribute.getValue(), " ");
+					String[] values = StringUtil.split(
+						valueAttribute.getValue(), StringPool.SPACE);
 
-					Arrays.sort(allowedMethods);
+					Arrays.sort(values);
 
 					valueAttribute.setValue(
-						StringUtil.merge(allowedMethods, " "));
+						StringUtil.merge(values, StringPool.SPACE));
+				}
+				else if (name.equals("schemaUnqualified")) {
+					Attribute valueAttribute = element.attribute("value");
+
+					String[] values = StringUtil.split(
+						valueAttribute.getValue());
+
+					Arrays.sort(values);
+
+					valueAttribute.setValue(StringUtil.merge(values));
 				}
 
 				parameterElements.put(name, element);
