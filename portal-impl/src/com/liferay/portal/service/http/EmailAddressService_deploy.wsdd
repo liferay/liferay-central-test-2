@@ -29,7 +29,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addEmailAddress deleteEmailAddress getEmailAddress getEmailAddresses updateEmailAddress" />
 		<parameter name="className" value="com.liferay.portal.service.http.EmailAddressServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="EmailAddressServiceSoap" />
 		<parameter name="wsdlServiceElement" value="EmailAddressServiceSoapService" />

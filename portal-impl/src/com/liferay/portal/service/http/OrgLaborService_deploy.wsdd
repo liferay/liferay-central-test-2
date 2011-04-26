@@ -51,7 +51,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addOrgLabor deleteOrgLabor getOrgLabor getOrgLabors updateOrgLabor" />
 		<parameter name="className" value="com.liferay.portal.service.http.OrgLaborServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="OrgLaborServiceSoap" />
 		<parameter name="wsdlServiceElement" value="OrgLaborServiceSoapService" />

@@ -26,7 +26,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addRegion getRegion getRegions" />
 		<parameter name="className" value="com.liferay.portal.service.http.RegionServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="RegionServiceSoap" />
 		<parameter name="wsdlServiceElement" value="RegionServiceSoapService" />
