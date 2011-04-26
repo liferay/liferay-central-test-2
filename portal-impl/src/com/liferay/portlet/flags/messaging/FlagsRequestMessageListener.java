@@ -35,6 +35,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -123,8 +124,8 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 
 		// Content
 
-		String contentType = LanguageUtil.get(
-			locale, "model.resource." + flagsRequest.getClassName());
+		String contentType = ResourceActionsUtil.getModelResource(
+			locale, flagsRequest.getClassName());
 
 		// Reason
 

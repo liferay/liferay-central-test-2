@@ -46,7 +46,7 @@ List<AssetRendererFactory> assetRendererFactories = AssetRendererFactoryRegistry
 							for (AssetRendererFactory assetRendererFactory : assetRendererFactories) {
 							%>
 
-								<aui:option label='<%= "model.resource." + assetRendererFactory.getClassName() %>' selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
+								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, assetRendererFactory.getClassName()) %>" selected="<%= classNameId == assetRendererFactory.getClassNameId() %>" value="<%= assetRendererFactory.getClassNameId() %>" />
 
 							<%
 							}

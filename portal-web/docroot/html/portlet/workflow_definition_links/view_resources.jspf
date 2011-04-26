@@ -70,7 +70,7 @@ portletURL.setParameter("struts_action", "/workflow_definition_links/view");
 				buffer.append("<img align=\"left\" border=\"0\" src=\"");
 				buffer.append(workflowHandler.getIconPath((LiferayPortletRequest)renderRequest));
 				buffer.append("\" style=\"margin-right: 5px;\">");
-				buffer.append(LanguageUtil.get(pageContext, "model.resource." + workflowHandler.getClassName()));
+				buffer.append(ResourceActionsUtil.getModelResource(locale, workflowHandler.getClassName()));
 				%>
 
 			</liferay-ui:search-container-column-text>

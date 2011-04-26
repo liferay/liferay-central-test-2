@@ -66,7 +66,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			for (long classNameId : classNameIds) {
 				ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-				typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+				typesLeftList.add(new KeyValuePair(String.valueOf(classNameId), ResourceActionsUtil.getModelResource(locale, className.getValue())));
 			}
 
 			// Right list
@@ -79,7 +79,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 				if (Arrays.binarySearch(classNameIds, classNameId) < 0) {
 					ClassName className = ClassNameServiceUtil.getClassName(classNameId);
 
-					typesRightList.add(new KeyValuePair(String.valueOf(classNameId), LanguageUtil.get(pageContext, "model.resource." + className.getValue())));
+					typesRightList.add(new KeyValuePair(String.valueOf(classNameId), ResourceActionsUtil.getModelResource(locale, className.getValue())));
 				}
 			}
 
@@ -189,7 +189,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 											%>
 
 												<liferay-ui:icon
-													message='<%= "model.resource." + curRendererFactory.getClassName() %>' src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>"
+													message="<%= ResourceActionsUtil.getModelResource(locale, curRendererFactory.getClassName()) %>" src="<%= curRendererFactory.getIconPath(renderRequest) %>" url="<%= taglibURL %>"
 												/>
 
 											<%
@@ -284,7 +284,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 								// Type
 
-								row.addText(LanguageUtil.get(pageContext, "model.resource." + assetEntryClassName), rowURL);
+								row.addText(ResourceActionsUtil.getModelResource(locale, assetEntryClassName), rowURL);
 
 								// Title
 

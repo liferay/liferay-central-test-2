@@ -213,7 +213,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		<c:when test="<%= typeSelection.equals(JournalArticle.class.getName()) %>">
 			<aui:input name="assetType" type="hidden" value="<%= JournalArticle.class.getName() %>" />
 
-			<liferay-ui:message key="select" />: <liferay-ui:message key='<%= "model.resource." + JournalArticle.class.getName() %>' />
+			<liferay-ui:message key="select" />: <%= ResourceActionsUtil.getModelResource(locale, JournalArticle.class.getName()) %>
 
 			<br /><br />
 

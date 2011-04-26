@@ -65,7 +65,7 @@ Collections.sort(customAttributesDisplays, new CustomAttributesDisplayComparator
 			buffer.append(customAttributesDisplay.getIconPath(themeDisplay));
 			buffer.append("\" style=\"margin-right: 5px;\">");
 			buffer.append("<strong>");
-			buffer.append(LanguageUtil.get(pageContext, "model.resource." + customAttributesDisplay.getClassName()));
+			buffer.append(ResourceActionsUtil.getModelResource(locale, customAttributesDisplay.getClassName()));
 			buffer.append("</strong>");
 			%>
 
