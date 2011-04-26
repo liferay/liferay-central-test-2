@@ -87,7 +87,7 @@
 				display: inline;
 
 				strong {
-                	display: inline;
+					display: inline;
 				}
 			}
 		}
@@ -315,7 +315,7 @@
 	}
 
 	.taglib-workflow-status {
-    	margin: 0 0 1em 0;
+		margin: 0 0 1em 0;
 	}
 
 	.default-link {
