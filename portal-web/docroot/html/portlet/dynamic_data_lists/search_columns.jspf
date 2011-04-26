@@ -15,12 +15,14 @@
 --%>
 
 <liferay-ui:search-container-column-text
+	href="<%= rowHREF %>"
 	name="id"
 	orderable="<%= false %>"
 	property="entryKey"
 />
 
 <liferay-ui:search-container-column-text
+	href="<%= rowHREF %>"
 	name="name"
 	orderable="<%= false %>"
 	property="name"
@@ -28,6 +30,7 @@
 
 <liferay-ui:search-container-column-text
 	buffer="buffer"
+	href="<%= rowHREF %>"
 	name="description"
 	orderable="<%= false %>"
 >
@@ -40,6 +43,7 @@
 
 <liferay-ui:search-container-column-text
 	buffer="buffer"
+	href="<%= rowHREF %>"
 	name="modified-date"
 	orderable="<%= false %>"
 >
