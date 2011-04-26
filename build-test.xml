@@ -1737,7 +1737,20 @@
 				<equals arg1="${skip.prepare-bundle}" arg2="true" />
 			</not>
 			<then>
-				<antcall target="all" />
+				<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
+
+				<if>
+					<not>
+						<available file="${app.server.tomcat.classes.global.dir}/jasper.jar" />
+					</not>
+					<then>
+						<ant antfile="build-dist.xml" target="unzip-tomcat" inheritAll="false" />
+					</then>
+				</if>
+
+				<antcall target="all" inheritAll="false" />
+
+				<delete file="app.server.${user.name}.properties" />
 			</then>
 		</if>
 	</target>
