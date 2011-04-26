@@ -51,7 +51,7 @@ public class AddCommunityNameCommaTest extends BaseTestCase {
 		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_134_name", RuntimeVariables.replace("Test,"));
+		selenium.type("_134_name", RuntimeVariables.replace("Community Name,"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_description",
 			RuntimeVariables.replace("This is a test community."));
@@ -62,15 +62,21 @@ public class AddCommunityNameCommaTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("Test,"),
-			selenium.getText("//tr[4]/td[1]"));
+		selenium.type("_134_name", RuntimeVariables.replace("Community Name,"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Community Name,"),
+			selenium.getText("//tr[3]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Open"),
-			selenium.getText("//tr[4]/td[2]"));
+			selenium.getText("//tr[3]/td[2]"));
 		assertEquals(RuntimeVariables.replace("1"),
-			selenium.getText("//tr[4]/td[3]"));
+			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace("0"),
-			selenium.getText("//tr[4]/td[4]"));
+			selenium.getText("//tr[3]/td[4]"));
 		assertEquals(RuntimeVariables.replace("Yes"),
-			selenium.getText("//tr[4]/td[5]"));
+			selenium.getText("//tr[3]/td[5]"));
 	}
 }

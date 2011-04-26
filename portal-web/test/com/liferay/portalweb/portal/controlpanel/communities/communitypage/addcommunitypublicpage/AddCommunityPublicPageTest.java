@@ -121,8 +121,6 @@ public class AddCommunityPublicPageTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
-				selenium.clickAt("main-content", RuntimeVariables.replace(""));
-				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -130,9 +128,8 @@ public class AddCommunityPublicPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Community Name")
-												.equals(selenium.getText(
-										"//div/div[3]/a"))) {
+						if (selenium.isPartialText("//div/div[3]/a",
+									"Community Name")) {
 							break;
 						}
 					}

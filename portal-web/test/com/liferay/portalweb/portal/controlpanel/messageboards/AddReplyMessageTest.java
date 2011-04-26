@@ -47,7 +47,6 @@ public class AddReplyMessageTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -86,7 +85,8 @@ public class AddReplyMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_textArea")) {
+				if (selenium.isVisible(
+							"//td[@id='cke_contents__162_editor']/iframe")) {
 					break;
 				}
 			}
@@ -97,15 +97,10 @@ public class AddReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace(
-				"This is a t\u00e9st r\u00e9pl m\u00e9ssag\u00e9!"));
-		selenium.saveScreenShotAndSource();
-		selenium.type("_19_textArea",
+		selenium.selectFrame("//td[@id='cke_contents__162_editor']/iframe");
+		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
-		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

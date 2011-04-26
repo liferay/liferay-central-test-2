@@ -57,7 +57,7 @@ public class AddAnswerThreadTest extends BaseTestCase {
 		selenium.clickAt("link=Reply", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_textArea",
+		selenium.type("_162_textArea",
 			RuntimeVariables.replace(
 				"I like green because it is so natural. Obviously."));
 		selenium.saveScreenShotAndSource();

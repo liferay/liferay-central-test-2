@@ -54,6 +54,8 @@ public class AddNullTitleTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		selenium.type("_162_subject", RuntimeVariables.replace(""));
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,7 +63,8 @@ public class AddNullTitleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_textArea")) {
+				if (selenium.isVisible(
+							"//td[@id='cke_contents__162_editor']/iframe")) {
 					break;
 				}
 			}
@@ -72,21 +75,14 @@ public class AddNullTitleTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace("This is a Null Test Entr"));
-		selenium.saveScreenShotAndSource();
-		selenium.type("_19_textArea",
+		selenium.selectFrame("//td[@id='cke_contents__162_editor']/iframe");
+		selenium.type("//body",
 			RuntimeVariables.replace("This is a Null Test Entry!"));
-		selenium.saveScreenShotAndSource();
-		selenium.type("_19_subject", RuntimeVariables.replace(""));
-		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
+		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid subject."));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

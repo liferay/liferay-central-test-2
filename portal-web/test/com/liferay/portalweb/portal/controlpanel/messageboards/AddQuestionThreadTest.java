@@ -61,7 +61,7 @@ public class AddQuestionThreadTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_questionCheckbox")) {
+				if (selenium.isVisible("_162_questionCheckbox")) {
 					break;
 				}
 			}
@@ -72,14 +72,14 @@ public class AddQuestionThreadTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_19_questionCheckbox", RuntimeVariables.replace(""));
-		selenium.typeKeys("_19_subject",
+		selenium.clickAt("_162_questionCheckbox", RuntimeVariables.replace(""));
+		selenium.typeKeys("_162_subject",
 			RuntimeVariables.replace("Favorite Color Test Question"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_subject",
+		selenium.type("_162_subject",
 			RuntimeVariables.replace("Favorite Color Test Question"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_textArea",
+		selenium.type("_162_textArea",
 			RuntimeVariables.replace("What is your favorite color?"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);

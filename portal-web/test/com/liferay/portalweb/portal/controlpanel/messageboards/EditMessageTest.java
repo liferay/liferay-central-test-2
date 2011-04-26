@@ -61,13 +61,13 @@ public class EditMessageTest extends BaseTestCase {
 		selenium.clickAt("link=Edit", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_subject",
+		selenium.typeKeys("_162_subject",
 			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Edited"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_subject",
+		selenium.type("_162_subject",
 			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9 Edited"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_textArea",
+		selenium.type("_162_textArea",
 			RuntimeVariables.replace("This is edited test M\u00e9ssag\u00e9!"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);

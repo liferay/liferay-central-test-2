@@ -47,7 +47,6 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -65,7 +64,7 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_name")) {
+				if (selenium.isVisible("_162_name")) {
 					break;
 				}
 			}
@@ -76,13 +75,13 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_name",
+		selenium.typeKeys("_162_name",
 			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gor"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_name",
+		selenium.type("_162_name",
 			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_description",
+		selenium.type("_162_description",
 			RuntimeVariables.replace(
 				"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!"));
 		selenium.saveScreenShotAndSource();
@@ -104,7 +103,6 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

@@ -56,13 +56,10 @@ public class AddOrganizationNameNullTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Regular Organization"));
 		selenium.select("_126_countryId",
 			RuntimeVariables.replace("label=United States"));
+		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//section/div/div/div/div[1]"));
-		assertEquals(RuntimeVariables.replace("Please enter a valid name."),
-			selenium.getText("//fieldset[1]/div/div[1]"));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

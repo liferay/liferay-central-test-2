@@ -54,11 +54,12 @@ public class MoveThreadTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//tr[4]/td[1]/a[1]/strong",
-					RuntimeVariables.replace(""));
+				assertEquals(RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"),
+					selenium.getText("//tr[4]/td[2]/a[1]/strong"));
+				selenium.clickAt("//tr[4]/td[2]/a[1]/strong",
+					RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				Thread.sleep(5000);
 				selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
@@ -75,7 +76,7 @@ public class MoveThreadTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("_19_addExplanationPostCheckbox",
+				selenium.clickAt("_162_addExplanationPostCheckbox",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -84,7 +85,7 @@ public class MoveThreadTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_19_subject")) {
+						if (selenium.isVisible("_162_subject")) {
 							break;
 						}
 					}
@@ -95,16 +96,36 @@ public class MoveThreadTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.typeKeys("_19_subject",
+				selenium.typeKeys("_162_subject",
 					RuntimeVariables.replace("Moved to Sujr"));
 				selenium.saveScreenShotAndSource();
-				selenium.type("_19_subject",
+				selenium.type("_162_subject",
 					RuntimeVariables.replace("Moved to Sujr"));
 				selenium.saveScreenShotAndSource();
-				selenium.type("_19_textArea",
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//td[@id='cke_contents__162_editor']/iframe")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.selectFrame(
+					"//td[@id='cke_contents__162_editor']/iframe");
+				selenium.type("//body",
 					RuntimeVariables.replace(
 						"Trust and paths will be straightened."));
-				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("category",

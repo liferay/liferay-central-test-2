@@ -104,7 +104,8 @@ public class AddOrganizationAddress2Test extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+				selenium.clickAt("//a[@id='_126_addressesLink']",
+					RuntimeVariables.replace("Addresses"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

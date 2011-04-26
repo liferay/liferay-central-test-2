@@ -53,13 +53,10 @@ public class AddCommunityNameNullTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name", RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//div[@class='portlet-msg-error']"));
-		assertEquals(RuntimeVariables.replace("Please enter a valid name."),
-			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

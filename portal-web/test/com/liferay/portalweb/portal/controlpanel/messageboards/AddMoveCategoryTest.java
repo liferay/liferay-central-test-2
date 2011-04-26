@@ -58,7 +58,7 @@ public class AddMoveCategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_name")) {
+				if (selenium.isVisible("_162_name")) {
 					break;
 				}
 			}
@@ -69,11 +69,10 @@ public class AddMoveCategoryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_name", RuntimeVariables.replace("Sujr"));
+		selenium.typeKeys("_162_name", RuntimeVariables.replace("Sujr"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_name", RuntimeVariables.replace("Sujr"));
+		selenium.type("_162_name", RuntimeVariables.replace("Sujr"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

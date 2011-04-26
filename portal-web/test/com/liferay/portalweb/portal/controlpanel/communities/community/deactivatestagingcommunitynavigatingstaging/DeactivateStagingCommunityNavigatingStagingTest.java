@@ -84,26 +84,10 @@ public class DeactivateStagingCommunityNavigatingStagingTest
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='View Pages']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='View Pages']",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("View Pages"),
+			selenium.getText("//div/span/button[2]"));
+		selenium.clickAt("//div/span/button[2]",
+			RuntimeVariables.replace("View Pages"));
 		selenium.waitForPopUp("", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("title=Public Page - Liferay");
 		selenium.saveScreenShotAndSource();
@@ -147,9 +131,8 @@ public class DeactivateStagingCommunityNavigatingStagingTest
 			}
 
 			try {
-				if (RuntimeVariables.replace("Manage Pages")
-										.equals(selenium.getText(
-								"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"))) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
 					break;
 				}
 			}
@@ -160,21 +143,23 @@ public class DeactivateStagingCommunityNavigatingStagingTest
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Manage Pages"),
+		assertEquals(RuntimeVariables.replace("Site Settings"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Settings"),
-			selenium.getText("//ul[1]/li[3]/span/span/a"));
-		selenium.clickAt("//ul[1]/li[3]/span/span/a",
-			RuntimeVariables.replace("Settings"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Staging", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		selenium.select("_134_stagingType",
+			RuntimeVariables.replace("label=None"));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to deactivate staging for Community Name[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isElementPresent(
 				"//input[@name='_134_stagingEnabled' and @disabled='']"));

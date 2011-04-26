@@ -61,7 +61,7 @@ public class AddSubcategoryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_name")) {
+				if (selenium.isVisible("_162_name")) {
 					break;
 				}
 			}
@@ -72,13 +72,12 @@ public class AddSubcategoryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_name",
+		selenium.type("_162_name",
 			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gory"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_description",
+		selenium.type("_162_description",
 			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gory!"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

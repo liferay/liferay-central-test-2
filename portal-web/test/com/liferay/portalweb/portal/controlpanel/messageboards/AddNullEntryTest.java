@@ -61,7 +61,7 @@ public class AddNullEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_19_subject")) {
+				if (selenium.isVisible("_162_subject")) {
 					break;
 				}
 			}
@@ -72,20 +72,38 @@ public class AddNullEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_subject",
+		selenium.typeKeys("_162_subject",
 			RuntimeVariables.replace("Null Test Entr"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_subject", RuntimeVariables.replace("Null Test Entry"));
+		selenium.type("_162_subject",
+			RuntimeVariables.replace("Null Test Entry"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_textArea", RuntimeVariables.replace(""));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//td[@id='cke_contents__162_editor']/iframe")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
+		selenium.selectFrame("//td[@id='cke_contents__162_editor']/iframe");
+		selenium.type("//body", RuntimeVariables.replace(""));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid message."));
 	}
 }

@@ -72,13 +72,13 @@ public class EditCategoryTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.typeKeys("_19_name",
+		selenium.typeKeys("_162_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gor Edit\u00e9d"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_name",
+		selenium.type("_162_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory Edit\u00e9d"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_description",
+		selenium.type("_162_description",
 			RuntimeVariables.replace(
 				"This is a t\u00e9st cat\u00e9gory edited!"));
 		selenium.saveScreenShotAndSource();

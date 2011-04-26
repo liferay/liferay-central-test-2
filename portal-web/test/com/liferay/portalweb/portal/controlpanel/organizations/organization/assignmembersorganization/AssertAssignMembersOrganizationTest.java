@@ -83,8 +83,8 @@ public class AssertAssignMembersOrganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a")) {
 							break;
 						}
 					}
@@ -95,8 +95,11 @@ public class AssertAssignMembersOrganizationTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("View Users"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[8]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isElementPresent("link=selen01"));

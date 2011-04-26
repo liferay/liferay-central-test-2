@@ -48,6 +48,12 @@ public class DeleteCommunityGuestTest extends BaseTestCase {
 		selenium.clickAt("link=Sites", RuntimeVariables.replace("Sites"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		selenium.type("_134_name", RuntimeVariables.replace("Guest"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//tr[3]/td[1]", "Liferay"));
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
@@ -58,7 +64,7 @@ public class DeleteCommunityGuestTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a")) {
 					break;
 				}
 			}
@@ -71,18 +77,18 @@ public class DeleteCommunityGuestTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//div[@class='portlet-msg-error']"));
+				"Your request failed to complete."),
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace(
-				"The group cannot be deleted because it is a required system group."),
+				"The site cannot be deleted or deactivated because it is a required system site."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		assertTrue(selenium.isPartialText("//tr[3]/td[1]", "Liferay"));
 	}

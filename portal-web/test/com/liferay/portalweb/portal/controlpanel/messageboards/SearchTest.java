@@ -47,7 +47,7 @@ public class SearchTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.type("_162_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
@@ -82,7 +82,7 @@ public class SearchTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.type("_162_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
@@ -121,7 +121,7 @@ public class SearchTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.type("_162_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace(""));
