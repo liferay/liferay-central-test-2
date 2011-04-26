@@ -2774,7 +2774,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = getUserByEmailAddress(companyId, emailAddress);
 
 		if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
-			throw new PortalException("Incorrect user status");
+			throw new PortalException("Invalid user status");
 		}
 
 		User defaultUser = getDefaultUser(companyId);
@@ -5340,15 +5340,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Group group = groupPersistence.fetchByC_F(companyId, friendlyURL);
 
-		user = userPersistence.fetchByPrimaryKey(userId);
-
-		long groupId = 0;
-
-		if (user != null) {
-			groupId = user.getGroup().getGroupId();
-		}
-
-		if ((group != null) && (group.getGroupId() != groupId)) {
+		if ((group != null) && (group.getClassPK() != userId)) {
 			throw new GroupFriendlyURLException(
 				GroupFriendlyURLException.DUPLICATE);
 		}
