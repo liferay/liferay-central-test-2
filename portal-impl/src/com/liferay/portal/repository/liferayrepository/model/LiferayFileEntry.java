@@ -58,9 +58,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	}
 
 	public Map<String, Serializable> getAttributes() {
-		ExpandoBridge expandoBridge = _dlFileEntry.getExpandoBridge();
-
-		return expandoBridge.getAttributes();
+		return getExpandoBridge().getAttributes();
 	}
 
 	public long getCompanyId() {
@@ -85,6 +83,10 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
 	public String getDescription() {
 		return _dlFileEntry.getDescription();
+	}
+
+	public ExpandoBridge getExpandoBridge() {
+		return _dlFileEntry.getExpandoBridge();
 	}
 
 	public String getExtension() {
