@@ -17,8 +17,6 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.RepositoryModel;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -271,10 +269,6 @@ public class SearchContainerRowTag<R>
 			}
  		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(BeanPropertiesUtil.getBoolean(model, "escapedModel"));
-		}
-
 		if (Validator.isNull(_keyProperty)) {
 			String primaryKey = String.valueOf(model);
 
@@ -298,9 +292,6 @@ public class SearchContainerRowTag<R>
 		pageContext.setAttribute(_modelVar, model);
 		pageContext.setAttribute(_rowVar, _row);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		SearchContainerRowTag.class);
 
 	private boolean _bold;
 	private String _className;
