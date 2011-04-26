@@ -23,9 +23,9 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
-import org.dom4j.Branch;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
+import org.dom4j.Node;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
@@ -95,18 +95,18 @@ public class XMLFormatter {
 			});
 	}
 
-	public static String toString(Branch branch) throws IOException {
-		return toString(branch, StringPool.TAB);
+	public static String toString(Node node) throws IOException {
+		return toString(node, StringPool.TAB);
 	}
 
-	public static String toString(Branch branch, String indent)
+	public static String toString(Node node, String indent)
 		throws IOException {
 
-		return toString(branch, StringPool.TAB, false);
+		return toString(node, StringPool.TAB, false);
 	}
 
 	public static String toString(
-			Branch branch, String indent, boolean expandEmptyElements)
+			Node node, String indent, boolean expandEmptyElements)
 		throws IOException {
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
@@ -118,10 +118,10 @@ public class XMLFormatter {
 		outputFormat.setIndent(indent);
 		outputFormat.setLineSeparator(StringPool.NEW_LINE);
 
-		XMLWriter writer = new XMLWriter(
+		XMLWriter xmlWriter = new XMLWriter(
 			unsyncByteArrayOutputStream, outputFormat);
 
-		writer.write(branch);
+		xmlWriter.write(node);
 
 		String content = unsyncByteArrayOutputStream.toString(StringPool.UTF8);
 

@@ -24,6 +24,9 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.Text;
 import com.liferay.portal.kernel.xml.Visitor;
+import com.liferay.util.xml.XMLFormatter;
+
+import java.io.IOException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -291,6 +294,20 @@ public class ElementImpl extends BranchImpl implements Element {
 		org.dom4j.Element element = ((ElementImpl)obj).getWrappedElement();
 
 		return _element.equals(element);
+	}
+
+	public String formattedString() throws IOException {
+		return XMLFormatter.toString(_element);
+	}
+
+	public String formattedString(String indent) throws IOException {
+		return XMLFormatter.toString(_element, indent);
+	}
+
+	public String formattedString(String indent, boolean expandEmptyElements)
+		throws IOException {
+
+		return XMLFormatter.toString(_element, indent, expandEmptyElements);
 	}
 
 	public Object getData() {

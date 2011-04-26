@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.xml;
 
+import java.io.IOException;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +109,13 @@ public interface Element extends Branch {
 	public String elementTextTrim(QName qName);
 
 	public String elementTextTrim(String name);
+
+	public String formattedString() throws IOException;
+
+	public String formattedString(String indent) throws IOException;
+
+	public String formattedString(String indent, boolean expandEmptyElements)
+		throws IOException;
 
 	public Object getData();
 

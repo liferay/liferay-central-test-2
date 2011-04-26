@@ -33,6 +33,13 @@ public interface Node extends Serializable {
 
 	public Node detach();
 
+	public String formattedString() throws IOException;
+
+	public String formattedString(String indent) throws IOException;
+
+	public String formattedString(String indent, boolean expandEmptyElements)
+		throws IOException;
+
 	public Document getDocument();
 
 	public String getName();

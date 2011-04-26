@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.Visitor;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -76,6 +77,20 @@ public class NodeImpl implements Node {
 		org.dom4j.Node node = ((NodeImpl)obj).getWrappedNode();
 
 		return _node.equals(node);
+	}
+
+	public String formattedString() throws IOException {
+		return XMLFormatter.toString(_node);
+	}
+
+	public String formattedString(String indent) throws IOException {
+		return XMLFormatter.toString(_node, indent);
+	}
+
+	public String formattedString(String indent, boolean expandEmptyElements)
+		throws IOException {
+
+		return XMLFormatter.toString(_node, indent, expandEmptyElements);
 	}
 
 	public Document getDocument() {
