@@ -680,19 +680,18 @@ if (Validator.isNotNull(content)) {
 	var templateIdSelector = A.one('select#<portlet:namespace />templateId');
 
 	if (templateIdSelector) {
-		var options = templateIdSelector.get('options');
-
 		var editTemplateLink = A.one('#<portlet:namespace />editTemplateLink');
 		var templateImage = A.one('#<portlet:namespace />templateImage');
 
 		var changeTemplate = function() {
-			var selectedOption = options.item(templateIdSelector.get('selectedIndex'));
+			var selectedOption = templateIdSelector.one(':selected');
 
 			var imageURL = selectedOption.attr('data-img');
 			var templateURL = selectedOption.attr('data-url');
 
 			if (imageURL) {
 				templateImage.attr('src', imageURL);
+
 				templateImage.show();
 			}
 			else {
@@ -705,15 +704,12 @@ if (Validator.isNotNull(content)) {
 		changeTemplate();
 
 		if (editTemplateLink) {
-			templateIdSelector.on(
-				'change',
-				changeTemplate
-			);
+			templateIdSelector.on('change', changeTemplate);
 
 			editTemplateLink.on(
 				'click',
-				function() {
-					var selectedOption = options.item(templateIdSelector.get('selectedIndex'))
+				function(event) {
+					var selectedOption = templateIdSelector.one(':selected');
 
 					window.location = selectedOption.attr('data-url');
 				}

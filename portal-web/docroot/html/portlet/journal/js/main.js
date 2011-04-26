@@ -570,6 +570,7 @@ AUI().add(
 				var structureButtonText = Liferay.Language.get('edit');
 
 				editStructureLink.show();
+
 				editStructureButton.ancestor('.yui3-aui-button').hide();
 
 				A.all('input.journal-list-label').attr('disabled', 'disabled');
@@ -657,6 +658,7 @@ AUI().add(
 				var structureTree = instance.getById('#structureTree');
 
 				editStructureLink.hide();
+
 				editStructureButton.ancestor('.yui3-aui-button').show();
 
 				structureTree.all('.journal-list-label').attr('disabled', '');
@@ -2348,6 +2350,7 @@ AUI().add(
 						'click',
 						function(event) {
 							Liferay.reset('controlPanelSidebarHidden');
+
 							instance.disableEditMode();
 						}
 					);
@@ -2360,6 +2363,7 @@ AUI().add(
 						'click',
 						function(event) {
 							Liferay.set('controlPanelSidebarHidden', true);
+
 							instance.enableEditMode();
 						}
 					);
