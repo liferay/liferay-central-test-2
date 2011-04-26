@@ -6,6 +6,36 @@
 	var isArray = Lang.isArray;
 	var arrayIndexOf = AArray.indexOf;
 
+	var htmlEscapedValues = [];
+	var htmlUnescapedValues = [];
+
+	var MAP_HTML_CHARS_ESCAPED = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&#034;',
+		'\'': '&#039;',
+		'/': '&#047;',
+		'`': '&#096;'
+	};
+
+	var MAP_HTML_CHARS_UNESCAPED = {};
+
+	for (var i in MAP_HTML_CHARS_ESCAPED) {
+		if (MAP_HTML_CHARS_ESCAPED.hasOwnProperty(i)) {
+			var escapedValue = MAP_HTML_CHARS_ESCAPED[i];
+
+			MAP_HTML_CHARS_UNESCAPED[escapedValue] = i;
+
+			htmlEscapedValues.push(escapedValue);
+			htmlUnescapedValues.push(i);
+		}
+	}
+
+	var REGEX_HTML_ESCAPE = new RegExp('[' + htmlUnescapedValues.join('') + ']', 'g');
+
+	var REGEX_HTML_UNESCAPE = new RegExp(htmlEscapedValues.join('|'), 'gi');
+
 	var Window = {
 		ALIGN_CENTER: {
 			points: ['tc', 'tc']
@@ -216,30 +246,7 @@
 		},
 
 		escapeHTML: function(str) {
-			return str.replace(
-				/<|>|&/gi,
-				function(match) {
-					var str = '';
-
-					if (match == '<') {
-						str = '&lt;';
-					}
-					else if (match == '>') {
-						str = '&gt;';
-					}
-					else if (match == '&') {
-						str = '&amp;';
-					}
-					else if (match == '\"') {
-						str = '&#034;';
-					}
-					else if (match == '\'') {
-						str = '&#039;';
-					}
-
-					return str;
-				}
-			);
+			return str.replace(REGEX_HTML_ESCAPE, Util._escapeHTML);
 		},
 
 		getColumnId: function(str) {
@@ -522,30 +529,7 @@
 		},
 
 		unescapeHTML: function(str) {
-			return str.replace(
-				/&lt;|&gt;|&amp;|&#034;|&#039;/gi,
-				function(match) {
-					var str = '';
-
-					if (match == '&lt;') {
-						str = '<';
-					}
-					else if (match == '&gt;') {
-						str = '>';
-					}
-					else if (match == '&amp;') {
-						str = '&';
-					}
-					else if (match == '&#034;') {
-						str = '\"';
-					}
-					else if (match == '&#039;') {
-						str = '\'';
-					}
-
-					return str;
-				}
-			);
+			return str.replace(REGEX_HTML_UNESCAPE, Util._unescapeHTML);
 		},
 
 		_defaultSubmitFormFn: function(event) {
@@ -574,6 +558,10 @@
 			}
 
 			form.submit();
+		},
+
+		_escapeHTML: function(match) {
+			return MAP_HTML_CHARS_ESCAPED[match];
 		},
 
 		_getEditableInstance: function(title) {
@@ -632,6 +620,10 @@
 			}
 
 			return editable;
+		},
+
+		_unescapeHTML: function(match) {
+			return MAP_HTML_CHARS_UNESCAPED[match];
 		}
 	};
 
@@ -1592,4 +1584,5 @@
 		TOOLTIP: 470,
 		WINDOW: 1000
 	};
+	Liferay.Util.htmlEscapedValues = htmlEscapedValues;
 })(AUI(), Liferay);
