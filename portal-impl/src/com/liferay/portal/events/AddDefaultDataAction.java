@@ -14,26 +14,24 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.events.data.PageTemplatesAction;
-import com.liferay.portal.events.data.SiteTemplatesAction;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 
 /**
  * @author Juan Fernández
   */
-public class DefaultDataAction extends SimpleAction {
-
-	public DefaultDataAction() {
-		_sta = new SiteTemplatesAction();
-		_pta = new PageTemplatesAction();
-	}
+public class AddDefaultDataAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
-		_sta.run(ids);
-		_pta.run(ids);
+		SimpleAction addDefaultLayoutPrototypesAction =
+			new AddDefaultLayoutPrototypesAction();
+
+		addDefaultLayoutPrototypesAction.run(ids);
+
+		SimpleAction addDefaultLayoutSetPrototypesAction =
+			new AddDefaultLayoutSetPrototypesAction();
+
+		addDefaultLayoutSetPrototypesAction.run(ids);
 	}
 
-	private SiteTemplatesAction _sta = null;
-	private PageTemplatesAction _pta = null;
 }

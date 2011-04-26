@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.events.data;
+package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
@@ -45,7 +45,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Sergio González
  */
-public class SiteTemplatesAction extends SimpleAction {
+public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 		try {

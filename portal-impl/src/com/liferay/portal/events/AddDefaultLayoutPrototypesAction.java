@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.events.data;
+package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
@@ -42,7 +42,7 @@ import java.util.Map;
  * @author Sergio González
  * @author Juan Fernández
  */
-public class PageTemplatesAction extends SimpleAction {
+public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
 		try {
