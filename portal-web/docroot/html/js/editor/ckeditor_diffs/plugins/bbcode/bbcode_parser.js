@@ -1,4 +1,14 @@
 (function() {
+	var HTML_CHARS = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        '/': '&#x2F;',
+        '`': '&#x60;'
+    };
+
 	var LIST = 'list';
 
 	var REGEX_COLOR = /^(:?aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|purple|red|silver|teal|white|yellow|#(?:[0-9a-f]{3})?[0-9a-f]{3})$/i;
@@ -139,12 +149,12 @@
 		_escapeData: function(data) {
 			var instance = this;
 
-			var htmlEncode = CKEDITOR.tools.htmlEncode;
+			var htmlEscape = instance._escapeHTML;
 
 			var dataMap = instance._dataMap;
 
 			if (dataMap.length === 0) {
-				data = htmlEncode(data);
+				data = htmlEscape(data);
 
 				return data;
 			}
@@ -160,7 +170,7 @@
 
 				tmp = data.substring(j, item.startIndex);
 
-				tmp = htmlEncode(tmp);
+				tmp = htmlEscape(tmp);
 
 				result.push(tmp);
 
@@ -176,7 +186,7 @@
 			if (lastTagOffset < data.length) {
 				tmp = data.substr(lastTagOffset);
 
-				tmp = htmlEncode(tmp);
+				tmp = htmlEscape(tmp);
 
 				result.push(tmp);
 			}
@@ -184,6 +194,15 @@
 			result = result.join('');
 
 			return result;
+		},
+
+		_escapeHTML: function(data) {
+			return data.replace(
+				/[&<>"'\/`]/g,
+				function (match) {
+					return HTML_CHARS[match];
+				}
+			);
 		},
 
 		_getFontSize: function(fontSize) {
@@ -323,7 +342,7 @@
 			var result = '<blockquote>';
 
 			if (tagOption && tagOption.length) {
-				tagOption = CKEDITOR.tools.htmlEncode(tagOption);
+				tagOption = instance._escapeHTML(tagOption);
 
 				result = '<blockquote><cite>' + tagOption + '</cite>';
 			}
