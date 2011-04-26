@@ -135,3 +135,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 }
+
+.ie6 .taglib-page-iterator .search-pages .page-selector .yui3-aui-field-content, .ie6 .taglib-page-iterator .search-pages .delta-selector .yui3-aui-field-content {
+	display: inline;
+}
