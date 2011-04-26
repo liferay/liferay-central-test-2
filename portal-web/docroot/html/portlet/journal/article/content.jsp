@@ -873,11 +873,8 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			if (dynamicContentEl != null) {
 				elLanguageId = dynamicContentEl.attributeValue("language-id", StringPool.BLANK);
 
-				if (Validator.isNotNull(toLanguageId)) {
+				if (Validator.isNotNull(toLanguageId) && Validator.isNull(elLanguageId)) {
 					continue;
-				}
-				else if (Validator.isNull(elLanguageId)) {
-					elLanguageId = languageId;
 				}
 			}
 			else {
