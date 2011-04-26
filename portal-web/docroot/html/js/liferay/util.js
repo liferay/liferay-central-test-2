@@ -1584,5 +1584,4 @@
 		TOOLTIP: 470,
 		WINDOW: 1000
 	};
-	Liferay.Util.htmlEscapedValues = htmlEscapedValues;
 })(AUI(), Liferay);
