@@ -2726,6 +2726,184 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
+	 * Updates an "anonymous" user and starts the workflow.
+	 *
+	 * @param  creatorUserId the primary key of the creator
+	 * @param  companyId the primary key of the company the user belongs to
+	 * @param  autoPassword whether a password should be automatically generated
+	 *         for the user
+	 * @param  password1 the user's password
+	 * @param  password2 the user's password confirmation
+	 * @param  autoScreenName whether a screen name should be automatically
+	 *         generated for the user
+	 * @param  screenName the user's screen name
+	 * @param  emailAddress the user's email address
+	 * @param  facebookId the user's facebook ID
+	 * @param  openId the user's OpenID
+	 * @param  locale the user's locale
+	 * @param  firstName the user's first name
+	 * @param  middleName the user's middle name
+	 * @param  lastName the user's last name
+	 * @param  prefixId the user's name prefix ID
+	 * @param  suffixId the user's name suffix ID
+	 * @param  male whether the user is male
+	 * @param  birthdayMonth the user's birthday month (0-based, meaning 0 for
+	 *         January)
+	 * @param  birthdayDay the user's birthday day
+	 * @param  birthdayYear the user's birthday year
+	 * @param  jobTitle the user's job title
+	 * @param  sendEmail whether to send the user an email notification about
+	 *         their new account
+	 * @param  serviceContext the service context for the user
+	 * @param  updateUserInformation whether to update the user information
+	 * @return the user
+	 * @throws PortalException if the user's information is invalid
+	 * @throws SystemException if a system exception occurred
+	 */
+	public User updateIncompleteUser(
+			long creatorUserId, long companyId, boolean autoPassword,
+			String password1, String password2, boolean autoScreenName,
+			String screenName, String emailAddress, long facebookId,
+			String openId, Locale locale, String firstName, String middleName,
+			String lastName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, boolean sendEmail, boolean updateUserInformation,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = getUserByEmailAddress(companyId, emailAddress);
+
+		if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
+			throw new PortalException("Incorrect user status");
+		}
+
+		User defaultUser = getDefaultUser(companyId);
+
+		if (updateUserInformation) {
+			autoScreenName = false;
+
+			if (PrefsPropsUtil.getBoolean(
+					companyId,
+					PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
+
+				autoScreenName = true;
+			}
+
+			validate(
+				companyId, user.getUserId(), autoPassword, password1, password2,
+				autoScreenName, screenName, emailAddress, firstName, middleName,
+				lastName, null);
+
+			if (!autoPassword) {
+				if (Validator.isNull(password1) ||
+					Validator.isNull(password2)) {
+						throw new UserPasswordException(
+							UserPasswordException.PASSWORD_INVALID);
+				}
+			}
+
+			if (autoScreenName) {
+				ScreenNameGenerator screenNameGenerator =
+					ScreenNameGeneratorFactory.getInstance();
+
+				try {
+					screenName = screenNameGenerator.generate(
+						companyId, user.getUserId(), emailAddress);
+				}
+				catch (Exception e) {
+					throw new SystemException(e);
+				}
+			}
+
+			FullNameGenerator fullNameGenerator =
+				FullNameGeneratorFactory.getInstance();
+
+			String fullName = fullNameGenerator.getFullName(
+				firstName, middleName, lastName);
+
+			String greeting = LanguageUtil.format(
+				locale, "welcome-x", " " + fullName, false);
+
+			if (Validator.isNotNull(password1)) {
+				user.setPassword(PwdEncryptor.encrypt(password1));
+				user.setPasswordUnencrypted(password1);
+			}
+
+			user.setPasswordEncrypted(true);
+
+			PasswordPolicy passwordPolicy = defaultUser.getPasswordPolicy();
+
+			if (passwordPolicy.isChangeable() &&
+				passwordPolicy.isChangeRequired()) {
+
+				user.setPasswordReset(true);
+			}
+			else {
+				user.setPasswordReset(false);
+			}
+
+			user.setScreenName(screenName);
+			user.setFacebookId(facebookId);
+			user.setOpenId(openId);
+			user.setLanguageId(locale.toString());
+			user.setTimeZoneId(defaultUser.getTimeZoneId());
+			user.setGreeting(greeting);
+			user.setFirstName(firstName);
+			user.setMiddleName(middleName);
+			user.setLastName(lastName);
+			user.setJobTitle(jobTitle);
+
+			Date birthday = PortalUtil.getDate(
+				birthdayMonth, birthdayDay, birthdayYear,
+				new ContactBirthdayException());
+
+			Contact contact = user.getContact();
+
+			contact.setFirstName(firstName);
+			contact.setMiddleName(middleName);
+			contact.setLastName(lastName);
+			contact.setPrefixId(prefixId);
+			contact.setSuffixId(suffixId);
+			contact.setMale(male);
+			contact.setBirthday(birthday);
+			contact.setJobTitle(jobTitle);
+
+			contactPersistence.update(contact, false, serviceContext);
+
+			// Expando
+
+			user.setExpandoBridgeAttributes(serviceContext);
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+			indexer.reindex(user);
+		}
+
+		user.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+		userPersistence.update(user, false, serviceContext);
+
+		// Workflow
+
+		long workflowUserId = creatorUserId;
+
+		if (workflowUserId == user.getUserId()) {
+			workflowUserId = defaultUser.getUserId();
+		}
+
+		serviceContext.setAttribute("autoPassword", autoPassword);
+		serviceContext.setAttribute("sendEmail", sendEmail);
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			companyId, workflowUserId, User.class.getName(), user.getUserId(),
+			user, serviceContext);
+
+		return getUserByEmailAddress(companyId, emailAddress);
+	}
+
+	/**
 	 * Searches for an ordered range of all the users with the status who match
 	 * the keywords, without using the indexer. It is preferable to use the
 	 * indexed version {@link #search(long, String, int, LinkedHashMap, int,
@@ -4978,7 +5156,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (Validator.isNotNull(emailAddress)) {
 			User user = userPersistence.fetchByC_EA(companyId, emailAddress);
 
-			if (user != null) {
+			if ((user != null) && (user.getUserId() != userId)) {
 				throw new DuplicateUserEmailAddressException();
 			}
 		}
@@ -5154,7 +5332,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.fetchByC_SN(companyId, screenName);
 
-		if (user != null) {
+		if ((user != null) && (user.getUserId() != userId)) {
 			throw new DuplicateUserScreenNameException();
 		}
 
@@ -5162,7 +5340,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Group group = groupPersistence.fetchByC_F(companyId, friendlyURL);
 
-		if (group != null) {
+		user = userPersistence.fetchByPrimaryKey(userId);
+
+		long groupId = 0;
+
+		if (user != null) {
+			groupId = user.getGroup().getGroupId();
+		}
+
+		if ((group != null) && (group.getGroupId() != groupId)) {
 			throw new GroupFriendlyURLException(
 				GroupFriendlyURLException.DUPLICATE);
 		}

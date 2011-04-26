@@ -422,6 +422,42 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		return userLocalService.hasRoleUser(companyId, name, userId, inherited);
 	}
 
+	public User updateIncompleteUser(
+			long companyId, boolean autoPassword, String password1,
+			String password2, boolean autoScreenName, String screenName,
+			String emailAddress, long facebookId, String openId, Locale locale,
+			String firstName, String middleName, String lastName, int prefixId,
+			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+			int birthdayYear, String jobTitle, boolean sendEmail,
+			boolean updateUserInformation, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		long creatorUserId = 0;
+
+		try {
+			creatorUserId = getUserId();
+		}
+		catch (PrincipalException pe) {
+		}
+
+		if (creatorUserId == 0) {
+			if (!company.isStrangersWithMx() &&
+				company.hasCompanyMx(emailAddress)) {
+
+				throw new ReservedUserEmailAddressException();
+			}
+		}
+
+		return userLocalService.updateIncompleteUser(
+			creatorUserId, companyId, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			locale, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, sendEmail,
+			updateUserInformation, serviceContext);
+	}
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws PortalException, SystemException {
 
