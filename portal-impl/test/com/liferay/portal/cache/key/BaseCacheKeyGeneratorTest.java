@@ -33,31 +33,30 @@ public class BaseCacheKeyGeneratorTest extends TestCase {
 	public void testConsistency() {
 		StringBundler sb = new StringBundler(_KEYS);
 
-		String combinedKey = sb.toString();
-
-		String hashCode1 = cacheKeyGenerator.getCacheKey(combinedKey);
-
+		String hashCode1 = cacheKeyGenerator.getCacheKey(sb.toString());
 		String hashCode2 = cacheKeyGenerator.getCacheKey(_KEYS);
+
+		assertEquals(hashCode1, hashCode2);
 
 		String hashCode3 = cacheKeyGenerator.getCacheKey(sb);
 
-		assertEquals(hashCode1, hashCode2);
 		assertEquals(hashCode2, hashCode3);
 	}
 
 	public void testScan() {
-		Map<String, String> checkMap = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 
 		for (int i = 0; i < 1000000; i++) {
 			String value = String.valueOf(i);
 
-			String key =  cacheKeyGenerator.getCacheKey(value);
+			String key = cacheKeyGenerator.getCacheKey(value);
 
-			String oldValue = checkMap.put(key, value);
+			String oldValue = map.put(key, value);
 
 			if (oldValue != null) {
-				fail("Value {" + oldValue + "}, {" + value + "} generate same "
-					+ "key : {" + key + "}");
+				fail(
+					oldValue + " and " + value + " generate the same key " +
+						key);
 			}
 		}
 	}
@@ -66,17 +65,21 @@ public class BaseCacheKeyGeneratorTest extends TestCase {
 		Map<String, String> checkMap = new HashMap<String, String>();
 
 		for (String[] values : _SPECIAL_CASES) {
+			String value = Arrays.toString(values);
 
-			String key =  cacheKeyGenerator.getCacheKey(values);
+			String key = cacheKeyGenerator.getCacheKey(values);
 
 			String oldValue = checkMap.put(key, Arrays.toString(values));
 
 			if (oldValue != null) {
-				fail("Value {" + oldValue + "}, {" + Arrays.toString(values) +
-					"} generate same " + "key : {" + key + "}");
+				fail(
+					oldValue + " and " + value + " generate the same key " +
+						key);
 			}
 		}
 	}
+
+	protected CacheKeyGenerator cacheKeyGenerator;
 
 	private static String[] _KEYS = {"test1", "test2", "test3", "test4"};
 
@@ -86,7 +89,5 @@ public class BaseCacheKeyGeneratorTest extends TestCase {
 		{"fetchByT_C_C_P_.java.lang.Long.java.lang.Long.java.lang.Long_A_", ".",
 			"10302", ".", "10305", ".", "13510"}
 	};
-
-	protected CacheKeyGenerator cacheKeyGenerator;
 
 }

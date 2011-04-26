@@ -19,7 +19,7 @@ package com.liferay.portal.cache.key;
  */
 public class HashCodeCacheKeyGeneratorTest extends BaseCacheKeyGeneratorTest {
 
-	public void setUp() {
+	public void setUp() throws Exception {
 		cacheKeyGenerator = new HashCodeCacheKeyGenerator();
 	}
 

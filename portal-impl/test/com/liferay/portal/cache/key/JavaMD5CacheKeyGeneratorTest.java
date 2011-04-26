@@ -14,14 +14,12 @@
 
 package com.liferay.portal.cache.key;
 
-import java.security.NoSuchAlgorithmException;
-
 /**
  * @author Shuyang Zhou
  */
 public class JavaMD5CacheKeyGeneratorTest extends BaseCacheKeyGeneratorTest {
 
-	public void setUp() throws NoSuchAlgorithmException {
+	public void setUp() throws Exception {
 		cacheKeyGenerator = new JavaMD5CacheKeyGenerator();
 	}
 
