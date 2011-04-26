@@ -53,7 +53,7 @@ portletURL.setParameter("struts_action", "/dynamic_data_lists/view");
 			keyProperty="entryId"
 			modelVar="entry"
 		>
-			<liferay-portlet:renderURL varImpl="rowHREF">
+			<liferay-portlet:renderURL varImpl="rowURL">
 				<portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry" />
 				<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
 				<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
