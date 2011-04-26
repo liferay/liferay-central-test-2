@@ -203,6 +203,20 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.User updateIncompleteUser(long companyId,
+		boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		long facebookId, java.lang.String openId, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, boolean sendEmail,
+		boolean updateUserInformation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

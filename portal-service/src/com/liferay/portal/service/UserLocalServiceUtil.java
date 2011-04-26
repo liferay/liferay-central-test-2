@@ -1762,6 +1762,64 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
+	* Updates an existing "anonymous" user and starts the workflow.
+	*
+	* @param creatorUserId the primary key of the creator
+	* @param companyId the primary key of the company the user belongs to
+	* @param autoPassword whether a password should be automatically generated
+	for the user
+	* @param password1 the user's password
+	* @param password2 the user's password confirmation
+	* @param autoScreenName whether a screen name should be automatically
+	generated for the user
+	* @param screenName the user's screen name
+	* @param emailAddress the user's email address
+	* @param facebookId the user's facebook ID
+	* @param openId the user's OpenID
+	* @param locale the user's locale
+	* @param firstName the user's first name
+	* @param middleName the user's middle name
+	* @param lastName the user's last name
+	* @param prefixId the user's name prefix ID
+	* @param suffixId the user's name suffix ID
+	* @param male whether the user is male
+	* @param birthdayMonth the user's birthday month (0-based, meaning 0 for
+	January)
+	* @param birthdayDay the user's birthday day
+	* @param birthdayYear the user's birthday year
+	* @param jobTitle the user's job title
+	* @param sendEmail whether to send the user an email notification about
+	their new account
+	* @param serviceContext the service context for the user
+	* @param updateUserInformation whether to update the user information
+	* @return the user
+	* @throws PortalException if the user's information is invalid
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.User updateIncompleteUser(
+		long creatorUserId, long companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, boolean sendEmail,
+		boolean updateUserInformation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateIncompleteUser(creatorUserId, companyId,
+			autoPassword, password1, password2, autoScreenName, screenName,
+			emailAddress, facebookId, openId, locale, firstName, middleName,
+			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+			birthdayYear, jobTitle, sendEmail, updateUserInformation,
+			serviceContext);
+	}
+
+	/**
 	* Searches for an ordered range of all the users with the status who match
 	* the keywords, without using the indexer. It is preferable to use the
 	* indexed version {@link #search(long, String, int, LinkedHashMap, int,

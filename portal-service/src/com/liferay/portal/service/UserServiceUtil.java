@@ -263,6 +263,27 @@ public class UserServiceUtil {
 		return getService().hasRoleUser(companyId, name, userId, inherited);
 	}
 
+	public static com.liferay.portal.model.User updateIncompleteUser(
+		long companyId, boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		long facebookId, java.lang.String openId, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, boolean sendEmail,
+		boolean updateUserInformation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateIncompleteUser(companyId, autoPassword, password1,
+			password2, autoScreenName, screenName, emailAddress, facebookId,
+			openId, locale, firstName, middleName, lastName, prefixId,
+			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+			sendEmail, updateUserInformation, serviceContext);
+	}
+
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

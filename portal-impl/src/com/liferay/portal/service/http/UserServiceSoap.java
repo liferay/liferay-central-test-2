@@ -496,6 +496,36 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserSoap updateIncompleteUser(
+		long companyId, boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		long facebookId, java.lang.String openId, String locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, boolean sendEmail,
+		boolean updateUserInformation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateIncompleteUser(companyId,
+					autoPassword, password1, password2, autoScreenName,
+					screenName, emailAddress, facebookId, openId,
+					LocaleUtil.fromLanguageId(locale), firstName, middleName,
+					lastName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, sendEmail,
+					updateUserInformation, serviceContext);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws RemoteException {
 		try {
