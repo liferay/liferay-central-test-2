@@ -163,7 +163,7 @@ public class Java2WsddTask {
 			if (elementName.equals("arrayMapping")) {
 				element.detach();
 
-				arrayMappingElements.put(element.toString(), element);
+				arrayMappingElements.put(element.formattedString(), element);
 			}
 			else if (elementName.equals("operation")) {
 				element.detach();
@@ -216,7 +216,7 @@ public class Java2WsddTask {
 			else if (elementName.equals("typeMapping")) {
 				element.detach();
 
-				typeMappingElements.put(element.toString(), element);
+				typeMappingElements.put(element.formattedString(), element);
 			}
 		}
 
