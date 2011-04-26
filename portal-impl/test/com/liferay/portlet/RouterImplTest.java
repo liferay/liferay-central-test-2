@@ -33,7 +33,7 @@ public class RouterImplTest extends BaseTestCase {
 		InitUtil.initWithSpring();
 	}
 
-	public void setUp() {
+	public void setUp() throws Exception {
 		_routerImpl = new RouterImpl();
 
 		Route route = _routerImpl.addRoute("instance/{instanceId}/{topLink}");
