@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -38,6 +40,7 @@ import java.util.Map;
 
 /**
  * @author Sergio González
+ * @author Juan Fernández
  */
 public class PageTemplatesAction extends SimpleAction {
 
@@ -90,7 +93,19 @@ public class PageTemplatesAction extends SimpleAction {
 		addPortletId(
 			layout, PortletKeys.TAGS_CATEGORIES_NAVIGATION, "column-1");
 		addPortletId(layout, PortletKeys.SEARCH, "column-2");
-		addPortletId(layout, PortletKeys.ASSET_PUBLISHER, "column-2");
+		String portletId = addPortletId(
+			layout, PortletKeys.ASSET_PUBLISHER, "column-2");
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
+			portletId);
+
+		layout = LayoutLocalServiceUtil.updateLayout(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			layout.getLayoutId(), layout.getTypeSettings());
 	}
 
 	protected Layout addLayout(
