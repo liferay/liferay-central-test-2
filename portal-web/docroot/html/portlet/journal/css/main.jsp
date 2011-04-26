@@ -45,8 +45,6 @@
 	}
 
 	.lfr-table .article-structure-template-toolbar {
-		/*background-color: #DFF4FF;
-		border: 1px solid #A7CEDF;*/
 		color: #34404F;
 		display: block;
 		margin: 0 auto;
@@ -60,10 +58,6 @@
 			display: inline;
 			margin-left: 0.5em;
 			margin-bottom: 0;
-		}
-
-		.article-template-label {
-			vertical-align: top;
 		}
 
 		.article-template-image {
@@ -84,10 +78,18 @@
 		}
 
 		.add-translations-menu {
-			float: right;
-			margin-left: 3em;
-			position: relative;
-			top: -3px;
+			display: inline;
+			float: none;
+			margin-left: 2em;
+			padding: 0.4em 0;
+
+			li {
+				display: inline;
+
+				strong {
+                	display: inline;
+				}
+			}
 		}
 
 		.contains-translations {

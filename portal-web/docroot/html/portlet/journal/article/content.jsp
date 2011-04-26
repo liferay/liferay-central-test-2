@@ -154,10 +154,6 @@ if (Validator.isNotNull(content)) {
 
 <aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
-<div class="portlet-msg-info yui3-aui-helper-hidden" id="<portlet:namespace />translationsMessage">
-	<liferay-ui:message key="the-changes-in-your-translations-will-be-available-once-the-content-is-published" />
-</div>
-
 <portlet:renderURL var="editArticleRenderPopUpURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
@@ -210,6 +206,12 @@ if (Validator.isNotNull(content)) {
 		<c:if test="<%= Validator.isNull(toLanguageId) %>">
 			<tr>
 				<td class="article-structure-template-toolbar journal-metadata">
+					<span id="<portlet:namespace />structureMessage" class="portlet-msg-alert structure-message yui3-aui-helper-hidden">
+						<liferay-ui:message key="this-structure-has-not-been-saved" />
+
+						<liferay-ui:message key="click-here-to-save-it-now" arguments='<%= new Object[] {"journal-save-structure-trigger", "#"} %>' />
+					</span>
+
 					<aui:layout>
 						<aui:column columnWidth="50" cssClass="article-structure">
 							<label class="article-structure-label"><liferay-ui:message key="structure" />:</label>
@@ -246,12 +248,6 @@ if (Validator.isNotNull(content)) {
 
 											<aui:button cssClass="edit-structure-button yui3-aui-helper-hidden" name="editStructureButton" value="stop-editing" />
 										</span>
-									</span>
-
-									<span id="<portlet:namespace />structureMessage" class="portlet-msg-alert structure-message yui3-aui-helper-hidden">
-										<liferay-ui:message key="this-structure-has-not-been-saved" />
-
-										<liferay-ui:message key="click-here-to-save-it-now" arguments='<%= new Object[] {"journal-save-structure-trigger", "#"} %>' />
 									</span>
 								</div>
 							</aui:fieldset>
@@ -341,9 +337,43 @@ if (Validator.isNotNull(content)) {
 
 		<tr>
 			<td class="article-translation-toolbar journal-metadata">
+				<div class="portlet-msg-info yui3-aui-helper-hidden" id="<portlet:namespace />translationsMessage">
+					<liferay-ui:message key="the-changes-in-your-translations-will-be-available-once-the-content-is-published" />
+				</div>
+
 				<div>
 					<c:choose>
 						<c:when test="<%= Validator.isNull(toLanguageId) %>">
+							<label for="<portlet:namespace />defaultLanguageId"><liferay-ui:message key="web-content-default-language" /></label>:
+
+							<span class="nobr">
+								<span class="article-default-language journal-article-default-translation" id="<portlet:namespace />textLanguageId">
+									<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png" %>' />
+
+									<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
+								</span>
+
+								<liferay-ui:icon-help message="default-language-help" />
+
+								<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
+
+								<aui:select inputCssClass="yui3-aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
+
+									<%
+									Locale[] locales = LanguageUtil.getAvailableLocales();
+
+									for (int i = 0; i < locales.length; i++) {
+									%>
+
+										<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= defaultLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+
+									<%
+									}
+									%>
+
+								</aui:select>
+							</span>
+
 							<c:if test="<%= Validator.isNotNull(articleId) %>">
 								<liferay-ui:icon-menu
 									align="auto"
@@ -379,36 +409,6 @@ if (Validator.isNotNull(content)) {
 
 								</liferay-ui:icon-menu>
 							</c:if>
-
-							<label for="<portlet:namespace />defaultLanguageId"><liferay-ui:message key="web-content-default-language" /></label>:
-
-							<span class="nobr">
-								<span class="article-default-language journal-article-default-translation" id="<portlet:namespace />textLanguageId">
-									<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png" %>' />
-
-									<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
-								</span>
-
-								<liferay-ui:icon-help message="default-language-help" />
-
-								<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
-
-								<aui:select inputCssClass="yui3-aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
-
-									<%
-									Locale[] locales = LanguageUtil.getAvailableLocales();
-
-									for (int i = 0; i < locales.length; i++) {
-									%>
-
-										<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= defaultLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
-
-									<%
-									}
-									%>
-
-								</aui:select>
-							</span>
 						</c:when>
 						<c:otherwise>
 							<aui:input id="defaultLocale" name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
