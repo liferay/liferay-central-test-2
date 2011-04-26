@@ -21,13 +21,21 @@
 
 	var REGEX_URI = /^[-;\/\?:@&=\+\$,_\.!~\*'\(\)%0-9a-z]{1,512}$/i;
 
+	var STR_BLANK = '';
+
 	var STR_BBCODE_CLOSE = ']';
 
 	var STR_BBCODE_OPEN = '[';
 
 	var STR_BBCODE_END_OPEN = '[/';
 
+	var STR_IMG = 'img';
+
+	var STR_TAG_A_CLOSE = '</a>';
+
 	var STR_TAG_ATTR_CLOSE = '">';
+
+	var STR_TAG_ATTR_HREF_OPEN = '<a href="';
 
 	var STR_TAG_ATTR_STYLE_OPEN = '<span style="';
 
@@ -44,6 +52,8 @@
 	var STR_TAG_OPEN = '<';
 
 	var STR_TAG_SPAN_CLOSE = '</span>';
+
+	var STR_URL = 'url';
 
 	var TPL_LIST_INVALID = STR_TAG_INVALID_OPEN + STR_BBCODE_OPEN + LIST + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 
@@ -113,7 +123,7 @@
 			if (openTags.length) {
 				var lastBBTag = openTags[openTags.length - 1].bbTag;
 
-				if ( lastBBTag == 'url') {
+				if ( lastBBTag == STR_URL) {
 					openTags.pop();
 
 					var urlStart = instance._urlStart;
@@ -122,9 +132,9 @@
 
 					url = CKEDITOR.tools.htmlEncodeAttr(url);
 
-					endTags.push(STR_TAG_ATTR_CLOSE, url, '</a>');
+					endTags.push(STR_TAG_ATTR_CLOSE, url, STR_TAG_A_CLOSE);
 				}
-				else if (lastBBTag == 'img') {
+				else if (lastBBTag == STR_IMG) {
 					openTags.pop();
 
 					endTags.push(STR_TAG_ATTR_CLOSE);
@@ -136,7 +146,7 @@
 			}
 
 			if (endTags.length) {
-				result = result + endTags.join('');
+				result = result + endTags.join(STR_BLANK);
 			}
 
 			result = instance._escapeData(result);
@@ -191,7 +201,7 @@
 				result.push(tmp);
 			}
 
-			result = result.join('');
+			result = result.join(STR_BLANK);
 
 			return result;
 		},
@@ -518,7 +528,7 @@
 			instance._openTags.push(
 				{
 					bbTag: openTag,
-					endTag: '</a>'
+					endTag: STR_TAG_A_CLOSE
 				}
 			);
 
@@ -527,12 +537,12 @@
 
 				tagOption = CKEDITOR.tools.htmlEncodeAttr(tagOption);
 
-				result = '<a href="' + tagOption + STR_TAG_ATTR_CLOSE;
+				result = STR_TAG_ATTR_HREF_OPEN + tagOption + STR_TAG_ATTR_CLOSE;
 			}
 			else {
 				instance._urlStart = matchedStr.length + offset;
 
-				result = '<a href="';
+				result = STR_TAG_ATTR_HREF_OPEN;
 			}
 
 			return result;
@@ -606,7 +616,7 @@
 					if (!openTags.length || openTags[openTags.length - 1].bbTag != closeTag) {
 						result = STR_TAG_INVALID_OPEN + STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 					}
-					else if (closeTag == 'url') {
+					else if (closeTag == STR_URL) {
 						var urlStart = instance._urlStart;
 
 						if (urlStart > 0) {
@@ -664,8 +674,8 @@
 				if (instance._noParse) {
 					result = STR_BBCODE_OPEN + openTag + STR_BBCODE_CLOSE;
 				}
-				else if ((openTags.length && openTags[openTags.length - 1].bbTag == 'url' && instance._urlStart >= 0) ||
-					(openTags.length && openTags[openTags.length - 1].bbTag == 'img')) {
+				else if ((openTags.length && openTags[openTags.length - 1].bbTag == STR_URL && instance._urlStart >= 0) ||
+					(openTags.length && openTags[openTags.length - 1].bbTag == STR_IMG)) {
 
 					result = STR_BBCODE_OPEN + openTag + STR_BBCODE_CLOSE;
 				}
@@ -690,7 +700,7 @@
 					else if (openTag == 'i') {
 						handler = instance._handleEm;
 					}
-					else if (openTag == 'img') {
+					else if (openTag == STR_IMG) {
 						handler = instance._handleImage;
 					}
 					else if (openTag == 'justify') {
@@ -729,7 +739,7 @@
 					else if (openTag == 'tr') {
 						handler = instance._handleTableRow;
 					}
-					else if (openTag == 'url') {
+					else if (openTag == STR_URL) {
 						handler = instance._handleURL;
 					}
 
