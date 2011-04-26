@@ -90,12 +90,14 @@
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleConstants" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalStructure" %>
 <%@ page import="com.liferay.portlet.journal.search.ArticleDisplayTerms" %>
 <%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %>
 <%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalPermission" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
@@ -114,7 +116,6 @@
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 <%@ page import="com.liferay.util.xml.DocUtil" %>
-
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
