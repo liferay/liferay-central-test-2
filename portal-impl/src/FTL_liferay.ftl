@@ -1,10 +1,14 @@
 <#ftl strip_whitespace=true>
 
 <#assign css_main_file = "" />
-<#assign js_main_file = "" />
 
 <#if themeDisplay??>
 	<#assign css_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${themeDisplay.getPathThemeCss()}/main.css")) />
+</#if>
+
+<#assign js_main_file = "" />
+
+<#if themeDisplay??>
 	<#assign js_main_file = htmlUtil.escape(portalUtil.getStaticResourceURL(request, "${themeDisplay.getPathThemeJavaScript()}/main.js")) />
 </#if>
 
