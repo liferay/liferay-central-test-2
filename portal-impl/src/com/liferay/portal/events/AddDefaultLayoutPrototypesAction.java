@@ -73,41 +73,6 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 		addPortletId(layout, PortletKeys.RECENT_BLOGGERS, "column-2");
 	}
 
-	protected void addWebContentPage(
-			long companyId, long defaultUserId,
-			List<LayoutPrototype> layoutPrototypes)
-		throws Exception {
-
-		Layout layout = addLayoutPrototype(
-			companyId, defaultUserId, "Web Content",
-			"Create, edit, and explore web content with this page. Search " +
-				"available content, explore related content with tags, and " +
-					"browse content categories.",
-			"2_columns_ii", layoutPrototypes);
-
-		if (layout == null) {
-			return;
-		}
-
-		addPortletId(layout, PortletKeys.TAGS_ENTRIES_NAVIGATION, "column-1");
-		addPortletId(
-			layout, PortletKeys.TAGS_CATEGORIES_NAVIGATION, "column-1");
-		addPortletId(layout, PortletKeys.SEARCH, "column-2");
-		String portletId = addPortletId(
-			layout, PortletKeys.ASSET_PUBLISHER, "column-2");
-
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
-			portletId);
-
-		layout = LayoutLocalServiceUtil.updateLayout(
-			layout.getGroupId(), layout.isPrivateLayout(),
-			layout.getLayoutId(), layout.getTypeSettings());
-	}
-
 	protected Layout addLayout(
 			LayoutSet layoutSet, String name, String friendlyURL,
 			String layouteTemplateId)
@@ -177,6 +142,41 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 		updateLayout(layout);
 
 		return portletId;
+	}
+
+	protected void addWebContentPage(
+			long companyId, long defaultUserId,
+			List<LayoutPrototype> layoutPrototypes)
+		throws Exception {
+
+		Layout layout = addLayoutPrototype(
+			companyId, defaultUserId, "Web Content",
+			"Create, edit, and explore web content with this page. Search " +
+				"available content, explore related content with tags, and " +
+					"browse content categories.",
+			"2_columns_ii", layoutPrototypes);
+
+		if (layout == null) {
+			return;
+		}
+
+		addPortletId(layout, PortletKeys.TAGS_ENTRIES_NAVIGATION, "column-1");
+		addPortletId(
+			layout, PortletKeys.TAGS_CATEGORIES_NAVIGATION, "column-1");
+		addPortletId(layout, PortletKeys.SEARCH, "column-2");
+		String portletId = addPortletId(
+			layout, PortletKeys.ASSET_PUBLISHER, "column-2");
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			LayoutTypePortletConstants.DEFAULT_ASSET_PUBLISHER_PORTLET_ID,
+			portletId);
+
+		layout = LayoutLocalServiceUtil.updateLayout(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			layout.getLayoutId(), layout.getTypeSettings());
 	}
 
 	protected void addWikiPage(
