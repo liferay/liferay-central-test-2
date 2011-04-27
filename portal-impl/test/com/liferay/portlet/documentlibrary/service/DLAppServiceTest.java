@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.ServiceContext;
@@ -34,6 +35,9 @@ import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+
+import java.io.File;
+import java.io.InputStream;
 
 import java.util.List;
 
@@ -75,6 +79,75 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		}
 
 		super.tearDown();
+	}
+
+	public void testAddNullFileEntry() throws Exception {
+		long folderId = _folder.getFolderId();
+
+		String description = StringPool.BLANK;
+		String changeLog = StringPool.BLANK;
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+
+		try {
+			byte[] bytes = null;
+
+			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
+				_groupId, folderId, "Bytes-null.txt", description, changeLog,
+				bytes, serviceContext);
+
+			String newName = "Bytes-changed.txt";
+
+			DLAppServiceUtil.updateFileEntry(
+				fileEntry.getFileEntryId(), newName, newName, description,
+				changeLog, true, bytes, serviceContext);
+		}
+		catch (Exception e) {
+			fail(
+				"Unable to pass null byte[] " +
+					StackTraceUtil.getStackTrace(e));
+		}
+
+		try {
+			File file = null;
+
+			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
+				_groupId, folderId, "File-null.txt", description, changeLog,
+				file, serviceContext);
+
+			String newName = "File-changed.txt";
+
+			DLAppServiceUtil.updateFileEntry(
+				fileEntry.getFileEntryId(), newName, newName, description,
+				changeLog, true, file, serviceContext);
+		}
+		catch (Exception e) {
+			fail(
+				"Unable to pass null File " +
+					StackTraceUtil.getStackTrace(e));
+		}
+
+		try {
+			InputStream is = null;
+
+			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
+				_groupId, folderId, "IS-null.txt", description, changeLog, is,
+				0, serviceContext);
+
+			String newName = "IS-changed.txt";
+
+			DLAppServiceUtil.updateFileEntry(
+				fileEntry.getFileEntryId(), newName, newName, description,
+				changeLog, true, is, 0, serviceContext);
+		}
+		catch (Exception e) {
+			fail(
+				"Unable to pass null InputStream " +
+					StackTraceUtil.getStackTrace(e));
+		}
 	}
 
 	public void testAddFileEntryWithDuplicateName() throws Exception {

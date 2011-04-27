@@ -55,7 +55,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (bytes == null) {
-			throw new FileSizeException();
+			bytes = new byte[0];
 		}
 
 		InputStream is = new UnsyncByteArrayInputStream(bytes);
@@ -71,15 +71,20 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		try {
+			InputStream is = null;
+			long size = 0;
+
 			if (file == null) {
-				throw new FileSizeException();
+				is = new UnsyncByteArrayInputStream(new byte[0]);
+			}
+			else {
+				is = new FileInputStream(file);
+				size = file.length();
 			}
 
-			InputStream is = new FileInputStream(file);
-
 			return addFileEntry(
-				repositoryId, folderId, title, description, changeLog,
-				is, file.length(), serviceContext);
+				repositoryId, folderId, title, description, changeLog, is, size,
+				serviceContext);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
@@ -91,6 +96,11 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		if (is == null) {
+			is = new UnsyncByteArrayInputStream(new byte[0]);
+			size = 0;
+		}
 
 		Repository repository = getRepository(repositoryId);
 
