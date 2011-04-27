@@ -276,6 +276,8 @@ if (Validator.isNotNull(content)) {
 											JournalTemplate template = templates.get(0);
 											%>
 
+											<aui:input name="templateId" type="hidden" value="<%= template.getTemplateId() %>" />
+
 											<span class="template-name-label">
 												<%= HtmlUtil.escape(template.getName()) %>
 											</span>
@@ -376,9 +378,8 @@ if (Validator.isNotNull(content)) {
 
 							<c:if test="<%= Validator.isNotNull(articleId) %>">
 								<liferay-ui:icon-menu
-									align="auto"
+									align="left"
 									cssClass="add-translations-menu"
-									direction="right"
 									icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
 									message='<%= LanguageUtil.get(pageContext, "add-translation") %>'
 									showArrow="<%= true %>"
