@@ -107,8 +107,8 @@ public class WSDDBuilder {
 		_outputPath = outputPath;
 	}
 
-	public void setServerConfigFileName(String serverConfigServerConfigFileName) {
-		_serverConfigServerConfigFileName = serverConfigServerConfigFileName;
+	public void setServerConfigFileName(String serverConfigFileName) {
+		_serverConfigFileName = serverConfigFileName;
 	}
 
 	public void setServiceNamespace(String serviceNamespace) {
