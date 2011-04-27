@@ -73,14 +73,14 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 		addPortletId(layout, PortletKeys.RECENT_BLOGGERS, "column-2");
 	}
 
-	protected void addContentPage(
+	protected void addWebContentPage(
 			long companyId, long defaultUserId,
 			List<LayoutPrototype> layoutPrototypes)
 		throws Exception {
 
 		Layout layout = addLayoutPrototype(
-			companyId, defaultUserId, "Content",
-			"Create, edit, and explore content with this page. Search " +
+			companyId, defaultUserId, "Web Content",
+			"Create, edit, and explore web content with this page. Search " +
 				"available content, explore related content with tags, and " +
 					"browse content categories.",
 			"2_columns_ii", layoutPrototypes);
@@ -209,7 +209,7 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 				companyId, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		addBlogPage(companyId, defaultUserId, layoutPrototypes);
-		addContentPage(companyId, defaultUserId, layoutPrototypes);
+		addWebContentPage(companyId, defaultUserId, layoutPrototypes);
 		addWikiPage(companyId, defaultUserId, layoutPrototypes);
 	}
 
