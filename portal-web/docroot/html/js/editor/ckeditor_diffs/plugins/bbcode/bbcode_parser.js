@@ -161,22 +161,22 @@
 
 			var item;
 
-			var tmp;
+			var dataValue;
 
 			var result = [];
 
 			for (var i = 0, j = 0, length = dataMap.length; i < length; i++) {
 				item = dataMap[i];
 
-				tmp = data.substring(j, item.startIndex);
+				dataValue = data.substring(j, item.startIndex);
 
-				tmp = htmlEscape(tmp);
+				dataValue = htmlEscape(dataValue);
 
-				result.push(tmp);
+				result.push(dataValue);
 
-				tmp = data.substr(item.startIndex, item.length);
+				dataValue = data.substr(item.startIndex, item.length);
 
-				result.push(tmp);
+				result.push(dataValue);
 
 				j = item.startIndex + item.length;
 			}
@@ -184,11 +184,11 @@
 			var lastTagOffset = item.startIndex + item.length;
 
 			if (lastTagOffset < data.length) {
-				tmp = data.substr(lastTagOffset);
+				dataValue = data.substr(lastTagOffset);
 
-				tmp = htmlEscape(tmp);
+				dataValue = htmlEscape(dataValue);
 
-				result.push(tmp);
+				result.push(dataValue);
 			}
 
 			result = result.join(STR_BLANK);
