@@ -139,7 +139,9 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 <c:if test="<%= showAddArticleButtonButton || showPermissionsButton %>">
 	<aui:button-row cssClass="add-permission-button-row">
 		<c:if test="<%= showAddArticleButtonButton %>">
-			<aui:button onClick='<%= renderResponse.getNamespace() + "addArticle();" %>' value="add-web-content" />
+			<div class="add-article-selector">
+				<%@ include file="/html/portlet/journal/add_article.jspf" %>
+			</div>
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -179,34 +181,47 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
+
+	<% JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(scopeGroupId, displayTerms.getStructureId()); %>
+
 	<aui:input name="<%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="filter-by-structure" />: <%= displayTerms.getStructureId() %><br />
+		<liferay-ui:message key="showing-content-filtered-by-structure" /> <i><%= structure.getName() %></i>  <a href="javascript:;" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
 	</div>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
+
+	<% JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(scopeGroupId, displayTerms.getTemplateId());%>
+
 	<aui:input name="<%= displayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="filter-by-template" />: <%= displayTerms.getTemplateId() %><br />
+		<liferay-ui:message key="showing-content-filtered-by-template" /> <i><%= template.getName() %></i> <a href="javascript:;" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
 	</div>
 </c:if>
 
-<aui:script>
-	function <portlet:namespace />addArticle() {
-		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= displayTerms.getStructureId() %>" /><portlet:param name="templateId" value="<%= displayTerms.getTemplateId() %>" /></liferay-portlet:renderURL>';
+<aui:script use="aui-base,liferay-portlet-journal">	
+	var addArticle = A.one('#<portlet:namespace />addArticleId');
 
-		if (toggle_id_journal_article_searchcurClickValue == 'basic') {
-			url += '&<portlet:namespace /><%= displayTerms.TITLE %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
+	if (addArticle) {
+		addArticle.on(
+			'click',
+			function(event) {
+				var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= displayTerms.getStructureId() %>" /><portlet:param name="templateId" value="<%= displayTerms.getTemplateId() %>" /></liferay-portlet:renderURL>';
 
-			submitForm(document.hrefFm, url);
-		}
-		else {
-			document.<portlet:namespace />fm.method = 'post';
-			submitForm(document.<portlet:namespace />fm, url);
-		}
+				if (toggle_id_journal_article_searchcurClickValue == 'basic') {
+					url += '&<portlet:namespace /><%= displayTerms.TITLE %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
+
+					submitForm(document.hrefFm, url);
+				}
+				else {
+					document.<portlet:namespace />fm.method = 'post';
+					submitForm(document.<portlet:namespace />fm, url);
+				}
+			}
+		);
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">

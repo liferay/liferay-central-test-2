@@ -23,6 +23,8 @@
 <%@ page import="com.liferay.portal.kernel.xml.XPath" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+<%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
@@ -66,7 +68,6 @@
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleConstants" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
-
 <%@ page import="com.liferay.portlet.journal.model.JournalFeed" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalFeedConstants" %>
 <%@ page import="com.liferay.portlet.journal.model.JournalStructure" %>
@@ -102,6 +103,8 @@
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 
 <%@ page import="com.liferay.util.RSSUtil" %>
+
+<%@ page import="javax.portlet.PortletMode" %>
 
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);

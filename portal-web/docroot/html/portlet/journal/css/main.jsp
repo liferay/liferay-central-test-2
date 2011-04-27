@@ -21,6 +21,15 @@
 }
 
 .portlet-journal {
+	.add-article-selector {
+		float: left;
+		margin-right: 1em;
+
+		.lfr-meta-actions {
+			padding-top: 0;
+		}
+	}
+
 	.add-permission-button-row {
 		float: left;
 	}
@@ -304,6 +313,10 @@
 
 	.journal-article-instructions-message {
 		margin: 5px 0 0 0;
+	}
+
+	.portlet-msg-info {
+    	clear:both;
 	}
 
 	.structure-controls {
