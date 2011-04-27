@@ -29,6 +29,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.NoSuchRegionException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.RequiredFieldException;
@@ -59,6 +60,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -86,6 +88,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Amos Fong
  * @author Daniel Sanz
+ * @author Sergio González
  */
 public class CreateAccountAction extends PortletAction {
 
@@ -94,15 +97,53 @@ public class CreateAccountAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD)) {
+				if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
+					CaptchaUtil.check(actionRequest);
+				}
+
 				addUser(actionRequest, actionResponse);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				updateIncompleteUser(actionRequest, actionResponse);
+			}
+			else if (cmd.equals(Constants.RESET)) {
+				resetUser(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof AddressCityException ||
+			if (e instanceof DuplicateUserEmailAddressException ||
+				e instanceof DuplicateUserScreenNameException) {
+
+				String emailAddress = ParamUtil.getString(
+					actionRequest, "emailAddress");
+
+				try {
+					User user = UserLocalServiceUtil.getUserByEmailAddress(
+						themeDisplay.getCompanyId(), emailAddress);
+
+					if (user.getStatus() !=
+						WorkflowConstants.STATUS_INCOMPLETE) {
+							SessionErrors.add(
+								actionRequest, e.getClass().getName(), e);
+					}
+					else {
+						setForward(
+							actionRequest,
+							"portlet.login.update_account");
+					}
+				}
+				catch (NoSuchUserException nsue) {
+					SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				}
+			}
+			else if (e instanceof AddressCityException ||
 				e instanceof AddressStreetException ||
 				e instanceof AddressZipException ||
 				e instanceof CaptchaMaxChallengesException ||
@@ -111,8 +152,6 @@ public class CreateAccountAction extends PortletAction {
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactFullNameException ||
 				e instanceof ContactLastNameException ||
-				e instanceof DuplicateUserEmailAddressException ||
-				e instanceof DuplicateUserScreenNameException ||
 				e instanceof EmailAddressException ||
 				e instanceof NoSuchCountryException ||
 				e instanceof NoSuchListTypeException ||
@@ -143,9 +182,6 @@ public class CreateAccountAction extends PortletAction {
 			return;
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		try {
 			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
 				themeDisplay.getScopeGroupId(), false,
@@ -175,7 +211,8 @@ public class CreateAccountAction extends PortletAction {
 
 		renderResponse.setTitle(themeDisplay.translate("create-account"));
 
-		return mapping.findForward("portlet.login.create_account");
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.login.create_account"));
 	}
 
 	protected void addUser(
@@ -240,10 +277,6 @@ public class CreateAccountAction extends PortletAction {
 			openIdPending = true;
 		}
 
-		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
-			CaptchaUtil.check(actionRequest);
-		}
-
 		User user = UserServiceUtil.addUserWithWorkflow(
 			company.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
@@ -292,6 +325,102 @@ public class CreateAccountAction extends PortletAction {
 		sendRedirect(
 			actionRequest, actionResponse, themeDisplay, login,
 			user.getPasswordUnencrypted());
+	}
+
+	protected void updateIncompleteUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			User.class.getName(), actionRequest);
+
+		boolean autoPassword = true;
+		String password1 = null;
+		String password2 = null;
+		boolean autoScreenName = false;
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+		long facebookId = ParamUtil.getLong(actionRequest, "facebookId");
+		String openId = ParamUtil.getString(actionRequest, "openId");
+		String firstName = ParamUtil.getString(actionRequest, "firstName");
+		String middleName = ParamUtil.getString(actionRequest, "middleName");
+		String lastName = ParamUtil.getString(actionRequest, "lastName");
+		int prefixId = ParamUtil.getInteger(actionRequest, "prefixId");
+		int suffixId = ParamUtil.getInteger(actionRequest, "suffixId");
+		boolean male = ParamUtil.get(actionRequest, "male", true);
+		int birthdayMonth = ParamUtil.getInteger(
+			actionRequest, "birthdayMonth");
+		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
+		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
+		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
+		boolean sendEmail = true;
+		boolean updateUserInformation = true;
+
+		User user = UserServiceUtil.updateIncompleteUser(
+			themeDisplay.getCompanyId(), autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			themeDisplay.getLocale(),firstName, middleName, lastName, prefixId,
+			suffixId, male,	birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+			sendEmail, updateUserInformation, serviceContext);
+
+		// Session messages
+
+		if (user.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			SessionMessages.add(
+				request, "user_added", user.getEmailAddress());
+			SessionMessages.add(
+				request, "user_added_password",
+				user.getPasswordUnencrypted());
+		}
+		else {
+			SessionMessages.add(
+				request, "user_pending", user.getEmailAddress());
+		}
+
+		// Send redirect
+
+		String login = null;
+
+		Company company = themeDisplay.getCompany();
+
+		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+			login = String.valueOf(user.getUserId());
+		}
+		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+			login = user.getScreenName();
+		}
+		else {
+			login = user.getEmailAddress();
+		}
+
+		sendRedirect(
+			actionRequest, actionResponse, themeDisplay, login,
+			user.getPasswordUnencrypted());
+	}
+
+	protected void resetUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+
+		User anonymousUser = UserLocalServiceUtil.getUserByEmailAddress(
+			themeDisplay.getCompanyId(), emailAddress);
+
+		UserServiceUtil.deleteUser(anonymousUser.getUserId());
+
+		addUser(actionRequest, actionResponse);
 	}
 
 	protected boolean isAutoScreenName() {
