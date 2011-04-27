@@ -99,6 +99,22 @@ public class WSDDBuilder {
 		}
 	}
 
+	public void setFileName(String fileName) {
+		_fileName = fileName;
+	}
+
+	public void setOutputPath(String outputPath) {
+		_outputPath = outputPath;
+	}
+
+	public void setServerConfigFileName(String serverConfigServerConfigFileName) {
+		_serverConfigServerConfigFileName = serverConfigServerConfigFileName;
+	}
+
+	public void setServiceNamespace(String serviceNamespace) {
+		_serviceNamespace = serviceNamespace;
+	}
+
 	private void _createServiceWSDD(String entityName) throws Exception {
 		String className =
 			_packagePath + ".service.http." + entityName + "ServiceSoap";
