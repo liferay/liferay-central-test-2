@@ -99,8 +99,6 @@ public class AdvancedSearchTemplateIDTest extends BaseTestCase {
 				selenium.type("_15_searchTemplateId",
 					RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("TEMPLATEID"),
-					selenium.getText("//td[2]/a"));
 				selenium.type("_15_searchTemplateId",
 					RuntimeVariables.replace("templateid1"));
 				selenium.saveScreenShotAndSource();

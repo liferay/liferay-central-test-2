@@ -44,10 +44,12 @@ public class AddSettingsWebsiteUrlInvalidTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_websitesLink']",
+			RuntimeVariables.replace(""));
 		selenium.type("_130_websiteUrl0",
 			RuntimeVariables.replace("www.liferay.com"));
 		selenium.saveScreenShotAndSource();
@@ -56,8 +58,7 @@ public class AddSettingsWebsiteUrlInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid URL."));
 	}
 }

@@ -97,8 +97,6 @@ public class SearchStructureTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_keywords", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("STRUCTUREID"),
-					selenium.getText("//td[2]/a"));
 				selenium.type("_15_keywords",
 					RuntimeVariables.replace("structure1"));
 				selenium.saveScreenShotAndSource();
@@ -108,7 +106,6 @@ public class SearchStructureTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_keywords", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertFalse(selenium.isElementPresent("link=STRUCTUREID"));
 
 			case 100:
 				label = -1;

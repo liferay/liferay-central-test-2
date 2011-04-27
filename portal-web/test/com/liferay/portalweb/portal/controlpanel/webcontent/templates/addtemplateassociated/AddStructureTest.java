@@ -54,9 +54,6 @@ public class AddStructureTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_newStructureId",
-			RuntimeVariables.replace("StructureID"));
-		selenium.saveScreenShotAndSource();
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Web Content Structure Name"));
 		selenium.saveScreenShotAndSource();
@@ -87,8 +84,6 @@ public class AddStructureTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("STRUCTUREID"),
-			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"Web Content Structure Name\nWeb Content Structure Description"),
 			selenium.getText("//td[3]/a"));

@@ -51,7 +51,8 @@ public class AddWebContentExpirationDateTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_title", RuntimeVariables.replace("Web Content Name"));
+		selenium.type("_15_title_en_US",
+			RuntimeVariables.replace("Web Content Name"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 

@@ -104,6 +104,8 @@ public class AddOrganizationServiceTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//a[@id='_126_servicesLink']",
+					RuntimeVariables.replace("Services"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -111,7 +113,7 @@ public class AddOrganizationServiceTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("servicesLink")) {
+						if (selenium.isVisible("_126_orgLaborTypeId0")) {
 							break;
 						}
 					}
@@ -122,7 +124,6 @@ public class AddOrganizationServiceTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("servicesLink", RuntimeVariables.replace(""));
 				selenium.select("_126_orgLaborTypeId0",
 					RuntimeVariables.replace("label=Training"));
 				selenium.select("_126_sunOpen0",

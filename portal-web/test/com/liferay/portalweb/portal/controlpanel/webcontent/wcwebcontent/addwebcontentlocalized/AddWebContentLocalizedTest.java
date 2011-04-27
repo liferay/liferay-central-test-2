@@ -51,7 +51,7 @@ public class AddWebContentLocalizedTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_title",
+		selenium.type("_15_title_en_US",
 			RuntimeVariables.replace("Hello World Localized Article"));
 		selenium.saveScreenShotAndSource();
 		selenium.click("//fieldset/div/div/span/span/input");

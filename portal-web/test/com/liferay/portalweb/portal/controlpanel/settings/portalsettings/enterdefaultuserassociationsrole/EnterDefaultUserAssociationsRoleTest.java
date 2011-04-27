@@ -45,10 +45,12 @@ public class EnterDefaultUserAssociationsRoleTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("usersLink", RuntimeVariables.replace("Users"));
+		selenium.clickAt("//a[@id='_130_usersLink']",
+			RuntimeVariables.replace("Users"));
 		selenium.clickAt("link=Default User Associations",
 			RuntimeVariables.replace(""));
 		selenium.type("_130_settings--admin.default.role.names--",

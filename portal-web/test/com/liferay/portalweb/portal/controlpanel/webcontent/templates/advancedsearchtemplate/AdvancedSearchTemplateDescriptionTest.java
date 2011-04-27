@@ -99,8 +99,6 @@ public class AdvancedSearchTemplateDescriptionTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_description", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("TEMPLATEID"),
-					selenium.getText("//td[2]/a"));
 				selenium.type("_15_description",
 					RuntimeVariables.replace(
 						"web1 content1 template1 description1"));

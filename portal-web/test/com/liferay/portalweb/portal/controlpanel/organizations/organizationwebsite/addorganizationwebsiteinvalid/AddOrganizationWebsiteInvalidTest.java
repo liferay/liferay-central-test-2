@@ -103,7 +103,26 @@ public class AddOrganizationWebsiteInvalidTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+				selenium.clickAt("//a[@id='_126_websitesLink']",
+					RuntimeVariables.replace("Websites"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_websiteUrl0")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_websiteUrl0",
 					RuntimeVariables.replace("www.liferay.com"));
 				selenium.saveScreenShotAndSource();
@@ -116,11 +135,13 @@ public class AddOrganizationWebsiteInvalidTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div[1]"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a valid URL."),
-					selenium.getText("//div[7]/div[1]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 
 			case 100:
 				label = -1;

@@ -54,7 +54,6 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.select("_126_type",
 			RuntimeVariables.replace("label=Regular Organization"));
-		Thread.sleep(5000);
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

@@ -97,8 +97,6 @@ public class SearchTemplateTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_keywords", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("TEMPLATEID"),
-					selenium.getText("//td[2]/a"));
 				selenium.type("_15_keywords",
 					RuntimeVariables.replace("template1"));
 				selenium.saveScreenShotAndSource();
@@ -108,7 +106,6 @@ public class SearchTemplateTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_keywords", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertFalse(selenium.isElementPresent("link=TEMPLATEID"));
 
 			case 100:
 				label = -1;

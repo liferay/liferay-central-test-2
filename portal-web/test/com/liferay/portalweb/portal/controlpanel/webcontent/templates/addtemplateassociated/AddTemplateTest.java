@@ -54,9 +54,6 @@ public class AddTemplateTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_newTemplateId",
-			RuntimeVariables.replace("TemplateID"));
-		selenium.saveScreenShotAndSource();
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Web Content Template Name"));
 		selenium.saveScreenShotAndSource();
@@ -71,7 +68,7 @@ public class AddTemplateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_15_xslContent")) {
+				if (selenium.isVisible("//textarea[@id='_15_xslContent']")) {
 					break;
 				}
 			}
@@ -82,7 +79,7 @@ public class AddTemplateTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_xslContent",
+		selenium.type("//textarea[@id='_15_xslContent']",
 			RuntimeVariables.replace(
 				"<h1>$title.getData()</h1>\n\n<a href=\"$ltp.getUrl()\">See Page</a>"));
 		selenium.saveScreenShotAndSource();
@@ -112,8 +109,6 @@ public class AddTemplateTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("TEMPLATEID"),
-			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"Web Content Template Name\n Web Content Template Description"),
 			selenium.getText("//td[3]/a"));

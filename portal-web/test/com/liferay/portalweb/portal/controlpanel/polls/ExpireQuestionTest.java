@@ -85,7 +85,6 @@ public class ExpireQuestionTest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("_25_neverExpireCheckbox", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -104,22 +103,18 @@ public class ExpireQuestionTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.select("_25_expirationDateYear",
-			RuntimeVariables.replace("label=2008"));
-		selenium.select("_25_expirationDateMonth",
-			RuntimeVariables.replace("label=January"));
-		selenium.select("_25_expirationDateDay",
-			RuntimeVariables.replace("label=1"));
-		selenium.select("_25_expirationDateHour",
-			RuntimeVariables.replace("label=12"));
-		selenium.select("_25_expirationDateMinute",
-			RuntimeVariables.replace("label=:00"));
-		selenium.select("_25_expirationDateAmPm",
-			RuntimeVariables.replace("label=AM"));
+		selenium.clickAt("_25_neverExpireCheckbox", RuntimeVariables.replace(""));
+		assertFalse(selenium.isChecked("_25_neverExpireCheckbox"));
+		selenium.saveScreenShotAndSource();
+		selenium.keyPress("_25_expirationDateMonth",
+			RuntimeVariables.replace("\\38"));
+		selenium.keyPress("_25_expirationDateMinute",
+			RuntimeVariables.replace("\\39"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
+		Thread.sleep(60000);
 	}
 }

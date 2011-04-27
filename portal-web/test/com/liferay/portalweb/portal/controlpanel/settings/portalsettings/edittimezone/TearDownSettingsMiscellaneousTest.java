@@ -44,10 +44,12 @@ public class TearDownSettingsMiscellaneousTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("displaySettingsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_displaySettingsLink']",
+			RuntimeVariables.replace(""));
 		selenium.select("_130_languageId",
 			RuntimeVariables.replace("label=English (United States)"));
 		selenium.type("_130_settings--locales--",
@@ -62,7 +64,8 @@ public class TearDownSettingsMiscellaneousTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Mobile"));
 		selenium.select("_130_settings--control.panel.layout.regular.theme.id--",
 			RuntimeVariables.replace("label=Control Panel"));
-		selenium.clickAt("googleAppsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_googleAppsLink']",
+			RuntimeVariables.replace(""));
 		selenium.type("_130_settings--google.apps.username--",
 			RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();

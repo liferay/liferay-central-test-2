@@ -44,19 +44,23 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_addressesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_phoneNumbersLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("additionalEmailAddressesLink",
+		selenium.clickAt("//a[@id='_130_additionalEmailAddressesLink']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_websitesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[9]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -87,19 +91,23 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_addressesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_phoneNumbersLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("additionalEmailAddressesLink",
+		selenium.clickAt("//a[@id='_130_additionalEmailAddressesLink']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_websitesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[9]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -130,19 +138,23 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_addressesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_phoneNumbersLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("additionalEmailAddressesLink",
+		selenium.clickAt("//a[@id='_130_additionalEmailAddressesLink']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_websitesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[9]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -173,19 +185,23 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_addressesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_phoneNumbersLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("additionalEmailAddressesLink",
+		selenium.clickAt("//a[@id='_130_additionalEmailAddressesLink']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_websitesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[9]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -216,19 +232,23 @@ public class TearDownSettingsIdentificationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_addressesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//button[2]", RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("phoneNumbersLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_phoneNumbersLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[7]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("additionalEmailAddressesLink",
+		selenium.clickAt("//a[@id='_130_additionalEmailAddressesLink']",
 			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[8]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_websitesLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("//div[9]/fieldset/div[2]/div/span/span/button[2]",
 			RuntimeVariables.replace("Delete Row"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

@@ -246,7 +246,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 			case 6:
 
 				boolean passwordPolicy1Present = selenium.isElementPresent(
-						"//tr[4]/td[3]/ul/li/strong/a");
+						"//tr[4]/td[3]/span/ul/li/strong/a");
 
 				if (!passwordPolicy1Present) {
 					label = 7;
@@ -254,7 +254,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[3]/ul/li/strong/a",
+				selenium.clickAt("//tr[4]/td[3]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -285,7 +285,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 			case 7:
 
 				boolean passwordPolicy2Present = selenium.isElementPresent(
-						"//tr[4]/td[3]/ul/li/strong/a");
+						"//tr[4]/td[3]/span/ul/li/strong/a");
 
 				if (!passwordPolicy2Present) {
 					label = 8;
@@ -293,7 +293,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[3]/ul/li/strong/a",
+				selenium.clickAt("//tr[4]/td[3]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -324,7 +324,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 			case 8:
 
 				boolean passwordPolicy3Present = selenium.isElementPresent(
-						"//tr[4]/td[3]/ul/li/strong/a");
+						"//tr[4]/td[3]/span/ul/li/strong/a");
 
 				if (!passwordPolicy3Present) {
 					label = 9;
@@ -332,7 +332,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[3]/ul/li/strong/a",
+				selenium.clickAt("//tr[4]/td[3]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -363,7 +363,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 			case 9:
 
 				boolean passwordPolicy4Present = selenium.isElementPresent(
-						"//tr[4]/td[3]/ul/li/strong/a");
+						"//tr[4]/td[3]/span/ul/li/strong/a");
 
 				if (!passwordPolicy4Present) {
 					label = 10;
@@ -371,7 +371,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[3]/ul/li/strong/a",
+				selenium.clickAt("//tr[4]/td[3]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
@@ -402,7 +402,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 			case 10:
 
 				boolean passwordPolicy5Present = selenium.isElementPresent(
-						"//tr[4]/td[3]/ul/li/strong/a");
+						"//tr[4]/td[3]/span/ul/li/strong/a");
 
 				if (!passwordPolicy5Present) {
 					label = 11;
@@ -410,7 +410,7 @@ public class TearDownPasswordPolicyTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//tr[4]/td[3]/ul/li/strong/a",
+				selenium.clickAt("//tr[4]/td[3]/span/ul/li/strong/a",
 					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {

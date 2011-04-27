@@ -91,12 +91,10 @@ public class AddNullUserGroupNameTest extends BaseTestCase {
 		selenium.type("_127_description",
 			RuntimeVariables.replace("This is a null user group test."));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
+		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid name."));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

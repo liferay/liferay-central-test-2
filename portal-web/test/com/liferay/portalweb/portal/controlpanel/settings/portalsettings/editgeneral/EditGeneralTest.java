@@ -44,10 +44,29 @@ public class EditGeneralTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("generalLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_generalLink']",
+			RuntimeVariables.replace("General"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("_130_legalId")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 		selenium.type("_130_legalId", RuntimeVariables.replace("LIFE"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_130_sicCode", RuntimeVariables.replace("1234"));

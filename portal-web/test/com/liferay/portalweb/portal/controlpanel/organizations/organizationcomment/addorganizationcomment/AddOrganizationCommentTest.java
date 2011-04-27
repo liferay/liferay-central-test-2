@@ -104,7 +104,28 @@ public class AddOrganizationCommentTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_126_comments",
+				selenium.clickAt("//a[@id='_126_commentsLink']",
+					RuntimeVariables.replace("Comments"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//textarea[@id='_126_comments']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				selenium.type("//textarea[@id='_126_comments']",
 					RuntimeVariables.replace("This is a test comment!"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Save']",
@@ -191,8 +212,29 @@ public class AddOrganizationCommentTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//a[@id='_126_commentsLink']",
+					RuntimeVariables.replace("Comments"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//textarea[@id='_126_comments']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
 				assertEquals("This is a test comment!",
-					selenium.getValue("_126_comments"));
+					selenium.getValue("//textarea[@id='_126_comments']"));
 
 			case 100:
 				label = -1;

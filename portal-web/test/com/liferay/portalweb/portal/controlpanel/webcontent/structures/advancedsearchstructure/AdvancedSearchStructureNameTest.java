@@ -98,8 +98,6 @@ public class AdvancedSearchStructureNameTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("STRUCTUREID"),
-					selenium.getText("//td[2]/a"));
 				selenium.type("_15_name",
 					RuntimeVariables.replace("web1 content1 structure1 name1"));
 				selenium.saveScreenShotAndSource();
@@ -109,7 +107,6 @@ public class AdvancedSearchStructureNameTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
-				assertFalse(selenium.isElementPresent("link=STRUCTUREID"));
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));
 

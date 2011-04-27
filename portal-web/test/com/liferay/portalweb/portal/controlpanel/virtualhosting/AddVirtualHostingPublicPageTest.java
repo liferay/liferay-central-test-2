@@ -50,8 +50,7 @@ public class AddVirtualHostingPublicPageTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Communities",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.type("_134_name",
@@ -90,10 +89,10 @@ public class AddVirtualHostingPublicPageTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//ul[2]/li[1]/span/span/a",
-					RuntimeVariables.replace("Pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Add Page"),
+					selenium.getText("//div/span/button[1]"));
+				selenium.clickAt("//div/span/button[1]",
+					RuntimeVariables.replace("Add Page"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -133,7 +132,7 @@ public class AddVirtualHostingPublicPageTest extends BaseTestCase {
 				}
 
 				Thread.sleep(5000);
-				selenium.click("//div[2]/ul/li/div/div[1]");
+				selenium.click("//div[3]/ul/li/div/div[1]");
 
 			case 2:
 

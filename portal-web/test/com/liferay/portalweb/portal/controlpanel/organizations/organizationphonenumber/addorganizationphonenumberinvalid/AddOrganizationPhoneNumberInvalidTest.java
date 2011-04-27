@@ -105,8 +105,26 @@ public class AddOrganizationPhoneNumberInvalidTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("phoneNumbersLink",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//a[@id='_126_phoneNumbersLink']",
+					RuntimeVariables.replace("Phone Numbers"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_phoneNumber0")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_phoneNumber0",
 					RuntimeVariables.replace("Selenium"));
 				selenium.saveScreenShotAndSource();
@@ -114,7 +132,7 @@ public class AddOrganizationPhoneNumberInvalidTest extends BaseTestCase {
 					RuntimeVariables.replace("321"));
 				selenium.saveScreenShotAndSource();
 				selenium.select("_126_phoneTypeId0",
-					RuntimeVariables.replace("label=Toll-Free"));
+					RuntimeVariables.replace("label=Toll Free"));
 				selenium.clickAt("_126_phonePrimary0",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//input[@value='Save']",
@@ -124,11 +142,13 @@ public class AddOrganizationPhoneNumberInvalidTest extends BaseTestCase {
 				selenium.selectWindow("null");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div[1]"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a valid phone number."),
-					selenium.getText("//div[@id='phoneNumbers']/div"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 
 			case 100:
 				label = -1;

@@ -54,9 +54,6 @@ public class AddTemplateScriptTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_newTemplateId",
-			RuntimeVariables.replace("TemplateID"));
-		selenium.saveScreenShotAndSource();
 		selenium.type("_15_name",
 			RuntimeVariables.replace("Web Content Template Name"));
 		selenium.saveScreenShotAndSource();
@@ -74,8 +71,6 @@ public class AddTemplateScriptTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div"));
-		assertEquals(RuntimeVariables.replace("TEMPLATEID"),
-			selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace(
 				"Web Content Template Name\n Web Content Template Description"),
 			selenium.getText("//td[3]/a"));

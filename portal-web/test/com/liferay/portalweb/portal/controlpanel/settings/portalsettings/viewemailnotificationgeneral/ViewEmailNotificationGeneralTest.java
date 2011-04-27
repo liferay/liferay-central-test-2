@@ -44,10 +44,12 @@ public class ViewEmailNotificationGeneralTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("emailNotificationsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_emailNotificationsLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("link=Sender", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {

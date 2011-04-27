@@ -105,13 +105,31 @@ public class AddOrganizationEmailAddressInvalidTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("additionalEmailAddressesLink",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//a[@id='_126_additionalEmailAddressesLink']",
+					RuntimeVariables.replace("Additional Email Addresses"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_emailAddressAddress0")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_emailAddressAddress0",
 					RuntimeVariables.replace("SeleniumSelenium.com"));
 				selenium.saveScreenShotAndSource();
 				selenium.select("_126_emailAddressTypeId0",
-					RuntimeVariables.replace("label=E-mail"));
+					RuntimeVariables.replace("label=Email Address"));
 				selenium.clickAt("_126_emailAddressPrimary0",
 					RuntimeVariables.replace(""));
 				selenium.clickAt("//input[@value='Save']",
@@ -119,11 +137,13 @@ public class AddOrganizationEmailAddressInvalidTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div[1]"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a valid email address."),
-					selenium.getText("//div[6]/div[1]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 
 			case 100:
 				label = -1;

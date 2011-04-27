@@ -79,44 +79,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAt</td>
-	<td>_25_neverExpireCheckbox</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>_25_expirationDateMonth</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_25_expirationDateYear</td>
-	<td>label=2008</td>
+	<td>clickAt</td>
+	<td>_25_neverExpireCheckbox</td>
+	<td></td>
 </tr>
 <tr>
-	<td>select</td>
+	<td>assertNotChecked</td>
+	<td>_25_neverExpireCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>keyPress</td>
 	<td>_25_expirationDateMonth</td>
-	<td>label=January</td>
+	<td>\38</td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>_25_expirationDateDay</td>
-	<td>label=1</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_25_expirationDateHour</td>
-	<td>label=12</td>
-</tr>
-<tr>
-	<td>select</td>
+	<td>keyPress</td>
 	<td>_25_expirationDateMinute</td>
-	<td>label=:00</td>
-</tr>
-<tr>
-	<td>select</td>
-	<td>_25_expirationDateAmPm</td>
-	<td>label=AM</td>
+	<td>\39</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -126,6 +111,11 @@
 <tr>
 	<td>assertTextPresent</td>
 	<td>Your request completed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>60000</td>
 	<td></td>
 </tr>
 

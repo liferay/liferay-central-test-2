@@ -44,7 +44,8 @@ public class TearDownSettingsConfigurationTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_130_name", RuntimeVariables.replace("Liferay"));
@@ -77,7 +78,8 @@ public class TearDownSettingsConfigurationTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_130_type", RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("usersLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_usersLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("link=Reserved Credentials",
 			RuntimeVariables.replace(""));
 		selenium.type("_130_settings--admin.reserved.screen.names--",
@@ -97,11 +99,13 @@ public class TearDownSettingsConfigurationTest extends BaseTestCase {
 		selenium.type("_130_settings--admin.default.user.group.names--",
 			RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("mailHostNamesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_mailHostNamesLink']",
+			RuntimeVariables.replace(""));
 		selenium.type("_130_settings--admin.mail.host.names--",
 			RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("emailNotificationsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_emailNotificationsLink']",
+			RuntimeVariables.replace(""));
 		selenium.type("_130_settings--admin.email.from.name--",
 			RuntimeVariables.replace("Joe Bloggs"));
 		selenium.saveScreenShotAndSource();

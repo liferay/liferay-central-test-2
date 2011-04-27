@@ -51,7 +51,7 @@ public class AddWebContentNameNullTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_title", RuntimeVariables.replace(""));
+		selenium.type("_15_title_en_US", RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 

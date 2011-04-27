@@ -51,7 +51,7 @@ public class AddWebContentApprovedTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_title",
+		selenium.type("_15_title_en_US",
 			RuntimeVariables.replace("Web Content Name Approved"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);

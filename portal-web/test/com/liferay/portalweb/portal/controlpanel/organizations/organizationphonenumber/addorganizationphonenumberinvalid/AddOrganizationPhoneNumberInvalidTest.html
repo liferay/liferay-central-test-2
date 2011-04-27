@@ -85,8 +85,13 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>phoneNumbersLink</td>
-	<td></td>
+	<td>//a[@id='_126_phoneNumbersLink']</td>
+	<td>Phone Numbers</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_126_phoneNumber0</td>
+	<td>Number</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -101,7 +106,7 @@
 <tr>
 	<td>select</td>
 	<td>_126_phoneTypeId0</td>
-	<td>label=Toll-Free</td>
+	<td>label=Toll Free</td>
 </tr>
 <tr>
 	<td>clickAt</td>
@@ -120,12 +125,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div[1]</td>
-	<td>You have entered invalid data. Please try again.</td>
+	<td>xPath=(//div[@class='portlet-msg-error'])[1]</td>
+	<td>Your request failed to complete.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@id='phoneNumbers']/div</td>
+	<td>xPath=(//div[@class='portlet-msg-error'])[2]</td>
 	<td>Please enter a valid phone number.</td>
 </tr>
 

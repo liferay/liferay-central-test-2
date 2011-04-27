@@ -61,9 +61,6 @@ public class AddTemplateLocalizedTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_15_newTemplateId",
-					RuntimeVariables.replace("LOCALIZED"));
-				selenium.saveScreenShotAndSource();
 				selenium.type("_15_name",
 					RuntimeVariables.replace("Test Localized Template"));
 				selenium.saveScreenShotAndSource();

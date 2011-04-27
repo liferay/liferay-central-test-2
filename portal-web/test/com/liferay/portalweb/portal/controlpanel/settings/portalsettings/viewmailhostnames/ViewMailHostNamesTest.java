@@ -44,10 +44,12 @@ public class ViewMailHostNamesTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Settings", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("mailHostNamesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_130_mailHostNamesLink']",
+			RuntimeVariables.replace(""));
 		assertTrue(selenium.isTextPresent(
 				"Enter one mail host name per line for all additional mail host names besides liferay.com."));
 		assertTrue(selenium.isElementPresent(

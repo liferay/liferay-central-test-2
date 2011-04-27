@@ -75,7 +75,7 @@ public class AdvancedSearchWebContentNameTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_15_title")) {
+						if (selenium.isVisible("_15_title_en_US")) {
 							break;
 						}
 					}
@@ -86,25 +86,25 @@ public class AdvancedSearchWebContentNameTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.type("_15_title",
+				selenium.type("_15_title_en_US",
 					RuntimeVariables.replace("web content name"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_15_title", RuntimeVariables.replace(""));
+				selenium.type("_15_title_en_US", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Web Content Name"),
 					selenium.getText("//td[3]/a"));
-				selenium.type("_15_title",
+				selenium.type("_15_title_en_US",
 					RuntimeVariables.replace("web1 content1 name1"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.type("_15_title", RuntimeVariables.replace(""));
+				selenium.type("_15_title_en_US", RuntimeVariables.replace(""));
 				selenium.saveScreenShotAndSource();
 				assertFalse(selenium.isElementPresent("link=Web Content Name"));
 				selenium.clickAt("link=\u00ab Basic",

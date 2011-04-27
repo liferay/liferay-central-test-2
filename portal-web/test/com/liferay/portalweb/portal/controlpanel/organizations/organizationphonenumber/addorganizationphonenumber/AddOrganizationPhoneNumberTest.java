@@ -104,8 +104,26 @@ public class AddOrganizationPhoneNumberTest extends BaseTestCase {
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("phoneNumbersLink",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("//a[@id='_126_phoneNumbersLink']",
+					RuntimeVariables.replace("Phone Numbers"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_126_phoneNumber0")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
 				selenium.type("_126_phoneNumber0",
 					RuntimeVariables.replace("(562)802-0523"));
 				selenium.saveScreenShotAndSource();
@@ -113,10 +131,9 @@ public class AddOrganizationPhoneNumberTest extends BaseTestCase {
 					RuntimeVariables.replace("321"));
 				selenium.saveScreenShotAndSource();
 				selenium.select("_126_phoneTypeId0",
-					RuntimeVariables.replace("label=Toll-Free"));
+					RuntimeVariables.replace("label=Toll Free"));
 				selenium.clickAt("_126_phonePrimary0",
 					RuntimeVariables.replace(""));
-				Thread.sleep(5000);
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
@@ -127,7 +144,7 @@ public class AddOrganizationPhoneNumberTest extends BaseTestCase {
 				assertEquals("5628020523",
 					selenium.getValue("_126_phoneNumber0"));
 				assertEquals("321", selenium.getValue("_126_phoneExtension0"));
-				assertEquals("Toll-Free",
+				assertEquals("Toll Free",
 					selenium.getSelectedLabel("_126_phoneTypeId0"));
 				assertTrue(selenium.isChecked("_126_phonePrimary0"));
 				selenium.saveScreenShotAndSource();
