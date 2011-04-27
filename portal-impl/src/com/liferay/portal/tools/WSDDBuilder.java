@@ -27,6 +27,7 @@ import java.io.File;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -34,19 +35,27 @@ import java.util.List;
 public class WSDDBuilder {
 
 	public static void main(String[] args) {
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
+
 		InitUtil.initWithSpring();
 
-		if (args.length == 2) {
-			new WSDDBuilder(args[0], args[1]);
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+		String fileName = arguments.get("wsdd.input.file");
+		String serviceNamespace = arguments.get("wsdd.service.namespace");
+		String outputPath = arguments.get("wsdd.output.path");
+		String serverConfigFileName = arguments.get("wsdd.server.config.file");
+
+		new WSDDBuilder(
+			fileName, serviceNamespace, outputPath, serverConfigFileName);
 	}
 
-	public WSDDBuilder(String fileName, String serverConfigFileName) {
+	public WSDDBuilder(
+		String fileName, String serviceNamespace, String outputPath,
+		String serverConfigFileName) {
+
 		try {
+			_outputPath = outputPath;
 			_serverConfigFileName = serverConfigFileName;
+			_serviceNamespace = serviceNamespace;
 
 			if (!FileUtil.exists(_serverConfigFileName)) {
 				ClassLoader classLoader = getClass().getClassLoader();
@@ -56,10 +65,6 @@ public class WSDDBuilder {
 					"com/liferay/portal/tools/dependencies/server-config.wsdd");
 
 				FileUtil.write(_serverConfigFileName, serverConfigContent);
-			}
-
-			if (FileUtil.exists("docroot/WEB-INF/src/")) {
-				_portalWsdd = false;
 			}
 
 			Document doc = SAXReaderUtil.read(new File(fileName), true);
@@ -76,13 +81,6 @@ public class WSDDBuilder {
 			}
 			else {
 				_portletShortName = namespace.getText();
-			}
-
-			if (_portalWsdd) {
-				_outputPath = "src/";
-			}
-			else {
-				_outputPath = "docroot/WEB-INF/src/";
 			}
 
 			_outputPath +=
@@ -122,13 +120,9 @@ public class WSDDBuilder {
 
 		String serviceName = StringUtil.replace(_portletShortName, " ", "_");
 
-		if (!_portalWsdd) {
-			serviceName = "Plugin_" + serviceName;
-		}
-		else {
-			if (!_portletShortName.equals("Portal")) {
-				serviceName = "Portlet_" + serviceName;
-			}
+
+		if (!_portletShortName.equals("Portal")) {
+			serviceName = _serviceNamespace + serviceName;
 		}
 
 		serviceName += ("_" + entityName + "Service");
@@ -145,7 +139,7 @@ public class WSDDBuilder {
 	}
 
 	private String _serverConfigFileName;
-	private boolean _portalWsdd = true;
+	private String _serviceNamespace;
 	private String _portletShortName;
 	private String _outputPath;
 	private String _packagePath;
