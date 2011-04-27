@@ -2726,7 +2726,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Updates an "anonymous" user and starts the workflow.
+	 * Updates a user account that was automatically created when a non logged
+     * in user participated in the portal, for example posting a comment, and
+     * providing only his name and email.
 	 *
 	 * @param  creatorUserId the primary key of the creator
 	 * @param  companyId the primary key of the company the user belongs to
