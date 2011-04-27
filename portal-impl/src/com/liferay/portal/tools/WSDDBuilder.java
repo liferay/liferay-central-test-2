@@ -25,7 +25,6 @@ import com.liferay.util.ant.Java2WsddTask;
 
 import java.io.File;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,83 +33,69 @@ import java.util.Map;
  */
 public class WSDDBuilder {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
 		InitUtil.initWithSpring();
 
-		String fileName = arguments.get("wsdd.input.file");
-		String serviceNamespace = arguments.get("wsdd.service.namespace");
-		String outputPath = arguments.get("wsdd.output.path");
-		String serverConfigFileName = arguments.get("wsdd.server.config.file");
+		WSDDBuilder wsddBuilder = new WSDDBuilder();
 
-		new WSDDBuilder(
-			fileName, serviceNamespace, outputPath, serverConfigFileName);
+		wsddBuilder._fileName = arguments.get("wsdd.input.file");
+		wsddBuilder._outputPath = arguments.get("wsdd.output.path");
+		wsddBuilder._serverConfigFileName = arguments.get(
+			"wsdd.server.config.file");
+		wsddBuilder._serviceNamespace = arguments.get("wsdd.service.namespace");
+
+		wsddBuilder.build();
 	}
 
-	public WSDDBuilder(
-		String fileName, String serviceNamespace, String outputPath,
-		String serverConfigFileName) {
+	public void build() throws Exception {
+		if (!FileUtil.exists(_serverConfigFileName)) {
+			ClassLoader classLoader = getClass().getClassLoader();
 
-		try {
-			_outputPath = outputPath;
-			_serverConfigFileName = serverConfigFileName;
-			_serviceNamespace = serviceNamespace;
+			String serverConfigContent = StringUtil.read(
+				classLoader,
+				"com/liferay/portal/tools/dependencies/server-config.wsdd");
 
-			if (!FileUtil.exists(_serverConfigFileName)) {
-				ClassLoader classLoader = getClass().getClassLoader();
-
-				String serverConfigContent = StringUtil.read(
-					classLoader,
-					"com/liferay/portal/tools/dependencies/server-config.wsdd");
-
-				FileUtil.write(_serverConfigFileName, serverConfigContent);
-			}
-
-			Document doc = SAXReaderUtil.read(new File(fileName), true);
-
-			Element root = doc.getRootElement();
-
-			String packagePath = root.attributeValue("package-path");
-
-			Element portlet = root.element("portlet");
-			Element namespace = root.element("namespace");
-
-			if (portlet != null) {
-				_portletShortName = portlet.attributeValue("short-name");
-			}
-			else {
-				_portletShortName = namespace.getText();
-			}
-
-			_outputPath +=
-				StringUtil.replace(packagePath, ".", "/") + "/service/http";
-
-			_packagePath = packagePath;
-
-			List<Element> entities = root.elements("entity");
-
-			Iterator<Element> itr = entities.iterator();
-
-			while (itr.hasNext()) {
-				Element entity = itr.next();
-
-				String entityName = entity.attributeValue("name");
-
-				boolean remoteService = GetterUtil.getBoolean(
-					entity.attributeValue("remote-service"), true);
-
-				if (remoteService) {
-					_createServiceWSDD(entityName);
-
-					WSDDMerger.merge(
-						_outputPath + "/" + entityName + "Service_deploy.wsdd",
-						_serverConfigFileName);
-				}
-			}
+			FileUtil.write(_serverConfigFileName, serverConfigContent);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
+
+		Document document = SAXReaderUtil.read(new File(_fileName), true);
+
+		Element rootElement = document.getRootElement();
+
+		String packagePath = rootElement.attributeValue("package-path");
+
+		Element portletElement = rootElement.element("portlet");
+		Element namespaceElement = rootElement.element("namespace");
+
+		if (portletElement != null) {
+			_portletShortName = portletElement.attributeValue("short-name");
+		}
+		else {
+			_portletShortName = namespaceElement.getText();
+		}
+
+		_outputPath +=
+			StringUtil.replace(packagePath, ".", "/") + "/service/http";
+
+		_packagePath = packagePath;
+
+		List<Element> entityElements = rootElement.elements("entity");
+
+		for (Element entityElement : entityElements) {
+			String entityName = entityElement.attributeValue("name");
+
+			boolean remoteService = GetterUtil.getBoolean(
+				entityElement.attributeValue("remote-service"), true);
+
+			if (remoteService) {
+				_createServiceWSDD(entityName);
+
+				WSDDMerger.merge(
+					_outputPath + "/" + entityName + "Service_deploy.wsdd",
+					_serverConfigFileName);
+			}
 		}
 	}
 
@@ -119,7 +104,6 @@ public class WSDDBuilder {
 			_packagePath + ".service.http." + entityName + "ServiceSoap";
 
 		String serviceName = StringUtil.replace(_portletShortName, " ", "_");
-
 
 		if (!_portletShortName.equals("Portal")) {
 			serviceName = _serviceNamespace + serviceName;
@@ -138,10 +122,11 @@ public class WSDDBuilder {
 			wsdds[1], true);
 	}
 
-	private String _serverConfigFileName;
-	private String _serviceNamespace;
-	private String _portletShortName;
+	private String _fileName;
 	private String _outputPath;
 	private String _packagePath;
+	private String _portletShortName;
+	private String _serverConfigFileName;
+	private String _serviceNamespace;
 
 }
