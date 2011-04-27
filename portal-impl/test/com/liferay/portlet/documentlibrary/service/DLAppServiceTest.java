@@ -81,6 +81,27 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		super.tearDown();
 	}
 
+	public void testAddFileEntryWithDuplicateName() throws Exception {
+		addFileEntry(false);
+
+		try {
+			addFileEntry(false);
+
+			fail("Able to add two files of the same name");
+		}
+		catch (DuplicateFileException dfe) {
+		}
+
+		try {
+			addFileEntry(true);
+		}
+		catch (DuplicateFileException dfe) {
+			fail(
+				"Unable to add two files of the same name in different " +
+					"folders");
+		}
+	}
+
 	public void testAddNullFileEntry() throws Exception {
 		long folderId = _folder.getFolderId();
 
@@ -147,27 +168,6 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			fail(
 				"Unable to pass null InputStream " +
 					StackTraceUtil.getStackTrace(e));
-		}
-	}
-
-	public void testAddFileEntryWithDuplicateName() throws Exception {
-		addFileEntry(false);
-
-		try {
-			addFileEntry(false);
-
-			fail("Able to add two files of the same name");
-		}
-		catch (DuplicateFileException dfe) {
-		}
-
-		try {
-			addFileEntry(true);
-		}
-		catch (DuplicateFileException dfe) {
-			fail(
-				"Unable to add two files of the same name in different " +
-					"folders");
 		}
 	}
 
