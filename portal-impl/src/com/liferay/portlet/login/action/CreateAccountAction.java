@@ -110,11 +110,11 @@ public class CreateAccountAction extends PortletAction {
 
 				addUser(actionRequest, actionResponse);
 			}
-			else if (cmd.equals(Constants.UPDATE)) {
-				updateIncompleteUser(actionRequest, actionResponse);
-			}
 			else if (cmd.equals(Constants.RESET)) {
 				resetUser(actionRequest, actionResponse);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				updateIncompleteUser(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -129,14 +129,14 @@ public class CreateAccountAction extends PortletAction {
 						themeDisplay.getCompanyId(), emailAddress);
 
 					if (user.getStatus() !=
-						WorkflowConstants.STATUS_INCOMPLETE) {
-							SessionErrors.add(
-								actionRequest, e.getClass().getName(), e);
+							WorkflowConstants.STATUS_INCOMPLETE) {
+
+						SessionErrors.add(
+							actionRequest, e.getClass().getName(), e);
 					}
 					else {
 						setForward(
-							actionRequest,
-							"portlet.login.update_account");
+							actionRequest, "portlet.login.update_account");
 					}
 				}
 				catch (NoSuchUserException nsue) {
@@ -327,82 +327,12 @@ public class CreateAccountAction extends PortletAction {
 			user.getPasswordUnencrypted());
 	}
 
-	protected void updateIncompleteUser(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws Exception {
+	protected boolean isAutoScreenName() {
+		return _AUTO_SCREEN_NAME;
+	}
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			User.class.getName(), actionRequest);
-
-		boolean autoPassword = true;
-		String password1 = null;
-		String password2 = null;
-		boolean autoScreenName = false;
-		String screenName = ParamUtil.getString(actionRequest, "screenName");
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-		long facebookId = ParamUtil.getLong(actionRequest, "facebookId");
-		String openId = ParamUtil.getString(actionRequest, "openId");
-		String firstName = ParamUtil.getString(actionRequest, "firstName");
-		String middleName = ParamUtil.getString(actionRequest, "middleName");
-		String lastName = ParamUtil.getString(actionRequest, "lastName");
-		int prefixId = ParamUtil.getInteger(actionRequest, "prefixId");
-		int suffixId = ParamUtil.getInteger(actionRequest, "suffixId");
-		boolean male = ParamUtil.get(actionRequest, "male", true);
-		int birthdayMonth = ParamUtil.getInteger(
-			actionRequest, "birthdayMonth");
-		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
-		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
-		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		boolean sendEmail = true;
-		boolean updateUserInformation = true;
-
-		User user = UserServiceUtil.updateIncompleteUser(
-			themeDisplay.getCompanyId(), autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, facebookId, openId,
-			themeDisplay.getLocale(),firstName, middleName, lastName, prefixId,
-			suffixId, male,	birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			sendEmail, updateUserInformation, serviceContext);
-
-		// Session messages
-
-		if (user.getStatus() == WorkflowConstants.STATUS_APPROVED) {
-			SessionMessages.add(
-				request, "user_added", user.getEmailAddress());
-			SessionMessages.add(
-				request, "user_added_password",
-				user.getPasswordUnencrypted());
-		}
-		else {
-			SessionMessages.add(
-				request, "user_pending", user.getEmailAddress());
-		}
-
-		// Send redirect
-
-		String login = null;
-
-		Company company = themeDisplay.getCompany();
-
-		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
-			login = String.valueOf(user.getUserId());
-		}
-		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
-			login = user.getScreenName();
-		}
-		else {
-			login = user.getEmailAddress();
-		}
-
-		sendRedirect(
-			actionRequest, actionResponse, themeDisplay, login,
-			user.getPasswordUnencrypted());
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
 	protected void resetUser(
@@ -421,10 +351,6 @@ public class CreateAccountAction extends PortletAction {
 		UserServiceUtil.deleteUser(anonymousUser.getUserId());
 
 		addUser(actionRequest, actionResponse);
-	}
-
-	protected boolean isAutoScreenName() {
-		return _AUTO_SCREEN_NAME;
 	}
 
 	protected void sendRedirect(
@@ -456,8 +382,80 @@ public class CreateAccountAction extends PortletAction {
 		actionResponse.sendRedirect(redirect);
 	}
 
-	protected boolean isCheckMethodOnProcessAction() {
-		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	protected void updateIncompleteUser(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		boolean autoPassword = true;
+		String password1 = null;
+		String password2 = null;
+		boolean autoScreenName = false;
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+		long facebookId = ParamUtil.getLong(actionRequest, "facebookId");
+		String openId = ParamUtil.getString(actionRequest, "openId");
+		String firstName = ParamUtil.getString(actionRequest, "firstName");
+		String middleName = ParamUtil.getString(actionRequest, "middleName");
+		String lastName = ParamUtil.getString(actionRequest, "lastName");
+		int prefixId = ParamUtil.getInteger(actionRequest, "prefixId");
+		int suffixId = ParamUtil.getInteger(actionRequest, "suffixId");
+		boolean male = ParamUtil.get(actionRequest, "male", true);
+		int birthdayMonth = ParamUtil.getInteger(
+			actionRequest, "birthdayMonth");
+		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
+		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
+		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
+		boolean updateUserInformation = true;
+		boolean sendEmail = true;
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			User.class.getName(), actionRequest);
+
+		User user = UserServiceUtil.updateIncompleteUser(
+			themeDisplay.getCompanyId(), autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			themeDisplay.getLocale(),firstName, middleName, lastName, prefixId,
+			suffixId, male,	birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+			sendEmail, updateUserInformation, serviceContext);
+
+		// Session messages
+
+		if (user.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			SessionMessages.add(request, "user_added", user.getEmailAddress());
+			SessionMessages.add(
+				request, "user_added_password", user.getPasswordUnencrypted());
+		}
+		else {
+			SessionMessages.add(
+				request, "user_pending", user.getEmailAddress());
+		}
+
+		// Send redirect
+
+		String login = null;
+
+		Company company = themeDisplay.getCompany();
+
+		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
+			login = String.valueOf(user.getUserId());
+		}
+		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
+			login = user.getScreenName();
+		}
+		else {
+			login = user.getEmailAddress();
+		}
+
+		sendRedirect(
+			actionRequest, actionResponse, themeDisplay, login,
+			user.getPasswordUnencrypted());
 	}
 
 	private static final boolean _AUTO_SCREEN_NAME = false;

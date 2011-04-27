@@ -25,7 +25,7 @@ long facebookId = ParamUtil.getLong(request, "facebookId");
 String firstName = ParamUtil.getString(request, "firstName");
 String jobTitle = ParamUtil.getString(request, "jobTitle");
 String lastName = ParamUtil.getString(request, "lastName");
-boolean male = ParamUtil.get(request, "male", true);
+boolean male = ParamUtil.getBoolean(request, "male", true);
 String middleName = ParamUtil.getString(request, "middleName");
 String openId = ParamUtil.getString(request, "openId");
 int prefixId = ParamUtil.getInteger(request, "prefixId");
@@ -57,21 +57,22 @@ int suffixId = ParamUtil.getInteger(request, "suffixId");
 	</aui:form>
 
 	<div class="portlet-msg-alert">
-		<liferay-ui:message key="this-email-address-has-already-been-used-within-the-portal-do-you-want-to-associate-that-activity-to-your-account" />
+		<liferay-ui:message argument="<%= emailAddress %>" key="an-account-with-x-as-the-email-address-already-exists-in-the-portal.-do-you-want-to-associate-this-activity-with-that-account" />
 	</div>
 
-	<aui:button name="updateUser" value="associate-account" onClick='<%= renderResponse.getNamespace() + "updateUser()" %>'/>
-	<aui:button name="resetUser" value="create-new-account" onClick='<%= renderResponse.getNamespace() + "resetUser()" %>'/>
+	<aui:button name="updateUser" onClick='<%= renderResponse.getNamespace() + "updateUser();" %>' value="associate-account" />
+
+	<aui:button name="resetUser" onClick='<%= renderResponse.getNamespace() + "resetUser();" %>' value="create-new-account" />
 </div>
 
 <aui:script>
-	function <portlet:namespace />updateUser() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+	function <portlet:namespace />resetUser() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.RESET %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />resetUser() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.RESET %>";
+	function <portlet:namespace />updateUser() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 </aui:script>
