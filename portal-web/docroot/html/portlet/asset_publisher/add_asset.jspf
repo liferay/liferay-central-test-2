@@ -30,11 +30,13 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			<%
 			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 				String className = entry.getKey();
+				String message = "model.resource." + className;
 
 				int pos = className.indexOf(_CLASSNAME_SEPARATOR);
 
 				if (pos != -1) {
-					className = className.substring(0, pos + _CLASSNAME_SEPARATOR.length());
+					message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
+					className = className.substring(0, pos);
 				}
 
 				PortletURL addPortletURL = entry.getValue();
@@ -52,7 +54,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			%>
 
 				<liferay-ui:icon
-					message="<%= ResourceActionsUtil.getModelResource(locale, className) %>"
+					message="<%= message %>"
 					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
 					url='<%= taglibEditURL %>'
 				/>
