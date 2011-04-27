@@ -131,7 +131,6 @@ body.portlet {
 	background: url() no-repeat 0 50%;
 	color: #3AF;
 	display: inline-block;
-	font-size: 0;
 	height: 16px;
 	margin-left: 5px;
 	text-indent: -9999px;
@@ -161,7 +160,6 @@ body.portlet {
 }
 
 .portlet-borderless-bar .portlet-back a {
-	background-image: url(../images/portlet/return_borderless.png);
 	height: auto;
 	text-indent: 0;
 	width: auto;

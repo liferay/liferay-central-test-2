@@ -172,16 +172,17 @@ boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 											<a href="<%= portletDisplay.getURLClose() %>" title="<liferay-ui:message key="close" />"><liferay-ui:message key="close" /></a>
 										</span>
 									</c:if>
+
+									<c:if test="<%= portletDisplay.isShowBackIcon() %>">
+										<span class="portlet-action portlet-back">
+											<span class="portlet-action-separator">-</span>
+
+											<a href="<%= portletDisplay.getURLBack() %>" title="<liferay-ui:message key="back" />"><liferay-ui:message key="back" /></a>
+										</span>
+									</c:if>									
 								</span>
 							</c:if>
 
-							<c:if test="<%= portletDisplay.isShowBackIcon() %>">
-								<span class="portlet-action portlet-back">
-									<span class="portlet-action-separator">-</span>
-
-									<a href="<%= portletDisplay.getURLBack() %>" title="<liferay-ui:message key="back" />"><liferay-ui:message key="back" /></a>
-								</span>
-							</c:if>
 						</div>
 					</c:if>
 
