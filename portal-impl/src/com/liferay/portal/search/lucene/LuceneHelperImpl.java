@@ -702,48 +702,45 @@ public class LuceneHelperImpl implements LuceneHelper {
 			if (indexAccessor == null) {
 				indexAccessor = new IndexAccessorImpl(companyId);
 
-				_indexAccessors.put(companyId, indexAccessor);
-			}
-		}
+				if (isLoadIndexFromClusterEnabled()) {
+					InputStream inputStream = null;
 
-		if (!isLoadIndexFromClusterEnabled()) {
-			return indexAccessor;
-		}
-
-		synchronized (indexAccessor) {
-			InputStream inputStream = null;
-
-			try {
-				Address bootupAddress = selectBootupClusterAddress(
-					companyId, IndexAccessor.DEFAULT_LAST_GENERATION);
-
-				if (bootupAddress != null) {
-					inputStream = getLoadIndexesInputStreamFromCluster(
-						companyId, bootupAddress);
-
-					indexAccessor.loadIndex(inputStream);
-				}
-
-				indexAccessor.enableDumpIndex();
-			}
-			catch (Exception e) {
-				_log.error(
-					"Unable to load index for company " +
-						indexAccessor.getCompanyId(),
-					e);
-			}
-			finally {
-				if (inputStream != null) {
 					try {
-						inputStream.close();
+						Address bootupAddress = selectBootupClusterAddress(
+							companyId, IndexAccessor.DEFAULT_LAST_GENERATION);
+
+						if (bootupAddress != null) {
+							inputStream = getLoadIndexesInputStreamFromCluster(
+								companyId, bootupAddress);
+
+							indexAccessor.loadIndex(inputStream);
+						}
+
+						indexAccessor.enableDumpIndex();
 					}
-					catch (IOException ioe) {
+					catch (Exception e) {
 						_log.error(
-							"Unable to close input stream for company " +
+							"Unable to load index for company " +
 								indexAccessor.getCompanyId(),
-							ioe);
+							e);
+					}
+					finally {
+						if (inputStream != null) {
+							try {
+								inputStream.close();
+							}
+							catch (IOException ioe) {
+								_log.error(
+									"Unable to close input stream for " +
+										"company " +
+											indexAccessor.getCompanyId(),
+									ioe);
+							}
+						}
 					}
 				}
+
+				_indexAccessors.put(companyId, indexAccessor);
 			}
 		}
 
