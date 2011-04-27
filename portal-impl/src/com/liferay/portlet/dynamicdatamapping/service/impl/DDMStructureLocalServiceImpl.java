@@ -124,7 +124,7 @@ public class DDMStructureLocalServiceImpl
 		resourceLocalService.addResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), DDMStructure.class.getName(),
-			structure.getStructureKey(), false, addCommunityPermissions,
+			structure.getStructureId(), false, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -136,7 +136,7 @@ public class DDMStructureLocalServiceImpl
 		resourceLocalService.addModelResources(
 			structure.getCompanyId(), structure.getGroupId(),
 			structure.getUserId(), DDMStructure.class.getName(),
-			structure.getStructureKey(), communityPermissions,
+			structure.getStructureId(), communityPermissions,
 			guestPermissions);
 	}
 
@@ -151,8 +151,7 @@ public class DDMStructureLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			structure.getCompanyId(), DDMStructure.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL,
-			structure.getStructureKey());
+			ResourceConstants.SCOPE_INDIVIDUAL, structure.getStructureId());
 
 		// Structure links
 
