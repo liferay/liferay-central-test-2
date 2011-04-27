@@ -197,6 +197,10 @@ public class ATag extends IncludeTag {
 			writeDynamicAttributes(jspWriter);
 
 			jspWriter.write(">");
+
+			if (Validator.isNotNull(_label)) {
+				jspWriter.write(LanguageUtil.get(pageContext, _label));
+			}
 		}
 
 		return EVAL_BODY_INCLUDE;
