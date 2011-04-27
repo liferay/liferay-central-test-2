@@ -31,8 +31,8 @@ import java.io.Serializable;
 
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PreferencesValidator;
@@ -89,7 +89,7 @@ public class PortletPreferencesImpl
 	}
 
 	public Map<String, String[]> getMap() {
-		Map<String, String[]> map = new HashMap<String, String[]>();
+		Map<String, String[]> map = new ConcurrentHashMap<String, String[]>();
 
 		for (Map.Entry<String, Preference> entry :
 				getPreferences().entrySet()) {
@@ -314,7 +314,8 @@ public class PortletPreferencesImpl
 			if (_originalPreferences ==
 					Collections.<String, Preference>emptyMap()) {
 
-				_originalPreferences = new HashMap<String, Preference>();
+				_originalPreferences =
+					new ConcurrentHashMap<String, Preference>();
 			}
 
 			return _originalPreferences;
@@ -355,7 +356,7 @@ public class PortletPreferencesImpl
 
 	private Map<String, Preference> _getModifiedPreferences() {
 		if (_modifiedPreferences == null) {
-			_modifiedPreferences = new HashMap<String, Preference>();
+			_modifiedPreferences = new ConcurrentHashMap<String, Preference>();
 
 			for (Map.Entry<String, Preference> entry :
 					_originalPreferences.entrySet()) {
