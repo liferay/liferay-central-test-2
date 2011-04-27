@@ -256,7 +256,7 @@ public class ExtBuilderMojo extends AbstractMojo {
 			File srcFile, File destDir, String[] excludes, String[] includes)
 		throws Exception {
 
-		UnArchiver unArchiver = archiverManager.getUnArchiver(src);
+		UnArchiver unArchiver = archiverManager.getUnArchiver(srcFile);
 
 		unArchiver.setDestDirectory(destDir);
 		unArchiver.setSourceFile(srcFile);
