@@ -458,6 +458,10 @@ public class PropsValues {
 
 	public static final boolean DYNAMIC_DATA_LISTS_ENTRY_FORCE_AUTOGENERATE_ID = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_ENTRY_FORCE_AUTOGENERATE_ID));
 
+	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER = PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER);
+
+	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_VELOCITY = PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_VELOCITY);
+
 	public static final boolean DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID));
 
 	public static final String EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(PropsKeys.EDITOR_WYSIWYG_DEFAULT);
