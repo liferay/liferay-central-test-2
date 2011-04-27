@@ -11,6 +11,7 @@ body {
 
 body.portal-popup {
 	height: auto;
+	min-height: 0;
 }
 
 a {
