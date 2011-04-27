@@ -179,7 +179,7 @@ boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 
 											<a href="<%= portletDisplay.getURLBack() %>" title="<liferay-ui:message key="back" />"><liferay-ui:message key="back" /></a>
 										</span>
-									</c:if>									
+									</c:if>
 								</span>
 							</c:if>
 						</div>
