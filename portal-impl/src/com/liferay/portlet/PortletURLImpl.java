@@ -1200,8 +1200,10 @@ public class PortletURLImpl
 	protected void mergeRenderParameters() {
 		String namespace = getNamespace();
 
+		Layout layout = getLayout();
+
 		Map<String, String[]> renderParameters = RenderParametersPool.get(
-			_request, _layout.getPlid(), getPortlet().getPortletId());
+			_request, layout.getPlid(), getPortlet().getPortletId());
 
 		Iterator<Map.Entry<String, String[]>> itr =
 			renderParameters.entrySet().iterator();
