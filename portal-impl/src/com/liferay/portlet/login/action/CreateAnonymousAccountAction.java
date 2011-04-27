@@ -284,6 +284,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 			PortletRequest portletRequest, PortletResponse portletResponse,
 			String json)
 		throws Exception {
+
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			portletResponse);
 
