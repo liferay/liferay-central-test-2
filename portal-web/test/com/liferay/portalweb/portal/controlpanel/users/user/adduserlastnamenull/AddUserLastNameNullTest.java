@@ -77,13 +77,10 @@ public class AddUserLastNameNullTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//section/div/div/div/div[1]"));
-		assertEquals(RuntimeVariables.replace("Please enter a valid last name."),
-			selenium.getText("//fieldset[1]/div/div"));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

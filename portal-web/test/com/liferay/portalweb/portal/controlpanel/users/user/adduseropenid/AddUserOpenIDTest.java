@@ -74,7 +74,7 @@ public class AddUserOpenIDTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("openIdLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_openIdLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -93,7 +93,8 @@ public class AddUserOpenIDTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_125_openId", RuntimeVariables.replace("test"));
+		selenium.type("//input[@id='_125_openId']",
+			RuntimeVariables.replace("test"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -101,6 +102,6 @@ public class AddUserOpenIDTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
-		assertEquals("test", selenium.getValue("_125_openId"));
+		assertEquals("test", selenium.getValue("//input[@id='_125_openId']"));
 	}
 }

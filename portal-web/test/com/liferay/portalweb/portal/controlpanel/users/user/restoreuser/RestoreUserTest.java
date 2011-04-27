@@ -74,7 +74,7 @@ public class RestoreUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_125_active")) {
+						if (selenium.isVisible("_125_status")) {
 							break;
 						}
 					}
@@ -85,8 +85,8 @@ public class RestoreUserTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.select("_125_active",
-					RuntimeVariables.replace("label=No"));
+				selenium.select("_125_status",
+					RuntimeVariables.replace("label=Inactive"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");

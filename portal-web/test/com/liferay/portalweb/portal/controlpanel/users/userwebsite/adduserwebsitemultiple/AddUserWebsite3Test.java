@@ -77,7 +77,8 @@ public class AddUserWebsite3Test extends BaseTestCase {
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+				selenium.clickAt("_125_websitesLink",
+					RuntimeVariables.replace(""));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

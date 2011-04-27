@@ -52,7 +52,7 @@ public class AddPageBlogsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input")) {
+				if (selenium.isVisible("//span/input")) {
 					break;
 				}
 			}
@@ -63,7 +63,8 @@ public class AddPageBlogsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input", RuntimeVariables.replace("Blogs Test Page"));
+		selenium.type("//span/input",
+			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button[@id='save']",
 			RuntimeVariables.replace("Save"));

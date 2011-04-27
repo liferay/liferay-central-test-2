@@ -56,7 +56,7 @@ public class AddUserPassword1NullTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("passwordLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_passwordLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,14 +79,11 @@ public class AddUserPassword1NullTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_125_password2", RuntimeVariables.replace("test"));
 		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent("Please enter the same value again."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//section/div/div/div/div[1]"));
-		assertEquals(RuntimeVariables.replace(
-				"That password is invalid. Please enter in a different password."),
-			selenium.getText("//td/div[2]/div"));
+				"Please enter the same value again."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message equalTo']"));
 	}
 }

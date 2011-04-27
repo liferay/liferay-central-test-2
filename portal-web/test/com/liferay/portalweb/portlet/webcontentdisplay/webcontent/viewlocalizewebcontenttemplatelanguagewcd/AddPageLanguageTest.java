@@ -52,7 +52,7 @@ public class AddPageLanguageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input")) {
+				if (selenium.isVisible("//span/input")) {
 					break;
 				}
 			}
@@ -63,7 +63,8 @@ public class AddPageLanguageTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input", RuntimeVariables.replace("Language Test Page"));
+		selenium.type("//span/input",
+			RuntimeVariables.replace("Language Test Page"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("save", RuntimeVariables.replace(""));
 

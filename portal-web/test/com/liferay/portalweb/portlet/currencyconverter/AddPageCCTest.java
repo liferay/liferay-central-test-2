@@ -52,7 +52,7 @@ public class AddPageCCTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input")) {
+				if (selenium.isVisible("//span/input")) {
 					break;
 				}
 			}
@@ -63,7 +63,7 @@ public class AddPageCCTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input",
+		selenium.type("//span/input",
 			RuntimeVariables.replace("Currency Converter Test Page"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("save", RuntimeVariables.replace(""));

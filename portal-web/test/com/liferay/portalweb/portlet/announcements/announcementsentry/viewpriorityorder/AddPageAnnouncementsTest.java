@@ -52,7 +52,7 @@ public class AddPageAnnouncementsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input")) {
+				if (selenium.isVisible("//span/input")) {
 					break;
 				}
 			}
@@ -63,7 +63,7 @@ public class AddPageAnnouncementsTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input",
+		selenium.type("//span/input",
 			RuntimeVariables.replace("Announcements Test Page"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//button[@id='save']",

@@ -77,7 +77,7 @@ public class AddUserPhoneNumberNumberInvalidTest extends BaseTestCase {
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("phoneNumbersLink",
+				selenium.clickAt("_125_phoneNumbersLink",
 					RuntimeVariables.replace(""));
 				selenium.type("_125_phoneNumber0",
 					RuntimeVariables.replace("phone number"));
@@ -89,7 +89,7 @@ public class AddUserPhoneNumberNumberInvalidTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
+						"Your request failed to complete."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a valid phone number."),

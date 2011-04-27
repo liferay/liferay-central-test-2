@@ -92,7 +92,7 @@ public class DeleteUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("_125_active")) {
+						if (selenium.isVisible("_125_status")) {
 							break;
 						}
 					}
@@ -103,8 +103,8 @@ public class DeleteUserTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.select("_125_active",
-					RuntimeVariables.replace("label=No"));
+				selenium.select("_125_status",
+					RuntimeVariables.replace("label=Inactive"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
@@ -122,8 +122,8 @@ public class DeleteUserTest extends BaseTestCase {
 						"Your request completed successfully."),
 					selenium.getText("//section/div/div/div/div[1]"));
 				assertFalse(selenium.isElementPresent("link=selen01"));
-				selenium.select("_125_active",
-					RuntimeVariables.replace("label=Yes"));
+				selenium.select("_125_status",
+					RuntimeVariables.replace("label=Active"));
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace(""));
 

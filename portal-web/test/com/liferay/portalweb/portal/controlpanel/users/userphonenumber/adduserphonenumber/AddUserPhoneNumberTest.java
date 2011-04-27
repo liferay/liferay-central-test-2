@@ -77,7 +77,7 @@ public class AddUserPhoneNumberTest extends BaseTestCase {
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("phoneNumbersLink",
+				selenium.clickAt("_125_phoneNumbersLink",
 					RuntimeVariables.replace(""));
 				selenium.type("_125_phoneNumber0",
 					RuntimeVariables.replace("123-123-1234"));

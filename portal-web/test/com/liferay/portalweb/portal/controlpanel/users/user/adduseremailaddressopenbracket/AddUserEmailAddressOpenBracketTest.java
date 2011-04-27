@@ -60,15 +60,13 @@ public class AddUserEmailAddressOpenBracketTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
 		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent(
+				"Please enter a valid email address."));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//div[@class='portlet-msg-error']"));
 		assertEquals(RuntimeVariables.replace(
 				"Please enter a valid email address."),
-			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message email']"));
 	}
 }

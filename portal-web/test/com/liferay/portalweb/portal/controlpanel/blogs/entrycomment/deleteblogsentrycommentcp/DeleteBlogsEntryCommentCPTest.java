@@ -84,5 +84,8 @@ public class DeleteBlogsEntryCommentCPTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("0 Comments"),
 			selenium.getText("//span[@class='comments']"));
 		assertFalse(selenium.isTextPresent("Blogs Entry Comment Body"));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
 	}
 }

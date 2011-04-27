@@ -65,7 +65,7 @@ public class AddUserEmailAddressDuplicateTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("//div[@class='portlet-msg-error']"));
 		assertEquals(RuntimeVariables.replace(
 				"The email address you requested is already taken."),

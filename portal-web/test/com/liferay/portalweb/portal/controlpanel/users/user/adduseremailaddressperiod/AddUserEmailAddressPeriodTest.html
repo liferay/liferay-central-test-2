@@ -54,14 +54,19 @@
 	<td>testA</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>assertTextNotPresent</td>
+	<td>Please enter a valid email address.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>//input[@value='Save']</td>
 	<td>Save</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
+	<td>//div[@class='yui3-aui-form-validator-message email']</td>
+	<td>Please enter a valid email address.</td>
 </tr>
 
 </tbody></table>

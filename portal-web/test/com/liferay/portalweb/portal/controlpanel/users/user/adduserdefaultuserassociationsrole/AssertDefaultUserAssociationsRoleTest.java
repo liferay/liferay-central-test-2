@@ -78,7 +78,8 @@ public class AssertDefaultUserAssociationsRoleTest extends BaseTestCase {
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("rolesLink", RuntimeVariables.replace("Roles"));
+				selenium.clickAt("_125_rolesLink",
+					RuntimeVariables.replace("Roles"));
 				assertEquals(RuntimeVariables.replace("Administrator"),
 					selenium.getText(
 						"//div[@id='_125_rolesSearchContainerSearchContainer']/table/tbody/tr[3]/td[1]"));

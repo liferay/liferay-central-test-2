@@ -56,7 +56,7 @@ public class AddUserWebsiteUrlInvalidTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_websitesLink", RuntimeVariables.replace(""));
 		selenium.type("_125_websiteUrl0",
 			RuntimeVariables.replace("www.selenium01.com"));
 		selenium.saveScreenShotAndSource();
@@ -66,7 +66,7 @@ public class AddUserWebsiteUrlInvalidTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Please enter a valid URL."),
 			selenium.getText("//div[12]/div[1]"));

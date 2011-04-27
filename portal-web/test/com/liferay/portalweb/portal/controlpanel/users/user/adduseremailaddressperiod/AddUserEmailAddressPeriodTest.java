@@ -60,12 +60,13 @@ public class AddUserEmailAddressPeriodTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace("testA"));
 		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent(
+				"Please enter a valid email address."));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
+				"Please enter a valid email address."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message email']"));
 	}
 }

@@ -52,7 +52,7 @@ public class AddPageMBTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -63,7 +63,7 @@ public class AddPageMBTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input",
+		selenium.type("//span/input",
 			RuntimeVariables.replace(
 				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.saveScreenShotAndSource();

@@ -56,7 +56,7 @@ public class AddUserAddressZipNullTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +86,7 @@ public class AddUserAddressZipNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Please enter a valid zip."),
 			selenium.getText("//div[9]/div[1]"));

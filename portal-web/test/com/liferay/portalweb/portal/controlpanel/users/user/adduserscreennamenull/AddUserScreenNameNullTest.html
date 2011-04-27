@@ -59,19 +59,19 @@
 	<td>testA</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>assertTextNotPresent</td>
+	<td>This field is required.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div[1]</td>
-	<td>You have entered invalid data. Please try again.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//fieldset[1]/div/div</td>
-	<td>Please enter a valid screen name.</td>
+	<td>//div[@class='yui3-aui-form-validator-message required']</td>
+	<td>This field is required.</td>
 </tr>
 
 </tbody></table>

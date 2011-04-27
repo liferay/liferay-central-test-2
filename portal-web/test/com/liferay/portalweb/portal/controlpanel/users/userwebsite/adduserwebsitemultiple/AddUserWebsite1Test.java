@@ -77,7 +77,8 @@ public class AddUserWebsite1Test extends BaseTestCase {
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("websitesLink", RuntimeVariables.replace(""));
+				selenium.clickAt("_125_websitesLink",
+					RuntimeVariables.replace(""));
 				selenium.type("_125_websiteUrl0",
 					RuntimeVariables.replace("http://www.selenium01.com"));
 				selenium.saveScreenShotAndSource();

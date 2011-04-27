@@ -87,8 +87,7 @@ public class AddUserScreenNameDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have entered invalid data. Please try again.")) {
+				if (selenium.isTextPresent("Your request failed to complete.")) {
 					break;
 				}
 			}
@@ -100,7 +99,7 @@ public class AddUserScreenNameDuplicateTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"The screen name you requested is already taken."),

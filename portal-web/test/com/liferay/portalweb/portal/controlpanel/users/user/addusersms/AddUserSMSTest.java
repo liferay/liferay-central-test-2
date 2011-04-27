@@ -74,7 +74,7 @@ public class AddUserSMSTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("smsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_smsLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

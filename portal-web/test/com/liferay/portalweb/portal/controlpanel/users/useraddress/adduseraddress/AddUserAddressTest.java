@@ -77,7 +77,7 @@ public class AddUserAddressTest extends BaseTestCase {
 					RuntimeVariables.replace("User Name"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("addressesLink",
+				selenium.clickAt("_125_addressesLink",
 					RuntimeVariables.replace("Addresses"));
 				selenium.type("_125_addressStreet1_0",
 					RuntimeVariables.replace("123 Liferay Ln."));

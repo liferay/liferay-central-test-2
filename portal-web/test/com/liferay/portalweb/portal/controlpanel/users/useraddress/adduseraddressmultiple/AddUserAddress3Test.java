@@ -56,7 +56,7 @@ public class AddUserAddress3Test extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("addressesLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_addressesLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -74,7 +74,7 @@ public class AddUserCommentTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("commentsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("_125_commentsLink", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -93,7 +93,7 @@ public class AddUserCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("_125_comments",
+		selenium.type("//textarea[@id='_125_comments']",
 			RuntimeVariables.replace("This is a test comment."));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
@@ -103,6 +103,6 @@ public class AddUserCommentTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("This is a test comment.",
-			selenium.getValue("_125_comments"));
+			selenium.getValue("//textarea[@id='_125_comments']"));
 	}
 }

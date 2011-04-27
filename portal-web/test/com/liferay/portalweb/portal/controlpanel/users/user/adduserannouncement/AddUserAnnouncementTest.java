@@ -74,7 +74,8 @@ public class AddUserAnnouncementTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("announcementsLink", RuntimeVariables.replace(""));
+		selenium.clickAt("//a[@id='_125_announcementsLink']",
+			RuntimeVariables.replace(""));
 		selenium.clickAt("_125_announcementsTypegeneralEmailCheckbox",
 			RuntimeVariables.replace(""));
 		selenium.uncheck("_125_announcementsTypegeneralSmsCheckbox");

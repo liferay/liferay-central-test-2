@@ -51,7 +51,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("additionalEmailAddressesLink",
+		selenium.clickAt("_125_additionalEmailAddressesLink",
 			RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
@@ -96,7 +96,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			RuntimeVariables.replace("testuser01@selenium.com"));
 		selenium.saveScreenShotAndSource();
 		selenium.select("_125_emailAddressTypeId2",
-			RuntimeVariables.replace("label=E-mail 2"));
+			RuntimeVariables.replace("label=Email 2"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -105,7 +105,7 @@ public class AddUserAdditionalEmailAddress2Test extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div[1]"));
 		assertEquals("testuser01@selenium.com",
 			selenium.getValue("_125_emailAddressAddress1"));
-		assertEquals("E-mail 2",
+		assertEquals("Email 2",
 			selenium.getSelectedLabel("_125_emailAddressTypeId1"));
 	}
 }

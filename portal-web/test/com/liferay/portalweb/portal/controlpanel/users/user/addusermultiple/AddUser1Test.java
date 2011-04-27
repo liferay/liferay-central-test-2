@@ -80,7 +80,7 @@ public class AddUser1Test extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_125_lastName", RuntimeVariables.replace("nium01"));
 		selenium.saveScreenShotAndSource();
-		selenium.select("_125_suffixId", RuntimeVariables.replace("label=PhD."));
+		selenium.select("_125_suffixId", RuntimeVariables.replace("label=Phd."));
 		selenium.select("_125_birthdayMonth",
 			RuntimeVariables.replace("label=April"));
 		selenium.select("_125_birthdayDay", RuntimeVariables.replace("label=10"));

@@ -52,7 +52,7 @@ public class AddPageBookmarksTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input")) {
+				if (selenium.isElementPresent("//span/input")) {
 					break;
 				}
 			}
@@ -63,7 +63,8 @@ public class AddPageBookmarksTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input", RuntimeVariables.replace("Bookmarks Test Page"));
+		selenium.type("//span/input",
+			RuntimeVariables.replace("Bookmarks Test Page"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("save", RuntimeVariables.replace(""));
 
