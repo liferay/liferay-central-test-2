@@ -428,8 +428,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String emailAddress, long facebookId, String openId, Locale locale,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, boolean sendEmail,
-			boolean updateUserInformation, ServiceContext serviceContext)
+			int birthdayYear, String jobTitle, boolean updateUserInformation,
+			boolean sendEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -454,8 +454,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, sendEmail,
-			updateUserInformation, serviceContext);
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+			updateUserInformation, sendEmail, serviceContext);
 	}
 
 	public void setRoleUsers(long roleId, long[] userIds)

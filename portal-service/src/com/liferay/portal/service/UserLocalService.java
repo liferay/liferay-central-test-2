@@ -1595,7 +1595,9 @@ public interface UserLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates an "anonymous" user and starts the workflow.
+	* Updates a user account that was automatically created when a guest user
+	* participated in an action (e.g. posting a comment) and only provided his
+	* name and email address.
 	*
 	* @param creatorUserId the primary key of the creator
 	* @param companyId the primary key of the company the user belongs to
@@ -1638,8 +1640,8 @@ public interface UserLocalService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, boolean sendEmail,
-		boolean updateUserInformation,
+		java.lang.String jobTitle, boolean updateUserInformation,
+		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

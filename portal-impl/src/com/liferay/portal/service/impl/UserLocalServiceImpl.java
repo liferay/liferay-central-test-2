@@ -2769,7 +2769,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String openId, Locale locale, String firstName, String middleName,
 			String lastName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, boolean sendEmail, boolean updateUserInformation,
+			String jobTitle, boolean updateUserInformation, boolean sendEmail,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

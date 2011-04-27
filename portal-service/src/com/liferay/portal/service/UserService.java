@@ -211,8 +211,8 @@ public interface UserService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, boolean sendEmail,
-		boolean updateUserInformation,
+		java.lang.String jobTitle, boolean updateUserInformation,
+		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

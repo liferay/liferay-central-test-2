@@ -504,8 +504,8 @@ public class UserServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, boolean sendEmail,
-		boolean updateUserInformation,
+		java.lang.String jobTitle, boolean updateUserInformation,
+		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -514,8 +514,8 @@ public class UserServiceSoap {
 					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
-					birthdayDay, birthdayYear, jobTitle, sendEmail,
-					updateUserInformation, serviceContext);
+					birthdayDay, birthdayYear, jobTitle, updateUserInformation,
+					sendEmail, serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

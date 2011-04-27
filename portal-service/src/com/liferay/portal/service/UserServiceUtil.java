@@ -271,8 +271,8 @@ public class UserServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, boolean sendEmail,
-		boolean updateUserInformation,
+		java.lang.String jobTitle, boolean updateUserInformation,
+		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -281,7 +281,7 @@ public class UserServiceUtil {
 			password2, autoScreenName, screenName, emailAddress, facebookId,
 			openId, locale, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			sendEmail, updateUserInformation, serviceContext);
+			updateUserInformation, sendEmail, serviceContext);
 	}
 
 	public static void setRoleUsers(long roleId, long[] userIds)
