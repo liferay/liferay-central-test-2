@@ -107,21 +107,21 @@ public class ThemeMergeMojo extends AbstractMojo {
 
 		unArchiver.extract();
 
-		webappDirectory.mkdirs();
+		webappDir.mkdirs();
 
 		if (parentThemeArtifactId.equals("portal-web")) {
 			FileUtils.copyDirectory(
-				new File(workDir, "html/themes/_unstyled"), webappDirectory);
+				new File(workDir, "html/themes/_unstyled"), webappDir);
 
 			getLog().info(
-				"Copying html/themes/_unstyled to " + webappDirectory);
+				"Copying html/themes/_unstyled to " + webappDir);
 
 			if (!"_unstyled".equals(parentTheme)) {
 				FileUtils.copyDirectory(
-					new File(workDir, "html/themes/_styled"), webappDirectory);
+					new File(workDir, "html/themes/_styled"), webappDir);
 
 				getLog().info(
-					"Copying html/themes/_styled to " + webappDirectory);
+					"Copying html/themes/_styled to " + webappDir);
 			}
 
 			if (!"_unstyled".equals(parentTheme) &&
@@ -129,23 +129,23 @@ public class ThemeMergeMojo extends AbstractMojo {
 
 				FileUtils.copyDirectory(
 					new File(workDir, "html/themes/" + parentTheme),
-					webappDirectory);
+					webappDir);
 
 				getLog().info(
 					"Copying html/themes/" + parentTheme + " to " +
-						webappDirectory);
+						webappDir);
 			}
 		}
 		else {
-			FileUtils.copyDirectory(workDir, webappDirectory);
+			FileUtils.copyDirectory(workDir, webappDir);
 		}
 
 		File initFile = new File(
-			webappDirectory, "templates/init." + themeType);
+			webappDir, "templates/init." + themeType);
 
 		FileUtils.deleteQuietly(initFile);
 
-		File templatesDirectory = new File(webappDirectory, "templates/");
+		File templatesDirectory = new File(webappDir, "templates/");
 
 		String[] extensions = null;
 
@@ -220,7 +220,7 @@ public class ThemeMergeMojo extends AbstractMojo {
 	 *			  "${project.build.directory}/${project.build.finalName}"
 	 * @required
 	 */
-	private File webappDirectory;
+	private File webappDir;
 
 	/**
 	 * @parameter expression="${project.build.directory}/liferay-theme/work"
