@@ -181,24 +181,28 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getStructureId()) %>">
-
-	<% JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(scopeGroupId, displayTerms.getStructureId()); %>
-
 	<aui:input name="<%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="showing-content-filtered-by-structure" /> <i><%= structure.getName() %></i>  <a href="javascript: <portlet:namespace />addArticle();" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
+
+		<%
+		JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(scopeGroupId, displayTerms.getStructureId());
+		%>
+
+		<liferay-ui:message argument="<%= structure.getName() %>" key="showing-content-filtered-by-structure-x" /> <a href="javascript:<portlet:namespace />addArticle();"><liferay-ui:message key="add-a-new-structure" /></a>
 	</div>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(displayTerms.getTemplateId()) %>">
-
-	<% JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(scopeGroupId, displayTerms.getTemplateId());%>
-
 	<aui:input name="<%= displayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="showing-content-filtered-by-template" /> <i><%= template.getName() %></i> <a href="javascript: <portlet:namespace />addArticle();" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
+
+		<%
+		JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(scopeGroupId, displayTerms.getTemplateId());
+		%>
+
+		<liferay-ui:message argument="<%= template.getName() %>" key="showing-content-filtered-by-template-x" /> <a href="javascript:<portlet:namespace />addArticle();"><liferay-ui:message key="add-a-new-template" /></a>
 	</div>
 </c:if>
 

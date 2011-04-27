@@ -30,28 +30,28 @@ Map<String, PortletURL> addArticleURLs = getAddArticleURLs(renderRequest, render
 			<%
 			for (Map.Entry<String, PortletURL> entry : addArticleURLs.entrySet()) {
 				String className = entry.getKey();
+
 				String message = "basic-web-content";
 
 				int pos = className.indexOf(_CLASSNAME_SEPARATOR);
 
 				if (pos != -1) {
 					message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
+
 					className = className.substring(0, pos);
 				}
+
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
 				PortletURL addArticleURL = entry.getValue();
 
 				addArticleURL.setParameter("groupId", String.valueOf(scopeGroupId));
-
-				String addArticleURLString = addArticleURL.toString();
-
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 			%>
 
 				<liferay-ui:icon
 					message='<%= message %>'
 					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
-					url='<%= addArticleURLString %>'
+					url="<%= addArticleURL.toString() %>"
 				/>
 
 			<%
@@ -73,8 +73,7 @@ public PortletURL getAddArticleURL(RenderRequest renderRequest, RenderResponse r
 
 		if (addArticleURL != null) {
 			addArticleURL.setWindowState(LiferayWindowState.MAXIMIZED);
-
-			addArticleURL.setPortletMode(javax.portlet.PortletMode.VIEW);
+			addArticleURL.setPortletMode(PortletMode.VIEW);
 
 			addArticleURL.setParameter("struts_action", "/journal/edit_article");
 
@@ -97,17 +96,17 @@ public Map<String, PortletURL> getAddArticleURLs(RenderRequest renderRequest, Re
 
 	Map<String, PortletURL> addArticleURLs = new TreeMap<String, PortletURL>();
 
-	List<JournalStructure> journalStructures = JournalStructureLocalServiceUtil.getStructures(themeDisplay.getScopeGroupId());
+	List<JournalStructure> structures = JournalStructureLocalServiceUtil.getStructures(themeDisplay.getScopeGroupId());
 
 	PortletURL addArticleURL = getAddArticleURL(renderRequest, renderResponse, null);
 
 	addArticleURLs.put(JournalArticle.class.getName(), addArticleURL);
 
-	for (JournalStructure journalStructure : journalStructures) {
-		addArticleURL = getAddArticleURL(renderRequest, renderResponse, journalStructure.getStructureId());
+	for (JournalStructure structure : structures) {
+		addArticleURL = getAddArticleURL(renderRequest, renderResponse, structure.getStructureId());
 
 		if (addArticleURL != null) {
-			addArticleURLs.put(JournalArticle.class.getName() + _CLASSNAME_SEPARATOR + journalStructure.getName(), addArticleURL);
+			addArticleURLs.put(JournalArticle.class.getName() + _CLASSNAME_SEPARATOR + structure.getName(), addArticleURL);
 		}
 	}
 

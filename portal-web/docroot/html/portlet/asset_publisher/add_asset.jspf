@@ -41,6 +41,8 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 					className = className.substring(0, pos);
 				}
 
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
+
 				PortletURL addPortletURL = entry.getValue();
 
 				addPortletURL.setParameter("groupId", String.valueOf(groupId));
@@ -51,14 +53,12 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
 
 				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 820}, id: '" + renderResponse.getNamespace() + "', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri:'" + addPortletURLString + "'});";
-
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 			%>
 
 				<liferay-ui:icon
 					message="<%= message %>"
 					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
-					url='<%= taglibEditURL %>'
+					url="<%= taglibEditURL %>"
 				/>
 
 			<%
