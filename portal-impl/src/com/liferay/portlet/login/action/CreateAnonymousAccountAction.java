@@ -258,15 +258,15 @@ public class CreateAnonymousAccountAction extends PortletAction {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = null;
-		boolean sendEmail = true;
 		boolean updateUserInformation = false;
+		boolean sendEmail = true;
 
 		User user = UserServiceUtil.updateIncompleteUser(
 			themeDisplay.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			sendEmail, updateUserInformation, serviceContext);
+			updateUserInformation, sendEmail, serviceContext);
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
