@@ -14,6 +14,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.taglib.util.IncludeTag;
@@ -61,7 +63,8 @@ public class RatingsTag extends IncludeTag {
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
-		_numberOfStars = 5;
+		_numberOfStars = Integer.valueOf(
+			PropsUtil.get(PropsKeys.RATINGS_DEFAULT_NUMBER_OF_STARS));
 		_ratingsEntry = null;
 		_ratingsStats = null;
 		_setRatingsEntry = false;
@@ -102,7 +105,8 @@ public class RatingsTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private int _numberOfStars = 5;
+	private int _numberOfStars = Integer.valueOf(
+		PropsUtil.get(PropsKeys.RATINGS_DEFAULT_NUMBER_OF_STARS));
 	private RatingsEntry _ratingsEntry;
 	private RatingsStats _ratingsStats;
 	private boolean _setRatingsEntry;
