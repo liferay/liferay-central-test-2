@@ -225,6 +225,10 @@ public class CreateAnonymousAccountAction extends PortletAction {
 			request, "user_added_password", user.getPasswordUnencrypted());
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
 	protected JSONObject updateIncompleteUser(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -274,10 +278,6 @@ public class CreateAnonymousAccountAction extends PortletAction {
 		}
 
 		return jsonObject;
-	}
-
-	protected boolean isCheckMethodOnProcessAction() {
-		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
 	protected void writeJSON(

@@ -34,7 +34,7 @@ boolean anonymousAccount = ParamUtil.getBoolean(request, "anonymousAccount");
 
 		<aui:form action="<%= updateIncompleteUserURL %>" method="post" name="fm">
 			<div class="portlet-msg-success">
-				<liferay-ui:message key="your-comment-has-already-been-posted-would-you-like-to-create-an-account-with-the-provided-information" />
+				<liferay-ui:message key="your-comment-has-already-been-posted.-would-you-like-to-create-an-account-with-the-provided-information" />
 			</div>
 
 			<aui:button onClick='<%= renderResponse.getNamespace() + "activateAccount();" %>' value="activate-account" />
