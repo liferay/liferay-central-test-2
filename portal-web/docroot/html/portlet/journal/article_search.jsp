@@ -187,7 +187,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 	<aui:input name="<%= displayTerms.STRUCTURE_ID %>" type="hidden" value="<%= displayTerms.getStructureId() %>" />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="showing-content-filtered-by-structure" /> <i><%= structure.getName() %></i>  <a href="javascript:;" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
+		<liferay-ui:message key="showing-content-filtered-by-structure" /> <i><%= structure.getName() %></i>  <a href="javascript: <portlet:namespace />addArticle();" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
 	</div>
 </c:if>
 
@@ -198,30 +198,24 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 	<aui:input name="<%= displayTerms.TEMPLATE_ID %>" type="hidden" value="<%= displayTerms.getTemplateId() %>" />
 
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="showing-content-filtered-by-template" /> <i><%= template.getName() %></i> <a href="javascript:;" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
+		<liferay-ui:message key="showing-content-filtered-by-template" /> <i><%= template.getName() %></i> <a href="javascript: <portlet:namespace />addArticle();" id="<portlet:namespace />addArticleId">(<liferay-ui:message key="add-new" />)</a><br />
 	</div>
 </c:if>
 
-<aui:script use="aui-base,liferay-portlet-journal">	
-	var addArticle = A.one('#<portlet:namespace />addArticleId');
+<aui:script>
+	function <portlet:namespace />addArticle() {
+		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= displayTerms.getStructureId() %>" /><portlet:param name="templateId" value="<%= displayTerms.getTemplateId() %>" /></liferay-portlet:renderURL>';
 
-	if (addArticle) {
-		addArticle.on(
-			'click',
-			function(event) {
-				var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.JOURNAL %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= displayTerms.getStructureId() %>" /><portlet:param name="templateId" value="<%= displayTerms.getTemplateId() %>" /></liferay-portlet:renderURL>';
+		if (toggle_id_journal_article_searchcurClickValue == 'basic') {
+			url += '&<portlet:namespace /><%= displayTerms.TITLE %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
 
-				if (toggle_id_journal_article_searchcurClickValue == 'basic') {
-					url += '&<portlet:namespace /><%= displayTerms.TITLE %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
+			submitForm(document.hrefFm, url);
+		}
+		else {
+			document.<portlet:namespace />fm.method = 'post';
 
-					submitForm(document.hrefFm, url);
-				}
-				else {
-					document.<portlet:namespace />fm.method = 'post';
-					submitForm(document.<portlet:namespace />fm, url);
-				}
-			}
-		);
+			submitForm(document.<portlet:namespace />fm, url);
+		}
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">

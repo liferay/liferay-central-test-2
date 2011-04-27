@@ -22,8 +22,8 @@
 
 .portlet-journal {
 	.add-article-selector {
-		float: left;
-		margin-right: 1em;
+		display: inline-block;
+		vertical-align: top;
 
 		.lfr-meta-actions {
 			padding-top: 0;
