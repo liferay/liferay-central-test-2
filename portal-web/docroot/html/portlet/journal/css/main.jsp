@@ -316,7 +316,7 @@
 	}
 
 	.portlet-msg-info {
-    	clear:both;
+		clear:both;
 	}
 
 	.structure-controls {
