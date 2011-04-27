@@ -151,6 +151,7 @@
 				<xs:element name="role-type" minOccurs="0" default="regular">
 					<xs:simpleType>
 						<xs:restriction base="xs:string">
+							<xs:enumeration value="community" />
 							<xs:enumeration value="regular" />
 							<xs:enumeration value="organization" />
 							<xs:enumeration value="site" />
