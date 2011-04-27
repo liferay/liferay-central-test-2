@@ -30,12 +30,14 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 			<%
 			for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 				String className = entry.getKey();
-				String message = "model.resource." + className;
+
+				String message = ResourceActionsUtil.getModelResourceNamePrefix() + className;
 
 				int pos = className.indexOf(_CLASSNAME_SEPARATOR);
 
 				if (pos != -1) {
 					message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
+
 					className = className.substring(0, pos);
 				}
 
