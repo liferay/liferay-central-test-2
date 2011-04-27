@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.dao.search;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderResponse;
 
 /**
@@ -38,12 +39,16 @@ public class RowChecker {
 
 	public static final String VALIGN = "middle";
 
-	public RowChecker(RenderResponse renderResponse) {
-		_renderResponse = renderResponse;
+	public RowChecker(PortletResponse portletResponse) {
+		_portletResponse = portletResponse;
 
-		_allRowIds = _renderResponse.getNamespace() + ALL_ROW_IDS;
-		_formName = _renderResponse.getNamespace() + FORM_NAME;
-		_rowIds = _renderResponse.getNamespace() + ROW_IDS;
+		_allRowIds = _portletResponse.getNamespace() + ALL_ROW_IDS;
+		_formName = _portletResponse.getNamespace() + FORM_NAME;
+		_rowIds = _portletResponse.getNamespace() + ROW_IDS;
+	}
+
+	public RowChecker(RenderResponse renderResponse) {
+		this((PortletResponse)renderResponse);
 	}
 
 	public String getAlign() {
@@ -170,8 +175,8 @@ public class RowChecker {
 			return StringPool.BLANK;
 		}
 		else {
-			if (!value.startsWith(_renderResponse.getNamespace())) {
-				value = _renderResponse.getNamespace() + value;
+			if (!value.startsWith(_portletResponse.getNamespace())) {
+				value = _portletResponse.getNamespace() + value;
 			}
 
 			return value;
@@ -183,7 +188,7 @@ public class RowChecker {
 	private int _colspan = COLSPAN;
 	private String _cssClass = CSS_CLASS;
 	private String _formName;
-	private RenderResponse _renderResponse;
+	private PortletResponse _portletResponse;
 	private String _rowIds;
 	private String _valign = VALIGN;
 

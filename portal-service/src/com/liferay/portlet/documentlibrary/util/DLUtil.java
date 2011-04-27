@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -36,6 +37,11 @@ import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelCreateDateComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelNameComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelReadCountComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelSizeComparator;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -242,6 +248,39 @@ public class DLUtil {
 
 	public static String getGenericName(String extension) {
 		return _instance._getGenericName(extension);
+	}
+
+	public static OrderByComparator getEntryOrderByComparator(
+		String orderByCol, String orderByType) {
+
+		boolean orderByAsc = true;
+
+		if (orderByType.equals("desc")) {
+			orderByAsc = false;
+		}
+
+		OrderByComparator orderByComparator = null;
+
+		if (orderByCol.equals("creationDate")) {
+			orderByComparator = new RepositoryModelCreateDateComparator(
+				orderByAsc);
+		}
+		else if (orderByCol.equals("modifiedDate")) {
+			orderByComparator = new RepositoryModelModifiedDateComparator(
+				orderByAsc);
+		}
+		else if (orderByCol.equals("readCount")) {
+			orderByComparator = new RepositoryModelReadCountComparator(
+				orderByAsc);
+		}
+		else if (orderByCol.equals("size")) {
+			orderByComparator = new RepositoryModelSizeComparator(orderByAsc);
+		}
+		else {
+			orderByComparator = new RepositoryModelNameComparator(orderByAsc);
+		}
+
+		return orderByComparator;
 	}
 
 	public static String getTempFileId(long id, String version) {
