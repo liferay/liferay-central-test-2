@@ -2726,9 +2726,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Updates a user account that was automatically created when a non logged
-     * in user participated in the portal, for example posting a comment, and
-     * providing only his name and email.
+	 * Updates a user account that was automatically created when a guest user
+     * participated in an action (e.g. posting a comment) and only provided his
+	 * name and email address.
 	 *
 	 * @param  creatorUserId the primary key of the creator
 	 * @param  companyId the primary key of the company the user belongs to
