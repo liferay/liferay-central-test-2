@@ -14,15 +14,8 @@
 
 package com.liferay.portlet.dynamicdatalists.util;
 
-import com.liferay.portal.kernel.templateparser.TemplateContext;
-import com.liferay.portal.kernel.templateparser.TemplateNode;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ContentUtil;
-import com.liferay.util.PwdGenerator;
-
-import java.util.List;
 
 /**
  * @author Marcellus Tavares
@@ -37,24 +30,6 @@ public class VelocityTemplateParser extends
 
 	protected String getErrorTemplateId() {
 		return PropsValues.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_VELOCITY;
-	}
-
-	protected List<TemplateNode> getTemplateNodes(Element element)
-		throws Exception {
-
-		return super.getTemplateNodes(element);
-	}
-
-	protected void populateTemplateContext(TemplateContext templateContext)
-		throws Exception {
-
-		super.populateTemplateContext(templateContext);
-
-		String randomNamespace =
-			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
-				StringPool.UNDERLINE;
-
-		templateContext.put("randomNamespace", randomNamespace);
 	}
 
 }
