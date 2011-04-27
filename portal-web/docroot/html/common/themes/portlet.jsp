@@ -182,7 +182,6 @@ boolean wsrp = ParamUtil.getBoolean(request, "wsrp");
 									</c:if>									
 								</span>
 							</c:if>
-
 						</div>
 					</c:if>
 
