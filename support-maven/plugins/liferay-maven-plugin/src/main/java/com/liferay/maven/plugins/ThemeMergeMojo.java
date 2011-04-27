@@ -113,35 +113,30 @@ public class ThemeMergeMojo extends AbstractMojo {
 			FileUtils.copyDirectory(
 				new File(workDir, "html/themes/_unstyled"), webappDir);
 
-			getLog().info(
-				"Copying html/themes/_unstyled to " + webappDir);
+			getLog().info("Copying html/themes/_unstyled to " + webappDir);
 
 			if (!"_unstyled".equals(parentTheme)) {
 				FileUtils.copyDirectory(
 					new File(workDir, "html/themes/_styled"), webappDir);
 
-				getLog().info(
-					"Copying html/themes/_styled to " + webappDir);
+				getLog().info("Copying html/themes/_styled to " + webappDir);
 			}
 
 			if (!"_unstyled".equals(parentTheme) &&
 				!"_styled".equals(parentTheme)) {
 
 				FileUtils.copyDirectory(
-					new File(workDir, "html/themes/" + parentTheme),
-					webappDir);
+					new File(workDir, "html/themes/" + parentTheme), webappDir);
 
 				getLog().info(
-					"Copying html/themes/" + parentTheme + " to " +
-						webappDir);
+					"Copying html/themes/" + parentTheme + " to " + webappDir);
 			}
 		}
 		else {
 			FileUtils.copyDirectory(workDir, webappDir);
 		}
 
-		File initFile = new File(
-			webappDir, "templates/init." + themeType);
+		File initFile = new File(webappDir, "templates/init." + themeType);
 
 		FileUtils.deleteQuietly(initFile);
 
