@@ -729,12 +729,12 @@ Liferay.Service.registerClass(
 Liferay.Service.register("Liferay.Service.DDL", "com.liferay.portlet.dynamicdatalists.service");
 
 Liferay.Service.registerClass(
-	Liferay.Service.DDL, "DDLEntry",
+	Liferay.Service.DDL, "DDLRecordSet",
 	{
-		addEntry: true,
-		deleteEntry: true,
-		getEntry: true,
-		updateEntry: true
+		addRecordSet: true,
+		deleteRecordSet: true,
+		getRecordSet: true,
+		updateRecordSet: true
 	}
 );
 

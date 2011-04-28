@@ -1658,9 +1658,21 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryModelImpl">
+	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordModelImpl">
 		<attributes>
-			<id name="entryId" />
+			<id name="recordId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="recordSetId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetModelImpl">
+		<attributes>
+			<id name="recordSetId" />
 			<basic name="uuid">
 				<column name="UUID_" />
 			</basic>
@@ -1675,24 +1687,12 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="DDMStructureId" />
-			<basic name="entryKey" />
+			<basic name="recordSetKey" />
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryItemModelImpl">
-		<attributes>
-			<id name="entryItemId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="entryId" />
-			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentModelImpl">
@@ -3379,12 +3379,12 @@
 		<table name="DLFolder" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryImpl" name="DDLEntry">
-		<table name="DDLEntry" />
+	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordImpl" name="DDLRecord">
+		<table name="DDLRecord" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLEntryItemImpl" name="DDLEntryItem">
-		<table name="DDLEntryItem" />
+	<entity class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetImpl" name="DDLRecordSet">
+		<table name="DDLRecordSet" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" name="DDMContent">
