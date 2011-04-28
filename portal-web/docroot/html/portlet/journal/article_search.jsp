@@ -189,7 +189,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 		JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(scopeGroupId, displayTerms.getStructureId());
 		%>
 
-		<liferay-ui:message arguments="<%= structure.getName() %>" key="showing-content-filtered-by-structure-x" /> <a href="javascript:<portlet:namespace />addArticle();"><liferay-ui:message key="add-a-new-structure" /></a>
+		<liferay-ui:message arguments="<%= structure.getName() %>" key="showing-content-filtered-by-structure-x" /> <a href="javascript:<portlet:namespace />addArticle();"><liferay-ui:message key="add-a-new-article" /></a>
 	</div>
 </c:if>
 
@@ -202,7 +202,7 @@ if (portletName.equals(PortletKeys.JOURNAL)) {
 		JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(scopeGroupId, displayTerms.getTemplateId());
 		%>
 
-		<liferay-ui:message arguments="<%= template.getName() %>" key="showing-content-filtered-by-template-x" /> <a href="javascript:<portlet:namespace />addArticle();"><liferay-ui:message key="add-a-new-template" /></a>
+		<liferay-ui:message arguments="<%= template.getName() %>" key="showing-content-filtered-by-template-x" /> <a href="javascript:<portlet:namespace />addArticle();"><liferay-ui:message key="add-a-new-article" /></a>
 	</div>
 </c:if>
 
