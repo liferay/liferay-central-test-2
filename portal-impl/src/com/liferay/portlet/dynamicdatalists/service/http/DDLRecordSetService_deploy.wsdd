@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
-	<service name="PortletDDL_DDLRecordSetService" provider="java:RPC" style="rpc" use="encoded">
+	<service name="Portlet_DDL_DDLRecordSetService" provider="java:RPC" style="rpc" use="encoded">
 		<typeMapping xmlns:ns="http://model.dynamicdatalists.portlet.liferay.com" qname="ns:DDLRecordSetSoap" type="java:com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<operation xmlns:operNS="urn:http.service.dynamicdatalists.portlet.liferay.com" name="deleteRecordSet" qname="operNS:deleteRecordSet" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="recordSetId" type="tns:long"></parameter>
@@ -23,7 +23,7 @@
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="DDLRecordSetServiceSoap" />
 		<parameter name="wsdlServiceElement" value="DDLRecordSetServiceSoapService" />
-		<parameter name="wsdlServicePort" value="PortletDDL_DDLRecordSetService" />
+		<parameter name="wsdlServicePort" value="Portlet_DDL_DDLRecordSetService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.dynamicdatalists.portlet.liferay.com" />
 	</service>
 </deployment>
