@@ -329,6 +329,8 @@ public interface PropsKeys {
 
 	public static final String COMBO_CHECK_TIMESTAMP = "combo.check.timestamp";
 
+	public static final String COMBO_CHECK_TIMESTAMP_INTERVAL = "combo.check.timestamp.interval";
+
 	public static final String COMMUNITIES_CONTROL_PANEL_MEMBERS_VISIBLE = "communities.control.panel.members.visible";
 
 	public static final String COMMUNITIES_EMAIL_FROM_ADDRESS = "communities.email.from.address";

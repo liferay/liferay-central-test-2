@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,6 +31,7 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -40,6 +42,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Eduardo Lundgren
+ * @author Edward Han
  */
 public class ComboServlet extends HttpServlet {
 
@@ -61,33 +64,49 @@ public class ComboServlet extends HttpServlet {
 
 		String extension = FileUtil.getExtension(firstModulePath);
 
-		String p = ParamUtil.getString(request, "p");
+		Set<String> modulePathsSet = null;
 
-		String minifierType = ParamUtil.getString(request, "minifierType");
+		byte[][] bytesArray = null;
 
-		if (Validator.isNull(minifierType)) {
-			minifierType = "js";
+		if (!PropsValues.COMBO_CHECK_TIMESTAMP) {
+			modulePathsSet = SetUtil.fromArray(modulePaths);
 
-			if (extension.equalsIgnoreCase(_CSS_EXTENSION)) {
-				minifierType = "css";
-			}
+			bytesArray = _fileContentSets.get(modulePathsSet);
 		}
 
-		int length = modulePaths.length;
+		if (bytesArray == null) {
+			String p = ParamUtil.getString(request, "p");
 
-		byte[][] bytesArray = new byte[length][];
+			String minifierType = ParamUtil.getString(request, "minifierType");
 
-		for (String modulePath : modulePaths) {
-			byte[] bytes = new byte[0];
+			if (Validator.isNull(minifierType)) {
+				minifierType = "js";
 
-			if (Validator.isNotNull(modulePath)) {
-				modulePath = StringUtil.replaceFirst(
-					p.concat(modulePath), contextPath, StringPool.BLANK);
-
-				bytes = getFileContent(modulePath, minifierType);
+				if (extension.equalsIgnoreCase(_CSS_EXTENSION)) {
+					minifierType = "css";
+				}
 			}
 
-			bytesArray[--length] = bytes;
+			int length = modulePaths.length;
+
+			bytesArray = new byte[length][];
+
+			for (String modulePath : modulePaths) {
+				byte[] bytes = new byte[0];
+
+				if (Validator.isNotNull(modulePath)) {
+					modulePath = StringUtil.replaceFirst(
+						p.concat(modulePath), contextPath, StringPool.BLANK);
+
+					bytes = getFileContent(modulePath, minifierType);
+				}
+
+				bytesArray[--length] = bytes;
+			}
+
+			if (modulePathsSet != null) {
+				_fileContentSets.put(modulePathsSet, bytesArray);
+			}
 		}
 
 		String contentType = ContentTypes.TEXT_JAVASCRIPT;
@@ -162,7 +181,12 @@ public class ComboServlet extends HttpServlet {
 		File file = getFile(path);
 
 		if ((fileContentBag != null) && PropsValues.COMBO_CHECK_TIMESTAMP) {
+			long currentTime = System.currentTimeMillis();
+
+			long elapsedTime = currentTime - fileContentBag._lastModified;
+
 			if ((file != null) &&
+				(elapsedTime <= PropsValues.COMBO_CHECK_TIMESTAMP_INTERVAL) &&
 				(file.lastModified() == fileContentBag._lastModified)) {
 
 				return fileContentBag._fileContent;
@@ -219,6 +243,9 @@ public class ComboServlet extends HttpServlet {
 
 	private ConcurrentMap<String, FileContentBag> _fileContents =
 		new ConcurrentHashMap<String, FileContentBag>();
+
+	private ConcurrentMap<Set<String>, byte[][]> _fileContentSets =
+		new ConcurrentHashMap<Set<String>, byte[][]>();
 
 	private static class FileContentBag {
 
