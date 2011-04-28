@@ -113,24 +113,18 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 				orderByType = orderByColumn.substring(columnPos + 1);
 			}
 
-			String patternString;
-
 			if (useOriginalColumnNames) {
-				patternString = "(\\S+) as \\Q".concat(
+				String patternString = "(\\S+) as \\Q".concat(
 					orderByColumnName).concat("\\E\\W");
-			}
-			else {
-				patternString = "\\Q".concat(orderByColumnName).concat(
-					"\\E as (\\w+)");
-			}
 
-			Pattern pattern = Pattern.compile(
-				patternString, Pattern.CASE_INSENSITIVE);
+				Pattern pattern = Pattern.compile(
+					patternString, Pattern.CASE_INSENSITIVE);
 
-			Matcher matcher = pattern.matcher(selectFrom);
+				Matcher matcher = pattern.matcher(selectFrom);
 
-			if (matcher.find()) {
-				orderByColumnName = matcher.group(1);
+				if (matcher.find()) {
+					orderByColumnName = matcher.group(1);
+				}
 			}
 
 			orderByColumns[i] =
