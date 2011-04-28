@@ -32,12 +32,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jruby.Ruby;
-import org.jruby.RubyInstanceConfig.CompileMode;
 import org.jruby.RubyInstanceConfig;
+import org.jruby.RubyInstanceConfig.CompileMode;
+import org.jruby.embed.LocalContextScope;
+import org.jruby.embed.ScriptingContainer;
 import org.jruby.exceptions.RaiseException;
-import org.jruby.internal.runtime.GlobalVariables;
-import org.jruby.javasupport.JavaEmbedUtils;
 
 /**
  * @author Alberto Montero
@@ -48,7 +47,10 @@ public class RubyExecutor extends BaseScriptingExecutor {
 	public static final String LANGUAGE = "ruby";
 
 	public RubyExecutor() {
-		RubyInstanceConfig rubyInstanceConfig = new RubyInstanceConfig();
+		_ruby = new ScriptingContainer(LocalContextScope.THREADSAFE);
+
+		RubyInstanceConfig rubyInstanceConfig =
+			_ruby.getProvider().getRubyInstanceConfig();
 
 		rubyInstanceConfig.setLoader(PortalClassLoaderUtil.getClassLoader());
 
@@ -77,7 +79,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			"file:" + _basePath +
 				"WEB-INF/lib/ruby-gems.jar!/gems/haml-3.0.25/lib");
 
-		_ruby = JavaEmbedUtils.initialize(_loadPaths, rubyInstanceConfig);
+		rubyInstanceConfig.setLoadPaths(_loadPaths);
 
 		_ruby.setCurrentDirectory(_basePath);
 	}
@@ -114,12 +116,13 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		}
 
 		try {
-			RubyInstanceConfig rubyInstanceConfig = _ruby.getInstanceConfig();
+			RubyInstanceConfig rubyInstanceConfig =
+				_ruby.getProvider().getRubyInstanceConfig();
 
 			rubyInstanceConfig.setCurrentDirectory(_basePath);
 			rubyInstanceConfig.setLoadPaths(_loadPaths);
 
-			GlobalVariables globalVariables = _ruby.getGlobalVariables();
+//			GlobalVariables globalVariables = _ruby.getGlobalVariables();
 
 			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
 				String inputName = entry.getKey();
@@ -129,18 +132,18 @@ public class RubyExecutor extends BaseScriptingExecutor {
 					inputName = StringPool.DOLLAR + inputName;
 				}
 
-				BeanGlobalVariable beanGlobalVariable = new BeanGlobalVariable(
-					_ruby, inputObject, inputObject.getClass());
+//				BeanGlobalVariable beanGlobalVariable = new BeanGlobalVariable(
+//					_ruby, inputObject, inputObject.getClass());
 
-				globalVariables.define(inputName, beanGlobalVariable);
+				_ruby.put(inputName, inputObject);
 			}
 
 			if (scriptFile != null) {
-				_ruby.runFromMain(
+				_ruby.runScriptlet(
 					new FileInputStream(scriptFile), scriptFile.toString());
 			}
 			else {
-				_ruby.evalScriptlet(script);
+				_ruby.runScriptlet(script);
 			}
 
 			if (outputNames == null) {
@@ -150,7 +153,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			Map<String, Object> outputObjects = new HashMap<String, Object>();
 
 			for (String outputName : outputNames) {
-				outputObjects.put(outputName, globalVariables.get(outputName));
+				outputObjects.put(outputName, _ruby.get(outputName));
 			}
 
 			return outputObjects;
@@ -162,9 +165,6 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		catch (FileNotFoundException fnfe) {
 			throw new ScriptingException(fnfe);
 		}
-		finally {
-			JavaEmbedUtils.terminate(_ruby);
-		}
 	}
 
 	private static final String _COMPILE_MODE_FORCE = "force";
@@ -173,6 +173,6 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 	private String _basePath;
 	private List<String> _loadPaths;
-	private Ruby _ruby;
+	private ScriptingContainer _ruby;
 
 }
