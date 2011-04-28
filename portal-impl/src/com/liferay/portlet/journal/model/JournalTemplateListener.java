@@ -14,12 +14,10 @@
 
 package com.liferay.portlet.journal.model;
 
-import com.liferay.portal.kernel.cache.MultiVMKeyPoolUtil;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-
-import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 
 /**
  * @author Brian Wing Shun Chan
@@ -49,8 +47,7 @@ public class JournalTemplateListener
 
 		// Velocity cache
 
-		MultiVMKeyPoolUtil.remove(
-			StringResourceRepository.class.getName(),
+		LiferayResourceCacheUtil.remove(
 			template.getCompanyId() + template.getGroupId() +
 				template.getTemplateId());
 	}
