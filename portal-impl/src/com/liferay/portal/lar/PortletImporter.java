@@ -928,7 +928,7 @@ public class PortletImporter {
 
 		Map<String, String> assetCategoryUuids =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				AssetCategory.class.getName().concat("uuid"));
+				AssetCategory.class.getName() + "uuid");
 
 		for (Element assetCategoryElement : assetCategoryElements) {
 			String path = assetCategoryElement.attributeValue("path");
