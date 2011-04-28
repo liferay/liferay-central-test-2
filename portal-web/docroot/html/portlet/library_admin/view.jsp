@@ -257,7 +257,7 @@ if (folder != null) {
 <aui:script use="liferay-list-view">
 	var listView = new Liferay.ListView(
 		{
-			itemAttributes: ['data-resource-url', 'data-expand'],
+			itemAttributes: ['data-direction-right', 'data-refresh-entries', 'data-refresh-folders', 'data-resource-url'],
 			itemSelector: 'ul > li > a',
 			srcNode: '#<portlet:namespace />folderContainer'
 		}
@@ -271,8 +271,10 @@ if (folder != null) {
 		var target = details.target;
 		var attributes = details.attributes;
 
+		var dataDirectionRight = attributes['data-direction-right'];
+		var dataRefreshEntries = attributes['data-refresh-entries'];
+		var dataRefreshFolders = attributes['data-refresh-folders'];
 		var dataResourceUrl = attributes['data-resource-url'];
-		var dataExpand = attributes['data-expand'];
 
 		A.io.request(
 			dataResourceUrl,
@@ -291,10 +293,14 @@ if (folder != null) {
 
 						target.ancestor('.folder').addClass('selected');
 
-						if (dataExpand) {
-							listView.set('data', content);
+						if (dataDirectionRight) {
+							listView.set('direction', 'right');
 						}
 						else {
+							listView.set('direction', 'left');
+						}
+
+						if (dataRefreshEntries) {
 							var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
 							var addButton = content.one('#addButton')
 
@@ -307,6 +313,15 @@ if (folder != null) {
 
 							entriesContainer.empty();
 							entriesContainer.appendChild(entries);
+						}
+
+						if (dataRefreshFolders) {
+							if (content.one('#folders')) {
+								listView.set('data', content.one('#folders'));
+							}
+							else {
+								listView.set('data', content);
+							}
 						}
 					}
 				}

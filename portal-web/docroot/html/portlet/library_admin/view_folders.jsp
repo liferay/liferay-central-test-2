@@ -59,6 +59,41 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 %>
 
 <ul>
+	<c:if test="<%= parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>">
+		<liferay-portlet:renderURL varImpl="viewURL">
+			<portlet:param name="struts_action" value="/library_admin/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+		</liferay-portlet:renderURL>
+
+		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewFoldersURL">
+			<portlet:param name="struts_action" value="/library_admin/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+			<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
+			<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+		</liferay-portlet:resourceURL>
+
+		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
+			<portlet:param name="struts_action" value="/library_admin/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+			<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
+			<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
+			<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+			<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+		</liferay-portlet:resourceURL>
+
+		<li class="folder">
+			<a href="<%= viewURL.toString() %>" data-direction-right="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder">
+				<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-l" />
+			</a>
+
+			<a href="<%= viewURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>">
+				<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/01_up.png" %>' />
+
+				<%= LanguageUtil.get(pageContext, "up") %>
+			</a>
+		</li>
+	</c:if>
+
 	<%
 	for (Folder curFolder : folders) {
 
@@ -86,12 +121,12 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 
 		<li class="folder <%= (curFolder.getFolderId() == folderId) ? "selected" : StringPool.BLANK %>">
 			<c:if test="<%= (childrenFolderCount > 0) %>">
-				<a href="<%= viewURL.toString() %>" data-expand="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder">
+				<a href="<%= viewURL.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder">
 					<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-r" />
 				</a>
 			</c:if>
 
-			<a href="<%= viewURL.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>">
+			<a href="<%= viewURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>">
 				<liferay-ui:icon image="folder" />
 
 				<%= curFolder.getName() %>
