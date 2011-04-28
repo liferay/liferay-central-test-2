@@ -41,22 +41,23 @@ import javax.portlet.RenderResponse;
 public class DDLUtil {
 
 	public static void addAllReservedEls(
-		Element root, Map<String, String> tokens, DDLRecordSet recordSet) {
+		Element rootElement, Map<String, String> tokens,
+		DDLRecordSet recordSet) {
 
 		JournalUtil.addReservedEl(
-			root, tokens, DDLConstants.RESERVED_RECORD_SET_ID,
+			rootElement, tokens, DDLConstants.RESERVED_RECORD_SET_ID,
 			String.valueOf(recordSet.getRecordSetId()));
 
 		JournalUtil.addReservedEl(
-			root, tokens, DDLConstants.RESERVED_RECORD_SET_NAME,
+			rootElement, tokens, DDLConstants.RESERVED_RECORD_SET_NAME,
 			recordSet.getName());
 
 		JournalUtil.addReservedEl(
-			root, tokens, DDLConstants.RESERVED_RECORD_SET_DESCRIPTION,
+			rootElement, tokens, DDLConstants.RESERVED_RECORD_SET_DESCRIPTION,
 			recordSet.getDescription());
 
 		JournalUtil.addReservedEl(
-			root, tokens, DDLConstants.RESERVED_DDM_STRUCTURE_ID,
+			rootElement, tokens, DDLConstants.RESERVED_DDM_STRUCTURE_ID,
 			String.valueOf(recordSet.getDDMStructureId()));
 	}
 
@@ -66,11 +67,10 @@ public class DDLUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(
-			ddmTemplateId);
-
 		String viewMode = ParamUtil.getString(renderRequest, "viewMode");
+
 		String languageId = LanguageUtil.getLanguageId(renderRequest);
+
 		String xmlRequest = PortletRequestUtil.toXML(
 			renderRequest, renderResponse);
 
@@ -83,23 +83,24 @@ public class DDLUtil {
 
 		String xml = StringPool.BLANK;
 
-		Document doc = SAXReaderUtil.createDocument();
+		Document document = SAXReaderUtil.createDocument();
 
-		Element root = doc.addElement("root");
+		Element rootElement = document.addElement("root");
 
-		Document request = SAXReaderUtil.read(xmlRequest);
+		Document requestDocument = SAXReaderUtil.read(xmlRequest);
 
-		root.add(request.getRootElement().createCopy());
+		rootElement.add(requestDocument.getRootElement().createCopy());
 
-		addAllReservedEls(root, tokens, recordSet);
+		addAllReservedEls(rootElement, tokens, recordSet);
 
-		xml = DDMXMLUtil.formatXML(doc);
+		xml = DDMXMLUtil.formatXML(document);
 
-		String script = template.getScript();
-		String langType = template.getLanguage();
+		DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(
+			ddmTemplateId);
 
 		return _transformer.transform(
-			themeDisplay, tokens, viewMode, languageId, xml, script, langType);
+			themeDisplay, tokens, viewMode, languageId, xml,
+			template.getScript(), template.getLanguage());
 	}
 
 	private static Transformer _transformer = new DDLTransformer();
