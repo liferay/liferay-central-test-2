@@ -122,7 +122,7 @@ public class WSDDBuilder {
 		String serviceName = StringUtil.replace(_portletShortName, " ", "_");
 
 		if (!_portletShortName.equals("Portal")) {
-			serviceName = _serviceNamespace + serviceName;
+			serviceName = _serviceNamespace + "_" + serviceName;
 		}
 
 		serviceName += ("_" + entityName + "Service");
