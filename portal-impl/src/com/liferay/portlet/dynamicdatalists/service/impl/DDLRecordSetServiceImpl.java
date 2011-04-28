@@ -39,7 +39,7 @@ public class DDLRecordSetServiceImpl extends DDLRecordSetServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		DDLPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.ADD_ENTRY);
+			getPermissionChecker(), groupId, ActionKeys.ADD_RECORD_SET);
 
 		return ddlRecordSetLocalService.addRecordSet(
 			getUserId(), groupId, ddmStructureId, recordSetKey,
