@@ -60,6 +60,11 @@
 				buffer.append(stringValue);
 			}
 		}
+		else if (type == ExpandoColumnConstants.DATE) {
+			Date defaultDate = new Date(GetterUtil.getLong(expandoColumn.getDefaultData()));
+
+			buffer.append(HtmlUtil.escape(dateFormatDateTime.format(defaultDate)));
+		}
 		else {
 			buffer.append(HtmlUtil.escape(expandoColumn.getDefaultData()));
 		}
