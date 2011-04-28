@@ -14,8 +14,6 @@
 
 package com.liferay.portal.util;
 
-import java.util.List;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -28,6 +26,8 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -51,21 +51,21 @@ public class TestPropsValues {
 	private static Log _log = LogFactoryUtil.getLog(TestPropsValues.class);
 
 	static {
-		String webId = TestPropsUtil.get("company.web.id");
 		long companyId = GetterUtil.getLong(TestPropsUtil.get("company.id"));
+		String companyWebId = TestPropsUtil.get("company.web.id");
 		long layoutPlid = GetterUtil.getLong(TestPropsUtil.get("layout.plid"));
 		long userId = GetterUtil.getLong(TestPropsUtil.get("user.id"));
 
 		try {
-			if (Validator.isNull(webId)) {
-				webId = PropsValues.COMPANY_DEFAULT_WEB_ID;
+			if (Validator.isNull(companyWebId)) {
+				companyWebId = PropsValues.COMPANY_DEFAULT_WEB_ID;
 
-				TestPropsUtil.set("company.web.id", webId);
+				TestPropsUtil.set("company.web.id", companyWebId);
 			}
 
 			if (companyId == 0) {
 				Company company = CompanyLocalServiceUtil.getCompanyByWebId(
-					webId);
+					companyWebId);
 
 				companyId = company.getCompanyId();
 
@@ -86,7 +86,9 @@ public class TestPropsValues {
 				List<User> users = UserLocalServiceUtil.getCompanyUsers(
 					companyId, 0, 2);
 
-				userId = users.get(1).getUserId();
+				User user = users.get(1);
+
+				userId = user.getUserId();
 
 				TestPropsUtil.set("user.id", String.valueOf(userId));
 			}
@@ -97,8 +99,8 @@ public class TestPropsValues {
 
 		TestPropsUtil.printProperties();
 
-		COMPANY_WEB_ID = webId;
 		COMPANY_ID = companyId;
+		COMPANY_WEB_ID = companyWebId;
 		LAYOUT_PLID = layoutPlid;
 		USER_ID = userId;
 	}
