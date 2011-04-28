@@ -408,8 +408,9 @@ public class PortletImporter {
 	protected void importAssetCategory(
 			PortletDataContext portletDataContext,
 			Map<Long, Long> assetVocabularyPKs,
-			Map<Long, Long> assetCategoryPKs, Element assetCategoryElement,
-			AssetCategory assetCategory)
+			Map<Long, Long> assetCategoryPKs,
+			Map<String, String> assetCategoryUuids,
+			Element assetCategoryElement, AssetCategory assetCategory)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(assetCategory.getUserUuid());
@@ -437,7 +438,8 @@ public class PortletImporter {
 			if (parentCategoryNode != null) {
 				importAssetCategory(
 					portletDataContext, assetVocabularyPKs, assetCategoryPKs,
-					(Element)parentCategoryNode, parentAssetCategory);
+					assetCategoryUuids, (Element)parentCategoryNode,
+					parentAssetCategory);
 
 				parentAssetCategoryId = MapUtil.getLong(
 					assetCategoryPKs, assetCategory.getParentCategoryId(),
@@ -503,6 +505,9 @@ public class PortletImporter {
 			assetCategoryPKs.put(
 				assetCategory.getCategoryId(),
 				importedAssetCategory.getCategoryId());
+
+			assetCategoryUuids.put(
+				assetCategory.getUuid(), importedAssetCategory.getUuid());
 
 			portletDataContext.importPermissions(
 				AssetCategory.class, assetCategory.getCategoryId(),
@@ -921,6 +926,10 @@ public class PortletImporter {
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				AssetCategory.class);
 
+		Map<String, String> assetCategoryUuids =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				AssetCategory.class.getName().concat("uuid"));
+
 		for (Element assetCategoryElement : assetCategoryElements) {
 			String path = assetCategoryElement.attributeValue("path");
 
@@ -933,7 +942,7 @@ public class PortletImporter {
 
 			importAssetCategory(
 				portletDataContext, assetVocabularyPKs, assetCategoryPKs,
-				assetCategoryElement, assetCategory);
+				assetCategoryUuids, assetCategoryElement, assetCategory);
 		}
 
 		Element assetsElement = rootElement.element("assets");
@@ -945,13 +954,17 @@ public class PortletImporter {
 				assetElement.attributeValue("class-name"));
 			long classPK = GetterUtil.getLong(
 				assetElement.attributeValue("class-pk"));
-			String[] assetCategoryUuids = StringUtil.split(
+			String[] assetCategoryUuidArray = StringUtil.split(
 				GetterUtil.getString(
 					assetElement.attributeValue("category-uuids")));
 
 			long[] assetCategoryIds = new long[0];
 
-			for (String assetCategoryUuid : assetCategoryUuids) {
+			for (String assetCategoryUuid : assetCategoryUuidArray) {
+				assetCategoryUuid = MapUtil.getString(
+					assetCategoryUuids, assetCategoryUuid,
+					assetCategoryUuid);
+
 				AssetCategory assetCategory = AssetCategoryUtil.fetchByUUID_G(
 					assetCategoryUuid, portletDataContext.getScopeGroupId());
 
