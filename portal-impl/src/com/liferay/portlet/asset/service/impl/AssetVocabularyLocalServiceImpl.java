@@ -16,13 +16,17 @@ package com.liferay.portlet.asset.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.VocabularyNameException;
@@ -41,6 +45,7 @@ import java.util.Map;
  * @author Alvaro del Castillo
  * @author Eduardo Lundgren
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
 public class AssetVocabularyLocalServiceImpl
 	extends AssetVocabularyLocalServiceBaseImpl {
@@ -180,13 +185,43 @@ public class AssetVocabularyLocalServiceImpl
 	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
 		throws PortalException, SystemException {
 
+		return getGroupsVocabularies(groupIds, null);
+	}
+
+
+	public List<AssetVocabulary> getGroupsVocabularies(
+			long[] groupIds, String className)
+		throws PortalException, SystemException {
+
 		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 
 		for (long groupId : groupIds) {
 			List<AssetVocabulary> groupVocabularies = getGroupVocabularies(
 				groupId);
 
-			vocabularies.addAll(groupVocabularies);
+			if (Validator.isNull(className)) {
+				vocabularies.addAll(groupVocabularies);
+			}
+			else {
+				for (AssetVocabulary groupVocabulary: groupVocabularies) {
+					UnicodeProperties settingsProperties =
+						groupVocabulary.getSettingsProperties();
+
+					long classNameId = PortalUtil.getClassNameId(className);
+
+					long[] selectedClassNameIds = StringUtil.split(
+						settingsProperties.getProperty(
+							"selectedClassNameIds"), 0L);
+
+					if (selectedClassNameIds.length == 0 ||
+						(selectedClassNameIds[0] == 0) ||
+						ArrayUtil.contains(
+							selectedClassNameIds, classNameId)) {
+
+						vocabularies.add(groupVocabulary);
+					}
+				}
+			}
 		}
 
 		return vocabularies;

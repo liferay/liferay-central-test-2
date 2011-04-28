@@ -31,6 +31,7 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
+		 * className (string): The class name of the current asset. 
 		 * curEntries (string): The current tags.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current tags.
@@ -52,6 +53,9 @@ AUI().add(
 					},
 					allowSuggestions: {
 						value: false
+					},
+					className: {
+						value: null
 					},
 					contentCallback: {
 						value: null

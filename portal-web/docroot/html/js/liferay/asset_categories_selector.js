@@ -15,6 +15,7 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
+		 * className {String}: The class name of the current asset.
 		 * curEntryIds (string): The ids of the current categories.
 		 * curEntries (string): The names of the current categories.
 		 * instanceVar {string}: The instance variable for this class.
@@ -147,12 +148,13 @@ AUI().add(
 						return data;
 					},
 
-					_getEntries: function(callback) {
+					_getEntries: function(className, callback) {
 						var instance = this;
 
 						Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
 							{
-								groupIds: [themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()]
+								groupIds: [themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()],
+								className: className
 							},
 							callback
 						);
@@ -277,7 +279,10 @@ AUI().add(
 
 						popup.entriesNode.addClass(CSS_TAGS_LIST);
 
+						var className = instance.get('className');
+
 						instance._getEntries(
+							className,
 							function(entries) {
 								popup.entriesNode.empty();
 

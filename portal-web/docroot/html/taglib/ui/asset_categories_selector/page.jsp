@@ -69,6 +69,7 @@ if (Validator.isNotNull(curCategoryIds)) {
 <aui:script use="liferay-asset-categories-selector">
 	new Liferay.AssetCategoriesSelector(
 		{
+			className: '<%= className %>',
 			contentBox: '#<%= namespace + randomNamespace %>assetCategoriesSelector',
 			curEntries: '<%= HtmlUtil.escapeJS(curCategoryNames) %>',
 			curEntryIds: '<%= curCategoryIds %>',
