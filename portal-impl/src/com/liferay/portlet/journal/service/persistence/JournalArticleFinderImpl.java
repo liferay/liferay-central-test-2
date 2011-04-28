@@ -526,11 +526,11 @@ public class JournalArticleFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "articleId", StringPool.LIKE, false, articleIds);
 
-			if (version == null || version == 0) {
+			if (version == null) {
 				sql = StringUtil.replace(
 					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
 			}
-			else if (version < 0) {
+			else if (version <= 0) {
 				sql = StringUtil.replace(
 					sql, "COUNT(*", "COUNT(DISTINCT articleId");
 
