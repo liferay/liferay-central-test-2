@@ -1414,8 +1414,10 @@ public class PortalImpl implements Portal {
 			UnicodeProperties properties = expandoBridge.getAttributeProperties(
 				name);
 
-			String displayType = properties.getProperty(
-				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE);
+			String displayType = GetterUtil.getString(
+				properties.getProperty(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE),
+				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX);
 
 			Serializable value = getExpandoValue(
 				portletRequest, "ExpandoAttribute--" + name + "--", type,
