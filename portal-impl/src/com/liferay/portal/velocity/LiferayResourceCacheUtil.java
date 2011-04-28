@@ -28,11 +28,11 @@ public class LiferayResourceCacheUtil {
 		LiferayResourceCacheUtil.class.getName();
 
 	public static void clear() {
-		_multiVMKeyPoolPortalCache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public static Resource get(String key) {
-		Object obj = _multiVMKeyPoolPortalCache.get(key);
+		Object obj = _portalCache.get(key);
 
 		if ((obj != null) && (obj instanceof Resource)) {
 			return (Resource)obj;
@@ -43,14 +43,14 @@ public class LiferayResourceCacheUtil {
 	}
 
 	public static void put(String key, Resource resource) {
-		_multiVMKeyPoolPortalCache.put(key, resource);
+		_portalCache.put(key, resource);
 	}
 
 	public static void remove(String key) {
-		_multiVMKeyPoolPortalCache.remove(key);
+		_portalCache.remove(key);
 	}
 
-	private static PortalCache _multiVMKeyPoolPortalCache =
-		MultiVMKeyPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = MultiVMKeyPoolUtil.getCache(
+		LiferayResourceCacheUtil.class.getName());
 
 }

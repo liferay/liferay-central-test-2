@@ -38,6 +38,14 @@ public class JournalTemplateListener
 
 	protected void clearCache(JournalTemplate template) {
 
+		// Freemarker cache
+
+		String freeMarkerTemplateId =
+			template.getCompanyId() + template.getGroupId() +
+				template.getTemplateId();
+
+		FreeMarkerEngineUtil.flushTemplate(freeMarkerTemplateId);
+
 		// Journal content
 
 		JournalContentUtil.clearCache();
@@ -46,14 +54,9 @@ public class JournalTemplateListener
 
 		CacheUtil.clearCache(template.getCompanyId());
 
-		String templateId = template.getCompanyId() + template.getGroupId() +
-			template.getTemplateId();
-
 		// Velocity cache
-		VelocityEngineUtil.flushTemplate(templateId);
 
-		// Freemarker cache
-		FreeMarkerEngineUtil.flushTemplate(templateId);
+		VelocityEngineUtil.flushTemplate(freeMarkerTemplateId);
 	}
 
 }

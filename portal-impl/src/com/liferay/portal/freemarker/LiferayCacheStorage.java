@@ -24,14 +24,16 @@ import freemarker.cache.ConcurrentCacheStorage;
  */
 public class LiferayCacheStorage implements ConcurrentCacheStorage {
 
-	public static final String CACHE_NAME = LiferayCacheStorage.class.getName();
+	public static PortalCache getPortalCache() {
+		return _portalCache;
+	}
 
 	public void clear() {
-		_multiVMKeyPoolPortalCache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public Object get(Object key) {
-		return _multiVMKeyPoolPortalCache.get(key.toString());
+		return _portalCache.get(key.toString());
 	}
 
 	public boolean isConcurrent() {
@@ -39,14 +41,14 @@ public class LiferayCacheStorage implements ConcurrentCacheStorage {
 	}
 
 	public void put(Object key, Object value) {
-		_multiVMKeyPoolPortalCache.put(key.toString(), value);
+		_portalCache.put(key.toString(), value);
 	}
 
 	public void remove(Object key) {
-		_multiVMKeyPoolPortalCache.remove(key.toString());
+		_portalCache.remove(key.toString());
 	}
 
-	private static PortalCache _multiVMKeyPoolPortalCache =
-		MultiVMKeyPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = MultiVMKeyPoolUtil.getCache(
+		LiferayCacheStorage.class.getName());
 
 }

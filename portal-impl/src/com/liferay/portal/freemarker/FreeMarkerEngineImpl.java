@@ -14,6 +14,7 @@
 
 package com.liferay.portal.freemarker;
 
+import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngine;
 import com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil;
@@ -38,10 +39,12 @@ import java.io.Writer;
  */
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
-	public void flushTemplate(String templateId) {
-		_stringTemplateLoader.removeTemplate(templateId);
+	public void flushTemplate(String freeMarkerTemplateId) {
+		_stringTemplateLoader.removeTemplate(freeMarkerTemplateId);
 
-		LiferayCacheStorageUtil.remove(templateId);
+		PortalCache portalCache = LiferayCacheStorage.getPortalCache();
+
+		portalCache.remove(freeMarkerTemplateId);
 	}
 
 	public FreeMarkerContext getWrappedRestrictedToolsContext() {

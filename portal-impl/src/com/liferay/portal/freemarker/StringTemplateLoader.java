@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,10 +14,13 @@
 
 package com.liferay.portal.freemarker;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import freemarker.cache.TemplateLoader;
 
 import java.io.Reader;
 import java.io.StringReader;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +28,7 @@ import java.util.Map;
  * @author Michael C. Han
  */
 public class StringTemplateLoader implements TemplateLoader {
+
 	public void closeTemplateSource(Object templateSource) {
 	}
 
@@ -33,60 +37,87 @@ public class StringTemplateLoader implements TemplateLoader {
 	}
 
 	public long getLastModified(Object templateSource) {
-		return ((StringTemplateSource)templateSource)._lastModified;
+		StringTemplateSource stringTemplateSource =
+			(StringTemplateSource)templateSource;
+
+		return stringTemplateSource._lastModified;
 	}
 
 	public Reader getReader(Object templateSource, String encoding) {
-		return new StringReader(((StringTemplateSource)templateSource)._source);
+		StringTemplateSource stringTemplateSource =
+			(StringTemplateSource)templateSource;
+
+		return new StringReader(stringTemplateSource._templateSource);
 	}
 
-    public void putTemplate(String name, String templateSource) {
-        putTemplate(name, templateSource, System.currentTimeMillis());
-    }
+	public void putTemplate(String name, String templateSource) {
+		putTemplate(name, templateSource, System.currentTimeMillis());
+	}
 
-    public void putTemplate(
+	public void putTemplate(
 		String name, String templateSource, long lastModified) {
 
-        _templates.put(
+		_templates.put(
 			name, new StringTemplateSource(name, templateSource, lastModified));
-    }
+	}
 
 	public void removeTemplate(String name) {
 		_templates.remove(name);
 	}
 
-    private static class StringTemplateSource {
+	private Map<String, StringTemplateSource> _templates =
+		new HashMap<String, StringTemplateSource>();
+
+	private class StringTemplateSource {
+
+		public StringTemplateSource(
+			String name, String templateSource, long lastModified) {
+
+			if (name == null) {
+				throw new IllegalArgumentException("Name is null");
+			}
+
+			if (templateSource == null) {
+				throw new IllegalArgumentException("Template source is null");
+			}
+
+			if (lastModified < -1) {
+				throw new IllegalArgumentException(
+					"Last modified is less than -1");
+			}
+
+			_name = name;
+			_templateSource = templateSource;
+			_lastModified = lastModified;
+		}
+
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+
+			if (!(obj instanceof StringTemplateSource)) {
+				return false;
+			}
+
+			StringTemplateSource stringTemplateSource =
+				(StringTemplateSource)obj;
+
+			if (Validator.equals(_name, stringTemplateSource._name)) {
+				return true;
+			}
+
+			return false;
+		}
+
+		public int hashCode() {
+			return _name.hashCode();
+		}
+
+		private long _lastModified;
 		private String _name;
-        private String _source;
-        private long _lastModified;
+		private String _templateSource;
 
-        StringTemplateSource(String name, String source, long lastModified) {
-            if(name == null) {
-                throw new IllegalArgumentException("name == null");
-            }
-            if(source == null) {
-                throw new IllegalArgumentException("source == null");
-            }
-            if(lastModified < -1L) {
-                throw new IllegalArgumentException("lastModified < -1L");
-            }
-            this._name = name;
-            this._source = source;
-            this._lastModified = lastModified;
-        }
-
-        public boolean equals(Object obj) {
-            if(obj instanceof StringTemplateSource) {
-                return _name.equals(((StringTemplateSource)obj)._name);
-            }
-            return false;
-        }
-
-        public int hashCode() {
-            return _name.hashCode();
-        }
-    }
-
-	private Map _templates = new HashMap();
+	}
 
 }

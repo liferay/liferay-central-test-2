@@ -21,7 +21,7 @@ import java.io.Writer;
  */
 public interface VelocityEngine {
 
-	public void flushTemplate(String templateId);
+	public void flushTemplate(String velocityTemplateId);
 
 	public VelocityContext getEmptyContext();
 
