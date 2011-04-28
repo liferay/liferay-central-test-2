@@ -21,7 +21,8 @@ Map<String, PortletURL> addArticleURLs = getAddArticleURLs(renderRequest, render
 <c:if test="<%= !addArticleURLs.isEmpty() %>">
 	<div class="lfr-meta-actions edit-controls">
 		<liferay-ui:icon-menu
-			align="left"
+			align="auto"
+			direction="right"
 			icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
 			message='<%= LanguageUtil.format(pageContext, "add", new Object[] {(GroupLocalServiceUtil.getGroup(scopeGroupId)).getDescriptiveName()}) %>'
 			showWhenSingleIcon="<%= true %>"
