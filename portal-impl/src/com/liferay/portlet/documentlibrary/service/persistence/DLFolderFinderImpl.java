@@ -139,7 +139,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFolder.class.getName(), "DLFolder.folderId",
-					"DLFolder.userId", groupId);
+					groupId);
 			}
 
 			sb.append(sql);
@@ -150,7 +150,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					groupId);
 			}
 
 			sb.append(sql);
@@ -161,8 +161,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileShortcut.class.getName(),
-					"DLFileShortcut.fileShortcutId", "DLFileShortcut.userId",
-					groupId);
+					"DLFileShortcut.fileShortcutId", groupId);
 			}
 
 			sb.append(sql);
@@ -243,7 +242,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					groupId);
 			}
 
 			sb.append(sql);
@@ -254,8 +253,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileShortcut.class.getName(),
-					"DLFileShortcut.fileShortcutId", "DLFileShortcut.userId",
-					groupId);
+					"DLFileShortcut.fileShortcutId", groupId);
 			}
 
 			sb.append(sql);
@@ -332,7 +330,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFolder.class.getName(), "DLFolder.folderId",
-					"DLFolder.userId", groupId);
+					groupId);
 			}
 
 			sb.append(sql);
@@ -343,7 +341,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					groupId);
 			}
 
 			sb.append(sql);
@@ -354,8 +352,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileShortcut.class.getName(),
-					"DLFileShortcut.fileShortcutId", "DLFileShortcut.userId",
-					groupId);
+					"DLFileShortcut.fileShortcutId", groupId);
 			}
 
 			sb.append(sql);
@@ -461,7 +458,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					groupId);
 			}
 
 			sb.append(sql);
@@ -472,8 +469,7 @@ public class DLFolderFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileShortcut.class.getName(),
-					"DLFileShortcut.fileShortcutId", "DLFileShortcut.userId",
-					groupId);
+					"DLFileShortcut.fileShortcutId", groupId);
 			}
 
 			sb.append(sql);

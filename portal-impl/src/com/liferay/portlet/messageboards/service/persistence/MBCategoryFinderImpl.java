@@ -117,7 +117,7 @@ public class MBCategoryFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, MBCategory.class.getName(), "MBCategory.categoryId",
-					"MBCategory.userId", groupId);
+					groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -195,7 +195,7 @@ public class MBCategoryFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, MBCategory.class.getName(), "MBCategory.categoryId",
-					"MBCategory.userId", groupId);
+					groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);

@@ -1517,7 +1517,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						}
 					</#if>
 
-					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
+					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK<#if finder.hasColumn("groupId")>, groupId</#if>);
 
 					Session session = null;
 
@@ -1729,7 +1729,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						}
 					</#if>
 
-					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
+					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK<#if finder.hasColumn("groupId")>, groupId</#if>);
 
 					SQLQuery q = session.createSQLQuery(sql);
 
@@ -1942,7 +1942,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							}
 						</#if>
 
-						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID
+						String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK
 
 						<#if finder.hasColumn("groupId")>,
 							<#if finder.getColumn("groupId").hasArrayableOperator()>
@@ -2567,7 +2567,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 				<#include "persistence_impl_finder_cols.ftl">
 
-				String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
+				String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK<#if finder.hasColumn("groupId")>, groupId</#if>);
 
 				Session session = null;
 
@@ -2655,7 +2655,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					<#include "persistence_impl_finder_arrayable_cols.ftl">
 
-					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID
+					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK
 
 					<#if finder.hasColumn("groupId")>,
 						<#if finder.getColumn("groupId").hasArrayableOperator()>

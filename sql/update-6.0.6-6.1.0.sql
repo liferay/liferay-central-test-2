@@ -240,6 +240,12 @@ create table RepositoryEntry (
 	mappedId VARCHAR(75) null
 );
 
+alter table ResourcePermission add ownerId LONG;
+
+COMMIT_TRANSACTION;
+
+update ResourcePermission set ownerId = 0;
+
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
 alter table User_ add status int;

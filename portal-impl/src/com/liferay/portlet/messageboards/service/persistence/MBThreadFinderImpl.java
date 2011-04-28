@@ -82,7 +82,7 @@ public class MBThreadFinderImpl
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
 				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-				"MBThread.rootMessageUserId", groupId);
+				groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -143,7 +143,7 @@ public class MBThreadFinderImpl
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
 				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-				"MBThread.rootMessageUserId", groupId);
+				groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -223,7 +223,7 @@ public class MBThreadFinderImpl
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
 				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-				"MBThread.rootMessageUserId", groupId);
+				groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -290,7 +290,7 @@ public class MBThreadFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-					"MBThread.rootMessageUserId", groupId);
+					groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -356,7 +356,7 @@ public class MBThreadFinderImpl
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
 				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-				"MBThread.rootMessageUserId", groupId);
+				groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -413,7 +413,7 @@ public class MBThreadFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, MBMessage.class.getName(), "MBThread.rootMessageId",
-					"MBThread.rootMessageUserId", groupId);
+					groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);

@@ -558,8 +558,7 @@ public class JournalArticleFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, JournalArticle.class.getName(),
-					"JournalArticle.resourcePrimKey", "JournalArticle.userId",
-					groupId);
+					"JournalArticle.resourcePrimKey", groupId);
 
 				sql = StringUtil.replace(
 					sql, "(companyId", "(JournalArticle.companyId");
@@ -696,8 +695,7 @@ public class JournalArticleFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, JournalArticle.class.getName(),
-					"JournalArticle.resourcePrimKey", "JournalArticle.userId",
-					groupId);
+					"JournalArticle.resourcePrimKey", groupId);
 
 				sql = StringUtil.replace(
 					sql, "(companyId", "(JournalArticle.companyId");

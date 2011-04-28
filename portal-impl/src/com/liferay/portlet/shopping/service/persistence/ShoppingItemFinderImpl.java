@@ -453,7 +453,7 @@ public class ShoppingItemFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, ShoppingItem.class.getName(), "ShoppingItem.itemId",
-					"ShoppingItem.userId", groupId);
+					groupId);
 			}
 
 			sql = StringUtil.replace(

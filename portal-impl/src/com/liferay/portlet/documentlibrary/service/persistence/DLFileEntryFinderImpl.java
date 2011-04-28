@@ -183,7 +183,7 @@ public class DLFileEntryFinderImpl
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
 					sql, DLFileEntry.class.getName(), "DLFileEntry.fileEntryId",
-					"DLFileEntry.userId", groupId);
+					groupId);
 			}
 
 			sql = StringUtil.replace(

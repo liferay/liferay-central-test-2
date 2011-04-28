@@ -85,6 +85,44 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 	}
 
 	public String replacePermissionCheck(
+		String sql, String className, String classPKField) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, null, new long[] {0}, null);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, long groupId) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, null, new long[] {groupId}, null);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, long groupId,
+		String bridgeJoin) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, null, new long[] {groupId},
+			bridgeJoin);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, long[] groupIds) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, null, groupIds, null);
+	}
+
+	public String replacePermissionCheck(
+		String sql, String className, String classPKField, long[] groupIds,
+		String bridgeJoin) {
+
+		return replacePermissionCheck(
+			sql, className, classPKField, null, groupIds, bridgeJoin);
+	}
+
+	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 
 		return replacePermissionCheck(
@@ -150,12 +188,21 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		StringBundler ownerSQL = new StringBundler(5);
 
-		if (Validator.isNotNull(userIdField)) {
-			ownerSQL.append("(");
-			ownerSQL.append(userIdField);
-			ownerSQL.append(" = ");
-			ownerSQL.append(String.valueOf(getUserId()));
-			ownerSQL.append(") OR ");
+		long userId = getUserId();
+
+		if (userId > 0) {
+			if (Validator.isNotNull(userIdField)) {
+				ownerSQL.append("(");
+				ownerSQL.append(userIdField);
+				ownerSQL.append(" = ");
+				ownerSQL.append(String.valueOf(userId));
+				ownerSQL.append(") OR ");
+			}
+			else {
+				ownerSQL.append("(ResourcePermission.ownerId = ");
+				ownerSQL.append(String.valueOf(userId));
+				ownerSQL.append(") OR ");
+			}
 		}
 
 		permissionJoin = StringUtil.replace(

@@ -110,7 +110,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			addModelResources_6(
-				companyId, groupId, resource, communityPermissions,
+				companyId, groupId, userId, resource, communityPermissions,
 				guestPermissions);
 		}
 		else {
@@ -628,7 +628,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void addModelResources_6(
-			long companyId, long groupId, Resource resource,
+			long companyId, long groupId, long userId, Resource resource,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -644,9 +644,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		filterOwnerActions(resource.getName(), actionIds);
 
-		resourcePermissionLocalService.setResourcePermissions(
+		resourcePermissionLocalService.setOwnerResourcePermissions(
 			resource.getCompanyId(), resource.getName(), resource.getScope(),
-			resource.getPrimKey(), ownerRole.getRoleId(),
+			resource.getPrimKey(), ownerRole.getRoleId(), userId,
 			actionIds.toArray(new String[actionIds.size()]));
 
 		// Community permissions
@@ -797,9 +797,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		Role role = roleLocalService.getRole(companyId, RoleConstants.OWNER);
 
-		resourcePermissionLocalService.setResourcePermissions(
+		resourcePermissionLocalService.setOwnerResourcePermissions(
 			resource.getCompanyId(), resource.getName(), resource.getScope(),
-			resource.getPrimKey(), role.getRoleId(),
+			resource.getPrimKey(), role.getRoleId(), userId,
 			actionIds.toArray(new String[actionIds.size()]));
 	}
 
