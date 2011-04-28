@@ -839,7 +839,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AssetTag.class.getName(), _FILTER_COLUMN_PK, groupId);
+				AssetTag.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
 
 		Session session = null;
 
@@ -1019,7 +1020,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AssetTag.class.getName(), _FILTER_COLUMN_PK, groupId);
+				AssetTag.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1258,7 +1260,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AssetTag.class.getName(), _FILTER_COLUMN_PK, groupId);
+				AssetTag.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
 
 		Session session = null;
 

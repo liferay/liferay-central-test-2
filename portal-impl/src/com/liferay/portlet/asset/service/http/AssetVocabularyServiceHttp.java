@@ -207,7 +207,7 @@ public class AssetVocabularyServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
-		HttpPrincipal httpPrincipal, long[] groupIds, java.lang.String className)
+		HttpPrincipal httpPrincipal, long[] groupIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -215,8 +215,7 @@ public class AssetVocabularyServiceHttp {
 					"getGroupsVocabularies",
 					_getGroupsVocabulariesParameterTypes4);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					groupIds, className);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupIds);
 
 			Object returnObj = null;
 
@@ -245,7 +244,7 @@ public class AssetVocabularyServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupsVocabularies(
-		HttpPrincipal httpPrincipal, long[] groupIds)
+		HttpPrincipal httpPrincipal, long[] groupIds, java.lang.String className)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -253,7 +252,8 @@ public class AssetVocabularyServiceHttp {
 					"getGroupsVocabularies",
 					_getGroupsVocabulariesParameterTypes5);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupIds);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					groupIds, className);
 
 			Object returnObj = null;
 
@@ -455,10 +455,10 @@ public class AssetVocabularyServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getGroupsVocabulariesParameterTypes4 = new Class[] {
-			long[].class, java.lang.String.class
+			long[].class
 		};
 	private static final Class<?>[] _getGroupsVocabulariesParameterTypes5 = new Class[] {
-			long[].class
+			long[].class, java.lang.String.class
 		};
 	private static final Class<?>[] _getGroupVocabulariesParameterTypes6 = new Class[] {
 			long.class

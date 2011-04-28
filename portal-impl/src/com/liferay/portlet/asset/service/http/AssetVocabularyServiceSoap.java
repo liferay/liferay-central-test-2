@@ -93,11 +93,10 @@ public class AssetVocabularyServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] getGroupsVocabularies(
-		long[] groupIds, java.lang.String className) throws RemoteException {
+		long[] groupIds) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> returnValue =
-				AssetVocabularyServiceUtil.getGroupsVocabularies(groupIds,
-					className);
+				AssetVocabularyServiceUtil.getGroupsVocabularies(groupIds);
 
 			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModels(returnValue);
 		}
@@ -109,10 +108,11 @@ public class AssetVocabularyServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] getGroupsVocabularies(
-		long[] groupIds) throws RemoteException {
+		long[] groupIds, java.lang.String className) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> returnValue =
-				AssetVocabularyServiceUtil.getGroupsVocabularies(groupIds);
+				AssetVocabularyServiceUtil.getGroupsVocabularies(groupIds,
+					className);
 
 			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModels(returnValue);
 		}
