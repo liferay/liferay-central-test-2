@@ -111,7 +111,7 @@ input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-ac
 	text-shadow: 1px 1px #FFF;
 }
 
-.yui3-aui-button-disabled input[type], .yui3-aui-button-disabled button, .yui3-aui-button-disabled input[type]:hover, .yui3-aui-button-disabled input[type]:focus, .yui3-aui-button-disabled button:hover, .yui3-aui-button-disabled button:focus {
+.yui3-aui-button-disabled input[type], .yui3-aui-button-disabled button, .yui3-aui-button-disabled input[type]:hover, .yui3-aui-button-disabled input[type]:focus, .yui3-aui-button-disabled button:hover, .yui3-aui-button-disabled button:focus, .yui3-aui-buttonitem-disabled, .yui3-aui-buttonitem-disabled:hover  {
 	background: #D4D4D4 url(../images/portlet/header_bg.png) repeat-x 0 0;
 	border-color: #C8C9CA #9E9E9E #9E9E9E #C8C9CA;
 	color: #555;

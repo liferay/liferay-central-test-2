@@ -58,7 +58,7 @@ input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hove
 input[type="submit"], input[type="button"], input[type="reset"], button, .lfr-actions, .lfr-actions ul {
 }
 
-.yui3-aui-button-disabled input[type], .yui3-aui-button-disabled button, .yui3-aui-button-disabled input[type]:hover, .yui3-aui-button-disabled input[type]:focus, .yui3-aui-button-disabled button:hover, .yui3-aui-button-disabled button:focus {
+.yui3-aui-button-disabled input[type], .yui3-aui-button-disabled button, .yui3-aui-button-disabled input[type]:hover, .yui3-aui-button-disabled input[type]:focus, .yui3-aui-button-disabled button:hover, .yui3-aui-button-disabled button:focus, .yui3-aui-buttonitem-disabled, .yui3-aui-buttonitem-disabled:hover  {
 }
 
 input[type="submit"]:hover, input[type="button"]:hover, input[type="reset"]:hover, button:hover, .lfr-actions:hover, .lfr-actions:hover ul {
@@ -81,5 +81,5 @@ input.focus, textarea.focus, .ie6 input.focus, .ie6 textarea.focus {
 .ie6 .yui3-aui-button-disabled input.submit, .ie6 .yui3-aui-button-disabled input.button, .ie6 .yui3-aui-button-disabled button {
 }
 
-.ie .yui3-aui-button-disabled input {
+.ie .yui3-aui-button-disabled input, .yui3-aui-buttonitem-disabled, .yui3-aui-buttonitem-disabled:hover {
 }
