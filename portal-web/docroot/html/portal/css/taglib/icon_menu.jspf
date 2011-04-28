@@ -80,12 +80,6 @@
 	vertical-align: middle;
 }
 
-.lfr-actions.direction-down .lfr-trigger strong a {
-	text-decoration: none;
-	padding: 2px 20px 2px 5px;
-	vertical-align: middle;
-}
-
 .lfr-actions.show-arrow .lfr-trigger strong a {
 	background: url(<%= themeImagesPath %>/arrows/04_left.png) no-repeat 5px 50%;
 }

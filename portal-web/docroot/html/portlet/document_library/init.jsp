@@ -162,7 +162,7 @@ boolean showAddFolderButton = false;
 boolean showFolderMenu = false;
 boolean showTabs = false;
 
-if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY) || portletName.equals(PortletKeys.LIBRARY_ADMIN)) {
+if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showActions = true;
 	showAddFileEntryButton = true;
 	showAddFileShortcutButton = true;

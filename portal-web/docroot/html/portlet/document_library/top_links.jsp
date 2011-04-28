@@ -146,7 +146,7 @@
 			</div>
 		</div>
 	</c:when>
-	<c:when test="<%= showTabs && showSubfolders && !portletName.equals(PortletKeys.LIBRARY_ADMIN) %>">
+	<c:when test="<%= showTabs && showSubfolders %>">
 		<liferay-ui:header
 			title="documents-home"
 		/>
