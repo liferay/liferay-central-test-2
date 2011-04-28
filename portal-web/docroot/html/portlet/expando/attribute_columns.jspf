@@ -49,7 +49,12 @@
 		buffer.append(LanguageUtil.get(pageContext, "default-value"));
 		buffer.append("</span>: ");
 
-		if (type == ExpandoColumnConstants.STRING_ARRAY) {
+		if (type == ExpandoColumnConstants.DATE) {
+			Date defaultDate = new Date(GetterUtil.getLong(expandoColumn.getDefaultData()));
+
+			buffer.append(dateFormatDateTime.format(defaultDate));
+		}
+		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			ExpandoValue expandoValue = new ExpandoValueImpl();
 
 			expandoValue.setColumnId(expandoColumn.getColumnId());
@@ -59,11 +64,6 @@
 				buffer.append("<br />");
 				buffer.append(stringValue);
 			}
-		}
-		else if (type == ExpandoColumnConstants.DATE) {
-			Date defaultDate = new Date(GetterUtil.getLong(expandoColumn.getDefaultData()));
-
-			buffer.append(HtmlUtil.escape(dateFormatDateTime.format(defaultDate)));
 		}
 		else {
 			buffer.append(HtmlUtil.escape(expandoColumn.getDefaultData()));
