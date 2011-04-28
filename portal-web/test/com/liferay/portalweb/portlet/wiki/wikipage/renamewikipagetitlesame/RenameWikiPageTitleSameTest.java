@@ -65,8 +65,7 @@ public class RenameWikiPageTitleSameTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isPartialText("//div[4]/h1/span", "Wiki Page Test"));
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent(
 				"There is already a page with the specified title."));
 	}

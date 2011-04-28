@@ -84,8 +84,7 @@ public class AddBlogsEntryTitleNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"You have entered invalid data. Please try again.")
+				if (RuntimeVariables.replace("Your request failed to complete.")
 										.equals(selenium.getText(
 								"xPath=(//div[@class='portlet-msg-error'])[1]"))) {
 					break;
@@ -99,7 +98,7 @@ public class AddBlogsEntryTitleNullTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace("Please enter a valid title."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));

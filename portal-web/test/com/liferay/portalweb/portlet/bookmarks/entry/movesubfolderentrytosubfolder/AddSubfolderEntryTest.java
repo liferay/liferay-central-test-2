@@ -51,7 +51,10 @@ public class AddSubfolderEntryTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Add Bookmark"),
+			selenium.getText("//div[2]/ul/li[5]/a"));
+		selenium.clickAt("//div[2]/ul/li[5]/a",
+			RuntimeVariables.replace("Add Bookmark"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_28_name",
@@ -60,7 +63,7 @@ public class AddSubfolderEntryTest extends BaseTestCase {
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_28_comments",
+		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test subfolder entry."));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

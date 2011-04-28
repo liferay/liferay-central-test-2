@@ -39,28 +39,28 @@
 	<td>Delete</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>clickAt</td>
 	<td>//div[5]/div/span/a/span</td>
 	<td>Delete</td>
 </tr>
 <tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this?</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
+	<td>//div[@class='lfr-message-response portlet-msg-success']</td>
+	<td>Your request processed successfully.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
+	<td>//div[@class='lfr-message-response portlet-msg-success']</td>
+	<td>Your request processed successfully.</td>
 </tr>
 <tr>
 	<td>assertTextNotPresent</td>
 	<td>Blogs Entry Comment Body</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to delete this?</td>
 	<td></td>
 </tr>
 

@@ -48,7 +48,7 @@ public class AddFolderEntry1Test extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[5]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_28_name",
@@ -57,7 +57,7 @@ public class AddFolderEntry1Test extends BaseTestCase {
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_28_comments",
+		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test1 folder1 entry1."));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

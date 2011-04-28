@@ -64,34 +64,79 @@
 	<td>Sign In</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//input[@value='I Agree']</td>
-	<td>I Agree</td>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_58_rememberMeCheckbox'))</td>
+	<td>rememberMeCheckboxChecked1</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//input[@value='I Agree']</td>
-	<td>I Agree</td>
+	<td>gotoIf</td>
+	<td>${rememberMeCheckboxChecked1}</td>
+	<td>RememberMeCheckboxChecked1</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>reminderQueryAnswer</td>
-	<td>What is your father's middle name?</td>
+	<td>clickAt</td>
+	<td>_58_rememberMeCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>RememberMeCheckboxChecked1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Sign In']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//span/input'))</td>
+	<td>iAgreeVisible1</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${iAgreeVisible1}</td>
+	<td>IAgreeNotVisible1</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='I Agree']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>IAgreeNotVisible1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('reminderQueryAnswer'))</td>
+	<td>passwordReminderVisible1</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${passwordReminderVisible1}</td>
+	<td>PasswordReminderNotVisible1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//form/div[1]</td>
+	<td>Please choose a reminder query.</td>
 </tr>
 <tr>
 	<td>type</td>
 	<td>reminderQueryAnswer</td>
-	<td>Test</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//input[@value='Save']</td>
-	<td>Save</td>
+	<td>test</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Save']</td>
-	<td>Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PasswordReminderNotVisible1</td>
+	<td></td>
 </tr>
 
 </tbody></table>

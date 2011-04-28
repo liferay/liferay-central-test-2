@@ -90,7 +90,7 @@ public class EditDLFolderDocumentTitleCloseBracketTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"Document names must end with one of the following extensions: *."),

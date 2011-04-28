@@ -83,7 +83,7 @@ public class EditFolderEntryTest extends BaseTestCase {
 		selenium.type("_28_url",
 			RuntimeVariables.replace("http://www.alloyui.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_28_comments",
+		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test folder entry. Edited."));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));

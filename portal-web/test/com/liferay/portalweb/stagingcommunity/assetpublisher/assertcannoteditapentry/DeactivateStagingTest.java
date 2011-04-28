@@ -37,7 +37,7 @@ public class DeactivateStagingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Sites")) {
 					break;
 				}
 			}
@@ -48,7 +48,7 @@ public class DeactivateStagingTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_134_name", RuntimeVariables.replace("Staging"));

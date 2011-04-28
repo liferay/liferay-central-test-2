@@ -64,8 +64,7 @@ public class AddFolderNameSpaceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have entered invalid data. Please try again.")) {
+				if (selenium.isTextPresent("Your request failed to complete.")) {
 					break;
 				}
 			}
@@ -76,8 +75,7 @@ public class AddFolderNameSpaceTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

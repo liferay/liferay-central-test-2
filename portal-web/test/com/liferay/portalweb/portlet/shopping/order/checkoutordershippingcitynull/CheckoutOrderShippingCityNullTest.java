@@ -119,7 +119,7 @@ public class CheckoutOrderShippingCityNullTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"You have entered invalid data. Please try again."));
+						"Your request failed to complete."));
 				assertTrue(selenium.isTextPresent("Please enter a valid city."));
 
 			case 100:

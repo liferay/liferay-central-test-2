@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//div[2]/ul/li[4]/a</td>
+	<td>//div[2]/ul/li[5]/a</td>
 	<td></td>
 </tr>
 <tr>
@@ -45,23 +45,23 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>_28_comments</td>
+	<td>_28_description</td>
 	<td>This is a test folder entry.</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
+	<td>assertTextNotPresent</td>
+	<td>This field is required.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//section/div/div/div/div[1]</td>
-	<td>You have entered invalid data. Please try again.</td>
+	<td>clickAt</td>
+	<td>//input[@value='Save']</td>
+	<td>Save</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//form/div[1]</td>
-	<td>Please enter a valid URL.</td>
+	<td>//div[@class='yui3-aui-form-validator-message required']</td>
+	<td>This field is required.</td>
 </tr>
 
 </tbody></table>

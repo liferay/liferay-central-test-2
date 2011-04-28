@@ -182,7 +182,7 @@ public class TearDownUserTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//select[@id='_125_active']")) {
+						if (selenium.isVisible("//select[@id='_125_status']")) {
 							break;
 						}
 					}
@@ -193,8 +193,8 @@ public class TearDownUserTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.select("//select[@id='_125_active']",
-					RuntimeVariables.replace("label=No"));
+				selenium.select("//select[@id='_125_status']",
+					RuntimeVariables.replace("label=Inactive"));
 				selenium.clickAt("//div[2]/span[2]/span/input",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");

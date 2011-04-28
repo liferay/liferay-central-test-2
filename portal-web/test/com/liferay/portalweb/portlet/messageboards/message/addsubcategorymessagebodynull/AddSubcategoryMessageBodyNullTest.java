@@ -64,9 +64,9 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//section/div/div/div/div"));
+				"Your request failed to complete."),
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace("Please enter a valid message."),
-			selenium.getText("//form/div[1]"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 	}
 }

@@ -85,8 +85,7 @@ public class AddBlogsEntryContentNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"You have entered invalid data. Please try again.")
+				if (RuntimeVariables.replace("Your request failed to complete.")
 										.equals(selenium.getText(
 								"//div[@class='portlet-msg-error']"))) {
 					break;
@@ -100,7 +99,7 @@ public class AddBlogsEntryContentNullTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("//div[@class='portlet-msg-error']"));
 		selenium.open("/web/guest/home/");
 

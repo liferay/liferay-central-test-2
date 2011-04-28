@@ -95,11 +95,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword c."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/combo"));
 				selenium.saveScreenShotAndSource();
@@ -108,11 +110,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword combo."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/delegate"));
 				selenium.saveScreenShotAndSource();
@@ -121,11 +125,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword delegate."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/display_chart"));
 				selenium.saveScreenShotAndSource();
@@ -134,11 +140,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword display_chart."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/dtd"));
 				selenium.saveScreenShotAndSource();
@@ -147,11 +155,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword dtd."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/facebook"));
 				selenium.saveScreenShotAndSource();
@@ -160,11 +170,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Facebook."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/google_gadget"));
 				selenium.saveScreenShotAndSource();
@@ -173,11 +185,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword google_gadget."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/group"));
 				selenium.saveScreenShotAndSource();
@@ -186,11 +200,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Group."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/html"));
 				selenium.saveScreenShotAndSource();
@@ -199,11 +215,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword HTML."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/image"));
 				selenium.saveScreenShotAndSource();
@@ -212,11 +230,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Image."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/language"));
 				selenium.saveScreenShotAndSource();
@@ -225,11 +245,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Language."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/netvibes"));
 				selenium.saveScreenShotAndSource();
@@ -238,11 +260,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Netvibes."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/page"));
 				selenium.saveScreenShotAndSource();
@@ -251,11 +275,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Page."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/pbhs"));
 				selenium.saveScreenShotAndSource();
@@ -264,11 +290,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword pbhs."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/poller"));
 				selenium.saveScreenShotAndSource();
@@ -277,11 +305,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword poller."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/public"));
 				selenium.saveScreenShotAndSource();
@@ -290,11 +320,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Public."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/private"));
 				selenium.saveScreenShotAndSource();
@@ -303,11 +335,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Private."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/rss"));
 				selenium.saveScreenShotAndSource();
@@ -316,11 +350,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword RSS."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/sharepoint"));
 				selenium.saveScreenShotAndSource();
@@ -329,11 +365,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword sharepoint."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/sitemap.xml"));
 				selenium.saveScreenShotAndSource();
@@ -342,11 +380,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword sitemap.xml."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/tags"));
 				selenium.saveScreenShotAndSource();
@@ -355,11 +395,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword Tags."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/software_catalog"));
 				selenium.saveScreenShotAndSource();
@@ -368,11 +410,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword software_catalog."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/_vti_"));
 				selenium.saveScreenShotAndSource();
@@ -381,11 +425,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword _vti_."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/wap"));
 				selenium.saveScreenShotAndSource();
@@ -394,11 +440,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword wap."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/web"));
 				selenium.saveScreenShotAndSource();
@@ -407,11 +455,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword web."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/widget"));
 				selenium.saveScreenShotAndSource();
@@ -420,11 +470,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword widget."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/wsrp"));
 				selenium.saveScreenShotAndSource();
@@ -433,11 +485,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword wsrp."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 				selenium.type("_88_friendlyURL",
 					RuntimeVariables.replace("/xmlrpc"));
 				selenium.saveScreenShotAndSource();
@@ -446,11 +500,13 @@ public class AddPageFriendlyURLReservedWordsTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"You have entered invalid data. Please try again."),
-					selenium.getText("//section/div/div/div/div"));
+						"Your request failed to complete."),
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[1]"));
 				assertEquals(RuntimeVariables.replace(
 						"Please enter a friendly url that does not conflict with the keyword xmlrpc."),
-					selenium.getText("//td[2]/div[2]"));
+					selenium.getText(
+						"xPath=(//div[@class='portlet-msg-error'])[2]"));
 
 			case 100:
 				label = -1;

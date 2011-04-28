@@ -97,8 +97,7 @@ public class SelectWikiNodeNullTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"You have entered invalid data. Please try again.")
+				if (RuntimeVariables.replace("Your request failed to complete.")
 										.equals(selenium.getText(
 								"//div[@id='p_p_id_86_']/div/div[1]"))) {
 					break;
@@ -112,7 +111,7 @@ public class SelectWikiNodeNullTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
+				"Your request failed to complete."),
 			selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("The node could not be found."),
 			selenium.getText("//form[@id='_86_fm']/div[1]"));

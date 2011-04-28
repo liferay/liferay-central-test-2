@@ -60,8 +60,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -79,8 +78,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -98,8 +96,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -117,8 +114,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -136,8 +132,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -155,8 +150,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -174,8 +168,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -193,8 +186,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 		selenium.clickAt("link=All Pages", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
@@ -212,8 +204,7 @@ public class AddWikiPageNameSymbolTest extends BaseTestCase {
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 		assertTrue(selenium.isTextPresent("Please enter a valid title."));
 	}
 }

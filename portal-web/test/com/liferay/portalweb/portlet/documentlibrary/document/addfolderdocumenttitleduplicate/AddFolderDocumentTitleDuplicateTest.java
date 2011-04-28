@@ -112,8 +112,7 @@ public class AddFolderDocumentTitleDuplicateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"You have entered invalid data. Please try again.")) {
+				if (selenium.isTextPresent("Your request failed to complete.")) {
 					break;
 				}
 			}
@@ -124,7 +123,6 @@ public class AddFolderDocumentTitleDuplicateTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+		assertTrue(selenium.isTextPresent("Your request failed to complete."));
 	}
 }

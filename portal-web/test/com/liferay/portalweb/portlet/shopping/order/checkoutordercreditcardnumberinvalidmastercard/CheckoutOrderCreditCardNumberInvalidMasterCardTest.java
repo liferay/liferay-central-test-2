@@ -105,7 +105,7 @@ public class CheckoutOrderCreditCardNumberInvalidMasterCardTest
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertTrue(selenium.isTextPresent(
-						"You have entered invalid data. Please try again."));
+						"Your request failed to complete."));
 				assertTrue(selenium.isTextPresent(
 						"Please enter a valid credit card number."));
 

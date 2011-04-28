@@ -48,23 +48,21 @@ public class AddFolderEntryURLNullTest extends BaseTestCase {
 		selenium.clickAt("//a/strong", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[2]/ul/li[4]/a", RuntimeVariables.replace(""));
+		selenium.clickAt("//div[2]/ul/li[5]/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("_28_name", RuntimeVariables.replace("Test Folder Entry"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("_28_url", RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_28_comments",
+		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test folder entry."));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"You have entered invalid data. Please try again."),
-			selenium.getText("//section/div/div/div/div[1]"));
-		assertEquals(RuntimeVariables.replace("Please enter a valid URL."),
-			selenium.getText("//form/div[1]"));
+		assertFalse(selenium.isTextPresent("This field is required."));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

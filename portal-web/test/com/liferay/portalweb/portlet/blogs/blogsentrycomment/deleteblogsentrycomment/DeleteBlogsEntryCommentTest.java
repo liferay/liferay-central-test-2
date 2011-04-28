@@ -53,11 +53,8 @@ public class DeleteBlogsEntryCommentTest extends BaseTestCase {
 			selenium.getText("//div/div/div/div/div[3]/div/div[1]"));
 		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText("//div[5]/div/span/a/span"));
-		selenium.click(RuntimeVariables.replace("//div[5]/div/span/a/span"));
-		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//div[5]/div/span/a/span",
+			RuntimeVariables.replace("Delete"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -66,9 +63,9 @@ public class DeleteBlogsEntryCommentTest extends BaseTestCase {
 
 			try {
 				if (RuntimeVariables.replace(
-							"Your request completed successfully.")
+							"Your request processed successfully.")
 										.equals(selenium.getText(
-								"//div[@class='portlet-msg-success']"))) {
+								"//div[@class='lfr-message-response portlet-msg-success']"))) {
 					break;
 				}
 			}
@@ -80,8 +77,12 @@ public class DeleteBlogsEntryCommentTest extends BaseTestCase {
 
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
+				"Your request processed successfully."),
+			selenium.getText(
+				"//div[@class='lfr-message-response portlet-msg-success']"));
 		assertFalse(selenium.isTextPresent("Blogs Entry Comment Body"));
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		selenium.saveScreenShotAndSource();
 	}
 }

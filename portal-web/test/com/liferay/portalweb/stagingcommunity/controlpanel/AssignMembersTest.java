@@ -28,7 +28,7 @@ public class AssignMembersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Sites")) {
 					break;
 				}
 			}
@@ -39,7 +39,7 @@ public class AssignMembersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
@@ -125,7 +125,7 @@ public class AssignMembersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Sites")) {
 					break;
 				}
 			}
@@ -136,7 +136,7 @@ public class AssignMembersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
@@ -191,7 +191,7 @@ public class AssignMembersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Sites")) {
 					break;
 				}
 			}
@@ -202,7 +202,7 @@ public class AssignMembersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
@@ -256,7 +256,7 @@ public class AssignMembersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Communities")) {
+				if (selenium.isElementPresent("link=Sites")) {
 					break;
 				}
 			}
@@ -267,7 +267,7 @@ public class AssignMembersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Communities", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));

@@ -50,7 +50,7 @@ public class AddStagingLocalLivePublicPageDLTest extends BaseTestCase {
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Communities",
+				selenium.clickAt("link=Sites",
 					RuntimeVariables.replace("Communities"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();

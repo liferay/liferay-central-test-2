@@ -117,8 +117,7 @@ public class SA_SetupTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Communities",
-					RuntimeVariables.replace(""));
+				selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//strong/a",

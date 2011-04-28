@@ -22,154 +22,160 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class User_LoginTest extends BaseTestCase {
 	public void testUser_Login() throws Exception {
-		selenium.setTimeout("180000");
-		selenium.open("/web/guest/home");
+		int label = 1;
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+		while (label >= 1) {
+			switch (label) {
+			case 1:
+				selenium.setTimeout("180000");
+				selenium.open("/web/guest/home");
 
-			try {
-				if (selenium.isVisible("link=Sign In")) {
-					break;
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("link=Sign In")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("link=Sign In",
+					RuntimeVariables.replace("Sign In"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Sign In", RuntimeVariables.replace("Sign In"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("//input[@id='_58_login']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//input[@id='_58_login']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.saveScreenShotAndSource();
+				selenium.type("//input[@id='_58_login']",
+					RuntimeVariables.replace("userea@liferay.com"));
+				selenium.saveScreenShotAndSource();
+				selenium.type("//input[@id='_58_password']",
+					RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
 
-		selenium.saveScreenShotAndSource();
-		selenium.type("//input[@id='_58_login']",
-			RuntimeVariables.replace("userea@liferay.com"));
-		selenium.saveScreenShotAndSource();
-		selenium.type("//input[@id='_58_password']",
-			RuntimeVariables.replace("test"));
-		selenium.saveScreenShotAndSource();
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible(
+									"//input[@id='_58_rememberMeCheckbox']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//input[@id='_58_rememberMeCheckbox']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.saveScreenShotAndSource();
+				selenium.click("//input[@id='_58_rememberMeCheckbox']");
 
-		selenium.saveScreenShotAndSource();
-		selenium.click("//input[@id='_58_rememberMeCheckbox']");
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+					try {
+						if (selenium.isVisible("//input[@value='Sign In']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
 
-			try {
-				if (selenium.isVisible("//input[@value='Sign In']")) {
-					break;
+					Thread.sleep(1000);
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='Sign In']",
+					RuntimeVariables.replace("Sign In"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Sign In']",
-			RuntimeVariables.replace("Sign In"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
+				boolean rememberMeCheckboxChecked1 = selenium.isChecked(
+						"_58_rememberMeCheckbox");
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				if (rememberMeCheckboxChecked1) {
+					label = 2;
 
-			try {
-				if (selenium.isVisible("//input[@value='I Agree']")) {
-					break;
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("_58_rememberMeCheckbox",
+					RuntimeVariables.replace(""));
 
-		selenium.saveScreenShotAndSource();
-		selenium.click("//input[@value='I Agree']");
+			case 2:
+				selenium.clickAt("//input[@value='Sign In']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean iAgreeVisible1 = selenium.isElementPresent(
+						"//span/input");
 
-			try {
-				if (selenium.isVisible("reminderQueryAnswer")) {
-					break;
+				if (!iAgreeVisible1) {
+					label = 3;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
-		}
+				selenium.clickAt("//input[@value='I Agree']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
-		selenium.saveScreenShotAndSource();
-		selenium.type("reminderQueryAnswer", RuntimeVariables.replace("Test"));
-		selenium.saveScreenShotAndSource();
+			case 3:
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
+				boolean passwordReminderVisible1 = selenium.isElementPresent(
+						"reminderQueryAnswer");
 
-			try {
-				if (selenium.isVisible("//input[@value='Save']")) {
-					break;
+				if (!passwordReminderVisible1) {
+					label = 4;
+
+					continue;
 				}
-			}
-			catch (Exception e) {
-			}
 
-			Thread.sleep(1000);
+				assertEquals(RuntimeVariables.replace(
+						"Please choose a reminder query."),
+					selenium.getText("//form/div[1]"));
+				selenium.type("reminderQueryAnswer",
+					RuntimeVariables.replace("test"));
+				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//input[@value='Save']",
+					RuntimeVariables.replace(""));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+
+			case 4:
+			case 100:
+				label = -1;
+			}
 		}
-
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Save']",
-			RuntimeVariables.replace("Save"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 	}
 }
