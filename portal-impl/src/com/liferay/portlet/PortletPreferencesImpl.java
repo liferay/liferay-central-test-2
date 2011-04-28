@@ -96,8 +96,11 @@ public class PortletPreferencesImpl
 
 			String key = entry.getKey();
 			Preference preference = entry.getValue();
+			String[] actualValues = _getActualValues(preference.getValues());
 
-			map.put(key, _getActualValues(preference.getValues()));
+			if (actualValues != null) {
+				map.put(key, actualValues);
+			}
 		}
 
 		return Collections.unmodifiableMap(map);
