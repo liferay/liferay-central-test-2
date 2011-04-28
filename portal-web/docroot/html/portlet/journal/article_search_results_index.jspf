@@ -29,7 +29,7 @@ Sort sort = SortFactoryUtil.getSort(JournalArticle.class, searchContainer.getOrd
 Hits hits = null;
 
 if (searchTerms.isAdvancedSearch()) {
-	hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStatus(), journalParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
+	hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), StringUtil.valueOf(searchTerms.getStatusCode()), journalParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 }
 else {
 	hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getKeywords(), journalParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
