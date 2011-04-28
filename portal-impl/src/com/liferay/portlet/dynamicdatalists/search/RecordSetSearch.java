@@ -37,8 +37,7 @@ public class RecordSetSearch extends SearchContainer<DDLRecordSet> {
 		headerNames.add("modified-date");
 	}
 
-	public static final String EMPTY_RESULTS_MESSAGE =
-		"no-record-sets-were-found";
+	public static final String EMPTY_RESULTS_MESSAGE = "no-entries-were-found";
 
 	public RecordSetSearch(
 		PortletRequest portletRequest, PortletURL iteratorURL) {

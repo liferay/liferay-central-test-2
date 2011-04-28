@@ -84,7 +84,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/dynamic_data_lists/record_set_item_action.jsp");
+	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/dynamic_data_lists/record_action.jsp");
 
 	// Add result row
 

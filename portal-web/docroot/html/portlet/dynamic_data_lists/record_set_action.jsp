@@ -58,7 +58,7 @@ DDLRecordSet recordSet = (DDLRecordSet)row.getObject();
 	<c:if test="<%= DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= DDLRecordSet.class.getName() %>"
-			modelResourceDescription="<%= recordSet.getName() %>"
+			modelResourceDescription="<%= recordSet.getName(locale) %>"
 			resourcePrimKey="<%= String.valueOf(recordSet.getRecordSetId()) %>"
 			var="permissionsRecordSetURL"
 		/>

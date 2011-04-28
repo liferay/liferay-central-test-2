@@ -563,7 +563,7 @@
 
 		<!-- Dynamic Data Lists -->
 
-		<action path="/dynamic_data_lists/edit_record" type="com.liferay.portlet.dynamicdatalists.action.EditRecordSetItemAction">
+		<action path="/dynamic_data_lists/edit_record" type="com.liferay.portlet.dynamicdatalists.action.EditRecordAction">
 			<forward name="portlet.dynamic_data_lists.edit_record" path="portlet.dynamic_data_lists.edit_record" />
 			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
 		</action>

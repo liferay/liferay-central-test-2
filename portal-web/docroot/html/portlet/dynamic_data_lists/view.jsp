@@ -31,6 +31,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("lists") %>'>
-		<liferay-util:include page="/html/portlet/dynamic_data_lists/view_entries.jsp" />
+		<liferay-util:include page="/html/portlet/dynamic_data_lists/view_record_sets.jsp" />
 	</c:when>
 </c:choose>
