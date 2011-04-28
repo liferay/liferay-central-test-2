@@ -165,8 +165,6 @@ public class EditRecordSetAction extends PortletAction {
 				serviceContext);
 		}
 
-		// Dynamic Data List Display
-
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
@@ -175,8 +173,8 @@ public class EditRecordSetAction extends PortletAction {
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			preferences.setValue("recordSetId", String.valueOf(
-				recordSet.getRecordSetId()));
+			preferences.setValue(
+				"recordSetId", String.valueOf(recordSet.getRecordSetId()));
 
 			preferences.store();
 		}
