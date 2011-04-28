@@ -667,6 +667,9 @@ public class EditLayoutsAction extends PortletAction {
 			else {
 				layout.setTypeSettingsProperties(formTypeSettingsProperties);
 
+				layoutTypeSettingsProperties.putAll(
+					layout.getTypeSettingsProperties());
+
 				LayoutServiceUtil.updateLayout(
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
