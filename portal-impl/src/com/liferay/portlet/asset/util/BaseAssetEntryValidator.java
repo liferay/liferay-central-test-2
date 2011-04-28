@@ -29,6 +29,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
@@ -87,7 +88,8 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 			return;
 		}
 
-		if ((selectedClassNameIds[0] != 0) &&
+		if ((selectedClassNameIds[0] !=
+				AssetCategoryConstants.ALL_CLASS_NAME_IDS) &&
 			!ArrayUtil.contains(selectedClassNameIds, classNameId)) {
 
 			return;
@@ -102,7 +104,8 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 				QueryUtil.ALL_POS, null);
 
 		if ((requiredClassNameIds.length > 0) &&
-			((requiredClassNameIds[0] == 0) ||
+			((requiredClassNameIds[0] ==
+				AssetCategoryConstants.ALL_CLASS_NAME_IDS) ||
 			 ArrayUtil.contains(requiredClassNameIds, classNameId))) {
 
 			boolean found = false;

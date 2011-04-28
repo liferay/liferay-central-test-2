@@ -28,6 +28,7 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -120,7 +121,7 @@ public class EditVocabularyAction extends PortletAction {
 			boolean required = ParamUtil.getBoolean(
 				actionRequest, "required" + index);
 
-			if (classNameId == 0) {
+			if (classNameId == AssetCategoryConstants.ALL_CLASS_NAME_IDS) {
 				selectedClassNameIds.clear();
 				selectedClassNameIds.add(classNameId);
 
