@@ -21,11 +21,11 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 String type = BeanParamUtil.getString(article, request, "type");
 
-String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
-
 if (Validator.isNull(type)) {
 	type = "general";
 }
+
+String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
 %>
 
 <liferay-ui:error-marker key="errorSection" value="categorization" />
