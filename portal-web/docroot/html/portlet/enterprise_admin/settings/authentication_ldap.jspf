@@ -231,8 +231,8 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsProp
 		var ldapServerHTML = ldapServer.html();
 		var swapLdapServerHTML = swapLdapServer.html();
 
-		ldapServer.html(swapLdapServerHTML);
-		swapLdapServer.html(ldapServerHTML);
+		ldapServer.setContent(swapLdapServerHTML);
+		swapLdapServer.setContent(ldapServerHTML);
 
 		ldapServer.setAttribute('data-ldapServerId', swapLdapServerId);
 		swapLdapServer.setAttribute('data-ldapServerId', ldapServerId);
