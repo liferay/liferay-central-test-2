@@ -36,6 +36,14 @@ public class TestPropsUtil {
 		return _instance._props;
 	}
 
+	public static void printProperties() {
+		_instance._printProperties(true);
+	}
+
+	public static void set(String key, String value) {
+		_instance._set(key, value);
+	}
+
 	private TestPropsUtil() {
 		try {
 			ClassLoader classLoader = ClassLoader.getSystemClassLoader();
@@ -52,26 +60,39 @@ public class TestPropsUtil {
 				_props.load(is);
 			}
 
-			List<String> keys = Collections.list(
-				(Enumeration<String>)_props.propertyNames());
-
-			keys = ListUtil.sort(keys);
-
-			System.out.println("-- listing properties --");
-
-			for (String key : keys) {
-				System.out.println(key + "=" + _props.getProperty(key));
-			}
-
-			System.out.println("");
+			_printProperties(false);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	private void _printProperties(boolean update) {
+		List<String> keys = Collections.list(
+			(Enumeration<String>)_props.propertyNames());
+
+		keys = ListUtil.sort(keys);
+
+		if (update) {
+			System.out.println("-- updated properties --");
+		}
+		else {
+			System.out.println("-- listing properties --");
+		}
+
+		for (String key : keys) {
+			System.out.println(key + "=" + _props.getProperty(key));
+		}
+
+		System.out.println("");
+	}
+
 	private String _get(String key) {
 		return _props.getProperty(key);
+	}
+
+	private void _set(String key, String value) {
+		_props.setProperty(key, value);
 	}
 
 	private static TestPropsUtil _instance = new TestPropsUtil();
