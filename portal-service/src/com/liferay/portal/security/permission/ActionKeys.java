@@ -86,6 +86,8 @@ public class ActionKeys {
 
 	public static final String ADD_QUESTION = "ADD_QUESTION";
 
+	public static final String ADD_RECORD_SET = "ADD_RECORD_SET";
+
 	public static final String ADD_REPOSITORY = "ADD_REPOSITORY";
 
 	public static final String ADD_ROLE = "ADD_ROLE";

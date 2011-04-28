@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
@@ -12,14 +11,24 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
+package com.liferay.portlet.dynamicdatalists.search;
 
-<liferay-ui:header
-	backURL="javascript:history.go(-1);"
-	title="error"
-/>
+import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 
-<liferay-ui:error exception="<%= NoSuchRecordSetException.class %>" message="the-recordSet-could-not-be-found" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+import javax.portlet.PortletRequest;
+
+/**
+ * @author Marcellus Tavares
+ */
+public class RecordSetSearchTerms extends RecordSetDisplayTerms {
+
+	public RecordSetSearchTerms(PortletRequest portletRequest) {
+		super(portletRequest);
+
+		description = DAOParamUtil.getLike(portletRequest, DESCRIPTION);
+		name = DAOParamUtil.getLike(portletRequest, NAME);
+		recordSetKey = DAOParamUtil.getLike(portletRequest, RECORD_SET_KEY);
+	}
+
+}

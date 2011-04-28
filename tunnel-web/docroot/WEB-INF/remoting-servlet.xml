@@ -661,17 +661,17 @@
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFolderService" />
 		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.DLFolderService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatalists_service_spring_DDLEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" />
+	<bean name="/com_liferay_portlet_dynamicdatalists_service_spring_DDLRecordSetService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatalists_service_spring_DDLEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" />
+	<bean name="/com_liferay_portlet_dynamicdatalists_service_spring_DDLRecordSetService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService" />
 	</bean>
-	<bean name="/com_liferay_portlet_dynamicdatalists_service_spring_DDLEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalists.service.DDLEntryService" />
+	<bean name="/com_liferay_portlet_dynamicdatalists_service_spring_DDLRecordSetService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService" />
+		<property name="serviceInterface" value="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService" />
 	</bean>
 	<bean name="/com_liferay_portlet_dynamicdatamapping_service_spring_DDMStructureService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.dynamicdatamapping.service.DDMStructureService" />

@@ -127,13 +127,13 @@ create unique index IX_717B9BA2 on Country (a3);
 create index IX_25D734CD on Country (active_);
 create unique index IX_19DA007B on Country (name);
 
-create index IX_D47E1FDE on DDLEntry (groupId);
-create unique index IX_8BA77E9F on DDLEntry (groupId, entryKey);
-create index IX_61B611E8 on DDLEntry (uuid_);
-create unique index IX_10A107C2 on DDLEntry (uuid_, groupId);
+create index IX_87A6B599 on DDLRecord (recordSetId);
+create index IX_8BC2F891 on DDLRecord (uuid_);
 
-create index IX_9B7EF63E on DDLEntryItem (entryId);
-create index IX_8E139F15 on DDLEntryItem (uuid_);
+create index IX_4FA5969F on DDLRecordSet (groupId);
+create unique index IX_56DAB121 on DDLRecordSet (groupId, recordSetKey);
+create index IX_561E44E9 on DDLRecordSet (uuid_);
+create unique index IX_270BA5E1 on DDLRecordSet (uuid_, groupId);
 
 create index IX_E3BAF436 on DDMContent (companyId);
 create index IX_50BF1038 on DDMContent (groupId);

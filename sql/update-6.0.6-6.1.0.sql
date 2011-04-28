@@ -16,9 +16,17 @@ alter table BookmarksEntry drop column comments;
 
 alter table CalEvent add location STRING null;
 
-create table DDLEntry (
+create table DDLRecord (
 	uuid_ VARCHAR(75) null,
-	entryId LONG not null primary key,
+	recordId LONG not null primary key,
+	classNameId LONG,
+	classPK LONG,
+	recordSetId LONG
+);
+
+create table DDLRecordSet (
+	uuid_ VARCHAR(75) null,
+	recordSetId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
@@ -26,17 +34,9 @@ create table DDLEntry (
 	createDate DATE null,
 	modifiedDate DATE null,
 	DDMStructureId LONG,
-	entryKey VARCHAR(75) null,
+	recordSetKey VARCHAR(75) null,
 	name STRING null,
 	description STRING null
-);
-
-create table DDLEntryItem (
-	uuid_ VARCHAR(75) null,
-	entryItemId LONG not null primary key,
-	classNameId LONG,
-	classPK LONG,
-	entryId LONG
 );
 
 create table DDMContent (

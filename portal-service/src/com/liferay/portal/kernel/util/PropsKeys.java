@@ -581,17 +581,17 @@ public interface PropsKeys {
 
 	public static final String DOCKBAR_ADD_PORTLETS = "dockbar.add.portlets";
 
-	public static final String DYNAMIC_DATA_LISTS_ENTRY_FORCE_AUTOGENERATE_ID = "dynamic.data.lists.entry.force.autogenerate.id";
-
 	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER = "dynamic.data.lists.error.template.freemarker";
 
 	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_VELOCITY = "dynamic.data.lists.error.template.velocity";
+
+	public static final String DYNAMIC_DATA_LISTS_RECORD_SET_FORCE_AUTOGENERATE_KEY = "dynamic.data.lists.record.set.force.autogenerate.key";
 
 	public static final String DYNAMIC_DATA_LISTS_TEMPLATE_LANGUAGE_PARSER = "dynamic.data.lists.template.language.parser";
 
 	public static final String DYNAMIC_DATA_LISTS_TRANSFORMER_LISTENER = "dynamic.data.lists.transformer.listener";
 
-	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID = "dynamic.data.mapping.structure.force.autogenerate.id";
+	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_KEY = "dynamic.data.mapping.structure.force.autogenerate.key";
 
 	public static final String DYNAMIC_DATA_MAPPING_TEMPLATE_LANGUAGE_CONTENT = "dynamic.data.mapping.template.language.content";
 

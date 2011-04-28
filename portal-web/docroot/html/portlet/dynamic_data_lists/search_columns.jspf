@@ -18,7 +18,7 @@
 	href="<%= rowURL %>"
 	name="id"
 	orderable="<%= false %>"
-	property="entryKey"
+	property="recordSetKey"
 />
 
 <liferay-ui:search-container-column-text
@@ -36,7 +36,7 @@
 >
 
 	<%
-	buffer.append(StringUtil.shorten(entry.getDescription(), 100));
+	buffer.append(StringUtil.shorten(recordSet.getDescription(), 100));
 	%>
 
 </liferay-ui:search-container-column-text>
@@ -49,7 +49,7 @@
 >
 
 	<%
-	buffer.append(dateFormatDateTime.format(entry.getModifiedDate()));
+	buffer.append(dateFormatDateTime.format(recordSet.getModifiedDate()));
 	%>
 
 </liferay-ui:search-container-column-text>

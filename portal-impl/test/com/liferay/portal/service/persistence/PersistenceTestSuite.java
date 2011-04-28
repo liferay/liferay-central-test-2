@@ -37,8 +37,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersist
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceTest;
-import com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryItemPersistenceTest;
-import com.liferay.portlet.dynamicdatalists.service.persistence.DDLEntryPersistenceTest;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordPersistenceTest;
+import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStorageLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistenceTest;
@@ -199,8 +199,8 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(DLFileVersionPersistenceTest.class);
 		testSuite.addTestSuite(DLFolderPersistenceTest.class);
 
-		testSuite.addTestSuite(DDLEntryItemPersistenceTest.class);
-		testSuite.addTestSuite(DDLEntryPersistenceTest.class);
+		testSuite.addTestSuite(DDLRecordPersistenceTest.class);
+		testSuite.addTestSuite(DDLRecordSetPersistenceTest.class);
 
 		testSuite.addTestSuite(DDMContentPersistenceTest.class);
 		testSuite.addTestSuite(DDMStorageLinkPersistenceTest.class);

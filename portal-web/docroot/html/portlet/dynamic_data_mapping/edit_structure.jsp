@@ -98,7 +98,7 @@ String callback = ParamUtil.getString(request, "callback");
 				<c:choose>
 					<c:when test="<%= structure == null %>">
 						<c:choose>
-							<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_ID %>">
+							<c:when test="<%= PropsValues.DYNAMIC_DATA_MAPPING_STRUCTURE_FORCE_AUTOGENERATE_KEY %>">
 								<aui:input name="newStructureKey" type="hidden" />
 								<aui:input name="autoStructureKey" type="hidden" value="<%= true %>" />
 							</c:when>

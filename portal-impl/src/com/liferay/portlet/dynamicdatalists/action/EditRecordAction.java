@@ -1,0 +1,163 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.portlet.dynamicdatalists.action;
+
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+
+import java.util.Set;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+/**
+ * @author Marcellus Tavares
+ */
+public class EditRecordAction extends PortletAction {
+
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		try {
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateRecord(actionRequest);
+			}
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteRecord(actionRequest);
+			}
+
+			if (Validator.isNotNull(cmd)) {
+				sendRedirect(actionRequest, actionResponse);
+			}
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchRecordException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName());
+
+				setForward(actionRequest, "portlet.dynamic_data_mapping.error");
+			}
+			else {
+				throw e;
+			}
+		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		try {
+			ActionUtil.getRecord(renderRequest);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchRecordException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(renderRequest, e.getClass().getName());
+
+				return mapping.findForward("portlet.dynamic_data_lists.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(
+			getForward(
+				renderRequest, "portlet.dynamic_data_lists.edit_record"));
+	}
+
+	protected void deleteRecord(ActionRequest actionRequest)
+		throws Exception {
+
+		long recordId = ParamUtil.getLong(actionRequest, "recordId");
+
+		DDLRecordLocalServiceUtil.deleteRecord(recordId);
+	}
+
+	protected DDLRecord updateRecord(ActionRequest actionRequest)
+		throws Exception {
+
+		long recordId = ParamUtil.getLong(actionRequest, "recordId");
+
+		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
+
+		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(
+			recordSetId);
+
+		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		Set<String> fieldNames = ddmStructure.getFieldNames();
+
+		Fields fields = new Fields();
+
+		for (String name : fieldNames) {
+			Field field = new Field();
+
+			field.setName(name);
+
+			String value = ParamUtil.getString(actionRequest, name);
+
+			field.setValue(value);
+
+			fields.put(field);
+		}
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DDLRecord.class.getName(), actionRequest);
+
+		DDLRecord record = null;
+
+		if (recordId <= 0) {
+			record = DDLRecordLocalServiceUtil.addRecord(
+				recordSetId, fields, serviceContext);
+		}
+		else {
+			record = DDLRecordLocalServiceUtil.updateRecord(
+				recordId, fields, serviceContext);
+		}
+
+		return record;
+	}
+
+}

@@ -30,12 +30,12 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ENTRY) %>">
-		<portlet:renderURL var="addEntryURL">
-			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_entry" />
+		<portlet:renderURL var="addRecordSetURL">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record_set" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addEntryURL %>"><liferay-ui:message key="add" /></a></span>
+		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addRecordSetURL %>"><liferay-ui:message key="add" /></a></span>
 	</c:if>
 </div>

@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.dynamicdatalists.model.DDLEntry;
-import com.liferay.portlet.dynamicdatalists.model.DDLEntryItem;
-import com.liferay.portlet.dynamicdatalists.service.DDLEntryItemLocalServiceUtil;
-import com.liferay.portlet.dynamicdatalists.service.DDLEntryLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 
 import javax.portlet.PortletRequest;
 
@@ -34,50 +34,50 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getEntry(HttpServletRequest request)
+	public static void getRecord(HttpServletRequest request)
 		throws Exception {
 
-		long entryId = ParamUtil.getLong(request, "entryId");
+		long recordId = ParamUtil.getLong(request, "recordId");
 
-		DDLEntry entry = null;
+		DDLRecord record = null;
 
-		if (Validator.isNotNull(entryId)) {
-			entry = DDLEntryLocalServiceUtil.getEntry(entryId);
+		if (recordId > 0) {
+			record = DDLRecordLocalServiceUtil.getRecord(recordId);
 		}
 
-		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY, entry);
+		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD, record);
 	}
 
-	public static void getEntry(PortletRequest portletRequest)
+	public static void getRecord(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		getEntry(request);
+		getRecord(request);
 	}
 
-	public static void getEntryItem(HttpServletRequest request)
+	public static void getRecordSet(HttpServletRequest request)
 		throws Exception {
 
-		long entryItemId = ParamUtil.getLong(request, "entryItemId");
+		long recordSetId = ParamUtil.getLong(request, "recordSetId");
 
-		DDLEntryItem entryItem = null;
+		DDLRecordSet recordSet = null;
 
-		if (entryItemId > 0) {
-			entryItem = DDLEntryItemLocalServiceUtil.getEntryItem(entryItemId);
+		if (Validator.isNotNull(recordSetId)) {
+			recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(recordSetId);
 		}
 
-		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_ENTRY_ITEM, entryItem);
+		request.setAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET, recordSet);
 	}
 
-	public static void getEntryItem(PortletRequest portletRequest)
+	public static void getRecordSet(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		getEntryItem(request);
+		getRecordSet(request);
 	}
 
 }

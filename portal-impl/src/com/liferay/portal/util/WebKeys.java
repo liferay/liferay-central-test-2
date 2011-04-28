@@ -88,9 +88,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String DOCUMENT_LIBRARY_REPOSITORY = "DOCUMENT_LIBRARY_REPOSITORY";
 
-	public static final String DYNAMIC_DATA_LISTS_ENTRY = "DYNAMIC_DATA_LISTS_ENTRY";
+	public static final String DYNAMIC_DATA_LISTS_RECORD = "DYNAMIC_DATA_LISTS_RECORD";
 
-	public static final String DYNAMIC_DATA_LISTS_ENTRY_ITEM = "DYNAMIC_DATA_LISTS_ENTRY_ITEM";
+	public static final String DYNAMIC_DATA_LISTS_RECORD_SET = "DYNAMIC_DATA_LISTS_RECORD_SET";
 
 	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE = "DYNAMIC_DATA_MAPPING_STRUCTURE";
 
