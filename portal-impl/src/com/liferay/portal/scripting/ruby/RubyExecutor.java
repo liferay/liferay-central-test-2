@@ -32,10 +32,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jruby.RubyInstanceConfig;
 import org.jruby.RubyInstanceConfig.CompileMode;
+import org.jruby.RubyInstanceConfig;
 import org.jruby.embed.LocalContextScope;
 import org.jruby.embed.ScriptingContainer;
+import org.jruby.embed.internal.LocalContextProvider;
 import org.jruby.exceptions.RaiseException;
 
 /**
@@ -47,10 +48,14 @@ public class RubyExecutor extends BaseScriptingExecutor {
 	public static final String LANGUAGE = "ruby";
 
 	public RubyExecutor() {
-		_ruby = new ScriptingContainer(LocalContextScope.THREADSAFE);
+		_scriptingContainer = new ScriptingContainer(
+			LocalContextScope.THREADSAFE);
+
+		LocalContextProvider localContextProvider =
+			_scriptingContainer.getProvider();
 
 		RubyInstanceConfig rubyInstanceConfig =
-			_ruby.getProvider().getRubyInstanceConfig();
+			localContextProvider.getRubyInstanceConfig();
 
 		rubyInstanceConfig.setLoader(PortalClassLoaderUtil.getClassLoader());
 
@@ -81,7 +86,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 		rubyInstanceConfig.setLoadPaths(_loadPaths);
 
-		_ruby.setCurrentDirectory(_basePath);
+		_scriptingContainer.setCurrentDirectory(_basePath);
 	}
 
 	public Map<String, Object> eval(
@@ -117,12 +122,10 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 		try {
 			RubyInstanceConfig rubyInstanceConfig =
-				_ruby.getProvider().getRubyInstanceConfig();
+				_scriptingContainer.getProvider().getRubyInstanceConfig();
 
 			rubyInstanceConfig.setCurrentDirectory(_basePath);
 			rubyInstanceConfig.setLoadPaths(_loadPaths);
-
-//			GlobalVariables globalVariables = _ruby.getGlobalVariables();
 
 			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
 				String inputName = entry.getKey();
@@ -132,18 +135,15 @@ public class RubyExecutor extends BaseScriptingExecutor {
 					inputName = StringPool.DOLLAR + inputName;
 				}
 
-//				BeanGlobalVariable beanGlobalVariable = new BeanGlobalVariable(
-//					_ruby, inputObject, inputObject.getClass());
-
-				_ruby.put(inputName, inputObject);
+				_scriptingContainer.put(inputName, inputObject);
 			}
 
 			if (scriptFile != null) {
-				_ruby.runScriptlet(
+				_scriptingContainer.runScriptlet(
 					new FileInputStream(scriptFile), scriptFile.toString());
 			}
 			else {
-				_ruby.runScriptlet(script);
+				_scriptingContainer.runScriptlet(script);
 			}
 
 			if (outputNames == null) {
@@ -153,7 +153,8 @@ public class RubyExecutor extends BaseScriptingExecutor {
 			Map<String, Object> outputObjects = new HashMap<String, Object>();
 
 			for (String outputName : outputNames) {
-				outputObjects.put(outputName, _ruby.get(outputName));
+				outputObjects.put(
+					outputName, _scriptingContainer.get(outputName));
 			}
 
 			return outputObjects;
@@ -173,6 +174,6 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 	private String _basePath;
 	private List<String> _loadPaths;
-	private ScriptingContainer _ruby;
+	private ScriptingContainer _scriptingContainer;
 
 }
