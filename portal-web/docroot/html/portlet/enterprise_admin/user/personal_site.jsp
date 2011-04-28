@@ -22,7 +22,7 @@ User selUser = (User)request.getAttribute("user.selUser");
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 %>
 
-<h3><liferay-ui:message key="pages" /></h3>
+<h3><liferay-ui:message key="personal-site" /></h3>
 
 <aui:fieldset>
 	<c:choose>
