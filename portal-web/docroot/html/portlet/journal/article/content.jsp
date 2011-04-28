@@ -172,12 +172,6 @@ if (Validator.isNotNull(content)) {
 <table class="lfr-table" id="<portlet:namespace />journalArticleWrapper" width="100%">
 <tr>
 	<td class="lfr-top">
-		<c:if test="<%= Validator.isNull(toLanguageId) %>">
-			<liferay-ui:asset-categories-error />
-
-			<liferay-ui:asset-tags-error />
-		</c:if>
-
 		<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
 		<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
 		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />

@@ -164,10 +164,6 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 				</c:if>
 
 				<liferay-util:include page="/html/portlet/journal/article_toolbar.jsp" />
-
-				<liferay-ui:asset-categories-error />
-
-				<liferay-ui:asset-tags-error />
 			</c:if>
 
 			<liferay-util:buffer var="htmlTop">

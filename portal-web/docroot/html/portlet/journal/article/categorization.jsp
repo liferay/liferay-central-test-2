@@ -21,6 +21,8 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 String type = BeanParamUtil.getString(article, request, "type");
 
+String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
+
 if (Validator.isNull(type)) {
 	type = "general";
 }
@@ -31,6 +33,12 @@ if (Validator.isNull(type)) {
 <aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
 <h3><liferay-ui:message key="categorization" /></h3>
+
+<c:if test="<%= Validator.isNull(toLanguageId) %>">
+	<liferay-ui:asset-categories-error />
+
+	<liferay-ui:asset-tags-error />
+</c:if>
 
 <liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
