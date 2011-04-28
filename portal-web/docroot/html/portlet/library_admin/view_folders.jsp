@@ -29,8 +29,6 @@ long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 Folder parentFolder = null;
 
-boolean showRepositories = GetterUtil.getBoolean((String)request.getAttribute("view.jsp-showRepositories"));
-
 boolean showSiblings = ParamUtil.getBoolean(request, "showSiblings");
 
 if (showSiblings) {
@@ -61,39 +59,6 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 %>
 
 <ul>
-	<c:if test="<%= showRepositories %>">
-		<liferay-portlet:renderURL varImpl="viewURL">
-			<portlet:param name="struts_action" value="/library_admin/view" />
-			<portlet:param name="folderId" value="<%= String.valueOf(0) %>" />
-		</liferay-portlet:renderURL>
-
-		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
-			<portlet:param name="struts_action" value="/library_admin/view" />
-			<portlet:param name="folderId" value="<%= String.valueOf(0) %>" />
-			<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
-			<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
-		</liferay-portlet:resourceURL>
-
-		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewExpandURL">
-			<portlet:param name="struts_action" value="/library_admin/view" />
-			<portlet:param name="folderId" value="<%= String.valueOf(0) %>" />
-			<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-			<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-		</liferay-portlet:resourceURL>
-
-		<li class="folder <%= (folderId == 0) ? "selected" : StringPool.BLANK %>">
-			<a href="<%= viewEntriesURL.toString() %>" data-expand="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" class="expand-folder">
-				<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-r" />
-			</a>
-
-			<a href="<%= viewURL.toString() %>" data-resource-url="<%= viewExpandURL.toString() %>">
-				<liferay-ui:icon image="folder" />
-
-				<liferay-ui:message key="documents-home" />
-			</a>
-		</li>
-	</c:if>
-
 	<%
 	for (Folder curFolder : folders) {
 
