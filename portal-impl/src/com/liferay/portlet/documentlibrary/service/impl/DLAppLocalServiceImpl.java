@@ -312,14 +312,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		return dlFileRankLocalService.getFileRanks(repositoryId, userId);
 	}
 
-	public List<DLFileRank> getFileRanks(
-			long repositoryId, long userId, int start, int end)
-		throws SystemException {
-
-		return dlFileRankLocalService.getFileRanks(
-			repositoryId, userId, start, end);
-	}
-
 	public DLFileShortcut getFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 

@@ -236,6 +236,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileRankLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" parent="basePersistence" />

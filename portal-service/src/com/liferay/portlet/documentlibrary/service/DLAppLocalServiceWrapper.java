@@ -225,12 +225,6 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 		return _dlAppLocalService.getFileRanks(repositoryId, userId);
 	}
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
-		long repositoryId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFileRanks(repositoryId, userId, start, end);
-	}
-
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
 		throws com.liferay.portal.kernel.exception.PortalException,

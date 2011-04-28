@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/recent_documents/init.jsp" %>
 
 <%
-List fileRanks = DLAppLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
+List fileRanks = DLAppLocalServiceUtil.getFileRanks(scopeGroupId, user.getUserId());
 %>
 
 <c:choose>

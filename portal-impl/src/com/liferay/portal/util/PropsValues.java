@@ -430,6 +430,8 @@ public class PropsValues {
 
 	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
 
+	public static final int DL_FILE_RANK_MAX_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_RANK_MAX_SIZE));
+
 	public static final String DL_HOOK_CMIS_CREDENTIALS_PASSWORD = PropsUtil.get(PropsKeys.DL_HOOK_CMIS_CREDENTIALS_PASSWORD);
 
 	public static final String DL_HOOK_CMIS_CREDENTIALS_USERNAME = PropsUtil.get(PropsKeys.DL_HOOK_CMIS_CREDENTIALS_USERNAME);

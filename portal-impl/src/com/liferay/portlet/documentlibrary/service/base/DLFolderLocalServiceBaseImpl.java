@@ -58,6 +58,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
@@ -448,6 +449,24 @@ public abstract class DLFolderLocalServiceBaseImpl
 	public void setDLFileRankPersistence(
 		DLFileRankPersistence dlFileRankPersistence) {
 		this.dlFileRankPersistence = dlFileRankPersistence;
+	}
+
+	/**
+	 * Gets the d l file rank finder.
+	 *
+	 * @return the d l file rank finder
+	 */
+	public DLFileRankFinder getDLFileRankFinder() {
+		return dlFileRankFinder;
+	}
+
+	/**
+	 * Sets the d l file rank finder.
+	 *
+	 * @param dlFileRankFinder the d l file rank finder
+	 */
+	public void setDLFileRankFinder(DLFileRankFinder dlFileRankFinder) {
+		this.dlFileRankFinder = dlFileRankFinder;
 	}
 
 	/**
@@ -1075,6 +1094,8 @@ public abstract class DLFolderLocalServiceBaseImpl
 	protected DLFileRankLocalService dlFileRankLocalService;
 	@BeanReference(type = DLFileRankPersistence.class)
 	protected DLFileRankPersistence dlFileRankPersistence;
+	@BeanReference(type = DLFileRankFinder.class)
+	protected DLFileRankFinder dlFileRankFinder;
 	@BeanReference(type = DLFileShortcutLocalService.class)
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
 	@BeanReference(type = DLFileShortcutService.class)

@@ -611,6 +611,15 @@
 		<portlet-name>64</portlet-name>
 		<icon>/html/icons/recent_documents.png</icon>
 		<struts-path>recent_documents</struts-path>
+		<scheduler-entry>
+			<scheduler-event-listener-class>com.liferay.portlet.documentlibrary.messaging.CheckFileRankMessageListener</scheduler-event-listener-class>
+			<trigger>
+				<simple>
+					<property-key>dl.file.rank.check.interval</property-key>
+					<time-unit>minute</time-unit>
+				</simple>
+			</trigger>
+		</scheduler-entry>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>

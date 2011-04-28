@@ -76,6 +76,17 @@
 				))
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.findGU_ByC">
+		<![CDATA[
+			SELECT
+				groupId, userId
+			FROM
+				DLFileRank
+			GROUP BY
+				groupId, userId
+			HAVING COUNT(*) > ?
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder.countF_ByG_F_S">
 		<![CDATA[
 			SELECT

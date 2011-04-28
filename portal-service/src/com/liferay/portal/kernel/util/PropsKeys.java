@@ -545,6 +545,8 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_RANK_ENABLED = "dl.file.rank.enabled";
 
+	public static final String DL_FILE_RANK_MAX_SIZE = "dl.file.rank.max.size";
+
 	public static final String DL_HOOK_CMIS_CREDENTIALS_PASSWORD = "dl.hook.cmis.credentials.password";
 
 	public static final String DL_HOOK_CMIS_CREDENTIALS_USERNAME = "dl.hook.cmis.credentials.username";

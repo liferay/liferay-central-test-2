@@ -17,6 +17,8 @@ package com.liferay.portlet.documentlibrary.service;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Document;
@@ -28,6 +30,8 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -79,6 +83,52 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		}
 
 		super.tearDown();
+	}
+
+	public void testAddFileEntriesConcurrently() throws Exception {
+		int threadCount = 25;
+
+		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
+
+		_fileEntryIds = new long[threadCount];
+
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < threads.length; j++) {
+				if (i == 0) {
+					threads[j] = new AddFileEntryThread(_userId, j);
+				}
+				else {
+					threads[j] = new RetrieveFileEntryThread(_userId, j);
+				}
+			}
+
+			for (DoAsUserThread thread : threads) {
+				thread.start();
+			}
+
+			for (DoAsUserThread thread : threads) {
+				thread.join();
+			}
+
+			int successCount = 0;
+
+			for (DoAsUserThread thread : threads) {
+				if (thread.isSuccess()) {
+					successCount++;
+				}
+			}
+
+			String message = "Only " + successCount + " out of " + threadCount;
+
+			if (i == 0) {
+				message += " threads added file entries successfully";
+			}
+			else {
+				message += " threads retrieved file entries successfully";
+			}
+
+			assertTrue(message, successCount == threadCount);
+		}
 	}
 
 	public void testAddFileEntryWithDuplicateName() throws Exception {
@@ -182,26 +232,29 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 	protected void addFileEntry(boolean rootFolder)
 		throws PortalException, SystemException {
 
+		_fileEntry = addFileEntry(rootFolder, "Title.txt");
+	}
+
+	protected FileEntry addFileEntry(boolean rootFolder, String fileName)
+		throws PortalException, SystemException {
+
 		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		if (!rootFolder) {
 			folderId = _folder.getFolderId();
 		}
 
-		String fileName = "Title.txt";
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 
-		String content = "Content: Enterprise. Open Source. For Life.";
-
-		byte[] bytes = content.getBytes();
+		byte[] bytes = _CONTENT.getBytes();
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddCommunityPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
-		_fileEntry = DLAppServiceUtil.addFileEntry(
+		return DLAppServiceUtil.addFileEntry(
 			_groupId, folderId, fileName, description, changeLog, bytes,
 			serviceContext);
 	}
@@ -262,8 +315,87 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 	}
 
 	private FileEntry _fileEntry;
+	private long[] _fileEntryIds;
 	private Folder _folder;
 	private long _groupId = PortalUtil.getScopeGroupId(
 		TestPropsValues.LAYOUT_PLID);
+	private long _userId = TestPropsValues.USER_ID;
+
+	private static final String _CONTENT =
+		"Content: Enterprise. Open Source. For Life.";
+
+	private static Log _log = LogFactoryUtil.getLog(DLAppServiceTest.class);
+
+	private class AddFileEntryThread extends DoAsUserThread {
+
+		public AddFileEntryThread(long userId, int index) {
+			super(userId);
+
+			_index = index;
+		}
+
+		public boolean isSuccess() {
+			return _success;
+		}
+
+		protected void doRun() throws Exception {
+			try {
+				FileEntry fileEntry = addFileEntry(
+					false, "Test-" + _index + ".txt");
+
+				_fileEntryIds[_index] = fileEntry.getFileEntryId();
+
+				_log.debug("Added file " + _index);
+
+				_success = true;
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unable to add file " + _index + " " +
+						StackTraceUtil.getStackTrace(e));
+			}
+		}
+
+		private int _index;
+		private boolean _success;
+	}
+
+	private class RetrieveFileEntryThread extends DoAsUserThread {
+
+		public RetrieveFileEntryThread(long userId, int index) {
+			super(userId);
+
+			_index = index;
+		}
+
+		public boolean isSuccess() {
+			return _success;
+		}
+
+		protected void doRun() throws Exception {
+			try {
+				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
+					_fileEntryIds[_index]);
+
+				InputStream is = fileEntry.getContentStream();
+
+				String content = StringUtil.read(is);
+
+				if (_CONTENT.equals(content)) {
+					_log.debug("Retrieved file " + _index);
+
+					_success = true;
+				}
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unable to add file " + _index + " " +
+						StackTraceUtil.getStackTrace(e));
+			}
+		}
+
+		private int _index;
+		private boolean _success;
+	}
 
 }
