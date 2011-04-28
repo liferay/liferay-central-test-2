@@ -38,22 +38,23 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 
 		int orderByPos = sqlLowerCase.lastIndexOf(" order by ");
 
-		String orderBy;
-		String selectFromWhere;
+		String selectFromWhere = null;
+		String orderBy = null;
 
 		if (orderByPos > 0) {
-			orderBy = sql.substring(orderByPos + 9, sql.length());
 			selectFromWhere = sql.substring(fromPos, orderByPos);
+			orderBy = sql.substring(orderByPos + 9, sql.length());
 		}
 		else {
-			orderBy = "CURRENT_TIMESTAMP";
 			selectFromWhere = sql.substring(fromPos);
+			orderBy = "CURRENT_TIMESTAMP";
 		}
 
-		StringBundler sb;
+		StringBundler sb = null;
 
 		if (sqlLowerCase.contains(" union ")) {
-			String[] orderByColumns = getOrderByColumns(selectFrom, orderBy, false);
+			String[] orderByColumns = getOrderByColumns(
+				selectFrom, orderBy, false);
 
 			sb = new StringBundler(11);
 
@@ -65,7 +66,8 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 			sb.append(" ) _temp_table_1 ) _temp_table_2");
 		}
 		else {
-			String[] orderByColumns = getOrderByColumns(selectFrom, orderBy, true);
+			String[] orderByColumns = getOrderByColumns(
+				selectFrom, orderBy, true);
 
 			sb = new StringBundler(12);
 
@@ -127,8 +129,8 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 				}
 			}
 
-			orderByColumns[i] =
-				orderByColumnName.concat(StringPool.SPACE).concat(orderByType);
+			orderByColumns[i] = orderByColumnName.concat(
+				StringPool.SPACE).concat(orderByType);
 		}
 
 		return orderByColumns;
