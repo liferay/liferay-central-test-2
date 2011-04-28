@@ -96,6 +96,7 @@ public class PortletPreferencesImpl
 
 			String key = entry.getKey();
 			Preference preference = entry.getValue();
+
 			String[] actualValues = _getActualValues(preference.getValues());
 
 			if (actualValues != null) {
