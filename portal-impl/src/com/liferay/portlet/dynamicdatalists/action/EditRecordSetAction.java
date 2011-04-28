@@ -23,6 +23,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException;
 import com.liferay.portlet.dynamicdatalists.RecordSetDDMStructureIdException;
 import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
@@ -37,6 +38,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -161,6 +163,22 @@ public class EditRecordSetAction extends PortletAction {
 			recordSet = DDLRecordSetServiceUtil.updateRecordSet(
 				groupId, ddmStructureId, recordSetKey, nameMap, description,
 				serviceContext);
+		}
+
+		// Dynamic Data List Display
+
+		String portletResource = ParamUtil.getString(
+			actionRequest, "portletResource");
+
+		if (Validator.isNotNull(portletResource)) {
+			PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					actionRequest, portletResource);
+
+			preferences.setValue("recordSetId", String.valueOf(
+				recordSet.getRecordSetId()));
+
+			preferences.store();
 		}
 
 		return recordSet;
