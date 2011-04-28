@@ -21,6 +21,12 @@ Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = ParamUtil.getLong(request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
+boolean showRepositories = false;
+
+if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+	showRepositories = true;
+}
+
 if ((folder == null) && (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 	try {
 		folder = DLAppLocalServiceUtil.getFolder(folderId);
@@ -45,6 +51,8 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
+
+request.setAttribute("view.jsp-showRepositories", String.valueOf(showRepositories));
 %>
 
 <c:if test="<%= viewFolders %>">

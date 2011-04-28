@@ -45,7 +45,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="folder"
+		image="title"
 		url="<%= sortTitle.toString() %>"
 	/>
 
@@ -57,7 +57,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="folder"
+		image="creation-date"
 		url="<%= sortCreationDate.toString() %>"
 	/>
 
@@ -69,7 +69,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="folder"
+		image="modified-date"
 		url="<%= sortModifiedDate.toString() %>"
 	/>
 
@@ -81,7 +81,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="folder"
+		image="read-count"
 		url="<%= sortReadCountDate.toString() %>"
 	/>
 
@@ -93,7 +93,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="folder"
+		image="size"
 		url="<%= sortSize.toString() %>"
 	/>
 </liferay-ui:icon-menu>
@@ -116,6 +116,16 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="unlock"
+		url="<%= taglibUrl %>"
+	/>
+
+	<%
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "doFileEntryAction('" + Constants.MOVE + "')";
+	%>
+
+	<liferay-ui:icon
+		image="submit"
+		message="move"
 		url="<%= taglibUrl %>"
 	/>
 

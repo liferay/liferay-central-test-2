@@ -21,6 +21,12 @@ Folder folder = (com.liferay.portal.kernel.repository.model.Folder)request.getAt
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
+boolean showRepositories = false;
+
+if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+	showRepositories = true;
+}
+
 if ((folder == null) && (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 	try {
 		folder = DLAppLocalServiceUtil.getFolder(folderId);
@@ -41,6 +47,8 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
+
+request.setAttribute("view.jsp-showRepositories", String.valueOf(showRepositories));
 
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
 
@@ -102,6 +110,8 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 
 					<div class="display-style">
 						<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
+
+						<aui:input cssClass="keywords" label="" name="keywords" type="text" />
 					</div>
 				</div>
 			</div>
@@ -257,7 +267,7 @@ if (folder != null) {
 <aui:script use="liferay-list-view">
 	var listView = new Liferay.ListView(
 		{
-			itemAttributes: ['data-direction-right', 'data-refresh-entries', 'data-refresh-folders', 'data-resource-url'],
+			itemAttributes: ['data-resource-url', 'data-expand'],
 			itemSelector: 'ul > li > a',
 			srcNode: '#<portlet:namespace />folderContainer'
 		}
@@ -271,10 +281,8 @@ if (folder != null) {
 		var target = details.target;
 		var attributes = details.attributes;
 
-		var dataDirectionRight = attributes['data-direction-right'];
-		var dataRefreshEntries = attributes['data-refresh-entries'];
-		var dataRefreshFolders = attributes['data-refresh-folders'];
 		var dataResourceUrl = attributes['data-resource-url'];
+		var dataExpand = attributes['data-expand'];
 
 		A.io.request(
 			dataResourceUrl,
@@ -293,14 +301,10 @@ if (folder != null) {
 
 						target.ancestor('.folder').addClass('selected');
 
-						if (dataDirectionRight) {
-							listView.set('direction', 'right');
+						if (dataExpand) {
+							listView.set('data', content);
 						}
 						else {
-							listView.set('direction', 'left');
-						}
-
-						if (dataRefreshEntries) {
 							var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
 							var addButton = content.one('#addButton')
 
@@ -313,15 +317,6 @@ if (folder != null) {
 
 							entriesContainer.empty();
 							entriesContainer.appendChild(entries);
-						}
-
-						if (dataRefreshFolders) {
-							if (content.one('#folders')) {
-								listView.set('data', content.one('#folders'));
-							}
-							else {
-								listView.set('data', content);
-							}
 						}
 					}
 				}
