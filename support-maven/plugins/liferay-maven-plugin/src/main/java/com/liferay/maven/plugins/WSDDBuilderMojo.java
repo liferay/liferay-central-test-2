@@ -25,7 +25,9 @@ import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.xml.SAXReaderImpl;
 
 import java.io.File;
+
 import java.lang.reflect.Method;
+
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -38,7 +40,7 @@ import org.apache.maven.project.MavenProject;
  * @author Mika Koivisto
  * @goal   build-wsdd
  */
-public class WSDDBuilderMojo  extends AbstractMojo {
+public class WSDDBuilderMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		try {
@@ -136,4 +138,5 @@ public class WSDDBuilderMojo  extends AbstractMojo {
 	 * @parameter default-value="Plugin" expression="${serviceNamespace}"
 	 */
 	private String serviceNamespace;
+
 }
