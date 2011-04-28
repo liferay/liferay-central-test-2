@@ -384,7 +384,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		addSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
 		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
-		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
+		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
 		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
