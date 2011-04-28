@@ -27,7 +27,7 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 public class StringResourceRepositoryImpl implements StringResourceRepository {
 
 	public static final String CACHE_NAME =
-		StringResourceRepository.class.getName();
+		LiferayResourceCacheUtil.class.getName();
 
 	public String getEncoding() {
 		return _encoding;
