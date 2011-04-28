@@ -63,6 +63,7 @@ portletURL.setParameter("articleId", article.getArticleId());
 
 	searchTerms.setAdvancedSearch(true);
 	searchTerms.setArticleId(article.getArticleId());
+	searchTerms.setVersion(0);
 
 	List<JournalArticle> results = null;
 	%>
