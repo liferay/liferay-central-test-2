@@ -1472,8 +1472,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				WikiNode.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				WikiNode.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1653,8 +1652,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				WikiNode.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				WikiNode.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2574,8 +2572,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				WikiNode.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				WikiNode.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

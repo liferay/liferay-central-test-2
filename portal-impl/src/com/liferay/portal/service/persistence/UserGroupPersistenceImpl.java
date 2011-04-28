@@ -928,8 +928,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				UserGroup.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				UserGroup.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1110,8 +1109,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				UserGroup.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				UserGroup.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1611,8 +1609,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				UserGroup.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				UserGroup.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1799,8 +1796,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				UserGroup.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				UserGroup.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2223,8 +2219,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				UserGroup.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				UserGroup.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -2334,8 +2329,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		query.append(_FINDER_COLUMN_C_P_PARENTUSERGROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				UserGroup.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				UserGroup.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

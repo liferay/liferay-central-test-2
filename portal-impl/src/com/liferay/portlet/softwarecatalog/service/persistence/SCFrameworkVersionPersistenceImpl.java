@@ -881,8 +881,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1065,8 +1064,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1907,8 +1905,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2096,8 +2093,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2365,8 +2361,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2529,8 +2524,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		query.append(_FINDER_COLUMN_G_A_ACTIVE_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCFrameworkVersion.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

@@ -993,7 +993,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1173,7 +1173,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1670,7 +1670,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1861,7 +1861,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2364,7 +2364,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -2555,7 +2555,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3238,7 +3238,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3436,7 +3436,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3896,7 +3896,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -4018,7 +4018,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -4142,7 +4142,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -4346,7 +4346,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Role.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID);
+				Role.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

@@ -35,6 +35,7 @@ public class ResourcePermissionJSONSerializer {
 		jsonObject.put("scope", model.getScope());
 		jsonObject.put("primKey", model.getPrimKey());
 		jsonObject.put("roleId", model.getRoleId());
+		jsonObject.put("ownerId", model.getOwnerId());
 		jsonObject.put("actionIds", model.getActionIds());
 
 		return jsonObject;

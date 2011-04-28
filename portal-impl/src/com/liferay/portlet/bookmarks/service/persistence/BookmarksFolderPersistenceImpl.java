@@ -1455,8 +1455,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1638,8 +1637,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2480,8 +2478,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2668,8 +2665,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3099,8 +3095,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -3263,8 +3258,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				BookmarksFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

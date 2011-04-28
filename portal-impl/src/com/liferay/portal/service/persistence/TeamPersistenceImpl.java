@@ -888,8 +888,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Team.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID,
-				groupId);
+				Team.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1068,8 +1067,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Team.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID,
-				groupId);
+				Team.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1474,8 +1472,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Team.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID,
-				groupId);
+				Team.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

@@ -291,6 +291,16 @@ public class ResourcePermissionLocalServiceUtil {
 			scope, primKey, roleId, actionIds);
 	}
 
+	public static com.liferay.portal.model.ResourcePermission getResourcePermission(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getResourcePermission(companyId, name, scope, primKey,
+			roleId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> getResourcePermissions(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
@@ -372,6 +382,16 @@ public class ResourcePermissionLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.removeResourcePermissions(companyId, name, scope, roleId, actionId);
+	}
+
+	public static void setOwnerResourcePermissions(long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, long ownerId, java.lang.String[] actionIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.setOwnerResourcePermissions(companyId, name, scope, primKey,
+			roleId, ownerId, actionIds);
 	}
 
 	public static void setResourcePermissions(long companyId,

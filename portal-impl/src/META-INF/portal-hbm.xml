@@ -766,6 +766,7 @@
 		<property name="scope" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="primKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ownerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="actionIds" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.RoleImpl" table="Role_">

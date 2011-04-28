@@ -666,6 +666,75 @@ public class ResourcePermissionUtil {
 	}
 
 	/**
+	* Finds the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; or throws a {@link com.liferay.portal.NoSuchResourcePermissionException} if it could not be found.
+	*
+	* @param companyId the company ID to search with
+	* @param name the name to search with
+	* @param scope the scope to search with
+	* @param primKey the prim key to search with
+	* @param roleId the role ID to search with
+	* @param ownerId the owner ID to search with
+	* @param actionIds the action IDs to search with
+	* @return the matching resource permission
+	* @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.ResourcePermission findByC_N_S_P_R_O_A(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId, long ownerId, long actionIds)
+		throws com.liferay.portal.NoSuchResourcePermissionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_N_S_P_R_O_A(companyId, name, scope, primKey,
+			roleId, ownerId, actionIds);
+	}
+
+	/**
+	* Finds the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID to search with
+	* @param name the name to search with
+	* @param scope the scope to search with
+	* @param primKey the prim key to search with
+	* @param roleId the role ID to search with
+	* @param ownerId the owner ID to search with
+	* @param actionIds the action IDs to search with
+	* @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.ResourcePermission fetchByC_N_S_P_R_O_A(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId, long ownerId, long actionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_N_S_P_R_O_A(companyId, name, scope, primKey,
+			roleId, ownerId, actionIds);
+	}
+
+	/**
+	* Finds the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID to search with
+	* @param name the name to search with
+	* @param scope the scope to search with
+	* @param primKey the prim key to search with
+	* @param roleId the role ID to search with
+	* @param ownerId the owner ID to search with
+	* @param actionIds the action IDs to search with
+	* @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.ResourcePermission fetchByC_N_S_P_R_O_A(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId, long ownerId, long actionIds,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_N_S_P_R_O_A(companyId, name, scope, primKey,
+			roleId, ownerId, actionIds, retrieveFromCache);
+	}
+
+	/**
 	* Finds all the resource permissions.
 	*
 	* @return the resource permissions
@@ -772,6 +841,28 @@ public class ResourcePermissionUtil {
 	}
 
 	/**
+	* Removes the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; from the database.
+	*
+	* @param companyId the company ID to search with
+	* @param name the name to search with
+	* @param scope the scope to search with
+	* @param primKey the prim key to search with
+	* @param roleId the role ID to search with
+	* @param ownerId the owner ID to search with
+	* @param actionIds the action IDs to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_N_S_P_R_O_A(long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, long ownerId, long actionIds)
+		throws com.liferay.portal.NoSuchResourcePermissionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence()
+			.removeByC_N_S_P_R_O_A(companyId, name, scope, primKey, roleId,
+			ownerId, actionIds);
+	}
+
+	/**
 	* Removes all the resource permissions from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -839,6 +930,28 @@ public class ResourcePermissionUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .countByC_N_S_P_R(companyId, name, scope, primKey, roleId);
+	}
+
+	/**
+	* Counts all the resource permissions where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @param name the name to search with
+	* @param scope the scope to search with
+	* @param primKey the prim key to search with
+	* @param roleId the role ID to search with
+	* @param ownerId the owner ID to search with
+	* @param actionIds the action IDs to search with
+	* @return the number of matching resource permissions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_N_S_P_R_O_A(long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, long ownerId, long actionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .countByC_N_S_P_R_O_A(companyId, name, scope, primKey,
+			roleId, ownerId, actionIds);
 	}
 
 	/**

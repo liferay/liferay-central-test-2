@@ -36,6 +36,7 @@ public class ResourcePermissionSoap implements Serializable {
 		soapModel.setScope(model.getScope());
 		soapModel.setPrimKey(model.getPrimKey());
 		soapModel.setRoleId(model.getRoleId());
+		soapModel.setOwnerId(model.getOwnerId());
 		soapModel.setActionIds(model.getActionIds());
 
 		return soapModel;
@@ -140,6 +141,14 @@ public class ResourcePermissionSoap implements Serializable {
 		_roleId = roleId;
 	}
 
+	public long getOwnerId() {
+		return _ownerId;
+	}
+
+	public void setOwnerId(long ownerId) {
+		_ownerId = ownerId;
+	}
+
 	public long getActionIds() {
 		return _actionIds;
 	}
@@ -154,5 +163,6 @@ public class ResourcePermissionSoap implements Serializable {
 	private int _scope;
 	private String _primKey;
 	private long _roleId;
+	private long _ownerId;
 	private long _actionIds;
 }

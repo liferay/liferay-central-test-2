@@ -1874,8 +1874,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2055,8 +2054,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3089,8 +3087,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -3288,8 +3285,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3464,8 +3460,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -3961,8 +3956,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -4148,8 +4142,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -4886,8 +4879,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -5090,8 +5082,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -5280,8 +5271,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -5802,8 +5792,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -6086,8 +6075,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -6180,8 +6168,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -6295,8 +6282,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		query.append(_FINDER_COLUMN_G_R_REPEATING_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -6550,8 +6536,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		query.append(_FINDER_COLUMN_G_T_R_REPEATING_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -6655,8 +6640,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		conjunctionable = true;
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				CalEvent.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				CalEvent.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

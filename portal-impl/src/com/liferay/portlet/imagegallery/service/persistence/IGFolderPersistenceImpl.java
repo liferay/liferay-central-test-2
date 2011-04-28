@@ -1506,8 +1506,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				IGFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				IGFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1688,8 +1687,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				IGFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				IGFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2529,8 +2527,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				IGFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				IGFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2716,8 +2713,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				IGFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				IGFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3325,8 +3321,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				IGFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				IGFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -3489,8 +3484,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				IGFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				IGFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

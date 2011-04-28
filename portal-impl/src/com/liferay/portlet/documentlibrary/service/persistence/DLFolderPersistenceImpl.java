@@ -1554,8 +1554,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DLFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				DLFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1736,8 +1735,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DLFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				DLFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2706,8 +2704,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DLFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				DLFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2893,8 +2890,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DLFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				DLFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3915,8 +3911,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DLFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				DLFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -4132,8 +4127,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		query.append(_FINDER_COLUMN_G_P_PARENTFOLDERID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DLFolder.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				DLFolder.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

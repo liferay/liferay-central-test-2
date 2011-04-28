@@ -852,8 +852,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCLicense.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				SCLicense.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1033,8 +1032,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCLicense.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				SCLicense.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1533,8 +1531,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCLicense.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				SCLicense.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1720,8 +1717,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCLicense.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				SCLicense.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1977,8 +1973,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		query.append(_FINDER_COLUMN_ACTIVE_ACTIVE_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCLicense.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				SCLicense.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -2088,8 +2083,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		query.append(_FINDER_COLUMN_A_R_RECOMMENDED_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCLicense.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				SCLicense.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

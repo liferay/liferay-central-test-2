@@ -867,8 +867,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1042,8 +1041,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1628,8 +1626,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1803,8 +1800,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2070,8 +2066,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		query.append(_FINDER_COLUMN_CLASSNAMEID_CLASSNAMEID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -2225,8 +2220,7 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				DDMStructureLink.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

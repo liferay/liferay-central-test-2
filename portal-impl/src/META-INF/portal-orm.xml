@@ -782,6 +782,7 @@
 			<basic name="scope" />
 			<basic name="primKey" />
 			<basic name="roleId" />
+			<basic name="ownerId" />
 			<basic name="actionIds" />
 			<transient name="primaryKey" />
 		</attributes>

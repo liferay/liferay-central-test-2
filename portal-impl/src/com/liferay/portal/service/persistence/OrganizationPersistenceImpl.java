@@ -956,8 +956,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1139,8 +1138,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1612,8 +1610,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1795,8 +1792,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2299,8 +2295,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -2488,8 +2483,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2925,8 +2919,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3026,8 +3019,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		query.append(_FINDER_COLUMN_LOCATIONS_COMPANYID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3137,8 +3129,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		query.append(_FINDER_COLUMN_C_P_PARENTORGANIZATIONID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Organization.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				Organization.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

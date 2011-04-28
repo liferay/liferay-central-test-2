@@ -72,6 +72,7 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 		newResourcePermission.setScope(nextInt());
 		newResourcePermission.setPrimKey(randomString());
 		newResourcePermission.setRoleId(nextLong());
+		newResourcePermission.setOwnerId(nextLong());
 		newResourcePermission.setActionIds(nextLong());
 
 		_persistence.update(newResourcePermission, false);
@@ -90,6 +91,8 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 			newResourcePermission.getPrimKey());
 		assertEquals(existingResourcePermission.getRoleId(),
 			newResourcePermission.getRoleId());
+		assertEquals(existingResourcePermission.getOwnerId(),
+			newResourcePermission.getOwnerId());
 		assertEquals(existingResourcePermission.getActionIds(),
 			newResourcePermission.getActionIds());
 	}
@@ -224,6 +227,23 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 				existingResourcePermissionModelImpl.getOriginalPrimKey()));
 		assertEquals(existingResourcePermissionModelImpl.getRoleId(),
 			existingResourcePermissionModelImpl.getOriginalRoleId());
+
+		assertEquals(existingResourcePermissionModelImpl.getCompanyId(),
+			existingResourcePermissionModelImpl.getOriginalCompanyId());
+		assertTrue(Validator.equals(
+				existingResourcePermissionModelImpl.getName(),
+				existingResourcePermissionModelImpl.getOriginalName()));
+		assertEquals(existingResourcePermissionModelImpl.getScope(),
+			existingResourcePermissionModelImpl.getOriginalScope());
+		assertTrue(Validator.equals(
+				existingResourcePermissionModelImpl.getPrimKey(),
+				existingResourcePermissionModelImpl.getOriginalPrimKey()));
+		assertEquals(existingResourcePermissionModelImpl.getRoleId(),
+			existingResourcePermissionModelImpl.getOriginalRoleId());
+		assertEquals(existingResourcePermissionModelImpl.getOwnerId(),
+			existingResourcePermissionModelImpl.getOriginalOwnerId());
+		assertEquals(existingResourcePermissionModelImpl.getActionIds(),
+			existingResourcePermissionModelImpl.getOriginalActionIds());
 	}
 
 	protected ResourcePermission addResourcePermission()
@@ -237,6 +257,7 @@ public class ResourcePermissionPersistenceTest extends BasePersistenceTestCase {
 		resourcePermission.setScope(nextInt());
 		resourcePermission.setPrimKey(randomString());
 		resourcePermission.setRoleId(nextLong());
+		resourcePermission.setOwnerId(nextLong());
 		resourcePermission.setActionIds(nextLong());
 
 		_persistence.update(resourcePermission, false);

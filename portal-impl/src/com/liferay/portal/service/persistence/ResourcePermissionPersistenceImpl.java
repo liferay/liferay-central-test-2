@@ -132,6 +132,22 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				Integer.class.getName(), String.class.getName(),
 				Long.class.getName()
 			});
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_N_S_P_R_O_A",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), String.class.getName(),
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_N_S_P_R_O_A = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
+			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_N_S_P_R_O_A",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), String.class.getName(),
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -158,6 +174,19 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				
 			resourcePermission.getPrimKey(),
 				Long.valueOf(resourcePermission.getRoleId())
+			}, resourcePermission);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+			new Object[] {
+				Long.valueOf(resourcePermission.getCompanyId()),
+				
+			resourcePermission.getName(),
+				Integer.valueOf(resourcePermission.getScope()),
+				
+			resourcePermission.getPrimKey(),
+				Long.valueOf(resourcePermission.getRoleId()),
+				Long.valueOf(resourcePermission.getOwnerId()),
+				Long.valueOf(resourcePermission.getActionIds())
 			}, resourcePermission);
 
 		resourcePermission.resetOriginalValues();
@@ -216,6 +245,19 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				
 			resourcePermission.getPrimKey(),
 				Long.valueOf(resourcePermission.getRoleId())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+			new Object[] {
+				Long.valueOf(resourcePermission.getCompanyId()),
+				
+			resourcePermission.getName(),
+				Integer.valueOf(resourcePermission.getScope()),
+				
+			resourcePermission.getPrimKey(),
+				Long.valueOf(resourcePermission.getRoleId()),
+				Long.valueOf(resourcePermission.getOwnerId()),
+				Long.valueOf(resourcePermission.getActionIds())
 			});
 	}
 
@@ -333,6 +375,19 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				Long.valueOf(resourcePermissionModelImpl.getRoleId())
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+			new Object[] {
+				Long.valueOf(resourcePermissionModelImpl.getCompanyId()),
+				
+			resourcePermissionModelImpl.getName(),
+				Integer.valueOf(resourcePermissionModelImpl.getScope()),
+				
+			resourcePermissionModelImpl.getPrimKey(),
+				Long.valueOf(resourcePermissionModelImpl.getRoleId()),
+				Long.valueOf(resourcePermissionModelImpl.getOwnerId()),
+				Long.valueOf(resourcePermissionModelImpl.getActionIds())
+			});
+
 		EntityCacheUtil.removeResult(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionImpl.class, resourcePermission.getPrimaryKey());
 
@@ -413,6 +468,59 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				}, resourcePermission);
 		}
 
+		if (!isNew &&
+				((resourcePermission.getCompanyId() != resourcePermissionModelImpl.getOriginalCompanyId()) ||
+				!Validator.equals(resourcePermission.getName(),
+					resourcePermissionModelImpl.getOriginalName()) ||
+				(resourcePermission.getScope() != resourcePermissionModelImpl.getOriginalScope()) ||
+				!Validator.equals(resourcePermission.getPrimKey(),
+					resourcePermissionModelImpl.getOriginalPrimKey()) ||
+				(resourcePermission.getRoleId() != resourcePermissionModelImpl.getOriginalRoleId()) ||
+				(resourcePermission.getOwnerId() != resourcePermissionModelImpl.getOriginalOwnerId()) ||
+				(resourcePermission.getActionIds() != resourcePermissionModelImpl.getOriginalActionIds()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+				new Object[] {
+					Long.valueOf(
+						resourcePermissionModelImpl.getOriginalCompanyId()),
+					
+				resourcePermissionModelImpl.getOriginalName(),
+					Integer.valueOf(
+						resourcePermissionModelImpl.getOriginalScope()),
+					
+				resourcePermissionModelImpl.getOriginalPrimKey(),
+					Long.valueOf(
+						resourcePermissionModelImpl.getOriginalRoleId()),
+					Long.valueOf(
+						resourcePermissionModelImpl.getOriginalOwnerId()),
+					Long.valueOf(
+						resourcePermissionModelImpl.getOriginalActionIds())
+				});
+		}
+
+		if (isNew ||
+				((resourcePermission.getCompanyId() != resourcePermissionModelImpl.getOriginalCompanyId()) ||
+				!Validator.equals(resourcePermission.getName(),
+					resourcePermissionModelImpl.getOriginalName()) ||
+				(resourcePermission.getScope() != resourcePermissionModelImpl.getOriginalScope()) ||
+				!Validator.equals(resourcePermission.getPrimKey(),
+					resourcePermissionModelImpl.getOriginalPrimKey()) ||
+				(resourcePermission.getRoleId() != resourcePermissionModelImpl.getOriginalRoleId()) ||
+				(resourcePermission.getOwnerId() != resourcePermissionModelImpl.getOriginalOwnerId()) ||
+				(resourcePermission.getActionIds() != resourcePermissionModelImpl.getOriginalActionIds()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+				new Object[] {
+					Long.valueOf(resourcePermission.getCompanyId()),
+					
+				resourcePermission.getName(),
+					Integer.valueOf(resourcePermission.getScope()),
+					
+				resourcePermission.getPrimKey(),
+					Long.valueOf(resourcePermission.getRoleId()),
+					Long.valueOf(resourcePermission.getOwnerId()),
+					Long.valueOf(resourcePermission.getActionIds())
+				}, resourcePermission);
+		}
+
 		return resourcePermission;
 	}
 
@@ -433,6 +541,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		resourcePermissionImpl.setScope(resourcePermission.getScope());
 		resourcePermissionImpl.setPrimKey(resourcePermission.getPrimKey());
 		resourcePermissionImpl.setRoleId(resourcePermission.getRoleId());
+		resourcePermissionImpl.setOwnerId(resourcePermission.getOwnerId());
 		resourcePermissionImpl.setActionIds(resourcePermission.getActionIds());
 
 		return resourcePermissionImpl;
@@ -1904,6 +2013,232 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	/**
+	 * Finds the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; or throws a {@link com.liferay.portal.NoSuchResourcePermissionException} if it could not be found.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param name the name to search with
+	 * @param scope the scope to search with
+	 * @param primKey the prim key to search with
+	 * @param roleId the role ID to search with
+	 * @param ownerId the owner ID to search with
+	 * @param actionIds the action IDs to search with
+	 * @return the matching resource permission
+	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourcePermission findByC_N_S_P_R_O_A(long companyId, String name,
+		int scope, String primKey, long roleId, long ownerId, long actionIds)
+		throws NoSuchResourcePermissionException, SystemException {
+		ResourcePermission resourcePermission = fetchByC_N_S_P_R_O_A(companyId,
+				name, scope, primKey, roleId, ownerId, actionIds);
+
+		if (resourcePermission == null) {
+			StringBundler msg = new StringBundler(16);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(", scope=");
+			msg.append(scope);
+
+			msg.append(", primKey=");
+			msg.append(primKey);
+
+			msg.append(", roleId=");
+			msg.append(roleId);
+
+			msg.append(", ownerId=");
+			msg.append(ownerId);
+
+			msg.append(", actionIds=");
+			msg.append(actionIds);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchResourcePermissionException(msg.toString());
+		}
+
+		return resourcePermission;
+	}
+
+	/**
+	 * Finds the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param name the name to search with
+	 * @param scope the scope to search with
+	 * @param primKey the prim key to search with
+	 * @param roleId the role ID to search with
+	 * @param ownerId the owner ID to search with
+	 * @param actionIds the action IDs to search with
+	 * @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourcePermission fetchByC_N_S_P_R_O_A(long companyId, String name,
+		int scope, String primKey, long roleId, long ownerId, long actionIds)
+		throws SystemException {
+		return fetchByC_N_S_P_R_O_A(companyId, name, scope, primKey, roleId,
+			ownerId, actionIds, true);
+	}
+
+	/**
+	 * Finds the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param name the name to search with
+	 * @param scope the scope to search with
+	 * @param primKey the prim key to search with
+	 * @param roleId the role ID to search with
+	 * @param ownerId the owner ID to search with
+	 * @param actionIds the action IDs to search with
+	 * @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourcePermission fetchByC_N_S_P_R_O_A(long companyId, String name,
+		int scope, String primKey, long roleId, long ownerId, long actionIds,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, name, scope, primKey, roleId, ownerId, actionIds
+			};
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(8);
+
+			query.append(_SQL_SELECT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_SCOPE_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_ROLEID_2);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_OWNERID_2);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_ACTIONIDS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(scope);
+
+				if (primKey != null) {
+					qPos.add(primKey);
+				}
+
+				qPos.add(roleId);
+
+				qPos.add(ownerId);
+
+				qPos.add(actionIds);
+
+				List<ResourcePermission> list = q.list();
+
+				result = list;
+
+				ResourcePermission resourcePermission = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+						finderArgs, list);
+				}
+				else {
+					resourcePermission = list.get(0);
+
+					cacheResult(resourcePermission);
+
+					if ((resourcePermission.getCompanyId() != companyId) ||
+							(resourcePermission.getName() == null) ||
+							!resourcePermission.getName().equals(name) ||
+							(resourcePermission.getScope() != scope) ||
+							(resourcePermission.getPrimKey() == null) ||
+							!resourcePermission.getPrimKey().equals(primKey) ||
+							(resourcePermission.getRoleId() != roleId) ||
+							(resourcePermission.getOwnerId() != ownerId) ||
+							(resourcePermission.getActionIds() != actionIds)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+							finderArgs, resourcePermission);
+					}
+				}
+
+				return resourcePermission;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (ResourcePermission)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the resource permissions.
 	 *
 	 * @return the resource permissions
@@ -2072,6 +2407,27 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		throws NoSuchResourcePermissionException, SystemException {
 		ResourcePermission resourcePermission = findByC_N_S_P_R(companyId,
 				name, scope, primKey, roleId);
+
+		resourcePermissionPersistence.remove(resourcePermission);
+	}
+
+	/**
+	 * Removes the resource permission where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63; from the database.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param name the name to search with
+	 * @param scope the scope to search with
+	 * @param primKey the prim key to search with
+	 * @param roleId the role ID to search with
+	 * @param ownerId the owner ID to search with
+	 * @param actionIds the action IDs to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_N_S_P_R_O_A(long companyId, String name, int scope,
+		String primKey, long roleId, long ownerId, long actionIds)
+		throws NoSuchResourcePermissionException, SystemException {
+		ResourcePermission resourcePermission = findByC_N_S_P_R_O_A(companyId,
+				name, scope, primKey, roleId, ownerId, actionIds);
 
 		resourcePermissionPersistence.remove(resourcePermission);
 	}
@@ -2410,6 +2766,117 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	}
 
 	/**
+	 * Counts all the resource permissions where companyId = &#63; and name = &#63; and scope = &#63; and primKey = &#63; and roleId = &#63; and ownerId = &#63; and actionIds = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param name the name to search with
+	 * @param scope the scope to search with
+	 * @param primKey the prim key to search with
+	 * @param roleId the role ID to search with
+	 * @param ownerId the owner ID to search with
+	 * @param actionIds the action IDs to search with
+	 * @return the number of matching resource permissions
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_N_S_P_R_O_A(long companyId, String name, int scope,
+		String primKey, long roleId, long ownerId, long actionIds)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, name, scope, primKey, roleId, ownerId, actionIds
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N_S_P_R_O_A,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(8);
+
+			query.append(_SQL_COUNT_RESOURCEPERMISSION_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_NAME_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_SCOPE_2);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_ROLEID_2);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_OWNERID_2);
+
+			query.append(_FINDER_COLUMN_C_N_S_P_R_O_A_ACTIONIDS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				qPos.add(scope);
+
+				if (primKey != null) {
+					qPos.add(primKey);
+				}
+
+				qPos.add(roleId);
+
+				qPos.add(ownerId);
+
+				qPos.add(actionIds);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N_S_P_R_O_A,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the resource permissions.
 	 *
 	 * @return the number of resource permissions
@@ -2627,6 +3094,17 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	private static final String _FINDER_COLUMN_C_N_S_P_R_PRIMKEY_2 = "resourcePermission.primKey = ? AND ";
 	private static final String _FINDER_COLUMN_C_N_S_P_R_PRIMKEY_3 = "(resourcePermission.primKey IS NULL OR resourcePermission.primKey = ?) AND ";
 	private static final String _FINDER_COLUMN_C_N_S_P_R_ROLEID_2 = "resourcePermission.roleId = ?";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_COMPANYID_2 = "resourcePermission.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_NAME_1 = "resourcePermission.name IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_NAME_2 = "resourcePermission.name = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_NAME_3 = "(resourcePermission.name IS NULL OR resourcePermission.name = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_SCOPE_2 = "resourcePermission.scope = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_1 = "resourcePermission.primKey IS NULL AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_2 = "resourcePermission.primKey = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_PRIMKEY_3 = "(resourcePermission.primKey IS NULL OR resourcePermission.primKey = ?) AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_ROLEID_2 = "resourcePermission.roleId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_OWNERID_2 = "resourcePermission.ownerId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_S_P_R_O_A_ACTIONIDS_2 = "resourcePermission.actionIds = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resourcePermission.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ResourcePermission exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ResourcePermission exists with the key {";

@@ -63,9 +63,10 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 			{ "scope", Types.INTEGER },
 			{ "primKey", Types.VARCHAR },
 			{ "roleId", Types.BIGINT },
+			{ "ownerId", Types.BIGINT },
 			{ "actionIds", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ResourcePermission (resourcePermissionId LONG not null primary key,companyId LONG,name VARCHAR(255) null,scope INTEGER,primKey VARCHAR(255) null,roleId LONG,actionIds LONG)";
+	public static final String TABLE_SQL_CREATE = "create table ResourcePermission (resourcePermissionId LONG not null primary key,companyId LONG,name VARCHAR(255) null,scope INTEGER,primKey VARCHAR(255) null,roleId LONG,ownerId LONG,actionIds LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ResourcePermission";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -92,6 +93,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		model.setScope(soapModel.getScope());
 		model.setPrimKey(soapModel.getPrimKey());
 		model.setRoleId(soapModel.getRoleId());
+		model.setOwnerId(soapModel.getOwnerId());
 		model.setActionIds(soapModel.getActionIds());
 
 		return model;
@@ -244,12 +246,40 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalRoleId;
 	}
 
+	public long getOwnerId() {
+		return _ownerId;
+	}
+
+	public void setOwnerId(long ownerId) {
+		if (!_setOriginalOwnerId) {
+			_setOriginalOwnerId = true;
+
+			_originalOwnerId = _ownerId;
+		}
+
+		_ownerId = ownerId;
+	}
+
+	public long getOriginalOwnerId() {
+		return _originalOwnerId;
+	}
+
 	public long getActionIds() {
 		return _actionIds;
 	}
 
 	public void setActionIds(long actionIds) {
+		if (!_setOriginalActionIds) {
+			_setOriginalActionIds = true;
+
+			_originalActionIds = _actionIds;
+		}
+
 		_actionIds = actionIds;
+	}
+
+	public long getOriginalActionIds() {
+		return _originalActionIds;
 	}
 
 	public ResourcePermission toEscapedModel() {
@@ -285,6 +315,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		resourcePermissionImpl.setScope(getScope());
 		resourcePermissionImpl.setPrimKey(getPrimKey());
 		resourcePermissionImpl.setRoleId(getRoleId());
+		resourcePermissionImpl.setOwnerId(getOwnerId());
 		resourcePermissionImpl.setActionIds(getActionIds());
 
 		resourcePermissionImpl.resetOriginalValues();
@@ -352,10 +383,18 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		resourcePermissionModelImpl._originalRoleId = resourcePermissionModelImpl._roleId;
 
 		resourcePermissionModelImpl._setOriginalRoleId = false;
+
+		resourcePermissionModelImpl._originalOwnerId = resourcePermissionModelImpl._ownerId;
+
+		resourcePermissionModelImpl._setOriginalOwnerId = false;
+
+		resourcePermissionModelImpl._originalActionIds = resourcePermissionModelImpl._actionIds;
+
+		resourcePermissionModelImpl._setOriginalActionIds = false;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{resourcePermissionId=");
 		sb.append(getResourcePermissionId());
@@ -369,6 +408,8 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		sb.append(getPrimKey());
 		sb.append(", roleId=");
 		sb.append(getRoleId());
+		sb.append(", ownerId=");
+		sb.append(getOwnerId());
 		sb.append(", actionIds=");
 		sb.append(getActionIds());
 		sb.append("}");
@@ -377,7 +418,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.ResourcePermission");
@@ -408,6 +449,10 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		sb.append(getRoleId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>ownerId</column-name><column-value><![CDATA[");
+		sb.append(getOwnerId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>actionIds</column-name><column-value><![CDATA[");
 		sb.append(getActionIds());
 		sb.append("]]></column-value></column>");
@@ -431,6 +476,11 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	private long _roleId;
 	private long _originalRoleId;
 	private boolean _setOriginalRoleId;
+	private long _ownerId;
+	private long _originalOwnerId;
+	private boolean _setOriginalOwnerId;
 	private long _actionIds;
+	private long _originalActionIds;
+	private boolean _setOriginalActionIds;
 	private transient ExpandoBridge _expandoBridge;
 }

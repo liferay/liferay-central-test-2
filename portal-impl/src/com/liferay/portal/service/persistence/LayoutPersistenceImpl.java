@@ -1635,8 +1635,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1816,8 +1815,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2783,8 +2781,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2970,8 +2967,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3651,8 +3647,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -3845,8 +3840,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -4573,8 +4567,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -4777,8 +4770,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -5284,8 +5276,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -5501,8 +5492,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		query.append(_FINDER_COLUMN_G_P_PRIVATELAYOUT_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -5688,8 +5678,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		query.append(_FINDER_COLUMN_G_P_P_PARENTLAYOUTID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -5909,8 +5898,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				Layout.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				Layout.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

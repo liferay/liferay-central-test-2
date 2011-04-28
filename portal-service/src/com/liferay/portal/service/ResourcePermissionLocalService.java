@@ -253,6 +253,13 @@ public interface ResourcePermissionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.ResourcePermission getResourcePermission(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long roleId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.ResourcePermission> getResourcePermissions(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey)
@@ -306,6 +313,12 @@ public interface ResourcePermissionLocalService {
 
 	public void removeResourcePermissions(long companyId,
 		java.lang.String name, int scope, long roleId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void setOwnerResourcePermissions(long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, long ownerId, java.lang.String[] actionIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

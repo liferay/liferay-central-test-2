@@ -1379,6 +1379,7 @@ create table ResourcePermission (
 	scope INTEGER,
 	primKey VARCHAR(255) null,
 	roleId LONG,
+	ownerId LONG,
 	actionIds LONG
 );
 

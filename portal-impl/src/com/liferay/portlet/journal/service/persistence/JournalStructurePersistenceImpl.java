@@ -1512,8 +1512,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				JournalStructure.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				JournalStructure.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1694,8 +1693,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				JournalStructure.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				JournalStructure.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2750,8 +2748,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				JournalStructure.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				JournalStructure.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2952,8 +2949,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				JournalStructure.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				JournalStructure.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3401,8 +3397,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				JournalStructure.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				JournalStructure.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -3670,8 +3665,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				JournalStructure.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				JournalStructure.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

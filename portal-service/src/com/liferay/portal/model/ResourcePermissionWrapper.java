@@ -163,6 +163,24 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	}
 
 	/**
+	* Gets the owner ID of this resource permission.
+	*
+	* @return the owner ID of this resource permission
+	*/
+	public long getOwnerId() {
+		return _resourcePermission.getOwnerId();
+	}
+
+	/**
+	* Sets the owner ID of this resource permission.
+	*
+	* @param ownerId the owner ID of this resource permission
+	*/
+	public void setOwnerId(long ownerId) {
+		_resourcePermission.setOwnerId(ownerId);
+	}
+
+	/**
 	* Gets the action IDs of this resource permission.
 	*
 	* @return the action IDs of this resource permission

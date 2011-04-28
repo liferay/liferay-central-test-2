@@ -932,8 +932,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1126,8 +1125,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1600,8 +1598,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1782,8 +1779,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2282,8 +2278,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -2470,8 +2465,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3000,8 +2994,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3196,8 +3189,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -3506,8 +3498,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3609,8 +3600,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		query.append(_FINDER_COLUMN_USERID_USERID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3720,8 +3710,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -3841,8 +3830,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		query.append(_FINDER_COLUMN_C_C_A_ALERT_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				AnnouncementsEntry.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

@@ -948,8 +948,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCProductEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCProductEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1131,8 +1130,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCProductEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCProductEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1971,8 +1969,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCProductEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCProductEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2159,8 +2156,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCProductEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCProductEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -2610,8 +2606,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCProductEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCProductEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2773,8 +2768,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		query.append(_FINDER_COLUMN_G_U_USERID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				SCProductEntry.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				SCProductEntry.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 

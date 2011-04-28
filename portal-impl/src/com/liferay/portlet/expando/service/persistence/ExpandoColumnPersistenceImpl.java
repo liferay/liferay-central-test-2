@@ -889,8 +889,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 
@@ -1072,8 +1071,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1480,8 +1478,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		query.append(_FINDER_COLUMN_TABLEID_TABLEID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID);
+				ExpandoColumn.class.getName(), _FILTER_COLUMN_PK);
 
 		Session session = null;
 

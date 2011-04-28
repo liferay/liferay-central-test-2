@@ -666,6 +666,7 @@
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="roleId" type="long" />
+		<field name="ownerId" type="long" />
 		<field name="actionIds" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Role">
