@@ -601,6 +601,11 @@ public class HookHotDeployListener
 			}
 		}
 
+		if (baseLanguageMap != null) {
+			languagesContainer.addLanguage(
+				new Locale(StringPool.BLANK), baseLanguageMap);
+		}
+
 		String customJspDir = rootElement.elementText("custom-jsp-dir");
 
 		if (Validator.isNotNull(customJspDir)) {
