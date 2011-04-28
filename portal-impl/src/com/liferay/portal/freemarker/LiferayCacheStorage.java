@@ -14,8 +14,8 @@
 
 package com.liferay.portal.freemarker;
 
+import com.liferay.portal.kernel.cache.MultiVMKeyPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 
 import freemarker.cache.ConcurrentCacheStorage;
 
@@ -27,11 +27,11 @@ public class LiferayCacheStorage implements ConcurrentCacheStorage {
 	public static final String CACHE_NAME = LiferayCacheStorage.class.getName();
 
 	public void clear() {
-		_cache.removeAll();
+		_multiVMKeyPoolPortalCache.removeAll();
 	}
 
 	public Object get(Object key) {
-		return _cache.get(key.toString());
+		return _multiVMKeyPoolPortalCache.get(key.toString());
 	}
 
 	public boolean isConcurrent() {
@@ -39,13 +39,14 @@ public class LiferayCacheStorage implements ConcurrentCacheStorage {
 	}
 
 	public void put(Object key, Object value) {
-		_cache.put(key.toString(), value);
+		_multiVMKeyPoolPortalCache.put(key.toString(), value);
 	}
 
 	public void remove(Object key) {
-		_cache.remove(key.toString());
+		_multiVMKeyPoolPortalCache.remove(key.toString());
 	}
 
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _multiVMKeyPoolPortalCache =
+		MultiVMKeyPoolUtil.getCache(CACHE_NAME);
 
 }

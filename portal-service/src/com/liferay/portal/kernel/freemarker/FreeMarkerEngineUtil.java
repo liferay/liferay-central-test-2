@@ -21,6 +21,10 @@ import java.io.Writer;
  */
 public class FreeMarkerEngineUtil {
 
+	public static void flushTemplate(String templateId) {
+		getFreeMarkerEngine().flushTemplate(templateId);
+	}
+
 	public static FreeMarkerEngine getFreeMarkerEngine() {
 		return _freeMarkerEngine;
 	}

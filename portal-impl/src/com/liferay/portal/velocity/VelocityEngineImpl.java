@@ -39,13 +39,15 @@ public class VelocityEngineImpl implements VelocityEngine {
 	public VelocityEngineImpl() {
 	}
 
-	public void flushTemplate(String resource) {
+	public void flushTemplate(String templateId) {
 		StringResourceRepository stringResourceRepository =
 			StringResourceLoader.getRepository();
 
 		if (stringResourceRepository != null) {
-			stringResourceRepository.removeStringResource(resource);
+			stringResourceRepository.removeStringResource(templateId);
 		}
+
+		LiferayResourceCacheUtil.remove(templateId);
 	}
 
 	public VelocityContext getEmptyContext() {

@@ -14,9 +14,10 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.BaseModelListener;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
 /**
@@ -45,11 +46,14 @@ public class JournalTemplateListener
 
 		CacheUtil.clearCache(template.getCompanyId());
 
-		// Velocity cache
+		String templateId = template.getCompanyId() + template.getGroupId() +
+			template.getTemplateId();
 
-		LiferayResourceCacheUtil.remove(
-			template.getCompanyId() + template.getGroupId() +
-				template.getTemplateId());
+		// Velocity cache
+		VelocityEngineUtil.flushTemplate(templateId);
+
+		// Freemarker cache
+		FreeMarkerEngineUtil.flushTemplate(templateId);
 	}
 
 }

@@ -25,7 +25,6 @@ import com.liferay.portal.util.PropsValues;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
-import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
 
 import freemarker.template.Configuration;
@@ -38,6 +37,12 @@ import java.io.Writer;
  * @author Mika Koivisto
  */
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {
+
+	public void flushTemplate(String templateId) {
+		_stringTemplateLoader.removeTemplate(templateId);
+
+		LiferayCacheStorageUtil.remove(templateId);
+	}
 
 	public FreeMarkerContext getWrappedRestrictedToolsContext() {
 		return new FreeMarkerContextImpl(

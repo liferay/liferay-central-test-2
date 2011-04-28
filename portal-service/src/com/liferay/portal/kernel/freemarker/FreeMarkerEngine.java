@@ -21,6 +21,8 @@ import java.io.Writer;
  */
 public interface FreeMarkerEngine {
 
+	public void flushTemplate(String templateId);
+
 	public FreeMarkerContext getWrappedRestrictedToolsContext();
 
 	public FreeMarkerContext getWrappedStandardToolsContext();
