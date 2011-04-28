@@ -188,7 +188,6 @@ public class AssetVocabularyLocalServiceImpl
 		return getGroupsVocabularies(groupIds, null);
 	}
 
-
 	public List<AssetVocabulary> getGroupsVocabularies(
 			long[] groupIds, String className)
 		throws PortalException, SystemException {
@@ -201,25 +200,23 @@ public class AssetVocabularyLocalServiceImpl
 
 			if (Validator.isNull(className)) {
 				vocabularies.addAll(groupVocabularies);
+
+				continue;
 			}
-			else {
-				for (AssetVocabulary groupVocabulary: groupVocabularies) {
-					UnicodeProperties settingsProperties =
-						groupVocabulary.getSettingsProperties();
 
-					long classNameId = PortalUtil.getClassNameId(className);
+			for (AssetVocabulary groupVocabulary: groupVocabularies) {
+				UnicodeProperties settingsProperties =
+					groupVocabulary.getSettingsProperties();
 
-					long[] selectedClassNameIds = StringUtil.split(
-						settingsProperties.getProperty(
-							"selectedClassNameIds"), 0L);
+				long[] selectedClassNameIds = StringUtil.split(
+					settingsProperties.getProperty("selectedClassNameIds"), 0L);
+				long classNameId = PortalUtil.getClassNameId(className);
 
-					if (selectedClassNameIds.length == 0 ||
-						(selectedClassNameIds[0] == 0) ||
-						ArrayUtil.contains(
-							selectedClassNameIds, classNameId)) {
+				if ((selectedClassNameIds.length == 0) ||
+					(selectedClassNameIds[0] == 0) ||
+					ArrayUtil.contains(selectedClassNameIds, classNameId)) {
 
-						vocabularies.add(groupVocabulary);
-					}
+					vocabularies.add(groupVocabulary);
 				}
 			}
 		}
