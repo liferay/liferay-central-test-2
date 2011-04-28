@@ -102,8 +102,6 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 
 					<div class="display-style">
 						<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
-
-						<aui:input cssClass="keywords" label="" name="keywords" type="text" />
 					</div>
 				</div>
 			</div>
