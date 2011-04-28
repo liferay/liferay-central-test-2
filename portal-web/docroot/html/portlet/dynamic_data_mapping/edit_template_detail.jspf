@@ -39,9 +39,10 @@ while (itr.hasNext()) {
 	JSONObject fieldJSONObject = JSONFactoryUtil.createJSONObject();
 
 	fieldJSONObject.put("fieldLabel", fieldName);
+	fieldJSONObject.put("key", fieldName);
 	fieldJSONObject.put("label", sb.toString());
-	fieldJSONObject.put("name", fieldName);
 	fieldJSONObject.put("type", structure.getFieldType(fieldName));
+	fieldJSONObject.put("unique", true);
 
 	structureAvailableFieldsJSONArray.put(fieldJSONObject);
 }

@@ -164,6 +164,9 @@ public class DDMXSDImpl implements DDMXSD {
 				jsonObject.put(attribute.getName(), attribute.getValue());
 			}
 
+			jsonObject.put(
+				"key", dynamicElementElement.attributeValue("name"));
+
 			String type = jsonObject.getString("type");
 
 			String key = "fields";
