@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -31,7 +30,7 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.io.File;
 import java.io.IOException;
 
-import java.util.Set;
+import java.util.Arrays;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -60,19 +59,19 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
-		String firstModulePath = modulePaths[0];
-
-		String extension = FileUtil.getExtension(firstModulePath);
-
-		Set<String> modulePathsSet = null;
+		String modulePathsString = null;
 
 		byte[][] bytesArray = null;
 
 		if (!PropsValues.COMBO_CHECK_TIMESTAMP) {
-			modulePathsSet = SetUtil.fromArray(modulePaths);
+			modulePathsString = Arrays.toString(modulePaths);
 
-			bytesArray = _fileContentSets.get(modulePathsSet);
+			bytesArray = _byteArrays.get(modulePathsString);
 		}
+
+		String firstModulePath = modulePaths[0];
+
+		String extension = FileUtil.getExtension(firstModulePath);
 
 		if (bytesArray == null) {
 			String p = ParamUtil.getString(request, "p");
@@ -104,8 +103,8 @@ public class ComboServlet extends HttpServlet {
 				bytesArray[--length] = bytes;
 			}
 
-			if (modulePathsSet != null) {
-				_fileContentSets.put(modulePathsSet, bytesArray);
+			if (modulePathsString != null) {
+				_byteArrays.put(modulePathsString, bytesArray);
 			}
 		}
 
@@ -170,7 +169,7 @@ public class ComboServlet extends HttpServlet {
 		String fileContentKey = path.concat(StringPool.QUESTION).concat(
 			minifierType);
 
-		FileContentBag fileContentBag = _fileContents.get(fileContentKey);
+		FileContentBag fileContentBag = _fileContentBags.get(fileContentKey);
 
 		if ((fileContentBag != null) &&
 			!PropsValues.COMBO_CHECK_TIMESTAMP) {
@@ -181,9 +180,8 @@ public class ComboServlet extends HttpServlet {
 		File file = getFile(path);
 
 		if ((fileContentBag != null) && PropsValues.COMBO_CHECK_TIMESTAMP) {
-			long currentTime = System.currentTimeMillis();
-
-			long elapsedTime = currentTime - fileContentBag._lastModified;
+			long elapsedTime =
+				System.currentTimeMillis() - fileContentBag._lastModified;
 
 			if ((file != null) &&
 				(elapsedTime <= PropsValues.COMBO_CHECK_TIMESTAMP_INTERVAL) &&
@@ -192,7 +190,7 @@ public class ComboServlet extends HttpServlet {
 				return fileContentBag._fileContent;
 			}
 			else {
-				_fileContents.remove(fileContentKey, fileContentBag);
+				_fileContentBags.remove(fileContentKey, fileContentBag);
 			}
  		}
 
@@ -220,7 +218,7 @@ public class ComboServlet extends HttpServlet {
 				file.lastModified());
 		}
 
-		FileContentBag oldFileContentBag = _fileContents.putIfAbsent(
+		FileContentBag oldFileContentBag = _fileContentBags.putIfAbsent(
 			fileContentKey, fileContentBag);
 
 		if (oldFileContentBag != null) {
@@ -241,11 +239,10 @@ public class ComboServlet extends HttpServlet {
 
 	private static final String _JAVASCRIPT_MINIFIED_SUFFIX = "-min.js";
 
-	private ConcurrentMap<String, FileContentBag> _fileContents =
+	private ConcurrentMap<String, byte[][]> _byteArrays =
+		new ConcurrentHashMap<String, byte[][]>();
+	private ConcurrentMap<String, FileContentBag> _fileContentBags =
 		new ConcurrentHashMap<String, FileContentBag>();
-
-	private ConcurrentMap<Set<String>, byte[][]> _fileContentSets =
-		new ConcurrentHashMap<Set<String>, byte[][]>();
 
 	private static class FileContentBag {
 
