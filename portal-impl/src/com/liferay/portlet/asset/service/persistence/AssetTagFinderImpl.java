@@ -447,20 +447,20 @@ public class AssetTagFinderImpl
 	}
 
 	protected void setJoin(QueryPos qPos, String[] tagProperties) {
-		for (String tagPropertie : tagProperties) {
-			String[] tagProperty = StringUtil.split(
-				tagPropertie, StringPool.COLON);
+		for (String tagProperty : tagProperties) {
+			String[] tagPropertyParts = StringUtil.split(
+				tagProperty, StringPool.COLON);
 
 			String key = StringPool.BLANK;
 
-			if (tagProperty.length > 0) {
-				key = GetterUtil.getString(tagProperty[0]);
+			if (tagPropertyParts.length > 0) {
+				key = GetterUtil.getString(tagPropertyParts[0]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (tagProperty.length > 1) {
-				value = GetterUtil.getString(tagProperty[1]);
+			if (tagPropertyParts.length > 1) {
+				value = GetterUtil.getString(tagPropertyParts[1]);
 			}
 
 			qPos.add(key);
