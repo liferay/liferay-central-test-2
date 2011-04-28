@@ -86,8 +86,8 @@ public class ShoppingItemFinderImpl
 
 			qPos.add(groupId);
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				qPos.add(categoryIds[i]);
+			for (long categoryId : categoryIds) {
+				qPos.add(categoryId);
 			}
 
 			qPos.add(true);
@@ -156,8 +156,8 @@ public class ShoppingItemFinderImpl
 
 			qPos.add(groupId);
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				qPos.add(categoryIds[i]);
+			for (long categoryId : categoryIds) {
+				qPos.add(categoryId);
 			}
 
 			qPos.add(keywords);
@@ -223,8 +223,8 @@ public class ShoppingItemFinderImpl
 
 			qPos.add(groupId);
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				qPos.add(categoryIds[i]);
+			for (long categoryId : categoryIds) {
+				qPos.add(categoryId);
 			}
 
 			qPos.add(true);
@@ -298,8 +298,8 @@ public class ShoppingItemFinderImpl
 
 			qPos.add(groupId);
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				qPos.add(categoryIds[i]);
+			for (long categoryId : categoryIds) {
+				qPos.add(categoryId);
 			}
 
 			qPos.add(true);
@@ -360,8 +360,8 @@ public class ShoppingItemFinderImpl
 
 			qPos.add(groupId);
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				qPos.add(categoryIds[i]);
+			for (long categoryId : categoryIds) {
+				qPos.add(categoryId);
 			}
 
 			qPos.add(keywords);
@@ -421,8 +421,8 @@ public class ShoppingItemFinderImpl
 
 			qPos.add(groupId);
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				qPos.add(categoryIds[i]);
+			for (long categoryId : categoryIds) {
+				qPos.add(categoryId);
 			}
 
 			qPos.add(true);
