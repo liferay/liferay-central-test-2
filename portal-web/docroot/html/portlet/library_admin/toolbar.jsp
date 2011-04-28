@@ -45,7 +45,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="title"
+		image="folder"
 		url="<%= sortTitle.toString() %>"
 	/>
 
@@ -57,7 +57,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="creation-date"
+		image="folder"
 		url="<%= sortCreationDate.toString() %>"
 	/>
 
@@ -69,7 +69,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="modified-date"
+		image="folder"
 		url="<%= sortModifiedDate.toString() %>"
 	/>
 
@@ -81,7 +81,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="read-count"
+		image="folder"
 		url="<%= sortReadCountDate.toString() %>"
 	/>
 
@@ -93,7 +93,7 @@ String taglibUrl = null;
 	%>
 
 	<liferay-ui:icon
-		image="size"
+		image="folder"
 		url="<%= sortSize.toString() %>"
 	/>
 </liferay-ui:icon-menu>
