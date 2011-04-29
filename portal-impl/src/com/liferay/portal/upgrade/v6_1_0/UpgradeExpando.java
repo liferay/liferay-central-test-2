@@ -36,7 +36,7 @@ public class UpgradeExpando extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select columnId typeSettings, from ExpandoColumn where " +
+				"select columnId, typeSettings from ExpandoColumn where " +
 					"typeSettings like '%selection%'");
 
 			rs = ps.executeQuery();
@@ -63,7 +63,12 @@ public class UpgradeExpando extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"update ExpandoColumn set typeSettings = ? where columnId =");
+				"update ExpandoColumn set typeSettings = ? where columnId = ?");
+
+			typeSettings = typeSettings.replace(
+				"selection=1", "display-type=selection-list");
+			typeSettings = typeSettings.replace(
+				"selection=0", "display-type=text-box");
 
 			ps.setString(1, typeSettings);
 			ps.setLong(2, columnId);
