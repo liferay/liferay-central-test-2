@@ -24,9 +24,6 @@ import org.apache.velocity.runtime.resource.Resource;
  */
 public class LiferayResourceCacheUtil {
 
-	public static final String CACHE_NAME =
-		LiferayResourceCacheUtil.class.getName();
-
 	public static void clear() {
 		_portalCache.removeAll();
 	}
