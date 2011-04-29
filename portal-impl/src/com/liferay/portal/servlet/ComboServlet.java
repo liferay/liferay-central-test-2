@@ -59,6 +59,8 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
+		Arrays.sort(modulePaths);
+
 		String modulePathsString = null;
 
 		byte[][] bytesArray = null;
