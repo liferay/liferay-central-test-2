@@ -412,7 +412,7 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	public List<DLFileEntry> getOrphanedFileEntries() throws SystemException {
-		return dlFileEntryFinder.findOrphanedFileEntries();
+		return dlFileEntryFinder.findByOrphanedFileEntries();
 	}
 
 	public boolean hasExtraSettings() throws SystemException {

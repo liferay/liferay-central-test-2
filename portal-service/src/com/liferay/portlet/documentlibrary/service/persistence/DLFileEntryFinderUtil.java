@@ -49,9 +49,9 @@ public class DLFileEntryFinderUtil {
 		return getFinder().findByNoAssets();
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findOrphanedFileEntries()
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByOrphanedFileEntries()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findOrphanedFileEntries();
+		return getFinder().findByOrphanedFileEntries();
 	}
 
 	public static DLFileEntryFinder getFinder() {

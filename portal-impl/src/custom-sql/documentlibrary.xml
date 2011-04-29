@@ -61,7 +61,7 @@
 				DLFileEntry.modifiedDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findOrphanedFileEntries">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByOrphanedFileEntries">
 		<![CDATA[
 			SELECT
 				{DLFileEntry.*}
