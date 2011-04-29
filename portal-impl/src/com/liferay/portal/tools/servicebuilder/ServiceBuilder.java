@@ -532,6 +532,11 @@ public class ServiceBuilder {
 
 			String packagePath = rootElement.attributeValue("package-path");
 
+			if (Validator.isNull(packagePath)) {
+				throw new IllegalArgumentException(
+					"The package-path attribute is required");
+			}
+
 			_outputPath =
 				_implDir + "/" + StringUtil.replace(packagePath, ".", "/");
 
@@ -3674,7 +3679,7 @@ public class ServiceBuilder {
 		for (Element element : rootElement.elements()) {
 			String elementName = element.getName(); 
 
-			if (!elementName.equals("service-builder")) {
+			if (!elementName.equals("service-builder-import")) {
 				continue;
 			}
 
@@ -3682,20 +3687,21 @@ public class ServiceBuilder {
 
 			String dirName = fileName.substring(
 				0, fileName.lastIndexOf(StringPool.SLASH) + 1);
-			String serviceBuilderFileName = element.attributeValue("file");
+			String serviceBuilderImportFileName = element.attributeValue(
+				"file");
 
-			Document serviceBuilderDocument = _getContentDocument(
-				dirName + serviceBuilderFileName);
+			Document serviceBuilderImportDocument = _getContentDocument(
+				dirName + serviceBuilderImportFileName);
 
-			Element serviceBuilderRootElement =
-				serviceBuilderDocument.getRootElement();
+			Element serviceBuilderImportRootElement =
+				serviceBuilderImportDocument.getRootElement();
 
-			for (Element serviceBuilderElement :
-					serviceBuilderRootElement.elements()) {
+			for (Element serviceBuilderImportElement :
+					serviceBuilderImportRootElement.elements()) {
 
-				serviceBuilderElement.detach();
+				serviceBuilderImportElement.detach();
 
-				rootElement.add(serviceBuilderElement);
+				rootElement.add(serviceBuilderImportElement);
 			}
 		}
 
