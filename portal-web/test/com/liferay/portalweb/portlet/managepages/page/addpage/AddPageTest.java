@@ -38,8 +38,7 @@ public class AddPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div/div[3]/div/ul/li[1]/a")) {
+						if (selenium.isElementPresent("//div[4]/div/ul/li[1]/a")) {
 							break;
 						}
 					}
@@ -50,10 +49,8 @@ public class AddPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
+				selenium.clickAt("//div[4]/div/ul/li[1]/a",
 					RuntimeVariables.replace("Manage Pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -61,9 +58,7 @@ public class AddPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Liferay")
-												.equals(selenium.getText(
-										"//div/div[3]/a"))) {
+						if (selenium.isPartialText("//div/div[3]/a", "Liferay")) {
 							break;
 						}
 					}
@@ -74,6 +69,8 @@ public class AddPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Pages (Liferay)"),
+					selenium.getText("//div/div[3]/a"));
 
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
@@ -84,7 +81,7 @@ public class AddPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[2]/ul/li/div/div[1]",
+				selenium.clickAt("//div[3]/ul/li/div/div[1]",
 					RuntimeVariables.replace(""));
 
 			case 2:
@@ -106,8 +103,51 @@ public class AddPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div/div[3]/a", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				assertEquals(RuntimeVariables.replace("Pages (Liferay)"),
+					selenium.getText("//div[3]/a"));
+				selenium.clickAt("//div[3]/a",
+					RuntimeVariables.replace("Pages (Liferay)"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (RuntimeVariables.replace("Add Page")
+												.equals(selenium.getText(
+										"//div/span/button[1]"))) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Add Page"),
+					selenium.getText("//div/span/button[1]"));
+				selenium.clickAt("//div/span/button[1]",
+					RuntimeVariables.replace("Add Page"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible("_88_name_en_US")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.saveScreenShotAndSource();
 				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("Manage Pages Test Page"));
@@ -116,11 +156,9 @@ public class AddPageTest extends BaseTestCase {
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isPartialText("//nav/ul/li[2]",
-						"Manage Pages Test Page"));
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
-					selenium.getText("//section/div/div/div/div"));
+					selenium.getText("//div[@class='portlet-msg-success']"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {

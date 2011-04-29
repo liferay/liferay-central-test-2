@@ -54,10 +54,6 @@ public class AddChildPage2Test extends BaseTestCase {
 				selenium.clickAt("main-content", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
-				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace("Manage Pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -65,9 +61,7 @@ public class AddChildPage2Test extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Liferay")
-												.equals(selenium.getText(
-										"//div/div[3]/a"))) {
+						if (selenium.isElementPresent("//div[4]/div/ul/li[1]/a")) {
 							break;
 						}
 					}
@@ -78,9 +72,32 @@ public class AddChildPage2Test extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Children", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
+				selenium.clickAt("//div[4]/div/ul/li[1]/a",
+					RuntimeVariables.replace("Manage Pages"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isPartialText("//div/div[3]/a", "Liferay")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
 				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Pages (Liferay)"),
+					selenium.getText("//div/div[3]/a"));
+				assertEquals(RuntimeVariables.replace("Add Child Page"),
+					selenium.getText("//div/span/button[1]"));
+				selenium.clickAt("//div/span/button[1]",
+					RuntimeVariables.replace("Add Child Page"));
 				selenium.type("_88_name_en_US",
 					RuntimeVariables.replace("Child2 Test2 Page2"));
 				selenium.saveScreenShotAndSource();
@@ -90,7 +107,7 @@ public class AddChildPage2Test extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
-					selenium.getText("//section/div/div/div/div"));
+					selenium.getText("//div[@class='portlet-msg-success']"));
 
 				boolean childPagePresent = selenium.isElementPresent(
 						"//li[2]/ul/li[2]/div/div[3]/a");

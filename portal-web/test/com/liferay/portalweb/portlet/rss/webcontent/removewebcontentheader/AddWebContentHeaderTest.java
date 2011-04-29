@@ -44,7 +44,10 @@ public class AddWebContentHeaderTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("link=Web Content"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//div[2]/div[2]/div[2]/ul/li[3]/a"));
+		selenium.clickAt("//div[2]/div[2]/div[2]/ul/li[3]/a",
+			RuntimeVariables.replace("Web Content"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Add Web Content']",

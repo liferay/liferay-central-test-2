@@ -44,7 +44,10 @@ public class ExpireWebContentApprovedTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//div[2]/div[2]/div[2]/ul/li[3]/a"));
+		selenium.clickAt("//div[2]/div[2]/div[2]/ul/li[3]/a",
+			RuntimeVariables.replace("Web Content"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Web Content Name Approved"),

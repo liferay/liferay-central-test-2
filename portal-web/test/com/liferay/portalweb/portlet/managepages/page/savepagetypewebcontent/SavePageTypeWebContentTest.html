@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head profile="http://selenium-ide.openqa.org/profiles/test-case">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SavePageTypeWebContentTest</title>
 </head>
 <body>
@@ -27,9 +24,14 @@
 	<td></td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[2]/div[2]/div[2]/ul/li[3]/a</td>
+	<td>Web Content</td>
+</tr>
+<tr>
 	<td>clickAtAndWait</td>
-	<td>link=Web Content</td>
-	<td></td>
+	<td>//div[2]/div[2]/div[2]/ul/li[3]/a</td>
+	<td>Web Content</td>
 </tr>
 <tr>
 	<td>storeText</td>
@@ -67,14 +69,24 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//div/div[3]/div/ul/li[1]/a</td>
+	<td>waitForElementPresent</td>
+	<td>//div[4]/div/ul/li[1]/a</td>
 	<td>Manage Pages</td>
 </tr>
 <tr>
-	<td>waitForText</td>
+	<td>clickAt</td>
+	<td>//div[4]/div/ul/li[1]/a</td>
+	<td>Manage Pages</td>
+</tr>
+<tr>
+	<td>waitForPartialText</td>
 	<td>//div/div[3]/a</td>
 	<td>Liferay</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div/div[3]/a</td>
+	<td>Pages (Liferay)</td>
 </tr>
 <tr>
 	<td>store</td>
@@ -88,7 +100,7 @@
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//li/div/div[1]</td>
+	<td>//div[3]/ul/li/div/div[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -118,12 +130,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>TypeSettingsProperties--article-id--</td>
+	<td>_88_article-id</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>TypeSettingsProperties--article-id--</td>
+	<td>_88_article-id</td>
 	<td>${articleID}</td>
 </tr>
 <tr>
@@ -133,7 +145,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//section/div/div/div/div</td>
+	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
 </tr>
 <tr>

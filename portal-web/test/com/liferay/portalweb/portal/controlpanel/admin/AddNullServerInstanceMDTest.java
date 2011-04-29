@@ -77,11 +77,10 @@ public class AddNullServerInstanceMDTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.type("_135_mx", RuntimeVariables.replace(""));
 		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid mail domain."));
+		assertEquals(RuntimeVariables.replace("This field is required."),
+			selenium.getText(
+				"//div[@class='yui3-aui-form-validator-message required']"));
 	}
 }

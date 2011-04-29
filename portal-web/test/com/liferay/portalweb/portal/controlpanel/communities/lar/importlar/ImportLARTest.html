@@ -59,14 +59,19 @@
 	<td>Manage Pages</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Export / Import</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//button[5]</td>
+	<td>Import</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Import</td>
-	<td></td>
+	<td>clickAt</td>
+	<td>//button[5]</td>
+	<td>Import</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>_134_importFileName</td>
+	<td>Import File Name</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -98,6 +103,7 @@
 	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
 </tr>
+
 </tbody></table>
 </body>
 </html>

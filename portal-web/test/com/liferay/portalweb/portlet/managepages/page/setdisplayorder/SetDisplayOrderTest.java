@@ -63,49 +63,12 @@ public class SetDisplayOrderTest extends BaseTestCase {
 				selenium.clickAt("main-content", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
-				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace("Manage Pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (RuntimeVariables.replace("Liferay")
-												.equals(selenium.getText(
-										"//div/div[3]/a"))) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.saveScreenShotAndSource();
-
-				boolean welcomePresent = selenium.isElementPresent(
-						"//li/ul/li[1]/div/div[3]/a");
-
-				if (welcomePresent) {
-					label = 2;
-
-					continue;
-				}
-
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
-
-			case 2:
 
 				boolean childPagePresent = selenium.isElementPresent(
 						"//li[2]/ul/li[1]/div/div[3]/a");
 
 				if (childPagePresent) {
-					label = 3;
+					label = 2;
 
 					continue;
 				}
@@ -113,7 +76,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 				selenium.clickAt("//li/ul/li[2]/div/div[1]",
 					RuntimeVariables.replace(""));
 
-			case 3:
+			case 2:
 				selenium.clickAt("link=Children", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
@@ -176,7 +139,7 @@ public class SetDisplayOrderTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
-					selenium.getText("//section/div/div/div/div"));
+					selenium.getText("//div[@class='portlet-msg-success']"));
 				assertEquals(RuntimeVariables.replace("Child2 Test2 Page2"),
 					selenium.getText("//nav/ul/li[2]/ul/li[1]"));
 				assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),

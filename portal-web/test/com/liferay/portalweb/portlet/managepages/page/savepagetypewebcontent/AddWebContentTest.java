@@ -44,14 +44,43 @@ public class AddWebContentTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//div[2]/div[2]/div[2]/ul/li[3]/a"));
+		selenium.clickAt("//div[2]/div[2]/div[2]/ul/li[3]/a",
+			RuntimeVariables.replace("Web Content"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Add Web Content']",
-			RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Add"),
+			selenium.getText("link=Add"));
+		selenium.clickAt("link=Add", RuntimeVariables.replace("Add"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("Basic Web Content"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_15_title", RuntimeVariables.replace("Test Web Content"));
+		selenium.type("_15_title_en_US",
+			RuntimeVariables.replace("Test Web Content"));
 		selenium.saveScreenShotAndSource();
 		Thread.sleep(5000);
 

@@ -53,10 +53,6 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 				selenium.clickAt("main-content", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
-				selenium.clickAt("//div/div[3]/div/ul/li[1]/a",
-					RuntimeVariables.replace("Manage Pages"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -64,9 +60,7 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("Liferay")
-												.equals(selenium.getText(
-										"//div/div[3]/a"))) {
+						if (selenium.isElementPresent("//div[4]/div/ul/li[1]/a")) {
 							break;
 						}
 					}
@@ -77,6 +71,28 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
+				selenium.clickAt("//div[4]/div/ul/li[1]/a",
+					RuntimeVariables.replace("Manage Pages"));
+
+				for (int second = 0;; second++) {
+					if (second >= 60) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isPartialText("//div/div[3]/a", "Liferay")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Pages (Liferay)"),
+					selenium.getText("//div/div[3]/a"));
 
 				boolean welcomePresent = selenium.isElementPresent(
 						"//li/ul/li[1]/div/div[3]/a");
@@ -87,7 +103,8 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//li/div/div[1]", RuntimeVariables.replace(""));
+				selenium.clickAt("//div[3]/ul/li/div/div[1]",
+					RuntimeVariables.replace(""));
 
 			case 2:
 
@@ -143,7 +160,7 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"TypeSettingsProperties--linkToLayoutId--")) {
+									"//select[@id='_88_linkToLayoutId']")) {
 							break;
 						}
 					}
@@ -156,8 +173,8 @@ public class SavePageTypeLinkToPageTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"- Welcome - Manage Pages Test Page"),
-					selenium.getText("TypeSettingsProperties--linkToLayoutId--"));
-				selenium.select("TypeSettingsProperties--linkToLayoutId--",
+					selenium.getText("//select[@id='_88_linkToLayoutId']"));
+				selenium.select("//select[@id='_88_linkToLayoutId']",
 					RuntimeVariables.replace("label=regexp:-\\sWelcome"));
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
