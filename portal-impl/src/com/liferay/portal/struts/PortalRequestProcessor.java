@@ -129,8 +129,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_UPDATE_PASSWORD);
 		_publicPaths.add(PropsValues.AUTH_LOGIN_DISABLED_PATH);
 
-		addPaths(_publicPaths, PropsKeys.AUTH_PUBLIC_PATHS);
-
 		_trackerIgnorePaths = new HashSet<String>();
 
 		addPaths(_trackerIgnorePaths, PropsKeys.SESSION_TRACKER_IGNORE_PATHS);

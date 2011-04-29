@@ -72,6 +72,7 @@ import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.absoluteredirects.AbsoluteRedirectsResponse;
 import com.liferay.portal.servlet.filters.i18n.I18nFilter;
+import com.liferay.portal.struts.AuthPublicPathRegistry;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ExtRegistry;
@@ -200,6 +201,9 @@ public class MainServlet extends ActionServlet {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize servlet context pool");
 		}
+
+		AuthPublicPathRegistry.register(
+			PropsUtil.getArray(PropsKeys.AUTH_PUBLIC_PATHS));
 
 		try {
 			initServletContextPool();
