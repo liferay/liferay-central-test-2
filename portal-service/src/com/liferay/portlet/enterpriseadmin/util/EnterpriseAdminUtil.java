@@ -104,6 +104,10 @@ public class EnterpriseAdminUtil {
 		return getEnterpriseAdmin().filterRoles(permissionChecker, roles);
 	}
 
+	public static List<Group> filterSites(List<Group> sites) {
+		return getEnterpriseAdmin().filterSites(sites);
+	}
+
 	public static List<UserGroupRole> filterUserGroupRoles(
 			PermissionChecker permissionChecker,
 			List<UserGroupRole> userGroupRoles)

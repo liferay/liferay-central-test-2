@@ -78,6 +78,8 @@ public interface EnterpriseAdmin {
 	public List<Role> filterRoles(
 		PermissionChecker permissionChecker, List<Role> roles);
 
+	public List<Group> filterSites(List<Group> sites);
+
 	public List<UserGroupRole> filterUserGroupRoles(
 			PermissionChecker permissionChecker,
 			List<UserGroupRole> userGroupRoles)
