@@ -2141,7 +2141,6 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		") TEMP_TABLE INNER JOIN PollsQuestion ON TEMP_TABLE.questionId = PollsQuestion.questionId";
 	private static final String _FILTER_SQL_COUNT_POLLSQUESTION_WHERE = "SELECT COUNT(DISTINCT pollsQuestion.questionId) AS COUNT_VALUE FROM PollsQuestion pollsQuestion WHERE ";
 	private static final String _FILTER_COLUMN_PK = "pollsQuestion.questionId";
-	private static final String _FILTER_COLUMN_USERID = "pollsQuestion.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "pollsQuestion";
 	private static final String _FILTER_ENTITY_TABLE = "PollsQuestion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "pollsQuestion.";

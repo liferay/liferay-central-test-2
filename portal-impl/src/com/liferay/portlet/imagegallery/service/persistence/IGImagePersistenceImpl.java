@@ -6130,7 +6130,6 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		") TEMP_TABLE INNER JOIN IGImage ON TEMP_TABLE.imageId = IGImage.imageId";
 	private static final String _FILTER_SQL_COUNT_IGIMAGE_WHERE = "SELECT COUNT(DISTINCT igImage.imageId) AS COUNT_VALUE FROM IGImage igImage WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igImage.imageId";
-	private static final String _FILTER_COLUMN_USERID = "igImage.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igImage";
 	private static final String _FILTER_ENTITY_TABLE = "IGImage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igImage.";

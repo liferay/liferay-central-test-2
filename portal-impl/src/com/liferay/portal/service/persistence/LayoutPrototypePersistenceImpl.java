@@ -2216,10 +2216,10 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	protected ShardPersistence shardPersistence;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(type = TicketPersistence.class)
-	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamPersistence.class)
 	protected TeamPersistence teamPersistence;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserGroupPersistence.class)
@@ -2260,7 +2260,6 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		") TEMP_TABLE INNER JOIN LayoutPrototype ON TEMP_TABLE.layoutPrototypeId = LayoutPrototype.layoutPrototypeId";
 	private static final String _FILTER_SQL_COUNT_LAYOUTPROTOTYPE_WHERE = "SELECT COUNT(DISTINCT layoutPrototype.layoutPrototypeId) AS COUNT_VALUE FROM LayoutPrototype layoutPrototype WHERE ";
 	private static final String _FILTER_COLUMN_PK = "layoutPrototype.layoutPrototypeId";
-	private static final String _FILTER_COLUMN_USERID = null;
 	private static final String _FILTER_ENTITY_ALIAS = "layoutPrototype";
 	private static final String _FILTER_ENTITY_TABLE = "LayoutPrototype";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutPrototype.";

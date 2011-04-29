@@ -3704,7 +3704,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		") TEMP_TABLE INNER JOIN IGFolder ON TEMP_TABLE.folderId = IGFolder.folderId";
 	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "igFolder.folderId";
-	private static final String _FILTER_COLUMN_USERID = "igFolder.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "igFolder";
 	private static final String _FILTER_ENTITY_TABLE = "IGFolder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";

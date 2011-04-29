@@ -3896,7 +3896,6 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		") TEMP_TABLE INNER JOIN MBCategory ON TEMP_TABLE.categoryId = MBCategory.categoryId";
 	private static final String _FILTER_SQL_COUNT_MBCATEGORY_WHERE = "SELECT COUNT(DISTINCT mbCategory.categoryId) AS COUNT_VALUE FROM MBCategory mbCategory WHERE ";
 	private static final String _FILTER_COLUMN_PK = "mbCategory.categoryId";
-	private static final String _FILTER_COLUMN_USERID = "mbCategory.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "mbCategory";
 	private static final String _FILTER_ENTITY_TABLE = "MBCategory";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbCategory.";

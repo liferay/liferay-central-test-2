@@ -1043,16 +1043,6 @@ Liferay.Service.register("Liferay.Service.Social", "com.liferay.portlet.social.s
 Liferay.Service.register("Liferay.Service.SC", "com.liferay.portlet.softwarecatalog.service");
 
 Liferay.Service.registerClass(
-	Liferay.Service.SC, "SCLicense",
-	{
-		addLicense: true,
-		deleteLicense: true,
-		getLicense: true,
-		updateLicense: true
-	}
-);
-
-Liferay.Service.registerClass(
 	Liferay.Service.SC, "SCFrameworkVersion",
 	{
 		addFrameworkVersion: true,
@@ -1060,6 +1050,16 @@ Liferay.Service.registerClass(
 		getFrameworkVersion: true,
 		getFrameworkVersions: true,
 		updateFrameworkVersion: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.SC, "SCLicense",
+	{
+		addLicense: true,
+		deleteLicense: true,
+		getLicense: true,
+		updateLicense: true
 	}
 );
 

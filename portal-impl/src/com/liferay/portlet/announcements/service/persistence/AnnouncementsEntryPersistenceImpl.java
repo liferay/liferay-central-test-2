@@ -3973,7 +3973,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		") TEMP_TABLE INNER JOIN AnnouncementsEntry ON TEMP_TABLE.entryId = AnnouncementsEntry.entryId";
 	private static final String _FILTER_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE = "SELECT COUNT(DISTINCT announcementsEntry.entryId) AS COUNT_VALUE FROM AnnouncementsEntry announcementsEntry WHERE ";
 	private static final String _FILTER_COLUMN_PK = "announcementsEntry.entryId";
-	private static final String _FILTER_COLUMN_USERID = "announcementsEntry.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "announcementsEntry";
 	private static final String _FILTER_ENTITY_TABLE = "AnnouncementsEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "announcementsEntry.";

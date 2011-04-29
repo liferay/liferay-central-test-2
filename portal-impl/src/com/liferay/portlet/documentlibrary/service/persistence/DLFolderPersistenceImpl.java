@@ -4431,7 +4431,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		") TEMP_TABLE INNER JOIN DLFolder ON TEMP_TABLE.folderId = DLFolder.folderId";
 	private static final String _FILTER_SQL_COUNT_DLFOLDER_WHERE = "SELECT COUNT(DISTINCT dlFolder.folderId) AS COUNT_VALUE FROM DLFolder dlFolder WHERE ";
 	private static final String _FILTER_COLUMN_PK = "dlFolder.folderId";
-	private static final String _FILTER_COLUMN_USERID = "dlFolder.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "dlFolder";
 	private static final String _FILTER_ENTITY_TABLE = "DLFolder";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFolder.";

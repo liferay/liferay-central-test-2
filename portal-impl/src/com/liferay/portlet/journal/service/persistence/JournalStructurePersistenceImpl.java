@@ -3820,7 +3820,6 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		") TEMP_TABLE INNER JOIN JournalStructure ON TEMP_TABLE.id = JournalStructure.id";
 	private static final String _FILTER_SQL_COUNT_JOURNALSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT journalStructure.id) AS COUNT_VALUE FROM JournalStructure journalStructure WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalStructure.id";
-	private static final String _FILTER_COLUMN_USERID = "journalStructure.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "journalStructure";
 	private static final String _FILTER_ENTITY_TABLE = "JournalStructure";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalStructure.";

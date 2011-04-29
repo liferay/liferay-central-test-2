@@ -6021,10 +6021,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	protected ShardPersistence shardPersistence;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(type = TicketPersistence.class)
-	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamPersistence.class)
 	protected TeamPersistence teamPersistence;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserGroupPersistence.class)
@@ -6604,7 +6604,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		") TEMP_TABLE INNER JOIN Role_ ON TEMP_TABLE.roleId = Role_.roleId";
 	private static final String _FILTER_SQL_COUNT_ROLE_WHERE = "SELECT COUNT(DISTINCT role.roleId) AS COUNT_VALUE FROM Role_ role WHERE ";
 	private static final String _FILTER_COLUMN_PK = "role.roleId";
-	private static final String _FILTER_COLUMN_USERID = null;
 	private static final String _FILTER_ENTITY_ALIAS = "role";
 	private static final String _FILTER_ENTITY_TABLE = "Role_";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "role.";

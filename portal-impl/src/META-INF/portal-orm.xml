@@ -844,24 +844,6 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portal.model.impl.TicketModelImpl">
-		<attributes>
-			<id name="ticketId" />
-			<basic name="companyId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="key">
-				<column name="KEY_" />
-			</basic>
-			<basic name="expirationDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.TeamModelImpl">
 		<attributes>
 			<id name="teamId" />
@@ -879,6 +861,24 @@
 			<basic name="description" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.TicketModelImpl">
+		<attributes>
+			<id name="ticketId" />
+			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="key">
+				<column name="KEY_" />
+			</basic>
+			<basic name="expirationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.UserModelImpl">
@@ -2752,19 +2752,6 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl">
-		<attributes>
-			<id name="licenseId" />
-			<basic name="name" />
-			<basic name="url" />
-			<basic name="openSource" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
-			<basic name="recommended" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl">
 		<attributes>
 			<id name="frameworkVersionId" />
@@ -2786,6 +2773,19 @@
 			<basic name="priority" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl">
+		<attributes>
+			<id name="licenseId" />
+			<basic name="name" />
+			<basic name="url" />
+			<basic name="openSource" />
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="recommended" />
+			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl">
@@ -3223,12 +3223,12 @@
 		<table name="Subscription" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.portal.model.impl.TicketImpl" name="Ticket">
-		<table name="Ticket" />
-		<attributes />
-	</entity>
 	<entity class="com.liferay.portal.model.impl.TeamImpl" name="Team">
 		<table name="Team" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.TicketImpl" name="Ticket">
+		<table name="Ticket" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserImpl" name="User">
@@ -3611,12 +3611,12 @@
 		<table name="SocialRequest" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl" name="SCLicense">
-		<table name="SCLicense" />
-		<attributes />
-	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl" name="SCFrameworkVersion">
 		<table name="SCFrameworkVersion" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl" name="SCLicense">
+		<table name="SCLicense" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl" name="SCProductEntry">

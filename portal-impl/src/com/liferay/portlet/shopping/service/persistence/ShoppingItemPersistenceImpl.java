@@ -2716,7 +2716,6 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		") TEMP_TABLE INNER JOIN ShoppingItem ON TEMP_TABLE.itemId = ShoppingItem.itemId";
 	private static final String _FILTER_SQL_COUNT_SHOPPINGITEM_WHERE = "SELECT COUNT(DISTINCT shoppingItem.itemId) AS COUNT_VALUE FROM ShoppingItem shoppingItem WHERE ";
 	private static final String _FILTER_COLUMN_PK = "shoppingItem.itemId";
-	private static final String _FILTER_COLUMN_USERID = "shoppingItem.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "shoppingItem";
 	private static final String _FILTER_ENTITY_TABLE = "ShoppingItem";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingItem.";

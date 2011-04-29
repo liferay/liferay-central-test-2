@@ -3112,10 +3112,10 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
-	@BeanReference(type = SCLicensePersistence.class)
-	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(type = SCLicensePersistence.class)
+	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCProductEntryPersistence.class)
 	protected SCProductEntryPersistence scProductEntryPersistence;
 	@BeanReference(type = SCProductScreenshotPersistence.class)
@@ -3333,7 +3333,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		") TEMP_TABLE INNER JOIN SCFrameworkVersion ON TEMP_TABLE.frameworkVersionId = SCFrameworkVersion.frameworkVersionId";
 	private static final String _FILTER_SQL_COUNT_SCFRAMEWORKVERSION_WHERE = "SELECT COUNT(DISTINCT scFrameworkVersion.frameworkVersionId) AS COUNT_VALUE FROM SCFrameworkVersion scFrameworkVersion WHERE ";
 	private static final String _FILTER_COLUMN_PK = "scFrameworkVersion.frameworkVersionId";
-	private static final String _FILTER_COLUMN_USERID = "scFrameworkVersion.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "scFrameworkVersion";
 	private static final String _FILTER_ENTITY_TABLE = "SCFrameworkVersion";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scFrameworkVersion.";

@@ -2677,10 +2677,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	protected ShardPersistence shardPersistence;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(type = TicketPersistence.class)
-	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamPersistence.class)
 	protected TeamPersistence teamPersistence;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserGroupPersistence.class)
@@ -3074,7 +3074,6 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		") TEMP_TABLE INNER JOIN Team ON TEMP_TABLE.teamId = Team.teamId";
 	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
 	private static final String _FILTER_COLUMN_PK = "team.teamId";
-	private static final String _FILTER_COLUMN_USERID = "team.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "team";
 	private static final String _FILTER_ENTITY_TABLE = "Team";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "team.";

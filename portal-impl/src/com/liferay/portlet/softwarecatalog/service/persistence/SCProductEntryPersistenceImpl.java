@@ -3435,10 +3435,10 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
-	@BeanReference(type = SCLicensePersistence.class)
-	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(type = SCLicensePersistence.class)
+	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCProductEntryPersistence.class)
 	protected SCProductEntryPersistence scProductEntryPersistence;
 	@BeanReference(type = SCProductScreenshotPersistence.class)
@@ -3662,7 +3662,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		") TEMP_TABLE INNER JOIN SCProductEntry ON TEMP_TABLE.productEntryId = SCProductEntry.productEntryId";
 	private static final String _FILTER_SQL_COUNT_SCPRODUCTENTRY_WHERE = "SELECT COUNT(DISTINCT scProductEntry.productEntryId) AS COUNT_VALUE FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _FILTER_COLUMN_PK = "scProductEntry.productEntryId";
-	private static final String _FILTER_COLUMN_USERID = "scProductEntry.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "scProductEntry";
 	private static final String _FILTER_ENTITY_TABLE = "SCProductEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductEntry.";

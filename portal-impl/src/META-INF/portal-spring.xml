@@ -129,14 +129,14 @@
 	<bean id="com.liferay.portal.service.persistence.ShardPersistence" class="com.liferay.portal.service.persistence.ShardPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.SubscriptionLocalService" class="com.liferay.portal.service.impl.SubscriptionLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence" class="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.TicketLocalService" class="com.liferay.portal.service.impl.TicketLocalServiceImpl" />
-	<bean id="com.liferay.portal.service.persistence.TicketPersistence" class="com.liferay.portal.service.persistence.TicketPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.TeamLocalService" class="com.liferay.portal.service.impl.TeamLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.TeamService" class="com.liferay.portal.service.impl.TeamServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.TeamPersistence" class="com.liferay.portal.service.persistence.TeamPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.TeamFinder" class="com.liferay.portal.service.persistence.TeamFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.ThemeLocalService" class="com.liferay.portal.service.impl.ThemeLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.ThemeService" class="com.liferay.portal.service.impl.ThemeServiceImpl" />
+	<bean id="com.liferay.portal.service.TicketLocalService" class="com.liferay.portal.service.impl.TicketLocalServiceImpl" />
+	<bean id="com.liferay.portal.service.persistence.TicketPersistence" class="com.liferay.portal.service.persistence.TicketPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.UserLocalService" class="com.liferay.portal.service.impl.UserLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.UserService" class="com.liferay.portal.service.impl.UserServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.UserPersistence" class="com.liferay.portal.service.persistence.UserPersistenceImpl" parent="basePersistence" />
@@ -389,12 +389,12 @@
 	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService" class="com.liferay.portlet.social.service.impl.SocialRequestLocalServiceImpl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestPersistence" class="com.liferay.portlet.social.service.persistence.SocialRequestPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseLocalServiceImpl" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseServiceImpl" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService" class="com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionLocalServiceImpl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" class="com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionServiceImpl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseLocalServiceImpl" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseServiceImpl" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductEntryServiceImpl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" parent="basePersistence" />

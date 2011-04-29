@@ -4296,7 +4296,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		") TEMP_TABLE INNER JOIN BookmarksEntry ON TEMP_TABLE.entryId = BookmarksEntry.entryId";
 	private static final String _FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(DISTINCT bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
 	private static final String _FILTER_COLUMN_PK = "bookmarksEntry.entryId";
-	private static final String _FILTER_COLUMN_USERID = "bookmarksEntry.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "bookmarksEntry";
 	private static final String _FILTER_ENTITY_TABLE = "BookmarksEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "bookmarksEntry.";

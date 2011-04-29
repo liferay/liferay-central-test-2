@@ -839,8 +839,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AssetTag.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				AssetTag.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -1020,8 +1019,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AssetTag.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				AssetTag.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -1260,8 +1258,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
-				AssetTag.class.getName(), _FILTER_COLUMN_PK,
-				_FILTER_COLUMN_USERID, groupId);
+				AssetTag.class.getName(), _FILTER_COLUMN_PK, groupId);
 
 		Session session = null;
 
@@ -2053,7 +2050,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		") TEMP_TABLE INNER JOIN AssetTag ON TEMP_TABLE.tagId = AssetTag.tagId";
 	private static final String _FILTER_SQL_COUNT_ASSETTAG_WHERE = "SELECT COUNT(DISTINCT assetTag.tagId) AS COUNT_VALUE FROM AssetTag assetTag WHERE ";
 	private static final String _FILTER_COLUMN_PK = "assetTag.tagId";
-	private static final String _FILTER_COLUMN_USERID = "assetTag.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "assetTag";
 	private static final String _FILTER_ENTITY_TABLE = "AssetTag";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetTag.";

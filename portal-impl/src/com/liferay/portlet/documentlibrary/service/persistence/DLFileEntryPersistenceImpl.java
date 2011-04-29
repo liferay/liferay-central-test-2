@@ -6781,7 +6781,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		") TEMP_TABLE INNER JOIN DLFileEntry ON TEMP_TABLE.fileEntryId = DLFileEntry.fileEntryId";
 	private static final String _FILTER_SQL_COUNT_DLFILEENTRY_WHERE = "SELECT COUNT(DISTINCT dlFileEntry.fileEntryId) AS COUNT_VALUE FROM DLFileEntry dlFileEntry WHERE ";
 	private static final String _FILTER_COLUMN_PK = "dlFileEntry.fileEntryId";
-	private static final String _FILTER_COLUMN_USERID = "dlFileEntry.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "dlFileEntry";
 	private static final String _FILTER_ENTITY_TABLE = "DLFileEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileEntry.";

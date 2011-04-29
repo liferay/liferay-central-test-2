@@ -12627,7 +12627,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		") TEMP_TABLE INNER JOIN MBMessage ON TEMP_TABLE.messageId = MBMessage.messageId";
 	private static final String _FILTER_SQL_COUNT_MBMESSAGE_WHERE = "SELECT COUNT(DISTINCT mbMessage.messageId) AS COUNT_VALUE FROM MBMessage mbMessage WHERE ";
 	private static final String _FILTER_COLUMN_PK = "mbMessage.rootMessageId";
-	private static final String _FILTER_COLUMN_USERID = "mbMessage.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "mbMessage";
 	private static final String _FILTER_ENTITY_TABLE = "MBMessage";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "mbMessage.";

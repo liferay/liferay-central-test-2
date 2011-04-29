@@ -3997,10 +3997,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	protected ShardPersistence shardPersistence;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(type = TicketPersistence.class)
-	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamPersistence.class)
 	protected TeamPersistence teamPersistence;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserGroupPersistence.class)
@@ -4562,7 +4562,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		") TEMP_TABLE INNER JOIN UserGroup ON TEMP_TABLE.userGroupId = UserGroup.userGroupId";
 	private static final String _FILTER_SQL_COUNT_USERGROUP_WHERE = "SELECT COUNT(DISTINCT userGroup.userGroupId) AS COUNT_VALUE FROM UserGroup userGroup WHERE ";
 	private static final String _FILTER_COLUMN_PK = "userGroup.userGroupId";
-	private static final String _FILTER_COLUMN_USERID = null;
 	private static final String _FILTER_ENTITY_ALIAS = "userGroup";
 	private static final String _FILTER_ENTITY_TABLE = "UserGroup";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "userGroup.";

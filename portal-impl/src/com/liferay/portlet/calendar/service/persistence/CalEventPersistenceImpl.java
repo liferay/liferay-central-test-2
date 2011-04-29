@@ -6826,7 +6826,6 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		") TEMP_TABLE INNER JOIN CalEvent ON TEMP_TABLE.eventId = CalEvent.eventId";
 	private static final String _FILTER_SQL_COUNT_CALEVENT_WHERE = "SELECT COUNT(DISTINCT calEvent.eventId) AS COUNT_VALUE FROM CalEvent calEvent WHERE ";
 	private static final String _FILTER_COLUMN_PK = "calEvent.eventId";
-	private static final String _FILTER_COLUMN_USERID = "calEvent.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "calEvent";
 	private static final String _FILTER_ENTITY_TABLE = "CalEvent";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "calEvent.";

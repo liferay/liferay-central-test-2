@@ -53,9 +53,9 @@
 	<import class="com.liferay.portal.model.ServiceComponent" />
 	<import class="com.liferay.portal.model.Shard" />
 	<import class="com.liferay.portal.model.Subscription" />
-	<import class="com.liferay.portal.model.Ticket" />
 	<import class="com.liferay.portal.model.Team" />
 	<import class="com.liferay.portal.model.Theme" />
+	<import class="com.liferay.portal.model.Ticket" />
 	<import class="com.liferay.portal.model.User" />
 	<import class="com.liferay.portal.model.UserGroup" />
 	<import class="com.liferay.portal.model.UserGroupGroupRole" />
@@ -146,8 +146,8 @@
 	<import class="com.liferay.portlet.social.model.SocialRelation" />
 	<import class="com.liferay.portlet.social.model.SocialRequest" />
 	<import class="com.liferay.portlet.social.model.SocialRequestInterpreter" />
-	<import class="com.liferay.portlet.softwarecatalog.model.SCLicense" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion" />
+	<import class="com.liferay.portlet.softwarecatalog.model.SCLicense" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductEntry" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductScreenshot" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductVersion" />
@@ -816,18 +816,6 @@
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="frequency" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.TicketImpl" table="Ticket">
-		<cache usage="read-write" />
-		<id name="ticketId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
-	</class>
 	<class name="com.liferay.portal.model.impl.TeamImpl" table="Team">
 		<cache usage="read-write" />
 		<id name="teamId" type="long">
@@ -841,6 +829,18 @@
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.TicketImpl" table="Ticket">
+		<cache usage="read-write" />
+		<id name="ticketId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="key" column="key_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="expirationDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserImpl" table="User_">
 		<cache usage="read-write" />
@@ -2239,17 +2239,6 @@
 		<property name="receiverUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
-	<class name="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl" table="SCLicense">
-		<cache usage="read-write" />
-		<id name="licenseId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="openSource" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="recommended" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-	</class>
 	<class name="com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl" table="SCFrameworkVersion">
 		<cache usage="read-write" />
 		<id name="frameworkVersionId" type="long">
@@ -2265,6 +2254,17 @@
 		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="priority" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl" table="SCLicense">
+		<cache usage="read-write" />
+		<id name="licenseId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="url" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="openSource" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="recommended" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl" table="SCProductEntry">
 		<cache usage="read-write" />

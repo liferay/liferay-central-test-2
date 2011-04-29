@@ -961,18 +961,6 @@
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingOrderService" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.ShoppingOrderService" />
 	</bean>
-	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
-	</bean>
-	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
-	</bean>
-	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
-		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
-	</bean>
 	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCFrameworkVersionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
 		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
@@ -984,6 +972,18 @@
 	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCFrameworkVersionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
 		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
+	</bean>
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
+	</bean>
+	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCLicenseService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
+		<property name="serviceInterface" value="com.liferay.portlet.softwarecatalog.service.SCLicenseService" />
 	</bean>
 	<bean name="/com_liferay_portlet_softwarecatalog_service_spring_SCProductEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryService" />

@@ -2391,7 +2391,6 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 		") TEMP_TABLE INNER JOIN DDLRecordSet ON TEMP_TABLE.recordSetId = DDLRecordSet.recordSetId";
 	private static final String _FILTER_SQL_COUNT_DDLRECORDSET_WHERE = "SELECT COUNT(DISTINCT ddlRecordSet.recordSetId) AS COUNT_VALUE FROM DDLRecordSet ddlRecordSet WHERE ";
 	private static final String _FILTER_COLUMN_PK = "ddlRecordSet.recordSetId";
-	private static final String _FILTER_COLUMN_USERID = "ddlRecordSet.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "ddlRecordSet";
 	private static final String _FILTER_ENTITY_TABLE = "DDLRecordSet";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddlRecordSet.";

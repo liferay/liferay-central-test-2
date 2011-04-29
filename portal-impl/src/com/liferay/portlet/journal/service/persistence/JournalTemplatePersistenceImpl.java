@@ -4050,7 +4050,6 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		") TEMP_TABLE INNER JOIN JournalTemplate ON TEMP_TABLE.id = JournalTemplate.id";
 	private static final String _FILTER_SQL_COUNT_JOURNALTEMPLATE_WHERE = "SELECT COUNT(DISTINCT journalTemplate.id) AS COUNT_VALUE FROM JournalTemplate journalTemplate WHERE ";
 	private static final String _FILTER_COLUMN_PK = "journalTemplate.id";
-	private static final String _FILTER_COLUMN_USERID = "journalTemplate.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "journalTemplate";
 	private static final String _FILTER_ENTITY_TABLE = "JournalTemplate";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalTemplate.";

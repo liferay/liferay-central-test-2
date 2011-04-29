@@ -1773,10 +1773,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
-	@BeanReference(type = SCLicensePersistence.class)
-	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(type = SCLicensePersistence.class)
+	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCProductEntryPersistence.class)
 	protected SCProductEntryPersistence scProductEntryPersistence;
 	@BeanReference(type = SCProductScreenshotPersistence.class)

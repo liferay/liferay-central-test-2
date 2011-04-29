@@ -2669,10 +2669,10 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
-	@BeanReference(type = SCLicensePersistence.class)
-	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(type = SCLicensePersistence.class)
+	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCProductEntryPersistence.class)
 	protected SCProductEntryPersistence scProductEntryPersistence;
 	@BeanReference(type = SCProductScreenshotPersistence.class)
@@ -2882,7 +2882,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		") TEMP_TABLE INNER JOIN SCLicense ON TEMP_TABLE.licenseId = SCLicense.licenseId";
 	private static final String _FILTER_SQL_COUNT_SCLICENSE_WHERE = "SELECT COUNT(DISTINCT scLicense.licenseId) AS COUNT_VALUE FROM SCLicense scLicense WHERE ";
 	private static final String _FILTER_COLUMN_PK = "scLicense.licenseId";
-	private static final String _FILTER_COLUMN_USERID = null;
 	private static final String _FILTER_ENTITY_ALIAS = "scLicense";
 	private static final String _FILTER_ENTITY_TABLE = "SCLicense";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scLicense.";

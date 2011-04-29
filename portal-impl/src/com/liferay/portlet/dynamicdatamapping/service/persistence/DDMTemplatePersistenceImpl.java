@@ -3887,7 +3887,6 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 		") TEMP_TABLE INNER JOIN DDMTemplate ON TEMP_TABLE.templateId = DDMTemplate.templateId";
 	private static final String _FILTER_SQL_COUNT_DDMTEMPLATE_WHERE = "SELECT COUNT(DISTINCT ddmTemplate.templateId) AS COUNT_VALUE FROM DDMTemplate ddmTemplate WHERE ";
 	private static final String _FILTER_COLUMN_PK = "ddmTemplate.templateId";
-	private static final String _FILTER_COLUMN_USERID = "ddmTemplate.userId";
 	private static final String _FILTER_ENTITY_ALIAS = "ddmTemplate";
 	private static final String _FILTER_ENTITY_TABLE = "DDMTemplate";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmTemplate.";

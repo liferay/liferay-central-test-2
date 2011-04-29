@@ -68,62 +68,6 @@ public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
 	 */
 
 	/**
-	 * Gets the s c license local service.
-	 *
-	 * @return the s c license local service
-	 */
-	public SCLicenseLocalService getSCLicenseLocalService() {
-		return scLicenseLocalService;
-	}
-
-	/**
-	 * Sets the s c license local service.
-	 *
-	 * @param scLicenseLocalService the s c license local service
-	 */
-	public void setSCLicenseLocalService(
-		SCLicenseLocalService scLicenseLocalService) {
-		this.scLicenseLocalService = scLicenseLocalService;
-	}
-
-	/**
-	 * Gets the s c license remote service.
-	 *
-	 * @return the s c license remote service
-	 */
-	public SCLicenseService getSCLicenseService() {
-		return scLicenseService;
-	}
-
-	/**
-	 * Sets the s c license remote service.
-	 *
-	 * @param scLicenseService the s c license remote service
-	 */
-	public void setSCLicenseService(SCLicenseService scLicenseService) {
-		this.scLicenseService = scLicenseService;
-	}
-
-	/**
-	 * Gets the s c license persistence.
-	 *
-	 * @return the s c license persistence
-	 */
-	public SCLicensePersistence getSCLicensePersistence() {
-		return scLicensePersistence;
-	}
-
-	/**
-	 * Sets the s c license persistence.
-	 *
-	 * @param scLicensePersistence the s c license persistence
-	 */
-	public void setSCLicensePersistence(
-		SCLicensePersistence scLicensePersistence) {
-		this.scLicensePersistence = scLicensePersistence;
-	}
-
-	/**
 	 * Gets the s c framework version local service.
 	 *
 	 * @return the s c framework version local service
@@ -178,6 +122,62 @@ public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
 	public void setSCFrameworkVersionPersistence(
 		SCFrameworkVersionPersistence scFrameworkVersionPersistence) {
 		this.scFrameworkVersionPersistence = scFrameworkVersionPersistence;
+	}
+
+	/**
+	 * Gets the s c license local service.
+	 *
+	 * @return the s c license local service
+	 */
+	public SCLicenseLocalService getSCLicenseLocalService() {
+		return scLicenseLocalService;
+	}
+
+	/**
+	 * Sets the s c license local service.
+	 *
+	 * @param scLicenseLocalService the s c license local service
+	 */
+	public void setSCLicenseLocalService(
+		SCLicenseLocalService scLicenseLocalService) {
+		this.scLicenseLocalService = scLicenseLocalService;
+	}
+
+	/**
+	 * Gets the s c license remote service.
+	 *
+	 * @return the s c license remote service
+	 */
+	public SCLicenseService getSCLicenseService() {
+		return scLicenseService;
+	}
+
+	/**
+	 * Sets the s c license remote service.
+	 *
+	 * @param scLicenseService the s c license remote service
+	 */
+	public void setSCLicenseService(SCLicenseService scLicenseService) {
+		this.scLicenseService = scLicenseService;
+	}
+
+	/**
+	 * Gets the s c license persistence.
+	 *
+	 * @return the s c license persistence
+	 */
+	public SCLicensePersistence getSCLicensePersistence() {
+		return scLicensePersistence;
+	}
+
+	/**
+	 * Sets the s c license persistence.
+	 *
+	 * @param scLicensePersistence the s c license persistence
+	 */
+	public void setSCLicensePersistence(
+		SCLicensePersistence scLicensePersistence) {
+		this.scLicensePersistence = scLicensePersistence;
 	}
 
 	/**
@@ -532,18 +532,18 @@ public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	@BeanReference(type = SCLicenseLocalService.class)
-	protected SCLicenseLocalService scLicenseLocalService;
-	@BeanReference(type = SCLicenseService.class)
-	protected SCLicenseService scLicenseService;
-	@BeanReference(type = SCLicensePersistence.class)
-	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCFrameworkVersionLocalService.class)
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
 	@BeanReference(type = SCFrameworkVersionService.class)
 	protected SCFrameworkVersionService scFrameworkVersionService;
 	@BeanReference(type = SCFrameworkVersionPersistence.class)
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@BeanReference(type = SCLicenseLocalService.class)
+	protected SCLicenseLocalService scLicenseLocalService;
+	@BeanReference(type = SCLicenseService.class)
+	protected SCLicenseService scLicenseService;
+	@BeanReference(type = SCLicensePersistence.class)
+	protected SCLicensePersistence scLicensePersistence;
 	@BeanReference(type = SCProductEntryLocalService.class)
 	protected SCProductEntryLocalService scProductEntryLocalService;
 	@BeanReference(type = SCProductEntryService.class)

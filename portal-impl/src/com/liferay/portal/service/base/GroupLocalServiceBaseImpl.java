@@ -2840,42 +2840,6 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	}
 
 	/**
-	 * Gets the ticket local service.
-	 *
-	 * @return the ticket local service
-	 */
-	public TicketLocalService getTicketLocalService() {
-		return ticketLocalService;
-	}
-
-	/**
-	 * Sets the ticket local service.
-	 *
-	 * @param ticketLocalService the ticket local service
-	 */
-	public void setTicketLocalService(TicketLocalService ticketLocalService) {
-		this.ticketLocalService = ticketLocalService;
-	}
-
-	/**
-	 * Gets the ticket persistence.
-	 *
-	 * @return the ticket persistence
-	 */
-	public TicketPersistence getTicketPersistence() {
-		return ticketPersistence;
-	}
-
-	/**
-	 * Sets the ticket persistence.
-	 *
-	 * @param ticketPersistence the ticket persistence
-	 */
-	public void setTicketPersistence(TicketPersistence ticketPersistence) {
-		this.ticketPersistence = ticketPersistence;
-	}
-
-	/**
 	 * Gets the team local service.
 	 *
 	 * @return the team local service
@@ -2981,6 +2945,42 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	 */
 	public void setThemeService(ThemeService themeService) {
 		this.themeService = themeService;
+	}
+
+	/**
+	 * Gets the ticket local service.
+	 *
+	 * @return the ticket local service
+	 */
+	public TicketLocalService getTicketLocalService() {
+		return ticketLocalService;
+	}
+
+	/**
+	 * Sets the ticket local service.
+	 *
+	 * @param ticketLocalService the ticket local service
+	 */
+	public void setTicketLocalService(TicketLocalService ticketLocalService) {
+		this.ticketLocalService = ticketLocalService;
+	}
+
+	/**
+	 * Gets the ticket persistence.
+	 *
+	 * @return the ticket persistence
+	 */
+	public TicketPersistence getTicketPersistence() {
+		return ticketPersistence;
+	}
+
+	/**
+	 * Sets the ticket persistence.
+	 *
+	 * @param ticketPersistence the ticket persistence
+	 */
+	public void setTicketPersistence(TicketPersistence ticketPersistence) {
+		this.ticketPersistence = ticketPersistence;
 	}
 
 	/**
@@ -5222,10 +5222,6 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	protected SubscriptionLocalService subscriptionLocalService;
 	@BeanReference(type = SubscriptionPersistence.class)
 	protected SubscriptionPersistence subscriptionPersistence;
-	@BeanReference(type = TicketLocalService.class)
-	protected TicketLocalService ticketLocalService;
-	@BeanReference(type = TicketPersistence.class)
-	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = TeamLocalService.class)
 	protected TeamLocalService teamLocalService;
 	@BeanReference(type = TeamService.class)
@@ -5238,6 +5234,10 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	protected ThemeLocalService themeLocalService;
 	@BeanReference(type = ThemeService.class)
 	protected ThemeService themeService;
+	@BeanReference(type = TicketLocalService.class)
+	protected TicketLocalService ticketLocalService;
+	@BeanReference(type = TicketPersistence.class)
+	protected TicketPersistence ticketPersistence;
 	@BeanReference(type = UserLocalService.class)
 	protected UserLocalService userLocalService;
 	@BeanReference(type = UserService.class)
