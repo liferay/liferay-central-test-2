@@ -3627,7 +3627,7 @@ public class ServiceBuilder {
 
 				String name = element.attributeValue("name");
 
-				entityElements.put(name, element);
+				entityElements.put(name.toLowerCase(), element);
 			}
 			else if (elementName.equals("exceptions")) {
 				element.detach();
