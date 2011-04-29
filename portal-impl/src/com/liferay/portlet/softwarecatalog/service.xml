@@ -3,40 +3,6 @@
 
 <service-builder package-path="com.liferay.portlet.softwarecatalog">
 	<namespace>SC</namespace>
-	<entity name="SCLicense" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="licenseId" type="long" primary="true" />
-
-		<!-- Other fields -->
-
-		<column name="name" type="String" />
-		<column name="url" type="String" />
-		<column name="openSource" type="boolean" />
-		<column name="active" type="boolean" />
-		<column name="recommended" type="boolean" />
-
-		<!-- Relationships -->
-
-		<column name="scProductEntries" type="Collection" entity="SCProductEntry" mapping-table="SCLicenses_SCProductEntries" />
-
-		<!-- Order -->
-
-		<order by="asc">
-			<order-column name="name" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="Active" return-type="Collection">
-			<finder-column name="active" />
-		</finder>
-		<finder name="A_R" return-type="Collection">
-			<finder-column name="active" />
-			<finder-column name="recommended" />
-		</finder>
-	</entity>
 	<entity name="SCFrameworkVersion" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -85,6 +51,40 @@
 		<finder name="G_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="active" />
+		</finder>
+	</entity>
+	<entity name="SCLicense" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="licenseId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="url" type="String" />
+		<column name="openSource" type="boolean" />
+		<column name="active" type="boolean" />
+		<column name="recommended" type="boolean" />
+
+		<!-- Relationships -->
+
+		<column name="scProductEntries" type="Collection" entity="SCProductEntry" mapping-table="SCLicenses_SCProductEntries" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+		<finder name="A_R" return-type="Collection">
+			<finder-column name="active" />
+			<finder-column name="recommended" />
 		</finder>
 	</entity>
 	<entity name="SCProductEntry" local-service="true" remote-service="true">
