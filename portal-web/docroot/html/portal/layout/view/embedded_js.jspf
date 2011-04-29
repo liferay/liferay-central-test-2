@@ -14,62 +14,10 @@
  */
 --%>
 
-<aui:script>
-	Liferay.provide(
-		window,
-		'resizeIframe',
-		function() {
-			var A = AUI();
+<aui:script use="aui-resize-iframe">
+	var iframe = A.one('#embeddedIframe');
 
-			var winHeight = 0;
-
-			if (typeof(window.innerWidth) == 'number') {
-
-				// Non-IE
-
-				winHeight = window.innerHeight;
-			}
-			else if ((document.documentElement) &&
-					 (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-
-				// IE 6+
-
-				winHeight = document.documentElement.clientHeight;
-			}
-			else if ((document.body) &&
-					 (document.body.clientWidth || document.body.clientHeight)) {
-
-				// IE 4 compatible
-
-				winHeight = document.body.clientHeight;
-			}
-
-			var iframe = A.one('#embeddedIframe');
-
-			var height = null;
-
-			try {
-				height = iframe.attr('contentWindow.document.body.offsetHeight');
-
-				if (!height) {
-					height = iframe.attr('contentWindow.document.body.scrollHeight');
-				}
-
-				height = height + 50;
-			}
-			catch (e) {
-
-				// The value 139 here is derived (tab_height * num_tab_levels) +
-				// height_of_banner + bottom_spacer. 139 just happend to work in
-				// this instance in IE and Firefox at the time.
-
-				height = winHeight - 139;
-			}
-
-			A.all('iframe').setStyle('height', height + 'px');
-		},
-		['aui-base']
-	);
-
-	window.onresize = resizeIframe;
+	if (iframe) {
+		iframe.plug(A.Plugin.ResizeIframe);
+	}
 </aui:script>

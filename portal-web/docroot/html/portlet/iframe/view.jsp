@@ -57,7 +57,7 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 	</c:when>
 	<c:otherwise>
 		<div>
-			<iframe alt="<%= alt %>" border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" longdesc="<%= longdesc%>" name="<portlet:namespace />iframe" onload="<portlet:namespace />monitorIframe(); <%= resizeAutomatically ?  renderResponse.getNamespace() + "resizeIframe();" : StringPool.BLANK %>" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>">
+			<iframe alt="<%= alt %>" border="<%= border %>" bordercolor="<%= bordercolor %>" frameborder="<%= frameborder %>" height="<%= iframeHeight %>" hspace="<%= hspace %>" id="<portlet:namespace />iframe" longdesc="<%= longdesc%>" name="<portlet:namespace />iframe" onload="<portlet:namespace />monitorIframe();" scrolling="<%= scrolling %>" src="<%= iframeSrc %>" vspace="<%= vspace %>" width="<%= width %>">
 				<%= LanguageUtil.format(pageContext, "your-browser-does-not-support-inline-frames-or-is-currently-configured-not-to-display-inline-frames.-content-can-be-viewed-at-actual-source-page-x", iframeSrc) %>
 			</iframe>
 		</div>
@@ -65,37 +65,6 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 </c:choose>
 
 <aui:script>
-	function <portlet:namespace />maximizeIframe(iframe) {
-		var winHeight = 0;
-
-		if (typeof(window.innerWidth) == 'number') {
-
-			// Non-IE
-
-			winHeight = window.innerHeight;
-		}
-		else if ((document.documentElement) &&
-				 (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
-
-			// IE 6+
-
-			winHeight = document.documentElement.clientHeight;
-		}
-		else if ((document.body) &&
-				 (document.body.clientWidth || document.body.clientHeight)) {
-
-			// IE 4 compatible
-
-			winHeight = document.body.clientHeight;
-		}
-
-		// The value 139 here is derived (tab_height * num_tab_levels) +
-		// height_of_banner + bottom_spacer. 139 just happend to work in
-		// this instance in IE and Firefox at the time.
-
-		iframe.height = (winHeight - 139);
-	}
-
 	function <portlet:namespace />monitorIframe() {
 		var url = null;
 
@@ -121,37 +90,6 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 		else {
 			<portlet:namespace />updateHash(url);
 		}
-
-		return true;
-	}
-
-	function <portlet:namespace />resizeIframe() {
-		var iframe = document.getElementById('<portlet:namespace />iframe');
-
-		var height = null;
-
-		try {
-			var frameBody = iframe.contentWindow.document.body;
-
-			height = frameBody.offsetHeight;
-
-			if (!height) {
-				height = frameBody.scrollHeight;
-			}
-		}
-		catch (e) {
-			if (themeDisplay.isStateMaximized()) {
-				<portlet:namespace />maximizeIframe(iframe);
-			}
-			else {
-				iframe.height = <%= heightNormal %>;
-			}
-
-			return true;
-		}
-
-		iframe.height = height + 50;
-		iframe.width= "100%";
 
 		return true;
 	}
@@ -227,4 +165,17 @@ if (windowState.equals(WindowState.MAXIMIZED)) {
 	);
 
 	<portlet:namespace />init();
+</aui:script>
+
+<aui:script use="aui-resize-iframe">
+	var iframe = A.one('#<portlet:namespace />iframe');
+
+	if (iframe) {
+		iframe.plug(
+			A.Plugin.ResizeIframe,
+			{
+				monitorHeight: <%= resizeAutomatically %>
+			}
+		);
+	}
 </aui:script>
