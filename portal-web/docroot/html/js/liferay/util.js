@@ -1194,7 +1194,7 @@
 	Liferay.provide(
 		Util,
 		'resizeTextarea',
-		function(elString, usingRichEditor, resizeToInlinePopup) {
+		function(elString, usingRichEditor) {
 			var el = A.one('#' + elString);
 
 			if (!el) {
@@ -1204,8 +1204,10 @@
 			if (el) {
 				var pageBody = A.getBody();
 
-				var resize = function() {
-					var pageBodyHeight = pageBody.get('offsetHeight');
+				var diff;
+
+				var resize = function(event) {
+					var pageBodyHeight = pageBody.get('winHeight');
 
 					if (usingRichEditor) {
 						try {
@@ -1217,18 +1219,29 @@
 						}
 					}
 
-					var diff = 170;
+					if (!diff) {
+						var buttonRow = pageBody.one('.yui3-aui-button-holder');
+						var templateEditor = pageBody.one('.lfr-template-editor');
 
-					if (!resizeToInlinePopup) {
-						diff = 100;
+						if (buttonRow && templateEditor) {
+							var region = templateEditor.getXY();
+
+							diff = (buttonRow.outerHeight(true) + region[1]) + 25;
+						}
+						else {
+							diff = 170;
+						}
 					}
 
 					el = A.one(el);
 
 					var styles = {
-						height: (pageBodyHeight - diff) + 'px',
 						width: '98%'
 					};
+
+					if (event) {
+						styles.height = (pageBodyHeight - diff);
+					}
 
 					if (usingRichEditor) {
 						if (!el || !A.DOM.inDoc(el)) {
@@ -1255,7 +1268,13 @@
 
 				resize();
 
-				A.getWin().on('resize', resize);
+				var dialog = Liferay.Util.getWindow();
+
+				if (dialog) {
+					var resizeEventHandle = dialog.iframe.after('resizeiframe:heightChange', resize);
+
+					A.getWin().on('unload', resizeEventHandle.detach, resizeEventHandle);
+				}
 			}
 		},
 		['aui-base']
