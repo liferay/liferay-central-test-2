@@ -3641,7 +3641,7 @@ public class ServiceBuilder {
 			}
 		}
 
-		if (authorElement == null) {
+		if (authorElement != null) {
 			rootElement.add(authorElement);
 		}
 
