@@ -13,7 +13,7 @@ portlets. The Service Builder saves the developer time by generating Spring
 utilities, SOAP utilities, and Hibernate persistence classes to ease the
 development of services.
 -->
-<!ELEMENT service-builder (author?, namespace, entity+, exceptions?)>
+<!ELEMENT service-builder (author?, namespace?, entity+, exceptions?)>
 
 <!--
 The package-path value specifies the package of the generated code.

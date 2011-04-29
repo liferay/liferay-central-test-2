@@ -524,9 +524,9 @@ public class ServiceBuilder {
 			_testDir = testDir;
 			_build = build;
 
-			String content = FileUtil.read(new File(fileName));
+			String content = _getContent(fileName);
 
-			Document document = SAXReaderUtil.read(content, true);
+			Document document = SAXReaderUtil.read(content, false);
 
 			Element rootElement = document.getRootElement();
 
@@ -1503,6 +1503,16 @@ public class ServiceBuilder {
 		fileName = fileName.substring(x + 4, y);
 
 		return StringUtil.replace(fileName, "/", ".");
+	}
+
+	private void _addElements(
+		Element element, Map<String, Element> elements) {
+
+		for (Map.Entry<String, Element> entry : elements.entrySet()) {
+			Element childElement = entry.getValue();
+
+			element.add(childElement);
+		}
 	}
 
 	private void _createEJBPK(Entity entity) throws Exception {
@@ -3577,6 +3587,119 @@ public class ServiceBuilder {
 		}
 
 		return xml;
+	}
+
+	private String _getContent(String fileName) throws Exception {
+		Document document = _getContentDocument(fileName);
+
+		Element rootElement = document.getRootElement();
+
+		Element authorElement = null;
+		Element namespaceElement = null;
+		Map<String, Element> entityElements = new TreeMap<String, Element>();
+		Map<String, Element> exceptionElements = new TreeMap<String, Element>();
+
+		for (Element element : rootElement.elements()) {
+			String elementName = element.getName();
+
+			if (elementName.equals("author")) {
+				element.detach();
+
+				if (authorElement != null) {
+					throw new IllegalArgumentException(
+						"There can only be one author element");
+				}
+
+				authorElement = element;
+			}
+			else if (elementName.equals("namespace")) {
+				element.detach();
+
+				if (namespaceElement != null) {
+					throw new IllegalArgumentException(
+						"There can only be one namespace element");
+				}
+
+				namespaceElement = element;
+			}
+			else if (elementName.equals("entity")) {
+				element.detach();
+
+				String name = element.attributeValue("name");
+
+				entityElements.put(name, element);
+			}
+			else if (elementName.equals("exceptions")) {
+				element.detach();
+
+				for (Element exceptionElement : element.elements("exception")) {
+					exceptionElement.detach();
+
+					exceptionElements.put(
+						exceptionElement.getText(), exceptionElement);
+				}
+			}
+		}
+
+		if (authorElement == null) {
+			rootElement.add(authorElement);
+		}
+
+		if (namespaceElement == null) {
+			throw new IllegalArgumentException(
+				"The namespace element is required");
+		}
+		else {
+			rootElement.add(namespaceElement);
+		}
+
+		_addElements(rootElement, entityElements);
+
+		if (!exceptionElements.isEmpty()) {
+			Element exceptionsElement = rootElement.addElement("exceptions");
+
+			_addElements(exceptionsElement, exceptionElements);
+		}
+
+		return document.asXML();
+	}
+
+	private Document _getContentDocument(String fileName) throws Exception {
+		String content = FileUtil.read(new File(fileName));
+
+		Document document = SAXReaderUtil.read(content);
+
+		Element rootElement = document.getRootElement();
+
+		for (Element element : rootElement.elements()) {
+			String elementName = element.getName(); 
+
+			if (!elementName.equals("service-builder")) {
+				continue;
+			}
+
+			element.detach();
+
+			String dirName = fileName.substring(
+				0, fileName.lastIndexOf(StringPool.SLASH) + 1);
+			String serviceBuilderFileName = element.attributeValue("file");
+
+			Document serviceBuilderDocument = _getContentDocument(
+				dirName + serviceBuilderFileName);
+
+			Element serviceBuilderRootElement =
+				serviceBuilderDocument.getRootElement();
+
+			for (Element serviceBuilderElement :
+					serviceBuilderRootElement.elements()) {
+
+				serviceBuilderElement.detach();
+
+				rootElement.add(serviceBuilderElement);
+			}
+		}
+
+		return document;
 	}
 
 	private Map<String, Object> _getContext() throws TemplateModelException {
