@@ -10,8 +10,9 @@ update ExpandoTable set name = 'CUSTOM_FIELDS' where name = 'DEFAULT_TABLE';
 
 alter table LayoutSet add settings_ TEXT null;
 
-update MBThread set categoryId = -1 where groupId = 0;
 update MBMessage set categoryId = -1 where groupId = 0;
+
+update MBThread set categoryId = -1 where groupId = 0;
 
 alter table PasswordPolicy add minAlphanumeric INTEGER;
 alter table PasswordPolicy add minLowerCase INTEGER;
