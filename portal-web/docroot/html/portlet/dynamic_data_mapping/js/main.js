@@ -147,13 +147,13 @@ AUI().add(
 											value: optionValue
 										}
 									);
-									
+
 									var metadata = instance._createDynamicNode('meta-data');
-									
+
 									var label = instance._createDynamicNode('entry', MAP_ATTR_LABEL);
-									
+
 									buffer.push(typeElementOption.openTag);
-									
+
 									buffer.push(metadata.openTag);
 
 									buffer.push(
