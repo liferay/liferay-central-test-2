@@ -333,8 +333,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			try {
 				template = JournalTemplateLocalServiceUtil.getTemplate(
-					portletDataContext.getScopeGroupId(),
-					article.getTemplateId());
+					article.getGroupId(), article.getTemplateId());
 			}
 			catch (NoSuchTemplateException nste) {
 				template = JournalTemplateLocalServiceUtil.getTemplate(
