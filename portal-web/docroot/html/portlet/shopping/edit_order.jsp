@@ -434,7 +434,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		if (fieldsArray.length > 0) {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append(orderItem.getName());
+			sb.append(HtmlUtil.escape(orderItem.getName()));
 			sb.append(" (");
 			sb.append(StringUtil.replace(StringUtil.merge(fieldsArray, ", "), "=", ": "));
 			sb.append(")");
@@ -442,7 +442,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 			row.addText(sb.toString(), rowURL);
 		}
 		else {
-			row.addText(orderItem.getName(), rowURL);
+			row.addText(HtmlUtil.escape(orderItem.getName()), rowURL);
 		}
 
 		// Quantity

@@ -380,7 +380,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 		if (item.isFields()) {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append(item.getName());
+			sb.append(HtmlUtil.escape(item.getName()));
 			sb.append(" (");
 			sb.append(StringUtil.replace(StringUtil.merge(cartItem.getFieldsArray(), ", "), "=", ": "));
 			sb.append(")");
@@ -388,7 +388,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 			row.addText(sb.toString(), rowURL);
 		}
 		else {
-			row.addText(item.getName(), rowURL);
+			row.addText(HtmlUtil.escape(item.getName()), rowURL);
 		}
 
 		// Availability
