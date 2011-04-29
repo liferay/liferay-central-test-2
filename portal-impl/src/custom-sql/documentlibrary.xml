@@ -76,7 +76,7 @@
 				))
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.findGU_ByC">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.findByStaleRanks">
 		<![CDATA[
 			SELECT
 				groupId, userId

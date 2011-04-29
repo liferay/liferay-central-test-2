@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class DLFileRankFinderUtil {
-	public static java.util.List<java.lang.Object[]> findGU_ByC(int count)
+	public static java.util.List<java.lang.Object[]> findByStaleRanks(int count)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findGU_ByC(count);
+		return getFinder().findByStaleRanks(count);
 	}
 
 	public static DLFileRankFinder getFinder() {

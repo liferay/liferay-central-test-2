@@ -31,16 +31,16 @@ import java.util.List;
 public class DLFileRankFinderImpl
 	extends BasePersistenceImpl<DLFileRank> implements DLFileRankFinder {
 
-	public static String FIND_GU_BY_C =
-		DLFileRankFinder.class.getName() + ".findGU_ByC";
+	public static String FIND_BY_STALE_RANKS =
+		DLFileRankFinder.class.getName() + ".findByStaleRanks";
 
-	public List<Object[]> findGU_ByC(int count) throws SystemException {
+	public List<Object[]> findByStaleRanks(int count) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_GU_BY_C);
+			String sql = CustomSQLUtil.get(FIND_BY_STALE_RANKS);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -51,7 +51,7 @@ public class DLFileRankFinderImpl
 
 			qPos.add(count);
 
-			return (List<Object[]>)q.list();
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

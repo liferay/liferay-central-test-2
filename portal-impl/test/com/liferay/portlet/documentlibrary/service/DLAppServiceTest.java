@@ -88,32 +88,32 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 	public void testAddFileEntriesConcurrently() throws Exception {
 		int threadCount = 25;
 
-		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
+		DoAsUserThread[] doAsUserThreads = new DoAsUserThread[threadCount];
 
 		_fileEntryIds = new long[threadCount];
 
 		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < threads.length; j++) {
+			for (int j = 0; j < doAsUserThreads.length; j++) {
 				if (i == 0) {
-					threads[j] = new AddFileEntryThread(_userId, j);
+					doAsUserThreads[j] = new AddFileEntryThread(_userId, j);
 				}
 				else {
-					threads[j] = new RetrieveFileEntryThread(_userId, j);
+					doAsUserThreads[j] = new GetFileEntryThread(_userId, j);
 				}
 			}
 
-			for (DoAsUserThread thread : threads) {
-				thread.start();
+			for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+				doAsUserThread.start();
 			}
 
-			for (DoAsUserThread thread : threads) {
-				thread.join();
+			for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+				doAsUserThread.join();
 			}
 
 			int successCount = 0;
 
-			for (DoAsUserThread thread : threads) {
-				if (thread.isSuccess()) {
+			for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+				if (doAsUserThread.isSuccess()) {
 					successCount++;
 				}
 			}
@@ -314,18 +314,6 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		search(rootFolder, "content");
 	}
 
-	private FileEntry _fileEntry;
-	private long[] _fileEntryIds;
-	private Folder _folder;
-	private long _groupId = PortalUtil.getScopeGroupId(
-		TestPropsValues.LAYOUT_PLID);
-	private long _userId = TestPropsValues.USER_ID;
-
-	private static final String _CONTENT =
-		"Content: Enterprise. Open Source. For Life.";
-
-	private static Log _log = LogFactoryUtil.getLog(DLAppServiceTest.class);
-
 	private class AddFileEntryThread extends DoAsUserThread {
 
 		public AddFileEntryThread(long userId, int index) {
@@ -350,19 +338,18 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 				_success = true;
 			}
 			catch (Exception e) {
-				_log.error(
-					"Unable to add file " + _index + " " +
-						StackTraceUtil.getStackTrace(e));
+				_log.error("Unable to add file " + _index, e);
 			}
 		}
 
 		private int _index;
 		private boolean _success;
+
 	}
 
-	private class RetrieveFileEntryThread extends DoAsUserThread {
+	private class GetFileEntryThread extends DoAsUserThread {
 
-		public RetrieveFileEntryThread(long userId, int index) {
+		public GetFileEntryThread(long userId, int index) {
 			super(userId);
 
 			_index = index;
@@ -388,14 +375,25 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 				}
 			}
 			catch (Exception e) {
-				_log.error(
-					"Unable to add file " + _index + " " +
-						StackTraceUtil.getStackTrace(e));
+				_log.error("Unable to add file " + _index, e);
 			}
 		}
 
 		private int _index;
 		private boolean _success;
+
 	}
+
+	private static final String _CONTENT =
+		"Content: Enterprise. Open Source. For Life.";
+
+	private static Log _log = LogFactoryUtil.getLog(DLAppServiceTest.class);
+
+	private FileEntry _fileEntry;
+	private long[] _fileEntryIds;
+	private Folder _folder;
+	private long _groupId = PortalUtil.getScopeGroupId(
+		TestPropsValues.LAYOUT_PLID);
+	private long _userId = TestPropsValues.USER_ID;
 
 }

@@ -69,28 +69,28 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	}
 
 	public void checkFileRanks() throws SystemException {
-		List<Object[]> list = dlFileRankFinder.findGU_ByC(
+		List<Object[]> staleFileRanks = dlFileRankFinder.findByStaleRanks(
 			PropsValues.DL_FILE_RANK_MAX_SIZE);
 
-		for (Object[] pair : list) {
-			long groupId = (Long)pair[0];
-			long userId = (Long)pair[1];
+		for (Object[] staleFileRank : staleFileRanks) {
+			long groupId = (Long)staleFileRank[0];
+			long userId = (Long)staleFileRank[1];
 
-			List<DLFileRank> fileRanks = getFileRanks(
+			List<DLFileRank> fileRanks = dlFileRankPersistence.findByG_U(
 				groupId, userId, PropsValues.DL_FILE_RANK_MAX_SIZE,
-				QueryUtil.ALL_POS);
+				QueryUtil.ALL_POS, new FileRankCreateDateComparator());
 
-			for (int i = 0; i < fileRanks.size(); i++) {
-				DLFileRank lastFileRank = fileRanks.get(i);
-
-				long lastFileRankId = lastFileRank.getFileRankId();
+			for (DLFileRank fileRank : fileRanks) {
+				long fileRankId = fileRank.getFileRankId();
 
 				try {
-					dlFileRankPersistence.remove(lastFileRank);
+					dlFileRankPersistence.remove(fileRank);
 				}
 				catch (Exception e) {
-					_log.warn(
-						"Failed to remove file rank " + lastFileRankId);
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to remove file rank " + fileRankId);
+					}
 				}
 			}
 		}
@@ -132,8 +132,9 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public List<DLFileRank> getFileRanks(long groupId, long userId)
 		throws SystemException {
 
-		return getFileRanks(
-			groupId, userId, 0, PropsValues.DL_FILE_RANK_MAX_SIZE);
+		return dlFileRankPersistence.findByG_U(
+			groupId, userId, 0, PropsValues.DL_FILE_RANK_MAX_SIZE,
+			new FileRankCreateDateComparator());
 	}
 
 	public DLFileRank updateFileRank(
@@ -159,14 +160,6 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 
 		return fileRank;
-	}
-
-	protected List<DLFileRank> getFileRanks(
-			long groupId, long userId, int start, int end)
-		throws SystemException {
-
-		return dlFileRankPersistence.findByG_U(
-			groupId, userId, start, end, new FileRankCreateDateComparator());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
