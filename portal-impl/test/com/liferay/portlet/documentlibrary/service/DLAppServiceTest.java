@@ -314,6 +314,18 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		search(rootFolder, "content");
 	}
 
+	private static final String _CONTENT =
+		"Content: Enterprise. Open Source. For Life.";
+
+	private static Log _log = LogFactoryUtil.getLog(DLAppServiceTest.class);
+
+	private FileEntry _fileEntry;
+	private long[] _fileEntryIds;
+	private Folder _folder;
+	private long _groupId = PortalUtil.getScopeGroupId(
+		TestPropsValues.LAYOUT_PLID);
+	private long _userId = TestPropsValues.USER_ID;
+
 	private class AddFileEntryThread extends DoAsUserThread {
 
 		public AddFileEntryThread(long userId, int index) {
@@ -383,17 +395,5 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		private boolean _success;
 
 	}
-
-	private static final String _CONTENT =
-		"Content: Enterprise. Open Source. For Life.";
-
-	private static Log _log = LogFactoryUtil.getLog(DLAppServiceTest.class);
-
-	private FileEntry _fileEntry;
-	private long[] _fileEntryIds;
-	private Folder _folder;
-	private long _groupId = PortalUtil.getScopeGroupId(
-		TestPropsValues.LAYOUT_PLID);
-	private long _userId = TestPropsValues.USER_ID;
 
 }
