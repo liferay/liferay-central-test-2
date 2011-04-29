@@ -136,19 +136,33 @@ AUI().add(
 							A.each(
 								options,
 								function(item, index, collection) {
-									var optionKey = instance._formatOptionsKey(item.name);
+									var optionLabel = item.label;
 									var optionValue = item.value;
 
 									var typeElementOption = instance._createDynamicNode(
 										'dynamic-element',
 										{
-											name: optionKey,
+											name: instance._formatOptionsKey(optionLabel),
 											type: 'option',
 											value: optionValue
 										}
 									);
+									
+									var metadata = instance._createDynamicNode('meta-data');
+									
+									var label = instance._createDynamicNode('entry', MAP_ATTR_LABEL);
+									
+									buffer.push(typeElementOption.openTag);
+									
+									buffer.push(metadata.openTag);
 
-									buffer.push(typeElementOption.openTag + typeElementOption.closeTag);
+									buffer.push(
+										label.openTag,
+										STR_CDATA_OPEN + optionLabel + STR_CDATA_CLOSE,
+										label.closeTag,
+										metadata.closeTag,
+										typeElementOption.closeTag
+									);
 								}
 							);
 						}
@@ -268,6 +282,8 @@ AUI().add(
 					},
 
 					_formatOptionsKey: function(s) {
+						s = A.Text.AccentFold.fold(s);
+
 						return s.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
 					}
 				}
@@ -404,6 +420,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-form-builder']
+		requires: ['aui-form-builder', 'text']
 	}
 );
