@@ -478,10 +478,10 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		searchQuery.addTerms(Field.KEYWORDS, keywords, false, true);
+		searchQuery.addTerms(Field.KEYWORDS, keywords, true, true);
 
-		searchQuery.addExactTerm(Field.ASSET_CATEGORY_NAMES, keywords);
-		searchQuery.addExactTerm(Field.ASSET_TAG_NAMES, keywords);
+		searchQuery.addTerm(Field.ASSET_CATEGORY_NAMES, keywords, false, true);
+		searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, false, true);
 
 		addSearchExpando(searchQuery, searchContext, keywords);
 	}
