@@ -43,7 +43,13 @@ public class UpgradeExpando extends UpgradeProcess {
 
 			while (rs.next()) {
 				long columnId = rs.getLong("columnId");
+
 				String typeSettings = rs.getString("typeSettings");
+
+				typeSettings = typeSettings.replace(
+					"selection=1", "display-type=selection-list");
+				typeSettings = typeSettings.replace(
+					"selection=0", "display-type=text-box");
 
 				updateColumn(columnId, typeSettings);
 			}
@@ -64,11 +70,6 @@ public class UpgradeExpando extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"update ExpandoColumn set typeSettings = ? where columnId = ?");
-
-			typeSettings = typeSettings.replace(
-				"selection=1", "display-type=selection-list");
-			typeSettings = typeSettings.replace(
-				"selection=0", "display-type=text-box");
 
 			ps.setString(1, typeSettings);
 			ps.setLong(2, columnId);
