@@ -1460,6 +1460,18 @@
 
 		<action path="/layouts_admin/update_page" type="com.liferay.portlet.layoutsadmin.action.UpdateLayoutAction" />
 
+		<!-- Library Admin -->
+
+		<action path="/library_admin/view" type="com.liferay.portlet.libraryadmin.action.ViewAction">
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+			<forward name="portlet.library_admin.view" path="portlet.library_admin.view" />
+		</action>
+
+		<action path="/library_admin/view_file_entry" type="com.liferay.portlet.libraryadmin.action.EditFileEntryAction">
+			<forward name="portlet.library_admin.edit_file_entry" path="portlet.library_admin.view_file_entry" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<!-- Login -->
 
 		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
