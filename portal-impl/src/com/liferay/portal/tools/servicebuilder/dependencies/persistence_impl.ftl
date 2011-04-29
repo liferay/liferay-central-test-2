@@ -3848,12 +3848,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		private static final String _FILTER_COLUMN_PK = "${entity.alias}.${entity.filterPKColumn.name}";
 
-		<#if entity.hasColumn("userId")>
-			private static final String _FILTER_COLUMN_USERID = "${entity.alias}.userId";
-		<#else>
-			private static final String _FILTER_COLUMN_USERID = null;
-		</#if>
-
 		private static final String _FILTER_ENTITY_ALIAS = "${entity.alias}";
 
 		private static final String _FILTER_ENTITY_TABLE = "${entity.table}";
