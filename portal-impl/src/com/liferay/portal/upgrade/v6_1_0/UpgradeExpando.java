@@ -23,14 +23,11 @@ import java.sql.ResultSet;
 
 /**
  * @author Terry Jia
+ * @author Brian Wing Shun Chan
  */
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		updateExpandColumn();
-	}
-
-	protected void updateExpandColumn() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -39,26 +36,42 @@ public class UpgradeExpando extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select typeSettings, columnId from ExpandoColumn where " +
+				"select columnId typeSettings, from ExpandoColumn where " +
 					"typeSettings like '%selection%'");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long columnId = rs.getLong("columnId");
 				String typeSettings = rs.getString("typeSettings");
 
-				typeSettings = typeSettings.replace(
-					"selection=1", "display-type=selection-list");
-				typeSettings = typeSettings.replace(
-					"selection=0", "display-type=text-box");
-
-				runSQL(
-					"update ExpandoColumn set typeSettings = '" + typeSettings +
-						"' where columnId = " + rs.getLong("columnId"));
+				updateColumn(columnId, typeSettings);
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateColumn(long columnId, String typeSettings)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update ExpandoColumn set typeSettings = ? where columnId =");
+
+			ps.setString(1, typeSettings);
+			ps.setLong(2, columnId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
