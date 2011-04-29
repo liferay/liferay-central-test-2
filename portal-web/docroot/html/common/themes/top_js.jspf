@@ -152,6 +152,9 @@
 				getLanguageId: function() {
 					return "<%= LanguageUtil.getLanguageId(request) %>";
 				},
+				isAddSessionIdToURL: function() {
+					return <%= themeDisplay.isAddSessionIdToURL() %>;
+				},
 				isFreeformLayout: function() {
 					return <%= themeDisplay.isFreeformLayout() %>;
 				},

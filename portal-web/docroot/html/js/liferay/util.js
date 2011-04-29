@@ -353,7 +353,7 @@
 		},
 
 		getURLWithSessionId: function(url) {
-			if (document.cookie && (document.cookie.length > 0)) {
+			if (!themeDisplay.isAddSessionIdToURL()) {
 				return url;
 			}
 
