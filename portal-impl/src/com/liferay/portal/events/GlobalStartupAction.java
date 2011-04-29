@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.pop.POPServerUtil;
+import com.liferay.portal.struts.AuthPublicPathRegistry;
 import com.liferay.portal.util.BrowserLauncher;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -229,6 +230,10 @@ public class GlobalStartupAction extends SimpleAction {
 		catch (Exception e) {
 			_log.error(e);
 		}
+
+		// Authentication
+
+		AuthPublicPathRegistry.register(PropsValues.AUTH_PUBLIC_PATHS);
 
 		// JAMWiki
 

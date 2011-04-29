@@ -100,6 +100,8 @@ public class PropsValues {
 
 	public static final String[] AUTH_PIPELINE_PRE = PropsUtil.getArray(PropsKeys.AUTH_PIPELINE_PRE);
 
+	public static final String[] AUTH_PUBLIC_PATHS = PropsUtil.getArray(PropsKeys.AUTH_PUBLIC_PATHS);
+
 	public static final boolean AUTH_SIMULTANEOUS_LOGINS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_SIMULTANEOUS_LOGINS));
 
 	public static final boolean AUTH_TOKEN_CHECK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_TOKEN_CHECK_ENABLED));
