@@ -71,36 +71,6 @@ import java.sql.ResultSet;
 public class VerifyResourcePermissions extends VerifyProcess {
 
 	public static void verifyModel(
-			String name, String modelName, String pkColumnName)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select " + pkColumnName + ", companyId, userId AS ownerId " +
-					"from " + modelName);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-				long ownerId = rs.getLong("ownerId");
-				long primKey = rs.getLong(pkColumnName);
-
-				verifyModel(companyId, name, primKey, ownerId);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	public static void verifyModel(
 			long companyId, String name, long primKey, long ownerId)
 		throws Exception {
 
@@ -148,14 +118,41 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		}
 	}
 
+	public static void verifyModel(
+			String name, String modelName, String pkColumnName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select " + pkColumnName + ", companyId, userId AS ownerId " +
+					"from " + modelName);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
+				long primKey = rs.getLong(pkColumnName);
+				long ownerId = rs.getLong("ownerId");
+
+				verifyModel(companyId, name, primKey, ownerId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected void doVerify() throws Exception {
 		for (String[] model : _MODELS) {
 			verifyModel(model[0], model[1], model[2]);
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		VerifyResourcePermissions.class);
 
 	private static final String[][] _MODELS = new String[][] {
 		new String[] {
@@ -324,5 +321,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			"resourcePrimKey"
 		}
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(
+		VerifyResourcePermissions.class);
 
 }
