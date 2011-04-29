@@ -31,6 +31,8 @@ import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetTag;
@@ -71,17 +73,76 @@ import java.sql.ResultSet;
 public class VerifyResourcePermissions extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-		for (String[] model : _MODELS) {
-			verifyModel(model[0], model[1], model[2]);
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			return;
+		}
+
+		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
+
+		for (long companyId : companyIds) {
+			for (String[] model : _MODELS) {
+				verifyModel(companyId, model[0], model[1], model[2]);
+			}
+		}
+	}
+
+	protected long getHasOwnerIdCount(String name, Role role) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from ResourcePermission where name = ? and " +
+					"scope = ? and roleId = ? and ownerId != 0");
+
+			ps.setString(1, name);
+			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
+			ps.setLong(3, role.getRoleId());
+
+			rs = ps.executeQuery();
+
+			rs.next();
+
+			return rs.getLong(1);
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected long getNoOwnerIdCount(String name, Role role) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from ResourcePermission where name = ? and " +
+					"scope = ? and roleId = ? and ownerId = 0");
+
+			ps.setString(1, name);
+			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
+			ps.setLong(3, role.getRoleId());
+
+			rs = ps.executeQuery();
+
+			rs.next();
+
+			return rs.getLong(1);
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
 	protected void verifyModel(
-			long companyId, String name, long primKey, long ownerId)
+			long companyId, String name, long primKey, Role role, long ownerId)
 		throws Exception {
-
-		Role role = RoleLocalServiceUtil.getRole(
-			companyId, RoleConstants.OWNER);
 
 		ResourcePermission resourcePermission = null;
 
@@ -92,12 +153,11 @@ public class VerifyResourcePermissions extends VerifyProcess {
 					String.valueOf(primKey), role.getRoleId());
 		}
 		catch (NoSuchResourcePermissionException nsrpe) {
-			if (_log.isDebugEnabled()) {
+			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No resource found for {" + companyId + ", " + name + ", " +
-						ResourceConstants.SCOPE_INDIVIDUAL + ", " +
-							String.valueOf(primKey) + ", " + role.getRoleId() +
-								"}");
+						ResourceConstants.SCOPE_INDIVIDUAL + ", " + primKey +
+							", " + role.getRoleId() + "}");
 			}
 
 			return;
@@ -115,18 +175,39 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		resourcePermission.setOwnerId(ownerId);
 
 		ResourcePermissionLocalServiceUtil.updateResourcePermission(
-			resourcePermission, false);
+			resourcePermission);
 
-		if (_log.isDebugEnabled() &&
-			(resourcePermission.getResourcePermissionId() % 10 == 0)) {
+		if (_log.isInfoEnabled() &&
+			(resourcePermission.getResourcePermissionId() % 100 == 0)) {
 
-			_log.debug(resourcePermission);
+			_log.info("Processed 100 resource permissions for " + name);
 		}
 	}
 
 	protected void verifyModel(
-			String name, String modelName, String pkColumnName)
+			long companyId, String name, String modelName, String pkColumnName)
 		throws Exception {
+
+		Role role = RoleLocalServiceUtil.getRole(
+			companyId, RoleConstants.OWNER);
+
+		long hasOwnerIdCount = getHasOwnerIdCount(name, role);
+
+		if (hasOwnerIdCount > 0) {
+			return;
+		}
+
+		long noOwnerIdCount = getNoOwnerIdCount(name, role);
+
+		if (noOwnerIdCount == 0) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Processing " + noOwnerIdCount + " resource permissions for " +
+					name);
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -136,17 +217,16 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select " + pkColumnName + ", companyId, userId AS ownerId " +
-					"from " + modelName);
+				"select " + pkColumnName + ", userId AS ownerId " +
+					"from " + modelName + " where companyId = " + companyId);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
 				long primKey = rs.getLong(pkColumnName);
 				long ownerId = rs.getLong("ownerId");
 
-				verifyModel(companyId, name, primKey, ownerId);
+				verifyModel(companyId, name, primKey, role, ownerId);
 			}
 		}
 		finally {
@@ -198,7 +278,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		new String[] {
 			DDMContent.class.getName(),
 			"DDMContent",
-			"entryId"
+			"contentId"
 		},
 		new String[] {
 			DDMStructure.class.getName(),
