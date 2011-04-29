@@ -39,16 +39,16 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 		long fileRankId = counterLocalService.increment();
 
-		DLFileRank fileRank = dlFileRankPersistence.create(fileRankId);
+		DLFileRank dlFileRank = dlFileRankPersistence.create(fileRankId);
 
-		fileRank.setGroupId(groupId);
-		fileRank.setCompanyId(companyId);
-		fileRank.setUserId(userId);
-		fileRank.setCreateDate(serviceContext.getCreateDate(null));
-		fileRank.setFileEntryId(fileEntryId);
+		dlFileRank.setGroupId(groupId);
+		dlFileRank.setCompanyId(companyId);
+		dlFileRank.setUserId(userId);
+		dlFileRank.setCreateDate(serviceContext.getCreateDate(null));
+		dlFileRank.setFileEntryId(fileEntryId);
 
 		try {
-			dlFileRankPersistence.update(fileRank, false);
+			dlFileRankPersistence.update(dlFileRank, false);
 		}
 		catch (SystemException se) {
 			if (_log.isWarnEnabled()) {
@@ -57,15 +57,15 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 						userId + ", fileEntryId=" + fileEntryId + "}");
 			}
 
-			fileRank = dlFileRankPersistence.fetchByC_U_F(
+			dlFileRank = dlFileRankPersistence.fetchByC_U_F(
 				companyId, userId, fileEntryId, false);
 
-			if (fileRank == null) {
+			if (dlFileRank == null) {
 				throw se;
 			}
 		}
 
-		return fileRank;
+		return dlFileRank;
 	}
 
 	public void checkFileRanks() throws SystemException {
@@ -76,15 +76,15 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			long groupId = (Long)staleFileRank[0];
 			long userId = (Long)staleFileRank[1];
 
-			List<DLFileRank> fileRanks = dlFileRankPersistence.findByG_U(
+			List<DLFileRank> dlFileRanks = dlFileRankPersistence.findByG_U(
 				groupId, userId, PropsValues.DL_FILE_RANK_MAX_SIZE,
 				QueryUtil.ALL_POS, new FileRankCreateDateComparator());
 
-			for (DLFileRank fileRank : fileRanks) {
-				long fileRankId = fileRank.getFileRankId();
+			for (DLFileRank dlFileRank : dlFileRanks) {
+				long fileRankId = dlFileRank.getFileRankId();
 
 				try {
-					dlFileRankPersistence.remove(fileRank);
+					dlFileRankPersistence.remove(dlFileRank);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
@@ -146,20 +146,20 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			return null;
 		}
 
-		DLFileRank fileRank = dlFileRankPersistence.fetchByC_U_F(
+		DLFileRank dlFileRank = dlFileRankPersistence.fetchByC_U_F(
 			companyId, userId, fileEntryId);
 
-		if (fileRank != null) {
-			fileRank.setCreateDate(serviceContext.getCreateDate(null));
+		if (dlFileRank != null) {
+			dlFileRank.setCreateDate(serviceContext.getCreateDate(null));
 
-			dlFileRankPersistence.update(fileRank, false);
+			dlFileRankPersistence.update(dlFileRank, false);
 		}
 		else {
-			fileRank = addFileRank(
+			dlFileRank = addFileRank(
 				groupId, companyId, userId, fileEntryId, serviceContext);
 		}
 
-		return fileRank;
+		return dlFileRank;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
