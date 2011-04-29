@@ -439,8 +439,8 @@ public class ResourcePermissionLocalServiceImpl
 			resourcePermission.setName(name);
 			resourcePermission.setScope(scope);
 			resourcePermission.setPrimKey(primKey);
-			resourcePermission.setOwnerId(ownerId);
 			resourcePermission.setRoleId(roleId);
+			resourcePermission.setOwnerId(ownerId);
 		}
 		else {
 			oldActionIds = resourcePermission.getActionIds();

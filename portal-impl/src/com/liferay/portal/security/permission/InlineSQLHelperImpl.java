@@ -195,12 +195,12 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				ownerSQL.append("(");
 				ownerSQL.append(userIdField);
 				ownerSQL.append(" = ");
-				ownerSQL.append(String.valueOf(userId));
+				ownerSQL.append(userId);
 				ownerSQL.append(") OR ");
 			}
 			else {
 				ownerSQL.append("(ResourcePermission.ownerId = ");
-				ownerSQL.append(String.valueOf(userId));
+				ownerSQL.append(userId);
 				ownerSQL.append(") OR ");
 			}
 		}

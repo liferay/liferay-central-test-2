@@ -1561,11 +1561,6 @@
 			<finder-column name="primKey" />
 			<finder-column name="roleId" />
 		</finder>
-		<!--
-			This finder exists for the sake of creating a unique index on the
-			table to improve performance of the inline permission checking. Do
-			not remove it!
-		-->
 		<finder name="C_N_S_P_R_O_A" return-type="ResourcePermission" unique="true">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
