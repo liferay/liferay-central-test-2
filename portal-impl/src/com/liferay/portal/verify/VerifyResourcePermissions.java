@@ -70,7 +70,13 @@ import java.sql.ResultSet;
  */
 public class VerifyResourcePermissions extends VerifyProcess {
 
-	public static void verifyModel(
+	protected void doVerify() throws Exception {
+		for (String[] model : _MODELS) {
+			verifyModel(model[0], model[1], model[2]);
+		}
+	}
+
+	protected void verifyModel(
 			long companyId, String name, long primKey, long ownerId)
 		throws Exception {
 
@@ -118,7 +124,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		}
 	}
 
-	public static void verifyModel(
+	protected void verifyModel(
 			String name, String modelName, String pkColumnName)
 		throws Exception {
 
@@ -145,12 +151,6 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void doVerify() throws Exception {
-		for (String[] model : _MODELS) {
-			verifyModel(model[0], model[1], model[2]);
 		}
 	}
 
