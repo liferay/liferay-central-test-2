@@ -143,8 +143,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		content = exportLayoutFriendlyURLs(portletDataContext, content);
 		content = exportLinksToLayout(portletDataContext, content);
 
-		content = StringUtil.replace(
-			content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+		String entityName = entityElement.getName();
+
+		if (!entityName.equals("article")) {
+			content = StringUtil.replace(
+				content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+		}
 
 		return content;
 	}
