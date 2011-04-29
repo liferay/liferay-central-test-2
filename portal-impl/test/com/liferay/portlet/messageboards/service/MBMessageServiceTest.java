@@ -93,26 +93,26 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 	public void testAddMessagesConcurrently() throws Exception {
 		int threadCount = 5;
 
-		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
+		DoAsUserThread[] doAsUserThreads = new DoAsUserThread[threadCount];
 
-		for (int i = 0; i < threads.length; i++) {
+		for (int i = 0; i < doAsUserThreads.length; i++) {
 			String subject = "Test Message " + i;
 
-			threads[i] = new AddMessageThread(_userIds[i], subject);
+			doAsUserThreads[i] = new AddMessageThread(_userIds[i], subject);
 		}
 
-		for (DoAsUserThread thread : threads) {
-			thread.start();
+		for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+			doAsUserThread.start();
 		}
 
-		for (DoAsUserThread thread : threads) {
-			thread.join();
+		for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+			doAsUserThread.join();
 		}
 
 		int successCount = 0;
 
-		for (DoAsUserThread thread : threads) {
-			if (thread.isSuccess()) {
+		for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+			if (doAsUserThread.isSuccess()) {
 				successCount++;
 			}
 		}

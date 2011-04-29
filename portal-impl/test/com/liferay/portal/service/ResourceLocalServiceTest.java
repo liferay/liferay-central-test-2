@@ -45,24 +45,24 @@ public class ResourceLocalServiceTest extends BaseServiceTestCase {
 	public void testAddResourcesConcurrently() throws Exception {
 		int threadCount = 5;
 
-		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
+		DoAsUserThread[] doAsUserThreads = new DoAsUserThread[threadCount];
 
-		for (int i = 0; i < threads.length; i++) {
-			threads[i] = new AddResources(_userIds[i]);
+		for (int i = 0; i < doAsUserThreads.length; i++) {
+			doAsUserThreads[i] = new AddResources(_userIds[i]);
 		}
 
-		for (DoAsUserThread thread : threads) {
-			thread.start();
+		for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+			doAsUserThread.start();
 		}
 
-		for (DoAsUserThread thread : threads) {
-			thread.join();
+		for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+			doAsUserThread.join();
 		}
 
 		int successCount = 0;
 
-		for (DoAsUserThread thread : threads) {
-			if (thread.isSuccess()) {
+		for (DoAsUserThread doAsUserThread : doAsUserThreads) {
+			if (doAsUserThread.isSuccess()) {
 				successCount++;
 			}
 		}
