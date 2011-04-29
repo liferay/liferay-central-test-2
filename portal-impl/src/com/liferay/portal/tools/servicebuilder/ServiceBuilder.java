@@ -526,7 +526,7 @@ public class ServiceBuilder {
 
 			String content = _getContent(fileName);
 
-			Document document = SAXReaderUtil.read(content, false);
+			Document document = SAXReaderUtil.read(content, true);
 
 			Element rootElement = document.getRootElement();
 
