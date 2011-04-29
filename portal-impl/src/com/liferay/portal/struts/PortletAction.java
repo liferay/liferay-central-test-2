@@ -250,6 +250,8 @@ public class PortletAction extends Action {
 
 		if (Validator.isNull(redirect)) {
 			redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			redirect = PortalUtil.escapeRedirect(redirect);
 		}
 
 		if (Validator.isNotNull(redirect)) {
