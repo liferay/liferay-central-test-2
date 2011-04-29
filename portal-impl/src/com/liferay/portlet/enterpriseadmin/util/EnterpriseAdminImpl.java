@@ -329,24 +329,6 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		return filteredRoles;
 	}
 
-	public List<Group> filterSites(List<Group> sites) {
-		List<Group> filteredSites = ListUtil.copy(sites);
-
-		Iterator<Group> itr = filteredSites.iterator();
-
-		while (itr.hasNext()) {
-			Group group = itr.next();
-
-			if ((group.isOrganization()) && (!group.hasPrivateLayouts()) &&
-				(!group.hasPublicLayouts())) {
-
-				itr.remove();
-			}
-		}
-
-		return filteredSites;
-	}
-
 	public List<UserGroupRole> filterUserGroupRoles(
 			PermissionChecker permissionChecker,
 			List<UserGroupRole> userGroupRoles)

@@ -99,15 +99,11 @@ pageContext.setAttribute("portletURL", portletURL);
 		groupParams.put("active", Boolean.TRUE);
 	}
 
-	List sites = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, searchContainer.getOrderByComparator());
-
-	sites = EnterpriseAdminUtil.filterSites(sites);
-
-	int total = sites.size();
+	int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 	searchContainer.setTotal(total);
 
-	List results = ListUtil.subList(sites, searchContainer.getStart(), searchContainer.getEnd());
+	List results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 	searchContainer.setResults(results);
 	%>
