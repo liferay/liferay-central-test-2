@@ -43,7 +43,6 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,15 +51,11 @@ import com.liferay.portal.search.lucene.cluster.LuceneClusterUtil;
 import com.liferay.portal.search.lucene.messaging.CleanUpMessageListener;
 import com.liferay.portal.security.auth.TransientTokenUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.lucene.KeywordsUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import java.lang.reflect.Constructor;
 
 import java.net.InetAddress;
 import java.net.URL;
@@ -75,8 +70,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.WhitespaceAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
@@ -297,20 +290,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public Analyzer getAnalyzer() {
-		try {
-			if (_analyzerClass.equals(StandardAnalyzer.class)) {
-				Constructor<?> constructor = _analyzerClass.getConstructor(
-					Version.class);
-
-				return (Analyzer)constructor.newInstance(Version.LUCENE_30);
-			}
-			else {
-				return (Analyzer)_analyzerClass.newInstance();
-			}
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		return _analyzer;
 	}
 
 	public long getLastGeneration(long companyId) {
@@ -580,6 +560,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	public void setAnalyzer(Analyzer analyzer) {
+		_analyzer = analyzer;
+	}
+
+	public void setVersion(Version version) {
+		_version = version;
+	}
+
 	public void startup(long companyId) {
 		if (PropsValues.INDEX_ON_STARTUP) {
 			if (_log.isInfoEnabled()) {
@@ -626,17 +614,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	private LuceneHelperImpl() {
-		String analyzerName = PropsUtil.get(PropsKeys.LUCENE_ANALYZER);
-
-		if (Validator.isNotNull(analyzerName)) {
-			try {
-				_analyzerClass = Class.forName(analyzerName);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
-
 		if (PropsValues.INDEX_ON_STARTUP && PropsValues.INDEX_WITH_THREAD) {
 			_luceneIndexThreadPoolExecutor =
 				PortalExecutorManagerUtil.getPortalExecutor(
@@ -812,11 +789,11 @@ public class LuceneHelperImpl implements LuceneHelper {
 		new MethodKey(LuceneHelperUtil.class.getName(), "getLastGeneration",
 		long.class);
 
-	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
+	private Analyzer _analyzer;
 	private Map<Long, IndexAccessor> _indexAccessors =
 		new ConcurrentHashMap<Long, IndexAccessor>();
 	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
 	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
-	private Version _version = Version.LUCENE_30;
+	private Version _version;
 
 }
