@@ -334,7 +334,7 @@ public class PermissionImporter {
 				String description = roleElement.attributeValue("description");
 				int type = Integer.valueOf(roleElement.attributeValue("type"));
 
-				if ((type == RoleConstants.TYPE_COMMUNITY) &&
+				if ((type == RoleConstants.TYPE_SITE) &&
 					group.isOrganization()) {
 
 					type = RoleConstants.TYPE_ORGANIZATION;
@@ -342,7 +342,7 @@ public class PermissionImporter {
 				else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
 						 group.isCommunity()) {
 
-					type = RoleConstants.TYPE_COMMUNITY;
+					type = RoleConstants.TYPE_SITE;
 				}
 
 				role = RoleLocalServiceUtil.addRole(
@@ -397,7 +397,7 @@ public class PermissionImporter {
 				role = layoutCache.getRole(companyId, name);
 			}
 
-			if ((type == RoleConstants.TYPE_COMMUNITY) &&
+			if ((type == RoleConstants.TYPE_SITE) &&
 				group.isOrganization()) {
 
 				type = RoleConstants.TYPE_ORGANIZATION;
@@ -407,13 +407,13 @@ public class PermissionImporter {
 
 					role = null;
 
-					if (name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR)) {
+					if (name.equals(RoleConstants.SITE_ADMINISTRATOR)) {
 						name = RoleConstants.ORGANIZATION_ADMINISTRATOR;
 					}
-					else if (name.equals(RoleConstants.COMMUNITY_MEMBER)) {
+					else if (name.equals(RoleConstants.SITE_MEMBER)) {
 						name = RoleConstants.ORGANIZATION_MEMBER;
 					}
-					else if (name.equals(RoleConstants.COMMUNITY_OWNER)) {
+					else if (name.equals(RoleConstants.SITE_OWNER)) {
 						name = RoleConstants.ORGANIZATION_OWNER;
 					}
 					else {
@@ -436,21 +436,21 @@ public class PermissionImporter {
 			else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
 					 group.isCommunity()) {
 
-				type = RoleConstants.TYPE_COMMUNITY;
+				type = RoleConstants.TYPE_SITE;
 
 				if ((role != null) &&
-					(role.getType() != RoleConstants.TYPE_COMMUNITY)) {
+					(role.getType() != RoleConstants.TYPE_SITE)) {
 
 					role = null;
 
 					if (name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
-						name = RoleConstants.COMMUNITY_ADMINISTRATOR;
+						name = RoleConstants.SITE_ADMINISTRATOR;
 					}
 					else if (name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-						name = RoleConstants.COMMUNITY_MEMBER;
+						name = RoleConstants.SITE_MEMBER;
 					}
 					else if (name.equals(RoleConstants.ORGANIZATION_OWNER)) {
-						name = RoleConstants.COMMUNITY_OWNER;
+						name = RoleConstants.SITE_OWNER;
 					}
 					else {
 						if (name.contains("Organization")) {

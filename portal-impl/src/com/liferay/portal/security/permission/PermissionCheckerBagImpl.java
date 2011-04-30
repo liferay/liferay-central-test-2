@@ -136,10 +136,10 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
+					RoleConstants.SITE_ADMINISTRATOR, true) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleConstants.COMMUNITY_OWNER, true)) {
+					RoleConstants.SITE_OWNER, true)) {
 
 				return true;
 			}
@@ -210,7 +210,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		if (group.isCommunity()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
-					RoleConstants.COMMUNITY_OWNER, true)) {
+					RoleConstants.SITE_OWNER, true)) {
 
 				return true;
 			}

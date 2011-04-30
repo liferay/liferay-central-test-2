@@ -147,7 +147,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 
 		if (group.isCommunity()) {
 			Role communityMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+				group.getCompanyId(), RoleConstants.SITE_MEMBER);
 
 			permissionQuery.addTerm(
 				Field.GROUP_ROLE_ID,
@@ -190,7 +190,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			long roleId = role.getRoleId();
 
 			if (hasPermission(roleId, resource.getResourceId())) {
-				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+				if ((role.getType() == RoleConstants.TYPE_SITE) ||
 					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
 					groupRoleIds.add(groupId + StringPool.DASH + roleId);
@@ -232,7 +232,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 					companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
 					classPK, roleId, ActionKeys.VIEW)) {
 
-				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+				if ((role.getType() == RoleConstants.TYPE_SITE) ||
 					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
 					groupRoleIds.add(groupId + StringPool.DASH + roleId);

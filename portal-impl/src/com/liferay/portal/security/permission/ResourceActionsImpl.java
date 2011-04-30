@@ -772,7 +772,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		long companyId, Group group, String modelResource) {
 
 		int[] types = {
-			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_COMMUNITY
+			RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_SITE
 		};
 
 		if (isPortalModelResource(modelResource)) {

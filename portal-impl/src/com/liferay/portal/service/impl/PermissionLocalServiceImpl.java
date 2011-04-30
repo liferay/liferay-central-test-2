@@ -817,7 +817,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		if (communityDefaultActions.contains(actionId)) {
 			addRolePermissions(
-				RoleConstants.COMMUNITY_MEMBER, permission);
+				RoleConstants.SITE_MEMBER, permission);
 		}
 
 		List<String> guestDefaultActions =

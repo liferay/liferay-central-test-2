@@ -164,9 +164,9 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		roles.remove(administrator);
 
-		if (group.isCommunity() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_COMMUNITY)) {
-			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_ADMINISTRATOR);
-			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
+		if (group.isCommunity() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_SITE)) {
+			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
 
 			roles.remove(communityAdministrator);
 			roles.remove(communityOwner);
@@ -221,7 +221,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 				String name = role.getName();
 
-				if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) && !name.equals(RoleConstants.COMMUNITY_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
+				if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.SITE_ADMINISTRATOR) && !name.equals(RoleConstants.SITE_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
 					definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 					definePermissionsHREF = definePermissionsURL.toString();

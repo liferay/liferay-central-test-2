@@ -216,10 +216,10 @@ public class ActionUtil {
 					ActionKeys.ASSIGN_USER_ROLES) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					themeDisplay.getUserId(), group.getGroupId(),
-					RoleConstants.COMMUNITY_ADMINISTRATOR, true) ||
+					RoleConstants.SITE_ADMINISTRATOR, true) ||
 				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					themeDisplay.getUserId(), group.getGroupId(),
-					RoleConstants.COMMUNITY_OWNER, true)) {
+					RoleConstants.SITE_OWNER, true)) {
 
 				if (roleId > 0) {
 					role = RoleLocalServiceUtil.getRole(roleId);

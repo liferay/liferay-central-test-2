@@ -331,7 +331,7 @@ public class MembershipRequestLocalServiceImpl
 
 		Role communityAdminRole = roleLocalService.getRole(
 			membershipRequest.getCompanyId(),
-			RoleConstants.COMMUNITY_ADMINISTRATOR);
+			RoleConstants.SITE_ADMINISTRATOR);
 
 		List<UserGroupRole> communityAdmins =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
@@ -340,7 +340,7 @@ public class MembershipRequestLocalServiceImpl
 		admins.addAll(communityAdmins);
 
 		Role communityOwnerRole = rolePersistence.findByC_N(
-			membershipRequest.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
+			membershipRequest.getCompanyId(), RoleConstants.SITE_OWNER);
 
 		List<UserGroupRole> communityOwners =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(

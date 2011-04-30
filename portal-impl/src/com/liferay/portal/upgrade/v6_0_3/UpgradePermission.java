@@ -82,7 +82,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		addRole(
 			roleId, companyId, classNameId, roleId,
-			_ROLE_COMMUNITY_CONTENT_REVIEWER, RoleConstants.TYPE_COMMUNITY);
+			_ROLE_COMMUNITY_CONTENT_REVIEWER, RoleConstants.TYPE_SITE);
 
 		classNameId = PortalUtil.getClassNameId(Organization.class.getName());
 		roleId = increment();

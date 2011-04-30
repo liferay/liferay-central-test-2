@@ -342,7 +342,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			int type = role.getType();
 
 			if ((type == RoleConstants.TYPE_REGULAR) ||
-				((type == RoleConstants.TYPE_COMMUNITY) &&
+				((type == RoleConstants.TYPE_SITE) &&
 				 (group.isCommunity())) ||
 				((type == RoleConstants.TYPE_ORGANIZATION) &&
 				 (group.isOrganization()))) {

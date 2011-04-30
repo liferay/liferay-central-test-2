@@ -73,7 +73,7 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 			<c:when test="<%= ((role == null) && (type == 0)) %>">
 				<aui:select name="type">
 					<aui:option label="regular" value="<%= RoleConstants.TYPE_REGULAR %>" />
-					<aui:option label="site" value="<%= RoleConstants.TYPE_COMMUNITY %>" />
+					<aui:option label="site" value="<%= RoleConstants.TYPE_SITE %>" />
 					<aui:option label="organization" value="<%= RoleConstants.TYPE_ORGANIZATION %>" />
 				</aui:select>
 			</c:when>
@@ -96,7 +96,7 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 			<%
 			String[] subtypes = null;
 
-			if (role.getType() == RoleConstants.TYPE_COMMUNITY) {
+			if (role.getType() == RoleConstants.TYPE_SITE) {
 				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
 			}
 			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {

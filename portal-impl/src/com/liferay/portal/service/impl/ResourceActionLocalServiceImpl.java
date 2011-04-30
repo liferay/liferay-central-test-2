@@ -172,7 +172,7 @@ public class ResourceActionLocalServiceImpl
 
 				if (communityDefaultActions.contains(actionId)) {
 					resourcePermissionLocalService.addResourcePermissions(
-						name, RoleConstants.COMMUNITY_MEMBER,
+						name, RoleConstants.SITE_MEMBER,
 						ResourceConstants.SCOPE_INDIVIDUAL,
 						resourceAction.getBitwiseValue());
 				}

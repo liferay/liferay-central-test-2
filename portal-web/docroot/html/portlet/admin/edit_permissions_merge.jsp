@@ -26,7 +26,7 @@ MultiValueMap mvp = new MultiValueMap();
 int roleType = RoleConstants.TYPE_REGULAR;
 
 if (tabs2.equals("sites")) {
-	roleType = RoleConstants.TYPE_COMMUNITY;
+	roleType = RoleConstants.TYPE_SITE;
 }
 else if (tabs2.equals("organizations")) {
 	roleType = RoleConstants.TYPE_ORGANIZATION;

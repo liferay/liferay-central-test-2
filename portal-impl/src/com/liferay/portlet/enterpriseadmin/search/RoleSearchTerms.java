@@ -34,7 +34,7 @@ public class RoleSearchTerms extends RoleDisplayTerms {
 	}
 
 	public Integer[] getTypesObj() {
-		if ((type == RoleConstants.TYPE_COMMUNITY) ||
+		if ((type == RoleConstants.TYPE_SITE) ||
 			(type == RoleConstants.TYPE_ORGANIZATION) ||
 			(type == RoleConstants.TYPE_REGULAR)) {
 

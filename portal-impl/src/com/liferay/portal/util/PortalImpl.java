@@ -398,11 +398,11 @@ public class PortalImpl implements Portal {
 		if ((customSystemCommunityRoles == null) ||
 			(customSystemCommunityRoles.length == 0)) {
 
-			_allSystemCommunityRoles = RoleConstants.SYSTEM_COMMUNITY_ROLES;
+			_allSystemCommunityRoles = RoleConstants.SYSTEM_SITE_ROLES;
 		}
 		else {
 			_allSystemCommunityRoles = ArrayUtil.append(
-				RoleConstants.SYSTEM_COMMUNITY_ROLES,
+				RoleConstants.SYSTEM_SITE_ROLES,
 				customSystemCommunityRoles);
 		}
 

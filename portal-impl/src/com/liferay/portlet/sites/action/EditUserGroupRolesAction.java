@@ -82,7 +82,7 @@ public class EditUserGroupRolesAction extends PortletAction {
 			if (role != null) {
 				String name = role.getName();
 
-				if (name.equals(RoleConstants.COMMUNITY_MEMBER) ||
+				if (name.equals(RoleConstants.SITE_MEMBER) ||
 					name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
 
 					throw new NoSuchRoleException();

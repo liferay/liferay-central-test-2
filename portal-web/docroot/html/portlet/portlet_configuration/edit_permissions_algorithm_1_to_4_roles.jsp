@@ -35,7 +35,7 @@ int roleIdsPos = ParamUtil.getInteger(request, "roleIdsPos");
 int type = RoleConstants.TYPE_REGULAR;
 
 if (tabs2.equals("site-roles")) {
-	type = RoleConstants.TYPE_COMMUNITY;
+	type = RoleConstants.TYPE_SITE;
 }
 else if (tabs2.equals("organization-roles")) {
 	type = RoleConstants.TYPE_ORGANIZATION;

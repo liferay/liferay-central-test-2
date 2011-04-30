@@ -175,8 +175,8 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		if (group.isCommunity()) {
-			roleNames.add(RoleConstants.COMMUNITY_ADMINISTRATOR);
-			roleNames.add(RoleConstants.COMMUNITY_OWNER);
+			roleNames.add(RoleConstants.SITE_ADMINISTRATOR);
+			roleNames.add(RoleConstants.SITE_OWNER);
 		}
 		else if (group.isCompany()) {
 			roleNames.add(RoleConstants.ADMINISTRATOR);

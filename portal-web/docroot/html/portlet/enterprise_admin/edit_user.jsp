@@ -108,7 +108,7 @@ if (userGroupRoles.isEmpty() && (selUser != null)) {
 for (UserGroupRole userGroupRole : userGroupRoles) {
 	int roleType = userGroupRole.getRole().getType();
 
-	if (roleType == RoleConstants.TYPE_COMMUNITY) {
+	if (roleType == RoleConstants.TYPE_SITE) {
 		communityRoles.add(userGroupRole);
 	}
 	else if (roleType == RoleConstants.TYPE_ORGANIZATION) {

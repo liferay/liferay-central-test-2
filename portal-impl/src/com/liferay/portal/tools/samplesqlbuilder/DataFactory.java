@@ -772,8 +772,8 @@ public class DataFactory {
 
 		role = newRole();
 
-		role.setName(RoleConstants.COMMUNITY_ADMINISTRATOR);
-		role.setType(RoleConstants.TYPE_COMMUNITY);
+		role.setName(RoleConstants.SITE_ADMINISTRATOR);
+		role.setType(RoleConstants.TYPE_SITE);
 
 		_roles.add(role);
 
@@ -783,8 +783,8 @@ public class DataFactory {
 
 		role = newRole();
 
-		role.setName(RoleConstants.COMMUNITY_MEMBER);
-		role.setType(RoleConstants.TYPE_COMMUNITY);
+		role.setName(RoleConstants.SITE_MEMBER);
+		role.setType(RoleConstants.TYPE_SITE);
 
 		_roles.add(role);
 
@@ -794,8 +794,8 @@ public class DataFactory {
 
 		role = newRole();
 
-		role.setName(RoleConstants.COMMUNITY_OWNER);
-		role.setType(RoleConstants.TYPE_COMMUNITY);
+		role.setName(RoleConstants.SITE_OWNER);
+		role.setType(RoleConstants.TYPE_SITE);
 
 		_roles.add(role);
 

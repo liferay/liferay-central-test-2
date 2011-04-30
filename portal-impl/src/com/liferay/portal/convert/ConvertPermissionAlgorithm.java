@@ -202,7 +202,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		// Groups_Permissions
 
 		convertPermissions(
-			RoleConstants.TYPE_COMMUNITY, "Groups_Permissions",
+			RoleConstants.TYPE_SITE, "Groups_Permissions",
 			new String[] {"groupId"}, "Groups_Roles",
 			new Object[][] {
 				{"groupId", Types.BIGINT}, {"roleId", Types.BIGINT}
@@ -704,7 +704,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 				companyId,
 				new Role[] {
 						RoleLocalServiceUtil.getRole(
-							companyId, RoleConstants.COMMUNITY_MEMBER),
+							companyId, RoleConstants.SITE_MEMBER),
 						RoleLocalServiceUtil.getRole(
 							companyId, RoleConstants.ORGANIZATION_MEMBER),
 						RoleLocalServiceUtil.getRole(

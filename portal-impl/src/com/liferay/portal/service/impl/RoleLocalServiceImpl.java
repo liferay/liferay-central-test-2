@@ -160,7 +160,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				"system.community.role." +
 				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
 				".description");
-			int type = RoleConstants.TYPE_COMMUNITY;
+			int type = RoleConstants.TYPE_SITE;
 
 			checkSystemRole(companyId, name, description, type);
 		}
@@ -207,7 +207,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				ResourceConstants.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
 
-		if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+		if ((role.getType() == RoleConstants.TYPE_SITE) ||
 			(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
 			userGroupRoleLocalService.deleteUserGroupRolesByRoleId(
@@ -247,7 +247,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			group.isLayoutSetPrototype()) {
 
 			role = getRole(
-				group.getCompanyId(), RoleConstants.COMMUNITY_MEMBER);
+				group.getCompanyId(), RoleConstants.SITE_MEMBER);
 		}
 		else if (group.isCompany()) {
 			role = getRole(group.getCompanyId(), RoleConstants.USER);

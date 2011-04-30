@@ -148,7 +148,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		else if (type == RoleConstants.TYPE_REGULAR) {
 			cssClassName = "lfr-role-regular";
 		}
-		else if (type == RoleConstants.TYPE_COMMUNITY) {
+		else if (type == RoleConstants.TYPE_SITE) {
 			cssClassName = "lfr-role-community";
 		}
 		else if (type == RoleConstants.TYPE_ORGANIZATION) {
@@ -200,7 +200,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 			String name = groupRole.getName();
 
 			if (name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
-				name.equals(RoleConstants.COMMUNITY_MEMBER)) {
+				name.equals(RoleConstants.SITE_MEMBER)) {
 
 				itr.remove();
 			}
@@ -219,8 +219,8 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
 			String groupRoleName = groupRole.getName();
 
-			if (groupRoleName.equals(RoleConstants.COMMUNITY_ADMINISTRATOR) ||
-				groupRoleName.equals(RoleConstants.COMMUNITY_OWNER) ||
+			if (groupRoleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
+				groupRoleName.equals(RoleConstants.SITE_OWNER) ||
 				groupRoleName.equals(
 					RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
 				groupRoleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
@@ -299,7 +299,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
 			String name = role.getName();
 
-			if (name.equals(RoleConstants.COMMUNITY_MEMBER) ||
+			if (name.equals(RoleConstants.SITE_MEMBER) ||
 				name.equals(RoleConstants.GUEST) ||
 				name.equals(RoleConstants.OWNER) ||
 				name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
@@ -347,7 +347,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 			String name = role.getName();
 
 			if (name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
-				name.equals(RoleConstants.COMMUNITY_MEMBER)) {
+				name.equals(RoleConstants.SITE_MEMBER)) {
 
 				itr.remove();
 			}

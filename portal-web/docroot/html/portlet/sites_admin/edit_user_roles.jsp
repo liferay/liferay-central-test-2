@@ -32,7 +32,7 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
-int roleType = RoleConstants.TYPE_COMMUNITY;
+int roleType = RoleConstants.TYPE_SITE;
 
 Organization organization = null;
 

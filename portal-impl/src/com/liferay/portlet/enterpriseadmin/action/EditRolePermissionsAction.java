@@ -132,8 +132,8 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		if (role.getName().equals(RoleConstants.ADMINISTRATOR) ||
 			role.getName().equals(RoleConstants.OWNER) ||
-			role.getName().equals(RoleConstants.COMMUNITY_ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.COMMUNITY_OWNER) ||
+			role.getName().equals(RoleConstants.SITE_ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.SITE_OWNER) ||
 			role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
 			role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
 
@@ -274,8 +274,8 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		if (role.getName().equals(RoleConstants.ADMINISTRATOR) ||
 			role.getName().equals(RoleConstants.OWNER) ||
-			role.getName().equals(RoleConstants.COMMUNITY_ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.COMMUNITY_OWNER) ||
+			role.getName().equals(RoleConstants.SITE_ADMINISTRATOR) ||
+			role.getName().equals(RoleConstants.SITE_OWNER) ||
 			role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
 			role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
 
@@ -330,7 +330,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				int scope = ResourceConstants.SCOPE_COMPANY;
 
-				if ((role.getType() == RoleConstants.TYPE_COMMUNITY) ||
+				if ((role.getType() == RoleConstants.TYPE_SITE) ||
 					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
 
 					scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;

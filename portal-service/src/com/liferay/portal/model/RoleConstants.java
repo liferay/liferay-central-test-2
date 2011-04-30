@@ -33,15 +33,15 @@ public class RoleConstants {
 		ADMINISTRATOR, GUEST, OWNER, POWER_USER, USER
 	};
 
-	public static final String COMMUNITY_ADMINISTRATOR =
+	public static final String SITE_ADMINISTRATOR =
 		"Community Administrator";
 
-	public static final String COMMUNITY_MEMBER = "Community Member";
+	public static final String SITE_MEMBER = "Community Member";
 
-	public static final String COMMUNITY_OWNER = "Community Owner";
+	public static final String SITE_OWNER = "Community Owner";
 
-	public static final String[] SYSTEM_COMMUNITY_ROLES = {
-		COMMUNITY_ADMINISTRATOR, COMMUNITY_MEMBER, COMMUNITY_OWNER
+	public static final String[] SYSTEM_SITE_ROLES = {
+		SITE_ADMINISTRATOR, SITE_MEMBER, SITE_OWNER
 	};
 
 	public static final String ORGANIZATION_ADMINISTRATOR =
@@ -55,9 +55,9 @@ public class RoleConstants {
 		ORGANIZATION_ADMINISTRATOR, ORGANIZATION_MEMBER, ORGANIZATION_OWNER
 	};
 
-	public static final int TYPE_COMMUNITY = 2;
+	public static final int TYPE_SITE = 2;
 
-	public static final String TYPE_COMMUNITY_LABEL = "site";
+	public static final String TYPE_SITE_LABEL = "site";
 
 	public static final int TYPE_ORGANIZATION = 3;
 
@@ -70,8 +70,8 @@ public class RoleConstants {
 	public static final String TYPE_REGULAR_LABEL = "regular";
 
 	public static String getTypeLabel(int type) {
-		if (type == TYPE_COMMUNITY) {
-			return TYPE_COMMUNITY_LABEL;
+		if (type == TYPE_SITE) {
+			return TYPE_SITE_LABEL;
 		}
 		else if (type == TYPE_ORGANIZATION) {
 			return TYPE_ORGANIZATION_LABEL;
