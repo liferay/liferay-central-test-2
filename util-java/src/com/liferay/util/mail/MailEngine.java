@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
@@ -227,9 +226,7 @@ public class MailEngine {
 				message.setRecipients(Message.RecipientType.BCC, bcc);
 			}
 
-			if (Validator.isNull(subject)) {
-				subject = StringPool.BLANK;
-			}
+			subject = GetterUtil.getString(subject);
 
 			message.setSubject(subject);
 
