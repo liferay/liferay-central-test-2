@@ -40,24 +40,12 @@ public abstract class BaseBooleanQueryImpl
 			fields = new String[0];
 		}
 
-		Map<String, List<String>> termFieldsValuesMap = getTermFieldsValuesMap(
-			fields, values);
-
-		List<String> valuesList = termFieldsValuesMap.remove("no_field");
-
-		if (!valuesList.isEmpty()) {
-			String value = valuesList.get(0);
-
-			for (String field : fields) {
-				addTerm(field, value);
-			}
+		for (String field : fields) {
+			addTerm(field, values);
 		}
-
-		addTerms(fields, termFieldsValuesMap);
 	}
 
-	public void addTerms(
-			String[] fields, String value, boolean like, boolean parseKeywords)
+	public void addTerms(String[] fields, String value, boolean like)
 		throws ParseException {
 
 		if (Validator.isNull(value)) {
@@ -65,7 +53,7 @@ public abstract class BaseBooleanQueryImpl
 		}
 
 		for (String field : fields) {
-			addTerm(field, value, like, parseKeywords);
+			addTerm(field, value, like);
 		}
 	}
 

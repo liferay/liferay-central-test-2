@@ -144,8 +144,8 @@ public class SCIndexer extends BaseIndexer {
 		document.addKeyword(Field.USER_ID, userId);
 		document.addKeyword(Field.USER_NAME, userName, true);
 
-		document.addKeyword(Field.TITLE, name, true);
-		document.addKeyword(Field.CONTENT, content, true);
+		document.addText(Field.TITLE, name);
+		document.addText(Field.CONTENT, content);
 
 		document.addKeyword(
 			Field.ENTRY_CLASS_NAME, SCProductEntry.class.getName());

@@ -112,11 +112,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
 
-		//text = KeywordsUtil.escape(value);
-
-		Query query = new TermQuery(new Term(field, value));
-
-		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+		try {
+			addTerm(booleanQuery, field, value, false);
+		}
+		catch (ParseException pe) {
+			_log.error(pe, pe);
+		}
 	}
 
 	public void addNumericRangeTerm(
@@ -185,37 +186,25 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		if (like) {
-			value = value.toLowerCase();
-
-			Term term = new Term(
-				field, StringPool.STAR.concat(value).concat(StringPool.STAR));
-
-			WildcardQuery wildcardQuery = new WildcardQuery(term);
-
-			booleanQuery.add(wildcardQuery, BooleanClause.Occur.SHOULD);
+			value = StringUtil.replace(
+				value, StringPool.PERCENT, StringPool.BLANK);
 		}
-		else {
+
+		value = StringUtil.replace(value, StringPool.STAR, StringPool.BLANK);
+
+		Query query = null;
+
+		try {
 			QueryParser queryParser = new QueryParser(
 				_version, field, getAnalyzer());
 
-			try {
-				Query query = queryParser.parse(value);
+			query = queryParser.parse(value);
 
-				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
-			}
-			catch (ParseException pe) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"ParseException thrown, reverting to literal search",
-						pe);
-				}
-
-				value = KeywordsUtil.escape(value);
-
-				Query query = queryParser.parse(value);
-
-				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
-			}
+			_includeIfUnique(
+				booleanQuery, query, BooleanClause.Occur.SHOULD, like);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -347,6 +336,19 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public String[] getQueryTerms(Query query) {
+		String queryString = StringUtil.replace(
+			query.toString(), StringPool.STAR, StringPool.BLANK);
+
+		try {
+			QueryParser queryParser = new QueryParser(
+				_version, Field.CONTENT, getAnalyzer());
+
+			query = queryParser.parse(queryString);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
 		WeightedTerm[] weightedTerms = null;
 
 		for (String fieldName : Field.KEYWORDS) {
@@ -626,6 +628,65 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 			ClusterExecutorUtil.addClusterEventListener(
 				_loadIndexClusterEventListener);
+		}
+	}
+
+	private void _includeIfUnique(
+		BooleanQuery booleanQuery, Query query, BooleanClause.Occur occur,
+		boolean like) {
+
+		if (query instanceof TermQuery) {
+			Set<Term> terms = new HashSet<Term>();
+
+			query.extractTerms(terms);
+
+			for (Term term : terms) {
+				String termValue = term.text();
+
+				if (like) {
+					term = term.createTerm(
+						StringPool.STAR.concat(termValue).concat(
+							StringPool.STAR));
+
+					query = new WildcardQuery(term);
+				}
+				else {
+					query = new TermQuery(term);
+				}
+
+				boolean included = false;
+
+				for (BooleanClause clause : booleanQuery.getClauses()) {
+					if (clause.getQuery().equals(query)) {
+						included = true;
+					}
+				}
+
+				if (!included) {
+					booleanQuery.add(query, occur);
+				}
+			}
+		}
+		else if (query instanceof BooleanQuery) {
+			BooleanQuery curQuery = (BooleanQuery)query;
+
+			for (BooleanClause clause : curQuery.getClauses()) {
+				_includeIfUnique(
+					booleanQuery, clause.getQuery(), clause.getOccur(), like);
+			}
+		}
+		else {
+			boolean included = false;
+
+			for (BooleanClause clause : booleanQuery.getClauses()) {
+				if (clause.getQuery().equals(query)) {
+					included = true;
+				}
+			}
+
+			if (!included) {
+				booleanQuery.add(query, occur);
+			}
 		}
 	}
 

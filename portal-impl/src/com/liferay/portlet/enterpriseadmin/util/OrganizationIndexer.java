@@ -169,8 +169,8 @@ public class OrganizationIndexer extends BaseIndexer {
 		document.addKeyword("parentOrganizationId", parentOrganizationId);
 		document.addNumber("leftOrganizationId", leftOrganizationId);
 		document.addNumber("rightOrganizationId", rightOrganizationId);
-		document.addKeyword("name", name, true);
-		document.addKeyword("type", type);
+		document.addText(Field.NAME, name);
+		document.addKeyword(Field.TYPE, type);
 		document.addKeyword(
 			"street", streets.toArray(new String[streets.size()]));
 		document.addKeyword("city", cities.toArray(new String[cities.size()]));
@@ -311,10 +311,10 @@ public class OrganizationIndexer extends BaseIndexer {
 					Field.ORGANIZATION_ID, -1);
 			}
 			else if (leftAndRightOrganizationIds.length > 0) {
-				for (int i = 0; i < leftAndRightOrganizationIds.length; i++) {
+				for (Long[] leftAndRightOrganizationId : leftAndRightOrganizationIds) {
 					organizationsTreeQuery.addNumericRangeTerm(
-						"leftOrganizationId", leftAndRightOrganizationIds[i][0],
-						leftAndRightOrganizationIds[i][1]);
+						"leftOrganizationId", leftAndRightOrganizationId[0],
+						leftAndRightOrganizationId[1]);
 				}
 			}
 

@@ -118,7 +118,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
-		document.addKeyword(Field.TITLE, name, true);
+		document.addText(Field.TITLE, name);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
@@ -128,7 +128,7 @@ public class BookmarksIndexer extends BaseIndexer {
 			Field.ENTRY_CLASS_NAME, BookmarksEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, entryId);
 		document.addText(Field.URL, url);
-		document.addKeyword(Field.DESCRIPTION, description, true);
+		document.addText(Field.DESCRIPTION, description);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

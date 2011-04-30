@@ -478,10 +478,10 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		searchQuery.addTerms(Field.KEYWORDS, keywords, true, true);
+		searchQuery.addTerms(Field.KEYWORDS, keywords, true);
 
-		searchQuery.addTerm(Field.ASSET_CATEGORY_NAMES, keywords, false, true);
-		searchQuery.addTerm(Field.ASSET_TAG_NAMES, keywords, false, true);
+		searchQuery.addExactTerm(Field.ASSET_CATEGORY_NAMES, keywords);
+		searchQuery.addExactTerm(Field.ASSET_TAG_NAMES, keywords);
 
 		addSearchExpando(searchQuery, searchContext, keywords);
 	}
@@ -591,14 +591,18 @@ public abstract class BaseIndexer implements Indexer {
 		String value = (String)searchContext.getAttribute(field);
 
 		if (Validator.isNull(value)) {
+			value = searchContext.getKeywords();
+		}
+
+		if (Validator.isNull(value)) {
 			return;
 		}
 
 		if (searchContext.isAndSearch()) {
-			searchQuery.addRequiredTerm(field, value, like, true);
+			searchQuery.addRequiredTerm(field, value, like);
 		}
 		else {
-			searchQuery.addTerm(field, value, like, true);
+			searchQuery.addTerm(field, value, like);
 		}
 	}
 

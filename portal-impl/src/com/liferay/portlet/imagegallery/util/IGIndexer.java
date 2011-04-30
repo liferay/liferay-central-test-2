@@ -119,8 +119,8 @@ public class IGIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 
-		document.addKeyword(Field.TITLE, name, true);
-		document.addKeyword(Field.DESCRIPTION, description, true);
+		document.addText(Field.TITLE, name);
+		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);

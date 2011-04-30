@@ -104,8 +104,8 @@ public class CalIndexer extends BaseIndexer {
 		document.addKeyword(Field.USER_ID, userId);
 		document.addKeyword(Field.USER_NAME, userName, true);
 
-		document.addKeyword(Field.TITLE, title, true);
-		document.addKeyword(Field.DESCRIPTION, description, true);
+		document.addText(Field.TITLE, title);
+		document.addText(Field.DESCRIPTION, description);
 		document.addKeyword(Field.TYPE, type);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);

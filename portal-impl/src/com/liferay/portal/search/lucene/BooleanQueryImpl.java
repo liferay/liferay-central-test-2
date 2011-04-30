@@ -20,9 +20,6 @@ import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -223,31 +220,6 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		LuceneHelperUtil.addRequiredTerm(_booleanQuery, field, value, like);
 	}
 
-	public void addRequiredTerm(
-		String field, String value, boolean like, boolean parseKeywords) {
-
-		if (Validator.isNull(value)) {
-			return;
-		}
-
-		if (like) {
-			value = StringUtil.replace(
-				value, StringPool.PERCENT, StringPool.BLANK);
-		}
-
-		String[] values = null;
-
-		if (parseKeywords) {
-			values = parseKeywords(value);
-		}
-		else {
-			values = new String[] {value};
-		}
-
-		LuceneHelperUtil.addRequiredTerm(
-			_booleanQuery, field, values, like);
-	}
-
 	public void addTerm(String field, long value) throws ParseException {
 		try {
 			LuceneHelperUtil.addTerm(_booleanQuery, field, value);
@@ -271,37 +243,6 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 		try {
 			LuceneHelperUtil.addTerm(_booleanQuery, field, value, like);
-		}
-		catch (org.apache.lucene.queryParser.ParseException pe) {
-			throw new ParseException(pe.getMessage());
-		}
-	}
-
-	public void addTerm(
-			String field, String value, boolean like, boolean parseKeywords)
-		throws ParseException {
-
-		if (Validator.isNull(value)) {
-			return;
-		}
-
-		if (like) {
-			value = StringUtil.replace(
-				value, StringPool.PERCENT, StringPool.BLANK);
-		}
-
-		String[] values = null;
-
-		if (parseKeywords) {
-			values = parseKeywords(value);
-		}
-		else {
-			values = new String[] {value};
-		}
-
-		try {
-			LuceneHelperUtil.addTerm(
-				_booleanQuery, field, values, like);
 		}
 		catch (org.apache.lucene.queryParser.ParseException pe) {
 			throw new ParseException(pe.getMessage());

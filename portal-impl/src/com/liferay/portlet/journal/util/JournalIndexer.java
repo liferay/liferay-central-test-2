@@ -153,8 +153,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		document.addKeyword(Field.TITLE, article.getTitle(defaultLocale), true);
-		document.addLocalizedText("titleMap", titleMap);
+		document.addLocalizedText(Field.TITLE, titleMap);
 
 		processStructure(structure, document, article.getContent());
 
@@ -172,18 +171,15 @@ public class JournalIndexer extends BaseIndexer {
 				article.getContentByLocale(languageId));
 
 			if (languageId.equals(defaultLangaugeId)) {
-				document.addKeyword(Field.CONTENT, content, true);
+				document.addText(Field.CONTENT, content);
 			}
 
-			document.addKeyword(
+			document.addText(
 				Field.CONTENT.concat(StringPool.UNDERLINE).concat(languageId),
-				content, true);
+				content);
 		}
 
-		document.addKeyword(
-			Field.DESCRIPTION, article.getDescription(defaultLocale), true);
-		document.addLocalizedText("descriptionMap", descriptionMap);
-
+		document.addLocalizedText(Field.DESCRIPTION, descriptionMap);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
@@ -382,22 +378,41 @@ public class JournalIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
+		Locale locale = searchContext.getLocale();
+
+		if (locale == null) {
+			locale = LocaleUtil.getDefault();
+		}
+
+		String languageSufix = StringPool.UNDERLINE.concat(locale.toString());
+
 		addSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
+		addSearchTerm(
+			searchQuery, searchContext, Field.CONTENT.concat(languageSufix),
+			true);
 		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
+		addSearchTerm(
+			searchQuery, searchContext, Field.DESCRIPTION.concat(languageSufix),
+			true);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
 		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(
+			searchQuery, searchContext, Field.TITLE.concat(languageSufix),
+			true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (Validator.isNotNull(params)) {
-			String expandoAttributes = (String)params.get("expandoAttributes");
+		if (Validator.isNull(params)) {
+			return;
+		}
 
-			if (Validator.isNotNull(expandoAttributes)) {
-				addSearchExpando(searchQuery, searchContext, expandoAttributes);
-			}
+		String expandoAttributes = (String)params.get("expandoAttributes");
+
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
 		}
 	}
 
