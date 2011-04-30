@@ -1,7 +1,13 @@
 (function() {
+	var IMAGE = 1;
+
+	var IMAGE_ATTR_SRC = '<img src="';
+
 	var LIST = 'list';
 
 	var REGEX_COLOR = /^(:?aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|purple|red|silver|teal|white|yellow|#(?:[0-9a-f]{3})?[0-9a-f]{3})$/i;
+
+	var REGEX_IMAGE = /^(\/|https?:\/\/)/i;
 
 	var REGEX_MAIN = /((?:\r\n){2}|(?:\n\n)|\r\n|\n)|(?:\[((?:[a-z]|\*){1,16})(?:=([^\x00-\x1F"'\(\)<>\[\]]{1,256}))?\])|(?:\[\/([a-z]{1,16})\])/ig;
 
@@ -159,9 +165,13 @@
 				return data;
 			}
 
+			var currentElement;
+
 			var item;
 
 			var dataValue;
+
+			var tagValue;
 
 			var result = [];
 
@@ -170,13 +180,22 @@
 
 				dataValue = data.substring(j, item.startIndex);
 
-				dataValue = htmlEscape(dataValue);
+				tagValue = data.substr(item.startIndex, item.length);
 
-				result.push(dataValue);
+				if (tagValue === IMAGE_ATTR_SRC) {
+					currentElement = IMAGE;
+				}
 
-				dataValue = data.substr(item.startIndex, item.length);
+				if (tagValue === STR_TAG_ATTR_CLOSE && currentElement === IMAGE) {
+					dataValue = instance._validateImage(dataValue);
 
-				result.push(dataValue);
+					dataValue = CKEDITOR.tools.htmlEncodeAttr(dataValue);
+				}
+				else {
+					dataValue = htmlEscape(dataValue);
+				}
+
+				result.push(dataValue, tagValue);
 
 				j = item.startIndex + item.length;
 			}
@@ -760,6 +779,14 @@
 			);
 
 			instance._dataOffset += tagHTML.length - matchedStr.length;
+		},
+
+		_validateImage: function(imageValue) {
+			if (REGEX_IMAGE.test(imageValue)) {
+				return imageValue;
+			}
+
+			return STR_BLANK;
 		}
 	};
 
