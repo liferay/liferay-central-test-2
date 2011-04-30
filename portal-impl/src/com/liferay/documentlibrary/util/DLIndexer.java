@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -122,6 +123,9 @@ public class DLIndexer extends BaseIndexer {
 			userId = fileEntry.getUserId();
 		}
 
+		String userName = PortalUtil.getUserName(
+			userId, fileEntry.getUserName());
+
 		String extension = fileEntry.getExtension();
 		String title = fileEntry.getTitle();
 		String description = fileEntry.getDescription();
@@ -211,6 +215,7 @@ public class DLIndexer extends BaseIndexer {
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
+		document.addKeyword(Field.USER_NAME, userName, true);
 
 		document.addText(Field.TITLE, title);
 

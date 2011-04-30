@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -96,6 +97,7 @@ public class JournalIndexer extends BaseIndexer {
 		long groupId = getParentGroupId(article.getGroupId());
 		long scopeGroupId = article.getGroupId();
 		long userId = article.getUserId();
+		String userName = PortalUtil.getUserName(userId, article.getUserName());
 		Date modifiedDate = article.getModifiedDate();
 		long resourcePrimKey = article.getResourcePrimKey();
 		String articleId = article.getArticleId();
@@ -150,6 +152,7 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.GROUP_ID, groupId);
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
+		document.addKeyword(Field.USER_NAME, userName, true);
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -401,6 +404,7 @@ public class JournalIndexer extends BaseIndexer {
 			true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
