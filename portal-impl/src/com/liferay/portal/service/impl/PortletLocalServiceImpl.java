@@ -193,22 +193,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_companyPortletsPool.removeAll();
 	}
 
-	public Portlet clonePortlet(long companyId, String portletId)
+	public Portlet clonePortlet(String portletId)
 		throws SystemException {
 
-		Portlet portlet = getPortletById(companyId, portletId);
+		Portlet portlet = getPortletById(portletId);
 
 		return (Portlet)portlet.clone();
 	}
 
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return deployRemotePortlet(portlet, new String[] {categoryName});
 	}
 
 	public Portlet deployRemotePortlet(Portlet portlet, String[] categoryNames)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
@@ -256,6 +256,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			portletCategory.merge(newPortletCategory.getRootCategory());
 		}
+
+		checkPortlet(portlet);
 
 		return portlet;
 	}
