@@ -151,6 +151,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 			for (String value : values) {
 				value = value.toLowerCase();
 
+				value = StringUtil.replace(
+					value, StringPool.PERCENT, StringPool.BLANK);
+
 				WildcardQuery wildcardQuery = new WildcardQuery(
 					new Term(
 						field,
