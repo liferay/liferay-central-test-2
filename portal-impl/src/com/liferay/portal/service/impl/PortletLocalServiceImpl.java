@@ -193,9 +193,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_companyPortletsPool.removeAll();
 	}
 
-	public Portlet clonePortlet(String portletId)
-		throws SystemException {
-
+	public Portlet clonePortlet(String portletId) throws SystemException {
 		Portlet portlet = getPortletById(portletId);
 
 		return (Portlet)portlet.clone();
