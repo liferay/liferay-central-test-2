@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringEncoder;
 import com.liferay.portal.kernel.util.StringParser;
 import com.liferay.portal.kernel.util.URLStringEncoder;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -105,7 +106,7 @@ public class RouteImpl implements Route {
 
 		String url = _stringParser.build(allParameters);
 
-		if (url == null) {
+		if (Validator.isNull(url)) {
 			return null;
 		}
 

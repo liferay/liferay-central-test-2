@@ -23,6 +23,11 @@
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
 	</route>
 	<route>
+		<pattern>/message/{messageId:\d+}</pattern>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="struts_action">/message_boards/view_message</implicit-parameter>
+	</route>
+	<route>
 		<pattern>/view_message/{messageId:\d+}</pattern>
 		<implicit-parameter name="p_p_state">normal</implicit-parameter>
 		<implicit-parameter name="struts_action">/message_boards/view_message</implicit-parameter>
@@ -30,6 +35,10 @@
 	<route>
 		<pattern>/category/{mbCategoryId:\d+}/{p_p_state}</pattern>
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/message/{messageId:\d+}/{p_p_state}</pattern>
+		<implicit-parameter name="struts_action">/message_boards/view_message</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/view_message/{messageId:\d+}/{p_p_state}</pattern>
