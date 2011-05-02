@@ -439,17 +439,17 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 	protected void addRequiredMemberRole(Group group, List<Role> roles)
 		throws Exception {
 
-		if (group.isCommunity()) {
-			Role communityMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.SITE_MEMBER);
-
-			roles.add(communityMemberRole);
-		}
-		else if (group.isOrganization()) {
+		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
 			roles.add(organizationMemberRole);
+		}
+		else if (group.isCommunity()) {
+			Role communityMemberRole = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+			roles.add(communityMemberRole);
 		}
 	}
 

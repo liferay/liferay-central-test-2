@@ -207,8 +207,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				ResourceConstants.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
 
-		if ((role.getType() == RoleConstants.TYPE_SITE) ||
-			(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+		if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+			(role.getType() == RoleConstants.TYPE_SITE)) {
 
 			userGroupRoleLocalService.deleteUserGroupRolesByRoleId(
 				role.getRoleId());

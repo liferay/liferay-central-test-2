@@ -145,16 +145,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			Group group, BooleanQuery permissionQuery)
 		throws Exception {
 
-		if (group.isCommunity()) {
-			Role communityMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.SITE_MEMBER);
-
-			permissionQuery.addTerm(
-				Field.GROUP_ROLE_ID,
-				group.getGroupId() + StringPool.DASH +
-					communityMemberRole.getRoleId());
-		}
-		else if (group.isOrganization()) {
+		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
@@ -162,6 +153,15 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				Field.GROUP_ROLE_ID,
 				group.getGroupId() + StringPool.DASH +
 					organizationMemberRole.getRoleId());
+		}
+		else if (group.isCommunity()) {
+			Role communityMemberRole = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+			permissionQuery.addTerm(
+				Field.GROUP_ROLE_ID,
+				group.getGroupId() + StringPool.DASH +
+					communityMemberRole.getRoleId());
 		}
 	}
 
@@ -190,8 +190,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			long roleId = role.getRoleId();
 
 			if (hasPermission(roleId, resource.getResourceId())) {
-				if ((role.getType() == RoleConstants.TYPE_SITE) ||
-					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+				if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+					(role.getType() == RoleConstants.TYPE_SITE)) {
 
 					groupRoleIds.add(groupId + StringPool.DASH + roleId);
 				}
@@ -232,8 +232,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 					companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
 					classPK, roleId, ActionKeys.VIEW)) {
 
-				if ((role.getType() == RoleConstants.TYPE_SITE) ||
-					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+				if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+					(role.getType() == RoleConstants.TYPE_SITE)) {
 
 					groupRoleIds.add(groupId + StringPool.DASH + roleId);
 				}

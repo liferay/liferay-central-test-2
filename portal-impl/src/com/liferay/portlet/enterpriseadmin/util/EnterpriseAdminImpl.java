@@ -145,14 +145,14 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		if (name.equals(RoleConstants.GUEST)) {
 			cssClassName = "lfr-role-guest";
 		}
+		else if (type == RoleConstants.TYPE_ORGANIZATION) {
+			cssClassName = "lfr-role-organization";
+		}
 		else if (type == RoleConstants.TYPE_REGULAR) {
 			cssClassName = "lfr-role-regular";
 		}
 		else if (type == RoleConstants.TYPE_SITE) {
 			cssClassName = "lfr-role-community";
-		}
-		else if (type == RoleConstants.TYPE_ORGANIZATION) {
-			cssClassName = "lfr-role-organization";
 		}
 		else if (role.isTeam()) {
 			cssClassName = "lfr-role-team";
@@ -219,11 +219,11 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
 			String groupRoleName = groupRole.getName();
 
-			if (groupRoleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
-				groupRoleName.equals(RoleConstants.SITE_OWNER) ||
-				groupRoleName.equals(
+			if (groupRoleName.equals(
 					RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
 				groupRoleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
+				groupRoleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
+				groupRoleName.equals(RoleConstants.SITE_OWNER) ||
 				!GroupPermissionUtil.contains(
 					permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
 
@@ -299,10 +299,10 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 
 			String name = role.getName();
 
-			if (name.equals(RoleConstants.SITE_MEMBER) ||
-				name.equals(RoleConstants.GUEST) ||
-				name.equals(RoleConstants.OWNER) ||
+			if (name.equals(RoleConstants.GUEST) ||
 				name.equals(RoleConstants.ORGANIZATION_MEMBER) ||
+				name.equals(RoleConstants.OWNER) ||
+				name.equals(RoleConstants.SITE_MEMBER) ||
 				name.equals(RoleConstants.USER)) {
 
 				itr.remove();

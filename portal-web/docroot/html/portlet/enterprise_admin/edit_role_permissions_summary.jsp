@@ -52,7 +52,7 @@ if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 	if (role.getType() == RoleConstants.TYPE_REGULAR) {
 		scopes = new int[] {ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP};
 	}
-	else if ((role.getType() == RoleConstants.TYPE_SITE) || (role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+	else if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) || (role.getType() == RoleConstants.TYPE_SITE)) {
 		scopes = new int[] {ResourceConstants.SCOPE_GROUP_TEMPLATE};
 	}
 

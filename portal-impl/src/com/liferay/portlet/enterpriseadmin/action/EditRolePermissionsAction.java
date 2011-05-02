@@ -130,14 +130,16 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		if (role.getName().equals(RoleConstants.ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.OWNER) ||
-			role.getName().equals(RoleConstants.SITE_ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.SITE_OWNER) ||
-			role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
+		String roleName = role.getName();
 
-			throw new RolePermissionsException(role.getName());
+		if (roleName.equals(RoleConstants.ADMINISTRATOR) ||
+			roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+			roleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
+			roleName.equals(RoleConstants.OWNER) ||
+			roleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
+			roleName.equals(RoleConstants.SITE_OWNER)) {
+
+			throw new RolePermissionsException(roleName);
 		}
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
@@ -272,14 +274,16 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
-		if (role.getName().equals(RoleConstants.ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.OWNER) ||
-			role.getName().equals(RoleConstants.SITE_ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.SITE_OWNER) ||
-			role.getName().equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
-			role.getName().equals(RoleConstants.ORGANIZATION_OWNER)) {
+		String roleName = role.getName();
 
-			throw new RolePermissionsException(role.getName());
+		if (roleName.equals(RoleConstants.ADMINISTRATOR) ||
+			roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+			roleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
+			roleName.equals(RoleConstants.OWNER) ||
+			roleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
+			roleName.equals(RoleConstants.SITE_OWNER)) {
+
+			throw new RolePermissionsException(roleName);
 		}
 
 		String portletResource = ParamUtil.getString(
@@ -330,8 +334,8 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				int scope = ResourceConstants.SCOPE_COMPANY;
 
-				if ((role.getType() == RoleConstants.TYPE_SITE) ||
-					(role.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+				if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+					(role.getType() == RoleConstants.TYPE_SITE)) {
 
 					scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
 				}

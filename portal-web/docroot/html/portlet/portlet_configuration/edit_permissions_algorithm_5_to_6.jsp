@@ -164,20 +164,20 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		roles.remove(administrator);
 
-		if (group.isCommunity() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_SITE)) {
-			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
-			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
-
-			roles.remove(communityAdministrator);
-			roles.remove(communityOwner);
-		}
-
 		if (group.isOrganization() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_ORGANIZATION)) {
 			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
 			roles.remove(organizationAdministrator);
 			roles.remove(organizationOwner);
+		}
+
+		if (group.isCommunity() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_SITE)) {
+			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
+
+			roles.remove(communityAdministrator);
+			roles.remove(communityOwner);
 		}
 
 		if (group.isCommunity() || group.isOrganization()) {
@@ -221,7 +221,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 				String name = role.getName();
 
-				if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.SITE_ADMINISTRATOR) && !name.equals(RoleConstants.SITE_OWNER) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
+				if (!name.equals(RoleConstants.ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) && !name.equals(RoleConstants.ORGANIZATION_OWNER) && !name.equals(RoleConstants.OWNER) && !name.equals(RoleConstants.SITE_ADMINISTRATOR) && !name.equals(RoleConstants.SITE_OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS)) {
 					definePermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 					definePermissionsHREF = definePermissionsURL.toString();

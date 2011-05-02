@@ -478,18 +478,6 @@ public class DataFactory {
 		return _classNames;
 	}
 
-	public Role getCommunityAdministratorRole() {
-		return _communityAdministratorRole;
-	}
-
-	public Role getCommunityMemberRole() {
-		return _communityMemberRole;
-	}
-
-	public Role getCommunityOwnerRole() {
-		return _communityOwnerRole;
-	}
-
 	public Company getCompany() {
 		return _company;
 	}
@@ -544,6 +532,18 @@ public class DataFactory {
 
 	public List<Role> getRoles() {
 		return _roles;
+	}
+
+	public Role getSiteAdministratorRole() {
+		return _siteAdministratorRole;
+	}
+
+	public Role getSiteMemberRole() {
+		return _siteMemberRole;
+	}
+
+	public Role getSiteOwnerRole() {
+		return _siteOwnerRole;
 	}
 
 	public ClassName getUserClassName() {
@@ -768,39 +768,6 @@ public class DataFactory {
 
 		_administratorRole = role;
 
-		// Community Administrator
-
-		role = newRole();
-
-		role.setName(RoleConstants.SITE_ADMINISTRATOR);
-		role.setType(RoleConstants.TYPE_SITE);
-
-		_roles.add(role);
-
-		_communityAdministratorRole = role;
-
-		// Community Member
-
-		role = newRole();
-
-		role.setName(RoleConstants.SITE_MEMBER);
-		role.setType(RoleConstants.TYPE_SITE);
-
-		_roles.add(role);
-
-		_communityMemberRole = role;
-
-		// Community Owner
-
-		role = newRole();
-
-		role.setName(RoleConstants.SITE_OWNER);
-		role.setType(RoleConstants.TYPE_SITE);
-
-		_roles.add(role);
-
-		_communityOwnerRole = role;
-
 		// Guest
 
 		role = newRole();
@@ -821,7 +788,7 @@ public class DataFactory {
 
 		_roles.add(role);
 
-		_communityAdministratorRole = role;
+		_organizationAdministratorRole = role;
 
 		// Organization Member
 
@@ -832,7 +799,7 @@ public class DataFactory {
 
 		_roles.add(role);
 
-		_communityMemberRole = role;
+		_organizationMemberRole = role;
 
 		// Organization Owner
 
@@ -843,7 +810,7 @@ public class DataFactory {
 
 		_roles.add(role);
 
-		_communityOwnerRole = role;
+		_organizationOwnerRole = role;
 
 		// Owner
 
@@ -866,6 +833,39 @@ public class DataFactory {
 		_roles.add(role);
 
 		_powerUserRole = role;
+
+		// Site Administrator
+
+		role = newRole();
+
+		role.setName(RoleConstants.SITE_ADMINISTRATOR);
+		role.setType(RoleConstants.TYPE_SITE);
+
+		_roles.add(role);
+
+		_siteAdministratorRole = role;
+
+		// Site Member
+
+		role = newRole();
+
+		role.setName(RoleConstants.SITE_MEMBER);
+		role.setType(RoleConstants.TYPE_SITE);
+
+		_roles.add(role);
+
+		_siteMemberRole = role;
+
+		// Site Owner
+
+		role = newRole();
+
+		role.setName(RoleConstants.SITE_OWNER);
+		role.setType(RoleConstants.TYPE_SITE);
+
+		_roles.add(role);
+
+		_siteOwnerRole = role;
 
 		// User
 
@@ -925,9 +925,6 @@ public class DataFactory {
 	private String _baseDir;
 	private ClassName _blogsEntryClassName;
 	private List<ClassName> _classNames;
-	private Role _communityAdministratorRole;
-	private Role _communityMemberRole;
-	private Role _communityOwnerRole;
 	private Company _company;
 	private SimpleCounter _counter;
 	private List<CounterModelImpl> _counters;
@@ -951,6 +948,9 @@ public class DataFactory {
 	private SimpleCounter _resourceCounter;
 	private ClassName _roleClassName;
 	private List<Role> _roles;
+	private Role _siteAdministratorRole;
+	private Role _siteMemberRole;
+	private Role _siteOwnerRole;
 	private ClassName _userClassName;
 	private Object[] _userNames;
 	private Role _userRole;

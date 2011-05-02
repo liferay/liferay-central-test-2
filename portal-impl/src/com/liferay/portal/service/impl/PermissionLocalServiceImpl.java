@@ -816,8 +816,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				resource.getName());
 
 		if (communityDefaultActions.contains(actionId)) {
-			addRolePermissions(
-				RoleConstants.SITE_MEMBER, permission);
+			addRolePermissions(RoleConstants.SITE_MEMBER, permission);
 		}
 
 		List<String> guestDefaultActions =
@@ -825,8 +824,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				resource.getName());
 
 		if (guestDefaultActions.contains(actionId)) {
-			addRolePermissions(
-				RoleConstants.GUEST, permission);
+			addRolePermissions(RoleConstants.GUEST, permission);
 		}
 
 		addRolePermissions(RoleConstants.OWNER, permission);

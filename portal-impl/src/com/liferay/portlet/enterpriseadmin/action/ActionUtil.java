@@ -210,28 +210,7 @@ public class ActionUtil {
 
 		Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-		if ((group != null) && group.isCommunity()) {
-			if (GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
-					ActionKeys.ASSIGN_USER_ROLES) ||
-				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					themeDisplay.getUserId(), group.getGroupId(),
-					RoleConstants.SITE_ADMINISTRATOR, true) ||
-				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					themeDisplay.getUserId(), group.getGroupId(),
-					RoleConstants.SITE_OWNER, true)) {
-
-				if (roleId > 0) {
-					role = RoleLocalServiceUtil.getRole(roleId);
-				}
-			}
-			else {
-				if (roleId > 0) {
-					role = RoleServiceUtil.getRole(roleId);
-				}
-			}
-		}
-		else if ((group != null) && group.isOrganization()) {
+		if ((group != null) && group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=
@@ -267,6 +246,27 @@ public class ActionUtil {
 
 			if (roleId > 0 && (role == null)) {
 				role = RoleServiceUtil.getRole(roleId);
+			}
+		}
+		else if ((group != null) && group.isCommunity()) {
+			if (GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.ASSIGN_USER_ROLES) ||
+				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					themeDisplay.getUserId(), group.getGroupId(),
+					RoleConstants.SITE_ADMINISTRATOR, true) ||
+				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					themeDisplay.getUserId(), group.getGroupId(),
+					RoleConstants.SITE_OWNER, true)) {
+
+				if (roleId > 0) {
+					role = RoleLocalServiceUtil.getRole(roleId);
+				}
+			}
+			else {
+				if (roleId > 0) {
+					role = RoleServiceUtil.getRole(roleId);
+				}
 			}
 		}
 		else {

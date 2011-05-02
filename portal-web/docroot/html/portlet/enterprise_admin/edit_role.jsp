@@ -96,14 +96,14 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 			<%
 			String[] subtypes = null;
 
-			if (role.getType() == RoleConstants.TYPE_SITE) {
-				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
-			}
-			else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+			if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 				subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
 			}
 			else if (role.getType() == RoleConstants.TYPE_REGULAR) {
 				subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
+			}
+			else if (role.getType() == RoleConstants.TYPE_SITE) {
+				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
 			}
 			else {
 				subtypes = new String[0];

@@ -23,11 +23,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_permissions.jsp-p
 
 String systemRoleName = RoleConstants.OWNER;
 
-if (tabs2.equals("sites")) {
-	systemRoleName = RoleConstants.SITE_MEMBER;
-}
-else if (tabs2.equals("organizations")) {
+if (tabs2.equals("organizations")) {
 	systemRoleName = RoleConstants.ORGANIZATION_MEMBER;
+}
+else if (tabs2.equals("sites")) {
+	systemRoleName = RoleConstants.SITE_MEMBER;
 }
 %>
 
@@ -48,11 +48,11 @@ List<ResourcePermission> resourcePermissions = new UniqueList<ResourcePermission
 
 int roleType = RoleConstants.TYPE_REGULAR;
 
-if (tabs2.equals("sites")) {
-	roleType = RoleConstants.TYPE_SITE;
-}
-else if (tabs2.equals("organizations")) {
+if (tabs2.equals("organizations")) {
 	roleType = RoleConstants.TYPE_ORGANIZATION;
+}
+else if (tabs2.equals("sites")) {
+	roleType = RoleConstants.TYPE_SITE;
 }
 
 List<Role> roles = RoleLocalServiceUtil.getRoles(roleType, "lfr-permission-algorithm-5");

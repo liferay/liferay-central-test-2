@@ -334,15 +334,15 @@ public class PermissionImporter {
 				String description = roleElement.attributeValue("description");
 				int type = Integer.valueOf(roleElement.attributeValue("type"));
 
-				if ((type == RoleConstants.TYPE_SITE) &&
-					group.isOrganization()) {
-
-					type = RoleConstants.TYPE_ORGANIZATION;
-				}
-				else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
-						 group.isCommunity()) {
+				if ((type == RoleConstants.TYPE_ORGANIZATION) &&
+					group.isCommunity()) {
 
 					type = RoleConstants.TYPE_SITE;
+				}
+				else if ((type == RoleConstants.TYPE_SITE) &&
+						 group.isOrganization()) {
+
+					type = RoleConstants.TYPE_ORGANIZATION;
 				}
 
 				role = RoleLocalServiceUtil.addRole(
@@ -397,44 +397,8 @@ public class PermissionImporter {
 				role = layoutCache.getRole(companyId, name);
 			}
 
-			if ((type == RoleConstants.TYPE_SITE) &&
-				group.isOrganization()) {
-
-				type = RoleConstants.TYPE_ORGANIZATION;
-
-				if ((role != null) &&
-					(role.getType() != RoleConstants.TYPE_ORGANIZATION)) {
-
-					role = null;
-
-					if (name.equals(RoleConstants.SITE_ADMINISTRATOR)) {
-						name = RoleConstants.ORGANIZATION_ADMINISTRATOR;
-					}
-					else if (name.equals(RoleConstants.SITE_MEMBER)) {
-						name = RoleConstants.ORGANIZATION_MEMBER;
-					}
-					else if (name.equals(RoleConstants.SITE_OWNER)) {
-						name = RoleConstants.ORGANIZATION_OWNER;
-					}
-					else {
-						if (name.contains("Community")) {
-							name = StringUtil.replace(
-								name, "Community", "Organization");
-						}
-						else {
-							name = "Organization ".concat(name);
-						}
-					}
-
-					try {
-						role = RoleLocalServiceUtil.getRole(companyId, name);
-					}
-					catch (Exception e) {
-					}
-				}
-			}
-			else if ((type == RoleConstants.TYPE_ORGANIZATION) &&
-					 group.isCommunity()) {
+			if ((type == RoleConstants.TYPE_ORGANIZATION) &&
+				group.isCommunity()) {
 
 				type = RoleConstants.TYPE_SITE;
 
@@ -459,6 +423,42 @@ public class PermissionImporter {
 						}
 						else {
 							name = "Community ".concat(name);
+						}
+					}
+
+					try {
+						role = RoleLocalServiceUtil.getRole(companyId, name);
+					}
+					catch (Exception e) {
+					}
+				}
+			}
+			else if ((type == RoleConstants.TYPE_SITE) &&
+					 group.isOrganization()) {
+
+				type = RoleConstants.TYPE_ORGANIZATION;
+
+				if ((role != null) &&
+					(role.getType() != RoleConstants.TYPE_ORGANIZATION)) {
+
+					role = null;
+
+					if (name.equals(RoleConstants.SITE_ADMINISTRATOR)) {
+						name = RoleConstants.ORGANIZATION_ADMINISTRATOR;
+					}
+					else if (name.equals(RoleConstants.SITE_MEMBER)) {
+						name = RoleConstants.ORGANIZATION_MEMBER;
+					}
+					else if (name.equals(RoleConstants.SITE_OWNER)) {
+						name = RoleConstants.ORGANIZATION_OWNER;
+					}
+					else {
+						if (name.contains("Community")) {
+							name = StringUtil.replace(
+								name, "Community", "Organization");
+						}
+						else {
+							name = "Organization ".concat(name);
 						}
 					}
 

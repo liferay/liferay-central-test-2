@@ -32,19 +32,19 @@ public class VerifyRole extends VerifyProcess {
 			RoleLocalServiceUtil.checkSystemRoles(companyId);
 
 			try {
-				Role communityMemberRole = RoleLocalServiceUtil.getRole(
-					companyId, RoleConstants.SITE_MEMBER);
+				Role organizationMemberRole = RoleLocalServiceUtil.getRole(
+					companyId, RoleConstants.ORGANIZATION_MEMBER);
 
-				deleteImplicitAssociations(communityMemberRole);
+				deleteImplicitAssociations(organizationMemberRole);
 			}
 			catch (NoSuchRoleException nsre) {
 			}
 
 			try {
-				Role organizationMemberRole = RoleLocalServiceUtil.getRole(
-					companyId, RoleConstants.ORGANIZATION_MEMBER);
+				Role siteMemberRole = RoleLocalServiceUtil.getRole(
+					companyId, RoleConstants.SITE_MEMBER);
 
-				deleteImplicitAssociations(organizationMemberRole);
+				deleteImplicitAssociations(siteMemberRole);
 			}
 			catch (NoSuchRoleException nsre) {
 			}

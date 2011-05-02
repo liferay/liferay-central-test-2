@@ -49,9 +49,9 @@ public class RoleDisplayTerms extends DisplayTerms {
 	}
 
 	public int getType() {
-		if ((type == RoleConstants.TYPE_SITE) ||
-			(type == RoleConstants.TYPE_ORGANIZATION) ||
-			(type == RoleConstants.TYPE_REGULAR)) {
+		if ((type == RoleConstants.TYPE_ORGANIZATION) ||
+			(type == RoleConstants.TYPE_REGULAR) ||
+			(type == RoleConstants.TYPE_SITE)) {
 
 			return type;
 		}
@@ -61,9 +61,9 @@ public class RoleDisplayTerms extends DisplayTerms {
 	}
 
 	public String getTypeString() {
-		if ((type == RoleConstants.TYPE_SITE) ||
-			(type == RoleConstants.TYPE_ORGANIZATION) ||
-			(type == RoleConstants.TYPE_REGULAR)) {
+		if ((type == RoleConstants.TYPE_ORGANIZATION) ||
+			(type == RoleConstants.TYPE_REGULAR) ||
+			(type == RoleConstants.TYPE_SITE)) {
 
 			return String.valueOf(type);
 		}
