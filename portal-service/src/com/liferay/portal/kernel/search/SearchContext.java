@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.io.Serializable;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -38,10 +39,18 @@ public class SearchContext implements Serializable {
 	}
 
 	public Serializable getAttribute(String name) {
+		if (_attributes == null) {
+			return null;
+		}
+
 		return _attributes.get(name);
 	}
 
 	public Map<String, Serializable> getAttributes() {
+		if (_attributes == null) {
+			_attributes = new HashMap<String, Serializable>();
+		}
+
 		return _attributes;
 	}
 
@@ -142,6 +151,10 @@ public class SearchContext implements Serializable {
 	}
 
 	public void setAttribute(String name, Serializable value) {
+		if (_attributes == null) {
+			_attributes = new HashMap<String, Serializable>();
+		}
+
 		_attributes.put(name, value);
 	}
 

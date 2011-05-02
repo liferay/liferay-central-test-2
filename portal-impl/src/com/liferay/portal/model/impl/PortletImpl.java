@@ -3556,7 +3556,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * An array of required roles of the portlet.
 	 */
-	private String[] _rolesArray;
+	private String[] _rolesArray = new String[0];
 
 	/**
 	 * The unlinked roles of the portlet.
