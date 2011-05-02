@@ -40,7 +40,9 @@ import java.io.Writer;
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
 	public void flushTemplate(String freeMarkerTemplateId) {
-		_stringTemplateLoader.removeTemplate(freeMarkerTemplateId);
+		if (_stringTemplateLoader != null) {
+			_stringTemplateLoader.removeTemplate(freeMarkerTemplateId);
+		}
 
 		PortalCache portalCache = LiferayCacheStorage.getPortalCache();
 
