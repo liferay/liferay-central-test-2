@@ -26,7 +26,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 			<aui:option label="" />
 
 			<c:choose>
-				<c:when test="<%= role.getType() == RoleConstants.TYPE_COMMUNITY %>">
+				<c:when test="<%= role.getType() == RoleConstants.TYPE_SITE %>">
 					<optgroup label="<liferay-ui:message key="administration" />">
 
 						<%
@@ -73,7 +73,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 								continue;
 							}
 
-							if ((role.getType() == RoleConstants.TYPE_COMMUNITY) && !_isCommunityPortlet(portlet.getPortletId())) {
+							if ((role.getType() == RoleConstants.TYPE_SITE) && !_isCommunityPortlet(portlet.getPortletId())) {
 								continue;
 							}
 
