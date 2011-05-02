@@ -29,7 +29,11 @@ public interface UploadPortletRequest extends HttpServletRequest {
 
 	public File getFile(String name);
 
+	public File[] getFiles(String name);
+
 	public String getFileName(String name);
+
+	public String[] getFileNames(String name);
 
 	public String getFullFileName(String name);
 

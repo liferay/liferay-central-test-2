@@ -77,6 +77,16 @@ public class UploadPortletRequestImpl
 		return file;
 	}
 
+	public File[] getFiles(String name) {
+		File[] files = _uploadRequest.getFiles(_namespace + name);
+
+		if (files == null) {
+			files = _uploadRequest.getFiles(name);
+		}
+
+		return files;
+	}
+
 	public String getFileName(String name) {
 		String fileName = _uploadRequest.getFileName(_namespace + name);
 
@@ -85,6 +95,16 @@ public class UploadPortletRequestImpl
 		}
 
 		return fileName;
+	}
+
+	public String[] getFileNames(String name) {
+		String[] fileNames = _uploadRequest.getFileNames(_namespace + name);
+
+		if (fileNames == null) {
+			fileNames = _uploadRequest.getFileNames(name);
+		}
+
+		return fileNames;
 	}
 
 	public String getFullFileName(String name) {

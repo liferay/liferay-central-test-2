@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.util.SystemProperties;
 
@@ -151,11 +152,55 @@ public class UploadServletRequestImpl
 		}
 	}
 
+	public File[] getFiles(String name) {
+		if (getFileNames(name) == null) {
+			return null;
+		}
+
+		LiferayFileItem[] liferayFileItems = _params.get(name);
+
+		if ((liferayFileItems != null) && (liferayFileItems.length > 0)) {
+			File[] files = new File[liferayFileItems.length];
+
+			for (int i = 0; i < liferayFileItems.length; i++) {
+				LiferayFileItem liferayFileItem = liferayFileItems[i];
+
+				if (Validator.isNotNull(liferayFileItem.getFileName())) {
+					files[i] = liferayFileItem.getStoreLocation();
+				}
+			}
+
+			return files;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public String getFileName(String name) {
 		LiferayFileItem[] liferayFileItems = _params.get(name);
 
 		if ((liferayFileItems != null) && (liferayFileItems.length > 0)) {
 			return liferayFileItems[0].getFileName();
+		}
+		else {
+			return null;
+		}
+	}
+
+	public String[] getFileNames(String name) {
+		LiferayFileItem[] liferayFileItems = _params.get(name);
+
+		if ((liferayFileItems != null) && (liferayFileItems.length > 0)) {
+			String[] fileNames = new String[liferayFileItems.length];
+
+			for (int i = 0; i < liferayFileItems.length; i++) {
+				LiferayFileItem liferayFileItem = liferayFileItems[i];
+
+				fileNames[i] = liferayFileItem.getFileName();
+			}
+
+			return fileNames;
 		}
 		else {
 			return null;
