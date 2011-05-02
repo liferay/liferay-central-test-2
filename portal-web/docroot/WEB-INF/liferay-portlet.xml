@@ -1759,6 +1759,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<css-class-wrapper>portlet-dynamic-data-lists</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>168</portlet-name>
@@ -1776,6 +1777,21 @@
 		<header-portlet-css>/html/portlet/library_admin/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-document-library</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
+	</portlet>
+	<portlet>
+		<portlet-name>169</portlet-name>
+		<struts-path>dynamic_data_list_display</struts-path>
+		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
+		<use-default-template>false</use-default-template>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<css-class-wrapper>dynamic_data_list_display</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
