@@ -136,6 +136,10 @@ public class InputTag extends IncludeTag {
 		_model = model;
 	}
 
+	public void setMultiple(boolean multiple) {
+		_multiple = multiple;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -237,6 +241,7 @@ public class InputTag extends IncludeTag {
 		_languageId = null;
 		_last = false;
 		_model = null;
+		_multiple = false;
 		_name = null;
 		_onChange = null;
 		_onClick = null;
@@ -339,6 +344,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:languageId", _languageId);
 		request.setAttribute("aui:input:last", String.valueOf(_last));
 		request.setAttribute("aui:input:model", model);
+		request.setAttribute("aui:input:multiple", String.valueOf(_multiple));
 		request.setAttribute("aui:input:name", _name);
 		request.setAttribute("aui:input:onChange", _onChange);
 		request.setAttribute("aui:input:onClick", _onClick);
@@ -405,6 +411,7 @@ public class InputTag extends IncludeTag {
 	private String _languageId;
 	private boolean _last;
 	private Class<?> _model;
+	private boolean _multiple;
 	private String _name;
 	private String _onChange;
 	private String _onClick;
