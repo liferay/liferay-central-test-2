@@ -59,10 +59,9 @@
 		<property name="searcher" ref="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
 		<property name="writer" ref="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
 	</bean>
-
 	<bean id="com.liferay.portal.search.lucene.LuceneHelperImpl" class="com.liferay.portal.search.lucene.LuceneHelperImpl">
-		<property name="analyzer" ref="luceneAnalyzer"></property>
-		<property name="version" ref="luceneVersion"></property>
+		<property name="analyzer" ref="com.liferay.portal.search.lucene.PerFieldAnalyzerWrapper" />
+		<property name="version" ref="org.apache.lucene.util.Version" />
 	</bean>
 	<bean id="com.liferay.portal.search.lucene.LuceneHelperUtil" class="com.liferay.portal.search.lucene.LuceneHelperUtil">
 		<property name="luceneHelper" ref="com.liferay.portal.search.lucene.LuceneHelperImpl" />
@@ -86,6 +85,89 @@
 	<bean id="com.liferay.portal.kernel.search.TermQueryFactory" class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
 	<bean id="com.liferay.portal.kernel.search.TermQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermQueryFactoryUtil">
 		<property name="termQueryFactory" ref="com.liferay.portal.kernel.search.TermQueryFactory" />
+	</bean>
+
+	<!-- Lucene analyzers -->
+
+	<bean id="com.liferay.portal.search.lucene.PerFieldAnalyzerWrapper" class="com.liferay.portal.search.lucene.PerFieldAnalyzerWrapper">
+		<constructor-arg>
+			<ref bean="org.apache.lucene.analysis.standard.StandardAnalyzer" />
+		</constructor-arg>
+		<constructor-arg>
+			<util:map>
+				<entry key="assetCategoryNames" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="assetTagNames" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="extension" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<!--<entry key="path">
+					<bean id="org.apache.lucene.analysis.miscellaneous.PatternAnalyzer" class="org.apache.lucene.analysis.miscellaneous.PatternAnalyzer">
+						<constructor-arg ref="org.apache.lucene.util.Version" />
+						<constructor-arg>
+							<bean class="java.util.regex.Pattern" factory-method="compile">
+								<constructor-arg value="[-\\./]" />
+							</bean>
+						</constructor-arg>
+						<constructor-arg value="false" />
+						<constructor-arg>
+							<util:set></util:set>
+						</constructor-arg>
+					</bean>
+				</entry>-->
+				<entry key="userName" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key=".*_ar" value-ref="org.apache.lucene.analysis.ar.ArabicAnalyzer" />
+				<entry key=".*_pt_BR" value-ref="org.apache.lucene.analysis.br.BrazilianAnalyzer" />
+				<entry key=".*_zh_CN" value-ref="org.apache.lucene.analysis.cjk.CJKAnalyzer" />
+				<entry key=".*_ja_JP" value-ref="org.apache.lucene.analysis.cjk.CJKAnalyzer" />
+				<entry key=".*_ko_KR" value-ref="org.apache.lucene.analysis.cjk.CJKAnalyzer" />
+				<entry key=".*_nl_NL" value-ref="org.apache.lucene.analysis.nl.DutchAnalyzer" />
+				<entry key=".*_fr_[A-Z]{2}" value-ref="org.apache.lucene.analysis.fr.FrenchAnalyzer" />
+				<entry key=".*_de_DE" value-ref="org.apache.lucene.analysis.de.GermanAnalyzer" />
+				<entry key=".*_el_GR" value-ref="org.apache.lucene.analysis.el.GreekAnalyzer" />
+				<entry key=".*_fa_IR" value-ref="org.apache.lucene.analysis.fa.PersianAnalyzer" />
+				<entry key=".*_ru_RU" value-ref="org.apache.lucene.analysis.ru.RussianAnalyzer" />
+				<entry key=".*_zh_TW" value-ref="org.apache.lucene.analysis.th.ThaiAnalyzer" />
+			</util:map>
+		</constructor-arg>
+	</bean>
+	<bean id="org.apache.lucene.analysis.KeywordAnalyzer" class="org.apache.lucene.analysis.KeywordAnalyzer" />
+	<bean id="org.apache.lucene.analysis.WhitespaceAnalyzer" class="org.apache.lucene.analysis.WhitespaceAnalyzer" />
+	<bean id="org.apache.lucene.analysis.ar.ArabicAnalyzer" class="org.apache.lucene.analysis.ar.ArabicAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.br.BrazilianAnalyzer" class="org.apache.lucene.analysis.br.BrazilianAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.cjk.CJKAnalyzer" class="org.apache.lucene.analysis.cjk.CJKAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.cz.CzechAnalyzer" class="org.apache.lucene.analysis.cz.CzechAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.nl.DutchAnalyzer" class="org.apache.lucene.analysis.nl.DutchAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.fr.FrenchAnalyzer" class="org.apache.lucene.analysis.fr.FrenchAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.de.GermanAnalyzer" class="org.apache.lucene.analysis.de.GermanAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.el.GreekAnalyzer" class="org.apache.lucene.analysis.el.GreekAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.fa.PersianAnalyzer" class="org.apache.lucene.analysis.fa.PersianAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.ru.RussianAnalyzer" class="org.apache.lucene.analysis.ru.RussianAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.standard.StandardAnalyzer" class="org.apache.lucene.analysis.standard.StandardAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.analysis.th.ThaiAnalyzer" class="org.apache.lucene.analysis.th.ThaiAnalyzer">
+		<constructor-arg ref="org.apache.lucene.util.Version" />
+	</bean>
+	<bean id="org.apache.lucene.util.Version" class="org.apache.lucene.util.Version" factory-method="valueOf">
+		<constructor-arg value="LUCENE_30" />
 	</bean>
 
 	<!-- Messaging -->

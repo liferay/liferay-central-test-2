@@ -539,6 +539,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return bootupAddress;
 	}
 
+	public void setAnalyzer(Analyzer analyzer) {
+		_analyzer = analyzer;
+	}
+
+	public void setVersion(Version version) {
+		_version = version;
+	}
+
 	public void shutdown() {
 		if (_luceneIndexThreadPoolExecutor != null) {
 			_luceneIndexThreadPoolExecutor.shutdownNow();
@@ -560,14 +568,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		for (IndexAccessor indexAccessor : _indexAccessors.values()) {
 			indexAccessor.close();
 		}
-	}
-
-	public void setAnalyzer(Analyzer analyzer) {
-		_analyzer = analyzer;
-	}
-
-	public void setVersion(Version version) {
-		_version = version;
 	}
 
 	public void startup(long companyId) {

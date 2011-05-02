@@ -1135,8 +1135,6 @@ public interface PropsKeys {
 
 	public static final String LOOK_AND_FEEL_MODIFIABLE = "look.and.feel.modifiable";
 
-	public static final String LUCENE_ANALYZER = "lucene.analyzer";
-
 	public static final String LUCENE_BUFFER_SIZE = "lucene.buffer.size";
 
 	public static final String LUCENE_COMMIT_BATCH_SIZE = "lucene.commit.batch.size";

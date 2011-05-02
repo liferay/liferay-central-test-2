@@ -36,63 +36,59 @@ public class PerFieldAnalyzerWrapper
 
 		super(defaultAnalyzer, analyzerMap);
 
-		_defaultAnalyzer = defaultAnalyzer;
-		_analyzerMap = analyzerMap;
+		_analyzer = defaultAnalyzer;
+		_analyzers = analyzerMap;
 	}
 
 	public void addAnalyzer(String fieldName, Analyzer analyzer) {
 		super.addAnalyzer(fieldName, analyzer);
 
-		_analyzerMap.put(fieldName, analyzer);
+		_analyzers.put(fieldName, analyzer);
 	}
 
-	public TokenStream tokenStream(String fieldName, Reader reader) {
-		Analyzer analyzer = _findAnalyzer(fieldName);
+	public int getOffsetGap(Fieldable field) {
+		Analyzer analyzer = _getAnalyzer(field.name());
 
-		return analyzer.tokenStream(fieldName, reader);
+		return analyzer.getOffsetGap(field);
+	}
+
+	public int getPositionIncrementGap(String fieldName) {
+		Analyzer analyzer = _getAnalyzer(fieldName);
+
+		return analyzer.getPositionIncrementGap(fieldName);
 	}
 
 	public TokenStream reusableTokenStream(String fieldName, Reader reader)
 		throws IOException {
 
-		Analyzer analyzer = _findAnalyzer(fieldName);
+		Analyzer analyzer = _getAnalyzer(fieldName);
 
 		return analyzer.reusableTokenStream(fieldName, reader);
 	}
 
-	public int getPositionIncrementGap(String fieldName) {
-		Analyzer analyzer = _findAnalyzer(fieldName);
+	public TokenStream tokenStream(String fieldName, Reader reader) {
+		Analyzer analyzer = _getAnalyzer(fieldName);
 
-		return analyzer.getPositionIncrementGap(fieldName);
+		return analyzer.tokenStream(fieldName, reader);
 	}
 
-	public int getOffsetGap(Fieldable field) {
-		Analyzer analyzer = _findAnalyzer(field.name());
-
-		return analyzer.getOffsetGap(field);
-	}
-
-	private Analyzer _findAnalyzer(String fieldName) {
-		Analyzer analyzer = _analyzerMap.get(fieldName);
-
-		if (analyzer == null) {
-			for (String key : _analyzerMap.keySet()) {
-				if (Pattern.matches(key, fieldName)) {
-					analyzer = _analyzerMap.get(key);
-
-					break;
-				}
-			}
-		}
+	private Analyzer _getAnalyzer(String fieldName) {
+		Analyzer analyzer = _analyzers.get(fieldName);
 
 		if (analyzer != null) {
 			return analyzer;
 		}
 
-		return _defaultAnalyzer;
+		for (String key : _analyzers.keySet()) {
+			if (Pattern.matches(key, fieldName)) {
+				return _analyzers.get(key);
+			}
+		}
+
+		return _analyzer;
 	}
 
-	private Map<String,Analyzer> _analyzerMap = new HashMap<String,Analyzer>();
-	private Analyzer _defaultAnalyzer;
+	private Analyzer _analyzer;
+	private Map<String, Analyzer> _analyzers = new HashMap<String, Analyzer>();
 
 }
