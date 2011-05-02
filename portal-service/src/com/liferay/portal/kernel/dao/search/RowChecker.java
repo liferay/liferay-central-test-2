@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletResponse;
-import javax.portlet.RenderResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -45,10 +44,6 @@ public class RowChecker {
 		_allRowIds = _portletResponse.getNamespace() + ALL_ROW_IDS;
 		_formName = _portletResponse.getNamespace() + FORM_NAME;
 		_rowIds = _portletResponse.getNamespace() + ROW_IDS;
-	}
-
-	public RowChecker(RenderResponse renderResponse) {
-		this((PortletResponse)renderResponse);
 	}
 
 	public String getAlign() {
