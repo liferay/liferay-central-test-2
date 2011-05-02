@@ -153,7 +153,9 @@ public class UploadServletRequestImpl
 	}
 
 	public File[] getFiles(String name) {
-		if (getFileNames(name) == null) {
+		String[] fileNames = getFileNames(name);
+
+		if (fileNames == null) {
 			return null;
 		}
 
