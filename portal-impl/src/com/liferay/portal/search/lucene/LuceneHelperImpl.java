@@ -150,7 +150,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		if (like) {
 			for (String value : values) {
 				value = value.toLowerCase();
-
 				value = StringUtil.replace(
 					value, StringPool.PERCENT, StringPool.BLANK);
 
