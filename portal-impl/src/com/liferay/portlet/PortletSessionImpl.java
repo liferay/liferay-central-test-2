@@ -112,7 +112,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			Object value = getAttribute(name);
+			Object value = getAttribute(name, scope);
 
 			map.put(name, value);
 		}
