@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
 <%
+String portletResource = ParamUtil.getString(request, "portletResource");
+
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
 
@@ -58,6 +60,7 @@ String newRecordSetKey = ParamUtil.getString(request, "newRecordSetKey");
 </portlet:actionURL>
 
 <aui:form action="<%= editRecordSetURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRecordSet();" %>'>
+	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
