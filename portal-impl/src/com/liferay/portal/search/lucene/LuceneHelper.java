@@ -24,7 +24,6 @@ import java.io.OutputStream;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
@@ -57,13 +56,10 @@ public interface LuceneHelper {
 		BooleanQuery booleanQuery, String field, String[] values, boolean like);
 
 	public void addTerm(
-			BooleanQuery booleanQuery, String field, String value, boolean like)
-		throws ParseException;
+		BooleanQuery booleanQuery, String field, String value, boolean like);
 
 	public void addTerm(
-			BooleanQuery booleanQuery, String field, String[] values,
-			boolean like)
-		throws ParseException;
+		BooleanQuery booleanQuery, String field, String[] values, boolean like);
 
 	public int countScoredFieldNames(Query query, String[] fieldNames);
 

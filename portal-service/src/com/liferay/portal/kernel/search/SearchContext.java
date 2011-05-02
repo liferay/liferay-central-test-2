@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.io.Serializable;
 
@@ -185,7 +186,9 @@ public class SearchContext implements Serializable {
 	}
 
 	public void setLocale(Locale locale) {
-		_locale = locale;
+		if (locale != null) {
+			_locale = locale;
+		}
 	}
 
 	public void setNodeIds(long[] nodeIds) {
@@ -237,7 +240,7 @@ public class SearchContext implements Serializable {
 	private boolean _includeLiveGroups = true;
 	private boolean _includeStagingGroups = true;
 	private String _keywords;
-	private Locale _locale;
+	private Locale _locale = LocaleUtil.getDefault();
 	private long[] _nodeIds;
 	private long _ownerUserId;
 	private String[] _portletIds;

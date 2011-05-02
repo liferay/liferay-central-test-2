@@ -408,6 +408,10 @@ public class UserIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
+		if (params == null) {
+			return;
+		}
+
 		String expandoAttributes = (String)params.get("expandoAttributes");
 
 		if (Validator.isNotNull(expandoAttributes)) {

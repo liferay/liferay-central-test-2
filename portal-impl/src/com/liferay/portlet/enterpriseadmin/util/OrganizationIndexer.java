@@ -299,6 +299,10 @@ public class OrganizationIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
+		if (params == null) {
+			return;
+		}
+
 		Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
 			"organizationsTree");
 
@@ -311,7 +315,9 @@ public class OrganizationIndexer extends BaseIndexer {
 					Field.ORGANIZATION_ID, -1);
 			}
 			else if (leftAndRightOrganizationIds.length > 0) {
-				for (Long[] leftAndRightOrganizationId : leftAndRightOrganizationIds) {
+				for (Long[] leftAndRightOrganizationId :
+						leftAndRightOrganizationIds) {
+
 					organizationsTreeQuery.addNumericRangeTerm(
 						"leftOrganizationId", leftAndRightOrganizationId[0],
 						leftAndRightOrganizationId[1]);
@@ -338,6 +344,10 @@ public class OrganizationIndexer extends BaseIndexer {
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
 
 		String expandoAttributes = (String)params.get("expandoAttributes");
 

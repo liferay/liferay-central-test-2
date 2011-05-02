@@ -72,7 +72,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -112,12 +111,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
 
-		try {
-			addTerm(booleanQuery, field, value, false);
-		}
-		catch (ParseException pe) {
-			_log.error(pe, pe);
-		}
+		addTerm(booleanQuery, field, value, false);
 	}
 
 	public void addNumericRangeTerm(
@@ -178,8 +172,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void addTerm(
-			BooleanQuery booleanQuery, String field, String value, boolean like)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
 		if (Validator.isNull(value)) {
 			return;
@@ -192,13 +185,11 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		value = StringUtil.replace(value, StringPool.STAR, StringPool.BLANK);
 
-		Query query = null;
-
 		try {
 			QueryParser queryParser = new QueryParser(
 				_version, field, getAnalyzer());
 
-			query = queryParser.parse(value);
+			Query query = queryParser.parse(value);
 
 			_includeIfUnique(
 				booleanQuery, query, BooleanClause.Occur.SHOULD, like);
@@ -209,9 +200,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void addTerm(
-			BooleanQuery booleanQuery, String field, String[] values,
-			boolean like)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, String[] values,
+		boolean like) {
 
 		for (String value : values) {
 			addTerm(booleanQuery, field, value, like);
@@ -631,65 +621,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
-	private void _includeIfUnique(
-		BooleanQuery booleanQuery, Query query, BooleanClause.Occur occur,
-		boolean like) {
-
-		if (query instanceof TermQuery) {
-			Set<Term> terms = new HashSet<Term>();
-
-			query.extractTerms(terms);
-
-			for (Term term : terms) {
-				String termValue = term.text();
-
-				if (like) {
-					term = term.createTerm(
-						StringPool.STAR.concat(termValue).concat(
-							StringPool.STAR));
-
-					query = new WildcardQuery(term);
-				}
-				else {
-					query = new TermQuery(term);
-				}
-
-				boolean included = false;
-
-				for (BooleanClause clause : booleanQuery.getClauses()) {
-					if (clause.getQuery().equals(query)) {
-						included = true;
-					}
-				}
-
-				if (!included) {
-					booleanQuery.add(query, occur);
-				}
-			}
-		}
-		else if (query instanceof BooleanQuery) {
-			BooleanQuery curQuery = (BooleanQuery)query;
-
-			for (BooleanClause clause : curQuery.getClauses()) {
-				_includeIfUnique(
-					booleanQuery, clause.getQuery(), clause.getOccur(), like);
-			}
-		}
-		else {
-			boolean included = false;
-
-			for (BooleanClause clause : booleanQuery.getClauses()) {
-				if (clause.getQuery().equals(query)) {
-					included = true;
-				}
-			}
-
-			if (!included) {
-				booleanQuery.add(query, occur);
-			}
-		}
-	}
-
 	private ObjectValuePair<String, URL>
 			_getBootupClusterNodeObjectValuePair(Address bootupAddress)
 		throws SystemException {
@@ -783,6 +714,66 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		return indexAccessor;
+	}
+
+	private void _includeIfUnique(
+		BooleanQuery booleanQuery, Query query, BooleanClause.Occur occur,
+		boolean like) {
+
+		if (query instanceof TermQuery) {
+			Set<Term> terms = new HashSet<Term>();
+
+			query.extractTerms(terms);
+
+			for (Term term : terms) {
+				String termValue = term.text();
+
+				if (like) {
+					term = term.createTerm(
+						StringPool.STAR.concat(termValue).concat(
+							StringPool.STAR));
+
+					query = new WildcardQuery(term);
+				}
+				else {
+					query = new TermQuery(term);
+				}
+
+				boolean included = false;
+
+				for (BooleanClause booleanClause : booleanQuery.getClauses()) {
+					if (query.equals(booleanClause.getQuery())) {
+						included = true;
+					}
+				}
+
+				if (!included) {
+					booleanQuery.add(query, occur);
+				}
+			}
+		}
+		else if (query instanceof BooleanQuery) {
+			BooleanQuery curBooleanQuery = (BooleanQuery)query;
+
+			for (BooleanClause booleanClause : curBooleanQuery.getClauses()) {
+				_includeIfUnique(
+					booleanQuery, booleanClause.getQuery(),
+					booleanClause.getOccur(), like);
+			}
+		}
+		else {
+			boolean included = false;
+
+			for (BooleanClause booleanClause : booleanQuery.getClauses()) {
+				if (query.equals(booleanClause.getQuery())) {
+					included = true;
+				}
+			}
+
+			if (!included) {
+				booleanQuery.add(query, occur);
+			}
+		}
 	}
 
 	private class LoadIndexClusterEventListener

@@ -256,6 +256,18 @@ public abstract class BaseIndexer implements Indexer {
 			new IndexerPostProcessor[indexerPostProcessorsList.size()]);
 	}
 
+	protected void addLocalizedSearchTerm(
+			BooleanQuery searchQuery, SearchContext searchContext,
+			String field, boolean like)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, field, like);
+		addSearchTerm(
+			searchQuery, searchContext,
+			DocumentImpl.getLocalizedName(searchContext.getLocale(), field),
+			like);
+	}
+
 	protected void addSearchAssetCategoryIds(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {

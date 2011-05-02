@@ -220,33 +220,16 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		LuceneHelperUtil.addRequiredTerm(_booleanQuery, field, value, like);
 	}
 
-	public void addTerm(String field, long value) throws ParseException {
-		try {
-			LuceneHelperUtil.addTerm(_booleanQuery, field, value);
-		}
-		catch (org.apache.lucene.queryParser.ParseException pe) {
-			throw new ParseException(pe.getMessage());
-		}
+	public void addTerm(String field, long value) {
+		LuceneHelperUtil.addTerm(_booleanQuery, field, value);
 	}
 
-	public void addTerm(String field, String value) throws ParseException {
-		try {
-			LuceneHelperUtil.addTerm(_booleanQuery, field, value);
-		}
-		catch (org.apache.lucene.queryParser.ParseException pe) {
-			throw new ParseException(pe.getMessage());
-		}
+	public void addTerm(String field, String value) {
+		LuceneHelperUtil.addTerm(_booleanQuery, field, value);
 	}
 
-	public void addTerm(String field, String value, boolean like)
-		throws ParseException {
-
-		try {
-			LuceneHelperUtil.addTerm(_booleanQuery, field, value, like);
-		}
-		catch (org.apache.lucene.queryParser.ParseException pe) {
-			throw new ParseException(pe.getMessage());
-		}
+	public void addTerm(String field, String value, boolean like) {
+		LuceneHelperUtil.addTerm(_booleanQuery, field, value, like);
 	}
 
 	public List<BooleanClause> clauses() {

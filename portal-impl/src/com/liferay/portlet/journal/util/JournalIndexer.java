@@ -381,35 +381,18 @@ public class JournalIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		Locale locale = searchContext.getLocale();
-
-		if (locale == null) {
-			locale = LocaleUtil.getDefault();
-		}
-
-		String languageSufix = StringPool.UNDERLINE.concat(locale.toString());
-
-		addSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
-		addSearchTerm(
-			searchQuery, searchContext, Field.CONTENT.concat(languageSufix),
-			true);
-		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
-		addSearchTerm(
-			searchQuery, searchContext, Field.DESCRIPTION.concat(languageSufix),
-			true);
+		addLocalizedSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
+		addLocalizedSearchTerm(
+			searchQuery, searchContext, Field.DESCRIPTION, true);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
-		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
-		addSearchTerm(
-			searchQuery, searchContext, Field.TITLE.concat(languageSufix),
-			true);
+		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
-		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (Validator.isNull(params)) {
+		if (params == null) {
 			return;
 		}
 

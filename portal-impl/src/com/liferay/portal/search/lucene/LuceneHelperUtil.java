@@ -27,7 +27,6 @@ import java.util.Date;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
@@ -243,31 +242,26 @@ public class LuceneHelperUtil {
 	}
 
 	public static void addTerm(
-			BooleanQuery booleanQuery, String field, long value)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, long value) {
 
 		addTerm(booleanQuery, field, String.valueOf(value));
 	}
 
 	public static void addTerm(
-			BooleanQuery booleanQuery, String field, String value)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, String value) {
 
 		addTerm(booleanQuery, field, value, false);
 	}
 
 	public static void addTerm(
-			BooleanQuery booleanQuery, String field, String value,
-			boolean like)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
 		getLuceneHelper().addTerm(booleanQuery, field, value, like);
 	}
 
 	public static void addTerm(
-			BooleanQuery booleanQuery, String field, String[] values,
-			boolean like)
-		throws ParseException {
+		BooleanQuery booleanQuery, String field, String[] values,
+		boolean like) {
 
 		getLuceneHelper().addTerm(booleanQuery, field, values, like);
 	}
