@@ -193,7 +193,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		_companyPortletsPool.removeAll();
 	}
 
-	public Portlet clonePortlet(String portletId) throws SystemException {
+	/**
+	 * @deprecated {@link #clonePortlet(String)}
+	 */
+	public Portlet clonePortlet(long companyId, String portletId) {
+		return clonePortlet(portletId);
+	}
+
+	public Portlet clonePortlet(String portletId) {
 		Portlet portlet = getPortletById(portletId);
 
 		return (Portlet)portlet.clone();

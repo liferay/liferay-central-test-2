@@ -232,9 +232,14 @@ public interface PortletLocalService {
 
 	public void clearCache();
 
+	/**
+	* @deprecated {@link #clonePortlet(String)}
+	*/
+	public com.liferay.portal.model.Portlet clonePortlet(long companyId,
+		java.lang.String portletId);
+
 	public com.liferay.portal.model.Portlet clonePortlet(
-		java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		java.lang.String portletId);
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)

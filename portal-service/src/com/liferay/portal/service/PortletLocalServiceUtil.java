@@ -265,9 +265,16 @@ public class PortletLocalServiceUtil {
 		getService().clearCache();
 	}
 
+	/**
+	* @deprecated {@link #clonePortlet(String)}
+	*/
 	public static com.liferay.portal.model.Portlet clonePortlet(
-		java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		long companyId, java.lang.String portletId) {
+		return getService().clonePortlet(companyId, portletId);
+	}
+
+	public static com.liferay.portal.model.Portlet clonePortlet(
+		java.lang.String portletId) {
 		return getService().clonePortlet(portletId);
 	}
 

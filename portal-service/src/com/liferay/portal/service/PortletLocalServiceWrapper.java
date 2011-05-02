@@ -254,9 +254,16 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		_portletLocalService.clearCache();
 	}
 
+	/**
+	* @deprecated {@link #clonePortlet(String)}
+	*/
+	public com.liferay.portal.model.Portlet clonePortlet(long companyId,
+		java.lang.String portletId) {
+		return _portletLocalService.clonePortlet(companyId, portletId);
+	}
+
 	public com.liferay.portal.model.Portlet clonePortlet(
-		java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		java.lang.String portletId) {
 		return _portletLocalService.clonePortlet(portletId);
 	}
 
