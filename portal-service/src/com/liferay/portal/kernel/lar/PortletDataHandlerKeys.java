@@ -89,6 +89,9 @@ public class PortletDataHandlerKeys {
 
 	public static final String THEME_REFERENCE = "THEME_REFERENCE";
 
+	public static final String UPDATE_LAST_PUBLISH_DATE =
+		"UPDATE_LAST_PUBLISH_DATE";
+
 	public static final String USER_ID_STRATEGY = "USER_ID_STRATEGY";
 
 	public static final String USER_PERMISSIONS = "USER_PERMISSIONS";

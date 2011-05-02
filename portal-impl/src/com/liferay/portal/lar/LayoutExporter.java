@@ -194,6 +194,8 @@ public class LayoutExporter {
 			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED);
 		boolean publishToRemote = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
+		boolean updateLastPublishDate =  MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export categories " + exportCategories);
@@ -489,7 +491,9 @@ public class LayoutExporter {
 			return zipWriter.getFile();
 		}
 		finally {
-			updateLastPublishDate(layoutSet, lastPublishDate);
+			if (updateLastPublishDate) {
+				updateLastPublishDate(layoutSet, lastPublishDate);
+			}
 		}
 	}
 

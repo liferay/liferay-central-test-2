@@ -621,6 +621,9 @@ public class StagingImpl implements Staging {
 			PortletDataHandlerKeys.THEME,
 			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
+			PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			new String[] {UserIdStrategy.CURRENT_USER_ID});
 		parameterMap.put(
@@ -694,6 +697,14 @@ public class StagingImpl implements Staging {
 			parameterMap.put(
 				PortletDataHandlerKeys.THEME,
 				new String[] {Boolean.FALSE.toString()});
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE,
+				new String[] {Boolean.TRUE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
