@@ -232,18 +232,20 @@ public interface PortletLocalService {
 
 	public void clearCache();
 
-	public com.liferay.portal.model.Portlet clonePortlet(long companyId,
+	public com.liferay.portal.model.Portlet clonePortlet(
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet,
 		java.lang.String[] categoryNames)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
 
