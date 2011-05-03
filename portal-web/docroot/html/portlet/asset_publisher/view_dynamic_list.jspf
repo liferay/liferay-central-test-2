@@ -32,71 +32,18 @@ int total = 0;
 if (assetVocabularyId > 0) {
 	AssetVocabulary assetVocabulary = AssetVocabularyLocalServiceUtil.getVocabulary(assetVocabularyId);
 
-	long[] originalGroupIds = groupIds;
+	List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-	long assetVocabularyGroupId = assetVocabulary.getGroupId();
-
-	if (ArrayUtil.contains(groupIds, assetVocabularyGroupId)) {
-		assetEntryQuery.setGroupIds(new long[]{ assetVocabularyGroupId });
-
-		List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getVocabularyRootCategories(assetVocabulary.getVocabularyId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-		if (!anyAssetType) {
-			assetEntryQuery.setClassNameIds(classNameIds);
-		}
-
-		for (AssetCategory assetCategory : assetCategories) {
-			long[] oldAllCategoryIds = assetEntryQuery.getAllCategoryIds();
-
-			long[] newAllAssetCategoryIds = ArrayUtil.append(oldAllCategoryIds, assetCategory.getCategoryId());
-
-			assetEntryQuery.setAllCategoryIds(newAllAssetCategoryIds);
-
-			int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
-
-			total += groupTotal;
-
-			List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
-
-			if (!results.isEmpty()) {
-				searchContainer.setResults(results);
-
-				request.setAttribute("view.jsp-results", results);
-%>
-
-			<h3 class="asset-entries-group-label"><%= assetCategory.getName() %></h3>
-
-			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
-
-<%
-			}
-
-			if (groupTotal > 0) {
-				if ((end > 0) && (end > groupTotal)) {
-					end -= groupTotal;
-				}
-				else {
-					end = 0;
-				}
-
-				if ((start > 0) && (start > groupTotal)) {
-					start -= groupTotal;
-				}
-				else {
-					start = 0;
-				}
-			}
-
-			assetEntryQuery.setAllCategoryIds(oldAllCategoryIds);
-			assetEntryQuery.setEnd(end);
-			assetEntryQuery.setStart(start);
-		}
+	if (!anyAssetType) {
+		assetEntryQuery.setClassNameIds(classNameIds);
 	}
 
-	long[] remainedGroupIds = ArrayUtil.remove(originalGroupIds, assetVocabularyGroupId);
+	for (AssetCategory assetCategory : assetCategories) {
+		long[] oldAllCategoryIds = assetEntryQuery.getAllCategoryIds();
 
-	if (remainedGroupIds.length > 0) {
-		assetEntryQuery.setGroupIds(remainedGroupIds);
+		long[] newAllAssetCategoryIds = ArrayUtil.append(oldAllCategoryIds, assetCategory.getCategoryId());
+
+		assetEntryQuery.setAllCategoryIds(newAllAssetCategoryIds);
 
 		int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
@@ -110,12 +57,32 @@ if (assetVocabularyId > 0) {
 			request.setAttribute("view.jsp-results", results);
 %>
 
-			<h3 class="asset-entries-group-label"><liferay-ui:message key="other" /></h3>
+			<h3 class="asset-entries-group-label"><%= assetCategory.getName() %></h3>
 
 			<%@ include file="/html/portlet/asset_publisher/view_dynamic_list_asset.jspf" %>
 
 <%
 		}
+
+		if (groupTotal > 0) {
+			if ((end > 0) && (end > groupTotal)) {
+				end -= groupTotal;
+			}
+			else {
+				end = 0;
+			}
+
+			if ((start > 0) && (start > groupTotal)) {
+				start -= groupTotal;
+			}
+			else {
+				start = 0;
+			}
+		}
+
+		assetEntryQuery.setAllCategoryIds(oldAllCategoryIds);
+		assetEntryQuery.setEnd(end);
+		assetEntryQuery.setStart(start);
 	}
 
 	searchContainer.setTotal(total);
