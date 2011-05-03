@@ -123,7 +123,6 @@ public class MBUtil {
 		}
 		else {
 			portletURL.setParameter("struts_action", "/message_boards/view");
-			portletURL.setParameter("tabs1", "categories");
 		}
 
 		List<MBCategory> ancestorCategories = category.getAncestors();
@@ -166,7 +165,6 @@ public class MBUtil {
 
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
-		portletURL.setParameter("tabs1", "categories");
 		portletURL.setParameter(
 			"messageId", String.valueOf(message.getMessageId()));
 
