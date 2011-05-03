@@ -32,6 +32,7 @@ long layoutId = ((Long)request.getAttribute("edit_pages.jsp-layoutId")).longValu
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+PortletURL redirectURL = (PortletURL)request.getAttribute("edit_pages.jsp-redirectURL");
 
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
@@ -46,7 +47,9 @@ String[][] categorySections = {mainSections};
 
 <div class="header-row title">
 	<div class="header-row-content">
-		<aui:button-row cssClass="edit-toolbar" id='<%= renderResponse.getNamespace() + "layoutToolbar" %>'>
+		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
+
+		<aui:button-row cssClass="edit-toolbar" id='<%= portletResponse.getNamespace() + "layoutToolbar" %>'>
 		</aui:button-row>
 	</div>
 </div>
@@ -55,9 +58,9 @@ String[][] categorySections = {mainSections};
 	<portlet:param name="struts_action" value="/manage_pages/edit_layouts" />
 </portlet:actionURL>
 
-<aui:form action="<%= editLayoutURL %>" cssClass="edit-layout-form"  enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayout();" %>'>
+<aui:form action="<%= editLayoutURL %>" cssClass="edit-layout-form"  enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + portletResponse.getNamespace() + "saveLayout();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value='<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid", selPlid) %>' />
+	<aui:input name="redirect" type="hidden" value='<%= HttpUtil.addParameter(redirectURL.toString(), portletResponse.getNamespace() + "selPlid", selPlid) %>' />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
@@ -76,6 +79,7 @@ String[][] categorySections = {mainSections};
 			modelResourceDescription="<%= selLayout.getName(locale) %>"
 			resourcePrimKey="<%= String.valueOf(selLayout.getPlid()) %>"
 			var="permissionURL"
+			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 		/>
 
 		<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar">
@@ -152,7 +156,7 @@ String[][] categorySections = {mainSections};
 									<c:otherwise>
 										if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
 											document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-											document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid", selLayout.getParentPlid()) %>';
+											document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HttpUtil.addParameter(redirectURL.toString(), portletResponse.getNamespace() + "selPlid", selLayout.getParentPlid()) %>';
 											submitForm(document.<portlet:namespace />fm);
 										}
 									</c:otherwise>
@@ -175,10 +179,6 @@ String[][] categorySections = {mainSections};
 		jspPath="/html/portlet/layouts_admin/layout/"
 	/>
 </aui:form>
-
-<liferay-util:html-top>
-	<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
-</liferay-util:html-top>
 
 <aui:script>
 	function <portlet:namespace />saveLayout(action) {

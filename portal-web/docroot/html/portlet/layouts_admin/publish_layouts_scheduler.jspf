@@ -34,6 +34,7 @@ else if (cmd.equals("publish_to_remote")) {
 ResourceURL scheduledPublishEventsURL = renderResponse.createResourceURL();
 
 scheduledPublishEventsURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
+scheduledPublishEventsURL.setParameter(Constants.CMD, ActionKeys.PUBLISH_STAGING);
 
 long targetGroupId = liveGroupId;
 

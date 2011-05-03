@@ -25,7 +25,7 @@ Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+PortletURL redirectURL = (PortletURL)request.getAttribute("edit_pages.jsp-redirectURL");
 
 Theme selTheme = null;
 ColorScheme selColorScheme = null;
@@ -76,7 +76,7 @@ else {
 		taglibLabel = LanguageUtil.get(pageContext, "use-the-same-look-and-feel-of-the-pages-in-which-this-template-is-used");
 	}
 	else {
-		taglibLabel = LanguageUtil.format(pageContext, "use-the-same-look-and-feel-of-the-x-x", new String[] {rootNodeName, portletURL.toString()});
+		taglibLabel = LanguageUtil.format(pageContext, "use-the-same-look-and-feel-of-the-x-x", new String[] {rootNodeName, redirectURL.toString()});
 	}
 	%>
 

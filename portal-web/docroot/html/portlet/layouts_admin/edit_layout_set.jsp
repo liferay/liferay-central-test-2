@@ -31,7 +31,7 @@ LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLay
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+PortletURL redirectURL = (PortletURL)request.getAttribute("edit_pages.jsp-redirectURL");
 
 int pagesCount = 0;
 
@@ -71,9 +71,11 @@ String[][] categorySections = {mainSections};
 
 <div class="header-row">
 	<div class="header-row-content">
-		<aui:button-row cssClass="edit-toolbar" id='<%= renderResponse.getNamespace() + "layoutSetToolbar" %>'>
+		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
+
+		<aui:button-row cssClass="edit-toolbar" id='<%= portletResponse.getNamespace() + "layoutSetToolbar" %>'>
 			<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
-				<c:if test="<%= SessionErrors.contains(renderRequest, LayoutImportException.class.getName()) || SessionErrors.contains(renderRequest, LARFileException.class.getName()) || SessionErrors.contains(renderRequest, LARTypeException.class.getName()) %>">
+				<c:if test="<%= SessionErrors.contains(portletRequest, LayoutImportException.class.getName()) || SessionErrors.contains(portletRequest, LARFileException.class.getName()) || SessionErrors.contains(portletRequest, LARTypeException.class.getName()) %>">
 					<liferay-util:html-top>
 						<div class="yui3-aui-helper-hidden" id="<portlet:namespace />importPage">
 							<liferay-util:include page="/html/portlet/layouts_admin/export_import.jsp">
@@ -106,10 +108,6 @@ String[][] categorySections = {mainSections};
 <c:if test="<%= liveGroup.isStaged() %>">
 	<liferay-util:include page="/html/portlet/layouts_admin/staging_toolbar.jsp" />
 </c:if>
-
-<liferay-util:html-top>
-	<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
-</liferay-util:html-top>
 
 <aui:script use="aui-dialog,aui-toolbar">
 	var popUp;
@@ -230,7 +228,7 @@ String[][] categorySections = {mainSections};
 									<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
 									<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="redirectWindowState" value="<%= renderRequest.getWindowState().toString() %>" />
+									<portlet:param name="redirectWindowState" value="<%= portletRequest.getWindowState().toString() %>" />
 									<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
 								</portlet:renderURL>
 
@@ -273,9 +271,9 @@ String[][] categorySections = {mainSections};
 	<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set" />
 </portlet:actionURL>
 
-<aui:form action="<%= editLayoutSetURL %>" cssClass="edit-layoutset-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayoutset();" %>'>
+<aui:form action="<%= editLayoutSetURL %>" cssClass="edit-layoutset-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + portletResponse.getNamespace() + "saveLayoutset();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirectURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />

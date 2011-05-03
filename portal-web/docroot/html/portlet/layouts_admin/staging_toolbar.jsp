@@ -22,7 +22,7 @@ Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+PortletURL redirectURL = (PortletURL)request.getAttribute("edit_pages.jsp-redirectURL");
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
 
@@ -33,7 +33,7 @@ publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 publishToLiveURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
 publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
-publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
+publishToLiveURL.setParameter("pagesRedirect", redirectURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
 publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
 publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
 
@@ -105,7 +105,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 					<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
 						<portlet:param name="struts_action" value="/layouts_admin/publish_layouts" />
 						<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
-						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+						<portlet:param name="pagesRedirect" value='<%= redirectURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 					</portlet:renderURL>
 

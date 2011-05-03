@@ -62,5 +62,23 @@
 <%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 
 <%
+PortletResponse portletResponse = null;
+
+if (renderResponse != null) {
+	portletResponse = renderResponse;
+}
+else {
+	portletResponse = resourceResponse;
+}
+
+PortletRequest portletRequest = null;
+
+if (renderRequest != null) {
+	portletRequest = renderRequest;
+}
+else {
+	portletRequest = resourceRequest;
+}
+
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

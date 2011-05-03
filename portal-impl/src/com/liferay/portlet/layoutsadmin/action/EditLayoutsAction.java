@@ -295,9 +295,23 @@ public class EditLayoutsAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(
-				"/html/portlet/layouts_admin/scheduled_publishing_events.jsp");
+		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
+
+		PortletRequestDispatcher portletRequestDispatcher = null;
+
+		if (cmd.equals(ActionKeys.PUBLISH_STAGING)) {
+			portletRequestDispatcher =
+				portletConfig.getPortletContext().getRequestDispatcher(
+					"/html/portlet/layouts_admin/" +
+						"scheduled_publishing_events.jsp");
+		}
+		else {
+			getGroup(resourceRequest);
+
+			portletRequestDispatcher =
+				portletConfig.getPortletContext().getRequestDispatcher(
+					"/html/portlet/layouts_admin/view_resources.jsp");
+		}
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}

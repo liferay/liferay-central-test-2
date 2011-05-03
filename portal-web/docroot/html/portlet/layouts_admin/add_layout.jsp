@@ -26,7 +26,7 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
 long layoutId = ((Long)request.getAttribute("edit_pages.jsp-layoutId")).longValue();
 
-PortletURL portletURL = ((PortletURL)request.getAttribute("edit_pages.jsp-portletURL"));
+PortletURL redirectURL = ((PortletURL)request.getAttribute("edit_pages.jsp-redirectURL"));
 
 List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 %>
@@ -40,7 +40,7 @@ List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(compa
 
 	<aui:form action="<%= editPageURL %>" enctype="multipart/form-data" method="post" name="fm2">
 		<aui:input id="addLayoutCmd" name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-		<aui:input id="addLayoutRedirect" name="redirect" type="hidden" value='<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid"  ,selPlid) %>' />
+		<aui:input id="addLayoutRedirect" name="redirect" type="hidden" value='<%= HttpUtil.addParameter(redirectURL.toString(), portletResponse.getNamespace() + "selPlid"  ,selPlid) %>' />
 		<aui:input id="addLayoutGroupId" name="groupId" type="hidden" value="<%= groupId %>" />
 		<aui:input id="addLayoutLiveGroupId" name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 		<aui:input id="addLayoutStagingGroupId" name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
@@ -51,8 +51,7 @@ List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(compa
 			<aui:input name="name" />
 
 			<c:if test="<%= !layoutPrototypes.isEmpty() %>">
-				<aui:select label="template" name="layoutPrototypeId">
-					<aui:option selected="<%= true %>" value="none" />
+				<aui:select label="template" name="layoutPrototypeId" showEmptyOption="<%= true %>">
 
 					<%
 					for (LayoutPrototype layoutPrototype : layoutPrototypes) {

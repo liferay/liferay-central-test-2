@@ -26,7 +26,7 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 UnicodeProperties groupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+PortletURL redirectURL = (PortletURL)request.getAttribute("edit_pages.jsp-redirectURL");
 
 List selLayoutChildren = null;
 
@@ -51,7 +51,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 <liferay-ui:tabs
 	names="<%= tabs4Names %>"
 	param="tabs4"
-	url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
+	url='<%= redirectURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
 />
 
 <aui:input name="parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>" />

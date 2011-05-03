@@ -20,7 +20,7 @@
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
-PortletURL portletURL = ((PortletURL)request.getAttribute("edit_pages.jsp-portletURL"));
+PortletURL redirectURL = ((PortletURL)request.getAttribute("edit_pages.jsp-redirectURL"));
 %>
 
 <div class="yui3-aui-helper-hidden" data-namespace="<portlet:namespace />" id="addBranch">
@@ -33,7 +33,7 @@ PortletURL portletURL = ((PortletURL)request.getAttribute("edit_pages.jsp-portle
 	<aui:form action="<%= editLayoutSetBranchURL %>" enctype="multipart/form-data" method="post" name="fm3">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input name="pagesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+		<aui:input name="pagesRedirect" type="hidden" value="<%= redirectURL.toString() %>" />
 		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 		<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
 
