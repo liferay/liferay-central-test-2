@@ -1328,13 +1328,13 @@ public class LayoutTypePortletImpl
 		if (group.isUser()) {
 			selector1 = LayoutTypePortletConstants.STATIC_PORTLET_USER_SELECTOR;
 		}
-		else if (group.isCommunity()) {
-			selector1 =
-				LayoutTypePortletConstants.STATIC_PORTLET_COMMUNITY_SELECTOR;
-		}
 		else if (group.isOrganization()) {
 			selector1 =
 				LayoutTypePortletConstants.STATIC_PORTLET_ORGANIZATION_SELECTOR;
+		}
+		else if (group.isRegularSite()) {
+			selector1 =
+				LayoutTypePortletConstants.STATIC_PORTLET_COMMUNITY_SELECTOR;
 		}
 
 		String selector2 = layout.getFriendlyURL();

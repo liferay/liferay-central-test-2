@@ -133,18 +133,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			PermissionChecker permissionChecker, Group group)
 		throws PortalException, SystemException {
 
-		if (group.isCommunity()) {
-			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					_userId, group.getGroupId(),
-					RoleConstants.SITE_ADMINISTRATOR, true) ||
-				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					_userId, group.getGroupId(),
-					RoleConstants.SITE_OWNER, true)) {
-
-				return true;
-			}
-		}
-		else if (group.isCompany()) {
+		if (group.isCompany()) {
 			if (permissionChecker.isCompanyAdmin()) {
 				return true;
 			}
@@ -198,6 +187,16 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 				organizationId = organization.getParentOrganizationId();
 			}
+		} else if (group.isRegularSite()) {
+			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					_userId, group.getGroupId(),
+					RoleConstants.SITE_ADMINISTRATOR, true) ||
+				UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					_userId, group.getGroupId(),
+					RoleConstants.SITE_OWNER, true)) {
+
+				return true;
+			}
 		}
 
 		return false;
@@ -207,15 +206,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			PermissionChecker permissionChecker, Group group)
 		throws PortalException, SystemException {
 
-		if (group.isCommunity()) {
-			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-					_userId, group.getGroupId(),
-					RoleConstants.SITE_OWNER, true)) {
-
-				return true;
-			}
-		}
-		else if (group.isLayoutPrototype()) {
+		if (group.isLayoutPrototype()) {
 			if (LayoutPrototypePermissionUtil.contains(
 					permissionChecker, group.getClassPK(), ActionKeys.UPDATE)) {
 
@@ -257,6 +248,14 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				}
 
 				organizationId = organization.getParentOrganizationId();
+			}
+		}
+		else if (group.isRegularSite()) {
+			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					_userId, group.getGroupId(),
+					RoleConstants.SITE_OWNER, true)) {
+
+				return true;
 			}
 		}
 		else if (group.isUser()) {

@@ -390,7 +390,7 @@ public class EditLayoutsAction extends PortletAction {
 				ActionKeys.UPDATE);
 		}
 
-		if (group.isCommunity()) {
+		if (group.isRegularSite()) {
 			boolean publishToLive =
 				GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),

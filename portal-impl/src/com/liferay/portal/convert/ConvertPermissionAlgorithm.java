@@ -524,11 +524,11 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 								continue;
 							}
 
-							if (group.isCommunity()) {
-								defaultRole = defaultRoles[0];
-							}
-							else if (group.isOrganization()) {
+							if (group.isOrganization()) {
 								defaultRole = defaultRoles[1];
+							}
+							else if (group.isRegularSite()) {
+								defaultRole = defaultRoles[0];
 							}
 							else if (group.isUser() || group.isUserGroup()) {
 								defaultRole = defaultRoles[2];

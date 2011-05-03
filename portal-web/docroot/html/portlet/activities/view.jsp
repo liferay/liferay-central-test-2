@@ -24,11 +24,11 @@ int end = 10;
 
 List<SocialActivity> activities = null;
 
-if (group.isCommunity()) {
-	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), start, end);
-}
-else if (group.isOrganization()) {
+if (group.isOrganization()) {
 	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getOrganizationId(), start, end);
+}
+else if (group.isRegularSite()) {
+	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), start, end);
 }
 else if (group.isUser()) {
 	activities = SocialActivityLocalServiceUtil.getUserActivities(group.getClassPK(), start, end);

@@ -216,9 +216,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				roles.addAll(userGroupGroupRoles);
 
 				if ((group != null) &&
-					((group.isCommunity() && userGroups.contains(group)) ||
-					 (group.isOrganization() &&
-						userOrgGroups.contains(group)))) {
+					((group.isOrganization() &&
+						userOrgGroups.contains(group)) ||
+					 (group.isRegularSite() && userGroups.contains(group)))) {
 
 					addRequiredMemberRole(group, roles);
 					addTeamRoles(userId, group, roles);
@@ -445,7 +445,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			roles.add(organizationMemberRole);
 		}
-		else if (group.isCommunity()) {
+		else if (group.isSite()) {
 			Role communityMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.SITE_MEMBER);
 

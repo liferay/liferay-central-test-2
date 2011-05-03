@@ -62,11 +62,11 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 				userParams.put("permission", new Long(resource.getResourceId()));
 			}
 			else if (tabs3.equals("available")) {
-				if (group.isCommunity()) {
-					userParams.put("usersGroups", new Long(groupId));
-				}
-				else if (group.isOrganization()) {
+				if (group.isOrganization()) {
 					userParams.put("usersOrgs", new Long(group.getOrganizationId()));
+				}
+				else if (group.isRegularSite()) {
+					userParams.put("usersGroups", new Long(groupId));
 				}
 			}
 			%>

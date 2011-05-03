@@ -3815,22 +3815,7 @@ public class PortalImpl implements Portal {
 
 			Group group = layout.getGroup();
 
-			if (group.isCommunity() || group.isUserGroup()) {
-				long scopeGroupId = themeDisplay.getScopeGroupId();
-
-				if (GroupPermissionUtil.contains(
-						permissionChecker, scopeGroupId,
-						ActionKeys.MANAGE_LAYOUTS) ||
-					GroupPermissionUtil.contains(
-						permissionChecker, scopeGroupId,
-						ActionKeys.PUBLISH_STAGING) ||
-					LayoutPermissionUtil.contains(
-						permissionChecker, layout, ActionKeys.UPDATE)) {
-
-					return true;
-				}
-			}
-			else if (group.isCompany()) {
+			if (group.isCompany()) {
 				if (permissionChecker.isCompanyAdmin()) {
 					return true;
 				}
@@ -3861,6 +3846,21 @@ public class PortalImpl implements Portal {
 				if (OrganizationPermissionUtil.contains(
 						permissionChecker, organizationId,
 						ActionKeys.MANAGE_LAYOUTS)) {
+
+					return true;
+				}
+			}
+			else if (group.isRegularSite() || group.isUserGroup()) {
+				long scopeGroupId = themeDisplay.getScopeGroupId();
+
+				if (GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.MANAGE_LAYOUTS) ||
+					GroupPermissionUtil.contains(
+						permissionChecker, scopeGroupId,
+						ActionKeys.PUBLISH_STAGING) ||
+					LayoutPermissionUtil.contains(
+						permissionChecker, layout, ActionKeys.UPDATE)) {
 
 					return true;
 				}

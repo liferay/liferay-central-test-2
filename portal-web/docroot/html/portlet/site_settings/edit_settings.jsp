@@ -194,7 +194,7 @@ request.setAttribute("edit_settings.jsp-liveGroupTypeSettings", liveGroupTypeSet
 			</tr>
 			</table>
 
-			<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
+			<c:if test="<%= liveGroup.isOrganization() || liveGroup.isRegularSite() %>">
 				<br />
 
 				<liferay-ui:message key="enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages" />
@@ -258,7 +258,7 @@ request.setAttribute("edit_settings.jsp-liveGroupTypeSettings", liveGroupTypeSet
 				</tr>
 				</table>
 
-				<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
+				<c:if test="<%= liveGroup.isOrganization() || liveGroup.isRegularSite() %>">
 					<br />
 
 					<table class="lfr-table">

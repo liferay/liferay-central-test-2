@@ -707,17 +707,7 @@ public class ServicePreAction extends Action {
 		// belong to the community or organization, or by users who can update
 		// the community or organization
 
-		if (group.isCommunity()) {
-			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
-				return true;
-			}
-			else if (GroupPermissionUtil.contains(
-						permissionChecker, groupId, ActionKeys.UPDATE)) {
-
-				return true;
-			}
-		}
-		else if (group.isCompany()) {
+		if (group.isCompany()) {
 			return false;
 		}
 		else if (group.isLayoutPrototype()) {
@@ -770,6 +760,16 @@ public class ServicePreAction extends Action {
 						}
 					}
 				}
+			}
+		}
+		else if (group.isRegularSite()) {
+			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
+				return true;
+			}
+			else if (GroupPermissionUtil.contains(
+						permissionChecker, groupId, ActionKeys.UPDATE)) {
+
+				return true;
 			}
 		}
 		else if (group.isUserGroup()) {
