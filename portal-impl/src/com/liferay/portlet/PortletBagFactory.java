@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
@@ -317,6 +318,39 @@ public class PortletBagFactory {
 		_warFile = warFile;
 	}
 
+	protected String getContent(String fileName) throws Exception {
+		String queryString = HttpUtil.getQueryString(fileName);
+
+		if (Validator.isNull(queryString)) {
+			return StringUtil.read(_classLoader, fileName);
+		}
+
+		int parameterIndex = fileName.indexOf(StringPool.QUESTION);
+
+		String xml = StringUtil.read(
+			_classLoader, fileName.substring(0, parameterIndex));
+
+		Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
+			queryString);
+
+		if (parameterMap == null) {
+			return xml;
+		}
+
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			String name = entry.getKey();
+			String[] values = entry.getValue();
+
+			for (String value : values) {
+				xml = xml.replace("${" + name + "}", value);
+
+				break;
+			}
+		}
+
+		return xml;
+	}
+
 	protected String getPluginPropertyValue(String propertyKey)
 		throws Exception {
 
@@ -580,8 +614,7 @@ public class PortletBagFactory {
 
 		Router router = new RouterImpl();
 
-		String xml = StringUtil.read(
-			_classLoader, portlet.getFriendlyURLRoutes());
+		String xml = getContent(portlet.getFriendlyURLRoutes());
 
 		Document document = SAXReaderUtil.read(xml, true);
 
