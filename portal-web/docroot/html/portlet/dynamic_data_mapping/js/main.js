@@ -44,6 +44,24 @@ AUI().add(
 
 		var TPL_ELEMENT = '<{nodeName}{attributeList}></{nodeName}>';
 
+		A.mix(
+			YUI.AUI.defaults.FormValidator.STRINGS,
+			{
+				structureFieldName: Liferay.Language.get('please-enter-only-alphanumeric-characters'),
+			},
+			true
+		);
+
+		A.mix(
+			YUI.AUI.defaults.FormValidator.RULES,
+			{
+				structureFieldName: function(v){
+					return /^[\w-]+$/.test(v);
+				}
+			},
+			true
+		);
+
 		var LiferayFormBuilder = A.Component.create(
 			{
 				ATTRS: {
@@ -62,10 +80,42 @@ AUI().add(
 						value: STR_BLANK
 					},
 
+					validator: {
+						setter: function(val) {
+							var instance = this;
+
+							var config = A.merge({
+								boundingBox: instance.get('settingsFormNode'),
+
+								rules: {
+									name: {
+										required: true,
+										structureFieldName: true
+									}
+								},
+								fieldStrings: {
+									name: {
+										required: Liferay.Language.get('this-field-is-required')
+									}
+								},
+								on: {
+									errorField: function(event) {
+										instance._tabs.selectTab(1);
+									}
+								},
+								validateOnBlur: true
+							}, val);
+
+							return config;
+						},
+						value: {}
+					},
+
 					strings: {
 						value: {
-							stringDefaultMessage: Liferay.Language.get('drop-fields-here'),
-							stringEmptySelection: Liferay.Language.get('no-field-selected')
+							defaultMessage: Liferay.Language.get('drop-fields-here'),
+							emptySelection: Liferay.Language.get('no-field-selected'),
+							type: Liferay.Language.get('type')
 						}
 					}
 				},
@@ -77,6 +127,8 @@ AUI().add(
 				prototype: {
 					initializer: function() {
 						var instance = this;
+
+						instance.validator = new A.FormValidator(instance.get('validator'));
 
 						instance.addTarget(Liferay.Util.getOpener().Liferay);
 					},
@@ -111,6 +163,14 @@ AUI().add(
 						}
 
 						return value;
+					},
+
+					_afterSelectedChange: function() {
+						var instance = this;
+
+						LiferayFormBuilder.superclass._afterSelectedChange.apply(instance, arguments);
+
+						instance.validator._uiSetValidateOnBlur(true);
 					},
 
 					_appendStructureChildren: function(field, buffer, generateArticleContent) {
@@ -283,6 +343,17 @@ AUI().add(
 						str = A.Text.AccentFold.fold(str);
 
 						return str.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
+					},
+
+					_onClickSettingsButton: function(event) {
+						var instance = this;
+						var target = event.currentTarget;
+
+						LiferayFormBuilder.superclass._onClickSettingsButton.apply(instance, arguments);
+
+						if (target.hasClass('yui3-aui-form-builder-button-save')) {
+							instance.validator.validate();
+						}
 					}
 				}
 			}
@@ -418,6 +489,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-form-builder', 'text']
+		requires: ['aui-form-builder', 'aui-form-validator', 'text']
 	}
 );

@@ -46,6 +46,17 @@
 		}
 	}
 
+	.yui3-aui-field {
+		.yui3-aui-field-content {
+			clear: both;
+			position: relative;
+
+			.yui3-aui-form-validator-message {
+				width: auto;
+			}
+		}
+	}
+
 	.ddm-field-icon-separator {
 		background-image: url(<%= themeImagesPath %>/journal/selection_break.png);
 		background-position: 0px 6px;
