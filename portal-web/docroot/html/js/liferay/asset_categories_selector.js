@@ -20,6 +20,9 @@ AUI().add(
 		 * curEntries (string): The names of the current categories.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
+		 *
+		 * Optional
+		 * isPortalModelResource {boolean}: Whether the asset model is on portal level.
 		 */
 
 		var AssetCategoriesSelector = A.Component.create(
@@ -151,9 +154,19 @@ AUI().add(
 					_getEntries: function(className, callback) {
 						var instance = this;
 
+						var isPortalModelResource = instance.get('isPortalModelResource');
+
+						var groupIds = [];
+
+						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !isPortalModelResource) {
+							groupIds.push(themeDisplay.getParentGroupId());
+						}
+
+						groupIds.push(themeDisplay.getCompanyGroupId());
+
 						Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
 							{
-								groupIds: [themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()],
+								groupIds: [groupIds],
 								className: className
 							},
 							callback

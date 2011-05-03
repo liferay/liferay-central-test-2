@@ -40,6 +40,7 @@ AUI().add(
 		 *
 		 * Optional
 		 * focus {boolean}: Whether the text input should be focused.
+		 * isPortalModelResource {boolean}: Whether the asset model is on portal level.
 		 *
 		 * Callbacks
 		 * contentCallback {function}: Called to get suggested tags.
@@ -84,6 +85,9 @@ AUI().add(
 					},
 					instanceVar: {
 						value: ''
+					},
+					isPortalModelResource: {
+						value: false
 					},
 					hiddenInput: {
 						setter: function(value) {
@@ -246,9 +250,19 @@ AUI().add(
 					_getEntries: function(callback) {
 						var instance = this;
 
+						var isPortalModelResource = instance.get('isPortalModelResource');
+
+						var groupIds = [];
+
+						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !isPortalModelResource) {
+							groupIds.push(themeDisplay.getParentGroupId());
+						}
+
+						groupIds.push(themeDisplay.getCompanyGroupId());
+
 						Liferay.Service.Asset.AssetTag.getGroupsTags(
 							{
-								groupIds: [themeDisplay.getCompanyGroupId(), themeDisplay.getParentGroupId()]
+								groupIds: [groupIds]
 							},
 							callback
 						);

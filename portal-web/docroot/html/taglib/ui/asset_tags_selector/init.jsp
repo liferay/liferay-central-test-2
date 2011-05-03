@@ -20,3 +20,9 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 
 <portlet:defineObjects />
+
+<%!
+private boolean _isPortalModelResource(String modelResource) {
+	return ResourceActionsUtil.isPortalModelResource(modelResource) || modelResource.equals(Group.class.getName());
+}
+%>

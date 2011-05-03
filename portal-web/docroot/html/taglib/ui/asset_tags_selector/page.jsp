@@ -65,7 +65,8 @@ if (curTagsParam != null) {
 			focused: <%= focus %>,
 			hiddenInput: '#<%= namespace + hiddenInput %>',
 			input: '#<%= randomNamespace %>assetTagNames',
-			instanceVar: '<%= namespace + randomNamespace %>'
+			instanceVar: '<%= namespace + randomNamespace %>',
+			isPortalModelResource: <%= _isPortalModelResource(className) %>
 		}
 	).render();
 </aui:script>

@@ -74,7 +74,8 @@ if (Validator.isNotNull(curCategoryIds)) {
 			curEntries: '<%= HtmlUtil.escapeJS(curCategoryNames) %>',
 			curEntryIds: '<%= curCategoryIds %>',
 			hiddenInput: '#<%= namespace + hiddenInput %>',
-			instanceVar: '<%= namespace + randomNamespace %>'
+			instanceVar: '<%= namespace + randomNamespace %>',
+			isPortalModelResource: <%= _isPortalModelResource(className) %>
 		}
 	).render();
 </aui:script>
