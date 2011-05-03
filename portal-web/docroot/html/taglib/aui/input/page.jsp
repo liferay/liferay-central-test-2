@@ -19,6 +19,7 @@
 <%@ page import="java.text.Format" %>
 
 <%
+String baseType = GetterUtil.getString((String)request.getAttribute("aui:input:baseType"));
 Object bean = (Object)request.getAttribute("aui:input:bean");
 boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:input:changesContext"));
 boolean checked = GetterUtil.getBoolean((String)request.getAttribute("aui:input:checked"));
@@ -30,6 +31,7 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 String field = GetterUtil.getString((String)request.getAttribute("aui:input:field"));
 String fieldParam = GetterUtil.getString((String)request.getAttribute("aui:input:fieldParam"));
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:first"));
+String forLabel = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:forLabel"));
 String formName = GetterUtil.getString((String)request.getAttribute("aui:input:formName"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
@@ -65,28 +67,6 @@ if (Validator.isNull(label) && changesContext) {
 }
 else if (Validator.isNotNull(title)) {
 	title = LanguageUtil.get(pageContext, title);
-}
-
-String baseType = type;
-String forLabel = id;
-
-if ((model != null) && Validator.isNull(type)) {
-	baseType = ModelHintsUtil.getType(model.getName(), field);
-
-	if (Validator.isNotNull(fieldParam)) {
-		forLabel = namespace + fieldParam;
-	}
-
-	if (ModelHintsUtil.isLocalized(model.getName(), field)) {
-		Locale defaultLocale = LocaleUtil.getDefault();
-		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-		forLabel += StringPool.UNDERLINE + defaultLanguageId;
-	}
-}
-
-if (Validator.isNull(baseType)){
-	baseType = "text";
 }
 
 boolean checkboxField = baseType.equals("checkbox") || baseType.equals("boolean");

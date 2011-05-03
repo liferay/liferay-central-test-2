@@ -16,6 +16,7 @@ package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Tuple;
@@ -26,6 +27,7 @@ import com.liferay.util.PwdGenerator;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -317,6 +319,31 @@ public class InputTag extends IncludeTag {
 				"aui:model-context:model");
 		}
 
+		_forLabel = id;
+
+		String baseType = null;
+
+		if ((model != null) && Validator.isNull(_type)) {
+			baseType = ModelHintsUtil.getType(model.getName(), field);
+
+			if (Validator.isNotNull(_fieldParam)) {
+				_forLabel = _fieldParam;
+			}
+
+			if (ModelHintsUtil.isLocalized(model.getName(), field)) {
+				Locale defaultLocale = LocaleUtil.getDefault();
+				String defaultLanguageId = LocaleUtil.toLanguageId(
+					defaultLocale);
+
+				_forLabel += StringPool.UNDERLINE + defaultLanguageId;
+			}
+		}
+
+		if (Validator.isNull(baseType)) {
+			baseType = "text";
+		}
+
+		request.setAttribute("aui:input:baseType", baseType);
 		request.setAttribute("aui:input:bean", bean);
 		request.setAttribute(
 			"aui:input:changesContext", String.valueOf(_changesContext));
@@ -330,6 +357,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:field", field);
 		request.setAttribute("aui:input:fieldParam", _fieldParam);
 		request.setAttribute("aui:input:first", String.valueOf(_first));
+		request.setAttribute("aui:input:forLabel", _forLabel);
 		request.setAttribute("aui:input:formName", formName);
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", id);
@@ -383,7 +411,7 @@ public class InputTag extends IncludeTag {
 		List<ValidatorTag> validatorTags = ListUtil.fromCollection(
 			_validators.values());
 
-		validatorTagsMap.put(_name, validatorTags);
+		validatorTagsMap.put(_forLabel, validatorTags);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
@@ -400,6 +428,7 @@ public class InputTag extends IncludeTag {
 	private String _field;
 	private String _fieldParam;
 	private boolean _first;
+	private String _forLabel;
 	private String _formName;
 	private String _helpMessage;
 	private String _id;
