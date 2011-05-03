@@ -16,6 +16,8 @@ package com.liferay.portal.googleapps;
 
 import com.liferay.portal.kernel.googleapps.GoogleAppsException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Http;
@@ -93,11 +95,19 @@ public class GHelperUtil {
 		throws GoogleAppsException {
 
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("getDocument request " + url);
+			}
+
 			Http.Options options = _getOptions(gAuthenticator);
 
 			options.setLocation(url);
 
 			String xml = HttpUtil.URLtoString(options);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("getDocument response " + xml);
+			}
 
 			return SAXReaderUtil.read(new UnsyncStringReader(xml));
 		}
@@ -153,6 +163,10 @@ public class GHelperUtil {
 		throws GoogleAppsException {
 
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("submitAdd request " + url);
+			}
+
 			Http.Options options = _getOptions(gAuthenticator);
 
 			options.setBody(
@@ -161,7 +175,11 @@ public class GHelperUtil {
 			options.setLocation(url);
 			options.setPost(true);
 
-			HttpUtil.URLtoString(options);
+			String response = HttpUtil.URLtoString(options);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("submitAdd response " + response);
+			}
 		}
 		catch (IOException ioe) {
 			throw new GoogleAppsException(ioe);
@@ -172,12 +190,20 @@ public class GHelperUtil {
 		throws GoogleAppsException {
 
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("submitDelete request " + url);
+			}
+
 			Http.Options options = _getOptions(gAuthenticator);
 
 			options.setDelete(true);
 			options.setLocation(url);
 
-			HttpUtil.URLtoString(options);
+			String response = HttpUtil.URLtoString(options);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("submitDelete response " + response);
+			}
 		}
 		catch (IOException ioe) {
 			throw new GoogleAppsException(ioe);
@@ -189,6 +215,10 @@ public class GHelperUtil {
 		throws GoogleAppsException {
 
 		try {
+			if (_log.isInfoEnabled()) {
+				_log.info("submitUpdate request " + url);
+			}
+
 			Http.Options options = _getOptions(gAuthenticator);
 
 			options.setBody(
@@ -197,7 +227,11 @@ public class GHelperUtil {
 			options.setLocation(url);
 			options.setPut(true);
 
-			HttpUtil.URLtoString(options);
+			String response = HttpUtil.URLtoString(options);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("submitUpdate response " + response);
+			}
 		}
 		catch (IOException ioe) {
 			throw new GoogleAppsException(ioe);
@@ -222,5 +256,7 @@ public class GHelperUtil {
 	private static final String _ATOM_PREFIX = "atom";
 
 	private static final String _ATOM_URI = "http://www.w3.org/2005/Atom";
+
+	private static Log _log = LogFactoryUtil.getLog(GHelperUtil.class);
 
 }
