@@ -188,7 +188,8 @@ public class LayoutStagingHandler implements InvocationHandler {
 		return LayoutRevisionLocalServiceUtil.addLayoutRevision(
 			serviceContext.getUserId(), layoutSetBranchId,
 			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-			false, layout.getPlid(), layout.isPrivateLayout(), layout.getName(),
+			false, LayoutRevisionConstants.DEFAULT_LAYOUT_VARIATION_NAME,
+			layout.getPlid(), layout.isPrivateLayout(), layout.getName(),
 			layout.getTitle(), layout.getDescription(), layout.getKeywords(),
 			layout.getRobots(), layout.getTypeSettings(), layout.getIconImage(),
 			layout.getIconImageId(), layout.getThemeId(),

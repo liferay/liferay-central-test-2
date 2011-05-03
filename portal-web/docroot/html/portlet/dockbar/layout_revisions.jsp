@@ -22,17 +22,71 @@ long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSetBranchId, plid);
 
 List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutSetBranchId, LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, plid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new LayoutRevisionIdComparator(true));
-
-if (!layoutRevisions.isEmpty()) {
 %>
 
+<div class="yui3-aui-helper-hidden" id="<portlet:namespace />addVariation">
+	<portlet:actionURL var="addVariationURL">
+		<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
+		<portlet:param name="<%= Constants.CMD %>" value="add_root_revision" />
+		<portlet:param name="redirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
+		<portlet:param name="mergeLayoutRevisionId" value="<%= String.valueOf(layoutRevisionId) %>" />
+		<portlet:param name="workflowAction" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
+	</portlet:actionURL>
+
+	<aui:form name="fmVariation" action="<%= addVariationURL %>" method="post">
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="new-page-variation-help" />
+		</div>
+
+		<aui:input label="page-variation-name" name="variationName" />
+
+		<aui:button-row>
+			<aui:button type="submit" />
+		</aui:button-row>
+	</aui:form>
+</div>
+
+<div id="<portlet:namespace />revisionsToolbar"></div>
+
+<aui:script use="aui-toolbar,liferay-staging" position="inline">
+	var branching = Liferay.Staging.Branching;
+
+	branching.init(
+		{
+			namespace: '<portlet:namespace />'
+		}
+	);
+
+	new A.Toolbar(
+		{
+			activeState: false,
+			boundingBox: '#<portlet:namespace />revisionsToolbar',
+			children: [
+				{
+					handler: function (event) {
+						alert('clean history');
+					},
+					icon: 'trash',
+					label: '<liferay-ui:message key="clean-history" />'
+				},
+				{
+					handler: function (event) {
+						branching.addVariation('<%= addVariationURL %>');
+					},
+					icon: 'copy',
+					label: '<liferay-ui:message key="new-page-variation" />'
+				}
+			]
+		}
+	).render();
+</aui:script>
+
+<c:if test="<%= !layoutRevisions.isEmpty() %>">
 	<ul class="layout-revision-container layout-revision-container-root">
 		<%= _getGraph(pageContext, layoutRevisionId, layoutRevisions) %>
 	</ul>
-
-<%
-}
-%>
+</c:if>
 
 <%!
 public String _getGraph(PageContext pageContext, long layoutRevisionId, List<LayoutRevision> layoutRevisions) throws PortalException, SystemException {

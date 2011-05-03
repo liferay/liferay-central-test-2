@@ -140,6 +140,9 @@ public class EditLayoutsAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				CommunitiesUtil.deleteLayout(actionRequest, actionResponse);
 			}
+			else if (cmd.equals("add_root_revision")) {
+				addRootRevision(actionRequest);
+			}
 			else if (cmd.equals("copy_from_live")) {
 				StagingUtil.copyFromLive(actionRequest);
 			}
@@ -314,6 +317,34 @@ public class EditLayoutsAction extends PortletAction {
 		}
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+	}
+
+	protected void addRootRevision(ActionRequest actionRequest)
+		throws Exception {
+
+		long layoutRevisionId = ParamUtil.getLong(
+			actionRequest, "mergeLayoutRevisionId");
+
+		LayoutRevision layoutRevision =
+			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
+
+		String variationName = ParamUtil.getString(
+			actionRequest, "variationName", layoutRevision.getVariationName());
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		LayoutRevisionLocalServiceUtil.addLayoutRevision(
+			serviceContext.getUserId(), layoutRevision.getLayoutSetBranchId(),
+			layoutRevisionId, false, variationName, layoutRevision.getPlid(),
+			layoutRevision.isPrivateLayout(), layoutRevision.getName(),
+			layoutRevision.getTitle(), layoutRevision.getDescription(),
+			layoutRevision.getKeywords(), layoutRevision.getRobots(),
+			layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+			layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
+			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
+			serviceContext);
 	}
 
 	protected void checkPermissions(PortletRequest portletRequest)
@@ -721,12 +752,12 @@ public class EditLayoutsAction extends PortletAction {
 
 		LayoutRevisionLocalServiceUtil.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevisionId,
-			layoutRevision.getName(), layoutRevision.getTitle(),
-			layoutRevision.getDescription(), layoutRevision.getKeywords(),
-			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
-			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
-			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
-			layoutRevision.getWapThemeId(),
+			layoutRevision.getVariationName(), layoutRevision.getName(),
+			layoutRevision.getTitle(), layoutRevision.getDescription(),
+			layoutRevision.getKeywords(), layoutRevision.getRobots(),
+			layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+			layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
 	}

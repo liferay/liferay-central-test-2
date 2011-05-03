@@ -586,6 +586,7 @@
 		<column name="parentLayoutRevisionId" type="long" />
 		<column name="head" type="boolean" />
 		<column name="major" type="boolean" />
+		<column name="variationName" type="String" />
 		<column name="plid" type="long" />
 		<column name="privateLayout" type="boolean" />
 		<column name="name" type="String" localized="true" />

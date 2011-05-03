@@ -42,8 +42,9 @@ public class LayoutRevisionLocalServiceImpl
 
 	public LayoutRevision addLayoutRevision(
 			long userId, long layoutSetBranchId, long parentLayoutRevisionId,
-			boolean head, long plid, boolean privateLayout, String name,
-			String title, String description, String keywords, String robots,
+			boolean head, String variationName, long plid,
+			boolean privateLayout, String name, String title,
+			String description, String keywords, String robots,
 			String typeSettings, boolean iconImage, long iconImageId,
 			String themeId, String colorSchemeId, String wapThemeId,
 			String wapColorSchemeId, String css, ServiceContext serviceContext)
@@ -72,6 +73,7 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision.setLayoutSetBranchId(layoutSetBranchId);
 		layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
 		layoutRevision.setHead(head);
+		layoutRevision.setVariationName(variationName);
 
 		long mergeLayoutRevisionId = ParamUtil.getLong(
 			serviceContext, "mergeLayoutRevisionId");
@@ -128,6 +130,82 @@ public class LayoutRevisionLocalServiceImpl
 			LayoutRevision.class.getName(),
 			layoutRevision.getLayoutRevisionId(), layoutRevision,
 			serviceContext);
+
+		return layoutRevision;
+	}
+
+	public LayoutRevision addRootRevision(
+			long userId, long layoutRevisionId, String variationName,
+			String name, String title, String description, String keywords,
+			String robots, String typeSettings, boolean iconImage,
+			long iconImageId, String themeId, String colorSchemeId,
+			String wapThemeId, String wapColorSchemeId, String css,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		// Layout revision
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		LayoutRevision oldLayoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
+		Date now = new Date();
+
+		LayoutRevision layoutRevision = null;
+
+		long newLayoutRevisionId = counterLocalService.increment();
+
+		layoutRevision = layoutRevisionPersistence.create(
+			newLayoutRevisionId);
+
+		layoutRevision.setGroupId(oldLayoutRevision.getGroupId());
+		layoutRevision.setCompanyId(oldLayoutRevision.getCompanyId());
+		layoutRevision.setUserId(user.getUserId());
+		layoutRevision.setUserName(user.getFullName());
+		layoutRevision.setCreateDate(serviceContext.getCreateDate(now));
+		layoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
+		layoutRevision.setLayoutSetBranchId(
+			oldLayoutRevision.getLayoutSetBranchId());
+		layoutRevision.setParentLayoutRevisionId(
+			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID);
+		layoutRevision.setMajor(true);
+		layoutRevision.setHead(false);
+		layoutRevision.setVariationName(variationName);
+		layoutRevision.setPlid(oldLayoutRevision.getPlid());
+		layoutRevision.setPrivateLayout(
+			oldLayoutRevision.isPrivateLayout());
+		layoutRevision.setName(name);
+		layoutRevision.setTitle(title);
+		layoutRevision.setDescription(description);
+		layoutRevision.setKeywords(keywords);
+		layoutRevision.setRobots(robots);
+		layoutRevision.setTypeSettings(typeSettings);
+
+		if (iconImage) {
+			layoutRevision.setIconImage(iconImage);
+			layoutRevision.setIconImageId(iconImageId);
+		}
+
+		layoutRevision.setThemeId(themeId);
+		layoutRevision.setColorSchemeId(colorSchemeId);
+		layoutRevision.setWapThemeId(wapThemeId);
+		layoutRevision.setWapColorSchemeId(wapColorSchemeId);
+		layoutRevision.setCss(css);
+		layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
+		layoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
+
+		layoutRevisionPersistence.update(layoutRevision, false);
+
+		// Portlet preferences
+
+		copyPortletPreferences(
+			layoutRevision, layoutRevision.getParentLayoutRevisionId(),
+			serviceContext);
+
+		StagingUtil.setRecentLayoutRevisionId(
+			user, layoutRevision.getLayoutSetBranchId(),
+			layoutRevision.getPlid(), layoutRevision.getLayoutRevisionId());
+
+		updateMajor(layoutRevision);
 
 		return layoutRevision;
 	}
@@ -277,11 +355,12 @@ public class LayoutRevisionLocalServiceImpl
 	}
 
 	public LayoutRevision updateLayoutRevision(
-			long userId, long layoutRevisionId, String name, String title,
-			String description, String keywords, String robots,
-			String typeSettings, boolean iconImage, long iconImageId,
-			String themeId, String colorSchemeId, String wapThemeId,
-			String wapColorSchemeId, String css, ServiceContext serviceContext)
+			long userId, long layoutRevisionId, String variationName,
+			String name, String title, String description, String keywords,
+			String robots, String typeSettings, boolean iconImage,
+			long iconImageId, String themeId, String colorSchemeId,
+			String wapThemeId, String wapColorSchemeId, String css,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout revision
@@ -312,6 +391,7 @@ public class LayoutRevisionLocalServiceImpl
 			layoutRevision.setParentLayoutRevisionId(
 				oldLayoutRevision.getLayoutRevisionId());
 			layoutRevision.setHead(false);
+			layoutRevision.setVariationName(variationName);
 			layoutRevision.setPlid(oldLayoutRevision.getPlid());
 			layoutRevision.setPrivateLayout(
 				oldLayoutRevision.isPrivateLayout());

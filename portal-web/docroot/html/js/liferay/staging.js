@@ -20,6 +20,14 @@ AUI().add(
 				branchDialog.show();
 			},
 
+			addVariation: function(formAction) {
+				var instance = this;
+
+				var variationDialog = instance._getVariationDialog(formAction);
+
+				variationDialog.show();
+			},
+
 			mergeBranch: function(options) {
 				var instance = this;
 
@@ -64,6 +72,34 @@ AUI().add(
 				}
 
 				return branchDialog;
+			},
+
+			_getVariationDialog: function(formAction) {
+				var instance = this;
+
+				var variationDialog = instance._variationDialog;
+
+				if (!variationDialog) {
+					var namespace = instance._namespace;
+
+					variationDialog = new A.Dialog(
+						{
+							align: {
+								points: ['tc', 'tc']
+							},
+							bodyContent: A.one('#' + namespace + 'addVariation').show(),
+							title: Liferay.Language.get('new-page-variation'),
+							modal: true,
+							width: 530
+						}
+					).render();
+
+					variationDialog.move(variationDialog.get('x'), variationDialog.get('y') + 100);
+
+					instance._variationDialog = variationDialog;
+				}
+
+				return variationDialog;
 			},
 
 			_getMergeDialog: function() {

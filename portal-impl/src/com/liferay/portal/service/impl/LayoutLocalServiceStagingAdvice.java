@@ -166,12 +166,12 @@ public class LayoutLocalServiceStagingAdvice
 
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
-			layoutRevision.getName(), layoutRevision.getTitle(),
-			layoutRevision.getDescription(), layoutRevision.getKeywords(),
-			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
-			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
-			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
-			layoutRevision.getWapThemeId(),
+			layoutRevision.getVariationName(), layoutRevision.getName(),
+			layoutRevision.getTitle(), layoutRevision.getDescription(),
+			layoutRevision.getKeywords(), layoutRevision.getRobots(),
+			layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+			layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
 
@@ -220,12 +220,12 @@ public class LayoutLocalServiceStagingAdvice
 
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
-			layoutRevision.getName(), layoutRevision.getTitle(),
-			layoutRevision.getDescription(), layoutRevision.getKeywords(),
-			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
-			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
-			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
-			layoutRevision.getWapThemeId(),
+			layoutRevision.getVariationName(), layoutRevision.getName(),
+			layoutRevision.getTitle(), layoutRevision.getDescription(),
+			layoutRevision.getKeywords(), layoutRevision.getRobots(),
+			layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+			layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
 
@@ -268,12 +268,12 @@ public class LayoutLocalServiceStagingAdvice
 
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
-			layoutRevision.getName(), layoutRevision.getTitle(),
-			layoutRevision.getDescription(), layoutRevision.getKeywords(),
-			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
-			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
-			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
-			layoutRevision.getWapThemeId(),
+			layoutRevision.getVariationName(), layoutRevision.getName(),
+			layoutRevision.getTitle(), layoutRevision.getDescription(),
+			layoutRevision.getKeywords(), layoutRevision.getRobots(),
+			layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+			layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
 
@@ -303,12 +303,12 @@ public class LayoutLocalServiceStagingAdvice
 
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
-			layoutRevision.getName(), layoutRevision.getTitle(),
-			layoutRevision.getDescription(), layoutRevision.getKeywords(),
-			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
-			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
-			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
-			layoutRevision.getWapThemeId(),
+			layoutRevision.getVariationName(), layoutRevision.getName(),
+			layoutRevision.getTitle(), layoutRevision.getDescription(),
+			layoutRevision.getKeywords(), layoutRevision.getRobots(),
+			layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+			layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
 
