@@ -325,10 +325,9 @@ public class PortletBagFactory {
 			return StringUtil.read(_classLoader, fileName);
 		}
 
-		int parameterIndex = fileName.indexOf(StringPool.QUESTION);
+		int pos = fileName.indexOf(StringPool.QUESTION);
 
-		String xml = StringUtil.read(
-			_classLoader, fileName.substring(0, parameterIndex));
+		String xml = StringUtil.read(_classLoader, fileName.substring(0, pos));
 
 		Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
 			queryString);
@@ -341,11 +340,13 @@ public class PortletBagFactory {
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
-			for (String value : values) {
-				xml = xml.replace("${" + name + "}", value);
-
-				break;
+			if (values.length == 0) {
+				continue;
 			}
+
+			String value = values[0];
+
+			xml = StringUtil.replace(xml, "@" + name + "@", value);
 		}
 
 		return xml;

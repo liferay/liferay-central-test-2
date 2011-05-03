@@ -5,7 +5,7 @@
 	<route>
 		<pattern>GET</pattern>
 		<implicit-parameter name="action">index</implicit-parameter>
-		<implicit-parameter name="controller">${defaultController}</implicit-parameter>
+		<implicit-parameter name="controller">@controller@</implicit-parameter>
 		<implicit-parameter name="format">html</implicit-parameter>
 		<implicit-parameter name="method">GET</implicit-parameter>
 	</route>
