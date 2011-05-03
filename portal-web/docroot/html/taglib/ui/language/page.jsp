@@ -40,7 +40,7 @@ if (Validator.isNull(formAction)) {
 	liferayPortletURL.setAnchor(false);
 
 	liferayPortletURL.setParameter("struts_action", "/language/view");
-	//liferayPortletURL.setParameter("redirect", currentURL);
+	liferayPortletURL.setParameter("redirect", currentURL);
 
 	formAction = liferayPortletURL.toString();
 }
