@@ -525,13 +525,13 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 							}
 
 							if (group.isOrganization()) {
-								defaultRole = defaultRoles[1];
-							}
-							else if (group.isRegularSite()) {
 								defaultRole = defaultRoles[0];
 							}
-							else if (group.isUser() || group.isUserGroup()) {
+							else if (group.isSite()) {
 								defaultRole = defaultRoles[2];
+							}
+							else if (group.isUser() || group.isUserGroup()) {
+								defaultRole = defaultRoles[1];
 							}
 						}
 					}
@@ -706,9 +706,9 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 						RoleLocalServiceUtil.getRole(
 							companyId, RoleConstants.ORGANIZATION_MEMBER),
 						RoleLocalServiceUtil.getRole(
-							companyId, RoleConstants.SITE_MEMBER),
-						RoleLocalServiceUtil.getRole(
 							companyId, RoleConstants.POWER_USER),
+						RoleLocalServiceUtil.getRole(
+							companyId, RoleConstants.SITE_MEMBER)
 					}
 				);
 

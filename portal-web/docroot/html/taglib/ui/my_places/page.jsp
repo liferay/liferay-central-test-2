@@ -42,9 +42,9 @@ List<Group> myPlaces = user.getMyPlaces(max);
 		for (Group myPlace : myPlaces) {
 			myPlace = myPlace.toEscapedModel();
 
-			boolean organizationCommunity = myPlace.isOrganization();
-			boolean regularCommunity = myPlace.isRegularSite();
-			boolean userCommunity = myPlace.isUser();
+			boolean organizationSite = myPlace.isOrganization();
+			boolean regularSite = myPlace.isSite();
+			boolean userSite = myPlace.isUser();
 			int publicLayoutsPageCount = myPlace.getPublicLayoutsPageCount();
 			int privateLayoutsPageCount = myPlace.getPrivateLayoutsPageCount();
 
@@ -53,7 +53,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 			String publicAddPageHREF = null;
 			String privateAddPageHREF = null;
 
-			if (organizationCommunity) {
+			if (organizationSite) {
 				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getOrganizationId());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_LAYOUTS)) {
@@ -74,7 +74,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					privateAddPageHREF = addPageURL.toString();
 				}
 			}
-			else if (regularCommunity) {
+			else if (regularSite) {
 				if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 
@@ -93,7 +93,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					privateAddPageHREF = addPageURL.toString();
 				}
 			}
-			else if (userCommunity) {
+			else if (userSite) {
 				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
 
 				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
@@ -134,13 +134,13 @@ List<Group> myPlaces = user.getMyPlaces(max);
 			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
 
 			if (publicLayoutsPageCount == 0) {
-				if (organizationCommunity) {
+				if (organizationSite) {
 					showPublicPlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS;
 				}
-				else if (regularCommunity) {
+				else if (regularSite) {
 					showPublicPlace = PropsValues.MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS;
 				}
-				else if (userCommunity) {
+				else if (userSite) {
 					showPublicPlace = PropsValues.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS;
 
 					if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE || (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED && !hasPowerUserRole)) {
@@ -152,13 +152,13 @@ List<Group> myPlaces = user.getMyPlaces(max);
 			boolean showPrivatePlace = true;
 
 			if (privateLayoutsPageCount == 0) {
-				if (organizationCommunity) {
+				if (organizationSite) {
 					showPrivatePlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS;
 				}
-				else if (regularCommunity) {
+				else if (regularSite) {
 					showPrivatePlace = PropsValues.MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS;
 				}
-				else if (userCommunity) {
+				else if (userSite) {
 					showPrivatePlace = PropsValues.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
 
 					if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED && !hasPowerUserRole)) {
@@ -230,10 +230,10 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									<%
 									String siteName = StringPool.BLANK;
 
-									if (organizationCommunity) {
+									if (organizationSite) {
 										siteName = HtmlUtil.escape(organization.getName());
 									}
-									else if (userCommunity) {
+									else if (userSite) {
 										siteName = LanguageUtil.get(pageContext, "my-public-pages");
 									}
 									else if (myPlace.getName().equals(GroupConstants.GUEST)) {
@@ -280,10 +280,10 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									<%
 									String siteName = StringPool.BLANK;
 
-									if (organizationCommunity) {
+									if (organizationSite) {
 										siteName = HtmlUtil.escape(organization.getName());
 									}
-									else if (userCommunity) {
+									else if (userSite) {
 										siteName = LanguageUtil.get(pageContext, "my-private-pages");
 									}
 									else if (myPlace.getName().equals(GroupConstants.GUEST)) {
@@ -319,10 +319,10 @@ List<Group> myPlaces = user.getMyPlaces(max);
 							<h3>
 								<a href="javascript:;">
 									<c:choose>
-										<c:when test="<%= organizationCommunity %>">
+										<c:when test="<%= organizationSite %>">
 											<%= HtmlUtil.escape(organization.getName()) %>
 										</c:when>
-										<c:when test="<%= userCommunity %>">
+										<c:when test="<%= userSite %>">
 											<liferay-ui:message key="my-site" />
 										</c:when>
 										<c:otherwise>
@@ -349,7 +349,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									<li class="public <%= selectedPlace ? "current" : "" %>">
 										<a href="<%= publicLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript:;" %>"
 
-										<c:if test="<%= userCommunity %>">
+										<c:if test="<%= userSite %>">
 											id="my-community-public-pages"
 										</c:if>
 
@@ -380,7 +380,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 									<li class="private <%= selectedPlace ? "current" : "" %>">
 										<a href="<%= privateLayoutsPageCount > 0 ? HtmlUtil.escape(portletURL.toString()) : "javascript:;" %>"
 
-										<c:if test="<%= userCommunity %>">
+										<c:if test="<%= userSite %>">
 											id="my-community-private-pages"
 										</c:if>
 

@@ -428,7 +428,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Asset
 
-		if (group.isRegularSite()) {
+		if (group.isSite()) {
 			assetEntryLocalService.deleteEntry(
 				Group.class.getName(), group.getGroupId());
 		}
@@ -497,7 +497,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (!group.isStagingGroup() &&
-			(group.isOrganization()) || group.isRegularSite()) {
+			(group.isOrganization()) || group.isSite()) {
 
 			resourceLocalService.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
@@ -1026,7 +1026,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Asset
 
-		if ((serviceContext != null) && group.isRegularSite()) {
+		if ((serviceContext != null) && group.isSite()) {
 			User user = null;
 
 			try {

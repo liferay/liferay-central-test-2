@@ -218,7 +218,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				if ((group != null) &&
 					((group.isOrganization() &&
 						userOrgGroups.contains(group)) ||
-					 (group.isRegularSite() && userGroups.contains(group)))) {
+					 (group.isSite() && userGroups.contains(group)))) {
 
 					addRequiredMemberRole(group, roles);
 					addTeamRoles(userId, group, roles);

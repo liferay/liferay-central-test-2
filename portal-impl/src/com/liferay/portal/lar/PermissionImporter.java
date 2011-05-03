@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -32,7 +31,6 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -293,8 +291,6 @@ public class PermissionImporter {
 			Element permissionsElement, boolean portletActions)
 		throws Exception {
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName,
 			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
@@ -351,8 +347,6 @@ public class PermissionImporter {
 			String resourceName, String resourcePrimKey,
 			Element permissionsElement, boolean portletActions)
 		throws Exception {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		List<Element> roleElements = permissionsElement.elements("role");
 

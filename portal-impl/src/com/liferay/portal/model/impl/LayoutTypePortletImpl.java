@@ -1332,7 +1332,7 @@ public class LayoutTypePortletImpl
 			selector1 =
 				LayoutTypePortletConstants.STATIC_PORTLET_ORGANIZATION_SELECTOR;
 		}
-		else if (group.isRegularSite()) {
+		else if (group.isSite()) {
 			selector1 =
 				LayoutTypePortletConstants.STATIC_PORTLET_COMMUNITY_SELECTOR;
 		}

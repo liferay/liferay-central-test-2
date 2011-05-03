@@ -69,15 +69,13 @@ public interface Group extends GroupModel {
 	public boolean hasStagingGroup();
 
 	/**
-	* @deprecated in 6.1
+	* @deprecated {@link #isSite}
 	*/
 	public boolean isCommunity();
 
 	public boolean isCompany();
 
 	public boolean isControlPanel();
-
-	public boolean isRegularSite();
 
 	public boolean isLayout();
 

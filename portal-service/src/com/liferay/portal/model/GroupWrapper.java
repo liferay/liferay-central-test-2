@@ -459,7 +459,7 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
-	* @deprecated in 6.1
+	* @deprecated {@link #isSite}
 	*/
 	public boolean isCommunity() {
 		return _group.isCommunity();
@@ -471,10 +471,6 @@ public class GroupWrapper implements Group {
 
 	public boolean isControlPanel() {
 		return _group.isControlPanel();
-	}
-
-	public boolean isRegularSite() {
-		return _group.isRegularSite();
 	}
 
 	public boolean isLayout() {

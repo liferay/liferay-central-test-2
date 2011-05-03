@@ -127,7 +127,7 @@ public class InputPermissionsParamsTagUtil {
 					guestChecked = false;
 				}
 
-				if (group.isOrganization() || group.isRegularSite()) {
+				if (group.isOrganization() || group.isSite()) {
 					if (communityChecked) {
 						sb.append(StringPool.AMPERSAND);
 						sb.append(renderResponse.getNamespace());

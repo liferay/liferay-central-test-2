@@ -321,10 +321,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	/**
-	 * @deprecated in 6.1
+	 * @deprecated {@link #isSite}
 	 */
 	public boolean isCommunity() {
-		return isRegularSite();
+		return isSite();
 	}
 
 	public boolean isCompany() {
@@ -352,23 +352,12 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(LayoutSetPrototype.class);
 	}
 
-	/**
-	 * @deprecated in 6.1
-	 */
 	public boolean isOrganization() {
-		return isOrganizationSite();
-	}
-
-	public boolean isOrganizationSite() {
 		return hasClassName(Organization.class);
 	}
 
-	public boolean isRegularSite() {
-		return hasClassName(Group.class);
-	}
-
 	public boolean isSite() {
-		return isOrganizationSite() || isRegularSite();
+		return hasClassName(Group.class);
 	}
 
 	public boolean isStaged() {
