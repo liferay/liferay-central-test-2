@@ -90,6 +90,7 @@ import java.util.Set;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
@@ -301,13 +302,11 @@ public class EditLayoutsAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
 
-		PortletContext portletContext = getPortletContext();
+		PortletContext portletContext = portletConfig.getPortletContext();
 
 		PortletRequestDispatcher portletRequestDispatcher = null;
 
 		if (cmd.equals(ActionKeys.PUBLISH_STAGING)) {
-			PortletContext portletContext = getPortletContext();
-
 			portletRequestDispatcher = portletContext.getRequestDispatcher(
 				"/html/portlet/layouts_admin/scheduled_publishing_events.jsp");
 		}
