@@ -5035,6 +5035,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (!user.hasCompanyMx() && user.hasCompanyMx(emailAddress) &&
 			Validator.isNotNull(password)) {
+
 			mailService.addUser(
 				user.getCompanyId(), userId, password, firstName, middleName,
 				lastName, emailAddress);
