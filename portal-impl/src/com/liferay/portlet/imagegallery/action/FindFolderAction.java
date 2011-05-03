@@ -51,9 +51,10 @@ public class FindFolderAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
+			long groupId = ParamUtil.getLong(request,"groupId");
 			long folderId = ParamUtil.getLong(request, "folderId");
 
-			plid = getPlid(plid, folderId);
+			plid = getPlid(plid, groupId, folderId);
 
 			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.IMAGE_GALLERY, plid,
@@ -76,7 +77,9 @@ public class FindFolderAction extends Action {
 		}
 	}
 
-	protected long getPlid(long plid, long folderId) throws Exception {
+	protected long getPlid(long plid, long groupId, long folderId)
+		throws Exception {
+
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -92,10 +95,14 @@ public class FindFolderAction extends Action {
 			}
 		}
 
-		IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+		if (groupId <= 0) {
+			IGFolder folder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+			groupId = folder.getGroupId();
+		}
 
 		plid = PortalUtil.getPlidFromPortletId(
-			folder.getGroupId(), PortletKeys.IMAGE_GALLERY);
+			groupId, PortletKeys.IMAGE_GALLERY);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
