@@ -48,6 +48,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutRevision;
+import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
@@ -336,7 +337,8 @@ public class EditLayoutsAction extends PortletAction {
 
 		LayoutRevisionLocalServiceUtil.addLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutSetBranchId(),
-			layoutRevisionId, false, variationName, layoutRevision.getPlid(),
+			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+			false, variationName, layoutRevision.getPlid(),
 			layoutRevision.isPrivateLayout(), layoutRevision.getName(),
 			layoutRevision.getTitle(), layoutRevision.getDescription(),
 			layoutRevision.getKeywords(), layoutRevision.getRobots(),

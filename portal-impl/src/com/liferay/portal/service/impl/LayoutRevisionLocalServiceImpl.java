@@ -536,15 +536,15 @@ public class LayoutRevisionLocalServiceImpl
 		if (parentLayoutRevisionId > 0) {
 			parentLayoutRevision = layoutRevisionPersistence.fetchByPrimaryKey(
 				parentLayoutRevisionId);
-		}
 
-		if (parentLayoutRevision == null) {
-			List<LayoutRevision> layoutRevisions =
-				layoutRevisionPersistence.findByL_P(
-					layoutSetBranchId, plid, 0, 1);
+			if (parentLayoutRevision == null) {
+				List<LayoutRevision> layoutRevisions =
+					layoutRevisionPersistence.findByL_P(
+						layoutSetBranchId, plid, 0, 1);
 
-			if (!layoutRevisions.isEmpty()) {
-				parentLayoutRevision = layoutRevisions.get(0);
+				if (!layoutRevisions.isEmpty()) {
+					parentLayoutRevision = layoutRevisions.get(0);
+				}
 			}
 		}
 
