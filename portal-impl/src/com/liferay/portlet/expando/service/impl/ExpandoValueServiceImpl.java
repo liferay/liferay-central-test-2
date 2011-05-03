@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -98,7 +99,13 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 				StringPool.BLANK);
 
 			if (Validator.isNotNull(data)) {
-				return JSONFactoryUtil.createJSONObject(data);
+				StringBundler sb = new StringBundler(3);
+
+				sb.append("{data=");
+				sb.append(data);
+				sb.append("}");
+
+				return JSONFactoryUtil.createJSONObject(sb.toString());
 			}
 			else {
 				return null;
