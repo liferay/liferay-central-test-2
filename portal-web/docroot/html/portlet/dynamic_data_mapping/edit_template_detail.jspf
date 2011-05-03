@@ -21,6 +21,15 @@ if (Validator.isNull(script)) {
 
 Set<String> fieldNames = structure.getFieldNames();
 
+JSONArray readOnlyAttributesJSONArray = JSONFactoryUtil.createJSONArray();
+
+readOnlyAttributesJSONArray.put("label");
+readOnlyAttributesJSONArray.put("name");
+readOnlyAttributesJSONArray.put("options");
+readOnlyAttributesJSONArray.put("predefinedValue");
+readOnlyAttributesJSONArray.put("required");
+readOnlyAttributesJSONArray.put("showLabel");
+
 JSONArray structureAvailableFieldsJSONArray = JSONFactoryUtil.createJSONArray();
 
 Iterator<String> itr = fieldNames.iterator();
@@ -41,6 +50,7 @@ while (itr.hasNext()) {
 	fieldJSONObject.put("fieldLabel", fieldName);
 	fieldJSONObject.put("key", fieldName);
 	fieldJSONObject.put("label", sb.toString());
+	fieldJSONObject.put("readOnlyAttributes", readOnlyAttributesJSONArray);
 	fieldJSONObject.put("type", structure.getFieldType(fieldName));
 	fieldJSONObject.put("unique", true);
 
