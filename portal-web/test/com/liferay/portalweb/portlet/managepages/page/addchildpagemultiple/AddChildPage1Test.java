@@ -122,8 +122,6 @@ public class AddChildPage1Test extends BaseTestCase {
 					RuntimeVariables.replace(""));
 
 			case 2:
-				assertEquals(RuntimeVariables.replace("Child1 Test1 Page1"),
-					selenium.getText("//nav/ul/li[2]/ul/li"));
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
