@@ -45,6 +45,7 @@ public class ServiceContextUtil {
 		serviceContext.setScopeGroupId(jsonObject.getLong("scopeGroupId"));
 		serviceContext.setUserDisplayURL(
 			jsonObject.getString("userDisplayURL"));
+		serviceContext.setUserId(jsonObject.getLong("userId"));
 
 		// Permissions
 
