@@ -126,82 +126,73 @@ if (folder != null) {
 }
 %>
 
-<aui:script use="aui-dialog,aui-dialog-iframe">
+<aui:script>
+	function <portlet:namespace />editFileEntry(action) {
+		if (action == '<%= Constants.DELETE %>') {
+			if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
+				<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>');
+			}
+		}
+		else if (action == '<%= Constants.MOVE %>') {
+			<portlet:namespace />doFileEntryAction(action, '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/move_file_entry" /></portlet:renderURL>');
+		}
+		else {
+			<portlet:namespace />doFileEntryAction(action, '<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>');
+		}
+	}
+
 	Liferay.provide(
 		window,
 		'<portlet:namespace />doFileEntryAction',
-		function(action) {
-			if (action == '<%= Constants.DELETE %>') {
-				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-entries") %>')) {
-					document.<portlet:namespace />fm.method = "post";
-					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
-					document.<portlet:namespace />fm.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>');
-					submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>");
-				}
-			}
-			else if (action == '<%= Constants.MOVE %>') {
-				document.<portlet:namespace />fm.method = "post";
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
-				document.<portlet:namespace />fm.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>');
-				submitForm(document.<portlet:namespace />fm, "<portlet:renderURL><portlet:param name="struts_action" value="/document_library/move_file_entry" /></portlet:renderURL>");
-			}
-			else {
-				document.<portlet:namespace />fm.method = "post";
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
-				document.<portlet:namespace />fm.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>');
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>");
-			}
+		function(action, url) {
+			document.<portlet:namespace />fm.method = "post";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
+			document.<portlet:namespace />fm.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
+
+			submitForm(document.<portlet:namespace />fm, url);
 		},
 		['liferay-util-list-fields']
 	);
+</aui:script>
 
-	A.one('.document-container').delegate(
+<aui:script use="aui-dialog,aui-dialog-iframe">
+	var markSelected = function(node) {
+		var documentThumbnail = node.ancestor('.document-display-style');
+
+		documentThumbnail.toggleClass('selected');
+	};
+
+	var documentContainer = A.one('#<portlet:namespace />documentContainer');
+
+	documentContainer.delegate(
 		'change',
 		function(event) {
 			markSelected(event.currentTarget);
 
-			Liferay.Util.checkAllBox(A.one('.document-container'), '<portlet:namespace /><%= RowChecker.ROW_IDS %>', '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>');
+			Liferay.Util.checkAllBox(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>Checkbox', '#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 		},
 		'.document-selector'
 	);
 
-
 	<c:if test='<%= (!displayStyle.equals("list")) %>'>
-		A.one('.document-container').delegate(
-			'focus',
-			function(event) {
-				var documentView = event.currentTarget.ancestor('.document-display-style');
+		var toggleHoverClass = function(event) {
+			var documentDisplayStyle = event.currentTarget.ancestor('.document-display-style');
 
-				if (documentView) {
-					documentView.addClass('hover');
-				}
+			if (documentDisplayStyle) {
+				documentDisplayStyle.toggleClass('hover', (event.type == 'focus'));
 			}
-		);
+		};
 
-		A.one('.document-container').delegate(
-			'blur',
-			function(event) {
-				var documentView = event.currentTarget.ancestor('.document-display-style');
+		documentContainer.delegate('focus', toggleHoverClass, '*');
 
-				documentView.removeClass('hover');
-			}
-		);
+		documentContainer.delegate('blur', toggleHoverClass, '*');
 	</c:if>
-
-	function markSelected(e) {
-		var documentThumbnail = e.ancestor('.document-display-style');
-
-		documentThumbnail.toggleClass("selected");
-	}
 
 	var buttonRow = A.one('#<portlet:namespace />displayStyleToolbar');
 
-	var permissionPopUp = null;
-	var popUp = null;
-
 	var displayStyleToolbar = new A.Toolbar(
 		{
-			activeState: false,
+			activeState: true,
 			boundingBox: buttonRow,
 			children: [
 				{
@@ -212,11 +203,10 @@ if (folder != null) {
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:renderURL>
 
-					classNames: {'default': 'aui-icon-display-icon'},
 					handler: function(event) {
 						location.href = '<%= iconDisplayStyle.toString() %>';
 					},
-					icon: 'pin-b'
+					icon: 'display-icon'
 				},
 				{
 
@@ -226,11 +216,10 @@ if (folder != null) {
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:renderURL>
 
-					classNames: {'default': 'aui-icon-display-descriptive'},
 					handler: function(event) {
 						location.href = '<%= descriptiveDisplayStyle.toString() %>';
 					},
-					icon: 'pin-b'
+					icon: 'display-descriptive'
 				},
 				{
 
@@ -240,109 +229,56 @@ if (folder != null) {
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:renderURL>
 
-					activeState: true,
-					classNames: {'default': 'aui-icon-display-list'},
 					handler: function(event) {
 						location.href = '<%= listDisplayStyle.toString() %>';
 					},
-					icon: 'pin-b'
-				},
+					icon: 'display-list'
+				}
 			]
 		}
 	).render();
 
-	buttonRow.setData('displayStyleToolbar', displayStyleToolbar);
+	<c:choose>
+		<c:when test='<%= displayStyle.equals("icon") %>'>
+			var index = 0;
+		</c:when>
+		<c:when test='<%= displayStyle.equals("descriptive") %>'>
+			var index = 1;
+		</c:when>
+		<c:when test='<%= displayStyle.equals("list") %>'>
+			var index = 2;
+		</c:when>
+	</c:choose>
 
+	displayStyleToolbar.item(index).StateInteraction.set('active', true);
+
+	buttonRow.setData('displayStyleToolbar', displayStyleToolbar);
 </aui:script>
 
 <aui:script use="liferay-list-view">
 	var listView = new Liferay.ListView(
 		{
 			itemAttributes: ['data-direction-right', 'data-refresh-entries', 'data-refresh-folders', 'data-resource-url'],
-			itemSelector: 'ul > li > a',
+			itemSelector: '.folder a',
 			srcNode: '#<portlet:namespace />folderContainer'
 		}
-	);
+	).render();
 
-	listView.render();
-
-	listView.on('itemChosen', function(event) {
-		var details = event.details[0];
-
-		var target = details.target;
-		var attributes = details.attributes;
-
-		var dataDirectionRight = attributes['data-direction-right'];
-		var dataRefreshEntries = attributes['data-refresh-entries'];
-		var dataRefreshFolders = attributes['data-refresh-folders'];
-		var dataResourceUrl = attributes['data-resource-url'];
-
-		A.io.request(
-			dataResourceUrl,
-			{
-				on: {
-					success: function(event, id, obj) {
-						var selFolder = A.one('.folder.selected');
-
-						if (selFolder) {
-							selFolder.removeClass('selected');
-						}
-
-						var responseData = this.get('responseData');
-
-						var content = A.Node.create(responseData);
-
-						target.ancestor('.folder').addClass('selected');
-
-						if (dataDirectionRight) {
-							listView.set('direction', 'right');
-						}
-						else {
-							listView.set('direction', 'left');
-						}
-
-						if (dataRefreshEntries) {
-							var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
-							var addButton = content.one('#addButton')
-
-							addButtonContainer.empty();
-							addButtonContainer.appendChild(addButton);
-
-							var entriesContainer = A.one('#<portlet:namespace />documentContainer');
-
-							var entries = content.one('#entries');
-
-							entriesContainer.empty();
-							entriesContainer.appendChild(entries);
-						}
-
-						if (dataRefreshFolders) {
-							if (content.one('#folders')) {
-								listView.set('data', content.one('#folders'));
-							}
-							else {
-								listView.set('data', content);
-							}
-						}
-					}
-				}
-			}
-		);
-		}
-	);
-
-	A.one('.document-container').delegate(
-		'click',
+	listView.on(
+		'itemChosen',
 		function(event) {
+			var item = event.item;
+			var attributes = event.attributes;
 
-			event.preventDefault();
-
-			var requestUrl = event.currentTarget.getAttribute('data-resource-url');
+			var dataDirectionRight = attributes['data-direction-right'];
+			var dataRefreshEntries = attributes['data-refresh-entries'];
+			var dataRefreshFolders = attributes['data-refresh-folders'];
+			var dataResourceUrl = attributes['data-resource-url'];
 
 			A.io.request(
-				requestUrl,
+				dataResourceUrl,
 				{
-					on: {
+					after: {
 						success: function(event, id, obj) {
 							var selFolder = A.one('.folder.selected');
 
@@ -354,27 +290,84 @@ if (folder != null) {
 
 							var content = A.Node.create(responseData);
 
-							var folders = content.one('#folders');
+							item.ancestor('.folder').addClass('selected');
+
+							var direction = 'left';
+
+							if (dataDirectionRight) {
+								direction = 'right';
+							}
+
+							listView.set('direction', direction);
+
+							if (dataRefreshEntries) {
+								var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
+								var addButton = content.one('#<portlet:namespace />addButton')
+
+								addButtonContainer.setContent(addButton);
+
+								var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+								var entries = content.one('#<portlet:namespace />entries');
+
+								entriesContainer.setContent(entries);
+							}
+
+							if (dataRefreshFolders) {
+								var foldersContent = content.one('#<portlet:namespace />folders');
+
+								if (foldersContent) {
+									content = foldersContent;
+								}
+
+								listView.set('data', content);
+							}
+						}
+					}
+				}
+			);
+		}
+	);
+
+	A.one('#<portlet:namespace />documentContainer').delegate(
+		'click',
+		function(event) {
+			event.preventDefault();
+
+			var requestUrl = event.currentTarget.attr('data-resource-url');
+
+			A.io.request(
+				requestUrl,
+				{
+					after: {
+						success: function(event, id, obj) {
+							var selFolder = A.one('.folder.selected');
+
+							if (selFolder) {
+								selFolder.removeClass('selected');
+							}
+
+							var responseData = this.get('responseData');
+
+							var content = A.Node.create(responseData);
+
+							var folders = content.one('#<portlet:namespace />folders');
+
 							listView.set('data', folders);
 
-							var addButton = content.one('#addButton');
-
 							var addButtonContainer = A.one('#<portlet:namespace />addButtonContainer');
+							var addButton = content.one('#<portlet:namespace />addButton');
 
-							addButtonContainer.empty();
-							addButtonContainer.appendChild(addButton);
-
-							var entries = content.one('#entries');
+							addButtonContainer.setContent(addButton);
 
 							var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+							var entries = content.one('#<portlet:namespace />entries');
 
-							entriesContainer.empty();
-							entriesContainer.appendChild(entries);
+							entriesContainer.setContent(entries);
 						}
 					}
 				}
 			);
 		},
-		'a[data-isFolder=true]'
+		'a[data-folder=true]'
 	);
 </aui:script>

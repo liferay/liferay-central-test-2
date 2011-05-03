@@ -35,11 +35,7 @@ AUI().add(
 						if (!menu) {
 							var list = trigger.one('ul');
 
-							var listElement = list.all('li');
-
-							var lastChild = listElement.item(listElement.size() - 1);
-
-							lastChild.addClass('last');
+							list.all('li').last().addClass('last');
 
 							menu = A.Node.create('<div class="lfr-component lfr-menu-list" />');
 

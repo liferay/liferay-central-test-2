@@ -277,7 +277,9 @@ if (row == null) {
 		webdavAction.on(
 			'click',
 			function(event) {
-				var popup = new A.Dialog(
+				event.preventDefault();
+
+				new A.Dialog(
 					{
 						bodyContent: A.one('#<%= randomNamespace %>webDav').html(),
 						centered: true,
@@ -287,8 +289,6 @@ if (row == null) {
 						width: 500
 					}
 				).render();
-
-				event.preventDefault();
 			}
 		);
 	}

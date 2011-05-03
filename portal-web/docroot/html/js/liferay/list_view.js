@@ -1,108 +1,108 @@
-
 AUI().add(
 	'liferay-list-view',
 	function(A) {
-		var BOTTOM = 'bottom';
-
-		var CONTAINER = 'container';
+		var Lang = A.Lang;
+		var isString = Lang.isString;
+		var getClassName = A.getClassName;
 
 		var CONTENT_BOX = 'contentBox';
 
-		var DATA = 'data';
-
-		var DEFAULT_TRANSITION_CONFIG = {
-			duration: 1,
-			easing: 'ease-out',
-			left: 0,
-			top: 0
-		};
-
-		var getClassName = A.ClassNameManager.getClassName;
-
-		var ITEM_CHOSEN = 'itemChosen';
-
-		var Lang = A.Lang;
-
-		var LEFT = 'left';
+		var EVENT_ITEM_CHOSEN = 'itemChosen';
 
 		var NAME = 'liferaylistview';
 
-		var CLASS_DATA_CONTAINER = getClassName(NAME, DATA, CONTAINER);
+		var CSS_DATA_CONTAINER = getClassName(NAME, 'data', 'container');
 
-		var CLASS_DATA_CONTAINER_HIDDEN = getClassName(NAME, DATA, CONTAINER, 'hidden');
+		var STR_BOTTOM = 'bottom';
 
-		var PX = 'px';
+		var STR_LEFT = 'left';
 
-		var REGION = 'region';
+		var STR_REGION = 'region';
 
-		var RIGHT = 'right';
+		var STR_RIGHT = 'right';
 
-		var TOP = 'top';
+		var STR_TOP = 'top';
 
-		var TPL_DATA_CONTAINER = '<div class="' + CLASS_DATA_CONTAINER + ' ' + CLASS_DATA_CONTAINER_HIDDEN + '"></div>';
-
-		var ZERO_PX = '0px';
+		var TPL_DATA_CONTAINER = '<div class="' + CSS_DATA_CONTAINER + ' yui3-aui-helper-hidden"></div>';
 
 		var ListView = A.Component.create(
 			{
-				EXTENDS: A.Widget,
-
 				ATTRS: {
 					data: {
 						setter: '_setData',
-						value: null,
-						validator: '_validateData'
+						validator: '_validateData',
+						value: null
 					},
 
 					direction: {
-						value: LEFT,
-						validator: '_validateDirection'
+						validator: '_validateDirection',
+						value: STR_LEFT
 					},
 
 					itemChosen: {
-						value: 'click',
-						validtor: Lang.isString
+						validator: isString,
+						value: 'click'
 					},
 
 					itemSelector: {
-						value: null,
-						validtor: Lang.isString
+						validator: isString,
+						value: null
 					},
 
 					itemAttributes: {
-						value: 'href',
-						validator: '_validateItemAttributes'
+						setter: A.Array,
+						validator: '_validateItemAttributes',
+						value: 'href'
 					},
 
 					transitionConfig: {
-						value: DEFAULT_TRANSITION_CONFIG,
-						validator: Lang.isObject
+						validator: Lang.isObject,
+						value: {
+							duration: 0.3,
+							easing: 'ease-out',
+							left: 0,
+							top: 0
+						}
 					},
 
 					useTransition: {
-						value: true,
-						validator: Lang.isBoolean
+						validator: Lang.isBoolean,
+						value: true
 					}
 				},
 
 				NAME: NAME,
 
 				prototype: {
+					initializer: function() {
+						var instance = this;
+
+						instance._transitionCompleteProxy = A.bind(instance._onTransitionCompleted, instance);
+					},
+
+					renderUI: function() {
+						var instance = this;
+
+						var boundingBox = instance.get('boundingBox');
+
+						var dataContainer = A.Node.create(TPL_DATA_CONTAINER);
+
+						boundingBox.append(dataContainer);
+
+						instance._dataContainer = dataContainer;
+					},
 
 					bindUI: function() {
 						var instance = this;
 
-						instance._itemChosenHandle = A.delegate(
-							instance.get(ITEM_CHOSEN),
-							A.bind(instance._onItemChosen, instance),
-							instance.get(CONTENT_BOX),
-							instance.get('itemSelector')
-						);
+						var contentBox = instance.get(CONTENT_BOX);
 
-						instance.after(
-							DATA + 'Change',
-							A.bind(instance._afterDataChange, instance)
-						);
+						var itemChosenEvent = instance.get(EVENT_ITEM_CHOSEN);
+						var itemSelector = instance.get('itemSelector');
+
+						instance._itemChosenHandle = contentBox.delegate(itemChosenEvent, instance._onItemChosen, itemSelector, instance);
+
+						instance.after('dataChange', instance._afterDataChange);
 					},
 
 					destructor: function() {
@@ -117,34 +117,20 @@ AUI().add(
 						}
 					},
 
-					renderUI: function() {
-						var instance = this;
-
-						var dataContainer = A.Node.create(TPL_DATA_CONTAINER);
-
-						var boundingBox = instance.get('boundingBox');
-
-						boundingBox.appendChild(dataContainer);
-
-						instance._dataContainer = dataContainer;
-					},
-
-					_afterDataChange: function(value) {
+					_afterDataChange: function(event) {
 						var instance = this;
 
 						var useTransition = instance.get('useTransition');
 
+						var newData = event.newVal;
+
 						if (useTransition) {
-							var dataContainer = instance._dataContainer;
-
-							dataContainer.empty();
-
-							instance._dataContainer.appendChild(value.newVal);
+							instance._dataContainer.setContent(newData);
 
 							instance._moveContainer();
 						}
 						else {
-							instance.get(CONTENT_BOX).html(value.newVal);
+							instance.get(CONTENT_BOX).setContent(newData);
 						}
 					},
 
@@ -153,17 +139,17 @@ AUI().add(
 
 						var contentBox = instance.get(CONTENT_BOX);
 
-						var targetRegion = contentBox.get(REGION);
+						var targetRegion = contentBox.get(STR_REGION);
 
 						instance._setDataContainerPosition(targetRegion);
 
 						var dataContainer = instance._dataContainer;
 
-						dataContainer.removeClass(CLASS_DATA_CONTAINER_HIDDEN);
+						dataContainer.show();
 
 						var transitionConfig = instance.get('transitionConfig');
 
-						dataContainer.transition(transitionConfig, A.bind(instance._onTransitionCompleted, instance));
+						dataContainer.transition(transitionConfig, instance._transitionCompleteProxy);
 					},
 
 					_onItemChosen: function(event) {
@@ -174,24 +160,26 @@ AUI().add(
 						if (itemAttributes) {
 							event.preventDefault();
 
-							itemAttributes = A.Array(itemAttributes);
-
 							var attributesData = {};
 
 							var target = event.currentTarget;
 
-							A.Array.each(itemAttributes, function(item, index, array) {
-								var attributeData = target.getAttribute(item);
+							A.Array.each(
+								itemAttributes,
+								function(item, index, collection) {
+									var attributeData = target.getAttribute(item);
 
-								attributesData[item] = attributeData;
-							});
+									attributesData[item] = attributeData;
+								}
+							);
 
-							var params = {
-								target: target,
-								attributes: attributesData
-							};
-
-							instance.fire(ITEM_CHOSEN, params);
+							instance.fire(
+								EVENT_ITEM_CHOSEN,
+								{
+									item: target,
+									attributes: attributesData
+								}
+							);
 						}
 					},
 
@@ -202,13 +190,12 @@ AUI().add(
 
 						instance.get(CONTENT_BOX).html(dataContainer.html());
 
-						dataContainer.addClass(CLASS_DATA_CONTAINER_HIDDEN);
-
+						dataContainer.hide();
 						dataContainer.empty();
 					},
 
 					_setData: function(value) {
-						if (Lang.isString(value)) {
+						if (isString(value)) {
 							value = A.Node.create(value);
 						}
 
@@ -218,44 +205,49 @@ AUI().add(
 					_setDataContainerPosition: function(targetRegion) {
 						var instance = this;
 
-						targetRegion = targetRegion || instance.get(CONTENT_BOX).get(REGION);
+						targetRegion = targetRegion || instance.get(CONTENT_BOX).get(STR_REGION);
 
 						var direction = instance.get('direction');
 
 						var dataContainer = instance._dataContainer;
 
-						if (direction == LEFT) {
-							dataContainer.setStyle(LEFT, targetRegion.width + PX );
-							dataContainer.setStyle(TOP, ZERO_PX );
+						var styles = {
+							left: 0,
+							top: 0
+						};
+
+						var valid = true;
+
+						if (direction == STR_LEFT) {
+							styles.left = targetRegion.width;
 						}
-						else if (direction == RIGHT) {
-							dataContainer.setStyle(LEFT, -targetRegion.width + PX );
-							dataContainer.setStyle(TOP, ZERO_PX );
+						else if (direction == STR_RIGHT) {
+							styles.left = -(targetRegion.width);
 						}
-						else if (direction == TOP) {
-							dataContainer.setStyle(LEFT, ZERO_PX );
-							dataContainer.setStyle(TOP, -targetRegion.height + PX );
+						else if (direction == STR_TOP) {
+							styles.top = -(targetRegion.height);
 						}
-						else if (direction == BOTTOM) {
-							dataContainer.setStyle(LEFT, ZERO_PX );
-							dataContainer.setStyle(TOP, targetRegion.height + PX );
+						else if (direction == STR_BOTTOM) {
+							styles.top = targetRegion.height;
 						}
 						else {
-							throw 'Internal error. Unsupported direction value';
+							valid = false;
 						}
+
+						dataContainer.setStyles(styles);
 					},
 
 					_validateData: function(value) {
-						return Lang.isString(value) || (value instanceof A.Node);
+						return isString(value) || A.instanceOf(value, A.Node);
 					},
 
 					_validateDirection: function(value) {
-						return value === BOTTOM || value === LEFT ||
-							value === RIGHT || value === TOP;
+						return value === STR_BOTTOM || value === STR_LEFT ||
+							value === STR_RIGHT || value === STR_TOP;
 					},
 
 					_validateItemAttributes: function(value) {
-						return Lang.isString(value) || Lang.isArray(value);
+						return isString(value) || Lang.isArray(value);
 					}
 				}
 			}
@@ -265,6 +257,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-widget', 'aui-paginator']
+		requires: ['aui-base']
 	}
 );

@@ -48,19 +48,19 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 %>
 
 <c:if test="<%= viewFolders %>">
-	<div id="folders">
+	<div id="<portlet:namespace />folders">
 		<liferay-util:include page="/html/portlet/library_admin/view_folders.jsp" />
 	</div>
 </c:if>
 
 <c:if test="<%= viewEntries %>">
-	<div id="entries">
+	<div id="<portlet:namespace />entries">
 		<liferay-util:include page="/html/portlet/library_admin/view_entries.jsp" />
 	</div>
 </c:if>
 
 <c:if test="<%= viewAddButton %>">
-	<span id="addButton">
+	<span id="<portlet:namespace />addButton">
 		<liferay-util:include page="/html/portlet/library_admin/add_button.jsp" />
 	</span>
 </c:if>

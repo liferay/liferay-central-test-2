@@ -518,48 +518,33 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 <aui:script use="aui-base">
 	var buttonRow = A.one('#<portlet:namespace />fileEntryToolbar');
 
-	var permissionPopUp = null;
-	var popUp = null;
-
 	var fileEntryToolbar = new A.Toolbar(
 		{
 			activeState: false,
 			boundingBox: buttonRow,
 			children: [
 				{
-					classNames: {'default': 'aui-icon-edit'},
 					handler: function(event) {
-						alert('keko');
-						<portlet:namespace />doFileEntryAction('<%= Constants.DELETE %>');
 					},
-					icon: 'pin-b',
+					icon: 'edit',
 					label: '<liferay-ui:message key="edit" />'
 				},
 				{
-					classNames: {'default': 'aui-icon-move'},
 					handler: function(event) {
-						alert('keko');
-						<portlet:namespace />doFileEntryAction('<%= Constants.DELETE %>');
 					},
-					icon: 'pin-b',
+					icon: 'move',
 					label: '<liferay-ui:message key="move" />'
 				},
 				{
-					classNames: {'default': 'aui-icon-lock'},
 					handler: function(event) {
-						alert('keko');
-						<portlet:namespace />doFileEntryAction('<%= Constants.DELETE %>');
 					},
-					icon: 'pin-b',
+					icon: 'lock',
 					label: '<liferay-ui:message key="lock" />'
 				},
 				{
-					classNames: {'default': 'aui-icon-permissions'},
 					handler: function(event) {
-						alert('keko');
-						<portlet:namespace />doFileEntryAction('<%= Constants.DELETE %>');
 					},
-					icon: 'pin-b',
+					icon: 'permissions',
 					label: '<liferay-ui:message key="permissions" />'
 				}
 			]

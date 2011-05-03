@@ -206,7 +206,7 @@ for (int i = 0; i < results.size(); i++) {
 
 										<liferay-util:include page="/html/portlet/library_admin/file_entry_action.jsp" />
 
-										<a class="document-link" data-isFolder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
+										<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
 											<c:if test="<%= fileEntry.isLocked() %>">
 												<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 											</c:if>
@@ -222,7 +222,7 @@ for (int i = 0; i < results.size(); i++) {
 
 								<c:otherwise>
 									<div class="document-display-style descriptive">
-										<a class="document-link" data-isFolder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
+										<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
 											<c:if test="<%= fileEntry.isLocked() %>">
 												<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
 											</c:if>
@@ -282,7 +282,7 @@ for (int i = 0; i < results.size(); i++) {
 
 								<liferay-util:include page="/html/portlet/library_admin/folder_action.jsp" />
 
-								<a class="document-link" data-isFolder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
+								<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
 									<img border="no" class="document-thumbnail" src="<%= src %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
 
 									<span class="document-title">
@@ -294,7 +294,7 @@ for (int i = 0; i < results.size(); i++) {
 
 						<c:otherwise>
 							<div class="document-display-style descriptive">
-								<a class="document-link" data-isFolder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
+								<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
 									<img border="no" class="document-thumbnail" src="<%= src %>" style="width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
 
 									<span class="document-title"><%= HtmlUtil.escape(curFolder.getName()) %></span>

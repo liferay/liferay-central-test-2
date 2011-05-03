@@ -31,6 +31,8 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 String taglibUrl = null;
 %>
 
+<aui:input cssClass="select-documents yui3-aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
+
 <span class="add-button" id="<portlet:namespace />addButtonContainer">
 	<liferay-util:include page="/html/portlet/library_admin/add_button.jsp" />
 </span>
@@ -102,7 +104,7 @@ String taglibUrl = null;
 <liferay-ui:icon-menu icon="" align="left" direction="down" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "doFileEntryAction('" + Constants.LOCK + "')";
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
 	%>
 
 	<liferay-ui:icon
@@ -111,7 +113,7 @@ String taglibUrl = null;
 	/>
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "doFileEntryAction('" + Constants.UNLOCK + "')";
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.UNLOCK + "')";
 	%>
 
 	<liferay-ui:icon
@@ -120,7 +122,7 @@ String taglibUrl = null;
 	/>
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "doFileEntryAction('" + Constants.DELETE + "')";
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
 	%>
 
 	<liferay-ui:icon-delete
@@ -128,25 +130,18 @@ String taglibUrl = null;
 	/>
 </liferay-ui:icon-menu>
 
-<span class="select-documents lfr-component lfr-actions align-left direction-down null lfr-extended show-arrow"><input id="<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>" name="<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>" type="checkbox" /></span>
-
 <aui:script use="aui-base">
-	var allRowIds = A.one('#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>');
+	var allRowIds = A.one('#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 
 	allRowIds.on(
 		'click',
 		function(event) {
-			var documentViews = A.one('.document-container');
-			var documentView = A.all('.document-display-style')
+			var documentContainer = A.one('.document-container');
+			var documentDisplayStyle = A.all('.document-display-style')
 
-			Liferay.Util.checkAll(documentViews, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', event.currentTarget);
+			Liferay.Util.checkAll(documentContainer, '<portlet:namespace /><%= RowChecker.ROW_IDS %>', event.currentTarget);
 
-			if (allRowIds.attr('checked')) {
-				documentView.addClass("selected");
-			}
-			else {
-				documentView.removeClass("selected");
-			}
+			documentDisplayStyle.toggleClass('selected', allRowIds.attr('checked'));
 		}
 	);
 </aui:script>
