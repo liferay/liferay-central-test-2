@@ -98,7 +98,7 @@ public class IGActivityInterpreter extends BaseSocialActivityInterpreter {
 		String folderLink =
 			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 				"/image_gallery/find_folder?groupId=" + image.getGroupId() +
-				"&folderId=" + image.getFolderId();
+					"&folderId=" + image.getFolderId();
 
 		String body = wrapLink(folderLink, "go-to-folder", themeDisplay);
 
