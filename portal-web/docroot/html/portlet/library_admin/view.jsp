@@ -182,6 +182,7 @@ if (folder != null) {
 			'blur',
 			function(event) {
 				var documentView = event.currentTarget.ancestor('.document-display-style');
+
 				documentView.removeClass('hover');
 			}
 		);

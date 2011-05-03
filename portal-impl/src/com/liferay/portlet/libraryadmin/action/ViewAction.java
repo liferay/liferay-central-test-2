@@ -21,6 +21,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.action.ActionUtil;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -41,8 +42,10 @@ public class ViewAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		PortletContext portletContext = portletConfig.getPortletContext();
+
 		PortletRequestDispatcher portletRequestDispatcher =
-			portletConfig.getPortletContext().getRequestDispatcher(
+			portletContext.getRequestDispatcher(
 				"/html/portlet/library_admin/library_entries.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);

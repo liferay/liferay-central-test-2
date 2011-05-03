@@ -85,7 +85,7 @@ List<String> headerNames = new ArrayList<String>();
 headerNames.add("name");
 headerNames.add("description");
 headerNames.add("size");
-headerNames.add("creation-date");
+headerNames.add("create-date");
 headerNames.add("modified-date");
 headerNames.add("read-count");
 headerNames.add(StringPool.BLANK);
@@ -105,7 +105,7 @@ orderableHeaders.put("read-count", "readCount");
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
 
-OrderByComparator orderByComparator = DLUtil.getEntryOrderByComparator(orderByCol, orderByType);
+OrderByComparator orderByComparator = DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType);
 
 searchContainer.setOrderableHeaders(orderableHeaders);
 searchContainer.setOrderByCol(orderByCol);
@@ -132,9 +132,9 @@ else {
 		results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 	}
 	else {
-		List folders = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getEntryOrderByComparator(orderByCol, orderByType));
+		List folders = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
 
-		List fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getEntryOrderByComparator(orderByCol, orderByType));
+		List fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
 
 		results = ListUtil.copy(folders);
 
@@ -171,7 +171,6 @@ searchContainer.setTotal(total);
 
 <%
 for (int i = 0; i < results.size(); i++) {
-
 	Object result = results.get(i);
 %>
 
@@ -205,7 +204,7 @@ for (int i = 0; i < results.size(); i++) {
 									<div class="document-display-style icon">
 										<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 
-										<liferay-util:include page='<%= "/html/portlet/library_admin/file_entry_action.jsp" %>' />
+										<liferay-util:include page="/html/portlet/library_admin/file_entry_action.jsp" />
 
 										<a class="document-link" data-isFolder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
 											<c:if test="<%= fileEntry.isLocked() %>">
@@ -235,7 +234,7 @@ for (int i = 0; i < results.size(); i++) {
 											<span class="document-description"><%= HtmlUtil.escape(fileEntry.getDescription()) %></span>
 										</a>
 
-										<liferay-util:include page='<%= "/html/portlet/library_admin/file_entry_action.jsp" %>' />
+										<liferay-util:include page="/html/portlet/library_admin/file_entry_action.jsp" />
 
 										<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 									</div>
@@ -281,7 +280,7 @@ for (int i = 0; i < results.size(); i++) {
 							<div class="document-display-style icon">
 								<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= curFolder.getFolderId() %>" />
 
-								<liferay-util:include page='<%= "/html/portlet/library_admin/folder_action.jsp" %>' />
+								<liferay-util:include page="/html/portlet/library_admin/folder_action.jsp" />
 
 								<a class="document-link" data-isFolder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
 									<img border="no" class="document-thumbnail" src="<%= src %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
@@ -303,7 +302,7 @@ for (int i = 0; i < results.size(); i++) {
 									<span class="document-description"><%= HtmlUtil.escape(curFolder.getDescription()) %></span>
 								</a>
 
-								<liferay-util:include page='<%= "/html/portlet/library_admin/folder_action.jsp" %>' />
+								<liferay-util:include page="/html/portlet/library_admin/folder_action.jsp" />
 
 								<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= curFolder.getFolderId() %>" />
 							</div>
@@ -356,7 +355,7 @@ for (int i = 0; i < results.size(); i++) {
 				<c:when test="<%= curFolder != null %>">
 					<liferay-util:buffer var="folderTitle">
 						<liferay-ui:icon
-							image="../common/folder"
+							image="folder"
 							label="<%= true %>"
 							message="<%= curFolder.getName() %>"
 						/>

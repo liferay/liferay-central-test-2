@@ -29,8 +29,8 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
+			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="folder" message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />

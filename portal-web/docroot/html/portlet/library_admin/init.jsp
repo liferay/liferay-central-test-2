@@ -52,5 +52,4 @@ boolean showActions = true;
 boolean showFolderMenu = true;
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
 %>

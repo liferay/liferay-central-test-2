@@ -55,7 +55,7 @@ int end = ParamUtil.getInteger(request, "end", SearchContainer.DEFAULT_DELTA);
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
 
-List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId, start, end, DLUtil.getEntryOrderByComparator(orderByCol, orderByType));
+List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId, start, end, DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
 %>
 
 <ul>
@@ -96,28 +96,27 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 
 	<%
 	for (Folder curFolder : folders) {
-
 		int childrenFolderCount = DLAppServiceUtil.getFoldersCount(repositoryId, curFolder.getFolderId());
 	%>
 
-	<liferay-portlet:renderURL varImpl="viewURL">
-		<portlet:param name="struts_action" value="/library_admin/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-	</liferay-portlet:renderURL>
+		<liferay-portlet:renderURL varImpl="viewURL">
+			<portlet:param name="struts_action" value="/library_admin/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+		</liferay-portlet:renderURL>
 
-	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewFoldersURL">
-		<portlet:param name="struts_action" value="/library_admin/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-		<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
-	</liferay-portlet:resourceURL>
+		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewFoldersURL">
+			<portlet:param name="struts_action" value="/library_admin/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+			<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
+		</liferay-portlet:resourceURL>
 
-	<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
-		<portlet:param name="struts_action" value="/library_admin/view" />
-		<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-		<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
-		<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-		<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-	</liferay-portlet:resourceURL>
+		<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
+			<portlet:param name="struts_action" value="/library_admin/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+			<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
+			<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
+			<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+		</liferay-portlet:resourceURL>
 
 		<li class="folder <%= (curFolder.getFolderId() == folderId) ? "selected" : StringPool.BLANK %>">
 			<c:if test="<%= (childrenFolderCount > 0) %>">

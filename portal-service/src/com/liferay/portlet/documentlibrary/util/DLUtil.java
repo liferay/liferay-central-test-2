@@ -250,7 +250,7 @@ public class DLUtil {
 		return _instance._getGenericName(extension);
 	}
 
-	public static OrderByComparator getEntryOrderByComparator(
+	public static OrderByComparator getRepositoryModelOrderByComparator(
 		String orderByCol, String orderByType) {
 
 		boolean orderByAsc = true;
