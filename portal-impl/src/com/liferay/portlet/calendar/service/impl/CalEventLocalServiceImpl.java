@@ -107,7 +107,6 @@ import net.fortuna.ical4j.model.property.DateProperty;
 import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
-import net.fortuna.ical4j.model.property.Duration;
 import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.Method;
 import net.fortuna.ical4j.model.property.ProdId;
@@ -1471,11 +1470,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			// Duration
 
-			Duration duration = new Duration(
-				new Dur(
-					0, event.getDurationHour(), event.getDurationMinute(), 0));
+			Dur dur = new Dur(
+				0, event.getDurationHour(), event.getDurationMinute(), 0);
 
-			eventProps.add(duration);
+			DtEnd dtEnd = new DtEnd(new DateTime(dur.getTime(
+				event.getStartDate())));
+
+			eventProps.add(dtEnd);
 		}
 
 		// Summary
