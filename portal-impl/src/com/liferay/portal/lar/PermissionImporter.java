@@ -334,17 +334,6 @@ public class PermissionImporter {
 				String description = roleElement.attributeValue("description");
 				int type = Integer.valueOf(roleElement.attributeValue("type"));
 
-				if ((type == RoleConstants.TYPE_ORGANIZATION) &&
-					group.isCommunity()) {
-
-					type = RoleConstants.TYPE_SITE;
-				}
-				else if ((type == RoleConstants.TYPE_SITE) &&
-						 group.isOrganization()) {
-
-					type = RoleConstants.TYPE_ORGANIZATION;
-				}
-
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, description, type);
 			}
@@ -395,79 +384,6 @@ public class PermissionImporter {
 			}
 			else {
 				role = layoutCache.getRole(companyId, name);
-			}
-
-			if ((type == RoleConstants.TYPE_ORGANIZATION) &&
-				group.isCommunity()) {
-
-				type = RoleConstants.TYPE_SITE;
-
-				if ((role != null) &&
-					(role.getType() != RoleConstants.TYPE_SITE)) {
-
-					role = null;
-
-					if (name.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
-						name = RoleConstants.SITE_ADMINISTRATOR;
-					}
-					else if (name.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-						name = RoleConstants.SITE_MEMBER;
-					}
-					else if (name.equals(RoleConstants.ORGANIZATION_OWNER)) {
-						name = RoleConstants.SITE_OWNER;
-					}
-					else {
-						if (name.contains("Organization")) {
-							name = StringUtil.replace(
-								name, "Organization", "Community");
-						}
-						else {
-							name = "Community ".concat(name);
-						}
-					}
-
-					try {
-						role = RoleLocalServiceUtil.getRole(companyId, name);
-					}
-					catch (Exception e) {
-					}
-				}
-			}
-			else if ((type == RoleConstants.TYPE_SITE) &&
-					 group.isOrganization()) {
-
-				type = RoleConstants.TYPE_ORGANIZATION;
-
-				if ((role != null) &&
-					(role.getType() != RoleConstants.TYPE_ORGANIZATION)) {
-
-					role = null;
-
-					if (name.equals(RoleConstants.SITE_ADMINISTRATOR)) {
-						name = RoleConstants.ORGANIZATION_ADMINISTRATOR;
-					}
-					else if (name.equals(RoleConstants.SITE_MEMBER)) {
-						name = RoleConstants.ORGANIZATION_MEMBER;
-					}
-					else if (name.equals(RoleConstants.SITE_OWNER)) {
-						name = RoleConstants.ORGANIZATION_OWNER;
-					}
-					else {
-						if (name.contains("Community")) {
-							name = StringUtil.replace(
-								name, "Community", "Organization");
-						}
-						else {
-							name = "Organization ".concat(name);
-						}
-					}
-
-					try {
-						role = RoleLocalServiceUtil.getRole(companyId, name);
-					}
-					catch (Exception e) {
-					}
-				}
 			}
 
 			if (role == null) {
