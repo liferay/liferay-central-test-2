@@ -458,6 +458,9 @@ public class GroupWrapper implements Group {
 		return _group.hasStagingGroup();
 	}
 
+	/**
+	* @deprecated in 6.1
+	*/
 	public boolean isCommunity() {
 		return _group.isCommunity();
 	}
@@ -468,6 +471,10 @@ public class GroupWrapper implements Group {
 
 	public boolean isControlPanel() {
 		return _group.isControlPanel();
+	}
+
+	public boolean isRegularSite() {
+		return _group.isRegularSite();
 	}
 
 	public boolean isLayout() {
@@ -484,6 +491,10 @@ public class GroupWrapper implements Group {
 
 	public boolean isOrganization() {
 		return _group.isOrganization();
+	}
+
+	public boolean isSite() {
+		return _group.isSite();
 	}
 
 	public boolean isStaged() {
