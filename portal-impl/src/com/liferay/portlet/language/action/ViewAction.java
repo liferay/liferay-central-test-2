@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -103,19 +105,30 @@ public class ViewAction extends PortletAction {
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		if (Validator.isNull(redirect)) {
-			if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
-				redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
+			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 
-				if (themeDisplay.isI18n()) {
-					int pos = redirect.indexOf(CharPool.SLASH, 1);
+			if (themeDisplay.isI18n()) {
+				int pos = redirect.indexOf(CharPool.SLASH, 1);
 
-					redirect = redirect.substring(pos);
-				}
+				redirect = redirect.substring(pos);
+			}
+		}
+		else {
+			String layoutURL = PortalUtil.getLayoutFriendlyURL(
+				layout, themeDisplay, locale);
+
+			int pos = redirect.indexOf(Portal.FRIENDLY_URL_SEPARATOR);
+
+			if (pos == -1) {
+				pos = redirect.indexOf(StringPool.QUESTION);
+			}
+
+			if (pos != -1) {
+				redirect = layoutURL + redirect.substring(pos);
 			}
 			else {
-				redirect = PortalUtil.getLayoutFriendlyURL(
-					layout, themeDisplay, locale);
+				redirect = layoutURL;
 			}
 		}
 
