@@ -135,11 +135,6 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>copyCurrentRenderParameters</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
 			<name>escapeXml</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
