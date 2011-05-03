@@ -301,20 +301,21 @@ public class EditLayoutsAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(resourceRequest, Constants.CMD);
 
+		PortletContext portletContext = getPortletContext();
+
 		PortletRequestDispatcher portletRequestDispatcher = null;
 
 		if (cmd.equals(ActionKeys.PUBLISH_STAGING)) {
-			portletRequestDispatcher =
-				portletConfig.getPortletContext().getRequestDispatcher(
-					"/html/portlet/layouts_admin/" +
-						"scheduled_publishing_events.jsp");
+			PortletContext portletContext = getPortletContext();
+
+			portletRequestDispatcher = portletContext.getRequestDispatcher(
+				"/html/portlet/layouts_admin/scheduled_publishing_events.jsp");
 		}
 		else {
 			getGroup(resourceRequest);
 
-			portletRequestDispatcher =
-				portletConfig.getPortletContext().getRequestDispatcher(
-					"/html/portlet/layouts_admin/view_resources.jsp");
+			portletRequestDispatcher = portletContext.getRequestDispatcher(
+				"/html/portlet/layouts_admin/view_resources.jsp");
 		}
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);

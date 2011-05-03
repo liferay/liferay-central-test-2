@@ -49,8 +49,7 @@ String[][] categorySections = {mainSections};
 	<div class="header-row-content">
 		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
 
-		<aui:button-row cssClass="edit-toolbar" id='<%= portletResponse.getNamespace() + "layoutToolbar" %>'>
-		</aui:button-row>
+		<aui:button-row cssClass="edit-toolbar" id='<%= portletResponse.getNamespace() + "layoutToolbar" %>' />
 	</div>
 </div>
 
