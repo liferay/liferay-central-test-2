@@ -61,6 +61,7 @@ public class LayoutRevisionJSONSerializer {
 			model.getParentLayoutRevisionId());
 		jsonObject.put("head", model.getHead());
 		jsonObject.put("major", model.getMajor());
+		jsonObject.put("variationName", model.getVariationName());
 		jsonObject.put("plid", model.getPlid());
 		jsonObject.put("privateLayout", model.getPrivateLayout());
 		jsonObject.put("name", model.getName());

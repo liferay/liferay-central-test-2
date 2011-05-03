@@ -321,6 +321,7 @@
 			<basic name="parentLayoutRevisionId" />
 			<basic name="head" />
 			<basic name="major" />
+			<basic name="variationName" />
 			<basic name="plid" />
 			<basic name="privateLayout" />
 			<basic name="name" />

@@ -393,6 +393,7 @@
 		<property name="parentLayoutRevisionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="major" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="variationName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="plid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="privateLayout" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />

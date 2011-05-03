@@ -246,6 +246,21 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setMajor(boolean major);
 
 	/**
+	 * Gets the variation name of this layout revision.
+	 *
+	 * @return the variation name of this layout revision
+	 */
+	@AutoEscape
+	public String getVariationName();
+
+	/**
+	 * Sets the variation name of this layout revision.
+	 *
+	 * @param variationName the variation name of this layout revision
+	 */
+	public void setVariationName(String variationName);
+
+	/**
 	 * Gets the plid of this layout revision.
 	 *
 	 * @return the plid of this layout revision

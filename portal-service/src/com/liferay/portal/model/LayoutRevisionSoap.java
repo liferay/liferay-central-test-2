@@ -42,6 +42,7 @@ public class LayoutRevisionSoap implements Serializable {
 		soapModel.setParentLayoutRevisionId(model.getParentLayoutRevisionId());
 		soapModel.setHead(model.getHead());
 		soapModel.setMajor(model.getMajor());
+		soapModel.setVariationName(model.getVariationName());
 		soapModel.setPlid(model.getPlid());
 		soapModel.setPrivateLayout(model.getPrivateLayout());
 		soapModel.setName(model.getName());
@@ -207,6 +208,14 @@ public class LayoutRevisionSoap implements Serializable {
 
 	public void setMajor(boolean major) {
 		_major = major;
+	}
+
+	public String getVariationName() {
+		return _variationName;
+	}
+
+	public void setVariationName(String variationName) {
+		_variationName = variationName;
 	}
 
 	public long getPlid() {
@@ -380,6 +389,7 @@ public class LayoutRevisionSoap implements Serializable {
 	private long _parentLayoutRevisionId;
 	private boolean _head;
 	private boolean _major;
+	private String _variationName;
 	private long _plid;
 	private boolean _privateLayout;
 	private String _name;

@@ -291,6 +291,24 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
+	* Gets the variation name of this layout revision.
+	*
+	* @return the variation name of this layout revision
+	*/
+	public java.lang.String getVariationName() {
+		return _layoutRevision.getVariationName();
+	}
+
+	/**
+	* Sets the variation name of this layout revision.
+	*
+	* @param variationName the variation name of this layout revision
+	*/
+	public void setVariationName(java.lang.String variationName) {
+		_layoutRevision.setVariationName(variationName);
+	}
+
+	/**
 	* Gets the plid of this layout revision.
 	*
 	* @return the plid of this layout revision

@@ -79,6 +79,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "parentLayoutRevisionId", Types.BIGINT },
 			{ "head", Types.BOOLEAN },
 			{ "major", Types.BOOLEAN },
+			{ "variationName", Types.VARCHAR },
 			{ "plid", Types.BIGINT },
 			{ "privateLayout", Types.BOOLEAN },
 			{ "name", Types.VARCHAR },
@@ -99,7 +100,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,major BOOLEAN,plid LONG,privateLayout BOOLEAN,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,major BOOLEAN,variationName VARCHAR(75) null,plid LONG,privateLayout BOOLEAN,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutRevision";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.layoutRevisionId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.layoutRevisionId DESC";
@@ -133,6 +134,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		model.setParentLayoutRevisionId(soapModel.getParentLayoutRevisionId());
 		model.setHead(soapModel.getHead());
 		model.setMajor(soapModel.getMajor());
+		model.setVariationName(soapModel.getVariationName());
 		model.setPlid(soapModel.getPlid());
 		model.setPrivateLayout(soapModel.getPrivateLayout());
 		model.setName(soapModel.getName());
@@ -325,6 +327,19 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public void setMajor(boolean major) {
 		_major = major;
+	}
+
+	public String getVariationName() {
+		if (_variationName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _variationName;
+		}
+	}
+
+	public void setVariationName(String variationName) {
+		_variationName = variationName;
 	}
 
 	public long getPlid() {
@@ -1028,6 +1043,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		layoutRevisionImpl.setParentLayoutRevisionId(getParentLayoutRevisionId());
 		layoutRevisionImpl.setHead(getHead());
 		layoutRevisionImpl.setMajor(getMajor());
+		layoutRevisionImpl.setVariationName(getVariationName());
 		layoutRevisionImpl.setPlid(getPlid());
 		layoutRevisionImpl.setPrivateLayout(getPrivateLayout());
 		layoutRevisionImpl.setName(getName());
@@ -1120,7 +1136,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{layoutRevisionId=");
 		sb.append(getLayoutRevisionId());
@@ -1144,6 +1160,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getHead());
 		sb.append(", major=");
 		sb.append(getMajor());
+		sb.append(", variationName=");
+		sb.append(getVariationName());
 		sb.append(", plid=");
 		sb.append(getPlid());
 		sb.append(", privateLayout=");
@@ -1188,7 +1206,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(94);
+		StringBundler sb = new StringBundler(97);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.LayoutRevision");
@@ -1237,6 +1255,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(
 			"<column><column-name>major</column-name><column-value><![CDATA[");
 		sb.append(getMajor());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>variationName</column-name><column-value><![CDATA[");
+		sb.append(getVariationName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>plid</column-name><column-value><![CDATA[");
@@ -1336,6 +1358,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private boolean _originalHead;
 	private boolean _setOriginalHead;
 	private boolean _major;
+	private String _variationName;
 	private long _plid;
 	private long _originalPlid;
 	private boolean _setOriginalPlid;

@@ -878,6 +878,7 @@ create table LayoutRevision (
 	parentLayoutRevisionId LONG,
 	head BOOLEAN,
 	major BOOLEAN,
+	variationName VARCHAR(75) null,
 	plid LONG,
 	privateLayout BOOLEAN,
 	name STRING null,

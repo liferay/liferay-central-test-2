@@ -244,21 +244,38 @@ public class LayoutRevisionLocalServiceWrapper
 
 	public com.liferay.portal.model.LayoutRevision addLayoutRevision(
 		long userId, long layoutSetBranchId, long parentLayoutRevisionId,
-		boolean head, long plid, boolean privateLayout, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String keywords, java.lang.String robots,
-		java.lang.String typeSettings, boolean iconImage, long iconImageId,
-		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,
-		java.lang.String css,
+		boolean head, java.lang.String variationName, long plid,
+		boolean privateLayout, java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String keywords,
+		java.lang.String robots, java.lang.String typeSettings,
+		boolean iconImage, long iconImageId, java.lang.String themeId,
+		java.lang.String colorSchemeId, java.lang.String wapThemeId,
+		java.lang.String wapColorSchemeId, java.lang.String css,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevisionLocalService.addLayoutRevision(userId,
-			layoutSetBranchId, parentLayoutRevisionId, head, plid,
-			privateLayout, name, title, description, keywords, robots,
+			layoutSetBranchId, parentLayoutRevisionId, head, variationName,
+			plid, privateLayout, name, title, description, keywords, robots,
 			typeSettings, iconImage, iconImageId, themeId, colorSchemeId,
 			wapThemeId, wapColorSchemeId, css, serviceContext);
+	}
+
+	public com.liferay.portal.model.LayoutRevision addRootRevision(
+		long userId, long layoutRevisionId, java.lang.String variationName,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String keywords,
+		java.lang.String robots, java.lang.String typeSettings,
+		boolean iconImage, long iconImageId, java.lang.String themeId,
+		java.lang.String colorSchemeId, java.lang.String wapThemeId,
+		java.lang.String wapColorSchemeId, java.lang.String css,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.addRootRevision(userId,
+			layoutRevisionId, variationName, name, title, description,
+			keywords, robots, typeSettings, iconImage, iconImageId, themeId,
+			colorSchemeId, wapThemeId, wapColorSchemeId, css, serviceContext);
 	}
 
 	public void deleteLayoutLayoutRevisions(long plid)
@@ -345,20 +362,20 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	public com.liferay.portal.model.LayoutRevision updateLayoutRevision(
-		long userId, long layoutRevisionId, java.lang.String name,
-		java.lang.String title, java.lang.String description,
-		java.lang.String keywords, java.lang.String robots,
-		java.lang.String typeSettings, boolean iconImage, long iconImageId,
-		java.lang.String themeId, java.lang.String colorSchemeId,
-		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,
-		java.lang.String css,
+		long userId, long layoutRevisionId, java.lang.String variationName,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String keywords,
+		java.lang.String robots, java.lang.String typeSettings,
+		boolean iconImage, long iconImageId, java.lang.String themeId,
+		java.lang.String colorSchemeId, java.lang.String wapThemeId,
+		java.lang.String wapColorSchemeId, java.lang.String css,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevisionLocalService.updateLayoutRevision(userId,
-			layoutRevisionId, name, title, description, keywords, robots,
-			typeSettings, iconImage, iconImageId, themeId, colorSchemeId,
-			wapThemeId, wapColorSchemeId, css, serviceContext);
+			layoutRevisionId, variationName, name, title, description,
+			keywords, robots, typeSettings, iconImage, iconImageId, themeId,
+			colorSchemeId, wapThemeId, wapColorSchemeId, css, serviceContext);
 	}
 
 	public com.liferay.portal.model.LayoutRevision updateStatus(long userId,
