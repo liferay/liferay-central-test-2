@@ -82,6 +82,7 @@
 			</c:if>
 
 			boundingBox: '#<portlet:namespace />formBuilder',
+			enableEditing: false,
 
 			<c:if test="<%= Validator.isNotNull(script) %>">
 				fields: <%= DDMXSDUtil.getJSONArray(script) %>,
