@@ -66,7 +66,7 @@ if (curTagsParam != null) {
 			hiddenInput: '#<%= namespace + hiddenInput %>',
 			input: '#<%= randomNamespace %>assetTagNames',
 			instanceVar: '<%= namespace + randomNamespace %>',
-			isPortalModelResource: <%= _isPortalModelResource(className) %>
+			portalModelResource: <%= ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName()) %>
 		}
 	).render();
 </aui:script>

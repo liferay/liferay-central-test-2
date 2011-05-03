@@ -22,7 +22,7 @@ AUI().add(
 		 * hiddenInput {string}: The hidden input used to pass in the current categories.
 		 *
 		 * Optional
-		 * isPortalModelResource {boolean}: Whether the asset model is on portal level.
+		 * portalModelResource {boolean}: Whether the asset model is on portal level.
 		 */
 
 		var AssetCategoriesSelector = A.Component.create(
@@ -154,11 +154,11 @@ AUI().add(
 					_getEntries: function(className, callback) {
 						var instance = this;
 
-						var isPortalModelResource = instance.get('isPortalModelResource');
+						var portalModelResource = instance.get('portalModelResource');
 
 						var groupIds = [];
 
-						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !isPortalModelResource) {
+						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !portalModelResource) {
 							groupIds.push(themeDisplay.getParentGroupId());
 						}
 

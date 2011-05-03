@@ -40,7 +40,7 @@ AUI().add(
 		 *
 		 * Optional
 		 * focus {boolean}: Whether the text input should be focused.
-		 * isPortalModelResource {boolean}: Whether the asset model is on portal level.
+		 * portalModelResource {boolean}: Whether the asset model is on portal level.
 		 *
 		 * Callbacks
 		 * contentCallback {function}: Called to get suggested tags.
@@ -86,7 +86,7 @@ AUI().add(
 					instanceVar: {
 						value: ''
 					},
-					isPortalModelResource: {
+					portalModelResource: {
 						value: false
 					},
 					hiddenInput: {
@@ -250,11 +250,11 @@ AUI().add(
 					_getEntries: function(callback) {
 						var instance = this;
 
-						var isPortalModelResource = instance.get('isPortalModelResource');
+						var portalModelResource = instance.get('portalModelResource');
 
 						var groupIds = [];
 
-						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !isPortalModelResource) {
+						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !portalModelResource) {
 							groupIds.push(themeDisplay.getParentGroupId());
 						}
 
