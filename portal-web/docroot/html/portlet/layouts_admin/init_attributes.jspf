@@ -203,7 +203,7 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 	</c:if>
 
 	<liferay-portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-</portlet:renderURL>
+</liferay-portlet:renderURL>
 
 <liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="portletURL">
 	<liferay-portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
@@ -216,7 +216,7 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 
 	<liferay-portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 	<liferay-portlet:param name="viewLayout" value="<%= Boolean.TRUE.toString() %>" />
-</portlet:resourceURL>
+</liferay-portlet:resourceURL>
 
 <%
 if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletKeys.MY_PAGES)) {
