@@ -152,11 +152,9 @@ AUI().add(
 
 									var label = instance._createDynamicNode('entry', MAP_ATTR_LABEL);
 
-									buffer.push(typeElementOption.openTag);
-
-									buffer.push(metadata.openTag);
-
 									buffer.push(
+										typeElementOption.openTag,
+										metadata.openTag,
 										label.openTag,
 										STR_CDATA_OPEN + optionLabel + STR_CDATA_CLOSE,
 										label.closeTag,
@@ -281,10 +279,10 @@ AUI().add(
 						};
 					},
 
-					_formatOptionsKey: function(s) {
-						s = A.Text.AccentFold.fold(s);
+					_formatOptionsKey: function(str) {
+						str = A.Text.AccentFold.fold(str);
 
-						return s.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
+						return str.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
 					}
 				}
 			}
