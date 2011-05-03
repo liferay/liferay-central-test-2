@@ -126,6 +126,8 @@ public class MoveThreadTest extends BaseTestCase {
 				selenium.type("//body",
 					RuntimeVariables.replace(
 						"Trust and paths will be straightened."));
+				selenium.selectFrame("relative=top");
+				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Select']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPopUp("category",

@@ -47,8 +47,12 @@ public class EditPageTemplateTest extends BaseTestCase {
 		selenium.clickAt("link=Page Templates", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
+		assertEquals(RuntimeVariables.replace("Test Page Template"),
+			selenium.getText("//tr[6]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText("//tr[6]/td[3]/span/ul/li/strong/a/span"));
+		selenium.clickAt("//tr[6]/td[3]/span/ul/li/strong/a/span",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

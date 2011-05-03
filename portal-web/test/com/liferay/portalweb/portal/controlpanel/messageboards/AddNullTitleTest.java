@@ -78,6 +78,8 @@ public class AddNullTitleTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents__162_editor']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a Null Test Entry!"));
+		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("This field is required."));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));

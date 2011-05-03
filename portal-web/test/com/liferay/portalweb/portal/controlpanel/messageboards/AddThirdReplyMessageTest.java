@@ -102,6 +102,26 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 		selenium.selectFrame("//td[@id='cke_contents__162_editor']/iframe");
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a third reply message."));
+		selenium.selectFrame("relative=top");
+		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Publish']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");

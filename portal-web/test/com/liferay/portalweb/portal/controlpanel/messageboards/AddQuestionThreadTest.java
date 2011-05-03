@@ -82,7 +82,24 @@ public class AddQuestionThreadTest extends BaseTestCase {
 		selenium.type("_162_textArea",
 			RuntimeVariables.replace("What is your favorite color?"));
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@value='Publish']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
