@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");

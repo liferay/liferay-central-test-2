@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_library_admin_folder_action") + StringPool.UNDERLINE;

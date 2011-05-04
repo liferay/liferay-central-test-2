@@ -1762,23 +1762,6 @@
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
-		<portlet-name>168</portlet-name>
-		<icon>/html/icons/document_library.png</icon>
-		<struts-path>library_admin</struts-path>
-		<parent-struts-path>document_library</parent-struts-path>
-		<control-panel-entry-category>content</control-panel-entry-category>
-		<control-panel-entry-weight>2.0</control-panel-entry-weight>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<scopeable>true</scopeable>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/library_admin/css/main.jsp</header-portlet-css>
-		<css-class-wrapper>portlet-document-library</css-class-wrapper>
-		<add-default-resource>true</add-default-resource>
-	</portlet>
-	<portlet>
 		<portlet-name>169</portlet-name>
 		<struts-path>dynamic_data_list_display</struts-path>
 		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>

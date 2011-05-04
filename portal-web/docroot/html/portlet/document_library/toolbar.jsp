@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 Folder folder = (Folder)request.getAttribute("view.jsp-folder");
@@ -34,7 +34,7 @@ String taglibUrl = null;
 <aui:input cssClass="select-documents yui3-aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
 
 <span class="add-button" id="<portlet:namespace />addButtonContainer">
-	<liferay-util:include page="/html/portlet/library_admin/add_button.jsp" />
+	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
 </span>
 
 <liferay-ui:icon-menu icon="" align="left" direction="down" message="sort" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">

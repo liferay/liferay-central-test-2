@@ -364,6 +364,18 @@
 
 	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
 
+	<!-- Document Library -->
+
+	<definition name="portlet.document_library" extends="portlet" />
+
+	<definition name="portlet.document_library.view" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.view_file_entry" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view_file_entry.jsp" />
+	</definition>
+
 	<!-- Document Library Display-->
 
 	<definition name="portlet.document_library_display" extends="portlet" />
@@ -882,18 +894,6 @@
 
 	<definition name="portlet.layouts_admin.publish_layouts" extends="portlet.layouts_admin">
 		<put name="portlet_content" value="/portlet/layouts_admin/publish_layouts.jsp" />
-	</definition>
-
-	<!-- Library Admin -->
-
-	<definition name="portlet.library_admin" extends="portlet" />
-
-	<definition name="portlet.library_admin.view" extends="portlet.library_admin">
-		<put name="portlet_content" value="/portlet/library_admin/view.jsp" />
-	</definition>
-
-	<definition name="portlet.library_admin.view_file_entry" extends="portlet.library_admin">
-		<put name="portlet_content" value="/portlet/library_admin/view_file_entry.jsp" />
 	</definition>
 
 	<!-- Login -->

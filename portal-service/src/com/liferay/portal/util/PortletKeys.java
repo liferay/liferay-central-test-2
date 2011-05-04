@@ -118,8 +118,6 @@ public class PortletKeys {
 
 	public static final String LAYOUTS_ADMIN = "88";
 
-	public static final String LIBRARY_ADMIN = "168";
-
 	public static final String LIFERAY_PORTAL = "LIFERAY_PORTAL";
 
 	public static final String LOGIN = "58";

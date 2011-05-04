@@ -223,15 +223,15 @@
 
 	.header-row {
 		.yui3-aui-icon-display-icon {
-			background: url(<%= themeImagesPath%>/library_admin/layouts.png) no-repeat -35px 0;
+			background: url(<%= themeImagesPath%>/document_library/layouts.png) no-repeat -35px 0;
 		}
 
 		.yui3-aui-icon-display-descriptive {
-			background: url(<%= themeImagesPath%>/library_admin/layouts.png) no-repeat -65px 0;
+			background: url(<%= themeImagesPath%>/document_library/layouts.png) no-repeat -65px 0;
 		}
 
 		.yui3-aui-icon-display-list {
-			background: url(<%= themeImagesPath%>/library_admin/layouts.png) no-repeat -4px 0;
+			background: url(<%= themeImagesPath%>/document_library/layouts.png) no-repeat -4px 0;
 		}
 
 		.yui3-aui-icon-edit {

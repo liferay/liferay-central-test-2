@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -73,7 +73,7 @@ else {
 	viewFolderURL = resourceResponse.createRenderURL();
 }
 
-viewFolderURL.setParameter("struts_action", "/library_admin/view");
+viewFolderURL.setParameter("struts_action", "/document_library/view");
 viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 %>
 

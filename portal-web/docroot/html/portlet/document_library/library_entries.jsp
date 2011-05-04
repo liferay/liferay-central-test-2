@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -49,18 +49,18 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 
 <c:if test="<%= viewFolders %>">
 	<div id="<portlet:namespace />folders">
-		<liferay-util:include page="/html/portlet/library_admin/view_folders.jsp" />
+		<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
 	</div>
 </c:if>
 
 <c:if test="<%= viewEntries %>">
 	<div id="<portlet:namespace />entries">
-		<liferay-util:include page="/html/portlet/library_admin/view_entries.jsp" />
+		<liferay-util:include page="/html/portlet/document_library/view_entries.jsp" />
 	</div>
 </c:if>
 
 <c:if test="<%= viewAddButton %>">
 	<span id="<portlet:namespace />addButton">
-		<liferay-util:include page="/html/portlet/library_admin/add_button.jsp" />
+		<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
 	</span>
 </c:if>

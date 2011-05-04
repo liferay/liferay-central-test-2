@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 Folder folder = (com.liferay.portal.kernel.repository.model.Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -47,13 +47,13 @@ PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPre
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
-	displayStyle = portalPreferences.getValue(PortletKeys.LIBRARY_ADMIN, "display-style", "icon");
+	displayStyle = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", "icon");
 }
 else {
 	boolean saveDisplayStyle = ParamUtil.getBoolean(request, "saveDisplayStyle");
 
 	if (saveDisplayStyle && ArrayUtil.contains(PropsValues.DL_DISPLAY_VIEWS, displayStyle)) {
-		portalPreferences.setValue(PortletKeys.LIBRARY_ADMIN, "display-style", displayStyle);
+		portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", displayStyle);
 	}
 }
 
@@ -61,8 +61,8 @@ String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
 
 if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-	portalPreferences.setValue(PortletKeys.LIBRARY_ADMIN, "order-by-col", orderByCol);
-	portalPreferences.setValue(PortletKeys.LIBRARY_ADMIN, "order-by-type", orderByType);
+	portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-col", orderByCol);
+	portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-type", orderByType);
 }
 %>
 
@@ -88,7 +88,7 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 
 			<div class="body-row">
 				<div id="<portlet:namespace />folderContainer">
-					<liferay-util:include page="/html/portlet/library_admin/view_folders.jsp" />
+					<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
 				</div>
 			</div>
 		</aui:column>
@@ -97,7 +97,7 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 			<div class="header-row">
 				<div class="header-row-content">
 					<div class="toolbar">
-						<liferay-util:include page="/html/portlet/library_admin/toolbar.jsp" />
+						<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
 					</div>
 
 					<div class="display-style">
@@ -108,7 +108,7 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 
 			<div class="document-container" id="<portlet:namespace />documentContainer">
 				<c:if test='<%= true %>'>
-					<liferay-util:include page="/html/portlet/library_admin/view_entries.jsp" />
+					<liferay-util:include page="/html/portlet/document_library/view_entries.jsp" />
 				</c:if>
 			</div>
 		</aui:column>
@@ -198,7 +198,7 @@ if (folder != null) {
 				{
 
 					<portlet:renderURL var="iconDisplayStyle">
-						<portlet:param name="struts_action" value="/library_admin/view" />
+						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="displayStyle" value="icon" />
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:renderURL>
@@ -211,7 +211,7 @@ if (folder != null) {
 				{
 
 					<portlet:renderURL var="descriptiveDisplayStyle">
-						<portlet:param name="struts_action" value="/library_admin/view" />
+						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="displayStyle" value="descriptive" />
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:renderURL>
@@ -224,7 +224,7 @@ if (folder != null) {
 				{
 
 					<portlet:renderURL var="listDisplayStyle">
-						<portlet:param name="struts_action" value="/library_admin/view" />
+						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="displayStyle" value="list" />
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:renderURL>

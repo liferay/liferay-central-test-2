@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.libraryadmin.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileNameException;
@@ -184,7 +184,7 @@ public class EditFileEntryAction extends PortletAction {
 			}
 		}
 
-		String forward = "portlet.library_admin.edit_file_entry";
+		String forward = "portlet.document_library.edit_file_entry";
 
 		return mapping.findForward(getForward(renderRequest, forward));
 	}

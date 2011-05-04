@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.libraryadmin.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -46,7 +46,7 @@ public class ViewAction extends PortletAction {
 
 		PortletRequestDispatcher portletRequestDispatcher =
 			portletContext.getRequestDispatcher(
-				"/html/portlet/library_admin/library_entries.jsp");
+				"/html/portlet/document_library/library_entries.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
@@ -72,7 +72,7 @@ public class ViewAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward("portlet.library_admin.view");
+		return mapping.findForward("portlet.document_library.view");
 	}
 
 }

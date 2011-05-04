@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/library_admin/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -66,7 +66,7 @@ else {
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
-	displayStyle = portalPreferences.getValue(PortletKeys.LIBRARY_ADMIN, "display-style", "icon");
+	displayStyle = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", "icon");
 }
 
 int targetPage = ParamUtil.getInteger(request, "targetPage");
@@ -74,7 +74,7 @@ int rowsPerPage = ParamUtil.getInteger(request, "rowsPerPage", SearchContainer.D
 
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/library_admin/view");
+portletURL.setParameter("struts_action", "/document_library/view");
 portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("displayStyle", String.valueOf(displayStyle));
 
@@ -186,7 +186,7 @@ for (int i = 0; i < results.size(); i++) {
 							<%
 							PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
 
-							tempRowURL.setParameter("struts_action", "/library_admin/view_file_entry");
+							tempRowURL.setParameter("struts_action", "/document_library/view_file_entry");
 							tempRowURL.setParameter("redirect", currentURL);
 							tempRowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
@@ -204,7 +204,7 @@ for (int i = 0; i < results.size(); i++) {
 									<div class="document-display-style icon">
 										<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 
-										<liferay-util:include page="/html/portlet/library_admin/file_entry_action.jsp" />
+										<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
 										<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
 											<c:if test="<%= fileEntry.isLocked() %>">
@@ -234,7 +234,7 @@ for (int i = 0; i < results.size(); i++) {
 											<span class="document-description"><%= HtmlUtil.escape(fileEntry.getDescription()) %></span>
 										</a>
 
-										<liferay-util:include page="/html/portlet/library_admin/file_entry_action.jsp" />
+										<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
 										<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
 									</div>
@@ -255,7 +255,7 @@ for (int i = 0; i < results.size(); i++) {
 					<%
 					PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
 
-					tempRowURL.setParameter("struts_action", "/library_admin/view");
+					tempRowURL.setParameter("struts_action", "/document_library/view");
 					tempRowURL.setParameter("redirect", currentURL);
 					tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
@@ -267,7 +267,7 @@ for (int i = 0; i < results.size(); i++) {
 					%>
 
 					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
-						<portlet:param name="struts_action" value="/library_admin/view" />
+						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 						<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
@@ -280,7 +280,7 @@ for (int i = 0; i < results.size(); i++) {
 							<div class="document-display-style icon">
 								<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= curFolder.getFolderId() %>" />
 
-								<liferay-util:include page="/html/portlet/library_admin/folder_action.jsp" />
+								<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 
 								<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
 									<img border="no" class="document-thumbnail" src="<%= src %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
@@ -302,7 +302,7 @@ for (int i = 0; i < results.size(); i++) {
 									<span class="document-description"><%= HtmlUtil.escape(curFolder.getDescription()) %></span>
 								</a>
 
-								<liferay-util:include page="/html/portlet/library_admin/folder_action.jsp" />
+								<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 
 								<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= curFolder.getFolderId() %>" />
 							</div>
@@ -330,7 +330,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
-					rowURL.setParameter("struts_action", "/library_admin/view_file_entry");
+					rowURL.setParameter("struts_action", "/document_library/view_file_entry");
 					rowURL.setParameter("redirect", currentURL);
 					rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
@@ -346,7 +346,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					row.addText(String.valueOf(fileEntry.getReadCount()));
 
-					row.addJSP("/html/portlet/library_admin/file_entry_action.jsp");
+					row.addJSP("/html/portlet/library_admin/document_library.jsp");
 
 					resultRows.add(row);
 					%>
@@ -368,7 +368,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
-					rowURL.setParameter("struts_action", "/library_admin/view");
+					rowURL.setParameter("struts_action", "/document_library/view");
 					rowURL.setParameter("redirect", currentURL);
 					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
@@ -384,7 +384,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					row.addText(String.valueOf(0));
 
-					row.addJSP("/html/portlet/library_admin/folder_action.jsp");
+					row.addJSP("/html/portlet/document_library/folder_action.jsp");
 
 					resultRows.add(row);
 					%>
