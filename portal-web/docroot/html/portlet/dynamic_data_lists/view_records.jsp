@@ -19,6 +19,10 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
+boolean editable = ParamUtil.getBoolean(request, "editable", true);
+
+boolean isRecordSetEditable = _isRecordSetEditable(portletName, editable);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/dynamic_data_lists/view_record_set");
@@ -36,7 +40,9 @@ for (Map<String, String> fields : fieldsMap.values()) {
 	headerNames.add(label);
 }
 
-headerNames.add(StringPool.BLANK);
+if (isRecordSetEditable) {
+	headerNames.add(StringPool.BLANK);
+}
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, portletURL, headerNames, "no-records-were-found");
 
@@ -79,12 +85,19 @@ for (int i = 0; i < results.size(); i++) {
 			value = StringPool.BLANK;
 		}
 
-		row.addText(value, rowURL);
+		if (isRecordSetEditable) {
+			row.addText(value, rowURL);
+		}
+		else {
+			row.addText(value);
+		}
 	}
 
 	// Action
 
-	row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/dynamic_data_lists/record_action.jsp");
+	if (isRecordSetEditable) {
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/dynamic_data_lists/record_action.jsp");
+	}
 
 	// Add result row
 

@@ -22,6 +22,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
 long recordSetId = BeanParamUtil.getLong(recordSet, request, "recordSetId");
+
+boolean editable = ParamUtil.getBoolean(request, "editable", true);
+
+long detailTemplateId = ParamUtil.getLong(request, "detailTemplateId");
+
+long listTemplateId = ParamUtil.getLong(request, "listTemplateId");
 %>
 
 <liferay-ui:header
@@ -34,16 +40,28 @@ long recordSetId = BeanParamUtil.getLong(recordSet, request, "recordSetId");
 </portlet:actionURL>
 
 <aui:form action="<%= editRecordSetURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRecordSet();" %>'>
-	<aui:button onClick='<%= renderResponse.getNamespace() + "addRecord();" %>' value="add-record" />
+	<c:if test="<%= _isRecordSetEditable(portletName, editable) %>">
+		<aui:button onClick='<%= renderResponse.getNamespace() + "addRecord();" %>' value="add-record" />
 
-	<div class="separator"><!-- --></div>
+		<div class="separator"><!-- --></div>
+	</c:if>
 
-	<liferay-util:include page="/html/portlet/dynamic_data_lists/view_records.jsp" />
+	<c:choose>
+		<c:when test="<%= (listTemplateId > 0) %>">
+
+			<%= DDLUtil.getTemplateContent(listTemplateId, recordSet, themeDisplay, renderRequest, renderResponse) %>
+
+		</c:when>
+		<c:otherwise>
+			<liferay-util:include page="/html/portlet/dynamic_data_lists/view_records.jsp" />
+		</c:otherwise>
+	</c:choose>
+
 </aui:form>
 
 <aui:script>
 	function <portlet:namespace />addRecord() {
-		submitForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="recordSetId" value="<%= String.valueOf(recordSetId) %>" /></liferay-portlet:renderURL>');
+		submitForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="recordSetId" value="<%= String.valueOf(recordSetId) %>" /><portlet:param name="detailTemplateId" value="<%= String.valueOf(detailTemplateId) %>" /></liferay-portlet:renderURL>');
 	}
 </aui:script>
 
