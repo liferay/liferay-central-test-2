@@ -105,6 +105,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		return addGroup(userId, className, classPK, liveGroupId, name,
+			description, type, friendlyURL, active, false, serviceContext);
+	}
+
+	public Group addGroup(
+			long userId, String className, long classPK, long liveGroupId,
+			String name, String description, int type, String friendlyURL,
+			boolean active, boolean site, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
 		// Group
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -133,6 +143,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			className = Group.class.getName();
 			classNameId = groupClassNameId;
 			classPK = groupId;
+			site = true;
 		}
 		else if (!GroupConstants.USER_PERSONAL_COMMUNITY.equals(name)) {
 			name = String.valueOf(classPK);
@@ -179,6 +190,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setType(type);
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
+		group.setSite(site);
 
 		groupPersistence.update(group, false);
 
@@ -239,6 +251,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return addGroup(
 			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
 			name, description, type, friendlyURL, active, serviceContext);
+	}
+
+	public Group addGroup(
+			long userId, String className, long classPK, String name,
+			String description, int type, String friendlyURL, boolean active,
+			boolean site, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addGroup(
+			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
+			name, description, type, friendlyURL, active, site, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)
@@ -1049,6 +1072,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				user.getUserId(), group, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
+
+		return group;
+	}
+
+	public Group updateSite(long groupId, boolean site)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		group.setSite(site);
+
+		groupPersistence.update(group, false);
 
 		return group;
 	}
