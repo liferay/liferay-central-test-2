@@ -38,13 +38,19 @@ public class DDLRecordImpl
 	}
 
 	public Field getField(String fieldName) throws StorageException {
-		return getFields().get(fieldName);
+		Fields fields = getFields();
+
+		return fields.get(fieldName);
 	}
 
-	public Serializable getFieldDataType(String fieldName) throws Exception {
-		DDMStructure structure = getRecordSet().getDDMStructure();
+	public Serializable getFieldDataType(String fieldName)
+		throws PortalException, SystemException {
 
-		return structure.getFieldDataType(fieldName);
+		DDLRecordSet recordSet = getRecordSet();
+
+		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		return ddmStructure.getFieldDataType(fieldName);
 	}
 
 	public Fields getFields() throws StorageException {
@@ -52,15 +58,19 @@ public class DDLRecordImpl
 	}
 
 	public Serializable getFieldType(String fieldName) throws Exception {
-		DDMStructure structure = getRecordSet().getDDMStructure();
+		DDLRecordSet recordSet = getRecordSet();
 
-		return structure.getFieldType(fieldName);
+		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		return ddmStructure.getFieldType(fieldName);
 	}
 
 	public Serializable getFieldValue(String fieldName)
 		throws StorageException {
 
-		return getField(fieldName).getValue();
+		Field field = getField(fieldName);
+
+		return field.getValue();
 	}
 
 	public DDLRecordSet getRecordSet() throws PortalException, SystemException {

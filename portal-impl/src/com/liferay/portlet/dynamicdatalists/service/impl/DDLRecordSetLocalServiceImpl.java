@@ -44,10 +44,10 @@ public class DDLRecordSetLocalServiceImpl
 	extends DDLRecordSetLocalServiceBaseImpl {
 
 	public DDLRecordSet addRecordSet(
-			long userId, long groupId, long ddmStructureId,
-			String recordSetKey, boolean autoRecordSetKey,
-			Map<Locale, String> nameMap, String description,
-			int minDisplayRows, ServiceContext serviceContext)
+			long userId, long groupId, long ddmStructureId, String recordSetKey,
+			boolean autoRecordSetKey, Map<Locale, String> nameMap,
+			String description, int minDisplayRows,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record set
@@ -234,15 +234,15 @@ public class DDLRecordSetLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long groupId = serviceContext.getScopeGroupId();
-
-		DDLRecordSet recordSet = ddlRecordSetLocalService.getDDLRecordSet(
+		DDLRecordSet recordSet = ddlRecordSetPersistence.findByPrimaryKey(
 			recordSetId);
 
-		return updateRecordSet(
-			groupId, recordSet.getDDMStructureId(),
-			recordSet.getRecordSetKey(), recordSet.getNameMap(),
-			recordSet.getDescription(), minDisplayRows, serviceContext);
+		recordSet.setModifiedDate(serviceContext.getModifiedDate(null));
+		recordSet.setMinDisplayRows(minDisplayRows);
+
+		ddlRecordSetPersistence.update(recordSet, false);
+
+		return recordSet;
 	}
 
 	public DDLRecordSet updateRecordSet(

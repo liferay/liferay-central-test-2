@@ -45,7 +45,9 @@ public class DDLRecordSetImpl
 		return DDLRecordLocalServiceUtil.getRecords(getRecordSetId());
 	}
 
-	public List<Fields> getRecordsFieldsList() throws Exception {
+	public List<Fields> getRecordsFieldsList()
+		throws PortalException, SystemException {
+
 		List<Fields> fieldsList = new ArrayList<Fields>();
 
 		for (DDLRecord record : getRecords()) {

@@ -148,8 +148,8 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected void doUpdate(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
 		throws Exception {
 
 		ExpandoRow expandoRow = ExpandoRowLocalServiceUtil.getRow(classPK);
@@ -164,7 +164,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		List<ExpandoColumn> expandoColumns =
 			ExpandoColumnLocalServiceUtil.getColumns(expandoTable.getTableId());
 
-		if (!merge) {
+		if (!mergeFields) {
 			for (ExpandoColumn expandoColumn : expandoColumns) {
 				if (!fields.contains(expandoColumn.getName())) {
 					ExpandoValueLocalServiceUtil.deleteValue(

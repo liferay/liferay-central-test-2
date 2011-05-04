@@ -169,8 +169,8 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 	}
 
 	protected void doUpdate(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
 		throws Exception {
 
 		DDMContent ddmContent = DDMContentLocalServiceUtil.getContent(classPK);
@@ -179,7 +179,7 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 
 		Element rootElement = null;
 
-		if (merge) {
+		if (mergeFields) {
 			document = SAXReaderUtil.read(ddmContent.getXml());
 
 			rootElement = document.getRootElement();

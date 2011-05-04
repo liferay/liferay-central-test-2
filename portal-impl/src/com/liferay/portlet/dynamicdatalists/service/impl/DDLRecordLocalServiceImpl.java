@@ -29,7 +29,6 @@ import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 
 import java.io.Serializable;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -64,9 +63,8 @@ public class DDLRecordLocalServiceImpl
 
 		record.setClassPK(classPK);
 
-		record.setDisplayIndex(displayIndex);
-
 		record.setRecordSetId(recordSetId);
+		record.setDisplayIndex(displayIndex);
 
 		ddlRecordPersistence.update(record, false);
 
@@ -86,7 +84,7 @@ public class DDLRecordLocalServiceImpl
 			int displayIndex, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Fields fields = _toFields(fieldsMap);
+		Fields fields = toFields(fieldsMap);
 
 		return addRecord(recordSetId, fields, displayIndex, serviceContext);
 	}
@@ -154,7 +152,7 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	public DDLRecord updateRecord(
-			long recordId, Fields fields, int displayIndex, boolean merge,
+			long recordId, Fields fields, int displayIndex, boolean mergeFields,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -169,7 +167,7 @@ public class DDLRecordLocalServiceImpl
 		// Dynamic data mapping storage
 
 		StorageEngineUtil.update(
-			record.getClassPK(), fields, serviceContext, merge);
+			record.getClassPK(), fields, mergeFields, serviceContext);
 
 		return record;
 	}
@@ -179,22 +177,19 @@ public class DDLRecordLocalServiceImpl
 			int displayIndex, boolean merge, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Fields fields = _toFields(fieldsMap);
+		Fields fields = toFields(fieldsMap);
 
 		return updateRecord(
 			recordId, fields, displayIndex, merge, serviceContext);
 	}
 
-	private Fields _toFields(Map<String, Serializable> fieldsMap) {
+	protected Fields toFields(Map<String, Serializable> fieldsMap) {
 		Fields fields = new Fields();
 
-		Iterator<String> itr = fieldsMap.keySet().iterator();
+		for (String name : fieldsMap.keySet()) {
+			String value = String.valueOf(fieldsMap.get(name));
 
-		while (itr.hasNext()) {
-			String fieldName = itr.next();
-			String value = String.valueOf(fieldsMap.get(fieldName));
-
-			fields.put(new Field(fieldName, value));
+			fields.put(new Field(name, value));
 		}
 
 		return fields;

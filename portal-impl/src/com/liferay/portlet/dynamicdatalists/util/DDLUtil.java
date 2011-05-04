@@ -73,86 +73,25 @@ public class DDLUtil {
 			String.valueOf(recordSet.getDDMStructureId()));
 	}
 
-	public static JSONArray getJSONArrayColumnSet(DDLRecordSet recordSet)
-		throws Exception {
-
-		DDMStructure structure = recordSet.getDDMStructure();
-
-		Map<String, Map<String, String>> fieldsMap = structure.getFieldsMap();
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (Map<String, String> fields : fieldsMap.values()) {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-			boolean editable = GetterUtil.getBoolean(
-				fields.get(DDMFieldConstants.EDITABLE), true);
-
-			boolean required = GetterUtil.getBoolean(
-				fields.get(DDMFieldConstants.REQUIRED), false);
-
-			boolean sortable = GetterUtil.getBoolean(
-				fields.get(DDMFieldConstants.SORTABLE), true);
-
-			String dataType = fields.get(DDMFieldConstants.DATA_TYPE);
-			String label = fields.get(DDMFieldConstants.LABEL);
-			String name = fields.get(DDMFieldConstants.NAME);
-			String type = fields.get(DDMFieldConstants.TYPE);
-
-			jsonObject.put("editable", editable);
-			jsonObject.put("required", required);
-			jsonObject.put("sortable", sortable);
-			jsonObject.put("dataType", dataType);
-			jsonObject.put("key", name);
-			jsonObject.put("label", label);
-			jsonObject.put("type", type);
-
-			jsonArray.put(jsonObject);
-		}
-
-		return jsonArray;
-	}
-
-	public static JSONArray getJSONArrayData(DDLRecordSet recordSet)
-		throws Exception {
-
-		return getJSONArrayData(recordSet.getRecords());
-	}
-
-	public static JSONArray getJSONArrayData(List<DDLRecord> records)
-		throws Exception {
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (DDLRecord record : records) {
-			jsonArray.put(getJSONObjectData(record));
-		}
-
-		return jsonArray;
-	}
-
-	public static JSONObject getJSONObjectData(DDLRecord record)
+	public static JSONObject getRecordJSONObject(DDLRecord record)
 		throws Exception {
 
 		DDLRecordSet recordSet = record.getRecordSet();
-		DDMStructure structure = recordSet.getDDMStructure();
 
-		Fields fields = record.getFields();
-
-		Iterator<Field> itr = fields.iterator();
+		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		Iterator<String> fieldNames = structure.getFieldNames().iterator();
-
-		while (fieldNames.hasNext()) {
-			String fieldName = fieldNames.next();
-
+		for (String fieldName : ddmStructure.getFieldNames()) {
 			jsonObject.put(fieldName, StringPool.BLANK);
 		}
 
 		jsonObject.put("displayIndex", record.getDisplayIndex());
 		jsonObject.put("recordId", record.getRecordId());
+
+		Fields fields = record.getFields();
+
+		Iterator<Field> itr = fields.iterator();
 
 		while (itr.hasNext()) {
 			Field field = itr.next();
@@ -164,6 +103,76 @@ public class DDLUtil {
 		}
 
 		return jsonObject;
+	}
+
+	public static JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
+		throws Exception {
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		Map<String, Map<String, String>> fieldsMap =
+			ddmStructure.getFieldsMap();
+
+		for (Map<String, String> fields : fieldsMap.values()) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			String dataType = fields.get(DDMFieldConstants.DATA_TYPE);
+
+			jsonObject.put("dataType", dataType);
+
+			boolean editable = GetterUtil.getBoolean(
+				fields.get(DDMFieldConstants.EDITABLE));
+
+			jsonObject.put("editable", editable);
+
+			String label = fields.get(DDMFieldConstants.LABEL);
+
+			jsonObject.put("label", label);
+
+			String name = fields.get(DDMFieldConstants.NAME);
+
+			jsonObject.put("name", name);
+
+			boolean required = GetterUtil.getBoolean(
+				fields.get(DDMFieldConstants.REQUIRED));
+
+			jsonObject.put("required", required);
+
+			boolean sortable = GetterUtil.getBoolean(
+				fields.get(DDMFieldConstants.SORTABLE));
+
+			jsonObject.put("sortable", sortable);
+
+			String type = fields.get(DDMFieldConstants.TYPE);
+
+			jsonObject.put("type", type);
+
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
+	}
+
+	public static JSONArray getRecordsJSONArray(DDLRecordSet recordSet)
+		throws Exception {
+
+		return getRecordsJSONArray(recordSet.getRecords());
+	}
+
+	public static JSONArray getRecordsJSONArray(List<DDLRecord> records)
+		throws Exception {
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (DDLRecord record : records) {
+			JSONObject jsonObject = getRecordJSONObject(record);
+
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
 	}
 
 	public static String getTemplateContent(

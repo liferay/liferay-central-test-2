@@ -209,21 +209,14 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 	}
 
 	public void update(
-			long classPK, Fields fields, ServiceContext serviceContext)
-		throws StorageException {
-
-		update(classPK, fields, serviceContext, false);
-	}
-
-	public void update(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
 		throws StorageException {
 
 		try {
 			validateClassFields(classPK, fields);
 
-			doUpdate(classPK, fields, serviceContext, merge);
+			doUpdate(classPK, fields, mergeFields, serviceContext);
 		}
 		catch (StorageException se) {
 			throw se;
@@ -231,6 +224,13 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		catch (Exception e) {
 			throw new StorageException(e);
 		}
+	}
+
+	public void update(
+			long classPK, Fields fields, ServiceContext serviceContext)
+		throws StorageException {
+
+		update(classPK, fields, false, serviceContext);
 	}
 
 	protected abstract long doCreate(
@@ -267,8 +267,8 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 		throws Exception;
 
 	protected abstract void doUpdate(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
 		throws Exception;
 
 	protected void validateClassFields(long classPK, Fields fields)

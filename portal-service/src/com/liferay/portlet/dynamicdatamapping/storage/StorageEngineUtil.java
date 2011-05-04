@@ -127,18 +127,18 @@ public class StorageEngineUtil {
 	}
 
 	public static void update(
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
+		throws StorageException {
+
+		getStorageEngine().update(classPK, fields, mergeFields, serviceContext);
+	}
+
+	public static void update(
 			long classPK, Fields fields, ServiceContext serviceContext)
 		throws StorageException {
 
 		getStorageEngine().update(classPK, fields, serviceContext);
-	}
-
-	public static void update(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
-		throws StorageException {
-
-		getStorageEngine().update(classPK, fields, serviceContext, merge);
 	}
 
 	public void setStorageEngine(StorageEngine storageEngine) {

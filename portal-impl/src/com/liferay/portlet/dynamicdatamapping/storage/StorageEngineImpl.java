@@ -171,22 +171,22 @@ public class StorageEngineImpl implements StorageEngine {
 	}
 
 	public void update(
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
+		throws StorageException {
+
+		StorageAdapter storageAdapter = getClassStorageAdapter(classPK);
+
+		storageAdapter.update(classPK, fields, mergeFields, serviceContext);
+	}
+
+	public void update(
 			long classPK, Fields fields, ServiceContext serviceContext)
 		throws StorageException {
 
 		StorageAdapter storageAdapter = getClassStorageAdapter(classPK);
 
 		storageAdapter.update(classPK, fields, serviceContext);
-	}
-
-	public void update(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
-		throws StorageException {
-
-		StorageAdapter storageAdapter = getClassStorageAdapter(classPK);
-
-		storageAdapter.update(classPK, fields, serviceContext, merge);
 	}
 
 	protected StorageAdapter getClassStorageAdapter(long classPK)

@@ -79,12 +79,12 @@ public interface StorageAdapter {
 		throws StorageException;
 
 	public void update(
-			long classPK, Fields fields, ServiceContext serviceContext)
+			long classPK, Fields fields, boolean mergeFields,
+			ServiceContext serviceContext)
 		throws StorageException;
 
 	public void update(
-			long classPK, Fields fields, ServiceContext serviceContext,
-			boolean merge)
+			long classPK, Fields fields, ServiceContext serviceContext)
 		throws StorageException;
 
 }
