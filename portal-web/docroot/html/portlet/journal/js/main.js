@@ -616,7 +616,7 @@ AUI().add(
 
 					xmlInput.val(articleContent);
 
-					auxForm.submit();
+					submitForm(auxForm, null, false);
 				}
 			},
 
@@ -1300,7 +1300,7 @@ AUI().add(
 					titleAuxFormInput.val(titleInput.val());
 					xmlAuxFormInput.val(articleContent);
 
-					auxForm.submit();
+					submitForm(auxForm, null, false);
 				}
 			},
 

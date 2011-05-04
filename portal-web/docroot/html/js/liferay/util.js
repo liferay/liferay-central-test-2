@@ -543,7 +543,7 @@
 
 			if (singleSubmit === false) {
 				Util._submitLocked = A.later(
-					10000,
+					1000,
 					Util,
 					Util.enableFormButtons,
 					[inputs, form]
