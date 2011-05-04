@@ -259,6 +259,18 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group addGroup(long userId,
+		java.lang.String className, long classPK, long liveGroupId,
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean active, boolean site,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addGroup(userId, className, classPK, liveGroupId, name,
+			description, type, friendlyURL, active, site, serviceContext);
+	}
+
+	public static com.liferay.portal.model.Group addGroup(long userId,
 		java.lang.String className, long classPK, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
@@ -267,6 +279,18 @@ public class GroupLocalServiceUtil {
 		return getService()
 				   .addGroup(userId, className, classPK, name, description,
 			type, friendlyURL, active, serviceContext);
+	}
+
+	public static com.liferay.portal.model.Group addGroup(long userId,
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, int type, java.lang.String friendlyURL,
+		boolean active, boolean site,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addGroup(userId, className, classPK, name, description,
+			type, friendlyURL, active, site, serviceContext);
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
@@ -577,6 +601,13 @@ public class GroupLocalServiceUtil {
 		return getService()
 				   .updateGroup(groupId, name, description, type, friendlyURL,
 			active, serviceContext);
+	}
+
+	public static com.liferay.portal.model.Group updateSite(long groupId,
+		boolean site)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateSite(groupId, site);
 	}
 
 	public static GroupLocalService getService() {

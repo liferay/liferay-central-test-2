@@ -259,13 +259,14 @@ public class OrganizationLocalServiceUtil {
 	public static com.liferay.portal.model.Organization addOrganization(
 		long userId, long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments,
+		long countryId, int statusId, java.lang.String comments, boolean site,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addOrganization(userId, parentOrganizationId, name, type,
-			recursable, regionId, countryId, statusId, comments, serviceContext);
+			recursable, regionId, countryId, statusId, comments, site,
+			serviceContext);
 	}
 
 	public static void addOrganizationResources(long userId,
@@ -553,13 +554,13 @@ public class OrganizationLocalServiceUtil {
 		long companyId, long organizationId, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		boolean site, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateOrganization(companyId, organizationId,
 			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments, serviceContext);
+			statusId, comments, site, serviceContext);
 	}
 
 	public static OrganizationLocalService getService() {
