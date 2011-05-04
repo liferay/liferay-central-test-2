@@ -470,7 +470,6 @@ public class DLFileEntryLocalServiceImpl
 		newDLFileEntry.setVersion(dlFileEntry.getVersion());
 		newDLFileEntry.setSize(dlFileEntry.getSize());
 		newDLFileEntry.setReadCount(dlFileEntry.getReadCount());
-		newDLFileEntry.setExpandoBridgeAttributes(serviceContext);
 
 		dlFileEntryPersistence.remove(dlFileEntry);
 
