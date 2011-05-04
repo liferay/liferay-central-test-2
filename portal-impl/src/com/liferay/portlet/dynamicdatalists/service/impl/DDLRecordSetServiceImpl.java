@@ -35,7 +35,8 @@ public class DDLRecordSetServiceImpl extends DDLRecordSetServiceBaseImpl {
 	public DDLRecordSet addRecordSet(
 			long groupId, long ddmStructureId, String recordSetKey,
 			boolean autoRecordSetKey, Map<Locale, String> nameMap,
-			String description, ServiceContext serviceContext)
+			String description, int minDisplayRows,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLPermission.check(
@@ -43,7 +44,8 @@ public class DDLRecordSetServiceImpl extends DDLRecordSetServiceBaseImpl {
 
 		return ddlRecordSetLocalService.addRecordSet(
 			getUserId(), groupId, ddmStructureId, recordSetKey,
-			autoRecordSetKey, nameMap, description, serviceContext);
+			autoRecordSetKey, nameMap, description, minDisplayRows,
+			serviceContext);
 	}
 
 	public void deleteRecordSet(long recordSetId)
@@ -82,10 +84,22 @@ public class DDLRecordSetServiceImpl extends DDLRecordSetServiceBaseImpl {
 		return ddlRecordSetLocalService.getRecordSet(groupId, recordSetKey);
 	}
 
+	public DDLRecordSet updateMinDisplayRows(
+			long recordSetId, int minDisplayRows,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDLRecordSetPermission.check(
+			getPermissionChecker(), recordSetId, ActionKeys.UPDATE);
+
+		return ddlRecordSetLocalService.updateMinDisplayRows(
+			recordSetId, minDisplayRows, serviceContext);
+	}
+
 	public DDLRecordSet updateRecordSet(
 			long groupId, long ddmStructureId, String recordSetKey,
 			Map<Locale, String> nameMap, String description,
-			ServiceContext serviceContext)
+			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecordSetPermission.check(
@@ -93,7 +107,7 @@ public class DDLRecordSetServiceImpl extends DDLRecordSetServiceBaseImpl {
 
 		return ddlRecordSetLocalService.updateRecordSet(
 			groupId, ddmStructureId, recordSetKey, nameMap, description,
-			serviceContext);
+			minDisplayRows, serviceContext);
 	}
 
 }

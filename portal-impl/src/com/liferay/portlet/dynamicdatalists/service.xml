@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.dynamicdatalists">
 	<namespace>DDL</namespace>
-	<entity name="DDLRecord" uuid="true" local-service="true" remote-service="false">
+	<entity name="DDLRecord" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -14,6 +14,7 @@
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
 		<column name="recordSetId" type="long" />
+		<column name="displayIndex" type="int" />
 
 		<!-- Finder methods -->
 
@@ -49,6 +50,7 @@
 		<column name="recordSetKey" type="String" />
 		<column name="name" type="String" localized="true" />
 		<column name="description" type="String" />
+		<column name="minDisplayRows" type="int" />
 
 		<!-- Finder methods -->
 

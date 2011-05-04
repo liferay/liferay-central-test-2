@@ -44,9 +44,10 @@ public class DDLRecordSetLocalServiceImpl
 	extends DDLRecordSetLocalServiceBaseImpl {
 
 	public DDLRecordSet addRecordSet(
-			long userId, long groupId, long ddmStructureId, String recordSetKey,
-			boolean autoRecordSetKey, Map<Locale, String> nameMap,
-			String description, ServiceContext serviceContext)
+			long userId, long groupId, long ddmStructureId,
+			String recordSetKey, boolean autoRecordSetKey,
+			Map<Locale, String> nameMap, String description,
+			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record set
@@ -79,6 +80,7 @@ public class DDLRecordSetLocalServiceImpl
 		recordSet.setRecordSetKey(recordSetKey);
 		recordSet.setNameMap(nameMap);
 		recordSet.setDescription(description);
+		recordSet.setMinDisplayRows(minDisplayRows);
 
 		ddlRecordSetPersistence.update(recordSet, false);
 
@@ -227,10 +229,26 @@ public class DDLRecordSetLocalServiceImpl
 			companyId, groupId, recordSetKey, name, description, andOperator);
 	}
 
+	public DDLRecordSet updateMinDisplayRows(
+			long recordSetId, int minDisplayRows,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long groupId = serviceContext.getScopeGroupId();
+
+		DDLRecordSet recordSet = ddlRecordSetLocalService.getDDLRecordSet(
+			recordSetId);
+
+		return updateRecordSet(
+			groupId, recordSet.getDDMStructureId(),
+			recordSet.getRecordSetKey(), recordSet.getNameMap(),
+			recordSet.getDescription(), minDisplayRows, serviceContext);
+	}
+
 	public DDLRecordSet updateRecordSet(
 			long groupId, long ddmStructureId, String recordSetKey,
 			Map<Locale, String> nameMap, String description,
-			ServiceContext serviceContext)
+			int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		validateDDMStructureId(ddmStructureId);
@@ -243,6 +261,7 @@ public class DDLRecordSetLocalServiceImpl
 		recordSet.setDDMStructureId(ddmStructureId);
 		recordSet.setNameMap(nameMap);
 		recordSet.setDescription(description);
+		recordSet.setMinDisplayRows(minDisplayRows);
 
 		ddlRecordSetPersistence.update(recordSet, false);
 

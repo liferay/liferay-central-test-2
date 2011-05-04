@@ -31,6 +31,7 @@ import com.liferay.portlet.dynamicdatalists.RecordSetNameException;
 import com.liferay.portlet.dynamicdatalists.RecordSetRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetServiceUtil;
+import com.liferay.portlet.dynamicdatalists.util.DDLConstants;
 
 import java.util.Locale;
 import java.util.Map;
@@ -157,12 +158,13 @@ public class EditRecordSetAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			recordSet = DDLRecordSetServiceUtil.addRecordSet(
 				groupId, ddmStructureId, recordSetKey, autoRecordSetKey,
-				nameMap, description, serviceContext);
+				nameMap, description, DDLConstants.MIN_DISPLAY_ROWS_DEFAULT,
+				serviceContext);
 		}
 		else {
 			recordSet = DDLRecordSetServiceUtil.updateRecordSet(
 				groupId, ddmStructureId, recordSetKey, nameMap, description,
-				serviceContext);
+				DDLConstants.MIN_DISPLAY_ROWS_DEFAULT, serviceContext);
 		}
 
 		String portletResource = ParamUtil.getString(

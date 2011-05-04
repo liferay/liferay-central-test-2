@@ -23,19 +23,26 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordLocalServiceBaseImpl;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 
+import java.io.Serializable;
+
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Marcellus Tavares
+ * @author Eduardo Lundgren
  */
 public class DDLRecordLocalServiceImpl
 	extends DDLRecordLocalServiceBaseImpl {
 
 	public DDLRecord addRecord(
-			long recordSetId, Fields fields, ServiceContext serviceContext)
+			long recordSetId, Fields fields, int displayIndex,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record
@@ -57,6 +64,8 @@ public class DDLRecordLocalServiceImpl
 
 		record.setClassPK(classPK);
 
+		record.setDisplayIndex(displayIndex);
+
 		record.setRecordSetId(recordSetId);
 
 		ddlRecordPersistence.update(record, false);
@@ -70,6 +79,16 @@ public class DDLRecordLocalServiceImpl
 			serviceContext);
 
 		return record;
+	}
+
+	public DDLRecord addRecord(
+			long recordSetId, Map<String, Serializable> fieldsMap,
+			int displayIndex, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Fields fields = _toFields(fieldsMap);
+
+		return addRecord(recordSetId, fields, displayIndex, serviceContext);
 	}
 
 	public void deleteRecord(DDLRecord record)
@@ -135,20 +154,50 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	public DDLRecord updateRecord(
-			long recordId, Fields fields, ServiceContext serviceContext)
+			long recordId, Fields fields, int displayIndex, boolean merge,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record
 
-		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(
-			recordId);
+		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
+
+		record.setDisplayIndex(displayIndex);
+
+		ddlRecordPersistence.update(record, false);
 
 		// Dynamic data mapping storage
 
 		StorageEngineUtil.update(
-			record.getClassPK(), fields, serviceContext);
+			record.getClassPK(), fields, serviceContext, merge);
 
 		return record;
+	}
+
+	public DDLRecord updateRecord(
+			long recordId, Map<String, Serializable> fieldsMap,
+			int displayIndex, boolean merge, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Fields fields = _toFields(fieldsMap);
+
+		return updateRecord(
+			recordId, fields, displayIndex, merge, serviceContext);
+	}
+
+	private Fields _toFields(Map<String, Serializable> fieldsMap) {
+		Fields fields = new Fields();
+
+		Iterator<String> itr = fieldsMap.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String fieldName = itr.next();
+			String value = String.valueOf(fieldsMap.get(fieldName));
+
+			fields.put(new Field(fieldName, value));
+		}
+
+		return fields;
 	}
 
 }

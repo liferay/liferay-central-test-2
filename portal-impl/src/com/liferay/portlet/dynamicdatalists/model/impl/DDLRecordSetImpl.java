@@ -16,9 +16,15 @@ package com.liferay.portlet.dynamicdatalists.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -33,6 +39,20 @@ public class DDLRecordSetImpl
 		throws PortalException, SystemException {
 
 		return DDMStructureLocalServiceUtil.getStructure(getDDMStructureId());
+	}
+
+	public List<DDLRecord> getRecords() throws SystemException {
+		return DDLRecordLocalServiceUtil.getRecords(getRecordSetId());
+	}
+
+	public List<Fields> getRecordsFieldsList() throws Exception {
+		List<Fields> fieldsList = new ArrayList<Fields>();
+
+		for (DDLRecord record : getRecords()) {
+			fieldsList.add(record.getFields());
+		}
+
+		return fieldsList;
 	}
 
 }

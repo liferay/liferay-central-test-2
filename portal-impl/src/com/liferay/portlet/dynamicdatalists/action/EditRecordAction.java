@@ -27,6 +27,7 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.util.DDLConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -45,6 +46,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Marcellus Tavares
+ * @author Eduardo Lundgren
  */
 public class EditRecordAction extends PortletAction {
 
@@ -150,11 +152,13 @@ public class EditRecordAction extends PortletAction {
 
 		if (recordId <= 0) {
 			record = DDLRecordLocalServiceUtil.addRecord(
-				recordSetId, fields, serviceContext);
+				recordSetId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT,
+				serviceContext);
 		}
 		else {
 			record = DDLRecordLocalServiceUtil.updateRecord(
-				recordId, fields, serviceContext);
+				recordId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT, false,
+				serviceContext);
 		}
 
 		return record;

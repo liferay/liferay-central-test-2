@@ -19,14 +19,48 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.StorageException;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
+import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
+
+import java.io.Serializable;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
  */
 public class DDLRecordImpl
 	extends DDLRecordModelImpl implements DDLRecord {
 
 	public DDLRecordImpl() {
+	}
+
+	public Field getField(String fieldName) throws StorageException {
+		return getFields().get(fieldName);
+	}
+
+	public Serializable getFieldDataType(String fieldName) throws Exception {
+		DDMStructure structure = getRecordSet().getDDMStructure();
+
+		return structure.getFieldDataType(fieldName);
+	}
+
+	public Fields getFields() throws StorageException {
+		return StorageEngineUtil.getFields(getClassPK());
+	}
+
+	public Serializable getFieldType(String fieldName) throws Exception {
+		DDMStructure structure = getRecordSet().getDDMStructure();
+
+		return structure.getFieldType(fieldName);
+	}
+
+	public Serializable getFieldValue(String fieldName)
+		throws StorageException {
+
+		return getField(fieldName).getValue();
 	}
 
 	public DDLRecordSet getRecordSet() throws PortalException, SystemException {
