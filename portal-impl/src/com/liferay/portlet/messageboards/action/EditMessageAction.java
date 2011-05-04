@@ -115,11 +115,24 @@ public class EditMessageAction extends PortletAction {
 					actionRequest, "workflowAction",
 					WorkflowConstants.ACTION_PUBLISH);
 
-				if ((message != null) &&
-					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+				if (message != null) {
+					if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
+						redirect = getSaveAndContinueRedirect(
+							actionRequest, actionResponse, message);
+					}
+					else {
+						PortletURL portletURL =
+							((ActionResponseImpl)actionResponse).
+								createRenderURL();
 
-					redirect = getSaveAndContinueRedirect(
-						actionRequest, actionResponse, message);
+						portletURL.setParameter(
+							"struts_action", "/message_boards/view_message");
+						portletURL.setParameter(
+							"messageId",
+							String.valueOf(message.getMessageId()));
+
+						redirect = portletURL.toString();
+					}
 				}
 
 				sendRedirect(actionRequest, actionResponse, redirect);
