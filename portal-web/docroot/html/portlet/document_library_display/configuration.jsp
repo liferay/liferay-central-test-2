@@ -47,6 +47,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 			<aui:input label="show-search" name="preferences--showFoldersSearch--" type="checkbox" value="<%= showFoldersSearch %>" />
 		</liferay-ui:panel>
+
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentLibraryFoldersListingPanel" persistState="<%= true %>" title="folders-listing">
 			<aui:fieldset>
 				<aui:field-wrapper label="root-folder">

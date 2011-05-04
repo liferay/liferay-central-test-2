@@ -117,10 +117,10 @@ if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	portletId = portletResource;
 }
 
-boolean showActions = PrefsParamUtil.getBoolean(preferences, request, "showActions", false);
+boolean showActions = PrefsParamUtil.getBoolean(preferences, request, "showActions");
 boolean showAddFolderButton = false;
-boolean showFolderMenu = PrefsParamUtil.getBoolean(preferences, request, "showFolderMenu", false);
-boolean showTabs = PrefsParamUtil.getBoolean(preferences, request, "showTabs", false);
+boolean showFolderMenu = PrefsParamUtil.getBoolean(preferences, request, "showFolderMenu");
+boolean showTabs = PrefsParamUtil.getBoolean(preferences, request, "showTabs");
 
 if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 	showActions = true;
