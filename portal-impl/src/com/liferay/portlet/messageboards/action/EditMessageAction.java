@@ -121,9 +121,11 @@ public class EditMessageAction extends PortletAction {
 							actionRequest, actionResponse, message);
 					}
 					else {
+						ActionResponseImpl actionResponseImpl =
+							(ActionResponseImpl)actionResponse;
+
 						PortletURL portletURL =
-							((ActionResponseImpl)actionResponse).
-								createRenderURL();
+							actionResponseImpl.createRenderURL();
 
 						portletURL.setParameter(
 							"struts_action", "/message_boards/view_message");
