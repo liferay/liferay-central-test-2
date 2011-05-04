@@ -668,12 +668,6 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
-	protected void checkPortletActions(String name, List<String> actions) {
-		Portlet portlet = portletLocalService.getPortletById(name);
-
-		checkPortletActions(portlet, actions);
-	}
-
 	protected void checkPortletActions(Portlet portlet, List<String> actions) {
 		if (!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
 			!actions.contains(ActionKeys.ADD_TO_PAGE)) {
@@ -695,6 +689,12 @@ public class ResourceActionsImpl implements ResourceActions {
 		if (!actions.contains(ActionKeys.VIEW)) {
 			actions.add(ActionKeys.VIEW);
 		}
+	}
+
+	protected void checkPortletActions(String name, List<String> actions) {
+		Portlet portlet = portletLocalService.getPortletById(name);
+
+		checkPortletActions(portlet, actions);
 	}
 
 	protected void checkPortletCommunityDefaultActions(List<String> actions) {
