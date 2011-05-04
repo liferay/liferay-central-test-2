@@ -248,7 +248,7 @@ public class ActionUtil {
 				role = RoleServiceUtil.getRole(roleId);
 			}
 		}
-		else if ((group != null) && group.isSite()) {
+		else if ((group != null) && group.isRegularSite()) {
 			if (GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
 					ActionKeys.ASSIGN_USER_ROLES) ||

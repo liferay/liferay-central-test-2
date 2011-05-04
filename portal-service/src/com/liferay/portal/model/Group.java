@@ -69,7 +69,7 @@ public interface Group extends GroupModel {
 	public boolean hasStagingGroup();
 
 	/**
-	* @deprecated As of 6.1, renamed to {@link #isSite}
+	* @deprecated As of 6.1, renamed to {@link #isRegularSite}
 	*/
 	public boolean isCommunity();
 
@@ -83,7 +83,14 @@ public interface Group extends GroupModel {
 
 	public boolean isLayoutSetPrototype();
 
+	/**
+	* @deprecated As of 6.1, renamed to {@link #isOrganizationSite}
+	*/
 	public boolean isOrganization();
+
+	public boolean isOrganizationSite();
+
+	public boolean isRegularSite();
 
 	public boolean isSite();
 

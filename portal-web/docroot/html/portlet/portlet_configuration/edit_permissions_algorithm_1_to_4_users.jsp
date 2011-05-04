@@ -65,7 +65,7 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 				if (group.isOrganization()) {
 					userParams.put("usersOrgs", new Long(group.getOrganizationId()));
 				}
-				else if (group.isSite()) {
+				else if (group.isRegularSite()) {
 					userParams.put("usersGroups", new Long(groupId));
 				}
 			}

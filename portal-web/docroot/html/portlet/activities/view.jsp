@@ -27,7 +27,7 @@ List<SocialActivity> activities = null;
 if (group.isOrganization()) {
 	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getOrganizationId(), start, end);
 }
-else if (group.isSite()) {
+else if (group.isRegularSite()) {
 	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), start, end);
 }
 else if (group.isUser()) {

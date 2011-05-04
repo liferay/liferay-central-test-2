@@ -188,7 +188,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				organizationId = organization.getParentOrganizationId();
 			}
 		}
-		else if (group.isSite()) {
+		else if (group.isRegularSite()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(),
 					RoleConstants.SITE_ADMINISTRATOR, true) ||
@@ -251,7 +251,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				organizationId = organization.getParentOrganizationId();
 			}
 		}
-		else if (group.isSite()) {
+		else if (group.isRegularSite()) {
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 					_userId, group.getGroupId(), RoleConstants.SITE_OWNER,
 					true)) {

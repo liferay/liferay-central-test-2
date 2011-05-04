@@ -3850,7 +3850,7 @@ public class PortalImpl implements Portal {
 					return true;
 				}
 			}
-			else if (group.isSite() || group.isUserGroup()) {
+			else if (group.isRegularSite() || group.isUserGroup()) {
 				long scopeGroupId = themeDisplay.getScopeGroupId();
 
 				if (GroupPermissionUtil.contains(

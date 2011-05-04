@@ -762,7 +762,7 @@ public class ServicePreAction extends Action {
 				}
 			}
 		}
-		else if (group.isSite()) {
+		else if (group.isRegularSite()) {
 			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
 				return true;
 			}

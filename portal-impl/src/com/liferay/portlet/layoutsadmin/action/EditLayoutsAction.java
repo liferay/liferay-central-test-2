@@ -390,7 +390,22 @@ public class EditLayoutsAction extends PortletAction {
 				ActionKeys.UPDATE);
 		}
 
-		if (group.isCompany()) {
+		if (group.isRegularSite()) {
+			boolean publishToLive =
+				GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.PUBLISH_STAGING) &&
+					cmd.equals("publish_to_live");
+
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.MANAGE_LAYOUTS) &&
+				!hasUpdateLayoutPermission && !publishToLive) {
+
+				throw new PrincipalException();
+			}
+		}
+		else if (group.isCompany()) {
 			if (!permissionChecker.isCompanyAdmin()) {
 				throw new PrincipalException();
 			}
@@ -414,21 +429,6 @@ public class EditLayoutsAction extends PortletAction {
 
 			if (!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
-					ActionKeys.MANAGE_LAYOUTS) &&
-				!hasUpdateLayoutPermission && !publishToLive) {
-
-				throw new PrincipalException();
-			}
-		}
-		else if (group.isSite()) {
-			boolean publishToLive =
-				GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
-					ActionKeys.PUBLISH_STAGING) &&
-				cmd.equals("publish_to_live");
-
-			if (!GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
 					ActionKeys.MANAGE_LAYOUTS) &&
 				!hasUpdateLayoutPermission && !publishToLive) {
 

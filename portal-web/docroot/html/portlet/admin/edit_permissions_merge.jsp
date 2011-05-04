@@ -57,7 +57,7 @@ while (rolesItr.hasNext()) {
 
 		Group group = groups.get(0);
 
-		if (tabs2.equals("sites") && !group.isSite()) {
+		if (tabs2.equals("sites") && !group.isRegularSite()) {
 			continue;
 		}
 		else if (tabs2.equals("organizations") && !group.isOrganization()) {
@@ -108,7 +108,7 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 			editGroupURL.setParameter("tabs1Names", "organizations");
 			editGroupURL.setParameter("organizationId", String.valueOf(group.getOrganizationId()));
 		}
-		else if (group.isSite()) {
+		else if (group.isRegularSite()) {
 			editGroupURL.setParameter("struts_action", "/admin_server/edit_site");
 			editGroupURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		}
