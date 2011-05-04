@@ -240,7 +240,8 @@ public class DDLRecordWrapper implements DDLRecord {
 	}
 
 	public java.io.Serializable getFieldDataType(java.lang.String fieldName)
-		throws java.lang.Exception {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecord.getFieldDataType(fieldName);
 	}
 

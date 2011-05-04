@@ -34,7 +34,8 @@ public interface DDLRecord extends DDLRecordModel {
 		throws com.liferay.portlet.dynamicdatamapping.StorageException;
 
 	public java.io.Serializable getFieldDataType(java.lang.String fieldName)
-		throws java.lang.Exception;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatamapping.storage.Fields getFields()
 		throws com.liferay.portlet.dynamicdatamapping.StorageException;
