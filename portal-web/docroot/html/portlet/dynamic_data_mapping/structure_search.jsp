@@ -87,6 +87,7 @@ if (!portletName.equals(PortletKeys.DYNAMIC_DATA_MAPPING)) {
 		}
 		else {
 			document.<portlet:namespace />fm.method = 'post';
+
 			submitForm(document.<portlet:namespace />fm, url);
 		}
 	}
