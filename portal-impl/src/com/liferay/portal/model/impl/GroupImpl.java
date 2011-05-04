@@ -367,10 +367,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(Group.class);
 	}
 
-	public boolean isSite() {
-		return isOrganizationSite() || isRegularSite();
-	}
-
 	public boolean isStaged() {
 		return GetterUtil.getBoolean(getTypeSettingsProperty("staged"));
 	}

@@ -271,6 +271,27 @@ public interface GroupModel extends BaseModel<Group> {
 	 */
 	public void setActive(boolean active);
 
+	/**
+	 * Gets the site of this group.
+	 *
+	 * @return the site of this group
+	 */
+	public boolean getSite();
+
+	/**
+	 * Determines if this group is site.
+	 *
+	 * @return <code>true</code> if this group is site; <code>false</code> otherwise
+	 */
+	public boolean isSite();
+
+	/**
+	 * Sets whether this group is site.
+	 *
+	 * @param site the site of this group
+	 */
+	public void setSite(boolean site);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

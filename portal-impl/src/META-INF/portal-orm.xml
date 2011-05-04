@@ -217,6 +217,7 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<basic name="site" />
 			<transient name="creatorUserUuid" />
 			<transient name="primaryKey" />
 		</attributes>

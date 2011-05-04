@@ -334,6 +334,7 @@
 		<column name="typeSettings" type="String" />
 		<column name="friendlyURL" type="String" />
 		<column name="active" type="boolean" />
+		<column name="site" type="boolean" />
 
 		<!-- Relationships -->
 

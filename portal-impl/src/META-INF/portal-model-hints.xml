@@ -197,6 +197,7 @@
 			<hint name="max-length">100</hint>
 		</field>
 		<field name="active" type="boolean" />
+		<field name="site" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Image">
 		<field name="imageId" type="long" />
