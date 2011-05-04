@@ -210,7 +210,7 @@ public class ActionUtil {
 
 		Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-		if ((group != null) && group.isOrganizationSite()) {
+		if ((group != null) && group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=

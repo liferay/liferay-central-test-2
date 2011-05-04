@@ -512,15 +512,8 @@ public class GroupWrapper implements Group {
 		return _group.isLayoutSetPrototype();
 	}
 
-	/**
-	* @deprecated As of 6.1, renamed to {@link #isOrganizationSite}
-	*/
 	public boolean isOrganization() {
 		return _group.isOrganization();
-	}
-
-	public boolean isOrganizationSite() {
-		return _group.isOrganizationSite();
 	}
 
 	public boolean isRegularSite() {

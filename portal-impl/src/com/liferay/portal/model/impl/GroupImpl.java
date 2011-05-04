@@ -352,19 +352,21 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(LayoutSetPrototype.class);
 	}
 
-	/**
-	 * @deprecated  As of 6.1, renamed to {@link #isOrganizationSite}
-	 */
 	public boolean isOrganization() {
-		return isOrganizationSite();
-	}
-
-	public boolean isOrganizationSite() {
 		return hasClassName(Organization.class);
 	}
 
 	public boolean isRegularSite() {
 		return hasClassName(Group.class);
+	}
+
+	public boolean isSite() {
+		if (isOrganizationSite() || isRegularSite()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isStaged() {

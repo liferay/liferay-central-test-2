@@ -216,7 +216,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				roles.addAll(userGroupGroupRoles);
 
 				if ((group != null) &&
-					((group.isOrganizationSite() &&
+					((group.isOrganization() &&
 						userOrgGroups.contains(group)) ||
 					 (group.isRegularSite() && userGroups.contains(group)))) {
 
@@ -439,7 +439,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 	protected void addRequiredMemberRole(Group group, List<Role> roles)
 		throws Exception {
 
-		if (group.isOrganizationSite()) {
+		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 

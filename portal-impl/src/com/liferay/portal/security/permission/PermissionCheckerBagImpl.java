@@ -161,7 +161,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				return false;
 			}
 		}
-		else if (group.isOrganizationSite()) {
+		else if (group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=
@@ -227,7 +227,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				return false;
 			}
 		}
-		else if (group.isOrganizationSite()) {
+		else if (group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
 
 			while (organizationId !=

@@ -1328,7 +1328,7 @@ public class LayoutTypePortletImpl
 		if (group.isUser()) {
 			selector1 = LayoutTypePortletConstants.STATIC_PORTLET_USER_SELECTOR;
 		}
-		else if (group.isOrganizationSite()) {
+		else if (group.isOrganization()) {
 			selector1 =
 				LayoutTypePortletConstants.STATIC_PORTLET_ORGANIZATION_SELECTOR;
 		}

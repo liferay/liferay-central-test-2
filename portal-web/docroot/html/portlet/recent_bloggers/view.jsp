@@ -63,7 +63,7 @@ else {
 
 				String blogType = LanguageUtil.get(pageContext, "personal");
 
-				if (group.isOrganizationSite() || group.isRegularSite()) {
+				if (group.isOrganization() || group.isRegularSite()) {
 					blogType = group.getDescriptiveName();// + " " + LanguageUtil.get(pageContext, "site");
 				}
 

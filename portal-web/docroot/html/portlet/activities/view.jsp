@@ -24,7 +24,7 @@ int end = 10;
 
 List<SocialActivity> activities = null;
 
-if (group.isOrganizationSite()) {
+if (group.isOrganization()) {
 	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getOrganizationId(), start, end);
 }
 else if (group.isRegularSite()) {

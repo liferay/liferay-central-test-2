@@ -145,7 +145,7 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			Group group, BooleanQuery permissionQuery)
 		throws Exception {
 
-		if (group.isOrganizationSite()) {
+		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 

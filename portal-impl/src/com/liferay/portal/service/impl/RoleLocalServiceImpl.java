@@ -247,12 +247,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			role = getRole(group.getCompanyId(), RoleConstants.USER);
 		}
 		else if (group.isLayoutPrototype() || group.isLayoutSetPrototype() ||
-			group.isRegularSite()) {
+				 group.isRegularSite()) {
 
 			role = getRole(
 				group.getCompanyId(), RoleConstants.SITE_MEMBER);
 		}
-		else if (group.isOrganizationSite()) {
+		else if (group.isOrganization()) {
 			role = getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 		}

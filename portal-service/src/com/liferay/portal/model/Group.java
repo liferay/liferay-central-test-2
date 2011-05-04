@@ -83,12 +83,7 @@ public interface Group extends GroupModel {
 
 	public boolean isLayoutSetPrototype();
 
-	/**
-	* @deprecated As of 6.1, renamed to {@link #isOrganizationSite}
-	*/
 	public boolean isOrganization();
-
-	public boolean isOrganizationSite();
 
 	public boolean isRegularSite();
 
