@@ -50,9 +50,7 @@ List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutR
 <div id="<portlet:namespace />revisionsToolbar"></div>
 
 <aui:script use="aui-toolbar,liferay-staging" position="inline">
-	var branching = Liferay.Staging.Branching;
-
-	branching.init(
+	Liferay.Staging.Branching.init(
 		{
 			namespace: '<portlet:namespace />'
 		}
@@ -65,14 +63,13 @@ List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutR
 			children: [
 				{
 					handler: function (event) {
-						alert('clean history');
 					},
 					icon: 'trash',
 					label: '<liferay-ui:message key="clean-history" />'
 				},
 				{
 					handler: function (event) {
-						branching.addVariation('<%= addVariationURL %>');
+						Liferay.Staging.Branching.addVariation('<%= addVariationURL %>');
 					},
 					icon: 'copy',
 					label: '<liferay-ui:message key="new-page-variation" />'
