@@ -75,7 +75,7 @@ if (Validator.isNotNull(curCategoryIds)) {
 			curEntryIds: '<%= curCategoryIds %>',
 			hiddenInput: '#<%= namespace + hiddenInput %>',
 			instanceVar: '<%= namespace + randomNamespace %>',
-			portalModelResource: <%= ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName()) %>
+			portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>
 		}
 	).render();
 </aui:script>
