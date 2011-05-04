@@ -361,7 +361,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	public boolean isSite() {
-		if (isOrganizationSite() || isRegularSite()) {
+		if (isOrganization() || isRegularSite()) {
 			return true;
 		}
 		else {
