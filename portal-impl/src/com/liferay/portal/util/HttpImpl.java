@@ -51,6 +51,7 @@ import javax.portlet.RenderRequest;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
@@ -314,6 +315,15 @@ public class HttpImpl implements Http {
 		}
 
 		String completeURL = sb.toString();
+
+		if (request.isRequestedSessionIdFromURL()) {
+			HttpSession session = request.getSession();
+
+			String sessionId = session.getId();
+
+			completeURL = PortalUtil.getURLWithSessionId(
+				completeURL, sessionId);
+		}
 
 		if (_log.isWarnEnabled()) {
 			if (completeURL.contains("?&")) {
