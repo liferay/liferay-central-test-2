@@ -493,10 +493,6 @@ public class GroupWrapper implements Group {
 		return _group.isRegularSite();
 	}
 
-	public boolean isSite() {
-		return _group.isSite();
-	}
-
 	public boolean isStaged() {
 		return _group.isStaged();
 	}
