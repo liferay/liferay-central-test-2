@@ -484,12 +484,38 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									<aui:option label="asset-types" selected="<%= assetVocabularyId == -1 %>" value="-1" />
 
 									<%
-									List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
+									if (scopeGroupId != company.getGroup().getGroupId()) {
+										List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
+
+										if (!assetVocabularies.isEmpty()) {
+										%>
+
+											<optgroup label="<liferay-ui:message key="vocabularies" />">
+
+												<%
+												for (AssetVocabulary assetVocabulary : assetVocabularies) {
+												%>
+
+													<aui:option label="<%= assetVocabulary.getName() %>" selected="<%= assetVocabularyId == assetVocabulary.getVocabularyId() %>" value="<%= assetVocabulary.getVocabularyId() %>" />
+
+												<%
+												}
+												%>
+
+											</optgroup>
+
+										<%
+										}
+									}
+									%>
+
+									<%
+									List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(company.getGroup().getGroupId());
 
 									if (!assetVocabularies.isEmpty()) {
 									%>
 
-										<optgroup label="<liferay-ui:message key="vocabularies" />">
+										<optgroup label="<liferay-ui:message key="vocabularies" /> (<liferay-ui:message key="global" />)">
 
 											<%
 											for (AssetVocabulary assetVocabulary : assetVocabularies) {
