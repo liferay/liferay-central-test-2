@@ -199,7 +199,6 @@ public class EditOrganizationAction extends PortletAction {
 		long regionId = ParamUtil.getLong(actionRequest, "regionId");
 		long countryId = ParamUtil.getLong(actionRequest, "countryId");
 		String comments = ParamUtil.getString(actionRequest, "comments");
-		boolean site = ParamUtil.getBoolean(actionRequest, "site");
 		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
 			actionRequest);
 		List<EmailAddress> emailAddresses =
@@ -220,7 +219,7 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.addOrganization(
 				parentOrganizationId, name, type, recursable, regionId,
-				countryId, statusId, comments, site, addresses, emailAddresses,
+				countryId, statusId, comments, addresses, emailAddresses,
 				orgLabors, phones, websites, serviceContext);
 		}
 		else {
@@ -229,9 +228,8 @@ public class EditOrganizationAction extends PortletAction {
 
 			organization = OrganizationServiceUtil.updateOrganization(
 				organizationId, parentOrganizationId, name, type,
-				recursable, regionId, countryId, statusId, comments, site,
-				addresses, emailAddresses, orgLabors, phones, websites,
-				serviceContext);
+				recursable, regionId, countryId, statusId, comments, addresses,
+				emailAddresses, orgLabors, phones, websites, serviceContext);
 
 			boolean deleteLogo = ParamUtil.getBoolean(
 				actionRequest, "deleteLogo");

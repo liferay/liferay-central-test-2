@@ -185,10 +185,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				plid, WorkflowConstants.ACTION_PUBLISH);
 		}
 
-		// Site
-
-		Group group = groupLocalService.updateSite(groupId, true);
-
 		return layout;
 	}
 

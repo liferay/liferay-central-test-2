@@ -79,7 +79,6 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		newGroup.setTypeSettings(randomString());
 		newGroup.setFriendlyURL(randomString());
 		newGroup.setActive(randomBoolean());
-		newGroup.setSite(randomBoolean());
 
 		_persistence.update(newGroup, false);
 
@@ -100,7 +99,6 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingGroup.getTypeSettings(), newGroup.getTypeSettings());
 		assertEquals(existingGroup.getFriendlyURL(), newGroup.getFriendlyURL());
 		assertEquals(existingGroup.getActive(), newGroup.getActive());
-		assertEquals(existingGroup.getSite(), newGroup.getSite());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -271,7 +269,6 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		group.setTypeSettings(randomString());
 		group.setFriendlyURL(randomString());
 		group.setActive(randomBoolean());
-		group.setSite(randomBoolean());
 
 		_persistence.update(group, false);
 

@@ -70,10 +70,9 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			{ "type_", Types.INTEGER },
 			{ "typeSettings", Types.VARCHAR },
 			{ "friendlyURL", Types.VARCHAR },
-			{ "active_", Types.BOOLEAN },
-			{ "site", Types.BOOLEAN }
+			{ "active_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN,site BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Group_";
 	public static final String ORDER_BY_JPQL = " ORDER BY group_.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Group_.name ASC";
@@ -109,7 +108,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		model.setTypeSettings(soapModel.getTypeSettings());
 		model.setFriendlyURL(soapModel.getFriendlyURL());
 		model.setActive(soapModel.getActive());
-		model.setSite(soapModel.getSite());
 
 		return model;
 	}
@@ -391,18 +389,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_active = active;
 	}
 
-	public boolean getSite() {
-		return _site;
-	}
-
-	public boolean isSite() {
-		return _site;
-	}
-
-	public void setSite(boolean site) {
-		_site = site;
-	}
-
 	public Group toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Group)this;
@@ -442,7 +428,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		groupImpl.setTypeSettings(getTypeSettings());
 		groupImpl.setFriendlyURL(getFriendlyURL());
 		groupImpl.setActive(getActive());
-		groupImpl.setSite(getSite());
 
 		groupImpl.resetOriginalValues();
 
@@ -514,7 +499,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{groupId=");
 		sb.append(getGroupId());
@@ -542,15 +527,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		sb.append(getFriendlyURL());
 		sb.append(", active=");
 		sb.append(getActive());
-		sb.append(", site=");
-		sb.append(getSite());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Group");
@@ -608,10 +591,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>site</column-name><column-value><![CDATA[");
-		sb.append(getSite());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -642,6 +621,5 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	private String _friendlyURL;
 	private String _originalFriendlyURL;
 	private boolean _active;
-	private boolean _site;
 	private transient ExpandoBridge _expandoBridge;
 }

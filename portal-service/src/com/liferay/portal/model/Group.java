@@ -87,6 +87,8 @@ public interface Group extends GroupModel {
 
 	public boolean isRegularSite();
 
+	public boolean isSite();
+
 	public boolean isStaged();
 
 	public boolean isStagedPortlet(java.lang.String portletId);

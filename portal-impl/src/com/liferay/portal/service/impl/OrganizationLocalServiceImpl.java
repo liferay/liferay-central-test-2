@@ -91,7 +91,7 @@ public class OrganizationLocalServiceImpl
 	public Organization addOrganization(
 			long userId, long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, boolean site, ServiceContext serviceContext)
+			String comments, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Organization
@@ -126,7 +126,7 @@ public class OrganizationLocalServiceImpl
 
 		Group group = groupLocalService.addGroup(
 			userId, Organization.class.getName(), organizationId, name, null,
-			0, null, true, site, null);
+			0, null, true, null);
 
 		if (PropsValues.ORGANIZATIONS_ASSIGNMENT_AUTO) {
 
@@ -825,7 +825,7 @@ public class OrganizationLocalServiceImpl
 	public Organization updateOrganization(
 			long companyId, long organizationId, long parentOrganizationId,
 			String name, String type, boolean recursable, long regionId,
-			long countryId, int statusId, String comments, boolean site,
+			long countryId, int statusId, String comments,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -874,11 +874,6 @@ public class OrganizationLocalServiceImpl
 
 		indexer.reindex(
 			new String[] {String.valueOf(organization.getCompanyId())});
-
-		// Site
-
-		Group group = groupLocalService.updateSite(
-			organization.getGroup().getGroupId(), site);
 
 		return organization;
 	}

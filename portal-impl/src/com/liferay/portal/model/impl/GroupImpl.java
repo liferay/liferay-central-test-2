@@ -360,15 +360,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(Group.class);
 	}
 
-	public boolean isSite() {
-		if (isOrganization() || isRegularSite()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public boolean isStaged() {
 		return GetterUtil.getBoolean(getTypeSettingsProperty("staged"));
 	}

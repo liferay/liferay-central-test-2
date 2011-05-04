@@ -74,8 +74,6 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	LinkedHashMap groupParams = new LinkedHashMap();
 
-	groupParams.put("site", Boolean.TRUE);
-
 	if (tabs1.equals("sites-owned")) {
 		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
 

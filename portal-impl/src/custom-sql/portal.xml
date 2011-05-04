@@ -266,12 +266,6 @@
 				(MOD(INTEGER_DIV(ResourcePermission.actionIds, ResourceAction.bitwiseValue), 2) = 1)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinBySite">
-		<![CDATA[
-			WHERE
-				(Group_.site = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.joinByType">
 		<![CDATA[
 			WHERE

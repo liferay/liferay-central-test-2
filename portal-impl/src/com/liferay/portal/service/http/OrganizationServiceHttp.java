@@ -90,7 +90,6 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
-		boolean site,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
@@ -105,8 +104,8 @@ public class OrganizationServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentOrganizationId, name, type, recursable, regionId,
-					countryId, statusId, comments, site, addresses,
-					emailAddresses, orgLabors, phones, websites, serviceContext);
+					countryId, statusId, comments, addresses, emailAddresses,
+					orgLabors, phones, websites, serviceContext);
 
 			Object returnObj = null;
 
@@ -138,7 +137,7 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long parentOrganizationId,
 		java.lang.String name, java.lang.String type, boolean recursable,
 		long regionId, long countryId, int statusId, java.lang.String comments,
-		boolean site, com.liferay.portal.service.ServiceContext serviceContext)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -147,7 +146,7 @@ public class OrganizationServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					parentOrganizationId, name, type, recursable, regionId,
-					countryId, statusId, comments, site, serviceContext);
+					countryId, statusId, comments, serviceContext);
 
 			Object returnObj = null;
 
@@ -663,7 +662,7 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long organizationId,
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments, boolean site,
+		long countryId, int statusId, java.lang.String comments,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.OrgLabor> orgLabors,
@@ -678,7 +677,7 @@ public class OrganizationServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, parentOrganizationId, name, type,
-					recursable, regionId, countryId, statusId, comments, site,
+					recursable, regionId, countryId, statusId, comments,
 					addresses, emailAddresses, orgLabors, phones, websites,
 					serviceContext);
 
@@ -712,7 +711,7 @@ public class OrganizationServiceHttp {
 		HttpPrincipal httpPrincipal, long organizationId,
 		long parentOrganizationId, java.lang.String name,
 		java.lang.String type, boolean recursable, long regionId,
-		long countryId, int statusId, java.lang.String comments, boolean site,
+		long countryId, int statusId, java.lang.String comments,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -722,7 +721,7 @@ public class OrganizationServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					organizationId, parentOrganizationId, name, type,
-					recursable, regionId, countryId, statusId, comments, site,
+					recursable, regionId, countryId, statusId, comments,
 					serviceContext);
 
 			Object returnObj = null;
@@ -758,15 +757,14 @@ public class OrganizationServiceHttp {
 	private static final Class<?>[] _addOrganizationParameterTypes1 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			boolean.class, long.class, long.class, int.class,
-			java.lang.String.class, boolean.class, java.util.List.class,
+			java.lang.String.class, java.util.List.class, java.util.List.class,
 			java.util.List.class, java.util.List.class, java.util.List.class,
-			java.util.List.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addOrganizationParameterTypes2 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			boolean.class, long.class, long.class, int.class,
-			java.lang.String.class, boolean.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addPasswordPolicyOrganizationsParameterTypes3 =
@@ -812,15 +810,15 @@ public class OrganizationServiceHttp {
 	private static final Class<?>[] _updateOrganizationParameterTypes17 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class, boolean.class, long.class, long.class,
-			int.class, java.lang.String.class, boolean.class,
+			int.class, java.lang.String.class, java.util.List.class,
 			java.util.List.class, java.util.List.class, java.util.List.class,
-			java.util.List.class, java.util.List.class,
+			java.util.List.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateOrganizationParameterTypes18 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class, boolean.class, long.class, long.class,
-			int.class, java.lang.String.class, boolean.class,
+			int.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }
