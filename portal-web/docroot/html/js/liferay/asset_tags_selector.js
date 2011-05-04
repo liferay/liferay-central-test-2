@@ -40,7 +40,7 @@ AUI().add(
 		 *
 		 * Optional
 		 * focus {boolean}: Whether the text input should be focused.
-		 * portalModelResource {boolean}: Whether the asset model is on portal level.
+		 * portalModelResource {boolean}: Whether the asset model is on the portal level.
 		 *
 		 * Callbacks
 		 * contentCallback {function}: Called to get suggested tags.
@@ -254,7 +254,7 @@ AUI().add(
 
 						var groupIds = [];
 
-						if ((themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId()) && !portalModelResource) {
+						if (!portalModelResource && (themeDisplay.getParentGroupId() != themeDisplay.getCompanyGroupId())) {
 							groupIds.push(themeDisplay.getParentGroupId());
 						}
 
