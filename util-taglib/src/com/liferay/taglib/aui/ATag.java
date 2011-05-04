@@ -27,6 +27,7 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspWriter;
+import java.util.Map;
 
 /**
  * @author Julio Camarero
@@ -38,6 +39,10 @@ public class ATag extends IncludeTag {
 
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
+	}
+
+	public void setData(Map<String,Object> data) {
+		_data = data;
 	}
 
 	public void setHref(String href) {
@@ -70,6 +75,7 @@ public class ATag extends IncludeTag {
 
 	protected void cleanUp() {
 		_cssClass = null;
+		_data = null;
 		_href = null;
 		_id = null;
 		_label = null;
@@ -121,6 +127,10 @@ public class ATag extends IncludeTag {
 				jspWriter.write("class=\"");
 				jspWriter.write(_cssClass);
 				jspWriter.write("\" ");
+			}
+
+			if (_data != null) {
+				jspWriter.write(AUIUtil.buildData(_data));
 			}
 
 			jspWriter.write("href=\"");
@@ -181,6 +191,10 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
+			if (_data != null) {
+				jspWriter.write(AUIUtil.buildData(_data));
+			}
+
 			if (Validator.isNotNull(_id)) {
 				jspWriter.write("id=\"");
 				jspWriter.write(namespace);
@@ -232,6 +246,7 @@ public class ATag extends IncludeTag {
 		"/html/taglib/aui/a/start.jsp";
 
 	private String _cssClass;
+	private Map<String, Object> _data;
 	private String _href;
 	private String _id;
 	private String _label;
