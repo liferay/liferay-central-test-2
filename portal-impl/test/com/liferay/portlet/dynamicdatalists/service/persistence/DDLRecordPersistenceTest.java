@@ -69,6 +69,7 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		newDDLRecord.setClassNameId(nextLong());
 		newDDLRecord.setClassPK(nextLong());
 		newDDLRecord.setRecordSetId(nextLong());
+		newDDLRecord.setDisplayIndex(nextInt());
 
 		_persistence.update(newDDLRecord, false);
 
@@ -81,6 +82,8 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDDLRecord.getClassPK(), newDDLRecord.getClassPK());
 		assertEquals(existingDDLRecord.getRecordSetId(),
 			newDDLRecord.getRecordSetId());
+		assertEquals(existingDDLRecord.getDisplayIndex(),
+			newDDLRecord.getDisplayIndex());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -195,6 +198,7 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		ddlRecord.setClassNameId(nextLong());
 		ddlRecord.setClassPK(nextLong());
 		ddlRecord.setRecordSetId(nextLong());
+		ddlRecord.setDisplayIndex(nextInt());
 
 		_persistence.update(ddlRecord, false);
 

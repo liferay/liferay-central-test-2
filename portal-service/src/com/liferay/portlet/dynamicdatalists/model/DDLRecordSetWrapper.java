@@ -373,6 +373,24 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 		_ddlRecordSet.setDescription(description);
 	}
 
+	/**
+	* Gets the min display rows of this d d l record set.
+	*
+	* @return the min display rows of this d d l record set
+	*/
+	public int getMinDisplayRows() {
+		return _ddlRecordSet.getMinDisplayRows();
+	}
+
+	/**
+	* Sets the min display rows of this d d l record set.
+	*
+	* @param minDisplayRows the min display rows of this d d l record set
+	*/
+	public void setMinDisplayRows(int minDisplayRows) {
+		_ddlRecordSet.setMinDisplayRows(minDisplayRows);
+	}
+
 	public boolean isNew() {
 		return _ddlRecordSet.isNew();
 	}
@@ -439,6 +457,16 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSet.getDDMStructure();
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordSet.getRecords();
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.storage.Fields> getRecordsFieldsList()
+		throws java.lang.Exception {
+		return _ddlRecordSet.getRecordsFieldsList();
 	}
 
 	public DDLRecordSet getWrappedDDLRecordSet() {

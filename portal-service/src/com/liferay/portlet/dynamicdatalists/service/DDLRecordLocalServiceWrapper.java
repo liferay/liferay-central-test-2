@@ -242,11 +242,23 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		long recordSetId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordLocalService.addRecord(recordSetId, fields,
-			serviceContext);
+			displayIndex, serviceContext);
+	}
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
+		long recordSetId,
+		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
+		int displayIndex,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.addRecord(recordSetId, fieldsMap,
+			displayIndex, serviceContext);
 	}
 
 	public void deleteRecord(
@@ -297,11 +309,23 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		int displayIndex, boolean merge,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordLocalService.updateRecord(recordId, fields,
-			serviceContext);
+			displayIndex, merge, serviceContext);
+	}
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
+		long recordId,
+		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
+		int displayIndex, boolean merge,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.updateRecord(recordId, fieldsMap,
+			displayIndex, merge, serviceContext);
 	}
 
 	public DDLRecordLocalService getWrappedDDLRecordLocalService() {

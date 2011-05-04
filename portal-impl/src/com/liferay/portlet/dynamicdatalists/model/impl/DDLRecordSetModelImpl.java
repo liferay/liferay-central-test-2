@@ -79,9 +79,10 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 			{ "DDMStructureId", Types.BIGINT },
 			{ "recordSetKey", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
-			{ "description", Types.VARCHAR }
+			{ "description", Types.VARCHAR },
+			{ "minDisplayRows", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecordSet (uuid_ VARCHAR(75) null,recordSetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,DDMStructureId LONG,recordSetKey VARCHAR(75) null,name STRING null,description STRING null)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecordSet (uuid_ VARCHAR(75) null,recordSetId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,DDMStructureId LONG,recordSetKey VARCHAR(75) null,name STRING null,description STRING null,minDisplayRows INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecordSet";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -114,6 +115,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		model.setRecordSetKey(soapModel.getRecordSetKey());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
+		model.setMinDisplayRows(soapModel.getMinDisplayRows());
 
 		return model;
 	}
@@ -390,6 +392,14 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_description = description;
 	}
 
+	public int getMinDisplayRows() {
+		return _minDisplayRows;
+	}
+
+	public void setMinDisplayRows(int minDisplayRows) {
+		_minDisplayRows = minDisplayRows;
+	}
+
 	public DDLRecordSet toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDLRecordSet)this;
@@ -429,6 +439,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		ddlRecordSetImpl.setRecordSetKey(getRecordSetKey());
 		ddlRecordSetImpl.setName(getName());
 		ddlRecordSetImpl.setDescription(getDescription());
+		ddlRecordSetImpl.setMinDisplayRows(getMinDisplayRows());
 
 		ddlRecordSetImpl.resetOriginalValues();
 
@@ -490,7 +501,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -516,13 +527,15 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", minDisplayRows=");
+		sb.append(getMinDisplayRows());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatalists.model.DDLRecordSet");
@@ -576,6 +589,10 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>minDisplayRows</column-name><column-value><![CDATA[");
+		sb.append(getMinDisplayRows());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -599,5 +616,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 	private String _originalRecordSetKey;
 	private String _name;
 	private String _description;
+	private int _minDisplayRows;
 	private transient ExpandoBridge _expandoBridge;
 }

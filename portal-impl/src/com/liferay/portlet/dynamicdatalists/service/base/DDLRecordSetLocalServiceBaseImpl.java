@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalService;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalService;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordPersistence;
@@ -282,6 +283,24 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 	public void setDDLRecordLocalService(
 		DDLRecordLocalService ddlRecordLocalService) {
 		this.ddlRecordLocalService = ddlRecordLocalService;
+	}
+
+	/**
+	 * Gets the d d l record remote service.
+	 *
+	 * @return the d d l record remote service
+	 */
+	public DDLRecordService getDDLRecordService() {
+		return ddlRecordService;
+	}
+
+	/**
+	 * Sets the d d l record remote service.
+	 *
+	 * @param ddlRecordService the d d l record remote service
+	 */
+	public void setDDLRecordService(DDLRecordService ddlRecordService) {
+		this.ddlRecordService = ddlRecordService;
 	}
 
 	/**
@@ -653,6 +672,8 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 
 	@BeanReference(type = DDLRecordLocalService.class)
 	protected DDLRecordLocalService ddlRecordLocalService;
+	@BeanReference(type = DDLRecordService.class)
+	protected DDLRecordService ddlRecordService;
 	@BeanReference(type = DDLRecordPersistence.class)
 	protected DDLRecordPersistence ddlRecordPersistence;
 	@BeanReference(type = DDLRecordSetLocalService.class)

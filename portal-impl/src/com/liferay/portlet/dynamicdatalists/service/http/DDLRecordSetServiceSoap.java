@@ -118,5 +118,22 @@ public class DDLRecordSetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap updateMinDisplayRows(
+		long recordSetId, int minDisplayRows,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.dynamicdatalists.model.DDLRecordSet returnValue = DDLRecordSetServiceUtil.updateMinDisplayRows(recordSetId,
+					minDisplayRows, serviceContext);
+
+			return com.liferay.portlet.dynamicdatalists.model.DDLRecordSetSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(DDLRecordSetServiceSoap.class);
 }

@@ -1330,6 +1330,7 @@
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="recordSetId" type="long" />
+		<field name="displayIndex" type="int" />
 	</model>
 	<model name="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet">
 		<field name="uuid" type="String" />
@@ -1351,6 +1352,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="minDisplayRows" type="int" />
 	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMContent">
 		<field name="uuid" type="String" />

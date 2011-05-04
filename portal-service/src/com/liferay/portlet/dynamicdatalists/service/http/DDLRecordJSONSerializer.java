@@ -17,61 +17,34 @@ package com.liferay.portlet.dynamicdatalists.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.StringPool;
 
-import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author    Brian Wing Shun Chan
  * @generated
  */
-public class DDLRecordSetJSONSerializer {
-	public static JSONObject toJSONObject(DDLRecordSet model) {
+public class DDLRecordJSONSerializer {
+	public static JSONObject toJSONObject(DDLRecord model) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("uuid", model.getUuid());
+		jsonObject.put("recordId", model.getRecordId());
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
 		jsonObject.put("recordSetId", model.getRecordSetId());
-		jsonObject.put("groupId", model.getGroupId());
-		jsonObject.put("companyId", model.getCompanyId());
-		jsonObject.put("userId", model.getUserId());
-		jsonObject.put("userName", model.getUserName());
-
-		Date createDate = model.getCreateDate();
-
-		String createDateJSON = StringPool.BLANK;
-
-		if (createDate != null) {
-			createDateJSON = String.valueOf(createDate.getTime());
-		}
-
-		jsonObject.put("createDate", createDateJSON);
-
-		Date modifiedDate = model.getModifiedDate();
-
-		String modifiedDateJSON = StringPool.BLANK;
-
-		if (modifiedDate != null) {
-			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
-		}
-
-		jsonObject.put("modifiedDate", modifiedDateJSON);
-		jsonObject.put("DDMStructureId", model.getDDMStructureId());
-		jsonObject.put("recordSetKey", model.getRecordSetKey());
-		jsonObject.put("name", model.getName());
-		jsonObject.put("description", model.getDescription());
-		jsonObject.put("minDisplayRows", model.getMinDisplayRows());
+		jsonObject.put("displayIndex", model.getDisplayIndex());
 
 		return jsonObject;
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portlet.dynamicdatalists.model.DDLRecordSet[] models) {
+		com.liferay.portlet.dynamicdatalists.model.DDLRecord[] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (DDLRecordSet model : models) {
+		for (DDLRecord model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 
@@ -79,10 +52,10 @@ public class DDLRecordSetJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		com.liferay.portlet.dynamicdatalists.model.DDLRecordSet[][] models) {
+		com.liferay.portlet.dynamicdatalists.model.DDLRecord[][] models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (DDLRecordSet[] model : models) {
+		for (DDLRecord[] model : models) {
 			jsonArray.put(toJSONArray(model));
 		}
 
@@ -90,10 +63,10 @@ public class DDLRecordSetJSONSerializer {
 	}
 
 	public static JSONArray toJSONArray(
-		List<com.liferay.portlet.dynamicdatalists.model.DDLRecordSet> models) {
+		List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> models) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		for (DDLRecordSet model : models) {
+		for (DDLRecord model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

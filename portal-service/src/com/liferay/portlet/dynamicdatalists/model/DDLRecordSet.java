@@ -32,4 +32,10 @@ public interface DDLRecordSet extends DDLRecordSetModel {
 	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getDDMStructure()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.storage.Fields> getRecordsFieldsList()
+		throws java.lang.Exception;
 }

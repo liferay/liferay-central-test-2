@@ -1669,6 +1669,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="recordSetId" />
+			<basic name="displayIndex" />
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
@@ -1692,6 +1693,7 @@
 			<basic name="recordSetKey" />
 			<basic name="name" />
 			<basic name="description" />
+			<basic name="minDisplayRows" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />

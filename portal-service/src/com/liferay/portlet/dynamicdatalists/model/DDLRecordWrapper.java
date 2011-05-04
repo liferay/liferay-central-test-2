@@ -153,6 +153,24 @@ public class DDLRecordWrapper implements DDLRecord {
 		_ddlRecord.setRecordSetId(recordSetId);
 	}
 
+	/**
+	* Gets the display index of this d d l record.
+	*
+	* @return the display index of this d d l record
+	*/
+	public int getDisplayIndex() {
+		return _ddlRecord.getDisplayIndex();
+	}
+
+	/**
+	* Sets the display index of this d d l record.
+	*
+	* @param displayIndex the display index of this d d l record
+	*/
+	public void setDisplayIndex(int displayIndex) {
+		_ddlRecord.setDisplayIndex(displayIndex);
+	}
+
 	public boolean isNew() {
 		return _ddlRecord.isNew();
 	}
@@ -213,6 +231,32 @@ public class DDLRecordWrapper implements DDLRecord {
 
 	public java.lang.String toXmlString() {
 		return _ddlRecord.toXmlString();
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.storage.Field getField(
+		java.lang.String fieldName)
+		throws com.liferay.portlet.dynamicdatamapping.StorageException {
+		return _ddlRecord.getField(fieldName);
+	}
+
+	public java.io.Serializable getFieldDataType(java.lang.String fieldName)
+		throws java.lang.Exception {
+		return _ddlRecord.getFieldDataType(fieldName);
+	}
+
+	public com.liferay.portlet.dynamicdatamapping.storage.Fields getFields()
+		throws com.liferay.portlet.dynamicdatamapping.StorageException {
+		return _ddlRecord.getFields();
+	}
+
+	public java.io.Serializable getFieldType(java.lang.String fieldName)
+		throws java.lang.Exception {
+		return _ddlRecord.getFieldType(fieldName);
+	}
+
+	public java.io.Serializable getFieldValue(java.lang.String fieldName)
+		throws com.liferay.portlet.dynamicdatamapping.StorageException {
+		return _ddlRecord.getFieldValue(fieldName);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet getRecordSet()

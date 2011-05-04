@@ -43,6 +43,7 @@ public class DDLRecordSetSoap implements Serializable {
 		soapModel.setRecordSetKey(model.getRecordSetKey());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setMinDisplayRows(model.getMinDisplayRows());
 
 		return soapModel;
 	}
@@ -191,6 +192,14 @@ public class DDLRecordSetSoap implements Serializable {
 		_description = description;
 	}
 
+	public int getMinDisplayRows() {
+		return _minDisplayRows;
+	}
+
+	public void setMinDisplayRows(int minDisplayRows) {
+		_minDisplayRows = minDisplayRows;
+	}
+
 	private String _uuid;
 	private long _recordSetId;
 	private long _groupId;
@@ -203,4 +212,5 @@ public class DDLRecordSetSoap implements Serializable {
 	private String _recordSetKey;
 	private String _name;
 	private String _description;
+	private int _minDisplayRows;
 }

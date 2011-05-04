@@ -58,7 +58,7 @@ public class DDLRecordSetServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long ddmStructureId,
 		java.lang.String recordSetKey, boolean autoRecordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description,
+		java.lang.String description, int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -68,7 +68,7 @@ public class DDLRecordSetServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					ddmStructureId, recordSetKey, autoRecordSetKey, nameMap,
-					description, serviceContext);
+					description, minDisplayRows, serviceContext);
 
 			Object returnObj = null;
 
@@ -236,21 +236,59 @@ public class DDLRecordSetServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
-		HttpPrincipal httpPrincipal, long groupId, long ddmStructureId,
-		java.lang.String recordSetKey,
-		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description,
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateMinDisplayRows(
+		HttpPrincipal httpPrincipal, long recordSetId, int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DDLRecordSetServiceUtil.class.getName(),
-					"updateRecordSet", _updateRecordSetParameterTypes5);
+					"updateMinDisplayRows", _updateMinDisplayRowsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					recordSetId, minDisplayRows, serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.dynamicdatalists.model.DDLRecordSet)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
+		HttpPrincipal httpPrincipal, long groupId, long ddmStructureId,
+		java.lang.String recordSetKey,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.lang.String description, int minDisplayRows,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DDLRecordSetServiceUtil.class.getName(),
+					"updateRecordSet", _updateRecordSetParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					ddmStructureId, recordSetKey, nameMap, description,
-					serviceContext);
+					minDisplayRows, serviceContext);
 
 			Object returnObj = null;
 
@@ -281,7 +319,7 @@ public class DDLRecordSetServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(DDLRecordSetServiceHttp.class);
 	private static final Class<?>[] _addRecordSetParameterTypes0 = new Class[] {
 			long.class, long.class, java.lang.String.class, boolean.class,
-			java.util.Map.class, java.lang.String.class,
+			java.util.Map.class, java.lang.String.class, int.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteRecordSetParameterTypes1 = new Class[] {
@@ -296,9 +334,13 @@ public class DDLRecordSetServiceHttp {
 	private static final Class<?>[] _getRecordSetParameterTypes4 = new Class[] {
 			long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _updateRecordSetParameterTypes5 = new Class[] {
+	private static final Class<?>[] _updateMinDisplayRowsParameterTypes5 = new Class[] {
+			long.class, int.class,
+			com.liferay.portal.service.ServiceContext.class
+		};
+	private static final Class<?>[] _updateRecordSetParameterTypes6 = new Class[] {
 			long.class, long.class, java.lang.String.class, java.util.Map.class,
-			java.lang.String.class,
+			java.lang.String.class, int.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 }

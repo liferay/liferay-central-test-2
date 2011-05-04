@@ -268,13 +268,14 @@ public class DDLRecordSetLocalServiceUtil {
 		long userId, long groupId, long ddmStructureId,
 		java.lang.String recordSetKey, boolean autoRecordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description,
+		java.lang.String description, int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addRecordSet(userId, groupId, ddmStructureId, recordSetKey,
-			autoRecordSetKey, nameMap, description, serviceContext);
+			autoRecordSetKey, nameMap, description, minDisplayRows,
+			serviceContext);
 	}
 
 	public static void addRecordSetResources(
@@ -385,16 +386,26 @@ public class DDLRecordSetLocalServiceUtil {
 			description, andOperator);
 	}
 
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateMinDisplayRows(
+		long recordSetId, int minDisplayRows,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateMinDisplayRows(recordSetId, minDisplayRows,
+			serviceContext);
+	}
+
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
 		long groupId, long ddmStructureId, java.lang.String recordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description,
+		java.lang.String description, int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateRecordSet(groupId, ddmStructureId, recordSetKey,
-			nameMap, description, serviceContext);
+			nameMap, description, minDisplayRows, serviceContext);
 	}
 
 	public static DDLRecordSetLocalService getService() {

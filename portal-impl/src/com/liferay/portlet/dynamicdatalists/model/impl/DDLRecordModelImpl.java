@@ -24,6 +24,7 @@ import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordModel;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSoap;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
@@ -32,6 +33,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The base model implementation for the DDLRecord service. Represents a row in the &quot;DDLRecord&quot; database table, with each column mapped to a property of this class.
@@ -59,9 +63,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			{ "recordId", Types.BIGINT },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
-			{ "recordSetId", Types.BIGINT }
+			{ "recordSetId", Types.BIGINT },
+			{ "displayIndex", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,classNameId LONG,classPK LONG,recordSetId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,classNameId LONG,classPK LONG,recordSetId LONG,displayIndex INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecord";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -72,6 +77,41 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.dynamicdatalists.model.DDLRecord"),
 			true);
+
+	/**
+	 * Converts the soap model instance into a normal model instance.
+	 *
+	 * @param soapModel the soap model instance to convert
+	 * @return the normal model instance
+	 */
+	public static DDLRecord toModel(DDLRecordSoap soapModel) {
+		DDLRecord model = new DDLRecordImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setRecordId(soapModel.getRecordId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setRecordSetId(soapModel.getRecordSetId());
+		model.setDisplayIndex(soapModel.getDisplayIndex());
+
+		return model;
+	}
+
+	/**
+	 * Converts the soap model instances into normal model instances.
+	 *
+	 * @param soapModels the soap model instances to convert
+	 * @return the normal model instances
+	 */
+	public static List<DDLRecord> toModels(DDLRecordSoap[] soapModels) {
+		List<DDLRecord> models = new ArrayList<DDLRecord>(soapModels.length);
+
+		for (DDLRecordSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
 
 	public Class<?> getModelClass() {
 		return DDLRecord.class;
@@ -152,6 +192,14 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_recordSetId = recordSetId;
 	}
 
+	public int getDisplayIndex() {
+		return _displayIndex;
+	}
+
+	public void setDisplayIndex(int displayIndex) {
+		_displayIndex = displayIndex;
+	}
+
 	public DDLRecord toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDLRecord)this;
@@ -183,6 +231,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordImpl.setClassNameId(getClassNameId());
 		ddlRecordImpl.setClassPK(getClassPK());
 		ddlRecordImpl.setRecordSetId(getRecordSetId());
+		ddlRecordImpl.setDisplayIndex(getDisplayIndex());
 
 		ddlRecordImpl.resetOriginalValues();
 
@@ -235,7 +284,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -247,13 +296,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getClassPK());
 		sb.append(", recordSetId=");
 		sb.append(getRecordSetId());
+		sb.append(", displayIndex=");
+		sb.append(getDisplayIndex());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatalists.model.DDLRecord");
@@ -279,6 +330,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			"<column><column-name>recordSetId</column-name><column-value><![CDATA[");
 		sb.append(getRecordSetId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>displayIndex</column-name><column-value><![CDATA[");
+		sb.append(getDisplayIndex());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -290,5 +345,6 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private long _classNameId;
 	private long _classPK;
 	private long _recordSetId;
+	private int _displayIndex;
 	private transient ExpandoBridge _expandoBridge;
 }

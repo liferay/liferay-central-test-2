@@ -134,6 +134,20 @@ public interface DDLRecordModel extends BaseModel<DDLRecord> {
 	 */
 	public void setRecordSetId(long recordSetId);
 
+	/**
+	 * Gets the display index of this d d l record.
+	 *
+	 * @return the display index of this d d l record
+	 */
+	public int getDisplayIndex();
+
+	/**
+	 * Sets the display index of this d d l record.
+	 *
+	 * @param displayIndex the display index of this d d l record
+	 */
+	public void setDisplayIndex(int displayIndex);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.dynamicdatalists.service.http.DDLRecordServiceSoap}.
  *
  * @author    Brian Wing Shun Chan
+ * @see       com.liferay.portlet.dynamicdatalists.service.http.DDLRecordServiceSoap
  * @generated
  */
 public class DDLRecordSoap implements Serializable {
@@ -34,6 +35,7 @@ public class DDLRecordSoap implements Serializable {
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setRecordSetId(model.getRecordSetId());
+		soapModel.setDisplayIndex(model.getDisplayIndex());
 
 		return soapModel;
 	}
@@ -126,9 +128,18 @@ public class DDLRecordSoap implements Serializable {
 		_recordSetId = recordSetId;
 	}
 
+	public int getDisplayIndex() {
+		return _displayIndex;
+	}
+
+	public void setDisplayIndex(int displayIndex) {
+		_displayIndex = displayIndex;
+	}
+
 	private String _uuid;
 	private long _recordId;
 	private long _classNameId;
 	private long _classPK;
 	private long _recordSetId;
+	private int _displayIndex;
 }

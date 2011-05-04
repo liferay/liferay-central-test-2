@@ -260,13 +260,13 @@ public class DDLRecordSetLocalServiceWrapper implements DDLRecordSetLocalService
 		long userId, long groupId, long ddmStructureId,
 		java.lang.String recordSetKey, boolean autoRecordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description,
+		java.lang.String description, int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetLocalService.addRecordSet(userId, groupId,
 			ddmStructureId, recordSetKey, autoRecordSetKey, nameMap,
-			description, serviceContext);
+			description, minDisplayRows, serviceContext);
 	}
 
 	public void addRecordSetResources(
@@ -373,15 +373,25 @@ public class DDLRecordSetLocalServiceWrapper implements DDLRecordSetLocalService
 			recordSetKey, name, description, andOperator);
 	}
 
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateMinDisplayRows(
+		long recordSetId, int minDisplayRows,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordSetLocalService.updateMinDisplayRows(recordSetId,
+			minDisplayRows, serviceContext);
+	}
+
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecordSet updateRecordSet(
 		long groupId, long ddmStructureId, java.lang.String recordSetKey,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description,
+		java.lang.String description, int minDisplayRows,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordSetLocalService.updateRecordSet(groupId,
-			ddmStructureId, recordSetKey, nameMap, description, serviceContext);
+			ddmStructureId, recordSetKey, nameMap, description, minDisplayRows,
+			serviceContext);
 	}
 
 	public DDLRecordSetLocalService getWrappedDDLRecordSetLocalService() {

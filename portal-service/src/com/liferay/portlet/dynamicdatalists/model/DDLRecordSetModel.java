@@ -308,6 +308,20 @@ public interface DDLRecordSetModel extends BaseModel<DDLRecordSet>, GroupedModel
 	 */
 	public void setDescription(String description);
 
+	/**
+	 * Gets the min display rows of this d d l record set.
+	 *
+	 * @return the min display rows of this d d l record set
+	 */
+	public int getMinDisplayRows();
+
+	/**
+	 * Sets the min display rows of this d d l record set.
+	 *
+	 * @param minDisplayRows the min display rows of this d d l record set
+	 */
+	public void setMinDisplayRows(int minDisplayRows);
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

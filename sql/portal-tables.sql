@@ -402,7 +402,8 @@ create table DDLRecord (
 	recordId LONG not null primary key,
 	classNameId LONG,
 	classPK LONG,
-	recordSetId LONG
+	recordSetId LONG,
+	displayIndex INTEGER
 );
 
 create table DDLRecordSet (
@@ -417,7 +418,8 @@ create table DDLRecordSet (
 	DDMStructureId LONG,
 	recordSetKey VARCHAR(75) null,
 	name STRING null,
-	description STRING null
+	description STRING null,
+	minDisplayRows INTEGER
 );
 
 create table DDMContent (

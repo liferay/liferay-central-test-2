@@ -437,6 +437,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 		ddlRecordSetImpl.setRecordSetKey(ddlRecordSet.getRecordSetKey());
 		ddlRecordSetImpl.setName(ddlRecordSet.getName());
 		ddlRecordSetImpl.setDescription(ddlRecordSet.getDescription());
+		ddlRecordSetImpl.setMinDisplayRows(ddlRecordSet.getMinDisplayRows());
 
 		return ddlRecordSetImpl;
 	}

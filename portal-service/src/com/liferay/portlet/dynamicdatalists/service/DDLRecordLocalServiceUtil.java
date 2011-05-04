@@ -251,10 +251,24 @@ public class DDLRecordLocalServiceUtil {
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		long recordSetId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addRecord(recordSetId, fields, serviceContext);
+		return getService()
+				   .addRecord(recordSetId, fields, displayIndex, serviceContext);
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
+		long recordSetId,
+		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
+		int displayIndex,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addRecord(recordSetId, fieldsMap, displayIndex,
+			serviceContext);
 	}
 
 	public static void deleteRecord(
@@ -305,10 +319,25 @@ public class DDLRecordLocalServiceUtil {
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		int displayIndex, boolean merge,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateRecord(recordId, fields, serviceContext);
+		return getService()
+				   .updateRecord(recordId, fields, displayIndex, merge,
+			serviceContext);
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
+		long recordId,
+		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
+		int displayIndex, boolean merge,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateRecord(recordId, fieldsMap, displayIndex, merge,
+			serviceContext);
 	}
 
 	public static DDLRecordLocalService getService() {

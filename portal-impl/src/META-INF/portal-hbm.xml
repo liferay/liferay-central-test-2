@@ -1413,6 +1413,7 @@
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="recordSetId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="displayIndex" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetImpl" table="DDLRecordSet">
 		<cache usage="read-write" />
@@ -1430,6 +1431,7 @@
 		<property name="recordSetKey" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="minDisplayRows" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" table="DDMContent">
 		<cache usage="read-write" />
