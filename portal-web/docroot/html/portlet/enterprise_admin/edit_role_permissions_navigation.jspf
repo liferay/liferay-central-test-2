@@ -95,7 +95,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 				</c:otherwise>
 			</c:choose>
 
-			<optgroup label="<liferay-ui:message key="content" />">
+			<optgroup label="<liferay-ui:message key="site-content" />">
 
 				<%
 				for (Portlet portlet : portlets) {
@@ -127,7 +127,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 			Set<String> hiddenPortletIds = portletCategory.getCategory(PortletCategoryConstants.NAME_HIDDEN).getPortletIds();
 			%>
 
-			<optgroup label="<liferay-ui:message key="applications" />">
+			<optgroup label="<liferay-ui:message key="site-applications" />">
 
 				<%
 				for (Portlet portlet : portlets) {
