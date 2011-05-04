@@ -36,7 +36,7 @@ int roleType = RoleConstants.TYPE_SITE;
 
 Organization organization = null;
 
-if (group.isOrganization()) {
+if (group.isOrganizationSite()) {
 	roleType = RoleConstants.TYPE_ORGANIZATION;
 
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());

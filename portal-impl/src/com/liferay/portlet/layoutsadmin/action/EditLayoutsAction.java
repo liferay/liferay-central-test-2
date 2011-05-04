@@ -418,7 +418,7 @@ public class EditLayoutsAction extends PortletAction {
 			LayoutSetPrototypePermissionUtil.check(
 				permissionChecker, group.getClassPK(), ActionKeys.UPDATE);
 		}
-		else if (group.isOrganization()) {
+		else if (group.isOrganizationSite()) {
 			long organizationId = group.getOrganizationId();
 
 			boolean publishToLive =

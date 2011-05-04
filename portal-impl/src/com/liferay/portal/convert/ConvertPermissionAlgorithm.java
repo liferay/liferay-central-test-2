@@ -524,7 +524,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 								continue;
 							}
 
-							if (group.isOrganization()) {
+							if (group.isOrganizationSite()) {
 								defaultRole = defaultRoles[1];
 							}
 							else if (group.isRegularSite()) {

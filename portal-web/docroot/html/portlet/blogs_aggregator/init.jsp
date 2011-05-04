@@ -47,7 +47,7 @@ boolean showTags = GetterUtil.getBoolean(preferences.getValue("showTags", null),
 if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
-	if (group.isOrganization()) {
+	if (group.isOrganizationSite()) {
 		organizationId = group.getOrganizationId();
 	}
 }

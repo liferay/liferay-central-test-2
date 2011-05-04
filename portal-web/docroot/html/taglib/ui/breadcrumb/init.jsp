@@ -100,7 +100,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 		return;
 	}
 
-	if (group.isOrganization()) {
+	if (group.isOrganizationSite()) {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 
 		Organization parentOrganization = organization.getParentOrganization();

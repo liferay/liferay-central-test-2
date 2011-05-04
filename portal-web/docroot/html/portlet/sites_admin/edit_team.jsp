@@ -29,7 +29,7 @@ Group group = GroupServiceUtil.getGroup(groupId);
 
 Organization organization = null;
 
-if (group.isOrganization()) {
+if (group.isOrganizationSite()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 }
 %>
@@ -85,7 +85,7 @@ if (group.isOrganization()) {
 </aui:script>
 
 <%
-if (group.isOrganization()) {
+if (group.isOrganizationSite()) {
 	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 else {

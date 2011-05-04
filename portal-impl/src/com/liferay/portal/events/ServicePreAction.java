@@ -730,7 +730,7 @@ public class ServicePreAction extends Action {
 				return false;
 			}
 		}
-		else if (group.isOrganization()) {
+		else if (group.isOrganizationSite()) {
 			long organizationId = group.getOrganizationId();
 
 			if (OrganizationLocalServiceUtil.hasUserOrganization(

@@ -155,7 +155,7 @@
 									else {
 										Group organizationGroup = (Group)baseModel;
 
-										if (!organizationGroup.isOrganization()) {
+										if (!organizationGroup.isOrganizationSite()) {
 											continue;
 										}
 

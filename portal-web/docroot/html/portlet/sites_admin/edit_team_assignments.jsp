@@ -30,7 +30,7 @@ Group group = GroupServiceUtil.getGroup(team.getGroupId());
 
 Organization organization = null;
 
-if (group.isOrganization()) {
+if (group.isOrganizationSite()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 }
 
@@ -119,7 +119,7 @@ request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 </aui:script>
 
 <%
-if (group.isOrganization()) {
+if (group.isOrganizationSite()) {
 	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 else {

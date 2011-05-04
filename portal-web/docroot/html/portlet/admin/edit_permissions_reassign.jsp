@@ -81,7 +81,7 @@ while (rolesItr.hasNext()) {
 		if (tabs2.equals("sites") && !group.isRegularSite()) {
 			continue;
 		}
-		else if (tabs2.equals("organizations") && !group.isOrganization()) {
+		else if (tabs2.equals("organizations") && !group.isOrganizationSite()) {
 			continue;
 		}
 	}
@@ -169,7 +169,7 @@ while (rolesItr.hasNext()) {
 
 		editGroupURL.setParameter("redirect", currentURL);
 
-		if (group.isOrganization()) {
+		if (group.isOrganizationSite()) {
 			editGroupURL.setParameter("struts_action", "/admin_server/edit_organization");
 			editGroupURL.setParameter("tabs1Names", "organizations");
 			editGroupURL.setParameter("organizationId", String.valueOf(group.getOrganizationId()));

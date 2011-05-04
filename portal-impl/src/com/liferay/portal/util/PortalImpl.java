@@ -3840,7 +3840,7 @@ public class PortalImpl implements Portal {
 					return true;
 				}
 			}
-			else if (group.isOrganization()) {
+			else if (group.isOrganizationSite()) {
 				long organizationId = group.getOrganizationId();
 
 				if (OrganizationPermissionUtil.contains(

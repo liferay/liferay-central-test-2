@@ -177,7 +177,7 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		if (group.isCompany()) {
 			roleNames.add(RoleConstants.ADMINISTRATOR);
 		}
-		else if (group.isOrganization()) {
+		else if (group.isOrganizationSite()) {
 			roleNames.add(RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			roleNames.add(RoleConstants.ORGANIZATION_OWNER);
 		}

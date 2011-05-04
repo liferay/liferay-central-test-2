@@ -141,7 +141,7 @@ UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 Organization organization = null;
 User user2 = null;
 
-if (liveGroup.isOrganization()) {
+if (liveGroup.isOrganizationSite()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getOrganizationId());
 }
 else if (liveGroup.isUser()) {
@@ -150,7 +150,7 @@ else if (liveGroup.isUser()) {
 
 String rootNodeName = liveGroup.getDescriptiveName();
 
-if (liveGroup.isOrganization()) {
+if (liveGroup.isOrganizationSite()) {
 	rootNodeName = organization.getName();
 }
 else if (liveGroup.isUser()) {

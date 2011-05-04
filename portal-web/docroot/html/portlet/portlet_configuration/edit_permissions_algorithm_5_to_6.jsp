@@ -164,7 +164,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		roles.remove(administrator);
 
-		if (group.isOrganization() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_ORGANIZATION)) {
+		if (group.isOrganizationSite() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_ORGANIZATION)) {
 			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
 			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
@@ -180,7 +180,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			roles.remove(communityOwner);
 		}
 
-		if (group.isOrganization() || group.isRegularSite()) {
+		if (group.isOrganizationSite() || group.isRegularSite()) {
 			List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
 
 			for (Team team : teams) {

@@ -42,7 +42,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 		for (Group myPlace : myPlaces) {
 			myPlace = myPlace.toEscapedModel();
 
-			boolean organizationSite = myPlace.isOrganization();
+			boolean organizationSite = myPlace.isOrganizationSite();
 			boolean regularSite = myPlace.isRegularSite();
 			boolean userSite = myPlace.isUser();
 			int publicLayoutsPageCount = myPlace.getPublicLayoutsPageCount();
