@@ -20,6 +20,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -171,6 +172,10 @@ public class ResourceActionsUtil {
 
 	public static List<String> getPortletNames() {
 		return getResourceActions().getPortletNames();
+	}
+
+	public static List<String> getPortletResourceActions(Portlet portlet) {
+		return getResourceActions().getPortletResourceActions(portlet);
 	}
 
 	public static List<String> getPortletResourceActions(String name) {

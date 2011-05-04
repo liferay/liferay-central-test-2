@@ -861,8 +861,7 @@ public class MainServlet extends ActionServlet {
 			Portlet portlet = itr.next();
 
 			List<String> portletActions =
-				ResourceActionsUtil.getPortletResourceActions(
-					portlet.getPortletId());
+				ResourceActionsUtil.getPortletResourceActions(portlet);
 
 			ResourceActionLocalServiceUtil.checkResourceActions(
 				portlet.getPortletId(), portletActions);

@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Role;
 import com.liferay.portlet.social.model.SocialEquityActionMapping;
 
@@ -80,6 +81,8 @@ public interface ResourceActions {
 	public List<String> getPortletModelResources(String portletName);
 
 	public List<String> getPortletNames();
+
+	public List<String> getPortletResourceActions(Portlet portlet);
 
 	public List<String> getPortletResourceActions(String name);
 

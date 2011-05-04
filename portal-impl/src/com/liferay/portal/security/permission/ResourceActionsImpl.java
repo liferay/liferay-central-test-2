@@ -323,6 +323,20 @@ public class ResourceActionsImpl implements ResourceActions {
 		return ListUtil.fromCollection(_portletModelResources.keySet());
 	}
 
+	public List<String> getPortletResourceActions(Portlet portlet) {
+		List<String> actions = ListUtil.copy(
+			getPortletResourceActions(portlet.getPortletId()));
+
+		synchronized (this) {
+			checkPortletActions(portlet, actions);
+
+			setActions(
+				_portletResourceActions, portlet.getPortletId(), actions);
+		}
+
+		return actions;
+	}
+
 	public List<String> getPortletResourceActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
@@ -655,13 +669,17 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	protected void checkPortletActions(String name, List<String> actions) {
+		Portlet portlet = portletLocalService.getPortletById(name);
+
+		checkPortletActions(portlet, actions);
+	}
+
+	protected void checkPortletActions(Portlet portlet, List<String> actions) {
 		if (!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
 			!actions.contains(ActionKeys.ADD_TO_PAGE)) {
 
 			actions.add(ActionKeys.ADD_TO_PAGE);
 		}
-
-		Portlet portlet = portletLocalService.getPortletById(name);
 
 		if ((portlet != null) &&
 			(portlet.getControlPanelEntryCategory() != null) &&
