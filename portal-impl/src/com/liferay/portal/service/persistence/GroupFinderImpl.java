@@ -99,6 +99,9 @@ public class GroupFinderImpl
 	public static String JOIN_BY_ROLE_RESOURCE_PERMISSIONS =
 		GroupFinder.class.getName() + ".joinByRoleResourcePermissions";
 
+	public static String JOIN_BY_SITE =
+		GroupFinder.class.getName() + ".joinBySite";
+
 	public static String JOIN_BY_TYPE =
 		GroupFinder.class.getName() + ".joinByType";
 
@@ -597,6 +600,9 @@ public class GroupFinderImpl
 				join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
 			}
 		}
+		else if (key.equals("site")) {
+			join = CustomSQLUtil.get(JOIN_BY_SITE);
+		}
 		else if (key.equals("userGroupRole")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
 		}
@@ -670,6 +676,9 @@ public class GroupFinderImpl
 				join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
 			}
 		}
+		else if (key.equals("site")) {
+			join = CustomSQLUtil.get(JOIN_BY_SITE);
+		}
 		else if (key.equals("type")) {
 			join = CustomSQLUtil.get(JOIN_BY_TYPE);
 		}
@@ -736,7 +745,9 @@ public class GroupFinderImpl
 
 				String key = entry.getKey();
 
-				if (key.equals("active") || key.equals("layoutSet")) {
+				if (key.equals("active") || key.equals("layoutSet") ||
+						key.equals("site")) {
+
 					Boolean value = (Boolean)entry.getValue();
 
 					qPos.add(value);
