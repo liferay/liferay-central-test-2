@@ -108,34 +108,8 @@ public class EditMessageAction extends PortletAction {
 			}
 
 			if (Validator.isNotNull(cmd)) {
-				String redirect = ParamUtil.getString(
-					actionRequest, "redirect");
-
-				int workflowAction = ParamUtil.getInteger(
-					actionRequest, "workflowAction",
-					WorkflowConstants.ACTION_PUBLISH);
-
-				if (message != null) {
-					if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
-						redirect = getSaveAndContinueRedirect(
-							actionRequest, actionResponse, message);
-					}
-					else {
-						ActionResponseImpl actionResponseImpl =
-							(ActionResponseImpl)actionResponse;
-
-						PortletURL portletURL =
-							actionResponseImpl.createRenderURL();
-
-						portletURL.setParameter(
-							"struts_action", "/message_boards/view_message");
-						portletURL.setParameter(
-							"messageId",
-							String.valueOf(message.getMessageId()));
-
-						redirect = portletURL.toString();
-					}
-				}
+				String redirect = getRedirect(
+					actionRequest, actionResponse, message);
 
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
@@ -200,6 +174,37 @@ public class EditMessageAction extends PortletAction {
 		long messageId = ParamUtil.getLong(actionRequest, "messageId");
 
 		MBMessageServiceUtil.deleteMessage(messageId);
+	}
+
+	protected String getRedirect(
+		ActionRequest actionRequest, ActionResponse actionResponse,
+		MBMessage message) {
+
+		if (message == null) {
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			return redirect;
+		}
+
+		int workflowAction = ParamUtil.getInteger(
+			actionRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
+
+		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
+			return getSaveAndContinueRedirect(
+				actionRequest, actionResponse, message);
+		}
+
+		ActionResponseImpl actionResponseImpl =
+			(ActionResponseImpl)actionResponse;
+
+		PortletURL portletURL = actionResponseImpl.createRenderURL();
+
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter(
+			"messageId", String.valueOf(message.getMessageId()));
+
+		return portletURL.toString();
 	}
 
 	protected String getSaveAndContinueRedirect(
