@@ -23,6 +23,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
@@ -69,9 +70,12 @@ public class EditPublicRenderParametersAction extends EditConfigurationAction {
 				actionRequest,
 				portletConfig.getPortletName() + ".doConfigure");
 
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
+			String redirect = PortalUtil.escapeRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 
-			actionResponse.sendRedirect(redirect);
+			if (Validator.isNotNull(redirect)) {
+				actionResponse.sendRedirect(redirect);
+			}
 		}
 	}
 

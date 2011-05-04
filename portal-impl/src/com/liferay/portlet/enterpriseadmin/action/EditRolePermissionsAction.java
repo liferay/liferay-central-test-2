@@ -36,6 +36,7 @@ import com.liferay.portal.service.ResourcePermissionServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
@@ -156,9 +157,12 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		SessionMessages.add(actionRequest, "permissionDeleted");
 
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		String redirect = PortalUtil.escapeRedirect(
+			ParamUtil.getString(actionRequest, "redirect"));
 
-		actionResponse.sendRedirect(redirect);
+		if (Validator.isNotNull(redirect)) {
+			actionResponse.sendRedirect(redirect);
+		}
 	}
 
 	protected void updateAction_1to5(
@@ -362,11 +366,14 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		SessionMessages.add(actionRequest, "permissionsUpdated");
 
-		String redirect =
-			ParamUtil.getString(actionRequest, "redirect") + "&" +
-				Constants.CMD + "=" + Constants.VIEW;
+		String redirect = PortalUtil.escapeRedirect(
+			ParamUtil.getString(actionRequest, "redirect"));
 
-		actionResponse.sendRedirect(redirect);
+		if (Validator.isNotNull(redirect)) {
+			redirect = redirect + "&" + Constants.CMD + "=" + Constants.VIEW;
+
+			actionResponse.sendRedirect(redirect);
+		}
 	}
 
 }

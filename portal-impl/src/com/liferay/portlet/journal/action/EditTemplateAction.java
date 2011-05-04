@@ -112,8 +112,12 @@ public class EditTemplateAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				if (e instanceof RequiredTemplateException) {
-					actionResponse.sendRedirect(
+					String redirect = PortalUtil.escapeRedirect(
 						ParamUtil.getString(actionRequest, "redirect"));
+
+					if (Validator.isNotNull(redirect)) {
+						actionResponse.sendRedirect(redirect);
+					}
 				}
 			}
 			else {

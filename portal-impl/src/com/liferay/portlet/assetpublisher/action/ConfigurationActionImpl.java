@@ -27,6 +27,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.AssetTagException;
@@ -98,8 +99,12 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 						portletConfig.getPortletName() + ".doConfigure");
 				}
 
-				actionResponse.sendRedirect(
+				String redirect = PortalUtil.escapeRedirect(
 					ParamUtil.getString(actionRequest, "redirect"));
+
+				if (Validator.isNotNull(redirect)) {
+					actionResponse.sendRedirect(redirect);
+				}
 			}
 			catch (Exception e) {
 				if (e instanceof AssetTagException) {

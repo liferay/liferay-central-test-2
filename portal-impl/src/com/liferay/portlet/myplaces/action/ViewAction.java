@@ -111,10 +111,13 @@ public class ViewAction extends PortletAction {
 			themeDisplay, layouts, groupId, privateLayoutParam);
 
 		if (Validator.isNull(redirect)) {
-			redirect = ParamUtil.getString(actionRequest, "redirect");
+			redirect = PortalUtil.escapeRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 		}
 
-		actionResponse.sendRedirect(redirect);
+		if (Validator.isNotNull(redirect)) {
+			actionResponse.sendRedirect(redirect);
+		}
 	}
 
 	public ActionForward render(

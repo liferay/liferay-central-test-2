@@ -267,8 +267,12 @@ public class EditUserAction extends PortletAction {
 				}
 
 				if (e instanceof RequiredUserException) {
-					actionResponse.sendRedirect(
+					String redirect = PortalUtil.escapeRedirect(
 						ParamUtil.getString(actionRequest, "redirect"));
+
+					if (Validator.isNotNull(redirect)) {
+						actionResponse.sendRedirect(redirect);
+					}
 				}
 			}
 			else {

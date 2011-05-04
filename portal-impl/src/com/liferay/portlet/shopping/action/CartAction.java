@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CartMinQuantityException;
 import com.liferay.portlet.shopping.CouponActiveException;
 import com.liferay.portlet.shopping.CouponEndDateException;
@@ -55,7 +56,8 @@ public void processAction(
 		try {
 			updateCart(actionRequest, actionResponse);
 
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
+			String redirect = PortalUtil.escapeRedirect(
+				ParamUtil.getString(actionRequest, "redirect"));
 
 			if (Validator.isNotNull(redirect)) {
 				actionResponse.sendRedirect(redirect);

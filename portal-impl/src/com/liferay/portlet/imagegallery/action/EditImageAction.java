@@ -77,10 +77,12 @@ public class EditImageAction extends PortletAction {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
-				String redirect = ParamUtil.getString(
-					actionRequest, "redirect");
+				String redirect = PortalUtil.escapeRedirect(
+					ParamUtil.getString(actionRequest, "redirect"));
 
-				actionResponse.sendRedirect(redirect);
+				if (Validator.isNotNull(redirect)) {
+					actionResponse.sendRedirect(redirect);
+				}
 			}
 		}
 		catch (Exception e) {
