@@ -484,7 +484,9 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									<aui:option label="asset-types" selected="<%= assetVocabularyId == -1 %>" value="-1" />
 
 									<%
-									if (scopeGroupId != company.getGroup().getGroupId()) {
+									Group companyGroup = company.getGroup();
+
+									if (scopeGroupId != companyGroup.getGroupId()) {
 										List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId);
 
 										if (!assetVocabularies.isEmpty()) {
@@ -510,7 +512,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 									%>
 
 									<%
-									List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(company.getGroup().getGroupId());
+									List<AssetVocabulary> assetVocabularies = AssetVocabularyLocalServiceUtil.getGroupVocabularies(companyGroup.getGroupId());
 
 									if (!assetVocabularies.isEmpty()) {
 									%>
