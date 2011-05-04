@@ -45,7 +45,7 @@ String callback = ParamUtil.getString(request, "callback");
 	<aui:input name="script" type="hidden" />
 	<aui:input name="availableFields" type="hidden" value="<%= availableFields %>" />
 	<aui:input name="callback" type="hidden" value="<%= callback %>" />
-	<aui:input name="saveAndContinue" type="hidden" value="<%= true %>" />
+	<aui:input name="saveAndContinue" type="hidden" value="<%= false %>" />
 
 	<liferay-ui:error exception="<%= StructureDuplicateElementException.class %>" message="please-enter-unique-structure-field-names-(including-field-names-inherited-from-the-parent-structure)" />
 	<liferay-ui:error exception="<%= StructureDuplicateStructureKeyException.class %>" message="please-enter-a-unique-id" />
