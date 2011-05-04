@@ -104,23 +104,23 @@ if ((selLayout != null) && !group.isLayoutPrototype()) {
 	</aui:column>
 </aui:layout>
 
-<aui:script use="aui-io,aui-io-plugin">
+<aui:script use="aui-io-plugin">
+	var layoutsContainer = A.one('#<portlet:namespace />layoutsContainer');
+
+	layoutsContainer.plug(
+		A.Plugin.IO, {
+			autoLoad: false
+		}
+	);
+
 	A.one('#<portlet:namespace />layoutsTreeOutput').delegate(
 		'click',
 		function(event) {
-
 			event.preventDefault();
 
-			var requestUrl = event.currentTarget.get('href');
+			var requestUri = event.currentTarget.get('href');
 
-	   		var layoutsContainer = A.one('#<portlet:namespace />layoutsContainer');
-
-			layoutsContainer.plug(
-				A.Plugin.IO, {
-					autoLoad: false,
-					uri: requestUrl
-				}
-			);
+			layoutsContainer.io.set('uri', requestUri);
 
 			layoutsContainer.io.start();
 		},

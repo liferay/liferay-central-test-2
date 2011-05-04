@@ -24,7 +24,7 @@ boolean viewLayout = ParamUtil.getBoolean(request, "viewLayout");
 %>
 
 <c:if test="<%= viewTree %>">
-	<div id="viewTree">
+	<div id="<portlet:namespace />viewTree">
 		<liferay-util:include page="/html/portlet/layouts_admin/tree_js.jsp">
 			<liferay-util:param name="treeId" value="layoutsTree" />
 		</liferay-util:include>
@@ -32,7 +32,7 @@ boolean viewLayout = ParamUtil.getBoolean(request, "viewLayout");
 </c:if>
 
 <c:if test="<%= viewLayout %>">
-	<div id="viewLayout">
+	<div id="<portlet:namespace />viewLayout">
 		<c:choose>
 			<c:when test="<%= selPlid > 0 %>">
 				<liferay-util:include page="/html/portlet/layouts_admin/edit_layout.jsp" />
