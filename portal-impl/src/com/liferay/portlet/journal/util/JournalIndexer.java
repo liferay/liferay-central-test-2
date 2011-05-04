@@ -387,7 +387,15 @@ public class JournalIndexer extends BaseIndexer {
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
 		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
-		addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
+
+		int status = 
+			GetterUtil.get(
+				searchContext.getAttribute(Field.STATUS),
+				WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
+		}
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
