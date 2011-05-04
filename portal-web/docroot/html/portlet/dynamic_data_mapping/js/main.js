@@ -9,6 +9,8 @@ AUI().add(
 
 		var instanceOf = A.instanceOf;
 
+		var DEFAULTS_FORM_VALIDATOR = AUI.defaults.FormValidator;
+
 		var MAP_ATTR_LABEL = {
 			name: 'label'
 		};
@@ -44,23 +46,11 @@ AUI().add(
 
 		var TPL_ELEMENT = '<{nodeName}{attributeList}></{nodeName}>';
 
-		A.mix(
-			YUI.AUI.defaults.FormValidator.STRINGS,
-			{
-				structureFieldName: Liferay.Language.get('please-enter-only-alphanumeric-characters'),
-			},
-			true
-		);
+		DEFAULTS_FORM_VALIDATOR.STRINGS.structureFieldName = Liferay.Language.get('please-enter-only-alphanumeric-characters');
 
-		A.mix(
-			YUI.AUI.defaults.FormValidator.RULES,
-			{
-				structureFieldName: function(v){
-					return /^[\w-]+$/.test(v);
-				}
-			},
-			true
-		);
+		DEFAULTS_FORM_VALIDATOR.RULES.structureFieldName = function(value) {
+			return /^[\w-]+$/.test(value);
+		};
 
 		var LiferayFormBuilder = A.Component.create(
 			{
@@ -340,6 +330,8 @@ AUI().add(
 					},
 
 					_formatOptionsKey: function(str) {
+						var instance = this;
+
 						str = A.Text.AccentFold.fold(str);
 
 						return str.replace(/\W+/g, STR_SPACE).replace(/^\W+|\W+$/g, STR_BLANK).replace(/ /g, '_');
@@ -347,6 +339,7 @@ AUI().add(
 
 					_onClickSettingsButton: function(event) {
 						var instance = this;
+
 						var target = event.currentTarget;
 
 						LiferayFormBuilder.superclass._onClickSettingsButton.apply(instance, arguments);
