@@ -364,72 +364,72 @@
 
 	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
 
-	<!-- Document Library -->
+	<!-- Document Library Display-->
 
-	<definition name="portlet.document_library" extends="portlet" />
+	<definition name="portlet.document_library_display" extends="portlet" />
 
-	<definition name="portlet.document_library.compare_versions" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/compare_versions.jsp" />
+	<definition name="portlet.document_library_display.compare_versions" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/compare_versions.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.edit_file_entry" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/edit_file_entry.jsp" />
+	<definition name="portlet.document_library_display.edit_file_entry" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/edit_file_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.edit_file_shortcut" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/edit_file_shortcut.jsp" />
+	<definition name="portlet.document_library_display.edit_file_shortcut" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/edit_file_shortcut.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.edit_file_version" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/edit_file_version.jsp" />
+	<definition name="portlet.document_library_display.edit_file_version" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/edit_file_version.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.edit_folder" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/edit_folder.jsp" />
+	<definition name="portlet.document_library_display.edit_folder" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/edit_folder.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.edit_repository" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/edit_repository.jsp" />
+	<definition name="portlet.document_library_display.edit_repository" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/edit_repository.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.error" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/error.jsp" />
+	<definition name="portlet.document_library_display.error" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/error.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.move_file_entry" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/move_file_entry.jsp" />
+	<definition name="portlet.document_library_display.move_file_entry" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/move_file_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.move_folder" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/move_folder.jsp" />
+	<definition name="portlet.document_library_display.move_folder" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/move_folder.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.search" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/search.jsp" />
+	<definition name="portlet.document_library_display.search" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/search.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.select_file_entry" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/select_file_entry.jsp" />
+	<definition name="portlet.document_library_display.select_file_entry" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/select_file_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.select_folder" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/select_folder.jsp" />
+	<definition name="portlet.document_library_display.select_folder" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/select_folder.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.select_group" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/select_group.jsp" />
+	<definition name="portlet.document_library_display.select_group" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/select_group.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.view" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
+	<definition name="portlet.document_library_display.view" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/view.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.view_file_entry" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/view_file_entry.jsp" />
+	<definition name="portlet.document_library_display.view_file_entry" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/view_file_entry.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.view_file_shortcut" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/view_file_shortcut.jsp" />
+	<definition name="portlet.document_library_display.view_file_shortcut" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/view_file_shortcut.jsp" />
 	</definition>
 
 	<!-- Dynamic Data List Display -->

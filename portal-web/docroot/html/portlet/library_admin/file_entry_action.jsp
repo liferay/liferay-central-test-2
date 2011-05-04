@@ -89,7 +89,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-				<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
+				<%@ include file="/html/portlet/document_library_display/file_entry_action_open_document.jspf" %>
 
 				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editURL">
@@ -120,7 +120,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= showActions %>">
-					<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
+					<%@ include file="/html/portlet/document_library_display/file_entry_action_lock.jspf" %>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
@@ -164,7 +164,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-				<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
+				<%@ include file="/html/portlet/document_library_display/file_entry_action_open_document.jspf" %>
 
 				<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 					<portlet:renderURL var="viewShortcutURL">
@@ -194,7 +194,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= showActions %>">
-					<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
+					<%@ include file="/html/portlet/document_library_display/file_entry_action_lock.jspf" %>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">

@@ -89,7 +89,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
 
-<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
+<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
 
 <c:if test="<%= folder != null %>">
 

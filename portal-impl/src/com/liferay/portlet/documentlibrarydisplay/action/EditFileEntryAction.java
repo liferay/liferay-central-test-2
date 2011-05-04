@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.portlet.libraryadmin.action;
+package com.liferay.portlet.documentlibrarydisplay.action;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileExtensionException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
@@ -34,6 +35,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -41,7 +43,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrarydisplay.action.ActionUtil;
 
 import java.io.File;
 
@@ -121,10 +122,12 @@ public class EditFileEntryAction extends PortletAction {
 					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 
-				setForward(actionRequest, "portlet.document_library.error");
+				setForward(
+					actionRequest, "portlet.document_library_display.error");
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
+					 e instanceof FileExtensionException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof NoSuchFolderException ||
@@ -136,6 +139,13 @@ public class EditFileEntryAction extends PortletAction {
 
 					response.setStatus(
 						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION);
+				}
+				else if (e instanceof FileExtensionException) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(actionResponse);
+
+					response.setStatus(
+						ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION);
 				}
 				else if (e instanceof FileNameException) {
 					HttpServletResponse response =
@@ -154,7 +164,9 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof AssetTagException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
@@ -177,14 +189,15 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.document_library.error");
+				return mapping.findForward(
+					"portlet.document_library_display.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		String forward = "portlet.library_admin.edit_file_entry";
+		String forward = "portlet.document_library_display.edit_file_entry";
 
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
@@ -199,7 +212,7 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		else {
 			long[] deleteFileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
 
 			for (int i = 0; i < deleteFileEntryIds.length; i++) {
 				DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
@@ -321,8 +334,6 @@ public class EditFileEntryAction extends PortletAction {
 
 			serviceContext.setAttribute("extension", extension);
 
-			serviceContext.setAttribute("sourceFileName", sourceFileName);
-
 			// Add file entry
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
@@ -340,8 +351,6 @@ public class EditFileEntryAction extends PortletAction {
 				String extension = FileUtil.getExtension(sourceFileName);
 
 				serviceContext.setAttribute("extension", extension);
-
-				serviceContext.setAttribute("sourceFileName", sourceFileName);
 			}
 
 			// Update file entry

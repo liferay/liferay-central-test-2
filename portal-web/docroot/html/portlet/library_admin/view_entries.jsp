@@ -174,7 +174,7 @@ for (int i = 0; i < results.size(); i++) {
 	Object result = results.get(i);
 %>
 
-	<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
+	<%@ include file="/html/portlet/document_library_display/cast_result.jspf" %>
 
 	<c:choose>
 		<c:when test='<%= !displayStyle.equals("list") %>'>

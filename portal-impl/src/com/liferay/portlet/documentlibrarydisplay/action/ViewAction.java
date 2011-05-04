@@ -12,44 +12,25 @@
  * details.
  */
 
-package com.liferay.portlet.libraryadmin.action;
+package com.liferay.portlet.documentlibrarydisplay.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrarydisplay.action.ActionUtil;
 
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Sergio González
+ * @author Brian Wing Shun Chan
  */
 public class ViewAction extends PortletAction {
-
-	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws Exception {
-
-		PortletContext portletContext = portletConfig.getPortletContext();
-
-		PortletRequestDispatcher portletRequestDispatcher =
-			portletContext.getRequestDispatcher(
-				"/html/portlet/library_admin/library_entries.jsp");
-
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
-	}
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -65,14 +46,14 @@ public class ViewAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.document_library.error");
+				return mapping.findForward("portlet.document_library_display.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward("portlet.library_admin.view");
+		return mapping.findForward("portlet.document_library_display.view");
 	}
 
 }
