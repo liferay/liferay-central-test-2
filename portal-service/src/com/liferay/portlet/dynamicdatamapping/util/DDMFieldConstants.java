@@ -21,6 +21,8 @@ public class DDMFieldConstants {
 
 	public static final String DATA_TYPE = "dataType";
 
+	public static final String EDITABLE = "editable";
+
 	public static final String LABEL = "label";
 
 	public static final String NAME = "name";
@@ -30,6 +32,8 @@ public class DDMFieldConstants {
 	public static final String REQUIRED = "required";
 
 	public static final String SHOW_LABEL = "showLabel";
+
+	public static final String SORTABLE = "sortable";
 
 	public static final String TYPE = "type";
 
