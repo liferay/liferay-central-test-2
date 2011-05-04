@@ -62,8 +62,36 @@ StructureDisplayTerms displayTerms = new StructureDisplayTerms(renderRequest);
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<aui:script>
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</aui:script>
+<%
+boolean showAddStructureButton = false;
+
+if (!portletName.equals(PortletKeys.DYNAMIC_DATA_MAPPING)) {
+	showAddStructureButton = DDMPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE);
+}
+%>
+
+<c:if test="<%= showAddStructureButton %>">
+	<aui:button-row>
+		<aui:button onClick='<%= renderResponse.getNamespace() + "addStructure();" %>' value="add-structure" />
+	</aui:button-row>
 </c:if>
+
+<aui:script>
+	function <portlet:namespace />addStructure() {
+		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>';
+
+		if (toggle_id_ddm_structure_searchcurClickValue == 'basic') {
+			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
+
+			submitForm(document.hrefFm, url);
+		}
+		else {
+			document.<portlet:namespace />fm.method = 'post';
+			submitForm(document.<portlet:namespace />fm, url);
+		}
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
+	</c:if>
+</aui:script>

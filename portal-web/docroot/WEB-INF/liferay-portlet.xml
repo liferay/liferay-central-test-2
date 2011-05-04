@@ -1746,6 +1746,7 @@
 		<header-portlet-css>/html/portlet/dynamic_data_mapping/css/main.jsp</header-portlet-css>
 		<header-portlet-javascript>/html/portlet/dynamic_data_mapping/js/main.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-dynamic-data-mapping</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>167</portlet-name>
@@ -1758,6 +1759,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
+		<header-portlet-javascript>/html/portlet/dynamic_data_mapping/js/main.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-dynamic-data-lists</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
