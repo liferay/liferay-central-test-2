@@ -736,8 +736,10 @@ public abstract class BaseIndexer implements Indexer {
 		List<Document> docs = new ArrayList<Document>();
 		List<Float> scores = new ArrayList<Float>();
 
-		for (int i = 0; i < hits.getLength(); i++) {
-			Document doc = hits.doc(i);
+		Document[] documents = hits.getDocs();
+
+		for (int i = 0; i < documents.length; i++) {
+			Document doc = documents[i];
 
 			long entryClassPK = GetterUtil.getLong(
 				doc.get(Field.ENTRY_CLASS_PK));
@@ -746,7 +748,7 @@ public abstract class BaseIndexer implements Indexer {
 				if (hasPermission(
 						permissionChecker, entryClassPK, ActionKeys.VIEW)) {
 
-					docs.add(hits.doc(i));
+					docs.add(doc);
 					scores.add(hits.score(i));
 				}
 			}
