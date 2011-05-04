@@ -46,7 +46,8 @@ public class ViewAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.document_library_display.error");
+				return mapping.findForward(
+					"portlet.document_library_display.error");
 			}
 			else {
 				throw e;
