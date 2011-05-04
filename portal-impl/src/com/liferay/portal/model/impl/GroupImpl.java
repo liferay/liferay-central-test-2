@@ -321,7 +321,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	}
 
 	/**
-	 * @deprecated  As of 6.1, replaced by {@link #isSite}
+	 * @deprecated  As of 6.1, renamed to {@link #isSite}
 	 */
 	public boolean isCommunity() {
 		return isSite();
