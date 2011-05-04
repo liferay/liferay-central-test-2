@@ -13,6 +13,7 @@
 			maxmemory="1024m"
 			newenvironment="true"
 		>
+			<jvmarg value="-XX:MaxPermSize=256m" />
 			<jvmarg value="-Dfile.encoding=UTF-8" />
 			<jvmarg value="-Duser.country=US" />
 			<jvmarg value="-Duser.language=en" />
