@@ -739,16 +739,16 @@ public abstract class BaseIndexer implements Indexer {
 		Document[] documents = hits.getDocs();
 
 		for (int i = 0; i < documents.length; i++) {
-			Document doc = documents[i];
+			Document document = documents[i];
 
 			long entryClassPK = GetterUtil.getLong(
-				doc.get(Field.ENTRY_CLASS_PK));
+				document.get(Field.ENTRY_CLASS_PK));
 
 			try {
 				if (hasPermission(
 						permissionChecker, entryClassPK, ActionKeys.VIEW)) {
 
-					docs.add(doc);
+					docs.add(document);
 					scores.add(hits.score(i));
 				}
 			}
