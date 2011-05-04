@@ -129,10 +129,6 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
-			if (_data != null) {
-				jspWriter.write(AUIUtil.buildData(_data));
-			}
-
 			jspWriter.write("href=\"");
 			jspWriter.write(HtmlUtil.escape(_href));
 			jspWriter.write("\" ");
@@ -174,6 +170,10 @@ public class ATag extends IncludeTag {
 				jspWriter.write(customAttributes.toString());
 			}
 
+			if (_data != null) {
+				jspWriter.write(AUIUtil.buildData(_data));
+			}
+
 			writeDynamicAttributes(jspWriter);
 
 			jspWriter.write(">");
@@ -191,10 +191,6 @@ public class ATag extends IncludeTag {
 				jspWriter.write("\" ");
 			}
 
-			if (_data != null) {
-				jspWriter.write(AUIUtil.buildData(_data));
-			}
-
 			if (Validator.isNotNull(_id)) {
 				jspWriter.write("id=\"");
 				jspWriter.write(namespace);
@@ -206,6 +202,10 @@ public class ATag extends IncludeTag {
 				jspWriter.write("lang=\"");
 				jspWriter.write(_lang);
 				jspWriter.write("\" ");
+			}
+
+			if (_data != null) {
+				jspWriter.write(AUIUtil.buildData(_data));
 			}
 
 			writeDynamicAttributes(jspWriter);
