@@ -175,10 +175,6 @@ public class EditRecordSetAction extends PortletAction {
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					actionRequest, portletResource);
 
-			preferences.reset("detailTemplateId");
-			preferences.reset("listTemplateId");
-			preferences.reset("editable");
-
 			preferences.setValue(
 				"recordSetId", String.valueOf(recordSet.getRecordSetId()));
 

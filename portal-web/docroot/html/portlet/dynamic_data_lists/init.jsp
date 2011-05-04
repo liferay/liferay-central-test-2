@@ -30,15 +30,11 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.service.permission.DDLRecordSetPermission" %>
-<%@ page import="com.liferay.portlet.dynamicdatalists.util.DDLUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Fields" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMFieldConstants" %>
@@ -46,14 +42,4 @@
 
 <%
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-%>
-
-<%!
-private boolean _isRecordSetEditable(String portletName, boolean editable) {
-	if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
-		return true;
-	}
-
-	return editable;
-}
 %>
