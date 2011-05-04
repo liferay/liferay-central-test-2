@@ -134,6 +134,23 @@ if (yearValue > 0) {
 		function(event) {
 			new A.DatePickerSelect(
 				{
+					after: {
+						render: function(event) {
+							var instance = this;
+
+							<c:if test="<%= dayNullable %>">
+								instance.get('dayNode').val('');
+							</c:if>
+
+							<c:if test="<%= monthNullable %>">
+								instance.get('monthNode').val('');
+							</c:if>
+
+							<c:if test="<%= yearNullable %>">
+								instance.get('yearNode').val('');
+							</c:if>
+						}
+					},
 					appendOrder: '<%= dateFormatOrder %>',
 					boundingBox: displayDateNode,
 					calendar: {
@@ -157,6 +174,7 @@ if (yearValue > 0) {
 							A.one('#<%= imageInputId %>Input').val(formatted);
 						}
 					},
+					populateDay: false,
 					populateMonth: false,
 					populateYear: false,
 					srcNode: '#<%= randomNamespace %>displayDateContent',
