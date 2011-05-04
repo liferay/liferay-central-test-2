@@ -51,7 +51,7 @@ public class GroupPermissionImpl implements GroupPermission {
 			group = group.getLiveGroup();
 		}
 
-		if (group.isOrganizationSite()) {
+		if (group.isOrganization()) {
 			long organizationId = group.getOrganizationId();
 
 			return OrganizationPermissionUtil.contains(

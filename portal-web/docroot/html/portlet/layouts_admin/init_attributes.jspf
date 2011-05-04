@@ -114,7 +114,7 @@ Organization organization = null;
 User selUser = null;
 UserGroup userGroup = null;
 
-if (liveGroup.isOrganizationSite()) {
+if (liveGroup.isOrganization()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getOrganizationId());
 }
 else if (liveGroup.isUser()) {
@@ -160,7 +160,7 @@ LayoutLister layoutLister = new LayoutLister();
 
 String rootNodeName = liveGroup.getDescriptiveName();
 
-if (liveGroup.isOrganizationSite()) {
+if (liveGroup.isOrganization()) {
 	rootNodeName = organization.getName();
 }
 else if (liveGroup.isUser()) {

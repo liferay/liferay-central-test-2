@@ -36,7 +36,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 <div class="portlet-section-body results-row" style="border: 1px solid; padding: 5px;">
 	<%= LanguageUtil.format(pageContext, "step-x-of-x", new String[] {"2", "2"}) %>
 
-	<%= LanguageUtil.format(pageContext, "current-signifies-current-users-associated-with-the-x-role.-available-signifies-all-users-associated-with-the-x-x", new String[] {HtmlUtil.escape(role.getTitle(locale)), HtmlUtil.escape(groupName), LanguageUtil.get(pageContext, (group.isOrganizationSite() ? "organization" : "site"))}) %>
+	<%= LanguageUtil.format(pageContext, "current-signifies-current-users-associated-with-the-x-role.-available-signifies-all-users-associated-with-the-x-x", new String[] {HtmlUtil.escape(role.getTitle(locale)), HtmlUtil.escape(groupName), LanguageUtil.get(pageContext, (group.isOrganization() ? "organization" : "site"))}) %>
 </div>
 
 <br />
@@ -62,7 +62,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_user_roles.jsp-po
 
 	LinkedHashMap userParams = new LinkedHashMap();
 
-	if (group.isOrganizationSite()) {
+	if (group.isOrganization()) {
 		userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 	}
 	else {

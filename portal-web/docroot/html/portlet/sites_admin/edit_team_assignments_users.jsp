@@ -52,7 +52,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 
 	LinkedHashMap userParams = new LinkedHashMap();
 
-	if (group.isOrganizationSite()) {
+	if (group.isOrganization()) {
 		userParams.put("usersOrgs", organization.getOrganizationId());
 	}
 	else {

@@ -39,7 +39,7 @@ int max = GetterUtil.getInteger(preferences.getValue("max", "10"));
 if (organizationId == 0) {
 	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
-	if (group.isOrganizationSite()) {
+	if (group.isOrganization()) {
 		organizationId = group.getOrganizationId();
 	}
 }

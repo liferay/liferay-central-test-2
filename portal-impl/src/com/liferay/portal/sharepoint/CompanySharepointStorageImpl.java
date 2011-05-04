@@ -80,7 +80,7 @@ public class CompanySharepointStorageImpl extends BaseSharepointStorageImpl {
 
 			name = user.getFullName();
 		}
-		else if (group.isOrganizationSite()) {
+		else if (group.isOrganization()) {
 			Organization organization =
 				OrganizationLocalServiceUtil.getOrganization(
 					group.getOrganizationId());

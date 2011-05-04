@@ -808,7 +808,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 		else {
 			if (group != null) {
-				if (group.isOrganizationSite()) {
+				if (group.isOrganization()) {
 					types = new int[] {
 						RoleConstants.TYPE_REGULAR,
 						RoleConstants.TYPE_ORGANIZATION

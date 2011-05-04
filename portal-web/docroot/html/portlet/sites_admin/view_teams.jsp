@@ -26,7 +26,7 @@ Group group = GroupServiceUtil.getGroup(groupId);
 
 Organization organization = null;
 
-if (group.isOrganizationSite()) {
+if (group.isOrganization()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 }
 
@@ -40,7 +40,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 <div>
 	<c:choose>
-		<c:when test="<%= group.isOrganizationSite() %>">
+		<c:when test="<%= group.isOrganization() %>">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
 				title="<%= group.getDescriptiveName() %>"
@@ -143,7 +143,7 @@ pageContext.setAttribute("portletURL", portletURL);
 </aui:form>
 
 <%
-if (group.isOrganizationSite()) {
+if (group.isOrganization()) {
 	EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 else {
