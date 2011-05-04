@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.pagecomments.comment.addcomment;
+package com.liferay.portalweb.stagingcommunity.sites.activatestaging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddCommentTest extends BaseTestCase {
-	public void testAddComment() throws Exception {
+public class AddSitesTest extends BaseTestCase {
+	public void testAddSites() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -30,7 +30,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Page Comments Test Page")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -41,11 +41,12 @@ public class AddCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Page Comments Test Page",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Be the first.", RuntimeVariables.replace(""));
+		selenium.clickAt("link=Sites", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -53,7 +54,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("_107_postReplyBody0")) {
+				if (selenium.isVisible("link=Add")) {
 					break;
 				}
 			}
@@ -64,14 +65,9 @@ public class AddCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isVisible("_107_postReplyBody0"));
-		selenium.type("_107_postReplyBody0",
-			RuntimeVariables.replace("This is a test page comment."));
+		selenium.clickAt("link=Add", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.keyPress("_107_postReplyBody0",
-			RuntimeVariables.replace("\\48"));
-		selenium.keyPress("_107_postReplyBody0", RuntimeVariables.replace("\\8"));
-		selenium.clickAt("//input[@value='Reply']", RuntimeVariables.replace(""));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,10 +75,7 @@ public class AddCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace(
-							"Your request processed successfully.")
-										.equals(selenium.getText(
-								"//div[@class='lfr-message-response portlet-msg-success']"))) {
+				if (selenium.isVisible("_134_name")) {
 					break;
 				}
 			}
@@ -93,11 +86,16 @@ public class AddCommentTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
-			selenium.getText(
-				"//div[@class='lfr-message-response portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("This is a test page comment."),
-			selenium.getText("//div/div[3]/div/div[1]"));
+		selenium.type("_134_name", RuntimeVariables.replace("Staging"));
+		selenium.saveScreenShotAndSource();
+		selenium.type("_134_description",
+			RuntimeVariables.replace("This is a test community!"));
+		selenium.saveScreenShotAndSource();
+		Thread.sleep(5000);
+		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertTrue(selenium.isTextPresent(
+				"Your request completed successfully."));
 	}
 }
