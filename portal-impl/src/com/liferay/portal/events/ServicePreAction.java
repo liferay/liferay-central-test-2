@@ -1855,7 +1855,12 @@ public class ServicePreAction extends Action {
 				myAccountURL.setDoAsGroupId(scopeGroupId);
 			}
 
-			myAccountURL.setRefererPlid(plid);
+			if (refererPlid > 0) {
+				myAccountURL.setRefererPlid(refererPlid);
+			}
+			else {
+				myAccountURL.setRefererPlid(plid);
+			}
 
 			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
 			myAccountURL.setParameter("backURL", myAccountRedirect);
