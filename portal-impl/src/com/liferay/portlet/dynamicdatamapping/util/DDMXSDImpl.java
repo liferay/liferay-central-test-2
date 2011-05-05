@@ -235,7 +235,7 @@ public class DDMXSDImpl implements DDMXSD {
 	}
 
 	/**
-	 * @see {@link com.liferay.taglib.util.ThemeUtil#includeFTL}
+	 * @see com.liferay.taglib.util.ThemeUtil#includeFTL
 	 */
 	protected String processFTL(
 			PageContext pageContext, FreeMarkerContext freeMarkerContext,

@@ -220,8 +220,7 @@ public class UpdateLayoutAction extends JSONAction {
 	}
 
 	/**
-	 * @see {@link
-	 *      com.liferay.portlet.portletconfiguration.action.EditScopeAction#getPortletTitle}
+	 * @see com.liferay.portlet.portletconfiguration.action.EditScopeAction#getPortletTitle
 	 */
 	protected String getPortletTitle(
 		HttpServletRequest request, String portletId,
@@ -327,8 +326,7 @@ public class UpdateLayoutAction extends JSONAction {
 	}
 
 	/**
-	 * @see {@link
-	 *      com.liferay.portlet.portletconfiguration.action.EditScopeAction#updateScope}
+	 * @see com.liferay.portlet.portletconfiguration.action.EditScopeAction#updateScope
 	 */
 	protected void updateScopedPortletNames(
 			HttpServletRequest request, long groupId, boolean privateLayout,

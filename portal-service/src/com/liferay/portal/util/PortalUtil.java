@@ -979,7 +979,7 @@ public class PortalUtil {
 
 	/**
 	 * @deprecated {@link
-	 *             ResourceActionsUtil#getSocialEquityActionMappingss(String)}
+	 *             ResourceActionsUtil#getSocialEquityActionMappings(String)}
 	 */
 	public static List<SocialEquityActionMapping> getSocialEquityActionMappings(
 		String name) {
