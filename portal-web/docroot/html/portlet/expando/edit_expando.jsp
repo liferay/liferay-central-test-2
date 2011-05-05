@@ -136,8 +136,8 @@ portletURL.setParameter("modelResource", modelResource);
 					%>
 
 					<aui:select name="defaultValue">
-						<aui:option label="true" selected="<%= curValue %>" value="1" />
-						<aui:option label="false" selected="<%= !curValue %>" value="0" />
+						<aui:option label="true" selected="<%= curValue %>" value="true" />
+						<aui:option label="false" selected="<%= !curValue %>" value="false" />
 					</aui:select>
 				</c:when>
 				<c:when test="<%= type == ExpandoColumnConstants.BOOLEAN_ARRAY %>">
