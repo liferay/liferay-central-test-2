@@ -145,6 +145,16 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			Group group, BooleanQuery permissionQuery)
 		throws Exception {
 
+		if (group.isSite()) {
+			Role communityMemberRole = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+			permissionQuery.addTerm(
+				Field.GROUP_ROLE_ID,
+				group.getGroupId() + StringPool.DASH +
+					communityMemberRole.getRoleId());
+		}
+
 		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
@@ -153,15 +163,6 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				Field.GROUP_ROLE_ID,
 				group.getGroupId() + StringPool.DASH +
 					organizationMemberRole.getRoleId());
-		}
-		else if (group.isRegularSite()) {
-			Role communityMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.SITE_MEMBER);
-
-			permissionQuery.addTerm(
-				Field.GROUP_ROLE_ID,
-				group.getGroupId() + StringPool.DASH +
-					communityMemberRole.getRoleId());
 		}
 	}
 

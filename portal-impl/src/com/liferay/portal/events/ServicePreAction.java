@@ -703,9 +703,22 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		// Community or organization layouts are only viewable by users who
-		// belong to the community or organization, or by users who can update
-		// the community or organization
+		// Site layouts are only viewable by users who are members of the site
+		// or by users who can update the site
+
+		if (group.isSite()) {
+			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
+				return true;
+			}
+			else if (GroupPermissionUtil.contains(
+						permissionChecker, groupId, ActionKeys.UPDATE)) {
+
+				return true;
+			}
+		}
+
+		// Organization site layouts are also viewable by users who belong to
+		// the organization, or by users who can update organization
 
 		if (group.isCompany()) {
 			return false;
@@ -760,16 +773,6 @@ public class ServicePreAction extends Action {
 						}
 					}
 				}
-			}
-		}
-		else if (group.isRegularSite()) {
-			if (GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId)) {
-				return true;
-			}
-			else if (GroupPermissionUtil.contains(
-						permissionChecker, groupId, ActionKeys.UPDATE)) {
-
-				return true;
 			}
 		}
 		else if (group.isUserGroup()) {

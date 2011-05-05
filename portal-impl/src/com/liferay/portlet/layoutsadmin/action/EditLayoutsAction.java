@@ -390,9 +390,27 @@ public class EditLayoutsAction extends PortletAction {
 				ActionKeys.UPDATE);
 		}
 
+		boolean hasPermission = true;
+
+		if (group.isSite()) {
+			boolean publishToLive =
+				GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.PUBLISH_STAGING) &&
+				cmd.equals("publish_to_live");
+
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.MANAGE_LAYOUTS) &&
+				!hasUpdateLayoutPermission && !publishToLive) {
+
+				hasPermission = false;
+			}
+		}
+
 		if (group.isCompany()) {
 			if (!permissionChecker.isCompanyAdmin()) {
-				throw new PrincipalException();
+				hasPermission = false;
 			}
 		}
 		else if (group.isLayoutPrototype()) {
@@ -417,22 +435,7 @@ public class EditLayoutsAction extends PortletAction {
 					ActionKeys.MANAGE_LAYOUTS) &&
 				!hasUpdateLayoutPermission && !publishToLive) {
 
-				throw new PrincipalException();
-			}
-		}
-		else if (group.isRegularSite()) {
-			boolean publishToLive =
-				GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
-					ActionKeys.PUBLISH_STAGING) &&
-				cmd.equals("publish_to_live");
-
-			if (!GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
-					ActionKeys.MANAGE_LAYOUTS) &&
-				!hasUpdateLayoutPermission && !publishToLive) {
-
-				throw new PrincipalException();
+				hasPermission = false;
 			}
 		}
 		else if (group.isUser()) {
@@ -449,8 +452,12 @@ public class EditLayoutsAction extends PortletAction {
 			if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE &&
 				 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
 
-				throw new PrincipalException();
+				hasPermission = false;
 			}
+		}
+
+		if (!hasPermission) {
+			throw new PrincipalException();
 		}
 	}
 
