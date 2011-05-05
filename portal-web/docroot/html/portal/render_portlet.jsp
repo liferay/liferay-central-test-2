@@ -418,7 +418,11 @@ portletDisplay.setURLPortlet(themeDisplay.getCDNHost() + portletIcon);
 
 String urlClose = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&doAsUserId=" + HttpUtil.encodeURL(themeDisplay.getDoAsUserId()) + "&" + Constants.CMD + "=" + Constants.DELETE + "&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
-portletDisplay.setURLClose(urlClose.toString());
+if (themeDisplay.isAddSessionIdToURL()) {
+	urlClose = PortalUtil.getURLWithSessionId(urlClose, themeDisplay.getSessionId());
+}
+
+portletDisplay.setURLClose(urlClose);
 
 // URL configuration
 
