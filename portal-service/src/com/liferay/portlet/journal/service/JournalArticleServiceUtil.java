@@ -70,37 +70,8 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long groupId, java.lang.String articleId, boolean autoArticleId,
-		java.util.Map<java.util.Locale, java.lang.String> titleMap,
-		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.lang.String layoutUuid, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map<java.lang.String, byte[]> images,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addArticle(groupId, articleId, autoArticleId, titleMap,
-			descriptionMap, content, type, structureId, templateId, layoutUuid,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-			reviewDateHour, reviewDateMinute, neverReview, indexable,
-			smallImage, smallImageURL, smallFile, images, articleURL,
-			serviceContext);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long groupId, java.lang.String articleId, boolean autoArticleId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String articleId, boolean autoArticleId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
@@ -116,9 +87,10 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addArticle(groupId, articleId, autoArticleId, titleMap,
-			descriptionMap, content, type, structureId, templateId, layoutUuid,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+				   .addArticle(groupId, className, classPK, articleId,
+			autoArticleId, titleMap, descriptionMap, content, type,
+			structureId, templateId, layoutUuid, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,

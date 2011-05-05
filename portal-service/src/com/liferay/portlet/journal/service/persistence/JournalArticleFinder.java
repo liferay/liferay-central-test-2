@@ -169,17 +169,6 @@ public interface JournalArticleFinder {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, long classNameId,
-		java.lang.String[] articleIds, java.lang.Double version,
-		java.lang.String[] titles, java.lang.String[] descriptions,
-		java.lang.String[] contents, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String[] templateIds,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 		long companyId, long groupId, long classNameId,
 		java.lang.String articleId, java.lang.Double version,
