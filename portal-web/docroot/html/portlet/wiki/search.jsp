@@ -79,11 +79,11 @@ boolean createNewPage = true;
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+		searchContext.setAttribute("paginationType", "more");
 		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setKeywords(keywords);
 		searchContext.setNodeIds(nodeIds);
 		searchContext.setStart(searchContainer.getStart());
-		searchContext.setAttribute("paginationType", "more");
 
 		Hits results = indexer.search(searchContext);
 

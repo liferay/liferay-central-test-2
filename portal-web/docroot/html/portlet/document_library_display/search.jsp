@@ -83,11 +83,11 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+		searchContext.setAttribute("paginationType", "more");
 		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setFolderIds(folderIdsArray);
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(searchContainer.getStart());
-		searchContext.setAttribute("paginationType", "more");
 
 		Hits results = indexer.search(searchContext);
 

@@ -82,11 +82,11 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+		searchContext.setAttribute("paginationType", "more");
 		searchContext.setCategoryIds(categoryIdsArray);
 		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(searchContainer.getStart());
-		searchContext.setAttribute("paginationType", "more");
 
 		Hits results = indexer.search(searchContext);
 
