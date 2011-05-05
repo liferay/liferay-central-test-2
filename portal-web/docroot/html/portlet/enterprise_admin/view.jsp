@@ -179,7 +179,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			function <portlet:namespace />exportUsers() {
 				document.<portlet:namespace />fm.method = "post";
-				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/export_users" /></portlet:actionURL>&etag=0&strip=0&compress=0");
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/export_users" /></portlet:actionURL>&etag=0&strip=0&compress=0", false);
 			}
 
 			Liferay.provide(
