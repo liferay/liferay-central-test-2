@@ -98,9 +98,9 @@ public class JournalRSSUtil {
 		}
 
 		return JournalArticleLocalServiceUtil.search(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator, start, end, obc);
+			companyId, groupId, 0, articleId, version, title, description,
+			content, type, structureId, templateId, displayDateGT,
+			displayDateLT, status, reviewDate, andOperator, start, end, obc);
 	}
 
 	public static List<SyndEnclosure> getDLEnclosures(
