@@ -1272,9 +1272,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.setPriority(priority);
 		}
 
-		if (!message.isPending()) {
+		if (!message.isPending() &&
+			(serviceContext.getWorkflowAction() ==
+				WorkflowConstants.ACTION_SAVE_DRAFT)) {
+
 			message.setStatus(WorkflowConstants.STATUS_DRAFT);
-	 	}
+		}
 
 		// Attachments
 
