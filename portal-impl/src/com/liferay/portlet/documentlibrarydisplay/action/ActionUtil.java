@@ -56,46 +56,45 @@ public class ActionUtil {
 		long folderId = ParamUtil.getLong(request, "folderId");
 		String title = ParamUtil.getString(request, "title");
 
-		FileEntry fileEntry = null;
-		List<FileEntry> fileEntries = null;
-
 		if (fileEntryId > 0) {
 			try {
-				fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
+				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
+					fileEntryId);
+
+				request.setAttribute(
+					WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
 			}
 			catch (NoSuchFileEntryException nsfee) {
 			}
 		}
 		else if (Validator.isNotNull(title)) {
 			try {
-				fileEntry = DLAppServiceUtil.getFileEntry(
+				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, folderId, title);
+
+				request.setAttribute(
+					WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
 			}
 			catch (NoSuchFileEntryException nsfee) {
 			}
 		}
 		else {
+			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
+
 			long[] fileEntryIds = StringUtil.split(
 				ParamUtil.getString(request, "fileEntryIds"), 0L);
 
-			fileEntries = new ArrayList<FileEntry>();
-
 			for (int i = 0; i < fileEntryIds.length; i++) {
 				try {
-					fileEntry = DLAppServiceUtil.getFileEntry(fileEntryIds[i]);
+					FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
+						fileEntryIds[i]);
 
 					fileEntries.add(fileEntry);
 				}
 				catch (NoSuchFileEntryException nsfee) {
 				}
 			}
-		}
 
-		if ((fileEntryId > 0) || Validator.isNotNull(title)) {
-			request.setAttribute(
-				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
-		}
-		else {
 			request.setAttribute(
 				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRIES, fileEntries);
 		}

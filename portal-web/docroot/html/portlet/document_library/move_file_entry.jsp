@@ -25,27 +25,27 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-List<FileEntry> fileEntries  = (List<FileEntry>)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRIES);
-
-long[] fileEntryIds = null;
+List<FileEntry> fileEntries = (List<FileEntry>)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRIES);
 
 long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 if (fileEntries != null) {
-	folderId = fileEntries.get(0).getFolderId();
+	FileEntry fileEntry = fileEntries.get(0);
+
+	folderId = fileEntry.getFolderId();
 }
 
-List<FileEntry> moveFileEntries  = new ArrayList<FileEntry>();
-List<FileEntry> errorMoveFileEntries  = new ArrayList<FileEntry>();
+List<FileEntry> validMoveFileEntries = new ArrayList<FileEntry>();
+List<FileEntry> invalidMoveFileEntries = new ArrayList<FileEntry>();
 
 for (FileEntry fileEntry : fileEntries) {
 	boolean movePermission = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && (!fileEntry.isLocked() || fileEntry.hasLock());
 
 	if (movePermission) {
-		moveFileEntries.add(fileEntry);
+		validMoveFileEntries.add(fileEntry);
 	}
 	else {
-		errorMoveFileEntries.add(fileEntry);
+		invalidMoveFileEntries.add(fileEntry);
 	}
 }
 %>
@@ -72,21 +72,17 @@ for (FileEntry fileEntry : fileEntries) {
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name.-please-select-a-different-folder" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
-	<c:if test="<%= moveFileEntries.size() > 0 %>">
+	<c:if test="<%= !validMoveFileEntries.isEmpty() %>">
 		<div class="move-list-info">
-			<h4><%= LanguageUtil.format(pageContext, "x-files-ready-to-be-moved", moveFileEntries.size()) %></h4>
+			<h4><%= LanguageUtil.format(pageContext, "x-files-ready-to-be-moved", validMoveFileEntries.size()) %></h4>
 		</div>
 
 		<div class="move-list">
 			<ul class="lfr-component">
 
 				<%
-				fileEntryIds = new long[moveFileEntries.size()];
-
-				for (int i = 0; i < moveFileEntries.size(); i++) {
-					FileEntry fileEntry = moveFileEntries.get(i);
-
-					fileEntryIds[i] = fileEntry.getFileEntryId();
+				for (int i = 0; i < validMoveFileEntries.size(); i++) {
+					FileEntry fileEntry = validMoveFileEntries.get(i);
 				%>
 
 					<li class="move-file">
@@ -103,20 +99,21 @@ for (FileEntry fileEntry : fileEntries) {
 		</div>
 	</c:if>
 
-	<c:if test="<%= errorMoveFileEntries.size() > 0 %>">
+	<c:if test="<%= !invalidMoveFileEntries.isEmpty() %>">
 		<div class="move-list-info">
-			<h4><%= LanguageUtil.format(pageContext, "x-files-cannot-be-moved", errorMoveFileEntries.size()) %></h4>
+			<h4><%= LanguageUtil.format(pageContext, "x-files-cannot-be-moved", invalidMoveFileEntries.size()) %></h4>
 		</div>
 
 		<div class="move-list">
 			<ul class="lfr-component">
 
 				<%
-				for (FileEntry fileEntry : errorMoveFileEntries) {
+				for (FileEntry fileEntry : invalidMoveFileEntries) {
 					Lock lock = fileEntry.getLock();
 				%>
+
 					<li class="move-file move-error">
-						<span class=file-title>
+						<span class="file-title">
 							<%= fileEntry.getTitle() %>
 						</span>
 
@@ -140,7 +137,7 @@ for (FileEntry fileEntry : fileEntries) {
 		</div>
 	</c:if>
 
-	<aui:input name="fileEntryIds" type="hidden" value="<%= StringUtil.merge(fileEntryIds, StringPool.COMMA) %>" />
+	<aui:input name="fileEntryIds" type="hidden" value='<%= ListUtil.toString(validMoveFileEntries, "fileEntryId") %>' />
 
 	<aui:fieldset>
 
