@@ -1597,7 +1597,7 @@ public class JournalArticleLocalServiceImpl
 			Map<String, Serializable> attributes =
 				new HashMap<String, Serializable>();
 
-			attributes.put(Field.CLASS_NAME_ID, String.valueOf(classNameId));
+			attributes.put(Field.CLASS_NAME_ID, classNameId);
 			attributes.put(Field.CONTENT, content);
 			attributes.put(Field.DESCRIPTION, description);
 			attributes.put(Field.ENTRY_CLASS_PK, articleId);

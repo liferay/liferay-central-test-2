@@ -600,7 +600,7 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		String value = (String)searchContext.getAttribute(field);
+		String value = GetterUtil.getString(searchContext.getAttribute(field));
 
 		if (Validator.isNull(value)) {
 			value = searchContext.getKeywords();
