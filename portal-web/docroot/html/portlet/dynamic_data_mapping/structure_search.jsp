@@ -78,7 +78,7 @@ if (!portletName.equals(PortletKeys.DYNAMIC_DATA_MAPPING)) {
 
 <aui:script>
 	function <portlet:namespace />addStructure() {
-		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>';
+		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" /><portlet:param name="availableFields" value="Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>';
 
 		if (toggle_id_ddm_structure_searchcurClickValue == 'basic') {
 			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;

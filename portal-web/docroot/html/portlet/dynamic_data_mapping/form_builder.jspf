@@ -78,7 +78,7 @@
 	window.<portlet:namespace />formBuilder = new Liferay.FormBuilder(
 		{
 			<c:if test="<%= Validator.isNotNull(availableFields) %>">
-				availableFields: A.Object.getValue(Liferay.Util.getTop(), '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
+				availableFields: A.Object.getValue(window, '<%= HtmlUtil.escapeJS(availableFields) %>'.split('.')),
 			</c:if>
 
 			boundingBox: '#<portlet:namespace />formBuilder',
