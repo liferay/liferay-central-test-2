@@ -3978,7 +3978,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  bytes the new portrait image data
 	 * @return the user
 	 * @throws PortalException if a user with the primary key could not be
-	 *         found, or if the new portrait was invalid
+	 *         found or if the new portrait was invalid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User updatePortrait(long userId, byte[] bytes)
@@ -4039,7 +4039,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  answer the user's new password reset answer
 	 * @return the user
 	 * @throws PortalException if a user with the primary key could not be
-	 *         found, or if the new question or answer were invalid
+	 *         found or if the new question or answer were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User updateReminderQuery(long userId, String question, String answer)
@@ -4064,7 +4064,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  screenName the user's new screen name
 	 * @return the user
 	 * @throws PortalException if a user with the primary key could not be
-	 *         found, or if the new screen name was invalid
+	 *         found or if the new screen name was invalid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User updateScreenName(long userId, String screenName)
@@ -4175,7 +4175,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  serviceContext the service context
 	 * @return the user
 	 * @throws PortalException if a user with the primary key could not be
-	 *         found, or if the new information was invalid
+	 *         found or if the new information was invalid
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User updateUser(
