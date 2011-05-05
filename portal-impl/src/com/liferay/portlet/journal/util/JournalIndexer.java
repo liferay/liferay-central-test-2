@@ -98,10 +98,10 @@ public class JournalIndexer extends BaseIndexer {
 		long scopeGroupId = article.getGroupId();
 		long userId = article.getUserId();
 		String userName = PortalUtil.getUserName(userId, article.getUserName());
-		long classNameId = article.getClassNameId();
-		long classPK = article.getClassPK();
 		Date modifiedDate = article.getModifiedDate();
 		long resourcePrimKey = article.getResourcePrimKey();
+		long classNameId = article.getClassNameId();
+		long classPK = article.getClassPK();
 		String articleId = article.getArticleId();
 		double version = article.getVersion();
 		Map<Locale, String> titleMap = article.getTitleMap();
@@ -155,8 +155,6 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 		document.addKeyword(Field.USER_NAME, userName, true);
-		document.addKeyword(Field.CLASS_NAME_ID, classNameId);
-		document.addKeyword(Field.CLASS_PK, classPK);
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -195,6 +193,8 @@ public class JournalIndexer extends BaseIndexer {
 			Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, articleId);
 		document.addKeyword(Field.ROOT_ENTRY_CLASS_PK, resourcePrimKey);
+		document.addKeyword(Field.CLASS_NAME_ID, classNameId);
+		document.addKeyword(Field.CLASS_PK, classPK);
 		document.addKeyword(Field.VERSION, version);
 		document.addKeyword(Field.TYPE, type);
 		document.addKeyword(Field.STATUS, status);
@@ -385,12 +385,12 @@ public class JournalIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
+		addSearchTerm(searchQuery, searchContext, Field.CLASS_NAME_ID, false);
+		addSearchTerm(searchQuery, searchContext, Field.CLASS_PK, false);
 		addLocalizedSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
 		addLocalizedSearchTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, true);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
-		addSearchTerm(searchQuery, searchContext, Field.CLASS_NAME_ID, false);
-		addSearchTerm(searchQuery, searchContext, Field.CLASS_PK, false);
 
 		int status = GetterUtil.getInteger(
 			searchContext.getAttribute(Field.STATUS),
