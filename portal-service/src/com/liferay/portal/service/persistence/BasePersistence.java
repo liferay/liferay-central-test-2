@@ -259,29 +259,6 @@ public interface BasePersistence<T extends BaseModel<T>> {
 
 	/**
 	 * Updates the model instance in the database or adds it if it does not yet
-	 * exist.
-	 *
-	 * <p>
-	 * Typically not called directly, use local service update model methods
-	 * instead. For example, {@link
-	 * com.liferay.portal.service.UserLocalServiceUtil#updateUser(
-	 * com.liferay.portal.model.User)}.
-	 * </p>
-	 *
-	 * @param  model the model instance to update
-	 * @param  merge whether to merge the model instance with the current
-	 *         session. See {@link
-	 *         BatchSession#update(com.liferay.portal.kernel.dao.orm.Session,
-	 *         BaseModel, boolean)} for an explanation.
-	 * @param  quiet whether to notify the appropriate model listeners.
-	 * @return the model instance that was updated
-	 * @throws SystemException if a system exception occurred
-	 */
-	public T update(T model, boolean merge, boolean quiet)
-		throws SystemException;
-
-	/**
-	 * Updates the model instance in the database or adds it if it does not yet
 	 * exist, within a different service context. Also notifies the appropriate
 	 * model listeners.
 	 *

@@ -240,34 +240,25 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	}
 
 	public T update(T model, boolean merge) throws SystemException {
-		return update(model, merge, false);
-	}
-
-	public T update(T model, boolean merge, boolean quiet)
-		throws SystemException {
 		boolean isNew = model.isNew();
 
-		if (!quiet) {
-			for (ModelListener<T> listener : listeners) {
-				if (isNew) {
-					listener.onBeforeCreate(model);
-				}
-				else {
-					listener.onBeforeUpdate(model);
-				}
+		for (ModelListener<T> listener : listeners) {
+			if (isNew) {
+				listener.onBeforeCreate(model);
+			}
+			else {
+				listener.onBeforeUpdate(model);
 			}
 		}
 
 		model = updateImpl(model, merge);
 
-		if (!quiet) {
-			for (ModelListener<T> listener : listeners) {
-				if (isNew) {
-					listener.onAfterCreate(model);
-				}
-				else {
-					listener.onAfterUpdate(model);
-				}
+		for (ModelListener<T> listener : listeners) {
+			if (isNew) {
+				listener.onAfterCreate(model);
+			}
+			else {
+				listener.onAfterUpdate(model);
 			}
 		}
 
