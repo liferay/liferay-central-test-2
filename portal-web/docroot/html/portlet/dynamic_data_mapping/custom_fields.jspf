@@ -55,6 +55,22 @@
 							trigger: instance.get('templateNode')
 						}
 					).render();
+				},
+
+				renderSettings: function() {
+					var instance = this;
+
+					DDMDateField.superclass.renderSettings.apply(instance, arguments);
+
+					var settingsNodesMap = instance.settingsNodesMap;
+
+					var predefinedValueNode = settingsNodesMap['predefinedValueSettingNode'];
+
+					instance.predefinedValueDatePicker = new A.DatePicker(
+						{
+							trigger: predefinedValueNode
+						}
+					).render();
 				}
 
 			}
