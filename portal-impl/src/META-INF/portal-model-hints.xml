@@ -1516,6 +1516,8 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
 		<field name="articleId" type="String">
 			<hint name="auto-escape">false</hint>
 			<hint name="upper-case">true</hint>

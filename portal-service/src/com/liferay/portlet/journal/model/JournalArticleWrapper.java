@@ -241,6 +241,51 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
+	* Gets the class name of the model instance this journal article is polymorphically associated with.
+	*
+	* @return the class name of the model instance this journal article is polymorphically associated with
+	*/
+	public java.lang.String getClassName() {
+		return _journalArticle.getClassName();
+	}
+
+	/**
+	* Gets the class name ID of this journal article.
+	*
+	* @return the class name ID of this journal article
+	*/
+	public long getClassNameId() {
+		return _journalArticle.getClassNameId();
+	}
+
+	/**
+	* Sets the class name ID of this journal article.
+	*
+	* @param classNameId the class name ID of this journal article
+	*/
+	public void setClassNameId(long classNameId) {
+		_journalArticle.setClassNameId(classNameId);
+	}
+
+	/**
+	* Gets the class p k of this journal article.
+	*
+	* @return the class p k of this journal article
+	*/
+	public long getClassPK() {
+		return _journalArticle.getClassPK();
+	}
+
+	/**
+	* Sets the class p k of this journal article.
+	*
+	* @param classPK the class p k of this journal article
+	*/
+	public void setClassPK(long classPK) {
+		_journalArticle.setClassPK(classPK);
+	}
+
+	/**
 	* Gets the article ID of this journal article.
 	*
 	* @return the article ID of this journal article

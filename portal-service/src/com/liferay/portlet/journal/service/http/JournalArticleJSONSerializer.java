@@ -59,6 +59,8 @@ public class JournalArticleJSONSerializer {
 		}
 
 		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
+		jsonObject.put("classPK", model.getClassPK());
 		jsonObject.put("articleId", model.getArticleId());
 		jsonObject.put("version", model.getVersion());
 		jsonObject.put("title", model.getTitle());

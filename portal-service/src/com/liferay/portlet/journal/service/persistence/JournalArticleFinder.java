@@ -18,15 +18,15 @@ package com.liferay.portlet.journal.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface JournalArticleFinder {
-	public int countByKeywords(long companyId, long groupId,
+	public int countByKeywords(long companyId, long groupId, long classNameId,
 		java.lang.String keywords, java.lang.Double version,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(long companyId, long groupId,
-		java.lang.String articleId, java.lang.Double version,
+	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(long companyId, long groupId,
+		long classNameId, java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -34,8 +34,8 @@ public interface JournalArticleFinder {
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(long companyId, long groupId,
-		java.lang.String articleId, java.lang.Double version,
+	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(long companyId, long groupId,
+		long classNameId, java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String[] structureIds, java.lang.String[] templateIds,
@@ -43,107 +43,114 @@ public interface JournalArticleFinder {
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_G_A_V_T_D_C_T_S_T_D_S_R(long companyId, long groupId,
-		java.lang.String[] articleIds, java.lang.Double version,
-		java.lang.String[] titles, java.lang.String[] descriptions,
-		java.lang.String[] contents, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String[] templateIds,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int filterCountByKeywords(long companyId, long groupId,
-		java.lang.String keywords, java.lang.Double version,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, int status, java.util.Date reviewDate)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int filterCountByC_G_A_V_T_D_C_T_S_T_D_S_R(long companyId,
-		long groupId, java.lang.String articleId, java.lang.Double version,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int filterCountByC_G_A_V_T_D_C_T_S_T_D_S_R(long companyId,
-		long groupId, java.lang.String articleId, java.lang.Double version,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String[] templateIds,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int filterCountByC_G_A_V_T_D_C_T_S_T_D_S_R(long companyId,
-		long groupId, java.lang.String[] articleIds, java.lang.Double version,
-		java.lang.String[] titles, java.lang.String[] descriptions,
-		java.lang.String[] contents, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String[] templateIds,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, boolean andOperator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByKeywords(
-		long companyId, long groupId, java.lang.String keywords,
-		java.lang.Double version, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String[] structureIds,
-		java.lang.String[] templateIds, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, java.lang.String[] articleIds,
+	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(long companyId, long groupId,
+		long classNameId, java.lang.String[] articleIds,
 		java.lang.Double version, java.lang.String[] titles,
 		java.lang.String[] descriptions, java.lang.String[] contents,
 		java.lang.String type, java.lang.String[] structureIds,
 		java.lang.String[] templateIds, java.util.Date displayDateGT,
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		boolean andOperator, int start, int end,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByKeywords(long companyId, long groupId,
+		long classNameId, java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(long companyId,
+		long groupId, long classNameId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(long companyId,
+		long groupId, long classNameId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String[] structureIds,
+		java.lang.String[] templateIds, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(long companyId,
+		long groupId, long classNameId, java.lang.String[] articleIds,
+		java.lang.Double version, java.lang.String[] titles,
+		java.lang.String[] descriptions, java.lang.String[] contents,
+		java.lang.String type, java.lang.String[] structureIds,
+		java.lang.String[] templateIds, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
+		boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByKeywords(
+		long companyId, long groupId, long classNameId,
+		java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+		long companyId, long groupId, long classNameId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+		long companyId, long groupId, long classNameId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+		long companyId, long groupId, long classNameId,
+		java.lang.String[] articleIds, java.lang.Double version,
+		java.lang.String[] titles, java.lang.String[] descriptions,
+		java.lang.String[] contents, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByExpirationDate(
-		int status, java.util.Date expirationDateLT,
+		long classNameId, int status, java.util.Date expirationDateLT,
 		java.util.Date expirationDateGT)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByKeywords(
-		long companyId, long groupId, java.lang.String keywords,
-		java.lang.Double version, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
-		java.util.Date reviewDate, int start, int end,
+		long companyId, long groupId, long classNameId,
+		java.lang.String keywords, java.lang.Double version,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
+		int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByReviewDate(
-		java.util.Date reviewDateLT, java.util.Date reviewDateGT)
+		long classNameId, java.util.Date reviewDateLT,
+		java.util.Date reviewDateGT)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle findByR_D(
@@ -151,36 +158,47 @@ public interface JournalArticleFinder {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.journal.NoSuchArticleException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		boolean andOperator, int start, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+		long companyId, long groupId, long classNameId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String[] structureIds,
-		java.lang.String[] templateIds, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		boolean andOperator, int start, int end,
+		long companyId, long groupId, long classNameId,
+		java.lang.String[] articleIds, java.lang.Double version,
+		java.lang.String[] titles, java.lang.String[] descriptions,
+		java.lang.String[] contents, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-		long companyId, long groupId, java.lang.String[] articleIds,
-		java.lang.Double version, java.lang.String[] titles,
-		java.lang.String[] descriptions, java.lang.String[] contents,
-		java.lang.String type, java.lang.String[] structureIds,
-		java.lang.String[] templateIds, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, int status, java.util.Date reviewDate,
-		boolean andOperator, int start, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+		long companyId, long groupId, long classNameId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+		long companyId, long groupId, long classNameId,
+		java.lang.String[] articleIds, java.lang.Double version,
+		java.lang.String[] titles, java.lang.String[] descriptions,
+		java.lang.String[] contents, java.lang.String type,
+		java.lang.String[] structureIds, java.lang.String[] templateIds,
+		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
+		java.util.Date reviewDate, boolean andOperator, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -715,6 +715,8 @@ create table JournalArticle (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
 	articleId VARCHAR(75) null,
 	version DOUBLE,
 	title STRING null,

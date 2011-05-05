@@ -77,6 +77,8 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		newJournalArticle.setUserName(randomString());
 		newJournalArticle.setCreateDate(nextDate());
 		newJournalArticle.setModifiedDate(nextDate());
+		newJournalArticle.setClassNameId(nextLong());
+		newJournalArticle.setClassPK(nextLong());
 		newJournalArticle.setArticleId(randomString());
 		newJournalArticle.setVersion(nextDouble());
 		newJournalArticle.setTitle(randomString());
@@ -122,6 +124,10 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingJournalArticle.getModifiedDate()),
 			Time.getShortTimestamp(newJournalArticle.getModifiedDate()));
+		assertEquals(existingJournalArticle.getClassNameId(),
+			newJournalArticle.getClassNameId());
+		assertEquals(existingJournalArticle.getClassPK(),
+			newJournalArticle.getClassPK());
 		assertEquals(existingJournalArticle.getArticleId(),
 			newJournalArticle.getArticleId());
 		assertEquals(existingJournalArticle.getVersion(),
@@ -295,6 +301,13 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 				existingJournalArticleModelImpl.getOriginalArticleId()));
 		assertEquals(existingJournalArticleModelImpl.getVersion(),
 			existingJournalArticleModelImpl.getOriginalVersion());
+
+		assertEquals(existingJournalArticleModelImpl.getGroupId(),
+			existingJournalArticleModelImpl.getOriginalGroupId());
+		assertEquals(existingJournalArticleModelImpl.getClassNameId(),
+			existingJournalArticleModelImpl.getOriginalClassNameId());
+		assertEquals(existingJournalArticleModelImpl.getClassPK(),
+			existingJournalArticleModelImpl.getOriginalClassPK());
 	}
 
 	protected JournalArticle addJournalArticle() throws Exception {
@@ -310,6 +323,8 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		journalArticle.setUserName(randomString());
 		journalArticle.setCreateDate(nextDate());
 		journalArticle.setModifiedDate(nextDate());
+		journalArticle.setClassNameId(nextLong());
+		journalArticle.setClassPK(nextLong());
 		journalArticle.setArticleId(randomString());
 		journalArticle.setVersion(nextDouble());
 		journalArticle.setTitle(randomString());

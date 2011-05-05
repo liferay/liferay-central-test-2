@@ -78,6 +78,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
 			{ "articleId", Types.VARCHAR },
 			{ "version", Types.DOUBLE },
 			{ "title", Types.VARCHAR },
@@ -100,7 +102,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,articleId VARCHAR(75) null,version DOUBLE,title STRING null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,layoutUuid VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalArticle (uuid_ VARCHAR(75) null,id_ LONG not null primary key,resourcePrimKey LONG,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,articleId VARCHAR(75) null,version DOUBLE,title STRING null,urlTitle VARCHAR(150) null,description STRING null,content TEXT null,type_ VARCHAR(75) null,structureId VARCHAR(75) null,templateId VARCHAR(75) null,layoutUuid VARCHAR(75) null,displayDate DATE null,expirationDate DATE null,reviewDate DATE null,indexable BOOLEAN,smallImage BOOLEAN,smallImageId LONG,smallImageURL STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticle";
 	public static final String ORDER_BY_JPQL = " ORDER BY journalArticle.articleId ASC, journalArticle.version DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY JournalArticle.articleId ASC, JournalArticle.version DESC";
@@ -132,6 +134,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
 		model.setArticleId(soapModel.getArticleId());
 		model.setVersion(soapModel.getVersion());
 		model.setTitle(soapModel.getTitle());
@@ -309,6 +313,50 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return StringPool.BLANK;
+		}
+
+		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
+		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
+	}
+
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
+		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	public String getArticleId() {
@@ -802,6 +850,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		journalArticleImpl.setUserName(getUserName());
 		journalArticleImpl.setCreateDate(getCreateDate());
 		journalArticleImpl.setModifiedDate(getModifiedDate());
+		journalArticleImpl.setClassNameId(getClassNameId());
+		journalArticleImpl.setClassPK(getClassPK());
 		journalArticleImpl.setArticleId(getArticleId());
 		journalArticleImpl.setVersion(getVersion());
 		journalArticleImpl.setTitle(getTitle());
@@ -894,6 +944,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 		journalArticleModelImpl._setOriginalGroupId = false;
 
+		journalArticleModelImpl._originalClassNameId = journalArticleModelImpl._classNameId;
+
+		journalArticleModelImpl._setOriginalClassNameId = false;
+
+		journalArticleModelImpl._originalClassPK = journalArticleModelImpl._classPK;
+
+		journalArticleModelImpl._setOriginalClassPK = false;
+
 		journalArticleModelImpl._originalArticleId = journalArticleModelImpl._articleId;
 
 		journalArticleModelImpl._originalVersion = journalArticleModelImpl._version;
@@ -902,7 +960,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(65);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -922,6 +980,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
+		sb.append(", classPK=");
+		sb.append(getClassPK());
 		sb.append(", articleId=");
 		sb.append(getArticleId());
 		sb.append(", version=");
@@ -970,7 +1032,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(94);
+		StringBundler sb = new StringBundler(100);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.journal.model.JournalArticle");
@@ -1011,6 +1073,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append(getClassNameId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>classPK</column-name><column-value><![CDATA[");
+		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>articleId</column-name><column-value><![CDATA[");
@@ -1115,6 +1185,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
+	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private String _articleId;
 	private String _originalArticleId;
 	private double _version;

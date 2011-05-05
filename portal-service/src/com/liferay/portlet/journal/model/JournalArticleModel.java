@@ -210,6 +210,41 @@ public interface JournalArticleModel extends BaseModel<JournalArticle>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the class name of the model instance this journal article is polymorphically associated with.
+	 *
+	 * @return the class name of the model instance this journal article is polymorphically associated with
+	 */
+	public String getClassName();
+
+	/**
+	 * Gets the class name ID of this journal article.
+	 *
+	 * @return the class name ID of this journal article
+	 */
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this journal article.
+	 *
+	 * @param classNameId the class name ID of this journal article
+	 */
+	public void setClassNameId(long classNameId);
+
+	/**
+	 * Gets the class p k of this journal article.
+	 *
+	 * @return the class p k of this journal article
+	 */
+	public long getClassPK();
+
+	/**
+	 * Sets the class p k of this journal article.
+	 *
+	 * @param classPK the class p k of this journal article
+	 */
+	public void setClassPK(long classPK);
+
+	/**
 	 * Gets the article ID of this journal article.
 	 *
 	 * @return the article ID of this journal article
