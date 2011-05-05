@@ -67,6 +67,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			SearchContext searchContext = SearchContextFactory.getInstance(
 				request);
 
+			searchContext.setAttribute("paginationType", "more");
+
 			if (groupId == 0) {
 				searchContext.setGroupIds(null);
 			}
@@ -96,8 +98,6 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			searchContext.setStart(start);
 
 			searchContext.setUserId(userId);
-
-			searchContext.setAttribute("paginationType", "more");
 
 			addSearchAttributes(
 				themeDisplay.getCompanyId(), searchContext, keywords);

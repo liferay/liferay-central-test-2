@@ -738,10 +738,11 @@ public abstract class BaseIndexer implements Indexer {
 
 		int start = searchContext.getStart();
 		int end = searchContext.getEnd();
-		int delta = end - start;
+
 		String paginationType = GetterUtil.getString(
 			searchContext.getAttribute("paginationType"));
-		boolean doMore = false;
+
+		boolean hasMore = false;
 
 		Document[] documents = hits.getDocs();
 
@@ -763,7 +764,7 @@ public abstract class BaseIndexer implements Indexer {
 			}
 
 			if (paginationType.equals("more") && (docs.size() > end)) {
-				doMore = true;
+				hasMore = true;
 
 				break;
 			}
@@ -771,8 +772,8 @@ public abstract class BaseIndexer implements Indexer {
 
 		int length = docs.size();
 
-		if (doMore) {
-			length = length + delta;
+		if (hasMore) {
+			length = length + (end - start);
 		}
 
 		hits.setLength(length);
