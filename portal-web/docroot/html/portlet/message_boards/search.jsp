@@ -90,10 +90,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		Hits results = indexer.search(searchContext);
 
-		ThreadHits threadHits = new ThreadHits();
-
-		threadHits.recordHits(results, searchContainer.getStart(), searchContainer.getEnd());
-
 		int total = results.getLength();
 
 		searchContainer.setTotal(total);
