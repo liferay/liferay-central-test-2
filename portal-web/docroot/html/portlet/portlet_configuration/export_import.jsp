@@ -115,7 +115,7 @@ if (layout.isTypeControlPanel()) {
 					<aui:button-row>
 						<aui:button onClick='<%= renderResponse.getNamespace() + "exportData();" %>' value="export" />
 
-						<aui:button onClick="<%= redirect %>" type="cancel" />
+						<aui:button href="<%= redirect %>" type="cancel" />
 					</aui:button-row>
 				</aui:fieldset>
 				</c:when>
@@ -130,7 +130,7 @@ if (layout.isTypeControlPanel()) {
 						<aui:button-row>
 							<aui:button onClick='<%= renderResponse.getNamespace() + "importData();" %>' value="import" />
 
-							<aui:button onClick="<%= redirect %>" type="cancel" />
+							<aui:button href="<%= redirect %>" type="cancel" />
 						</aui:button-row>
 					</aui:fieldset>
 				</c:when>
