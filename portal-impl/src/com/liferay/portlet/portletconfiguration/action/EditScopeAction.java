@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -118,7 +119,7 @@ public class EditScopeAction extends EditConfigurationAction {
 			renderRequest, "portlet.portlet_configuration.edit_scope"));
 	}
 
-	protected String getNewScopeName(ActionRequest actionRequest)
+	protected Tuple getNewScope(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -128,13 +129,14 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
 
-		if (Validator.isNull(scopeType)) {
-			return null;
-		}
-
+		long scopeGroupId = 0;
 		String scopeName = null;
 
-		if (scopeType.equals("company")) {
+		if (Validator.isNull(scopeType)) {
+			scopeGroupId = layout.getGroupId();
+		}
+		else if (scopeType.equals("company")) {
+			scopeGroupId = themeDisplay.getCompanyGroupId();
 			scopeName = themeDisplay.translate("global");
 		}
 		else if (scopeType.equals("layout")) {
@@ -153,6 +155,7 @@ public class EditScopeAction extends EditConfigurationAction {
 					scopeLayout.getPlid(), name, null, 0, null, true, null);
 			}
 
+			scopeGroupId = scopeLayout.getGroupId();
 			scopeName = scopeLayout.getName(themeDisplay.getLocale());
 		}
 		else {
@@ -160,7 +163,7 @@ public class EditScopeAction extends EditConfigurationAction {
 				"Scope type " + scopeType + " is invalid");
 		}
 
-		return scopeName;
+		return new Tuple(scopeGroupId, scopeName);
 	}
 
 	protected String getOldScopeName(
@@ -265,8 +268,12 @@ public class EditScopeAction extends EditConfigurationAction {
 		String portletTitle = getPortletTitle(
 			actionRequest, portlet, preferences);
 
+		Tuple tuple = getNewScope(actionRequest);
+
+		long newScopeGroupId = (Long)tuple.getObject(0);
+		preferences.setValue("groupId", String.valueOf(newScopeGroupId));
 		String oldScopeName = getOldScopeName(actionRequest, portlet);
-		String newScopeName = getNewScopeName(actionRequest);
+		String newScopeName = (String)tuple.getObject(1);
 
 		String newPortletTitle = PortalUtil.getNewPortletTitle(
 			portletTitle, oldScopeName, newScopeName);
