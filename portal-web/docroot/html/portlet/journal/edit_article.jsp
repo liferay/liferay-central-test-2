@@ -62,7 +62,8 @@ double version = BeanParamUtil.getDouble(article, request, "version", JournalArt
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
 JournalStructure structure = null;
-long structureGroupdId = groupId;
+
+long structureGroupId = groupId;
 
 if (Validator.isNotNull(structureId)) {
 	try {
@@ -72,7 +73,8 @@ if (Validator.isNotNull(structureId)) {
 		if (groupId != themeDisplay.getCompanyGroupId()) {
 			try {
 				structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
-				structureGroupdId = structure.getGroupId();
+
+				structureGroupId = structure.getGroupId();
 			}
 			catch (NoSuchStructureException nsse2) {
 			}

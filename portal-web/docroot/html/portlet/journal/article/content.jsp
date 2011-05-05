@@ -30,7 +30,7 @@ String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
 String parentStructureId = StringPool.BLANK;
-long structureGroupdId = groupId;
+long structureGroupId = groupId;
 String structureName = LanguageUtil.get(pageContext, "default");
 String structureDescription = StringPool.BLANK;
 String structureXSD = StringPool.BLANK;
@@ -38,7 +38,7 @@ String structureXSD = StringPool.BLANK;
 JournalStructure structure = (JournalStructure)request.getAttribute("edit_article.jsp-structure");
 
 if (structure != null) {
-	structureGroupdId = structure.getGroupId();
+	structureGroupId = structure.getGroupId();
 	parentStructureId = structure.getParentStructureId();
 	structureName = structure.getName();
 	structureDescription = structure.getDescription();
@@ -48,7 +48,7 @@ if (structure != null) {
 List<JournalTemplate> templates = new ArrayList();
 
 if (structure != null) {
-	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(structureGroupdId, structureId);
+	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(structureGroupId, structureId);
 }
 
 String templateId = BeanParamUtil.getString(article, request, "templateId");
@@ -64,7 +64,7 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 			try {
 				template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), templateId);
 
-				structureGroupdId = themeDisplay.getCompanyGroupId();
+				structureGroupId = themeDisplay.getCompanyGroupId();
 			}
 			catch (NoSuchTemplateException nste2) {
 			}
@@ -74,11 +74,11 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 	if (template != null) {
 		structureId = template.getStructureId();
 
-		structure = JournalStructureLocalServiceUtil.getStructure(structureGroupdId, structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(structureGroupId, structureId);
 
 		structureName = structure.getName();
 
-		templates = JournalTemplateLocalServiceUtil.getStructureTemplates(structureGroupdId, structureId);
+		templates = JournalTemplateLocalServiceUtil.getStructureTemplates(structureGroupId, structureId);
 	}
 }
 
