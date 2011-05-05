@@ -97,6 +97,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 
 			searchContext.setUserId(userId);
 
+			searchContext.setAttribute("paginationType", "more");
+
 			addSearchAttributes(
 				themeDisplay.getCompanyId(), searchContext, keywords);
 

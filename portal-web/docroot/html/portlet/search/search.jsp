@@ -385,7 +385,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 			<c:choose>
 				<c:when test="<%= (searchContainer.getTotal() == resultRows.size()) || (Validator.isNotNull(primarySearch) && portlet.getOpenSearchClass().equals(primarySearch)) %>">
 					<div class="search-paginator-container">
-						<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+						<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="more" />
 					</div>
 				</c:when>
 				<c:otherwise>

@@ -122,7 +122,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test="<%= total > delta %>">
 	<div class="search-pages">
-		<c:if test='<%= type.equals("more") || type.equals("regular") %>'>
+		<c:if test='<%= type.equals("regular") %>'>
 			<c:if test="<%= PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES.length > 0 %>">
 				<div class="delta-selector">
 					<c:choose>

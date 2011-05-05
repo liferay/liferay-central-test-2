@@ -736,6 +736,13 @@ public abstract class BaseIndexer implements Indexer {
 		List<Document> docs = new ArrayList<Document>();
 		List<Float> scores = new ArrayList<Float>();
 
+		int start = searchContext.getStart();
+		int end = searchContext.getEnd();
+		int delta = end - start;
+		String paginationType = GetterUtil.getString(
+			searchContext.getAttribute("paginationType"));
+		boolean doMore = false;
+
 		Document[] documents = hits.getDocs();
 
 		for (int i = 0; i < documents.length; i++) {
@@ -754,14 +761,21 @@ public abstract class BaseIndexer implements Indexer {
 			}
 			catch (Exception e) {
 			}
+
+			if (paginationType.equals("more") && (docs.size() > end)) {
+				doMore = true;
+
+				break;
+			}
 		}
 
 		int length = docs.size();
 
-		hits.setLength(length);
+		if (doMore) {
+			length = length + delta;
+		}
 
-		int start = searchContext.getStart();
-		int end = searchContext.getEnd();
+		hits.setLength(length);
 
 		if ((start != QueryUtil.ALL_POS) && (end != QueryUtil.ALL_POS)) {
 			if (end > length) {
