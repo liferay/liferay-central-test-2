@@ -271,7 +271,9 @@ public class EditScopeAction extends EditConfigurationAction {
 		Tuple tuple = getNewScope(actionRequest);
 
 		long newScopeGroupId = (Long)tuple.getObject(0);
+
 		preferences.setValue("groupId", String.valueOf(newScopeGroupId));
+
 		String oldScopeName = getOldScopeName(actionRequest, portlet);
 		String newScopeName = (String)tuple.getObject(1);
 
