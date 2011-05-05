@@ -83,6 +83,7 @@ boolean createNewPage = true;
 		searchContext.setKeywords(keywords);
 		searchContext.setNodeIds(nodeIds);
 		searchContext.setStart(searchContainer.getStart());
+		searchContext.setAttribute("paginationType", "more");
 
 		Hits results = indexer.search(searchContext);
 
@@ -155,7 +156,7 @@ boolean createNewPage = true;
 			<strong><aui:a cssClass="new-page" href="<%= addPageURL.toString() %>" label="create-a-new-page-on-this-topic" /></strong>
 		</c:if>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="more" />
 
 	<%
 	}

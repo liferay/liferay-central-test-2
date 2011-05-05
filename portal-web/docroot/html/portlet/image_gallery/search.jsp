@@ -81,6 +81,7 @@ boolean useAssetEntryQuery = false;
 		searchContext.setFolderIds(folderIdsArray);
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(searchContainer.getStart());
+		searchContext.setAttribute("paginationType", "more");
 
 		Hits hits = indexer.search(searchContext);
 

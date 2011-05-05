@@ -87,6 +87,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 		searchContext.setFolderIds(folderIdsArray);
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(searchContainer.getStart());
+		searchContext.setAttribute("paginationType", "more");
 
 		Hits results = indexer.search(searchContext);
 
@@ -165,7 +166,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 		<br /><br />
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" type="more" />
 
 	<%
 	}
