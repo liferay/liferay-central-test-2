@@ -31,6 +31,7 @@ _options.putAll(dynamicAttributes);
 java.lang.String cssClass = GetterUtil.getString((java.lang.String)request.getAttribute("aui:button:cssClass"));
 java.util.Map data = (java.util.Map)request.getAttribute("aui:button:data");
 boolean disabled = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:button:disabled")));
+java.lang.String href = GetterUtil.getString((java.lang.String)request.getAttribute("aui:button:href"));
 java.lang.String inputCssClass = GetterUtil.getString((java.lang.String)request.getAttribute("aui:button:inputCssClass"));
 java.lang.String name = GetterUtil.getString((java.lang.String)request.getAttribute("aui:button:name"));
 java.lang.String onClick = GetterUtil.getString((java.lang.String)request.getAttribute("aui:button:onClick"));
@@ -40,6 +41,7 @@ java.lang.String value = GetterUtil.getString((java.lang.String)request.getAttri
 _updateOptions(_options, "cssClass", cssClass);
 _updateOptions(_options, "data", data);
 _updateOptions(_options, "disabled", disabled);
+_updateOptions(_options, "href", href);
 _updateOptions(_options, "inputCssClass", inputCssClass);
 _updateOptions(_options, "name", name);
 _updateOptions(_options, "onClick", onClick);
