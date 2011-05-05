@@ -14,10 +14,8 @@
 
 package com.liferay.portlet.assetpublisher.action;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -28,26 +26,12 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
-import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.util.RSSUtil;
 
-import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
-
 import java.io.OutputStream;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -78,76 +62,6 @@ public class RSSAction extends PortletAction {
 		}
 		finally {
 			os.close();
-		}
-	}
-
-	protected String exportToRSS(
-			String name, String description, String type, double version,
-			String displayStyle, String feedURL, String tagURL,
-			List<AssetEntry> assetEntries)
-		throws SystemException {
-
-		SyndFeed syndFeed = new SyndFeedImpl();
-
-		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
-		syndFeed.setTitle(name);
-		syndFeed.setLink(feedURL);
-		syndFeed.setDescription(GetterUtil.getString(description, name));
-
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
-
-		syndFeed.setEntries(entries);
-
-		for (AssetEntry entry : assetEntries) {
-			AssetRendererFactory assetRendererFactory =
-				AssetRendererFactoryRegistryUtil.
-					getAssetRendererFactoryByClassName(entry.getClassName());
-
-			String author = HtmlUtil.escape(
-				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(tagURL);
-			sb.append(assetRendererFactory.getType());
-			sb.append("/id/");
-			sb.append(entry.getEntryId());
-
-			String link = sb.toString();
-
-			String value = null;
-
-			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
-				value = StringPool.BLANK;
-			}
-			else {
-				value = entry.getSummary();
-			}
-
-			SyndEntry syndEntry = new SyndEntryImpl();
-
-			syndEntry.setAuthor(author);
-			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(link);
-			syndEntry.setUri(syndEntry.getLink());
-			syndEntry.setPublishedDate(entry.getCreateDate());
-			syndEntry.setUpdatedDate(entry.getModifiedDate());
-
-			SyndContent syndContent = new SyndContentImpl();
-
-			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
-			syndContent.setValue(value);
-
-			syndEntry.setDescription(syndContent);
-
-			entries.add(syndEntry);
-		}
-
-		try {
-			return RSSUtil.export(syndFeed);
-		}
-		catch (FeedException fe) {
-			throw new SystemException(fe);
 		}
 	}
 
@@ -228,13 +142,10 @@ public class RSSAction extends PortletAction {
 		assetEntryQuery.setGroupIds(groupIds);
 		assetEntryQuery.setStart(0);
 
-		List<AssetEntry> assetEntries = AssetEntryServiceUtil.getEntries(
-			assetEntryQuery);
-
-		String rss = exportToRSS(
-				rssName, null, rssFormatType, rssFormatVersion, rssDisplayStyle,
-				getFeedURL(portletRequest), getEntryURL(portletRequest),
-				assetEntries);
+		String rss = AssetEntryServiceUtil.getEntriesRSS(
+			assetEntryQuery, rssName, rssFormatType, rssFormatVersion,
+			rssDisplayStyle, getFeedURL(portletRequest),
+			getEntryURL(portletRequest));
 
 		return rss.getBytes(StringPool.UTF8);
 	}
