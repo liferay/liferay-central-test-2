@@ -1992,14 +1992,14 @@ resource.repositories.root=$${user.home}/liferay</echo>
 				<equals arg1="${svn.info.revision.actual}" arg2="${svn.info.revision.valid}" />
 			</not>
 			<then>
-				<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}" spawn="true">
-					<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid}" />
-				</exec>
+				<echo file="${project.dir}/update_svn.bat">@echo off
 
-				<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}" spawn="true">
-					<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid}" />
-				</exec>
+svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid} ${project.dir}
+svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid} ${lp.plugins.dir}</echo>
 			</then>
+			<else>
+				<delete file="${project.dir}/update_svn.bat" />
+			</else>
 		</if>
 	</target>
 
