@@ -44,7 +44,7 @@ String threadView = messageDisplay.getThreadView();
 	title="<%= message.getSubject() %>"
 />
 
-<table cellpadding="0" cellspacing="0" width="100%">
+<table cellpadding="0" cellspacing="0" class="thread-view-controls" width="100%">
 <tr>
 	<td class="stretch"></td>
 
