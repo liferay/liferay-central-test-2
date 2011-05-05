@@ -598,9 +598,9 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				groupId, articleId, autoArticleId, titleMap, descriptionMap,
-				content, type, structureId, templateId, layoutUuid,
-				displayDateMonth, displayDateDay, displayDateYear,
+				groupId, null, 0, articleId, autoArticleId, titleMap,
+				descriptionMap, content, type, structureId, templateId,
+				layoutUuid, displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, reviewDateMonth,
