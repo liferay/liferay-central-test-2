@@ -468,22 +468,6 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator);
 	}
 
-	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-			long companyId, long groupId, long classNameId, String[] articleIds,
-			Double version, String[] titles, String[] descriptions,
-			String[] contents, String type, String[] structureIds,
-			String[] templateIds, Date displayDateGT, Date displayDateLT,
-			int status, Date reviewDate, boolean andOperator, int start,
-			int end, OrderByComparator orderByComparator)
-		throws SystemException {
-
-		return doFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, classNameId, articleIds, version, titles,
-			descriptions, contents, type, structureIds, templateIds,
-			displayDateGT, displayDateLT, status, reviewDate, andOperator,
-			start, end, orderByComparator, false);
-	}
-
 	public List<JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
