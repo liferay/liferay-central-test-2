@@ -30,6 +30,43 @@
 		clear: both;
 	}
 
+	.move-list {
+		.move-file {
+			background: #f0faf0 url(<%= themeImagesPath %>/file_system/small/jpg.png) no-repeat 5px 50%;
+			border-bottom: 1px solid #ccc;
+			display: block;
+			font-weight: bold;
+			margin-bottom: 1px;
+			padding: 5px;
+			padding-left: 25px;
+			position: relative;
+		}
+
+		.move-error {
+			background-color: #FDD;
+			background-image: url(<%= themeImagesPath %>/messages/error.png);
+			font-weight: normal;
+			opacity: 0.6;
+
+			.error-message {
+				position: absolute;
+				right: 5px;
+			}
+		}
+
+		.lfr-component {
+			margin: 0;
+		}
+	}
+
+	.move-list-info {
+		margin: 5px 0;
+
+		h4 {
+			font-size: 1.3em;
+		}
+	}
+
 	.select-documents {
 		float: left;
 		margin-right: 2em;

@@ -122,6 +122,16 @@ String taglibUrl = null;
 	/>
 
 	<%
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.MOVE + "')";
+	%>
+
+	<liferay-ui:icon
+		image="submit"
+		message="move"
+		url="<%= taglibUrl %>"
+	/>
+
+	<%
 	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
 	%>
 

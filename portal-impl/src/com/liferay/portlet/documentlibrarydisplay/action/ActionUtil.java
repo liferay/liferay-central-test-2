@@ -17,6 +17,7 @@ package com.liferay.portlet.documentlibrarydisplay.action;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -30,16 +31,20 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Sergio González
  */
 public class ActionUtil {
 
-	public static void getFileEntry(HttpServletRequest request)
+	public static void getFileEntries(HttpServletRequest request)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -52,29 +57,57 @@ public class ActionUtil {
 		String title = ParamUtil.getString(request, "title");
 
 		FileEntry fileEntry = null;
+		List<FileEntry> fileEntries = null;
 
-		try {
-			if (fileEntryId > 0) {
+		if (fileEntryId > 0) {
+			try {
 				fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
 			}
-			else if (Validator.isNotNull(title)) {
+			catch (NoSuchFileEntryException nsfee) {
+			}
+		}
+		else if (Validator.isNotNull(title)) {
+			try {
 				fileEntry = DLAppServiceUtil.getFileEntry(
 					groupId, folderId, title);
 			}
+			catch (NoSuchFileEntryException nsfee) {
+			}
 		}
-		catch (NoSuchFileEntryException nsfee) {
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(request, "fileEntryIds"), 0L);
+
+			fileEntries = new ArrayList<FileEntry>();
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				try {
+					fileEntry = DLAppServiceUtil.getFileEntry(fileEntryIds[i]);
+
+					fileEntries.add(fileEntry);
+				}
+				catch (NoSuchFileEntryException nsfee) {
+				}
+			}
 		}
 
-		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
+		if ((fileEntryId > 0) || Validator.isNotNull(title)) {
+			request.setAttribute(
+				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
+		}
+		else {
+			request.setAttribute(
+				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRIES, fileEntries);
+		}
 	}
 
-	public static void getFileEntry(PortletRequest portletRequest)
+	public static void getFileEntries(PortletRequest portletRequest)
 		throws Exception {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		getFileEntry(request);
+		getFileEntries(request);
 	}
 
 	public static void getFileShortcut(HttpServletRequest request)
