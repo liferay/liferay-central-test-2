@@ -62,6 +62,7 @@ double version = BeanParamUtil.getDouble(article, request, "version", JournalArt
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
 JournalStructure structure = null;
+long structureGroupdId = groupId;
 
 if (Validator.isNotNull(structureId)) {
 	try {
@@ -71,6 +72,7 @@ if (Validator.isNotNull(structureId)) {
 		if (groupId != themeDisplay.getCompanyGroupId()) {
 			try {
 				structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+				structureGroupdId = structure.getGroupId();
 			}
 			catch (NoSuchStructureException nsse2) {
 			}
@@ -126,6 +128,10 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	<input name="title" type="hidden" value="" />
 	<input name="xml" type="hidden" value="" />
 </aui:form>
+
+<c:if test='<%= Validator.isNull(toLanguageId) && ArrayUtil.contains(mainSections, "content") %>'>
+	<%@ include file="/html/portlet/journal/edit_article_structure_extra.jspf" %>
+</c:if>
 
 <portlet:actionURL var="editArticleActionURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/journal/edit_article" />

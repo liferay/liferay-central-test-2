@@ -570,8 +570,6 @@ if (Validator.isNotNull(content)) {
 </tr>
 </table>
 
-<%@ include file="/html/portlet/journal/edit_article_structure_extra.jspf" %>
-
 <aui:script>
 	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";

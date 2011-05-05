@@ -41,7 +41,7 @@
 </div>
 
 <div class="journal-article-edit-field-wrapper yui3-aui-helper-hidden" id="<portlet:namespace />journalArticleEditFieldWrapper">
-	<aui:form method="post">
+	<aui:form method="post" name="fm3">
 		<div class="journal-article-edit-field" id="<portlet:namespace />journalArticleEditField">
 			<div class="portlet-msg-success journal-message yui3-aui-helper-hidden" id="<portlet:namespace />journalMessage">
 				<liferay-ui:message key="your-request-processed-successfully" />
