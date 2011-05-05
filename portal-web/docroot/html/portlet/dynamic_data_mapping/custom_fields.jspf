@@ -45,18 +45,6 @@
 			},
 
 			prototype: {
-				renderUI: function() {
-					var instance = this;
-
-					DDMDateField.superclass.renderUI.apply(instance, arguments);
-
-					instance.datePicker = new A.DatePicker(
-						{
-							trigger: instance.get('templateNode')
-						}
-					).render();
-				},
-
 				renderSettings: function() {
 					var instance = this;
 
@@ -71,8 +59,19 @@
 							trigger: predefinedValueNode
 						}
 					).render();
-				}
+				},
 
+				renderUI: function() {
+					var instance = this;
+
+					DDMDateField.superclass.renderUI.apply(instance, arguments);
+
+					instance.datePicker = new A.DatePicker(
+						{
+							trigger: instance.get('templateNode')
+						}
+					).render();
+				}
 			}
 		}
 	);
