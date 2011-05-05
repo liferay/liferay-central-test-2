@@ -129,7 +129,8 @@ public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			long userId, long groupId, String articleId, boolean autoArticleId,
+			long userId, long groupId, String className, long classPK,
+			String articleId, boolean autoArticleId,
 			double version, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String content, String type,
 			String structureId, String templateId, String layoutUuid,
@@ -148,6 +149,8 @@ public class JournalArticleLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		articleId = articleId.trim().toUpperCase();
+
+		long classNameId = PortalUtil.getClassNameId(className);
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear,
@@ -217,6 +220,8 @@ public class JournalArticleLocalServiceImpl
 		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());
 		article.setUserId(user.getUserId());
+		article.setClassNameId(classNameId);
+		article.setClassPK(classPK);
 		article.setUserName(user.getFullName());
 		article.setCreateDate(serviceContext.getCreateDate(now));
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
@@ -310,6 +315,34 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
+	public JournalArticle addArticle(
+			long userId, long groupId, String articleId, boolean autoArticleId,
+			double version, Map<Locale, String> titleMap,
+			Map<Locale, String> descriptionMap, String content, String type,
+			String structureId, String templateId, String layoutUuid,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return addArticle(
+			userId, groupId, StringPool.BLANK, 0, articleId, autoArticleId,
+			version, titleMap, descriptionMap, content, type, structureId,
+			templateId, layoutUuid, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
+			smallFile, images, articleURL, serviceContext);
+	}
+
 	public void addArticleResources(
 			JournalArticle article, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -382,7 +415,7 @@ public class JournalArticleLocalServiceImpl
 
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
-				WorkflowConstants.STATUS_APPROVED, now,
+				0, WorkflowConstants.STATUS_APPROVED, now,
 				new Date(now.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL));
 
 		if (_log.isDebugEnabled()) {
@@ -415,7 +448,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		articles = journalArticleFinder.findByReviewDate(
-			now, new Date(now.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL));
+			0, now, new Date(now.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -779,6 +812,16 @@ public class JournalArticleLocalServiceImpl
 
 		return journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
+	}
+
+	public JournalArticle getArticle(
+			long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return journalArticlePersistence.findByG_C_C(
+			groupId, classNameId, classPK);
 	}
 
 	public JournalArticle getArticleByUrlTitle(long groupId, String urlTitle)
@@ -1476,48 +1519,49 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List<JournalArticle> search(
-			long companyId, long groupId, String keywords, Double version,
-			String type, String structureId, String templateId,
+			long companyId, long groupId, long classNameId, String keywords,
+			Double version, String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return journalArticleFinder.findByKeywords(
-			companyId, groupId, keywords, version, type, structureId,
-			templateId, displayDateGT, displayDateLT, status, reviewDate, start,
-			end, obc);
+			companyId, groupId, classNameId, keywords, version, type,
+			structureId, templateId, displayDateGT, displayDateLT, status,
+			reviewDate, start, end, obc);
 	}
 
 	public List<JournalArticle> search(
-			long companyId, long groupId, String articleId, Double version,
-			String title, String description, String content, String type,
-			String structureId, String templateId, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate,
+			long companyId, long groupId, long classNameId, String articleId,
+			Double version, String title, String description, String content,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator, start, end, obc);
+		return journalArticleFinder.findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, classNameId, articleId, version, title,
+			description, content, type, structureId, templateId, displayDateGT,
+			displayDateLT, status, reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> search(
-			long companyId, long groupId, String articleId, Double version,
-			String title, String description, String content, String type,
-			String[] structureIds, String[] templateIds, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate,
+			long companyId, long groupId, long classNameId, String articleId,
+			Double version, String title, String description, String content,
+			String type, String[] structureIds, String[] templateIds,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator, start, end, obc);
+		return journalArticleFinder.findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, classNameId, articleId, version, title,
+			description, content, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator,
+			start, end, obc);
 	}
 
 	public Hits search(
-			long companyId, long groupId, String keywords,
+			long companyId, long groupId, long classNameId, String keywords,
 			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
 		throws SystemException {
 
@@ -1538,21 +1582,22 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return search(
-			companyId, groupId, articleId, title, description, content, null,
-			null, params, andOperator, start, end, sort);
+			companyId, groupId, classNameId, articleId, title, description,
+			content, null, null, params, andOperator, start, end, sort);
 	}
 
 	public Hits search(
-			long companyId, long groupId, String articleId, String title,
-			String description, String content, String type, String status,
-			LinkedHashMap<String, Object> params, boolean andSearch, int start,
-			int end, Sort sort)
+			long companyId, long groupId, long classNameId, String articleId,
+			String title, String description, String content, String type,
+			String status, LinkedHashMap<String, Object> params,
+			boolean andSearch, int start, int end, Sort sort)
 		throws SystemException {
 
 		try {
 			Map<String, Serializable> attributes =
 				new HashMap<String, Serializable>();
 
+			attributes.put(Field.CLASS_NAME_ID, classNameId);
 			attributes.put(Field.CONTENT, content);
 			attributes.put(Field.DESCRIPTION, description);
 			attributes.put(Field.ENTRY_CLASS_PK, articleId);
@@ -1590,42 +1635,43 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String keywords, Double version,
-			String type, String structureId, String templateId,
+			long companyId, long groupId, long classNameId, String keywords,
+			Double version, String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, int status, Date reviewDate)
 		throws SystemException {
 
 		return journalArticleFinder.countByKeywords(
-			companyId, groupId, keywords, version, type, structureId,
-			templateId, displayDateGT, displayDateLT, status, reviewDate);
+			companyId, groupId, classNameId, keywords, version, type,
+			structureId, templateId, displayDateGT, displayDateLT, status,
+			reviewDate);
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String articleId, Double version,
-			String title, String description, String content, String type,
-			String structureId, String templateId, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate,
+			long companyId, long groupId, long classNameId, String articleId,
+			Double version, String title, String description, String content,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator)
 		throws SystemException {
 
-		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator);
+		return journalArticleFinder.countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, classNameId, articleId, version, title,
+			description, content, type, structureId, templateId, displayDateGT,
+			displayDateLT, status, reviewDate, andOperator);
 	}
 
 	public int searchCount(
-			long companyId, long groupId, String articleId, Double version,
-			String title, String description, String content, String type,
-			String[] structureIds, String[] templateIds, Date displayDateGT,
-			Date displayDateLT, int status, Date reviewDate,
+			long companyId, long groupId, long classNameId, String articleId,
+			Double version, String title, String description, String content,
+			String type, String[] structureIds, String[] templateIds,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
 			boolean andOperator)
 		throws SystemException {
 
-		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator);
+		return journalArticleFinder.countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, classNameId, articleId, version, title,
+			description, content, type, structureIds, templateIds,
+			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
 	public void subscribe(long userId, long groupId)

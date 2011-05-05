@@ -35,6 +35,10 @@ public class Field implements Serializable {
 
 	public static final String CATEGORY_ID = "categoryId";
 
+	public static final String CLASS_NAME_ID = "classNameId";
+
+	public static final String CLASS_PK = "classPK";
+
 	public static final String COMMENTS = "comments";
 
 	public static final String COMPANY_ID = "companyId";

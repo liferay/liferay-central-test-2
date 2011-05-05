@@ -142,7 +142,14 @@ COMMIT_TRANSACTION;
 
 update DLFolder set repositoryId = groupId;
 
+alter table JournalArticle add classNameId LONG null;
+alter table JournalArticle add classPK LONG null;
 alter table JournalArticle add layoutUuid VARCHAR(75) null;
+
+COMMIT_TRANSACTION;
+
+update JournalArticle set classNameId = 0;
+update JournalArticle set classPK = 0;
 
 alter table Layout add createDate DATE null;
 alter table Layout add modifiedDate DATE null;

@@ -98,6 +98,8 @@ public class JournalIndexer extends BaseIndexer {
 		long scopeGroupId = article.getGroupId();
 		long userId = article.getUserId();
 		String userName = PortalUtil.getUserName(userId, article.getUserName());
+		long classNameId = article.getClassNameId();
+		long classPK = article.getClassPK();
 		Date modifiedDate = article.getModifiedDate();
 		long resourcePrimKey = article.getResourcePrimKey();
 		String articleId = article.getArticleId();
@@ -153,6 +155,8 @@ public class JournalIndexer extends BaseIndexer {
 		document.addKeyword(Field.SCOPE_GROUP_ID, scopeGroupId);
 		document.addKeyword(Field.USER_ID, userId);
 		document.addKeyword(Field.USER_NAME, userName, true);
+		document.addKeyword(Field.CLASS_NAME_ID, classNameId);
+		document.addKeyword(Field.CLASS_PK, classPK);
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -385,6 +389,8 @@ public class JournalIndexer extends BaseIndexer {
 		addLocalizedSearchTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, true);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
+		addSearchTerm(searchQuery, searchContext, Field.CLASS_NAME_ID, false);
+		addSearchTerm(searchQuery, searchContext, Field.CLASS_PK, false);
 
 		int status = GetterUtil.getInteger(
 			searchContext.getAttribute(Field.STATUS),
