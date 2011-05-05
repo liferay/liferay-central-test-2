@@ -268,14 +268,14 @@ public class EditScopeAction extends EditConfigurationAction {
 		String portletTitle = getPortletTitle(
 			actionRequest, portlet, preferences);
 
-		Tuple tuple = getNewScope(actionRequest);
+		Tuple newScopeTuple = getNewScope(actionRequest);
 
-		long newScopeGroupId = (Long)tuple.getObject(0);
+		long newScopeGroupId = (Long)newScopeTuple.getObject(0);
 
 		preferences.setValue("groupId", String.valueOf(newScopeGroupId));
 
 		String oldScopeName = getOldScopeName(actionRequest, portlet);
-		String newScopeName = (String)tuple.getObject(1);
+		String newScopeName = (String)newScopeTuple.getObject(1);
 
 		String newPortletTitle = PortalUtil.getNewPortletTitle(
 			portletTitle, oldScopeName, newScopeName);
