@@ -26,7 +26,22 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  * @author Michael C. Han
  */
-public class Message implements Serializable {
+public class Message implements Serializable, Cloneable {
+
+	public Message clone() {
+		Message cloneMessage = new Message();
+
+		cloneMessage._destinationName = _destinationName;
+		cloneMessage._payload = _payload;
+		cloneMessage._response = _response;
+		cloneMessage._responseDestinationName = _responseDestinationName;
+		cloneMessage._responseId = _responseId;
+		if (_values != null) {
+			cloneMessage._values = new HashMap<String, Object>(_values);
+		}
+
+		return cloneMessage;
+	}
 
 	public boolean contains(String key) {
 		if (_values == null) {

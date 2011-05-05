@@ -302,6 +302,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			if (message == null) {
 				message = new Message();
 			}
+			else {
+				message = message.clone();
+			}
 
 			message.put(RECEIVER_KEY, quartzTrigger.getFullJobName());
 
