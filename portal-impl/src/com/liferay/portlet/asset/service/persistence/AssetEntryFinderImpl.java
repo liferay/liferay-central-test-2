@@ -182,7 +182,7 @@ public class AssetEntryFinderImpl
 		if (entryQuery.getOrderByCol1().equals("ratings") ||
 			entryQuery.getOrderByCol2().equals("ratings")) {
 
-			sb.append(" INNER JOIN ");
+			sb.append(" LEFT JOIN ");
 			sb.append("RatingsEntry ON ");
 			sb.append("(RatingsEntry.classNameId = ");
 			sb.append("AssetEntry.classNameId) AND ");
