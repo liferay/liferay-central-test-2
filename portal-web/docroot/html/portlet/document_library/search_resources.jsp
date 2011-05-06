@@ -41,18 +41,11 @@ else {
 
 String keywords = ParamUtil.getString(request, "keywords");
 
-PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
-
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
 	displayStyle = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", "icon");
 }
-
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
-
-OrderByComparator orderByComparator = DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType);
 %>
 
 <div class="search-info">
@@ -93,6 +86,8 @@ OrderByComparator orderByComparator = DLUtil.getRepositoryModelOrderByComparator
 		headerNames.add("read-count");
 		headerNames.add(StringPool.BLANK);
 
+		SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
+
 		Map<String, String> orderableHeaders = new HashMap<String, String>();
 
 		orderableHeaders.put("name", "name");
@@ -101,12 +96,20 @@ OrderByComparator orderByComparator = DLUtil.getRepositoryModelOrderByComparator
 		orderableHeaders.put("modified-date", "modifiedDate");
 		orderableHeaders.put("read-count", "readCount");
 
-		SearchContainer searchContainer = new SearchContainer(liferayPortletRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
-
 		searchContainer.setOrderableHeaders(orderableHeaders);
+
+		String orderByCol = ParamUtil.getString(request, "orderByCol");
+
 		searchContainer.setOrderByCol(orderByCol);
+
+		String orderByType = ParamUtil.getString(request, "orderByType");
+
 		searchContainer.setOrderByType(orderByType);
+
+		OrderByComparator orderByComparator = DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType);
+
 		searchContainer.setOrderByComparator(orderByComparator);
+
 		searchContainer.setRowChecker(new RowChecker(liferayPortletResponse));
 
 		Hits results = null;
@@ -116,11 +119,11 @@ OrderByComparator orderByComparator = DLUtil.getRepositoryModelOrderByComparator
 
 			SearchContext searchContext = SearchContextFactory.getInstance(request);
 
+			searchContext.setAttribute("paginationType", "more");
 			searchContext.setEnd(searchContainer.getEnd());
 			searchContext.setFolderIds(folderIdsArray);
 			searchContext.setKeywords(keywords);
 			searchContext.setStart(searchContainer.getStart());
-			searchContext.setAttribute("paginationType", "more");
 
 			results = indexer.search(searchContext);
 

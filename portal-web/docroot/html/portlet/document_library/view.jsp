@@ -36,14 +36,6 @@ if (folder != null) {
 	repositoryId = folder.getRepositoryId();
 }
 
-request.setAttribute("view.jsp-folder", folder);
-
-request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
-
-request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
-
-PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
-
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
@@ -64,6 +56,12 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 	portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-col", orderByCol);
 	portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-type", orderByType);
 }
+
+request.setAttribute("view.jsp-folder", folder);
+
+request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
+
+request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 %>
 
 <div class="portlet-msg-error yui3-aui-helper-hidden" id="<portlet:namespace />errorContainer">
@@ -89,11 +87,12 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 		</portlet:resourceURL>
 
 		<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();" %>'>
+
 			<%
-			String taglib = "javascript:event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();";
+			String taglibOnClick = "javascript:event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();";
 			%>
 
-			<aui:button cssClass="search-button" name="search" onClick='<%= taglib %>' value="search" />
+			<aui:button cssClass="search-button" name="search" onClick="<%= taglibOnClick %>" value="search" />
 
 			<aui:input cssClass="keywords" id="keywords" label="" name="keywords" type="text" />
 		</aui:form>
