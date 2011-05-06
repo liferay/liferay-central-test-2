@@ -488,6 +488,8 @@
 			<forward name="portlet.document_library_display.error" path="portlet.document_library_display.error" />
 		</action>
 
+		<action path="/document_library/search" type="com.liferay.portlet.documentlibrary.action.SearchAction" />
+
 		<action path="/document_library/select_folder" type="com.liferay.portlet.documentlibrarydisplay.action.EditFolderAction">
 			<forward name="portlet.document_library_display.edit_folder" path="portlet.document_library_display.select_folder" />
 			<forward name="portlet.document_library_display.error" path="portlet.document_library_display.error" />

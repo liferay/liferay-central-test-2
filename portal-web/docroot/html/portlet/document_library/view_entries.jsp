@@ -36,32 +36,7 @@ String tagName = ParamUtil.getString(request, "tag");
 
 boolean useAssetEntryQuery = (categoryId > 0) || Validator.isNotNull(tagName);
 
-LiferayPortletResponse liferayPortletResponse = null;
-
-if (renderResponse != null) {
-	liferayPortletResponse = (LiferayPortletResponse)renderResponse;
-}
-else {
-	liferayPortletResponse = (LiferayPortletResponse)resourceResponse;
-}
-
-LiferayPortletRequest liferayPortletRequest = null;
-
-if (renderRequest != null) {
-	liferayPortletRequest = (LiferayPortletRequest)renderRequest;
-}
-else {
-	liferayPortletRequest = (LiferayPortletRequest)resourceRequest;
-}
-
-PortalPreferences portalPreferences = null;
-
-if (renderRequest != null) {
-	portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(renderRequest);
-}
-else {
-	portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(resourceRequest);
-}
+PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
@@ -190,54 +165,17 @@ for (int i = 0; i < results.size(); i++) {
 							tempRowURL.setParameter("redirect", currentURL);
 							tempRowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
-							String src = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
-
-							if (PDFProcessorUtil.hasImages(fileEntry)) {
-								src = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
-							}
-
 							request.setAttribute("view_entries.jsp-fileEntry", fileEntry);
+							request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
 							%>
 
 							<c:choose>
 								<c:when test='<%= displayStyle.equals("icon") %>'>
-									<div class="document-display-style icon">
-										<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
-
-										<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
-
-										<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
-											<c:if test="<%= fileEntry.isLocked() %>">
-												<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
-											</c:if>
-
-											<img border="no" class="document-thumbnail" src="<%= src %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
-
-											<span class="document-title">
-												<%= HtmlUtil.escape(StringUtil.shorten(fileEntry.getTitle(), 60)) %>
-											</span>
-										</a>
-									</div>
+									<liferay-util:include page="/html/portlet/document_library/view_file_entry_icon.jsp" />
 								</c:when>
 
 								<c:otherwise>
-									<div class="document-display-style descriptive">
-										<a class="document-link" data-folder="<%= Boolean.FALSE.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(fileEntry.getTitle()) + " - " + HtmlUtil.escape(fileEntry.getDescription()) %>">
-											<c:if test="<%= fileEntry.isLocked() %>">
-												<img alt="<%= LanguageUtil.get(pageContext, "locked") %>" class="locked-icon" src="<%= themeDisplay.getPathThemeImages() %>/file_system/large/overlay_lock.png">
-											</c:if>
-
-											<img border="no" class="document-thumbnail" src="<%= src %>" style="width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
-
-											<span class="document-title"><%= HtmlUtil.escape(fileEntry.getTitle()) %></span>
-
-											<span class="document-description"><%= HtmlUtil.escape(fileEntry.getDescription()) %></span>
-										</a>
-
-										<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
-
-										<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= fileEntry.getFileEntryId() %>" />
-									</div>
+									<liferay-util:include page="/html/portlet/document_library/view_file_entry_descriptive.jsp" />
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -252,20 +190,6 @@ for (int i = 0; i < results.size(); i++) {
 
 				<c:when test="<%= (curFolder != null) %>">
 
-					<%
-					PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
-
-					tempRowURL.setParameter("struts_action", "/document_library/view");
-					tempRowURL.setParameter("redirect", currentURL);
-					tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-					String src = themeDisplay.getPathThemeImages() + "/file_system/large/folder_full_document.png";
-
-					request.setAttribute("view_entries.jsp-folder", curFolder);
-					request.setAttribute("view_entries.jsp-folderId", String.valueOf(curFolder.getFolderId()));
-					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
-					%>
-
 					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
@@ -275,37 +199,28 @@ for (int i = 0; i < results.size(); i++) {
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
+					<%
+					PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
+
+					tempRowURL.setParameter("struts_action", "/document_library/view");
+					tempRowURL.setParameter("redirect", currentURL);
+					tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+
+
+					request.setAttribute("view_entries.jsp-folder", curFolder);
+					request.setAttribute("view_entries.jsp-folderId", String.valueOf(curFolder.getFolderId()));
+					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
+					request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
+					request.setAttribute("view_entries.jsp-viewEntriesURL", viewEntriesURL);
+					%>
+
 					<c:choose>
 						<c:when test='<%= displayStyle.equals("icon") %>'>
-							<div class="document-display-style icon">
-								<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= curFolder.getFolderId() %>" />
-
-								<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
-
-								<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
-									<img border="no" class="document-thumbnail" src="<%= src %>" style="height: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT %>; width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
-
-									<span class="document-title">
-										<%= HtmlUtil.escape(StringUtil.shorten(curFolder.getName(), 60)) %>
-									</span>
-								</a>
-							</div>
+							<liferay-util:include page="/html/portlet/document_library/view_folder_icon.jsp" />
 						</c:when>
 
 						<c:otherwise>
-							<div class="document-display-style descriptive">
-								<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(curFolder.getName()) + " - " + HtmlUtil.escape(curFolder.getDescription()) %>">
-									<img border="no" class="document-thumbnail" src="<%= src %>" style="width: <%= PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH %>;" />
-
-									<span class="document-title"><%= HtmlUtil.escape(curFolder.getName()) %></span>
-
-									<span class="document-description"><%= HtmlUtil.escape(curFolder.getDescription()) %></span>
-								</a>
-
-								<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
-
-								<input class="overlay document-selector" name="<portlet:namespace /><%= RowChecker.ROW_IDS %>" type="checkbox" value="<%= curFolder.getFolderId() %>" />
-							</div>
+							<liferay-util:include page="/html/portlet/document_library/view_folder_descriptive.jsp" />
 						</c:otherwise>
 					</c:choose>
 				</c:when>

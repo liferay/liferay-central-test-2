@@ -30,6 +30,22 @@
 		clear: both;
 	}
 
+	.document-container .search-info {
+		background-color: #CCECF9;
+		margin-bottom: 5px;
+		margin-top: -6px;
+		min-height: 40px;
+		position: relative;
+
+		.keywords {
+			float: none;
+			font-size: 1.4em;
+			font-weight: bold;
+			position: absolute;
+			top: 7px;
+		}
+	}
+
 	.move-list {
 		.move-file {
 			background: #f0faf0 url(<%= themeImagesPath %>/file_system/small/jpg.png) no-repeat 5px 50%;
@@ -339,6 +355,10 @@
 
 		.view-content {
 			background-color: #fafafa;
+		}
+
+		.search-button {
+			float: right;
 		}
 	}
 

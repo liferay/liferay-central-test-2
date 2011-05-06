@@ -19,6 +19,12 @@
 <%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.FileVersion" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.Folder" %>
+<%@ page import="com.liferay.portal.kernel.search.Indexer" %>
+<%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
+<%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
+<%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
+<%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
@@ -37,14 +43,25 @@
 <%@ page import="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" %>
 
 <%
-PortletPreferences preferences = null;
+LiferayPortletResponse liferayPortletResponse = null;
 
-if (renderRequest != null) {
-	preferences = renderRequest.getPreferences();
+if (renderResponse != null) {
+	liferayPortletResponse = (LiferayPortletResponse)renderResponse;
 }
 else {
-	preferences = resourceRequest.getPreferences();
+	liferayPortletResponse = (LiferayPortletResponse)resourceResponse;
 }
+
+LiferayPortletRequest liferayPortletRequest = null;
+
+if (renderRequest != null) {
+	liferayPortletRequest = (LiferayPortletRequest)renderRequest;
+}
+else {
+	liferayPortletRequest = (LiferayPortletRequest)resourceRequest;
+}
+
+PortletPreferences preferences = liferayPortletRequest.getPreferences();
 
 int fileEntriesPerPage = PrefsParamUtil.getInteger(preferences, request, "fileEntriesPerPage", SearchContainer.DEFAULT_DELTA);
 

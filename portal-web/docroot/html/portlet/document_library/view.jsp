@@ -70,30 +70,44 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 	<liferay-ui:message key="your-request-failed-to-complete" />
 </div>
 
-<liferay-portlet:renderURL varImpl="deleteURL">
-	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-</liferay-portlet:renderURL>
+<aui:layout cssClass="view">
+	<aui:column columnWidth="<%= 20 %>" first="<%= true %>">
+		<div class="header-row">
+			<div class="header-row-content"> </div>
+		</div>
 
-<aui:form action="<%= deleteURL.toString() %>" method="get" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="deleteEntryIds" type="hidden" />
-	<aui:input name="fileEntryIds" type="hidden" />
-
-	<aui:layout cssClass="view">
-		<aui:column columnWidth="<%= 20 %>" first="<%= true %>">
-			<div class="header-row">
-				<div class="header-row-content"> </div>
+		<div class="body-row">
+			<div id="<portlet:namespace />folderContainer">
+				<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
 			</div>
+		</div>
+	</aui:column>
 
-			<div class="body-row">
-				<div id="<portlet:namespace />folderContainer">
-					<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
-				</div>
-			</div>
-		</aui:column>
+	<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
+		<portlet:resourceURL var="searchURL">
+			<portlet:param name="struts_action" value="/document_library/search" />
+		</portlet:resourceURL>
 
-		<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
+		<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();" %>'>
+			<%
+			String taglib = "javascript:event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();";
+			%>
+
+			<aui:button cssClass="search-button" name="search" onClick='<%= taglib %>' value="search" />
+
+			<aui:input cssClass="keywords" id="keywords" label="" name="keywords" type="text" />
+		</aui:form>
+
+		<liferay-portlet:renderURL varImpl="editFileEntryURL">
+			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+		</liferay-portlet:renderURL>
+
+		<aui:form action="<%= editFileEntryURL.toString() %>" method="get" name="fm2">
+			<aui:input name="<%= Constants.CMD %>" type="hidden" />
+			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+			<aui:input name="deleteEntryIds" type="hidden" />
+			<aui:input name="fileEntryIds" type="hidden" />
+
 			<div class="header-row">
 				<div class="header-row-content">
 					<div class="toolbar">
@@ -111,9 +125,9 @@ if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
 					<liferay-util:include page="/html/portlet/document_library/view_entries.jsp" />
 				</c:if>
 			</div>
-		</aui:column>
-	</aui:layout>
-</aui:form>
+		</aui:form>
+	</aui:column>
+</aui:layout>
 
 <%
 if (folder != null) {
@@ -145,11 +159,11 @@ if (folder != null) {
 		window,
 		'<portlet:namespace />doFileEntryAction',
 		function(action, url) {
-			document.<portlet:namespace />fm.method = "post";
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
-			document.<portlet:namespace />fm.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
+			document.<portlet:namespace />fm2.method = "post";
+			document.<portlet:namespace />fm2.<portlet:namespace /><%= Constants.CMD %>.value = action;
+			document.<portlet:namespace />fm2.<portlet:namespace />fileEntryIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 
-			submitForm(document.<portlet:namespace />fm, url);
+			submitForm(document.<portlet:namespace />fm2, url);
 		},
 		['liferay-util-list-fields']
 	);
@@ -369,5 +383,32 @@ if (folder != null) {
 			);
 		},
 		'a[data-folder=true]'
+	);
+</aui:script>
+
+<aui:script use="aui-io-plugin">
+	var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+
+	entriesContainer.plug(
+		A.Plugin.IO, {
+			autoLoad: false,
+			dataType: 'json',
+			uri: document.<portlet:namespace />fm1.action
+		}
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />searchFileEntry',
+		function() {
+			var data = {
+				<portlet:namespace />keywords: document.<portlet:namespace />fm1.<portlet:namespace />keywords.value
+			}
+
+			entriesContainer.io.set('data', data);
+
+			entriesContainer.io.start();
+		},
+		[]
 	);
 </aui:script>
