@@ -11,8 +11,8 @@
 	<bean id="com.liferay.portal.cache.keypool.MultiVMKeyPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.keypool.MultiVMKeyPoolPortalCacheManager" />
 	</bean>
-    <bean id="com.liferay.portal.cache.keypool.MultiVMKeyPoolPortalCacheManager" class="com.liferay.portal.cache.keypool.MultiVMKeyPoolPortalCacheManager">
-        <property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
+	<bean id="com.liferay.portal.cache.keypool.MultiVMKeyPoolPortalCacheManager" class="com.liferay.portal.cache.keypool.MultiVMKeyPoolPortalCacheManager">
+		<property name="multiVMPool" ref="com.liferay.portal.kernel.cache.MultiVMPool" />
 		<property name="singleVMPool" ref="com.liferay.portal.kernel.cache.SingleVMPool" />
 	</bean>
 	<bean id="com.liferay.portal.events.StartupHelperUtil" class="com.liferay.portal.events.StartupHelperUtil">
@@ -35,8 +35,8 @@
 		<property name="renderer" ref="com.liferay.portal.kernel.bean.Renderer" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMKeyPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMKeyPoolUtil">
-        <property name="multiVMPool" ref="com.liferay.portal.cache.keypool.MultiVMKeyPool" />
-    </bean>
+		<property name="multiVMPool" ref="com.liferay.portal.cache.keypool.MultiVMKeyPool" />
+	</bean>
 	<bean id="com.liferay.portal.kernel.cache.MultiVMPool" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.kernel.cache.MultiVMPortalCacheManager" />
 	</bean>
