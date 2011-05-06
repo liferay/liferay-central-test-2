@@ -159,6 +159,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			friendlyURL = friendlyURL.concat("-staging");
 		}
 
+		if (className.equals(Group.class.getName())) {
+			site = true;
+		}
+		else if (!className.equals(Organization.class.getName())) {
+			site = false;
+		}
+
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
 			validateName(groupId, user.getCompanyId(), name);
 		}
