@@ -906,8 +906,8 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 		<echo file="svn-revision">Revision: ${svn.info.revision}
 Username: ${svn.username}
 Password: ${svn.password}
-Portal:   ${project.dir}
-Plugins:  ${lp.plugins.dir}</echo>
+Portal: ${project.dir}
+Plugins: ${lp.plugins.dir}</echo>
 	</target>
 
 	<target name="start">
