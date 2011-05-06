@@ -25,6 +25,7 @@ String structureKey = ParamUtil.getString(request, "structureKey");
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewEntriesURL">
 		<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
+		<portlet:param name="structureKey" value="<%= structureKey %>" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
