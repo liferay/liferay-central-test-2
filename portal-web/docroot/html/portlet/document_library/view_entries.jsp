@@ -31,6 +31,8 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(sco
 	status = WorkflowConstants.STATUS_ANY;
 }
 
+String navigation = ParamUtil.getString(request, "navigation","documents-home");
+
 long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
 
@@ -92,37 +94,49 @@ searchContainer.setRowChecker(new RowChecker(liferayPortletResponse));
 List results = null;
 int total = 0;
 
-if (useAssetEntryQuery) {
-	long[] classNameIds = {PortalUtil.getClassNameId(DLFileEntryConstants.getClassName()), PortalUtil.getClassNameId(DLFileShortcut.class.getName())};
+if (navigation.equals("documents-home")) {
+	if (useAssetEntryQuery) {
+		long[] classNameIds = {PortalUtil.getClassNameId(DLFileEntryConstants.getClassName()), PortalUtil.getClassNameId(DLFileShortcut.class.getName())};
 
-	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameIds, searchContainer);
+		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameIds, searchContainer);
 
-	assetEntryQuery.setExcludeZeroViewCount(false);
+		assetEntryQuery.setExcludeZeroViewCount(false);
 
-	results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
-	total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
+		results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+		total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
+	}
+	else {
+		if (true) {
+			results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+		}
+		else {
+			List folders = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
+
+			List fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
+
+			results = ListUtil.copy(folders);
+
+			results.addAll(fileEntries);
+		}
+
+		if (true) {
+			total = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
+		}
+		else {
+			total = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
+			total += DLAppServiceUtil.getFileEntriesCount(repositoryId, folderId);
+		}
+	}
 }
-else {
-	if (true) {
-		results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-	}
-	else {
-		List folders = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
+else if (navigation.equals("my-documents") || navigation.equals("recent-documents")) {
+	long groupFileEntriesUserId = 0;
 
-		List fileEntries = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd(), DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
-
-		results = ListUtil.copy(folders);
-
-		results.addAll(fileEntries);
+	if (navigation.equals("my-documents") && themeDisplay.isSignedIn()) {
+		groupFileEntriesUserId = user.getUserId();
 	}
 
-	if (true) {
-		total = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
-	}
-	else {
-		total = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
-		total += DLAppServiceUtil.getFileEntriesCount(repositoryId, folderId);
-	}
+	results= DLAppServiceUtil.getGroupFileEntries(repositoryId, groupFileEntriesUserId, defaultFolderId, searchContainer.getStart(), searchContainer.getEnd());
+	total= DLAppServiceUtil.getGroupFileEntriesCount(repositoryId, groupFileEntriesUserId, defaultFolderId);
 }
 
 searchContainer.setResults(results);

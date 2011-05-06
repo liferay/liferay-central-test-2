@@ -326,10 +326,6 @@
 		overflow: hidden;
 		position: relative;
 		width: 100%;
-
-		ul li a .icon {
-			float: left;
-		}
 	}
 
 	.header-row {
@@ -407,7 +403,7 @@
 
 		ul, li a {
 			display: block;
-			padding: 4px 0 4px 4px;
+			padding: 6px 0 4px 4px;
 		}
 
 		ul li a {
