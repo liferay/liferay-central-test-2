@@ -50,6 +50,8 @@ public class DefineObjectsTag extends TagSupport {
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
+			pageContext.setAttribute("liferayPortletRequest", portletRequest);
+
 			String portletRequestAttrName = null;
 
 			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
@@ -90,6 +92,8 @@ public class DefineObjectsTag extends TagSupport {
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {
+			pageContext.setAttribute("liferayPortletResponse", portletResponse);
+
 			String portletResponseAttrName = null;
 
 			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {

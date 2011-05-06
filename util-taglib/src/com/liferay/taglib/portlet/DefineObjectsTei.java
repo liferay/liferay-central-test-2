@@ -14,6 +14,9 @@
 
 package com.liferay.taglib.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -54,6 +57,12 @@ public class DefineObjectsTei extends TagExtraInfo {
 		new VariableInfo(
 			"eventResponse", EventResponse.class.getName(), true,
 			VariableInfo.AT_END),
+		new VariableInfo(
+			"liferayPortletRequest", LiferayPortletRequest.class.getName(),
+			true, VariableInfo.AT_END),
+		new VariableInfo(
+			"liferayPortletResponse", LiferayPortletResponse.class.getName(),
+			true, VariableInfo.AT_END),
 		new VariableInfo(
 			"portletConfig", PortletConfig.class.getName(), true,
 			VariableInfo.AT_END),

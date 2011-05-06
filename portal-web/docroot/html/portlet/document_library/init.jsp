@@ -43,24 +43,6 @@
 <%@ page import="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" %>
 
 <%
-LiferayPortletRequest liferayPortletRequest = null;
-
-if (renderRequest != null) {
-	liferayPortletRequest = (LiferayPortletRequest)renderRequest;
-}
-else {
-	liferayPortletRequest = (LiferayPortletRequest)resourceRequest;
-}
-
-LiferayPortletResponse liferayPortletResponse = null;
-
-if (renderResponse != null) {
-	liferayPortletResponse = (LiferayPortletResponse)renderResponse;
-}
-else {
-	liferayPortletResponse = (LiferayPortletResponse)resourceResponse;
-}
-
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
 
 PortletPreferences preferences = liferayPortletRequest.getPreferences();
