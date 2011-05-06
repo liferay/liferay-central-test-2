@@ -339,7 +339,7 @@ if (Validator.isNull(redirect)) {
 					<aui:model-context bean="<%= new WikiPageImpl() %>" model="<%= WikiPage.class %>" />
 				</c:if>
 
-				<aui:input name="summary" label="description-of-the-changes" />
+				<aui:input label="description-of-the-changes" name="summary" />
 
 				<c:if test="<%= !newPage %>">
 					<aui:input inlineLabel="true" label="this-is-a-minor-edit" name="minorEdit" />
