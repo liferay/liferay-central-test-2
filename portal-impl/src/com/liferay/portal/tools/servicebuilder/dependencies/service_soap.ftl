@@ -96,6 +96,8 @@ public class ${entity.name}ServiceSoap {
 				<#else>
 					${returnTypeGenericsName}
 				</#if>
+			<#elseif stringUtil.startsWith(returnValueName, "com.liferay.portal.kernel.json.JSON")>
+				java.lang.String
 			<#else>
 				${returnTypeGenericsName}
 			</#if>
@@ -205,6 +207,8 @@ public class ${entity.name}ServiceSoap {
 							<#else>
 								return returnValue;
 							</#if>
+						<#elseif stringUtil.startsWith(returnValueName, "com.liferay.portal.kernel.json.JSON")>
+								return returnValue.toString();
 						<#else>
 							return returnValue;
 						</#if>
