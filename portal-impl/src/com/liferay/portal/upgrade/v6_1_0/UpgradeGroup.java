@@ -29,6 +29,15 @@ import java.sql.ResultSet;
 public class UpgradeGroup extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		long groupClassNameId = getClassNameId(Group.class.getName());
+
+		runSQL(
+			"update Group_ set site = TRUE where classNameId = " +
+				groupClassNameId);
+
+		long organizationClassNameId = getClassNameId(
+			Organization.class.getName());
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -36,20 +45,22 @@ public class UpgradeGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select groupId, classNameId from group_");
+			String sql =
+				"select distinct Group_.groupId from Group_ inner join " +
+					"Layout on Layout.groupId = Group_.groupId where " +
+						"classNameId = ?";
+
+			ps = con.prepareStatement(sql);
+
+			ps.setLong(1, organizationClassNameId);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
-				long classNameId = rs.getLong("classNameId");
-
-				boolean site = isSite(groupId, classNameId);
 
 				runSQL(
-					"update group_ set site = " + site + " where groupId = " +
-						groupId);
+					"update Group_ set site = TRUE where groupId = " + groupId);
 			}
 		}
 		finally {
@@ -57,57 +68,30 @@ public class UpgradeGroup extends UpgradeProcess {
 		}
 	}
 
-	protected boolean isSite(long groupId, long classNameId) throws Exception {
+	protected long getClassNameId(String className) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		boolean isOrganization = false;
-
 		try {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select value from classname_ where classNameId = ?");
+				"select classNameId from ClassName_ where value = ?");
 
-			ps.setLong(1, classNameId);
+			ps.setString(1, className);
 
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				String className = rs.getString("value");
-
-				if (className.equals(Group.class.getName())) {
-					return true;
-				}
-				else if (className.equals(Organization.class.getName())) {
-					isOrganization = true;
-				}
+				return rs.getLong("classNameId");
 			}
+
+			return 0;
 		}
 		finally {
-			DataAccess.cleanUp(con, ps);
+			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select * from layout where groupId = ?");
-
-			ps.setLong(1, groupId);
-
-			rs = ps.executeQuery();
-
-			if (isOrganization && rs.next()) {
-				return true;
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-
-		return false;
 	}
 
 }
