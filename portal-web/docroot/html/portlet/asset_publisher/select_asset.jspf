@@ -82,6 +82,12 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 			AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(typeSelection, entryId);
 
+			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(entry.getClassPK());
+
+			String title = assetRenderer.getTitle(locale);
+
+			String description = assetRenderer.getSummary(locale);
+
 			entry = entry.toEscapedModel();
 
 			StringBundler sb = new StringBundler(11);
@@ -98,11 +104,11 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 			// Title
 
-			row.addText(entry.getTitle(), rowHREF);
+			row.addText(title, rowHREF);
 
 			// Description
 
-			row.addText(entry.getDescription(), rowHREF);
+			row.addText(description, rowHREF);
 
 			// User name
 

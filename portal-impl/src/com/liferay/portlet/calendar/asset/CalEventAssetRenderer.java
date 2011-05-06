@@ -59,7 +59,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getSummary(Locale locale) {
-		return _event.getTitle();
+		return _event.getDescription();
 	}
 
 	public String getTitle(Locale locale) {

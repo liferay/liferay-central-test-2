@@ -62,7 +62,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getSummary(Locale locale) {
-		return HtmlUtil.stripHtml(_entry.getContent());
+		return HtmlUtil.stripHtml(_entry.getDescription());
 	}
 
 	public String getTitle(Locale locale) {

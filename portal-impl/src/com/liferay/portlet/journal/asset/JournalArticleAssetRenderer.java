@@ -86,7 +86,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getSummary(Locale locale) {
-		return HtmlUtil.stripHtml(_article.getContent());
+		return _article.getDescription(locale);
 	}
 
 	public String getTitle(Locale locale) {
