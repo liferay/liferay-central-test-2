@@ -607,20 +607,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 								if (!exception) {
 									Liferay.after(
-										'<%= portletDisplay.getId() %>:portletRefreshed',
+										'<%= portletDisplay.getId() %>:messagePosted',
 										function(event) {
-											<portlet:namespace />showStatusMessage('success', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-processed-successfully") %>');
-
-											location.hash = '#' + response.randomNamespace + 'messageScroll' + response.messageId;
+											<portlet:namespace />onMessagePosted(response, refreshPage);
 										}
 									);
 
-									if (refreshPage) {
-										window.location.reload();
-									}
-									else {
-										Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
-									}
+								Liferay.fire('<%= portletDisplay.getId() %>:messagePosted', response);
 								}
 								else {
 									var errorKey = '';
@@ -649,6 +642,31 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				);
 			},
 			['aui-io']
+		);
+
+		Liferay.provide(
+			window,
+			'<portlet:namespace />onMessagePosted',
+			function(response, refreshPage) {
+				var A = AUI();
+
+				Liferay.after(
+					'<%= portletDisplay.getId() %>:portletRefreshed',
+					function(event) {
+						<portlet:namespace />showStatusMessage('success', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-processed-successfully") %>');
+
+						location.hash = '#' + response.randomNamespace + 'messageScroll' + response.messageId;
+					}
+				);
+
+				if (refreshPage) {
+					window.location.reload();
+				}
+				else {
+					Liferay.Portlet.refresh('#p_p_id_<%= portletDisplay.getId() %>_');
+				}
+			},
+			['aui-base']
 		);
 
 		Liferay.provide(
