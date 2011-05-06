@@ -29,6 +29,8 @@ public interface Hits extends Serializable {
 
 	public int getLength();
 
+	public Query getQuery();
+
 	public String[] getQueryTerms();
 
 	public float[] getScores();
@@ -44,6 +46,8 @@ public interface Hits extends Serializable {
 	public void setDocs(Document[] docs);
 
 	public void setLength(int length);
+
+	public void setQuery(Query query);
 
 	public void setQueryTerms(String[] queryTerms);
 

@@ -38,6 +38,10 @@ public class HitsImpl implements Hits {
 		return _length;
 	}
 
+	public Query getQuery() {
+		return _query;
+	}
+
 	public String[] getQueryTerms() {
 		return _queryTerms;
 	}
@@ -68,6 +72,10 @@ public class HitsImpl implements Hits {
 
 	public void setLength(int length) {
 		_length = length;
+	}
+
+	public void setQuery(Query query) {
+		_query = query;
 	}
 
 	public void setQueryTerms(String[] queryTerms) {
@@ -107,8 +115,8 @@ public class HitsImpl implements Hits {
 	public List<Document> toList() {
 		List<Document> subset = new ArrayList<Document>(_docs.length);
 
-		for (int i = 0; i < _docs.length; i++) {
-			subset.add(_docs[i]);
+		for (Document _doc : _docs) {
+			subset.add(_doc);
 		}
 
 		return subset;
@@ -116,6 +124,7 @@ public class HitsImpl implements Hits {
 
 	private Document[] _docs;
 	private int _length;
+	private Query _query;
 	private String[] _queryTerms;
 	private float[] _scores = new float[0];
 	private float _searchTime;
