@@ -319,9 +319,9 @@ public class AssetEntryQuery {
 				AssetCategory category =
 					AssetCategoryLocalServiceUtil.getCategory(categoryId);
 
-				leftRightIds[3 * i] = category.getLeftCategoryId();
-				leftRightIds[3 * i + 1] = category.getRightCategoryId();
-				leftRightIds[3 * i + 2] = category.getGroupId();
+				leftRightIds[3 * i] = category.getGroupId();
+				leftRightIds[3 * i + 1] = category.getLeftCategoryId();
+				leftRightIds[3 * i + 2] = category.getRightCategoryId();
 			}
 			catch (Exception e) {
 				_log.warn("Error retrieving category " + categoryId);
