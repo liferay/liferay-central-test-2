@@ -70,6 +70,7 @@ String callback = ParamUtil.getString(request, "callback");
 						<aui:field-wrapper>
 							<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
 								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
+								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
 							</aui:select>
 						</aui:field-wrapper>
 					</aui:column>

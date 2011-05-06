@@ -104,8 +104,37 @@ create table DDMTemplate (
 	script TEXT null
 );
 
+create table DLDocumentMetadataSet (
+	uuid_ VARCHAR(75) null,
+	metadataSetId LONG not null primary key,
+	classNameId LONG,
+	classPK LONG,
+	documentTypeId LONG,
+	DDMStructureId LONG,
+	fileVersionId LONG
+);
+
+create table DLDocumentType (
+	documentTypeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description STRING null
+);
+
+create table DLDocumentType_DDMStructure (
+	documentTypeId LONG not null,
+	structureId LONG not null,
+	primary key (documentTypeId, structureId)
+);
+
 alter table DLFileEntry add repositoryId LONG;
 alter table DLFileEntry add mimeType VARCHAR(75) null;
+alter table DLFileEntry add documentTypeId LONG;
 
 COMMIT_TRANSACTION;
 
@@ -130,6 +159,7 @@ drop index IX_2F8FED9C on DLFileVersion;
 alter table DLFileVersion add repositoryId LONG;
 alter table DLFileVersion add fileEntryId LONG;
 alter table DLFileVersion add mimeType VARCHAR(75) null;
+alter table DLFileVersion add documentTypeId LONG;
 
 COMMIT_TRANSACTION;
 

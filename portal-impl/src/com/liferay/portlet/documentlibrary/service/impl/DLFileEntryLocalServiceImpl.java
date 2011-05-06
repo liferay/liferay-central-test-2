@@ -54,6 +54,7 @@ import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceB
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
@@ -66,6 +67,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -98,6 +100,13 @@ public class DLFileEntryLocalServiceImpl
 			counterLocalService.increment(DLFileEntry.class.getName()));
 		String extension = (String)serviceContext.getAttribute("extension");
 		String mimeType = (String)serviceContext.getAttribute("contentType");
+		Long documentTypeId = (Long)serviceContext.getAttribute(
+			"documentTypeId");
+
+		if (documentTypeId == null) {
+			documentTypeId = 0L;
+		}
+
 		Date now = new Date();
 
 		validateFile(groupId, folderId, title, extension, is);
@@ -122,6 +131,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntry.setMimeType(mimeType);
 		dlFileEntry.setTitle(title);
 		dlFileEntry.setDescription(description);
+		dlFileEntry.setDocumentTypeId(documentTypeId);
 		dlFileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
 		dlFileEntry.setSize(size);
 		dlFileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
@@ -148,7 +158,7 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion dlFileVersion = addFileVersion(
 			user, dlFileEntry, serviceContext.getModifiedDate(now), extension,
 			mimeType, title, description, null, StringPool.BLANK,
-			DLFileEntryConstants.DEFAULT_VERSION, size,
+			documentTypeId, DLFileEntryConstants.DEFAULT_VERSION, size,
 			WorkflowConstants.STATUS_DRAFT, serviceContext);
 
 		// Folder
@@ -770,9 +780,10 @@ public class DLFileEntryLocalServiceImpl
 	protected DLFileVersion addFileVersion(
 			User user, DLFileEntry dlFileEntry, Date modifiedDate,
 			String extension, String mimeType, String title, String description,
-			String changeLog, String extraSettings, String version, long size,
-			int status, ServiceContext serviceContext)
-		throws SystemException {
+			String changeLog, String extraSettings, long documentTypeId,
+			String version, long size, int status,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
 		long fileVersionId = counterLocalService.increment();
 
@@ -801,6 +812,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);
 		dlFileVersion.setExtraSettings(extraSettings);
+		dlFileVersion.setDocumentTypeId(documentTypeId);
 		dlFileVersion.setVersion(version);
 		dlFileVersion.setSize(size);
 		dlFileVersion.setStatus(status);
@@ -810,6 +822,14 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setExpandoBridgeAttributes(serviceContext);
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
+
+		Map<Long, Fields> fieldsMap =
+			(Map<Long, Fields>)serviceContext.getAttribute("fieldsMap");
+
+		if (documentTypeId > 0) {
+			dlDocumentMetadataSetLocalService.updateMetadataSets(
+				fileVersionId, documentTypeId, fieldsMap, serviceContext);
+		}
 
 		return dlFileVersion;
 	}
@@ -1023,6 +1043,13 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
+		Long documentTypeId = (Long)serviceContext.getAttribute(
+			"documentTypeId");
+
+		if (documentTypeId == null) {
+			documentTypeId = 0L;
+		}
+
 		Date now = new Date();
 
 		validateFile(
@@ -1064,7 +1091,8 @@ public class DLFileEntryLocalServiceImpl
 				updateFileVersion(
 					user, latestDLFileVersion, sourceFileName, extension,
 					mimeType, title, description, changeLog, extraSettings,
-					version, size, latestDLFileVersion.getStatus(),
+					documentTypeId, version, size,
+					latestDLFileVersion.getStatus(),
 					serviceContext.getModifiedDate(now), serviceContext);
 			}
 			else {
@@ -1074,14 +1102,15 @@ public class DLFileEntryLocalServiceImpl
 					updateFileVersion(
 						user, latestDLFileVersion, sourceFileName, extension,
 						mimeType, title, description, changeLog, extraSettings,
-						version, size, latestDLFileVersion.getStatus(),
+						documentTypeId, version, size,
+						latestDLFileVersion.getStatus(),
 						serviceContext.getModifiedDate(now), serviceContext);
 				}
 				else {
 					dlFileVersion = addFileVersion(
 						user, dlFileEntry, serviceContext.getModifiedDate(now),
 						extension, mimeType, title, description, changeLog,
-						extraSettings, version, size,
+						extraSettings, documentTypeId, version, size,
 						WorkflowConstants.STATUS_DRAFT, serviceContext);
 				}
 			}
@@ -1094,8 +1123,8 @@ public class DLFileEntryLocalServiceImpl
 			dlFileVersion = addFileVersion(
 				user, dlFileEntry, serviceContext.getModifiedDate(now),
 				extension, mimeType, title, description, changeLog,
-				extraSettings, version, size, WorkflowConstants.STATUS_DRAFT,
-				serviceContext);
+				extraSettings, documentTypeId, version, size,
+				WorkflowConstants.STATUS_DRAFT, serviceContext);
 		}
 
 		File file = null;
@@ -1205,9 +1234,10 @@ public class DLFileEntryLocalServiceImpl
 	protected void updateFileVersion(
 			User user, DLFileVersion dlFileVersion, String sourceFileName,
 			String extension, String mimeType, String title, String description,
-			String changeLog, String extraSettings, String version, long size,
-			int status, Date statusDate, ServiceContext serviceContext)
-		throws SystemException {
+			String changeLog, String extraSettings, long documentTypeId,
+			String version, long size, int status, Date statusDate,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(sourceFileName)) {
 			dlFileVersion.setExtension(extension);
@@ -1225,8 +1255,18 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setStatusByUserName(user.getFullName());
 		dlFileVersion.setStatusDate(statusDate);
 		dlFileVersion.setExpandoBridgeAttributes(serviceContext);
+		dlFileVersion.setDocumentTypeId(documentTypeId);
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
+
+		Map<Long, Fields> fieldsMap =
+			(Map<Long, Fields>)serviceContext.getAttribute("fieldsMap");
+
+		if (documentTypeId > 0) {
+			dlDocumentMetadataSetLocalService.updateMetadataSets(
+				dlFileVersion.getFileVersionId(), documentTypeId, fieldsMap,
+				serviceContext);
+		}
 	}
 
 	protected void validateFile(

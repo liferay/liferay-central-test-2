@@ -162,6 +162,16 @@ create index IX_C4F283C8 on DDMTemplate (type_);
 create index IX_F2A243A7 on DDMTemplate (uuid_);
 create unique index IX_1AA75CE3 on DDMTemplate (uuid_, groupId);
 
+create unique index IX_D8B1BFBC on DLDocumentMetadataSet (DDMStructureId, fileVersionId);
+create index IX_5598211A on DLDocumentMetadataSet (documentTypeId);
+create index IX_18D42171 on DLDocumentMetadataSet (fileVersionId);
+create index IX_79AEF83E on DLDocumentMetadataSet (uuid_);
+
+create index IX_C0A3BBE7 on DLDocumentType (groupId);
+
+create index IX_E5E327B2 on DLDocumentType_DDMStructure (documentTypeId);
+create index IX_F8746210 on DLDocumentType_DDMStructure (structureId);
+
 create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_F4AF5636 on DLFileEntry (groupId);
 create index IX_93CF8193 on DLFileEntry (groupId, folderId);

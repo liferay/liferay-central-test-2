@@ -419,6 +419,24 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
+	* Gets the document type ID of this d l file entry.
+	*
+	* @return the document type ID of this d l file entry
+	*/
+	public long getDocumentTypeId() {
+		return _dlFileEntry.getDocumentTypeId();
+	}
+
+	/**
+	* Sets the document type ID of this d l file entry.
+	*
+	* @param documentTypeId the document type ID of this d l file entry
+	*/
+	public void setDocumentTypeId(long documentTypeId) {
+		_dlFileEntry.setDocumentTypeId(documentTypeId);
+	}
+
+	/**
 	* Gets the version of this d l file entry.
 	*
 	* @return the version of this d l file entry

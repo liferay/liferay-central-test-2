@@ -40,6 +40,9 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
@@ -47,6 +50,8 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
@@ -130,6 +135,101 @@ public abstract class DLAppServiceBaseImpl extends PrincipalBean
 	public void setDLAppHelperLocalService(
 		DLAppHelperLocalService dlAppHelperLocalService) {
 		this.dlAppHelperLocalService = dlAppHelperLocalService;
+	}
+
+	/**
+	 * Gets the d l document metadata set local service.
+	 *
+	 * @return the d l document metadata set local service
+	 */
+	public DLDocumentMetadataSetLocalService getDLDocumentMetadataSetLocalService() {
+		return dlDocumentMetadataSetLocalService;
+	}
+
+	/**
+	 * Sets the d l document metadata set local service.
+	 *
+	 * @param dlDocumentMetadataSetLocalService the d l document metadata set local service
+	 */
+	public void setDLDocumentMetadataSetLocalService(
+		DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService) {
+		this.dlDocumentMetadataSetLocalService = dlDocumentMetadataSetLocalService;
+	}
+
+	/**
+	 * Gets the d l document metadata set persistence.
+	 *
+	 * @return the d l document metadata set persistence
+	 */
+	public DLDocumentMetadataSetPersistence getDLDocumentMetadataSetPersistence() {
+		return dlDocumentMetadataSetPersistence;
+	}
+
+	/**
+	 * Sets the d l document metadata set persistence.
+	 *
+	 * @param dlDocumentMetadataSetPersistence the d l document metadata set persistence
+	 */
+	public void setDLDocumentMetadataSetPersistence(
+		DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence) {
+		this.dlDocumentMetadataSetPersistence = dlDocumentMetadataSetPersistence;
+	}
+
+	/**
+	 * Gets the d l document type local service.
+	 *
+	 * @return the d l document type local service
+	 */
+	public DLDocumentTypeLocalService getDLDocumentTypeLocalService() {
+		return dlDocumentTypeLocalService;
+	}
+
+	/**
+	 * Sets the d l document type local service.
+	 *
+	 * @param dlDocumentTypeLocalService the d l document type local service
+	 */
+	public void setDLDocumentTypeLocalService(
+		DLDocumentTypeLocalService dlDocumentTypeLocalService) {
+		this.dlDocumentTypeLocalService = dlDocumentTypeLocalService;
+	}
+
+	/**
+	 * Gets the d l document type remote service.
+	 *
+	 * @return the d l document type remote service
+	 */
+	public DLDocumentTypeService getDLDocumentTypeService() {
+		return dlDocumentTypeService;
+	}
+
+	/**
+	 * Sets the d l document type remote service.
+	 *
+	 * @param dlDocumentTypeService the d l document type remote service
+	 */
+	public void setDLDocumentTypeService(
+		DLDocumentTypeService dlDocumentTypeService) {
+		this.dlDocumentTypeService = dlDocumentTypeService;
+	}
+
+	/**
+	 * Gets the d l document type persistence.
+	 *
+	 * @return the d l document type persistence
+	 */
+	public DLDocumentTypePersistence getDLDocumentTypePersistence() {
+		return dlDocumentTypePersistence;
+	}
+
+	/**
+	 * Sets the d l document type persistence.
+	 *
+	 * @param dlDocumentTypePersistence the d l document type persistence
+	 */
+	public void setDLDocumentTypePersistence(
+		DLDocumentTypePersistence dlDocumentTypePersistence) {
+		this.dlDocumentTypePersistence = dlDocumentTypePersistence;
 	}
 
 	/**
@@ -709,6 +809,16 @@ public abstract class DLAppServiceBaseImpl extends PrincipalBean
 	protected DLAppService dlAppService;
 	@BeanReference(type = DLAppHelperLocalService.class)
 	protected DLAppHelperLocalService dlAppHelperLocalService;
+	@BeanReference(type = DLDocumentMetadataSetLocalService.class)
+	protected DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService;
+	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
+	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
+	@BeanReference(type = DLDocumentTypeLocalService.class)
+	protected DLDocumentTypeLocalService dlDocumentTypeLocalService;
+	@BeanReference(type = DLDocumentTypeService.class)
+	protected DLDocumentTypeService dlDocumentTypeService;
+	@BeanReference(type = DLDocumentTypePersistence.class)
+	protected DLDocumentTypePersistence dlDocumentTypePersistence;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)

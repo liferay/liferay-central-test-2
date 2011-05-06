@@ -41,6 +41,7 @@ StructureDisplayTerms displayTerms = new StructureDisplayTerms(renderRequest);
 		<aui:column>
 			<aui:select label="type" name="<%= displayTerms.CLASS_NAME_ID %>">
 				<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
+				<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
 			</aui:select>
 		</aui:column>
 

@@ -68,6 +68,7 @@ public class DLFileEntryJSONSerializer {
 		jsonObject.put("title", model.getTitle());
 		jsonObject.put("description", model.getDescription());
 		jsonObject.put("extraSettings", model.getExtraSettings());
+		jsonObject.put("documentTypeId", model.getDocumentTypeId());
 		jsonObject.put("version", model.getVersion());
 		jsonObject.put("size", model.getSize());
 		jsonObject.put("readCount", model.getReadCount());

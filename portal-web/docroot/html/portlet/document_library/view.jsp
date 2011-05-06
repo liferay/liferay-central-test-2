@@ -78,6 +78,10 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 			<div id="<portlet:namespace />folderContainer">
 				<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
 			</div>
+
+			<div id="<portlet:namespace />documentTypeContainer">
+				<liferay-util:include page="/html/portlet/document_library/view_document_types.jsp" />
+			</div>
 		</div>
 	</aui:column>
 

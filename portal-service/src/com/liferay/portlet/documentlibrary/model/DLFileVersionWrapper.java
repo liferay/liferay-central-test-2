@@ -327,6 +327,24 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	}
 
 	/**
+	* Gets the document type ID of this d l file version.
+	*
+	* @return the document type ID of this d l file version
+	*/
+	public long getDocumentTypeId() {
+		return _dlFileVersion.getDocumentTypeId();
+	}
+
+	/**
+	* Sets the document type ID of this d l file version.
+	*
+	* @param documentTypeId the document type ID of this d l file version
+	*/
+	public void setDocumentTypeId(long documentTypeId) {
+		_dlFileVersion.setDocumentTypeId(documentTypeId);
+	}
+
+	/**
 	* Gets the version of this d l file version.
 	*
 	* @return the version of this d l file version

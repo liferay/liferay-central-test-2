@@ -88,6 +88,8 @@
 	<import class="com.liferay.portlet.calendar.model.CalEvent" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLApp" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLAppHelper" />
+	<import class="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet" />
+	<import class="com.liferay.portlet.documentlibrary.model.DLDocumentType" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileEntry" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileRank" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileShortcut" />
@@ -1304,6 +1306,32 @@
 		<property name="firstReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="secondReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetImpl" table="DLDocumentMetadataSet">
+		<cache usage="read-write" />
+		<id name="metadataSetId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="DDMStructureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fileVersionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.portlet.documentlibrary.model.impl.DLDocumentTypeImpl" table="DLDocumentType">
+		<cache usage="read-write" />
+		<id name="documentTypeId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" table="DLFileEntry">
 		<cache usage="read-write" />
 		<id name="fileEntryId" type="long">
@@ -1326,6 +1354,7 @@
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="readCount" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
@@ -1379,6 +1408,7 @@
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="changeLog" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="extraSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="size" column="size_" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />

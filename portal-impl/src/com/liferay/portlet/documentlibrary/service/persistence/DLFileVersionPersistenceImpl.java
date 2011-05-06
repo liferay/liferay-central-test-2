@@ -384,6 +384,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		dlFileVersionImpl.setDescription(dlFileVersion.getDescription());
 		dlFileVersionImpl.setChangeLog(dlFileVersion.getChangeLog());
 		dlFileVersionImpl.setExtraSettings(dlFileVersion.getExtraSettings());
+		dlFileVersionImpl.setDocumentTypeId(dlFileVersion.getDocumentTypeId());
 		dlFileVersionImpl.setVersion(dlFileVersion.getVersion());
 		dlFileVersionImpl.setSize(dlFileVersion.getSize());
 		dlFileVersionImpl.setStatus(dlFileVersion.getStatus());
@@ -1749,6 +1750,10 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
+	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
+	@BeanReference(type = DLDocumentTypePersistence.class)
+	protected DLDocumentTypePersistence dlDocumentTypePersistence;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileRankPersistence.class)

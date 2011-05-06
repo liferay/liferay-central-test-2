@@ -52,8 +52,20 @@ if (fileEntry != null) {
 
 FileVersion fileVersion = null;
 
+long fileVersionId = 0;
+
+long documentTypeId = ParamUtil.getLong(request, "documentTypeId", -1);
+
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
+
+	fileVersionId = fileVersion.getFileVersionId();
+
+	if ((documentTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
+		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
+
+		documentTypeId = dlFileVersion.getDocumentTypeId();
+	}
 }
 
 long assetClassPK = 0;
@@ -274,6 +286,54 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 			</c:if>
 		</c:if>
 
+		<%
+		List documentTypes = DLDocumentTypeServiceUtil.getGroupDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		%>
+
+			<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
+				<aui:option label="none" value="0" />
+
+				<%
+				for (int i = 0; i < documentTypes.size(); i++) {
+					DLDocumentType documentType = (DLDocumentType)documentTypes.get(i);
+				%>
+
+					<aui:option label="<%= documentType.getName() %>" value="<%= documentType.getPrimaryKey() %>" selected="<%= (documentTypeId == documentType.getPrimaryKey()) %>" />
+
+				<%
+				}
+				%>
+			</aui:select>
+
+		<%
+		if (documentTypeId > 0) {
+			try {
+				List ddmStructures = DLDocumentTypeServiceUtil.getDocumentType(documentTypeId).getDDMStructures();
+
+				for (int i = 0; i < ddmStructures.size(); i++) {
+					DDMStructure ddmStructure = (DDMStructure)ddmStructures.get(i);
+
+					Fields fields = null;
+
+					try {
+						DLDocumentMetadataSet metadataSet = DLDocumentMetadataSetLocalServiceUtil.getMetadataSet(ddmStructure.getStructureId(), fileVersionId);
+
+						fields = StorageEngineUtil.getFields(metadataSet.getClassPK());
+					}
+					catch (Exception e) {
+					}
+		%>
+
+			<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
+
+		<%
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+		%>
+
 		<c:if test="<%= fileEntry == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
@@ -359,6 +419,11 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 </c:if>
 
 <aui:script>
+	function <portlet:namespace />changeDocumentType() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PREVIEW %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />lock() {
 		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library_display/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}

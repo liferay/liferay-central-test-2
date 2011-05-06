@@ -666,6 +666,17 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLDocumentType",
+	{
+		addDocumentType: true,
+		deleteDocumentType: true,
+		getDocumentType: true,
+		getGroupDocumentTypes: true,
+		updateDocumentType: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLFileEntry",
 	{
 		copyFileEntry: true,

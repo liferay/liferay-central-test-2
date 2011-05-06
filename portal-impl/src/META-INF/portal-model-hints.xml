@@ -1220,6 +1220,28 @@
 		<field name="firstReminder" type="int" />
 		<field name="secondReminder" type="int" />
 	</model>
+	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet">
+		<field name="uuid" type="String" />
+		<field name="metadataSetId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="documentTypeId" type="long" />
+		<field name="DDMStructureId" type="long" />
+		<field name="fileVersionId" type="long" />
+	</model>
+	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentType">
+		<field name="documentTypeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntry">
 		<field name="uuid" type="String" />
 		<field name="fileEntryId" type="long" />
@@ -1247,6 +1269,7 @@
 		<field name="extraSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="documentTypeId" type="long" />
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="readCount" type="int" />
@@ -1297,6 +1320,7 @@
 		<field name="extraSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="documentTypeId" type="long" />
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="status" type="int" />

@@ -485,6 +485,34 @@ create table DDMTemplate (
 	script TEXT null
 );
 
+create table DLDocumentMetadataSet (
+	uuid_ VARCHAR(75) null,
+	metadataSetId LONG not null primary key,
+	classNameId LONG,
+	classPK LONG,
+	documentTypeId LONG,
+	DDMStructureId LONG,
+	fileVersionId LONG
+);
+
+create table DLDocumentType (
+	documentTypeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description STRING null
+);
+
+create table DLDocumentType_DDMStructure (
+	documentTypeId LONG not null,
+	structureId LONG not null,
+	primary key (documentTypeId, structureId)
+);
+
 create table DLFileEntry (
 	uuid_ VARCHAR(75) null,
 	fileEntryId LONG not null primary key,
@@ -504,6 +532,7 @@ create table DLFileEntry (
 	title VARCHAR(255) null,
 	description STRING null,
 	extraSettings TEXT null,
+	documentTypeId LONG,
 	version VARCHAR(75) null,
 	size_ LONG,
 	readCount INTEGER
@@ -551,6 +580,7 @@ create table DLFileVersion (
 	description STRING null,
 	changeLog VARCHAR(75) null,
 	extraSettings TEXT null,
+	documentTypeId LONG,
 	version VARCHAR(75) null,
 	size_ LONG,
 	status INTEGER,

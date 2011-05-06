@@ -29,18 +29,25 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
 <%@ page import="com.liferay.portlet.documentlibrary.NoSuchFolderException" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLDocumentType" %>
+<%@ page import="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileShortcut" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLDocumentTypeServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMStructure" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
 
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);

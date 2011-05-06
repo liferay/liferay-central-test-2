@@ -44,6 +44,7 @@ public class DLFileVersionSoap implements Serializable {
 		soapModel.setDescription(model.getDescription());
 		soapModel.setChangeLog(model.getChangeLog());
 		soapModel.setExtraSettings(model.getExtraSettings());
+		soapModel.setDocumentTypeId(model.getDocumentTypeId());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
 		soapModel.setStatus(model.getStatus());
@@ -214,6 +215,14 @@ public class DLFileVersionSoap implements Serializable {
 		_extraSettings = extraSettings;
 	}
 
+	public long getDocumentTypeId() {
+		return _documentTypeId;
+	}
+
+	public void setDocumentTypeId(long documentTypeId) {
+		_documentTypeId = documentTypeId;
+	}
+
 	public String getVersion() {
 		return _version;
 	}
@@ -276,6 +285,7 @@ public class DLFileVersionSoap implements Serializable {
 	private String _description;
 	private String _changeLog;
 	private String _extraSettings;
+	private long _documentTypeId;
 	private String _version;
 	private long _size;
 	private int _status;

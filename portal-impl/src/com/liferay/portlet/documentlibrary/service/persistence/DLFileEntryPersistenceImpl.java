@@ -577,6 +577,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		dlFileEntryImpl.setTitle(dlFileEntry.getTitle());
 		dlFileEntryImpl.setDescription(dlFileEntry.getDescription());
 		dlFileEntryImpl.setExtraSettings(dlFileEntry.getExtraSettings());
+		dlFileEntryImpl.setDocumentTypeId(dlFileEntry.getDocumentTypeId());
 		dlFileEntryImpl.setVersion(dlFileEntry.getVersion());
 		dlFileEntryImpl.setSize(dlFileEntry.getSize());
 		dlFileEntryImpl.setReadCount(dlFileEntry.getReadCount());
@@ -6701,6 +6702,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
 	}
 
+	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
+	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
+	@BeanReference(type = DLDocumentTypePersistence.class)
+	protected DLDocumentTypePersistence dlDocumentTypePersistence;
 	@BeanReference(type = DLFileEntryPersistence.class)
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileRankPersistence.class)

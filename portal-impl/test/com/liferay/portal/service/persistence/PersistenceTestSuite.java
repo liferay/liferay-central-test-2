@@ -32,6 +32,8 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceTe
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceTest;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceTest;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistenceTest;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistenceTest;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceTest;
@@ -193,6 +195,8 @@ public class PersistenceTestSuite extends TestSuite {
 
 		testSuite.addTestSuite(CalEventPersistenceTest.class);
 
+		testSuite.addTestSuite(DLDocumentMetadataSetPersistenceTest.class);
+		testSuite.addTestSuite(DLDocumentTypePersistenceTest.class);
 		testSuite.addTestSuite(DLFileEntryPersistenceTest.class);
 		testSuite.addTestSuite(DLFileRankPersistenceTest.class);
 		testSuite.addTestSuite(DLFileShortcutPersistenceTest.class);

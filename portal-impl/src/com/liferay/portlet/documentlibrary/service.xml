@@ -34,6 +34,74 @@
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 	</entity>
+	<entity name="DLDocumentMetadataSet" uuid="true" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="metadataSetId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
+		<column name="documentTypeId" type="long" />
+		<column name="DDMStructureId" type="long" />
+		<column name="fileVersionId" type="long" />
+		
+		<!-- Finder methods -->
+
+		<finder name="D_F" return-type="DLDocumentMetadataSet" unique="true">
+			<finder-column name="DDMStructureId" />
+			<finder-column name="fileVersionId" />
+		</finder>
+		<finder name="DocumentTypeId" return-type="Collection">
+			<finder-column name="documentTypeId" />
+		</finder>
+		<finder name="FileVersionId" return-type="Collection">
+			<finder-column name="fileVersionId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.dynamicdatamapping" entity="DDMStructureLink" />
+	</entity>
+	<entity name="DLDocumentType" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="documentTypeId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+				
+		<!-- Relationships -->
+
+		<column name="ddmStructure" type="Collection" entity="com.liferay.portlet.dynamicdatamapping.DDMStructure" mapping-table="DLDocumentType_DDMStructure" />
+		
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.dynamicdatamapping" entity="DDMStructure" />
+	</entity>
 	<entity name="DLFileEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -64,6 +132,7 @@
 		<column name="title" type="String" />
 		<column name="description" type="String" />
 		<column name="extraSettings" type="String" />
+		<column name="documentTypeId" type="long" />
 		<column name="version" type="String" />
 		<column name="size" type="long" />
 		<column name="readCount" type="int" />
@@ -242,6 +311,7 @@
 		<column name="description" type="String" />
 		<column name="changeLog" type="String" />
 		<column name="extraSettings" type="String" />
+		<column name="documentTypeId" type="long" />
 		<column name="version" type="String" />
 		<column name="size" type="long" />
 		<column name="status" type="int" />

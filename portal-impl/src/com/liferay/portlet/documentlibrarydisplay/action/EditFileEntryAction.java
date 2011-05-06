@@ -20,6 +20,7 @@ import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
@@ -43,8 +44,16 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.File;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -95,7 +104,12 @@ public class EditFileEntryAction extends PortletAction {
 
 			WindowState windowState = actionRequest.getWindowState();
 
-			if (!windowState.equals(LiferayWindowState.POP_UP)) {
+			if (cmd.equals(Constants.PREVIEW)) {
+
+				// render
+
+			}
+			else if (!windowState.equals(LiferayWindowState.POP_UP)) {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
@@ -220,6 +234,44 @@ public class EditFileEntryAction extends PortletAction {
 		}
 	}
 
+	protected HashMap<Long, Fields> getFieldsMap(
+			UploadPortletRequest uploadRequest, long documentTypeId)
+		throws SystemException {
+
+		HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
+
+		if (documentTypeId > 0) {
+			List<DDMStructure> ddmStructures =
+				DLDocumentTypeLocalServiceUtil.getDDMStructures(documentTypeId);
+
+			for (DDMStructure ddmStructure : ddmStructures) {
+				String namespace = String.valueOf(
+					ddmStructure.getStructureId());
+
+				Set<String> fieldNames = ddmStructure.getFieldNames();
+
+				Fields fields = new Fields();
+
+				for (String name : fieldNames) {
+					Field field = new Field();
+
+					field.setName(name);
+
+					String value = ParamUtil.getString(
+						uploadRequest, namespace + name);
+
+					field.setValue(value);
+
+					fields.put(field);
+				}
+
+				fieldsMap.put(ddmStructure.getStructureId(), fields);
+			}
+		}
+
+		return fieldsMap;
+	}
+
 	protected void lockFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
@@ -309,6 +361,8 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String changeLog = ParamUtil.getString(uploadRequest, "changeLog");
+		long documentTypeId = ParamUtil.getLong(
+			uploadRequest, "documentTypeId");
 		boolean majorVersion = ParamUtil.getBoolean(
 			uploadRequest, "majorVersion");
 
@@ -322,6 +376,13 @@ public class EditFileEntryAction extends PortletAction {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
+
+		serviceContext.setAttribute("documentTypeId", documentTypeId);
+
+		HashMap<Long, Fields> fieldsMap = getFieldsMap(
+			uploadRequest, documentTypeId);
+
+		serviceContext.setAttribute("fieldsMap", fieldsMap);
 
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(title)) {
