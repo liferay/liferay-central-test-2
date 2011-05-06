@@ -71,7 +71,12 @@ public class InputPermissionsParamsTagUtil {
 
 			return RoleConstants.GUEST;
 		}
-		else {
+
+		List<String> communityDefaultActions =
+			ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+				modelName);
+
+		if (communityDefaultActions.contains(ActionKeys.VIEW)) {
 			Group parentGroup = GroupLocalServiceUtil.getGroup(
 				themeDisplay.getParentGroupId());
 
@@ -81,7 +86,7 @@ public class InputPermissionsParamsTagUtil {
 			return defaultGroupRole.getName();
 		}
 
-		return StringPool.BLANK;
+		return RoleConstants.OWNER;
 	}
 
 	public static void doEndTag(String modelName, PageContext pageContext)
@@ -97,6 +102,10 @@ public class InputPermissionsParamsTagUtil {
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
+
+			Layout layout = themeDisplay.getLayout();
+
+			Group layoutGroup = layout.getGroup();
 
 			Group group = themeDisplay.getScopeGroup();
 
@@ -119,7 +128,22 @@ public class InputPermissionsParamsTagUtil {
 
 				boolean communityChecked = communityDefaultActions.contains(
 					action);
-				boolean guestChecked = guestDefaultActions.contains(action);
+
+				boolean guestChecked = false;
+
+				if (layoutGroup.isControlPanel()) {
+					if (!group.hasPrivateLayouts() &&
+						guestDefaultActions.contains(action)) {
+
+						guestChecked = true;
+					}
+				}
+				else if (layout.isPublicLayout() &&
+						 guestDefaultActions.contains(action)) {
+
+					guestChecked = true;
+				}
+
 				boolean guestDisabled = guestUnsupportedActions.contains(
 					action);
 
