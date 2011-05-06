@@ -14,7 +14,8 @@
 
 package com.liferay.portlet.assetpublisher.action;
 
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.service.AssetEntryServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
@@ -42,7 +44,6 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
 
 import java.io.OutputStream;
 
@@ -52,6 +53,7 @@ import java.util.List;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -74,7 +76,7 @@ public class RSSAction extends PortletAction {
 		OutputStream os = resourceResponse.getPortletOutputStream();
 
 		try {
-			os.write(getRSS(resourceRequest));
+			os.write(getRSS(resourceRequest, resourceResponse));
 		}
 		finally {
 			os.close();
@@ -82,16 +84,17 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected String exportToRSS(
+			PortletRequest portletRequest, PortletResponse portletResponse,
 			String name, String description, String type, double version,
-			String displayStyle, String feedURL, String tagURL,
+			String displayStyle, String assetLinkBehavior,
 			List<AssetEntry> assetEntries)
-		throws SystemException {
+		throws Exception {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
 		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
 		syndFeed.setTitle(name);
-		syndFeed.setLink(feedURL);
+		syndFeed.setLink(getFeedURL(portletRequest));
 		syndFeed.setDescription(GetterUtil.getString(description, name));
 
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
@@ -99,21 +102,11 @@ public class RSSAction extends PortletAction {
 		syndFeed.setEntries(entries);
 
 		for (AssetEntry entry : assetEntries) {
-			AssetRendererFactory assetRendererFactory =
-				AssetRendererFactoryRegistryUtil.
-					getAssetRendererFactoryByClassName(entry.getClassName());
+			String link = getEntryURL(
+				portletRequest, portletResponse, entry, assetLinkBehavior);
 
 			String author = HtmlUtil.escape(
 				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(tagURL);
-			sb.append(assetRendererFactory.getType());
-			sb.append("/id/");
-			sb.append(entry.getEntryId());
-
-			String link = sb.toString();
 
 			String value = null;
 
@@ -143,16 +136,11 @@ public class RSSAction extends PortletAction {
 			entries.add(syndEntry);
 		}
 
-		try {
-			return RSSUtil.export(syndFeed);
-		}
-		catch (FeedException fe) {
-			throw new SystemException(fe);
-		}
+		return RSSUtil.export(syndFeed);
 	}
 
-	protected String getEntryURL(PortletRequest portletRequest)
-		throws Exception {
+	protected String getAssetPublisherURL(
+		PortletRequest portletRequest) throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -181,15 +169,84 @@ public class RSSAction extends PortletAction {
 		return sb.toString();
 	}
 
+	protected String getEntryURL(
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			AssetEntry entry, String assetLinkBehavior)
+		throws Exception {
+
+		if ("viewInPortlet".equals(assetLinkBehavior)) {
+			return getEntryURLViewInContext(
+				portletRequest, portletResponse, entry);
+		}
+		else {
+			return getEntryURLAssetPublisher(
+				portletRequest, portletResponse, entry);
+		}
+	}
+
+	protected String getEntryURLAssetPublisher(
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			AssetEntry entry)
+		throws Exception {
+
+		AssetRendererFactory assetRendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				entry.getClassName());
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(getAssetPublisherURL(portletRequest));
+		sb.append(assetRendererFactory.getType());
+		sb.append("/id/");
+		sb.append(entry.getEntryId());
+
+		return sb.toString();
+	}
+
+	protected String getEntryURLViewInContext(
+			PortletRequest portletRequest, PortletResponse portletResponse,
+			AssetEntry entry)
+		throws Exception {
+
+		AssetRendererFactory assetRendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				entry.getClassName());
+
+		AssetRenderer assetRenderer =
+			assetRendererFactory.getAssetRenderer(entry.getClassPK());
+
+		String viewInContextURL = assetRenderer.getURLViewInContext(
+			(LiferayPortletRequest)portletRequest,
+			(LiferayPortletResponse)portletResponse, null);
+
+		StringBundler sb = new StringBundler(2);
+
+		if (!viewInContextURL.startsWith(Http.HTTP_WITH_SLASH) &&
+			!viewInContextURL.startsWith(Http.HTTPS_WITH_SLASH)) {
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)portletRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+				sb.append(themeDisplay.getPortalURL());
+		}
+
+		sb.append(viewInContextURL);
+
+		return sb.toString();
+	}
+
 	protected String getFeedURL(PortletRequest portletRequest)
 		throws Exception {
 
-		String feedURL = getEntryURL(portletRequest);
+		String feedURL = getAssetPublisherURL(portletRequest);
 
 		return feedURL.concat("rss");
 	}
 
-	protected byte[] getRSS(PortletRequest portletRequest) throws Exception {
+	protected byte[] getRSS(
+			PortletRequest portletRequest, PortletResponse portletResponse)
+		throws Exception {
+
 		PortletPreferences preferences = portletRequest.getPreferences();
 
 		String selectionStyle = preferences.getValue(
@@ -206,6 +263,8 @@ public class RSSAction extends PortletAction {
 			preferences, themeDisplay.getScopeGroupId(),
 			themeDisplay.getLayout());
 
+		String assetLinkBehavior = preferences.getValue(
+			"assetLinkBehaviour", "showFullContent");
 		boolean excludeZeroViewCount = GetterUtil.getBoolean(
 			preferences.getValue("exclude-zero-view-count", "0"));
 
@@ -232,9 +291,8 @@ public class RSSAction extends PortletAction {
 			assetEntryQuery);
 
 		String rss = exportToRSS(
-				rssName, null, rssFormatType, rssFormatVersion, rssDisplayStyle,
-				getFeedURL(portletRequest), getEntryURL(portletRequest),
-				assetEntries);
+			portletRequest, portletResponse, rssName, null, rssFormatType,
+			rssFormatVersion, rssDisplayStyle, assetLinkBehavior, assetEntries);
 
 		return rss.getBytes(StringPool.UTF8);
 	}
