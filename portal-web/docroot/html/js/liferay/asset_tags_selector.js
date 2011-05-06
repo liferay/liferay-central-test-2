@@ -31,7 +31,7 @@ AUI().add(
 		 * OPTIONS
 		 *
 		 * Required
-		 * className (string): The class name of the current asset. 
+		 * className (string): The class name of the current asset.
 		 * curEntries (string): The current tags.
 		 * instanceVar {string}: The instance variable for this class.
 		 * hiddenInput {string}: The hidden input used to pass in the current tags.
@@ -262,7 +262,7 @@ AUI().add(
 
 						Liferay.Service.Asset.AssetTag.getGroupsTags(
 							{
-								groupIds: [groupIds]
+								groupIds: groupIds
 							},
 							callback
 						);

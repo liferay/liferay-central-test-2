@@ -166,7 +166,7 @@ AUI().add(
 
 						Liferay.Service.Asset.AssetVocabulary.getGroupsVocabularies(
 							{
-								groupIds: [groupIds],
+								groupIds: groupIds,
 								className: className
 							},
 							callback
