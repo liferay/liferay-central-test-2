@@ -160,12 +160,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (className.equals(Group.class.getName())) {
-			site = true;
+			if (!site) {
+				throw new IllegalArgumentException();
+			}
 		}
 		else if (!className.equals(Organization.class.getName()) &&
 				 className.startsWith("com.liferay.portal.model.")) {
 
-			site = false;
+			if (site) {
+				throw new IllegalArgumentException();
+			}
 		}
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
