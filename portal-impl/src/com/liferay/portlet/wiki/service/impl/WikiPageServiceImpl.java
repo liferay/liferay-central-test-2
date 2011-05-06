@@ -331,9 +331,9 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
 
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
-		syndFeed.setEntries(entries);
+		syndFeed.setEntries(syndEntries);
 
 		WikiPage latestPage = null;
 
@@ -385,7 +385,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 					syndEntry.setDescription(syndContent);
 
-					entries.add(syndEntry);
+					syndEntries.add(syndEntry);
 				}
 			}
 			else {
@@ -407,7 +407,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 				syndEntry.setDescription(syndContent);
 
-				entries.add(syndEntry);
+				syndEntries.add(syndEntry);
 			}
 
 			syndEntry.setLink(link.toString());

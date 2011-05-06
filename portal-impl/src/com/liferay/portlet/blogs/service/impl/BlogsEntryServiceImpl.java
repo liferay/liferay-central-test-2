@@ -348,9 +348,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
 
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
-		syndFeed.setEntries(entries);
+		syndFeed.setEntries(syndEntries);
 
 		for (BlogsEntry entry : blogsEntries) {
 			String author = HtmlUtil.escape(
@@ -413,7 +413,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			syndEntry.setDescription(syndContent);
 
-			entries.add(syndEntry);
+			syndEntries.add(syndEntry);
 		}
 
 		try {

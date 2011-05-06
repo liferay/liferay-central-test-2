@@ -108,18 +108,18 @@ public class RSSUtil {
 		return formatVersion;
 	}
 
-	private static void _regexpStrip(SyndFeed feed) {
-		feed.setTitle(_regexpStrip(feed.getTitle()));
-		feed.setDescription(_regexpStrip(feed.getDescription()));
+	private static void _regexpStrip(SyndFeed syndFeed) {
+		syndFeed.setTitle(_regexpStrip(syndFeed.getTitle()));
+		syndFeed.setDescription(_regexpStrip(syndFeed.getDescription()));
 
-		List<SyndEntry> entries = feed.getEntries();
+		List<SyndEntry> syndEntries = syndFeed.getEntries();
 
-		for (SyndEntry entry : entries) {
-			entry.setTitle(_regexpStrip(entry.getTitle()));
+		for (SyndEntry syndEntry : syndEntries) {
+			syndEntry.setTitle(_regexpStrip(syndEntry.getTitle()));
 
-			SyndContent content = entry.getDescription();
+			SyndContent syndContent = syndEntry.getDescription();
 
-			content.setValue(_regexpStrip(content.getValue()));
+			syndContent.setValue(_regexpStrip(syndContent.getValue()));
 		}
 	}
 

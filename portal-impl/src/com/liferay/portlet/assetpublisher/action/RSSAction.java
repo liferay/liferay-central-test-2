@@ -97,16 +97,17 @@ public class RSSAction extends PortletAction {
 		syndFeed.setLink(getFeedURL(portletRequest));
 		syndFeed.setDescription(GetterUtil.getString(description, name));
 
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
-		syndFeed.setEntries(entries);
+		syndFeed.setEntries(syndEntries);
 
-		for (AssetEntry entry : assetEntries) {
+		for (AssetEntry assetEntry : assetEntries) {
 			String link = getEntryURL(
-				portletRequest, portletResponse, entry, assetLinkBehavior);
+				portletRequest, portletResponse, assetEntry, assetLinkBehavior);
 
 			String author = HtmlUtil.escape(
-				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
+				PortalUtil.getUserName(
+					assetEntry.getUserId(), assetEntry.getUserName()));
 
 			String value = null;
 
@@ -114,17 +115,17 @@ public class RSSAction extends PortletAction {
 				value = StringPool.BLANK;
 			}
 			else {
-				value = entry.getSummary();
+				value = assetEntry.getSummary();
 			}
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setAuthor(author);
-			syndEntry.setTitle(entry.getTitle());
+			syndEntry.setTitle(assetEntry.getTitle());
 			syndEntry.setLink(link);
 			syndEntry.setUri(syndEntry.getLink());
-			syndEntry.setPublishedDate(entry.getCreateDate());
-			syndEntry.setUpdatedDate(entry.getModifiedDate());
+			syndEntry.setPublishedDate(assetEntry.getCreateDate());
+			syndEntry.setUpdatedDate(assetEntry.getModifiedDate());
 
 			SyndContent syndContent = new SyndContentImpl();
 
@@ -133,7 +134,7 @@ public class RSSAction extends PortletAction {
 
 			syndEntry.setDescription(syndContent);
 
-			entries.add(syndEntry);
+			syndEntries.add(syndEntry);
 		}
 
 		return RSSUtil.export(syndFeed);
@@ -171,49 +172,49 @@ public class RSSAction extends PortletAction {
 
 	protected String getEntryURL(
 			PortletRequest portletRequest, PortletResponse portletResponse,
-			AssetEntry entry, String assetLinkBehavior)
+			AssetEntry assetEntry, String assetLinkBehavior)
 		throws Exception {
 
 		if ("viewInPortlet".equals(assetLinkBehavior)) {
 			return getEntryURLViewInContext(
-				portletRequest, portletResponse, entry);
+				portletRequest, portletResponse, assetEntry);
 		}
 		else {
 			return getEntryURLAssetPublisher(
-				portletRequest, portletResponse, entry);
+				portletRequest, portletResponse, assetEntry);
 		}
 	}
 
 	protected String getEntryURLAssetPublisher(
 			PortletRequest portletRequest, PortletResponse portletResponse,
-			AssetEntry entry)
+			AssetEntry assetEntry)
 		throws Exception {
 
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				entry.getClassName());
+				assetEntry.getClassName());
 
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(getAssetPublisherURL(portletRequest));
 		sb.append(assetRendererFactory.getType());
 		sb.append("/id/");
-		sb.append(entry.getEntryId());
+		sb.append(assetEntry.getEntryId());
 
 		return sb.toString();
 	}
 
 	protected String getEntryURLViewInContext(
 			PortletRequest portletRequest, PortletResponse portletResponse,
-			AssetEntry entry)
+			AssetEntry assetEntry)
 		throws Exception {
 
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
-				entry.getClassName());
+				assetEntry.getClassName());
 
 		AssetRenderer assetRenderer =
-			assetRendererFactory.getAssetRenderer(entry.getClassPK());
+			assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
 		String viewInContextURL = assetRenderer.getURLViewInContext(
 			(LiferayPortletRequest)portletRequest,

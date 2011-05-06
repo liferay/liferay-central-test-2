@@ -118,9 +118,9 @@ public class RSSAction extends PortletAction {
 		syndFeed.setLink(feedURL.toString());
 		syndFeed.setDescription(feed.getDescription());
 
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
-		syndFeed.setEntries(entries);
+		syndFeed.setEntries(syndEntries);
 
 		List<JournalArticle> articles = JournalRSSUtil.getArticles(feed);
 
@@ -168,7 +168,7 @@ public class RSSAction extends PortletAction {
 
 			syndEntry.setDescription(syndContent);
 
-			entries.add(syndEntry);
+			syndEntries.add(syndEntry);
 		}
 
 		try {

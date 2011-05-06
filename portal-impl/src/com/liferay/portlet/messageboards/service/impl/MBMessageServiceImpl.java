@@ -658,9 +658,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
 
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
+		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
-		syndFeed.setEntries(entries);
+		syndFeed.setEntries(syndEntries);
 
 		Iterator<MBMessage> itr = messages.iterator();
 
@@ -719,7 +719,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			syndEntry.setDescription(syndContent);
 
-			entries.add(syndEntry);
+			syndEntries.add(syndEntry);
 		}
 
 		try {
