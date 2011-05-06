@@ -1,6 +1,6 @@
 <#setting number_format = "0">
 
-insert into Group_ values (${group.groupId}, ${companyId}, ${defaultUserId}, ${group.classNameId}, ${group.classPK}, 0, 0, '${group.name}', '', 0, '', '${group.friendlyURL}', TRUE);
+insert into Group_ values (${group.groupId}, ${companyId}, ${defaultUserId}, ${group.classNameId}, ${group.classPK}, 0, 0, '${group.name}', '', 0, '', '${group.friendlyURL}', <#if group.site>TRUE<#else>FALSE</#if>, TRUE);
 
 ${sampleSQLBuilder.insertSecurity("com.liferay.portal.model.Group", group.groupId)}
 

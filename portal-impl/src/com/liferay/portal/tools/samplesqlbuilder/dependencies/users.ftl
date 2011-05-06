@@ -16,7 +16,7 @@
 		<#assign contact = dataFactory.addContact(firstName, lastName)>
 		<#assign user = dataFactory.addUser(false, "test" + userScreenNameIncrementer.get())>
 
-		<#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassName.classNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName)>
+		<#assign userGroup = dataFactory.addGroup(counter.get(), dataFactory.userClassName.classNameId, user.userId, stringUtil.valueOf(user.userId), "/" + user.screenName, false)>
 
 		<#include "users_user_private_layouts.ftl">
 		<#include "users_user_public_layouts.ftl">

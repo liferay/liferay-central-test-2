@@ -13,7 +13,7 @@
 <#list 1..maxGroupCount as groupCount>
 	<#assign groupId = groupCount>
 
-	<#assign group = dataFactory.addGroup(groupId, dataFactory.groupClassName.classNameId, groupId, "Community " + groupCount, "/community" + groupCount)>
+	<#assign group = dataFactory.addGroup(groupId, dataFactory.groupClassName.classNameId, groupId, "Community " + groupCount, "/community" + groupCount, true)>
 
 	<#include "groups_group_private_layouts.ftl">
 	<#include "groups_group_public_layouts.ftl">

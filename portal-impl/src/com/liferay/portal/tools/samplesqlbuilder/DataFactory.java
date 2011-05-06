@@ -174,7 +174,7 @@ public class DataFactory {
 
 	public Group addGroup(
 			long groupId, long classNameId, long classPK, String name,
-			String friendlyURL)
+			String friendlyURL, boolean site)
 		throws Exception {
 
 		Group group = new GroupImpl();
@@ -184,6 +184,7 @@ public class DataFactory {
 		group.setClassPK(classPK);
 		group.setName(name);
 		group.setFriendlyURL(friendlyURL);
+		group.setSite(site);
 
 		return group;
 	}
@@ -670,6 +671,7 @@ public class DataFactory {
 		group.setClassPK(group.getGroupId());
 		group.setName(GroupConstants.GUEST);
 		group.setFriendlyURL("/guest");
+		group.setSite(true);
 
 		_groups.add(group);
 
