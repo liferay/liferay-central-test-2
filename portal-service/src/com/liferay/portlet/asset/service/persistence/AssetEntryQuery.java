@@ -310,7 +310,7 @@ public class AssetEntryQuery {
 	}
 
 	private long[] _getLeftAndRightCategoryIds(long[] categoryIds) {
-		long[] leftRightIds = new long[categoryIds.length * 2];
+		long[] leftRightIds = new long[categoryIds.length * 3];
 
 		for (int i = 0; i < categoryIds.length; i++) {
 			long categoryId = categoryIds[i];
@@ -319,8 +319,9 @@ public class AssetEntryQuery {
 				AssetCategory category =
 					AssetCategoryLocalServiceUtil.getCategory(categoryId);
 
-				leftRightIds[2 * i] = category.getLeftCategoryId();
-				leftRightIds[2 * i + 1] = category.getRightCategoryId();
+				leftRightIds[3 * i] = category.getLeftCategoryId();
+				leftRightIds[3 * i + 1] = category.getRightCategoryId();
+				leftRightIds[3 * i + 2] = category.getGroupId();
 			}
 			catch (Exception e) {
 				_log.warn("Error retrieving category " + categoryId);

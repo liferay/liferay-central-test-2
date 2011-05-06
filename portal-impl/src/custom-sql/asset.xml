@@ -135,7 +135,7 @@
 				AssetCategory ON
 					(AssetCategory.categoryId = AssetEntries_AssetCategories.categoryId)
 			WHERE
-				(AssetCategory.leftCategoryId BETWEEN ? AND ?)
+				(AssetCategory.leftCategoryId BETWEEN ? AND ?) AND (AssetCategory.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetEntryFinder.findByAndTagIds">
