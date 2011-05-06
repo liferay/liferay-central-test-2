@@ -346,7 +346,7 @@ for (int i = 0; i < results.size(); i++) {
 
 					row.addText(String.valueOf(fileEntry.getReadCount()));
 
-					row.addJSP("/html/portlet/library_admin/document_library.jsp");
+					row.addJSP("/html/portlet/document_library/file_entry_action.jsp");
 
 					resultRows.add(row);
 					%>
