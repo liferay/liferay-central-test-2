@@ -172,6 +172,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 			_booleanQuery, field, startValue, endValue);
 	}
 
+	public void addRangeTerm(String field, String startValue, String endValue) {
+		LuceneHelperUtil.addRangeTerm(
+			_booleanQuery, field, startValue, endValue);
+	}
+
 	public void addRequiredTerm(String field, boolean value) {
 		LuceneHelperUtil.addRequiredTerm(_booleanQuery, field, value);
 	}
@@ -248,6 +253,10 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 	public org.apache.lucene.search.BooleanQuery getBooleanQuery() {
 		return _booleanQuery;
+	}
+
+	public Object getWrappedQuery() {
+		return getBooleanQuery();
 	}
 
 	public String toString() {

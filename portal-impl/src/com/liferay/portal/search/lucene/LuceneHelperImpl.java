@@ -129,8 +129,19 @@ public class LuceneHelperImpl implements LuceneHelper {
 		BooleanQuery booleanQuery, String field, String startValue,
 		String endValue) {
 
+		boolean includeLower = true;
+		boolean includeUpper = true;
+
+		if (startValue.equals(StringPool.STAR)) {
+			includeLower = false;
+		}
+
+		if (endValue.equals(StringPool.STAR)) {
+			includeUpper = false;
+		}
+
 		TermRangeQuery termRangeQuery = new TermRangeQuery(
-			field, startValue, endValue, true, true);
+			field, startValue, endValue, includeLower, includeUpper);
 
 		booleanQuery.add(termRangeQuery, BooleanClause.Occur.SHOULD);
 	}

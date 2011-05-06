@@ -42,6 +42,10 @@ public class TermQueryImpl extends BaseQueryImpl implements TermQuery {
 		return _termQuery;
 	}
 
+	public Object getWrappedQuery() {
+		return getTermQuery();
+	}
+
 	public String toString() {
 		return _termQuery.toString();
 	}

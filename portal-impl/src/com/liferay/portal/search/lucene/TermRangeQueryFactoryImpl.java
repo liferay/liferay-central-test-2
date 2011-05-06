@@ -14,30 +14,20 @@
 
 package com.liferay.portal.search.lucene;
 
-import com.liferay.portal.kernel.search.BaseQueryImpl;
-import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.search.TermRangeQuery;
+import com.liferay.portal.kernel.search.TermRangeQueryFactory;
 
 /**
- * @author Bruno Farache
+ * @author Raymond Augé
  */
-public class LuceneQueryImpl extends BaseQueryImpl implements Query {
+public class TermRangeQueryFactoryImpl implements TermRangeQueryFactory {
 
-	public LuceneQueryImpl(org.apache.lucene.search.Query query) {
-		_query = query;
+	public TermRangeQuery create(
+		String field, String lowerTerm, String upperTerm, boolean includeLower,
+		boolean includeUpper) {
+
+		return new TermRangeQueryImpl(
+			field, lowerTerm, upperTerm, includeLower, includeUpper);
 	}
-
-	public org.apache.lucene.search.Query getQuery() {
-		return _query;
-	}
-
-	public Object getWrappedQuery() {
-		return _query;
-	}
-
-	public String toString() {
-		return _query.toString();
-	}
-
-	private org.apache.lucene.search.Query _query;
 
 }

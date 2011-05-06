@@ -31,6 +31,10 @@ public class WildcardQueryImpl extends BaseQueryImpl implements WildcardQuery {
 		return _queryTerm;
 	}
 
+	public Object getWrappedQuery() {
+		return this;
+	}
+
 	private QueryTerm _queryTerm;
 
 }

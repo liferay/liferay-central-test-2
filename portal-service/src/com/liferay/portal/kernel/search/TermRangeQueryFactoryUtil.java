@@ -14,17 +14,29 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.io.Serializable;
-
 /**
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
-public interface Query extends Serializable {
+public class TermRangeQueryFactoryUtil {
 
-	public QueryConfig getQueryConfig();
+	public static TermRangeQuery create(
+		String field, String lowerTerm, String upperTerm, boolean includeLower,
+		boolean includeUpper) {
 
-	public Object getWrappedQuery();
+		return getTermRangeQueryFactory().create(
+			field, lowerTerm, upperTerm, includeLower, includeUpper);
+	}
 
-	public void setQueryConfig(QueryConfig queryConfig);
+	public static TermRangeQueryFactory getTermRangeQueryFactory() {
+		return _termRangeQueryFactory;
+	}
+
+	public void setTermRangeQueryFactory(
+		TermRangeQueryFactory termRangeQueryFactory) {
+
+		_termRangeQueryFactory = termRangeQueryFactory;
+	}
+
+	private static TermRangeQueryFactory _termRangeQueryFactory;
 
 }

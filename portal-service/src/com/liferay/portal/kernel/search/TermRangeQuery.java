@@ -12,32 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.search.lucene;
-
-import com.liferay.portal.kernel.search.BaseQueryImpl;
-import com.liferay.portal.kernel.search.Query;
+package com.liferay.portal.kernel.search;
 
 /**
- * @author Bruno Farache
+ * @author Raymond Augé
  */
-public class LuceneQueryImpl extends BaseQueryImpl implements Query {
+public interface TermRangeQuery extends Query {
 
-	public LuceneQueryImpl(org.apache.lucene.search.Query query) {
-		_query = query;
-	}
+	public String getField();
 
-	public org.apache.lucene.search.Query getQuery() {
-		return _query;
-	}
+	public String getLowerTerm();
 
-	public Object getWrappedQuery() {
-		return _query;
-	}
+	public String getUpperTerm();
 
-	public String toString() {
-		return _query.toString();
-	}
+	public boolean includeLower();
 
-	private org.apache.lucene.search.Query _query;
+	public boolean includeUpper();
+
+	public String toString();
 
 }

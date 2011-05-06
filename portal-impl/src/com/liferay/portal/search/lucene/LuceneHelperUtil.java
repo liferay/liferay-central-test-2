@@ -192,6 +192,14 @@ public class LuceneHelperUtil {
 			String.valueOf(endValue));
 	}
 
+	public static void addRangeTerm(
+		BooleanQuery booleanQuery, String field, String startValue,
+		String endValue) {
+
+		getLuceneHelper().addRangeTerm(
+			booleanQuery, field, startValue, endValue);
+	}
+
 	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, boolean value) {
 

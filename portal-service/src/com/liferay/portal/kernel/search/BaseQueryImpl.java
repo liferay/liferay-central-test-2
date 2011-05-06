@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.search;
 /**
  * @author Michael C. Han
  */
-public class BaseQueryImpl implements Query {
+public abstract class BaseQueryImpl implements Query {
 
 	public QueryConfig getQueryConfig() {
 		if (_queryConfig == null) {
@@ -26,6 +26,8 @@ public class BaseQueryImpl implements Query {
 
 		return _queryConfig;
 	}
+
+	public abstract Object getWrappedQuery();
 
 	public void setQueryConfig(QueryConfig queryConfig) {
 		_queryConfig = queryConfig;

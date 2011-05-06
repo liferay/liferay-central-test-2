@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryTerm;
+import com.liferay.portal.kernel.search.TermRangeQuery;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -141,9 +142,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, int startValue, int endValue) {
-		for (int i = startValue; i <= endValue; i++) {
-			addTerm(field, i);
-		}
+		TermRangeQuery query = new TermRangeQueryImpl(
+			field, String.valueOf(startValue), String.valueOf(endValue), true,
+			true);
+
+		add(query, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRangeTerm(
@@ -153,9 +156,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, long startValue, long endValue) {
-		for (long i = startValue; i <= endValue; i++) {
-			addTerm(field, i);
-		}
+		TermRangeQuery query = new TermRangeQueryImpl(
+			field, String.valueOf(startValue), String.valueOf(endValue), true,
+			true);
+
+		add(query, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRangeTerm(String field, Long startValue, Long endValue) {
@@ -163,13 +168,22 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, short startValue, short endValue) {
-		for (short i = startValue; i <= endValue; i++) {
-			addTerm(field, i);
-		}
+		TermRangeQuery query = new TermRangeQueryImpl(
+			field, String.valueOf(startValue), String.valueOf(endValue), true,
+			true);
+
+		add(query, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRangeTerm(String field, Short startValue, Short endValue) {
 		addRangeTerm(field, startValue.shortValue(), endValue.shortValue());
+	}
+
+	public void addRangeTerm(String field, String startValue, String endValue) {
+		TermRangeQuery query = new TermRangeQueryImpl(
+			field, startValue, endValue, true, true);
+
+		add(query, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRequiredTerm(String field, boolean value) {
@@ -306,6 +320,10 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		else {
 			addTerm(field, value, like);
 		}
+	}
+
+	public Object getWrappedQuery() {
+		return this;
 	}
 
 	public List<BooleanClause> clauses() {
