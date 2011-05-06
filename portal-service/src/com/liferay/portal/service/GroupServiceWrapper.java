@@ -30,21 +30,22 @@ public class GroupServiceWrapper implements GroupService {
 
 	public com.liferay.portal.model.Group addGroup(long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
+		java.lang.String friendlyURL, boolean site, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupService.addGroup(liveGroupId, name, description, type,
-			friendlyURL, active, serviceContext);
+			friendlyURL, site, active, serviceContext);
 	}
 
 	public com.liferay.portal.model.Group addGroup(java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
-		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
+		boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupService.addGroup(name, description, type, friendlyURL,
-			active, serviceContext);
+			site, active, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)

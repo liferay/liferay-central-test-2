@@ -39,24 +39,24 @@ public class GroupServiceUtil {
 	 */
 	public static com.liferay.portal.model.Group addGroup(long liveGroupId,
 		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
+		java.lang.String friendlyURL, boolean site, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addGroup(liveGroupId, name, description, type, friendlyURL,
-			active, serviceContext);
+			site, active, serviceContext);
 	}
 
 	public static com.liferay.portal.model.Group addGroup(
 		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
+		java.lang.String friendlyURL, boolean site, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addGroup(name, description, type, friendlyURL, active,
-			serviceContext);
+				   .addGroup(name, description, type, friendlyURL, site,
+			active, serviceContext);
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)

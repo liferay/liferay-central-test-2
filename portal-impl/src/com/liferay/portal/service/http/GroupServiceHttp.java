@@ -55,7 +55,8 @@ public class GroupServiceHttp {
 	public static com.liferay.portal.model.Group addGroup(
 		HttpPrincipal httpPrincipal, long liveGroupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
-		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
+		boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -63,8 +64,8 @@ public class GroupServiceHttp {
 					"addGroup", _addGroupParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					liveGroupId, name, description, type, friendlyURL, active,
-					serviceContext);
+					liveGroupId, name, description, type, friendlyURL, site,
+					active, serviceContext);
 
 			Object returnObj = null;
 
@@ -95,7 +96,8 @@ public class GroupServiceHttp {
 	public static com.liferay.portal.model.Group addGroup(
 		HttpPrincipal httpPrincipal, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
-		boolean active, com.liferay.portal.service.ServiceContext serviceContext)
+		boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -103,7 +105,7 @@ public class GroupServiceHttp {
 					"addGroup", _addGroupParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, name,
-					description, type, friendlyURL, active, serviceContext);
+					description, type, friendlyURL, site, active, serviceContext);
 
 			Object returnObj = null;
 
@@ -728,12 +730,12 @@ public class GroupServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(GroupServiceHttp.class);
 	private static final Class<?>[] _addGroupParameterTypes0 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
-			int.class, java.lang.String.class, boolean.class,
+			int.class, java.lang.String.class, boolean.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addGroupParameterTypes1 = new Class[] {
 			java.lang.String.class, java.lang.String.class, int.class,
-			java.lang.String.class, boolean.class,
+			java.lang.String.class, boolean.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addRoleGroupsParameterTypes2 = new Class[] {

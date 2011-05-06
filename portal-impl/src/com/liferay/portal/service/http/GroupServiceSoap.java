@@ -66,12 +66,13 @@ import java.rmi.RemoteException;
 public class GroupServiceSoap {
 	public static com.liferay.portal.model.GroupSoap addGroup(
 		long liveGroupId, java.lang.String name, java.lang.String description,
-		int type, java.lang.String friendlyURL, boolean active,
+		int type, java.lang.String friendlyURL, boolean site, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(liveGroupId,
-					name, description, type, friendlyURL, active, serviceContext);
+					name, description, type, friendlyURL, site, active,
+					serviceContext);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
@@ -84,12 +85,12 @@ public class GroupServiceSoap {
 
 	public static com.liferay.portal.model.GroupSoap addGroup(
 		java.lang.String name, java.lang.String description, int type,
-		java.lang.String friendlyURL, boolean active,
+		java.lang.String friendlyURL, boolean site, boolean active,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
-					description, type, friendlyURL, active, serviceContext);
+					description, type, friendlyURL, site, active, serviceContext);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
