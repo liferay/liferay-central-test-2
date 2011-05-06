@@ -214,6 +214,7 @@
 			</basic>
 			<basic name="typeSettings" />
 			<basic name="friendlyURL" />
+			<basic name="site" />
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>

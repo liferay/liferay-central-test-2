@@ -78,6 +78,7 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		newGroup.setType(nextInt());
 		newGroup.setTypeSettings(randomString());
 		newGroup.setFriendlyURL(randomString());
+		newGroup.setSite(randomBoolean());
 		newGroup.setActive(randomBoolean());
 
 		_persistence.update(newGroup, false);
@@ -98,6 +99,7 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingGroup.getType(), newGroup.getType());
 		assertEquals(existingGroup.getTypeSettings(), newGroup.getTypeSettings());
 		assertEquals(existingGroup.getFriendlyURL(), newGroup.getFriendlyURL());
+		assertEquals(existingGroup.getSite(), newGroup.getSite());
 		assertEquals(existingGroup.getActive(), newGroup.getActive());
 	}
 
@@ -268,6 +270,7 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		group.setType(nextInt());
 		group.setTypeSettings(randomString());
 		group.setFriendlyURL(randomString());
+		group.setSite(randomBoolean());
 		group.setActive(randomBoolean());
 
 		_persistence.update(group, false);

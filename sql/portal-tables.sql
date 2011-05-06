@@ -638,6 +638,7 @@ create table Group_ (
 	type_ INTEGER,
 	typeSettings STRING null,
 	friendlyURL VARCHAR(100) null,
+	site BOOLEAN,
 	active_ BOOLEAN
 );
 

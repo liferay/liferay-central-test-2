@@ -333,6 +333,7 @@
 		<column name="type" type="int" />
 		<column name="typeSettings" type="String" />
 		<column name="friendlyURL" type="String" />
+		<column name="site" type="boolean" />
 		<column name="active" type="boolean" />
 
 		<!-- Relationships -->

@@ -300,6 +300,33 @@ public class GroupWrapper implements Group {
 	}
 
 	/**
+	* Gets the site of this group.
+	*
+	* @return the site of this group
+	*/
+	public boolean getSite() {
+		return _group.getSite();
+	}
+
+	/**
+	* Determines if this group is site.
+	*
+	* @return <code>true</code> if this group is site; <code>false</code> otherwise
+	*/
+	public boolean isSite() {
+		return _group.isSite();
+	}
+
+	/**
+	* Sets whether this group is site.
+	*
+	* @param site the site of this group
+	*/
+	public void setSite(boolean site) {
+		_group.setSite(site);
+	}
+
+	/**
 	* Gets the active of this group.
 	*
 	* @return the active of this group
@@ -491,10 +518,6 @@ public class GroupWrapper implements Group {
 
 	public boolean isRegularSite() {
 		return _group.isRegularSite();
-	}
-
-	public boolean isSite() {
-		return _group.isSite();
 	}
 
 	public boolean isStaged() {
