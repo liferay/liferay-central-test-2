@@ -21,11 +21,14 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 
-boolean disabled = false;
+boolean siteDisabled = false;
+
 boolean site = false;
 
 if (organization != null) {
-	site = organization.getGroup().getSite();
+	Group organizationGroup = organization.getGroup();
+
+	site = organizationGroup.isSite();
 }
 %>
 
@@ -55,7 +58,7 @@ if (organization != null) {
 					<c:when test="<%= (organization != null) && (organization.getPublicLayoutsPageCount() > 0) %>">
 
 						<%
-						disabled = true;
+						siteDisabled = true;
 						%>
 
 						<liferay-portlet:actionURL var="publicPagesURL" portletName="<%= PortletKeys.MY_PLACES %>">
@@ -125,7 +128,7 @@ if (organization != null) {
 		</c:otherwise>
 	</c:choose>
 
-	<aui:input disabled="<%= disabled %>" label="site-enabled" name="site" type="checkbox" value="<%= site %>" />
+	<aui:input disabled="<%= siteDisabled %>" label="site-enabled" name="site" type="checkbox" value="<%= site %>" />
 </aui:fieldset>
 
 <%

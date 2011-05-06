@@ -853,6 +853,12 @@ public class OrganizationLocalServiceImpl
 
 		organizationPersistence.update(organization, false);
 
+		// Group
+
+		Group group = organization.getGroup();
+
+		groupLocalService.updateSite(group.getGroupId(), site);
+
 		// Asset
 
 		if (serviceContext != null) {
@@ -874,11 +880,6 @@ public class OrganizationLocalServiceImpl
 
 		indexer.reindex(
 			new String[] {String.valueOf(organization.getCompanyId())});
-
-		// Site
-
-		Group group = groupLocalService.updateSite(
-			organization.getGroup().getGroupId(), site);
 
 		return organization;
 	}

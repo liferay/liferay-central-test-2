@@ -746,7 +746,7 @@ public class GroupFinderImpl
 				String key = entry.getKey();
 
 				if (key.equals("active") || key.equals("layoutSet") ||
-						key.equals("site")) {
+					key.equals("site")) {
 
 					Boolean value = (Boolean)entry.getValue();
 

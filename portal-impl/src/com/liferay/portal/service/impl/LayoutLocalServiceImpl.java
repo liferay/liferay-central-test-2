@@ -167,6 +167,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Layout.class.getName(), layout.getPlid(), false, true,
 			addGuestPermissions);
 
+		// Group
+
+		groupLocalService.updateSite(groupId, true);
+
 		// Layout set
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
@@ -184,10 +188,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				userId, user.getFullName(), groupId, Layout.class.getName(),
 				plid, WorkflowConstants.ACTION_PUBLISH);
 		}
-
-		// Site
-
-		Group group = groupLocalService.updateSite(groupId, true);
 
 		return layout;
 	}

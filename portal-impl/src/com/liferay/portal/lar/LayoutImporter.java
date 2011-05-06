@@ -51,7 +51,6 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -518,7 +517,7 @@ public class LayoutImporter {
 
 		// Site
 
-		Group group = GroupLocalServiceUtil.updateSite(groupId, true);
+		GroupLocalServiceUtil.updateSite(groupId, true);
 
 		// Web content layout type
 
