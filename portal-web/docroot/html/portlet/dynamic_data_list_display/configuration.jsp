@@ -54,7 +54,7 @@ catch (NoSuchRecordSetException nsrse) {
 	<c:if test="<%= selRecordSet != null %>">
 
 		<aui:fieldset label="templates">
-			<aui:select helpMessage="select-the-list-template-used-to-diplay-the-list-records" label="list-template" name="listTemplateId" onChange='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "ddmListTemplateId.value = this.value;" %>'>
+			<aui:select helpMessage="select-the-list-template-used-to-diplay-the-list-records" label="list-template" name="listTemplateId" onChange='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "listDDMTemplateId.value = this.value;" %>'>
 				<aui:option label="default" value="<%= 0 %>" />
 
 				<%
@@ -65,7 +65,7 @@ catch (NoSuchRecordSetException nsrse) {
 				for (DDMTemplate template : templates) {
 					boolean selected = false;
 
-					if (ddmListTemplateId == template.getTemplateId()) {
+					if (listDDMTemplateId == template.getTemplateId()) {
 						selected = true;
 					}
 				%>
@@ -78,7 +78,7 @@ catch (NoSuchRecordSetException nsrse) {
 
 			</aui:select>
 
-			<aui:select helpMessage="select-the-detail-template-used-to-add-records-to-the-list" label="detail-template" name="detailTemplateId" onChange='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "ddmDetailTemplateId.value = this.value;" %>'>
+			<aui:select helpMessage="select-the-detail-template-used-to-add-records-to-the-list" label="detail-template" name="detailTemplateId" onChange='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "detailDDMTemplateId.value = this.value;" %>'>
 				<aui:option label="default" value="<%= 0 %>" />
 
 				<%
@@ -89,7 +89,7 @@ catch (NoSuchRecordSetException nsrse) {
 				for (DDMTemplate template : templates) {
 					boolean selected = false;
 
-					if (ddmDetailTemplateId == template.getTemplateId()) {
+					if (detailDDMTemplateId == template.getTemplateId()) {
 						selected = true;
 					}
 				%>
@@ -164,8 +164,8 @@ catch (NoSuchRecordSetException nsrse) {
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur" + cur %>' />
 	<aui:input name="preferences--recordSetId--" type="hidden" value="<%= recordSetId %>" />
-	<aui:input name="preferences--ddmDetailTemplateId--" type="hidden" value="<%= ddmDetailTemplateId %>" />
-	<aui:input name="preferences--ddmListTemplateId--" type="hidden" value="<%= ddmListTemplateId %>" />
+	<aui:input name="preferences--detailDDMTemplateId--" type="hidden" value="<%= detailDDMTemplateId %>" />
+	<aui:input name="preferences--listDDMTemplateId--" type="hidden" value="<%= listDDMTemplateId %>" />
 	<aui:input name="preferences--editable--" type="hidden" value="<%= editable %>" />
 
 	<aui:fieldset cssClass="yui3-aui-helper-hidden">
@@ -187,8 +187,8 @@ catch (NoSuchRecordSetException nsrse) {
 			var A = AUI();
 
 			document.<portlet:namespace />fm.<portlet:namespace />recordSetId.value = recordSetId;
-			document.<portlet:namespace />fm.<portlet:namespace />ddmDetailTemplateId.value = "";
-			document.<portlet:namespace />fm.<portlet:namespace />ddmListTemplateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />detailDDMTemplateId.value = "";
+			document.<portlet:namespace />fm.<portlet:namespace />listDDMTemplateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />editable.value = "";
 
 			A.one('.displaying-record-set-id-holder').show();

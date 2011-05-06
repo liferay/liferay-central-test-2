@@ -39,10 +39,10 @@ if (Validator.isNotNull(portletResource)) {
 
 long recordSetId = GetterUtil.getLong(preferences.getValue("recordSetId", StringPool.BLANK));
 
-long ddmDetailTemplateId = GetterUtil.getLong(preferences.getValue("ddmDetailTemplateId", StringPool.BLANK));
-long ddmListTemplateId = GetterUtil.getLong(preferences.getValue("ddmListTemplateId", StringPool.BLANK));
+long detailDDMTemplateId = GetterUtil.getLong(preferences.getValue("detailDDMTemplateId", StringPool.BLANK));
+long listDDMTemplateId = GetterUtil.getLong(preferences.getValue("listDDMTemplateId", StringPool.BLANK));
 
-boolean editable = GetterUtil.getBoolean(preferences.getValue("editable", StringPool.BLANK), Boolean.TRUE);
+boolean editable = GetterUtil.getBoolean(preferences.getValue("editable", Boolean.TRUE.toString()));
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>

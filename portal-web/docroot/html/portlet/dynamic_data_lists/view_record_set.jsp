@@ -23,11 +23,14 @@ DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA
 
 long recordSetId = BeanParamUtil.getLong(recordSet, request, "recordSetId");
 
+long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
+long listDDMTemplateId = ParamUtil.getLong(request, "listDDMTemplateId");
+
 boolean editable = ParamUtil.getBoolean(request, "editable", true);
 
-long ddmDetailTemplateId = ParamUtil.getLong(request, "ddmDetailTemplateId");
-
-long ddmListTemplateId = ParamUtil.getLong(request, "ddmListTemplateId");
+if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
+	editable = true;
+}
 %>
 
 <liferay-ui:header
@@ -40,17 +43,15 @@ long ddmListTemplateId = ParamUtil.getLong(request, "ddmListTemplateId");
 </portlet:actionURL>
 
 <aui:form action="<%= editRecordSetURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRecordSet();" %>'>
-	<c:if test="<%= _isRecordSetEditable(portletName, editable) %>">
+	<c:if test="<%= editable %>">
 		<aui:button onClick='<%= renderResponse.getNamespace() + "addRecord();" %>' value="add-record" />
 
 		<div class="separator"><!-- --></div>
 	</c:if>
 
 	<c:choose>
-		<c:when test="<%= (ddmListTemplateId > 0) %>">
-
-			<%= DDLUtil.getTemplateContent(ddmListTemplateId, recordSet, themeDisplay, renderRequest, renderResponse) %>
-
+		<c:when test="<%= listDDMTemplateId > 0 %>">
+			<%= DDLUtil.getTemplateContent(listDDMTemplateId, recordSet, themeDisplay, renderRequest, renderResponse) %>
 		</c:when>
 		<c:otherwise>
 			<liferay-util:include page="/html/portlet/dynamic_data_lists/view_records.jsp" />
@@ -61,7 +62,7 @@ long ddmListTemplateId = ParamUtil.getLong(request, "ddmListTemplateId");
 
 <aui:script>
 	function <portlet:namespace />addRecord() {
-		submitForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="recordSetId" value="<%= String.valueOf(recordSetId) %>" /><portlet:param name="ddmDetailTemplateId" value="<%= String.valueOf(ddmDetailTemplateId) %>" /></liferay-portlet:renderURL>');
+		submitForm(document.<portlet:namespace />fm, '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>"><portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="backURL" value="<%= currentURL %>" /><portlet:param name="recordSetId" value="<%= String.valueOf(recordSetId) %>" /><portlet:param name="detailDDMTemplateId" value="<%= String.valueOf(detailDDMTemplateId) %>" /></liferay-portlet:renderURL>');
 	}
 </aui:script>
 

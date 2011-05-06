@@ -26,7 +26,7 @@ long recordId = BeanParamUtil.getLong(record, request, "recordId");
 
 long recordSetId = BeanParamUtil.getLong(record, request, "recordSetId");
 
-long ddmDetailTemplateId = ParamUtil.getLong(request, "ddmDetailTemplateId");
+long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 %>
 
 <liferay-ui:header
@@ -52,10 +52,10 @@ long ddmDetailTemplateId = ParamUtil.getLong(request, "ddmDetailTemplateId");
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
-		if (ddmDetailTemplateId > 0) {
-			DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(ddmDetailTemplateId);
+		if (detailDDMTemplateId > 0) {
+			DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(detailDDMTemplateId);
 
-			ddmStructure.setXsd(template.getScript());
+			ddmStructure.setXsd(ddmTemplate.getScript());
 		}
 
 		Fields fields = null;

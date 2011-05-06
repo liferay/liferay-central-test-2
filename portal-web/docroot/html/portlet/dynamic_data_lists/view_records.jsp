@@ -21,7 +21,9 @@ DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA
 
 boolean editable = ParamUtil.getBoolean(request, "editable", true);
 
-boolean isRecordSetEditable = _isRecordSetEditable(portletName, editable);
+if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
+	editable = true;
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -40,7 +42,7 @@ for (Map<String, String> fields : fieldsMap.values()) {
 	headerNames.add(label);
 }
 
-if (isRecordSetEditable) {
+if (editable) {
 	headerNames.add(StringPool.BLANK);
 }
 
@@ -85,7 +87,7 @@ for (int i = 0; i < results.size(); i++) {
 			value = StringPool.BLANK;
 		}
 
-		if (isRecordSetEditable) {
+		if (editable) {
 			row.addText(value, rowURL);
 		}
 		else {
@@ -95,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	if (isRecordSetEditable) {
+	if (editable) {
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/dynamic_data_lists/record_action.jsp");
 	}
 

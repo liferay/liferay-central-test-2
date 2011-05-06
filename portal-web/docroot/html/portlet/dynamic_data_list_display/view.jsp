@@ -33,9 +33,9 @@ try {
 			%>
 
 			<liferay-util:include page="/html/portlet/dynamic_data_lists/view_record_set.jsp">
+				<liferay-util:param name="detailDDMTemplateId" value="<%= String.valueOf(detailDDMTemplateId) %>" />
+				<liferay-util:param name="listDDMTemplateId" value="<%= String.valueOf(listDDMTemplateId) %>" />
 				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
-				<liferay-util:param name="ddmDetailTemplateId" value="<%= String.valueOf(ddmDetailTemplateId) %>" />
-				<liferay-util:param name="ddmListTemplateId" value="<%= String.valueOf(ddmListTemplateId) %>" />
 			</liferay-util:include>
 
 		</c:when>

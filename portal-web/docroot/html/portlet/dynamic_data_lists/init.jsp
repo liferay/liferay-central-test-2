@@ -47,13 +47,3 @@
 <%
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
-
-<%!
-private boolean _isRecordSetEditable(String portletName, boolean editable) {
-	if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
-		return true;
-	}
-
-	return editable;
-}
-%>
