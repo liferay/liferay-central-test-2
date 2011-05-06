@@ -381,6 +381,10 @@ public class ResultRow {
 		return _restricted;
 	}
 
+	public boolean isSkip() {
+		return _skip;
+	}
+
 	public void removeSearchEntry(int pos) {
 		_searchEntries.remove(pos);
 	}
@@ -417,6 +421,10 @@ public class ResultRow {
 		_restricted = restricted;
 	}
 
+	public void setSkip(boolean skip) {
+		_skip = skip;
+	}
+
 	private boolean _bold;
 	private String _classHoverName;
 	private String _className;
@@ -426,5 +434,6 @@ public class ResultRow {
 	private int _pos;
 	private String _primaryKey;
 	private boolean _restricted;
+	private boolean _skip;
 
 }

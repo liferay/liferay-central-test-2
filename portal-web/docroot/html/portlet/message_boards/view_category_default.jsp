@@ -96,7 +96,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 				catch (NoSuchMessageException nsme) {
 					_log.error("Thread requires missing root message id " + thread.getRootMessageId());
 
-					continue;
+					message = new MBMessageImpl();
+
+					row.setSkip(true);
 				}
 
 				message = message.toEscapedModel();

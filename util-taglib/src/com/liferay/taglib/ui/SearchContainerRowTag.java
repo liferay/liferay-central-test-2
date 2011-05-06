@@ -81,7 +81,9 @@ public class SearchContainerRowTag<R>
 			_headerNamesAssigned = true;
 		}
 
-		_resultRows.add(_row);
+		if (!_row.isSkip()) {
+			_resultRows.add(_row);
+		}
 
 		_rowIndex++;
 
@@ -307,6 +309,6 @@ public class SearchContainerRowTag<R>
 	private int _rowIndex;
 	private String _rowVar = DEFAULT_ROW_VAR;
 	private ResultRow _row;
-	private boolean _stringKey = false;
+	private boolean _stringKey;
 
 }
