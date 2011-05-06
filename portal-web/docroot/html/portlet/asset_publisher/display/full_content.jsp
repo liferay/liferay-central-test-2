@@ -92,6 +92,8 @@ request.setAttribute("view.jsp-showIconLabel", true);
 		<%
 		AssetEntryServiceUtil.incrementViewCounter(assetEntry.getClassName(), assetEntry.getClassPK());
 
+		assetEntry.setViewCount(assetEntry.getViewCount() + 1);
+
 		if (showContextLink) {
 			if (PortalUtil.getPlidFromPortletId(assetRenderer.getGroupId(), assetRendererFactory.getPortletId()) == 0) {
 				showContextLink = false;
