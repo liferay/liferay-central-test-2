@@ -613,7 +613,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										}
 									);
 
-								Liferay.fire('<%= portletDisplay.getId() %>:messagePosted', response);
+									Liferay.fire('<%= portletDisplay.getId() %>:messagePosted', response);
 								}
 								else {
 									var errorKey = '';
