@@ -250,7 +250,7 @@ public class RSSAction extends PortletAction {
 		PortletPreferences preferences = portletRequest.getPreferences();
 
 		String selectionStyle = preferences.getValue(
-			"selection-style", "dynamic");
+			"selectionStyle", "dynamic");
 
 		if (!selectionStyle.equals("dynamic")) {
 			return new byte[0];
@@ -266,14 +266,14 @@ public class RSSAction extends PortletAction {
 		String assetLinkBehavior = preferences.getValue(
 			"assetLinkBehaviour", "showFullContent");
 		boolean excludeZeroViewCount = GetterUtil.getBoolean(
-			preferences.getValue("exclude-zero-view-count", "0"));
+			preferences.getValue("excludeZeroViewCount", "0"));
 
 		int rssDelta = GetterUtil.getInteger(
-			preferences.getValue("rss-delta", "20"));
+			preferences.getValue("rssDelta", "20"));
 		String rssDisplayStyle = preferences.getValue(
-			"rss-display-style", RSSUtil.DISPLAY_STYLE_ABSTRACT);
-		String rssFormat = preferences.getValue("rss-format", "atom10");
-		String rssName = preferences.getValue("rss-name", null);
+			"rssDisplayStyle", RSSUtil.DISPLAY_STYLE_ABSTRACT);
+		String rssFormat = preferences.getValue("rssFormat", "atom10");
+		String rssName = preferences.getValue("rssName", null);
 
 		String rssFormatType = RSSUtil.getFormatType(rssFormat);
 		double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
