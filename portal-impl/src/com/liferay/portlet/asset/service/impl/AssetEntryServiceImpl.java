@@ -18,14 +18,8 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -35,15 +29,6 @@ import com.liferay.portlet.asset.service.base.AssetEntryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
-import com.liferay.util.RSSUtil;
-
-import com.sun.syndication.feed.synd.SyndContent;
-import com.sun.syndication.feed.synd.SyndContentImpl;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndEntryImpl;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,21 +51,6 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
 		return assetEntryLocalService.getCompanyEntriesCount(companyId);
-	}
-
-	public String getCompanyEntriesRSS(
-			long companyId, int max, String type, double version,
-			String displayStyle, String feedURL, String tagURL)
-		throws PortalException, SystemException {
-
-		Company company = companyPersistence.findByPrimaryKey(companyId);
-
-		String name = company.getName();
-
-		List<AssetEntry> entries = getCompanyEntries(companyId, 0, max);
-
-		return exportToRSS(
-			name, null, type, version, displayStyle, feedURL, tagURL, entries);
 	}
 
 	public AssetEntryDisplay[] getCompanyEntryDisplays(
@@ -109,20 +79,6 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		Object[] results = filterQuery(entryQuery);
 
 		return (Integer)results[1];
-	}
-
-	public String getEntriesRSS(
-			AssetEntryQuery entryQuery, String name, String type,
-			double version, String displayStyle, String feedURL, String tagURL)
-		throws PortalException, SystemException {
-
-		setupQuery(entryQuery);
-
-		Object[] results = filterQuery(entryQuery);
-
-		return exportToRSS(
-			name, null, type, version, displayStyle, feedURL, tagURL,
-			(List<AssetEntry>)results[0]);
 	}
 
 	public AssetEntry getEntry(long entryId)
@@ -170,76 +126,6 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			tagNames, visible, startDate, endDate, publishDate, expirationDate,
 			mimeType, title, description, summary, url, layoutUuid, height,
 			width, priority, sync);
-	}
-
-	protected String exportToRSS(
-			String name, String description, String type, double version,
-			String displayStyle, String feedURL, String tagURL,
-			List<AssetEntry> assetEntries)
-		throws SystemException {
-
-		SyndFeed syndFeed = new SyndFeedImpl();
-
-		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
-		syndFeed.setTitle(name);
-		syndFeed.setLink(feedURL);
-		syndFeed.setDescription(GetterUtil.getString(description, name));
-
-		List<SyndEntry> entries = new ArrayList<SyndEntry>();
-
-		syndFeed.setEntries(entries);
-
-		for (AssetEntry entry : assetEntries) {
-			AssetRendererFactory assetRendererFactory =
-				AssetRendererFactoryRegistryUtil.
-					getAssetRendererFactoryByClassName(entry.getClassName());
-
-			String author = HtmlUtil.escape(
-				PortalUtil.getUserName(entry.getUserId(), entry.getUserName()));
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(tagURL);
-			sb.append(assetRendererFactory.getType());
-			sb.append("/id/");
-			sb.append(entry.getEntryId());
-
-			String link = sb.toString();
-
-			String value = null;
-
-			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
-				value = StringPool.BLANK;
-			}
-			else {
-				value = entry.getSummary();
-			}
-
-			SyndEntry syndEntry = new SyndEntryImpl();
-
-			syndEntry.setAuthor(author);
-			syndEntry.setTitle(entry.getTitle());
-			syndEntry.setLink(link);
-			syndEntry.setUri(syndEntry.getLink());
-			syndEntry.setPublishedDate(entry.getCreateDate());
-			syndEntry.setUpdatedDate(entry.getModifiedDate());
-
-			SyndContent syndContent = new SyndContentImpl();
-
-			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
-			syndContent.setValue(value);
-
-			syndEntry.setDescription(syndContent);
-
-			entries.add(syndEntry);
-		}
-
-		try {
-			return RSSUtil.export(syndFeed);
-		}
-		catch (FeedException fe) {
-			throw new SystemException(fe);
-		}
 	}
 
 	protected long[] filterCategoryIds(long[] categoryIds)

@@ -48,17 +48,6 @@ public class AssetEntryServiceUtil {
 		return getService().getCompanyEntriesCount(companyId);
 	}
 
-	public static java.lang.String getCompanyEntriesRSS(long companyId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String tagURL)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getCompanyEntriesRSS(companyId, max, type, version,
-			displayStyle, feedURL, tagURL);
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] getCompanyEntryDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -78,18 +67,6 @@ public class AssetEntryServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEntriesCount(entryQuery);
-	}
-
-	public static java.lang.String getEntriesRSS(
-		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
-		java.lang.String name, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String tagURL)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getEntriesRSS(entryQuery, name, type, version,
-			displayStyle, feedURL, tagURL);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry getEntry(

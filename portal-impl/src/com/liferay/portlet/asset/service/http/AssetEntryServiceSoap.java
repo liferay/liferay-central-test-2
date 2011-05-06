@@ -94,23 +94,6 @@ public class AssetEntryServiceSoap {
 		}
 	}
 
-	public static java.lang.String getCompanyEntriesRSS(long companyId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String tagURL) throws RemoteException {
-		try {
-			java.lang.String returnValue = AssetEntryServiceUtil.getCompanyEntriesRSS(companyId,
-					max, type, version, displayStyle, feedURL, tagURL);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] getCompanyEntryDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
 		throws RemoteException {
@@ -148,24 +131,6 @@ public class AssetEntryServiceSoap {
 		throws RemoteException {
 		try {
 			int returnValue = AssetEntryServiceUtil.getEntriesCount(entryQuery);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static java.lang.String getEntriesRSS(
-		com.liferay.portlet.asset.service.persistence.AssetEntryQuery entryQuery,
-		java.lang.String name, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String tagURL) throws RemoteException {
-		try {
-			java.lang.String returnValue = AssetEntryServiceUtil.getEntriesRSS(entryQuery,
-					name, type, version, displayStyle, feedURL, tagURL);
 
 			return returnValue;
 		}
