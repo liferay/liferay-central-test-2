@@ -121,7 +121,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				bag = new PermissionCheckerBagImpl(
 					defaultUserId, new ArrayList<Group>(),
 					new ArrayList<Organization>(), new ArrayList<Group>(),
-					new ArrayList<Group>(), new ArrayList<Group>(), roles);
+					new ArrayList<Group>(), groups, roles);
 			}
 			finally {
 				if (bag == null) {

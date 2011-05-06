@@ -410,6 +410,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		}
 		else {
 			for (long groupId : groupIds) {
+				groups.addAll(bag.getGroups());
+
 				if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 					Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -528,7 +530,12 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			AdvancedPermissionChecker advancedPermissionChecker =
 				(AdvancedPermissionChecker)permissionChecker;
 
-			return advancedPermissionChecker.getUserBag(userId, 0);
+			if (user.isDefaultUser()) {
+				return advancedPermissionChecker.getGuestUserBag();
+			}
+			else {
+				return advancedPermissionChecker.getUserBag(userId, 0);
+			}
 		}
 		else {
 			return null;
