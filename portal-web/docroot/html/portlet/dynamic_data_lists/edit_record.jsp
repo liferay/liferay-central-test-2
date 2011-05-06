@@ -25,6 +25,8 @@ DDLRecord record = (DDLRecord)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RE
 long recordId = BeanParamUtil.getLong(record, request, "recordId");
 
 long recordSetId = BeanParamUtil.getLong(record, request, "recordSetId");
+
+long ddmDetailTemplateId = ParamUtil.getLong(request, "ddmDetailTemplateId");
 %>
 
 <liferay-ui:header
@@ -49,6 +51,12 @@ long recordSetId = BeanParamUtil.getLong(record, request, "recordSetId");
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(recordSetId);
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		if (ddmDetailTemplateId > 0) {
+			DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(ddmDetailTemplateId);
+
+			ddmStructure.setXsd(template.getScript());
+		}
 
 		Fields fields = null;
 
