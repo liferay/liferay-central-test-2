@@ -40,7 +40,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	public Group addGroup(
 			long liveGroupId, String name, String description, int type,
-			String friendlyURL, boolean active, ServiceContext serviceContext)
+			String friendlyURL, boolean site, boolean active,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -48,20 +49,20 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 		return groupLocalService.addGroup(
 			getUserId(), null, 0, liveGroupId, name, description, type,
-			friendlyURL, active, serviceContext);
+			friendlyURL, site, active, serviceContext);
 	}
 
 	public Group addGroup(
 			String name, String description, int type, String friendlyURL,
-			boolean active, ServiceContext serviceContext)
+			boolean site, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortalPermissionUtil.check(
 			getPermissionChecker(), ActionKeys.ADD_COMMUNITY);
 
 		return groupLocalService.addGroup(
-			getUserId(), null, 0, name, description, type, friendlyURL, active,
-			serviceContext);
+			getUserId(), null, 0, name, description, type, friendlyURL, site,
+			active, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)

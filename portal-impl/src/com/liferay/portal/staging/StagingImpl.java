@@ -390,7 +390,7 @@ public class StagingImpl implements Staging {
 				userId, liveGroup.getClassName(), liveGroup.getClassPK(),
 				liveGroup.getGroupId(), liveGroup.getDescriptiveName(),
 				liveGroup.getDescription(), liveGroup.getType(),
-				liveGroup.getFriendlyURL(), liveGroup.isActive(),
+				liveGroup.getFriendlyURL(), false, liveGroup.isActive(),
 				serviceContext);
 
 			if (branchingPublic) {

@@ -73,7 +73,7 @@ public class LayoutPrototypeLocalServiceImpl
 			userId, LayoutPrototype.class.getName(),
 			layoutPrototype.getLayoutPrototypeId(),
 			layoutPrototype.getName(LocaleUtil.getDefault()), null, 0,
-			friendlyURL, true, null);
+			friendlyURL, false, true, null);
 
 		ServiceContext serviceContext = new ServiceContext();
 

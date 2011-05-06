@@ -74,7 +74,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 			userId, LayoutSetPrototype.class.getName(),
 			layoutSetPrototype.getLayoutSetPrototypeId(),
 			layoutSetPrototype.getName(LocaleUtil.getDefault()), null, 0,
-			friendlyURL, true, serviceContext);
+			friendlyURL, false, true, serviceContext);
 
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,

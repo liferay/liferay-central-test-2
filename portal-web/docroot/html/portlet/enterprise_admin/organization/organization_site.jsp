@@ -20,6 +20,13 @@
 Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZATION);
 
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+
+boolean disabled = false;
+boolean site = false;
+
+if (organization != null) {
+	site = organization.getGroup().getSite();
+}
 %>
 
 <h3><liferay-ui:message key="organization-site" /></h3>
@@ -46,6 +53,11 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 			<aui:field-wrapper label="public-pages">
 				<c:choose>
 					<c:when test="<%= (organization != null) && (organization.getPublicLayoutsPageCount() > 0) %>">
+
+						<%
+						disabled = true;
+						%>
+
 						<liferay-portlet:actionURL var="publicPagesURL" portletName="<%= PortletKeys.MY_PLACES %>">
 							<portlet:param name="struts_action" value="/my_places/view" />
 							<portlet:param name="groupId" value="<%= String.valueOf(organization.getGroup().getGroupId()) %>" />
@@ -112,6 +124,8 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 			</aui:field-wrapper>
 		</c:otherwise>
 	</c:choose>
+
+	<aui:input disabled="<%= disabled %>" label="site-enabled" name="site" type="checkbox" value="<%= site %>" />
 </aui:fieldset>
 
 <%

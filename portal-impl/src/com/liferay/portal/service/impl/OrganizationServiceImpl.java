@@ -60,7 +60,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, List<Address> addresses,
+			String comments, boolean site, List<Address> addresses,
 			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
 			List<Phone> phones, List<Website> websites,
 			ServiceContext serviceContext)
@@ -68,7 +68,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		Organization organization = addOrganization(
 			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments, serviceContext);
+			statusId, comments, site, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Organization.class.getName(), organization.getOrganizationId(),
@@ -95,7 +95,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, ServiceContext serviceContext)
+			String comments, boolean site, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!OrganizationPermissionUtil.contains(
@@ -111,7 +111,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable, regionId,
-			countryId, statusId, comments, serviceContext);
+			countryId, statusId, comments, site, serviceContext);
 	}
 
 	public void addPasswordPolicyOrganizations(
@@ -279,10 +279,10 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments, List<Address> addresses,
-			List<EmailAddress> emailAddresses, List<OrgLabor> orgLabors,
-			List<Phone> phones, List<Website> websites,
-			ServiceContext serviceContext)
+			int statusId, String comments, boolean site,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<OrgLabor> orgLabors, List<Phone> phones,
+			List<Website> websites, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		EnterpriseAdminUtil.updateAddresses(
@@ -301,7 +301,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		Organization organization = updateOrganization(
 			organizationId, parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments, serviceContext);
+			regionId, countryId, statusId, comments, site, serviceContext);
 
 		return organization;
 	}
@@ -309,7 +309,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
-			int statusId, String comments, ServiceContext serviceContext)
+			int statusId, String comments, boolean site,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		OrganizationPermissionUtil.check(
@@ -320,7 +321,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 		return organizationLocalService.updateOrganization(
 			user.getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments,
-			serviceContext);
+			site, serviceContext);
 	}
 
 }

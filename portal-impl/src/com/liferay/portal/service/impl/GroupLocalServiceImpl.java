@@ -102,7 +102,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	public Group addGroup(
 			long userId, String className, long classPK, long liveGroupId,
 			String name, String description, int type, String friendlyURL,
-			boolean active, ServiceContext serviceContext)
+			boolean site, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Group
@@ -178,6 +178,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setDescription(description);
 		group.setType(type);
 		group.setFriendlyURL(friendlyURL);
+		group.setSite(site);
 		group.setActive(active);
 
 		groupPersistence.update(group, false);
@@ -232,13 +233,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
 			long userId, String className, long classPK, String name,
-			String description, int type, String friendlyURL, boolean active,
-			ServiceContext serviceContext)
+			String description, int type, String friendlyURL, boolean site,
+			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return addGroup(
 			userId, className, classPK, GroupConstants.DEFAULT_LIVE_GROUP_ID,
-			name, description, type, friendlyURL, active, serviceContext);
+			name, description, type, friendlyURL, site, active, serviceContext);
 	}
 
 	public void addRoleGroups(long roleId, long[] groupIds)
@@ -271,7 +272,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			groupLocalService.addGroup(
 				defaultUserId, Company.class.getName(), companyId, null, null,
-				0, null, true, null);
+				0, null, false, true, null);
 		}
 	}
 
@@ -300,10 +301,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				long classPK = 0;
 				int type = GroupConstants.TYPE_COMMUNITY_OPEN;
 				String friendlyURL = null;
+				boolean site = true;
 
 				if (name.equals(GroupConstants.CONTROL_PANEL)) {
 					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
 					friendlyURL = GroupConstants.CONTROL_PANEL_FRIENDLY_URL;
+					site = false;
 				}
 				else if (name.equals(GroupConstants.GUEST)) {
 					friendlyURL = "/guest";
@@ -314,11 +317,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
 					friendlyURL =
 						GroupConstants.USER_PERSONAL_COMMUNITY_FRIENDLY_URL;
+					site = false;
 				}
 
 				group = groupLocalService.addGroup(
 					defaultUserId, className, classPK, name, null, type,
-					friendlyURL, true, null);
+					friendlyURL, site, true, null);
 
 				if (name.equals(GroupConstants.USER_PERSONAL_COMMUNITY)) {
 					initUserPersonalCommunityPermissions(group);
@@ -1049,6 +1053,22 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				user.getUserId(), group, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
+
+		return group;
+	}
+
+	public Group updateSite(long groupId, boolean site)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		if (!group.isOrganization()) {
+			return group;
+		}
+
+		group.setSite(site);
+
+		groupPersistence.update(group, false);
 
 		return group;
 	}

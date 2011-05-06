@@ -701,7 +701,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupLocalService.addGroup(
 			user.getUserId(), User.class.getName(), user.getUserId(), null,
-			null, 0, StringPool.SLASH + screenName, true, null);
+			null, 0, StringPool.SLASH + screenName, false, true, null);
 
 		// Groups
 

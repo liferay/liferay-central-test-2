@@ -236,7 +236,8 @@ public class EditGroupAction extends PortletAction {
 			// Add group
 
 			group = GroupServiceUtil.addGroup(
-				name, description, type, friendlyURL, active, serviceContext);
+				name, description, type, friendlyURL, true, active,
+				serviceContext);
 
 			LiveUsers.joinGroup(
 				themeDisplay.getCompanyId(), group.getGroupId(), userId);

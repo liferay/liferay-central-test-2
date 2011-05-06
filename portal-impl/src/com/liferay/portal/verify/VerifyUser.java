@@ -96,7 +96,8 @@ public class VerifyUser extends VerifyProcess {
 
 			GroupLocalServiceUtil.addGroup(
 				user.getUserId(), User.class.getName(), user.getUserId(), null,
-				null, 0, StringPool.SLASH + user.getScreenName(), true, null);
+				null, 0, StringPool.SLASH + user.getScreenName(), false, true,
+				null);
 		}
 
 		if (_log.isDebugEnabled()) {

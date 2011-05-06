@@ -152,7 +152,8 @@ public class EditScopeAction extends EditConfigurationAction {
 
 				GroupLocalServiceUtil.addGroup(
 					themeDisplay.getUserId(), Layout.class.getName(),
-					scopeLayout.getPlid(), name, null, 0, null, true, null);
+					scopeLayout.getPlid(), name, null, 0, null, false, true,
+					null);
 			}
 
 			scopeGroupId = scopeLayout.getGroupId();
