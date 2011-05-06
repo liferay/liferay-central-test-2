@@ -76,6 +76,8 @@ public class ${entity.name}ServiceSoap {
 				${soapModelName}${returnValueDimension}
 			<#elseif stringUtil.startsWith(returnValueName, packagePath + ".model.") && serviceBuilder.hasEntityByGenericsName(returnValueName)>
 				${returnValueName}Soap${returnValueDimension}
+			<#elseif stringUtil.startsWith(returnValueName, "com.liferay.portal.kernel.json.JSON")>
+				java.lang.String
 			<#elseif returnValueName == "java.util.List">
 				<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
 					java.lang.Boolean[]
@@ -96,8 +98,6 @@ public class ${entity.name}ServiceSoap {
 				<#else>
 					${returnTypeGenericsName}
 				</#if>
-			<#elseif stringUtil.startsWith(returnValueName, "com.liferay.portal.kernel.json.JSON")>
-				java.lang.String
 			<#else>
 				${returnTypeGenericsName}
 			</#if>
@@ -187,6 +187,8 @@ public class ${entity.name}ServiceSoap {
 							<#else>
 								return ${returnValueName}Soap.toSoapModels(returnValue);
 							</#if>
+						<#elseif stringUtil.startsWith(returnValueName, "com.liferay.portal.kernel.json.JSON")>
+							return returnValue.toString();
 						<#elseif returnValueName == "java.util.List">
 							<#if returnTypeGenericsName == "java.util.List<java.lang.Boolean>">
 								return returnValue.toArray(new java.lang.Boolean[returnValue.size()]);
@@ -207,8 +209,6 @@ public class ${entity.name}ServiceSoap {
 							<#else>
 								return returnValue;
 							</#if>
-						<#elseif stringUtil.startsWith(returnValueName, "com.liferay.portal.kernel.json.JSON")>
-								return returnValue.toString();
 						<#else>
 							return returnValue;
 						</#if>
