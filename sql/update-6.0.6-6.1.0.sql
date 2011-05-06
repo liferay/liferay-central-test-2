@@ -142,6 +142,8 @@ COMMIT_TRANSACTION;
 
 update DLFolder set repositoryId = groupId;
 
+alter table Group_ add site BOOLEAN;
+
 alter table JournalArticle add classNameId LONG null;
 alter table JournalArticle add classPK LONG null;
 alter table JournalArticle add layoutUuid VARCHAR(75) null;
