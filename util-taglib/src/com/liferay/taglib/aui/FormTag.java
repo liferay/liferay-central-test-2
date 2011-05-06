@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  */
 public class FormTag extends BaseFormTag {
-	
+
 	public String getAction() {
 		return super.getAction();
 	}
