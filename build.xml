@@ -903,7 +903,11 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			project.setProperty("svn.info.revision", revision);
 		</script>
 
-		<echo file="svn-revision">${svn.info.revision}</echo>
+		<echo file="svn-revision">Revision: ${svn.info.revision}
+Username: ${svn.username}
+Password: ${svn.password}
+Portal:   ${project.dir}
+Plugins:  ${lp.plugins.dir}</echo>
 	</target>
 
 	<target name="start">
