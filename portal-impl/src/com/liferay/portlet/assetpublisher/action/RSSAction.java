@@ -86,7 +86,7 @@ public class RSSAction extends PortletAction {
 	protected String exportToRSS(
 			PortletRequest portletRequest, PortletResponse portletResponse,
 			String name, String description, String type, double version,
-			String displayStyle, String assetLinkBehavior,
+			String displayStyle, String linkBehavior,
 			List<AssetEntry> assetEntries)
 		throws Exception {
 
@@ -103,7 +103,7 @@ public class RSSAction extends PortletAction {
 
 		for (AssetEntry assetEntry : assetEntries) {
 			String link = getEntryURL(
-				portletRequest, portletResponse, assetEntry, assetLinkBehavior);
+				portletRequest, portletResponse, linkBehavior, assetEntry);
 
 			String author = HtmlUtil.escape(
 				PortalUtil.getUserName(
@@ -140,8 +140,8 @@ public class RSSAction extends PortletAction {
 		return RSSUtil.export(syndFeed);
 	}
 
-	protected String getAssetPublisherURL(
-		PortletRequest portletRequest) throws Exception {
+	protected String getAssetPublisherURL(PortletRequest portletRequest)
+		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -172,10 +172,10 @@ public class RSSAction extends PortletAction {
 
 	protected String getEntryURL(
 			PortletRequest portletRequest, PortletResponse portletResponse,
-			AssetEntry assetEntry, String assetLinkBehavior)
+			String linkBehavior, AssetEntry assetEntry)
 		throws Exception {
 
-		if ("viewInPortlet".equals(assetLinkBehavior)) {
+		if (linkBehavior.equals("viewInPortlet")) {
 			return getEntryURLViewInContext(
 				portletRequest, portletResponse, assetEntry);
 		}
@@ -220,20 +220,17 @@ public class RSSAction extends PortletAction {
 			(LiferayPortletRequest)portletRequest,
 			(LiferayPortletResponse)portletResponse, null);
 
-		StringBundler sb = new StringBundler(2);
-
 		if (!viewInContextURL.startsWith(Http.HTTP_WITH_SLASH) &&
 			!viewInContextURL.startsWith(Http.HTTPS_WITH_SLASH)) {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)portletRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
 
-				sb.append(themeDisplay.getPortalURL());
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			viewInContextURL = themeDisplay.getPortalURL() + viewInContextURL;
 		}
 
-		sb.append(viewInContextURL);
-
-		return sb.toString();
+		return viewInContextURL;
 	}
 
 	protected String getFeedURL(PortletRequest portletRequest)
