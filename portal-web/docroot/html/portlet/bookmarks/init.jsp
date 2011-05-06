@@ -46,8 +46,6 @@
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-
 PortletPreferences preferences = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
@@ -113,6 +111,8 @@ String[] entryColumns = StringUtil.split(PrefsParamUtil.getString(preferences, r
 if (!portletId.equals(PortletKeys.BOOKMARKS)) {
 	entryColumns = ArrayUtil.remove(entryColumns, "action");
 }
+
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/bookmarks/init-ext.jsp" %>
