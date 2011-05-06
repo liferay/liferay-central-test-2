@@ -29,8 +29,6 @@ long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 Folder parentFolder = null;
 
-String navigation = ParamUtil.getString(request, "navigation", "documents-home");
-
 boolean showRootFolder = ParamUtil.getBoolean(request, "showRootFolder", true);
 boolean showSiblings = ParamUtil.getBoolean(request, "showSiblings");
 
@@ -71,7 +69,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 		<c:when test="<%= (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) && (parentFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID && showRootFolder) %>">
 
 			<%
-			int childrenFolderCount = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
+			int foldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
 			%>
 
 			<liferay-portlet:renderURL varImpl="viewDocumentsHomeURL">
@@ -96,8 +94,12 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 				<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 			</liferay-portlet:resourceURL>
 
+			<%
+			String navigation = ParamUtil.getString(request, "navigation", "documents-home");
+			%>
+
 			<li class="folder <%= navigation.equals("documents-home") ? "selected" : StringPool.BLANK %>">
-				<c:if test="<%= (childrenFolderCount > 0) %>">
+				<c:if test="<%= (foldersCount > 0) %>">
 					<a href="<%= viewDocumentsHomeURL.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentsHomeFoldersURL.toString() %>" class="expand-folder">
 						<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-r" />
 					</a>
@@ -173,11 +175,11 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 			</liferay-portlet:resourceURL>
 
 			<li class="folder">
-				<a href="<%= viewURL.toString() %>" data-direction-right="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder">
+				<a data-direction-right="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder" href="<%= viewURL.toString() %>">
 					<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-l" />
 				</a>
 
-				<a href="<%= viewURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>">
+				<a data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= viewURL.toString() %>">
 					<liferay-ui:icon src='<%= themeDisplay.getPathThemeImages() + "/arrows/01_up.png" %>' />
 
 					<%= LanguageUtil.get(pageContext, "up") %>
@@ -186,7 +188,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 
 			<%
 			for (Folder curFolder : folders) {
-				int childrenFolderCount = DLAppServiceUtil.getFoldersCount(repositoryId, curFolder.getFolderId());
+				int foldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, curFolder.getFolderId());
 			%>
 
 				<liferay-portlet:renderURL varImpl="viewURL">
@@ -209,13 +211,13 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 				</liferay-portlet:resourceURL>
 
 				<li class="folder <%= (curFolder.getFolderId() == folderId) ? "selected" : StringPool.BLANK %>">
-					<c:if test="<%= (childrenFolderCount > 0) %>">
-						<a href="<%= viewURL.toString() %>" data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder">
+					<c:if test="<%= foldersCount > 0 %>">
+						<a data-refresh-folders="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewFoldersURL.toString() %>" class="expand-folder" href="<%= viewURL.toString() %>">
 							<liferay-ui:icon cssClass="expand-folder-arrow" image="../aui/carat-1-r" />
 						</a>
 					</c:if>
 
-					<a href="<%= viewURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>">
+					<a data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewEntriesURL.toString() %>" href="<%= viewURL.toString() %>">
 						<liferay-ui:icon image="folder" />
 
 						<%= curFolder.getName() %>

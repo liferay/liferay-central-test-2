@@ -38,8 +38,6 @@ String tagName = ParamUtil.getString(request, "tag");
 
 boolean useAssetEntryQuery = (categoryId > 0) || Validator.isNotNull(tagName);
 
-PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
-
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
 if (Validator.isNull(displayStyle)) {
@@ -180,6 +178,7 @@ for (int i = 0; i < results.size(); i++) {
 							tempRowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
 							request.setAttribute("view_entries.jsp-fileEntry", fileEntry);
+
 							request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
 							%>
 
@@ -187,7 +186,6 @@ for (int i = 0; i < results.size(); i++) {
 								<c:when test='<%= displayStyle.equals("icon") %>'>
 									<liferay-util:include page="/html/portlet/document_library/view_file_entry_icon.jsp" />
 								</c:when>
-
 								<c:otherwise>
 									<liferay-util:include page="/html/portlet/document_library/view_file_entry_descriptive.jsp" />
 								</c:otherwise>
@@ -203,7 +201,6 @@ for (int i = 0; i < results.size(); i++) {
 				</c:when>
 
 				<c:when test="<%= (curFolder != null) %>">
-
 					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewEntriesURL">
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
@@ -220,10 +217,10 @@ for (int i = 0; i < results.size(); i++) {
 					tempRowURL.setParameter("redirect", currentURL);
 					tempRowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-
 					request.setAttribute("view_entries.jsp-folder", curFolder);
 					request.setAttribute("view_entries.jsp-folderId", String.valueOf(curFolder.getFolderId()));
 					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
+
 					request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
 					request.setAttribute("view_entries.jsp-viewEntriesURL", viewEntriesURL);
 					%>
