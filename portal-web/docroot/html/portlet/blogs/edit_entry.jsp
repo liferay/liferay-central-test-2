@@ -218,7 +218,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 			<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "saveEntry(false, false);" %>' type="submit" value="<%= publishButtonLabel %>" />
 
-			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" name="cancelButton" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

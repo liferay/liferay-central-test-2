@@ -292,7 +292,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 
 		<aui:button name="saveButton" onClick='<%= taglibOnClick %>' value="save" />
 
-		<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" name="cancelButton" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

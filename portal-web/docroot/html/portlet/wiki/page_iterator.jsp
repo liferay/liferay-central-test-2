@@ -367,7 +367,7 @@ for (int i = 0; i < results.size(); i++) {
 			<portlet:param name="editTitle" value="1" />
 		</portlet:actionURL>
 
-		<aui:button name="addPageButton" onClick="<%= addPageURL %>" value="add-page" />
+		<aui:button href="<%= addPageURL %>" name="addPageButton" value="add-page" />
 	</aui:button-row>
 </c:if>
 

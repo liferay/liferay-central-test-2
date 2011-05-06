@@ -62,7 +62,7 @@ long recordSetId = BeanParamUtil.getLong(record, request, "recordSetId");
 		<aui:button-row>
 			<aui:button name="saveButton" type="submit" value="save" />
 
-			<aui:button name="cancelButton" onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" name="cancelButton" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
