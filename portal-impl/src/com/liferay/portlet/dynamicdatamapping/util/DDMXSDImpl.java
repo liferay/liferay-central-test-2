@@ -70,6 +70,15 @@ public class DDMXSDImpl implements DDMXSD {
 		return getHTML(pageContext, document.getRootElement(), fields);
 	}
 
+	public String getHTML(
+			PageContext pageContext, Document document, Fields fields,
+			String namespace)
+		throws Exception {
+
+		return getHTML(
+			pageContext, document.getRootElement(), fields, namespace);
+	}
+
 	public String getHTML(PageContext pageContext, Element element)
 		throws Exception {
 
@@ -80,6 +89,14 @@ public class DDMXSDImpl implements DDMXSD {
 			PageContext pageContext, Element element, Fields fields)
 		throws Exception {
 
+		return getHTML(pageContext, element, fields, StringPool.BLANK);
+	}
+
+	public String getHTML(
+			PageContext pageContext, Element element, Fields fields,
+			String namespace)
+		throws Exception {
+
 		StringBundler sb = new StringBundler();
 
 		List<Element> dynamicElementElements = element.elements(
@@ -88,6 +105,8 @@ public class DDMXSDImpl implements DDMXSD {
 		for (Element dynamicElementElement : dynamicElementElements) {
 			FreeMarkerContext freeMarkerContext = getFreeMarkerContext(
 				dynamicElementElement);
+
+			freeMarkerContext.put("namespace", namespace);
 
 			if (fields != null) {
 				freeMarkerContext.put("fields", fields);
@@ -134,6 +153,14 @@ public class DDMXSDImpl implements DDMXSD {
 		throws Exception {
 
 		return getHTML(pageContext, SAXReaderUtil.read(xml), fields);
+	}
+
+	public String getHTML(
+			PageContext pageContext, String xml, Fields fields,
+			String namespace)
+		throws Exception {
+
+		return getHTML(pageContext, SAXReaderUtil.read(xml), fields, namespace);
 	}
 
 	public JSONArray getJSONArray(Document document) throws JSONException {

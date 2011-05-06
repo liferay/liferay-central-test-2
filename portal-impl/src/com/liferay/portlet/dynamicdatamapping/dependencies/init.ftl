@@ -2,6 +2,8 @@
 
 <#assign fieldName = field.name>
 
+<#assign namespacedName = "${namespace}${field.name}">
+
 <#if parentField.name??>
 	<#assign fieldName = parentField.name!"">
 </#if>

@@ -36,12 +36,22 @@ public interface DDMXSD {
 			PageContext pageContext, Document document, Fields fields)
 		throws Exception;
 
+	public String getHTML(
+			PageContext pageContext, Document document, Fields fields,
+			String namespace)
+		throws Exception;
+
 	public String getHTML(PageContext pageContext, Element element)
 		throws Exception;
 
 	public String getHTML(PageContext pageContext, String xml) throws Exception;
 
 	public String getHTML(PageContext pageContext, String xml, Fields fields)
+		throws Exception;
+
+	public String getHTML(
+			PageContext pageContext, String xml, Fields fields,
+			String namespace)
 		throws Exception;
 
 	public JSONArray getJSONArray(Document document) throws JSONException;
