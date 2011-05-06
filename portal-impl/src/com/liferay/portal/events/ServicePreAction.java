@@ -718,7 +718,7 @@ public class ServicePreAction extends Action {
 		}
 
 		// Organization site layouts are also viewable by users who belong to
-		// the organization, or by users who can update organization
+		// the organization or by users who can update organization
 
 		if (group.isCompany()) {
 			return false;
