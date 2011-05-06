@@ -45,7 +45,7 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryConst
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

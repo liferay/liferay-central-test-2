@@ -224,7 +224,7 @@ int tabIndex = 1;
 
 		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' value="save-and-continue" />
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

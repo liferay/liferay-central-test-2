@@ -59,7 +59,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		<aui:button-row>
 			<aui:button type="submit" />
 
-			<aui:button onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

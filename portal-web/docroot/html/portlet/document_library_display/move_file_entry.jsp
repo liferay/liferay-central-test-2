@@ -146,7 +146,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		<aui:button-row>
 			<aui:button disabled="<%= isLocked && !hasLock %>" type="submit" value="move" />
 
-			<aui:button onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

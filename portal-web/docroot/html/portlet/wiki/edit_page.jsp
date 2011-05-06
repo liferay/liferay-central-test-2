@@ -401,7 +401,7 @@ if (Validator.isNull(redirect)) {
 						<aui:button name="discardDraftButton" onClick='<%= renderResponse.getNamespace() + "discardDraftPage();" %>' value="discard-draft" />
 					</c:if>
 
-					<aui:button onClick="<%= redirect %>" type="cancel" />
+					<aui:button href="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
 		</c:when>

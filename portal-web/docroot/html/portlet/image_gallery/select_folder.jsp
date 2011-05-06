@@ -125,7 +125,7 @@ if (folder != null) {
 		</portlet:renderURL>
 
 		<aui:button-row>
-			<aui:button onClick="<%= editFolerURL %>" value="add-folder" />
+			<aui:button href="<%= editFolerURL %>" value="add-folder" />
 		</aui:button-row>
 
 		<c:if test="<%= !results.isEmpty() %>">

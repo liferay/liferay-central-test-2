@@ -103,7 +103,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<aui:button-row>
 					<aui:button type="submit" value="vote" />
 
-					<aui:button onClick="<%= redirect %>" type="cancel" />
+					<aui:button href="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 
 				<%
@@ -123,7 +123,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				<aui:button-row>
 					<c:choose>
 						<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-							<aui:button onClick="<%= viewQuestionURL %>" value="back-to-vote" />
+							<aui:button href="<%= viewQuestionURL %>" value="back-to-vote" />
 						</c:when>
 					</c:choose>
 				</aui:button-row>

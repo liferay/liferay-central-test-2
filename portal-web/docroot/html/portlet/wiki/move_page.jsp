@@ -62,7 +62,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "renamePage();" %>' value="rename" />
 
-					<aui:button onClick="<%= redirect %>" type="cancel" />
+					<aui:button href="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
 		</liferay-ui:section>
@@ -146,7 +146,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 				<aui:button-row>
 					<aui:button disabled="<%= !newParentAvailable %>" type="submit" value="change-parent" />
 
-					<aui:button onClick="<%= redirect %>" type="cancel" />
+					<aui:button href="<%= redirect %>" type="cancel" />
 				</aui:button-row>
 			</aui:fieldset>
 		</liferay-ui:section>

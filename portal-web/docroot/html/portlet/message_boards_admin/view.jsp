@@ -89,7 +89,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 						<portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" />
 					</portlet:renderURL>
 
-					<aui:button onClick='<%= editCategoryURL %>' value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
+					<aui:button href='<%= editCategoryURL %>' value='<%= (category == null) ? "add-category" : "add-subcategory" %>' />
 				</c:if>
 
 				<c:if test="<%= showAddMessageButton %>">
@@ -99,7 +99,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 						<portlet:param name="mbCategoryId" value="<%= String.valueOf(categoryId) %>" />
 					</portlet:renderURL>
 
-					<aui:button onClick='<%= editMessageURL %>' value="post-new-thread" />
+					<aui:button href='<%= editMessageURL %>' value="post-new-thread" />
 				</c:if>
 
 				<c:if test="<%= showPermissionsButton %>">
@@ -123,7 +123,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 						var="permissionsURL"
 					/>
 
-					<aui:button onClick="<%= permissionsURL %>" value="permissions" />
+					<aui:button href="<%= permissionsURL %>" value="permissions" />
 				</c:if>
 			</div>
 		</c:if>

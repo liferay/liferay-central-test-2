@@ -113,7 +113,7 @@ if (message != null) {
 			</div>
 		</c:if>
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

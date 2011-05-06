@@ -89,7 +89,7 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 				var="permissionsURL"
 			/>
 
-			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
+			<aui:button href="<%= permissionsURL %>" value="permissions" />
 		</c:if>
 	</aui:button-row>
 </c:if>

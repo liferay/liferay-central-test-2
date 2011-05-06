@@ -343,7 +343,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 				</c:choose>
 			</c:if>
 
-			<aui:button onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

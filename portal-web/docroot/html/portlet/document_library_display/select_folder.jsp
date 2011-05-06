@@ -132,7 +132,7 @@ if (folder != null) {
 				<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 			</portlet:renderURL>
 
-			<aui:button onClick="<%= editFolderURL %>" value='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />
+			<aui:button href="<%= editFolderURL %>" value='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />
 		</c:if>
 
 		<%

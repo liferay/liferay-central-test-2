@@ -569,7 +569,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 				<aui:button onClick='<%= renderResponse.getNamespace() + "deleteOrder();" %>' value="delete" />
 			</c:if>
 
-			<aui:button onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</c:if>
 </aui:form>

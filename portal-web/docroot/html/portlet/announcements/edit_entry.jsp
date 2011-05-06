@@ -112,7 +112,7 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 		<aui:button onClick='<%= renderResponse.getNamespace() + "previewEntry();" %>' value="preview" />
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

@@ -106,6 +106,6 @@ String callback = ParamUtil.getString(request, "callback");
 	<aui:button onClick='<%= renderResponse.getNamespace() + "saveTemplate();" %>' value='<%= LanguageUtil.get(pageContext, "save") %>' />
 
 	<c:if test="<%= Validator.isNull(portletResourceNamespace) %>">
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</c:if>
 </aui:button-row>

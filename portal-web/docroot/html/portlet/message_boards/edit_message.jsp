@@ -387,7 +387,7 @@ if (Validator.isNull(redirect)) {
 
 		<aui:button onClick='<%= renderResponse.getNamespace() + "previewMessage();" %>' value="preview" />
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 
 	<c:if test="<%= curParentMessage != null %>">

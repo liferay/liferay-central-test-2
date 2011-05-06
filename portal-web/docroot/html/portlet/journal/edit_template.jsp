@@ -227,7 +227,7 @@ if (template == null) {
 
 		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueTemplate();" %>' value="save-and-continue" />
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 </aui:form>
 

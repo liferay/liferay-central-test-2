@@ -172,7 +172,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button onClick="<%= redirect %>" type="cancel" />
+		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
 
 	<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
