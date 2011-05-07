@@ -39,7 +39,7 @@ if (column != null) {
 
 boolean propertyHidden = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_HIDDEN));
 boolean propertyVisibleWithUpdatePermission = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_VISIBLE_WITH_UPDATE_PERMISSION));
-boolean propertyIndexable = GetterUtil.getBoolean(properties.get(ExpandoBridgeIndexer.INDEXABLE));
+int propertyIndexType = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.INDEX_TYPE));
 boolean propertySecret = GetterUtil.getBoolean(properties.get(ExpandoColumnConstants.PROPERTY_SECRET));
 int propertyHeight = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.PROPERTY_HEIGHT));
 int propertyWidth = GetterUtil.getInteger(properties.get(ExpandoColumnConstants.PROPERTY_WIDTH));
@@ -221,11 +221,16 @@ portletURL.setParameter("modelResource", modelResource);
 				<aui:option label="false" selected="<%= !propertyVisibleWithUpdatePermission %>" value="0" />
 			</aui:select>
 
-			<aui:input name="PropertyName--indexable--" type="hidden" value="indexable" />
+			<aui:input name="PropertyName--index-type--" type="hidden" value="index-type" />
 
-			<aui:select helpMessage="custom-field-indexable-help" label="searchable" name="Property--indexable--">
-				<aui:option label="true" selected="<%= propertyIndexable %>" value="1" />
-				<aui:option label="false" selected="<%= !propertyIndexable %>" value="0" />
+			<aui:select helpMessage="custom-field-index-type-help" label="searchablility" name="Property--index-type--">
+				<aui:option label="not-searchable" selected="<%= propertyIndexType == ExpandoColumnConstants.INDEX_TYPE_NONE %>" value="<%= ExpandoColumnConstants.INDEX_TYPE_NONE %>" />
+
+				<c:if test="<%= (type == ExpandoColumnConstants.STRING) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">
+					<aui:option label="as-text" selected="<%= propertyIndexType == ExpandoColumnConstants.INDEX_TYPE_TEXT %>" value="<%= ExpandoColumnConstants.INDEX_TYPE_TEXT %>" />
+				</c:if>
+
+				<aui:option label="as-keyword" selected="<%= propertyIndexType == ExpandoColumnConstants.INDEX_TYPE_KEYWORD %>" value="<%= ExpandoColumnConstants.INDEX_TYPE_KEYWORD %>" />
 			</aui:select>
 
 			<c:if test="<%= (type == ExpandoColumnConstants.DOUBLE_ARRAY) || (type == ExpandoColumnConstants.FLOAT_ARRAY) || (type == ExpandoColumnConstants.INTEGER_ARRAY) || (type == ExpandoColumnConstants.LONG_ARRAY) || (type == ExpandoColumnConstants.SHORT_ARRAY) || (type == ExpandoColumnConstants.STRING_ARRAY) %>">

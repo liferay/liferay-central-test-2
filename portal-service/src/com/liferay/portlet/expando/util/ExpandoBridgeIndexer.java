@@ -22,8 +22,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
  */
 public interface ExpandoBridgeIndexer {
 
-	public static final String INDEXABLE = "indexable";
-
 	public void addAttributes(Document document, ExpandoBridge expandoBridge);
 
 	public String encodeFieldName(String columnName);

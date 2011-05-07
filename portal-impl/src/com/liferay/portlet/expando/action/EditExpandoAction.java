@@ -38,7 +38,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.service.ExpandoColumnServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.io.Serializable;
 
@@ -196,7 +195,8 @@ public class EditExpandoAction extends PortletAction {
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_WIDTH, "450");
 			properties.setProperty(
-				ExpandoBridgeIndexer.INDEXABLE, Boolean.TRUE.toString());
+				ExpandoColumnConstants.INDEX_TYPE,
+				String.valueOf(ExpandoColumnConstants.INDEX_TYPE_TEXT));
 		}
 		else if (preset.equals("PresetTextFieldSecret()")) {
 			type = ExpandoColumnConstants.STRING;
@@ -207,7 +207,8 @@ public class EditExpandoAction extends PortletAction {
 		else {
 			type = ExpandoColumnConstants.STRING;
 			properties.setProperty(
-				ExpandoBridgeIndexer.INDEXABLE, Boolean.TRUE.toString());
+				ExpandoColumnConstants.INDEX_TYPE,
+				String.valueOf(ExpandoColumnConstants.INDEX_TYPE_TEXT));
 		}
 
 		expandoBridge.addAttribute(name, type);
@@ -223,11 +224,12 @@ public class EditExpandoAction extends PortletAction {
 		ExpandoColumnServiceUtil.deleteColumn(columnId);
 	}
 
-	protected Serializable getValue(
+	public static Serializable getValue(
 			PortletRequest portletRequest, String name, int type)
 		throws PortalException, SystemException {
 
 		Serializable value = null;
+		String delimiter = StringPool.COMMA;
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
 			value = ParamUtil.getBoolean(portletRequest, name);
@@ -264,8 +266,13 @@ public class EditExpandoAction extends PortletAction {
 			value = ParamUtil.getDouble(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
+			String paramValue = ParamUtil.getString(portletRequest, name);
+
+			if (paramValue.contains(StringPool.NEW_LINE)) {
+				delimiter = StringPool.NEW_LINE;
+			}
+
+			String[] values = StringUtil.split(paramValue, delimiter);
 
 			value = GetterUtil.getDoubleValues(values);
 		}
@@ -273,8 +280,13 @@ public class EditExpandoAction extends PortletAction {
 			value = ParamUtil.getFloat(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
+			String paramValue = ParamUtil.getString(portletRequest, name);
+
+			if (paramValue.contains(StringPool.NEW_LINE)) {
+				delimiter = StringPool.NEW_LINE;
+			}
+
+			String[] values = StringUtil.split(paramValue, delimiter);
 
 			value = GetterUtil.getFloatValues(values);
 		}
@@ -282,8 +294,13 @@ public class EditExpandoAction extends PortletAction {
 			value = ParamUtil.getInteger(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
+			String paramValue = ParamUtil.getString(portletRequest, name);
+
+			if (paramValue.contains(StringPool.NEW_LINE)) {
+				delimiter = StringPool.NEW_LINE;
+			}
+
+			String[] values = StringUtil.split(paramValue, delimiter);
 
 			value = GetterUtil.getIntegerValues(values);
 		}
@@ -291,8 +308,13 @@ public class EditExpandoAction extends PortletAction {
 			value = ParamUtil.getLong(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
+			String paramValue = ParamUtil.getString(portletRequest, name);
+
+			if (paramValue.contains(StringPool.NEW_LINE)) {
+				delimiter = StringPool.NEW_LINE;
+			}
+
+			String[] values = StringUtil.split(paramValue, delimiter);
 
 			value = GetterUtil.getLongValues(values);
 		}
@@ -300,14 +322,24 @@ public class EditExpandoAction extends PortletAction {
 			value = ParamUtil.getShort(portletRequest, name);
 		}
 		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-			String[] values = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
+			String paramValue = ParamUtil.getString(portletRequest, name);
+
+			if (paramValue.contains(StringPool.NEW_LINE)) {
+				delimiter = StringPool.NEW_LINE;
+			}
+
+			String[] values = StringUtil.split(paramValue, delimiter);
 
 			value = GetterUtil.getShortValues(values);
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-			value = StringUtil.split(
-				ParamUtil.getString(portletRequest, name), StringPool.NEW_LINE);
+			String paramValue = ParamUtil.getString(portletRequest, name);
+
+			if (paramValue.contains(StringPool.NEW_LINE)) {
+				delimiter = StringPool.NEW_LINE;
+			}
+
+			value = StringUtil.split(paramValue, delimiter);
 		}
 		else {
 			value = ParamUtil.getString(portletRequest, name);

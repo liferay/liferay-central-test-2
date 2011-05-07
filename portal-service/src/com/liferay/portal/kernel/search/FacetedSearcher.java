@@ -24,8 +24,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.Locale;
@@ -123,8 +123,10 @@ public class FacetedSearcher extends BaseIndexer {
 			UnicodeProperties properties = expandoBridge.getAttributeProperties(
 				attributeName);
 
-			if (GetterUtil.getBoolean(
-					properties.getProperty(ExpandoBridgeIndexer.INDEXABLE))) {
+			int indexType = GetterUtil.getInteger(
+				properties.getProperty(ExpandoColumnConstants.INDEX_TYPE));
+
+			if (indexType != ExpandoColumnConstants.INDEX_TYPE_NONE) {
 				String fieldName = ExpandoBridgeIndexerUtil.encodeFieldName(
 					attributeName);
 

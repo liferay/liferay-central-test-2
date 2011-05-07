@@ -66,6 +66,14 @@ public class ExpandoColumnConstants {
 
 	public static final String FLOAT_LABEL = "custom.field.float";
 
+	public static final String INDEX_TYPE = "index-type";
+
+	public static final int INDEX_TYPE_KEYWORD = 2;
+
+	public static final int INDEX_TYPE_NONE = 0;
+
+	public static final int INDEX_TYPE_TEXT = 1;
+
 	public static final int INTEGER = 9;
 
 	public static final int INTEGER_ARRAY = 10;

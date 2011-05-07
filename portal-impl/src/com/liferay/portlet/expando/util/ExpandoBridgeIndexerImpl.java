@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -84,10 +85,10 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 			UnicodeProperties properties =
 				expandoColumn.getTypeSettingsProperties();
 
-			boolean indexable = GetterUtil.getBoolean(
-				properties.get(ExpandoBridgeIndexer.INDEXABLE));
+			int indexType = GetterUtil.getInteger(
+				properties.get(ExpandoColumnConstants.INDEX_TYPE));
 
-			if (indexable) {
+			if (indexType != ExpandoColumnConstants.INDEX_TYPE_NONE) {
 				indexedColumns.add(expandoColumn);
 			}
 		}
@@ -136,6 +137,13 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 				break;
 			}
 		}
+
+		UnicodeProperties typeSettingsProperties =
+			expandoColumn.getTypeSettingsProperties();
+
+		int indexType = GetterUtil.getInteger(
+			typeSettingsProperties.getProperty(
+				ExpandoColumnConstants.INDEX_TYPE));
 
 		int type = expandoColumn.getType();
 
@@ -209,14 +217,33 @@ public class ExpandoBridgeIndexerImpl implements ExpandoBridgeIndexer {
 			}
 		}
 		else if (type == ExpandoColumnConstants.STRING) {
-			document.addText(fieldName, expandoValue.getString());
+			if (indexType == ExpandoColumnConstants.INDEX_TYPE_KEYWORD) {
+				document.addKeyword(fieldName, expandoValue.getString());
+			}
+			else {
+				document.addText(fieldName, expandoValue.getString());
+			}
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
 			if (!defaultValue) {
-				document.addKeyword(fieldName, expandoValue.getStringArray());
+				if (indexType == ExpandoColumnConstants.INDEX_TYPE_KEYWORD) {
+					document.addKeyword(
+						fieldName, expandoValue.getStringArray());
+				}
+				else {
+					document.addText(
+						fieldName,
+						StringUtil.merge(
+							expandoValue.getStringArray(), StringPool.SPACE));
+				}
 			}
 			else {
-				document.addKeyword(fieldName, new String[0]);
+				if (indexType == ExpandoColumnConstants.INDEX_TYPE_KEYWORD) {
+					document.addKeyword(fieldName, StringPool.BLANK);
+				}
+				else {
+					document.addText(fieldName, StringPool.BLANK);
+				}
 			}
 		}
 	}

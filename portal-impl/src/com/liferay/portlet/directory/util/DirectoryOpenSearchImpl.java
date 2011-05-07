@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortletKeys;
@@ -27,7 +26,6 @@ import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
-import com.liferay.portlet.expando.util.ExpandoBridgeIndexer;
 
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
@@ -99,15 +97,11 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 			UnicodeProperties properties = expandoBridge.getAttributeProperties(
 				attributeName);
 
-			String indexable = properties.getProperty(
-				ExpandoBridgeIndexer.INDEXABLE);
+			String indexType = properties.getProperty(
+				ExpandoColumnConstants.INDEX_TYPE);
 
-			if (GetterUtil.getBoolean(indexable)) {
-				int type = expandoBridge.getAttributeType(attributeName);
-
-				if (type == ExpandoColumnConstants.STRING) {
-					userParams.put(attributeName, keywords);
-				}
+			if (!indexType.equals(ExpandoColumnConstants.INDEX_TYPE_NONE)) {
+				userParams.put(attributeName, keywords);
 			}
 		}
 
