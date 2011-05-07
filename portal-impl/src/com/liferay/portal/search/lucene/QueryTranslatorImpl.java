@@ -24,7 +24,7 @@ import org.apache.lucene.queryParser.QueryParser;
 /**
  * @author Brian Wing Shun Chan
  */
-public class QueryTranslator {
+public class QueryTranslatorImpl {
 
 	public static org.apache.lucene.search.Query translate(Query query)
 		throws ParseException {
