@@ -70,6 +70,12 @@ public class SearchContextFactory {
 
 		searchContext.setAttributes(attributes);
 
+		// Keywords
+
+		String keywords = ParamUtil.getString(request, "keywords");
+
+		searchContext.setKeywords(keywords);
+
 		// Asset
 
 		long[] assetCategoryIds = StringUtil.split(
