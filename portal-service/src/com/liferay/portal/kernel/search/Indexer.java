@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.security.permission.PermissionChecker;
+
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -31,7 +33,15 @@ public interface Indexer {
 
 	public String[] getClassNames();
 
-	public Document getDocument(Object obj) throws SearchException;
+	public Document getDocument(Object obj)	throws SearchException;
+
+	public String getSearchEngineId();
+
+	public BooleanQuery getFacetQuery(
+			String className, SearchContext searchContext)
+		throws Exception;
+
+	public IndexerPostProcessor[] getIndexerPostProcessors();
 
 	public String getSortField(String orderByCol);
 
@@ -39,6 +49,23 @@ public interface Indexer {
 			Document document, Locale locale, String snippet,
 			PortletURL portletURL)
 		throws SearchException;
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception;
+
+	public boolean isFilterSearch();
+
+	public boolean isStagingAware();
+
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception;
+
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception;
 
 	public void registerIndexerPostProcessor(
 		IndexerPostProcessor indexerPostProcessor);

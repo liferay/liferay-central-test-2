@@ -105,6 +105,7 @@
 			<util:map>
 				<entry key="assetCategoryNames" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<entry key="assetTagNames" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="entryClassName" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<entry key="extension" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<!--<entry key="path">
 					<bean id="org.apache.lucene.analysis.miscellaneous.PatternAnalyzer" class="org.apache.lucene.analysis.miscellaneous.PatternAnalyzer">

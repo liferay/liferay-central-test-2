@@ -1098,6 +1098,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/bobo-browse.jar</file-name>
+		<version>2.5.0-rc1</version>
+		<project-name>Bob Browse</project-name>
+		<project-url>http://code.google.com/p/bobo-browse/</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 3</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/bsh.jar</file-name>
 		<version>2.0 B4</version>
 		<project-name>BeanShell</project-name>
@@ -1581,6 +1592,17 @@
 		<version>1.3.0</version>
 		<project-name>Ehcache</project-name>
 		<project-url>http://ehcache.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/fastutil.jar</file-name>
+		<version>5.0.5</version>
+		<project-name>Fastutil</project-name>
+		<project-url>http://fastutil.dsi.unimi.it/</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>

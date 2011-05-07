@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
+import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -47,6 +49,7 @@ import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
@@ -72,6 +75,53 @@ public class MBIndexer extends BaseIndexer {
 
 	public String[] getClassNames() {
 		return CLASS_NAMES;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception {
+
+		return MBMessagePermission.contains(
+			permissionChecker, entryClassPK, ActionKeys.VIEW);
+	}
+
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		long threadId = GetterUtil.getLong(
+			(String)searchContext.getAttribute("threadId"));
+
+		if (threadId > 0) {
+			contextQuery.addTerm("threadId", threadId);
+		}
+	}
+
+	protected void addSearchCategoryIds(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		MultiValueFacet categoryIdsFacet = new MultiValueFacet(searchContext);
+
+		categoryIdsFacet.setFacetValueValidator(new FacetValueValidator() {
+			public boolean check(SearchContext searchContext, String primKey) {
+				try {
+					MBCategoryServiceUtil.getCategory(
+						GetterUtil.getLong(primKey));
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				return true;
+			}
+		});
+
+		categoryIdsFacet.setFieldName(Field.CATEGORY_ID);
+		categoryIdsFacet.setStatic(true);
+
+		searchContext.addFacet(categoryIdsFacet);
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -250,29 +300,8 @@ public class MBIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected boolean hasPermission(
-			PermissionChecker permissionChecker, long entryClassPK,
-			String actionId)
-		throws Exception {
-
-		return MBMessagePermission.contains(
-			permissionChecker, entryClassPK, ActionKeys.VIEW);
-	}
-
-	protected boolean isFilterSearch() {
+	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
-	}
-
-	protected void postProcessContextQuery(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		long threadId = GetterUtil.getLong(
-			(String)searchContext.getAttribute("threadId"));
-
-		if (threadId > 0) {
-			contextQuery.addTerm("threadId", threadId);
-		}
 	}
 
 	protected String processContent(long messageId, String content) {

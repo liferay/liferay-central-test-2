@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
+import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -40,6 +42,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 import java.util.Date;
@@ -68,6 +71,62 @@ public class DLIndexer extends BaseIndexer {
 
 	public String[] getClassNames() {
 		return CLASS_NAMES;
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception {
+
+		return DLFileEntryPermission.contains(
+			permissionChecker, entryClassPK, ActionKeys.VIEW);
+	}
+
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, "extension", true);
+		addSearchTerm(searchQuery, searchContext, "path", true);
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		String expandoAttributes = (String)params.get("expandoAttributes");
+
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+		}
+	}
+
+	protected void addSearchFolderIds(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		MultiValueFacet folderIdsFacet = new MultiValueFacet(searchContext);
+
+		folderIdsFacet.setFacetValueValidator(new FacetValueValidator() {
+			public boolean check(SearchContext searchContext, String primKey) {
+				try {
+					DLFolderServiceUtil.getFolder(GetterUtil.getLong(primKey));
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				return true;
+			}
+		});
+
+		folderIdsFacet.setFieldName(Field.FOLDER_ID);
+		folderIdsFacet.setStatic(true);
+
+		searchContext.addFacet(folderIdsFacet);
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -185,39 +244,8 @@ public class DLIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected boolean hasPermission(
-			PermissionChecker permissionChecker, long entryClassPK,
-			String actionId)
-		throws Exception {
-
-		return DLFileEntryPermission.contains(
-			permissionChecker, entryClassPK, ActionKeys.VIEW);
-	}
-
-	protected boolean isFilterSearch() {
+	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
-	}
-
-	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		addSearchTerm(searchQuery, searchContext, "extension", true);
-		addSearchTerm(searchQuery, searchContext, "path", true);
-		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (params == null) {
-			return;
-		}
-
-		String expandoAttributes = (String)params.get("expandoAttributes");
-
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
-		}
 	}
 
 	protected void reindexFolders(long companyId) throws Exception {

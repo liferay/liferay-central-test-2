@@ -69,6 +69,67 @@ public class UserIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		Integer status = (Integer)searchContext.getAttribute("status");
+
+		if ((status != null) &&
+			(status.intValue() != WorkflowConstants.STATUS_ANY)) {
+
+			contextQuery.addRequiredTerm("status", status);
+		}
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			if (value == null) {
+				continue;
+			}
+
+			addContextQueryParams(contextQuery, key, value);
+		}
+	}
+
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, "city", true);
+		addSearchTerm(searchQuery, searchContext, "country", true);
+		addSearchTerm(searchQuery, searchContext, "emailAddress", true);
+		addSearchTerm(searchQuery, searchContext, "firstName", true);
+		addSearchTerm(searchQuery, searchContext, "fullName", true);
+		addSearchTerm(searchQuery, searchContext, "lastName", true);
+		addSearchTerm(searchQuery, searchContext, "middleName", true);
+		addSearchTerm(searchQuery, searchContext, "region", true);
+		addSearchTerm(searchQuery, searchContext, "screenName", true);
+		addSearchTerm(searchQuery, searchContext, "street", true);
+		addSearchTerm(searchQuery, searchContext, "zip", true);
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		String expandoAttributes = (String)params.get("expandoAttributes");
+
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+		}
+	}
+
 	protected void addContextQueryParams(
 			BooleanQuery contextQuery, String key, Object value)
 		throws Exception {
@@ -356,67 +417,6 @@ public class UserIndexer extends BaseIndexer {
 
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
-	}
-
-	protected void postProcessContextQuery(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		Integer status = (Integer)searchContext.getAttribute("status");
-
-		if ((status != null) &&
-			(status.intValue() != WorkflowConstants.STATUS_ANY)) {
-
-			contextQuery.addRequiredTerm("status", status);
-		}
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (params == null) {
-			return;
-		}
-
-		for (Map.Entry<String, Object> entry : params.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
-
-			if (value == null) {
-				continue;
-			}
-
-			addContextQueryParams(contextQuery, key, value);
-		}
-	}
-
-	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		addSearchTerm(searchQuery, searchContext, "city", true);
-		addSearchTerm(searchQuery, searchContext, "country", true);
-		addSearchTerm(searchQuery, searchContext, "emailAddress", true);
-		addSearchTerm(searchQuery, searchContext, "firstName", true);
-		addSearchTerm(searchQuery, searchContext, "fullName", true);
-		addSearchTerm(searchQuery, searchContext, "lastName", true);
-		addSearchTerm(searchQuery, searchContext, "middleName", true);
-		addSearchTerm(searchQuery, searchContext, "region", true);
-		addSearchTerm(searchQuery, searchContext, "screenName", true);
-		addSearchTerm(searchQuery, searchContext, "street", true);
-		addSearchTerm(searchQuery, searchContext, "zip", true);
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (params == null) {
-			return;
-		}
-
-		String expandoAttributes = (String)params.get("expandoAttributes");
-
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
-		}
 	}
 
 	protected void reindexUsers(long companyId) throws Exception {

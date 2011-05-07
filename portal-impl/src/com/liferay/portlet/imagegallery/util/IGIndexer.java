@@ -15,6 +15,7 @@
 package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -22,6 +23,8 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
+import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -60,6 +63,31 @@ public class IGIndexer extends BaseIndexer {
 
 	public String[] getClassNames() {
 		return CLASS_NAMES;
+	}
+
+	protected void addSearchFolderIds(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		MultiValueFacet folderIdsFacet = new MultiValueFacet(searchContext);
+
+		folderIdsFacet.setFacetValueValidator(new FacetValueValidator() {
+			public boolean check(SearchContext searchContext, String primKey) {
+				try {
+					IGFolderServiceUtil.getFolder(GetterUtil.getLong(primKey));
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				return true;
+			}
+		});
+
+		folderIdsFacet.setFieldName(Field.FOLDER_ID);
+		folderIdsFacet.setStatic(true);
+
+		searchContext.addFacet(folderIdsFacet);
 	}
 
 	protected void checkSearchFolderId(

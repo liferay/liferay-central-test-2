@@ -41,6 +41,19 @@ public class AssetIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		if (searchContext.getAttributes() == null) {
+			return;
+		}
+
+		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
+		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
+	}
+
 	protected void doDelete(Object obj) {
 	}
 
@@ -66,19 +79,6 @@ public class AssetIndexer extends BaseIndexer {
 
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
-	}
-
-	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		if (searchContext.getAttributes() == null) {
-			return;
-		}
-
-		addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
-		addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
-		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 	}
 
 }

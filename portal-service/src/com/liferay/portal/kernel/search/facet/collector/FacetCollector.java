@@ -12,23 +12,19 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search;
+package com.liferay.portal.kernel.search.facet.collector;
 
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import java.util.List;
 
 /**
- * @author Bruno Farache
  * @author Raymond Augé
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
-public interface IndexSearcher {
+public interface FacetCollector {
 
-	public Hits search(SearchContext searchContext, Query query)
-		throws SearchException;
+	public String getFieldName();
 
-	public Hits search(
-			long companyId, Query query, Sort[] sort, int start, int end)
-		throws SearchException;
+	public TermCollector getTermCollector(String term);
+
+	public List<TermCollector> getTermCollectors();
 
 }

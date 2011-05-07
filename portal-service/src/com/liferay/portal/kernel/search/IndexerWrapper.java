@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.security.permission.PermissionChecker;
+
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -39,6 +41,20 @@ public class IndexerWrapper implements Indexer {
 		return _indexer.getDocument(obj);
 	}
 
+	public String getSearchEngineId() {
+		return _indexer.getSearchEngineId();
+	}
+
+	public BooleanQuery getFacetQuery(String className, SearchContext searchContext)
+		throws Exception {
+
+		return _indexer.getFacetQuery(className, searchContext);
+	}
+
+	public IndexerPostProcessor[] getIndexerPostProcessors() {
+		return _indexer.getIndexerPostProcessors();
+	}
+
 	public String getSortField(String orderByCol) {
 		return _indexer.getSortField(orderByCol);
 	}
@@ -49,6 +65,37 @@ public class IndexerWrapper implements Indexer {
 		throws SearchException {
 
 		return _indexer.getSummary(document, locale, snippet, portletURL);
+	}
+
+	public boolean hasPermission(
+			PermissionChecker permissionChecker, long entryClassPK,
+			String actionId)
+		throws Exception {
+
+		return _indexer.hasPermission(
+			permissionChecker, entryClassPK, actionId);
+	}
+
+	public boolean isFilterSearch() {
+		return _indexer.isFilterSearch();
+	}
+
+	public boolean isStagingAware() {
+		return _indexer.isStagingAware();
+	}
+
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		_indexer.postProcessContextQuery(contextQuery, searchContext);
+	}
+
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		_indexer.postProcessSearchQuery(searchQuery, searchContext);
 	}
 
 	public void registerIndexerPostProcessor(

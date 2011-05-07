@@ -15,20 +15,31 @@
 package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.io.Serializable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
  */
 public class SearchContext implements Serializable {
+
+	public void addFacet(Facet facet) {
+		if (facet == null) {
+			return;
+		}
+
+		_facets.put(facet.getFieldName(), facet);
+	}
 
 	public long[] getAssetCategoryIds() {
 		return _assetCategoryIds;
@@ -70,6 +81,22 @@ public class SearchContext implements Serializable {
 		return _end;
 	}
 
+	public String[] getEntryClassNames() {
+		if (_entryClassNames == null) {
+			_entryClassNames = new String[0];
+		}
+
+		return _entryClassNames;
+	}
+
+	public Facet getFacet(String fieldName) {
+		return _facets.get(fieldName);
+	}
+
+	public Map<String,Facet> getFacets() {
+		return _facets;
+	}
+
 	public long[] getFolderIds() {
 		return _folderIds;
 	}
@@ -104,6 +131,10 @@ public class SearchContext implements Serializable {
 		}
 
 		return _queryConfig;
+	}
+
+	public String getSearchEngineId() {
+		return _searchEngineId;
 	}
 
 	public Sort[] getSorts() {
@@ -178,6 +209,16 @@ public class SearchContext implements Serializable {
 		_end = end;
 	}
 
+	public void setEntryClassNames(String[] entryClassNames) {
+		_entryClassNames = entryClassNames;
+	}
+
+	public void setFacets(List<Facet> facets) {
+		for (Facet facet : facets) {
+			_facets.put(facet.getFieldName(), facet);
+		}
+	}
+
 	public void setFolderIds(long[] folderIds) {
 		_folderIds = folderIds;
 	}
@@ -224,6 +265,12 @@ public class SearchContext implements Serializable {
 		_scopeStrict = scopeStrict;
 	}
 
+	public void setSearchEngineId(String searchEngineId) {
+		if (_searchEngineId == null) {
+			_searchEngineId = searchEngineId;
+		}
+	}
+
 	public void setSorts(Sort[] sorts) {
 		_sorts = sorts;
 	}
@@ -248,6 +295,8 @@ public class SearchContext implements Serializable {
 	private long[] _categoryIds;
 	private long _companyId;
 	private int _end = QueryUtil.ALL_POS;
+	private String[] _entryClassNames;
+	private Map<String,Facet> _facets = new ConcurrentHashMap<String, Facet>();
 	private long[] _folderIds;
 	private long[] _groupIds;
 	private boolean _includeLiveGroups = true;
@@ -259,6 +308,7 @@ public class SearchContext implements Serializable {
 	private String[] _portletIds;
 	private QueryConfig _queryConfig;
 	private boolean _scopeStrict = true;
+	private String _searchEngineId;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;
 	private TimeZone _timeZone;

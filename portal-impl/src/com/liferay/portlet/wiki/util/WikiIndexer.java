@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.search.facet.MultiValueFacet;
+import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -67,6 +69,31 @@ public class WikiIndexer extends BaseIndexer {
 
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
+	}
+
+	protected void addSearchNodeIds(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		MultiValueFacet nodeIdsFacet = new MultiValueFacet(searchContext);
+
+		nodeIdsFacet.setFacetValueValidator(new FacetValueValidator() {
+			public boolean check(SearchContext searchContext, String primKey) {
+				try {
+					WikiNodeServiceUtil.getNode(GetterUtil.getLong(primKey));
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				return true;
+			}
+		});
+
+		nodeIdsFacet.setFieldName(Field.NODE_ID);
+		nodeIdsFacet.setStatic(true);
+
+		searchContext.addFacet(nodeIdsFacet);
 	}
 
 	protected void doDelete(Object obj) throws Exception {

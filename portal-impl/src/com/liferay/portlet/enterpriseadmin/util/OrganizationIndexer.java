@@ -76,6 +76,70 @@ public class OrganizationIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
+			"organizationsTree");
+
+		if (leftAndRightOrganizationIds != null) {
+			BooleanQuery organizationsTreeQuery =
+				BooleanQueryFactoryUtil.create();
+
+			if (leftAndRightOrganizationIds.length == 0) {
+				organizationsTreeQuery.addRequiredTerm(
+					Field.ORGANIZATION_ID, -1);
+			}
+			else if (leftAndRightOrganizationIds.length > 0) {
+				for (Long[] leftAndRightOrganizationId :
+						leftAndRightOrganizationIds) {
+
+					organizationsTreeQuery.addNumericRangeTerm(
+						"leftOrganizationId", leftAndRightOrganizationId[0],
+						leftAndRightOrganizationId[1]);
+				}
+			}
+
+			contextQuery.add(organizationsTreeQuery, BooleanClauseOccur.MUST);
+		}
+	}
+
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, "city", true);
+		addSearchTerm(searchQuery, searchContext, "country", true);
+		addSearchTerm(searchQuery, searchContext, "name", true);
+		addSearchTerm(
+			searchQuery, searchContext, "parentOrganizationId", false);
+		addSearchTerm(searchQuery, searchContext, "region", true);
+		addSearchTerm(searchQuery, searchContext, "street", true);
+		addSearchTerm(searchQuery, searchContext, "type", true);
+		addSearchTerm(searchQuery, searchContext, "zip", true);
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		String expandoAttributes = (String)params.get("expandoAttributes");
+
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+		}
+	}
+
 	protected void doDelete(Object obj) throws Exception {
 		Organization organization = (Organization)obj;
 
@@ -290,70 +354,6 @@ public class OrganizationIndexer extends BaseIndexer {
 
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
-	}
-
-	protected void postProcessContextQuery(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (params == null) {
-			return;
-		}
-
-		Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
-			"organizationsTree");
-
-		if (leftAndRightOrganizationIds != null) {
-			BooleanQuery organizationsTreeQuery =
-				BooleanQueryFactoryUtil.create();
-
-			if (leftAndRightOrganizationIds.length == 0) {
-				organizationsTreeQuery.addRequiredTerm(
-					Field.ORGANIZATION_ID, -1);
-			}
-			else if (leftAndRightOrganizationIds.length > 0) {
-				for (Long[] leftAndRightOrganizationId :
-						leftAndRightOrganizationIds) {
-
-					organizationsTreeQuery.addNumericRangeTerm(
-						"leftOrganizationId", leftAndRightOrganizationId[0],
-						leftAndRightOrganizationId[1]);
-				}
-			}
-
-			contextQuery.add(organizationsTreeQuery, BooleanClauseOccur.MUST);
-		}
-	}
-
-	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		addSearchTerm(searchQuery, searchContext, "city", true);
-		addSearchTerm(searchQuery, searchContext, "country", true);
-		addSearchTerm(searchQuery, searchContext, "name", true);
-		addSearchTerm(
-			searchQuery, searchContext, "parentOrganizationId", false);
-		addSearchTerm(searchQuery, searchContext, "region", true);
-		addSearchTerm(searchQuery, searchContext, "street", true);
-		addSearchTerm(searchQuery, searchContext, "type", true);
-		addSearchTerm(searchQuery, searchContext, "zip", true);
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (params == null) {
-			return;
-		}
-
-		String expandoAttributes = (String)params.get("expandoAttributes");
-
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
-		}
 	}
 
 	protected void reindexOrganizations(long companyId) throws Exception {

@@ -12,23 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search;
+package com.liferay.portal.kernel.search.facet.util;
 
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.search.SearchContext;
 
 /**
- * @author Bruno Farache
  * @author Raymond Augé
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
-public interface IndexSearcher {
+public interface FacetValueValidator {
 
-	public Hits search(SearchContext searchContext, Query query)
-		throws SearchException;
-
-	public Hits search(
-			long companyId, Query query, Sort[] sort, int start, int end)
-		throws SearchException;
+	public boolean check(SearchContext searchContext, String primKey);
 
 }

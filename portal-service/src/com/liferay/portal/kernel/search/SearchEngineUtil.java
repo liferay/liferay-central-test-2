@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Bruno Farache
@@ -31,7 +33,16 @@ public class SearchEngineUtil {
 	 */
 	public static final int ALL_POS = -1;
 
+	public static final String SYSTEM_ENGINE_ID = "SYSTEM_ENGINE";
+
 	public static void addDocument(long companyId, Document document)
+		throws SearchException {
+
+		addDocument(SYSTEM_ENGINE_ID, companyId, document);
+	}
+
+	public static void addDocument(
+			String searchEngineId, long companyId, Document document)
 		throws SearchException {
 
 		if (isIndexReadOnly()) {
@@ -44,11 +55,20 @@ public class SearchEngineUtil {
 
 		_searchPermissionChecker.addPermissionFields(companyId, document);
 
-		_searchEngine.getWriter().addDocument(companyId, document);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().addDocument(companyId, document);
 	}
 
 	public static void addDocuments(
 			long companyId, Collection<Document> documents)
+		throws SearchException {
+
+		addDocuments(SYSTEM_ENGINE_ID, companyId, documents);
+	}
+
+	public static void addDocuments(
+			String searchEngineId, long companyId, Collection<Document> documents)
 		throws SearchException {
 
 		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
@@ -63,37 +83,65 @@ public class SearchEngineUtil {
 			_searchPermissionChecker.addPermissionFields(companyId, document);
 		}
 
-		_searchEngine.getWriter().addDocuments(companyId, documents);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().addDocuments(companyId, documents);
 	}
 
 	public static void deleteDocument(long companyId, String uid)
+		throws SearchException {
+
+		deleteDocument(SYSTEM_ENGINE_ID, companyId, uid);
+	}
+
+	public static void deleteDocument(
+			String searchEngineId, long companyId, String uid)
 		throws SearchException {
 
 		if (isIndexReadOnly()) {
 			return;
 		}
 
-		_searchEngine.getWriter().deleteDocument(companyId, uid);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().deleteDocument(companyId, uid);
 	}
 
 	public static void deleteDocuments(long companyId, Collection<String> uids)
+		throws SearchException {
+
+		deleteDocuments(SYSTEM_ENGINE_ID, companyId, uids);
+	}
+
+	public static void deleteDocuments(
+			String searchEngineId, long companyId, Collection<String> uids)
 		throws SearchException {
 
 		if (isIndexReadOnly() || (uids == null) || uids.isEmpty()) {
 			return;
 		}
 
-		_searchEngine.getWriter().deleteDocuments(companyId, uids);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().deleteDocuments(companyId, uids);
 	}
 
 	public static void deletePortletDocuments(long companyId, String portletId)
+		throws SearchException {
+
+	}
+
+	public static void deletePortletDocuments(
+			String searchEngineId, long companyId, String portletId)
 		throws SearchException {
 
 		if (isIndexReadOnly()) {
 			return;
 		}
 
-		_searchEngine.getWriter().deletePortletDocuments(companyId, portletId);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().deletePortletDocuments(companyId, portletId);
 	}
 
 	public static PortalSearchEngine getPortalSearchEngine() {
@@ -101,21 +149,52 @@ public class SearchEngineUtil {
 	}
 
 	public static SearchEngine getSearchEngine() {
-		return _searchEngine;
+		return getSearchEngine(SYSTEM_ENGINE_ID);
+	}
+
+	public static SearchEngine getSearchEngine(String searchEngineId) {
+		return _searchEngines.get(searchEngineId);
+	}
+
+	public static SearchPermissionChecker getSearchPermissionChecker() {
+		return _searchPermissionChecker;
 	}
 
 	public static boolean isIndexReadOnly() {
 		return _portalSearchEngine.isIndexReadOnly();
 	}
 
-	public static Hits search(long companyId, Query query, int start, int end)
+	public static Hits search(SearchContext searchContext, Query query)
 		throws SearchException {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search query " + query.toString());
 		}
 
-		return _searchEngine.getSearcher().search(
+		SearchEngine searchEngine = _searchEngines.get(
+			searchContext.getSearchEngineId());
+
+		return searchEngine.getSearcher().search(searchContext, query);
+	}
+
+	public static Hits search(long companyId, Query query, int start, int end)
+		throws SearchException {
+
+		return search(SYSTEM_ENGINE_ID, companyId, query, start, end);
+	}
+
+	public static Hits search(
+			String searchEngineId, long companyId, Query query, int start,
+			int end)
+		throws SearchException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search query " + query.toString());
+		}
+
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		return searchEngine.getSearcher().search(
 			companyId, query, SortFactoryUtil.getDefaultSorts(), start, end);
 	}
 
@@ -123,11 +202,21 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
+		return search(SYSTEM_ENGINE_ID, companyId, query, sort, start, end);
+	}
+
+	public static Hits search(
+			String searchEngineId, long companyId, Query query, Sort sort,
+			int start, int end)
+		throws SearchException {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search query " + query.toString());
 		}
 
-		return _searchEngine.getSearcher().search(
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		return searchEngine.getSearcher().search(
 			companyId, query, new Sort[] {sort}, start, end);
 	}
 
@@ -135,11 +224,21 @@ public class SearchEngineUtil {
 			long companyId, Query query, Sort[] sorts, int start, int end)
 		throws SearchException {
 
+		return search(SYSTEM_ENGINE_ID, companyId, query, sorts, start, end);
+	}
+
+	public static Hits search(
+			String searchEngineId, long companyId, Query query, Sort[] sorts,
+			int start, int end)
+		throws SearchException {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search query " + query.toString());
 		}
 
-		return _searchEngine.getSearcher().search(
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		return searchEngine.getSearcher().search(
 			companyId, query, sorts, start, end);
 	}
 
@@ -190,6 +289,13 @@ public class SearchEngineUtil {
 	public static void updateDocument(long companyId, Document document)
 		throws SearchException {
 
+		updateDocument(SYSTEM_ENGINE_ID, companyId, document);
+	}
+
+	public static void updateDocument(
+			String searchEngineId, long companyId, Document document)
+		throws SearchException {
+
 		if (isIndexReadOnly()) {
 			return;
 		}
@@ -200,11 +306,20 @@ public class SearchEngineUtil {
 
 		_searchPermissionChecker.addPermissionFields(companyId, document);
 
-		_searchEngine.getWriter().updateDocument(companyId, document);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().updateDocument(companyId, document);
 	}
 
 	public static void updateDocuments(
 			long companyId, Collection<Document> documents)
+		throws SearchException {
+
+	}
+
+	public static void updateDocuments(
+			String searchEngineId, long companyId,
+			Collection<Document> documents)
 		throws SearchException {
 
 		if (isIndexReadOnly() || (documents == null) || documents.isEmpty()) {
@@ -219,7 +334,9 @@ public class SearchEngineUtil {
 			_searchPermissionChecker.addPermissionFields(companyId, document);
 		}
 
-		_searchEngine.getWriter().updateDocuments(companyId, documents);
+		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
+
+		searchEngine.getWriter().updateDocuments(companyId, documents);
 	}
 
 	public static void updatePermissionFields(long resourceId) {
@@ -243,7 +360,11 @@ public class SearchEngineUtil {
 	}
 
 	public void setSearchEngine(SearchEngine searchEngine) {
-		_searchEngine = searchEngine;
+		_searchEngines.put(SYSTEM_ENGINE_ID, searchEngine);
+	}
+
+	public void setSearchEngines(Map<String,SearchEngine> searchEngines) {
+		_searchEngines.putAll(searchEngines);
 	}
 
 	public void setSearchPermissionChecker(
@@ -255,7 +376,8 @@ public class SearchEngineUtil {
 	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
 	private static PortalSearchEngine _portalSearchEngine;
-	private static SearchEngine _searchEngine;
+	private static Map<String,SearchEngine> _searchEngines =
+		new ConcurrentHashMap<String,SearchEngine>();
 	private static SearchPermissionChecker _searchPermissionChecker;
 
 }

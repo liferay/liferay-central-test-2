@@ -12,23 +12,29 @@
  * details.
  */
 
-package com.liferay.portal.kernel.search;
+package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
-import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.search.facet.collector.TermCollector;
+
+import com.browseengine.bobo.api.BrowseFacet;
 
 /**
- * @author Bruno Farache
  * @author Raymond Augé
  */
-@MessagingProxy(mode = ProxyMode.SYNC)
-public interface IndexSearcher {
+public class BoboTermCollector implements TermCollector {
 
-	public Hits search(SearchContext searchContext, Query query)
-		throws SearchException;
+	public BoboTermCollector(BrowseFacet browseFacet) {
+		_browseFacet = browseFacet;
+	}
 
-	public Hits search(
-			long companyId, Query query, Sort[] sort, int start, int end)
-		throws SearchException;
+	public int getFrequency() {
+		return _browseFacet.getFacetValueHitCount();
+	}
+
+	public String getTerm() {
+		return _browseFacet.getValue();
+	}
+
+	private BrowseFacet _browseFacet;
 
 }

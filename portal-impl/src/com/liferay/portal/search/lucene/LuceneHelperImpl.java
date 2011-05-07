@@ -200,7 +200,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		try {
 			QueryParser queryParser = new QueryParser(
-				_version, field, getAnalyzer());
+				getVersion(), field, getAnalyzer());
 
 			Query query = queryParser.parse(value);
 
@@ -342,21 +342,25 @@ public class LuceneHelperImpl implements LuceneHelper {
 		String queryString = StringUtil.replace(
 			query.toString(), StringPool.STAR, StringPool.BLANK);
 
+		Query tempQuery = null;
+
 		try {
 			QueryParser queryParser = new QueryParser(
-				_version, Field.CONTENT, getAnalyzer());
+				getVersion(), StringPool.BLANK, getAnalyzer());
 
-			query = queryParser.parse(queryString);
+			tempQuery = queryParser.parse(queryString);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
+			tempQuery = query;
 		}
 
 		WeightedTerm[] weightedTerms = null;
 
 		for (String fieldName : Field.KEYWORDS) {
 			weightedTerms = QueryTermExtractor.getTerms(
-				query, false, fieldName);
+				tempQuery, false, fieldName);
 
 			if (weightedTerms.length > 0) {
 				break;
@@ -375,9 +379,17 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
-		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		if (_indexSearcher == null) {
+			IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
-		return new IndexSearcher(indexAccessor.getLuceneDir(), readOnly);
+			_indexSearcher = new IndexSearcher(
+				indexAccessor.getLuceneDir(), readOnly);
+
+			_indexSearcher.setDefaultFieldSortScoring(true, true);
+			_indexSearcher.setSimilarity(new FieldWeightSimilarity());
+		}
+
+		return _indexSearcher;
 	}
 
 	public String getSnippet(
@@ -857,6 +869,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	private Analyzer _analyzer;
 	private Map<Long, IndexAccessor> _indexAccessors =
 		new ConcurrentHashMap<Long, IndexAccessor>();
+	private IndexSearcher _indexSearcher;
 	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
 	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
 	private Version _version;

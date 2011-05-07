@@ -78,6 +78,53 @@ public class JournalIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		String type = (String)searchContext.getAttribute("type");
+
+		if (Validator.isNotNull(type)) {
+			contextQuery.addRequiredTerm("type", type);
+		}
+	}
+
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		addSearchTerm(searchQuery, searchContext, Field.CLASS_NAME_ID, false);
+		addSearchTerm(searchQuery, searchContext, Field.CLASS_PK, false);
+		addLocalizedSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
+		addLocalizedSearchTerm(
+			searchQuery, searchContext, Field.DESCRIPTION, true);
+		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
+
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
+		}
+
+		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
+
+		LinkedHashMap<String, Object> params =
+			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
+
+		if (params == null) {
+			return;
+		}
+
+		String expandoAttributes = (String)params.get("expandoAttributes");
+
+		if (Validator.isNotNull(expandoAttributes)) {
+			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+		}
+	}
+
 	protected void doDelete(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
@@ -367,53 +414,6 @@ public class JournalIndexer extends BaseIndexer {
 						StringUtil.merge(value, StringPool.SPACE));
 				}
 			}
-		}
-	}
-
-	protected void postProcessContextQuery(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		String type = (String)searchContext.getAttribute("type");
-
-		if (Validator.isNotNull(type)) {
-			contextQuery.addRequiredTerm("type", type);
-		}
-	}
-
-	protected void postProcessSearchQuery(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		addSearchTerm(searchQuery, searchContext, Field.CLASS_NAME_ID, false);
-		addSearchTerm(searchQuery, searchContext, Field.CLASS_PK, false);
-		addLocalizedSearchTerm(searchQuery, searchContext, Field.CONTENT, true);
-		addLocalizedSearchTerm(
-			searchQuery, searchContext, Field.DESCRIPTION, true);
-		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
-
-		int status = GetterUtil.getInteger(
-			searchContext.getAttribute(Field.STATUS),
-			WorkflowConstants.STATUS_ANY);
-
-		if (status != WorkflowConstants.STATUS_ANY) {
-			addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
-		}
-
-		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
-		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
-
-		LinkedHashMap<String, Object> params =
-			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		if (params == null) {
-			return;
-		}
-
-		String expandoAttributes = (String)params.get("expandoAttributes");
-
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
 		}
 	}
 
