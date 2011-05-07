@@ -31,6 +31,8 @@ boolean editable = ParamUtil.getBoolean(request, "editable", true);
 if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
 	editable = true;
 }
+
+boolean spreadsheet = ParamUtil.getBoolean(request, "spreadsheet");
 %>
 
 <liferay-ui:header
@@ -43,7 +45,7 @@ if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
 </portlet:actionURL>
 
 <aui:form action="<%= editRecordSetURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRecordSet();" %>'>
-	<c:if test="<%= editable %>">
+	<c:if test="<%= !spreadsheet && editable %>">
 		<aui:button onClick='<%= renderResponse.getNamespace() + "addRecord();" %>' value="add-record" />
 
 		<div class="separator"><!-- --></div>
@@ -52,6 +54,9 @@ if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
 	<c:choose>
 		<c:when test="<%= listDDMTemplateId > 0 %>">
 			<%= DDLUtil.getTemplateContent(listDDMTemplateId, recordSet, themeDisplay, renderRequest, renderResponse) %>
+		</c:when>
+		<c:when test="<%= spreadsheet %>">
+			<liferay-util:include page="/html/portlet/dynamic_data_lists/view_spreadsheet_records.jsp" />
 		</c:when>
 		<c:otherwise>
 			<liferay-util:include page="/html/portlet/dynamic_data_lists/view_records.jsp" />

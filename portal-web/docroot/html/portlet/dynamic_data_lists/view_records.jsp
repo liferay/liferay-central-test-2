@@ -61,7 +61,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	DDLRecord record = results.get(i);
 
-	Fields fieldsModel = StorageEngineUtil.getFields(record.getClassPK());
+	Fields fieldsModel = record.getFields();
 
 	ResultRow row = new ResultRow(record, record.getRecordId(), i);
 

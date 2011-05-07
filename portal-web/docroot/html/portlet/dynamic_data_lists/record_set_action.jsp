@@ -41,6 +41,22 @@ DDLRecordSet recordSet = (DDLRecordSet)row.getObject();
 		/>
 	</c:if>
 
+	<c:if test="<%= DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.VIEW) %>">
+		<portlet:renderURL var="viewRecordSetURL">
+			<portlet:param name="struts_action" value="/dynamic_data_lists/view_record_set" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+			<portlet:param name="spreadsheet" value="true" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="view_tasks"
+			message="spreadsheet-view"
+			url="<%= viewRecordSetURL %>"
+		/>
+	</c:if>
+
 	<c:if test="<%= DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editRecordSetURL">
 			<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record_set" />

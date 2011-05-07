@@ -24,6 +24,7 @@
 <%@ page import="com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecord" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet" %>
+<%@ page import="com.liferay.portlet.dynamicdatalists.util.DDLUtil" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.RecordSetDisplayTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.RecordSetSearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatalists.search.RecordSetSearchTerms" %>
