@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
@@ -278,7 +279,9 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
-		List<Document> documents = indexer.search(searchContext).toList();
+		Hits hits = indexer.search(searchContext);
+
+		List<Document> documents = hits.toList();
 
 		boolean found = false;
 
@@ -301,6 +304,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		else {
 			message += "file entry by " + keywords;
 		}
+
+		message += " using query " + hits.getQuery().toString();
 
 		assertTrue(message, found);
 	}

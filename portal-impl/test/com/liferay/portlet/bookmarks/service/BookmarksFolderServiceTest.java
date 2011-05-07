@@ -110,7 +110,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		hits = indexer.search(searchContext);
 
-		assertEquals(0, hits.getLength());
+		assertEquals(hits.getQuery().toString(), 0, hits.getLength());
 
 		addEntry();
 		addEntry();
