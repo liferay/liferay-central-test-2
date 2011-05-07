@@ -86,6 +86,10 @@
 	<bean id="com.liferay.portal.kernel.search.TermQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermQueryFactoryUtil">
 		<property name="termQueryFactory" ref="com.liferay.portal.kernel.search.TermQueryFactory" />
 	</bean>
+	<bean id="com.liferay.portal.kernel.search.TermRangeQueryFactory" class="com.liferay.portal.search.lucene.TermRangeQueryFactoryImpl" />
+	<bean id="com.liferay.portal.kernel.search.TermRangeQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermRangeQueryFactoryUtil">
+		<property name="termRangeQueryFactory" ref="com.liferay.portal.kernel.search.TermRangeQueryFactory" />
+	</bean>
 
 	<!-- Lucene analyzers -->
 
