@@ -123,7 +123,7 @@ public class DDLUtil {
 			jsonObject.put("dataType", dataType);
 
 			boolean editable = GetterUtil.getBoolean(
-				fields.get(DDMFieldConstants.EDITABLE));
+				fields.get(DDMFieldConstants.EDITABLE), true);
 
 			jsonObject.put("editable", editable);
 
@@ -141,7 +141,7 @@ public class DDLUtil {
 			jsonObject.put("required", required);
 
 			boolean sortable = GetterUtil.getBoolean(
-				fields.get(DDMFieldConstants.SORTABLE));
+				fields.get(DDMFieldConstants.SORTABLE), true);
 
 			jsonObject.put("sortable", sortable);
 
