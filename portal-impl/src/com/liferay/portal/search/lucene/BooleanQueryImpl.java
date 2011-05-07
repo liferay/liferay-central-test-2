@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanClauseOccurImpl;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.search.QueryTranslatorUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +38,10 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	public void add(Query query, BooleanClauseOccur booleanClauseOccur)
 		throws ParseException {
 
-		try {
-			_booleanQuery.add(
-				QueryTranslator.translate(query),
-				BooleanClauseOccurTranslator.translate(booleanClauseOccur));
-		}
-		catch (org.apache.lucene.queryParser.ParseException pe) {
-			throw new ParseException(pe.getMessage());
-		}
+		_booleanQuery.add(
+			(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+				query),
+			BooleanClauseOccurTranslator.translate(booleanClauseOccur));
 	}
 
 	public void add(Query query, String occur) throws ParseException {

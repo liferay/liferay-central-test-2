@@ -35,4 +35,11 @@ public class BooleanClauseFactoryImpl implements BooleanClauseFactory {
 		return new BooleanClauseImpl(query, booleanClauseOccur);
 	}
 
+	public BooleanClause create(Query query, String occur) {
+		BooleanClauseOccur booleanClauseOccur = new BooleanClauseOccurImpl(
+			occur);
+
+		return new BooleanClauseImpl(query, booleanClauseOccur);
+	}
+
 }

@@ -15,30 +15,26 @@
 package com.liferay.portal.kernel.search;
 
 /**
- * @author Bruno Farache
+ * @author Raymond Augé
  */
-public class BooleanClauseFactoryUtil {
+public class QueryTranslatorUtil {
 
-	public static BooleanClause create(
-		String field, String value, String occur) {
-
-		return getBooleanClauseFactory().create(field, value, occur);
+	public static QueryTranslator getQueryTranslator() {
+		return _queryTranslator;
 	}
 
-	public static BooleanClause create(Query query, String occur) {
-		return getBooleanClauseFactory().create(query, occur);
+	public static Object translate(Query query) throws ParseException {
+		return getQueryTranslator().translate(query);
 	}
 
-	public static BooleanClauseFactory getBooleanClauseFactory() {
-		return _booleanClauseFactory;
+	public static Object translateForSolr(Query query) throws ParseException {
+		return getQueryTranslator().translateForSolr(query);
 	}
 
-	public void setBooleanClauseFactory(
-		BooleanClauseFactory booleanClauseFactory) {
-
-		_booleanClauseFactory = booleanClauseFactory;
+	public void setQueryTranslator(QueryTranslator queryTranslator) {
+		_queryTranslator = queryTranslator;
 	}
 
-	private static BooleanClauseFactory _booleanClauseFactory;
+	private static QueryTranslator _queryTranslator;
 
 }

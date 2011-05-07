@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.HitsImpl;
 import com.liferay.portal.kernel.search.IndexSearcher;
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryConfig;
+import com.liferay.portal.kernel.search.QueryTranslatorUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -41,7 +43,6 @@ import java.util.List;
 
 import org.apache.lucene.document.NumericField;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Explanation;
 import org.apache.lucene.search.SortField;
@@ -90,8 +91,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			long startTime = System.currentTimeMillis();
 
 			TopFieldDocs topFieldDocs = indexSearcher.search(
-				QueryTranslator.translate(query), null,
-				PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
+				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+					query),
+				null, PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
 
 			long endTime = System.currentTimeMillis();
 
@@ -110,8 +112,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				long startTime = System.currentTimeMillis();
 
 				TopFieldDocs topFieldDocs = indexSearcher.search(
-					QueryTranslator.translate(query), null,
-					PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
+					(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+						query),
+					null, PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
 
 				long endTime = System.currentTimeMillis();
 
@@ -193,7 +196,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		try {
 			queryTerms = LuceneHelperUtil.getQueryTerms(
-				QueryTranslator.translate(query));
+				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+					query));
 		}
 		catch (ParseException pe) {
 			_log.error("Query: " + query, pe);
@@ -218,7 +222,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		try {
 			snippet = LuceneHelperUtil.getSnippet(
-				QueryTranslator.translate(query), field, s);
+				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+					query), field, s);
 		}
 		catch (ParseException pe) {
 			_log.error("Query: " + query, pe);
@@ -247,8 +252,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		List<String> indexedFieldNames = new ArrayList<String> (
 			indexReader.getFieldNames(IndexReader.FieldOption.INDEXED));
 
-		org.apache.lucene.search.Query luceneQuery = QueryTranslator.translate(
-			query);
+		org.apache.lucene.search.Query luceneQuery =
+			(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+				query);
 
 		int scoredFieldNamesCount = LuceneHelperUtil.countScoredFieldNames(
 			luceneQuery, ArrayUtil.toStringArray(indexedFieldNames.toArray()));

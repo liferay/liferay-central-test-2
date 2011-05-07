@@ -14,21 +14,27 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
+import com.liferay.portal.kernel.search.QueryTranslator;
 import com.liferay.portal.kernel.search.StringQueryImpl;
 import com.liferay.portal.kernel.util.StringPool;
 
-import org.apache.lucene.queryParser.ParseException;
+import java.lang.reflect.Field;
+
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.WildcardQuery;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class QueryTranslatorImpl {
+public class QueryTranslatorImpl implements QueryTranslator {
 
-	public static org.apache.lucene.search.Query translate(Query query)
-		throws ParseException {
-
+	public Object translate(Query query) throws ParseException {
 		if (query instanceof BooleanQueryImpl) {
 			return ((BooleanQueryImpl)query).getBooleanQuery();
 		}
@@ -40,13 +46,93 @@ public class QueryTranslatorImpl {
 				LuceneHelperUtil.getVersion(), StringPool.BLANK,
 				LuceneHelperUtil.getAnalyzer());
 
-			return parser.parse(query.toString());
+			try {
+				return parser.parse(query.toString());
+			}
+			catch (org.apache.lucene.queryParser.ParseException pe) {
+				throw new ParseException(pe);
+			}
 		}
 		else if (query instanceof TermQueryImpl) {
 			return ((TermQueryImpl)query).getTermQuery();
 		}
+		else if (query instanceof TermRangeQueryImpl) {
+			return ((TermRangeQueryImpl)query).getTermRangeQuery();
+		}
 		else {
 			return null;
+		}
+	}
+
+	public Object translateForSolr(Query query) throws ParseException {
+		Object queryObject = query.getWrappedQuery();
+
+		if (queryObject instanceof org.apache.lucene.search.Query) {
+			_adjustQuery((org.apache.lucene.search.Query)queryObject);
+		}
+
+		return query;
+	}
+
+	protected void _adjustQuery(org.apache.lucene.search.Query query) {
+		if (query instanceof BooleanQuery) {
+			BooleanQuery booleanQuery = (BooleanQuery)query;
+
+			for (BooleanClause clause : booleanQuery.getClauses()) {
+				_adjustQuery(clause.getQuery());
+			}
+		}
+		else if (query instanceof TermQuery) {
+			TermQuery termQuery = (TermQuery)query;
+
+			Term term = termQuery.getTerm();
+
+			try {
+
+				String termText = term.text();
+
+				if (termText.matches("^\\s*[^\"].*\\s+.*[^\"]\\s*$(?m)")) {
+					termText = StringPool.QUOTE.concat(termText).concat(
+						StringPool.QUOTE);
+
+					_termField.set(term, termText);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if (query instanceof WildcardQuery) {
+			WildcardQuery wildcardQuery = (WildcardQuery)query;
+
+			Term term = wildcardQuery.getTerm();
+
+			try {
+				String termText = term.text();
+
+				if (termText.matches("^\\s*\\*.*(?m)")) {
+					termText = term.text().replaceFirst(
+						"\\*", StringPool.BLANK);
+
+					_termField.set(term, termText);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static Field _termField = null;
+
+	static {
+		try {
+			_termField = Term.class.getDeclaredField("text");
+			_termField.setAccessible(true);
+		}
+		catch (Exception e) {
+			// TODO
+			e.printStackTrace();
 		}
 	}
 
