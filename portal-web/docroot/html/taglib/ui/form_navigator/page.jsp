@@ -175,7 +175,8 @@ if (Validator.isNotNull(historyKey)) {
 			container: '#<portlet:namespace />sectionsContainer',
 			defaultModifiedSections: <%= JS.toScript(modifiedSections) %>,
 			formName: '<portlet:namespace /><%= formName %>',
-			modifiedSections: '<portlet:namespace />modifiedSections'
+			modifiedSections: '<portlet:namespace />modifiedSections',
+			namespace: '<portlet:namespace />'
 		}
 	);
 

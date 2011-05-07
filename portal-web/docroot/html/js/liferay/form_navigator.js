@@ -14,6 +14,8 @@ AUI().add(
 		var FormNavigator = function(options) {
 			var instance = this;
 
+			instance._namespace = options.namespace || '';
+
 			instance._container = A.one(options.container);
 
 			instance._formName = options.formName;
@@ -110,6 +112,10 @@ AUI().add(
 				}
 				else {
 					id = '';
+				}
+
+				if (id && instance._namespace && (id.indexOf(instance._namespace) == -1)) {
+					id = instance._namespace + id;
 				}
 
 				return id;
