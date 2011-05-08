@@ -409,9 +409,9 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 				userId);
 		}
 		else {
-			for (long groupId : groupIds) {
-				groups.addAll(bag.getGroups());
+			groups.addAll(bag.getGroups());
 
+			for (long groupId : groupIds) {
 				if (GroupLocalServiceUtil.hasUserGroup(userId, groupId)) {
 					Group group = GroupLocalServiceUtil.getGroup(groupId);
 
