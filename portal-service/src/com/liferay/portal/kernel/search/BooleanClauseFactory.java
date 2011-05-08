@@ -19,8 +19,8 @@ package com.liferay.portal.kernel.search;
  */
 public interface BooleanClauseFactory {
 
-	public BooleanClause create(String field, String value, String occur);
-
 	public BooleanClause create(Query query, String occur);
+
+	public BooleanClause create(String field, String value, String occur);
 
 }

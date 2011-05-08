@@ -14,6 +14,8 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryTranslator;
@@ -42,12 +44,12 @@ public class QueryTranslatorImpl implements QueryTranslator {
 			return ((LuceneQueryImpl)query).getQuery();
 		}
 		else if (query instanceof StringQueryImpl) {
-			QueryParser parser = new QueryParser(
+			QueryParser queryParser = new QueryParser(
 				LuceneHelperUtil.getVersion(), StringPool.BLANK,
 				LuceneHelperUtil.getAnalyzer());
 
 			try {
-				return parser.parse(query.toString());
+				return queryParser.parse(query.toString());
 			}
 			catch (org.apache.lucene.queryParser.ParseException pe) {
 				throw new ParseException(pe);
@@ -64,22 +66,22 @@ public class QueryTranslatorImpl implements QueryTranslator {
 		}
 	}
 
-	public Object translateForSolr(Query query) throws ParseException {
+	public Object translateForSolr(Query query) {
 		Object queryObject = query.getWrappedQuery();
 
 		if (queryObject instanceof org.apache.lucene.search.Query) {
-			_adjustQuery((org.apache.lucene.search.Query)queryObject);
+			adjustQuery((org.apache.lucene.search.Query)queryObject);
 		}
 
 		return query;
 	}
 
-	protected void _adjustQuery(org.apache.lucene.search.Query query) {
+	protected void adjustQuery(org.apache.lucene.search.Query query) {
 		if (query instanceof BooleanQuery) {
 			BooleanQuery booleanQuery = (BooleanQuery)query;
 
-			for (BooleanClause clause : booleanQuery.getClauses()) {
-				_adjustQuery(clause.getQuery());
+			for (BooleanClause booleanClause : booleanQuery.getClauses()) {
+				adjustQuery(booleanClause.getQuery());
 			}
 		}
 		else if (query instanceof TermQuery) {
@@ -88,18 +90,17 @@ public class QueryTranslatorImpl implements QueryTranslator {
 			Term term = termQuery.getTerm();
 
 			try {
+				String text = term.text();
 
-				String termText = term.text();
-
-				if (termText.matches("^\\s*[^\"].*\\s+.*[^\"]\\s*$(?m)")) {
-					termText = StringPool.QUOTE.concat(termText).concat(
+				if (text.matches("^\\s*[^\"].*\\s+.*[^\"]\\s*$(?m)")) {
+					text = StringPool.QUOTE.concat(text).concat(
 						StringPool.QUOTE);
 
-					_termField.set(term, termText);
+					_textField.set(term, text);
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 		}
 		else if (query instanceof WildcardQuery) {
@@ -108,31 +109,32 @@ public class QueryTranslatorImpl implements QueryTranslator {
 			Term term = wildcardQuery.getTerm();
 
 			try {
-				String termText = term.text();
+				String text = term.text();
 
-				if (termText.matches("^\\s*\\*.*(?m)")) {
-					termText = term.text().replaceFirst(
-						"\\*", StringPool.BLANK);
+				if (text.matches("^\\s*\\*.*(?m)")) {
+					text = text.replaceFirst("\\*", StringPool.BLANK);
 
-					_termField.set(term, termText);
+					_textField.set(term, text);
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 		}
 	}
 
-	private static Field _termField = null;
+	private static Log _log = LogFactoryUtil.getLog(QueryTranslatorImpl.class);
+
+	private static Field _textField = null;
 
 	static {
 		try {
-			_termField = Term.class.getDeclaredField("text");
-			_termField.setAccessible(true);
+			_textField = Term.class.getDeclaredField("text");
+
+			_textField.setAccessible(true);
 		}
 		catch (Exception e) {
-			// TODO
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 	}
 

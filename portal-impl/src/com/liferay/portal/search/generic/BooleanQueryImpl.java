@@ -142,11 +142,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, int startValue, int endValue) {
-		TermRangeQuery query = new TermRangeQueryImpl(
+		TermRangeQuery termRangeQuery = new TermRangeQueryImpl(
 			field, String.valueOf(startValue), String.valueOf(endValue), true,
 			true);
 
-		add(query, BooleanClauseOccur.SHOULD);
+		add(termRangeQuery, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRangeTerm(
@@ -156,11 +156,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, long startValue, long endValue) {
-		TermRangeQuery query = new TermRangeQueryImpl(
+		TermRangeQuery termRangeQuery = new TermRangeQueryImpl(
 			field, String.valueOf(startValue), String.valueOf(endValue), true,
 			true);
 
-		add(query, BooleanClauseOccur.SHOULD);
+		add(termRangeQuery, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRangeTerm(String field, Long startValue, Long endValue) {
@@ -168,11 +168,11 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, short startValue, short endValue) {
-		TermRangeQuery query = new TermRangeQueryImpl(
+		TermRangeQuery termRangeQuery = new TermRangeQueryImpl(
 			field, String.valueOf(startValue), String.valueOf(endValue), true,
 			true);
 
-		add(query, BooleanClauseOccur.SHOULD);
+		add(termRangeQuery, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRangeTerm(String field, Short startValue, Short endValue) {
@@ -180,10 +180,10 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public void addRangeTerm(String field, String startValue, String endValue) {
-		TermRangeQuery query = new TermRangeQueryImpl(
+		TermRangeQuery termRangeQuery = new TermRangeQueryImpl(
 			field, startValue, endValue, true, true);
 
-		add(query, BooleanClauseOccur.SHOULD);
+		add(termRangeQuery, BooleanClauseOccur.SHOULD);
 	}
 
 	public void addRequiredTerm(String field, boolean value) {
@@ -322,12 +322,12 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		}
 	}
 
-	public Object getWrappedQuery() {
-		return this;
-	}
-
 	public List<BooleanClause> clauses() {
 		return Collections.unmodifiableList(_clauses);
+	}
+
+	public Object getWrappedQuery() {
+		return this;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BooleanQueryImpl.class);

@@ -26,16 +26,16 @@ import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
  */
 public class BooleanClauseFactoryImpl implements BooleanClauseFactory {
 
-	public BooleanClause create(String field, String value, String occur) {
-		Query query = TermQueryFactoryUtil.create(field, value);
-
+	public BooleanClause create(Query query, String occur) {
 		BooleanClauseOccur booleanClauseOccur = new BooleanClauseOccurImpl(
 			occur);
 
 		return new BooleanClauseImpl(query, booleanClauseOccur);
 	}
 
-	public BooleanClause create(Query query, String occur) {
+	public BooleanClause create(String field, String value, String occur) {
+		Query query = TermQueryFactoryUtil.create(field, value);
+
 		BooleanClauseOccur booleanClauseOccur = new BooleanClauseOccurImpl(
 			occur);
 

@@ -350,8 +350,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				long startTime = System.currentTimeMillis();
 
 				TopFieldDocs topFieldDocs = indexSearcher.search(
-					(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
-						query),
+					(org.apache.lucene.search.Query)
+						QueryTranslatorUtil.translate(query),
 					null, PropsValues.INDEX_SEARCH_LIMIT, luceneSort);
 
 				long endTime = System.currentTimeMillis();
@@ -461,7 +461,8 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		try {
 			snippet = LuceneHelperUtil.getSnippet(
 				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
-					query), field, s);
+					query),
+				field, s);
 		}
 		catch (ParseException pe) {
 			_log.error("Query: " + query, pe);
