@@ -23,11 +23,11 @@ import com.liferay.portal.kernel.search.TermRangeQueryFactory;
 public class TermRangeQueryFactoryImpl implements TermRangeQueryFactory {
 
 	public TermRangeQuery create(
-		String field, String lowerTerm, String upperTerm, boolean includeLower,
-		boolean includeUpper) {
+		String field, String lowerTerm, String upperTerm, boolean includesLower,
+		boolean includesUpper) {
 
 		return new TermRangeQueryImpl(
-			field, lowerTerm, upperTerm, includeLower, includeUpper);
+			field, lowerTerm, upperTerm, includesLower, includesUpper);
 	}
 
 }

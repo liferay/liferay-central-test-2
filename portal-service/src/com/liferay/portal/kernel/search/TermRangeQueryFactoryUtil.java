@@ -20,11 +20,11 @@ package com.liferay.portal.kernel.search;
 public class TermRangeQueryFactoryUtil {
 
 	public static TermRangeQuery create(
-		String field, String lowerTerm, String upperTerm, boolean includeLower,
-		boolean includeUpper) {
+		String field, String lowerTerm, String upperTerm, boolean includesLower,
+		boolean includesUpper) {
 
 		return getTermRangeQueryFactory().create(
-			field, lowerTerm, upperTerm, includeLower, includeUpper);
+			field, lowerTerm, upperTerm, includesLower, includesUpper);
 	}
 
 	public static TermRangeQueryFactory getTermRangeQueryFactory() {

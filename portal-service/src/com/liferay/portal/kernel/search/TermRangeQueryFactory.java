@@ -20,7 +20,7 @@ package com.liferay.portal.kernel.search;
 public interface TermRangeQueryFactory {
 
 	public TermRangeQuery create(
-		String field, String lowerTerm, String upperTerm, boolean includeLower,
-		boolean includeUpper);
+		String field, String lowerTerm, String upperTerm, boolean includesLower,
+		boolean includesUpper);
 
 }

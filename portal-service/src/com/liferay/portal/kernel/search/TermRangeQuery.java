@@ -25,9 +25,9 @@ public interface TermRangeQuery extends Query {
 
 	public String getUpperTerm();
 
-	public boolean includeLower();
+	public boolean includesLower();
 
-	public boolean includeUpper();
+	public boolean includesUpper();
 
 	public String toString();
 

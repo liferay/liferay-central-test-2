@@ -24,11 +24,11 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 	implements TermRangeQuery {
 
 	public TermRangeQueryImpl(
-		String field, String lowerTerm, String upperTerm, boolean includeLower,
-		boolean includeUpper) {
+		String field, String lowerTerm, String upperTerm, boolean includesLower,
+		boolean includesUpper) {
 
 		_termRangeQuery = new org.apache.lucene.search.TermRangeQuery(
-			field, lowerTerm, upperTerm, includeLower, includeUpper);
+			field, lowerTerm, upperTerm, includesLower, includesUpper);
 	}
 
 	public String getField() {
@@ -51,11 +51,11 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 		return getTermRangeQuery();
 	}
 
-	public boolean includeLower() {
+	public boolean includesLower() {
 		return _termRangeQuery.includesLower();
 	}
 
-	public boolean includeUpper() {
+	public boolean includesUpper() {
 		return _termRangeQuery.includesUpper();
 	}
 

@@ -16,6 +16,7 @@ package com.liferay.portal.search.generic;
 
 import com.liferay.portal.kernel.search.BaseQueryImpl;
 import com.liferay.portal.kernel.search.TermRangeQuery;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 
 /**
@@ -25,14 +26,14 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 	implements TermRangeQuery {
 
 	public TermRangeQueryImpl(
-		String field, String lowerTerm, String upperTerm, boolean includeLower,
-		boolean includeUpper) {
+		String field, String lowerTerm, String upperTerm, boolean includesLower,
+		boolean includesUpper) {
 
 		_field = field;
 		_lowerTerm = lowerTerm;
 		_upperTerm = upperTerm;
-		_includeLower = includeLower;
-		_includeUpper = includeUpper;
+		_includesLower = includesLower;
+		_includesUpper = includesUpper;
 	}
 
 	public String getField() {
@@ -51,32 +52,56 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 		return this;
 	}
 
-	public boolean includeLower() {
-		return _includeLower;
+	public boolean includesLower() {
+		return _includesLower;
 	}
 
-	public boolean includeUpper() {
-		return _includeUpper;
+	public boolean includesUpper() {
+		return _includesUpper;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(7);
 
-		sb.append(getField());
-		sb.append(':');
+		sb.append(_field);
+		sb.append(CharPool.COLON);
 
-		sb.append(includeLower() ? '[' : '{');
-		sb.append(getLowerTerm() != null ? getLowerTerm() : '*');
+		if (_includesLower) {
+			sb.append(CharPool.OPEN_BRACKET);
+		}
+		else {
+			sb.append(CharPool.OPEN_CURLY_BRACE);
+		}
+
+		if (_lowerTerm != null) {
+			sb.append(_lowerTerm);
+		}
+		else {
+			sb.append(CharPool.STAR);
+		}
+
 		sb.append(" TO ");
-		sb.append(getUpperTerm() != null ? getUpperTerm() : '*');
-		sb.append(includeUpper() ? ']' : '}');
+
+		if (_upperTerm != null) {
+			sb.append(_upperTerm);
+		}
+		else {
+			sb.append(CharPool.STAR);
+		}
+
+		if (_includesUpper) {
+			sb.append(CharPool.CLOSE_BRACKET);
+		}
+		else {
+			sb.append(CharPool.CLOSE_CURLY_BRACE);
+		}
 
 		return sb.toString();
 	}
 
 	private String _field;
-	private boolean _includeLower;
-	private boolean _includeUpper;
+	private boolean _includesLower;
+	private boolean _includesUpper;
 	private String _lowerTerm;
 	private String _upperTerm;
 
