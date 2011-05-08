@@ -274,6 +274,16 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
+		finally {
+			if (browser != null) {
+				try {
+					browser.close();
+				}
+				catch (IOException ioe) {
+					_log.error(ioe, ioe);
+				}
+			}
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -366,6 +376,16 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
+		}
+		finally {
+			if (indexSearcher != null) {
+				try {
+					indexSearcher.close();
+				}
+				catch (IOException ioe) {
+					_log.error(ioe, ioe);
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {

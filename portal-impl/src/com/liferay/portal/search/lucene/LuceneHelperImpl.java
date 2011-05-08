@@ -379,17 +379,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 	public IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
-		if (_indexSearcher == null) {
-			IndexAccessor indexAccessor = _getIndexAccessor(companyId);
+		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
-			_indexSearcher = new IndexSearcher(
-				indexAccessor.getLuceneDir(), readOnly);
+		IndexSearcher indexSearcher = new IndexSearcher(
+			indexAccessor.getLuceneDir(), readOnly);
 
-			_indexSearcher.setDefaultFieldSortScoring(true, true);
-			_indexSearcher.setSimilarity(new FieldWeightSimilarity());
-		}
+		indexSearcher.setDefaultFieldSortScoring(true, true);
+		indexSearcher.setSimilarity(new FieldWeightSimilarity());
 
-		return _indexSearcher;
+		return indexSearcher;
 	}
 
 	public String getSnippet(
@@ -869,7 +867,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 	private Analyzer _analyzer;
 	private Map<Long, IndexAccessor> _indexAccessors =
 		new ConcurrentHashMap<Long, IndexAccessor>();
-	private IndexSearcher _indexSearcher;
 	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
 	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
 	private Version _version;

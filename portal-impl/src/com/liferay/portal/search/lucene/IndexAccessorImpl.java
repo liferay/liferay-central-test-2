@@ -194,6 +194,10 @@ public class IndexAccessorImpl implements IndexAccessor {
 			return;
 		}
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Indexing " + document);
+		}
+
 		_write(term, document);
 	}
 

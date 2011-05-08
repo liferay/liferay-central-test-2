@@ -315,6 +315,7 @@ public class SearchEngineUtil {
 			long companyId, Collection<Document> documents)
 		throws SearchException {
 
+		updateDocuments(SYSTEM_ENGINE_ID, companyId, documents);
 	}
 
 	public static void updateDocuments(
