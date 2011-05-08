@@ -2,7 +2,7 @@
 
 <#assign fieldName = field.name>
 
-<#assign namespacedName = "${namespace}${field.name}">
+<#assign namespacedFieldName = "${namespace}${fieldName}">
 
 <#if parentField.name??>
 	<#assign fieldName = parentField.name!"">
