@@ -55,8 +55,6 @@ import java.util.Map;
 import javax.portlet.PortletURL;
 
 /**
- * <a href="OrganzationIndexer.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  * @author Zsigmond Rab
  * @author Hugo Huijser
