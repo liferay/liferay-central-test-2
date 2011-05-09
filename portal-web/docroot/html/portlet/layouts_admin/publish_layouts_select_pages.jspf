@@ -21,7 +21,7 @@
 	String taglibUrl = "javascript:AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
 	%>
 
-	<aui:button onClick="<%= taglibUrl %>" value='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' />
+	<aui:button href="<%= taglibUrl %>" value='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' />
 </aui:fieldset>
 
 <%

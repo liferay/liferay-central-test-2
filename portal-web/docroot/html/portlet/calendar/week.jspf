@@ -100,7 +100,7 @@ Format dateFormatDayOfWeek = FastDateFormatFactoryUtil.getSimpleDateFormat("EEE"
 			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />
 		</portlet:renderURL>
 
-		<aui:button onClick="<%= editEventURL %>" value="add-event" />
+		<aui:button href="<%= editEventURL %>" value="add-event" />
 	</c:if>
 
 	<portlet:renderURL var="viewURL">
@@ -112,7 +112,7 @@ Format dateFormatDayOfWeek = FastDateFormatFactoryUtil.getSimpleDateFormat("EEE"
 	</portlet:renderURL>
 
 	<c:if test="<%= (curMonth != selMonth) || (curDay != selDay) || (curYear != selYear) %>">
-		<aui:button onClick="<%= viewURL %>" value="current-week" />
+		<aui:button href="<%= viewURL %>" value="current-week" />
 	</c:if>
 </div>
 

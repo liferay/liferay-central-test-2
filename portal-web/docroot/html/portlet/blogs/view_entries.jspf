@@ -38,7 +38,7 @@ showSearch = showSearch && !results.isEmpty();
 				<portlet:param name="backURL" value="<%= currentURL %>" />
 			</portlet:renderURL>
 
-			<aui:button name="addEntryButton" value="add-blog-entry" onClick="<%= editEntryURL %>" />
+			<aui:button href="<%= editEntryURL %>" name="addEntryButton" value="add-blog-entry" />
 		</c:if>
 
 		<c:if test="<%= showPermissionsButton %>">
@@ -49,7 +49,7 @@ showSearch = showSearch && !results.isEmpty();
 				var="permissionsURL"
 			/>
 
-			<aui:button onClick="<%= permissionsURL %>" value="permissions" />
+			<aui:button href="<%= permissionsURL %>" value="permissions" />
 		</c:if>
 	</div>
 </c:if>

@@ -115,11 +115,9 @@ if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsProp
 
 	addServerURL.setParameter("struts_action", "enterprise_admin_settings/edit_ldap_server");
 	addServerURL.setParameter("redirect", authenticationURL);
-
-	String taglibOnClick = "location.href = '" + addServerURL.toString() + "'";
 	%>
 
-	<aui:button name="addButton" onClick="<%= taglibOnClick %>" value="add" />
+	<aui:button href="<%= addServerURL.toString() %>" name="addButton" value="add" />
 </aui:button-row>
 
 <aui:fieldset>

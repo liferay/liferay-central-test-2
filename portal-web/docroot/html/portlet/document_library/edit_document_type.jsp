@@ -112,7 +112,7 @@ if (documentType != null) {
 				<aui:button onClick='<%= renderResponse.getNamespace() + "delete();" %>' value="delete" />
 			</c:if>
 
-			<aui:button onClick="<%= redirect %>" type="cancel" />
+			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

@@ -90,7 +90,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />
 		</portlet:renderURL>
 
-		<aui:button onClick="<%= editEventURL %>" value="add-event" />
+		<aui:button href="<%= editEventURL %>" value="add-event" />
 	</c:if>
 
 	<portlet:renderURL var="viewURL">
@@ -102,7 +102,7 @@ dateFormatDate = FastDateFormatFactoryUtil.getSimpleDateFormat("MMMMM d, yyyy", 
 	</portlet:renderURL>
 
 	<c:if test="<%= (curMonth != selMonth) || (curDay != selDay) || (curYear != selYear) %>">
-		<aui:button onClick="<%= viewURL %>" value="today" />
+		<aui:button href="<%= viewURL %>" value="today" />
 	</c:if>
 </div>
 
