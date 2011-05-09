@@ -31,11 +31,11 @@ public class DLDocumentMetadataSetSoap implements Serializable {
 		DLDocumentMetadataSetSoap soapModel = new DLDocumentMetadataSetSoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setMetadataSetId(model.getMetadataSetId());
+		soapModel.setDocumentMetadataSetId(model.getDocumentMetadataSetId());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
-		soapModel.setDocumentTypeId(model.getDocumentTypeId());
 		soapModel.setDDMStructureId(model.getDDMStructureId());
+		soapModel.setDocumentTypeId(model.getDocumentTypeId());
 		soapModel.setFileVersionId(model.getFileVersionId());
 
 		return soapModel;
@@ -85,11 +85,11 @@ public class DLDocumentMetadataSetSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _metadataSetId;
+		return _documentMetadataSetId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setMetadataSetId(pk);
+		setDocumentMetadataSetId(pk);
 	}
 
 	public String getUuid() {
@@ -100,12 +100,12 @@ public class DLDocumentMetadataSetSoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getMetadataSetId() {
-		return _metadataSetId;
+	public long getDocumentMetadataSetId() {
+		return _documentMetadataSetId;
 	}
 
-	public void setMetadataSetId(long metadataSetId) {
-		_metadataSetId = metadataSetId;
+	public void setDocumentMetadataSetId(long documentMetadataSetId) {
+		_documentMetadataSetId = documentMetadataSetId;
 	}
 
 	public long getClassNameId() {
@@ -124,20 +124,20 @@ public class DLDocumentMetadataSetSoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public long getDocumentTypeId() {
-		return _documentTypeId;
-	}
-
-	public void setDocumentTypeId(long documentTypeId) {
-		_documentTypeId = documentTypeId;
-	}
-
 	public long getDDMStructureId() {
 		return _DDMStructureId;
 	}
 
 	public void setDDMStructureId(long DDMStructureId) {
 		_DDMStructureId = DDMStructureId;
+	}
+
+	public long getDocumentTypeId() {
+		return _documentTypeId;
+	}
+
+	public void setDocumentTypeId(long documentTypeId) {
+		_documentTypeId = documentTypeId;
 	}
 
 	public long getFileVersionId() {
@@ -149,10 +149,10 @@ public class DLDocumentMetadataSetSoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _metadataSetId;
+	private long _documentMetadataSetId;
 	private long _classNameId;
 	private long _classPK;
-	private long _documentTypeId;
 	private long _DDMStructureId;
+	private long _documentTypeId;
 	private long _fileVersionId;
 }

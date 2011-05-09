@@ -163,13 +163,12 @@ public class DLDocumentTypeServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getGroupDocumentTypes(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		HttpPrincipal httpPrincipal, long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLDocumentTypeServiceUtil.class.getName(),
-					"getGroupDocumentTypes",
-					_getGroupDocumentTypesParameterTypes3);
+					"getDocumentTypes", _getDocumentTypesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					start, end);
@@ -242,7 +241,7 @@ public class DLDocumentTypeServiceHttp {
 	private static final Class<?>[] _getDocumentTypeParameterTypes2 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getGroupDocumentTypesParameterTypes3 = new Class[] {
+	private static final Class<?>[] _getDocumentTypesParameterTypes3 = new Class[] {
 			long.class, int.class, int.class
 		};
 	private static final Class<?>[] _updateDocumentTypeParameterTypes4 = new Class[] {

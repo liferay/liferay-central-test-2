@@ -242,17 +242,12 @@ public interface DLDocumentTypeLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getGroupDocumentTypes(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures(
-		long documentTypeId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateDocumentType(long userId, long documentTypeId,
-		java.lang.String name, java.lang.String description,
+	public void updateDocumentType(long documentTypeId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

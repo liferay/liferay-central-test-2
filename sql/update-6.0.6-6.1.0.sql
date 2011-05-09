@@ -106,11 +106,11 @@ create table DDMTemplate (
 
 create table DLDocumentMetadataSet (
 	uuid_ VARCHAR(75) null,
-	metadataSetId LONG not null primary key,
+	documentMetadataSetId LONG not null primary key,
 	classNameId LONG,
 	classPK LONG,
-	documentTypeId LONG,
 	DDMStructureId LONG,
+	documentTypeId LONG,
 	fileVersionId LONG
 );
 

@@ -71,8 +71,8 @@ public class DLDocumentMetadataSetPersistenceTest
 		newDLDocumentMetadataSet.setUuid(randomString());
 		newDLDocumentMetadataSet.setClassNameId(nextLong());
 		newDLDocumentMetadataSet.setClassPK(nextLong());
-		newDLDocumentMetadataSet.setDocumentTypeId(nextLong());
 		newDLDocumentMetadataSet.setDDMStructureId(nextLong());
+		newDLDocumentMetadataSet.setDocumentTypeId(nextLong());
 		newDLDocumentMetadataSet.setFileVersionId(nextLong());
 
 		_persistence.update(newDLDocumentMetadataSet, false);
@@ -81,16 +81,16 @@ public class DLDocumentMetadataSetPersistenceTest
 
 		assertEquals(existingDLDocumentMetadataSet.getUuid(),
 			newDLDocumentMetadataSet.getUuid());
-		assertEquals(existingDLDocumentMetadataSet.getMetadataSetId(),
-			newDLDocumentMetadataSet.getMetadataSetId());
+		assertEquals(existingDLDocumentMetadataSet.getDocumentMetadataSetId(),
+			newDLDocumentMetadataSet.getDocumentMetadataSetId());
 		assertEquals(existingDLDocumentMetadataSet.getClassNameId(),
 			newDLDocumentMetadataSet.getClassNameId());
 		assertEquals(existingDLDocumentMetadataSet.getClassPK(),
 			newDLDocumentMetadataSet.getClassPK());
-		assertEquals(existingDLDocumentMetadataSet.getDocumentTypeId(),
-			newDLDocumentMetadataSet.getDocumentTypeId());
 		assertEquals(existingDLDocumentMetadataSet.getDDMStructureId(),
 			newDLDocumentMetadataSet.getDDMStructureId());
+		assertEquals(existingDLDocumentMetadataSet.getDocumentTypeId(),
+			newDLDocumentMetadataSet.getDocumentTypeId());
 		assertEquals(existingDLDocumentMetadataSet.getFileVersionId(),
 			newDLDocumentMetadataSet.getFileVersionId());
 	}
@@ -139,8 +139,8 @@ public class DLDocumentMetadataSetPersistenceTest
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLDocumentMetadataSet.class,
 				DLDocumentMetadataSet.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("metadataSetId",
-				newDLDocumentMetadataSet.getMetadataSetId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("documentMetadataSetId",
+				newDLDocumentMetadataSet.getDocumentMetadataSetId()));
 
 		List<DLDocumentMetadataSet> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -155,7 +155,8 @@ public class DLDocumentMetadataSetPersistenceTest
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(DLDocumentMetadataSet.class,
 				DLDocumentMetadataSet.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("metadataSetId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("documentMetadataSetId",
+				nextLong()));
 
 		List<DLDocumentMetadataSet> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -170,20 +171,20 @@ public class DLDocumentMetadataSetPersistenceTest
 				DLDocumentMetadataSet.class.getClassLoader());
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"metadataSetId"));
+				"documentMetadataSetId"));
 
-		Object newMetadataSetId = newDLDocumentMetadataSet.getMetadataSetId();
+		Object newDocumentMetadataSetId = newDLDocumentMetadataSet.getDocumentMetadataSetId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("metadataSetId",
-				new Object[] { newMetadataSetId }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in("documentMetadataSetId",
+				new Object[] { newDocumentMetadataSetId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Object existingMetadataSetId = result.get(0);
+		Object existingDocumentMetadataSetId = result.get(0);
 
-		assertEquals(existingMetadataSetId, newMetadataSetId);
+		assertEquals(existingDocumentMetadataSetId, newDocumentMetadataSetId);
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
@@ -191,9 +192,9 @@ public class DLDocumentMetadataSetPersistenceTest
 				DLDocumentMetadataSet.class.getClassLoader());
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"metadataSetId"));
+				"documentMetadataSetId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("metadataSetId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in("documentMetadataSetId",
 				new Object[] { nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -227,8 +228,8 @@ public class DLDocumentMetadataSetPersistenceTest
 		dlDocumentMetadataSet.setUuid(randomString());
 		dlDocumentMetadataSet.setClassNameId(nextLong());
 		dlDocumentMetadataSet.setClassPK(nextLong());
-		dlDocumentMetadataSet.setDocumentTypeId(nextLong());
 		dlDocumentMetadataSet.setDDMStructureId(nextLong());
+		dlDocumentMetadataSet.setDocumentTypeId(nextLong());
 		dlDocumentMetadataSet.setFileVersionId(nextLong());
 
 		_persistence.update(dlDocumentMetadataSet, false);

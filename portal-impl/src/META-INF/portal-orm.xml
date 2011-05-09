@@ -1522,14 +1522,14 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetModelImpl">
 		<attributes>
-			<id name="metadataSetId" />
+			<id name="documentMetadataSetId" />
 			<basic name="uuid">
 				<column name="UUID_" />
 			</basic>
 			<basic name="classNameId" />
 			<basic name="classPK" />
-			<basic name="documentTypeId" />
 			<basic name="DDMStructureId" />
+			<basic name="documentTypeId" />
 			<basic name="fileVersionId" />
 			<transient name="primaryKey" />
 		</attributes>

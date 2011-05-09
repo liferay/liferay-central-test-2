@@ -103,23 +103,24 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Creates a new d l document metadata set with the primary key. Does not add the d l document metadata set to the database.
 	 *
-	 * @param metadataSetId the primary key for the new d l document metadata set
+	 * @param documentMetadataSetId the primary key for the new d l document metadata set
 	 * @return the new d l document metadata set
 	 */
-	public DLDocumentMetadataSet createDLDocumentMetadataSet(long metadataSetId) {
-		return dlDocumentMetadataSetPersistence.create(metadataSetId);
+	public DLDocumentMetadataSet createDLDocumentMetadataSet(
+		long documentMetadataSetId) {
+		return dlDocumentMetadataSetPersistence.create(documentMetadataSetId);
 	}
 
 	/**
 	 * Deletes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param metadataSetId the primary key of the d l document metadata set to delete
+	 * @param documentMetadataSetId the primary key of the d l document metadata set to delete
 	 * @throws PortalException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteDLDocumentMetadataSet(long metadataSetId)
+	public void deleteDLDocumentMetadataSet(long documentMetadataSetId)
 		throws PortalException, SystemException {
-		dlDocumentMetadataSetPersistence.remove(metadataSetId);
+		dlDocumentMetadataSetPersistence.remove(documentMetadataSetId);
 	}
 
 	/**
@@ -202,14 +203,14 @@ public abstract class DLDocumentMetadataSetLocalServiceBaseImpl
 	/**
 	 * Gets the d l document metadata set with the primary key.
 	 *
-	 * @param metadataSetId the primary key of the d l document metadata set to get
+	 * @param documentMetadataSetId the primary key of the d l document metadata set to get
 	 * @return the d l document metadata set
 	 * @throws PortalException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLDocumentMetadataSet getDLDocumentMetadataSet(long metadataSetId)
-		throws PortalException, SystemException {
-		return dlDocumentMetadataSetPersistence.findByPrimaryKey(metadataSetId);
+	public DLDocumentMetadataSet getDLDocumentMetadataSet(
+		long documentMetadataSetId) throws PortalException, SystemException {
+		return dlDocumentMetadataSetPersistence.findByPrimaryKey(documentMetadataSetId);
 	}
 
 	/**

@@ -671,7 +671,7 @@ Liferay.Service.registerClass(
 		addDocumentType: true,
 		deleteDocumentType: true,
 		getDocumentType: true,
-		getGroupDocumentTypes: true,
+		getDocumentTypes: true,
 		updateDocumentType: true
 	}
 );

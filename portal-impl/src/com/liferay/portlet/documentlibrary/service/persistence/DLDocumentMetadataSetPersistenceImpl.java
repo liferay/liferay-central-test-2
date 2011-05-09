@@ -88,14 +88,6 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByUuid",
 			new String[] { String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_D_F = new FinderPath(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
-			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_ENTITY, "fetchByD_F",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_D_F = new FinderPath(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
-			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
-			FINDER_CLASS_NAME_LIST, "countByD_F",
-			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_DOCUMENTTYPEID = new FinderPath(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
 			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByDocumentTypeId",
@@ -122,6 +114,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByFileVersionId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_D_F = new FinderPath(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
+			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByD_F",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_D_F = new FinderPath(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
+			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByD_F",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
 			DLDocumentMetadataSetModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -203,14 +203,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Creates a new d l document metadata set with the primary key. Does not add the d l document metadata set to the database.
 	 *
-	 * @param metadataSetId the primary key for the new d l document metadata set
+	 * @param documentMetadataSetId the primary key for the new d l document metadata set
 	 * @return the new d l document metadata set
 	 */
-	public DLDocumentMetadataSet create(long metadataSetId) {
+	public DLDocumentMetadataSet create(long documentMetadataSetId) {
 		DLDocumentMetadataSet dlDocumentMetadataSet = new DLDocumentMetadataSetImpl();
 
 		dlDocumentMetadataSet.setNew(true);
-		dlDocumentMetadataSet.setPrimaryKey(metadataSetId);
+		dlDocumentMetadataSet.setPrimaryKey(documentMetadataSetId);
 
 		String uuid = PortalUUIDUtil.generate();
 
@@ -235,12 +235,12 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Removes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param metadataSetId the primary key of the d l document metadata set to remove
+	 * @param documentMetadataSetId the primary key of the d l document metadata set to remove
 	 * @return the d l document metadata set that was removed
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLDocumentMetadataSet remove(long metadataSetId)
+	public DLDocumentMetadataSet remove(long documentMetadataSetId)
 		throws NoSuchDocumentMetadataSetException, SystemException {
 		Session session = null;
 
@@ -248,15 +248,16 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 			session = openSession();
 
 			DLDocumentMetadataSet dlDocumentMetadataSet = (DLDocumentMetadataSet)session.get(DLDocumentMetadataSetImpl.class,
-					Long.valueOf(metadataSetId));
+					Long.valueOf(documentMetadataSetId));
 
 			if (dlDocumentMetadataSet == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + metadataSetId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+						documentMetadataSetId);
 				}
 
 				throw new NoSuchDocumentMetadataSetException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					metadataSetId);
+					documentMetadataSetId);
 			}
 
 			return dlDocumentMetadataSetPersistence.remove(dlDocumentMetadataSet);
@@ -393,11 +394,11 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 		dlDocumentMetadataSetImpl.setPrimaryKey(dlDocumentMetadataSet.getPrimaryKey());
 
 		dlDocumentMetadataSetImpl.setUuid(dlDocumentMetadataSet.getUuid());
-		dlDocumentMetadataSetImpl.setMetadataSetId(dlDocumentMetadataSet.getMetadataSetId());
+		dlDocumentMetadataSetImpl.setDocumentMetadataSetId(dlDocumentMetadataSet.getDocumentMetadataSetId());
 		dlDocumentMetadataSetImpl.setClassNameId(dlDocumentMetadataSet.getClassNameId());
 		dlDocumentMetadataSetImpl.setClassPK(dlDocumentMetadataSet.getClassPK());
-		dlDocumentMetadataSetImpl.setDocumentTypeId(dlDocumentMetadataSet.getDocumentTypeId());
 		dlDocumentMetadataSetImpl.setDDMStructureId(dlDocumentMetadataSet.getDDMStructureId());
+		dlDocumentMetadataSetImpl.setDocumentTypeId(dlDocumentMetadataSet.getDocumentTypeId());
 		dlDocumentMetadataSetImpl.setFileVersionId(dlDocumentMetadataSet.getFileVersionId());
 
 		return dlDocumentMetadataSetImpl;
@@ -419,22 +420,23 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Finds the d l document metadata set with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
 	 *
-	 * @param metadataSetId the primary key of the d l document metadata set to find
+	 * @param documentMetadataSetId the primary key of the d l document metadata set to find
 	 * @return the d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLDocumentMetadataSet findByPrimaryKey(long metadataSetId)
+	public DLDocumentMetadataSet findByPrimaryKey(long documentMetadataSetId)
 		throws NoSuchDocumentMetadataSetException, SystemException {
-		DLDocumentMetadataSet dlDocumentMetadataSet = fetchByPrimaryKey(metadataSetId);
+		DLDocumentMetadataSet dlDocumentMetadataSet = fetchByPrimaryKey(documentMetadataSetId);
 
 		if (dlDocumentMetadataSet == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + metadataSetId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+					documentMetadataSetId);
 			}
 
 			throw new NoSuchDocumentMetadataSetException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				metadataSetId);
+				documentMetadataSetId);
 		}
 
 		return dlDocumentMetadataSet;
@@ -455,14 +457,14 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	/**
 	 * Finds the d l document metadata set with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param metadataSetId the primary key of the d l document metadata set to find
+	 * @param documentMetadataSetId the primary key of the d l document metadata set to find
 	 * @return the d l document metadata set, or <code>null</code> if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLDocumentMetadataSet fetchByPrimaryKey(long metadataSetId)
+	public DLDocumentMetadataSet fetchByPrimaryKey(long documentMetadataSetId)
 		throws SystemException {
 		DLDocumentMetadataSet dlDocumentMetadataSet = (DLDocumentMetadataSet)EntityCacheUtil.getResult(DLDocumentMetadataSetModelImpl.ENTITY_CACHE_ENABLED,
-				DLDocumentMetadataSetImpl.class, metadataSetId, this);
+				DLDocumentMetadataSetImpl.class, documentMetadataSetId, this);
 
 		if (dlDocumentMetadataSet == null) {
 			Session session = null;
@@ -471,7 +473,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 				session = openSession();
 
 				dlDocumentMetadataSet = (DLDocumentMetadataSet)session.get(DLDocumentMetadataSetImpl.class,
-						Long.valueOf(metadataSetId));
+						Long.valueOf(documentMetadataSetId));
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -695,17 +697,18 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param metadataSetId the primary key of the current d l document metadata set
+	 * @param documentMetadataSetId the primary key of the current d l document metadata set
 	 * @param uuid the uuid to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l document metadata set
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a d l document metadata set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLDocumentMetadataSet[] findByUuid_PrevAndNext(long metadataSetId,
-		String uuid, OrderByComparator orderByComparator)
+	public DLDocumentMetadataSet[] findByUuid_PrevAndNext(
+		long documentMetadataSetId, String uuid,
+		OrderByComparator orderByComparator)
 		throws NoSuchDocumentMetadataSetException, SystemException {
-		DLDocumentMetadataSet dlDocumentMetadataSet = findByPrimaryKey(metadataSetId);
+		DLDocumentMetadataSet dlDocumentMetadataSet = findByPrimaryKey(documentMetadataSetId);
 
 		Session session = null;
 
@@ -841,147 +844,6 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 		}
 		else {
 			return null;
-		}
-	}
-
-	/**
-	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
-	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
-	 * @return the matching d l document metadata set
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLDocumentMetadataSet findByD_F(long DDMStructureId,
-		long fileVersionId)
-		throws NoSuchDocumentMetadataSetException, SystemException {
-		DLDocumentMetadataSet dlDocumentMetadataSet = fetchByD_F(DDMStructureId,
-				fileVersionId);
-
-		if (dlDocumentMetadataSet == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("DDMStructureId=");
-			msg.append(DDMStructureId);
-
-			msg.append(", fileVersionId=");
-			msg.append(fileVersionId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchDocumentMetadataSetException(msg.toString());
-		}
-
-		return dlDocumentMetadataSet;
-	}
-
-	/**
-	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
-	 * @return the matching d l document metadata set, or <code>null</code> if a matching d l document metadata set could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLDocumentMetadataSet fetchByD_F(long DDMStructureId,
-		long fileVersionId) throws SystemException {
-		return fetchByD_F(DDMStructureId, fileVersionId, true);
-	}
-
-	/**
-	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
-	 * @return the matching d l document metadata set, or <code>null</code> if a matching d l document metadata set could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLDocumentMetadataSet fetchByD_F(long DDMStructureId,
-		long fileVersionId, boolean retrieveFromCache)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { DDMStructureId, fileVersionId };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_F,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_DLDOCUMENTMETADATASET_WHERE);
-
-			query.append(_FINDER_COLUMN_D_F_DDMSTRUCTUREID_2);
-
-			query.append(_FINDER_COLUMN_D_F_FILEVERSIONID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(DDMStructureId);
-
-				qPos.add(fileVersionId);
-
-				List<DLDocumentMetadataSet> list = q.list();
-
-				result = list;
-
-				DLDocumentMetadataSet dlDocumentMetadataSet = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_F,
-						finderArgs, list);
-				}
-				else {
-					dlDocumentMetadataSet = list.get(0);
-
-					cacheResult(dlDocumentMetadataSet);
-
-					if ((dlDocumentMetadataSet.getDDMStructureId() != DDMStructureId) ||
-							(dlDocumentMetadataSet.getFileVersionId() != fileVersionId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_F,
-							finderArgs, dlDocumentMetadataSet);
-					}
-				}
-
-				return dlDocumentMetadataSet;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_F,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (DLDocumentMetadataSet)result;
-			}
 		}
 	}
 
@@ -1182,7 +1044,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param metadataSetId the primary key of the current d l document metadata set
+	 * @param documentMetadataSetId the primary key of the current d l document metadata set
 	 * @param documentTypeId the document type ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l document metadata set
@@ -1190,10 +1052,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DLDocumentMetadataSet[] findByDocumentTypeId_PrevAndNext(
-		long metadataSetId, long documentTypeId,
+		long documentMetadataSetId, long documentTypeId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDocumentMetadataSetException, SystemException {
-		DLDocumentMetadataSet dlDocumentMetadataSet = findByPrimaryKey(metadataSetId);
+		DLDocumentMetadataSet dlDocumentMetadataSet = findByPrimaryKey(documentMetadataSetId);
 
 		Session session = null;
 
@@ -1520,7 +1382,7 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param metadataSetId the primary key of the current d l document metadata set
+	 * @param documentMetadataSetId the primary key of the current d l document metadata set
 	 * @param fileVersionId the file version ID to search with
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l document metadata set
@@ -1528,10 +1390,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DLDocumentMetadataSet[] findByFileVersionId_PrevAndNext(
-		long metadataSetId, long fileVersionId,
+		long documentMetadataSetId, long fileVersionId,
 		OrderByComparator orderByComparator)
 		throws NoSuchDocumentMetadataSetException, SystemException {
-		DLDocumentMetadataSet dlDocumentMetadataSet = findByPrimaryKey(metadataSetId);
+		DLDocumentMetadataSet dlDocumentMetadataSet = findByPrimaryKey(documentMetadataSetId);
 
 		Session session = null;
 
@@ -1662,6 +1524,147 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
+	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException} if it could not be found.
+	 *
+	 * @param DDMStructureId the d d m structure ID to search with
+	 * @param fileVersionId the file version ID to search with
+	 * @return the matching d l document metadata set
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchDocumentMetadataSetException if a matching d l document metadata set could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentMetadataSet findByD_F(long DDMStructureId,
+		long fileVersionId)
+		throws NoSuchDocumentMetadataSetException, SystemException {
+		DLDocumentMetadataSet dlDocumentMetadataSet = fetchByD_F(DDMStructureId,
+				fileVersionId);
+
+		if (dlDocumentMetadataSet == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("DDMStructureId=");
+			msg.append(DDMStructureId);
+
+			msg.append(", fileVersionId=");
+			msg.append(fileVersionId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchDocumentMetadataSetException(msg.toString());
+		}
+
+		return dlDocumentMetadataSet;
+	}
+
+	/**
+	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param DDMStructureId the d d m structure ID to search with
+	 * @param fileVersionId the file version ID to search with
+	 * @return the matching d l document metadata set, or <code>null</code> if a matching d l document metadata set could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentMetadataSet fetchByD_F(long DDMStructureId,
+		long fileVersionId) throws SystemException {
+		return fetchByD_F(DDMStructureId, fileVersionId, true);
+	}
+
+	/**
+	 * Finds the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param DDMStructureId the d d m structure ID to search with
+	 * @param fileVersionId the file version ID to search with
+	 * @return the matching d l document metadata set, or <code>null</code> if a matching d l document metadata set could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLDocumentMetadataSet fetchByD_F(long DDMStructureId,
+		long fileVersionId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { DDMStructureId, fileVersionId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_D_F,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DLDOCUMENTMETADATASET_WHERE);
+
+			query.append(_FINDER_COLUMN_D_F_DDMSTRUCTUREID_2);
+
+			query.append(_FINDER_COLUMN_D_F_FILEVERSIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(DDMStructureId);
+
+				qPos.add(fileVersionId);
+
+				List<DLDocumentMetadataSet> list = q.list();
+
+				result = list;
+
+				DLDocumentMetadataSet dlDocumentMetadataSet = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_F,
+						finderArgs, list);
+				}
+				else {
+					dlDocumentMetadataSet = list.get(0);
+
+					cacheResult(dlDocumentMetadataSet);
+
+					if ((dlDocumentMetadataSet.getDDMStructureId() != DDMStructureId) ||
+							(dlDocumentMetadataSet.getFileVersionId() != fileVersionId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_D_F,
+							finderArgs, dlDocumentMetadataSet);
+					}
+				}
+
+				return dlDocumentMetadataSet;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_F,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DLDocumentMetadataSet)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the d l document metadata sets.
 	 *
 	 * @return the d l document metadata sets
@@ -1783,21 +1786,6 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
-	 * Removes the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; from the database.
-	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByD_F(long DDMStructureId, long fileVersionId)
-		throws NoSuchDocumentMetadataSetException, SystemException {
-		DLDocumentMetadataSet dlDocumentMetadataSet = findByD_F(DDMStructureId,
-				fileVersionId);
-
-		dlDocumentMetadataSetPersistence.remove(dlDocumentMetadataSet);
-	}
-
-	/**
 	 * Removes all the d l document metadata sets where documentTypeId = &#63; from the database.
 	 *
 	 * @param documentTypeId the document type ID to search with
@@ -1823,6 +1811,21 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 				fileVersionId)) {
 			dlDocumentMetadataSetPersistence.remove(dlDocumentMetadataSet);
 		}
+	}
+
+	/**
+	 * Removes the d l document metadata set where DDMStructureId = &#63; and fileVersionId = &#63; from the database.
+	 *
+	 * @param DDMStructureId the d d m structure ID to search with
+	 * @param fileVersionId the file version ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByD_F(long DDMStructureId, long fileVersionId)
+		throws NoSuchDocumentMetadataSetException, SystemException {
+		DLDocumentMetadataSet dlDocumentMetadataSet = findByD_F(DDMStructureId,
+				fileVersionId);
+
+		dlDocumentMetadataSetPersistence.remove(dlDocumentMetadataSet);
 	}
 
 	/**
@@ -1893,65 +1896,6 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
 					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the d l document metadata sets where DDMStructureId = &#63; and fileVersionId = &#63;.
-	 *
-	 * @param DDMStructureId the d d m structure ID to search with
-	 * @param fileVersionId the file version ID to search with
-	 * @return the number of matching d l document metadata sets
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByD_F(long DDMStructureId, long fileVersionId)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { DDMStructureId, fileVersionId };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_D_F,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_DLDOCUMENTMETADATASET_WHERE);
-
-			query.append(_FINDER_COLUMN_D_F_DDMSTRUCTUREID_2);
-
-			query.append(_FINDER_COLUMN_D_F_FILEVERSIONID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(DDMStructureId);
-
-				qPos.add(fileVersionId);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_F, finderArgs,
-					count);
 
 				closeSession(session);
 			}
@@ -2069,6 +2013,65 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	}
 
 	/**
+	 * Counts all the d l document metadata sets where DDMStructureId = &#63; and fileVersionId = &#63;.
+	 *
+	 * @param DDMStructureId the d d m structure ID to search with
+	 * @param fileVersionId the file version ID to search with
+	 * @return the number of matching d l document metadata sets
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByD_F(long DDMStructureId, long fileVersionId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { DDMStructureId, fileVersionId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_D_F,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DLDOCUMENTMETADATASET_WHERE);
+
+			query.append(_FINDER_COLUMN_D_F_DDMSTRUCTUREID_2);
+
+			query.append(_FINDER_COLUMN_D_F_FILEVERSIONID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(DDMStructureId);
+
+				qPos.add(fileVersionId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_D_F, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the d l document metadata sets.
 	 *
 	 * @return the number of d l document metadata sets
@@ -2166,10 +2169,10 @@ public class DLDocumentMetadataSetPersistenceImpl extends BasePersistenceImpl<DL
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "dlDocumentMetadataSet.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "dlDocumentMetadataSet.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(dlDocumentMetadataSet.uuid IS NULL OR dlDocumentMetadataSet.uuid = ?)";
-	private static final String _FINDER_COLUMN_D_F_DDMSTRUCTUREID_2 = "dlDocumentMetadataSet.DDMStructureId = ? AND ";
-	private static final String _FINDER_COLUMN_D_F_FILEVERSIONID_2 = "dlDocumentMetadataSet.fileVersionId = ?";
 	private static final String _FINDER_COLUMN_DOCUMENTTYPEID_DOCUMENTTYPEID_2 = "dlDocumentMetadataSet.documentTypeId = ?";
 	private static final String _FINDER_COLUMN_FILEVERSIONID_FILEVERSIONID_2 = "dlDocumentMetadataSet.fileVersionId = ?";
+	private static final String _FINDER_COLUMN_D_F_DDMSTRUCTUREID_2 = "dlDocumentMetadataSet.DDMStructureId = ? AND ";
+	private static final String _FINDER_COLUMN_D_F_FILEVERSIONID_2 = "dlDocumentMetadataSet.fileVersionId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlDocumentMetadataSet.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DLDocumentMetadataSet exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No DLDocumentMetadataSet exists with the key {";

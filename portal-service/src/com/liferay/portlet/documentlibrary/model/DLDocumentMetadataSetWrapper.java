@@ -74,21 +74,21 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the metadata set ID of this d l document metadata set.
+	* Gets the document metadata set ID of this d l document metadata set.
 	*
-	* @return the metadata set ID of this d l document metadata set
+	* @return the document metadata set ID of this d l document metadata set
 	*/
-	public long getMetadataSetId() {
-		return _dlDocumentMetadataSet.getMetadataSetId();
+	public long getDocumentMetadataSetId() {
+		return _dlDocumentMetadataSet.getDocumentMetadataSetId();
 	}
 
 	/**
-	* Sets the metadata set ID of this d l document metadata set.
+	* Sets the document metadata set ID of this d l document metadata set.
 	*
-	* @param metadataSetId the metadata set ID of this d l document metadata set
+	* @param documentMetadataSetId the document metadata set ID of this d l document metadata set
 	*/
-	public void setMetadataSetId(long metadataSetId) {
-		_dlDocumentMetadataSet.setMetadataSetId(metadataSetId);
+	public void setDocumentMetadataSetId(long documentMetadataSetId) {
+		_dlDocumentMetadataSet.setDocumentMetadataSetId(documentMetadataSetId);
 	}
 
 	/**
@@ -137,24 +137,6 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	}
 
 	/**
-	* Gets the document type ID of this d l document metadata set.
-	*
-	* @return the document type ID of this d l document metadata set
-	*/
-	public long getDocumentTypeId() {
-		return _dlDocumentMetadataSet.getDocumentTypeId();
-	}
-
-	/**
-	* Sets the document type ID of this d l document metadata set.
-	*
-	* @param documentTypeId the document type ID of this d l document metadata set
-	*/
-	public void setDocumentTypeId(long documentTypeId) {
-		_dlDocumentMetadataSet.setDocumentTypeId(documentTypeId);
-	}
-
-	/**
 	* Gets the d d m structure ID of this d l document metadata set.
 	*
 	* @return the d d m structure ID of this d l document metadata set
@@ -170,6 +152,24 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	*/
 	public void setDDMStructureId(long DDMStructureId) {
 		_dlDocumentMetadataSet.setDDMStructureId(DDMStructureId);
+	}
+
+	/**
+	* Gets the document type ID of this d l document metadata set.
+	*
+	* @return the document type ID of this d l document metadata set
+	*/
+	public long getDocumentTypeId() {
+		return _dlDocumentMetadataSet.getDocumentTypeId();
+	}
+
+	/**
+	* Sets the document type ID of this d l document metadata set.
+	*
+	* @param documentTypeId the document type ID of this d l document metadata set
+	*/
+	public void setDocumentTypeId(long documentTypeId) {
+		_dlDocumentMetadataSet.setDocumentTypeId(documentTypeId);
 	}
 
 	/**
@@ -252,6 +252,12 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 		return _dlDocumentMetadataSet.toXmlString();
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getDDMStructure()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlDocumentMetadataSet.getDDMStructure();
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLDocumentType getDocumentType()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -262,12 +268,6 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlDocumentMetadataSet.getFileVersion();
-	}
-
-	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure getDDMStructure()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlDocumentMetadataSet.getDDMStructure();
 	}
 
 	public DLDocumentMetadataSet getWrappedDLDocumentMetadataSet() {

@@ -52,10 +52,10 @@ public class DLDocumentTypeServiceWrapper implements DLDocumentTypeService {
 		return _dlDocumentTypeService.getDocumentType(documentTypeId);
 	}
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getGroupDocumentTypes(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlDocumentTypeService.getGroupDocumentTypes(groupId, start, end);
+		return _dlDocumentTypeService.getDocumentTypes(groupId, start, end);
 	}
 
 	public void updateDocumentType(long documentTypeId, java.lang.String name,

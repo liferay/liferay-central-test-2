@@ -298,7 +298,8 @@ public class DLDocumentTypeWrapper implements DLDocumentType {
 		return _dlDocumentType.toXmlString();
 	}
 
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures() {
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures()
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlDocumentType.getDDMStructures();
 	}
 

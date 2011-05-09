@@ -72,18 +72,18 @@ public interface DLDocumentMetadataSetModel extends BaseModel<DLDocumentMetadata
 	public void setUuid(String uuid);
 
 	/**
-	 * Gets the metadata set ID of this d l document metadata set.
+	 * Gets the document metadata set ID of this d l document metadata set.
 	 *
-	 * @return the metadata set ID of this d l document metadata set
+	 * @return the document metadata set ID of this d l document metadata set
 	 */
-	public long getMetadataSetId();
+	public long getDocumentMetadataSetId();
 
 	/**
-	 * Sets the metadata set ID of this d l document metadata set.
+	 * Sets the document metadata set ID of this d l document metadata set.
 	 *
-	 * @param metadataSetId the metadata set ID of this d l document metadata set
+	 * @param documentMetadataSetId the document metadata set ID of this d l document metadata set
 	 */
-	public void setMetadataSetId(long metadataSetId);
+	public void setDocumentMetadataSetId(long documentMetadataSetId);
 
 	/**
 	 * Gets the class name of the model instance this d l document metadata set is polymorphically associated with.
@@ -121,20 +121,6 @@ public interface DLDocumentMetadataSetModel extends BaseModel<DLDocumentMetadata
 	public void setClassPK(long classPK);
 
 	/**
-	 * Gets the document type ID of this d l document metadata set.
-	 *
-	 * @return the document type ID of this d l document metadata set
-	 */
-	public long getDocumentTypeId();
-
-	/**
-	 * Sets the document type ID of this d l document metadata set.
-	 *
-	 * @param documentTypeId the document type ID of this d l document metadata set
-	 */
-	public void setDocumentTypeId(long documentTypeId);
-
-	/**
 	 * Gets the d d m structure ID of this d l document metadata set.
 	 *
 	 * @return the d d m structure ID of this d l document metadata set
@@ -147,6 +133,20 @@ public interface DLDocumentMetadataSetModel extends BaseModel<DLDocumentMetadata
 	 * @param DDMStructureId the d d m structure ID of this d l document metadata set
 	 */
 	public void setDDMStructureId(long DDMStructureId);
+
+	/**
+	 * Gets the document type ID of this d l document metadata set.
+	 *
+	 * @return the document type ID of this d l document metadata set
+	 */
+	public long getDocumentTypeId();
+
+	/**
+	 * Sets the document type ID of this d l document metadata set.
+	 *
+	 * @param documentTypeId the document type ID of this d l document metadata set
+	 */
+	public void setDocumentTypeId(long documentTypeId);
 
 	/**
 	 * Gets the file version ID of this d l document metadata set.

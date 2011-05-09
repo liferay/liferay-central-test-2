@@ -272,25 +272,19 @@ public class DLDocumentTypeLocalServiceUtil {
 		return getService().getDocumentType(documentTypeId);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getGroupDocumentTypes(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupDocumentTypes(groupId, start, end);
+		return getService().getDocumentTypes(groupId, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures(
-		long documentTypeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDDMStructures(documentTypeId);
-	}
-
-	public static void updateDocumentType(long userId, long documentTypeId,
+	public static void updateDocumentType(long documentTypeId,
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateDocumentType(userId, documentTypeId, name, description,
+			.updateDocumentType(documentTypeId, name, description,
 			serviceContext);
 	}
 

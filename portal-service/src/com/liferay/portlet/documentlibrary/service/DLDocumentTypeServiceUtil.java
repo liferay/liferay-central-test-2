@@ -61,10 +61,10 @@ public class DLDocumentTypeServiceUtil {
 		return getService().getDocumentType(documentTypeId);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getGroupDocumentTypes(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupDocumentTypes(groupId, start, end);
+		return getService().getDocumentTypes(groupId, start, end);
 	}
 
 	public static void updateDocumentType(long documentTypeId,

@@ -1308,14 +1308,14 @@
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetImpl" table="DLDocumentMetadataSet">
 		<cache usage="read-write" />
-		<id name="metadataSetId" type="long">
+		<id name="documentMetadataSetId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="DDMStructureId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="documentTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="fileVersionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLDocumentTypeImpl" table="DLDocumentType">

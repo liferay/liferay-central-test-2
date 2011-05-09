@@ -264,26 +264,19 @@ public class DLDocumentTypeLocalServiceWrapper
 		return _dlDocumentTypeLocalService.getDocumentType(documentTypeId);
 	}
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getGroupDocumentTypes(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlDocumentTypeLocalService.getGroupDocumentTypes(groupId,
-			start, end);
+		return _dlDocumentTypeLocalService.getDocumentTypes(groupId, start, end);
 	}
 
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDDMStructures(
-		long documentTypeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlDocumentTypeLocalService.getDDMStructures(documentTypeId);
-	}
-
-	public void updateDocumentType(long userId, long documentTypeId,
-		java.lang.String name, java.lang.String description,
+	public void updateDocumentType(long documentTypeId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlDocumentTypeLocalService.updateDocumentType(userId, documentTypeId,
-			name, description, serviceContext);
+		_dlDocumentTypeLocalService.updateDocumentType(documentTypeId, name,
+			description, serviceContext);
 	}
 
 	public DLDocumentTypeLocalService getWrappedDLDocumentTypeLocalService() {

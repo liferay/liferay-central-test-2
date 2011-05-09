@@ -56,20 +56,20 @@ public interface DLDocumentMetadataSetLocalService {
 	/**
 	* Creates a new d l document metadata set with the primary key. Does not add the d l document metadata set to the database.
 	*
-	* @param metadataSetId the primary key for the new d l document metadata set
+	* @param documentMetadataSetId the primary key for the new d l document metadata set
 	* @return the new d l document metadata set
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet createDLDocumentMetadataSet(
-		long metadataSetId);
+		long documentMetadataSetId);
 
 	/**
 	* Deletes the d l document metadata set with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param metadataSetId the primary key of the d l document metadata set to delete
+	* @param documentMetadataSetId the primary key of the d l document metadata set to delete
 	* @throws PortalException if a d l document metadata set with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDLDocumentMetadataSet(long metadataSetId)
+	public void deleteDLDocumentMetadataSet(long documentMetadataSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -148,14 +148,14 @@ public interface DLDocumentMetadataSetLocalService {
 	/**
 	* Gets the d l document metadata set with the primary key.
 	*
-	* @param metadataSetId the primary key of the d l document metadata set to get
+	* @param documentMetadataSetId the primary key of the d l document metadata set to get
 	* @return the d l document metadata set
 	* @throws PortalException if a d l document metadata set with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet getDLDocumentMetadataSet(
-		long metadataSetId)
+		long documentMetadataSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -224,23 +224,24 @@ public interface DLDocumentMetadataSetLocalService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	public void deleteMetadataSets(long fileVersionId)
+	public void deleteDocumentMetadataSets(long fileVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet getMetadataSet(
-		long metadataSetId)
+	public com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet getDocumentMetadataSet(
+		long documentMetadataSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet getMetadataSet(
+	public com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet getDocumentMetadataSet(
 		long ddmStructureId, long fileVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateMetadataSets(long fileVersionId, long documentTypeId,
+	public void updateDocumentMetadataSets(long documentTypeId,
+		long fileVersionId,
 		java.util.Map<java.lang.Long, com.liferay.portlet.dynamicdatamapping.storage.Fields> fieldsMap,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

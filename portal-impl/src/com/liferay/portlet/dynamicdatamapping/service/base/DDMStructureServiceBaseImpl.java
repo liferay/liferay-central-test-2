@@ -31,6 +31,9 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
@@ -513,6 +516,63 @@ public abstract class DDMStructureServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the d l document type local service.
+	 *
+	 * @return the d l document type local service
+	 */
+	public DLDocumentTypeLocalService getDLDocumentTypeLocalService() {
+		return dlDocumentTypeLocalService;
+	}
+
+	/**
+	 * Sets the d l document type local service.
+	 *
+	 * @param dlDocumentTypeLocalService the d l document type local service
+	 */
+	public void setDLDocumentTypeLocalService(
+		DLDocumentTypeLocalService dlDocumentTypeLocalService) {
+		this.dlDocumentTypeLocalService = dlDocumentTypeLocalService;
+	}
+
+	/**
+	 * Gets the d l document type remote service.
+	 *
+	 * @return the d l document type remote service
+	 */
+	public DLDocumentTypeService getDLDocumentTypeService() {
+		return dlDocumentTypeService;
+	}
+
+	/**
+	 * Sets the d l document type remote service.
+	 *
+	 * @param dlDocumentTypeService the d l document type remote service
+	 */
+	public void setDLDocumentTypeService(
+		DLDocumentTypeService dlDocumentTypeService) {
+		this.dlDocumentTypeService = dlDocumentTypeService;
+	}
+
+	/**
+	 * Gets the d l document type persistence.
+	 *
+	 * @return the d l document type persistence
+	 */
+	public DLDocumentTypePersistence getDLDocumentTypePersistence() {
+		return dlDocumentTypePersistence;
+	}
+
+	/**
+	 * Sets the d l document type persistence.
+	 *
+	 * @param dlDocumentTypePersistence the d l document type persistence
+	 */
+	public void setDLDocumentTypePersistence(
+		DLDocumentTypePersistence dlDocumentTypePersistence) {
+		this.dlDocumentTypePersistence = dlDocumentTypePersistence;
+	}
+
+	/**
 	 * Gets the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
@@ -597,5 +657,11 @@ public abstract class DDMStructureServiceBaseImpl extends PrincipalBean
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	@BeanReference(type = DLDocumentTypeLocalService.class)
+	protected DLDocumentTypeLocalService dlDocumentTypeLocalService;
+	@BeanReference(type = DLDocumentTypeService.class)
+	protected DLDocumentTypeService dlDocumentTypeService;
+	@BeanReference(type = DLDocumentTypePersistence.class)
+	protected DLDocumentTypePersistence dlDocumentTypePersistence;
 	private String _beanIdentifier;
 }

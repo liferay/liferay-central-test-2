@@ -111,12 +111,11 @@ public class DLDocumentTypeServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLDocumentTypeSoap[] getGroupDocumentTypes(
+	public static com.liferay.portlet.documentlibrary.model.DLDocumentTypeSoap[] getDocumentTypes(
 		long groupId, int start, int end) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> returnValue =
-				DLDocumentTypeServiceUtil.getGroupDocumentTypes(groupId, start,
-					end);
+				DLDocumentTypeServiceUtil.getDocumentTypes(groupId, start, end);
 
 			return com.liferay.portlet.documentlibrary.model.DLDocumentTypeSoap.toSoapModels(returnValue);
 		}

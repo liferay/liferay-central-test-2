@@ -56,14 +56,14 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 	public static final String TABLE_NAME = "DLDocumentMetadataSet";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
-			{ "metadataSetId", Types.BIGINT },
+			{ "documentMetadataSetId", Types.BIGINT },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
-			{ "documentTypeId", Types.BIGINT },
 			{ "DDMStructureId", Types.BIGINT },
+			{ "documentTypeId", Types.BIGINT },
 			{ "fileVersionId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLDocumentMetadataSet (uuid_ VARCHAR(75) null,metadataSetId LONG not null primary key,classNameId LONG,classPK LONG,documentTypeId LONG,DDMStructureId LONG,fileVersionId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DLDocumentMetadataSet (uuid_ VARCHAR(75) null,documentMetadataSetId LONG not null primary key,classNameId LONG,classPK LONG,DDMStructureId LONG,documentTypeId LONG,fileVersionId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DLDocumentMetadataSet";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -90,15 +90,15 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 	}
 
 	public long getPrimaryKey() {
-		return _metadataSetId;
+		return _documentMetadataSetId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setMetadataSetId(pk);
+		setDocumentMetadataSetId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_metadataSetId);
+		return new Long(_documentMetadataSetId);
 	}
 
 	public String getUuid() {
@@ -114,12 +114,12 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		_uuid = uuid;
 	}
 
-	public long getMetadataSetId() {
-		return _metadataSetId;
+	public long getDocumentMetadataSetId() {
+		return _documentMetadataSetId;
 	}
 
-	public void setMetadataSetId(long metadataSetId) {
-		_metadataSetId = metadataSetId;
+	public void setDocumentMetadataSetId(long documentMetadataSetId) {
+		_documentMetadataSetId = documentMetadataSetId;
 	}
 
 	public String getClassName() {
@@ -146,14 +146,6 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		_classPK = classPK;
 	}
 
-	public long getDocumentTypeId() {
-		return _documentTypeId;
-	}
-
-	public void setDocumentTypeId(long documentTypeId) {
-		_documentTypeId = documentTypeId;
-	}
-
 	public long getDDMStructureId() {
 		return _DDMStructureId;
 	}
@@ -170,6 +162,14 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 
 	public long getOriginalDDMStructureId() {
 		return _originalDDMStructureId;
+	}
+
+	public long getDocumentTypeId() {
+		return _documentTypeId;
+	}
+
+	public void setDocumentTypeId(long documentTypeId) {
+		_documentTypeId = documentTypeId;
 	}
 
 	public long getFileVersionId() {
@@ -218,11 +218,11 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		DLDocumentMetadataSetImpl dlDocumentMetadataSetImpl = new DLDocumentMetadataSetImpl();
 
 		dlDocumentMetadataSetImpl.setUuid(getUuid());
-		dlDocumentMetadataSetImpl.setMetadataSetId(getMetadataSetId());
+		dlDocumentMetadataSetImpl.setDocumentMetadataSetId(getDocumentMetadataSetId());
 		dlDocumentMetadataSetImpl.setClassNameId(getClassNameId());
 		dlDocumentMetadataSetImpl.setClassPK(getClassPK());
-		dlDocumentMetadataSetImpl.setDocumentTypeId(getDocumentTypeId());
 		dlDocumentMetadataSetImpl.setDDMStructureId(getDDMStructureId());
+		dlDocumentMetadataSetImpl.setDocumentTypeId(getDocumentTypeId());
 		dlDocumentMetadataSetImpl.setFileVersionId(getFileVersionId());
 
 		dlDocumentMetadataSetImpl.resetOriginalValues();
@@ -289,16 +289,16 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
-		sb.append(", metadataSetId=");
-		sb.append(getMetadataSetId());
+		sb.append(", documentMetadataSetId=");
+		sb.append(getDocumentMetadataSetId());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
-		sb.append(", documentTypeId=");
-		sb.append(getDocumentTypeId());
 		sb.append(", DDMStructureId=");
 		sb.append(getDDMStructureId());
+		sb.append(", documentTypeId=");
+		sb.append(getDocumentTypeId());
 		sb.append(", fileVersionId=");
 		sb.append(getFileVersionId());
 		sb.append("}");
@@ -319,8 +319,8 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		sb.append(getUuid());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>metadataSetId</column-name><column-value><![CDATA[");
-		sb.append(getMetadataSetId());
+			"<column><column-name>documentMetadataSetId</column-name><column-value><![CDATA[");
+		sb.append(getDocumentMetadataSetId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
@@ -331,12 +331,12 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>documentTypeId</column-name><column-value><![CDATA[");
-		sb.append(getDocumentTypeId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>DDMStructureId</column-name><column-value><![CDATA[");
 		sb.append(getDDMStructureId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>documentTypeId</column-name><column-value><![CDATA[");
+		sb.append(getDocumentTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fileVersionId</column-name><column-value><![CDATA[");
@@ -349,13 +349,13 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 	}
 
 	private String _uuid;
-	private long _metadataSetId;
+	private long _documentMetadataSetId;
 	private long _classNameId;
 	private long _classPK;
-	private long _documentTypeId;
 	private long _DDMStructureId;
 	private long _originalDDMStructureId;
 	private boolean _setOriginalDDMStructureId;
+	private long _documentTypeId;
 	private long _fileVersionId;
 	private long _originalFileVersionId;
 	private boolean _setOriginalFileVersionId;
