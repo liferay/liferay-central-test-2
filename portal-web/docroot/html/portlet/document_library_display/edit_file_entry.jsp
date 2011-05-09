@@ -54,14 +54,14 @@ FileVersion fileVersion = null;
 
 long fileVersionId = 0;
 
-long documentTypeId = ParamUtil.getLong(request, "documentTypeId", -1);
+long documentTypeId = ParamUtil.getLong(request, "documentTypeId");
 
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
 
 	fileVersionId = fileVersion.getFileVersionId();
 
-	if ((documentTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
+	if ((documentTypeId == 0) && (fileVersion.getModel() instanceof DLFileVersion)) {
 		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
 		documentTypeId = dlFileVersion.getDocumentTypeId();
@@ -287,44 +287,44 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		</c:if>
 
 		<%
-		List documentTypes = DLDocumentTypeServiceUtil.getGroupDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		%>
 
-			<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
-				<aui:option label="none" value="0" />
+		<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
+			<aui:option label="none" value="0" />
 
-				<%
-				for (int i = 0; i < documentTypes.size(); i++) {
-					DLDocumentType documentType = (DLDocumentType)documentTypes.get(i);
-				%>
+			<%
+			for (DLDocumentType documentType : documentTypes) {
+			%>
 
-					<aui:option label="<%= documentType.getName() %>" value="<%= documentType.getPrimaryKey() %>" selected="<%= (documentTypeId == documentType.getPrimaryKey()) %>" />
+				<aui:option label="<%= documentType.getName() %>" selected="<%= (documentTypeId == documentType.getPrimaryKey()) %>" value="<%= documentType.getPrimaryKey() %>" />
 
-				<%
-				}
-				%>
-			</aui:select>
+			<%
+			}
+			%>
+
+		</aui:select>
 
 		<%
 		if (documentTypeId > 0) {
 			try {
-				List ddmStructures = DLDocumentTypeServiceUtil.getDocumentType(documentTypeId).getDDMStructures();
+				DLDocumentType documentType = DLDocumentTypeServiceUtil.getDocumentType(documentTypeId);
 
-				for (int i = 0; i < ddmStructures.size(); i++) {
-					DDMStructure ddmStructure = (DDMStructure)ddmStructures.get(i);
+				List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
+				for (DDMStructure ddmStructure : ddmStructures) {
 					Fields fields = null;
 
 					try {
-						DLDocumentMetadataSet metadataSet = DLDocumentMetadataSetLocalServiceUtil.getMetadataSet(ddmStructure.getStructureId(), fileVersionId);
+						DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
 
-						fields = StorageEngineUtil.getFields(metadataSet.getClassPK());
+						fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
 					}
 					catch (Exception e) {
 					}
 		%>
 
-			<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
+					<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, String.valueOf(ddmStructure.getPrimaryKey())) %>
 
 		<%
 				}

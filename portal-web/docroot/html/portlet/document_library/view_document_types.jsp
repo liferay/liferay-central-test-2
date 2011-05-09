@@ -35,15 +35,15 @@ if ((folder != null) && !folder.isDefaultRepository()) {
 		int start = ParamUtil.getInteger(request, "start");
 		int end = ParamUtil.getInteger(request, "end", SearchContainer.DEFAULT_DELTA);
 
-		List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getGroupDocumentTypes(scopeGroupId, start, end);
+		List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, start, end);
 
 		for (DLDocumentType documentType : documentTypes) {
 		%>
 
 			<portlet:renderURL var="editDocumentTypeURL">
 				<portlet:param name="struts_action" value="/document_library/edit_document_type" />
-				<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
 			</portlet:renderURL>
 
 			<li class="document-type">

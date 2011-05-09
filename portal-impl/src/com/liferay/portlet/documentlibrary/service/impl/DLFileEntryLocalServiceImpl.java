@@ -100,6 +100,7 @@ public class DLFileEntryLocalServiceImpl
 			counterLocalService.increment(DLFileEntry.class.getName()));
 		String extension = (String)serviceContext.getAttribute("extension");
 		String mimeType = (String)serviceContext.getAttribute("contentType");
+
 		Long documentTypeId = (Long)serviceContext.getAttribute(
 			"documentTypeId");
 
@@ -827,8 +828,8 @@ public class DLFileEntryLocalServiceImpl
 			(Map<Long, Fields>)serviceContext.getAttribute("fieldsMap");
 
 		if (documentTypeId > 0) {
-			dlDocumentMetadataSetLocalService.updateMetadataSets(
-				fileVersionId, documentTypeId, fieldsMap, serviceContext);
+			dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(
+				documentTypeId, fileVersionId, fieldsMap, serviceContext);
 		}
 
 		return dlFileVersion;
@@ -1248,6 +1249,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setDescription(description);
 		dlFileVersion.setChangeLog(changeLog);
 		dlFileVersion.setExtraSettings(extraSettings);
+		dlFileVersion.setDocumentTypeId(documentTypeId);
 		dlFileVersion.setVersion(version);
 		dlFileVersion.setSize(size);
 		dlFileVersion.setStatus(status);
@@ -1255,7 +1257,6 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setStatusByUserName(user.getFullName());
 		dlFileVersion.setStatusDate(statusDate);
 		dlFileVersion.setExpandoBridgeAttributes(serviceContext);
-		dlFileVersion.setDocumentTypeId(documentTypeId);
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
 
@@ -1263,8 +1264,8 @@ public class DLFileEntryLocalServiceImpl
 			(Map<Long, Fields>)serviceContext.getAttribute("fieldsMap");
 
 		if (documentTypeId > 0) {
-			dlDocumentMetadataSetLocalService.updateMetadataSets(
-				dlFileVersion.getFileVersionId(), documentTypeId, fieldsMap,
+			dlDocumentMetadataSetLocalService.updateDocumentMetadataSets(
+				documentTypeId, dlFileVersion.getFileVersionId(), fieldsMap,
 				serviceContext);
 		}
 	}

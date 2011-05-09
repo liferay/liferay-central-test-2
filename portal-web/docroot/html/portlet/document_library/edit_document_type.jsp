@@ -23,7 +23,7 @@ DLDocumentType documentType = (DLDocumentType)request.getAttribute(WebKeys.DOCUM
 
 long documentTypeId = BeanParamUtil.getLong(documentType, request, "documentTypeId");
 
-List ddmStructures = null;
+List<DDMStructure> ddmStructures = null;
 
 if (documentType != null) {
 	ddmStructures = documentType.getDDMStructures();
@@ -38,7 +38,6 @@ if (documentType != null) {
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (documentType == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
-	<aui:input name="metadataSetIds" type="hidden" value="" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
@@ -82,9 +81,9 @@ if (documentType != null) {
 				</aui:field-wrapper>
 			</c:when>
 			<c:otherwise>
+
 				<%
-				for (int i = 0; i < ddmStructures.size(); i++) {
-					DDMStructure ddmStructure = (DDMStructure)ddmStructures.get(i);
+				for (DDMStructure ddmStructure : ddmStructures) {
 				%>
 
 					<aui:field-wrapper label="document-metadata-set">
@@ -94,6 +93,7 @@ if (documentType != null) {
 				<%
 				}
 				%>
+
 			</c:otherwise>
 		</c:choose>
 

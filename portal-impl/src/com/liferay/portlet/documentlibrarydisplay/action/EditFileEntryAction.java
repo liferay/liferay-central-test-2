@@ -20,6 +20,7 @@ import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -42,6 +43,7 @@ import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
@@ -105,9 +107,6 @@ public class EditFileEntryAction extends PortletAction {
 			WindowState windowState = actionRequest.getWindowState();
 
 			if (cmd.equals(Constants.PREVIEW)) {
-
-				// render
-
 			}
 			else if (!windowState.equals(LiferayWindowState.POP_UP)) {
 				sendRedirect(actionRequest, actionResponse);
@@ -236,37 +235,41 @@ public class EditFileEntryAction extends PortletAction {
 
 	protected HashMap<Long, Fields> getFieldsMap(
 			UploadPortletRequest uploadRequest, long documentTypeId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
 
-		if (documentTypeId > 0) {
-			List<DDMStructure> ddmStructures =
-				DLDocumentTypeLocalServiceUtil.getDDMStructures(documentTypeId);
+		if (documentTypeId <= 0) {
+			return fieldsMap;
+		}
 
-			for (DDMStructure ddmStructure : ddmStructures) {
-				String namespace = String.valueOf(
-					ddmStructure.getStructureId());
+		DLDocumentType documentType =
+			DLDocumentTypeLocalServiceUtil.getDocumentType(documentTypeId);
 
-				Set<String> fieldNames = ddmStructure.getFieldNames();
+		List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
-				Fields fields = new Fields();
+		for (DDMStructure ddmStructure : ddmStructures) {
+			String namespace = String.valueOf(
+				ddmStructure.getStructureId());
 
-				for (String name : fieldNames) {
-					Field field = new Field();
+			Set<String> fieldNames = ddmStructure.getFieldNames();
 
-					field.setName(name);
+			Fields fields = new Fields();
 
-					String value = ParamUtil.getString(
-						uploadRequest, namespace + name);
+			for (String name : fieldNames) {
+				Field field = new Field();
 
-					field.setValue(value);
+				field.setName(name);
 
-					fields.put(field);
-				}
+				String value = ParamUtil.getString(
+					uploadRequest, namespace + name);
 
-				fieldsMap.put(ddmStructure.getStructureId(), fields);
+				field.setValue(value);
+
+				fields.put(field);
 			}
+
+			fieldsMap.put(ddmStructure.getStructureId(), fields);
 		}
 
 		return fieldsMap;

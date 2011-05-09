@@ -92,7 +92,7 @@ public class DDLRecordLocalServiceImpl
 	public void deleteRecord(DDLRecord record)
 		throws PortalException, SystemException {
 
-		// RecordSet item
+		// Record
 
 		ddlRecordPersistence.remove(record);
 

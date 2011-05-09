@@ -96,6 +96,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="structureKey" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLDocumentType" />
 	</entity>
 	<entity name="DDMStructureLink" local-service="true" remote-service="true">
 

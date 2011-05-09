@@ -38,26 +38,26 @@
 
 		<!-- PK fields -->
 
-		<column name="metadataSetId" type="long" primary="true" />
+		<column name="documentMetadataSetId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
-		<column name="documentTypeId" type="long" />
 		<column name="DDMStructureId" type="long" />
+		<column name="documentTypeId" type="long" />
 		<column name="fileVersionId" type="long" />
-		
+
 		<!-- Finder methods -->
 
-		<finder name="D_F" return-type="DLDocumentMetadataSet" unique="true">
-			<finder-column name="DDMStructureId" />
-			<finder-column name="fileVersionId" />
-		</finder>
 		<finder name="DocumentTypeId" return-type="Collection">
 			<finder-column name="documentTypeId" />
 		</finder>
 		<finder name="FileVersionId" return-type="Collection">
+			<finder-column name="fileVersionId" />
+		</finder>
+		<finder name="D_F" return-type="DLDocumentMetadataSet" unique="true">
+			<finder-column name="DDMStructureId" />
 			<finder-column name="fileVersionId" />
 		</finder>
 
@@ -87,11 +87,11 @@
 
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-				
+
 		<!-- Relationships -->
 
 		<column name="ddmStructure" type="Collection" entity="com.liferay.portlet.dynamicdatamapping.DDMStructure" mapping-table="DLDocumentType_DDMStructure" />
-		
+
 		<!-- Finder methods -->
 
 		<finder name="GroupId" return-type="Collection">

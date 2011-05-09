@@ -27,10 +27,16 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUt
 /**
  * @author Alexander Chow
  */
-public class DLDocumentMetadataSetImpl extends DLDocumentMetadataSetModelImpl
-	implements DLDocumentMetadataSet {
+public class DLDocumentMetadataSetImpl
+	extends DLDocumentMetadataSetModelImpl implements DLDocumentMetadataSet {
 
 	public DLDocumentMetadataSetImpl() {
+	}
+
+	public DDMStructure getDDMStructure()
+		throws PortalException, SystemException {
+
+		return DDMStructureLocalServiceUtil.getStructure(getDDMStructureId());
 	}
 
 	public DLDocumentType getDocumentType()
@@ -44,12 +50,6 @@ public class DLDocumentMetadataSetImpl extends DLDocumentMetadataSetModelImpl
 		throws PortalException, SystemException {
 
 		return DLFileEntryLocalServiceUtil.getFileVersion(getFileVersionId());
-	}
-
-	public DDMStructure getDDMStructure()
-		throws PortalException, SystemException {
-
-		return DDMStructureLocalServiceUtil.getStructure(getDDMStructureId());
 	}
 
 }

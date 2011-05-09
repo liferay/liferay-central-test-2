@@ -1222,11 +1222,11 @@
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet">
 		<field name="uuid" type="String" />
-		<field name="metadataSetId" type="long" />
+		<field name="documentMetadataSetId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
-		<field name="documentTypeId" type="long" />
 		<field name="DDMStructureId" type="long" />
+		<field name="documentTypeId" type="long" />
 		<field name="fileVersionId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentType">

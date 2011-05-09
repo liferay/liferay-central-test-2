@@ -69,8 +69,7 @@ public class EditDocumentTypeAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(
-					actionRequest, "portlet.document_library.error");
+				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -110,9 +109,9 @@ public class EditDocumentTypeAction extends PortletAction {
 			}
 		}
 
-		String forward = "portlet.document_library.edit_document_type";
-
-		return mapping.findForward(getForward(renderRequest, forward));
+		return mapping.findForward(
+			getForward(
+				renderRequest, "portlet.document_library.edit_document_type"));
 	}
 
 	protected void deleteDocumentType(
@@ -138,19 +137,19 @@ public class EditDocumentTypeAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		List<Long> ddmStructureIdList = new ArrayList<Long>();
+		List<Long> ddmStructureIdsList = new ArrayList<Long>();
 
 		for (int i = 1; i < 4; i++) {
 			long ddmStructureId = ParamUtil.getLong(
 				actionRequest, "ddmStructureId" + i);
 
 			if (ddmStructureId > 0) {
-				ddmStructureIdList.add(ddmStructureId);
+				ddmStructureIdsList.add(ddmStructureId);
 			}
 		}
 
-		long[] ddmStructureIdArray =
-			ArrayUtil.toArray((Long[])ddmStructureIdList.toArray(new Long[0]));
+		long[] ddmStructureIdsArray = ArrayUtil.toArray(
+			ddmStructureIdsList.toArray(new Long[ddmStructureIdsList.size()]));
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLDocumentType.class.getName(), actionRequest);
@@ -161,7 +160,7 @@ public class EditDocumentTypeAction extends PortletAction {
 
 			DLDocumentTypeServiceUtil.addDocumentType(
 				themeDisplay.getScopeGroupId(), name, description,
-				ddmStructureIdArray, serviceContext);
+				ddmStructureIdsArray, serviceContext);
 		}
 		else {
 

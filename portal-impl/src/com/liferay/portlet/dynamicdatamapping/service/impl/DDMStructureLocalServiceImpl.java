@@ -177,7 +177,7 @@ public class DDMStructureLocalServiceImpl
 		deleteStructure(structure);
 	}
 
-	public void deleteStructureEntries(long groupId)
+	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
 		for (DDMStructure structure :
@@ -187,12 +187,18 @@ public class DDMStructureLocalServiceImpl
 		}
 	}
 
-	public List<DDMStructure> getClassStructureEntries(
+	public List<DDMStructure> getClassStructures(
 			long classNameId, int start, int end)
 		throws SystemException {
 
 		return ddmStructurePersistence.findByClassNameId(
 			classNameId, start, end);
+	}
+
+	public List<DDMStructure> getDLDocumentTypeStructures(long dlDocumentTypeId)
+		throws SystemException {
+
+		return dlDocumentTypePersistence.getDDMStructures(dlDocumentTypeId);
 	}
 
 	public DDMStructure getStructure(long structureId)

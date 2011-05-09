@@ -14,31 +14,25 @@
 
 package com.liferay.portlet.documentlibrary.model.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.documentlibrary.model.DLDocumentType;
-import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Alexander Chow
  */
-public class DLDocumentTypeImpl extends DLDocumentTypeModelImpl
-	implements DLDocumentType {
+public class DLDocumentTypeImpl
+	extends DLDocumentTypeModelImpl implements DLDocumentType {
 
 	public DLDocumentTypeImpl() {
 	}
 
-	public List<DDMStructure> getDDMStructures() {
-		try {
-			return DLDocumentTypeLocalServiceUtil.getDDMStructures(
-				getDocumentTypeId());
-		}
-		catch (Exception e) {
-		}
-
-		return new ArrayList<DDMStructure>();
+	public List<DDMStructure> getDDMStructures() throws SystemException {
+		return DDMStructureLocalServiceUtil.getDLDocumentTypeStructures(
+			getDocumentTypeId());
 	}
 
 }

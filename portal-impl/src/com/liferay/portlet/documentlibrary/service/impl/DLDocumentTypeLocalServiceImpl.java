@@ -20,8 +20,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.service.base.DLDocumentTypeLocalServiceBaseImpl;
-import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
-import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 
 import java.util.Date;
 import java.util.List;
@@ -38,7 +36,6 @@ public class DLDocumentTypeLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		Date now = new Date();
 
 		verify(ddmStructureIds);
@@ -90,36 +87,22 @@ public class DLDocumentTypeLocalServiceImpl
 		return dlDocumentTypePersistence.findByPrimaryKey(documentTypeId);
 	}
 
-	public List<DLDocumentType> getGroupDocumentTypes(
+	public List<DLDocumentType> getDocumentTypes(
 			long groupId, int start, int end)
 		throws SystemException {
 
 		return dlDocumentTypePersistence.findByGroupId(groupId, start, end);
 	}
 
-	public List<DDMStructure> getDDMStructures(long documentTypeId)
-		throws SystemException {
-
-		return dlDocumentTypePersistence.getDDMStructures(documentTypeId);
-	}
-
 	public void updateDocumentType(
-			long userId, long documentTypeId, String name, String description,
+			long documentTypeId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		Date now = new Date();
 
 		DLDocumentType documentType =
 			dlDocumentTypePersistence.findByPrimaryKey(documentTypeId);
 
-		documentType.setCompanyId(user.getCompanyId());
-		documentType.setUserId(user.getUserId());
-		documentType.setUserName(user.getFullName());
-		documentType.setCreateDate(serviceContext.getCreateDate(now));
-		documentType.setModifiedDate(serviceContext.getModifiedDate(now));
+		documentType.setModifiedDate(serviceContext.getModifiedDate(null));
 		documentType.setName(name);
 		documentType.setDescription(description);
 
@@ -151,7 +134,7 @@ public class DLDocumentTypeLocalServiceImpl
 	}
 
 	protected void verify(long[] ddmStructureIds)
-		throws NoSuchStructureException, SystemException {
+		throws PortalException, SystemException {
 
 		for (long ddmStructureId : ddmStructureIds) {
 			ddmStructurePersistence.findByPrimaryKey(ddmStructureId);

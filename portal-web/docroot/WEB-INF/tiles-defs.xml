@@ -367,13 +367,9 @@
 	<!-- Document Library -->
 
 	<definition name="portlet.document_library" extends="portlet" />
-	
+
 	<definition name="portlet.document_library.edit_document_type" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/edit_document_type.jsp" />
-	</definition>
-	
-	<definition name="portlet.document_library.select_dynamic_data_mapping_structure" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/select_dynamic_data_mapping_structure.jsp" />
 	</definition>
 
 	<definition name="portlet.document_library.move_file_entry" extends="portlet.document_library">
@@ -382,6 +378,10 @@
 
 	<definition name="portlet.document_library.search" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/search.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.select_dynamic_data_mapping_structure" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/select_dynamic_data_mapping_structure.jsp" />
 	</definition>
 
 	<definition name="portlet.document_library.view" extends="portlet.document_library">

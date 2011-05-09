@@ -61,11 +61,11 @@ public class DLDocumentTypeServiceImpl extends DLDocumentTypeServiceBaseImpl {
 		return dlDocumentTypeLocalService.getDocumentType(documentTypeId);
 	}
 
-	public List<DLDocumentType> getGroupDocumentTypes(
+	public List<DLDocumentType> getDocumentTypes(
 			long groupId, int start, int end)
 		throws SystemException {
 
-		return dlDocumentTypeLocalService.getGroupDocumentTypes(
+		return dlDocumentTypePersistence.filterFindByGroupId(
 			groupId, start, end);
 	}
 
@@ -78,7 +78,7 @@ public class DLDocumentTypeServiceImpl extends DLDocumentTypeServiceBaseImpl {
 			getPermissionChecker(), documentTypeId, ActionKeys.UPDATE);
 
 		dlDocumentTypeLocalService.updateDocumentType(
-			getUserId(), documentTypeId, name, description, serviceContext);
+			documentTypeId, name, description, serviceContext);
 	}
 
 }
