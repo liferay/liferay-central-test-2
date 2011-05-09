@@ -190,37 +190,6 @@ public class SourceFormatter {
 		return content;
 	}
 
-	private static boolean _checkHtmlTagVulnerability(
-		String jspContent, String vulnerabilityString) {
-
-		int pos1 = -1;
-
-		do {
-			pos1 = jspContent.indexOf(vulnerabilityString, pos1 + 1);
-
-			if (pos1 != -1) {
-				int pos2 = jspContent.lastIndexOf(CharPool.LESS_THAN, pos1);
-
-				while (pos2 > 0 && jspContent.charAt(pos2 + 1) == CharPool.PERCENT) {
-					pos2 = jspContent.lastIndexOf(CharPool.LESS_THAN, pos2 - 1);
-				}
-
-				String tagContent = jspContent.substring(pos2, pos1);
-
-				if (!tagContent.startsWith("<aui:") &&
-					!tagContent.startsWith("<liferay-portlet:") &&
-					!tagContent.startsWith("<liferay-util:") &&
-					!tagContent.startsWith("<portlet:")) {
-
-					return true;
-				}
-			}
-		}
-		while (pos1 != -1);
-
-		return false;
-	}
-
 	private static void _checkPersistenceTestSuite() throws IOException {
 		String basedir = "./portal-impl/test";
 
@@ -266,6 +235,39 @@ public class SourceFormatter {
 		}
 	}
 
+	private static boolean _checkTaglibVulnerability(
+		String jspContent, String vulnerability) {
+
+		int pos1 = -1;
+
+		do {
+			pos1 = jspContent.indexOf(vulnerability, pos1 + 1);
+
+			if (pos1 != -1) {
+				int pos2 = jspContent.lastIndexOf(CharPool.LESS_THAN, pos1);
+
+				while ((pos2 > 0) &&
+					   (jspContent.charAt(pos2 + 1) == CharPool.PERCENT)) {
+
+					pos2 = jspContent.lastIndexOf(CharPool.LESS_THAN, pos2 - 1);
+				}
+
+				String tagContent = jspContent.substring(pos2, pos1);
+
+				if (!tagContent.startsWith("<aui:") &&
+					!tagContent.startsWith("<liferay-portlet:") &&
+					!tagContent.startsWith("<liferay-util:") &&
+					!tagContent.startsWith("<portlet:")) {
+
+					return true;
+				}
+			}
+		}
+		while (pos1 != -1);
+
+		return false;
+	}
+
 	private static void _checkXSS(String fileName, String jspContent) {
 		Matcher matcher = _xssPattern.matcher(jspContent);
 
@@ -274,15 +276,15 @@ public class SourceFormatter {
 
 			String jspVariable = matcher.group(1);
 
-			String inputVulnerability = " value=\"<%= " + jspVariable + " %>";
+			String anchorVulnerability = " href=\"<%= " + jspVariable + " %>";
 
-			if (_checkHtmlTagVulnerability(jspContent, inputVulnerability)) {
+			if (_checkTaglibVulnerability(jspContent, anchorVulnerability)) {
 				xssVulnerable = true;
 			}
 
-			String anchorVulnerability = " href=\"<%= " + jspVariable + " %>";
+			String inputVulnerability = " value=\"<%= " + jspVariable + " %>";
 
-			if (_checkHtmlTagVulnerability(jspContent, anchorVulnerability)) {
+			if (_checkTaglibVulnerability(jspContent, inputVulnerability)) {
 				xssVulnerable = true;
 			}
 
