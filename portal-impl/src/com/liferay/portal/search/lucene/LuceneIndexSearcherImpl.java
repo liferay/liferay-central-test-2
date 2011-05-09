@@ -114,11 +114,18 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				FacetConfiguration facetConfiguration =
 					facet.getFacetConfiguration();
 
+				JSONObject dataJSONObject = facetConfiguration.getData();
+
 				if (facet instanceof MultiValueFacet) {
 					MultiValueFacetHandler multiValueFacetHandler =
 						new MultiValueFacetHandler(
 							facetConfiguration.getFieldName(),
 							facetConfiguration.getFieldName());
+
+					if (dataJSONObject.has("maxTerms")) {
+						multiValueFacetHandler.setMaxItems(
+							dataJSONObject.getInt("maxTerms"));
+					}
 
 					handlerList.add(multiValueFacetHandler);
 				}
