@@ -60,11 +60,11 @@ public class WebAppPool {
 		if (map == null) {
 			map = new ConcurrentHashMap<String, Object>();
 
-			Map<String, Object> existingMap =
-				_webAppPool.putIfAbsent(webAppId, map);
+			Map<String, Object> previousMap = _webAppPool.putIfAbsent(
+				webAppId, map);
 
-			if (existingMap != null) {
-				map = existingMap;
+			if (previousMap != null) {
+				map = previousMap;
 			}
 		}
 
