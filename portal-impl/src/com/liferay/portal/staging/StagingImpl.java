@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -397,24 +398,34 @@ public class StagingImpl implements Staging {
 				typeSettingsProperties.setProperty(
 					"branchingPublic", String.valueOf(branchingPublic));
 
+				Locale defaultLocale = LocaleUtil.getDefault();
+
+				String description = LanguageUtil.format(
+					defaultLocale,
+					LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+					stagingGroup.getDescriptiveName());
+
 				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 					userId, stagingGroup.getGroupId(), false,
 					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
-						" branch of ").concat(
-							stagingGroup.getDescriptiveName()), serviceContext);
+					description, serviceContext);
 			}
 
 			if (branchingPrivate) {
 				typeSettingsProperties.setProperty(
 					"branchingPrivate", String.valueOf(branchingPrivate));
 
+				Locale defaultLocale = LocaleUtil.getDefault();
+
+				String description = LanguageUtil.format(
+					defaultLocale,
+					LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+					stagingGroup.getDescriptiveName());
+
 				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 					userId, stagingGroup.getGroupId(), true,
 					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
-						" branch of ").concat(
-							stagingGroup.getDescriptiveName()), serviceContext);
+					description, serviceContext);
 			}
 
 			GroupLocalServiceUtil.updateGroup(
@@ -487,21 +498,31 @@ public class StagingImpl implements Staging {
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
 		if (branchingPublic) {
+			Locale defaultLocale = LocaleUtil.getDefault();
+
+			String description = LanguageUtil.format(
+				defaultLocale,
+				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+				liveGroup.getDescriptiveName());
+
 			LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 				serviceContext.getUserId(), liveGroup.getGroupId(), false,
-				LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-				LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
-					" branch of ").concat(liveGroup.getDescriptiveName()),
+				LayoutSetBranchConstants.MASTER_BRANCH_NAME, description,
 				serviceContext);
 		}
 
 		if (branchingPrivate) {
+			Locale defaultLocale = LocaleUtil.getDefault();
+
+			String description = LanguageUtil.format(
+				defaultLocale,
+				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+				liveGroup.getDescriptiveName());
+
 			LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 				serviceContext.getUserId(), liveGroup.getGroupId(), true,
 				LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-				LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
-					" branch of ").concat(liveGroup.getDescriptiveName()),
-				serviceContext);
+				description, serviceContext);
 		}
 	}
 
