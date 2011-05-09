@@ -21,9 +21,9 @@ package com.liferay.portal.model;
  */
 public class LayoutSetBranchConstants {
 
-	public static final String MASTER_BRANCH_NAME = "backstage";
-
 	public static final String MASTER_BRANCH_DESCRIPTION =
 		"default-backstage-of-x";
+
+	public static final String MASTER_BRANCH_NAME = "backstage";
 
 }

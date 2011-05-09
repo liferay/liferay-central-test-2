@@ -398,28 +398,26 @@ public class StagingImpl implements Staging {
 				typeSettingsProperties.setProperty(
 					"branchingPublic", String.valueOf(branchingPublic));
 
-				Locale defaultLocale = LocaleUtil.getDefault();
+				Locale locale = LocaleUtil.getDefault();
 
 				String description = LanguageUtil.format(
-					defaultLocale,
-					LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+					locale, LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
 					stagingGroup.getDescriptiveName());
 
 				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 					userId, stagingGroup.getGroupId(), false,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-					description, serviceContext);
+					LayoutSetBranchConstants.MASTER_BRANCH_NAME, description,
+					serviceContext);
 			}
 
 			if (branchingPrivate) {
 				typeSettingsProperties.setProperty(
 					"branchingPrivate", String.valueOf(branchingPrivate));
 
-				Locale defaultLocale = LocaleUtil.getDefault();
+				Locale locale = LocaleUtil.getDefault();
 
 				String description = LanguageUtil.format(
-					defaultLocale,
-					LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+					locale, LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
 					stagingGroup.getDescriptiveName());
 
 				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
@@ -498,11 +496,10 @@ public class StagingImpl implements Staging {
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
 		if (branchingPublic) {
-			Locale defaultLocale = LocaleUtil.getDefault();
+			Locale locale = LocaleUtil.getDefault();
 
 			String description = LanguageUtil.format(
-				defaultLocale,
-				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+				locale, LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
 				liveGroup.getDescriptiveName());
 
 			LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
@@ -512,17 +509,16 @@ public class StagingImpl implements Staging {
 		}
 
 		if (branchingPrivate) {
-			Locale defaultLocale = LocaleUtil.getDefault();
+			Locale locale = LocaleUtil.getDefault();
 
 			String description = LanguageUtil.format(
-				defaultLocale,
-				LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
+				locale, LayoutSetBranchConstants.MASTER_BRANCH_DESCRIPTION,
 				liveGroup.getDescriptiveName());
 
 			LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
 				serviceContext.getUserId(), liveGroup.getGroupId(), true,
-				LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-				description, serviceContext);
+				LayoutSetBranchConstants.MASTER_BRANCH_NAME, description,
+				serviceContext);
 		}
 	}
 
