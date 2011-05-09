@@ -48,7 +48,7 @@ AUI().add(
 						recordset.add(emptyRows);
 
 						instance._uiSetRecordset(recordset);
-						
+
 						instance._fixPluginsUI();
 					},
 

@@ -19,22 +19,7 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/dynamic_data_lists/view_entry");
-portletURL.setParameter("entryId", String.valueOf(recordSet.getRecordSetId()));
-
 DDMStructure ddmStructure = recordSet.getDDMStructure();
-
-List<DDLRecord> results = DDLRecordLocalServiceUtil.getRecords(recordSet.getRecordSetId(), 0, 1000, (OrderByComparator)null);
-
-JSONArray recordSetJSON = DDLUtil.getRecordSetJSONArray(recordSet);
-
-JSONArray recordsJSON = DDLUtil.getRecordsJSONArray(results);
-
-JSONArray structureJSON = DDMXSDUtil.getJSONArray(ddmStructure.getXsd());
-
-int totalEmptyRecords = Math.max(recordSet.getMinDisplayRows(), results.size()) - results.size();
 %>
 
 <div class="lfr-spreadsheet-container">
@@ -58,66 +43,72 @@ int totalEmptyRecords = Math.max(recordSet.getMinDisplayRows(), results.size()) 
 </div>
 
 <aui:script use="liferay-portlet-dynamic-data-lists">
-var keys = [];
+	var keys = [];
 
-var columnset = Liferay.LiferaySpreadSheet.buildDataTableColumnset(<%= recordSetJSON.toString() %>, <%= structureJSON.toString() %>);
+	var columnset = Liferay.LiferaySpreadSheet.buildDataTableColumnset(<%= DDLUtil.getRecordSetJSONArray(recordSet) %>, <%= DDMXSDUtil.getJSONArray(ddmStructure.getXsd()) %>);
 
-A.Array.each(
-	columnset,
-	function(column) {
-		keys.push(column.key);
-	}
-);
+	A.Array.each(
+		columnset,
+		function(column) {
+			keys.push(column.key);
+		}
+	);
 
-var recordset = Liferay.LiferaySpreadSheet.buildEmptyRecords(<%= totalEmptyRecords %>, keys);
+	<%
+	List<DDLRecord> records = DDLRecordLocalServiceUtil.getRecords(recordSet.getRecordSetId(), 0, 1000, null);
 
-A.Array.each(
-	<%= recordsJSON.toString() %>,
-	function(record) {
-		recordset.splice(record.displayIndex, 0, record);
-	}
-);
+	int totalEmptyRecords = Math.max(recordSet.getMinDisplayRows(), records.size()) - records.size();
+	%>
 
-window.<portlet:namespace />spreadSheet = new Liferay.LiferaySpreadSheet(
-	{
-		boundingBox: '#<portlet:namespace />dataTableBB',
-		columnset: columnset,
-		contentBox: '#<portlet:namespace />dataTableCC',
-		editEvent: 'dblclick',
-		recordset: recordset,
-		recordsetId: <%= recordSet.getRecordSetId() %>
-	}
-)
-.plug(
-	A.Plugin.DataTableScroll,
-	{
-		height: 700,
-		width: 900
-	}
-)
-.plug(
-	A.Plugin.DataTableSelection,
-	{
-		selectEvent: 'mousedown'
-	}
-)
-.plug(A.Plugin.DataTableSort)
-.render('#<portlet:namespace />spreadsheet');
+	var recordset = Liferay.LiferaySpreadSheet.buildEmptyRecords(<%= totalEmptyRecords %>, keys);
 
-window.<portlet:namespace />spreadSheet.get('boundingBox').unselectable();
+	A.Array.each(
+		<%= DDLUtil.getRecordsJSONArray(records) %>,
+		function(record) {
+			recordset.splice(record.displayIndex, 0, record);
+		}
+	);
 
-var numberOfRecordsNode = A.one('#<portlet:namespace />numberOfRecords');
+	window.<portlet:namespace />spreadSheet = new Liferay.LiferaySpreadSheet(
+		{
+			boundingBox: '#<portlet:namespace />dataTableBB',
+			columnset: columnset,
+			contentBox: '#<portlet:namespace />dataTableCC',
+			editEvent: 'dblclick',
+			recordset: recordset,
+			recordsetId: <%= recordSet.getRecordSetId() %>
+		}
+	)
+	.plug(
+		A.Plugin.DataTableScroll,
+		{
+			height: 700,
+			width: 900
+		}
+	)
+	.plug(
+		A.Plugin.DataTableSelection,
+		{
+			selectEvent: 'mousedown'
+		}
+	)
+	.plug(A.Plugin.DataTableSort)
+	.render('#<portlet:namespace />spreadsheet');
 
-A.one('#<portlet:namespace />addRecords').on(
-	'click',
-	function(event) {
-		var numberOfRecords = parseInt(numberOfRecordsNode.val(), 10) || 0;
+	window.<portlet:namespace />spreadSheet.get('boundingBox').unselectable();
 
-		var recordset = <portlet:namespace />spreadSheet.get('recordset');
+	var numberOfRecordsNode = A.one('#<portlet:namespace />numberOfRecords');
 
-		<portlet:namespace />spreadSheet.addEmptyRows(numberOfRecords);
+	A.one('#<portlet:namespace />addRecords').on(
+		'click',
+		function(event) {
+			var numberOfRecords = parseInt(numberOfRecordsNode.val(), 10) || 0;
 
-		<portlet:namespace />spreadSheet.updateMinDisplayRows(recordset.getLength());
-	}
-);
+			var recordset = <portlet:namespace />spreadSheet.get('recordset');
+
+			<portlet:namespace />spreadSheet.addEmptyRows(numberOfRecords);
+
+			<portlet:namespace />spreadSheet.updateMinDisplayRows(recordset.getLength());
+		}
+	);
 </aui:script>
