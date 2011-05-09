@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Brian Wing Shun Chan
@@ -59,7 +60,12 @@ public class WebAppPool {
 		if (map == null) {
 			map = new ConcurrentHashMap<String, Object>();
 
-			_webAppPool.put(webAppId, map);
+			Map<String, Object> existingMap =
+				_webAppPool.putIfAbsent(webAppId, map);
+
+			if (existingMap != null) {
+				map = existingMap;
+			}
 		}
 
 		map.put(key, obj);
@@ -78,6 +84,6 @@ public class WebAppPool {
 
 	private static WebAppPool _instance = new WebAppPool();
 
-	private Map<String, Map<String, Object>> _webAppPool;
+	private ConcurrentMap<String, Map<String, Object>> _webAppPool;
 
 }
