@@ -54,14 +54,14 @@ FileVersion fileVersion = null;
 
 long fileVersionId = 0;
 
-long documentTypeId = ParamUtil.getLong(request, "documentTypeId");
+long documentTypeId = ParamUtil.getLong(request, "documentTypeId", -1);
 
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
 
 	fileVersionId = fileVersion.getFileVersionId();
 
-	if ((documentTypeId == 0) && (fileVersion.getModel() instanceof DLFileVersion)) {
+	if ((documentTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
 		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
 		documentTypeId = dlFileVersion.getDocumentTypeId();
