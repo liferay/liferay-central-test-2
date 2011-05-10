@@ -78,32 +78,32 @@ public class PortletSessionTracker
 	private void _add(HttpSession session) {
 		String sessionId = session.getId();
 
-		Set<HttpSession> portletSessions = _sessions.get(sessionId);
+		Set<HttpSession> sessions = _sessions.get(sessionId);
 
-		if (portletSessions == null) {
-			portletSessions = new ConcurrentHashSet<HttpSession>();
+		if (sessions == null) {
+			sessions = new ConcurrentHashSet<HttpSession>();
 
-			Set<HttpSession> oldPortletSessions = _sessions.putIfAbsent(
-				sessionId, portletSessions);
+			Set<HttpSession> previousSessions = _sessions.putIfAbsent(
+				sessionId, sessions);
 
-			if (oldPortletSessions != null) {
-				portletSessions = oldPortletSessions;
+			if (previousSessions != null) {
+				sessions = previousSessions;
 			}
 		}
 
-		portletSessions.add(session);
+		sessions.add(session);
 	}
 
 	private void _invalidate(String sessionId) {
-		Set<HttpSession> portletSessions = _sessions.remove(sessionId);
+		Set<HttpSession> sessions = _sessions.remove(sessionId);
 
-		if (portletSessions == null) {
+		if (sessions == null) {
 			return;
 		}
 
-		for (HttpSession httpSession : portletSessions) {
+		for (HttpSession session : sessions) {
 			try {
-				httpSession.invalidate();
+				session.invalidate();
 			}
 			catch (Exception e) {
 			}
