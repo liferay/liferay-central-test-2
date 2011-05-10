@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -64,6 +65,10 @@ public abstract class CMISModel {
 	protected boolean containsPermission(CmisObject cmisObject, String actionId)
 		throws RepositoryException {
 
+		if (getCmisRepository().isRefreshBeforePermissionCheck()) {
+			cmisObject.refresh();
+		}
+
 		if (_unsupportedActionKeys.contains(actionId)) {
 			return false;
 		}
@@ -82,6 +87,8 @@ public abstract class CMISModel {
 
 		return allowableActionsSet.contains(action);
 	}
+
+	protected abstract CMISRepository getCmisRepository();
 
 	@SuppressWarnings("unused")
 	protected Folder getParentFolder() throws PortalException, SystemException {

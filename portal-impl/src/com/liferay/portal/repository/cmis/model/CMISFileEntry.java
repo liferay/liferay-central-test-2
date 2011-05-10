@@ -206,8 +206,21 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		throws PortalException, SystemException {
 
 		if (_latestFileVersion == null) {
-			_latestFileVersion = CMISRepositoryLocalServiceUtil.toFileVersion(
-				getRepositoryId(), _document.getObjectOfLatestVersion(false));
+			Document latestDocumentVersion = null;
+
+			if (getCmisRepository().isDocumentRetrievableByVersionSeriesId()) {
+				latestDocumentVersion = _document.getObjectOfLatestVersion(
+					false);
+			}
+			else {
+				List<Document> documentVersions = _document.getAllVersions();
+
+				latestDocumentVersion = documentVersions.get(0);
+			}
+
+			_latestFileVersion =
+				CMISRepositoryLocalServiceUtil.toFileVersion(
+					getRepositoryId(), latestDocumentVersion);
 		}
 
 		return _latestFileVersion;
@@ -387,6 +400,10 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public FileEntry toEscapedModel() {
 		return this;
+	}
+
+	protected CMISRepository getCmisRepository() {
+		return _cmisRepository;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CMISFileEntry.class);

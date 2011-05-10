@@ -33,6 +33,7 @@ import com.liferay.portal.service.ServiceContext;
 import java.io.InputStream;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Alexander Chow
@@ -160,6 +161,12 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _cmisRepository.getFoldersFileEntriesCount(folderIds, status);
 	}
 
+	public String getLatestVersionId(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.getLatestVersionId(objectId);
+	}
+
 	public String getLogin() throws RepositoryException {
 		String login = PrincipalThreadLocal.getName();
 
@@ -185,6 +192,18 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return login;
 	}
 
+	public String getObjectName(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.getObjectName(objectId);
+	}
+
+	public List<String> getObjectPaths(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.getObjectPaths(objectId);
+	}
+
 	public abstract Session getSession()
 		throws PortalException, RepositoryException;
 
@@ -196,6 +215,32 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 
 	public void initRepository() throws PortalException, SystemException {
 		_cmisRepository.initRepository();
+	}
+
+	public boolean isCancelCheckOutAllowable(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.isCancelCheckOutAllowable(objectId);
+	}
+
+	public boolean isCheckInAllowable(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.isCheckInAllowable(objectId);
+	}
+
+	public boolean isCheckOutAllowable(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.isCheckOutAllowable(objectId);
+	}
+
+	public boolean isDocumentRetrievableByVersionSeriesId() {
+		return true;
+	}
+
+	public boolean isRefreshBeforePermissionCheck() {
+		return false;
 	}
 
 	public void lockFileEntry(long fileEntryId)
@@ -263,8 +308,20 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		_cmisRepository.revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
-	public void setCmisRepository(BaseRepositoryImpl cmisRepository) {
+	public void setCmisRepository(AbstractCmisRepository cmisRepository) {
 		_cmisRepository = cmisRepository;
+	}
+
+	public FileEntry toFileEntry(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.toFileEntry(objectId);
+	}
+
+	public Folder toFolder(String objectId)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.toFolder(objectId);
 	}
 
 	public void unlockFileEntry(long fileEntryId)
@@ -296,6 +353,15 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 			majorVersion, is, size, serviceContext);
 	}
 
+	public FileEntry updateFileEntry(
+			String objectId, Map<String, Object> properties, InputStream is,
+			String sourceFileName, long size, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		return _cmisRepository.updateFileEntry(
+			objectId, properties, is, sourceFileName, size, serviceContext);
+	}
+
 	public Folder updateFolder(
 			long folderId, String title, String description,
 			ServiceContext serviceContext)
@@ -317,6 +383,6 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _cmisRepository.verifyInheritableLock(folderId, lockUuid);
 	}
 
-	private BaseRepositoryImpl _cmisRepository;
+	private AbstractCmisRepository _cmisRepository;
 
 }

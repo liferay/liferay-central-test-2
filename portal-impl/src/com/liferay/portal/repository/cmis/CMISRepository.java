@@ -21,8 +21,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.repository.cmis.AbstractCmisRepository;
 import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -71,6 +71,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
+import org.apache.chemistry.opencmis.client.api.FileableCmisObject;
 import org.apache.chemistry.opencmis.client.api.ItemIterable;
 import org.apache.chemistry.opencmis.client.api.ObjectId;
 import org.apache.chemistry.opencmis.client.api.QueryResult;
@@ -85,6 +86,7 @@ import org.apache.chemistry.opencmis.commons.enums.BaseTypeId;
 import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisPermissionDeniedException;
 import org.apache.chemistry.opencmis.commons.exceptions.CmisRuntimeException;
+import org.apache.chemistry.opencmis.commons.impl.Base64;
 import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
 
 /**
@@ -100,7 +102,7 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  *         href="http://www.oasis-open.org/committees/document.php?document_id=39631">
  *         CMIS Type Mutability proposal</a>
  */
-public class CMISRepository extends BaseRepositoryImpl {
+public class CMISRepository extends AbstractCmisRepository {
 
 	public CMISRepository(CMISRepositoryHandler cmisRepositoryHandler) {
 		_cmisRepositoryHandler = cmisRepositoryHandler;
@@ -537,6 +539,50 @@ public class CMISRepository extends BaseRepositoryImpl {
 		return count;
 	}
 
+	public String getLatestVersionId(String objectId)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			Document document = (Document)session.getObject(objectId);
+
+			List<Document> documentVersions = document.getAllVersions();
+
+			document = documentVersions.get(0);
+
+			return document.getId();
+		}
+		catch (Exception e) {
+			throw new RepositoryException(e);
+		}
+	}
+
+	public String getObjectName(String objectId)
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		CmisObject cmisObject = session.getObject(objectId);
+
+		return cmisObject.getName();
+	}
+
+	public List<String> getObjectPaths(String objectId)
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		CmisObject cmisObject = session.getObject(objectId);
+
+		if (cmisObject instanceof FileableCmisObject) {
+			return ((FileableCmisObject)cmisObject).getPaths();
+		}
+
+		throw new RepositoryException(
+			"CMIS object is unfileable for id " + objectId);
+	}
+
 	public Session getSession() throws PortalException, RepositoryException {
 		Session session = getCachedSession();
 
@@ -606,6 +652,32 @@ public class CMISRepository extends BaseRepositoryImpl {
 				"Unable to initialize CMIS session for repository " +
 					getRepositoryId(), e);
 		}
+	}
+
+	public boolean isCancelCheckOutAllowable(String objectId)
+		throws PortalException, SystemException {
+
+		return isActionAllowable(objectId, Action.CAN_CANCEL_CHECK_OUT);
+	}
+
+	public boolean isCheckInAllowable(String objectId)
+		throws PortalException, SystemException {
+
+		return isActionAllowable(objectId, Action.CAN_CHECK_IN);
+	}
+
+	public boolean isCheckOutAllowable(String objectId)
+		throws PortalException, SystemException {
+
+		return isActionAllowable(objectId, Action.CAN_CHECK_OUT);
+	}
+
+	public boolean isDocumentRetrievableByVersionSeriesId() {
+		return _cmisRepositoryHandler.isDocumentRetrievableByVersionSeriesId();
+	}
+
+	public boolean isRefreshBeforePermissionCheck() {
+		return _cmisRepositoryHandler.isRefreshBeforePermissionCheck();
 	}
 
 	public void lockFileEntry(long fileEntryId) {
@@ -811,12 +883,29 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public FileEntry toFileEntry(Document document) throws SystemException {
-		Object[] ids = getRepositoryEntryIds(document.getVersionSeriesId());
+		Object[] ids = null;
+
+		if (isDocumentRetrievableByVersionSeriesId()) {
+			ids = getRepositoryEntryIds(document.getVersionSeriesId());
+		}
+		else {
+			ids = getRepositoryEntryIds(document.getId());
+		}
 
 		long fileEntryId = (Long)ids[0];
 		String uuid = (String)ids[1];
 
 		return new CMISFileEntry(this, uuid, fileEntryId, document);
+	}
+
+	public FileEntry toFileEntry(String objectId)
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		Document document = (Document)session.getObject(objectId);
+
+		return toFileEntry(document);
 	}
 
 	public FileVersion toFileVersion(Document version) throws SystemException {
@@ -837,6 +926,18 @@ public class CMISRepository extends BaseRepositoryImpl {
 		String uuid = (String)ids[1];
 
 		return new CMISFolder(this, uuid, folderId, cmisFolder);
+	}
+
+	public Folder toFolder(String objectId)
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
+			(org.apache.chemistry.opencmis.client.api.Folder)
+				session.getObject(objectId);
+
+		return toFolder(cmisFolder);
 	}
 
 	public void unlockFileEntry(long fileEntryId) {
@@ -956,6 +1057,58 @@ public class CMISRepository extends BaseRepositoryImpl {
 			if (checkOutDocumentObjectId != null) {
 				document.cancelCheckOut();
 			}
+		}
+	}
+
+	public FileEntry updateFileEntry(
+			String objectId, Map<String, Object> properties, InputStream is,
+			String sourceFileName, long size, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			Document document = (Document)session.getObject(objectId);
+
+			AllowableActions allowableActions = document.getAllowableActions();
+
+			Set<Action> allowableActionsSet =
+				allowableActions.getAllowableActions();
+
+			ContentStream contentStream = null;
+
+			if (is != null) {
+				String contentType = (String)serviceContext.getAttribute(
+					"contentType");
+
+				is = new Base64.InputStream(is, Base64.ENCODE);
+
+				contentStream = new ContentStreamImpl(
+					sourceFileName, BigInteger.valueOf(size), contentType, is);
+			}
+
+			checkUpdatable(allowableActionsSet, properties, contentStream);
+
+			if (properties != null) {
+				document = (Document)document.updateProperties(properties);
+			}
+
+			if (contentStream != null) {
+				document.setContentStream(contentStream, true, false);
+			}
+
+			return toFileEntry(document);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			processException(e);
+
+			throw new RepositoryException(e);
 		}
 	}
 
@@ -1321,6 +1474,26 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 				getSubfolderIds(subfolderIds, subSubFolders, recurse);
 			}
+		}
+	}
+
+	protected boolean isActionAllowable(String objectId, Action action)
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		Document document = (Document)session.getObject(objectId);
+
+		AllowableActions allowableActions = document.getAllowableActions();
+
+		Set<Action> allowableActionsSet =
+			allowableActions.getAllowableActions();
+
+		if (allowableActionsSet.contains(action)) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
