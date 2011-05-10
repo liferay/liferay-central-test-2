@@ -138,7 +138,12 @@ web.server.display.node=true</echo>
 	</target>
 
 	<target name="run-selenium-versioned-tomcat">
-		<unzip src="${hudson.portal.dependencies.dir}/${lp.version}/${file.name}" dest="${app.server.parent.dir}" />
+		<copy
+			file="${hudson.portal.dependencies.dir}/${lp.version}/${file.name}"
+			todir="${app.server.parent.dir}"
+		/>
+
+		<unzip src="${app.server.parent.dir}/${file.name}" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.tomcat.dir=${app.server.parent.dir}/${tomcat.folder.dir}</echo>
 
