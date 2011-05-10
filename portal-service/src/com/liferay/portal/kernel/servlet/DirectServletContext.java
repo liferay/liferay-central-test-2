@@ -37,8 +37,9 @@ import javax.servlet.ServletException;
 public class DirectServletContext implements ServletContext {
 
 	public DirectServletContext(ServletContext servletContext) {
-		_contextPath = ContextPathUtil.getContextPath(servletContext);
 		_servletContext = servletContext;
+
+		_contextPath = ContextPathUtil.getContextPath(servletContext);
 	}
 
 	public Object getAttribute(String name) {
@@ -86,19 +87,20 @@ public class DirectServletContext implements ServletContext {
 	}
 
 	public RequestDispatcher getRequestDispatcher(String path) {
-		Servlet servlet = DirectServletRegistry.getServlet(
-			_contextPath.concat(path));
+		String fullPath = _contextPath.concat(path);
+
+		Servlet servlet = DirectServletRegistry.getServlet(fullPath);
 
 		if (servlet == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("No servlet found for " + path);
+				_log.debug("No servlet found for " + fullPath);
 			}
 
 			return _servletContext.getRequestDispatcher(path);
 		}
 		else {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Servlet found for " + path);
+				_log.debug("Servlet found for " + fullPath);
 			}
 
 			return new DirectRequestDispatcher(servlet);
@@ -172,7 +174,6 @@ public class DirectServletContext implements ServletContext {
 	private static Log _log = LogFactoryUtil.getLog(DirectServletContext.class);
 
 	private String _contextPath;
-
 	private ServletContext _servletContext;
 
 }
