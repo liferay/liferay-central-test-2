@@ -217,7 +217,7 @@ AUI().add(
 								p_l_id: themeDisplay.getPlid(),
 								redirect: Liferay.currentURL
 							},
-							uri: themeDisplay.getPathMain() + '/dockbar/layout_revisions'
+							uri: themeDisplay.getPathMain() + '/staging_bar/layout_revisions'
 						}
 					).render();
 

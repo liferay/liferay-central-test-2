@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/dockbar/init.jsp" %>
+<%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <%
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
@@ -26,7 +26,7 @@ List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutR
 
 <div class="yui3-aui-helper-hidden" id="<portlet:namespace />addVariation">
 	<portlet:actionURL var="addVariationURL">
-		<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
+		<portlet:param name="struts_action" value="/staging_bar/edit_layouts" />
 		<portlet:param name="<%= Constants.CMD %>" value="add_root_revision" />
 		<portlet:param name="redirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
@@ -137,7 +137,7 @@ public String _getGraph(PageContext pageContext, long layoutRevisionId, List<Lay
 			sb.append("</span>");
 		}
 
-		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/html/portlet/dockbar/layout_revision_action.jsp");
+		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher("/html/portlet/staging_bar/layout_revision_action.jsp");
 
 		request.setAttribute("layout_revisions.jsp-layoutRevision", layoutRevision);
 

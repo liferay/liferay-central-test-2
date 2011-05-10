@@ -445,12 +445,6 @@
 
 		<!-- Dockbar -->
 
-		<action path="/dockbar/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
-			<forward name="portlet.layouts_admin.error" path="portlet.dockbar.view" />
-		</action>
-
-		<action path="/dockbar/layout_revisions" forward="portlet.dockbar.layout_revisions" />
-
 		<action path="/dockbar/view" forward="portlet.dockbar.view" />
 
 		<!-- Document Library -->
@@ -1639,7 +1633,7 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
 		</action>
-												 
+
 		<action path="/message_boards_admin/search" forward="portlet.message_boards.search" />
 
 		<action path="/message_boards_admin/select_category" type="com.liferay.portlet.messageboards.action.EditCategoryAction">
@@ -2145,6 +2139,16 @@
 			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
 			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
 		</action>
+
+		<!-- Staging Bar -->
+
+		<action path="/staging_bar/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+			<forward name="portlet.layouts_admin.error" path="portlet.staging_bar.view" />
+		</action>
+
+		<action path="/staging_bar/layout_revisions" forward="portlet.staging_bar.layout_revisions" />
+
+		<action path="/staging_bar/view" forward="portlet.staging_bar.view" />
 
 		<!-- Update Manager -->
 

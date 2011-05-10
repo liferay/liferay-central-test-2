@@ -1780,6 +1780,20 @@
 		<render-weight>50</render-weight>
 		<css-class-wrapper>dynamic_data_list_display</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>170</portlet-name>
+		<icon>/html/icons/default.png</icon>
+		<struts-path>staging_bar</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<use-default-template>false</use-default-template>
+		<show-portlet-access-denied>false</show-portlet-access-denied>
+		<show-portlet-inactive>false</show-portlet-inactive>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<add-default-resource>true</add-default-resource>
+		<system>true</system>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

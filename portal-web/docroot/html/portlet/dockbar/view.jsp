@@ -14,17 +14,13 @@
  */
 --%>
 
-<%@ include file="/html/portlet/dockbar/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
 <%
 Group group = null;
 
-LayoutRevision layoutRevision = null;
-
 if (layout != null) {
 	group = layout.getGroup();
-
-	layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 }
 
 List<Portlet> portlets = new ArrayList<Portlet>();
@@ -37,10 +33,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	}
 }
 %>
-
-<c:if test="<%= layoutRevision != null %>">
-	<liferay-util:include page="/html/portlet/dockbar/branching_and_versioning.jsp" />
-</c:if>
 
 <div class="dockbar" data-namespace="<portlet:namespace />" id="dockbar">
 	<ul class="yui3-aui-toolbar">

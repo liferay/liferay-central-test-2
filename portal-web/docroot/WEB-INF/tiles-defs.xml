@@ -360,8 +360,6 @@
 
 	<!-- Dockbar -->
 
-	<definition name="portlet.dockbar.layout_revisions" path="/portlet/dockbar/layout_revisions.jsp" />
-
 	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
 
 	<!-- Document Library -->
@@ -1438,6 +1436,12 @@
 	<definition name="portlet.social_equity_admin.view" extends="portlet.social_equity_admin">
 		<put name="portlet_content" value="/portlet/social_equity_admin/view.jsp" />
 	</definition>
+
+	<!-- Staging Bar -->
+
+	<definition name="portlet.staging_bar.layout_revisions" path="/portlet/staging_bar/layout_revisions.jsp" />
+
+	<definition name="portlet.staging_bar.view" path="/portlet/staging_bar/view.jsp" />
 
 	<!-- Update Manager -->
 
