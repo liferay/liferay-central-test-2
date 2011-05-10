@@ -180,9 +180,16 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			roles.remove(communityOwner);
 		}
 
-		if (group.isOrganization() || group.isRegularSite()) {
-			List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
+		List<Team> teams = null;
 
+		if (group.isOrganization() || group.isRegularSite()) {
+			teams = TeamLocalServiceUtil.getGroupTeams(groupId);
+		}
+		else if (group.isLayout()) {
+			teams = TeamLocalServiceUtil.getGroupTeams(group.getParentGroupId());
+		}
+
+		if (teams != null) {
 			for (Team team : teams) {
 				Role role = RoleLocalServiceUtil.getTeamRole(team.getCompanyId(), team.getTeamId());
 
