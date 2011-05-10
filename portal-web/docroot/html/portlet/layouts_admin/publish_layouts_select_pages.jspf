@@ -18,10 +18,10 @@
 	<aui:input name="scope" type="hidden" value='<%= (results.isEmpty() ? "all-pages" : "selected-pages") %>' />
 
 	<%
-	String taglibUrl = "javascript:AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
+	String taglibUrl = "AUI().DialogManager.refreshByChild('#" + renderResponse.getNamespace() + "exportPagesFm');";
 	%>
 
-	<aui:button href="<%= taglibUrl %>" value='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' />
+	<aui:button onClick="<%= taglibUrl %>" value='<%= results.isEmpty() ? "select-pages" : "change-selection" %>' />
 </aui:fieldset>
 
 <%
