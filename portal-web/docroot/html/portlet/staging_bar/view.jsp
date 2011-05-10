@@ -17,12 +17,10 @@
 <%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <%
-Group group = null;
-
 LayoutRevision layoutRevision = null;
 
 if (layout != null) {
-	group = layout.getGroup();
+	Group group = layout.getGroup();
 
 	layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 }
