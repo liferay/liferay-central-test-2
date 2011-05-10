@@ -417,8 +417,9 @@ public class GroupFinderImpl
 		else {
 			findByCND_SQL = StringUtil.replace(
 				findByCND_SQL, "Group_.classNameId = ?",
-				"Group_.classNameId = ".concat(StringUtil.merge(
-					classNameIds, " OR Group_.classNameId = ")));
+				"Group_.classNameId = ".concat(
+					StringUtil.merge(
+						classNameIds, " OR Group_.classNameId = ")));
 		}
 
 		StringBundler sb = new StringBundler();
@@ -542,7 +543,8 @@ public class GroupFinderImpl
 			sql = StringUtil.replace(
 				sql, "Group_.classNameId = ?",
 				"Group_.classNameId = ".concat(
-					StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
+					StringUtil.merge(
+						classNameIds, " OR Group_.classNameId = ")));
 		}
 
 		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));

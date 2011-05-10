@@ -117,16 +117,12 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 				max);
 		}
 
-		List<Group> groups1 = userPersistence.getGroups(
-			permissionChecker.getUserId(), 0, max);
-		List<Group> groups2 = getUserOrganizationsGroups(
-			permissionChecker.getUserId(), 0, max);
+		List<Group> groups = new UniqueList<Group>();
 
-		List<Group> groups = new UniqueList<Group>(
-			groups1.size() + groups2.size());
-
-		groups.addAll(groups1);
-		groups.addAll(groups2);
+		groups.addAll(
+			userPersistence.getGroups(permissionChecker.getUserId(), 0, max));
+		groups.addAll(
+			getUserOrganizationsGroups(permissionChecker.getUserId(), 0, max));
 
 		Iterator<Group> itr = groups.iterator();
 

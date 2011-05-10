@@ -110,13 +110,15 @@
 					}
 
 					boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
-					boolean showPersonalSite = user.getGroup().hasPrivateLayouts() || user.getGroup().hasPublicLayouts();
+
+					Group userGroup = user.getGroup();
+
+					boolean showPersonalSite = userGroup.hasPrivateLayouts() || userGroup.hasPublicLayouts();
 					%>
 
 					<c:if test="<%= !manageableSites.isEmpty() %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuSitesPanel" persistState="<%= true %>" title="sites">
 							<ul>
-
 								<c:if test="<%= showGlobal %>">
 									<li>
 										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId())) %>"><liferay-ui:message key="global" /></a>
@@ -124,7 +126,7 @@
 								</c:if>
 								<c:if test="<%= showPersonalSite %>">
 									<li>
-										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId())) %>"><liferay-ui:message key="my-site" /></a>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", userGroup.getGroupId())) %>"><liferay-ui:message key="my-site" /></a>
 									</li>
 								</c:if>
 
@@ -149,7 +151,6 @@
 							</ul>
 						</liferay-ui:panel>
 					</c:if>
-
 				</liferay-ui:panel-floating-container>
 
 				<c:if test="<%= !scopeLayouts.isEmpty() %>">
