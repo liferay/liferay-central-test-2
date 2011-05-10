@@ -14,13 +14,13 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
+
 import java.io.Serializable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -34,6 +34,7 @@ import javax.servlet.http.HttpSessionListener;
  * </p>
  *
  * @author Rudy Hilado
+ * @author Shuyang Zhou
  */
 public class PortletSessionTracker
 	implements HttpSessionListener, HttpSessionBindingListener, Serializable {
@@ -69,7 +70,7 @@ public class PortletSessionTracker
 	}
 
 	private PortletSessionTracker() {
-		_sessions = new HashMap<String, Set<HttpSession>>();
+		_sessions = new ConcurrentHashMap<String, Set<HttpSession>>();
 
 		PortletSessionListenerManager.addListener(this);
 	}
@@ -77,44 +78,34 @@ public class PortletSessionTracker
 	private void _add(HttpSession session) {
 		String sessionId = session.getId();
 
-		synchronized (_sessions) {
-			Set<HttpSession> portletSessions = _sessions.get(sessionId);
+		Set<HttpSession> portletSessions = _sessions.get(sessionId);
 
-			if (portletSessions == null) {
-				portletSessions = new HashSet<HttpSession>();
+		if (portletSessions == null) {
+			portletSessions = new ConcurrentHashSet<HttpSession>();
 
-				_sessions.put(sessionId, portletSessions);
+			Set<HttpSession> oldPortletSessions = _sessions.putIfAbsent(
+				sessionId, portletSessions);
+
+			if (oldPortletSessions != null) {
+				portletSessions = oldPortletSessions;
 			}
-
-			portletSessions.add(session);
 		}
+
+		portletSessions.add(session);
 	}
 
 	private void _invalidate(String sessionId) {
-		Set<HttpSession> sessionsToInvalidate = null;
+		Set<HttpSession> portletSessions = _sessions.remove(sessionId);
 
-		synchronized (_sessions) {
-			Set<HttpSession> portletSessions = _sessions.get(sessionId);
-
-			if (portletSessions != null) {
-				sessionsToInvalidate = new HashSet<HttpSession>(
-					portletSessions);
-			}
-
-			_sessions.remove(sessionId);
+		if (portletSessions == null) {
+			return;
 		}
 
-		if (sessionsToInvalidate != null) {
-			Iterator<HttpSession> itr = sessionsToInvalidate.iterator();
-
-			while (itr.hasNext()) {
-				HttpSession session = itr.next();
-
-				try {
-					session.invalidate();
-				}
-				catch (Exception e) {
-				}
+		for (HttpSession httpSession : portletSessions) {
+			try {
+				httpSession.invalidate();
+			}
+			catch (Exception e) {
 			}
 		}
 	}
@@ -122,6 +113,6 @@ public class PortletSessionTracker
 	private static PortletSessionTracker _instance =
 		new PortletSessionTracker();
 
-	private transient Map<String, Set<HttpSession>> _sessions;
+	private transient ConcurrentMap<String, Set<HttpSession>> _sessions;
 
 }
