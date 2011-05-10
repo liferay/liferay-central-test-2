@@ -1892,6 +1892,7 @@ wiki.page.titles.remove.regexp=([/\\\\\\[\\]%&amp;?@]+)</echo>
 			<elseif>
 				<or>
 					<equals arg1="${sql.version}" arg2="5.2.3" />
+					<equals arg1="${sql.version}" arg2="5.2.5" />
 					<equals arg1="${sql.version}" arg2="5.2.7" />
 					<equals arg1="${sql.version}" arg2="5.2.8" />
 					<equals arg1="${sql.version}" arg2="5.2.9" />
