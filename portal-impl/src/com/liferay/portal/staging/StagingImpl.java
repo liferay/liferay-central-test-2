@@ -432,7 +432,12 @@ public class StagingImpl implements Staging {
 
 			if (!branchingPublic) {
 				LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
-					liveGroup.getStagingGroup().getGroupId(), true);
+					liveGroup.getStagingGroup().getGroupId(), false, true);
+			}
+
+			if (!branchingPrivate) {
+				LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+					liveGroup.getStagingGroup().getGroupId(), true, true);
 			}
 		}
 	}
