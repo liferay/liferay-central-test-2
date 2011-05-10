@@ -1,6 +1,10 @@
 AUI().add(
 	'liferay-menu',
 	function(A) {
+		var CLASS_HIDE = 'yui3-aui-helper-hidden-accessible';
+
+		var CLASS_VISIBILITY_HIDDEN = 'yui3-aui-helper-force-offset';
+
 		var Menu = function() {
 			var instance = this;
 
@@ -24,8 +28,6 @@ AUI().add(
 
 				instance._window.on('resize', instance._positionActiveMenu, instance);
 
-				var hideClass = 'yui3-aui-helper-hidden-accessible';
-
 				instance._body.delegate(
 					'click',
 					function(event) {
@@ -39,7 +41,7 @@ AUI().add(
 
 							menu = A.Node.create('<div class="lfr-component lfr-menu-list" />');
 
-							menu._hideClass = hideClass;
+							menu._hideClass = CLASS_HIDE;
 
 							menu.appendChild(list);
 							menu.hide();
@@ -59,7 +61,7 @@ AUI().add(
 							instance._closeActiveMenu();
 						}
 
-						if (!menu.hasClass(hideClass)) {
+						if (!menu.hasClass(CLASS_HIDE)) {
 							instance._closeActiveMenu();
 						}
 						else {
@@ -198,6 +200,8 @@ AUI().add(
 						direction = 'down';
 					}
 
+					menu.replaceClass(CLASS_HIDE, CLASS_VISIBILITY_HIDDEN);
+
 					var menuHeight = menu.get('offsetHeight');
 					var menuWidth = menu.get('offsetWidth');
 
@@ -261,6 +265,8 @@ AUI().add(
 					menu.setXY([offset.left, offset.top]);
 
 					menu.show();
+
+					menu.removeClass(CLASS_VISIBILITY_HIDDEN);
 
 					var extended = (cssClass.indexOf('lfr-extended') > -1);
 
