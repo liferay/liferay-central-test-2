@@ -51,8 +51,8 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		}
 
 		if (groupId > 0) {
-			if (permissionChecker.isCommunityAdmin(groupId) ||
-				permissionChecker.isCommunityOwner(groupId)) {
+			if (permissionChecker.isGroupAdmin(groupId) ||
+				permissionChecker.isGroupOwner(groupId)) {
 
 				return false;
 			}

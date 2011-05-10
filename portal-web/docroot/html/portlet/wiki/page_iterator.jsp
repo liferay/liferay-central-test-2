@@ -191,7 +191,7 @@ else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 else if (type.equals("draft_pages") || type.equals("pending_pages")) {
 	long draftUserId = user.getUserId();
 
-	if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId)) {
 		draftUserId = 0;
 	}
 

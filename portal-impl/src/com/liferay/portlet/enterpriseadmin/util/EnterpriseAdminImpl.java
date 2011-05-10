@@ -207,7 +207,7 @@ public class EnterpriseAdminImpl implements EnterpriseAdmin {
 		}
 
 		if (permissionChecker.isCompanyAdmin() ||
-			permissionChecker.isCommunityOwner(groupId)) {
+			permissionChecker.isGroupOwner(groupId)) {
 
 			return filteredGroupRoles;
 		}

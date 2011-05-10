@@ -32,7 +32,7 @@ public class UserGroupGroupRoleServiceImpl
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isGroupOwner(groupId)) {
 			throw new PrincipalException();
 		}
 
@@ -46,7 +46,7 @@ public class UserGroupGroupRoleServiceImpl
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isGroupOwner(groupId)) {
 			throw new PrincipalException();
 		}
 
@@ -60,7 +60,7 @@ public class UserGroupGroupRoleServiceImpl
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isGroupOwner(groupId)) {
 			throw new PrincipalException();
 		}
 
@@ -74,7 +74,7 @@ public class UserGroupGroupRoleServiceImpl
 
 		PermissionChecker permissionChecker = getPermissionChecker();
 
-		if (!permissionChecker.isCommunityOwner(groupId)) {
+		if (!permissionChecker.isGroupOwner(groupId)) {
 			throw new PrincipalException();
 		}
 

@@ -226,7 +226,7 @@ if (Validator.isNotNull(folder.getName())) {
 			<%
 			boolean showNonApprovedDocuments = false;
 
-			if ((user.getUserId() == fileShortcut.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+			if ((user.getUserId() == fileShortcut.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId)) {
 				showNonApprovedDocuments = true;
 			}
 

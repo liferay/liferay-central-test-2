@@ -119,7 +119,7 @@ if (row == null) {
 		/>
 	</c:if>
 
-	<c:if test="<%= permissionChecker.isCommunityOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
+	<c:if test="<%= permissionChecker.isGroupOwner(organizationGroupId) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

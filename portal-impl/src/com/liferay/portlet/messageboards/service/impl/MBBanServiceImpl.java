@@ -45,7 +45,7 @@ public class MBBanServiceImpl extends MBBanServiceBaseImpl {
 		boolean communityAdmin = false;
 
 		try {
-			communityAdmin = PortalUtil.isCommunityAdmin(
+			communityAdmin = PortalUtil.isGroupAdmin(
 				banUser, serviceContext.getScopeGroupId());
 		}
 		catch (Exception e) {

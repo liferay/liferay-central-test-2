@@ -95,7 +95,7 @@ String tabs1 = (String)objArray[1];
 		/>
 	</c:if>
 
-	<c:if test="<%= permissionChecker.isCommunityOwner(group.getGroupId()) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USER_ROLES) %>">
+	<c:if test="<%= permissionChecker.isGroupOwner(group.getGroupId()) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USER_ROLES) %>">
 		<portlet:renderURL var="assignUserRolesURL">
 			<portlet:param name="struts_action" value="/sites_admin/edit_user_roles" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

@@ -347,7 +347,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			boolean comparableFileEntry = DocumentConversionUtil.isComparableVersion(extension);
 			boolean showNonApprovedDocuments = false;
 
-			if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
+			if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId)) {
 				showNonApprovedDocuments = true;
 			}
 

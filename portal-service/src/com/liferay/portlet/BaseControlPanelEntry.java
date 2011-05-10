@@ -52,7 +52,7 @@ public abstract class BaseControlPanelEntry implements ControlPanelEntry {
 		}
 
 		if (category.equals(PortletCategoryKeys.CONTENT) &&
-			permissionChecker.isCommunityAdmin(group.getGroupId()) &&
+			permissionChecker.isGroupAdmin(group.getGroupId()) &&
 			!group.isUser()) {
 
 			return true;

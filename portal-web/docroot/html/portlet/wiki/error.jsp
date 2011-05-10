@@ -69,7 +69,7 @@
 
 			boolean editableDraft = true;
 
-			if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId) || (draftPage.getUserId() == user.getUserId())) {
+			if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) || (draftPage.getUserId() == user.getUserId())) {
 				editableDraft = true;
 			}
 			%>
