@@ -378,13 +378,13 @@ public class StagingImpl implements Staging {
 			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"staged", Boolean.TRUE.toString());
-		typeSettingsProperties.setProperty(
-			"stagedRemotely", String.valueOf(false));
+			"branchingPrivate", String.valueOf(branchingPrivate));
 		typeSettingsProperties.setProperty(
 			"branchingPublic", String.valueOf(branchingPublic));
 		typeSettingsProperties.setProperty(
-			"branchingPrivate", String.valueOf(branchingPrivate));
+			"staged", Boolean.TRUE.toString());
+		typeSettingsProperties.setProperty(
+			"stagedRemotely", String.valueOf(false));
 
 		setCommonStagingOptions(
 			liveGroup, typeSettingsProperties, serviceContext);
@@ -1107,7 +1107,7 @@ public class StagingImpl implements Staging {
 
 			targetGroupId = stagingGroup.getGroupId();
 		}
-		
+
 		if (branchingPublic) {
 			Locale locale = LocaleUtil.getDefault();
 
