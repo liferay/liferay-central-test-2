@@ -208,7 +208,9 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		if (_latestFileVersion == null) {
 			Document latestDocumentVersion = null;
 
-			if (getCmisRepository().isDocumentRetrievableByVersionSeriesId()) {
+			CMISRepository cmisRepository = getCmisRepository();
+
+			if (cmisRepository.isDocumentRetrievableByVersionSeriesId()) {
 				latestDocumentVersion = _document.getObjectOfLatestVersion(
 					false);
 			}
@@ -218,9 +220,8 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 				latestDocumentVersion = documentVersions.get(0);
 			}
 
-			_latestFileVersion =
-				CMISRepositoryLocalServiceUtil.toFileVersion(
-					getRepositoryId(), latestDocumentVersion);
+			_latestFileVersion = CMISRepositoryLocalServiceUtil.toFileVersion(
+				getRepositoryId(), latestDocumentVersion);
 		}
 
 		return _latestFileVersion;

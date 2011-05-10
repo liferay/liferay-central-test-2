@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.cmis.AbstractCmisRepository;
+import com.liferay.portal.kernel.repository.cmis.BaseCmisRepository;
 import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -102,7 +102,7 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  *         href="http://www.oasis-open.org/committees/document.php?document_id=39631">
  *         CMIS Type Mutability proposal</a>
  */
-public class CMISRepository extends AbstractCmisRepository {
+public class CMISRepository extends BaseCmisRepository {
 
 	public CMISRepository(CMISRepositoryHandler cmisRepositoryHandler) {
 		_cmisRepositoryHandler = cmisRepositoryHandler;
@@ -539,9 +539,7 @@ public class CMISRepository extends AbstractCmisRepository {
 		return count;
 	}
 
-	public String getLatestVersionId(String objectId)
-		throws PortalException, SystemException {
-
+	public String getLatestVersionId(String objectId) throws SystemException {
 		try {
 			Session session = getSession();
 
@@ -576,7 +574,10 @@ public class CMISRepository extends AbstractCmisRepository {
 		CmisObject cmisObject = session.getObject(objectId);
 
 		if (cmisObject instanceof FileableCmisObject) {
-			return ((FileableCmisObject)cmisObject).getPaths();
+			FileableCmisObject fileableCmisObject =
+				(FileableCmisObject)cmisObject;
+
+			return fileableCmisObject.getPaths();
 		}
 
 		throw new RepositoryException(
@@ -934,8 +935,8 @@ public class CMISRepository extends AbstractCmisRepository {
 		Session session = getSession();
 
 		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-			(org.apache.chemistry.opencmis.client.api.Folder)
-				session.getObject(objectId);
+			(org.apache.chemistry.opencmis.client.api.Folder)session.getObject(
+				objectId);
 
 		return toFolder(cmisFolder);
 	}
@@ -1656,6 +1657,8 @@ public class CMISRepository extends AbstractCmisRepository {
 
 	private static final int _DELETE_NONE = 0;
 
+	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
+
 	private static ThreadLocal<Map<Long, List<FileEntry>>> _fileEntriesCache =
 		new AutoResetThreadLocal<Map<Long, List<FileEntry>>>(
 			CMISRepository.class + "._fileEntriesCache",
@@ -1669,8 +1672,6 @@ public class CMISRepository extends AbstractCmisRepository {
 		new AutoResetThreadLocal<Map<Long, List<Folder>>>(
 			CMISRepository.class + "._foldersCache",
 			new HashMap<Long, List<Folder>>());
-
-	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 
 	private CMISRepositoryHandler _cmisRepositoryHandler;
 	private String _sessionKey;

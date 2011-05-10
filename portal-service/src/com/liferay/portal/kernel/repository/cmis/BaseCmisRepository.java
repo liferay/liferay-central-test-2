@@ -29,10 +29,10 @@ import java.util.Map;
 /**
  * @author Alexander Chow
  */
-public abstract class AbstractCmisRepository extends BaseRepositoryImpl {
+public abstract class BaseCmisRepository extends BaseRepositoryImpl {
 
 	public abstract String getLatestVersionId(String objectId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public abstract String getObjectName(String objectId)
 		throws PortalException, SystemException;

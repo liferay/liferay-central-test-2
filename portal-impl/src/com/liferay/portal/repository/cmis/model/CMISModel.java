@@ -65,7 +65,9 @@ public abstract class CMISModel {
 	protected boolean containsPermission(CmisObject cmisObject, String actionId)
 		throws RepositoryException {
 
-		if (getCmisRepository().isRefreshBeforePermissionCheck()) {
+		CMISRepository cmisRepository = getCmisRepository();
+
+		if (cmisRepository.isRefreshBeforePermissionCheck()) {
 			cmisObject.refresh();
 		}
 
