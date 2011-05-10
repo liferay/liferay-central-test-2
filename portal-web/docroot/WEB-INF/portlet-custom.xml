@@ -2553,7 +2553,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>170</portlet-name>
-		<display-name>StagingBar</display-name>
+		<display-name>Staging Bar</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
