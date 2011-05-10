@@ -160,7 +160,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (className.equals(Group.class.getName())) {
-			if (!site) {
+			if (!site && (liveGroupId == 0)) {
 				throw new IllegalArgumentException();
 			}
 		}
