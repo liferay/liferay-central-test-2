@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -63,7 +64,13 @@ public class JspFactoryWrapper extends JspFactory {
 			if (servletPath != null) {
 				servletRequest.removeAttribute(WebKeys.SERVLET_PATH);
 
-				DirectServletRegistry.putServlet(servletPath, servlet);
+				ServletContext servletContext = pageContext.getServletContext();
+
+				String contextPath = ContextPathUtil.getContextPath(
+					servletContext);
+
+				DirectServletRegistry.putServlet(
+					contextPath.concat(servletPath), servlet);
 			}
 		}
 

@@ -37,6 +37,7 @@ import javax.servlet.ServletException;
 public class DirectServletContext implements ServletContext {
 
 	public DirectServletContext(ServletContext servletContext) {
+		_contextPath = ContextPathUtil.getContextPath(servletContext);
 		_servletContext = servletContext;
 	}
 
@@ -53,7 +54,7 @@ public class DirectServletContext implements ServletContext {
 	}
 
 	public String getContextPath() {
-		return ContextPathUtil.getContextPath(_servletContext);
+		return _contextPath;
 	}
 
 	public String getInitParameter(String name) {
@@ -85,7 +86,8 @@ public class DirectServletContext implements ServletContext {
 	}
 
 	public RequestDispatcher getRequestDispatcher(String path) {
-		Servlet servlet = DirectServletRegistry.getServlet(path);
+		Servlet servlet = DirectServletRegistry.getServlet(
+			_contextPath.concat(path));
 
 		if (servlet == null) {
 			if (_log.isDebugEnabled()) {
@@ -168,6 +170,8 @@ public class DirectServletContext implements ServletContext {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DirectServletContext.class);
+
+	private String _contextPath;
 
 	private ServletContext _servletContext;
 
