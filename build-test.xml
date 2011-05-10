@@ -2514,12 +2514,6 @@ file.
 			</then>
 		</if>
 
-		<ant dir="portal-web" target="test-class" inheritAll="false">
-			<property name="class" value="${test.class}" />
-		</ant>
-	</target>
-
-	<target name="run-simple-server">
 		<if>
 			<isset property="legacy.theme.ids" />
 			<then>
@@ -2538,6 +2532,12 @@ file.
 			</else>
 		</if>
 
+		<ant dir="portal-web" target="test-class" inheritAll="false">
+			<property name="class" value="${test.class}" />
+		</ant>
+	</target>
+
+	<target name="run-simple-server">
 		<if>
 			<isset property="test.browser" />
 			<then>
