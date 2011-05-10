@@ -252,7 +252,10 @@ public class ClusterExecutorImpl
 	}
 
 	public void portalPortConfigured(int port) {
-		if (!isEnabled()) {
+		if (!isEnabled() ||
+			_localClusterNode.getPort() ==
+				PropsValues.PORTAL_INSTANCE_HTTP_PORT) {
+
 			return;
 		}
 
@@ -326,7 +329,12 @@ public class ClusterExecutorImpl
 	protected void initLocalClusterNode() throws SystemException {
 		_localClusterNode = new ClusterNode(PortalUUIDUtil.generate());
 
-		_localClusterNode.setPort(PortalUtil.getPortalPort());
+		if (PropsValues.PORTAL_INSTANCE_HTTP_PORT > 0) {
+			_localClusterNode.setPort(PropsValues.PORTAL_INSTANCE_HTTP_PORT);
+		}
+		else {
+			_localClusterNode.setPort(PortalUtil.getPortalPort());
+		}
 
 		try {
 			InetAddress inetAddress = bindInetAddress;
