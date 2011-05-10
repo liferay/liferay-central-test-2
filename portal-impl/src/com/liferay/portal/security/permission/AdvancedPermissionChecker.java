@@ -439,18 +439,18 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 	protected void addRequiredMemberRole(Group group, List<Role> roles)
 		throws Exception {
 
-		if (group.isSite()) {
-			Role siteMemberRole = RoleLocalServiceUtil.getRole(
-				group.getCompanyId(), RoleConstants.SITE_MEMBER);
-
-			roles.add(siteMemberRole);
-		}
-
 		if (group.isOrganization()) {
 			Role organizationMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.ORGANIZATION_MEMBER);
 
 			roles.add(organizationMemberRole);
+		}
+
+		if (group.isSite()) {
+			Role siteMemberRole = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleConstants.SITE_MEMBER);
+
+			roles.add(siteMemberRole);
 		}
 	}
 
@@ -706,8 +706,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		if (checkAdmin &&
 			(isCompanyAdminImpl(companyId) ||
-				(isGroupAdminImpl(groupId) &&
-					hasLayoutManagerPermission))) {
+			 (isGroupAdminImpl(groupId) && hasLayoutManagerPermission))) {
 
 			return true;
 		}
@@ -827,6 +826,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return false;
 		}
 	}
+
 	protected void logHasUserPermission(
 		long groupId, String name, String primKey, String actionId,
 		StopWatch stopWatch, int block) {

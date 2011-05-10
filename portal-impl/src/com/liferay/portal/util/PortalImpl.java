@@ -3923,14 +3923,14 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated  As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
+	 * @deprecated As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
 	 */
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception {
 		return isGroupAdmin(user, groupId);
 	}
 
 	/**
-	 * @deprecated  As of 6.1, renamed to {@link #isGroupOwner(User, long)}
+	 * @deprecated As of 6.1, renamed to {@link #isGroupOwner(User, long)}
 	 */
 	public boolean isCommunityOwner(User user, long groupId) throws Exception {
 		return isGroupOwner(user, groupId);
