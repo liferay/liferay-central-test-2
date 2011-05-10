@@ -100,26 +100,37 @@
 				<liferay-ui:panel-floating-container id="groupSelectorPanel" paging="<%= true %>" trigger=".lfr-group-selector">
 
 					<%
-					List<Group> manageableGroups = null;
-					List<? extends BaseModel<?>> manageableOrganizations = null;
+					List<Group> manageableSites = null;
 
 					if (permissionChecker.isCompanyAdmin()) {
-						manageableGroups = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-						manageableOrganizations = OrganizationServiceUtil.getManageableOrganizations(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+						manageableSites = GroupServiceUtil.getManageableGroups(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 					}
 					else {
-						manageableGroups = user.getMyPlaces(new String[] {Group.class.getName()}, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-						manageableOrganizations = user.getMyPlaces(new String[] {Organization.class.getName()}, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_ORGANIZATIONS);
+						manageableSites = user.getMyPlaces(new String[] {Group.class.getName()}, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 					}
+
+					boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
+					boolean showPersonalSite = user.getGroup().hasPrivateLayouts() || user.getGroup().hasPublicLayouts();
 					%>
 
-					<c:if test="<%= !manageableGroups.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuCommunitiesPanel" persistState="<%= true %>" title="sites">
+					<c:if test="<%= !manageableSites.isEmpty() %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuSitesPanel" persistState="<%= true %>" title="sites">
 							<ul>
 
+								<c:if test="<%= showGlobal %>">
+									<li>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId())) %>"><liferay-ui:message key="global" /></a>
+									</li>
+								</c:if>
+								<c:if test="<%= showPersonalSite %>">
+									<li>
+										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId())) %>"><liferay-ui:message key="my-site" /></a>
+									</li>
+								</c:if>
+
 								<%
-								for (int i = 0; i < manageableGroups.size(); i++) {
-									Group group = manageableGroups.get(i);
+								for (int i = 0; i < manageableSites.size(); i++) {
+									Group group = manageableSites.get(i);
 								%>
 
 									<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
@@ -139,68 +150,6 @@
 						</liferay-ui:panel>
 					</c:if>
 
-					<c:if test="<%= !manageableOrganizations.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuOrganizationsPanel" persistState="<%= true %>" title="organizations">
-							<ul>
-
-								<%
-								for (int i = 0; i < manageableOrganizations.size(); i++) {
-									BaseModel baseModel = manageableOrganizations.get(i);
-
-									Organization organization = null;
-
-									if (baseModel instanceof Organization) {
-										organization = (Organization)baseModel;
-									}
-									else {
-										Group organizationGroup = (Group)baseModel;
-
-										if (!organizationGroup.isOrganization()) {
-											continue;
-										}
-
-										organization = OrganizationLocalServiceUtil.getOrganization(organizationGroup.getOrganizationId());
-									}
-								%>
-
-									<c:if test="<%= (i != 0) && (i % 7 == 0 ) %>">
-										</ul>
-										<ul>
-									</c:if>
-
-									<li>
-										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", organization.getGroup().getGroupId())) %>"><%= HtmlUtil.escape(organization.getName()) %></a>
-									</li>
-
-								<%
-								}
-								%>
-
-							</ul>
-						</liferay-ui:panel>
-					</c:if>
-
-					<%
-					boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
-					boolean showMyCommunity = user.getGroup().hasPrivateLayouts() || user.getGroup().hasPublicLayouts();
-					%>
-
-					<c:if test="<%= showGlobal || showMyCommunity %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuSharedCommunitiesPanel" persistState="<%= true %>" title="other[plural]">
-							<ul>
-								<c:if test="<%= showGlobal %>">
-									<li>
-										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId())) %>"><liferay-ui:message key="global" /></a>
-									</li>
-								</c:if>
-								<c:if test="<%= showMyCommunity %>">
-									<li>
-										<a href="<%= HtmlUtil.escapeAttribute(HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId())) %>"><liferay-ui:message key="my-site" /></a>
-									</li>
-								</c:if>
-							</ul>
-						</liferay-ui:panel>
-					</c:if>
 				</liferay-ui:panel-floating-container>
 
 				<c:if test="<%= !scopeLayouts.isEmpty() %>">

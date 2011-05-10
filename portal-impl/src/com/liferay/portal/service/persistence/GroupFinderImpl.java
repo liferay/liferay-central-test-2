@@ -409,10 +409,17 @@ public class GroupFinderImpl
 
 		String findByCND_SQL = CustomSQLUtil.get(FIND_BY_C_N_D);
 
-		findByCND_SQL = StringUtil.replace(
-			findByCND_SQL, "Group_.classNameId = ?",
-			"Group_.classNameId = ".concat(
-				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
+		if (classNameIds == null) {
+			findByCND_SQL = StringUtil.replace(
+				findByCND_SQL, "AND (Group_.classNameId = ?)",
+				StringPool.BLANK);
+		}
+		else {
+			findByCND_SQL = StringUtil.replace(
+				findByCND_SQL, "Group_.classNameId = ?",
+				"Group_.classNameId = ".concat(StringUtil.merge(
+					classNameIds, " OR Group_.classNameId = ")));
+		}
 
 		StringBundler sb = new StringBundler();
 
@@ -527,10 +534,17 @@ public class GroupFinderImpl
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
-		sql = StringUtil.replace(
-			sql, "Group_.classNameId = ?",
-			"Group_.classNameId = ".concat(
-				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
+		if (classNameIds == null) {
+			sql = StringUtil.replace(
+				sql, "AND (Group_.classNameId = ?)", StringPool.BLANK);
+		}
+		else {
+			sql = StringUtil.replace(
+				sql, "Group_.classNameId = ?",
+				"Group_.classNameId = ".concat(
+					StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
+		}
+
 		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 

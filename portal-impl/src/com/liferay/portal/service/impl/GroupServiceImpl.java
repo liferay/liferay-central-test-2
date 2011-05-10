@@ -16,7 +16,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -28,6 +27,7 @@ import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.util.UniqueList;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -98,24 +98,43 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	public List<Group> getManageableGroups(String actionId, int max)
 		throws PortalException, SystemException {
 
+		return getManageableSites(actionId, max);
+	}
+
+	public List<Group> getManageableSites(String actionId, int max)
+		throws PortalException, SystemException {
+
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (permissionChecker.isCompanyAdmin()) {
+			LinkedHashMap<String, Object> params =
+				new LinkedHashMap<String, Object>();
+
+			params.put("site", Boolean.TRUE);
+
 			return groupLocalService.search(
-				permissionChecker.getCompanyId(), null, null, null, 0, max);
+				permissionChecker.getCompanyId(), null, null, null, params, 0,
+				max);
 		}
 
-		List<Group> groups = userPersistence.getGroups(
+		List<Group> groups1 = userPersistence.getGroups(
+			permissionChecker.getUserId(), 0, max);
+		List<Group> groups2 = getUserOrganizationsGroups(
 			permissionChecker.getUserId(), 0, max);
 
-		groups = ListUtil.copy(groups);
+		List<Group> groups = new UniqueList<Group>(
+			groups1.size() + groups2.size());
+
+		groups.addAll(groups1);
+		groups.addAll(groups2);
 
 		Iterator<Group> itr = groups.iterator();
 
 		while (itr.hasNext()) {
 			Group group = itr.next();
 
-			if (!GroupPermissionUtil.contains(
+			if (!group.isSite() ||
+				!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(), actionId)) {
 
 				itr.remove();
