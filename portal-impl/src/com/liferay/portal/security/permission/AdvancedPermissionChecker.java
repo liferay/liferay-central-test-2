@@ -392,28 +392,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
-	public boolean isCommunityAdmin(long groupId) {
-		try {
-			return isCommunityAdminImpl(groupId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return false;
-		}
-	}
-
-	public boolean isCommunityOwner(long groupId) {
-		try {
-			return isCommunityOwnerImpl(groupId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return false;
-		}
-	}
-
 	public boolean isCompanyAdmin() {
 		try {
 			return isCompanyAdminImpl();
@@ -436,14 +414,36 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
+	public boolean isGroupAdmin(long groupId) {
+		try {
+			return isGroupAdminImpl(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return false;
+		}
+	}
+
+	public boolean isGroupOwner(long groupId) {
+		try {
+			return isGroupOwnerImpl(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return false;
+		}
+	}
+
 	protected void addRequiredMemberRole(Group group, List<Role> roles)
 		throws Exception {
 
 		if (group.isSite()) {
-			Role communityMemberRole = RoleLocalServiceUtil.getRole(
+			Role siteMemberRole = RoleLocalServiceUtil.getRole(
 				group.getCompanyId(), RoleConstants.SITE_MEMBER);
 
-			roles.add(communityMemberRole);
+			roles.add(siteMemberRole);
 		}
 
 		if (group.isOrganization()) {
@@ -706,7 +706,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		if (checkAdmin &&
 			(isCompanyAdminImpl(companyId) ||
-				(isCommunityAdminImpl(groupId) &&
+				(isGroupAdminImpl(groupId) &&
 					hasLayoutManagerPermission))) {
 
 			return true;
@@ -732,72 +732,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
 
 		return value;
-	}
-
-	protected boolean isCommunityAdminImpl(long groupId) throws Exception {
-		if (!signedIn) {
-			return false;
-		}
-
-		if (isOmniadmin()) {
-			return true;
-		}
-
-		if (groupId <= 0) {
-			return false;
-		}
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		if (isCompanyAdmin(group.getCompanyId())) {
-			return true;
-		}
-
-		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
-
-		if (bag == null) {
-			_log.error("Bag should never be null");
-		}
-
-		if (bag.isCommunityAdmin(this, group)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	protected boolean isCommunityOwnerImpl(long groupId) throws Exception {
-		if (!signedIn) {
-			return false;
-		}
-
-		if (isOmniadmin()) {
-			return true;
-		}
-
-		if (groupId <= 0) {
-			return false;
-		}
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		if (isCompanyAdmin(group.getCompanyId())) {
-			return true;
-		}
-
-		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
-
-		if (bag == null) {
-			_log.error("Bag should never be null");
-		}
-
-		if (bag.isCommunityOwner(this, group)) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	}
 
 	protected boolean isCompanyAdminImpl() throws Exception {
@@ -827,6 +761,72 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		return value.booleanValue();
 	}
 
+
+	protected boolean isGroupAdminImpl(long groupId) throws Exception {
+		if (!signedIn) {
+			return false;
+		}
+
+		if (isOmniadmin()) {
+			return true;
+		}
+
+		if (groupId <= 0) {
+			return false;
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (isCompanyAdmin(group.getCompanyId())) {
+			return true;
+		}
+
+		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
+
+		if (bag == null) {
+			_log.error("Bag should never be null");
+		}
+
+		if (bag.isGroupAdmin(this, group)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected boolean isGroupOwnerImpl(long groupId) throws Exception {
+		if (!signedIn) {
+			return false;
+		}
+
+		if (isOmniadmin()) {
+			return true;
+		}
+
+		if (groupId <= 0) {
+			return false;
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (isCompanyAdmin(group.getCompanyId())) {
+			return true;
+		}
+
+		PermissionCheckerBag bag = getUserBag(user.getUserId(), groupId);
+
+		if (bag == null) {
+			_log.error("Bag should never be null");
+		}
+
+		if (bag.isGroupOwner(this, group)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 	protected void logHasUserPermission(
 		long groupId, String name, String primKey, String actionId,
 		StopWatch stopWatch, int block) {

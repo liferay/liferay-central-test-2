@@ -53,13 +53,23 @@ public interface PermissionChecker {
 
 	public void init(User user, boolean checkGuest);
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupAdmin(long)}
+	 */
 	public boolean isCommunityAdmin(long groupId);
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupOwner(long)}
+	 */
 	public boolean isCommunityOwner(long groupId);
 
 	public boolean isCompanyAdmin();
 
 	public boolean isCompanyAdmin(long companyId);
+
+	public boolean isGroupAdmin(long groupId);
+
+	public boolean isGroupOwner(long groupId);
 
 	public boolean isOmniadmin();
 

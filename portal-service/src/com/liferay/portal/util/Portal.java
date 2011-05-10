@@ -871,8 +871,14 @@ public interface Portal {
 			HttpServletRequest request, Portlet portlet)
 		throws PortalException, SystemException;
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
+	 */
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception;
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupOwner(User, long)}
+	 */
 	public boolean isCommunityOwner(User user, long groupId) throws Exception;
 
 	public boolean isCompanyAdmin(User user) throws Exception;
@@ -895,6 +901,10 @@ public interface Portal {
 	public boolean isControlPanelPortlet(
 			String portletId, ThemeDisplay themeDisplay)
 		throws SystemException;
+
+	public boolean isGroupAdmin(User user, long groupId) throws Exception;
+
+	public boolean isGroupOwner(User user, long groupId) throws Exception;
 
 	public boolean isLayoutFirstPageable(Layout layout);
 

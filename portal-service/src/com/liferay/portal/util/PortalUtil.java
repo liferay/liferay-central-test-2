@@ -1149,12 +1149,18 @@ public class PortalUtil {
 		return getPortal().isAllowAddPortletDefaultResource(request, portlet);
 	}
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
+	 */
 	public static boolean isCommunityAdmin(User user, long groupId)
 		throws Exception {
 
 		return getPortal().isCommunityAdmin(user, groupId);
 	}
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupOwner(User, long)}
+	 */
 	public static boolean isCommunityOwner(User user, long groupId)
 		throws Exception {
 
@@ -1201,6 +1207,18 @@ public class PortalUtil {
 		throws SystemException {
 
 		return getPortal().isControlPanelPortlet(portletId, themeDisplay);
+	}
+
+	public static boolean isGroupAdmin(User user, long groupId)
+			throws Exception {
+
+		return getPortal().isGroupAdmin(user, groupId);
+	}
+
+	public static boolean isGroupOwner(User user, long groupId)
+			throws Exception {
+
+		return getPortal().isGroupOwner(user, groupId);
 	}
 
 	public static boolean isLayoutFirstPageable(Layout layout) {

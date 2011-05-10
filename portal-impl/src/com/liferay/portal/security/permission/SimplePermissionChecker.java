@@ -39,19 +39,19 @@ public class SimplePermissionChecker extends BasePermissionChecker {
 		return hasPermission(actionId);
 	}
 
-	public boolean isCommunityAdmin(long groupId) {
-		return signedIn;
-	}
-
-	public boolean isCommunityOwner(long groupId) {
-		return signedIn;
-	}
-
 	public boolean isCompanyAdmin() {
 		return signedIn;
 	}
 
 	public boolean isCompanyAdmin(long companyId) {
+		return signedIn;
+	}
+
+	public boolean isGroupAdmin(long groupId) {
+		return signedIn;
+	}
+
+	public boolean isGroupOwner(long groupId) {
 		return signedIn;
 	}
 

@@ -3922,18 +3922,18 @@ public class PortalImpl implements Portal {
 		return false;
 	}
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
+	 */
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception {
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user, true);
-
-		return permissionChecker.isCommunityAdmin(groupId);
+		return isGroupAdmin(user, groupId);
 	}
 
+	/**
+	 * @deprecated  As of 6.1, renamed to {@link #isGroupOwner(User, long)}
+	 */
 	public boolean isCommunityOwner(User user, long groupId) throws Exception {
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user, true);
-
-		return permissionChecker.isCommunityOwner(groupId);
+		return isGroupOwner(user, groupId);
 	}
 
 	public boolean isCompanyAdmin(User user) throws Exception {
@@ -4055,6 +4055,20 @@ public class PortalImpl implements Portal {
 		}
 
 		return secure;
+	}
+
+	public boolean isGroupAdmin(User user, long groupId) throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		return permissionChecker.isGroupAdmin(groupId);
+	}
+
+	public boolean isGroupOwner(User user, long groupId) throws Exception {
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
+
+		return permissionChecker.isGroupOwner(groupId);
 	}
 
 	public boolean isLayoutFirstPageable(Layout layout) {

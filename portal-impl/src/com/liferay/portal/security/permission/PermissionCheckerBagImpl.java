@@ -97,39 +97,61 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		return _roles;
 	}
 
+	/**
+	 * @deprecated  As of 6.1, renamed to
+	 * 		{@link #isGroupAdmin(PermissionChecker, Group)}
+	 */
 	public boolean isCommunityAdmin(
 			PermissionChecker permissionChecker, Group group)
 		throws Exception {
 
-		Boolean value = _communityAdmins.get(group.getGroupId());
-
-		if (value == null) {
-			value = Boolean.valueOf(
-				isCommunityAdminImpl(permissionChecker, group));
-
-			_communityAdmins.put(group.getGroupId(), value);
-		}
-
-		return value.booleanValue();
+		return isGroupAdmin(permissionChecker, group);
 	}
 
+	/**
+	 * @deprecated  As of 6.1, renamed to
+	 * 		{@link #isGroupOwner(PermissionChecker, Group)}
+	 */
 	public boolean isCommunityOwner(
 			PermissionChecker permissionChecker, Group group)
 		throws Exception {
 
-		Boolean value = _communityOwners.get(group.getGroupId());
+		return isGroupOwner(permissionChecker, group);
+	}
+
+	public boolean isGroupAdmin(
+			PermissionChecker permissionChecker, Group group)
+		throws Exception {
+
+		Boolean value = _groupAdmins.get(group.getGroupId());
 
 		if (value == null) {
 			value = Boolean.valueOf(
-				isCommunityOwnerImpl(permissionChecker, group));
+				isGroupAdminImpl(permissionChecker, group));
 
-			_communityOwners.put(group.getGroupId(), value);
+			_groupAdmins.put(group.getGroupId(), value);
 		}
 
 		return value.booleanValue();
 	}
 
-	protected boolean isCommunityAdminImpl(
+	public boolean isGroupOwner(
+			PermissionChecker permissionChecker, Group group)
+		throws Exception {
+
+		Boolean value = _groupOwners.get(group.getGroupId());
+
+		if (value == null) {
+			value = Boolean.valueOf(
+				isGroupOwnerImpl(permissionChecker, group));
+
+			_groupOwners.put(group.getGroupId(), value);
+		}
+
+		return value.booleanValue();
+	}
+
+	protected boolean isGroupAdminImpl(
 			PermissionChecker permissionChecker, Group group)
 		throws PortalException, SystemException {
 
@@ -204,7 +226,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		return false;
 	}
 
-	protected boolean isCommunityOwnerImpl(
+	protected boolean isGroupOwnerImpl(
 			PermissionChecker permissionChecker, Group group)
 		throws PortalException, SystemException {
 
@@ -280,7 +302,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	private List<Group> _groups;
 	private long[] _roleIds;
 	private List<Role> _roles;
-	private Map<Long, Boolean> _communityAdmins = new HashMap<Long, Boolean>();
-	private Map<Long, Boolean> _communityOwners = new HashMap<Long, Boolean>();
+	private Map<Long, Boolean> _groupAdmins = new HashMap<Long, Boolean>();
+	private Map<Long, Boolean> _groupOwners = new HashMap<Long, Boolean>();
 
 }
