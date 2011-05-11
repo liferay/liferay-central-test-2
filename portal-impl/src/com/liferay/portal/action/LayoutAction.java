@@ -182,6 +182,14 @@ public class LayoutAction extends Action {
 					authLoginURL = themeDisplay.getURLSignIn();
 				}
 
+				if (PrefsPropsUtil.getBoolean(
+						themeDisplay.getCompanyId(),
+						PropsKeys.OPEN_SSO_AUTH_ENABLED,
+						PropsValues.OPEN_SSO_AUTH_ENABLED)) {
+
+					authLoginURL = themeDisplay.getURLSignIn();
+				}
+
 				if (Validator.isNull(authLoginURL)) {
 					authLoginURL = PortalUtil.getCommunityLoginURL(
 						themeDisplay);
