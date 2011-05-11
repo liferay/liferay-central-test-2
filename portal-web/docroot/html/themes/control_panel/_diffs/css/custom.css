@@ -150,6 +150,10 @@ select {
 	padding: 0 3px 0 5px;
 }
 
+#main-content .lfr-panel.lfr-extended #panel-manage-content .lfr-panel-titlebar {
+	padding: 0px;
+}
+
 #main-content .lfr-panel.lfr-collapsed .lfr-panel-titlebar {
 	border-bottom: 1px solid #DEDEDE;
 }
@@ -299,6 +303,14 @@ select {
 	padding: 7px 6px 6px;
 }
 
+.panel-page-menu #panel-manage-content .lfr-panel-titlebar {
+	padding: 1px 1px 0px;
+}
+
+.panel-page-menu #panel-manage-content .lfr-panel-titlebar .lfr-panel-title-single {
+	padding: 7px 6px 6px;
+}
+
 .panel-page-menu .lfr-panel.lfr-collapsed .lfr-panel-titlebar {
 	background: #CAD2DD;
 	border-top: 1px solid transparent;
@@ -351,11 +363,20 @@ select {
 	border-color: #6E6E6E;
 }
 
-.panel-page-menu .lfr-panel-titlebar .lfr-panel-title, .panel-page-menu #panel-manage-content .lfr-panel-title span a, .panels-minimized .panel-page-menu #panel-manage-content .lfr-panel-title {
+.panel-page-menu .lfr-panel-titlebar .lfr-panel-title {
 	background-image: url(../images/custom/panel_icons_bg.png);
 	background-repeat: no-repeat;
 	font-size: 13px;
 	padding-left: 20px;
+}
+
+.panel-page-menu #panel-manage-content .lfr-panel-title span a, .panels-minimized .panel-page-menu #panel-manage-content .lfr-panel-title {
+	font-size: 13px;
+	padding-left: 20px;
+}
+
+.panel-page-menu #panel-manage-content .lfr-actions{
+	background: #BDC8D6 url(../images/portlet/header_bg.png) repeat-x 0px 100%;
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-title {
@@ -377,11 +398,19 @@ select {
 	background-repeat: no-repeat;
 }
 
+.panel-page-menu .lfr-panel-content ul.category-portlets {
+	clear: both;
+}
+
 .panel-page-menu .lfr-panel-content ul li a {
 	color: #2D2D2D;
 	display: block;
 	outline: 0;
 	padding: 5px 8px 5px 20px;
+}
+
+.panel-page-menu .lfr-panel-content .lfr-title-scope-selector {
+	margin-left: 20px;
 }
 
 .panel-page-menu .lfr-panel-content ul li.selected-portlet a {
@@ -437,16 +466,12 @@ select {
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-title span a {
-	background-position: 3px -17px;
 	font-weight: bold;
-	padding-left: 24px;
+	padding-left: 2px;
 	position: relative;
-	text-decoration: underline;
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-title span a:after {
-	border: 3px solid #FFF;
-	border-color: #FFF transparent transparent;
 	content: "";
 	position: absolute;
 	right: 5px;
@@ -488,7 +513,7 @@ select {
 	color: #FFF;
 }
 
-#controlPanelMenuAddContentPanelContainer a:focus, .panel-page-menu #panel-manage-content .lfr-panel-title span {
+#controlPanelMenuAddContentPanelContainer a:focus {
 	color: #FFF;
 	font-weight: bold;
 	text-decoration: underline;
@@ -496,11 +521,6 @@ select {
 
 .search-panel-active #controlPanelMenuAddContentPanelContainer .lfr-panel.lfr-extended, .search-panel-active #controlPanelMenuAddContentPanelContainer .lfr-panel.lfr-extended .lfr-panel-content, .search-panel-active #controlPanelMenuAddContentPanelContainer .lfr-panel.lfr-extended .lfr-panel-content ul {
 	background: transparent;
-}
-
-.panel-page-menu #panel-manage-content .lfr-panel-title span {
-	font-weight: normal;
-	text-decoration: none;
 }
 
 #controlPanelMenuAddContentPanelContainer a:focus {
@@ -736,12 +756,6 @@ input[type="text"], input[type="password"], select, textarea, .textarea, #breadc
 	-moz-box-shadow: 0 0 5px #111 inset;
 	-webkit-box-shadow: 0 0 5px #111 inset;
 	box-shadow: 0 0 5px #111 inset;
-}
-
-.panel-page-menu #panel-manage-content .lfr-panel-title span {
-	-moz-box-shadow: 0 0 3px #111 inset;
-	-webkit-box-shadow: 0 0 3px #111 inset;
-	box-shadow: 0 0 3px #111 inset;
 }
 
 #controlPanelMenuAddContentPanelContainer a:focus {
