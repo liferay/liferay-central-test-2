@@ -326,6 +326,9 @@ public class StagingImpl implements Staging {
 			typeSettingsProperties.remove(key);
 		}
 
+		deleteImportInformation(liveGroup, true);
+		deleteImportInformation(liveGroup, false);
+
 		if (liveGroup.hasStagingGroup()) {
 			if ((portletRequest != null) &&
 				(scopeGroupId != liveGroup.getGroupId())) {
@@ -1139,6 +1142,37 @@ public class StagingImpl implements Staging {
 					description, serviceContext);
 			}
 			catch (LayoutSetBranchNameException lsbne) {
+			}
+		}
+	}
+
+	protected void deleteImportInformation(
+			Group liveGroup, boolean privateLayout)
+		throws SystemException, PortalException {
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			liveGroup.getGroupId(), privateLayout);
+
+		for (Layout layout : layouts) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			Set<String> keys = new HashSet<String>();
+
+			for (String key : typeSettingsProperties.keySet()) {
+				if (key.startsWith("last-import-")) {
+					keys.add(key);
+				}
+			}
+
+			if (!keys.isEmpty()) {
+				for (String key : keys) {
+					typeSettingsProperties.remove(key);
+				}
+
+				LayoutLocalServiceUtil.updateLayout(
+					layout.getGroupId(), layout.getPrivateLayout(),
+					layout.getLayoutId(), typeSettingsProperties.toString());
 			}
 		}
 	}
