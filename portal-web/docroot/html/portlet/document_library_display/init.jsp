@@ -70,6 +70,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLDocumentTypeServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %>

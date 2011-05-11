@@ -73,7 +73,7 @@ if (fileEntry != null) {
 DLDocumentType documentType = null;
 
 if (documentTypeId > 0) {
-	documentType = DLDocumentLocalServiceUtilUtil.getDocumentType(documentTypeId);
+	documentType = DLDocumentTypeLocalServiceUtil.getDocumentType(documentTypeId);
 }
 
 long assetClassPK = 0;
@@ -334,8 +334,6 @@ else if (documentType != null) {
 		<%
 		if (documentTypeId > 0) {
 			try {
-				DLDocumentType documentType = DLDocumentTypeServiceUtil.getDocumentType(documentTypeId);
-
 				List<DDMStructure> ddmStructures = documentType.getDDMStructures();
 
 				for (DDMStructure ddmStructure : ddmStructures) {
