@@ -129,10 +129,27 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			groupId, folderId, start, end, obc);
 	}
 
+	public List<DLFileEntry> getFileEntries(
+			long groupId, long folderId, long documentTypeId, int start,
+			int end, OrderByComparator obc)
+		throws SystemException {
+
+		return dlFileEntryPersistence.filterFindByG_F_D(
+			groupId, folderId, documentTypeId, start, end, obc);
+	}
+
 	public int getFileEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
 		return dlFileEntryPersistence.filterCountByG_F(groupId, folderId);
+	}
+
+	public int getFileEntriesCount(
+		long groupId, long folderId, long documentTypeId)
+			throws SystemException {
+
+		return dlFileEntryPersistence.filterCountByG_F_D(
+			groupId, folderId, documentTypeId);
 	}
 
 	public DLFileEntry getFileEntry(long fileEntryId)

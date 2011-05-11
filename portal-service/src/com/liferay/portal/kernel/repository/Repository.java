@@ -63,6 +63,11 @@ public interface Repository {
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException;
 
+	public List<FileEntry> getFileEntries(
+			long folderId, long documentTypeId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException;
+
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long folderId, int status, int start, int end)
 		throws SystemException;
@@ -71,6 +76,9 @@ public interface Repository {
 		throws SystemException;
 
 	public int getFileEntriesCount(long folderId)
+		throws SystemException;
+
+	public int getFileEntriesCount(long folderId, long documentTypeId)
 		throws SystemException;
 
 	public FileEntry getFileEntry(long fileEntryId)

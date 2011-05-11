@@ -90,8 +90,24 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _baseCmisRepository.getFileEntries(folderId, start, end, obc);
 	}
 
+	public List<FileEntry> getFileEntries(
+			long folderId, long documentTypeId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return _baseCmisRepository.getFileEntries(
+			folderId, documentTypeId, start, end, obc);
+	}
+
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		return _baseCmisRepository.getFileEntriesCount(folderId);
+	}
+
+	public int getFileEntriesCount(long folderId, long documentTypeId)
+		throws SystemException {
+
+		return _baseCmisRepository.getFileEntriesCount(
+			folderId, documentTypeId);
 	}
 
 	public FileEntry getFileEntry(long fileEntryId)

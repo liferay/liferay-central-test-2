@@ -294,8 +294,24 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	public List<FileEntry> getFileEntries(
+			long folderId, long documentTypeId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return new ArrayList<FileEntry>();
+	}
+
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		List<FileEntry> fileEntries = getFileEntries(folderId);
+
+		return fileEntries.size();
+	}
+
+	public int getFileEntriesCount(long folderId, long documentTypeId)
+		throws SystemException {
+
+		List<FileEntry> fileEntries = getFileEntries(folderId, documentTypeId);
 
 		return fileEntries.size();
 	}
@@ -1365,6 +1381,12 @@ public class CMISRepository extends BaseCmisRepository {
 			_fileEntriesCache.get();
 
 		return fileEntriesCache.get(folderId);
+	}
+
+	protected List<FileEntry> getFileEntries(long folderId, long repositoryId)
+		throws SystemException {
+
+		return new ArrayList<FileEntry>();
 	}
 
 	protected FileVersion getFileVersion(Session session, long fileVersionId)
