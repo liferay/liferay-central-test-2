@@ -87,6 +87,12 @@ public class DLDocumentTypeLocalServiceImpl
 		return dlDocumentTypePersistence.findByPrimaryKey(documentTypeId);
 	}
 
+	public List<DLDocumentType> getDocumentTypes(long groupId)
+		throws SystemException {
+
+		return dlDocumentTypePersistence.findByGroupId(groupId);
+	}
+
 	public List<DLDocumentType> getDocumentTypes(
 			long groupId, int start, int end)
 		throws SystemException {
