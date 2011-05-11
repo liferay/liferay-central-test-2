@@ -69,7 +69,7 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 
 <c:if test="<%= viewDisplayStyleButtons %>">
 	<span id="<portlet:namespace />displayStyleButtons">
-		<liferay-util:include page="/html/portlet/document_library/display_style_buttons_resources.jsp" />
+		<liferay-util:include page="/html/portlet/document_library/display_style_buttons.jsp" />
 	</span>
 </c:if>
 

@@ -186,7 +186,7 @@ if (folder != null) {
 </aui:script>
 
 <span id="<portlet:namespace />displayStyleButtonsContainer">
-	<liferay-util:include page="/html/portlet/document_library/display_style_buttons_resources.jsp" />
+	<liferay-util:include page="/html/portlet/document_library/display_style_buttons.jsp" />
 </span>
 
 <aui:script use="liferay-list-view">
