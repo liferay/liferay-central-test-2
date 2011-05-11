@@ -760,7 +760,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		return value.booleanValue();
 	}
 
-
 	protected boolean isGroupAdminImpl(long groupId) throws Exception {
 		if (!signedIn) {
 			return false;
