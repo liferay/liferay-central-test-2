@@ -33,7 +33,7 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="folder" message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
+		<liferay-ui:icon image="folder" message='<%= (folder != null) ? "subfolder" : "folder" %>' url="<%= addFolderURL %>" />
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT) %>">
@@ -66,7 +66,7 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="add_drive" message="add-repository" url="<%= addRepositoryURL %>" />
+		<liferay-ui:icon image="add_drive" message="repository" url="<%= addRepositoryURL %>" />
 	</c:if>
 
 	<portlet:renderURL var="addDocumentTypeURL">
@@ -74,5 +74,5 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="copy" message="add-document-type" url="<%= addDocumentTypeURL %>" />
+	<liferay-ui:icon image="copy" message="document-type" url="<%= addDocumentTypeURL %>" />
 </liferay-ui:icon-menu>
