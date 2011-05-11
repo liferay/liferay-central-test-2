@@ -41,6 +41,13 @@ String displayStyle = ParamUtil.getString(request, "displayStyle");
 if (Validator.isNull(displayStyle)) {
 	displayStyle = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", "icon");
 }
+else {
+	boolean saveDisplayStyle = ParamUtil.getBoolean(request, "saveDisplayStyle");
+
+	if (saveDisplayStyle && ArrayUtil.contains(PropsValues.DL_DISPLAY_VIEWS, displayStyle)) {
+		portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", displayStyle);
+	}
+}
 
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
@@ -194,11 +201,72 @@ if (folder != null) {
 		documentContainer.delegate('blur', toggleHoverClass, '*');
 	</c:if>
 
-</aui:script>
+	var buttonRow = A.one('#<portlet:namespace />displayStyleToolbar');
 
-<span id="<portlet:namespace />displayStyleButtonsContainer">
-	<liferay-util:include page="/html/portlet/document_library/display_style_buttons_resources.jsp" />
-</span>
+	var displayStyleToolbar = new A.Toolbar(
+		{
+			activeState: true,
+			boundingBox: buttonRow,
+			children: [
+				{
+
+					<portlet:renderURL var="iconDisplayStyle">
+						<portlet:param name="struts_action" value="/document_library/view" />
+						<portlet:param name="displayStyle" value="icon" />
+						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
+					</portlet:renderURL>
+
+					handler: function(event) {
+						location.href = '<%= iconDisplayStyle.toString() %>';
+					},
+					icon: 'display-icon'
+				},
+				{
+
+					<portlet:renderURL var="descriptiveDisplayStyle">
+						<portlet:param name="struts_action" value="/document_library/view" />
+						<portlet:param name="displayStyle" value="descriptive" />
+						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
+					</portlet:renderURL>
+
+					handler: function(event) {
+						location.href = '<%= descriptiveDisplayStyle.toString() %>';
+					},
+					icon: 'display-descriptive'
+				},
+				{
+
+					<portlet:renderURL var="listDisplayStyle">
+						<portlet:param name="struts_action" value="/document_library/view" />
+						<portlet:param name="displayStyle" value="list" />
+						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
+					</portlet:renderURL>
+
+					handler: function(event) {
+						location.href = '<%= listDisplayStyle.toString() %>';
+					},
+					icon: 'display-list'
+				}
+			]
+		}
+	).render();
+
+	<c:choose>
+		<c:when test='<%= displayStyle.equals("icon") %>'>
+			var index = 0;
+		</c:when>
+		<c:when test='<%= displayStyle.equals("descriptive") %>'>
+			var index = 1;
+		</c:when>
+		<c:when test='<%= displayStyle.equals("list") %>'>
+			var index = 2;
+		</c:when>
+	</c:choose>
+
+	displayStyleToolbar.item(index).StateInteraction.set('active', true);
+
+	buttonRow.setData('displayStyleToolbar', displayStyleToolbar);
+</aui:script>
 
 <aui:script use="liferay-list-view">
 	var listView = new Liferay.ListView(
@@ -250,14 +318,6 @@ if (folder != null) {
 								var addButton = content.one('#<portlet:namespace />addButton')
 
 								addButtonContainer.setContent(addButton);
-
-								A.one('#<portlet:namespace />displayStyleToolbar').empty();
-
-								var displayStyleButtonsContainer = A.one('#<portlet:namespace />displayStyleButtonsContainer');
-								var displayStyleButtons = content.one('#<portlet:namespace />displayStyleButtons');
-
-								displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
-								displayStyleButtonsContainer.setContent(displayStyleButtons);
 
 								var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 								var entries = content.one('#<portlet:namespace />entries');
@@ -311,14 +371,6 @@ if (folder != null) {
 							var addButton = content.one('#<portlet:namespace />addButton');
 
 							addButtonContainer.setContent(addButton);
-
-							A.one('#<portlet:namespace />displayStyleToolbar').empty();
-
-							var displayStyleButtonsContainer = A.one('#<portlet:namespace />displayStyleButtonsContainer');
-							var displayStyleButtons = content.one('#<portlet:namespace />displayStyleButtons');
-
-							displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
-							displayStyleButtonsContainer.setContent(displayStyleButtons);
 
 							var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 							var entries = content.one('#<portlet:namespace />entries');

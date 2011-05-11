@@ -45,13 +45,6 @@ String displayStyle = ParamUtil.getString(request, "displayStyle");
 if (Validator.isNull(displayStyle)) {
 	displayStyle = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", "icon");
 }
-else {
-	boolean saveDisplayStyle = ParamUtil.getBoolean(request, "saveDisplayStyle");
-
-	if (saveDisplayStyle && ArrayUtil.contains(PropsValues.DL_DISPLAY_VIEWS, displayStyle)) {
-		portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "display-style", displayStyle);
-	}
-}
 
 int targetPage = ParamUtil.getInteger(request, "targetPage");
 int rowsPerPage = ParamUtil.getInteger(request, "rowsPerPage", SearchContainer.DEFAULT_DELTA);
@@ -223,7 +216,6 @@ for (int i = 0; i < results.size(); i++) {
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
 					<%
