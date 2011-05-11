@@ -77,18 +77,18 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 	<liferay-ui:icon image="copy" message="document-type" url="<%= addDocumentTypeURL %>" />
 
 	<%
-	List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, 0, -1);
+	List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 	for (DLDocumentType documentType : documentTypes) {
 	%>
 
 		<portlet:renderURL var="addDocumentTypeURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 			<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="copy" message="<%= documentType.getName() %>" url="<%= addDocumentTypeURL %>" />

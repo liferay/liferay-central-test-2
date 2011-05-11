@@ -1,7 +1,3 @@
-<%@ page
-	import="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeUtil" %>
-<%@ page
-	import="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeUtil" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -74,10 +70,10 @@ if (fileEntry != null) {
 	}
 }
 
-DLDocumentType curDocumentType = null;
+DLDocumentType documentType = null;
 
 if (documentTypeId > 0) {
-	curDocumentType = DLDocumentTypeUtil.findByPrimaryKey(documentTypeId);
+	documentType = DLDocumentLocalServiceUtilUtil.getDocumentType(documentTypeId);
 }
 
 long assetClassPK = 0;
@@ -105,15 +101,6 @@ portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
-
-String header = LanguageUtil.get(pageContext, "new-document");
-
-if (fileVersion != null) {
-	header = fileVersion.getTitle();
-}
-else if (curDocumentType != null) {
-	header = LanguageUtil.format(pageContext, "new-x", new Object[] {curDocumentType.getName()});
-}
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
@@ -147,9 +134,20 @@ else if (curDocumentType != null) {
 	</c:choose>
 </c:if>
 
+<%
+String header = LanguageUtil.get(pageContext, "new-document");
+
+if (fileVersion != null) {
+	header = fileVersion.getTitle();
+}
+else if (documentType != null) {
+	header = LanguageUtil.format(pageContext, "new-x", new Object[] {documentType.getName()});
+}
+%>
+
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	title='<%= header %>'
+	title="<%= header %>"
 />
 
 <c:if test="<%= fileEntry == null %>">
@@ -317,10 +315,10 @@ else if (curDocumentType != null) {
 					<aui:option label="none" value="0" />
 
 					<%
-					for (DLDocumentType documentType : documentTypes) {
+					for (DLDocumentType curDocumentType : documentTypes) {
 					%>
 
-						<aui:option label="<%= documentType.getName() %>" selected="<%= (documentTypeId == documentType.getPrimaryKey()) %>" value="<%= documentType.getPrimaryKey() %>" />
+						<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
 
 					<%
 					}
