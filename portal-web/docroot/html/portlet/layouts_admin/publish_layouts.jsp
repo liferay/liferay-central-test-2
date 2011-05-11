@@ -26,9 +26,6 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 boolean selectPages = ParamUtil.getBoolean(request, "selectPages");
 boolean schedule = ParamUtil.getBoolean(request, "schedule");
 
-long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
-String layoutSetBranchName = ParamUtil.getString(request, "layoutSetBranchName");
-
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -232,10 +229,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
-	<aui:input name="layoutSetBranchId" type="hidden" value="<%= layoutSetBranchId %>" />
-	<aui:input name="layoutSetBranchName" type="hidden" value="<%= layoutSetBranchName %>" />
-	<aui:input name="lastImportUserName" type="hidden" value="<%= user.getFullName() %>" />
-	<aui:input name="lastImportUserUuid" type="hidden" value="<%= String.valueOf(user.getUserUuid()) %>" />
 
 	<liferay-ui:error exception="<%= RemoteExportException.class %>">
 
@@ -325,6 +318,8 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 					<div id="<portlet:namespace />scheduledPublishEventsDiv"></div>
 				</div>
+
+
 			</c:if>
 
 			<div id="<portlet:namespace />publishOptions">

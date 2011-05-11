@@ -543,57 +543,6 @@ public class LayoutImporter {
 		zipReader.close();
 	}
 
-	public static void updateImportInformation(
-			Element layoutElement, Layout layout,
-			PortletDataContext portletDataContext)
-		throws Exception {
-
-		String layoutRevisionId = GetterUtil.getString(
-			layoutElement.attributeValue("layout-revision-id"));
-
-		String variationName = GetterUtil.getString(
-			layoutElement.attributeValue("variation-name"));
-
-		String layoutSetBranchName[] =
-			portletDataContext.getParameterMap().get("layoutSetBranchName");
-		String layoutSetBranchId[] =
-			portletDataContext.getParameterMap().get("layoutSetBranchId");
-		String lastImportUserName[] =
-			portletDataContext.getParameterMap().get("lastImportUserName");
-		String lastImportUserUuid[] =
-			portletDataContext.getParameterMap().get("lastImportUserUuid");
-
-		UnicodeProperties typeSettingsProperties =
-			layout.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			"last-import-date", String.valueOf(new Date().getTime()));
-
-		typeSettingsProperties.setProperty(
-			"last-import-layout-revision-id", layoutRevisionId);
-
-		typeSettingsProperties.setProperty(
-			"last-import-variation-name", variationName);
-
-		typeSettingsProperties.setProperty(
-			"last-import-layout-set-branch-name",
-			layoutSetBranchName != null ? layoutSetBranchName[0] : null);
-
-		typeSettingsProperties.setProperty(
-			"last-import-layout-set-branch-id",
-			layoutSetBranchId != null ? layoutSetBranchId[0] : null);
-
-		typeSettingsProperties.setProperty(
-			"last-import-user-name",
-			lastImportUserName != null ? lastImportUserName[0] : null);
-
-		typeSettingsProperties.setProperty(
-			"last-import-user-uuid",
-			lastImportUserUuid != null ? lastImportUserUuid[0] : null);
-
-		layout.setTypeSettingsProperties(typeSettingsProperties);
-	}
-
 	protected String[] appendPortletIds(
 		String[] portletIds, String[] newPortletIds, String portletsMergeMode) {
 
@@ -1010,9 +959,6 @@ public class LayoutImporter {
 		else {
 			importedLayout.setTypeSettings(layout.getTypeSettings());
 		}
-
-		updateImportInformation(
-			layoutElement, importedLayout, portletDataContext);
 
 		importedLayout.setHidden(layout.isHidden());
 		importedLayout.setFriendlyURL(friendlyURL);
