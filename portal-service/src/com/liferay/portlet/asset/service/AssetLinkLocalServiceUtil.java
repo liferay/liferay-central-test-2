@@ -276,10 +276,10 @@ public class AssetLinkLocalServiceUtil {
 		getService().deleteLinks(entryId1, entryId2);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLinks(entryId, typeId);
+		return getService().getDirectLinks(entryId, typeId);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getReverseLinks(
