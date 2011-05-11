@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-long folderId = ParamUtil.getLong(request, "folderId");
+long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
 long documentTypeId = ParamUtil.getLong(request, "documentTypeId");
 
