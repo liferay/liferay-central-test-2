@@ -147,7 +147,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		List<AssetEntry> entries = new ArrayList<AssetEntry>();
 
 		List<AssetLink> links = assetLinkLocalService.getDirectLinks(
-                entryId, AssetLinkConstants.TYPE_CHILD);
+			entryId, AssetLinkConstants.TYPE_CHILD);
 
 		for (AssetLink link : links) {
 			AssetEntry curAsset = getEntry(link.getEntryId2());
@@ -226,7 +226,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 
 		List<AssetLink> links = assetLinkLocalService.getDirectLinks(
-                entryId, AssetLinkConstants.TYPE_CHILD);
+			entryId, AssetLinkConstants.TYPE_CHILD);
 
 		for (int i = 0; i < links.size(); i++) {
 			AssetLink link = links.get(i);
@@ -267,7 +267,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		getParentEntry(entryId);
 
 		List<AssetLink> links = assetLinkLocalService.getDirectLinks(
-                entryId, AssetLinkConstants.TYPE_CHILD);
+			entryId, AssetLinkConstants.TYPE_CHILD);
 
 		for (int i = 0; i < links.size(); i++) {
 			AssetLink link = links.get(i);

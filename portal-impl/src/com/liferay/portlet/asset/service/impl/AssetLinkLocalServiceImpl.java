@@ -92,6 +92,15 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return assetLinkPersistence.findByE1_T(entryId, typeId);
 	}
 
+	/**
+	 * @deprecated As of 6.1, renamed to {@link #getDirectLinks(long, long)}
+	 */
+	public List<AssetLink> getLinks(long entryId, int typeId)
+		throws SystemException {
+
+		return getDirectLinks(entryId, typeId);
+	}
+
 	public List<AssetLink> getReverseLinks(long entryId, int typeId)
 		throws SystemException {
 
