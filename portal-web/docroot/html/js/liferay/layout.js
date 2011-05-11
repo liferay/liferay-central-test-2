@@ -630,10 +630,12 @@ AUI().add(
 					savePosition: function(portletNode) {
 						var portletId = Util.getPortletId(portletNode.get('id'));
 
+						var heightNode = portletNode.one('.portlet-content-container') || portletNode;
+
 						Layout.saveLayout(
 							{
 								cmd: 'drag',
-								height: portletNode.getStyle('height'),
+								height: heightNode.getStyle('height'),
 								left: portletNode.getStyle('left'),
 								p_p_id: portletId,
 								top: portletNode.getStyle('top'),
