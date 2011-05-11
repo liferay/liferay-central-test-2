@@ -99,7 +99,7 @@
 				boolean showPersonalSite = userGroup.hasPrivateLayouts() || userGroup.hasPublicLayouts();
 				%>
 
-				<liferay-util:buffer var="siteSelectorBuffer">
+				<liferay-util:buffer var="groupSelectorIconMenu">
 					<c:choose>
 						<c:when test="<%= !manageableSites.isEmpty() %>">
 
@@ -117,18 +117,18 @@
 							}
 							%>
 
-							<liferay-ui:icon-menu align="left" direction="down" icon="<%= icon %>" id="groupSelector" message='<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>'>
+							<liferay-ui:icon-menu align="left" direction="down" icon="<%= icon %>" id="groupSelector" message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>">
 								<c:if test="<%= showGlobal %>">
 									<liferay-ui:icon
 										image="folder"
-										message='global'
+										message="global"
 										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>'
 									/>
 								</c:if>
 								<c:if test="<%= showPersonalSite %>">
 									<liferay-ui:icon
 										image="user_icon"
-										message='my-site'
+										message="my-site"
 										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", userGroup.getGroupId()) %>'
 									/>
 								</c:if>
@@ -146,7 +146,7 @@
 
 									<liferay-ui:icon
 										image="<%= image %>"
-										message='<%= HtmlUtil.escape(group.getDescriptiveName()) %>'
+										message="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
 										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>'
 									/>
 
@@ -176,7 +176,7 @@
 								cssClass="lfr-panel-title-single"
 								image="<%= image %>"
 								label="<%= true %>"
-								message='<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>'
+								message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>"
 							/>
 						</c:otherwise>
 					</c:choose>
@@ -186,7 +186,7 @@
 				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curGroup.getGroupId(), false));
 				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curGroup.getGroupId(), true));
 
-				title = siteSelectorBuffer;
+				title = groupSelectorIconMenu;
 			}
 			else if (curCategory.equals(PortletCategoryKeys.PORTAL) && (CompanyLocalServiceUtil.getCompaniesCount(false) > 1)) {
 				title = HtmlUtil.escape(company.getName());
@@ -202,7 +202,7 @@
 						<liferay-ui:icon-menu align="left" direction="down" icon="" message='<%= LanguageUtil.get(pageContext, "scope") + StringPool.COLON + StringPool.SPACE + curGroupLabel %>'>
 							<liferay-ui:icon
 								image="folder"
-								message='default'
+								message="default"
 								url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>'
 							/>
 
@@ -212,7 +212,7 @@
 
 								<liferay-ui:icon
 									image="folder"
-									message='<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>'
+									message="<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>"
 									url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>'
 								/>
 
@@ -262,15 +262,17 @@
 </div>
 
 <aui:script use="liferay-panel">
-    var trigger = A.one('#groupSelectormenu a');
-    var panelContainer = Liferay.Panel.get('controlPanelMenuAddContentPanelContainer');
+    var trigger = A.one('#groupSelector a');
 
-    if(trigger && panelContainer){
+	var panelContainer = Liferay.Panel.get('controlPanelMenuAddContentPanelContainer');
+
+    if (trigger && panelContainer) {
 		trigger.on(
 			'click',
 			function(event) {
-				panelContainer.once('collapse',
-					function(event){
+				panelContainer.once(
+					'collapse',
+					function(event) {
 						event.preventDefault();
 					}
 				);
