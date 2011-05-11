@@ -93,6 +93,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 				<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewSearch" value="<%= Boolean.TRUE.toString() %>" />
 			</liferay-portlet:resourceURL>
 
 			<%
@@ -124,6 +125,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 				<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewSearch" value="<%= Boolean.TRUE.toString() %>" />
 			</liferay-portlet:resourceURL>
 
 			<li class="folder <%= navigation.equals("recent-documents") ? "selected" : StringPool.BLANK %>">
@@ -145,6 +147,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 				<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewSearch" value="<%= Boolean.TRUE.toString() %>" />
 			</liferay-portlet:resourceURL>
 
 			<li class="folder <%= navigation.equals("my-documents") ? "selected" : StringPool.BLANK %>">
@@ -173,6 +176,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 					<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+					<portlet:param name="viewSearch" value="<%= Boolean.TRUE.toString() %>" />
 				</liferay-portlet:resourceURL>
 
 				<li class="folder document-type">
@@ -209,6 +213,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 				<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+				<portlet:param name="viewSearch" value="<%= Boolean.TRUE.toString() %>" />
 			</liferay-portlet:resourceURL>
 
 			<li class="folder">
@@ -246,6 +251,7 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 					<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 					<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+					<portlet:param name="viewSearch" value="<%= Boolean.TRUE.toString() %>" />
 				</liferay-portlet:resourceURL>
 
 				<li class="folder <%= (curFolder.getFolderId() == folderId) ? "selected" : StringPool.BLANK %>">

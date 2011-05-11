@@ -75,20 +75,9 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 	</aui:column>
 
 	<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
-		<portlet:resourceURL var="searchURL">
-			<portlet:param name="struts_action" value="/document_library/search" />
-		</portlet:resourceURL>
-
-		<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();" %>'>
-
-			<%
-			String taglibOnClick = "javascript:event.preventDefault(); " + renderResponse.getNamespace() + "searchFileEntry();";
-			%>
-
-			<aui:button cssClass="search-button" name="search" onClick="<%= taglibOnClick %>" value="search" />
-
-			<aui:input cssClass="keywords" id="keywords" label="" name="keywords" type="text" />
-		</aui:form>
+		<span class="search-button-container" id="<portlet:namespace />searchContainer">
+			<liferay-util:include page="/html/portlet/document_library/search_button_resources.jsp" />
+		</span>
 
 		<liferay-portlet:renderURL varImpl="editFileEntryURL">
 			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -259,6 +248,12 @@ if (folder != null) {
 								displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
 								displayStyleButtonsContainer.setContent(displayStyleButtons);
 
+								var searchContainer = A.one('#<portlet:namespace />searchContainer');
+								var search = content.one('#<portlet:namespace />search');
+
+								searchContainer.plug(A.Plugin.ParseContent);
+								searchContainer.setContent(search);
+
 								var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 								var entries = content.one('#<portlet:namespace />entries');
 
@@ -320,6 +315,12 @@ if (folder != null) {
 							displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
 							displayStyleButtonsContainer.setContent(displayStyleButtons);
 
+							var searchContainer = A.one('#<portlet:namespace />searchContainer');
+							var search = content.one('#<portlet:namespace />search');
+
+							searchContainer.plug(A.Plugin.ParseContent);
+							searchContainer.setContent(search);
+
 							var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 							var entries = content.one('#<portlet:namespace />entries');
 
@@ -330,32 +331,5 @@ if (folder != null) {
 			);
 		},
 		'a[data-folder=true]'
-	);
-</aui:script>
-
-<aui:script use="aui-io-plugin">
-	var entriesContainer = A.one('#<portlet:namespace />documentContainer');
-
-	entriesContainer.plug(
-		A.Plugin.IO, {
-			autoLoad: false,
-			dataType: 'json',
-			uri: document.<portlet:namespace />fm1.action
-		}
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />searchFileEntry',
-		function() {
-			var data = {
-				<portlet:namespace />keywords: document.<portlet:namespace />fm1.<portlet:namespace />keywords.value
-			}
-
-			entriesContainer.io.set('data', data);
-
-			entriesContainer.io.start();
-		},
-		[]
 	);
 </aui:script>
