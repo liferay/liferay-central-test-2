@@ -75,6 +75,6 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 
 <c:if test="<%= viewSearch %>">
 	<span id="<portlet:namespace />search">
-		<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
+		<liferay-util:include page="/html/portlet/document_library/search_button_resources.jsp" />
 	</span>
 </c:if>
