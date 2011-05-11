@@ -265,6 +265,12 @@ public class DLDocumentTypeLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlDocumentTypeLocalService.getDocumentTypes(groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> getDocumentTypes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlDocumentTypeLocalService.getDocumentTypes(groupId, start, end);
