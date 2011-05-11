@@ -99,6 +99,8 @@ AUI().add(
 			_getId: function(id) {
 				var instance = this;
 
+				var namespace = instance._namespace;
+
 				id = id || '';
 
 				if (id.indexOf('#') > -1) {
@@ -114,8 +116,8 @@ AUI().add(
 					id = '';
 				}
 
-				if (id && instance._namespace && (id.indexOf(instance._namespace) == -1)) {
-					id = instance._namespace + id;
+				if (id && namespace && (id.indexOf(namespace) == -1)) {
+					id = namespace + id;
 				}
 
 				return id;
