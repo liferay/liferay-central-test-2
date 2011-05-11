@@ -73,11 +73,11 @@ public class GroupServiceWrapper implements GroupService {
 		return _groupService.getGroup(companyId, name);
 	}
 
-	public java.util.List<com.liferay.portal.model.Group> getManageableGroups(
+	public java.util.List<com.liferay.portal.model.Group> getManageableSites(
 		java.lang.String actionId, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _groupService.getManageableGroups(actionId, max);
+		return _groupService.getManageableSites(actionId, max);
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(

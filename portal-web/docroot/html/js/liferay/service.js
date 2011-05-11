@@ -67,7 +67,7 @@ Liferay.Service.registerClass(
 		addRoleGroups: true,
 		deleteGroup: true,
 		getGroup: true,
-		getManageableGroups: true,
+		getManageableSites: true,
 		getOrganizationsGroups: true,
 		getUserGroup: true,
 		getUserGroupsGroups: true,

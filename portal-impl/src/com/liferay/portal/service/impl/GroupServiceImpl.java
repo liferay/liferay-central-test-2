@@ -95,12 +95,6 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
-	public List<Group> getManageableGroups(String actionId, int max)
-		throws PortalException, SystemException {
-
-		return getManageableSites(actionId, max);
-	}
-
 	public List<Group> getManageableSites(String actionId, int max)
 		throws PortalException, SystemException {
 

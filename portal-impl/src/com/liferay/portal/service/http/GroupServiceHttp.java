@@ -270,13 +270,13 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> getManageableGroups(
+	public static java.util.List<com.liferay.portal.model.Group> getManageableSites(
 		HttpPrincipal httpPrincipal, java.lang.String actionId, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
-					"getManageableGroups", _getManageableGroupsParameterTypes6);
+					"getManageableSites", _getManageableSitesParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					actionId, max);
@@ -750,7 +750,7 @@ public class GroupServiceHttp {
 	private static final Class<?>[] _getGroupParameterTypes5 = new Class[] {
 			long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _getManageableGroupsParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getManageableSitesParameterTypes6 = new Class[] {
 			java.lang.String.class, int.class
 		};
 	private static final Class<?>[] _getOrganizationsGroupsParameterTypes7 = new Class[] {
