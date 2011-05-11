@@ -1,3 +1,7 @@
+<%@ page
+	import="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeUtil" %>
+<%@ page
+	import="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeUtil" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -18,6 +22,8 @@
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
+
+String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EDIT);
 
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
@@ -68,6 +74,12 @@ if (fileEntry != null) {
 	}
 }
 
+DLDocumentType curDocumentType = null;
+
+if (documentTypeId > 0) {
+	curDocumentType = DLDocumentTypeUtil.findByPrimaryKey(documentTypeId);
+}
+
 long assetClassPK = 0;
 
 if ((fileVersion != null) && !fileVersion.isApproved() && !fileVersion.getVersion().equals(DLFileEntryConstants.DEFAULT_VERSION)) {
@@ -93,6 +105,15 @@ portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
+
+String header = LanguageUtil.get(pageContext, "new-document");
+
+if (fileVersion != null) {
+	header = fileVersion.getTitle();
+}
+else if (curDocumentType != null) {
+	header = LanguageUtil.format(pageContext, "new-x", new Object[] {curDocumentType.getName()});
+}
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
@@ -128,7 +149,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	title='<%= (fileVersion != null) ? fileVersion.getTitle() : "new-document" %>'
+	title='<%= header %>'
 />
 
 <c:if test="<%= fileEntry == null %>">
@@ -290,20 +311,27 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		%>
 
-		<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
-			<aui:option label="none" value="0" />
+		<c:choose>
+			<c:when test="<%= !cmd.equals(Constants.ADD) %>">
+				<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
+					<aui:option label="none" value="0" />
 
-			<%
-			for (DLDocumentType documentType : documentTypes) {
-			%>
+					<%
+					for (DLDocumentType documentType : documentTypes) {
+					%>
 
-				<aui:option label="<%= documentType.getName() %>" selected="<%= (documentTypeId == documentType.getPrimaryKey()) %>" value="<%= documentType.getPrimaryKey() %>" />
+						<aui:option label="<%= documentType.getName() %>" selected="<%= (documentTypeId == documentType.getPrimaryKey()) %>" value="<%= documentType.getPrimaryKey() %>" />
 
-			<%
-			}
-			%>
+					<%
+					}
+					%>
 
-		</aui:select>
+				</aui:select>
+			</c:when>
+			<c:otherwise>
+				<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
+			</c:otherwise>
+		</c:choose>
 
 		<%
 		if (documentTypeId > 0) {
