@@ -324,5 +324,5 @@ if (Validator.isNull(displayStyle)) {
 </div>
 
 <span id="<portlet:namespace />displayStyleButtons">
-	<liferay-util:include page="/html/portlet/document_library/display_style_buttons.jsp" />
+	<liferay-util:include page="/html/portlet/document_library/display_style_buttons_resources.jsp" />
 </span>
