@@ -653,7 +653,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 	Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 	Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
-	Liferay.Util.toggleBoxes('<portlet:namespace />enableRSSCheckbox','<portlet:namespace />rssOptions');
+	Liferay.Util.toggleBoxes('<portlet:namespace />enableRssCheckbox','<portlet:namespace />rssOptions');
 
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
 </aui:script>
