@@ -3,7 +3,7 @@ AUI().add(
 	function(A) {
 		var CLASS_HIDE = 'yui3-aui-helper-hidden-accessible';
 
-		var CLASS_VISIBILITY_HIDDEN = 'yui3-aui-helper-force-offset';
+		var CLASS_VISIBILITY_HIDDEN = 'lfr-menu-list-hidden';
 
 		var Menu = function() {
 			var instance = this;
