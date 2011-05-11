@@ -165,21 +165,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_G_F_D = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByG_F_D",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_D = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
-			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByG_F_D",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_F_N = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_ENTITY, "fetchByG_F_N",
@@ -207,6 +192,21 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_G_F_D = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_F_D",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_F_D = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
+			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_F_D",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -4930,6 +4930,334 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
+	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param name the name to search with
+	 * @return the matching d l file entry
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileEntry findByG_F_N(long groupId, long folderId, String name)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = fetchByG_F_N(groupId, folderId, name);
+
+		if (dlFileEntry == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", folderId=");
+			msg.append(folderId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+
+		return dlFileEntry;
+	}
+
+	/**
+	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param name the name to search with
+	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileEntry fetchByG_F_N(long groupId, long folderId, String name)
+		throws SystemException {
+		return fetchByG_F_N(groupId, folderId, name, true);
+	}
+
+	/**
+	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param name the name to search with
+	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileEntry fetchByG_F_N(long groupId, long folderId, String name,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, folderId, name };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F_N,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
+				}
+			}
+
+			query.append(DLFileEntryModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				List<DLFileEntry> list = q.list();
+
+				result = list;
+
+				DLFileEntry dlFileEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N,
+						finderArgs, list);
+				}
+				else {
+					dlFileEntry = list.get(0);
+
+					cacheResult(dlFileEntry);
+
+					if ((dlFileEntry.getGroupId() != groupId) ||
+							(dlFileEntry.getFolderId() != folderId) ||
+							(dlFileEntry.getName() == null) ||
+							!dlFileEntry.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N,
+							finderArgs, dlFileEntry);
+					}
+				}
+
+				return dlFileEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DLFileEntry)result;
+			}
+		}
+	}
+
+	/**
+	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param title the title to search with
+	 * @return the matching d l file entry
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileEntry findByG_F_T(long groupId, long folderId, String title)
+		throws NoSuchFileEntryException, SystemException {
+		DLFileEntry dlFileEntry = fetchByG_F_T(groupId, folderId, title);
+
+		if (dlFileEntry == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", folderId=");
+			msg.append(folderId);
+
+			msg.append(", title=");
+			msg.append(title);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFileEntryException(msg.toString());
+		}
+
+		return dlFileEntry;
+	}
+
+	/**
+	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param title the title to search with
+	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileEntry fetchByG_F_T(long groupId, long folderId, String title)
+		throws SystemException {
+		return fetchByG_F_T(groupId, folderId, title, true);
+	}
+
+	/**
+	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param title the title to search with
+	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileEntry fetchByG_F_T(long groupId, long folderId, String title,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, folderId, title };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F_T,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_T_FOLDERID_2);
+
+			if (title == null) {
+				query.append(_FINDER_COLUMN_G_F_T_TITLE_1);
+			}
+			else {
+				if (title.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_F_T_TITLE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_F_T_TITLE_2);
+				}
+			}
+
+			query.append(DLFileEntryModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (title != null) {
+					qPos.add(title);
+				}
+
+				List<DLFileEntry> list = q.list();
+
+				result = list;
+
+				DLFileEntry dlFileEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_T,
+						finderArgs, list);
+				}
+				else {
+					dlFileEntry = list.get(0);
+
+					cacheResult(dlFileEntry);
+
+					if ((dlFileEntry.getGroupId() != groupId) ||
+							(dlFileEntry.getFolderId() != folderId) ||
+							(dlFileEntry.getTitle() == null) ||
+							!dlFileEntry.getTitle().equals(title)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_T,
+							finderArgs, dlFileEntry);
+					}
+				}
+
+				return dlFileEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_T,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DLFileEntry)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -5991,334 +6319,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param name the name to search with
-	 * @return the matching d l file entry
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileEntry findByG_F_N(long groupId, long folderId, String name)
-		throws NoSuchFileEntryException, SystemException {
-		DLFileEntry dlFileEntry = fetchByG_F_N(groupId, folderId, name);
-
-		if (dlFileEntry == null) {
-			StringBundler msg = new StringBundler(8);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", name=");
-			msg.append(name);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchFileEntryException(msg.toString());
-		}
-
-		return dlFileEntry;
-	}
-
-	/**
-	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param name the name to search with
-	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileEntry fetchByG_F_N(long groupId, long folderId, String name)
-		throws SystemException {
-		return fetchByG_F_N(groupId, folderId, name, true);
-	}
-
-	/**
-	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param name the name to search with
-	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileEntry fetchByG_F_N(long groupId, long folderId, String name,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, name };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F_N,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(5);
-
-			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
-				}
-			}
-
-			query.append(DLFileEntryModelImpl.ORDER_BY_JPQL);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				List<DLFileEntry> list = q.list();
-
-				result = list;
-
-				DLFileEntry dlFileEntry = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N,
-						finderArgs, list);
-				}
-				else {
-					dlFileEntry = list.get(0);
-
-					cacheResult(dlFileEntry);
-
-					if ((dlFileEntry.getGroupId() != groupId) ||
-							(dlFileEntry.getFolderId() != folderId) ||
-							(dlFileEntry.getName() == null) ||
-							!dlFileEntry.getName().equals(name)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_N,
-							finderArgs, dlFileEntry);
-					}
-				}
-
-				return dlFileEntry;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (DLFileEntry)result;
-			}
-		}
-	}
-
-	/**
-	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param title the title to search with
-	 * @return the matching d l file entry
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileEntry findByG_F_T(long groupId, long folderId, String title)
-		throws NoSuchFileEntryException, SystemException {
-		DLFileEntry dlFileEntry = fetchByG_F_T(groupId, folderId, title);
-
-		if (dlFileEntry == null) {
-			StringBundler msg = new StringBundler(8);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", folderId=");
-			msg.append(folderId);
-
-			msg.append(", title=");
-			msg.append(title);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchFileEntryException(msg.toString());
-		}
-
-		return dlFileEntry;
-	}
-
-	/**
-	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param title the title to search with
-	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileEntry fetchByG_F_T(long groupId, long folderId, String title)
-		throws SystemException {
-		return fetchByG_F_T(groupId, folderId, title, true);
-	}
-
-	/**
-	 * Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param title the title to search with
-	 * @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFileEntry fetchByG_F_T(long groupId, long folderId, String title,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, title };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_F_T,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(5);
-
-			query.append(_SQL_SELECT_DLFILEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_T_FOLDERID_2);
-
-			if (title == null) {
-				query.append(_FINDER_COLUMN_G_F_T_TITLE_1);
-			}
-			else {
-				if (title.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_T_TITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_T_TITLE_2);
-				}
-			}
-
-			query.append(DLFileEntryModelImpl.ORDER_BY_JPQL);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (title != null) {
-					qPos.add(title);
-				}
-
-				List<DLFileEntry> list = q.list();
-
-				result = list;
-
-				DLFileEntry dlFileEntry = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_T,
-						finderArgs, list);
-				}
-				else {
-					dlFileEntry = list.get(0);
-
-					cacheResult(dlFileEntry);
-
-					if ((dlFileEntry.getGroupId() != groupId) ||
-							(dlFileEntry.getFolderId() != folderId) ||
-							(dlFileEntry.getTitle() == null) ||
-							!dlFileEntry.getTitle().equals(title)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F_T,
-							finderArgs, dlFileEntry);
-					}
-				}
-
-				return dlFileEntry;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_T,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (DLFileEntry)result;
-			}
-		}
-	}
-
-	/**
 	 * Finds all the d l file entries.
 	 *
 	 * @return the d l file entries
@@ -6521,22 +6521,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Removes all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63; from the database.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param documentTypeId the document type ID to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByG_F_D(long groupId, long folderId, long documentTypeId)
-		throws SystemException {
-		for (DLFileEntry dlFileEntry : findByG_F_D(groupId, folderId,
-				documentTypeId)) {
-			dlFileEntryPersistence.remove(dlFileEntry);
-		}
-	}
-
-	/**
 	 * Removes the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
@@ -6564,6 +6548,22 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		DLFileEntry dlFileEntry = findByG_F_T(groupId, folderId, title);
 
 		dlFileEntryPersistence.remove(dlFileEntry);
+	}
+
+	/**
+	 * Removes all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param documentTypeId the document type ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_F_D(long groupId, long folderId, long documentTypeId)
+		throws SystemException {
+		for (DLFileEntry dlFileEntry : findByG_F_D(groupId, folderId,
+				documentTypeId)) {
+			dlFileEntryPersistence.remove(dlFileEntry);
+		}
 	}
 
 	/**
@@ -7572,6 +7572,158 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
+	 * Counts all the d l file entries where groupId = &#63; and folderId = &#63; and name = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param name the name to search with
+	 * @return the number of matching d l file entries
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_F_N(long groupId, long folderId, String name)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, folderId, name };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param folderId the folder ID to search with
+	 * @param title the title to search with
+	 * @return the number of matching d l file entries
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_F_T(long groupId, long folderId, String title)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, folderId, title };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_T,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_F_T_FOLDERID_2);
+
+			if (title == null) {
+				query.append(_FINDER_COLUMN_G_F_T_TITLE_1);
+			}
+			else {
+				if (title.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_F_T_TITLE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_F_T_TITLE_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folderId);
+
+				if (title != null) {
+					qPos.add(title);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -7886,158 +8038,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	}
 
 	/**
-	 * Counts all the d l file entries where groupId = &#63; and folderId = &#63; and name = &#63;.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param name the name to search with
-	 * @return the number of matching d l file entries
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByG_F_N(long groupId, long folderId, String name)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, name };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_N,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_F_N_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_N_FOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_F_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_N_NAME_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_N,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param folderId the folder ID to search with
-	 * @param title the title to search with
-	 * @return the number of matching d l file entries
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByG_F_T(long groupId, long folderId, String title)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, folderId, title };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_F_T,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_DLFILEENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_F_T_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_F_T_FOLDERID_2);
-
-			if (title == null) {
-				query.append(_FINDER_COLUMN_G_F_T_TITLE_1);
-			}
-			else {
-				if (title.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_F_T_TITLE_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_F_T_TITLE_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(folderId);
-
-				if (title != null) {
-					qPos.add(title);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_F_T,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
 	 * Counts all the d l file entries.
 	 *
 	 * @return the number of d l file entries
@@ -8164,15 +8164,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	private static final String _FINDER_COLUMN_G_U_F_FOLDERID_2 = "dlFileEntry.folderId = ?";
 	private static final String _FINDER_COLUMN_G_U_F_FOLDERID_5 = "(" +
 		_removeConjunction(_FINDER_COLUMN_G_U_F_FOLDERID_2) + ")";
-	private static final String _FINDER_COLUMN_G_F_D_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_D_GROUPID_5 = "(" +
-		_removeConjunction(_FINDER_COLUMN_G_F_D_GROUPID_2) + ")";
-	private static final String _FINDER_COLUMN_G_F_D_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
-	private static final String _FINDER_COLUMN_G_F_D_FOLDERID_5 = "(" +
-		_removeConjunction(_FINDER_COLUMN_G_F_D_FOLDERID_2) + ")";
-	private static final String _FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2 = "dlFileEntry.documentTypeId = ?";
-	private static final String _FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5 = "(" +
-		_removeConjunction(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2) + ")";
 	private static final String _FINDER_COLUMN_G_F_N_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_N_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
 	private static final String _FINDER_COLUMN_G_F_N_NAME_1 = "dlFileEntry.name IS NULL";
@@ -8183,6 +8174,15 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_1 = "dlFileEntry.title IS NULL";
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_2 = "dlFileEntry.title = ?";
 	private static final String _FINDER_COLUMN_G_F_T_TITLE_3 = "(dlFileEntry.title IS NULL OR dlFileEntry.title = ?)";
+	private static final String _FINDER_COLUMN_G_F_D_GROUPID_2 = "dlFileEntry.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_D_GROUPID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_D_GROUPID_2) + ")";
+	private static final String _FINDER_COLUMN_G_F_D_FOLDERID_2 = "dlFileEntry.folderId = ? AND ";
+	private static final String _FINDER_COLUMN_G_F_D_FOLDERID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_D_FOLDERID_2) + ")";
+	private static final String _FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2 = "dlFileEntry.documentTypeId = ?";
+	private static final String _FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_F_D_DOCUMENTTYPEID_2) + ")";
 
 	private static String _removeConjunction(String sql) {
 		int pos = sql.indexOf(" AND ");

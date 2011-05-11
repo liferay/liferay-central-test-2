@@ -209,8 +209,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.getFileEntries(folderId, start, end, obc);
 	}
 
-	public List<FileEntry> getFileEntries(long repositoryId, long folderId,
-			long documentTypeId)
+	public List<FileEntry> getFileEntries(
+			long repositoryId, long folderId, long documentTypeId)
 		throws PortalException, SystemException {
 
 		return getFileEntries(
@@ -267,8 +267,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public int getFileEntriesCount(
-		long repositoryId, long folderId, long documentTypeId)
-			throws PortalException, SystemException {
+			long repositoryId, long folderId, long documentTypeId)
+		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 

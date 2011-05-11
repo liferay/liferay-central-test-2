@@ -145,8 +145,8 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public int getFileEntriesCount(
-		long groupId, long folderId, long documentTypeId)
-			throws SystemException {
+			long groupId, long folderId, long documentTypeId)
+		throws SystemException {
 
 		return dlFileEntryPersistence.filterCountByG_F_D(
 			groupId, folderId, documentTypeId);

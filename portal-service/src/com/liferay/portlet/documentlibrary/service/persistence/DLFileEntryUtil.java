@@ -1585,6 +1585,104 @@ public class DLFileEntryUtil {
 	}
 
 	/**
+	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param name the name to search with
+	* @return the matching d l file entry
+	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_N(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		return getPersistence().findByG_F_N(groupId, folderId, name);
+	}
+
+	/**
+	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param name the name to search with
+	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_N(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_F_N(groupId, folderId, name);
+	}
+
+	/**
+	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param name the name to search with
+	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_N(
+		long groupId, long folderId, java.lang.String name,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_F_N(groupId, folderId, name, retrieveFromCache);
+	}
+
+	/**
+	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param title the title to search with
+	* @return the matching d l file entry
+	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_T(
+		long groupId, long folderId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
+		return getPersistence().findByG_F_T(groupId, folderId, title);
+	}
+
+	/**
+	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param title the title to search with
+	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_T(
+		long groupId, long folderId, java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_F_T(groupId, folderId, title);
+	}
+
+	/**
+	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param title the title to search with
+	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_T(
+		long groupId, long folderId, java.lang.String title,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_F_T(groupId, folderId, title, retrieveFromCache);
+	}
+
+	/**
 	* Finds all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1949,104 +2047,6 @@ public class DLFileEntryUtil {
 	}
 
 	/**
-	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param name the name to search with
-	* @return the matching d l file entry
-	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_N(
-		long groupId, long folderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getPersistence().findByG_F_N(groupId, folderId, name);
-	}
-
-	/**
-	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param name the name to search with
-	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_N(
-		long groupId, long folderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByG_F_N(groupId, folderId, name);
-	}
-
-	/**
-	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param name the name to search with
-	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_N(
-		long groupId, long folderId, java.lang.String name,
-		boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_F_N(groupId, folderId, name, retrieveFromCache);
-	}
-
-	/**
-	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileEntryException} if it could not be found.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param title the title to search with
-	* @return the matching d l file entry
-	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByG_F_T(
-		long groupId, long folderId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
-		return getPersistence().findByG_F_T(groupId, folderId, title);
-	}
-
-	/**
-	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param title the title to search with
-	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_T(
-		long groupId, long folderId, java.lang.String title)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByG_F_T(groupId, folderId, title);
-	}
-
-	/**
-	* Finds the d l file entry where groupId = &#63; and folderId = &#63; and title = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param title the title to search with
-	* @return the matching d l file entry, or <code>null</code> if a matching d l file entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchByG_F_T(
-		long groupId, long folderId, java.lang.String title,
-		boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_F_T(groupId, folderId, title, retrieveFromCache);
-	}
-
-	/**
 	* Finds all the d l file entries.
 	*
 	* @return the d l file entries
@@ -2179,20 +2179,6 @@ public class DLFileEntryUtil {
 	}
 
 	/**
-	* Removes all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63; from the database.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param documentTypeId the document type ID to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByG_F_D(long groupId, long folderId,
-		long documentTypeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByG_F_D(groupId, folderId, documentTypeId);
-	}
-
-	/**
 	* Removes the d l file entry where groupId = &#63; and folderId = &#63; and name = &#63; from the database.
 	*
 	* @param groupId the group ID to search with
@@ -2220,6 +2206,20 @@ public class DLFileEntryUtil {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		getPersistence().removeByG_F_T(groupId, folderId, title);
+	}
+
+	/**
+	* Removes all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63; from the database.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param documentTypeId the document type ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_F_D(long groupId, long folderId,
+		long documentTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_F_D(groupId, folderId, documentTypeId);
 	}
 
 	/**
@@ -2430,6 +2430,36 @@ public class DLFileEntryUtil {
 	}
 
 	/**
+	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and name = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param name the name to search with
+	* @return the number of matching d l file entries
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_F_N(long groupId, long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_F_N(groupId, folderId, name);
+	}
+
+	/**
+	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param title the title to search with
+	* @return the number of matching d l file entries
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_F_T(long groupId, long folderId,
+		java.lang.String title)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_F_T(groupId, folderId, title);
+	}
+
+	/**
 	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and documentTypeId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -2489,36 +2519,6 @@ public class DLFileEntryUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterCountByG_F_D(groupId, folderIds, documentTypeId);
-	}
-
-	/**
-	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and name = &#63;.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param name the name to search with
-	* @return the number of matching d l file entries
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByG_F_N(long groupId, long folderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_F_N(groupId, folderId, name);
-	}
-
-	/**
-	* Counts all the d l file entries where groupId = &#63; and folderId = &#63; and title = &#63;.
-	*
-	* @param groupId the group ID to search with
-	* @param folderId the folder ID to search with
-	* @param title the title to search with
-	* @return the number of matching d l file entries
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByG_F_T(long groupId, long folderId,
-		java.lang.String title)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_F_T(groupId, folderId, title);
 	}
 
 	/**
