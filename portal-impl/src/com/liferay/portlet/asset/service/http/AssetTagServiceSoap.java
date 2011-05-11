@@ -215,14 +215,14 @@ public class AssetTagServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.json.JSONArray search(
-		long groupId, java.lang.String name, java.lang.String[] tagProperties,
-		int start, int end) throws RemoteException {
+	public static java.lang.String search(long groupId, java.lang.String name,
+		java.lang.String[] tagProperties, int start, int end)
+		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = AssetTagServiceUtil.search(groupId,
 					name, tagProperties, start, end);
 
-			return returnValue;
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

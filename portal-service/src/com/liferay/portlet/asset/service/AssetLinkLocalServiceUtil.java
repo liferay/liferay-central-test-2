@@ -282,6 +282,15 @@ public class AssetLinkLocalServiceUtil {
 		return getService().getDirectLinks(entryId, typeId);
 	}
 
+	/**
+	* @deprecated As of 6.1, renamed to {@link #getDirectLinks(long, long)}
+	*/
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(
+		long entryId, int typeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLinks(entryId, typeId);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getReverseLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {

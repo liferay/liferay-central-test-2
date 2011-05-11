@@ -193,15 +193,14 @@ public class AssetCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.json.JSONArray search(
-		long groupId, java.lang.String name,
+	public static java.lang.String search(long groupId, java.lang.String name,
 		java.lang.String[] categoryProperties, int start, int end)
 		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = AssetCategoryServiceUtil.search(groupId,
 					name, categoryProperties, start, end);
 
-			return returnValue;
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
