@@ -73,6 +73,10 @@
 	color: #777;
 }
 
+.lfr-input-resource {
+	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH%>px;
+}
+
 .lfr-input-text, .yui3-aui-form .yui3-aui-fieldset .yui3-aui-field.lfr-input-text-container input {
 	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
