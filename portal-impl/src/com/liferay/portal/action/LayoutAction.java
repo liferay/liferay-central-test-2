@@ -177,12 +177,8 @@ public class LayoutAction extends Action {
 
 				if (PrefsPropsUtil.getBoolean(
 						themeDisplay.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED,
-						PropsValues.CAS_AUTH_ENABLED)) {
-
-					authLoginURL = themeDisplay.getURLSignIn();
-				}
-
-				if (PrefsPropsUtil.getBoolean(
+						PropsValues.CAS_AUTH_ENABLED) ||
+					PrefsPropsUtil.getBoolean(
 						themeDisplay.getCompanyId(),
 						PropsKeys.OPEN_SSO_AUTH_ENABLED,
 						PropsValues.OPEN_SSO_AUTH_ENABLED)) {
