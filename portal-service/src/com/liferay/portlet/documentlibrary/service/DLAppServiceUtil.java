@@ -159,6 +159,34 @@ public class DLAppServiceUtil {
 				   .getFileEntries(repositoryId, folderId, start, end, obc);
 	}
 
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, long documentTypeId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntries(repositoryId, folderId, documentTypeId);
+	}
+
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, long documentTypeId, int start,
+		int end)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntries(repositoryId, folderId, documentTypeId,
+			start, end);
+	}
+
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
+		long repositoryId, long folderId, long documentTypeId, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntries(repositoryId, folderId, documentTypeId,
+			start, end, obc);
+	}
+
 	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
 		long repositoryId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -181,6 +209,14 @@ public class DLAppServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntriesCount(repositoryId, folderId);
+	}
+
+	public static int getFileEntriesCount(long repositoryId, long folderId,
+		long documentTypeId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getFileEntriesCount(repositoryId, folderId, documentTypeId);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(

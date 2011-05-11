@@ -175,6 +175,7 @@ create index IX_F8746210 on DLDocumentType_DDMStructure (structureId);
 create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_F4AF5636 on DLFileEntry (groupId);
 create index IX_93CF8193 on DLFileEntry (groupId, folderId);
+create index IX_40BC2FF7 on DLFileEntry (groupId, folderId, documentTypeId);
 create unique index IX_5391712 on DLFileEntry (groupId, folderId, name);
 create unique index IX_ED5CA615 on DLFileEntry (groupId, folderId, title);
 create index IX_43261870 on DLFileEntry (groupId, userId);

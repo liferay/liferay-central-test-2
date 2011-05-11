@@ -76,9 +76,24 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 			end, obc);
 	}
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
+		long groupId, long folderId, long documentTypeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.getFileEntries(groupId, folderId,
+			documentTypeId, start, end, obc);
+	}
+
 	public int getFileEntriesCount(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.getFileEntriesCount(groupId, folderId);
+	}
+
+	public int getFileEntriesCount(long groupId, long folderId,
+		long documentTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.getFileEntriesCount(groupId, folderId,
+			documentTypeId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
