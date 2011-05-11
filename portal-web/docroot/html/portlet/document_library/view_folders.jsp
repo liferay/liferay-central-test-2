@@ -151,6 +151,38 @@ List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 					<%= LanguageUtil.get(pageContext, "my-documents") %>
 				</a>
 			</li>
+
+			<%
+			List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, start, end);
+
+			for (DLDocumentType documentType : documentTypes) {
+			%>
+
+				<liferay-portlet:renderURL varImpl="viewDocumentTypeURL">
+					<portlet:param name="struts_action" value="/document_library/view" />
+					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
+					<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
+				</liferay-portlet:renderURL>
+
+				<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewDocumentTypeEntriesURL">
+					<portlet:param name="struts_action" value="/document_library/view" />
+					<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
+					<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
+					<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+				</liferay-portlet:resourceURL>
+
+				<li class="folder document-type">
+					<a href="<%= viewDocumentTypeURL.toString() %>" data-refresh-entries="<%= Boolean.TRUE.toString() %>" data-resource-url="<%= viewDocumentTypeEntriesURL.toString() %>"
+						<liferay-ui:icon image="copy" />
+
+						<%= documentType.getName() %>
+					</a>
+				</li>
+
+			<%
+			}
+			%>
+
 		</c:when>
 		<c:otherwise>
 			<liferay-portlet:renderURL varImpl="viewURL">
