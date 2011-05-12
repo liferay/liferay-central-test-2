@@ -14,7 +14,11 @@
 
 package com.liferay.portal.kernel.staging;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.lar.PortletDataContext;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -51,6 +55,9 @@ public interface Staging {
 			long remoteGroupId, boolean remotePrivateLayout, Date startDate,
 			Date endDate)
 		throws Exception;
+
+	public void deleteImportSettings(Group liveGroup, boolean privateLayout)
+		throws SystemException, PortalException;
 
 	public void disableStaging(
 			long scopeGroupId, long liveGroupId, ServiceContext serviceContext)
@@ -154,6 +161,11 @@ public interface Staging {
 		throws Exception;
 
 	public void unschedulePublishToRemote(PortletRequest PortletRequest)
+		throws Exception;
+
+	public void updateImportSettings(
+			Element layoutElement, Layout layout,
+			PortletDataContext portletDataContext)
 		throws Exception;
 
 	public void updateStaging(PortletRequest PortletRequest) throws Exception;

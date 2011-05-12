@@ -549,9 +549,10 @@ public class LayoutExporter {
 			return;
 		}
 
+		LayoutRevision layoutRevision = null;
+
 		if (LayoutStagingUtil.isBranchingLayout(layout)) {
-			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
-				layout);
+			layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 
 			if (!layoutRevision.isHead()) {
 				return;
@@ -575,6 +576,15 @@ public class LayoutExporter {
 				layoutElement.addAttribute(
 					"parent-layout-uuid", parentLayout.getUuid());
 			}
+		}
+
+		if (layoutRevision != null) {
+			layoutElement.addAttribute(
+				"layout-revision-id",
+				String.valueOf(layoutRevision.getLayoutRevisionId()));
+
+			layoutElement.addAttribute(
+				"variation-name", layoutRevision.getVariationName());
 		}
 
 		boolean deleteLayout = MapUtil.getBoolean(

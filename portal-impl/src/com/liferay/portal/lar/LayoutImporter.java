@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -959,6 +960,9 @@ public class LayoutImporter {
 		else {
 			importedLayout.setTypeSettings(layout.getTypeSettings());
 		}
+
+		StagingUtil.updateImportSettings(
+			layoutElement, importedLayout, portletDataContext);
 
 		importedLayout.setHidden(layout.isHidden());
 		importedLayout.setFriendlyURL(friendlyURL);

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.cal.RecurrenceSerializer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -46,6 +47,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
@@ -288,6 +290,37 @@ public class StagingImpl implements Staging {
 			bytes);
 	}
 
+	public void deleteImportSettings(
+		Group liveGroup, boolean privateLayout)
+		throws SystemException, PortalException {
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			liveGroup.getGroupId(), privateLayout);
+
+		for (Layout layout : layouts) {
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			Set<String> keys = new HashSet<String>();
+
+			for (String key : typeSettingsProperties.keySet()) {
+				if (key.startsWith("last-import-")) {
+					keys.add(key);
+				}
+			}
+
+			if (!keys.isEmpty()) {
+				for (String key : keys) {
+					typeSettingsProperties.remove(key);
+				}
+
+				LayoutLocalServiceUtil.updateLayout(
+					layout.getGroupId(), layout.getPrivateLayout(),
+					layout.getLayoutId(), typeSettingsProperties.toString());
+			}
+		}
+	}
+
 	public void disableStaging(
 			long scopeGroupId, long liveGroupId, ServiceContext serviceContext)
 		throws Exception {
@@ -325,6 +358,9 @@ public class StagingImpl implements Staging {
 		for (String key : keys) {
 			typeSettingsProperties.remove(key);
 		}
+
+		deleteImportSettings(liveGroup, true);
+		deleteImportSettings(liveGroup, false);
 
 		if (liveGroup.hasStagingGroup()) {
 			if ((portletRequest != null) &&
@@ -1023,6 +1059,57 @@ public class StagingImpl implements Staging {
 
 		LayoutServiceUtil.unschedulePublishToRemote(
 			groupId, jobName, groupName);
+	}
+
+	public void updateImportSettings(
+			Element layoutElement, Layout layout,
+			PortletDataContext portletDataContext)
+		throws Exception {
+
+		String layoutRevisionId = GetterUtil.getString(
+			layoutElement.attributeValue("layout-revision-id"));
+
+		String variationName = GetterUtil.getString(
+			layoutElement.attributeValue("variation-name"));
+
+		String layoutSetBranchName[] =
+			portletDataContext.getParameterMap().get("layoutSetBranchName");
+		String layoutSetBranchId[] =
+			portletDataContext.getParameterMap().get("layoutSetBranchId");
+		String lastImportUserName[] =
+			portletDataContext.getParameterMap().get("lastImportUserName");
+		String lastImportUserUuid[] =
+			portletDataContext.getParameterMap().get("lastImportUserUuid");
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			"last-import-date", String.valueOf(new Date().getTime()));
+
+		typeSettingsProperties.setProperty(
+			"last-import-layout-revision-id", layoutRevisionId);
+
+		typeSettingsProperties.setProperty(
+			"last-import-variation-name", variationName);
+
+		typeSettingsProperties.setProperty(
+			"last-import-layout-set-branch-name",
+			layoutSetBranchName != null ? layoutSetBranchName[0] : null);
+
+		typeSettingsProperties.setProperty(
+			"last-import-layout-set-branch-id",
+			layoutSetBranchId != null ? layoutSetBranchId[0] : null);
+
+		typeSettingsProperties.setProperty(
+			"last-import-user-name",
+			lastImportUserName != null ? lastImportUserName[0] : null);
+
+		typeSettingsProperties.setProperty(
+			"last-import-user-uuid",
+			lastImportUserUuid != null ? lastImportUserUuid[0] : null);
+
+		layout.setTypeSettingsProperties(typeSettingsProperties);
 	}
 
 	public void updateStaging(PortletRequest portletRequest) throws Exception {
