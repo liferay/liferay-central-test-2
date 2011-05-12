@@ -57,19 +57,6 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 
 	<aui:fieldset>
 		<c:choose>
-			<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
-				<aui:input type="hidden" name="name" value="<%= role.getName() %>" />
-			</c:when>
-			<c:otherwise>
-				<aui:input label='<%= (role != null) ? "new-name" : "name" %>' name="name" />
-			</c:otherwise>
-		</c:choose>
-
-		<aui:input name="title" />
-
-		<aui:input name="description" />
-
-		<c:choose>
 			<c:when test="<%= ((role == null) && (type == 0)) %>">
 				<aui:select name="type">
 					<aui:option label="regular" value="<%= RoleConstants.TYPE_REGULAR %>" />
@@ -90,6 +77,19 @@ String subtype = BeanParamUtil.getString(role, request, "subtype");
 				</aui:field-wrapper>
 			</c:otherwise>
 		</c:choose>
+
+		<c:choose>
+			<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
+				<aui:input type="hidden" name="name" value="<%= role.getName() %>" />
+			</c:when>
+			<c:otherwise>
+				<aui:input label='<%= (role != null) ? "new-name" : "name" %>' name="name" />
+			</c:otherwise>
+		</c:choose>
+
+		<aui:input name="title" />
+
+		<aui:input name="description" />
 
 		<c:if test="<%= role != null %>">
 
