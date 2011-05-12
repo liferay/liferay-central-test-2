@@ -170,6 +170,11 @@ AUI().add(
 
 				instance._liveSearch = new A.LiveSearch(options);
 
+				instance._liveSearch.after('search', function(event) {
+					menu.focusManager.refresh();
+				},
+				instance);
+
 				return instance._liveSearch;
 			},
 
@@ -260,7 +265,7 @@ AUI().add(
 					A.Plugin.NodeFocusManager,
 					{
 						circular: true,
-						descendants: 'a,input',
+						descendants: 'li:not(.yui3-aui-helper-hidden) a,input',
 						focusClass: 'yui3-aui-focus',
 						keys: {
 							next: 'down:40',
