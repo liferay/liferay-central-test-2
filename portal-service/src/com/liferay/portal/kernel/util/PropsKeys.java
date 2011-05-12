@@ -1223,6 +1223,8 @@ public interface PropsKeys {
 
 	public static final String MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED = "memory.cluster.scheduler.lock.cache.enabled";
 
+	public static final String MENU_MAX_VISIBLE_ITEMS = "menu.max.visible.items";
+
 	public static final String MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING = "message.boards.anonymous.posting.enabled";
 
 	public static final String MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED = "message.boards.anonymous.posting.enabled";

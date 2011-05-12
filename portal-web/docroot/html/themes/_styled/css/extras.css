@@ -22,7 +22,7 @@
 	box-shadow: 1px 1px 0 #FFF;
 }
 
-.yui3-aui-tabview-list, .yui3-aui-tab-active, body > .lfr-menu-list ul, .lfr-actions, .yui3-aui-dialog-content, .yui3-aui-dialog .yui3-widget-hd, .modify-pages .delete-tab, input[type="submit"], input[type="button"], input[type="reset"], button {
+.yui3-aui-tabview-list, .yui3-aui-tab-active, body > .lfr-menu-list, body > .lfr-menu-list ul, .lfr-actions, .yui3-aui-dialog-content, .yui3-aui-dialog .yui3-widget-hd, .modify-pages .delete-tab, input[type="submit"], input[type="button"], input[type="reset"], button {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
