@@ -1189,7 +1189,8 @@ public class BaseDeployer implements Deployer {
 		return sb.toString();
 	}
 
-	public String getServletContextIncludeFiltersContent(File srcFile)
+	public String getServletContextIncludeFiltersContent(
+			double webXmlVersion, File srcFile)
 		throws Exception {
 
 		boolean servletContextIncludeFiltersEnabled = true;
@@ -1206,6 +1207,23 @@ public class BaseDeployer implements Deployer {
 			String servletContextIncludeFiltersContent = FileUtil.read(
 				DeployUtil.getResourcePath(
 					"servlet-context-include-filters-web.xml"));
+
+			if (webXmlVersion < 2.4) {
+				int x = servletContextIncludeFiltersContent.indexOf(
+					"<dispatcher>");
+				int y = servletContextIncludeFiltersContent.indexOf(
+					"</filter-mapping>");
+
+				if (x != -1) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Please update web.xml to at least 2.4");
+					}
+
+					servletContextIncludeFiltersContent =
+						servletContextIncludeFiltersContent.substring(0, x) +
+							servletContextIncludeFiltersContent.substring(y);
+				}
+			}
 
 			return servletContextIncludeFiltersContent;
 		}
