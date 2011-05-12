@@ -21,20 +21,56 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 %>
 
 <div class="lfr-portlet-toolbar">
-	<portlet:renderURL var="viewCommunitiesURL">
+	<portlet:renderURL var="viewSitesURL">
 		<portlet:param name="struts_action" value="/sites_admin/view" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
-		<a href="<%= viewCommunitiesURL %>"><liferay-ui:message key="view-all" /></a>
+		<a href="<%= viewSitesURL %>"><liferay-ui:message key="view-all" /></a>
 	</span>
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
-		<portlet:renderURL var="addCommunityURL">
+
+		<%
+		List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
+		%>
+
+		<liferay-portlet:renderURL varImpl="addSiteURL">
 			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-		</portlet:renderURL>
+		</liferay-portlet:renderURL>
 
-		<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addCommunityURL %>"><liferay-ui:message key="add" /></a></span>
+		<c:choose>
+			<c:when test="<%= layoutSetPrototypes.isEmpty() %>">
+				<span class="lfr-toolbar-button add-button <%= toolbarItem.equals("add") ? "current" : StringPool.BLANK %>"><a href="<%= addSiteURL %>"><liferay-ui:message key="add" /></a></span>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add">
+					<liferay-ui:icon
+						image="site"
+						message='custom-site'
+						method="get"
+						url='<%= addSiteURL.toString() %>'
+					/>
+
+					<%
+					for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+						addSiteURL.setParameter("selLayoutSetPrototypeId", String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()));
+					%>
+
+						<liferay-ui:icon
+							image="site"
+							message='<%= layoutSetPrototype.getName(locale) %>'
+							method="get"
+							url='<%= addSiteURL.toString() %>'
+						/>
+
+					<%
+					}
+					%>
+
+				</liferay-ui:icon-menu>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 </div>
