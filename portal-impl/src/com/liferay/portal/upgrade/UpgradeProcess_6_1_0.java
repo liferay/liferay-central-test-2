@@ -29,6 +29,7 @@ import com.liferay.portal.upgrade.v6_1_0.UpgradeNavigation;
 import com.liferay.portal.upgrade.v6_1_0.UpgradePortletPreferences;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeScheduler;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeSchema;
+import com.liferay.portal.upgrade.v6_1_0.UpgradeScopes;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeSubscription;
 import com.liferay.portal.upgrade.v6_1_0.UpgradeVirtualHost;
 
@@ -56,6 +57,7 @@ public class UpgradeProcess_6_1_0 extends UpgradeProcess {
 		upgrade(UpgradeNavigation.class);
 		upgrade(UpgradePortletPreferences.class);
 		upgrade(UpgradeScheduler.class);
+		upgrade(UpgradeScopes.class);
 		upgrade(UpgradeSubscription.class);
 		upgrade(UpgradeVirtualHost.class);
 	}
