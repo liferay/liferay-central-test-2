@@ -32,8 +32,6 @@
 
 	.document-container .search-info {
 		background-color: #CCECF9;
-		margin-bottom: 5px;
-		margin-top: -6px;
 		min-height: 40px;
 		position: relative;
 
@@ -43,6 +41,12 @@
 			font-weight: bold;
 			position: absolute;
 			top: 7px;
+		}
+
+		.close-search {
+			position: absolute;
+			right: 20px;
+			top: 10px;
 		}
 	}
 
