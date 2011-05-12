@@ -685,12 +685,6 @@ AUI().add(
 
 											var portletNode = this.get('node');
 
-											var internalNode = portletNode.one('.portlet');
-
-											if (internalNode) {
-												internalNode.set('offsetHeight', info.offsetHeight);
-											}
-
 											var containerNode = portletNode.one('.portlet-content-container');
 
 											if (containerNode) {
@@ -709,6 +703,8 @@ AUI().add(
 												}
 
 												containerNode.setStyle('height', containerHeight);
+
+												portletNode.setStyle('height', 'auto');
 											}
 
 											instance.savePosition(portletNode);
