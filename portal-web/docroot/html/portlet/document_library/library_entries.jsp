@@ -39,6 +39,7 @@ if (folder != null) {
 boolean viewFolders = ParamUtil.getBoolean(request, "viewFolders");
 boolean viewEntries = ParamUtil.getBoolean(request, "viewEntries");
 boolean viewAddButton = ParamUtil.getBoolean(request, "viewAddButton");
+boolean viewDisplayStyleButtons = ParamUtil.getBoolean(request, "viewDisplayStyleButtons");
 
 request.setAttribute("view.jsp-folder", folder);
 
@@ -62,5 +63,11 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 <c:if test="<%= viewAddButton %>">
 	<span id="<portlet:namespace />addButton">
 		<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
+	</span>
+</c:if>
+
+<c:if test="<%= viewDisplayStyleButtons %>">
+	<span id="<portlet:namespace />displayStyleButtons">
+		<liferay-util:include page="/html/portlet/document_library/display_style_buttons.jsp" />
 	</span>
 </c:if>
