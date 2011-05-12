@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
@@ -51,6 +52,26 @@ public class AssetCategoryImpl
 		}
 
 		return categories;
+	}
+
+    public String getTitle(String languageId) {
+		String value = super.getTitle(languageId);
+
+		if (Validator.isNull(value)) {
+			value = getName();
+		}
+
+		return value;
+	}
+
+	public String getTitle(String languageId, boolean useDefault) {
+		String value = super.getTitle(languageId, useDefault);
+
+		if (Validator.isNull(value)) {
+			value = getName();
+		}
+
+		return value;
 	}
 
 	public boolean isRootCategory() {
