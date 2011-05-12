@@ -486,41 +486,41 @@ public class PortletImporter {
 					parentAssetCategoryId, assetCategory.getName(),
 					assetVocabularyId);
 
-            Map<Locale, String> titleMap = null;
+			Map<Locale, String> titleMap = null;
 
 			if (existingAssetCategory == null) {
 				serviceContext.setUuid(assetCategory.getUuid());
 
-                titleMap = assetCategory.getTitleMap();
+				titleMap = assetCategory.getTitleMap();
 
-                if (titleMap == null) {
-                    titleMap = new HashMap<Locale, String>();
+				if (titleMap == null) {
+					titleMap = new HashMap<Locale, String>();
 
-                    titleMap.put(
-                        LocaleUtil.getDefault(), assetCategory.getName());
-                }
+					titleMap.put(
+						LocaleUtil.getDefault(), assetCategory.getName());
+				}
 
 				importedAssetCategory =
 					AssetCategoryLocalServiceUtil.addCategory(
 						userId, parentAssetCategoryId, titleMap,
-                        assetCategory.getDescriptionMap(), assetVocabularyId,
+						assetCategory.getDescriptionMap(), assetVocabularyId,
 						properties, serviceContext);
 			}
 			else {
-                titleMap = existingAssetCategory.getTitleMap();
+				titleMap = existingAssetCategory.getTitleMap();
 
-                if (titleMap == null) {
-                    titleMap = new HashMap<Locale, String>();
+				if (titleMap == null) {
+					titleMap = new HashMap<Locale, String>();
 
-                    titleMap.put(
-                        LocaleUtil.getDefault(), assetCategory.getName());
-                }
+					titleMap.put(
+						LocaleUtil.getDefault(), assetCategory.getName());
+				}
 
 				importedAssetCategory =
 					AssetCategoryLocalServiceUtil.updateCategory(
 						userId, existingAssetCategory.getCategoryId(),
 						parentAssetCategoryId, titleMap,
-                        assetCategory.getDescriptionMap(), assetVocabularyId,
+						assetCategory.getDescriptionMap(), assetVocabularyId,
 						properties, serviceContext);
 			}
 
@@ -565,19 +565,19 @@ public class PortletImporter {
 		AssetVocabulary existingAssetVocabulary =
 			AssetVocabularyUtil.fetchByG_N(groupId, assetVocabulary.getName());
 
-        Map<Locale, String> titleMap = null;
+		Map<Locale, String> titleMap = null;
 
 		if (existingAssetVocabulary == null) {
 			serviceContext.setUuid(assetVocabulary.getUuid());
 
-            titleMap = assetVocabulary.getTitleMap();
+			titleMap = assetVocabulary.getTitleMap();
 
-            if (titleMap == null) {
-                titleMap = new HashMap<Locale, String>();
+			if (titleMap == null) {
+				titleMap = new HashMap<Locale, String>();
 
-                titleMap.put(
-                    LocaleUtil.getDefault(), assetVocabulary.getName());
-            }
+				titleMap.put(
+					LocaleUtil.getDefault(), assetVocabulary.getName());
+			}
 
 			importedAssetVocabulary =
 				AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -587,14 +587,14 @@ public class PortletImporter {
 					assetVocabulary.getSettings(), serviceContext);
 		}
 		else {
-            titleMap = existingAssetVocabulary.getTitleMap();
+			titleMap = existingAssetVocabulary.getTitleMap();
 
-            if (titleMap == null) {
-                titleMap = new HashMap<Locale, String>();
+			if (titleMap == null) {
+				titleMap = new HashMap<Locale, String>();
 
-                titleMap.put(
-                    LocaleUtil.getDefault(), existingAssetVocabulary.getName());
-            }
+				titleMap.put(
+					LocaleUtil.getDefault(), existingAssetVocabulary.getName());
+			}
 
 			importedAssetVocabulary =
 				AssetVocabularyLocalServiceUtil.updateVocabulary(

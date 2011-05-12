@@ -54,7 +54,7 @@ public class AssetCategoryImpl
 		return categories;
 	}
 
-    public String getTitle(String languageId) {
+	public String getTitle(String languageId) {
 		String value = super.getTitle(languageId);
 
 		if (Validator.isNull(value)) {
