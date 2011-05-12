@@ -261,8 +261,9 @@ public class LDAPAuth implements Authenticator {
 				LDAPAuthResult ldapAuthResult = null;
 
 				if (PropsValues.LDAP_IMPORT_USER_PASSWORD_ENABLED) {
-					ldapAuthResult = authenticate(ldapContext,
-						companyId, attributes, fullUserDN, password);
+					ldapAuthResult = authenticate(
+						ldapContext, companyId, attributes, fullUserDN,
+						password);
 
 					// Process LDAP failure codes
 
@@ -300,12 +301,14 @@ public class LDAPAuth implements Authenticator {
 				if (ldapAuthResult != null) {
 					String resultCode = ldapAuthResult.getResponseControl();
 
-					if (resultCode.equals(LDAPAuth.RESULT_PASSWORD_RESET)) {
+					if (resultCode.equals(
+							LDAPAuth.RESULT_PASSWORD_EXP_WARNING)) {
+
 						UserLocalServiceUtil.updatePasswordReset(
 							user.getUserId(), true);
 					}
 					else if (resultCode.equals(
-							LDAPAuth.RESULT_PASSWORD_EXP_WARNING)) {
+								LDAPAuth.RESULT_PASSWORD_RESET)) {
 
 						UserLocalServiceUtil.updatePasswordReset(
 							user.getUserId(), true);
