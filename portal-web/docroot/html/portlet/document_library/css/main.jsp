@@ -326,11 +326,85 @@
 		overflow: hidden;
 		position: relative;
 		width: 100%;
+
+		.document-info {
+			background-color: #CCECF9;
+			min-height: 100px;
+			padding-top: .5em;
+
+			.document-description {
+				display: block;
+				margin-top: 5px;
+			}
+
+			.document-thumbnail {
+				display: block;
+				float: left;
+				margin: 0 5px;
+
+				.thumbnail {
+					height: 90px;
+				}
+			}
+
+			.lfr-asset-categories {
+				margin-top: 0.5em;
+			}
+
+			.lfr-asset-ratings {
+				float: right;
+				margin: 0 20px 0 0;
+
+				.taglib-ratings.stars {
+					padding-top: 0;
+				}
+
+				.yui3-aui-rating-label-element {
+					float: left;
+				}
+			}
+
+			.lfr-asset-tags {
+				padding-bottom: 1em;
+			}
+		}
+
+		.lfr-input-resource {
+			width: 250px;
+		}
+
+		.lfr-asset-summary {
+			margin-left: 5px;
+
+			.download-document {
+				display: block;
+				margin: 0.7em 0;
+			}
+
+			.last-updated {
+				display: block;
+				margin: 0.7em 0;
+			}
+
+			.version {
+				display: block;
+				font-size: 1.4em;
+				font-weight: bold;
+			}
+
+			.webdav-url {
+				display: block;
+				margin: 0.7em 0;
+			}
+		}
+
+		.user-date {
+			font-weight: bold;
+		}
 	}
 
 	.header-row {
 		background-color: #DDD;
-		margin-bottom: .5em;
 		min-height: 34px;
 	}
 
@@ -343,6 +417,10 @@
 
 		.display-style {
 			float: right;
+		}
+
+		.edit-toolbar {
+			margin: 0;
 		}
 	}
 

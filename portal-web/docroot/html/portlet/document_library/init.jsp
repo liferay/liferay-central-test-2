@@ -37,6 +37,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLAppServiceUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLDocumentTypeServiceUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %>
@@ -48,6 +49,9 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.Fields" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>
 
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(liferayPortletRequest);
