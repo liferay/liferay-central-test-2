@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -86,8 +87,10 @@ import java.io.File;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -483,22 +486,41 @@ public class PortletImporter {
 					parentAssetCategoryId, assetCategory.getName(),
 					assetVocabularyId);
 
+            Map<Locale, String> titleMap = null;
+
 			if (existingAssetCategory == null) {
 				serviceContext.setUuid(assetCategory.getUuid());
 
+                titleMap = assetCategory.getTitleMap();
+
+                if (titleMap == null) {
+                    titleMap = new HashMap<Locale, String>();
+
+                    titleMap.put(
+                        LocaleUtil.getDefault(), assetCategory.getName());
+                }
+
 				importedAssetCategory =
 					AssetCategoryLocalServiceUtil.addCategory(
-						userId, parentAssetCategoryId,
-						assetCategory.getTitleMap(),
-						assetCategory.getDescriptionMap(), assetVocabularyId,
+						userId, parentAssetCategoryId, titleMap,
+                        assetCategory.getDescriptionMap(), assetVocabularyId,
 						properties, serviceContext);
 			}
 			else {
+                titleMap = existingAssetCategory.getTitleMap();
+
+                if (titleMap == null) {
+                    titleMap = new HashMap<Locale, String>();
+
+                    titleMap.put(
+                        LocaleUtil.getDefault(), assetCategory.getName());
+                }
+
 				importedAssetCategory =
 					AssetCategoryLocalServiceUtil.updateCategory(
 						userId, existingAssetCategory.getCategoryId(),
-						parentAssetCategoryId, assetCategory.getTitleMap(),
-						assetCategory.getDescriptionMap(), assetVocabularyId,
+						parentAssetCategoryId, titleMap,
+                        assetCategory.getDescriptionMap(), assetVocabularyId,
 						properties, serviceContext);
 			}
 
@@ -543,8 +565,19 @@ public class PortletImporter {
 		AssetVocabulary existingAssetVocabulary =
 			AssetVocabularyUtil.fetchByG_N(groupId, assetVocabulary.getName());
 
+        Map<Locale, String> titleMap = null;
+
 		if (existingAssetVocabulary == null) {
 			serviceContext.setUuid(assetVocabulary.getUuid());
+
+            titleMap = assetVocabulary.getTitleMap();
+
+            if (titleMap == null) {
+                titleMap = new HashMap<Locale, String>();
+
+                titleMap.put(
+                    LocaleUtil.getDefault(), assetVocabulary.getName());
+            }
 
 			importedAssetVocabulary =
 				AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -554,6 +587,15 @@ public class PortletImporter {
 					assetVocabulary.getSettings(), serviceContext);
 		}
 		else {
+            titleMap = existingAssetVocabulary.getTitleMap();
+
+            if (titleMap == null) {
+                titleMap = new HashMap<Locale, String>();
+
+                titleMap.put(
+                    LocaleUtil.getDefault(), existingAssetVocabulary.getName());
+            }
+
 			importedAssetVocabulary =
 				AssetVocabularyLocalServiceUtil.updateVocabulary(
 					existingAssetVocabulary.getVocabularyId(),
