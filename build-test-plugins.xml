@@ -56,12 +56,28 @@ plugins.includes=${plugins.includes}</echo>
 	</target>
 
 	<target name="deploy-versioned-simple-server-plugins">
-		<copy todir="${user.home}/liferay/deploy">
-			<fileset
-				dir="${hudson.plugin.dependencies.dir}/${lp.version}"
-				includes="${plugins.includes}"
-			/>
-		</copy>
+		<if>
+			<or>
+				<equals arg1="${lp.version}" arg2="5.2.3" />
+				<equals arg1="${lp.version}" arg2="5.2.4" />
+			</or>
+			<then>
+				<copy todir="${user.home}/liferay/deploy">
+					<fileset
+						dir="${hudson.plugin.dependencies.dir}/5.2.2"
+						includes="${plugins.includes}"
+					/>
+				</copy>
+			</then>
+			<else>
+				<copy todir="${user.home}/liferay/deploy">
+					<fileset
+						dir="${hudson.plugin.dependencies.dir}/${lp.version}"
+						includes="${plugins.includes}"
+					/>
+				</copy>
+			</else>
+		</if>
 	</target>
 
 	<target name="test-create">
