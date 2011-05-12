@@ -177,7 +177,8 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Servlet context include filters
 
-		sb.append(getServletContextIncludeFiltersContent(srcFile));
+		sb.append(
+			getServletContextIncludeFiltersContent(webXmlVersion, srcFile));
 
 		return sb.toString();
 	}
