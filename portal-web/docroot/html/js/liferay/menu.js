@@ -170,10 +170,13 @@ AUI().add(
 
 				instance._liveSearch = new A.LiveSearch(options);
 
-				instance._liveSearch.after('search', function(event) {
-					menu.focusManager.refresh();
-				},
-				instance);
+				instance._liveSearch.after(
+					'search',
+					function(event) {
+						menu.focusManager.refresh();
+					},
+					instance
+				);
 
 				return instance._liveSearch;
 			},
