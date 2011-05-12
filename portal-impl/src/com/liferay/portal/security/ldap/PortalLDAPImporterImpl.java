@@ -1048,17 +1048,6 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			passwordReset = user.isPasswordReset();
 		}
 
-		if (!PropsValues.LDAP_IMPORT_USER_PASSWORD_ENABLED) {
-			String defaultPassword =
-				PropsValues.LDAP_IMPORT_USER_PASSWORD_DEFAULT;
-
-			if (defaultPassword.equalsIgnoreCase(_USER_PASSWORD_SCREEN_NAME)) {
-				defaultPassword = ldapUser.getScreenName();
-			}
-
-			password = defaultPassword;
-		}
-
 		if (Validator.isNull(ldapUser.getScreenName())) {
 			ldapUser.setAutoScreenName(true);
 		}
@@ -1080,7 +1069,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
 		int birthdayYear = birthdayCal.get(Calendar.YEAR);
 
-		if (ldapUser.isUpdatePassword()) {
+		if (PropsValues.LDAP_IMPORT_USER_PASSWORD_ENABLED) {
 			UserLocalServiceUtil.updatePassword(
 				user.getUserId(), password, password, passwordReset, true);
 		}
