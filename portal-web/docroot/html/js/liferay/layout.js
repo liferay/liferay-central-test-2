@@ -342,15 +342,14 @@ AUI().add(
 								proxyNode.one('.portlet-topper').html(getTitle(nodeId));
 							}
 						},
-						delegateConfig: {
-							dragConfig: {
-								startCentered: false
-							}
-						},
 						lazyStart: false,
 						on: {}
 					}
 				);
+
+				var dragConfig = A.namespace.call(freeformLayoutDefaults, 'delegateConfig.dragConfig');
+
+				dragConfig.startCentered = false;
 
 				Layout.layoutHandler = new Layout.FreeFormLayout(freeformLayoutDefaults);
 			},
