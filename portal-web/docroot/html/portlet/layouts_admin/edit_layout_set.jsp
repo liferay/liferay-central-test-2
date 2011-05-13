@@ -101,12 +101,33 @@ String[][] categorySections = {mainSections};
 					</aui:script>
 				</c:if>
 			</c:if>
+
+			<liferay-ui:staging selPlid="<%= selPlid %>" groupId="<%= groupId %>" />
 		</aui:button-row>
 	</div>
 </div>
 
 <c:if test="<%= liveGroup.isStaged() %>">
-	<liferay-util:include page="/html/portlet/layouts_admin/staging_toolbar.jsp" />
+	<liferay-ui:error exception="<%= RemoteExportException.class %>">
+
+		<%
+		RemoteExportException ree = (RemoteExportException)errorException;
+		%>
+
+		<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
+			<%= LanguageUtil.format(pageContext, "could-not-connect-to-address-x.-please-verify-that-the-specified-port-is-correct-and-that-the-remote-server-is-configured-to-accept-requests-from-this-server", "<em>" + ree.getURL() + "</em>") %>
+		</c:if>
+		<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
+			<%= LanguageUtil.format(pageContext, "remote-group-with-id-x-does-not-exist", ree.getGroupId()) %>
+		</c:if>
+		<c:if test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
+			<liferay-ui:message key="no-pages-are-selected-for-export" />
+		</c:if>
+	</liferay-ui:error>
+
+	<div class="portlet-msg-alert">
+		<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
+	</div>
 </c:if>
 
 <aui:script use="aui-dialog,aui-toolbar">
