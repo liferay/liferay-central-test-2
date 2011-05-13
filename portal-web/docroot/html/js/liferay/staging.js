@@ -133,7 +133,15 @@ AUI().add(
 
 					mergeDialog.move(mergeDialog.get('x'), mergeDialog.get('y') + 100);
 
-					mergeDialog.bodyNode.delegate('click', instance._onMergeBranch, 'a.layout-set-branch');
+					mergeDialog.bodyNode.delegate(
+						'click',
+						function(event) {
+							var node = event.currentTarget;
+
+							instance._onMergeBranch(node)
+						},
+						'a.layout-set-branch'
+					);
 
 					instance._mergeDialog = mergeDialog;
 				}
@@ -141,10 +149,8 @@ AUI().add(
 				return mergeDialog;
 			},
 
-			_onMergeBranch: function(event) {
+			_onMergeBranch: function(node) {
 				var instance = this;
-
-				var node = event.currentTarget;
 
 				var namespace = instance._namespace;
 
