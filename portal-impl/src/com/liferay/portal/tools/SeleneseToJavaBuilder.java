@@ -727,6 +727,13 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append(");");
 			}
+			else if (param1.equals("storeElementPresent")) {
+				sb.append("boolean ");
+				sb.append(param3);
+				sb.append(" = selenium.isElementPresent(\"");
+				sb.append(param2);
+				sb.append("\");");
+			}
 			else if (param1.equals("storeFirstNumber")) {
 				sb.append("String ");
 				sb.append(param3);
