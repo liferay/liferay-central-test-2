@@ -26,9 +26,6 @@ String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 boolean selectPages = ParamUtil.getBoolean(request, "selectPages");
 boolean schedule = ParamUtil.getBoolean(request, "schedule");
 
-long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
-String layoutSetBranchName = ParamUtil.getString(request, "layoutSetBranchName");
-
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group liveGroup = null;
@@ -62,6 +59,9 @@ long stagingGroupId = 0;
 if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
+
+long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
+String layoutSetBranchName = ParamUtil.getString(request, "layoutSetBranchName");
 
 boolean localPublishing = true;
 

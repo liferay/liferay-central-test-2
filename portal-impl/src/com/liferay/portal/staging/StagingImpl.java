@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.RecurrenceSerializer;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -290,9 +289,8 @@ public class StagingImpl implements Staging {
 			bytes);
 	}
 
-	public void deleteImportSettings(
-		Group liveGroup, boolean privateLayout)
-		throws SystemException, PortalException {
+	public void deleteLastImportSettings(Group liveGroup, boolean privateLayout)
+		throws Exception {
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			liveGroup.getGroupId(), privateLayout);
@@ -309,15 +307,17 @@ public class StagingImpl implements Staging {
 				}
 			}
 
-			if (!keys.isEmpty()) {
-				for (String key : keys) {
-					typeSettingsProperties.remove(key);
-				}
-
-				LayoutLocalServiceUtil.updateLayout(
-					layout.getGroupId(), layout.getPrivateLayout(),
-					layout.getLayoutId(), typeSettingsProperties.toString());
+			if (keys.isEmpty()) {
+				continue;
 			}
+
+			for (String key : keys) {
+				typeSettingsProperties.remove(key);
+			}
+
+			LayoutLocalServiceUtil.updateLayout(
+				layout.getGroupId(), layout.getPrivateLayout(),
+				layout.getLayoutId(), typeSettingsProperties.toString());
 		}
 	}
 
@@ -359,8 +359,8 @@ public class StagingImpl implements Staging {
 			typeSettingsProperties.remove(key);
 		}
 
-		deleteImportSettings(liveGroup, true);
-		deleteImportSettings(liveGroup, false);
+		deleteLastImportSettings(liveGroup, true);
+		deleteLastImportSettings(liveGroup, false);
 
 		if (liveGroup.hasStagingGroup()) {
 			if ((portletRequest != null) &&
@@ -524,7 +524,7 @@ public class StagingImpl implements Staging {
 
 	public List<Layout> getMissingParentLayouts(
 			Layout layout, long liveGroupId)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		List<Layout> missingParentLayouts = new ArrayList<Layout>();
 
@@ -1061,53 +1061,55 @@ public class StagingImpl implements Staging {
 			groupId, jobName, groupName);
 	}
 
-	public void updateImportSettings(
+	public void updateLastImportSettings(
 			Element layoutElement, Layout layout,
 			PortletDataContext portletDataContext)
 		throws Exception {
-
-		String layoutRevisionId = GetterUtil.getString(
-			layoutElement.attributeValue("layout-revision-id"));
-
-		String variationName = GetterUtil.getString(
-			layoutElement.attributeValue("variation-name"));
-
-		String layoutSetBranchName[] =
-			portletDataContext.getParameterMap().get("layoutSetBranchName");
-		String layoutSetBranchId[] =
-			portletDataContext.getParameterMap().get("layoutSetBranchId");
-		String lastImportUserName[] =
-			portletDataContext.getParameterMap().get("lastImportUserName");
-		String lastImportUserUuid[] =
-			portletDataContext.getParameterMap().get("lastImportUserUuid");
 
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"last-import-date", String.valueOf(new Date().getTime()));
+			"last-import-date", String.valueOf(System.currentTimeMillis()));
+
+		String layoutRevisionId = GetterUtil.getString(
+			layoutElement.attributeValue("layout-revision-id"));
 
 		typeSettingsProperties.setProperty(
 			"last-import-layout-revision-id", layoutRevisionId);
 
+		Map<String, String[]> parameterMap =
+			portletDataContext.getParameterMap();
+
+		String layoutSetBranchId = MapUtil.getString(
+			parameterMap, "layoutSetBranchId");
+
+		typeSettingsProperties.setProperty(
+			"last-import-layout-set-branch-id", layoutSetBranchId);
+
+		String layoutSetBranchName = MapUtil.getString(
+			parameterMap, "layoutSetBranchName");
+
+		typeSettingsProperties.setProperty(
+			"last-import-layout-set-branch-name", layoutSetBranchName);
+
+		String lastImportUserName = MapUtil.getString(
+			parameterMap, "lastImportUserName");
+
+		typeSettingsProperties.setProperty(
+			"last-import-user-name", lastImportUserName);
+
+		String lastImportUserUuid = MapUtil.getString(
+			parameterMap, "lastImportUserUuid");
+
+		typeSettingsProperties.setProperty(
+			"last-import-user-uuid", lastImportUserUuid);
+
+		String variationName = GetterUtil.getString(
+			layoutElement.attributeValue("variation-name"));
+
 		typeSettingsProperties.setProperty(
 			"last-import-variation-name", variationName);
-
-		typeSettingsProperties.setProperty(
-			"last-import-layout-set-branch-name",
-			layoutSetBranchName != null ? layoutSetBranchName[0] : null);
-
-		typeSettingsProperties.setProperty(
-			"last-import-layout-set-branch-id",
-			layoutSetBranchId != null ? layoutSetBranchId[0] : null);
-
-		typeSettingsProperties.setProperty(
-			"last-import-user-name",
-			lastImportUserName != null ? lastImportUserName[0] : null);
-
-		typeSettingsProperties.setProperty(
-			"last-import-user-uuid",
-			lastImportUserUuid != null ? lastImportUserUuid[0] : null);
 
 		layout.setTypeSettingsProperties(typeSettingsProperties);
 	}
@@ -1178,7 +1180,7 @@ public class StagingImpl implements Staging {
 			long userId, Group liveGroup, boolean branchingPublic,
 			boolean branchingPrivate, boolean remote,
 			ServiceContext serviceContext)
-		throws SystemException, PortalException {
+		throws Exception {
 
 		long targetGroupId = 0;
 

@@ -561,6 +561,15 @@ public class LayoutExporter {
 
 		Element layoutElement = layoutsElement.addElement("layout");
 
+		if (layoutRevision != null) {
+			layoutElement.addAttribute(
+				"layout-revision-id",
+				String.valueOf(layoutRevision.getLayoutRevisionId()));
+
+			layoutElement.addAttribute(
+				"variation-name", layoutRevision.getVariationName());
+		}
+
 		layoutElement.addAttribute(
 			"layout-uuid", layout.getUuid());
 		layoutElement.addAttribute(
@@ -576,15 +585,6 @@ public class LayoutExporter {
 				layoutElement.addAttribute(
 					"parent-layout-uuid", parentLayout.getUuid());
 			}
-		}
-
-		if (layoutRevision != null) {
-			layoutElement.addAttribute(
-				"layout-revision-id",
-				String.valueOf(layoutRevision.getLayoutRevisionId()));
-
-			layoutElement.addAttribute(
-				"variation-name", layoutRevision.getVariationName());
 		}
 
 		boolean deleteLayout = MapUtil.getBoolean(

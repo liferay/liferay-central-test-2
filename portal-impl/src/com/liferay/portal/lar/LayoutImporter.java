@@ -961,9 +961,6 @@ public class LayoutImporter {
 			importedLayout.setTypeSettings(layout.getTypeSettings());
 		}
 
-		StagingUtil.updateImportSettings(
-			layoutElement, importedLayout, portletDataContext);
-
 		importedLayout.setHidden(layout.isHidden());
 		importedLayout.setFriendlyURL(friendlyURL);
 
@@ -980,6 +977,9 @@ public class LayoutImporter {
 		importedLayout.setWapColorSchemeId(layout.getWapColorSchemeId());
 		importedLayout.setCss(layout.getCss());
 		importedLayout.setPriority(layout.getPriority());
+
+		StagingUtil.updateLastImportSettings(
+			layoutElement, importedLayout, portletDataContext);
 
 		fixTypeSettings(importedLayout);
 
