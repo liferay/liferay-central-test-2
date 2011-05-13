@@ -63,7 +63,6 @@ public class ViewAnnouncementsEntryTest extends BaseTestCase {
 		selenium.clickAt("//div/h3/a", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Liferay.com"),
-			selenium.getText("logo"));
+		assertTrue(selenium.isElementPresent("//img[@alt='Liferay']"));
 	}
 }

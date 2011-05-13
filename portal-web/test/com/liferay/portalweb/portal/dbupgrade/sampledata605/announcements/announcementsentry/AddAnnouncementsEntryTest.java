@@ -108,7 +108,6 @@ public class AddAnnouncementsEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("Announcements Entry Name"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Liferay.com"),
-			selenium.getText("logo"));
+		assertTrue(selenium.isElementPresent("//img[@alt='Liferay']"));
 	}
 }

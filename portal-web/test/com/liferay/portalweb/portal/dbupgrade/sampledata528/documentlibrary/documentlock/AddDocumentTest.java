@@ -135,8 +135,7 @@ public class AddDocumentTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Test1 Document1.txt\nThis is Test1 Document1"),
 			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("0.6k"),
-			selenium.getText("//td[2]/a"));
+		assertFalse(selenium.isTextPresent("0.0k"));
 		assertEquals(RuntimeVariables.replace("0"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("No"),
