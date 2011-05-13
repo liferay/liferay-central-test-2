@@ -31,6 +31,10 @@ AUI().add(
 			name: 'showLabel'
 		};
 
+		var MAP_ATTR_TIP = {
+			name: 'tip'
+		};
+
 		var MAP_ELEMENT_DATA = {
 			attributeList: '',
 			nodeName: ''
@@ -241,6 +245,8 @@ AUI().add(
 
 						var showLabel = instance._createDynamicNode('entry', MAP_ATTR_SHOW_LABEL);
 
+						var tip = instance._createDynamicNode('entry', MAP_ATTR_TIP);
+
 						buffer.push(typeElement.openTag);
 
 						instance._appendStructureFieldOptionsBuffer(field, buffer);
@@ -289,6 +295,14 @@ AUI().add(
 							showLabel.openTag,
 							STR_CDATA_OPEN + showLabelVal + STR_CDATA_CLOSE,
 							showLabel.closeTag
+						);
+
+						var tipVal = instance.normalizeValue(field.get('tip'));
+
+						buffer.push(
+							tip.openTag,
+							STR_CDATA_OPEN + tipVal + STR_CDATA_CLOSE,
+							tip.closeTag
 						);
 
 						buffer.push(metadata.closeTag, typeElement.closeTag);
