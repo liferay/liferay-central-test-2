@@ -22,36 +22,74 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertLDAPUsersPresentTest extends BaseTestCase {
 	public void testAssertLDAPUsersPresent() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("//span/input", RuntimeVariables.replace("jane"));
+		selenium.type("//input[@id='_125_toggle_id_enterprise_admin_user_searchkeywords']",
+			RuntimeVariables.replace("jane"));
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("Jane"));
-		assertTrue(selenium.isTextPresent("Smith"));
-		assertTrue(selenium.isTextPresent("janesmith"));
-		selenium.type("//span/input", RuntimeVariables.replace("luke"));
+		assertEquals(RuntimeVariables.replace("Jane"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Smith"),
+			selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("janesmith"),
+			selenium.getText("//td[4]/a"));
+		assertFalse(selenium.isTextPresent("No users were found."));
+		selenium.type("//input[@id='_125_toggle_id_enterprise_admin_user_searchkeywords']",
+			RuntimeVariables.replace("luke"));
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("Luke"));
-		assertTrue(selenium.isTextPresent("Skywalker"));
-		assertTrue(selenium.isTextPresent("lukeskywalker"));
-		selenium.type("//span/input", RuntimeVariables.replace("martin"));
+		assertEquals(RuntimeVariables.replace("Luke"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Skywalker"),
+			selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("lukeskywalker"),
+			selenium.getText("//td[4]/a"));
+		assertFalse(selenium.isTextPresent("No users were found."));
+		selenium.type("//input[@id='_125_toggle_id_enterprise_admin_user_searchkeywords']",
+			RuntimeVariables.replace("martin"));
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("Martin"));
-		assertTrue(selenium.isTextPresent("Luther"));
-		assertTrue(selenium.isTextPresent("martinluther"));
-		System.out.println("LDAP Users have been imported into Liferay.\n");
+		assertEquals(RuntimeVariables.replace("Martin"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Luther"),
+			selenium.getText("//td[3]/a"));
+		assertEquals(RuntimeVariables.replace("martinluther"),
+			selenium.getText("//td[4]/a"));
+		assertFalse(selenium.isTextPresent("No users were found."));
+		System.out.println("LDAP Users have been imported into Liferay.");
 	}
 }

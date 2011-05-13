@@ -22,13 +22,37 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertLDAPUsersTest extends BaseTestCase {
 	public void testAssertLDAPUsers() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("authenticationLink");
+		assertTrue(selenium.isPartialText(
+				"//a[@id='_130_authenticationLink']", "Authentication"));
+		selenium.clickAt("//a[@id='_130_authenticationLink']",
+			RuntimeVariables.replace("Authentication"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -47,7 +71,7 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.click("link=LDAP");
+		selenium.clickAt("link=LDAP", RuntimeVariables.replace("LDAP"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +80,7 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings--ldap.auth.enabled--Checkbox")) {
+							"//input[@id='_130_ldap.auth.enabledCheckbox']")) {
 					break;
 				}
 			}
@@ -67,28 +91,16 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//span[3]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isChecked(
+				"//input[@id='_130_ldap.auth.enabledCheckbox']"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//span[3]/a/img", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Test LDAP 1"),
+			selenium.getText("//fieldset[2]/div/div/table/tbody/tr/td[1]"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("//input[@value='Test LDAP Users']");
+		selenium.clickAt("//input[@value='Test LDAP Users']",
+			RuntimeVariables.replace("Test LDAP Users"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -96,7 +108,7 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[1]/div[2]")) {
+				if (selenium.isVisible("//div[1]/div[2]")) {
 					break;
 				}
 			}
@@ -107,35 +119,66 @@ public class AssertLDAPUsersTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
-		assertTrue(selenium.isTextPresent("janesmith"));
-		assertTrue(selenium.isTextPresent("lukeskywalker"));
-		assertTrue(selenium.isTextPresent("martinluther"));
-		assertTrue(selenium.isTextPresent("janesmith@liferay.com"));
-		assertTrue(selenium.isTextPresent("lukeskywalker@liferay.com"));
-		assertTrue(selenium.isTextPresent("martinluther@liferay.com"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("janesmith")
+										.equals(selenium.getText("//td[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("janesmith"),
+			selenium.getText("//td[2]"));
+		assertEquals(RuntimeVariables.replace("janesmith@liferay.com"),
+			selenium.getText("//td[3]"));
+		assertEquals(RuntimeVariables.replace("Jane"),
+			selenium.getText("//td[4]"));
+		assertEquals(RuntimeVariables.replace("Smith"),
+			selenium.getText("//td[5]"));
+		assertEquals(RuntimeVariables.replace("********"),
+			selenium.getText("//td[6]"));
+		assertEquals(RuntimeVariables.replace(""), selenium.getText("//td[7]"));
+		assertEquals(RuntimeVariables.replace("1"), selenium.getText("//td[8]"));
+		assertEquals(RuntimeVariables.replace("lukeskywalker"),
+			selenium.getText("//tr[3]/td[2]"));
+		assertEquals(RuntimeVariables.replace("lukeskywalker@liferay.com"),
+			selenium.getText("//tr[3]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Luke"),
+			selenium.getText("//tr[3]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Skywalker"),
+			selenium.getText("//tr[3]/td[5]"));
+		assertEquals(RuntimeVariables.replace("********"),
+			selenium.getText("//tr[3]/td[6]"));
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText("//tr[3]/td[7]"));
+		assertEquals(RuntimeVariables.replace("0"),
+			selenium.getText("//tr[3]/td[8]"));
+		assertEquals(RuntimeVariables.replace("martinluther"),
+			selenium.getText("//tr[4]/td[2]"));
+		assertEquals(RuntimeVariables.replace("martinluther@liferay.com"),
+			selenium.getText("//tr[4]/td[3]"));
+		assertEquals(RuntimeVariables.replace("Martin"),
+			selenium.getText("//tr[4]/td[4]"));
+		assertEquals(RuntimeVariables.replace("Luther"),
+			selenium.getText("//tr[4]/td[5]"));
+		assertEquals(RuntimeVariables.replace("********"),
+			selenium.getText("//tr[4]/td[6]"));
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText("//tr[4]/td[7]"));
+		assertEquals(RuntimeVariables.replace("0"),
+			selenium.getText("//tr[4]/td[8]"));
 		System.out.println("LDAP Users have been detected.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//button")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.click("//button");
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
 	}
 }

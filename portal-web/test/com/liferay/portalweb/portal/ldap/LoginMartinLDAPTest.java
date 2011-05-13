@@ -22,26 +22,76 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginMartinLDAPTest extends BaseTestCase {
 	public void testLoginMartinLDAP() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Sign In"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Sign In")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Sign In", RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("_58_login",
+		selenium.type("//input[@id='_58_login']",
 			RuntimeVariables.replace("martinluther@liferay.com"));
 		selenium.saveScreenShotAndSource();
-		selenium.type("_58_password", RuntimeVariables.replace("test"));
+		selenium.type("//input[@id='_58_password']",
+			RuntimeVariables.replace("test"));
 		selenium.saveScreenShotAndSource();
-		selenium.click("_58_rememberMeCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
+		assertFalse(selenium.isChecked("//input[@id='_58_rememberMeCheckbox']"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//input[@id='_58_rememberMeCheckbox']",
+			RuntimeVariables.replace("Remember Me"));
+		assertTrue(selenium.isChecked("//input[@id='_58_rememberMeCheckbox']"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
+		selenium.clickAt("//input[@value='I Agree']",
+			RuntimeVariables.replace("I Agree"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		selenium.type("//input[@id='password1']",
+			RuntimeVariables.replace("password"));
+		selenium.saveScreenShotAndSource();
+		selenium.type("//input[@id='password2']",
+			RuntimeVariables.replace("password"));
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("reminderQueryAnswer", RuntimeVariables.replace("test"));
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("You are signed in as Martin Luther."));
+		assertEquals(RuntimeVariables.replace(
+				"You are signed in as Martin Luther."),
+			selenium.getText("//div[@class='portlet-body']"));
+		assertEquals(RuntimeVariables.replace("Martin Luther"),
+			selenium.getText("//a[2]"));
+		selenium.clickAt("//a[2]", RuntimeVariables.replace("Martin Luther"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertTrue(selenium.isPartialText("//a[@id='_2_userGroupsLink']",
+				"User Groups"));
+		selenium.clickAt("//a[@id='_2_userGroupsLink']",
+			RuntimeVariables.replace("User Groups"));
+		assertFalse(selenium.isTextPresent("usergroup"));
 	}
 }

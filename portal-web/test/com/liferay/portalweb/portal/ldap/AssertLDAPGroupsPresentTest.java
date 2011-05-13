@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AssertNoLDAPUsersTest extends BaseTestCase {
-	public void testAssertNoLDAPUsers() throws Exception {
+public class AssertLDAPGroupsPresentTest extends BaseTestCase {
+	public void testAssertLDAPGroupsPresent() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -45,36 +45,19 @@ public class AssertNoLDAPUsersTest extends BaseTestCase {
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		System.out.println("Now testing LDAP integration...");
-		selenium.click(RuntimeVariables.replace("link=Users"));
+		selenium.click(RuntimeVariables.replace("link=User Groups"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input[@id='_125_toggle_id_enterprise_admin_user_searchkeywords']",
-			RuntimeVariables.replace("jane"));
+		selenium.type("//input[@id='_127_name']",
+			RuntimeVariables.replace("usergroup"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No users were found."),
-			selenium.getText("//div[@class='portlet-msg-info']"));
-		selenium.type("//input[@id='_125_toggle_id_enterprise_admin_user_searchkeywords']",
-			RuntimeVariables.replace("luke"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace("Search"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No users were found."),
-			selenium.getText("//div[@class='portlet-msg-info']"));
-		selenium.type("//input[@id='_125_toggle_id_enterprise_admin_user_searchkeywords']",
-			RuntimeVariables.replace("martin"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace("Search"));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("No users were found."),
-			selenium.getText("//div[@class='portlet-msg-info']"));
+		assertEquals(RuntimeVariables.replace("usergroup"),
+			selenium.getText("//td[2]/a"));
+		assertFalse(selenium.isTextPresent("No user groups were found."));
+		System.out.println("LDAP Groups have been imported into Liferay.\n");
 	}
 }

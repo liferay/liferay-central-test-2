@@ -29,10 +29,12 @@ public class LDAPTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(AssertNoLDAPUsersTest.class);
+		testSuite.addTestSuite(AssertNoLDAPGroupsTest.class);
 		testSuite.addTestSuite(EnableLDAPTest.class);
 		testSuite.addTestSuite(AddLDAPServerTest.class);
 		testSuite.addTestSuite(AssertLDAPConnectionTest.class);
 		testSuite.addTestSuite(AssertLDAPUsersTest.class);
+		testSuite.addTestSuite(AssertLDAPGroupsTest.class);
 		testSuite.addTestSuite(LogoutTest.class);
 		testSuite.addTestSuite(LoginJaneLDAPTest.class);
 		testSuite.addTestSuite(LogoutTest.class);
@@ -42,6 +44,7 @@ public class LDAPTests extends BaseTests {
 		testSuite.addTestSuite(LogoutTest.class);
 		testSuite.addTestSuite(LoginAdminTest.class);
 		testSuite.addTestSuite(AssertLDAPUsersPresentTest.class);
+		testSuite.addTestSuite(AssertLDAPGroupsPresentTest.class);
 
 		testSuite.addTestSuite(StopSeleniumTest.class);
 

@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EnableLDAPTest extends BaseTestCase {
-	public void testEnableLDAP() throws Exception {
+public class AssertLDAPGroupsTest extends BaseTestCase {
+	public void testAssertLDAPGroups() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -91,20 +91,58 @@ public class EnableLDAPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isChecked(
-				"//input[@id='_130_ldap.auth.enabledCheckbox']"));
-		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@id='_130_ldap.auth.enabledCheckbox']",
-			RuntimeVariables.replace("Enabled"));
 		assertTrue(selenium.isChecked(
 				"//input[@id='_130_ldap.auth.enabledCheckbox']"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Save']",
-			RuntimeVariables.replace("Save"));
+		assertEquals(RuntimeVariables.replace("Test LDAP 1"),
+			selenium.getText("//fieldset[2]/div/div/table/tbody/tr/td[1]"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isChecked(
-				"//input[@id='_130_ldap.auth.enabledCheckbox']"));
+		selenium.clickAt("//input[@value='Test LDAP Groups']",
+			RuntimeVariables.replace("Test LDAP Groups"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div[1]/div[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("usergroup")
+										.equals(selenium.getText("//td[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace("usergroup"),
+			selenium.getText("//td[2]"));
+		assertEquals(RuntimeVariables.replace(""), selenium.getText("//td[3]"));
+		assertEquals(RuntimeVariables.replace("1"), selenium.getText("//td[4]"));
+		System.out.println("LDAP Groups have been detected.");
+		selenium.click("//button");
 	}
 }

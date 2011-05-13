@@ -22,13 +22,37 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssertLDAPConnectionTest extends BaseTestCase {
 	public void testAssertLDAPConnection() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Control Panel"));
+		selenium.open("/web/guest/home/");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click(RuntimeVariables.replace("link=Settings"));
+		selenium.clickAt("link=Portal Settings",
+			RuntimeVariables.replace("Portal Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("authenticationLink");
+		assertTrue(selenium.isPartialText(
+				"//a[@id='_130_authenticationLink']", "Authentication"));
+		selenium.clickAt("//a[@id='_130_authenticationLink']",
+			RuntimeVariables.replace("Authentication"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -47,7 +71,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.click("link=LDAP");
+		selenium.clickAt("link=LDAP", RuntimeVariables.replace("LDAP"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +80,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"_130_settings--ldap.auth.enabled--Checkbox")) {
+							"//input[@id='_130_ldap.auth.enabledCheckbox']")) {
 					break;
 				}
 			}
@@ -67,29 +91,16 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//span[3]/a/img")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isChecked(
+				"//input[@id='_130_ldap.auth.enabledCheckbox']"));
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//span[3]/a/img", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("Test LDAP 1"),
+			selenium.getText("//fieldset[2]/div/div/table/tbody/tr/td[1]"));
+		selenium.clickAt("//img[@alt='Edit']", RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.click("//input[@value='Test LDAP Connection']");
-		Thread.sleep(5000);
+		selenium.clickAt("//input[@value='Test LDAP Connection']",
+			RuntimeVariables.replace("Test LDAP Connection"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -97,7 +108,7 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[1]/div[2]")) {
+				if (selenium.isVisible("//div[1]/div[2]")) {
 					break;
 				}
 			}
@@ -108,28 +119,32 @@ public class AssertLDAPConnectionTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"Liferay has successfully connected to the LDAP server."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"Liferay has successfully connected to the LDAP server.")
+										.equals(selenium.getText(
+								"//div[1]/div[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace(
+				"Liferay has successfully connected to the LDAP server."),
+			selenium.getText("//div[1]/div[2]"));
 		System.out.println(
 			"Liferay has successfully connected to the LDAP server.");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//button")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.saveScreenShotAndSource();
 		selenium.click("//button");
 	}
 }
