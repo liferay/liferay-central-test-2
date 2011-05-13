@@ -68,10 +68,14 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(
 			activity.getClassPK());
 
-		String link =
-			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/message_boards/find_message?messageId=" +
-					message.getMessageId();
+		StringBuilder sb = new StringBuilder(4);
+
+		sb.append(themeDisplay.getPortalURL());
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/message_boards/find_message?messageId=");
+		sb.append(message.getMessageId());
+
+		String link = sb.toString();
 
 		// Title
 
@@ -99,12 +103,20 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		// Body
 
-		String categoryLink =
-			themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-				"/message_boards/find_category?mbCategoryId=" +
-					message.getCategoryId();
+		String body = StringPool.BLANK;
 
-		String body = wrapLink(categoryLink, "go-to-category", themeDisplay);
+		if (message.getCategoryId() > 0) {
+			sb = new StringBuilder(4);
+
+			sb.append(themeDisplay.getPortalURL());
+			sb.append(themeDisplay.getPathMain());
+			sb.append("/message_boards/find_category?mbCategoryId=");
+			sb.append(message.getCategoryId());
+
+			String categoryLink = sb.toString();
+
+			body = wrapLink(categoryLink, "go-to-category", themeDisplay);
+		}
 
 		return new SocialActivityFeedEntry(link, title, body);
 	}
