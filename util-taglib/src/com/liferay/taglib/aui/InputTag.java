@@ -338,6 +338,13 @@ public class InputTag extends IncludeTag {
 				_forLabel += StringPool.UNDERLINE + defaultLanguageId;
 			}
 		}
+		else if (Validator.isNotNull(_type)) {
+			if (Validator.equals(_type, "checkbox") ||
+				Validator.equals(_type, "radio")) {
+
+				baseType = _type;
+			}
+		}
 
 		if (Validator.isNull(baseType)) {
 			baseType = "text";
