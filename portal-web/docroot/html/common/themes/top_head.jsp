@@ -65,6 +65,10 @@ if (layout != null) {
 		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
 	}
 
+	if (themeDisplay.isShowStagingIcon()) {
+		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), PortletKeys.STAGING_BAR));
+	}
+
 	request.setAttribute(WebKeys.LAYOUT_PORTLETS, portlets);
 }
 %>

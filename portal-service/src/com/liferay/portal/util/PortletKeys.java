@@ -190,6 +190,8 @@ public class PortletKeys {
 
 	public static final String SOFTWARE_CATALOG = "98";
 
+	public static final String STAGING_BAR = "170";
+
 	public static final String STOCKS = "12";
 
 	public static final String TAGS_ADMIN = "99";
