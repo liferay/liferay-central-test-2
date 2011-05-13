@@ -21,14 +21,13 @@ import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.taglib.aui.ScriptTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +82,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				_extended = true;
 				_icon = null;
 				_id = null;
-				_maxVisibleItems = 0;
+				_maxDisplayItems = _DEFAULT_MAX_DISPLAY_ITEMS;
 				_message = "actions";
 				_showArrow = true;
 				_showExpanded = false;
@@ -157,8 +156,12 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		_id = id;
 	}
 
-	public void setMaxVisibleItems(int maxVisibleItems) {
-		_maxVisibleItems = maxVisibleItems;
+	public void setMaxDisplayItems(int maxDisplayItems) {
+		if (maxDisplayItems <= 0) {
+			maxDisplayItems = _DEFAULT_MAX_DISPLAY_ITEMS;
+		}
+
+		_maxDisplayItems = maxDisplayItems;
 	}
 
 	public void setMessage(String message) {
@@ -232,13 +235,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write("menu\">");
 				}
 				else {
-					int maxVisibleItems = _maxVisibleItems;
-
-					if (maxVisibleItems == 0) {
-						maxVisibleItems = GetterUtil.getInteger(
-							PropsUtil.get(PropsKeys.MENU_MAX_VISIBLE_ITEMS));
-					}
-
 					jspWriter.write("<span title=\"");
 					jspWriter.write(LanguageUtil.get(pageContext, _message));
 					jspWriter.write("\"><ul class='lfr-component lfr-actions ");
@@ -246,8 +242,8 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write(_align);
 					jspWriter.write(" direction-");
 					jspWriter.write(_direction);
-					jspWriter.write(" max-visible-items-");
-					jspWriter.write(String.valueOf(maxVisibleItems));
+					jspWriter.write(" max-display-items-");
+					jspWriter.write(String.valueOf(_maxDisplayItems));
 					jspWriter.write(" ");
 
 					if (Validator.isNotNull(_cssClass)) {
@@ -318,6 +314,9 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		return EVAL_PAGE;
 	}
 
+	private static final int _DEFAULT_MAX_DISPLAY_ITEMS = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.ICON_MENU_MAX_DISPLAY_ITEMS));
+
 	private static final String _END_PAGE = "/html/taglib/ui/icon_menu/end.jsp";
 
 	private static final String _START_PAGE =
@@ -330,7 +329,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private boolean _extended = true;
 	private String _icon;
 	private String _id;
-	private int _maxVisibleItems = 0;
+	private int _maxDisplayItems = _DEFAULT_MAX_DISPLAY_ITEMS;
 	private String _message = "actions";
 	private boolean _showArrow = true;
 	private boolean _showExpanded;

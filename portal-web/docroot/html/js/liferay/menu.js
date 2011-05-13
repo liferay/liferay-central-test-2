@@ -39,7 +39,7 @@ AUI().add(
 
 		var SELECTOR_SEARCH_INPUT = '.lfr-menu-list-search';
 
-		var REGEX_MAX_VISIBLE_ITEMS = /max-visible-items-(\d+)/;
+		var REGEX_MAX_VISIBLE_ITEMS = /max-display-items-(\d+)/;
 
 		var TPL_MENU = '<div id="{menuId}" class="lfr-component lfr-menu-list" />';
 
@@ -475,9 +475,9 @@ AUI().add(
 					var params = REGEX_MAX_VISIBLE_ITEMS.exec(cssClass);
 
 					if (params && params.length === 2) {
-						var maxVisibleItems = parseInt(params[1], 10);
+						var maxDisplayItems = parseInt(params[1], 10);
 
-						if (maxVisibleItems && listItems.size() > maxVisibleItems) {
+						if (maxDisplayItems && listItems.size() > maxDisplayItems) {
 							instance._createLiveSearch(trigger, menu);
 
 							var totalHeight = instance._liveSearch.get('input').get(OFFSET_HEIGHT);
@@ -487,7 +487,7 @@ AUI().add(
 								function(item, index) {
 									totalHeight += item.get(OFFSET_HEIGHT);
 
-									return index === (maxVisibleItems - 1);
+									return index === (maxDisplayItems - 1);
 								}
 							);
 
