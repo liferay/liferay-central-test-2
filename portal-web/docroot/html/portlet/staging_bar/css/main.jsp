@@ -21,6 +21,31 @@
 		display: none;
 	}
 
+	.staging-icon-menu-container {
+		overflow: hidden;
+		position: absolute;
+		right: 8px;
+		top: -5px;
+
+		a {
+			display: block;
+			float: right;
+			min-height: 15px;
+
+		}
+
+		.staging-icon-menu.lfr-actions .lfr-trigger strong {
+			min-width: 0;
+
+			a {
+				background-color: #EEE;
+				background-position: 50% 4px;
+				border-radius: 15px;
+				padding: 0 15px 0 0;
+			}
+		}
+	}
+
 	.tab-container {
 		position: relative;
 		margin-left: 5px;

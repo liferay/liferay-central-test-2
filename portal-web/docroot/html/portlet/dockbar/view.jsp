@@ -157,22 +157,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= themeDisplay.isShowStagingIcon() %>">
-			<li class="staging-options has-submenu" id="<portlet:namespace />staging">
-				<a class="menu-button" href="javascript:;">
-					<span>
-						<liferay-ui:message key="staging" />
-					</span>
-				</a>
-
-				<div class="yui3-aui-menu staging-menu yui3-aui-overlaycontext-hidden" id="<portlet:namespace />stagingContainer">
-					<div class="yui3-aui-menu-content">
-						<liferay-ui:staging />
-					</div>
-				</div>
-			</li>
-		</c:if>
-
 		<li class="yui3-aui-toolbar-separator">
 			<span></span>
 		</li>

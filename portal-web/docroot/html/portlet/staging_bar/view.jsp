@@ -92,6 +92,8 @@ if (layout != null) {
 
 							<span class="tab-container">
 								<aui:a cssClass='<%= "layout-set-branch tab" + (selected ? " selected" : StringPool.BLANK) %>' href="<%= selected ? null : layoutSetBranchURL %>" label="<%= layoutSetBranch.getName() %>" />
+
+								<liferay-ui:staging extended="<%= false %>" layoutSetBranchId="<%= layoutSetBranch.getLayoutSetBranchId() %>" />
 							</span>
 
 						<%
@@ -107,6 +109,8 @@ if (layout != null) {
 
 						<span class="tab-container">
 							<aui:a cssClass='<%= "tab" +  (selected ? " selected" : StringPool.BLANK)  %>' href="<%= selected ? null : stagedFriendlyURL %>" label="backstage" />
+
+							<liferay-ui:staging extended="<%= false %>" />
 						</span>
 					</c:otherwise>
 				</c:choose>

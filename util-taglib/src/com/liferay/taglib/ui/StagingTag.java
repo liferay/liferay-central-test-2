@@ -16,15 +16,53 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Brian Wing Shun Chan
  */
 public class StagingTag extends IncludeTag {
 
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public void setExtended(boolean extended) {
+		_extended = extended;
+	}
+
+	public void setLayoutSetBranchId(long layoutSetBranchId) {
+		_layoutSetBranchId = layoutSetBranchId;
+	}
+
+	public void setSelPlid(long selPlid) {
+		_selPlid = selPlid;
+	}
+
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:staging:extended",
+			String.valueOf(_extended));
+		request.setAttribute(
+			"liferay-ui:staging:groupId",
+			String.valueOf(_groupId));
+		request.setAttribute(
+			"liferay-ui:staging:layoutSetBranchId",
+			String.valueOf(_layoutSetBranchId));
+		request.setAttribute(
+			"liferay-ui:staging:selPlid",
+			String.valueOf(_selPlid));
+	}
+
 	private static final String _PAGE = "/html/taglib/ui/staging/page.jsp";
+
+	private boolean _extended = true;
+	private long _groupId;
+	private long _layoutSetBranchId;
+	private long _selPlid;
 
 }
