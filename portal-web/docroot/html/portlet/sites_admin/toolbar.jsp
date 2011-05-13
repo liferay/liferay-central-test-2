@@ -36,8 +36,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 		%>
 
 		<liferay-portlet:renderURL varImpl="addSiteURL">
-			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<liferay-portlet:param name="struts_action" value="/sites_admin/edit_site" />
+			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 
 		<c:choose>
@@ -48,19 +48,19 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 				<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add">
 					<liferay-ui:icon
 						image="site"
-						message='custom-site'
+						message="custom-site"
 						method="get"
 						url='<%= addSiteURL.toString() %>'
 					/>
 
 					<%
 					for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
-						addSiteURL.setParameter("selLayoutSetPrototypeId", String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()));
+						addSiteURL.setParameter("layoutSetPrototypeId", String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()));
 					%>
 
 						<liferay-ui:icon
 							image="site"
-							message='<%= layoutSetPrototype.getName(locale) %>'
+							message="<%= layoutSetPrototype.getName(locale) %>"
 							method="get"
 							url='<%= addSiteURL.toString() %>'
 						/>

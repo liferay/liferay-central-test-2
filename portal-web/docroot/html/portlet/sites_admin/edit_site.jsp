@@ -18,7 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-long selLayoutSetPrototypeId = ParamUtil.getLong(request, "selLayoutSetPrototypeId");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -26,19 +25,12 @@ long groupId = BeanParamUtil.getLong(group, request, "groupId");
 
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
-LayoutSetPrototype selLayoutSetPrototype = null;
+LayoutSetPrototype layoutSetPrototype = null;
 
-if (selLayoutSetPrototypeId > 0) {
-	selLayoutSetPrototype = LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(selLayoutSetPrototypeId);
-}
+long layoutSetPrototypeId = ParamUtil.getLong(request, "layoutSetPrototypeId");
 
-String title = "new-site";
-
-if (group != null) {
-	title = group.getDescriptiveName();
-}
-else if (selLayoutSetPrototype != null) {
-	title = selLayoutSetPrototype.getName(locale);
+if (layoutSetPrototypeId > 0) {
+	layoutSetPrototype = LayoutSetPrototypeServiceUtil.getLayoutSetPrototype(layoutSetPrototypeId);
 }
 %>
 
@@ -48,9 +40,20 @@ else if (selLayoutSetPrototype != null) {
 	</liferay-util:include>
 </c:if>
 
+<%
+String title = "new-site";
+
+if (group != null) {
+	title = group.getDescriptiveName();
+}
+else if (layoutSetPrototype != null) {
+	title = layoutSetPrototype.getName(locale);
+}
+%>
+
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= title %>'
+	title="<%= title %>"
 />
 
 <portlet:actionURL var="editCommunityURL">
@@ -108,7 +111,7 @@ else if (selLayoutSetPrototype != null) {
 		%>
 
 		<c:choose>
-			<c:when test="<%= (group != null) || (!layoutSetPrototypes.isEmpty() && (selLayoutSetPrototype == null)) %>">
+			<c:when test="<%= (group != null) || (!layoutSetPrototypes.isEmpty() && (layoutSetPrototype == null)) %>">
 				<br />
 
 				<aui:fieldset label="pages">
@@ -162,10 +165,10 @@ else if (selLayoutSetPrototype != null) {
 								<aui:option label="none" selected="<%= true %>" value="" />
 
 								<%
-								for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+								for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
 								%>
 
-									<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+									<aui:option value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 								<%
 								}
@@ -207,15 +210,15 @@ else if (selLayoutSetPrototype != null) {
 					</aui:field-wrapper>
 				</aui:fieldset>
 			</c:when>
-			<c:when test="<%= selLayoutSetPrototype != null %>">
+			<c:when test="<%= layoutSetPrototype != null %>">
 				<aui:fieldset label="pages">
 					<br />
 
-					<aui:input type="hidden" name="selLayoutSetPrototypeId" value="<%= selLayoutSetPrototypeId %>" />
+					<aui:input name="layoutSetPrototypeId" type="hidden" value="<%= layoutSetPrototypeId %>" />
 
-					<aui:select label="visibility" name="publicLayouts">
-						<aui:option label="public" value="1" />
-						<aui:option label="private" value="0" />
+					<aui:select label="visibility" name="privateLayoutSetPrototype">
+						<aui:option label="public" value="0" />
+						<aui:option label="private" value="1" />
 					</aui:select>
 
 					<aui:field-wrapper name="site-template-relationship">

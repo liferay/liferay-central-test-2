@@ -291,23 +291,26 @@ public class EditGroupAction extends PortletAction {
 			actionRequest, "publicLayoutSetPrototypeId");
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "privateLayoutSetPrototypeId");
-		long selLayoutSetPrototypeId = ParamUtil.getLong(
-			actionRequest, "selLayoutSetPrototypeId");
-		boolean publicLayouts = ParamUtil.getBoolean(
-			actionRequest, "publicLayouts");
 
 		if ((publicLayoutSetPrototypeId == 0) &&
 			(privateLayoutSetPrototypeId == 0)) {
-			if (publicLayouts) {
-				publicLayoutSetPrototypeId = selLayoutSetPrototypeId;
+
+			long layoutSetPrototypeId = ParamUtil.getLong(
+				actionRequest, "layoutSetPrototypeId");
+			boolean privateLayoutSetPrototype = ParamUtil.getBoolean(
+				actionRequest, "privateLayoutSetPrototype");
+
+			if (privateLayoutSetPrototype) {
+				privateLayoutSetPrototypeId = layoutSetPrototypeId;
 			}
 			else {
-				privateLayoutSetPrototypeId = selLayoutSetPrototypeId;
+				publicLayoutSetPrototypeId = layoutSetPrototypeId;
 			}
 		}
 
 		if ((publicLayoutSetPrototypeId > 0) ||
 			(privateLayoutSetPrototypeId > 0)) {
+
 			CommunitiesUtil.applyLayoutSetPrototypes(
 				group, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
 				serviceContext);
