@@ -1107,6 +1107,9 @@
 				<license-name>LGPL 3</license-name>
 			</license>
 		</licenses>
+		<comments>
+			Re-compiled with JDK 1.5.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/bsh.jar</file-name>
