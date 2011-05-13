@@ -24,6 +24,18 @@
 				margin-left: 10px;
 			}
 		}
+
+		.yui3-aui-field-text {
+			display: block;
+
+			.yui3-aui-field-element {
+				display: block;
+
+				.yui3-aui-field-input {
+					width: 100%;
+				}
+			}
+		}
 	}
 
 	.lfr-spreadsheet-add-rows-buttons {

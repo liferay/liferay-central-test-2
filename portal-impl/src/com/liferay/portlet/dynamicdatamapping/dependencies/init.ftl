@@ -9,6 +9,8 @@
 	<#assign fieldName = parentField.name!"">
 </#if>
 
+<#assign cssClass = field.fieldCssClass!"">
+
 <#assign fieldValue = "">
 
 <#if fields?? && fields.get(fieldName)??>

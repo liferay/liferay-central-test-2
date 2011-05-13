@@ -11,6 +11,10 @@ AUI().add(
 
 		var DEFAULTS_FORM_VALIDATOR = AUI.defaults.FormValidator;
 
+		var MAP_ATTR_FIELD_CSS_CLASS = {
+			name: 'fieldCssClass'
+		};
+
 		var MAP_ATTR_LABEL = {
 			name: 'label'
 		};
@@ -33,6 +37,10 @@ AUI().add(
 
 		var MAP_ATTR_TIP = {
 			name: 'tip'
+		};
+
+		var MAP_ATTR_WIDTH = {
+			name: 'width'
 		};
 
 		var MAP_ELEMENT_DATA = {
@@ -107,8 +115,14 @@ AUI().add(
 
 					strings: {
 						value: {
+							button: Liferay.Language.get('button'),
 							defaultMessage: Liferay.Language.get('drop-fields-here'),
 							emptySelection: Liferay.Language.get('no-field-selected'),
+							large: Liferay.Language.get('large'),
+							medium: Liferay.Language.get('medium'),
+							reset: Liferay.Language.get('Reset'),
+							small: Liferay.Language.get('small'),
+							submit: Liferay.Language.get('Submit'),
 							type: Liferay.Language.get('type')
 						}
 					}
@@ -237,6 +251,8 @@ AUI().add(
 
 						var entryRequired = instance._createDynamicNode('entry', MAP_ATTR_REQUIRED);
 
+						var fieldCssClass = instance._createDynamicNode('entry', MAP_ATTR_FIELD_CSS_CLASS);
+
 						var label = instance._createDynamicNode('entry', MAP_ATTR_LABEL);
 
 						var multiple = instance._createDynamicNode('entry', MAP_ATTR_MULTIPLE);
@@ -246,6 +262,8 @@ AUI().add(
 						var showLabel = instance._createDynamicNode('entry', MAP_ATTR_SHOW_LABEL);
 
 						var tip = instance._createDynamicNode('entry', MAP_ATTR_TIP);
+
+						var width = instance._createDynamicNode('entry', MAP_ATTR_WIDTH);
 
 						buffer.push(typeElement.openTag);
 
@@ -304,6 +322,23 @@ AUI().add(
 							STR_CDATA_OPEN + tipVal + STR_CDATA_CLOSE,
 							tip.closeTag
 						);
+
+						if (instanceOf(field, A.FormBuilderTextField)) {
+							var widthVal = instance.normalizeValue(field.get('width'));
+							var widthCssClassVal = A.getClassName('w' + widthVal);
+
+							buffer.push(
+								fieldCssClass.openTag,
+								STR_CDATA_OPEN + widthCssClassVal + STR_CDATA_CLOSE,
+								fieldCssClass.closeTag
+							);
+
+							buffer.push(
+								width.openTag,
+								STR_CDATA_OPEN + widthVal + STR_CDATA_CLOSE,
+								width.closeTag
+							);
+						}
 
 						buffer.push(metadata.closeTag, typeElement.closeTag);
 					},

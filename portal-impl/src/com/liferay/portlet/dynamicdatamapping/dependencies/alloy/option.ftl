@@ -3,7 +3,7 @@
 <#assign selected = (field.value == fieldValue)>
 
 <#if parentType == "select">
-	<@aui.option label=field.name selected=selected value=field.value />
+	<@aui.option cssClass=cssClass label=field.name selected=selected value=field.value />
 <#else>
-	<@aui.input checked=selected label=field.name name=parentName type="radio" value=field.value />
+	<@aui.input checked=selected cssClass=cssClass label=field.name name=parentName type="radio" value=field.value />
 </#if>
