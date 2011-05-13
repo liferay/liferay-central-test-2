@@ -38,7 +38,6 @@ if (layout != null) {
 	}
 	else if (group.isStaged()) {
 		if (group.isStagedRemotely()) {
-			liveGroup = null;
 			stagingGroup = group;
 		}
 		else {

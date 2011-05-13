@@ -37,16 +37,13 @@ if (selGroup.isStagingGroup()) {
 	liveGroup = selGroup.getLiveGroup();
 	stagingGroup = selGroup;
 }
-else {
-	liveGroup = selGroup;
-}
-
-if (liveGroup.isStaged()) {
-	if (liveGroup.isStagedRemotely()) {
-		stagingGroup = liveGroup;
+else if (selGroup.isStaged()) {
+	if (selGroup.isStagedRemotely()) {
+		stagingGroup = selGroup;
 	}
 	else {
-		stagingGroup = liveGroup.getStagingGroup();
+		liveGroup = selGroup;
+		stagingGroup = selGroup.getStagingGroup();
 	}
 }
 
@@ -162,7 +159,7 @@ else if (liveGroup.isUser()) {
 
 LayoutLister layoutLister = new LayoutLister();
 
-LayoutView layoutView = layoutLister.getLayoutView(selGroupId, privateLayout, rootNodeName, locale);
+LayoutView layoutView = layoutLister.getLayoutView(stagingGroupId, privateLayout, rootNodeName, locale);
 
 List layoutList = layoutView.getList();
 
@@ -182,11 +179,11 @@ selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 selectURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
 selectURL.setParameter(Constants.CMD, cmd);
 selectURL.setParameter("pagesRedirect", pagesRedirect);
-selectURL.setParameter("groupId", String.valueOf(selGroupId));
+selectURL.setParameter("groupId", String.valueOf(stagingGroupId));
 selectURL.setParameter("selectPages", String.valueOf(!selectPages));
 selectURL.setParameter("schedule", String.valueOf(schedule));
 
-request.setAttribute("edit_pages.jsp-groupId", new Long(selGroupId));
+request.setAttribute("edit_pages.jsp-groupId", new Long(stagingGroupId));
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
 request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
 
@@ -232,7 +229,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
-	<aui:input name="layoutSetBranchId" type="hidden" value="<%= layoutSetBranchId %>" />
 	<aui:input name="layoutSetBranchName" type="hidden" value="<%= layoutSetBranchName %>" />
 	<aui:input name="lastImportUserName" type="hidden" value="<%= user.getFullName() %>" />
 	<aui:input name="lastImportUserUuid" type="hidden" value="<%= String.valueOf(user.getUserUuid()) %>" />
@@ -336,33 +332,32 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<aui:input label="title" name="description" type="text" />
 				</c:if>
 
-				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="pages">
-						<%@ include file="/html/portlet/layouts_admin/publish_layouts_select_pages.jspf" %>
-					</liferay-ui:panel>
+				<c:choose>
+					<c:when test="<%= layoutSetBranchId > 0 %>">
+						<aui:input name="layoutSetBranchId" type="hidden" value="<%= layoutSetBranchId %>" />
+					</c:when>
+					<c:otherwise>
+						<%
+						String branchingKey = "branchingPublic";
 
-					<%
-					String branchingKey = "branchingPublic";
+						if (privateLayout) {
+							branchingKey = "branchingPrivate";
+						}
 
-					if (privateLayout) {
-						branchingKey = "branchingPrivate";
-					}
+						boolean branchingEnabled = false;
 
-					boolean branchingEnabled = false;
+						if (liveGroup.isStaged() && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
+							branchingEnabled = true;
+						}
+						%>
 
-					if (liveGroup.isStaged() && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
-						branchingEnabled = true;
-					}
-					%>
-
-					<c:if test="<%= branchingEnabled %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="branches">
+						<c:if test="<%= branchingEnabled %>">
 
 							<%
 							List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);
 							%>
 
-							<aui:select id="layoutSetBranchId" inlineField="<%= true %>" label="branch" name="layoutSetBranchId">
+							<aui:select inlineLabel="left" label="backstage" name="layoutSetBranchId">
 
 								<%
 								for (LayoutSetBranch layoutSetBranch : layoutSetBranches) {
@@ -380,8 +375,14 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 								%>
 
 							</aui:select>
-						</liferay-ui:panel>
-					</c:if>
+						</c:if>
+					</c:otherwise>
+				</c:choose>
+
+				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="pages">
+						<%@ include file="/html/portlet/layouts_admin/publish_layouts_select_pages.jspf" %>
+					</liferay-ui:panel>
 
 					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title="options">
 						<%@ include file="/html/portlet/layouts_admin/publish_layouts_options.jspf" %>
