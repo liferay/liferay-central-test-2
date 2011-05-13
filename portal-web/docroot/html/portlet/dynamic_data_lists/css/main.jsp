@@ -17,6 +17,15 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-dynamic-data-lists {
+	.ddl-form {
+		.yui3-aui-field-radio {
+			.yui3-aui-field {
+				display: block;
+				margin-left: 10px;
+			}
+		}
+	}
+
 	.lfr-spreadsheet-add-rows-buttons {
 		padding: 5px;
 

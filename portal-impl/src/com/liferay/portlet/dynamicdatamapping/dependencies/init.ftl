@@ -1,4 +1,5 @@
 <#assign aui = PortalJspTagLibs["/WEB-INF/tld/liferay-aui.tld"] />
+<#assign liferay_ui = PortalJspTagLibs["/WEB-INF/tld/liferay-ui.tld"] />
 
 <#assign fieldName = field.name>
 
@@ -18,6 +19,12 @@
 
 <#if field.showLabel?? && (field.showLabel == "false")>
 	<#assign label = "">
+</#if>
+
+<#assign required = false>
+
+<#if field.required?? && (field.required == "true")>
+	<#assign required = true>
 </#if>
 
 <#assign parentName = parentField.name!"">
