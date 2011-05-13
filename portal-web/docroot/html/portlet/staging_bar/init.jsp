@@ -19,4 +19,34 @@
 <%@ page import="com.liferay.portal.kernel.staging.LayoutStagingUtil" %>
 <%@ page import="com.liferay.portal.kernel.staging.StagingUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.SessionParamUtil" %>
+<%@ page import="com.liferay.portal.service.LayoutSetBranchLocalServiceUtil" %>
 <%@ page import="com.liferay.portal.util.comparator.LayoutRevisionIdComparator" %>
+
+<%
+Group group = null;
+Group liveGroup = null;
+Group stagingGroup = null;
+
+boolean privateLayout = false;
+
+if (layout != null) {
+	group = layout.getGroup();
+
+	if (group.isStagingGroup()) {
+		liveGroup = group.getLiveGroup();
+		stagingGroup = group;
+	}
+	else if (group.isStaged()) {
+		if (group.isStagedRemotely()) {
+			liveGroup = null;
+			stagingGroup = group;
+		}
+		else {
+			liveGroup = group;
+			stagingGroup = group.getStagingGroup();
+		}
+	}
+
+	privateLayout = layout.isPrivateLayout();
+}
+%>

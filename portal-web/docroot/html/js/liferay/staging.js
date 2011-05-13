@@ -169,27 +169,36 @@ AUI().add(
 
 				var namespace = options.namespace;
 
-				var dockBar = A.one('#' + namespace + 'dockbarStaging');
-
-				var layoutSetBranchId = A.one('#' + namespace + 'layoutSetBranchId');
-
-				if (layoutSetBranchId) {
-					layoutSetBranchId.on('change', instance._onLayoutSetBranchId, instance);
-				}
-
-				var undoRevision = A.one('#' + namespace + 'undoRevision');
-
-				if (undoRevision) {
-					undoRevision.on('click', instance._onUndoRevision, instance);
-				}
-
-				var viewHistory = A.one('#' + namespace + 'viewHistory');
-
-				if (viewHistory) {
-					viewHistory.on('click', instance._onViewHistory, instance);
-				}
-
 				instance._namespace = namespace;
+
+				Dockbar.backstageToolbar = new A.Toolbar(
+					{
+						activeState: false,
+						boundingBox: '#' + namespace + 'backstageToolbar',
+						children: [
+							{
+							type: 'ToolbarSpacer'
+							},
+							{
+								handler: function(event) {
+									instance._onViewHistory(event);
+								},
+								icon: 'clock',
+								label: Liferay.Language.get('history')
+							}
+						]
+					}
+				).render();
+
+				Dockbar.undoButton = new A.ButtonItem(
+					{
+						handler: function(event) {
+							instance._onUndoRevision(event);
+						},
+						icon: 'arrowreturnthick-1-b',
+						title: Liferay.Language.get('undo')
+					}
+				);
 			},
 
 			_getGraphDialog: function() {
@@ -235,20 +244,6 @@ AUI().add(
 				return graphDialog;
 			},
 
-			_onLayoutSetBranchId: function(event) {
-				var instance = this;
-
-				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-to-another-branch'))) {
-					var namespace = instance._namespace;
-
-					var form = A.one('#' + namespace + 'fm');
-
-					form.one('#' + namespace + 'cmd').val('select_layout_set_branch');
-
-					submitForm(form);
-				}
-			},
-
 			_onUndoRevision: function(event) {
 				var instance = this;
 
@@ -272,7 +267,7 @@ AUI().add(
 				var form = A.one('#' + namespace + 'fm');
 
 				var layoutRevisionId = form.one('#' + namespace + 'layoutRevisionId').val();
-				var layoutSetBranchId = form.one('#' + namespace + 'layoutSetBranchId option:selected').val();
+				var layoutSetBranchId = form.one('#' + namespace + 'layoutSetBranchId').val();
 
 				var graphDialog = instance._getGraphDialog();
 
@@ -330,6 +325,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-dialog', 'aui-io-plugin', 'liferay-portlet-url']
+		requires: ['aui-dialog', 'aui-io-plugin', 'aui-toolbar', 'liferay-portlet-url']
 	}
 );

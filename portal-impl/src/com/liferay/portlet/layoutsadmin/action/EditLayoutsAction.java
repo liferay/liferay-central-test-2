@@ -508,6 +508,10 @@ public class EditLayoutsAction extends PortletAction {
 		return ActionUtil.getGroup(portletRequest);
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
 	protected void selectLayoutSetBranch(ActionRequest actionRequest)
 		throws Exception {
 
@@ -840,5 +844,7 @@ public class EditLayoutsAction extends PortletAction {
 				css, wapTheme);
 		}
 	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }
