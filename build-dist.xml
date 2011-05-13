@@ -593,8 +593,13 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas" />
 		<antcall target="build-dist-resin" />
-		<antcall target="build-dist-tcat" />
 		<antcall target="build-dist-tomcat" />
+
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">plugins.includes=${lp.plugins.tcat}</echo>
+
+		<ant dir="${lp.plugins.dir}" target="all" inheritAll="false" />
+
+		<antcall target="build-dist-tcat" />
 
 		<antcall target="zip-api" />
 		<antcall target="zip-geronimo" />
