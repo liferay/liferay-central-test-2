@@ -163,6 +163,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
+		servletContext.setAttribute(HAS_SERVICE_PROPERTIES, Boolean.TRUE);
+
 		Properties serviceBuilderProperties =
 			serviceBuilderPropertiesConfiguration.getProperties();
 
@@ -194,6 +196,9 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			servletContext, classLoader, buildNamespace, buildNumber,
 			buildDate, buildAutoUpgrade);
 	}
+
+	protected static final String HAS_SERVICE_PROPERTIES =
+		"HAS_SERVICE_PROPERTIES";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PluginPackageHotDeployListener.class);

@@ -209,7 +209,15 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		String configLocation = servletContext.getInitParameter(
 			PortletContextLoader.PORTAL_CONFIG_LOCATION_PARAM);
 
-		if (Validator.isNotNull(configLocation)) {
+		Boolean hasServiceProperties =
+			GetterUtil.getBoolean(
+				(Boolean)servletContext.getAttribute(
+					PluginPackageHotDeployListener.HAS_SERVICE_PROPERTIES));
+
+		if (Validator.isNotNull(configLocation) || hasServiceProperties) {
+			servletContext.removeAttribute(
+				PluginPackageHotDeployListener.HAS_SERVICE_PROPERTIES);
+
 			String lockKey = PortletContextLoaderListener.getLockKey(
 				servletContext);
 
