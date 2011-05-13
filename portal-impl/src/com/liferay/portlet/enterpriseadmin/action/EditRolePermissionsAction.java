@@ -339,8 +339,8 @@ public class EditRolePermissionsAction extends PortletAction {
 				int scope = ResourceConstants.SCOPE_COMPANY;
 
 				if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
-					(role.getType() == RoleConstants.TYPE_SITE) ||
-					(role.getType() == RoleConstants.TYPE_PROVIDER)) {
+					(role.getType() == RoleConstants.TYPE_PROVIDER) ||
+					(role.getType() == RoleConstants.TYPE_SITE)) {
 
 					scope = ResourceConstants.SCOPE_GROUP_TEMPLATE;
 				}
