@@ -136,7 +136,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	public FileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return new LiferayFileVersion(_dlFileEntry.getFileVersion());
+		return new LiferayFileVersion(_dlFileEntry.getLatestFileVersion());
 	}
 
 	public Lock getLock() {

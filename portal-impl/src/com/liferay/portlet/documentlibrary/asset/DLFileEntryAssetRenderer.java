@@ -80,7 +80,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getTitle(Locale locale) {
-		return _fileEntry.getTitle();
+		return _fileVersion.getTitle();
 	}
 
 	public PortletURL getURLEdit(

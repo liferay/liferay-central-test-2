@@ -47,9 +47,7 @@ if (assetRenderer != null) {
 
 String headerTitle = LanguageUtil.get(pageContext, workflowTask.getName());
 
-if (assetEntry != null) {
-	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetEntry.getTitle());
-}
+headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + workflowHandler.getTitle(classPK, locale));
 
 PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
