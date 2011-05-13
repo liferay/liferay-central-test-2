@@ -60,7 +60,7 @@ AUI().add(
 								points: ['tc', 'tc']
 							},
 							bodyContent: A.one('#' + namespace + 'addBranch').show(),
-							title: Liferay.Language.get('add-branch'),
+							title: Liferay.Language.get('add-backstage'),
 							modal: true,
 							width: 530
 						}
@@ -127,7 +127,7 @@ AUI().add(
 								p_l_id: themeDisplay.getPlid(),
 								redirect: Liferay.currentURL
 							},
-							uri: themeDisplay.getPathMain() + '/group_pages/merge_layout_set_branch'
+							uri: themeDisplay.getPathMain() + '/staging_bar/merge_layout_set_branch'
 						}
 					).render();
 
@@ -159,7 +159,7 @@ AUI().add(
 				var mergeLayoutSetBranchId = node.attr('data-layoutSetBranchId');
 				var mergeLayoutSetBranchName = node.attr('data-layoutSetBranchName');
 
-				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-merge-changes-from-branch') + ' ' + mergeLayoutSetBranchName)) {
+				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-merge-changes-from-backstage') + ' ' + mergeLayoutSetBranchName)) {
 					var form = A.one('#' + namespace + 'fm4');
 
 					form.one('#' + namespace + 'mergeLayoutSetBranchId').val(mergeLayoutSetBranchId);
@@ -232,7 +232,7 @@ AUI().add(
 								p_l_id: themeDisplay.getPlid(),
 								redirect: Liferay.currentURL
 							},
-							uri: themeDisplay.getPathMain() + '/staging_bar/layout_revisions'
+							uri: themeDisplay.getPathMain() + '/staging_bar/view_layout_revisions'
 						}
 					).render();
 

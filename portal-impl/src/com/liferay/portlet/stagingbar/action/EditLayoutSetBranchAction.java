@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.layoutsadmin.action;
+package com.liferay.portlet.stagingbar.action;
 
 import com.liferay.portal.LayoutSetBranchNameException;
 import com.liferay.portal.NoSuchGroupException;
@@ -31,6 +31,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -75,7 +76,7 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.layouts_admin.error");
+				setForward(actionRequest, "portlet.staging_bar.error");
 			}
 			else {
 				throw e;
@@ -95,7 +96,7 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.layouts_admin.error");
+			return mapping.findForward("portlet.staging_bar.error");
 		}
 
 		try {
@@ -107,7 +108,7 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.layouts_admin.error");
+				return mapping.findForward("portlet.staging_bar.error");
 			}
 			else {
 				throw e;
@@ -115,7 +116,8 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.layouts_admin.edit_pages"));
+			getForward(
+				renderRequest, "portlet.staging_bar.view_layout_set_branches"));
 	}
 
 	protected void deleteLayoutSetBranch(ActionRequest actionRequest)

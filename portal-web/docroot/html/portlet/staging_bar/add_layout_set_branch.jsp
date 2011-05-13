@@ -14,27 +14,19 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
-
-<%
-long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
-boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
-
-PortletURL redirectURL = ((PortletURL)request.getAttribute("edit_pages.jsp-redirectURL"));
-%>
+<%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <div class="yui3-aui-helper-hidden" data-namespace="<portlet:namespace />" id="<portlet:namespace />addBranch">
 	<aui:model-context model="<%= LayoutSetBranch.class %>" />
 
 	<portlet:actionURL var="editLayoutSetBranchURL">
-		<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
+		<portlet:param name="struts_action" value="/staging_bar/edit_layout_set_branch" />
 	</portlet:actionURL>
 
 	<aui:form action="<%= editLayoutSetBranchURL %>" enctype="multipart/form-data" method="post" name="fm3">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input name="pagesRedirect" type="hidden" value="<%= redirectURL.toString() %>" />
-		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+		<aui:input name="groupId" type="hidden" value="<%= group.getGroupId() %>" />
 		<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
 
 		<aui:fieldset>
@@ -44,7 +36,7 @@ PortletURL redirectURL = ((PortletURL)request.getAttribute("edit_pages.jsp-redir
 		</aui:fieldset>
 
 		<aui:button-row>
-			<aui:button type="submit" value="add-branch" />
+			<aui:button type="submit" value="add-backstage" />
 		</aui:button-row>
 	</aui:form>
 </div>

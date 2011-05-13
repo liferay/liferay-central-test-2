@@ -21,6 +21,10 @@
 		display: none;
 	}
 
+	.manage-backstages {
+    	margin-left: 1em;
+	}
+
 	.staging-icon-menu-container {
 		overflow: hidden;
 		position: absolute;
@@ -149,6 +153,14 @@
 				font-size: 1.3em;
 				padding: 5px 0 0;
 			}
+
+			.backstage-toolbar {
+				padding-left: 1em;
+			}
 		}
+	}
+
+	.layout-set-results {
+		min-height: 300px;
 	}
 }

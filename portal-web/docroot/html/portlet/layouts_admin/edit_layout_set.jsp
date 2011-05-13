@@ -56,16 +56,6 @@ if (!company.isCommunityLogo()) {
 	mainSections = ArrayUtil.remove(mainSections, "logo");
 }
 
-String branchingKey = "branchingPublic";
-
-if (privateLayout) {
-	branchingKey = "branchingPrivate";
-}
-
-if (GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
-	mainSections = ArrayUtil.append(mainSections, "branches");
-}
-
 String[][] categorySections = {mainSections};
 %>
 

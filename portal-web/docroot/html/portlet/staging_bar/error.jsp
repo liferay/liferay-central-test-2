@@ -14,13 +14,11 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+<%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <liferay-ui:header
 	backURL="javascript:history.go(-1);"
 	title="error"
 />
-<liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-site-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="the-page-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+
+<liferay-ui:error exception="<%= LayoutSetBranchNameException.class %>" message="a-branch-with-that-name-already-exists" />

@@ -65,7 +65,7 @@ List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutR
 					handler: function (event) {
 					},
 					icon: 'trash',
-					label: '<liferay-ui:message key="clean-history" />'
+					label: '<liferay-ui:message key="clear-history" />'
 				},
 				{
 					handler: function (event) {

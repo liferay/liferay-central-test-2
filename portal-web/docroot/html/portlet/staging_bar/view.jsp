@@ -100,6 +100,38 @@ if (layout != null) {
 						}
 						%>
 
+						<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="layoutSetBranchesURL">
+							<portlet:param name="struts_action" value="/staging_bar/view_layout_set_branches" />
+						</portlet:renderURL>
+
+						<liferay-ui:icon cssClass="manage-backstages" id="manageBackstages" image="configuration" label="<%= true %>" message="manage-backstages" url="<%= layoutSetBranchesURL %>" />
+
+						<aui:script use="aui-base">
+							var layoutSetBranchesLink = A.one('#<portlet:namespace />manageBackstages');
+
+							if (layoutSetBranchesLink) {
+								layoutSetBranchesLink.detach('click');
+
+								layoutSetBranchesLink.on(
+									'click',
+									function(event) {
+										event.preventDefault();
+
+										Liferay.Util.openWindow(
+											{
+												dialog:
+													{
+														width: 820
+													},
+												id: '<portlet:namespace />',
+												title: '<liferay-ui:message key="manage-backstages" />',
+												uri: event.currentTarget.attr('href')
+											}
+										);
+									}
+								);
+							}
+						</aui:script>
 					</c:when>
 					<c:otherwise>
 

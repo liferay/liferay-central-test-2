@@ -14,13 +14,13 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+<%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
 long groupId = ParamUtil.getLong(request, "groupId");
-boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(groupId, privateLayout);
 
@@ -37,7 +37,7 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 
 <div id="<portlet:namespace />mergeLayoutSetBranch">
 	<portlet:actionURL var="mergeLayoutSetBranchURL">
-		<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
+		<portlet:param name="struts_action" value="/staging_bar/edit_layout_set_branch" />
 	</portlet:actionURL>
 
 	<aui:form action="<%= mergeLayoutSetBranchURL %>" enctype="multipart/form-data" method="post" name="fm4">

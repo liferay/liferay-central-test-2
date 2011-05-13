@@ -20,7 +20,9 @@
 <%@ page import="com.liferay.portal.kernel.staging.StagingUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.SessionParamUtil" %>
 <%@ page import="com.liferay.portal.service.LayoutSetBranchLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.service.permission.LayoutSetBranchPermissionUtil" %>
 <%@ page import="com.liferay.portal.util.comparator.LayoutRevisionIdComparator" %>
+<%@ page import="com.liferay.portal.LayoutSetBranchNameException" %>
 
 <%
 Group group = null;

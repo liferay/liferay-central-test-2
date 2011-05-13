@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+<%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -39,7 +39,7 @@ LayoutSetBranch layoutSetBranch = (LayoutSetBranch)row.getObject();
 
 	<c:if test="<%= !layoutSetBranch.isMaster() && LayoutSetBranchPermissionUtil.contains(permissionChecker, layoutSetBranch, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
+			<portlet:param name="struts_action" value="/staging_bar/edit_layout_set_branch" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(layoutSetBranch.getGroupId()) %>" />
