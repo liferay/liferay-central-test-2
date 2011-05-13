@@ -17,21 +17,21 @@ package com.liferay.portlet.dynamicdatamapping;
 /**
  * @author Brian Wing Shun Chan
  */
-public class StorageFieldNameException extends StorageException {
+public class StorageFieldRequiredException extends StorageException {
 
-	public StorageFieldNameException() {
+	public StorageFieldRequiredException() {
 		super();
 	}
 
-	public StorageFieldNameException(String msg) {
+	public StorageFieldRequiredException(String msg) {
 		super(msg);
 	}
 
-	public StorageFieldNameException(String msg, Throwable cause) {
+	public StorageFieldRequiredException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public StorageFieldNameException(Throwable cause) {
+	public StorageFieldRequiredException(Throwable cause) {
 		super(cause);
 	}
 

@@ -413,6 +413,10 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.getFieldsMap();
 	}
 
+	public boolean getFieldRequired(java.lang.String fieldName) {
+		return _ddmStructure.getFieldRequired(fieldName);
+	}
+
 	public java.lang.String getFieldType(java.lang.String fieldName) {
 		return _ddmStructure.getFieldType(fieldName);
 	}

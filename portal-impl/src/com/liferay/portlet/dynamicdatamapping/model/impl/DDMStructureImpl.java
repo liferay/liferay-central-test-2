@@ -65,6 +65,14 @@ public class DDMStructureImpl
 		return _getFieldsMap();
 	}
 
+	public boolean getFieldRequired(String fieldName) {
+		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
+
+		Map<String, String> field = fieldsMap.get(fieldName);
+
+		return GetterUtil.getBoolean(field.get("required"));
+	}
+
 	public String getFieldType(String fieldName) {
 		Map<String, Map<String, String>> fieldsMap = _getFieldsMap();
 

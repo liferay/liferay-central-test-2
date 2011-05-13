@@ -37,6 +37,8 @@ public interface DDMStructure extends DDMStructureModel {
 
 	public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>> getFieldsMap();
 
+	public boolean getFieldRequired(java.lang.String fieldName);
+
 	public java.lang.String getFieldType(java.lang.String fieldName);
 
 	public boolean hasField(java.lang.String fieldName);

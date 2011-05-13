@@ -177,6 +177,7 @@
 		<exception>ContentXml</exception>
 		<exception>Storage</exception>
 		<exception>StorageFieldName</exception>
+		<exception>StorageFieldRequired</exception>
 		<exception>StructureDuplicateElement</exception>
 		<exception>StructureDuplicateStructureKey</exception>
 		<exception>StructureStructureKey</exception>

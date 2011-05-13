@@ -28,6 +28,7 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.util.DDLConstants;
+import com.liferay.portlet.dynamicdatamapping.StorageFieldRequiredException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -76,6 +77,9 @@ public class EditRecordAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.dynamic_data_mapping.error");
+			}
+			else if (e instanceof StorageFieldRequiredException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else {
 				throw e;

@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portlet.dynamicdatamapping.model.DDMTemplate" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchStructureException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException" %>
+<%@ page import="com.liferay.portlet.dynamicdatamapping.StorageFieldRequiredException" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearch" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms" %>
 <%@ page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil" %>
