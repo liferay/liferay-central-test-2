@@ -82,7 +82,17 @@ objectClass: extensibleObject
 objectClass: top
 dc: example
 
-dn: cn=janesmith,dc=example,dc=com
+dn: ou=users,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: ou=groups,dc=example,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: cn=janesmith,ou=users,dc=example,dc=com
 objectClass: organizationalPerson
 objectClass: person
 objectClass: inetOrgPerson
@@ -92,8 +102,9 @@ givenname: Jane
 mail: janesmith@liferay.com
 sn: Smith
 userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09
+businessCategory: cn=usergroup,ou=groups,dc=example,dc=com
 
-dn: cn=lukeskywalker,dc=example,dc=com
+dn: cn=lukeskywalker,ou=users,dc=example,dc=com
 objectClass: organizationalPerson
 objectClass: person
 objectClass: inetOrgPerson
@@ -104,7 +115,7 @@ mail: lukeskywalker@liferay.com
 sn: Skywalker
 userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09
 
-dn: cn=martinluther,dc=example,dc=com
+dn: cn=martinluther,ou=users,dc=example,dc=com
 objectClass: organizationalPerson
 objectClass: person
 objectClass: inetOrgPerson
@@ -113,7 +124,14 @@ cn: martinluther
 givenname: Martin
 mail: martinluther@liferay.com
 sn: Luther
-userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09</echo>
+userpassword:: e1NIQX1xVXFQNWN5eG02WWNUQWh6MDVIcGg1Z3Z1OU09
+
+dn: cn=usergroup,ou=groups,dc=example,dc=com
+objectClass: groupOfUniqueNames
+objectClass: top
+cn: usergroup
+uniqueMember: cn=janesmith,ou=users,dc=example,dc=com
+businessCategory: cn=janesmith,ou=users,dc=example,dc=com</echo>
 
 				<exec executable="${pscp.executable}">
 					<arg line="-pw ${vm.password} ${tstamp.value} ${vm.username}@${vm.host}:/" />
