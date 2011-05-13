@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -699,7 +700,7 @@ public class StagingImpl implements Staging {
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_SETUP,
-				new String[] {Boolean.TRUE.toString()});
+				new String[]{Boolean.TRUE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
