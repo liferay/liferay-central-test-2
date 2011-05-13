@@ -31,8 +31,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
 		<liferay-portlet:renderURL varImpl="addRoleURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<liferay-portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
+			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add">
@@ -43,9 +43,9 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 			<liferay-ui:icon
 				image="user_icon"
-				message='regular-role'
+				message="regular-role"
 				method="get"
-				url='<%= addRoleURL.toString() %>'
+				url="<%= addRoleURL.toString() %>"
 			/>
 
 			<%
@@ -54,9 +54,9 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 			<liferay-ui:icon
 				image="community_icon"
-				message='site-role'
+				message="site-role"
 				method="get"
-				url='<%= addRoleURL.toString() %>'
+				url="<%= addRoleURL.toString() %>"
 			/>
 
 			<%
@@ -65,9 +65,9 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 			<liferay-ui:icon
 				image="organization_icon"
-				message='organization-role'
+				message="organization-role"
 				method="get"
-				url='<%= addRoleURL.toString() %>'
+				url="<%= addRoleURL.toString() %>"
 			/>
 		</liferay-ui:icon-menu>
 	</c:if>
