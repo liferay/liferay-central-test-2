@@ -168,7 +168,7 @@ else if (layoutSetPrototype != null) {
 								for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
 								%>
 
-									<aui:option value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+									<aui:option value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= curLayoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 								<%
 								}
