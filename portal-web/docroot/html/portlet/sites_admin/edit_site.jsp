@@ -121,10 +121,10 @@ else if (layoutSetPrototype != null) {
 								<aui:option label="none" selected="<%= true %>" value="" />
 
 								<%
-								for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+								for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
 								%>
 
-									<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+									<aui:option value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= curLayoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
 
 								<%
 								}
