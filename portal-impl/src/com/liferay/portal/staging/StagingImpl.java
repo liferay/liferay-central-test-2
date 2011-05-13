@@ -700,7 +700,7 @@ public class StagingImpl implements Staging {
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_SETUP,
-				new String[]{Boolean.TRUE.toString()});
+				new String[] {Boolean.TRUE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
