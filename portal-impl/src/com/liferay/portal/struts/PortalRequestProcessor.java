@@ -568,8 +568,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				_log.error(e, e);
 			}
 
+			String fullPathWithoutQueryString = fullPath;
+
 			if (Validator.isNull(fullPath)) {
 				String queryString = request.getQueryString();
+
+				fullPathWithoutQueryString = path;
 
 				if (Validator.isNotNull(queryString)) {
 					fullPath = path.concat(StringPool.QUESTION).concat(
@@ -580,13 +584,16 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
-			UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
+			if (!_trackerIgnorePaths.contains(fullPathWithoutQueryString)) {
+				UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
 
-			userTrackerPath.setUserTrackerId(userTracker.getUserTrackerId());
-			userTrackerPath.setPath(fullPath);
-			userTrackerPath.setPathDate(new Date());
+				userTrackerPath.setUserTrackerId(
+					userTracker.getUserTrackerId());
+				userTrackerPath.setPath(fullPath);
+				userTrackerPath.setPathDate(new Date());
 
-			userTracker.addPath(userTrackerPath);
+				userTracker.addPath(userTrackerPath);
+			}
 		}
 
 		String remoteUser = request.getRemoteUser();
