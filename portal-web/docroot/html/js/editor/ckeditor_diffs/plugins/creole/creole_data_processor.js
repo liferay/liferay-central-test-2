@@ -27,6 +27,8 @@
 
 	var TAG_PRE = 'pre';
 
+	var TAG_TELETYPETEXT = 'tt';
+
 	var TAG_UNORDERED_LIST = 'ul';
 
 	var TAG_UNORDERED_LIST_ITEM = '*';
@@ -99,7 +101,7 @@
 
 			var allowNewLine = true;
 
-			if (!instance._inPRE) {
+			if (!instance._skipParse) {
 				var parentNode = element.parentNode;
 
 				if (parentNode) {
@@ -151,7 +153,7 @@
 
 				var child = children[i];
 
-				if (instance._isIgnorable(child) && !instance._inPRE) {
+				if (instance._isIgnorable(child) && !instance._skipParse) {
 					continue;
 				}
 
@@ -175,7 +177,7 @@
 		_handleBreak: function(element, listTagsIn, listTagsOut) {
 			var instance = this;
 
-			if (instance._inPRE) {
+			if (instance._skipParse) {
 				listTagsIn.push(NEW_LINE);
 			}
 			else {
@@ -237,7 +239,10 @@
 					instance._endResult.push(NEW_LINE);
 				}
 
-				instance._inPRE = false;
+				instance._skipParse = false;
+			}
+			else if (tagName == TAG_TELETYPETEXT) {
+				instance._skipParse = false;
 			}
 			else if (tagName == 'table') {
 				listTagsOut.push(NEW_LINE);
@@ -285,6 +290,9 @@
 				}
 				else if (tagName == TAG_PRE) {
 					instance._handlePre(element, listTagsIn, listTagsOut);
+				}
+				else if (tagName == TAG_TELETYPETEXT) {
+					instance._handleTT(element, listTagsIn, listTagsOut);
 				}
 				else if ((params = REGEX_HEADER.exec(tagName))) {
 					instance._handleHeader(element, listTagsIn, listTagsOut, params);
@@ -418,7 +426,7 @@
 		_handlePre: function(element, listTagsIn, listTagsOut) {
 			var instance = this;
 
-			instance._inPRE = true;
+			instance._skipParse = true;
 
 			var endResult = instance._endResult;
 
@@ -468,6 +476,22 @@
 			}
 
 			listTagsOut.push(STR_PIPE);
+		},
+
+		_handleTT: function(element, listTagsIn, listTagsOut) {
+			var instance = this;
+
+			instance._skipParse = true;
+
+			var endResult = instance._endResult;
+
+			if (instance._isDataAvailable() && !instance._isLastItemNewLine()) {
+				endResult.push(NEW_LINE);
+			}
+
+			listTagsIn.push('{{{');
+
+			listTagsOut.push('}}}', NEW_LINE);
 		},
 
 		_handleUnorderedList: function(element, listTagsIn, listTagsOut) {
@@ -520,7 +544,7 @@
 
 		_endResult: null,
 
-		_inPRE: false,
+		_skipParse: false,
 
 		_ulLevel: 0
 	};
