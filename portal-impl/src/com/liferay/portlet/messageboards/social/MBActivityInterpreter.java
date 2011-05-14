@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.social;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -68,7 +69,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(
 			activity.getClassPK());
 
-		StringBuilder sb = new StringBuilder(4);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(themeDisplay.getPortalURL());
 		sb.append(themeDisplay.getPathMain());
@@ -106,7 +107,7 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		String body = StringPool.BLANK;
 
 		if (message.getCategoryId() > 0) {
-			sb = new StringBuilder(4);
+			sb.setIndex(0);
 
 			sb.append(themeDisplay.getPortalURL());
 			sb.append(themeDisplay.getPathMain());
