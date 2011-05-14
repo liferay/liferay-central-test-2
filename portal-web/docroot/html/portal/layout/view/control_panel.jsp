@@ -59,7 +59,7 @@ Portlet portlet = null;
 boolean denyAccess = false;
 
 if (Validator.isNotNull(ppid)) {
-	portlet = PortletLocalServiceUtil.getPortletById(ppid);
+	portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
 
 	if ((portlet == null) ||
 		(!portlet.isSystem() && !PortalUtil.isControlPanelPortlet(ppid, category, themeDisplay)) && !PortalUtil.isAllowAddPortletDefaultResource(request, portlet)) {
