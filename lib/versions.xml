@@ -1108,7 +1108,7 @@
 			</license>
 		</licenses>
 		<comments>
-			Re-compiled with JDK 1.5.
+			This was recompiled for compatibility with JDK 5.
 		</comments>
 	</library>
 	<library>
