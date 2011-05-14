@@ -96,9 +96,11 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected String buildIncludePath(String viewPath) {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
-		sb.append("/WEB-INF/jsp/views/");
+		sb.append("/WEB-INF/jsp/");
+		sb.append(portlet.getFriendlyURLMapping());
+		sb.append("/views/");
 		sb.append(controllerPath);
 		sb.append(StringPool.SLASH);
 		sb.append(viewPath);

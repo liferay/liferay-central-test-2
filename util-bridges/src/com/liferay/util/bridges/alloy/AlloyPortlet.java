@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.Router;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -91,6 +92,12 @@ public class AlloyPortlet extends GenericPortlet {
 	}
 
 	protected String getPath(PortletRequest portletRequest) {
+		LiferayPortletConfig liferayPortletConfig =
+			(LiferayPortletConfig)portletRequest.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		Portlet portlet = liferayPortletConfig.getPortlet();
+
 		String controllerPath = ParamUtil.getString(
 			portletRequest, "controller");
 
@@ -101,7 +108,8 @@ public class AlloyPortlet extends GenericPortlet {
 			controllerPath = defaultRouteParameters.get("controller");
 		}
 
-		return "/WEB-INF/jsp/controllers/" + controllerPath + "_controller.jsp";
+		return "/WEB-INF/jsp/" + portlet.getFriendlyURLMapping() +
+			"/controllers/" + controllerPath + "_controller.jsp";
 	}
 
 	protected void include(
