@@ -29,6 +29,10 @@ import org.hibernate.dialect.SQLServerDialect;
  */
 public class SQLServer2008Dialect extends SQLServerDialect {
 
+	public boolean dropTemporaryTableAfterUse() {
+		return _DROP_TEMP_TABLE_AFTER_USE;
+	}
+
 	public String getLimitString(String sql, int offset, int limit) {
 		String sqlLowerCase = sql.toLowerCase();
 
@@ -135,6 +139,8 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 
 		return orderByColumns;
 	}
+
+	private static final boolean _DROP_TEMP_TABLE_AFTER_USE = true;
 
 	private static final boolean _SUPPORTS_LIMIT_OFFSET = true;
 
