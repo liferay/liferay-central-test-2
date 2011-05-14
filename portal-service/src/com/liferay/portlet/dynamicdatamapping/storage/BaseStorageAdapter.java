@@ -298,9 +298,9 @@ public abstract class BaseStorageAdapter implements StorageAdapter {
 				throw new StorageFieldNameException();
 			}
 
-			boolean required = ddmStructure.getFieldRequired(field.getName());
+			if (ddmStructure.getFieldRequired(field.getName()) &&
+				Validator.isNull(field.getValue())) {
 
-			if (required && Validator.isNull(field.getValue())) {
 				throw new StorageFieldRequiredException();
 			}
 		}
