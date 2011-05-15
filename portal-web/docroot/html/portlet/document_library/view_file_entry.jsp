@@ -102,15 +102,9 @@ if (portletDisplay.isWebDAVEnabled()) {
 	webDavUrl = themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav" + group.getFriendlyURL() + "/document_library" + sb.toString();
 }
 
-request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
-
-String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
-
-if (PDFProcessorUtil.hasImages(fileEntry)) {
-	thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
-}
-
 User userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getUserId());
+
+request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
 
 <portlet:actionURL var ="editFileEntry">
@@ -178,6 +172,15 @@ User userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getUserId());
 			<div class="body-row">
 				<div class="document-info">
 					<span class="document-thumbnail">
+
+						<%
+						String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
+
+						if (PDFProcessorUtil.hasImages(fileEntry)) {
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1";
+						}
+						%>
+
 						<img border="no" class="thumbnail" src="<%= thumbnailSrc %>" />
 					</span>
 
@@ -291,7 +294,7 @@ User userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getUserId());
 					</span>
 
 					<%
-					userDisplay =  UserLocalServiceUtil.getUserById(fileEntry.getFileVersion().getUserId());
+					userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getFileVersion().getUserId());
 					%>
 
 					<span class="last-updated">
