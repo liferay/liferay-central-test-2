@@ -60,8 +60,8 @@ AUI().add(
 								points: ['tc', 'tc']
 							},
 							bodyContent: A.one('#' + namespace + 'addBranch').show(),
-							title: Liferay.Language.get('add-backstage'),
 							modal: true,
+							title: Liferay.Language.get('add-backstage'),
 							width: 530
 						}
 					).render();

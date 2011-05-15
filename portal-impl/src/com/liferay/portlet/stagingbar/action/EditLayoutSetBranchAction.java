@@ -24,6 +24,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutSetBranchServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -31,7 +32,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
