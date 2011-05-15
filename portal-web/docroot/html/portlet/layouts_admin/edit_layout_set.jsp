@@ -63,9 +63,9 @@ String[][] categorySections = {mainSections};
 	<div class="header-row-content">
 		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
 
-		<aui:button-row cssClass="edit-toolbar" id='<%= portletResponse.getNamespace() + "layoutSetToolbar" %>'>
+		<aui:button-row cssClass="edit-toolbar" id='<%= liferayPortletResponse.getNamespace() + "layoutSetToolbar" %>'>
 			<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
-				<c:if test="<%= SessionErrors.contains(portletRequest, LayoutImportException.class.getName()) || SessionErrors.contains(portletRequest, LARFileException.class.getName()) || SessionErrors.contains(portletRequest, LARTypeException.class.getName()) %>">
+				<c:if test="<%= SessionErrors.contains(liferayPortletRequest, LayoutImportException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARFileException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARTypeException.class.getName()) %>">
 					<liferay-util:html-top>
 						<div class="yui3-aui-helper-hidden" id="<portlet:namespace />importPage">
 							<liferay-util:include page="/html/portlet/layouts_admin/export_import.jsp">
@@ -239,7 +239,7 @@ String[][] categorySections = {mainSections};
 									<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
 									<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="redirectWindowState" value="<%= portletRequest.getWindowState().toString() %>" />
+									<portlet:param name="redirectWindowState" value="<%= liferayPortletRequest.getWindowState().toString() %>" />
 									<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
 								</portlet:renderURL>
 
@@ -282,7 +282,7 @@ String[][] categorySections = {mainSections};
 	<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set" />
 </portlet:actionURL>
 
-<aui:form action="<%= editLayoutSetURL %>" cssClass="edit-layoutset-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + portletResponse.getNamespace() + "saveLayoutset();" %>'>
+<aui:form action="<%= editLayoutSetURL %>" cssClass="edit-layoutset-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + liferayPortletResponse.getNamespace() + "saveLayoutset();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirectURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />

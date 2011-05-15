@@ -17,15 +17,6 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-PortletResponse portletResponse = null;
-
-if (renderResponse != null) {
-	portletResponse = renderResponse;
-}
-else {
-	portletResponse = resourceResponse;
-}
-
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 %>
 
@@ -35,10 +26,10 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 	<portlet:param name="searchFolderId" value="<%= String.valueOf(folderId) %>" />
 </liferay-portlet:resourceURL>
 
-<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + portletResponse.getNamespace() + "searchFileEntry();" %>'>
+<aui:form action="<%= searchURL.toString() %>" method="get" name="fm1" onSubmit='<%= "event.preventDefault(); " + liferayPortletResponse.getNamespace() + "searchFileEntry();" %>'>
 
 	<%
-	String taglibOnClick = "javascript:event.preventDefault(); " + portletResponse.getNamespace() + "searchFileEntry();";
+	String taglibOnClick = "javascript:event.preventDefault(); " + liferayPortletResponse.getNamespace() + "searchFileEntry();";
 	%>
 
 	<aui:button cssClass="search-button" name="search" onClick="<%= taglibOnClick %>" value="search" />

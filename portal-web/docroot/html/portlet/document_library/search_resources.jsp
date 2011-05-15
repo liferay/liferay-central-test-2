@@ -276,9 +276,9 @@ if (Validator.isNull(displayStyle)) {
 	<aui:script use="aui-io">
 		<portlet:resourceURL var="closeSearch">
 			<portlet:param name="struts_action" value="/document_library/view" />
+			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 			<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 			<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:resourceURL>
 
 		A.one('#<portlet:namespace />closeSearch').on(
