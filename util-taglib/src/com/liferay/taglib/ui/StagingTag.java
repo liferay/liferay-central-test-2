@@ -23,12 +23,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class StagingTag extends IncludeTag {
 
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
 	public void setExtended(boolean extended) {
 		_extended = extended;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public void setLayoutSetBranchId(long layoutSetBranchId) {
@@ -45,17 +45,14 @@ public class StagingTag extends IncludeTag {
 
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-ui:staging:extended",
-			String.valueOf(_extended));
+			"liferay-ui:staging:extended", String.valueOf(_extended));
 		request.setAttribute(
-			"liferay-ui:staging:groupId",
-			String.valueOf(_groupId));
+			"liferay-ui:staging:groupId", String.valueOf(_groupId));
 		request.setAttribute(
 			"liferay-ui:staging:layoutSetBranchId",
 			String.valueOf(_layoutSetBranchId));
 		request.setAttribute(
-			"liferay-ui:staging:selPlid",
-			String.valueOf(_selPlid));
+			"liferay-ui:staging:selPlid", String.valueOf(_selPlid));
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/staging/page.jsp";
