@@ -182,7 +182,6 @@ if (folder != null) {
 
 		documentContainer.delegate('blur', toggleHoverClass, '*');
 	</c:if>
-
 </aui:script>
 
 <span id="<portlet:namespace />displayStyleButtonsContainer">
