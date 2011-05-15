@@ -38,6 +38,9 @@ import javax.servlet.ServletContext;
  */
 public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
+	public static final String SERVICE_BUILDER_PROPERTIES =
+		"SERVICE_BUILDER_PROPERTIES";
+
 	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
 		try {
 			doInvokeDeploy(event);
@@ -163,14 +166,15 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
-		servletContext.setAttribute(HAS_SERVICE_PROPERTIES, Boolean.TRUE);
-
 		Properties serviceBuilderProperties =
 			serviceBuilderPropertiesConfiguration.getProperties();
 
 		if (serviceBuilderProperties.size() == 0) {
 			return;
 		}
+
+		servletContext.setAttribute(
+			SERVICE_BUILDER_PROPERTIES, serviceBuilderProperties);
 
 		String buildNamespace = GetterUtil.getString(
 			serviceBuilderProperties.getProperty("build.namespace"));
@@ -196,9 +200,6 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			servletContext, classLoader, buildNamespace, buildNumber,
 			buildDate, buildAutoUpgrade);
 	}
-
-	protected static final String HAS_SERVICE_PROPERTIES =
-		"HAS_SERVICE_PROPERTIES";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PluginPackageHotDeployListener.class);
