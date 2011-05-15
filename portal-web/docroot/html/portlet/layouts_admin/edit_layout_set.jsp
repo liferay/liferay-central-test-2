@@ -92,7 +92,7 @@ String[][] categorySections = {mainSections};
 				</c:if>
 			</c:if>
 
-			<liferay-ui:staging selPlid="<%= selPlid %>" groupId="<%= groupId %>" />
+			<liferay-ui:staging groupId="<%= groupId %>" selPlid="<%= selPlid %>" />
 		</aui:button-row>
 	</div>
 </div>

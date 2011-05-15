@@ -50,7 +50,7 @@ String[][] categorySections = {mainSections};
 		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
 
 		<aui:button-row cssClass="edit-toolbar" id='<%= portletResponse.getNamespace() + "layoutToolbar" %>'>
-			<liferay-ui:staging selPlid="<%= selPlid %>" groupId="<%= groupId %>" />
+			<liferay-ui:staging groupId="<%= groupId %>" selPlid="<%= selPlid %>" />
 		</aui:button-row>
 	</div>
 </div>
