@@ -22,7 +22,7 @@
 	}
 
 	.manage-backstages {
-    	margin-left: 1em;
+		margin-left: 1em;
 	}
 
 	.staging-icon-menu-container {
