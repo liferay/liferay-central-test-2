@@ -53,6 +53,54 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil
 	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
 
+	public static void copyLayoutPrototypePermissions(
+			HttpServletRequest request, Layout targetLayout,
+			LayoutPrototype sourceLayoutPrototype)
+		throws Exception {
+
+		List<Role> roles = RoleLocalServiceUtil.getRoles(
+			targetLayout.getCompanyId());
+
+		for (Role role : roles) {
+			String roleName = role.getName();
+
+			if (roleName.equals(RoleConstants.ADMINISTRATOR)) {
+				continue;
+			}
+
+			List<String> actionIds = ResourceActionsUtil.getResourceActions(
+				LayoutPrototype.class.getName());
+
+			List<String> actions =
+				ResourcePermissionLocalServiceUtil.
+					getAvailableResourcePermissionActionIds(
+						targetLayout.getCompanyId(),
+						LayoutPrototype.class.getName(),
+						ResourceConstants.SCOPE_INDIVIDUAL,
+						String.valueOf(
+							sourceLayoutPrototype.getLayoutPrototypeId()),
+						role.getRoleId(), actionIds);
+
+			ResourcePermissionLocalServiceUtil.setResourcePermissions(
+				targetLayout.getCompanyId(), Layout.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(targetLayout.getPlid()), role.getRoleId(),
+				actions.toArray(new String[actions.size()]));
+		}
+	}
+
+	public static void copyLayoutPrototypePermissions(
+			PortletRequest portletRequest, Layout targetLayout,
+			LayoutPrototype sourceLayoutPrototype)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		copyLayoutPrototypePermissions(
+			request, targetLayout, sourceLayoutPrototype);
+	}
+
 	public static void copyLookAndFeel(
 			Layout targetLayout, Layout sourceLayout)
 		throws Exception {
@@ -66,59 +114,6 @@ public class ActionUtil
 			targetLayout.getGroupId(), targetLayout.isPrivateLayout(),
 			targetLayout.getLayoutId(),	sourceLayout.getWapThemeId(),
 			sourceLayout.getWapColorSchemeId(),	sourceLayout.getCss(), true);
-	}
-
-	public static void copyPrototypePermissions(
-			HttpServletRequest request, Layout targetLayout,
-			LayoutPrototype sourceLayoutPrototype)
-		throws Exception {
-
-		long companyId = targetLayout.getCompanyId();
-
-		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
-
-		String sourceResourceName = LayoutPrototype.class.getName();
-
-		String sourceResourcePrimKey =
-			String.valueOf(sourceLayoutPrototype.getLayoutPrototypeId());
-
-		String targetResourceName = Layout.class.getName();
-
-		String targetResourcePrimKey = String.valueOf(targetLayout.getPlid());
-
-		List<String> actionIds =
-			ResourceActionsUtil.getResourceActions(sourceResourceName);
-
-		for (Role role : roles) {
-			String roleName = role.getName();
-
-			if (roleName.equals(RoleConstants.ADMINISTRATOR)) {
-				continue;
-			}
-
-			List<String> actions =
-				ResourcePermissionLocalServiceUtil.
-					getAvailableResourcePermissionActionIds(
-						companyId, sourceResourceName,
-						ResourceConstants.SCOPE_INDIVIDUAL,
-						sourceResourcePrimKey, role.getRoleId(), actionIds);
-
-			ResourcePermissionLocalServiceUtil.setResourcePermissions(
-				companyId, targetResourceName,
-				ResourceConstants.SCOPE_INDIVIDUAL, targetResourcePrimKey,
-				role.getRoleId(), actions.toArray(new String[actions.size()]));
-		}
-	}
-
-	public static void copyPrototypePermissions(
-			PortletRequest portletRequest, Layout targetLayout,
-			LayoutPrototype sourceLayoutPrototype)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		copyPrototypePermissions(request, targetLayout, sourceLayoutPrototype);
 	}
 
 	public static void copyPortletPermissions(

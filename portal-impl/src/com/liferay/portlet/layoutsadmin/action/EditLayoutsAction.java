@@ -644,7 +644,7 @@ public class EditLayoutsAction extends PortletAction {
 					layout.getLayoutId(),
 					layoutPrototypeLayout.getTypeSettings());
 
-				ActionUtil.copyPrototypePermissions(
+				ActionUtil.copyLayoutPrototypePermissions(
 					actionRequest, layout, layoutPrototype);
 
 				ActionUtil.copyPortletPermissions(
