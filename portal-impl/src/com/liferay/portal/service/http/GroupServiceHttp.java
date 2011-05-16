@@ -272,7 +272,7 @@ public class GroupServiceHttp {
 
 	public static java.util.List<com.liferay.portal.model.Group> getManageableSites(
 		HttpPrincipal httpPrincipal,
-		java.util.List<com.liferay.portal.model.Portlet> portlets, int max)
+		java.util.Collection<com.liferay.portal.model.Portlet> portlets, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -752,7 +752,7 @@ public class GroupServiceHttp {
 			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getManageableSitesParameterTypes6 = new Class[] {
-			java.util.List.class, int.class
+			java.util.Collection.class, int.class
 		};
 	private static final Class<?>[] _getOrganizationsGroupsParameterTypes7 = new Class[] {
 			java.util.List.class

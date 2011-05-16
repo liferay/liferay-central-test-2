@@ -74,7 +74,7 @@ public class GroupServiceWrapper implements GroupService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Group> getManageableSites(
-		java.util.List<com.liferay.portal.model.Portlet> portlets, int max)
+		java.util.Collection<com.liferay.portal.model.Portlet> portlets, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupService.getManageableSites(portlets, max);
