@@ -334,7 +334,7 @@
 		.document-info {
 			background-color: #CCECF9;
 			min-height: 100px;
-			padding-top: .5em;
+			padding-top: 0.5em;
 
 			.document-description {
 				display: block;
@@ -380,12 +380,7 @@
 		.lfr-asset-summary {
 			margin-left: 5px;
 
-			.download-document {
-				display: block;
-				margin: 0.7em 0;
-			}
-
-			.last-updated {
+			.download-document, .last-updated, .webdav-url {
 				display: block;
 				margin: 0.7em 0;
 			}
@@ -394,11 +389,6 @@
 				display: block;
 				font-size: 1.4em;
 				font-weight: bold;
-			}
-
-			.webdav-url {
-				display: block;
-				margin: 0.7em 0;
 			}
 		}
 

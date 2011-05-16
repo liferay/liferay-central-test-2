@@ -154,8 +154,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 						var content = A.Node.create(responseData);
 
-						A.one('#<portlet:namespace />displayStyleToolbar').empty();
-
 						var displayStyleButtonsContainer = A.one('#<portlet:namespace />displayStyleButtonsContainer');
 						var displayStyleButtons = content.one('#<portlet:namespace />displayStyleButtons');
 
