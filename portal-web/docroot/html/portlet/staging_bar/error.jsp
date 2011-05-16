@@ -21,4 +21,4 @@
 	title="error"
 />
 
-<liferay-ui:error exception="<%= LayoutSetBranchNameException.class %>" message="a-branch-with-that-name-already-exists" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

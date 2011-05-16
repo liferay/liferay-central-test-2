@@ -20,7 +20,13 @@
 List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);
 
 LayoutSetBranch layoutSetBranch = LayoutSetBranchLocalServiceUtil.getUserLayoutSetBranch(themeDisplay.getUserId(), stagingGroup.getGroupId(), privateLayout, 0);
+
+String taglibMessage = LanguageUtil.format(pageContext, "please-enter-a-value-between-x-and-x-characters-long", new Object[]{4,100});
 %>
+
+<liferay-ui:error key="<%= LayoutSetBranchNameException.class.getName() + LayoutSetBranchNameException.DUPLICATE %>" message="a-branch-with-that-name-already-exists" />
+<liferay-ui:error key="<%= LayoutSetBranchNameException.class.getName() + LayoutSetBranchNameException.TOO_LONG %>" message="<%= taglibMessage %>" />
+<liferay-ui:error key="<%= LayoutSetBranchNameException.class.getName() + LayoutSetBranchNameException.TOO_SHORT %>" message="<%= taglibMessage %>" />
 
 <liferay-util:html-top>
 	<liferay-util:include page="/html/portlet/staging_bar/add_layout_set_branch.jsp" />
