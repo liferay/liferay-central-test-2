@@ -1650,15 +1650,9 @@ AUI().add(
 
 				var form = instance.getPrincipalForm();
 
-				var updateStructureDefaultValues = false;
-
 				var classNameId = instance.getByName(form, 'classNameId');
 
-				if (classNameId && classNameId.val() > 0) {
-					updateStructureDefaultValues = true;
-				}
-
-				return updateStructureDefaultValues;
+				return (classNameId && classNameId.val() > 0);
 			},
 
 			updateTextAreaVisibility: function(visibility) {
