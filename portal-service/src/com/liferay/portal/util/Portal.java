@@ -419,11 +419,11 @@ public interface Portal {
 			long scopeGroupId, String ppid, Map<String, String[]> params)
 		throws PortalException, SystemException;
 
-	public List<Portlet> getControlPanelPortlets(
-			String category, ThemeDisplay themeDisplay)
+	public Set<Portlet> getControlPanelPortlets(long companyId, String category)
 		throws SystemException;
 
-	public Set<Portlet> getControlPanelPortlets(long companyId, String category)
+	public List<Portlet> getControlPanelPortlets(
+			String category, ThemeDisplay themeDisplay)
 		throws SystemException;
 
 	public String getCurrentCompleteURL(HttpServletRequest request);

@@ -1123,16 +1123,6 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public List<Portlet> getControlPanelPortlets(
-			String category, ThemeDisplay themeDisplay)
-		throws SystemException {
-
-		Set<Portlet> portletsSet = getControlPanelPortlets(
-			themeDisplay.getCompanyId(), category);
-
-		return filterControlPanelPortlets(portletsSet, category, themeDisplay);
-	}
-
 	public Set<Portlet> getControlPanelPortlets(long companyId, String category)
 		throws SystemException {
 
@@ -1149,6 +1139,16 @@ public class PortalImpl implements Portal {
 		}
 
 		return portletsSet;
+	}
+
+	public List<Portlet> getControlPanelPortlets(
+			String category, ThemeDisplay themeDisplay)
+		throws SystemException {
+
+		Set<Portlet> portlets = getControlPanelPortlets(
+			themeDisplay.getCompanyId(), category);
+
+		return filterControlPanelPortlets(portlets, category, themeDisplay);
 	}
 
 	public String getCurrentCompleteURL(HttpServletRequest request) {

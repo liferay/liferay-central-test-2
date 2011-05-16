@@ -314,19 +314,19 @@ public class PortalUtil {
 		return getPortal().getControlPanelFullURL(scopeGroupId, ppid, params);
 	}
 
+	public static Set<Portlet> getControlPanelPortlets(
+			long companyId, String category)
+		throws SystemException {
+
+		return getPortal().getControlPanelPortlets(companyId, category);
+	}
+
 	public static List<Portlet> getControlPanelPortlets(
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException {
 
 		return getPortal().getControlPanelPortlets(
 			category, themeDisplay);
-	}
-
-	public static Set<Portlet> getControlPanelPortlets(
-			long companyId, String category)
-		throws SystemException {
-
-		return getPortal().getControlPanelPortlets(companyId, category);
 	}
 
 	public static String getCurrentCompleteURL(HttpServletRequest request) {
