@@ -142,6 +142,7 @@ if (documentType != null) {
 			var A = AUI();
 
 			A.one('#<portlet:namespace />ddmStructureId' + structureIndex).val(ddmStructureId);
+
 			A.one('#<portlet:namespace />ddmStructureNameDisplay' + structureIndex).html(ddmStructureName)
 
 			if (dialog) {
