@@ -30,6 +30,13 @@ else {
 
 JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOURNAL_STRUCTURE);
 
+long classNameId = PortalUtil.getClassNameId(JournalStructure.class.getName());
+long classPK = 0;
+
+if (structure != null) {
+	classPK = structure.getId();
+}
+
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
 
 Group group = GroupLocalServiceUtil.getGroup(groupId);
@@ -80,6 +87,16 @@ int tabIndex = 1;
 <portlet:actionURL var="editStructureURL">
 	<portlet:param name="struts_action" value="/journal/edit_structure" />
 </portlet:actionURL>
+
+<liferay-portlet:renderURL var="editStructureDefaultValuesURL">
+	<portlet:param name="struts_action" value="/journal/edit_article" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
+	<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
+	<portlet:param name="backURL" value="<%= currentURL %>" />
+	<portlet:param name="structureId" value="<%= structureId %>" />
+</liferay-portlet:renderURL>
 
 <aui:form action="<%= editStructureURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<input name="scroll" type="hidden" value="" />
@@ -222,7 +239,9 @@ int tabIndex = 1;
 	<aui:button-row>
 		<aui:button type="submit" />
 
-		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' value="save-and-continue" />
+		<aui:button disabled="<%= structure == null%>" onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' value="save-and-continue" />
+
+		<aui:button disabled="<%= structure == null%>" onClick='<%= renderResponse.getNamespace() + "saveAndEditDefaultValues();" %>' value="save-and-edit-default-values" />
 
 		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
@@ -397,6 +416,11 @@ int tabIndex = 1;
 
 	function <portlet:namespace />saveAndContinueStructure() {
 		document.<portlet:namespace />fm1.<portlet:namespace />saveAndContinue.value = "1";
+		<portlet:namespace />saveStructure();
+	}
+
+	function <portlet:namespace />saveAndEditDefaultValues() {
+		document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<%= editStructureDefaultValuesURL %>";
 		<portlet:namespace />saveStructure();
 	}
 

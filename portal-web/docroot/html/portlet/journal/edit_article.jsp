@@ -55,6 +55,9 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 
+long classNameId = BeanParamUtil.getLong(article, request, "classNameId");
+long classPK = BeanParamUtil.getLong(article, request, "classPK");
+
 String articleId = BeanParamUtil.getString(article, request, "articleId");
 
 double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleConstants.DEFAULT_VERSION);
@@ -152,8 +155,10 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="classNameId" type="hidden" value="<%= classNameId %>" />
+	<aui:input name="classPK" type="hidden" value="<%= classPK %>" />
 	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
-	<aui:input name="version" type="hidden" value="<%= (article == null) ? version : article.getVersion() %>" />
+	<aui:input name="version" type="hidden" value="<%= ((article == null) || article.isNew()) ? version : article.getVersion() %>" />
 	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 	<aui:input id="articleContent" name="content" type="hidden" />
 	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
@@ -181,8 +186,9 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 							<c:if test="<%= article.isSmallImage() %>">
 								<img alt="" class="article-image" src="<%= HtmlUtil.escape(_getArticleImage(themeDisplay, article)) %>" width="150" />
 							</c:if>
-
-							<span class="article-name"><%= HtmlUtil.escape(article.getTitle(locale)) %></span>
+							<c:if test="<%= !article.isNew() %>">
+								<span class="article-name"><%= HtmlUtil.escape(article.getTitle(locale)) %></span>
+							</c:if>
 						</div>
 					</div>
 				</c:if>
@@ -235,12 +241,18 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 					if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, JournalArticle.class.getName())) {
 						publishButtonLabel = "submit-for-publication";
 					}
+
+					if (classNameId > 0) {
+						publishButtonLabel = "save";
+					}
 					%>
 
 					<c:choose>
 						<c:when test="<%= Validator.isNull(toLanguageId) %>">
 							<c:if test="<%= hasSavePermission %>">
-								<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
+								<c:if test="<%= (classNameId == 0) %>">
+									<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
+								</c:if>
 
 								<aui:button disabled="<%= pending %>" name="publishButton" value="<%= publishButtonLabel %>" />
 							</c:if>

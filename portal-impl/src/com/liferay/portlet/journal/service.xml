@@ -109,6 +109,11 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
+		<finder name="G_C_S" return-type="JournalArticle">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+			<finder-column name="structureId" />
+		</finder>
 		<finder name="G_C_L" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />

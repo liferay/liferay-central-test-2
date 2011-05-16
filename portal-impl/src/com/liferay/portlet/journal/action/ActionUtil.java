@@ -40,13 +40,37 @@ public class ActionUtil {
 
 	public static void getArticle(HttpServletRequest request) throws Exception {
 		long groupId = ParamUtil.getLong(request, "groupId");
+		long classNameId = ParamUtil.getLong(request, "classNameId");
+		long classPK = ParamUtil.getLong(request, "classPK");
 		String articleId = ParamUtil.getString(request, "articleId");
+		String structureId = ParamUtil.getString(request, "structureId");
 
 		JournalArticle article = null;
 
 		if (Validator.isNotNull(articleId)) {
 			article = JournalArticleServiceUtil.getLatestArticle(
 				groupId, articleId, WorkflowConstants.STATUS_ANY);
+		}
+		else if ((classNameId > 0) && (classPK > 0)) {
+			String className = PortalUtil.getClassName(classNameId);
+
+			article = JournalArticleServiceUtil.getArticle(
+				groupId, className, classPK);
+		}
+		else if (Validator.isNotNull(structureId)) {
+			JournalStructure structure =
+				JournalStructureServiceUtil.getStructure(groupId, structureId);
+
+			article = JournalArticleServiceUtil.getArticle(
+				groupId, JournalStructure.class.getName(), structure.getId());
+
+			article.setNew(true);
+
+			article.setId(0);
+			article.setClassNameId(0);
+			article.setClassPK(0);
+			article.setArticleId(null);
+			article.setVersion(0);
 		}
 
 		request.setAttribute(WebKeys.JOURNAL_ARTICLE, article);

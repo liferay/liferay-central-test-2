@@ -1282,7 +1282,7 @@ AUI().add(
 					}
 				}
 				else {
-					var defaultLocale  = instance.getDefaultLocale();
+					var defaultLocale = instance.getDefaultLocale();
 					var typeInput = instance.getByName(form, 'type');
 					var versionInput = instance.getByName(form, 'version');
 					var structureIdInput = instance.getByName(form, 'structureId');
@@ -1405,7 +1405,7 @@ AUI().add(
 						instance.openSaveStructureDialog();
 					}
 				}
-				else if (instance.hasStructure() && !instance.hasTemplate()) {
+				else if (instance.hasStructure() && !instance.hasTemplate() && !instance.updateStructureDefaultValues()) {
 					var templateMessage = Liferay.Language.get('please-add-a-template-to-render-this-structure');
 
 					alert(templateMessage);
@@ -1641,6 +1641,22 @@ AUI().add(
 						}
 					}
 				);
+			},
+
+			updateStructureDefaultValues: function() {
+				var instance = this;
+
+				var form = instance.getPrincipalForm();
+
+				var updateStructureDefaultValues = false;
+
+				var classNameId = instance.getByName(form, 'classNameId');
+
+				if (classNameId && classNameId.val() > 0) {
+					updateStructureDefaultValues = true;
+				}
+
+				return updateStructureDefaultValues;
 			},
 
 			updateTextAreaVisibility: function(visibility) {

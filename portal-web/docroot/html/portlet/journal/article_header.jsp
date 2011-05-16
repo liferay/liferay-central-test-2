@@ -37,9 +37,20 @@ String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 if ((article != null) && Validator.isNotNull(toLanguageId)) {
 	redirect = null;
 }
+
+long classNameId = BeanParamUtil.getLong(article, request, "classNameId");
+
+String title = "new-web-content";
+
+if (classNameId > 0) {
+	title = "structure-default-values";
+}
+else if (article != null) {
+	title = article.getTitle(locale);
+}
 %>
 
 <liferay-ui:header
 	backURL="<%= article != null ? redirect : backURL %>"
-	title='<%= article != null ? article.getTitle(locale) : "new-web-content" %>'
+	title='<%= title %>'
 />

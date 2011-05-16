@@ -232,11 +232,7 @@ public class EditArticleAction extends PortletAction {
 		throws Exception {
 
 		try {
-			String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
-
-			if (!cmd.equals(Constants.ADD)) {
-				ActionUtil.getArticle(renderRequest);
-			}
+			ActionUtil.getArticle(renderRequest);
 		}
 		catch (NoSuchArticleException nsse) {
 
@@ -464,6 +460,14 @@ public class EditArticleAction extends PortletAction {
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
+		long classNameId = ParamUtil.getLong(uploadRequest, "classNameId");
+		long classPK = ParamUtil.getLong(uploadRequest, "classPK");
+
+		String className = StringPool.BLANK;
+
+		if (classNameId > 0) {
+			className = PortalUtil.getClassName(classNameId);
+		}
 
 		String articleId = ParamUtil.getString(uploadRequest, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(
@@ -598,7 +602,7 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				groupId, null, 0, articleId, autoArticleId, titleMap,
+				groupId, className, classPK, articleId, autoArticleId, titleMap,
 				descriptionMap, content, type, structureId, templateId,
 				layoutUuid, displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,

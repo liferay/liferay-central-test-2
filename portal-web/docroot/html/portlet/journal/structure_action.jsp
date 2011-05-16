@@ -37,6 +37,24 @@ JournalStructure structure = (JournalStructure)row.getObject();
 		/>
 	</c:if>
 
+	<c:if test="<%= JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.UPDATE) %>">
+		<liferay-portlet:renderURL var="editStructureDefaultValuesURL">
+			<portlet:param name="struts_action" value="/journal/edit_article" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
+			<portlet:param name="classNameId" value="<%= String.valueOf(PortalUtil.getClassNameId(JournalStructure.class.getName())) %>" />
+			<portlet:param name="classPK" value="<%= String.valueOf(structure.getId()) %>" />
+			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
+		</liferay-portlet:renderURL>
+
+		<liferay-ui:icon
+			image="edit"
+			url="<%= editStructureDefaultValuesURL %>"
+			message="edit-default-values"
+		/>
+	</c:if>
+
 	<c:if test="<%= JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= JournalStructure.class.getName() %>"
@@ -71,6 +89,8 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" />
+			<portlet:param name="classNameId" value="<%= String.valueOf(PortalUtil.getClassNameId(JournalStructure.class.getName())) %>" />
+			<portlet:param name="classPK" value="<%= String.valueOf(structure.getId()) %>" />
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 		</portlet:renderURL>
 

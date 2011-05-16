@@ -30,18 +30,22 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.journal.DuplicateStructureElementException;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
 import com.liferay.portlet.journal.StructureIdException;
 import com.liferay.portlet.journal.StructureInheritanceException;
 import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.comparator.StructurePKComparator;
 
@@ -252,8 +256,8 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructure(JournalStructure structure)
 		throws PortalException, SystemException {
 
-		if (journalArticlePersistence.countByG_S(
-				structure.getGroupId(), structure.getStructureId()) > 0) {
+		if (journalArticlePersistence.countByG_C_S(
+				structure.getGroupId(), 0, structure.getStructureId()) > 0) {
 
 			throw new RequiredStructureException();
 		}
@@ -268,6 +272,21 @@ public class JournalStructureLocalServiceImpl
 				structure.getGroupId(), structure.getStructureId()) > 0) {
 
 			throw new RequiredStructureException();
+		}
+
+		// Structure Default Values
+
+		try {
+			long classNameId = PortalUtil.getClassNameId(
+				JournalStructure.class.getName());
+
+			JournalArticle article = journalArticlePersistence.findByG_C_C(
+				structure.getGroupId(), classNameId, structure.getId());
+
+			JournalArticleLocalServiceUtil.deleteJournalArticle(
+				article.getId());
+		}
+		catch (NoSuchArticleException nsae) {
 		}
 
 		// WebDAVProps

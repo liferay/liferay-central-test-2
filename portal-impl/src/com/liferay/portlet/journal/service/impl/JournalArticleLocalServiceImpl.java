@@ -185,9 +185,9 @@ public class JournalArticleLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			user.getCompanyId(), groupId, articleId, autoArticleId, version,
-			titleMap, content, type, structureId, templateId,smallImage,
-			smallImageURL, smallFile, smallBytes);
+			user.getCompanyId(), groupId, classNameId, articleId, autoArticleId,
+			version, titleMap, content, type, structureId, templateId,
+			smallImage, smallImageURL, smallFile, smallBytes);
 
 		if (autoArticleId) {
 			articleId = String.valueOf(counterLocalService.increment());
@@ -306,10 +306,17 @@ public class JournalArticleLocalServiceImpl
 
 		// Workflow
 
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			user.getCompanyId(), groupId, userId,
-			JournalArticle.class.getName(), article.getResourcePrimKey(),
-			article, serviceContext);
+		if (classNameId == 0) {
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(
+				user.getCompanyId(), groupId, userId,
+				JournalArticle.class.getName(), article.getResourcePrimKey(),
+				article, serviceContext);
+		}
+		else {
+			updateStatus(
+				userId, article, WorkflowConstants.STATUS_APPROVED, null,
+				serviceContext);
+		}
 
 		return article;
 	}
@@ -1823,8 +1830,9 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			user.getCompanyId(), groupId, titleMap, content, type, structureId,
-			templateId, smallImage, smallImageURL, smallFile, smallBytes);
+			user.getCompanyId(), groupId, -1, titleMap, content, type,
+			structureId, templateId, smallImage, smallImageURL, smallFile,
+			smallBytes);
 
 		JournalArticle oldArticle = null;
 		double oldVersion = 0;
@@ -1877,6 +1885,8 @@ public class JournalArticleLocalServiceImpl
 			article.setUserId(user.getUserId());
 			article.setUserName(user.getFullName());
 			article.setCreateDate(serviceContext.getModifiedDate(now));
+			article.setClassNameId(oldArticle.getClassNameId());
+			article.setClassPK(oldArticle.getClassPK());
 			article.setArticleId(articleId);
 			article.setVersion(newVersion);
 			article.setSmallImageId(oldArticle.getSmallImageId());
@@ -2009,6 +2019,10 @@ public class JournalArticleLocalServiceImpl
 
 		boolean visible = article.isApproved();
 
+		if (article.getClassNameId() > 0) {
+			visible = false;
+		}
+
 		boolean addDraftAssetEntry = false;
 
 		if (!article.isApproved() &&
@@ -2125,14 +2139,21 @@ public class JournalArticleLocalServiceImpl
 							draftAssetEntry.getCategoryIds();
 						String[] assetTagNames = draftAssetEntry.getTagNames();
 
+						boolean visible = true;
+
+						if (article.getClassNameId() > 0) {
+							visible = false;
+						}
+
 						assetEntryLocalService.updateEntry(
 							userId, article.getGroupId(),
 							JournalArticle.class.getName(),
 							article.getResourcePrimKey(), article.getUuid(),
-							assetCategoryIds, assetTagNames, true, null, null,
-							displayDate, expirationDate, ContentTypes.TEXT_HTML,
-							article.getTitle(), article.getDescription(), null,
-							null, article.getLayoutUuid(), 0, 0, null, false);
+							assetCategoryIds, assetTagNames, visible, null,
+							null, displayDate, expirationDate,
+							ContentTypes.TEXT_HTML, article.getTitle(),
+							article.getDescription(), null, null,
+							article.getLayoutUuid(), 0, 0, null, false);
 
 						assetEntryLocalService.deleteEntry(
 							JournalArticle.class.getName(),
@@ -2142,9 +2163,11 @@ public class JournalArticleLocalServiceImpl
 					}
 				}
 
-				assetEntryLocalService.updateVisible(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey(), true);
+				if (article.getClassNameId() == 0) {
+					assetEntryLocalService.updateVisible(
+						JournalArticle.class.getName(),
+						article.getResourcePrimKey(), true);
+				}
 
 				// Expando
 
@@ -2164,46 +2187,49 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		// Social
+		if (article.getClassNameId() == 0) {
+			// Social
 
-		if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
+			if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
+				(status == WorkflowConstants.STATUS_APPROVED)) {
 
-			socialEquityLogLocalService.addEquityLogs(
-				userId, JournalArticle.class.getName(),
-				article.getResourcePrimKey(), ActionKeys.ADD_ARTICLE,
-				StringPool.BLANK);
+				socialEquityLogLocalService.addEquityLogs(
+					userId, JournalArticle.class.getName(),
+					article.getResourcePrimKey(), ActionKeys.ADD_ARTICLE,
+					StringPool.BLANK);
+			}
+
+			// Email
+
+			if ((oldStatus == WorkflowConstants.STATUS_PENDING) &&
+				((status == WorkflowConstants.STATUS_APPROVED) ||
+				 (status == WorkflowConstants.STATUS_DENIED))) {
+
+				String msg = "granted";
+
+				if (status == WorkflowConstants.STATUS_DENIED) {
+					msg = "denied";
+				}
+
+				try {
+					PortletPreferences preferences =
+						ServiceContextUtil.getPortletPreferences(
+							serviceContext);
+
+					sendEmail(article, articleURL, preferences, msg);
+				}
+				catch (Exception e) {
+					_log.error(
+						"Unable to send email to notify the change of status " +
+							" to " + msg + " for article " + article.getId() +
+								": " + e.getMessage());
+				}
+			}
+
+			// Subscriptions
+
+			notifySubscribers(article, serviceContext);
 		}
-
-		// Email
-
-		if ((oldStatus == WorkflowConstants.STATUS_PENDING) &&
-			((status == WorkflowConstants.STATUS_APPROVED) ||
-			 (status == WorkflowConstants.STATUS_DENIED))) {
-
-			String msg = "granted";
-
-			if (status == WorkflowConstants.STATUS_DENIED) {
-				msg = "denied";
-			}
-
-			try {
-				PortletPreferences preferences =
-					ServiceContextUtil.getPortletPreferences(serviceContext);
-
-				sendEmail(article, articleURL, preferences, msg);
-			}
-			catch (Exception e) {
-				_log.error(
-					"Unable to send email to notify the change of status " +
-						" to " + msg + " for article " + article.getId() +
-							": " + e.getMessage());
-			}
-		}
-
-		// Subscriptions
-
-		notifySubscribers(article, serviceContext);
 
 		return article;
 	}
@@ -2979,10 +3005,10 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long groupId, Map<Locale, String> titleMap,
-			String content, String type, String structureId, String templateId,
-			boolean smallImage, String smallImageURL, File smallFile,
-			byte[] smallBytes)
+			long companyId, long groupId, long classNameId,
+			Map<Locale, String> titleMap, String content, String type,
+			String structureId, String templateId, boolean smallImage,
+			String smallImageURL, File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
 		Locale defaultLocale = LocaleUtil.fromLanguageId(
@@ -3013,16 +3039,21 @@ public class JournalArticleLocalServiceImpl
 
 			JournalTemplate template = null;
 
-			try {
-				template = journalTemplatePersistence.findByG_T(
-					groupId, templateId);
-			}
-			catch (NoSuchTemplateException nste) {
-				template = journalTemplatePersistence.findByG_T(
-					companyGroup.getGroupId(), templateId);
-			}
+			if (Validator.isNotNull(templateId)) {
+				try {
+					template = journalTemplatePersistence.findByG_T(
+						groupId, templateId);
+				}
+				catch (NoSuchTemplateException nste) {
+					template = journalTemplatePersistence.findByG_T(
+						companyGroup.getGroupId(), templateId);
+				}
 
-			if (!template.getStructureId().equals(structureId)) {
+				if (!template.getStructureId().equals(structureId)) {
+					throw new NoSuchTemplateException();
+				}
+			}
+			else if (classNameId == 0) {
 				throw new NoSuchTemplateException();
 			}
 		}
@@ -3066,7 +3097,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long groupId, String articleId,
+			long companyId, long groupId, long classNameId, String articleId,
 			boolean autoArticleId, double version, Map<Locale, String> titleMap,
 			String content, String type, String structureId, String templateId,
 			boolean smallImage, String smallImageURL, File smallFile,
@@ -3085,8 +3116,9 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			companyId, groupId, titleMap, content, type, structureId,templateId,
-			smallImage, smallImageURL, smallFile, smallBytes);
+			companyId, groupId, classNameId, titleMap, content, type,
+			structureId,templateId, smallImage, smallImageURL, smallFile,
+			smallBytes);
 	}
 
 	protected void validate(String articleId) throws PortalException {

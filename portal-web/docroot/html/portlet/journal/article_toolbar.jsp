@@ -19,6 +19,8 @@
 <%
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
+long classNameId = BeanParamUtil.getLong(article, request, "classNameId");
+
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
 String deleteButtonLabel = "delete-this-version";
@@ -38,7 +40,7 @@ if ((article != null) && article.isDraft()) {
 			activeState: false,
 			boundingBox: '#<portlet:namespace />articleToobar',
 			children: [
-				<c:if test="<%= Validator.isNotNull(structureId) %>">
+				<c:if test="<%= Validator.isNotNull(structureId) && (classNameId == 0) %>">
 					{
 						icon: 'search',
 						id: '<portlet:namespace />previewArticleButton',

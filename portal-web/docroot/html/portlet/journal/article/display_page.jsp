@@ -25,7 +25,7 @@ String layoutUuid = BeanParamUtil.getString(article, request, "layoutUuid");
 
 boolean preselectCurrentLayout = false;
 
-if (article == null) {
+if ((article == null) || article.isNew()) {
 	UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
 
 	long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);

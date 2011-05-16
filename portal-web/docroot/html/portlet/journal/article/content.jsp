@@ -23,6 +23,9 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 
+String classNameId = ParamUtil.getString(request, "classNameId");
+String classPK = ParamUtil.getString(request, "classPK");
+
 String articleId = BeanParamUtil.getString(article, request, "articleId");
 String newArticleId = ParamUtil.getString(request, "newArticleId");
 String instanceIdKey = PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3;
@@ -167,6 +170,8 @@ if (Validator.isNotNull(content)) {
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<portlet:param name="structureId" value="<%= structureId %>" />
 	<portlet:param name="templateId" value="<%= templateId %>" />
+	<portlet:param name="classNameId" value="<%= classNameId %>" />
+	<portlet:param name="classPK" value="<%= classPK %>" />
 </portlet:renderURL>
 
 <table class="lfr-table" id="<portlet:namespace />journalArticleWrapper" width="100%">
@@ -181,7 +186,7 @@ if (Validator.isNotNull(content)) {
 		<table class="lfr-table journal-article-header-edit" id="<portlet:namespace />articleHeaderEdit">
 		<tr>
 			<td>
-				<c:if test="<%= article == null %>">
+				<c:if test="<%= (article == null) || article.isNew() %>">
 					<c:choose>
 						<c:when test="<%= PropsValues.JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID %>">
 							<aui:input name="newArticleId" type="hidden" />
@@ -221,28 +226,30 @@ if (Validator.isNotNull(content)) {
 										<%= HtmlUtil.escape(structureName) %>
 									</span>
 
-									<liferay-ui:icon id="editStructureLink" image="edit" url="javascript:;" />
+									<c:if test="<%= Validator.isNull(classNameId) %>">
+										<liferay-ui:icon id="editStructureLink" image="edit" url="javascript:;" />
 
-									<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeStructureURL">
-										<portlet:param name="struts_action" value="/journal/select_structure" />
-										<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
-									</portlet:renderURL>
+										<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeStructureURL">
+											<portlet:param name="struts_action" value="/journal/select_structure" />
+											<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
+										</portlet:renderURL>
 
-									<span class="structure-links">
-										<liferay-ui:icon id="changeStructureButton" image="configuration" message="change" url="<%= changeStructureURL %>" />
-									</span>
-
-									<c:if test="<%= Validator.isNotNull(structureId) %>">
-										<span class="default-link">(<a href="javascript:;" id="<portlet:namespace />loadDefaultStructure"><liferay-ui:message key="use-default" /></a>)</span>
-									</c:if>
-
-									<span class="structure-controls">
-										<span class="structure-buttons">
-											<aui:button cssClass="save-structure-button yui3-aui-helper-hidden" name="saveStructureButton" value="save" />
-
-											<aui:button cssClass="edit-structure-button yui3-aui-helper-hidden" name="editStructureButton" value="stop-editing" />
+										<span class="structure-links">
+											<liferay-ui:icon id="changeStructureButton" image="configuration" message="change" url="<%= changeStructureURL %>" />
 										</span>
-									</span>
+
+										<c:if test="<%= Validator.isNotNull(structureId) %>">
+											<span class="default-link">(<a href="javascript:;" id="<portlet:namespace />loadDefaultStructure"><liferay-ui:message key="use-default" /></a>)</span>
+										</c:if>
+
+										<span class="structure-controls">
+											<span class="structure-buttons">
+												<aui:button cssClass="save-structure-button yui3-aui-helper-hidden" name="saveStructureButton" value="save" />
+
+												<aui:button cssClass="edit-structure-button yui3-aui-helper-hidden" name="editStructureButton" value="stop-editing" />
+											</span>
+										</span>
+									</c:if>
 								</div>
 							</aui:fieldset>
 						</aui:column>
@@ -305,7 +312,7 @@ if (Validator.isNotNull(content)) {
 													</portlet:renderURL>
 
 													<aui:option
-														data-img="<%=  imageURL != null ? imageURL : StringPool.BLANK %>"
+														data-img="<%= imageURL != null ? imageURL : StringPool.BLANK %>"
 														data-url="<%= templateURL %>"
 														label="<%= HtmlUtil.escape(template.getName()) %>"
 														selected="<%= templateId.equals(template.getTemplateId()) %>"
@@ -374,6 +381,7 @@ if (Validator.isNotNull(content)) {
 								<liferay-ui:icon-menu
 									align="left"
 									cssClass="add-translations-menu"
+									direction="down"
 									icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
 									message='<%= LanguageUtil.get(pageContext, "add-translation") %>'
 									showArrow="<%= true %>"

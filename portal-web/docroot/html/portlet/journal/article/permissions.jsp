@@ -26,7 +26,7 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 <h3><liferay-ui:message key="permissions" /></h3>
 
-<c:if test="<%= article == null %>">
+<c:if test="<%= (article == null) || article.isNew() %>">
 	<aui:field-wrapper cssClass="journal-article-permissions" label="permissions">
 		<liferay-ui:input-permissions
 			modelName="<%= JournalArticle.class.getName() %>"

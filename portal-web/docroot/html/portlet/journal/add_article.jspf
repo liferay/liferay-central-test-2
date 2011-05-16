@@ -18,50 +18,55 @@
 Map<String, PortletURL> addArticleURLs = getAddArticleURLs(renderRequest, renderResponse);
 %>
 
-<c:if test="<%= !addArticleURLs.isEmpty() %>">
-	<div class="lfr-meta-actions edit-controls">
-		<liferay-ui:icon-menu
-			align="auto"
-			direction="right"
-			icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
-			message='<%= LanguageUtil.format(pageContext, "add", new Object[] {(GroupLocalServiceUtil.getGroup(scopeGroupId)).getDescriptiveName()}) %>'
-			showWhenSingleIcon="<%= true %>"
-		>
+<c:choose>
+	<c:when test="<%= addArticleURLs.size() > 1 %>">
+		<div class="lfr-meta-actions edit-controls">
+			<liferay-ui:icon-menu
+				align="auto"
+				direction="right"
+				icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
+				message='<%= LanguageUtil.format(pageContext, "add", new Object[] {(GroupLocalServiceUtil.getGroup(scopeGroupId)).getDescriptiveName()}) %>'
+				showWhenSingleIcon="<%= true %>"
+			>
 
-			<%
-			for (Map.Entry<String, PortletURL> entry : addArticleURLs.entrySet()) {
-				String className = entry.getKey();
+				<%
+				for (Map.Entry<String, PortletURL> entry : addArticleURLs.entrySet()) {
+					String className = entry.getKey();
 
-				String message = "basic-web-content";
+					String message = "basic-web-content";
 
-				int pos = className.indexOf(_CLASSNAME_SEPARATOR);
+					int pos = className.indexOf(_CLASSNAME_SEPARATOR);
 
-				if (pos != -1) {
-					message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
+					if (pos != -1) {
+						message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
 
-					className = className.substring(0, pos);
+						className = className.substring(0, pos);
+					}
+
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
+
+					PortletURL addArticleURL = entry.getValue();
+
+					addArticleURL.setParameter("groupId", String.valueOf(scopeGroupId));
+				%>
+
+					<liferay-ui:icon
+						message='<%= message %>'
+						src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
+						url="<%= addArticleURL.toString() %>"
+					/>
+
+				<%
 				}
+				%>
 
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
-
-				PortletURL addArticleURL = entry.getValue();
-
-				addArticleURL.setParameter("groupId", String.valueOf(scopeGroupId));
-			%>
-
-				<liferay-ui:icon
-					message='<%= message %>'
-					src="<%= assetRendererFactory.getIconPath(renderRequest) %>"
-					url="<%= addArticleURL.toString() %>"
-				/>
-
-			<%
-			}
-			%>
-
-		</liferay-ui:icon-menu>
-	</div>
-</c:if>
+			</liferay-ui:icon-menu>
+		</div>
+	</c:when>
+	<c:otherwise>
+		<aui:button href="<%= addArticleURLs.get(JournalArticle.class.getName()).toString() %>" value="add" />
+	</c:otherwise>
+</c:choose>
 
 <%!
 public PortletURL getAddArticleURL(RenderRequest renderRequest, RenderResponse renderResponse, String structureId) throws Exception {
