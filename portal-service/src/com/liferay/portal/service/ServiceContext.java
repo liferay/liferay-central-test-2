@@ -244,7 +244,7 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	/**
 	 * @deprecated As of 6.1, renamed to {@link
-	 * 		#setAddGroupPermissions(boolean)}
+	 *             #setAddGroupPermissions(boolean)}
 	 */
 	public void setAddCommunityPermissions(boolean addCommunityPermissions) {
 		setAddGroupPermissions(addCommunityPermissions);
