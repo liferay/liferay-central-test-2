@@ -77,31 +77,33 @@ public class MinifierFilter extends BasePortalFilter {
 		int pos = 0;
 
 		while (true) {
-			int v = content.indexOf(_CSS_COMMENT_BEGIN, pos);
-			int w = content.indexOf(
-				_CSS_COMMENT_END, v + _CSS_COMMENT_BEGIN.length());
+			int commentX = content.indexOf(_CSS_COMMENT_BEGIN, pos);
+			int commentY = content.indexOf(
+				_CSS_COMMENT_END, commentX + _CSS_COMMENT_BEGIN.length());
 
-			int x = content.indexOf(_CSS_IMPORT_BEGIN, pos);
-			int y = content.indexOf(
-				_CSS_IMPORT_END, x + _CSS_IMPORT_BEGIN.length());
+			int importX = content.indexOf(_CSS_IMPORT_BEGIN, pos);
+			int importY = content.indexOf(
+				_CSS_IMPORT_END, importX + _CSS_IMPORT_BEGIN.length());
 
-			if ((x == -1) || (y == -1)) {
+			if ((importX == -1) || (importY == -1)) {
 				sb.append(content.substring(pos, content.length()));
 
 				break;
 			}
-			else if ((v != -1) && (w != -1) && (v < x) && (w > x)) {
-				w += _CSS_COMMENT_END.length();
+			else if ((commentX != -1) && (commentY != -1) &&
+					 (commentX < importX) && (commentY > importX)) {
 
-				sb.append(content.substring(pos, w));
+				commentY += _CSS_COMMENT_END.length();
 
-				pos = w;
+				sb.append(content.substring(pos, commentY));
+
+				pos = commentY;
 			}
 			else {
-				sb.append(content.substring(pos, x));
+				sb.append(content.substring(pos, importX));
 
 				String importFileName = content.substring(
-					x + _CSS_IMPORT_BEGIN.length(), y);
+					importX + _CSS_IMPORT_BEGIN.length(), importY);
 
 				String importFullFileName = dir.concat(StringPool.SLASH).concat(
 					importFileName);
@@ -157,7 +159,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 				sb.append(importContent);
 
-				pos = y + _CSS_IMPORT_END.length();
+				pos = importY + _CSS_IMPORT_END.length();
 			}
 		}
 
