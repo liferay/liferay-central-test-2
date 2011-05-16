@@ -83,14 +83,7 @@
 					}
 				}
 
-				List<Group> manageableSites = null;
-
-				if (permissionChecker.isCompanyAdmin()) {
-					manageableSites = GroupServiceUtil.getManageableSites(ActionKeys.MANAGE_LAYOUTS, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-				}
-				else {
-					manageableSites = user.getMyPlaces(new String[] {Group.class.getName()}, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-				}
+				List<Group> manageableSites = GroupServiceUtil.getManageableSites(portlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 
 				boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
 

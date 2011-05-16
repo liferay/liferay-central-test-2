@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -26,6 +27,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.util.UniqueList;
 
@@ -95,7 +97,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
-	public List<Group> getManageableSites(String actionId, int max)
+	public List<Group> getManageableSites(List<Portlet> portlets, int max)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -124,8 +126,9 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			Group group = itr.next();
 
 			if (!group.isSite() ||
-				!GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(), actionId)) {
+				!PortletPermissionUtil.contains(
+					permissionChecker, group.getGroupId(), 0L, portlets,
+					ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
 
 				itr.remove();
 			}

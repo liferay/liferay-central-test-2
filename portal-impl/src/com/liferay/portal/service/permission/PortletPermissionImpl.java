@@ -93,6 +93,23 @@ public class PortletPermissionImpl implements PortletPermission {
 
 	public boolean contains(
 			PermissionChecker permissionChecker, long groupId, long plid,
+			List<Portlet> portlets, String actionId)
+		throws PortalException, SystemException {
+
+		for (Portlet portlet : portlets) {
+			if (contains(
+				permissionChecker, groupId, 0, portlet.getPortletId(),
+				ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long groupId, long plid,
 			Portlet portlet, String actionId)
 		throws PortalException, SystemException {
 

@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 
+import java.util.List;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -66,6 +68,15 @@ public class PortletPermissionUtil {
 		throws PortalException, SystemException {
 
 		getPortletPermission().check(permissionChecker, portletId, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, long plid,
+			List<Portlet> portlets, String actionId)
+		throws PortalException, SystemException {
+
+		return getPortletPermission().contains(
+			permissionChecker, groupId, plid, portlets, actionId);
 	}
 
 	public static boolean contains(
