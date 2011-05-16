@@ -187,8 +187,7 @@ public class LayoutAction extends Action {
 				}
 
 				if (Validator.isNull(authLoginURL)) {
-					authLoginURL = PortalUtil.getCommunityLoginURL(
-						themeDisplay);
+					authLoginURL = PortalUtil.getSiteLoginURL(themeDisplay);
 				}
 
 				if (Validator.isNull(authLoginURL)) {

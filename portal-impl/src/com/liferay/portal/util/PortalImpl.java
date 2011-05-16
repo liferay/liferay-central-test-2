@@ -392,28 +392,28 @@ public class PortalImpl implements Portal {
 
 		// Community roles
 
-		String customSystemCommunityRoles[] =
+		String customSystemSiteRoles[] =
 			PropsUtil.getArray(PropsKeys.SYSTEM_COMMUNITY_ROLES);
 
-		if ((customSystemCommunityRoles == null) ||
-			(customSystemCommunityRoles.length == 0)) {
+		if ((customSystemSiteRoles == null) ||
+			(customSystemSiteRoles.length == 0)) {
 
-			_allSystemCommunityRoles = RoleConstants.SYSTEM_SITE_ROLES;
+			_allSystemSiteRoles = RoleConstants.SYSTEM_SITE_ROLES;
 		}
 		else {
-			_allSystemCommunityRoles = ArrayUtil.append(
+			_allSystemSiteRoles = ArrayUtil.append(
 				RoleConstants.SYSTEM_SITE_ROLES,
-				customSystemCommunityRoles);
+				customSystemSiteRoles);
 		}
 
-		_sortedSystemCommunityRoles =
-			new String[_allSystemCommunityRoles.length];
+		_sortedSystemSiteRoles =
+			new String[_allSystemSiteRoles.length];
 
 		System.arraycopy(
-			_allSystemCommunityRoles, 0, _sortedSystemCommunityRoles, 0,
-				_allSystemCommunityRoles.length);
+			_allSystemSiteRoles, 0, _sortedSystemSiteRoles, 0,
+				_allSystemSiteRoles.length);
 
-		Arrays.sort(_sortedSystemCommunityRoles, new StringComparator());
+		Arrays.sort(_sortedSystemSiteRoles, new StringComparator());
 
 		// Organization roles
 
@@ -1013,46 +1013,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return portletId;
-	}
-
-	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
-			return null;
-		}
-
-		List<Layout> layouts = themeDisplay.getUnfilteredLayouts();
-
-		if (layouts == null) {
-			return null;
-		}
-
-		for (Layout layout : layouts) {
-			if (layout.getFriendlyURL().equals(
-					PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
-
-				if (themeDisplay.getLayout() != null) {
-					String layoutSetFriendlyURL = getLayoutSetFriendlyURL(
-						themeDisplay.getLayout().getLayoutSet(), themeDisplay);
-
-					return layoutSetFriendlyURL +
-						PropsValues.AUTH_LOGIN_COMMUNITY_URL;
-				}
-
-				break;
-			}
-		}
-
-		return null;
-	}
-
-	public String[] getCommunityPermissions(HttpServletRequest request) {
-		return request.getParameterValues("communityPermissions");
-	}
-
-	public String[] getCommunityPermissions(PortletRequest portletRequest) {
-		return portletRequest.getParameterValues("communityPermissions");
 	}
 
 	public Company getCompany(HttpServletRequest request)
@@ -1705,6 +1665,14 @@ public class PortalImpl implements Portal {
 		}
 
 		return portalURL + _pathContext + friendlyURL + group.getFriendlyURL();
+	}
+
+	public String[] getGroupPermissions(HttpServletRequest request) {
+		return request.getParameterValues("communityPermissions");
+	}
+
+	public String[] getGroupPermissions(PortletRequest portletRequest) {
+		return portletRequest.getParameterValues("communityPermissions");
 	}
 
 	public String[] getGuestPermissions(HttpServletRequest request) {
@@ -3221,6 +3189,38 @@ public class PortalImpl implements Portal {
 		return portletContextImpl.getServletContext();
 	}
 
+	public String getSiteLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+			return null;
+		}
+
+		List<Layout> layouts = themeDisplay.getUnfilteredLayouts();
+
+		if (layouts == null) {
+			return null;
+		}
+
+		for (Layout layout : layouts) {
+			if (layout.getFriendlyURL().equals(
+					PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+
+				if (themeDisplay.getLayout() != null) {
+					String layoutSetFriendlyURL = getLayoutSetFriendlyURL(
+						themeDisplay.getLayout().getLayoutSet(), themeDisplay);
+
+					return layoutSetFriendlyURL +
+						PropsValues.AUTH_LOGIN_COMMUNITY_URL;
+				}
+
+				break;
+			}
+		}
+
+		return null;
+	}
+
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri) {
 
@@ -3390,10 +3390,6 @@ public class PortalImpl implements Portal {
 		return _getPortletParam(request, "struts_action");
 	}
 
-	public String[] getSystemCommunityRoles() {
-		return _allSystemCommunityRoles;
-	}
-
 	public String[] getSystemGroups() {
 		return _allSystemGroups;
 	}
@@ -3404,6 +3400,10 @@ public class PortalImpl implements Portal {
 
 	public String[] getSystemRoles() {
 		return _allSystemRoles;
+	}
+
+	public String[] getSystemSiteRoles() {
+		return _allSystemSiteRoles;
 	}
 
 	public UploadServletRequest getUploadServletRequest(
@@ -4204,7 +4204,7 @@ public class PortalImpl implements Portal {
 		}
 		else {
 			pos = Arrays.binarySearch(
-				_sortedSystemCommunityRoles, roleName, new StringComparator());
+				_sortedSystemSiteRoles, roleName, new StringComparator());
 
 			if (pos >= 0) {
 				return true;
@@ -5200,10 +5200,10 @@ public class PortalImpl implements Portal {
 	private static Log _logImageServlet = LogFactoryUtil.getLog(
 		ImageServlet.class);
 
-	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
 	private String[] _allSystemRoles;
+	private String[] _allSystemSiteRoles;
 	private Set<String> _authTokenIgnoreActions;
 	private Set<String> _authTokenIgnorePortlets;
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
@@ -5233,9 +5233,9 @@ public class PortalImpl implements Portal {
 	private Set<String> _portletAddDefaultResourceCheckWhitelist;
 	private Set<String> _portletAddDefaultResourceCheckWhitelistActions;
 	private Set<String> _reservedParams;
-	private String[] _sortedSystemCommunityRoles;
 	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
+	private String[] _sortedSystemSiteRoles;
 
 }

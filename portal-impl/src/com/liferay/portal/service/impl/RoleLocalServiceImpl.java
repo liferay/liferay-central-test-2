@@ -153,7 +153,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Community roles
 
-		String[] systemCommunityRoles = PortalUtil.getSystemCommunityRoles();
+		String[] systemCommunityRoles = PortalUtil.getSystemSiteRoles();
 
 		for (String name : systemCommunityRoles) {
 			String description = PropsUtil.get(

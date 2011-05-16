@@ -268,22 +268,6 @@ public class PortalUtil {
 		return getPortal().getClassNamePortletId(className);
 	}
 
-	public static String getCommunityLoginURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getPortal().getCommunityLoginURL(themeDisplay);
-	}
-
-	public static String[] getCommunityPermissions(HttpServletRequest request) {
-		return getPortal().getCommunityPermissions(request);
-	}
-
-	public static String[] getCommunityPermissions(
-		PortletRequest portletRequest) {
-
-		return getPortal().getCommunityPermissions(portletRequest);
-	}
-
 	public static Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException {
 
@@ -455,6 +439,16 @@ public class PortalUtil {
 
 		return getPortal().getGroupFriendlyURL(
 			group, privateLayoutSet, themeDisplay);
+	}
+
+	public static String[] getGroupPermissions(HttpServletRequest request) {
+		return getPortal().getGroupPermissions(request);
+	}
+
+	public static String[] getGroupPermissions(
+		PortletRequest portletRequest) {
+
+		return getPortal().getGroupPermissions(portletRequest);
 	}
 
 	public static String[] getGuestPermissions(HttpServletRequest request) {
@@ -973,6 +967,12 @@ public class PortalUtil {
 		return getPortal().getServletContext(portlet, servletContext);
 	}
 
+	public static String getSiteLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getSiteLoginURL(themeDisplay);
+	}
+
 	/**
 	 * @deprecated {@link
 	 *             ResourceActionsUtil#getSocialEquityActionMapping(String,
@@ -1031,10 +1031,6 @@ public class PortalUtil {
 		return getPortal().getStrutsAction(request);
 	}
 
-	public static String[] getSystemCommunityRoles() {
-		return getPortal().getSystemCommunityRoles();
-	}
-
 	public static String[] getSystemGroups() {
 		return getPortal().getSystemGroups();
 	}
@@ -1045,6 +1041,10 @@ public class PortalUtil {
 
 	public static String[] getSystemRoles() {
 		return getPortal().getSystemRoles();
+	}
+
+	public static String[] getSystemSiteRoles() {
+		return getPortal().getSystemSiteRoles();
 	}
 
 	public static UploadServletRequest getUploadServletRequest(

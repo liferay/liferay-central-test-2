@@ -90,7 +90,7 @@ public class LoginAction extends Action {
 			}
 		}
 
-		String redirect = PortalUtil.getCommunityLoginURL(themeDisplay);
+		String redirect = PortalUtil.getSiteLoginURL(themeDisplay);
 
 		if (Validator.isNull(redirect)) {
 			redirect = PropsValues.AUTH_LOGIN_URL;

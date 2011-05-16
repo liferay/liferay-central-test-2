@@ -380,21 +380,20 @@ public interface Portal {
 	public String getClassNamePortletId(String className);
 
 	/**
-	 * Gets the URL of the login page for the current community if one is
-	 * available.
+	 * Gets the URL of the login page for the current site if one is available.
 	 *
 	 * @param  themeDisplay the theme display for the current page
-	 * @return the URL of the login page for the current community, or
+	 * @return the URL of the login page for the current site, or
 	 *         <code>null</code> if one is not available
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
+	public String getSiteLoginURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
-	public String[] getCommunityPermissions(HttpServletRequest request);
+	public String[] getGroupPermissions(HttpServletRequest request);
 
-	public String[] getCommunityPermissions(PortletRequest portletRequest);
+	public String[] getGroupPermissions(PortletRequest portletRequest);
 
 	public Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException;
@@ -813,7 +812,7 @@ public interface Portal {
 
 	public String getStrutsAction(HttpServletRequest request);
 
-	public String[] getSystemCommunityRoles();
+	public String[] getSystemSiteRoles();
 
 	public String[] getSystemGroups();
 

@@ -195,7 +195,7 @@ public class ServiceContextFactory {
 			portletRequest, "addCommunityPermissions");
 		boolean addGuestPermissions = ParamUtil.getBoolean(
 			portletRequest, "addGuestPermissions");
-		String[] communityPermissions = PortalUtil.getCommunityPermissions(
+		String[] communityPermissions = PortalUtil.getGroupPermissions(
 			portletRequest);
 		String[] guestPermissions = PortalUtil.getGuestPermissions(
 			portletRequest);
