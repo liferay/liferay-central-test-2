@@ -38,9 +38,12 @@ import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetService;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordPersistence;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetFinder;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetPersistence;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkLocalService;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureService;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureFinder;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructurePersistence;
 
 import javax.sql.DataSource;
@@ -432,6 +435,63 @@ public abstract class DDLRecordSetServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the d d m structure link local service.
+	 *
+	 * @return the d d m structure link local service
+	 */
+	public DDMStructureLinkLocalService getDDMStructureLinkLocalService() {
+		return ddmStructureLinkLocalService;
+	}
+
+	/**
+	 * Sets the d d m structure link local service.
+	 *
+	 * @param ddmStructureLinkLocalService the d d m structure link local service
+	 */
+	public void setDDMStructureLinkLocalService(
+		DDMStructureLinkLocalService ddmStructureLinkLocalService) {
+		this.ddmStructureLinkLocalService = ddmStructureLinkLocalService;
+	}
+
+	/**
+	 * Gets the d d m structure link remote service.
+	 *
+	 * @return the d d m structure link remote service
+	 */
+	public DDMStructureLinkService getDDMStructureLinkService() {
+		return ddmStructureLinkService;
+	}
+
+	/**
+	 * Sets the d d m structure link remote service.
+	 *
+	 * @param ddmStructureLinkService the d d m structure link remote service
+	 */
+	public void setDDMStructureLinkService(
+		DDMStructureLinkService ddmStructureLinkService) {
+		this.ddmStructureLinkService = ddmStructureLinkService;
+	}
+
+	/**
+	 * Gets the d d m structure link persistence.
+	 *
+	 * @return the d d m structure link persistence
+	 */
+	public DDMStructureLinkPersistence getDDMStructureLinkPersistence() {
+		return ddmStructureLinkPersistence;
+	}
+
+	/**
+	 * Sets the d d m structure link persistence.
+	 *
+	 * @param ddmStructureLinkPersistence the d d m structure link persistence
+	 */
+	public void setDDMStructureLinkPersistence(
+		DDMStructureLinkPersistence ddmStructureLinkPersistence) {
+		this.ddmStructureLinkPersistence = ddmStructureLinkPersistence;
+	}
+
+	/**
 	 * Gets the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
@@ -508,5 +568,11 @@ public abstract class DDLRecordSetServiceBaseImpl extends PrincipalBean
 	protected DDMStructurePersistence ddmStructurePersistence;
 	@BeanReference(type = DDMStructureFinder.class)
 	protected DDMStructureFinder ddmStructureFinder;
+	@BeanReference(type = DDMStructureLinkLocalService.class)
+	protected DDMStructureLinkLocalService ddmStructureLinkLocalService;
+	@BeanReference(type = DDMStructureLinkService.class)
+	protected DDMStructureLinkService ddmStructureLinkService;
+	@BeanReference(type = DDMStructureLinkPersistence.class)
+	protected DDMStructureLinkPersistence ddmStructureLinkPersistence;
 	private String _beanIdentifier;
 }
