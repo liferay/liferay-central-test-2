@@ -163,9 +163,3 @@
 .lfr-menu-list li.last {
 	border-bottom: none;
 }
-
-.lfr-menu-list-hidden {
-	display: block !important;
-	position: absolute !important;
-	visibility: hidden !important;
-}

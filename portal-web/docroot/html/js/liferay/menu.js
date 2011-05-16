@@ -11,13 +11,11 @@ AUI().add(
 
 		var ARIA_ATTR_ROLE = 'role';
 
-		var CLASS_STATE_ACTIVE = 'yui3-aui-state-active';
+		var CSS_STATE_ACTIVE = 'yui3-aui-state-active';
 
-		var CLASS_HIDE = 'yui3-aui-helper-hidden';
+		var CSS_HELPER_HIDDEN = 'yui3-aui-helper-hidden-accessible';
 
-		var CLASS_EXTENDED = 'lfr-extended';
-
-		var CLASS_VISIBILITY_HIDDEN = 'lfr-menu-list-hidden';
+		var CSS_EXTENDED = 'lfr-extended';
 
 		var DIRECTION_AUTO = 'auto';
 
@@ -77,7 +75,7 @@ AUI().add(
 						var menu = instance._active.menu;
 
 						if (menu) {
-							if (!menu.hasClass(CLASS_HIDE)) {
+							if (!menu.hasClass(CSS_HELPER_HIDDEN)) {
 								instance._positionActiveMenu();
 							}
 						}
@@ -99,7 +97,7 @@ AUI().add(
 							instance._closeActiveMenu();
 						}
 
-						if (!menu.hasClass(CLASS_HIDE)) {
+						if (!menu.hasClass(CSS_HELPER_HIDDEN)) {
 							instance._closeActiveMenu();
 						}
 						else {
@@ -199,7 +197,7 @@ AUI().add(
 
 				var menu = A.Node.create(menuContent);
 
-				menu._hideClass = CLASS_HIDE;
+				menu._hideClass = CSS_HELPER_HIDDEN;
 
 				menu.appendChild(list);
 
@@ -231,10 +229,10 @@ AUI().add(
 
 					var cssClass = instance._active.trigger.attr(ATTR_CLASS_NAME);
 
-					var extended = (cssClass.indexOf(CLASS_EXTENDED) > -1);
+					var extended = (cssClass.indexOf(CSS_EXTENDED) > -1);
 
 					if (extended) {
-						instance._active.trigger.removeClass(CLASS_STATE_ACTIVE);
+						instance._active.trigger.removeClass(CSS_STATE_ACTIVE);
 					}
 
 					instance._active.trigger = null;
@@ -349,8 +347,6 @@ AUI().add(
 						direction = DIRECTION_DOWN;
 					}
 
-					menu.replaceClass(CLASS_HIDE, CLASS_VISIBILITY_HIDDEN);
-
 					var menuHeight = menu.get(OFFSET_HEIGHT);
 					var menuWidth = menu.get('offsetWidth');
 
@@ -424,12 +420,10 @@ AUI().add(
 						}
 					}
 
-					menu.removeClass(CLASS_VISIBILITY_HIDDEN);
-
-					var extended = (cssClass.indexOf(CLASS_EXTENDED) > -1);
+					var extended = (cssClass.indexOf(CSS_EXTENDED) > -1);
 
 					if (extended) {
-						trigger.addClass(CLASS_STATE_ACTIVE);
+						trigger.addClass(CSS_STATE_ACTIVE);
 					}
 
 					instance._active = {
