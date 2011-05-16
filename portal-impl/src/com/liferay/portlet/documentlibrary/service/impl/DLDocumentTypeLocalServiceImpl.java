@@ -59,16 +59,16 @@ public class DLDocumentTypeLocalServiceImpl
 		dlDocumentTypePersistence.addDDMStructures(
 			documentTypeId, ddmStructureIds);
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			 serviceContext.getAddGuestPermissions()) {
 
 			addDocumentTypeResources(
-				documentType, serviceContext.getAddCommunityPermissions(),
+				documentType, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addDocumentTypeResources(
-				documentType, serviceContext.getCommunityPermissions(),
+				documentType, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

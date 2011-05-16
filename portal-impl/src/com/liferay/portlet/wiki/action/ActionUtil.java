@@ -65,7 +65,7 @@ public class ActionUtil {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				WikiNode.class.getName(), portletRequest);
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 
 			if (layout.isPublicLayout()) {
 				serviceContext.setAddGuestPermissions(true);
@@ -176,7 +176,7 @@ public class ActionUtil {
 
 				Layout layout = themeDisplay.getLayout();
 
-				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGroupPermissions(true);
 
 				if (layout.isPublicLayout()) {
 					serviceContext.setAddGuestPermissions(true);

@@ -192,7 +192,7 @@ public class WordPressImporter {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
@@ -283,7 +283,7 @@ public class WordPressImporter {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setScopeGroupId(context.getGroupId());

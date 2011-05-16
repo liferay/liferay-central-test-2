@@ -1178,7 +1178,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		// Permissions
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		// Asset

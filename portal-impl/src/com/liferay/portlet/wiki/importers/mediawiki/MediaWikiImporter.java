@@ -160,7 +160,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setAssetTagNames(
 				readAssetTagNames(userId, node, content));
@@ -249,7 +249,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 					ServiceContext serviceContext = new ServiceContext();
 
-					serviceContext.setAddCommunityPermissions(true);
+					serviceContext.setAddGroupPermissions(true);
 					serviceContext.setAddGuestPermissions(true);
 
 					WikiPageLocalServiceUtil.movePage(
@@ -321,7 +321,7 @@ public class MediaWikiImporter implements WikiImporter {
 			catch (NoSuchPageException nspe) {
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGroupPermissions(true);
 				serviceContext.setAddGuestPermissions(true);
 
 				WikiPageLocalServiceUtil.addPage(
@@ -514,7 +514,7 @@ public class MediaWikiImporter implements WikiImporter {
 				catch (NoSuchTagException nste) {
 					ServiceContext serviceContext = new ServiceContext();
 
-					serviceContext.setAddCommunityPermissions(true);
+					serviceContext.setAddGroupPermissions(true);
 					serviceContext.setAddGuestPermissions(true);
 					serviceContext.setScopeGroupId(node.getGroupId());
 
@@ -560,7 +560,7 @@ public class MediaWikiImporter implements WikiImporter {
 			catch (NoSuchTagException nste) {
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGroupPermissions(true);
 				serviceContext.setAddGuestPermissions(true);
 				serviceContext.setScopeGroupId(node.getGroupId());
 

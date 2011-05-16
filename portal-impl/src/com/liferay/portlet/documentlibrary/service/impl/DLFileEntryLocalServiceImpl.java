@@ -141,16 +141,16 @@ public class DLFileEntryLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addFileEntryResources(
-				dlFileEntry, serviceContext.getAddCommunityPermissions(),
+				dlFileEntry, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFileEntryResources(
-				dlFileEntry, serviceContext.getCommunityPermissions(),
+				dlFileEntry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

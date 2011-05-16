@@ -65,7 +65,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setCommunityPermissions(
+		serviceContext.setGroupPermissions(
 			new String[] {ActionKeys.ADD_MESSAGE, ActionKeys.VIEW});
 		serviceContext.setGuestPermissions(
 			new String[] {ActionKeys.ADD_MESSAGE, ActionKeys.VIEW});
@@ -148,7 +148,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
 			MBMessageServiceUtil.addMessage(

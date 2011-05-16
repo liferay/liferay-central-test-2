@@ -58,7 +58,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setScopeGroupId(layout.getGroupId());
 		serviceContext.setPlid(layout.getPlid());
@@ -85,7 +85,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		IGImageServiceUtil.addImage(

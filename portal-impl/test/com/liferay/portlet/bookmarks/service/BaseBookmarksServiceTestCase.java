@@ -37,7 +37,7 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		return BookmarksEntryServiceUtil.addEntry(
@@ -60,7 +60,7 @@ public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(layout.getGroupId());
 

@@ -72,16 +72,16 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addFileShortcutResources(
-				fileShortcut, serviceContext.getAddCommunityPermissions(),
+				fileShortcut, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFileShortcutResources(
-				fileShortcut, serviceContext.getCommunityPermissions(),
+				fileShortcut, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

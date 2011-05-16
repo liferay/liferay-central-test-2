@@ -95,16 +95,16 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addTagResources(
-				tag, serviceContext.getAddCommunityPermissions(),
+				tag, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addTagResources(
-				tag, serviceContext.getCommunityPermissions(),
+				tag, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -167,7 +167,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 			catch (NoSuchTagException nste) {
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAddCommunityPermissions(true);
+				serviceContext.setAddGroupPermissions(true);
 				serviceContext.setAddGuestPermissions(true);
 				serviceContext.setScopeGroupId(groupId);
 

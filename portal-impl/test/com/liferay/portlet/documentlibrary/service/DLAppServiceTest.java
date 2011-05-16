@@ -59,7 +59,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		try {
@@ -161,7 +161,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		try {
@@ -252,7 +252,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		return DLAppServiceUtil.addFileEntry(

@@ -100,16 +100,16 @@ public class DDMStructureLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addStructureResources(
-				structure, serviceContext.getAddCommunityPermissions(),
+				structure, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addStructureResources(
-				structure, serviceContext.getCommunityPermissions(),
+				structure, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

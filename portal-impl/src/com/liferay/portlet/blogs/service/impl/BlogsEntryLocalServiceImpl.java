@@ -145,16 +145,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addEntryResources(
-				entry, serviceContext.getAddCommunityPermissions(),
+				entry, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addEntryResources(
-				entry, serviceContext.getCommunityPermissions(),
+				entry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -582,11 +582,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Resources
 
-		if ((serviceContext.getCommunityPermissions() != null) ||
+		if ((serviceContext.getGroupPermissions() != null) ||
 			(serviceContext.getGuestPermissions() != null)) {
 
 			updateEntryResources(
-				entry, serviceContext.getCommunityPermissions(),
+				entry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

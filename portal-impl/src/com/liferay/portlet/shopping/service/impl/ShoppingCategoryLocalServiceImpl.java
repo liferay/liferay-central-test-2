@@ -70,16 +70,16 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addCategoryResources(
-				category, serviceContext.getAddCommunityPermissions(),
+				category, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addCategoryResources(
-				category, serviceContext.getCommunityPermissions(),
+				category, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

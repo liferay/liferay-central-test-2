@@ -110,16 +110,16 @@ public class SCProductEntryLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addProductEntryResources(
-				productEntry, serviceContext.getAddCommunityPermissions(),
+				productEntry, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addProductEntryResources(
-				productEntry, serviceContext.getCommunityPermissions(),
+				productEntry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

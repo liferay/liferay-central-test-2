@@ -480,7 +480,7 @@ public class PortletImporter {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(assetCategory.getCreateDate());
 		serviceContext.setModifiedDate(assetCategory.getModifiedDate());
@@ -564,7 +564,7 @@ public class PortletImporter {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(assetVocabulary.getCreateDate());
 		serviceContext.setModifiedDate(assetVocabulary.getModifiedDate());

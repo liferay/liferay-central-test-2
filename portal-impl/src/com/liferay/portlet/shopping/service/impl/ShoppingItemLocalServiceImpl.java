@@ -170,16 +170,16 @@ public class ShoppingItemLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addItemResources(
-				item, serviceContext.getAddCommunityPermissions(),
+				item, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addItemResources(
-				item, serviceContext.getCommunityPermissions(),
+				item, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
@@ -713,7 +713,7 @@ public class ShoppingItemLocalServiceImpl
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
 			addItem(

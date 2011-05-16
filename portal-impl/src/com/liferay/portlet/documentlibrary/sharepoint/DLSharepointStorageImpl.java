@@ -89,7 +89,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		DLAppServiceUtil.addFolder(
@@ -311,7 +311,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
 		String contentType = GetterUtil.get(

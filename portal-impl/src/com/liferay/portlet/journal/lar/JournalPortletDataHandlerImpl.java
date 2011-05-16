@@ -1499,7 +1499,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			articleElement, article, _NAMESPACE);
 
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setAttribute("imported", Boolean.TRUE.toString());
 
@@ -1753,7 +1753,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			feedElement, feed, _NAMESPACE);
 
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		JournalFeed importedFeed = null;
@@ -1995,7 +1995,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			structureElement, structure, _NAMESPACE);
 
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		JournalStructure importedStructure = null;
@@ -2123,7 +2123,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			templateElement, template, _NAMESPACE);
 
-		serviceContext.setAddCommunityPermissions(addCommunityPermissions);
+		serviceContext.setAddGroupPermissions(addCommunityPermissions);
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 
 		File smallFile = null;

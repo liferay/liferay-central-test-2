@@ -585,7 +585,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				catch (NoSuchTagException nste) {
 					ServiceContext serviceContext = new ServiceContext();
 
-					serviceContext.setAddCommunityPermissions(true);
+					serviceContext.setAddGroupPermissions(true);
 					serviceContext.setAddGuestPermissions(true);
 					serviceContext.setScopeGroupId(parentGroupId);
 

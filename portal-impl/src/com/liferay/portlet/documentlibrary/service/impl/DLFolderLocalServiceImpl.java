@@ -83,16 +83,16 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addFolderResources(
-				dlFolder, serviceContext.getAddCommunityPermissions(),
+				dlFolder, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFolderResources(
-				dlFolder, serviceContext.getCommunityPermissions(),
+				dlFolder, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

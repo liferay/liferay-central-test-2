@@ -108,16 +108,16 @@ public class AssetVocabularyLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addVocabularyResources(
-				vocabulary, serviceContext.getAddCommunityPermissions(),
+				vocabulary, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addVocabularyResources(
-				vocabulary, serviceContext.getCommunityPermissions(),
+				vocabulary, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

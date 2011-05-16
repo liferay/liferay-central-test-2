@@ -80,16 +80,16 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addEntryResources(
-				entry, serviceContext.getAddCommunityPermissions(),
+				entry, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addEntryResources(
-				entry, serviceContext.getCommunityPermissions(),
+				entry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 

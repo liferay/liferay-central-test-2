@@ -223,7 +223,7 @@ public class MailingListMessageListener extends BaseMessageListener {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setLayoutFullURL(
 			PortalUtil.getLayoutFullURL(groupId, PortletKeys.MESSAGE_BOARDS));

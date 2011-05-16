@@ -165,7 +165,7 @@ public class SplitThreadAction extends PortletAction {
 					newThreadURL
 				});
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
 			MBMessageServiceUtil.addMessage(

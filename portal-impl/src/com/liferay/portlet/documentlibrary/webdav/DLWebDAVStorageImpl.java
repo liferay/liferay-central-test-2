@@ -95,7 +95,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(
+			serviceContext.setAddGroupPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
@@ -171,7 +171,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(
+			serviceContext.setAddGroupPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
@@ -362,7 +362,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				ServiceContext serviceContext = new ServiceContext();
 
-				serviceContext.setAddCommunityPermissions(
+				serviceContext.setAddGroupPermissions(
 					isAddCommunityPermissions(groupId));
 				serviceContext.setAddGuestPermissions(true);
 
@@ -431,7 +431,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(
+			serviceContext.setAddGroupPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
@@ -633,7 +633,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(
+			serviceContext.setAddGroupPermissions(
 				isAddCommunityPermissions(groupId));
 			serviceContext.setAddGuestPermissions(true);
 
@@ -975,7 +975,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(
+		serviceContext.setAddGroupPermissions(
 			isAddCommunityPermissions(fileEntry.getRepositoryId()));
 		serviceContext.setAddGuestPermissions(true);
 

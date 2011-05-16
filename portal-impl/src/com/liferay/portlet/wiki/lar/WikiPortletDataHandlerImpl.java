@@ -106,7 +106,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCreateDate(node.getCreateDate());
 		serviceContext.setModifiedDate(node.getModifiedDate());

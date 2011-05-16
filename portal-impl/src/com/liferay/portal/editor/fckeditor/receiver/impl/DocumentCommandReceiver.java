@@ -59,7 +59,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
 			DLAppServiceUtil.addFolder(
@@ -90,7 +90,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
 			DLAppServiceUtil.addFileEntry(

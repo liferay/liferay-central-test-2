@@ -61,7 +61,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setPlid(commandArgument.getPlid());
 			serviceContext.setScopeGroupId(group.getGroupId());
@@ -95,7 +95,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setAddCommunityPermissions(true);
+			serviceContext.setAddGroupPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
 
 			IGImageServiceUtil.addImage(

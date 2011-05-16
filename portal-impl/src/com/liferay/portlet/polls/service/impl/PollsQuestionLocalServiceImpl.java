@@ -88,16 +88,16 @@ public class PollsQuestionLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddCommunityPermissions() ||
+		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
 			addQuestionResources(
-				question, serviceContext.getAddCommunityPermissions(),
+				question, serviceContext.getAddGroupPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addQuestionResources(
-				question, serviceContext.getCommunityPermissions(),
+				question, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
