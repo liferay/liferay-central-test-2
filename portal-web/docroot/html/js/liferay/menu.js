@@ -1,13 +1,13 @@
 AUI().add(
 	'liferay-menu',
 	function(A) {
+		var Lang = A.Lang;
+
+		var trim = Lang.trim;
+
 		var ATTR_CLASS_NAME = 'className';
 
 		var ALIGN_AUTO = 'auto';
-
-		var ALIGN_LEFT = 'left';
-
-		var ALIGN_RIGHT = 'right';
 
 		var ARIA_ATTR_ROLE = 'role';
 
@@ -33,11 +33,17 @@ AUI().add(
 
 		var OFFSET_HEIGHT = 'offsetHeight';
 
+		var SELECTOR_ANCHOR = 'a';
+
 		var SELECTOR_SEARCH_CONTAINER = '.lfr-menu-list-search-container';
 
 		var SELECTOR_SEARCH_INPUT = '.lfr-menu-list-search';
 
-		var REGEX_MAX_VISIBLE_ITEMS = /max-display-items-(\d+)/;
+		var REGEX_ALIGN = /\balign-(right|left)\b/;
+
+		var REGEX_DIRECTION = /\bdirection-(down|left|right)\b/;
+
+		var REGEX_MAX_DISPLAY_ITEMS = /max-display-items-(\d+)/;
 
 		var TPL_MENU = '<div id="{menuId}" class="lfr-component lfr-menu-list" />';
 
@@ -69,18 +75,13 @@ AUI().add(
 
 				instance._window.on(
 					'resize',
-					function(event){
-						var instance = this;
-
+					function(event) {
 						var menu = instance._active.menu;
 
-						if (menu) {
-							if (!menu.hasClass(CSS_HELPER_HIDDEN)) {
-								instance._positionActiveMenu();
-							}
+						if (menu && !menu.hasClass(CSS_HELPER_HIDDEN)) {
+							instance._positionActiveMenu();
 						}
-					},
-					instance
+					}
 				);
 
 				instance._body.delegate(
@@ -89,11 +90,15 @@ AUI().add(
 						var trigger = event.currentTarget;
 						var menu = trigger._AUI_MENU;
 
+						var active = instance._active;
+
+						var activeMenu = active.menu;
+
 						if (!menu) {
 							menu = instance._createMenu(trigger);
 						}
 
-						if (instance._active.menu && !instance._active.menu.compareTo(menu)) {
+						if (activeMenu && !activeMenu.compareTo(menu)) {
 							instance._closeActiveMenu();
 						}
 
@@ -101,8 +106,8 @@ AUI().add(
 							instance._closeActiveMenu();
 						}
 						else {
-							instance._active.menu = menu;
-							instance._active.trigger = trigger;
+							active.menu = menu;
+							active.trigger = trigger;
 
 							if (!menu.focusManager) {
 								instance._plugMenu(menu, trigger);
@@ -113,7 +118,7 @@ AUI().add(
 
 						event.halt();
 
-						var anchor = trigger.one('a');
+						var anchor = trigger.one(SELECTOR_ANCHOR);
 
 						if (anchor) {
 							anchor.setAttrs(
@@ -127,7 +132,7 @@ AUI().add(
 					'.lfr-actions'
 				);
 
-				instance._document.on(EVENT_CLICK, instance._onDocumentClick, instance);
+				instance._document.on(EVENT_CLICK, instance._closeActiveMenu, instance);
 			}
 		};
 
@@ -135,18 +140,18 @@ AUI().add(
 			_createLiveSearch: function(trigger, menu) {
 				var instance = this;
 
-				var idSearch = A.guid();
+				var searchId = A.guid();
 
 				var listNode = menu.one('ul');
 
-				var searchLabelNode = trigger.one('a') || trigger;
+				var searchLabelNode = trigger.one(SELECTOR_ANCHOR) || trigger;
 
 				var searchBoxContent = A.substitute(
 					TPL_SEARCH_BOX,
 					{
-						searchId: idSearch,
+						searchId: searchId,
 						searchLabeledBy: searchLabelNode.get(ID),
-						searchOwns: listNode.get(ID)
+						searchOwns: listNode.attr(ID)
 					}
 				);
 
@@ -156,9 +161,9 @@ AUI().add(
 
 				var options = {
 					data: function(node) {
-						return A.Lang.trim(node.one('a').text());
+						return trim(node.one(SELECTOR_ANCHOR).text());
 					},
-					input: '#' + idSearch,
+					input: '#' + searchId,
 					nodes: '#' + menu.get(ID) + ' > ul > li'
 				};
 
@@ -197,6 +202,8 @@ AUI().add(
 
 				var menu = A.Node.create(menuContent);
 
+				menu.swallowEvent('click');
+
 				menu._hideClass = CSS_HELPER_HIDDEN;
 
 				menu.appendChild(list);
@@ -223,39 +230,21 @@ AUI().add(
 			_closeActiveMenu: function() {
 				var instance = this;
 
-				if (instance._active.menu) {
-					instance._active.menu.hide();
-					instance._active.menu = null;
+				var active = instance._active;
+				var activeMenu = active.menu;
 
-					var cssClass = instance._active.trigger.attr(ATTR_CLASS_NAME);
+				if (activeMenu) {
+					activeMenu.hide();
 
-					var extended = (cssClass.indexOf(CSS_EXTENDED) > -1);
+					active.menu = null;
 
-					if (extended) {
-						instance._active.trigger.removeClass(CSS_STATE_ACTIVE);
+					var activeTrigger = active.trigger;
+
+					if (activeTrigger.hasClass(CSS_EXTENDED)) {
+						activeTrigger.removeClass(CSS_STATE_ACTIVE);
 					}
 
-					instance._active.trigger = null;
-				}
-			},
-
-			_onDocumentClick: function(event) {
-				var instance = this;
-
-				var menu = instance._active.menu;
-
-				if (menu) {
-					var target = event.target;
-
-					var insideMenu = target.ancestor(
-						function(parent){
-							return parent === menu;
-						}
-					);
-
-					if (!insideMenu ) {
-						instance._closeActiveMenu();
-					}
+					active.trigger = null;
 				}
 			},
 
@@ -275,7 +264,7 @@ AUI().add(
 					 }
 				);
 
-				var anchor = trigger.one('a');
+				var anchor = trigger.one(SELECTOR_ANCHOR);
 
 				menu.on(
 					'key',
@@ -295,7 +284,7 @@ AUI().add(
 					'mouseenter',
 					function (event) {
 						if (focusManager.get('focused')) {
-							focusManager.focus(event.currentTarget.one('a'));
+							focusManager.focus(event.currentTarget.one(SELECTOR_ANCHOR));
 						}
 					},
 					LIST_ITEM
@@ -318,34 +307,25 @@ AUI().add(
 			_positionActiveMenu: function() {
 				var instance = this;
 
-				var menu = instance._active.menu;
-				var trigger = instance._active.trigger;
+				var active = instance._active;
+
+				var menu = active.menu;
+				var trigger = active.trigger;
 
 				if (menu) {
 					var triggerRegion = trigger.get('region');
 
 					var cssClass = trigger.attr(ATTR_CLASS_NAME);
 
-					var align = ALIGN_AUTO;
-					var direction = DIRECTION_AUTO;
+					var alignMatch = cssClass.match(REGEX_ALIGN);
+
+					var align = (alignMatch && alignMatch[1]) || ALIGN_AUTO;
+
+					var directionMatch = cssClass.match(REGEX_DIRECTION);
+
+					var direction = (directionMatch && directionMatch[1]) || DIRECTION_AUTO;
+
 					var win = instance._window;
-
-					if (cssClass.indexOf('align-right') > -1) {
-						align = ALIGN_RIGHT;
-					}
-					else if (cssClass.indexOf('align-left') > -1) {
-						align = ALIGN_LEFT;
-					}
-
-					if (cssClass.indexOf('direction-right') > -1) {
-						direction = DIRECTION_RIGHT;
-					}
-					else if (cssClass.indexOf('direction-left') > -1) {
-						direction = DIRECTION_LEFT;
-					}
-					else if (cssClass.indexOf('direction-down') > -1) {
-						direction = DIRECTION_DOWN;
-					}
 
 					var menuHeight = menu.get(OFFSET_HEIGHT);
 					var menuWidth = menu.get('offsetWidth');
@@ -370,13 +350,13 @@ AUI().add(
 						}
 
 						if (menuTop > windowHeight
-							&& !((triggerRegion.top - menuHeight) < 0)) {
+							&& ((triggerRegion.top - menuHeight) >= 0)) {
 
 							triggerRegion.top -= menuHeight;
 						}
 
 						if ((menuLeft > windowWidth || ((menuWidth/2) + triggerRegion.left) > windowWidth/2)
-							&& !((triggerRegion.left - menuWidth) < 0)) {
+							&& ((triggerRegion.left - menuWidth) >= 0)) {
 
 							triggerRegion.left -= (menuWidth - triggerWidth);
 						}
@@ -411,18 +391,17 @@ AUI().add(
 
 					menu.show();
 
-					if (A.UA.ie === 6 || A.UA.ie === 7) {
+					if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() <= 7) {
 						var searchContainer = menu.one(SELECTOR_SEARCH_CONTAINER);
 
 						if (searchContainer) {
-							searchContainer.setStyle('width', menu.get('clientWidth') + 'px');
-							menu.one(SELECTOR_SEARCH_INPUT).setStyle('width', '100%');
+							searchContainer.width(menu.innerWidth());
+
+							menu.one(SELECTOR_SEARCH_INPUT).width('100%');
 						}
 					}
 
-					var extended = (cssClass.indexOf(CSS_EXTENDED) > -1);
-
-					if (extended) {
+					if (cssClass.indexOf(CSS_EXTENDED) > -1) {
 						trigger.addClass(CSS_STATE_ACTIVE);
 					}
 
@@ -436,7 +415,7 @@ AUI().add(
 			},
 
 			_setARIARoles: function(trigger, menu) {
-				var links = menu.all('a');
+				var links = menu.all(SELECTOR_ANCHOR);
 
 				var searchContainer = menu.one(SELECTOR_SEARCH_CONTAINER);
 
@@ -451,7 +430,7 @@ AUI().add(
 					links.set(ARIA_ATTR_ROLE, 'option');
 				}
 
-				var anchor = trigger.one('a');
+				var anchor = trigger.one(SELECTOR_ANCHOR);
 
 				if (anchor) {
 					listNode.setAttribute('aria-labelledby', anchor.get(ID));
@@ -463,30 +442,26 @@ AUI().add(
 
 				var cssClass = trigger.attr(ATTR_CLASS_NAME);
 
-				var expanded = (cssClass.indexOf('lfr-menu-expanded') > -1);
+				if (cssClass.indexOf('lfr-menu-expanded') == -1) {
+					var match = REGEX_MAX_DISPLAY_ITEMS.exec(cssClass);
 
-				if (!expanded) {
-					var params = REGEX_MAX_VISIBLE_ITEMS.exec(cssClass);
+					var maxDisplayItems = match && parseInt(match[1], 10);
 
-					if (params && params.length === 2) {
-						var maxDisplayItems = parseInt(params[1], 10);
+					if (maxDisplayItems && listItems.size() > maxDisplayItems) {
+						instance._createLiveSearch(trigger, menu);
 
-						if (maxDisplayItems && listItems.size() > maxDisplayItems) {
-							instance._createLiveSearch(trigger, menu);
+						var totalHeight = instance._liveSearch.get('input').get(OFFSET_HEIGHT);
 
-							var totalHeight = instance._liveSearch.get('input').get(OFFSET_HEIGHT);
+						A.some(
+							listItems,
+							function(item, index) {
+								totalHeight += item.get(OFFSET_HEIGHT);
 
-							A.some(
-								listItems,
-								function(item, index) {
-									totalHeight += item.get(OFFSET_HEIGHT);
+								return index === (maxDisplayItems - 1);
+							}
+						);
 
-									return index === (maxDisplayItems - 1);
-								}
-							);
-
-							menu.setStyle('height', totalHeight + 'px');
-						}
+						menu.setStyle('height', totalHeight + 'px');
 					}
 				}
 			}
@@ -502,7 +477,7 @@ AUI().add(
 		};
 
 		Menu._targetLink = function(event, action) {
-			var anchor = event.currentTarget.one('a');
+			var anchor = event.currentTarget.one(SELECTOR_ANCHOR);
 
 			if (anchor) {
 				anchor[action]();

@@ -120,7 +120,7 @@
 }
 
 .lfr-menu-list-search {
-	border: 1px solid #FFCC00;
+	border: 1px solid #FC0;
 	padding: 2px;
 	width: 100%;
 }
