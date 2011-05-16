@@ -171,11 +171,21 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 	</target>
 
 	<target name="build-dist-tcat-admin-webapps-plugins">
-		<copy file="tunnel-web/tunnel-web.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/tunnel-web.war" />
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">plugins.includes=${lp.plugins.includes.tcat}</echo>
+
+		<ant dir="${lp.plugins.dir}" target="all" inheritAll="false" />
 
 		<copy todir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}">
 			<fileset dir="${lp.plugins.dir}/dist" includes="*.war" />
 		</copy>
+
+		<copy file="tunnel-web/tunnel-web.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/tunnel-web.war" />
+
+		<ant dir="${lp.plugins.dir}" target="clean" inheritAll="false" />
+
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">plugins.includes=${lp.plugins.normal}</echo>
+
+		<ant dir="${lp.plugins.dir}" target="all" inheritAll="false" />
 	</target>
 
 	<target name="build-dist-tcat-admin-webapps-portal">
@@ -583,7 +593,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 
 		<antcall target="zip-portal-war" />
 
-		<echo file="${lp.plugins.dir}/build.${user.name}.properties">plugins.includes=${lp.plugins.normal}</echo>
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">plugins.includes=${lp.plugins.includes.required}</echo>
 
 		<ant dir="${lp.plugins.dir}" target="all" inheritAll="false" />
 
