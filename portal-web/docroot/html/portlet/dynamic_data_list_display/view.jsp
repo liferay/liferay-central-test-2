@@ -36,6 +36,7 @@ try {
 				<liferay-util:param name="detailDDMTemplateId" value="<%= String.valueOf(detailDDMTemplateId) %>" />
 				<liferay-util:param name="listDDMTemplateId" value="<%= String.valueOf(listDDMTemplateId) %>" />
 				<liferay-util:param name="editable" value="<%= String.valueOf(editable) %>" />
+				<liferay-util:param name="spreadsheet" value="<%= String.valueOf(spreadsheet) %>" />
 			</liferay-util:include>
 
 		</c:when>

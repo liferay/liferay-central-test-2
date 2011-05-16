@@ -19,6 +19,12 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
+boolean editable = ParamUtil.getBoolean(request, "editable", true);
+
+if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
+	editable = true;
+}
+
 DDMStructure ddmStructure = recordSet.getDDMStructure();
 %>
 
@@ -29,17 +35,19 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 		</div>
 	</div>
 
-	<div class="lfr-spreadsheet-add-rows-buttons">
-		<aui:button inlineField="<%= true %>" name="addRecords" value="add" />
+	<c:if test="<%= editable %>">
+		<div class="lfr-spreadsheet-add-rows-buttons">
+			<aui:button inlineField="<%= true %>" name="addRecords" value="add" />
 
-		<aui:select inlineField="<%= true %>" inlineLabel="right" label="more-rows-at-bottom" name="numberOfRecords">
-			<aui:option value="1">1</aui:option>
-			<aui:option value="5">5</aui:option>
-			<aui:option value="10">10</aui:option>
-			<aui:option value="20">20</aui:option>
-			<aui:option value="50">50</aui:option>
-		</aui:select>
-	</div>
+			<aui:select inlineField="<%= true %>" inlineLabel="right" label="more-rows-at-bottom" name="numberOfRecords">
+				<aui:option value="1">1</aui:option>
+				<aui:option value="5">5</aui:option>
+				<aui:option value="10">10</aui:option>
+				<aui:option value="20">20</aui:option>
+				<aui:option value="50">50</aui:option>
+			</aui:select>
+		</div>
+	</c:if>
 </div>
 
 <aui:script use="liferay-portlet-dynamic-data-lists">
@@ -74,7 +82,7 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 			boundingBox: '#<portlet:namespace />dataTableBB',
 			columnset: columnset,
 			contentBox: '#<portlet:namespace />dataTableCC',
-			editEvent: 'dblclick',
+			editEvent: '<%= editable ? "dblclick" : "" %>',
 			recordset: recordset,
 			recordsetId: <%= recordSet.getRecordSetId() %>
 		}

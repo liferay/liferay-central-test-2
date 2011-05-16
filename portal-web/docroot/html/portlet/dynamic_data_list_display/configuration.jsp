@@ -103,6 +103,8 @@ catch (NoSuchRecordSetException nsrse) {
 			</aui:select>
 
 			<aui:input helpMessage="check-to-allow-users-to-add-records-to-the-list" name="editable" type="checkbox" value="<%= editable %>" onChange='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "editable.value = this.checked;" %>' />
+
+			<aui:input helpMessage="check-to-view-the-list-records-in-a-spreadsheet" name="spreadsheet" type="checkbox" value="<%= spreadsheet %>" onChange='<%= "document." + renderResponse.getNamespace() + "fm." + renderResponse.getNamespace() + "spreadsheet.value = this.checked;" %>' />
 		</aui:fieldset>
 	</c:if>
 
@@ -167,6 +169,7 @@ catch (NoSuchRecordSetException nsrse) {
 	<aui:input name="preferences--detailDDMTemplateId--" type="hidden" value="<%= detailDDMTemplateId %>" />
 	<aui:input name="preferences--listDDMTemplateId--" type="hidden" value="<%= listDDMTemplateId %>" />
 	<aui:input name="preferences--editable--" type="hidden" value="<%= editable %>" />
+	<aui:input name="preferences--spreadsheet--" type="hidden" value="<%= spreadsheet %>" />
 
 	<aui:fieldset cssClass="yui3-aui-helper-hidden">
 		<aui:field-wrapper label="portlet-id">
