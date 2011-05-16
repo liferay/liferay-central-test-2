@@ -110,6 +110,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
