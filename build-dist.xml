@@ -122,6 +122,14 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<property name="tcat.zip.name" value="TcatServer-6.4.4.zip" />
 		<property name="tcat.zip.url" value="http://files.liferay.com/public/bundles/trunk/${tcat.zip.name}" />
 
+		<script classpathref="project.classpath" language="beanshell">
+			String lpVersion = project.getProperty("lp.version");
+
+			String lpVersionTcat = lpVersion.replace(".", "_");
+
+			project.setProperty("lp.version.tcat", lpVersionTcat);
+		</script>
+
 		<delete dir="${tcat.dir}" />
 
 		<antcall target="build-dist-tcat-profile" />
@@ -175,11 +183,11 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 
 		<ant dir="${lp.plugins.dir}" target="all" inheritAll="false" />
 
-		<copy todir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}">
+		<copy todir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.tcat}">
 			<fileset dir="${lp.plugins.dir}/dist" includes="*.war" />
 		</copy>
 
-		<copy file="tunnel-web/tunnel-web.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/tunnel-web.war" />
+		<copy file="tunnel-web/tunnel-web.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.tcat}/tunnel-web.war" />
 
 		<ant dir="${lp.plugins.dir}" target="clean" inheritAll="false" />
 
@@ -206,13 +214,13 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 			</Context>]]>
 		</echo>
 
-		<mkdir dir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}" />
+		<mkdir dir="${tcat.dir}/admin/tcat_init/webapps/${lp.version.tcat}" />
 
-		<copy file="dist/liferay-portal-${lp.version}.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/ROOT.war" />
+		<copy file="dist/liferay-portal-${lp.version}.war" tofile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.tcat}/ROOT.war" />
 
 		<zip
 			basedir="${tstamp.value}"
-			destfile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.dtd}/ROOT.war"
+			destfile="${tcat.dir}/admin/tcat_init/webapps/${lp.version.tcat}/ROOT.war"
 			update="yes"
 		/>
 
