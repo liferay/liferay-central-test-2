@@ -151,7 +151,7 @@ select {
 }
 
 #main-content .lfr-panel.lfr-extended #panel-manage-content .lfr-panel-titlebar {
-	padding: 0px;
+	padding: 0;
 }
 
 #main-content .lfr-panel.lfr-collapsed .lfr-panel-titlebar {
@@ -304,7 +304,7 @@ select {
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-titlebar {
-	padding: 1px 1px 0px;
+	padding: 3px 6px;
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-titlebar .lfr-panel-title-single {
@@ -370,13 +370,19 @@ select {
 	padding-left: 20px;
 }
 
+.panel-page-menu #panel-manage-content.lfr-collapsed .lfr-panel-title .lfr-actions {
+	border-width: 0;
+	background-color: transparent;
+	background-image: none;
+}
+
+.panel-page-menu #panel-manage-content .lfr-panel-title .lfr-actions .lfr-trigger img {
+	vertical-align: text-bottom;
+}
+
 .panel-page-menu #panel-manage-content .lfr-panel-title span a, .panels-minimized .panel-page-menu #panel-manage-content .lfr-panel-title {
 	font-size: 13px;
 	padding-left: 20px;
-}
-
-.panel-page-menu #panel-manage-content .lfr-actions{
-	background: #BDC8D6 url(../images/portlet/header_bg.png) repeat-x 0px 100%;
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-title {
@@ -445,7 +451,7 @@ select {
 
 .panel-page-menu .lfr-panel-content ul li a .icon {
 	float: left;
-	padding: 0px 4px 0 0;
+	padding: 0 4px 0 0;
 }
 
 .panel-page-menu #groupSelectorPanel .lfr-panel-content ul li a {
@@ -463,6 +469,7 @@ select {
 .panel-page-menu #panel-manage-content .lfr-panel-title span, .panels-minimized .panel-page-menu #panel-manage-content .lfr-panel-title {
 	background-position: 3px -18px;
 	display: inline-block;
+	vertical-align: top;
 }
 
 .panel-page-menu #panel-manage-content .lfr-panel-title span a {
@@ -476,6 +483,11 @@ select {
 	position: absolute;
 	right: 5px;
 	top: 10px;
+}
+
+.panel-page-menu #panel-manage-content .lfr-panel-title span a:focus {
+	background-color: transparent;
+	text-decoration: none;
 }
 
 .panel-page-menu #panel-manage-portal .lfr-panel-title {
@@ -524,23 +536,23 @@ select {
 }
 
 #controlPanelMenuAddContentPanelContainer a:focus {
-	background: #5487af;
+	background-color: #5487af;
 }
 
 .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-my li a:focus, .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-my li.selected-portlet a {
-	background: #76AD00;
+	background-color: #76AD00;
 }
 
 .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-content li a:focus, .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-content li.selected-portlet a {
-	background: #005BA8;
+	background-color: #005BA8;
 }
 
 .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-portal li a:focus, .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-portal li.selected-portlet a {
-	background: #680082;
+	background-color: #680082;
 }
 
 .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-server li a:focus, .search-panel-active #controlPanelMenuAddContentPanelContainer #panel-manage-server li.selected-portlet a {
-	background: #727171;
+	background-color: #727171;
 }
 
 .panel-page-menu #controlPanelMenuAddContentPanelContainer .lfr-panel-titlebar a.lfr-panel-button:focus {
@@ -575,7 +587,7 @@ select {
 }
 
 .panels-minimized .panel-page-menu #panel-manage-content .lfr-panel-title {
-	background-position: 0px -18px;
+	background-position: 0 -18px;
 }
 
 .panels-minimized #controlPanelMenuAddContentPanelContainer .lfr-panel-content {
@@ -690,7 +702,7 @@ select {
 	font-size: 0.8em;
 	margin-left: 2px;
 	padding: 1px 10px;
-	text-shadow: 1px 1px 0px #000;
+	text-shadow: 1px 1px 0 #000;
 	vertical-align: top;
 }
 
