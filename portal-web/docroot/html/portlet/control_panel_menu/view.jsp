@@ -128,8 +128,8 @@
 								for (int i = 0; i < manageableSites.size(); i++) {
 									Group group = manageableSites.get(i);
 
-									String message = HtmlUtil.escape(group.getDescriptiveName());
 									String image = "site";
+									String message = HtmlUtil.escape(group.getDescriptiveName());
 
 									if (group.isCompany()) {
 										image = "folder";
