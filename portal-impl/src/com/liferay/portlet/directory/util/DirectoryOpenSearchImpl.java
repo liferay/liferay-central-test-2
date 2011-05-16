@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortletKeys;
@@ -97,10 +98,10 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 			UnicodeProperties properties = expandoBridge.getAttributeProperties(
 				attributeName);
 
-			String indexType = properties.getProperty(
-				ExpandoColumnConstants.INDEX_TYPE);
+			int indexType = GetterUtil.getInteger(
+				properties.getProperty(ExpandoColumnConstants.INDEX_TYPE));
 
-			if (!indexType.equals(ExpandoColumnConstants.INDEX_TYPE_NONE)) {
+			if (indexType != ExpandoColumnConstants.INDEX_TYPE_NONE) {
 				userParams.put(attributeName, keywords);
 			}
 		}

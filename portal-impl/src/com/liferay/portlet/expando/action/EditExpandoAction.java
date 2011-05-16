@@ -165,24 +165,28 @@ public class EditExpandoAction extends PortletAction {
 
 		if (preset.equals("PresetSelectionIntegerArray()")) {
 			type = ExpandoColumnConstants.INTEGER_ARRAY;
+
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE,
 				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_SELECTION_LIST);
 		}
 		else if (preset.equals("PresetSelectionDoubleArray()")) {
 			type = ExpandoColumnConstants.DOUBLE_ARRAY;
+
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE,
 				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_SELECTION_LIST);
 		}
 		else if (preset.equals("PresetSelectionStringArray()")) {
 			type = ExpandoColumnConstants.STRING_ARRAY;
+
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE,
 				ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_SELECTION_LIST);
 		}
 		else if (preset.equals("PresetTextBox()")) {
 			type = ExpandoColumnConstants.STRING;
+
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_HEIGHT, "105");
 			properties.setProperty(
@@ -190,6 +194,7 @@ public class EditExpandoAction extends PortletAction {
 		}
 		else if (preset.equals("PresetTextBoxIndexed()")) {
 			type = ExpandoColumnConstants.STRING;
+
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_HEIGHT, "105");
 			properties.setProperty(
@@ -200,12 +205,14 @@ public class EditExpandoAction extends PortletAction {
 		}
 		else if (preset.equals("PresetTextFieldSecret()")) {
 			type = ExpandoColumnConstants.STRING;
+
 			properties.setProperty(
 				ExpandoColumnConstants.PROPERTY_SECRET,
 				Boolean.TRUE.toString());
 		}
 		else {
 			type = ExpandoColumnConstants.STRING;
+
 			properties.setProperty(
 				ExpandoColumnConstants.INDEX_TYPE,
 				String.valueOf(ExpandoColumnConstants.INDEX_TYPE_TEXT));
@@ -224,12 +231,13 @@ public class EditExpandoAction extends PortletAction {
 		ExpandoColumnServiceUtil.deleteColumn(columnId);
 	}
 
-	public static Serializable getValue(
+	protected Serializable getValue(
 			PortletRequest portletRequest, String name, int type)
 		throws PortalException, SystemException {
 
-		Serializable value = null;
 		String delimiter = StringPool.COMMA;
+
+		Serializable value = null;
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
 			value = ParamUtil.getBoolean(portletRequest, name);

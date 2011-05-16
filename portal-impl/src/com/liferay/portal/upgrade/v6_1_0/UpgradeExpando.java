@@ -16,6 +16,9 @@ package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,6 +31,92 @@ import java.sql.ResultSet;
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
+		updateTypeSettingsIndexable();
+		updateTypeSettingsSelection();
+	}
+
+	protected void updateTypeSettings(long columnId, String typeSettings)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update ExpandoColumn set typeSettings = ? where columnId = ?");
+
+			ps.setString(1, typeSettings);
+			ps.setLong(2, columnId);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void updateTypeSettingsIndexable() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select columnId, type_, typeSettings from ExpandoColumn " +
+					"where typeSettings like '%indexable%'");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long columnId = rs.getLong("columnId");
+				int type = rs.getInt("type_");
+				String typeSettings = rs.getString("typeSettings");
+
+				UnicodeProperties typeSettingsProperties =
+					new UnicodeProperties(true);
+
+				typeSettingsProperties.load(typeSettings);
+
+				boolean indexable = GetterUtil.getBoolean(
+					typeSettingsProperties.getProperty("indexable"));
+
+				if (indexable) {
+					if ((type == ExpandoColumnConstants.STRING) ||
+						(type == ExpandoColumnConstants.STRING_ARRAY)) {
+
+						typeSettingsProperties.setProperty(
+							ExpandoColumnConstants.INDEX_TYPE,
+							String.valueOf(
+								ExpandoColumnConstants.INDEX_TYPE_TEXT));
+					}
+					else {
+						typeSettingsProperties.setProperty(
+							ExpandoColumnConstants.INDEX_TYPE,
+							String.valueOf(
+								ExpandoColumnConstants.INDEX_TYPE_KEYWORD));
+					}
+				}
+				else {
+					typeSettingsProperties.setProperty(
+						ExpandoColumnConstants.INDEX_TYPE,
+						String.valueOf(ExpandoColumnConstants.INDEX_TYPE_NONE));
+				}
+
+				typeSettingsProperties.remove("indexable");
+
+				updateTypeSettings(columnId, typeSettingsProperties.toString());
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateTypeSettingsSelection() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -51,33 +140,11 @@ public class UpgradeExpando extends UpgradeProcess {
 				typeSettings = typeSettings.replace(
 					"selection=0", "display-type=text-box");
 
-				updateColumn(columnId, typeSettings);
+				updateTypeSettings(columnId, typeSettings);
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateColumn(long columnId, String typeSettings)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update ExpandoColumn set typeSettings = ? where columnId = ?");
-
-			ps.setString(1, typeSettings);
-			ps.setLong(2, columnId);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
 		}
 	}
 
