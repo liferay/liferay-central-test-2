@@ -751,12 +751,16 @@ public class StringUtil {
 	public static String replace(
 		String s, String oldSub, String newSub, int fromIndex) {
 
-		if ((s == null) || (oldSub == null) || (newSub == null)) {
+		if (s == null) {
 			return null;
 		}
 
-		if (oldSub.equals(StringPool.BLANK)) {
+		if (Validator.isNull(oldSub)) {
 			return s;
+		}
+
+		if (newSub == null) {
+			newSub = StringPool.BLANK;
 		}
 
 		int y = s.indexOf(oldSub, fromIndex);
