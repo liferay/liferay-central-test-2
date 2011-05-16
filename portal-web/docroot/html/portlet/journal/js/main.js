@@ -2147,6 +2147,7 @@ AUI().add(
 				var instance = this;
 
 				var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
+
 				if (editContainerWrapper) {
 					var editContainerCheckboxes = editContainerWrapper.all('input[type=checkbox]');
 					var editContainerInputs = editContainerWrapper.all('input[type=text],select');
