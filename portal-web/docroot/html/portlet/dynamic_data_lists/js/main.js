@@ -1,19 +1,31 @@
 AUI().add(
 	'liferay-portlet-dynamic-data-lists',
 	function(A) {
-		var Lang = A.Lang,
+		var AArray = A.Array;
 
-		getObjectKeys = A.Object.keys,
+		var Lang = A.Lang;
 
-		_COMMA = ',',
-		_EMPTY = '',
-		_EMPTY_FN = function() {};
+		var DDL = Liferay.Service.DDL;
 
-		var LiferaySpreadSheet = A.Component.create(
+		var DDLRecord = DDL.DDLRecord;
+
+		var DDLRecordSet = DDL.DDLRecordSet;
+
+		var DDLRecordSet = DDL.DDLRecordSet;
+
+		var getObjectKeys = A.Object.keys;
+
+		var JSON = A.JSON;
+
+		var EMPTY_FN = A.Lang.emptyFn;
+
+		var STR_EMPTY = '';
+
+		var SpreadSheet = A.Component.create(
 			{
 				ATTRS: {
 					portletNamespace: {
-						value: _EMPTY,
+						value: STR_EMPTY,
 						validator: Lang.isString
 					},
 
@@ -25,7 +37,7 @@ AUI().add(
 
 				EXTENDS: A.DataTable.Base,
 
-				NAME: 'liferayspreadsheet',
+				NAME: 'spreadsheet',
 
 				prototype: {
 					initializer: function() {
@@ -33,17 +45,16 @@ AUI().add(
 
 						var recordset = instance.get('recordset');
 
-						recordset.on('update', A.bind(instance._onRecordUpdate, instance));
+						recordset.on('update', instance._onRecordUpdate, instance);
 					},
 
 					addEmptyRows: function(num) {
 						var instance = this;
 
 						var columnset = instance.get('columnset');
-
 						var recordset = instance.get('recordset');
 
-						var emptyRows = LiferaySpreadSheet.buildEmptyRecords(num, getObjectKeys(columnset.keyHash));
+						var emptyRows = SpreadSheet.buildEmptyRecords(num, getObjectKeys(columnset.keyHash));
 
 						recordset.add(emptyRows);
 
@@ -55,61 +66,67 @@ AUI().add(
 					addRecord: function(displayIndex, fieldsMap, callback) {
 						var instance = this;
 
+						callback = A.bind(callback || EMPTY_FN, instance);
+
 						var recordsetId = instance.get('recordsetId');
 
-						Liferay.Service.DDL.DDLRecord.addRecord(
+						DDL_RECORD.addRecord(
 							{
 								recordSetId: recordsetId,
-							    fieldsMap: A.JSON.stringify(fieldsMap),
-							    displayIndex: displayIndex,
-							    serviceContext: A.JSON.stringify(
-							        {
-							            scopeGroupId: themeDisplay.getScopeGroupId(),
-							            userId: themeDisplay.getUserId()
-							        }
-							    )
+								fieldsMap: JSON.stringify(fieldsMap),
+								displayIndex: displayIndex,
+								serviceContext: JSON.stringify(
+									{
+										scopeGroupId: themeDisplay.getScopeGroupId(),
+										userId: themeDisplay.getUserId()
+									}
+								)
 							},
-							A.bind(callback || _EMPTY_FN, instance)
+							callback
 						);
 					},
 
 					updateMinDisplayRows: function(minDisplayRows, callback) {
 						var instance = this;
 
+						callback = A.bind(callback || EMPTY_FN, instance);
+
 						var recordsetId = instance.get('recordsetId');
 
-						Liferay.Service.DDL.DDLRecordSet.updateMinDisplayRows(
+						DDLRecordSet.updateMinDisplayRows(
 							{
 								recordSetId: recordsetId,
-							    minDisplayRows: minDisplayRows,
-							    serviceContext: A.JSON.stringify(
-							        {
-							            scopeGroupId: themeDisplay.getScopeGroupId(),
-							            userId: themeDisplay.getUserId()
-							        }
-							    )
+								minDisplayRows: minDisplayRows,
+								serviceContext: JSON.stringify(
+									{
+										scopeGroupId: themeDisplay.getScopeGroupId(),
+										userId: themeDisplay.getUserId()
+									}
+								)
 							},
-							A.bind(callback || _EMPTY_FN, instance)
+							callback
 						);
 					},
 
 					updateRecord: function(recordId, displayIndex, fieldsMap, merge, callback) {
 						var instance = this;
 
-						Liferay.Service.DDL.DDLRecord.updateRecord(
+						callback = A.bind(callback || EMPTY_FN, instance);
+
+						DDLRecord.updateRecord(
 							{
 								recordId: recordId,
-							    fieldsMap: A.JSON.stringify(fieldsMap),
-							    displayIndex: displayIndex,
-							    merge: merge,
-							    serviceContext: A.JSON.stringify(
-							        {
-							            scopeGroupId: themeDisplay.getScopeGroupId(),
-							            userId: themeDisplay.getUserId()
-							        }
-							    )
+								fieldsMap: JSON.stringify(fieldsMap),
+								displayIndex: displayIndex,
+								merge: merge,
+								serviceContext: JSON.stringify(
+									{
+										scopeGroupId: themeDisplay.getScopeGroupId(),
+										userId: themeDisplay.getUserId()
+									}
+								)
 							},
-							A.bind(callback || _EMPTY_FN, instance)
+							callback
 						);
 					},
 
@@ -120,8 +137,8 @@ AUI().add(
 
 						A.each(
 							data,
-							function(value, key) {
-								normalized[key] = instance._normalizeValue(value);
+							function(item, index, collection) {
+								normalized[index] = instance._normalizeValue(item);
 							}
 						);
 
@@ -135,7 +152,7 @@ AUI().add(
 						var instance = this;
 
 						if (Lang.isArray(value)) {
-							value = value.join(_COMMA);
+							value = value.join();
 						}
 
 						return String(value);
@@ -146,10 +163,11 @@ AUI().add(
 
 						var recordIndex = event.index;
 
-						A.Array.each(
+						AArray.each(
 							event.updated,
-							function(record) {
-								var data = record.get('data');
+							function(item, index, collection) {
+								var data = item.get('data');
+
 								var fieldsMap = instance._normalizeRecordData(data);
 
 								if (data.recordId > 0) {
@@ -169,26 +187,21 @@ AUI().add(
 							}
 						);
 					}
-				}
-			}
-		);
+				},
 
-		A.mix(
-			LiferaySpreadSheet,
-			{
 				buildDataTableColumnset: function(columnset, structure) {
 					var instance = this;
 
-					A.Array.each(
+					AArray.each(
 						columnset,
-						function(column) {
-							column.key = column.name;
+						function(item, index, collection) {
+							item.key = item.name;
 
-							if (column.editable) {
-								var dataType = column.dataType;
-								var label = column.label;
-								var required = column.required;
-								var type = column.type;
+							if (item.editable) {
+								var dataType = item.dataType;
+								var label = item.label;
+								var required = item.required;
+								var type = item.type;
 
 								var EditorClass = instance.TYPE_EDITOR[type] || A.TextCellEditor;
 
@@ -203,10 +216,10 @@ AUI().add(
 								if (type === 'checkbox') {
 									elementName = label;
 
-									config.options = [ label ];
+									config.options = [label];
 								}
 								else if ((type === 'radio') || (type === 'select')) {
-									var structureField = instance.findStructureFieldByKey(structure, column.key);
+									var structureField = instance.findStructureFieldByKey(structure, item.key);
 
 									config.options = instance.getCellEditorOptions(structureField.options);
 								}
@@ -222,7 +235,7 @@ AUI().add(
 									validatorRules[elementName][validatorRuleName] = true;
 								}
 
-								column.editor = new EditorClass(config);
+								item.editor = new EditorClass(config);
 							}
 						}
 					);
@@ -245,10 +258,10 @@ AUI().add(
 				findStructureFieldByKey: function(structure, key) {
 					var found = null;
 
-					A.Array.some(
+					AArray.some(
 						structure,
-						function(field) {
-							found = field;
+						function(item, index, collection) {
+							found = item;
 
 							return (found.key === key);
 						}
@@ -260,10 +273,10 @@ AUI().add(
 				getCellEditorOptions: function(options) {
 					var normalized = {};
 
-					A.Array.each(
+					AArray.each(
 						options,
-						function(option) {
-							normalized[option.name] = option.value;
+						function(item, index, collection) {
+							normalized[item.name] = item.value;
 						}
 					);
 
@@ -275,10 +288,10 @@ AUI().add(
 
 					var recordModel = {};
 
-					A.Array.each(
+					AArray.each(
 						keys,
-						function(key) {
-							recordModel[key] = _EMPTY;
+						function(item, index, collection) {
+							recordModel[item] = STR_EMPTY;
 						}
 					);
 
@@ -305,7 +318,7 @@ AUI().add(
 			}
 		);
 
-		Liferay.LiferaySpreadSheet = LiferaySpreadSheet;
+		Liferay.SpreadSheet = SpreadSheet;
 	},
 	'',
 	{

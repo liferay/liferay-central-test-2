@@ -49,9 +49,11 @@
 
 .yui3-skin-sam .lfr-spreadsheet-container {
 	.yui3-datatable td {
-		border-color: #ccc;
-		border-style: solid;
-		border-width: 0 1px 1px 0;
+		border: {
+			color: #CCC;
+			style: solid;
+			width: 0 1px 1px 0;
+		}
 	}
 
 	.yui3-datatable-liner {
@@ -60,18 +62,20 @@
 	}
 
 	.yui3-datatable-scrollable .yui3-datatable-bd {
-		background-color: #f2f2f2;
+		background-color: #F2F2F2;
 	}
 
 	tr.yui3-datatable-odd {
-		background-color: #fff;
+		background-color: #FFF;
 
 		td.yui3-datatable-asc, td.yui3-datatable-desc {
 			background-color: #EDF5FF;
 		}
 
-		td.yui3-datatable-asc.yui3-aui-datatable-cell-selected, td.yui3-datatable-desc.yui3-aui-datatable-cell-selected {
-			background-color: #6688EE;
+		td.yui3-datatable-asc, td.yui3-datatable-desc {
+			&.yui3-aui-datatable-cell-selected {
+				background-color: #6688EE;
+			}
 		}
 	}
 }

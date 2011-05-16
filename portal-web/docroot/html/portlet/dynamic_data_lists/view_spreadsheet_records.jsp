@@ -40,25 +40,23 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 			<aui:button inlineField="<%= true %>" name="addRecords" value="add" />
 
 			<aui:select inlineField="<%= true %>" inlineLabel="right" label="more-rows-at-bottom" name="numberOfRecords">
-				<aui:option value="1">1</aui:option>
-				<aui:option value="5">5</aui:option>
-				<aui:option value="10">10</aui:option>
-				<aui:option value="20">20</aui:option>
-				<aui:option value="50">50</aui:option>
+				<aui:option label="1" />
+				<aui:option label="5" />
+				<aui:option label="10" />
+				<aui:option label="20" />
+				<aui:option label="50" />
 			</aui:select>
 		</div>
 	</c:if>
 </div>
 
 <aui:script use="liferay-portlet-dynamic-data-lists">
-	var keys = [];
+	var columnset = Liferay.SpreadSheet.buildDataTableColumnset(<%= DDLUtil.getRecordSetJSONArray(recordSet) %>, <%= DDMXSDUtil.getJSONArray(ddmStructure.getXsd()) %>);
 
-	var columnset = Liferay.LiferaySpreadSheet.buildDataTableColumnset(<%= DDLUtil.getRecordSetJSONArray(recordSet) %>, <%= DDMXSDUtil.getJSONArray(ddmStructure.getXsd()) %>);
-
-	A.Array.each(
+	var keys = A.Array.map(
 		columnset,
-		function(column) {
-			keys.push(column.key);
+		function(item, index, collection) {
+			return item.key;
 		}
 	);
 
@@ -68,16 +66,16 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 	int totalEmptyRecords = Math.max(recordSet.getMinDisplayRows(), records.size()) - records.size();
 	%>
 
-	var recordset = Liferay.LiferaySpreadSheet.buildEmptyRecords(<%= totalEmptyRecords %>, keys);
+	var recordset = Liferay.SpreadSheet.buildEmptyRecords(<%= totalEmptyRecords %>, keys);
 
 	A.Array.each(
 		<%= DDLUtil.getRecordsJSONArray(records) %>,
-		function(record) {
-			recordset.splice(record.displayIndex, 0, record);
+		function(item, index, collection) {
+			recordset.splice(item.displayIndex, 0, item);
 		}
 	);
 
-	window.<portlet:namespace />spreadSheet = new Liferay.LiferaySpreadSheet(
+	var spreadSheet = new Liferay.SpreadSheet(
 		{
 			boundingBox: '#<portlet:namespace />dataTableBB',
 			columnset: columnset,
@@ -86,24 +84,22 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 			recordset: recordset,
 			recordsetId: <%= recordSet.getRecordSetId() %>
 		}
-	)
-	.plug(
+	).plug(
 		A.Plugin.DataTableScroll,
 		{
 			height: 700,
 			width: 900
 		}
-	)
-	.plug(
+	).plug(
 		A.Plugin.DataTableSelection,
 		{
 			selectEvent: 'mousedown'
 		}
-	)
-	.plug(A.Plugin.DataTableSort)
-	.render('#<portlet:namespace />spreadsheet');
+	).plug(A.Plugin.DataTableSort);
 
-	window.<portlet:namespace />spreadSheet.get('boundingBox').unselectable();
+	spreadSheet.render('#<portlet:namespace />spreadsheet');
+
+	spreadSheet.get('boundingBox').unselectable();
 
 	var numberOfRecordsNode = A.one('#<portlet:namespace />numberOfRecords');
 
@@ -112,11 +108,13 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 		function(event) {
 			var numberOfRecords = parseInt(numberOfRecordsNode.val(), 10) || 0;
 
-			var recordset = <portlet:namespace />spreadSheet.get('recordset');
+			var recordset = spreadSheet.get('recordset');
 
-			<portlet:namespace />spreadSheet.addEmptyRows(numberOfRecords);
+			spreadSheet.addEmptyRows(numberOfRecords);
 
-			<portlet:namespace />spreadSheet.updateMinDisplayRows(recordset.getLength());
+			spreadSheet.updateMinDisplayRows(recordset.getLength());
 		}
 	);
+
+	window.<portlet:namespace />spreadSheet = spreadSheet;
 </aui:script>
