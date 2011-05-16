@@ -798,10 +798,6 @@
 		<put name="portlet_content" value="/portlet/journal/view.jsp" />
 	</definition>
 
-	<definition name="portlet.journal.view_article" extends="portlet.journal">
-		<put name="portlet_content" value="/portlet/journal/view_article.jsp" />
-	</definition>
-
 	<definition name="portlet.journal.view_article_content" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/view_article_content.jsp" />
 	</definition>

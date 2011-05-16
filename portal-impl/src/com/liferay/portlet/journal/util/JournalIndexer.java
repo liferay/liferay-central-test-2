@@ -293,7 +293,7 @@ public class JournalIndexer extends BaseIndexer {
 		String articleId = document.get(Field.ENTRY_CLASS_PK);
 		String version = document.get("version");
 
-		portletURL.setParameter("struts_action", "/journal/view_article");
+		portletURL.setParameter("struts_action", "/journal/edit_article");
 		portletURL.setParameter("groupId", groupId);
 		portletURL.setParameter("articleId", articleId);
 		portletURL.setParameter("version", version);

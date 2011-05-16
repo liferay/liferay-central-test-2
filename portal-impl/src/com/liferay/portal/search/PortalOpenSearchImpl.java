@@ -26,17 +26,27 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -112,7 +122,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String url = portletURL.toString();
 
-				Date modifiedDate = result.getDate(Field.MODIFIED);
+				Date modifedDate = result.getDate(Field.MODIFIED);
 
 				String content = StringPool.BLANK;
 
@@ -129,6 +139,10 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					url = portletURL.toString();
 					content = summary.getContent();
 
+					if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
+						url = getJournalURL(
+							themeDisplay, resultGroupId, result);
+					}
 				}
 
 				double score = results.score(i);
@@ -137,7 +151,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					root, resultGroupId, resultScopeGroupId, entryClassName,
 					entryClassPK,
 					portletTitle + " " + CharPool.RAQUO + " " + title, url,
-					modifiedDate, content, score, format);
+					modifedDate, content, score, format);
 			}
 
 			if (_log.isDebugEnabled()) {
@@ -150,6 +164,57 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
+	}
+
+	protected String getJournalURL(
+			ThemeDisplay themeDisplay, long groupId, Document result)
+		throws Exception {
+
+		String articleId = result.get(Field.ENTRY_CLASS_PK);
+
+		JournalArticle article = JournalArticleServiceUtil.getArticle(
+			groupId, articleId);
+
+		if (Validator.isNotNull(article.getLayoutUuid())) {
+			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
+				GroupLocalServiceUtil.getGroup(article.getGroupId()),
+				false, themeDisplay);
+
+			return groupFriendlyURL.concat(
+				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
+					article.getUrlTitle());
+		}
+
+		Layout layout = themeDisplay.getLayout();
+
+		List<Long> hitLayoutIds =
+			JournalContentSearchLocalServiceUtil.getLayoutIds(
+				layout.getGroupId(), layout.isPrivateLayout(), articleId);
+
+		if (!hitLayoutIds.isEmpty()) {
+			Long hitLayoutId = hitLayoutIds.get(0);
+
+			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				hitLayoutId.longValue());
+
+			return PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+		}
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/journal/view_article_content?groupId=");
+		sb.append(groupId);
+		sb.append("&articleId=");
+		sb.append(articleId);
+		sb.append("&version=");
+
+		String version = result.get("version");
+
+		sb.append(version);
+
+		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortalOpenSearchImpl.class);

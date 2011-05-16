@@ -16,9 +16,4 @@
 		<implicit-parameter name="struts_action">/journal/rss</implicit-parameter>
 		<overridden-parameter name="p_p_cacheability">cacheLevelFull</overridden-parameter>
 	</route>
-	<route>
-		<pattern>/{groupId:\d+}/{articleId:\d+}</pattern>
-		<implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/journal/view_article</implicit-parameter>
-	</route>
 </routes>
