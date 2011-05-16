@@ -154,10 +154,11 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap[] getManageableSites(
-		java.lang.String actionId, int max) throws RemoteException {
+		com.liferay.portal.model.PortletSoap[] portlets, int max)
+		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getManageableSites(actionId,
-					max);
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getManageableSites(com.liferay.portal.model.impl.PortletModelImpl.toModels(
+						portlets), max);
 
 			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
