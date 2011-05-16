@@ -34,9 +34,7 @@ AUI().add(
 				var mergeDialog = instance._getMergeDialog();
 				var mergeDialogIO = mergeDialog.io;
 
-				var data = mergeDialogIO.get('data');
-
-				mergeDialogIO.set('uri', options.url);
+				mergeDialogIO.set('uri', options.uri);
 				mergeDialogIO.start();
 
 				mergeDialog.show();

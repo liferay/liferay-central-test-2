@@ -60,7 +60,7 @@ LayoutSetBranch layoutSetBranch = (LayoutSetBranch)row.getObject();
 		</portlet:renderURL>
 
 		<%
-		String taglibURL = "javascript:Liferay.Staging.Branching.mergeBranch({url: '" + mergeURL + "'});";
+		String taglibURL = "javascript:Liferay.Staging.Branching.mergeBranch({uri: '" + mergeURL + "'});";
 		%>
 
 		<liferay-ui:icon
