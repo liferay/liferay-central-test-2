@@ -316,7 +316,9 @@ AUI().add(
 			var fieldLabel = instance.getById('fieldLabel');
 			var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
 
-			editContainerWrapper.show();
+			if (editContainerWrapper) {
+				editContainerWrapper.show();
+			}
 
 			instance.editContainerContextPanel = new A.OverlayContextPanel(
 				{
@@ -2151,44 +2153,46 @@ AUI().add(
 				var instance = this;
 
 				var editContainerWrapper = instance.getById('#journalArticleEditFieldWrapper');
-				var editContainerCheckboxes = editContainerWrapper.all('input[type=checkbox]');
-				var editContainerInputs = editContainerWrapper.all('input[type=text],select');
-				var editContainerTextareas = editContainerWrapper.all('textarea');
-				var editFieldCancelButton = editContainerWrapper.one('.cancel-button .yui3-aui-button-input');
-				var editFieldCloseButton = editContainerWrapper.one('.close-button .yui3-aui-button-input');
-				var editFieldSaveButton = editContainerWrapper.one('.save-button .yui3-aui-button-input');
-				var wrapper = instance.getById('journalArticleWrapper');
+				if (editContainerWrapper) {
+					var editContainerCheckboxes = editContainerWrapper.all('input[type=checkbox]');
+					var editContainerInputs = editContainerWrapper.all('input[type=text],select');
+					var editContainerTextareas = editContainerWrapper.all('textarea');
+					var editFieldCancelButton = editContainerWrapper.one('.cancel-button .yui3-aui-button-input');
+					var editFieldCloseButton = editContainerWrapper.one('.close-button .yui3-aui-button-input');
+					var editFieldSaveButton = editContainerWrapper.one('.save-button .yui3-aui-button-input');
+					var wrapper = instance.getById('journalArticleWrapper');
 
-				editContainerCheckboxes.detach('click');
-				editContainerInputs.detach('change');
-				editContainerInputs.detach('keypress');
-				editContainerTextareas.detach('change');
-				editContainerTextareas.detach('keypress');
-				editFieldCancelButton.detach('click');
-				editFieldCloseButton.detach('click');
-				editFieldSaveButton.detach('click');
+					editContainerCheckboxes.detach('click');
+					editContainerInputs.detach('change');
+					editContainerInputs.detach('keypress');
+					editContainerTextareas.detach('change');
+					editContainerTextareas.detach('keypress');
+					editFieldCancelButton.detach('click');
+					editFieldCloseButton.detach('click');
+					editFieldSaveButton.detach('click');
 
-				var editContainerSaveMode = instance.editContainerSaveMode;
+					var editContainerSaveMode = instance.editContainerSaveMode;
 
-				editContainerCheckboxes.on('click', editContainerSaveMode, instance);
-				editContainerInputs.on('change', editContainerSaveMode, instance);
-				editContainerInputs.on('keypress', editContainerSaveMode, instance);
-				editContainerTextareas.on('change', editContainerSaveMode, instance);
-				editContainerTextareas.on('keypress', editContainerSaveMode, instance);
+					editContainerCheckboxes.on('click', editContainerSaveMode, instance);
+					editContainerInputs.on('change', editContainerSaveMode, instance);
+					editContainerInputs.on('keypress', editContainerSaveMode, instance);
+					editContainerTextareas.on('change', editContainerSaveMode, instance);
+					editContainerTextareas.on('keypress', editContainerSaveMode, instance);
 
-				editFieldSaveButton.on(
-					'click',
-					function() {
-						var source = instance.getSelectedField();
+					editFieldSaveButton.on(
+						'click',
+						function() {
+							var source = instance.getSelectedField();
 
-						instance.saveEditFieldOptions(source);
-					}
-				);
+							instance.saveEditFieldOptions(source);
+						}
+					);
 
-				var closeEditField = instance.closeEditFieldOptions;
+					var closeEditField = instance.closeEditFieldOptions;
 
-				editFieldCancelButton.on('click', closeEditField, instance);
-				editFieldCloseButton.on('click', closeEditField, instance);
+					editFieldCancelButton.on('click', closeEditField, instance);
+					editFieldCloseButton.on('click', closeEditField, instance);
+				}
 			},
 
 			_attachEvents: function() {
