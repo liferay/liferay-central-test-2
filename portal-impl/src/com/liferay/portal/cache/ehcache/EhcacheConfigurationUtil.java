@@ -27,11 +27,37 @@ import net.sf.ehcache.config.ConfigurationFactory;
 
 /**
  * @author Shuyang Zhou
+ * @author Edward Han
  */
 public class EhcacheConfigurationUtil {
 
 	public static Configuration getConfiguration(
 		String configurationResourcePath) {
+
+		return getConfiguration(configurationResourcePath, false);
+	}
+
+	public static Configuration getConfiguration(
+		URL configurationResourceURL) {
+
+		return getConfiguration(configurationResourceURL, false);
+	}
+
+	public static Configuration getConfiguration(
+		String configurationResourcePath, boolean clusterAware) {
+
+		return getConfiguration(configurationResourcePath, clusterAware, false);
+	}
+
+	public static Configuration getConfiguration(
+		URL configurationResourceURL, boolean clusterAware) {
+
+		return getConfiguration(configurationResourceURL, clusterAware, false);
+	}
+
+	public static Configuration getConfiguration(
+		String configurationResourcePath, boolean clusterAware,
+		boolean usingDefault) {
 
 		if (Validator.isNull(configurationResourcePath)) {
 			return null;
@@ -40,36 +66,99 @@ public class EhcacheConfigurationUtil {
 		URL url = EhcacheConfigurationUtil.class.getResource(
 			configurationResourcePath);
 
+		return getConfiguration(url, clusterAware, usingDefault);
+	}
+
+	public static Configuration getConfiguration(
+		URL configurationResourceURL, boolean clusterAware,
+		boolean usingDefault) {
+
+		if (Validator.isNull(configurationResourceURL)) {
+			return null;
+		}
+
 		Configuration configuration = ConfigurationFactory.parseConfiguration(
-			url);
+			configurationResourceURL);
 
-		if (PropsValues.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED) {
-			configuration.getCacheManagerPeerProviderFactoryConfiguration().
-				clear();
-			configuration.getCacheManagerPeerListenerFactoryConfigurations().
-				clear();
+		boolean enableClusterLinkReplication =
+			PropsValues.CLUSTER_LINK_ENABLED &&
+				PropsValues.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED;
 
-			CacheConfiguration defaultCacheConfiguration =
-				configuration.getDefaultCacheConfiguration();
-
-			_processCacheConfiguration(defaultCacheConfiguration);
-
-			for (CacheConfiguration cacheConfiguration :
-					configuration.getCacheConfigurations().values()) {
-
-				_processCacheConfiguration(cacheConfiguration);
-			}
+		if (clusterAware && (usingDefault || enableClusterLinkReplication)) {
+			return _processDefaultClusterLinkReplication(
+				configuration, usingDefault, enableClusterLinkReplication);
 		}
 
 		return configuration;
 	}
 
-	private static void _processCacheConfiguration(
+	private static Configuration _processDefaultClusterLinkReplication(
+		Configuration configuration, boolean usingDefault,
+		boolean enableClusterLinkReplication) {
+
+		boolean clearCachePeerProviderConfigurations =
+			((usingDefault && enableClusterLinkReplication) ||
+			 (usingDefault && !PropsValues.CLUSTER_LINK_ENABLED));
+
+		if (clearCachePeerProviderConfigurations) {
+			configuration.getCacheManagerPeerProviderFactoryConfiguration().
+				clear();
+			configuration.getCacheManagerPeerListenerFactoryConfigurations().
+				clear();
+		}
+
+		CacheConfiguration defaultCacheConfiguration =
+			configuration.getDefaultCacheConfiguration();
+
+		_configureCacheEventListeners(
+			enableClusterLinkReplication, clearCachePeerProviderConfigurations,
+			usingDefault, defaultCacheConfiguration);
+
+		for (CacheConfiguration cacheConfiguration :
+				configuration.getCacheConfigurations().values()) {
+
+			_configureCacheEventListeners(
+				enableClusterLinkReplication,
+				clearCachePeerProviderConfigurations, usingDefault,
+				cacheConfiguration);
+		}
+
+		return configuration;
+	}
+
+	private static void _configureCacheEventListeners(
+		boolean enableClusterLinkReplication,
+		boolean clearCachePeerProviderConfigurations, boolean usingDefault,
+		CacheConfiguration cacheConfiguration) {
+
+		if (cacheConfiguration == null) {
+			return;
+		}
+
+		boolean clearDefaultCacheListenerConfigurations =
+			clearCachePeerProviderConfigurations ||
+				(!usingDefault && !cacheConfiguration.isTerracottaClustered());
+
+		if (clearDefaultCacheListenerConfigurations ) {
+
+			_clearCacheEventListenerConfigurations(cacheConfiguration);
+
+			if (enableClusterLinkReplication) {
+				_enableClusterLinkReplication(cacheConfiguration);
+			}
+		}
+	}
+
+	private static void _clearCacheEventListenerConfigurations(
 		CacheConfiguration cacheConfiguration) {
 
 		cacheConfiguration.addBootstrapCacheLoaderFactory(null);
 
 		cacheConfiguration.getCacheEventListenerConfigurations().clear();
+	}
+
+	private static void _enableClusterLinkReplication(
+		CacheConfiguration cacheConfiguration) {
 
 		CacheEventListenerFactoryConfiguration configuration =
 			new CacheEventListenerFactoryConfiguration();
