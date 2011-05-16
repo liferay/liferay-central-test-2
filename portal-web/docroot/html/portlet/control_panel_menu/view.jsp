@@ -56,13 +56,33 @@
 					curGroup = scopeLayout.getGroup();
 				}
 
+				List<Group> manageableSites = GroupServiceUtil.getManageableSites(categoryPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+
+				Group userGroup = user.getGroup();
+
+				if (userGroup.hasPrivateLayouts() || userGroup.hasPublicLayouts()) {
+					manageableSites.add(0, userGroup);
+				}
+
+				if (PortalUtil.isCompanyControlPanelVisible(themeDisplay)) {
+					Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(themeDisplay.getCompanyId());
+
+					manageableSites.add(0, companyGroup);
+				}
+
+				if (!manageableSites.isEmpty() && !manageableSites.contains(curGroup)) {
+					curGroup = manageableSites.get(0);
+
+					themeDisplay.setScopeGroupId(curGroup.getGroupId());
+				}
+
 				String curGroupName = null;
 
 				if (curGroup.isCompany()) {
 					curGroupName = LanguageUtil.get(pageContext, "global");
 				}
 				else if (curGroup.isUser() && (curGroup.getClassPK() == user.getUserId())) {
-					curGroupName = LanguageUtil.get(pageContext, "my-site");
+					curGroupName = LanguageUtil.format(pageContext, "x-personal-site", curGroup.getDescriptiveName());
 				}
 				else {
 					curGroupName = curGroup.getDescriptiveName();
@@ -82,14 +102,6 @@
 						PortalUtil.addPortletBreadcrumbEntry(request, curGroupLabel, null);
 					}
 				}
-
-				List<Group> manageableSites = GroupServiceUtil.getManageableSites(categoryPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
-
-				boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
-
-				Group userGroup = user.getGroup();
-
-				boolean showPersonalSite = userGroup.hasPrivateLayouts() || userGroup.hasPublicLayouts();
 				%>
 
 				<liferay-util:buffer var="groupSelectorIconMenu">
@@ -111,36 +123,36 @@
 							%>
 
 							<liferay-ui:icon-menu align="left" direction="down" icon="<%= icon %>" id="groupSelector" message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>">
-								<c:if test="<%= showGlobal %>">
-									<liferay-ui:icon
-										image="folder"
-										message="global"
-										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", themeDisplay.getCompanyGroupId()) %>'
-									/>
-								</c:if>
-								<c:if test="<%= showPersonalSite %>">
-									<liferay-ui:icon
-										image="user_icon"
-										message="my-site"
-										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", userGroup.getGroupId()) %>'
-									/>
-								</c:if>
 
 								<%
 								for (int i = 0; i < manageableSites.size(); i++) {
 									Group group = manageableSites.get(i);
 
+									String message = HtmlUtil.escape(group.getDescriptiveName());
 									String image = "site";
 
-									if (group.isOrganization()) {
+									if (group.isCompany()) {
+										image = "folder";
+									}
+									else if (group.isOrganization()) {
 										image = "organization_icon";
+									}
+									else if (group.isUser()) {
+										image = "user_icon";
+										message = LanguageUtil.format(pageContext, "x-personal-site", group.getDescriptiveName());
+									}
+
+									String url = null;
+
+									if (manageableSites.size() > 1) {
+										url = HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId());
 									}
 								%>
 
 									<liferay-ui:icon
 										image="<%= image %>"
-										message="<%= HtmlUtil.escape(group.getDescriptiveName()) %>"
-										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>'
+										message="<%= message %>"
+										url="<%= url %>"
 									/>
 
 								<%
