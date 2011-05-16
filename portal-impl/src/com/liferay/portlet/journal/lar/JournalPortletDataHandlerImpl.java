@@ -1551,7 +1551,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (existingArticle == null) {
 				importedArticle = JournalArticleLocalServiceUtil.addArticle(
-					userId, portletDataContext.getScopeGroupId(), null, 0,
+					userId, portletDataContext.getScopeGroupId(), 0, 0,
 					articleId, autoArticleId, article.getVersion(),
 					article.getTitleMap(), article.getDescriptionMap(),
 					article.getContent(), article.getType(), parentStructureId,
@@ -1585,19 +1585,18 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 		else {
 			importedArticle = JournalArticleLocalServiceUtil.addArticle(
-				userId, portletDataContext.getScopeGroupId(), null, 0,
-				articleId, autoArticleId, article.getVersion(),
-				article.getTitleMap(), article.getDescriptionMap(),
-				article.getContent(), article.getType(), parentStructureId,
-				parentTemplateId, article.getLayoutUuid(), displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-				reviewDateHour, reviewDateMinute, neverReview,
-				article.isIndexable(), article.isSmallImage(),
-				article.getSmallImageURL(), smallFile, images, articleURL,
-				serviceContext);
+				userId, portletDataContext.getScopeGroupId(), 0, 0, articleId,
+				autoArticleId, article.getVersion(), article.getTitleMap(),
+				article.getDescriptionMap(), article.getContent(),
+				article.getType(), parentStructureId, parentTemplateId,
+				article.getLayoutUuid(), displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+				reviewDateMinute, neverReview, article.isIndexable(),
+				article.isSmallImage(), article.getSmallImageURL(), smallFile,
+				images, articleURL, serviceContext);
 		}
 
 		if (smallFile != null) {

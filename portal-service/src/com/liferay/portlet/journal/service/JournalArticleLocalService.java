@@ -240,7 +240,7 @@ public interface JournalArticleLocalService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long userId, long groupId, java.lang.String className, long classPK,
+		long userId, long groupId, long classNameId, long classPK,
 		java.lang.String articleId, boolean autoArticleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,

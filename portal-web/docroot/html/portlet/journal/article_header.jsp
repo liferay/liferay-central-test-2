@@ -32,13 +32,13 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
+long classNameId = BeanParamUtil.getLong(article, request, "classNameId");
+
 String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
 if ((article != null) && Validator.isNotNull(toLanguageId)) {
 	redirect = null;
 }
-
-long classNameId = BeanParamUtil.getLong(article, request, "classNameId");
 
 String title = "new-web-content";
 
@@ -52,5 +52,5 @@ else if (article != null) {
 
 <liferay-ui:header
 	backURL="<%= article != null ? redirect : backURL %>"
-	title='<%= title %>'
+	title="<%= title %>"
 />

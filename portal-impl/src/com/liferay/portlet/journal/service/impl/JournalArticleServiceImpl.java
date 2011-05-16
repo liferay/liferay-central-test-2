@@ -40,7 +40,7 @@ import java.util.Map;
 public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			long groupId, String className, long classPK, String articleId,
+			long groupId, long classNameId, long classPK, String articleId,
 			boolean autoArticleId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String content, String type,
 			String structureId, String templateId, String layoutUuid,
@@ -59,9 +59,9 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), groupId, className, classPK, articleId, autoArticleId,
-			JournalArticleConstants.DEFAULT_VERSION, titleMap, descriptionMap,
-			content, type, structureId, templateId, layoutUuid,
+			getUserId(), groupId, classNameId, classPK, articleId,
+			autoArticleId, JournalArticleConstants.DEFAULT_VERSION, titleMap,
+			descriptionMap, content, type, structureId, templateId, layoutUuid,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -72,7 +72,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			long groupId, String className, long classPK, String articleId,
+			long groupId, long classNameId, long classPK, String articleId,
 			boolean autoArticleId, Map<Locale, String> titleMap,
 			Map<Locale, String> descriptionMap, String content, String type,
 			String structureId, String templateId, String layoutUuid,
@@ -90,9 +90,9 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), groupId, className, classPK, articleId, autoArticleId,
-			JournalArticleConstants.DEFAULT_VERSION, titleMap, descriptionMap,
-			content, type, structureId, templateId, layoutUuid,
+			getUserId(), groupId, classNameId, classPK, articleId,
+			autoArticleId, JournalArticleConstants.DEFAULT_VERSION, titleMap,
+			descriptionMap, content, type, structureId, templateId, layoutUuid,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,

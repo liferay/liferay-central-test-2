@@ -460,14 +460,9 @@ public class EditArticleAction extends PortletAction {
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
+
 		long classNameId = ParamUtil.getLong(uploadRequest, "classNameId");
 		long classPK = ParamUtil.getLong(uploadRequest, "classPK");
-
-		String className = StringPool.BLANK;
-
-		if (classNameId > 0) {
-			className = PortalUtil.getClassName(classNameId);
-		}
 
 		String articleId = ParamUtil.getString(uploadRequest, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(
@@ -602,15 +597,15 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				groupId, className, classPK, articleId, autoArticleId, titleMap,
-				descriptionMap, content, type, structureId, templateId,
-				layoutUuid, displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, reviewDateMonth,
-				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, indexable, smallImage, smallImageURL, smallFile,
-				images, articleURL, serviceContext);
+				groupId, classNameId, classPK, articleId, autoArticleId,
+				titleMap, descriptionMap, content, type, structureId,
+				templateId, layoutUuid, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+				reviewDateMinute, neverReview, indexable, smallImage,
+				smallImageURL, smallFile, images, articleURL, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, JournalArticle.class.getName(),

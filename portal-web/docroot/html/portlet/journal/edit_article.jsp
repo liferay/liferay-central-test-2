@@ -186,6 +186,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 							<c:if test="<%= article.isSmallImage() %>">
 								<img alt="" class="article-image" src="<%= HtmlUtil.escape(_getArticleImage(themeDisplay, article)) %>" width="150" />
 							</c:if>
+
 							<c:if test="<%= !article.isNew() %>">
 								<span class="article-name"><%= HtmlUtil.escape(article.getTitle(locale)) %></span>
 							</c:if>
@@ -250,7 +251,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 					<c:choose>
 						<c:when test="<%= Validator.isNull(toLanguageId) %>">
 							<c:if test="<%= hasSavePermission %>">
-								<c:if test="<%= (classNameId == 0) %>">
+								<c:if test="<%= classNameId == 0 %>">
 									<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
 								</c:if>
 

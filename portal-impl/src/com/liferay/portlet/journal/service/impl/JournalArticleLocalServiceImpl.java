@@ -129,7 +129,7 @@ public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			long userId, long groupId, String className, long classPK,
+			long userId, long groupId, long classNameId, long classPK,
 			String articleId, boolean autoArticleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			String content, String type, String structureId, String templateId,
@@ -148,7 +148,6 @@ public class JournalArticleLocalServiceImpl
 		// Article
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long classNameId = PortalUtil.getClassNameId(className);
 		articleId = articleId.trim().toUpperCase();
 
 		Date displayDate = PortalUtil.getDate(
@@ -2196,6 +2195,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (article.getClassNameId() == 0) {
+
 			// Social
 
 			if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&

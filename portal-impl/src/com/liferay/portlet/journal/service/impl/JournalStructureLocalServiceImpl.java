@@ -274,21 +274,6 @@ public class JournalStructureLocalServiceImpl
 			throw new RequiredStructureException();
 		}
 
-		// Structure Default Values
-
-		try {
-			long classNameId = PortalUtil.getClassNameId(
-				JournalStructure.class.getName());
-
-			JournalArticle article = journalArticlePersistence.findByG_C_C(
-				structure.getGroupId(), classNameId, structure.getId());
-
-			JournalArticleLocalServiceUtil.deleteJournalArticle(
-				article.getId());
-		}
-		catch (NoSuchArticleException nsae) {
-		}
-
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
@@ -304,6 +289,20 @@ public class JournalStructureLocalServiceImpl
 		resourceLocalService.deleteResource(
 			structure.getCompanyId(), JournalStructure.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, structure.getId());
+
+		// Article
+
+		try {
+			long classNameId = PortalUtil.getClassNameId(
+				JournalStructure.class.getName());
+
+			JournalArticle article = journalArticlePersistence.findByG_C_C(
+				structure.getGroupId(), classNameId, structure.getId());
+
+			journalArticleLocalService.deleteJournalArticle(article.getId());
+		}
+		catch (NoSuchArticleException nsae) {
+		}
 
 		// Structure
 

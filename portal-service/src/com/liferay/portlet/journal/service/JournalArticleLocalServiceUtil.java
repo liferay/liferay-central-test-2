@@ -265,7 +265,7 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long userId, long groupId, java.lang.String className, long classPK,
+		long userId, long groupId, long classNameId, long classPK,
 		java.lang.String articleId, boolean autoArticleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
@@ -284,10 +284,10 @@ public class JournalArticleLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addArticle(userId, groupId, className, classPK, articleId,
-			autoArticleId, version, titleMap, descriptionMap, content, type,
-			structureId, templateId, layoutUuid, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour,
+				   .addArticle(userId, groupId, classNameId, classPK,
+			articleId, autoArticleId, version, titleMap, descriptionMap,
+			content, type, structureId, templateId, layoutUuid,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,

@@ -38,7 +38,7 @@ JournalStructure structure = (JournalStructure)row.getObject();
 	</c:if>
 
 	<c:if test="<%= JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.UPDATE) %>">
-		<liferay-portlet:renderURL var="editStructureDefaultValuesURL">
+		<portlet:renderURL var="editStructureDefaultValuesURL">
 			<portlet:param name="struts_action" value="/journal/edit_article" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
@@ -46,12 +46,12 @@ JournalStructure structure = (JournalStructure)row.getObject();
 			<portlet:param name="classNameId" value="<%= String.valueOf(PortalUtil.getClassNameId(JournalStructure.class.getName())) %>" />
 			<portlet:param name="classPK" value="<%= String.valueOf(structure.getId()) %>" />
 			<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
-		</liferay-portlet:renderURL>
+		</portlet:renderURL>
 
 		<liferay-ui:icon
 			image="edit"
-			url="<%= editStructureDefaultValuesURL %>"
 			message="edit-default-values"
+			url="<%= editStructureDefaultValuesURL %>"
 		/>
 	</c:if>
 

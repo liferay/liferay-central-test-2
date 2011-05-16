@@ -55,7 +55,7 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
  */
 public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		HttpPrincipal httpPrincipal, long groupId, long classNameId,
 		long classPK, java.lang.String articleId, boolean autoArticleId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
@@ -78,7 +78,7 @@ public class JournalArticleServiceHttp {
 					"addArticle", _addArticleParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					className, classPK, articleId, autoArticleId, titleMap,
+					classNameId, classPK, articleId, autoArticleId, titleMap,
 					descriptionMap, content, type, structureId, templateId,
 					layoutUuid, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
@@ -116,7 +116,7 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		HttpPrincipal httpPrincipal, long groupId, long classNameId,
 		long classPK, java.lang.String articleId, boolean autoArticleId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
@@ -137,7 +137,7 @@ public class JournalArticleServiceHttp {
 					"addArticle", _addArticleParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					className, classPK, articleId, autoArticleId, titleMap,
+					classNameId, classPK, articleId, autoArticleId, titleMap,
 					descriptionMap, content, type, structureId, templateId,
 					layoutUuid, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
@@ -1252,9 +1252,9 @@ public class JournalArticleServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(JournalArticleServiceHttp.class);
 	private static final Class<?>[] _addArticleParameterTypes0 = new Class[] {
-			long.class, java.lang.String.class, long.class,
-			java.lang.String.class, boolean.class, java.util.Map.class,
-			java.util.Map.class, java.lang.String.class, java.lang.String.class,
+			long.class, long.class, long.class, java.lang.String.class,
+			boolean.class, java.util.Map.class, java.util.Map.class,
+			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
@@ -1264,9 +1264,9 @@ public class JournalArticleServiceHttp {
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addArticleParameterTypes1 = new Class[] {
-			long.class, java.lang.String.class, long.class,
-			java.lang.String.class, boolean.class, java.util.Map.class,
-			java.util.Map.class, java.lang.String.class, java.lang.String.class,
+			long.class, long.class, long.class, java.lang.String.class,
+			boolean.class, java.util.Map.class, java.util.Map.class,
+			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,

@@ -30,7 +30,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long groupId, java.lang.String className, long classPK,
+		long groupId, long classNameId, long classPK,
 		java.lang.String articleId, boolean autoArticleId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
@@ -48,7 +48,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticleService.addArticle(groupId, className, classPK,
+		return _journalArticleService.addArticle(groupId, classNameId, classPK,
 			articleId, autoArticleId, titleMap, descriptionMap, content, type,
 			structureId, templateId, layoutUuid, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
@@ -61,7 +61,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		long groupId, java.lang.String className, long classPK,
+		long groupId, long classNameId, long classPK,
 		java.lang.String articleId, boolean autoArticleId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
@@ -77,7 +77,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticleService.addArticle(groupId, className, classPK,
+		return _journalArticleService.addArticle(groupId, classNameId, classPK,
 			articleId, autoArticleId, titleMap, descriptionMap, content, type,
 			structureId, templateId, layoutUuid, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,

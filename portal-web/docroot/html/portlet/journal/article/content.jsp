@@ -168,10 +168,10 @@ if (Validator.isNotNull(content)) {
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="structureId" value="<%= structureId %>" />
-	<portlet:param name="templateId" value="<%= templateId %>" />
 	<portlet:param name="classNameId" value="<%= classNameId %>" />
 	<portlet:param name="classPK" value="<%= classPK %>" />
+	<portlet:param name="structureId" value="<%= structureId %>" />
+	<portlet:param name="templateId" value="<%= templateId %>" />
 </portlet:renderURL>
 
 <table class="lfr-table" id="<portlet:namespace />journalArticleWrapper" width="100%">
@@ -226,7 +226,7 @@ if (Validator.isNotNull(content)) {
 										<%= HtmlUtil.escape(structureName) %>
 									</span>
 
-									<c:if test="<%= Validator.isNull(classNameId) %>">
+									<c:if test="<%= classNameId == 0 %>">
 										<liferay-ui:icon id="editStructureLink" image="edit" url="javascript:;" />
 
 										<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="changeStructureURL">
