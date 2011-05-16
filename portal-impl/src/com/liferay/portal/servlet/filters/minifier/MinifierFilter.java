@@ -76,6 +76,10 @@ public class MinifierFilter extends BasePortalFilter {
 
 		int pos = 0;
 
+		int v = content.indexOf(_CSS_COMMENT_BEGIN);
+		int w = content.indexOf(
+			_CSS_COMMENT_END, v + _CSS_COMMENT_BEGIN.length());
+
 		while (true) {
 			int x = content.indexOf(_CSS_IMPORT_BEGIN, pos);
 			int y = content.indexOf(
@@ -85,6 +89,17 @@ public class MinifierFilter extends BasePortalFilter {
 				sb.append(content.substring(pos, content.length()));
 
 				break;
+			}
+			else if ((v != -1) && (w != -1) && (v < x) && (w > x)) {
+				w += _CSS_COMMENT_END.length();
+
+				sb.append(content.substring(pos, w));
+
+				pos = w;
+
+				v = content.indexOf(_CSS_COMMENT_BEGIN, pos);
+				w = content.indexOf(
+					_CSS_COMMENT_END, v + _CSS_COMMENT_BEGIN.length());
 			}
 			else {
 				sb.append(content.substring(pos, x));
@@ -449,6 +464,10 @@ public class MinifierFilter extends BasePortalFilter {
 			new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
 			new String[] {StringPool.UNDERLINE, StringPool.UNDERLINE});
 	}
+
+	private static final String _CSS_COMMENT_BEGIN = "/*";
+
+	private static final String _CSS_COMMENT_END = "*/";
 
 	private static final String _CSS_IMPORT_BEGIN = "@import url(";
 
