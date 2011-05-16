@@ -25,24 +25,25 @@
 <%@ page import="com.liferay.portal.util.comparator.LayoutRevisionIdComparator" %>
 
 <%
-long groupId = ParamUtil.getLong(request, "groupId");
-boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-long selPlid = ParamUtil.getLong(request, "selPlid");
-
-Group group = null;
-Group liveGroup = null;
-Group stagingGroup = null;
-
 Layout selLayout = layout;
+
+long selPlid = ParamUtil.getLong(request, "selPlid");
 
 if (selPlid > 0) {
 	selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 }
 
+Group group = null;
+Group liveGroup = null;
+Group stagingGroup = null;
+
+long groupId = ParamUtil.getLong(request, "groupId");
+boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+
 if (groupId > 0) {
 	group = GroupLocalServiceUtil.getGroup(groupId);
 }
-else if (selLayout != null) {
+else {
 	group = selLayout.getGroup();
 
 	privateLayout = selLayout.isPrivateLayout();
