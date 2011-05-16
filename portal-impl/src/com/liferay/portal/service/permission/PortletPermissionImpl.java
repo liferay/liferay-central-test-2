@@ -99,8 +99,8 @@ public class PortletPermissionImpl implements PortletPermission {
 
 		for (Portlet portlet : portlets) {
 			if (contains(
-				permissionChecker, groupId, 0, portlet.getPortletId(),
-				ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
+					permissionChecker, groupId, 0, portlet.getPortletId(),
+					ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
 
 				return true;
 			}

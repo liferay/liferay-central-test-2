@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice;
+package com.liferay.portal.rest;
 
-import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.rest.REST;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -25,16 +25,15 @@ import java.lang.reflect.Method;
 /**
  * @author Igor Spasic
  */
-public class JSONWebServiceMappingResolver {
+public class RESTMappingResolver {
 
 	public String resolveHttpMethod(Method method) {
-		JSONWebService jsonWebServiceAnnotation =
-			method.getAnnotation(JSONWebService.class);
+		REST restAnnotation = method.getAnnotation(REST.class);
 
 		String httpMethod = null;
 
-		if (jsonWebServiceAnnotation != null) {
-			httpMethod = jsonWebServiceAnnotation.method().trim();
+		if (restAnnotation != null) {
+			httpMethod = restAnnotation.method().trim();
 		}
 
 		if (httpMethod != null && httpMethod.length() != 0) {
@@ -49,13 +48,12 @@ public class JSONWebServiceMappingResolver {
 	}
 
 	public String resolvePath(Class<?> clazz, Method method) {
-		JSONWebService jsonWebServiceAnnotation =
-			method.getAnnotation(JSONWebService.class);
+		REST restAnnotation = method.getAnnotation(REST.class);
 
 		String path = null;
 
-		if (jsonWebServiceAnnotation != null) {
-			path = jsonWebServiceAnnotation.value().trim();
+		if (restAnnotation != null) {
+			path = restAnnotation.value().trim();
 		}
 
 		if (path == null || path.length() == 0) {
@@ -68,11 +66,10 @@ public class JSONWebServiceMappingResolver {
 
 			String pathFromClass = null;
 
-			jsonWebServiceAnnotation =
-				clazz.getAnnotation(JSONWebService.class);
+			restAnnotation = clazz.getAnnotation(REST.class);
 
-			if (jsonWebServiceAnnotation != null) {
-				pathFromClass = jsonWebServiceAnnotation.value().trim();
+			if (restAnnotation != null) {
+				pathFromClass = restAnnotation.value().trim();
 			}
 
 			if (pathFromClass == null || pathFromClass.length() == 0) {

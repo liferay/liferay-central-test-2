@@ -12,17 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.kernel.jsonwebservice;
-
-import javax.servlet.http.HttpServletRequest;
+package com.liferay.portal.kernel.rest;
 
 /**
  * @author Igor Spasic
  */
-public interface JSONWebServiceAction {
+public enum RESTMode {
 
-	public Class<?> getReturnType();
-
-	public Object invoke(HttpServletRequest request) throws Exception;
+	AUTO, IGNORE, MANUAL
 
 }

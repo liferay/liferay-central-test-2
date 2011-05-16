@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice;
+package com.liferay.portal.rest;
 
 import com.liferay.portal.action.JSONServiceAction;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
-import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.rest.RESTAction;
+import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -33,17 +33,16 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Igor Spasic
  */
-public class JSONWebServiceServiceAction extends JSONServiceAction {
+public class RESTServiceAction extends JSONServiceAction {
 
-	public JSONWebServiceServiceAction(ClassLoader classLoader) {
-		JSONWebServiceConfigurator
-			jsonWebServiceConfigurator = new JSONWebServiceConfigurator();
+	public RESTServiceAction(ClassLoader classLoader) {
+		RESTConfigurator restConfigurator = new RESTConfigurator();
 
-		jsonWebServiceConfigurator.setJSONWebServiceActionsManager(
-			JSONWebServiceActionsManagerUtil.getJSONWebServiceActionsManager());
+		restConfigurator.setRESTActionsManager(
+			RESTActionsManagerUtil.getRESTActionsManager());
 
 		try {
-			jsonWebServiceConfigurator.configure(classLoader);
+			restConfigurator.configure(classLoader);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -56,14 +55,12 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 		throws Exception {
 
 		try {
-			JSONWebServiceAction jsonWebServiceAction =
-				JSONWebServiceActionsManagerUtil.lookup(request);
+			RESTAction restAction = RESTActionsManagerUtil.lookup(request);
 
-			Object returnObj = jsonWebServiceAction.invoke(request);
+			Object returnObj = restAction.invoke(request);
 
 			if (returnObj != null) {
-				return getReturnValue(
-					returnObj, jsonWebServiceAction.getReturnType());
+				return getReturnValue(returnObj, restAction.getReturnType());
 			}
 			else {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -91,9 +88,8 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 		return _REROUTE_PATH;
 	}
 
-	private static final String _REROUTE_PATH = "/jsonws";
+	private static final String _REROUTE_PATH = "/rest";
 
-	private static Log _log = LogFactoryUtil.getLog(
-		JSONWebServiceServiceAction.class);
+	private static Log _log = LogFactoryUtil.getLog(RESTServiceAction.class);
 
 }

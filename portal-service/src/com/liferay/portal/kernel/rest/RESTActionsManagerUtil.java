@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.jsonwebservice;
+package com.liferay.portal.kernel.rest;
 
 import java.lang.reflect.Method;
 
@@ -23,35 +23,31 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public class JSONWebServiceActionsManagerUtil {
+public class RESTActionsManagerUtil {
 
 	public static List<String[]> dumpMappings() {
-		return _jsonWebServiceActionsManager.dumpMappings();
+		return _restActionsManager.dumpMappings();
 	}
 
-	public static JSONWebServiceActionsManager
-			getJSONWebServiceActionsManager() {
-
-		return _jsonWebServiceActionsManager;
+	public static RESTActionsManager getRESTActionsManager() {
+		return _restActionsManager;
 	}
 
-	public static JSONWebServiceAction lookup(HttpServletRequest request) {
-		return getJSONWebServiceActionsManager().lookup(request);
+	public static RESTAction lookup(HttpServletRequest request) {
+		return getRESTActionsManager().lookup(request);
 	}
 
-	public static void registerJSONWebServiceAction(
+	public static void registerRESTAction(
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
-		getJSONWebServiceActionsManager().registerJSONWebServiceAction(
+		getRESTActionsManager().registerRESTAction(
 			actionClass, actionMethod, path, method);
 	}
 
-	public void setJsonWebServiceActionsManager(
-		JSONWebServiceActionsManager jsonWebServiceActionsManager) {
-
-		_jsonWebServiceActionsManager = jsonWebServiceActionsManager;
+	public void setRESTActionsManager(RESTActionsManager restActionsManager) {
+		_restActionsManager = restActionsManager;
 	}
 
-	private static JSONWebServiceActionsManager _jsonWebServiceActionsManager;
+	private static RESTActionsManager _restActionsManager;
 
 }

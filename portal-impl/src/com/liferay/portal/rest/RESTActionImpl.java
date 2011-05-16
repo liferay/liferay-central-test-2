@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice;
+package com.liferay.portal.rest;
 
-import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
+import com.liferay.portal.kernel.rest.RESTAction;
 import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Method;
@@ -26,26 +26,26 @@ import jodd.util.ReflectUtil;
 /**
  * @author Igor Spasic
  */
-public class JSONWebServiceActionImpl implements JSONWebServiceAction {
+public class RESTActionImpl implements RESTAction {
 
-	public JSONWebServiceActionImpl(
-		JSONWebServiceActionConfig jsonWebServiceActionConfig,
-		JSONWebServiceActionParameters jsonWebServiceActionParameters) {
+	public RESTActionImpl(
+		RESTActionConfig restActionConfig,
+		RESTActionParameters restActionParameters) {
 
-		_jsonWebServiceActionConfig = jsonWebServiceActionConfig;
-		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
+		_restActionConfig = restActionConfig;
+		_restActionParameters = restActionParameters;
 	}
 
 	public Class<?> getReturnType() {
-		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
+		Method actionMethod = _restActionConfig.getActionMethod();
 
 		return actionMethod.getReturnType();
 	}
 
 	public Object invoke(HttpServletRequest request) throws Exception {
-		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
+		Class<?> actionClass = _restActionConfig.getActionClass();
 
-		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
+		Method actionMethod = _restActionConfig.getActionMethod();
 
 		Object[] parameters = _prepareParameters();
 
@@ -55,11 +55,8 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 	}
 
 	private void _injectServiceContext(Object[] parameters) {
-		String[] parameterNames =
-			_jsonWebServiceActionConfig.getParameterNames();
-
-		Class<?>[] parameterTypes =
-			_jsonWebServiceActionConfig.getParameterTypes();
+		String[] parameterNames = _restActionConfig.getParameterNames();
+		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
 
 		for (int i = 0; i < parameterNames.length; i++) {
 			if (parameters[i] != null) {
@@ -78,19 +75,15 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 	}
 
 	private Object[] _prepareParameters() {
-		String[] parameterNames =
-			_jsonWebServiceActionConfig.getParameterNames();
-
-		Class<?>[] parameterTypes =
-			_jsonWebServiceActionConfig.getParameterTypes();
+		String[] parameterNames = _restActionConfig.getParameterNames();
+		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
 
 		Object[] parameters = new Object[parameterNames.length];
 
 		for (int i = 0; i < parameterNames.length; i++) {
 			String parameterName = parameterNames[i];
 
-			Object value =
-				_jsonWebServiceActionParameters.getParameter(parameterName);
+			Object value = _restActionParameters.getParameter(parameterName);
 
 			Object parameterValue = null;
 
@@ -106,7 +99,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		return parameters;
 	}
 
-	private JSONWebServiceActionConfig _jsonWebServiceActionConfig;
-	private JSONWebServiceActionParameters _jsonWebServiceActionParameters;
+	private RESTActionConfig _restActionConfig;
+	private RESTActionParameters _restActionParameters;
 
 }

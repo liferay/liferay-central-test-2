@@ -12,13 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.kernel.jsonwebservice;
+package com.liferay.portal.kernel.rest;
+
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author Igor Spasic
+ * @author Brian Wing Shun Chan
  */
-public enum JSONWebServiceMode {
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD, ElementType.TYPE})
+public @interface REST {
 
-	AUTO, IGNORE, MANUAL
+	public String value() default StringPool.BLANK;
+
+	public String method() default StringPool.BLANK;
+
+	public RESTMode mode() default RESTMode.AUTO;
 
 }
