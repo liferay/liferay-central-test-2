@@ -18,7 +18,10 @@ import com.liferay.portal.kernel.bean.BeanProperties;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.util.PortalUtil;
 
+import java.util.Date;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -456,6 +459,29 @@ public class BeanPropertiesImpl implements BeanProperties {
 			String value = request.getParameter(name);
 
 			BeanUtil.setPropertyForcedSilent(bean, name, value);
+
+			if (name.endsWith("Month")) {
+				String dateParam = name.substring(0, name.lastIndexOf("Month"));
+
+				if (request.getParameter(dateParam) != null) {
+					continue;
+				}
+
+				Class<?> propertyTypeClass = BeanUtil.getPropertyType(
+					bean, dateParam);
+
+				if (!propertyTypeClass.equals(Date.class)) {
+					continue;
+				}
+
+				int month = GetterUtil.getInteger(value);
+				int day = ParamUtil.getInteger(request, dateParam + "Day");
+				int year = ParamUtil.getInteger(request, dateParam + "Year");
+
+				Date date = PortalUtil.getDate(month, day, year);
+
+				BeanUtil.setPropertyForcedSilent(bean, dateParam, date);
+			}
 		}
 	}
 
