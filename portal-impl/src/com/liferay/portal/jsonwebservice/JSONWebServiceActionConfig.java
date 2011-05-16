@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil;
@@ -23,9 +23,10 @@ import java.lang.reflect.Method;
 /**
  * @author Igor Spasic
  */
-public class RESTActionConfig implements Comparable<RESTActionConfig> {
+public class JSONWebServiceActionConfig
+	implements Comparable<JSONWebServiceActionConfig> {
 
-	public RESTActionConfig(
+	public JSONWebServiceActionConfig(
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
 		_actionClass = actionClass;
@@ -52,8 +53,10 @@ public class RESTActionConfig implements Comparable<RESTActionConfig> {
 		_fullPath = sb.toString();
 	}
 
-	public int compareTo(RESTActionConfig restActionConfig) {
-		return _fullPath.compareTo(restActionConfig._fullPath);
+	public int compareTo(
+		JSONWebServiceActionConfig jsonWebServiceActionConfig) {
+
+		return _fullPath.compareTo(jsonWebServiceActionConfig._fullPath);
 	}
 
 	public Class<?> getActionClass() {

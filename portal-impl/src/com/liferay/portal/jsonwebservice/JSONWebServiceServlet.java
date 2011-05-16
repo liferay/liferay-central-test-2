@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
@@ -41,7 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Igor Spasic
  */
-public class RESTServlet extends JSONServlet {
+public class JSONWebServiceServlet extends JSONServlet {
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
@@ -67,7 +67,8 @@ public class RESTServlet extends JSONServlet {
 	protected void dumpMappings(HttpServletResponse response)
 		throws IOException {
 
-		List<String[]> mappings = RESTActionsManagerUtil.dumpMappings();
+		List<String[]> mappings = JSONWebServiceActionsManagerUtil
+			.dumpMappings();
 
 		StringBundler sb = new StringBundler(mappings.size() * 6 + 2);
 
@@ -117,7 +118,8 @@ public class RESTServlet extends JSONServlet {
 			(ClassLoader)servletContext.getAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER);
 
-		JSONAction jsonAction = new RESTServiceAction(portletClassLoader);
+		JSONAction jsonAction =
+			new JSONWebServiceServiceAction(portletClassLoader);
 
 		jsonAction.setServletContext(servletContext);
 

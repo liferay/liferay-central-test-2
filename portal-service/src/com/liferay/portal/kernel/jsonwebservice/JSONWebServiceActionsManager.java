@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.rest;
+package com.liferay.portal.kernel.jsonwebservice;
 
 import java.lang.reflect.Method;
 
@@ -23,13 +23,13 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public interface RESTActionsManager {
+public interface JSONWebServiceActionsManager {
 
 	public List<String[]> dumpMappings();
 
-	public RESTAction lookup(HttpServletRequest request);
+	public JSONWebServiceAction lookup(HttpServletRequest request);
 
-	public void registerRESTAction(
+	public void registerJSONWebServiceAction(
 		Class<?> actionClass, Method actionMethod, String path, String method);
 
 }

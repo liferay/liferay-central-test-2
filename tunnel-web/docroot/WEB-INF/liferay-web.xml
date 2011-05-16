@@ -38,7 +38,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>REST Servlet Filter</filter-name>
+		<filter-name>JSON Web Service Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -46,7 +46,7 @@
 		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
-			<param-value>rest.servlet.</param-value>
+			<param-value>jsonws.servlet.</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -130,7 +130,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Secure REST Servlet Filter</filter-name>
+		<filter-name>Secure JSON Web Service Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -142,7 +142,7 @@
 		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
-			<param-value>rest.servlet.</param-value>
+			<param-value>jsonws.servlet.</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -194,8 +194,8 @@
 		<url-pattern>/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>REST Servlet Filter</filter-name>
-		<url-pattern>/rest/*</url-pattern>
+		<filter-name>JSON Web Service Servlet Filter</filter-name>
+		<url-pattern>/jsonws/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Spring Servlet Filter</filter-name>
@@ -218,8 +218,8 @@
 		<url-pattern>/secure/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure REST Servlet Filter</filter-name>
-		<url-pattern>/secure/rest/*</url-pattern>
+		<filter-name>Secure JSON Web Service Servlet Filter</filter-name>
+		<url-pattern>/secure/jsonws/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Secure Spring Servlet Filter</filter-name>

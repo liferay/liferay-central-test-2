@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.REST;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -25,15 +25,16 @@ import java.lang.reflect.Method;
 /**
  * @author Igor Spasic
  */
-public class RESTMappingResolver {
+public class JSONWebServiceMappingResolver {
 
 	public String resolveHttpMethod(Method method) {
-		REST restAnnotation = method.getAnnotation(REST.class);
+		JSONWebService jsonWebServiceAnnotation =
+			method.getAnnotation(JSONWebService.class);
 
 		String httpMethod = null;
 
-		if (restAnnotation != null) {
-			httpMethod = restAnnotation.method().trim();
+		if (jsonWebServiceAnnotation != null) {
+			httpMethod = jsonWebServiceAnnotation.method().trim();
 		}
 
 		if (httpMethod != null && httpMethod.length() != 0) {
@@ -48,12 +49,13 @@ public class RESTMappingResolver {
 	}
 
 	public String resolvePath(Class<?> clazz, Method method) {
-		REST restAnnotation = method.getAnnotation(REST.class);
+		JSONWebService jsonWebServiceAnnotation =
+			method.getAnnotation(JSONWebService.class);
 
 		String path = null;
 
-		if (restAnnotation != null) {
-			path = restAnnotation.value().trim();
+		if (jsonWebServiceAnnotation != null) {
+			path = jsonWebServiceAnnotation.value().trim();
 		}
 
 		if (path == null || path.length() == 0) {
@@ -66,10 +68,11 @@ public class RESTMappingResolver {
 
 			String pathFromClass = null;
 
-			restAnnotation = clazz.getAnnotation(REST.class);
+			jsonWebServiceAnnotation =
+				clazz.getAnnotation(JSONWebService.class);
 
-			if (restAnnotation != null) {
-				pathFromClass = restAnnotation.value().trim();
+			if (jsonWebServiceAnnotation != null) {
+				pathFromClass = jsonWebServiceAnnotation.value().trim();
 			}
 
 			if (pathFromClass == null || pathFromClass.length() == 0) {

@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.rest.REST;
-import com.liferay.portal.kernel.rest.RESTActionsManager;
-import com.liferay.portal.kernel.rest.RESTMode;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -44,9 +44,9 @@ import org.apache.commons.lang.time.StopWatch;
 /**
  * @author Igor Spasic
  */
-public class RESTConfigurator extends FindClass {
+public class JSONWebServiceConfigurator extends FindClass {
 
-	public RESTConfigurator() {
+	public JSONWebServiceConfigurator() {
 		setIncludedJars("*portal-impl.jar", "*_wl_cls_gen.jar");
 	}
 
@@ -118,7 +118,7 @@ public class RESTConfigurator extends FindClass {
 		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Configure REST actions");
+			_log.debug("Configure JSON web service actions");
 
 			stopWatch = new StopWatch();
 
@@ -143,8 +143,10 @@ public class RESTConfigurator extends FindClass {
 		_checkBytecodeSignature = checkBytecodeSignature;
 	}
 
-	public void setRESTActionsManager(RESTActionsManager restActionsManager) {
-		_restActionsManager = restActionsManager;
+	public void setJSONWebServiceActionsManager(
+		JSONWebServiceActionsManager jsonWebServiceActionsManager) {
+
+		_jsonWebServiceActionsManager = jsonWebServiceActionsManager;
 	}
 
 	protected void onEntry(EntryData entryData) throws Exception {
@@ -154,16 +156,17 @@ public class RESTConfigurator extends FindClass {
 			if (_checkBytecodeSignature) {
 				InputStream inputStream = entryData.openInputStream();
 
-				if (!isTypeSignatureInUse(inputStream, _restAnnotationBytes)) {
+				if (!isTypeSignatureInUse(inputStream,
+					_jsonWebServiceAnnotationBytes)) {
 					return;
 				}
 			}
 
-			_onRESTClass(className);
+			_onJSONWebServiceClass(className);
 		}
 	}
 
-	private boolean _isRESTClass(Class<?> clazz) {
+	private boolean _isJSONWebServiceClass(Class<?> clazz) {
 		if (!clazz.isAnonymousClass() && !clazz.isArray() && !clazz.isEnum() &&
 			!clazz.isInterface() && !clazz.isLocalClass() &&
 			!clazz.isPrimitive() &&
@@ -203,19 +206,20 @@ public class RESTConfigurator extends FindClass {
 		return utilClass;
 	}
 
-	private void _onRESTClass(String className) throws Exception {
+	private void _onJSONWebServiceClass(String className) throws Exception {
 		Class<?> actionClass = _classLoader.loadClass(className);
 
-		if (!_isRESTClass(actionClass)) {
+		if (!_isJSONWebServiceClass(actionClass)) {
 			return;
 		}
 
-		REST restClassAnnotation = actionClass.getAnnotation(REST.class);
+		JSONWebService jsonWebServiceClassAnnotation =
+			actionClass.getAnnotation(JSONWebService.class);
 
-		RESTMode restClassRestMode = RESTMode.MANUAL;
+		JSONWebServiceMode jsonWebServiceClassMode = JSONWebServiceMode.MANUAL;
 
-		if (restClassAnnotation != null) {
-			restClassRestMode = restClassAnnotation.mode();
+		if (jsonWebServiceClassAnnotation != null) {
+			jsonWebServiceClassMode = jsonWebServiceClassAnnotation.mode();
 		}
 
 		Method[] methods = actionClass.getMethods();
@@ -229,43 +233,51 @@ public class RESTConfigurator extends FindClass {
 
 			boolean registerMethod = false;
 
-			REST restMethodAnnotation = method.getAnnotation(REST.class);
+			JSONWebService jsonWebService =
+				method.getAnnotation(JSONWebService.class);
 
-			if (restClassRestMode.equals(RESTMode.AUTO)) {
+			if (jsonWebServiceClassMode.equals(JSONWebServiceMode.AUTO)) {
 				registerMethod = true;
 
-				if (restMethodAnnotation != null) {
-					RESTMode restMethodRestMode = restMethodAnnotation.mode();
+				if (jsonWebService != null) {
+					JSONWebServiceMode jsonWebServiceMethodMode =
+						jsonWebService.mode();
 
-					if (restMethodRestMode.equals(RESTMode.IGNORE)) {
+					if (jsonWebServiceMethodMode.equals(
+						JSONWebServiceMode.IGNORE)) {
+
 						registerMethod = false;
 					}
 				}
 			}
 			else {
-				if (restMethodAnnotation != null) {
-					RESTMode restMethodRestMode = restMethodAnnotation.mode();
+				if (jsonWebService != null) {
+					JSONWebServiceMode jsonWebServiceMethodMode =
+						jsonWebService.mode();
 
-					if (!restMethodRestMode.equals(RESTMode.IGNORE)) {
+					if (!jsonWebServiceMethodMode.equals(
+						JSONWebServiceMode.IGNORE)) {
+
 						registerMethod = false;
 					}
 				}
 			}
 
 			if (registerMethod) {
-				_registerRESTAction(actionClass, method);
+				_registerJSONWebServiceAction(actionClass, method);
 			}
 		}
 	}
 
-	private void _registerRESTAction(
-			Class<?> implementationClass, Method method)
+	private void _registerJSONWebServiceAction(
+		Class<?> implementationClass, Method method)
 		throws Exception {
 
-		String path = _restMappingResolver.resolvePath(
+		String path = _jsonWebServiceMappingResolver.resolvePath(
 			implementationClass, method);
 
-		String httpMethod = _restMappingResolver.resolveHttpMethod(method);
+		String httpMethod =
+			_jsonWebServiceMappingResolver.resolveHttpMethod(method);
 
 		Class<?> utilClass = _loadUtilClass(implementationClass);
 
@@ -277,21 +289,23 @@ public class RESTConfigurator extends FindClass {
 			return;
 		}
 
-		_restActionsManager.registerRESTAction(
+		_jsonWebServiceActionsManager.registerJSONWebServiceAction(
 			method.getDeclaringClass(), method, path, httpMethod);
 
 		_registeredActionsCount++;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RESTConfigurator.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JSONWebServiceConfigurator.class);
 
 	private boolean _checkBytecodeSignature = true;
 	private ClassLoader _classLoader;
 	private int _registeredActionsCount;
-	private RESTActionsManager _restActionsManager;
-	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);
-	private RESTMappingResolver _restMappingResolver =
-		new RESTMappingResolver();
+	private JSONWebServiceActionsManager _jsonWebServiceActionsManager;
+	private byte[] _jsonWebServiceAnnotationBytes =
+		getTypeSignatureBytes(JSONWebService.class);
+	private JSONWebServiceMappingResolver _jsonWebServiceMappingResolver =
+		new JSONWebServiceMappingResolver();
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
 

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.CharPool;
@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Igor Spasic
  */
-public class RESTActionParameters {
+public class JSONWebServiceActionParameters {
 
 	public void collectAll(
 		HttpServletRequest request, String pathParameters,

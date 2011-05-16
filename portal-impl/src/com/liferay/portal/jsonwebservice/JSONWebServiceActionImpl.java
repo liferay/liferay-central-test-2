@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.RESTAction;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Method;
@@ -26,26 +26,26 @@ import jodd.util.ReflectUtil;
 /**
  * @author Igor Spasic
  */
-public class RESTActionImpl implements RESTAction {
+public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 
-	public RESTActionImpl(
-		RESTActionConfig restActionConfig,
-		RESTActionParameters restActionParameters) {
+	public JSONWebServiceActionImpl(
+		JSONWebServiceActionConfig jsonWebServiceActionConfig,
+		JSONWebServiceActionParameters jsonWebServiceActionParameters) {
 
-		_restActionConfig = restActionConfig;
-		_restActionParameters = restActionParameters;
+		_jsonWebServiceActionConfig = jsonWebServiceActionConfig;
+		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
 	}
 
 	public Class<?> getReturnType() {
-		Method actionMethod = _restActionConfig.getActionMethod();
+		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
 
 		return actionMethod.getReturnType();
 	}
 
 	public Object invoke(HttpServletRequest request) throws Exception {
-		Class<?> actionClass = _restActionConfig.getActionClass();
+		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
 
-		Method actionMethod = _restActionConfig.getActionMethod();
+		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
 
 		Object[] parameters = _prepareParameters();
 
@@ -55,8 +55,11 @@ public class RESTActionImpl implements RESTAction {
 	}
 
 	private void _injectServiceContext(Object[] parameters) {
-		String[] parameterNames = _restActionConfig.getParameterNames();
-		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
+		String[] parameterNames =
+			_jsonWebServiceActionConfig.getParameterNames();
+
+		Class<?>[] parameterTypes =
+			_jsonWebServiceActionConfig.getParameterTypes();
 
 		for (int i = 0; i < parameterNames.length; i++) {
 			if (parameters[i] != null) {
@@ -75,15 +78,19 @@ public class RESTActionImpl implements RESTAction {
 	}
 
 	private Object[] _prepareParameters() {
-		String[] parameterNames = _restActionConfig.getParameterNames();
-		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
+		String[] parameterNames =
+			_jsonWebServiceActionConfig.getParameterNames();
+
+		Class<?>[] parameterTypes =
+			_jsonWebServiceActionConfig.getParameterTypes();
 
 		Object[] parameters = new Object[parameterNames.length];
 
 		for (int i = 0; i < parameterNames.length; i++) {
 			String parameterName = parameterNames[i];
 
-			Object value = _restActionParameters.getParameter(parameterName);
+			Object value =
+				_jsonWebServiceActionParameters.getParameter(parameterName);
 
 			Object parameterValue = null;
 
@@ -99,7 +106,7 @@ public class RESTActionImpl implements RESTAction {
 		return parameters;
 	}
 
-	private RESTActionConfig _restActionConfig;
-	private RESTActionParameters _restActionParameters;
+	private JSONWebServiceActionConfig _jsonWebServiceActionConfig;
+	private JSONWebServiceActionParameters _jsonWebServiceActionParameters;
 
 }
