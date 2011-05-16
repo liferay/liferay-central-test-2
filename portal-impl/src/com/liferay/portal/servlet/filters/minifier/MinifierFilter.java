@@ -76,11 +76,11 @@ public class MinifierFilter extends BasePortalFilter {
 
 		int pos = 0;
 
-		int v = content.indexOf(_CSS_COMMENT_BEGIN);
-		int w = content.indexOf(
-			_CSS_COMMENT_END, v + _CSS_COMMENT_BEGIN.length());
-
 		while (true) {
+			int v = content.indexOf(_CSS_COMMENT_BEGIN, pos);
+			int w = content.indexOf(
+				_CSS_COMMENT_END, v + _CSS_COMMENT_BEGIN.length());
+
 			int x = content.indexOf(_CSS_IMPORT_BEGIN, pos);
 			int y = content.indexOf(
 				_CSS_IMPORT_END, x + _CSS_IMPORT_BEGIN.length());
@@ -96,10 +96,6 @@ public class MinifierFilter extends BasePortalFilter {
 				sb.append(content.substring(pos, w));
 
 				pos = w;
-
-				v = content.indexOf(_CSS_COMMENT_BEGIN, pos);
-				w = content.indexOf(
-					_CSS_COMMENT_END, v + _CSS_COMMENT_BEGIN.length());
 			}
 			else {
 				sb.append(content.substring(pos, x));
