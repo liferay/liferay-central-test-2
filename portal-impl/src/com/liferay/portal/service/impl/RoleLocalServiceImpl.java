@@ -151,20 +151,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			checkSystemRole(companyId, name, description, type);
 		}
 
-		// Community roles
-
-		String[] systemCommunityRoles = PortalUtil.getSystemSiteRoles();
-
-		for (String name : systemCommunityRoles) {
-			String description = PropsUtil.get(
-				"system.community.role." +
-				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
-				".description");
-			int type = RoleConstants.TYPE_SITE;
-
-			checkSystemRole(companyId, name, description, type);
-		}
-
 		// Organization roles
 
 		String[] systemOrganizationRoles =
@@ -176,6 +162,20 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 					StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
 					".description");
 			int type = RoleConstants.TYPE_ORGANIZATION;
+
+			checkSystemRole(companyId, name, description, type);
+		}
+
+		// Site roles
+
+		String[] systemSiteRoles = PortalUtil.getSystemSiteRoles();
+
+		for (String name : systemSiteRoles) {
+			String description = PropsUtil.get(
+				"system.community.role." +
+				StringUtil.replace(name, CharPool.SPACE, CharPool.PERIOD) +
+				".description");
+			int type = RoleConstants.TYPE_SITE;
 
 			checkSystemRole(companyId, name, description, type);
 		}

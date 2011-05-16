@@ -379,22 +379,6 @@ public interface Portal {
 	 */
 	public String getClassNamePortletId(String className);
 
-	/**
-	 * Gets the URL of the login page for the current site if one is available.
-	 *
-	 * @param  themeDisplay the theme display for the current page
-	 * @return the URL of the login page for the current site, or
-	 *         <code>null</code> if one is not available
-	 * @throws PortalException if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
-	 */
-	public String getSiteLoginURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException;
-
-	public String[] getGroupPermissions(HttpServletRequest request);
-
-	public String[] getGroupPermissions(PortletRequest portletRequest);
-
 	public Company getCompany(HttpServletRequest request)
 		throws PortalException, SystemException;
 
@@ -558,6 +542,10 @@ public interface Portal {
 	public String getGroupFriendlyURL(
 			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
+
+	public String[] getGroupPermissions(HttpServletRequest request);
+
+	public String[] getGroupPermissions(PortletRequest portletRequest);
 
 	public String[] getGuestPermissions(HttpServletRequest request);
 
@@ -797,6 +785,18 @@ public interface Portal {
 	public ServletContext getServletContext(
 		Portlet portlet, ServletContext servletContext);
 
+	/**
+	 * Gets the URL of the login page for the current site if one is available.
+	 *
+	 * @param  themeDisplay the theme display for the current page
+	 * @return the URL of the login page for the current site, or
+	 *         <code>null</code> if one is not available
+	 * @throws PortalException if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getSiteLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri);
 
@@ -812,19 +812,19 @@ public interface Portal {
 
 	public String getStrutsAction(HttpServletRequest request);
 
-	public String[] getSystemSiteRoles();
-
 	public String[] getSystemGroups();
 
 	public String[] getSystemOrganizationRoles();
 
 	public String[] getSystemRoles();
 
-	public UploadServletRequest getUploadServletRequest(
-		HttpServletRequest request);
+	public String[] getSystemSiteRoles();
 
 	public UploadPortletRequest getUploadPortletRequest(
 		PortletRequest portletRequest);
+
+	public UploadServletRequest getUploadServletRequest(
+		HttpServletRequest request);
 
 	public Date getUptime();
 
