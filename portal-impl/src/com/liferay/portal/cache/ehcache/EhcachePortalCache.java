@@ -65,6 +65,10 @@ public class EhcachePortalCache extends BasePortalCache {
 		return values;
 	}
 
+	public String getName() {
+		return _ehcache.getName();
+	}
+
 	public void put(String key, Object value) {
 		Element element = createElement(key, value);
 
