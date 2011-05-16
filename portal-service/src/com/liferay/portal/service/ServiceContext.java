@@ -40,17 +40,17 @@ public class ServiceContext implements Cloneable, Serializable {
 	public Object clone() {
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddCommunityPermissions(getAddCommunityPermissions());
+		serviceContext.setAddGroupPermissions(getAddGroupPermissions());
 		serviceContext.setAddGuestPermissions(getAddGuestPermissions());
 		serviceContext.setAssetCategoryIds(getAssetCategoryIds());
 		serviceContext.setAssetTagNames(getAssetTagNames());
 		serviceContext.setAttributes(getAttributes());
 		serviceContext.setCommand(getCommand());
-		serviceContext.setCommunityPermissions(getCommunityPermissions());
 		serviceContext.setCompanyId(getCompanyId());
 		serviceContext.setCreateDate(getCreateDate());
 		serviceContext.setCurrentURL(getCurrentURL());
 		serviceContext.setExpandoBridgeAttributes(getExpandoBridgeAttributes());
+		serviceContext.setGroupPermissions(getGroupPermissions());
 		serviceContext.setGuestPermissions(getGuestPermissions());
 		serviceContext.setLanguageId(getLanguageId());
 		serviceContext.setLayoutFullURL(getLayoutFullURL());
@@ -70,12 +70,19 @@ public class ServiceContext implements Cloneable, Serializable {
 		return serviceContext;
 	}
 
+	/**
+	 * @deprecated As of 6.1, renamed to {@link #getAddGroupPermissions()}
+	 */
 	public boolean getAddCommunityPermissions() {
-		return _addCommunityPermissions;
+		return getAddGroupPermissions();
 	}
 
 	public boolean getAddGuestPermissions() {
 		return _addGuestPermissions;
+	}
+
+	public boolean getAddGroupPermissions() {
+		return _addGroupPermissions;
 	}
 
 	public long[] getAssetCategoryIds() {
@@ -98,8 +105,11 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _command;
 	}
 
+	/**
+	 * @deprecated As of 6.1, renamed to {@link #getGroupPermissions()}
+	 */
 	public String[] getCommunityPermissions() {
-		return _communityPermissions;
+		return getGroupPermissions();
 	}
 
 	public long getCompanyId() {
@@ -128,6 +138,10 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	public Map<String, Serializable> getExpandoBridgeAttributes() {
 		return _expandoBridgeAttributes;
+	}
+
+	public String[] getGroupPermissions() {
+		return _groupPermissions;
 	}
 
 	public String[] getGuestPermissions() {
@@ -228,8 +242,16 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _attributes.remove(name);
 	}
 
+	/**
+	 * @deprecated As of 6.1, renamed to {@link
+	 * 		#setAddGroupPermissions(boolean)}
+	 */
 	public void setAddCommunityPermissions(boolean addCommunityPermissions) {
-		_addCommunityPermissions = addCommunityPermissions;
+		setAddGroupPermissions(addCommunityPermissions);
+	}
+
+	public void setAddGroupPermissions(boolean addGroupPermissions) {
+		_addGroupPermissions = addGroupPermissions;
 	}
 
 	public void setAddGuestPermissions(boolean addGuestPermissions) {
@@ -256,8 +278,11 @@ public class ServiceContext implements Cloneable, Serializable {
 		_command = command;
 	}
 
+	/**
+	 * @deprecated As of 6.1, renamed to {@link #setGroupPermissions(String[])}
+	 */
 	public void setCommunityPermissions(String[] communityPermissions) {
-		_communityPermissions = communityPermissions;
+		setGroupPermissions(communityPermissions);
 	}
 
 	public void setCompanyId(long companyId) {
@@ -276,6 +301,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		Map<String, Serializable> expandoBridgeAttributes) {
 
 		_expandoBridgeAttributes = expandoBridgeAttributes;
+	}
+
+	public void setGroupPermissions(String[] groupPermissions) {
+		_groupPermissions = groupPermissions;
 	}
 
 	public void setGuestPermissions(String[] guestPermissions) {
@@ -340,17 +369,17 @@ public class ServiceContext implements Cloneable, Serializable {
 		_workflowAction = workflowAction;
 	}
 
-	private boolean _addCommunityPermissions;
+	private boolean _addGroupPermissions;
 	private boolean _addGuestPermissions;
 	private long[] _assetCategoryIds;
 	private String[] _assetTagNames;
 	private Map<String, Serializable> _attributes;
 	private String _command;
-	private String[] _communityPermissions;
 	private long _companyId;
 	private Date _createDate;
 	private String _currentURL;
 	private Map<String, Serializable> _expandoBridgeAttributes;
+	private String[] _groupPermissions;
 	private String[] _guestPermissions;
 	private String _languageId;
 	private String _layoutFullURL;
