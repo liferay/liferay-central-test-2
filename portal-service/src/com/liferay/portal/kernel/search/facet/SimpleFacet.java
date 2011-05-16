@@ -35,13 +35,15 @@ public class SimpleFacet extends BaseFacet {
 
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
+
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
-		JSONObject data = facetConfiguration.getData();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
 
 		String value = StringPool.BLANK;
 
-		if (isStatic() && data.has("value")) {
-			value = data.getString("value");
+		if (isStatic() && dataJSONObject.has("value")) {
+			value = dataJSONObject.getString("value");
 		}
 
 		String valueParam = GetterUtil.getString(

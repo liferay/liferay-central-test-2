@@ -93,7 +93,7 @@ public class SearchContext implements Serializable {
 		return _facets.get(fieldName);
 	}
 
-	public Map<String,Facet> getFacets() {
+	public Map<String, Facet> getFacets() {
 		return _facets;
 	}
 
@@ -296,7 +296,7 @@ public class SearchContext implements Serializable {
 	private long _companyId;
 	private int _end = QueryUtil.ALL_POS;
 	private String[] _entryClassNames;
-	private Map<String,Facet> _facets = new ConcurrentHashMap<String, Facet>();
+	private Map<String, Facet> _facets = new ConcurrentHashMap<String, Facet>();
 	private long[] _folderIds;
 	private long[] _groupIds;
 	private boolean _includeLiveGroups = true;

@@ -35,13 +35,13 @@ public interface Indexer {
 
 	public Document getDocument(Object obj)	throws SearchException;
 
-	public String getSearchEngineId();
-
 	public BooleanQuery getFacetQuery(
 			String className, SearchContext searchContext)
 		throws Exception;
 
 	public IndexerPostProcessor[] getIndexerPostProcessors();
+
+	public String getSearchEngineId();
 
 	public String getSortField(String orderByCol);
 

@@ -27,11 +27,11 @@ public class FacetConfiguration {
 	}
 
 	public JSONObject getData() {
-		if (_data == null) {
-			_data = JSONFactoryUtil.createJSONObject();
+		if (_dataJSONObject == null) {
+			_dataJSONObject = JSONFactoryUtil.createJSONObject();
 		}
 
-		return _data;
+		return _dataJSONObject;
 	}
 
 	public String getDisplayStyle() {
@@ -66,8 +66,8 @@ public class FacetConfiguration {
 		_className = className;
 	}
 
-	public void setData(JSONObject data) {
-		_data = data;
+	public void setDataJSONObject(JSONObject dataJSONObject) {
+		_dataJSONObject = dataJSONObject;
 	}
 
 	public void setDisplayStyle(String displayStyle) {
@@ -95,7 +95,7 @@ public class FacetConfiguration {
 	}
 
 	private String _className;
-	private JSONObject _data;
+	private JSONObject _dataJSONObject;
 	private String _displayStyle;
 	private String _fieldName;
 	private String _label;

@@ -14,11 +14,11 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
-import com.liferay.portal.kernel.search.facet.collector.TermCollector;
-
 import com.browseengine.bobo.api.BrowseFacet;
 import com.browseengine.bobo.api.FacetAccessible;
+
+import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
+import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +28,11 @@ import java.util.List;
  */
 public class BoboFacetCollector implements FacetCollector {
 
-	public BoboFacetCollector(String fieldName, FacetAccessible facetAccessible) {
+	public BoboFacetCollector(
+		String fieldName, FacetAccessible facetAccessible) {
+
 		_fieldName = fieldName;
 		_facetAccessible = facetAccessible;
-
-		_termCollectors = new ArrayList<TermCollector>();
 
 		for (BrowseFacet browseFacet : _facetAccessible.getFacets()) {
 			_termCollectors.add(new BoboTermCollector(browseFacet));
@@ -52,7 +52,8 @@ public class BoboFacetCollector implements FacetCollector {
 	}
 
 	private FacetAccessible _facetAccessible;
-	private List<TermCollector> _termCollectors;
 	private String _fieldName;
+	private List<TermCollector> _termCollectors =
+		new ArrayList<TermCollector>();
 
 }

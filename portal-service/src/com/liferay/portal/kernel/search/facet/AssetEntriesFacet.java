@@ -48,6 +48,7 @@ public class AssetEntriesFacet extends MultiValueFacet {
 		super(searchContext);
 
 		setFieldName(Field.ENTRY_CLASS_NAME);
+
 		initFacetClause();
 	}
 
@@ -72,25 +73,27 @@ public class AssetEntriesFacet extends MultiValueFacet {
 			}
 
 			try {
-				BooleanQuery indexerQuery = indexer.getFacetQuery(
+				BooleanQuery indexerBooleanQuery = indexer.getFacetQuery(
 					entryClassName, searchContext);
 
-				if ((indexerQuery == null ) ||
-					(indexerQuery.clauses().isEmpty())) {
+				if ((indexerBooleanQuery == null ) ||
+					(indexerBooleanQuery.clauses().isEmpty())) {
 
 					continue;
 				}
 
-				indexer.postProcessContextQuery(indexerQuery, searchContext);
+				indexer.postProcessContextQuery(
+					indexerBooleanQuery, searchContext);
 
 				for (IndexerPostProcessor indexerPostProcessor :
 						indexer.getIndexerPostProcessors()) {
 
 					indexerPostProcessor.postProcessContextQuery(
-						indexerQuery, searchContext);
+						indexerBooleanQuery, searchContext);
 				}
 
-				facetQuery.add(indexerQuery, BooleanClauseOccur.SHOULD);
+				facetQuery.add(
+					indexerBooleanQuery, BooleanClauseOccur.SHOULD);
 
 				if (!indexer.isStagingAware()) {
 					continue;
@@ -99,12 +102,14 @@ public class AssetEntriesFacet extends MultiValueFacet {
 				if (!searchContext.isIncludeLiveGroups() &&
 					searchContext.isIncludeStagingGroups()) {
 
-					facetQuery.addRequiredTerm(Field.STAGING_GROUP, true);
+					facetQuery.addRequiredTerm(
+						Field.STAGING_GROUP, true);
 				}
 				else if (searchContext.isIncludeLiveGroups() &&
 						!searchContext.isIncludeStagingGroups()) {
 
-					facetQuery.addRequiredTerm(Field.STAGING_GROUP, false);
+					facetQuery.addRequiredTerm(
+						Field.STAGING_GROUP, false);
 				}
 			}
 			catch (Exception e) {
@@ -122,13 +127,15 @@ public class AssetEntriesFacet extends MultiValueFacet {
 
 	protected void initFacetClause() {
 		SearchContext searchContext = getSearchContext();
+
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
-		JSONObject data = facetConfiguration.getData();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
 
 		String[] entryClassNames = null;
 
-		if (data.has("values")) {
-			JSONArray valuesJSONArray = data.getJSONArray("values");
+		if (dataJSONObject.has("values")) {
+			JSONArray valuesJSONArray = dataJSONObject.getJSONArray("values");
 
 			entryClassNames = new String[valuesJSONArray.length()];
 
@@ -171,15 +178,14 @@ public class AssetEntriesFacet extends MultiValueFacet {
 			entryClassNames = entryClassNamesList.toArray(
 				new String[entryClassNamesList.size()]);
 
-			if (!facetConfiguration.getData().has("values")) {
+			if (!dataJSONObject.has("values")) {
 				JSONArray entriesJSONArray = JSONFactoryUtil.createJSONArray();
 
 				for (String entryClassName : entryClassNames) {
 					entriesJSONArray.put(entryClassName);
 				}
 
-				facetConfiguration.getData().put(
-					"values", entriesJSONArray);
+				dataJSONObject.put("values", entriesJSONArray);
 			}
 		}
 
@@ -187,7 +193,5 @@ public class AssetEntriesFacet extends MultiValueFacet {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetEntriesFacet.class);
-
-	private BooleanClause _facetClause;
 
 }

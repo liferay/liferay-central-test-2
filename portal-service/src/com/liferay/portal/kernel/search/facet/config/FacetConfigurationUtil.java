@@ -17,6 +17,8 @@ package com.liferay.portal.kernel.search.facet.config;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -27,49 +29,65 @@ import java.util.List;
  */
 public class FacetConfigurationUtil {
 
-	public static List<FacetConfiguration> load(String configuration) throws Exception {
-		List<FacetConfiguration> configurationList =
+	public static List<FacetConfiguration> load(String configuration) {
+		List<FacetConfiguration> facetConfigurations =
 			new ArrayList<FacetConfiguration>();
 
-		if (Validator.isNull(configuration)) {
-			return configurationList;
-		}
-
 		try {
-			JSONObject configurationJSONObject = JSONFactoryUtil.createJSONObject(
-				configuration);
+			if (Validator.isNull(configuration)) {
+				return facetConfigurations;
+			}
+
+			JSONObject configurationJSONObject =
+				JSONFactoryUtil.createJSONObject(configuration);
 
 			JSONArray facetsJSONArray = configurationJSONObject.getJSONArray(
 				"facets");
 
-			if (facetsJSONArray != null) {
-				for (int i = 0; i < facetsJSONArray.length(); i++) {
-					JSONObject facetJSONObject = facetsJSONArray.getJSONObject(i);
+			if (facetsJSONArray == null) {
+				return facetConfigurations;
+			}
 
-					FacetConfiguration config = new FacetConfiguration();
+			for (int i = 0; i < facetsJSONArray.length(); i++) {
+				JSONObject facetJSONObject = facetsJSONArray.getJSONObject(i);
 
-					config.setClassName(facetJSONObject.getString("className"));
+				FacetConfiguration facetConfiguration =
+					_toFacetConfiguration(facetJSONObject);
 
-					if (facetJSONObject.has("data")) {
-						config.setData(facetJSONObject.getJSONObject("data"));
-					}
-
-					config.setDisplayStyle(
-						facetJSONObject.getString("displayStyle"));
-					config.setFieldName(facetJSONObject.getString("fieldName"));
-					config.setLabel(facetJSONObject.getString("label"));
-					config.setOrder(facetJSONObject.getString("order"));
-					config.setStatic(facetJSONObject.getBoolean("static"));
-					config.setWeight(facetJSONObject.getDouble("weight"));
-
-					configurationList.add(config);
-				}
+				facetConfigurations.add(facetConfiguration);
 			}
 		}
 		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		return configurationList;
+		return facetConfigurations;
 	}
+
+	private static FacetConfiguration _toFacetConfiguration(
+		JSONObject facetJSONObject) {
+
+		FacetConfiguration facetConfiguration = new FacetConfiguration();
+
+		facetConfiguration.setClassName(facetJSONObject.getString("className"));
+
+		if (facetJSONObject.has("data")) {
+			facetConfiguration.setDataJSONObject(
+				facetJSONObject.getJSONObject("data"));
+		}
+
+		facetConfiguration.setDisplayStyle(
+			facetJSONObject.getString("displayStyle"));
+		facetConfiguration.setFieldName(facetJSONObject.getString("fieldName"));
+		facetConfiguration.setLabel(facetJSONObject.getString("label"));
+		facetConfiguration.setOrder(facetJSONObject.getString("order"));
+		facetConfiguration.setStatic(facetJSONObject.getBoolean("static"));
+		facetConfiguration.setWeight(facetJSONObject.getDouble("weight"));
+
+		return facetConfiguration;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		FacetConfigurationUtil.class);
 
 }

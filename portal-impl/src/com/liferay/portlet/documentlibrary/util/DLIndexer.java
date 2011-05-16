@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -82,6 +81,10 @@ public class DLIndexer extends BaseIndexer {
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
 	}
 
+	public boolean isFilterSearch() {
+		return _FILTER_SEARCH;
+	}
+
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -102,31 +105,6 @@ public class DLIndexer extends BaseIndexer {
 		if (Validator.isNotNull(expandoAttributes)) {
 			addSearchExpando(searchQuery, searchContext, expandoAttributes);
 		}
-	}
-
-	protected void addSearchFolderIds(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		MultiValueFacet folderIdsFacet = new MultiValueFacet(searchContext);
-
-		folderIdsFacet.setFacetValueValidator(new FacetValueValidator() {
-			public boolean check(SearchContext searchContext, String primKey) {
-				try {
-					DLFolderServiceUtil.getFolder(GetterUtil.getLong(primKey));
-				}
-				catch (Exception e) {
-					return false;
-				}
-
-				return true;
-			}
-		});
-
-		folderIdsFacet.setFieldName(Field.FOLDER_ID);
-		folderIdsFacet.setStatic(true);
-
-		searchContext.addFacet(folderIdsFacet);
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -240,12 +218,27 @@ public class DLIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
-	protected String getPortletId(SearchContext searchContext) {
-		return PORTLET_ID;
+	protected FacetValueValidator getAddSearchFolderIdsFacetValueValidator() {
+		return new FacetValueValidator() {
+
+			public boolean check(
+				SearchContext searchContext, String primKey) {
+
+				try {
+					DLFolderServiceUtil.getFolder(GetterUtil.getLong(primKey));
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				return true;
+			}
+
+		};
 	}
 
-	public boolean isFilterSearch() {
-		return _FILTER_SEARCH;
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
 	}
 
 	protected void reindexFolders(long companyId) throws Exception {

@@ -41,11 +41,8 @@ public class IndexerWrapper implements Indexer {
 		return _indexer.getDocument(obj);
 	}
 
-	public String getSearchEngineId() {
-		return _indexer.getSearchEngineId();
-	}
-
-	public BooleanQuery getFacetQuery(String className, SearchContext searchContext)
+	public BooleanQuery getFacetQuery(
+			String className, SearchContext searchContext)
 		throws Exception {
 
 		return _indexer.getFacetQuery(className, searchContext);
@@ -53,6 +50,10 @@ public class IndexerWrapper implements Indexer {
 
 	public IndexerPostProcessor[] getIndexerPostProcessors() {
 		return _indexer.getIndexerPostProcessors();
+	}
+
+	public String getSearchEngineId() {
+		return _indexer.getSearchEngineId();
 	}
 
 	public String getSortField(String orderByCol) {

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -110,7 +111,9 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		hits = indexer.search(searchContext);
 
-		assertEquals(hits.getQuery().toString(), 0, hits.getLength());
+		Query query = hits.getQuery();
+
+		assertEquals(query.toString(), 0, hits.getLength());
 
 		addEntry();
 		addEntry();

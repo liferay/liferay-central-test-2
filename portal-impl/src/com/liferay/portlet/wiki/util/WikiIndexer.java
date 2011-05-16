@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -67,17 +66,9 @@ public class WikiIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected String getPortletId(SearchContext searchContext) {
-		return PORTLET_ID;
-	}
+	protected FacetValueValidator getAddSearchNodeIdsFacetValueValidator() {
+		return new FacetValueValidator() {
 
-	protected void addSearchNodeIds(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		MultiValueFacet nodeIdsFacet = new MultiValueFacet(searchContext);
-
-		nodeIdsFacet.setFacetValueValidator(new FacetValueValidator() {
 			public boolean check(SearchContext searchContext, String primKey) {
 				try {
 					WikiNodeServiceUtil.getNode(GetterUtil.getLong(primKey));
@@ -88,12 +79,15 @@ public class WikiIndexer extends BaseIndexer {
 
 				return true;
 			}
-		});
 
-		nodeIdsFacet.setFieldName(Field.NODE_ID);
-		nodeIdsFacet.setStatic(true);
+		};
+	}
 
-		searchContext.addFacet(nodeIdsFacet);
+	protected void checkSearchNodeId(
+			long nodeId, SearchContext searchContext)
+		throws Exception {
+
+		WikiNodeServiceUtil.getNode(nodeId);
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -141,51 +135,6 @@ public class WikiIndexer extends BaseIndexer {
 			SearchEngineUtil.deleteDocument(
 				page.getCompanyId(), document.get(Field.UID));
 		}
-	}
-
-	protected Summary doGetSummary(
-		Document document, Locale locale, String snippet,
-		PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String nodeId = document.get("nodeId");
-
-		portletURL.setParameter("struts_action", "/wiki/view");
-		portletURL.setParameter("nodeId", nodeId);
-		portletURL.setParameter("title", title);
-
-		return new Summary(title, content, portletURL);
-	}
-
-	protected void doReindex(Object obj) throws Exception {
-		WikiPage page = (WikiPage)obj;
-
-		if (Validator.isNotNull(page.getRedirectTitle())) {
-			return;
-		}
-
-		Document document = getDocument(page);
-
-		SearchEngineUtil.updateDocument(page.getCompanyId(), document);
-	}
-
-	protected void doReindex(String className, long classPK) throws Exception {
-		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
-
-		doReindex(page);
-	}
-
-	protected void doReindex(String[] ids) throws Exception {
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		reindexNodes(companyId);
 	}
 
 	protected Document doGetDocument(Object obj) throws Exception {
@@ -238,11 +187,53 @@ public class WikiIndexer extends BaseIndexer {
 		return document;
 	}
 
-	protected void checkSearchNodeId(
-			long nodeId, SearchContext searchContext)
-		throws Exception {
+	protected Summary doGetSummary(
+		Document document, Locale locale, String snippet,
+		PortletURL portletURL) {
 
-		WikiNodeServiceUtil.getNode(nodeId);
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String nodeId = document.get("nodeId");
+
+		portletURL.setParameter("struts_action", "/wiki/view");
+		portletURL.setParameter("nodeId", nodeId);
+		portletURL.setParameter("title", title);
+
+		return new Summary(title, content, portletURL);
+	}
+
+	protected void doReindex(Object obj) throws Exception {
+		WikiPage page = (WikiPage)obj;
+
+		if (Validator.isNotNull(page.getRedirectTitle())) {
+			return;
+		}
+
+		Document document = getDocument(page);
+
+		SearchEngineUtil.updateDocument(page.getCompanyId(), document);
+	}
+
+	protected void doReindex(String className, long classPK) throws Exception {
+		WikiPage page = WikiPageLocalServiceUtil.getPage(classPK);
+
+		doReindex(page);
+	}
+
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		reindexNodes(companyId);
+	}
+
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
 	}
 
 	protected void reindexNodes(long companyId) throws Exception {

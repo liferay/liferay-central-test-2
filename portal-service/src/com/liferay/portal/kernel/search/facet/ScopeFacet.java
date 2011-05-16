@@ -45,13 +45,15 @@ public class ScopeFacet extends MultiValueFacet {
 
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
+
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
-		JSONObject data = facetConfiguration.getData();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
 
 		long[] groupIds = null;
 
-		if (data.has("values")) {
-			JSONArray valuesJSONArray = data.getJSONArray("values");
+		if (dataJSONObject.has("values")) {
+			JSONArray valuesJSONArray = dataJSONObject.getJSONArray("values");
 
 			groupIds = new long[valuesJSONArray.length()];
 
@@ -113,8 +115,7 @@ public class ScopeFacet extends MultiValueFacet {
 				groupIds[i] = parentGroupId;
 
 				if (group.isLayout() || searchContext.isScopeStrict()) {
-					scopeGroupIdsQuery.addTerm(
-						Field.SCOPE_GROUP_ID, groupId);
+					scopeGroupIdsQuery.addTerm(Field.SCOPE_GROUP_ID, groupId);
 				}
 			}
 			catch (Exception e) {

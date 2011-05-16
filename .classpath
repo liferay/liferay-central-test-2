@@ -104,6 +104,7 @@
 	<classpathentry kind="lib" path="lib/portal/backport-concurrent.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bcmail.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bcprov.jar"/>
+	<classpathentry kind="lib" path="lib/portal/bobo-browse.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bsh.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bsf.jar"/>
 	<classpathentry kind="lib" path="lib/portal/c3p0.jar"/>
@@ -147,6 +148,7 @@
 	<classpathentry kind="lib" path="lib/portal/ecs.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ehcache-jgroupsreplication.jar"/>
+	<classpathentry kind="lib" path="lib/portal/fastutil.jar"/>
 	<classpathentry kind="lib" path="lib/portal/flexjson.jar"/>
 	<classpathentry kind="lib" path="lib/portal/fontbox.jar"/>
 	<classpathentry kind="lib" path="lib/portal/freemarker.jar"/>
@@ -282,7 +284,5 @@
 	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xpp3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xstream.jar"/>
-	<classpathentry kind="lib" path="lib/portal/bobo-browse.jar"/>
-	<classpathentry kind="lib" path="lib/portal/fastutil.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

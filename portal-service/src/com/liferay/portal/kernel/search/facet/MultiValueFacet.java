@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.TermQuery;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
+import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -42,13 +43,15 @@ public class MultiValueFacet extends BaseFacet {
 
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
+
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
-		JSONObject data = facetConfiguration.getData();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
 
 		String[] values = null;
 
-		if (isStatic() && data.has("values")) {
-			JSONArray valuesJSONArray = data.getJSONArray("values");
+		if (isStatic() && dataJSONObject.has("values")) {
+			JSONArray valuesJSONArray = dataJSONObject.getJSONArray("values");
 
 			values = new String[valuesJSONArray.length()];
 
@@ -61,9 +64,7 @@ public class MultiValueFacet extends BaseFacet {
 			GetterUtil.getString(
 				searchContext.getAttribute(getFieldName())));
 
-		if ((!isStatic()) && (valuesParam != null) &&
-			(valuesParam.length > 0)) {
-
+		if (!isStatic() && (valuesParam != null) && (valuesParam.length > 0)) {
 			values = valuesParam;
 		}
 
@@ -74,8 +75,10 @@ public class MultiValueFacet extends BaseFacet {
 		BooleanQuery facetQuery = BooleanQueryFactoryUtil.create();
 
 		for (String value : values) {
+			FacetValueValidator facetValueValidator = getFacetValueValidator();
+
 			if ((searchContext.getUserId() > 0) &&
-				(!getFacetValueValidator().check(searchContext, value))) {
+				(!facetValueValidator.check(searchContext, value))) {
 
 				continue;
 			}

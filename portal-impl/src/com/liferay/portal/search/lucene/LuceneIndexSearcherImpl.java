@@ -14,6 +14,21 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.browseengine.bobo.api.BoboBrowser;
+import com.browseengine.bobo.api.BoboIndexReader;
+import com.browseengine.bobo.api.Browsable;
+import com.browseengine.bobo.api.BrowseHit;
+import com.browseengine.bobo.api.BrowseRequest;
+import com.browseengine.bobo.api.BrowseResult;
+import com.browseengine.bobo.api.FacetAccessible;
+import com.browseengine.bobo.api.FacetSpec.FacetSortSpec;
+import com.browseengine.bobo.api.FacetSpec;
+import com.browseengine.bobo.facets.FacetHandler.TermCountSize;
+import com.browseengine.bobo.facets.FacetHandler;
+import com.browseengine.bobo.facets.impl.MultiValueFacetHandler;
+import com.browseengine.bobo.facets.impl.RangeFacetHandler;
+import com.browseengine.bobo.facets.impl.SimpleFacetHandler;
+
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -36,6 +51,7 @@ import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.RangeFacet;
 import com.liferay.portal.kernel.search.facet.SimpleFacet;
+import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,21 +60,6 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.BoboFacetCollector;
 import com.liferay.portal.util.PropsValues;
-
-import com.browseengine.bobo.api.BoboBrowser;
-import com.browseengine.bobo.api.BoboIndexReader;
-import com.browseengine.bobo.api.Browsable;
-import com.browseengine.bobo.api.BrowseHit;
-import com.browseengine.bobo.api.BrowseRequest;
-import com.browseengine.bobo.api.BrowseResult;
-import com.browseengine.bobo.api.FacetAccessible;
-import com.browseengine.bobo.api.FacetSpec;
-import com.browseengine.bobo.api.FacetSpec.FacetSortSpec;
-import com.browseengine.bobo.facets.FacetHandler;
-import com.browseengine.bobo.facets.FacetHandler.TermCountSize;
-import com.browseengine.bobo.facets.impl.MultiValueFacetHandler;
-import com.browseengine.bobo.facets.impl.RangeFacetHandler;
-import com.browseengine.bobo.facets.impl.SimpleFacetHandler;
 
 import java.io.IOException;
 
@@ -70,6 +71,7 @@ import org.apache.lucene.document.NumericField;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Explanation;
+import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.SortField;
 import org.apache.lucene.search.TopFieldDocs;
 
@@ -77,229 +79,6 @@ import org.apache.lucene.search.TopFieldDocs;
  * @author Bruno Farache
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
-
-	public Hits search(SearchContext searchContext, Query query)
-		throws SearchException {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Query " + query);
-		}
-
-		long companyId = searchContext.getCompanyId();
-		Sort[] sorts = searchContext.getSorts();
-		int start = searchContext.getStart();
-		int end = searchContext.getEnd();
-
-		Hits hits = null;
-
-		org.apache.lucene.search.IndexSearcher indexSearcher = null;
-		BoboIndexReader boboReader = null;
-		Browsable browser = null;
-		BrowseRequest browseRequest = null;
-		Map<String, Facet> facets = null;
-
-		try {
-			indexSearcher = LuceneHelperUtil.getSearcher(companyId, true);
-
-			List<FacetHandler<?>> handlerList =
-				new ArrayList<FacetHandler<?>>();
-
-			facets = searchContext.getFacets();
-
-			for (Facet facet : facets.values()) {
-				if (facet.isStatic()) {
-					continue;
-				}
-
-				FacetConfiguration facetConfiguration =
-					facet.getFacetConfiguration();
-
-				JSONObject dataJSONObject = facetConfiguration.getData();
-
-				if (facet instanceof MultiValueFacet) {
-					MultiValueFacetHandler multiValueFacetHandler =
-						new MultiValueFacetHandler(
-							facetConfiguration.getFieldName(),
-							facetConfiguration.getFieldName());
-
-					if (dataJSONObject.has("maxTerms")) {
-						multiValueFacetHandler.setMaxItems(
-							dataJSONObject.getInt("maxTerms"));
-					}
-
-					handlerList.add(multiValueFacetHandler);
-				}
-				else if (facet instanceof RangeFacet) {
-					List<String> ranges = new ArrayList<String>();
-
-					JSONArray rangesJSONArray =
-						facetConfiguration.getData().getJSONArray("ranges");
-
-					if (rangesJSONArray != null) {
-						for (int i = 0; i < rangesJSONArray.length(); i++) {
-							JSONObject rangeJSONObject =
-								rangesJSONArray.getJSONObject(i);
-
-							ranges.add(rangeJSONObject.getString("range"));
-						}
-					}
-
-					RangeFacetHandler rangeFacetHandler =
-						new RangeFacetHandler(
-							facetConfiguration.getFieldName(),
-							facetConfiguration.getFieldName(), ranges);
-
-					rangeFacetHandler.setTermCountSize(TermCountSize.large);
-
-					handlerList.add(rangeFacetHandler);
-				}
-				else if (facet instanceof SimpleFacet) {
-					SimpleFacetHandler simpleFacetHandler =
-						new SimpleFacetHandler(
-							facetConfiguration.getFieldName(),
-							facetConfiguration.getFieldName());
-
-					handlerList.add(simpleFacetHandler);
-				}
-			}
-
-			boboReader = BoboIndexReader.getInstance(
-				indexSearcher.getIndexReader(), handlerList);
-
-			SortField[] sortFields = new SortField[0];
-
-			if (sorts != null) {
-				sortFields = new SortField[sorts.length];
-
-				for (int i = 0; i < sorts.length; i++) {
-					Sort sort = sorts[i];
-
-					sortFields[i] = new SortField(
-						sort.getFieldName(), sort.getType(), sort.isReverse());
-				}
-			}
-
-			browseRequest = new BrowseRequest();
-
-			for (Facet facet : facets.values()) {
-				if (facet.isStatic()) {
-					continue;
-				}
-
-				FacetConfiguration facetConfiguration =
-					facet.getFacetConfiguration();
-
-				FacetSpec spec = new FacetSpec();
-				spec.setOrderBy(
-					FacetSortSpec.valueOf(facetConfiguration.getOrder()));
-
-				browseRequest.setFacetSpec(facet.getFieldName(), spec);
-			}
-
-			browseRequest.setCount(PropsValues.INDEX_SEARCH_LIMIT);
-			browseRequest.setOffset(0);
-			browseRequest.setSort(sortFields);
-			browseRequest.setQuery(
-				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
-					query));
-
-			browser = new BoboBrowser(boboReader);
-
-			long startTime = System.currentTimeMillis();
-
-			BrowseResult result = browser.browse(browseRequest);
-
-			BrowseHit[] browseHits = result.getHits();
-
-			long endTime = System.currentTimeMillis();
-
-			float searchTime = (float)(endTime - startTime) / Time.SECOND;
-
-			hits = toHits(
-				indexSearcher, new HitDocs(browseHits), query, startTime,
-				searchTime, start, end);
-
-			Map<String,FacetAccessible> facetMap = result.getFacetMap();
-
-			for (Map.Entry<String,FacetAccessible> facetEntry :
-					facetMap.entrySet()) {
-
-				Facet facet = facets.get(facetEntry.getKey());
-
-				FacetAccessible facetAccessible = facetEntry.getValue();
-
-				facet.setFacetCollector(
-					new BoboFacetCollector(
-						facetEntry.getKey(), facetAccessible));
-			}
-		}
-		catch (BooleanQuery.TooManyClauses tmc) {
-			int maxClauseCount = BooleanQuery.getMaxClauseCount();
-
-			BooleanQuery.setMaxClauseCount(Integer.MAX_VALUE);
-
-			try {
-				long startTime = System.currentTimeMillis();
-
-				BrowseResult result = browser.browse(browseRequest);
-
-				BrowseHit[] browseHits = result.getHits();
-
-				long endTime = System.currentTimeMillis();
-
-				float searchTime = (float)(endTime - startTime) / Time.SECOND;
-
-				hits = toHits(
-					indexSearcher, new HitDocs(browseHits), query, startTime,
-					searchTime, start, end);
-
-				Map<String,FacetAccessible> facetMap = result.getFacetMap();
-
-				for (Map.Entry<String,FacetAccessible> facetEntry :
-						facetMap.entrySet()) {
-
-					Facet facet = facets.get(facetEntry.getKey());
-
-					FacetAccessible facetAccessible = facetEntry.getValue();
-
-					facet.setFacetCollector(
-						new BoboFacetCollector(facetEntry.getKey(), facetAccessible));
-				}
-			}
-			catch (Exception e) {
-				throw new SearchException(e);
-			}
-			finally {
-				BooleanQuery.setMaxClauseCount(maxClauseCount);
-			}
-		}
-		catch (ParseException pe) {
-			_log.error("Query: " + query, pe);
-
-			return new HitsImpl();
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-		finally {
-			if (browser != null) {
-				try {
-					browser.close();
-				}
-				catch (IOException ioe) {
-					_log.error(ioe, ioe);
-				}
-			}
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Search found " + hits.getLength() + " results in " +
-					hits.getSearchTime() + "ms");
-		}
-
-		return hits;
-	}
 
 	public Hits search(
 			long companyId, Query query, Sort[] sorts, int start, int end)
@@ -377,7 +156,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			}
 		}
 		catch (ParseException pe) {
-			_log.error("Query: " + query, pe);
+			_log.error("Query " + query, pe);
 
 			return new HitsImpl();
 		}
@@ -388,6 +167,233 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			if (indexSearcher != null) {
 				try {
 					indexSearcher.close();
+				}
+				catch (IOException ioe) {
+					_log.error(ioe, ioe);
+				}
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Search found " + hits.getLength() + " results in " +
+					hits.getSearchTime() + "ms");
+		}
+
+		return hits;
+	}
+
+	public Hits search(SearchContext searchContext, Query query)
+		throws SearchException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query " + query);
+		}
+
+		Hits hits = null;
+
+		org.apache.lucene.search.IndexSearcher indexSearcher = null;
+		Map<String, Facet> facets = null;
+		BrowseRequest browseRequest = null;
+		Browsable browsable = null;
+
+		try {
+			indexSearcher = LuceneHelperUtil.getSearcher(
+				searchContext.getCompanyId(), true);
+
+			List<FacetHandler<?>> facetHandlers =
+				new ArrayList<FacetHandler<?>>();
+
+			facets = searchContext.getFacets();
+
+			for (Facet facet : facets.values()) {
+				if (facet.isStatic()) {
+					continue;
+				}
+
+				FacetConfiguration facetConfiguration =
+					facet.getFacetConfiguration();
+
+				if (facet instanceof MultiValueFacet) {
+					MultiValueFacetHandler multiValueFacetHandler =
+						new MultiValueFacetHandler(
+							facetConfiguration.getFieldName(),
+							facetConfiguration.getFieldName());
+
+					JSONObject dataJSONObject = facetConfiguration.getData();
+
+					if (dataJSONObject.has("maxTerms")) {
+						multiValueFacetHandler.setMaxItems(
+							dataJSONObject.getInt("maxTerms"));
+					}
+
+					facetHandlers.add(multiValueFacetHandler);
+				}
+				else if (facet instanceof RangeFacet) {
+					List<String> ranges = new ArrayList<String>();
+
+					JSONObject dataJSONObject = facetConfiguration.getData();
+
+					JSONArray rangesJSONArray = dataJSONObject.getJSONArray(
+						"ranges");
+
+					if (rangesJSONArray != null) {
+						for (int i = 0; i < rangesJSONArray.length(); i++) {
+							JSONObject rangeJSONObject =
+								rangesJSONArray.getJSONObject(i);
+
+							ranges.add(rangeJSONObject.getString("range"));
+						}
+					}
+
+					RangeFacetHandler rangeFacetHandler =
+						new RangeFacetHandler(
+							facetConfiguration.getFieldName(),
+							facetConfiguration.getFieldName(), ranges);
+
+					rangeFacetHandler.setTermCountSize(TermCountSize.large);
+
+					facetHandlers.add(rangeFacetHandler);
+				}
+				else if (facet instanceof SimpleFacet) {
+					SimpleFacetHandler simpleFacetHandler =
+						new SimpleFacetHandler(
+							facetConfiguration.getFieldName(),
+							facetConfiguration.getFieldName());
+
+					facetHandlers.add(simpleFacetHandler);
+				}
+			}
+
+			BoboIndexReader boboIndexReader = BoboIndexReader.getInstance(
+				indexSearcher.getIndexReader(), facetHandlers);
+
+			SortField[] sortFields = new SortField[0];
+
+			Sort[] sorts = searchContext.getSorts();
+
+			if (sorts != null) {
+				sortFields = new SortField[sorts.length];
+
+				for (int i = 0; i < sorts.length; i++) {
+					Sort sort = sorts[i];
+
+					sortFields[i] = new SortField(
+						sort.getFieldName(), sort.getType(), sort.isReverse());
+				}
+			}
+
+			browseRequest = new BrowseRequest();
+
+			for (Facet facet : facets.values()) {
+				if (facet.isStatic()) {
+					continue;
+				}
+
+				FacetConfiguration facetConfiguration =
+					facet.getFacetConfiguration();
+
+				FacetSpec facetSpec = new FacetSpec();
+
+				facetSpec.setOrderBy(
+					FacetSortSpec.valueOf(facetConfiguration.getOrder()));
+
+				browseRequest.setFacetSpec(facet.getFieldName(), facetSpec);
+			}
+
+			browseRequest.setCount(PropsValues.INDEX_SEARCH_LIMIT);
+			browseRequest.setOffset(0);
+			browseRequest.setQuery(
+				(org.apache.lucene.search.Query)QueryTranslatorUtil.translate(
+					query));
+			browseRequest.setSort(sortFields);
+
+			browsable = new BoboBrowser(boboIndexReader);
+
+			long startTime = System.currentTimeMillis();
+
+			BrowseResult browseResult = browsable.browse(browseRequest);
+
+			BrowseHit[] browseHits = browseResult.getHits();
+
+			long endTime = System.currentTimeMillis();
+
+			float searchTime = (float)(endTime - startTime) / Time.SECOND;
+
+			hits = toHits(
+				indexSearcher, new HitDocs(browseHits), query, startTime,
+				searchTime, searchContext.getStart(), searchContext.getEnd());
+
+			Map<String, FacetAccessible> facetMap = browseResult.getFacetMap();
+
+			for (Map.Entry<String, FacetAccessible> entry :
+					facetMap.entrySet()) {
+
+				Facet facet = facets.get(entry.getKey());
+
+				FacetAccessible facetAccessible = entry.getValue();
+
+				FacetCollector facetCollector = new BoboFacetCollector(
+					entry.getKey(), facetAccessible);
+
+				facet.setFacetCollector(facetCollector);
+			}
+		}
+		catch (BooleanQuery.TooManyClauses tmc) {
+			int maxClauseCount = BooleanQuery.getMaxClauseCount();
+
+			BooleanQuery.setMaxClauseCount(Integer.MAX_VALUE);
+
+			try {
+				long startTime = System.currentTimeMillis();
+
+				BrowseResult result = browsable.browse(browseRequest);
+
+				BrowseHit[] browseHits = result.getHits();
+
+				long endTime = System.currentTimeMillis();
+
+				float searchTime = (float)(endTime - startTime) / Time.SECOND;
+
+				hits = toHits(
+					indexSearcher, new HitDocs(browseHits), query, startTime,
+					searchTime, searchContext.getStart(),
+					searchContext.getEnd());
+
+				Map<String, FacetAccessible> facetMap = result.getFacetMap();
+
+				for (Map.Entry<String, FacetAccessible> entry :
+						facetMap.entrySet()) {
+
+					Facet facet = facets.get(entry.getKey());
+
+					FacetAccessible facetAccessible = entry.getValue();
+
+					FacetCollector facetCollector = new BoboFacetCollector(
+						entry.getKey(), facetAccessible);
+
+					facet.setFacetCollector(facetCollector);
+				}
+			}
+			catch (Exception e) {
+				throw new SearchException(e);
+			}
+			finally {
+				BooleanQuery.setMaxClauseCount(maxClauseCount);
+			}
+		}
+		catch (ParseException pe) {
+			_log.error("Query " + query, pe);
+
+			return new HitsImpl();
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
+		finally {
+			if (browsable != null) {
+				try {
+					browsable.close();
 				}
 				catch (IOException ioe) {
 					_log.error(ioe, ioe);
@@ -445,7 +451,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					query));
 		}
 		catch (ParseException pe) {
-			_log.error("Query: " + query, pe);
+			_log.error("Query " + query, pe);
 		}
 
 		return queryTerms;
@@ -472,7 +478,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				field, s);
 		}
 		catch (ParseException pe) {
-			_log.error("Query: " + query, pe);
+			_log.error("Query " + query, pe);
 		}
 
 		return snippet;
@@ -535,8 +541,10 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					break;
 				}
 
+				int docId = hitDocs.getDocId(i);
+
 				org.apache.lucene.document.Document document =
-					indexSearcher.doc(hitDocs.getDocId(i));
+					indexSearcher.doc(docId);
 
 				Document subsetDocument = getDocument(document);
 
@@ -552,15 +560,14 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					subsetSnippets.add(StringPool.BLANK);
 				}
 
-				Float subsetScore =
-					hitDocs.getScore(i) / scoredFieldNamesCount;
+				Float subsetScore = hitDocs.getScore(i) / scoredFieldNamesCount;
 
 				subsetScores.add(subsetScore);
 
 				if (_log.isDebugEnabled()) {
 					try {
 						Explanation explanation = indexSearcher.explain(
-							luceneQuery, hitDocs.getDocId(i));
+							luceneQuery, docId);
 
 						_log.debug(explanation.toString());
 					}
@@ -584,7 +591,10 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		return hits;
 	}
 
-	public class HitDocs {
+	private static Log _log = LogFactoryUtil.getLog(
+		LuceneIndexSearcherImpl.class);
+
+	private class HitDocs {
 
 		public HitDocs(BrowseHit[] browseHits) {
 			_browseHits = browseHits;
@@ -596,7 +606,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		public int getDocId(int i) {
 			if (_topFieldDocs != null) {
-				return _topFieldDocs.scoreDocs[i].doc;
+				ScoreDoc scoreDoc = _topFieldDocs.scoreDocs[i];
+
+				return scoreDoc.doc;
 			}
 			else if (_browseHits != null) {
 				return _browseHits[i].getDocid();
@@ -607,7 +619,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		public float getScore(int i) {
 			if (_topFieldDocs != null) {
-				return _topFieldDocs.scoreDocs[i].score;
+				ScoreDoc scoreDoc = _topFieldDocs.scoreDocs[i];
+
+				return scoreDoc.score;
 			}
 			else if (_browseHits != null) {
 				return _browseHits[i].getScore();
@@ -631,8 +645,5 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		private TopFieldDocs _topFieldDocs;
 
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		LuceneIndexSearcherImpl.class);
 
 }

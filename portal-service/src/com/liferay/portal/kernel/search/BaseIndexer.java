@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.search.facet.AssetEntriesFacet;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.ScopeFacet;
+import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -56,6 +57,11 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseIndexer implements Indexer {
 
+	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
+
+	private static final boolean _FILTER_SEARCH = false;
+
 	public void delete(Object obj) throws SearchException {
 		try {
 			doDelete(obj);
@@ -66,10 +72,6 @@ public abstract class BaseIndexer implements Indexer {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
-	}
-
-	public String getSortField(String orderByCol) {
-		return doGetSortField(orderByCol);
 	}
 
 	public Document getDocument(Object obj) throws SearchException {
@@ -106,18 +108,14 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
-	public String getSearchEngineId() {
-		return SearchEngineUtil.SYSTEM_ENGINE_ID;
-	}
-
 	public BooleanQuery getFacetQuery(
 			String className, SearchContext searchContext)
 		throws Exception {
 
 		BooleanQuery facetQuery = BooleanQueryFactoryUtil.create();
 
-		facetQuery.addExactTerm(Field.PORTLET_ID, getPortletId(searchContext));
 		facetQuery.addExactTerm(Field.ENTRY_CLASS_NAME, className);
+		facetQuery.addExactTerm(Field.PORTLET_ID, getPortletId(searchContext));
 
 		if (searchContext.getUserId() > 0) {
 			SearchPermissionChecker searchPermissionChecker =
@@ -138,6 +136,14 @@ public abstract class BaseIndexer implements Indexer {
 
 	public IndexerPostProcessor[] getIndexerPostProcessors() {
 		return _indexerPostProcessors;
+	}
+
+	public String getSearchEngineId() {
+		return SearchEngineUtil.SYSTEM_ENGINE_ID;
+	}
+
+	public String getSortField(String orderByCol) {
+		return doGetSortField(orderByCol);
 	}
 
 	public Summary getSummary(
@@ -264,13 +270,15 @@ public abstract class BaseIndexer implements Indexer {
 			searchContext.setEntryClassNames(
 				new String[] {getClassName(searchContext)});
 
-			AssetEntriesFacet assetEntryFacet = new AssetEntriesFacet(
+			AssetEntriesFacet assetEntriesFacet = new AssetEntriesFacet(
 				searchContext);
-			assetEntryFacet.setStatic(true);
 
-			searchContext.addFacet(assetEntryFacet);
+			assetEntriesFacet.setStatic(true);
+
+			searchContext.addFacet(assetEntriesFacet);
 
 			ScopeFacet scopeFacet = new ScopeFacet(searchContext);
+
 			scopeFacet.setStatic(true);
 
 			searchContext.addFacet(scopeFacet);
@@ -344,30 +352,44 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		MultiValueFacet assetCategoryIdsFacet = new MultiValueFacet(
-			searchContext);
+		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
 
-		assetCategoryIdsFacet.setFieldName(Field.ASSET_CATEGORY_IDS);
-		assetCategoryIdsFacet.setStatic(true);
+		multiValueFacet.setFieldName(Field.ASSET_CATEGORY_IDS);
+		multiValueFacet.setStatic(true);
 
-		searchContext.addFacet(assetCategoryIdsFacet);
+		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addSearchAssetTagNames(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		MultiValueFacet assetTagNamesFacet = new MultiValueFacet(searchContext);
+		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
 
-		assetTagNamesFacet.setFieldName(Field.ASSET_TAG_NAMES);
-		assetTagNamesFacet.setStatic(true);
+		multiValueFacet.setFieldName(Field.ASSET_TAG_NAMES);
+		multiValueFacet.setStatic(true);
 
-		searchContext.addFacet(assetTagNamesFacet);
+		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addSearchCategoryIds(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
+
+		FacetValueValidator facetValueValidator =
+			getAddSearchCategoryIdsFacetValueValidator();
+
+		if (facetValueValidator == null) {
+			return;
+		}
+
+		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
+
+		multiValueFacet.setFacetValueValidator(facetValueValidator);
+		multiValueFacet.setFieldName(Field.CATEGORY_ID);
+		multiValueFacet.setStatic(true);
+
+		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addSearchExpando(
@@ -408,6 +430,21 @@ public abstract class BaseIndexer implements Indexer {
 	protected void addSearchFolderIds(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
+
+		FacetValueValidator facetValueValidator =
+			getAddSearchFolderIdsFacetValueValidator();
+
+		if (facetValueValidator == null) {
+			return;
+		}
+
+		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
+
+		multiValueFacet.setFacetValueValidator(facetValueValidator);
+		multiValueFacet.setFieldName(Field.FOLDER_ID);
+		multiValueFacet.setStatic(true);
+
+		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addSearchGroupId(
@@ -429,10 +466,9 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		searchQuery.addTerms(Field.KEYWORDS, keywords, true);
-
 		searchQuery.addExactTerm(Field.ASSET_CATEGORY_NAMES, keywords);
 		searchQuery.addExactTerm(Field.ASSET_TAG_NAMES, keywords);
+		searchQuery.addTerms(Field.KEYWORDS, keywords, true);
 
 		addSearchExpando(searchQuery, searchContext, keywords);
 	}
@@ -440,6 +476,21 @@ public abstract class BaseIndexer implements Indexer {
 	protected void addSearchNodeIds(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
+
+		FacetValueValidator facetValueValidator =
+			getAddSearchNodeIdsFacetValueValidator();
+
+		if (facetValueValidator == null) {
+			return;
+		}
+
+		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
+
+		multiValueFacet.setFacetValueValidator(facetValueValidator);
+		multiValueFacet.setFieldName(Field.NODE_ID);
+		multiValueFacet.setStatic(true);
+
+		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addSearchTerm(
@@ -517,7 +568,7 @@ public abstract class BaseIndexer implements Indexer {
 				searchQuery, searchContext);
 		}
 
-		Map<String,Facet> facets = searchContext.getFacets();
+		Map<String, Facet> facets = searchContext.getFacets();
 
 		for (Facet facet : facets.values()) {
 			BooleanClause facetClause = facet.getFacetClause();
@@ -596,15 +647,16 @@ public abstract class BaseIndexer implements Indexer {
 		Document[] documents = hits.getDocs();
 
 		for (int i = 0; i < documents.length; i++) {
-			Document document = documents[i];
-
-			String entryClassName = document.get(Field.ENTRY_CLASS_NAME);
-			long entryClassPK = GetterUtil.getLong(
-				document.get(Field.ENTRY_CLASS_PK));
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(entryClassName);
-
 			try {
+				Document document = documents[i];
+
+				String entryClassName = document.get(Field.ENTRY_CLASS_NAME);
+				long entryClassPK = GetterUtil.getLong(
+					document.get(Field.ENTRY_CLASS_PK));
+
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					entryClassName);
+
 				if (indexer.hasPermission(
 						permissionChecker, entryClassPK, ActionKeys.VIEW)) {
 
@@ -648,6 +700,18 @@ public abstract class BaseIndexer implements Indexer {
 		return hits;
 	}
 
+	protected FacetValueValidator getAddSearchCategoryIdsFacetValueValidator() {
+		return null;
+	}
+
+	protected FacetValueValidator getAddSearchFolderIdsFacetValueValidator() {
+		return null;
+	}
+
+	protected FacetValueValidator getAddSearchNodeIdsFacetValueValidator() {
+		return null;
+	}
+
 	protected String getClassName(SearchContext searchContext) {
 		String[] classNames = getClassNames();
 
@@ -686,11 +750,6 @@ public abstract class BaseIndexer implements Indexer {
 	protected void setStagingAware(boolean stagingAware) {
 		_stagingAware = stagingAware;
 	}
-
-	private static final boolean _FILTER_SEARCH = false;
-
-	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 

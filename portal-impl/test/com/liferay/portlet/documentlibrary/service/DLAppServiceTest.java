@@ -305,7 +305,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			message += "file entry by " + keywords;
 		}
 
-		message += " using query " + hits.getQuery().toString();
+		message += " using query " + hits.getQuery();
 
 		assertTrue(message, found);
 	}

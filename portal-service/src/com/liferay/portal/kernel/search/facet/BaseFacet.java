@@ -50,6 +50,18 @@ public abstract class BaseFacet implements Facet {
 		return _facetValueValidator;
 	}
 
+	public String getFieldName() {
+		return _facetConfiguration.getFieldName();
+	}
+
+	public SearchContext getSearchContext() {
+		return _searchContext;
+	}
+
+	public boolean isStatic() {
+		return _facetConfiguration.isStatic();
+	}
+
 	public void setFacetCollector(FacetCollector facetCollector) {
 		_facetCollector = facetCollector;
 	}
@@ -64,18 +76,6 @@ public abstract class BaseFacet implements Facet {
 		_facetValueValidator = facetValueValidator;
 	}
 
-	public String getFieldName() {
-		return _facetConfiguration.getFieldName();
-	}
-
-	public SearchContext getSearchContext() {
-		return _searchContext;
-	}
-
-	public boolean isStatic() {
-		return _facetConfiguration.isStatic();
-	}
-
 	public void setFieldName(String fieldName) {
 		_facetConfiguration.setFieldName(fieldName);
 	}
@@ -86,7 +86,6 @@ public abstract class BaseFacet implements Facet {
 
 	protected abstract BooleanClause doGetFacetClause();
 
-	protected BooleanClause _facetClause;
 	private FacetCollector _facetCollector;
 	private FacetConfiguration _facetConfiguration = new FacetConfiguration();
 	private FacetValueValidator _facetValueValidator;

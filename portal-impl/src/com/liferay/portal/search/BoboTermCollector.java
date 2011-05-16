@@ -14,9 +14,9 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.search.facet.collector.TermCollector;
-
 import com.browseengine.bobo.api.BrowseFacet;
+
+import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 
 /**
  * @author Raymond Augé

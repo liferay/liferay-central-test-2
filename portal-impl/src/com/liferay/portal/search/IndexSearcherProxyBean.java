@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchContext;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 
 /**
@@ -30,15 +29,13 @@ import com.liferay.portal.kernel.search.Sort;
 public class IndexSearcherProxyBean
 	extends BaseProxyBean implements IndexSearcher {
 
-	public Hits search(SearchContext searchContext, Query query)
-		throws SearchException {
+	public Hits search(
+		long companyId, Query query, Sort[] sorts, int start, int end) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public Hits search(
-		long companyId, Query query, Sort[] sorts, int start, int end) {
-
+	public Hits search(SearchContext searchContext, Query query) {
 		throw new UnsupportedOperationException();
 	}
 

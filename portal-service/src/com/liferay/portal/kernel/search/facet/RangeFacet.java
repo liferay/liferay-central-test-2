@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.search.facet;
 
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.search.BooleanClause;
 import com.liferay.portal.kernel.search.BooleanClauseFactoryUtil;
@@ -38,21 +39,26 @@ public class RangeFacet extends BaseFacet {
 
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
+
 		FacetConfiguration facetConfiguration = getFacetConfiguration();
-		JSONObject data = facetConfiguration.getData();
-		String fieldName = getFieldName();
+
+		JSONObject dataJSONObject = facetConfiguration.getData();
 
 		String start = StringPool.BLANK;
 		String end = StringPool.BLANK;
 
-		if (isStatic() && data.has("ranges")) {
-			String rangeString = data.getJSONArray("ranges").getString(0);
+		if (isStatic() && dataJSONObject.has("ranges")) {
+			JSONArray rangesJSONArray = dataJSONObject.getJSONArray("ranges");
+
+			String rangeString = rangesJSONArray.getString(0);
 
 			String[] range = RangeParserUtil.parserRange(rangeString);
 
 			start = range[0];
 			end = range[1];
 		}
+
+		String fieldName = getFieldName();
 
 		String rangeParam = GetterUtil.getString(
 			searchContext.getAttribute(fieldName));
@@ -68,30 +74,30 @@ public class RangeFacet extends BaseFacet {
 			return null;
 		}
 
-		if (Validator.isNotNull(start) &&
-			Validator.isNotNull(end) &&
-			start.compareTo(end) >= 0) {
+		if (Validator.isNotNull(start) && Validator.isNotNull(end) &&
+			(start.compareTo(end) >= 0)) {
 
 			throw new IllegalArgumentException(
-				"End value must be greater than Start value.");
+				"End value must be greater than start value");
 		}
 
-		String endString = StringPool.STAR;
 		String startString = StringPool.STAR;
 
 		if (Validator.isNotNull(start)) {
 			startString = start;
 		}
 
+		String endString = StringPool.STAR;
+
 		if (Validator.isNotNull(end)) {
 			endString = end;
 		}
 
-		TermRangeQuery facetQuery = TermRangeQueryFactoryUtil.create(
+		TermRangeQuery facetTermRangeQuery = TermRangeQueryFactoryUtil.create(
 			fieldName, startString, endString, true, true);
 
 		return BooleanClauseFactoryUtil.create(
-			facetQuery, BooleanClauseOccur.MUST.getName());
+			facetTermRangeQuery, BooleanClauseOccur.MUST.getName());
 	}
 
 }

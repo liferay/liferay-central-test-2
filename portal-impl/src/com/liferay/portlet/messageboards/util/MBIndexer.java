@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -86,6 +85,10 @@ public class MBIndexer extends BaseIndexer {
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
 	}
 
+	public boolean isFilterSearch() {
+		return _FILTER_SEARCH;
+	}
+
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -96,32 +99,6 @@ public class MBIndexer extends BaseIndexer {
 		if (threadId > 0) {
 			contextQuery.addTerm("threadId", threadId);
 		}
-	}
-
-	protected void addSearchCategoryIds(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		MultiValueFacet categoryIdsFacet = new MultiValueFacet(searchContext);
-
-		categoryIdsFacet.setFacetValueValidator(new FacetValueValidator() {
-			public boolean check(SearchContext searchContext, String primKey) {
-				try {
-					MBCategoryServiceUtil.getCategory(
-						GetterUtil.getLong(primKey));
-				}
-				catch (Exception e) {
-					return false;
-				}
-
-				return true;
-			}
-		});
-
-		categoryIdsFacet.setFieldName(Field.CATEGORY_ID);
-		categoryIdsFacet.setStatic(true);
-
-		searchContext.addFacet(categoryIdsFacet);
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -296,12 +273,26 @@ public class MBIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
-	protected String getPortletId(SearchContext searchContext) {
-		return PORTLET_ID;
+	protected FacetValueValidator getAddSearchCategoryIdsFacetValueValidator() {
+		return new FacetValueValidator() {
+
+			public boolean check(SearchContext searchContext, String primKey) {
+				try {
+					MBCategoryServiceUtil.getCategory(
+						GetterUtil.getLong(primKey));
+				}
+				catch (Exception e) {
+					return false;
+				}
+
+				return true;
+			}
+
+		};
 	}
 
-	public boolean isFilterSearch() {
-		return _FILTER_SEARCH;
+	protected String getPortletId(SearchContext searchContext) {
+		return PORTLET_ID;
 	}
 
 	protected String processContent(long messageId, String content) {

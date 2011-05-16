@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -112,9 +110,8 @@ public class FacetedSearcher extends BaseIndexer {
 			String keywords, String className)
 		throws Exception {
 
-		ExpandoBridge expandoBridge =
-			ExpandoBridgeFactoryUtil.getExpandoBridge(
-				searchContext.getCompanyId(), className);
+		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
+			searchContext.getCompanyId(), className);
 
 		Set<String> attributeNames = SetUtil.fromEnumeration(
 			expandoBridge.getAttributeNames());
@@ -182,10 +179,9 @@ public class FacetedSearcher extends BaseIndexer {
 		String keywords = searchContext.getKeywords();
 
 		if (Validator.isNotNull(keywords)) {
-			searchQuery.addTerms(Field.KEYWORDS, keywords, true);
-
 			searchQuery.addExactTerm(Field.ASSET_CATEGORY_NAMES, keywords);
 			searchQuery.addExactTerm(Field.ASSET_TAG_NAMES, keywords);
+			searchQuery.addTerms(Field.KEYWORDS, keywords, true);
 		}
 
 		for (String entryClassName : searchContext.getEntryClassNames()) {
@@ -210,7 +206,7 @@ public class FacetedSearcher extends BaseIndexer {
 			}
 		}
 
-		Map<String,Facet> facets = searchContext.getFacets();
+		Map<String, Facet> facets = searchContext.getFacets();
 
 		for (Facet facet : facets.values()) {
 			BooleanClause facetClause = facet.getFacetClause();
@@ -314,7 +310,5 @@ public class FacetedSearcher extends BaseIndexer {
 			BooleanQuery fullQuery, SearchContext searchContext)
 		throws Exception {
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
 }
