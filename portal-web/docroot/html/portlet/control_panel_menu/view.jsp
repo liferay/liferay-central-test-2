@@ -33,7 +33,7 @@
 		String category = PortalUtil.getControlPanelCategory(ppid, themeDisplay);
 
 		for (String curCategory : PortletCategoryKeys.ALL) {
-			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
+			Collection<Portlet> categoryPortlets = PortalUtil.getControlPanelPortlets(themeDisplay.getCompanyId(), curCategory);
 
 			List<Layout> scopeLayouts = new ArrayList<Layout>();
 
@@ -83,7 +83,7 @@
 					}
 				}
 
-				List<Group> manageableSites = GroupServiceUtil.getManageableSites(portlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
+				List<Group> manageableSites = GroupServiceUtil.getManageableSites(categoryPortlets, PropsValues.CONTROL_PANEL_NAVIGATION_MAX_COMMUNITIES);
 
 				boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
 
@@ -220,6 +220,8 @@
 				<ul class="category-portlets">
 
 					<%
+					List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
+
 					for (Portlet portlet : portlets) {
 						if (portlet.isActive() && !portlet.isInstanceable()) {
 					%>

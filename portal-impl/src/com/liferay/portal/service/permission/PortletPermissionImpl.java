@@ -31,6 +31,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -93,7 +94,7 @@ public class PortletPermissionImpl implements PortletPermission {
 
 	public boolean contains(
 			PermissionChecker permissionChecker, long groupId, long plid,
-			List<Portlet> portlets, String actionId)
+			Collection<Portlet> portlets, String actionId)
 		throws PortalException, SystemException {
 
 		for (Portlet portlet : portlets) {

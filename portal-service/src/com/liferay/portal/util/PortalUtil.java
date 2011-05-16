@@ -338,6 +338,13 @@ public class PortalUtil {
 			category, themeDisplay);
 	}
 
+	public static Set<Portlet> getControlPanelPortlets(
+			long companyId, String category)
+		throws SystemException {
+
+		return getPortal().getControlPanelPortlets(companyId, category);
+	}
+
 	public static String getCurrentCompleteURL(HttpServletRequest request) {
 		return getPortal().getCurrentCompleteURL(request);
 	}

@@ -424,6 +424,9 @@ public interface Portal {
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException;
 
+	public Set<Portlet> getControlPanelPortlets(long companyId, String category)
+		throws SystemException;
+
 	public String getCurrentCompleteURL(HttpServletRequest request);
 
 	public String getCurrentURL(HttpServletRequest request);

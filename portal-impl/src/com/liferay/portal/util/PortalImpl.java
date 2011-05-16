@@ -1167,11 +1167,20 @@ public class PortalImpl implements Portal {
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException {
 
+		Set<Portlet> portletsSet = getControlPanelPortlets(
+			themeDisplay.getCompanyId(), category);
+
+		return filterControlPanelPortlets(portletsSet, category, themeDisplay);
+	}
+
+	public Set<Portlet> getControlPanelPortlets(long companyId, String category)
+		throws SystemException {
+
 		Set<Portlet> portletsSet = new TreeSet<Portlet>(
 			new PortletControlPanelWeightComparator());
 
 		List<Portlet> portletsList = PortletLocalServiceUtil.getPortlets(
-			themeDisplay.getCompanyId());
+			companyId);
 
 		for (Portlet portlet : portletsList) {
 			if (category.equals(portlet.getControlPanelEntryCategory())) {
@@ -1179,7 +1188,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		return filterControlPanelPortlets(portletsSet, category, themeDisplay);
+		return portletsSet;
 	}
 
 	public String getCurrentCompleteURL(HttpServletRequest request) {

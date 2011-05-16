@@ -31,6 +31,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.util.UniqueList;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -97,7 +98,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
-	public List<Group> getManageableSites(List<Portlet> portlets, int max)
+	public List<Group> getManageableSites(Collection<Portlet> portlets, int max)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
