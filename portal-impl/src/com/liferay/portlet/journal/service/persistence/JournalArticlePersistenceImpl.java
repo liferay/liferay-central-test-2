@@ -278,6 +278,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_C_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_C_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_S = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByG_C_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_BY_G_C_L = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByG_C_L",
@@ -373,6 +387,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				Long.valueOf(journalArticle.getClassPK())
 			}, journalArticle);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_S,
+			new Object[] {
+				Long.valueOf(journalArticle.getGroupId()),
+				Long.valueOf(journalArticle.getClassNameId()),
+				
+			journalArticle.getStructureId()
+			}, journalArticle);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V,
 			new Object[] {
 				Long.valueOf(journalArticle.getGroupId()),
@@ -439,6 +461,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				Long.valueOf(journalArticle.getGroupId()),
 				Long.valueOf(journalArticle.getClassNameId()),
 				Long.valueOf(journalArticle.getClassPK())
+			});
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_S,
+			new Object[] {
+				Long.valueOf(journalArticle.getGroupId()),
+				Long.valueOf(journalArticle.getClassNameId()),
+				
+			journalArticle.getStructureId()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
@@ -569,6 +599,14 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				Long.valueOf(journalArticleModelImpl.getClassPK())
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_S,
+			new Object[] {
+				Long.valueOf(journalArticleModelImpl.getGroupId()),
+				Long.valueOf(journalArticleModelImpl.getClassNameId()),
+				
+			journalArticleModelImpl.getStructureId()
+			});
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
 			new Object[] {
 				Long.valueOf(journalArticleModelImpl.getGroupId()),
@@ -664,6 +702,35 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					Long.valueOf(journalArticle.getGroupId()),
 					Long.valueOf(journalArticle.getClassNameId()),
 					Long.valueOf(journalArticle.getClassPK())
+				}, journalArticle);
+		}
+
+		if (!isNew &&
+				((journalArticle.getGroupId() != journalArticleModelImpl.getOriginalGroupId()) ||
+				(journalArticle.getClassNameId() != journalArticleModelImpl.getOriginalClassNameId()) ||
+				!Validator.equals(journalArticle.getStructureId(),
+					journalArticleModelImpl.getOriginalStructureId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_S,
+				new Object[] {
+					Long.valueOf(journalArticleModelImpl.getOriginalGroupId()),
+					Long.valueOf(
+						journalArticleModelImpl.getOriginalClassNameId()),
+					
+				journalArticleModelImpl.getOriginalStructureId()
+				});
+		}
+
+		if (isNew ||
+				((journalArticle.getGroupId() != journalArticleModelImpl.getOriginalGroupId()) ||
+				(journalArticle.getClassNameId() != journalArticleModelImpl.getOriginalClassNameId()) ||
+				!Validator.equals(journalArticle.getStructureId(),
+					journalArticleModelImpl.getOriginalStructureId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_S,
+				new Object[] {
+					Long.valueOf(journalArticle.getGroupId()),
+					Long.valueOf(journalArticle.getClassNameId()),
+					
+				journalArticle.getStructureId()
 				}, journalArticle);
 		}
 
@@ -8264,6 +8331,172 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Finds the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
+	 * @param structureId the structure ID to search with
+	 * @return the matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByG_C_S(long groupId, long classNameId,
+		String structureId) throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = fetchByG_C_S(groupId, classNameId,
+				structureId);
+
+		if (journalArticle == null) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", structureId=");
+			msg.append(structureId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+
+		return journalArticle;
+	}
+
+	/**
+	 * Finds the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
+	 * @param structureId the structure ID to search with
+	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle fetchByG_C_S(long groupId, long classNameId,
+		String structureId) throws SystemException {
+		return fetchByG_C_S(groupId, classNameId, structureId, true);
+	}
+
+	/**
+	 * Finds the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
+	 * @param structureId the structure ID to search with
+	 * @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle fetchByG_C_S(long groupId, long classNameId,
+		String structureId, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, classNameId, structureId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_C_S,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_CLASSNAMEID_2);
+
+			if (structureId == null) {
+				query.append(_FINDER_COLUMN_G_C_S_STRUCTUREID_1);
+			}
+			else {
+				if (structureId.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_C_S_STRUCTUREID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_C_S_STRUCTUREID_2);
+				}
+			}
+
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(classNameId);
+
+				if (structureId != null) {
+					qPos.add(structureId);
+				}
+
+				List<JournalArticle> list = q.list();
+
+				result = list;
+
+				JournalArticle journalArticle = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_S,
+						finderArgs, list);
+				}
+				else {
+					journalArticle = list.get(0);
+
+					cacheResult(journalArticle);
+
+					if ((journalArticle.getGroupId() != groupId) ||
+							(journalArticle.getClassNameId() != classNameId) ||
+							(journalArticle.getStructureId() == null) ||
+							!journalArticle.getStructureId().equals(structureId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_S,
+							finderArgs, journalArticle);
+					}
+				}
+
+				return journalArticle;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_S,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (JournalArticle)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -11056,6 +11289,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Removes the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
+	 * @param structureId the structure ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_C_S(long groupId, long classNameId, String structureId)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByG_C_S(groupId, classNameId,
+				structureId);
+
+		journalArticlePersistence.remove(journalArticle);
+	}
+
+	/**
 	 * Removes all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
@@ -12499,6 +12748,82 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Counts all the journal articles where groupId = &#63; and classNameId = &#63; and structureId = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param classNameId the class name ID to search with
+	 * @param structureId the structure ID to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_C_S(long groupId, long classNameId, String structureId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, classNameId, structureId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_S,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_S_CLASSNAMEID_2);
+
+			if (structureId == null) {
+				query.append(_FINDER_COLUMN_G_C_S_STRUCTUREID_1);
+			}
+			else {
+				if (structureId.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_C_S_STRUCTUREID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_C_S_STRUCTUREID_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(classNameId);
+
+				if (structureId != null) {
+					qPos.add(structureId);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_S,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -13172,6 +13497,11 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "journalArticle.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 = "journalArticle.classPK = ?";
+	private static final String _FINDER_COLUMN_G_C_S_GROUPID_2 = "journalArticle.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_S_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_S_STRUCTUREID_1 = "journalArticle.structureId IS NULL";
+	private static final String _FINDER_COLUMN_G_C_S_STRUCTUREID_2 = "journalArticle.structureId = ?";
+	private static final String _FINDER_COLUMN_G_C_S_STRUCTUREID_3 = "(journalArticle.structureId IS NULL OR journalArticle.structureId = ?)";
 	private static final String _FINDER_COLUMN_G_C_L_GROUPID_2 = "journalArticle.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_L_CLASSNAMEID_2 = "journalArticle.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_G_C_L_LAYOUTUUID_1 = "journalArticle.layoutUuid IS NULL";

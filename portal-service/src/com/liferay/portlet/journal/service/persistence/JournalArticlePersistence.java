@@ -2088,6 +2088,48 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Finds the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; or throws a {@link com.liferay.portlet.journal.NoSuchArticleException} if it could not be found.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param structureId the structure ID to search with
+	* @return the matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.journal.model.JournalArticle findByG_C_S(
+		long groupId, long classNameId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	/**
+	* Finds the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param structureId the structure ID to search with
+	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.journal.model.JournalArticle fetchByG_C_S(
+		long groupId, long classNameId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param structureId the structure ID to search with
+	* @return the matching journal article, or <code>null</code> if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.journal.model.JournalArticle fetchByG_C_S(
+		long groupId, long classNameId, java.lang.String structureId,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -2903,6 +2945,19 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 			com.liferay.portlet.journal.NoSuchArticleException;
 
 	/**
+	* Removes the journal article where groupId = &#63; and classNameId = &#63; and structureId = &#63; from the database.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param structureId the structure ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByG_C_S(long groupId, long classNameId,
+		java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException;
+
+	/**
 	* Removes all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63; from the database.
 	*
 	* @param groupId the group ID to search with
@@ -3192,6 +3247,19 @@ public interface JournalArticlePersistence extends BasePersistence<JournalArticl
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByG_C_C(long groupId, long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Counts all the journal articles where groupId = &#63; and classNameId = &#63; and structureId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param structureId the structure ID to search with
+	* @return the number of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_C_S(long groupId, long classNameId,
+		java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

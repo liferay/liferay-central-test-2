@@ -627,7 +627,15 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public void setStructureId(String structureId) {
+		if (_originalStructureId == null) {
+			_originalStructureId = _structureId;
+		}
+
 		_structureId = structureId;
+	}
+
+	public String getOriginalStructureId() {
+		return GetterUtil.getString(_originalStructureId);
 	}
 
 	public String getTemplateId() {
@@ -957,6 +965,8 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		journalArticleModelImpl._originalVersion = journalArticleModelImpl._version;
 
 		journalArticleModelImpl._setOriginalVersion = false;
+
+		journalArticleModelImpl._originalStructureId = journalArticleModelImpl._structureId;
 	}
 
 	public String toString() {
@@ -1202,6 +1212,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	private String _content;
 	private String _type;
 	private String _structureId;
+	private String _originalStructureId;
 	private String _templateId;
 	private String _layoutUuid;
 	private Date _displayDate;

@@ -303,6 +303,14 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingJournalArticleModelImpl.getGroupId(),
 			existingJournalArticleModelImpl.getOriginalGroupId());
+		assertEquals(existingJournalArticleModelImpl.getClassNameId(),
+			existingJournalArticleModelImpl.getOriginalClassNameId());
+		assertTrue(Validator.equals(
+				existingJournalArticleModelImpl.getStructureId(),
+				existingJournalArticleModelImpl.getOriginalStructureId()));
+
+		assertEquals(existingJournalArticleModelImpl.getGroupId(),
+			existingJournalArticleModelImpl.getOriginalGroupId());
 		assertTrue(Validator.equals(
 				existingJournalArticleModelImpl.getArticleId(),
 				existingJournalArticleModelImpl.getOriginalArticleId()));
