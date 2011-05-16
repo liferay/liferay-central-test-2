@@ -21,10 +21,6 @@
 		<finder name="RecordSetId" return-type="Collection">
 			<finder-column name="recordSetId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.dynamicdatamapping" entity="DDMStructureLink" />
 	</entity>
 	<entity name="DDLRecordSet" uuid="true" local-service="true" remote-service="true">
 
@@ -65,6 +61,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portlet.dynamicdatamapping" entity="DDMStructure" />
+		<reference package-path="com.liferay.portlet.dynamicdatamapping" entity="DDMStructureLink" />
 	</entity>
 	<exceptions>
 		<exception>RecordSetDDMStructureId</exception>

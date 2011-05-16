@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.RecordSetDDMStructureIdException;
 import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
 import com.liferay.portlet.dynamicdatalists.RecordSetNameException;
@@ -99,6 +100,13 @@ public class DDLRecordSetLocalServiceImpl
 				serviceContext.getGuestPermissions());
 		}
 
+		// Dynamic data mapping structure link
+
+		long classNameId = PortalUtil.getClassNameId(DDLRecordSet.class);
+
+		ddmStructureLinkLocalService.addStructureLink(
+			classNameId, recordSetId, ddmStructureId, serviceContext);
+
 		return recordSet;
 	}
 
@@ -141,6 +149,11 @@ public class DDLRecordSetLocalServiceImpl
 		// Records
 
 		ddlRecordLocalService.deleteRecords(recordSet.getRecordSetId());
+
+		// Dynamic data mapping structure link
+
+		ddmStructureLinkLocalService.deleteClassStructureLink(
+			recordSet.getRecordSetId());
 	}
 
 	public void deleteRecordSet(long recordSetId)

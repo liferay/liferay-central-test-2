@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordLocalServiceBaseImpl;
@@ -28,7 +27,6 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 
 import java.io.Serializable;
-
 import java.util.List;
 import java.util.Map;
 
@@ -68,14 +66,6 @@ public class DDLRecordLocalServiceImpl
 
 		ddlRecordPersistence.update(record, false);
 
-		// Dynamic data mapping structure link
-
-		long classNameId = PortalUtil.getClassNameId(DDLRecord.class);
-
-		ddmStructureLinkLocalService.addStructureLink(
-			classNameId, recordId, recordSet.getDDMStructureId(),
-			serviceContext);
-
 		return record;
 	}
 
@@ -99,11 +89,6 @@ public class DDLRecordLocalServiceImpl
 		// Dynamic data mapping storage
 
 		StorageEngineUtil.deleteByClass(record.getClassPK());
-
-		// Dynamic data mapping structure link
-
-		ddmStructureLinkLocalService.deleteClassStructureLink(
-			record.getRecordId());
 	}
 
 	public void deleteRecord(long recordId)
