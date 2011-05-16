@@ -36,11 +36,7 @@ AUI().add(
 
 				var data = mergeDialogIO.get('data');
 
-				data.groupId = options.groupId;
-				data.privateLayout = options.privateLayout;
-				data.layoutSetBranchId = options.layoutSetBranchId;
-
-				mergeDialogIO.set('data', data);
+				mergeDialogIO.set('uri', options.url);
 				mergeDialogIO.start();
 
 				mergeDialog.show();
@@ -66,7 +62,7 @@ AUI().add(
 						}
 					).render();
 
-					branchDialog.move(dialog.get('x'), dialog.get('y') + 100);
+					branchDialog.move(branchDialog.get('x'), branchDialog.get('y') + 10);
 
 					instance._branchDialog = branchDialog;
 				}
@@ -126,8 +122,7 @@ AUI().add(
 								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 								p_l_id: themeDisplay.getPlid(),
 								redirect: Liferay.currentURL
-							},
-							uri: themeDisplay.getPathMain() + '/staging_bar/merge_layout_set_branch'
+							}
 						}
 					).render();
 
@@ -164,7 +159,7 @@ AUI().add(
 
 					form.one('#' + namespace + 'mergeLayoutSetBranchId').val(mergeLayoutSetBranchId);
 
-					submitForm(form);
+					submitForm('#' + namespace + 'fm4');
 				}
 			}
 		};

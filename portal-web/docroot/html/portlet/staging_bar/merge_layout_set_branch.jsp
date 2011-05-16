@@ -19,9 +19,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long groupId = ParamUtil.getLong(request, "groupId");
-privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-
 List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(groupId, privateLayout);
 
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");

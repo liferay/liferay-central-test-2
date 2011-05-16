@@ -26,7 +26,7 @@
 	<aui:form action="<%= editLayoutSetBranchURL %>" enctype="multipart/form-data" method="post" name="fm3">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-		<aui:input name="groupId" type="hidden" value="<%= group.getGroupId() %>" />
+		<aui:input name="groupId" type="hidden" value="<%= stagingGroup.getGroupId() %>" />
 		<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
 
 		<aui:fieldset>

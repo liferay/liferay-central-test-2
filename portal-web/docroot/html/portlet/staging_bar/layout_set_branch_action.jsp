@@ -52,10 +52,21 @@ LayoutSetBranch layoutSetBranch = (LayoutSetBranch)row.getObject();
 	</c:if>
 
 	<c:if test="<%= LayoutSetBranchPermissionUtil.contains(permissionChecker, layoutSetBranch, ActionKeys.MERGE) %>">
+		<portlet:renderURL var="mergeURL">
+			<portlet:param name="struts_action" value="/staging_bar/merge_layout_set_branch" />
+			<portlet:param name="groupId" value="<%= String.valueOf(layoutSetBranch.getGroupId()) %>" />
+			<portlet:param name="privateLayout" value="<%= String.valueOf(layoutSetBranch.isPrivateLayout()) %>" />
+			<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(layoutSetBranch.getLayoutSetBranchId()) %>" />
+		</portlet:renderURL>
+
+		<%
+		String taglibURL = "javascript:Liferay.Staging.Branching.mergeBranch({url: '" + mergeURL + "'});";
+		%>
+
 		<liferay-ui:icon
 			image="edit"
 			message="merge"
-			url='<%= "javascript:Liferay.Staging.Branching.mergeBranch({groupId: " + layoutSetBranch.getGroupId() + ", privateLayout: " + layoutSetBranch.isPrivateLayout() + ", layoutSetBranchId: " + layoutSetBranch.getLayoutSetBranchId() + "});" %>'
+			url="<%= taglibURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>
