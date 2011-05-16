@@ -1,5 +1,5 @@
 <ehcache
-	dynamicConfig="false"
+	dynamicConfig="true"
 	monitoring="off"
 	name="liferay-multi-vm-clustered"
 	updateCheck="false"
