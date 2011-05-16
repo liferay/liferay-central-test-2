@@ -199,67 +199,69 @@
 			else {
 				title = LanguageUtil.get(pageContext, "category." + curCategory);
 			}
+
+			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
 		%>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="lfr-component panel-page-category" extended="<%= false %>" id='<%= "panel-manage-" + curCategory %>' persistState="<%= true %>" title="<%= title %>">
-				<c:if test="<%= !scopeLayouts.isEmpty() && curCategory.equals(PortletCategoryKeys.CONTENT) %>">
-					<div class="nobr lfr-title-scope-selector">
-						<liferay-ui:icon-menu align="left" direction="down" icon="" message='<%= LanguageUtil.get(pageContext, "scope") + StringPool.COLON + StringPool.SPACE + curGroupLabel %>'>
-							<liferay-ui:icon
-								image="folder"
-								message="default"
-								url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>'
-							/>
-
-							<%
-							for (Layout curScopeLayout : scopeLayouts) {
-							%>
-
+			<c:if test="<%= !portlets.isEmpty() %>">
+				<liferay-ui:panel collapsible="<%= true %>" cssClass="lfr-component panel-page-category" extended="<%= false %>" id='<%= "panel-manage-" + curCategory %>' persistState="<%= true %>" title="<%= title %>">
+					<c:if test="<%= !scopeLayouts.isEmpty() && curCategory.equals(PortletCategoryKeys.CONTENT) %>">
+						<div class="nobr lfr-title-scope-selector">
+							<liferay-ui:icon-menu align="left" direction="down" icon="" message='<%= LanguageUtil.get(pageContext, "scope") + StringPool.COLON + StringPool.SPACE + curGroupLabel %>'>
 								<liferay-ui:icon
 									image="folder"
-									message="<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>"
-									url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>'
+									message="default"
+									url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curGroup.getGroupId()) %>'
 								/>
 
-							<%
+								<%
+								for (Layout curScopeLayout : scopeLayouts) {
+								%>
+
+									<liferay-ui:icon
+										image="folder"
+										message="<%= HtmlUtil.escape(curScopeLayout.getName(locale)) %>"
+										url='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", curScopeLayout.getScopeGroup().getGroupId()) %>'
+									/>
+
+								<%
+								}
+								%>
+
+							</liferay-ui:icon-menu>
+						</div>
+					</c:if>
+
+					<ul class="category-portlets">
+
+						<%
+						for (Portlet portlet : portlets) {
+							if (portlet.isActive() && !portlet.isInstanceable()) {
+						%>
+
+								<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
+									<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />">
+										<c:choose>
+											<c:when test="<%= Validator.isNull(portlet.getIcon()) %>">
+												<liferay-ui:icon src='<%= themeDisplay.getPathContext() + "/html/icons/default.png" %>' />
+											</c:when>
+											<c:otherwise>
+												<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
+											</c:otherwise>
+										</c:choose>
+
+										<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
+									</a>
+								</li>
+
+						<%
 							}
-							%>
-
-						</liferay-ui:icon-menu>
-					</div>
-				</c:if>
-
-				<ul class="category-portlets">
-
-					<%
-					List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
-
-					for (Portlet portlet : portlets) {
-						if (portlet.isActive() && !portlet.isInstanceable()) {
-					%>
-
-							<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
-								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />">
-									<c:choose>
-										<c:when test="<%= Validator.isNull(portlet.getIcon()) %>">
-											<liferay-ui:icon src='<%= themeDisplay.getPathContext() + "/html/icons/default.png" %>' />
-										</c:when>
-										<c:otherwise>
-											<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
-										</c:otherwise>
-									</c:choose>
-
-									<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
-								</a>
-							</li>
-
-					<%
 						}
-					}
-					%>
+						%>
 
-				</ul>
-			</liferay-ui:panel>
+					</ul>
+				</liferay-ui:panel>
+			</c:if>
 
 		<%
 		}
