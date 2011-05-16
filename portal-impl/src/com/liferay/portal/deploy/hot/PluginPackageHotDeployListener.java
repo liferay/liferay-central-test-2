@@ -14,8 +14,11 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
@@ -25,9 +28,12 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
+
+import java.net.URL;
 
 import java.util.Properties;
 
@@ -106,6 +112,10 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		initServiceComponent(servletContext, portletClassLoader);
 
 		registerClpMessageListeners(servletContext, portletClassLoader);
+
+		//	Cache reconfiguration
+
+		reconfigureCaches(portletClassLoader);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -200,6 +210,68 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			servletContext, classLoader, buildNamespace, buildNumber,
 			buildDate, buildAutoUpgrade);
 	}
+
+	protected void processCacheConfiguration(
+		ClassLoader servletClassLoader, String cacheConfigurationLocation,
+		String portalCacheManagerBean)
+		throws Exception {
+
+		URL configurationFile = servletClassLoader.getResource(
+			cacheConfigurationLocation);
+
+		if (Validator.isNotNull(configurationFile)) {
+			PortalCacheManager portalCacheManager =
+				(PortalCacheManager) PortalBeanLocatorUtil.locate(
+					portalCacheManagerBean);
+
+			if (portalCacheManager == null) {
+				throw new AutoDeployException(
+					"Unable to find portal cache manager to override: " +
+						portalCacheManagerBean);
+			}
+
+			portalCacheManager.reconfigureCaches(configurationFile);
+		}
+	}
+
+	protected void reconfigureCaches(ClassLoader portletClassLoader)
+		throws Exception {
+
+		Configuration portletPropertiesConfiguration = null;
+
+		try {
+			portletPropertiesConfiguration =
+				ConfigurationFactoryUtil.getConfiguration(
+					portletClassLoader, "portlet");
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to read portlet.properties");
+			}
+
+			return;
+		}
+
+		String cacheConfigurationLocation = portletPropertiesConfiguration.get(
+			PropsKeys.EHCACHE_SINGLE_VM_CONFIG_LOCATION);
+
+		String clusterCacheConfigurationLocation =
+			portletPropertiesConfiguration.get(
+				PropsKeys.EHCACHE_MULTI_VM_CONFIG_LOCATION);
+
+		processCacheConfiguration(
+			portletClassLoader, cacheConfigurationLocation,
+			_SINGLE_VM_PORTAL_CACHE_MANAGER_BEAN_NAME);
+
+		processCacheConfiguration(
+			portletClassLoader, clusterCacheConfigurationLocation,
+			_MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME);
+	}
+
+	private static final String _MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME =
+		"com.liferay.portal.kernel.cache.MultiVMPortalCacheManager";
+	private static final String _SINGLE_VM_PORTAL_CACHE_MANAGER_BEAN_NAME =
+		"com.liferay.portal.kernel.cache.SingleVMPortalCacheManager";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PluginPackageHotDeployListener.class);
