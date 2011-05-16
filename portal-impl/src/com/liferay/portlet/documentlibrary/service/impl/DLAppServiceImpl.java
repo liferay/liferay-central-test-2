@@ -48,7 +48,6 @@ import java.util.List;
 /**
  * @author Alexander Chow
  */
-@JSONWebService
 public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 	public FileEntry addFileEntry(
