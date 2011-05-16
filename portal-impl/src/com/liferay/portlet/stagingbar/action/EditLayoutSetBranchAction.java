@@ -78,7 +78,8 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 					actionRequest, e.getClass().getName() + lsbne.getType());
 			}
 			else if (e instanceof PrincipalException ||
-					e instanceof SystemException) {
+					 e instanceof SystemException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.staging_bar.error");
