@@ -143,20 +143,14 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 			return layoutURL;
 		}
 
-		StringBundler sb = new StringBundler(7);
-
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/journal/view_article_content?groupId=");
-		sb.append(groupId);
-		sb.append("&articleId=");
-		sb.append(articleId);
-		sb.append("&version=");
-
 		String version = result.get("version");
 
-		sb.append(version);
+		portletURL.setParameter("struts_action", "/journal/view_article");
+		portletURL.setParameter("groupId", String.valueOf(groupId));
+		portletURL.setParameter("articleId", articleId);
+		portletURL.setParameter("version", version);
 
-		return sb.toString();
+		return portletURL.toString();
 	}
 
 }

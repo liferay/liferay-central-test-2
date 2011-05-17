@@ -260,29 +260,9 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 					StringBundler rowSB = new StringBundler();
 
-					if (portletId.equals(PortletKeys.JOURNAL) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(JournalArticle.class.getName()))) {
-						String articleId = el.elementText(OpenSearchUtil.getQName(Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
-
-						JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryScopeGroupId, articleId);
-
-						entryTitle = article.getTitle(locale);
-
-						if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
-							total--;
-
-							continue;
-						}
-
-						rowSB.append("<a class=\"entry-title\" href=\"");
-						rowSB.append(entryHref);
-						rowSB.append("\" target=\"_blank\">");
-					}
-					else {
-						rowSB.append("<a class=\"entry-title\" href=\"");
-						rowSB.append(entryHref);
-						rowSB.append("\">");
-					}
-
+					rowSB.append("<a class=\"entry-title\" href=\"");
+					rowSB.append(entryHref);
+					rowSB.append("\">");
 					rowSB.append(StringUtil.highlight(HtmlUtil.escape(entryTitle), queryTerms));
 					rowSB.append("</a>");
 
