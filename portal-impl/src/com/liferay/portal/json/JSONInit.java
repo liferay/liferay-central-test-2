@@ -68,8 +68,6 @@ public class JSONInit {
 
 			_registerDefaultTransformers(newTransformersMap);
 
-			defaultTransformersField.set(null, newTransformersMap);
-
 			Field modifiersField = Field.class.getDeclaredField("modifiers");
 
 			modifiersField.setAccessible(true);
@@ -77,6 +75,8 @@ public class JSONInit {
 			modifiersField.setInt(
 				defaultTransformersField,
 				defaultTransformersField.getModifiers() & ~Modifier.FINAL);
+
+			defaultTransformersField.set(null, newTransformersMap);
 
 			_initalized = true;
 		}
