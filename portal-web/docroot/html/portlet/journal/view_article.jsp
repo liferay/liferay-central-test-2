@@ -20,15 +20,9 @@
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
 long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
-
 String articleId = ParamUtil.getString(request, "articleId");
-
-double version = ParamUtil.getDouble(request, "version", -1);
-
 String languageId = LanguageUtil.getLanguageId(request);
-
 int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
-
 String xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
 
 JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, xmlRequest);
