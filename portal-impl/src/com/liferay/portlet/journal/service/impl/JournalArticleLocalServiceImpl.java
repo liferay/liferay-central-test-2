@@ -1501,7 +1501,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articles = journalArticlePersistence.findByG_C_T(
-				groupId, classNameId, oldTemplateId);
+			groupId, classNameId, oldTemplateId);
 
 		for (JournalArticle article : articles) {
 			article.setTemplateId(newTemplateId);
