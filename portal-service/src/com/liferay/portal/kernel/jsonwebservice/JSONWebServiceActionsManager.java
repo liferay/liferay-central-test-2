@@ -29,7 +29,7 @@ public interface JSONWebServiceActionsManager {
 
 	public JSONWebServiceAction lookup(HttpServletRequest request);
 
-	public void registerRESTAction(
+	public void registerJSONWebServiceAction(
 		Class<?> actionClass, Method actionMethod, String path, String method);
 
 }

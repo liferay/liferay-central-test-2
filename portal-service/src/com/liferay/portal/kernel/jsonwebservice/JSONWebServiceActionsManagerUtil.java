@@ -26,28 +26,32 @@ import javax.servlet.http.HttpServletRequest;
 public class JSONWebServiceActionsManagerUtil {
 
 	public static List<String[]> dumpMappings() {
-		return _restActionsManager.dumpMappings();
+		return _jsonWebServiceActionsManager.dumpMappings();
 	}
 
-	public static JSONWebServiceActionsManager getRESTActionsManager() {
-		return _restActionsManager;
+	public static JSONWebServiceActionsManager
+			getJSONWebServiceActionsManager() {
+
+		return _jsonWebServiceActionsManager;
 	}
 
 	public static JSONWebServiceAction lookup(HttpServletRequest request) {
-		return getRESTActionsManager().lookup(request);
+		return getJSONWebServiceActionsManager().lookup(request);
 	}
 
-	public static void registerRESTAction(
+	public static void registerJSONWebServiceAction(
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
-		getRESTActionsManager().registerRESTAction(
+		getJSONWebServiceActionsManager().registerJSONWebServiceAction(
 			actionClass, actionMethod, path, method);
 	}
 
-	public void setRESTActionsManager(JSONWebServiceActionsManager restActionsManager) {
-		_restActionsManager = restActionsManager;
+	public void setJSONWebServiceActionsManager(
+		JSONWebServiceActionsManager jsonWebServiceActionsManager) {
+
+		_jsonWebServiceActionsManager = jsonWebServiceActionsManager;
 	}
 
-	private static JSONWebServiceActionsManager _restActionsManager;
+	private static JSONWebServiceActionsManager _jsonWebServiceActionsManager;
 
 }

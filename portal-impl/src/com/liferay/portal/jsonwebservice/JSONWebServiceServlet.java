@@ -118,7 +118,8 @@ public class JSONWebServiceServlet extends JSONServlet {
 			(ClassLoader)servletContext.getAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER);
 
-		JSONAction jsonAction = new JSONWebServiceServiceAction(portletClassLoader);
+		JSONAction jsonAction =
+			new JSONWebServiceServiceAction(portletClassLoader);
 
 		jsonAction.setServletContext(servletContext);
 

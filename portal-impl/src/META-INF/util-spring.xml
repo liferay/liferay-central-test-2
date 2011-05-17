@@ -173,7 +173,7 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.rest.RESTActionsManagerUtil" class="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil">
-		<property name="RESTActionsManager">
+		<property name="JSONWebServiceActionsManager">
 			<bean class="com.liferay.portal.jsonwebservice.JSONWebServiceActionsManagerImpl" />
 		</property>
 	</bean>

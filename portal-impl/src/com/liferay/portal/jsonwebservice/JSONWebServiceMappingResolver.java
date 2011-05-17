@@ -28,12 +28,13 @@ import java.lang.reflect.Method;
 public class JSONWebServiceMappingResolver {
 
 	public String resolveHttpMethod(Method method) {
-		JSONWebService restAnnotation = method.getAnnotation(JSONWebService.class);
+		JSONWebService jsonWebServiceAnnotation =
+			method.getAnnotation(JSONWebService.class);
 
 		String httpMethod = null;
 
-		if (restAnnotation != null) {
-			httpMethod = restAnnotation.method().trim();
+		if (jsonWebServiceAnnotation != null) {
+			httpMethod = jsonWebServiceAnnotation.method().trim();
 		}
 
 		if (httpMethod != null && httpMethod.length() != 0) {
@@ -48,12 +49,13 @@ public class JSONWebServiceMappingResolver {
 	}
 
 	public String resolvePath(Class<?> clazz, Method method) {
-		JSONWebService restAnnotation = method.getAnnotation(JSONWebService.class);
+		JSONWebService jsonWebServiceAnnotation =
+			method.getAnnotation(JSONWebService.class);
 
 		String path = null;
 
-		if (restAnnotation != null) {
-			path = restAnnotation.value().trim();
+		if (jsonWebServiceAnnotation != null) {
+			path = jsonWebServiceAnnotation.value().trim();
 		}
 
 		if (path == null || path.length() == 0) {
@@ -66,10 +68,11 @@ public class JSONWebServiceMappingResolver {
 
 			String pathFromClass = null;
 
-			restAnnotation = clazz.getAnnotation(JSONWebService.class);
+			jsonWebServiceAnnotation =
+				clazz.getAnnotation(JSONWebService.class);
 
-			if (restAnnotation != null) {
-				pathFromClass = restAnnotation.value().trim();
+			if (jsonWebServiceAnnotation != null) {
+				pathFromClass = jsonWebServiceAnnotation.value().trim();
 			}
 
 			if (pathFromClass == null || pathFromClass.length() == 0) {

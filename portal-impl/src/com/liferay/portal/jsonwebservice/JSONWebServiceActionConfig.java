@@ -53,8 +53,10 @@ public class JSONWebServiceActionConfig
 		_fullPath = sb.toString();
 	}
 
-	public int compareTo(JSONWebServiceActionConfig restActionConfig) {
-		return _fullPath.compareTo(restActionConfig._fullPath);
+	public int compareTo(
+		JSONWebServiceActionConfig jsonWebServiceActionConfig) {
+
+		return _fullPath.compareTo(jsonWebServiceActionConfig._fullPath);
 	}
 
 	public Class<?> getActionClass() {

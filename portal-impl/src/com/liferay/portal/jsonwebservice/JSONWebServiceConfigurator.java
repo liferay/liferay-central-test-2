@@ -16,10 +16,10 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -118,7 +118,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Configure REST actions");
+			_log.debug("Configure JSON web service actions");
 
 			stopWatch = new StopWatch();
 
@@ -135,7 +135,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Configuring " + _registeredActionsCount +
-					" actions in completed " + stopWatch.getTime() + " ms");
+					" actions in " + stopWatch.getTime() + " ms");
 		}
 	}
 
@@ -143,8 +143,10 @@ public class JSONWebServiceConfigurator extends FindClass {
 		_checkBytecodeSignature = checkBytecodeSignature;
 	}
 
-	public void setRESTActionsManager(JSONWebServiceActionsManager restActionsManager) {
-		_restActionsManager = restActionsManager;
+	public void setJSONWebServiceActionsManager(
+		JSONWebServiceActionsManager jsonWebServiceActionsManager) {
+
+		_jsonWebServiceActionsManager = jsonWebServiceActionsManager;
 	}
 
 	protected void onEntry(EntryData entryData) throws Exception {
@@ -154,16 +156,18 @@ public class JSONWebServiceConfigurator extends FindClass {
 			if (_checkBytecodeSignature) {
 				InputStream inputStream = entryData.openInputStream();
 
-				if (!isTypeSignatureInUse(inputStream, _restAnnotationBytes)) {
+				if (!isTypeSignatureInUse(inputStream,
+					_jsonWebServiceAnnotationBytes)) {
+
 					return;
 				}
 			}
 
-			_onRESTClass(className);
+			_onJSONWebServiceClass(className);
 		}
 	}
 
-	private boolean _isRESTClass(Class<?> clazz) {
+	private boolean _isJSONWebServiceClass(Class<?> clazz) {
 		if (!clazz.isAnonymousClass() && !clazz.isArray() && !clazz.isEnum() &&
 			!clazz.isInterface() && !clazz.isLocalClass() &&
 			!clazz.isPrimitive() &&
@@ -203,20 +207,20 @@ public class JSONWebServiceConfigurator extends FindClass {
 		return utilClass;
 	}
 
-	private void _onRESTClass(String className) throws Exception {
+	private void _onJSONWebServiceClass(String className) throws Exception {
 		Class<?> actionClass = _classLoader.loadClass(className);
 
-		if (!_isRESTClass(actionClass)) {
+		if (!_isJSONWebServiceClass(actionClass)) {
 			return;
 		}
 
 		JSONWebService
-			restClassAnnotation = actionClass.getAnnotation(JSONWebService.class);
+			classAnnotation = actionClass.getAnnotation(JSONWebService.class);
 
-		JSONWebServiceMode restClassRestMode = JSONWebServiceMode.MANUAL;
+		JSONWebServiceMode classAnnotationMode = JSONWebServiceMode.MANUAL;
 
-		if (restClassAnnotation != null) {
-			restClassRestMode = restClassAnnotation.mode();
+		if (classAnnotation != null) {
+			classAnnotationMode = classAnnotation.mode();
 		}
 
 		Method[] methods = actionClass.getMethods();
@@ -231,43 +235,50 @@ public class JSONWebServiceConfigurator extends FindClass {
 			boolean registerMethod = false;
 
 			JSONWebService
-				restMethodAnnotation = method.getAnnotation(JSONWebService.class);
+				methodAnnotation = method.getAnnotation(JSONWebService.class);
 
-			if (restClassRestMode.equals(JSONWebServiceMode.AUTO)) {
+			if (classAnnotationMode.equals(JSONWebServiceMode.AUTO)) {
 				registerMethod = true;
 
-				if (restMethodAnnotation != null) {
-					JSONWebServiceMode restMethodRestMode = restMethodAnnotation.mode();
+				if (methodAnnotation != null) {
+					JSONWebServiceMode methodAnnotationMode =
+						methodAnnotation.mode();
 
-					if (restMethodRestMode.equals(JSONWebServiceMode.IGNORE)) {
+					if (methodAnnotationMode.equals(
+						JSONWebServiceMode.IGNORE)) {
+
 						registerMethod = false;
 					}
 				}
 			}
 			else {
-				if (restMethodAnnotation != null) {
-					JSONWebServiceMode restMethodRestMode = restMethodAnnotation.mode();
+				if (methodAnnotation != null) {
+					JSONWebServiceMode methodAnnotationMode =
+						methodAnnotation.mode();
 
-					if (!restMethodRestMode.equals(JSONWebServiceMode.IGNORE)) {
+					if (!methodAnnotationMode.equals(
+						JSONWebServiceMode.IGNORE)) {
+
 						registerMethod = false;
 					}
 				}
 			}
 
 			if (registerMethod) {
-				_registerRESTAction(actionClass, method);
+				_registerJSONWebServiceAction(actionClass, method);
 			}
 		}
 	}
 
-	private void _registerRESTAction(
-			Class<?> implementationClass, Method method)
+	private void _registerJSONWebServiceAction(
+		Class<?> implementationClass, Method method)
 		throws Exception {
 
-		String path = _restMappingResolver.resolvePath(
+		String path = _jsonWebServiceMappingResolver.resolvePath(
 			implementationClass, method);
 
-		String httpMethod = _restMappingResolver.resolveHttpMethod(method);
+		String httpMethod =
+			_jsonWebServiceMappingResolver.resolveHttpMethod(method);
 
 		Class<?> utilClass = _loadUtilClass(implementationClass);
 
@@ -279,20 +290,22 @@ public class JSONWebServiceConfigurator extends FindClass {
 			return;
 		}
 
-		_restActionsManager.registerRESTAction(
+		_jsonWebServiceActionsManager.registerJSONWebServiceAction(
 			method.getDeclaringClass(), method, path, httpMethod);
 
 		_registeredActionsCount++;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JSONWebServiceConfigurator.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		JSONWebServiceConfigurator.class);
 
 	private boolean _checkBytecodeSignature = true;
 	private ClassLoader _classLoader;
 	private int _registeredActionsCount;
-	private JSONWebServiceActionsManager _restActionsManager;
-	private byte[] _restAnnotationBytes = getTypeSignatureBytes(JSONWebService.class);
-	private JSONWebServiceMappingResolver _restMappingResolver =
+	private JSONWebServiceActionsManager _jsonWebServiceActionsManager;
+	private byte[] _jsonWebServiceAnnotationBytes =
+		getTypeSignatureBytes(JSONWebService.class);
+	private JSONWebServiceMappingResolver _jsonWebServiceMappingResolver =
 		new JSONWebServiceMappingResolver();
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
