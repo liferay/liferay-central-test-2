@@ -1553,7 +1553,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public Hits search(
-			long companyId, long groupId, long classNameId, String keywords,
+			long companyId, long groupId, long classNameId, String structureId,
+			String templateId, String keywords,
 			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
 		throws SystemException {
 
@@ -1575,14 +1576,16 @@ public class JournalArticleLocalServiceImpl
 
 		return search(
 			companyId, groupId, classNameId, articleId, title, description,
-			content, null, null, params, andOperator, start, end, sort);
+			content, null, null, structureId, templateId, params, andOperator,
+			start, end, sort);
 	}
 
 	public Hits search(
 			long companyId, long groupId, long classNameId, String articleId,
 			String title, String description, String content, String type,
-			String status, LinkedHashMap<String, Object> params,
-			boolean andSearch, int start, int end, Sort sort)
+			String status, String structureId, String templateId,
+			LinkedHashMap<String, Object> params, boolean andSearch, int start,
+			int end, Sort sort)
 		throws SystemException {
 
 		try {
@@ -1594,6 +1597,8 @@ public class JournalArticleLocalServiceImpl
 			attributes.put(Field.DESCRIPTION, description);
 			attributes.put(Field.ENTRY_CLASS_PK, articleId);
 			attributes.put(Field.STATUS, status);
+			attributes.put("structureId", structureId);
+			attributes.put("templateId", templateId);
 			attributes.put(Field.TITLE, title);
 			attributes.put(Field.TYPE, type);
 			attributes.put("params", params);

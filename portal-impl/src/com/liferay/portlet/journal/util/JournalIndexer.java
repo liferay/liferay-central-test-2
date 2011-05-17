@@ -108,6 +108,8 @@ public class JournalIndexer extends BaseIndexer {
 			addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
 		}
 
+		addSearchTerm(searchQuery, searchContext, "structureId", false);
+		addSearchTerm(searchQuery, searchContext, "templateId", false);
 		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
