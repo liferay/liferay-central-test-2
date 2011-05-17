@@ -14,11 +14,11 @@
 
 package com.liferay.portal.json;
 
-import com.liferay.portal.json.transformer.FlexjsonObjectTransformer;
-import com.liferay.portal.json.transformer.JSONArrayTransformer;
-import com.liferay.portal.json.transformer.JSONObjectTransformer;
-import com.liferay.portal.json.transformer.JSONSerializableTransformer;
-import com.liferay.portal.json.transformer.RepositoryModelTransformer;
+import com.liferay.portal.json.transformer.FlexjsonObjectJSONTransformer;
+import com.liferay.portal.json.transformer.JSONArrayJSONTransformer;
+import com.liferay.portal.json.transformer.JSONObjectJSONTransformer;
+import com.liferay.portal.json.transformer.JSONSerializableJSONTransformer;
+import com.liferay.portal.json.transformer.RepositoryModelJSONTransformer;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONSerializable;
@@ -39,85 +39,77 @@ import java.lang.reflect.Modifier;
 import java.util.Map;
 
 /**
- * Initializes JSON framework by setting default transformers.
- *
  * @author Igor Spasic
  */
 public class JSONInit {
 
-	/**
-	 * Initializes JSON serializer by registering default transformers.
-	 * Due to current 'closed' flexjson configuration, this is done
-	 * using reflection.
-	 *
-	 * https://sourceforge.net/tracker/?func=detail&aid=3280551&group_id=194042&atid=947845
-	 * https://sourceforge.net/tracker/?func=detail&aid=3277973&group_id=194042&atid=947842
-	 */
+	@SuppressWarnings("rawtypes")
 	public static synchronized void init() {
-		if (_initalized == true) {
-			return;
-		}
 		try {
+			if (_initalized) {
+				return;
+			}
 
-			// bypass private static final
-
-			Field defaultTransformers =
+			Field defaultTransformersField =
 				TransformerUtil.class.getDeclaredField("defaultTransformers");
 
-			Field modifiersField = Field.class.getDeclaredField("modifiers");
-			modifiersField.setAccessible(true);
-			modifiersField.setInt(defaultTransformers,
-				defaultTransformers.getModifiers() & ~Modifier.FINAL);
+			defaultTransformersField.setAccessible(true);
 
-			defaultTransformers.setAccessible(true);
-
-			// replace original default transformers
-
-			TypeTransformerMap originalTransformersMap =
+			TypeTransformerMap oldTransformersMap =
 				TransformerUtil.getDefaultTypeTransformers();
 
 			TypeTransformerMap newTransformersMap = new TypeTransformerMap();
 
 			for (Map.Entry<Class, Transformer> entry :
-				originalTransformersMap.entrySet()) {
+					oldTransformersMap.entrySet()) {
 
 				newTransformersMap.put(entry.getKey(), entry.getValue());
 			}
 
 			_registerDefaultTransformers(newTransformersMap);
 
-			defaultTransformers.set(null, newTransformersMap);
-		}
-		catch (Exception ex) {
-			throw new RuntimeException("FLEXJson initialization failed.", ex);
-		}
+			defaultTransformersField.set(null, newTransformersMap);
 
-		_initalized = true;
+			Field modifiersField = Field.class.getDeclaredField("modifiers");
+
+			modifiersField.setAccessible(true);
+
+			modifiersField.setInt(
+				defaultTransformersField,
+				defaultTransformersField.getModifiers() & ~Modifier.FINAL);
+
+			_initalized = true;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	/**
-	 * Registers application-wide default transformers.
-	 */
 	private static void _registerDefaultTransformers(
 		TypeTransformerMap transformersMap) {
 
-		transformersMap.put(InputStream.class,
-			new TransformerWrapper(new NullTransformer()));
+		transformersMap.put(
+			InputStream.class, new TransformerWrapper(new NullTransformer()));
 
-		transformersMap.put(JSONObject.class,
-			new TransformerWrapper(new JSONObjectTransformer()));
+		transformersMap.put(
+			JSONArray.class,
+			new TransformerWrapper(new JSONArrayJSONTransformer()));
 
-		transformersMap.put(JSONArray.class,
-			new TransformerWrapper(new JSONArrayTransformer()));
+		transformersMap.put(
+			JSONObject.class,
+			new TransformerWrapper(new JSONObjectJSONTransformer()));
 
-		transformersMap.put(JSONSerializable.class,
-			new TransformerWrapper(new JSONSerializableTransformer()));
+		transformersMap.put(
+			JSONSerializable.class,
+			new TransformerWrapper(new JSONSerializableJSONTransformer()));
 
-		transformersMap.put(RepositoryModel.class,
-			new TransformerWrapper(new RepositoryModelTransformer()));
+		transformersMap.put(
+			Object.class,
+			new TransformerWrapper(new FlexjsonObjectJSONTransformer()));
 
-		transformersMap.put(Object.class,
-			new TransformerWrapper(new FlexjsonObjectTransformer()));
+		transformersMap.put(
+			RepositoryModel.class,
+			new TransformerWrapper(new RepositoryModelJSONTransformer()));
 	}
 
 	private static boolean _initalized = false;

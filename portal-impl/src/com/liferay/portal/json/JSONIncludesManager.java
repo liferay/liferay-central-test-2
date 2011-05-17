@@ -25,9 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Manages includes and excludes serialization paths for types.
- * It's based on our annotation and our logic.
- *
  * @author Igor Spasic
  */
 public class JSONIncludesManager {
@@ -42,11 +39,11 @@ public class JSONIncludesManager {
 		List<String> list = new ArrayList<String>();
 
 		while (type != null) {
-
 			JSON jsonAnnotation = type.getAnnotation(JSON.class);
 
-			if ((jsonAnnotation != null) && (jsonAnnotation.strict() == true)) {
+			if ((jsonAnnotation != null) && jsonAnnotation.strict()) {
 				list.add(_EXCLUDE_ALL);
+
 				break;
 			}
 			else {
@@ -72,18 +69,17 @@ public class JSONIncludesManager {
 
 		List<String> list = new ArrayList<String>();
 
-		boolean wasStrict = false;
+		boolean strict = false;
 
 		while (type != null) {
-
 			JSON jsonAnnotation = type.getAnnotation(JSON.class);
 
-			if ((jsonAnnotation != null) && (jsonAnnotation.strict() == true)) {
+			if ((jsonAnnotation != null) && jsonAnnotation.strict()) {
 				_scanFieldsAndMethods(list, type, true);
 
-				wasStrict = true;
+				strict = true;
 			}
-			else if (wasStrict) {
+			else if (strict) {
 				_scanFieldsAndMethods(list, type, true);
 			}
 
@@ -98,7 +94,9 @@ public class JSONIncludesManager {
 	}
 
 	private String _getPropertyName(Method method) {
-		if (method.getParameterTypes().length != 0) {
+		Class<?>[] parameterTypes = method.getParameterTypes();
+
+		if (parameterTypes.length != 0) {
 			return null;
 		}
 
@@ -106,29 +104,27 @@ public class JSONIncludesManager {
 
 		String methodName = method.getName();
 
-		if (methodName.startsWith("is")) {
-			propertyName = methodName.substring(2);
-		}
-
-		if (methodName.startsWith("has")) {
-			propertyName = methodName.substring(3);
-		}
-
 		if (methodName.startsWith("get")) {
 			propertyName = methodName.substring(3);
 		}
-
-		if (propertyName == null) {
+		else if (methodName.startsWith("has")) {
+			propertyName = methodName.substring(3);
+		}
+		else if (methodName.startsWith("is")) {
+			propertyName = methodName.substring(2);
+		}
+		else {
 			return null;
 		}
 
 		if ((propertyName.length() > 2) &&
 			Character.isUpperCase(propertyName.charAt(1))) {
+
 			return propertyName;
 		}
 
-		return Character.toLowerCase(propertyName.charAt(0))
-			+ propertyName.substring(1);
+		return Character.toLowerCase(propertyName.charAt(0)) +
+			propertyName.substring(1);
 	}
 
 	private String[] _listToArray(List<String> list) {
@@ -141,15 +137,15 @@ public class JSONIncludesManager {
 	}
 
 	private void _scanFieldsAndMethods(
-		List<String> list, Class type, boolean include) {
+		List<String> list, Class<?> type, boolean include) {
 
 		Field[] fields = type.getDeclaredFields();
 
 		for (Field field : fields) {
 			JSON jsonAnnotation = field.getAnnotation(JSON.class);
 
-			if (jsonAnnotation != null &&
-				jsonAnnotation.include() == include) {
+			if ((jsonAnnotation != null) &&
+				(jsonAnnotation.include() == include)) {
 
 				String name = field.getName();
 
@@ -164,28 +160,27 @@ public class JSONIncludesManager {
 		for (Method method : methods) {
 			JSON jsonAnnotation = method.getAnnotation(JSON.class);
 
-			if (jsonAnnotation != null &&
-				jsonAnnotation.include() == include) {
+			if ((jsonAnnotation != null) &&
+				(jsonAnnotation.include() == include)) {
 
 				String name = _getPropertyName(method);
 
 				if (name != null) {
-
 					if (!list.contains(name)) {
 						list.add(name);
 					}
 				}
 			}
 		}
-
 	}
 
 	private static final String[] _EMPTY_LIST = new String[0];
 
 	private static final String _EXCLUDE_ALL = "*";
 
-	private Map<Class, String[]> _excludesMap = new HashMap<Class, String[]>();
-
-	private Map<Class, String[]> _includesMap = new HashMap<Class, String[]>();
+	private Map<Class<?>, String[]> _excludesMap =
+		new HashMap<Class<?>, String[]>();
+	private Map<Class<?>, String[]> _includesMap =
+		new HashMap<Class<?>, String[]>();
 
 }

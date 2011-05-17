@@ -27,33 +27,33 @@ import flexjson.transformer.Transformer;
 public class JSONSerializerImpl implements JSONSerializer {
 
 	public JSONSerializerImpl() {
-		_serializer = new flexjson.JSONSerializer();
+		_jsonSerializer = new flexjson.JSONSerializer();
 	}
 
 	public JSONSerializerImpl exclude(String... fields) {
-		_serializer.exclude(fields);
+		_jsonSerializer.exclude(fields);
 
 		return this;
 	}
 
 	public JSONSerializerImpl include(String... fields) {
-		_serializer.include(fields);
+		_jsonSerializer.include(fields);
 
 		return this;
 	}
 
 	public String serialize(Object target) {
-		return _serializer.serialize(target);
+		return _jsonSerializer.serialize(target);
 	}
 
 	public String serializeDeep(Object target) {
-		return _serializer.deepSerialize(target);
+		return _jsonSerializer.deepSerialize(target);
 	}
 
 	public JSONSerializerImpl transform(
-		JSONTransformer jsonTransformer, Class... types) {
+		JSONTransformer jsonTransformer, Class<?>... types) {
 
-		Transformer transformer;
+		Transformer transformer = null;
 
 		if (jsonTransformer instanceof Transformer) {
 			transformer = (Transformer)jsonTransformer;
@@ -62,7 +62,7 @@ public class JSONSerializerImpl implements JSONSerializer {
 			transformer = new FlexjsonTransformer(jsonTransformer);
 		}
 
-		_serializer.transform(transformer, types);
+		_jsonSerializer.transform(transformer, types);
 
 		return this;
 	}
@@ -70,7 +70,7 @@ public class JSONSerializerImpl implements JSONSerializer {
 	public JSONSerializerImpl transform(
 		JSONTransformer jsonTransformer, String... fields) {
 
-		Transformer transformer;
+		Transformer transformer = null;
 
 		if (jsonTransformer instanceof Transformer) {
 			transformer = (Transformer)jsonTransformer;
@@ -79,11 +79,11 @@ public class JSONSerializerImpl implements JSONSerializer {
 			transformer = new FlexjsonTransformer(jsonTransformer);
 		}
 
-		_serializer.transform(transformer, fields);
+		_jsonSerializer.transform(transformer, fields);
 
 		return this;
 	}
 
-	private final flexjson.JSONSerializer _serializer;
+	private final flexjson.JSONSerializer _jsonSerializer;
 
 }

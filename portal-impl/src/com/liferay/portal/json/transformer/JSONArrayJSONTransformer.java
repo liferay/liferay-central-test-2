@@ -14,17 +14,21 @@
 
 package com.liferay.portal.json.transformer;
 
-import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONArray;
+
+import flexjson.JSONContext;
 
 /**
  * @author Igor Spasic
  */
-public class JSONObjectTransformer extends JSONBaseTransformer {
+public class JSONArrayJSONTransformer extends BaseJSONTransformer {
 
 	public void transform(Object object) {
-		JSONObject jsonObject = (JSONObject)object;
+		JSONArray jsonArray = (JSONArray)object;
 
-		getContext().write(jsonObject.toString());
+		JSONContext jsonContext = getContext();
+
+		jsonContext.write(jsonArray.toString());
 	}
 
 }

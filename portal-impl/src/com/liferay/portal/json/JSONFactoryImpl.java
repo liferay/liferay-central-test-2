@@ -34,10 +34,10 @@ public class JSONFactoryImpl implements JSONFactory {
 	public JSONFactoryImpl() {
 		JSONInit.init();
 
-		_serializer = new org.jabsorb.JSONSerializer();
+		_jsonSerializer = new org.jabsorb.JSONSerializer();
 
 		 try {
-			 _serializer.registerDefaultSerializers();
+			 _jsonSerializer.registerDefaultSerializers();
 		 }
 		 catch (Exception e) {
 			 _log.error(e, e);
@@ -74,7 +74,7 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	public Object deserialize(String json) {
 		try {
-			return _serializer.fromJSON(json);
+			return _jsonSerializer.fromJSON(json);
 		}
 		catch (Exception e) {
 			 _log.error(e, e);
@@ -99,28 +99,38 @@ public class JSONFactoryImpl implements JSONFactory {
 	}
 
 	public String looseSerialize(Object object) {
-		return createJSONSerializer().serialize(object);
-	}
+		JSONSerializer jsonSerializer = createJSONSerializer();
 
-	public String looseSerialize(Object object, String... includes) {
-		return createJSONSerializer().include(includes).serialize(object);
+		return jsonSerializer.serialize(object);
 	}
 
 	public String looseSerialize(
 		Object object, JSONTransformer jsonTransformer, Class<?> clazz) {
 
-		return createJSONSerializer().
-			transform(jsonTransformer, clazz).
-			serialize(object);
+		JSONSerializer jsonSerializer = createJSONSerializer();
+
+		jsonSerializer.transform(jsonTransformer, clazz);
+
+		return jsonSerializer.serialize(object);
+	}
+
+	public String looseSerialize(Object object, String... includes) {
+		JSONSerializer jsonSerializer = createJSONSerializer();
+
+		jsonSerializer.include(includes);
+
+		return jsonSerializer.serialize(object);
 	}
 
 	public String looseSerializeDeep(Object object) {
-		return createJSONSerializer().serializeDeep(object);
+		JSONSerializer jsonSerializer = createJSONSerializer();
+
+		return jsonSerializer.serializeDeep(object);
 	}
 
 	public String serialize(Object object) {
 		try {
-			return _serializer.toJSON(object);
+			return _jsonSerializer.toJSON(object);
 		}
 		catch (MarshallException me) {
 			_log.error(me, me);
@@ -131,6 +141,6 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONFactoryImpl.class);
 
-	private org.jabsorb.JSONSerializer _serializer;
+	private org.jabsorb.JSONSerializer _jsonSerializer;
 
 }

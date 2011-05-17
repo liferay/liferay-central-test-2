@@ -69,14 +69,14 @@ public class JSONFactoryUtil {
 		return getJSONFactory().looseSerialize(object);
 	}
 
-	public static String looseSerialize(Object object, String... includes) {
-		return getJSONFactory().looseSerialize(object, includes);
-	}
-
 	public static String looseSerialize(
 		Object object, JSONTransformer jsonTransformer, Class<?> clazz) {
 
 		return getJSONFactory().looseSerialize(object, jsonTransformer, clazz);
+	}
+
+	public static String looseSerialize(Object object, String... includes) {
+		return getJSONFactory().looseSerialize(object, includes);
 	}
 
 	public static String looseSerializeDeep(Object object) {

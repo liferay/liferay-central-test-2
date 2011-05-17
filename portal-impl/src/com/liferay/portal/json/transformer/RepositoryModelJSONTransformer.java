@@ -14,19 +14,21 @@
 
 package com.liferay.portal.json.transformer;
 
-import com.liferay.portal.kernel.json.JSONSerializable;
+import com.liferay.portal.kernel.repository.model.RepositoryModel;
+
+import flexjson.JSONContext;
 
 /**
- * JSON transformer for classes that implements {@link JSONSerializable}.
- *
  * @author Igor Spasic
  */
-public class JSONSerializableTransformer extends JSONBaseTransformer {
+public class RepositoryModelJSONTransformer extends BaseJSONTransformer {
 
 	public void transform(Object object) {
-		JSONSerializable jsonSerializable = (JSONSerializable) object;
+		RepositoryModel<?> repositoryModel = (RepositoryModel<?>)object;
 
-		getContext().write(jsonSerializable.toJSONString());
+		JSONContext jsonContext = getContext();
+
+		jsonContext.transform(repositoryModel.getModel());
 	}
 
 }

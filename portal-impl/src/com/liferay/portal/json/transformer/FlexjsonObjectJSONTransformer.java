@@ -16,9 +16,12 @@ package com.liferay.portal.json.transformer;
 
 import com.liferay.portal.json.JSONIncludesManager;
 import com.liferay.portal.kernel.json.JSONTransformer;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
+import flexjson.JSONContext;
+import flexjson.Path;
 import flexjson.PathExpression;
 
 import flexjson.transformer.ObjectTransformer;
@@ -28,38 +31,26 @@ import java.util.List;
 import jodd.bean.BeanUtil;
 
 /**
- * Default core object transformer. It enhances current flexjson
- * functionality with support for:
- * <li>liferay custom annotation,
- * <li>strict-mode
- *
  * @author Igor Spasic
  */
-public class FlexjsonObjectTransformer extends ObjectTransformer implements
-	JSONTransformer {
+public class FlexjsonObjectJSONTransformer
+	extends ObjectTransformer implements JSONTransformer {
 
-	/**
-	 * Transformers an object to JSON string.
-	 *
-	 * Current include/exclude path set is extended with our custom data.
-	 * This overrides default annotations and allows us to use
-	 * custom annotation and custom logic.
-	 */
-	@Override
 	public void transform(Object object) {
+		Class<?> type = resolveClass(object);
 
-		Class type = resolveClass(object);
-
-		_pathExpressions = (List<PathExpression>)
-			BeanUtil.getDeclaredProperty(getContext(), "pathExpressions");
+		_pathExpressions = (List<PathExpression>)BeanUtil.getDeclaredProperty(
+			getContext(), "pathExpressions");
 
 		String path = _getPath();
 
-		String[] includes = _JSON_INCLUDES_MANAGER.lookupIncludes(type);
-		_include(path, includes);
+		String[] excludes = _jsonIncludesManager.lookupExcludes(type);
 
-		String[] excludes = _JSON_INCLUDES_MANAGER.lookupExcludes(type);
 		_exclude(path, excludes);
+
+		String[] includes = _jsonIncludesManager.lookupIncludes(type);
+
+		_include(path, includes);
 
 		super.transform(object);
 	}
@@ -71,33 +62,37 @@ public class FlexjsonObjectTransformer extends ObjectTransformer implements
 	}
 
 	private String _getPath() {
+		JSONContext jsonContext = getContext();
 
-		List<String> pathList = getContext().getPath().getPath();
+		Path path = jsonContext.getPath();
 
-		int pathSize = pathList.size();
+		List<String> paths = path.getPath();
 
-		if (pathSize == 0) {
+		if (paths.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
-		StringBundler path = new StringBundler(pathSize * 2);
+		StringBundler sb = new StringBundler(paths.size() * 2);
 
-		for (String pathElement : pathList) {
-			path.append(pathElement);
-			path.append('.');
+		for (String curPath : paths) {
+			sb.append(curPath);
+			sb.append(CharPool.PERIOD);
 		}
 
-		return path.toString();
+		return sb.toString();
 	}
 
 	private void _include(String path, String... names) {
 		for (String name : names) {
-			_pathExpressions.add(0, new PathExpression(path + name, true));
+			PathExpression pathExpression = new PathExpression(
+				path + name, true);
+
+			_pathExpressions.add(0, pathExpression);
 		}
 	}
 
-	private static final JSONIncludesManager
-		_JSON_INCLUDES_MANAGER = new JSONIncludesManager();
+	private static JSONIncludesManager _jsonIncludesManager =
+		new JSONIncludesManager();
 
 	private List<PathExpression> _pathExpressions;
 

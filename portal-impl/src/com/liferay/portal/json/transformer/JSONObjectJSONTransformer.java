@@ -12,24 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.kernel.json;
+package com.liferay.portal.json.transformer;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.liferay.portal.kernel.json.JSONObject;
+
+import flexjson.JSONContext;
 
 /**
  * @author Igor Spasic
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE})
-public @interface JSON {
+public class JSONObjectJSONTransformer extends BaseJSONTransformer {
 
-	public boolean include() default true;
+	public void transform(Object object) {
+		JSONObject jsonObject = (JSONObject)object;
 
-	public boolean strict() default false;
+		JSONContext jsonContext = getContext();
+
+		jsonContext.write(jsonObject.toString());
+	}
 
 }

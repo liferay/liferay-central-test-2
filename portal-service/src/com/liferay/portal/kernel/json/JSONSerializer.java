@@ -28,7 +28,7 @@ public interface JSONSerializer {
 	public String serializeDeep(Object target);
 
 	public JSONSerializer transform(
-		JSONTransformer jsonTransformer, Class... types);
+		JSONTransformer jsonTransformer, Class<?>... types);
 
 	public JSONSerializer transform(
 		JSONTransformer jsonTransformer, String... fields);

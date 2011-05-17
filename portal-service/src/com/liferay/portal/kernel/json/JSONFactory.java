@@ -41,10 +41,10 @@ public interface JSONFactory {
 
 	public String looseSerialize(Object object);
 
-	public String looseSerialize(Object object, String... includes);
-
 	public String looseSerialize(
 		Object object, JSONTransformer jsonTransformer, Class<?> clazz);
+
+	public String looseSerialize(Object object, String... includes);
 
 	public String looseSerializeDeep(Object object);
 
