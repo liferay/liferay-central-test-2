@@ -101,6 +101,8 @@ portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
+
+long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024;
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
@@ -202,7 +204,9 @@ else if (documentType != null) {
 		<liferay-ui:message key="the-source-file-does-not-have-the-same-extension-as-the-original-file" />
 	</liferay-ui:error>
 
-	<liferay-ui:error exception="<%= FileSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= FileSizeException.class %>">
+		<liferay-ui:message arguments="<%= fileMaxSize %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+	</liferay-ui:error>
 
 	<liferay-ui:asset-categories-error />
 
@@ -216,11 +220,6 @@ else if (documentType != null) {
 
 	<aui:fieldset>
 		<aui:field-wrapper>
-
-			<%
-			long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024;
-			%>
-
 			<c:if test="<%= fileMaxSize != 0 %>">
 				<div class="portlet-msg-info">
 					<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", String.valueOf(fileMaxSize), false) %>

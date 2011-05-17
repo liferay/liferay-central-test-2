@@ -36,7 +36,16 @@ User selUser = PortalUtil.getSelectedUser(request);
 			<aui:input name="p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
 
 			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
-			<liferay-ui:error exception="<%= UserPortraitSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+
+			<liferay-ui:error exception="<%= UserPortraitSizeException.class %>">
+
+				<%
+				long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.USERS_IMAGE_MAX_SIZE) / 1024;
+				%>
+
+				<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+			</liferay-ui:error>
+
 			<liferay-ui:error exception="<%= UserPortraitTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
 
 			<aui:fieldset>

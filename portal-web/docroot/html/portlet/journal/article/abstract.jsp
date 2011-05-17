@@ -41,7 +41,14 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 </liferay-ui:error>
 
-<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>">
+
+	<%
+	long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) / 1024;
+	%>
+
+	<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-small-image-with-a-valid-file-size-no-larger-than-x" />
+</liferay-ui:error>
 
 <aui:fieldset>
 	<aui:input label="summary" languageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" name="description" />

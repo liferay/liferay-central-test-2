@@ -35,6 +35,8 @@ IGFolder folder = null;
 if (image != null) {
 	folder = image.getFolder();
 }
+
+long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 %>
 
 <liferay-ui:header
@@ -87,7 +89,10 @@ if (image != null) {
 		<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.IG_IMAGE_EXTENSIONS, StringPool.COMMA), StringPool.COMMA_AND_SPACE) %>.
 	</liferay-ui:error>
 
-	<liferay-ui:error exception="<%= ImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= ImageSizeException.class %>">
+		<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+	</liferay-ui:error>
+
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
 	<liferay-ui:asset-categories-error />
@@ -99,7 +104,6 @@ if (image != null) {
 	<aui:field-wrapper>
 
 		<%
-		long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 		%>
 
 		<c:if test="<%= imageMaxSize != 0 %>">

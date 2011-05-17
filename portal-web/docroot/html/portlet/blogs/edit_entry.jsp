@@ -153,7 +153,14 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 			</liferay-ui:error>
 
-			<liferay-ui:error exception="<%= EntrySmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
+			<liferay-ui:error exception="<%= EntrySmallImageSizeException.class %>">
+
+				<%
+				long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.BLOGS_IMAGE_SMALL_MAX_SIZE) / 1024;
+				%>
+
+				<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-small-image-with-a-valid-file-size-no-larger-than-x" />
+			</liferay-ui:error>
 
 			<aui:fieldset>
 				<aui:input label="description" name="description" />

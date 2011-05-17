@@ -108,7 +108,15 @@ if (template == null) {
 		<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, StringPool.COMMA) %>.
 	</liferay-ui:error>
 
-	<liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+	<liferay-ui:error exception="<%= TemplateSmallImageSizeException.class %>">
+
+		<%
+		long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE) / 1024;
+		%>
+
+		<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-small-image-with-a-valid-file-size-no-larger-than-x" />
+	</liferay-ui:error>
+
 	<liferay-ui:error exception="<%= TemplateXslException.class %>" message="please-enter-a-valid-script-template" />
 
 	<aui:model-context bean="<%= template %>" model="<%= JournalTemplate.class %>" />

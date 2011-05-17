@@ -436,7 +436,14 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 			</liferay-ui:error>
 
-			<liferay-ui:error exception="<%= ItemLargeImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+			<liferay-ui:error exception="<%= ItemLargeImageSizeException.class %>">
+
+				<%
+				long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_LARGE_MAX_SIZE) / 1024;
+				%>
+
+				<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= ItemMediumImageNameException.class %>">
 
@@ -447,7 +454,14 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 			</liferay-ui:error>
 
-			<liferay-ui:error exception="<%= ItemMediumImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+			<liferay-ui:error exception="<%= ItemMediumImageSizeException.class %>">
+
+				<%
+				long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_MEDIUM_MAX_SIZE) / 1024;
+				%>
+
+				<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= ItemSmallImageNameException.class %>">
 
@@ -458,7 +472,14 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(imageExtensions, ", ") %>.
 			</liferay-ui:error>
 
-			<liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>" message="please-enter-a-file-with-a-valid-file-size" />
+			<liferay-ui:error exception="<%= ItemSmallImageSizeException.class %>">
+
+				<%
+				long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.SHOPPING_IMAGE_SMALL_MAX_SIZE) / 1024;
+				%>
+
+				<liferay-ui:message arguments="<%= imageMaxSize %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+			</liferay-ui:error>
 
 			<aui:fieldset>
 				<aui:input label="small-image-url" name="smallImageURL" />
