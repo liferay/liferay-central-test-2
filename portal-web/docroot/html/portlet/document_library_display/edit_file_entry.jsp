@@ -95,14 +95,14 @@ if (fileEntry != null) {
 	lock = fileEntry.getLock();
 }
 
+long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024;
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
-
-long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) / 1024;
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">

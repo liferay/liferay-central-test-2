@@ -102,10 +102,6 @@ long imageMaxSize = PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_MAX_SIZE) / 1024;
 	<aui:model-context bean="<%= image %>" model="<%= IGImage.class %>" />
 
 	<aui:field-wrapper>
-
-		<%
-		%>
-
 		<c:if test="<%= imageMaxSize != 0 %>">
 			<div class="portlet-msg-info">
 				<%= LanguageUtil.format(pageContext, "upload-images-no-larger-than-x-k", String.valueOf(imageMaxSize), false) %>
