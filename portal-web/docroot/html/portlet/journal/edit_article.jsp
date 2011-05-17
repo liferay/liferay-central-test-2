@@ -289,14 +289,15 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 					for (String section : mainSections) {
 					%>
 
-						<liferay-util:include page='<%= "/html/portlet/journal/article/" + _getSectionJsp(section) + ".jsp" %>' />
+						<div class="form-section">
+							<liferay-util:include page='<%= "/html/portlet/journal/article/" + _getSectionJsp(section) + ".jsp" %>' />
+						</div>
 
 					<%
 					}
 					%>
 
 					<%= htmlBottom %>
-
 				</c:otherwise>
 			</c:choose>
 		</td>

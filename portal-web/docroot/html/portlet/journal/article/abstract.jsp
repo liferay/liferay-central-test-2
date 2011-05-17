@@ -19,15 +19,18 @@
 <%
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
+String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaultLanguageId");
+String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
+
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
-<liferay-ui:error-marker key="errorSection" value="image" />
+<liferay-ui:error-marker key="errorSection" value="abstract" />
 
 <aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
-<h3><liferay-ui:message key="image" /></h3>
+<h3><liferay-ui:message key="abstract" /></h3>
 
 <liferay-ui:error exception="<%= ArticleSmallImageNameException.class %>">
 
@@ -41,11 +44,15 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 <liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
 
 <aui:fieldset>
-	<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
+	<aui:input label="summary" languageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" name="description" />
 
-	<aui:input label="small-image-url" name="smallImageURL" />
+	<c:if test="<%= Validator.isNull(toLanguageId) %>">
+		<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
 
-	<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+		<aui:input label="small-image-url" name="smallImageURL" />
 
-	<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+		<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+
+		<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+	</c:if>
 </aui:fieldset>

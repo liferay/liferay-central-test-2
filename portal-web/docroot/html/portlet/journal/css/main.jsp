@@ -38,6 +38,10 @@
 		clear: both;
 	}
 
+	.form-section h3 {
+		border-bottom: 1px solid #666;
+	}
+
 	.lfr-table .journal-metadata {
 		background: #EEE;
 		border: 1px solid #979798;
