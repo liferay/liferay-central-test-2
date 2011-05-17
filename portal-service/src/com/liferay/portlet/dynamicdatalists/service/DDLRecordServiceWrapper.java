@@ -29,13 +29,13 @@ public class DDLRecordServiceWrapper implements DDLRecordService {
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long recordSetId,
+		long groupId, long recordSetId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddlRecordService.addRecord(recordSetId, fieldsMap,
+		return _ddlRecordService.addRecord(groupId, recordSetId, fieldsMap,
 			displayIndex, serviceContext);
 	}
 

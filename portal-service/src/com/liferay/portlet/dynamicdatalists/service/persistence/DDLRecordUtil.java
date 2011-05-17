@@ -318,6 +318,50 @@ public class DDLRecordUtil {
 	}
 
 	/**
+	* Finds the d d l record where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordException} if it could not be found.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the matching d d l record
+	* @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a matching d d l record could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	/**
+	* Finds the d d l record where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the matching d d l record, or <code>null</code> if a matching d d l record could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	/**
+	* Finds the d d l record where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the matching d d l record, or <code>null</code> if a matching d d l record could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchByUUID_G(
+		java.lang.String uuid, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId, retrieveFromCache);
+	}
+
+	/**
 	* Finds all the d d l records where recordSetId = &#63;.
 	*
 	* @param recordSetId the record set ID to search with
@@ -500,6 +544,19 @@ public class DDLRecordUtil {
 	}
 
 	/**
+	* Removes the d d l record where uuid = &#63; and groupId = &#63; from the database.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatalists.NoSuchRecordException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
+	/**
 	* Removes all the d d l records where recordSetId = &#63; from the database.
 	*
 	* @param recordSetId the record set ID to search with
@@ -530,6 +587,19 @@ public class DDLRecordUtil {
 	public static int countByUuid(java.lang.String uuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByUuid(uuid);
+	}
+
+	/**
+	* Counts all the d d l records where uuid = &#63; and groupId = &#63;.
+	*
+	* @param uuid the uuid to search with
+	* @param groupId the group ID to search with
+	* @return the number of matching d d l records
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
 	}
 
 	/**

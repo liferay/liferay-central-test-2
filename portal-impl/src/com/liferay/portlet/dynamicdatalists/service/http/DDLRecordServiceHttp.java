@@ -55,7 +55,7 @@ import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
  */
 public class DDLRecordServiceHttp {
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		HttpPrincipal httpPrincipal, long recordSetId,
+		HttpPrincipal httpPrincipal, long groupId, long recordSetId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -65,7 +65,7 @@ public class DDLRecordServiceHttp {
 			MethodKey methodKey = new MethodKey(DDLRecordServiceUtil.class.getName(),
 					"addRecord", _addRecordParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					recordSetId, fieldsMap, displayIndex, serviceContext);
 
 			Object returnObj = null;
@@ -136,7 +136,7 @@ public class DDLRecordServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DDLRecordServiceHttp.class);
 	private static final Class<?>[] _addRecordParameterTypes0 = new Class[] {
-			long.class, java.util.Map.class, int.class,
+			long.class, long.class, java.util.Map.class, int.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateRecordParameterTypes1 = new Class[] {

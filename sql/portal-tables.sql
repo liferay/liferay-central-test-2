@@ -400,6 +400,12 @@ create table CyrusVirtual (
 create table DDLRecord (
 	uuid_ VARCHAR(75) null,
 	recordId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
 	recordSetId LONG,

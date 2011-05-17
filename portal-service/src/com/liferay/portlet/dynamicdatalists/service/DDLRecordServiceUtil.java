@@ -38,14 +38,14 @@ public class DDLRecordServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.dynamicdatalists.service.impl.DDLRecordServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long recordSetId,
+		long groupId, long recordSetId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRecord(recordSetId, fieldsMap, displayIndex,
+				   .addRecord(groupId, recordSetId, fieldsMap, displayIndex,
 			serviceContext);
 	}
 

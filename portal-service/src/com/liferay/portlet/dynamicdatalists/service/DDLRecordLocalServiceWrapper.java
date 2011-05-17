@@ -165,6 +165,22 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	/**
+	* Gets the d d l record with the UUID and group id.
+	*
+	* @param uuid the UUID of d d l record to get
+	* @param groupId the group id of the d d l record to get
+	* @return the d d l record
+	* @throws PortalException if a d d l record with the UUID and group id could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getDDLRecordByUuidAndGroupId(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getDDLRecordByUuidAndGroupId(uuid, groupId);
+	}
+
+	/**
 	* Gets a range of all the d d l records.
 	*
 	* <p>
@@ -240,25 +256,25 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long recordSetId,
+		long userId, long groupId, long recordSetId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddlRecordLocalService.addRecord(recordSetId, fields,
-			displayIndex, serviceContext);
+		return _ddlRecordLocalService.addRecord(userId, groupId, recordSetId,
+			fields, displayIndex, serviceContext);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long recordSetId,
+		long userId, long groupId, long recordSetId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _ddlRecordLocalService.addRecord(recordSetId, fieldsMap,
-			displayIndex, serviceContext);
+		return _ddlRecordLocalService.addRecord(userId, groupId, recordSetId,
+			fieldsMap, displayIndex, serviceContext);
 	}
 
 	public void deleteRecord(
@@ -320,12 +336,12 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long recordId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
-		int displayIndex, boolean merge,
+		int displayIndex, boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordLocalService.updateRecord(recordId, fieldsMap,
-			displayIndex, merge, serviceContext);
+			displayIndex, mergeFields, serviceContext);
 	}
 
 	public DDLRecordLocalService getWrappedDDLRecordLocalService() {

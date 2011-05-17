@@ -41,7 +41,7 @@ public interface DDLRecordService {
 	 * Never modify or reference this interface directly. Always use {@link DDLRecordServiceUtil} to access the d d l record remote service. Add custom service methods to {@link com.liferay.portlet.dynamicdatalists.service.impl.DDLRecordServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
-		long recordSetId,
+		long groupId, long recordSetId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)

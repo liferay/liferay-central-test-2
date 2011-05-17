@@ -48,7 +48,7 @@ public class DDLRecordWrapper implements DDLRecord {
 	/**
 	* Sets the primary key of this d d l record
 	*
-	* @param pk the primary key of this d d l record
+	* @param primaryKey the primary key of this d d l record
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ddlRecord.setPrimaryKey(primaryKey);
@@ -88,6 +88,134 @@ public class DDLRecordWrapper implements DDLRecord {
 	*/
 	public void setRecordId(long recordId) {
 		_ddlRecord.setRecordId(recordId);
+	}
+
+	/**
+	* Gets the group ID of this d d l record.
+	*
+	* @return the group ID of this d d l record
+	*/
+	public long getGroupId() {
+		return _ddlRecord.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this d d l record.
+	*
+	* @param groupId the group ID of this d d l record
+	*/
+	public void setGroupId(long groupId) {
+		_ddlRecord.setGroupId(groupId);
+	}
+
+	/**
+	* Gets the company ID of this d d l record.
+	*
+	* @return the company ID of this d d l record
+	*/
+	public long getCompanyId() {
+		return _ddlRecord.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this d d l record.
+	*
+	* @param companyId the company ID of this d d l record
+	*/
+	public void setCompanyId(long companyId) {
+		_ddlRecord.setCompanyId(companyId);
+	}
+
+	/**
+	* Gets the user ID of this d d l record.
+	*
+	* @return the user ID of this d d l record
+	*/
+	public long getUserId() {
+		return _ddlRecord.getUserId();
+	}
+
+	/**
+	* Sets the user ID of this d d l record.
+	*
+	* @param userId the user ID of this d d l record
+	*/
+	public void setUserId(long userId) {
+		_ddlRecord.setUserId(userId);
+	}
+
+	/**
+	* Gets the user uuid of this d d l record.
+	*
+	* @return the user uuid of this d d l record
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecord.getUserUuid();
+	}
+
+	/**
+	* Sets the user uuid of this d d l record.
+	*
+	* @param userUuid the user uuid of this d d l record
+	*/
+	public void setUserUuid(java.lang.String userUuid) {
+		_ddlRecord.setUserUuid(userUuid);
+	}
+
+	/**
+	* Gets the user name of this d d l record.
+	*
+	* @return the user name of this d d l record
+	*/
+	public java.lang.String getUserName() {
+		return _ddlRecord.getUserName();
+	}
+
+	/**
+	* Sets the user name of this d d l record.
+	*
+	* @param userName the user name of this d d l record
+	*/
+	public void setUserName(java.lang.String userName) {
+		_ddlRecord.setUserName(userName);
+	}
+
+	/**
+	* Gets the create date of this d d l record.
+	*
+	* @return the create date of this d d l record
+	*/
+	public java.util.Date getCreateDate() {
+		return _ddlRecord.getCreateDate();
+	}
+
+	/**
+	* Sets the create date of this d d l record.
+	*
+	* @param createDate the create date of this d d l record
+	*/
+	public void setCreateDate(java.util.Date createDate) {
+		_ddlRecord.setCreateDate(createDate);
+	}
+
+	/**
+	* Gets the modified date of this d d l record.
+	*
+	* @return the modified date of this d d l record
+	*/
+	public java.util.Date getModifiedDate() {
+		return _ddlRecord.getModifiedDate();
+	}
+
+	/**
+	* Sets the modified date of this d d l record.
+	*
+	* @param modifiedDate the modified date of this d d l record
+	*/
+	public void setModifiedDate(java.util.Date modifiedDate) {
+		_ddlRecord.setModifiedDate(modifiedDate);
 	}
 
 	/**

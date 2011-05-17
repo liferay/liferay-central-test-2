@@ -86,6 +86,14 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByUuid", new String[] { String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_UUID_G = new FinderPath(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
+			DDLRecordModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
+			DDLRecordModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByUUID_G",
+			new String[] { String.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_RECORDSETID = new FinderPath(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByRecordSetId",
@@ -113,6 +121,11 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 	public void cacheResult(DDLRecord ddlRecord) {
 		EntityCacheUtil.putResult(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordImpl.class, ddlRecord.getPrimaryKey(), ddlRecord);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				ddlRecord.getUuid(), Long.valueOf(ddlRecord.getGroupId())
+			}, ddlRecord);
 
 		ddlRecord.resetOriginalValues();
 	}
@@ -159,6 +172,11 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 	public void clearCache(DDLRecord ddlRecord) {
 		EntityCacheUtil.removeResult(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordImpl.class, ddlRecord.getPrimaryKey());
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				ddlRecord.getUuid(), Long.valueOf(ddlRecord.getGroupId())
+			});
 	}
 
 	/**
@@ -264,6 +282,14 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
 
+		DDLRecordModelImpl ddlRecordModelImpl = (DDLRecordModelImpl)ddlRecord;
+
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+			new Object[] {
+				ddlRecordModelImpl.getUuid(),
+				Long.valueOf(ddlRecordModelImpl.getGroupId())
+			});
+
 		EntityCacheUtil.removeResult(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordImpl.class, ddlRecord.getPrimaryKey());
 
@@ -274,6 +300,10 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 		com.liferay.portlet.dynamicdatalists.model.DDLRecord ddlRecord,
 		boolean merge) throws SystemException {
 		ddlRecord = toUnwrappedModel(ddlRecord);
+
+		boolean isNew = ddlRecord.isNew();
+
+		DDLRecordModelImpl ddlRecordModelImpl = (DDLRecordModelImpl)ddlRecord;
 
 		if (Validator.isNull(ddlRecord.getUuid())) {
 			String uuid = PortalUUIDUtil.generate();
@@ -302,6 +332,27 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 		EntityCacheUtil.putResult(DDLRecordModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordImpl.class, ddlRecord.getPrimaryKey(), ddlRecord);
 
+		if (!isNew &&
+				(!Validator.equals(ddlRecord.getUuid(),
+					ddlRecordModelImpl.getOriginalUuid()) ||
+				(ddlRecord.getGroupId() != ddlRecordModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					ddlRecordModelImpl.getOriginalUuid(),
+					Long.valueOf(ddlRecordModelImpl.getOriginalGroupId())
+				});
+		}
+
+		if (isNew ||
+				(!Validator.equals(ddlRecord.getUuid(),
+					ddlRecordModelImpl.getOriginalUuid()) ||
+				(ddlRecord.getGroupId() != ddlRecordModelImpl.getOriginalGroupId()))) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+				new Object[] {
+					ddlRecord.getUuid(), Long.valueOf(ddlRecord.getGroupId())
+				}, ddlRecord);
+		}
+
 		return ddlRecord;
 	}
 
@@ -317,6 +368,12 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 
 		ddlRecordImpl.setUuid(ddlRecord.getUuid());
 		ddlRecordImpl.setRecordId(ddlRecord.getRecordId());
+		ddlRecordImpl.setGroupId(ddlRecord.getGroupId());
+		ddlRecordImpl.setCompanyId(ddlRecord.getCompanyId());
+		ddlRecordImpl.setUserId(ddlRecord.getUserId());
+		ddlRecordImpl.setUserName(ddlRecord.getUserName());
+		ddlRecordImpl.setCreateDate(ddlRecord.getCreateDate());
+		ddlRecordImpl.setModifiedDate(ddlRecord.getModifiedDate());
 		ddlRecordImpl.setClassNameId(ddlRecord.getClassNameId());
 		ddlRecordImpl.setClassPK(ddlRecord.getClassPK());
 		ddlRecordImpl.setRecordSetId(ddlRecord.getRecordSetId());
@@ -760,6 +817,157 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 		}
 		else {
 			return null;
+		}
+	}
+
+	/**
+	 * Finds the d d l record where uuid = &#63; and groupId = &#63; or throws a {@link com.liferay.portlet.dynamicdatalists.NoSuchRecordException} if it could not be found.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the matching d d l record
+	 * @throws com.liferay.portlet.dynamicdatalists.NoSuchRecordException if a matching d d l record could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDLRecord findByUUID_G(String uuid, long groupId)
+		throws NoSuchRecordException, SystemException {
+		DDLRecord ddlRecord = fetchByUUID_G(uuid, groupId);
+
+		if (ddlRecord == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("uuid=");
+			msg.append(uuid);
+
+			msg.append(", groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchRecordException(msg.toString());
+		}
+
+		return ddlRecord;
+	}
+
+	/**
+	 * Finds the d d l record where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the matching d d l record, or <code>null</code> if a matching d d l record could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDLRecord fetchByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		return fetchByUUID_G(uuid, groupId, true);
+	}
+
+	/**
+	 * Finds the d d l record where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the matching d d l record, or <code>null</code> if a matching d d l record could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDLRecord fetchByUUID_G(String uuid, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, groupId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_UUID_G,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DDLRECORD_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				List<DDLRecord> list = q.list();
+
+				result = list;
+
+				DDLRecord ddlRecord = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs, list);
+				}
+				else {
+					ddlRecord = list.get(0);
+
+					cacheResult(ddlRecord);
+
+					if ((ddlRecord.getUuid() == null) ||
+							!ddlRecord.getUuid().equals(uuid) ||
+							(ddlRecord.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
+							finderArgs, ddlRecord);
+					}
+				}
+
+				return ddlRecord;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DDLRecord)result;
+			}
 		}
 	}
 
@@ -1218,6 +1426,20 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 	}
 
 	/**
+	 * Removes the d d l record where uuid = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByUUID_G(String uuid, long groupId)
+		throws NoSuchRecordException, SystemException {
+		DDLRecord ddlRecord = findByUUID_G(uuid, groupId);
+
+		ddlRecordPersistence.remove(ddlRecord);
+	}
+
+	/**
 	 * Removes all the d d l records where recordSetId = &#63; from the database.
 	 *
 	 * @param recordSetId the record set ID to search with
@@ -1296,6 +1518,77 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the d d l records where uuid = &#63; and groupId = &#63;.
+	 *
+	 * @param uuid the uuid to search with
+	 * @param groupId the group ID to search with
+	 * @return the number of matching d d l records
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByUUID_G(String uuid, long groupId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { uuid, groupId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_UUID_G,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DDLRECORD_WHERE);
+
+			if (uuid == null) {
+				query.append(_FINDER_COLUMN_UUID_G_UUID_1);
+			}
+			else {
+				if (uuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_UUID_G_UUID_2);
+				}
+			}
+
+			query.append(_FINDER_COLUMN_UUID_G_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (uuid != null) {
+					qPos.add(uuid);
+				}
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1444,6 +1737,10 @@ public class DDLRecordPersistenceImpl extends BasePersistenceImpl<DDLRecord>
 	private static final String _FINDER_COLUMN_UUID_UUID_1 = "ddlRecord.uuid IS NULL";
 	private static final String _FINDER_COLUMN_UUID_UUID_2 = "ddlRecord.uuid = ?";
 	private static final String _FINDER_COLUMN_UUID_UUID_3 = "(ddlRecord.uuid IS NULL OR ddlRecord.uuid = ?)";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_1 = "ddlRecord.uuid IS NULL AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_2 = "ddlRecord.uuid = ? AND ";
+	private static final String _FINDER_COLUMN_UUID_G_UUID_3 = "(ddlRecord.uuid IS NULL OR ddlRecord.uuid = ?) AND ";
+	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "ddlRecord.groupId = ?";
 	private static final String _FINDER_COLUMN_RECORDSETID_RECORDSETID_2 = "ddlRecord.recordSetId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddlRecord.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No DDLRecord exists with the primary key ";

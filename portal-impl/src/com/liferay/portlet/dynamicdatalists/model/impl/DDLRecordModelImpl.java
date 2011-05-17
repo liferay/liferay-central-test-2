@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatalists.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -35,6 +36,7 @@ import java.lang.reflect.Proxy;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -61,12 +63,18 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", Types.VARCHAR },
 			{ "recordId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
 			{ "recordSetId", Types.BIGINT },
 			{ "displayIndex", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,classNameId LONG,classPK LONG,recordSetId LONG,displayIndex INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,displayIndex INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecord";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -89,6 +97,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 		model.setUuid(soapModel.getUuid());
 		model.setRecordId(soapModel.getRecordId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setRecordSetId(soapModel.getRecordSetId());
@@ -153,7 +167,15 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getRecordId() {
@@ -162,6 +184,77 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 	public void setRecordId(long recordId) {
 		_recordId = recordId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
+		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
+	}
+
+	public String getUserName() {
+		if (_userName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userName;
+		}
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
 	}
 
 	public String getClassName() {
@@ -216,7 +309,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 					DDLRecord.class.getName(), getPrimaryKey());
 		}
 
@@ -232,6 +325,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 		ddlRecordImpl.setUuid(getUuid());
 		ddlRecordImpl.setRecordId(getRecordId());
+		ddlRecordImpl.setGroupId(getGroupId());
+		ddlRecordImpl.setCompanyId(getCompanyId());
+		ddlRecordImpl.setUserId(getUserId());
+		ddlRecordImpl.setUserName(getUserName());
+		ddlRecordImpl.setCreateDate(getCreateDate());
+		ddlRecordImpl.setModifiedDate(getModifiedDate());
 		ddlRecordImpl.setClassNameId(getClassNameId());
 		ddlRecordImpl.setClassPK(getClassPK());
 		ddlRecordImpl.setRecordSetId(getRecordSetId());
@@ -285,15 +384,34 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public void resetOriginalValues() {
+		DDLRecordModelImpl ddlRecordModelImpl = this;
+
+		ddlRecordModelImpl._originalUuid = ddlRecordModelImpl._uuid;
+
+		ddlRecordModelImpl._originalGroupId = ddlRecordModelImpl._groupId;
+
+		ddlRecordModelImpl._setOriginalGroupId = false;
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
 		sb.append(", recordId=");
 		sb.append(getRecordId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", userId=");
+		sb.append(getUserId());
+		sb.append(", userName=");
+		sb.append(getUserName());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
+		sb.append(", modifiedDate=");
+		sb.append(getModifiedDate());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
@@ -308,7 +426,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatalists.model.DDLRecord");
@@ -321,6 +439,30 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(
 			"<column><column-name>recordId</column-name><column-value><![CDATA[");
 		sb.append(getRecordId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append(getUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userName</column-name><column-value><![CDATA[");
+		sb.append(getUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
+		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
@@ -345,7 +487,17 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	private String _uuid;
+	private String _originalUuid;
 	private long _recordId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
+	private long _companyId;
+	private long _userId;
+	private String _userUuid;
+	private String _userName;
+	private Date _createDate;
+	private Date _modifiedDate;
 	private long _classNameId;
 	private long _classPK;
 	private long _recordSetId;

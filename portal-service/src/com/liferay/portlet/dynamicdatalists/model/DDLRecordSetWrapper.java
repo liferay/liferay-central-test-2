@@ -48,7 +48,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 	/**
 	* Sets the primary key of this d d l record set
 	*
-	* @param pk the primary key of this d d l record set
+	* @param primaryKey the primary key of this d d l record set
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ddlRecordSet.setPrimaryKey(primaryKey);

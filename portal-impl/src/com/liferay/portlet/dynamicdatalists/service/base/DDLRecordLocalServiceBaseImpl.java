@@ -192,6 +192,20 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the d d l record with the UUID and group id.
+	 *
+	 * @param uuid the UUID of d d l record to get
+	 * @param groupId the group id of the d d l record to get
+	 * @return the d d l record
+	 * @throws PortalException if a d d l record with the UUID and group id could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DDLRecord getDDLRecordByUuidAndGroupId(String uuid, long groupId)
+		throws PortalException, SystemException {
+		return ddlRecordPersistence.findByUUID_G(uuid, groupId);
+	}
+
+	/**
 	 * Gets a range of all the d d l records.
 	 *
 	 * <p>

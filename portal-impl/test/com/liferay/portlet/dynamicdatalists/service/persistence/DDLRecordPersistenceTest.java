@@ -19,10 +19,14 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
+import com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordModelImpl;
 
 import java.util.List;
 
@@ -66,6 +70,12 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		DDLRecord newDDLRecord = _persistence.create(pk);
 
 		newDDLRecord.setUuid(randomString());
+		newDDLRecord.setGroupId(nextLong());
+		newDDLRecord.setCompanyId(nextLong());
+		newDDLRecord.setUserId(nextLong());
+		newDDLRecord.setUserName(randomString());
+		newDDLRecord.setCreateDate(nextDate());
+		newDDLRecord.setModifiedDate(nextDate());
 		newDDLRecord.setClassNameId(nextLong());
 		newDDLRecord.setClassPK(nextLong());
 		newDDLRecord.setRecordSetId(nextLong());
@@ -77,6 +87,15 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingDDLRecord.getUuid(), newDDLRecord.getUuid());
 		assertEquals(existingDDLRecord.getRecordId(), newDDLRecord.getRecordId());
+		assertEquals(existingDDLRecord.getGroupId(), newDDLRecord.getGroupId());
+		assertEquals(existingDDLRecord.getCompanyId(),
+			newDDLRecord.getCompanyId());
+		assertEquals(existingDDLRecord.getUserId(), newDDLRecord.getUserId());
+		assertEquals(existingDDLRecord.getUserName(), newDDLRecord.getUserName());
+		assertEquals(Time.getShortTimestamp(existingDDLRecord.getCreateDate()),
+			Time.getShortTimestamp(newDDLRecord.getCreateDate()));
+		assertEquals(Time.getShortTimestamp(existingDDLRecord.getModifiedDate()),
+			Time.getShortTimestamp(newDDLRecord.getModifiedDate()));
 		assertEquals(existingDDLRecord.getClassNameId(),
 			newDDLRecord.getClassNameId());
 		assertEquals(existingDDLRecord.getClassPK(), newDDLRecord.getClassPK());
@@ -189,12 +208,35 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(0, result.size());
 	}
 
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		DDLRecord newDDLRecord = addDDLRecord();
+
+		_persistence.clearCache();
+
+		DDLRecordModelImpl existingDDLRecordModelImpl = (DDLRecordModelImpl)_persistence.findByPrimaryKey(newDDLRecord.getPrimaryKey());
+
+		assertTrue(Validator.equals(existingDDLRecordModelImpl.getUuid(),
+				existingDDLRecordModelImpl.getOriginalUuid()));
+		assertEquals(existingDDLRecordModelImpl.getGroupId(),
+			existingDDLRecordModelImpl.getOriginalGroupId());
+	}
+
 	protected DDLRecord addDDLRecord() throws Exception {
 		long pk = nextLong();
 
 		DDLRecord ddlRecord = _persistence.create(pk);
 
 		ddlRecord.setUuid(randomString());
+		ddlRecord.setGroupId(nextLong());
+		ddlRecord.setCompanyId(nextLong());
+		ddlRecord.setUserId(nextLong());
+		ddlRecord.setUserName(randomString());
+		ddlRecord.setCreateDate(nextDate());
+		ddlRecord.setModifiedDate(nextDate());
 		ddlRecord.setClassNameId(nextLong());
 		ddlRecord.setClassPK(nextLong());
 		ddlRecord.setRecordSetId(nextLong());

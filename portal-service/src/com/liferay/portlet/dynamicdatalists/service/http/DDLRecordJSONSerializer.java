@@ -17,9 +17,11 @@ package com.liferay.portlet.dynamicdatalists.service.http;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +34,30 @@ public class DDLRecordJSONSerializer {
 
 		jsonObject.put("uuid", model.getUuid());
 		jsonObject.put("recordId", model.getRecordId());
+		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
+		jsonObject.put("userId", model.getUserId());
+		jsonObject.put("userName", model.getUserName());
+
+		Date createDate = model.getCreateDate();
+
+		String createDateJSON = StringPool.BLANK;
+
+		if (createDate != null) {
+			createDateJSON = String.valueOf(createDate.getTime());
+		}
+
+		jsonObject.put("createDate", createDateJSON);
+
+		Date modifiedDate = model.getModifiedDate();
+
+		String modifiedDateJSON = StringPool.BLANK;
+
+		if (modifiedDate != null) {
+			modifiedDateJSON = String.valueOf(modifiedDate.getTime());
+		}
+
+		jsonObject.put("modifiedDate", modifiedDateJSON);
 		jsonObject.put("classNameId", model.getClassNameId());
 		jsonObject.put("classPK", model.getClassPK());
 		jsonObject.put("recordSetId", model.getRecordSetId());

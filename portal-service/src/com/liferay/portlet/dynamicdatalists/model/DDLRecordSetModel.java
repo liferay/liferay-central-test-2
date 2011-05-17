@@ -58,7 +58,7 @@ public interface DDLRecordSetModel extends BaseModel<DDLRecordSet>, GroupedModel
 	/**
 	 * Sets the primary key of this d d l record set
 	 *
-	 * @param pk the primary key of this d d l record set
+	 * @param primaryKey the primary key of this d d l record set
 	 */
 	public void setPrimaryKey(long primaryKey);
 
