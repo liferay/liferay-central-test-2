@@ -30,6 +30,10 @@
 		}
 	}
 
+	.layout-set-results {
+		min-height: 300px;
+	}
+
 	.theme-title {
 		display: block;
 		font-weight: bold;

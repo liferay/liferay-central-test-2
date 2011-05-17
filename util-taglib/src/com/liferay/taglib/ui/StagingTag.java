@@ -35,8 +35,16 @@ public class StagingTag extends IncludeTag {
 		_layoutSetBranchId = layoutSetBranchId;
 	}
 
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
+
 	public void setSelPlid(long selPlid) {
 		_selPlid = selPlid;
+	}
+
+	public void setShowManageBackstages(boolean showManageBackstages) {
+		_showManageBackstages = showManageBackstages;
 	}
 
 	protected String getPage() {
@@ -52,7 +60,12 @@ public class StagingTag extends IncludeTag {
 			"liferay-ui:staging:layoutSetBranchId",
 			String.valueOf(_layoutSetBranchId));
 		request.setAttribute(
+			"liferay-ui:staging:privateLayout", String.valueOf(_privateLayout));
+		request.setAttribute(
 			"liferay-ui:staging:selPlid", String.valueOf(_selPlid));
+		request.setAttribute(
+			"liferay-ui:staging:showManageBackstages",
+			String.valueOf(_showManageBackstages));
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/staging/page.jsp";
@@ -60,6 +73,8 @@ public class StagingTag extends IncludeTag {
 	private boolean _extended = true;
 	private long _groupId;
 	private long _layoutSetBranchId;
+	private boolean _privateLayout = false;
 	private long _selPlid;
+	private boolean _showManageBackstages = false;
 
 }

@@ -21,8 +21,11 @@ boolean extended = GetterUtil.getBoolean((String) request.getAttribute("liferay-
 long groupId = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:groupId"));
 long layoutSetBranchId = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:layoutSetBranchId"));
 long selPlid = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:selPlid"));
+boolean privateLayout = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:staging:privateLayout"));
+boolean showManageBackStages = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:staging:showManageBackstages"));
 
 LayoutSetBranch layoutSetBranch = null;
+List<LayoutSetBranch> layoutSetBranches = null;
 
 Group group = null;
 
@@ -74,6 +77,14 @@ else if (group.isStaged()) {
 		stagingGroup = group.getStagingGroup();
 	}
 }
+
+boolean isPrivateLayout = layout.isPrivateLayout();
+
+if (groupId > 0) {
+	isPrivateLayout = privateLayout;
+}
+
+layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), isPrivateLayout);
 %>
 
 <c:if test="<%= stagingGroup != null %>">
@@ -164,6 +175,44 @@ else if (group.isStaged()) {
 									title: '<%= UnicodeFormatter.toString(publishScheduleMessage) %>',
 									url: event.currentTarget.attr('href')
 								});
+							}
+						);
+					}
+				</aui:script>
+			</c:if>
+
+			<c:if test="<%= showManageBackStages && !layoutSetBranches.isEmpty() %>">
+				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="layoutSetBranchesURL">
+					<portlet:param name="struts_action" value="/staging_bar/view_layout_set_branches" />
+					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+					<portlet:param name="privateLayout" value="<%= String.valueOf(isPrivateLayout) %>" />
+					<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon cssClass="manage-backstages" id="manageBackstages" image="configuration" label="<%= true %>" message="manage-backstages" url="<%= layoutSetBranchesURL %>" />
+
+				<aui:script use="aui-base">
+					var layoutSetBranchesLink = A.one('#<portlet:namespace />manageBackstages');
+
+					if (layoutSetBranchesLink) {
+						layoutSetBranchesLink.detach('click');
+
+						layoutSetBranchesLink.on(
+							'click',
+							function(event) {
+								event.preventDefault();
+
+								Liferay.Util.openWindow(
+									{
+										dialog:
+											{
+												width: 820
+											},
+										id: '<portlet:namespace />',
+										title: '<liferay-ui:message key="manage-backstages" />',
+										uri: event.currentTarget.attr('href')
+									}
+								);
 							}
 						);
 					}
