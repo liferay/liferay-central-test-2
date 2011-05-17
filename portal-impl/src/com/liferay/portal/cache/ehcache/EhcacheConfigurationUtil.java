@@ -33,55 +33,50 @@ import net.sf.ehcache.config.ConfigurationFactory;
 public class EhcacheConfigurationUtil {
 
 	public static Configuration getConfiguration(
-		String configurationResourcePath) {
+		String configurationPath) {
 
-		return getConfiguration(configurationResourcePath, false);
+		return getConfiguration(configurationPath, false);
 	}
 
 	public static Configuration getConfiguration(
-		String configurationResourcePath, boolean clusterAware) {
+		String configurationPath, boolean clusterAware) {
 
-		return getConfiguration(configurationResourcePath, clusterAware, false);
+		return getConfiguration(configurationPath, clusterAware, false);
 	}
 
 	public static Configuration getConfiguration(
-		String configurationResourcePath, boolean clusterAware,
+		String configurationPath, boolean clusterAware,
 		boolean usingDefault) {
 
-		if (Validator.isNull(configurationResourcePath)) {
+		if (Validator.isNull(configurationPath)) {
 			return null;
 		}
 
-		URL configurationResourceURL =
-			EhcacheConfigurationUtil.class.getResource(
-				configurationResourcePath);
+		URL configurationURL = EhcacheConfigurationUtil.class.getResource(
+			configurationPath);
 
-		return getConfiguration(
-			configurationResourceURL, clusterAware, usingDefault);
+		return getConfiguration(configurationURL, clusterAware, usingDefault);
+	}
+
+	public static Configuration getConfiguration(URL configurationURL) {
+		return getConfiguration(configurationURL, false);
 	}
 
 	public static Configuration getConfiguration(
-		URL configurationResourceURL) {
+		URL configurationURL, boolean clusterAware) {
 
-		return getConfiguration(configurationResourceURL, false);
+		return getConfiguration(configurationURL, clusterAware, false);
 	}
 
 	public static Configuration getConfiguration(
-		URL configurationResourceURL, boolean clusterAware) {
+		URL configurationURL, boolean clusterAware, boolean usingDefault) {
 
-		return getConfiguration(configurationResourceURL, clusterAware, false);
-	}
-
-	public static Configuration getConfiguration(
-		URL configurationResourceURL, boolean clusterAware,
-		boolean usingDefault) {
-
-		if (Validator.isNull(configurationResourceURL)) {
+		if (Validator.isNull(configurationURL)) {
 			return null;
 		}
 
 		Configuration configuration = ConfigurationFactory.parseConfiguration(
-			configurationResourceURL);
+			configurationURL);
 
 		boolean enableClusterLinkReplication = false;
 
