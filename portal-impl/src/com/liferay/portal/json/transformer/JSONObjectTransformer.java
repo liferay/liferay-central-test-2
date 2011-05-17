@@ -12,25 +12,19 @@
  * details.
  */
 
-package com.liferay.portal.json;
+package com.liferay.portal.json.transformer;
 
-import com.liferay.portal.kernel.json.JSONTransformer;
-
-import flexjson.transformer.Transformer;
+import com.liferay.portal.kernel.json.JSONObject;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
-public class FlexjsonTransformer implements Transformer {
-
-	public FlexjsonTransformer(JSONTransformer jsonTransformer) {
-		_jsonTransformer = jsonTransformer;
-	}
+public class JSONObjectTransformer extends JSONBaseTransformer {
 
 	public void transform(Object object) {
-		_jsonTransformer.transform(object);
-	}
+		JSONObject jsonObject = (JSONObject)object;
 
-	private final JSONTransformer _jsonTransformer;
+		getContext().write(jsonObject.toString());
+	}
 
 }

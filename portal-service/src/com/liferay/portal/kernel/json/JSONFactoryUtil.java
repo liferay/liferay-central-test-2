@@ -41,6 +41,10 @@ public class JSONFactoryUtil {
 		return getJSONFactory().createJSONObject(json);
 	}
 
+	public static JSONSerializer createJSONSerializer() {
+		return getJSONFactory().createJSONSerializer();
+	}
+
 	public static Object deserialize(JSONObject jsonObj) {
 		return getJSONFactory().deserialize(jsonObj);
 	}
@@ -57,14 +61,26 @@ public class JSONFactoryUtil {
 		return getJSONFactory().looseDeserialize(json);
 	}
 
+	public static <T> T looseDeserialize(String json, Class<T> clazz) {
+		return getJSONFactory().looseDeserialize(json, clazz);
+	}
+
 	public static String looseSerialize(Object object) {
 		return getJSONFactory().looseSerialize(object);
+	}
+
+	public static String looseSerialize(Object object, String... includes) {
+		return getJSONFactory().looseSerialize(object, includes);
 	}
 
 	public static String looseSerialize(
 		Object object, JSONTransformer jsonTransformer, Class<?> clazz) {
 
 		return getJSONFactory().looseSerialize(object, jsonTransformer, clazz);
+	}
+
+	public static String looseSerializeDeep(Object object) {
+		return getJSONFactory().looseSerializeDeep(object);
 	}
 
 	public static String serialize(Object object) {

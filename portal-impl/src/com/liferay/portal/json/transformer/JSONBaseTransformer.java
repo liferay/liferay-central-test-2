@@ -12,25 +12,18 @@
  * details.
  */
 
-package com.liferay.portal.json;
+package com.liferay.portal.json.transformer;
 
 import com.liferay.portal.kernel.json.JSONTransformer;
 
-import flexjson.transformer.Transformer;
+import flexjson.transformer.AbstractTransformer;
 
 /**
- * @author Brian Wing Shun Chan
+ * Base transformer for all portal transformers.
+ *
+ * @author Igor Spasic
  */
-public class FlexjsonTransformer implements Transformer {
-
-	public FlexjsonTransformer(JSONTransformer jsonTransformer) {
-		_jsonTransformer = jsonTransformer;
-	}
-
-	public void transform(Object object) {
-		_jsonTransformer.transform(object);
-	}
-
-	private final JSONTransformer _jsonTransformer;
+public abstract class JSONBaseTransformer extends AbstractTransformer
+	implements JSONTransformer {
 
 }

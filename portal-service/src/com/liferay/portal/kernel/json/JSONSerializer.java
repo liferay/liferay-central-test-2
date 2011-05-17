@@ -12,25 +12,25 @@
  * details.
  */
 
-package com.liferay.portal.json;
-
-import com.liferay.portal.kernel.json.JSONTransformer;
-
-import flexjson.transformer.Transformer;
+package com.liferay.portal.kernel.json;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
-public class FlexjsonTransformer implements Transformer {
+public interface JSONSerializer {
 
-	public FlexjsonTransformer(JSONTransformer jsonTransformer) {
-		_jsonTransformer = jsonTransformer;
-	}
+	public JSONSerializer exclude(String... fields);
 
-	public void transform(Object object) {
-		_jsonTransformer.transform(object);
-	}
+	public JSONSerializer include(String... fields);
 
-	private final JSONTransformer _jsonTransformer;
+	public String serialize(Object target);
+
+	public String serializeDeep(Object target);
+
+	public JSONSerializer transform(
+		JSONTransformer jsonTransformer, Class... types);
+
+	public JSONSerializer transform(
+		JSONTransformer jsonTransformer, String... fields);
 
 }

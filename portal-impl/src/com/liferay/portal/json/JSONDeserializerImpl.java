@@ -23,18 +23,23 @@ import java.io.Reader;
  */
 public class JSONDeserializerImpl<T> implements JSONDeserializer<T> {
 
+	public JSONDeserializerImpl() {
+		_deserializer = new flexjson.JSONDeserializer<T>();
+	}
+
 	public T deserialize(Reader input) {
-		return _flexjsonDeserializer.deserialize(input);
+		return _deserializer.deserialize(input);
 	}
 
 	public T deserialize(String input) {
-		return _flexjsonDeserializer.deserialize(input);
+		return _deserializer.deserialize(input);
 	}
 
 	public JSONDeserializer<T> use(String path, Class<?> clazz) {
+		_deserializer.use(path, clazz);
 		return this;
 	}
 
-	private flexjson.JSONDeserializer<T> _flexjsonDeserializer;
+	private flexjson.JSONDeserializer<T> _deserializer;
 
 }

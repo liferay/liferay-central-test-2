@@ -19,11 +19,11 @@ import com.liferay.portal.kernel.json.JSONDeserializer;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.json.JSONTransformer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.MarshallException;
 
 /**
@@ -32,10 +32,9 @@ import org.jabsorb.serializer.MarshallException;
 public class JSONFactoryImpl implements JSONFactory {
 
 	public JSONFactoryImpl() {
-		_flexjsonDeserializer = new flexjson.JSONDeserializer<Object>();
-		_flexjsonSerializer = new flexjson.JSONSerializer();
+		JSONInit.init();
 
-		_serializer = new JSONSerializer();
+		_serializer = new org.jabsorb.JSONSerializer();
 
 		 try {
 			 _serializer.registerDefaultSerializers();
@@ -65,6 +64,10 @@ public class JSONFactoryImpl implements JSONFactory {
 		return new JSONObjectImpl(json);
 	}
 
+	public JSONSerializer createJSONSerializer() {
+		return new JSONSerializerImpl();
+	}
+
 	public Object deserialize(JSONObject jsonObj) {
 		return deserialize(jsonObj.toString());
 	}
@@ -82,7 +85,7 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	public Object looseDeserialize(String json) {
 		try {
-			return _flexjsonDeserializer.deserialize(json);
+			return createJSONDeserializer().deserialize(json);
 		}
 		catch (Exception e) {
 			 _log.error(e, e);
@@ -91,19 +94,28 @@ public class JSONFactoryImpl implements JSONFactory {
 		}
 	}
 
+	public <T> T looseDeserialize(String json, Class<T> clazz) {
+		return (T) createJSONDeserializer().use(null, clazz).deserialize(json);
+	}
+
 	public String looseSerialize(Object object) {
-		return looseSerialize(object, null, null);
+		return createJSONSerializer().serialize(object);
+	}
+
+	public String looseSerialize(Object object, String... includes) {
+		return createJSONSerializer().include(includes).serialize(object);
 	}
 
 	public String looseSerialize(
 		Object object, JSONTransformer jsonTransformer, Class<?> clazz) {
 
-		if ((jsonTransformer != null) && (clazz != null)) {
-			_flexjsonSerializer.transform(
-				new FlexjsonTransformer(jsonTransformer), clazz);
-		}
+		return createJSONSerializer().
+			transform(jsonTransformer, clazz).
+			serialize(object);
+	}
 
-		return _flexjsonSerializer.deepSerialize(object);
+	public String looseSerializeDeep(Object object) {
+		return createJSONSerializer().serializeDeep(object);
 	}
 
 	public String serialize(Object object) {
@@ -119,8 +131,6 @@ public class JSONFactoryImpl implements JSONFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONFactoryImpl.class);
 
-	private flexjson.JSONDeserializer<Object> _flexjsonDeserializer;
-	private flexjson.JSONSerializer _flexjsonSerializer;
-	private JSONSerializer _serializer;
+	private org.jabsorb.JSONSerializer _serializer;
 
 }

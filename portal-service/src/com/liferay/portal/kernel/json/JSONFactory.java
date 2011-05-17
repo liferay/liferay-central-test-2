@@ -29,16 +29,24 @@ public interface JSONFactory {
 
 	public JSONObject createJSONObject(String json) throws JSONException;
 
+	public JSONSerializer createJSONSerializer();
+
 	public Object deserialize(JSONObject jsonObj);
 
 	public Object deserialize(String json);
 
 	public Object looseDeserialize(String json);
 
+	public <T> T looseDeserialize(String json, Class<T> clazz);
+
 	public String looseSerialize(Object object);
+
+	public String looseSerialize(Object object, String... includes);
 
 	public String looseSerialize(
 		Object object, JSONTransformer jsonTransformer, Class<?> clazz);
+
+	public String looseSerializeDeep(Object object);
 
 	public String serialize(Object object);
 

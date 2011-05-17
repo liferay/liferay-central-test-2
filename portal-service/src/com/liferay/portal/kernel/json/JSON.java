@@ -12,25 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.json;
+package com.liferay.portal.kernel.json;
 
-import com.liferay.portal.kernel.json.JSONTransformer;
-
-import flexjson.transformer.Transformer;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
-public class FlexjsonTransformer implements Transformer {
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+public @interface JSON {
 
-	public FlexjsonTransformer(JSONTransformer jsonTransformer) {
-		_jsonTransformer = jsonTransformer;
-	}
+	/**
+	 * Includes or excludes method or field in automatic json serialization.
+	 */
+	boolean include() default true;
 
-	public void transform(Object object) {
-		_jsonTransformer.transform(object);
-	}
-
-	private final JSONTransformer _jsonTransformer;
+	/**
+	 * Defines the 'strict' mode where only annotated fields are serialized.
+	 */
+	boolean strict() default false;
 
 }
