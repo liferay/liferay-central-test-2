@@ -27,7 +27,7 @@
 	</init-param>
 </filter>
 <filter>
-	<filter-name>REST Servlet Filter</filter-name>
+	<filter-name>JSON Web Service Servlet Filter</filter-name>
 	<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 	<init-param>
 		<param-name>filter-class</param-name>
@@ -35,7 +35,7 @@
 	</init-param>
 	<init-param>
 		<param-name>portal_property_prefix</param-name>
-		<param-value>rest.servlet.</param-value>
+		<param-value>jsonws.servlet.</param-value>
 	</init-param>
 </filter>
 <filter>
@@ -71,7 +71,7 @@
 	</init-param>
 </filter>
 <filter>
-	<filter-name>Secure REST Servlet Filter</filter-name>
+	<filter-name>Secure JSON Web Service Servlet Filter</filter-name>
 	<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 	<init-param>
 		<param-name>filter-class</param-name>
@@ -83,7 +83,7 @@
 	</init-param>
 	<init-param>
 		<param-name>portal_property_prefix</param-name>
-		<param-value>rest.servlet.</param-value>
+		<param-value>jsonws.servlet.</param-value>
 	</init-param>
 </filter>
 <filter>
@@ -104,7 +104,7 @@
 </filter-mapping>
 <filter-mapping>
 	<filter-name>Thread Local Filter</filter-name>
-	<url-pattern>/rest/*</url-pattern>
+	<url-pattern>/jsonws/*</url-pattern>
 </filter-mapping>
 <filter-mapping>
 	<filter-name>Thread Local Filter</filter-name>
@@ -119,8 +119,8 @@
 	<url-pattern>/json/*</url-pattern>
 </filter-mapping>
 <filter-mapping>
-	<filter-name>REST Servlet Filter</filter-name>
-	<url-pattern>/rest/*</url-pattern>
+	<filter-name>JSON Web Service Servlet Filter</filter-name>
+	<url-pattern>/jsonws/*</url-pattern>
 </filter-mapping>
 <filter-mapping>
 	<filter-name>Secure Axis Servlet Filter</filter-name>
@@ -131,8 +131,8 @@
 	<url-pattern>/secure/json/*</url-pattern>
 </filter-mapping>
 <filter-mapping>
-	<filter-name>Secure REST Servlet Filter</filter-name>
-	<url-pattern>/secure/rest/*</url-pattern>
+	<filter-name>Secure JSON Web Service Servlet Filter</filter-name>
+	<url-pattern>/secure/jsonws/*</url-pattern>
 </filter-mapping>
 <servlet>
 	<servlet-name>Set Portlet Class Loader Servlet</servlet-name>
@@ -166,7 +166,7 @@
 	<load-on-startup>2</load-on-startup>
 </servlet>
 <servlet>
-	<servlet-name>REST Servlet</servlet-name>
+	<servlet-name>JSON Web Service Servlet</servlet-name>
 	<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 	<init-param>
 		<param-name>servlet-class</param-name>
@@ -195,10 +195,10 @@
 	<url-pattern>/secure/json/*</url-pattern>
 </servlet-mapping>
 <servlet-mapping>
-	<servlet-name>REST Servlet</servlet-name>
-	<url-pattern>/rest/*</url-pattern>
+	<servlet-name>JSON Web Service Servlet</servlet-name>
+	<url-pattern>/jsonws/*</url-pattern>
 </servlet-mapping>
 <servlet-mapping>
-	<servlet-name>REST Servlet</servlet-name>
-	<url-pattern>/secure/rest/*</url-pattern>
+	<servlet-name>JSON Web Service Servlet</servlet-name>
+	<url-pattern>/secure/jsonws/*</url-pattern>
 </servlet-mapping>
