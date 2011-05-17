@@ -32,39 +32,31 @@ String type = displayTerms.getType();
 	buttonLabel="search"
 >
 	<aui:fieldset>
-		<aui:column>
-			<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
+		<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 
-			<aui:select name="<%= displayTerms.TYPE %>">
-				<aui:option label="any" selected="<%= (displayTerms.getType() == null) %>" />
+		<aui:select name="<%= displayTerms.TYPE %>">
+			<aui:option label="any" selected="<%= (displayTerms.getType() == null) %>" />
 
-				<%
-				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
-				%>
+			<%
+			for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+			%>
 
-					<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
+				<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
 
-				<%
-				}
-				%>
-			</aui:select>
-		</aui:column>
+			<%
+			}
+			%>
+		</aui:select>
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.STREET %>" size="20" type="text" value="<%= displayTerms.getStreet() %>" />
+		<aui:input name="<%= displayTerms.STREET %>" size="20" type="text" value="<%= displayTerms.getStreet() %>" />
 
-			<aui:select label="country" name="<%= displayTerms.COUNTRY_ID %>" />
-		</aui:column>
+		<aui:select label="country" name="<%= displayTerms.COUNTRY_ID %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.CITY %>" size="20" type="text" value="<%= displayTerms.getCity() %>" />
+		<aui:input name="<%= displayTerms.CITY %>" size="20" type="text" value="<%= displayTerms.getCity() %>" />
 
-			<aui:select label="region" name="<%= displayTerms.REGION_ID %>" />
-		</aui:column>
+		<aui:select label="region" name="<%= displayTerms.REGION_ID %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.ZIP %>" size="20" type="text" value="<%= displayTerms.getZip() %>" />
-		</aui:column>
+		<aui:input name="<%= displayTerms.ZIP %>" size="20" type="text" value="<%= displayTerms.getZip() %>" />
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

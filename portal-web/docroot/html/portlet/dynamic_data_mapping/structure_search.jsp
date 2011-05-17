@@ -26,40 +26,30 @@ StructureDisplayTerms displayTerms = new StructureDisplayTerms(renderRequest);
 	id="toggle_id_ddm_structure_search"
 >
 	<aui:fieldset cssClass="lfr-ddm-search-form">
-		<aui:column>
-			<aui:input label="id" name="<%= displayTerms.STRUCTURE_KEY %>" size="20" value="<%= displayTerms.getStructureKey() %>" />
-		</aui:column>
+		<aui:input label="id" name="<%= displayTerms.STRUCTURE_KEY %>" size="20" value="<%= displayTerms.getStructureKey() %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
-		</aui:column>
+		<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" value="<%= displayTerms.getDescription() %>" />
-		</aui:column>
+		<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" value="<%= displayTerms.getDescription() %>" />
 
-		<aui:column>
-			<aui:select label="type" name="<%= displayTerms.CLASS_NAME_ID %>">
-				<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
-				<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
-			</aui:select>
-		</aui:column>
+		<aui:select label="type" name="<%= displayTerms.CLASS_NAME_ID %>">
+			<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
+			<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
+		</aui:select>
 
-		<aui:column>
-			<aui:select name="storageType">
+		<aui:select name="storageType">
 
-				<%
-				for (StorageType storageType : StorageType.values()) {
-				%>
+			<%
+			for (StorageType storageType : StorageType.values()) {
+			%>
 
-					<aui:option label="<%= storageType %>" selected="<%= storageType.equals(displayTerms.getStorageType()) %>" value="<%= storageType %>" />
+				<aui:option label="<%= storageType %>" selected="<%= storageType.equals(displayTerms.getStorageType()) %>" value="<%= storageType %>" />
 
-				<%
-				}
-				%>
+			<%
+			}
+			%>
 
-			</aui:select>
-		</aui:column>
+		</aui:select>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

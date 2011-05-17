@@ -27,29 +27,26 @@ WorkflowTaskDisplayTerms displayTerms = new WorkflowTaskDisplayTerms(renderReque
 >
 
 	<aui:fieldset>
-		<aui:column>
-			<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
-		</aui:column>
-		<aui:column>
-			<aui:select name="<%= displayTerms.TYPE %>">
+		<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
 
-				<%
-				String displayTermsType = displayTerms.getType();
+		<aui:select name="<%= displayTerms.TYPE %>">
 
-				List<WorkflowHandler> workflowHhandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
+			<%
+			String displayTermsType = displayTerms.getType();
 
-				for (WorkflowHandler workflowHandler : workflowHhandlers) {
-					String defaultWorkflowHandlerType = workflowHandler.getClassName();
-				%>
+			List<WorkflowHandler> workflowHhandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
 
-					<aui:option label="<%= workflowHandler.getType(locale) %>" selected="<%= displayTermsType.equals(defaultWorkflowHandlerType) %>" value="<%= defaultWorkflowHandlerType %>" />
+			for (WorkflowHandler workflowHandler : workflowHhandlers) {
+				String defaultWorkflowHandlerType = workflowHandler.getClassName();
+			%>
 
-				<%
-				}
-				%>
+				<aui:option label="<%= workflowHandler.getType(locale) %>" selected="<%= displayTermsType.equals(defaultWorkflowHandlerType) %>" value="<%= defaultWorkflowHandlerType %>" />
 
-			</aui:select>
-		</aui:column>
+			<%
+			}
+			%>
+
+		</aui:select>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

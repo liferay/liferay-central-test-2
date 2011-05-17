@@ -25,12 +25,20 @@ String buttonLabel = (String)request.getAttribute("liferay-ui:search-toggle:butt
 
 String clickValue = GetterUtil.getString(SessionClicks.get(request, id, null), "basic");
 
+String advancedFormCssClass = "taglib-search-toggle-advanced";
+String basicFormCssClass = "taglib-search-toggle-basic";
+String hiddenCssClass = " yui3-aui-helper-hidden";
+
 if (clickValue.equals("basic")) {
+	basicFormCssClass += hiddenCssClass;
+
 	if (displayTerms.isAdvancedSearch()) {
 		displayTerms.setAdvancedSearch(false);
 	}
 }
 else {
+	advancedFormCssClass += hiddenCssClass;
+
 	if (!displayTerms.isAdvancedSearch()) {
 		displayTerms.setAdvancedSearch(true);
 	}

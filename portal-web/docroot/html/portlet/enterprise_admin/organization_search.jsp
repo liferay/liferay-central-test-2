@@ -42,40 +42,32 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	buttonLabel="search"
 >
 	<aui:fieldset>
-		<aui:column>
-			<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
+		<aui:input name="<%= displayTerms.NAME %>" size="20" value="<%= displayTerms.getName() %>" />
 
-			<aui:select name="<%= displayTerms.TYPE %>">
-				<aui:option value=""></aui:option>
+		<aui:input name="<%= displayTerms.STREET %>" size="20" value="<%= displayTerms.getStreet() %>" />
 
-				<%
-				for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
-				%>
+		<aui:input name="<%= displayTerms.CITY %>" size="20" value="<%= displayTerms.getCity() %>" />
 
-					<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
+		<aui:select name="<%= displayTerms.TYPE %>">
+			<aui:option value=""></aui:option>
 
-				<%
-				}
-				%>
+			<%
+			for (String curType : PropsValues.ORGANIZATIONS_TYPES) {
+			%>
 
-			</aui:select>
-		</aui:column>
+				<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.STREET %>" size="20" value="<%= displayTerms.getStreet() %>" />
+			<%
+			}
+			%>
 
-			<aui:select label="country" name="<%= displayTerms.COUNTRY_ID %>"></aui:select>
-		</aui:column>
+		</aui:select>
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.CITY %>" size="20" value="<%= displayTerms.getCity() %>" />
+		<aui:select label="country" name="<%= displayTerms.COUNTRY_ID %>"></aui:select>
 
-			<aui:select label="region" name="<%= displayTerms.REGION_ID %>"></aui:select>
-		</aui:column>
+		<aui:select label="region" name="<%= displayTerms.REGION_ID %>"></aui:select>
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.ZIP %>" size="20" value="<%= displayTerms.getZip() %>" />
-		</aui:column>
+		<aui:input name="<%= displayTerms.ZIP %>" size="20" value="<%= displayTerms.getZip() %>" />
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 

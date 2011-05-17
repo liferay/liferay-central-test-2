@@ -30,42 +30,34 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 	buttonLabel="search"
 >
 	<aui:fieldset>
-		<aui:column>
-			<aui:input label="id" name="<%= displayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>" />
-		</aui:column>
+		<aui:input label="id" name="<%= displayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
-		</aui:column>
+		<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 
-		<aui:column>
-			<aui:input name="<%= displayTerms.DESCRIPTION %>" type="text" size="20" value="<%= displayTerms.getDescription() %>" />
-		</aui:column>
+		<aui:input name="<%= displayTerms.DESCRIPTION %>" type="text" size="20" value="<%= displayTerms.getDescription() %>" />
 
 		<c:if test='<%= strutsAction.equalsIgnoreCase("/journal/select_template") %>'>
-			<aui:column>
-				<aui:select label="my-places" name="<%= displayTerms.GROUP_IDS %>">
-					<c:if test="<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>">
-						<aui:option label="" value="<%= displayTerms.getGroupIds(renderRequest) %>" />
-						<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
-					</c:if>
+			<aui:select label="my-places" name="<%= displayTerms.GROUP_IDS %>">
+				<c:if test="<%= themeDisplay.getCompanyGroupId() != scopeGroupId %>">
+					<aui:option label="" value="<%= displayTerms.getGroupIds(renderRequest) %>" />
+					<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
+				</c:if>
 
-					<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= displayTerms.getGroupId() == themeDisplay.getParentGroupId() %>" value="<%= themeDisplay.getParentGroupId() %>" />
+				<aui:option label="<%= themeDisplay.getParentGroupName() %>" selected="<%= displayTerms.getGroupId() == themeDisplay.getParentGroupId() %>" value="<%= themeDisplay.getParentGroupId() %>" />
+
+				<%
+				Layout scopeLayout = themeDisplay.getScopeLayout();
+				%>
+
+				<c:if test="<%= scopeLayout != null %>">
 
 					<%
-					Layout scopeLayout = themeDisplay.getScopeLayout();
+					Group scopeGroup = scopeLayout.getScopeGroup();
 					%>
 
-					<c:if test="<%= scopeLayout != null %>">
-
-						<%
-						Group scopeGroup = scopeLayout.getScopeGroup();
-						%>
-
-						<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == scopeGroup.getGroupId()) %>" value="<%= scopeGroup.getGroupId() %>" />
-					</c:if>
-				</aui:select>
-			</aui:column>
+					<aui:option label='<%= LanguageUtil.get(pageContext, "current-page") + " (" + HtmlUtil.escape(scopeLayout.getName(locale)) + ")" %>' selected="<%= (displayTerms.getGroupIds().length == 1) && (displayTerms.getGroupIds()[0] == scopeGroup.getGroupId()) %>" value="<%= scopeGroup.getGroupId() %>" />
+				</c:if>
+			</aui:select>
 		</c:if>
 	</aui:fieldset>
 </liferay-ui:search-toggle>

@@ -28,98 +28,90 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	buttonLabel="search"
 >
 	<aui:fieldset>
-		<aui:column>
-			<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= displayTerms.getArticleId() %>" />
+		<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= displayTerms.getArticleId() %>" />
 
-			<aui:input name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
-		</aui:column>
+		<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 
-		<aui:column>
-			<aui:input label="name" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
+		<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 
-			<aui:select name="<%= displayTerms.TYPE %>">
-				<aui:option value=""></aui:option>
+		<aui:input name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
+
+		<aui:select name="<%= displayTerms.TYPE %>">
+			<aui:option value=""></aui:option>
+
+			<%
+			for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
+			%>
+
+				<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= displayTerms.getType().equals(JournalArticleConstants.TYPES[i]) %>" />
+
+			<%
+			}
+			%>
+
+		</aui:select>
+
+		<c:if test="<%= !portletName.equals(PortletKeys.JOURNAL) || ((themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId()))) %>">
+
+			<%
+			List<Group> myPlaces = user.getMyPlaces();
+
+			List<Layout> scopeLayouts = new ArrayList<Layout>();
+
+			scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getParentGroupId(), false));
+			scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getParentGroupId(), true));
+			%>
+
+			<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>" showEmptyOption="<%= (themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId())) %>">
+				<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 				<%
-				for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
+				for (Group myPlace : myPlaces) {
+					if (myPlace.hasStagingGroup() && !myPlace.isStagedRemotely() && myPlace.isStagedPortlet(PortletKeys.JOURNAL)) {
+						myPlace = myPlace.getStagingGroup();
+					}
 				%>
 
-					<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= displayTerms.getType().equals(JournalArticleConstants.TYPES[i]) %>" />
+					<aui:option label='<%= myPlace.isUser() ? "my-site" : HtmlUtil.escape(myPlace.getDescriptiveName()) %>' selected="<%= displayTerms.getGroupId() == myPlace.getGroupId() %>" value="<%= myPlace.getGroupId() %>" />
 
 				<%
 				}
 				%>
 
-			</aui:select>
-		</aui:column>
-
-		<aui:column>
-			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
-
-			<c:if test="<%= !portletName.equals(PortletKeys.JOURNAL) || ((themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId()))) %>">
-
-				<%
-				List<Group> myPlaces = user.getMyPlaces();
-
-				List<Layout> scopeLayouts = new ArrayList<Layout>();
-
-				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getParentGroupId(), false));
-				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getParentGroupId(), true));
-				%>
-
-				<aui:select label="my-places" name="<%= displayTerms.GROUP_ID %>" showEmptyOption="<%= (themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId())) %>">
-					<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
+				<c:if test="<%= !scopeLayouts.isEmpty() %>">
 
 					<%
-					for (Group myPlace : myPlaces) {
-						if (myPlace.hasStagingGroup() && !myPlace.isStagedRemotely() && myPlace.isStagedPortlet(PortletKeys.JOURNAL)) {
-							myPlace = myPlace.getStagingGroup();
-						}
+					for (Layout curScopeLayout : scopeLayouts) {
 					%>
 
-						<aui:option label='<%= myPlace.isUser() ? "my-site" : HtmlUtil.escape(myPlace.getDescriptiveName()) %>' selected="<%= displayTerms.getGroupId() == myPlace.getGroupId() %>" value="<%= myPlace.getGroupId() %>" />
+						<%
+						Group scopeGroup = curScopeLayout.getScopeGroup();
+
+						String label = HtmlUtil.escape(curScopeLayout.getName(locale));
+
+						if (curScopeLayout.equals(layout)) {
+							label = LanguageUtil.get(pageContext, "current-page") + " (" + label + ")";
+						}
+						%>
+
+						<aui:option label='<%= label %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
 
 					<%
 					}
 					%>
 
-					<c:if test="<%= !scopeLayouts.isEmpty() %>">
-
-						<%
-						for (Layout curScopeLayout : scopeLayouts) {
-						%>
-
-							<%
-							Group scopeGroup = curScopeLayout.getScopeGroup();
-
-							String label = HtmlUtil.escape(curScopeLayout.getName(locale));
-
-							if (curScopeLayout.equals(layout)) {
-								label = LanguageUtil.get(pageContext, "current-page") + " (" + label + ")";
-							}
-							%>
-
-							<aui:option label='<%= label %>' selected="<%= displayTerms.getGroupId() == scopeGroup.getGroupId() %>" value="<%= scopeGroup.getGroupId() %>" />
-
-						<%
-						}
-						%>
-
-					</c:if>
-				</aui:select>
-			</c:if>
-		</aui:column>
+				</c:if>
+			</aui:select>
+		</c:if>
 
 		<c:if test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-			<aui:column>
-				<aui:select name="<%= displayTerms.STATUS %>">
-					<aui:option value=""></aui:option>
-					<aui:option label="draft" selected='<%= displayTerms.getStatus().equals("draft") %>' />
-					<aui:option label="pending" selected='<%= displayTerms.getStatus().equals("pending") %>' />
-					<aui:option label="approved" selected='<%= displayTerms.getStatus().equals("approved") %>' />
-					<aui:option label="expired" selected='<%= displayTerms.getStatus().equals("expired") %>' />
-				</aui:select>
-			</aui:column>
+			<aui:select name="<%= displayTerms.STATUS %>">
+				<aui:option value=""></aui:option>
+				<aui:option label="draft" selected='<%= displayTerms.getStatus().equals("draft") %>' />
+				<aui:option label="pending" selected='<%= displayTerms.getStatus().equals("pending") %>' />
+				<aui:option label="approved" selected='<%= displayTerms.getStatus().equals("approved") %>' />
+				<aui:option label="expired" selected='<%= displayTerms.getStatus().equals("expired") %>' />
+			</aui:select>
 		</c:if>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
