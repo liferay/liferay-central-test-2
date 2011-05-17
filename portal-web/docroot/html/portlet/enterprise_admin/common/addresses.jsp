@@ -145,11 +145,11 @@ else {
 
 <aui:script use="liferay-auto-fields,liferay-dynamic-select">
 	Liferay.once(
-		'enterpriseAdmin:revealaddresses',
+		'formNavigator:reveal<portlet:namespace />addresses',
 		function() {
 			var addresses = new Liferay.AutoFields(
 				{
-					contentBox: '#addresses > fieldset',
+					contentBox: '#<portlet:namespace />addresses > fieldset',
 					fieldIndexes: '<portlet:namespace />addressesIndexes',
 					on: {
 						'clone': function(event) {

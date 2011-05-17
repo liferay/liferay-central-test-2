@@ -103,11 +103,11 @@ else {
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseAdmin:revealphoneNumbers',
+		'formNavigator:reveal<portlet:namespace />phoneNumbers',
 		function() {
 			new Liferay.AutoFields(
 				{
-					contentBox: '#phoneNumbers > fieldset',
+					contentBox: '#<portlet:namespace />phoneNumbers > fieldset',
 					fieldIndexes: '<portlet:namespace />phonesIndexes'
 				}
 			).render();

@@ -159,27 +159,25 @@ AUI().add(
 
 					id = id.split('#');
 
-					if (!id[1]) {
-						return;
-					}
+					var namespacedId = id[1];
 
-					Liferay.fire('enterpriseAdmin:reveal' + id[1]);
+					if (namespacedId) {
+						Liferay.fire('formNavigator:reveal' + namespacedId);
 
-					id = '#' + id[1];
+						var section = A.one('#' + namespacedId);
+						var selected = instance._navigation.one(SELECTOR_LIST_ITEM_SELECTED);
 
-					var section = A.one(id);
-					var selected = instance._navigation.one(SELECTOR_LIST_ITEM_SELECTED);
+						if (selected) {
+							selected.removeClass(CSS_SELECTED);
+						}
 
-					if (selected) {
-						selected.removeClass(CSS_SELECTED);
-					}
+						li.addClass(CSS_SELECTED);
 
-					li.addClass(CSS_SELECTED);
+						instance._sections.removeClass(CSS_SELECTED).addClass(CSS_HIDDEN);
 
-					instance._sections.removeClass(CSS_SELECTED).addClass(CSS_HIDDEN);
-
-					if (section) {
-						section.addClass(CSS_SELECTED).removeClass(CSS_HIDDEN);
+						if (section) {
+							section.addClass(CSS_SELECTED).removeClass(CSS_HIDDEN);
+						}
 					}
 				}
 			},

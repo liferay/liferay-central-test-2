@@ -254,11 +254,11 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseAdmin:revealservices',
+		'formNavigator:reveal<portlet:namespace />services',
 		function() {
 			new Liferay.AutoFields(
 				{
-					contentBox: '#services > fieldset',
+					contentBox: '#<portlet:namespace />services > fieldset',
 					fieldIndexes: '<portlet:namespace />orgLaborsIndexes'
 				}
 			).render();

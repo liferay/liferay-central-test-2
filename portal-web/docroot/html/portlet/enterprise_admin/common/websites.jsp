@@ -100,11 +100,11 @@ else {
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseAdmin:revealwebsites',
+		'formNavigator:reveal<portlet:namespace />websites',
 		function() {
 			new Liferay.AutoFields(
 				{
-					contentBox: '#websites > fieldset',
+					contentBox: '#<portlet:namespace />websites > fieldset',
 					fieldIndexes: '<portlet:namespace />websitesIndexes'
 				}
 			).render();

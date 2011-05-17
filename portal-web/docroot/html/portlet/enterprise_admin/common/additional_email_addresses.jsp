@@ -99,11 +99,11 @@ else {
 
 <aui:script use="liferay-auto-fields">
 	Liferay.once(
-		'enterpriseAdmin:revealadditionalEmailAddresses',
+		'formNavigator:reveal<portlet:namespace />additionalEmailAddresses',
 		function() {
 			new Liferay.AutoFields(
 				{
-					contentBox: '#additionalEmailAddresses > fieldset',
+					contentBox: '#<portlet:namespace />additionalEmailAddresses > fieldset',
 					fieldIndexes: '<portlet:namespace />emailAddressesIndexes'
 				}
 			).render();
