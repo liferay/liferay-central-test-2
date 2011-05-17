@@ -298,7 +298,7 @@ public class JournalStructureLocalServiceImpl
 			JournalArticle article = journalArticlePersistence.findByG_C_C(
 				structure.getGroupId(), classNameId, structure.getId());
 
-			journalArticleLocalService.deleteJournalArticle(article.getId());
+			journalArticleLocalService.deleteArticle(article, null, null);
 		}
 		catch (NoSuchArticleException nsae) {
 		}
