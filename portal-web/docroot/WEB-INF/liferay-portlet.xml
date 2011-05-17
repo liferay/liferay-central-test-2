@@ -845,7 +845,6 @@
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
-		<remoteable>true</remoteable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
