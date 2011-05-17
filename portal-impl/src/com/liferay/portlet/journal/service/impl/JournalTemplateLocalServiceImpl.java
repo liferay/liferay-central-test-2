@@ -30,6 +30,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -41,6 +42,7 @@ import com.liferay.portlet.journal.TemplateNameException;
 import com.liferay.portlet.journal.TemplateSmallImageNameException;
 import com.liferay.portlet.journal.TemplateSmallImageSizeException;
 import com.liferay.portlet.journal.TemplateXslException;
+import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
@@ -307,8 +309,8 @@ public class JournalTemplateLocalServiceImpl
 	public void deleteTemplate(JournalTemplate template)
 		throws PortalException, SystemException {
 
-		if (journalArticlePersistence.countByG_T(
-				template.getGroupId(), template.getTemplateId()) > 0) {
+		if (journalArticlePersistence.countByG_C_T(
+				template.getGroupId(), 0, template.getTemplateId()) > 0) {
 
 			throw new RequiredTemplateException();
 		}
@@ -332,6 +334,13 @@ public class JournalTemplateLocalServiceImpl
 		resourceLocalService.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, template.getId());
+
+		// Article
+
+		journalArticleLocalService.updateTemplateId(
+			template.getGroupId(),
+			PortalUtil.getClassNameId(JournalStructure.class.getName()),
+			template.getTemplateId(), StringPool.BLANK);
 
 		// Template
 

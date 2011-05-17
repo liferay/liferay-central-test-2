@@ -114,6 +114,11 @@
 			<finder-column name="classNameId" />
 			<finder-column name="structureId" />
 		</finder>
+		<finder name="G_C_T" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+			<finder-column name="templateId" />
+		</finder>
 		<finder name="G_C_L" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />

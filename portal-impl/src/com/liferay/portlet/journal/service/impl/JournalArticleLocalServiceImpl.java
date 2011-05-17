@@ -1495,6 +1495,21 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
+	public void updateTemplateId(
+			long groupId, long classNameId, String oldTemplateId,
+			String newTemplateId)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_C_T(
+				groupId, classNameId, oldTemplateId);
+
+		for (JournalArticle article : articles) {
+			article.setTemplateId(newTemplateId);
+
+			journalArticlePersistence.update(article, false);
+		}
+	}
+
 	public List<JournalArticle> search(
 			long companyId, long groupId, long classNameId, String keywords,
 			Double version, String type, String structureId, String templateId,
