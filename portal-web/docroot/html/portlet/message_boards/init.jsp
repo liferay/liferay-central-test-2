@@ -110,6 +110,7 @@ boolean subscribeByDefault = GetterUtil.getBoolean(preferences.getValue("subscri
 String messageFormat = GetterUtil.getString(preferences.getValue("messageFormat", MBMessageConstants.DEFAULT_FORMAT));
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enableFlags", null), true);
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null), true);
+boolean threadAsQuestionByDefault = GetterUtil.getBoolean(preferences.getValue("threadAsQuestionByDefault", null), false);
 
 String rssFormatType = RSSUtil.getFormatType(rssFormat);
 double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);

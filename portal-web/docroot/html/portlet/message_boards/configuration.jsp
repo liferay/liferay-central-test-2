@@ -102,6 +102,8 @@ else if (tabs2.equals("message-updated-email")) {
 				<aui:input name="preferences--enableFlags--" type="checkbox" value="<%= enableFlags %>" />
 
 				<aui:input name="preferences--enableRatings--" type="checkbox" value="<%= enableRatings %>" />
+
+				<aui:input name="preferences--threadAsQuestionByDefault--" type="checkbox" value="<%= threadAsQuestionByDefault %>" />
 			</aui:fieldset>
 		</c:when>
 		<c:when test='<%= tabs2.equals("email-from") %>'>

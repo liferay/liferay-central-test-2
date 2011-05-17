@@ -265,7 +265,7 @@ if (Validator.isNull(redirect)) {
 		<c:if test="<%= curParentMessage == null %>">
 
 			<%
-			boolean question = false;
+			boolean question = threadAsQuestionByDefault;
 
 			if (message != null) {
 				boolean questionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(messageId);
