@@ -66,9 +66,9 @@ public interface ${entity.name}Model extends
 	/**
 	 * Sets the primary key of this ${entity.humanName}
 	 *
-	 * @param pk the primary key of this ${entity.humanName}
+	 * @param primaryKey the primary key of this ${entity.humanName}
 	 */
-	public void setPrimaryKey(${entity.PKClassName} pk);
+	public void setPrimaryKey(${entity.PKClassName} primaryKey);
 
 	<#list entity.regularColList as column>
 		<#if column.name == "classNameId">
@@ -266,6 +266,8 @@ public interface ${entity.name}Model extends
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

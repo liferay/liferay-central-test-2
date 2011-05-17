@@ -47,6 +47,9 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 		return StringPool.BLANK;
 	}
 
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {		
+	}
+
 	public void resetOriginalValues() {
 	}
 

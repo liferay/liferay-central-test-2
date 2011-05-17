@@ -256,13 +256,13 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		</#if>
 	}
 
-	public void setPrimaryKey(${entity.PKClassName} pk) {
+	public void setPrimaryKey(${entity.PKClassName} primaryKey) {
 		<#if entity.hasCompoundPK()>
 			<#list entity.PKList as column>
-				set${column.methodName}(pk.${column.name});
+				set${column.methodName}(primaryKey.${column.name});
 			</#list>
 		<#else>
-			set${entity.PKList[0].methodName}(pk);
+			set${entity.PKList[0].methodName}(primaryKey);
 		</#if>
 	}
 
@@ -294,6 +294,24 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 			;
 		</#if>
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(
+
+		<#if entity.hasPrimitivePK()>
+			((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})
+		<#else>
+			(${entity.PKClassName})
+		</#if>
+
+		primaryKeyObj
+
+		<#if entity.hasPrimitivePK()>
+			)${serviceBuilder.getPrimitiveObjValue(serviceBuilder.getPrimitiveObj("${entity.PKClassName}"))}
+		</#if>
+
+		);
 	}
 
 	<#list entity.regularColList as column>
@@ -597,20 +615,20 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 			return 0;
 		<#else>
-			${entity.PKClassName} pk = ${entity.varName}.getPrimaryKey();
+			${entity.PKClassName} primaryKey = ${entity.varName}.getPrimaryKey();
 
 			<#if entity.hasPrimitivePK()>
-				if (getPrimaryKey() < pk) {
+				if (getPrimaryKey() < primaryKey) {
 					return -1;
 				}
-				else if (getPrimaryKey() > pk) {
+				else if (getPrimaryKey() > primaryKey) {
 					return 1;
 				}
 				else {
 					return 0;
 				}
 			<#else>
-				return getPrimaryKey().compareTo(pk);
+				return getPrimaryKey().compareTo(primaryKey);
 			</#if>
 		</#if>
 	}
@@ -629,12 +647,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			return false;
 		}
 
-		${entity.PKClassName} pk = ${entity.varName}.getPrimaryKey();
+		${entity.PKClassName} primaryKey = ${entity.varName}.getPrimaryKey();
 
 		<#if entity.hasPrimitivePK()>
-			if (getPrimaryKey() == pk) {
+			if (getPrimaryKey() == primaryKey) {
 		<#else>
-			if (getPrimaryKey().equals(pk)) {
+			if (getPrimaryKey().equals(primaryKey)) {
 		</#if>
 
 			return true;
