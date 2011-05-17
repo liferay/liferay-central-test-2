@@ -88,6 +88,10 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 			<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
 		</c:if>
 
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_TRIVIAL %>">
+			<liferay-ui:message key="that-password-is-too-trivial" />
+		</c:if>
+
 		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
 			<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
 		</c:if>
