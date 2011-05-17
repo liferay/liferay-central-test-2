@@ -67,7 +67,7 @@ public class ScopeFacet extends MultiValueFacet {
 		}
 
 		String groupIdParam = GetterUtil.getString(
-			searchContext.getAttribute("groupId"), "0");
+			searchContext.getAttribute("groupId"));
 
 		if (Validator.isNotNull(groupIdParam)) {
 			groupIds = new long[] {GetterUtil.getLong(groupIdParam)};
