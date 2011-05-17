@@ -36,8 +36,8 @@ import org.apache.struts.action.ActionMapping;
 public class JSONWebServiceServiceAction extends JSONServiceAction {
 
 	public JSONWebServiceServiceAction(ClassLoader classLoader) {
-		JSONWebServiceConfigurator
-			jsonWebServiceConfigurator = new JSONWebServiceConfigurator();
+		JSONWebServiceConfigurator jsonWebServiceConfigurator =
+			new JSONWebServiceConfigurator();
 
 		jsonWebServiceConfigurator.setJSONWebServiceActionsManager(
 			JSONWebServiceActionsManagerUtil.getJSONWebServiceActionsManager());

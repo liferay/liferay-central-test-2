@@ -30,10 +30,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface JSONWebService {
 
-	public String value() default StringPool.BLANK;
-
 	public String method() default StringPool.BLANK;
 
 	public JSONWebServiceMode mode() default JSONWebServiceMode.AUTO;
+
+	public String value() default StringPool.BLANK;
 
 }

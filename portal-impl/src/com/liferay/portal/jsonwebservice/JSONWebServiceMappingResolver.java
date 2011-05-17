@@ -28,8 +28,8 @@ import java.lang.reflect.Method;
 public class JSONWebServiceMappingResolver {
 
 	public String resolveHttpMethod(Method method) {
-		JSONWebService jsonWebServiceAnnotation =
-			method.getAnnotation(JSONWebService.class);
+		JSONWebService jsonWebServiceAnnotation = method.getAnnotation(
+			JSONWebService.class);
 
 		String httpMethod = null;
 
@@ -37,7 +37,7 @@ public class JSONWebServiceMappingResolver {
 			httpMethod = jsonWebServiceAnnotation.method().trim();
 		}
 
-		if (httpMethod != null && httpMethod.length() != 0) {
+		if ((httpMethod != null) && (httpMethod.length() != 0)) {
 			return httpMethod;
 		}
 
@@ -49,8 +49,8 @@ public class JSONWebServiceMappingResolver {
 	}
 
 	public String resolvePath(Class<?> clazz, Method method) {
-		JSONWebService jsonWebServiceAnnotation =
-			method.getAnnotation(JSONWebService.class);
+		JSONWebService jsonWebServiceAnnotation = method.getAnnotation(
+			JSONWebService.class);
 
 		String path = null;
 
@@ -68,8 +68,8 @@ public class JSONWebServiceMappingResolver {
 
 			String pathFromClass = null;
 
-			jsonWebServiceAnnotation =
-				clazz.getAnnotation(JSONWebService.class);
+			jsonWebServiceAnnotation = clazz.getAnnotation(
+				JSONWebService.class);
 
 			if (jsonWebServiceAnnotation != null) {
 				pathFromClass = jsonWebServiceAnnotation.value().trim();

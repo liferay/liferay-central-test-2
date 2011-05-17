@@ -30,7 +30,7 @@ public class JSONWebServiceActionsManagerUtil {
 	}
 
 	public static JSONWebServiceActionsManager
-			getJSONWebServiceActionsManager() {
+		getJSONWebServiceActionsManager() {
 
 		return _jsonWebServiceActionsManager;
 	}

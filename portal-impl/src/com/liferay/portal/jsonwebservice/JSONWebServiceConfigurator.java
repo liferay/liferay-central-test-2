@@ -64,8 +64,8 @@ public class JSONWebServiceConfigurator extends FindClass {
 			int pos = servicePropertiesPath.indexOf("_wl_cls_gen.jar!");
 
 			if (pos != -1) {
-				String wlClsGenJarPath =
-					servicePropertiesPath.substring(0, pos + 15);
+				String wlClsGenJarPath = servicePropertiesPath.substring(
+					0, pos + 15);
 
 				classPathFile = new File(wlClsGenJarPath);
 			}
@@ -156,8 +156,8 @@ public class JSONWebServiceConfigurator extends FindClass {
 			if (_checkBytecodeSignature) {
 				InputStream inputStream = entryData.openInputStream();
 
-				if (!isTypeSignatureInUse(inputStream,
-					_jsonWebServiceAnnotationBytes)) {
+				if (!isTypeSignatureInUse(
+						inputStream, _jsonWebServiceAnnotationBytes)) {
 
 					return;
 				}
@@ -214,8 +214,8 @@ public class JSONWebServiceConfigurator extends FindClass {
 			return;
 		}
 
-		JSONWebService
-			classAnnotation = actionClass.getAnnotation(JSONWebService.class);
+		JSONWebService classAnnotation = actionClass.getAnnotation(
+			JSONWebService.class);
 
 		JSONWebServiceMode classAnnotationMode = JSONWebServiceMode.MANUAL;
 
@@ -234,8 +234,8 @@ public class JSONWebServiceConfigurator extends FindClass {
 
 			boolean registerMethod = false;
 
-			JSONWebService
-				methodAnnotation = method.getAnnotation(JSONWebService.class);
+			JSONWebService methodAnnotation = method.getAnnotation(
+				JSONWebService.class);
 
 			if (classAnnotationMode.equals(JSONWebServiceMode.AUTO)) {
 				registerMethod = true;
@@ -245,7 +245,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 						methodAnnotation.mode();
 
 					if (methodAnnotationMode.equals(
-						JSONWebServiceMode.IGNORE)) {
+							JSONWebServiceMode.IGNORE)) {
 
 						registerMethod = false;
 					}
@@ -257,7 +257,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 						methodAnnotation.mode();
 
 					if (!methodAnnotationMode.equals(
-						JSONWebServiceMode.IGNORE)) {
+							JSONWebServiceMode.IGNORE)) {
 
 						registerMethod = false;
 					}
@@ -271,14 +271,14 @@ public class JSONWebServiceConfigurator extends FindClass {
 	}
 
 	private void _registerJSONWebServiceAction(
-		Class<?> implementationClass, Method method)
+			Class<?> implementationClass, Method method)
 		throws Exception {
 
 		String path = _jsonWebServiceMappingResolver.resolvePath(
 			implementationClass, method);
 
-		String httpMethod =
-			_jsonWebServiceMappingResolver.resolveHttpMethod(method);
+		String httpMethod = _jsonWebServiceMappingResolver.resolveHttpMethod(
+			method);
 
 		Class<?> utilClass = _loadUtilClass(implementationClass);
 
@@ -301,12 +301,12 @@ public class JSONWebServiceConfigurator extends FindClass {
 
 	private boolean _checkBytecodeSignature = true;
 	private ClassLoader _classLoader;
-	private int _registeredActionsCount;
 	private JSONWebServiceActionsManager _jsonWebServiceActionsManager;
 	private byte[] _jsonWebServiceAnnotationBytes =
 		getTypeSignatureBytes(JSONWebService.class);
 	private JSONWebServiceMappingResolver _jsonWebServiceMappingResolver =
 		new JSONWebServiceMappingResolver();
+	private int _registeredActionsCount;
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
 

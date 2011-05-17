@@ -34,8 +34,9 @@ public class JSONWebServiceActionConfig
 		_path = path;
 		_method = method;
 
-		_parameterNames = MethodParameterNamesResolverUtil.
-			resolveParameterNames(actionMethod);
+		_parameterNames =
+			MethodParameterNamesResolverUtil.resolveParameterNames(
+				actionMethod);
 		_parameterTypes = actionMethod.getParameterTypes();
 
 		StringBundler sb = new StringBundler(_parameterNames.length * 2 + 4);

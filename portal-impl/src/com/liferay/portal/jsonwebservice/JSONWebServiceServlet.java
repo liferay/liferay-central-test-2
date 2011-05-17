@@ -67,8 +67,8 @@ public class JSONWebServiceServlet extends JSONServlet {
 	protected void dumpMappings(HttpServletResponse response)
 		throws IOException {
 
-		List<String[]> mappings = JSONWebServiceActionsManagerUtil
-			.dumpMappings();
+		List<String[]> mappings =
+			JSONWebServiceActionsManagerUtil.dumpMappings();
 
 		StringBundler sb = new StringBundler(mappings.size() * 6 + 2);
 

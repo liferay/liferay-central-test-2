@@ -148,6 +148,11 @@
 			<bean class="com.liferay.portal.json.JSONFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil" class="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil">
+		<property name="JSONWebServiceActionsManager">
+			<bean class="com.liferay.portal.jsonwebservice.JSONWebServiceActionsManagerImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil">
 		<property name="language">
 			<bean class="com.liferay.portal.language.LanguageImpl" />
@@ -171,11 +176,6 @@
 	<bean id="com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil" class="com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil">
 		<property name="cometHandlerPool">
 			<bean class="com.liferay.portal.kernel.poller.comet.CometHandlerPool" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.rest.RESTActionsManagerUtil" class="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil">
-		<property name="JSONWebServiceActionsManager">
-			<bean class="com.liferay.portal.jsonwebservice.JSONWebServiceActionsManagerImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.sanitizer.SanitizerUtil" class="com.liferay.portal.kernel.sanitizer.SanitizerUtil">
