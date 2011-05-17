@@ -209,7 +209,7 @@ String[][] categorySections = {mainSections};
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'update';
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value += Liferay.Util.getHistoryParam('<portlet:namespace />');;
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value += Liferay.Util.getHistoryParam('<portlet:namespace />');
 
 		submitForm(document.<portlet:namespace />fm);
 	}
