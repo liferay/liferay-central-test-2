@@ -38,12 +38,13 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 	<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 </portlet:actionURL>
 
-<aui:form action="<%= editRecordURL %>" cssClass="ddl-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRecord();" %>'>
+<aui:form action="<%= editRecordURL %>" cssClass="ddl-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="recordSetId" type="hidden" value="<%= recordSetId %>" />
 	<aui:input name="recordId" type="hidden" value="<%= recordId %>" />
+	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
 
 	<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
 
@@ -69,8 +70,39 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
 		<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields) %>
 
+		<%
+		boolean pending = false;
+
+		if (record != null) {
+			pending = record.isPending();
+		}
+		%>
+
+		<c:if test="<%= pending %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="there-is-a-publication-workflow-in-process" />
+			</div>
+		</c:if>
+
 		<aui:button-row>
-			<aui:button name="saveButton" type="submit" value="save" />
+
+			<%
+			String saveButtonLabel = "save";
+
+			if ((record == null) || record.isDraft() || record.isApproved()) {
+				saveButtonLabel = "save-as-draft";
+			}
+
+			String publishButtonLabel = "publish";
+
+			if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, DDLRecord.class.getName())) {
+				publishButtonLabel = "submit-for-publication";
+			}
+			%>
+
+			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveRecord(true);" %>' type="submit" value="<%= saveButtonLabel %>" />
+
+			<aui:button disabled="<%= pending %>" name="publishButton" onClick='<%= renderResponse.getNamespace() + "saveRecord(false);" %>' type="submit" value="<%= publishButtonLabel %>" />
 
 			<aui:button href="<%= redirect %>" name="cancelButton" type="cancel" />
 		</aui:button-row>
@@ -78,8 +110,15 @@ long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />saveRecord() {
+	function <portlet:namespace />saveRecord(draft) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (record == null) ? Constants.ADD : Constants.UPDATE %>";
+
+		if (draft) {
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
+		}
+		else {
+			document.<portlet:namespace />fm.<portlet:namespace />workflowAction.value = <%= WorkflowConstants.ACTION_PUBLISH %>;
+		}
 
 		submitForm(document.<portlet:namespace />fm);
 	}

@@ -50,11 +50,17 @@ if (editable) {
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, portletURL, headerNames, "no-records-were-found");
 
-int total = DDLRecordLocalServiceUtil.getRecordsCount(recordSet.getRecordSetId());
+int status = WorkflowConstants.STATUS_APPROVED;
+
+if (DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.ADD_RECORD)) {
+	status = WorkflowConstants.STATUS_ANY;
+}
+
+int total = DDLRecordLocalServiceUtil.getRecordsCount(recordSet.getRecordSetId(), status);
 
 searchContainer.setTotal(total);
 
-List<DDLRecord> results = DDLRecordLocalServiceUtil.getRecords(recordSet.getRecordSetId(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+List<DDLRecord> results = DDLRecordLocalServiceUtil.getRecords(recordSet.getRecordSetId(), status, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
 searchContainer.setResults(results);
 

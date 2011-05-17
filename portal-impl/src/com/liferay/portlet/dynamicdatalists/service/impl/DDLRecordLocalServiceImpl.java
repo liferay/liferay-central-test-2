@@ -17,6 +17,8 @@ package com.liferay.portlet.dynamicdatalists.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
@@ -78,8 +80,16 @@ public class DDLRecordLocalServiceImpl
 
 		record.setRecordSetId(recordSetId);
 		record.setDisplayIndex(displayIndex);
+		record.setStatus(WorkflowConstants.STATUS_DRAFT);
+		record.setStatusDate(serviceContext.getModifiedDate(now));
 
 		ddlRecordPersistence.update(record, false);
+
+		// Workflow
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), groupId, userId, DDLRecord.class.getName(),
+			record.getRecordId(), record, serviceContext);
 
 		return record;
 	}
@@ -106,6 +116,12 @@ public class DDLRecordLocalServiceImpl
 		// Dynamic data mapping storage
 
 		StorageEngineUtil.deleteByClass(record.getClassPK());
+
+		// Workflow
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			record.getCompanyId(), record.getGroupId(),
+			DDLRecord.class.getName(), record.getRecordId());
 	}
 
 	public void deleteRecord(long recordId)
@@ -141,29 +157,48 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	public List<DDLRecord> getRecords(
-			long recordSetId, int start, int end,
+			long recordSetId, int status, int start, int end,
 			OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return ddlRecordPersistence.findByRecordSetId(
-			recordSetId, start, end, orderByComparator);
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return ddlRecordPersistence.findByRecordSetId(
+				recordSetId, start, end, orderByComparator);
+		}
+		else {
+			return ddlRecordPersistence.findByR_S(
+				recordSetId, status, start, end, orderByComparator);
+		}
 	}
 
-	public int getRecordsCount(long recordSetId) throws SystemException {
-		return ddlRecordPersistence.countByRecordSetId(recordSetId);
+	public int getRecordsCount(long recordSetId, int status)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return ddlRecordPersistence.countByRecordSetId(recordSetId);
+		}
+		else {
+			return ddlRecordPersistence.countByR_S(recordSetId, status);
+		}
 	}
 
 	public DDLRecord updateRecord(
-			long recordId, Fields fields, int displayIndex, boolean mergeFields,
-			ServiceContext serviceContext)
+			long userId, long recordId, Fields fields, int displayIndex,
+			boolean mergeFields, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record
+
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
 
 		record.setModifiedDate(serviceContext.getModifiedDate(null));
 		record.setDisplayIndex(displayIndex);
+
+		if (!record.isPending()) {
+			record.setStatus(WorkflowConstants.STATUS_DRAFT);
+		}
 
 		ddlRecordPersistence.update(record, false);
 
@@ -172,19 +207,46 @@ public class DDLRecordLocalServiceImpl
 		StorageEngineUtil.update(
 			record.getClassPK(), fields, mergeFields, serviceContext);
 
+		// Workflow
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			user.getCompanyId(), record.getGroupId(), userId,
+			DDLRecord.class.getName(), record.getRecordId(), record,
+			serviceContext);
+
 		return record;
 	}
 
 	public DDLRecord updateRecord(
-			long recordId, Map<String, Serializable> fieldsMap,
-			int displayIndex, boolean mergeFields, 
+			long userId, long recordId, Map<String, Serializable> fieldsMap,
+			int displayIndex, boolean mergeFields,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Fields fields = toFields(fieldsMap);
 
 		return updateRecord(
-			recordId, fields, displayIndex, mergeFields, serviceContext);
+			userId, recordId, fields, displayIndex, mergeFields,
+			serviceContext);
+	}
+
+	public DDLRecord updateStatus(
+			long userId, long recordId, int status,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		Date now = new Date();
+
+		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
+
+		record.setModifiedDate(serviceContext.getModifiedDate(now));
+		record.setStatus(status);
+		record.setStatusByUserId(user.getUserId());
+		record.setStatusByUserName(user.getFullName());
+		record.setStatusDate(serviceContext.getModifiedDate(now));
+
+		return ddlRecordPersistence.update(record, false);
 	}
 
 	protected Fields toFields(Map<String, Serializable> fieldsMap) {

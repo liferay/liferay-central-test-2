@@ -27,12 +27,24 @@
 		<column name="classPK" type="long" />
 		<column name="recordSetId" type="long" />
 		<column name="displayIndex" type="int" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
 
 		<!-- Finder methods -->
 
 		<finder name="RecordSetId" return-type="Collection">
 			<finder-column name="recordSetId" />
 		</finder>
+		<finder name="R_S" return-type="Collection">
+			<finder-column name="recordSetId" />
+			<finder-column name="status" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 	</entity>
 	<entity name="DDLRecordSet" uuid="true" local-service="true" remote-service="true">
 

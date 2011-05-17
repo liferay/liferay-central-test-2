@@ -56,7 +56,8 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getPermissionChecker(), record.getRecordSetId(), ActionKeys.UPDATE);
 
 		return ddlRecordLocalService.updateRecord(
-			recordId, fieldsMap, displayIndex, merge, serviceContext);
+			getUserId(), recordId, fieldsMap, displayIndex, merge,
+			serviceContext);
 	}
 
 }
