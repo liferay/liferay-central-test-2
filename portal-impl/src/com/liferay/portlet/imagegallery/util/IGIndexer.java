@@ -15,6 +15,9 @@
 package com.liferay.portlet.imagegallery.util;
 
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -22,7 +25,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -63,15 +65,35 @@ public class IGIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected void checkSearchFolderId(
-			long folderId, SearchContext searchContext)
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		if (folderId == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			return;
-		}
+		long[] folderIds = searchContext.getFolderIds();
 
-		IGFolderServiceUtil.getFolder(folderId);
+		if (folderIds != null && folderIds.length > 0) {
+			if ((folderIds.length  == 1) &&
+				(folderIds[0] ==
+					IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
+
+				return;
+			}
+
+			BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
+
+			for (long folderId : folderIds) {
+				try {
+					IGFolderServiceUtil.getFolder(folderId);
+				}
+				catch (Exception e) {
+					continue;
+				}
+
+				folderIdsQuery.addTerm(Field.FOLDER_ID, folderId);
+			}
+
+			contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	protected void doDelete(Object obj) throws Exception {
@@ -174,23 +196,6 @@ public class IGIndexer extends BaseIndexer {
 
 		reindexFolders(companyId);
 		reindexRoot(companyId);
-	}
-
-	protected FacetValueValidator getAddSearchFolderIdsFacetValueValidator() {
-		return new FacetValueValidator() {
-
-			public boolean check(SearchContext searchContext, String primKey) {
-				try {
-					IGFolderServiceUtil.getFolder(GetterUtil.getLong(primKey));
-				}
-				catch (Exception e) {
-					return false;
-				}
-
-				return true;
-			}
-
-		};
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

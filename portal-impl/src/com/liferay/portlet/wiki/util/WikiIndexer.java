@@ -16,6 +16,7 @@ package com.liferay.portlet.wiki.util;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -26,7 +27,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -66,28 +66,28 @@ public class WikiIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected FacetValueValidator getAddSearchNodeIdsFacetValueValidator() {
-		return new FacetValueValidator() {
-
-			public boolean check(SearchContext searchContext, String primKey) {
-				try {
-					WikiNodeServiceUtil.getNode(GetterUtil.getLong(primKey));
-				}
-				catch (Exception e) {
-					return false;
-				}
-
-				return true;
-			}
-
-		};
-	}
-
-	protected void checkSearchNodeId(
-			long nodeId, SearchContext searchContext)
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		WikiNodeServiceUtil.getNode(nodeId);
+		long[] nodeIds = searchContext.getNodeIds();
+
+		if (nodeIds != null && nodeIds.length > 0) {
+			BooleanQuery nodeIdsQuery = BooleanQueryFactoryUtil.create();
+
+			for (long nodeId : nodeIds) {
+				try {
+					WikiNodeServiceUtil.getNode(nodeId);
+				}
+				catch (Exception e) {
+					continue;
+				}
+
+				nodeIdsQuery.addTerm(Field.NODE_ID, nodeId);
+			}
+
+			contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	protected void doDelete(Object obj) throws Exception {

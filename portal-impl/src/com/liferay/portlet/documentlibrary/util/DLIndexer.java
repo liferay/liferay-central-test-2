@@ -18,7 +18,9 @@ import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
@@ -26,7 +28,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -39,6 +40,7 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
@@ -83,6 +85,37 @@ public class DLIndexer extends BaseIndexer {
 
 	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
+	}
+
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		long[] folderIds = searchContext.getFolderIds();
+
+		if (folderIds != null && folderIds.length > 0) {
+			if ((folderIds.length  == 1) &&
+				(folderIds[0] ==
+					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
+
+				return;
+			}
+
+			BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
+
+			for (long folderId : folderIds) {
+				try {
+					DLFolderServiceUtil.getFolder(folderId);
+				}
+				catch (Exception e) {
+					continue;
+				}
+
+				folderIdsQuery.addTerm(Field.FOLDER_ID, folderId);
+			}
+
+			contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
+		}
 	}
 
 	public void postProcessSearchQuery(
@@ -216,25 +249,6 @@ public class DLIndexer extends BaseIndexer {
 
 		reindexFolders(companyId);
 		reindexRoot(companyId);
-	}
-
-	protected FacetValueValidator getAddSearchFolderIdsFacetValueValidator() {
-		return new FacetValueValidator() {
-
-			public boolean check(
-				SearchContext searchContext, String primKey) {
-
-				try {
-					DLFolderServiceUtil.getFolder(GetterUtil.getLong(primKey));
-				}
-				catch (Exception e) {
-					return false;
-				}
-
-				return true;
-			}
-
-		};
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

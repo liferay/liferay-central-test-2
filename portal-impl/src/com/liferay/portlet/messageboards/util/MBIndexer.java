@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
@@ -28,7 +29,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
-import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -97,7 +97,33 @@ public class MBIndexer extends BaseIndexer {
 			(String)searchContext.getAttribute("threadId"));
 
 		if (threadId > 0) {
-			contextQuery.addTerm("threadId", threadId);
+			contextQuery.addRequiredTerm("threadId", threadId);
+		}
+
+		long[] categoryIds = searchContext.getCategoryIds();
+
+		if (categoryIds != null && categoryIds.length > 0) {
+			if ((categoryIds.length  == 1) &&
+				(categoryIds[0] ==
+					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
+
+				return;
+			}
+
+			BooleanQuery categoriesQuery = BooleanQueryFactoryUtil.create();
+
+			for (long categoryId : categoryIds) {
+				try {
+					MBCategoryServiceUtil.getCategory(categoryId);
+				}
+				catch (Exception e) {
+					continue;
+				}
+
+				categoriesQuery.addTerm(Field.CATEGORY_ID, categoryId);
+			}
+
+			contextQuery.add(categoriesQuery, BooleanClauseOccur.MUST);
 		}
 	}
 
@@ -271,24 +297,6 @@ public class MBIndexer extends BaseIndexer {
 
 		reindexCategories(companyId);
 		reindexRoot(companyId);
-	}
-
-	protected FacetValueValidator getAddSearchCategoryIdsFacetValueValidator() {
-		return new FacetValueValidator() {
-
-			public boolean check(SearchContext searchContext, String primKey) {
-				try {
-					MBCategoryServiceUtil.getCategory(
-						GetterUtil.getLong(primKey));
-				}
-				catch (Exception e) {
-					return false;
-				}
-
-				return true;
-			}
-
-		};
 	}
 
 	protected String getPortletId(SearchContext searchContext) {

@@ -137,39 +137,6 @@ public class FacetedSearcher extends BaseIndexer {
 		}
 	}
 
-	protected void addSearchNodeIds(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		long[] nodeIds = searchContext.getNodeIds();
-
-		if ((nodeIds == null) || (nodeIds.length == 0)) {
-			return;
-		}
-
-		BooleanQuery nodeIdsQuery = BooleanQueryFactoryUtil.create();
-
-		for (long nodeId : nodeIds) {
-			if (searchContext.getUserId() > 0) {
-				try {
-					checkSearchNodeId(nodeId, searchContext);
-				}
-				catch (Exception e) {
-					continue;
-				}
-			}
-
-			TermQuery termQuery = TermQueryFactoryUtil.create(
-				Field.NODE_ID, nodeId);
-
-			nodeIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
-		}
-
-		if (!nodeIdsQuery.clauses().isEmpty()) {
-			contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
-		}
-	}
-
 	protected BooleanQuery createFullQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -304,11 +271,6 @@ public class FacetedSearcher extends BaseIndexer {
 		}
 
 		return super.isFilterSearch();
-	}
-
-	protected void postProcessFullQuery(
-			BooleanQuery fullQuery, SearchContext searchContext)
-		throws Exception {
 	}
 
 }

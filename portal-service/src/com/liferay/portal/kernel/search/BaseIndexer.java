@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.search.facet.AssetEntriesFacet;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.ScopeFacet;
-import com.liferay.portal.kernel.search.facet.util.FacetValueValidator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -126,10 +125,6 @@ public abstract class BaseIndexer implements Indexer {
 					searchContext.getCompanyId(), searchContext.getGroupIds(),
 					searchContext.getUserId(), className, facetQuery);
 		}
-
-		addSearchCategoryIds(facetQuery, searchContext);
-		addSearchFolderIds(facetQuery, searchContext);
-		addSearchNodeIds(facetQuery, searchContext);
 
 		return facetQuery;
 	}
@@ -270,23 +265,11 @@ public abstract class BaseIndexer implements Indexer {
 			searchContext.setEntryClassNames(
 				new String[] {getClassName(searchContext)});
 
-			AssetEntriesFacet assetEntriesFacet = new AssetEntriesFacet(
-				searchContext);
-
-			assetEntriesFacet.setStatic(true);
-
-			searchContext.addFacet(assetEntriesFacet);
-
-			ScopeFacet scopeFacet = new ScopeFacet(searchContext);
-
-			scopeFacet.setStatic(true);
-
-			searchContext.addFacet(scopeFacet);
-
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
 			addSearchAssetCategoryIds(contextQuery, searchContext);
 			addSearchAssetTagNames(contextQuery, searchContext);
+			addSearchEntryClassNames(contextQuery, searchContext);
 			addSearchGroupId(contextQuery, searchContext);
 
 			BooleanQuery fullQuery = createFullQuery(
@@ -372,24 +355,16 @@ public abstract class BaseIndexer implements Indexer {
 		searchContext.addFacet(multiValueFacet);
 	}
 
-	protected void addSearchCategoryIds(
+	protected void addSearchEntryClassNames(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		FacetValueValidator facetValueValidator =
-			getAddSearchCategoryIdsFacetValueValidator();
+		AssetEntriesFacet assetEntriesFacet = new AssetEntriesFacet(
+			searchContext);
 
-		if (facetValueValidator == null) {
-			return;
-		}
+		assetEntriesFacet.setStatic(true);
 
-		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
-
-		multiValueFacet.setFacetValueValidator(facetValueValidator);
-		multiValueFacet.setFieldName(Field.CATEGORY_ID);
-		multiValueFacet.setStatic(true);
-
-		searchContext.addFacet(multiValueFacet);
+		searchContext.addFacet(assetEntriesFacet);
 	}
 
 	protected void addSearchExpando(
@@ -427,31 +402,13 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
-	protected void addSearchFolderIds(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		FacetValueValidator facetValueValidator =
-			getAddSearchFolderIdsFacetValueValidator();
-
-		if (facetValueValidator == null) {
-			return;
-		}
-
-		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
-
-		multiValueFacet.setFacetValueValidator(facetValueValidator);
-		multiValueFacet.setFieldName(Field.FOLDER_ID);
-		multiValueFacet.setStatic(true);
-
-		searchContext.addFacet(multiValueFacet);
-	}
-
 	protected void addSearchGroupId(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
 		ScopeFacet scopeFacet = new ScopeFacet(searchContext);
+
+		scopeFacet.setStatic(true);
 
 		searchContext.addFacet(scopeFacet);
 	}
@@ -471,26 +428,6 @@ public abstract class BaseIndexer implements Indexer {
 		searchQuery.addTerms(Field.KEYWORDS, keywords, true);
 
 		addSearchExpando(searchQuery, searchContext, keywords);
-	}
-
-	protected void addSearchNodeIds(
-			BooleanQuery contextQuery, SearchContext searchContext)
-		throws Exception {
-
-		FacetValueValidator facetValueValidator =
-			getAddSearchNodeIdsFacetValueValidator();
-
-		if (facetValueValidator == null) {
-			return;
-		}
-
-		MultiValueFacet multiValueFacet = new MultiValueFacet(searchContext);
-
-		multiValueFacet.setFacetValueValidator(facetValueValidator);
-		multiValueFacet.setFieldName(Field.NODE_ID);
-		multiValueFacet.setStatic(true);
-
-		searchContext.addFacet(multiValueFacet);
 	}
 
 	protected void addSearchTerm(
@@ -540,16 +477,6 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		document.addKeyword(Field.STAGING_GROUP, stagingGroup);
-	}
-
-	protected void checkSearchFolderId(
-			long folderId, SearchContext searchContext)
-		throws Exception {
-	}
-
-	protected void checkSearchNodeId(
-			long nodeId, SearchContext searchContext)
-		throws Exception {
 	}
 
 	protected BooleanQuery createFullQuery(
@@ -698,18 +625,6 @@ public abstract class BaseIndexer implements Indexer {
 				Time.SECOND);
 
 		return hits;
-	}
-
-	protected FacetValueValidator getAddSearchCategoryIdsFacetValueValidator() {
-		return null;
-	}
-
-	protected FacetValueValidator getAddSearchFolderIdsFacetValueValidator() {
-		return null;
-	}
-
-	protected FacetValueValidator getAddSearchNodeIdsFacetValueValidator() {
-		return null;
 	}
 
 	protected String getClassName(SearchContext searchContext) {
