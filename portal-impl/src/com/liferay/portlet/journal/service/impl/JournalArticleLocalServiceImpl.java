@@ -1498,7 +1498,7 @@ public class JournalArticleLocalServiceImpl
 	public void updateTemplateId(
 			long groupId, long classNameId, String oldTemplateId,
 			String newTemplateId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<JournalArticle> articles = journalArticlePersistence.findByG_C_T(
 			groupId, classNameId, oldTemplateId);
