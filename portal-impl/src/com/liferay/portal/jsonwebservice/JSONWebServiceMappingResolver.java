@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 /**
  * @author Igor Spasic
  */
-public class RESTMappingResolver {
+public class JSONWebServiceMappingResolver {
 
 	public String resolveHttpMethod(Method method) {
 		JSONWebService restAnnotation = method.getAnnotation(JSONWebService.class);

@@ -33,10 +33,11 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Igor Spasic
  */
-public class RESTServiceAction extends JSONServiceAction {
+public class JSONWebServiceServiceAction extends JSONServiceAction {
 
-	public RESTServiceAction(ClassLoader classLoader) {
-		RESTConfigurator restConfigurator = new RESTConfigurator();
+	public JSONWebServiceServiceAction(ClassLoader classLoader) {
+		JSONWebServiceConfigurator
+			restConfigurator = new JSONWebServiceConfigurator();
 
 		restConfigurator.setRESTActionsManager(
 			JSONWebServiceActionsManagerUtil.getRESTActionsManager());
@@ -91,6 +92,6 @@ public class RESTServiceAction extends JSONServiceAction {
 
 	private static final String _REROUTE_PATH = "/rest";
 
-	private static Log _log = LogFactoryUtil.getLog(RESTServiceAction.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONWebServiceServiceAction.class);
 
 }

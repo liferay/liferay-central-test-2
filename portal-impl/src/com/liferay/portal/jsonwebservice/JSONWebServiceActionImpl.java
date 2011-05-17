@@ -26,11 +26,11 @@ import jodd.util.ReflectUtil;
 /**
  * @author Igor Spasic
  */
-public class RESTActionImpl implements JSONWebServiceAction {
+public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 
-	public RESTActionImpl(
-		RESTActionConfig restActionConfig,
-		RESTActionParameters restActionParameters) {
+	public JSONWebServiceActionImpl(
+		JSONWebServiceActionConfig restActionConfig,
+		JSONWebServiceActionParameters restActionParameters) {
 
 		_restActionConfig = restActionConfig;
 		_restActionParameters = restActionParameters;
@@ -99,7 +99,7 @@ public class RESTActionImpl implements JSONWebServiceAction {
 		return parameters;
 	}
 
-	private RESTActionConfig _restActionConfig;
-	private RESTActionParameters _restActionParameters;
+	private JSONWebServiceActionConfig _restActionConfig;
+	private JSONWebServiceActionParameters _restActionParameters;
 
 }

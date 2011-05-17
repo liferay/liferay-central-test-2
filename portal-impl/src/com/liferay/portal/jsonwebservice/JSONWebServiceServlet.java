@@ -41,7 +41,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Igor Spasic
  */
-public class RESTServlet extends JSONServlet {
+public class JSONWebServiceServlet extends JSONServlet {
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
@@ -118,7 +118,7 @@ public class RESTServlet extends JSONServlet {
 			(ClassLoader)servletContext.getAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER);
 
-		JSONAction jsonAction = new RESTServiceAction(portletClassLoader);
+		JSONAction jsonAction = new JSONWebServiceServiceAction(portletClassLoader);
 
 		jsonAction.setServletContext(servletContext);
 

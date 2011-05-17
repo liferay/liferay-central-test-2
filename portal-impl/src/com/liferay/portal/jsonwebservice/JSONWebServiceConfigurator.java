@@ -44,9 +44,9 @@ import org.apache.commons.lang.time.StopWatch;
 /**
  * @author Igor Spasic
  */
-public class RESTConfigurator extends FindClass {
+public class JSONWebServiceConfigurator extends FindClass {
 
-	public RESTConfigurator() {
+	public JSONWebServiceConfigurator() {
 		setIncludedJars("*portal-impl.jar", "*_wl_cls_gen.jar");
 	}
 
@@ -285,15 +285,15 @@ public class RESTConfigurator extends FindClass {
 		_registeredActionsCount++;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RESTConfigurator.class);
+	private static Log _log = LogFactoryUtil.getLog(JSONWebServiceConfigurator.class);
 
 	private boolean _checkBytecodeSignature = true;
 	private ClassLoader _classLoader;
 	private int _registeredActionsCount;
 	private JSONWebServiceActionsManager _restActionsManager;
 	private byte[] _restAnnotationBytes = getTypeSignatureBytes(JSONWebService.class);
-	private RESTMappingResolver _restMappingResolver =
-		new RESTMappingResolver();
+	private JSONWebServiceMappingResolver _restMappingResolver =
+		new JSONWebServiceMappingResolver();
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
 

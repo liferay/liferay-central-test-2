@@ -34,17 +34,17 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
+public class JSONWebServiceActionsManagerImpl implements JSONWebServiceActionsManager {
 
-	public RESTActionsManagerImpl() {
-		_restActionConfig = new SortedArrayList<RESTActionConfig>();
+	public JSONWebServiceActionsManagerImpl() {
+		_restActionConfig = new SortedArrayList<JSONWebServiceActionConfig>();
 		_pathBinarySearch = new PathBinarySearch();
 	}
 
 	public List<String[]> dumpMappings() {
 		List<String[]> mappings = new ArrayList<String[]>();
 
-		for (RESTActionConfig restActionConfig : _restActionConfig) {
+		for (JSONWebServiceActionConfig restActionConfig : _restActionConfig) {
 			String[] parameterNames = restActionConfig.getParameterNames();
 
 			Class<?> actionClass = restActionConfig.getActionClass();
@@ -108,7 +108,8 @@ public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
 			}
 		}
 
-		RESTActionParameters restActionParameters = new RESTActionParameters();
+		JSONWebServiceActionParameters
+			restActionParameters = new JSONWebServiceActionParameters();
 
 		restActionParameters.collectAll(
 			request, pathParameters, jsonRpcRequest);
@@ -124,17 +125,17 @@ public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
 					" and method " + method);
 		}
 
-		RESTActionConfig restActionConfig = _restActionConfig.get(
+		JSONWebServiceActionConfig restActionConfig = _restActionConfig.get(
 			restActionConfigIndex);
 
-		return new RESTActionImpl(restActionConfig, restActionParameters);
+		return new JSONWebServiceActionImpl(restActionConfig, restActionParameters);
 	}
 
 	public void registerRESTAction(
 		Class<?> actionClass, Method actionMethod, String path, String method) {
 
-		RESTActionConfig restActionConfig =
-			new RESTActionConfig(actionClass, actionMethod, path, method);
+		JSONWebServiceActionConfig restActionConfig =
+			new JSONWebServiceActionConfig(actionClass, actionMethod, path, method);
 
 		_restActionConfig.add(restActionConfig);
 	}
@@ -187,7 +188,7 @@ public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
 		int max = -1;
 
 		for (int i = firstIndex; i <= lastIndex; i++) {
-			RESTActionConfig restActionConfig = _restActionConfig.get(i);
+			JSONWebServiceActionConfig restActionConfig = _restActionConfig.get(i);
 
 			String restActionConfigMethod = restActionConfig.getMethod();
 
@@ -218,7 +219,7 @@ public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
 	private class PathBinarySearch extends BinarySearch<String> {
 
 		protected int compare(int index, String element) {
-			RESTActionConfig restActionConfig = _restActionConfig.get(index);
+			JSONWebServiceActionConfig restActionConfig = _restActionConfig.get(index);
 
 			String path = restActionConfig.getPath();
 
@@ -231,6 +232,6 @@ public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
 
 	}
 	private BinarySearch<String> _pathBinarySearch;
-	private SortedArrayList<RESTActionConfig> _restActionConfig;
+	private SortedArrayList<JSONWebServiceActionConfig> _restActionConfig;
 
 }
