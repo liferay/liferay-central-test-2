@@ -45,7 +45,12 @@ boolean spreadsheet = ParamUtil.getBoolean(request, "spreadsheet");
 </portlet:actionURL>
 
 <aui:form action="<%= editRecordSetURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveRecordSet();" %>'>
-	<c:if test="<%= !spreadsheet && editable %>">
+
+	<%
+	boolean showAddRecordButton = DDLRecordSetPermission.contains(permissionChecker, recordSetId, ActionKeys.ADD_RECORD);
+	%>
+
+	<c:if test="<%= showAddRecordButton && !spreadsheet && editable %>">
 		<aui:button onClick='<%= renderResponse.getNamespace() + "addRecord();" %>' value="add-record" />
 
 		<div class="separator"><!-- --></div>

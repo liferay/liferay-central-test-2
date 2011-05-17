@@ -25,6 +25,8 @@ if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
 	editable = true;
 }
 
+editable = editable && DDLRecordSetPermission.contains(permissionChecker, recordSet.getRecordSetId(), ActionKeys.UPDATE);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/dynamic_data_lists/view_record_set");
