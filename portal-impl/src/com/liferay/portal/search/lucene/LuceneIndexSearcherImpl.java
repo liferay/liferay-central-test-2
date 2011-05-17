@@ -399,6 +399,15 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					_log.error(ioe, ioe);
 				}
 			}
+
+			if (indexSearcher != null) {
+				try {
+					indexSearcher.close();
+				}
+				catch (IOException ioe) {
+					_log.error(ioe, ioe);
+				}
+			}
 		}
 
 		if (_log.isDebugEnabled()) {
