@@ -252,6 +252,111 @@ public interface DDLRecordModel extends BaseModel<DDLRecord>, GroupedModel {
 	 */
 	public void setDisplayIndex(int displayIndex);
 
+	/**
+	 * Gets the status of this d d l record.
+	 *
+	 * @return the status of this d d l record
+	 */
+	public int getStatus();
+
+	/**
+	 * Sets the status of this d d l record.
+	 *
+	 * @param status the status of this d d l record
+	 */
+	public void setStatus(int status);
+
+	/**
+	 * Gets the status by user ID of this d d l record.
+	 *
+	 * @return the status by user ID of this d d l record
+	 */
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this d d l record.
+	 *
+	 * @param statusByUserId the status by user ID of this d d l record
+	 */
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Gets the status by user uuid of this d d l record.
+	 *
+	 * @return the status by user uuid of this d d l record
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this d d l record.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this d d l record
+	 */
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Gets the status by user name of this d d l record.
+	 *
+	 * @return the status by user name of this d d l record
+	 */
+	@AutoEscape
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this d d l record.
+	 *
+	 * @param statusByUserName the status by user name of this d d l record
+	 */
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Gets the status date of this d d l record.
+	 *
+	 * @return the status date of this d d l record
+	 */
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this d d l record.
+	 *
+	 * @param statusDate the status date of this d d l record
+	 */
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * @deprecated {@link #isApproved}
+	 */
+	public boolean getApproved();
+
+	/**
+	 * Determines if this d d l record is approved.
+	 *
+	 * @return <code>true</code> if this d d l record is approved; <code>false</code> otherwise
+	 */
+	public boolean isApproved();
+
+	/**
+	 * Determines if this d d l record is a draft.
+	 *
+	 * @return <code>true</code> if this d d l record is a draft; <code>false</code> otherwise
+	 */
+	public boolean isDraft();
+
+	/**
+	 * Determines if this d d l record is expired.
+	 *
+	 * @return <code>true</code> if this d d l record is expired; <code>false</code> otherwise
+	 */
+	public boolean isExpired();
+
+	/**
+	 * Determines if this d d l record is pending.
+	 *
+	 * @return <code>true</code> if this d d l record is pending; <code>false</code> otherwise
+	 */
+	public boolean isPending();
+
 	public boolean isNew();
 
 	public void setNew(boolean n);

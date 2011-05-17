@@ -80,6 +80,10 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		newDDLRecord.setClassPK(nextLong());
 		newDDLRecord.setRecordSetId(nextLong());
 		newDDLRecord.setDisplayIndex(nextInt());
+		newDDLRecord.setStatus(nextInt());
+		newDDLRecord.setStatusByUserId(nextLong());
+		newDDLRecord.setStatusByUserName(randomString());
+		newDDLRecord.setStatusDate(nextDate());
 
 		_persistence.update(newDDLRecord, false);
 
@@ -103,6 +107,13 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 			newDDLRecord.getRecordSetId());
 		assertEquals(existingDDLRecord.getDisplayIndex(),
 			newDDLRecord.getDisplayIndex());
+		assertEquals(existingDDLRecord.getStatus(), newDDLRecord.getStatus());
+		assertEquals(existingDDLRecord.getStatusByUserId(),
+			newDDLRecord.getStatusByUserId());
+		assertEquals(existingDDLRecord.getStatusByUserName(),
+			newDDLRecord.getStatusByUserName());
+		assertEquals(Time.getShortTimestamp(existingDDLRecord.getStatusDate()),
+			Time.getShortTimestamp(newDDLRecord.getStatusDate()));
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -241,6 +252,10 @@ public class DDLRecordPersistenceTest extends BasePersistenceTestCase {
 		ddlRecord.setClassPK(nextLong());
 		ddlRecord.setRecordSetId(nextLong());
 		ddlRecord.setDisplayIndex(nextInt());
+		ddlRecord.setStatus(nextInt());
+		ddlRecord.setStatusByUserId(nextLong());
+		ddlRecord.setStatusByUserName(randomString());
+		ddlRecord.setStatusDate(nextDate());
 
 		_persistence.update(ddlRecord, false);
 

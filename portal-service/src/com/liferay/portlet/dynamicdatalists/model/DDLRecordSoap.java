@@ -43,6 +43,10 @@ public class DDLRecordSoap implements Serializable {
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setRecordSetId(model.getRecordSetId());
 		soapModel.setDisplayIndex(model.getDisplayIndex());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -191,6 +195,38 @@ public class DDLRecordSoap implements Serializable {
 		_displayIndex = displayIndex;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private String _uuid;
 	private long _recordId;
 	private long _groupId;
@@ -203,4 +239,8 @@ public class DDLRecordSoap implements Serializable {
 	private long _classPK;
 	private long _recordSetId;
 	private int _displayIndex;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

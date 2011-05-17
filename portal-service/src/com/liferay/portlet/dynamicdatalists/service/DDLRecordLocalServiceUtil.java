@@ -321,40 +321,50 @@ public class DDLRecordLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords(
-		long recordSetId, int start, int end,
+		long recordSetId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getRecords(recordSetId, start, end, orderByComparator);
+				   .getRecords(recordSetId, status, start, end,
+			orderByComparator);
 	}
 
-	public static int getRecordsCount(long recordSetId)
+	public static int getRecordsCount(long recordSetId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRecordsCount(recordSetId);
+		return getService().getRecordsCount(recordSetId, status);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long recordId,
+		long userId, long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		int displayIndex, boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateRecord(recordId, fields, displayIndex, mergeFields,
-			serviceContext);
+				   .updateRecord(userId, recordId, fields, displayIndex,
+			mergeFields, serviceContext);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long recordId,
+		long userId, long recordId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex, boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateRecord(recordId, fieldsMap, displayIndex,
+				   .updateRecord(userId, recordId, fieldsMap, displayIndex,
 			mergeFields, serviceContext);
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateStatus(
+		long userId, long recordId, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateStatus(userId, recordId, status, serviceContext);
 	}
 
 	public static DDLRecordLocalService getService() {

@@ -299,6 +299,141 @@ public class DDLRecordWrapper implements DDLRecord {
 		_ddlRecord.setDisplayIndex(displayIndex);
 	}
 
+	/**
+	* Gets the status of this d d l record.
+	*
+	* @return the status of this d d l record
+	*/
+	public int getStatus() {
+		return _ddlRecord.getStatus();
+	}
+
+	/**
+	* Sets the status of this d d l record.
+	*
+	* @param status the status of this d d l record
+	*/
+	public void setStatus(int status) {
+		_ddlRecord.setStatus(status);
+	}
+
+	/**
+	* Gets the status by user ID of this d d l record.
+	*
+	* @return the status by user ID of this d d l record
+	*/
+	public long getStatusByUserId() {
+		return _ddlRecord.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this d d l record.
+	*
+	* @param statusByUserId the status by user ID of this d d l record
+	*/
+	public void setStatusByUserId(long statusByUserId) {
+		_ddlRecord.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Gets the status by user uuid of this d d l record.
+	*
+	* @return the status by user uuid of this d d l record
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecord.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this d d l record.
+	*
+	* @param statusByUserUuid the status by user uuid of this d d l record
+	*/
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_ddlRecord.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Gets the status by user name of this d d l record.
+	*
+	* @return the status by user name of this d d l record
+	*/
+	public java.lang.String getStatusByUserName() {
+		return _ddlRecord.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this d d l record.
+	*
+	* @param statusByUserName the status by user name of this d d l record
+	*/
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_ddlRecord.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Gets the status date of this d d l record.
+	*
+	* @return the status date of this d d l record
+	*/
+	public java.util.Date getStatusDate() {
+		return _ddlRecord.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this d d l record.
+	*
+	* @param statusDate the status date of this d d l record
+	*/
+	public void setStatusDate(java.util.Date statusDate) {
+		_ddlRecord.setStatusDate(statusDate);
+	}
+
+	/**
+	* @deprecated {@link #isApproved}
+	*/
+	public boolean getApproved() {
+		return _ddlRecord.getApproved();
+	}
+
+	/**
+	* Determines if this d d l record is approved.
+	*
+	* @return <code>true</code> if this d d l record is approved; <code>false</code> otherwise
+	*/
+	public boolean isApproved() {
+		return _ddlRecord.isApproved();
+	}
+
+	/**
+	* Determines if this d d l record is a draft.
+	*
+	* @return <code>true</code> if this d d l record is a draft; <code>false</code> otherwise
+	*/
+	public boolean isDraft() {
+		return _ddlRecord.isDraft();
+	}
+
+	/**
+	* Determines if this d d l record is expired.
+	*
+	* @return <code>true</code> if this d d l record is expired; <code>false</code> otherwise
+	*/
+	public boolean isExpired() {
+		return _ddlRecord.isExpired();
+	}
+
+	/**
+	* Determines if this d d l record is pending.
+	*
+	* @return <code>true</code> if this d d l record is pending; <code>false</code> otherwise
+	*/
+	public boolean isPending() {
+		return _ddlRecord.isPending();
+	}
+
 	public boolean isNew() {
 		return _ddlRecord.isNew();
 	}

@@ -1365,6 +1365,10 @@
 		<field name="classPK" type="long" />
 		<field name="recordSetId" type="long" />
 		<field name="displayIndex" type="int" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.dynamicdatalists.model.DDLRecordSet">
 		<field name="uuid" type="String" />

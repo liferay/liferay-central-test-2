@@ -281,16 +281,16 @@ public interface DDLRecordLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords(
-		long recordSetId, int start, int end,
+		long recordSetId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRecordsCount(long recordSetId)
+	public int getRecordsCount(long recordSetId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long recordId,
+		long userId, long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
 		int displayIndex, boolean mergeFields,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -298,9 +298,15 @@ public interface DDLRecordLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
-		long recordId,
+		long userId, long recordId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex, boolean mergeFields,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateStatus(
+		long userId, long recordId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

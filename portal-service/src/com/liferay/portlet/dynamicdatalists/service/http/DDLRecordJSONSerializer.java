@@ -62,6 +62,19 @@ public class DDLRecordJSONSerializer {
 		jsonObject.put("classPK", model.getClassPK());
 		jsonObject.put("recordSetId", model.getRecordSetId());
 		jsonObject.put("displayIndex", model.getDisplayIndex());
+		jsonObject.put("status", model.getStatus());
+		jsonObject.put("statusByUserId", model.getStatusByUserId());
+		jsonObject.put("statusByUserName", model.getStatusByUserName());
+
+		Date statusDate = model.getStatusDate();
+
+		String statusDateJSON = StringPool.BLANK;
+
+		if (statusDate != null) {
+			statusDateJSON = String.valueOf(statusDate.getTime());
+		}
+
+		jsonObject.put("statusDate", statusDateJSON);
 
 		return jsonObject;
 	}
