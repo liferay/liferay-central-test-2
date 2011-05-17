@@ -93,13 +93,6 @@ public class MBIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		long threadId = GetterUtil.getLong(
-			(String)searchContext.getAttribute("threadId"));
-
-		if (threadId > 0) {
-			contextQuery.addRequiredTerm("threadId", threadId);
-		}
-
 		long[] categoryIds = searchContext.getCategoryIds();
 
 		if (categoryIds != null && categoryIds.length > 0) {
@@ -124,6 +117,13 @@ public class MBIndexer extends BaseIndexer {
 			}
 
 			contextQuery.add(categoriesQuery, BooleanClauseOccur.MUST);
+		}
+
+		long threadId = GetterUtil.getLong(
+			(String)searchContext.getAttribute("threadId"));
+
+		if (threadId > 0) {
+			contextQuery.addRequiredTerm("threadId", threadId);
 		}
 	}
 

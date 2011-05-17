@@ -89,6 +89,14 @@ public class JournalIndexer extends BaseIndexer {
 			contextQuery.addRequiredTerm("classNameId", classNameId.toString());
 		}
 
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm(Field.STATUS, status);
+		}
+
 		String structureId = (String)searchContext.getAttribute("structureId");
 
 		if (Validator.isNotNull(structureId)) {
@@ -117,14 +125,6 @@ public class JournalIndexer extends BaseIndexer {
 		addLocalizedSearchTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, true);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
-
-		int status = GetterUtil.getInteger(
-			searchContext.getAttribute(Field.STATUS),
-			WorkflowConstants.STATUS_ANY);
-
-		if (status != WorkflowConstants.STATUS_ANY) {
-			addSearchTerm(searchQuery, searchContext, Field.STATUS, false);
-		}
 
 		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
