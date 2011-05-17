@@ -28,9 +28,6 @@
 
 .taglib-search-toggle-advanced .yui3-aui-fieldset .yui3-aui-field {
 	display: inline-block;
-}
-
-.taglib-search-toggle-advanced .yui3-aui-fieldset .yui3-aui-field {
 	width: 30%;
 }
 
