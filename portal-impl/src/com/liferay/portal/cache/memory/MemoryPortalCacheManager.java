@@ -17,6 +17,8 @@ package com.liferay.portal.cache.memory;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 
+import java.net.URL;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -42,7 +44,7 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 		PortalCache portalCache = _portalCaches.get(name);
 
 		if (portalCache == null) {
-			portalCache = new MemoryPortalCache(_cacheInitialCapacity);
+			portalCache = new MemoryPortalCache(name, _cacheInitialCapacity);
 
 			portalCache.setDebug(_debug);
 
@@ -50,6 +52,9 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 		}
 
 		return portalCache;
+	}
+
+	public void reconfigureCaches(URL configurationURL) {
 	}
 
 	public void removeCache(String name) {

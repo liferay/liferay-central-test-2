@@ -35,8 +35,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class MemoryPortalCache extends BasePortalCache {
 
-	public MemoryPortalCache(int initialCapacity) {
-		 _map = new ConcurrentHashMap<String, Object>(initialCapacity);
+	public MemoryPortalCache(String name, int initialCapacity) {
+ 		_name = name;
+		_map = new ConcurrentHashMap<String, Object>(initialCapacity);
 	}
 
 	public Collection<Object> get(Collection<String> keys) {
@@ -53,6 +54,10 @@ public class MemoryPortalCache extends BasePortalCache {
 		String processedKey = processKey(key);
 
 		return _map.get(processedKey);
+	}
+
+	public String getName() {
+		return _name;
 	}
 
 	public void put(String key, Object value) {
@@ -147,5 +152,6 @@ public class MemoryPortalCache extends BasePortalCache {
 	private Set<CacheListener> _cacheListeners =
 		new ConcurrentHashSet<CacheListener>();
 	private Map<String, Object> _map;
+	private String _name;
 
 }

@@ -151,7 +151,7 @@ public class EhcacheConfigurationUtil {
 
 		if (clearCachePeerProviderConfigurations) {
 			configuration.getCacheManagerPeerListenerFactoryConfigurations().
-			clear();
+				clear();
 			configuration.getCacheManagerPeerProviderFactoryConfiguration().
 				clear();
 		}

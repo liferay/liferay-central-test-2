@@ -146,6 +146,10 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		}
 	}
 
+	public String getName() {
+		return _name;
+	}
+
 	public void put(String key, Object value) {
 		put(key, value, _timeToLive);
 	}

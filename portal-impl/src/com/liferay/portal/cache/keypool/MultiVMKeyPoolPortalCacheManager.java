@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.kernel.cache.SingleVMPool;
 
+import java.net.URL;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -66,6 +68,9 @@ public class MultiVMKeyPoolPortalCacheManager implements PortalCacheManager {
 		}
 
 		return multiVMKeyPoolPortalCache;
+	}
+
+	public void reconfigureCaches(URL configurationURL) {
 	}
 
 	public void removeCache(String name) {

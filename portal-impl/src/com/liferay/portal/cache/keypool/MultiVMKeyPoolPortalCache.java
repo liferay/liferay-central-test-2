@@ -93,6 +93,10 @@ public class MultiVMKeyPoolPortalCache extends BasePortalCache {
 		return null;
 	}
 
+	public String getName() {
+		return _clusterPortalCache.getName();
+	}
+
 	public void put(String key, Object obj) {
 		updateClusterKey(key);
 
