@@ -154,6 +154,10 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 						continue;
 					}
 
+					if ((role.getType() != RoleConstants.TYPE_REGULAR) && !portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.CONTENT)) {
+						continue;
+					}
+
 					editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
 					editPermissionsURL.setParameter("showModelResources", "0");
 				%>
