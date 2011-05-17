@@ -43,7 +43,7 @@ boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 if (groupId > 0) {
 	group = GroupLocalServiceUtil.getGroup(groupId);
 }
-else {
+else if (selLayout != null) {
 	group = selLayout.getGroup();
 
 	privateLayout = selLayout.isPrivateLayout();
