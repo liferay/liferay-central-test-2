@@ -485,7 +485,7 @@ body.portlet {
 }
 
 .results-row.lfr-role-community .col-1, .results-row.hover.lfr-role-community .col-1 {
-	background-image: url(../images/common/community_icon.png);
+	background-image: url(../images/common/site_icon.png);
 }
 
 .results-row.lfr-role-organization .col-1, .results-row.hover.lfr-role-organization .col-1 {

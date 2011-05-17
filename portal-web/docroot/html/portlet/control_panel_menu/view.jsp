@@ -109,7 +109,7 @@
 						<c:when test="<%= !manageableSites.isEmpty() %>">
 
 							<%
-							String icon = themeDisplay.getPathThemeImages() + "/common/site.png";
+							String icon = themeDisplay.getPathThemeImages() + "/common/site_icon.png";
 
 							if (curGroup.isCompany()) {
 								icon = themeDisplay.getPathThemeImages() + "/common/folder.png";
