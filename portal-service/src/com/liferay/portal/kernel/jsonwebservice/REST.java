@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.rest;
+package com.liferay.portal.kernel.jsonwebservice;
 
 import com.liferay.portal.kernel.util.StringPool;
 

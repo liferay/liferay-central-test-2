@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.json.JSONDeserializer;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;

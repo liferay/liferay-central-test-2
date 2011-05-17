@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.REST;
+import com.liferay.portal.kernel.jsonwebservice.REST;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;

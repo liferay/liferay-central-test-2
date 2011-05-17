@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
+import com.liferay.portal.kernel.jsonwebservice.RESTActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.upload.UploadServletRequest;

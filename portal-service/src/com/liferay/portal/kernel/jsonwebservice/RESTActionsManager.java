@@ -12,13 +12,24 @@
  * details.
  */
 
-package com.liferay.portal.kernel.rest;
+package com.liferay.portal.kernel.jsonwebservice;
+
+import java.lang.reflect.Method;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Igor Spasic
  */
-public enum RESTMode {
+public interface RESTActionsManager {
 
-	AUTO, IGNORE, MANUAL
+	public List<String[]> dumpMappings();
+
+	public RESTAction lookup(HttpServletRequest request);
+
+	public void registerRESTAction(
+		Class<?> actionClass, Method actionMethod, String path, String method);
 
 }

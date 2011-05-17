@@ -12,14 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.rest.REST;
-import com.liferay.portal.kernel.rest.RESTActionsManager;
-import com.liferay.portal.kernel.rest.RESTMode;
+import com.liferay.portal.kernel.jsonwebservice.REST;
+import com.liferay.portal.kernel.jsonwebservice.RESTActionsManager;
+import com.liferay.portal.kernel.jsonwebservice.RESTMode;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 

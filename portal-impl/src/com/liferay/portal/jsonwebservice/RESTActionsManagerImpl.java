@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.RESTAction;
-import com.liferay.portal.kernel.rest.RESTActionsManager;
+import com.liferay.portal.kernel.jsonwebservice.RESTAction;
+import com.liferay.portal.kernel.jsonwebservice.RESTActionsManager;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.BinarySearch;
 import com.liferay.portal.kernel.util.CharPool;

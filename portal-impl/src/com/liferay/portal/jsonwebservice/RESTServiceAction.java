@@ -12,15 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.action.JSONServiceAction;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.rest.RESTAction;
-import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
+import com.liferay.portal.kernel.jsonwebservice.RESTAction;
+import com.liferay.portal.kernel.jsonwebservice.RESTActionsManagerUtil;
 
 import java.lang.reflect.InvocationTargetException;
 

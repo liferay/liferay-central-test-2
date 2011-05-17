@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.rest;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.rest.RESTAction;
+import com.liferay.portal.kernel.jsonwebservice.RESTAction;
 import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Method;
