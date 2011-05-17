@@ -86,7 +86,7 @@ for (int i = 0; i < results.size(); i++) {
 				supportsFilterByGroup = true;
 			}
 		}
-		else if (!ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
+		else if (!ResourceActionsUtil.isPortalModelResource(curResource)) {
 			supportsFilterByGroup = true;
 		}
 
