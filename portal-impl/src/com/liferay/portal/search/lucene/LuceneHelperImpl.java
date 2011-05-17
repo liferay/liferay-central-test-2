@@ -352,7 +352,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			tempQuery = queryParser.parse(queryString);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			_log.warn("Can't parse " + queryString);
 
 			tempQuery = query;
 		}
