@@ -50,8 +50,8 @@ public class DDMStructureWrapper implements DDMStructure {
 	*
 	* @param pk the primary key of this d d m structure
 	*/
-	public void setPrimaryKey(long pk) {
-		_ddmStructure.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ddmStructure.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -361,6 +361,10 @@ public class DDMStructureWrapper implements DDMStructure {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ddmStructure.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ddmStructure.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

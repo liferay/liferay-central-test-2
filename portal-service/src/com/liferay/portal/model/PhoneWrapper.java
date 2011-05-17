@@ -50,8 +50,8 @@ public class PhoneWrapper implements Phone {
 	*
 	* @param pk the primary key of this phone
 	*/
-	public void setPrimaryKey(long pk) {
-		_phone.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_phone.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -334,6 +334,10 @@ public class PhoneWrapper implements Phone {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _phone.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_phone.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

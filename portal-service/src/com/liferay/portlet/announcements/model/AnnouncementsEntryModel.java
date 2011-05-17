@@ -59,7 +59,7 @@ public interface AnnouncementsEntryModel extends AuditedModel,
 	 *
 	 * @param pk the primary key of this announcements entry
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this announcements entry.
@@ -347,6 +347,8 @@ public interface AnnouncementsEntryModel extends AuditedModel,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

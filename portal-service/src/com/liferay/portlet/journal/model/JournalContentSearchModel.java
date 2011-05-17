@@ -54,7 +54,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	 *
 	 * @param pk the primary key of this journal content search
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the content search ID of this journal content search.
@@ -176,6 +176,8 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

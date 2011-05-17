@@ -50,8 +50,8 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	*
 	* @param pk the primary key of this layout revision
 	*/
-	public void setPrimaryKey(long pk) {
-		_layoutRevision.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_layoutRevision.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -1176,6 +1176,10 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _layoutRevision.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_layoutRevision.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

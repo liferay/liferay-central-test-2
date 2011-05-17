@@ -50,8 +50,8 @@ public class UserGroupWrapper implements UserGroup {
 	*
 	* @param pk the primary key of this user group
 	*/
-	public void setPrimaryKey(long pk) {
-		_userGroup.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_userGroup.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -170,6 +170,10 @@ public class UserGroupWrapper implements UserGroup {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userGroup.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_userGroup.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

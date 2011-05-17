@@ -53,7 +53,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	 *
 	 * @param pk the primary key of this plugin setting
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the plugin setting ID of this plugin setting.
@@ -162,6 +162,8 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

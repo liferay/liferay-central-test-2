@@ -57,7 +57,7 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	 *
 	 * @param pk the primary key of this workflow instance link
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the workflow instance link ID of this workflow instance link.
@@ -235,6 +235,8 @@ public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLin
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

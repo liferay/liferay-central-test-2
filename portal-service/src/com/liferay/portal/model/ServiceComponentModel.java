@@ -53,7 +53,7 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	 *
 	 * @param pk the primary key of this service component
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the service component ID of this service component.
@@ -140,6 +140,8 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

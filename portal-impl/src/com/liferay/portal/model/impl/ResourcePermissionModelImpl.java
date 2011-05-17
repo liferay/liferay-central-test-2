@@ -134,12 +134,16 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _resourcePermissionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setResourcePermissionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setResourcePermissionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_resourcePermissionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getResourcePermissionId() {
@@ -324,12 +328,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public int compareTo(ResourcePermission resourcePermission) {
-		long pk = resourcePermission.getPrimaryKey();
+		long primaryKey = resourcePermission.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -351,9 +355,9 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 			return false;
 		}
 
-		long pk = resourcePermission.getPrimaryKey();
+		long primaryKey = resourcePermission.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

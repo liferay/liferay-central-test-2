@@ -159,12 +159,16 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return _productEntryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setProductEntryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setProductEntryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_productEntryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getProductEntryId() {
@@ -455,9 +459,9 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 			return false;
 		}
 
-		long pk = scProductEntry.getPrimaryKey();
+		long primaryKey = scProductEntry.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

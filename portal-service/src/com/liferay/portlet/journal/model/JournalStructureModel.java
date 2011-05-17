@@ -59,7 +59,7 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	 *
 	 * @param pk the primary key of this journal structure
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this journal structure.
@@ -277,6 +277,8 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

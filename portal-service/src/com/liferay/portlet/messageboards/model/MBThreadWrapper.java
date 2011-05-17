@@ -50,8 +50,8 @@ public class MBThreadWrapper implements MBThread {
 	*
 	* @param pk the primary key of this message boards thread
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbThread.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbThread.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -453,6 +453,10 @@ public class MBThreadWrapper implements MBThread {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbThread.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbThread.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

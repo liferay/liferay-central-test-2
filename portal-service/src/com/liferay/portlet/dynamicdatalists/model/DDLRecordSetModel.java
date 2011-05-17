@@ -60,7 +60,7 @@ public interface DDLRecordSetModel extends BaseModel<DDLRecordSet>, GroupedModel
 	 *
 	 * @param pk the primary key of this d d l record set
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this d d l record set.
@@ -335,6 +335,8 @@ public interface DDLRecordSetModel extends BaseModel<DDLRecordSet>, GroupedModel
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

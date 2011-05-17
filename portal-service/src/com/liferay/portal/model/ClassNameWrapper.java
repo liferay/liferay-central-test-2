@@ -50,8 +50,8 @@ public class ClassNameWrapper implements ClassName {
 	*
 	* @param pk the primary key of this class name
 	*/
-	public void setPrimaryKey(long pk) {
-		_className.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_className.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -125,6 +125,10 @@ public class ClassNameWrapper implements ClassName {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _className.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_className.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

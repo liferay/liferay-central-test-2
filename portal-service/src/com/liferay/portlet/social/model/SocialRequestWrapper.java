@@ -50,8 +50,8 @@ public class SocialRequestWrapper implements SocialRequest {
 	*
 	* @param pk the primary key of this social request
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialRequest.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialRequest.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -363,6 +363,10 @@ public class SocialRequestWrapper implements SocialRequest {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialRequest.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialRequest.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

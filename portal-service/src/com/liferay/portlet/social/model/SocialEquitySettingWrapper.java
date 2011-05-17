@@ -50,8 +50,8 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 	*
 	* @param pk the primary key of this social equity setting
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialEquitySetting.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialEquitySetting.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -278,6 +278,10 @@ public class SocialEquitySettingWrapper implements SocialEquitySetting {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialEquitySetting.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialEquitySetting.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

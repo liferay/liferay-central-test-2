@@ -53,7 +53,7 @@ public interface PermissionModel extends BaseModel<Permission> {
 	 *
 	 * @param pk the primary key of this permission
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the permission ID of this permission.
@@ -125,6 +125,8 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

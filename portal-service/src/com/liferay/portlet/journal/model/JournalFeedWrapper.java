@@ -50,8 +50,8 @@ public class JournalFeedWrapper implements JournalFeed {
 	*
 	* @param pk the primary key of this journal feed
 	*/
-	public void setPrimaryKey(long pk) {
-		_journalFeed.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_journalFeed.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -515,6 +515,10 @@ public class JournalFeedWrapper implements JournalFeed {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _journalFeed.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_journalFeed.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

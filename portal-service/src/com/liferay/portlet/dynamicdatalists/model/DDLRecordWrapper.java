@@ -50,8 +50,8 @@ public class DDLRecordWrapper implements DDLRecord {
 	*
 	* @param pk the primary key of this d d l record
 	*/
-	public void setPrimaryKey(long pk) {
-		_ddlRecord.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ddlRecord.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -197,6 +197,10 @@ public class DDLRecordWrapper implements DDLRecord {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ddlRecord.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ddlRecord.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

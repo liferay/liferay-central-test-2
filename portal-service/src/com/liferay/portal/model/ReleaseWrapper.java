@@ -50,8 +50,8 @@ public class ReleaseWrapper implements Release {
 	*
 	* @param pk the primary key of this release
 	*/
-	public void setPrimaryKey(long pk) {
-		_release.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_release.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -233,6 +233,10 @@ public class ReleaseWrapper implements Release {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _release.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_release.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

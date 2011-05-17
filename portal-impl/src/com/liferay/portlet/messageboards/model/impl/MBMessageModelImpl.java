@@ -175,12 +175,16 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return _messageId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setMessageId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setMessageId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_messageId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -608,9 +612,9 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			return false;
 		}
 
-		long pk = mbMessage.getPrimaryKey();
+		long primaryKey = mbMessage.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

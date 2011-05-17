@@ -226,12 +226,16 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return _orderId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setOrderId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setOrderId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_orderId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getOrderId() {
@@ -964,9 +968,9 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 			return false;
 		}
 
-		long pk = shoppingOrder.getPrimaryKey();
+		long primaryKey = shoppingOrder.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

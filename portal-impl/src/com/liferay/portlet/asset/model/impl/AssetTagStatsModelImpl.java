@@ -92,12 +92,16 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		return _tagStatsId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setTagStatsId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setTagStatsId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_tagStatsId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getTagStatsId() {
@@ -233,9 +237,9 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 			return false;
 		}
 
-		long pk = assetTagStats.getPrimaryKey();
+		long primaryKey = assetTagStats.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

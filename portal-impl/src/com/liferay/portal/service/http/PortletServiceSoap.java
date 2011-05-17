@@ -64,12 +64,11 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class PortletServiceSoap {
-	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets()
-		throws RemoteException {
+	public static java.lang.String getWARPortlets() throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = PortletServiceUtil.getWARPortlets();
 
-			return returnValue;
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

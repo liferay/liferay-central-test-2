@@ -50,8 +50,8 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	*
 	* @param pk the primary key of this expando value
 	*/
-	public void setPrimaryKey(long pk) {
-		_expandoValue.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_expandoValue.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -233,6 +233,10 @@ public class ExpandoValueWrapper implements ExpandoValue {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _expandoValue.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_expandoValue.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -56,7 +56,7 @@ public interface EmailAddressModel extends AuditedModel, BaseModel<EmailAddress>
 	 *
 	 * @param pk the primary key of this email address
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the email address ID of this email address.
@@ -256,6 +256,8 @@ public interface EmailAddressModel extends AuditedModel, BaseModel<EmailAddress>
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

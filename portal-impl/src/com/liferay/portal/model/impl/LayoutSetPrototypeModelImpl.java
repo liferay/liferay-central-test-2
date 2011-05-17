@@ -139,12 +139,16 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return _layoutSetPrototypeId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setLayoutSetPrototypeId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setLayoutSetPrototypeId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_layoutSetPrototypeId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -343,12 +347,12 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	}
 
 	public int compareTo(LayoutSetPrototype layoutSetPrototype) {
-		long pk = layoutSetPrototype.getPrimaryKey();
+		long primaryKey = layoutSetPrototype.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -370,9 +374,9 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 			return false;
 		}
 
-		long pk = layoutSetPrototype.getPrimaryKey();
+		long primaryKey = layoutSetPrototype.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

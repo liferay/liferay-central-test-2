@@ -92,12 +92,16 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		return _contentSearchId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setContentSearchId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setContentSearchId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_contentSearchId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getContentSearchId() {
@@ -257,12 +261,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public int compareTo(JournalContentSearch journalContentSearch) {
-		long pk = journalContentSearch.getPrimaryKey();
+		long primaryKey = journalContentSearch.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -284,9 +288,9 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 			return false;
 		}
 
-		long pk = journalContentSearch.getPrimaryKey();
+		long primaryKey = journalContentSearch.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

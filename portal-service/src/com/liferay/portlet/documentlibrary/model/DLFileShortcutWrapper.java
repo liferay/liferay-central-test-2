@@ -50,8 +50,8 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	*
 	* @param pk the primary key of this d l file shortcut
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlFileShortcut.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlFileShortcut.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -433,6 +433,10 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlFileShortcut.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlFileShortcut.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

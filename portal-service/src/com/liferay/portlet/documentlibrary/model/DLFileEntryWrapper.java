@@ -50,8 +50,8 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	*
 	* @param pk the primary key of this d l file entry
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlFileEntry.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlFileEntry.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -516,6 +516,10 @@ public class DLFileEntryWrapper implements DLFileEntry {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlFileEntry.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlFileEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

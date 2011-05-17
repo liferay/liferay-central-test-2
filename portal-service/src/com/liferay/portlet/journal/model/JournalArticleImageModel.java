@@ -54,7 +54,7 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	 *
 	 * @param pk the primary key of this journal article image
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the article image ID of this journal article image.
@@ -192,6 +192,8 @@ public interface JournalArticleImageModel extends BaseModel<JournalArticleImage>
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

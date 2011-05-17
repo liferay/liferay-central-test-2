@@ -50,8 +50,8 @@ public class CompanyWrapper implements Company {
 	*
 	* @param pk the primary key of this company
 	*/
-	public void setPrimaryKey(long pk) {
-		_company.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_company.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -251,6 +251,10 @@ public class CompanyWrapper implements Company {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _company.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_company.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

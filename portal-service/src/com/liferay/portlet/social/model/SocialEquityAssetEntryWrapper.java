@@ -51,8 +51,8 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	*
 	* @param pk the primary key of this social equity asset entry
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialEquityAssetEntry.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialEquityAssetEntry.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -227,6 +227,10 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialEquityAssetEntry.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialEquityAssetEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

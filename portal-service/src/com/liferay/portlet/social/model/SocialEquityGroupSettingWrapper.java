@@ -51,8 +51,8 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	*
 	* @param pk the primary key of this social equity group setting
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialEquityGroupSetting.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialEquityGroupSetting.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -207,6 +207,10 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialEquityGroupSetting.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialEquityGroupSetting.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

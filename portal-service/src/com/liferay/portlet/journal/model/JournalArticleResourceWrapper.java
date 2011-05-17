@@ -51,8 +51,8 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	*
 	* @param pk the primary key of this journal article resource
 	*/
-	public void setPrimaryKey(long pk) {
-		_journalArticleResource.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_journalArticleResource.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -153,6 +153,10 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _journalArticleResource.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_journalArticleResource.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

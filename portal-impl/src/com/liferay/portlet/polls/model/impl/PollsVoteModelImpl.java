@@ -130,12 +130,16 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		return _voteId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setVoteId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setVoteId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_voteId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getVoteId() {
@@ -244,12 +248,12 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	public int compareTo(PollsVote pollsVote) {
-		long pk = pollsVote.getPrimaryKey();
+		long primaryKey = pollsVote.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -271,9 +275,9 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 			return false;
 		}
 
-		long pk = pollsVote.getPrimaryKey();
+		long primaryKey = pollsVote.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

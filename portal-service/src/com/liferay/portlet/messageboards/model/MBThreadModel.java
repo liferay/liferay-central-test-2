@@ -57,7 +57,7 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	 *
 	 * @param pk the primary key of this message boards thread
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the thread ID of this message boards thread.
@@ -361,6 +361,8 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

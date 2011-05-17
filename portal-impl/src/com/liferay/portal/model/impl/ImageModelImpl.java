@@ -133,12 +133,16 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		return _imageId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setImageId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setImageId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_imageId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getImageId() {
@@ -280,9 +284,9 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 			return false;
 		}
 
-		long pk = image.getPrimaryKey();
+		long primaryKey = image.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

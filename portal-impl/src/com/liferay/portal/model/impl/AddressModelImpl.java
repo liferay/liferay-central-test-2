@@ -159,12 +159,16 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		return _addressId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setAddressId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setAddressId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_addressId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getAddressId() {
@@ -441,9 +445,9 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 			return false;
 		}
 
-		long pk = address.getPrimaryKey();
+		long primaryKey = address.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

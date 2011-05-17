@@ -52,7 +52,7 @@ public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	 *
 	 * @param pk the primary key of this expando value
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the value ID of this expando value.
@@ -187,6 +187,8 @@ public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

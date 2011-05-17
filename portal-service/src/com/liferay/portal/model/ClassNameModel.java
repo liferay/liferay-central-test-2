@@ -53,7 +53,7 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	 *
 	 * @param pk the primary key of this class name
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the class name of the model instance this class name is polymorphically associated with.
@@ -104,6 +104,8 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

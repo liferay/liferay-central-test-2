@@ -155,12 +155,16 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _threadId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setThreadId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setThreadId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_threadId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getThreadId() {
@@ -449,9 +453,9 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 			return false;
 		}
 
-		long pk = mbThread.getPrimaryKey();
+		long primaryKey = mbThread.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

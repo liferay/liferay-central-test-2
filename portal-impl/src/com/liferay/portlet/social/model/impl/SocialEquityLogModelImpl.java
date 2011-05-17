@@ -99,12 +99,16 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		return _equityLogId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEquityLogId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEquityLogId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_equityLogId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getEquityLogId() {
@@ -337,12 +341,12 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public int compareTo(SocialEquityLog socialEquityLog) {
-		long pk = socialEquityLog.getPrimaryKey();
+		long primaryKey = socialEquityLog.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -364,9 +368,9 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 			return false;
 		}
 
-		long pk = socialEquityLog.getPrimaryKey();
+		long primaryKey = socialEquityLog.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

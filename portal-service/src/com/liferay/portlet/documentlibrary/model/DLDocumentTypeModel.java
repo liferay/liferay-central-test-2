@@ -59,7 +59,7 @@ public interface DLDocumentTypeModel extends BaseModel<DLDocumentType>,
 	 *
 	 * @param pk the primary key of this d l document type
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the document type ID of this d l document type.
@@ -218,6 +218,8 @@ public interface DLDocumentTypeModel extends BaseModel<DLDocumentType>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

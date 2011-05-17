@@ -50,8 +50,8 @@ public class SocialActivityWrapper implements SocialActivity {
 	*
 	* @param pk the primary key of this social activity
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialActivity.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialActivity.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -327,6 +327,10 @@ public class SocialActivityWrapper implements SocialActivity {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialActivity.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialActivity.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

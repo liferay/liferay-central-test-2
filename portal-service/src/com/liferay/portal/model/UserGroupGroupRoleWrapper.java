@@ -51,8 +51,8 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	* @param pk the primary key of this user group group role
 	*/
 	public void setPrimaryKey(
-		com.liferay.portal.service.persistence.UserGroupGroupRolePK pk) {
-		_userGroupGroupRole.setPrimaryKey(pk);
+		com.liferay.portal.service.persistence.UserGroupGroupRolePK primaryKey) {
+		_userGroupGroupRole.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -135,6 +135,10 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userGroupGroupRole.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_userGroupGroupRole.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

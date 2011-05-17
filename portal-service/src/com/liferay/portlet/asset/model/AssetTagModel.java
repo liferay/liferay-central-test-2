@@ -58,7 +58,7 @@ public interface AssetTagModel extends BaseModel<AssetTag>, GroupedModel {
 	 *
 	 * @param pk the primary key of this asset tag
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the tag ID of this asset tag.
@@ -216,6 +216,8 @@ public interface AssetTagModel extends BaseModel<AssetTag>, GroupedModel {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

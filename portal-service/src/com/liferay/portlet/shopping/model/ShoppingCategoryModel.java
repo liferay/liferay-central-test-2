@@ -59,7 +59,7 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory>,
 	 *
 	 * @param pk the primary key of this shopping category
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the category ID of this shopping category.
@@ -232,6 +232,8 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

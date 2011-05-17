@@ -50,8 +50,8 @@ public class TicketWrapper implements Ticket {
 	*
 	* @param pk the primary key of this ticket
 	*/
-	public void setPrimaryKey(long pk) {
-		_ticket.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ticket.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -215,6 +215,10 @@ public class TicketWrapper implements Ticket {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ticket.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ticket.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

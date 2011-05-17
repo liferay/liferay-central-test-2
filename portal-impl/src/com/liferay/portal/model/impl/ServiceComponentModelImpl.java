@@ -91,12 +91,16 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		return _serviceComponentId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setServiceComponentId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setServiceComponentId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_serviceComponentId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getServiceComponentId() {
@@ -250,9 +254,9 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 			return false;
 		}
 
-		long pk = serviceComponent.getPrimaryKey();
+		long primaryKey = serviceComponent.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

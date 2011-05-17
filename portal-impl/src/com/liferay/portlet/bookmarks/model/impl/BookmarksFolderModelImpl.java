@@ -144,12 +144,16 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		return _folderId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFolderId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFolderId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_folderId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -357,9 +361,9 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 			return false;
 		}
 
-		long pk = bookmarksFolder.getPrimaryKey();
+		long primaryKey = bookmarksFolder.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

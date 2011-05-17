@@ -145,12 +145,16 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return _nodeId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setNodeId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setNodeId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_nodeId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -365,9 +369,9 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 			return false;
 		}
 
-		long pk = wikiNode.getPrimaryKey();
+		long primaryKey = wikiNode.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -152,12 +152,16 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _fileShortcutId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFileShortcutId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFileShortcutId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_fileShortcutId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -422,12 +426,12 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public int compareTo(DLFileShortcut dlFileShortcut) {
-		long pk = dlFileShortcut.getPrimaryKey();
+		long primaryKey = dlFileShortcut.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -449,9 +453,9 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 			return false;
 		}
 
-		long pk = dlFileShortcut.getPrimaryKey();
+		long primaryKey = dlFileShortcut.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

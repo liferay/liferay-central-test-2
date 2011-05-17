@@ -100,12 +100,16 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 		return _choiceId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setChoiceId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setChoiceId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_choiceId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -338,9 +342,9 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 			return false;
 		}
 
-		long pk = pollsChoice.getPrimaryKey();
+		long primaryKey = pollsChoice.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -50,8 +50,8 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	*
 	* @param pk the primary key of this journal article image
 	*/
-	public void setPrimaryKey(long pk) {
-		_journalArticleImage.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_journalArticleImage.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -233,6 +233,10 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _journalArticleImage.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_journalArticleImage.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -92,12 +92,16 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return _relationId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRelationId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRelationId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_relationId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -232,12 +236,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public int compareTo(SocialRelation socialRelation) {
-		long pk = socialRelation.getPrimaryKey();
+		long primaryKey = socialRelation.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -259,9 +263,9 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 			return false;
 		}
 
-		long pk = socialRelation.getPrimaryKey();
+		long primaryKey = socialRelation.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

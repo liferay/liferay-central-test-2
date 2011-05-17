@@ -50,8 +50,8 @@ public class ContactWrapper implements Contact {
 	*
 	* @param pk the primary key of this contact
 	*/
-	public void setPrimaryKey(long pk) {
-		_contact.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_contact.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -649,6 +649,10 @@ public class ContactWrapper implements Contact {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _contact.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_contact.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -50,8 +50,8 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	*
 	* @param pk the primary key of this portlet preferences
 	*/
-	public void setPrimaryKey(long pk) {
-		_portletPreferences.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_portletPreferences.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -188,6 +188,10 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _portletPreferences.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_portletPreferences.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

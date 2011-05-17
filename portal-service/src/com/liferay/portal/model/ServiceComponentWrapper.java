@@ -50,8 +50,8 @@ public class ServiceComponentWrapper implements ServiceComponent {
 	*
 	* @param pk the primary key of this service component
 	*/
-	public void setPrimaryKey(long pk) {
-		_serviceComponent.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_serviceComponent.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -170,6 +170,10 @@ public class ServiceComponentWrapper implements ServiceComponent {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _serviceComponent.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_serviceComponent.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

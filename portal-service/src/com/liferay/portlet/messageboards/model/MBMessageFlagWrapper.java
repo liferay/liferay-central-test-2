@@ -50,8 +50,8 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 	*
 	* @param pk the primary key of this message boards message flag
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbMessageFlag.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbMessageFlag.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -208,6 +208,10 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbMessageFlag.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbMessageFlag.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

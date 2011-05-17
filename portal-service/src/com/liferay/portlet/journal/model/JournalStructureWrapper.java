@@ -50,8 +50,8 @@ public class JournalStructureWrapper implements JournalStructure {
 	*
 	* @param pk the primary key of this journal structure
 	*/
-	public void setPrimaryKey(long pk) {
-		_journalStructure.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_journalStructure.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -334,6 +334,10 @@ public class JournalStructureWrapper implements JournalStructure {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _journalStructure.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_journalStructure.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

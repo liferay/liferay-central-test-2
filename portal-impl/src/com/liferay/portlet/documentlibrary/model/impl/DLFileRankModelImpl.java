@@ -97,12 +97,16 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		return _fileRankId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFileRankId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFileRankId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_fileRankId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getFileRankId() {
@@ -258,9 +262,9 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 			return false;
 		}
 
-		long pk = dlFileRank.getPrimaryKey();
+		long primaryKey = dlFileRank.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

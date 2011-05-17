@@ -93,12 +93,16 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return _productScreenshotId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setProductScreenshotId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setProductScreenshotId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_productScreenshotId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getProductScreenshotId() {
@@ -285,9 +289,9 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 			return false;
 		}
 
-		long pk = scProductScreenshot.getPrimaryKey();
+		long primaryKey = scProductScreenshot.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

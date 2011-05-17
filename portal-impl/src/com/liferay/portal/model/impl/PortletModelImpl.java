@@ -127,12 +127,16 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		return _id;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_id);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getId() {
@@ -245,12 +249,12 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 	}
 
 	public int compareTo(Portlet portlet) {
-		long pk = portlet.getPrimaryKey();
+		long primaryKey = portlet.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -272,9 +276,9 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 			return false;
 		}
 
-		long pk = portlet.getPrimaryKey();
+		long primaryKey = portlet.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

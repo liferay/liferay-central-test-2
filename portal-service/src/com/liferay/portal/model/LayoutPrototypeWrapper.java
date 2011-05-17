@@ -50,8 +50,8 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 	*
 	* @param pk the primary key of this layout prototype
 	*/
-	public void setPrimaryKey(long pk) {
-		_layoutPrototype.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_layoutPrototype.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -280,6 +280,10 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _layoutPrototype.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_layoutPrototype.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

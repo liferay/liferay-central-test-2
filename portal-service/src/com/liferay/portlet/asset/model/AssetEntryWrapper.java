@@ -50,8 +50,8 @@ public class AssetEntryWrapper implements AssetEntry {
 	*
 	* @param pk the primary key of this asset entry
 	*/
-	public void setPrimaryKey(long pk) {
-		_assetEntry.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_assetEntry.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -568,6 +568,10 @@ public class AssetEntryWrapper implements AssetEntry {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetEntry.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_assetEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

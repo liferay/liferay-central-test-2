@@ -170,12 +170,16 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _pageId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPageId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPageId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_pageId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -647,9 +651,9 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 			return false;
 		}
 
-		long pk = wikiPage.getPrimaryKey();
+		long primaryKey = wikiPage.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

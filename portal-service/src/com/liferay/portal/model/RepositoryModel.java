@@ -55,7 +55,7 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	 *
 	 * @param pk the primary key of this repository
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the repository ID of this repository.
@@ -235,6 +235,8 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

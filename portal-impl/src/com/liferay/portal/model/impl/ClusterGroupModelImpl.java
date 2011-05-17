@@ -88,12 +88,16 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		return _clusterGroupId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setClusterGroupId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setClusterGroupId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_clusterGroupId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getClusterGroupId() {
@@ -180,12 +184,12 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	public int compareTo(ClusterGroup clusterGroup) {
-		long pk = clusterGroup.getPrimaryKey();
+		long primaryKey = clusterGroup.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -207,9 +211,9 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 			return false;
 		}
 
-		long pk = clusterGroup.getPrimaryKey();
+		long primaryKey = clusterGroup.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

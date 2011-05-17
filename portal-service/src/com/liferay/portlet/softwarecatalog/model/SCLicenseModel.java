@@ -54,7 +54,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	 *
 	 * @param pk the primary key of this s c license
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the license ID of this s c license.
@@ -176,6 +176,8 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

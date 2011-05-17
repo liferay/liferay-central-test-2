@@ -50,8 +50,8 @@ public class PluginSettingWrapper implements PluginSetting {
 	*
 	* @param pk the primary key of this plugin setting
 	*/
-	public void setPrimaryKey(long pk) {
-		_pluginSetting.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_pluginSetting.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -197,6 +197,10 @@ public class PluginSettingWrapper implements PluginSetting {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _pluginSetting.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_pluginSetting.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

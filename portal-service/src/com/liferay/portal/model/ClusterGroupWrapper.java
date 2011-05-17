@@ -50,8 +50,8 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	*
 	* @param pk the primary key of this cluster group
 	*/
-	public void setPrimaryKey(long pk) {
-		_clusterGroup.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_clusterGroup.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -161,6 +161,10 @@ public class ClusterGroupWrapper implements ClusterGroup {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _clusterGroup.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_clusterGroup.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

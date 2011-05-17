@@ -53,7 +53,7 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	 *
 	 * @param pk the primary key of this message boards discussion
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the discussion ID of this message boards discussion.
@@ -131,6 +131,8 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

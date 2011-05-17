@@ -92,12 +92,16 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		return _equityGroupSettingId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEquityGroupSettingId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEquityGroupSettingId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_equityGroupSettingId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getEquityGroupSettingId() {
@@ -230,12 +234,12 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	}
 
 	public int compareTo(SocialEquityGroupSetting socialEquityGroupSetting) {
-		long pk = socialEquityGroupSetting.getPrimaryKey();
+		long primaryKey = socialEquityGroupSetting.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -257,9 +261,9 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 			return false;
 		}
 
-		long pk = socialEquityGroupSetting.getPrimaryKey();
+		long primaryKey = socialEquityGroupSetting.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

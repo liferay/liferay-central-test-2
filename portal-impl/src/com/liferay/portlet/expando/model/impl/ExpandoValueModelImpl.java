@@ -134,12 +134,16 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return _valueId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setValueId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setValueId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_valueId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getValueId() {
@@ -349,9 +353,9 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 			return false;
 		}
 
-		long pk = expandoValue.getPrimaryKey();
+		long primaryKey = expandoValue.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

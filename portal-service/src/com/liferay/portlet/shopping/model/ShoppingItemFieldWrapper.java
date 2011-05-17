@@ -50,8 +50,8 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 	*
 	* @param pk the primary key of this shopping item field
 	*/
-	public void setPrimaryKey(long pk) {
-		_shoppingItemField.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_shoppingItemField.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -170,6 +170,10 @@ public class ShoppingItemFieldWrapper implements ShoppingItemField {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _shoppingItemField.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_shoppingItemField.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -50,8 +50,8 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	*
 	* @param pk the primary key of this asset vocabulary
 	*/
-	public void setPrimaryKey(long pk) {
-		_assetVocabulary.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_assetVocabulary.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -484,6 +484,10 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetVocabulary.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_assetVocabulary.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -50,8 +50,8 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	*
 	* @param pk the primary key of this message boards stats user
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbStatsUser.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbStatsUser.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -210,6 +210,10 @@ public class MBStatsUserWrapper implements MBStatsUser {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbStatsUser.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbStatsUser.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -243,12 +243,16 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		return _userId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setUserId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setUserId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_userId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -828,12 +832,12 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public int compareTo(User user) {
-		long pk = user.getPrimaryKey();
+		long primaryKey = user.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -855,9 +859,9 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			return false;
 		}
 
-		long pk = user.getPrimaryKey();
+		long primaryKey = user.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

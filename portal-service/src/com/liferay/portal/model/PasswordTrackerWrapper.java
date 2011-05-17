@@ -50,8 +50,8 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 	*
 	* @param pk the primary key of this password tracker
 	*/
-	public void setPrimaryKey(long pk) {
-		_passwordTracker.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_passwordTracker.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -172,6 +172,10 @@ public class PasswordTrackerWrapper implements PasswordTracker {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _passwordTracker.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_passwordTracker.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

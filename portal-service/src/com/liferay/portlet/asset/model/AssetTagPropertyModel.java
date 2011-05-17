@@ -59,7 +59,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	 *
 	 * @param pk the primary key of this asset tag property
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the tag property ID of this asset tag property.
@@ -218,6 +218,8 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

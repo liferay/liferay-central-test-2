@@ -52,7 +52,7 @@ public interface ExpandoTableModel extends BaseModel<ExpandoTable> {
 	 *
 	 * @param pk the primary key of this expando table
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the table ID of this expando table.
@@ -131,6 +131,8 @@ public interface ExpandoTableModel extends BaseModel<ExpandoTable> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

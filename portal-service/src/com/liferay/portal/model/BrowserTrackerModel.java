@@ -53,7 +53,7 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	 *
 	 * @param pk the primary key of this browser tracker
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the browser tracker ID of this browser tracker.
@@ -125,6 +125,8 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -50,8 +50,8 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 	*
 	* @param pk the primary key of this social equity user
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialEquityUser.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialEquityUser.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -282,6 +282,10 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialEquityUser.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialEquityUser.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

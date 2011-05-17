@@ -50,8 +50,8 @@ public class SCLicenseWrapper implements SCLicense {
 	*
 	* @param pk the primary key of this s c license
 	*/
-	public void setPrimaryKey(long pk) {
-		_scLicense.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_scLicense.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -215,6 +215,10 @@ public class SCLicenseWrapper implements SCLicense {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _scLicense.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_scLicense.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

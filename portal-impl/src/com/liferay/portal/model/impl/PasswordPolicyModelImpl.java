@@ -184,12 +184,16 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 		return _passwordPolicyId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPasswordPolicyId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPasswordPolicyId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_passwordPolicyId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPasswordPolicyId() {
@@ -601,12 +605,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public int compareTo(PasswordPolicy passwordPolicy) {
-		long pk = passwordPolicy.getPrimaryKey();
+		long primaryKey = passwordPolicy.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -628,9 +632,9 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 			return false;
 		}
 
-		long pk = passwordPolicy.getPrimaryKey();
+		long primaryKey = passwordPolicy.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

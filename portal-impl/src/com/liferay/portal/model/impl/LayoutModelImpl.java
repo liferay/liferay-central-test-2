@@ -181,12 +181,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return _plid;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPlid(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPlid(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_plid);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -1031,9 +1035,9 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			return false;
 		}
 
-		long pk = layout.getPrimaryKey();
+		long primaryKey = layout.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

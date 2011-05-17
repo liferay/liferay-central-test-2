@@ -50,8 +50,8 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	*
 	* @param pk the primary key of this s c product entry
 	*/
-	public void setPrimaryKey(long pk) {
-		_scProductEntry.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_scProductEntry.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -388,6 +388,10 @@ public class SCProductEntryWrapper implements SCProductEntry {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _scProductEntry.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_scProductEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

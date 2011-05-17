@@ -56,7 +56,7 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	 *
 	 * @param pk the primary key of this message boards stats user
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the stats user ID of this message boards stats user.
@@ -171,6 +171,8 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -135,12 +135,16 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		return _companyId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCompanyId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCompanyId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_companyId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCompanyId() {
@@ -307,12 +311,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public int compareTo(Company company) {
-		long pk = company.getPrimaryKey();
+		long primaryKey = company.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -334,9 +338,9 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			return false;
 		}
 
-		long pk = company.getPrimaryKey();
+		long primaryKey = company.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

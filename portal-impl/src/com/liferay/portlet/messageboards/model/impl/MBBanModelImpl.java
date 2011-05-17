@@ -136,12 +136,16 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return _banId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setBanId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setBanId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_banId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getBanId() {
@@ -290,12 +294,12 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	public int compareTo(MBBan mbBan) {
-		long pk = mbBan.getPrimaryKey();
+		long primaryKey = mbBan.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -317,9 +321,9 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 			return false;
 		}
 
-		long pk = mbBan.getPrimaryKey();
+		long primaryKey = mbBan.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

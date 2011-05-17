@@ -50,8 +50,8 @@ public class PollsChoiceWrapper implements PollsChoice {
 	*
 	* @param pk the primary key of this polls choice
 	*/
-	public void setPrimaryKey(long pk) {
-		_pollsChoice.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_pollsChoice.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -255,6 +255,10 @@ public class PollsChoiceWrapper implements PollsChoice {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _pollsChoice.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_pollsChoice.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

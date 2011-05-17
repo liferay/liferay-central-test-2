@@ -50,8 +50,8 @@ public class RoleWrapper implements Role {
 	*
 	* @param pk the primary key of this role
 	*/
-	public void setPrimaryKey(long pk) {
-		_role.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_role.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -334,6 +334,10 @@ public class RoleWrapper implements Role {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _role.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_role.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

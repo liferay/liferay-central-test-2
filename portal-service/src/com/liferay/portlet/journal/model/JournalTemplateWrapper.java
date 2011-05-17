@@ -50,8 +50,8 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	*
 	* @param pk the primary key of this journal template
 	*/
-	public void setPrimaryKey(long pk) {
-		_journalTemplate.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_journalTemplate.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -442,6 +442,10 @@ public class JournalTemplateWrapper implements JournalTemplate {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _journalTemplate.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_journalTemplate.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -83,14 +83,18 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		return new OrgGroupPermissionPK(_organizationId, _groupId, _permissionId);
 	}
 
-	public void setPrimaryKey(OrgGroupPermissionPK pk) {
-		setOrganizationId(pk.organizationId);
-		setGroupId(pk.groupId);
-		setPermissionId(pk.permissionId);
+	public void setPrimaryKey(OrgGroupPermissionPK primaryKey) {
+		setOrganizationId(primaryKey.organizationId);
+		setGroupId(primaryKey.groupId);
+		setPermissionId(primaryKey.permissionId);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new OrgGroupPermissionPK(_organizationId, _groupId, _permissionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey((OrgGroupPermissionPK)primaryKeyObj);
 	}
 
 	public long getOrganizationId() {
@@ -141,9 +145,9 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public int compareTo(OrgGroupPermission orgGroupPermission) {
-		OrgGroupPermissionPK pk = orgGroupPermission.getPrimaryKey();
+		OrgGroupPermissionPK primaryKey = orgGroupPermission.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		return getPrimaryKey().compareTo(primaryKey);
 	}
 
 	public boolean equals(Object obj) {
@@ -160,9 +164,9 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 			return false;
 		}
 
-		OrgGroupPermissionPK pk = orgGroupPermission.getPrimaryKey();
+		OrgGroupPermissionPK primaryKey = orgGroupPermission.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey().equals(primaryKey)) {
 			return true;
 		}
 		else {

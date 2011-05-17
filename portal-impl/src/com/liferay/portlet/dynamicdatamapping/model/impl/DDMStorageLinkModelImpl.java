@@ -91,12 +91,16 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 		return _storageLinkId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setStorageLinkId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setStorageLinkId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_storageLinkId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -201,12 +205,12 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	public int compareTo(DDMStorageLink ddmStorageLink) {
-		long pk = ddmStorageLink.getPrimaryKey();
+		long primaryKey = ddmStorageLink.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -228,9 +232,9 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 			return false;
 		}
 
-		long pk = ddmStorageLink.getPrimaryKey();
+		long primaryKey = ddmStorageLink.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

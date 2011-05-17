@@ -50,8 +50,8 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 	*
 	* @param pk the primary key of this social equity log
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialEquityLog.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialEquityLog.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -325,6 +325,10 @@ public class SocialEquityLogWrapper implements SocialEquityLog {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialEquityLog.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialEquityLog.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

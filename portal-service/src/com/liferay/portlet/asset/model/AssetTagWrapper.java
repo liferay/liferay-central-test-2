@@ -50,8 +50,8 @@ public class AssetTagWrapper implements AssetTag {
 	*
 	* @param pk the primary key of this asset tag
 	*/
-	public void setPrimaryKey(long pk) {
-		_assetTag.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_assetTag.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -262,6 +262,10 @@ public class AssetTagWrapper implements AssetTag {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetTag.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_assetTag.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

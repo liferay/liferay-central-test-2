@@ -50,8 +50,8 @@ public class EmailAddressWrapper implements EmailAddress {
 	*
 	* @param pk the primary key of this email address
 	*/
-	public void setPrimaryKey(long pk) {
-		_emailAddress.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_emailAddress.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -316,6 +316,10 @@ public class EmailAddressWrapper implements EmailAddress {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _emailAddress.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_emailAddress.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -50,8 +50,8 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 	*
 	* @param pk the primary key of this d d m structure link
 	*/
-	public void setPrimaryKey(long pk) {
-		_ddmStructureLink.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ddmStructureLink.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -161,6 +161,10 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ddmStructureLink.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ddmStructureLink.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

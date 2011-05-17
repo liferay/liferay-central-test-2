@@ -57,7 +57,7 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	 *
 	 * @param pk the primary key of this i g image
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this i g image.
@@ -286,6 +286,8 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

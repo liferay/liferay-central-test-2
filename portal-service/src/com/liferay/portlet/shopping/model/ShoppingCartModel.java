@@ -58,7 +58,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	 *
 	 * @param pk the primary key of this shopping cart
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the cart ID of this shopping cart.
@@ -252,6 +252,8 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

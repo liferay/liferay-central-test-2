@@ -88,12 +88,16 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return _virtualHostId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setVirtualHostId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setVirtualHostId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_virtualHostId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getVirtualHostId() {
@@ -199,12 +203,12 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	public int compareTo(VirtualHost virtualHost) {
-		long pk = virtualHost.getPrimaryKey();
+		long primaryKey = virtualHost.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -226,9 +230,9 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 			return false;
 		}
 
-		long pk = virtualHost.getPrimaryKey();
+		long primaryKey = virtualHost.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

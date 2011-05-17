@@ -145,12 +145,16 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 		return _emailAddressId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEmailAddressId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEmailAddressId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_emailAddressId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getEmailAddressId() {
@@ -341,9 +345,9 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 			return false;
 		}
 
-		long pk = emailAddress.getPrimaryKey();
+		long primaryKey = emailAddress.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -50,8 +50,8 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	*
 	* @param pk the primary key of this d d m template
 	*/
-	public void setPrimaryKey(long pk) {
-		_ddmTemplate.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ddmTemplate.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -352,6 +352,10 @@ public class DDMTemplateWrapper implements DDMTemplate {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ddmTemplate.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ddmTemplate.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

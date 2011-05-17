@@ -160,12 +160,16 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return _couponId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCouponId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCouponId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_couponId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCouponId() {
@@ -445,9 +449,9 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 			return false;
 		}
 
-		long pk = shoppingCoupon.getPrimaryKey();
+		long primaryKey = shoppingCoupon.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -56,7 +56,7 @@ public interface SocialEquityHistoryModel extends BaseModel<SocialEquityHistory>
 	 *
 	 * @param pk the primary key of this social equity history
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the equity history ID of this social equity history.
@@ -170,6 +170,8 @@ public interface SocialEquityHistoryModel extends BaseModel<SocialEquityHistory>
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

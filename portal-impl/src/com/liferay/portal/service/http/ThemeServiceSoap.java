@@ -67,12 +67,11 @@ public class ThemeServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.json.JSONArray getWARThemes()
-		throws RemoteException {
+	public static java.lang.String getWARThemes() throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = ThemeServiceUtil.getWARThemes();
 
-			return returnValue;
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

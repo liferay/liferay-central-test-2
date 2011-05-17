@@ -90,12 +90,16 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		return _resourceActionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setResourceActionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setResourceActionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_resourceActionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getResourceActionId() {
@@ -233,9 +237,9 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 			return false;
 		}
 
-		long pk = resourceAction.getPrimaryKey();
+		long primaryKey = resourceAction.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

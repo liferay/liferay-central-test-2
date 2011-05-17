@@ -33,5 +33,10 @@ public interface AssetCategory extends AssetCategoryModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public java.lang.String getTitle(java.lang.String languageId);
+
+	public java.lang.String getTitle(java.lang.String languageId,
+		boolean useDefault);
+
 	public boolean isRootCategory();
 }

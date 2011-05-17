@@ -50,8 +50,8 @@ public class IGImageWrapper implements IGImage {
 	*
 	* @param pk the primary key of this i g image
 	*/
-	public void setPrimaryKey(long pk) {
-		_igImage.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_igImage.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -352,6 +352,10 @@ public class IGImageWrapper implements IGImage {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _igImage.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_igImage.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

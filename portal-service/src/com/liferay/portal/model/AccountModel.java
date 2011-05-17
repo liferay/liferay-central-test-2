@@ -56,7 +56,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	 *
 	 * @param pk the primary key of this account
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the account ID of this account.
@@ -320,6 +320,8 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

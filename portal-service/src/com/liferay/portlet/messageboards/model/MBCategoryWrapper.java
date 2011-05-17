@@ -50,8 +50,8 @@ public class MBCategoryWrapper implements MBCategory {
 	*
 	* @param pk the primary key of this message boards category
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbCategory.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbCategory.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -370,6 +370,10 @@ public class MBCategoryWrapper implements MBCategory {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbCategory.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbCategory.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

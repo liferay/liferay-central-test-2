@@ -50,8 +50,8 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	*
 	* @param pk the primary key of this s c product version
 	*/
-	public void setPrimaryKey(long pk) {
-		_scProductVersion.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_scProductVersion.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -325,6 +325,10 @@ public class SCProductVersionWrapper implements SCProductVersion {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _scProductVersion.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_scProductVersion.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

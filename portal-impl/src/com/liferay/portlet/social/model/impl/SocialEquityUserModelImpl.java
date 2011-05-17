@@ -95,12 +95,16 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 		return _equityUserId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEquityUserId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEquityUserId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_equityUserId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getEquityUserId() {
@@ -255,12 +259,12 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	}
 
 	public int compareTo(SocialEquityUser socialEquityUser) {
-		long pk = socialEquityUser.getPrimaryKey();
+		long primaryKey = socialEquityUser.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -282,9 +286,9 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 			return false;
 		}
 
-		long pk = socialEquityUser.getPrimaryKey();
+		long primaryKey = socialEquityUser.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

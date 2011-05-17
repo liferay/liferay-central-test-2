@@ -56,7 +56,7 @@ public interface ContactModel extends AuditedModel, BaseModel<Contact> {
 	 *
 	 * @param pk the primary key of this contact
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the contact ID of this contact.
@@ -532,6 +532,8 @@ public interface ContactModel extends AuditedModel, BaseModel<Contact> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -131,12 +131,16 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _recordId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRecordId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRecordId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_recordId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -239,12 +243,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public int compareTo(DDLRecord ddlRecord) {
-		long pk = ddlRecord.getPrimaryKey();
+		long primaryKey = ddlRecord.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -266,9 +270,9 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			return false;
 		}
 
-		long pk = ddlRecord.getPrimaryKey();
+		long primaryKey = ddlRecord.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

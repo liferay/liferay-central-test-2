@@ -50,8 +50,8 @@ public class DLFolderWrapper implements DLFolder {
 	*
 	* @param pk the primary key of this d l folder
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlFolder.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlFolder.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -361,6 +361,10 @@ public class DLFolderWrapper implements DLFolder {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlFolder.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlFolder.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

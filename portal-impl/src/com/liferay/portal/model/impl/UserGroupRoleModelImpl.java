@@ -121,14 +121,18 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 		return new UserGroupRolePK(_userId, _groupId, _roleId);
 	}
 
-	public void setPrimaryKey(UserGroupRolePK pk) {
-		setUserId(pk.userId);
-		setGroupId(pk.groupId);
-		setRoleId(pk.roleId);
+	public void setPrimaryKey(UserGroupRolePK primaryKey) {
+		setUserId(primaryKey.userId);
+		setGroupId(primaryKey.groupId);
+		setRoleId(primaryKey.roleId);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new UserGroupRolePK(_userId, _groupId, _roleId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey((UserGroupRolePK)primaryKeyObj);
 	}
 
 	public long getUserId() {
@@ -187,9 +191,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 	}
 
 	public int compareTo(UserGroupRole userGroupRole) {
-		UserGroupRolePK pk = userGroupRole.getPrimaryKey();
+		UserGroupRolePK primaryKey = userGroupRole.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		return getPrimaryKey().compareTo(primaryKey);
 	}
 
 	public boolean equals(Object obj) {
@@ -206,9 +210,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 			return false;
 		}
 
-		UserGroupRolePK pk = userGroupRole.getPrimaryKey();
+		UserGroupRolePK primaryKey = userGroupRole.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey().equals(primaryKey)) {
 			return true;
 		}
 		else {

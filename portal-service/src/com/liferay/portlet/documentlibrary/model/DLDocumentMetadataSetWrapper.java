@@ -51,8 +51,8 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 	*
 	* @param pk the primary key of this d l document metadata set
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlDocumentMetadataSet.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlDocumentMetadataSet.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -216,6 +216,10 @@ public class DLDocumentMetadataSetWrapper implements DLDocumentMetadataSet {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlDocumentMetadataSet.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlDocumentMetadataSet.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

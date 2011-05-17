@@ -93,12 +93,16 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return _articleImageId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setArticleImageId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setArticleImageId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_articleImageId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getArticleImageId() {
@@ -283,12 +287,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public int compareTo(JournalArticleImage journalArticleImage) {
-		long pk = journalArticleImage.getPrimaryKey();
+		long primaryKey = journalArticleImage.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -310,9 +314,9 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 			return false;
 		}
 
-		long pk = journalArticleImage.getPrimaryKey();
+		long primaryKey = journalArticleImage.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

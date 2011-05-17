@@ -56,7 +56,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	 *
 	 * @param pk the primary key of this blogs stats user
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the stats user ID of this blogs stats user.
@@ -227,6 +227,8 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

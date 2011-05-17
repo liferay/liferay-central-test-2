@@ -50,8 +50,8 @@ public class OrganizationWrapper implements Organization {
 	*
 	* @param pk the primary key of this organization
 	*/
-	public void setPrimaryKey(long pk) {
-		_organization.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_organization.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -305,6 +305,10 @@ public class OrganizationWrapper implements Organization {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _organization.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_organization.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

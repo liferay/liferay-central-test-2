@@ -50,8 +50,8 @@ public class IGFolderWrapper implements IGFolder {
 	*
 	* @param pk the primary key of this i g folder
 	*/
-	public void setPrimaryKey(long pk) {
-		_igFolder.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_igFolder.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -280,6 +280,10 @@ public class IGFolderWrapper implements IGFolder {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _igFolder.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_igFolder.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

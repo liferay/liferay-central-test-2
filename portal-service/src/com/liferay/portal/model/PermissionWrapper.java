@@ -50,8 +50,8 @@ public class PermissionWrapper implements Permission {
 	*
 	* @param pk the primary key of this permission
 	*/
-	public void setPrimaryKey(long pk) {
-		_permission.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_permission.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -152,6 +152,10 @@ public class PermissionWrapper implements Permission {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _permission.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_permission.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

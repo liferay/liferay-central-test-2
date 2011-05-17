@@ -129,12 +129,16 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		return _regionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRegionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRegionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_regionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getRegionId() {
@@ -254,9 +258,9 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 			return false;
 		}
 
-		long pk = region.getPrimaryKey();
+		long primaryKey = region.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

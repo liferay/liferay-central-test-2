@@ -58,7 +58,7 @@ public interface RatingsEntryModel extends AuditedModel, BaseModel<RatingsEntry>
 	 *
 	 * @param pk the primary key of this ratings entry
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the entry ID of this ratings entry.
@@ -222,6 +222,8 @@ public interface RatingsEntryModel extends AuditedModel, BaseModel<RatingsEntry>
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

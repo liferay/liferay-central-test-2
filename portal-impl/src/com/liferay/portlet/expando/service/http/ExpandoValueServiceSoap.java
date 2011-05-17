@@ -99,14 +99,14 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.json.JSONObject getJSONData(
-		long companyId, java.lang.String className, java.lang.String tableName,
+	public static java.lang.String getJSONData(long companyId,
+		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK) throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONObject returnValue = ExpandoValueServiceUtil.getJSONData(companyId,
 					className, tableName, columnName, classPK);
 
-			return returnValue;
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -50,8 +50,8 @@ public class RatingsEntryWrapper implements RatingsEntry {
 	*
 	* @param pk the primary key of this ratings entry
 	*/
-	public void setPrimaryKey(long pk) {
-		_ratingsEntry.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ratingsEntry.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -271,6 +271,10 @@ public class RatingsEntryWrapper implements RatingsEntry {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ratingsEntry.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ratingsEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

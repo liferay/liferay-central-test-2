@@ -51,8 +51,8 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	*
 	* @param pk the primary key of this workflow definition link
 	*/
-	public void setPrimaryKey(long pk) {
-		_workflowDefinitionLink.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_workflowDefinitionLink.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -291,6 +291,10 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _workflowDefinitionLink.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_workflowDefinitionLink.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

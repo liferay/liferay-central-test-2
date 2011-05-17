@@ -50,8 +50,8 @@ public class WikiNodeWrapper implements WikiNode {
 	*
 	* @param pk the primary key of this wiki node
 	*/
-	public void setPrimaryKey(long pk) {
-		_wikiNode.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_wikiNode.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -298,6 +298,10 @@ public class WikiNodeWrapper implements WikiNode {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _wikiNode.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_wikiNode.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

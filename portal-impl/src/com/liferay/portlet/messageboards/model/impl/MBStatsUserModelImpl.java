@@ -95,12 +95,16 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		return _statsUserId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setStatsUserId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setStatsUserId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_statsUserId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getStatsUserId() {
@@ -253,9 +257,9 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 			return false;
 		}
 
-		long pk = mbStatsUser.getPrimaryKey();
+		long primaryKey = mbStatsUser.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -54,7 +54,7 @@ public interface GroupModel extends BaseModel<Group> {
 	 *
 	 * @param pk the primary key of this group
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the group ID of this group.
@@ -305,6 +305,8 @@ public interface GroupModel extends BaseModel<Group> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

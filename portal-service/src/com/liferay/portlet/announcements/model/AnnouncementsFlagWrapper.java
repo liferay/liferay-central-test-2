@@ -50,8 +50,8 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 	*
 	* @param pk the primary key of this announcements flag
 	*/
-	public void setPrimaryKey(long pk) {
-		_announcementsFlag.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_announcementsFlag.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -190,6 +190,10 @@ public class AnnouncementsFlagWrapper implements AnnouncementsFlag {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _announcementsFlag.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_announcementsFlag.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -121,12 +121,16 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		return _listTypeId;
 	}
 
-	public void setPrimaryKey(int pk) {
-		setListTypeId(pk);
+	public void setPrimaryKey(int primaryKey) {
+		setListTypeId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Integer(_listTypeId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Integer)primaryKeyObj).intValue());
 	}
 
 	public int getListTypeId() {
@@ -212,9 +216,9 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 			return false;
 		}
 
-		int pk = listType.getPrimaryKey();
+		int primaryKey = listType.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

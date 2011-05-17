@@ -96,12 +96,16 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		return _userNotificationEventId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setUserNotificationEventId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setUserNotificationEventId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_userNotificationEventId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -266,9 +270,9 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 			return false;
 		}
 
-		long pk = userNotificationEvent.getPrimaryKey();
+		long primaryKey = userNotificationEvent.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -52,7 +52,7 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	 *
 	 * @param pk the primary key of this org labor
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the org labor ID of this org labor.
@@ -305,6 +305,8 @@ public interface OrgLaborModel extends BaseModel<OrgLabor> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

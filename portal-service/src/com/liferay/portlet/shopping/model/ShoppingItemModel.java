@@ -58,7 +58,7 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	 *
 	 * @param pk the primary key of this shopping item
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the item ID of this shopping item.
@@ -636,6 +636,8 @@ public interface ShoppingItemModel extends BaseModel<ShoppingItem>, GroupedModel
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

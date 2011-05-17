@@ -144,12 +144,16 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		return _categoryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCategoryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCategoryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_categoryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCategoryId() {
@@ -339,9 +343,9 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 			return false;
 		}
 
-		long pk = shoppingCategory.getPrimaryKey();
+		long primaryKey = shoppingCategory.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

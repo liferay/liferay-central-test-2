@@ -195,12 +195,16 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _id;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_id);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -929,9 +933,9 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			return false;
 		}
 
-		long pk = journalArticle.getPrimaryKey();
+		long primaryKey = journalArticle.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

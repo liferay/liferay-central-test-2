@@ -57,7 +57,7 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	 *
 	 * @param pk the primary key of this i g folder
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this i g folder.
@@ -230,6 +230,8 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -115,12 +115,16 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		return _mailingListId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setMailingListId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setMailingListId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_mailingListId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -502,12 +506,12 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	public int compareTo(MBMailingList mbMailingList) {
-		long pk = mbMailingList.getPrimaryKey();
+		long primaryKey = mbMailingList.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -529,9 +533,9 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 			return false;
 		}
 
-		long pk = mbMailingList.getPrimaryKey();
+		long primaryKey = mbMailingList.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

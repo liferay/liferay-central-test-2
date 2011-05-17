@@ -50,8 +50,8 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 	*
 	* @param pk the primary key of this asset tag stats
 	*/
-	public void setPrimaryKey(long pk) {
-		_assetTagStats.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_assetTagStats.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -161,6 +161,10 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetTagStats.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_assetTagStats.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

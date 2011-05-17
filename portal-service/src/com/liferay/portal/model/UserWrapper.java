@@ -50,8 +50,8 @@ public class UserWrapper implements User {
 	*
 	* @param pk the primary key of this user
 	*/
-	public void setPrimaryKey(long pk) {
-		_user.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_user.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -829,6 +829,10 @@ public class UserWrapper implements User {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _user.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_user.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

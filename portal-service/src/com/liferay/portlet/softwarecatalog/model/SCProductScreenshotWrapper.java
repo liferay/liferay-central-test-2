@@ -50,8 +50,8 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	*
 	* @param pk the primary key of this s c product screenshot
 	*/
-	public void setPrimaryKey(long pk) {
-		_scProductScreenshot.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_scProductScreenshot.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -206,6 +206,10 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _scProductScreenshot.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_scProductScreenshot.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

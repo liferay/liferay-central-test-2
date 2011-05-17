@@ -50,8 +50,8 @@ public class OrgLaborWrapper implements OrgLabor {
 	*
 	* @param pk the primary key of this org labor
 	*/
-	public void setPrimaryKey(long pk) {
-		_orgLabor.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_orgLabor.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -386,6 +386,10 @@ public class OrgLaborWrapper implements OrgLabor {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _orgLabor.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_orgLabor.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

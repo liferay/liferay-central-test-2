@@ -50,8 +50,8 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 	*
 	* @param pk the primary key of this resource permission
 	*/
-	public void setPrimaryKey(long pk) {
-		_resourcePermission.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_resourcePermission.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -224,6 +224,10 @@ public class ResourcePermissionWrapper implements ResourcePermission {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _resourcePermission.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_resourcePermission.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

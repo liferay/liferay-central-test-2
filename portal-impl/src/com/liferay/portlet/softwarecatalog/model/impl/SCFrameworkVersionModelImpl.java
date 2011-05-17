@@ -159,12 +159,16 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		return _frameworkVersionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFrameworkVersionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFrameworkVersionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_frameworkVersionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getFrameworkVersionId() {
@@ -354,9 +358,9 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 			return false;
 		}
 
-		long pk = scFrameworkVersion.getPrimaryKey();
+		long primaryKey = scFrameworkVersion.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

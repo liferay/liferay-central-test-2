@@ -133,12 +133,16 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return _countryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCountryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCountryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_countryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCountryId() {
@@ -315,9 +319,9 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 			return false;
 		}
 
-		long pk = country.getPrimaryKey();
+		long primaryKey = country.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

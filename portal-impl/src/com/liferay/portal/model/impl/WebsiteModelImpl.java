@@ -145,12 +145,16 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return _websiteId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setWebsiteId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setWebsiteId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_websiteId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getWebsiteId() {
@@ -340,9 +344,9 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 			return false;
 		}
 
-		long pk = website.getPrimaryKey();
+		long primaryKey = website.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

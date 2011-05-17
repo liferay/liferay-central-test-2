@@ -50,8 +50,8 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	*
 	* @param pk the primary key of this message boards discussion
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbDiscussion.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbDiscussion.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -161,6 +161,10 @@ public class MBDiscussionWrapper implements MBDiscussion {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbDiscussion.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbDiscussion.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

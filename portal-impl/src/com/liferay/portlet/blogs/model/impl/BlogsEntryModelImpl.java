@@ -171,12 +171,16 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return _entryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEntryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEntryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_entryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -590,9 +594,9 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 			return false;
 		}
 
-		long pk = blogsEntry.getPrimaryKey();
+		long primaryKey = blogsEntry.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

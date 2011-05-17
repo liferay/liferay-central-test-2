@@ -50,8 +50,8 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 	*
 	* @param pk the primary key of this browser tracker
 	*/
-	public void setPrimaryKey(long pk) {
-		_browserTracker.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_browserTracker.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -154,6 +154,10 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _browserTracker.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_browserTracker.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

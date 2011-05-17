@@ -85,12 +85,16 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		return _rowId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRowId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRowId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_rowId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getRowId() {
@@ -170,12 +174,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	public int compareTo(ExpandoRow expandoRow) {
-		long pk = expandoRow.getPrimaryKey();
+		long primaryKey = expandoRow.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -197,9 +201,9 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 			return false;
 		}
 
-		long pk = expandoRow.getPrimaryKey();
+		long primaryKey = expandoRow.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

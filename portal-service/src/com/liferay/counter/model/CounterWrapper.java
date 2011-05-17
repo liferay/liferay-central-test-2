@@ -50,8 +50,8 @@ public class CounterWrapper implements Counter {
 	*
 	* @param pk the primary key of this counter
 	*/
-	public void setPrimaryKey(java.lang.String pk) {
-		_counter.setPrimaryKey(pk);
+	public void setPrimaryKey(java.lang.String primaryKey) {
+		_counter.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -116,6 +116,10 @@ public class CounterWrapper implements Counter {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _counter.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_counter.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -50,8 +50,8 @@ public class DLDocumentTypeWrapper implements DLDocumentType {
 	*
 	* @param pk the primary key of this d l document type
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlDocumentType.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlDocumentType.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -262,6 +262,10 @@ public class DLDocumentTypeWrapper implements DLDocumentType {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlDocumentType.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlDocumentType.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

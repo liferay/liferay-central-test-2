@@ -54,7 +54,7 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	 *
 	 * @param pk the primary key of this shopping item field
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the item field ID of this shopping item field.
@@ -142,6 +142,8 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -54,7 +54,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	 *
 	 * @param pk the primary key of this social relation
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this social relation.
@@ -168,6 +168,8 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

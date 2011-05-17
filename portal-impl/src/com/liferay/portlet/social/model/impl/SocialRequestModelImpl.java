@@ -102,12 +102,16 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		return _requestId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRequestId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRequestId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_requestId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -399,9 +403,9 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 			return false;
 		}
 
-		long pk = socialRequest.getPrimaryKey();
+		long primaryKey = socialRequest.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

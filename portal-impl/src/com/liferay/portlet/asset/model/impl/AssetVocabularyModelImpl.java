@@ -155,12 +155,16 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return _vocabularyId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setVocabularyId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setVocabularyId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_vocabularyId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -548,9 +552,9 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 			return false;
 		}
 
-		long pk = assetVocabulary.getPrimaryKey();
+		long primaryKey = assetVocabulary.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

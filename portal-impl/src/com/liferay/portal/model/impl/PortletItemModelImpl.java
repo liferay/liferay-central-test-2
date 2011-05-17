@@ -98,12 +98,16 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return _portletItemId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPortletItemId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPortletItemId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_portletItemId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPortletItemId() {
@@ -297,12 +301,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public int compareTo(PortletItem portletItem) {
-		long pk = portletItem.getPrimaryKey();
+		long primaryKey = portletItem.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -324,9 +328,9 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 			return false;
 		}
 
-		long pk = portletItem.getPrimaryKey();
+		long primaryKey = portletItem.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

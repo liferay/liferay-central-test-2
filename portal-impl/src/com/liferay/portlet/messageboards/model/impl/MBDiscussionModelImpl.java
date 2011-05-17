@@ -90,12 +90,16 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		return _discussionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setDiscussionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setDiscussionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_discussionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getDiscussionId() {
@@ -206,12 +210,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	}
 
 	public int compareTo(MBDiscussion mbDiscussion) {
-		long pk = mbDiscussion.getPrimaryKey();
+		long primaryKey = mbDiscussion.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -233,9 +237,9 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 			return false;
 		}
 
-		long pk = mbDiscussion.getPrimaryKey();
+		long primaryKey = mbDiscussion.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

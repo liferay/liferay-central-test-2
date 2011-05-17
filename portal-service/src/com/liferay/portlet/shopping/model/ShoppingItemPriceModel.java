@@ -53,7 +53,7 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	 *
 	 * @param pk the primary key of this shopping item price
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the item price ID of this shopping item price.
@@ -222,6 +222,8 @@ public interface ShoppingItemPriceModel extends BaseModel<ShoppingItemPrice> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

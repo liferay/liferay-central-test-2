@@ -170,12 +170,16 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _eventId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEventId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEventId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_eventId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -523,9 +527,9 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 			return false;
 		}
 
-		long pk = calEvent.getPrimaryKey();
+		long primaryKey = calEvent.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

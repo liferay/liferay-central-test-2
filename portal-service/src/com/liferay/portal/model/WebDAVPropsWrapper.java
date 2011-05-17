@@ -50,8 +50,8 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 	*
 	* @param pk the primary key of this web d a v props
 	*/
-	public void setPrimaryKey(long pk) {
-		_webDAVProps.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_webDAVProps.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -215,6 +215,10 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _webDAVProps.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_webDAVProps.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

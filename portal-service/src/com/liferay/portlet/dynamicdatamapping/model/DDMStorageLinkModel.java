@@ -54,7 +54,7 @@ public interface DDMStorageLinkModel extends BaseModel<DDMStorageLink> {
 	 *
 	 * @param pk the primary key of this d d m storage link
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this d d m storage link.
@@ -147,6 +147,8 @@ public interface DDMStorageLinkModel extends BaseModel<DDMStorageLink> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

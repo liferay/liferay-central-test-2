@@ -53,7 +53,7 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	 *
 	 * @param pk the primary key of this user group
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the user group ID of this user group.
@@ -140,6 +140,8 @@ public interface UserGroupModel extends BaseModel<UserGroup> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

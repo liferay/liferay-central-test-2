@@ -141,12 +141,16 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return _userGroupId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setUserGroupId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setUserGroupId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_userGroupId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getUserGroupId() {
@@ -280,9 +284,9 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			return false;
 		}
 
-		long pk = userGroup.getPrimaryKey();
+		long primaryKey = userGroup.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

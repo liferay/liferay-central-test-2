@@ -51,8 +51,8 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	* @param pk the primary key of this org group permission
 	*/
 	public void setPrimaryKey(
-		com.liferay.portal.service.persistence.OrgGroupPermissionPK pk) {
-		_orgGroupPermission.setPrimaryKey(pk);
+		com.liferay.portal.service.persistence.OrgGroupPermissionPK primaryKey) {
+		_orgGroupPermission.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -135,6 +135,10 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _orgGroupPermission.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_orgGroupPermission.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

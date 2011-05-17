@@ -50,8 +50,8 @@ public class MBBanWrapper implements MBBan {
 	*
 	* @param pk the primary key of this message boards ban
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbBan.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbBan.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -264,6 +264,10 @@ public class MBBanWrapper implements MBBan {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbBan.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbBan.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

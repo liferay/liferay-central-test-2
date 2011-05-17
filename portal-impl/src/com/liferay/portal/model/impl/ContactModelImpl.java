@@ -180,12 +180,16 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		return _contactId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setContactId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setContactId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_contactId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getContactId() {
@@ -598,12 +602,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public int compareTo(Contact contact) {
-		long pk = contact.getPrimaryKey();
+		long primaryKey = contact.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -625,9 +629,9 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			return false;
 		}
 
-		long pk = contact.getPrimaryKey();
+		long primaryKey = contact.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

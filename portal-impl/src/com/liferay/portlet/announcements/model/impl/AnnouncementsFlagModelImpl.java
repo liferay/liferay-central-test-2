@@ -134,12 +134,16 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return _flagId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFlagId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFlagId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_flagId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getFlagId() {
@@ -299,9 +303,9 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 			return false;
 		}
 
-		long pk = announcementsFlag.getPrimaryKey();
+		long primaryKey = announcementsFlag.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

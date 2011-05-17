@@ -53,7 +53,7 @@ public interface CountryModel extends BaseModel<Country> {
 	 *
 	 * @param pk the primary key of this country
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the country ID of this country.
@@ -178,6 +178,8 @@ public interface CountryModel extends BaseModel<Country> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

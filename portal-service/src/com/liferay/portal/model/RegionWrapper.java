@@ -50,8 +50,8 @@ public class RegionWrapper implements Region {
 	*
 	* @param pk the primary key of this region
 	*/
-	public void setPrimaryKey(long pk) {
-		_region.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_region.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -179,6 +179,10 @@ public class RegionWrapper implements Region {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _region.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_region.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -59,7 +59,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	 *
 	 * @param pk the primary key of this s c product entry
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the product entry ID of this s c product entry.
@@ -323,6 +323,8 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

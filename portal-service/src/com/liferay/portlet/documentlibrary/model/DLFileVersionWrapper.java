@@ -50,8 +50,8 @@ public class DLFileVersionWrapper implements DLFileVersion {
 	*
 	* @param pk the primary key of this d l file version
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlFileVersion.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlFileVersion.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -541,6 +541,10 @@ public class DLFileVersionWrapper implements DLFileVersion {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlFileVersion.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlFileVersion.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

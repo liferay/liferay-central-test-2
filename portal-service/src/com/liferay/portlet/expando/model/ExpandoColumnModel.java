@@ -52,7 +52,7 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	 *
 	 * @param pk the primary key of this expando column
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the column ID of this expando column.
@@ -168,6 +168,8 @@ public interface ExpandoColumnModel extends BaseModel<ExpandoColumn> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

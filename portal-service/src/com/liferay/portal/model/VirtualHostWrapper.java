@@ -50,8 +50,8 @@ public class VirtualHostWrapper implements VirtualHost {
 	*
 	* @param pk the primary key of this virtual host
 	*/
-	public void setPrimaryKey(long pk) {
-		_virtualHost.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_virtualHost.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -152,6 +152,10 @@ public class VirtualHostWrapper implements VirtualHost {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _virtualHost.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_virtualHost.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

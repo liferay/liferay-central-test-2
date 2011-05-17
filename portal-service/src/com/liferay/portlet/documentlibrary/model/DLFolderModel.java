@@ -58,7 +58,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	 *
 	 * @param pk the primary key of this d l folder
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this d l folder.
@@ -295,6 +295,8 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -128,12 +128,16 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return _structureLinkId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setStructureLinkId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setStructureLinkId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_structureLinkId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getStructureLinkId() {
@@ -224,12 +228,12 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	}
 
 	public int compareTo(DDMStructureLink ddmStructureLink) {
-		long pk = ddmStructureLink.getPrimaryKey();
+		long primaryKey = ddmStructureLink.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -251,9 +255,9 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 			return false;
 		}
 
-		long pk = ddmStructureLink.getPrimaryKey();
+		long primaryKey = ddmStructureLink.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

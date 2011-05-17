@@ -84,12 +84,16 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		return _name;
 	}
 
-	public void setPrimaryKey(String pk) {
-		setName(pk);
+	public void setPrimaryKey(String primaryKey) {
+		setName(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return _name;
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey((String)primaryKeyObj);
 	}
 
 	public String getName() {
@@ -135,9 +139,9 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	}
 
 	public int compareTo(Counter counter) {
-		String pk = counter.getPrimaryKey();
+		String primaryKey = counter.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		return getPrimaryKey().compareTo(primaryKey);
 	}
 
 	public boolean equals(Object obj) {
@@ -154,9 +158,9 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 			return false;
 		}
 
-		String pk = counter.getPrimaryKey();
+		String primaryKey = counter.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey().equals(primaryKey)) {
 			return true;
 		}
 		else {

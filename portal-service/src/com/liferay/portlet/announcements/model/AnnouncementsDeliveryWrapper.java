@@ -51,8 +51,8 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 	*
 	* @param pk the primary key of this announcements delivery
 	*/
-	public void setPrimaryKey(long pk) {
-		_announcementsDelivery.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_announcementsDelivery.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -254,6 +254,10 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _announcementsDelivery.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_announcementsDelivery.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

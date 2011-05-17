@@ -50,8 +50,8 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	*
 	* @param pk the primary key of this layout set branch
 	*/
-	public void setPrimaryKey(long pk) {
-		_layoutSetBranch.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_layoutSetBranch.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -289,6 +289,10 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _layoutSetBranch.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_layoutSetBranch.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

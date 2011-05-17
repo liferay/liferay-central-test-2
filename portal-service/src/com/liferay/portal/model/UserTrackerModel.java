@@ -56,7 +56,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	 *
 	 * @param pk the primary key of this user tracker
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the user tracker ID of this user tracker.
@@ -202,6 +202,8 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

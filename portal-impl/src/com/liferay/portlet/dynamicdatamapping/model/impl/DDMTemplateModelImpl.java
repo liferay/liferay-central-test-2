@@ -149,12 +149,16 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		return _templateId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setTemplateId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setTemplateId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_templateId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -378,12 +382,12 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	public int compareTo(DDMTemplate ddmTemplate) {
-		long pk = ddmTemplate.getPrimaryKey();
+		long primaryKey = ddmTemplate.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -405,9 +409,9 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 			return false;
 		}
 
-		long pk = ddmTemplate.getPrimaryKey();
+		long primaryKey = ddmTemplate.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

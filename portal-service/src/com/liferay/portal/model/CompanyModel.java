@@ -53,7 +53,7 @@ public interface CompanyModel extends BaseModel<Company> {
 	 *
 	 * @param pk the primary key of this company
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the company ID of this company.
@@ -205,6 +205,8 @@ public interface CompanyModel extends BaseModel<Company> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

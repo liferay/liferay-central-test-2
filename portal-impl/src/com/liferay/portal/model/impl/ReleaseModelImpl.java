@@ -94,12 +94,16 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		return _releaseId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setReleaseId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setReleaseId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_releaseId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getReleaseId() {
@@ -229,12 +233,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	public int compareTo(Release release) {
-		long pk = release.getPrimaryKey();
+		long primaryKey = release.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -256,9 +260,9 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 			return false;
 		}
 
-		long pk = release.getPrimaryKey();
+		long primaryKey = release.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

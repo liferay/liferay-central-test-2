@@ -50,8 +50,8 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 	*
 	* @param pk the primary key of this shopping coupon
 	*/
-	public void setPrimaryKey(long pk) {
-		_shoppingCoupon.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_shoppingCoupon.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -433,6 +433,10 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _shoppingCoupon.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_shoppingCoupon.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

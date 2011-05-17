@@ -50,8 +50,8 @@ public class PortletWrapper implements Portlet {
 	*
 	* @param pk the primary key of this portlet
 	*/
-	public void setPrimaryKey(long pk) {
-		_portlet.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_portlet.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -179,6 +179,10 @@ public class PortletWrapper implements Portlet {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _portlet.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_portlet.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

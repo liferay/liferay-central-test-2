@@ -153,12 +153,16 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		return _productVersionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setProductVersionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setProductVersionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_productVersionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getProductVersionId() {
@@ -376,9 +380,9 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 			return false;
 		}
 
-		long pk = scProductVersion.getPrimaryKey();
+		long primaryKey = scProductVersion.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

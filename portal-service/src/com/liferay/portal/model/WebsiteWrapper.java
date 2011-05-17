@@ -50,8 +50,8 @@ public class WebsiteWrapper implements Website {
 	*
 	* @param pk the primary key of this website
 	*/
-	public void setPrimaryKey(long pk) {
-		_website.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_website.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -316,6 +316,10 @@ public class WebsiteWrapper implements Website {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _website.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_website.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

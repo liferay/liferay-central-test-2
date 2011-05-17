@@ -59,7 +59,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	 *
 	 * @param pk the primary key of this asset category property
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the category property ID of this asset category property.
@@ -218,6 +218,8 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

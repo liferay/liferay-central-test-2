@@ -156,12 +156,16 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return _roleId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRoleId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRoleId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_roleId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getRoleId() {
@@ -444,9 +448,9 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 			return false;
 		}
 
-		long pk = role.getPrimaryKey();
+		long primaryKey = role.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

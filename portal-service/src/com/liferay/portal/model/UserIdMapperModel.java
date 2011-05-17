@@ -54,7 +54,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	 *
 	 * @param pk the primary key of this user ID mapper
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the user ID mapper ID of this user ID mapper.
@@ -157,6 +157,8 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -143,12 +143,16 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return _teamId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setTeamId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setTeamId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_teamId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getTeamId() {
@@ -331,9 +335,9 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 			return false;
 		}
 
-		long pk = team.getPrimaryKey();
+		long primaryKey = team.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

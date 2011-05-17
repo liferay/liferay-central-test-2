@@ -50,8 +50,8 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	*
 	* @param pk the primary key of this password policy
 	*/
-	public void setPrimaryKey(long pk) {
-		_passwordPolicy.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_passwordPolicy.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -757,6 +757,10 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _passwordPolicy.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_passwordPolicy.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -59,7 +59,7 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	 *
 	 * @param pk the primary key of this d l file shortcut
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this d l file shortcut.
@@ -350,6 +350,8 @@ public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

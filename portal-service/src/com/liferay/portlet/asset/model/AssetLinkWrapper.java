@@ -50,8 +50,8 @@ public class AssetLinkWrapper implements AssetLink {
 	*
 	* @param pk the primary key of this asset link
 	*/
-	public void setPrimaryKey(long pk) {
-		_assetLink.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_assetLink.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -262,6 +262,10 @@ public class AssetLinkWrapper implements AssetLink {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetLink.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_assetLink.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

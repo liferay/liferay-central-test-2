@@ -146,12 +146,16 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return _phoneId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPhoneId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPhoneId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_phoneId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPhoneId() {
@@ -355,9 +359,9 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 			return false;
 		}
 
-		long pk = phone.getPrimaryKey();
+		long primaryKey = phone.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

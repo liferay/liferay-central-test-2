@@ -51,7 +51,7 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	 *
 	 * @param pk the primary key of this expando row
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the row ID of this expando row.
@@ -122,6 +122,8 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

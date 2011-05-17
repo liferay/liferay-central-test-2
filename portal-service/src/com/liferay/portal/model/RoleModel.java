@@ -56,7 +56,7 @@ public interface RoleModel extends BaseModel<Role> {
 	 *
 	 * @param pk the primary key of this role
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the role ID of this role.
@@ -267,6 +267,8 @@ public interface RoleModel extends BaseModel<Role> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

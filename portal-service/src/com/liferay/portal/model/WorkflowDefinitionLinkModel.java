@@ -57,7 +57,7 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	 *
 	 * @param pk the primary key of this workflow definition link
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the workflow definition link ID of this workflow definition link.
@@ -236,6 +236,8 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

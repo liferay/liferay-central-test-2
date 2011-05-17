@@ -50,8 +50,8 @@ public class TeamWrapper implements Team {
 	*
 	* @param pk the primary key of this team
 	*/
-	public void setPrimaryKey(long pk) {
-		_team.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_team.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -262,6 +262,10 @@ public class TeamWrapper implements Team {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _team.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_team.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

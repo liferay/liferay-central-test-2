@@ -57,7 +57,7 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	 *
 	 * @param pk the primary key of this d l file version
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the file version ID of this d l file version.
@@ -438,6 +438,8 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -53,7 +53,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	 *
 	 * @param pk the primary key of this resource permission
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the resource permission ID of this resource permission.
@@ -182,6 +182,8 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

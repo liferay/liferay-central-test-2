@@ -53,7 +53,7 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	 *
 	 * @param pk the primary key of this s c product screenshot
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the product screenshot ID of this s c product screenshot.
@@ -166,6 +166,8 @@ public interface SCProductScreenshotModel extends BaseModel<SCProductScreenshot>
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

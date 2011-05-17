@@ -50,8 +50,8 @@ public class CountryWrapper implements Country {
 	*
 	* @param pk the primary key of this country
 	*/
-	public void setPrimaryKey(long pk) {
-		_country.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_country.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -215,6 +215,10 @@ public class CountryWrapper implements Country {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _country.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_country.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -88,12 +88,16 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		return _browserTrackerId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setBrowserTrackerId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setBrowserTrackerId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_browserTrackerId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getBrowserTrackerId() {
@@ -175,12 +179,12 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	}
 
 	public int compareTo(BrowserTracker browserTracker) {
-		long pk = browserTracker.getPrimaryKey();
+		long primaryKey = browserTracker.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -202,9 +206,9 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 			return false;
 		}
 
-		long pk = browserTracker.getPrimaryKey();
+		long primaryKey = browserTracker.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

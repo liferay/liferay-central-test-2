@@ -53,7 +53,7 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	 *
 	 * @param pk the primary key of this org group role
 	 */
-	public void setPrimaryKey(OrgGroupRolePK pk);
+	public void setPrimaryKey(OrgGroupRolePK primaryKey);
 
 	/**
 	 * Gets the organization ID of this org group role.
@@ -110,6 +110,8 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

@@ -151,12 +151,16 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _folderId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFolderId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFolderId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_folderId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -436,9 +440,9 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 			return false;
 		}
 
-		long pk = dlFolder.getPrimaryKey();
+		long primaryKey = dlFolder.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

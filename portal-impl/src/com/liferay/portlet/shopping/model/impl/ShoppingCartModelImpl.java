@@ -100,12 +100,16 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		return _cartId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCartId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCartId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_cartId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCartId() {
@@ -288,12 +292,12 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	}
 
 	public int compareTo(ShoppingCart shoppingCart) {
-		long pk = shoppingCart.getPrimaryKey();
+		long primaryKey = shoppingCart.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -315,9 +319,9 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 			return false;
 		}
 
-		long pk = shoppingCart.getPrimaryKey();
+		long primaryKey = shoppingCart.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -50,8 +50,8 @@ public class SocialRelationWrapper implements SocialRelation {
 	*
 	* @param pk the primary key of this social relation
 	*/
-	public void setPrimaryKey(long pk) {
-		_socialRelation.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_socialRelation.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -206,6 +206,10 @@ public class SocialRelationWrapper implements SocialRelation {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _socialRelation.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_socialRelation.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

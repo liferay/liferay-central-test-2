@@ -53,7 +53,7 @@ public interface RegionModel extends BaseModel<Region> {
 	 *
 	 * @param pk the primary key of this region
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the region ID of this region.
@@ -147,6 +147,8 @@ public interface RegionModel extends BaseModel<Region> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

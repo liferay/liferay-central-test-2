@@ -167,12 +167,16 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _fileEntryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFileEntryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFileEntryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_fileEntryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -557,9 +561,9 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 			return false;
 		}
 
-		long pk = dlFileEntry.getPrimaryKey();
+		long primaryKey = dlFileEntry.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

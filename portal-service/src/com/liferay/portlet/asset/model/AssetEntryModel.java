@@ -58,7 +58,7 @@ public interface AssetEntryModel extends BaseModel<AssetEntry>, GroupedModel {
 	 *
 	 * @param pk the primary key of this asset entry
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the entry ID of this asset entry.
@@ -460,6 +460,8 @@ public interface AssetEntryModel extends BaseModel<AssetEntry>, GroupedModel {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

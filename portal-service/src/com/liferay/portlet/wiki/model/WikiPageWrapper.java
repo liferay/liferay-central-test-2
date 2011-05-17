@@ -50,8 +50,8 @@ public class WikiPageWrapper implements WikiPage {
 	*
 	* @param pk the primary key of this wiki page
 	*/
-	public void setPrimaryKey(long pk) {
-		_wikiPage.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_wikiPage.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -599,6 +599,10 @@ public class WikiPageWrapper implements WikiPage {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _wikiPage.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_wikiPage.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -12,6 +12,7 @@
 			<id name="name" />
 			<basic name="currentId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.AccountModelImpl">
@@ -41,6 +42,7 @@
 				<column name="SIZE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -71,6 +73,7 @@
 				<column name="PRIMARY_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -80,6 +83,7 @@
 			<basic name="userId" />
 			<basic name="browserKey" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -88,6 +92,7 @@
 			<id name="classNameId" />
 			<basic name="value" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ClusterGroupModelImpl">
@@ -97,6 +102,7 @@
 			<basic name="clusterNodeIds" />
 			<basic name="wholeCluster" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.CompanyModelImpl">
@@ -113,6 +119,7 @@
 			<basic name="system" />
 			<basic name="maxUsers" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ContactModelImpl">
@@ -154,6 +161,7 @@
 			<basic name="jobClass" />
 			<basic name="hoursOfOperation" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -173,6 +181,7 @@
 				<column name="ACTIVE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.EmailAddressModelImpl">
@@ -195,6 +204,7 @@
 				<column name="PRIMARY_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -220,6 +230,7 @@
 			</basic>
 			<transient name="creatorUserUuid" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ImageModelImpl">
@@ -240,6 +251,7 @@
 				<column name="SIZE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutModelImpl">
@@ -285,6 +297,7 @@
 			<transient name="keywordsMap" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="robotsMap" />
 			<transient name="titleMap" />
 		</attributes>
@@ -303,6 +316,7 @@
 			</basic>
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutRevisionModelImpl">
@@ -348,6 +362,7 @@
 			<transient name="keywordsMap" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="robotsMap" />
 			<transient name="statusByUserUuid" />
 			<transient name="titleMap" />
@@ -373,6 +388,7 @@
 			</basic>
 			<basic name="layoutSetPrototypeId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutSetBranchModelImpl">
@@ -392,6 +408,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -412,6 +429,7 @@
 			</basic>
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ListTypeModelImpl">
@@ -422,6 +440,7 @@
 				<column name="TYPE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LockModelImpl">
@@ -446,6 +465,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -466,6 +486,7 @@
 			<basic name="replierUserId" />
 			<basic name="statusId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="replierUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -487,6 +508,7 @@
 			<basic name="statusId" />
 			<basic name="comments" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.OrgGroupPermissionModelImpl">
@@ -496,6 +518,7 @@
 			<id name="groupId" />
 			<id name="permissionId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.OrgGroupRoleModelImpl">
@@ -505,6 +528,7 @@
 			<id name="groupId" />
 			<id name="roleId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.OrgLaborModelImpl">
@@ -527,6 +551,7 @@
 			<basic name="satOpen" />
 			<basic name="satClose" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.PasswordPolicyModelImpl">
@@ -568,6 +593,7 @@
 			<basic name="resetFailureCount" />
 			<basic name="resetTicketMaxAge" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -578,6 +604,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.PasswordTrackerModelImpl">
@@ -591,6 +618,7 @@
 				<column name="PASSWORD_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -601,6 +629,7 @@
 			<basic name="actionId" />
 			<basic name="resourceId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.PhoneModelImpl">
@@ -626,6 +655,7 @@
 				<column name="PRIMARY_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -640,6 +670,7 @@
 				<column name="ACTIVE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.PortletModelImpl">
@@ -654,6 +685,7 @@
 				<column name="ACTIVE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.PortletItemModelImpl">
@@ -673,6 +705,7 @@
 			<basic name="portletId" />
 			<basic name="classNameId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -685,6 +718,7 @@
 			<basic name="portletId" />
 			<basic name="preferences" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.RegionModelImpl">
@@ -697,6 +731,7 @@
 				<column name="ACTIVE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ReleaseModelImpl">
@@ -716,6 +751,7 @@
 			<basic name="verified" />
 			<basic name="testString" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.RepositoryModelImpl">
@@ -736,6 +772,7 @@
 			<basic name="typeSettings" />
 			<basic name="dlFolderId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.RepositoryEntryModelImpl">
@@ -748,6 +785,7 @@
 			<basic name="repositoryId" />
 			<basic name="mappedId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ResourceModelImpl">
@@ -756,6 +794,7 @@
 			<basic name="codeId" />
 			<basic name="primKey" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ResourceActionModelImpl">
@@ -765,6 +804,7 @@
 			<basic name="actionId" />
 			<basic name="bitwiseValue" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ResourceCodeModelImpl">
@@ -774,6 +814,7 @@
 			<basic name="name" />
 			<basic name="scope" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ResourcePermissionModelImpl">
@@ -787,6 +828,7 @@
 			<basic name="ownerId" />
 			<basic name="actionIds" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.RoleModelImpl">
@@ -803,6 +845,7 @@
 			</basic>
 			<basic name="subtype" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="titleMap" />
 		</attributes>
 	</mapped-superclass>
@@ -816,6 +859,7 @@
 				<column name="DATA_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ShardModelImpl">
@@ -825,6 +869,7 @@
 			<basic name="classPK" />
 			<basic name="name" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.SubscriptionModelImpl">
@@ -843,6 +888,7 @@
 			<basic name="classPK" />
 			<basic name="frequency" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -862,6 +908,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -881,6 +928,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.UserModelImpl">
@@ -942,6 +990,7 @@
 			<basic name="agreedToTermsOfUse" />
 			<basic name="status" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -953,6 +1002,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.UserGroupGroupRoleModelImpl">
@@ -962,6 +1012,7 @@
 			<id name="groupId" />
 			<id name="roleId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.UserGroupRoleModelImpl">
@@ -971,6 +1022,7 @@
 			<id name="groupId" />
 			<id name="roleId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -984,6 +1036,7 @@
 			<basic name="description" />
 			<basic name="externalUserId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1002,6 +1055,7 @@
 			<basic name="deliverBy" />
 			<basic name="payload" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1018,6 +1072,7 @@
 			<basic name="remoteHost" />
 			<basic name="userAgent" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1032,6 +1087,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.VirtualHostModelImpl">
@@ -1041,6 +1097,7 @@
 			<basic name="layoutSetId" />
 			<basic name="hostname" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.WebDAVPropsModelImpl">
@@ -1057,6 +1114,7 @@
 			<basic name="classPK" />
 			<basic name="props" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.WebsiteModelImpl">
@@ -1079,6 +1137,7 @@
 				<column name="PRIMARY_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1099,6 +1158,7 @@
 			<basic name="workflowDefinitionName" />
 			<basic name="workflowDefinitionVersion" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1119,6 +1179,7 @@
 			<basic name="classPK" />
 			<basic name="workflowInstanceId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1134,6 +1195,7 @@
 			<basic name="sms" />
 			<basic name="website" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1169,6 +1231,7 @@
 			<basic name="priority" />
 			<basic name="alert" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1182,6 +1245,7 @@
 			<basic name="entryId" />
 			<basic name="value" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1210,6 +1274,7 @@
 			<basic name="vocabularyId" />
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="titleMap" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1232,6 +1297,7 @@
 			</basic>
 			<basic name="value" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1275,6 +1341,7 @@
 			<basic name="priority" />
 			<basic name="viewCount" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1294,6 +1361,7 @@
 			</basic>
 			<basic name="weight" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1313,6 +1381,7 @@
 			<basic name="name" />
 			<basic name="assetCount" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1334,6 +1403,7 @@
 			</basic>
 			<basic name="value" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1344,6 +1414,7 @@
 			<basic name="classNameId" />
 			<basic name="assetCount" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.asset.model.impl.AssetVocabularyModelImpl">
@@ -1370,6 +1441,7 @@
 			</basic>
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="titleMap" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1410,6 +1482,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1428,6 +1501,7 @@
 			<basic name="ratingsTotalScore" />
 			<basic name="ratingsAverageScore" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statsUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1454,6 +1528,7 @@
 			<basic name="visits" />
 			<basic name="priority" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1476,6 +1551,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1517,6 +1593,7 @@
 			<basic name="firstReminder" />
 			<basic name="secondReminder" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1532,6 +1609,7 @@
 			<basic name="documentTypeId" />
 			<basic name="fileVersionId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentTypeModelImpl">
@@ -1550,6 +1628,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1586,6 +1665,7 @@
 			</basic>
 			<basic name="readCount" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 			<transient name="versionUserUuid" />
 		</attributes>
@@ -1601,6 +1681,7 @@
 			</basic>
 			<basic name="fileEntryId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1630,6 +1711,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1664,6 +1746,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -1693,6 +1776,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1707,6 +1791,7 @@
 			<basic name="recordSetId" />
 			<basic name="displayIndex" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetModelImpl">
@@ -1732,6 +1817,7 @@
 			<basic name="minDisplayRows" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1756,6 +1842,7 @@
 			<basic name="xml" />
 			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1769,6 +1856,7 @@
 			<basic name="classPK" />
 			<basic name="structureId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureModelImpl">
@@ -1794,6 +1882,7 @@
 			<basic name="xsd" />
 			<basic name="storageType" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1804,6 +1893,7 @@
 			<basic name="classPK" />
 			<basic name="structureId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMTemplateModelImpl">
@@ -1831,6 +1921,7 @@
 			<basic name="language" />
 			<basic name="script" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1846,6 +1937,7 @@
 			<basic name="defaultData" />
 			<basic name="typeSettings" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl">
@@ -1857,6 +1949,7 @@
 			<basic name="tableId" />
 			<basic name="classPK" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl">
@@ -1866,6 +1959,7 @@
 			<basic name="classNameId" />
 			<basic name="name" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl">
@@ -1883,6 +1977,7 @@
 				<column name="DATA_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl">
@@ -1904,6 +1999,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1930,6 +2026,7 @@
 			<basic name="custom1ImageId" />
 			<basic name="custom2ImageId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -1987,6 +2084,7 @@
 			</basic>
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
 			<transient name="titleMap" />
 			<transient name="userUuid" />
@@ -2003,6 +2101,7 @@
 			<basic name="languageId" />
 			<basic name="tempImage" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalArticleResourceModelImpl">
@@ -2014,6 +2113,7 @@
 			<basic name="groupId" />
 			<basic name="articleId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl">
@@ -2026,6 +2126,7 @@
 			<basic name="portletId" />
 			<basic name="articleId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.journal.model.impl.JournalFeedModelImpl">
@@ -2064,6 +2165,7 @@
 			<basic name="feedType" />
 			<basic name="feedVersion" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2091,6 +2193,7 @@
 			<basic name="description" />
 			<basic name="xsd" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2123,6 +2226,7 @@
 			<basic name="smallImageId" />
 			<basic name="smallImageURL" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2142,6 +2246,7 @@
 			<basic name="banUserId" />
 			<transient name="banUserUuid" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2171,6 +2276,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2181,6 +2287,7 @@
 			<basic name="classPK" />
 			<basic name="threadId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.messageboards.model.impl.MBMailingListModelImpl">
@@ -2220,6 +2327,7 @@
 				<column name="ACTIVE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2259,6 +2367,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2274,6 +2383,7 @@
 			<basic name="messageId" />
 			<basic name="flag" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2287,6 +2397,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statsUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2314,6 +2425,7 @@
 			</basic>
 			<transient name="lastPostByUserUuid" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="rootMessageUserUuid" />
 			<transient name="statusByUserUuid" />
 		</attributes>
@@ -2329,6 +2441,7 @@
 			<basic name="description" />
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl">
@@ -2357,6 +2470,7 @@
 			</basic>
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="titleMap" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2371,6 +2485,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2390,6 +2505,7 @@
 			<basic name="classPK" />
 			<basic name="score" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2402,6 +2518,7 @@
 			<basic name="totalScore" />
 			<basic name="averageScore" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingCartModelImpl">
@@ -2422,6 +2539,7 @@
 			<basic name="altShipping" />
 			<basic name="insure" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2442,6 +2560,7 @@
 			<basic name="name" />
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2478,6 +2597,7 @@
 			<basic name="discount" />
 			<basic name="discountType" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2528,6 +2648,7 @@
 			<basic name="largeImageId" />
 			<basic name="largeImageURL" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2541,6 +2662,7 @@
 			</basic>
 			<basic name="description" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl">
@@ -2556,6 +2678,7 @@
 			<basic name="useShippingFormula" />
 			<basic name="status" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl">
@@ -2618,6 +2741,7 @@
 			<basic name="sendOrderEmail" />
 			<basic name="sendShippingEmail" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2636,6 +2760,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialActivityModelImpl">
@@ -2654,6 +2779,7 @@
 			<basic name="extraData" />
 			<basic name="receiverUserId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="receiverUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2668,6 +2794,7 @@
 			<basic name="informationK" />
 			<basic name="informationB" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2682,6 +2809,7 @@
 			</basic>
 			<basic name="enabled" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityHistoryModelImpl">
@@ -2695,6 +2823,7 @@
 			</basic>
 			<basic name="personalEquity" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2717,6 +2846,7 @@
 			<basic name="value" />
 			<basic name="extraData" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2735,6 +2865,7 @@
 			<basic name="uniqueEntry" />
 			<basic name="value" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialEquityUserModelImpl">
@@ -2750,6 +2881,7 @@
 			<basic name="rank" />
 			<transient name="equityUserUuid" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2767,6 +2899,7 @@
 				<column name="TYPE_" />
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.social.model.impl.SocialRequestModelImpl">
@@ -2789,6 +2922,7 @@
 			<basic name="receiverUserId" />
 			<basic name="status" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="receiverUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2813,6 +2947,7 @@
 			</basic>
 			<basic name="priority" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2827,6 +2962,7 @@
 			</basic>
 			<basic name="recommended" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl">
@@ -2854,6 +2990,7 @@
 			<basic name="repoGroupId" />
 			<basic name="repoArtifactId" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2867,6 +3004,7 @@
 			<basic name="fullImageId" />
 			<basic name="priority" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl">
@@ -2888,6 +3026,7 @@
 			<basic name="directDownloadURL" />
 			<basic name="repoStoreArtifact" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2913,6 +3052,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -2950,6 +3090,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
@@ -2963,6 +3104,7 @@
 			<basic name="nodeId" />
 			<basic name="title" />
 			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
 	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">

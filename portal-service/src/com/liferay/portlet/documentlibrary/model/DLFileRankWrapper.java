@@ -50,8 +50,8 @@ public class DLFileRankWrapper implements DLFileRank {
 	*
 	* @param pk the primary key of this d l file rank
 	*/
-	public void setPrimaryKey(long pk) {
-		_dlFileRank.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_dlFileRank.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -208,6 +208,10 @@ public class DLFileRankWrapper implements DLFileRank {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _dlFileRank.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_dlFileRank.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

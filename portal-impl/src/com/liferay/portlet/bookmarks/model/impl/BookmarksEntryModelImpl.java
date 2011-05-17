@@ -149,12 +149,16 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _entryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEntryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEntryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_entryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -394,9 +398,9 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 			return false;
 		}
 
-		long pk = bookmarksEntry.getPrimaryKey();
+		long primaryKey = bookmarksEntry.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

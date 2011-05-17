@@ -96,12 +96,16 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		return _userTrackerId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setUserTrackerId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setUserTrackerId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_userTrackerId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getUserTrackerId() {
@@ -238,12 +242,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	public int compareTo(UserTracker userTracker) {
-		long pk = userTracker.getPrimaryKey();
+		long primaryKey = userTracker.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -265,9 +269,9 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 			return false;
 		}
 
-		long pk = userTracker.getPrimaryKey();
+		long primaryKey = userTracker.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

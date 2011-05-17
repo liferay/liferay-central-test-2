@@ -100,12 +100,16 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		return _linkId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setLinkId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setLinkId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_linkId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getLinkId() {
@@ -268,9 +272,9 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 			return false;
 		}
 
-		long pk = assetLink.getPrimaryKey();
+		long primaryKey = assetLink.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

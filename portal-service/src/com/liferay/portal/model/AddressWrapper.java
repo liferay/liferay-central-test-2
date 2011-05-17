@@ -50,8 +50,8 @@ public class AddressWrapper implements Address {
 	*
 	* @param pk the primary key of this address
 	*/
-	public void setPrimaryKey(long pk) {
-		_address.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_address.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -451,6 +451,10 @@ public class AddressWrapper implements Address {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _address.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_address.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

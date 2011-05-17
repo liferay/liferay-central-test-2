@@ -51,8 +51,8 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 	*
 	* @param pk the primary key of this asset category property
 	*/
-	public void setPrimaryKey(long pk) {
-		_assetCategoryProperty.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_assetCategoryProperty.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -263,6 +263,10 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _assetCategoryProperty.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_assetCategoryProperty.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

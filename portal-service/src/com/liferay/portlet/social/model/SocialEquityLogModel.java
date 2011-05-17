@@ -55,7 +55,7 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	 *
 	 * @param pk the primary key of this social equity log
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the equity log ID of this social equity log.
@@ -262,6 +262,8 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

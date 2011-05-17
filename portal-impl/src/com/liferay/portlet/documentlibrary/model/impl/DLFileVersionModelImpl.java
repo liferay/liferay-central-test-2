@@ -114,12 +114,16 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		return _fileVersionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setFileVersionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setFileVersionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_fileVersionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getFileVersionId() {
@@ -512,9 +516,9 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			return false;
 		}
 
-		long pk = dlFileVersion.getPrimaryKey();
+		long primaryKey = dlFileVersion.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

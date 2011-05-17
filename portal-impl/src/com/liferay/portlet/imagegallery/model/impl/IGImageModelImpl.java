@@ -151,12 +151,16 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _imageId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setImageId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setImageId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_imageId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -432,9 +436,9 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 			return false;
 		}
 
-		long pk = igImage.getPrimaryKey();
+		long primaryKey = igImage.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

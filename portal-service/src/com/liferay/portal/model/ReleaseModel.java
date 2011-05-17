@@ -55,7 +55,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	 *
 	 * @param pk the primary key of this release
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the release ID of this release.
@@ -191,6 +191,8 @@ public interface ReleaseModel extends BaseModel<Release> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

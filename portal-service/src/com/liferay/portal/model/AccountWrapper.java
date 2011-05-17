@@ -50,8 +50,8 @@ public class AccountWrapper implements Account {
 	*
 	* @param pk the primary key of this account
 	*/
-	public void setPrimaryKey(long pk) {
-		_account.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_account.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -388,6 +388,10 @@ public class AccountWrapper implements Account {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _account.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_account.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

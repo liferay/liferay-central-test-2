@@ -94,12 +94,16 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		return _equityHistoryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEquityHistoryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEquityHistoryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_equityHistoryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getEquityHistoryId() {
@@ -198,12 +202,12 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 	}
 
 	public int compareTo(SocialEquityHistory socialEquityHistory) {
-		long pk = socialEquityHistory.getPrimaryKey();
+		long primaryKey = socialEquityHistory.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -225,9 +229,9 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 			return false;
 		}
 
-		long pk = socialEquityHistory.getPrimaryKey();
+		long primaryKey = socialEquityHistory.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

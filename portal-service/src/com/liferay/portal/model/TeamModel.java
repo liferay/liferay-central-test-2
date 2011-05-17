@@ -56,7 +56,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	 *
 	 * @param pk the primary key of this team
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the team ID of this team.
@@ -215,6 +215,8 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

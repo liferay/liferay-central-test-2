@@ -53,7 +53,7 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	 *
 	 * @param pk the primary key of this virtual host
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the virtual host ID of this virtual host.
@@ -125,6 +125,8 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

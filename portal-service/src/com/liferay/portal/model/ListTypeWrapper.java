@@ -50,8 +50,8 @@ public class ListTypeWrapper implements ListType {
 	*
 	* @param pk the primary key of this list type
 	*/
-	public void setPrimaryKey(int pk) {
-		_listType.setPrimaryKey(pk);
+	public void setPrimaryKey(int primaryKey) {
+		_listType.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -134,6 +134,10 @@ public class ListTypeWrapper implements ListType {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _listType.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_listType.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -163,12 +163,16 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return _categoryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCategoryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCategoryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_categoryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -598,9 +602,9 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 			return false;
 		}
 
-		long pk = assetCategory.getPrimaryKey();
+		long primaryKey = assetCategory.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

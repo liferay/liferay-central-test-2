@@ -59,7 +59,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	 *
 	 * @param pk the primary key of this message boards mailing list
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this message boards mailing list.
@@ -499,6 +499,8 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

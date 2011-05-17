@@ -50,8 +50,8 @@ public class ResourceCodeWrapper implements ResourceCode {
 	*
 	* @param pk the primary key of this resource code
 	*/
-	public void setPrimaryKey(long pk) {
-		_resourceCode.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_resourceCode.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -152,6 +152,10 @@ public class ResourceCodeWrapper implements ResourceCode {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _resourceCode.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_resourceCode.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

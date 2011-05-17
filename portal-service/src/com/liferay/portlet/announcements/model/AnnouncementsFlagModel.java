@@ -56,7 +56,7 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	 *
 	 * @param pk the primary key of this announcements flag
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the flag ID of this announcements flag.
@@ -156,6 +156,8 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

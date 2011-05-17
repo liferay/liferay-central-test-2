@@ -50,8 +50,8 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	*
 	* @param pk the primary key of this blogs entry
 	*/
-	public void setPrimaryKey(long pk) {
-		_blogsEntry.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_blogsEntry.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -604,6 +604,10 @@ public class BlogsEntryWrapper implements BlogsEntry {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _blogsEntry.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_blogsEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

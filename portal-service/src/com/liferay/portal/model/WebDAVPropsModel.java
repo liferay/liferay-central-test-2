@@ -55,7 +55,7 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	 *
 	 * @param pk the primary key of this web d a v props
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the web dav props ID of this web d a v props.
@@ -176,6 +176,8 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

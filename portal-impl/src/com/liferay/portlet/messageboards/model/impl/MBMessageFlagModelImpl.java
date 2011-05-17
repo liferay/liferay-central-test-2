@@ -132,12 +132,16 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		return _messageFlagId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setMessageFlagId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setMessageFlagId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_messageFlagId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getMessageFlagId() {
@@ -266,12 +270,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	}
 
 	public int compareTo(MBMessageFlag mbMessageFlag) {
-		long pk = mbMessageFlag.getPrimaryKey();
+		long primaryKey = mbMessageFlag.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -293,9 +297,9 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 			return false;
 		}
 
-		long pk = mbMessageFlag.getPrimaryKey();
+		long primaryKey = mbMessageFlag.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

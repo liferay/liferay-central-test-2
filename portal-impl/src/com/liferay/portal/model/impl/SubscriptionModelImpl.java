@@ -97,12 +97,16 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		return _subscriptionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setSubscriptionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setSubscriptionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_subscriptionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getSubscriptionId() {
@@ -286,12 +290,12 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	}
 
 	public int compareTo(Subscription subscription) {
-		long pk = subscription.getPrimaryKey();
+		long primaryKey = subscription.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -313,9 +317,9 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 			return false;
 		}
 
-		long pk = subscription.getPrimaryKey();
+		long primaryKey = subscription.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

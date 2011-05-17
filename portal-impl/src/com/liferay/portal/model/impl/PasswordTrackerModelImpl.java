@@ -95,12 +95,16 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		return _passwordTrackerId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPasswordTrackerId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPasswordTrackerId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_passwordTrackerId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPasswordTrackerId() {
@@ -230,9 +234,9 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 			return false;
 		}
 
-		long pk = passwordTracker.getPrimaryKey();
+		long primaryKey = passwordTracker.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

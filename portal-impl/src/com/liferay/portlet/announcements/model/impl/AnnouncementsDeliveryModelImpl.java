@@ -136,12 +136,16 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return _deliveryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setDeliveryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setDeliveryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_deliveryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getDeliveryId() {
@@ -284,12 +288,12 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public int compareTo(AnnouncementsDelivery announcementsDelivery) {
-		long pk = announcementsDelivery.getPrimaryKey();
+		long primaryKey = announcementsDelivery.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -311,9 +315,9 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 			return false;
 		}
 
-		long pk = announcementsDelivery.getPrimaryKey();
+		long primaryKey = announcementsDelivery.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

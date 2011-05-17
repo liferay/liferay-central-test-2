@@ -56,7 +56,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	 *
 	 * @param pk the primary key of this message boards message flag
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the message flag ID of this message boards message flag.
@@ -170,6 +170,8 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

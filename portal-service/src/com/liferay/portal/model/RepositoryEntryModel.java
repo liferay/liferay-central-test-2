@@ -53,7 +53,7 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	 *
 	 * @param pk the primary key of this repository entry
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this repository entry.
@@ -140,6 +140,8 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

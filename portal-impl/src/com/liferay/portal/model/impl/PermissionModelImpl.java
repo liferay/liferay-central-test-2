@@ -131,12 +131,16 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		return _permissionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPermissionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPermissionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_permissionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPermissionId() {
@@ -232,12 +236,12 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	}
 
 	public int compareTo(Permission permission) {
-		long pk = permission.getPrimaryKey();
+		long primaryKey = permission.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -259,9 +263,9 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 			return false;
 		}
 
-		long pk = permission.getPrimaryKey();
+		long primaryKey = permission.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

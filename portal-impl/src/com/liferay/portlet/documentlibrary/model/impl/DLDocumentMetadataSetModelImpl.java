@@ -93,12 +93,16 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 		return _documentMetadataSetId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setDocumentMetadataSetId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setDocumentMetadataSetId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_documentMetadataSetId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -231,12 +235,12 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 	}
 
 	public int compareTo(DLDocumentMetadataSet dlDocumentMetadataSet) {
-		long pk = dlDocumentMetadataSet.getPrimaryKey();
+		long primaryKey = dlDocumentMetadataSet.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -258,9 +262,9 @@ public class DLDocumentMetadataSetModelImpl extends BaseModelImpl<DLDocumentMeta
 			return false;
 		}
 
-		long pk = dlDocumentMetadataSet.getPrimaryKey();
+		long primaryKey = dlDocumentMetadataSet.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

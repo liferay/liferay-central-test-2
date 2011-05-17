@@ -89,12 +89,16 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		return _passwordPolicyRelId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPasswordPolicyRelId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPasswordPolicyRelId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_passwordPolicyRelId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPasswordPolicyRelId() {
@@ -205,12 +209,12 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public int compareTo(PasswordPolicyRel passwordPolicyRel) {
-		long pk = passwordPolicyRel.getPrimaryKey();
+		long primaryKey = passwordPolicyRel.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -232,9 +236,9 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 			return false;
 		}
 
-		long pk = passwordPolicyRel.getPrimaryKey();
+		long primaryKey = passwordPolicyRel.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

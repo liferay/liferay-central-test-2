@@ -53,7 +53,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	 *
 	 * @param pk the primary key of this social equity group setting
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the equity group setting ID of this social equity group setting.
@@ -166,6 +166,8 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

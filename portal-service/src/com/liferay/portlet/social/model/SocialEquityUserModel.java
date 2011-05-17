@@ -54,7 +54,7 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	 *
 	 * @param pk the primary key of this social equity user
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the equity user ID of this social equity user.
@@ -225,6 +225,8 @@ public interface SocialEquityUserModel extends BaseModel<SocialEquityUser> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

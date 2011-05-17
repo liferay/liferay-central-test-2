@@ -56,7 +56,7 @@ public interface PhoneModel extends AuditedModel, BaseModel<Phone> {
 	 *
 	 * @param pk the primary key of this phone
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the phone ID of this phone.
@@ -271,6 +271,8 @@ public interface PhoneModel extends AuditedModel, BaseModel<Phone> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

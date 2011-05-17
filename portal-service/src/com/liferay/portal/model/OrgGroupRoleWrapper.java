@@ -51,8 +51,8 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 	* @param pk the primary key of this org group role
 	*/
 	public void setPrimaryKey(
-		com.liferay.portal.service.persistence.OrgGroupRolePK pk) {
-		_orgGroupRole.setPrimaryKey(pk);
+		com.liferay.portal.service.persistence.OrgGroupRolePK primaryKey) {
+		_orgGroupRole.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -135,6 +135,10 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _orgGroupRole.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_orgGroupRole.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -130,12 +130,16 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return _portletPreferencesId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPortletPreferencesId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPortletPreferencesId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_portletPreferencesId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPortletPreferencesId() {
@@ -274,12 +278,12 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public int compareTo(PortletPreferences portletPreferences) {
-		long pk = portletPreferences.getPrimaryKey();
+		long primaryKey = portletPreferences.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -301,9 +305,9 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 			return false;
 		}
 
-		long pk = portletPreferences.getPrimaryKey();
+		long primaryKey = portletPreferences.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

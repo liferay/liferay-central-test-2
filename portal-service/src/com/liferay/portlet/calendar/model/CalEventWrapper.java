@@ -50,8 +50,8 @@ public class CalEventWrapper implements CalEvent {
 	*
 	* @param pk the primary key of this cal event
 	*/
-	public void setPrimaryKey(long pk) {
-		_calEvent.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_calEvent.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -541,6 +541,10 @@ public class CalEventWrapper implements CalEvent {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _calEvent.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_calEvent.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

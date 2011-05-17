@@ -257,7 +257,7 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
+	* @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
 	*/
 	public void deactivateEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId)

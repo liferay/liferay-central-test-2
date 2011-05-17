@@ -149,12 +149,16 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return _structureId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setStructureId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setStructureId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_structureId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -394,12 +398,12 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	public int compareTo(DDMStructure ddmStructure) {
-		long pk = ddmStructure.getPrimaryKey();
+		long primaryKey = ddmStructure.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -421,9 +425,9 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			return false;
 		}
 
-		long pk = ddmStructure.getPrimaryKey();
+		long primaryKey = ddmStructure.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

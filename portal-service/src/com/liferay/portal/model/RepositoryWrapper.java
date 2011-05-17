@@ -50,8 +50,8 @@ public class RepositoryWrapper implements Repository {
 	*
 	* @param pk the primary key of this repository
 	*/
-	public void setPrimaryKey(long pk) {
-		_repository.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_repository.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -287,6 +287,10 @@ public class RepositoryWrapper implements Repository {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _repository.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_repository.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

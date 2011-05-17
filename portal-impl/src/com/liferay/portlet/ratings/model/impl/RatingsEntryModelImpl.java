@@ -139,12 +139,16 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return _entryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setEntryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setEntryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_entryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getEntryId() {
@@ -313,12 +317,12 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public int compareTo(RatingsEntry ratingsEntry) {
-		long pk = ratingsEntry.getPrimaryKey();
+		long primaryKey = ratingsEntry.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -340,9 +344,9 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 			return false;
 		}
 
-		long pk = ratingsEntry.getPrimaryKey();
+		long primaryKey = ratingsEntry.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -123,12 +123,16 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		return _resourceId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setResourceId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setResourceId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_resourceId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getResourceId() {
@@ -214,12 +218,12 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	}
 
 	public int compareTo(Resource resource) {
-		long pk = resource.getPrimaryKey();
+		long primaryKey = resource.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -241,9 +245,9 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 			return false;
 		}
 
-		long pk = resource.getPrimaryKey();
+		long primaryKey = resource.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -53,7 +53,7 @@ public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	 *
 	 * @param pk the primary key of this resource code
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the code ID of this resource code.
@@ -125,6 +125,8 @@ public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

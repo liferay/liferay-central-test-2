@@ -50,8 +50,8 @@ public class ResourceActionWrapper implements ResourceAction {
 	*
 	* @param pk the primary key of this resource action
 	*/
-	public void setPrimaryKey(long pk) {
-		_resourceAction.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_resourceAction.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -152,6 +152,10 @@ public class ResourceActionWrapper implements ResourceAction {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _resourceAction.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_resourceAction.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -50,8 +50,8 @@ public class MBMailingListWrapper implements MBMailingList {
 	*
 	* @param pk the primary key of this message boards mailing list
 	*/
-	public void setPrimaryKey(long pk) {
-		_mbMailingList.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_mbMailingList.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -613,6 +613,10 @@ public class MBMailingListWrapper implements MBMailingList {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _mbMailingList.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_mbMailingList.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

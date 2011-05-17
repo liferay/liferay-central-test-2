@@ -50,8 +50,8 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 	*
 	* @param pk the primary key of this d d m storage link
 	*/
-	public void setPrimaryKey(long pk) {
-		_ddmStorageLink.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_ddmStorageLink.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -179,6 +179,10 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _ddmStorageLink.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_ddmStorageLink.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -88,12 +88,16 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		return _codeId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCodeId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCodeId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_codeId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCodeId() {
@@ -199,12 +203,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 	}
 
 	public int compareTo(ResourceCode resourceCode) {
-		long pk = resourceCode.getPrimaryKey();
+		long primaryKey = resourceCode.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -226,9 +230,9 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 			return false;
 		}
 
-		long pk = resourceCode.getPrimaryKey();
+		long primaryKey = resourceCode.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

@@ -52,7 +52,7 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	 *
 	 * @param pk the primary key of this password policy rel
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the password policy rel ID of this password policy rel.
@@ -130,6 +130,8 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

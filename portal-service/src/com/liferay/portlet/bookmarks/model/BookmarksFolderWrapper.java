@@ -50,8 +50,8 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 	*
 	* @param pk the primary key of this bookmarks folder
 	*/
-	public void setPrimaryKey(long pk) {
-		_bookmarksFolder.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_bookmarksFolder.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -280,6 +280,10 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _bookmarksFolder.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_bookmarksFolder.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

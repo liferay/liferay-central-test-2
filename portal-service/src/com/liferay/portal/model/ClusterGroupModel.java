@@ -53,7 +53,7 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	 *
 	 * @param pk the primary key of this cluster group
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the cluster group ID of this cluster group.
@@ -133,6 +133,8 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

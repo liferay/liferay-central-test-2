@@ -50,8 +50,8 @@ public class GroupWrapper implements Group {
 	*
 	* @param pk the primary key of this group
 	*/
-	public void setPrimaryKey(long pk) {
-		_group.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_group.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -379,6 +379,10 @@ public class GroupWrapper implements Group {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _group.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_group.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

@@ -53,7 +53,7 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	 *
 	 * @param pk the primary key of this org group permission
 	 */
-	public void setPrimaryKey(OrgGroupPermissionPK pk);
+	public void setPrimaryKey(OrgGroupPermissionPK primaryKey);
 
 	/**
 	 * Gets the organization ID of this org group permission.
@@ -110,6 +110,8 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

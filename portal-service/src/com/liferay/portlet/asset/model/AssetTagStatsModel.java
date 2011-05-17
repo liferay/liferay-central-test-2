@@ -53,7 +53,7 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	 *
 	 * @param pk the primary key of this asset tag stats
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the tag stats ID of this asset tag stats.
@@ -131,6 +131,8 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

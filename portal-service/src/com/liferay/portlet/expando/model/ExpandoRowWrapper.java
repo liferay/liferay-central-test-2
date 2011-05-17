@@ -50,8 +50,8 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	*
 	* @param pk the primary key of this expando row
 	*/
-	public void setPrimaryKey(long pk) {
-		_expandoRow.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_expandoRow.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -152,6 +152,10 @@ public class ExpandoRowWrapper implements ExpandoRow {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _expandoRow.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_expandoRow.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

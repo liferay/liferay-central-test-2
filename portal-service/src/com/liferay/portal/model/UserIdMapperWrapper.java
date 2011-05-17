@@ -50,8 +50,8 @@ public class UserIdMapperWrapper implements UserIdMapper {
 	*
 	* @param pk the primary key of this user ID mapper
 	*/
-	public void setPrimaryKey(long pk) {
-		_userIdMapper.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_userIdMapper.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -190,6 +190,10 @@ public class UserIdMapperWrapper implements UserIdMapper {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userIdMapper.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_userIdMapper.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

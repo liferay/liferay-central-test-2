@@ -101,12 +101,16 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		return _workflowInstanceLinkId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setWorkflowInstanceLinkId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setWorkflowInstanceLinkId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_workflowInstanceLinkId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getWorkflowInstanceLinkId() {
@@ -282,9 +286,9 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 			return false;
 		}
 
-		long pk = workflowInstanceLink.getPrimaryKey();
+		long primaryKey = workflowInstanceLink.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

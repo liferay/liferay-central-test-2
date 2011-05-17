@@ -96,12 +96,16 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		return _ticketId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setTicketId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setTicketId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_ticketId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getTicketId() {
@@ -254,9 +258,9 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 			return false;
 		}
 
-		long pk = ticket.getPrimaryKey();
+		long primaryKey = ticket.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

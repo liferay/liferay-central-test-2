@@ -53,7 +53,7 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	 *
 	 * @param pk the primary key of this list type
 	 */
-	public void setPrimaryKey(int pk);
+	public void setPrimaryKey(int primaryKey);
 
 	/**
 	 * Gets the list type ID of this list type.
@@ -112,6 +112,8 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

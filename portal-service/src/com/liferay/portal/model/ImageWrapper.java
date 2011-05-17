@@ -50,8 +50,8 @@ public class ImageWrapper implements Image {
 	*
 	* @param pk the primary key of this image
 	*/
-	public void setPrimaryKey(long pk) {
-		_image.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_image.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -206,6 +206,10 @@ public class ImageWrapper implements Image {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _image.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_image.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

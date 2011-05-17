@@ -56,7 +56,7 @@ public interface WebsiteModel extends AuditedModel, BaseModel<Website> {
 	 *
 	 * @param pk the primary key of this website
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the website ID of this website.
@@ -256,6 +256,8 @@ public interface WebsiteModel extends AuditedModel, BaseModel<Website> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

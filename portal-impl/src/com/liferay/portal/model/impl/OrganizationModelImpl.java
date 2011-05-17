@@ -147,12 +147,16 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return _organizationId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setOrganizationId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setOrganizationId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_organizationId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getOrganizationId() {
@@ -369,9 +373,9 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 			return false;
 		}
 
-		long pk = organization.getPrimaryKey();
+		long primaryKey = organization.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

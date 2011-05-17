@@ -100,12 +100,16 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 		return _activityId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setActivityId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setActivityId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_activityId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getActivityId() {
@@ -386,9 +390,9 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 			return false;
 		}
 
-		long pk = socialActivity.getPrimaryKey();
+		long primaryKey = socialActivity.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

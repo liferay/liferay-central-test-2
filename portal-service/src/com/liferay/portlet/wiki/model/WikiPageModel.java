@@ -60,7 +60,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	 *
 	 * @param pk the primary key of this wiki page
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this wiki page.
@@ -485,6 +485,8 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

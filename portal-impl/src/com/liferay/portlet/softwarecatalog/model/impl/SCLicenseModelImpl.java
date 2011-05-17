@@ -144,12 +144,16 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		return _licenseId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setLicenseId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setLicenseId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_licenseId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getLicenseId() {
@@ -286,9 +290,9 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 			return false;
 		}
 
-		long pk = scLicense.getPrimaryKey();
+		long primaryKey = scLicense.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

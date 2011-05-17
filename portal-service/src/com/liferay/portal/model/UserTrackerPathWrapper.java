@@ -50,8 +50,8 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 	*
 	* @param pk the primary key of this user tracker path
 	*/
-	public void setPrimaryKey(long pk) {
-		_userTrackerPath.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_userTrackerPath.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -152,6 +152,10 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userTrackerPath.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_userTrackerPath.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

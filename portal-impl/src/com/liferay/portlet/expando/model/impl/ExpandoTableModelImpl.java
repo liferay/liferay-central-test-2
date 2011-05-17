@@ -87,12 +87,16 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return _tableId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setTableId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setTableId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_tableId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getTableId() {
@@ -193,12 +197,12 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	}
 
 	public int compareTo(ExpandoTable expandoTable) {
-		long pk = expandoTable.getPrimaryKey();
+		long primaryKey = expandoTable.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -220,9 +224,9 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 			return false;
 		}
 
-		long pk = expandoTable.getPrimaryKey();
+		long primaryKey = expandoTable.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

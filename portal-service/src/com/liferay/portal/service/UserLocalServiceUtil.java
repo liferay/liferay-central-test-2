@@ -2555,7 +2555,7 @@ public class UserLocalServiceUtil {
 	* @param bytes the new portrait image data
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be
-	found, or if the new portrait was invalid
+	found or if the new portrait was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updatePortrait(long userId,
@@ -2573,7 +2573,7 @@ public class UserLocalServiceUtil {
 	* @param answer the user's new password reset answer
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be
-	found, or if the new question or answer were invalid
+	found or if the new question or answer were invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateReminderQuery(
@@ -2590,7 +2590,7 @@ public class UserLocalServiceUtil {
 	* @param screenName the user's new screen name
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be
-	found, or if the new screen name was invalid
+	found or if the new screen name was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateScreenName(long userId,
@@ -2668,7 +2668,7 @@ public class UserLocalServiceUtil {
 	* @param serviceContext the service context
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be
-	found, or if the new information was invalid
+	found or if the new information was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User updateUser(long userId,

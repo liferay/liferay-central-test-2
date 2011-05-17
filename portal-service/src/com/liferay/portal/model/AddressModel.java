@@ -56,7 +56,7 @@ public interface AddressModel extends AuditedModel, BaseModel<Address> {
 	 *
 	 * @param pk the primary key of this address
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the address ID of this address.
@@ -365,6 +365,8 @@ public interface AddressModel extends AuditedModel, BaseModel<Address> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

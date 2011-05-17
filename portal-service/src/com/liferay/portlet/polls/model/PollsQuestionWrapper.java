@@ -50,8 +50,8 @@ public class PollsQuestionWrapper implements PollsQuestion {
 	*
 	* @param pk the primary key of this polls question
 	*/
-	public void setPrimaryKey(long pk) {
-		_pollsQuestion.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_pollsQuestion.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -484,6 +484,10 @@ public class PollsQuestionWrapper implements PollsQuestion {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _pollsQuestion.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_pollsQuestion.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

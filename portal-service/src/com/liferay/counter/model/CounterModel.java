@@ -54,7 +54,7 @@ public interface CounterModel extends BaseModel<Counter> {
 	 *
 	 * @param pk the primary key of this counter
 	 */
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(String primaryKey);
 
 	/**
 	 * Gets the name of this counter.
@@ -98,6 +98,8 @@ public interface CounterModel extends BaseModel<Counter> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

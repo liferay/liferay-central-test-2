@@ -59,7 +59,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 *
 	 * @param pk the primary key of this layout revision
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the layout revision ID of this layout revision.
@@ -911,6 +911,8 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

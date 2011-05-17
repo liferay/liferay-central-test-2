@@ -83,14 +83,18 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return new OrgGroupRolePK(_organizationId, _groupId, _roleId);
 	}
 
-	public void setPrimaryKey(OrgGroupRolePK pk) {
-		setOrganizationId(pk.organizationId);
-		setGroupId(pk.groupId);
-		setRoleId(pk.roleId);
+	public void setPrimaryKey(OrgGroupRolePK primaryKey) {
+		setOrganizationId(primaryKey.organizationId);
+		setGroupId(primaryKey.groupId);
+		setRoleId(primaryKey.roleId);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new OrgGroupRolePK(_organizationId, _groupId, _roleId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey((OrgGroupRolePK)primaryKeyObj);
 	}
 
 	public long getOrganizationId() {
@@ -141,9 +145,9 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	}
 
 	public int compareTo(OrgGroupRole orgGroupRole) {
-		OrgGroupRolePK pk = orgGroupRole.getPrimaryKey();
+		OrgGroupRolePK primaryKey = orgGroupRole.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		return getPrimaryKey().compareTo(primaryKey);
 	}
 
 	public boolean equals(Object obj) {
@@ -160,9 +164,9 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 			return false;
 		}
 
-		OrgGroupRolePK pk = orgGroupRole.getPrimaryKey();
+		OrgGroupRolePK primaryKey = orgGroupRole.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey().equals(primaryKey)) {
 			return true;
 		}
 		else {

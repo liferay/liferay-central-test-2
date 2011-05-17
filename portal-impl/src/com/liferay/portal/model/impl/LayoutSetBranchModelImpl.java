@@ -143,12 +143,16 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		return _layoutSetBranchId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setLayoutSetBranchId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setLayoutSetBranchId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_layoutSetBranchId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getLayoutSetBranchId() {
@@ -355,9 +359,9 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 			return false;
 		}
 
-		long pk = layoutSetBranch.getPrimaryKey();
+		long primaryKey = layoutSetBranch.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

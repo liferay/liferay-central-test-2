@@ -192,12 +192,16 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return _layoutRevisionId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setLayoutRevisionId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setLayoutRevisionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_layoutRevisionId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getLayoutRevisionId() {
@@ -1105,9 +1109,9 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			return false;
 		}
 
-		long pk = layoutRevision.getPrimaryKey();
+		long primaryKey = layoutRevision.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

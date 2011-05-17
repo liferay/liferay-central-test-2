@@ -56,7 +56,7 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	 *
 	 * @param pk the primary key of this layout set prototype
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this layout set prototype.
@@ -239,6 +239,8 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

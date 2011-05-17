@@ -129,12 +129,16 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return _pluginSettingId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setPluginSettingId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setPluginSettingId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_pluginSettingId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getPluginSettingId() {
@@ -270,12 +274,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	public int compareTo(PluginSetting pluginSetting) {
-		long pk = pluginSetting.getPrimaryKey();
+		long primaryKey = pluginSetting.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -297,9 +301,9 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 			return false;
 		}
 
-		long pk = pluginSetting.getPrimaryKey();
+		long primaryKey = pluginSetting.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

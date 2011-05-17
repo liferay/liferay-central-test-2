@@ -107,12 +107,16 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		return _contentId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setContentId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setContentId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_contentId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public String getUuid() {
@@ -374,12 +378,12 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	}
 
 	public int compareTo(DDMContent ddmContent) {
-		long pk = ddmContent.getPrimaryKey();
+		long primaryKey = ddmContent.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -401,9 +405,9 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 			return false;
 		}
 
-		long pk = ddmContent.getPrimaryKey();
+		long primaryKey = ddmContent.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

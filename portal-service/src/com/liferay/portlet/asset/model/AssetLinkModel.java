@@ -57,7 +57,7 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 	 *
 	 * @param pk the primary key of this asset link
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the link ID of this asset link.
@@ -214,6 +214,8 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

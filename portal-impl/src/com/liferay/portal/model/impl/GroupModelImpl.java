@@ -182,12 +182,16 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _groupId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setGroupId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setGroupId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_groupId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getGroupId() {
@@ -475,9 +479,9 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			return false;
 		}
 
-		long pk = group.getPrimaryKey();
+		long primaryKey = group.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

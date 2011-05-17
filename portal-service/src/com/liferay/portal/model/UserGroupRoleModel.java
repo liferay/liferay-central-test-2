@@ -54,7 +54,7 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	 *
 	 * @param pk the primary key of this user group role
 	 */
-	public void setPrimaryKey(UserGroupRolePK pk);
+	public void setPrimaryKey(UserGroupRolePK primaryKey);
 
 	/**
 	 * Gets the user ID of this user group role.
@@ -126,6 +126,8 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

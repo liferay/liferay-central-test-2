@@ -50,8 +50,8 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 	*
 	* @param pk the primary key of this s c framework version
 	*/
-	public void setPrimaryKey(long pk) {
-		_scFrameworkVersion.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_scFrameworkVersion.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -307,6 +307,10 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _scFrameworkVersion.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_scFrameworkVersion.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

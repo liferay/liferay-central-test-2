@@ -152,12 +152,16 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 		return _orgLaborId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setOrgLaborId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setOrgLaborId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_orgLaborId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getOrgLaborId() {
@@ -393,9 +397,9 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 			return false;
 		}
 
-		long pk = orgLabor.getPrimaryKey();
+		long primaryKey = orgLabor.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

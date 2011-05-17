@@ -50,8 +50,8 @@ public class SubscriptionWrapper implements Subscription {
 	*
 	* @param pk the primary key of this subscription
 	*/
-	public void setPrimaryKey(long pk) {
-		_subscription.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_subscription.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -271,6 +271,10 @@ public class SubscriptionWrapper implements Subscription {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _subscription.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_subscription.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {

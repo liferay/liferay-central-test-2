@@ -99,12 +99,16 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		return _statsUserId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setStatsUserId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setStatsUserId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_statsUserId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getStatsUserId() {
@@ -293,9 +297,9 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 			return false;
 		}
 
-		long pk = blogsStatsUser.getPrimaryKey();
+		long primaryKey = blogsStatsUser.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

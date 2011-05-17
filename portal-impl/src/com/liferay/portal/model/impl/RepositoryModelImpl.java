@@ -141,12 +141,16 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		return _repositoryId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setRepositoryId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setRepositoryId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_repositoryId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getRepositoryId() {
@@ -310,12 +314,12 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	}
 
 	public int compareTo(Repository repository) {
-		long pk = repository.getPrimaryKey();
+		long primaryKey = repository.getPrimaryKey();
 
-		if (getPrimaryKey() < pk) {
+		if (getPrimaryKey() < primaryKey) {
 			return -1;
 		}
-		else if (getPrimaryKey() > pk) {
+		else if (getPrimaryKey() > primaryKey) {
 			return 1;
 		}
 		else {
@@ -337,9 +341,9 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 			return false;
 		}
 
-		long pk = repository.getPrimaryKey();
+		long primaryKey = repository.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

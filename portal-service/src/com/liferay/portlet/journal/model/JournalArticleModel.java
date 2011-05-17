@@ -62,7 +62,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle>,
 	 *
 	 * @param pk the primary key of this journal article
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this journal article.
@@ -741,6 +741,8 @@ public interface JournalArticleModel extends BaseModel<JournalArticle>,
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

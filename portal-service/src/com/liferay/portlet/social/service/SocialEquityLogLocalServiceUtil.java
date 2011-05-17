@@ -296,7 +296,7 @@ public class SocialEquityLogLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
+	* @deprecated {@link #deactivateEquityLogs(long, String, long, String, String)}
 	*/
 	public static void deactivateEquityLogs(long userId, long assetEntryId,
 		java.lang.String actionId)

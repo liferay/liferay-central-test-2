@@ -58,7 +58,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 *
 	 * @param pk the primary key of this d d m structure
 	 */
-	public void setPrimaryKey(long pk);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Gets the uuid of this d d m structure.
@@ -297,6 +297,8 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	public void setEscapedModel(boolean escapedModel);
 
 	public Serializable getPrimaryKeyObj();
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	public ExpandoBridge getExpandoBridge();
 

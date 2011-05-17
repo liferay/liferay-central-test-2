@@ -143,12 +143,16 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		return _categoryPropertyId;
 	}
 
-	public void setPrimaryKey(long pk) {
-		setCategoryPropertyId(pk);
+	public void setPrimaryKey(long primaryKey) {
+		setCategoryPropertyId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
 		return new Long(_categoryPropertyId);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	public long getCategoryPropertyId() {
@@ -332,9 +336,9 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 			return false;
 		}
 
-		long pk = assetCategoryProperty.getPrimaryKey();
+		long primaryKey = assetCategoryProperty.getPrimaryKey();
 
-		if (getPrimaryKey() == pk) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {

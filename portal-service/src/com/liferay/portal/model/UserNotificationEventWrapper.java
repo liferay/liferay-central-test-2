@@ -51,8 +51,8 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	*
 	* @param pk the primary key of this user notification event
 	*/
-	public void setPrimaryKey(long pk) {
-		_userNotificationEvent.setPrimaryKey(pk);
+	public void setPrimaryKey(long primaryKey) {
+		_userNotificationEvent.setPrimaryKey(primaryKey);
 	}
 
 	/**
@@ -245,6 +245,10 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 
 	public java.io.Serializable getPrimaryKeyObj() {
 		return _userNotificationEvent.getPrimaryKeyObj();
+	}
+
+	public void setPrimaryKeyObj(java.io.Serializable primaryKeyObj) {
+		_userNotificationEvent.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoBridge getExpandoBridge() {
