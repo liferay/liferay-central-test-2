@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
@@ -630,6 +631,9 @@ public interface Portal {
 	public String getLayoutViewPage(Layout layout);
 
 	public String getLayoutViewPage(String type);
+
+	public LiferayPortletRequest getLiferayPortletRequest(
+		PortletRequest portletRequest);
 
 	public LiferayPortletResponse getLiferayPortletResponse(
 		PortletResponse portletResponse);

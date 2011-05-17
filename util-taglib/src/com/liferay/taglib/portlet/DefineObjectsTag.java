@@ -15,6 +15,7 @@
 package com.liferay.taglib.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -50,7 +51,9 @@ public class DefineObjectsTag extends TagSupport {
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest != null) {
-			pageContext.setAttribute("liferayPortletRequest", portletRequest);
+			pageContext.setAttribute(
+				"liferayPortletRequest",
+				PortalUtil.getLiferayPortletRequest(portletRequest));
 
 			String portletRequestAttrName = null;
 
@@ -92,7 +95,9 @@ public class DefineObjectsTag extends TagSupport {
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (portletResponse != null) {
-			pageContext.setAttribute("liferayPortletResponse", portletResponse);
+			pageContext.setAttribute(
+				"liferayPortletResponse",
+				PortalUtil.getLiferayPortletResponse(portletResponse));
 
 			String portletResponseAttrName = null;
 

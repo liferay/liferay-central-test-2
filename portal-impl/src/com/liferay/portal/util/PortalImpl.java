@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapperThreadLocal;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletBag;
@@ -2229,6 +2230,15 @@ public class PortalImpl implements Portal {
 		LayoutSettings layoutSettings = LayoutSettings.getInstance(type);
 
 		return layoutSettings.getViewPage();
+	}
+
+	public LiferayPortletRequest getLiferayPortletRequest(
+		PortletRequest portletRequest) {
+
+		PortletRequestImpl portletRequestImpl =
+			PortletRequestImpl.getPortletRequestImpl(portletRequest);
+
+		return portletRequestImpl;
 	}
 
 	public LiferayPortletResponse getLiferayPortletResponse(
