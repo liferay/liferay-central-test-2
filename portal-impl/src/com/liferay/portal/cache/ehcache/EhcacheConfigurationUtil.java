@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 
 import java.net.URL;
+
 import java.util.Map;
 
 import net.sf.ehcache.config.CacheConfiguration.CacheEventListenerFactoryConfiguration;
@@ -163,7 +164,7 @@ public class EhcacheConfigurationUtil {
 			usingDefault, defaultCacheConfiguration);
 
 		Map<String, CacheConfiguration> cacheConfigurations =
-			configuration.getCacheConfigurations(); 
+			configuration.getCacheConfigurations();
 
 		for (CacheConfiguration cacheConfiguration :
 				cacheConfigurations.values()) {
