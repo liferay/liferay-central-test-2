@@ -2551,6 +2551,236 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Finds all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @return the matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_T(
+		long groupId, long classNameId, java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByG_C_T(groupId, classNameId, templateId);
+	}
+
+	/**
+	* Finds a range of all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @return the range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_T(
+		long groupId, long classNameId, java.lang.String templateId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_C_T(groupId, classNameId, templateId, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByG_C_T(
+		long groupId, long classNameId, java.lang.String templateId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByG_C_T(groupId, classNameId, templateId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the first journal article in the ordered set where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_T_First(
+		long groupId, long classNameId, java.lang.String templateId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByG_C_T_First(groupId, classNameId, templateId,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the last journal article in the ordered set where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByG_C_T_Last(
+		long groupId, long classNameId, java.lang.String templateId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByG_C_T_Last(groupId, classNameId, templateId,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the journal articles before and after the current journal article in the ordered set where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByG_C_T_PrevAndNext(
+		long id, long groupId, long classNameId, java.lang.String templateId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByG_C_T_PrevAndNext(id, groupId, classNameId,
+			templateId, orderByComparator);
+	}
+
+	/**
+	* Filters by the user's permissions and finds all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @return the matching journal articles that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_T(
+		long groupId, long classNameId, java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_C_T(groupId, classNameId, templateId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @return the range of matching journal articles that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_T(
+		long groupId, long classNameId, java.lang.String templateId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_C_T(groupId, classNameId, templateId, start,
+			end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching journal articles that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> filterFindByG_C_T(
+		long groupId, long classNameId, java.lang.String templateId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByG_C_T(groupId, classNameId, templateId, start,
+			end, orderByComparator);
+	}
+
+	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_C_T_PrevAndNext(
+		long id, long groupId, long classNameId, java.lang.String templateId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_C_T_PrevAndNext(id, groupId, classNameId,
+			templateId, orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -3529,6 +3759,20 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Removes all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63; from the database.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_C_T(long groupId, long classNameId,
+		java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_C_T(groupId, classNameId, templateId);
+	}
+
+	/**
 	* Removes all the journal articles where groupId = &#63; and classNameId = &#63; and layoutUuid = &#63; from the database.
 	*
 	* @param groupId the group ID to search with
@@ -3888,6 +4132,37 @@ public class JournalArticleUtil {
 		java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_C_S(groupId, classNameId, structureId);
+	}
+
+	/**
+	* Counts all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @return the number of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_C_T(long groupId, long classNameId,
+		java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_C_T(groupId, classNameId, templateId);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the journal articles where groupId = &#63; and classNameId = &#63; and templateId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @param classNameId the class name ID to search with
+	* @param templateId the template ID to search with
+	* @return the number of matching journal articles that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByG_C_T(long groupId, long classNameId,
+		java.lang.String templateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterCountByG_C_T(groupId, classNameId, templateId);
 	}
 
 	/**

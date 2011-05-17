@@ -789,6 +789,14 @@ public class JournalArticleLocalServiceUtil {
 				   .removeArticleLocale(groupId, articleId, version, languageId);
 	}
 
+	public static void updateTemplateId(long groupId, long classNameId,
+		java.lang.String oldTemplateId, java.lang.String newTemplateId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateTemplateId(groupId, classNameId, oldTemplateId, newTemplateId);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
 		long companyId, long groupId, long classNameId,
 		java.lang.String keywords, java.lang.Double version,
