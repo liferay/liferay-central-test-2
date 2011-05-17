@@ -33,7 +33,7 @@ import java.util.Map;
 public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 
 	public DDLRecord addRecord(
-			long recordSetId, Map<String, Serializable> fieldsMap,
+			long groupId, long recordSetId, Map<String, Serializable> fieldsMap,
 			int displayIndex, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -41,7 +41,8 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getPermissionChecker(), recordSetId, ActionKeys.ADD_RECORD);
 
 		return ddlRecordLocalService.addRecord(
-			recordSetId, fieldsMap, displayIndex, serviceContext);
+			getUserId(), groupId, recordSetId, fieldsMap, displayIndex,
+			serviceContext);
 	}
 
 	public DDLRecord updateRecord(

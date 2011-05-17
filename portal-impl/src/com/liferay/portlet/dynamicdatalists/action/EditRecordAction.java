@@ -22,6 +22,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
@@ -124,6 +126,9 @@ public class EditRecordAction extends PortletAction {
 	protected DDLRecord updateRecord(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long recordId = ParamUtil.getLong(actionRequest, "recordId");
 
 		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
@@ -156,6 +161,7 @@ public class EditRecordAction extends PortletAction {
 
 		if (recordId <= 0) {
 			record = DDLRecordLocalServiceUtil.addRecord(
+				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 				recordSetId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT,
 				serviceContext);
 		}

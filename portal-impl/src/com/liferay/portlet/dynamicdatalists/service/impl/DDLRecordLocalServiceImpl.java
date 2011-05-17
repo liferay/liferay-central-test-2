@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatalists.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
@@ -28,6 +29,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -39,11 +41,15 @@ public class DDLRecordLocalServiceImpl
 	extends DDLRecordLocalServiceBaseImpl {
 
 	public DDLRecord addRecord(
-			long recordSetId, Fields fields, int displayIndex,
-			ServiceContext serviceContext)
+			long userId, long groupId, long recordSetId, Fields fields,
+			int displayIndex, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Record
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Date now = new Date();
 
 		DDLRecordSet recordSet = ddlRecordSetPersistence.findByPrimaryKey(
 			recordSetId);
@@ -51,6 +57,14 @@ public class DDLRecordLocalServiceImpl
 		long recordId = counterLocalService.increment();
 
 		DDLRecord record = ddlRecordPersistence.create(recordId);
+
+		record.setUuid(serviceContext.getUuid());
+		record.setGroupId(groupId);
+		record.setCompanyId(user.getCompanyId());
+		record.setUserId(user.getUserId());
+		record.setUserName(user.getFullName());
+		record.setCreateDate(serviceContext.getCreateDate(now));
+		record.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
@@ -71,13 +85,15 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	public DDLRecord addRecord(
-			long recordSetId, Map<String, Serializable> fieldsMap,
-			int displayIndex, ServiceContext serviceContext)
+			long userId, long groupId, long recordSetId,
+			Map<String, Serializable> fieldsMap, int displayIndex,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Fields fields = toFields(fieldsMap);
 
-		return addRecord(recordSetId, fields, displayIndex, serviceContext);
+		return addRecord(
+			userId, groupId, recordSetId, fields, displayIndex, serviceContext);
 	}
 
 	public void deleteRecord(DDLRecord record)
@@ -146,6 +162,7 @@ public class DDLRecordLocalServiceImpl
 
 		DDLRecord record = ddlRecordPersistence.findByPrimaryKey(recordId);
 
+		record.setModifiedDate(serviceContext.getModifiedDate(null));
 		record.setDisplayIndex(displayIndex);
 
 		ddlRecordPersistence.update(record, false);
@@ -160,13 +177,14 @@ public class DDLRecordLocalServiceImpl
 
 	public DDLRecord updateRecord(
 			long recordId, Map<String, Serializable> fieldsMap,
-			int displayIndex, boolean merge, ServiceContext serviceContext)
+			int displayIndex, boolean mergeFields, 
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Fields fields = toFields(fieldsMap);
 
 		return updateRecord(
-			recordId, fields, displayIndex, merge, serviceContext);
+			recordId, fields, displayIndex, mergeFields, serviceContext);
 	}
 
 	protected Fields toFields(Map<String, Serializable> fieldsMap) {

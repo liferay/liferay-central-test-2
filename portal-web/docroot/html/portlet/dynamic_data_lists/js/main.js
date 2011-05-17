@@ -11,8 +11,6 @@ AUI().add(
 
 		var DDLRecordSet = DDL.DDLRecordSet;
 
-		var DDLRecordSet = DDL.DDLRecordSet;
-
 		var getObjectKeys = A.Object.keys;
 
 		var JSON = A.JSON;
@@ -70,8 +68,9 @@ AUI().add(
 
 						var recordsetId = instance.get('recordsetId');
 
-						DDL_RECORD.addRecord(
+						DDLRecord.addRecord(
 							{
+								groupId: themeDisplay.getScopeGroupId(),
 								recordSetId: recordsetId,
 								fieldsMap: JSON.stringify(fieldsMap),
 								displayIndex: displayIndex,
