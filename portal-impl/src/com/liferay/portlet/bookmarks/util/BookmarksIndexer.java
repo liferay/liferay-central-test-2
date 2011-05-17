@@ -177,7 +177,6 @@ public class BookmarksIndexer extends BaseIndexer {
 		return new FacetValueValidator() {
 
 			public boolean check(SearchContext searchContext, String primKey) {
-
 				try {
 					BookmarksFolderServiceUtil.getFolder(
 						GetterUtil.getLong(primKey));
