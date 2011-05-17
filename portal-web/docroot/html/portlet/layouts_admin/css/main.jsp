@@ -234,6 +234,11 @@
 
 	.edit-layout-form, .edit-layoutset-form {
 		padding: 0.5em;
+
+		.layout-description textarea {
+			height: 100px;
+        	width: 350px;
+		}
 	}
 
 	.layout-breadcrumb {

@@ -25,4 +25,4 @@ String description = typeSettingsProperties.getProperty("description", StringPoo
 
 <aui:input cssClass="lfr-input-text-container" label="url" name="TypeSettingsProperties--url--" type="text" value="<%= url %>" />
 
-<aui:input cssClass="lfr-textarea-container" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" wrap="soft" />
+<aui:input cssClass="layout-description" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" wrap="soft" />
