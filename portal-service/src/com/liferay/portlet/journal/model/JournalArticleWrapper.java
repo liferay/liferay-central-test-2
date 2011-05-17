@@ -48,7 +48,7 @@ public class JournalArticleWrapper implements JournalArticle {
 	/**
 	* Sets the primary key of this journal article
 	*
-	* @param pk the primary key of this journal article
+	* @param primaryKey the primary key of this journal article
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalArticle.setPrimaryKey(primaryKey);

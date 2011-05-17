@@ -48,7 +48,7 @@ public class JournalFeedWrapper implements JournalFeed {
 	/**
 	* Sets the primary key of this journal feed
 	*
-	* @param pk the primary key of this journal feed
+	* @param primaryKey the primary key of this journal feed
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalFeed.setPrimaryKey(primaryKey);

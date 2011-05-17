@@ -52,7 +52,7 @@ public interface JournalArticleResourceModel extends BaseModel<JournalArticleRes
 	/**
 	 * Sets the primary key of this journal article resource
 	 *
-	 * @param pk the primary key of this journal article resource
+	 * @param primaryKey the primary key of this journal article resource
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -629,8 +629,7 @@ public interface JournalArticleLocalService {
 
 	public void updateTemplateId(long groupId, long classNameId,
 		java.lang.String oldTemplateId, java.lang.String newTemplateId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(

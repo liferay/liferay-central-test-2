@@ -48,7 +48,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 	/**
 	* Sets the primary key of this journal template
 	*
-	* @param pk the primary key of this journal template
+	* @param primaryKey the primary key of this journal template
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalTemplate.setPrimaryKey(primaryKey);

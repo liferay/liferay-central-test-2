@@ -48,7 +48,7 @@ public class JournalArticleImageWrapper implements JournalArticleImage {
 	/**
 	* Sets the primary key of this journal article image
 	*
-	* @param pk the primary key of this journal article image
+	* @param primaryKey the primary key of this journal article image
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalArticleImage.setPrimaryKey(primaryKey);

@@ -60,7 +60,7 @@ public interface JournalArticleModel extends BaseModel<JournalArticle>,
 	/**
 	 * Sets the primary key of this journal article
 	 *
-	 * @param pk the primary key of this journal article
+	 * @param primaryKey the primary key of this journal article
 	 */
 	public void setPrimaryKey(long primaryKey);
 

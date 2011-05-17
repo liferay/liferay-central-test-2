@@ -52,7 +52,7 @@ public interface JournalContentSearchModel extends BaseModel<JournalContentSearc
 	/**
 	 * Sets the primary key of this journal content search
 	 *
-	 * @param pk the primary key of this journal content search
+	 * @param primaryKey the primary key of this journal content search
 	 */
 	public void setPrimaryKey(long primaryKey);
 

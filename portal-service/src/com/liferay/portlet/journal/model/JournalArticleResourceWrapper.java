@@ -49,7 +49,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 	/**
 	* Sets the primary key of this journal article resource
 	*
-	* @param pk the primary key of this journal article resource
+	* @param primaryKey the primary key of this journal article resource
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalArticleResource.setPrimaryKey(primaryKey);

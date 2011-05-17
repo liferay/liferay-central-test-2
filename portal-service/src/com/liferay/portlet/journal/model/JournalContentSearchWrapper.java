@@ -49,7 +49,7 @@ public class JournalContentSearchWrapper implements JournalContentSearch {
 	/**
 	* Sets the primary key of this journal content search
 	*
-	* @param pk the primary key of this journal content search
+	* @param primaryKey the primary key of this journal content search
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalContentSearch.setPrimaryKey(primaryKey);

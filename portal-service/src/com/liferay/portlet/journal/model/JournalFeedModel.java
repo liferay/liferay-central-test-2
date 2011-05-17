@@ -56,7 +56,7 @@ public interface JournalFeedModel extends BaseModel<JournalFeed>, GroupedModel {
 	/**
 	 * Sets the primary key of this journal feed
 	 *
-	 * @param pk the primary key of this journal feed
+	 * @param primaryKey the primary key of this journal feed
 	 */
 	public void setPrimaryKey(long primaryKey);
 

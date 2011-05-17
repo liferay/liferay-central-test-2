@@ -791,8 +791,7 @@ public class JournalArticleLocalServiceUtil {
 
 	public static void updateTemplateId(long groupId, long classNameId,
 		java.lang.String oldTemplateId, java.lang.String newTemplateId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateTemplateId(groupId, classNameId, oldTemplateId, newTemplateId);
 	}

@@ -48,7 +48,7 @@ public class JournalStructureWrapper implements JournalStructure {
 	/**
 	* Sets the primary key of this journal structure
 	*
-	* @param pk the primary key of this journal structure
+	* @param primaryKey the primary key of this journal structure
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_journalStructure.setPrimaryKey(primaryKey);
