@@ -79,7 +79,14 @@ for (int i = 0; i < results.size(); i++) {
 	List<String> groupNames = new ArrayList<String>();
 
 	if (role.getType() == RoleConstants.TYPE_REGULAR) {
-		if (!ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
+		if (Validator.isNotNull(portletResource)) {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
+
+			if (portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.CONTENT)) {
+				supportsFilterByGroup = true;
+			}
+		}
+		else if (!ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
 			supportsFilterByGroup = true;
 		}
 
