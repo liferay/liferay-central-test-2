@@ -58,7 +58,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 			if (_cacheManager.cacheExists(cacheName)) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Overriding existing cache: " + cacheName);
+					_log.info("Overriding existing cache " + cacheName);
 				}
 
 				_cacheManager.removeCache(cacheName);
@@ -71,19 +71,18 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 	}
 
 	public void afterPropertiesSet() {
-
-		String configFile = PropsUtil.get(_configPropertyKey);
+		String configurationPath = PropsUtil.get(_configPropertyKey);
 
 		boolean usingDefault = false;
 
-		if (Validator.isNull(configFile)) {
-			configFile = _DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE;
+		if (Validator.isNull(configurationPath)) {
+			configurationPath = _DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE;
 
 			usingDefault = true;
 		}
 
 		Configuration configuration = EhcacheConfigurationUtil.getConfiguration(
-			configFile, _clusterAware, usingDefault);
+			configurationPath, _clusterAware, usingDefault);
 
 		_cacheManager = new CacheManager(configuration);
 
@@ -176,25 +175,23 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		return _cacheManager;
 	}
 
-	public void reconfigureCaches(URL cacheConfigFile) {
+	public void reconfigureCaches(URL configurationURL) {
 		Configuration configuration = EhcacheConfigurationUtil.getConfiguration(
-			cacheConfigFile, _clusterAware);
+			configurationURL, _clusterAware);
 
 		Map<String, CacheConfiguration> cacheConfigurations =
 			configuration.getCacheConfigurations();
 
 		for (CacheConfiguration cacheConfiguration :
 				cacheConfigurations.values()) {
-			String cacheName = cacheConfiguration.getName();
 
 			Cache cache = new Cache(cacheConfiguration);
 
 			PortalCache portalCache = addCache(cache);
 
 			if (portalCache == null) {
-				if (_log.isErrorEnabled()) {
-					_log.error("Failed to override cache: " + cacheName);
-				}
+				_log.error(
+					"Failed to override cache " + cacheConfiguration.getName());
 			}
 		}
 	}
@@ -239,15 +236,13 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	private static final String _DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE =
 		"/ehcache/liferay-multi-vm.xml";
-	private static final String _DEFAULT_EHCACHE_CONFIG_FILE =
-		"/ehcache/liferay-single-vm.xml";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		EhcachePortalCacheManager.class);
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
-	private boolean _clusterAware = false;
+	private boolean _clusterAware;
 	private boolean _debug;
 	private ManagementService _managementService;
 	private MBeanServer _mBeanServer;

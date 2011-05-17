@@ -28,7 +28,7 @@ public interface PortalCacheManager {
 	public PortalCache getCache(String name, boolean blocking)
 		throws PortalCacheException;
 
-	public void reconfigureCaches(URL cacheConfigFile);
+	public void reconfigureCaches(URL configurationURL);
 
 	public void removeCache(String name);
 

@@ -70,7 +70,7 @@ public class MultiVMKeyPoolPortalCacheManager implements PortalCacheManager {
 		return multiVMKeyPoolPortalCache;
 	}
 
-	public void reconfigureCaches(URL cacheConfigFile) {
+	public void reconfigureCaches(URL configurationURL) {
 	}
 
 	public void removeCache(String name) {

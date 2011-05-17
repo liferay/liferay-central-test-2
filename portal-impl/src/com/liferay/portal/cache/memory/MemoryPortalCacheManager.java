@@ -54,7 +54,7 @@ public class MemoryPortalCacheManager implements PortalCacheManager {
 		return portalCache;
 	}
 
-	public void reconfigureCaches(URL cacheConfigFile) {
+	public void reconfigureCaches(URL configurationURL) {
 	}
 
 	public void removeCache(String name) {

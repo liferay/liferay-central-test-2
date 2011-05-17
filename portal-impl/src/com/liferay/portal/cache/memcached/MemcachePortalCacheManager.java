@@ -71,7 +71,7 @@ public class MemcachePortalCacheManager implements PortalCacheManager {
 		return memcachePortalCache;
 	}
 
-	public void reconfigureCaches(URL cacheConfigFile) {
+	public void reconfigureCaches(URL configurationURL) {
 	}
 
 	public void removeCache(String name) {
