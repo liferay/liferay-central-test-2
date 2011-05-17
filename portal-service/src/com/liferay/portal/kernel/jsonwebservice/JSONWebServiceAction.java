@@ -14,26 +14,15 @@
 
 package com.liferay.portal.kernel.jsonwebservice;
 
-import com.liferay.portal.kernel.util.StringPool;
-
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Igor Spasic
  */
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.TYPE})
-public @interface REST {
+public interface JSONWebServiceAction {
 
-	public String value() default StringPool.BLANK;
+	public Class<?> getReturnType();
 
-	public String method() default StringPool.BLANK;
-
-	public RESTMode mode() default RESTMode.AUTO;
+	public Object invoke(HttpServletRequest request) throws Exception;
 
 }

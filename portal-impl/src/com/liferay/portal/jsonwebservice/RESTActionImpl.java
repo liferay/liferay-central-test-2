@@ -14,7 +14,7 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.jsonwebservice.RESTAction;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Method;
@@ -26,7 +26,7 @@ import jodd.util.ReflectUtil;
 /**
  * @author Igor Spasic
  */
-public class RESTActionImpl implements RESTAction {
+public class RESTActionImpl implements JSONWebServiceAction {
 
 	public RESTActionImpl(
 		RESTActionConfig restActionConfig,

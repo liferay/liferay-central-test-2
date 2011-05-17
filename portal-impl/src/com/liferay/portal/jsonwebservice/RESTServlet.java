@@ -14,7 +14,7 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.jsonwebservice.RESTActionsManagerUtil;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
@@ -67,7 +67,8 @@ public class RESTServlet extends JSONServlet {
 	protected void dumpMappings(HttpServletResponse response)
 		throws IOException {
 
-		List<String[]> mappings = RESTActionsManagerUtil.dumpMappings();
+		List<String[]> mappings = JSONWebServiceActionsManagerUtil
+			.dumpMappings();
 
 		StringBundler sb = new StringBundler(mappings.size() * 6 + 2);
 

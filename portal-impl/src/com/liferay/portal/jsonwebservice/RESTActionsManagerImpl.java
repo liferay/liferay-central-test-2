@@ -14,8 +14,8 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.jsonwebservice.RESTAction;
-import com.liferay.portal.kernel.jsonwebservice.RESTActionsManager;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.BinarySearch;
 import com.liferay.portal.kernel.util.CharPool;
@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public class RESTActionsManagerImpl implements RESTActionsManager {
+public class RESTActionsManagerImpl implements JSONWebServiceActionsManager {
 
 	public RESTActionsManagerImpl() {
 		_restActionConfig = new SortedArrayList<RESTActionConfig>();
@@ -75,7 +75,7 @@ public class RESTActionsManagerImpl implements RESTActionsManager {
 		return mappings;
 	}
 
-	public RESTAction lookup(HttpServletRequest request) {
+	public JSONWebServiceAction lookup(HttpServletRequest request) {
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		String method = GetterUtil.getString(request.getMethod());

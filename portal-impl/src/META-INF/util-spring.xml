@@ -172,7 +172,7 @@
 			<bean class="com.liferay.portal.kernel.poller.comet.CometHandlerPool" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.rest.RESTActionsManagerUtil" class="com.liferay.portal.kernel.jsonwebservice.RESTActionsManagerUtil">
+	<bean id="com.liferay.portal.kernel.rest.RESTActionsManagerUtil" class="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil">
 		<property name="RESTActionsManager">
 			<bean class="com.liferay.portal.jsonwebservice.RESTActionsManagerImpl" />
 		</property>

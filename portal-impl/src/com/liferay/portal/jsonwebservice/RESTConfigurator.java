@@ -15,11 +15,11 @@
 package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.jsonwebservice.REST;
-import com.liferay.portal.kernel.jsonwebservice.RESTActionsManager;
-import com.liferay.portal.kernel.jsonwebservice.RESTMode;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -143,7 +143,7 @@ public class RESTConfigurator extends FindClass {
 		_checkBytecodeSignature = checkBytecodeSignature;
 	}
 
-	public void setRESTActionsManager(RESTActionsManager restActionsManager) {
+	public void setRESTActionsManager(JSONWebServiceActionsManager restActionsManager) {
 		_restActionsManager = restActionsManager;
 	}
 
@@ -210,9 +210,10 @@ public class RESTConfigurator extends FindClass {
 			return;
 		}
 
-		REST restClassAnnotation = actionClass.getAnnotation(REST.class);
+		JSONWebService
+			restClassAnnotation = actionClass.getAnnotation(JSONWebService.class);
 
-		RESTMode restClassRestMode = RESTMode.MANUAL;
+		JSONWebServiceMode restClassRestMode = JSONWebServiceMode.MANUAL;
 
 		if (restClassAnnotation != null) {
 			restClassRestMode = restClassAnnotation.mode();
@@ -229,24 +230,25 @@ public class RESTConfigurator extends FindClass {
 
 			boolean registerMethod = false;
 
-			REST restMethodAnnotation = method.getAnnotation(REST.class);
+			JSONWebService
+				restMethodAnnotation = method.getAnnotation(JSONWebService.class);
 
-			if (restClassRestMode.equals(RESTMode.AUTO)) {
+			if (restClassRestMode.equals(JSONWebServiceMode.AUTO)) {
 				registerMethod = true;
 
 				if (restMethodAnnotation != null) {
-					RESTMode restMethodRestMode = restMethodAnnotation.mode();
+					JSONWebServiceMode restMethodRestMode = restMethodAnnotation.mode();
 
-					if (restMethodRestMode.equals(RESTMode.IGNORE)) {
+					if (restMethodRestMode.equals(JSONWebServiceMode.IGNORE)) {
 						registerMethod = false;
 					}
 				}
 			}
 			else {
 				if (restMethodAnnotation != null) {
-					RESTMode restMethodRestMode = restMethodAnnotation.mode();
+					JSONWebServiceMode restMethodRestMode = restMethodAnnotation.mode();
 
-					if (!restMethodRestMode.equals(RESTMode.IGNORE)) {
+					if (!restMethodRestMode.equals(JSONWebServiceMode.IGNORE)) {
 						registerMethod = false;
 					}
 				}
@@ -288,8 +290,8 @@ public class RESTConfigurator extends FindClass {
 	private boolean _checkBytecodeSignature = true;
 	private ClassLoader _classLoader;
 	private int _registeredActionsCount;
-	private RESTActionsManager _restActionsManager;
-	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);
+	private JSONWebServiceActionsManager _restActionsManager;
+	private byte[] _restAnnotationBytes = getTypeSignatureBytes(JSONWebService.class);
 	private RESTMappingResolver _restMappingResolver =
 		new RESTMappingResolver();
 	private Map<Class<?>, Class<?>> _utilClasses =

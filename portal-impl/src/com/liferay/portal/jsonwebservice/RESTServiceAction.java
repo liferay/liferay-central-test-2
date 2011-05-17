@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.jsonwebservice.RESTAction;
-import com.liferay.portal.kernel.jsonwebservice.RESTActionsManagerUtil;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -39,7 +39,7 @@ public class RESTServiceAction extends JSONServiceAction {
 		RESTConfigurator restConfigurator = new RESTConfigurator();
 
 		restConfigurator.setRESTActionsManager(
-			RESTActionsManagerUtil.getRESTActionsManager());
+			JSONWebServiceActionsManagerUtil.getRESTActionsManager());
 
 		try {
 			restConfigurator.configure(classLoader);
@@ -55,7 +55,8 @@ public class RESTServiceAction extends JSONServiceAction {
 		throws Exception {
 
 		try {
-			RESTAction restAction = RESTActionsManagerUtil.lookup(request);
+			JSONWebServiceAction restAction = JSONWebServiceActionsManagerUtil
+				.lookup(request);
 
 			Object returnObj = restAction.invoke(request);
 

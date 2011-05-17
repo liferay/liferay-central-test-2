@@ -23,17 +23,17 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public class RESTActionsManagerUtil {
+public class JSONWebServiceActionsManagerUtil {
 
 	public static List<String[]> dumpMappings() {
 		return _restActionsManager.dumpMappings();
 	}
 
-	public static RESTActionsManager getRESTActionsManager() {
+	public static JSONWebServiceActionsManager getRESTActionsManager() {
 		return _restActionsManager;
 	}
 
-	public static RESTAction lookup(HttpServletRequest request) {
+	public static JSONWebServiceAction lookup(HttpServletRequest request) {
 		return getRESTActionsManager().lookup(request);
 	}
 
@@ -44,10 +44,10 @@ public class RESTActionsManagerUtil {
 			actionClass, actionMethod, path, method);
 	}
 
-	public void setRESTActionsManager(RESTActionsManager restActionsManager) {
+	public void setRESTActionsManager(JSONWebServiceActionsManager restActionsManager) {
 		_restActionsManager = restActionsManager;
 	}
 
-	private static RESTActionsManager _restActionsManager;
+	private static JSONWebServiceActionsManager _restActionsManager;
 
 }

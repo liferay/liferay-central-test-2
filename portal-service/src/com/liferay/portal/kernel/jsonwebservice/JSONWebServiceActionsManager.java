@@ -14,15 +14,22 @@
 
 package com.liferay.portal.kernel.jsonwebservice;
 
+import java.lang.reflect.Method;
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Igor Spasic
  */
-public interface RESTAction {
+public interface JSONWebServiceActionsManager {
 
-	public Class<?> getReturnType();
+	public List<String[]> dumpMappings();
 
-	public Object invoke(HttpServletRequest request) throws Exception;
+	public JSONWebServiceAction lookup(HttpServletRequest request);
+
+	public void registerRESTAction(
+		Class<?> actionClass, Method actionMethod, String path, String method);
 
 }

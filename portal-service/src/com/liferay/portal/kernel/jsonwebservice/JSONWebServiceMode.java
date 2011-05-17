@@ -14,22 +14,11 @@
 
 package com.liferay.portal.kernel.jsonwebservice;
 
-import java.lang.reflect.Method;
-
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Igor Spasic
  */
-public interface RESTActionsManager {
+public enum JSONWebServiceMode {
 
-	public List<String[]> dumpMappings();
-
-	public RESTAction lookup(HttpServletRequest request);
-
-	public void registerRESTAction(
-		Class<?> actionClass, Method actionMethod, String path, String method);
+	AUTO, IGNORE, MANUAL
 
 }

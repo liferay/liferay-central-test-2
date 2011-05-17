@@ -14,7 +14,7 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.jsonwebservice.REST;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
 public class RESTMappingResolver {
 
 	public String resolveHttpMethod(Method method) {
-		REST restAnnotation = method.getAnnotation(REST.class);
+		JSONWebService restAnnotation = method.getAnnotation(JSONWebService.class);
 
 		String httpMethod = null;
 
@@ -48,7 +48,7 @@ public class RESTMappingResolver {
 	}
 
 	public String resolvePath(Class<?> clazz, Method method) {
-		REST restAnnotation = method.getAnnotation(REST.class);
+		JSONWebService restAnnotation = method.getAnnotation(JSONWebService.class);
 
 		String path = null;
 
@@ -66,7 +66,7 @@ public class RESTMappingResolver {
 
 			String pathFromClass = null;
 
-			restAnnotation = clazz.getAnnotation(REST.class);
+			restAnnotation = clazz.getAnnotation(JSONWebService.class);
 
 			if (restAnnotation != null) {
 				pathFromClass = restAnnotation.value().trim();
