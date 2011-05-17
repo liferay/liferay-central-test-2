@@ -82,34 +82,35 @@ public class AssetEntriesFacet extends MultiValueFacet {
 					continue;
 				}
 
-				indexer.postProcessContextQuery(
-					indexerBooleanQuery, searchContext);
+				BooleanQuery entityQuery = BooleanQueryFactoryUtil.create();
+
+				entityQuery.add(indexerBooleanQuery, BooleanClauseOccur.MUST);
+
+				indexer.postProcessContextQuery(entityQuery, searchContext);
 
 				for (IndexerPostProcessor indexerPostProcessor :
 						indexer.getIndexerPostProcessors()) {
 
 					indexerPostProcessor.postProcessContextQuery(
-						indexerBooleanQuery, searchContext);
+						entityQuery, searchContext);
 				}
 
-				facetQuery.add(
-					indexerBooleanQuery, BooleanClauseOccur.SHOULD);
+				if (indexer.isStagingAware()) {
+					if (!searchContext.isIncludeLiveGroups() &&
+						searchContext.isIncludeStagingGroups()) {
 
-				if (!indexer.isStagingAware()) {
-					continue;
+						entityQuery.addRequiredTerm(Field.STAGING_GROUP, true);
+					}
+					else if (searchContext.isIncludeLiveGroups() &&
+							!searchContext.isIncludeStagingGroups()) {
+
+						entityQuery.addRequiredTerm(
+							Field.STAGING_GROUP, false);
+					}
 				}
 
-				if (!searchContext.isIncludeLiveGroups() &&
-					searchContext.isIncludeStagingGroups()) {
-
-					facetQuery.addRequiredTerm(
-						Field.STAGING_GROUP, true);
-				}
-				else if (searchContext.isIncludeLiveGroups() &&
-						!searchContext.isIncludeStagingGroups()) {
-
-					facetQuery.addRequiredTerm(
-						Field.STAGING_GROUP, false);
+				if (!entityQuery.clauses().isEmpty()) {
+					facetQuery.add(entityQuery, BooleanClauseOccur.SHOULD);
 				}
 			}
 			catch (Exception e) {
