@@ -155,7 +155,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		double priority = 0.0;
 		boolean allowPingbacks = false;
 
-		serviceContext.setAddCommunityPermissions(true);
+		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setAttribute("className", className);
 		serviceContext.setAttribute("classPK", String.valueOf(classPK));
@@ -354,16 +354,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (user.isDefaultUser()) {
 				addMessageResources(message, true, true);
 			}
-			else if (serviceContext.getAddCommunityPermissions() ||
+			else if (serviceContext.getAddGroupPermissions() ||
 					 serviceContext.getAddGuestPermissions()) {
 
 				addMessageResources(
-					message, serviceContext.getAddCommunityPermissions(),
+					message, serviceContext.getAddGroupPermissions(),
 					serviceContext.getAddGuestPermissions());
 			}
 			else {
 				addMessageResources(
-					message, serviceContext.getCommunityPermissions(),
+					message, serviceContext.getGroupPermissions(),
 					serviceContext.getGuestPermissions());
 			}
 		}
