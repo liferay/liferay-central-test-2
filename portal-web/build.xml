@@ -324,6 +324,10 @@
 
 				creoleParserContent = creoleParserContent.substring(0, x) + sb.toString() + creoleParserContent.substring(y);
 
+				// Add support for whitespace in headers
+
+				creoleParserContent = creoleParserContent.replace("regex: '(^|\\\\n)[ \\\\t]*={' + i + '}[ \\\\t]'", "regex: '(^|\\\\n)[ \\\\t]*={' + i + '}(?:[ \\\\t]*(?![=]))'");
+
 				// Register Creole parser
 
 				creoleParserContent = creoleParserContent.replace("= Parse.Simple.Creole;", "= Parse.Simple.Creole;\n\nCKEDITOR.CreoleParser = Parse.Simple.Creole;");

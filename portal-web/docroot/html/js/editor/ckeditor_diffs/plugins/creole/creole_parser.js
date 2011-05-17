@@ -344,7 +344,7 @@ Parse.Simple.Creole = function(options) {
 
     for (var i = 1; i <= 6; i++) {
         g['h' + i] = { tag: 'h' + i, capture: 2,
-            regex: '(^|\\n)[ \\t]*={' + i + '}[ \\t]' +
+            regex: '(^|\\n)[ \\t]*={' + i + '}(?:[ \\t]*(?![=]))' +
                    '([^~]*?(~(.|(?=\\n)|$))*)[ \\t]*=*\\s*(\\n|$)'
         };
     }
