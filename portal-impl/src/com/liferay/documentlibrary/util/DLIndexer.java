@@ -248,6 +248,10 @@ public class DLIndexer extends BaseIndexer {
 
 		DLFileVersion fileVersion = fileEntry.getFileVersion();
 
+		int status = fileVersion.getStatus();
+
+		document.addKeyword(Field.STATUS, status);
+
 		ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
 			companyId, DLFileEntry.class.getName(),
 			fileVersion.getFileVersionId());

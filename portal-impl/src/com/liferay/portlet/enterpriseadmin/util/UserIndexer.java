@@ -73,12 +73,12 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		Integer status = (Integer)searchContext.getAttribute("status");
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
 
-		if ((status != null) &&
-			(status.intValue() != WorkflowConstants.STATUS_ANY)) {
-
-			contextQuery.addRequiredTerm("status", status);
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm(Field.STATUS, status);
 		}
 
 		LinkedHashMap<String, Object> params =
@@ -244,7 +244,7 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("lastName", lastName, true);
 		document.addKeyword("fullName", fullName, true);
 		document.addKeyword("jobTitle", jobTitle);
-		document.addKeyword("status", status);
+		document.addKeyword(Field.STATUS, status);
 		document.addKeyword("groupIds", groupIds);
 		document.addKeyword("organizationIds", organizationIds);
 		document.addKeyword(

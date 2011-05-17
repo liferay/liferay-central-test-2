@@ -15,6 +15,7 @@
 package com.liferay.portlet.blogs.util;
 
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -60,6 +61,19 @@ public class BlogsIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
+
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm(Field.STATUS, status);
+		}
+	}
+
 	protected void doDelete(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
 
@@ -83,6 +97,7 @@ public class BlogsIndexer extends BaseIndexer {
 		String title = entry.getTitle();
 		String content = HtmlUtil.extractText(entry.getContent());
 		Date displayDate = entry.getDisplayDate();
+		int status = entry.getStatus();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			BlogsEntry.class.getName(), entryId);
@@ -109,6 +124,7 @@ public class BlogsIndexer extends BaseIndexer {
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.CONTENT, content);
+		document.addKeyword(Field.STATUS, status);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);

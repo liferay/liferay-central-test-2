@@ -155,7 +155,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 		document.addText("changeLog", changeLog);
 		document.addText("pageURL", pageURL);
 		document.addKeyword("repositoryURL", repositoryURL);
-		document.addKeyword("status", status);
+		document.addKeyword(Field.STATUS, status);
 		document.addKeyword("installedVersion", installedVersion);
 
 		return document;
@@ -265,7 +265,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 		}
 
-		String status = (String)searchContext.getAttribute("status");
+		String status = (String)searchContext.getAttribute(Field.STATUS);
 
 		if (Validator.isNotNull(status) && !status.equals("all")) {
 			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
@@ -275,12 +275,12 @@ public class PluginPackageIndexer extends BaseIndexer {
 						STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
 
 				searchQuery.addExactTerm(
-					"status", PluginPackageImpl.STATUS_NOT_INSTALLED);
+					Field.STATUS, PluginPackageImpl.STATUS_NOT_INSTALLED);
 				searchQuery.addExactTerm(
-					"status", PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
+					Field.STATUS, PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
 			}
 			else {
-				searchQuery.addExactTerm("status", status);
+				searchQuery.addExactTerm(Field.STATUS, status);
 			}
 
 			fullQuery.add(searchQuery, BooleanClauseOccur.MUST);

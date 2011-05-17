@@ -93,6 +93,21 @@ public class MBIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm(Field.STATUS, status);
+		}
+
+		long threadId = GetterUtil.getLong(
+			(String)searchContext.getAttribute("threadId"));
+
+		if (threadId > 0) {
+			contextQuery.addRequiredTerm("threadId", threadId);
+		}
+
 		long[] categoryIds = searchContext.getCategoryIds();
 
 		if (categoryIds != null && categoryIds.length > 0) {
@@ -117,13 +132,6 @@ public class MBIndexer extends BaseIndexer {
 			}
 
 			contextQuery.add(categoriesQuery, BooleanClauseOccur.MUST);
-		}
-
-		long threadId = GetterUtil.getLong(
-			(String)searchContext.getAttribute("threadId"));
-
-		if (threadId > 0) {
-			contextQuery.addRequiredTerm("threadId", threadId);
 		}
 	}
 
@@ -199,6 +207,7 @@ public class MBIndexer extends BaseIndexer {
 		String content = processContent(messageId, message.getBody());
 		boolean anonymous = message.isAnonymous();
 		Date modifiedDate = message.getModifiedDate();
+		long status = message.getStatus();
 
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			MBMessage.class.getName(), messageId);
@@ -232,6 +241,7 @@ public class MBIndexer extends BaseIndexer {
 			Field.ROOT_ENTRY_CLASS_PK, message.getRootMessageId());
 
 		document.addKeyword("threadId", threadId);
+		document.addKeyword(Field.STATUS, status);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

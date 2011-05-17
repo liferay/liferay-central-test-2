@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -87,6 +88,14 @@ public class WikiIndexer extends BaseIndexer {
 			}
 
 			contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
+		}
+
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm(Field.STATUS, status);
 		}
 	}
 
@@ -149,6 +158,7 @@ public class WikiIndexer extends BaseIndexer {
 		String title = page.getTitle();
 		String content = HtmlUtil.extractText(page.getContent());
 		Date modifiedDate = page.getModifiedDate();
+		int status = page.getStatus();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			WikiPage.class.getName(), resourcePrimKey);
@@ -179,6 +189,7 @@ public class WikiIndexer extends BaseIndexer {
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.NODE_ID, nodeId);
+		document.addKeyword(Field.STATUS, status);
 		document.addKeyword(Field.ENTRY_CLASS_NAME, WikiPage.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, resourcePrimKey);
 
