@@ -23,7 +23,7 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 
-String classNameId = ParamUtil.getString(request, "classNameId");
+long classNameId = ParamUtil.getLong(request, "classNameId");
 String classPK = ParamUtil.getString(request, "classPK");
 
 String articleId = BeanParamUtil.getString(article, request, "articleId");
@@ -168,7 +168,7 @@ if (Validator.isNotNull(content)) {
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="classNameId" value="<%= classNameId %>" />
+	<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
 	<portlet:param name="classPK" value="<%= classPK %>" />
 	<portlet:param name="structureId" value="<%= structureId %>" />
 	<portlet:param name="templateId" value="<%= templateId %>" />
