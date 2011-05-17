@@ -1597,11 +1597,11 @@ public class JournalArticleLocalServiceImpl
 			attributes.put(Field.DESCRIPTION, description);
 			attributes.put(Field.ENTRY_CLASS_PK, articleId);
 			attributes.put(Field.STATUS, status);
-			attributes.put("structureId", structureId);
-			attributes.put("templateId", templateId);
 			attributes.put(Field.TITLE, title);
 			attributes.put(Field.TYPE, type);
 			attributes.put("params", params);
+			attributes.put("structureId", structureId);
+			attributes.put("templateId", templateId);
 
 			SearchContext searchContext = new SearchContext();
 
