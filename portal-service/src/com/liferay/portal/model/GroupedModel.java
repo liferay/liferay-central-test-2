@@ -21,6 +21,4 @@ public interface GroupedModel extends AuditedModel {
 
 	public long getGroupId();
 
-	public void setGroupId(long groupId);
-
 }
