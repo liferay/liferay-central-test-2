@@ -4003,10 +4003,14 @@ public class PortalImpl implements Portal {
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 			themeDisplay.getCompanyId());
 
+		long originalScopeGroupId = themeDisplay.getScopeGroupId();
+
 		themeDisplay.setScopeGroupId(companyGroup.getGroupId());
 
 		List<Portlet> controlPanelPortlets = getControlPanelPortlets(
 			PortletCategoryKeys.CONTENT, themeDisplay);
+
+		themeDisplay.setScopeGroupId(originalScopeGroupId);
 
 		if (controlPanelPortlets.size() > 0) {
 			return true;
