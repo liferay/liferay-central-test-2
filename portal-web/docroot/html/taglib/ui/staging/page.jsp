@@ -20,8 +20,8 @@
 boolean extended = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:staging:extended"));
 long groupId = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:groupId"));
 long layoutSetBranchId = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:layoutSetBranchId"));
-long selPlid = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:selPlid"));
 boolean privateLayout = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:staging:privateLayout"));
+long selPlid = GetterUtil.getLong((String) request.getAttribute("liferay-ui:staging:selPlid"));
 boolean showManageBackStages = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:staging:showManageBackstages"));
 
 LayoutSetBranch layoutSetBranch = null;
@@ -78,13 +78,11 @@ else if (group.isStaged()) {
 	}
 }
 
-boolean isPrivateLayout = layout.isPrivateLayout();
-
-if (groupId > 0) {
-	isPrivateLayout = privateLayout;
+if (groupId <= 0) {
+	privateLayout = layout.isPrivateLayout();
 }
 
-layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), isPrivateLayout);
+layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);
 %>
 
 <c:if test="<%= stagingGroup != null %>">
@@ -185,7 +183,7 @@ layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(staging
 				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="layoutSetBranchesURL">
 					<portlet:param name="struts_action" value="/staging_bar/view_layout_set_branches" />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-					<portlet:param name="privateLayout" value="<%= String.valueOf(isPrivateLayout) %>" />
+					<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 					<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
 				</portlet:renderURL>
 

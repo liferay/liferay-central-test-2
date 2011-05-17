@@ -73,8 +73,8 @@ public class StagingTag extends IncludeTag {
 	private boolean _extended = true;
 	private long _groupId;
 	private long _layoutSetBranchId;
-	private boolean _privateLayout = false;
+	private boolean _privateLayout;
 	private long _selPlid;
-	private boolean _showManageBackstages = false;
+	private boolean _showManageBackstages;
 
 }
