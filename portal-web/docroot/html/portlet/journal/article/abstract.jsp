@@ -19,11 +19,11 @@
 <%
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
-String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaultLanguageId");
-String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
-
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
+
+String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaultLanguageId");
+String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageId");
 %>
 
 <liferay-ui:error-marker key="errorSection" value="abstract" />
