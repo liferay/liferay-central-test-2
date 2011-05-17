@@ -461,6 +461,7 @@ AUI().add(
 							}
 						);
 
+						menu.addClass('lfr-menu-list-overflow');
 						menu.setStyle('height', totalHeight + 'px');
 					}
 				}
