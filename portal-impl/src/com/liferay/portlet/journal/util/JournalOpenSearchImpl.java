@@ -143,11 +143,12 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 			return layoutURL;
 		}
 
-		String version = result.get("version");
-
 		portletURL.setParameter("struts_action", "/journal/view_article");
 		portletURL.setParameter("groupId", String.valueOf(groupId));
 		portletURL.setParameter("articleId", articleId);
+
+		String version = result.get("version");
+
 		portletURL.setParameter("version", version);
 
 		return portletURL.toString();
