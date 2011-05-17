@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import freemarker.ext.jsp.TaglibFactory;
@@ -99,6 +100,12 @@ public class DDMXSDImpl implements DDMXSD {
 
 		StringBundler sb = new StringBundler();
 
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		String portletNamespace = PortalUtil.getPortletNamespace(
+			PortalUtil.getPortletId(request));
+
 		List<Element> dynamicElementElements = element.elements(
 			"dynamic-element");
 
@@ -107,6 +114,7 @@ public class DDMXSDImpl implements DDMXSD {
 				dynamicElementElement);
 
 			freeMarkerContext.put("namespace", namespace);
+			freeMarkerContext.put("portletNamespace", portletNamespace);
 
 			if (fields != null) {
 				freeMarkerContext.put("fields", fields);
