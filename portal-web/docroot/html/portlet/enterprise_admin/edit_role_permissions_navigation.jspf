@@ -146,29 +146,104 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 				%>
 
 			</optgroup>
-			<optgroup label="<liferay-ui:message key="control-panel" />">
 
-				<%
-				for (Portlet portlet : portlets) {
-					if (Validator.isNull(portlet.getPortletId()) || Validator.isNull(portlet.getControlPanelEntryCategory())) {
-						continue;
-					}
+			<%
+			List<Portlet> myPortlets = new ArrayList<Portlet>();
+			List<Portlet> contentPortlets = new ArrayList<Portlet>();
+			List<Portlet> portalPortlets = new ArrayList<Portlet>();
+			List<Portlet> serverPortlets = new ArrayList<Portlet>();
 
-					if ((role.getType() != RoleConstants.TYPE_REGULAR) && !portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.CONTENT)) {
-						continue;
-					}
-
-					editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
-					editPermissionsURL.setParameter("showModelResources", "0");
-				%>
-
-					<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
-
-				<%
+			for (Portlet portlet : portlets) {
+				if (Validator.isNull(portlet.getPortletId()) || Validator.isNull(portlet.getControlPanelEntryCategory())) {
+					continue;
 				}
-				%>
 
-			</optgroup>
+				if (portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.MY) && (role.getType() == RoleConstants.TYPE_REGULAR)) {
+					myPortlets.add(portlet);
+				}
+				else if (portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.CONTENT)) {
+					contentPortlets.add(portlet);
+				}
+				else if (portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.PORTAL) && (role.getType() == RoleConstants.TYPE_REGULAR)) {
+					portalPortlets.add(portlet);
+				}
+				else if (portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.SERVER) && (role.getType() == RoleConstants.TYPE_REGULAR)) {
+					serverPortlets.add(portlet);
+				}
+			}
+			%>
+
+			<c:if test="<%= !myPortlets.isEmpty() %>">
+				<optgroup label="<liferay-ui:message key="control-panel-personal" />">
+
+					<%
+					for (Portlet portlet : myPortlets) {
+						editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+						editPermissionsURL.setParameter("showModelResources", "0");
+					%>
+
+						<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
+
+					<%
+					}
+					%>
+
+				</optgroup>
+			</c:if>
+
+			<c:if test="<%= !contentPortlets.isEmpty() %>">
+				<optgroup label="<liferay-ui:message key="control-panel-site" />">
+
+					<%
+					for (Portlet portlet : contentPortlets) {
+						editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+						editPermissionsURL.setParameter("showModelResources", "0");
+					%>
+
+						<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
+
+					<%
+					}
+					%>
+
+				</optgroup>
+			</c:if>
+
+			<c:if test="<%= !portalPortlets.isEmpty() %>">
+				<optgroup label="<liferay-ui:message key="control-panel-portal" />">
+
+					<%
+					for (Portlet portlet : portalPortlets) {
+						editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+						editPermissionsURL.setParameter("showModelResources", "0");
+					%>
+
+						<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
+
+					<%
+					}
+					%>
+
+				</optgroup>
+			</c:if>
+
+			<c:if test="<%= !serverPortlets.isEmpty() %>">
+				<optgroup label="<liferay-ui:message key="control-panel-server" />">
+
+					<%
+					for (Portlet portlet : serverPortlets) {
+						editPermissionsURL.setParameter("portletResource", portlet.getPortletId());
+						editPermissionsURL.setParameter("showModelResources", "0");
+					%>
+
+						<aui:option label="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
+
+					<%
+					}
+					%>
+
+				</optgroup>
+			</c:if>
 		</aui:select>
 	</aui:fieldset>
 </aui:form>
