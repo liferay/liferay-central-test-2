@@ -17,8 +17,6 @@ package com.liferay.portal.cache.memcached;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
 
-import java.net.URL;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -58,9 +56,6 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 		}
 
 		return portalCache;
-	}
-
-	public void reconfigureCaches(URL configurationURL) {
 	}
 
 	public void removeCache(String name) {

@@ -83,10 +83,6 @@ public class BlockingPortalCache implements PortalCache {
 		return value;
 	}
 
-	public String getName() {
-		return _portalCache.getName();
-	}
-
 	public void put(String key, Object value) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");

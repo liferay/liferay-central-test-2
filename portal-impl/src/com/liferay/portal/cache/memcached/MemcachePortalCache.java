@@ -120,10 +120,6 @@ public class MemcachePortalCache extends BasePortalCache {
 		return value;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
 	public void put(String key, Object value) {
 		put(key, value, _timeToLive);
 	}

@@ -63,10 +63,6 @@ public class TransactionalPortalCache extends BasePortalCache {
 		return result;
 	}
 
-	public String getName() {
-		return _portalCache.getName();
-	}
-
 	public void put(String key, Object value) {
 		if (TransactionalPortalCacheHelper.isEnabled()) {
 			if (value == null) {

@@ -1,5 +1,5 @@
 <ehcache
-	dynamicConfig="true"
+	dynamicConfig="false"
 	monitoring="off"
 	name="liferay-single-vm"
 	updateCheck="false"

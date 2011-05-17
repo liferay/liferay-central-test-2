@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.cache;
 
-import java.net.URL;
-
 /**
  * @author Joseph Shum
  */
@@ -27,8 +25,6 @@ public interface PortalCacheManager {
 
 	public PortalCache getCache(String name, boolean blocking)
 		throws PortalCacheException;
-
-	public void reconfigureCaches(URL configurationURL);
 
 	public void removeCache(String name);
 

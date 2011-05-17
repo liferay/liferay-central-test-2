@@ -30,8 +30,6 @@ public interface PortalCache {
 
 	public Object get(String key);
 
-	public String getName();
-
 	public void put(String key, Object value);
 
 	public void put(String key, Object value, int timeToLive);
