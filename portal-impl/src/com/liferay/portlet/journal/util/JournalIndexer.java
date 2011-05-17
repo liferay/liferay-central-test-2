@@ -109,10 +109,10 @@ public class JournalIndexer extends BaseIndexer {
 			contextQuery.addRequiredTerm("templateId", templateId);
 		}
 
-		String type = (String)searchContext.getAttribute("type");
+		String filterType = (String)searchContext.getAttribute("filterType");
 
-		if (Validator.isNotNull(type)) {
-			contextQuery.addRequiredTerm("type", type);
+		if (Validator.isNotNull(filterType)) {
+			contextQuery.addRequiredTerm(Field.TYPE, filterType);
 		}
 	}
 
