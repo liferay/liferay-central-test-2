@@ -298,6 +298,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 					%>
 
 					<%= htmlBottom %>
+
 				</c:otherwise>
 			</c:choose>
 		</td>
