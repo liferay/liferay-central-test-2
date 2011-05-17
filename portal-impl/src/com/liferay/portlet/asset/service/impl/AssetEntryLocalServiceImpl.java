@@ -22,12 +22,15 @@ import com.liferay.portal.kernel.increment.NumberIncrement;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.FacetedSearcher;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.facet.AssetEntriesFacet;
+import com.liferay.portal.kernel.search.facet.Facet;
+import com.liferay.portal.kernel.search.facet.ScopeFacet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -358,15 +361,16 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long[] groupIds, String portletId, String keywords,
+			long companyId, long[] groupIds, String className, String keywords,
 			int start, int end)
 		throws SystemException {
 
-		return search(companyId, groupIds, 0, portletId, keywords, start, end);
+		return search(
+			companyId, groupIds, 0, className, keywords, start, end);
 	}
 
 	public Hits search(
-			long companyId, long[] groupIds, long userId, String portletId,
+			long companyId, long[] groupIds, long userId, String className,
 			String keywords, int start, int end)
 		throws SystemException {
 
@@ -377,7 +381,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setEnd(end);
 			searchContext.setGroupIds(groupIds);
 			searchContext.setKeywords(keywords);
-			searchContext.setPortletIds(getPortletIds(portletId));
+			searchContext.setEntryClassNames(getClassNames(className));
 
 			QueryConfig queryConfig = new QueryConfig();
 
@@ -389,7 +393,15 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
+			Facet facet = new ScopeFacet(searchContext);
+			facet.setStatic(true);
+			searchContext.addFacet(facet);
+
+			facet = new AssetEntriesFacet(searchContext);
+			facet.setStatic(true);
+			searchContext.addFacet(facet);
+
+			Indexer indexer = FacetedSearcher.getInstance();
 
 			return indexer.search(searchContext);
 		}
@@ -399,7 +411,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public Hits search(
-			long companyId, long[] groupIds, long userId, String portletId,
+			long companyId, long[] groupIds, long userId, String className,
 			String userName, String title, String description,
 			String assetCategoryIds, String assetTagNames, boolean andSearch,
 			int start, int end)
@@ -423,7 +435,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setGroupIds(groupIds);
-			searchContext.setPortletIds(getPortletIds(portletId));
+			searchContext.setEntryClassNames(getClassNames(className));
 
 			QueryConfig queryConfig = new QueryConfig();
 
@@ -435,7 +447,15 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
+			Facet facet = new ScopeFacet(searchContext);
+			facet.setStatic(true);
+			searchContext.addFacet(facet);
+
+			facet = new AssetEntriesFacet(searchContext);
+			facet.setStatic(true);
+			searchContext.addFacet(facet);
+
+			Indexer indexer = FacetedSearcher.getInstance();
 
 			return indexer.search(searchContext);
 		}
@@ -445,14 +465,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public AssetEntryDisplay[] searchEntryDisplays(
-			long companyId, long[] groupIds, String portletId, String keywords,
+			long companyId, long[] groupIds, String className, String keywords,
 			String languageId, int start, int end)
 		throws SystemException {
 
 		List<AssetEntry> entries = new ArrayList<AssetEntry>();
 
 		Hits hits = search(
-			companyId, groupIds, portletId, keywords, start, end);
+			companyId, groupIds, className, keywords, start, end);
 
 		List<Document> hitsList = hits.toList();
 
@@ -475,12 +495,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	}
 
 	public int searchEntryDisplaysCount(
-			long companyId, long[] groupIds, String portletId, String keywords,
+			long companyId, long[] groupIds, String className, String keywords,
 			String languageId)
 		throws SystemException {
 
 		Hits hits = search(
-			companyId, groupIds, portletId, keywords, QueryUtil.ALL_POS,
+			companyId, groupIds, className, keywords, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		return hits.getLength();
@@ -895,23 +915,23 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entryDisplays;
 	}
 
-	private String[] getPortletIds(String portletId) {
-		if (Validator.isNotNull(portletId)) {
-			return new String[] {portletId};
+	private String[] getClassNames(String className) {
+		if (Validator.isNotNull(className)) {
+			return new String[] {className};
 		}
 		else {
 			List<AssetRendererFactory> rendererFactories =
 				AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
 
-			String[] portletIds = new String[rendererFactories.size()];
+			String[] classNames = new String[rendererFactories.size()];
 
 			for (int i = 0; i < rendererFactories.size(); i++) {
 				AssetRendererFactory rendererFactory = rendererFactories.get(i);
 
-				portletIds[i] = rendererFactory.getPortletId();
+				classNames[i] = rendererFactory.getClassName();
 			}
 
-			return portletIds;
+			return classNames;
 		}
 	}
 

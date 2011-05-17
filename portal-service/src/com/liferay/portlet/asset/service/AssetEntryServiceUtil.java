@@ -84,20 +84,20 @@ public class AssetEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		long companyId, long[] groupIds, java.lang.String portletId,
+		long companyId, long[] groupIds, java.lang.String className,
 		java.lang.String keywords, java.lang.String languageId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchEntryDisplays(companyId, groupIds, portletId,
+				   .searchEntryDisplays(companyId, groupIds, className,
 			keywords, languageId, start, end);
 	}
 
 	public static int searchEntryDisplaysCount(long companyId, long[] groupIds,
-		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String className, java.lang.String keywords,
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchEntryDisplaysCount(companyId, groupIds, portletId,
+				   .searchEntryDisplaysCount(companyId, groupIds, className,
 			keywords, languageId);
 	}
 

@@ -370,46 +370,46 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long[] groupIds, java.lang.String portletId, java.lang.String keywords,
+		long[] groupIds, java.lang.String className, java.lang.String keywords,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _assetEntryLocalService.search(companyId, groupIds, portletId,
+		return _assetEntryLocalService.search(companyId, groupIds, className,
 			keywords, start, end);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long[] groupIds, long userId, java.lang.String portletId,
+		long[] groupIds, long userId, java.lang.String className,
 		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.search(companyId, groupIds, userId,
-			portletId, keywords, start, end);
+			className, keywords, start, end);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		long[] groupIds, long userId, java.lang.String portletId,
+		long[] groupIds, long userId, java.lang.String className,
 		java.lang.String userName, java.lang.String title,
 		java.lang.String description, java.lang.String assetCategoryIds,
 		java.lang.String assetTagNames, boolean andSearch, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.search(companyId, groupIds, userId,
-			portletId, userName, title, description, assetCategoryIds,
+			className, userName, title, description, assetCategoryIds,
 			assetTagNames, andSearch, start, end);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		long companyId, long[] groupIds, java.lang.String portletId,
+		long companyId, long[] groupIds, java.lang.String className,
 		java.lang.String keywords, java.lang.String languageId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.searchEntryDisplays(companyId, groupIds,
-			portletId, keywords, languageId, start, end);
+			className, keywords, languageId, start, end);
 	}
 
 	public int searchEntryDisplaysCount(long companyId, long[] groupIds,
-		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String className, java.lang.String keywords,
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryLocalService.searchEntryDisplaysCount(companyId,
-			groupIds, portletId, keywords, languageId);
+			groupIds, className, keywords, languageId);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry updateEntry(long userId,

@@ -73,19 +73,19 @@ public class AssetEntryServiceWrapper implements AssetEntryService {
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
-		long companyId, long[] groupIds, java.lang.String portletId,
+		long companyId, long[] groupIds, java.lang.String className,
 		java.lang.String keywords, java.lang.String languageId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryService.searchEntryDisplays(companyId, groupIds,
-			portletId, keywords, languageId, start, end);
+			className, keywords, languageId, start, end);
 	}
 
 	public int searchEntryDisplaysCount(long companyId, long[] groupIds,
-		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String className, java.lang.String keywords,
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _assetEntryService.searchEntryDisplaysCount(companyId, groupIds,
-			portletId, keywords, languageId);
+			className, keywords, languageId);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry updateEntry(

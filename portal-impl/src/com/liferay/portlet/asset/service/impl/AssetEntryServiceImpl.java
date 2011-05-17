@@ -95,21 +95,21 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	}
 
 	public AssetEntryDisplay[] searchEntryDisplays(
-			long companyId, long[] groupIds, String portletId, String keywords,
+			long companyId, long[] groupIds, String className, String keywords,
 			String languageId, int start, int end)
 		throws SystemException {
 
 		return assetEntryLocalService.searchEntryDisplays(
-			companyId, groupIds, portletId, keywords, languageId, start, end);
+			companyId, groupIds, className, keywords, languageId, start, end);
 	}
 
 	public int searchEntryDisplaysCount(
-			long companyId, long[] groupIds, String portletId, String keywords,
+			long companyId, long[] groupIds, String className, String keywords,
 			String languageId)
 		throws SystemException {
 
 		return assetEntryLocalService.searchEntryDisplaysCount(
-			companyId, groupIds, portletId, keywords, languageId);
+			companyId, groupIds, className, keywords, languageId);
 	}
 
 	public AssetEntry updateEntry(

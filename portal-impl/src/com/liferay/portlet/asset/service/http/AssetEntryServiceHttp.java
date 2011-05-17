@@ -298,7 +298,7 @@ public class AssetEntryServiceHttp {
 
 	public static com.liferay.portlet.asset.model.AssetEntryDisplay[] searchEntryDisplays(
 		HttpPrincipal httpPrincipal, long companyId, long[] groupIds,
-		java.lang.String portletId, java.lang.String keywords,
+		java.lang.String className, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -306,7 +306,7 @@ public class AssetEntryServiceHttp {
 					"searchEntryDisplays", _searchEntryDisplaysParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupIds, portletId, keywords, languageId,
+					companyId, groupIds, className, keywords, languageId,
 					start, end);
 
 			Object returnObj = null;
@@ -332,7 +332,7 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static int searchEntryDisplaysCount(HttpPrincipal httpPrincipal,
-		long companyId, long[] groupIds, java.lang.String portletId,
+		long companyId, long[] groupIds, java.lang.String className,
 		java.lang.String keywords, java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -341,7 +341,7 @@ public class AssetEntryServiceHttp {
 					_searchEntryDisplaysCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupIds, portletId, keywords, languageId);
+					companyId, groupIds, className, keywords, languageId);
 
 			Object returnObj = null;
 
