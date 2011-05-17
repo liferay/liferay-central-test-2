@@ -4000,23 +4000,26 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-			themeDisplay.getCompanyId());
+		long scopeGroupId = themeDisplay.getScopeGroupId();
 
-		long originalScopeGroupId = themeDisplay.getScopeGroupId();
+		try {
+			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+				themeDisplay.getCompanyId());
 
-		themeDisplay.setScopeGroupId(companyGroup.getGroupId());
+			themeDisplay.setScopeGroupId(companyGroup.getGroupId());
 
-		List<Portlet> controlPanelPortlets = getControlPanelPortlets(
-			PortletCategoryKeys.CONTENT, themeDisplay);
+			List<Portlet> controlPanelPortlets = getControlPanelPortlets(
+				PortletCategoryKeys.CONTENT, themeDisplay);
 
-		themeDisplay.setScopeGroupId(originalScopeGroupId);
-
-		if (controlPanelPortlets.size() > 0) {
-			return true;
+			if (!controlPanelPortlets.isEmpty()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		else {
-			return false;
+		finally {
+			themeDisplay.setScopeGroupId(scopeGroupId);
 		}
 	}
 
