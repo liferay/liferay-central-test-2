@@ -23,7 +23,7 @@ String description = typeSettingsProperties.getProperty("description", StringPoo
 String panelSelectedPortlets = typeSettingsProperties.getProperty("panelSelectedPortlets", StringPool.BLANK);
 %>
 
-<aui:input cssClass="layout-description" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" width="350px" wrap="soft" />
+<aui:input cssClass="layout-description" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" wrap="soft" />
 
 <div class="portlet-msg-info">
 	<liferay-ui:message key="select-the-applications-that-will-be-available-in-the-panel" />
