@@ -30,14 +30,14 @@ String basicFormCssClass = "taglib-search-toggle-basic";
 String hiddenCssClass = " yui3-aui-helper-hidden";
 
 if (clickValue.equals("basic")) {
-	basicFormCssClass += hiddenCssClass;
+	advancedFormCssClass += hiddenCssClass;
 
 	if (displayTerms.isAdvancedSearch()) {
 		displayTerms.setAdvancedSearch(false);
 	}
 }
 else {
-	advancedFormCssClass += hiddenCssClass;
+	basicFormCssClass += hiddenCssClass;
 
 	if (!displayTerms.isAdvancedSearch()) {
 		displayTerms.setAdvancedSearch(true);
