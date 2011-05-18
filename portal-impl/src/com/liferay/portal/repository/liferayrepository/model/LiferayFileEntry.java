@@ -266,6 +266,38 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return true;
 	}
 
+	public void setCompanyId(long companyId) {
+		_dlFileEntry.setCompanyId(companyId);
+	}
+
+	public void setCreateDate(Date date) {
+		_dlFileEntry.setCreateDate(date);
+	}
+
+	public void setGroupId(long groupId) {
+		_dlFileEntry.setGroupId(groupId);
+	}
+
+	public void setModifiedDate(Date date) {
+		_dlFileEntry.setModifiedDate(date);
+	}
+
+	public void setPrimaryKey(long primaryKey) {
+		_dlFileEntry.setPrimaryKey(primaryKey);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
+	}
+
+	public void setUserId(long userId) {
+		_dlFileEntry.setUserId(userId);
+	}
+
+	public void setUserName(String userName) {
+		_dlFileEntry.setUserName(userName);
+	}
+
 	public void setUserUuid(String userUuid) {
 		_dlFileEntry.setUserUuid(userUuid);
 	}

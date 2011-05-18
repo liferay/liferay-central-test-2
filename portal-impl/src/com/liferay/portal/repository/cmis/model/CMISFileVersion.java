@@ -219,6 +219,38 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return false;
 	}
 
+	public void setCompanyId(long companyId) {
+		_cmisRepository.setCompanyId(companyId);
+	}
+
+	public void setCreateDate(Date date) {
+	}
+
+	public void setFileVersionId(long fileVersionId) {
+		_fileVersionId = fileVersionId;
+	}
+
+	public void setGroupId(long groupId) {
+		_cmisRepository.setGroupId(groupId);
+	}
+
+	public void setModifiedDate(Date date) {
+	}
+
+	public void setPrimaryKey(long primaryKey) {
+		setFileVersionId(primaryKey);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
+	}
+
+	public void setUserId(long userId) {
+	}
+
+	public void setUserName(String userName) {
+	}
+
 	public void setUserUuid(String userUuid) {
 	}
 

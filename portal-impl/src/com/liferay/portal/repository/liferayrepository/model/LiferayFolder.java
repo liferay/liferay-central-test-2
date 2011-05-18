@@ -205,6 +205,38 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return true;
 	}
 
+	public void setCompanyId(long companyId) {
+		_dlFolder.setCompanyId(companyId);
+	}
+
+	public void setCreateDate(Date date) {
+		_dlFolder.setCreateDate(date);
+	}
+
+	public void setGroupId(long groupId) {
+		_dlFolder.setGroupId(groupId);
+	}
+
+	public void setModifiedDate(Date date) {
+		_dlFolder.setModifiedDate(date);
+	}
+
+	public void setPrimaryKey(long primaryKey) {
+		_dlFolder.setPrimaryKey(primaryKey);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
+	}
+
+	public void setUserId(long userId) {
+		_dlFolder.setUserId(userId);
+	}
+
+	public void setUserName(String userName) {
+		_dlFolder.setUserName(userName);
+	}
+
 	public void setUserUuid(String userUuid) {
 		_dlFolder.setUserUuid(userUuid);
 	}

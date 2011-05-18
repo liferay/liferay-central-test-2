@@ -197,6 +197,37 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return _dlFileVersion.isPending();
 	}
 
+	public void setCompanyId(long companyId) {
+		_dlFileVersion.setCompanyId(companyId);
+	}
+
+	public void setCreateDate(Date date) {
+		_dlFileVersion.setCreateDate(date);
+	}
+
+	public void setGroupId(long groupId) {
+		_dlFileVersion.setGroupId(groupId);
+	}
+
+	public void setModifiedDate(Date date) {
+	}
+
+	public void setPrimaryKey(long primaryKey) {
+		_dlFileVersion.setPrimaryKey(primaryKey);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
+	}
+
+	public void setUserId(long userId) {
+		_dlFileVersion.setUserId(userId);
+	}
+
+	public void setUserName(String userName) {
+		_dlFileVersion.setUserName(userName);
+	}
+
 	public void setUserUuid(String userUuid) {
 		_dlFileVersion.setUserUuid(userUuid);
 	}

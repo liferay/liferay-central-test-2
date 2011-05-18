@@ -306,6 +306,38 @@ public class CMISFolder extends CMISModel implements Folder {
 		return false;
 	}
 
+	public void setCompanyId(long companyId) {
+		_cmisRepository.setCompanyId(companyId);
+	}
+
+	public void setCreateDate(Date date) {
+	}
+
+	public void setFolderId(long folderId) {
+		_folderId = folderId;
+	}
+
+	public void setGroupId(long groupId) {
+		_cmisRepository.setGroupId(groupId);
+	}
+
+	public void setModifiedDate(Date date) {
+	}
+
+	public void setPrimaryKey(long primaryKey) {
+		setFolderId(primaryKey);
+	}
+
+	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
+	}
+
+	public void setUserId(long userId) {
+	}
+
+	public void setUserName(String userName) {
+	}
+
 	public void setUserUuid(String userUuid) {
 	}
 
