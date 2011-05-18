@@ -24,18 +24,15 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 DDLRecord record = (DDLRecord)row.getObject();
-
-long detailDDMTemplateId = GetterUtil.getLong((String)row.getParameter("detailDDMTemplateId"));
 %>
 
 <liferay-ui:icon-menu>
-	<liferay-portlet:renderURL portletName="<%= PortletKeys.DYNAMIC_DATA_LISTS %>" var="editRecordURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:renderURL var="editRecordURL">
 		<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="detailDDMTemplateId" value="<%= String.valueOf(detailDDMTemplateId) %>" />
 		<portlet:param name="recordId" value="<%= String.valueOf(record.getRecordId()) %>" />
-	</liferay-portlet:renderURL>
+	</portlet:renderURL>
 
 	<liferay-ui:icon
 		image="edit"
