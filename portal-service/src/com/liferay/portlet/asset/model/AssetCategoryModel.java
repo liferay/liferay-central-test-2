@@ -59,7 +59,7 @@ public interface AssetCategoryModel extends BaseModel<AssetCategory>,
 	/**
 	 * Sets the primary key of this asset category
 	 *
-	 * @param pk the primary key of this asset category
+	 * @param primaryKey the primary key of this asset category
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -57,7 +57,7 @@ public interface AssetTagPropertyModel extends AuditedModel,
 	/**
 	 * Sets the primary key of this asset tag property
 	 *
-	 * @param pk the primary key of this asset tag property
+	 * @param primaryKey the primary key of this asset tag property
 	 */
 	public void setPrimaryKey(long primaryKey);
 

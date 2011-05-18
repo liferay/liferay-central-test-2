@@ -48,7 +48,7 @@ public class AssetTagWrapper implements AssetTag {
 	/**
 	* Sets the primary key of this asset tag
 	*
-	* @param pk the primary key of this asset tag
+	* @param primaryKey the primary key of this asset tag
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_assetTag.setPrimaryKey(primaryKey);

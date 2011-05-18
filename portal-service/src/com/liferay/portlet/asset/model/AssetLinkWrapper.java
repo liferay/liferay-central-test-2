@@ -48,7 +48,7 @@ public class AssetLinkWrapper implements AssetLink {
 	/**
 	* Sets the primary key of this asset link
 	*
-	* @param pk the primary key of this asset link
+	* @param primaryKey the primary key of this asset link
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_assetLink.setPrimaryKey(primaryKey);

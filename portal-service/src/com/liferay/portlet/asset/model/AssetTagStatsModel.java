@@ -51,7 +51,7 @@ public interface AssetTagStatsModel extends BaseModel<AssetTagStats> {
 	/**
 	 * Sets the primary key of this asset tag stats
 	 *
-	 * @param pk the primary key of this asset tag stats
+	 * @param primaryKey the primary key of this asset tag stats
 	 */
 	public void setPrimaryKey(long primaryKey);
 

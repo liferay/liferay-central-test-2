@@ -48,7 +48,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 	/**
 	* Sets the primary key of this asset vocabulary
 	*
-	* @param pk the primary key of this asset vocabulary
+	* @param primaryKey the primary key of this asset vocabulary
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_assetVocabulary.setPrimaryKey(primaryKey);

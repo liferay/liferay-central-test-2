@@ -56,7 +56,7 @@ public interface AssetTagModel extends BaseModel<AssetTag>, GroupedModel {
 	/**
 	 * Sets the primary key of this asset tag
 	 *
-	 * @param pk the primary key of this asset tag
+	 * @param primaryKey the primary key of this asset tag
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -56,7 +56,7 @@ public interface AssetEntryModel extends BaseModel<AssetEntry>, GroupedModel {
 	/**
 	 * Sets the primary key of this asset entry
 	 *
-	 * @param pk the primary key of this asset entry
+	 * @param primaryKey the primary key of this asset entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 

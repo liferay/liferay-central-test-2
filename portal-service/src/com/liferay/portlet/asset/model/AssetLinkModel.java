@@ -55,7 +55,7 @@ public interface AssetLinkModel extends BaseModel<AssetLink> {
 	/**
 	 * Sets the primary key of this asset link
 	 *
-	 * @param pk the primary key of this asset link
+	 * @param primaryKey the primary key of this asset link
 	 */
 	public void setPrimaryKey(long primaryKey);
 

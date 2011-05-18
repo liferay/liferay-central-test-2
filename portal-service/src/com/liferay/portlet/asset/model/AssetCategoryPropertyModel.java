@@ -57,7 +57,7 @@ public interface AssetCategoryPropertyModel extends AuditedModel,
 	/**
 	 * Sets the primary key of this asset category property
 	 *
-	 * @param pk the primary key of this asset category property
+	 * @param primaryKey the primary key of this asset category property
 	 */
 	public void setPrimaryKey(long primaryKey);
 
