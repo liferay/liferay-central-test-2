@@ -46,7 +46,7 @@ public class ViewAction extends PortletAction {
 
 		PortletRequestDispatcher portletRequestDispatcher =
 			portletContext.getRequestDispatcher(
-				"/html/portlet/document_library/library_entries.jsp");
+				"/html/portlet/document_library/view_resources.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
