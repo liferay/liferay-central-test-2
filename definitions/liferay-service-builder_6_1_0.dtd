@@ -116,6 +116,7 @@ programs. The default value is true.
 	session-factory CDATA #IMPLIED
 	tx-manager CDATA #IMPLIED
 	cache-enabled CDATA #IMPLIED
+	json CDATA #IMPLIED
 >
 
 <!--
@@ -291,6 +292,7 @@ different values for different locales. The default value is false.
 	id-param CDATA #IMPLIED
 	convert-null CDATA #IMPLIED
 	localized CDATA #IMPLIED
+	json CDATA #IMPLIED
 >
 
 <!--

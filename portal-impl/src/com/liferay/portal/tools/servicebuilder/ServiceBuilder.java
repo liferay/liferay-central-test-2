@@ -60,7 +60,9 @@ import de.hunsicker.jalopy.storage.ConventionKeys;
 import de.hunsicker.jalopy.storage.Environment;
 
 import freemarker.ext.beans.BeansWrapper;
+
 import freemarker.log.Logger;
+
 import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
@@ -3677,7 +3679,7 @@ public class ServiceBuilder {
 		Element rootElement = document.getRootElement();
 
 		for (Element element : rootElement.elements()) {
-			String elementName = element.getName(); 
+			String elementName = element.getName();
 
 			if (!elementName.equals("service-builder-import")) {
 				continue;
@@ -4241,6 +4243,8 @@ public class ServiceBuilder {
 			entityElement.attributeValue("local-service"));
 		boolean remoteService = GetterUtil.getBoolean(
 			entityElement.attributeValue("remote-service"), true);
+		String jsonMode = GetterUtil.getString(
+			entityElement.attributeValue("json"), null);
 		String persistenceClass = GetterUtil.getString(
 			entityElement.attributeValue("persistence-class"),
 			_packagePath + ".service.persistence." + ejbName +
@@ -4325,6 +4329,19 @@ public class ServiceBuilder {
 				columnName, columnDBName, columnType, primary, filterPrimary,
 				collectionEntity, mappingKey, mappingTable, idType, idParam,
 				convertNull, localized);
+
+			String json = GetterUtil.getString(
+				columnElement.attributeValue("json"), null);
+
+			if (Validator.isNotNull(json)) {
+				json = json.trim().toLowerCase();
+
+				if (json.equals("include")) {
+					col.setJson(Boolean.TRUE);
+				} else if (json.equals("exclude")) {
+					col.setJson(Boolean.FALSE);
+				}
+			}
 
 			if (primary) {
 				pkList.add(col);
@@ -4571,9 +4588,10 @@ public class ServiceBuilder {
 			new Entity(
 				_packagePath, _portletName, _portletShortName, ejbName,
 				humanName, table, alias, uuid, localService, remoteService,
-				persistenceClass, finderClass, dataSource, sessionFactory,
-				txManager, cacheEnabled, pkList, regularColList, collectionList,
-				columnList, order, finderList, referenceList, txRequiredList));
+				jsonMode, persistenceClass, finderClass, dataSource,
+				sessionFactory, txManager, cacheEnabled, pkList, regularColList,
+				collectionList, columnList, order, finderList, referenceList,
+				txRequiredList));
 	}
 
 	private String _processTemplate(String name) throws Exception {
@@ -4627,7 +4645,7 @@ public class ServiceBuilder {
 	private Map<String, Entity> _entityPool = new HashMap<String, Entity>();
 	private String _hbmFileName;
 	private String _implDir;
-	private Map<String, JavaClass> _javaClasses = 
+	private Map<String, JavaClass> _javaClasses =
 		new HashMap<String, JavaClass>();
 	private String _jsonFileName;
 	private String _modelHintsFileName;

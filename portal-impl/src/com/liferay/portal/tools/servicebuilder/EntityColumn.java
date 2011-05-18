@@ -27,7 +27,7 @@ public class EntityColumn implements Cloneable {
 	public EntityColumn(String name) {
 		this(
 			name, null, null, false, false, null, null, null, true, true, null,
-			null, null, null, true, false);
+			null, null, null, true, false, null);
 	}
 
 	public EntityColumn(
@@ -35,7 +35,7 @@ public class EntityColumn implements Cloneable {
 		boolean filterPrimary, String ejbName, String mappingKey,
 		String mappingTable, boolean caseSensitive, boolean orderByAscending,
 		String comparator, String arrayableOperator, String idType,
-		String idParam, boolean convertNull, boolean localized) {
+		String idParam, boolean convertNull, boolean localized, Boolean json) {
 
 		_name = name;
 		_dbName = dbName;
@@ -55,6 +55,7 @@ public class EntityColumn implements Cloneable {
 		_idParam = idParam;
 		_convertNull = convertNull;
 		_localized = localized;
+		_json = json;
 	}
 
 	public EntityColumn(
@@ -66,7 +67,7 @@ public class EntityColumn implements Cloneable {
 		this(
 			name, dbName, type, primary, filterPrimary, ejbName, mappingKey,
 			mappingTable, true, true, null, null, idType, idParam, convertNull,
-			localized);
+			localized, null);
 	}
 
 	public Object clone() {
@@ -74,7 +75,8 @@ public class EntityColumn implements Cloneable {
 			getName(), getDBName(), getType(), isPrimary(), isFilterPrimary(),
 			getEJBName(), getMappingKey(), getMappingTable(), isCaseSensitive(),
 			isOrderByAscending(), getComparator(), getArrayableOperator(),
-			getIdType(), getIdParam(), isConvertNull(), isLocalized());
+			getIdType(), getIdParam(), isConvertNull(), isLocalized(),
+			getJson());
 	}
 
 	public boolean equals(Object obj) {
@@ -142,6 +144,10 @@ public class EntityColumn implements Cloneable {
 
 	public String getIdType() {
 		return _idType;
+	}
+
+	public Boolean getJson() {
+		return _json;
 	}
 
 	public String getMappingKey() {
@@ -328,6 +334,10 @@ public class EntityColumn implements Cloneable {
 		_idType = idType;
 	}
 
+	public void setJson(Boolean json) {
+		_json = json;
+	}
+
 	public void setLocalized(boolean localized) {
 		_localized = localized;
 	}
@@ -371,6 +381,7 @@ public class EntityColumn implements Cloneable {
 	private String _humanName;
 	private String _idParam;
 	private String _idType;
+	private Boolean _json;
 	private boolean _localized;
 	private String _mappingKey;
 	private String _mappingTable;

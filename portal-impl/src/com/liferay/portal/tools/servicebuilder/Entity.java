@@ -63,20 +63,20 @@ public class Entity {
 	public Entity(String name) {
 		this(
 			null, null, null, name,  null,null, null, false, false, true, null,
-			null, null, null, null, true, null, null, null, null, null, null,
-			null, null);
+			null, null, null, null, null, true, null, null, null, null, null,
+			null, null, null);
 	}
 
 	public Entity(
 		String packagePath, String portletName, String portletShortName,
 		String name, String humanName, String table, String alias, boolean uuid,
-		boolean localService, boolean remoteService, String persistenceClass,
-		String finderClass, String dataSource, String sessionFactory,
-		String txManager, boolean cacheEnabled, List<EntityColumn> pkList,
-		List<EntityColumn> regularColList, List<EntityColumn> collectionList,
-		List<EntityColumn> columnList, EntityOrder order,
-		List<EntityFinder> finderList, List<Entity> referenceList,
-		List<String> txRequiredList) {
+		boolean localService, boolean remoteService, String jsonMode,
+		String persistenceClass, String finderClass, String dataSource,
+		String sessionFactory, String txManager, boolean cacheEnabled,
+		List<EntityColumn> pkList, List<EntityColumn> regularColList,
+		List<EntityColumn> collectionList, List<EntityColumn> columnList,
+		EntityOrder order, List<EntityFinder> finderList,
+		List<Entity> referenceList, List<String> txRequiredList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -89,6 +89,7 @@ public class Entity {
 		_uuid = uuid;
 		_localService = localService;
 		_remoteService = remoteService;
+		_jsonMode = jsonMode;
 		_persistenceClass = persistenceClass;
 		_finderClass = finderClass;
 		_dataSource = GetterUtil.getString(dataSource, DEFAULT_DATA_SOURCE);
@@ -191,6 +192,10 @@ public class Entity {
 
 	public String getHumanNames() {
 		return TextFormatter.formatPlural(_humanName);
+	}
+
+	public String getJsonMode() {
+		return _jsonMode;
 	}
 
 	public String getName() {
@@ -584,6 +589,7 @@ public class Entity {
 	private String _finderClass;
 	private List<EntityFinder> _finderList;
 	private String _humanName;
+	private String _jsonMode;
 	private boolean _localService;
 	private String _name;
 	private EntityOrder _order;

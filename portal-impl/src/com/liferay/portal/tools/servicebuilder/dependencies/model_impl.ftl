@@ -18,6 +18,7 @@ import ${packagePath}.model.${entity.name}Soap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -59,6 +60,9 @@ import java.util.Map;
  * @see ${packagePath}.model.${entity.name}Model
  * @generated
  */
+<#if (entity.jsonMode?? && entity.jsonMode == "strict") || entity.hasRemoteService()>
+@JSON(strict = true)
+</#if>
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> implements ${entity.name}Model {
 
 	/*
@@ -323,6 +327,22 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 				return PortalUtil.getClassName(getClassNameId());
 			}
+		</#if>
+
+		<#if column.json??>
+			<#if column.json?string == 'true'>
+				@JSON
+			</#if>
+			<#if column.json?string == 'false'>
+				<#if (entity.jsonMode?? && entity.jsonMode == "strict") || entity.hasRemoteService()>
+				<#else>
+					@JSON(include = false)
+				</#if>
+			</#if>
+		<#else>
+			<#if (entity.jsonMode?? && entity.jsonMode == "strict") || entity.hasRemoteService()>
+				@JSON
+			</#if>
 		</#if>
 
 		public ${column.type} get${column.methodName}() {
