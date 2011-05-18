@@ -35,6 +35,16 @@ public interface AuditedModel {
 
 	public String getUserUuid() throws SystemException;
 
+	public void setCompanyId(long companyId);
+
+	public void setCreateDate(Date date);
+
+	public void setModifiedDate(Date date);
+
+	public void setUserId(long userId);
+
+	public void setUserName(String userName);
+
 	public void setUserUuid(String userUuid);
 
 }
