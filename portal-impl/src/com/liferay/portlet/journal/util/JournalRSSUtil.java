@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Image;
@@ -56,7 +58,7 @@ public class JournalRSSUtil {
 		long companyId = feed.getCompanyId();
 		long groupId = feed.getGroupId();
 		String articleId = null;
-		Double version = null;
+		Double version = null; //new Double(-1);
 		String title = null;
 		String description = null;
 		String content = null;
@@ -133,7 +135,24 @@ public class JournalRSSUtil {
 		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
 			queryString);
 
-		if (parameters.containsKey("folderId") &&
+		if (url.startsWith("/documents/")) {
+			String[] pathArray = StringUtil.split(url, StringPool.SLASH);
+
+			long groupId = GetterUtil.getLong(pathArray[2]);
+			long folderId = GetterUtil.getLong(pathArray[3]);
+			String title = HttpUtil.decodeURL(pathArray[4], true);
+
+			try {
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(
+					groupId, folderId, title);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
+		}
+		else if (parameters.containsKey("folderId") &&
 			parameters.containsKey("name")) {
 
 			try {
@@ -155,9 +174,8 @@ public class JournalRSSUtil {
 				String uuid = parameters.get("uuid")[0];
 				long groupId = GetterUtil.getLong(parameters.get("groupId")[0]);
 
-				fileEntry =
-					DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
-						uuid, groupId);
+				fileEntry = DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
+					uuid, groupId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
