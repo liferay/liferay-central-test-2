@@ -1,4 +1,4 @@
-#macro(css $file_name)
+#macro (css $file_name)
 	#set ($file_id = "")
 
 	#if ($file_name == $css_main_file)
@@ -8,7 +8,7 @@
 	<link class="lfr-css-file" href="$file_name" id="$file_id" rel="stylesheet" type="text/css" />
 #end
 
-#macro(js $file_name)
+#macro (js $file_name)
 	#set ($file_id = "")
 
 	#if ($file_name == $js_main_file)
@@ -18,16 +18,16 @@
 	<script id="$file_id" src="$file_name" type="text/javascript"></script>
 #end
 
-#macro(language $lang_key)
+#macro (language $lang_key)
 $languageUtil.get($locale, $lang_key)#end
 
-#macro(language_format $lang_key $objects)
+#macro (language_format $lang_key $objects)
 $languageUtil.format($locale, $lang_key, $objects.toArray())#end
 
-#macro(date $date_format)
+#macro (date $date_format)
 $dateUtil.getCurrentDate($date_format, $locale)#end
 
-#macro(ie6_png_fix)
+#macro (ie6_png_fix)
 #if ($browserSniffer.isIe($request) && $browserSniffer.getMajorVersion($request) < 7)
 /* ---------- IE6 PNG image fix ---------- */
 img, .png {
@@ -73,7 +73,7 @@ img, .png {
 #end
 #end
 
-#macro(breadcrumbs $control_panel)
+#macro (breadcrumbs $control_panel)
 	#set ($breadcrumb_tag = $theme.getBreadcrumbTag())
 
 	#if ($control_panel == "control_panel")
@@ -84,7 +84,7 @@ img, .png {
 	$breadcrumb_tag.runTag()
 #end
 
-#macro(dockbar)
+#macro (dockbar)
 	$theme.runtime("145")
 	$theme.runtime("170")
 #end

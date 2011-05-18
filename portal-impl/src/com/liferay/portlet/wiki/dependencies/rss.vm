@@ -1,4 +1,4 @@
-#macro(processColumn $changedLine)
+#macro (processColumn $changedLine)
 	#set ($changedLine = $changedLine.replaceAll(" ", "&nbsp;"))
 	#set ($changedLine = $changedLine.replaceAll("\t", "&nbsp;&nbsp;&nbsp;"))
 
