@@ -54,6 +54,10 @@ while (itr.hasNext()) {
 	fieldJSONObject.put("type", structure.getFieldType(fieldName));
 	fieldJSONObject.put("unique", true);
 
+	if (structure.getFieldRequired(fieldName)) {
+		fieldJSONObject.put("fixed", true);
+	}
+
 	structureAvailableFieldsJSONArray.put(fieldJSONObject);
 }
 %>
