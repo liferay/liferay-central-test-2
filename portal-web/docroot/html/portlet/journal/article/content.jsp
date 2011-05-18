@@ -871,10 +871,6 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				if (Validator.isNotNull(toLanguageId) && Validator.isNull(elLanguageId)) {
 					continue;
 				}
-
-				if (Validator.isNull(elLanguageId)) {
-					elLanguageId = languageId;
-				}
 			}
 			else {
 				elLanguageId = languageId;
