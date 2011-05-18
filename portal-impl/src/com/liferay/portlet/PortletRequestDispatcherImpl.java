@@ -286,11 +286,11 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		}
 
 		PortletServletRequest portletServletRequest = new PortletServletRequest(
-			request, portletRequestImpl, pathInfo, queryString, requestURI,
+			request, portletRequest, pathInfo, queryString, requestURI,
 			servletPath, _named, include);
 
 		PortletServletResponse portletServletResponse =
-			new PortletServletResponse(response, portletResponseImpl, include);
+			new PortletServletResponse(response, portletResponse, include);
 
 		URLEncoder urlEncoder = _portlet.getURLEncoderInstance();
 
