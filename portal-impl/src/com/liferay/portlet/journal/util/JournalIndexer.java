@@ -99,7 +99,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		String articleType = (String)searchContext.getAttribute("articleType");
 
-		if (Validator.isNotNull(filterType)) {
+		if (Validator.isNotNull(articleType)) {
 			contextQuery.addRequiredTerm(Field.TYPE, articleType);
 		}
 
