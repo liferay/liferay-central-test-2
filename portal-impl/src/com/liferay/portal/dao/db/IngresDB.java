@@ -143,7 +143,7 @@ public class IngresDB extends BaseDB {
 	private static String[] _INGRES = {
 		"--", "1", "0",
 		"'1970-01-01'", "date('now')",
-		" byte varying", " tinyint", " timestamp",
+		" blob", " tinyint", " timestamp",
 		" float", " integer", " bigint",
 		" varchar(1000)", " long varchar", " varchar",
 		"", "commit;\\g"
