@@ -2,13 +2,13 @@
 <#assign liferay_ui = PortalJspTagLibs["/WEB-INF/tld/liferay-ui.tld"] />
 
 <#assign cssClass = field.fieldCssClass!"">
-
 <#assign fieldName = field.name>
-
 <#assign namespacedFieldName = "${namespace}${fieldName}">
+<#assign parentName = parentField.name!"">
+<#assign parentType = parentField.type!"">
 
-<#if parentField.name??>
-	<#assign fieldName = parentField.name!"">
+<#if parentName?? && (parentName != "") && ((parentType == "radio") || (parentType == "select"))>
+	<#assign fieldName = parentName>
 </#if>
 
 <#assign fieldValue = "">
@@ -28,6 +28,3 @@
 <#if field.required?? && (field.required == "true")>
 	<#assign required = true>
 </#if>
-
-<#assign parentName = parentField.name!"">
-<#assign parentType = parentField.type!"">
