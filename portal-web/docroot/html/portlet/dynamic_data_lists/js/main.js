@@ -68,6 +68,14 @@ AUI().add(
 
 						var recordsetId = instance.get('recordsetId');
 
+						var serviceParameterTypes = [
+         					'long',
+         					'long',
+         					'java.util.Map<java.lang.String, java.io.Serializable>',
+         					'int',
+         					'com.liferay.portal.service.ServiceContext'
+         				];
+
 						DDLRecord.addRecord(
 							{
 								groupId: themeDisplay.getScopeGroupId(),
@@ -79,7 +87,8 @@ AUI().add(
 										scopeGroupId: themeDisplay.getScopeGroupId(),
 										userId: themeDisplay.getUserId()
 									}
-								)
+								),
+								serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
 							},
 							callback
 						);
