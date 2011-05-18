@@ -355,20 +355,21 @@ public class RSSAction extends PortletAction {
 			}
 		);
 
-		List<SyndLink> links = JournalRSSUtil.getDLLinks(
+		List<SyndEnclosure> syndEnclosures = JournalRSSUtil.getDLEnclosures(
 			themeDisplay.getURLPortal(), url);
 
-		links.addAll(
-			JournalRSSUtil.getIGLinks(themeDisplay.getURLPortal(), url));
-
-		List<SyndEnclosure> enclosures = JournalRSSUtil.getDLEnclosures(
-			themeDisplay.getURLPortal(), url);
-
-		enclosures.addAll(
+		syndEnclosures.addAll(
 			JournalRSSUtil.getIGEnclosures(themeDisplay.getURLPortal(), url));
 
-		syndEntry.setLinks(links);
-		syndEntry.setEnclosures(enclosures);
+		syndEntry.setEnclosures(syndEnclosures);
+
+		List<SyndLink> syndLinks = JournalRSSUtil.getDLLinks(
+			themeDisplay.getURLPortal(), url);
+
+		syndLinks.addAll(
+			JournalRSSUtil.getIGLinks(themeDisplay.getURLPortal(), url));
+
+		syndEntry.setLinks(syndLinks);
 
 		return url;
 	}
