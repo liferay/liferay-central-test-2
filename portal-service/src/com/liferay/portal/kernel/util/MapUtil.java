@@ -48,6 +48,17 @@ public class MapUtil {
 			getString(map, key, String.valueOf(defaultValue)), defaultValue);
 	}
 
+	public static double getDouble(Map<String, ?> map, String key) {
+		return getDouble(map, key, GetterUtil.DEFAULT_DOUBLE);
+	}
+
+	public static double getDouble(
+		Map<String, ?> map, String key, double defaultValue) {
+
+		return GetterUtil.getDouble(
+			getString(map, key, String.valueOf(defaultValue)), defaultValue);
+	}
+
 	public static int getInteger(Map<String, ?> map, String key) {
 		return getInteger(map, key, GetterUtil.DEFAULT_INTEGER);
 	}
@@ -191,7 +202,7 @@ public class MapUtil {
 						map.put(kvp[0], constructor.newInstance(kvp[1]));
 					}
 					catch (Exception e) {
-						_log.error(e, e);
+						_log.error(e.getMessage(), e);
 					}
 				}
 			}
