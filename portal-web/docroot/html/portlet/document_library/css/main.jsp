@@ -409,6 +409,11 @@
 			float: left;
 		}
 
+		.toolbar .manage-button {
+			display: inline-block;
+			margin-left: 30px;
+		}
+
 		.display-style {
 			float: right;
 		}

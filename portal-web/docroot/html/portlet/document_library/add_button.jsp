@@ -69,13 +69,6 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 		<liferay-ui:icon image="add_drive" message="repository" url="<%= addRepositoryURL %>" />
 	</c:if>
 
-	<portlet:renderURL var="addDocumentTypeURL">
-		<portlet:param name="struts_action" value="/document_library/edit_document_type" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-	</portlet:renderURL>
-
-	<liferay-ui:icon image="copy" message="document-type" url="<%= addDocumentTypeURL %>" />
-
 	<%
 	List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 

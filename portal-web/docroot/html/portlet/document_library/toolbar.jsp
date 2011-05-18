@@ -140,6 +140,17 @@ String taglibUrl = null;
 	/>
 </liferay-ui:icon-menu>
 
+<span class="manage-button">
+	<liferay-ui:icon-menu icon="" align="left" direction="down" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
+		<portlet:renderURL var="addDocumentTypeURL">
+			<portlet:param name="struts_action" value="/document_library/edit_document_type" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="copy" message="document-types" url="<%= addDocumentTypeURL %>" />
+	</liferay-ui:icon-menu>
+</span>
+
 <aui:script use="aui-base">
 	var allRowIds = A.one('#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 
