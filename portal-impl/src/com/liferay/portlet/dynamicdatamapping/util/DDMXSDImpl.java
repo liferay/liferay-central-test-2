@@ -103,8 +103,9 @@ public class DDMXSDImpl implements DDMXSD {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		String portletNamespace = PortalUtil.getPortletNamespace(
-			PortalUtil.getPortletId(request));
+		String portletId = PortalUtil.getPortletId(request);
+
+		String portletNamespace = PortalUtil.getPortletNamespace(portletId);
 
 		List<Element> dynamicElementElements = element.elements(
 			"dynamic-element");
@@ -113,8 +114,8 @@ public class DDMXSDImpl implements DDMXSD {
 			FreeMarkerContext freeMarkerContext = getFreeMarkerContext(
 				dynamicElementElement);
 
-			freeMarkerContext.put("namespace", namespace);
 			freeMarkerContext.put("portletNamespace", portletNamespace);
+			freeMarkerContext.put("namespace", namespace);
 
 			if (fields != null) {
 				freeMarkerContext.put("fields", fields);

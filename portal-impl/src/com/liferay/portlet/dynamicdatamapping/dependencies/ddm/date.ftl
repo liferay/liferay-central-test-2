@@ -13,9 +13,9 @@
 </div>
 
 <@aui.script use="aui-datepicker">
-new A.DatePicker(
-	{
-		trigger: '#${portletNamespace}${namespacedFieldName}'
-	}
-).render();
+	new A.DatePicker(
+		{
+			trigger: '#${portletNamespace}${namespacedFieldName}'
+		}
+	).render();
 </@aui.script>
