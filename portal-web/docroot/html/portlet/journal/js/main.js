@@ -732,6 +732,12 @@ AUI().add(
 							'default-locale': defaultLocale
 						};
 					}
+					else {
+						attributes = {
+							'available-locales': defaultLocale,
+							'default-locale': defaultLocale
+						};
+					}
 
 					var root = instance._createDynamicNode('root', attributes);
 
