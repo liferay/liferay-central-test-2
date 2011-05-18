@@ -68,7 +68,7 @@ long reportedUserId = GetterUtil.getLong((String)request.getAttribute("liferay-u
 									contentURL: '<%= PortalUtil.getPortalURL(request) + currentURL %>',
 									reportedUserId: '<%= reportedUserId %>'
 								},
-								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
+								uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:renderURL>'
 							}
 						);
 					}

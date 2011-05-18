@@ -127,12 +127,12 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 										align="right"
 									>
 										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
-											<liferay-portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
-											<liferay-portlet:param name="cmd" value="edit" />
-											<liferay-portlet:param name="tabs1" value="roles" />
-											<liferay-portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-											<liferay-portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
-											<liferay-portlet:param name="showModelResources" value="0" />
+											<portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
+											<portlet:param name="cmd" value="edit" />
+											<portlet:param name="tabs1" value="roles" />
+											<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+											<portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
+											<portlet:param name="showModelResources" value="0" />
 										</liferay-portlet:renderURL>
 
 										<liferay-ui:icon image="edit" label="true" message="change" url="<%= editURL %>" />
@@ -170,12 +170,12 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 										align="right"
 									>
 										<liferay-portlet:renderURL portletName="<%= PortletKeys.ENTERPRISE_ADMIN_ROLES %>" var="editURL">
-											<liferay-portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
-											<liferay-portlet:param name="cmd" value="edit" />
-											<liferay-portlet:param name="tabs1" value="roles" />
-											<liferay-portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-											<liferay-portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
-											<liferay-portlet:param name="showModelResources" value="0" />
+											<portlet:param name="struts_action" value="/enterprise_admin_roles/edit_role_permissions" />
+											<portlet:param name="cmd" value="edit" />
+											<portlet:param name="tabs1" value="roles" />
+											<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+											<portlet:param name="portletResource" value="<%= portlet.getPortletId() %>" />
+											<portlet:param name="showModelResources" value="0" />
 										</liferay-portlet:renderURL>
 
 										<liferay-ui:icon image="edit" label="true" message="change" url="<%= editURL %>" />

@@ -112,7 +112,7 @@ long reportedUserId = ParamUtil.getLong(request, "reportedUserId");
 		};
 
 		A.io.request(
-			'<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><liferay-portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
+			'<liferay-portlet:actionURL portletName="<%= PortletKeys.FLAGS %>" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/flags/edit_entry" /></liferay-portlet:actionURL>',
 			{
 				data: {
 					className: '<%= HtmlUtil.escape(className) %>',

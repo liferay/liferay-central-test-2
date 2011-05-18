@@ -194,28 +194,28 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 %>
 
 <liferay-portlet:renderURL varImpl="redirectURL">
-	<liferay-portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
-	<liferay-portlet:param name="tabs1" value="<%= tabs1 %>" />
-	<liferay-portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
+	<portlet:param name="tabs1" value="<%= tabs1 %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 
 	<c:if test="<%= (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) %>">
-		<liferay-portlet:param name="backURL" value="<%= backURL %>" />
+		<portlet:param name="backURL" value="<%= backURL %>" />
 	</c:if>
 
-	<liferay-portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 </liferay-portlet:renderURL>
 
 <liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="portletURL">
-	<liferay-portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
-	<liferay-portlet:param name="tabs1" value="<%= tabs1 %>" />
-	<liferay-portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
+	<portlet:param name="tabs1" value="<%= tabs1 %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 
 	<c:if test="<%= (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) %>">
-		<liferay-portlet:param name="backURL" value="<%= backURL %>" />
+		<portlet:param name="backURL" value="<%= backURL %>" />
 	</c:if>
 
-	<liferay-portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-	<liferay-portlet:param name="viewLayout" value="<%= Boolean.TRUE.toString() %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+	<portlet:param name="viewLayout" value="<%= Boolean.TRUE.toString() %>" />
 </liferay-portlet:resourceURL>
 
 <%

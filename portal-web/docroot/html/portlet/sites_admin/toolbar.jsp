@@ -36,8 +36,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 		%>
 
 		<liferay-portlet:renderURL varImpl="addSiteURL">
-			<liferay-portlet:param name="struts_action" value="/sites_admin/edit_site" />
-			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 
 		<c:choose>

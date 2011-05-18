@@ -31,8 +31,8 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>">
 		<liferay-portlet:renderURL varImpl="addRoleURL">
-			<liferay-portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
-			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add">
