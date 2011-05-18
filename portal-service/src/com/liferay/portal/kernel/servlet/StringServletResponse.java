@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
+ * @author Zsolt Balogh
  */
 public class StringServletResponse extends HeaderCacheServletResponse {
 
@@ -44,7 +45,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	}
 
 	public ServletOutputStream getOutputStream() {
-		if (_printWriter != null) {
+		if (_calledGetWriter) {
 			throw new IllegalStateException(
 				"Cannot obtain OutputStream because Writer is already in use");
 		}
@@ -55,6 +56,8 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 				_unsyncByteArrayOutputStream);
 		}
 
+		_calledGetOutputStream = true;
+
 		return _servletOutputStream;
 	}
 
@@ -63,7 +66,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 			return _string;
 		}
 
-		if (_servletOutputStream != null) {
+		if (_calledGetOutputStream) {
 			try {
 				_string = _unsyncByteArrayOutputStream.toString(
 					StringPool.UTF8);
@@ -74,7 +77,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 				_string = StringPool.BLANK;
 			}
 		}
-		else if (_printWriter != null) {
+		else if (_calledGetWriter) {
 			_string = _unsyncStringWriter.toString();
 		}
 		else {
@@ -89,7 +92,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	}
 
 	public PrintWriter getWriter() {
-		if (_servletOutputStream != null) {
+		if (_calledGetOutputStream) {
 			throw new IllegalStateException(
 				"Cannot obtain Writer because OutputStream is already in use");
 		}
@@ -99,25 +102,17 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 			_printWriter = new UnsyncPrintWriter(_unsyncStringWriter);
 		}
 
+		_calledGetWriter = true;
+
 		return _printWriter;
 	}
 
 	public boolean isCalledGetOutputStream() {
-		if (_servletOutputStream != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return _calledGetOutputStream;
 	}
 
 	public boolean isCalledGetWriter() {
-		if (_printWriter != null) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return _calledGetWriter;
 	}
 
 	public void recycle() {
@@ -129,10 +124,12 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	}
 
 	public void resetBuffer() {
-		if (_servletOutputStream != null) {
+		if (_calledGetOutputStream) {
+			_calledGetOutputStream = false;
 			_unsyncByteArrayOutputStream.reset();
 		}
-		else if (_printWriter != null) {
+		else if (_calledGetWriter) {
+			_calledGetWriter = false;
 			_unsyncStringWriter.reset();
 		}
 	}
@@ -152,6 +149,8 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		StringServletResponse.class);
 
 	private int _bufferSize;
+	private boolean _calledGetOutputStream;
+	private boolean _calledGetWriter;
 	private PrintWriter _printWriter;
 	private ServletOutputStream _servletOutputStream;
 	private String _string;
