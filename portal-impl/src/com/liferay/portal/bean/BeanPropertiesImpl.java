@@ -497,13 +497,14 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 	}
 
-	protected Date getDate(String dateParam, HttpServletRequest request) {
-		int month = ParamUtil.getInteger(request, dateParam + "Month");
-		int day = ParamUtil.getInteger(request, dateParam + "Day");
-		int year = ParamUtil.getInteger(request, dateParam + "Year");
-		int hour = ParamUtil.getInteger(request, dateParam + "Hour", -1);
-		int minute = ParamUtil.getInteger(request, dateParam + "Minute");
-		int amPm = ParamUtil.getInteger(request, dateParam + "AmPm");
+	protected Date getDate(String param, HttpServletRequest request) {
+		int month = ParamUtil.getInteger(request, param + "Month");
+		int day = ParamUtil.getInteger(request, param + "Day");
+		int year = ParamUtil.getInteger(request, param + "Year");
+		int hour = ParamUtil.getInteger(request, param + "Hour", -1);
+		int minute = ParamUtil.getInteger(request, param + "Minute");
+
+		int amPm = ParamUtil.getInteger(request, param + "AmPm");
 
 		if (amPm == Calendar.PM) {
 			hour += 12;
