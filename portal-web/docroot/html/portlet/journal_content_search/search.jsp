@@ -57,7 +57,7 @@
 
 				SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-				searchContext.setAttribute("filterType", type);
+				searchContext.setAttribute("articleType", type);
 				searchContext.setGroupIds(null);
 				searchContext.setKeywords(keywords);
 

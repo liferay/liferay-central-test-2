@@ -82,12 +82,6 @@ public class JournalIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		String filterType = (String)searchContext.getAttribute("filterType");
-
-		if (Validator.isNotNull(filterType)) {
-			contextQuery.addRequiredTerm(Field.TYPE, filterType);
-		}
-
 		Long classNameId = (Long)searchContext.getAttribute(
 			Field.CLASS_NAME_ID);
 
@@ -101,6 +95,12 @@ public class JournalIndexer extends BaseIndexer {
 
 		if (status != WorkflowConstants.STATUS_ANY) {
 			contextQuery.addRequiredTerm(Field.STATUS, status);
+		}
+
+		String articleType = (String)searchContext.getAttribute("articleType");
+
+		if (Validator.isNotNull(filterType)) {
+			contextQuery.addRequiredTerm(Field.TYPE, articleType);
 		}
 
 		String structureId = (String)searchContext.getAttribute("structureId");
