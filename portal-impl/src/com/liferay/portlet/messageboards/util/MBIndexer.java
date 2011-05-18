@@ -111,7 +111,7 @@ public class MBIndexer extends BaseIndexer {
 		long[] categoryIds = searchContext.getCategoryIds();
 
 		if (categoryIds != null && categoryIds.length > 0) {
-			if ((categoryIds.length  == 1) &&
+			if ((categoryIds.length == 1) &&
 				(categoryIds[0] ==
 					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 

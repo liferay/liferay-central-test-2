@@ -72,9 +72,8 @@ public class IGIndexer extends BaseIndexer {
 		long[] folderIds = searchContext.getFolderIds();
 
 		if (folderIds != null && folderIds.length > 0) {
-			if ((folderIds.length  == 1) &&
-				(folderIds[0] ==
-					IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
+			if ((folderIds.length == 1) &&
+				(folderIds[0] == IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 				return;
 			}

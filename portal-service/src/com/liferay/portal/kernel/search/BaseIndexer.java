@@ -359,12 +359,11 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		AssetEntriesFacet assetEntriesFacet = new AssetEntriesFacet(
-			searchContext);
+		Facet facet = new AssetEntriesFacet(searchContext);
 
-		assetEntriesFacet.setStatic(true);
+		facet.setStatic(true);
 
-		searchContext.addFacet(assetEntriesFacet);
+		searchContext.addFacet(facet);
 	}
 
 	protected void addSearchExpando(
@@ -406,11 +405,11 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		ScopeFacet scopeFacet = new ScopeFacet(searchContext);
+		Facet facet = new ScopeFacet(searchContext);
 
-		scopeFacet.setStatic(true);
+		facet.setStatic(true);
 
-		searchContext.addFacet(scopeFacet);
+		searchContext.addFacet(facet);
 	}
 
 	protected void addSearchKeywords(
