@@ -142,7 +142,7 @@ public class RSSAction extends PortletAction {
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setAuthor(author);
-			syndEntry.setTitle(article.getTitle());
+			syndEntry.setTitle(article.getTitle(languageId));
 			syndEntry.setLink(link);
 			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(article.getDisplayDate());
@@ -150,7 +150,7 @@ public class RSSAction extends PortletAction {
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			String value = article.getDescription();
+			String value = article.getDescription(languageId);
 
 			try {
 				value = processContent(
@@ -270,7 +270,7 @@ public class RSSAction extends PortletAction {
 			SyndContent syndContent)
 		throws Exception {
 
-		String content = article.getDescription();
+		String content = article.getDescription(languageId);
 
 		String contentField = feed.getContentField();
 
@@ -294,7 +294,8 @@ public class RSSAction extends PortletAction {
 		else if (!contentField.equals(
 					JournalFeedConstants.WEB_CONTENT_DESCRIPTION)) {
 
-			Document doc = SAXReaderUtil.read(article.getContent());
+			Document doc = SAXReaderUtil.read(
+				article.getContentByLocale(languageId));
 
 			XPath xpathSelector = SAXReaderUtil.createXPath(
 				"//dynamic-element[@name='" + contentField + "']");
