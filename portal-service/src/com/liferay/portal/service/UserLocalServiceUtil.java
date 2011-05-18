@@ -2329,6 +2329,19 @@ public class UserLocalServiceUtil {
 	}
 
 	/**
+	* Updates the user's job title.
+	*
+	* @param jobTitle the user's job title
+	* @return the user
+	*/
+	public static com.liferay.portal.model.User updateJobTitle(long userId,
+		java.lang.String jobTitle)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateJobTitle(userId, jobTitle);
+	}
+
+	/**
 	* Updates the user's last login with the current time and the IP address.
 	*
 	* @param userId the primary key of the user

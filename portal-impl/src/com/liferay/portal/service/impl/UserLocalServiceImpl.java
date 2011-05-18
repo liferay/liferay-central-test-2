@@ -3602,6 +3602,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
+	  * Updates the user's job title.
+	  *
+	  * @param  jobTitle the user's job title
+	  * @return the user
+	 */
+	public User updateJobTitle(long userId, String jobTitle)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setJobTitle(jobTitle);
+
+		userPersistence.update(user, false);
+
+		Contact contact = contactPersistence.findByPrimaryKey(
+			user.getContactId());
+
+		contact.setJobTitle(jobTitle);
+
+		contactPersistence.update(contact, false);
+
+		return user;
+	}
+
+	/**
 	 * Updates the user's last login with the current time and the IP address.
 	 *
 	 * @param  userId the primary key of the user
