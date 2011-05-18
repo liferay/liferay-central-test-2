@@ -28,6 +28,7 @@ import com.liferay.portlet.dynamicdatalists.NoSuchRecordException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
+import com.liferay.portlet.dynamicdatalists.service.DDLRecordServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.util.DDLConstants;
 import com.liferay.portlet.dynamicdatamapping.StorageFieldRequiredException;
@@ -160,15 +161,14 @@ public class EditRecordAction extends PortletAction {
 		DDLRecord record = null;
 
 		if (recordId <= 0) {
-			record = DDLRecordLocalServiceUtil.addRecord(
-				themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
-				recordSetId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT,
-				serviceContext);
+			record = DDLRecordServiceUtil.addRecord(
+				themeDisplay.getScopeGroupId(), recordSetId, fields,
+				DDLConstants.DISPLAY_INDEX_DEFAULT, serviceContext);
 		}
 		else {
-			record = DDLRecordLocalServiceUtil.updateRecord(
-				themeDisplay.getUserId(), recordId, fields,
-				DDLConstants.DISPLAY_INDEX_DEFAULT, false, serviceContext);
+			record = DDLRecordServiceUtil.updateRecord(
+				recordId, fields, DDLConstants.DISPLAY_INDEX_DEFAULT, false,
+				serviceContext);
 		}
 
 		return record;

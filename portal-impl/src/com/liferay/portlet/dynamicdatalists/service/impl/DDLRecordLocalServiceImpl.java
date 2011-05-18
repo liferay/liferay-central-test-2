@@ -50,7 +50,6 @@ public class DDLRecordLocalServiceImpl
 		// Record
 
 		User user = userPersistence.findByPrimaryKey(userId);
-
 		Date now = new Date();
 
 		DDLRecordSet recordSet = ddlRecordSetPersistence.findByPrimaryKey(
@@ -255,7 +254,9 @@ public class DDLRecordLocalServiceImpl
 		for (String name : fieldsMap.keySet()) {
 			String value = String.valueOf(fieldsMap.get(name));
 
-			fields.put(new Field(name, value));
+			Field field = new Field(name, value);
+
+			fields.put(field);
 		}
 
 		return fields;

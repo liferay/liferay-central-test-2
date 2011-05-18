@@ -21,6 +21,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordServiceBaseImpl;
 import com.liferay.portlet.dynamicdatalists.service.permission.DDLRecordSetPermission;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.Serializable;
 
@@ -33,6 +34,19 @@ import java.util.Map;
 public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 
 	public DDLRecord addRecord(
+			long groupId, long recordSetId, Fields fields,
+			int displayIndex, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDLRecordSetPermission.check(
+			getPermissionChecker(), recordSetId, ActionKeys.ADD_RECORD);
+
+		return ddlRecordLocalService.addRecord(
+			getUserId(), groupId, recordSetId, fields, displayIndex,
+			serviceContext);
+	}
+	
+	public DDLRecord addRecord(
 			long groupId, long recordSetId, Map<String, Serializable> fieldsMap,
 			int displayIndex, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -43,6 +57,20 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 		return ddlRecordLocalService.addRecord(
 			getUserId(), groupId, recordSetId, fieldsMap, displayIndex,
 			serviceContext);
+	}
+	
+	public DDLRecord updateRecord(
+			long recordId, Fields fields, int displayIndex, boolean merge,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DDLRecord record = ddlRecordLocalService.getDDLRecord(recordId);
+
+		DDLRecordSetPermission.check(
+			getPermissionChecker(), record.getRecordSetId(), ActionKeys.UPDATE);
+
+		return ddlRecordLocalService.updateRecord(
+			getUserId(), recordId, fields, displayIndex, merge, serviceContext);
 	}
 
 	public DDLRecord updateRecord(
