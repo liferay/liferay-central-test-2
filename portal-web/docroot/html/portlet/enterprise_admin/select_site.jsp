@@ -48,26 +48,33 @@ portletURL.setParameter("target", target);
 		<liferay-ui:search-container-results>
 
 			<%
+			results = new ArrayList<Group>();
+
 			if (filterManageableGroups) {
 				groupParams.put("usersGroups", user.getUserId());
 			}
 
-			List<Long> classNameIdsList = new ArrayList<Long>();
+			groupParams.put("site", Boolean.TRUE);
 
-			classNameIdsList.add(PortalUtil.getClassNameId(Group.class.getName()));
+			List<Group> sites = GroupLocalServiceUtil.search(company.getCompanyId(), null, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+
+			results.addAll(sites);
+
+			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), null, searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 			if (includeCompany) {
-				classNameIdsList.add(PortalUtil.getClassNameId(Company.class));
+				results.add(0, company.getGroup());
+
+				total++;
 			}
 
 			if (includeUserPersonalCommunity) {
-				classNameIdsList.add(PortalUtil.getClassNameId(UserPersonalCommunity.class));
+				Group userPersonalCommunity = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.USER_PERSONAL_COMMUNITY);
+
+				results.add(0, userPersonalCommunity);
+
+				total++;
 			}
-
-			long[] classNameIds = StringUtil.split(StringUtil.merge(classNameIdsList), 0L);
-
-			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 			pageContext.setAttribute("results", results);
 			pageContext.setAttribute("total", total);
