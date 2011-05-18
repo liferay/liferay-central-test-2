@@ -25,6 +25,8 @@ public interface PermissionChecker {
 
 	public static final long[] DEFAULT_ROLE_IDS = new long[] {0};
 
+	public boolean getCheckGuest();
+
 	public long getCompanyId();
 
 	public long getOwnerRoleId();

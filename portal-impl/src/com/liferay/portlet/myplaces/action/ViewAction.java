@@ -165,18 +165,31 @@ public class ViewAction extends PortletAction {
 
 		String redirect = null;
 
-		for (Layout layout : layouts) {
+		if (layouts.size() > 0) {
 			PermissionChecker permissionChecker =
 				themeDisplay.getPermissionChecker();
 
-			if (!layout.isHidden() &&
-				LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.VIEW)) {
+			boolean currentLayoutCheckGuest = permissionChecker.getCheckGuest();
 
-				redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+			for (Layout layout : layouts) {
+				if (layout.isPrivateLayout()) {
+					permissionChecker.setCheckGuest(false);
+				}
+				else {
+					permissionChecker.setCheckGuest(true);
+				}
 
-				break;
+				if (!layout.isHidden() &&
+					LayoutPermissionUtil.contains(
+						permissionChecker, layout, ActionKeys.VIEW)) {
+
+					redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
+
+					break;
+				}
 			}
+
+			permissionChecker.setCheckGuest(currentLayoutCheckGuest);
 		}
 
 		if (Validator.isNull(redirect)) {

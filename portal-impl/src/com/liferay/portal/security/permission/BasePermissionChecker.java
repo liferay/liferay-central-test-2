@@ -30,6 +30,10 @@ import javax.portlet.PortletRequest;
  */
 public abstract class BasePermissionChecker implements PermissionChecker {
 
+	public boolean getCheckGuest() {
+		return this.checkGuest;
+	}
+
 	public long getCompanyId() {
 		return user.getCompanyId();
 	}
