@@ -19,6 +19,7 @@
 <%
 DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA_LISTS_RECORD_SET);
 
+long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 boolean editable = ParamUtil.getBoolean(request, "editable", true);
 
 if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
@@ -103,6 +104,8 @@ for (int i = 0; i < results.size(); i++) {
 		else {
 			row.addText(value);
 		}
+
+		row.setParameter("detailDDMTemplateId", String.valueOf(detailDDMTemplateId));
 	}
 
 	// Action
