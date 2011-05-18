@@ -277,7 +277,8 @@ public class PluginPackageIndexer extends BaseIndexer {
 				searchQuery.addExactTerm(
 					Field.STATUS, PluginPackageImpl.STATUS_NOT_INSTALLED);
 				searchQuery.addExactTerm(
-					Field.STATUS, PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
+					Field.STATUS,
+					PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
 			}
 			else {
 				searchQuery.addExactTerm(Field.STATUS, status);

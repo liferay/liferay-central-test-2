@@ -81,32 +81,31 @@ public class OrganizationIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (params == null) {
-			return;
-		}
+		if (params != null) {
+			Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
+				"organizationsTree");
 
-		Long[][] leftAndRightOrganizationIds = (Long[][])params.get(
-			"organizationsTree");
+			if (leftAndRightOrganizationIds != null) {
+				BooleanQuery organizationsTreeQuery =
+					BooleanQueryFactoryUtil.create();
 
-		if (leftAndRightOrganizationIds != null) {
-			BooleanQuery organizationsTreeQuery =
-				BooleanQueryFactoryUtil.create();
-
-			if (leftAndRightOrganizationIds.length == 0) {
-				organizationsTreeQuery.addRequiredTerm(
-					Field.ORGANIZATION_ID, -1);
-			}
-			else if (leftAndRightOrganizationIds.length > 0) {
-				for (Long[] leftAndRightOrganizationId :
-						leftAndRightOrganizationIds) {
-
-					organizationsTreeQuery.addNumericRangeTerm(
-						"leftOrganizationId", leftAndRightOrganizationId[0],
-						leftAndRightOrganizationId[1]);
+				if (leftAndRightOrganizationIds.length == 0) {
+					organizationsTreeQuery.addRequiredTerm(
+						Field.ORGANIZATION_ID, -1);
 				}
-			}
+				else if (leftAndRightOrganizationIds.length > 0) {
+					for (Long[] leftAndRightOrganizationId :
+							leftAndRightOrganizationIds) {
 
-			contextQuery.add(organizationsTreeQuery, BooleanClauseOccur.MUST);
+						organizationsTreeQuery.addNumericRangeTerm(
+							"leftOrganizationId", leftAndRightOrganizationId[0],
+							leftAndRightOrganizationId[1]);
+					}
+				}
+
+				contextQuery.add(
+					organizationsTreeQuery, BooleanClauseOccur.MUST);
+			}
 		}
 	}
 
@@ -127,14 +126,12 @@ public class OrganizationIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (params == null) {
-			return;
-		}
+		if (params != null) {
+			String expandoAttributes = (String)params.get("expandoAttributes");
 
-		String expandoAttributes = (String)params.get("expandoAttributes");
-
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			if (Validator.isNotNull(expandoAttributes)) {
+				addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			}
 		}
 	}
 

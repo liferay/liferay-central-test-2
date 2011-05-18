@@ -71,6 +71,14 @@ public class WikiIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
+		int status = GetterUtil.getInteger(
+			searchContext.getAttribute(Field.STATUS),
+			WorkflowConstants.STATUS_ANY);
+
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm(Field.STATUS, status);
+		}
+
 		long[] nodeIds = searchContext.getNodeIds();
 
 		if (nodeIds != null && nodeIds.length > 0) {
@@ -88,14 +96,6 @@ public class WikiIndexer extends BaseIndexer {
 			}
 
 			contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
-		}
-
-		int status = GetterUtil.getInteger(
-			searchContext.getAttribute(Field.STATUS),
-			WorkflowConstants.STATUS_ANY);
-
-		if (status != WorkflowConstants.STATUS_ANY) {
-			contextQuery.addRequiredTerm(Field.STATUS, status);
 		}
 	}
 

@@ -84,19 +84,17 @@ public class UserIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (params == null) {
-			return;
-		}
+		if (params != null) {
+			for (Map.Entry<String, Object> entry : params.entrySet()) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
 
-		for (Map.Entry<String, Object> entry : params.entrySet()) {
-			String key = entry.getKey();
-			Object value = entry.getValue();
+				if (value == null) {
+					continue;
+				}
 
-			if (value == null) {
-				continue;
+				addContextQueryParams(contextQuery, key, value);
 			}
-
-			addContextQueryParams(contextQuery, key, value);
 		}
 	}
 
@@ -119,14 +117,12 @@ public class UserIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (params == null) {
-			return;
-		}
+		if (params != null) {
+			String expandoAttributes = (String)params.get("expandoAttributes");
 
-		String expandoAttributes = (String)params.get("expandoAttributes");
-
-		if (Validator.isNotNull(expandoAttributes)) {
-			addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			if (Validator.isNotNull(expandoAttributes)) {
+				addSearchExpando(searchQuery, searchContext, expandoAttributes);
+			}
 		}
 	}
 
