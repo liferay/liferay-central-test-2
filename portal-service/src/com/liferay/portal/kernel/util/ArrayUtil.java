@@ -414,7 +414,7 @@ public class ArrayUtil {
 		Class<?> arrayClass = array.getClass();
 
 		T[] newArray = (T[])Array.newInstance(
-			arrayClass.getComponentType(), array.length + 1);
+			arrayClass.getComponentType(), array.length);
 
 		System.arraycopy(array, 0, newArray, 0, array.length);
 
@@ -425,7 +425,7 @@ public class ArrayUtil {
 		Class<?> arrayClass = array.getClass();
 
 		T[][] newArray = (T[][])Array.newInstance(
-			arrayClass.getComponentType(), array.length + 1);
+			arrayClass.getComponentType(), array.length);
 
 		System.arraycopy(array, 0, newArray, 0, array.length);
 
