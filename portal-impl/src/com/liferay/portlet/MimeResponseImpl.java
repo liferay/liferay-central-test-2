@@ -36,10 +36,6 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class MimeResponseImpl
 	extends PortletResponseImpl implements MimeResponse {
 
-	public boolean isCalledFlushBuffer() {
-		return _calledFlushBuffer;
-	}
-
 	public void flushBuffer() throws IOException {
 		_response.flushBuffer();
 
@@ -96,6 +92,10 @@ public abstract class MimeResponseImpl
 		return _response.getWriter();
 	}
 
+	public boolean isCalledFlushBuffer() {
+		return _calledFlushBuffer;
+	}
+
 	public boolean isCalledGetPortletOutputStream() {
 		return _calledGetPortletOutputStream;
 	}
@@ -107,14 +107,14 @@ public abstract class MimeResponseImpl
 	public boolean isCommitted() {
 		return false;
 	}
-
+	
 	public void reset() {
 		if (_calledFlushBuffer) {
 			throw new IllegalStateException(
 				"Cannot reset a buffer that has been flushed");
 		}
 	}
-
+	
 	public void resetBuffer() {
 		if (_calledFlushBuffer) {
 			throw new IllegalStateException(
@@ -123,12 +123,12 @@ public abstract class MimeResponseImpl
 
 		_response.resetBuffer();
 	}
-
+	
 	public void setBufferSize(int bufferSize) {
 		_response.setBufferSize(bufferSize);
 	}
-
-	public void setContentType(String contentType) {
+	
+ 	public void setContentType(String contentType) {
 		if (Validator.isNull(contentType)) {
 			throw new IllegalArgumentException("Content type cannot be null");
 		}
@@ -164,8 +164,8 @@ public abstract class MimeResponseImpl
 
 		_response.setContentType(contentType);
 	}
-
-	protected void init(
+ 	
+ 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {
 
@@ -174,12 +174,12 @@ public abstract class MimeResponseImpl
 		_portletRequestImpl = portletRequestImpl;
 		_response = response;
 	}
-
+ 	
+	private boolean _calledFlushBuffer;
+	private boolean _calledGetPortletOutputStream;
+	private boolean _calledGetWriter;
+	private String _contentType;
 	private PortletRequestImpl _portletRequestImpl;
 	private HttpServletResponse _response;
-	private String _contentType;
-	private boolean _calledGetPortletOutputStream;
- 	private boolean _calledGetWriter;
- 	private boolean _calledFlushBuffer;
 
 }
