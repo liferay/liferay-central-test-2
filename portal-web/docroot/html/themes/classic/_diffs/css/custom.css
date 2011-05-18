@@ -156,14 +156,13 @@ body #banner .logo a {
 }
 
 #navigation .selected a, #navigation li.hover a, #navigation a:hover, #navigation a:focus, #navigation .child-menu li a, #navigation .yui3-aui-dd-dragging, .lfr-navigation-proxy {
-	background: #313334;
+	background: #434646;
 	color: #FFF;
 	outline: 0;
 	text-shadow: -1px -1px #000;
 }
 
 #navigation li.hover .child-menu {
-	background: #1E2529;
 	display: block;
 	position: absolute;
 	width: 200px;
@@ -180,13 +179,23 @@ body #banner .logo a {
 }
 
 #navigation .child-menu li {
+	background: #434646;
 	border-width: 0 0 1px;
 	display: block;
 	float: none;
 	margin: 0;
+	padding: 2px;
+}
+
+#navigation .child-menu li:hover {
+	background-color: #595D5F;
 }
 
 #navigation .child-menu li a {
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+	background: none;
+	border-radius: 0;
 	cursor: pointer !important;
 }
 
@@ -195,11 +204,11 @@ body #banner .logo a {
 }
 
 #navigation .child-menu li a:hover, #navigation li a.active {
-	background-color: #020509;
+	background-color: #595D5F;
 }
 
 #navigation .child-menu .selected a {
-	background: #020509 url(../images/navigation/bullet_selected.png) no-repeat 5px 50%;
+	background: url(../images/navigation/bullet_selected.png) no-repeat 5px 50%;
 }
 
 .nav-menu-style-arrows ul {
@@ -348,6 +357,12 @@ body #banner .logo a {
 	-moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
 	-webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
 	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+#navigation li.selected .child-menu a {
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 .yui3-aui-combobox .yui3-aui-toolbar-first {
