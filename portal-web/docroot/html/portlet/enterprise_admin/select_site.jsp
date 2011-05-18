@@ -48,7 +48,7 @@ portletURL.setParameter("target", target);
 		<liferay-ui:search-container-results>
 
 			<%
-			results = new ArrayList<Group>();
+			results.clear();
 
 			if (filterManageableGroups) {
 				groupParams.put("usersGroups", user.getUserId());
