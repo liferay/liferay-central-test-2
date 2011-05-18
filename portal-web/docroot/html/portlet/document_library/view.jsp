@@ -211,6 +211,7 @@ if (folder != null) {
 			var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 
 			entriesContainer.plug(A.LoadingMask);
+
 			entriesContainer.loadingmask.toggle();
 
 			A.io.request(
@@ -291,6 +292,7 @@ if (folder != null) {
 			var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 
 			entriesContainer.plug(A.LoadingMask);
+
 			entriesContainer.loadingmask.toggle();
 
 			A.io.request(

@@ -287,6 +287,7 @@ if (Validator.isNull(displayStyle)) {
 				var documentContainer = A.one('#<portlet:namespace />documentContainer');
 
 				documentContainer.plug(A.LoadingMask);
+
 				documentContainer.loadingmask.toggle();
 
 				A.io.request(

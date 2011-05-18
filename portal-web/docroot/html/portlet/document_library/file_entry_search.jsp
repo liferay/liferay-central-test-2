@@ -44,8 +44,8 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 		window,
 		'<portlet:namespace />searchFileEntry',
 		function() {
-
 			entriesContainer.plug(A.LoadingMask);
+
 			entriesContainer.loadingmask.toggle();
 
 			A.io.request(

@@ -140,6 +140,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 	var updateDisplayStyle = function(url, index) {
 		entriesContainer.plug(A.LoadingMask);
+
 		entriesContainer.loadingmask.toggle();
 
 		A.io.request(
