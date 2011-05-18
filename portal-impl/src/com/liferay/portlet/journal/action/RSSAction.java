@@ -357,10 +357,13 @@ public class RSSAction extends PortletAction {
 
 		List<SyndLink> links = JournalRSSUtil.getDLLinks(
 			themeDisplay.getURLPortal(), url);
+
 		links.addAll(
 			JournalRSSUtil.getIGLinks(themeDisplay.getURLPortal(), url));
+
 		List<SyndEnclosure> enclosures = JournalRSSUtil.getDLEnclosures(
 			themeDisplay.getURLPortal(), url);
+
 		enclosures.addAll(
 			JournalRSSUtil.getIGEnclosures(themeDisplay.getURLPortal(), url));
 

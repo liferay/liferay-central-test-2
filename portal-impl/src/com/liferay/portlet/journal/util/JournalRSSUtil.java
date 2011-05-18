@@ -58,7 +58,7 @@ public class JournalRSSUtil {
 		long companyId = feed.getCompanyId();
 		long groupId = feed.getGroupId();
 		String articleId = null;
-		Double version = null; //new Double(-1);
+		Double version = null;
 		String title = null;
 		String description = null;
 		String content = null;
