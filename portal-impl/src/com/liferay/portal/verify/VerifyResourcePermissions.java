@@ -84,7 +84,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				companyId, RoleConstants.OWNER);
 
 			for (String[] model : _MODELS) {
-				verifyModel(companyId, role, model[0], model[1], model[2]);
+				verifyModel(role, model[0], model[1], model[2]);
 			}
 		}
 	}
@@ -121,14 +121,12 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			ownerId = contact.getUserId();
 		}
 
-		if (ownerId == resourcePermission.getOwnerId()) {
-			return;
+		if (ownerId != resourcePermission.getOwnerId()) {
+			resourcePermission.setOwnerId(ownerId);
+
+			ResourcePermissionLocalServiceUtil.updateResourcePermission(
+				resourcePermission);
 		}
-
-		resourcePermission.setOwnerId(ownerId);
-
-		ResourcePermissionLocalServiceUtil.updateResourcePermission(
-			resourcePermission);
 
 		if (_log.isInfoEnabled() &&
 			(resourcePermission.getResourcePermissionId() % 100 == 0)) {
@@ -138,8 +136,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 	}
 
 	protected void verifyModel(
-			long companyId, Role role, String name, String modelName,
-			String pkColumnName)
+			Role role, String name, String modelName, String pkColumnName)
 		throws Exception {
 
 		Connection con = null;
@@ -151,7 +148,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 
 			ps = con.prepareStatement(
 				"select " + pkColumnName + ", userId AS ownerId " +
-					"from " + modelName + " where companyId = " + companyId);
+					"from " + modelName + " where companyId = " +
+						role.getCompanyId());
 
 			rs = ps.executeQuery();
 
@@ -159,7 +157,7 @@ public class VerifyResourcePermissions extends VerifyProcess {
 				long primKey = rs.getLong(pkColumnName);
 				long ownerId = rs.getLong("ownerId");
 
-				verifyModel(companyId, name, primKey, role, ownerId);
+				verifyModel(role.getCompanyId(), name, primKey, role, ownerId);
 			}
 		}
 		finally {
