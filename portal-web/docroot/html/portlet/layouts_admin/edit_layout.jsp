@@ -139,30 +139,16 @@ String[][] categorySections = {mainSections};
 						{
 							handler: function(event) {
 								if (!permissionPopUp) {
-									permissionPopUp = new A.Dialog(
+									permissionPopUp = new Liferay.Util.openWindow (
 										{
-											centered: true,
-											modal: true,
 											title: '<liferay-ui:message key="permissions" />',
-											width: 700
+											uri: '<%= permissionURL %>',
 										}
-									).plug(
-										A.Plugin.DialogIframe,
-										{
-											after: {
-												load: Liferay.Util.afterIframeLoaded
-											},
-											uri: '<%= permissionURL %>'
-										}
-									).render();
+									)
 								}
 								else {
 									permissionPopUp.iframe.node.get('contentWindow.location').reload(true);
 								}
-
-								permissionPopUp.show();
-								permissionPopUp.centered();
-
 							},
 							icon: 'key',
 							label: '<liferay-ui:message key="permissions" />'
