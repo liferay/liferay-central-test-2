@@ -48,7 +48,7 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	/**
 	* Sets the primary key of this layout revision
 	*
-	* @param pk the primary key of this layout revision
+	* @param primaryKey the primary key of this layout revision
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_layoutRevision.setPrimaryKey(primaryKey);

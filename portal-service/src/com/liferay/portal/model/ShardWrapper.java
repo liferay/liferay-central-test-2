@@ -48,7 +48,7 @@ public class ShardWrapper implements Shard {
 	/**
 	* Sets the primary key of this shard
 	*
-	* @param pk the primary key of this shard
+	* @param primaryKey the primary key of this shard
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_shard.setPrimaryKey(primaryKey);

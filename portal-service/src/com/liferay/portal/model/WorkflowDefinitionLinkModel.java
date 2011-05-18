@@ -55,7 +55,7 @@ public interface WorkflowDefinitionLinkModel extends BaseModel<WorkflowDefinitio
 	/**
 	 * Sets the primary key of this workflow definition link
 	 *
-	 * @param pk the primary key of this workflow definition link
+	 * @param primaryKey the primary key of this workflow definition link
 	 */
 	public void setPrimaryKey(long primaryKey);
 

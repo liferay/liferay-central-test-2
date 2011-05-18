@@ -48,7 +48,7 @@ public class EmailAddressWrapper implements EmailAddress {
 	/**
 	* Sets the primary key of this email address
 	*
-	* @param pk the primary key of this email address
+	* @param primaryKey the primary key of this email address
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_emailAddress.setPrimaryKey(primaryKey);

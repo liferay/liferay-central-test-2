@@ -51,7 +51,7 @@ public interface ClassNameModel extends BaseModel<ClassName> {
 	/**
 	 * Sets the primary key of this class name
 	 *
-	 * @param pk the primary key of this class name
+	 * @param primaryKey the primary key of this class name
 	 */
 	public void setPrimaryKey(long primaryKey);
 

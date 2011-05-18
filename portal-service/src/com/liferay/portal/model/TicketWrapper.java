@@ -48,7 +48,7 @@ public class TicketWrapper implements Ticket {
 	/**
 	* Sets the primary key of this ticket
 	*
-	* @param pk the primary key of this ticket
+	* @param primaryKey the primary key of this ticket
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ticket.setPrimaryKey(primaryKey);

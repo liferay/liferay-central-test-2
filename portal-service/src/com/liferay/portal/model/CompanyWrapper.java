@@ -48,7 +48,7 @@ public class CompanyWrapper implements Company {
 	/**
 	* Sets the primary key of this company
 	*
-	* @param pk the primary key of this company
+	* @param primaryKey the primary key of this company
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_company.setPrimaryKey(primaryKey);

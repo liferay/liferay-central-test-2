@@ -54,7 +54,7 @@ public interface ContactModel extends AuditedModel, BaseModel<Contact> {
 	/**
 	 * Sets the primary key of this contact
 	 *
-	 * @param pk the primary key of this contact
+	 * @param primaryKey the primary key of this contact
 	 */
 	public void setPrimaryKey(long primaryKey);
 

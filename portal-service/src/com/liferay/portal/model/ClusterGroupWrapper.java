@@ -48,7 +48,7 @@ public class ClusterGroupWrapper implements ClusterGroup {
 	/**
 	* Sets the primary key of this cluster group
 	*
-	* @param pk the primary key of this cluster group
+	* @param primaryKey the primary key of this cluster group
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_clusterGroup.setPrimaryKey(primaryKey);

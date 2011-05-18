@@ -48,7 +48,7 @@ public class UserWrapper implements User {
 	/**
 	* Sets the primary key of this user
 	*
-	* @param pk the primary key of this user
+	* @param primaryKey the primary key of this user
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_user.setPrimaryKey(primaryKey);

@@ -51,7 +51,7 @@ public interface ResourcePermissionModel extends BaseModel<ResourcePermission> {
 	/**
 	 * Sets the primary key of this resource permission
 	 *
-	 * @param pk the primary key of this resource permission
+	 * @param primaryKey the primary key of this resource permission
 	 */
 	public void setPrimaryKey(long primaryKey);
 

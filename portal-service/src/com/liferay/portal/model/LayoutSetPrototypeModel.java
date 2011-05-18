@@ -54,7 +54,7 @@ public interface LayoutSetPrototypeModel extends BaseModel<LayoutSetPrototype> {
 	/**
 	 * Sets the primary key of this layout set prototype
 	 *
-	 * @param pk the primary key of this layout set prototype
+	 * @param primaryKey the primary key of this layout set prototype
 	 */
 	public void setPrimaryKey(long primaryKey);
 

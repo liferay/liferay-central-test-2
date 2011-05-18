@@ -48,7 +48,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 	/**
 	* Sets the primary key of this org group permission
 	*
-	* @param pk the primary key of this org group permission
+	* @param primaryKey the primary key of this org group permission
 	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK primaryKey) {

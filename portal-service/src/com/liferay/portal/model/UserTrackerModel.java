@@ -54,7 +54,7 @@ public interface UserTrackerModel extends BaseModel<UserTracker> {
 	/**
 	 * Sets the primary key of this user tracker
 	 *
-	 * @param pk the primary key of this user tracker
+	 * @param primaryKey the primary key of this user tracker
 	 */
 	public void setPrimaryKey(long primaryKey);
 

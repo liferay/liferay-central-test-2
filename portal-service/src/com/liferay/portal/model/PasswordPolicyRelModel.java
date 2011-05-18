@@ -50,7 +50,7 @@ public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
 	/**
 	 * Sets the primary key of this password policy rel
 	 *
-	 * @param pk the primary key of this password policy rel
+	 * @param primaryKey the primary key of this password policy rel
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -51,7 +51,7 @@ public interface RegionModel extends BaseModel<Region> {
 	/**
 	 * Sets the primary key of this region
 	 *
-	 * @param pk the primary key of this region
+	 * @param primaryKey the primary key of this region
 	 */
 	public void setPrimaryKey(long primaryKey);
 

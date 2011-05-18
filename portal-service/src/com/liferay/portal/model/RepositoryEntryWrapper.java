@@ -48,7 +48,7 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 	/**
 	* Sets the primary key of this repository entry
 	*
-	* @param pk the primary key of this repository entry
+	* @param primaryKey the primary key of this repository entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_repositoryEntry.setPrimaryKey(primaryKey);

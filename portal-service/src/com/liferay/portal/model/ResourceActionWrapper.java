@@ -48,7 +48,7 @@ public class ResourceActionWrapper implements ResourceAction {
 	/**
 	* Sets the primary key of this resource action
 	*
-	* @param pk the primary key of this resource action
+	* @param primaryKey the primary key of this resource action
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_resourceAction.setPrimaryKey(primaryKey);

@@ -51,7 +51,7 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole> {
 	/**
 	 * Sets the primary key of this org group role
 	 *
-	 * @param pk the primary key of this org group role
+	 * @param primaryKey the primary key of this org group role
 	 */
 	public void setPrimaryKey(OrgGroupRolePK primaryKey);
 

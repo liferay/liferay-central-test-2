@@ -49,7 +49,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink {
 	/**
 	* Sets the primary key of this workflow instance link
 	*
-	* @param pk the primary key of this workflow instance link
+	* @param primaryKey the primary key of this workflow instance link
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_workflowInstanceLink.setPrimaryKey(primaryKey);

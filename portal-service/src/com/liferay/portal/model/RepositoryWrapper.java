@@ -48,7 +48,7 @@ public class RepositoryWrapper implements Repository {
 	/**
 	* Sets the primary key of this repository
 	*
-	* @param pk the primary key of this repository
+	* @param primaryKey the primary key of this repository
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_repository.setPrimaryKey(primaryKey);

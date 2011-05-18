@@ -51,7 +51,7 @@ public interface ResourceActionModel extends BaseModel<ResourceAction> {
 	/**
 	 * Sets the primary key of this resource action
 	 *
-	 * @param pk the primary key of this resource action
+	 * @param primaryKey the primary key of this resource action
 	 */
 	public void setPrimaryKey(long primaryKey);
 

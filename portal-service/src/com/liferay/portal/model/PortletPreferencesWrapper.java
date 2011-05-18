@@ -48,7 +48,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 	/**
 	* Sets the primary key of this portlet preferences
 	*
-	* @param pk the primary key of this portlet preferences
+	* @param primaryKey the primary key of this portlet preferences
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_portletPreferences.setPrimaryKey(primaryKey);

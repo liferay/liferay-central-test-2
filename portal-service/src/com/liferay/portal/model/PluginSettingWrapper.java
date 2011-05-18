@@ -48,7 +48,7 @@ public class PluginSettingWrapper implements PluginSetting {
 	/**
 	* Sets the primary key of this plugin setting
 	*
-	* @param pk the primary key of this plugin setting
+	* @param primaryKey the primary key of this plugin setting
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_pluginSetting.setPrimaryKey(primaryKey);

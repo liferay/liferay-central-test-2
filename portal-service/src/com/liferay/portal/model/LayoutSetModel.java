@@ -51,7 +51,7 @@ public interface LayoutSetModel extends BaseModel<LayoutSet> {
 	/**
 	 * Sets the primary key of this layout set
 	 *
-	 * @param pk the primary key of this layout set
+	 * @param primaryKey the primary key of this layout set
 	 */
 	public void setPrimaryKey(long primaryKey);
 

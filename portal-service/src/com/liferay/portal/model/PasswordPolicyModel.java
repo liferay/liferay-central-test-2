@@ -55,7 +55,7 @@ public interface PasswordPolicyModel extends AuditedModel,
 	/**
 	 * Sets the primary key of this password policy
 	 *
-	 * @param pk the primary key of this password policy
+	 * @param primaryKey the primary key of this password policy
 	 */
 	public void setPrimaryKey(long primaryKey);
 

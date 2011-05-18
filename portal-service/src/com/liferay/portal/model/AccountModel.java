@@ -54,7 +54,7 @@ public interface AccountModel extends AuditedModel, BaseModel<Account> {
 	/**
 	 * Sets the primary key of this account
 	 *
-	 * @param pk the primary key of this account
+	 * @param primaryKey the primary key of this account
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -54,7 +54,7 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel {
 	/**
 	 * Sets the primary key of this team
 	 *
-	 * @param pk the primary key of this team
+	 * @param primaryKey the primary key of this team
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -48,7 +48,7 @@ public class ServiceComponentWrapper implements ServiceComponent {
 	/**
 	* Sets the primary key of this service component
 	*
-	* @param pk the primary key of this service component
+	* @param primaryKey the primary key of this service component
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_serviceComponent.setPrimaryKey(primaryKey);

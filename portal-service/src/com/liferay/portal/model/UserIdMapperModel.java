@@ -52,7 +52,7 @@ public interface UserIdMapperModel extends BaseModel<UserIdMapper> {
 	/**
 	 * Sets the primary key of this user ID mapper
 	 *
-	 * @param pk the primary key of this user ID mapper
+	 * @param primaryKey the primary key of this user ID mapper
 	 */
 	public void setPrimaryKey(long primaryKey);
 

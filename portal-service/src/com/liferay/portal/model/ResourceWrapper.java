@@ -48,7 +48,7 @@ public class ResourceWrapper implements Resource {
 	/**
 	* Sets the primary key of this resource
 	*
-	* @param pk the primary key of this resource
+	* @param primaryKey the primary key of this resource
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_resource.setPrimaryKey(primaryKey);

@@ -54,7 +54,7 @@ public interface AddressModel extends AuditedModel, BaseModel<Address> {
 	/**
 	 * Sets the primary key of this address
 	 *
-	 * @param pk the primary key of this address
+	 * @param primaryKey the primary key of this address
 	 */
 	public void setPrimaryKey(long primaryKey);
 

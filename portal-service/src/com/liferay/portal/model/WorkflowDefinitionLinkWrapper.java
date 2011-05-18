@@ -49,7 +49,7 @@ public class WorkflowDefinitionLinkWrapper implements WorkflowDefinitionLink {
 	/**
 	* Sets the primary key of this workflow definition link
 	*
-	* @param pk the primary key of this workflow definition link
+	* @param primaryKey the primary key of this workflow definition link
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_workflowDefinitionLink.setPrimaryKey(primaryKey);

@@ -53,7 +53,7 @@ public interface WebDAVPropsModel extends BaseModel<WebDAVProps> {
 	/**
 	 * Sets the primary key of this web d a v props
 	 *
-	 * @param pk the primary key of this web d a v props
+	 * @param primaryKey the primary key of this web d a v props
 	 */
 	public void setPrimaryKey(long primaryKey);
 

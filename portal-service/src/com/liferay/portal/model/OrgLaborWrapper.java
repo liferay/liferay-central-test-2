@@ -48,7 +48,7 @@ public class OrgLaborWrapper implements OrgLabor {
 	/**
 	* Sets the primary key of this org labor
 	*
-	* @param pk the primary key of this org labor
+	* @param primaryKey the primary key of this org labor
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_orgLabor.setPrimaryKey(primaryKey);

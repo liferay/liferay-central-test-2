@@ -54,7 +54,7 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker> {
 	/**
 	 * Sets the primary key of this password tracker
 	 *
-	 * @param pk the primary key of this password tracker
+	 * @param primaryKey the primary key of this password tracker
 	 */
 	public void setPrimaryKey(long primaryKey);
 

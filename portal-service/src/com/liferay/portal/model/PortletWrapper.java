@@ -48,7 +48,7 @@ public class PortletWrapper implements Portlet {
 	/**
 	* Sets the primary key of this portlet
 	*
-	* @param pk the primary key of this portlet
+	* @param primaryKey the primary key of this portlet
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_portlet.setPrimaryKey(primaryKey);

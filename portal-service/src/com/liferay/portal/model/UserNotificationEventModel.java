@@ -52,7 +52,7 @@ public interface UserNotificationEventModel extends BaseModel<UserNotificationEv
 	/**
 	 * Sets the primary key of this user notification event
 	 *
-	 * @param pk the primary key of this user notification event
+	 * @param primaryKey the primary key of this user notification event
 	 */
 	public void setPrimaryKey(long primaryKey);
 

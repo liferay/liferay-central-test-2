@@ -48,7 +48,7 @@ public class UserGroupWrapper implements UserGroup {
 	/**
 	* Sets the primary key of this user group
 	*
-	* @param pk the primary key of this user group
+	* @param primaryKey the primary key of this user group
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_userGroup.setPrimaryKey(primaryKey);

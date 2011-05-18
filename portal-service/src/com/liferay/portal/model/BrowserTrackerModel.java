@@ -51,7 +51,7 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker> {
 	/**
 	 * Sets the primary key of this browser tracker
 	 *
-	 * @param pk the primary key of this browser tracker
+	 * @param primaryKey the primary key of this browser tracker
 	 */
 	public void setPrimaryKey(long primaryKey);
 

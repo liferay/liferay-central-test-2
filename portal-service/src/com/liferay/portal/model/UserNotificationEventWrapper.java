@@ -49,7 +49,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 	/**
 	* Sets the primary key of this user notification event
 	*
-	* @param pk the primary key of this user notification event
+	* @param primaryKey the primary key of this user notification event
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_userNotificationEvent.setPrimaryKey(primaryKey);

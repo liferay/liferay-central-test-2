@@ -53,7 +53,7 @@ public interface TicketModel extends BaseModel<Ticket> {
 	/**
 	 * Sets the primary key of this ticket
 	 *
-	 * @param pk the primary key of this ticket
+	 * @param primaryKey the primary key of this ticket
 	 */
 	public void setPrimaryKey(long primaryKey);
 

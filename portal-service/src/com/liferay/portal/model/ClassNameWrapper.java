@@ -48,7 +48,7 @@ public class ClassNameWrapper implements ClassName {
 	/**
 	* Sets the primary key of this class name
 	*
-	* @param pk the primary key of this class name
+	* @param primaryKey the primary key of this class name
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_className.setPrimaryKey(primaryKey);

@@ -48,7 +48,7 @@ public class ReleaseWrapper implements Release {
 	/**
 	* Sets the primary key of this release
 	*
-	* @param pk the primary key of this release
+	* @param primaryKey the primary key of this release
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_release.setPrimaryKey(primaryKey);

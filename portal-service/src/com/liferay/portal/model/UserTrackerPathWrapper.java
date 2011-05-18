@@ -48,7 +48,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 	/**
 	* Sets the primary key of this user tracker path
 	*
-	* @param pk the primary key of this user tracker path
+	* @param primaryKey the primary key of this user tracker path
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_userTrackerPath.setPrimaryKey(primaryKey);

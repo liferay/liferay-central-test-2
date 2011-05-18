@@ -48,7 +48,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 	/**
 	* Sets the primary key of this layout set prototype
 	*
-	* @param pk the primary key of this layout set prototype
+	* @param primaryKey the primary key of this layout set prototype
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_layoutSetPrototype.setPrimaryKey(primaryKey);

@@ -48,7 +48,7 @@ public class GroupWrapper implements Group {
 	/**
 	* Sets the primary key of this group
 	*
-	* @param pk the primary key of this group
+	* @param primaryKey the primary key of this group
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_group.setPrimaryKey(primaryKey);

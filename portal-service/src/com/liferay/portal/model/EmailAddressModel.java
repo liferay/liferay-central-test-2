@@ -54,7 +54,7 @@ public interface EmailAddressModel extends AuditedModel, BaseModel<EmailAddress>
 	/**
 	 * Sets the primary key of this email address
 	 *
-	 * @param pk the primary key of this email address
+	 * @param primaryKey the primary key of this email address
 	 */
 	public void setPrimaryKey(long primaryKey);
 

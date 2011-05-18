@@ -52,7 +52,7 @@ public interface GroupModel extends BaseModel<Group> {
 	/**
 	 * Sets the primary key of this group
 	 *
-	 * @param pk the primary key of this group
+	 * @param primaryKey the primary key of this group
 	 */
 	public void setPrimaryKey(long primaryKey);
 

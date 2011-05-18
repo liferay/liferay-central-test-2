@@ -48,7 +48,7 @@ public class LayoutWrapper implements Layout {
 	/**
 	* Sets the primary key of this layout
 	*
-	* @param pk the primary key of this layout
+	* @param primaryKey the primary key of this layout
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_layout.setPrimaryKey(primaryKey);

@@ -52,7 +52,7 @@ public interface UserGroupRoleModel extends BaseModel<UserGroupRole> {
 	/**
 	 * Sets the primary key of this user group role
 	 *
-	 * @param pk the primary key of this user group role
+	 * @param primaryKey the primary key of this user group role
 	 */
 	public void setPrimaryKey(UserGroupRolePK primaryKey);
 

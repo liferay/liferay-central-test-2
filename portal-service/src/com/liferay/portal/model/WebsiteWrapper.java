@@ -48,7 +48,7 @@ public class WebsiteWrapper implements Website {
 	/**
 	* Sets the primary key of this website
 	*
-	* @param pk the primary key of this website
+	* @param primaryKey the primary key of this website
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_website.setPrimaryKey(primaryKey);

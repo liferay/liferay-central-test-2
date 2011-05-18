@@ -48,7 +48,7 @@ public class PasswordPolicyWrapper implements PasswordPolicy {
 	/**
 	* Sets the primary key of this password policy
 	*
-	* @param pk the primary key of this password policy
+	* @param primaryKey the primary key of this password policy
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_passwordPolicy.setPrimaryKey(primaryKey);

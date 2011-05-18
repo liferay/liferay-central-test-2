@@ -48,7 +48,7 @@ public class RegionWrapper implements Region {
 	/**
 	* Sets the primary key of this region
 	*
-	* @param pk the primary key of this region
+	* @param primaryKey the primary key of this region
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_region.setPrimaryKey(primaryKey);

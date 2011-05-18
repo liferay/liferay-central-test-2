@@ -48,7 +48,7 @@ public class TeamWrapper implements Team {
 	/**
 	* Sets the primary key of this team
 	*
-	* @param pk the primary key of this team
+	* @param primaryKey the primary key of this team
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_team.setPrimaryKey(primaryKey);

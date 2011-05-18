@@ -54,7 +54,7 @@ public interface RoleModel extends BaseModel<Role> {
 	/**
 	 * Sets the primary key of this role
 	 *
-	 * @param pk the primary key of this role
+	 * @param primaryKey the primary key of this role
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -51,7 +51,7 @@ public interface PluginSettingModel extends BaseModel<PluginSetting> {
 	/**
 	 * Sets the primary key of this plugin setting
 	 *
-	 * @param pk the primary key of this plugin setting
+	 * @param primaryKey the primary key of this plugin setting
 	 */
 	public void setPrimaryKey(long primaryKey);
 

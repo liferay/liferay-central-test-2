@@ -51,7 +51,7 @@ public interface OrgGroupPermissionModel extends BaseModel<OrgGroupPermission> {
 	/**
 	 * Sets the primary key of this org group permission
 	 *
-	 * @param pk the primary key of this org group permission
+	 * @param primaryKey the primary key of this org group permission
 	 */
 	public void setPrimaryKey(OrgGroupPermissionPK primaryKey);
 

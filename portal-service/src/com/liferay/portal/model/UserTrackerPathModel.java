@@ -53,7 +53,7 @@ public interface UserTrackerPathModel extends BaseModel<UserTrackerPath> {
 	/**
 	 * Sets the primary key of this user tracker path
 	 *
-	 * @param pk the primary key of this user tracker path
+	 * @param primaryKey the primary key of this user tracker path
 	 */
 	public void setPrimaryKey(long primaryKey);
 

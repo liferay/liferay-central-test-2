@@ -48,7 +48,7 @@ public class CountryWrapper implements Country {
 	/**
 	* Sets the primary key of this country
 	*
-	* @param pk the primary key of this country
+	* @param primaryKey the primary key of this country
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_country.setPrimaryKey(primaryKey);

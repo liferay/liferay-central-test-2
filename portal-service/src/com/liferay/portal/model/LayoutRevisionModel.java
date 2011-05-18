@@ -57,7 +57,7 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	/**
 	 * Sets the primary key of this layout revision
 	 *
-	 * @param pk the primary key of this layout revision
+	 * @param primaryKey the primary key of this layout revision
 	 */
 	public void setPrimaryKey(long primaryKey);
 

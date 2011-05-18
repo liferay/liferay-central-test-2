@@ -51,7 +51,7 @@ public interface ListTypeModel extends BaseModel<ListType> {
 	/**
 	 * Sets the primary key of this list type
 	 *
-	 * @param pk the primary key of this list type
+	 * @param primaryKey the primary key of this list type
 	 */
 	public void setPrimaryKey(int primaryKey);
 

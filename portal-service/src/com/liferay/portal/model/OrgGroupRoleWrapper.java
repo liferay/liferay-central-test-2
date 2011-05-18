@@ -48,7 +48,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 	/**
 	* Sets the primary key of this org group role
 	*
-	* @param pk the primary key of this org group role
+	* @param primaryKey the primary key of this org group role
 	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupRolePK primaryKey) {

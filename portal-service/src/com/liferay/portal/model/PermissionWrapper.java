@@ -48,7 +48,7 @@ public class PermissionWrapper implements Permission {
 	/**
 	* Sets the primary key of this permission
 	*
-	* @param pk the primary key of this permission
+	* @param primaryKey the primary key of this permission
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_permission.setPrimaryKey(primaryKey);

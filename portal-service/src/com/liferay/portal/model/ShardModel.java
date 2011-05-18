@@ -51,7 +51,7 @@ public interface ShardModel extends BaseModel<Shard> {
 	/**
 	 * Sets the primary key of this shard
 	 *
-	 * @param pk the primary key of this shard
+	 * @param primaryKey the primary key of this shard
 	 */
 	public void setPrimaryKey(long primaryKey);
 

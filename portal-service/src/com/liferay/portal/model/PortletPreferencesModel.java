@@ -51,7 +51,7 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences> {
 	/**
 	 * Sets the primary key of this portlet preferences
 	 *
-	 * @param pk the primary key of this portlet preferences
+	 * @param primaryKey the primary key of this portlet preferences
 	 */
 	public void setPrimaryKey(long primaryKey);
 

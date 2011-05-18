@@ -48,7 +48,7 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole {
 	/**
 	* Sets the primary key of this user group group role
 	*
-	* @param pk the primary key of this user group group role
+	* @param primaryKey the primary key of this user group group role
 	*/
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK primaryKey) {

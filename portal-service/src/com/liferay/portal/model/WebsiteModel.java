@@ -54,7 +54,7 @@ public interface WebsiteModel extends AuditedModel, BaseModel<Website> {
 	/**
 	 * Sets the primary key of this website
 	 *
-	 * @param pk the primary key of this website
+	 * @param primaryKey the primary key of this website
 	 */
 	public void setPrimaryKey(long primaryKey);
 

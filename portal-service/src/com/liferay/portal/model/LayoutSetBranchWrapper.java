@@ -48,7 +48,7 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch {
 	/**
 	* Sets the primary key of this layout set branch
 	*
-	* @param pk the primary key of this layout set branch
+	* @param primaryKey the primary key of this layout set branch
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_layoutSetBranch.setPrimaryKey(primaryKey);

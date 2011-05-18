@@ -54,7 +54,7 @@ public interface SubscriptionModel extends AuditedModel, BaseModel<Subscription>
 	/**
 	 * Sets the primary key of this subscription
 	 *
-	 * @param pk the primary key of this subscription
+	 * @param primaryKey the primary key of this subscription
 	 */
 	public void setPrimaryKey(long primaryKey);
 

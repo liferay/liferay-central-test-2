@@ -48,7 +48,7 @@ public class ImageWrapper implements Image {
 	/**
 	* Sets the primary key of this image
 	*
-	* @param pk the primary key of this image
+	* @param primaryKey the primary key of this image
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_image.setPrimaryKey(primaryKey);

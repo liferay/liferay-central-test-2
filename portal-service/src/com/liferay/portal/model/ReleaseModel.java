@@ -53,7 +53,7 @@ public interface ReleaseModel extends BaseModel<Release> {
 	/**
 	 * Sets the primary key of this release
 	 *
-	 * @param pk the primary key of this release
+	 * @param primaryKey the primary key of this release
 	 */
 	public void setPrimaryKey(long primaryKey);
 

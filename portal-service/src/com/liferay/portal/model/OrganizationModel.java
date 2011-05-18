@@ -51,7 +51,7 @@ public interface OrganizationModel extends BaseModel<Organization> {
 	/**
 	 * Sets the primary key of this organization
 	 *
-	 * @param pk the primary key of this organization
+	 * @param primaryKey the primary key of this organization
 	 */
 	public void setPrimaryKey(long primaryKey);
 

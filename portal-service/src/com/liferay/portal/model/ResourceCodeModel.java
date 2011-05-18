@@ -51,7 +51,7 @@ public interface ResourceCodeModel extends BaseModel<ResourceCode> {
 	/**
 	 * Sets the primary key of this resource code
 	 *
-	 * @param pk the primary key of this resource code
+	 * @param primaryKey the primary key of this resource code
 	 */
 	public void setPrimaryKey(long primaryKey);
 

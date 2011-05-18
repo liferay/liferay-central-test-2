@@ -51,7 +51,7 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup> {
 	/**
 	 * Sets the primary key of this cluster group
 	 *
-	 * @param pk the primary key of this cluster group
+	 * @param primaryKey the primary key of this cluster group
 	 */
 	public void setPrimaryKey(long primaryKey);
 

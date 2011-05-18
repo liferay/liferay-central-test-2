@@ -48,7 +48,7 @@ public class LockWrapper implements Lock {
 	/**
 	* Sets the primary key of this lock
 	*
-	* @param pk the primary key of this lock
+	* @param primaryKey the primary key of this lock
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_lock.setPrimaryKey(primaryKey);

@@ -51,7 +51,7 @@ public interface VirtualHostModel extends BaseModel<VirtualHost> {
 	/**
 	 * Sets the primary key of this virtual host
 	 *
-	 * @param pk the primary key of this virtual host
+	 * @param primaryKey the primary key of this virtual host
 	 */
 	public void setPrimaryKey(long primaryKey);
 

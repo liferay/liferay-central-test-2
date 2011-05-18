@@ -48,7 +48,7 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	/**
 	* Sets the primary key of this membership request
 	*
-	* @param pk the primary key of this membership request
+	* @param primaryKey the primary key of this membership request
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_membershipRequest.setPrimaryKey(primaryKey);

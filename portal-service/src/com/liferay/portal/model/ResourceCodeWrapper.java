@@ -48,7 +48,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 	/**
 	* Sets the primary key of this resource code
 	*
-	* @param pk the primary key of this resource code
+	* @param primaryKey the primary key of this resource code
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_resourceCode.setPrimaryKey(primaryKey);

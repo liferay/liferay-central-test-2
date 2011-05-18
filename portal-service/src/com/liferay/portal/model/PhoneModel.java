@@ -54,7 +54,7 @@ public interface PhoneModel extends AuditedModel, BaseModel<Phone> {
 	/**
 	 * Sets the primary key of this phone
 	 *
-	 * @param pk the primary key of this phone
+	 * @param primaryKey the primary key of this phone
 	 */
 	public void setPrimaryKey(long primaryKey);
 

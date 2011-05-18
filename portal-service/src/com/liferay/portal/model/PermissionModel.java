@@ -51,7 +51,7 @@ public interface PermissionModel extends BaseModel<Permission> {
 	/**
 	 * Sets the primary key of this permission
 	 *
-	 * @param pk the primary key of this permission
+	 * @param primaryKey the primary key of this permission
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -54,7 +54,7 @@ public interface LockModel extends BaseModel<Lock> {
 	/**
 	 * Sets the primary key of this lock
 	 *
-	 * @param pk the primary key of this lock
+	 * @param primaryKey the primary key of this lock
 	 */
 	public void setPrimaryKey(long primaryKey);
 
