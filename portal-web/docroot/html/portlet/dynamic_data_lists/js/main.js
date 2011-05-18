@@ -121,6 +121,14 @@ AUI().add(
 
 						callback = A.bind(callback || EMPTY_FN, instance);
 
+						var serviceParameterTypes = [
+           					'long',
+           					'java.util.Map<java.lang.String, java.io.Serializable>',
+           					'int',
+           					'boolean',
+           					'com.liferay.portal.service.ServiceContext'
+           				];
+
 						DDLRecord.updateRecord(
 							{
 								recordId: recordId,
@@ -132,7 +140,8 @@ AUI().add(
 										scopeGroupId: themeDisplay.getScopeGroupId(),
 										userId: themeDisplay.getUserId()
 									}
-								)
+								),
+								serviceParameterTypes: A.JSON.stringify(serviceParameterTypes)
 							},
 							callback
 						);
