@@ -104,8 +104,7 @@ public class AssetEntriesFacet extends MultiValueFacet {
 					else if (searchContext.isIncludeLiveGroups() &&
 							!searchContext.isIncludeStagingGroups()) {
 
-						entityQuery.addRequiredTerm(
-							Field.STAGING_GROUP, false);
+						entityQuery.addRequiredTerm(Field.STAGING_GROUP, false);
 					}
 				}
 
