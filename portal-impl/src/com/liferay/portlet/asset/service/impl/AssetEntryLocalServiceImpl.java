@@ -432,13 +432,13 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			SearchContext searchContext = new SearchContext();
 
 			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
-			
+
 			assetEntriesFacet.setStatic(true);
-			
+
 			searchContext.addFacet(assetEntriesFacet);
 
 			Facet scopeFacet = new ScopeFacet(searchContext);
-			
+
 			scopeFacet.setStatic(true);
 
 			searchContext.addFacet(scopeFacet);
