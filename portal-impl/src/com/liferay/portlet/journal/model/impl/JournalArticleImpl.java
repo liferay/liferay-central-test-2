@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -26,6 +27,11 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
+
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author Brian Wing Shun Chan
@@ -64,7 +70,37 @@ public class JournalArticleImpl
 	}
 
 	public String[] getAvailableLocales() {
-		return LocalizationUtil.getAvailableLocales(getContent());
+		Set<String> availableLocales = new TreeSet<String>();
+
+		// Title
+
+		for (Map.Entry<Locale, String> entry : getTitleMap().entrySet()) {
+			String languageId = entry.getKey().toString();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLocales.add(languageId);
+			}
+		}
+
+		// Description
+
+		for (Map.Entry<Locale, String> entry : getDescriptionMap().entrySet()) {
+			String languageId = entry.getKey().toString();
+			String value = entry.getValue();
+
+			if (Validator.isNotNull(value)) {
+				availableLocales.add(languageId);
+			}
+		}
+
+		// Content
+
+		availableLocales.addAll(
+			ListUtil.toList(
+				LocalizationUtil.getAvailableLocales(getContent())));
+
+		return availableLocales.toArray(new String[availableLocales.size()]);
 	}
 
 	public String getContentByLocale(String languageId) {
