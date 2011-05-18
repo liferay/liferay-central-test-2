@@ -80,63 +80,12 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
 		for (long companyId : companyIds) {
+			Role role = RoleLocalServiceUtil.getRole(
+				companyId, RoleConstants.OWNER);
+
 			for (String[] model : _MODELS) {
-				verifyModel(companyId, model[0], model[1], model[2]);
+				verifyModel(companyId, role, model[0], model[1], model[2]);
 			}
-		}
-	}
-
-	protected long getHasOwnerIdCount(String name, Role role) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select count(*) from ResourcePermission where name = ? and " +
-					"scope = ? and roleId = ? and ownerId != 0");
-
-			ps.setString(1, name);
-			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
-			ps.setLong(3, role.getRoleId());
-
-			rs = ps.executeQuery();
-
-			rs.next();
-
-			return rs.getLong(1);
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected long getNoOwnerIdCount(String name, Role role) throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select count(*) from ResourcePermission where name = ? and " +
-					"scope = ? and roleId = ? and ownerId = 0");
-
-			ps.setString(1, name);
-			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
-			ps.setLong(3, role.getRoleId());
-
-			rs = ps.executeQuery();
-
-			rs.next();
-
-			return rs.getLong(1);
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
@@ -172,6 +121,10 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			ownerId = contact.getUserId();
 		}
 
+		if (ownerId == resourcePermission.getOwnerId()) {
+			return;
+		}
+
 		resourcePermission.setOwnerId(ownerId);
 
 		ResourcePermissionLocalServiceUtil.updateResourcePermission(
@@ -185,29 +138,9 @@ public class VerifyResourcePermissions extends VerifyProcess {
 	}
 
 	protected void verifyModel(
-			long companyId, String name, String modelName, String pkColumnName)
+			long companyId, Role role, String name, String modelName,
+			String pkColumnName)
 		throws Exception {
-
-		Role role = RoleLocalServiceUtil.getRole(
-			companyId, RoleConstants.OWNER);
-
-		long hasOwnerIdCount = getHasOwnerIdCount(name, role);
-
-		if (hasOwnerIdCount > 0) {
-			return;
-		}
-
-		long noOwnerIdCount = getNoOwnerIdCount(name, role);
-
-		if (noOwnerIdCount == 0) {
-			return;
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Processing " + noOwnerIdCount + " resource permissions for " +
-					name);
-		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
