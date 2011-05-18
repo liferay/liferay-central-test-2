@@ -48,15 +48,16 @@ while (itr.hasNext()) {
 	JSONObject fieldJSONObject = JSONFactoryUtil.createJSONObject();
 
 	fieldJSONObject.put("fieldLabel", fieldName);
+
+	if (structure.getFieldRequired(fieldName)) {
+		fieldJSONObject.put("fixed", true);
+	}
+
 	fieldJSONObject.put("key", fieldName);
 	fieldJSONObject.put("label", sb.toString());
 	fieldJSONObject.put("readOnlyAttributes", readOnlyAttributesJSONArray);
 	fieldJSONObject.put("type", structure.getFieldType(fieldName));
 	fieldJSONObject.put("unique", true);
-
-	if (structure.getFieldRequired(fieldName)) {
-		fieldJSONObject.put("fixed", true);
-	}
 
 	structureAvailableFieldsJSONArray.put(fieldJSONObject);
 }
