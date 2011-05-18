@@ -70,7 +70,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				_getMimeResponse().setProperty(name, value);
+				MimeResponse mimeResponse = _getMimeResponse();
+
+				mimeResponse.setProperty(name, value);
 			}
 		}
 	}
@@ -83,19 +85,19 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		return false;
 	}
 
-	public String encodeRedirectURL(String url) {
-		return null;
-	}
-
 	public String encodeRedirectUrl(String url) {
 		return null;
 	}
 
-	public String encodeURL(String url) {
-		return _portletResponse.encodeURL(url);
+	public String encodeRedirectURL(String url) {
+		return null;
 	}
 
 	public String encodeUrl(String url) {
+		return _portletResponse.encodeURL(url);
+	}
+
+	public String encodeURL(String url) {
 		return _portletResponse.encodeURL(url);
 	}
 
@@ -103,7 +105,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_getMimeResponse().flushBuffer();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			mimeResponse.flushBuffer();
 		}
 	}
 
@@ -111,7 +115,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _getMimeResponse().getBufferSize();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			return mimeResponse.getBufferSize();
 		}
 		else {
 			return 0;
@@ -122,7 +128,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _getMimeResponse().getCharacterEncoding();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			return mimeResponse.getCharacterEncoding();
 		}
 		else {
 			return null;
@@ -133,7 +141,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _getMimeResponse().getContentType();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			return mimeResponse.getContentType();
 		}
 		else {
 			return null;
@@ -144,7 +154,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _getMimeResponse().getLocale();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			return mimeResponse.getLocale();
 		}
 		else {
 			return null;
@@ -155,8 +167,10 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
+			MimeResponse mimeResponse = _getMimeResponse();
+
 			OutputStream portletOutputStream =
-				_getMimeResponse().getPortletOutputStream();
+				mimeResponse.getPortletOutputStream();
 
 			ServletOutputStream servletOutputStream =
 				new GenericServletOutputStream(portletOutputStream);
@@ -172,7 +186,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _getMimeResponse().getWriter();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			return mimeResponse.getWriter();
 		}
 		else {
 			return new UnsyncPrintWriter(new NullServletOutputStream());
@@ -183,7 +199,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return _getMimeResponse().isCommitted();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			return mimeResponse.isCommitted();
 		}
 		else if (!_include) {
 			return false;
@@ -197,7 +215,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_getMimeResponse().reset();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			mimeResponse.reset();
 		}
 	}
 
@@ -205,7 +225,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_getMimeResponse().resetBuffer();
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			mimeResponse.resetBuffer();
 		}
 	}
 
@@ -218,7 +240,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void sendRedirect(String location) throws IOException {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				_getActionResponse().sendRedirect(location);
+				ActionResponse actionResponse = _getActionResponse();
+
+				actionResponse.sendRedirect(location);
 			}
 		}
 	}
@@ -227,14 +251,18 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			_getMimeResponse().setBufferSize(bufferSize);
+			MimeResponse mimeResponse = _getMimeResponse();
+
+			mimeResponse.setBufferSize(bufferSize);
 		}
 	}
 
 	public void setCharacterEncoding(String encoding) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_getResourceResponse().setCharacterEncoding(encoding);
+				ResourceResponse resourceResponse = _getResourceResponse();
+
+				resourceResponse.setCharacterEncoding(encoding);
 			}
 		}
 	}
@@ -242,7 +270,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setContentLength(int length) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_getResourceResponse().setContentLength(length);
+				ResourceResponse resourceResponse = _getResourceResponse();
+
+				resourceResponse.setContentLength(length);
 			}
 		}
 	}
@@ -252,7 +282,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				_getMimeResponse().setContentType(contentType);
+				MimeResponse mimeResponse = _getMimeResponse();
+
+				mimeResponse.setContentType(contentType);
 			}
 		}
 	}
@@ -266,7 +298,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				_getMimeResponse().setProperty(name, value);
+				MimeResponse mimeResponse = _getMimeResponse();
+
+				mimeResponse.setProperty(name, value);
 			}
 		}
 	}
@@ -278,7 +312,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setLocale(Locale locale) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_getResourceResponse().setLocale(locale);
+				ResourceResponse resourceResponse = _getResourceResponse();
+
+				resourceResponse.setLocale(locale);
 			}
 		}
 	}
@@ -286,7 +322,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 	public void setStatus(int status) {
 		if (!_include) {
 			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-				_getResourceResponse().setProperty(
+				ResourceResponse resourceResponse = _getResourceResponse();
+
+				resourceResponse.setProperty(
 					ResourceResponse.HTTP_STATUS_CODE, String.valueOf(status));
 			}
 		}
@@ -308,8 +346,8 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 		return (ResourceResponse)_portletResponse;
 	}
 
-	private PortletResponse _portletResponse;
 	private boolean _include;
 	private String _lifecycle;
+	private PortletResponse _portletResponse;
 
 }
