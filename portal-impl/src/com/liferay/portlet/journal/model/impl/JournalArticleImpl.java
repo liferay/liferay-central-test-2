@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -74,31 +73,38 @@ public class JournalArticleImpl
 
 		// Title
 
-		for (Map.Entry<Locale, String> entry : getTitleMap().entrySet()) {
-			String languageId = entry.getKey().toString();
+		Map<Locale, String> titleMap = getTitleMap();
+
+		for (Map.Entry<Locale, String> entry : titleMap.entrySet()) {
+			Locale locale = entry.getKey();
 			String value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				availableLocales.add(languageId);
+				availableLocales.add(locale.toString());
 			}
 		}
 
 		// Description
 
-		for (Map.Entry<Locale, String> entry : getDescriptionMap().entrySet()) {
-			String languageId = entry.getKey().toString();
+		Map<Locale, String> descriptionMap = getDescriptionMap();
+
+		for (Map.Entry<Locale, String> entry : descriptionMap.entrySet()) {
+			Locale locale = entry.getKey();
 			String value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				availableLocales.add(languageId);
+				availableLocales.add(locale.toString());
 			}
 		}
 
 		// Content
 
-		availableLocales.addAll(
-			ListUtil.toList(
-				LocalizationUtil.getAvailableLocales(getContent())));
+		String[] availableLocalesArray = LocalizationUtil.getAvailableLocales(
+			getContent());
+
+		for (String availableLocale : availableLocalesArray) {
+			availableLocales.add(availableLocale);
+		}
 
 		return availableLocales.toArray(new String[availableLocales.size()]);
 	}
