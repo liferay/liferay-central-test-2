@@ -16,6 +16,8 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -351,7 +353,7 @@ public class JournalFeedLocalServiceImpl
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 		}
 
@@ -404,5 +406,8 @@ public class JournalFeedLocalServiceImpl
 			throw new FeedContentFieldException();
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalFeedLocalServiceImpl.class);
 
 }
