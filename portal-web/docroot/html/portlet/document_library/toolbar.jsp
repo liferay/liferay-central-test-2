@@ -37,7 +37,7 @@ String taglibUrl = null;
 	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
 </span>
 
-<liferay-ui:icon-menu icon="" align="left" direction="down" message="sort" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
+<liferay-ui:icon-menu align="left" direction="down" icon="" message="sort" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 	<%
 	PortletURL sortTitle = renderResponse.createRenderURL();
@@ -101,7 +101,7 @@ String taglibUrl = null;
 </liferay-ui:icon-menu>
 
 
-<liferay-ui:icon-menu icon="" align="left" direction="down" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
+<liferay-ui:icon-menu align="left" direction="down" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 	<%
 	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
@@ -141,7 +141,7 @@ String taglibUrl = null;
 </liferay-ui:icon-menu>
 
 <span class="manage-button">
-	<liferay-ui:icon-menu icon="" align="left" direction="down" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
+	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
 		<portlet:renderURL var="addDocumentTypeURL">
 			<portlet:param name="struts_action" value="/document_library/edit_document_type" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
