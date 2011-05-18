@@ -25,11 +25,15 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
+ * @author Michael Chen
  */
 public class ContentPersistenceImpl
 	extends BasePersistenceImpl<Dummy> implements ContentPersistence {
@@ -38,15 +42,9 @@ public class ContentPersistenceImpl
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("SELECT count(content) FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND ");
-		sb.append("content.repositoryId = ? AND ");
-		sb.append("content.path = ? AND ");
-		sb.append("content.version = ?");
-
-		String sql = sb.toString();
+		String sql = "SELECT count(content) FROM Content content WHERE " +
+			"content.companyId = ? AND content.repositoryId = ? AND " +
+			"content.path = ? AND content.version = ?";
 
 		Session session = null;
 
@@ -75,16 +73,17 @@ public class ContentPersistenceImpl
 	public Content fetchByC_R_P(long companyId, long repositoryId, String path)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(6);
+		String sql = "SELECT content FROM Content content WHERE " +
+			"content.companyId = ? AND content.repositoryId = ? AND " +
+			"content.path = ? ";
 
-		sb.append("SELECT content FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND ");
-		sb.append("content.repositoryId = ? AND ");
-		sb.append("content.path = ? ");
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(sql);
 
 		appendOrderByComparator(sb, "content.", new ContentVersionComparator());
 
-		String sql = sb.toString();
+		sql = sb.toString();
 
 		Session session = null;
 
@@ -118,15 +117,9 @@ public class ContentPersistenceImpl
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("SELECT content FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND ");
-		sb.append("content.repositoryId = ? AND ");
-		sb.append("content.path = ? AND ");
-		sb.append("content.version = ?");
-
-		String sql = sb.toString();
+		String sql = "SELECT content FROM Content content WHERE " +
+			"content.companyId = ? AND content.repositoryId = ? AND " +
+			"content.path = ? AND content.version = ?";
 
 		Session session = null;
 
@@ -240,6 +233,86 @@ public class ContentPersistenceImpl
 		return content;
 	}
 
+	public List<String> findNamesByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws SystemException {
+
+		if (!path.endsWith(StringPool.SLASH)) {
+			path = path.concat(StringPool.SLASH);
+		}
+
+		path = path.concat(StringPool.PERCENT);
+
+		String sql = "SELECT content.path FROM Content content WHERE " +
+			"content.companyId = ? AND content.repositoryId = ? AND " +
+			"content.path like ?";
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public long findSizeByC_R_P(long companyId, long repositoryId, String path)
+		throws SystemException {
+
+		String sql = "SELECT content.size FROM Content content WHERE " +
+			"content.companyId = ? AND content.repositoryId = ? AND " +
+			"content.path = ? ";
+
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(sql);
+
+		appendOrderByComparator(sb, "content.", new ContentVersionComparator());
+
+		sql = sb.toString();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createQuery(sql);
+
+			q.setFirstResult(0);
+			q.setMaxResults(1);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			long size = (Long)q.uniqueResult();
+
+			return size;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void remove(long contentId)
 		throws NoSuchContentException, SystemException {
 
@@ -265,19 +338,48 @@ public class ContentPersistenceImpl
 		}
 	}
 
+	public boolean removeByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		String sql = "DELETE FROM Content WHERE companyId = ? AND " +
+			"portletId = ? AND repositoryId = ? AND path_ = ?";
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(portletId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			if (q.executeUpdate() > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public boolean removeByC_R_P_V(
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("DELETE FROM Content WHERE ");
-		sb.append("companyId = ? AND ");
-		sb.append("repositoryId = ? AND ");
-		sb.append("path_ = ? AND ");
-		sb.append("version = ?");
-
-		String sql = sb.toString();
+		String sql = "DELETE FROM Content WHERE companyId = ? AND " +
+			"repositoryId = ? AND path_ = ? AND version = ?";
 
 		Session session = null;
 
@@ -308,6 +410,46 @@ public class ContentPersistenceImpl
 		}
 	}
 
+	public boolean removeByC_R_P(long companyId, long repositoryId, String path)
+		throws SystemException {
+
+		if (!path.endsWith(StringPool.SLASH)) {
+			path = path.concat(StringPool.SLASH);
+		}
+
+		path = path.concat(StringPool.PERCENT);
+
+		String sql = "DELETE FROM Content WHERE companyId = ? AND " +
+			"repositoryId = ? AND path_ like ?";
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			if (q.executeUpdate() > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public void update(Content content) throws SystemException {
 		Session session = null;
 
@@ -317,6 +459,71 @@ public class ContentPersistenceImpl
 			session.saveOrUpdate(content);
 
 			session.flush();
+
+			session.clear();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void update(
+			long companyId, long repositoryId, String path,
+			long newRepositoryId)
+		throws SystemException {
+
+		String sql = "UPDATE Content SET repositoryId = ? WHERE " +
+			"companyId = ? AND repositoryId = ? AND path_ = ?";
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(newRepositoryId);
+			qPos.add(companyId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			q.executeUpdate();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void update(
+			long companyId, long repositoryId, String path, String newPath)
+		throws SystemException {
+
+		String sql = "UPDATE Content SET path_ = ? WHERE companyId = ? AND " +
+			"repositoryId = ? AND path_ = ?";
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(newPath);
+			qPos.add(companyId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			q.executeUpdate();
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -24,22 +24,19 @@ import java.io.InputStream;
 
 /**
  * @author Shuyang Zhou
+ * @author Michael Chen
  */
 @Transactional(rollbackFor = {PortalException.class, SystemException.class})
 public interface ContentLocalService {
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, byte[] bytes)
+			String path, String version, byte[] bytes)
 		throws SystemException;
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, InputStream inputStream, long size)
-		throws SystemException;
-
-	public boolean deleteContent(
-			long companyId, long repositoryId, String path, String version)
+			String path, String version, InputStream is, long size)
 		throws SystemException;
 
 	public Content getContent(
@@ -50,8 +47,37 @@ public interface ContentLocalService {
 			long companyId, long repositoryId, String path, String version)
 		throws NoSuchContentException, SystemException;
 
+	public String[] getContentNames(
+			long companyId, long repositoryId, String path)
+		throws SystemException;
+
+	public long getContentSize(long companyId, long repositoryId, String path)
+		throws SystemException;
+
 	public boolean hasContent(
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException;
+
+	public boolean removeByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException;
+
+	public boolean removeByC_R_P_V(
+			long companyId, long repositoryId, String path, String version)
+		throws SystemException;
+
+	public void removeByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws SystemException;
+
+	public void updateContent(
+			long companyId, String portletId, long groupId, long repositoryId,
+			long newRepositoryId, String path)
+		throws NoSuchContentException, SystemException;
+
+	public void updateContent(
+			long companyId, String portletId, long groupId, long repositoryId,
+			String path, String newPath)
+		throws NoSuchContentException, SystemException;
 
 }

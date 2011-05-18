@@ -366,7 +366,7 @@ create table Content (
 	portletId VARCHAR(75) null,
 	groupId LONG,
 	repositoryId LONG null,
-	path_ STRING null,
+	path_ VARCHAR(250) null,
 	version VARCHAR(75) null,
 	data_ BLOB null,
 	size_ LONG null

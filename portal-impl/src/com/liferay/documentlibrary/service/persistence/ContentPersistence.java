@@ -20,8 +20,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
+ * @author Michael Chen
  */
 public interface ContentPersistence extends BasePersistence<Dummy> {
 
@@ -49,6 +52,14 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 	public Content findByPrimaryKey(long contentId)
 		throws NoSuchContentException, SystemException;
 
+	public List<String> findNamesByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws SystemException;
+
+	public long findSizeByC_R_P(
+			long companyId, long repositoryId, String path)
+		throws SystemException;
+
 	public void remove(long contentId)
 		throws NoSuchContentException, SystemException;
 
@@ -56,6 +67,22 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException;
 
+	public boolean removeByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException;
+
+	public boolean removeByC_R_P(long companyId, long repositoryId, String path)
+		throws SystemException;
+
 	public void update(Content content) throws SystemException;
+
+	public void update(
+			long companyId, long repositoryId, String path,
+			long newRepositoryId)
+		throws SystemException;
+
+	public void update(
+			long companyId, long repositoryId, String path, String newPath)
+		throws SystemException;
 
 }
