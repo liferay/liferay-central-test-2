@@ -15,12 +15,17 @@
 package com.liferay.portal.bean;
 
 import com.liferay.portal.kernel.bean.BeanProperties;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 
@@ -474,13 +479,11 @@ public class BeanPropertiesImpl implements BeanProperties {
 					continue;
 				}
 
-				int month = GetterUtil.getInteger(value);
-				int day = ParamUtil.getInteger(request, dateParam + "Day");
-				int year = ParamUtil.getInteger(request, dateParam + "Year");
+				Date date = getDate(dateParam, request);
 
-				Date date = PortalUtil.getDate(month, day, year);
-
-				BeanUtil.setPropertyForcedSilent(bean, dateParam, date);
+				if (date != null) {
+					BeanUtil.setPropertyForcedSilent(bean, dateParam, date);
+				}
 			}
 		}
 	}
@@ -491,6 +494,37 @@ public class BeanPropertiesImpl implements BeanProperties {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+	}
+
+	protected Date getDate(String dateParam, HttpServletRequest request) {
+		int month = ParamUtil.getInteger(request, dateParam + "Month");
+		int day = ParamUtil.getInteger(request, dateParam + "Day");
+		int year = ParamUtil.getInteger(request, dateParam + "Year");
+		int hour = ParamUtil.getInteger(request, dateParam + "Hour", -1);
+		int minute = ParamUtil.getInteger(request, dateParam + "Minute");
+		int amPm = ParamUtil.getInteger(request, dateParam + "AmPm");
+
+		if (amPm == Calendar.PM) {
+			hour += 12;
+		}
+
+		if (hour == -1) {
+			return PortalUtil.getDate(month, day, year);
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		User user = themeDisplay.getUser();
+
+		try {
+			return PortalUtil.getDate(
+				month, day, year, hour, minute, user.getTimeZone(),
+				new PortalException());
+		}
+		catch (PortalException pe) {
+			return null;
 		}
 	}
 
