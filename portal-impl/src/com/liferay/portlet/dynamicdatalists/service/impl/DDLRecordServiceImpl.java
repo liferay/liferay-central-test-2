@@ -45,7 +45,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getUserId(), groupId, recordSetId, fields, displayIndex,
 			serviceContext);
 	}
-	
+
 	public DDLRecord addRecord(
 			long groupId, long recordSetId, Map<String, Serializable> fieldsMap,
 			int displayIndex, ServiceContext serviceContext)
@@ -58,7 +58,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			getUserId(), groupId, recordSetId, fieldsMap, displayIndex,
 			serviceContext);
 	}
-	
+
 	public DDLRecord updateRecord(
 			long recordId, Fields fields, int displayIndex, boolean merge,
 			ServiceContext serviceContext)
