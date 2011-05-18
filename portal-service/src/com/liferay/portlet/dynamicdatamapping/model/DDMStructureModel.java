@@ -56,7 +56,7 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	/**
 	 * Sets the primary key of this d d m structure
 	 *
-	 * @param pk the primary key of this d d m structure
+	 * @param primaryKey the primary key of this d d m structure
 	 */
 	public void setPrimaryKey(long primaryKey);
 

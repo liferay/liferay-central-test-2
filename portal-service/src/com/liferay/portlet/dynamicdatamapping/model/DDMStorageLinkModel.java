@@ -52,7 +52,7 @@ public interface DDMStorageLinkModel extends BaseModel<DDMStorageLink> {
 	/**
 	 * Sets the primary key of this d d m storage link
 	 *
-	 * @param pk the primary key of this d d m storage link
+	 * @param primaryKey the primary key of this d d m storage link
 	 */
 	public void setPrimaryKey(long primaryKey);
 

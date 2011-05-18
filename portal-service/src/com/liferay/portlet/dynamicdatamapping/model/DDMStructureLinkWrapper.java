@@ -48,7 +48,7 @@ public class DDMStructureLinkWrapper implements DDMStructureLink {
 	/**
 	* Sets the primary key of this d d m structure link
 	*
-	* @param pk the primary key of this d d m structure link
+	* @param primaryKey the primary key of this d d m structure link
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ddmStructureLink.setPrimaryKey(primaryKey);

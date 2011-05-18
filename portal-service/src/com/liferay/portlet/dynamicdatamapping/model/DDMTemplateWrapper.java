@@ -48,7 +48,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 	/**
 	* Sets the primary key of this d d m template
 	*
-	* @param pk the primary key of this d d m template
+	* @param primaryKey the primary key of this d d m template
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ddmTemplate.setPrimaryKey(primaryKey);

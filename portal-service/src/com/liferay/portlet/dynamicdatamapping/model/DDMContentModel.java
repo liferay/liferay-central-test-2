@@ -58,7 +58,7 @@ public interface DDMContentModel extends BaseModel<DDMContent>, GroupedModel {
 	/**
 	 * Sets the primary key of this d d m content
 	 *
-	 * @param pk the primary key of this d d m content
+	 * @param primaryKey the primary key of this d d m content
 	 */
 	public void setPrimaryKey(long primaryKey);
 

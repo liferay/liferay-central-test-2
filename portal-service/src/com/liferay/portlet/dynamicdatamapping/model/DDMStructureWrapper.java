@@ -48,7 +48,7 @@ public class DDMStructureWrapper implements DDMStructure {
 	/**
 	* Sets the primary key of this d d m structure
 	*
-	* @param pk the primary key of this d d m structure
+	* @param primaryKey the primary key of this d d m structure
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ddmStructure.setPrimaryKey(primaryKey);

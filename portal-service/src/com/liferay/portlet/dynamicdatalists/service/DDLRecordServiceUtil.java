@@ -39,6 +39,18 @@ public class DDLRecordServiceUtil {
 	 */
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
 		long groupId, long recordSetId,
+		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		int displayIndex,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addRecord(groupId, recordSetId, fields, displayIndex,
+			serviceContext);
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord addRecord(
+		long groupId, long recordSetId,
 		java.util.Map<java.lang.String, java.io.Serializable> fieldsMap,
 		int displayIndex,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -46,6 +58,18 @@ public class DDLRecordServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addRecord(groupId, recordSetId, fieldsMap, displayIndex,
+			serviceContext);
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
+		long recordId,
+		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,
+		int displayIndex, boolean merge,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateRecord(recordId, fields, displayIndex, merge,
 			serviceContext);
 	}
 
