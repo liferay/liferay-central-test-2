@@ -44,6 +44,10 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 		window,
 		'<portlet:namespace />searchFileEntry',
 		function() {
+
+			entriesContainer.plug(A.LoadingMask);
+			entriesContainer.loadingmask.toggle();
+
 			A.io.request(
 				document.<portlet:namespace />fm1.action,
 				{
@@ -52,6 +56,8 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 					},
 					after: {
 						success: function(event, id, obj) {
+							entriesContainer.unplug(A.LoadingMask);
+
 							var responseData = this.get('responseData');
 
 							var content = A.Node.create(responseData);
@@ -64,7 +70,6 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 							displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
 							displayStyleButtonsContainer.setContent(displayStyleButtons);
 
-							var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 							var entries = content.one('#<portlet:namespace />entries');
 
 							entriesContainer.plug(A.Plugin.ParseContent);

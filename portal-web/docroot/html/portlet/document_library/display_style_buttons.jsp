@@ -136,12 +136,19 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 	buttonRow.setData('displayStyleToolbar', displayStyleToolbar);
 
+	var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+
 	var updateDisplayStyle = function(url, index) {
+		entriesContainer.plug(A.LoadingMask);
+		entriesContainer.loadingmask.toggle();
+
 		A.io.request(
 			url,
 			{
 				after: {
 					success: function(event, id, obj) {
+						entriesContainer.unplug(A.LoadingMask);
+
 						A.one('#<portlet:namespace />displayStyleToolbar').empty();
 
 						displayStyleToolbar.item(0).StateInteraction.set('active', false);
@@ -160,7 +167,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 						displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
 						displayStyleButtonsContainer.setContent(displayStyleButtons);
 
-						var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 						var entries = content.one('#<portlet:namespace />entries');
 
 						entriesContainer.setContent(entries);

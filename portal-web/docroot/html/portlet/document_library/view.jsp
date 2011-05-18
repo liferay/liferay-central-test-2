@@ -208,11 +208,18 @@ if (folder != null) {
 			var dataRefreshFolders = attributes['data-refresh-folders'];
 			var dataResourceUrl = attributes['data-resource-url'];
 
+			var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+
+			entriesContainer.plug(A.LoadingMask);
+			entriesContainer.loadingmask.toggle();
+
 			A.io.request(
 				dataResourceUrl,
 				{
 					after: {
 						success: function(event, id, obj) {
+							entriesContainer.unplug(A.LoadingMask);
+
 							var selFolder = A.one('.folder.selected');
 
 							if (selFolder) {
@@ -253,7 +260,6 @@ if (folder != null) {
 								fileEntrySearchContainer.plug(A.Plugin.ParseContent);
 								fileEntrySearchContainer.setContent(fileEntrySearch);
 
-								var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 								var entries = content.one('#<portlet:namespace />entries');
 
 								entriesContainer.setContent(entries);
@@ -282,11 +288,18 @@ if (folder != null) {
 
 			var requestUrl = event.currentTarget.attr('data-resource-url');
 
+			var entriesContainer = A.one('#<portlet:namespace />documentContainer');
+
+			entriesContainer.plug(A.LoadingMask);
+			entriesContainer.loadingmask.toggle();
+
 			A.io.request(
 				requestUrl,
 				{
 					after: {
 						success: function(event, id, obj) {
+							entriesContainer.unplug(A.LoadingMask);
+
 							var selFolder = A.one('.folder.selected');
 
 							if (selFolder) {
@@ -320,7 +333,6 @@ if (folder != null) {
 							fileEntrySearchContainer.plug(A.Plugin.ParseContent);
 							fileEntrySearchContainer.setContent(fileEntrySearch);
 
-							var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 							var entries = content.one('#<portlet:namespace />entries');
 
 							entriesContainer.setContent(entries);

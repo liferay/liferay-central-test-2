@@ -284,11 +284,18 @@ if (Validator.isNull(displayStyle)) {
 		A.one('#<portlet:namespace />closeSearch').on(
 			'click',
 			function(event) {
+				var documentContainer = A.one('#<portlet:namespace />documentContainer');
+
+				documentContainer.plug(A.LoadingMask);
+				documentContainer.loadingmask.toggle();
+
 				A.io.request(
 					'<%= closeSearch.toString() %>',
 					{
 						after: {
 							success: function(event, id, obj) {
+								documentContainer.unplug(A.LoadingMask);
+
 								var responseData = this.get('responseData');
 
 								var content = A.Node.create(responseData);
@@ -301,7 +308,6 @@ if (Validator.isNull(displayStyle)) {
 								displayStyleButtonsContainer.plug(A.Plugin.ParseContent);
 								displayStyleButtonsContainer.setContent(displayStyleButtons);
 
-								var documentContainer = A.one('#<portlet:namespace />documentContainer');
 								var entries = content.one('#<portlet:namespace />entries');
 
 								documentContainer.setContent(entries);
