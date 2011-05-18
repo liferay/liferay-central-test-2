@@ -94,8 +94,7 @@ public class DDLRecordLocalServiceImpl
 		Locale locale = ServiceContextUtil.getLocale(serviceContext);
 
 		updateAsset(
-			userId, record, locale,
-			serviceContext.getAssetCategoryIds(),
+			userId, record, locale, serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames());
 
 		// Workflow
@@ -215,8 +214,8 @@ public class DDLRecordLocalServiceImpl
 			userId, record.getGroupId(), DDLRecord.class.getName(),
 			record.getRecordId(), record.getUuid(), assetCategoryIds,
 			assetTagNames, visible, null, null, null, null,
-			ContentTypes.TEXT_HTML, title, null, StringPool.BLANK,
-			null, null, 0, 0, null, false);
+			ContentTypes.TEXT_HTML, title, null, StringPool.BLANK, null, null,
+			0, 0, null, false);
 	}
 
 	public DDLRecord updateRecord(
