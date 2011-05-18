@@ -16,11 +16,15 @@ package com.liferay.portlet.dynamicdatalists.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.service.base.DDLRecordLocalServiceBaseImpl;
@@ -33,6 +37,7 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -83,6 +88,15 @@ public class DDLRecordLocalServiceImpl
 		record.setStatusDate(serviceContext.getModifiedDate(now));
 
 		ddlRecordPersistence.update(record, false);
+
+		// Asset
+
+		Locale locale = ServiceContextUtil.getLocale(serviceContext);
+
+		updateAsset(
+			userId, record, locale,
+			serviceContext.getAssetCategoryIds(),
+			serviceContext.getAssetTagNames());
 
 		// Workflow
 
@@ -179,6 +193,30 @@ public class DDLRecordLocalServiceImpl
 		else {
 			return ddlRecordPersistence.countByR_S(recordSetId, status);
 		}
+	}
+
+	public void updateAsset(
+			long userId, DDLRecord record, Locale locale,
+			long[] assetCategoryIds, String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		boolean visible = false;
+
+		if (record.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			visible = true;
+		}
+
+		DDLRecordSet recordSet = record.getRecordSet();
+
+		String title = LanguageUtil.format(
+			locale, "new-record-for-list-x", recordSet.getName(locale));
+
+		assetEntryLocalService.updateEntry(
+			userId, record.getGroupId(), DDLRecord.class.getName(),
+			record.getRecordId(), record.getUuid(), assetCategoryIds,
+			assetTagNames, visible, null, null, null, null,
+			ContentTypes.TEXT_HTML, title, null, StringPool.BLANK,
+			null, null, 0, 0, null, false);
 	}
 
 	public DDLRecord updateRecord(
