@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.ResourceConstants;
@@ -344,13 +344,14 @@ public class JournalFeedLocalServiceImpl
 				XPath xpathSelector = SAXReaderUtil.createXPath(
 					"//dynamic-element[@name='"+ contentField + "']");
 
-				Element el = (Element)xpathSelector.selectSingleNode(doc);
+				Node node = xpathSelector.selectSingleNode(doc);
 
-				if (el != null) {
+				if (node != null) {
 					return true;
 				}
 			}
 			catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
