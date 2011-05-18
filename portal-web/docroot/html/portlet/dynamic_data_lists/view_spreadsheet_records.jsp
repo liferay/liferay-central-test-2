@@ -61,7 +61,13 @@ DDMStructure ddmStructure = recordSet.getDDMStructure();
 	);
 
 	<%
-	List<DDLRecord> records = DDLRecordLocalServiceUtil.getRecords(recordSet.getRecordSetId(), 0, 1000, null);
+	int status = WorkflowConstants.STATUS_APPROVED;
+
+	if (DDLRecordSetPermission.contains(permissionChecker, recordSet, ActionKeys.ADD_RECORD)) {
+		status = WorkflowConstants.STATUS_ANY;
+	}
+
+	List<DDLRecord> records = DDLRecordLocalServiceUtil.getRecords(recordSet.getRecordSetId(), status, 0, 1000, null);
 
 	int totalEmptyRecords = Math.max(recordSet.getMinDisplayRows(), records.size()) - records.size();
 	%>
