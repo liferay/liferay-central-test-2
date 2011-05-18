@@ -377,11 +377,23 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		try {
 			SearchContext searchContext = new SearchContext();
 
+			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
+
+			assetEntriesFacet.setStatic(true);
+
+			searchContext.addFacet(assetEntriesFacet);
+
+			Facet scopeFacet = new ScopeFacet(searchContext);
+
+			scopeFacet.setStatic(true);
+
+			searchContext.addFacet(scopeFacet);
+
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
+			searchContext.setEntryClassNames(getClassNames(className));
 			searchContext.setGroupIds(groupIds);
 			searchContext.setKeywords(keywords);
-			searchContext.setEntryClassNames(getClassNames(className));
 
 			QueryConfig queryConfig = new QueryConfig();
 
@@ -392,14 +404,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
-
-			Facet facet = new ScopeFacet(searchContext);
-			facet.setStatic(true);
-			searchContext.addFacet(facet);
-
-			facet = new AssetEntriesFacet(searchContext);
-			facet.setStatic(true);
-			searchContext.addFacet(facet);
 
 			Indexer indexer = FacetedSearcher.getInstance();
 
@@ -427,6 +431,18 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			SearchContext searchContext = new SearchContext();
 
+			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
+			
+			assetEntriesFacet.setStatic(true);
+			
+			searchContext.addFacet(assetEntriesFacet);
+
+			Facet scopeFacet = new ScopeFacet(searchContext);
+			
+			scopeFacet.setStatic(true);
+
+			searchContext.addFacet(scopeFacet);
+
 			searchContext.setAndSearch(andSearch);
 			searchContext.setAssetCategoryIds(
 				StringUtil.split(assetCategoryIds, 0L));
@@ -434,8 +450,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setAttributes(attributes);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
-			searchContext.setGroupIds(groupIds);
 			searchContext.setEntryClassNames(getClassNames(className));
+			searchContext.setGroupIds(groupIds);
 
 			QueryConfig queryConfig = new QueryConfig();
 
@@ -446,14 +462,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
-
-			Facet facet = new ScopeFacet(searchContext);
-			facet.setStatic(true);
-			searchContext.addFacet(facet);
-
-			facet = new AssetEntriesFacet(searchContext);
-			facet.setStatic(true);
-			searchContext.addFacet(facet);
 
 			Indexer indexer = FacetedSearcher.getInstance();
 
@@ -763,6 +771,26 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		validator.validate(groupId, className, categoryIds, tagNames);
 	}
 
+	protected String[] getClassNames(String className) {
+		if (Validator.isNotNull(className)) {
+			return new String[] {className};
+		}
+		else {
+			List<AssetRendererFactory> rendererFactories =
+				AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
+
+			String[] classNames = new String[rendererFactories.size()];
+
+			for (int i = 0; i < rendererFactories.size(); i++) {
+				AssetRendererFactory rendererFactory = rendererFactories.get(i);
+
+				classNames[i] = rendererFactory.getClassName();
+			}
+
+			return classNames;
+		}
+	}
+
 	protected AssetEntry getEntry(Document document)
 		throws PortalException, SystemException {
 
@@ -913,26 +941,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 
 		return entryDisplays;
-	}
-
-	private String[] getClassNames(String className) {
-		if (Validator.isNotNull(className)) {
-			return new String[] {className};
-		}
-		else {
-			List<AssetRendererFactory> rendererFactories =
-				AssetRendererFactoryRegistryUtil.getAssetRendererFactories();
-
-			String[] classNames = new String[rendererFactories.size()];
-
-			for (int i = 0; i < rendererFactories.size(); i++) {
-				AssetRendererFactory rendererFactory = rendererFactories.get(i);
-
-				classNames[i] = rendererFactory.getClassName();
-			}
-
-			return classNames;
-		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
