@@ -126,10 +126,12 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 	public void resetBuffer() {
 		if (_calledGetOutputStream) {
 			_calledGetOutputStream = false;
+
 			_unsyncByteArrayOutputStream.reset();
 		}
 		else if (_calledGetWriter) {
 			_calledGetWriter = false;
+
 			_unsyncStringWriter.reset();
 		}
 	}
