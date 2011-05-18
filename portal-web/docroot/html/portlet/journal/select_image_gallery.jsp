@@ -146,7 +146,7 @@ if (folder != null) {
 
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("opener.");
+		sb.append("parent.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectImageGallery('");
 		sb.append(themeDisplay.getPathImage());
@@ -156,7 +156,7 @@ if (folder != null) {
 		sb.append(image.getGroupId());
 		sb.append("&t=");
 		sb.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
-		sb.append("'); window.close();");
+		sb.append("'); Liferay.Util.getWindow().close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 

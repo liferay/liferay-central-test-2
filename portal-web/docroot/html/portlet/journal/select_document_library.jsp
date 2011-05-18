@@ -171,7 +171,7 @@ if (folder != null) {
 
 		sb.setIndex(0);
 
-		sb.append("opener.");
+		sb.append("parent.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectDocumentLibrary('");
 		sb.append(themeDisplay.getPathContext());
@@ -181,7 +181,7 @@ if (folder != null) {
 		sb.append(fileEntry.getFolderId());
 		sb.append(StringPool.SLASH);
 		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())));
-		sb.append("'); window.close();");
+		sb.append("'); Liferay.Util.getWindow().close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 
