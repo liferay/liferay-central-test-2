@@ -25,8 +25,6 @@ public interface PermissionChecker {
 
 	public static final long[] DEFAULT_ROLE_IDS = new long[] {0};
 
-	public boolean getCheckGuest();
-
 	public long getCompanyId();
 
 	public long getOwnerRoleId();
@@ -54,6 +52,8 @@ public interface PermissionChecker {
 		boolean checkAdmin);
 
 	public void init(User user, boolean checkGuest);
+
+	public boolean isCheckGuest();
 
 	/**
 	 * @deprecated As of 6.1, renamed to {@link #isGroupAdmin(long)}

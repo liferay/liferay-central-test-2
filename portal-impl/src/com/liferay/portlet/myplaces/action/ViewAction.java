@@ -163,14 +163,12 @@ public class ViewAction extends PortletAction {
 			String privateLayoutParam)
 		throws Exception {
 
-		String redirect = null;
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
 
-		if (layouts.size() > 0) {
-			PermissionChecker permissionChecker =
-				themeDisplay.getPermissionChecker();
+		boolean checkGuest = permissionChecker.isCheckGuest();
 
-			boolean currentLayoutCheckGuest = permissionChecker.getCheckGuest();
-
+		try {
 			for (Layout layout : layouts) {
 				if (layout.isPrivateLayout()) {
 					permissionChecker.setCheckGuest(false);
@@ -183,23 +181,18 @@ public class ViewAction extends PortletAction {
 					LayoutPermissionUtil.contains(
 						permissionChecker, layout, ActionKeys.VIEW)) {
 
-					redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
-
-					break;
+					return PortalUtil.getLayoutURL(layout, themeDisplay);
 				}
 			}
-
-			permissionChecker.setCheckGuest(currentLayoutCheckGuest);
+		}
+		finally {
+			permissionChecker.setCheckGuest(checkGuest);
 		}
 
-		if (Validator.isNull(redirect)) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			redirect = PortalUtil.getGroupFriendlyURL(
-				group, GetterUtil.getBoolean(privateLayoutParam), themeDisplay);
-		}
-
-		return redirect;
+		return PortalUtil.getGroupFriendlyURL(
+			group, GetterUtil.getBoolean(privateLayoutParam), themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
