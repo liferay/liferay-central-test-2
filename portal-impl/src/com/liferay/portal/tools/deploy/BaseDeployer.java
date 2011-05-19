@@ -282,6 +282,8 @@ public class BaseDeployer implements Deployer {
 		for (int i = 0; i < portalJars.length; i++) {
 			String portalJar = portalJars[i].trim();
 
+			portalJar = fixPortalDependencyJar(portalJar);
+
 			if (_log.isDebugEnabled()) {
 				_log.debug("Copy portal JAR " + portalJar);
 			}
@@ -861,6 +863,14 @@ public class BaseDeployer implements Deployer {
 		}
 
 		return FileUtil.getAbsolutePath(file);
+	}
+
+	public String fixPortalDependencyJar(String portalJar) {
+		if (portalJar.equals("antlr.jar")) {
+			portalJar = "antlr2.jar";
+		}
+
+		return portalJar;
 	}
 
 	public String getDisplayName(File srcFile) {

@@ -900,9 +900,31 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/antlr.jar</file-name>
-		<version>2.7.6</version>
-		<project-name>ANother Tool for Language Recognition )ANTLR) Parser Generator</project-name>
+		<file-name>portal/antlr2.jar</file-name>
+		<version>2.7.7</version>
+		<project-name>ANTLR</project-name>
+		<project-url>http://www.antlr.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/antlr3.jar</file-name>
+		<version>3.3</version>
+		<project-name>ANTLR</project-name>
+		<project-url>http://www.antlr.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/antlr3-runtime.jar</file-name>
+		<version>3.3</version>
+		<project-name>ANTLR</project-name>
 		<project-url>http://www.antlr.org</project-url>
 		<licenses>
 			<license>
@@ -2923,6 +2945,17 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/stringtemplate.jar</file-name>
+		<version>4.0.2</version>
+		<project-name>StringTemplate</project-name>
+		<project-url>http://www.stringtemplate.org</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>

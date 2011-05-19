@@ -87,7 +87,9 @@
 	<classpathentry kind="lib" path="lib/portal/abdera.jar"/>
 	<classpathentry kind="lib" path="lib/portal/alloy-taglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ant.jar"/>
-	<classpathentry kind="lib" path="lib/portal/antlr.jar"/>
+	<classpathentry kind="lib" path="lib/portal/antlr2.jar"/>
+	<classpathentry kind="lib" path="lib/portal/antlr3.jar"/>
+	<classpathentry kind="lib" path="lib/portal/antlr3-runtime.jar"/>
 	<classpathentry kind="lib" path="lib/portal/aopalliance.jar"/>
 	<classpathentry kind="lib" path="lib/portal/asm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/asm-analysis.jar"/>
@@ -263,6 +265,7 @@
 	<classpathentry kind="lib" path="lib/portal/stax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/stax-ex.jar"/>
 	<classpathentry kind="lib" path="lib/portal/streambuffer.jar"/>
+	<classpathentry kind="lib" path="lib/portal/stringtemplate.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
 	<classpathentry kind="lib" path="lib/portal/tagsoup.jar"/>
