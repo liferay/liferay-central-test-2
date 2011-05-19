@@ -1660,7 +1660,7 @@ public class ServicePreAction extends Action {
 					LayoutPermissionUtil.contains(
 						permissionChecker, layout, ActionKeys.UPDATE);
 
-				if (hasUpdateLayoutPermission && !personalizedView) {
+				if (hasUpdateLayoutPermission) {
 					themeDisplay.setShowAddContentIconPermission(true);
 
 					if (!LiferayWindowState.isMaximized(request)) {
@@ -1668,6 +1668,8 @@ public class ServicePreAction extends Action {
 					}
 
 					themeDisplay.setShowLayoutTemplatesIcon(true);
+
+					themeDisplay.setShowPagePersonalizationIcon(true);
 
 					themeDisplay.setURLAddContent(
 						"Liferay.LayoutConfiguration.toggle('".concat(

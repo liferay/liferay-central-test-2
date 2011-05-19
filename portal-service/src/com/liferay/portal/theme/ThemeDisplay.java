@@ -590,6 +590,10 @@ public class ThemeDisplay implements Serializable {
 		return _showMyAccountIcon;
 	}
 
+	public boolean isShowPagePersonalizationIcon() {
+		return _showPagePersonalizationIcon;
+	}
+
 	public boolean isShowPageSettingsIcon() {
 		return _showPageSettingsIcon;
 	}
@@ -1027,6 +1031,12 @@ public class ThemeDisplay implements Serializable {
 		_showMyAccountIcon = showMyAccountIcon;
 	}
 
+	public void setShowPagePersonalizationIcon(
+		boolean showPagePersonalizationIcon) {
+
+		_showPagePersonalizationIcon = showPagePersonalizationIcon;
+	}
+
 	public void setShowPageSettingsIcon(boolean showPageSettingsIcon) {
 		_showPageSettingsIcon = showPageSettingsIcon;
 	}
@@ -1272,6 +1282,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showHomeIcon;
 	private boolean _showLayoutTemplatesIcon;
 	private boolean _showMyAccountIcon;
+	private boolean _showPagePersonalizationIcon;
 	private boolean _showPageSettingsIcon;
 	private boolean _showPortalIcon;
 	private boolean _showSignInIcon;
