@@ -527,6 +527,7 @@ Liferay.Service.registerClass(
 	{
 		addTag: true,
 		deleteTag: true,
+		deleteTags: true,
 		getGroupsTags: true,
 		getGroupTags: true,
 		getTag: true,
