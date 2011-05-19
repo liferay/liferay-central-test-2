@@ -193,6 +193,9 @@ public class UpdateLayoutAction extends JSONAction {
 
 			updateLayout = false;
 		}
+		else if (cmd.equals("toggle_personalized_view")) {
+			updateLayout = false;
+		}
 		else if (cmd.equals("update_type_settings")) {
 			UnicodeProperties layoutTypeSettingsProperties =
 				layout.getTypeSettingsProperties();
@@ -202,9 +205,6 @@ public class UpdateLayoutAction extends JSONAction {
 					request, "TypeSettingsProperties--");
 
 			layoutTypeSettingsProperties.putAll(formTypeSettingsProperties);
-		}
-		else if (cmd.equals("toggle_personalized_view")) {
-			updateLayout = false;
 		}
 
 		if (updateLayout) {
