@@ -755,7 +755,7 @@ public class StringUtil {
 			return null;
 		}
 
-		if (Validator.isNull(oldSub)) {
+		if ((oldSub == null) || (oldSub.equals(StringPool.BLANK))) {
 			return s;
 		}
 

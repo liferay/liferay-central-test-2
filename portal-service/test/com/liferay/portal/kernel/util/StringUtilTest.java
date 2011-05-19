@@ -118,6 +118,15 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testReplaceSpaceString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "HelloWorldHELLOWORLDHelloWorld";
+
+		String actual = StringUtil.replace(original, " ", StringPool.BLANK);
+
+		assertEquals(expected, actual);
+	}
+
 	public void testReplaceStringArray() throws Exception {
 		String original = "Hello World HELLO WORLD Hello World";
 		String expected = "Aloha World ALOHA WORLD Aloha World";
