@@ -397,7 +397,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			}
 			%>
 
-			<liferay-ui:icon cssClass='<%= layoutTypePortlet.isPersonalizedView() ? StringPool.BLANK : "false" %>' id="togglePersonalizedView" image='<%= taglibImage %>' label="<%= true %>" message='<%= taglibMessage %>' url="javascript:;" />
+			<liferay-ui:icon cssClass='<%= layoutTypePortlet.isPersonalizedView() ? StringPool.BLANK : "false" %>' id="togglePersonalizedView" image='<%= taglibImage %>' label="<%= true %>" message="<%= taglibMessage %>" url="javascript:;" />
 
 			<liferay-portlet:actionURL portletName="<%= PortletKeys.LAYOUTS_ADMIN %>" var="resetPersonalizationViewURL">
 				<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
