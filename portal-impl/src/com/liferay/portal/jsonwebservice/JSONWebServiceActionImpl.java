@@ -36,12 +36,6 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
 	}
 
-	public Class<?> getReturnType() {
-		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
-
-		return actionMethod.getReturnType();
-	}
-
 	public Object invoke(HttpServletRequest request) throws Exception {
 		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
 

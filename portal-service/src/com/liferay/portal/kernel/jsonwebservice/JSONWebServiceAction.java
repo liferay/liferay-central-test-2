@@ -21,8 +21,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface JSONWebServiceAction {
 
-	public Class<?> getReturnType();
-
 	public Object invoke(HttpServletRequest request) throws Exception;
 
 }

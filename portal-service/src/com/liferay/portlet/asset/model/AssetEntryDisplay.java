@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.json.JSON;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -22,6 +24,7 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
+
 public class AssetEntryDisplay implements Serializable {
 
 	public long getEntryId() {
@@ -216,6 +219,7 @@ public class AssetEntryDisplay implements Serializable {
 		_viewCount = viewCount;
 	}
 
+	@JSON
 	public long[] getCategoryIds() {
 		return _categoryIds;
 	}
