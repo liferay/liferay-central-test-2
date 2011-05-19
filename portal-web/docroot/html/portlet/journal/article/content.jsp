@@ -815,6 +815,11 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 		String elIndexType = xsdElement.attributeValue("index-type", StringPool.BLANK);
 		String repeatable = xsdElement.attributeValue("repeatable");
 		boolean elRepeatable = GetterUtil.getBoolean(repeatable);
+
+		if (Validator.isNotNull(toLanguageId)) {
+			elRepeatable = false;
+		}
+
 		String elParentStructureId = xsdElement.attributeValue("parent-structure-id");
 
 		Map<String, String> elMetaData = _getMetaData(xsdElement, elName);
