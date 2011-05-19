@@ -20,11 +20,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
-import java.util.List;
-
 /**
  * @author Shuyang Zhou
- * @author Michael Chen
  */
 public class ContentUtil {
 
@@ -78,20 +75,6 @@ public class ContentUtil {
 		return getPersistence().findByPrimaryKey(contentId);
 	}
 
-	public static List<String> findNamesByC_R_P(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		return getPersistence().findNamesByC_R_P(companyId, repositoryId, path);
-	}
-
-	public long findSizeByC_R_P(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		return getPersistence().findSizeByC_R_P(companyId, repositoryId, path);
-	}
-
 	public static ContentPersistence getPersistence() {
 		if (_persistence == null) {
 			_persistence = (ContentPersistence)PortalBeanLocatorUtil.locate(
@@ -109,14 +92,6 @@ public class ContentUtil {
 		getPersistence().remove(contentId);
 	}
 
-	public static boolean removeByC_P_R_P(
-			long companyId, String portletId, long repositoryId, String path)
-		throws SystemException {
-
-		return getPersistence().removeByC_P_R_P(
-			companyId, portletId, repositoryId, path);
-	}
-
 	public static boolean removeByC_R_P_V(
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException {
@@ -125,32 +100,8 @@ public class ContentUtil {
 			companyId, repositoryId, path, version);
 	}
 
-	public static boolean removeByC_R_P(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		return getPersistence().removeByC_R_P(companyId, repositoryId, path);
-	}
-
 	public static void update(Content content) throws SystemException {
 		getPersistence().update(content);
-	}
-
-	public static void updateByC_R_P_P(
-			long companyId, long repositoryId, String path, String newPath)
-		throws SystemException {
-
-		getPersistence().update(
-			companyId, repositoryId, path, newPath);
-	}
-
-	public void updateByC_R_P_R(
-			long companyId, long repositoryId, String path,
-			long newRepositoryId)
-		throws SystemException {
-
-		getPersistence().update(
-			companyId, repositoryId, path, newRepositoryId);
 	}
 
 	public void setPersistence(ContentPersistence persistence) {

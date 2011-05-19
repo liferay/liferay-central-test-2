@@ -122,9 +122,6 @@ create unique index IX_EC00543C on Company (webId);
 
 create index IX_66D496A3 on Contact_ (companyId);
 
-create index IX_BE853B15 on Content (companyId, portletId, repositoryId, path_);
-create unique index IX_C2FBD420 on Content (companyId, repositoryId, path_, version);
-
 create unique index IX_717B97E1 on Country (a2);
 create unique index IX_717B9BA2 on Country (a3);
 create index IX_25D734CD on Country (active_);

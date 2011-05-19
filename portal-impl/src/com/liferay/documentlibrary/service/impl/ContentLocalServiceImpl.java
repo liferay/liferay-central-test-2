@@ -19,6 +19,7 @@ import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.documentlibrary.service.ContentLocalService;
 import com.liferay.documentlibrary.service.persistence.ContentPersistence;
+import com.liferay.documentlibrary.util.Hook;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -26,17 +27,14 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 
 import java.io.InputStream;
 
-import java.util.List;
-
 /**
  * @author Shuyang Zhou
- * @author Michael Chen
  */
 public class ContentLocalServiceImpl implements ContentLocalService {
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, String version, byte[] bytes)
+			String path, byte[] bytes)
 		throws SystemException {
 
 		long contentId = _counterLocalService.increment();
@@ -46,14 +44,14 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 
 		Content content = new Content(
 			contentId, companyId, portletId, groupId, repositoryId, path,
-			version, outputBlob, bytes.length);
+			Hook.DEFAULT_VERSION, outputBlob, bytes.length);
 
 		_contentPersistence.update(content);
 	}
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, String version, InputStream inputStream, long size)
+			String path, InputStream inputStream, long size)
 		throws SystemException {
 
 		long contentId = _counterLocalService.increment();
@@ -62,9 +60,17 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 
 		Content content = new Content(
 			contentId, companyId, portletId, groupId, repositoryId, path,
-			version, outputBlob, size);
+			Hook.DEFAULT_VERSION, outputBlob, size);
 
 		_contentPersistence.update(content);
+	}
+
+	public boolean deleteContent(
+			long companyId, long repositoryId, String path, String version)
+		throws SystemException {
+
+		return _contentPersistence.removeByC_R_P_V(
+			companyId, repositoryId, path, version);
 	}
 
 	public Content getContent(long companyId, long repositoryId, String path)
@@ -81,23 +87,6 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 			companyId, repositoryId, path, version);
 	}
 
-	public String[] getContentNames(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		List<String> list = _contentPersistence.findNamesByC_R_P(
-			companyId, repositoryId, path);
-
-		return list.toArray(new String[list.size()]);
-	}
-
-	public long getContentSize(long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		return _contentPersistence.findSizeByC_R_P(
-			companyId, repositoryId, path);
-	}
-
 	public boolean hasContent(
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException {
@@ -111,46 +100,6 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 		else {
 			return false;
 		}
-	}
-
-	public boolean removeByC_P_R_P(
-			long companyId, String portletId, long repositoryId, String path)
-		throws SystemException {
-
-		return _contentPersistence.removeByC_P_R_P(
-			companyId, portletId, repositoryId, path);
-	}
-
-	public boolean removeByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
-		throws SystemException {
-
-		return _contentPersistence.removeByC_R_P_V(
-			companyId, repositoryId, path, version);
-	}
-
-	public void removeByC_R_P(long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		_contentPersistence.removeByC_R_P(companyId, repositoryId, path);
-	}
-
-	public void updateContent(
-			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String path)
-		throws NoSuchContentException, SystemException {
-
-		_contentPersistence.update(
-			companyId, repositoryId, path, newRepositoryId);
-	}
-
-	public void updateContent(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String path, String newPath)
-		throws NoSuchContentException, SystemException {
-
-		_contentPersistence.update(
-			companyId, repositoryId, path, newPath);
 	}
 
 	@BeanReference(type = ContentPersistence.class)

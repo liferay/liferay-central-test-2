@@ -18,18 +18,14 @@ import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import java.io.ByteArrayInputStream;
 
 import java.sql.Blob;
 
-import java.util.List;
-
 /**
  * @author Shuyang Zhou
- * @author Michael Chen
  */
 public class ContentPersistenceTest extends BasePersistenceTestCase {
 
@@ -201,9 +197,8 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		_persistence.remove(existingContent.getContentId());
 
 		try {
-			_persistence.findByC_R_P_V(
-				content.getCompanyId(), content.getRepositoryId(),
-				content.getPath(), randomString());
+			_persistence.findByC_R_P_V(content.getCompanyId(),
+				content.getRepositoryId(), content.getPath(), randomString());
 
 			fail("Missing entity did not throw NoSuchContentException");
 		}
@@ -232,31 +227,6 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		}
 	}
 
-	public void testFindNamesByC_R_P() throws Exception {
-		Content content = createContent();
-
-		content.setPath(content.getPath().concat(StringPool.SLASH));
-
-		_persistence.update(content);
-
-		List<String> names = _persistence.findNamesByC_R_P(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath());
-
-		assertEquals(1, names.size());
-		assertEquals(content.getPath(), names.get(0));
-	}
-
-	public void testFindSizeByC_R_P() throws Exception {
-		Content content = addContent();
-
-		long size = _persistence.findSizeByC_R_P(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath());
-
-		assertEquals(content.getSize(), size);
-	}
-
 	public void testRemove() throws Exception {
 		Content content = addContent();
 
@@ -267,26 +237,6 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		assertTrue(existingContent.equals(content));
 
 		_persistence.remove(content.getContentId());
-
-		existingContent = _persistence.fetchByPrimaryKey(
-			content.getContentId());
-
-		assertNull(existingContent);
-	}
-
-	public void testRemoveByC_P_R_P() throws Exception {
-		Content content = addContent();
-
-		Content existingContent = _persistence.fetchByPrimaryKey(
-			content.getContentId());
-
-		assertNotNull(existingContent);
-
-		boolean removed = _persistence.removeByC_P_R_P(
-			content.getCompanyId(), content.getPortletId(),
-			content.getRepositoryId(), content.getPath());
-
-		assertTrue(removed);
 
 		existingContent = _persistence.fetchByPrimaryKey(
 			content.getContentId());
@@ -312,64 +262,6 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 			content.getContentId());
 
 		assertNull(existingContent);
-	}
-
-	public void testRemoveByC_R_P() throws Exception {
-		Content content = createContent();
-
-		content.setPath(content.getPath().concat(StringPool.SLASH));
-
-		_persistence.update(content);
-
-		Content existingContent = _persistence.fetchByPrimaryKey(
-			content.getContentId());
-
-		assertNotNull(existingContent);
-
-		boolean removed = _persistence.removeByC_R_P(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath());
-
-		assertTrue(removed);
-
-		existingContent = _persistence.fetchByPrimaryKey(
-			content.getContentId());
-
-		assertNull(existingContent);
-	}
-
-	public void testUpdateByC_R_P_P() throws Exception {
-		Content content = addContent();
-
-		String newPath = randomString();
-
-		_persistence.update(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), newPath);
-
-		Content newContent = _persistence.fetchByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(), newPath,
-			content.getVersion());
-
-		assertFalse(content.getPath().equals(newContent.getPath()));
-		assertFalse(content.equals(newContent));
-	}
-
-	public void testUpdateByC_R_P_R() throws Exception {
-		Content content = addContent();
-
-		long newRepositoryId = nextLong();
-
-		_persistence.update(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), newRepositoryId);
-
-		Content newContent = _persistence.fetchByC_R_P_V(
-			content.getCompanyId(), newRepositoryId, content.getPath(),
-			content.getVersion());
-
-		assertFalse(content.getRepositoryId() == newContent.getRepositoryId());
-		assertFalse(content.equals(newContent));
 	}
 
 	public void testUpdateExisting() throws Exception {

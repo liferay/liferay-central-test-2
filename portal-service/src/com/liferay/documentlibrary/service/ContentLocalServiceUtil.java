@@ -25,26 +25,25 @@ import java.io.InputStream;
 
 /**
  * @author Shuyang Zhou
- * @author Michael Chen
  */
 public class ContentLocalServiceUtil {
 
 	public static void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, String version, byte[] bytes)
+			String path, byte[] bytes)
 		throws SystemException {
 
 		getService().addContent(
-			companyId, portletId, groupId, repositoryId, path, version, bytes);
+			companyId, portletId, groupId, repositoryId, path, bytes);
 	}
 
 	public static void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, String version, InputStream is, long size)
+			String path, InputStream inputStream, long size)
 		throws SystemException {
 
 		getService().addContent(
-			companyId, portletId, groupId, repositoryId, path, version, is,
+			companyId, portletId, groupId, repositoryId, path, inputStream,
 			size);
 	}
 
@@ -60,20 +59,6 @@ public class ContentLocalServiceUtil {
 		throws NoSuchContentException, SystemException {
 
 		return getService().getContent(companyId, repositoryId, path, version);
-	}
-
-	public static String[] getContentNames(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		return getService().getContentNames(companyId, repositoryId, path);
-	}
-
-	public static long getContentSize(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		return getService().getContentSize(companyId, repositoryId, path);
 	}
 
 	public static ContentLocalService getService() {
@@ -97,49 +82,16 @@ public class ContentLocalServiceUtil {
 		return getService().hasContent(companyId, repositoryId, path, version);
 	}
 
-	public static boolean removeByC_R_P_V(
+	public static boolean removeByC_R_F_V(
 			long companyId, long repositoryId, String path, String version)
 		throws SystemException {
 
-		return getService().removeByC_R_P_V(
+		return getService().deleteContent(
 			companyId, repositoryId, path, version);
-	}
-
-	public static boolean removeByC_P_R_P(
-			long companyId, String portletId, long repositoryId, String path)
-		throws SystemException {
-
-		return getService().removeByC_P_R_P(
-			companyId, portletId, repositoryId, path);
-	}
-
-	public static void removeByC_R_P(
-			long companyId, long repositoryId, String path)
-		throws SystemException {
-
-		getService().removeByC_R_P(companyId, repositoryId, path);
 	}
 
 	public void setService(ContentLocalService service) {
 		_service = service;
-	}
-
-	public static void updateContent(
-			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String path)
-		throws NoSuchContentException, SystemException {
-
-		getService().updateContent(
-			companyId, portletId, groupId, repositoryId, newRepositoryId, path);
-	}
-
-	public static void updateContent(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String path, String newPath)
-		throws NoSuchContentException, SystemException {
-
-		getService().updateContent(
-			companyId, portletId, groupId, repositoryId, path, newPath);
 	}
 
 	private static ContentLocalService _service;
