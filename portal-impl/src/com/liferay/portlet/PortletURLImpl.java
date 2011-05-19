@@ -416,6 +416,12 @@ public class PortletURLImpl
 		clearCache();
 	}
 
+	public void setControlPanelCategory(String controlPanelCategory) {
+		_controlPanelCategory = controlPanelCategory;
+
+		clearCache();
+	}
+
 	public void setCopyCurrentRenderParameters(
 		boolean copyCurrentRenderParameters) {
 
@@ -917,6 +923,19 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
+		String controlPanelCategory = _controlPanelCategory;
+
+		if (Validator.isNull(controlPanelCategory)) {
+			controlPanelCategory = themeDisplay.getControlPanelCategory();
+		}
+
+		if (Validator.isNotNull(controlPanelCategory)) {
+			sb.append("controlPanelCategory");
+			sb.append(StringPool.EQUAL);
+			sb.append(processValue(key, controlPanelCategory));
+			sb.append(StringPool.AMPERSAND);
+		}
+
 		Iterator<Map.Entry<String, String[]>> itr =
 			_removePublicRenderParameters.entrySet().iterator();
 
@@ -1325,6 +1344,7 @@ public class PortletURLImpl
 
 	private boolean _anchor = true;
 	private String _cacheability = ResourceURL.PAGE;
+	private String _controlPanelCategory;
 	private boolean _copyCurrentRenderParameters;
 	private long _doAsGroupId;
 	private long _doAsUserId;

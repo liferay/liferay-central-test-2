@@ -12,7 +12,9 @@
 
 <body class="$css_class">
 
-#dockbar()
+#if ($control_panel_category == "")
+	#dockbar()
+#end
 
 <div id="wrapper">
 	<a href="#main-content" id="skip-to-content">#language("skip-to-content")</a>
@@ -34,7 +36,12 @@
 	</header>
 
 	<div id="content">
-		<nav class="site-breadcrumbs" id="breadcrumbs">
+		#if ($control_panel_category == "")
+			<nav class="site-breadcrumbs" id="breadcrumbs">
+		#else
+			<nav class="site-breadcrumbs control-panel-category" id="breadcrumbs">
+		#end
+
 			<h1>
 				<span>#language("breadcrumbs")</span>
 			</h1>

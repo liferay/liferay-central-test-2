@@ -369,6 +369,10 @@ html > .lfr-dockbar-pinned {
 	background-image: url(../images/dock/page_settings.png);
 }
 
+.manage-content-menu .manage-site-content a {
+	background-image: url(../images/common/site_icon.png);
+}
+
 .manage-content-menu .page-layout a {
 	background-image: url(../images/dock/layout.png);
 }

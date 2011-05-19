@@ -620,6 +620,11 @@ public class PortalImpl implements Portal {
 				url = HttpUtil.addParameter(
 					url, "refererPlid", themeDisplay.getRefererPlid());
 			}
+
+			if (Validator.isNotNull(themeDisplay.getControlPanelCategory())) {
+				url = HttpUtil.addParameter(
+					url, "controlPanelCategory", themeDisplay.getControlPanelCategory());
+			}
 		}
 
 		return url;

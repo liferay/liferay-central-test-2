@@ -175,7 +175,7 @@ public interface Portal {
 
 	/**
 	 * Adds the preserved parameters doAsUserId, doAsUserLanguageId,
-	 * doAsGroupId, and refererPlid to the URL.
+	 * doAsGroupId, refererPlid and controlPanelCategory to the URL.
 	 *
 	 * @param  themeDisplay the current theme display
 	 * @param  url the URL to add the preserved parameters to

@@ -1056,6 +1056,8 @@ public class ServicePreAction extends Action {
 			request, "doAsUserLanguageId");
 		long doAsGroupId = ParamUtil.getLong(request, "doAsGroupId");
 		long refererPlid = ParamUtil.getLong(request, "refererPlid");
+		String controlPanelCategory = ParamUtil.getString(
+			request, "controlPanelCategory");
 
 		// Permission checker
 
@@ -1519,6 +1521,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setDoAsUserLanguageId(doAsUserLanguageId);
 		themeDisplay.setDoAsGroupId(doAsGroupId);
 		themeDisplay.setRefererPlid(refererPlid);
+		themeDisplay.setControlPanelCategory(controlPanelCategory);
 		themeDisplay.setLayoutSet(layoutSet);
 		themeDisplay.setLayoutSetLogo(layoutSetLogo);
 		themeDisplay.setLayout(layout);
@@ -1615,6 +1618,13 @@ public class ServicePreAction extends Action {
 		}
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
+
+		String urlManageContent = urlControlPanel;
+
+		urlManageContent = HttpUtil.addParameter(
+			urlManageContent, "controlPanelCategory", "content");
+
+		themeDisplay.setURLManageContent(urlManageContent);
 
 		PortletURL createAccountURL = new PortletURLImpl(
 			request, PortletKeys.LOGIN, plid, PortletRequest.ACTION_PHASE);

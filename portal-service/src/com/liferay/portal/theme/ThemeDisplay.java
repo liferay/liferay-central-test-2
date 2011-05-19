@@ -106,6 +106,10 @@ public class ThemeDisplay implements Serializable {
 		return _contact;
 	}
 
+	public String getControlPanelCategory() {
+		return _controlPanelCategory;
+	}
+
 	public User getDefaultUser() throws PortalException, SystemException {
 		if (_defaultUser == null) {
 			_defaultUser = _company.getDefaultUser();
@@ -443,6 +447,10 @@ public class ThemeDisplay implements Serializable {
 		return _urlLayoutTemplates;
 	}
 
+	public String getURLManageContent() {
+			return _urlManageContent;
+		}
+
 	public PortletURL getURLMyAccount() {
 		return _urlMyAccount;
 	}
@@ -689,6 +697,10 @@ public class ThemeDisplay implements Serializable {
 
 	public void setContact(Contact contact) {
 		_contact = contact;
+	}
+
+	public void setControlPanelCategory(String controlPanelCategory) {
+		_controlPanelCategory = controlPanelCategory;
 	}
 
 	public void setDevice(Device device) {
@@ -1119,6 +1131,10 @@ public class ThemeDisplay implements Serializable {
 		_urlLayoutTemplates = urlLayoutTemplates;
 	}
 
+	public void setURLManageContent(String urlManageContent) {
+		_urlManageContent = urlManageContent;
+	}
+
 	public void setURLMyAccount(PortletURL urlMyAccount) {
 		_urlMyAccount = urlMyAccount;
 	}
@@ -1189,6 +1205,7 @@ public class ThemeDisplay implements Serializable {
 	private int _companyLogoHeight;
 	private int _companyLogoWidth;
 	private Contact _contact;
+	private String _controlPanelCategory;
 	private User _defaultUser;
 	private Device _device;
 	private long _doAsGroupId = 0;
@@ -1282,6 +1299,7 @@ public class ThemeDisplay implements Serializable {
 	private String _urlCurrent = StringPool.BLANK;
 	private String _urlHome = StringPool.BLANK;
 	private String _urlLayoutTemplates = StringPool.BLANK;
+	private String _urlManageContent = StringPool.BLANK;
 	private transient PortletURL _urlMyAccount = null;
 	private transient PortletURL _urlPageSettings = null;
 	private String _urlPortal = StringPool.BLANK;

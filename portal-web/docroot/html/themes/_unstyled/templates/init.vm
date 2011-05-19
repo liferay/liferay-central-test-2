@@ -83,6 +83,8 @@
 
 ## ---------- URLs ---------- ##
 
+#set ($control_panel_category = $htmlUtil.escape($theme_display.getControlPanelCategory().toString()))
+
 #set ($show_add_content = $theme_display.isShowAddContentIcon())
 
 #if ($show_add_content)

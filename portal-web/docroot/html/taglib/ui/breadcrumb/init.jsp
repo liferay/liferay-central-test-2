@@ -69,10 +69,19 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 		layoutURL = PortalUtil.getURLWithSessionId(layoutURL, themeDisplay.getSessionId());
 	}
 
+	if (selLayout.isTypeControlPanel()) {
+		layoutURL = HttpUtil.removeParameter(layoutURL, "controlPanelCategory");
+	}
+
 	breadcrumbSB.append("<li><span><a href=\"");
 	breadcrumbSB.append(layoutURL);
 	breadcrumbSB.append("\" ");
 	breadcrumbSB.append(target);
+
+	if (selLayout.isTypeControlPanel()) {
+		breadcrumbSB.append(" target=\"_top\"");
+	}
+
 	breadcrumbSB.append(">");
 
 	breadcrumbSB.append(HtmlUtil.escape(selLayout.getName(themeDisplay.getLocale())));
