@@ -814,6 +814,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 		String elType = xsdElement.attributeValue("type", StringPool.BLANK);
 		String elIndexType = xsdElement.attributeValue("index-type", StringPool.BLANK);
 		String repeatable = xsdElement.attributeValue("repeatable");
+
 		boolean elRepeatable = GetterUtil.getBoolean(repeatable);
 
 		if (Validator.isNotNull(toLanguageId)) {
