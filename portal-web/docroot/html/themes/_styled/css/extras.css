@@ -55,8 +55,14 @@
 	border-top-right-radius: 0;
 }
 
-.portlet-journal .journal-article-default-translation, .portlet-journal .journal-article-translation {
+.portlet-journal .journal-article-default-translation, .portlet-journal .journal-article-translation, .layout-personalizable-controls {
 	-moz-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	border-radius: 8px;
+}
+
+.layout-column-content, .layout-column-personalizable-content {
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+	border-radius: 16px;
 }

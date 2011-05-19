@@ -415,11 +415,15 @@
 	border-bottom-width: 0;
 }
 
-.yui3-aui-menu-content li a, .lfr-menu-list ul li .taglib-icon {
+.yui3-aui-menu-content li a, .lfr-menu-list ul li .taglib-icon, .yui3-aui-menu-content li .disabled {
 	color: #2C2F34;
 	display: block;
 	padding: 4px 5px;
 	text-decoration: none;
+}
+
+.yui3-aui-menu-content li .disabled {
+	color: #999;
 }
 
 .yui3-aui-menu-content li a.yui3-aui-focus, .lfr-menu-list ul .taglib-icon.yui3-aui-focus, .lfr-menu-expanded li a:focus {
@@ -428,7 +432,7 @@
 	text-shadow: -1px -1px #2C2F34;
 }
 
-.yui3-aui-menu-content a, .lfr-menu-list li .taglib-icon, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+.yui3-aui-menu-content a, .lfr-menu-list li .taglib-icon, .yui3-aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 	font-weight: bold;
 	text-shadow: 1px 1px #FFF;
 }

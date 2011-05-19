@@ -301,27 +301,6 @@ html > .lfr-dockbar-pinned {
 	background-image: url(../images/dockbar/places.png);
 }
 
-.dockbar .staging-options .menu-button span {
-	background-image: url(../images/dockbar/staging.png);
-}
-
-.dockbar .toggle-personalized-view .menu-button {
-	background: url(../images/arrows/05_down.png) no-repeat 97% 50%;
-}
-
-.dockbar .toggle-personalized-view .menu-button span {
-	background-image: url(../images/dockbar/checked.png);
-}
-
-.dockbar .toggle-personalized-view.false span {
-	background: url(../images/dockbar/unchecked.png) no-repeat 0 50%;
-	padding-left: 20px;
-}
-
-.dockbar .toggle-personalized-view.update .menu-button span {
-	background-image: url(../images/messages/info.png);
-}
-
 .dockbar-messages-container {
 	left: 50%;
 	margin-left: -150px;
@@ -360,7 +339,7 @@ html > .lfr-dockbar-pinned {
 	cursor: auto;
 }
 
-.manage-content-menu li a {
+.manage-content-menu li a, .manage-content-menu li .disabled {
 	background: url() no-repeat 3px 50%;
 	padding-left: 25px;
 }
@@ -371,6 +350,10 @@ html > .lfr-dockbar-pinned {
 
 .manage-content-menu .manage-site-content a {
 	background-image: url(../images/common/site_icon.png);
+}
+
+.manage-content-menu .manage-page-personalization a, .manage-content-menu .manage-page-personalization .disabled {
+	background-image: url(../images/dock/personalizations.png);
 }
 
 .manage-content-menu .page-layout a {
@@ -389,7 +372,30 @@ html > .lfr-dockbar-pinned {
 	background-image: url(../images/dock/control_panel.png);
 }
 
-.toggle-personalized-view-menu .reset-personalized-view a {
-	background: url(../images/portlet/refresh.png) no-repeat 3px 50%;
-	padding-left: 25px;
+/* ---------- Personalization Bar ---------- */
+
+.page-personalization-bar {
+	background-color: #999;
+	color: #FFF;
+	font-size: 1.2em;
+	min-height: 30px;
+}
+
+.controls-hidden .page-personalization-bar {
+	display: none;
+}
+
+.page-personalization-bar .personalized-icon {
+	margin: 5px;
+	vertical-align: middle;
+}
+
+.page-personalization-bar .page-personalization-actions {
+	padding-left: 5em;
+}
+
+.page-personalization-bar .page-personalization-actions a {
+	color: #EEE;
+	font-size: 0.8em;
+	padding: 0 1em;
 }

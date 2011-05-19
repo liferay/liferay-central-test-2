@@ -55,3 +55,34 @@
 	height: 100px;
 	min-height: 100px;
 }
+
+/* ---------- Page Personalization ---------- */
+
+.controls-visible .portlet-column.personalizable {
+	background-color: #CFFCCF;
+	border: 2px dashed green;
+}
+
+.layout-column-content.yui3-widget-content-expanded, .layout-column-personalizable-content.yui3-widget-content-expanded {
+	border: 5px solid #666;
+	margin: 0.5em;
+	height: 95%;
+}
+
+.layout-column-content {
+	background-color: red;
+}
+
+.layout-column-personalizable-content {
+	background-color: green;
+}
+
+.layout-personalizable-controls {
+	background-color: #FFF;
+	font-size: 1.5em;
+	margin: 1em;
+	opacity: 0.8;
+	padding: 1em;
+	position: absolute;
+	z-index: 15;
+}
