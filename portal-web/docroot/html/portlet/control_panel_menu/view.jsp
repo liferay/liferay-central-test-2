@@ -67,7 +67,7 @@
 				List<Group> manageableSites = null;
 
 				if (Validator.isNotNull(controlPanelCategory)) {
-					long groupId = Long.parseLong(HttpUtil.getParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", false));
+					long groupId = GetterUtil.getLong(HttpUtil.getParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", false));
 
 					Group group = GroupServiceUtil.getGroup(groupId);
 
@@ -224,7 +224,7 @@
 			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
 		%>
 
-			<liferay-util:buffer var="categoryPortletsDisplay">
+			<liferay-util:buffer var="categoryPortletsContent">
 				<c:if test="<%= !scopeLayouts.isEmpty() && curCategory.equals(PortletCategoryKeys.CONTENT) %>">
 					<div class="nobr lfr-title-scope-selector">
 						<liferay-ui:icon-menu align="left" direction="down" icon="" message='<%= LanguageUtil.get(pageContext, "scope") + StringPool.COLON + StringPool.SPACE + curGroupLabel %>'>
@@ -257,12 +257,14 @@
 					<%
 					for (Portlet portlet : portlets) {
 						if (portlet.isActive() && !portlet.isInstanceable()) {
-							if (controlPanelCategory.equals(PortletCategoryKeys.CONTENT) && (portlet.getPortletId().equals(PortletKeys.GROUP_PAGES) || portlet.getPortletId().equals(PortletKeys.SITE_SETTINGS))) {
+							String portletId = portlet.getPortletId();
+
+							if (controlPanelCategory.equals(PortletCategoryKeys.CONTENT) && (portletId.equals(PortletKeys.GROUP_PAGES) || portletId.equals(PortletKeys.SITE_SETTINGS))) {
 								continue;
 							}
 					%>
 
-							<li class="<%= ppid.equals(portlet.getPortletId()) ? "selected-portlet" : "" %>">
+							<li class="<%= ppid.equals(portletId) ? "selected-portlet" : "" %>">
 								<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />">
 									<c:choose>
 										<c:when test="<%= Validator.isNull(portlet.getIcon()) %>">
@@ -286,12 +288,12 @@
 			</liferay-util:buffer>
 
 			<c:choose>
-				<c:when test='<%= Validator.isNotNull(controlPanelCategory) %>'>
-					<div id="controlPanelMenuAddContentPanelContainer" class="lfr-panel-container ">
+				<c:when test="<%= Validator.isNotNull(controlPanelCategory) %>">
+					<div class="lfr-panel-container" id="controlPanelMenuAddContentPanelContainer">
 						<div class="lfr-panel lfr-component panel-page-category lfr-extended" id="panel-manage-content">
 							<div class="lfr-panel-content">
 
-								<%= categoryPortletsDisplay %>
+								<%= categoryPortletsContent %>
 
 							</div>
 						</div>
@@ -301,7 +303,7 @@
 					<c:if test="<%= !portlets.isEmpty() %>">
 						<liferay-ui:panel collapsible="<%= true %>" cssClass="lfr-component panel-page-category" extended="<%= true %>" id='<%= "panel-manage-" + curCategory %>' persistState="<%= true %>" title="<%= title %>">
 
-							<%= categoryPortletsDisplay %>
+							<%= categoryPortletsContent %>
 
 						</liferay-ui:panel>
 					</c:if>

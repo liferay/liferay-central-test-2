@@ -76,10 +76,12 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 	breadcrumbSB.append("<li><span><a href=\"");
 	breadcrumbSB.append(layoutURL);
 	breadcrumbSB.append("\" ");
-	breadcrumbSB.append(target);
 
 	if (selLayout.isTypeControlPanel()) {
 		breadcrumbSB.append(" target=\"_top\"");
+	}
+	else {
+		breadcrumbSB.append(target);
 	}
 
 	breadcrumbSB.append(">");

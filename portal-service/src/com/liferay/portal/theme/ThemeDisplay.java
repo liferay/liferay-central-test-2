@@ -1215,7 +1215,7 @@ public class ThemeDisplay implements Serializable {
 	private int _companyLogoHeight;
 	private int _companyLogoWidth;
 	private Contact _contact;
-	private String _controlPanelCategory;
+	private String _controlPanelCategory = StringPool.BLANK;
 	private User _defaultUser;
 	private Device _device;
 	private long _doAsGroupId = 0;
