@@ -307,4 +307,4 @@
 
 ## ---------- Custom init ---------- ##
 
-#parse("$full_templates_path/init_custom.vm")
+#parse ("$full_templates_path/init_custom.vm")
