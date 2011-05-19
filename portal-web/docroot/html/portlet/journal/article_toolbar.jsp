@@ -32,7 +32,7 @@ if ((article != null) && article.isDraft()) {
 
 <div class="article-toolbar" id="<portlet:namespace />articleToobar"></div>
 
-<aui:script use="aui-toolbar,aui-dialog-iframe">
+<aui:script use="aui-toolbar,aui-dialog-iframe,liferay-util-window">
 	var permissionPopUp = null;
 
 	new A.Toolbar(
@@ -67,22 +67,17 @@ if ((article != null) && article.isDraft()) {
 					{
 					handler: function(event) {
 						if (!permissionPopUp) {
-							permissionPopUp = new A.Dialog(
+							permissionPopUp = Liferay.Util._openWindow(
 								{
-									centered: true,
-									modal: true,
-									title: '<liferay-ui:message key="permissions" />',
-									width: 700
-								}
-							).plug(
-								A.Plugin.DialogIframe,
-								{
-									after: {
-										load: Liferay.Util.afterIframeLoaded
+									dialog: {
+										centered: true,
+										cssClass: 'portlet-asset-categories-admin-dialog permissions-change',
+										width: 700
 									},
+									title: '<liferay-ui:message key="permissions" />',
 									uri: '<%= permissionsURL %>'
 								}
-							).render();
+							);
 						}
 						else {
 							permissionPopUp.iframe.node.get('contentWindow.location').reload(true);

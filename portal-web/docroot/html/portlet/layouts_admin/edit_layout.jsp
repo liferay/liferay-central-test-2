@@ -102,7 +102,7 @@ String[][] categorySections = {mainSections};
 			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 		/>
 
-		<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar">
+		<aui:script use="aui-dialog,aui-dialog-iframe,aui-toolbar,liferay-util-window">
 			var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
 
 			var permissionPopUp = null;
@@ -139,7 +139,7 @@ String[][] categorySections = {mainSections};
 						{
 							handler: function(event) {
 								if (!permissionPopUp) {
-									permissionPopUp = Liferay.Util.openWindow(
+									permissionPopUp = Liferay.Util._openWindow(
 										{
 											dialog: {
 												width: 700

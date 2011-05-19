@@ -277,21 +277,16 @@ AUI().add(
 						var panelPermissionsChange = instance._panelPermissionsChange;
 
 						if (!panelPermissionsChange) {
-							panelPermissionsChange = new A.Dialog(
+							panelPermissionsChange = Liferay.Util._openWindow(
 								{
-									align: instance._dialogAlignConfig,
-									cssClass: CSS_TAG_DIALOG + ' permissions-change',
-									title: Liferay.Language.get('edit-permissions'),
-									width: 600
+									dialog: {
+										align: instance._dialogAlignConfig,
+										cssClass: CSS_TAG_DIALOG + ' permissions-change',
+										width: 600
+									},
+									title: Liferay.Language.get('edit-permissions')
 								}
-							).plug(
-								A.Plugin.DialogIframe,
-								{
-									after: {
-										load: Liferay.Util.afterIframeLoaded
-									}
-								}
-							).render();
+							);
 
 							instance._panelPermissionsChange = panelPermissionsChange;
 						}
@@ -1091,6 +1086,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url']
+		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window']
 	}
 );
