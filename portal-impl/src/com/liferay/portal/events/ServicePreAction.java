@@ -1623,7 +1623,8 @@ public class ServicePreAction extends Action {
 		String urlManageContent = urlControlPanel;
 
 		urlManageContent = HttpUtil.addParameter(
-			urlManageContent, "controlPanelCategory", "content");
+			urlManageContent, "controlPanelCategory",
+			PortletCategoryKeys.CONTENT);
 
 		themeDisplay.setURLManageContent(urlManageContent);
 
