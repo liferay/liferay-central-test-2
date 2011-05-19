@@ -91,6 +91,7 @@ import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletCategoryKeys;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -1871,6 +1872,8 @@ public class ServicePreAction extends Action {
 			else {
 				myAccountURL.setRefererPlid(plid);
 			}
+
+			myAccountURL.setControlPanelCategory(PortletCategoryKeys.MY);
 
 			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
 			myAccountURL.setParameter("backURL", myAccountRedirect);

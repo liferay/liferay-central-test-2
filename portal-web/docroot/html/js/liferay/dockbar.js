@@ -563,22 +563,41 @@ AUI().add(
 
 							manageContent.hide();
 
-							var href = item.attr('href');
-							var title = item.attr('title');
-
-							Util.openWindow(
+							instance._openWindow(
 								{
 									dialog: {
 										align: Util.Window.ALIGN_CENTER,
 										width: 820
-									},
-									id: item.guid(),
-									title: title,
-									uri: href
-								}
+									}
+								},
+								item
 							);
 						},
 						'.use-dialog a'
+					);
+				}
+
+				var myAccount = A.one('#' + namespace + 'userAvatar .user-links');
+
+				if (myAccount){
+					myAccount.delegate(
+						'click',
+						function(event) {
+							event.preventDefault();
+
+							var item = event.currentTarget;
+
+							instance._openWindow(
+								{
+									dialog: {
+										align: Util.Window.ALIGN_CENTER,
+										width: 1000
+									}
+								},
+								item
+							);
+						},
+						'a.use-dialog'
 					);
 				}
 
@@ -591,6 +610,18 @@ AUI().add(
 					},
 					'.yui3-aui-toolbar a'
 				);
+			},
+
+			_openWindow: function(configParams, item) {
+				var defaultParams = {
+					id: item.guid(),
+					title: item.attr('title'),
+					uri: item.attr('href')
+				};
+
+				A.mix(configParams, defaultParams);
+
+				Util.openWindow(configParams);
 			},
 
 			_toggleAppShortcut: function(item, force) {
