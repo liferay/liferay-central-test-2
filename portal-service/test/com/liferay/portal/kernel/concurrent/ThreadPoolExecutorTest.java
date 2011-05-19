@@ -446,8 +446,8 @@ public class ThreadPoolExecutorTest extends TestCase {
 
 		long waitTime = System.nanoTime() - startTime;
 
-		assertTrue(waitTime >= TimeUnit.MILLISECONDS.toNanos(
-			TestUtil.KEEPALIVE_TIME));
+		assertTrue(
+			waitTime >= TimeUnit.MILLISECONDS.toNanos(TestUtil.KEEPALIVE_TIME));
 	}
 
 	public void testAwaitTermination2() throws InterruptedException {
