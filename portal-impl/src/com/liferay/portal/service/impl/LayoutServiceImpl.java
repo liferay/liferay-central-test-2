@@ -402,8 +402,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		SchedulerEngineUtil.unschedule(
-			jobName, groupName, StorageType.PERSISTED);
+		SchedulerEngineUtil.delete(jobName, groupName, StorageType.PERSISTED);
 	}
 
 	public void unschedulePublishToRemote(
@@ -421,8 +420,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.contains(
 			permissionChecker, groupId, ActionKeys.PUBLISH_STAGING);
 
-		SchedulerEngineUtil.unschedule(
-			jobName, groupName, StorageType.PERSISTED);
+		SchedulerEngineUtil.delete(jobName, groupName, StorageType.PERSISTED);
 	}
 
 	public Layout updateLayout(

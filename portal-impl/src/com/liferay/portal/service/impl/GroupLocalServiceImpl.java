@@ -1434,7 +1434,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String groupName = StagingUtil.getSchedulerGroupName(
 				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, group.getGroupId());
 
-			SchedulerEngineUtil.unschedule(groupName, StorageType.PERSISTED);
+			SchedulerEngineUtil.delete(groupName, StorageType.PERSISTED);
 
 			long liveGroupId = 0;
 			long stagingGroupId = 0;
@@ -1457,16 +1457,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
-				SchedulerEngineUtil.unschedule(
-					groupName, StorageType.PERSISTED);
+				SchedulerEngineUtil.delete(groupName, StorageType.PERSISTED);
 
 				// Copy from live
 
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
 
-				SchedulerEngineUtil.unschedule(
-					groupName, StorageType.PERSISTED);
+				SchedulerEngineUtil.delete(groupName, StorageType.PERSISTED);
 			}
 		}
 		catch (Exception e) {
