@@ -30,7 +30,7 @@ public class UpgradeScopes extends BaseUpgradePortletPreferences {
 	}
 
 	protected String getUpdatePortletPreferencesWhereClause() {
-		return "preferences like '%lfr-scope-layout-uuid%'";
+		return "preferences like '%lfrScopeLayoutUuid%'";
 	}
 
 	protected String upgradePreferences(

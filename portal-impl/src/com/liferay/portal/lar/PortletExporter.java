@@ -185,7 +185,7 @@ public class PortletExporter {
 		String scopeType = GetterUtil.getString(
 			jxPreferences.getValue("lfr-scope-type", null));
 		String scopeLayoutUuid = GetterUtil.getString(
-			jxPreferences.getValue("lfr-scope-layout-uuid", null));
+			jxPreferences.getValue("lfrScopeLayoutUuid", null));
 
 		if (Validator.isNotNull(scopeType)) {
 			Group scopeGroup = null;

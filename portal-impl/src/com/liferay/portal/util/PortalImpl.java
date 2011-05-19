@@ -3114,7 +3114,7 @@ public class PortalImpl implements Portal {
 			}
 			else {
 				String scopeLayoutUuid = GetterUtil.getString(
-					portletSetup.getValue("lfr-scope-layout-uuid", null));
+					portletSetup.getValue("lfrScopeLayoutUuid", null));
 
 				Layout scopeLayout =
 					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(

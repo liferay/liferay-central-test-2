@@ -194,7 +194,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		}
 		else if (scopeType.equals("layout")) {
 			String scopeLayoutUuid = GetterUtil.getString(
-				preferences.getValue("lfr-scope-layout-uuid", null));
+				preferences.getValue("lfrScopeLayoutUuid", null));
 
 			try {
 				Layout scopeLayout =
@@ -264,7 +264,7 @@ public class EditScopeAction extends EditConfigurationAction {
 			scopeLayoutUuid = StringPool.BLANK;
 		}
 
-		preferences.setValue("lfr-scope-layout-uuid", scopeLayoutUuid);
+		preferences.setValue("lfrScopeLayoutUuid", scopeLayoutUuid);
 
 		String portletTitle = getPortletTitle(
 			actionRequest, portlet, preferences);

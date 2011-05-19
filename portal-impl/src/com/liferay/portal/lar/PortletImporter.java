@@ -795,7 +795,7 @@ public class PortletImporter {
 				scopeType = GetterUtil.getString(
 					jxPreferences.getValue("lfr-scope-type", null));
 				scopeLayoutUuid = GetterUtil.getString(
-					jxPreferences.getValue("lfr-scope-layout-uuid", null));
+					jxPreferences.getValue("lfrScopeLayoutUuid", null));
 
 				portletDataContext.setScopeType(scopeType);
 				portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
@@ -900,7 +900,7 @@ public class PortletImporter {
 			try {
 				jxPreferences.setValue("lfr-scope-type", scopeType);
 				jxPreferences.setValue(
-					"lfr-scope-layout-uuid", scopeLayoutUuid);
+					"lfrScopeLayoutUuid", scopeLayoutUuid);
 
 				jxPreferences.store();
 			}

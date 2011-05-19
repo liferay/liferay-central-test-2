@@ -348,7 +348,7 @@ public class UpdateLayoutAction extends JSONAction {
 					layout, portletId);
 
 			String scopeLayoutUuid = GetterUtil.getString(
-				preferences.getValue("lfr-scope-layout-uuid", null));
+				preferences.getValue("lfrScopeLayoutUuid", null));
 
 			if (layout.getUuid().equals(scopeLayoutUuid)) {
 				String portletTitle = getPortletTitle(
