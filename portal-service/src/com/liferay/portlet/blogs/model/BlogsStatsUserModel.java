@@ -54,7 +54,7 @@ public interface BlogsStatsUserModel extends BaseModel<BlogsStatsUser> {
 	/**
 	 * Sets the primary key of this blogs stats user
 	 *
-	 * @param pk the primary key of this blogs stats user
+	 * @param primaryKey the primary key of this blogs stats user
 	 */
 	public void setPrimaryKey(long primaryKey);
 

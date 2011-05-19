@@ -56,7 +56,7 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>, GroupedModel {
 	/**
 	 * Sets the primary key of this blogs entry
 	 *
-	 * @param pk the primary key of this blogs entry
+	 * @param primaryKey the primary key of this blogs entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 

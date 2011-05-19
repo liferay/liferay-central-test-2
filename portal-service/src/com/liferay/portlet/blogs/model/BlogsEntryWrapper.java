@@ -48,7 +48,7 @@ public class BlogsEntryWrapper implements BlogsEntry {
 	/**
 	* Sets the primary key of this blogs entry
 	*
-	* @param pk the primary key of this blogs entry
+	* @param primaryKey the primary key of this blogs entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_blogsEntry.setPrimaryKey(primaryKey);
