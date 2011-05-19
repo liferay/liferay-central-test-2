@@ -40,7 +40,7 @@
 
 			ATTRS: {
 				dataType: {
-					value: 'long'
+					value: 'date'
 				}
 			},
 
