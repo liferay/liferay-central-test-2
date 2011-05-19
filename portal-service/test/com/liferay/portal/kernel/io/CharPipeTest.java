@@ -23,6 +23,10 @@ import java.io.Writer;
 import java.nio.CharBuffer;
 
 import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Shuyang Zhou
@@ -145,11 +149,13 @@ public class CharPipeTest extends TestCase {
 
 		Reader reader = charPipe.getReader();
 
+		final AtomicLong timeStampBeforeClose = new AtomicLong();
+
 		Thread thread = new Thread() {
 
 			public void run() {
 				try {
-					Thread.sleep(100);
+					timeStampBeforeClose.set(System.currentTimeMillis());
 
 					charPipe.close();
 				}
@@ -160,18 +166,16 @@ public class CharPipeTest extends TestCase {
 
 		};
 
-		long startTime = System.currentTimeMillis();
-
 		thread.start();
 
 		int result = reader.read();
 
+		long timeStampAfterRead = System.currentTimeMillis();
+
 		thread.join();
 
-		long duration = System.currentTimeMillis() - startTime;
-
 		assertEquals(-1, result);
-		assertTrue(duration > 100);
+		assertTrue(timeStampAfterRead >= timeStampBeforeClose.get());
 	}
 
 	public void testClosePeacefullyEmpty() throws IOException {
@@ -559,8 +563,14 @@ public class CharPipeTest extends TestCase {
 		thread.start();
 
 		for (int i = 0; i < 10; i++) {
-			assertTrue(_timedSkip(reader, 2) > 50);
-			assertTrue(_timedSkip(reader, 2) < 50);
+			long timeStampBeforeWrite = slowWriterJob.getTimeStampBeforeWrite();
+			long timeStampAfterSkip1 = _timeStampedSkip(reader, 2);
+			long timeStampAfterSkip2 = _timeStampedSkip(reader, 2);
+
+			assertTrue(timeStampAfterSkip1 >= timeStampBeforeWrite);
+			assertTrue(timeStampAfterSkip2 >= timeStampAfterSkip1);
+			assertTrue((timeStampAfterSkip1 - timeStampBeforeWrite) >=
+				(timeStampAfterSkip2 - timeStampAfterSkip1));
 		}
 
 		charPipe.close();
@@ -582,16 +592,19 @@ public class CharPipeTest extends TestCase {
 
 		Writer writer = charPipe.getWriter();
 
-		assertTrue(_timedWrite(writer, "abcd") < 100);
+		writer.write("abcd");
 
 		thread.start();
 
 		for (int i = 0; i < 5; i++) {
 			if ((i % 2) == 0) {
-				assertTrue(_timedWrite(writer, "abcdefgh") > 100);
+				assertTrue(_timeStampedWrite(writer, "abcdefgh") >=
+					slowReaderJob.getTimeStampBeforeRead());
 			}
 			else {
-				assertTrue(_timedWrite(writer, "abcdefgh".toCharArray()) > 100);
+				assertTrue(
+					_timeStampedWrite(writer, "abcdefgh".toCharArray()) >=
+					slowReaderJob.getTimeStampBeforeRead());
 			}
 		}
 
@@ -613,12 +626,13 @@ public class CharPipeTest extends TestCase {
 
 		Writer writer = charPipe.getWriter();
 
-		assertTrue(_timedWrite(writer, "abcd") < 100);
+		writer.write("abcd");
 
 		thread.start();
 
 		for (int i = 0; i < 2; i++) {
-			assertTrue(_timedWrite(writer, "abcdefgh") > 100);
+			assertTrue(_timeStampedWrite(writer, "abcdefgh") >=
+				slowReaderJob.getTimeStampBeforeRead());
 		}
 
 		charPipe.close(true);
@@ -639,12 +653,13 @@ public class CharPipeTest extends TestCase {
 
 		Writer writer = charPipe.getWriter();
 
-		assertTrue(_timedWrite(writer, "abcd") < 100);
+		writer.write("abcd");
 
 		thread.start();
 
 		for (int i = 0; i < 2; i++) {
-			assertTrue(_timedWrite(writer, "abcdefgh") > 100);
+			assertTrue(_timeStampedWrite(writer, "abcdefgh") >=
+				slowReaderJob.getTimeStampBeforeRead());
 		}
 
 		charPipe.close();
@@ -670,7 +685,8 @@ public class CharPipeTest extends TestCase {
 
 			char[] buffer = new char[8];
 
-			assertTrue(_timedRead(reader, buffer) > 50);
+			assertTrue(_timeStampedRead(reader, buffer) >=
+				slowWriterJob.getTimeStampBeforeWrite());
 		}
 
 		charPipe.close();
@@ -696,7 +712,8 @@ public class CharPipeTest extends TestCase {
 
 			char[] buffer = new char[8];
 
-			assertTrue(_timedRead(reader, buffer) > 50);
+			assertTrue(_timeStampedRead(reader, buffer) >=
+				slowWriterJob.getTimeStampBeforeWrite());
 		}
 
 		charPipe.close();
@@ -706,40 +723,44 @@ public class CharPipeTest extends TestCase {
 		assertFalse(slowWriterJob.isFailed());
 	}
 
-	private long _timedRead(Reader reader, char[] buffer)
+	private void _randomWait(int time) throws InterruptedException {
+		if (time < 0) {
+			throw new IllegalArgumentException();
+		}
+
+		int range = time / 2;
+
+		int waitTime = new Random().nextInt(range) + range;
+
+		Thread.sleep(waitTime);
+	}
+
+	private long _timeStampedRead(Reader reader, char[] buffer)
 		throws IOException {
-
-		long startTime = System.currentTimeMillis();
-
 		reader.read(buffer);
 
-		return System.currentTimeMillis() - startTime;
+		return System.currentTimeMillis();
 	}
 
-	private long _timedSkip(Reader reader, int skipSize)
+	private long _timeStampedSkip(Reader reader, int skipSize)
 		throws IOException {
-
-		long startTime = System.currentTimeMillis();
-
 		reader.skip(skipSize);
 
-		return System.currentTimeMillis() - startTime;
+		return System.currentTimeMillis();
 	}
 
-	private long _timedWrite(Writer writer, char[] data) throws IOException {
-		long startTime = System.currentTimeMillis();
-
+	private long _timeStampedWrite(Writer writer, char[] data)
+		throws IOException {
 		writer.write(data);
 
-		return System.currentTimeMillis() - startTime;
+		return System.currentTimeMillis();
 	}
 
-	private long _timedWrite(Writer writer, String data) throws IOException {
-		long startTime = System.currentTimeMillis();
-
+	private long _timeStampedWrite(Writer writer, String data)
+		throws IOException {
 		writer.write(data);
 
-		return System.currentTimeMillis() - startTime;
+		return System.currentTimeMillis();
 	}
 
 	private class SlowReaderJob implements Runnable {
@@ -753,6 +774,10 @@ public class CharPipeTest extends TestCase {
 			_force = force;
 		}
 
+		public long getTimeStampBeforeRead() throws InterruptedException {
+			return _timeStampsBeforeRead.take();
+		}
+
 		public boolean isFailed() {
 			return _failed;
 		}
@@ -760,7 +785,9 @@ public class CharPipeTest extends TestCase {
 		public void run() {
 			try {
 				for (int i = 0; i < 10; i++) {
-					Thread.sleep(100);
+					_randomWait(100);
+
+					_timeStampsBeforeRead.put(System.currentTimeMillis());
 
 					int result = _reader.read(_buffer);
 
@@ -793,6 +820,8 @@ public class CharPipeTest extends TestCase {
 		private boolean _failed;
 		private boolean _force;
 		private Reader _reader;
+		private final BlockingQueue<Long> _timeStampsBeforeRead =
+			new LinkedBlockingQueue<Long>();
 
 	}
 
@@ -806,6 +835,10 @@ public class CharPipeTest extends TestCase {
 			_expectException = expectException;
 		}
 
+		public long getTimeStampBeforeWrite() throws InterruptedException {
+			return _timeStampsBeforeWrite.take();
+		}
+
 		public boolean isFailed() {
 			return _failed;
 		}
@@ -813,7 +846,9 @@ public class CharPipeTest extends TestCase {
 		public void run() {
 			try {
 				for (int i = 0; i < 10; i++) {
-					Thread.sleep(100);
+					_randomWait(100);
+
+					_timeStampsBeforeWrite.put(System.currentTimeMillis());
 
 					_writer.write(new char[_dataSize]);
 				}
@@ -833,6 +868,8 @@ public class CharPipeTest extends TestCase {
 		private int _dataSize;
 		private boolean _expectException;
 		private boolean _failed;
+		private final BlockingQueue<Long> _timeStampsBeforeWrite =
+			new LinkedBlockingQueue<Long>();
 		private Writer _writer;
 
 	}
