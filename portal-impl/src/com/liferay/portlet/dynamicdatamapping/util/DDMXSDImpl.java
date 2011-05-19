@@ -73,11 +73,12 @@ public class DDMXSDImpl implements DDMXSD {
 
 	public String getHTML(
 			PageContext pageContext, Document document, Fields fields,
-			String namespace)
+			String namespace, boolean readOnly)
 		throws Exception {
 
 		return getHTML(
-			pageContext, document.getRootElement(), fields, namespace);
+			pageContext, document.getRootElement(), fields, namespace,
+			readOnly);
 	}
 
 	public String getHTML(PageContext pageContext, Element element)
@@ -90,12 +91,12 @@ public class DDMXSDImpl implements DDMXSD {
 			PageContext pageContext, Element element, Fields fields)
 		throws Exception {
 
-		return getHTML(pageContext, element, fields, StringPool.BLANK);
+		return getHTML(pageContext, element, fields, StringPool.BLANK, false);
 	}
 
 	public String getHTML(
 			PageContext pageContext, Element element, Fields fields,
-			String namespace)
+			String namespace, boolean readOnly)
 		throws Exception {
 
 		StringBundler sb = new StringBundler();
@@ -125,12 +126,18 @@ public class DDMXSDImpl implements DDMXSD {
 				(Map<String, Object>)freeMarkerContext.get("field");
 
 			String childrenHTML = getHTML(
-				pageContext, dynamicElementElement, fields);
+				pageContext, dynamicElementElement, fields, namespace,
+				readOnly);
 
 			field.put("children", childrenHTML);
 
 			String fieldNamespace = dynamicElementElement.attributeValue(
 				"fieldNamespace", _DEFAULT_NAMESPACE);
+
+			if (readOnly) {
+				fieldNamespace = _DEFAULT_READ_ONLY_NAMESPACE;
+			}
+
 			String type = dynamicElementElement.attributeValue("type");
 
 			String templateName = StringUtil.replaceFirst(
@@ -146,7 +153,8 @@ public class DDMXSDImpl implements DDMXSD {
 
 			sb.append(
 				processFTL(
-					pageContext, freeMarkerContext, resourcePath.toString()));
+					pageContext, freeMarkerContext, resourcePath.toString(),
+					readOnly));
 		}
 
 		return sb.toString();
@@ -169,7 +177,17 @@ public class DDMXSDImpl implements DDMXSD {
 			String namespace)
 		throws Exception {
 
-		return getHTML(pageContext, SAXReaderUtil.read(xml), fields, namespace);
+		return getHTML(
+			pageContext, SAXReaderUtil.read(xml), fields, namespace, false);
+	}
+
+	public String getHTML(
+			PageContext pageContext, String xml, Fields fields,
+			String namespace, boolean readOnly)
+		throws Exception {
+
+		return getHTML(
+			pageContext, SAXReaderUtil.read(xml), fields, namespace, readOnly);
 	}
 
 	public JSONArray getJSONArray(Document document) throws JSONException {
@@ -275,11 +293,16 @@ public class DDMXSDImpl implements DDMXSD {
 	 */
 	protected String processFTL(
 			PageContext pageContext, FreeMarkerContext freeMarkerContext,
-			String resourcePath)
+			String resourcePath, boolean readOnly)
 		throws Exception {
 
 		if (!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
-			resourcePath = _TPL_DEFAULT_PATH;
+			if (readOnly) {
+				resourcePath = _TPL_DEFAULT_READ_ONLY_PATH;
+			}
+			else {
+				resourcePath = _TPL_DEFAULT_PATH;
+			}
 		}
 
 		HttpServletRequest request =
@@ -328,8 +351,14 @@ public class DDMXSDImpl implements DDMXSD {
 
 	private static final String _DEFAULT_NAMESPACE = "alloy";
 
+	private static final String _DEFAULT_READ_ONLY_NAMESPACE = "readonly";
+
 	private static final String _TPL_DEFAULT_PATH =
 		"com/liferay/portlet/dynamicdatamapping/dependencies/alloy/text.ftl";
+
+	private static final String _TPL_DEFAULT_READ_ONLY_PATH =
+		"com/liferay/portlet/dynamicdatamapping/dependencies/readonly/" +
+			"default.ftl";
 
 	private static final String _TPL_EXT = ".ftl";
 

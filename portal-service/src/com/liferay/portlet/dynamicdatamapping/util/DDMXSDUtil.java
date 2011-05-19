@@ -48,10 +48,11 @@ public class DDMXSDUtil {
 
 	public static String getHTML(
 			PageContext pageContext, Document document, Fields fields,
-			String namespace)
+			String namespace, boolean readOnly)
 		throws Exception {
 
-		return getDDMXSD().getHTML(pageContext, document, fields, namespace);
+		return getDDMXSD().getHTML(
+			pageContext, document, fields, namespace,readOnly);
 	}
 
 	public static String getHTML(PageContext pageContext, Element element)
@@ -79,6 +80,15 @@ public class DDMXSDUtil {
 		throws Exception {
 
 		return getDDMXSD().getHTML(pageContext, xml, fields, namespace);
+	}
+
+	public static String getHTML(
+			PageContext pageContext, String xml, Fields fields,
+			String namespace, boolean readOnly)
+		throws Exception {
+
+		return getDDMXSD().getHTML(
+			pageContext, xml, fields, namespace, readOnly);
 	}
 
 	public static JSONArray getJSONArray(Document document)

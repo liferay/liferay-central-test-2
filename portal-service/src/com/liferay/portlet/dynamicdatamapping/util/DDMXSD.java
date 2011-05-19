@@ -38,7 +38,7 @@ public interface DDMXSD {
 
 	public String getHTML(
 			PageContext pageContext, Document document, Fields fields,
-			String namespace)
+			String namespace, boolean readOnly)
 		throws Exception;
 
 	public String getHTML(PageContext pageContext, Element element)
@@ -52,6 +52,11 @@ public interface DDMXSD {
 	public String getHTML(
 			PageContext pageContext, String xml, Fields fields,
 			String namespace)
+		throws Exception;
+
+	public String getHTML(
+			PageContext pageContext, String xml, Fields fields,
+			String namespace, boolean readOnly)
 		throws Exception;
 
 	public JSONArray getJSONArray(Document document) throws JSONException;
