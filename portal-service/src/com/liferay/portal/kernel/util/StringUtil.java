@@ -755,7 +755,7 @@ public class StringUtil {
 			return null;
 		}
 
-		if ((oldSub == null) || (oldSub.equals(StringPool.BLANK))) {
+		if ((oldSub == null) || oldSub.equals(StringPool.BLANK)) {
 			return s;
 		}
 

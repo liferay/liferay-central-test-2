@@ -109,20 +109,20 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testReplaceString() throws Exception {
-		String original = "Hello World HELLO WORLD Hello World";
-		String expected = "Aloha World HELLO WORLD Aloha World";
-
-		String actual = StringUtil.replace(original, "Hello", "Aloha");
-
-		assertEquals(expected, actual);
-	}
-
 	public void testReplaceSpaceString() throws Exception {
 		String original = "Hello World HELLO WORLD Hello World";
 		String expected = "HelloWorldHELLOWORLDHelloWorld";
 
 		String actual = StringUtil.replace(original, " ", StringPool.BLANK);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testReplaceString() throws Exception {
+		String original = "Hello World HELLO WORLD Hello World";
+		String expected = "Aloha World HELLO WORLD Aloha World";
+
+		String actual = StringUtil.replace(original, "Hello", "Aloha");
 
 		assertEquals(expected, actual);
 	}
