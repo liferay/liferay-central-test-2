@@ -731,7 +731,7 @@ AUI().add(
 					}
 				);
 			},
-			
+
 			_openWindow: function(configParams, item) {
 				var defaultParams = {
 					id: item.guid(),
