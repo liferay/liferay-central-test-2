@@ -245,6 +245,10 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			String portalCacheManagerBeanId)
 		throws Exception {
 
+		if (Validator.isNull(cacheConfigurationPath)) {
+			return;
+		}
+
 		URL cacheConfigurationURL = classLoader.getResource(
 			cacheConfigurationPath);
 
