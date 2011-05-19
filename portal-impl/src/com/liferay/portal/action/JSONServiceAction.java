@@ -120,7 +120,7 @@ public class JSONServiceAction extends JSONAction {
 					return getReturnValue(returnObj);
 				}
 				else {
-					return _JSON_EMPTY_OBJECT;
+					return _NULL_JSON_STRING;
 				}
 			}
 			catch (Exception e) {
@@ -490,9 +490,7 @@ public class JSONServiceAction extends JSONAction {
 		return _REROUTE_PATH;
 	}
 
-	protected String getReturnValue(Object returnObj)
-		throws Exception {
-
+	protected String getReturnValue(Object returnObj) throws Exception {
 		return JSONFactoryUtil.looseSerialize(returnObj);
 	}
 
@@ -577,7 +575,7 @@ public class JSONServiceAction extends JSONAction {
 		}
 	}
 
-	private static final String _JSON_EMPTY_OBJECT = "{}";
+	private static final String _NULL_JSON_STRING = "{}";
 
 	private static final String _REROUTE_PATH = "/json";
 

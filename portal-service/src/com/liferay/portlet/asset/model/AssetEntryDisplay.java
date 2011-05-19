@@ -24,7 +24,6 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  */
-
 public class AssetEntryDisplay implements Serializable {
 
 	public long getEntryId() {
