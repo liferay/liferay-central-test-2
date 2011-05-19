@@ -17,7 +17,7 @@
 <%@ include file="/html/common/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isFacebook() || themeDisplay.isStateExclusive() %>">
+	<c:when test="<%= SessionErrors.isEmpty(request) && (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) %>">
 
 		<%
 		StringBundler sb = (StringBundler)request.getAttribute(WebKeys.LAYOUT_CONTENT);
