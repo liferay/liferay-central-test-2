@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.enterpriseadmin.action;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -28,7 +28,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.http.UserJSONSerializer;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
@@ -96,8 +95,6 @@ public class ExportUsersAction extends PortletAction {
 		StringBundler sb = new StringBundler(
 			PropsValues.USERS_EXPORT_CSV_FIELDS.length * 2);
 
-		JSONObject jsonObject = UserJSONSerializer.toJSONObject(user);
-
 		for (int i = 0; i < PropsValues.USERS_EXPORT_CSV_FIELDS.length; i++) {
 			String field = PropsValues.USERS_EXPORT_CSV_FIELDS[i];
 
@@ -112,7 +109,7 @@ public class ExportUsersAction extends PortletAction {
 				sb.append(expandoBridge.getAttribute(attributeName));
 			}
 			else {
-				sb.append(jsonObject.getString(field));
+				sb.append(BeanPropertiesUtil.getString(user, field));
 			}
 
 			if ((i + 1) < PropsValues.USERS_EXPORT_CSV_FIELDS.length) {
