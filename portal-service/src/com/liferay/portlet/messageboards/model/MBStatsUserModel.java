@@ -54,7 +54,7 @@ public interface MBStatsUserModel extends BaseModel<MBStatsUser> {
 	/**
 	 * Sets the primary key of this message boards stats user
 	 *
-	 * @param pk the primary key of this message boards stats user
+	 * @param primaryKey the primary key of this message boards stats user
 	 */
 	public void setPrimaryKey(long primaryKey);
 

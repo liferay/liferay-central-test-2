@@ -48,7 +48,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 	/**
 	* Sets the primary key of this message boards stats user
 	*
-	* @param pk the primary key of this message boards stats user
+	* @param primaryKey the primary key of this message boards stats user
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_mbStatsUser.setPrimaryKey(primaryKey);

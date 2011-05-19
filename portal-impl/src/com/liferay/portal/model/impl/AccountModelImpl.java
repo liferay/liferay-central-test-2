@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -51,6 +52,7 @@ import java.util.List;
  * @see com.liferay.portal.model.AccountModel
  * @generated
  */
+@JSON(strict = true)
 public class AccountModelImpl extends BaseModelImpl<Account>
 	implements AccountModel {
 	/*
@@ -164,6 +166,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getAccountId() {
 		return _accountId;
 	}
@@ -172,6 +175,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_accountId = accountId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -180,6 +184,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -196,6 +201,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -209,6 +215,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -217,6 +224,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -225,6 +233,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getParentAccountId() {
 		return _parentAccountId;
 	}
@@ -233,6 +242,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_parentAccountId = parentAccountId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -246,6 +256,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_name = name;
 	}
 
+	@JSON
 	public String getLegalName() {
 		if (_legalName == null) {
 			return StringPool.BLANK;
@@ -259,6 +270,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_legalName = legalName;
 	}
 
+	@JSON
 	public String getLegalId() {
 		if (_legalId == null) {
 			return StringPool.BLANK;
@@ -272,6 +284,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_legalId = legalId;
 	}
 
+	@JSON
 	public String getLegalType() {
 		if (_legalType == null) {
 			return StringPool.BLANK;
@@ -285,6 +298,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_legalType = legalType;
 	}
 
+	@JSON
 	public String getSicCode() {
 		if (_sicCode == null) {
 			return StringPool.BLANK;
@@ -298,6 +312,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_sicCode = sicCode;
 	}
 
+	@JSON
 	public String getTickerSymbol() {
 		if (_tickerSymbol == null) {
 			return StringPool.BLANK;
@@ -311,6 +326,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_tickerSymbol = tickerSymbol;
 	}
 
+	@JSON
 	public String getIndustry() {
 		if (_industry == null) {
 			return StringPool.BLANK;
@@ -324,6 +340,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_industry = industry;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -337,6 +354,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		_type = type;
 	}
 
+	@JSON
 	public String getSize() {
 		if (_size == null) {
 			return StringPool.BLANK;

@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -55,6 +56,7 @@ import java.util.Map;
  * @see com.liferay.portal.model.LayoutSetPrototypeModel
  * @generated
  */
+@JSON(strict = true)
 public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototype>
 	implements LayoutSetPrototypeModel {
 	/*
@@ -151,6 +153,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -164,6 +167,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		_uuid = uuid;
 	}
 
+	@JSON
 	public long getLayoutSetPrototypeId() {
 		return _layoutSetPrototypeId;
 	}
@@ -172,6 +176,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		_layoutSetPrototypeId = layoutSetPrototypeId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -180,6 +185,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		_companyId = companyId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -268,6 +274,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -281,6 +288,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		_description = description;
 	}
 
+	@JSON
 	public String getSettings() {
 		if (_settings == null) {
 			return StringPool.BLANK;
@@ -294,6 +302,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		_settings = settings;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}

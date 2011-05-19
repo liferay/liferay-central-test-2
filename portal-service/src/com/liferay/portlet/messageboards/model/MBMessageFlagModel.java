@@ -54,7 +54,7 @@ public interface MBMessageFlagModel extends BaseModel<MBMessageFlag> {
 	/**
 	 * Sets the primary key of this message boards message flag
 	 *
-	 * @param pk the primary key of this message boards message flag
+	 * @param primaryKey the primary key of this message boards message flag
 	 */
 	public void setPrimaryKey(long primaryKey);
 

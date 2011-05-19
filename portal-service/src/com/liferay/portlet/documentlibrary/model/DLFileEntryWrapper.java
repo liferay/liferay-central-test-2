@@ -48,7 +48,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	/**
 	* Sets the primary key of this d l file entry
 	*
-	* @param pk the primary key of this d l file entry
+	* @param primaryKey the primary key of this d l file entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_dlFileEntry.setPrimaryKey(primaryKey);

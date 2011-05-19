@@ -16,6 +16,7 @@ package com.liferay.portlet.bookmarks.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.bookmarks.model.BookmarksFolderModel
  * @generated
  */
+@JSON(strict = true)
 public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	implements BookmarksFolderModel {
 	/*
@@ -156,6 +158,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -177,6 +180,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -185,6 +189,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_folderId = folderId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -203,6 +208,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -211,6 +217,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -227,6 +234,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -235,6 +243,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -243,6 +252,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -251,6 +261,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_parentFolderId = parentFolderId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -264,6 +275,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;

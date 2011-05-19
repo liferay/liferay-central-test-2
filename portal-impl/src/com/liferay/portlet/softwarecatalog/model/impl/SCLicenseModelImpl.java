@@ -15,6 +15,7 @@
 package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -49,6 +50,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.SCLicenseModel
  * @generated
  */
+@JSON(strict = true)
 public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	implements SCLicenseModel {
 	/*
@@ -156,6 +158,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getLicenseId() {
 		return _licenseId;
 	}
@@ -164,6 +167,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		_licenseId = licenseId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -177,6 +181,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		_name = name;
 	}
 
+	@JSON
 	public String getUrl() {
 		if (_url == null) {
 			return StringPool.BLANK;
@@ -190,6 +195,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		_url = url;
 	}
 
+	@JSON
 	public boolean getOpenSource() {
 		return _openSource;
 	}
@@ -202,6 +208,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		_openSource = openSource;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}
@@ -214,6 +221,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		_active = active;
 	}
 
+	@JSON
 	public boolean getRecommended() {
 		return _recommended;
 	}

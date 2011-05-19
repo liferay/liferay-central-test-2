@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.ShoppingCategoryModel
  * @generated
  */
+@JSON(strict = true)
 public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	implements ShoppingCategoryModel {
 	/*
@@ -156,6 +158,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -164,6 +167,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_categoryId = categoryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -172,6 +176,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -180,6 +185,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -196,6 +202,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -209,6 +216,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -217,6 +225,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -225,6 +234,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getParentCategoryId() {
 		return _parentCategoryId;
 	}
@@ -233,6 +243,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_parentCategoryId = parentCategoryId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -246,6 +257,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;

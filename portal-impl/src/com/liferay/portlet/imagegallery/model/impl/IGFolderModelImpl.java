@@ -16,6 +16,7 @@ package com.liferay.portlet.imagegallery.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.imagegallery.model.IGFolderModel
  * @generated
  */
+@JSON(strict = true)
 public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 	implements IGFolderModel {
 	/*
@@ -155,6 +157,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -176,6 +179,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -184,6 +188,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		_folderId = folderId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -202,6 +207,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -210,6 +216,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -226,6 +233,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -234,6 +242,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -242,6 +251,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -260,6 +270,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		return _originalParentFolderId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -281,6 +292,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;

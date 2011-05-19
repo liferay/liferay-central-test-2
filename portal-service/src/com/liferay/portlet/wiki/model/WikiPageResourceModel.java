@@ -52,7 +52,7 @@ public interface WikiPageResourceModel extends BaseModel<WikiPageResource> {
 	/**
 	 * Sets the primary key of this wiki page resource
 	 *
-	 * @param pk the primary key of this wiki page resource
+	 * @param primaryKey the primary key of this wiki page resource
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -56,6 +57,7 @@ import java.util.Map;
  * @see com.liferay.portal.model.RoleModel
  * @generated
  */
+@JSON(strict = true)
 public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -168,6 +170,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getRoleId() {
 		return _roleId;
 	}
@@ -176,6 +179,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		_roleId = roleId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -202,6 +206,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -220,6 +225,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return _originalClassNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -238,6 +244,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return _originalClassPK;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -259,6 +266,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -347,6 +355,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -360,6 +369,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		_description = description;
 	}
 
+	@JSON
 	public int getType() {
 		return _type;
 	}
@@ -368,6 +378,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		_type = type;
 	}
 
+	@JSON
 	public String getSubtype() {
 		if (_subtype == null) {
 			return StringPool.BLANK;

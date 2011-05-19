@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.UserGroupModel
  * @generated
  */
+@JSON(strict = true)
 public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	implements UserGroupModel {
 	/*
@@ -153,6 +155,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getUserGroupId() {
 		return _userGroupId;
 	}
@@ -161,6 +164,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		_userGroupId = userGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -179,6 +183,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public long getParentUserGroupId() {
 		return _parentUserGroupId;
 	}
@@ -187,6 +192,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		_parentUserGroupId = parentUserGroupId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -208,6 +214,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;

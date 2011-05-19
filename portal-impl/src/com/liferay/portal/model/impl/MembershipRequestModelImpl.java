@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portal.model.MembershipRequestModel
  * @generated
  */
+@JSON(strict = true)
 public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	implements MembershipRequestModel {
 	/*
@@ -156,6 +158,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getMembershipRequestId() {
 		return _membershipRequestId;
 	}
@@ -164,6 +167,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_membershipRequestId = membershipRequestId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -172,6 +176,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -180,6 +185,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -196,6 +202,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -204,6 +211,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public String getComments() {
 		if (_comments == null) {
 			return StringPool.BLANK;
@@ -217,6 +225,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_comments = comments;
 	}
 
+	@JSON
 	public String getReplyComments() {
 		if (_replyComments == null) {
 			return StringPool.BLANK;
@@ -230,6 +239,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_replyComments = replyComments;
 	}
 
+	@JSON
 	public Date getReplyDate() {
 		return _replyDate;
 	}
@@ -238,6 +248,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_replyDate = replyDate;
 	}
 
+	@JSON
 	public long getReplierUserId() {
 		return _replierUserId;
 	}
@@ -255,6 +266,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_replierUserUuid = replierUserUuid;
 	}
 
+	@JSON
 	public int getStatusId() {
 		return _statusId;
 	}

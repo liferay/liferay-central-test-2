@@ -51,7 +51,7 @@ public interface SocialEquityGroupSettingModel extends BaseModel<SocialEquityGro
 	/**
 	 * Sets the primary key of this social equity group setting
 	 *
-	 * @param pk the primary key of this social equity group setting
+	 * @param primaryKey the primary key of this social equity group setting
 	 */
 	public void setPrimaryKey(long primaryKey);
 

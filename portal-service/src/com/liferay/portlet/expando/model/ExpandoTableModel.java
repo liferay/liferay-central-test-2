@@ -50,7 +50,7 @@ public interface ExpandoTableModel extends BaseModel<ExpandoTable> {
 	/**
 	 * Sets the primary key of this expando table
 	 *
-	 * @param pk the primary key of this expando table
+	 * @param primaryKey the primary key of this expando table
 	 */
 	public void setPrimaryKey(long primaryKey);
 

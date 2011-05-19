@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.JournalStructureModel
  * @generated
  */
+@JSON(strict = true)
 public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	implements JournalStructureModel {
 	/*
@@ -162,6 +164,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -183,6 +186,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getId() {
 		return _id;
 	}
@@ -191,6 +195,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_id = id;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -209,6 +214,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -217,6 +223,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -233,6 +240,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -246,6 +254,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -254,6 +263,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -262,6 +272,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getStructureId() {
 		if (_structureId == null) {
 			return StringPool.BLANK;
@@ -283,6 +294,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		return GetterUtil.getString(_originalStructureId);
 	}
 
+	@JSON
 	public String getParentStructureId() {
 		if (_parentStructureId == null) {
 			return StringPool.BLANK;
@@ -296,6 +308,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_parentStructureId = parentStructureId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -309,6 +322,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -322,6 +336,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_description = description;
 	}
 
+	@JSON
 	public String getXsd() {
 		if (_xsd == null) {
 			return StringPool.BLANK;

@@ -48,7 +48,7 @@ public class SCProductScreenshotWrapper implements SCProductScreenshot {
 	/**
 	* Sets the primary key of this s c product screenshot
 	*
-	* @param pk the primary key of this s c product screenshot
+	* @param primaryKey the primary key of this s c product screenshot
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_scProductScreenshot.setPrimaryKey(primaryKey);

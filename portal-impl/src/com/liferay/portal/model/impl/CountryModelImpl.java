@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.CountryModel
  * @generated
  */
+@JSON(strict = true)
 public class CountryModelImpl extends BaseModelImpl<Country>
 	implements CountryModel {
 	/*
@@ -145,6 +147,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getCountryId() {
 		return _countryId;
 	}
@@ -153,6 +156,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		_countryId = countryId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -174,6 +178,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getA2() {
 		if (_a2 == null) {
 			return StringPool.BLANK;
@@ -195,6 +200,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return GetterUtil.getString(_originalA2);
 	}
 
+	@JSON
 	public String getA3() {
 		if (_a3 == null) {
 			return StringPool.BLANK;
@@ -216,6 +222,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return GetterUtil.getString(_originalA3);
 	}
 
+	@JSON
 	public String getNumber() {
 		if (_number == null) {
 			return StringPool.BLANK;
@@ -229,6 +236,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		_number = number;
 	}
 
+	@JSON
 	public String getIdd() {
 		if (_idd == null) {
 			return StringPool.BLANK;
@@ -242,6 +250,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		_idd = idd;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}

@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.asset.model.AssetTagModel
  * @generated
  */
+@JSON(strict = true)
 public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 	implements AssetTagModel {
 	/*
@@ -155,6 +157,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getTagId() {
 		return _tagId;
 	}
@@ -163,6 +166,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_tagId = tagId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -171,6 +175,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -179,6 +184,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -195,6 +201,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -208,6 +215,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -216,6 +224,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -224,6 +233,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -237,6 +247,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		_name = name;
 	}
 
+	@JSON
 	public int getAssetCount() {
 		return _assetCount;
 	}

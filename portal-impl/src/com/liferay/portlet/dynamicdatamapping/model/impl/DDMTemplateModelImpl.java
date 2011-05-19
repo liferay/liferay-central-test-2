@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.dynamicdatamapping.model.DDMTemplateModel
  * @generated
  */
+@JSON(strict = true)
 public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	implements DDMTemplateModel {
 	/*
@@ -161,6 +163,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -182,6 +185,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getTemplateId() {
 		return _templateId;
 	}
@@ -190,6 +194,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_templateId = templateId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -208,6 +213,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -216,6 +222,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -232,6 +239,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -245,6 +253,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -253,6 +262,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -261,6 +271,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getStructureId() {
 		return _structureId;
 	}
@@ -269,6 +280,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_structureId = structureId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -282,6 +294,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -295,6 +308,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_description = description;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -308,6 +322,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_type = type;
 	}
 
+	@JSON
 	public String getLanguage() {
 		if (_language == null) {
 			return StringPool.BLANK;
@@ -321,6 +336,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		_language = language;
 	}
 
+	@JSON
 	public String getScript() {
 		if (_script == null) {
 			return StringPool.BLANK;

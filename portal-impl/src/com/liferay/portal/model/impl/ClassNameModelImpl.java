@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -49,6 +50,7 @@ import java.util.List;
  * @see com.liferay.portal.model.ClassNameModel
  * @generated
  */
+@JSON(strict = true)
 public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 	implements ClassNameModel {
 	/*
@@ -142,6 +144,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -150,6 +153,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public String getValue() {
 		if (_value == null) {
 			return StringPool.BLANK;

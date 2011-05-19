@@ -48,7 +48,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 	/**
 	* Sets the primary key of this shopping item
 	*
-	* @param pk the primary key of this shopping item
+	* @param primaryKey the primary key of this shopping item
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_shoppingItem.setPrimaryKey(primaryKey);

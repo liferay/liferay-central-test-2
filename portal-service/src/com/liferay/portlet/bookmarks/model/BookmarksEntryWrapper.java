@@ -48,7 +48,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 	/**
 	* Sets the primary key of this bookmarks entry
 	*
-	* @param pk the primary key of this bookmarks entry
+	* @param primaryKey the primary key of this bookmarks entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_bookmarksEntry.setPrimaryKey(primaryKey);

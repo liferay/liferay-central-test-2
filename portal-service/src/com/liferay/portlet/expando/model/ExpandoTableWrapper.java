@@ -48,7 +48,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 	/**
 	* Sets the primary key of this expando table
 	*
-	* @param pk the primary key of this expando table
+	* @param primaryKey the primary key of this expando table
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_expandoTable.setPrimaryKey(primaryKey);

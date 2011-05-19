@@ -52,7 +52,7 @@ public interface DLDocumentMetadataSetModel extends BaseModel<DLDocumentMetadata
 	/**
 	 * Sets the primary key of this d l document metadata set
 	 *
-	 * @param pk the primary key of this d l document metadata set
+	 * @param primaryKey the primary key of this d l document metadata set
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -57,7 +57,7 @@ public interface SCFrameworkVersionModel extends BaseModel<SCFrameworkVersion>,
 	/**
 	 * Sets the primary key of this s c framework version
 	 *
-	 * @param pk the primary key of this s c framework version
+	 * @param primaryKey the primary key of this s c framework version
 	 */
 	public void setPrimaryKey(long primaryKey);
 

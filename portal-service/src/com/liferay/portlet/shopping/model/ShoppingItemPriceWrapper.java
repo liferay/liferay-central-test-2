@@ -48,7 +48,7 @@ public class ShoppingItemPriceWrapper implements ShoppingItemPrice {
 	/**
 	* Sets the primary key of this shopping item price
 	*
-	* @param pk the primary key of this shopping item price
+	* @param primaryKey the primary key of this shopping item price
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_shoppingItemPrice.setPrimaryKey(primaryKey);

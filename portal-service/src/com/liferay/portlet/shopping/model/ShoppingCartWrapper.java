@@ -48,7 +48,7 @@ public class ShoppingCartWrapper implements ShoppingCart {
 	/**
 	* Sets the primary key of this shopping cart
 	*
-	* @param pk the primary key of this shopping cart
+	* @param primaryKey the primary key of this shopping cart
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_shoppingCart.setPrimaryKey(primaryKey);

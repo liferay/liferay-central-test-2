@@ -16,6 +16,7 @@ package com.liferay.portlet.imagegallery.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.imagegallery.model.IGImageModel
  * @generated
  */
+@JSON(strict = true)
 public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	implements IGImageModel {
 	/*
@@ -163,6 +165,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -184,6 +187,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getImageId() {
 		return _imageId;
 	}
@@ -192,6 +196,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_imageId = imageId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -210,6 +215,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -218,6 +224,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -234,6 +241,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -242,6 +250,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -250,6 +259,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -258,6 +268,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_folderId = folderId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -271,6 +282,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -284,6 +296,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		_description = description;
 	}
 
+	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
@@ -302,6 +315,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _originalSmallImageId;
 	}
 
+	@JSON
 	public long getLargeImageId() {
 		return _largeImageId;
 	}
@@ -320,6 +334,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _originalLargeImageId;
 	}
 
+	@JSON
 	public long getCustom1ImageId() {
 		return _custom1ImageId;
 	}
@@ -338,6 +353,7 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		return _originalCustom1ImageId;
 	}
 
+	@JSON
 	public long getCustom2ImageId() {
 		return _custom2ImageId;
 	}

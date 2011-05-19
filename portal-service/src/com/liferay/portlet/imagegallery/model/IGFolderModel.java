@@ -55,7 +55,7 @@ public interface IGFolderModel extends BaseModel<IGFolder> {
 	/**
 	 * Sets the primary key of this i g folder
 	 *
-	 * @param pk the primary key of this i g folder
+	 * @param primaryKey the primary key of this i g folder
 	 */
 	public void setPrimaryKey(long primaryKey);
 

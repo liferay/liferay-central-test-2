@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatalists.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -59,6 +60,7 @@ import java.util.Map;
  * @see com.liferay.portlet.dynamicdatalists.model.DDLRecordSetModel
  * @generated
  */
+@JSON(strict = true)
 public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 	implements DDLRecordSetModel {
 	/*
@@ -166,6 +168,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -187,6 +190,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getRecordSetId() {
 		return _recordSetId;
 	}
@@ -195,6 +199,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_recordSetId = recordSetId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -213,6 +218,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -221,6 +227,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -237,6 +244,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -250,6 +258,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -258,6 +267,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -266,6 +276,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getDDMStructureId() {
 		return _DDMStructureId;
 	}
@@ -274,6 +285,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_DDMStructureId = DDMStructureId;
 	}
 
+	@JSON
 	public String getRecordSetKey() {
 		if (_recordSetKey == null) {
 			return StringPool.BLANK;
@@ -295,6 +307,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		return GetterUtil.getString(_originalRecordSetKey);
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -383,6 +396,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -396,6 +410,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_description = description;
 	}
 
+	@JSON
 	public int getMinDisplayRows() {
 		return _minDisplayRows;
 	}

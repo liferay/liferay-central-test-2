@@ -56,7 +56,7 @@ public interface ShoppingCartModel extends BaseModel<ShoppingCart>, GroupedModel
 	/**
 	 * Sets the primary key of this shopping cart
 	 *
-	 * @param pk the primary key of this shopping cart
+	 * @param primaryKey the primary key of this shopping cart
 	 */
 	public void setPrimaryKey(long primaryKey);
 

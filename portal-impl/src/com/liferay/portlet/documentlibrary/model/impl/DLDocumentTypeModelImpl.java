@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.DLDocumentTypeModel
  * @generated
  */
+@JSON(strict = true)
 public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 	implements DLDocumentTypeModel {
 	/*
@@ -163,6 +165,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getDocumentTypeId() {
 		return _documentTypeId;
 	}
@@ -171,6 +174,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_documentTypeId = documentTypeId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -179,6 +183,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -187,6 +192,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -203,6 +209,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -216,6 +223,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -224,6 +232,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -232,6 +241,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -245,6 +255,7 @@ public class DLDocumentTypeModelImpl extends BaseModelImpl<DLDocumentType>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;

@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -50,6 +51,7 @@ import java.util.List;
  * @see com.liferay.portal.model.GroupModel
  * @generated
  */
+@JSON(strict = true)
 public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -194,6 +196,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -202,6 +205,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -220,6 +224,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public long getCreatorUserId() {
 		return _creatorUserId;
 	}
@@ -245,6 +250,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -263,6 +269,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalClassNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -281,6 +288,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalClassPK;
 	}
 
+	@JSON
 	public long getParentGroupId() {
 		return _parentGroupId;
 	}
@@ -289,6 +297,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_parentGroupId = parentGroupId;
 	}
 
+	@JSON
 	public long getLiveGroupId() {
 		return _liveGroupId;
 	}
@@ -307,6 +316,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _originalLiveGroupId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -328,6 +338,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -341,6 +352,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_description = description;
 	}
 
+	@JSON
 	public int getType() {
 		return _type;
 	}
@@ -349,6 +361,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_type = type;
 	}
 
+	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
 			return StringPool.BLANK;
@@ -362,6 +375,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_typeSettings = typeSettings;
 	}
 
+	@JSON
 	public String getFriendlyURL() {
 		if (_friendlyURL == null) {
 			return StringPool.BLANK;
@@ -383,6 +397,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return GetterUtil.getString(_originalFriendlyURL);
 	}
 
+	@JSON
 	public boolean getSite() {
 		return _site;
 	}
@@ -395,6 +410,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_site = site;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}

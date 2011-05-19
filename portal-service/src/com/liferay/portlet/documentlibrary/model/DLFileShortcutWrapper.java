@@ -48,7 +48,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	/**
 	* Sets the primary key of this d l file shortcut
 	*
-	* @param pk the primary key of this d l file shortcut
+	* @param primaryKey the primary key of this d l file shortcut
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_dlFileShortcut.setPrimaryKey(primaryKey);

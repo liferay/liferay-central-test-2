@@ -48,7 +48,7 @@ public class SocialActivityWrapper implements SocialActivity {
 	/**
 	* Sets the primary key of this social activity
 	*
-	* @param pk the primary key of this social activity
+	* @param primaryKey the primary key of this social activity
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialActivity.setPrimaryKey(primaryKey);

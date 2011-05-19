@@ -48,7 +48,7 @@ public class WikiNodeWrapper implements WikiNode {
 	/**
 	* Sets the primary key of this wiki node
 	*
-	* @param pk the primary key of this wiki node
+	* @param primaryKey the primary key of this wiki node
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_wikiNode.setPrimaryKey(primaryKey);

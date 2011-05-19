@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.UserGroupGroupRole;
@@ -44,6 +45,7 @@ import java.util.List;
  * @see com.liferay.portal.model.UserGroupGroupRoleModel
  * @generated
  */
+@JSON(strict = true)
 public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRole>
 	implements UserGroupGroupRoleModel {
 	/*
@@ -134,6 +136,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		setPrimaryKey((UserGroupGroupRolePK)primaryKeyObj);
 	}
 
+	@JSON
 	public long getUserGroupId() {
 		return _userGroupId;
 	}
@@ -142,6 +145,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		_userGroupId = userGroupId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -150,6 +154,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getRoleId() {
 		return _roleId;
 	}

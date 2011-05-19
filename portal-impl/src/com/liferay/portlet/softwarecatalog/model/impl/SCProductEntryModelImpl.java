@@ -16,6 +16,7 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.SCProductEntryModel
  * @generated
  */
+@JSON(strict = true)
 public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	implements SCProductEntryModel {
 	/*
@@ -171,6 +173,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getProductEntryId() {
 		return _productEntryId;
 	}
@@ -179,6 +182,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_productEntryId = productEntryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -187,6 +191,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -195,6 +200,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -211,6 +217,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -224,6 +231,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -232,6 +240,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -240,6 +249,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -253,6 +263,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_name = name;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -266,6 +277,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_type = type;
 	}
 
+	@JSON
 	public String getTags() {
 		if (_tags == null) {
 			return StringPool.BLANK;
@@ -279,6 +291,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_tags = tags;
 	}
 
+	@JSON
 	public String getShortDescription() {
 		if (_shortDescription == null) {
 			return StringPool.BLANK;
@@ -292,6 +305,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_shortDescription = shortDescription;
 	}
 
+	@JSON
 	public String getLongDescription() {
 		if (_longDescription == null) {
 			return StringPool.BLANK;
@@ -305,6 +319,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_longDescription = longDescription;
 	}
 
+	@JSON
 	public String getPageURL() {
 		if (_pageURL == null) {
 			return StringPool.BLANK;
@@ -318,6 +333,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_pageURL = pageURL;
 	}
 
+	@JSON
 	public String getAuthor() {
 		if (_author == null) {
 			return StringPool.BLANK;
@@ -331,6 +347,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		_author = author;
 	}
 
+	@JSON
 	public String getRepoGroupId() {
 		if (_repoGroupId == null) {
 			return StringPool.BLANK;
@@ -352,6 +369,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return GetterUtil.getString(_originalRepoGroupId);
 	}
 
+	@JSON
 	public String getRepoArtifactId() {
 		if (_repoArtifactId == null) {
 			return StringPool.BLANK;

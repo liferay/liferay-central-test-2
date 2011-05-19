@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.OrganizationModel
  * @generated
  */
+@JSON(strict = true)
 public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	implements OrganizationModel {
 	/*
@@ -159,6 +161,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getOrganizationId() {
 		return _organizationId;
 	}
@@ -167,6 +170,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_organizationId = organizationId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -185,6 +189,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public long getParentOrganizationId() {
 		return _parentOrganizationId;
 	}
@@ -203,6 +208,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return _originalParentOrganizationId;
 	}
 
+	@JSON
 	public long getLeftOrganizationId() {
 		return _leftOrganizationId;
 	}
@@ -211,6 +217,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_leftOrganizationId = leftOrganizationId;
 	}
 
+	@JSON
 	public long getRightOrganizationId() {
 		return _rightOrganizationId;
 	}
@@ -219,6 +226,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_rightOrganizationId = rightOrganizationId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -240,6 +248,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -253,6 +262,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_type = type;
 	}
 
+	@JSON
 	public boolean getRecursable() {
 		return _recursable;
 	}
@@ -265,6 +275,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_recursable = recursable;
 	}
 
+	@JSON
 	public long getRegionId() {
 		return _regionId;
 	}
@@ -273,6 +284,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_regionId = regionId;
 	}
 
+	@JSON
 	public long getCountryId() {
 		return _countryId;
 	}
@@ -281,6 +293,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_countryId = countryId;
 	}
 
+	@JSON
 	public int getStatusId() {
 		return _statusId;
 	}
@@ -289,6 +302,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		_statusId = statusId;
 	}
 
+	@JSON
 	public String getComments() {
 		if (_comments == null) {
 			return StringPool.BLANK;

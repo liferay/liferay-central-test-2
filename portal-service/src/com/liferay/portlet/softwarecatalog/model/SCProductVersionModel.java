@@ -57,7 +57,7 @@ public interface SCProductVersionModel extends AuditedModel,
 	/**
 	 * Sets the primary key of this s c product version
 	 *
-	 * @param pk the primary key of this s c product version
+	 * @param primaryKey the primary key of this s c product version
 	 */
 	public void setPrimaryKey(long primaryKey);
 

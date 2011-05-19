@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portal.model.WebsiteModel
  * @generated
  */
+@JSON(strict = true)
 public class WebsiteModelImpl extends BaseModelImpl<Website>
 	implements WebsiteModel {
 	/*
@@ -157,6 +159,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getWebsiteId() {
 		return _websiteId;
 	}
@@ -165,6 +168,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_websiteId = websiteId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -173,6 +177,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -189,6 +194,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -202,6 +208,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -210,6 +217,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -226,6 +234,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -234,6 +243,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -242,6 +252,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_classPK = classPK;
 	}
 
+	@JSON
 	public String getUrl() {
 		if (_url == null) {
 			return StringPool.BLANK;
@@ -255,6 +266,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_url = url;
 	}
 
+	@JSON
 	public int getTypeId() {
 		return _typeId;
 	}
@@ -263,6 +275,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		_typeId = typeId;
 	}
 
+	@JSON
 	public boolean getPrimary() {
 		return _primary;
 	}

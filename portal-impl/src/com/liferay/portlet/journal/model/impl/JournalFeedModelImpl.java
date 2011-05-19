@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.JournalFeedModel
  * @generated
  */
+@JSON(strict = true)
 public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	implements JournalFeedModel {
 	/*
@@ -181,6 +183,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -202,6 +205,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getId() {
 		return _id;
 	}
@@ -210,6 +214,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_id = id;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -228,6 +233,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -236,6 +242,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -252,6 +259,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -265,6 +273,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -273,6 +282,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -281,6 +291,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getFeedId() {
 		if (_feedId == null) {
 			return StringPool.BLANK;
@@ -302,6 +313,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		return GetterUtil.getString(_originalFeedId);
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -315,6 +327,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -328,6 +341,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_description = description;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -341,6 +355,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_type = type;
 	}
 
+	@JSON
 	public String getStructureId() {
 		if (_structureId == null) {
 			return StringPool.BLANK;
@@ -354,6 +369,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_structureId = structureId;
 	}
 
+	@JSON
 	public String getTemplateId() {
 		if (_templateId == null) {
 			return StringPool.BLANK;
@@ -367,6 +383,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_templateId = templateId;
 	}
 
+	@JSON
 	public String getRendererTemplateId() {
 		if (_rendererTemplateId == null) {
 			return StringPool.BLANK;
@@ -380,6 +397,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_rendererTemplateId = rendererTemplateId;
 	}
 
+	@JSON
 	public int getDelta() {
 		return _delta;
 	}
@@ -388,6 +406,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_delta = delta;
 	}
 
+	@JSON
 	public String getOrderByCol() {
 		if (_orderByCol == null) {
 			return StringPool.BLANK;
@@ -401,6 +420,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_orderByCol = orderByCol;
 	}
 
+	@JSON
 	public String getOrderByType() {
 		if (_orderByType == null) {
 			return StringPool.BLANK;
@@ -414,6 +434,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_orderByType = orderByType;
 	}
 
+	@JSON
 	public String getTargetLayoutFriendlyUrl() {
 		if (_targetLayoutFriendlyUrl == null) {
 			return StringPool.BLANK;
@@ -427,6 +448,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_targetLayoutFriendlyUrl = targetLayoutFriendlyUrl;
 	}
 
+	@JSON
 	public String getTargetPortletId() {
 		if (_targetPortletId == null) {
 			return StringPool.BLANK;
@@ -440,6 +462,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_targetPortletId = targetPortletId;
 	}
 
+	@JSON
 	public String getContentField() {
 		if (_contentField == null) {
 			return StringPool.BLANK;
@@ -453,6 +476,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_contentField = contentField;
 	}
 
+	@JSON
 	public String getFeedType() {
 		if (_feedType == null) {
 			return StringPool.BLANK;
@@ -466,6 +490,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		_feedType = feedType;
 	}
 
+	@JSON
 	public double getFeedVersion() {
 		return _feedVersion;
 	}

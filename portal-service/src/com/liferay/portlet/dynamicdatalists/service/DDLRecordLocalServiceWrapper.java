@@ -322,6 +322,16 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService {
 		return _ddlRecordLocalService.getRecordsCount(recordSetId, status);
 	}
 
+	public void updateAsset(long userId,
+		com.liferay.portlet.dynamicdatalists.model.DDLRecord record,
+		java.util.Locale locale, long[] assetCategoryIds,
+		java.lang.String[] assetTagNames)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_ddlRecordLocalService.updateAsset(userId, record, locale,
+			assetCategoryIds, assetTagNames);
+	}
+
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord updateRecord(
 		long userId, long recordId,
 		com.liferay.portlet.dynamicdatamapping.storage.Fields fields,

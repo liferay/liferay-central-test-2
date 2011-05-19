@@ -58,7 +58,7 @@ public interface WikiPageModel extends BaseModel<WikiPage>, GroupedModel,
 	/**
 	 * Sets the primary key of this wiki page
 	 *
-	 * @param pk the primary key of this wiki page
+	 * @param primaryKey the primary key of this wiki page
 	 */
 	public void setPrimaryKey(long primaryKey);
 

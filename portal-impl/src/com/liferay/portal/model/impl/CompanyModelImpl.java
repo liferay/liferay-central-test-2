@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.CompanyModel
  * @generated
  */
+@JSON(strict = true)
 public class CompanyModelImpl extends BaseModelImpl<Company>
 	implements CompanyModel {
 	/*
@@ -147,6 +149,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -155,6 +158,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getAccountId() {
 		return _accountId;
 	}
@@ -163,6 +167,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_accountId = accountId;
 	}
 
+	@JSON
 	public String getWebId() {
 		if (_webId == null) {
 			return StringPool.BLANK;
@@ -184,6 +189,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		return GetterUtil.getString(_originalWebId);
 	}
 
+	@JSON
 	public String getKey() {
 		if (_key == null) {
 			return StringPool.BLANK;
@@ -197,6 +203,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_key = key;
 	}
 
+	@JSON
 	public String getMx() {
 		if (_mx == null) {
 			return StringPool.BLANK;
@@ -218,6 +225,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		return GetterUtil.getString(_originalMx);
 	}
 
+	@JSON
 	public String getHomeURL() {
 		if (_homeURL == null) {
 			return StringPool.BLANK;
@@ -231,6 +239,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_homeURL = homeURL;
 	}
 
+	@JSON
 	public long getLogoId() {
 		return _logoId;
 	}
@@ -249,6 +258,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		return _originalLogoId;
 	}
 
+	@JSON
 	public boolean getSystem() {
 		return _system;
 	}
@@ -261,6 +271,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_system = system;
 	}
 
+	@JSON
 	public int getMaxUsers() {
 		return _maxUsers;
 	}

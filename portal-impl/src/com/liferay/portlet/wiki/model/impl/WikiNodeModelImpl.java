@@ -16,6 +16,7 @@ package com.liferay.portlet.wiki.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.wiki.model.WikiNodeModel
  * @generated
  */
+@JSON(strict = true)
 public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	implements WikiNodeModel {
 	/*
@@ -157,6 +159,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -178,6 +181,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getNodeId() {
 		return _nodeId;
 	}
@@ -186,6 +190,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_nodeId = nodeId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -204,6 +209,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -212,6 +218,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -228,6 +235,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -241,6 +249,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -249,6 +258,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -257,6 +267,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -278,6 +289,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -291,6 +303,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		_description = description;
 	}
 
+	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}

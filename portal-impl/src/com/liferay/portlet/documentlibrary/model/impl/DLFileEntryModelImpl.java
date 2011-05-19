@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.DLFileEntryModel
  * @generated
  */
+@JSON(strict = true)
 public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	implements DLFileEntryModel {
 	/*
@@ -179,6 +181,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -200,6 +203,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getFileEntryId() {
 		return _fileEntryId;
 	}
@@ -208,6 +212,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_fileEntryId = fileEntryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -226,6 +231,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -234,6 +240,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -250,6 +257,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -263,6 +271,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_userName = userName;
 	}
 
+	@JSON
 	public long getVersionUserId() {
 		return _versionUserId;
 	}
@@ -280,6 +289,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_versionUserUuid = versionUserUuid;
 	}
 
+	@JSON
 	public String getVersionUserName() {
 		if (_versionUserName == null) {
 			return StringPool.BLANK;
@@ -293,6 +303,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_versionUserName = versionUserName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -301,6 +312,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -309,6 +321,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
@@ -317,6 +330,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_repositoryId = repositoryId;
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -335,6 +349,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _originalFolderId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -356,6 +371,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getExtension() {
 		if (_extension == null) {
 			return StringPool.BLANK;
@@ -369,6 +385,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_extension = extension;
 	}
 
+	@JSON
 	public String getMimeType() {
 		if (_mimeType == null) {
 			return StringPool.BLANK;
@@ -382,6 +399,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_mimeType = mimeType;
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -403,6 +421,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return GetterUtil.getString(_originalTitle);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -416,6 +435,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_description = description;
 	}
 
+	@JSON
 	public String getExtraSettings() {
 		if (_extraSettings == null) {
 			return StringPool.BLANK;
@@ -429,6 +449,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_extraSettings = extraSettings;
 	}
 
+	@JSON
 	public long getDocumentTypeId() {
 		return _documentTypeId;
 	}
@@ -437,6 +458,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_documentTypeId = documentTypeId;
 	}
 
+	@JSON
 	public String getVersion() {
 		if (_version == null) {
 			return StringPool.BLANK;
@@ -450,6 +472,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_version = version;
 	}
 
+	@JSON
 	public long getSize() {
 		return _size;
 	}
@@ -458,6 +481,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_size = size;
 	}
 
+	@JSON
 	public int getReadCount() {
 		return _readCount;
 	}

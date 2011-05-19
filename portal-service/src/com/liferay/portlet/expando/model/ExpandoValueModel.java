@@ -50,7 +50,7 @@ public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
 	/**
 	 * Sets the primary key of this expando value
 	 *
-	 * @param pk the primary key of this expando value
+	 * @param primaryKey the primary key of this expando value
 	 */
 	public void setPrimaryKey(long primaryKey);
 

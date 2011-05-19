@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.ResourcePermissionModel
  * @generated
  */
+@JSON(strict = true)
 public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermission>
 	implements ResourcePermissionModel {
 	/*
@@ -146,6 +148,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getResourcePermissionId() {
 		return _resourcePermissionId;
 	}
@@ -154,6 +157,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		_resourcePermissionId = resourcePermissionId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -172,6 +176,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -193,6 +198,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public int getScope() {
 		return _scope;
 	}
@@ -211,6 +217,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalScope;
 	}
 
+	@JSON
 	public String getPrimKey() {
 		if (_primKey == null) {
 			return StringPool.BLANK;
@@ -232,6 +239,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return GetterUtil.getString(_originalPrimKey);
 	}
 
+	@JSON
 	public long getRoleId() {
 		return _roleId;
 	}
@@ -250,6 +258,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalRoleId;
 	}
 
+	@JSON
 	public long getOwnerId() {
 		return _ownerId;
 	}
@@ -268,6 +277,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalOwnerId;
 	}
 
+	@JSON
 	public long getActionIds() {
 		return _actionIds;
 	}

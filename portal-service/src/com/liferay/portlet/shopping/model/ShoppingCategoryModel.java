@@ -57,7 +57,7 @@ public interface ShoppingCategoryModel extends BaseModel<ShoppingCategory>,
 	/**
 	 * Sets the primary key of this shopping category
 	 *
-	 * @param pk the primary key of this shopping category
+	 * @param primaryKey the primary key of this shopping category
 	 */
 	public void setPrimaryKey(long primaryKey);
 

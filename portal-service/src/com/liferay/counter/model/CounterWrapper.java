@@ -48,7 +48,7 @@ public class CounterWrapper implements Counter {
 	/**
 	* Sets the primary key of this counter
 	*
-	* @param pk the primary key of this counter
+	* @param primaryKey the primary key of this counter
 	*/
 	public void setPrimaryKey(java.lang.String primaryKey) {
 		_counter.setPrimaryKey(primaryKey);

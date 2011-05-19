@@ -16,6 +16,7 @@ package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -51,6 +52,7 @@ import java.util.List;
  * @see com.liferay.portlet.polls.model.PollsVoteModel
  * @generated
  */
+@JSON(strict = true)
 public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	implements PollsVoteModel {
 	/*
@@ -142,6 +144,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getVoteId() {
 		return _voteId;
 	}
@@ -150,6 +153,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		_voteId = voteId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -176,6 +180,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		return _originalUserId;
 	}
 
+	@JSON
 	public long getQuestionId() {
 		return _questionId;
 	}
@@ -194,6 +199,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		return _originalQuestionId;
 	}
 
+	@JSON
 	public long getChoiceId() {
 		return _choiceId;
 	}
@@ -202,6 +208,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		_choiceId = choiceId;
 	}
 
+	@JSON
 	public Date getVoteDate() {
 		return _voteDate;
 	}

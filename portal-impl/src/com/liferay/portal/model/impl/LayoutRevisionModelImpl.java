@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -59,6 +60,7 @@ import java.util.Map;
  * @see com.liferay.portal.model.LayoutRevisionModel
  * @generated
  */
+@JSON(strict = true)
 public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	implements LayoutRevisionModel {
 	/*
@@ -204,6 +206,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getLayoutRevisionId() {
 		return _layoutRevisionId;
 	}
@@ -212,6 +215,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_layoutRevisionId = layoutRevisionId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -220,6 +224,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -228,6 +233,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -244,6 +250,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -257,6 +264,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -265,6 +273,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -273,6 +282,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getLayoutSetBranchId() {
 		return _layoutSetBranchId;
 	}
@@ -291,6 +301,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return _originalLayoutSetBranchId;
 	}
 
+	@JSON
 	public long getParentLayoutRevisionId() {
 		return _parentLayoutRevisionId;
 	}
@@ -299,6 +310,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_parentLayoutRevisionId = parentLayoutRevisionId;
 	}
 
+	@JSON
 	public boolean getHead() {
 		return _head;
 	}
@@ -321,6 +333,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return _originalHead;
 	}
 
+	@JSON
 	public boolean getMajor() {
 		return _major;
 	}
@@ -333,6 +346,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_major = major;
 	}
 
+	@JSON
 	public String getVariationName() {
 		if (_variationName == null) {
 			return StringPool.BLANK;
@@ -346,6 +360,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_variationName = variationName;
 	}
 
+	@JSON
 	public long getPlid() {
 		return _plid;
 	}
@@ -364,6 +379,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return _originalPlid;
 	}
 
+	@JSON
 	public boolean getPrivateLayout() {
 		return _privateLayout;
 	}
@@ -376,6 +392,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_privateLayout = privateLayout;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -464,6 +481,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -552,6 +570,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -644,6 +663,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@JSON
 	public String getKeywords() {
 		if (_keywords == null) {
 			return StringPool.BLANK;
@@ -734,6 +754,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@JSON
 	public String getRobots() {
 		if (_robots == null) {
 			return StringPool.BLANK;
@@ -822,6 +843,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
 			return StringPool.BLANK;
@@ -835,6 +857,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_typeSettings = typeSettings;
 	}
 
+	@JSON
 	public boolean getIconImage() {
 		return _iconImage;
 	}
@@ -847,6 +870,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_iconImage = iconImage;
 	}
 
+	@JSON
 	public long getIconImageId() {
 		return _iconImageId;
 	}
@@ -855,6 +879,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_iconImageId = iconImageId;
 	}
 
+	@JSON
 	public String getThemeId() {
 		if (_themeId == null) {
 			return StringPool.BLANK;
@@ -868,6 +893,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_themeId = themeId;
 	}
 
+	@JSON
 	public String getColorSchemeId() {
 		if (_colorSchemeId == null) {
 			return StringPool.BLANK;
@@ -881,6 +907,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_colorSchemeId = colorSchemeId;
 	}
 
+	@JSON
 	public String getWapThemeId() {
 		if (_wapThemeId == null) {
 			return StringPool.BLANK;
@@ -894,6 +921,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_wapThemeId = wapThemeId;
 	}
 
+	@JSON
 	public String getWapColorSchemeId() {
 		if (_wapColorSchemeId == null) {
 			return StringPool.BLANK;
@@ -907,6 +935,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_wapColorSchemeId = wapColorSchemeId;
 	}
 
+	@JSON
 	public String getCss() {
 		if (_css == null) {
 			return StringPool.BLANK;
@@ -920,6 +949,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_css = css;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -928,6 +958,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -945,6 +976,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -958,6 +990,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

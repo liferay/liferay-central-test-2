@@ -56,7 +56,7 @@ public interface DLFolderModel extends BaseModel<DLFolder>, GroupedModel {
 	/**
 	 * Sets the primary key of this d l folder
 	 *
-	 * @param pk the primary key of this d l folder
+	 * @param primaryKey the primary key of this d l folder
 	 */
 	public void setPrimaryKey(long primaryKey);
 

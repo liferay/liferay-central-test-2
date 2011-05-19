@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portal.model.AddressModel
  * @generated
  */
+@JSON(strict = true)
 public class AddressModelImpl extends BaseModelImpl<Address>
 	implements AddressModel {
 	/*
@@ -171,6 +173,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getAddressId() {
 		return _addressId;
 	}
@@ -179,6 +182,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_addressId = addressId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -187,6 +191,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -203,6 +208,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -216,6 +222,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -224,6 +231,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -240,6 +248,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -248,6 +257,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -256,6 +266,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_classPK = classPK;
 	}
 
+	@JSON
 	public String getStreet1() {
 		if (_street1 == null) {
 			return StringPool.BLANK;
@@ -269,6 +280,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_street1 = street1;
 	}
 
+	@JSON
 	public String getStreet2() {
 		if (_street2 == null) {
 			return StringPool.BLANK;
@@ -282,6 +294,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_street2 = street2;
 	}
 
+	@JSON
 	public String getStreet3() {
 		if (_street3 == null) {
 			return StringPool.BLANK;
@@ -295,6 +308,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_street3 = street3;
 	}
 
+	@JSON
 	public String getCity() {
 		if (_city == null) {
 			return StringPool.BLANK;
@@ -308,6 +322,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_city = city;
 	}
 
+	@JSON
 	public String getZip() {
 		if (_zip == null) {
 			return StringPool.BLANK;
@@ -321,6 +336,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_zip = zip;
 	}
 
+	@JSON
 	public long getRegionId() {
 		return _regionId;
 	}
@@ -329,6 +345,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_regionId = regionId;
 	}
 
+	@JSON
 	public long getCountryId() {
 		return _countryId;
 	}
@@ -337,6 +354,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_countryId = countryId;
 	}
 
+	@JSON
 	public int getTypeId() {
 		return _typeId;
 	}
@@ -345,6 +363,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_typeId = typeId;
 	}
 
+	@JSON
 	public boolean getMailing() {
 		return _mailing;
 	}
@@ -357,6 +376,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		_mailing = mailing;
 	}
 
+	@JSON
 	public boolean getPrimary() {
 		return _primary;
 	}

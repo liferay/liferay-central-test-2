@@ -48,7 +48,7 @@ public class SCProductEntryWrapper implements SCProductEntry {
 	/**
 	* Sets the primary key of this s c product entry
 	*
-	* @param pk the primary key of this s c product entry
+	* @param primaryKey the primary key of this s c product entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_scProductEntry.setPrimaryKey(primaryKey);

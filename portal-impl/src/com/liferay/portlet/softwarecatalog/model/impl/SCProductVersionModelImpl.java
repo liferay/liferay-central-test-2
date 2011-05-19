@@ -16,6 +16,7 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.softwarecatalog.model.SCProductVersionModel
  * @generated
  */
+@JSON(strict = true)
 public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	implements SCProductVersionModel {
 	/*
@@ -165,6 +167,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getProductVersionId() {
 		return _productVersionId;
 	}
@@ -173,6 +176,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_productVersionId = productVersionId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -181,6 +185,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -197,6 +202,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -210,6 +216,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -218,6 +225,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -226,6 +234,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getProductEntryId() {
 		return _productEntryId;
 	}
@@ -234,6 +243,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_productEntryId = productEntryId;
 	}
 
+	@JSON
 	public String getVersion() {
 		if (_version == null) {
 			return StringPool.BLANK;
@@ -247,6 +257,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_version = version;
 	}
 
+	@JSON
 	public String getChangeLog() {
 		if (_changeLog == null) {
 			return StringPool.BLANK;
@@ -260,6 +271,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_changeLog = changeLog;
 	}
 
+	@JSON
 	public String getDownloadPageURL() {
 		if (_downloadPageURL == null) {
 			return StringPool.BLANK;
@@ -273,6 +285,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_downloadPageURL = downloadPageURL;
 	}
 
+	@JSON
 	public String getDirectDownloadURL() {
 		if (_directDownloadURL == null) {
 			return StringPool.BLANK;
@@ -294,6 +307,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		return GetterUtil.getString(_originalDirectDownloadURL);
 	}
 
+	@JSON
 	public boolean getRepoStoreArtifact() {
 		return _repoStoreArtifact;
 	}

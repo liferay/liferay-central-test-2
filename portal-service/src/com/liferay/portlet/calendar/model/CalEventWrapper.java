@@ -48,7 +48,7 @@ public class CalEventWrapper implements CalEvent {
 	/**
 	* Sets the primary key of this cal event
 	*
-	* @param pk the primary key of this cal event
+	* @param primaryKey the primary key of this cal event
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_calEvent.setPrimaryKey(primaryKey);

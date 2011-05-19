@@ -48,7 +48,7 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 	/**
 	* Sets the primary key of this social equity user
 	*
-	* @param pk the primary key of this social equity user
+	* @param primaryKey the primary key of this social equity user
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialEquityUser.setPrimaryKey(primaryKey);

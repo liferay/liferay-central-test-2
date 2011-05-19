@@ -48,7 +48,7 @@ public class RatingsEntryWrapper implements RatingsEntry {
 	/**
 	* Sets the primary key of this ratings entry
 	*
-	* @param pk the primary key of this ratings entry
+	* @param primaryKey the primary key of this ratings entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_ratingsEntry.setPrimaryKey(primaryKey);

@@ -56,7 +56,7 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry>, GroupedModel {
 	/**
 	 * Sets the primary key of this d l file entry
 	 *
-	 * @param pk the primary key of this d l file entry
+	 * @param primaryKey the primary key of this d l file entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 

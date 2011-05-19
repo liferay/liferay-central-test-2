@@ -16,6 +16,7 @@ package com.liferay.portlet.blogs.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -54,6 +55,7 @@ import java.util.List;
  * @see com.liferay.portlet.blogs.model.BlogsEntryModel
  * @generated
  */
+@JSON(strict = true)
 public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	implements BlogsEntryModel {
 	/*
@@ -183,6 +185,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -204,6 +207,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
@@ -212,6 +216,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_entryId = entryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -230,6 +235,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -238,6 +244,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -254,6 +261,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -267,6 +275,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -275,6 +284,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -283,6 +293,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -296,6 +307,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_title = title;
 	}
 
+	@JSON
 	public String getUrlTitle() {
 		if (_urlTitle == null) {
 			return StringPool.BLANK;
@@ -317,6 +329,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return GetterUtil.getString(_originalUrlTitle);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -330,6 +343,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_description = description;
 	}
 
+	@JSON
 	public String getContent() {
 		if (_content == null) {
 			return StringPool.BLANK;
@@ -343,6 +357,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_content = content;
 	}
 
+	@JSON
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -351,6 +366,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_displayDate = displayDate;
 	}
 
+	@JSON
 	public boolean getAllowPingbacks() {
 		return _allowPingbacks;
 	}
@@ -363,6 +379,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_allowPingbacks = allowPingbacks;
 	}
 
+	@JSON
 	public boolean getAllowTrackbacks() {
 		return _allowTrackbacks;
 	}
@@ -375,6 +392,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_allowTrackbacks = allowTrackbacks;
 	}
 
+	@JSON
 	public String getTrackbacks() {
 		if (_trackbacks == null) {
 			return StringPool.BLANK;
@@ -388,6 +406,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_trackbacks = trackbacks;
 	}
 
+	@JSON
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
@@ -400,6 +419,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_smallImage = smallImage;
 	}
 
+	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
@@ -408,6 +428,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_smallImageId = smallImageId;
 	}
 
+	@JSON
 	public String getSmallImageURL() {
 		if (_smallImageURL == null) {
 			return StringPool.BLANK;
@@ -421,6 +442,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_smallImageURL = smallImageURL;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -429,6 +451,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -446,6 +469,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -459,6 +483,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

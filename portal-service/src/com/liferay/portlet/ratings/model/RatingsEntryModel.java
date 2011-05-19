@@ -56,7 +56,7 @@ public interface RatingsEntryModel extends AuditedModel, BaseModel<RatingsEntry>
 	/**
 	 * Sets the primary key of this ratings entry
 	 *
-	 * @param pk the primary key of this ratings entry
+	 * @param primaryKey the primary key of this ratings entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 

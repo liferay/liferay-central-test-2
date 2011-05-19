@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.MBCategoryModel
  * @generated
  */
+@JSON(strict = true)
 public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	implements MBCategoryModel {
 	/*
@@ -165,6 +167,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -186,6 +189,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -194,6 +198,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_categoryId = categoryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -212,6 +217,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -220,6 +226,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -236,6 +243,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -249,6 +257,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -257,6 +266,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -265,6 +275,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getParentCategoryId() {
 		return _parentCategoryId;
 	}
@@ -273,6 +284,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_parentCategoryId = parentCategoryId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -286,6 +298,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -299,6 +312,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_description = description;
 	}
 
+	@JSON
 	public String getDisplayStyle() {
 		if (_displayStyle == null) {
 			return StringPool.BLANK;
@@ -312,6 +326,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_displayStyle = displayStyle;
 	}
 
+	@JSON
 	public int getThreadCount() {
 		return _threadCount;
 	}
@@ -320,6 +335,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_threadCount = threadCount;
 	}
 
+	@JSON
 	public int getMessageCount() {
 		return _messageCount;
 	}
@@ -328,6 +344,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_messageCount = messageCount;
 	}
 
+	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}

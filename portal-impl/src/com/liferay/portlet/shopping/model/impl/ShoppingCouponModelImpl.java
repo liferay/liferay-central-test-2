@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.ShoppingCouponModel
  * @generated
  */
+@JSON(strict = true)
 public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	implements ShoppingCouponModel {
 	/*
@@ -172,6 +174,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getCouponId() {
 		return _couponId;
 	}
@@ -180,6 +183,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_couponId = couponId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -188,6 +192,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -196,6 +201,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -212,6 +218,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -225,6 +232,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -233,6 +241,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -241,6 +250,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getCode() {
 		if (_code == null) {
 			return StringPool.BLANK;
@@ -262,6 +272,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		return GetterUtil.getString(_originalCode);
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -275,6 +286,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -288,6 +300,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_description = description;
 	}
 
+	@JSON
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -296,6 +309,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_startDate = startDate;
 	}
 
+	@JSON
 	public Date getEndDate() {
 		return _endDate;
 	}
@@ -304,6 +318,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_endDate = endDate;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}
@@ -316,6 +331,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_active = active;
 	}
 
+	@JSON
 	public String getLimitCategories() {
 		if (_limitCategories == null) {
 			return StringPool.BLANK;
@@ -329,6 +345,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_limitCategories = limitCategories;
 	}
 
+	@JSON
 	public String getLimitSkus() {
 		if (_limitSkus == null) {
 			return StringPool.BLANK;
@@ -342,6 +359,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_limitSkus = limitSkus;
 	}
 
+	@JSON
 	public double getMinOrder() {
 		return _minOrder;
 	}
@@ -350,6 +368,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_minOrder = minOrder;
 	}
 
+	@JSON
 	public double getDiscount() {
 		return _discount;
 	}
@@ -358,6 +377,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		_discount = discount;
 	}
 
+	@JSON
 	public String getDiscountType() {
 		if (_discountType == null) {
 			return StringPool.BLANK;

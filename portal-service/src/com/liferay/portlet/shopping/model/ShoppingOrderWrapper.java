@@ -48,7 +48,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 	/**
 	* Sets the primary key of this shopping order
 	*
-	* @param pk the primary key of this shopping order
+	* @param primaryKey the primary key of this shopping order
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_shoppingOrder.setPrimaryKey(primaryKey);

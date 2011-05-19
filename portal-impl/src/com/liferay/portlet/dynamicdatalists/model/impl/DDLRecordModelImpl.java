@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatalists.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.dynamicdatalists.model.DDLRecordModel
  * @generated
  */
+@JSON(strict = true)
 public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	implements DDLRecordModel {
 	/*
@@ -166,6 +168,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -187,6 +190,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getRecordId() {
 		return _recordId;
 	}
@@ -195,6 +199,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_recordId = recordId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -213,6 +218,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -221,6 +227,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -237,6 +244,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -250,6 +258,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -258,6 +267,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -274,6 +284,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -282,6 +293,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -290,6 +302,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_classPK = classPK;
 	}
 
+	@JSON
 	public long getRecordSetId() {
 		return _recordSetId;
 	}
@@ -298,6 +311,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_recordSetId = recordSetId;
 	}
 
+	@JSON
 	public int getDisplayIndex() {
 		return _displayIndex;
 	}
@@ -306,6 +320,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_displayIndex = displayIndex;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -314,6 +329,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -331,6 +347,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -344,6 +361,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

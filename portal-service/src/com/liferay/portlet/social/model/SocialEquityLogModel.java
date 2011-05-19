@@ -53,7 +53,7 @@ public interface SocialEquityLogModel extends BaseModel<SocialEquityLog> {
 	/**
 	 * Sets the primary key of this social equity log
 	 *
-	 * @param pk the primary key of this social equity log
+	 * @param primaryKey the primary key of this social equity log
 	 */
 	public void setPrimaryKey(long primaryKey);
 

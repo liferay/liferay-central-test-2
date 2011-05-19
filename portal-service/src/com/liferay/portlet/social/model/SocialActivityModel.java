@@ -53,7 +53,7 @@ public interface SocialActivityModel extends BaseModel<SocialActivity> {
 	/**
 	 * Sets the primary key of this social activity
 	 *
-	 * @param pk the primary key of this social activity
+	 * @param primaryKey the primary key of this social activity
 	 */
 	public void setPrimaryKey(long primaryKey);
 

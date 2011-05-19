@@ -59,7 +59,7 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion>,
 	/**
 	 * Sets the primary key of this polls question
 	 *
-	 * @param pk the primary key of this polls question
+	 * @param primaryKey the primary key of this polls question
 	 */
 	public void setPrimaryKey(long primaryKey);
 

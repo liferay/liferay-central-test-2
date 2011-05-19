@@ -49,7 +49,7 @@ public interface ExpandoRowModel extends BaseModel<ExpandoRow> {
 	/**
 	 * Sets the primary key of this expando row
 	 *
-	 * @param pk the primary key of this expando row
+	 * @param primaryKey the primary key of this expando row
 	 */
 	public void setPrimaryKey(long primaryKey);
 

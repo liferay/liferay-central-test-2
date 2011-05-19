@@ -16,6 +16,7 @@ package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -60,6 +61,7 @@ import java.util.Map;
  * @see com.liferay.portlet.polls.model.PollsQuestionModel
  * @generated
  */
+@JSON(strict = true)
 public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 	implements PollsQuestionModel {
 	/*
@@ -167,6 +169,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -188,6 +191,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getQuestionId() {
 		return _questionId;
 	}
@@ -196,6 +200,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_questionId = questionId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -214,6 +219,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -222,6 +228,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -238,6 +245,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -251,6 +259,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -259,6 +268,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -267,6 +277,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -355,6 +366,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -447,6 +459,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		}
 	}
 
+	@JSON
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -455,6 +468,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_expirationDate = expirationDate;
 	}
 
+	@JSON
 	public Date getLastVoteDate() {
 		return _lastVoteDate;
 	}

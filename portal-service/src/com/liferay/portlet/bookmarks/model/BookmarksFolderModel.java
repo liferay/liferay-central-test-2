@@ -55,7 +55,7 @@ public interface BookmarksFolderModel extends BaseModel<BookmarksFolder> {
 	/**
 	 * Sets the primary key of this bookmarks folder
 	 *
-	 * @param pk the primary key of this bookmarks folder
+	 * @param primaryKey the primary key of this bookmarks folder
 	 */
 	public void setPrimaryKey(long primaryKey);
 

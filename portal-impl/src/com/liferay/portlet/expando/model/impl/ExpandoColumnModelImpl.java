@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,6 +47,7 @@ import java.util.List;
  * @see com.liferay.portlet.expando.model.ExpandoColumnModel
  * @generated
  */
+@JSON(strict = true)
 public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	implements ExpandoColumnModel {
 	/*
@@ -143,6 +145,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getColumnId() {
 		return _columnId;
 	}
@@ -151,6 +154,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		_columnId = columnId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -159,6 +163,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getTableId() {
 		return _tableId;
 	}
@@ -177,6 +182,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return _originalTableId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -198,6 +204,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public int getType() {
 		return _type;
 	}
@@ -206,6 +213,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		_type = type;
 	}
 
+	@JSON
 	public String getDefaultData() {
 		if (_defaultData == null) {
 			return StringPool.BLANK;
@@ -219,6 +227,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		_defaultData = defaultData;
 	}
 
+	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
 			return StringPool.BLANK;

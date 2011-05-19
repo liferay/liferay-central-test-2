@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -47,6 +48,7 @@ import java.util.List;
  * @see com.liferay.portlet.expando.model.ExpandoValueModel
  * @generated
  */
+@JSON(strict = true)
 public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	implements ExpandoValueModel {
 	/*
@@ -146,6 +148,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getValueId() {
 		return _valueId;
 	}
@@ -154,6 +157,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		_valueId = valueId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -162,6 +166,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getTableId() {
 		return _tableId;
 	}
@@ -180,6 +185,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return _originalTableId;
 	}
 
+	@JSON
 	public long getColumnId() {
 		return _columnId;
 	}
@@ -198,6 +204,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return _originalColumnId;
 	}
 
+	@JSON
 	public long getRowId() {
 		return _rowId;
 	}
@@ -224,6 +231,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -232,6 +240,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -250,6 +259,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return _originalClassPK;
 	}
 
+	@JSON
 	public String getData() {
 		if (_data == null) {
 			return StringPool.BLANK;

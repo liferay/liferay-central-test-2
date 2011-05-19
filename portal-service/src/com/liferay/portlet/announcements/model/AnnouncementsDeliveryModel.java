@@ -53,7 +53,7 @@ public interface AnnouncementsDeliveryModel extends BaseModel<AnnouncementsDeliv
 	/**
 	 * Sets the primary key of this announcements delivery
 	 *
-	 * @param pk the primary key of this announcements delivery
+	 * @param primaryKey the primary key of this announcements delivery
 	 */
 	public void setPrimaryKey(long primaryKey);
 

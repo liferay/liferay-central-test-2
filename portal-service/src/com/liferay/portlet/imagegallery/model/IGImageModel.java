@@ -55,7 +55,7 @@ public interface IGImageModel extends BaseModel<IGImage> {
 	/**
 	 * Sets the primary key of this i g image
 	 *
-	 * @param pk the primary key of this i g image
+	 * @param primaryKey the primary key of this i g image
 	 */
 	public void setPrimaryKey(long primaryKey);
 

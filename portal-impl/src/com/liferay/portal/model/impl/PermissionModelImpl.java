@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.PermissionModel
  * @generated
  */
+@JSON(strict = true)
 public class PermissionModelImpl extends BaseModelImpl<Permission>
 	implements PermissionModel {
 	/*
@@ -143,6 +145,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getPermissionId() {
 		return _permissionId;
 	}
@@ -151,6 +154,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		_permissionId = permissionId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -159,6 +163,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public String getActionId() {
 		if (_actionId == null) {
 			return StringPool.BLANK;
@@ -180,6 +185,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		return GetterUtil.getString(_originalActionId);
 	}
 
+	@JSON
 	public long getResourceId() {
 		return _resourceId;
 	}

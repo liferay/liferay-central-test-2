@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
  * @generated
  */
+@JSON(strict = true)
 public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	implements DLFileShortcutModel {
 	/*
@@ -164,6 +166,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -185,6 +188,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getFileShortcutId() {
 		return _fileShortcutId;
 	}
@@ -193,6 +197,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_fileShortcutId = fileShortcutId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -211,6 +216,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -219,6 +225,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -235,6 +242,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -248,6 +256,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -256,6 +265,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -264,6 +274,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
@@ -272,6 +283,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_repositoryId = repositoryId;
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -280,6 +292,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_folderId = folderId;
 	}
 
+	@JSON
 	public long getToFileEntryId() {
 		return _toFileEntryId;
 	}
@@ -288,6 +301,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_toFileEntryId = toFileEntryId;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -296,6 +310,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -313,6 +328,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -326,6 +342,7 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

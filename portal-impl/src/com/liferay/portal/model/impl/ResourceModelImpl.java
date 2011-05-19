@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.ResourceModel
  * @generated
  */
+@JSON(strict = true)
 public class ResourceModelImpl extends BaseModelImpl<Resource>
 	implements ResourceModel {
 	/*
@@ -135,6 +137,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getResourceId() {
 		return _resourceId;
 	}
@@ -143,6 +146,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		_resourceId = resourceId;
 	}
 
+	@JSON
 	public long getCodeId() {
 		return _codeId;
 	}
@@ -161,6 +165,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		return _originalCodeId;
 	}
 
+	@JSON
 	public String getPrimKey() {
 		if (_primKey == null) {
 			return StringPool.BLANK;

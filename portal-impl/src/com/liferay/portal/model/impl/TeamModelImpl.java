@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -51,6 +52,7 @@ import java.util.List;
  * @see com.liferay.portal.model.TeamModel
  * @generated
  */
+@JSON(strict = true)
 public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -155,6 +157,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getTeamId() {
 		return _teamId;
 	}
@@ -163,6 +166,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_teamId = teamId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -171,6 +175,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -187,6 +192,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -200,6 +206,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -208,6 +215,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -216,6 +224,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -234,6 +243,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return _originalGroupId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -255,6 +265,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;

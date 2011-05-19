@@ -16,6 +16,7 @@ package com.liferay.portlet.bookmarks.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.bookmarks.model.BookmarksEntryModel
  * @generated
  */
+@JSON(strict = true)
 public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	implements BookmarksEntryModel {
 	/*
@@ -161,6 +163,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -182,6 +185,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
@@ -190,6 +194,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_entryId = entryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -208,6 +213,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -216,6 +222,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -232,6 +239,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -240,6 +248,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -248,6 +257,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -256,6 +266,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_folderId = folderId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -269,6 +280,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_name = name;
 	}
 
+	@JSON
 	public String getUrl() {
 		if (_url == null) {
 			return StringPool.BLANK;
@@ -282,6 +294,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_url = url;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -295,6 +308,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_description = description;
 	}
 
+	@JSON
 	public int getVisits() {
 		return _visits;
 	}
@@ -303,6 +317,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		_visits = visits;
 	}
 
+	@JSON
 	public int getPriority() {
 		return _priority;
 	}

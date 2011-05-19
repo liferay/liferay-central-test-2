@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.ShoppingOrderModel
  * @generated
  */
+@JSON(strict = true)
 public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	implements ShoppingOrderModel {
 	/*
@@ -238,6 +240,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getOrderId() {
 		return _orderId;
 	}
@@ -246,6 +249,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_orderId = orderId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -254,6 +258,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -262,6 +267,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -278,6 +284,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -291,6 +298,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -299,6 +307,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -307,6 +316,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getNumber() {
 		if (_number == null) {
 			return StringPool.BLANK;
@@ -328,6 +338,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return GetterUtil.getString(_originalNumber);
 	}
 
+	@JSON
 	public double getTax() {
 		return _tax;
 	}
@@ -336,6 +347,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_tax = tax;
 	}
 
+	@JSON
 	public double getShipping() {
 		return _shipping;
 	}
@@ -344,6 +356,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shipping = shipping;
 	}
 
+	@JSON
 	public String getAltShipping() {
 		if (_altShipping == null) {
 			return StringPool.BLANK;
@@ -357,6 +370,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_altShipping = altShipping;
 	}
 
+	@JSON
 	public boolean getRequiresShipping() {
 		return _requiresShipping;
 	}
@@ -369,6 +383,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_requiresShipping = requiresShipping;
 	}
 
+	@JSON
 	public boolean getInsure() {
 		return _insure;
 	}
@@ -381,6 +396,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_insure = insure;
 	}
 
+	@JSON
 	public double getInsurance() {
 		return _insurance;
 	}
@@ -389,6 +405,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_insurance = insurance;
 	}
 
+	@JSON
 	public String getCouponCodes() {
 		if (_couponCodes == null) {
 			return StringPool.BLANK;
@@ -402,6 +419,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_couponCodes = couponCodes;
 	}
 
+	@JSON
 	public double getCouponDiscount() {
 		return _couponDiscount;
 	}
@@ -410,6 +428,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_couponDiscount = couponDiscount;
 	}
 
+	@JSON
 	public String getBillingFirstName() {
 		if (_billingFirstName == null) {
 			return StringPool.BLANK;
@@ -423,6 +442,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingFirstName = billingFirstName;
 	}
 
+	@JSON
 	public String getBillingLastName() {
 		if (_billingLastName == null) {
 			return StringPool.BLANK;
@@ -436,6 +456,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingLastName = billingLastName;
 	}
 
+	@JSON
 	public String getBillingEmailAddress() {
 		if (_billingEmailAddress == null) {
 			return StringPool.BLANK;
@@ -449,6 +470,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingEmailAddress = billingEmailAddress;
 	}
 
+	@JSON
 	public String getBillingCompany() {
 		if (_billingCompany == null) {
 			return StringPool.BLANK;
@@ -462,6 +484,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingCompany = billingCompany;
 	}
 
+	@JSON
 	public String getBillingStreet() {
 		if (_billingStreet == null) {
 			return StringPool.BLANK;
@@ -475,6 +498,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingStreet = billingStreet;
 	}
 
+	@JSON
 	public String getBillingCity() {
 		if (_billingCity == null) {
 			return StringPool.BLANK;
@@ -488,6 +512,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingCity = billingCity;
 	}
 
+	@JSON
 	public String getBillingState() {
 		if (_billingState == null) {
 			return StringPool.BLANK;
@@ -501,6 +526,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingState = billingState;
 	}
 
+	@JSON
 	public String getBillingZip() {
 		if (_billingZip == null) {
 			return StringPool.BLANK;
@@ -514,6 +540,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingZip = billingZip;
 	}
 
+	@JSON
 	public String getBillingCountry() {
 		if (_billingCountry == null) {
 			return StringPool.BLANK;
@@ -527,6 +554,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingCountry = billingCountry;
 	}
 
+	@JSON
 	public String getBillingPhone() {
 		if (_billingPhone == null) {
 			return StringPool.BLANK;
@@ -540,6 +568,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_billingPhone = billingPhone;
 	}
 
+	@JSON
 	public boolean getShipToBilling() {
 		return _shipToBilling;
 	}
@@ -552,6 +581,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shipToBilling = shipToBilling;
 	}
 
+	@JSON
 	public String getShippingFirstName() {
 		if (_shippingFirstName == null) {
 			return StringPool.BLANK;
@@ -565,6 +595,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingFirstName = shippingFirstName;
 	}
 
+	@JSON
 	public String getShippingLastName() {
 		if (_shippingLastName == null) {
 			return StringPool.BLANK;
@@ -578,6 +609,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingLastName = shippingLastName;
 	}
 
+	@JSON
 	public String getShippingEmailAddress() {
 		if (_shippingEmailAddress == null) {
 			return StringPool.BLANK;
@@ -591,6 +623,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingEmailAddress = shippingEmailAddress;
 	}
 
+	@JSON
 	public String getShippingCompany() {
 		if (_shippingCompany == null) {
 			return StringPool.BLANK;
@@ -604,6 +637,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingCompany = shippingCompany;
 	}
 
+	@JSON
 	public String getShippingStreet() {
 		if (_shippingStreet == null) {
 			return StringPool.BLANK;
@@ -617,6 +651,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingStreet = shippingStreet;
 	}
 
+	@JSON
 	public String getShippingCity() {
 		if (_shippingCity == null) {
 			return StringPool.BLANK;
@@ -630,6 +665,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingCity = shippingCity;
 	}
 
+	@JSON
 	public String getShippingState() {
 		if (_shippingState == null) {
 			return StringPool.BLANK;
@@ -643,6 +679,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingState = shippingState;
 	}
 
+	@JSON
 	public String getShippingZip() {
 		if (_shippingZip == null) {
 			return StringPool.BLANK;
@@ -656,6 +693,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingZip = shippingZip;
 	}
 
+	@JSON
 	public String getShippingCountry() {
 		if (_shippingCountry == null) {
 			return StringPool.BLANK;
@@ -669,6 +707,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingCountry = shippingCountry;
 	}
 
+	@JSON
 	public String getShippingPhone() {
 		if (_shippingPhone == null) {
 			return StringPool.BLANK;
@@ -682,6 +721,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_shippingPhone = shippingPhone;
 	}
 
+	@JSON
 	public String getCcName() {
 		if (_ccName == null) {
 			return StringPool.BLANK;
@@ -695,6 +735,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ccName = ccName;
 	}
 
+	@JSON
 	public String getCcType() {
 		if (_ccType == null) {
 			return StringPool.BLANK;
@@ -708,6 +749,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ccType = ccType;
 	}
 
+	@JSON
 	public String getCcNumber() {
 		if (_ccNumber == null) {
 			return StringPool.BLANK;
@@ -721,6 +763,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ccNumber = ccNumber;
 	}
 
+	@JSON
 	public int getCcExpMonth() {
 		return _ccExpMonth;
 	}
@@ -729,6 +772,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ccExpMonth = ccExpMonth;
 	}
 
+	@JSON
 	public int getCcExpYear() {
 		return _ccExpYear;
 	}
@@ -737,6 +781,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ccExpYear = ccExpYear;
 	}
 
+	@JSON
 	public String getCcVerNumber() {
 		if (_ccVerNumber == null) {
 			return StringPool.BLANK;
@@ -750,6 +795,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ccVerNumber = ccVerNumber;
 	}
 
+	@JSON
 	public String getComments() {
 		if (_comments == null) {
 			return StringPool.BLANK;
@@ -763,6 +809,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_comments = comments;
 	}
 
+	@JSON
 	public String getPpTxnId() {
 		if (_ppTxnId == null) {
 			return StringPool.BLANK;
@@ -784,6 +831,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return GetterUtil.getString(_originalPpTxnId);
 	}
 
+	@JSON
 	public String getPpPaymentStatus() {
 		if (_ppPaymentStatus == null) {
 			return StringPool.BLANK;
@@ -797,6 +845,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ppPaymentStatus = ppPaymentStatus;
 	}
 
+	@JSON
 	public double getPpPaymentGross() {
 		return _ppPaymentGross;
 	}
@@ -805,6 +854,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ppPaymentGross = ppPaymentGross;
 	}
 
+	@JSON
 	public String getPpReceiverEmail() {
 		if (_ppReceiverEmail == null) {
 			return StringPool.BLANK;
@@ -818,6 +868,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ppReceiverEmail = ppReceiverEmail;
 	}
 
+	@JSON
 	public String getPpPayerEmail() {
 		if (_ppPayerEmail == null) {
 			return StringPool.BLANK;
@@ -831,6 +882,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_ppPayerEmail = ppPayerEmail;
 	}
 
+	@JSON
 	public boolean getSendOrderEmail() {
 		return _sendOrderEmail;
 	}
@@ -843,6 +895,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_sendOrderEmail = sendOrderEmail;
 	}
 
+	@JSON
 	public boolean getSendShippingEmail() {
 		return _sendShippingEmail;
 	}

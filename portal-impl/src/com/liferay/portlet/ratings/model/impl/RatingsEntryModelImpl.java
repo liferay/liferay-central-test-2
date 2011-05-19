@@ -16,6 +16,7 @@ package com.liferay.portlet.ratings.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.ratings.model.RatingsEntryModel
  * @generated
  */
+@JSON(strict = true)
 public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	implements RatingsEntryModel {
 	/*
@@ -151,6 +153,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
@@ -159,6 +162,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		_entryId = entryId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -167,6 +171,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -193,6 +198,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return _originalUserId;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -206,6 +212,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -214,6 +221,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -230,6 +238,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -248,6 +257,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return _originalClassNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -266,6 +276,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		return _originalClassPK;
 	}
 
+	@JSON
 	public double getScore() {
 		return _score;
 	}

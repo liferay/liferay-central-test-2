@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.LayoutSetModel
  * @generated
  */
+@JSON(strict = true)
 public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	implements LayoutSetModel {
 	/*
@@ -157,6 +159,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getLayoutSetId() {
 		return _layoutSetId;
 	}
@@ -165,6 +168,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_layoutSetId = layoutSetId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -183,6 +187,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -191,6 +196,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public boolean getPrivateLayout() {
 		return _privateLayout;
 	}
@@ -213,6 +219,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		return _originalPrivateLayout;
 	}
 
+	@JSON
 	public boolean getLogo() {
 		return _logo;
 	}
@@ -225,6 +232,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_logo = logo;
 	}
 
+	@JSON
 	public long getLogoId() {
 		return _logoId;
 	}
@@ -233,6 +241,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_logoId = logoId;
 	}
 
+	@JSON
 	public String getThemeId() {
 		if (_themeId == null) {
 			return StringPool.BLANK;
@@ -246,6 +255,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_themeId = themeId;
 	}
 
+	@JSON
 	public String getColorSchemeId() {
 		if (_colorSchemeId == null) {
 			return StringPool.BLANK;
@@ -259,6 +269,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_colorSchemeId = colorSchemeId;
 	}
 
+	@JSON
 	public String getWapThemeId() {
 		if (_wapThemeId == null) {
 			return StringPool.BLANK;
@@ -272,6 +283,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_wapThemeId = wapThemeId;
 	}
 
+	@JSON
 	public String getWapColorSchemeId() {
 		if (_wapColorSchemeId == null) {
 			return StringPool.BLANK;
@@ -285,6 +297,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_wapColorSchemeId = wapColorSchemeId;
 	}
 
+	@JSON
 	public String getCss() {
 		if (_css == null) {
 			return StringPool.BLANK;
@@ -298,6 +311,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_css = css;
 	}
 
+	@JSON
 	public int getPageCount() {
 		return _pageCount;
 	}
@@ -306,6 +320,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_pageCount = pageCount;
 	}
 
+	@JSON
 	public String getSettings() {
 		if (_settings == null) {
 			return StringPool.BLANK;
@@ -319,6 +334,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		_settings = settings;
 	}
 
+	@JSON
 	public long getLayoutSetPrototypeId() {
 		return _layoutSetPrototypeId;
 	}

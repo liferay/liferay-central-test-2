@@ -48,7 +48,7 @@ public class ExpandoRowWrapper implements ExpandoRow {
 	/**
 	* Sets the primary key of this expando row
 	*
-	* @param pk the primary key of this expando row
+	* @param primaryKey the primary key of this expando row
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_expandoRow.setPrimaryKey(primaryKey);

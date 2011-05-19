@@ -48,7 +48,7 @@ public class SocialRequestWrapper implements SocialRequest {
 	/**
 	* Sets the primary key of this social request
 	*
-	* @param pk the primary key of this social request
+	* @param primaryKey the primary key of this social request
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialRequest.setPrimaryKey(primaryKey);

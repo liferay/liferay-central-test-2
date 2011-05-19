@@ -57,7 +57,7 @@ public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
 	/**
 	 * Sets the primary key of this s c product entry
 	 *
-	 * @param pk the primary key of this s c product entry
+	 * @param primaryKey the primary key of this s c product entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 

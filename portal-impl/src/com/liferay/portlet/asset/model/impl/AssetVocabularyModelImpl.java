@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -59,6 +60,7 @@ import java.util.Map;
  * @see com.liferay.portlet.asset.model.AssetVocabularyModel
  * @generated
  */
+@JSON(strict = true)
 public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	implements AssetVocabularyModel {
 	/*
@@ -167,6 +169,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -188,6 +191,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getVocabularyId() {
 		return _vocabularyId;
 	}
@@ -196,6 +200,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_vocabularyId = vocabularyId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -214,6 +219,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -222,6 +228,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -238,6 +245,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -251,6 +259,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -259,6 +268,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -267,6 +277,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -288,6 +299,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -376,6 +388,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -468,6 +481,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		}
 	}
 
+	@JSON
 	public String getSettings() {
 		if (_settings == null) {
 			return StringPool.BLANK;

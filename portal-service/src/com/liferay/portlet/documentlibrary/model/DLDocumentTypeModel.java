@@ -57,7 +57,7 @@ public interface DLDocumentTypeModel extends BaseModel<DLDocumentType>,
 	/**
 	 * Sets the primary key of this d l document type
 	 *
-	 * @param pk the primary key of this d l document type
+	 * @param primaryKey the primary key of this d l document type
 	 */
 	public void setPrimaryKey(long primaryKey);
 

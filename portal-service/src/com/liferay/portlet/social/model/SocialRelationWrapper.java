@@ -48,7 +48,7 @@ public class SocialRelationWrapper implements SocialRelation {
 	/**
 	* Sets the primary key of this social relation
 	*
-	* @param pk the primary key of this social relation
+	* @param primaryKey the primary key of this social relation
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialRelation.setPrimaryKey(primaryKey);

@@ -57,7 +57,7 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	/**
 	 * Sets the primary key of this message boards mailing list
 	 *
-	 * @param pk the primary key of this message boards mailing list
+	 * @param primaryKey the primary key of this message boards mailing list
 	 */
 	public void setPrimaryKey(long primaryKey);
 

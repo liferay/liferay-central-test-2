@@ -56,7 +56,7 @@ public interface MBMessageModel extends BaseModel<MBMessage>, GroupedModel {
 	/**
 	 * Sets the primary key of this message-boards message
 	 *
-	 * @param pk the primary key of this message-boards message
+	 * @param primaryKey the primary key of this message-boards message
 	 */
 	public void setPrimaryKey(long primaryKey);
 

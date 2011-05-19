@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -56,6 +57,7 @@ import java.util.Map;
  * @see com.liferay.portal.model.LayoutModel
  * @generated
  */
+@JSON(strict = true)
 public class LayoutModelImpl extends BaseModelImpl<Layout>
 	implements LayoutModel {
 	/*
@@ -193,6 +195,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -214,6 +217,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getPlid() {
 		return _plid;
 	}
@@ -222,6 +226,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_plid = plid;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -240,6 +245,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -248,6 +254,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -256,6 +263,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -264,6 +272,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public boolean getPrivateLayout() {
 		return _privateLayout;
 	}
@@ -286,6 +295,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return _originalPrivateLayout;
 	}
 
+	@JSON
 	public long getLayoutId() {
 		return _layoutId;
 	}
@@ -304,6 +314,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return _originalLayoutId;
 	}
 
+	@JSON
 	public long getParentLayoutId() {
 		return _parentLayoutId;
 	}
@@ -312,6 +323,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_parentLayoutId = parentLayoutId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -400,6 +412,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -488,6 +501,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -580,6 +594,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@JSON
 	public String getKeywords() {
 		if (_keywords == null) {
 			return StringPool.BLANK;
@@ -670,6 +685,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@JSON
 	public String getRobots() {
 		if (_robots == null) {
 			return StringPool.BLANK;
@@ -758,6 +774,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -771,6 +788,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_type = type;
 	}
 
+	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
 			return StringPool.BLANK;
@@ -784,6 +802,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_typeSettings = typeSettings;
 	}
 
+	@JSON
 	public boolean getHidden() {
 		return _hidden;
 	}
@@ -796,6 +815,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_hidden = hidden;
 	}
 
+	@JSON
 	public String getFriendlyURL() {
 		if (_friendlyURL == null) {
 			return StringPool.BLANK;
@@ -817,6 +837,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return GetterUtil.getString(_originalFriendlyURL);
 	}
 
+	@JSON
 	public boolean getIconImage() {
 		return _iconImage;
 	}
@@ -829,6 +850,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_iconImage = iconImage;
 	}
 
+	@JSON
 	public long getIconImageId() {
 		return _iconImageId;
 	}
@@ -847,6 +869,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return _originalIconImageId;
 	}
 
+	@JSON
 	public String getThemeId() {
 		if (_themeId == null) {
 			return StringPool.BLANK;
@@ -860,6 +883,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_themeId = themeId;
 	}
 
+	@JSON
 	public String getColorSchemeId() {
 		if (_colorSchemeId == null) {
 			return StringPool.BLANK;
@@ -873,6 +897,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_colorSchemeId = colorSchemeId;
 	}
 
+	@JSON
 	public String getWapThemeId() {
 		if (_wapThemeId == null) {
 			return StringPool.BLANK;
@@ -886,6 +911,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_wapThemeId = wapThemeId;
 	}
 
+	@JSON
 	public String getWapColorSchemeId() {
 		if (_wapColorSchemeId == null) {
 			return StringPool.BLANK;
@@ -899,6 +925,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_wapColorSchemeId = wapColorSchemeId;
 	}
 
+	@JSON
 	public String getCss() {
 		if (_css == null) {
 			return StringPool.BLANK;
@@ -912,6 +939,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_css = css;
 	}
 
+	@JSON
 	public int getPriority() {
 		return _priority;
 	}
@@ -920,6 +948,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_priority = priority;
 	}
 
+	@JSON
 	public long getLayoutPrototypeId() {
 		return _layoutPrototypeId;
 	}

@@ -51,7 +51,7 @@ public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
 	/**
 	 * Sets the primary key of this message boards discussion
 	 *
-	 * @param pk the primary key of this message boards discussion
+	 * @param primaryKey the primary key of this message boards discussion
 	 */
 	public void setPrimaryKey(long primaryKey);
 

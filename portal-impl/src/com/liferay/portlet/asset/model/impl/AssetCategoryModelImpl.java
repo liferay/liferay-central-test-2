@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -59,6 +60,7 @@ import java.util.Map;
  * @see com.liferay.portlet.asset.model.AssetCategoryModel
  * @generated
  */
+@JSON(strict = true)
 public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	implements AssetCategoryModel {
 	/*
@@ -175,6 +177,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -196,6 +199,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -204,6 +208,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_categoryId = categoryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -222,6 +227,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -230,6 +236,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -246,6 +253,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -259,6 +267,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -267,6 +276,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -275,6 +285,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getParentCategoryId() {
 		return _parentCategoryId;
 	}
@@ -293,6 +304,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return _originalParentCategoryId;
 	}
 
+	@JSON
 	public long getLeftCategoryId() {
 		return _leftCategoryId;
 	}
@@ -301,6 +313,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_leftCategoryId = leftCategoryId;
 	}
 
+	@JSON
 	public long getRightCategoryId() {
 		return _rightCategoryId;
 	}
@@ -309,6 +322,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		_rightCategoryId = rightCategoryId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -330,6 +344,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -418,6 +433,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -510,6 +526,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		}
 	}
 
+	@JSON
 	public long getVocabularyId() {
 		return _vocabularyId;
 	}

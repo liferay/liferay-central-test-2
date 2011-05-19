@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.PortletPreferencesModel
  * @generated
  */
+@JSON(strict = true)
 public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreferences>
 	implements PortletPreferencesModel {
 	/*
@@ -142,6 +144,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getPortletPreferencesId() {
 		return _portletPreferencesId;
 	}
@@ -150,6 +153,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		_portletPreferencesId = portletPreferencesId;
 	}
 
+	@JSON
 	public long getOwnerId() {
 		return _ownerId;
 	}
@@ -168,6 +172,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return _originalOwnerId;
 	}
 
+	@JSON
 	public int getOwnerType() {
 		return _ownerType;
 	}
@@ -186,6 +191,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return _originalOwnerType;
 	}
 
+	@JSON
 	public long getPlid() {
 		return _plid;
 	}
@@ -204,6 +210,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return _originalPlid;
 	}
 
+	@JSON
 	public String getPortletId() {
 		if (_portletId == null) {
 			return StringPool.BLANK;
@@ -225,6 +232,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		return GetterUtil.getString(_originalPortletId);
 	}
 
+	@JSON
 	public String getPreferences() {
 		if (_preferences == null) {
 			return StringPool.BLANK;

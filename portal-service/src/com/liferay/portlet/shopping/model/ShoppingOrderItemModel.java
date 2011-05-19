@@ -54,7 +54,7 @@ public interface ShoppingOrderItemModel extends BaseModel<ShoppingOrderItem> {
 	/**
 	 * Sets the primary key of this shopping order item
 	 *
-	 * @param pk the primary key of this shopping order item
+	 * @param primaryKey the primary key of this shopping order item
 	 */
 	public void setPrimaryKey(long primaryKey);
 

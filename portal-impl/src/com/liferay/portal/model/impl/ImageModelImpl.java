@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -49,6 +50,7 @@ import java.util.List;
  * @see com.liferay.portal.model.ImageModel
  * @generated
  */
+@JSON(strict = true)
 public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -145,6 +147,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getImageId() {
 		return _imageId;
 	}
@@ -153,6 +156,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		_imageId = imageId;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -161,6 +165,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getText() {
 		if (_text == null) {
 			return StringPool.BLANK;
@@ -174,6 +179,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		_text = text;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -187,6 +193,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		_type = type;
 	}
 
+	@JSON
 	public int getHeight() {
 		return _height;
 	}
@@ -195,6 +202,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		_height = height;
 	}
 
+	@JSON
 	public int getWidth() {
 		return _width;
 	}
@@ -203,6 +211,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		_width = width;
 	}
 
+	@JSON
 	public int getSize() {
 		return _size;
 	}

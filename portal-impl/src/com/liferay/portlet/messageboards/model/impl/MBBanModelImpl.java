@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.MBBanModel
  * @generated
  */
+@JSON(strict = true)
 public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -148,6 +150,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getBanId() {
 		return _banId;
 	}
@@ -156,6 +159,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_banId = banId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -174,6 +178,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -182,6 +187,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -198,6 +204,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -211,6 +218,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -219,6 +227,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -227,6 +236,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getBanUserId() {
 		return _banUserId;
 	}

@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.shopping.model.ShoppingItemModel
  * @generated
  */
+@JSON(strict = true)
 public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	implements ShoppingItemModel {
 	/*
@@ -203,6 +205,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getItemId() {
 		return _itemId;
 	}
@@ -211,6 +214,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_itemId = itemId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -219,6 +223,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -237,6 +242,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -253,6 +259,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -266,6 +273,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -274,6 +282,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -282,6 +291,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -290,6 +300,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_categoryId = categoryId;
 	}
 
+	@JSON
 	public String getSku() {
 		if (_sku == null) {
 			return StringPool.BLANK;
@@ -311,6 +322,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return GetterUtil.getString(_originalSku);
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -324,6 +336,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -337,6 +350,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_description = description;
 	}
 
+	@JSON
 	public String getProperties() {
 		if (_properties == null) {
 			return StringPool.BLANK;
@@ -350,6 +364,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_properties = properties;
 	}
 
+	@JSON
 	public boolean getFields() {
 		return _fields;
 	}
@@ -362,6 +377,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_fields = fields;
 	}
 
+	@JSON
 	public String getFieldsQuantities() {
 		if (_fieldsQuantities == null) {
 			return StringPool.BLANK;
@@ -375,6 +391,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_fieldsQuantities = fieldsQuantities;
 	}
 
+	@JSON
 	public int getMinQuantity() {
 		return _minQuantity;
 	}
@@ -383,6 +400,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_minQuantity = minQuantity;
 	}
 
+	@JSON
 	public int getMaxQuantity() {
 		return _maxQuantity;
 	}
@@ -391,6 +409,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_maxQuantity = maxQuantity;
 	}
 
+	@JSON
 	public double getPrice() {
 		return _price;
 	}
@@ -399,6 +418,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_price = price;
 	}
 
+	@JSON
 	public double getDiscount() {
 		return _discount;
 	}
@@ -407,6 +427,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_discount = discount;
 	}
 
+	@JSON
 	public boolean getTaxable() {
 		return _taxable;
 	}
@@ -419,6 +440,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_taxable = taxable;
 	}
 
+	@JSON
 	public double getShipping() {
 		return _shipping;
 	}
@@ -427,6 +449,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_shipping = shipping;
 	}
 
+	@JSON
 	public boolean getUseShippingFormula() {
 		return _useShippingFormula;
 	}
@@ -439,6 +462,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_useShippingFormula = useShippingFormula;
 	}
 
+	@JSON
 	public boolean getRequiresShipping() {
 		return _requiresShipping;
 	}
@@ -451,6 +475,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_requiresShipping = requiresShipping;
 	}
 
+	@JSON
 	public int getStockQuantity() {
 		return _stockQuantity;
 	}
@@ -459,6 +484,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_stockQuantity = stockQuantity;
 	}
 
+	@JSON
 	public boolean getFeatured() {
 		return _featured;
 	}
@@ -471,6 +497,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_featured = featured;
 	}
 
+	@JSON
 	public boolean getSale() {
 		return _sale;
 	}
@@ -483,6 +510,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_sale = sale;
 	}
 
+	@JSON
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
@@ -495,6 +523,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_smallImage = smallImage;
 	}
 
+	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
@@ -513,6 +542,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalSmallImageId;
 	}
 
+	@JSON
 	public String getSmallImageURL() {
 		if (_smallImageURL == null) {
 			return StringPool.BLANK;
@@ -526,6 +556,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_smallImageURL = smallImageURL;
 	}
 
+	@JSON
 	public boolean getMediumImage() {
 		return _mediumImage;
 	}
@@ -538,6 +569,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_mediumImage = mediumImage;
 	}
 
+	@JSON
 	public long getMediumImageId() {
 		return _mediumImageId;
 	}
@@ -556,6 +588,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalMediumImageId;
 	}
 
+	@JSON
 	public String getMediumImageURL() {
 		if (_mediumImageURL == null) {
 			return StringPool.BLANK;
@@ -569,6 +602,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_mediumImageURL = mediumImageURL;
 	}
 
+	@JSON
 	public boolean getLargeImage() {
 		return _largeImage;
 	}
@@ -581,6 +615,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		_largeImage = largeImage;
 	}
 
+	@JSON
 	public long getLargeImageId() {
 		return _largeImageId;
 	}
@@ -599,6 +634,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		return _originalLargeImageId;
 	}
 
+	@JSON
 	public String getLargeImageURL() {
 		if (_largeImageURL == null) {
 			return StringPool.BLANK;

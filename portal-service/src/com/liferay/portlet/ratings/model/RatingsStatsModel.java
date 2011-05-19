@@ -51,7 +51,7 @@ public interface RatingsStatsModel extends BaseModel<RatingsStats> {
 	/**
 	 * Sets the primary key of this ratings stats
 	 *
-	 * @param pk the primary key of this ratings stats
+	 * @param primaryKey the primary key of this ratings stats
 	 */
 	public void setPrimaryKey(long primaryKey);
 

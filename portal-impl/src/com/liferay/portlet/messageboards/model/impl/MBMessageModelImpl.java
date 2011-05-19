@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -54,6 +55,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.MBMessageModel
  * @generated
  */
+@JSON(strict = true)
 public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	implements MBMessageModel {
 	/*
@@ -187,6 +189,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -208,6 +211,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getMessageId() {
 		return _messageId;
 	}
@@ -216,6 +220,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_messageId = messageId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -234,6 +239,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -242,6 +248,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -258,6 +265,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -271,6 +279,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -279,6 +288,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -295,6 +305,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -303,6 +314,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -311,6 +323,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_classPK = classPK;
 	}
 
+	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -319,6 +332,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_categoryId = categoryId;
 	}
 
+	@JSON
 	public long getThreadId() {
 		return _threadId;
 	}
@@ -327,6 +341,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_threadId = threadId;
 	}
 
+	@JSON
 	public long getRootMessageId() {
 		return _rootMessageId;
 	}
@@ -335,6 +350,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_rootMessageId = rootMessageId;
 	}
 
+	@JSON
 	public long getParentMessageId() {
 		return _parentMessageId;
 	}
@@ -343,6 +359,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_parentMessageId = parentMessageId;
 	}
 
+	@JSON
 	public String getSubject() {
 		if (_subject == null) {
 			return StringPool.BLANK;
@@ -356,6 +373,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_subject = subject;
 	}
 
+	@JSON
 	public String getBody() {
 		if (_body == null) {
 			return StringPool.BLANK;
@@ -369,6 +387,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_body = body;
 	}
 
+	@JSON
 	public String getFormat() {
 		if (_format == null) {
 			return StringPool.BLANK;
@@ -382,6 +401,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_format = format;
 	}
 
+	@JSON
 	public boolean getAttachments() {
 		return _attachments;
 	}
@@ -394,6 +414,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_attachments = attachments;
 	}
 
+	@JSON
 	public boolean getAnonymous() {
 		return _anonymous;
 	}
@@ -406,6 +427,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_anonymous = anonymous;
 	}
 
+	@JSON
 	public double getPriority() {
 		return _priority;
 	}
@@ -414,6 +436,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_priority = priority;
 	}
 
+	@JSON
 	public boolean getAllowPingbacks() {
 		return _allowPingbacks;
 	}
@@ -426,6 +449,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_allowPingbacks = allowPingbacks;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -434,6 +458,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -451,6 +476,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -464,6 +490,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

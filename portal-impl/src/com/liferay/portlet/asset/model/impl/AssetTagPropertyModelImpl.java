@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.asset.model.AssetTagPropertyModel
  * @generated
  */
+@JSON(strict = true)
 public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	implements AssetTagPropertyModel {
 	/*
@@ -154,6 +156,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getTagPropertyId() {
 		return _tagPropertyId;
 	}
@@ -162,6 +165,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		_tagPropertyId = tagPropertyId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -170,6 +174,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -186,6 +191,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -199,6 +205,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -207,6 +214,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -215,6 +223,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getTagId() {
 		return _tagId;
 	}
@@ -233,6 +242,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return _originalTagId;
 	}
 
+	@JSON
 	public String getKey() {
 		if (_key == null) {
 			return StringPool.BLANK;
@@ -254,6 +264,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		return GetterUtil.getString(_originalKey);
 	}
 
+	@JSON
 	public String getValue() {
 		if (_value == null) {
 			return StringPool.BLANK;

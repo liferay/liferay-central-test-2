@@ -52,7 +52,7 @@ public interface CounterModel extends BaseModel<Counter> {
 	/**
 	 * Sets the primary key of this counter
 	 *
-	 * @param pk the primary key of this counter
+	 * @param primaryKey the primary key of this counter
 	 */
 	public void setPrimaryKey(String primaryKey);
 

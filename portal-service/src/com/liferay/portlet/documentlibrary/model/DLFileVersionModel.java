@@ -55,7 +55,7 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	/**
 	 * Sets the primary key of this d l file version
 	 *
-	 * @param pk the primary key of this d l file version
+	 * @param primaryKey the primary key of this d l file version
 	 */
 	public void setPrimaryKey(long primaryKey);
 

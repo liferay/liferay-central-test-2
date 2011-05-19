@@ -16,6 +16,7 @@ package com.liferay.portlet.announcements.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -51,6 +52,7 @@ import java.util.List;
  * @see com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
  * @generated
  */
+@JSON(strict = true)
 public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsDelivery>
 	implements AnnouncementsDeliveryModel {
 	/*
@@ -148,6 +150,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getDeliveryId() {
 		return _deliveryId;
 	}
@@ -156,6 +159,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		_deliveryId = deliveryId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -164,6 +168,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -190,6 +195,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return _originalUserId;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -211,6 +217,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		return GetterUtil.getString(_originalType);
 	}
 
+	@JSON
 	public boolean getEmail() {
 		return _email;
 	}
@@ -223,6 +230,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		_email = email;
 	}
 
+	@JSON
 	public boolean getSms() {
 		return _sms;
 	}
@@ -235,6 +243,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		_sms = sms;
 	}
 
+	@JSON
 	public boolean getWebsite() {
 		return _website;
 	}

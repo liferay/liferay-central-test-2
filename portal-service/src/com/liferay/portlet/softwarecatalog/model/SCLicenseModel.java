@@ -52,7 +52,7 @@ public interface SCLicenseModel extends BaseModel<SCLicense> {
 	/**
 	 * Sets the primary key of this s c license
 	 *
-	 * @param pk the primary key of this s c license
+	 * @param primaryKey the primary key of this s c license
 	 */
 	public void setPrimaryKey(long primaryKey);
 

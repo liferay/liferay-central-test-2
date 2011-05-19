@@ -48,7 +48,7 @@ public class PollsVoteWrapper implements PollsVote {
 	/**
 	* Sets the primary key of this polls vote
 	*
-	* @param pk the primary key of this polls vote
+	* @param primaryKey the primary key of this polls vote
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_pollsVote.setPrimaryKey(primaryKey);

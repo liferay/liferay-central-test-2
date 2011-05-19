@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.journal.model.JournalTemplateModel
  * @generated
  */
+@JSON(strict = true)
 public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	implements JournalTemplateModel {
 	/*
@@ -172,6 +174,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -193,6 +196,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getId() {
 		return _id;
 	}
@@ -201,6 +205,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_id = id;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -219,6 +224,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -227,6 +233,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -243,6 +250,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -256,6 +264,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -264,6 +273,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -272,6 +282,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getTemplateId() {
 		if (_templateId == null) {
 			return StringPool.BLANK;
@@ -293,6 +304,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return GetterUtil.getString(_originalTemplateId);
 	}
 
+	@JSON
 	public String getStructureId() {
 		if (_structureId == null) {
 			return StringPool.BLANK;
@@ -306,6 +318,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_structureId = structureId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -319,6 +332,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -332,6 +346,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_description = description;
 	}
 
+	@JSON
 	public String getXsl() {
 		if (_xsl == null) {
 			return StringPool.BLANK;
@@ -345,6 +360,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_xsl = xsl;
 	}
 
+	@JSON
 	public String getLangType() {
 		if (_langType == null) {
 			return StringPool.BLANK;
@@ -358,6 +374,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_langType = langType;
 	}
 
+	@JSON
 	public boolean getCacheable() {
 		return _cacheable;
 	}
@@ -370,6 +387,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_cacheable = cacheable;
 	}
 
+	@JSON
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
@@ -382,6 +400,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		_smallImage = smallImage;
 	}
 
+	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
@@ -400,6 +419,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		return _originalSmallImageId;
 	}
 
+	@JSON
 	public String getSmallImageURL() {
 		if (_smallImageURL == null) {
 			return StringPool.BLANK;

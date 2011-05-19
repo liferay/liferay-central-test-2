@@ -16,6 +16,7 @@ package com.liferay.portlet.calendar.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -53,6 +54,7 @@ import java.util.List;
  * @see com.liferay.portlet.calendar.model.CalEventModel
  * @generated
  */
+@JSON(strict = true)
 public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	implements CalEventModel {
 	/*
@@ -182,6 +184,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -203,6 +206,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getEventId() {
 		return _eventId;
 	}
@@ -211,6 +215,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_eventId = eventId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -229,6 +234,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -237,6 +243,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -253,6 +260,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -266,6 +274,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -274,6 +283,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -282,6 +292,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -295,6 +306,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_title = title;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -308,6 +320,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_description = description;
 	}
 
+	@JSON
 	public String getLocation() {
 		if (_location == null) {
 			return StringPool.BLANK;
@@ -321,6 +334,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_location = location;
 	}
 
+	@JSON
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -329,6 +343,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_startDate = startDate;
 	}
 
+	@JSON
 	public Date getEndDate() {
 		return _endDate;
 	}
@@ -337,6 +352,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_endDate = endDate;
 	}
 
+	@JSON
 	public int getDurationHour() {
 		return _durationHour;
 	}
@@ -345,6 +361,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_durationHour = durationHour;
 	}
 
+	@JSON
 	public int getDurationMinute() {
 		return _durationMinute;
 	}
@@ -353,6 +370,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_durationMinute = durationMinute;
 	}
 
+	@JSON
 	public boolean getAllDay() {
 		return _allDay;
 	}
@@ -365,6 +383,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_allDay = allDay;
 	}
 
+	@JSON
 	public boolean getTimeZoneSensitive() {
 		return _timeZoneSensitive;
 	}
@@ -377,6 +396,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_timeZoneSensitive = timeZoneSensitive;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -390,6 +410,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_type = type;
 	}
 
+	@JSON
 	public boolean getRepeating() {
 		return _repeating;
 	}
@@ -402,6 +423,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_repeating = repeating;
 	}
 
+	@JSON
 	public String getRecurrence() {
 		if (_recurrence == null) {
 			return StringPool.BLANK;
@@ -415,6 +437,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_recurrence = recurrence;
 	}
 
+	@JSON
 	public int getRemindBy() {
 		return _remindBy;
 	}
@@ -423,6 +446,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_remindBy = remindBy;
 	}
 
+	@JSON
 	public int getFirstReminder() {
 		return _firstReminder;
 	}
@@ -431,6 +455,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_firstReminder = firstReminder;
 	}
 
+	@JSON
 	public int getSecondReminder() {
 		return _secondReminder;
 	}

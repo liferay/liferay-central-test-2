@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -60,6 +61,7 @@ import java.util.Map;
  * @see com.liferay.portlet.journal.model.JournalArticleModel
  * @generated
  */
+@JSON(strict = true)
 public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	implements JournalArticleModel {
 	/*
@@ -207,6 +209,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -228,6 +231,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getId() {
 		return _id;
 	}
@@ -236,6 +240,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_id = id;
 	}
 
+	@JSON
 	public long getResourcePrimKey() {
 		return _resourcePrimKey;
 	}
@@ -248,6 +253,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return true;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -266,6 +272,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -274,6 +281,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -290,6 +298,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -303,6 +312,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -311,6 +321,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -327,6 +338,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -345,6 +357,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalClassNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -363,6 +376,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalClassPK;
 	}
 
+	@JSON
 	public String getArticleId() {
 		if (_articleId == null) {
 			return StringPool.BLANK;
@@ -384,6 +398,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalArticleId);
 	}
 
+	@JSON
 	public double getVersion() {
 		return _version;
 	}
@@ -402,6 +417,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return _originalVersion;
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -490,6 +506,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@JSON
 	public String getUrlTitle() {
 		if (_urlTitle == null) {
 			return StringPool.BLANK;
@@ -503,6 +520,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_urlTitle = urlTitle;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -595,6 +613,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 	}
 
+	@JSON
 	public String getContent() {
 		if (_content == null) {
 			return StringPool.BLANK;
@@ -608,6 +627,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_content = content;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -621,6 +641,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_type = type;
 	}
 
+	@JSON
 	public String getStructureId() {
 		if (_structureId == null) {
 			return StringPool.BLANK;
@@ -642,6 +663,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		return GetterUtil.getString(_originalStructureId);
 	}
 
+	@JSON
 	public String getTemplateId() {
 		if (_templateId == null) {
 			return StringPool.BLANK;
@@ -655,6 +677,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_templateId = templateId;
 	}
 
+	@JSON
 	public String getLayoutUuid() {
 		if (_layoutUuid == null) {
 			return StringPool.BLANK;
@@ -668,6 +691,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_layoutUuid = layoutUuid;
 	}
 
+	@JSON
 	public Date getDisplayDate() {
 		return _displayDate;
 	}
@@ -676,6 +700,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_displayDate = displayDate;
 	}
 
+	@JSON
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -684,6 +709,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_expirationDate = expirationDate;
 	}
 
+	@JSON
 	public Date getReviewDate() {
 		return _reviewDate;
 	}
@@ -692,6 +718,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_reviewDate = reviewDate;
 	}
 
+	@JSON
 	public boolean getIndexable() {
 		return _indexable;
 	}
@@ -704,6 +731,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_indexable = indexable;
 	}
 
+	@JSON
 	public boolean getSmallImage() {
 		return _smallImage;
 	}
@@ -716,6 +744,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_smallImage = smallImage;
 	}
 
+	@JSON
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
@@ -724,6 +753,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_smallImageId = smallImageId;
 	}
 
+	@JSON
 	public String getSmallImageURL() {
 		if (_smallImageURL == null) {
 			return StringPool.BLANK;
@@ -737,6 +767,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_smallImageURL = smallImageURL;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -745,6 +776,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -762,6 +794,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -775,6 +808,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

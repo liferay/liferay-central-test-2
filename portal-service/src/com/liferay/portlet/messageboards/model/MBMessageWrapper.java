@@ -48,7 +48,7 @@ public class MBMessageWrapper implements MBMessage {
 	/**
 	* Sets the primary key of this message-boards message
 	*
-	* @param pk the primary key of this message-boards message
+	* @param primaryKey the primary key of this message-boards message
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_mbMessage.setPrimaryKey(primaryKey);

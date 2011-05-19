@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.documentlibrary.model.DLFolderModel
  * @generated
  */
+@JSON(strict = true)
 public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	implements DLFolderModel {
 	/*
@@ -163,6 +165,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -184,6 +187,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -192,6 +196,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_folderId = folderId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -210,6 +215,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -218,6 +224,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -234,6 +241,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -247,6 +255,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -255,6 +264,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -263,6 +273,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
@@ -281,6 +292,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalRepositoryId;
 	}
 
+	@JSON
 	public boolean getMountPoint() {
 		return _mountPoint;
 	}
@@ -293,6 +305,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_mountPoint = mountPoint;
 	}
 
+	@JSON
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -311,6 +324,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return _originalParentFolderId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -332,6 +346,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		return GetterUtil.getString(_originalName);
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -345,6 +360,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_description = description;
 	}
 
+	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}

@@ -57,7 +57,7 @@ public interface ShoppingCouponModel extends BaseModel<ShoppingCoupon>,
 	/**
 	 * Sets the primary key of this shopping coupon
 	 *
-	 * @param pk the primary key of this shopping coupon
+	 * @param primaryKey the primary key of this shopping coupon
 	 */
 	public void setPrimaryKey(long primaryKey);
 

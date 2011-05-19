@@ -16,6 +16,7 @@ package com.liferay.portlet.announcements.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.announcements.model.AnnouncementsFlagModel
  * @generated
  */
+@JSON(strict = true)
 public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	implements AnnouncementsFlagModel {
 	/*
@@ -146,6 +148,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getFlagId() {
 		return _flagId;
 	}
@@ -154,6 +157,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		_flagId = flagId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -180,6 +184,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return _originalUserId;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -188,6 +193,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
@@ -206,6 +212,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		return _originalEntryId;
 	}
 
+	@JSON
 	public int getValue() {
 		return _value;
 	}

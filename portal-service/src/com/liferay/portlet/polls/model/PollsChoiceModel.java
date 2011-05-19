@@ -55,7 +55,7 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	/**
 	 * Sets the primary key of this polls choice
 	 *
-	 * @param pk the primary key of this polls choice
+	 * @param primaryKey the primary key of this polls choice
 	 */
 	public void setPrimaryKey(long primaryKey);
 

@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -55,6 +56,7 @@ import java.util.Map;
  * @see com.liferay.portal.model.LayoutPrototypeModel
  * @generated
  */
+@JSON(strict = true)
 public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	implements LayoutPrototypeModel {
 	/*
@@ -149,6 +151,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getLayoutPrototypeId() {
 		return _layoutPrototypeId;
 	}
@@ -157,6 +160,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		_layoutPrototypeId = layoutPrototypeId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -165,6 +169,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -253,6 +258,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		}
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -266,6 +272,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		_description = description;
 	}
 
+	@JSON
 	public String getSettings() {
 		if (_settings == null) {
 			return StringPool.BLANK;
@@ -279,6 +286,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		_settings = settings;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}

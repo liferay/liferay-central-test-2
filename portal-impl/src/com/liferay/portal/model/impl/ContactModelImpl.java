@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -51,6 +52,7 @@ import java.util.List;
  * @see com.liferay.portal.model.ContactModel
  * @generated
  */
+@JSON(strict = true)
 public class ContactModelImpl extends BaseModelImpl<Contact>
 	implements ContactModel {
 	/*
@@ -192,6 +194,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getContactId() {
 		return _contactId;
 	}
@@ -200,6 +203,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_contactId = contactId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -208,6 +212,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -224,6 +229,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -237,6 +243,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -245,6 +252,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -253,6 +261,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getAccountId() {
 		return _accountId;
 	}
@@ -261,6 +270,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_accountId = accountId;
 	}
 
+	@JSON
 	public long getParentContactId() {
 		return _parentContactId;
 	}
@@ -269,6 +279,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_parentContactId = parentContactId;
 	}
 
+	@JSON
 	public String getFirstName() {
 		if (_firstName == null) {
 			return StringPool.BLANK;
@@ -282,6 +293,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_firstName = firstName;
 	}
 
+	@JSON
 	public String getMiddleName() {
 		if (_middleName == null) {
 			return StringPool.BLANK;
@@ -295,6 +307,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_middleName = middleName;
 	}
 
+	@JSON
 	public String getLastName() {
 		if (_lastName == null) {
 			return StringPool.BLANK;
@@ -308,6 +321,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_lastName = lastName;
 	}
 
+	@JSON
 	public int getPrefixId() {
 		return _prefixId;
 	}
@@ -316,6 +330,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_prefixId = prefixId;
 	}
 
+	@JSON
 	public int getSuffixId() {
 		return _suffixId;
 	}
@@ -324,6 +339,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_suffixId = suffixId;
 	}
 
+	@JSON
 	public boolean getMale() {
 		return _male;
 	}
@@ -336,6 +352,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_male = male;
 	}
 
+	@JSON
 	public Date getBirthday() {
 		return _birthday;
 	}
@@ -344,6 +361,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_birthday = birthday;
 	}
 
+	@JSON
 	public String getSmsSn() {
 		if (_smsSn == null) {
 			return StringPool.BLANK;
@@ -357,6 +375,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_smsSn = smsSn;
 	}
 
+	@JSON
 	public String getAimSn() {
 		if (_aimSn == null) {
 			return StringPool.BLANK;
@@ -370,6 +389,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_aimSn = aimSn;
 	}
 
+	@JSON
 	public String getFacebookSn() {
 		if (_facebookSn == null) {
 			return StringPool.BLANK;
@@ -383,6 +403,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_facebookSn = facebookSn;
 	}
 
+	@JSON
 	public String getIcqSn() {
 		if (_icqSn == null) {
 			return StringPool.BLANK;
@@ -396,6 +417,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_icqSn = icqSn;
 	}
 
+	@JSON
 	public String getJabberSn() {
 		if (_jabberSn == null) {
 			return StringPool.BLANK;
@@ -409,6 +431,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_jabberSn = jabberSn;
 	}
 
+	@JSON
 	public String getMsnSn() {
 		if (_msnSn == null) {
 			return StringPool.BLANK;
@@ -422,6 +445,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_msnSn = msnSn;
 	}
 
+	@JSON
 	public String getMySpaceSn() {
 		if (_mySpaceSn == null) {
 			return StringPool.BLANK;
@@ -435,6 +459,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_mySpaceSn = mySpaceSn;
 	}
 
+	@JSON
 	public String getSkypeSn() {
 		if (_skypeSn == null) {
 			return StringPool.BLANK;
@@ -448,6 +473,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_skypeSn = skypeSn;
 	}
 
+	@JSON
 	public String getTwitterSn() {
 		if (_twitterSn == null) {
 			return StringPool.BLANK;
@@ -461,6 +487,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_twitterSn = twitterSn;
 	}
 
+	@JSON
 	public String getYmSn() {
 		if (_ymSn == null) {
 			return StringPool.BLANK;
@@ -474,6 +501,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_ymSn = ymSn;
 	}
 
+	@JSON
 	public String getEmployeeStatusId() {
 		if (_employeeStatusId == null) {
 			return StringPool.BLANK;
@@ -487,6 +515,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_employeeStatusId = employeeStatusId;
 	}
 
+	@JSON
 	public String getEmployeeNumber() {
 		if (_employeeNumber == null) {
 			return StringPool.BLANK;
@@ -500,6 +529,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_employeeNumber = employeeNumber;
 	}
 
+	@JSON
 	public String getJobTitle() {
 		if (_jobTitle == null) {
 			return StringPool.BLANK;
@@ -513,6 +543,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_jobTitle = jobTitle;
 	}
 
+	@JSON
 	public String getJobClass() {
 		if (_jobClass == null) {
 			return StringPool.BLANK;
@@ -526,6 +557,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_jobClass = jobClass;
 	}
 
+	@JSON
 	public String getHoursOfOperation() {
 		if (_hoursOfOperation == null) {
 			return StringPool.BLANK;

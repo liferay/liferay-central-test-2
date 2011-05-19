@@ -52,7 +52,7 @@ public interface SocialEquitySettingModel extends BaseModel<SocialEquitySetting>
 	/**
 	 * Sets the primary key of this social equity setting
 	 *
-	 * @param pk the primary key of this social equity setting
+	 * @param primaryKey the primary key of this social equity setting
 	 */
 	public void setPrimaryKey(long primaryKey);
 

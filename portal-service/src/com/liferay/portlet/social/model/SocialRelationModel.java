@@ -52,7 +52,7 @@ public interface SocialRelationModel extends BaseModel<SocialRelation> {
 	/**
 	 * Sets the primary key of this social relation
 	 *
-	 * @param pk the primary key of this social relation
+	 * @param primaryKey the primary key of this social relation
 	 */
 	public void setPrimaryKey(long primaryKey);
 

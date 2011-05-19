@@ -48,7 +48,7 @@ public class MBCategoryWrapper implements MBCategory {
 	/**
 	* Sets the primary key of this message boards category
 	*
-	* @param pk the primary key of this message boards category
+	* @param primaryKey the primary key of this message boards category
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_mbCategory.setPrimaryKey(primaryKey);

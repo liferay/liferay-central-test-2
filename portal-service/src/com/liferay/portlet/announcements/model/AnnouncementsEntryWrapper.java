@@ -48,7 +48,7 @@ public class AnnouncementsEntryWrapper implements AnnouncementsEntry {
 	/**
 	* Sets the primary key of this announcements entry
 	*
-	* @param pk the primary key of this announcements entry
+	* @param primaryKey the primary key of this announcements entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_announcementsEntry.setPrimaryKey(primaryKey);

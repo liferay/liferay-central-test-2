@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.PortletModel
  * @generated
  */
+@JSON(strict = true)
 public class PortletModelImpl extends BaseModelImpl<Portlet>
 	implements PortletModel {
 	/*
@@ -139,6 +141,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getId() {
 		return _id;
 	}
@@ -147,6 +150,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		_id = id;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -165,6 +169,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public String getPortletId() {
 		if (_portletId == null) {
 			return StringPool.BLANK;
@@ -186,6 +191,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		return GetterUtil.getString(_originalPortletId);
 	}
 
+	@JSON
 	public String getRoles() {
 		if (_roles == null) {
 			return StringPool.BLANK;
@@ -199,6 +205,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		_roles = roles;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}

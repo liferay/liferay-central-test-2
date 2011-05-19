@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.asset.model.AssetEntryModel
  * @generated
  */
+@JSON(strict = true)
 public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	implements AssetEntryModel {
 	/*
@@ -204,6 +206,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getEntryId() {
 		return _entryId;
 	}
@@ -212,6 +215,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_entryId = entryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -230,6 +234,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -238,6 +243,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -254,6 +260,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -267,6 +274,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -275,6 +283,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -291,6 +300,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -309,6 +319,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalClassNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -327,6 +338,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return _originalClassPK;
 	}
 
+	@JSON
 	public String getClassUuid() {
 		if (_classUuid == null) {
 			return StringPool.BLANK;
@@ -348,6 +360,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		return GetterUtil.getString(_originalClassUuid);
 	}
 
+	@JSON
 	public boolean getVisible() {
 		return _visible;
 	}
@@ -360,6 +373,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_visible = visible;
 	}
 
+	@JSON
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -368,6 +382,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_startDate = startDate;
 	}
 
+	@JSON
 	public Date getEndDate() {
 		return _endDate;
 	}
@@ -376,6 +391,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_endDate = endDate;
 	}
 
+	@JSON
 	public Date getPublishDate() {
 		return _publishDate;
 	}
@@ -384,6 +400,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_publishDate = publishDate;
 	}
 
+	@JSON
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -392,6 +409,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_expirationDate = expirationDate;
 	}
 
+	@JSON
 	public String getMimeType() {
 		if (_mimeType == null) {
 			return StringPool.BLANK;
@@ -405,6 +423,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_mimeType = mimeType;
 	}
 
+	@JSON
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -418,6 +437,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_title = title;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -431,6 +451,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_description = description;
 	}
 
+	@JSON
 	public String getSummary() {
 		if (_summary == null) {
 			return StringPool.BLANK;
@@ -444,6 +465,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_summary = summary;
 	}
 
+	@JSON
 	public String getUrl() {
 		if (_url == null) {
 			return StringPool.BLANK;
@@ -457,6 +479,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_url = url;
 	}
 
+	@JSON
 	public String getLayoutUuid() {
 		if (_layoutUuid == null) {
 			return StringPool.BLANK;
@@ -470,6 +493,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_layoutUuid = layoutUuid;
 	}
 
+	@JSON
 	public int getHeight() {
 		return _height;
 	}
@@ -478,6 +502,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_height = height;
 	}
 
+	@JSON
 	public int getWidth() {
 		return _width;
 	}
@@ -486,6 +511,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_width = width;
 	}
 
+	@JSON
 	public double getPriority() {
 		return _priority;
 	}
@@ -494,6 +520,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		_priority = priority;
 	}
 
+	@JSON
 	public int getViewCount() {
 		return _viewCount;
 	}

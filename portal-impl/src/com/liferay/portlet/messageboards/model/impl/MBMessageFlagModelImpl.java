@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.impl.BaseModelImpl;
@@ -51,6 +52,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.MBMessageFlagModel
  * @generated
  */
+@JSON(strict = true)
 public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	implements MBMessageFlagModel {
 	/*
@@ -144,6 +146,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getMessageFlagId() {
 		return _messageFlagId;
 	}
@@ -152,6 +155,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		_messageFlagId = messageFlagId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -178,6 +182,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		return _originalUserId;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -186,6 +191,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		_modifiedDate = modifiedDate;
 	}
 
+	@JSON
 	public long getThreadId() {
 		return _threadId;
 	}
@@ -194,6 +200,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		_threadId = threadId;
 	}
 
+	@JSON
 	public long getMessageId() {
 		return _messageId;
 	}
@@ -212,6 +219,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		return _originalMessageId;
 	}
 
+	@JSON
 	public int getFlag() {
 		return _flag;
 	}

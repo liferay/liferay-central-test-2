@@ -16,6 +16,7 @@ package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -52,6 +53,7 @@ import java.util.List;
  * @see com.liferay.portlet.dynamicdatamapping.model.DDMStructureModel
  * @generated
  */
+@JSON(strict = true)
 public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	implements DDMStructureModel {
 	/*
@@ -161,6 +163,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public String getUuid() {
 		if (_uuid == null) {
 			return StringPool.BLANK;
@@ -182,6 +185,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return GetterUtil.getString(_originalUuid);
 	}
 
+	@JSON
 	public long getStructureId() {
 		return _structureId;
 	}
@@ -190,6 +194,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_structureId = structureId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -208,6 +213,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return _originalGroupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -216,6 +222,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getUserId() {
 		return _userId;
 	}
@@ -232,6 +239,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_userUuid = userUuid;
 	}
 
+	@JSON
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -245,6 +253,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_userName = userName;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -253,6 +262,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -269,6 +279,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -277,6 +288,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public String getStructureKey() {
 		if (_structureKey == null) {
 			return StringPool.BLANK;
@@ -298,6 +310,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return GetterUtil.getString(_originalStructureKey);
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -311,6 +324,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -324,6 +338,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_description = description;
 	}
 
+	@JSON
 	public String getXsd() {
 		if (_xsd == null) {
 			return StringPool.BLANK;
@@ -337,6 +352,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_xsd = xsd;
 	}
 
+	@JSON
 	public String getStorageType() {
 		if (_storageType == null) {
 			return StringPool.BLANK;

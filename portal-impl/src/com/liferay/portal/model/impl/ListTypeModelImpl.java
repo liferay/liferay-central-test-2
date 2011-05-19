@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,6 +45,7 @@ import java.util.List;
  * @see com.liferay.portal.model.ListTypeModel
  * @generated
  */
+@JSON(strict = true)
 public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	implements ListTypeModel {
 	/*
@@ -133,6 +135,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		setPrimaryKey(((Integer)primaryKeyObj).intValue());
 	}
 
+	@JSON
 	public int getListTypeId() {
 		return _listTypeId;
 	}
@@ -141,6 +144,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		_listTypeId = listTypeId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -154,6 +158,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		_name = name;
 	}
 
+	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;

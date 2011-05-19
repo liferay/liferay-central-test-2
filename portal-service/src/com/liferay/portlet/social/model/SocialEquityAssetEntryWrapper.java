@@ -49,7 +49,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 	/**
 	* Sets the primary key of this social equity asset entry
 	*
-	* @param pk the primary key of this social equity asset entry
+	* @param primaryKey the primary key of this social equity asset entry
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialEquityAssetEntry.setPrimaryKey(primaryKey);

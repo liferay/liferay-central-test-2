@@ -55,7 +55,7 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	/**
 	 * Sets the primary key of this message boards thread
 	 *
-	 * @param pk the primary key of this message boards thread
+	 * @param primaryKey the primary key of this message boards thread
 	 */
 	public void setPrimaryKey(long primaryKey);
 

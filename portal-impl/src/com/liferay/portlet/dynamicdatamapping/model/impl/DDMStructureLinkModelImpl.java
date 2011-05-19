@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -50,6 +51,7 @@ import java.util.List;
  * @see com.liferay.portlet.dynamicdatamapping.model.DDMStructureLinkModel
  * @generated
  */
+@JSON(strict = true)
 public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	implements DDMStructureLinkModel {
 	/*
@@ -140,6 +142,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getStructureLinkId() {
 		return _structureLinkId;
 	}
@@ -156,6 +159,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -164,6 +168,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public long getClassPK() {
 		return _classPK;
 	}
@@ -182,6 +187,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return _originalClassPK;
 	}
 
+	@JSON
 	public long getStructureId() {
 		return _structureId;
 	}

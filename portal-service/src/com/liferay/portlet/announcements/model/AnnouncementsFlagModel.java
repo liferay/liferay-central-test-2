@@ -54,7 +54,7 @@ public interface AnnouncementsFlagModel extends BaseModel<AnnouncementsFlag> {
 	/**
 	 * Sets the primary key of this announcements flag
 	 *
-	 * @param pk the primary key of this announcements flag
+	 * @param primaryKey the primary key of this announcements flag
 	 */
 	public void setPrimaryKey(long primaryKey);
 

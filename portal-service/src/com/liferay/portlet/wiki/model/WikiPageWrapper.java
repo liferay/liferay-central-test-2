@@ -48,7 +48,7 @@ public class WikiPageWrapper implements WikiPage {
 	/**
 	* Sets the primary key of this wiki page
 	*
-	* @param pk the primary key of this wiki page
+	* @param primaryKey the primary key of this wiki page
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_wikiPage.setPrimaryKey(primaryKey);

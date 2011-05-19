@@ -48,7 +48,7 @@ public class MBBanWrapper implements MBBan {
 	/**
 	* Sets the primary key of this message boards ban
 	*
-	* @param pk the primary key of this message boards ban
+	* @param primaryKey the primary key of this message boards ban
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_mbBan.setPrimaryKey(primaryKey);

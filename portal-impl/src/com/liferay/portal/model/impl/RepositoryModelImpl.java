@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -50,6 +51,7 @@ import java.util.List;
  * @see com.liferay.portal.model.RepositoryModel
  * @generated
  */
+@JSON(strict = true)
 public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	implements RepositoryModel {
 	/*
@@ -153,6 +155,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
@@ -161,6 +164,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_repositoryId = repositoryId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -169,6 +173,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -177,6 +182,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -185,6 +191,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_createDate = createDate;
 	}
 
+	@JSON
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
@@ -201,6 +208,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -209,6 +217,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_classNameId = classNameId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -222,6 +231,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_name = name;
 	}
 
+	@JSON
 	public String getDescription() {
 		if (_description == null) {
 			return StringPool.BLANK;
@@ -235,6 +245,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_description = description;
 	}
 
+	@JSON
 	public String getPortletId() {
 		if (_portletId == null) {
 			return StringPool.BLANK;
@@ -248,6 +259,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_portletId = portletId;
 	}
 
+	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
 			return StringPool.BLANK;
@@ -261,6 +273,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_typeSettings = typeSettings;
 	}
 
+	@JSON
 	public long getDlFolderId() {
 		return _dlFolderId;
 	}

@@ -48,7 +48,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 	/**
 	* Sets the primary key of this social equity history
 	*
-	* @param pk the primary key of this social equity history
+	* @param primaryKey the primary key of this social equity history
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialEquityHistory.setPrimaryKey(primaryKey);

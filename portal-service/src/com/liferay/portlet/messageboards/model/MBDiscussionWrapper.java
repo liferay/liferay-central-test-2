@@ -48,7 +48,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 	/**
 	* Sets the primary key of this message boards discussion
 	*
-	* @param pk the primary key of this message boards discussion
+	* @param primaryKey the primary key of this message boards discussion
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_mbDiscussion.setPrimaryKey(primaryKey);

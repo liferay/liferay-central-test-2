@@ -48,7 +48,7 @@ public class DLFileRankWrapper implements DLFileRank {
 	/**
 	* Sets the primary key of this d l file rank
 	*
-	* @param pk the primary key of this d l file rank
+	* @param primaryKey the primary key of this d l file rank
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_dlFileRank.setPrimaryKey(primaryKey);

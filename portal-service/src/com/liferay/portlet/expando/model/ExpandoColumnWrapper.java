@@ -48,7 +48,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 	/**
 	* Sets the primary key of this expando column
 	*
-	* @param pk the primary key of this expando column
+	* @param primaryKey the primary key of this expando column
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_expandoColumn.setPrimaryKey(primaryKey);

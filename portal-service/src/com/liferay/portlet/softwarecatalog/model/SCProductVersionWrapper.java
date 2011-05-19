@@ -48,7 +48,7 @@ public class SCProductVersionWrapper implements SCProductVersion {
 	/**
 	* Sets the primary key of this s c product version
 	*
-	* @param pk the primary key of this s c product version
+	* @param primaryKey the primary key of this s c product version
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_scProductVersion.setPrimaryKey(primaryKey);

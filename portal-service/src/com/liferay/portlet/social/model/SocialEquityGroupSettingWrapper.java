@@ -49,7 +49,7 @@ public class SocialEquityGroupSettingWrapper implements SocialEquityGroupSetting
 	/**
 	* Sets the primary key of this social equity group setting
 	*
-	* @param pk the primary key of this social equity group setting
+	* @param primaryKey the primary key of this social equity group setting
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_socialEquityGroupSetting.setPrimaryKey(primaryKey);

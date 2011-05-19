@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -54,6 +55,7 @@ import java.util.List;
  * @see com.liferay.portlet.messageboards.model.MBThreadModel
  * @generated
  */
+@JSON(strict = true)
 public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	implements MBThreadModel {
 	/*
@@ -167,6 +169,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getThreadId() {
 		return _threadId;
 	}
@@ -175,6 +178,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_threadId = threadId;
 	}
 
+	@JSON
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -183,6 +187,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_groupId = groupId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -191,6 +196,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_companyId = companyId;
 	}
 
+	@JSON
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -199,6 +205,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_categoryId = categoryId;
 	}
 
+	@JSON
 	public long getRootMessageId() {
 		return _rootMessageId;
 	}
@@ -207,6 +214,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_rootMessageId = rootMessageId;
 	}
 
+	@JSON
 	public long getRootMessageUserId() {
 		return _rootMessageUserId;
 	}
@@ -224,6 +232,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_rootMessageUserUuid = rootMessageUserUuid;
 	}
 
+	@JSON
 	public int getMessageCount() {
 		return _messageCount;
 	}
@@ -232,6 +241,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_messageCount = messageCount;
 	}
 
+	@JSON
 	public int getViewCount() {
 		return _viewCount;
 	}
@@ -240,6 +250,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_viewCount = viewCount;
 	}
 
+	@JSON
 	public long getLastPostByUserId() {
 		return _lastPostByUserId;
 	}
@@ -257,6 +268,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_lastPostByUserUuid = lastPostByUserUuid;
 	}
 
+	@JSON
 	public Date getLastPostDate() {
 		return _lastPostDate;
 	}
@@ -265,6 +277,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_lastPostDate = lastPostDate;
 	}
 
+	@JSON
 	public double getPriority() {
 		return _priority;
 	}
@@ -273,6 +286,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_priority = priority;
 	}
 
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -281,6 +295,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_status = status;
 	}
 
+	@JSON
 	public long getStatusByUserId() {
 		return _statusByUserId;
 	}
@@ -298,6 +313,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_statusByUserUuid = statusByUserUuid;
 	}
 
+	@JSON
 	public String getStatusByUserName() {
 		if (_statusByUserName == null) {
 			return StringPool.BLANK;
@@ -311,6 +327,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_statusByUserName = statusByUserName;
 	}
 
+	@JSON
 	public Date getStatusDate() {
 		return _statusDate;
 	}

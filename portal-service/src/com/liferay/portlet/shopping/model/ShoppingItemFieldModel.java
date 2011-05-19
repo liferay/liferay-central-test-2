@@ -52,7 +52,7 @@ public interface ShoppingItemFieldModel extends BaseModel<ShoppingItemField> {
 	/**
 	 * Sets the primary key of this shopping item field
 	 *
-	 * @param pk the primary key of this shopping item field
+	 * @param primaryKey the primary key of this shopping item field
 	 */
 	public void setPrimaryKey(long primaryKey);
 

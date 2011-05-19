@@ -48,7 +48,7 @@ public class ExpandoValueWrapper implements ExpandoValue {
 	/**
 	* Sets the primary key of this expando value
 	*
-	* @param pk the primary key of this expando value
+	* @param primaryKey the primary key of this expando value
 	*/
 	public void setPrimaryKey(long primaryKey) {
 		_expandoValue.setPrimaryKey(primaryKey);

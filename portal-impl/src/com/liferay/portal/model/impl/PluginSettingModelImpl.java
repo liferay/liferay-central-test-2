@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.PluginSettingModel
  * @generated
  */
+@JSON(strict = true)
 public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	implements PluginSettingModel {
 	/*
@@ -141,6 +143,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getPluginSettingId() {
 		return _pluginSettingId;
 	}
@@ -149,6 +152,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		_pluginSettingId = pluginSettingId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -167,6 +171,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return _originalCompanyId;
 	}
 
+	@JSON
 	public String getPluginId() {
 		if (_pluginId == null) {
 			return StringPool.BLANK;
@@ -188,6 +193,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return GetterUtil.getString(_originalPluginId);
 	}
 
+	@JSON
 	public String getPluginType() {
 		if (_pluginType == null) {
 			return StringPool.BLANK;
@@ -209,6 +215,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		return GetterUtil.getString(_originalPluginType);
 	}
 
+	@JSON
 	public String getRoles() {
 		if (_roles == null) {
 			return StringPool.BLANK;
@@ -222,6 +229,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		_roles = roles;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}

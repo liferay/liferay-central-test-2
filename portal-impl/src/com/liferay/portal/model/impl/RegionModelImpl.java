@@ -15,6 +15,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,6 +49,7 @@ import java.util.List;
  * @see com.liferay.portal.model.RegionModel
  * @generated
  */
+@JSON(strict = true)
 public class RegionModelImpl extends BaseModelImpl<Region>
 	implements RegionModel {
 	/*
@@ -141,6 +143,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@JSON
 	public long getRegionId() {
 		return _regionId;
 	}
@@ -149,6 +152,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		_regionId = regionId;
 	}
 
+	@JSON
 	public long getCountryId() {
 		return _countryId;
 	}
@@ -157,6 +161,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		_countryId = countryId;
 	}
 
+	@JSON
 	public String getRegionCode() {
 		if (_regionCode == null) {
 			return StringPool.BLANK;
@@ -170,6 +175,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		_regionCode = regionCode;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -183,6 +189,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		_name = name;
 	}
 
+	@JSON
 	public boolean getActive() {
 		return _active;
 	}
