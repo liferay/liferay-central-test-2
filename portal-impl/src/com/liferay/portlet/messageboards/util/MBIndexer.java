@@ -230,8 +230,8 @@ public class MBIndexer extends BaseIndexer {
 			document.addText(Field.USER_NAME, userName);
 		}
 
-		document.addKeyword(Field.TITLE, title, true);
-		document.addKeyword(Field.CONTENT, content, true);
+		document.addText(Field.TITLE, title);
+		document.addText(Field.CONTENT, content);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 
 		document.addKeyword(Field.CATEGORY_ID, categoryId);

@@ -233,13 +233,13 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword(Field.ENTRY_CLASS_NAME, User.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, userId);
 
-		document.addKeyword("screenName", screenName);
-		document.addKeyword("emailAddress", emailAddress);
-		document.addKeyword("firstName", firstName, true);
-		document.addKeyword("middleName", middleName, true);
-		document.addKeyword("lastName", lastName, true);
-		document.addKeyword("fullName", fullName, true);
-		document.addKeyword("jobTitle", jobTitle);
+		document.addText("screenName", screenName);
+		document.addText("emailAddress", emailAddress);
+		document.addText("firstName", firstName);
+		document.addText("middleName", middleName);
+		document.addText("lastName", lastName);
+		document.addText("fullName", fullName);
+		document.addText("jobTitle", jobTitle);
 		document.addKeyword(Field.STATUS, status);
 		document.addKeyword("groupIds", groupIds);
 		document.addKeyword("organizationIds", organizationIds);
@@ -249,13 +249,11 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("roleIds", roleIds);
 		document.addKeyword("teamIds", teamIds);
 		document.addKeyword("userGroupIds", userGroupIds);
-		document.addKeyword(
-			"street", streets.toArray(new String[streets.size()]));
-		document.addKeyword("city", cities.toArray(new String[cities.size()]));
-		document.addKeyword("zip", zips.toArray(new String[zips.size()]));
-		document.addKeyword(
-			"region", regions.toArray(new String[regions.size()]));
-		document.addKeyword(
+		document.addText("street", streets.toArray(new String[streets.size()]));
+		document.addText("city", cities.toArray(new String[cities.size()]));
+		document.addText("zip", zips.toArray(new String[zips.size()]));
+		document.addText("region", regions.toArray(new String[regions.size()]));
+		document.addText(
 			"country", countries.toArray(new String[countries.size()]));
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);

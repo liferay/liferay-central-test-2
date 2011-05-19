@@ -230,13 +230,11 @@ public class OrganizationIndexer extends BaseIndexer {
 		document.addNumber("rightOrganizationId", rightOrganizationId);
 		document.addText(Field.NAME, name);
 		document.addKeyword(Field.TYPE, type);
-		document.addKeyword(
-			"street", streets.toArray(new String[streets.size()]));
-		document.addKeyword("city", cities.toArray(new String[cities.size()]));
-		document.addKeyword("zip", zips.toArray(new String[zips.size()]));
-		document.addKeyword(
-			"region", regions.toArray(new String[regions.size()]));
-		document.addKeyword(
+		document.addText("street", streets.toArray(new String[streets.size()]));
+		document.addText("city", cities.toArray(new String[cities.size()]));
+		document.addText("zip", zips.toArray(new String[zips.size()]));
+		document.addText("region", regions.toArray(new String[regions.size()]));
+		document.addText(
 			"country", countries.toArray(new String[countries.size()]));
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);

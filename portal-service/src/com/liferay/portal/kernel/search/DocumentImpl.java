@@ -386,6 +386,18 @@ public class DocumentImpl implements Document {
 		}
 	}
 
+	public void addText(String name, String[] values) {
+		if (values == null) {
+			return;
+		}
+
+		Field field = new Field(name, values);
+
+		field.setTokenized(true);
+
+		_fields.put(name, field);
+	}
+
 	public void addUID(String portletId, long field1) {
 		addUID(portletId, String.valueOf(field1));
 	}

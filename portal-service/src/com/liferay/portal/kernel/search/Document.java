@@ -144,6 +144,8 @@ public interface Document extends Serializable {
 
 	public void addText(String name, String value);
 
+	public void addText(String name, String[] values);
+
 	public void addUID(String portletId, long field1);
 
 	public void addUID(String portletId, long field1, String field2);
