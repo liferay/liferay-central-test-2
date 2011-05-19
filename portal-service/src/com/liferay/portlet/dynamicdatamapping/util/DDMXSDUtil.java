@@ -52,7 +52,7 @@ public class DDMXSDUtil {
 		throws Exception {
 
 		return getDDMXSD().getHTML(
-			pageContext, document, fields, namespace,readOnly);
+			pageContext, document, fields, namespace, readOnly);
 	}
 
 	public static String getHTML(PageContext pageContext, Element element)
