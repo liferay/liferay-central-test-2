@@ -56,6 +56,33 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</java>
 	</target>-->
 
+    <target name="build-creole-parser">
+		<delete>
+			<fileset
+				dir="src/com/liferay/portlet/wiki/engines/creole/parser"
+				includes="*.java"
+			/>
+		</delete>
+
+		<path id="antlr.classpath">
+			<pathelement path="${classpath}" />
+			<fileset dir="${project.dir}/lib/portal" includes="antlr2.jar,antlr3.jar,antlr3-runtime.jar,stringtemplate.jar" />
+		</path>
+
+		<java
+			classname="org.antlr.Tool"
+			classpathref="antlr.classpath"
+			fork="true"
+			maxmemory="512m"
+			newenvironment="true"
+		>
+			<arg value="-make" />
+			<arg value="-o" />
+			<arg path="src/com/liferay/portlet/wiki/engines/creole/parser" />
+			<arg path="src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" />
+		</java>
+    </target>
+
 	<target name="build-css">
 		<ant dir="../portal-web" target="build-css" />
 	</target>
