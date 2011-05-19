@@ -584,6 +584,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
+			int index = fullPathWithoutQueryString.indexOf(StringPool.QUESTION);
+
+			if (index != -1) {
+				fullPathWithoutQueryString =
+					fullPathWithoutQueryString.substring(0, index);
+			}
+
 			if (!_trackerIgnorePaths.contains(fullPathWithoutQueryString)) {
 				UserTrackerPath userTrackerPath = UserTrackerPathUtil.create(0);
 
