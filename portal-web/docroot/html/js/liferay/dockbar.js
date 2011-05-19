@@ -301,6 +301,46 @@ AUI().add(
 				return '<div class="dockbar-message ' + cssClass + '" id="' + messageId + '">' + message + '</div>';
 			},
 
+			_createPersonalizationOverlayMask: function(column, controls) {
+				var columnId = column.attr('id');
+
+				var personalizable = false;
+
+				if (column.one('.portlet-column-content.personalizable')) {
+					personalizable = true;
+				}
+
+				var overlayMask = new A.OverlayMask(
+					{
+						cssClass:  personalizable ? 'layout-column-personalizable' : 'layout-column',
+						target: column,
+						zIndex: 10
+
+					}
+				).render();
+
+				var columnControls = controls.clone();
+
+				var input = columnControls.one('input');
+				var label = columnControls.one('label');
+
+				var oldName = input.attr('name');
+				var newName = oldName.replace('[COLUMN_ID]', columnId);
+
+				input.attr('name', newName);
+				input.attr('id', newName);
+				label.attr('for', newName);
+
+				input.attr('checked', personalizable);
+				input.setData('personalizatonControls', overlayMask);
+
+				overlayMask.get('boundingBox').prepend(columnControls.show());
+
+				column.setData("personalizatonControls", overlayMask);
+
+				return overlayMask;
+			},
+
 			_init: function() {
 				var instance = this;
 
@@ -577,6 +617,60 @@ AUI().add(
 					);
 				}
 
+				var managePersonalizationLink = A.one('#' + namespace + 'managePersonalization');
+
+				if (managePersonalizationLink ) {
+					if (managePersonalizationLink.hasClass('disabled')) {
+						managePersonalizationLink.on(
+							'click',
+							function(event) {
+								var instance = new A.Dialog(
+									{
+										bodyContent: A.one('#' + namespace + 'FreeformLayoutHelp').show(),
+										height: 250,
+										width: 500
+									}
+								).render();
+							}
+						);
+
+
+
+					}
+					else {
+						var controls = dockBar.one('.layout-personalizable-controls');
+
+						var columns = A.all('.portlet-column');
+
+						A.getBody().delegate(
+							'change',
+							function(event) {
+								instance._onChangePersonalization(event);
+							},
+							'.layout-personalizable-checkbox'
+						);
+
+						managePersonalizationLink.on(
+							'click',
+							function(event) {
+								event.halt();
+
+								columns.each(
+									function(column) {
+										var overlayMask = column.getData("personalizatonControls");
+
+										if (!overlayMask) {
+											overlayMask = instance._createPersonalizationOverlayMask(column, controls);
+										}
+
+										overlayMask.toggle();
+									}
+								);
+							}
+						);
+					}
+				}
+
 				var myAccount = A.one('#' + namespace + 'userAvatar .user-links');
 
 				if (myAccount){
@@ -612,6 +706,32 @@ AUI().add(
 				);
 			},
 
+			_onChangePersonalization: function(event) {
+				var checkbox = event.target;
+
+				var overlayMask = checkbox.getData("personalizatonControls");
+
+				var contentBox = overlayMask.get('contentBox');
+
+				contentBox.toggleClass('layout-column-content');
+				contentBox.toggleClass('layout-column-personalizable-content');
+
+				var data = {
+					cmd: 'update_type_settings',
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+					p_l_id: themeDisplay.getPlid()
+				}
+
+				data[checkbox.attr('name')] = checkbox.attr('checked');
+
+				A.io.request(
+					themeDisplay.getPathMain() + '/portal/update_layout',
+					{
+						data : data
+					}
+				);
+			},
+			
 			_openWindow: function(configParams, item) {
 				var defaultParams = {
 					id: item.guid(),

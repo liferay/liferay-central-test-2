@@ -62,9 +62,18 @@ if (selLayout != null) {
 
 <h3><liferay-ui:message key="personalization-settings" /></h3>
 
-<c:if test="<%= curFreeformLayout %>">
-	<liferay-ui:message key="it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" />
-</c:if>
+<c:choose>
+	<c:when test="<%= curFreeformLayout %>">
+		<div class="portlet-msg-alert">
+			<liferay-ui:message key="it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" />
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div class="portlet-msg-info">
+			<liferay-ui:message key="personalization-help" />
+		</div>
+	</c:otherwise>
+</c:choose>
 
 <div class="personalization-settings">
 	<%= content %>

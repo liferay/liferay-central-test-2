@@ -45,8 +45,7 @@
 			'asset-categories-selector': ['aui-tree', 'liferay-asset-tags-selector'],
 			'asset-tags-selector': ['aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'datasource-cache', 'liferay-service-datasource', 'substitute'],
 			'auto-fields': ['aui-base', 'aui-data-set', 'aui-io-request', 'aui-parse-content', 'aui-sortable', 'base', 'liferay-undo-manager'],
-			'dockbar': ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'event-touch', 'node-focusmanager'],
-			'dockbar-personalized': ['liferay-dockbar'],
+			'dockbar': ['aui-button-item', 'aui-dialog', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'event-touch', 'node-focusmanager'],
 			'dynamic-select': ['aui-base'],
 			'form': ['aui-base', 'aui-form-validator'],
 			'form-navigator': ['aui-base'],
@@ -117,14 +116,6 @@
 				return A.UA.touch;
 			},
 			trigger: 'liferay-navigation'
-		}
-	);
-
-	addPlugin(
-		{
-			name: 'liferay-dockbar-personalized',
-			test: Liferay.Data.isPersonalizationView,
-			trigger: 'liferay-dockbar'
 		}
 	);
 

@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -190,6 +192,16 @@ public class UpdateLayoutAction extends JSONAction {
 				request, layoutSetBranchId, layout.getPlid(), layoutRevisionId);
 
 			updateLayout = false;
+		}
+		else if (cmd.equals("update_type_settings")) {
+			UnicodeProperties layoutTypeSettingsProperties =
+				layout.getTypeSettingsProperties();
+
+			UnicodeProperties formTypeSettingsProperties =
+				PropertiesParamUtil.getProperties(
+					request, "TypeSettingsProperties--");
+
+			layoutTypeSettingsProperties.putAll(formTypeSettingsProperties);
 		}
 		else if (cmd.equals("toggle_personalized_view")) {
 			updateLayout = false;
