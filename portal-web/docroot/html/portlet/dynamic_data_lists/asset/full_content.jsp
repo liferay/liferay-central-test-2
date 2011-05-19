@@ -30,4 +30,4 @@ if (record != null) {
 }
 %>
 
-<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields) %>
+<%= DDMXSDUtil.getHTML(pageContext, ddmStructure.getXsd(), fields, "", true) %>
