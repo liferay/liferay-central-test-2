@@ -82,11 +82,12 @@ for (int i = 0; i < results.size(); i++) {
 		if (Validator.isNotNull(portletResource)) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
-			if (portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.CONTENT)) {
+			if (Validator.isNotNull(portlet.getControlPanelEntryCategory()) && portlet.getControlPanelEntryCategory().equals(PortletCategoryKeys.CONTENT)) {
 				supportsFilterByGroup = true;
 			}
 		}
-		else if (!ResourceActionsUtil.isPortalModelResource(curResource)) {
+
+		if (!supportsFilterByGroup && !ResourceActionsUtil.isPortalModelResource(curResource) && !portletResource.equals(PortletKeys.PORTAL)) {
 			supportsFilterByGroup = true;
 		}
 
