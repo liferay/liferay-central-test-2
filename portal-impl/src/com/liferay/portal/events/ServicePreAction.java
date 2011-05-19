@@ -1668,7 +1668,6 @@ public class ServicePreAction extends Action {
 					}
 
 					themeDisplay.setShowLayoutTemplatesIcon(true);
-
 					themeDisplay.setShowPagePersonalizationIcon(true);
 
 					themeDisplay.setURLAddContent(
