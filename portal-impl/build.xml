@@ -56,6 +56,42 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</java>
 	</target>-->
 
+    <path id="antlr.libs.classpath">
+        <fileset dir="${project.dir}/lib/portal/"
+                 includes="antlr.jar, antlr3.jar,antlr-runtime.jar, stringtemplate.jar"/>
+    </path>
+
+    <path id="antlr.classpath">
+        <pathelement path="${classpath}"/>
+        <path refid="antlr.libs.classpath"/>
+    </path>
+
+    <target name="build-creole-parser">
+        <antelope:fileutil file="src/com/liferay/portlet/wiki/engines/creole/parser/Creole10Parser.java" property="parser">
+            <antelope:lastmodified format="yyyyMMddHHmmss" />
+        </antelope:fileutil>
+
+        <antelope:fileutil file="src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" property="grammar">
+            <antelope:lastmodified format="yyyyMMddHHmmss" />
+        </antelope:fileutil>
+
+        <if>
+            <and>
+                <antelope:isgreaterthan arg1="${grammar}" arg2="${parser}"/>
+            </and>
+            <then>
+                <property name="creole.parser" value="src/com/liferay/portlet/wiki/engines/creole/parser/Creole10Parser.java"/>
+                <java classname="org.antlr.Tool" fork="true" failonerror="true"
+                    classpathref="antlr.classpath">
+                    <arg value="-make"/>
+                    <arg value="-o"/>
+                    <arg path="src/com/liferay/portlet/wiki/engines/creole/parser"/>
+                    <arg path="src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g"/>
+                </java>
+            </then>
+        </if>
+    </target>
+
 	<target name="build-css">
 		<ant dir="../portal-web" target="build-css" />
 	</target>
