@@ -57,59 +57,59 @@ T73 : 'y' ;
 T74 : 'U' ;
 T75 : 'X' ;
 
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 758
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 755
 ESCAPE					: '~';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 759
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 756
 NOWIKI_BLOCK_CLOSE		: NEWLINE  '}}}';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 760
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 757
 NEWLINE					: ( CR )?  LF
 						| CR;
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 762
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 759
 fragment CR				: '\r';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 763
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 760
 fragment LF				: '\n';
 
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 765
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 762
 BLANKS					: ( SPACE | TABULATOR )+;
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 766
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 763
 fragment SPACE			: ' ';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 767
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 764
 fragment TABULATOR		: '\t';
 
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 769
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 766
 COLON_SLASH				: ':'  '/';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 770
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 767
 ITAL					: '//';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 771
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 768
 NOWIKI_OPEN				: '{{{';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 772
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 769
 NOWIKI_CLOSE			: '}}}';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 773
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 770
 LINK_OPEN				: '[[';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 774
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 771
 LINK_CLOSE				: ']]';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 775
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 772
 IMAGE_OPEN				: '{{';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 776
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 773
 IMAGE_CLOSE				: '}}';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 777
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 774
 FORCED_LINEBREAK		: '\\\\';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 778
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 775
 EQUAL					: '=';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 779
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 776
 PIPE					: '|';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 780
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 777
 POUND					: '#';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 781
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 778
 DASH					: '-';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 782
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 779
 STAR					: '*';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 783
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 780
 SLASH					: '/';
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 784
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 781
 EXTENSION				: '@@';
 
-// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 786
+// $ANTLR src "/home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" 783
 INSIGNIFICANT_CHAR		: .;
 
 

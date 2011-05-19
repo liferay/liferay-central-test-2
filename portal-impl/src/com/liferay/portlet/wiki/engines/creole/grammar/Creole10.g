@@ -471,10 +471,7 @@ link returns [LinkNode link = null]
 		d = link_description {$link.setAltNode($d.node); } )?  link_close_markup
 	;
 link_address returns [LinkNode link =null] 
-	:	li = link_interwiki_uri  ':'  p = link_interwiki_pagename { 
-						$li.interwiki.setUri($p.text);
-						$link = $li.interwiki;
-					}
+	:	li = link_interwiki_uri  ':'  p = link_interwiki_pagename
 	|	lu = link_uri {$link = new LinkNode($lu.text); }
 	;
 link_interwiki_uri returns [InterwikiLinkNode interwiki = null]
