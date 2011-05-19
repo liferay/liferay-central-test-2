@@ -14,7 +14,7 @@
 
 package com.liferay.portal.json;
 
-import com.liferay.portal.kernel.json.JSONMode;
+import com.liferay.portal.kernel.json.JSON;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -39,9 +39,9 @@ public class JSONIncludesManager {
 		List<String> list = new ArrayList<String>();
 
 		while (type != null) {
-			JSONMode jsonModeAnnotation = type.getAnnotation(JSONMode.class);
+			JSON jsonAnnotation = type.getAnnotation(JSON.class);
 
-			if ((jsonModeAnnotation != null) && jsonModeAnnotation.strict()) {
+			if ((jsonAnnotation != null) && jsonAnnotation.strict()) {
 				list.add(_EXCLUDE_ALL);
 
 				break;
@@ -72,9 +72,9 @@ public class JSONIncludesManager {
 		boolean strict = false;
 
 		while (type != null) {
-			JSONMode jsonModeAnnotation = type.getAnnotation(JSONMode.class);
+			JSON jsonAnnotation = type.getAnnotation(JSON.class);
 
-			if ((jsonModeAnnotation != null) && jsonModeAnnotation.strict()) {
+			if ((jsonAnnotation != null) && jsonAnnotation.strict()) {
 				_scanFieldsAndMethods(list, type, true);
 
 				strict = true;
@@ -142,10 +142,10 @@ public class JSONIncludesManager {
 		Field[] fields = type.getDeclaredFields();
 
 		for (Field field : fields) {
-			JSONMode jsonModeAnnotation = field.getAnnotation(JSONMode.class);
+			JSON jsonAnnotation = field.getAnnotation(JSON.class);
 
-			if ((jsonModeAnnotation != null) &&
-				(jsonModeAnnotation.include() == include)) {
+			if ((jsonAnnotation != null) &&
+				(jsonAnnotation.include() == include)) {
 
 				String name = field.getName();
 
@@ -158,10 +158,10 @@ public class JSONIncludesManager {
 		Method[] methods = type.getDeclaredMethods();
 
 		for (Method method : methods) {
-			JSONMode jsonModeAnnotation = method.getAnnotation(JSONMode.class);
+			JSON jsonAnnotation = method.getAnnotation(JSON.class);
 
-			if ((jsonModeAnnotation != null) &&
-				(jsonModeAnnotation.include() == include)) {
+			if ((jsonAnnotation != null) &&
+				(jsonAnnotation.include() == include)) {
 
 				String name = _getPropertyName(method);
 
