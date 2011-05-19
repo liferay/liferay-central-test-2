@@ -124,12 +124,43 @@ public class AssetTagServiceHttp {
 		}
 	}
 
+	public static void deleteTags(HttpPrincipal httpPrincipal, long[] tagIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
+					"deleteTags", _deleteTagsParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, tagIds);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupsTags(
 		HttpPrincipal httpPrincipal, long[] groupIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getGroupsTags", _getGroupsTagsParameterTypes2);
+					"getGroupsTags", _getGroupsTagsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupIds);
 
@@ -160,7 +191,7 @@ public class AssetTagServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getGroupTags", _getGroupTagsParameterTypes3);
+					"getGroupTags", _getGroupTagsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -192,7 +223,7 @@ public class AssetTagServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getGroupTags", _getGroupTagsParameterTypes4);
+					"getGroupTags", _getGroupTagsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					start, end, obc);
@@ -225,7 +256,7 @@ public class AssetTagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getTag", _getTagParameterTypes5);
+					"getTag", _getTagParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId);
 
@@ -261,7 +292,7 @@ public class AssetTagServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getTags", _getTagsParameterTypes6);
+					"getTags", _getTagsParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					classNameId, name);
@@ -295,7 +326,7 @@ public class AssetTagServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getTags", _getTagsParameterTypes7);
+					"getTags", _getTagsParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					classNameId, name, start, end, obc);
@@ -328,7 +359,7 @@ public class AssetTagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"getTags", _getTagsParameterTypes8);
+					"getTags", _getTagsParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					className, classPK);
@@ -365,7 +396,7 @@ public class AssetTagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"mergeTags", _mergeTagsParameterTypes9);
+					"mergeTags", _mergeTagsParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fromTagId, toTagId);
@@ -398,7 +429,7 @@ public class AssetTagServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"search", _searchParameterTypes10);
+					"search", _searchParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					name, tagProperties, start, end);
@@ -433,7 +464,7 @@ public class AssetTagServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
-					"updateTag", _updateTagParameterTypes11);
+					"updateTag", _updateTagParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, tagId,
 					name, tagProperties, serviceContext);
@@ -472,37 +503,40 @@ public class AssetTagServiceHttp {
 	private static final Class<?>[] _deleteTagParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getGroupsTagsParameterTypes2 = new Class[] {
+	private static final Class<?>[] _deleteTagsParameterTypes2 = new Class[] {
 			long[].class
 		};
-	private static final Class<?>[] _getGroupTagsParameterTypes3 = new Class[] {
-			long.class
+	private static final Class<?>[] _getGroupsTagsParameterTypes3 = new Class[] {
+			long[].class
 		};
 	private static final Class<?>[] _getGroupTagsParameterTypes4 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _getGroupTagsParameterTypes5 = new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getTagParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getTagParameterTypes6 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getTagsParameterTypes6 = new Class[] {
+	private static final Class<?>[] _getTagsParameterTypes7 = new Class[] {
 			long.class, long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _getTagsParameterTypes7 = new Class[] {
+	private static final Class<?>[] _getTagsParameterTypes8 = new Class[] {
 			long.class, long.class, java.lang.String.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getTagsParameterTypes8 = new Class[] {
+	private static final Class<?>[] _getTagsParameterTypes9 = new Class[] {
 			java.lang.String.class, long.class
 		};
-	private static final Class<?>[] _mergeTagsParameterTypes9 = new Class[] {
+	private static final Class<?>[] _mergeTagsParameterTypes10 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _searchParameterTypes10 = new Class[] {
+	private static final Class<?>[] _searchParameterTypes11 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String[].class,
 			int.class, int.class
 		};
-	private static final Class<?>[] _updateTagParameterTypes11 = new Class[] {
+	private static final Class<?>[] _updateTagParameterTypes12 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String[].class,
 			com.liferay.portal.service.ServiceContext.class
 		};

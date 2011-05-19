@@ -51,6 +51,12 @@ public class AssetTagServiceUtil {
 		getService().deleteTag(tagId);
 	}
 
+	public static void deleteTags(long[] tagIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteTags(tagIds);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getGroupsTags(
 		long[] groupIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
