@@ -61,6 +61,17 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 		assetTagLocalService.deleteTag(tagId);
 	}
 
+	public void deleteTags(long[] tagIds)
+		throws PortalException, SystemException {
+
+		for (long tagId : tagIds) {
+			AssetTagPermission.check(
+				getPermissionChecker(), tagId, ActionKeys.DELETE);
+
+			assetTagLocalService.deleteTag(tagId);
+		}
+	}
+
 	public List<AssetTag> getGroupsTags(long[] groupIds)
 		throws SystemException {
 
