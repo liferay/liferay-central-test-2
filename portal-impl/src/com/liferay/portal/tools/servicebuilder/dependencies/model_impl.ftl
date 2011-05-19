@@ -60,9 +60,11 @@ import java.util.Map;
  * @see ${packagePath}.model.${entity.name}Model
  * @generated
  */
-<#if (entity.jsonMode?? && entity.jsonMode == "strict") || entity.hasRemoteService()>
-@JSON(strict = true)
+
+<#if entity.jsonEnabled>
+	@JSON(strict = true)
 </#if>
+
 public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> implements ${entity.name}Model {
 
 	/*
@@ -329,20 +331,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			}
 		</#if>
 
-		<#if column.json??>
-			<#if column.json?string == 'true'>
-				@JSON
-			</#if>
-			<#if column.json?string == 'false'>
-				<#if (entity.jsonMode?? && entity.jsonMode == "strict") || entity.hasRemoteService()>
-				<#else>
-					@JSON(include = false)
-				</#if>
-			</#if>
-		<#else>
-			<#if (entity.jsonMode?? && entity.jsonMode == "strict") || entity.hasRemoteService()>
-				@JSON
-			</#if>
+		<#if column.jsonEnabled>
+			@JSON
+		<#elseif entity.jsonEnabled>
+			@JSON(include = false)
 		</#if>
 
 		public ${column.type} get${column.methodName}() {

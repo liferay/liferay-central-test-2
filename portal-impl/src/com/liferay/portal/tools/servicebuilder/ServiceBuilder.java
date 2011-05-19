@@ -4243,8 +4243,6 @@ public class ServiceBuilder {
 			entityElement.attributeValue("local-service"));
 		boolean remoteService = GetterUtil.getBoolean(
 			entityElement.attributeValue("remote-service"), true);
-		String jsonMode = GetterUtil.getString(
-			entityElement.attributeValue("json"), null);
 		String persistenceClass = GetterUtil.getString(
 			entityElement.attributeValue("persistence-class"),
 			_packagePath + ".service.persistence." + ejbName +
@@ -4267,6 +4265,8 @@ public class ServiceBuilder {
 			"tx-manager");
 		boolean cacheEnabled = GetterUtil.getBoolean(
 			entityElement.attributeValue("cache-enabled"), true);
+		boolean jsonEnabled = GetterUtil.getBoolean(
+			entityElement.attributeValue("json-enabled"), remoteService);
 
 		List<EntityColumn> pkList = new ArrayList<EntityColumn>();
 		List<EntityColumn> regularColList = new ArrayList<EntityColumn>();
@@ -4324,24 +4324,13 @@ public class ServiceBuilder {
 				columnElement.attributeValue("convert-null"), true);
 			boolean localized = GetterUtil.getBoolean(
 				columnElement.attributeValue("localized"));
+			boolean colJsonEnabled = GetterUtil.getBoolean(
+				columnElement.attributeValue("json-enabled"), jsonEnabled);
 
 			EntityColumn col = new EntityColumn(
 				columnName, columnDBName, columnType, primary, filterPrimary,
 				collectionEntity, mappingKey, mappingTable, idType, idParam,
-				convertNull, localized);
-
-			String json = GetterUtil.getString(
-				columnElement.attributeValue("json"), null);
-
-			if (Validator.isNotNull(json)) {
-				json = json.trim().toLowerCase();
-
-				if (json.equals("include")) {
-					col.setJson(Boolean.TRUE);
-				} else if (json.equals("exclude")) {
-					col.setJson(Boolean.FALSE);
-				}
-			}
+				convertNull, localized, colJsonEnabled);
 
 			if (primary) {
 				pkList.add(col);
@@ -4588,8 +4577,8 @@ public class ServiceBuilder {
 			new Entity(
 				_packagePath, _portletName, _portletShortName, ejbName,
 				humanName, table, alias, uuid, localService, remoteService,
-				jsonMode, persistenceClass, finderClass, dataSource,
-				sessionFactory, txManager, cacheEnabled, pkList, regularColList,
+				persistenceClass, finderClass, dataSource, sessionFactory,
+				txManager, cacheEnabled, jsonEnabled, pkList, regularColList,
 				collectionList, columnList, order, finderList, referenceList,
 				txRequiredList));
 	}
