@@ -206,7 +206,7 @@ AUI().add(
 					}
 				},
 
-				buildDataTableColumnset: function(columnset, structure) {
+				buildDataTableColumnset: function(columnset, structure, editable) {
 					var instance = this;
 
 					AArray.each(
@@ -214,7 +214,7 @@ AUI().add(
 						function(item, index, collection) {
 							item.key = item.name;
 
-							if (item.editable) {
+							if (editable && item.editable) {
 								var dataType = item.dataType;
 								var label = item.label;
 								var required = item.required;
