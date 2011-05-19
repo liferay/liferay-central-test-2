@@ -28,6 +28,8 @@ if (!themeDisplay.isStatePopUp()) {
 
 			var ATTR_DATA_NODE_STATUS = 'data-nodeStatus';
 
+			var CSS_DISPLAY_PANEL_COLUMNS = 'display-panel-columns';
+
 			var CSS_ICON_CLOSE = 'yui3-aui-icon-closethick';
 
 			var CSS_ICON_HELP = 'yui3-aui-icon-help';
@@ -414,10 +416,10 @@ if (!themeDisplay.isStatePopUp()) {
 
 					var panelCfg = instance._panelCfg;
 
-					var leftPosition = panelCfg.closeLeft;
+					var toggleValue = panelCfg.closeValue;
 
 					if (!newVal) {
-						leftPosition = panelCfg.openLeft;
+						toggleValue = panelCfg.openValue;
 
 						instance._searchPanelInput.val(instance._searchValue);
 					}
@@ -434,9 +436,11 @@ if (!themeDisplay.isStatePopUp()) {
 						}
 					);
 
+					body.removeClass(CSS_DISPLAY_PANEL_COLUMNS);
+
 					instance._panelHolder.transition(
 						{
-							left: leftPosition,
+							width: toggleValue,
 							easing: 'ease-out',
 							duration: 0.2
 						},
@@ -449,6 +453,8 @@ if (!themeDisplay.isStatePopUp()) {
 									}
 								).start();
 							}
+
+							body.addClass(CSS_DISPLAY_PANEL_COLUMNS);
 
 							body.toggleClass(CSS_PANELS_MINIMIZED, newVal);
 
@@ -467,8 +473,8 @@ if (!themeDisplay.isStatePopUp()) {
 				},
 
 				_panelCfg: {
-					closeLeft: '-198px',
-					openLeft: '0px'
+					closeValue: '40px',
+					openValue: '238px'
 				},
 
 				_searchActive: false,
