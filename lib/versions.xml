@@ -910,29 +910,6 @@
 			</license>
 		</licenses>
 	</library>
-    <library>
-		<file-name>portal/antlr3.jar</file-name>
-		<version>3.0.1</version>
-		<project-name>ANother Tool for Language Recognition (ANTLR) Parser Generator</project-name>
-		<project-url>http://www.antlr.org</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
-			</license>
-		</licenses>
-        <comments>This jar depends on antlr v2 (antlr.jar)</comments>
-	</library>
-    <library>
-		<file-name>portal/antlr-runtime.jar</file-name>
-		<version>3.0.1</version>
-		<project-name>ANother Tool for Language Recognition (ANTLR) Parser Generator</project-name>
-		<project-url>http://www.antlr.org</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
-			</license>
-		</licenses>
-	</library>
 	<library>
 		<file-name>portal/aopalliance.jar</file-name>
 		<version>1.0</version>
@@ -2946,17 +2923,6 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-    <library>
-		<file-name>portal/stringtemplate.jar</file-name>
-		<version>3.0</version>
-		<project-name>ANTLR String Template project</project-name>
-		<project-url>http://www.stringtemplate.org/</project-url>
-		<licenses>
-			<license>
-				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
 	</library>
