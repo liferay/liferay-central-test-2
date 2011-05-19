@@ -1,3 +1,5 @@
+#set ($control_panel_category = $htmlUtil.escape($theme_display.getControlPanelCategory().toString()))
+
 #set ($panelsMinimized = $getterUtil.getBoolean($sessionClicks.get($request, "control-panel-sidebar-minimized", "false")))
 
 #if ($panelsMinimized == true)

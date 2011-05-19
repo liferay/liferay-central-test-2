@@ -81,8 +81,6 @@
 
 #set ($group_id = $theme_display.getScopeGroupId())
 
-#set ($control_panel_category = $htmlUtil.escape($theme_display.getControlPanelCategory().toString()))
-
 ## ---------- URLs ---------- ##
 
 #set ($show_add_content = $theme_display.isShowAddContentIcon())
