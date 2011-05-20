@@ -142,12 +142,26 @@ String taglibUrl = null;
 
 <span class="manage-button">
 	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
-		<portlet:renderURL var="addDocumentTypeURL">
-			<portlet:param name="struts_action" value="/document_library/edit_document_type" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-		</portlet:renderURL>
 
-		<liferay-ui:icon image="copy" message="document-types" url="<%= addDocumentTypeURL %>" />
+		<%
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "openDocumentTypeView()";
+		%>
+
+		<liferay-ui:icon
+			image="copy"
+			message="document-types"
+			url="<%= taglibUrl %>"
+		/>
+
+		<%
+		taglibUrl = "javascript:" + renderResponse.getNamespace() + "openDDMStructureView()";
+		%>
+
+		<liferay-ui:icon
+			image="copy"
+			message="metadata-sets"
+			url="<%= taglibUrl %>"
+		/>
 	</liferay-ui:icon-menu>
 </span>
 
@@ -164,5 +178,41 @@ String taglibUrl = null;
 
 			documentDisplayStyle.toggleClass('selected', allRowIds.attr('checked'));
 		}
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />openDocumentTypeView',
+		function() {
+			Liferay.Util.openWindow(
+				{
+					dialog: {
+						stack: false,
+						width:820
+					},
+					title: '<liferay-ui:message key="Document Type" />',
+					uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
+				}
+			);
+		},
+		[]
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />openDDMStructureView',
+		function() {
+			Liferay.Util.openWindow(
+				{
+					dialog: {
+						stack: false,
+						width:820
+					},
+					title: '<liferay-ui:message key="Metadata Sets" />',
+					uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/view" /></liferay-portlet:renderURL>'
+				}
+			);
+		},
+		[]
 	);
 </aui:script>
