@@ -109,7 +109,8 @@ if ((selLayout != null) && !group.isLayoutPrototype()) {
 		var layoutsContainer = A.one('#<portlet:namespace />layoutsContainer');
 
 		layoutsContainer.plug(
-			A.Plugin.IO, {
+			A.Plugin.IO,
+			{
 				autoLoad: false
 			}
 		);
