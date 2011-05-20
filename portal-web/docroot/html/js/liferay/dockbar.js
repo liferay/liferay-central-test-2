@@ -599,8 +599,6 @@ AUI().add(
 						function(event) {
 							event.preventDefault();
 
-							var item = event.currentTarget;
-
 							manageContent.hide();
 
 							instance._openWindow(
@@ -610,7 +608,7 @@ AUI().add(
 										width: 820
 									}
 								},
-								item
+								event.currentTarget
 							);
 						},
 						'.use-dialog a'
@@ -679,16 +677,14 @@ AUI().add(
 						function(event) {
 							event.preventDefault();
 
-							var item = event.currentTarget;
-
 							instance._openWindow(
 								{
 									dialog: {
 										align: Util.Window.ALIGN_CENTER,
-										width: 1000
+										width: 960
 									}
 								},
-								item
+								event.currentTarget
 							);
 						},
 						'a.use-dialog'
@@ -732,16 +728,16 @@ AUI().add(
 				);
 			},
 
-			_openWindow: function(configParams, item) {
+			_openWindow: function(config, item) {
 				var defaultParams = {
 					id: item.guid(),
 					title: item.attr('title'),
 					uri: item.attr('href')
 				};
 
-				A.mix(configParams, defaultParams);
+				A.mix(config, defaultParams);
 
-				Util.openWindow(configParams);
+				Util.openWindow(config);
 			},
 
 			_toggleAppShortcut: function(item, force) {
