@@ -301,42 +301,52 @@ AUI().add(
 				return '<div class="dockbar-message ' + cssClass + '" id="' + messageId + '">' + message + '</div>';
 			},
 
-			_createPersonalizationOverlayMask: function(column, controls) {
+			_createPersonalizationMask: function(column) {
+				var instance = this;
+
 				var columnId = column.attr('id');
 
-				var personalizable = false;
+				var personalizable = !!column.one('.portlet-column-content.personalizable');
 
-				if (column.one('.portlet-column-content.personalizable')) {
-					personalizable = true;
-				}
+				var cssClass = 'customizable-layout-column';
 
 				var overlayMask = new A.OverlayMask(
 					{
-						cssClass:  personalizable ? 'layout-column-personalizable' : 'layout-column',
+						cssClass: cssClass,
 						target: column,
 						zIndex: 10
 
 					}
 				).render();
 
-				var columnControls = controls.clone();
+				if (personalizable) {
+					overlayMask.get('boundingBox').addClass('personalizable');
+				}
 
-				var input = columnControls.one('input');
+				var columnControls = instance._controls.clone();
+
+				var input = columnControls.one('.layout-personalizable-checkbox');
 				var label = columnControls.one('label');
 
 				var oldName = input.attr('name');
 				var newName = oldName.replace('[COLUMN_ID]', columnId);
 
-				input.attr('name', newName);
-				input.attr('id', newName);
+				input.attr(
+					{
+						checked: personalizable,
+						id: newName,
+						name: newName
+					}
+				);
+
 				label.attr('for', newName);
 
-				input.attr('checked', personalizable);
+				overlayMask.get('boundingBox').prepend(columnControls);
+
+				columnControls.show();
+
 				input.setData('personalizatonControls', overlayMask);
-
-				overlayMask.get('boundingBox').prepend(columnControls.show());
-
-				column.setData("personalizatonControls", overlayMask);
+				column.setData('personalizatonControls', overlayMask);
 
 				return overlayMask;
 			},
@@ -409,12 +419,12 @@ AUI().add(
 					'visibleChange',
 					function(event) {
 						if (event.newVal) {
-							A.getBody().addClass('showing-messages');
+							BODY.addClass('showing-messages');
 
 							MenuManager.hideAll();
 						}
 						else {
-							A.getBody().removeClass('showing-messages');
+							BODY.removeClass('showing-messages');
 						}
 					}
 				);
@@ -593,7 +603,7 @@ AUI().add(
 					);
 				}
 
-				if (manageContent){
+				if (manageContent) {
 					manageContent.get('boundingBox').delegate(
 						'click',
 						function(event) {
@@ -617,36 +627,13 @@ AUI().add(
 
 				var managePersonalizationLink = A.one('#' + namespace + 'managePersonalization');
 
-				if (managePersonalizationLink ) {
-					if (managePersonalizationLink.hasClass('disabled')) {
-						managePersonalizationLink.on(
-							'click',
-							function(event) {
-								var instance = new A.Dialog(
-									{
-										bodyContent: A.one('#' + namespace + 'FreeformLayoutHelp').show(),
-										height: 250,
-										width: 500
-									}
-								).render();
-							}
-						);
-
-
-
-					}
-					else {
-						var controls = dockBar.one('.layout-personalizable-controls');
+				if (managePersonalizationLink) {
+					if (!managePersonalizationLink.hasClass('disabled')) {
+						instance._controls = dockBar.one('.layout-personalizable-controls');
 
 						var columns = A.all('.portlet-column');
 
-						A.getBody().delegate(
-							'change',
-							function(event) {
-								instance._onChangePersonalization(event);
-							},
-							'.layout-personalizable-checkbox'
-						);
+						BODY.delegate('click', instance._onChangePersonalization, '.layout-personalizable-checkbox', instance);
 
 						managePersonalizationLink.on(
 							'click',
@@ -654,11 +641,11 @@ AUI().add(
 								event.halt();
 
 								columns.each(
-									function(column) {
-										var overlayMask = column.getData("personalizatonControls");
+									function(item, index, collection) {
+										var overlayMask = item.getData('personalizatonControls');
 
 										if (!overlayMask) {
-											overlayMask = instance._createPersonalizationOverlayMask(column, controls);
+											overlayMask = instance._createPersonalizationMask(item);
 										}
 
 										overlayMask.toggle();
@@ -671,7 +658,7 @@ AUI().add(
 
 				var myAccount = A.one('#' + namespace + 'userAvatar .user-links');
 
-				if (myAccount){
+				if (myAccount) {
 					myAccount.delegate(
 						'click',
 						function(event) {
@@ -703,27 +690,28 @@ AUI().add(
 			},
 
 			_onChangePersonalization: function(event) {
-				var checkbox = event.target;
+				var instance = this;
 
-				var overlayMask = checkbox.getData("personalizatonControls");
+				var checkbox = event.currentTarget;
 
-				var contentBox = overlayMask.get('contentBox');
+				var overlayMask = checkbox.getData('personalizatonControls');
 
-				contentBox.toggleClass('layout-column-content');
-				contentBox.toggleClass('layout-column-personalizable-content');
+				var boundingBox = overlayMask.get('boundingBox');
+
+				boundingBox.toggleClass('personalizable');
 
 				var data = {
 					cmd: 'update_type_settings',
 					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					p_l_id: themeDisplay.getPlid()
-				}
+				};
 
 				data[checkbox.attr('name')] = checkbox.attr('checked');
 
 				A.io.request(
 					themeDisplay.getPathMain() + '/portal/update_layout',
 					{
-						data : data
+						data: data
 					}
 				);
 			},

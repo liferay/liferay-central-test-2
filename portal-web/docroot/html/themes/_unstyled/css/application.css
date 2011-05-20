@@ -256,13 +256,16 @@
 .yui3-aui-menu-content li.last, .lfr-menu-list ul li.last {
 }
 
-.yui3-aui-menu-content li a, .lfr-menu-list ul li .taglib-icon {
+.yui3-aui-menu-content li a, .lfr-menu-list ul li .taglib-icon, .yui3-aui-menu-content li .disabled {
+}
+
+.yui3-aui-menu-content li .disabled {
 }
 
 .yui3-aui-menu-content li a.yui3-aui-focus, .lfr-menu-list ul .taglib-icon.yui3-aui-focus, .lfr-menu-expanded li a:focus {
 }
 
-.yui3-aui-menu-content a, .lfr-menu-list li .taglib-icon, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
+.yui3-aui-menu-content a, .lfr-menu-list li .taglib-icon, .yui3-aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 }
 
 /* ---------- Toolbar ---------- */
@@ -287,4 +290,24 @@
 /* ---------- Tree View ---------- */
 
 .yui3-aui-tree-node-selected .yui3-aui-tree-label {
+}
+
+/* ---------- Page Personalization ---------- */
+
+.controls-visible .portlet-column.personalizable {
+}
+
+.customizable-layout-column-content.yui3-widget-content-expanded {
+}
+
+.customizable-layout-column-content {
+}
+
+.personalizable .customizable-layout-column-content {
+}
+
+.layout-personalizable-controls {
+}
+
+.ie .layout-personalizable-controls {
 }

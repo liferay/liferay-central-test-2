@@ -61,8 +61,8 @@
 	border-radius: 8px;
 }
 
-.layout-column-content, .layout-column-personalizable-content {
-	-moz-border-radius: 16px;
-	-webkit-border-radius: 16px;
-	border-radius: 16px;
+.customizable-layout-column-content {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 }

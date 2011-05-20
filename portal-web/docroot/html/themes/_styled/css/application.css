@@ -479,3 +479,38 @@
 	background-color: transparent;
 	font-weight: bold;
 }
+
+/* ---------- Page Personalization ---------- */
+
+.controls-visible .portlet-column.personalizable {
+	background-color: #CFFCCF;
+	border: 2px dashed #9CC97B;
+}
+
+.customizable-layout-column-content.yui3-widget-content-expanded {
+	border: 3px solid #333;
+	margin: 0.2em;
+}
+
+.customizable-layout-column-content {
+	background-color: #C92C3C;
+}
+
+.personalizable .customizable-layout-column-content {
+	background-color: #9CC97B;
+}
+
+.layout-personalizable-controls {
+	background-color: #FFF;
+	font-size: 1.5em;
+	margin: 1em;
+	opacity: 0.9;
+	padding: 1em;
+	position: absolute;
+	z-index: 15;
+}
+
+.ie .layout-personalizable-controls {
+	-ms-filter: alpha(opacity=90);
+	filter: alpha(opacity=90);
+}
