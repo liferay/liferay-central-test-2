@@ -389,6 +389,17 @@ public class JournalArticleServiceUtil {
 			serviceContext);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle updateArticleTranslation(
+		long groupId, java.lang.String articleId, double version,
+		java.util.Locale locale, java.lang.String title,
+		java.lang.String description, java.lang.String content)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateArticleTranslation(groupId, articleId, version,
+			locale, title, description, content);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
 		long groupId, java.lang.String articleId, double version,
 		java.lang.String content)
