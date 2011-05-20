@@ -104,26 +104,28 @@ if ((selLayout != null) && !group.isLayoutPrototype()) {
 	</aui:column>
 </aui:layout>
 
-<aui:script use="aui-io-plugin">
-	var layoutsContainer = A.one('#<portlet:namespace />layoutsContainer');
+<c:if test="<%= !group.isLayoutPrototype() %>">
+	<aui:script use="aui-io-plugin">
+		var layoutsContainer = A.one('#<portlet:namespace />layoutsContainer');
 
-	layoutsContainer.plug(
-		A.Plugin.IO, {
-			autoLoad: false
-		}
-	);
+		layoutsContainer.plug(
+			A.Plugin.IO, {
+				autoLoad: false
+			}
+		);
 
-	A.one('#<portlet:namespace />layoutsTreeOutput').delegate(
-		'click',
-		function(event) {
-			event.preventDefault();
+		A.one('#<portlet:namespace />layoutsTreeOutput').delegate(
+			'click',
+			function(event) {
+				event.preventDefault();
 
-			var requestUri = event.currentTarget.get('href');
+				var requestUri = event.currentTarget.get('href');
 
-			layoutsContainer.io.set('uri', requestUri);
+				layoutsContainer.io.set('uri', requestUri);
 
-			layoutsContainer.io.start();
-		},
-		'.layout-tree'
-	);
-</aui:script>
+				layoutsContainer.io.start();
+			},
+			'.layout-tree'
+		);
+	</aui:script>
+</c:if>

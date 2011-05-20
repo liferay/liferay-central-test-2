@@ -37,7 +37,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 
 <div id="<portlet:namespace />panelSelectPortletsOutput" style="margin: 4px;"></div>
 
-<aui:script use="yui3-aui-tree-view">
+<aui:script use="aui-tree-view">
 	var panelSelectedPortletsEl = A.one('#<portlet:namespace />panelSelectedPortlets');
 	var selectedPortlets = panelSelectedPortletsEl.val().split(',');
 
