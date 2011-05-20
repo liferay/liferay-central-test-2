@@ -1878,7 +1878,6 @@ public class ServicePreAction extends Action {
 			myAccountURL.setControlPanelCategory(PortletCategoryKeys.MY);
 
 			myAccountURL.setParameter("struts_action", "/my_account/edit_user");
-			myAccountURL.setParameter("backURL", myAccountRedirect);
 
 			themeDisplay.setURLMyAccount(myAccountURL);
 		}
