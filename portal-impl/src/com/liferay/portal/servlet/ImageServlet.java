@@ -124,12 +124,17 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected boolean checkIGImageThumbnailMaxDimensions(
-			Image image, long igImageId)
+	protected Image getIGImageThumbnail(Image image, long igImageId)
 		throws PortalException, SystemException {
+
+		if (image == null) {
+			return null;
+		}
 
 		long igThumbnailMaxDimension = PrefsPropsUtil.getLong(
 			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
+
+		long imageId = image.getImageId();
 
 		if ((image.getHeight() > igThumbnailMaxDimension) ||
 			(image.getWidth() > igThumbnailMaxDimension)) {
@@ -140,14 +145,18 @@ public class ImageServlet extends HttpServlet {
 			IGImageLocalServiceUtil.updateSmallImage(
 				igImage.getSmallImageId(), igImage.getLargeImageId());
 
-			return true;
+			return ImageServiceUtil.getImage(imageId);
 		}
 
-		return false;
+		return image;
 	}
 
-	protected boolean checkUserImageMaxDimensions(Image image, long imageId)
+	protected Image getUserImageResized(Image image, long imageId)
 		throws PortalException, SystemException {
+
+		if (image == null) {
+			return null;
+		}
 
 		if ((image.getHeight() > PropsValues.USERS_IMAGE_MAX_HEIGHT) ||
 			(image.getWidth() > PropsValues.USERS_IMAGE_MAX_WIDTH)) {
@@ -157,10 +166,10 @@ public class ImageServlet extends HttpServlet {
 			UserLocalServiceUtil.updatePortrait(
 				user.getUserId(), image.getTextObj());
 
-			return true;
+			return ImageLocalServiceUtil.getImage(imageId);
 		}
 
-		return false;
+		return image;
 	}
 
 	protected Image getDefaultImage(HttpServletRequest request, long imageId)
@@ -205,9 +214,7 @@ public class ImageServlet extends HttpServlet {
 				path.startsWith("/user_male_portrait") ||
 				path.startsWith("/user_portrait")) {
 
-				if (checkUserImageMaxDimensions(image, imageId)) {
-					image = ImageLocalServiceUtil.getImage(imageId);
-				}
+				image = getUserImageResized(image, imageId);
 			}
 			else {
 				long igImageId = ParamUtil.getLong(request, "igImageId");
@@ -215,9 +222,7 @@ public class ImageServlet extends HttpServlet {
 					request, "igSmallImage");
 
 				if ((igImageId > 0) && igSmallImage) {
-					if (checkIGImageThumbnailMaxDimensions(image, igImageId)) {
-						image = ImageServiceUtil.getImage(imageId);
-					}
+					image = getIGImageThumbnail(image, igImageId);
 				}
 			}
 		}
