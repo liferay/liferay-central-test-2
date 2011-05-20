@@ -22,6 +22,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
+
+Calendar expirationDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+expirationDate.add(Calendar.MONTH, 1);
+
+if (entry != null) {
+	if (entry.getExpirationDate() != null) {
+		expirationDate.setTime(entry.getExpirationDate());
+	}
+}
 %>
 
 <aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
@@ -104,7 +114,7 @@ long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 		<aui:input name="displayDate" />
 
-		<aui:input name="expirationDate" />
+		<aui:input name="expirationDate" value="<%= expirationDate %>" />
 	</aui:fieldset>
 
 	<aui:button-row>
