@@ -912,7 +912,7 @@
 	</library>
 	<library>
 		<file-name>portal/antlr3.jar</file-name>
-		<version>3.3</version>
+		<version>3.0.1</version>
 		<project-name>ANTLR</project-name>
 		<project-url>http://www.antlr.org</project-url>
 		<licenses>
@@ -923,7 +923,7 @@
 	</library>
 	<library>
 		<file-name>portal/antlr3-runtime.jar</file-name>
-		<version>3.3</version>
+		<version>3.0.1</version>
 		<project-name>ANTLR</project-name>
 		<project-url>http://www.antlr.org</project-url>
 		<licenses>
@@ -2950,7 +2950,7 @@
 	</library>
 	<library>
 		<file-name>portal/stringtemplate.jar</file-name>
-		<version>4.0.2</version>
+		<version>3.0</version>
 		<project-name>StringTemplate</project-name>
 		<project-url>http://www.stringtemplate.org</project-url>
 		<licenses>
