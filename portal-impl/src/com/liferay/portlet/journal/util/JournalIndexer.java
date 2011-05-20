@@ -194,6 +194,7 @@ public class JournalIndexer extends BaseIndexer {
 		}
 
 		String templateId = article.getTemplateId();
+		String layoutUuid = article.getLayoutUuid();
 		Date displayDate = article.getDisplayDate();
 		long status = article.getStatus();
 
@@ -265,6 +266,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		document.addKeyword("structureId", structureId);
 		document.addKeyword("templateId", templateId);
+		document.addKeyword("layoutUuid", layoutUuid);
 		document.addDate("displayDate", displayDate);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
