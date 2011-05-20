@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
@@ -55,9 +56,9 @@ public class ZipWriterImpl implements ZipWriter {
 
 		_file.mkdir();
 
-		// LPS-16369
-
-		//_file.deleteOnExit();
+		if (!JavaProps.hasSunBug6291034()) {
+			_file.deleteOnExit();
+		}
 	}
 
 	public ZipWriterImpl(java.io.File file) {

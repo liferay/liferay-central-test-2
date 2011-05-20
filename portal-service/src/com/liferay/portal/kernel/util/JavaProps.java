@@ -59,6 +59,10 @@ public class JavaProps {
 		return _instance._javaVmVersion;
 	}
 
+	public static boolean hasSunBug6291034() {
+		return _instance._sunBug6291034;
+	}
+
 	public static boolean is64bit() {
 		return _instance._64bit;
 	}
@@ -130,6 +134,10 @@ public class JavaProps {
 		}
 
 		LogUtil.debug(_log, System.getProperties());
+
+		if (_javaVmVersion.compareTo("1.5.0_06-") < 0) {
+			_sunBug6291034 = true;
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JavaProps.class);
@@ -145,5 +153,6 @@ public class JavaProps {
 	private String _javaVendor;
 	private String _javaVersion;
 	private String _javaVmVersion;
+	private boolean _sunBug6291034;
 
 }

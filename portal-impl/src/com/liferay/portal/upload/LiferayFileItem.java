@@ -16,6 +16,7 @@ package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 
@@ -107,9 +108,9 @@ public class LiferayFileItem extends DiskFileItem {
 
 		File tempFile = new File(_repository, tempFileName);
 
-		// LPS-16369
-
-		//tempFile.deleteOnExit();
+		if (!JavaProps.hasSunBug6291034()) {
+			tempFile.deleteOnExit();
+		}
 
 		return tempFile;
 	}
