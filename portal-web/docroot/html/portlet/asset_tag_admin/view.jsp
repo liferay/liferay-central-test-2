@@ -55,7 +55,11 @@
 					</span>
 				</div>
 
+				<div class="tags-paginator"></div>
+
 				<div class="tags-admin-list lfr-component"></div>
+
+				<div class="tags-paginator"></div>
 			</aui:column>
 
 			<aui:column columnWidth="65" cssClass="tags-admin-edit-tag">
@@ -74,7 +78,9 @@
 <aui:script use="liferay-tags-admin">
 	new Liferay.Portlet.AssetTagsAdmin(
 		{
-			portletId: '<%= portletDisplay.getId() %>'
+			portletId: '<%= portletDisplay.getId() %>',
+			tagsPerPage: <%= SearchContainer.DEFAULT_DELTA %>,
+			tagsPerPageOptions: [<%= StringUtil.merge(PropsValues.SEARCH_CONTAINER_PAGE_DELTA_VALUES) %>]
 		}
 	);
 </aui:script>

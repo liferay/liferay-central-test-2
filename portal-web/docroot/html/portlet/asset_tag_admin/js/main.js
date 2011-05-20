@@ -54,6 +54,8 @@ AUI().add(
 					initializer: function(config) {
 						var instance = this;
 
+						instance._config = config;
+
 						instance.portletId = config.portletId;
 
 						instance._prefixedPortletId = '_' + config.portletId + '_';
@@ -173,6 +175,33 @@ AUI().add(
 						var currentCheckedStatus = event.currentTarget.attr('checked');
 
 						A.all('.tag-item-check').attr('checked', currentCheckedStatus);
+					},
+
+					_createTagsPaginator: function(customParams) {
+						var instance = this;
+
+						var config = instance._config;
+
+						var defaultParams = {
+							alwaysVisible: false,
+							containers: '.tags-paginator',
+							firstPageLinkLabel: '<<',
+							lastPageLinkLabel: '>>',
+							nextPageLinkLabel: '>',
+							prevPageLinkLabel: '<',
+							rowsPerPage: config.tagsPerPage,
+							rowsPerPageOptions: config.tagsPerPageOptions
+						};
+
+						A.mix(defaultParams, customParams);
+
+						var tagsPaginator = new A.Paginator(defaultParams).render();
+
+						tagsPaginator.on('changeRequest', instance._onTagsPaginatorChangeRequest, instance);
+
+						instance._tagsPaginator = tagsPaginator;
+
+						return tagsPaginator;
 					},
 
 					_createTagPanelAdd: function() {
@@ -366,8 +395,8 @@ AUI().add(
 						var instance = this;
 
 						instance._getTags(
-							function(tags) {
-								instance._prepareTags(tags, callback);
+							function(result) {
+								instance._prepareTags(result.tags, callback);
 							}
 						);
 					},
@@ -540,11 +569,39 @@ AUI().add(
 					_getTags: function(callback) {
 						var instance = this;
 
-						Liferay.Service.Asset.AssetTag.getGroupTags(
-							{
-								groupId: themeDisplay.getParentGroupId()
-							},
-							callback
+						var paginator = instance._tagsPaginator;
+
+						var currentPage = 0;
+						var rowsPerPage = instance._config.tagsPerPage;
+
+						if (paginator) {
+							currentPage = paginator.get('page') - 1;
+							rowsPerPage = paginator.get('rowsPerPage');
+						}
+
+						var start = currentPage * rowsPerPage;
+						var end = start + rowsPerPage;
+
+						var params = {
+							groupId: themeDisplay.getParentGroupId(),
+							start: start,
+							end: end
+						};
+
+						Liferay.Service.Asset.AssetTag.getJSONGroupTags(
+							params,
+							function(result) {
+								if (!paginator) {
+									paginator = instance._createTagsPaginator(result);
+								}
+								else {
+									paginator.setState(result);
+								}
+
+								if (callback) {
+									callback.apply(instance, arguments);
+								}
+							}
 						);
 					},
 
@@ -777,6 +834,12 @@ AUI().add(
 						var tagId = instance._getTagId(event.target);
 
 						instance._selectTag(tagId);
+					},
+
+					_onTagsPaginatorChangeRequest: function(event) {
+						var instance = this;
+
+						instance._displayTags();
 					},
 
 					_onTagUpdateFailure: function(response) {
@@ -1123,6 +1186,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window']
+		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window', 'aui-paginator']
 	}
 );
