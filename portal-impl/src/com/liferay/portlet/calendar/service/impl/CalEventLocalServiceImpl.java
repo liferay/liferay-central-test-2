@@ -1456,9 +1456,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			eventProps.add(dtStart);
 
-			Property dtStartProperty = eventProps.getProperty(Property.DTSTART);
-
-			dtStartProperty.getParameters().add(Value.DATE);
 		}
 		else {
 
