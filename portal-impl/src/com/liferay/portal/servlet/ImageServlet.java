@@ -124,54 +124,6 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected Image getIGImageThumbnail(Image image, long igImageId)
-		throws PortalException, SystemException {
-
-		if (image == null) {
-			return null;
-		}
-
-		long igThumbnailMaxDimension = PrefsPropsUtil.getLong(
-			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
-
-		long imageId = image.getImageId();
-
-		if ((image.getHeight() > igThumbnailMaxDimension) ||
-			(image.getWidth() > igThumbnailMaxDimension)) {
-
-			IGImage igImage = IGImageLocalServiceUtil.getImage(
-				igImageId);
-
-			IGImageLocalServiceUtil.updateSmallImage(
-				igImage.getSmallImageId(), igImage.getLargeImageId());
-
-			return ImageServiceUtil.getImage(imageId);
-		}
-
-		return image;
-	}
-
-	protected Image getUserImageResized(Image image, long imageId)
-		throws PortalException, SystemException {
-
-		if (image == null) {
-			return null;
-		}
-
-		if ((image.getHeight() > PropsValues.USERS_IMAGE_MAX_HEIGHT) ||
-			(image.getWidth() > PropsValues.USERS_IMAGE_MAX_WIDTH)) {
-
-			User user = UserLocalServiceUtil.getUserByPortraitId(imageId);
-
-			UserLocalServiceUtil.updatePortrait(
-				user.getUserId(), image.getTextObj());
-
-			return ImageLocalServiceUtil.getImage(imageId);
-		}
-
-		return image;
-	}
-
 	protected Image getDefaultImage(HttpServletRequest request, long imageId)
 		throws NoSuchImageException {
 
@@ -198,6 +150,31 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
+	protected Image getIGImageThumbnail(Image image, long igImageId)
+		throws PortalException, SystemException {
+
+		if (image == null) {
+			return null;
+		}
+
+		long igThumbnailMaxDimension = PrefsPropsUtil.getLong(
+			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
+
+		if ((image.getHeight() > igThumbnailMaxDimension) ||
+			(image.getWidth() > igThumbnailMaxDimension)) {
+
+			IGImage igImage = IGImageLocalServiceUtil.getImage(
+				igImageId);
+
+			IGImageLocalServiceUtil.updateSmallImage(
+				igImage.getSmallImageId(), igImage.getLargeImageId());
+
+			return ImageServiceUtil.getImage(image.getImageId());
+		}
+
+		return image;
+	}
+
 	protected Image getImage(HttpServletRequest request, boolean getDefault)
 		throws PortalException, SystemException {
 
@@ -214,7 +191,7 @@ public class ImageServlet extends HttpServlet {
 				path.startsWith("/user_male_portrait") ||
 				path.startsWith("/user_portrait")) {
 
-				image = getUserImageResized(image, imageId);
+				image = getUserPortraitImageResized(image, imageId);
 			}
 			else {
 				long igImageId = ParamUtil.getLong(request, "igImageId");
@@ -351,6 +328,27 @@ public class ImageServlet extends HttpServlet {
 		}
 
 		return -1;
+	}
+
+	protected Image getUserPortraitImageResized(Image image, long imageId)
+		throws PortalException, SystemException {
+
+		if (image == null) {
+			return null;
+		}
+
+		if ((image.getHeight() > PropsValues.USERS_IMAGE_MAX_HEIGHT) ||
+			(image.getWidth() > PropsValues.USERS_IMAGE_MAX_WIDTH)) {
+
+			User user = UserLocalServiceUtil.getUserByPortraitId(imageId);
+
+			UserLocalServiceUtil.updatePortrait(
+				user.getUserId(), image.getTextObj());
+
+			return ImageLocalServiceUtil.getImage(imageId);
+		}
+
+		return image;
 	}
 
 	protected void writeImage(
