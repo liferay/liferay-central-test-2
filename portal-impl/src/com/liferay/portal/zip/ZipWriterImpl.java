@@ -54,7 +54,10 @@ public class ZipWriterImpl implements ZipWriter {
 				PortalUUIDUtil.generate() + ".zip");
 
 		_file.mkdir();
-		_file.deleteOnExit();
+
+		// See LPS-16369
+
+		//_file.deleteOnExit();
 	}
 
 	public ZipWriterImpl(java.io.File file) {
