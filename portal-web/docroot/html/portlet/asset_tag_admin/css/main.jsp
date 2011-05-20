@@ -72,22 +72,30 @@
 
 	.tag-item a {
 		display: block;
-		padding: 8px 20px 8px 10px;
+		padding: 8px 20px 8px 25px;
 		text-decoration: none;
+	}
+
+	.tag-item-actions-trigger, .tag-item-check {
+		 display: block;
+		 margin-top: -8px;
+		 position: absolute;
+		 top: 50%;
 	}
 
 	.tag-item-actions-trigger {
 		background-image: url(<%= themeImagesPath %>/common/edit.png);
 		background-repeat: no-repeat;
 		clip: rect(0pt, 0pt, 0pt, 0pt);
-		display: block;
 		height: 16px;
 		margin-top: -8px;
 		padding: 0;
-		position: absolute;
 		right: 0;
-		top: 50%;
 		width: 16px;
+	}
+
+	.tag-item-check {
+		 margin-left: 2px;
 	}
 
 	.tags-admin-content {
@@ -102,11 +110,15 @@
 	}
 
 	.tag-item-container {
-		&:hover, &:focus, &:focus {
+		&:hover, &:focus {
 			.tag-item-actions-trigger {
 				clip: auto;
 			}
 		}
+	}
+
+	.tag-item-actions-trigger:focus {
+		clip: auto;
 	}
 
 	.tags-admin-list {
@@ -145,6 +157,22 @@
 
 	.tags-admin-list-container .results-header {
 		background: #D3DADD;
+		padding-left: 30px;
+
+		.tag-admin-check {
+			display: block;
+			left: 2px;
+			margin-top: -6px;
+			position: absolute;
+			top: 50%;
+		}
+
+		.tag-admin-delete {
+			display: block;
+			position: absolute;
+			right: 10px;
+			top: 0px;
+		}
 	}
 
 	.tags-admin-search-bar {
@@ -237,7 +265,7 @@
 			width: 100%;
 		}
 
-		.tag-item-actions-trigger {
+		.tag-item-actions-trigger, .tag-item-check {
 			cursor: pointer;
 		}
 	}

@@ -46,7 +46,14 @@
 	<div class="tags-admin-content-wrapper">
 		<aui:layout cssClass="tags-admin-content">
 			<aui:column columnWidth="35" cssClass="tags-admin-list-container">
-				<div class="results-header"><liferay-ui:message key="tags" /></div>
+				<div class="results-header"><liferay-ui:message key="tags" />
+					<span class="tag-admin-check">
+						<input type="checkbox" id="checkAllTags" title="<%= LanguageUtil.get(pageContext, "tag-check-all")%>">
+					</span>
+					<span class="tag-admin-delete">
+						<aui:button id="deleteCheckedTags" value="delete"/>
+					</span>
+				</div>
 
 				<div class="tags-admin-list lfr-component"></div>
 			</aui:column>

@@ -34,6 +34,7 @@ AUI().add(
 
 		var TPL_TAG_LIST = '<li class="tag-item-container results-row {cssClassSelected}" data-tag="{name}" data-tagId="{tagId}" tabIndex="0">' +
 			'<div class="tags-admin-content-wrapper">' +
+					'<input type="checkbox" class="tag-item-check" name="tag-item-check" data-tagId="{tagId}"></a>' +
 					'<span class="tag-item">' +
 						'<a href="javascript:;" data-tagId="{tagId}" tabIndex="-1">{name}</a>' +
 					'</span>' +
@@ -80,14 +81,15 @@ AUI().add(
 						instance._tagsList.on(EVENT_CLICK, instance._onTagsListClick, instance);
 						instance._tagsList.on('key', instance._onTagsListSelect, 'up:13', instance);
 
-						instance._tagsList.delegate(EVENT_CLICK, instance._onTagsListItemClick, 'li', instance);
-
 						instance._tagViewContainer.on(EVENT_CLICK, instance._onTagViewContainerClick, instance);
 
 						var namespace = instance._prefixedPortletId;
 
 						A.one('#' + namespace + 'addTagButton').on(EVENT_CLICK, instance._onShowTagPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'tagsPermissionsButton').on(EVENT_CLICK, instance._onTagChangePermissions, instance);
+
+						A.one('#checkAllTags').on(EVENT_CLICK, instance._checkAllTags, instance);
+						A.one('#deleteCheckedTags').on(EVENT_CLICK, instance._deleteSelectedTags, instance);
 
 						instance._loadData();
 
@@ -167,53 +169,10 @@ AUI().add(
 						contextPanel.get('boundingBox').on('key', contextPanel.hide, 'up:27', contextPanel);
 					},
 
-					_getDDHandler: function() {
-						var instance = this;
+					_checkAllTags: function(event) {
+						var currentCheckedStatus = event.currentTarget.attr('checked');
 
-						var ddHandler = instance._ddHandler;
-
-						if (!ddHandler) {
-							ddHandler = new A.DD.Delegate(
-								{
-									container: '.tags-admin-list',
-									nodes: 'li',
-									target: true
-								}
-							);
-
-							var dd = ddHandler.dd;
-
-							dd.addTarget(instance);
-
-							dd.plug(
-								A.Plugin.DDProxy,
-								{
-									borderStyle: '0',
-									moveOnEnd: false
-								}
-							);
-
-							dd.plug(
-								A.Plugin.DDConstrained,
-								{
-									constrain2node: instance._tagsList
-								}
-							);
-
-							dd.plug(
-								A.Plugin.DDNodeScroll,
-								{
-									node: instance._tagsList,
-									scrollDelay: 100
-								}
-							);
-
-							dd.removeInvalid('a');
-
-							instance._ddHandler = ddHandler;
-						}
-
-						return ddHandler;
+						A.all('.tag-item-check').attr('checked', currentCheckedStatus);
 					},
 
 					_createTagPanelAdd: function() {
@@ -345,6 +304,36 @@ AUI().add(
 						return url;
 					},
 
+					_deleteSelectedTags: function(event) {
+						var instance = this;
+
+						if (!confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-tags'))) {
+							return;
+						}
+
+						var tagsNodes = A.all('.tag-item-check');
+
+						var checkedItemsIds = [];
+
+						A.each(
+							tagsNodes,
+							function(item, index, tagsNodes) {
+								if (item.get('checked')) {
+									checkedItemsIds.push(item.getAttribute('data-tagId'));
+								}
+							}
+						);
+
+						if (checkedItemsIds.length > 0) {
+							Liferay.Service.Asset.AssetTag.deleteTags(
+								{
+									tagIds: checkedItemsIds
+								},
+								A.bind(instance._processActionResult, instance)
+							);
+						}
+					},
+
 					_deleteTag: function(tagId, callback) {
 						var instance = this;
 
@@ -397,6 +386,55 @@ AUI().add(
 						var inputTagEditNameNode = instance._tagFormEdit.one('.tag-name input');
 
 						Liferay.Util.focusFormField(inputTagEditNameNode);
+					},
+
+					_getDDHandler: function() {
+						var instance = this;
+
+						var ddHandler = instance._ddHandler;
+
+						if (!ddHandler) {
+							ddHandler = new A.DD.Delegate(
+								{
+									container: '.tags-admin-list',
+									nodes: 'li',
+									target: true
+								}
+							);
+
+							var dd = ddHandler.dd;
+
+							dd.addTarget(instance);
+
+							dd.plug(
+								A.Plugin.DDProxy,
+								{
+									borderStyle: '0',
+									moveOnEnd: false
+								}
+							);
+
+							dd.plug(
+								A.Plugin.DDConstrained,
+								{
+									constrain2node: instance._tagsList
+								}
+							);
+
+							dd.plug(
+								A.Plugin.DDNodeScroll,
+								{
+									node: instance._tagsList,
+									scrollDelay: 100
+								}
+							);
+
+							dd.removeInvalid('a');
+
+							instance._ddHandler = ddHandler;
+						}
+
+						return ddHandler;
 					},
 
 					_getIOTagUpdate: function() {
@@ -684,28 +722,7 @@ AUI().add(
 						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
 							instance._deleteTag(
 								instance._selectedTagId,
-								function(message) {
-									var exception = message.exception;
-
-									if (!exception) {
-										instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
-
-										instance._hidePanels();
-										instance._loadData();
-									}
-									else {
-										var errorText;
-
-										if (exception.indexOf('auth.PrincipalException') > -1) {
-											errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
-										}
-										else {
-											errorText = Liferay.Language.get('your-request-failed-to-complete');
-										}
-
-										instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
-									}
-								}
+								A.bind(instance._processActionResult, instance)
 							);
 						}
 					},
@@ -746,17 +763,12 @@ AUI().add(
 
 						instance._onTagsListSelect(event);
 
-						if (event.target.hasClass('tag-item-actions-trigger')) {
+						if (event.target.hasClass('tag-item-check')) {
+							Liferay.Util.checkAllBox(event.currentTarget, 'tag-item-check', '#checkAllTags');
+						}
+						else if (event.target.hasClass('tag-item-actions-trigger')) {
 							instance._onShowTagPanel(event, ACTION_EDIT);
 						}
-					},
-
-					_onTagsListItemClick: function(event) {
-						var instance = this;
-
-						var tagId = instance._getTagId(event.currentTarget);
-
-						instance._selectTag(tagId);
 					},
 
 					_onTagsListSelect: function(event) {
@@ -900,6 +912,31 @@ AUI().add(
 
 						if (callback) {
 							callback();
+						}
+					},
+
+					_processActionResult: function(result) {
+						var instance = this;
+
+						var exception = result.exception;
+
+						if (!exception) {
+							instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
+
+							instance._hidePanels();
+							instance._loadData();
+						}
+						else {
+							var errorText;
+
+							if (exception.indexOf('auth.PrincipalException') > -1) {
+								errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
+							}
+							else {
+								errorText = Liferay.Language.get('your-request-failed-to-complete');
+							}
+
+							instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
 						}
 					},
 
