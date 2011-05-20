@@ -44,9 +44,9 @@ if (Validator.isNull(availableFields)) {
 String callback = ParamUtil.getString(request, "callback");
 %>
 
-<liferay-portlet:actionURL var="editTemplateURL" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>">
+<portlet:actionURL var="editTemplateURL">
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
-</liferay-portlet:actionURL>
+</portlet:actionURL>
 
 <aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (template != null) ? Constants.UPDATE : Constants.ADD %>" />

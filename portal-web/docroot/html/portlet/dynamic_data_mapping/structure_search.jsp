@@ -32,24 +32,38 @@ StructureDisplayTerms displayTerms = new StructureDisplayTerms(renderRequest);
 
 		<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" value="<%= displayTerms.getDescription() %>" />
 
-		<aui:select label="type" name="<%= displayTerms.CLASS_NAME_ID %>">
-			<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
-			<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
-		</aui:select>
+		<c:choose>
+			<c:when test="<%= classNameId == 0 %>">
+				<aui:select label="type" name="<%= displayTerms.CLASS_NAME_ID %>">
+					<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
+					<aui:option label='<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>' selected='<%= "datalist".equals(displayTerms.getStorageType()) %>' value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
+				</aui:select>
+			</c:when>
+			<c:otherwise>
+				<aui:input name="<%= displayTerms.CLASS_NAME_ID %>" type="hidden" value="<%= classNameId %>" />
+			</c:otherwise>
+		</c:choose>
 
-		<aui:select name="storageType">
+		<c:choose>
+			<c:when test="<%= Validator.isNull(storageTypeValue) %>">
+				<aui:select name="storageType">
 
-			<%
-			for (StorageType storageType : StorageType.values()) {
-			%>
+					<%
+					for (StorageType storageType : StorageType.values()) {
+					%>
 
-				<aui:option label="<%= storageType %>" selected="<%= storageType.equals(displayTerms.getStorageType()) %>" value="<%= storageType %>" />
+						<aui:option label="<%= storageType %>" selected="<%= storageType.equals(displayTerms.getStorageType()) %>" value="<%= storageType %>" />
 
-			<%
-			}
-			%>
+					<%
+					}
+					%>
 
-		</aui:select>
+				</aui:select>
+			</c:when>
+			<c:otherwise>
+				<aui:input name="storageType" type="hidden" value="<%= storageTypeValue %>" />
+			</c:otherwise>
+		</c:choose>
 	</aui:fieldset>
 </liferay-ui:search-toggle>
 
@@ -59,17 +73,23 @@ boolean showAddStructureButton = false;
 if (!portletName.equals(PortletKeys.DYNAMIC_DATA_MAPPING)) {
 	showAddStructureButton = DDMPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_STRUCTURE);
 }
+
+String buttonLabel = "add-structure";
+
+if (Validator.isNotNull(structureNameInitParam)) {
+	buttonLabel = LanguageUtil.format(pageContext, "add-x", structureNameInitParam);
+}
 %>
 
 <c:if test="<%= showAddStructureButton %>">
 	<aui:button-row>
-		<aui:button onClick='<%= renderResponse.getNamespace() + "addStructure();" %>' value="add-structure" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "addStructure();" %>' value="<%= buttonLabel %>" />
 	</aui:button-row>
 </c:if>
 
 <aui:script>
 	function <portlet:namespace />addStructure() {
-		var url = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="availableFields" value="Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE" /></liferay-portlet:renderURL>';
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="availableFields" value="Liferay.FormBuilder.AVAILABLE_FIELDS.DDM_STRUCTURE" /></portlet:renderURL>';
 
 		if (toggle_id_ddm_structure_searchcurClickValue == 'basic') {
 			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;

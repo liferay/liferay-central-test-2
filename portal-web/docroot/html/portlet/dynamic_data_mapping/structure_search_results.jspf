@@ -22,8 +22,19 @@ if (searchTerms.isAdvancedSearch()){
 	total = DDMStructureLocalServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, new long[] {searchTerms.getClassNameId()}, searchTerms.getStructureKey(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getStorageType(), searchTerms.isAndOperator());
 }
 else {
-	results = DDMStructureLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, null, searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-	total = DDMStructureLocalServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, null, searchTerms.getKeywords());
+	long[] classNameIds = null;
+	String[] storageTypes = null;
+
+	if (classNameId > 0) {
+		classNameIds = new long[] {classNameId};
+	}
+
+	if (Validator.isNotNull(storageTypeValue)) {
+		storageTypes = new String[] {storageTypeValue};
+	}
+
+	results = DDMStructureLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, classNameIds, searchTerms.getKeywords(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+	total = DDMStructureLocalServiceUtil.searchCount(company.getCompanyId(), scopeGroupId, classNameIds, searchTerms.getKeywords());
 }
 
 pageContext.setAttribute("results", results);

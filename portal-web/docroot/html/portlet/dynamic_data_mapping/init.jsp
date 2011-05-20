@@ -50,4 +50,22 @@
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+
+boolean showManageTemplates = GetterUtil.getBoolean(portletConfig.getInitParameter("show-manage-templates"), true);
+boolean showTabs = GetterUtil.getBoolean(portletConfig.getInitParameter("show-tabs"), true);
+boolean showToolbar = GetterUtil.getBoolean(portletConfig.getInitParameter("show-toolbar"), true);
+String structureNameInitParam = GetterUtil.getString(portletConfig.getInitParameter("structure-name"));
+String storageTypeInitParam = GetterUtil.getString(portletConfig.getInitParameter("storage-type"));
+String structureTypeInitParam = GetterUtil.getString(portletConfig.getInitParameter("structure-type"));
+
+long classNameId = 0;
+String storageTypeValue = StringPool.BLANK;
+
+if (structureTypeInitParam.equals("DLDocumentMetadataSet")) {
+	classNameId = PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName());
+}
+
+if (storageTypeInitParam.equals("xml")) {
+	storageTypeValue = StorageType.XML.getValue();
+}
 %>

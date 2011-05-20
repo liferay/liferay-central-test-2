@@ -33,9 +33,9 @@ String availableFields = ParamUtil.getString(request, "availableFields");
 String callback = ParamUtil.getString(request, "callback");
 %>
 
-<liferay-portlet:actionURL var="editStructureURL" portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>">
+<portlet:actionURL var="editStructureURL">
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
-</liferay-portlet:actionURL>
+</portlet:actionURL>
 
 <aui:form action="<%= editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (structure != null) ? Constants.UPDATE : Constants.ADD %>" />
@@ -53,8 +53,19 @@ String callback = ParamUtil.getString(request, "callback");
 	<liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
+	<%
+	String title = "new-structure";
+
+	if (structure != null) {
+		title = structure.getName();
+	}
+	else if (Validator.isNotNull(structureNameInitParam)) {
+		title = LanguageUtil.format(pageContext, "new-x", structureNameInitParam);
+	}
+	%>
+
 	<liferay-ui:header
-		title='<%= (structure != null) ? structure.getName() : "new-structure" %>'
+		title="<%= title %>"
 		backURL="<%= backURL %>"
 	/>
 
@@ -66,32 +77,46 @@ String callback = ParamUtil.getString(request, "callback");
 		<liferay-ui:panel-container cssClass="lfr-structure-entry-details-container" extended="<%= false %>" id="structureDetailsPanelContainer" persistState="<%= true %>">
 			<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="structureDetailsSectionPanel" persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "details") %>'>
 				<aui:layout cssClass="lfr-ddm-types-form-column">
-					<aui:column first="<%= true %>">
-						<aui:field-wrapper>
-							<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
-								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
-								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
-							</aui:select>
-						</aui:field-wrapper>
-					</aui:column>
+					<c:choose>
+						<c:when test="<%= classNameId == 0 %>">
+							<aui:column first="<%= true %>">
+								<aui:field-wrapper>
+									<aui:select disabled="<%= structure != null %>" label="type" name="classNameId">
+										<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DDLRecordSet.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DDLRecordSet.class.getName()) %>" />
+										<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, DLDocumentMetadataSet.class.getName()) %>" value="<%= PortalUtil.getClassNameId(DLDocumentMetadataSet.class.getName()) %>" />
+									</aui:select>
+								</aui:field-wrapper>
+							</aui:column>
+						</c:when>
+						<c:otherwise>
+							<aui:input name="classNameId" type="hidden" value="<%= classNameId %>" />
+						</c:otherwise>
+					</c:choose>
 
-					<aui:column>
-						<aui:field-wrapper>
-							<aui:select disabled="<%= structure != null %>" name="storageType">
+					<c:choose>
+						<c:when test="<%= Validator.isNull(storageTypeValue) %>">
+							<aui:column>
+								<aui:field-wrapper>
+									<aui:select disabled="<%= structure != null %>" name="storageType">
 
-							<%
-							for (StorageType storageType : StorageType.values()) {
-							%>
+									<%
+									for (StorageType storageType : StorageType.values()) {
+									%>
 
-								<aui:option label="<%= storageType %>" value="<%= storageType %>" />
+										<aui:option label="<%= storageType %>" value="<%= storageType %>" />
 
-							<%
-							}
-							%>
+									<%
+									}
+									%>
 
-							</aui:select>
-						</aui:field-wrapper>
-					</aui:column>
+									</aui:select>
+								</aui:field-wrapper>
+							</aui:column>
+						</c:when>
+						<c:otherwise>
+							<aui:input name="storageType" type="hidden" value="<%= storageTypeValue %>" />
+						</c:otherwise>
+					</c:choose>
 				</aui:layout>
 
 				<aui:input name="description" />

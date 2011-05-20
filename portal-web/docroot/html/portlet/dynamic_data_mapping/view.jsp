@@ -25,14 +25,18 @@ portletURL.setParameter("struts_action", "/dynamic_data_mapping/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<liferay-ui:tabs
-	names="structures"
-	portletURL="<%= portletURL %>"
-/>
+<c:if test="<%= showTabs %>">
+	<liferay-ui:tabs
+		names="structures"
+		portletURL="<%= portletURL %>"
+	/>
+</c:if>
 
-<liferay-util:include page="/html/portlet/dynamic_data_mapping/toolbar.jsp">
-	<liferay-util:param name="toolbarItem" value="view-all" />
-</liferay-util:include>
+<c:if test="<%= showToolbar %>">
+	<liferay-util:include page="/html/portlet/dynamic_data_mapping/toolbar.jsp">
+		<liferay-util:param name="toolbarItem" value="view-all" />
+	</liferay-util:include>
+</c:if>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<liferay-ui:search-form
@@ -64,21 +68,25 @@ portletURL.setParameter("tabs1", tabs1);
 			property="name"
 		/>
 
-		<liferay-ui:search-container-column-text
-			name="storage-type"
-			value="<%= LanguageUtil.get(pageContext, structure.getStorageType()) %>"
-		/>
+		<c:if test="<%= classNameId == 0 %>">
+			<liferay-ui:search-container-column-text
+				name="storage-type"
+				value="<%= LanguageUtil.get(pageContext, structure.getStorageType()) %>"
+			/>
+		</c:if>
 
-		<liferay-ui:search-container-column-text
-			buffer="buffer"
-			name="type"
-		>
+		<c:if test="<%= Validator.isNull(storageTypeValue) %>">
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="type"
+			>
 
-			<%
-			buffer.append(ResourceActionsUtil.getModelResource(locale, structure.getClassName()));
-			%>
+				<%
+				buffer.append(ResourceActionsUtil.getModelResource(locale, structure.getClassName()));
+				%>
 
-		</liferay-ui:search-container-column-text>
+			</liferay-ui:search-container-column-text>
+		</c:if>
 
 		<liferay-ui:search-container-column-text
 			buffer="buffer"

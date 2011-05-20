@@ -128,6 +128,8 @@ public class PortletKeys {
 
 	public static final String MESSAGE_BOARDS = "19";
 
+	public static final String METADATA_SET_ADMIN = "171";
+
 	public static final String MY_ACCOUNT = "2";
 
 	public static final String MY_PAGES = "140";
