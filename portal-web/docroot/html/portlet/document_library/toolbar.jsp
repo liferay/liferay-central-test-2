@@ -165,6 +165,34 @@ String taglibUrl = null;
 	</liferay-ui:icon-menu>
 </span>
 
+<aui:script>
+	function <portlet:namespace />openDocumentTypeView() {
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					stack: false,
+					width:820
+				},
+				title: '<liferay-ui:message key="Document Type" />',
+				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
+			}
+		);
+	}
+
+	function <portlet:namespace />openDDMStructureView() {
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					stack: false,
+					width:820
+				},
+				title: '<liferay-ui:message key="Metadata Sets" />',
+				uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/view" /></liferay-portlet:renderURL>'
+			}
+		);
+	}
+</aui:script>
+
 <aui:script use="aui-base">
 	var allRowIds = A.one('#<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox');
 
@@ -178,41 +206,5 @@ String taglibUrl = null;
 
 			documentDisplayStyle.toggleClass('selected', allRowIds.attr('checked'));
 		}
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />openDocumentTypeView',
-		function() {
-			Liferay.Util.openWindow(
-				{
-					dialog: {
-						stack: false,
-						width:820
-					},
-					title: '<liferay-ui:message key="Document Type" />',
-					uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
-				}
-			);
-		},
-		[]
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />openDDMStructureView',
-		function() {
-			Liferay.Util.openWindow(
-				{
-					dialog: {
-						stack: false,
-						width:820
-					},
-					title: '<liferay-ui:message key="Metadata Sets" />',
-					uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/view" /></liferay-portlet:renderURL>'
-				}
-			);
-		},
-		[]
 	);
 </aui:script>
