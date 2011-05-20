@@ -2026,26 +2026,20 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content)
 		throws PortalException, SystemException {
 
-		JournalArticle article = null;
-
 		validateContent(content);
 
-		JournalArticle oldArticle = null;
-		double oldVersion = 0;
-
-		oldArticle = getLatestArticle(
+		JournalArticle oldArticle = getLatestArticle(
 			groupId, articleId, WorkflowConstants.STATUS_ANY);
 
-		oldVersion = oldArticle.getVersion();
+		double oldVersion = oldArticle.getVersion();
 
 		if ((version > 0) && (version != oldVersion)) {
 			throw new ArticleVersionException();
 		}
 
+		JournalArticle article = null;
+
 		if (!oldArticle.isDraft()) {
-
-			// Create new version
-
 			double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
 			long id = counterLocalService.increment();
@@ -2093,16 +2087,18 @@ public class JournalArticleLocalServiceImpl
 			article = oldArticle;
 		}
 
-		// Update content
-
 		Map<Locale, String> titleMap = article.getTitleMap();
-		Map<Locale, String> descriptionMap = article.getDescriptionMap();
 
 		titleMap.put(locale, title);
-		descriptionMap.put(locale, description);
 
 		article.setTitleMap(titleMap);
+
+		Map<Locale, String> descriptionMap = article.getDescriptionMap();
+
+		descriptionMap.put(locale, description);
+
 		article.setDescriptionMap(descriptionMap);
+
 		article.setContent(content);
 
 		journalArticlePersistence.update(article, false);
