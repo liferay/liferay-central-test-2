@@ -235,6 +235,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLDocumentTypeLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLDocumentTypeService" class="com.liferay.portlet.documentlibrary.service.impl.DLDocumentTypeServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" parent="basePersistence" />

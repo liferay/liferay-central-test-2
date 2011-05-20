@@ -56,6 +56,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
@@ -437,6 +438,25 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	public void setDLDocumentTypePersistence(
 		DLDocumentTypePersistence dlDocumentTypePersistence) {
 		this.dlDocumentTypePersistence = dlDocumentTypePersistence;
+	}
+
+	/**
+	 * Gets the d l document type finder.
+	 *
+	 * @return the d l document type finder
+	 */
+	public DLDocumentTypeFinder getDLDocumentTypeFinder() {
+		return dlDocumentTypeFinder;
+	}
+
+	/**
+	 * Sets the d l document type finder.
+	 *
+	 * @param dlDocumentTypeFinder the d l document type finder
+	 */
+	public void setDLDocumentTypeFinder(
+		DLDocumentTypeFinder dlDocumentTypeFinder) {
+		this.dlDocumentTypeFinder = dlDocumentTypeFinder;
 	}
 
 	/**
@@ -1120,6 +1140,8 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	protected DLDocumentTypeService dlDocumentTypeService;
 	@BeanReference(type = DLDocumentTypePersistence.class)
 	protected DLDocumentTypePersistence dlDocumentTypePersistence;
+	@BeanReference(type = DLDocumentTypeFinder.class)
+	protected DLDocumentTypeFinder dlDocumentTypeFinder;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)

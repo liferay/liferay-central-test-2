@@ -276,6 +276,22 @@ public class DLDocumentTypeLocalServiceWrapper
 		return _dlDocumentTypeLocalService.getDocumentTypes(groupId, start, end);
 	}
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLDocumentType> search(
+		long companyId, long groupId, java.lang.String keywords, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlDocumentTypeLocalService.search(companyId, groupId, keywords,
+			start, end, orderByComparator);
+	}
+
+	public int searchCount(long companyId, long groupId,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlDocumentTypeLocalService.searchCount(companyId, groupId,
+			keywords);
+	}
+
 	public void updateDocumentType(long documentTypeId, java.lang.String name,
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
