@@ -59,8 +59,8 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
     <target name="build-creole-parser">
 		<delete>
 			<fileset
-				dir="src/com/liferay/portlet/wiki/engines/creole/parser"
-				includes="*.java"
+				dir="src/com/liferay/parsers/creole/parser"
+				includes="*.*"
 			/>
 		</delete>
 
@@ -76,10 +76,9 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 			maxmemory="512m"
 			newenvironment="true"
 		>
-			<arg value="-make" />
 			<arg value="-o" />
-			<arg path="src/com/liferay/portlet/wiki/engines/creole/parser" />
-			<arg path="src/com/liferay/portlet/wiki/engines/creole/grammar/Creole10.g" />
+			<arg path="src/com/liferay/parsers/creole/parser" />
+			<arg path="src/com/liferay/parsers/creole/grammar/Creole10.g" />
 		</java>
     </target>
 
