@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLDocumentType;
@@ -26,6 +27,7 @@ import java.util.List;
 
 /**
  * @author Alexander Chow
+ * @author Sergio González
  */
 public class DLDocumentTypeLocalServiceImpl
 	extends DLDocumentTypeLocalServiceBaseImpl {
@@ -98,6 +100,22 @@ public class DLDocumentTypeLocalServiceImpl
 		throws SystemException {
 
 		return dlDocumentTypePersistence.findByGroupId(groupId, start, end);
+	}
+
+	public List<DLDocumentType> search(
+			long companyId, long groupId, String keywords, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return dlDocumentTypeFinder.findByKeywords(
+			companyId, groupId, keywords, start, end, orderByComparator);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String keywords)
+		throws SystemException {
+
+		return dlDocumentTypeFinder.countByKeywords(companyId, groupId, keywords);
 	}
 
 	public void updateDocumentType(

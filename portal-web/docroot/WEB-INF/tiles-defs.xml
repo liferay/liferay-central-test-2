@@ -386,6 +386,10 @@
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library.view_document_type" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view_document_type.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library.view_file_entry" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/view_file_entry.jsp" />
 	</definition>
