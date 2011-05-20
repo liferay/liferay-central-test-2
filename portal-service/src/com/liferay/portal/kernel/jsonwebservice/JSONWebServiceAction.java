@@ -14,13 +14,11 @@
 
 package com.liferay.portal.kernel.jsonwebservice;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Igor Spasic
  */
 public interface JSONWebServiceAction {
 
-	public Object invoke(HttpServletRequest request) throws Exception;
+	public Object invoke() throws Exception;
 
 }

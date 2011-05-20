@@ -17,9 +17,8 @@ package com.liferay.portal.jsonwebservice;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.service.ServiceContext;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import javax.servlet.http.HttpServletRequest;
 
 import jodd.util.ReflectUtil;
 
@@ -36,16 +35,26 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
 	}
 
-	public Object invoke(HttpServletRequest request) throws Exception {
-		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
+	public Object invoke() throws Exception {
 
-		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
+		JSONRPCRequest jsonRpcRequest =
+			_jsonWebServiceActionParameters.getJSONRPCRequest();
 
-		Object[] parameters = _prepareParameters();
+		if (jsonRpcRequest == null) {
+			return _invokeActionMethod();
+		}
 
-		_injectServiceContext(parameters);
+		Object result = null;
+		Exception exception = null;
 
-		return actionMethod.invoke(actionClass, parameters);
+		try {
+			result = _invokeActionMethod();
+		}
+		catch (Exception e) {
+			exception = e;
+		}
+
+		return new JSONRPCResponse(jsonRpcRequest, result, exception);
 	}
 
 	private void _injectServiceContext(Object[] parameters) {
@@ -69,6 +78,19 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 				parameters[i] = new ServiceContext();
 			}
 		}
+	}
+
+	private Object _invokeActionMethod()
+		throws IllegalAccessException, InvocationTargetException {
+		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
+
+		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
+
+		Object[] parameters = _prepareParameters();
+
+		_injectServiceContext(parameters);
+
+		return actionMethod.invoke(actionClass, parameters);
 	}
 
 	private Object[] _prepareParameters() {

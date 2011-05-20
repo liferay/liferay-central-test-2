@@ -59,7 +59,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 			JSONWebServiceAction jsonWebServiceAction =
 				JSONWebServiceActionsManagerUtil.lookup(request);
 
-			Object returnObj = jsonWebServiceAction.invoke(request);
+			Object returnObj = jsonWebServiceAction.invoke();
 
 			if (returnObj != null) {
 				return getReturnValue(returnObj);

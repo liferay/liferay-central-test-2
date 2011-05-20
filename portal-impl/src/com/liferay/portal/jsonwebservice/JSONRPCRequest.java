@@ -45,9 +45,13 @@ public class JSONRPCRequest {
 			HashMap<Object, Object> requestBodyMap =
 				jsonDeserializer.deserialize(requestBody);
 
+			_id = (Integer)requestBodyMap.get("id");
+
+			_jsonrpc = (String)requestBodyMap.get("jsonrpc");
+
 			_method = (String)requestBodyMap.get("method");
 
-			_parameters = (Map<String, String>)requestBodyMap.get("params");
+			_parameters = (Map<String, ?>)requestBodyMap.get("params");
 
 			_valid = true;
 		}
@@ -56,12 +60,20 @@ public class JSONRPCRequest {
 		}
 	}
 
+	public Integer getId() {
+		return _id;
+	}
+
+	public String getJsonrpc() {
+		return _jsonrpc;
+	}
+
 	public String getMethod() {
 		return _method;
 	}
 
 	public String getParameter(String name) {
-		return _parameters.get(name);
+		return _parameters.get(name).toString();
 	}
 
 	public Set<String> getParameterNames() {
@@ -74,8 +86,10 @@ public class JSONRPCRequest {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONRPCRequest.class);
 
+	private Integer _id;
+	private String _jsonrpc;
 	private String _method;
-	private Map<String, String> _parameters;
+	private Map<String, ?> _parameters;
 	private boolean _valid;
 
 }
