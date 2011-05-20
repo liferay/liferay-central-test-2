@@ -311,6 +311,11 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 		return _assetTagLocalService.getGroupTags(groupId, start, end);
 	}
 
+	public int getGroupTagsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetTagLocalService.getGroupTagsCount(groupId);
+	}
+
 	public com.liferay.portlet.asset.model.AssetTag getTag(long tagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

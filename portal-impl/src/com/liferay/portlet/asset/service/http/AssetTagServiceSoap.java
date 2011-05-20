@@ -93,6 +93,17 @@ public class AssetTagServiceSoap {
 		}
 	}
 
+	public static void deleteTags(long[] tagIds) throws RemoteException {
+		try {
+			AssetTagServiceUtil.deleteTags(tagIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTagSoap[] getGroupsTags(
 		long[] groupIds) throws RemoteException {
 		try {
@@ -132,6 +143,21 @@ public class AssetTagServiceSoap {
 				AssetTagServiceUtil.getGroupTags(groupId, start, end, obc);
 
 			return com.liferay.portlet.asset.model.AssetTagSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getJSONGroupTags(long groupId, int start,
+		int end) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = AssetTagServiceUtil.getJSONGroupTags(groupId,
+					start, end);
+
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
