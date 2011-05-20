@@ -16,6 +16,12 @@
 
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
+<%
+long classNameId = 0;
+
+String storageTypeValue = StringPool.BLANK;
+%>
+
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/dynamic_data_lists/select_dynamic_data_mapping_structure" />
 </liferay-portlet:renderURL>

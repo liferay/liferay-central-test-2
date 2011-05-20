@@ -18,6 +18,10 @@
 
 <%
 int structureIndex = ParamUtil.getInteger(request, "structureIndex");
+
+long classNameId = 0;
+
+String storageTypeValue = StringPool.BLANK;
 %>
 
 <liferay-portlet:renderURL varImpl="portletURL">
