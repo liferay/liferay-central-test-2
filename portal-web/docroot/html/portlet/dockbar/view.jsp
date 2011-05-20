@@ -136,7 +136,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 							<c:if test="<%= themeDisplay.isShowPagePersonalizationIcon() %>">
 								<li class="manage-page-personalization">
-									<aui:a cssClass='<%= themeDisplay.isFreeformLayout() ? "disabled" : StringPool.BLANK %>' href='<%= themeDisplay.isFreeformLayout() ? null : "javascript:;" %>' id="managePersonalization" label="page-personalizations" title='<%= themeDisplay.isFreeformLayout() ? "it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" : null %>' />
+									<aui:a cssClass='<%= themeDisplay.isFreeformLayout() ? "disabled" : StringPool.BLANK %>' href='<%= themeDisplay.isFreeformLayout() ? null : "javascript:;" %>' id="managePersonalization" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "page-modifications" : "page-personalizations" %>' title='<%= themeDisplay.isFreeformLayout() ? "it-is-not-possible-to-specify-personalization-settings-for-freeform-layouts" : null %>' />
 								</li>
 							</c:if>
 
@@ -174,7 +174,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 						<label for="TypeSettingsProperties--[COLUMN_ID]-personalizable--">
 							<input class="layout-personalizable-checkbox" id="TypeSettingsProperties--[COLUMN_ID]-personalizable--" name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" />
 
-							<liferay-ui:message key="personalizable" />
+							<liferay-ui:message key='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable" : "personalizable" %>' />
 
 							<liferay-ui:icon-help message="personalizable-help" />
 						</label>
