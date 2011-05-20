@@ -2021,6 +2021,95 @@ public class JournalArticleLocalServiceImpl
 			serviceContext);
 	}
 
+	public JournalArticle updateArticleTranslation(
+			long groupId, String articleId, double version, Locale locale,
+			String title, String description, String content)
+		throws PortalException, SystemException {
+
+		JournalArticle article = null;
+
+		validateContent(content);
+
+		JournalArticle oldArticle = null;
+		double oldVersion = 0;
+
+		oldArticle = getLatestArticle(
+			groupId, articleId, WorkflowConstants.STATUS_ANY);
+
+		oldVersion = oldArticle.getVersion();
+
+		if ((version > 0) && (version != oldVersion)) {
+			throw new ArticleVersionException();
+		}
+
+		if (!oldArticle.isDraft()) {
+
+			// Create new version
+
+			double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
+
+			long id = counterLocalService.increment();
+
+			article = journalArticlePersistence.create(id);
+
+			User user = userService.getUserById(oldArticle.getUserId());
+
+			article.setResourcePrimKey(oldArticle.getResourcePrimKey());
+			article.setGroupId(oldArticle.getGroupId());
+			article.setCompanyId(oldArticle.getCompanyId());
+			article.setUserId(oldArticle.getUserId());
+			article.setUserName(user.getFullName());
+			article.setCreateDate(new Date());
+			article.setModifiedDate(new Date());
+			article.setClassNameId(oldArticle.getClassNameId());
+			article.setClassPK(oldArticle.getClassPK());
+			article.setArticleId(articleId);
+			article.setVersion(newVersion);
+			article.setTitleMap(oldArticle.getTitleMap());
+			article.setUrlTitle(
+				getUniqueUrlTitle(article.getId(), groupId, articleId, title));
+			article.setDescriptionMap(oldArticle.getDescriptionMap());
+			article.setType(oldArticle.getType());
+			article.setStructureId(oldArticle.getStructureId());
+			article.setTemplateId(oldArticle.getTemplateId());
+			article.setLayoutUuid(oldArticle.getLayoutUuid());
+			article.setDisplayDate(oldArticle.getDisplayDate());
+			article.setExpirationDate(oldArticle.getExpirationDate());
+			article.setReviewDate(oldArticle.getReviewDate());
+			article.setIndexable(oldArticle.getIndexable());
+			article.setSmallImage(oldArticle.getSmallImage());
+			article.setSmallImageId(oldArticle.getSmallImageId());
+
+			if (article.getSmallImageId() == 0) {
+				article.setSmallImageId(counterLocalService.increment());
+			}
+
+			article.setSmallImageURL(oldArticle.getSmallImageURL());
+
+			article.setStatus(WorkflowConstants.STATUS_DRAFT);
+			article.setStatusDate(new Date());
+		}
+		else {
+			article = oldArticle;
+		}
+
+		// Update content
+
+		Map<Locale, String> titleMap = article.getTitleMap();
+		Map<Locale, String> descriptionMap = article.getDescriptionMap();
+
+		titleMap.put(locale, title);
+		descriptionMap.put(locale, description);
+
+		article.setTitleMap(titleMap);
+		article.setDescriptionMap(descriptionMap);
+		article.setContent(content);
+
+		journalArticlePersistence.update(article, false);
+
+		return article;
+	}
+
 	public void updateAsset(
 			long userId, JournalArticle article, long[] assetCategoryIds,
 			String[] assetTagNames)

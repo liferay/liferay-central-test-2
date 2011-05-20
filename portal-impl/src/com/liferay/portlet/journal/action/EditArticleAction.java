@@ -687,13 +687,9 @@ public class EditArticleAction extends PortletAction {
 					serviceContext);
 			}
 			else if (cmd.equals(Constants.TRANSLATE)) {
-				titleMap.put(toLocale, title);
-				descriptionMap.put(toLocale, description);
-
-				article = JournalArticleServiceUtil.updateArticle(
-					themeDisplay.getUserId(), groupId, articleId, version,
-					titleMap, descriptionMap, content, StringPool.BLANK,
-					serviceContext);
+				article = JournalArticleServiceUtil.updateArticleTranslation(
+					groupId, articleId, version, toLocale, title, description,
+					content);
 			}
 
 			if (!tempOldUrlTitle.equals(article.getUrlTitle())) {
