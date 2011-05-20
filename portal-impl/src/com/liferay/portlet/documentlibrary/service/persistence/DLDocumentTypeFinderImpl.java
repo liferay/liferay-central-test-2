@@ -36,7 +36,8 @@ import java.util.List;
  * @author Sergio González
  */
 public class DLDocumentTypeFinderImpl
-	extends BasePersistenceImpl<DLDocumentType> implements DLDocumentTypeFinder {
+	extends BasePersistenceImpl<DLDocumentType>
+		implements DLDocumentTypeFinder {
 
 	public static String COUNT_BY_C_G_N_D_S =
 		DLDocumentTypeFinder.class.getName() + ".countByC_G_N_D_S";

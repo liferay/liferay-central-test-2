@@ -115,7 +115,8 @@ public class DLDocumentTypeLocalServiceImpl
 			long companyId, long groupId, String keywords)
 		throws SystemException {
 
-		return dlDocumentTypeFinder.countByKeywords(companyId, groupId, keywords);
+		return dlDocumentTypeFinder.countByKeywords(
+			companyId, groupId, keywords);
 	}
 
 	public void updateDocumentType(
