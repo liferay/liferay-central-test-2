@@ -171,7 +171,13 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<c:if test="<%= themeDisplay.isShowPagePersonalizationIcon() %>">
 				<div class="yui3-aui-helper-hidden layout-personalizable-controls" id="<portlet:namespace />layout-personalizable-controls">
 					<span title='<liferay-ui:message key="personalizable-help" />'>
-						<aui:input helpMessage="personalizable-help" inputCssClass="layout-personalizable-checkbox" label="personalizable" name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" />
+						<label for="TypeSettingsProperties--[COLUMN_ID]-personalizable--">
+							<input class="layout-personalizable-checkbox" id="TypeSettingsProperties--[COLUMN_ID]-personalizable--" name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" />
+
+							<liferay-ui:message key="personalizable" />
+
+							<liferay-ui:icon-help message="personalizable-help" />
+						</label>
 					</span>
 				</div>
 			</c:if>

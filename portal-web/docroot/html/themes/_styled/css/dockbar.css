@@ -378,6 +378,7 @@ html > .lfr-dockbar-pinned {
 	background-color: #999;
 	color: #FFF;
 	font-size: 1.2em;
+	font-weight: bold;
 	min-height: 30px;
 }
 

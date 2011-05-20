@@ -70,7 +70,7 @@ if (selLayout != null) {
 	</c:when>
 	<c:otherwise>
 		<div class="portlet-msg-info">
-			<liferay-ui:message key="personalization-help" />
+			<liferay-ui:message key="personalizable-help" />
 		</div>
 	</c:otherwise>
 </c:choose>
