@@ -55,7 +55,7 @@ public class ZipWriterImpl implements ZipWriter {
 
 		_file.mkdir();
 
-		// See LPS-16369
+		// LPS-16369
 
 		//_file.deleteOnExit();
 	}

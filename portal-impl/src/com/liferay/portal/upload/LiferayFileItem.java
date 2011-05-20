@@ -107,7 +107,7 @@ public class LiferayFileItem extends DiskFileItem {
 
 		File tempFile = new File(_repository, tempFileName);
 
-		// See LPS-16369
+		// LPS-16369
 
 		//tempFile.deleteOnExit();
 
