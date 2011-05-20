@@ -79,6 +79,8 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
@@ -107,6 +109,8 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdAuthenticator;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
+import com.liferay.portal.service.MembershipRequestLocalServiceUtil;
+import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
@@ -301,6 +305,29 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 */
 	public void addGroupUsers(long groupId, long[] userIds)
 		throws PortalException, SystemException {
+
+		for (long userId : userIds) {
+			List<MembershipRequest> membershipRequests =
+				MembershipRequestLocalServiceUtil.getMembershipRequests(
+					userId, groupId,
+					MembershipRequestConstants.STATUS_PENDING);
+
+			try {
+				User user = getUserById(userId);
+
+				Locale locale = user.getLocale();
+
+				for (MembershipRequest membershipRequest : membershipRequests) {
+					MembershipRequestServiceUtil.updateStatus(
+						membershipRequest.getMembershipRequestId(),
+						LanguageUtil.get(
+							locale, "your-membership-has-been-approved"),
+						MembershipRequestConstants.STATUS_APPROVED);
+				}
+			}
+			catch (NoSuchUserException nsue) {
+			}
+		}
 
 		groupPersistence.addUsers(groupId, userIds);
 
