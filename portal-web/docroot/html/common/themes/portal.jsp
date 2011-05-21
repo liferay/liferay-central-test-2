@@ -16,15 +16,15 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
+<%
+StringBundler sb = (StringBundler)request.getAttribute(WebKeys.LAYOUT_CONTENT);
+%>
+
 <c:choose>
-	<c:when test="<%= SessionErrors.isEmpty(request) && (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) %>">
+	<c:when test="<%= (sb != null) && (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) %>">
 
 		<%
-		StringBundler sb = (StringBundler)request.getAttribute(WebKeys.LAYOUT_CONTENT);
-
 		sb.writeTo(out);
-
-		request.removeAttribute(WebKeys.LAYOUT_CONTENT);
 		%>
 
 	</c:when>
@@ -37,6 +37,8 @@
 </c:choose>
 
 <%
+request.removeAttribute(WebKeys.LAYOUT_CONTENT);
+
 SessionMessages.clear(request);
 SessionErrors.clear(request);
 %>
