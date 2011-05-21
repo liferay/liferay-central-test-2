@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 
 import java.io.InputStream;
 import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.util.Date;
 import java.util.Map;
 
@@ -58,65 +59,64 @@ public class ThreadUtil {
 		String threadDump = _getThreadDumpFromJstack();
 
 		if (Validator.isNull(threadDump)) {
-			threadDump = _getThreadDumpFromStackTraces();
+			threadDump = _getThreadDumpFromStackTrace();
 		}
 
 		return "\n\n".concat(threadDump);
 	}
 
 	private static String _getThreadDumpFromJstack() {
-
-		String vendorURL = System.getProperty("java.vendor.url");
-
-		if (!vendorURL.equals("http://java.sun.com/") &&
-			!vendorURL.equals("http://java.oracle.com/")) {
-
-			return StringPool.BLANK;
-		}
-
-		String name = ManagementFactory.getRuntimeMXBean().getName();
-
-		if (Validator.isNull(name)) {
-			return StringPool.BLANK;
-		}
-
-		int pos = name.indexOf(CharPool.AT);
-
-		if (pos == -1) {
-			return StringPool.BLANK;
-		}
-
-		String pidString = name.substring(0, pos);
-
-		if (!Validator.isNumber(pidString)) {
-			return StringPool.BLANK;
-		}
-
-		int pid = GetterUtil.getInteger(pidString);
-
-		String[] cmd = new String[] {
-			"jstack", String.valueOf(pid)
-		};
-
 		UnsyncByteArrayOutputStream outputStream =
 			new UnsyncByteArrayOutputStream();
 
 		try {
-			Process p = Runtime.getRuntime().exec(cmd);
+			String vendorURL = System.getProperty("java.vendor.url");
 
-			InputStream inputStream = p.getInputStream();
+			if (!vendorURL.equals("http://java.oracle.com/") &&
+				!vendorURL.equals("http://java.sun.com/")) {
+
+				return StringPool.BLANK;
+			}
+
+			RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+
+			String name = runtimeMXBean.getName();
+
+			if (Validator.isNull(name)) {
+				return StringPool.BLANK;
+			}
+
+			int pos = name.indexOf(CharPool.AT);
+
+			if (pos == -1) {
+				return StringPool.BLANK;
+			}
+
+			String pidString = name.substring(0, pos);
+
+			if (!Validator.isNumber(pidString)) {
+				return StringPool.BLANK;
+			}
+
+			Runtime runtime = Runtime.getRuntime();
+
+			int pid = GetterUtil.getInteger(pidString);
+
+			String[] cmd = new String[] {"jstack", String.valueOf(pid)};
+
+			Process process = runtime.exec(cmd);
+
+			InputStream inputStream = process.getInputStream();
 
 			StreamUtil.transfer(inputStream, outputStream);
 		}
 		catch (Exception e) {
-
 		}
 
 		return outputStream.toString();
 	}
 
-	private static String _getThreadDumpFromStackTraces() {
-
+	private static String _getThreadDumpFromStackTrace() {
 		String jvm =
 			System.getProperty("java.vm.name") + " " +
 				System.getProperty("java.vm.version");
