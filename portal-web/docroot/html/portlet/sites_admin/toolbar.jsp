@@ -47,7 +47,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 			<c:otherwise>
 				<liferay-ui:icon-menu align="left" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>' message="add">
 					<liferay-ui:icon
-						image="site"
+						image="site_icon"
 						message="custom-site"
 						method="get"
 						url='<%= addSiteURL.toString() %>'
@@ -59,7 +59,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 					%>
 
 						<liferay-ui:icon
-							image="site"
+							image="site_icon"
 							message="<%= layoutSetPrototype.getName(locale) %>"
 							method="get"
 							url='<%= addSiteURL.toString() %>'
