@@ -134,19 +134,11 @@ public class MembershipRequestLocalServiceImpl
 			membershipRequestId);
 	}
 
-	public List<MembershipRequest> getMembershipRequests(
-			long userId, long groupId, int statusId)
-		throws SystemException {
-
-		return membershipRequestPersistence.findByG_U_S(
-			groupId, userId, statusId);
-	}
-
 	public boolean hasMembershipRequest(long userId, long groupId, int statusId)
 		throws SystemException {
 
-		List<MembershipRequest> membershipRequests = getMembershipRequests(
-			userId, groupId, statusId);
+		List<MembershipRequest> membershipRequests =
+			membershipRequestPersistence.findByG_U_S(groupId, userId, statusId);
 
 		if (membershipRequests.isEmpty()) {
 			return false;
