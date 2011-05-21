@@ -17,7 +17,6 @@ package com.liferay.portal.jsonwebservice;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.service.ServiceContext;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import jodd.util.ReflectUtil;
@@ -36,7 +35,6 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 	}
 
 	public Object invoke() throws Exception {
-
 		JSONRPCRequest jsonRpcRequest =
 			_jsonWebServiceActionParameters.getJSONRPCRequest();
 
@@ -80,11 +78,10 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		}
 	}
 
-	private Object _invokeActionMethod()
-		throws IllegalAccessException, InvocationTargetException {
-		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
-
+	private Object _invokeActionMethod() throws Exception {
 		Method actionMethod = _jsonWebServiceActionConfig.getActionMethod();
+
+		Class<?> actionClass = _jsonWebServiceActionConfig.getActionClass();
 
 		Object[] parameters = _prepareParameters();
 

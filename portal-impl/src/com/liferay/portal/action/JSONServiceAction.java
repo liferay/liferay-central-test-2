@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONSerializable;
+import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -482,13 +483,17 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected String getReturnValue(Object returnObj) throws Exception {
-
 		if (returnObj instanceof JSONSerializable) {
-			return ((JSONSerializable) returnObj).toJSONString();
+			JSONSerializable jsonSerializable = (JSONSerializable)returnObj;
+
+			return jsonSerializable.toJSONString();
 		}
 
-		return JSONFactoryUtil.createJSONSerializer().
-			exclude("*.class").serialize(returnObj);
+		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+
+		jsonSerializer.exclude("*.class");
+
+		return jsonSerializer.serialize(returnObj);
 	}
 
 	protected String[] getStringArrayFromJSON(

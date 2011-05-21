@@ -17,6 +17,7 @@ package com.liferay.portal.jsonwebservice;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONSerializable;
 import com.liferay.portal.kernel.json.JSONSerializer;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -31,56 +32,53 @@ public class JSONRPCResponse implements JSONSerializable {
 	public JSONRPCResponse(
 		JSONRPCRequest jsonRpcRequest, Object result, Exception exception) {
 
-		this._id = jsonRpcRequest.getId();
-		this._jsonrpc = jsonRpcRequest.getJsonrpc();
-		this._result = null;
-		this._error = null;
+		_id = jsonRpcRequest.getId();
 
-		if (this._jsonrpc != null && !this._jsonrpc.equals("2.0")) {
-			result = null;
+		_jsonrpc = GetterUtil.getString(jsonRpcRequest.getJsonrpc());
 
-			this._error =
-				new Error(-32700, "Parsing error (wrong JSON RPC version)");
+		if (!_jsonrpc.equals("2.0")) {
+			_error = new Error(-32700, "Invalid JSON RPC version " + _jsonrpc);
 		}
-
-		if (exception == null) {
-			this._result = result;
+		else if (exception == null) {
+			_result = result;
 		}
 		else {
-			int errorCode = -32603;
+			int code = -32603;
 
-			String errorMessage = null;
+			String message = null;
 
 			if (exception instanceof InvocationTargetException) {
-				errorMessage = exception.getCause().toString();
+				code = -32602;
 
-				errorCode = -32602;
+				Throwable cause = exception.getCause();
+
+				message = cause.toString();
 			}
 			else {
-				errorMessage = exception.getMessage();
+				message = exception.getMessage();
 			}
 
-			if (errorMessage == null) {
-				errorMessage = exception.toString();
+			if (message == null) {
+				message = exception.toString();
 			}
 
-			this._error = new Error(errorCode, errorMessage);
+			_error = new Error(code, message);
 		}
 	}
 
 	public String toJSONString() {
 		Map<String, Object> response = new HashMap<String, Object>();
 
-		if (_jsonrpc != null) {
-			response.put("jsonrpc", "2.0");
+		if (_error != null) {
+			response.put("error", _error);
 		}
 
 		if (_id != null) {
 			response.put("id", _id);
 		}
 
-		if (_error != null) {
-			response.put("error", _error);
+		if (_jsonrpc != null) {
+			response.put("jsonrpc", "2.0");
 		}
 
 		if (_result != null) {
@@ -89,21 +87,17 @@ public class JSONRPCResponse implements JSONSerializable {
 
 		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 
-		jsonSerializer.include("error", "result").exclude("*.class");
+		jsonSerializer.exclude("*.class");
+		jsonSerializer.include("error", "result");
 
 		return jsonSerializer.serialize(response);
 	}
 
-	private Error _error;
-	private Integer _id;
-	private String _jsonrpc;
-	private Object _result;
+	public class Error {
 
-	public static class Error {
-
-		public Error(int _code, String _message) {
-			this._code = _code;
-			this._message = _message;
+		public Error(int code, String message) {
+			_code = code;
+			_message = message;
 		}
 
 		public int getCode() {
@@ -114,8 +108,14 @@ public class JSONRPCResponse implements JSONSerializable {
 			return _message;
 		}
 
-		private final int _code;
-		private final String _message;
+		private int _code;
+		private String _message;
+
 	}
+
+	private Error _error;
+	private Integer _id;
+	private String _jsonrpc;
+	private Object _result;
 
 }

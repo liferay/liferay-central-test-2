@@ -46,11 +46,8 @@ public class JSONRPCRequest {
 				jsonDeserializer.deserialize(requestBody);
 
 			_id = (Integer)requestBodyMap.get("id");
-
 			_jsonrpc = (String)requestBodyMap.get("jsonrpc");
-
 			_method = (String)requestBodyMap.get("method");
-
 			_parameters = (Map<String, ?>)requestBodyMap.get("params");
 
 			_valid = true;
@@ -73,7 +70,7 @@ public class JSONRPCRequest {
 	}
 
 	public String getParameter(String name) {
-		return _parameters.get(name).toString();
+		return String.valueOf(_parameters.get(name));
 	}
 
 	public Set<String> getParameterNames() {

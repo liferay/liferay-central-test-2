@@ -37,12 +37,15 @@ public class JSONWebServiceActionParameters {
 		HttpServletRequest request, String pathParameters,
 		JSONRPCRequest jsonRpcRequest) {
 
-		_httpRequest = request;
 		_jsonRpcRequest = jsonRpcRequest;
 
 		_collectFromPath(pathParameters);
 		_collectFromRequestParameters(request);
 		_collectFromJSONRPCRequest(jsonRpcRequest);
+	}
+
+	public JSONRPCRequest getJSONRPCRequest() {
+		return _jsonRpcRequest;
 	}
 
 	public Object getParameter(String name) {
@@ -55,14 +58,6 @@ public class JSONWebServiceActionParameters {
 		}
 
 		return null;
-	}
-
-	public HttpServletRequest getHttpRequest() {
-		return _httpRequest;
-	}
-
-	public JSONRPCRequest getJSONRPCRequest() {
-		return _jsonRpcRequest;
 	}
 
 	public String[] getParameterNames() {
@@ -165,7 +160,6 @@ public class JSONWebServiceActionParameters {
 		}
 	}
 
-	private HttpServletRequest _httpRequest;
 	private JSONRPCRequest _jsonRpcRequest;
 	private Set<ObjectValuePair<String, Object>> _parameters =
 		new HashSet<ObjectValuePair<String, Object>>();
