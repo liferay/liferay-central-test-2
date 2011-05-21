@@ -50,7 +50,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 				</c:choose>
 
 				<dl class="theme-fields">
-					<c:if test="<%= selPluginPackage != null && Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
+					<c:if test="<%= (selPluginPackage != null) && Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
 						<dt>
 							<liferay-ui:message key="description" />
 						</dt>
@@ -59,7 +59,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 						</dd>
 					</c:if>
 
-					<c:if test="<%= editable && selPluginPackage != null && Validator.isNotNull(selPluginPackage.getAuthor()) %>">
+					<c:if test="<%= editable && (selPluginPackage != null) && Validator.isNotNull(selPluginPackage.getAuthor()) %>">
 						<dt>
 							<liferay-ui:message key="author" />
 						</dt>
