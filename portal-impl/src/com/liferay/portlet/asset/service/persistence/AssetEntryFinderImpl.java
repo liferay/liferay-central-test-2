@@ -359,18 +359,10 @@ public class AssetEntryFinderImpl
 		}
 
 		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-			qPos.add(
-				getLeftAndRightCategoryIds(
-				entryQuery.getAllLeftAndRightCategoryIds()));
-			qPos.add(
-				getLeftAndRightCategoryIds(
-					entryQuery.getAnyLeftAndRightCategoryIds()));
-			qPos.add(
-				getLeftAndRightCategoryIds(
-					entryQuery.getNotAllLeftAndRightCategoryIds()));
-			qPos.add(
-				getLeftAndRightCategoryIds(
-					entryQuery.getNotAnyLeftAndRightCategoryIds()));
+			qPos.add(entryQuery.getAllLeftAndRightCategoryIds());
+			qPos.add(entryQuery.getAnyLeftAndRightCategoryIds());
+			qPos.add(entryQuery.getNotAllLeftAndRightCategoryIds());
+			qPos.add(entryQuery.getNotAnyLeftAndRightCategoryIds());
 		}
 		else {
 			qPos.add(entryQuery.getAllCategoryIds());
@@ -497,20 +489,6 @@ public class AssetEntryFinderImpl
 		sb.append(")");
 
 		return sb.toString();
-	}
-
-	protected long[] getLeftAndRightCategoryIds(long[] values) {
-		long[] leftAndRightCategoryIds = new long[values.length * 2 / 3];
-
-		int position = 0;
-
-		for (int i = 0; i < values.length; i++) {
-			if ((i % 3) != 0) {
-				leftAndRightCategoryIds[position] = values[i];
-			}
-		}
-
-		return leftAndRightCategoryIds;
 	}
 
 	protected String getNotCategoryIds(String sqlId, long[] notCategoryIds) {
