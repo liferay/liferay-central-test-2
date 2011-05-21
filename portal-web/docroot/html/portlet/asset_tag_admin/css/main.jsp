@@ -76,7 +76,7 @@
 		text-decoration: none;
 	}
 
-	.tag-item-actions-trigger, .tag-item-check {
+	.tag-item-actions-trigger {
 		 display: block;
 		 margin-top: -8px;
 		 position: absolute;
@@ -95,7 +95,10 @@
 	}
 
 	.tag-item-check {
-		 margin-left: 2px;
+		margin-left: 10px;
+		position: static;
+		margin-top: 10px;
+		float: left;
 	}
 
 	.tags-admin-content {
