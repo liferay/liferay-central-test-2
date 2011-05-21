@@ -90,8 +90,8 @@ AUI().add(
 						A.one('#' + namespace + 'addTagButton').on(EVENT_CLICK, instance._onShowTagPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'tagsPermissionsButton').on(EVENT_CLICK, instance._onTagChangePermissions, instance);
 
-						A.one('#checkAllTags').on(EVENT_CLICK, instance._checkAllTags, instance);
-						A.one('#deleteCheckedTags').on(EVENT_CLICK, instance._deleteSelectedTags, instance);
+						A.one('#' + namespace + 'checkAllTagsCheckbox').on(EVENT_CLICK, instance._checkAllTags, instance);
+						A.one('#' + namespace + 'deleteCheckedTags').on(EVENT_CLICK, instance._deleteSelectedTags, instance);
 
 						instance._loadData();
 
@@ -175,33 +175,6 @@ AUI().add(
 						var currentCheckedStatus = event.currentTarget.attr('checked');
 
 						A.all('.tag-item-check').attr('checked', currentCheckedStatus);
-					},
-
-					_createTagsPaginator: function(customParams) {
-						var instance = this;
-
-						var config = instance._config;
-
-						var defaultParams = {
-							alwaysVisible: false,
-							containers: '.tags-paginator',
-							firstPageLinkLabel: '<<',
-							lastPageLinkLabel: '>>',
-							nextPageLinkLabel: '>',
-							prevPageLinkLabel: '<',
-							rowsPerPage: config.tagsPerPage,
-							rowsPerPageOptions: config.tagsPerPageOptions
-						};
-
-						A.mix(defaultParams, customParams);
-
-						var tagsPaginator = new A.Paginator(defaultParams).render();
-
-						tagsPaginator.on('changeRequest', instance._onTagsPaginatorChangeRequest, instance);
-
-						instance._tagsPaginator = tagsPaginator;
-
-						return tagsPaginator;
 					},
 
 					_createTagPanelAdd: function() {
@@ -336,30 +309,19 @@ AUI().add(
 					_deleteSelectedTags: function(event) {
 						var instance = this;
 
-						if (!confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-tags'))) {
-							return;
-						}
+						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-the-selected-tags'))) {
+							var tagsNodes = A.all('.tag-item-check:checked');
 
-						var tagsNodes = A.all('.tag-item-check');
+							var checkedItemsIds = tagsNodes.attr('data-tagId');
 
-						var checkedItemsIds = [];
-
-						A.each(
-							tagsNodes,
-							function(item, index, tagsNodes) {
-								if (item.get('checked')) {
-									checkedItemsIds.push(item.getAttribute('data-tagId'));
-								}
+							if (checkedItemsIds.length > 0) {
+								Liferay.Service.Asset.AssetTag.deleteTags(
+									{
+										tagIds: checkedItemsIds
+									},
+									A.bind(instance._processActionResult, instance)
+								);
 							}
-						);
-
-						if (checkedItemsIds.length > 0) {
-							Liferay.Service.Asset.AssetTag.deleteTags(
-								{
-									tagIds: checkedItemsIds
-								},
-								A.bind(instance._processActionResult, instance)
-							);
 						}
 					},
 
@@ -566,37 +528,54 @@ AUI().add(
 						return attr;
 					},
 
+					_getTagsPaginator: function() {
+						var instance = this;
+
+						var tagsPaginator = instance._tagsPaginator;
+
+						if (!tagsPaginator) {
+							var instanceConfig = instance._config;
+
+							var config = {
+								alwaysVisible: false,
+								containers: '.tags-paginator',
+								firstPageLinkLabel: '<<',
+								lastPageLinkLabel: '>>',
+								nextPageLinkLabel: '>',
+								prevPageLinkLabel: '<',
+								rowsPerPage: instanceConfig.tagsPerPage,
+								rowsPerPageOptions: instanceConfig.tagsPerPageOptions
+							};
+
+							tagsPaginator = new A.Paginator(config).render();
+
+							tagsPaginator.on('changeRequest', instance._onTagsPaginatorChangeRequest, instance);
+
+							instance._tagsPaginator = tagsPaginator;
+						}
+
+						return tagsPaginator;
+					},
+
 					_getTags: function(callback) {
 						var instance = this;
 
-						var paginator = instance._tagsPaginator;
+						var paginator = instance._getTagsPaginator();
 
-						var currentPage = 0;
-						var rowsPerPage = instance._config.tagsPerPage;
-
-						if (paginator) {
-							currentPage = paginator.get('page') - 1;
-							rowsPerPage = paginator.get('rowsPerPage');
-						}
+						var currentPage = (paginator.get('page') || 1) - 1;
+						var rowsPerPage = paginator.get('rowsPerPage');
 
 						var start = currentPage * rowsPerPage;
 						var end = start + rowsPerPage;
 
-						var params = {
-							groupId: themeDisplay.getParentGroupId(),
-							start: start,
-							end: end
-						};
-
 						Liferay.Service.Asset.AssetTag.getJSONGroupTags(
-							params,
+							{
+								groupId: themeDisplay.getParentGroupId(),
+								start: start,
+								end: end
+							},
 							function(result) {
-								if (!paginator) {
-									paginator = instance._createTagsPaginator(result);
-								}
-								else {
-									paginator.setState(result);
-								}
+								paginator.setState(result);
 
 								if (callback) {
 									callback.apply(instance, arguments);
@@ -622,11 +601,9 @@ AUI().add(
 
 						closeButton.on(
 							EVENT_CLICK,
-							function(event, panel) {
-								panel.hide();
-							},
-							instance,
-							tagPanelAdd
+							function(event) {
+								tagPanelAdd.hide();
+							}
 						);
 
 						tagPanelAdd.on(
@@ -652,7 +629,9 @@ AUI().add(
 					_initializeTagPanelEdit: function(callback) {
 						var instance = this;
 
-						var tagFormEdit = instance._tagPanelEdit.get('contentBox').one('form.update-tag-form');
+						var tagPanelEdit = instance._tagPanelEdit;
+
+						var tagFormEdit = tagPanelEdit.get('contentBox').one('form.update-tag-form');
 
 						tagFormEdit.detach(EVENT_SUBMIT);
 
@@ -662,11 +641,9 @@ AUI().add(
 
 						closeButton.on(
 							EVENT_CLICK,
-							function(event, panel) {
-								panel.hide();
-							},
-							instance,
-							instance._tagPanelEdit
+							function(event) {
+								tagPanelEdit.hide();
+							}
 						);
 
 						var buttonDeleteTag = tagFormEdit.one('#deleteTagButton');
@@ -820,10 +797,12 @@ AUI().add(
 
 						instance._onTagsListSelect(event);
 
-						if (event.target.hasClass('tag-item-check')) {
-							Liferay.Util.checkAllBox(event.currentTarget, 'tag-item-check', '#checkAllTags');
+						var target = event.target;
+
+						if (target.hasClass('tag-item-check')) {
+							Liferay.Util.checkAllBox(event.currentTarget, 'tag-item-check', '#' + instance._prefixedPortletId + 'checkAllTagsCheckbox');
 						}
-						else if (event.target.hasClass('tag-item-actions-trigger')) {
+						else if (target.hasClass('tag-item-actions-trigger')) {
 							instance._onShowTagPanel(event, ACTION_EDIT);
 						}
 					},

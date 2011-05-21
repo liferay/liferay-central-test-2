@@ -157,14 +157,13 @@
 
 	.tags-admin-list-container .results-header {
 		background: #D3DADD;
-		padding-left: 30px;
 
 		.tag-admin-check {
-			display: block;
-			left: 2px;
-			margin-top: -6px;
-			position: absolute;
-			top: 50%;
+			float: left;
+
+			input {
+				float: none;
+			}
 		}
 
 		.tag-admin-delete {
@@ -172,6 +171,13 @@
 			position: absolute;
 			right: 10px;
 			top: 0px;
+		}
+
+		&:after {
+			clear: both;
+			content: "";
+			display: block;
+			height: 0;
 		}
 	}
 
@@ -274,6 +280,10 @@
 		.yui3-widget-bd .asset-tag-layer .yui3-aui-field {
 			width: 200px;
 		}
+	}
+
+	.tags-admin-list-container .results-header {
+		zoom: 1;
 	}
 }
 
