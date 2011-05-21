@@ -23,11 +23,12 @@ if (searchTerms.isAdvancedSearch()){
 }
 else {
 	long[] classNameIds = null;
-	String[] storageTypes = null;
 
 	if (classNameId > 0) {
 		classNameIds = new long[] {classNameId};
 	}
+
+	String[] storageTypes = null;
 
 	if (Validator.isNotNull(storageTypeValue)) {
 		storageTypes = new String[] {storageTypeValue};

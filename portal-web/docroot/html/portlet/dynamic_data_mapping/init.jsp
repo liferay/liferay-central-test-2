@@ -49,8 +49,6 @@
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
 boolean showManageTemplates = GetterUtil.getBoolean(portletConfig.getInitParameter("show-manage-templates"), true);
 boolean showTabs = GetterUtil.getBoolean(portletConfig.getInitParameter("show-tabs"), true);
 boolean showToolbar = GetterUtil.getBoolean(portletConfig.getInitParameter("show-toolbar"), true);
@@ -68,4 +66,6 @@ if (structureTypeInitParam.equals("DLDocumentMetadataSet")) {
 if (storageTypeInitParam.equals("xml")) {
 	storageTypeValue = StorageType.XML.getValue();
 }
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
