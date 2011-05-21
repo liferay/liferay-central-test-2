@@ -279,7 +279,7 @@ if (layout != null) {
 								}
 								%>
 
-								<c:if test="<%= (Validator.isNotNull(variationName) && rootRevisions.size() > 1) || Validator.isNotNull(layoutRevisionId) %>">
+								<c:if test="<%= (Validator.isNotNull(variationName) && (rootRevisions.size() > 1)) || Validator.isNotNull(layoutRevisionId) %>">
 									<span class="last-publication-branch">
 										<liferay-ui:message arguments="<%= layoutSetBranchName %>" key="last-publication-from-x" />
 
