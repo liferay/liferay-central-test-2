@@ -1851,9 +1851,6 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			String myAccountNamespace = PortalUtil.getPortletNamespace(
-				PortletKeys.MY_ACCOUNT);
-
 			PortletURLImpl myAccountURL = new PortletURLImpl(
 				request, PortletKeys.MY_ACCOUNT, controlPanelPlid,
 				PortletRequest.RENDER_PHASE);
