@@ -359,14 +359,18 @@ public class AssetEntryFinderImpl
 		}
 
 		if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-			qPos.add(getLeftAndRightCategoryIds(
+			qPos.add(
+				getLeftAndRightCategoryIds(
 				entryQuery.getAllLeftAndRightCategoryIds()));
-			qPos.add(getLeftAndRightCategoryIds(
-				entryQuery.getAnyLeftAndRightCategoryIds()));
-			qPos.add(getLeftAndRightCategoryIds(
-				entryQuery.getNotAllLeftAndRightCategoryIds()));
-			qPos.add(getLeftAndRightCategoryIds(
-				entryQuery.getNotAnyLeftAndRightCategoryIds()));
+			qPos.add(
+				getLeftAndRightCategoryIds(
+					entryQuery.getAnyLeftAndRightCategoryIds()));
+			qPos.add(
+				getLeftAndRightCategoryIds(
+					entryQuery.getNotAllLeftAndRightCategoryIds()));
+			qPos.add(
+				getLeftAndRightCategoryIds(
+					entryQuery.getNotAnyLeftAndRightCategoryIds()));
 		}
 		else {
 			qPos.add(entryQuery.getAllCategoryIds());
@@ -496,12 +500,12 @@ public class AssetEntryFinderImpl
 	}
 
 	protected long[] getLeftAndRightCategoryIds(long[] values) {
-		long[] leftAndRightCategoryIds = new long[values.length * 2/3];
+		long[] leftAndRightCategoryIds = new long[values.length * 2 / 3];
 
 		int position = 0;
 
 		for (int i = 0; i < values.length; i++) {
-			if (i % 3 != 0) {
+			if ((i % 3) != 0) {
 				leftAndRightCategoryIds[position] = values[i];
 			}
 		}
