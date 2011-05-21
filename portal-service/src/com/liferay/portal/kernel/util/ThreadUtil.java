@@ -14,6 +14,10 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
+import java.io.InputStream;
+import java.lang.management.ManagementFactory;
 import java.util.Date;
 import java.util.Map;
 
@@ -26,7 +30,7 @@ public class ThreadUtil {
 	public static Thread[] getThreads() {
 		Thread currentThread = Thread.currentThread();
 
-		ThreadGroup threadGroup = currentThread.getThreadGroup( );
+		ThreadGroup threadGroup = currentThread.getThreadGroup();
 
 		while (threadGroup.getParent() != null) {
 			threadGroup = threadGroup.getParent();
@@ -50,6 +54,69 @@ public class ThreadUtil {
 	}
 
 	public static String threadDump() {
+
+		String threadDump = _getThreadDumpFromJstack();
+
+		if (Validator.isNull(threadDump)) {
+			threadDump = _getThreadDumpFromStackTraces();
+		}
+
+		return "\n\n".concat(threadDump);
+	}
+
+	private static String _getThreadDumpFromJstack() {
+
+		String vendorURL = System.getProperty("java.vendor.url");
+
+		if (!vendorURL.equals("http://java.sun.com/") &&
+			!vendorURL.equals("http://java.oracle.com/")) {
+
+			return StringPool.BLANK;
+		}
+
+		String name = ManagementFactory.getRuntimeMXBean().getName();
+
+		if (Validator.isNull(name)) {
+			return StringPool.BLANK;
+		}
+
+		int pos = name.indexOf(CharPool.AT);
+
+		if (pos == -1) {
+			return StringPool.BLANK;
+		}
+
+		String pidString = name.substring(0, pos);
+
+		if (!Validator.isNumber(pidString)) {
+			return StringPool.BLANK;
+		}
+
+		int pid = GetterUtil.getInteger(pidString);
+
+		String[] cmd = new String[] {
+			"jstack", String.valueOf(pid)
+		};
+
+		UnsyncByteArrayOutputStream outputStream =
+			new UnsyncByteArrayOutputStream();
+
+		try {
+			Process p = Runtime.getRuntime().exec(cmd);
+
+			InputStream inputStream = p.getInputStream();
+
+			StreamUtil.transfer(inputStream, outputStream);
+		}
+		catch (Exception e) {
+
+		}
+
+		return outputStream.toString();
+	}
+
+	private static String _getThreadDumpFromStackTraces() {
+
 		String jvm =
 			System.getProperty("java.vm.name") + " " +
 				System.getProperty("java.vm.version");
