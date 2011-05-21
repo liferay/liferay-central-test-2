@@ -1455,7 +1455,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				new net.fortuna.ical4j.model.Date(event.getStartDate()));
 
 			eventProps.add(dtStart);
-
 		}
 		else {
 
