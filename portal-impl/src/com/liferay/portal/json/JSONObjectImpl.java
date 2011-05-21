@@ -33,7 +33,7 @@ import java.util.Map;
 public class JSONObjectImpl implements JSONObject {
 
 	public JSONObjectImpl() {
-		_jsonObj = new org.json.JSONObject();
+		_jsonObject = new org.json.JSONObject();
 	}
 
 	public JSONObjectImpl(JSONObject jsonObj, String[] names)
@@ -42,7 +42,7 @@ public class JSONObjectImpl implements JSONObject {
 		try {
 			JSONObjectImpl jsonObjImpl = (JSONObjectImpl)jsonObj;
 
-			_jsonObj = new org.json.JSONObject(
+			_jsonObject = new org.json.JSONObject(
 				jsonObjImpl.getJSONObject(), names);
 		}
 		catch (Exception e) {
@@ -51,20 +51,20 @@ public class JSONObjectImpl implements JSONObject {
 	}
 
 	public JSONObjectImpl(Map<?, ?> map) {
-		_jsonObj = new org.json.JSONObject(map);
+		_jsonObject = new org.json.JSONObject(map);
 	}
 
 	public JSONObjectImpl(Object bean) {
-		_jsonObj = new org.json.JSONObject(bean);
+		_jsonObject = new org.json.JSONObject(bean);
 	}
 
 	public JSONObjectImpl(Object obj, String[] names) {
-		_jsonObj = new org.json.JSONObject(obj, names);
+		_jsonObject = new org.json.JSONObject(obj, names);
 	}
 
 	public JSONObjectImpl(String json) throws JSONException {
 		try {
-			_jsonObj = new org.json.JSONObject(json);
+			_jsonObject = new org.json.JSONObject(json);
 		}
 		catch (Exception e) {
 			throw new JSONException(e);
@@ -72,23 +72,23 @@ public class JSONObjectImpl implements JSONObject {
 	}
 
 	public JSONObjectImpl(org.json.JSONObject jsonObj) {
-		_jsonObj = jsonObj;
+		_jsonObject = jsonObj;
 	}
 
 	public boolean getBoolean(String key) {
-		return _jsonObj.optBoolean(key);
+		return _jsonObject.optBoolean(key);
 	}
 
 	public double getDouble(String key) {
-		return _jsonObj.optDouble(key);
+		return _jsonObject.optDouble(key);
 	}
 
 	public int getInt(String key) {
-		return _jsonObj.optInt(key);
+		return _jsonObject.optInt(key);
 	}
 
 	public JSONArray getJSONArray(String key) {
-		org.json.JSONArray jsonArray = _jsonObj.optJSONArray(key);
+		org.json.JSONArray jsonArray = _jsonObject.optJSONArray(key);
 
 		if (jsonArray == null) {
 			return null;
@@ -98,11 +98,11 @@ public class JSONObjectImpl implements JSONObject {
 	}
 
 	public org.json.JSONObject getJSONObject() {
-		return _jsonObj;
+		return _jsonObject;
 	}
 
 	public JSONObject getJSONObject(String key) {
-		org.json.JSONObject jsonObj = _jsonObj.optJSONObject(key);
+		org.json.JSONObject jsonObj = _jsonObject.optJSONObject(key);
 
 		if (jsonObj == null) {
 			return null;
@@ -112,36 +112,36 @@ public class JSONObjectImpl implements JSONObject {
 	}
 
 	public long getLong(String key) {
-		return _jsonObj.optLong(key);
+		return _jsonObject.optLong(key);
 	}
 
 	public String getString(String key) {
-		return _jsonObj.optString(key);
+		return _jsonObject.optString(key);
 	}
 
 	public boolean has(String key) {
-		return _jsonObj.has(key);
+		return _jsonObject.has(key);
 	}
 
 	public boolean isNull(String key) {
-		return _jsonObj.isNull(key);
+		return _jsonObject.isNull(key);
 	}
 
 	public Iterator<String> keys() {
-		return _jsonObj.keys();
+		return _jsonObject.keys();
 	}
 
 	public int length() {
-		return _jsonObj.length();
+		return _jsonObject.length();
 	}
 
 	public JSONArray names() {
-		return new JSONArrayImpl(_jsonObj.names());
+		return new JSONArrayImpl(_jsonObject.names());
 	}
 
 	public JSONObject put(String key, boolean value) {
 		try {
-			_jsonObj.put(key, value);
+			_jsonObject.put(key, value);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -154,7 +154,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, double value) {
 		try {
-			_jsonObj.put(key, value);
+			_jsonObject.put(key, value);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -167,7 +167,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, int value) {
 		try {
-			_jsonObj.put(key, value);
+			_jsonObject.put(key, value);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -180,7 +180,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, long value) {
 		try {
-			_jsonObj.put(key, value);
+			_jsonObject.put(key, value);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -193,7 +193,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, Date value) {
 		try {
-			_jsonObj.put(key, value);
+			_jsonObject.put(key, value);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -206,7 +206,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, JSONArray value) {
 		try {
-			_jsonObj.put(key, ((JSONArrayImpl)value).getJSONArray());
+			_jsonObject.put(key, ((JSONArrayImpl)value).getJSONArray());
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -219,7 +219,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, JSONObject value) {
 		try {
-			_jsonObj.put(key, ((JSONObjectImpl)value).getJSONObject());
+			_jsonObject.put(key, ((JSONObjectImpl)value).getJSONObject());
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -232,7 +232,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject put(String key, String value) {
 		try {
-			_jsonObj.put(key, value);
+			_jsonObject.put(key, value);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -245,7 +245,8 @@ public class JSONObjectImpl implements JSONObject {
 
 	public JSONObject putException(Exception exception) {
 		try {
-			_jsonObj.put("exception",
+			_jsonObject.put(
+				"exception",
 				exception.getClass() + StringPool.COLON +
 					exception.getMessage());
 		}
@@ -259,16 +260,16 @@ public class JSONObjectImpl implements JSONObject {
 	}
 
 	public Object remove(String key) {
-		return _jsonObj.remove(key);
+		return _jsonObject.remove(key);
 	}
 
 	public String toString() {
-		return _jsonObj.toString();
+		return _jsonObject.toString();
 	}
 
 	public String toString(int indentFactor) throws JSONException {
 		try {
-			return _jsonObj.toString(indentFactor);
+			return _jsonObject.toString(indentFactor);
 		}
 		catch (Exception e) {
 			throw new JSONException(e);
@@ -277,7 +278,7 @@ public class JSONObjectImpl implements JSONObject {
 
 	public Writer write(Writer writer) throws JSONException {
 		try {
-			return _jsonObj.write(writer);
+			return _jsonObject.write(writer);
 		}
 		catch (Exception e) {
 			throw new JSONException(e);
@@ -286,6 +287,6 @@ public class JSONObjectImpl implements JSONObject {
 
 	private static Log _log = LogFactoryUtil.getLog(JSONObjectImpl.class);
 
-	private org.json.JSONObject _jsonObj;
+	private org.json.JSONObject _jsonObject;
 
 }

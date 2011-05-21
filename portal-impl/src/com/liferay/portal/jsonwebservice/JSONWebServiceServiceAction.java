@@ -62,7 +62,7 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 				return getReturnValue(returnObj);
 			}
 			else {
-				return JSONFactoryUtil.getNullJSONObject();
+				return JSONFactoryUtil.getNullJSON();
 			}
 		}
 		catch (Exception e) {

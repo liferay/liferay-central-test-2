@@ -121,7 +121,7 @@ public class JSONServiceAction extends JSONAction {
 					return getReturnValue(returnObj);
 				}
 				else {
-					return JSONFactoryUtil.getNullJSONObject();
+					return JSONFactoryUtil.getNullJSON();
 				}
 			}
 			catch (Exception e) {

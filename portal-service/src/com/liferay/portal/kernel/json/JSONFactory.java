@@ -35,7 +35,7 @@ public interface JSONFactory {
 
 	public Object deserialize(String json);
 
-	public String getNullJSONObject();
+	public String getNullJSON();
 
 	public Object looseDeserialize(String json);
 

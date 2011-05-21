@@ -57,8 +57,8 @@ public class JSONFactoryUtil {
 		return _jsonFactory;
 	}
 
-	public static String getNullJSONObject() {
-		return getJSONFactory().getNullJSONObject();
+	public static String getNullJSON() {
+		return getJSONFactory().getNullJSON();
 	}
 
 	public static Object looseDeserialize(String json) {

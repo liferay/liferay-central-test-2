@@ -85,8 +85,8 @@ public class JSONFactoryImpl implements JSONFactory {
 		}
 	}
 
-	public String getNullJSONObject() {
-		return "{}";
+	public String getNullJSON() {
+		return _NULL_JSON;
 	}
 
 	public Object looseDeserialize(String json) {
@@ -146,26 +146,29 @@ public class JSONFactoryImpl implements JSONFactory {
 	}
 
 	public String serializeException(Exception exception) {
-
-		String exceptionMessage = null;
+		String message = null;
 
 		if (exception instanceof InvocationTargetException) {
-			exceptionMessage = exception.getCause().toString();
+			Throwable cause = exception.getCause();
+
+			message = cause.toString();
 		}
 		else {
-			exceptionMessage = exception.getMessage();
+			message = exception.getMessage();
 		}
 
-		if (exceptionMessage == null) {
-			exceptionMessage = exception.toString();
+		if (message == null) {
+			message = exception.toString();
 		}
 
 		JSONObject jsonObject = createJSONObject();
 
-		jsonObject.put("exception", exceptionMessage);
+		jsonObject.put("exception", message);
 
 		return jsonObject.toString();
 	}
+
+	private static final String _NULL_JSON = "{}";
 
 	private static Log _log = LogFactoryUtil.getLog(JSONFactoryImpl.class);
 
