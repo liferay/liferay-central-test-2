@@ -149,7 +149,7 @@
 								for (int i = 0; i < manageableSites.size(); i++) {
 									Group group = manageableSites.get(i);
 
-									String image = "site";
+									String image = "site_icon";
 									String message = HtmlUtil.escape(group.getDescriptiveName());
 
 									if (group.isCompany()) {
