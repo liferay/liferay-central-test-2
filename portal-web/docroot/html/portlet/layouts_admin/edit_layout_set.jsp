@@ -92,7 +92,9 @@ String[][] categorySections = {mainSections};
 				</c:if>
 			</c:if>
 
-			<liferay-ui:staging groupId="<%= groupId %>" privateLayout="<%= privateLayout %>" selPlid="<%= selPlid %>" showManageBackstages="<%= true%>" />
+			<c:if test="<%= stagingGroupId > 0 %>">
+				<liferay-ui:staging groupId="<%= groupId %>" privateLayout="<%= privateLayout %>" selPlid="<%= selPlid %>" showManageBackstages="<%= true%>" />
+			</c:if>
 		</aui:button-row>
 	</div>
 </div>
