@@ -111,8 +111,7 @@ public class DLDocumentTypeLocalServiceImpl
 			companyId, groupId, keywords, start, end, orderByComparator);
 	}
 
-	public int searchCount(
-			long companyId, long groupId, String keywords)
+	public int searchCount(long companyId, long groupId, String keywords)
 		throws SystemException {
 
 		return dlDocumentTypeFinder.countByKeywords(
