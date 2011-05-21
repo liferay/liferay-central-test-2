@@ -106,7 +106,7 @@ public class EditDiscussionAction extends PortletAction {
 
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObject.put("exception", e.getClass().getName());
+				jsonObject.putException(e);
 
 				writeJSON(actionRequest, actionResponse, jsonObject.toString());
 			}

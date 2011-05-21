@@ -16,13 +16,10 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.action.JSONServiceAction;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -65,24 +62,13 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 				return getReturnValue(returnObj);
 			}
 			else {
-				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-				return jsonObject.toString();
+				return JSONFactoryUtil.getNullJSONObject();
 			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-			if (e instanceof InvocationTargetException) {
-				jsonObject.put("exception", e.getCause().toString());
-			}
-			else {
-				jsonObject.put("exception", e.getMessage());
-			}
-
-			return jsonObject.toString();
+			return JSONFactoryUtil.serializeException(e);
 		}
 	}
 

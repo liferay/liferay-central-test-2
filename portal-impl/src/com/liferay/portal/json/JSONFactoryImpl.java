@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.json.JSONTransformer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.jabsorb.serializer.MarshallException;
 
 /**
@@ -83,6 +85,10 @@ public class JSONFactoryImpl implements JSONFactory {
 		}
 	}
 
+	public String getNullJSONObject() {
+		return "{}";
+	}
+
 	public Object looseDeserialize(String json) {
 		try {
 			return createJSONDeserializer().deserialize(json);
@@ -137,6 +143,28 @@ public class JSONFactoryImpl implements JSONFactory {
 
 			throw new IllegalStateException("Unable to serialize oject", me);
 		}
+	}
+
+	public String serializeException(Exception exception) {
+
+		String exceptionMessage = null;
+
+		if (exception instanceof InvocationTargetException) {
+			exceptionMessage = exception.getCause().toString();
+		}
+		else {
+			exceptionMessage = exception.getMessage();
+		}
+
+		if (exceptionMessage == null) {
+			exceptionMessage = exception.toString();
+		}
+
+		JSONObject jsonObject = createJSONObject();
+
+		jsonObject.put("exception", exceptionMessage);
+
+		return jsonObject.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JSONFactoryImpl.class);

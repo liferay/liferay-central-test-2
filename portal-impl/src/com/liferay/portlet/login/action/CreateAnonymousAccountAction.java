@@ -118,7 +118,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			jsonObject.put("exception", e.getClass() + e.getMessage());
+			jsonObject.putException(e);
 
 			writeJSON(actionRequest, actionResponse, jsonObject.toString());
 

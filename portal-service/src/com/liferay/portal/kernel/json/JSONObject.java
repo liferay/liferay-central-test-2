@@ -64,6 +64,8 @@ public interface JSONObject {
 
 	public JSONObject put(String key, String value);
 
+	public JSONObject putException(Exception exception);
+
 	public Object remove(String key);
 
 	public String toString();

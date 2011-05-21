@@ -67,7 +67,7 @@ public class EditCategoryAction extends PortletAction {
 			}
 		}
 		catch (Exception e) {
-			jsonObject.put("exception", e.getClass() + e.getMessage());
+			jsonObject.putException(e);
 		}
 
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(

@@ -34,7 +34,6 @@ import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.PropsValues;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
@@ -121,7 +120,7 @@ public class JSONServiceAction extends JSONAction {
 					return getReturnValue(returnObj);
 				}
 				else {
-					return _NULL_JSON_STRING;
+					return JSONFactoryUtil.getNullJSONObject();
 				}
 			}
 			catch (Exception e) {
@@ -132,16 +131,7 @@ public class JSONServiceAction extends JSONAction {
 						e);
 				}
 
-				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-				if (e instanceof InvocationTargetException) {
-					jsonObject.put("exception", e.getCause().toString());
-				}
-				else {
-					jsonObject.put("exception", e.getMessage());
-				}
-
-				return jsonObject.toString();
+				return JSONFactoryUtil.serializeException(e);
 			}
 		}
 
@@ -581,8 +571,6 @@ public class JSONServiceAction extends JSONAction {
 			return false;
 		}
 	}
-
-	private static final String _NULL_JSON_STRING = "{}";
 
 	private static final String _REROUTE_PATH = "/json";
 

@@ -35,6 +35,8 @@ public interface JSONFactory {
 
 	public Object deserialize(String json);
 
+	public String getNullJSONObject();
+
 	public Object looseDeserialize(String json);
 
 	public <T> T looseDeserialize(String json, Class<T> clazz);
@@ -49,5 +51,7 @@ public interface JSONFactory {
 	public String looseSerializeDeep(Object object);
 
 	public String serialize(Object object);
+
+	public String serializeException(Exception exception);
 
 }

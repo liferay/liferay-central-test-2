@@ -57,6 +57,10 @@ public class JSONFactoryUtil {
 		return _jsonFactory;
 	}
 
+	public static String getNullJSONObject() {
+		return getJSONFactory().getNullJSONObject();
+	}
+
 	public static Object looseDeserialize(String json) {
 		return getJSONFactory().looseDeserialize(json);
 	}
@@ -85,6 +89,10 @@ public class JSONFactoryUtil {
 
 	public static String serialize(Object object) {
 		return getJSONFactory().serialize(object);
+	}
+
+	public static String serializeException(Exception exception) {
+		return getJSONFactory().serializeException(exception);
 	}
 
 	public void setJSONFactory(JSONFactory jsonFactory) {

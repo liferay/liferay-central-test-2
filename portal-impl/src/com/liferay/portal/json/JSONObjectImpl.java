@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Writer;
 
@@ -232,6 +233,21 @@ public class JSONObjectImpl implements JSONObject {
 	public JSONObject put(String key, String value) {
 		try {
 			_jsonObj.put(key, value);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return this;
+	}
+
+	public JSONObject putException(Exception exception) {
+		try {
+			_jsonObj.put("exception",
+				exception.getClass() + StringPool.COLON +
+					exception.getMessage());
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
