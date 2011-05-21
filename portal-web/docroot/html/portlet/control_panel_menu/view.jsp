@@ -91,7 +91,13 @@
 					}
 				}
 
-				if (!manageableSites.isEmpty() && !manageableSites.contains(curGroup)) {
+				Group curLiveGroup = curGroup;
+
+				if (curGroup.isStagingGroup()) {
+					curLiveGroup = curGroup.getLiveGroup();
+				}
+
+				if (!manageableSites.isEmpty() && !manageableSites.contains(curLiveGroup)) {
 					curGroup = manageableSites.get(0);
 
 					themeDisplay.setScopeGroupId(curGroup.getGroupId());
@@ -103,10 +109,10 @@
 					curGroupName = LanguageUtil.get(pageContext, "global");
 				}
 				else if (curGroup.isUser() && (curGroup.getClassPK() == user.getUserId())) {
-					curGroupName = LanguageUtil.format(pageContext, "x-personal-site", curGroup.getDescriptiveName());
+					curGroupName = LanguageUtil.format(pageContext, "x-personal-site", curLiveGroup.getDescriptiveName());
 				}
 				else {
-					curGroupName = curGroup.getDescriptiveName();
+					curGroupName = curLiveGroup.getDescriptiveName();
 				}
 
 				if (category.equals(PortletCategoryKeys.CONTENT)) {
