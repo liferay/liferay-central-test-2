@@ -252,8 +252,8 @@ public class AssetTagServiceHttp {
 
 	public static com.liferay.portal.kernel.json.JSONObject getJSONGroupTags(
 		HttpPrincipal httpPrincipal, long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portal.kernel.json.JSONException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetTagServiceUtil.class.getName(),
 					"getJSONGroupTags", _getJSONGroupTagsParameterTypes6);
@@ -267,12 +267,12 @@ public class AssetTagServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
 				}
 
-				if (e instanceof com.liferay.portal.kernel.json.JSONException) {
-					throw (com.liferay.portal.kernel.json.JSONException)e;
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
 				}
 
 				throw new com.liferay.portal.kernel.exception.SystemException(e);

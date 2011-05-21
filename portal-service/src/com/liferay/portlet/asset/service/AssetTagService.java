@@ -74,8 +74,8 @@ public interface AssetTagService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONObject getJSONGroupTags(
 		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portal.kernel.json.JSONException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.asset.model.AssetTag getTag(long tagId)

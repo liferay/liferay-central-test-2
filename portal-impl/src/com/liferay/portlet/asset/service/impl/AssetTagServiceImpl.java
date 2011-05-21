@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -102,25 +101,26 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 	}
 
 	public JSONObject getJSONGroupTags(long groupId, int start, int end)
-		throws SystemException, JSONException {
+		throws PortalException, SystemException {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		int page = end / (end - start);
+
+		jsonObject.put("page", page);
 
 		List<AssetTag> tags = assetTagLocalService.getGroupTags(
 			groupId, start, end);
 
-		String serializedTags = JSONFactoryUtil.looseSerialize(tags);
+		String tagsJSON = JSONFactoryUtil.looseSerialize(tags);
 
-		JSONArray jsonTags = JSONFactoryUtil.createJSONArray(serializedTags);
+		JSONArray tagsJSONArray = JSONFactoryUtil.createJSONArray(tagsJSON);
+
+		jsonObject.put("tags", tagsJSONArray);
 
 		int total = assetTagLocalService.getGroupTagsCount(groupId);
 
-		int delta = end - start;
-		int page = end / delta;
-
-		jsonObject.put("tags", jsonTags);
 		jsonObject.put("total", total);
-		jsonObject.put("page", page);
 
 		return jsonObject;
 	}
