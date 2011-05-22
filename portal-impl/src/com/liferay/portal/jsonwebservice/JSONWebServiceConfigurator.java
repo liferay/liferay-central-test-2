@@ -259,7 +259,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 					if (!methodAnnotationMode.equals(
 							JSONWebServiceMode.IGNORE)) {
 
-						registerMethod = false;
+						registerMethod = true;
 					}
 				}
 			}
