@@ -24,10 +24,17 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-asse
 PortletURL editPortletURL = assetRenderer.getURLEdit((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
 
 if (editPortletURL != null) {
-	editPortletURL.setWindowState(WindowState.MAXIMIZED);
+	editPortletURL.setWindowState(LiferayWindowState.POP_UP);
 	editPortletURL.setPortletMode(PortletMode.VIEW);
+}
 
-	editPortletURL.setParameter("redirect", currentURL);
+String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
+
+if (Validator.isNotNull(referringPortletResource)) {
+	editPortletURL.setParameter("referringPortletResource", referringPortletResource);
+}
+else {
+	editPortletURL.setParameter("referringPortletResource", portletDisplay.getId());
 }
 
 Group stageableGroup = themeDisplay.getScopeGroup();
@@ -35,6 +42,7 @@ Group stageableGroup = themeDisplay.getScopeGroup();
 if (themeDisplay.getScopeGroup().isLayout()) {
 	stageableGroup = layout.getGroup();
 }
+String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + editPortletURL.toString() + "'});";
 %>
 
 <c:if test="<%= assetRenderer.hasEditPermission(permissionChecker) && (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
@@ -43,7 +51,7 @@ if (themeDisplay.getScopeGroup().isLayout()) {
 			image="edit"
 			label="<%= showIconLabel %>"
 			message='<%= showIconLabel ? LanguageUtil.format(pageContext, "edit-x-x", new Object[] {"yui3-aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle(locale))}) : LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) %>'
-			url="<%= editPortletURL.toString() %>"
+			url="<%= taglibEditURL %>"
 		/>
 	</div>
 </c:if>

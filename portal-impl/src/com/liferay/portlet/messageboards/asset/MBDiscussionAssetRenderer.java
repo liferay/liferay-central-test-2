@@ -14,18 +14,26 @@
 
 package com.liferay.portlet.messageboards.asset;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Jorge Ferrer
+ * @author Sergio González
  */
 public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 
@@ -36,11 +44,19 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 	}
 
 	public PortletURL getURLEdit(
-		LiferayPortletRequest liferayPortletRequest,
-		LiferayPortletResponse liferayPortletResponse) {
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse)
+		throws PortalException, SystemException {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
-			PortletKeys.MESSAGE_BOARDS);
+		HttpServletRequest request =
+			liferayPortletRequest.getHttpServletRequest();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletURL editPortletURL = PortletURLFactoryUtil.create(
+			request, PortletKeys.MESSAGE_BOARDS,
+			getControlPanelPlid(themeDisplay), PortletRequest.RENDER_PHASE);
 
 		editPortletURL.setParameter(
 			"struts_action", "/message_boards/edit_discussion");
