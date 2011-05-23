@@ -85,6 +85,9 @@ AUI().add(
 
 						instance._tagViewContainer.on(EVENT_CLICK, instance._onTagViewContainerClick, instance);
 
+						instance._tagsAdminListContainer = instance._container.one('.tags-admin-list-container');
+						instance._tagsAdminListContainer.plug(A.LoadingMask);
+
 						var namespace = instance._prefixedPortletId;
 
 						A.one('#' + namespace + 'addTagButton').on(EVENT_CLICK, instance._onShowTagPanel, instance, ACTION_ADD);
@@ -356,8 +359,14 @@ AUI().add(
 					_displayTags: function(callback) {
 						var instance = this;
 
+						var loadingMask = instance._tagsAdminListContainer.loadingmask;
+
+						loadingMask.toggle();
+
 						instance._getTags(
 							function(result) {
+								loadingMask.toggle();
+
 								instance._prepareTags(result.tags, callback);
 							}
 						);
@@ -684,8 +693,6 @@ AUI().add(
 					_loadData: function() {
 						var instance = this;
 
-						instance._showLoading('.tags-admin-list, .tag-view-container');
-
 						instance._displayTags(
 							function() {
 								instance._displayTagData();
@@ -952,6 +959,12 @@ AUI().add(
 
 						instance._getDDHandler().syncTargets();
 
+						var firstTagLink = instance._tagsList.one('li a');
+
+						if (firstTagLink) {
+							firstTagLink.focus();
+						}
+
 						if (callback) {
 							callback();
 						}
@@ -1041,12 +1054,6 @@ AUI().add(
 						output.show();
 
 						instance._hideMessageTask();
-					},
-
-					_showLoading: function(container) {
-						var instance = this;
-
-						A.all(container).html('<div class="loading-animation" />');
 					},
 
 					_showTagPanel: function(action) {
@@ -1165,6 +1172,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window', 'aui-paginator']
+		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window', 'aui-paginator', 'aui-loading-mask']
 	}
 );
