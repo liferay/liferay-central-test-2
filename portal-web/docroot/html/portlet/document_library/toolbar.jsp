@@ -25,9 +25,7 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
-%>
 
-<%
 String taglibUrl = null;
 %>
 
@@ -37,74 +35,9 @@ String taglibUrl = null;
 	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
 </span>
 
-<liferay-ui:icon-menu align="left" direction="down" icon="" message="sort-by" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
-
-	<%
-	PortletURL sortTitle = renderResponse.createRenderURL();
-
-	sortTitle.setParameter("orderByCol", "title");
-	sortTitle.setParameter("orderByType", (orderByCol.equals("title") && orderByType.equals("asc")) ? "desc" : "asc");
-	%>
-
-	<liferay-ui:icon
-		image="folder"
-		message="title"
-		url="<%= sortTitle.toString() %>"
-	/>
-
-	<%
-	PortletURL sortCreationDate = renderResponse.createRenderURL();
-
-	sortCreationDate.setParameter("orderByCol", "creationDate");
-	sortCreationDate.setParameter("orderByType", (orderByCol.equals("creationDate") && orderByType.equals("asc")) ? "desc" : "asc");
-	%>
-
-	<liferay-ui:icon
-		image="folder"
-		message="creation-date"
-		url="<%= sortCreationDate.toString() %>"
-	/>
-
-	<%
-	PortletURL sortModifiedDate = renderResponse.createRenderURL();
-
-	sortModifiedDate.setParameter("orderByCol", "modifiedDate");
-	sortModifiedDate.setParameter("orderByType", (orderByCol.equals("modifiedDate") && orderByType.equals("asc")) ? "desc" : "asc");
-	%>
-
-	<liferay-ui:icon
-		image="folder"
-		message="modified-date"
-		url="<%= sortModifiedDate.toString() %>"
-	/>
-
-	<%
-	PortletURL sortReadCountDate = renderResponse.createRenderURL();
-
-	sortReadCountDate.setParameter("orderByCol", "readCount");
-	sortReadCountDate.setParameter("orderByType", (orderByCol.equals("readCount") && orderByType.equals("asc")) ? "desc" : "asc");
-	%>
-
-	<liferay-ui:icon
-		image="folder"
-		message="read-count"
-		url="<%= sortReadCountDate.toString() %>"
-	/>
-
-	<%
-	PortletURL sortSize = renderResponse.createRenderURL();
-
-	sortSize.setParameter("orderByCol", "size");
-	sortSize.setParameter("orderByType", (orderByCol.equals("size") && orderByType.equals("asc")) ? "desc" : "asc");
-	%>
-
-	<liferay-ui:icon
-		image="folder"
-		message="size"
-		url="<%= sortSize.toString() %>"
-	/>
-</liferay-ui:icon-menu>
-
+<span class="sort-button" id="<portlet:namespace />sortButtonContainer">
+	<liferay-util:include page="/html/portlet/document_library/sort_button.jsp" />
+</span>
 
 <liferay-ui:icon-menu align="left" direction="down" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
