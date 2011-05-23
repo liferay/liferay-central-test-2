@@ -513,7 +513,7 @@ public interface JournalArticleLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
-		long companyId, int status, double version, int start, int end)
+		long companyId, double version, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -522,8 +522,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getCompanyArticlesCount(long companyId, int status,
-		double version, int start, int end)
+	public int getCompanyArticlesCount(long companyId, double version,
+		int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -636,10 +636,6 @@ public interface JournalArticleLocalService {
 		java.lang.String languageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateTemplateId(long groupId, long classNameId,
-		java.lang.String oldTemplateId, java.lang.String newTemplateId)
-		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
@@ -804,4 +800,8 @@ public interface JournalArticleLocalService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateTemplateId(long groupId, long classNameId,
+		java.lang.String oldTemplateId, java.lang.String newTemplateId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

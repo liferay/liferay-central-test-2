@@ -627,10 +627,10 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
-		long companyId, int status, double version, int start, int end)
+		long companyId, double version, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.getCompanyArticles(companyId,
-			status, version, start, end);
+			version, status, start, end);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
@@ -640,11 +640,11 @@ public class JournalArticleLocalServiceWrapper
 			status, start, end);
 	}
 
-	public int getCompanyArticlesCount(long companyId, int status,
-		double version, int start, int end)
+	public int getCompanyArticlesCount(long companyId, double version,
+		int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.getCompanyArticlesCount(companyId,
-			status, version, start, end);
+			version, status, start, end);
 	}
 
 	public int getCompanyArticlesCount(long companyId, int status)
@@ -792,13 +792,6 @@ public class JournalArticleLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.removeArticleLocale(groupId,
 			articleId, version, languageId);
-	}
-
-	public void updateTemplateId(long groupId, long classNameId,
-		java.lang.String oldTemplateId, java.lang.String newTemplateId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_journalArticleLocalService.updateTemplateId(groupId, classNameId,
-			oldTemplateId, newTemplateId);
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
@@ -1031,6 +1024,13 @@ public class JournalArticleLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.updateStatus(userId, groupId,
 			articleId, version, status, articleURL, serviceContext);
+	}
+
+	public void updateTemplateId(long groupId, long classNameId,
+		java.lang.String oldTemplateId, java.lang.String newTemplateId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_journalArticleLocalService.updateTemplateId(groupId, classNameId,
+			oldTemplateId, newTemplateId);
 	}
 
 	public JournalArticleLocalService getWrappedJournalArticleLocalService() {
