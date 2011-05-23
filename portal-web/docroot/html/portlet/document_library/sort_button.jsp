@@ -57,7 +57,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
-		message="creation-date"
+		message="create-date"
 		url="<%= taglibUrl %>"
 	/>
 

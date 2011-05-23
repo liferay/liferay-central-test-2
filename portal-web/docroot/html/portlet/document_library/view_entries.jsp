@@ -82,7 +82,7 @@ Map<String, String> orderableHeaders = new HashMap<String, String>();
 
 orderableHeaders.put("name", "name");
 orderableHeaders.put("size", "size");
-orderableHeaders.put("creation-date", "creationDate");
+orderableHeaders.put("create-date", "creationDate");
 orderableHeaders.put("modified-date", "modifiedDate");
 orderableHeaders.put("read-count", "readCount");
 
