@@ -37,7 +37,7 @@ String taglibUrl = null;
 	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
 </span>
 
-<liferay-ui:icon-menu align="left" direction="down" icon="" message="sort" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
+<liferay-ui:icon-menu align="left" direction="down" icon="" message="sort-by" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 	<%
 	PortletURL sortTitle = renderResponse.createRenderURL();
@@ -48,6 +48,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
+		message="title"
 		url="<%= sortTitle.toString() %>"
 	/>
 
@@ -60,6 +61,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
+		message="creation-date"
 		url="<%= sortCreationDate.toString() %>"
 	/>
 
@@ -72,6 +74,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
+		message="modified-date"
 		url="<%= sortModifiedDate.toString() %>"
 	/>
 
@@ -84,6 +87,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
+		message="read-count"
 		url="<%= sortReadCountDate.toString() %>"
 	/>
 
@@ -96,6 +100,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
+		message="type"
 		url="<%= sortSize.toString() %>"
 	/>
 </liferay-ui:icon-menu>
