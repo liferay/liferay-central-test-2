@@ -237,7 +237,7 @@
 
 		.layout-description textarea {
 			height: 100px;
-        	width: 350px;
+			width: 350px;
 		}
 	}
 
