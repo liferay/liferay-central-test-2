@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.assetpublisher.dldocumentcomment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocumentcomment.adddldocumentcomment.AddDLDocumentCommentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocumentcomment.ratedldocumentcomment.RateDLDocumentCommentTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocumentcomment.bethefirstdlfolderdocumentcommentap.BeTheFirstDLFolderDocumentCommentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocumentcomment.ratedlfolderdocumentcommentap.RateDLFolderDocumentCommentAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,8 +29,8 @@ public class DLDocumentCommentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddDLDocumentCommentTests.suite());
-		testSuite.addTest(RateDLDocumentCommentTests.suite());
+		testSuite.addTest(BeTheFirstDLFolderDocumentCommentAPTests.suite());
+		testSuite.addTest(RateDLFolderDocumentCommentAPTests.suite());
 
 		return testSuite;
 	}

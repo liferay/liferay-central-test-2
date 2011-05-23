@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment.addblogsentrycomment.AddBlogsEntryCommentTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment.rateblogsentrycomment.RateBlogsEntryCommentTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment.bethefirstblogsentrycommentap.BeTheFirstBlogsEntryCommentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentrycomment.rateblogsentrycommentap.RateBlogsEntryCommentAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,8 +29,8 @@ public class BlogsEntryCommentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddBlogsEntryCommentTests.suite());
-		testSuite.addTest(RateBlogsEntryCommentTests.suite());
+		testSuite.addTest(BeTheFirstBlogsEntryCommentAPTests.suite());
+		testSuite.addTest(RateBlogsEntryCommentAPTests.suite());
 
 		return testSuite;
 	}

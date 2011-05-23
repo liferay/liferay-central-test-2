@@ -15,15 +15,16 @@
 package com.liferay.portalweb.portlet.assetpublisher.igimage;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.addigimage.AddIGImageTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.removeigimage.RemoveIGImageTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.selectigimage.SelectIGImageTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.viewcountigimage.ViewCountIGImageTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.viewigimageabstracts.ViewIGImageAbstractsTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.viewigimagedynamicassettypeigimage.ViewIGImageDynamicAssetTypeIGImageTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.viewigimagefullcontent.ViewIGImageFullContentTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.viewigimagetable.ViewIGImageTableTests;
-import com.liferay.portalweb.portlet.assetpublisher.igimage.viewigimagetitlelist.ViewIGImageTitleListTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.addnewigfolderimageapactions.AddNewIGFolderImageAPActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.deleteigfolderimageap.DeleteIGFolderImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.selectexistingigfolderimageapactions.SelectExistingIGFolderImageAPActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewconfigureportletabstractsigimageap.ViewConfigurePortletAbstractsIGImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewconfigureportletavailableigimageap.ViewConfigurePortletAvailableIGImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewconfigureportletcurrentigimageap.ViewConfigurePortletCurrentIGImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewconfigureportletfullcontentigimageap.ViewConfigurePortletFullContentIGImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewconfigureportlettableigimageap.ViewConfigurePortletTableIGImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewconfigureportlettitlelistigimageap.ViewConfigurePortletTitleListIGImageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.igimage.viewigfolderimageviewcountap.ViewIGFolderImageViewCountAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -36,16 +37,19 @@ public class IGImageTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddIGImageTests.suite());
-		testSuite.addTest(RemoveIGImageTests.suite());
-		testSuite.addTest(SelectIGImageTests.suite());
-		testSuite.addTest(ViewCountIGImageTests.suite());
-		testSuite.addTest(ViewIGImageAbstractsTests.suite());
+		testSuite.addTest(AddNewIGFolderImageAPActionsTests.suite());
+		testSuite.addTest(DeleteIGFolderImageAPTests.suite());
+		testSuite.addTest(SelectExistingIGFolderImageAPActionsTests.suite());
+		testSuite.addTest(ViewConfigurePortletAbstractsIGImageAPTests.suite());
 		testSuite.addTest(
-			ViewIGImageDynamicAssetTypeIGImageTests.suite());
-		testSuite.addTest(ViewIGImageFullContentTests.suite());
-		testSuite.addTest(ViewIGImageTableTests.suite());
-		testSuite.addTest(ViewIGImageTitleListTests.suite());
+			ViewConfigurePortletAvailableIGImageAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletCurrentIGImageAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletFullContentIGImageAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletTableIGImageAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletTitleListIGImageAPTests.suite());
+		testSuite.addTest(ViewIGFolderImageViewCountAPTests.suite());
 
 		return testSuite;
 	}

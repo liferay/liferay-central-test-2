@@ -15,15 +15,16 @@
 package com.liferay.portalweb.portlet.assetpublisher.dldocument;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.adddldocument.AddDLDocumentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.ratedldocument.RateDLDocumentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.removedldocument.RemoveDLDocumentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.selectdldocument.SelectDLDocumentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewdldocumentabstracts.ViewDLDocumentAbstractsTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewdldocumentdynamicassettypedldocument.ViewDLDocumentDynamicAssetTypeDLDocumentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewdldocumentfullcontent.ViewDLDocumentFullContentTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewdldocumenttable.ViewDLDocumentTableTests;
-import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewdldocumenttitlelist.ViewDLDocumentTitleListTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.addnewdlfolderdocumentapactions.AddNewDLFolderDocumentAPActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.deletedlfolderdocumentap.DeleteDLFolderDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.ratedlfolderdocumentap.RateDLFolderDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.selectexistingdlfolderdocumentapactions.SelectExistingDLFolderDocumentAPActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewconfigureportletabstractsdldocumentap.ViewConfigurePortletAbstractsDLDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewconfigureportletavailabledldocumentap.ViewConfigurePortletAvailableDLDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewconfigureportletcurrentdldocumentap.ViewConfigurePortletCurrentDLDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewconfigureportletfullcontentdldocumentap.ViewConfigurePortletFullContentDLDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewconfigureportlettabledldocumentap.ViewConfigurePortletTableDLDocumentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.dldocument.viewconfigureportlettitlelistdldocumentap.ViewConfigurePortletTitleListDLDocumentAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -36,16 +37,22 @@ public class DLDocumentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddDLDocumentTests.suite());
-		testSuite.addTest(RateDLDocumentTests.suite());
-		testSuite.addTest(RemoveDLDocumentTests.suite());
-		testSuite.addTest(SelectDLDocumentTests.suite());
-		testSuite.addTest(ViewDLDocumentAbstractsTests.suite());
+		testSuite.addTest(AddNewDLFolderDocumentAPActionsTests.suite());
+		testSuite.addTest(DeleteDLFolderDocumentAPTests.suite());
+		testSuite.addTest(RateDLFolderDocumentAPTests.suite());
+		testSuite.addTest(SelectExistingDLFolderDocumentAPActionsTests.suite());
 		testSuite.addTest(
-			ViewDLDocumentDynamicAssetTypeDLDocumentTests.suite());
-		testSuite.addTest(ViewDLDocumentFullContentTests.suite());
-		testSuite.addTest(ViewDLDocumentTableTests.suite());
-		testSuite.addTest(ViewDLDocumentTitleListTests.suite());
+			ViewConfigurePortletAbstractsDLDocumentAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletAvailableDLDocumentAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletCurrentDLDocumentAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletFullContentDLDocumentAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletTableDLDocumentAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletTitleListDLDocumentAPTests.suite());
 
 		return testSuite;
 	}

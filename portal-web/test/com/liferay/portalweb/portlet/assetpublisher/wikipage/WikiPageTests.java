@@ -15,12 +15,13 @@
 package com.liferay.portalweb.portlet.assetpublisher.wikipage;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewcountwikipage.ViewCountWikiPageTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewwikipageabstracts.ViewWikiPageAbstractsTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewwikipagedynamicassettypewikipage.ViewWikiPageDynamicAssetTypeWikiPageTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewwikipagefullcontent.ViewWikiPageFullContentTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewwikipagetable.ViewWikiPageTableTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewwikipagetitlelist.ViewWikiPageTitleListTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewconfigureportletabstractswikipageap.ViewConfigurePortletAbstractsWikiPageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewconfigureportletavailablewikipageap.ViewConfigurePortletAvailableWikiPageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewconfigureportletcurrentwikipageap.ViewConfigurePortletCurrentWikiPageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewconfigureportletfullcontentwikipageap.ViewConfigurePortletFullContentWikiPageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewconfigureportlettablewikipageap.ViewConfigurePortletTableWikiPageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewconfigureportlettitlelistwikipageap.ViewConfigurePortletTitleListWikiPageAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipage.viewwikipageviewcountap.ViewWikiPageViewCountAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -33,12 +34,14 @@ public class WikiPageTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ViewCountWikiPageTests.suite());
-		testSuite.addTest(ViewWikiPageAbstractsTests.suite());
-		testSuite.addTest(ViewWikiPageDynamicAssetTypeWikiPageTests.suite());
-		testSuite.addTest(ViewWikiPageFullContentTests.suite());
-		testSuite.addTest(ViewWikiPageTableTests.suite());
-		testSuite.addTest(ViewWikiPageTitleListTests.suite());
+		testSuite.addTest(ViewWikiPageViewCountAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletAbstractsWikiPageAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletAvailableWikiPageAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletCurrentWikiPageAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletFullContentWikiPageAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletTableWikiPageAPTests.suite());
+		testSuite.addTest(ViewConfigurePortletTitleListWikiPageAPTests.suite());
 
 		return testSuite;
 	}

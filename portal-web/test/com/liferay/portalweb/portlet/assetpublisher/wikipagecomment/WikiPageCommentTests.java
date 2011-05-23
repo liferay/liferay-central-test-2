@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.assetpublisher.wikipagecomment;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipagecomment.addwikipagecomment.AddWikiPageCommentTests;
-import com.liferay.portalweb.portlet.assetpublisher.wikipagecomment.ratewikipagecomment.RateWikiPageCommentTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipagecomment.bethefirstwikipagecommentap.BeTheFirstWikiPageCommentAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.wikipagecomment.ratewikipagecommentap.RateWikiPageCommentAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,8 +29,8 @@ public class WikiPageCommentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddWikiPageCommentTests.suite());
-		testSuite.addTest(RateWikiPageCommentTests.suite());
+		testSuite.addTest(BeTheFirstWikiPageCommentAPTests.suite());
+		testSuite.addTest(RateWikiPageCommentAPTests.suite());
 
 		return testSuite;
 	}

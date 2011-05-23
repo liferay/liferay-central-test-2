@@ -15,7 +15,7 @@
 package com.liferay.portalweb.portlet.assetpublisher.lar;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.lar.importlar.ImportLARTests;
+import com.liferay.portalweb.portlet.assetpublisher.lar.importlarap.ImportLARAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -28,7 +28,7 @@ public class LARTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ImportLARTests.suite());
+		testSuite.addTest(ImportLARAPTests.suite());
 
 		return testSuite;
 	}

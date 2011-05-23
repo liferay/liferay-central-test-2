@@ -15,16 +15,17 @@
 package com.liferay.portalweb.portlet.assetpublisher.blogsentry;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.addblogsentry.AddBlogsEntryTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.rateblogsentry.RateBlogsEntryTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.removeblogsentry.RemoveBlogsEntryTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.selectblogsentry.SelectBlogsEntryTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewblogsentryabstracts.ViewBlogsEntryAbstractsTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewblogsentrydynamicassettypeblogsentry.ViewBlogsEntryDynamicAssetTypeBlogsEntryTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewblogsentryfullcontent.ViewBlogsEntryFullContentTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewblogsentrytable.ViewBlogsEntryTableTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewblogsentrytitlelist.ViewBlogsEntryTitleListTests;
-import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewcountblogsentry.ViewCountBlogsEntryTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.addnewblogsentryapactions.AddNewBlogsEntryAPActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.deleteblogsentryap.DeleteBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.rateblogsentryap.RateBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.selectexistingblogsentryapactions.SelectExistingBlogsEntryAPActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewblogsentryviewcountap.ViewBlogsEntryViewCountAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewconfigureportletabstractsblogsentryap.ViewConfigurePortletAbstractsBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewconfigureportletavailableblogsentryap.ViewConfigurePortletAvailableBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewconfigureportletcurrentblogsentryap.ViewConfigurePortletCurrentBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewconfigureportletfullcontentblogsentryap.ViewConfigurePortletFullContentBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewconfigureportlettableblogsentryap.ViewConfigurePortletTableBlogsEntryAPTests;
+import com.liferay.portalweb.portlet.assetpublisher.blogsentry.viewconfigureportlettitlelistblogsentryap.ViewConfigurePortletTitleListBlogsEntryAPTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -37,17 +38,23 @@ public class BlogsEntryTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddBlogsEntryTests.suite());
-		testSuite.addTest(RateBlogsEntryTests.suite());
-		testSuite.addTest(RemoveBlogsEntryTests.suite());
-		testSuite.addTest(SelectBlogsEntryTests.suite());
-		testSuite.addTest(ViewBlogsEntryAbstractsTests.suite());
+		testSuite.addTest(AddNewBlogsEntryAPActionsTests.suite());
+		testSuite.addTest(RateBlogsEntryAPTests.suite());
+		testSuite.addTest(DeleteBlogsEntryAPTests.suite());
+		testSuite.addTest(SelectExistingBlogsEntryAPActionsTests.suite());
 		testSuite.addTest(
-			ViewBlogsEntryDynamicAssetTypeBlogsEntryTests.suite());
-		testSuite.addTest(ViewBlogsEntryFullContentTests.suite());
-		testSuite.addTest(ViewBlogsEntryTableTests.suite());
-		testSuite.addTest(ViewBlogsEntryTitleListTests.suite());
-		testSuite.addTest(ViewCountBlogsEntryTests.suite());
+			ViewConfigurePortletAbstractsBlogsEntryAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletAvailableBlogsEntryAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletCurrentBlogsEntryAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletFullContentBlogsEntryAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletTableBlogsEntryAPTests.suite());
+		testSuite.addTest(
+			ViewConfigurePortletTitleListBlogsEntryAPTests.suite());
+		testSuite.addTest(ViewBlogsEntryViewCountAPTests.suite());
 
 		return testSuite;
 	}

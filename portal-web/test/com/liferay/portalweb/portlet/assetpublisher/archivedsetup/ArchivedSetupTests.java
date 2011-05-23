@@ -15,9 +15,9 @@
 package com.liferay.portalweb.portlet.assetpublisher.archivedsetup;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.deletearchivedsetup.DeleteArchivedSetupTests;
-import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.restorearchivedsetup.RestoreArchivedSetupTests;
-import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.savearchivedsetup.SaveArchivedSetupTests;
+import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.deleteaparchivedsetupactions.DeleteAPArchivedSetupActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.restoreaparchivedsetupactions.RestoreAPArchivedSetupActionsTests;
+import com.liferay.portalweb.portlet.assetpublisher.archivedsetup.saveaparchivedsetup.SaveAPArchivedSetupTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,9 +30,9 @@ public class ArchivedSetupTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(DeleteArchivedSetupTests.suite());
-		testSuite.addTest(RestoreArchivedSetupTests.suite());
-		testSuite.addTest(SaveArchivedSetupTests.suite());
+		testSuite.addTest(DeleteAPArchivedSetupActionsTests.suite());
+		testSuite.addTest(RestoreAPArchivedSetupActionsTests.suite());
+		testSuite.addTest(SaveAPArchivedSetupTests.suite());
 
 		return testSuite;
 	}
