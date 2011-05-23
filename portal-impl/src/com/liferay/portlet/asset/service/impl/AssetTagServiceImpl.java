@@ -103,8 +103,8 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupId, start, end, obc);
 	}
 
-	public JSONObject getJSONGroupTags(long groupId, String tagName, int start,
-			int end)
+	public JSONObject getJSONGroupTags(
+			long groupId, String name, int start, int end)
 		throws PortalException, SystemException {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -115,11 +115,11 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 		List<AssetTag> tags = new ArrayList<AssetTag>();
 
-		if (Validator.isNotNull(tagName)) {
-			tagName = (CustomSQLUtil.keywords(tagName))[0];
+		if (Validator.isNotNull(name)) {
+			name = (CustomSQLUtil.keywords(name))[0];
 
 			tags = assetTagLocalService.search(
-				groupId, tagName, new String[]{}, start, end);
+				groupId, name, new String[0], start, end);
 		}
 		else {
 			tags = assetTagLocalService.getGroupTags(groupId, start, end);
