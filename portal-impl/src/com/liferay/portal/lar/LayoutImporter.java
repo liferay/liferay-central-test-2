@@ -936,12 +936,11 @@ public class LayoutImporter {
 					Layout linkedLayout = newLayoutsMap.get(linkToLayoutId);
 
 					typeSettingsProperties.setProperty(
-						"linkToLayoutId",
-						String.valueOf(linkedLayout.getLayoutId()));
-
-					typeSettingsProperties.setProperty(
 						"privateLayout",
 						String.valueOf(linkedLayout.getPrivateLayout()));
+					typeSettingsProperties.setProperty(
+						"linkToLayoutId",
+						String.valueOf(linkedLayout.getLayoutId()));
 				}
 				else {
 					if (_log.isWarnEnabled()) {
