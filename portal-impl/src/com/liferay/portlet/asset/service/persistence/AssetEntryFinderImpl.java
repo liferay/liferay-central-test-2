@@ -226,13 +226,16 @@ public class AssetEntryFinderImpl
 
 		if (entryQuery.getAnyCategoryIds().length > 0) {
 			if (PropsValues.ASSET_CATEGORIES_SEARCH_HIERARCHICAL) {
-				sb.append(getCategoryIds(
-					FIND_BY_AND_CATEGORY_IDS_TREE,
-					entryQuery.getAnyCategoryIds()));
+				sb.append(
+					getCategoryIds(
+						FIND_BY_AND_CATEGORY_IDS_TREE,
+						entryQuery.getAnyCategoryIds()));
 			}
 			else {
-				sb.append(getCategoryIds(
-					FIND_BY_AND_CATEGORY_IDS, entryQuery.getAnyCategoryIds()));
+				sb.append(
+					getCategoryIds(
+						FIND_BY_AND_CATEGORY_IDS,
+						entryQuery.getAnyCategoryIds()));
 			}
 		}
 
