@@ -59,7 +59,7 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
     <target name="build-creole-parser">
 		<delete>
 			<fileset
-				dir="src/com/liferay/parsers/creole/parser"
+				dir="src/com/liferay/portal/parsers/creole/parser"
 				includes="*.*"
 			/>
 		</delete>
@@ -77,8 +77,8 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 			newenvironment="true"
 		>
 			<arg value="-o" />
-			<arg path="src/com/liferay/parsers/creole/parser" />
-			<arg path="src/com/liferay/parsers/creole/grammar/Creole10.g" />
+			<arg path="src/com/liferay/portal/parsers/creole/parser" />
+			<arg path="src/com/liferay/portal/parsers/creole/grammar/Creole10.g" />
 		</java>
     </target>
 
