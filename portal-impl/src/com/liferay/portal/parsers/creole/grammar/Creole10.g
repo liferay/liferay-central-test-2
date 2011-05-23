@@ -133,13 +133,13 @@ paragraph returns [ASTNode node = null]
 ///////////////////////   T E X T  P A R A G R A P H   ////////////////////////
 
 text_paragraph returns [ ParagraphNode paragraph = new ParagraphNode() ]
-	:	(	tl = text_line {  $paragraph.addChildNode($tl.line);  }
+	:	(	tl = text_line {  $paragraph.addChildASTNode($tl.line);  }
 		|	( NOWIKI_OPEN  ~( NEWLINE ) )  =>
-			nw = nowiki_inline  {$paragraph.addChildNode($nw.nowiki);} ( te = text_element  {$paragraph.addChildNode($te.item);} )*  text_lineseparator
+			nw = nowiki_inline  {$paragraph.addChildASTNode($nw.nowiki);} ( te = text_element  {$paragraph.addChildASTNode($te.item);} )*  text_lineseparator
 		)+
 	;
 text_line returns [LineNode line = new LineNode()]
-	:	first = text_firstelement  {$line.addChildNode($first.item); } ( element = text_element  {$line.addChildNode($element.item);} )*  text_lineseparator
+	:	first = text_firstelement  {$line.addChildASTNode($first.item); } ( element = text_element  {$line.addChildASTNode($element.item);} )*  text_lineseparator
 	;
 text_firstelement returns [ASTNode item = null]
 	:	{ input.LA(1) != STAR || (input.LA(1) == STAR && input.LA(2) == STAR) }?
@@ -272,7 +272,7 @@ heading_text
 /////////////////////////////////   L I S T   /////////////////////////////////
 
 list_ord returns [OrderedListNode orderedList = new OrderedListNode()] 
-	:	( elem = list_ordelem { $orderedList.addChildNode($elem.item);  } )+  ( end_of_list )?
+	:	( elem = list_ordelem { $orderedList.addChildASTNode($elem.item);  } )+  ( end_of_list )?
 	;
 list_ordelem returns [ASTNode item = null]
 	scope  CountLevel;
@@ -284,7 +284,7 @@ list_ordelem returns [ASTNode item = null]
 	;
 	
 list_unord returns [UnorderedListNode unorderedList = new UnorderedListNode()]
-	:	( elem = list_unordelem { $unorderedList.addChildNode($elem.item); } )+  ( end_of_list )?
+	:	( elem = list_unordelem { $unorderedList.addChildASTNode($elem.item); } )+  ( end_of_list )?
 	;
 list_unordelem returns [UnorderedListItemNode  item = null]
 	scope  CountLevel;
@@ -350,7 +350,7 @@ scope {
 	
 ////////////////////////////////   T A B L E   ////////////////////////////////
 table returns [TableNode table = new TableNode()]
-	:	( tr = table_row {$table.addChildNode($tr.row);} )+
+	:	( tr = table_row {$table.addChildASTNode($tr.row);} )+
 	;
 table_row  returns [CollectionNode row = new CollectionNode()]
 	:	( tc = table_cell { $row.add($tc.cell); } )+  table_rowseparator
@@ -469,7 +469,7 @@ horizontalrule returns [ASTNode horizontal = null]
 
 link returns [LinkNode link = null]
 	:	link_open_markup  a =link_address  {$link = $a.link; } (link_description_markup  
-		d = link_description {$link.setAltNode($d.node); } )?  link_close_markup
+		d = link_description {$link.setAltCollectionNode($d.node); } )?  link_close_markup
 	;
 link_address returns [LinkNode link =null] 
 	:	li = link_interwiki_uri  ':'  p = link_interwiki_pagename { 
@@ -562,7 +562,7 @@ link_uri returns [String text = new String()]
 ////////////////////////////////   I M A G E   ////////////////////////////////
 
 image returns [ImageNode image = new ImageNode()]
-	:	image_open_markup uri = image_uri {$image.setUri($uri.link);}  ( alt =image_alternative {$image.setAltNode($alt.alternative);} )?   
+	:	image_open_markup uri = image_uri {$image.setUri($uri.link);}  ( alt =image_alternative {$image.setAltCollectionNode($alt.alternative);} )?   
 		image_close_markup
 	;
 image_uri returns [String link = new String()]
