@@ -100,6 +100,8 @@ AUI().add(
 
 						instance._checkAllTagsCheckbox = checkAllTagsCheckbox;
 
+						instance._prepareSearch();
+
 						instance._loadData();
 
 						instance.after('drag:drag', instance._afterDrag);
@@ -575,7 +577,16 @@ AUI().add(
 
 						var paginator = instance._getTagsPaginator();
 
-						var currentPage = (paginator.get('page') || 1) - 1;
+						var currentPage = 0;
+
+						var query = instance._tagsSearch.get('query');
+
+						if (!instance._restartSearch) {
+							currentPage = (paginator.get('page') || 1) - 1;
+						}
+
+						instance._lastSearchQuery = query;
+
 						var rowsPerPage = paginator.get('rowsPerPage');
 
 						var start = currentPage * rowsPerPage;
@@ -584,10 +595,13 @@ AUI().add(
 						Liferay.Service.Asset.AssetTag.getJSONGroupTags(
 							{
 								groupId: themeDisplay.getParentGroupId(),
+								tagName: query,
 								start: start,
 								end: end
 							},
 							function(result) {
+								instance._restartSearch = false;
+
 								paginator.setState(result);
 
 								if (callback) {
@@ -772,6 +786,12 @@ AUI().add(
 						}
 					},
 
+					_onSearchBoxNodeKeyDown: function(event) {
+						if (event.isKey('ENTER')) {
+							event.halt();
+						}
+					},
+
 					_onShowTagPanel: function(event, action) {
 						var instance = this;
 
@@ -920,6 +940,41 @@ AUI().add(
 						autoFieldsInstance.reset();
 					},
 
+					_prepareSearch: function() {
+						var instance = this;
+
+						var TagsSearch = A.Base.create(
+							'tagsSearch',
+							A.Base, [A.AutoCompleteBase],
+							{
+								initializer: function () {
+									this._bindUIACBase();
+									this._syncUIACBase();
+								}
+							}
+						);
+
+						var searchBoxNode = A.one('#' + instance._prefixedPortletId + 'tagsAdminSearchInput');
+
+						var tagsSearch = new TagsSearch(
+							{
+								inputNode: searchBoxNode,
+								minQueryLength: 0,
+								queryDelay: 300
+							}
+						);
+
+						tagsSearch.after('query', function(event) {
+							instance._restartSearch = true;
+
+							instance._loadData();
+						});
+
+						searchBoxNode.on('keydown', A.bind(instance._onSearchBoxNodeKeyDown, instance));
+
+						instance._tagsSearch = tagsSearch;
+					},
+
 					_prepareTags: function(tags, callback) {
 						var instance = this;
 
@@ -961,15 +1016,7 @@ AUI().add(
 							tagsMessageContainer.show();
 						}
 
-						instance._reloadSearch();
-
 						instance._getDDHandler().syncTargets();
-
-						var firstTagLink = instance._tagsList.one('li a');
-
-						if (firstTagLink) {
-							firstTagLink.focus();
-						}
 
 						if (callback) {
 							callback();
@@ -999,26 +1046,6 @@ AUI().add(
 
 							instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
 						}
-					},
-
-					_reloadSearch: function() {
-						var	instance = this;
-
-						var namespace = instance._prefixedPortletId;
-
-						var options = {
-							data: function(node) {
-								return node.one('span a').html();
-							},
-							input: '#' + namespace + 'tagsAdminSearchInput',
-							nodes: instance._tagsItemsSelector
-						};
-
-						if (instance.liveSearch) {
-							instance.liveSearch.destroy();
-						}
-
-						instance.liveSearch = new A.LiveSearch(options);
 					},
 
 					_selectTag: function(tagId) {
@@ -1178,6 +1205,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-live-search', 'aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window', 'aui-paginator', 'aui-loading-mask']
+		requires: ['aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window', 'aui-paginator', 'aui-loading-mask', 'autocomplete-base']
 	}
 );
