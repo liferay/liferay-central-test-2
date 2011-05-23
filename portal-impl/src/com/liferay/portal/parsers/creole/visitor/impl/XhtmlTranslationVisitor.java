@@ -209,8 +209,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	public void visit(UnorderedListItemNode unorderedListItemNode) {
-		traverseAndWriteForEach(
-			unorderedListItemNode.getChildASTNodes(), "<li>", "</li>");
+		traverse(unorderedListItemNode.getChildASTNodes(), "<li>", "</li>");
 	}
 
 	public void visit(UnorderedListNode unorderedListNode) {
