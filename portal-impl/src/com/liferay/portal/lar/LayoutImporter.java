@@ -938,6 +938,10 @@ public class LayoutImporter {
 					typeSettingsProperties.setProperty(
 						"linkToLayoutId",
 						String.valueOf(linkedLayout.getLayoutId()));
+
+					typeSettingsProperties.setProperty(
+						"privateLayout",
+						String.valueOf(linkedLayout.getPrivateLayout()));
 				}
 				else {
 					if (_log.isWarnEnabled()) {
