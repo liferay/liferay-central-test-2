@@ -100,6 +100,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="C_V" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="version" />
+		</finder>
 		<finder name="C_ST" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="status" />
@@ -139,6 +143,11 @@
 			<finder-column name="urlTitle" />
 			<finder-column name="status" />
 		</finder>
+        <finder name="C_V_ST" return-type="Collection">
+            <finder-column name="companyId" />
+            <finder-column name="version" />
+            <finder-column name="status" />
+        </finder>
 
 		<!-- References -->
 

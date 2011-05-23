@@ -46,6 +46,7 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
@@ -91,7 +92,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		int status = GetterUtil.getInteger(
 			searchContext.getAttribute(Field.STATUS),
-			WorkflowConstants.STATUS_ANY);
+			WorkflowConstants.STATUS_APPROVED);
 
 		if (status != WorkflowConstants.STATUS_ANY) {
 			contextQuery.addRequiredTerm(Field.STATUS, status);
@@ -322,7 +323,11 @@ public class JournalIndexer extends BaseIndexer {
 
 		Document document = getDocument(article);
 
-		if (!article.isApproved() || !article.isIndexable()) {
+		if (!article.isIndexable() ||
+			(!article.isApproved() &&
+			 (article.getVersion() !=
+			  	JournalArticleConstants.DEFAULT_VERSION))) {
+
 			SearchEngineUtil.deleteDocument(
 				article.getCompanyId(), document.get(Field.UID));
 
@@ -515,9 +520,20 @@ public class JournalIndexer extends BaseIndexer {
 	protected void reindexArticles(long companyId, int start, int end)
 		throws Exception {
 
-		List<JournalArticle> articles =
+		List<JournalArticle> articles = new ArrayList<JournalArticle>();
+
+		List<JournalArticle> approvedArticles =
 			JournalArticleLocalServiceUtil.getCompanyArticles(
 				companyId, WorkflowConstants.STATUS_APPROVED, start, end);
+
+		articles.addAll(approvedArticles);
+
+		List<JournalArticle> draftArticles =
+			JournalArticleLocalServiceUtil.getCompanyArticles(
+				companyId, WorkflowConstants.STATUS_DRAFT,
+				JournalArticleConstants.DEFAULT_VERSION, start, end);
+
+		articles.addAll(draftArticles);
 
 		if (articles.isEmpty()) {
 			return;

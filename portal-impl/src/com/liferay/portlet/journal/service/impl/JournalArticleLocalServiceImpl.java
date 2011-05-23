@@ -310,6 +310,17 @@ public class JournalArticleLocalServiceImpl
 				user.getCompanyId(), groupId, userId,
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
 				article, serviceContext);
+
+			if (serviceContext.getWorkflowAction() !=
+					WorkflowConstants.ACTION_PUBLISH) {
+
+				// Indexer
+
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					JournalArticle.class);
+
+				indexer.reindex(article);
+			}
 		}
 		else {
 			updateStatus(
@@ -1200,6 +1211,21 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List<JournalArticle> getCompanyArticles(
+			long companyId, int status, double version, int start, int end)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return journalArticlePersistence.findByC_V(
+				companyId, version, start, end, new ArticleIDComparator(true));
+		}
+		else {
+			return journalArticlePersistence.findByC_V_ST(
+				companyId, version, status, start, end,
+				new ArticleIDComparator(true));
+		}
+	}
+
+	public List<JournalArticle> getCompanyArticles(
 			long companyId, int status, int start, int end)
 		throws SystemException {
 
@@ -1210,6 +1236,19 @@ public class JournalArticleLocalServiceImpl
 		else {
 			return journalArticlePersistence.findByC_ST(
 				companyId, status, start, end, new ArticleIDComparator(true));
+		}
+	}
+
+	public int getCompanyArticlesCount(
+			long companyId, int status, double version, int start, int end)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return journalArticlePersistence.countByC_V(companyId, version);
+		}
+		else {
+			return journalArticlePersistence.countByC_V_ST(
+				companyId, version, status);
 		}
 	}
 
@@ -1574,9 +1613,11 @@ public class JournalArticleLocalServiceImpl
 			andOperator = true;
 		}
 
+		String status = String.valueOf(WorkflowConstants.STATUS_ANY);
+
 		return search(
 			companyId, groupId, classNameId, articleId, title, description,
-			content, null, null, structureId, templateId, params, andOperator,
+			content, null, status, structureId, templateId, params, andOperator,
 			start, end, sort);
 	}
 
@@ -2002,6 +2043,15 @@ public class JournalArticleLocalServiceImpl
 				user.getCompanyId(), groupId, userId,
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
 				article, serviceContext);
+		}
+		else if (version == JournalArticleConstants.DEFAULT_VERSION) {
+
+			// Indexer
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				JournalArticle.class);
+
+			indexer.reindex(article);
 		}
 
 		return article;
