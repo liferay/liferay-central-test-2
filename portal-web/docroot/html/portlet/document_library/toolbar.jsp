@@ -100,7 +100,7 @@ String taglibUrl = null;
 
 	<liferay-ui:icon
 		image="folder"
-		message="type"
+		message="size"
 		url="<%= sortSize.toString() %>"
 	/>
 </liferay-ui:icon-menu>
