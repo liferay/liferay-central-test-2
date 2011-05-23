@@ -26,16 +26,17 @@ import com.liferay.portal.model.RoleConstants;
 public class UpgradeResourcePermission extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		StringBundler sb = new StringBundler(8);
+		StringBundler sb = new StringBundler(9);
 
-		sb.append("update ResourcePermission inner join Role_ on ");
-		sb.append("ResourcePermission.roleId = Role_.roleId set ");
-		sb.append("ResourcePermission.scope = ");
+		sb.append("update ResourcePermission set scope = ");
 		sb.append(ResourceConstants.SCOPE_GROUP_TEMPLATE);
-		sb.append(", ResourcePermission.primKey = '");
+		sb.append(", primKey = '");
 		sb.append(String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
-		sb.append("' where Role_.type_ = ");
+		sb.append("' where exists (select roleId from Role_ where ");
+		sb.append("Role_.roleId = ResourcePermission.roleId and ");
+		sb.append("Role_.type_ = ");
 		sb.append(RoleConstants.TYPE_PROVIDER);
+		sb.append(")");
 
 		runSQL(sb.toString());
 	}

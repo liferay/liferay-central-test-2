@@ -90,11 +90,11 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("select userId, userName, createDate, modifiedDate, ");
-			sb.append("classNameId, classPK from MBMessage where ");
-			sb.append("(companyId = " + companyId + ") and (classNameId != ");
-			sb.append("0) and (parentMessageId != 0) group by userId, ");
-			sb.append("classNameId, classPK");
+			sb.append("select userId, MIN(userName), classNameId, classPK, ");
+			sb.append("MIN(createDate), MIN(modifiedDate) from MBMessage ");
+			sb.append("where (companyId = " + companyId + ") and ");
+			sb.append("(classNameId != 0) and (parentMessageId != 0) ");
+			sb.append("group by userId, userName, classNameId, classPK");
 
 			ps = con.prepareStatement(sb.toString());
 

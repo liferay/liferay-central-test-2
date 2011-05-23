@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class UpgradeAdminPortlets extends UpgradeProcess {
 
-	protected void addResource(long resourceId, String codeId, long primKey)
+	protected void addResource(long resourceId, long codeId, long primKey)
 		throws Exception {
 
 		Connection con = null;
@@ -51,7 +51,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 					"(?, ?, ?)");
 
 			ps.setLong(1, resourceId);
-			ps.setString(2, codeId);
+			ps.setLong(2, codeId);
 			ps.setLong(3, primKey);
 
 			ps.executeUpdate();
@@ -77,7 +77,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 		long resourceId = increment();
 
-		addResource(resourceId, String.valueOf(codeId), companyId);
+		addResource(resourceId, codeId, companyId);
 
 		resourceIds[0] = resourceId;
 
@@ -94,7 +94,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 
 		long controlPanelGroupId = getControlPanelGroupId();
 
-		addResource(resourceId, String.valueOf(codeId), controlPanelGroupId);
+		addResource(resourceId, codeId, controlPanelGroupId);
 
 		resourceIds[1] = resourceId;
 
@@ -212,18 +212,21 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(9);
 
-			sb.append("select Permission_.resourceId from Resource_ inner ");
-			sb.append("join ResourceCode inner join Permission_ on ");
+			sb.append("select Permission_.resourceId from Permission_ ");
+			sb.append("inner join Resource_ on ");
+			sb.append("Permission_.resourceId = Resource_.resourceId and ");
+			sb.append("Permission_.actionId = 'ACCESS_IN_CONTROL_PANEL' ");
+			sb.append("inner join ResourceCode on ");
 			sb.append("ResourceCode.codeId = Resource_.codeId and ");
 			sb.append("ResourceCode.name = '");
 			sb.append(name);
-			sb.append("' and Permission_.actionId = '");
-			sb.append(ActionKeys.ACCESS_IN_CONTROL_PANEL);
-			sb.append("' and Permission_.resourceId = Resource_.resourceId");
+			sb.append("'");
 
 			String sql = sb.toString();
+
+			System.out.println(sql);
 
 			ps = con.prepareStatement(sql);
 
