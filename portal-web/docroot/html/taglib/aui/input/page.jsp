@@ -19,6 +19,12 @@
 <%@ page import="java.text.Format" %>
 
 <%
+boolean useNamespace = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:input:useNamespace")), auiFormUseNamespace);
+
+if (!useNamespace) {
+	namespace = StringPool.BLANK;
+}
+
 String baseType = GetterUtil.getString((String)request.getAttribute("aui:input:baseType"));
 Object bean = (Object)request.getAttribute("aui:input:bean");
 boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:input:changesContext"));

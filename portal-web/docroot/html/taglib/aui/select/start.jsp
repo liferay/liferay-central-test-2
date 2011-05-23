@@ -17,6 +17,12 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+boolean useNamespace = GetterUtil.getBoolean(String.valueOf(request.getAttribute("aui:select:useNamespace")), auiFormUseNamespace);
+
+if (!useNamespace) {
+	namespace = StringPool.BLANK;
+}
+
 Object bean = request.getAttribute("aui:select:bean");
 boolean changesContext = GetterUtil.getBoolean((String)request.getAttribute("aui:select:changesContext"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("aui:select:cssClass"));

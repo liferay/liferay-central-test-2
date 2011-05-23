@@ -170,6 +170,10 @@ public class InputTag extends IncludeTag {
 		_type = type;
 	}
 
+	public void setUseNamespace(boolean useNamespace) {
+		_useNamespace = useNamespace;
+	}
+
 	public void setValue(Object value) {
 		_value = value;
 	}
@@ -387,6 +391,8 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:suffix", _suffix);
 		request.setAttribute("aui:input:title", _title);
 		request.setAttribute("aui:input:type", _type);
+		request.setAttribute(
+			"aui:input:useNamespace", String.valueOf(_useNamespace));
 		request.setAttribute("aui:input:value", _value);
 	}
 
@@ -456,6 +462,7 @@ public class InputTag extends IncludeTag {
 	private String _title;
 	private String _type;
 	private Map<String, ValidatorTag> _validators;
+	private boolean _useNamespace = true;
 	private Object _value;
 
 }

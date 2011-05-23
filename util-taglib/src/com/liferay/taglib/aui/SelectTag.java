@@ -128,6 +128,10 @@ public class SelectTag extends IncludeTag {
 		_suffix = suffix;
 	}
 
+	public void setUseNamespace(boolean useNamespace) {
+		_useNamespace = useNamespace;
+	}
+
 	protected void cleanUp() {
 		_bean = null;
 		_changesContext = false;
@@ -152,6 +156,7 @@ public class SelectTag extends IncludeTag {
 		_showEmptyOption = false;
 		_suffix = null;
 		_title = null;
+		_useNamespace = true;
 	}
 
 	protected String getEndPage() {
@@ -242,6 +247,8 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:suffix", _suffix);
 		request.setAttribute("aui:select:title", _title);
 		request.setAttribute("aui:select:value", value);
+		request.setAttribute(
+			"aui:select:useNamespace", String.valueOf(_useNamespace));
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
@@ -275,5 +282,6 @@ public class SelectTag extends IncludeTag {
 	private boolean _showEmptyOption;
 	private String _suffix;
 	private String _title;
+	private boolean _useNamespace = true;
 
 }
