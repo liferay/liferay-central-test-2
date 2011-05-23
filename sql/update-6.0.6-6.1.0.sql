@@ -16,6 +16,8 @@ alter table BookmarksEntry drop column comments;
 
 alter table CalEvent add location STRING null;
 
+drop index IX_975996C0 on Company;
+
 create table DDLRecord (
 	uuid_ VARCHAR(75) null,
 	recordId LONG not null primary key,
@@ -237,6 +239,8 @@ create table LayoutRevision (
 	statusByUserName VARCHAR(75) null,
 	statusDate DATE null
 );
+
+drop index IX_5ABC2905 on LayoutSet;
 
 create table LayoutSetBranch (
 	layoutSetBranchId LONG not null primary key,
