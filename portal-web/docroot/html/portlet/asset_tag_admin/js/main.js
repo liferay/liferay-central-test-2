@@ -86,6 +86,7 @@ AUI().add(
 						instance._tagViewContainer.on(EVENT_CLICK, instance._onTagViewContainerClick, instance);
 
 						instance._tagsAdminListContainer = instance._container.one('.tags-admin-list-container');
+
 						instance._tagsAdminListContainer.plug(A.LoadingMask);
 
 						var namespace = instance._prefixedPortletId;
