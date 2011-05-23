@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
@@ -30,6 +31,7 @@ import com.liferay.portlet.asset.service.base.AssetTagServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetPermission;
 import com.liferay.portlet.asset.service.permission.AssetTagPermission;
 import com.liferay.util.Autocomplete;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,6 +43,7 @@ import java.util.List;
  * @author Alvaro del Castillo
  * @author Eduardo Lundgren
  * @author Bruno Farache
+ * @author Juan Fernández
  */
 public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
@@ -100,7 +103,8 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupId, start, end, obc);
 	}
 
-	public JSONObject getJSONGroupTags(long groupId, int start, int end)
+	public JSONObject getJSONGroupTags(long groupId, String tagName, int start,
+			int end)
 		throws PortalException, SystemException {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -109,8 +113,17 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 
 		jsonObject.put("page", page);
 
-		List<AssetTag> tags = assetTagLocalService.getGroupTags(
-			groupId, start, end);
+		List<AssetTag> tags = new ArrayList<AssetTag>();
+
+		if (Validator.isNotNull(tagName)) {
+			tagName = (CustomSQLUtil.keywords(tagName))[0];
+
+			tags = assetTagLocalService.search(
+				groupId, tagName, new String[]{}, start, end);
+		}
+		else {
+			tags = assetTagLocalService.getGroupTags(groupId, start, end);
+		}
 
 		String tagsJSON = JSONFactoryUtil.looseSerialize(tags);
 
