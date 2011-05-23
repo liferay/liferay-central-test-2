@@ -251,7 +251,7 @@ public class AssetTagServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONObject getJSONGroupTags(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String tagName,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -260,7 +260,7 @@ public class AssetTagServiceHttp {
 					"getJSONGroupTags", _getJSONGroupTagsParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					tagName, start, end);
+					name, start, end);
 
 			Object returnObj = null;
 
