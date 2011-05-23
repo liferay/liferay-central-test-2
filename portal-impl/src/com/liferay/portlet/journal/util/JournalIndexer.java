@@ -530,8 +530,8 @@ public class JournalIndexer extends BaseIndexer {
 
 		List<JournalArticle> draftArticles =
 			JournalArticleLocalServiceUtil.getCompanyArticles(
-				companyId, WorkflowConstants.STATUS_DRAFT,
-				JournalArticleConstants.DEFAULT_VERSION, start, end);
+				companyId, JournalArticleConstants.DEFAULT_VERSION,
+				WorkflowConstants.STATUS_DRAFT, start, end);
 
 		articles.addAll(draftArticles);
 

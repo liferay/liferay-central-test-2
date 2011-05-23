@@ -1211,7 +1211,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List<JournalArticle> getCompanyArticles(
-			long companyId, int status, double version, int start, int end)
+			long companyId, double version, int status, int start, int end)
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
@@ -1240,7 +1240,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public int getCompanyArticlesCount(
-			long companyId, int status, double version, int start, int end)
+			long companyId, double version, int status, int start, int end)
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
@@ -1532,21 +1532,6 @@ public class JournalArticleLocalServiceImpl
 		journalArticlePersistence.update(article, false);
 
 		return article;
-	}
-
-	public void updateTemplateId(
-			long groupId, long classNameId, String oldTemplateId,
-			String newTemplateId)
-		throws SystemException {
-
-		List<JournalArticle> articles = journalArticlePersistence.findByG_C_T(
-			groupId, classNameId, oldTemplateId);
-
-		for (JournalArticle article : articles) {
-			article.setTemplateId(newTemplateId);
-
-			journalArticlePersistence.update(article, false);
-		}
 	}
 
 	public List<JournalArticle> search(
@@ -2409,6 +2394,21 @@ public class JournalArticleLocalServiceImpl
 
 		return updateStatus(
 			userId, article, status, articleURL, serviceContext);
+	}
+
+	public void updateTemplateId(
+			long groupId, long classNameId, String oldTemplateId,
+			String newTemplateId)
+		throws SystemException {
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_C_T(
+			groupId, classNameId, oldTemplateId);
+
+		for (JournalArticle article : articles) {
+			article.setTemplateId(newTemplateId);
+
+			journalArticlePersistence.update(article, false);
+		}
 	}
 
 	protected void checkStructure(Document contentDoc, Element root)
