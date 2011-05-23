@@ -85,9 +85,9 @@ AUI().add(
 
 						instance._tagViewContainer.on(EVENT_CLICK, instance._onTagViewContainerClick, instance);
 
-						instance._tagsAdminListContainer = instance._container.one('.tags-admin-list-container');
+						instance._listContainer = instance._container.one('.tags-admin-list-container');
 
-						instance._tagsAdminListContainer.plug(A.LoadingMask);
+						instance._listContainer.plug(A.LoadingMask);
 
 						var namespace = instance._prefixedPortletId;
 
@@ -101,7 +101,7 @@ AUI().add(
 
 						instance._checkAllTagsCheckbox = checkAllTagsCheckbox;
 
-						instance._prepareSearch();
+						instance._createTagSearch();
 
 						instance._loadData();
 
@@ -265,6 +265,33 @@ AUI().add(
 						return panelPermissionsChange;
 					},
 
+					_createTagSearch: function() {
+						var instance = this;
+
+						var searchInput = A.one('#' + instance._prefixedPortletId + 'tagsAdminSearchInput');
+
+						var tagsSearch = new TagsSearch(
+							{
+								inputNode: searchInput,
+								minQueryLength: 0,
+								queryDelay: 300
+							}
+						);
+
+						tagsSearch.after(
+							'query',
+							function(event) {
+								instance._restartSearch = true;
+
+								instance._loadData();
+							}
+						);
+
+						searchInput.on('keydown', instance._onSearchInputKeyDown, instance);
+
+						instance._tagsSearch = tagsSearch;
+					},
+
 					_createURL: function(action, lifecycle, params) {
 						var instance = this;
 
@@ -366,13 +393,13 @@ AUI().add(
 					_displayTags: function(callback) {
 						var instance = this;
 
-						var loadingMask = instance._tagsAdminListContainer.loadingmask;
+						var loadingMask = instance._listContainer.loadingmask;
 
-						loadingMask.toggle();
+						loadingMask.show();
 
 						instance._getTags(
 							function(result) {
-								loadingMask.toggle();
+								loadingMask.hide();
 
 								instance._prepareTags(result.tags, callback);
 							}
@@ -586,8 +613,6 @@ AUI().add(
 							currentPage = (paginator.get('page') || 1) - 1;
 						}
 
-						instance._lastSearchQuery = query;
-
 						var rowsPerPage = paginator.get('rowsPerPage');
 
 						var start = currentPage * rowsPerPage;
@@ -787,7 +812,7 @@ AUI().add(
 						}
 					},
 
-					_onSearchBoxNodeKeyDown: function(event) {
+					_onSearchInputKeyDown: function(event) {
 						if (event.isKey('ENTER')) {
 							event.halt();
 						}
@@ -939,41 +964,6 @@ AUI().add(
 						var autoFieldsInstance = propertiesTrigger.getData('autoFieldsInstance');
 
 						autoFieldsInstance.reset();
-					},
-
-					_prepareSearch: function() {
-						var instance = this;
-
-						var TagsSearch = A.Base.create(
-							'tagsSearch',
-							A.Base, [A.AutoCompleteBase],
-							{
-								initializer: function () {
-									this._bindUIACBase();
-									this._syncUIACBase();
-								}
-							}
-						);
-
-						var searchBoxNode = A.one('#' + instance._prefixedPortletId + 'tagsAdminSearchInput');
-
-						var tagsSearch = new TagsSearch(
-							{
-								inputNode: searchBoxNode,
-								minQueryLength: 0,
-								queryDelay: 300
-							}
-						);
-
-						tagsSearch.after('query', function(event) {
-							instance._restartSearch = true;
-
-							instance._loadData();
-						});
-
-						searchBoxNode.on('keydown', A.bind(instance._onSearchBoxNodeKeyDown, instance));
-
-						instance._tagsSearch = tagsSearch;
 					},
 
 					_prepareTags: function(tags, callback) {
@@ -1202,10 +1192,24 @@ AUI().add(
 			}
 		);
 
+		var TagsSearch = A.Component.create(
+			{
+				AUGMENTS: [A.AutoCompleteBase],
+				EXTENDS: A.Base,
+				NAME: 'tagssearch',
+				prototype: {
+					initializer: function () {
+						this._bindUIACBase();
+						this._syncUIACBase();
+					}
+				}
+			}
+		);
+
 		Liferay.Portlet.AssetTagsAdmin = AssetTagsAdmin;
 	},
 	'',
 	{
-		requires: ['aui-dialog', 'aui-dialog-iframe', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window', 'aui-paginator', 'aui-loading-mask', 'autocomplete-base']
+		requires: ['aui-dialog', 'aui-dialog-iframe', 'aui-loading-mask', 'aui-paginator', 'autocomplete-base', 'aui-tree-view', 'dd', 'json', 'liferay-portlet-url', 'liferay-util-window']
 	}
 );
