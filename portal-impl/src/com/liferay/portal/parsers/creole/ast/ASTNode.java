@@ -35,7 +35,7 @@ public abstract class ASTNode {
 		_token = token;
 	}
 
-	public abstract void accept(ASTVisitor visitor);
+	public abstract void accept(ASTVisitor astVisitor);
 
 	public Token getToken() {
 		return _token;

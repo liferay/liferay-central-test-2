@@ -40,8 +40,8 @@ public class LinkNode extends ASTNode {
 		_link = link;
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 	public CollectionNode getAltCollectionNode() {
