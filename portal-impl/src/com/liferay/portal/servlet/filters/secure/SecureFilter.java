@@ -205,7 +205,7 @@ public class SecureFilter extends BasePortalFilter {
 
 		HttpSession session = request.getSession();
 
-		session.setAttribute(WebKeys.BASIC_AUTH_ENABLED, true);
+		session.setAttribute(WebKeys.BASIC_AUTH_ENABLED, Boolean.TRUE);
 
 		long userId = GetterUtil.getLong(
 			(String)session.getAttribute(_AUTHENTICATED_USER));

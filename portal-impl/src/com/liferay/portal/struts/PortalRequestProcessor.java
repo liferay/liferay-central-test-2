@@ -138,6 +138,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
+		HttpSession session = request.getSession();
+
+		Boolean basicAuthEnabled = (Boolean)session.getAttribute(
+			WebKeys.BASIC_AUTH_ENABLED);
+
+		session.removeAttribute(WebKeys.BASIC_AUTH_ENABLED);
+
 		String path = super.processPath(request, response);
 
 		ActionMapping actionMapping =
@@ -145,24 +152,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		Action action = StrutsActionRegistry.getAction(path);
 
-		boolean basicAuthEnabled;
-		String lastPath = null;
-		try {
-			basicAuthEnabled = (Boolean) request.getSession().getAttribute(
-					WebKeys.BASIC_AUTH_ENABLED);
-			lastPath = getLastPath(request);
-		}
-		catch (NullPointerException npe) {
-			basicAuthEnabled = false;
-		}
+		if (((basicAuthEnabled != null) && basicAuthEnabled.booleanValue()) ||
+			((actionMapping == null) && (action == null))) {
 
-		if ((basicAuthEnabled) && (Validator.isNotNull(lastPath))) {
-			request.getSession().removeAttribute(WebKeys.BASIC_AUTH_ENABLED);
-			response.sendRedirect(lastPath);
-		}
-
-		if ((actionMapping == null) && (action == null)) {
-			lastPath = getLastPath(request);
+			String lastPath = getLastPath(request);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Last path " + lastPath);
