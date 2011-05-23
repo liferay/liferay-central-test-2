@@ -709,6 +709,7 @@ AUI().add(
 				};
 
 				var checkboxName = checkbox.attr('name');
+
 				checkboxName = checkboxName.replace('Checkbox', '');
 
 				data[checkboxName] = checkbox.attr('checked');
