@@ -17,6 +17,7 @@
 package com.liferay.portal.parsers.creole.parser;
 
 import org.antlr.runtime.*;
+@SuppressWarnings("all")
 public class Creole10Lexer extends Lexer {
 	public static final int T75=75;
 	public static final int T73=73;
