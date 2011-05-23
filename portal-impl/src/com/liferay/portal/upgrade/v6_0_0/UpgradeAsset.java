@@ -527,7 +527,7 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	protected void updateAssetTagsCount() throws Exception {
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("update AssetTag set assetCount = (select count(*) from ");
 		sb.append("AssetEntry inner join AssetEntries_AssetTags on ");

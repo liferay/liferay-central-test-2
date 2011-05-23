@@ -212,7 +212,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(8);
 
 			sb.append("select Permission_.resourceId from Permission_ ");
 			sb.append("inner join Resource_ on Permission_.resourceId = ");
