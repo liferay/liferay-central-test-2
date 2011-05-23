@@ -25,8 +25,6 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
-
-String taglibUrl = null;
 %>
 
 <aui:input cssClass="select-documents yui3-aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
@@ -42,7 +40,7 @@ String taglibUrl = null;
 <liferay-ui:icon-menu align="left" direction="down" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
+	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
 	%>
 
 	<liferay-ui:icon
@@ -82,7 +80,7 @@ String taglibUrl = null;
 	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
 
 		<%
-		taglibUrl = "javascript:" + renderResponse.getNamespace() + "openDocumentTypeView()";
+		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openDocumentTypeView()";
 		%>
 
 		<liferay-ui:icon
@@ -111,7 +109,7 @@ String taglibUrl = null;
 					stack: false,
 					width:820
 				},
-				title: '<liferay-ui:message key="Document Type" />',
+				title: '<liferay-ui:message key="document-type" />',
 				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
 			}
 		);
@@ -124,7 +122,7 @@ String taglibUrl = null;
 					stack: false,
 					width:820
 				},
-				title: '<liferay-ui:message key="Metadata Sets" />',
+				title: '<liferay-ui:message key="metadata-sets" />',
 				uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/view" /></liferay-portlet:renderURL>'
 			}
 		);

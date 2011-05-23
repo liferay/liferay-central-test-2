@@ -16,14 +16,12 @@
 
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
-<%
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
+<liferay-ui:icon-menu align="left" direction="down" icon="" message="sort-by" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
-String taglibUrl = null;
-%>
-
-<liferay-ui:icon-menu align="left" direction="down" icon="" message="sort-by" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>" id="iiu">
+	<%
+	String orderByCol = ParamUtil.getString(request, "orderByCol");
+	String orderByType = ParamUtil.getString(request, "orderByType");
+	%>
 
 	<portlet:resourceURL var="sortByTitle">
 		<portlet:param name="struts_action" value="/document_library/view" />
@@ -34,7 +32,7 @@ String taglibUrl = null;
 	</portlet:resourceURL>
 
 	<%
-	taglibUrl = "javascript:" + liferayPortletResponse.getNamespace() + "sortEntries('" + sortByTitle.toString() + "')";
+	String taglibUrl = "javascript:" + liferayPortletResponse.getNamespace() + "sortEntries('" + sortByTitle.toString() + "')";
 	%>
 
 	<liferay-ui:icon
