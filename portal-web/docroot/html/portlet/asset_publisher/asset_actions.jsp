@@ -28,10 +28,8 @@ if (editPortletURL != null) {
 	editPortletURL.setPortletMode(PortletMode.VIEW);
 }
 
-String referringPortletResource = ParamUtil.getString(renderRequest, "portletResource");
-
-if (Validator.isNotNull(referringPortletResource)) {
-	editPortletURL.setParameter("referringPortletResource", referringPortletResource);
+if (Validator.isNotNull(portletResource)) {
+	editPortletURL.setParameter("referringPortletResource", portletResource);
 }
 else {
 	editPortletURL.setParameter("referringPortletResource", portletDisplay.getId());
