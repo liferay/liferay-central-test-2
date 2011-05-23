@@ -58,10 +58,7 @@ else {
 int start = ParamUtil.getInteger(request, "start");
 int end = ParamUtil.getInteger(request, "end", SearchContainer.DEFAULT_DELTA);
 
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
-
-List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId, start, end, DLUtil.getRepositoryModelOrderByComparator(orderByCol, orderByType));
+List<Folder> folders = DLAppServiceUtil.getFolders(repositoryId, parentFolderId, start, end);
 %>
 
 <ul>
