@@ -25,15 +25,9 @@ long questionId = BeanParamUtil.getLong(question, request, "questionId");
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-Calendar expirationDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-expirationDate.add(Calendar.MONTH, 1);
-
 if (question != null) {
 	if (question.getExpirationDate() != null) {
 		neverExpire = false;
-
-		expirationDate.setTime(question.getExpirationDate());
 	}
 }
 
@@ -90,7 +84,7 @@ if (choiceName > 0) {
 
 		<aui:input name="description" />
 
-		<aui:input disabled="<%= neverExpire %>" name="expirationDate" value="<%= expirationDate %>" />
+		<aui:input disabled="<%= neverExpire %>" name="expirationDate" />
 
 		<%
 		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";

@@ -97,6 +97,14 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				month = cal.get(Calendar.MONTH);
 			}
 
+			int defaultMonthDelta = 0;
+
+			if (hints != null) {
+				defaultMonthDelta = GetterUtil.getInteger(hints.get("default-month-delta"), defaultMonthDelta);
+			}
+
+			month = month + defaultMonthDelta;
+
 			boolean monthNullable = false;
 
 			if (hints != null) {
@@ -109,6 +117,14 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				day = cal.get(Calendar.DATE);
 			}
 
+			int defaultDayDelta = 0;
+
+			if (hints != null) {
+				defaultDayDelta = GetterUtil.getInteger(hints.get("default-day-delta"), defaultDayDelta);
+			}
+
+			day = day + defaultDayDelta;
+
 			boolean dayNullable = false;
 
 			if (hints != null) {
@@ -120,6 +136,14 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			if ((year == -1) && (cal != null)) {
 				year = cal.get(Calendar.YEAR);
 			}
+
+			int defaultYearDelta = 0;
+
+			if (hints != null) {
+				defaultYearDelta = GetterUtil.getInteger(hints.get("default-year-delta"), defaultYearDelta);
+			}
+
+			year = year + defaultYearDelta;
 
 			boolean yearNullable = false;
 

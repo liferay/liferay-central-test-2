@@ -956,7 +956,9 @@
 		</field>
 		<field name="type" type="String" />
 		<field name="displayDate" type="Date" />
-		<field name="expirationDate" type="Date" />
+		<field name="expirationDate" type="Date">
+			<hint name="default-month-delta">1</hint>
+		</field>
 		<field name="priority" type="int" />
 		<field name="alert" type="boolean" />
 	</model>
@@ -1584,8 +1586,12 @@
 		</field>
 		<field name="layoutUuid" type="String" />
 		<field name="displayDate" type="Date" />
-		<field name="expirationDate" type="Date" />
-		<field name="reviewDate" type="Date" />
+		<field name="expirationDate" type="Date">
+			<hint name="default-year-delta">1</hint>
+		</field>
+		<field name="reviewDate" type="Date">
+			<hint name="default-month-delta">9</hint>
+		</field>
 		<field name="indexable" type="boolean">
 			<hint name="default-value">true</hint>
 		</field>
@@ -1882,7 +1888,9 @@
 			<hint-collection name="TEXTAREA" />
 			<validator name="required" />
 		</field>
-		<field name="expirationDate" type="Date" />
+		<field name="expirationDate" type="Date">
+			<hint name="default-month-delta">1</hint>
+		</field>
 		<field name="lastVoteDate" type="Date" />
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsVote">
@@ -1956,7 +1964,9 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="startDate" type="Date" />
-		<field name="endDate" type="Date" />
+		<field name="endDate" type="Date">
+			<hint name="default-month-delta">1</hint>
+		</field>
 		<field name="active" type="boolean" />
 		<field name="limitCategories" type="String">
 			<hint-collection name="TEXTAREA" />

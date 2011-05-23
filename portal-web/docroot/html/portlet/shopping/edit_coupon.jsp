@@ -27,15 +27,9 @@ String code = BeanParamUtil.getString(coupon, request, "code");
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-Calendar endDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-endDate.add(Calendar.MONTH, 1);
-
 if (coupon != null) {
 	if (coupon.getEndDate() != null) {
 		neverExpire = false;
-
-		endDate.setTime(coupon.getEndDate());
 	}
 }
 
@@ -92,7 +86,7 @@ String discountType = BeanParamUtil.getString(coupon, request, "discountType");
 
 		<aui:input name="startDate" />
 
-		<aui:input disabled="<%= neverExpire %>" label="expiration-date" name="endDate" value="<%= endDate %>" />
+		<aui:input disabled="<%= neverExpire %>" label="expiration-date" name="endDate" />
 
 		<%
 		String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('endDate', this.checked);";

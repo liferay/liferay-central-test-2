@@ -21,29 +21,17 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-Calendar expirationDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-expirationDate.add(Calendar.YEAR, 1);
-
 if (article != null) {
 	if (article.getExpirationDate() != null) {
 		neverExpire = false;
-
-		expirationDate.setTime(article.getExpirationDate());
 	}
 }
 
 boolean neverReview = ParamUtil.getBoolean(request, "neverReview", true);
 
-Calendar reviewDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-reviewDate.add(Calendar.MONTH, 9);
-
 if (article != null) {
 	if (article.getReviewDate() != null) {
 		neverReview = false;
-
-		reviewDate.setTime(article.getReviewDate());
 	}
 }
 %>
@@ -60,7 +48,7 @@ if (article != null) {
 <aui:fieldset>
 	<aui:input formName="fm1" name="displayDate" />
 
-	<aui:input disabled="<%= neverExpire %>" formName="fm1" name="expirationDate" value="<%= expirationDate %>" />
+	<aui:input disabled="<%= neverExpire %>" formName="fm1" name="expirationDate" />
 
 	<%
 	String taglibNeverExpireOnClick = renderResponse.getNamespace() + "disableInputDate('expirationDate', this.checked);";
@@ -68,7 +56,7 @@ if (article != null) {
 
 	<aui:input inlineLabel="left" label="never-auto-expire" name="neverExpire" value="<%= neverExpire %>" onClick="<%= taglibNeverExpireOnClick %>" type="checkbox" />
 
-	<aui:input disabled="<%= neverReview %>" formName="fm1" name="reviewDate" value="<%= reviewDate %>" />
+	<aui:input disabled="<%= neverReview %>" formName="fm1" name="reviewDate" />
 
 	<%
 	String taglibNeverReviewOnClick = renderResponse.getNamespace() + "disableInputDate('reviewDate', this.checked);";
