@@ -279,19 +279,21 @@ if (layout != null) {
 								}
 								%>
 
-								<c:if test="<%= (Validator.isNotNull(variationName) && (rootRevisions.size() > 1)) || Validator.isNotNull(layoutRevisionId) %>">
+								<c:if test="<%= Validator.isNotNull(layoutSetBranchName) %>">
 									<span class="last-publication-branch">
 										<liferay-ui:message arguments="<%= layoutSetBranchName %>" key="last-publication-from-x" />
 
-										<span class="last-publication-variation-details">(
-											<c:if test="<%= Validator.isNotNull(variationName) && (rootRevisions.size() > 1) %>">
-												<span class="variation-name"><liferay-ui:message key="variation" />: <strong><%= variationName %></strong></span>
-											</c:if>
+										<c:if test="<%= (Validator.isNotNull(variationName) && (rootRevisions.size() > 1)) || Validator.isNotNull(layoutRevisionId) %>">
+											<span class="last-publication-variation-details">(
+												<c:if test="<%= Validator.isNotNull(variationName) && (rootRevisions.size() > 1) %>">
+													<span class="variation-name"><liferay-ui:message key="variation" />: <strong><%= variationName %></strong></span>
+												</c:if>
 
-											<c:if test="<%= Validator.isNotNull(layoutRevisionId) %>">
-												<span class="layout-version"><liferay-ui:message key="version" />: <strong><%= layoutRevisionId %></strong></span>
-											</c:if>
-										)</span>
+												<c:if test="<%= Validator.isNotNull(layoutRevisionId) %>">
+													<span class="layout-version"><liferay-ui:message key="version" />: <strong><%= layoutRevisionId %></strong></span>
+												</c:if>
+											)</span>
+										</c:if>
 									</span>
 
 									<span class="last-publication-user"><liferay-ui:message arguments="<%= new String[] {LanguageUtil.getTimeDescription(pageContext, (System.currentTimeMillis() - lastImportDate), true), publisherName} %>" key="x-ago-by-x" /></span>
