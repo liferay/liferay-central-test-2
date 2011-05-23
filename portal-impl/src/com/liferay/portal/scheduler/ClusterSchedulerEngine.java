@@ -58,6 +58,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -589,13 +590,22 @@ public class ClusterSchedulerEngine
 		FutureClusterResponses futureClusterResponses =
 			ClusterExecutorUtil.execute(clusterRequest);
 
-		ClusterNodeResponses clusterNodeResponses =
-			futureClusterResponses.get();
+		try {
+			ClusterNodeResponses clusterNodeResponses =
+				futureClusterResponses.get(20, TimeUnit.SECONDS);
 
-		ClusterNodeResponse clusterNodeResponse =
-			clusterNodeResponses.getClusterResponse(address);
+			ClusterNodeResponse clusterNodeResponse =
+				clusterNodeResponses.getClusterResponse(address);
 
-		return clusterNodeResponse.getResult();
+			return clusterNodeResponse.getResult();
+		}
+		catch(Exception e) {
+			_log.error(
+				"Unable to load clustered scheduled jobs infomation from " + 
+					"cluster node (" + address.getDescription() + ")");
+
+			throw new SchedulerException("Failed to start scheduler", e);
+		}
 	}
 
 	protected Object getDeserializedObject(String string) throws Exception {
