@@ -47,7 +47,7 @@
 		<aui:layout cssClass="tags-admin-content">
 			<aui:column columnWidth="35" cssClass="tags-admin-list-container">
 				<div class="results-header">
-					<aui:input cssClass="tag-admin-check" label="tags" name="checkAllTags" type="checkbox" title='<%= LanguageUtil.get(pageContext, "tag-check-all") %>' />
+					<aui:input cssClass="tag-admin-check" label="tags" name="checkAllTags" type="checkbox" title='<%= LanguageUtil.get(pageContext, "check-all-tags") %>' />
 
 					<aui:button cssClass="tag-admin-delete" name="deleteCheckedTags" value="delete" />
 				</div>
