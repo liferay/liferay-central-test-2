@@ -98,8 +98,11 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 				StringPool.BLANK);
 
 			if (Validator.isNotNull(data)) {
-				return JSONFactoryUtil.createJSONObject(
-					"{data=".concat(data).concat("}"));
+				if (!data.startsWith(StringPool.OPEN_CURLY_BRACE)) {
+					data = "{data:".concat(data).concat("}");
+				}
+
+				return JSONFactoryUtil.createJSONObject(data);
 			}
 			else {
 				return null;
