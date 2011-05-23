@@ -599,12 +599,11 @@ public class ClusterSchedulerEngine
 
 			return clusterNodeResponse.getResult();
 		}
-		catch(Exception e) {
-			_log.error(
-				"Unable to load clustered scheduled jobs infomation from " + 
-					"cluster node (" + address.getDescription() + ")");
-
-			throw new SchedulerException("Failed to start scheduler", e);
+		catch (Exception e) {
+			throw new SchedulerException(
+				"Unable to load scheduled jobs from cluster node " +
+					address.getDescription(),
+				e);
 		}
 	}
 
