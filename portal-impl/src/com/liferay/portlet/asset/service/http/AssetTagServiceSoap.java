@@ -151,11 +151,11 @@ public class AssetTagServiceSoap {
 		}
 	}
 
-	public static java.lang.String getJSONGroupTags(long groupId, int start,
-		int end) throws RemoteException {
+	public static java.lang.String getJSONGroupTags(long groupId,
+		java.lang.String tagName, int start, int end) throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONObject returnValue = AssetTagServiceUtil.getJSONGroupTags(groupId,
-					start, end);
+					tagName, start, end);
 
 			return returnValue.toString();
 		}
