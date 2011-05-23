@@ -32,7 +32,6 @@ public class UnorderedListNode extends BaseListNode {
 		super(itemsNode);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

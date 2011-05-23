@@ -37,7 +37,6 @@ public class HeadingNode extends ASTNode {
 		_level = level;
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

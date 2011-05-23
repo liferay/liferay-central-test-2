@@ -35,7 +35,6 @@ public class NoWikiSectionNode extends ASTNode {
 		_content = content;
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

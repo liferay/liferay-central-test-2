@@ -25,7 +25,6 @@ public class FormattedTextNode extends TextNode {
 		super(tokenType);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

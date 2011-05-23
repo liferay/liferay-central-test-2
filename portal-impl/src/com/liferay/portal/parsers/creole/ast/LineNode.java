@@ -32,7 +32,6 @@ public class LineNode extends BaseParentableNode {
 		super(collectionNode);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

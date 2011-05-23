@@ -35,7 +35,6 @@ public class TableNode extends BaseParentableNode {
 		super(rowsNode);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

@@ -28,7 +28,6 @@ public class ForcedEndOfLineNode extends ASTNode {
 		super(tokenType);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

@@ -29,7 +29,6 @@ public class UnorderedListItemNode extends ItemNode {
 		super(level, collectionNode);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

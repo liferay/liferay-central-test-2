@@ -40,7 +40,6 @@ public class LinkNode extends ASTNode {
 		_link = link;
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

@@ -34,7 +34,6 @@ public class TableDataNode extends TableCellNode {
 		super(collectionNode);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

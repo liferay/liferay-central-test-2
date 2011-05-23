@@ -33,7 +33,6 @@ public class UnformattedTextNode extends TextNode {
 		super(node);
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}

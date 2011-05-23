@@ -40,7 +40,6 @@ public class ImageNode extends ASTNode {
 		_uri = uri;
 	}
 
-	@Override
 	public void accept(ASTVisitor visitor) {
 		visitor.visit(this);
 	}
