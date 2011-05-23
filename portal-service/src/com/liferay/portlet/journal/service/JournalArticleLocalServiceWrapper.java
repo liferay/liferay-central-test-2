@@ -627,10 +627,24 @@ public class JournalArticleLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
+		long companyId, int status, double version, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleLocalService.getCompanyArticles(companyId,
+			status, version, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
 		long companyId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.getCompanyArticles(companyId,
 			status, start, end);
+	}
+
+	public int getCompanyArticlesCount(long companyId, int status,
+		double version, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleLocalService.getCompanyArticlesCount(companyId,
+			status, version, start, end);
 	}
 
 	public int getCompanyArticlesCount(long companyId, int status)

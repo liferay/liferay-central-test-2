@@ -647,9 +647,24 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
+		long companyId, int status, double version, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getCompanyArticles(companyId, status, version, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getCompanyArticles(
 		long companyId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCompanyArticles(companyId, status, start, end);
+	}
+
+	public static int getCompanyArticlesCount(long companyId, int status,
+		double version, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getCompanyArticlesCount(companyId, status, version, start,
+			end);
 	}
 
 	public static int getCompanyArticlesCount(long companyId, int status)

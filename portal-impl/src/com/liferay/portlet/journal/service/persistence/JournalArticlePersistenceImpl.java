@@ -253,6 +253,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_ST",
 			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_C_V = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_V",
+			new String[] {
+				Long.class.getName(), Double.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_V = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_V",
+			new String[] { Long.class.getName(), Double.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_ST = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findByC_ST",
@@ -372,6 +385,23 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			FINDER_CLASS_NAME_LIST, "countByG_UT_ST",
 			new String[] {
 				Long.class.getName(), String.class.getName(),
+				Integer.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_FIND_BY_C_V_ST = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByC_V_ST",
+			new String[] {
+				Long.class.getName(), Double.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_V_ST = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
+			JournalArticleModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByC_V_ST",
+			new String[] {
+				Long.class.getName(), Double.class.getName(),
 				Integer.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
@@ -7834,6 +7864,368 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Finds all the journal articles where companyId = &#63; and version = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByC_V(long companyId, double version)
+		throws SystemException {
+		return findByC_V(companyId, version, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the journal articles where companyId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByC_V(long companyId, double version,
+		int start, int end) throws SystemException {
+		return findByC_V(companyId, version, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the journal articles where companyId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByC_V(long companyId, double version,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, version,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_V,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_V_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_V_VERSION_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(version);
+
+				list = (List<JournalArticle>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_V,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_V,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first journal article in the ordered set where companyId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByC_V_First(long companyId, double version,
+		OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		List<JournalArticle> list = findByC_V(companyId, version, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", version=");
+			msg.append(version);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last journal article in the ordered set where companyId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByC_V_Last(long companyId, double version,
+		OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		int count = countByC_V(companyId, version);
+
+		List<JournalArticle> list = findByC_V(companyId, version, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", version=");
+			msg.append(version);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where companyId = &#63; and version = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle[] findByC_V_PrevAndNext(long id, long companyId,
+		double version, OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByPrimaryKey(id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			JournalArticle[] array = new JournalArticleImpl[3];
+
+			array[0] = getByC_V_PrevAndNext(session, journalArticle, companyId,
+					version, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByC_V_PrevAndNext(session, journalArticle, companyId,
+					version, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByC_V_PrevAndNext(Session session,
+		JournalArticle journalArticle, long companyId, double version,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_V_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_V_VERSION_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(version);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the journal articles where companyId = &#63; and status = &#63;.
 	 *
 	 * @param companyId the company ID to search with
@@ -11764,6 +12156,388 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Finds all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @return the matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByC_V_ST(long companyId, double version,
+		int status) throws SystemException {
+		return findByC_V_ST(companyId, version, status, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @return the range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByC_V_ST(long companyId, double version,
+		int status, int start, int end) throws SystemException {
+		return findByC_V_ST(companyId, version, status, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @param start the lower bound of the range of journal articles to return
+	 * @param end the upper bound of the range of journal articles to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<JournalArticle> findByC_V_ST(long companyId, double version,
+		int status, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, version, status,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<JournalArticle> list = (List<JournalArticle>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_V_ST,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_V_ST_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_V_ST_VERSION_2);
+
+			query.append(_FINDER_COLUMN_C_V_ST_STATUS_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(version);
+
+				qPos.add(status);
+
+				list = (List<JournalArticle>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_V_ST,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_V_ST,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first journal article in the ordered set where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByC_V_ST_First(long companyId, double version,
+		int status, OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		List<JournalArticle> list = findByC_V_ST(companyId, version, status, 0,
+				1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", version=");
+			msg.append(version);
+
+			msg.append(", status=");
+			msg.append(status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last journal article in the ordered set where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle findByC_V_ST_Last(long companyId, double version,
+		int status, OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		int count = countByC_V_ST(companyId, version, status);
+
+		List<JournalArticle> list = findByC_V_ST(companyId, version, status,
+				count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", version=");
+			msg.append(version);
+
+			msg.append(", status=");
+			msg.append(status);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchArticleException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the journal articles before and after the current journal article in the ordered set where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param id the primary key of the current journal article
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next journal article
+	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle[] findByC_V_ST_PrevAndNext(long id, long companyId,
+		double version, int status, OrderByComparator orderByComparator)
+		throws NoSuchArticleException, SystemException {
+		JournalArticle journalArticle = findByPrimaryKey(id);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			JournalArticle[] array = new JournalArticleImpl[3];
+
+			array[0] = getByC_V_ST_PrevAndNext(session, journalArticle,
+					companyId, version, status, orderByComparator, true);
+
+			array[1] = journalArticle;
+
+			array[2] = getByC_V_ST_PrevAndNext(session, journalArticle,
+					companyId, version, status, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected JournalArticle getByC_V_ST_PrevAndNext(Session session,
+		JournalArticle journalArticle, long companyId, double version,
+		int status, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_JOURNALARTICLE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_V_ST_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_V_ST_VERSION_2);
+
+		query.append(_FINDER_COLUMN_C_V_ST_STATUS_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(JournalArticleModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(version);
+
+		qPos.add(status);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(journalArticle);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<JournalArticle> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the journal articles.
 	 *
 	 * @return the journal articles
@@ -12048,6 +12822,20 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Removes all the journal articles where companyId = &#63; and version = &#63; from the database.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_V(long companyId, double version)
+		throws SystemException {
+		for (JournalArticle journalArticle : findByC_V(companyId, version)) {
+			journalArticlePersistence.remove(journalArticle);
+		}
+	}
+
+	/**
 	 * Removes all the journal articles where companyId = &#63; and status = &#63; from the database.
 	 *
 	 * @param companyId the company ID to search with
@@ -12167,6 +12955,22 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByG_UT_ST(long groupId, String urlTitle, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_UT_ST(groupId, urlTitle,
+				status)) {
+			journalArticlePersistence.remove(journalArticle);
+		}
+	}
+
+	/**
+	 * Removes all the journal articles where companyId = &#63; and version = &#63; and status = &#63; from the database.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_V_ST(long companyId, double version, int status)
+		throws SystemException {
+		for (JournalArticle journalArticle : findByC_V_ST(companyId, version,
 				status)) {
 			journalArticlePersistence.remove(journalArticle);
 		}
@@ -13430,6 +14234,65 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Counts all the journal articles where companyId = &#63; and version = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_V(long companyId, double version)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, version };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_V,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_V_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_V_VERSION_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(version);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_V, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the journal articles where companyId = &#63; and status = &#63;.
 	 *
 	 * @param companyId the company ID to search with
@@ -14289,6 +15152,70 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	}
 
 	/**
+	 * Counts all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	 *
+	 * @param companyId the company ID to search with
+	 * @param version the version to search with
+	 * @param status the status to search with
+	 * @return the number of matching journal articles
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_V_ST(long companyId, double version, int status)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, version, status };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_V_ST,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_JOURNALARTICLE_WHERE);
+
+			query.append(_FINDER_COLUMN_C_V_ST_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_V_ST_VERSION_2);
+
+			query.append(_FINDER_COLUMN_C_V_ST_STATUS_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(version);
+
+				qPos.add(status);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_V_ST,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the journal articles.
 	 *
 	 * @return the number of journal articles
@@ -14443,6 +15370,8 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_L_LAYOUTUUID_3 = "(journalArticle.layoutUuid IS NULL OR journalArticle.layoutUuid = ?)";
 	private static final String _FINDER_COLUMN_G_ST_GROUPID_2 = "journalArticle.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_ST_STATUS_2 = "journalArticle.status = ?";
+	private static final String _FINDER_COLUMN_C_V_COMPANYID_2 = "journalArticle.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_V_VERSION_2 = "journalArticle.version = ?";
 	private static final String _FINDER_COLUMN_C_ST_COMPANYID_2 = "journalArticle.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_ST_STATUS_2 = "journalArticle.status = ?";
 	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "journalArticle.groupId = ? AND ";
@@ -14478,6 +15407,9 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FINDER_COLUMN_G_UT_ST_URLTITLE_2 = "journalArticle.urlTitle = ? AND ";
 	private static final String _FINDER_COLUMN_G_UT_ST_URLTITLE_3 = "(journalArticle.urlTitle IS NULL OR journalArticle.urlTitle = ?) AND ";
 	private static final String _FINDER_COLUMN_G_UT_ST_STATUS_2 = "journalArticle.status = ?";
+	private static final String _FINDER_COLUMN_C_V_ST_COMPANYID_2 = "journalArticle.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_V_ST_VERSION_2 = "journalArticle.version = ? AND ";
+	private static final String _FINDER_COLUMN_C_V_ST_STATUS_2 = "journalArticle.status = ?";
 	private static final String _FILTER_SQL_SELECT_JOURNALARTICLE_WHERE = "SELECT DISTINCT {journalArticle.*} FROM JournalArticle journalArticle WHERE ";
 	private static final String _FILTER_SQL_SELECT_JOURNALARTICLE_NO_INLINE_DISTINCT_WHERE_1 =
 		"SELECT {JournalArticle.*} FROM (SELECT DISTINCT journalArticle.id FROM JournalArticle journalArticle WHERE ";

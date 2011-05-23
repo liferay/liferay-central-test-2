@@ -2324,6 +2324,134 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Finds all the journal articles where companyId = &#63; and version = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @return the matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_V(
+		long companyId, double version)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_V(companyId, version);
+	}
+
+	/**
+	* Finds a range of all the journal articles where companyId = &#63; and version = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @return the range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_V(
+		long companyId, double version, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_V(companyId, version, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the journal articles where companyId = &#63; and version = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_V(
+		long companyId, double version, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_V(companyId, version, start, end, orderByComparator);
+	}
+
+	/**
+	* Finds the first journal article in the ordered set where companyId = &#63; and version = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_V_First(
+		long companyId, double version,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByC_V_First(companyId, version, orderByComparator);
+	}
+
+	/**
+	* Finds the last journal article in the ordered set where companyId = &#63; and version = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_V_Last(
+		long companyId, double version,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByC_V_Last(companyId, version, orderByComparator);
+	}
+
+	/**
+	* Finds the journal articles before and after the current journal article in the ordered set where companyId = &#63; and version = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_V_PrevAndNext(
+		long id, long companyId, double version,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByC_V_PrevAndNext(id, companyId, version,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where companyId = &#63; and status = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -3516,6 +3644,144 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Finds all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @return the matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_V_ST(
+		long companyId, double version, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByC_V_ST(companyId, version, status);
+	}
+
+	/**
+	* Finds a range of all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @return the range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_V_ST(
+		long companyId, double version, int status, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_V_ST(companyId, version, status, start, end);
+	}
+
+	/**
+	* Finds an ordered range of all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @param start the lower bound of the range of journal articles to return
+	* @param end the upper bound of the range of journal articles to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_V_ST(
+		long companyId, double version, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByC_V_ST(companyId, version, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the first journal article in the ordered set where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_V_ST_First(
+		long companyId, double version, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByC_V_ST_First(companyId, version, status,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the last journal article in the ordered set where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle findByC_V_ST_Last(
+		long companyId, double version, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByC_V_ST_Last(companyId, version, status,
+			orderByComparator);
+	}
+
+	/**
+	* Finds the journal articles before and after the current journal article in the ordered set where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_V_ST_PrevAndNext(
+		long id, long companyId, double version, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .findByC_V_ST_PrevAndNext(id, companyId, version, status,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles.
 	*
 	* @return the journal articles
@@ -3717,6 +3983,18 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Removes all the journal articles where companyId = &#63; and version = &#63; from the database.
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_V(long companyId, double version)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_V(companyId, version);
+	}
+
+	/**
 	* Removes all the journal articles where companyId = &#63; and status = &#63; from the database.
 	*
 	* @param companyId the company ID to search with
@@ -3825,6 +4103,19 @@ public class JournalArticleUtil {
 	public static void removeByG_UT_ST(long groupId, java.lang.String urlTitle,
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeByG_UT_ST(groupId, urlTitle, status);
+	}
+
+	/**
+	* Removes all the journal articles where companyId = &#63; and version = &#63; and status = &#63; from the database.
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_V_ST(long companyId, double version, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByC_V_ST(companyId, version, status);
 	}
 
 	/**
@@ -4093,6 +4384,19 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Counts all the journal articles where companyId = &#63; and version = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @return the number of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_V(long companyId, double version)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_V(companyId, version);
+	}
+
+	/**
 	* Counts all the journal articles where companyId = &#63; and status = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -4267,6 +4571,20 @@ public class JournalArticleUtil {
 		java.lang.String urlTitle, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().filterCountByG_UT_ST(groupId, urlTitle, status);
+	}
+
+	/**
+	* Counts all the journal articles where companyId = &#63; and version = &#63; and status = &#63;.
+	*
+	* @param companyId the company ID to search with
+	* @param version the version to search with
+	* @param status the status to search with
+	* @return the number of matching journal articles
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_V_ST(long companyId, double version, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_V_ST(companyId, version, status);
 	}
 
 	/**
