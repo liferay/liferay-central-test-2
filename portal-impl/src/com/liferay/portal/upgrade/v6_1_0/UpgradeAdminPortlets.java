@@ -215,18 +215,15 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 			StringBundler sb = new StringBundler(9);
 
 			sb.append("select Permission_.resourceId from Permission_ ");
-			sb.append("inner join Resource_ on ");
-			sb.append("Permission_.resourceId = Resource_.resourceId and ");
-			sb.append("Permission_.actionId = 'ACCESS_IN_CONTROL_PANEL' ");
-			sb.append("inner join ResourceCode on ");
+			sb.append("inner join Resource_ on Permission_.resourceId = ");
+			sb.append("Resource_.resourceId and Permission_.actionId = ");
+			sb.append("'ACCESS_IN_CONTROL_PANEL' inner join ResourceCode on ");
 			sb.append("ResourceCode.codeId = Resource_.codeId and ");
 			sb.append("ResourceCode.name = '");
 			sb.append(name);
 			sb.append("'");
 
 			String sql = sb.toString();
-
-			System.out.println(sql);
 
 			ps = con.prepareStatement(sql);
 

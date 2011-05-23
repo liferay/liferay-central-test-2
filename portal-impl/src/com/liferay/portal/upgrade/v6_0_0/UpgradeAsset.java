@@ -529,12 +529,11 @@ public class UpgradeAsset extends UpgradeProcess {
 	protected void updateAssetTagsCount() throws Exception {
 		StringBundler sb = new StringBundler(6);
 
-		sb.append("update AssetTag set assetCount = (");
-		sb.append("select count(*) from AssetEntry inner join ");
-		sb.append("AssetEntries_AssetTags on ");
+		sb.append("update AssetTag set assetCount = (select count(*) from ");
+		sb.append("AssetEntry inner join AssetEntries_AssetTags on ");
 		sb.append("AssetEntry.entryId = AssetEntries_AssetTags.entryId ");
-		sb.append("where AssetEntry.visible = TRUE and ");
-		sb.append("AssetTag.tagId = AssetEntries_AssetTags.tagId)");
+		sb.append("where AssetEntry.visible = TRUE and AssetTag.tagId = ");
+		sb.append("AssetEntries_AssetTags.tagId)");
 
 		runSQL(sb.toString());
 	}
