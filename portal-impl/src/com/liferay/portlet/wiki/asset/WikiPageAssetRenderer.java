@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.wiki.asset;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -25,7 +23,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageConstants;
@@ -37,8 +34,6 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Julio Camarero
@@ -96,24 +91,17 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
-		throws PortalException, SystemException {
+		throws Exception {
 
-		HttpServletRequest request =
-			liferayPortletRequest.getHttpServletRequest();
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletURL editPortletURL = PortletURLFactoryUtil.create(
-			request, PortletKeys.WIKI, getControlPanelPlid(themeDisplay),
+		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
+			getControlPanelPlid(liferayPortletRequest), PortletKeys.WIKI,
 			PortletRequest.RENDER_PHASE);
 
-		editPortletURL.setParameter("struts_action", "/wiki/edit_page");
-		editPortletURL.setParameter(
-			"nodeId", String.valueOf(_page.getNodeId()));
-		editPortletURL.setParameter("title", _page.getTitle());
+		portletURL.setParameter("struts_action", "/wiki/edit_page");
+		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));
+		portletURL.setParameter("title", _page.getTitle());
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public PortletURL getURLExport(

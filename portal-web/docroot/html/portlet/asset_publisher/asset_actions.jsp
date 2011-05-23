@@ -42,11 +42,15 @@ Group stageableGroup = themeDisplay.getScopeGroup();
 if (themeDisplay.getScopeGroup().isLayout()) {
 	stageableGroup = layout.getGroup();
 }
-String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + editPortletURL.toString() + "'});";
 %>
 
 <c:if test="<%= assetRenderer.hasEditPermission(permissionChecker) && (editPortletURL != null) && !stageableGroup.hasStagingGroup() %>">
 	<div class="lfr-meta-actions asset-actions">
+
+		<%
+		String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + editPortletURL.toString() + "'});";
+		%>
+
 		<liferay-ui:icon
 			image="edit"
 			label="<%= showIconLabel %>"

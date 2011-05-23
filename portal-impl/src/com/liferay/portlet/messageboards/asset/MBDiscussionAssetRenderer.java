@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.messageboards.asset;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -46,7 +44,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		HttpServletRequest request =
 			liferayPortletRequest.getHttpServletRequest();
@@ -65,6 +63,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 
 		return editPortletURL;
 	}
+
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,

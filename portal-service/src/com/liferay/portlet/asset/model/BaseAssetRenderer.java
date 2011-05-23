@@ -29,6 +29,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Jorge Ferrer
  * @author Sergio González
@@ -107,6 +109,23 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 
 	public boolean isPrintable() {
 		return false;
+	}
+
+	protected long getControlPanelPlid(
+			LiferayPortletRequest liferayPortletRequest)
+		throws PortalException, SystemException {
+
+		HttpServletRequest request =
+			liferayPortletRequest.getHttpServletRequest();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+			themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
+
+		return LayoutLocalServiceUtil.getDefaultPlid(
+			controlPanelGroup.getGroupId(), true);
 	}
 
 	protected long getControlPanelPlid(ThemeDisplay themeDisplay)
