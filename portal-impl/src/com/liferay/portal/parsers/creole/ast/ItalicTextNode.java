@@ -21,16 +21,16 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
  */
 public class ItalicTextNode extends FormattedTextNode {
 
+	public ItalicTextNode(ASTNode astNode) {
+		super(astNode);
+	}
+
 	public ItalicTextNode(String content) {
 		super(content);
 	}
 
-	public ItalicTextNode(ASTNode node) {
-		super(node);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

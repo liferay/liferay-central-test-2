@@ -27,16 +27,16 @@ public class TableNode extends BaseParentableNode {
 	public TableNode() {
 	}
 
+	public TableNode(CollectionNode collectionNode) {
+		super(collectionNode);
+	}
+
 	public TableNode(int tokenType) {
 		super(tokenType);
 	}
 
-	public TableNode(CollectionNode rowsNode) {
-		super(rowsNode);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

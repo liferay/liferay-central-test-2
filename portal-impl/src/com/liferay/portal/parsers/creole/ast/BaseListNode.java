@@ -22,12 +22,12 @@ public abstract class BaseListNode extends BaseParentableNode {
 	public BaseListNode() {
 	}
 
-	public BaseListNode(int token) {
-		super(token);
+	public BaseListNode(CollectionNode collectionNode) {
+		super(collectionNode);
 	}
 
-	public BaseListNode(CollectionNode itemsNode) {
-		super(itemsNode);
+	public BaseListNode(int token) {
+		super(token);
 	}
 
 }

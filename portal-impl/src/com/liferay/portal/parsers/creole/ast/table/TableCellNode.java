@@ -26,12 +26,12 @@ public abstract class TableCellNode extends BaseParentableNode {
 	public TableCellNode() {
 	}
 
-	public TableCellNode(int tokenType) {
-		super(tokenType);
-	}
-
 	public TableCellNode(CollectionNode collectionNode) {
 		super(collectionNode);
+	}
+
+	public TableCellNode(int tokenType) {
+		super(tokenType);
 	}
 
 }

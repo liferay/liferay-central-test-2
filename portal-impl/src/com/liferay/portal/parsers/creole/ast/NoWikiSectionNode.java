@@ -25,18 +25,18 @@ public class NoWikiSectionNode extends ASTNode {
 		this(tokenType, null);
 	}
 
-	public NoWikiSectionNode(String content) {
-		_content = content;
-	}
-
 	public NoWikiSectionNode(int tokenType, String content) {
 		super(tokenType);
 
 		_content = content;
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public NoWikiSectionNode(String content) {
+		_content = content;
+	}
+
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 	public String getContent() {

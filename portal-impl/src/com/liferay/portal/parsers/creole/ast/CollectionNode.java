@@ -31,30 +31,30 @@ public class CollectionNode extends ASTNode {
 		super(token);
 	}
 
-	public CollectionNode(List<ASTNode> nodes) {
-		_nodes = nodes;
+	public CollectionNode(List<ASTNode> astNodes) {
+		_astNodes = astNodes;
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
-	public void add(ASTNode node) {
-		_nodes.add(node);
+	public void add(ASTNode astNode) {
+		_astNodes.add(astNode);
 	}
 
 	public ASTNode get(int position) {
-		return _nodes.get(position);
+		return _astNodes.get(position);
 	}
 
-	public List<ASTNode> getNodes() {
-		return _nodes;
+	public List<ASTNode> getASTNodes() {
+		return _astNodes;
 	}
 
 	public int size() {
-		return _nodes.size();
+		return _astNodes.size();
 	}
 
-	private List<ASTNode> _nodes = new ArrayList<ASTNode>();
+	private List<ASTNode> _astNodes = new ArrayList<ASTNode>();
 
 }

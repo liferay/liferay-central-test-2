@@ -17,9 +17,6 @@ package com.liferay.portal.parsers.creole.ast;
 import java.util.List;
 
 /**
- * This class offers some funcionallity to those nodes which need to represent
- * some relationship parent-child or similar
- *
  * @author Miguel Pastor
  */
 public abstract class BaseParentableNode extends ASTNode {
@@ -27,31 +24,31 @@ public abstract class BaseParentableNode extends ASTNode {
 	public BaseParentableNode() {
 	}
 
-	public BaseParentableNode(int tokenType) {
-		super(tokenType);
-	}
-
 	public BaseParentableNode(CollectionNode collectionNode) {
 		_collectionNode = collectionNode;
 	}
 
-	public void addChildNode(ASTNode node) {
-		_collectionNode.add(node);
+	public BaseParentableNode(int tokenType) {
+		super(tokenType);
 	}
 
-	public ASTNode getChildNode(int position) {
+	public void addChildASTNode(ASTNode astNode) {
+		_collectionNode.add(astNode);
+	}
+
+	public ASTNode getChildASTNode(int position) {
 		return _collectionNode.get(position);
 	}
 
-	public List<ASTNode> getChildNodes() {
-		return _collectionNode.getNodes();
+	public List<ASTNode> getChildASTNodes() {
+		return _collectionNode.getASTNodes();
 	}
 
-	public int getNumOfChildNodes() {
+	public int getChildASTNodesCount() {
 		return _collectionNode.size();
 	}
 
-	public void setChildNodes(CollectionNode collectionNode) {
+	public void setASTChildNodes(CollectionNode collectionNode) {
 		_collectionNode = collectionNode;
 	}
 

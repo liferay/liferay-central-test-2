@@ -38,55 +38,52 @@ import com.liferay.portal.parsers.creole.ast.table.TableHeaderNode;
 import com.liferay.portal.parsers.creole.ast.table.TableNode;
 
 /**
- * Interface for all the visitors needing to traverse the AST
- * built by the parser.
- *
  * @author Miguel Pastor
  */
 public interface ASTVisitor {
 
-	void visit(BoldTextNode node);
+	public void visit(BoldTextNode boldTextNode);
 
-	void visit(TableDataNode node);
+	public void visit(CollectionNode collectionNode);
 
-	void visit(TableHeaderNode node);
+	public void visit(ForcedEndOfLineNode forcedEndOfLineNode);
 
-	void visit(CollectionNode node);
+	public void visit(FormattedTextNode formattedTextNode);
 
-	void visit(ForcedEndOfLineNode node);
+	public void visit(HeadingNode headingNode);
 
-	void visit(FormattedTextNode node);
+	public void visit(HorizontalNode horizontalNode);
 
-	void visit(HeadingNode node);
+	public void visit(ImageNode imageNode);
 
-	void visit(HorizontalNode node);
+	public void visit(ItalicTextNode italicTextNode);
 
-	void visit(ImageNode node);
+	public void visit(LineNode lineNode);
 
-	void visit(ItalicTextNode node);
+	public void visit(LinkNode linkNode);
 
-	void visit(LineNode node);
+	public void visit(NoWikiSectionNode noWikiSectionNode);
 
-	void visit(LinkNode node);
+	public void visit(OrderedListItemNode orderedListItemNode);
 
-	void visit(NoWikiSectionNode node);
+	public void visit(OrderedListNode orderedListNode);
 
-	void visit(OrderedListItemNode node);
+	public void visit(ParagraphNode paragraphNode);
 
-	void visit(OrderedListNode node);
+	public void visit(ScapedNode scapedNode);
 
-	void visit(ParagraphNode node);
+	public void visit(TableDataNode tableDataNode);
 
-	void visit(ScapedNode node);
+	public void visit(TableHeaderNode tableHeaderNode);
 
-	void visit(TableNode node);
+	public void visit(TableNode tableNode);
 
-	void visit(UnformattedTextNode node);
+	public void visit(UnformattedTextNode unformattedTextNode);
 
-	void visit(UnorderedListItemNode node);
+	public void visit(UnorderedListItemNode unorderedListItemNode);
 
-	void visit(UnorderedListNode node);
+	public void visit(UnorderedListNode unorderedListNode);
 
-	void visit(WikiPageNode node);
+	public void visit(WikiPageNode wikiPageNode);
 
 }

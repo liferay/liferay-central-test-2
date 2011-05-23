@@ -21,16 +21,16 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
  */
 public class BoldTextNode extends FormattedTextNode {
 
+	public BoldTextNode(ASTNode astNode) {
+		super(astNode);
+	}
+
 	public BoldTextNode(String content) {
 		super(content);
 	}
 
-	public BoldTextNode(ASTNode node) {
-		super(node);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

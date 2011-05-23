@@ -24,16 +24,16 @@ public class OrderedListNode extends BaseListNode {
 	public OrderedListNode() {
 	}
 
+	public OrderedListNode(CollectionNode collectionNode) {
+		super(collectionNode);
+	}
+
 	public OrderedListNode(int tokenType) {
 		super(tokenType);
 	}
 
-	public OrderedListNode(CollectionNode itemsNode) {
-		super(itemsNode);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

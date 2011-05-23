@@ -26,16 +26,16 @@ public class TableDataNode extends TableCellNode {
 	public TableDataNode() {
 	}
 
-	public TableDataNode(int tokenType) {
-		super(tokenType);
-	}
-
 	public TableDataNode(CollectionNode collectionNode) {
 		super(collectionNode);
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public TableDataNode(int tokenType) {
+		super(tokenType);
+	}
+
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

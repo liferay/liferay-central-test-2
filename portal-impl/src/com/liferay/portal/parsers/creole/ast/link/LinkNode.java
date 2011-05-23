@@ -44,27 +44,32 @@ public class LinkNode extends ASTNode {
 		visitor.visit(this);
 	}
 
-	public CollectionNode getAlternative() {
-		return _altNode;
+	public CollectionNode getAltCollectionNode() {
+		return _altCollectionNode;
 	}
 
 	public String getLink() {
 		return _link;
 	}
 
-	public boolean hasAlternative() {
-		return _altNode != null;
+	public boolean hasAltCollectionNode() {
+		if (_altCollectionNode != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
-	public void setAltNode(CollectionNode altNode) {
-		_altNode = altNode;
+	public void setAltCollectionNode(CollectionNode altCollectionNode) {
+		_altCollectionNode = altCollectionNode;
 	}
 
 	public void setLink(String link) {
 		_link = link;
 	}
 
-	private CollectionNode _altNode;
+	private CollectionNode _altCollectionNode;
 	private String _link;
 
 }

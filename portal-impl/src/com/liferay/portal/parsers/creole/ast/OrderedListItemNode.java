@@ -25,12 +25,12 @@ public class OrderedListItemNode extends ItemNode {
 		super(tokenType);
 	}
 
-	public OrderedListItemNode(int level, CollectionNode itemsnNode) {
-		super(level, itemsnNode);
+	public OrderedListItemNode(int level, CollectionNode collectionNode) {
+		super(level, collectionNode);
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

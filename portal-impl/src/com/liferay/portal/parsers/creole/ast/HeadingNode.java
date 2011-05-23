@@ -37,8 +37,8 @@ public class HeadingNode extends ASTNode {
 		_level = level;
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 	public String getContent() {

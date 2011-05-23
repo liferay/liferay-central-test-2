@@ -24,47 +24,54 @@ public class ImageNode extends ASTNode {
 	public ImageNode() {
 	}
 
+	public ImageNode(CollectionNode altCollectionNode, String uri) {
+		_altCollectionNode = altCollectionNode;
+		_uri = uri;
+	}
+
 	public ImageNode(int token) {
 		super(token);
 	}
 
-	public ImageNode(int tokenType, CollectionNode altNode, String uri) {
+	public ImageNode(
+		int tokenType, CollectionNode altCollectionNode, String uri) {
+
 		this(tokenType);
 
-		_altNode = altNode;
+		_altCollectionNode = altCollectionNode;
 		_uri = uri;
 	}
 
-	public ImageNode(CollectionNode altNode, String uri) {
-		_altNode = altNode;
-		_uri = uri;
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
-	}
-
-	public boolean hasAltNode() {
-		return _altNode != null;
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 	public CollectionNode getAltNode() {
-		return _altNode;
+		return _altCollectionNode;
 	}
 
 	public String getUri() {
 		return _uri;
 	}
 
+	public boolean hasAltCollectionNode() {
+		if (_altCollectionNode != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public void setAltNode(CollectionNode altNode) {
-		_altNode = altNode;
+		_altCollectionNode = altNode;
 	}
 
 	public void setUri(String uri) {
 		_uri = uri;
 	}
 
-	private CollectionNode _altNode;
+	private CollectionNode _altCollectionNode;
 	private String _uri;
 
 }

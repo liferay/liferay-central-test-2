@@ -24,16 +24,16 @@ public class ParagraphNode extends BaseParentableNode {
 	public ParagraphNode() {
 	}
 
+	public ParagraphNode(CollectionNode collectionNode) {
+		super(collectionNode);
+	}
+
 	public ParagraphNode(int tokenType) {
 		super(tokenType);
 	}
 
-	public ParagraphNode(CollectionNode linesNode) {
-		super(linesNode);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

@@ -24,16 +24,16 @@ public class LineNode extends BaseParentableNode {
 	public LineNode() {
 	}
 
-	public LineNode(int token) {
-		super(token);
-	}
-
 	public LineNode(CollectionNode collectionNode) {
 		super(collectionNode);
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public LineNode(int token) {
+		super(token);
+	}
+
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

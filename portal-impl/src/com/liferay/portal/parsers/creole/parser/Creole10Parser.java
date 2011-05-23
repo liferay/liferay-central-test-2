@@ -17,7 +17,6 @@
 package com.liferay.portal.parsers.creole.parser;
 
 import com.liferay.portal.parsers.creole.ast.ASTNode;
-
 import com.liferay.portal.parsers.creole.ast.BoldTextNode;
 import com.liferay.portal.parsers.creole.ast.CollectionNode;
 import com.liferay.portal.parsers.creole.ast.ForcedEndOfLineNode;
@@ -122,7 +121,6 @@ public class Creole10Parser extends Parser {
 
 			return _wikipage;
 		}
-
 
 	// $ANTLR start wikipage
 	// /home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portal/parsers/creole/grammar/Creole10.g:110:1: wikipage : ( whitespaces )? p= paragraphs EOF ;
@@ -935,7 +933,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return paragraph;
 					if ( backtracking==0 ) {
-						paragraph.addChildNode(tl);
+						paragraph.addChildASTNode(tl);
 					}
 
 					}
@@ -948,7 +946,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return paragraph;
 					if ( backtracking==0 ) {
-					  paragraph.addChildNode(nw);
+					  paragraph.addChildASTNode(nw);
 					}
 					// /home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portal/parsers/creole/grammar/Creole10.g:138:63: (te= text_element )*
 					loop7:
@@ -969,7 +967,7 @@ public class Creole10Parser extends Parser {
 							_fsp--;
 							if (failed) return paragraph;
 							if ( backtracking==0 ) {
-							  paragraph.addChildNode(te);
+							  paragraph.addChildASTNode(te);
 							}
 
 							}
@@ -1029,7 +1027,7 @@ public class Creole10Parser extends Parser {
 			_fsp--;
 			if (failed) return line;
 			if ( backtracking==0 ) {
-			  line.addChildNode(first);
+			  line.addChildASTNode(first);
 			}
 			// /home/migue/development/workspaces/workspace-liferayportal/Archive/portal/portal-impl/src/com/liferay/portal/parsers/creole/grammar/Creole10.g:142:67: (element= text_element )*
 			loop9:
@@ -1050,7 +1048,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return line;
 					if ( backtracking==0 ) {
-					  line.addChildNode(element);
+					  line.addChildASTNode(element);
 					}
 
 					}
@@ -3529,7 +3527,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return orderedList;
 					if ( backtracking==0 ) {
-					   orderedList.addChildNode(elem);
+					   orderedList.addChildASTNode(elem);
 					}
 
 					}
@@ -3592,7 +3590,6 @@ public class Creole10Parser extends Parser {
 		list_ordelem_markup_return om = null;
 
 		CollectionNode elem = null;
-
 
 				((CountLevel_scope)CountLevel_stack.peek()).level = 0;
 				((CountLevel_scope)CountLevel_stack.peek()).groups = new String();
@@ -3662,7 +3659,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return unorderedList;
 					if ( backtracking==0 ) {
-					   unorderedList.addChildNode(elem);
+					   unorderedList.addChildASTNode(elem);
 					}
 
 					}
@@ -3725,7 +3722,6 @@ public class Creole10Parser extends Parser {
 		list_unordelem_markup_return um = null;
 
 		CollectionNode elem = null;
-
 
 				((CountLevel_scope)CountLevel_stack.peek()).level = 0;
 
@@ -4429,7 +4425,6 @@ public class Creole10Parser extends Parser {
 
 		ASTNode t = null;
 
-
 			((list_boldcontentpart_scope)list_boldcontentpart_stack.peek()).elements = new ArrayList<ASTNode>();
 
 		try {
@@ -4812,7 +4807,6 @@ public class Creole10Parser extends Parser {
 
 		ASTNode t = null;
 
-
 			((list_italcontentpart_scope)list_italcontentpart_stack.peek()).elements = new ArrayList<ASTNode>();
 
 		try {
@@ -5060,7 +5054,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return table;
 					if ( backtracking==0 ) {
-					  table.addChildNode(tr);
+					  table.addChildASTNode(tr);
 					}
 
 					}
@@ -7448,7 +7442,7 @@ public class Creole10Parser extends Parser {
 					_fsp--;
 					if (failed) return link;
 					if ( backtracking==0 ) {
-					  link.setAltNode(d);
+					  link.setAltCollectionNode(d);
 					}
 
 					}
@@ -10857,7 +10851,6 @@ public class Creole10Parser extends Parser {
 
 		CollectionNode t = null;
 
-
 			((link_descriptionpart_scope)link_descriptionpart_stack.peek()).element = new CollectionNode();
 
 		try {
@@ -11418,7 +11411,7 @@ public class Creole10Parser extends Parser {
 					if (failed) return text;
 					if ( backtracking==0 ) {
 
-					  					for(ASTNode item:t.getNodes()) {
+					  					for(ASTNode item:t.getASTNodes()) {
 					  						text.add(item);
 					  					}
 
@@ -11912,7 +11905,6 @@ public class Creole10Parser extends Parser {
 
 		CollectionNode t3 = null;
 
-
 		   ((image_alternativepart_scope)image_alternativepart_stack.peek()).elements = new CollectionNode();
 
 		try {
@@ -12181,7 +12173,7 @@ public class Creole10Parser extends Parser {
 							if (failed) return item;
 							if ( backtracking==0 ) {
 
-							  					for(ASTNode n: t3.getNodes()) {
+							  					for(ASTNode n: t3.getASTNodes()) {
 							  					   ((image_alternativepart_scope)image_alternativepart_stack.peek()).elements.add(n);
 							  					 }
 
@@ -12238,7 +12230,6 @@ public class Creole10Parser extends Parser {
 		CollectionNode t = null;
 
 		CollectionNode i = null;
-
 
 		   ((image_bold_alternativepart_scope)image_bold_alternativepart_stack.peek()).elements = new CollectionNode();
 
@@ -12317,7 +12308,7 @@ public class Creole10Parser extends Parser {
 							if (failed) return text;
 							if ( backtracking==0 ) {
 
-							  					for(ASTNode item:i.getNodes()) {
+							  					for(ASTNode item:i.getASTNodes()) {
 							  						((image_ital_alternativepart_scope)image_ital_alternativepart_stack.peek()).elements.add(item);
 							  					}
 
@@ -12370,7 +12361,6 @@ public class Creole10Parser extends Parser {
 		CollectionNode t = null;
 
 		CollectionNode i = null;
-
 
 		   ((image_ital_alternativepart_scope)image_ital_alternativepart_stack.peek()).elements = new CollectionNode();
 
@@ -12463,7 +12453,7 @@ public class Creole10Parser extends Parser {
 							if (failed) return text;
 							if ( backtracking==0 ) {
 
-							  					for(ASTNode item:i.getNodes()) {
+							  					for(ASTNode item:i.getASTNodes()) {
 							  						((image_ital_alternativepart_scope)image_ital_alternativepart_stack.peek()).elements.add(item);
 							  					}
 
@@ -12542,7 +12532,7 @@ public class Creole10Parser extends Parser {
 					if (failed) return text;
 					if ( backtracking==0 ) {
 
-					  					for(ASTNode item:i.getNodes()) {
+					  					for(ASTNode item:i.getASTNodes()) {
 					  						text.add(item);
 					  					}
 
@@ -14287,7 +14277,6 @@ public class Creole10Parser extends Parser {
 		failed=false;
 		return success;
 	}
-
 
 
 	public static final BitSet FOLLOW_whitespaces_in_wikipage114 = new BitSet(new long[]{0xFFFFFFFFFFFF7FF0L,0x0000000000000FFFL});

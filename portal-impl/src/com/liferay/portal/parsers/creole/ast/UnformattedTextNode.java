@@ -21,6 +21,10 @@ import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
  */
 public class UnformattedTextNode extends TextNode {
 
+	public UnformattedTextNode(ASTNode astNode) {
+		super(astNode);
+	}
+
 	public UnformattedTextNode(int tokenType) {
 		super(tokenType);
 	}
@@ -29,12 +33,8 @@ public class UnformattedTextNode extends TextNode {
 		super(content);
 	}
 
-	public UnformattedTextNode(ASTNode node) {
-		super(node);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

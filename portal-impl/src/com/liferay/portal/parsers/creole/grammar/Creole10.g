@@ -99,7 +99,7 @@ import com.liferay.portal.parsers.creole.ast.WikiPageNode;
 
 	private WikiPageNode _wikipage = null;
 	
-	public WikiPageNode getWikiPageNode(){
+	public WikiPageNode getWikiPageNode() {
 		if(_wikipage == null)
 			throw new IllegalStateException("No succesful parsing process");
 		
@@ -530,7 +530,7 @@ link_ital_descriptionpart returns [ASTNode text = null]
 	;
 link_boldital_description returns [CollectionNode text = new CollectionNode()]
 	:	onestar  ( t = link_descriptiontext  onestar {
-					for(ASTNode item:$t.text.getNodes()){
+					for (ASTNode item:$t.text.getASTNodes()) {
 						$text.add(item);
 					}
 				                   })+
@@ -583,7 +583,7 @@ scope{
 	|	ital_markup  onestar  (  t2 = image_ital_alternativepart  {$image_alternativepart::elements.add($t2.text);} onestar )+
 		ital_markup {$item = new ItalicTextNode($image_alternativepart::elements);}
 	|	onestar  ( t3=image_alternativetext  {
-					for(ASTNode n: $t3.items.getNodes()){
+					for (ASTNode n: $t3.items.getASTNodes()) {
 					   $image_alternativepart::elements.add(n);
 					 }
 				              } onestar )+ {$item =new UnformattedTextNode($image_alternativepart::elements);}
@@ -597,7 +597,7 @@ scope{
 }
 	:	ital_markup  t = link_boldital_description  {$text = new ItalicTextNode($t.text); } ital_markup
 	|	onestar  ( i = image_alternativetext  onestar{ 
-					for(ASTNode item:$i.items.getNodes()){
+					for (ASTNode item:$i.items.getASTNodes()) {
 					    $image_ital_alternativepart::elements.add(item);
 					}
 					} )+ {$text = new UnformattedTextNode($image_bold_alternativepart::elements);}
@@ -612,14 +612,14 @@ scope{
 }
 	:	bold_markup  t = link_boldital_description  {$text = new BoldTextNode($t.text); } bold_markup
 	|	onestar  (i =  image_alternativetext  onestar { 
-					for(ASTNode item:$i.items.getNodes()){
+					for (ASTNode item:$i.items.getASTNodes()) {
 					    $image_ital_alternativepart::elements.add(item);
 					}
 					} )+ {$text = new UnformattedTextNode($image_ital_alternativepart::elements);}
 	;
 image_boldital_alternative returns [CollectionNode text = new CollectionNode()]
 	:	onestar  ( i = image_alternativetext  onestar {
-					for(ASTNode item:$i.items.getNodes()){
+					for (ASTNode item:$i.items.getASTNodes()) {
 					    $text.add(item);
 					}
 					})+

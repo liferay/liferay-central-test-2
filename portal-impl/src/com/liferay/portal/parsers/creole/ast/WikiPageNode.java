@@ -24,20 +24,20 @@ import org.antlr.runtime.Token;
  */
 public class WikiPageNode extends BaseParentableNode {
 
+	public WikiPageNode(CollectionNode collectionNode) {
+		super(collectionNode);
+	}
+
 	public WikiPageNode(int tokenType) {
 		this(new CommonToken(tokenType), null);
 	}
 
-	public WikiPageNode(CollectionNode sectionsNode) {
-		super(sectionsNode);
+	public WikiPageNode(Token token, CollectionNode collectionNode) {
+		super(collectionNode);
 	}
 
-	public WikiPageNode(Token token, CollectionNode sectionsNode) {
-		super(sectionsNode);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

@@ -23,8 +23,8 @@ public abstract class ItemNode extends BaseParentableNode {
 		super(tokenType);
 	}
 
-	public ItemNode(int level, CollectionNode contents) {
-		super(contents);
+	public ItemNode(int level, CollectionNode collectionNode) {
+		super(collectionNode);
 
 		_level = level;
 	}

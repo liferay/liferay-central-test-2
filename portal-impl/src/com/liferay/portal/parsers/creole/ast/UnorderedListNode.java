@@ -24,16 +24,16 @@ public class UnorderedListNode extends BaseListNode {
 	public UnorderedListNode() {
 	}
 
+	public UnorderedListNode(CollectionNode collectionNode) {
+		super(collectionNode);
+	}
+
 	public UnorderedListNode(int tokenType) {
 		super(tokenType);
 	}
 
-	public UnorderedListNode(CollectionNode itemsNode) {
-		super(itemsNode);
-	}
-
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }

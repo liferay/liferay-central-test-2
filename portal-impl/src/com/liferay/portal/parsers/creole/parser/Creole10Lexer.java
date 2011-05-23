@@ -1937,5 +1937,4 @@ public class Creole10Lexer extends Lexer {
 	}
 
 
-
 }

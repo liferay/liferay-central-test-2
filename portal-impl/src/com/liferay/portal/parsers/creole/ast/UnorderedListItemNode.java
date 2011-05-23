@@ -29,8 +29,8 @@ public class UnorderedListItemNode extends ItemNode {
 		super(level, collectionNode);
 	}
 
-	public void accept(ASTVisitor visitor) {
-		visitor.visit(this);
+	public void accept(ASTVisitor astVisitor) {
+		astVisitor.visit(this);
 	}
 
 }
