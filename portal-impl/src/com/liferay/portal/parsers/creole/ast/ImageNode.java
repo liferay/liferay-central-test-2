@@ -63,7 +63,7 @@ public class ImageNode extends ASTNode {
 		}
 	}
 
-	public void setAltNode(CollectionNode altNode) {
+	public void setAltCollectionNode(CollectionNode altNode) {
 		_altCollectionNode = altNode;
 	}
 
