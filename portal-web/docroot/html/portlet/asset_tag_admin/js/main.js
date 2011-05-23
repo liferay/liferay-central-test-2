@@ -92,9 +92,13 @@ AUI().add(
 
 						A.one('#' + namespace + 'addTagButton').on(EVENT_CLICK, instance._onShowTagPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'tagsPermissionsButton').on(EVENT_CLICK, instance._onTagChangePermissions, instance);
-
-						A.one('#' + namespace + 'checkAllTagsCheckbox').on(EVENT_CLICK, instance._checkAllTags, instance);
 						A.one('#' + namespace + 'deleteCheckedTags').on(EVENT_CLICK, instance._deleteSelectedTags, instance);
+
+						var checkAllTagsCheckbox = A.one('#' + namespace + 'checkAllTagsCheckbox');
+
+						checkAllTagsCheckbox.on(EVENT_CLICK, instance._checkAllTags, instance);
+
+						instance._checkAllTagsCheckbox = checkAllTagsCheckbox;
 
 						instance._loadData();
 
@@ -824,6 +828,8 @@ AUI().add(
 
 					_onTagsPaginatorChangeRequest: function(event) {
 						var instance = this;
+
+						instance._checkAllTagsCheckbox.attr('checked', false);
 
 						instance._displayTags();
 					},
