@@ -157,12 +157,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 									<aui:a href="<%= themeDisplay.getURLSiteSettings().toString() %>" label="site-settings" title="manage-site-settings" />
 								</li>
 							</c:if>
-
-							<c:if test="<%= themeDisplay.isShowControlPanelIcon() %>">
-								<li class="control-panel last" id="<portlet:namespace />controlPanel">
-									<aui:a href="<%= themeDisplay.getURLControlPanel() %>" label="control-panel" />
-								</li>
-							</c:if>
 						</ul>
 					</div>
 				</div>

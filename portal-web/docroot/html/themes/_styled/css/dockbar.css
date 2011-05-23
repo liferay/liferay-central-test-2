@@ -201,6 +201,11 @@ html > .lfr-dockbar-pinned {
 	white-space: nowrap;
 }
 
+.my-places-menu .control-panel a {
+	background: url(../images/dock/control_panel.png) no-repeat 3px 50%;
+	padding-left: 25px;
+}
+
 .my-places-menu .current-site {
 	border: solid #1D4280;
 	border-width: 1px 0;
@@ -366,10 +371,6 @@ html > .lfr-dockbar-pinned {
 
 .manage-content-menu .settings a {
 	background-image: url(../images/common/configuration.png);
-}
-
-.manage-content-menu .control-panel a {
-	background-image: url(../images/dock/control_panel.png);
 }
 
 /* ---------- Personalization Bar ---------- */

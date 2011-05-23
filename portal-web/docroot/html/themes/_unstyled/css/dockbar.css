@@ -125,6 +125,9 @@ html > .lfr-dockbar-pinned {
 .my-places-menu a {
 }
 
+.my-places-menu .control-panel a {
+}
+
 .my-places-menu .current-site {
 }
 
@@ -243,9 +246,6 @@ html > .lfr-dockbar-pinned {
 }
 
 .manage-content-menu .settings a {
-}
-
-.manage-content-menu .control-panel a {
 }
 
 .toggle-personalized-view-menu .reset-personalized-view a {

@@ -39,6 +39,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.PasswordPolicy;
@@ -358,6 +359,11 @@ public class UserImpl extends UserModelImpl implements User {
 		if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
 			myPlaces = ListUtil.subList(myPlaces, start, end);
 		}
+
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+			getCompanyId(), GroupConstants.CONTROL_PANEL);
+
+		myPlaces.add(controlPanelGroup);
 
 		myPlaces = Collections.unmodifiableList(myPlaces);
 

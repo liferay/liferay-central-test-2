@@ -75,7 +75,10 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				}
 			}
 			else if (regularSite) {
-				if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
+				if (myPlace.isControlPanel()) {
+					privateAddPageHREF = themeDisplay.getURLControlPanel();
+				}
+				else if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
 					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
@@ -263,6 +266,10 @@ List<Group> myPlaces = user.getMyPlaces(max);
 						}
 
 						cssClass = "private-community";
+
+						if (myPlace.isControlPanel()) {
+							cssClass += " control-panel";
+						}
 
 						if (selectedCommunity) {
 							cssClass += " current-community";
