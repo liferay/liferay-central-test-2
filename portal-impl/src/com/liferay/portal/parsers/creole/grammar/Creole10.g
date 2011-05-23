@@ -311,7 +311,12 @@ list_elemcontent returns [CollectionNode items = new CollectionNode()]
 	:	onestar  ( part = list_elemcontentpart  { $items.add($part.node); } onestar )*
 	;
 list_elemcontentpart returns [ASTNode node = null]
-	:	tuf = text_unformattedelement { $node = new UnformattedTextNode($tuf.contents);}
+	:	tuf = text_unformattedelement { 
+				if($tuf.contents instanceof CollectionNode)
+					$node = new UnformattedTextNode($tuf.contents);
+				else
+					$node = $tuf.contents;
+				}
 	|	tf = list_formatted_elem { $node = new FormattedTextNode($tf.contents);}
 	;
 list_formatted_elem returns [CollectionNode contents = new CollectionNode()] 
