@@ -165,9 +165,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<c:if test="<%= themeDisplay.isShowPagePersonalizationIcon() %>">
 				<div class="yui3-aui-helper-hidden layout-personalizable-controls" id="<portlet:namespace />layout-personalizable-controls">
 					<span title='<liferay-ui:message key="personalizable-help" />'>
-						<aui:input inputCssClass="layout-personalizable-checkbox" id="TypeSettingsProperties--[COLUMN_ID]-personalizable--" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable" : "personalizable" %>' name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" />
-
-						<liferay-ui:icon-help message="personalizable-help" />
+						<aui:input helpMessage='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable-help" : "personalizable-help" %>' inputCssClass="layout-personalizable-checkbox" id="TypeSettingsProperties--[COLUMN_ID]-personalizable--" label='<%= (group.isLayoutSetPrototype() || group.isLayoutPrototype()) ? "modifiable" : "personalizable" %>' name="TypeSettingsProperties--[COLUMN_ID]-personalizable--" type="checkbox" useNamespace="<%= false %>" />
 					</span>
 				</div>
 			</c:if>
@@ -355,7 +353,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	</c:if>
 </div>
 
-<c:if test="<%= layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE) %>">
+<c:if test="<%= !(group.isLayoutPrototype() || group.isLayoutSetPrototype()) && layoutTypePortlet.isPersonalizable() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.PERSONALIZE) %>">
 	<div class="page-personalization-bar">
 		<img alt="" class="personalized-icon" src="<%= themeDisplay.getPathThemeImages() %>/common/guest_icon.png" />
 
@@ -406,8 +404,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	</div>
 
 	<aui:script use="aui-base">
-		A.all('.portlet-column-content.personalizable').get('parentNode').addClass('personalizable');
-
 		var togglePersonalizedView = A.one('#<portlet:namespace />togglePersonalizedView');
 
 		if (togglePersonalizedView) {
@@ -436,4 +432,10 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 <aui:script position="inline" use="liferay-dockbar">
 	Liferay.Dockbar.init();
+
+	var personalizableColumns = A.all('.portlet-column-content.personalizable');
+
+	if (personalizableColumns.size() > 0) {
+		personalizableColumns.get('parentNode').addClass('personalizable');
+	}
 </aui:script>

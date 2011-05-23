@@ -697,8 +697,10 @@ AUI().add(
 				var overlayMask = checkbox.getData('personalizatonControls');
 
 				var boundingBox = overlayMask.get('boundingBox');
+				var column = overlayMask.get('target');
 
 				boundingBox.toggleClass('personalizable');
+				column.toggleClass('personalizable');
 
 				var data = {
 					cmd: 'update_type_settings',
@@ -706,7 +708,10 @@ AUI().add(
 					p_l_id: themeDisplay.getPlid()
 				};
 
-				data[checkbox.attr('name')] = checkbox.attr('checked');
+				var checkboxName = checkbox.attr('name');
+				checkboxName = checkboxName.replace('Checkbox', '');
+
+				data[checkboxName] = checkbox.attr('checked');
 
 				A.io.request(
 					themeDisplay.getPathMain() + '/portal/update_layout',
