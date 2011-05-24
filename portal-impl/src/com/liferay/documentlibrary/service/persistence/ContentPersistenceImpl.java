@@ -356,6 +356,8 @@ public class ContentPersistenceImpl
 			session.saveOrUpdate(content);
 
 			session.flush();
+
+			session.clear();
 		}
 		catch (Exception e) {
 			throw processException(e);
