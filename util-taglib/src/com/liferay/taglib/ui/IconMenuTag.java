@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.aui.ScriptTag;
@@ -119,7 +120,11 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			_id = randomKey + StringPool.UNDERLINE + "menu";
 		}
 		else {
-			_id = themeDisplay.getPortletDisplay().getNamespace().concat(_id);
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			String namespace = portletDisplay.getNamespace();
+
+			_id = namespace.concat(_id);
 		}
 
 		request.setAttribute(
