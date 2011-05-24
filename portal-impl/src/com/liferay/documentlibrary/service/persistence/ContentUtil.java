@@ -97,6 +97,14 @@ public class ContentUtil {
 		getPersistence().remove(contentId);
 	}
 
+	public static boolean removeByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		return getPersistence().removeByC_P_R_P(
+			companyId, portletId, repositoryId, path);
+	}
+
 	public static boolean removeByC_P_R_P_V(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)

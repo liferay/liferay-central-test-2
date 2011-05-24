@@ -281,12 +281,55 @@ public class ContentPersistenceImpl
 		}
 	}
 
+	public boolean removeByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("DELETE FROM Content WHERE ");
+		sb.append("companyId = ? AND ");
+		sb.append("portletId = ? AND ");
+		sb.append("repositoryId = ? AND ");
+		sb.append("path_ LIKE ?");
+
+		String sql = sb.toString();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(portletId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			if (q.executeUpdate() > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public boolean removeByC_P_R_P_V(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("DELETE FROM Content WHERE ");
 		sb.append("companyId = ? AND ");

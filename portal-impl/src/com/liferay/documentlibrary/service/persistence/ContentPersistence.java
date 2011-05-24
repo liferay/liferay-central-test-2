@@ -56,6 +56,10 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 	public void remove(long contentId)
 		throws NoSuchContentException, SystemException;
 
+	public boolean removeByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException;
+
 	public boolean removeByC_P_R_P_V(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
