@@ -19,26 +19,20 @@ package com.liferay.portal.model;
  */
 public class GroupConstants {
 
-	public static final long DEFAULT_PARENT_GROUP_ID = 0;
-
-	public static final long DEFAULT_LIVE_GROUP_ID = 0;
-
 	public static final String CONTROL_PANEL = "Control Panel";
 
 	public static final String CONTROL_PANEL_FRIENDLY_URL = "/control_panel";
 
 	public static final String DEFAULT = "default";
 
+	public static final long DEFAULT_LIVE_GROUP_ID = 0;
+
+	public static final long DEFAULT_PARENT_GROUP_ID = 0;
+
 	public static final String GUEST = "Guest";
 
-	public static final String USER_PERSONAL_SITE =
-		"User Personal Site";
-
-	public static final String USER_PERSONAL_SITE_FRIENDLY_URL =
-		"/personal_site";
-
 	public static final String[] SYSTEM_GROUPS = {
-		CONTROL_PANEL, GUEST, USER_PERSONAL_SITE
+		CONTROL_PANEL, GUEST, GroupConstants.USER_PERSONAL_SITE
 	};
 
 	public static final int TYPE_SITE_OPEN = 1;
@@ -56,6 +50,12 @@ public class GroupConstants {
 	public static final int TYPE_SITE_SYSTEM = 4;
 
 	public static final String TYPE_SITE_SYSTEM_LABEL = "system";
+
+	public static final String USER_PERSONAL_SITE =
+		"User Personal Site";
+
+	public static final String USER_PERSONAL_SITE_FRIENDLY_URL =
+		"/personal_site";
 
 	public static String getTypeLabel(int type) {
 		if (type == TYPE_SITE_OPEN) {
