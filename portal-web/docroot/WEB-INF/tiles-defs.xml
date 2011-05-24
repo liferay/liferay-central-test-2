@@ -378,10 +378,6 @@
 		<put name="portlet_content" value="/portlet/document_library/search.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.select_dynamic_data_mapping_structure" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/select_dynamic_data_mapping_structure.jsp" />
-	</definition>
-
 	<definition name="portlet.document_library.view" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
 	</definition>

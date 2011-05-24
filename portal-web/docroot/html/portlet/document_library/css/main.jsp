@@ -30,6 +30,17 @@
 		clear: both;
 	}
 
+	.edit-document-type {
+		h3 {
+			margin: 1em 0 0.3em 0;
+		}
+
+		.select-metadata-set {
+			display: block;
+			margin-bottom: 2em;
+		}
+	}
+
 	.document-container .search-info {
 		background-color: #CCECF9;
 		min-height: 40px;

@@ -23,12 +23,24 @@ DLDocumentType documentType = (DLDocumentType)request.getAttribute(WebKeys.DOCUM
 
 long documentTypeId = BeanParamUtil.getLong(documentType, request, "documentTypeId");
 
+String headerNames = "name,null";
+
 List<DDMStructure> ddmStructures = null;
 
 if (documentType != null) {
+	headerNames = "name";
+
 	ddmStructures = documentType.getDDMStructures();
 }
 %>
+
+<liferay-util:buffer var="removeStructureIcon">
+	<liferay-ui:icon
+		image="unlink"
+		label="<%= true %>"
+		message="remove"
+	/>
+</liferay-util:buffer>
 
 <portlet:actionURL var="editDocumentTypeURL">
 	<portlet:param name="struts_action" value="/document_library/edit_document_type" />
@@ -46,71 +58,55 @@ if (documentType != null) {
 
 	<aui:model-context bean="<%= documentType %>" model="<%= DLDocumentType.class %>" />
 
-	<aui:fieldset>
+	<aui:fieldset cssClass="edit-document-type">
 		<aui:input name="name" />
 
 		<aui:input name="description" />
 
-		<c:choose>
-			<c:when test='<%= documentType == null %>'>
-				<aui:field-wrapper label="document-metadata-set">
-					<aui:input name="ddmStructureId1" type="hidden" />
+		<h3><liferay-ui:message key="metadata-sets" /></h3>
 
-					<span id="<portlet:namespace />ddmStructureNameDisplay1">
-					</span>
+		<liferay-ui:search-container
+			id='<%= renderResponse.getNamespace() + "structuresSearchContainer" %>'
+			headerNames="<%= headerNames %>"
+		>
+			<liferay-ui:search-container-results
+				results="<%= ddmStructures %>"
+				total="<%= ddmStructures != null ? ddmStructures.size() : 0 %>"
+			/>
 
-					<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMStructureSelector(1);" %>' value="select" />
-				</aui:field-wrapper>
+			<liferay-ui:search-container-row
+				className="com.liferay.portlet.dynamicdatamapping.model.DDMStructure"
+				escapedModel="<%= true %>"
+				keyProperty="structureId"
+				modelVar="structure"
+			>
+				<liferay-ui:search-container-column-text
+					name="name"
+					value="<%= structure.getName() %>"
+				/>
 
-				<aui:field-wrapper label="document-metadata-set">
-					<aui:input name="ddmStructureId2" type="hidden" />
+				<c:if test="<%= documentType == null %>">
+					<liferay-ui:search-container-column-text>
+						<a class="modify-link" data-rowId="<%= structure.getStructureId() %>" href="javascript:;"><%= removeStructureIcon %></a>
+					</liferay-ui:search-container-column-text>
+				</c:if>
+			</liferay-ui:search-container-row>
 
-					<span id="<portlet:namespace />ddmStructureNameDisplay2">
-					</span>
-
-					<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMStructureSelector(2);" %>' value="select" />
-				</aui:field-wrapper>
-
-				<aui:field-wrapper label="document-metadata-set">
-					<aui:input name="ddmStructureId3" type="hidden" />
-
-					<span id="<portlet:namespace />ddmStructureNameDisplay3">
-					</span>
-
-					<aui:button name="selectDDMStructureButton" onClick='<%= renderResponse.getNamespace() + "openDDMStructureSelector(3);" %>' value="select" />
-				</aui:field-wrapper>
-			</c:when>
-			<c:otherwise>
-
-				<%
-				for (DDMStructure ddmStructure : ddmStructures) {
-				%>
-
-					<aui:field-wrapper label="document-metadata-set">
-						<span><%= ddmStructure.getName() %></span>
-					</aui:field-wrapper>
-
-				<%
-				}
-				%>
-
-			</c:otherwise>
-		</c:choose>
+			<liferay-ui:search-iterator paginate="<%= false %>" />
+		</liferay-ui:search-container>
 
 		<c:if test="<%= documentType == null %>">
-			<aui:field-wrapper label="permissions">
-				<liferay-ui:input-permissions
-					modelName="<%= DLDocumentType.class.getName() %>"
-				/>
-			</aui:field-wrapper>
+			<liferay-ui:icon
+				cssClass="modify-link select-metadata-set"
+				image="add"
+				label="<%= true %>"
+				message="select"
+				url='<%= "javascript:" + renderResponse.getNamespace() + "openDDMStructureSelector();" %>'
+			/>
 		</c:if>
 
 		<aui:button-row>
 			<aui:button type="submit" />
-
-			<c:if test="<%= documentType != null %>">
-				<aui:button onClick='<%= renderResponse.getNamespace() + "delete();" %>' value="delete" />
-			</c:if>
 
 			<aui:button href="<%= redirect %>" type="cancel" />
 		</aui:button-row>
@@ -118,19 +114,15 @@ if (documentType != null) {
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />delete() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_document_type" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" /></portlet:actionURL>");
-	}
-
-	function <portlet:namespace />openDDMStructureSelector(index) {
+	function <portlet:namespace />openDDMStructureSelector() {
 		Liferay.Util.openWindow(
 			{
 				dialog: {
 					stack: false,
 					width:680
 				},
-				title: '<liferay-ui:message key="definition" />',
-				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_dynamic_data_mapping_structure" /></portlet:renderURL>&structureIndex=' + index
+				title: '<liferay-ui:message key="metadata-sets" />',
+				uri: '<liferay-portlet:renderURL portletName="<%= PortletKeys.METADATA_SET_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/dynamic_data_mapping/select_structure" /><portlet:param name="callback" value='<%= renderResponse.getNamespace() + "selectDDMStructure" %>' /></liferay-portlet:renderURL>'
 			}
 		);
 	}
@@ -138,18 +130,39 @@ if (documentType != null) {
 	Liferay.provide(
 		window,
 		'<portlet:namespace />selectDDMStructure',
-		function(structureIndex, ddmStructureId, ddmStructureName, dialog) {
+		function(ddmStructureId, ddmStructureName, dialog) {
 			var A = AUI();
 
-			A.one('#<portlet:namespace />ddmStructureId' + structureIndex).val(ddmStructureId);
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />structuresSearchContainer');
 
-			A.one('#<portlet:namespace />ddmStructureNameDisplay' + structureIndex).html(ddmStructureName)
+			var rowColumns = [];
+
+			rowColumns.push(ddmStructureName);
+			rowColumns.push('<a class="modify-link" data-rowId="' + ddmStructureId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeStructureIcon) %></a>');
+
+			searchContainer.addRow(rowColumns, ddmStructureId);
+			searchContainer.updateDataStore();
 
 			if (dialog) {
 				dialog.close();
 			}
 		},
-		['aui-base']
+		['liferay-search-container']
+	);
+</aui:script>
+
+<aui:script use="liferay-search-container">
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />structuresSearchContainer');
+
+	searchContainer.get('contentBox').delegate(
+		'click',
+		function(event) {
+			var link = event.currentTarget;
+			var tr = link.ancestor('tr');
+
+			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
+		},
+		'.modify-link'
 	);
 </aui:script>
 

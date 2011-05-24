@@ -109,7 +109,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 					stack: false,
 					width:820
 				},
-				title: '<liferay-ui:message key="document-type" />',
+				title: '<liferay-ui:message key="document-types" />',
 				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
 			}
 		);

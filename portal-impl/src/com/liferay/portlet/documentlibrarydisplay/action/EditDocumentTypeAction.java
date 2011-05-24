@@ -15,9 +15,10 @@
 package com.liferay.portlet.documentlibrarydisplay.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -28,12 +29,10 @@ import com.liferay.portlet.documentlibrary.NoSuchDocumentTypeException;
 import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeServiceUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -43,6 +42,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Alexander Chow
+ * @author Sergio González
  */
 public class EditDocumentTypeAction extends PortletAction {
 
@@ -124,6 +124,16 @@ public class EditDocumentTypeAction extends PortletAction {
 		DLDocumentTypeServiceUtil.deleteDocumentType(documentTypeId);
 	}
 
+	protected long[] getLongArray(PortletRequest portletRequest, String name) {
+		String value = portletRequest.getParameter(name);
+
+		if (value == null) {
+			return null;
+		}
+
+		return StringUtil.split(GetterUtil.getString(value), 0L);
+	}
+
 	protected void updateDocumentType(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -137,19 +147,8 @@ public class EditDocumentTypeAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		List<Long> ddmStructureIdsList = new ArrayList<Long>();
-
-		for (int i = 1; i < 4; i++) {
-			long ddmStructureId = ParamUtil.getLong(
-				actionRequest, "ddmStructureId" + i);
-
-			if (ddmStructureId > 0) {
-				ddmStructureIdsList.add(ddmStructureId);
-			}
-		}
-
-		long[] ddmStructureIdsArray = ArrayUtil.toArray(
-			ddmStructureIdsList.toArray(new Long[ddmStructureIdsList.size()]));
+		long[] ddmStructureIds = getLongArray(
+			actionRequest, "structuresSearchContainerPrimaryKeys");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLDocumentType.class.getName(), actionRequest);
@@ -160,7 +159,7 @@ public class EditDocumentTypeAction extends PortletAction {
 
 			DLDocumentTypeServiceUtil.addDocumentType(
 				themeDisplay.getScopeGroupId(), name, description,
-				ddmStructureIdsArray, serviceContext);
+				ddmStructureIds, serviceContext);
 		}
 		else {
 
