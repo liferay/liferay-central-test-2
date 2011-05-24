@@ -16,10 +16,15 @@ package com.liferay.portlet.asset.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portlet.asset.NoSuchLinkException;
 import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.service.base.AssetLinkLocalServiceBaseImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -86,25 +91,89 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		}
 	}
 
+	public List<AssetLink> getLinks(long entryId, int typeId)
+		throws SystemException {
+
+		List<AssetLink> e1Links = assetLinkPersistence.findByE1(entryId);
+		List<AssetLink> e2Links = assetLinkPersistence.findByE2(entryId);
+
+		List<AssetLink> links = new ArrayList<AssetLink>(
+			e1Links.size() + e2Links.size());
+
+		links.addAll(e1Links);
+		links.addAll(e2Links);
+
+		return links;
+	}
+
 	public List<AssetLink> getDirectLinks(long entryId, int typeId)
 		throws SystemException {
 
 		return assetLinkPersistence.findByE1_T(entryId, typeId);
 	}
 
-	/**
-	 * @deprecated As of 6.1, renamed to {@link #getDirectLinks(long, long)}
-	 */
-	public List<AssetLink> getLinks(long entryId, int typeId)
-		throws SystemException {
-
-		return getDirectLinks(entryId, typeId);
-	}
-
 	public List<AssetLink> getReverseLinks(long entryId, int typeId)
 		throws SystemException {
 
 		return assetLinkPersistence.findByE2_T(entryId, typeId);
+	}
+
+	public AssetLink updateLink(
+			long userId, long entryId1, long entryId2, int type,
+			int weight)
+		throws SystemException, PortalException {
+
+		AssetLink link = null;
+
+		try {
+			link = assetLinkPersistence.findByE_E_T(
+				entryId1, entryId2, type);
+		}
+		catch (NoSuchLinkException nsle) {
+		}
+
+		if (Validator.isNull(link) &&
+			(type == AssetLinkConstants.TYPE_RELATED)) {
+
+			try {
+				link = assetLinkPersistence.findByE_E_T(
+					entryId2, entryId1, type);
+			}
+			catch (NoSuchLinkException nsle){
+			}
+		}
+
+		if (Validator.isNull(link)) {
+			link = addLink(userId, entryId1, entryId2, type, weight);
+		}
+
+		return link;
+	}
+
+	public void updateLinks(
+			long userId, long entryId, long[] assetLinkEntryIds)
+		throws SystemException, PortalException {
+
+		List<AssetLink> links = getLinks(
+			entryId, AssetLinkConstants.TYPE_RELATED);
+
+		for (AssetLink link : links) {
+			if (((link.getEntryId1() == entryId) &&
+				!ArrayUtil.contains(assetLinkEntryIds, link.getEntryId2())) ||
+				((link.getEntryId2() == entryId) &&
+				!ArrayUtil.contains(assetLinkEntryIds, link.getEntryId1()))) {
+
+				deleteLink(link);
+			}
+		}
+
+		for (int i = 0; i< assetLinkEntryIds.length; i++) {
+			if (assetLinkEntryIds[i] != entryId) {
+				updateLink(
+					userId, entryId, assetLinkEntryIds[i],
+					AssetLinkConstants.TYPE_RELATED, 0);
+			}
+		}
 	}
 
 }
