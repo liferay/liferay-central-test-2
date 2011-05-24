@@ -150,7 +150,7 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 		throws Exception {
 
 		Layout layout = addLayoutPrototype(
-			companyId, defaultUserId, "Web Content",
+			companyId, defaultUserId, "Content Display Page",
 			"Create, edit, and explore web content with this page. Search " +
 				"available content, explore related content with tags, and " +
 					"browse content categories.",
