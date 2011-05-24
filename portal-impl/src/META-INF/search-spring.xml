@@ -107,6 +107,9 @@
 				<entry key="assetTagNames" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<entry key="entryClassName" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<entry key="extension" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="installedVersion" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="layoutUuid" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="license" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<!--<entry key="path">
 					<bean id="org.apache.lucene.analysis.miscellaneous.PatternAnalyzer" class="org.apache.lucene.analysis.miscellaneous.PatternAnalyzer">
 						<constructor-arg ref="org.apache.lucene.util.Version" />
@@ -121,6 +124,11 @@
 						</constructor-arg>
 					</bean>
 				</entry>-->
+				<entry key="status" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="structureId" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="tag" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="templateId" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
+				<entry key="type" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<entry key="userName" value-ref="org.apache.lucene.analysis.KeywordAnalyzer" />
 				<entry key=".*_ar" value-ref="org.apache.lucene.analysis.ar.ArabicAnalyzer" />
 				<entry key=".*_pt_BR" value-ref="org.apache.lucene.analysis.br.BrazilianAnalyzer" />
