@@ -440,7 +440,7 @@ if (!themeDisplay.isStatePopUp()) {
 
 					instance._panelHolder.transition(
 						{
-							width: toggleValue,
+							left: toggleValue,
 							easing: 'ease-out',
 							duration: 0.2
 						},
@@ -473,8 +473,8 @@ if (!themeDisplay.isStatePopUp()) {
 				},
 
 				_panelCfg: {
-					closeValue: '40px',
-					openValue: '238px'
+					closeValue: '-198px',
+					openValue: '0'
 				},
 
 				_searchActive: false,
