@@ -17,9 +17,7 @@ package com.liferay.portlet.asset.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portlet.asset.NoSuchLinkException;
 import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.service.base.AssetLinkLocalServiceBaseImpl;
@@ -91,6 +89,12 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		}
 	}
 
+	public List<AssetLink> getDirectLinks(long entryId, int typeId)
+		throws SystemException {
+
+		return assetLinkPersistence.findByE1_T(entryId, typeId);
+	}
+
 	public List<AssetLink> getLinks(long entryId, int typeId)
 		throws SystemException {
 
@@ -106,12 +110,6 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return links;
 	}
 
-	public List<AssetLink> getDirectLinks(long entryId, int typeId)
-		throws SystemException {
-
-		return assetLinkPersistence.findByE1_T(entryId, typeId);
-	}
-
 	public List<AssetLink> getReverseLinks(long entryId, int typeId)
 		throws SystemException {
 
@@ -123,35 +121,23 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 			int weight)
 		throws SystemException, PortalException {
 
-		AssetLink link = null;
+		AssetLink link = assetLinkPersistence.fetchByE_E_T(
+			entryId1, entryId2, type);
 
-		try {
-			link = assetLinkPersistence.findByE_E_T(
-				entryId1, entryId2, type);
-		}
-		catch (NoSuchLinkException nsle) {
-		}
-
-		if (Validator.isNull(link) &&
+		if ((link == null) &&
 			(type == AssetLinkConstants.TYPE_RELATED)) {
 
-			try {
-				link = assetLinkPersistence.findByE_E_T(
-					entryId2, entryId1, type);
-			}
-			catch (NoSuchLinkException nsle){
-			}
+			link = assetLinkPersistence.fetchByE_E_T(entryId2, entryId1, type);
 		}
 
-		if (Validator.isNull(link)) {
+		if (link == null) {
 			link = addLink(userId, entryId1, entryId2, type, weight);
 		}
 
 		return link;
 	}
 
-	public void updateLinks(
-			long userId, long entryId, long[] assetLinkEntryIds)
+	public void updateLinks(long userId, long entryId, long[] linkEntryIds)
 		throws SystemException, PortalException {
 
 		List<AssetLink> links = getLinks(
@@ -159,18 +145,18 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 		for (AssetLink link : links) {
 			if (((link.getEntryId1() == entryId) &&
-				!ArrayUtil.contains(assetLinkEntryIds, link.getEntryId2())) ||
+				 !ArrayUtil.contains(linkEntryIds, link.getEntryId2())) ||
 				((link.getEntryId2() == entryId) &&
-				!ArrayUtil.contains(assetLinkEntryIds, link.getEntryId1()))) {
+				 !ArrayUtil.contains(linkEntryIds, link.getEntryId1()))) {
 
 				deleteLink(link);
 			}
 		}
 
-		for (int i = 0; i< assetLinkEntryIds.length; i++) {
-			if (assetLinkEntryIds[i] != entryId) {
+		for (long assetLinkEntryId : linkEntryIds) {
+			if (assetLinkEntryId != entryId) {
 				updateLink(
-					userId, entryId, assetLinkEntryIds[i],
+					userId, entryId, assetLinkEntryId,
 					AssetLinkConstants.TYPE_RELATED, 0);
 			}
 		}
