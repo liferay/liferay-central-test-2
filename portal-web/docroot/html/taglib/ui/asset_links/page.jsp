@@ -20,47 +20,47 @@
 String className = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-links:className"));
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:asset-links:classPK"));
 
-List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 AssetEntry assetEntry = null;
+
+List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 
 if (classPK > 0) {
 	assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
+
 	assetLinks = AssetLinkLocalServiceUtil.getLinks(assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
 }
 %>
 
-<c:if test="<%= assetLinks.size() > 0 %>" >
+<c:if test="<%= !assetLinks.isEmpty() %>">
 	<div class="taglib-asset-links">
 		<h2 class="asset-links-title"><liferay-ui:message key="related-assets" />:</h2>
 
 		<ul class="asset-links-list">
 
 			<%
-			String assetEntryTitle = StringPool.BLANK;
-
 			for (AssetLink assetLink : assetLinks) {
-				AssetEntry linkedAssetEntry = null;
+				AssetEntry assetLinkEntry = null;
 
 				if (assetLink.getEntryId1() == assetEntry.getEntryId()) {
-					linkedAssetEntry = AssetEntryServiceUtil.getEntry(assetLink.getEntryId2());
+					assetLinkEntry = AssetEntryServiceUtil.getEntry(assetLink.getEntryId2());
 				}
 				else {
-					linkedAssetEntry = AssetEntryServiceUtil.getEntry(assetLink.getEntryId1());
+					assetLinkEntry = AssetEntryServiceUtil.getEntry(assetLink.getEntryId1());
 				}
 
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(ClassNameLocalServiceUtil.getClassName(linkedAssetEntry.getClassNameId()).getClassName());
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(assetLinkEntry.getClassNameId()));
 
-				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(linkedAssetEntry.getClassPK());
+				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetLinkEntry.getClassPK());
 
-				assetEntryTitle = assetRenderer.getTitle(locale);
+				String asseLinktEntryTitle = assetRenderer.getTitle(locale);
 
-				String urlViewInContext = assetRenderer.getURLViewInContext((LiferayPortletRequest)portletRequest, (LiferayPortletResponse)portletResponse, "viewFullContentURLString");
+				String urlViewInContext = assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, "viewFullContentURLString");
 			%>
 
 				<li class="asset-links-list-item">
 					<liferay-ui:icon
 						label="<%= true %>"
-						message="<%= assetEntryTitle %>"
+						message="<%= asseLinktEntryTitle %>"
 						src="<%= assetRenderer.getIconPath(portletRequest) %>"
 						url="<%= urlViewInContext %>"
 					/>
