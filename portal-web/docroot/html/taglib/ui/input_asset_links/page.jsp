@@ -45,17 +45,17 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 <liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' id='<%= randomNamespace + "inputAssetLinks" %>' message="select" showWhenSingleIcon="<%= true %>">
 
 	<%
-	for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
-		if (curRendererFactory.isSelectable()) {
-			assetBrowserURL.setParameter("typeSelection", curRendererFactory.getClassName());
+	for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
+		if (assetRendererFactory.isSelectable()) {
+			assetBrowserURL.setParameter("typeSelection", assetRendererFactory.getClassName());
 			assetBrowserURL.setParameter("callback", randomNamespace + "addAssetLink");
 
 			String href = "javascript:openAssetBrowser('" + assetBrowserURL.toString() + "')";
 		%>
 
 			<liferay-ui:icon
-				message='<%= "model.resource." + curRendererFactory.getClassName() %>'
-				src="<%= curRendererFactory.getIconPath(portletRequest) %>"
+				message='<%= ResourceActionsUtil.getModelResource(locale, assetRendererFactory.getClassName()) %>'
+				src="<%= assetRendererFactory.getIconPath(portletRequest) %>"
 				url="<%= href %>"
 			/>
 
