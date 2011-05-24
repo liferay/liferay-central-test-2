@@ -591,7 +591,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				0, companyId, name, null, description, type);
 
 			if (name.equals(RoleConstants.USER)) {
-				initPersonalControlPanelPortletsPermissions(companyId, role);
+				initPersonalControlPanelPortletsPermissions(role);
 			}
 		}
 
@@ -604,29 +604,28 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		};
 	}
 
-	protected void initPersonalControlPanelPortletsPermissions(
-			long companyId, Role role)
+	protected void initPersonalControlPanelPortletsPermissions(Role role)
 		throws PortalException, SystemException {
 
 		for (String portletId : getDefaultControlPanelPortlets()) {
 			setRolePermissions(
-				companyId, role, portletId,
+				role, portletId,
 				new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
 		}
 	}
 
 	protected void setRolePermissions(
-			long companyId, Role role, String name, String[] actionIds)
+			Role role, String name, String[] actionIds)
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			resourcePermissionLocalService.setResourcePermissions(
-				companyId, name, ResourceConstants.SCOPE_COMPANY, "0",
+				role.getCompanyId(), name, ResourceConstants.SCOPE_COMPANY, "0",
 				role.getRoleId(), actionIds);
 		}
 		else {
 			permissionLocalService.setRolePermissions(
-				role.getRoleId(), companyId, name,
+				role.getRoleId(), role.getCompanyId(), name,
 				ResourceConstants.SCOPE_COMPANY, "0", actionIds);
 		}
 	}
