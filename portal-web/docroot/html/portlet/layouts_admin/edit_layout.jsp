@@ -24,7 +24,7 @@ Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
 
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
-long stagingGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
+long stagingGroupId = ((Long)request.getAttribute("edit_pages.jsp-stagingGroupId")).longValue();
 
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
