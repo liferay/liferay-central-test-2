@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.NoSuchLinkException;
 import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.impl.AssetLinkModelImpl;
 
 import java.util.List;
 
@@ -193,6 +195,25 @@ public class AssetLinkPersistenceTest extends BasePersistenceTestCase {
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(0, result.size());
+	}
+
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		AssetLink newAssetLink = addAssetLink();
+
+		_persistence.clearCache();
+
+		AssetLinkModelImpl existingAssetLinkModelImpl = (AssetLinkModelImpl)_persistence.findByPrimaryKey(newAssetLink.getPrimaryKey());
+
+		assertEquals(existingAssetLinkModelImpl.getEntryId1(),
+			existingAssetLinkModelImpl.getOriginalEntryId1());
+		assertEquals(existingAssetLinkModelImpl.getEntryId2(),
+			existingAssetLinkModelImpl.getOriginalEntryId2());
+		assertEquals(existingAssetLinkModelImpl.getType(),
+			existingAssetLinkModelImpl.getOriginalType());
 	}
 
 	protected AssetLink addAssetLink() throws Exception {

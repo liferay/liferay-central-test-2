@@ -276,25 +276,36 @@ public class AssetLinkLocalServiceUtil {
 		getService().deleteLinks(entryId1, entryId2);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
-		long entryId, int typeId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDirectLinks(entryId, typeId);
-	}
-
-	/**
-	* @deprecated As of 6.1, renamed to {@link #getDirectLinks(long, long)}
-	*/
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLinks(entryId, typeId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getDirectLinks(
+		long entryId, int typeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDirectLinks(entryId, typeId);
+	}
+
 	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> getReverseLinks(
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getReverseLinks(entryId, typeId);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetLink updateLink(
+		long userId, long entryId1, long entryId2, int type, int weight)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateLink(userId, entryId1, entryId2, type, weight);
+	}
+
+	public static void updateLinks(long userId, long entryId,
+		long[] assetLinkEntryIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateLinks(userId, entryId, assetLinkEntryIds);
 	}
 
 	public static AssetLinkLocalService getService() {

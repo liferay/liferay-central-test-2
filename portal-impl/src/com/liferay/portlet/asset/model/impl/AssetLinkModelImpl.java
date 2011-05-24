@@ -170,7 +170,17 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	}
 
 	public void setEntryId1(long entryId1) {
+		if (!_setOriginalEntryId1) {
+			_setOriginalEntryId1 = true;
+
+			_originalEntryId1 = _entryId1;
+		}
+
 		_entryId1 = entryId1;
+	}
+
+	public long getOriginalEntryId1() {
+		return _originalEntryId1;
 	}
 
 	public long getEntryId2() {
@@ -178,7 +188,17 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	}
 
 	public void setEntryId2(long entryId2) {
+		if (!_setOriginalEntryId2) {
+			_setOriginalEntryId2 = true;
+
+			_originalEntryId2 = _entryId2;
+		}
+
 		_entryId2 = entryId2;
+	}
+
+	public long getOriginalEntryId2() {
+		return _originalEntryId2;
 	}
 
 	public int getType() {
@@ -186,7 +206,17 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	}
 
 	public void setType(int type) {
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	public int getWeight() {
@@ -287,6 +317,19 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	}
 
 	public void resetOriginalValues() {
+		AssetLinkModelImpl assetLinkModelImpl = this;
+
+		assetLinkModelImpl._originalEntryId1 = assetLinkModelImpl._entryId1;
+
+		assetLinkModelImpl._setOriginalEntryId1 = false;
+
+		assetLinkModelImpl._originalEntryId2 = assetLinkModelImpl._entryId2;
+
+		assetLinkModelImpl._setOriginalEntryId2 = false;
+
+		assetLinkModelImpl._originalType = assetLinkModelImpl._type;
+
+		assetLinkModelImpl._setOriginalType = false;
 	}
 
 	public String toString() {
@@ -371,8 +414,14 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	private String _userName;
 	private Date _createDate;
 	private long _entryId1;
+	private long _originalEntryId1;
+	private boolean _setOriginalEntryId1;
 	private long _entryId2;
+	private long _originalEntryId2;
+	private boolean _setOriginalEntryId2;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private int _weight;
 	private transient ExpandoBridge _expandoBridge;
 }
