@@ -16,6 +16,14 @@
 
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
+<%
+String callback = ParamUtil.getString(request, "callback");
+
+if (Validator.isNull(callback)) {
+	callback = renderResponse.getNamespace() + "selectDDMStructure";
+}
+%>
+
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/select_structure" />
 </liferay-portlet:renderURL>
@@ -49,8 +57,8 @@
 			StringBundler sb = new StringBundler(7);
 
 			sb.append("javascript:Liferay.Util.getOpener().");
-			sb.append(renderResponse.getNamespace());
-			sb.append("selectDDMStructure('");
+			sb.append(callback);
+			sb.append("('");
 			sb.append(structure.getStructureId());
 			sb.append("', '");
 			sb.append(HtmlUtil.escapeJS(structure.getName()));
