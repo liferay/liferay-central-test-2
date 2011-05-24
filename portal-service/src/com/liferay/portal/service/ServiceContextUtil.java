@@ -49,7 +49,7 @@ public class ServiceContextUtil {
 
 		// Permissions
 
-		String[] communityPermissions = StringUtil.split(
+		String[] groupPermissions = StringUtil.split(
 			jsonObject.getString("groupPermissions"));
 		String[] guestPermissions = StringUtil.split(
 			jsonObject.getString("guestPermissions"));
@@ -58,7 +58,7 @@ public class ServiceContextUtil {
 			jsonObject.getBoolean("addGroupPermissions"));
 		serviceContext.setAddGuestPermissions(
 			jsonObject.getBoolean("addGuestPermissions"));
-		serviceContext.setGroupPermissions(communityPermissions);
+		serviceContext.setGroupPermissions(groupPermissions);
 		serviceContext.setGuestPermissions(guestPermissions);
 
 		// Asset
