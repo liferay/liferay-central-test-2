@@ -116,7 +116,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			String randomKey = PortalUtil.generateRandomKey(
 				request, IconMenuTag.class.getName());
 
-			_id = randomKey + StringPool.UNDERLINE;
+			_id = randomKey + StringPool.UNDERLINE + "menu";
+		}
+		else {
+			_id = themeDisplay.getPortletDisplay().getNamespace().concat(_id);
 		}
 
 		request.setAttribute(
@@ -232,7 +235,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.print(_cssClass);
 					jspWriter.write("\" id=\"");
 					jspWriter.write(_id);
-					jspWriter.write("menu\">");
+					jspWriter.write("\">");
 				}
 				else {
 					jspWriter.write("<span title=\"");
@@ -260,7 +263,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 					jspWriter.write("\' id=\"");
 					jspWriter.write(_id);
-					jspWriter.write("menu\">");
+					jspWriter.write("\">");
 					jspWriter.write("<li class=\"lfr-trigger\"><strong>");
 					jspWriter.write("<a class=\"nobr\" href=\"javascript:;\">");
 

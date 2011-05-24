@@ -324,7 +324,7 @@
 </div>
 
 <aui:script use="liferay-panel">
-	var trigger = A.one('#groupSelectormenu a');
+	var trigger = A.one('#<portlet:namespace />groupSelector a');
 
 	var panelContainer = Liferay.Panel.get('controlPanelMenuAddContentPanelContainer');
 
