@@ -48,6 +48,7 @@
 <%@ include file="/html/portal/css/portal/top_links.jspf" %>
 
 <%@ include file="/html/portal/css/taglib/asset_categories_summary.jspf" %>
+<%@ include file="/html/portal/css/taglib/asset_links.jspf" %>
 <%@ include file="/html/portal/css/taglib/calendar.jspf" %>
 <%@ include file="/html/portal/css/taglib/captcha.jspf" %>
 <%@ include file="/html/portal/css/taglib/diff.jspf" %>
