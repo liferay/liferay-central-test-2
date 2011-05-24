@@ -44,7 +44,7 @@ create index IX_1EBA6821 on AssetEntry (groupId, classUuid);
 
 create index IX_128516C8 on AssetLink (entryId1);
 create index IX_56E0AB21 on AssetLink (entryId1, entryId2);
-create index IX_8F542794 on AssetLink (entryId1, entryId2, type_);
+create unique index IX_8F542794 on AssetLink (entryId1, entryId2, type_);
 create index IX_14D5A20D on AssetLink (entryId1, type_);
 create index IX_12851A89 on AssetLink (entryId2);
 create index IX_91F132C on AssetLink (entryId2, type_);
