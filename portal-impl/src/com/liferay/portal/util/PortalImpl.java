@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -950,28 +951,38 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getCDNHostHttp() {
-		long companyId = CompanyThreadLocal.getCompanyId();
+		String cdnHostHttp = _cdnHostHttp.get();
 
-		String cdnHostHttp = StringPool.BLANK;
+		if (cdnHostHttp != null) {
+			return cdnHostHttp;
+		}
+
+		long companyId = CompanyThreadLocal.getCompanyId();
 
 		try {
 			cdnHostHttp = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CDN_HOST_HTTP, PropsValues.CDN_HOST_HTTP);
 		}
-		catch (SystemException e) {
+		catch (Exception e) {
 		}
 
-		if (cdnHostHttp.startsWith("${")) {
+		if ((cdnHostHttp == null) || cdnHostHttp.startsWith("${")) {
 			cdnHostHttp = StringPool.BLANK;
 		}
+
+		_cdnHostHttp.set(cdnHostHttp);
 
 		return cdnHostHttp;
 	}
 
 	public String getCDNHostHttps() {
-		long companyId = CompanyThreadLocal.getCompanyId();
+		String cdnHostHttps = _cdnHostHttps.get();
 
-		String cdnHostHttps = StringPool.BLANK;
+		if (cdnHostHttps != null) {
+			return cdnHostHttps;
+		}
+
+		long companyId = CompanyThreadLocal.getCompanyId();
 
 		try {
 			cdnHostHttps = PrefsPropsUtil.getString(
@@ -981,9 +992,11 @@ public class PortalImpl implements Portal {
 		catch (SystemException e) {
 		}
 
-		if (cdnHostHttps.startsWith("${")) {
+		if ((cdnHostHttps == null) || cdnHostHttps.startsWith("${")) {
 			cdnHostHttps = StringPool.BLANK;
 		}
+
+		_cdnHostHttps.set(cdnHostHttps);
 
 		return cdnHostHttps;
 	}
@@ -5252,6 +5265,12 @@ public class PortalImpl implements Portal {
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
 		Pattern.CASE_INSENSITIVE);
+	private static ThreadLocal<String> _cdnHostHttp =
+		new AutoResetThreadLocal<String>(
+			PortalImpl.class + "._cdnHostHttp");
+	private static ThreadLocal<String> _cdnHostHttps =
+		new AutoResetThreadLocal<String>(
+			PortalImpl.class + "._cdnHostHttps");
 	private String _computerAddress;
 	private String _computerName;
 	private String[] _customSqlKeys;
