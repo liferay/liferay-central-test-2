@@ -118,18 +118,6 @@ public class ContentUtil {
 		getPersistence().update(content);
 	}
 
-	public static void updatePath(long contentId, String path)
-		throws SystemException {
-
-		getPersistence().updatePath(contentId, path);
-	}
-
-	public static void updateRepositoryId(long contentId, long repositoryId)
-		throws SystemException {
-
-		getPersistence().updateRepositoryId(contentId, repositoryId);
-	}
-
 	public void setPersistence(ContentPersistence persistence) {
 		_persistence = persistence;
 	}
