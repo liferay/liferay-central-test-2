@@ -32,21 +32,21 @@ public class ContentLocalServiceUtil {
 
 	public static void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, byte[] bytes)
+			String path, String version, byte[] bytes)
 		throws SystemException {
 
 		getService().addContent(
-			companyId, portletId, groupId, repositoryId, path, bytes);
+			companyId, portletId, groupId, repositoryId, path, version, bytes);
 	}
 
 	public static void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, InputStream inputStream, long size)
+			String path, String version, InputStream inputStream, long size)
 		throws SystemException {
 
 		getService().addContent(
-			companyId, portletId, groupId, repositoryId, path, inputStream,
-			size);
+			companyId, portletId, groupId, repositoryId, path, version,
+			inputStream, size);
 	}
 
 	public static boolean deleteContent(
@@ -56,6 +56,14 @@ public class ContentLocalServiceUtil {
 
 		return getService().deleteContent(
 			companyId, portletId, repositoryId, path, version);
+	}
+
+	public static boolean deleteContents(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		return getService().deleteContents(
+			companyId, portletId, repositoryId, path);
 	}
 
 	public static Content getContent(

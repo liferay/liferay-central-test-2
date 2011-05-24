@@ -32,17 +32,21 @@ public interface ContentLocalService {
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, byte[] bytes)
+			String path, String version, byte[] bytes)
 		throws SystemException;
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, InputStream inputStream, long size)
+			String path, String version, InputStream inputStream, long size)
 		throws SystemException;
 
 	public boolean deleteContent(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
+		throws SystemException;
+
+	public boolean deleteContents(
+			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException;
 
 	public Content getContent(

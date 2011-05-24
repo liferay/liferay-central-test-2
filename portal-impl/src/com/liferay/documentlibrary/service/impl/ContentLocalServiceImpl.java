@@ -19,7 +19,6 @@ import com.liferay.documentlibrary.NoSuchContentException;
 import com.liferay.documentlibrary.model.Content;
 import com.liferay.documentlibrary.service.ContentLocalService;
 import com.liferay.documentlibrary.service.persistence.ContentPersistence;
-import com.liferay.documentlibrary.util.Hook;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -36,7 +35,7 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, byte[] bytes)
+			String path, String version, byte[] bytes)
 		throws SystemException {
 
 		long contentId = _counterLocalService.increment();
@@ -46,14 +45,14 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 
 		Content content = new Content(
 			contentId, companyId, portletId, groupId, repositoryId, path,
-			Hook.DEFAULT_VERSION, outputBlob, bytes.length);
+			version, outputBlob, bytes.length);
 
 		_contentPersistence.update(content);
 	}
 
 	public void addContent(
 			long companyId, String portletId, long groupId, long repositoryId,
-			String path, InputStream inputStream, long size)
+			String path, String version, InputStream inputStream, long size)
 		throws SystemException {
 
 		long contentId = _counterLocalService.increment();
@@ -62,7 +61,7 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 
 		Content content = new Content(
 			contentId, companyId, portletId, groupId, repositoryId, path,
-			Hook.DEFAULT_VERSION, outputBlob, size);
+			version, outputBlob, size);
 
 		_contentPersistence.update(content);
 	}
@@ -74,6 +73,14 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 
 		return _contentPersistence.removeByC_P_R_P_V(
 			companyId, portletId, repositoryId, path, version);
+	}
+
+	public boolean deleteContents(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		return _contentPersistence.removeByC_P_R_P(
+			companyId, portletId, repositoryId, path);
 	}
 
 	public Content getContent(
