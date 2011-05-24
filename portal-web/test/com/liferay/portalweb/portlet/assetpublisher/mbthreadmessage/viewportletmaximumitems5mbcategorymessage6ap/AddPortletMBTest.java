@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorythreadmessage6ap;
+package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorymessage6ap;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

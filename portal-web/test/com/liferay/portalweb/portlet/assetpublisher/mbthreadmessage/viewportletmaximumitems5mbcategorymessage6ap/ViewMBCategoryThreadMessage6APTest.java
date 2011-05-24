@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorythreadmessage6ap;
+package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorymessage6ap;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,10 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewPortletMaximumItems5MBCategoryThreadMessage6APTest
-	extends BaseTestCase {
-	public void testViewPortletMaximumItems5MBCategoryThreadMessage6AP()
-		throws Exception {
+public class ViewMBCategoryThreadMessage6APTest extends BaseTestCase {
+	public void testViewMBCategoryThreadMessage6AP() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -77,12 +75,11 @@ public class ViewPortletMaximumItems5MBCategoryThreadMessage6APTest
 		assertEquals(RuntimeVariables.replace(
 				"MB Category Thread2 Message1 Body"),
 			selenium.getText("xPath=(//div[@class='asset-summary'])[5]"));
-		assertFalse(selenium.isElementPresent(
-				"xPath=(//h3[@class='asset-title'])[6]/a"));
-		assertFalse(selenium.isElementPresent(
-				"xPath=(//div[@class='asset-summary'])[6]"));
-		assertFalse(selenium.isTextPresent(
-				"MB Category Thread1 Message1 Subject"));
-		assertFalse(selenium.isTextPresent("MB Category Thread1 Message1 Body"));
+		assertEquals(RuntimeVariables.replace(
+				"MB Category Thread1 Message1 Subject"),
+			selenium.getText("xPath=(//h3[@class='asset-title'])[6]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"MB Category Thread1 Message1 Body"),
+			selenium.getText("xPath=(//div[@class='asset-summary'])[6]"));
 	}
 }

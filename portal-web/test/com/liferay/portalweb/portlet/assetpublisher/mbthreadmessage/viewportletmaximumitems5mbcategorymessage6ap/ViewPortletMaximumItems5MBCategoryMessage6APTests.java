@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorythreadmessage6ap;
+package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorymessage6ap;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,7 +22,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewPortletMaximumItems5MBCategoryThreadMessage6APTests
+public class ViewPortletMaximumItems5MBCategoryMessage6APTests
 	extends BaseTests {
 
 	public static Test suite() {
@@ -43,7 +43,7 @@ public class ViewPortletMaximumItems5MBCategoryThreadMessage6APTests
 		testSuite.addTestSuite(
 			ConfigurePortletMaximumItemsToDisplay5Test.class);
 		testSuite.addTestSuite(
-			ViewPortletMaximumItems5MBCategoryThreadMessage6APTest.class);
+			ViewPortletMaximumItems5MBCategoryMessage6APTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
 		testSuite.addTestSuite(TearDownMBMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorythreadmessage6ap;
+package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorymessage6ap;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletAPTest extends BaseTestCase {
-	public void testAddPortletAP() throws Exception {
+public class ConfigurePortletMaximumItemsToDisplay5Test extends BaseTestCase {
+	public void testConfigurePortletMaximumItemsToDisplay5()
+		throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -45,10 +46,9 @@ public class AddPortletAPTest extends BaseTestCase {
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("More\u2026"),
-			selenium.getText("//a[@id='_145_addApplication']"));
-		selenium.clickAt("//a[@id='_145_addApplication']",
-			RuntimeVariables.replace("More\u2026"));
+		assertEquals(RuntimeVariables.replace("Options"),
+			selenium.getText("//strong/a"));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,8 +56,8 @@ public class AddPortletAPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@title='Asset Publisher']/p/a")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
 					break;
 				}
 			}
@@ -68,8 +68,10 @@ public class AddPortletAPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//div[@title='Asset Publisher']/p/a",
-			RuntimeVariables.replace("Add"));
+		assertEquals(RuntimeVariables.replace("Configuration"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -77,7 +79,7 @@ public class AddPortletAPTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//section")) {
+				if (selenium.isVisible("//span[6]/span/span/select")) {
 					break;
 				}
 			}
@@ -88,6 +90,16 @@ public class AddPortletAPTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isVisible("//section"));
+		selenium.select("//span[6]/span/span/select",
+			RuntimeVariables.replace("label=5"));
+		selenium.clickAt("//input[@value='Save']",
+			RuntimeVariables.replace("Save"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertEquals(RuntimeVariables.replace(
+				"You have successfully updated the setup."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals("5",
+			selenium.getSelectedLabel("//span[6]/span/span/select"));
 	}
 }

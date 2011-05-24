@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorythreadmessage6ap;
+package com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorymessage6ap;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PostNewMBCategoryThreadMessage3Test extends BaseTestCase {
-	public void testPostNewMBCategoryThreadMessage3() throws Exception {
+public class PostNewMBCategoryThreadMessage1Test extends BaseTestCase {
+	public void testPostNewMBCategoryThreadMessage1() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -56,10 +56,10 @@ public class PostNewMBCategoryThreadMessage3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.type("//input[@id='_19_subject']",
-			RuntimeVariables.replace("MB Category Thread3 Message1 Subject"));
+			RuntimeVariables.replace("MB Category Thread1 Message1 Subject"));
 		selenium.saveScreenShotAndSource();
 		selenium.type("//textarea[@id='_19_editor']",
-			RuntimeVariables.replace("MB Category Thread3 Message1 Body"));
+			RuntimeVariables.replace("MB Category Thread1 Message1 Body"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
@@ -69,7 +69,7 @@ public class PostNewMBCategoryThreadMessage3Test extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
-				"MB Category Thread3 Message1 Subject"),
+				"MB Category Thread1 Message1 Subject"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace(""), selenium.getText("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
@@ -79,17 +79,17 @@ public class PostNewMBCategoryThreadMessage3Test extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//td[5]/a"));
 		assertTrue(selenium.isPartialText("//td[6]/a", "By: Joe Bloggs"));
 		selenium.clickAt("//td[1]/a",
-			RuntimeVariables.replace("MB Category Thread3 Message1 Subject"));
+			RuntimeVariables.replace("MB Category Thread1 Message1 Subject"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"MB Category Thread3 Message1 Subject"),
+				"MB Category Thread1 Message1 Subject"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
-				"MB Category Thread3 Message1 Subject"),
+				"MB Category Thread1 Message1 Subject"),
 			selenium.getText("//div[@class='subject']/a/strong"));
 		assertEquals(RuntimeVariables.replace(
-				"MB Category Thread3 Message1 Body"),
+				"MB Category Thread1 Message1 Body"),
 			selenium.getText("//div[@class='thread-body']"));
 	}
 }

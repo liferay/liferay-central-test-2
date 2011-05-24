@@ -20,7 +20,7 @@ import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportleta
 import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletavailablembcategorythreadmessageap.ViewPortletAvailableMBCategoryThreadMessageAPTests;
 import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletcurrentmbcategorythreadmessageap.ViewPortletCurrentMBCategoryThreadMessageAPTests;
 import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletfullcontentmbcategorythreadmessageap.ViewPortletFullContentMBCategoryThreadMessageAPTests;
-import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorythreadmessage6ap.ViewPortletMaximumItems5MBCategoryThreadMessage6APTests;
+import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletmaximumitems5mbcategorymessage6ap.ViewPortletMaximumItems5MBCategoryMessage6APTests;
 import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletpaginationregularmbcategorythread6ap.ViewPortletPaginationRegularMBCategoryThread6APTests;
 import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportletpaginationsimplembcategorythread6ap.ViewPortletPaginationSimpleMBCategoryThread6APTests;
 import com.liferay.portalweb.portlet.assetpublisher.mbthreadmessage.viewportlettablembcategorythreadmessageap.ViewPortletTableMBCategoryThreadMessageAPTests;
@@ -47,7 +47,7 @@ public class MBThreadMessageTests extends BaseTests {
 		testSuite.addTest(
 			ViewPortletFullContentMBCategoryThreadMessageAPTests.suite());
 		testSuite.addTest(
-			ViewPortletMaximumItems5MBCategoryThreadMessage6APTests.suite());
+			ViewPortletMaximumItems5MBCategoryMessage6APTests.suite());
 		testSuite.addTest(
 			ViewPortletPaginationRegularMBCategoryThread6APTests.suite());
 		testSuite.addTest(
