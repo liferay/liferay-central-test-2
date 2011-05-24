@@ -234,7 +234,7 @@
 			<finder-column name="entryId2" />
 			<finder-column name="type" />
 		</finder>
-		<finder name="E_E_T" return-type="AssetLink">
+		<finder name="E_E_T" return-type="AssetLink" unique="true">
 			<finder-column name="entryId1" />
 			<finder-column name="entryId2" />
 			<finder-column name="type" />
