@@ -14,10 +14,10 @@
  */
 --%>
 
-<%@ include file="/html/portlet//sites_admin/init.jsp" %>
+<%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "users");
+String tabs1 = ParamUtil.getString(request, "tabs1", "summary");
 String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
@@ -38,6 +38,14 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
+PortletURL tabsURL = renderResponse.createRenderURL();
+
+tabsURL.setParameter("struts_action", "/sites_admin/edit_site_assignments");
+tabsURL.setParameter("tabs1", tabs1);
+tabsURL.setParameter("tabs2", "current");
+tabsURL.setParameter("redirect", redirect);
+tabsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+
 request.setAttribute("edit_site_assignments.jsp-tabs1", tabs1);
 request.setAttribute("edit_site_assignments.jsp-tabs2", tabs2);
 
@@ -55,13 +63,15 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 	<c:when test="<%= selUser == null %>">
 		<liferay-ui:header
 			backURL="<%= redirect %>"
-			title="<%= group.getDescriptiveName() %>"
+			title='<%= group.getDescriptiveName() + StringPool.COLON + StringPool.SPACE + LanguageUtil.get(pageContext, "manage-memberships") %>'
 		/>
 
+		<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_toolbar.jsp" />
+
 		<liferay-ui:tabs
-			names="users,organizations,user-groups"
+			names="summary,users,organizations,user-groups"
 			param="tabs1"
-			url="<%= portletURL.toString() %>"
+			url="<%= tabsURL.toString() %>"
 		/>
 	</c:when>
 	<c:otherwise>
@@ -72,7 +82,7 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 	</c:otherwise>
 </c:choose>
 
-<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm" onSubmit='<%= renderResponse.getNamespace() + "submit();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
@@ -80,6 +90,19 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 	<aui:input name="groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 
 	<c:choose>
+		<c:when test='<%= tabs1.equals("summary") %>'>
+			<aui:input name="keywords" type="hidden" value="" />
+
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="membership-type" />: <liferay-ui:message key="<%= GroupConstants.getTypeLabel(group.getType()) %>" />
+			</div>
+
+			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_users.jsp" />
+
+			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_organizations.jsp" />
+
+			<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_user_groups.jsp" />
+		</c:when>
 		<c:when test='<%= tabs1.equals("users") %>'>
 			<c:choose>
 				<c:when test="<%= selUser == null %>">
@@ -107,6 +130,32 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 </aui:form>
 
 <aui:script>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />submit',
+		function() {
+			if (document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_organizations.value != '') {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>.value = document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_organizations.value;
+
+				submitForm(document.<portlet:namespace />fm, "<portlet:renderURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /><portlet:param name="tabs1" value="organizations" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" /></portlet:renderURL>");
+			}
+			if (document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_users.value != '') {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>.value = document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_users.value;
+
+				submitForm(document.<portlet:namespace />fm, "<portlet:renderURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /><portlet:param name="tabs1" value="users" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" /></portlet:renderURL>");
+			}
+			if (document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_user_groups.value != '') {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>.value = document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_user_groups.value;
+
+				submitForm(document.<portlet:namespace />fm, "<portlet:renderURL><portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" /><portlet:param name="tabs1" value="users" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" /></portlet:renderURL>");
+			}
+			else {
+				submitForm(document.<portlet:namespace />fm);
+			}
+		},
+		['liferay-util-list-fields']
+	);
+
 	Liferay.provide(
 		window,
 		'<portlet:namespace />updateGroupOrganizations',

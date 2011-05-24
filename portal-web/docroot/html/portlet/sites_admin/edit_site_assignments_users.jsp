@@ -17,31 +17,56 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
+String tabs1 = (String)request.getAttribute("edit_site_assignments.jsp-tabs1");
 String tabs2 = (String)request.getAttribute("edit_site_assignments.jsp-tabs2");
 
 int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
 
+String redirect = ParamUtil.getString(request, "redirect");
+
 Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
+
+PortletURL viewUsersURL = renderResponse.createRenderURL();
+
+viewUsersURL.setParameter("struts_action", "/sites_admin/edit_site_assignments");
+viewUsersURL.setParameter("tabs1", "users");
+viewUsersURL.setParameter("tabs2", "current");
+viewUsersURL.setParameter("redirect", redirect);
+viewUsersURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+
+UserGroupChecker userGroupChecker = null;
+
+if (!tabs1.equals("summary")) {
+	userGroupChecker = new UserGroupChecker(renderResponse, group);
+}
+
+String emptyResultsMessage = UserSearch.EMPTY_RESULTS_MESSAGE;
+
+if (tabs2.equals("current")) {
+	emptyResultsMessage ="no-user-was-found-that-is-a-direct-member-of-this-site";
+}
+
+UserSearch userSearch = new UserSearch(renderRequest, viewUsersURL);
+
+userSearch.setEmptyResultsMessage(emptyResultsMessage);
 %>
 
 <aui:input name="addUserIds" type="hidden" />
 <aui:input name="removeUserIds" type="hidden" />
 
-<liferay-ui:tabs
-	names="current,available"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
-
 <liferay-ui:search-container
-	rowChecker="<%= new UserGroupChecker(renderResponse, group) %>"
-	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+	rowChecker="<%= userGroupChecker %>"
+	searchContainer="<%= userSearch %>"
 >
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/user_search.jsp"
-	/>
+	<c:if test='<%= !tabs1.equals("summary") %>'>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_search.jsp"
+		/>
+
+		<div class="separator"><!-- --></div>
+	</c:if>
 
 	<%
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
@@ -110,15 +135,39 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.
 		</c:if>
 	</liferay-ui:search-container-row>
 
-	<div class="separator"><!-- --></div>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("summary") && (total > 0) %>'>
+			<liferay-ui:panel collapsible='<%= true %>' extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, (total > 1) ? "x-users" : "x-user", total) %>'>
 
-	<%
-	String taglibOnClick = renderResponse.getNamespace() + "updateGroupUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
-	%>
+				<aui:input inlineField="<%= true %>" label="" name='<%= DisplayTerms.KEYWORDS + "_users" %>' size="30" value="" />
 
-	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+				<aui:button type="submit" value="search" />
 
-	<br /><br />
+				<br /> <br />
 
-	<liferay-ui:search-iterator />
+				<liferay-ui:search-iterator paginate='<%= false %>' />
+
+				<c:if test="<%= total > userSearch.getDelta() %>">
+					<a href="<%= viewUsersURL %>"><liferay-ui:message key="view-more" /> &raquo;</a>
+				</c:if>
+
+			</liferay-ui:panel>
+
+			<div class="separator"><!-- --></div>
+		</c:when>
+		<c:when test='<%= !tabs1.equals("summary") %>'>
+
+			<%
+			String taglibOnClick = renderResponse.getNamespace() + "updateGroupUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+			%>
+
+			<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+
+			<br /><br />
+
+			<liferay-ui:search-iterator />
+
+			<div class="separator"><!-- --></div>
+		</c:when>
+	</c:choose>
 </liferay-ui:search-container>

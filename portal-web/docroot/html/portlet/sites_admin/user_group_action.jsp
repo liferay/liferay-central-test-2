@@ -36,6 +36,7 @@ Group group = (Group)row.getParameter("group");
 
 		<liferay-ui:icon
 			image="assign_user_group_roles"
+			message="assign-site-roles"
 			url="<%= assignURL %>"
 		/>
 	</c:if>

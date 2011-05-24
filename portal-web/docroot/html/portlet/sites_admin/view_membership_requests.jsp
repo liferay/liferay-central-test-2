@@ -40,8 +40,12 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title="<%= group.getDescriptiveName() %>"
+	title='<%= group.getDescriptiveName() + StringPool.COLON + StringPool.SPACE + LanguageUtil.get(pageContext, "manage-memberships") %>'
 />
+
+<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value="view-membership-requests" />
+</liferay-util:include>
 
 <liferay-ui:tabs
 	names="pending,approved,denied"

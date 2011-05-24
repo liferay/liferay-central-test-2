@@ -38,22 +38,14 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 pageContext.setAttribute("portletURL", portletURL);
 %>
 
-<div>
-	<c:choose>
-		<c:when test="<%= group.isOrganization() %>">
-			<liferay-ui:header
-				backURL="<%= backURL %>"
-				title="<%= group.getDescriptiveName() %>"
-			/>
-		</c:when>
-		<c:otherwise>
-			<liferay-ui:header
-				backURL="<%= backURL %>"
-				title="<%= group.getDescriptiveName() %>"
-			/>
-		</c:otherwise>
-	</c:choose>
-</div>
+<liferay-ui:header
+	backURL="<%= backURL %>"
+	title='<%= group.getDescriptiveName() + StringPool.COLON + StringPool.SPACE + LanguageUtil.get(pageContext, "manage-memberships") %>'
+/>
+
+<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_toolbar.jsp">
+	<liferay-util:param name="toolbarItem" value="view-teams" />
+</liferay-util:include>
 
 <br />
 

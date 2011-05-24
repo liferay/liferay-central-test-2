@@ -17,31 +17,56 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
+String tabs1 = (String)request.getAttribute("edit_site_assignments.jsp-tabs1");
 String tabs2 = (String)request.getAttribute("edit_site_assignments.jsp-tabs2");
 
 int cur = (Integer)request.getAttribute("edit_site_assignments.jsp-cur");
 
+String redirect = ParamUtil.getString(request, "redirect");
+
 Group group = (Group)request.getAttribute("edit_site_assignments.jsp-group");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.jsp-portletURL");
+
+PortletURL viewUserGroupsURL = renderResponse.createRenderURL();
+
+viewUserGroupsURL.setParameter("struts_action", "/sites_admin/edit_site_assignments");
+viewUserGroupsURL.setParameter("tabs1", "user-groups");
+viewUserGroupsURL.setParameter("tabs2", "current");
+viewUserGroupsURL.setParameter("redirect", redirect);
+viewUserGroupsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+
+UserGroupGroupChecker userGroupGroupChecker = null;
+
+if (!tabs1.equals("summary")) {
+	userGroupGroupChecker = new UserGroupGroupChecker(renderResponse, group);
+}
+
+String emptyResultsMessage = UserGroupSearch.EMPTY_RESULTS_MESSAGE;
+
+if (tabs2.equals("current")) {
+	emptyResultsMessage ="no-user-group-was-found-that-is-a-member-of-this-site";
+}
+
+UserGroupSearch userGroupSearch = new UserGroupSearch(renderRequest, viewUserGroupsURL);
+
+userGroupSearch.setEmptyResultsMessage(emptyResultsMessage);
 %>
 
 <aui:input name="addUserGroupIds" type="hidden" />
 <aui:input name="removeUserGroupIds" type="hidden" />
 
-<liferay-ui:tabs
-	names="current,available"
-	param="tabs2"
-	url="<%= portletURL.toString() %>"
-/>
-
 <liferay-ui:search-container
-	rowChecker="<%= new UserGroupGroupChecker(renderResponse, group) %>"
-	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
+	rowChecker="<%= userGroupGroupChecker %>"
+	searchContainer="<%= userGroupSearch %>"
 >
-	<liferay-ui:search-form
-		page="/html/portlet/enterprise_admin/user_group_search.jsp"
-	/>
+	<c:if test='<%= !tabs1.equals("summary") %>'>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_group_search.jsp"
+		/>
+
+		<div class="separator"><!-- --></div>
+	</c:if>
 
 	<%
 	UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
@@ -112,15 +137,39 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_site_assignments.
 		</c:if>
 	</liferay-ui:search-container-row>
 
-	<div class="separator"><!-- --></div>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("summary") && (total > 0) %>'>
+			<liferay-ui:panel collapsible='<%= true %>' extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, (total > 1) ? "x-user-groups" : "x-user-group", total) %>'>
 
-	<%
-	String taglibOnClick = renderResponse.getNamespace() + "updateGroupUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
-	%>
+				<aui:input inlineField="<%= true %>" label="" name='<%= DisplayTerms.KEYWORDS + "_user_groups" %>' size="30" value="" />
 
-	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+				<aui:button type="submit" value="search" />
 
-	<br /><br />
+				<br /> <br />
 
-	<liferay-ui:search-iterator />
+				<liferay-ui:search-iterator paginate='<%= false %>' />
+
+				<c:if test="<%= total > userGroupSearch.getDelta() %>">
+					<a href="<%= viewUserGroupsURL %>"><liferay-ui:message key="view-more" /> &raquo;</a>
+				</c:if>
+
+			</liferay-ui:panel>
+
+			<div class="separator"><!-- --></div>
+		</c:when>
+		<c:when test='<%= !tabs1.equals("summary") %>'>
+
+			<%
+			String taglibOnClick = renderResponse.getNamespace() + "updateGroupUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+			%>
+
+			<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+
+			<br /><br />
+
+			<liferay-ui:search-iterator />
+
+			<div class="separator"><!-- --></div>
+		</c:when>
+	</c:choose>
 </liferay-ui:search-container>
