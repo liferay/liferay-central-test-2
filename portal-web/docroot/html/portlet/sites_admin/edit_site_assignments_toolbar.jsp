@@ -17,8 +17,9 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-memberships");
 String redirect = ParamUtil.getString(request, "redirect");
+
+String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-memberships");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
