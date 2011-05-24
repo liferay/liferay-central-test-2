@@ -39,19 +39,22 @@ public interface ContentLocalService {
 		throws SystemException;
 
 	public boolean deleteContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException;
 
 	public Content getContent(
-			long companyId, long repositoryId, String path)
+			long companyId, String portletId, long repositoryId, String path)
 		throws NoSuchContentException, SystemException;
 
 	public Content getContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws NoSuchContentException, SystemException;
 
 	public boolean hasContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException;
 
 }

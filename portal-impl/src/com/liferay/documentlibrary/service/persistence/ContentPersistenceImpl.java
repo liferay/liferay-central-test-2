@@ -30,18 +30,22 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 /**
  * @author Shuyang Zhou
+ * @author Michael Chen
+ * @author Brian Wing Shun Chan
  */
 public class ContentPersistenceImpl
 	extends BasePersistenceImpl<Dummy> implements ContentPersistence {
 
-	public int countByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public int countByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("SELECT count(content) FROM Content content WHERE ");
 		sb.append("content.companyId = ? AND ");
+		sb.append("content.portletId = ? AND ");
 		sb.append("content.repositoryId = ? AND ");
 		sb.append("content.path = ? AND ");
 		sb.append("content.version = ?");
@@ -58,6 +62,7 @@ public class ContentPersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+			qPos.add(portletId);
 			qPos.add(repositoryId);
 			qPos.add(path);
 			qPos.add(version);
@@ -72,13 +77,15 @@ public class ContentPersistenceImpl
 		}
 	}
 
-	public Content fetchByC_R_P(long companyId, long repositoryId, String path)
+	public Content fetchByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append("SELECT content FROM Content content WHERE ");
 		sb.append("content.companyId = ? AND ");
+		sb.append("content.portletId = ? AND ");
 		sb.append("content.repositoryId = ? AND ");
 		sb.append("content.path = ? ");
 
@@ -99,6 +106,7 @@ public class ContentPersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+			qPos.add(portletId);
 			qPos.add(repositoryId);
 			qPos.add(path);
 
@@ -114,14 +122,16 @@ public class ContentPersistenceImpl
 		}
 	}
 
-	public Content fetchByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public Content fetchByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(5);
 
 		sb.append("SELECT content FROM Content content WHERE ");
 		sb.append("content.companyId = ? AND ");
+		sb.append("content.portletId = ? AND ");
 		sb.append("content.repositoryId = ? AND ");
 		sb.append("content.path = ? AND ");
 		sb.append("content.version = ?");
@@ -138,6 +148,7 @@ public class ContentPersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+			qPos.add(portletId);
 			qPos.add(repositoryId);
 			qPos.add(path);
 			qPos.add(version);
@@ -170,23 +181,25 @@ public class ContentPersistenceImpl
 		}
 	}
 
-	public Content findByC_R_P(
-			long companyId, long repositoryId, String path)
+	public Content findByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
 		throws NoSuchContentException, SystemException {
 
-		Content content = fetchByC_R_P(companyId, repositoryId, path);
+		Content content = fetchByC_P_R_P(
+			companyId, portletId, repositoryId, path);
 
 		if (content == null) {
-			StringBundler msg = new StringBundler(8);
+			StringBundler msg = new StringBundler(10);
 
 			msg.append("No Content exists with the key {");
 			msg.append("companyId=");
 			msg.append(companyId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 			msg.append(", repositoryId=");
 			msg.append(repositoryId);
 			msg.append(", path=");
 			msg.append(path);
-
 			msg.append("}");
 
 			throw new NoSuchContentException(msg.toString());
@@ -195,19 +208,22 @@ public class ContentPersistenceImpl
 		return content;
 	}
 
-	public Content findByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public Content findByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws NoSuchContentException, SystemException {
 
-		Content content = fetchByC_R_P_V(companyId, repositoryId, path,
-			version);
+		Content content = fetchByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 
 		if (content == null) {
-			StringBundler msg = new StringBundler(10);
+			StringBundler msg = new StringBundler(12);
 
 			msg.append("No Content exists with the key {");
 			msg.append("companyId=");
 			msg.append(companyId);
+			msg.append(", portletId=");
+			msg.append(portletId);
 			msg.append(", repositoryId=");
 			msg.append(repositoryId);
 			msg.append(", path=");
@@ -265,14 +281,16 @@ public class ContentPersistenceImpl
 		}
 	}
 
-	public boolean removeByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public boolean removeByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(5);
 
 		sb.append("DELETE FROM Content WHERE ");
 		sb.append("companyId = ? AND ");
+		sb.append("portletId = ? AND ");
 		sb.append("repositoryId = ? AND ");
 		sb.append("path_ = ? AND ");
 		sb.append("version = ?");
@@ -289,6 +307,7 @@ public class ContentPersistenceImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+			qPos.add(portletId);
 			qPos.add(repositoryId);
 			qPos.add(path);
 			qPos.add(version);

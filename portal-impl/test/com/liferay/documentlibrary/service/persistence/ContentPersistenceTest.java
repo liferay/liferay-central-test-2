@@ -36,33 +36,33 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 			ContentPersistence.class.getName());
 	}
 
-	public void testCountByC_R_P_V() throws Exception {
+	public void testCountByC_P_R_P_V() throws Exception {
 		Content content = createContent();
 
-		int count = _persistence.countByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), content.getVersion());
+		int count = _persistence.countByC_P_R_P_V(
+			content.getCompanyId(), content.getPortletId(),
+			content.getRepositoryId(), content.getPath(), content.getVersion());
 
 		assertEquals(0, count);
 
 		_persistence.update(content);
 
-		count = _persistence.countByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), content.getVersion());
+		count = _persistence.countByC_P_R_P_V(
+			content.getCompanyId(), content.getPortletId(),
+			content.getRepositoryId(), content.getPath(), content.getVersion());
 
 		assertEquals(1, count);
 
 		_persistence.remove(content.getContentId());
 
-		count = _persistence.countByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), content.getVersion());
+		count = _persistence.countByC_P_R_P_V(
+			content.getCompanyId(), content.getPortletId(),
+			content.getRepositoryId(), content.getPath(), content.getVersion());
 
 		assertEquals(0, count);
 	}
 
-	public void testFetchByC_R_P() throws Exception {
+	public void testFetchByC_P_R_P() throws Exception {
 		Content content1 = addContent();
 
 		long contentId2 = content1.getContentId() + 1;
@@ -81,43 +81,44 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 
 		_persistence.update(content2);
 
-		Content existingContent2 = _persistence.fetchByC_R_P(
-			content1.getCompanyId(), content1.getRepositoryId(),
-			content1.getPath());
+		Content existingContent2 = _persistence.fetchByC_P_R_P(
+			content1.getCompanyId(), content1.getPortletId(),
+			content1.getRepositoryId(), content1.getPath());
 
 		assertTrue(existingContent2.equals(content2));
 
 		_persistence.remove(existingContent2.getContentId());
 
-		Content existingContent1 = _persistence.fetchByC_R_P(
-			content1.getCompanyId(), content1.getRepositoryId(),
-			content1.getPath());
+		Content existingContent1 = _persistence.fetchByC_P_R_P(
+			content1.getCompanyId(), content1.getPortletId(),
+			content1.getRepositoryId(), content1.getPath());
 
 		assertTrue(existingContent1.equals(content1));
 
 		_persistence.remove(existingContent1.getContentId());
 
-		Content missingContent = _persistence.fetchByC_R_P(
-			content1.getCompanyId(), content1.getRepositoryId(),
-			content1.getPath());
+		Content missingContent = _persistence.fetchByC_P_R_P(
+			content1.getCompanyId(), content1.getPortletId(),
+			content1.getRepositoryId(), content1.getPath());
 
 		assertNull(missingContent);
 	}
 
-	public void testFetchByC_R_P_V() throws Exception {
+	public void testFetchByC_P_R_P_V() throws Exception {
 		Content content = addContent();
 
-		Content existingContent = _persistence.fetchByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), content.getVersion());
+		Content existingContent = _persistence.fetchByC_P_R_P_V(
+			content.getCompanyId(), content.getPortletId(),
+			content.getRepositoryId(), content.getPath(),
+			content.getVersion());
 
 		assertTrue(existingContent.equals(content));
 
 		_persistence.remove(existingContent.getContentId());
 
-		Content missingContent = _persistence.fetchByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), randomString());
+		Content missingContent = _persistence.fetchByC_P_R_P_V(
+			content.getCompanyId(), content.getPortletId(),
+			content.getRepositoryId(), content.getPath(), randomString());
 
 		assertNull(missingContent);
 	}
@@ -139,7 +140,7 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		assertNull(missingContent);
 	}
 
-	public void testFindByC_R_P() throws Exception {
+	public void testFindByC_P_R_P() throws Exception {
 		Content content1 = addContent();
 
 		long contentId2 = content1.getContentId() + 1;
@@ -158,26 +159,26 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 
 		_persistence.update(content2);
 
-		Content existingContent2 = _persistence.findByC_R_P(
-			content1.getCompanyId(), content1.getRepositoryId(),
-			content1.getPath());
+		Content existingContent2 = _persistence.findByC_P_R_P(
+			content1.getCompanyId(), content1.getPortletId(),
+			content1.getRepositoryId(), content1.getPath());
 
 		assertTrue(existingContent2.equals(content2));
 
 		_persistence.remove(existingContent2.getContentId());
 
-		Content existingContent1 = _persistence.findByC_R_P(
-			content1.getCompanyId(), content1.getRepositoryId(),
-			content1.getPath());
+		Content existingContent1 = _persistence.findByC_P_R_P(
+			content1.getCompanyId(), content1.getPortletId(),
+			content1.getRepositoryId(), content1.getPath());
 
 		assertTrue(existingContent1.equals(content1));
 
 		_persistence.remove(existingContent1.getContentId());
 
 		try {
-			_persistence.findByC_R_P(
-				content1.getCompanyId(), content1.getRepositoryId(),
-				content1.getPath());
+			_persistence.findByC_P_R_P(
+				content1.getCompanyId(), content1.getPortletId(),
+				content1.getRepositoryId(), content1.getPath());
 
 			fail("Missing entity did not throw NoSuchContentException");
 		}
@@ -185,19 +186,20 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		}
 	}
 
-	public void testFindByC_R_P_V() throws Exception {
+	public void testFindByC_P_R_P_V() throws Exception {
 		Content content = addContent();
 
-		Content existingContent = _persistence.findByC_R_P_V(
-			content.getCompanyId(), content.getRepositoryId(),
-			content.getPath(), content.getVersion());
+		Content existingContent = _persistence.findByC_P_R_P_V(
+			content.getCompanyId(), content.getPortletId(),
+			content.getRepositoryId(), content.getPath(), content.getVersion());
 
 		assertTrue(existingContent.equals(content));
 
 		_persistence.remove(existingContent.getContentId());
 
 		try {
-			_persistence.findByC_R_P_V(content.getCompanyId(),
+			_persistence.findByC_P_R_P_V(
+				content.getCompanyId(), content.getPortletId(),
 				content.getRepositoryId(), content.getPath(), randomString());
 
 			fail("Missing entity did not throw NoSuchContentException");
@@ -244,7 +246,7 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 		assertNull(existingContent);
 	}
 
-	public void testRemoveByC_R_P_V() throws Exception {
+	public void testRemoveByC_P_R_P_V() throws Exception {
 		Content content = addContent();
 
 		Content existingContent = _persistence.fetchByPrimaryKey(
@@ -252,9 +254,10 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 
 		assertNotNull(existingContent);
 
-		boolean removed = _persistence.removeByC_R_P_V(
-			existingContent.getCompanyId(), existingContent.getRepositoryId(),
-			existingContent.getPath(), existingContent.getVersion());
+		boolean removed = _persistence.removeByC_P_R_P_V(
+			existingContent.getCompanyId(), existingContent.getPortletId(),
+			existingContent.getRepositoryId(), existingContent.getPath(),
+			existingContent.getVersion());
 
 		assertTrue(removed);
 

@@ -25,27 +25,30 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  */
 public class ContentUtil {
 
-	public static int countByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public static int countByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		return getPersistence().countByC_R_P_V(
-			companyId, repositoryId, path, version);
+		return getPersistence().countByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 	}
 
-	public static Content fetchByC_R_P(
-			long companyId, long repositoryId, String path)
+	public static Content fetchByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException {
 
-		return getPersistence().fetchByC_R_P(companyId, repositoryId, path);
+		return getPersistence().fetchByC_P_R_P(
+			companyId, portletId, repositoryId, path);
 	}
 
-	public static Content fetchByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public static Content fetchByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		return getPersistence().fetchByC_R_P_V(
-			companyId, repositoryId, path, version);
+		return getPersistence().fetchByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public static Content fetchByPrimaryKey(long contentId)
@@ -54,19 +57,21 @@ public class ContentUtil {
 		return getPersistence().fetchByPrimaryKey(contentId);
 	}
 
-	public static Content findByC_R_P(
-			long companyId, long repositoryId, String path)
+	public static Content findByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
 		throws NoSuchContentException, SystemException {
 
-		return getPersistence().findByC_R_P(companyId, repositoryId, path);
+		return getPersistence().findByC_P_R_P(
+			companyId, portletId, repositoryId, path);
 	}
 
-	public static Content findByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public static Content findByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws NoSuchContentException, SystemException {
 
-		return getPersistence().findByC_R_P_V(
-			companyId, repositoryId, path, version);
+		return getPersistence().findByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public static Content findByPrimaryKey(long contentId)
@@ -92,12 +97,13 @@ public class ContentUtil {
 		getPersistence().remove(contentId);
 	}
 
-	public static boolean removeByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public static boolean removeByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		return getPersistence().removeByC_R_P_V(
-			companyId, repositoryId, path, version);
+		return getPersistence().removeByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public static void update(Content content) throws SystemException {

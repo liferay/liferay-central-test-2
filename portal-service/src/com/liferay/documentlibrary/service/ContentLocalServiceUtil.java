@@ -47,18 +47,30 @@ public class ContentLocalServiceUtil {
 			size);
 	}
 
-	public static Content getContent(
-			long companyId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException {
+	public static boolean deleteContent(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
+		throws SystemException {
 
-		return getService().getContent(companyId, repositoryId, path);
+		return getService().deleteContent(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public static Content getContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path)
 		throws NoSuchContentException, SystemException {
 
-		return getService().getContent(companyId, repositoryId, path, version);
+		return getService().getContent(
+			companyId, portletId, repositoryId, path);
+	}
+
+	public static Content getContent(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
+		throws NoSuchContentException, SystemException {
+
+		return getService().getContent(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public static ContentLocalService getService() {
@@ -76,18 +88,12 @@ public class ContentLocalServiceUtil {
 	}
 
 	public static boolean hasContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		return getService().hasContent(companyId, repositoryId, path, version);
-	}
-
-	public static boolean removeByC_R_F_V(
-			long companyId, long repositoryId, String path, String version)
-		throws SystemException {
-
-		return getService().deleteContent(
-			companyId, repositoryId, path, version);
+		return getService().hasContent(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public void setService(ContentLocalService service) {

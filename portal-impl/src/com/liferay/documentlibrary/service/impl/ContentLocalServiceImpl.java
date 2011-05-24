@@ -66,33 +66,38 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 	}
 
 	public boolean deleteContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		return _contentPersistence.removeByC_R_P_V(
-			companyId, repositoryId, path, version);
-	}
-
-	public Content getContent(long companyId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException {
-
-		return _contentPersistence.findByC_R_P(companyId, repositoryId, path);
+		return _contentPersistence.removeByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public Content getContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path)
 		throws NoSuchContentException, SystemException {
 
-		return _contentPersistence.findByC_R_P_V(
-			companyId, repositoryId, path, version);
+		return _contentPersistence.findByC_P_R_P(
+			companyId, portletId, repositoryId, path);
+	}
+
+	public Content getContent(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
+		throws NoSuchContentException, SystemException {
+
+		return _contentPersistence.findByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 	}
 
 	public boolean hasContent(
-			long companyId, long repositoryId, String path, String version)
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException {
 
-		int count = _contentPersistence.countByC_R_P_V(
-			companyId, repositoryId, path, version);
+		int count = _contentPersistence.countByC_P_R_P_V(
+			companyId, portletId, repositoryId, path, version);
 
 		if (count > 0) {
 			return true;

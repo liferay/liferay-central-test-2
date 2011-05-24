@@ -25,25 +25,29 @@ import com.liferay.portal.service.persistence.BasePersistence;
  */
 public interface ContentPersistence extends BasePersistence<Dummy> {
 
-	public int countByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public int countByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException;
 
-	public Content fetchByC_R_P(long companyId, long repositoryId, String path)
+	public Content fetchByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException;
 
-	public Content fetchByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public Content fetchByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException;
 
 	public Content fetchByPrimaryKey(long contentId) throws SystemException;
 
-	public Content findByC_R_P(
-			long companyId, long repositoryId, String path)
+	public Content findByC_P_R_P(
+			long companyId, String portletId, long repositoryId, String path)
 		throws NoSuchContentException, SystemException;
 
-	public Content findByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public Content findByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws NoSuchContentException, SystemException;
 
 	public Content findByPrimaryKey(long contentId)
@@ -52,8 +56,9 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 	public void remove(long contentId)
 		throws NoSuchContentException, SystemException;
 
-	public boolean removeByC_R_P_V(
-			long companyId, long repositoryId, String path, String version)
+	public boolean removeByC_P_R_P_V(
+			long companyId, String portletId, long repositoryId, String path,
+			String version)
 		throws SystemException;
 
 	public void update(Content content) throws SystemException;
