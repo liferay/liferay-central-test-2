@@ -388,6 +388,68 @@ public class ContentPersistenceImpl
 		}
 	}
 
+	public boolean updatePath(long contentId, String path)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(
+				"UPDATE Content SET path_ = ? WHERE contentId = ? ");
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(path);
+			qPos.add(path);
+
+			if (q.executeUpdate() > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public boolean updateRepositoryId(long contentId, long repositoryId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createSQLQuery(
+				"UPDATE Content SET repositoryId = ? WHERE contentId = ? ");
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(repositoryId);
+			qPos.add(contentId);
+
+			if (q.executeUpdate() > 0) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		ContentPersistenceImpl.class);
 

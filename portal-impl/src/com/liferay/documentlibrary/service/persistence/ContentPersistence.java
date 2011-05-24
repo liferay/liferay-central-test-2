@@ -67,4 +67,10 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 
 	public void update(Content content) throws SystemException;
 
+	public boolean updatePath(long contentId, String path)
+		throws SystemException;
+
+	public boolean updateRepositoryId(long contentId, long repositoryId)
+		throws SystemException;
+
 }
