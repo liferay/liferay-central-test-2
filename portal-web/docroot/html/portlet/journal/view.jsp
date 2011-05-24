@@ -82,6 +82,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<c:if test="<%= !results.isEmpty() %>">
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
+
 					<span class="delete-button-wrapper">
 						<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
 					</span>
@@ -108,7 +109,7 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setParameter("articleId", article.getArticleId());
 			%>
 
-			<%@ include file="/html/portlet/journal/article_columns.jspf" %>
+				<%@ include file="/html/portlet/journal/article_columns.jspf" %>
 
 			<%
 
@@ -507,19 +508,23 @@ portletURL.setParameter("tabs1", tabs1);
 
 <aui:script use="aui-base">
 	A.use(
-		function(A){
-			var checkboxes = A.all('.results-grid :checkbox');
+		function(A) {
 			var deleteButton = A.all('.delete-button-wrapper :button');
+
 			var deleteButtonWrapper = A.all('.delete-button-wrapper');
 
 			var toggleDisabled = function(state) {
 				deleteButton.set('disabled', state);
+
 				deleteButtonWrapper.toggleClass('yui3-aui-button-disabled', state);
 			};
 
 			toggleDisabled(true);
 
-			checkboxes.on('click',
+			var checkboxes = A.all('.results-grid :checkbox');
+
+			checkboxes.on(
+				'click',
 				function() {
 					var checked = (checkboxes.filter(':checked').size() == 0);
 
