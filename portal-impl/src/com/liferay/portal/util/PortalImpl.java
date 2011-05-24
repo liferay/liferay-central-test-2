@@ -100,6 +100,7 @@ import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.AuthTokenUtil;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -319,20 +320,6 @@ public class PortalImpl implements Portal {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Portal web directory " + _portalWebDir);
-		}
-
-		// CDN host
-
-		_cdnHostHttp = PropsValues.CDN_HOST_HTTP;
-
-		if (_cdnHostHttp.startsWith("${")) {
-			_cdnHostHttp = StringPool.BLANK;
-		}
-
-		_cdnHostHttps = PropsValues.CDN_HOST_HTTPS;
-
-		if (_cdnHostHttps.startsWith("${")) {
-			_cdnHostHttps = StringPool.BLANK;
 		}
 
 		// Paths
@@ -963,11 +950,42 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getCDNHostHttp() {
-		return _cdnHostHttp;
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		String cdnHostHttp = StringPool.BLANK;
+
+		try {
+			cdnHostHttp = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CDN_HOST_HTTP, PropsValues.CDN_HOST_HTTP);
+		}
+		catch (SystemException e) {
+		}
+
+		if (cdnHostHttp.startsWith("${")) {
+			cdnHostHttp = StringPool.BLANK;
+		}
+
+		return cdnHostHttp;
 	}
 
 	public String getCDNHostHttps() {
-		return _cdnHostHttps;
+		long companyId = CompanyThreadLocal.getCompanyId();
+
+		String cdnHostHttps = StringPool.BLANK;
+
+		try {
+			cdnHostHttps = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CDN_HOST_HTTPS,
+				PropsValues.CDN_HOST_HTTPS);
+		}
+		catch (SystemException e) {
+		}
+
+		if (cdnHostHttps.startsWith("${")) {
+			cdnHostHttps = StringPool.BLANK;
+		}
+
+		return cdnHostHttps;
 	}
 
 	public String getClassName(long classNameId) {
@@ -5234,8 +5252,6 @@ public class PortalImpl implements Portal {
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
 		Pattern.CASE_INSENSITIVE);
-	private String _cdnHostHttp;
-	private String _cdnHostHttps;
 	private String _computerAddress;
 	private String _computerName;
 	private String[] _customSqlKeys;
