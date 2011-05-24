@@ -72,6 +72,7 @@ import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.FriendlyURLNormalizer;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletCategoryKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
@@ -1367,7 +1368,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				ResourceActionsUtil.getPortletResourceActions(
 					portlet.getPortletId());
 
-			if (actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
+			if (actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
+				(portlet.getControlPanelEntryCategory().equals(
+					PortletCategoryKeys.CONTENT))) {
+
 				setRolePermissions(
 					group, role, portlet.getPortletId(),
 					new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
