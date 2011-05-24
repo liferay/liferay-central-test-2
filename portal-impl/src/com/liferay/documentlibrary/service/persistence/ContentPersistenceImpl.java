@@ -41,13 +41,11 @@ public class ContentPersistenceImpl
 			String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append("SELECT count(content) FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND ");
-		sb.append("content.portletId = ? AND ");
-		sb.append("content.repositoryId = ? AND ");
-		sb.append("content.path = ? AND ");
+		sb.append("content.companyId = ? AND content.portletId = ? AND ");
+		sb.append("content.repositoryId = ? AND content.path = ? AND ");
 		sb.append("content.version = ?");
 
 		String sql = sb.toString();
@@ -81,13 +79,11 @@ public class ContentPersistenceImpl
 			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("SELECT content FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND ");
-		sb.append("content.portletId = ? AND ");
-		sb.append("content.repositoryId = ? AND ");
-		sb.append("content.path = ? ");
+		sb.append("content.companyId = ? AND content.portletId = ? AND ");
+		sb.append("content.repositoryId = ? AND content.path = ? ");
 
 		appendOrderByComparator(sb, "content.", new ContentVersionComparator());
 
@@ -127,13 +123,11 @@ public class ContentPersistenceImpl
 			String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(4);
 
 		sb.append("SELECT content FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND ");
-		sb.append("content.portletId = ? AND ");
-		sb.append("content.repositoryId = ? AND ");
-		sb.append("content.path = ? AND ");
+		sb.append("content.companyId = ? AND content.portletId = ? AND ");
+		sb.append("content.repositoryId = ? AND content.path = ? AND ");
 		sb.append("content.version = ?");
 
 		String sql = sb.toString();
@@ -285,22 +279,14 @@ public class ContentPersistenceImpl
 			long companyId, String portletId, long repositoryId, String path)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("DELETE FROM Content WHERE ");
-		sb.append("companyId = ? AND ");
-		sb.append("portletId = ? AND ");
-		sb.append("repositoryId = ? AND ");
-		sb.append("path_ LIKE ?");
-
-		String sql = sb.toString();
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Query q = session.createSQLQuery(sql);
+			Query q = session.createSQLQuery(
+				"DELETE FROM Content WHERE companyId = ? AND portletId = ? " +
+					"AND repositoryId = ? AND path_ LIKE ?");
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -329,23 +315,14 @@ public class ContentPersistenceImpl
 			String version)
 		throws SystemException {
 
-		StringBundler sb = new StringBundler(6);
-
-		sb.append("DELETE FROM Content WHERE ");
-		sb.append("companyId = ? AND ");
-		sb.append("portletId = ? AND ");
-		sb.append("repositoryId = ? AND ");
-		sb.append("path_ = ? AND ");
-		sb.append("version = ?");
-
-		String sql = sb.toString();
-
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Query q = session.createSQLQuery(sql);
+			Query q = session.createSQLQuery(
+				"DELETE FROM Content WHERE companyId = ? AND portletId = ? " +
+					"AND repositoryId = ? AND path_ = ? AND version = ?");
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
