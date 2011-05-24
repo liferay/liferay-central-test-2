@@ -40,9 +40,11 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
@@ -587,9 +589,46 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		catch (NoSuchRoleException nsre) {
 			role = roleLocalService.addRole(
 				0, companyId, name, null, description, type);
+
+			if (name.equals(RoleConstants.USER)) {
+				initPersonalControlPanelPortletsPermissions(companyId, role);
+			}
 		}
 
 		_systemRolesMap.put(companyId + name, role);
+	}
+
+	protected String[] getDefaultControlPanelPortlets() {
+		return new String[] {
+			PortletKeys.MY_WORKFLOW_TASKS, PortletKeys.MY_WORKFLOW_INSTANCES
+		};
+	}
+
+	protected void initPersonalControlPanelPortletsPermissions(
+			long companyId, Role role)
+		throws PortalException, SystemException {
+
+		for (String portletId : getDefaultControlPanelPortlets()) {
+			setRolePermissions(
+				companyId, role, portletId,
+				new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
+		}
+	}
+
+	protected void setRolePermissions(
+			long companyId, Role role, String name, String[] actionIds)
+		throws PortalException, SystemException {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			resourcePermissionLocalService.setResourcePermissions(
+				companyId, name, ResourceConstants.SCOPE_COMPANY, "0",
+				role.getRoleId(), actionIds);
+		}
+		else {
+			permissionLocalService.setRolePermissions(
+				role.getRoleId(), companyId, name,
+				ResourceConstants.SCOPE_COMPANY, "0", actionIds);
+		}
 	}
 
 	protected void validate(
