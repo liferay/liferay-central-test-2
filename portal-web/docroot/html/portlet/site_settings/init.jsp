@@ -16,6 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portal.GroupFriendlyURLException" %>
 <%@ page import="com.liferay.portal.ImageTypeException" %>
 <%@ page import="com.liferay.portal.LayoutSetVirtualHostException" %>
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>

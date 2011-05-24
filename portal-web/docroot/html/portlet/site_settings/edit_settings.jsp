@@ -142,6 +142,49 @@ request.setAttribute("edit_settings.jsp-liveGroupTypeSettings", liveGroupTypeSet
 		url='<%= portletURL.toString() %>'
 	/>
 
+	<liferay-ui:error exception="<%= GroupFriendlyURLException.class %>">
+
+		<%
+		GroupFriendlyURLException gfurle = (GroupFriendlyURLException)errorException;
+		%>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.ADJACENT_SLASHES %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-have-adjacent-slashes" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.DOES_NOT_START_WITH_SLASH %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-begins-with-a-slash" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.DUPLICATE %>">
+			<liferay-ui:message key="please-enter-a-unique-friendly-url" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.ENDS_WITH_SLASH %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-end-with-a-slash" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.INVALID_CHARACTERS %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-with-valid-characters" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.KEYWORD_CONFLICT %>">
+			<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", gfurle.getKeywordConflict()) %>
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.POSSIBLE_DUPLICATE %>">
+			<liferay-ui:message key="the-friendly-url-may-conflict-with-another-page" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.TOO_DEEP %>">
+			<liferay-ui:message key="the-friendly-url-has-too-many-slashes" />
+		</c:if>
+
+		<c:if test="<%= gfurle.getType() == GroupFriendlyURLException.TOO_SHORT %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-is-at-least-two-characters-long" />
+		</c:if>
+	</liferay-ui:error>
+
 	<liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
 
 	<liferay-ui:error exception="<%= LayoutSetVirtualHostException.class %>">

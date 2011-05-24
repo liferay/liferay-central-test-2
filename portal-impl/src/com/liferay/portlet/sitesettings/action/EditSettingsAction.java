@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.sitesettings.action;
 
+import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -88,7 +89,8 @@ public class EditSettingsAction extends EditLayoutsAction {
 
 				setForward(actionRequest, "portlet.site_settings.error");
 			}
-			else if (e instanceof ImageTypeException ||
+			else if (e instanceof GroupFriendlyURLException ||
+					 e instanceof ImageTypeException ||
 					 e instanceof UploadException ||
 					 e instanceof SystemException) {
 
