@@ -56,11 +56,8 @@ import com.liferay.portal.util.PropsValues;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-
 import java.net.MalformedURLException;
-
 import java.text.DateFormat;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -1106,7 +1103,9 @@ public class PluginPackageUtil {
 
 				Properties properties = PropertiesUtil.load(propertiesString);
 
-				String displayName = servletContextName.substring(1);
+				int beginIndex = servletContextName.startsWith("/") ? 1 : 0;
+
+				String displayName = servletContextName.substring(beginIndex);
 
 				pluginPackage = _readPluginPackageProperties(
 					displayName, properties);
