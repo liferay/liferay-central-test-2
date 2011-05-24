@@ -222,10 +222,13 @@ public class ServiceContextFactory {
 
 		long[] assetCategoryIds = StringUtil.split(
 			ParamUtil.getString(portletRequest, "assetCategoryIds"), 0L);
+		long[] assetLinkEntryIds = StringUtil.split(ParamUtil.getString(
+			portletRequest, "assetLinkSearchContainerPrimaryKeys"), 0L);
 		String[] assetTagNames = StringUtil.split(
 			ParamUtil.getString(portletRequest, "assetTagNames"));
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
+		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
 
 		// Workflow

@@ -43,6 +43,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setAddGroupPermissions(getAddGroupPermissions());
 		serviceContext.setAddGuestPermissions(getAddGuestPermissions());
 		serviceContext.setAssetCategoryIds(getAssetCategoryIds());
+		serviceContext.setAssetLinkEntryIds(getAssetLinkEntryIds());
 		serviceContext.setAssetTagNames(getAssetTagNames());
 		serviceContext.setAttributes(getAttributes());
 		serviceContext.setCommand(getCommand());
@@ -87,6 +88,10 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	public long[] getAssetCategoryIds() {
 		return _assetCategoryIds;
+	}
+
+	public long[] getAssetLinkEntryIds() {
+	  return _assetLinkEntryIds;
 	}
 
 	public String[] getAssetTagNames() {
@@ -262,6 +267,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		_assetCategoryIds = assetCategoryIds;
 	}
 
+	public void setAssetLinkEntryIds(long[] _assetLinkEntryIds) {
+	  this._assetLinkEntryIds = _assetLinkEntryIds;
+	}
+
 	public void setAssetTagNames(String[] assetTagNames) {
 		_assetTagNames = assetTagNames;
 	}
@@ -372,6 +381,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private boolean _addGroupPermissions;
 	private boolean _addGuestPermissions;
 	private long[] _assetCategoryIds;
+	private long[] _assetLinkEntryIds;
 	private String[] _assetTagNames;
 	private Map<String, Serializable> _attributes;
 	private String _command;
