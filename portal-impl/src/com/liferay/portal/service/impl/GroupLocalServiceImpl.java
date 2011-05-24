@@ -1368,13 +1368,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				ResourceActionsUtil.getPortletResourceActions(
 					portlet.getPortletId());
 
-			String controlPanelEntryCategory =
-				portlet.getControlPanelEntryCategory();
+			String controlPanelEntryCategory = GetterUtil.getString(
+				portlet.getControlPanelEntryCategory());
 
 			if (actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
-				((controlPanelEntryCategory != null) &&
-				 controlPanelEntryCategory.equals(
-					 PortletCategoryKeys.CONTENT))) {
+				controlPanelEntryCategory.equals(PortletCategoryKeys.CONTENT)) {
 
 				setRolePermissions(
 					group, role, portlet.getPortletId(),
