@@ -378,16 +378,16 @@ AUI().add(
 
 						tagId = tagId || instance._selectedTagId;
 
-						if (!tagId) {
-							instance._tagViewContainer.empty();
-							return;
+						if (tagId) {
+							var tagURL = instance._createURL(ACTION_VIEW, LIFECYCLE_RENDER);
+
+							var ioDetails = instance._getIOTagDetails();
+
+							ioDetails.set('uri', tagURL.toString()).start();
 						}
-
-						var tagURL = instance._createURL(ACTION_VIEW, LIFECYCLE_RENDER);
-
-						var ioDetails = instance._getIOTagDetails();
-
-						ioDetails.set('uri', tagURL.toString()).start();
+						else {
+							instance._tagViewContainer.empty();
+						}
 					},
 
 					_displayTags: function(callback) {
@@ -954,18 +954,6 @@ AUI().add(
 						instance._tagViewContainer.html(response);
 					},
 
-					_resetTagsProperties: function(event) {
-						var instance = this;
-
-						var contextPanel = event.currentTarget;
-						var boundingBox = contextPanel.get('boundingBox');
-						var propertiesTrigger = boundingBox.one('fieldset#tagProperties');
-
-						var autoFieldsInstance = propertiesTrigger.getData('autoFieldsInstance');
-
-						autoFieldsInstance.reset();
-					},
-
 					_prepareTags: function(tags, callback) {
 						var instance = this;
 
@@ -1037,6 +1025,18 @@ AUI().add(
 
 							instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
 						}
+					},
+
+					_resetTagsProperties: function(event) {
+						var instance = this;
+
+						var contextPanel = event.currentTarget;
+						var boundingBox = contextPanel.get('boundingBox');
+						var propertiesTrigger = boundingBox.one('fieldset#tagProperties');
+
+						var autoFieldsInstance = propertiesTrigger.getData('autoFieldsInstance');
+
+						autoFieldsInstance.reset();
 					},
 
 					_selectTag: function(tagId) {
@@ -1170,6 +1170,12 @@ AUI().add(
 						}
 					},
 
+					_unselectAllTags: function() {
+						var instance = this;
+
+						A.all(instance._tagsItemsSelector).removeClass('selected');
+					},
+
 					_updateTag: function(form) {
 						var instance = this;
 
@@ -1179,12 +1185,6 @@ AUI().add(
 						ioTag.set('uri', form.attr('action'));
 
 						ioTag.start();
-					},
-
-					_unselectAllTags: function() {
-						var instance = this;
-
-						A.all(instance._tagsItemsSelector).removeClass('selected');
 					},
 
 					_tagsItemsSelector: '.tags-admin-list li'
