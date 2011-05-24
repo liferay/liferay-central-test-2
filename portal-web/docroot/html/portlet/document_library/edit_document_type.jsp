@@ -156,6 +156,7 @@ if (documentType != null) {
 		'click',
 		function(event) {
 			var link = event.currentTarget;
+
 			var tr = link.ancestor('tr');
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
