@@ -135,12 +135,10 @@ if (documentType != null) {
 
 			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />structuresSearchContainer');
 
-			var rowColumns = [];
+			var ddmStructureLink = '<a class="modify-link" data-rowId="' + ddmStructureId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeStructureIcon) %></a>';
 
-			rowColumns.push(ddmStructureName);
-			rowColumns.push('<a class="modify-link" data-rowId="' + ddmStructureId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeStructureIcon) %></a>');
+			searchContainer.addRow([ddmStructureName, ddmStructureLink], ddmStructureId);
 
-			searchContainer.addRow(rowColumns, ddmStructureId);
 			searchContainer.updateDataStore();
 
 			if (dialog) {
