@@ -83,9 +83,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<aui:button-row>
 					<aui:button onClick='<%= renderResponse.getNamespace() + "expireArticles();" %>' value="expire" />
 
-					<span class="delete-button-wrapper">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
-					</span>
+					<aui:button cssClass="delete-articles-button" onClick='<%= renderResponse.getNamespace() + "deleteArticles();" %>' value="delete" />
 				</aui:button-row>
 
 				<br /><br />
@@ -506,34 +504,7 @@ portletURL.setParameter("tabs1", tabs1);
 	</c:choose>
 </aui:form>
 
-<aui:script use="aui-base">
-	A.use(
-		function(A) {
-			var deleteButton = A.all('.delete-button-wrapper :button');
-
-			var deleteButtonWrapper = A.all('.delete-button-wrapper');
-
-			var toggleDisabled = function(state) {
-				deleteButton.set('disabled', state);
-
-				deleteButtonWrapper.toggleClass('yui3-aui-button-disabled', state);
-			};
-
-			toggleDisabled(true);
-
-			var checkboxes = A.all('.results-grid :checkbox');
-
-			checkboxes.on(
-				'click',
-				function() {
-					var checked = (checkboxes.filter(':checked').size() == 0);
-
-					toggleDisabled(checked);
-				}
-			);
-		}
-	);
-
+<aui:script>
 	Liferay.provide(
 		window,
 		'<portlet:namespace />deleteArticles',
@@ -603,4 +574,34 @@ portletURL.setParameter("tabs1", tabs1);
 		},
 		['liferay-util-list-fields']
 	);
+</aui:script>
+
+<aui:script use="aui-base">
+	var deleteButtonWrapper = A.one('.delete-articles-button');
+
+	if (deleteButtonWrapper) {
+		var deleteButton = deleteButtonWrapper.one(':button');
+
+		var toggleDisabled = function(disabled) {
+			deleteButton.attr('disabled', disabled);
+
+			deleteButtonWrapper.toggleClass('yui3-aui-button-disabled', disabled);
+		};
+
+		var resultsGrid = A.one('.results-grid');
+
+		if (resultsGrid) {
+			resultsGrid.delegate(
+				'click',
+				function(event) {
+					var disabled = (resultsGrid.one(':checked') == null);
+
+					toggleDisabled(disabled);
+				},
+				':checkbox'
+			);
+		}
+
+		toggleDisabled(true);
+	}
 </aui:script>
