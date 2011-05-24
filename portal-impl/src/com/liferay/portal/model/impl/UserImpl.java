@@ -356,14 +356,14 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 
-		if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
-			myPlaces = ListUtil.subList(myPlaces, start, end);
-		}
-
 		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
 			getCompanyId(), GroupConstants.CONTROL_PANEL);
 
-		myPlaces.add(controlPanelGroup);
+		myPlaces.add(0, controlPanelGroup);
+
+		if ((max != QueryUtil.ALL_POS) && (myPlaces.size() > max)) {
+			myPlaces = ListUtil.subList(myPlaces, start, end);
+		}
 
 		myPlaces = Collections.unmodifiableList(myPlaces);
 
