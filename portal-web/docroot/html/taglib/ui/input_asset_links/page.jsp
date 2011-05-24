@@ -96,8 +96,6 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 		<%
 		AssetEntry assetLinkEntry = null;
 
-		long assetLinkEntryId = 0;
-
 		if (assetLink.getEntryId1() == assetEntry.getEntryId()) {
 			assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId2());
 		}
@@ -105,29 +103,24 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 			assetLinkEntry = AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId1());
 		}
 
-		String assetTitle = StringPool.BLANK;
-		String assetType = StringPool.BLANK;
+		AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(assetLinkEntry.getClassNameId()));
 
-		if (assetLinkEntry != null) {
-			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(assetLinkEntry.getClassNameId()));
+		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetLinkEntry.getClassPK());
 
-			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetLinkEntry.getClassPK());
+		long assetLinkEntryId = assetLinkEntry.getEntryId();
 
-			assetLinkEntryId = assetLinkEntry.getEntryId();
-
-			assetTitle = assetRenderer.getTitle(locale);
-			assetType = ResourceActionsUtil.getModelResource(locale, assetLinkEntry.getClassName());
-        }
+		String assetLinkEntryTitle = assetRenderer.getTitle(locale);
+		String assetLinkEntryType = ResourceActionsUtil.getModelResource(locale, assetLinkEntry.getClassName());
 		%>
 
 		<liferay-ui:search-container-column-text
 			name="type"
-			value="<%= assetType %>"
+			value="<%= assetLinkEntryType %>"
 		/>
 
 		<liferay-ui:search-container-column-text
 			name="title"
-			value="<%= assetTitle %>"
+			value="<%= assetLinkEntryTitle %>"
 		/>
 
 		<liferay-ui:search-container-column-text>
