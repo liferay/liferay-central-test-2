@@ -69,7 +69,7 @@ portletURL.setParameter("target", target);
 			}
 
 			if (includeUserPersonalSite) {
-				Group userPersonalSite = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.USER_PERSONAL_COMMUNITY);
+				Group userPersonalSite = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.USER_PERSONAL_SITE);
 
 				results.add(0, userPersonalSite);
 

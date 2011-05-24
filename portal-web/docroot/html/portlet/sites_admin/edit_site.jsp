@@ -95,9 +95,9 @@ else if (layoutSetPrototype != null) {
 		<aui:input name="description" />
 
 		<aui:select name="type" label="membership-type">
-			<aui:option label="open" value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>" />
-			<aui:option label="restricted" value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>" />
-			<aui:option label="private" value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>" />
+			<aui:option label="open" value="<%= GroupConstants.TYPE_SITE_OPEN %>" />
+			<aui:option label="restricted" value="<%= GroupConstants.TYPE_SITE_RESTRICTED %>" />
+			<aui:option label="private" value="<%= GroupConstants.TYPE_SITE_PRIVATE %>" />
 		</aui:select>
 
 		<aui:input inlineLabel="left" name="active" value="<%= true %>" />

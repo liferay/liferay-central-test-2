@@ -97,7 +97,7 @@ String tabs1 = (String)objArray[1];
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("sites-owned") || tabs1.equals("sites-joined") %>'>
-			<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
+			<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
 				<portlet:actionURL var="leaveURL">
 					<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 					<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -116,7 +116,7 @@ String tabs1 = (String)objArray[1];
 			<c:choose>
 				<c:when test="<%= !GroupLocalServiceUtil.hasUserGroup(user.getUserId(), group.getGroupId()) %>">
 					<c:choose>
-						<c:when test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN %>">
+						<c:when test="<%= group.getType() == GroupConstants.TYPE_SITE_OPEN %>">
 							<portlet:actionURL var="joinURL">
 								<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 								<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -130,7 +130,7 @@ String tabs1 = (String)objArray[1];
 								url="<%= joinURL %>"
 							/>
 						</c:when>
-						<c:when test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
+						<c:when test="<%= (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
 							<portlet:renderURL var="membershipRequestURL">
 								<portlet:param name="struts_action" value="/sites_admin/post_membership_request" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -152,7 +152,7 @@ String tabs1 = (String)objArray[1];
 					</c:choose>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
+					<c:if test="<%= (group.getType() == GroupConstants.TYPE_SITE_OPEN) || (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) %>">
 						<portlet:actionURL var="leaveURL">
 							<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
 							<portlet:param name="<%= Constants.CMD %>" value="group_users" />

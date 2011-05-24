@@ -31,44 +31,44 @@ public class GroupConstants {
 
 	public static final String GUEST = "Guest";
 
-	public static final String USER_PERSONAL_COMMUNITY =
-		"User Personal Community";
+	public static final String USER_PERSONAL_SITE =
+		"User Personal Site";
 
-	public static final String USER_PERSONAL_COMMUNITY_FRIENDLY_URL =
-		"/personal_community";
+	public static final String USER_PERSONAL_SITE_FRIENDLY_URL =
+		"/personal_site";
 
 	public static final String[] SYSTEM_GROUPS = {
-		CONTROL_PANEL, GUEST, USER_PERSONAL_COMMUNITY
+		CONTROL_PANEL, GUEST, USER_PERSONAL_SITE
 	};
 
-	public static final int TYPE_COMMUNITY_OPEN = 1;
+	public static final int TYPE_SITE_OPEN = 1;
 
-	public static final String TYPE_COMMUNITY_OPEN_LABEL = "open";
+	public static final String TYPE_SITE_OPEN_LABEL = "open";
 
-	public static final int TYPE_COMMUNITY_PRIVATE = 3;
+	public static final int TYPE_SITE_PRIVATE = 3;
 
-	public static final String TYPE_COMMUNITY_PRIVATE_LABEL = "private";
+	public static final String TYPE_SITE_PRIVATE_LABEL = "private";
 
-	public static final int TYPE_COMMUNITY_RESTRICTED = 2;
+	public static final int TYPE_SITE_RESTRICTED = 2;
 
-	public static final String TYPE_COMMUNITY_RESTRICTED_LABEL = "restricted";
+	public static final String TYPE_SITE_RESTRICTED_LABEL = "restricted";
 
-	public static final int TYPE_COMMUNITY_SYSTEM = 4;
+	public static final int TYPE_SITE_SYSTEM = 4;
 
-	public static final String TYPE_COMMUNITY_SYSTEM_LABEL = "system";
+	public static final String TYPE_SITE_SYSTEM_LABEL = "system";
 
 	public static String getTypeLabel(int type) {
-		if (type == TYPE_COMMUNITY_OPEN) {
-			return TYPE_COMMUNITY_OPEN_LABEL;
+		if (type == TYPE_SITE_OPEN) {
+			return TYPE_SITE_OPEN_LABEL;
 		}
-		else if (type == TYPE_COMMUNITY_PRIVATE) {
-			return TYPE_COMMUNITY_PRIVATE_LABEL;
+		else if (type == TYPE_SITE_PRIVATE) {
+			return TYPE_SITE_PRIVATE_LABEL;
 		}
-		else if (type == TYPE_COMMUNITY_RESTRICTED) {
-			return TYPE_COMMUNITY_RESTRICTED_LABEL;
+		else if (type == TYPE_SITE_RESTRICTED) {
+			return TYPE_SITE_RESTRICTED_LABEL;
 		}
 		else {
-			return TYPE_COMMUNITY_SYSTEM_LABEL;
+			return TYPE_SITE_SYSTEM_LABEL;
 		}
 	}
 

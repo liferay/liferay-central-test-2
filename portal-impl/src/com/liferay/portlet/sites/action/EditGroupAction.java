@@ -250,7 +250,7 @@ public class EditGroupAction extends PortletAction {
 				groupId, name, description, type, friendlyURL, active,
 				serviceContext);
 
-			if (type == GroupConstants.TYPE_COMMUNITY_OPEN) {
+			if (type == GroupConstants.TYPE_SITE_OPEN) {
 				List<MembershipRequest> membershipRequests =
 					MembershipRequestLocalServiceUtil.search(
 						groupId, MembershipRequestConstants.STATUS_PENDING,

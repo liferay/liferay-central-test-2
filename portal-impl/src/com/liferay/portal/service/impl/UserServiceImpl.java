@@ -90,7 +90,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					if (user.getCompanyId() == group.getCompanyId()) {
 						int type = group.getType();
 
-						if (type == GroupConstants.TYPE_COMMUNITY_OPEN) {
+						if (type == GroupConstants.TYPE_SITE_OPEN) {
 							hasPermission = true;
 						}
 					}
@@ -501,9 +501,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 					if (user.getCompanyId() == group.getCompanyId()) {
 						int type = group.getType();
 
-						if ((type == GroupConstants.TYPE_COMMUNITY_OPEN) ||
-							(type ==
-								GroupConstants.TYPE_COMMUNITY_RESTRICTED)) {
+						if ((type == GroupConstants.TYPE_SITE_OPEN) ||
+							(type == GroupConstants.TYPE_SITE_RESTRICTED)) {
 
 							hasPermission = true;
 						}

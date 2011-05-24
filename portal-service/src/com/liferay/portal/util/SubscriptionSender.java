@@ -359,7 +359,7 @@ public class SubscriptionSender implements Serializable {
 		int type = group.getType();
 
 		if (!GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId) &&
-			(type != GroupConstants.TYPE_COMMUNITY_OPEN)) {
+			(type != GroupConstants.TYPE_SITE_OPEN)) {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(

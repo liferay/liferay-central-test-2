@@ -40,7 +40,7 @@ if (group == null) {
 		<a href="<%= assignMembersURL %>"><liferay-ui:message key="view-memberships" /></a>
 	</span>
 
-	<c:if test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED %>">
+	<c:if test="<%= group.getType() == GroupConstants.TYPE_SITE_RESTRICTED %>">
 		<portlet:renderURL var="viewMembershipRequestsURL">
 			<portlet:param name="struts_action" value="/sites_admin/view_membership_requests" />
 			<portlet:param name="redirect" value="<%= redirect %>" />

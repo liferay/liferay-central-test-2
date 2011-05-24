@@ -94,8 +94,8 @@ pageContext.setAttribute("portletURL", portletURL);
 	else if (tabs1.equals("available-sites")) {
 		List types = new ArrayList();
 
-		types.add(new Integer(GroupConstants.TYPE_COMMUNITY_OPEN));
-		types.add(new Integer(GroupConstants.TYPE_COMMUNITY_RESTRICTED));
+		types.add(new Integer(GroupConstants.TYPE_SITE_OPEN));
+		types.add(new Integer(GroupConstants.TYPE_SITE_RESTRICTED));
 
 		groupParams.put("types", types);
 		groupParams.put("active", Boolean.TRUE);
@@ -313,7 +313,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		if (tabs1.equals("sites-owned")) {
 			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
 
-			if (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) {
+			if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
 				row.addText(String.valueOf(pendingRequests));
 			}
 			else {
