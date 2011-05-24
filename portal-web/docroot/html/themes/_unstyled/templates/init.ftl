@@ -212,10 +212,6 @@
 		<#assign css_class = css_class + " private-page" />
 	</#if>
 
-	<#if page_group.isUser() && layout.isPrivateLayout()>
-		<#assign community_name = languageUtil.get(locale, "my-community") />
-	</#if>
-
 	<#assign my_places_portlet_url = portletURLFactory.create(request, "49", page.getPlid(), "ACTION_PHASE") />
 
 	${my_places_portlet_url.setWindowState("normal")}

@@ -209,10 +209,6 @@
 		#set ($css_class = $css_class + " private-page")
 	#end
 
-	#if	($page_group.isUser() && $layout.isPrivateLayout())
-		#set ($community_name = $languageUtil.get($locale, "my-community"))
-	#end
-
 	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), "ACTION_PHASE"))
 
 	$my_places_portlet_url.setWindowState("normal")
