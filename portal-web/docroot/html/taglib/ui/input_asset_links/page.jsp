@@ -50,7 +50,7 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 			assetBrowserURL.setParameter("typeSelection", assetRendererFactory.getClassName());
 			assetBrowserURL.setParameter("callback", randomNamespace + "addAssetLink");
 
-			String href = "javascript:openAssetBrowser('" + assetBrowserURL.toString() + "')";
+			String href = "javascript:" + randomNamespace + "openAssetBrowser('" + assetBrowserURL.toString() + "')";
 		%>
 
 			<liferay-ui:icon
@@ -134,8 +134,18 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 <aui:input name="assetLinkEntryIds" type="hidden" />
 
 <aui:script>
-	function openAssetBrowser(url) {
-		var assetWindow = Liferay.Util.openWindow({dialog: {width: 820, constrain: true}, id: 'asset_browser', title: 'Asset Browser', uri:url});
+	function <%= randomNamespace %>openAssetBrowser(url) {
+		Liferay.Util.openWindow(
+			{
+				dialog: {
+					constrain: true,
+					width: 820
+				},
+				id: 'asset_browser',
+				title: <liferay-ui:message key="asset-browser" />,
+				uri: url
+			}
+		);
 	}
 
 	Liferay.provide(
@@ -148,13 +158,9 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 
 			searchContainer = Liferay.SearchContainer.get(searchContainerName);
 
-			var rowColumns = [];
+			var entryLink = '<a class="modify-link" data-rowId="' + entryId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeLinkIcon) %></a>';
 
-			rowColumns.push(entryType);
-			rowColumns.push(entryTitle);
-			rowColumns.push('<a class="modify-link" data-rowId="' + entryId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeLinkIcon) %></a>');
-
-			searchContainer.addRow(rowColumns, entryId);
+			searchContainer.addRow([entryType, entryTitle, entryLink], entryId);
 
 			searchContainer.updateDataStore();
 		},
