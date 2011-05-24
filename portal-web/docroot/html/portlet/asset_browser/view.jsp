@@ -18,7 +18,8 @@
 
 <%
 String typeSelection = request.getParameter("typeSelection");
-String callback = request.getParameter("callback");
+
+String callback = ParamUtil.getString(request, "callback");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -66,29 +67,29 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 			ResultRow row = new ResultRow(doc, i, i);
 
-			long entryId = 0;
+			long assetEntryId = 0;
 
 			if (typeSelection.equals(JournalArticle.class.getName())) {
-				entryId = GetterUtil.getLong(doc.get(Field.ROOT_ENTRY_CLASS_PK));
+				assetEntryId = GetterUtil.getLong(doc.get(Field.ROOT_ENTRY_CLASS_PK));
 			}
 			else {
-				entryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
+				assetEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 			}
 
-			AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(typeSelection, entryId);
+			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(typeSelection, assetEntryId);
 
-			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(entry.getClassPK());
+			assetEntry = assetEntry.toEscapedModel();
 
-			entry = entry.toEscapedModel();
+			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
-			StringBundler sb = new StringBundler(11);
+			StringBundler sb = new StringBundler(9);
 
 			sb.append("javascript:Liferay.Util.getOpener().");
 			sb.append(callback);
 			sb.append("('");
-			sb.append(entry.getEntryId());
+			sb.append(assetEntry.getEntryId());
 			sb.append("', '");
-			sb.append(LanguageUtil.get(locale, "model.resource." + entry.getClassName()));
+			sb.append(ResourceActionsUtil.getModelResource(locale, assetEntry.getClassName()));
 			sb.append("', '");
 			sb.append(assetRenderer.getTitle(locale));
 			sb.append("');Liferay.Util.getWindow().close();");
@@ -103,13 +104,13 @@ portletURL.setParameter("typeSelection", typeSelection);
 
 			row.addText(assetRenderer.getSummary(locale), rowHREF);
 
-			// User natypeSelectionme
+			// User name
 
-			row.addText(HtmlUtil.escape(PortalUtil.getUserName(entry.getUserId(), entry.getUserName())), rowHREF);
+			row.addText(HtmlUtil.escape(PortalUtil.getUserName(assetEntry.getUserId(), assetEntry.getUserName())), rowHREF);
 
 			// Modified date
 
-			row.addText(dateFormatDate.format(entry.getModifiedDate()), rowHREF);
+			row.addText(dateFormatDate.format(assetEntry.getModifiedDate()), rowHREF);
 
 			// Add result row
 
