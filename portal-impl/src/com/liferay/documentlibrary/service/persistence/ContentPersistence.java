@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  */
@@ -30,10 +32,6 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 			String version)
 		throws SystemException;
 
-	public Content fetchByC_P_R_P(
-			long companyId, String portletId, long repositoryId, String path)
-		throws SystemException;
-
 	public Content fetchByC_P_R_P_V(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
@@ -41,9 +39,9 @@ public interface ContentPersistence extends BasePersistence<Dummy> {
 
 	public Content fetchByPrimaryKey(long contentId) throws SystemException;
 
-	public Content findByC_P_R_P(
+	public List<Content> findByC_P_R_P(
 			long companyId, String portletId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException;
+		throws SystemException;
 
 	public Content findByC_P_R_P_V(
 			long companyId, String portletId, long repositoryId, String path,

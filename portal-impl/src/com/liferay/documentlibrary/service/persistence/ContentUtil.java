@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  */
@@ -32,14 +34,6 @@ public class ContentUtil {
 
 		return getPersistence().countByC_P_R_P_V(
 			companyId, portletId, repositoryId, path, version);
-	}
-
-	public static Content fetchByC_P_R_P(
-			long companyId, String portletId, long repositoryId, String path)
-		throws SystemException {
-
-		return getPersistence().fetchByC_P_R_P(
-			companyId, portletId, repositoryId, path);
 	}
 
 	public static Content fetchByC_P_R_P_V(
@@ -57,9 +51,9 @@ public class ContentUtil {
 		return getPersistence().fetchByPrimaryKey(contentId);
 	}
 
-	public static Content findByC_P_R_P(
+	public static List<Content> findByC_P_R_P(
 			long companyId, String portletId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException {
+		throws SystemException {
 
 		return getPersistence().findByC_P_R_P(
 			companyId, portletId, repositoryId, path);

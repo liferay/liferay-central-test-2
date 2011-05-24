@@ -13,7 +13,7 @@
 		<property name="repositoryId" />
 		<property name="path" column="path_" />
 		<property name="version" />
-		<property name="data" column="data_" />
+		<property name="data" column="data_" lazy="true" />
 		<property name="size" column="size_" />
 	</class>
 </hibernate-mapping>

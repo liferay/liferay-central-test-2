@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Dummy;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  * @author Michael Chen
@@ -66,49 +68,6 @@ public class ContentPersistenceImpl
 			qPos.add(version);
 
 			return ((Number)q.uniqueResult()).intValue();
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public Content fetchByC_P_R_P(
-			long companyId, String portletId, long repositoryId, String path)
-		throws SystemException {
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("SELECT content FROM Content content WHERE ");
-		sb.append("content.companyId = ? AND content.portletId = ? AND ");
-		sb.append("content.repositoryId = ? AND content.path = ? ");
-
-		appendOrderByComparator(sb, "content.", new ContentVersionComparator());
-
-		String sql = sb.toString();
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Query q = session.createQuery(sql);
-
-			q.setFirstResult(0);
-			q.setMaxResults(1);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(portletId);
-			qPos.add(repositoryId);
-			qPos.add(path);
-
-			Content content = (Content)q.uniqueResult();
-
-			return content;
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -175,31 +134,42 @@ public class ContentPersistenceImpl
 		}
 	}
 
-	public Content findByC_P_R_P(
+	public List<Content> findByC_P_R_P(
 			long companyId, String portletId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException {
+		throws SystemException {
 
-		Content content = fetchByC_P_R_P(
-			companyId, portletId, repositoryId, path);
+		StringBundler sb = new StringBundler(5);
 
-		if (content == null) {
-			StringBundler msg = new StringBundler(10);
+		sb.append("SELECT content FROM Content content WHERE ");
+		sb.append("content.companyId = ? AND content.portletId = ? AND ");
+		sb.append("content.repositoryId = ? AND content.path LIKE ? ");
 
-			msg.append("No Content exists with the key {");
-			msg.append("companyId=");
-			msg.append(companyId);
-			msg.append(", portletId=");
-			msg.append(portletId);
-			msg.append(", repositoryId=");
-			msg.append(repositoryId);
-			msg.append(", path=");
-			msg.append(path);
-			msg.append("}");
+		appendOrderByComparator(sb, "content.", new ContentVersionComparator());
 
-			throw new NoSuchContentException(msg.toString());
+		String sql = sb.toString();
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Query q = session.createQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(portletId);
+			qPos.add(repositoryId);
+			qPos.add(path);
+
+			return q.list();
 		}
-
-		return content;
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public Content findByC_P_R_P_V(

@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 import java.io.InputStream;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  */
@@ -57,20 +59,20 @@ public class ContentLocalServiceUtil {
 	}
 
 	public static Content getContent(
-			long companyId, String portletId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException {
-
-		return getService().getContent(
-			companyId, portletId, repositoryId, path);
-	}
-
-	public static Content getContent(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
 		throws NoSuchContentException, SystemException {
 
 		return getService().getContent(
 			companyId, portletId, repositoryId, path, version);
+	}
+
+	public static List<Content> getContents(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		return getService().getContents(
+			companyId, portletId, repositoryId, path);
 	}
 
 	public static ContentLocalService getService() {

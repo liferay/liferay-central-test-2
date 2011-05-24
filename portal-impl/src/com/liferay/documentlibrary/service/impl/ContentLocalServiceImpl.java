@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 
 import java.io.InputStream;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  */
@@ -75,20 +77,20 @@ public class ContentLocalServiceImpl implements ContentLocalService {
 	}
 
 	public Content getContent(
-			long companyId, String portletId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException {
-
-		return _contentPersistence.findByC_P_R_P(
-			companyId, portletId, repositoryId, path);
-	}
-
-	public Content getContent(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
 		throws NoSuchContentException, SystemException {
 
 		return _contentPersistence.findByC_P_R_P_V(
 			companyId, portletId, repositoryId, path, version);
+	}
+
+	public List<Content> getContents(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException {
+
+		return _contentPersistence.findByC_P_R_P(
+			companyId, portletId, repositoryId, path);
 	}
 
 	public boolean hasContent(

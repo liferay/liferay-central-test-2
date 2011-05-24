@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
 
 import java.io.InputStream;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  */
@@ -44,13 +46,13 @@ public interface ContentLocalService {
 		throws SystemException;
 
 	public Content getContent(
-			long companyId, String portletId, long repositoryId, String path)
-		throws NoSuchContentException, SystemException;
-
-	public Content getContent(
 			long companyId, String portletId, long repositoryId, String path,
 			String version)
 		throws NoSuchContentException, SystemException;
+
+	public List<Content> getContents(
+			long companyId, String portletId, long repositoryId, String path)
+		throws SystemException;
 
 	public boolean hasContent(
 			long companyId, String portletId, long repositoryId, String path,

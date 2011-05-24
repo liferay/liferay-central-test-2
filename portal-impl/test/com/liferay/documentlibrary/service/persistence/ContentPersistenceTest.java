@@ -24,6 +24,8 @@ import java.io.ByteArrayInputStream;
 
 import java.sql.Blob;
 
+import java.util.List;
+
 /**
  * @author Shuyang Zhou
  */
@@ -60,48 +62,6 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 			content.getRepositoryId(), content.getPath(), content.getVersion());
 
 		assertEquals(0, count);
-	}
-
-	public void testFetchByC_P_R_P() throws Exception {
-		Content content1 = addContent();
-
-		long contentId2 = content1.getContentId() + 1;
-
-		String version2 = content1.getVersion().concat("-2");
-
-		int size = (int)content1.getSize();
-
-		Blob data = new OutputBlob(
-			new ByteArrayInputStream(new byte[size]), size);
-
-		Content content2 = new Content(
-			contentId2, content1.getCompanyId(), content1.getPortletId(),
-			content1.getGroupId(), content1.getRepositoryId(),
-			content1.getPath(), version2, data, size);
-
-		_persistence.update(content2);
-
-		Content existingContent2 = _persistence.fetchByC_P_R_P(
-			content1.getCompanyId(), content1.getPortletId(),
-			content1.getRepositoryId(), content1.getPath());
-
-		assertTrue(existingContent2.equals(content2));
-
-		_persistence.remove(existingContent2.getContentId());
-
-		Content existingContent1 = _persistence.fetchByC_P_R_P(
-			content1.getCompanyId(), content1.getPortletId(),
-			content1.getRepositoryId(), content1.getPath());
-
-		assertTrue(existingContent1.equals(content1));
-
-		_persistence.remove(existingContent1.getContentId());
-
-		Content missingContent = _persistence.fetchByC_P_R_P(
-			content1.getCompanyId(), content1.getPortletId(),
-			content1.getRepositoryId(), content1.getPath());
-
-		assertNull(missingContent);
 	}
 
 	public void testFetchByC_P_R_P_V() throws Exception {
@@ -159,31 +119,35 @@ public class ContentPersistenceTest extends BasePersistenceTestCase {
 
 		_persistence.update(content2);
 
-		Content existingContent2 = _persistence.findByC_P_R_P(
+		List<Content> existingContents2 = _persistence.findByC_P_R_P(
 			content1.getCompanyId(), content1.getPortletId(),
 			content1.getRepositoryId(), content1.getPath());
+
+		assertTrue(existingContents2.size() == 1);
+
+		Content existingContent2 = existingContents2.get(0);
 
 		assertTrue(existingContent2.equals(content2));
 
 		_persistence.remove(existingContent2.getContentId());
 
-		Content existingContent1 = _persistence.findByC_P_R_P(
+		List<Content> existingContents1 = _persistence.findByC_P_R_P(
 			content1.getCompanyId(), content1.getPortletId(),
 			content1.getRepositoryId(), content1.getPath());
+
+		assertTrue(existingContents1.size() == 1);
+
+		Content existingContent1 = existingContents1.get(0);
 
 		assertTrue(existingContent1.equals(content1));
 
 		_persistence.remove(existingContent1.getContentId());
 
-		try {
-			_persistence.findByC_P_R_P(
-				content1.getCompanyId(), content1.getPortletId(),
-				content1.getRepositoryId(), content1.getPath());
+		existingContents1 = _persistence.findByC_P_R_P(
+			content1.getCompanyId(), content1.getPortletId(),
+			content1.getRepositoryId(), content1.getPath());
 
-			fail("Missing entity did not throw NoSuchContentException");
-		}
-		catch (NoSuchContentException nsce) {
-		}
+		assertTrue(existingContents1.size() == 0);
 	}
 
 	public void testFindByC_P_R_P_V() throws Exception {
