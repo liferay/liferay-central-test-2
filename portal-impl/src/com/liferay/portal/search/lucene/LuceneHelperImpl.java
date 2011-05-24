@@ -157,29 +157,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		BooleanQuery booleanQuery, String field, String[] values,
 		boolean like) {
 
+		if (values == null) {
+			return;
+		}
+
 		BooleanQuery query = new BooleanQuery();
 
-		if (like) {
-			for (String value : values) {
-				value = value.toLowerCase();
-				value = StringUtil.replace(
-					value, StringPool.PERCENT, StringPool.BLANK);
-
-				WildcardQuery wildcardQuery = new WildcardQuery(
-					new Term(
-						field,
-						StringPool.STAR.concat(value).concat(StringPool.STAR)));
-
-				query.add(wildcardQuery, BooleanClause.Occur.SHOULD);
-			}
-		}
-		else {
-			for (String value : values) {
-				Term term = new Term(field, value);
-				TermQuery termQuery = new TermQuery(term);
-
-				query.add(termQuery, BooleanClause.Occur.SHOULD);
-			}
+		for (String value : values) {
+			addTerm(query, field, value, like);
 		}
 
 		booleanQuery.add(query, BooleanClause.Occur.MUST);
