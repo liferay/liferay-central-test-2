@@ -1675,11 +1675,11 @@ public class PortalImpl implements Portal {
 	}
 
 	public String[] getGroupPermissions(HttpServletRequest request) {
-		return request.getParameterValues("communityPermissions");
+		return request.getParameterValues("groupPermissions");
 	}
 
 	public String[] getGroupPermissions(PortletRequest portletRequest) {
-		return portletRequest.getParameterValues("communityPermissions");
+		return portletRequest.getParameterValues("groupPermissions");
 	}
 
 	public String[] getGuestPermissions(HttpServletRequest request) {

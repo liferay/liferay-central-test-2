@@ -40,15 +40,15 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 		String[] roleNames = new String[] {RoleConstants.GUEST, defaultGroupRole.getName()};
 
-		List communityPermissions = ListUtil.fromArray(request.getParameterValues("communityPermissions"));
+		List groupPermissions = ListUtil.fromArray(request.getParameterValues("groupPermissions"));
 		List guestPermissions = ListUtil.fromArray(request.getParameterValues("guestPermissions"));
 
 		List supportedActions = (List)request.getAttribute("liferay-ui:input-permissions:supportedActions");
-		List communityDefaultActions = (List)request.getAttribute("liferay-ui:input-permissions:communityDefaultActions");
+		List groupDefaultActions = (List)request.getAttribute("liferay-ui:input-permissions:groupDefaultActions");
 		List guestDefaultActions = (List)request.getAttribute("liferay-ui:input-permissions:guestDefaultActions");
 		List guestUnsupportedActions = (List)request.getAttribute("liferay-ui:input-permissions:guestUnsupportedActions");
 
-		boolean submitted = (request.getParameter("communityPermissions") != null);
+		boolean submitted = (request.getParameter("groupPermissions") != null);
 
 		boolean inputPermissionsShowOptions = ParamUtil.getBoolean(request, "inputPermissionsShowOptions");
 
@@ -140,10 +140,10 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 					}
 					else if (roleName.equals(defaultGroupRole.getName())) {
 						if (submitted) {
-							checked = communityPermissions.contains(action);
+							checked = groupPermissions.contains(action);
 						}
 						else {
-							checked = communityDefaultActions.contains(action);
+							checked = groupDefaultActions.contains(action);
 						}
 					}
 
@@ -153,7 +153,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 						checkboxFieldName = namespace + "guestPermissions";
 					}
 					else {
-						checkboxFieldName = namespace + "communityPermissions";
+						checkboxFieldName = namespace + "groupPermissions";
 					}
 
 					String checkboxFieldId = checkboxFieldName + StringPool.UNDERLINE + action;
@@ -216,19 +216,19 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 					var viewableBySelect = A.one("#<%= namespace %>inputPermissionsViewRole");
 					var guestViewCheckbox = A.one('input[name="<%= namespace %>guestPermissions"][value="VIEW"]');
-					var communityViewCheckbox = A.one('input[name="<%= namespace %>communityPermissions"][value="VIEW"]');
+					var groupViewCheckbox = A.one('input[name="<%= namespace %>groupPermissions"][value="VIEW"]');
 
 					if (viewableBySelect.val() == '<%= RoleConstants.GUEST %>') {
 						guestViewCheckbox.set("checked", true);
-						communityViewCheckbox.set("checked", false);
+						groupViewCheckbox.set("checked", false);
 					}
 					else if (viewableBySelect.val() == '<%= defaultGroupRole.getName() %>') {
 						guestViewCheckbox.set("checked", false);
-						communityViewCheckbox.set("checked", true);
+						groupViewCheckbox.set("checked", true);
 					}
 					else {
 						guestViewCheckbox.set("checked", false);
-						communityViewCheckbox.set("checked", false);
+						groupViewCheckbox.set("checked", false);
 					}
 				},
 				['aui-base']
@@ -238,25 +238,25 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 	<c:otherwise>
 
 		<%
-		boolean addCommunityPermissions = ParamUtil.getBoolean(request, "addCommunityPermissions", true);
+		boolean addGroupPermissions = ParamUtil.getBoolean(request, "addGroupPermissions", true);
 		boolean addGuestPermissions = ParamUtil.getBoolean(request, "addGuestPermissions", true);
 		%>
 
-		<input name="<%= namespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>" />
+		<input name="<%= namespace %>addGroupPermissions" type="hidden" value="<%= addGroupPermissions %>" />
 		<input name="<%= namespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>" />
 
-		<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= namespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-site" /><br />
-		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-guest" /><br />
-		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();" /> <liferay-ui:message key="only-assign-permissions-to-me" />
+		<input <%= addGroupPermissions ? "checked" : "" %> name="<%= namespace %>addGroupPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGroupPermissions.value = this.checked; <%= namespace %>checkGroupAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-site" /><br />
+		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkGroupAndGuestPermissions();"> <liferay-ui:message key="assign-default-permissions-to-guest" /><br />
+		<input <%= !addGroupPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGroupPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();" /> <liferay-ui:message key="only-assign-permissions-to-me" />
 
 		<aui:script>
-			function <%= namespace %>checkCommunityAndGuestPermissions() {
-				if (document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked ||
+			function <%= namespace %>checkGroupAndGuestPermissions() {
+				if (document.<%= formName %>.<%= namespace %>addGroupPermissionsBox.checked ||
 					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
 
 					document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = false;
 				}
-				else if (!document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked &&
+				else if (!document.<%= formName %>.<%= namespace %>addGroupPermissionsBox.checked &&
 						 !document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
 
 					document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = true;
@@ -265,11 +265,11 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 
 			function <%= namespace %>checkUserPermissions() {
 				if (document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked) {
-					document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = false;
+					document.<%= formName %>.<%= namespace %>addGroupPermissionsBox.checked = false;
 					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = false;
 				}
 				else {
-					document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = true;
+					document.<%= formName %>.<%= namespace %>addGroupPermissionsBox.checked = true;
 					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = true;
 				}
 			}

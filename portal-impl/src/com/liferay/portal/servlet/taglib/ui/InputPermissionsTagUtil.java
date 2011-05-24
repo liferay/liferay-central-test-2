@@ -61,7 +61,7 @@ public class InputPermissionsTagUtil {
 					"liferay-ui:input-permissions:supportedActions",
 					supportedActions);
 				request.setAttribute(
-					"liferay-ui:input-permissions:communityDefaultActions",
+					"liferay-ui:input-permissions:groupDefaultActions",
 					communityDefaultActions);
 				request.setAttribute(
 					"liferay-ui:input-permissions:guestDefaultActions",
