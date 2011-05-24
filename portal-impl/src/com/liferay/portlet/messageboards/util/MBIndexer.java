@@ -227,7 +227,7 @@ public class MBIndexer extends BaseIndexer {
 		document.addKeyword(Field.USER_ID, userId);
 
 		if (!anonymous) {
-			document.addText(Field.USER_NAME, userName);
+			document.addKeyword(Field.USER_NAME, userName, true);
 		}
 
 		document.addText(Field.TITLE, title);
