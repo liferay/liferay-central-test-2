@@ -24,11 +24,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputAssetLinksTag extends IncludeTag {
 
-	protected void cleanUp() {
-		_className = StringPool.BLANK;
-		_classPK = 0;
-	}
-
 	public String getClassName() {
 		return _className;
 	}
@@ -56,10 +51,15 @@ public class InputAssetLinksTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
+	protected void cleanUp() {
+		_className = StringPool.BLANK;
+		_classPK = 0;
+	}
+
 	private static final String _PAGE =
 		"/html/taglib/ui/input_asset_links/page.jsp";
 
 	private String _className = StringPool.BLANK;
-	private long _classPK = 0;
+	private long _classPK;
 
 }
