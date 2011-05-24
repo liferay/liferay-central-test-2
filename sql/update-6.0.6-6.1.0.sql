@@ -16,6 +16,8 @@ alter table BookmarksEntry drop column comments;
 
 alter table CalEvent add location STRING null;
 
+update ClassName_ set value = "com.liferay.portal.model.UserPersonalSite" where value="com.liferay.portal.model.UserPersonalCommunity";
+
 drop index IX_975996C0 on Company;
 
 create table DDLRecord (

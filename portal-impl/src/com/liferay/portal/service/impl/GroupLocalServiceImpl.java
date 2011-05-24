@@ -61,7 +61,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.UserPersonalCommunity;
+import com.liferay.portal.model.UserPersonalSite;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
@@ -324,7 +324,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					friendlyURL = "/guest";
 				}
 				else if (name.equals(GroupConstants.USER_PERSONAL_COMMUNITY)) {
-					className = UserPersonalCommunity.class.getName();
+					className = UserPersonalSite.class.getName();
 					classPK = defaultUserId;
 					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
 					friendlyURL =

@@ -19,7 +19,7 @@
 <%
 String target = ParamUtil.getString(request, "target");
 boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
-boolean includeUserPersonalCommunity = ParamUtil.getBoolean(request, "includeUserPersonalCommunity");
+boolean includeUserPersonalSite = ParamUtil.getBoolean(request, "includeUserPersonalSite");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -68,10 +68,10 @@ portletURL.setParameter("target", target);
 				total++;
 			}
 
-			if (includeUserPersonalCommunity) {
-				Group userPersonalCommunity = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.USER_PERSONAL_COMMUNITY);
+			if (includeUserPersonalSite) {
+				Group userPersonalSite = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.USER_PERSONAL_COMMUNITY);
 
-				results.add(0, userPersonalCommunity);
+				results.add(0, userPersonalSite);
 
 				total++;
 			}

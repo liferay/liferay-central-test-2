@@ -24,5 +24,5 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public interface UserPersonalCommunity extends Serializable {
+public interface UserPersonalSite extends Serializable {
 }

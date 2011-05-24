@@ -30,7 +30,7 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 		<portlet:param name="struts_action" value="/enterprise_admin/select_site" />
 		<portlet:param name="target" value="<%= target %>" />
 		<portlet:param name="includeCompany" value="<%= Boolean.TRUE.toString() %>" />
-		<portlet:param name="includeUserPersonalCommunity" value="<%= Boolean.TRUE.toString() %>" />
+		<portlet:param name="includeUserPersonalSite" value="<%= Boolean.TRUE.toString() %>" />
 	</portlet:renderURL>
 
 	<%
