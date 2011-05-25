@@ -40,7 +40,7 @@ import java.util.Map;
  * @generated
  */
 public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
-	GroupedModel {
+	GroupedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

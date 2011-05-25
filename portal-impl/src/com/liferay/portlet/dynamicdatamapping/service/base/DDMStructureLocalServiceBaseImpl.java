@@ -35,6 +35,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
 import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
+import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
@@ -775,6 +776,25 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the d l document type finder.
+	 *
+	 * @return the d l document type finder
+	 */
+	public DLDocumentTypeFinder getDLDocumentTypeFinder() {
+		return dlDocumentTypeFinder;
+	}
+
+	/**
+	 * Sets the d l document type finder.
+	 *
+	 * @param dlDocumentTypeFinder the d l document type finder
+	 */
+	public void setDLDocumentTypeFinder(
+		DLDocumentTypeFinder dlDocumentTypeFinder) {
+		this.dlDocumentTypeFinder = dlDocumentTypeFinder;
+	}
+
+	/**
 	 * Gets the Spring bean ID for this bean.
 	 *
 	 * @return the Spring bean ID for this bean
@@ -865,5 +885,7 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	protected DLDocumentTypeService dlDocumentTypeService;
 	@BeanReference(type = DLDocumentTypePersistence.class)
 	protected DLDocumentTypePersistence dlDocumentTypePersistence;
+	@BeanReference(type = DLDocumentTypeFinder.class)
+	protected DLDocumentTypeFinder dlDocumentTypeFinder;
 	private String _beanIdentifier;
 }
