@@ -41,6 +41,7 @@ import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
@@ -585,7 +586,7 @@ public class DLFileEntryLocalServiceImpl
 			majorVersion, extraSettings, is, size, serviceContext);
 	}
 
-	public void updateAsset(
+	public AssetEntry updateAsset(
 			long userId, DLFileEntry dlFileEntry, DLFileVersion dlFileVersion,
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
@@ -612,7 +613,7 @@ public class DLFileEntryLocalServiceImpl
 			visible = false;
 		}
 
-		dlAppHelperLocalService.updateAsset(
+		return dlAppHelperLocalService.updateAsset(
 			userId, new LiferayFileEntry(dlFileEntry),
 			new LiferayFileVersion(dlFileVersion), assetCategoryIds,
 			assetTagNames, dlFileEntry.getMimeType(), addDraftAssetEntry,

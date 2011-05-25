@@ -211,14 +211,16 @@ public class DLAppHelperLocalServiceImpl
 			DLFileEntryConstants.getClassName(), oldFileEntryId);
 	}
 
-	public void updateAsset(
+	public AssetEntry updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames, String mimeType,
 			boolean addDraftAssetEntry, boolean visible)
 		throws PortalException, SystemException {
 
+		AssetEntry assetEntry = null;
+
 		if (addDraftAssetEntry) {
-			assetEntryLocalService.updateEntry(
+			assetEntry = assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
@@ -227,7 +229,7 @@ public class DLAppHelperLocalServiceImpl
 				null, null, null, 0, 0, null, false);
 		}
 		else {
-			assetEntryLocalService.updateEntry(
+			assetEntry = assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
@@ -251,6 +253,8 @@ public class DLAppHelperLocalServiceImpl
 					false);
 			}
 		}
+
+		return assetEntry;
 	}
 
 	public void updateStatus(
