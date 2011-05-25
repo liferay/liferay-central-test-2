@@ -507,10 +507,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Object fromXML(byte[] bytes) {
+		if (Validator.isNull(bytes)) {
+			return null;
+		}
+
 		return _xStream.fromXML(new String(bytes));
 	}
 
 	public Object fromXML(String xml) {
+		if (Validator.isNull(xml)) {
+			return null;
+		}
+
 		return _xStream.fromXML(xml);
 	}
 
