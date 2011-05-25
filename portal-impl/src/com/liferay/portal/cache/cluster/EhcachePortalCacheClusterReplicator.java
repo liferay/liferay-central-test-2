@@ -49,17 +49,21 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 	}
 
 	public void notifyElementEvicted(Ehcache ehcache, Element element) {
-		PortalCacheClusterLinkUtil.sendEvent(
+		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
 				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.EVICTED));
+				PortalCacheClusterEventType.EVICTED);
+
+		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void notifyElementExpired(Ehcache ehcache, Element element) {
-		PortalCacheClusterLinkUtil.sendEvent(
+		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
 				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.EXPIRED));
+				PortalCacheClusterEventType.EXPIRED);
+
+		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void notifyElementPut(Ehcache ehcache, Element element)
@@ -68,25 +72,33 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 
 	public void notifyElementRemoved(Ehcache ehcache, Element element)
 		throws CacheException {
-		PortalCacheClusterLinkUtil.sendEvent(
+
+		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
 				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.REMOVE));
+				PortalCacheClusterEventType.REMOVE);
+
+		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void notifyElementUpdated(Ehcache ehcache, Element element)
 		throws CacheException {
-		PortalCacheClusterLinkUtil.sendEvent(
+
+		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
 				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.UPDATE));
+				PortalCacheClusterEventType.UPDATE);
+
+		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void notifyRemoveAll(Ehcache ehcache) {
-		PortalCacheClusterLinkUtil.sendEvent(
+		PortalCacheClusterEvent portalCacheClusterEvent =
 			new PortalCacheClusterEvent(
 				ehcache.getName(), StringPool.BLANK,
-				PortalCacheClusterEventType.REMOVEALL));
+				PortalCacheClusterEventType.REMOVEALL);
+
+		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 }
