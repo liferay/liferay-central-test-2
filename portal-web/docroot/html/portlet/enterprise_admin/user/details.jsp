@@ -144,6 +144,8 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<c:choose>
 		<c:when test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_BIRTHDAY) %>">
+            <liferay-ui:error exception="<%= ContactBirthdayException.class %>" message="please-enter-a-valid-date" />
+
 			<aui:input bean="<%= selContact %>" model="<%= Contact.class %>" name="birthday" value="<%= birthday %>" />
 		</c:when>
 		<c:otherwise>

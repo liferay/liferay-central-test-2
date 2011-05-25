@@ -23,6 +23,7 @@
 <%@ page import="com.liferay.portal.CompanyMaxUsersException" %>
 <%@ page import="com.liferay.portal.CompanyMxException" %>
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
+<%@ page import="com.liferay.portal.ContactBirthdayException" %>
 <%@ page import="com.liferay.portal.ContactFirstNameException" %>
 <%@ page import="com.liferay.portal.ContactFullNameException" %>
 <%@ page import="com.liferay.portal.ContactLastNameException" %>
