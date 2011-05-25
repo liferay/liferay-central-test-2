@@ -507,7 +507,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Object fromXML(byte[] bytes) {
-		if (Validator.isNull(bytes)) {
+		if (bytes == null) {
 			return null;
 		}
 
