@@ -1043,14 +1043,12 @@ public class ServicePreAction extends Action {
 		}
 
 		if (PropsValues.BROWSER_CACHE_SIGNED_IN_DISABLED && signedIn) {
+			response.setDateHeader(HttpHeaders.EXPIRES, 0);
 			response.setHeader(
 				HttpHeaders.CACHE_CONTROL,
 				HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
-
 			response.setHeader(
 				HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_NO_CACHE_VALUE);
-
-			response.setDateHeader(HttpHeaders.EXPIRES, 0);
 		}
 
 		User realUser = user;
