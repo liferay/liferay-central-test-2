@@ -333,9 +333,8 @@ public class ResourcePermissionLocalServiceImpl
 			actionIds = ResourceActionsUtil.getModelResourceActions(name);
 		}
 		else {
-			actionIds =
-				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-					name);
+			actionIds = ResourceActionsUtil.getModelResourceGroupDefaultActions(
+				name);
 		}
 
 		setResourcePermissions(

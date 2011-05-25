@@ -356,13 +356,11 @@ public class DataFactory {
 		String name = _individualResourceNames.get(resource.getCodeId());
 
 		if (memberRole != null) {
-			List<String> communityDefaultactions =
-				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-					name);
+			List<String> groupDefaultActions =
+				ResourceActionsUtil.getModelResourceGroupDefaultActions(name);
 
 			for (Permission permission : permissions) {
-				if (!communityDefaultactions.contains(
-						permission.getActionId())) {
+				if (!groupDefaultActions.contains(permission.getActionId())) {
 
 					continue;
 				}

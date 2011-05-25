@@ -160,9 +160,8 @@ public class ResourceActionLocalServiceImpl
 		}
 
 		if (addDefaultActions) {
-			List<String> communityDefaultActions =
-				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-					name);
+			List<String> groupDefaultActions =
+				ResourceActionsUtil.getModelResourceGroupDefaultActions(name);
 
 			List<String> guestDefaultActions =
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
@@ -170,7 +169,7 @@ public class ResourceActionLocalServiceImpl
 			for (ResourceAction resourceAction : newResourceActions) {
 				String actionId = resourceAction.getActionId();
 
-				if (communityDefaultActions.contains(actionId)) {
+				if (groupDefaultActions.contains(actionId)) {
 					resourcePermissionLocalService.addResourcePermissions(
 						name, RoleConstants.SITE_MEMBER,
 						ResourceConstants.SCOPE_INDIVIDUAL,

@@ -492,8 +492,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 					}
 					else {
 						defaultActions =
-							ResourceActionsUtil.
-								getResourceCommunityDefaultActions(name);
+							ResourceActionsUtil.getResourceGroupDefaultActions(
+								name);
 					}
 
 					// Resolve owner and system roles

@@ -45,8 +45,8 @@ public class InputPermissionsTagUtil {
 			if (modelName != null) {
 				List<String> supportedActions =
 					ResourceActionsUtil.getModelResourceActions(modelName);
-				List<String> communityDefaultActions =
-					ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+				List<String> groupDefaultActions =
+					ResourceActionsUtil.getModelResourceGroupDefaultActions(
 						modelName);
 				List<String> guestDefaultActions =
 					ResourceActionsUtil.getModelResourceGuestDefaultActions(
@@ -62,7 +62,7 @@ public class InputPermissionsTagUtil {
 					supportedActions);
 				request.setAttribute(
 					"liferay-ui:input-permissions:groupDefaultActions",
-					communityDefaultActions);
+					groupDefaultActions);
 				request.setAttribute(
 					"liferay-ui:input-permissions:guestDefaultActions",
 					guestDefaultActions);

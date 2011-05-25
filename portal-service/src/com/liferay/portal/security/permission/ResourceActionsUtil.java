@@ -124,11 +124,10 @@ public class ResourceActionsUtil {
 		return getResourceActions().getModelResourceActions(name);
 	}
 
-	public static List<String> getModelResourceCommunityDefaultActions(
+	public static List<String> getModelResourceGroupDefaultActions(
 		String name) {
 
-		return getResourceActions().getModelResourceCommunityDefaultActions(
-			name);
+		return getResourceActions().getModelResourceGroupDefaultActions(name);
 	}
 
 	public static List<String> getModelResourceGuestDefaultActions(
@@ -182,11 +181,10 @@ public class ResourceActionsUtil {
 		return getResourceActions().getPortletResourceActions(name);
 	}
 
-	public static List<String> getPortletResourceCommunityDefaultActions(
+	public static List<String> getPortletResourceGroupDefaultActions(
 		String name) {
 
-		return getResourceActions().getPortletResourceCommunityDefaultActions(
-			name);
+		return getResourceActions().getPortletResourceGroupDefaultActions(name);
 	}
 
 	public static List<String> getPortletResourceGuestDefaultActions(
@@ -224,8 +222,8 @@ public class ResourceActionsUtil {
 			portletResource, modelResource);
 	}
 
-	public static List<String> getResourceCommunityDefaultActions(String name) {
-		return getResourceActions().getResourceCommunityDefaultActions(name);
+	public static List<String> getResourceGroupDefaultActions(String name) {
+		return getResourceActions().getResourceGroupDefaultActions(name);
 	}
 
 	public static List<String> getResourceGuestUnsupportedActions(

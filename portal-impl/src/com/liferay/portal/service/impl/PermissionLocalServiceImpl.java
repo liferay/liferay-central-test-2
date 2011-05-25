@@ -811,11 +811,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		permissionPersistence.update(permission, false);
 
-		List<String> communityDefaultActions =
-			ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+		List<String> groupDefaultActions =
+			ResourceActionsUtil.getModelResourceGroupDefaultActions(
 				resource.getName());
 
-		if (communityDefaultActions.contains(actionId)) {
+		if (groupDefaultActions.contains(actionId)) {
 			addRolePermissions(RoleConstants.SITE_MEMBER, permission);
 		}
 

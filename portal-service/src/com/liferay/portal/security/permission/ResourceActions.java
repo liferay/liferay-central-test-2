@@ -62,7 +62,7 @@ public interface ResourceActions {
 
 	public List<String> getModelResourceActions(String name);
 
-	public List<String> getModelResourceCommunityDefaultActions(String name);
+	public List<String> getModelResourceGroupDefaultActions(String name);
 
 	public List<String> getModelResourceGuestDefaultActions(String name);
 
@@ -86,7 +86,7 @@ public interface ResourceActions {
 
 	public List<String> getPortletResourceActions(String name);
 
-	public List<String> getPortletResourceCommunityDefaultActions(String name);
+	public List<String> getPortletResourceGroupDefaultActions(String name);
 
 	public List<String> getPortletResourceGuestDefaultActions(String name);
 
@@ -99,7 +99,7 @@ public interface ResourceActions {
 	public List<String> getResourceActions(
 		String portletResource, String modelResource);
 
-	public List<String> getResourceCommunityDefaultActions(String name);
+	public List<String> getResourceGroupDefaultActions(String name);
 
 	public List<String> getResourceGuestUnsupportedActions(
 		String portletResource, String modelResource);

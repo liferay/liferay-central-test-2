@@ -154,7 +154,7 @@ while (rolesItr.hasNext()) {
 		else {
 			group = GroupLocalServiceUtil.getRoleGroups(role.getRoleId()).get(0);
 
-			systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceCommunityDefaultActions(resourcePermission.getName()));
+			systemActionLabels = ResourceActionsUtil.getActionsNames(pageContext, ResourceActionsUtil.getModelResourceGroupDefaultActions(resourcePermission.getName()));
 		}
 
 		ListUtil.sort(systemActionLabels);

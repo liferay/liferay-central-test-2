@@ -398,14 +398,12 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		List<String> actions = null;
 
 		if (portletActions) {
-			actions =
-				ResourceActionsUtil.getPortletResourceCommunityDefaultActions(
-					name);
+			actions = ResourceActionsUtil.getPortletResourceGroupDefaultActions(
+				name);
 		}
 		else {
-			actions =
-				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-					name);
+			actions = ResourceActionsUtil.getModelResourceGroupDefaultActions(
+				name);
 		}
 
 		String[] actionIds = actions.toArray(new String[actions.size()]);

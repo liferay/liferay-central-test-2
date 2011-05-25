@@ -72,11 +72,10 @@ public class InputPermissionsParamsTagUtil {
 			return RoleConstants.GUEST;
 		}
 
-		List<String> communityDefaultActions =
-			ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-				modelName);
+		List<String> groupDefaultActions =
+			ResourceActionsUtil.getModelResourceGroupDefaultActions(modelName);
 
-		if (communityDefaultActions.contains(ActionKeys.VIEW)) {
+		if (groupDefaultActions.contains(ActionKeys.VIEW)) {
 			Group parentGroup = GroupLocalServiceUtil.getGroup(
 				themeDisplay.getParentGroupId());
 
@@ -111,8 +110,8 @@ public class InputPermissionsParamsTagUtil {
 
 			List<String> supportedActions =
 				ResourceActionsUtil.getModelResourceActions(modelName);
-			List<String> communityDefaultActions =
-				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+			List<String> groupDefaultActions =
+				ResourceActionsUtil.getModelResourceGroupDefaultActions(
 					modelName);
 			List<String> guestDefaultActions =
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(
@@ -126,8 +125,7 @@ public class InputPermissionsParamsTagUtil {
 			for (int i = 0; i < supportedActions.size(); i++) {
 				String action = supportedActions.get(i);
 
-				boolean communityChecked = communityDefaultActions.contains(
-					action);
+				boolean groupChecked = groupDefaultActions.contains(action);
 
 				boolean guestChecked = false;
 
@@ -152,7 +150,7 @@ public class InputPermissionsParamsTagUtil {
 				}
 
 				if (group.isOrganization() || group.isRegularSite()) {
-					if (communityChecked) {
+					if (groupChecked) {
 						sb.append(StringPool.AMPERSAND);
 						sb.append(renderResponse.getNamespace());
 						sb.append("communityPermissions=");

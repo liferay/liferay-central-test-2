@@ -87,7 +87,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		_portletModelResources = new HashMap<String, Set<String>>();
 		_portletResourceActions = new HashMap<String, List<String>>();
-		_portletResourceCommunityDefaultActions =
+		_portletResourceGroupDefaultActions =
 			new HashMap<String, List<String>>();
 		_portletResourceGuestDefaultActions =
 			new HashMap<String, List<String>>();
@@ -97,7 +97,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			new HashMap<String, List<String>>();
 		_modelPortletResources = new HashMap<String, Set<String>>();
 		_modelResourceActions = new HashMap<String, List<String>>();
-		_modelResourceCommunityDefaultActions =
+		_modelResourceGroupDefaultActions =
 			new HashMap<String, List<String>>();
 		_modelResourceGuestDefaultActions =
 			new HashMap<String, List<String>>();
@@ -266,8 +266,8 @@ public class ResourceActionsImpl implements ResourceActions {
 		return getActions(_modelResourceActions, name);
 	}
 
-	public List<String> getModelResourceCommunityDefaultActions(String name) {
-		return getActions(_modelResourceCommunityDefaultActions, name);
+	public List<String> getModelResourceGroupDefaultActions(String name) {
+		return getActions(_modelResourceGroupDefaultActions, name);
 	}
 
 	public List<String> getModelResourceGuestDefaultActions(String name) {
@@ -353,17 +353,17 @@ public class ResourceActionsImpl implements ResourceActions {
 				checkPortletActions(name, actions);
 			}
 
-			List<String> communityDefaultActions =
-				_portletResourceCommunityDefaultActions.get(name);
+			List<String> groupDefaultActions =
+				_portletResourceGroupDefaultActions.get(name);
 
-			if (communityDefaultActions == null) {
-				communityDefaultActions = new UniqueList<String>();
+			if (groupDefaultActions == null) {
+				groupDefaultActions = new UniqueList<String>();
 
-				checkPortletCommunityDefaultActions(communityDefaultActions);
+				checkPortletGroupDefaultActions(groupDefaultActions);
 
-				_portletResourceCommunityDefaultActions.put(
+				_portletResourceGroupDefaultActions.put(
 					name,
-					new UnmodifiableList<String>(communityDefaultActions));
+					new UnmodifiableList<String>(groupDefaultActions));
 			}
 
 			List<String> guestDefaultActions =
@@ -396,18 +396,18 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
-	public List<String> getPortletResourceCommunityDefaultActions(String name) {
+	public List<String> getPortletResourceGroupDefaultActions(String name) {
 
 		// This method should always be called only after
 		// _getPortletResourceActions has been called at least once to
-		// populate the default community actions. Check to make sure this is
+		// populate the default group actions. Check to make sure this is
 		// the case. However, if it is not, that means the methods
 		// getPortletResourceGuestDefaultActions and
 		// getPortletResourceGuestDefaultActions may not work either.
 
 		name = PortletConstants.getRootPortletId(name);
 
-		return getActions(_portletResourceCommunityDefaultActions, name);
+		return getActions(_portletResourceGroupDefaultActions, name);
 	}
 
 	public List<String> getPortletResourceGuestDefaultActions(String name) {
@@ -470,12 +470,12 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
-	public List<String> getResourceCommunityDefaultActions(String name) {
+	public List<String> getResourceGroupDefaultActions(String name) {
 		if (name.contains(StringPool.PERIOD)) {
-			return getModelResourceCommunityDefaultActions(name);
+			return getModelResourceGroupDefaultActions(name);
 		}
 		else {
-			return getPortletResourceCommunityDefaultActions(name);
+			return getPortletResourceGroupDefaultActions(name);
 		}
 	}
 
@@ -697,7 +697,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		checkPortletActions(portlet, actions);
 	}
 
-	protected void checkPortletCommunityDefaultActions(List<String> actions) {
+	protected void checkPortletGroupDefaultActions(List<String> actions) {
 		if (actions.isEmpty()) {
 			actions.add(ActionKeys.VIEW);
 		}
@@ -861,20 +861,20 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
-	protected void readCommunityDefaultActions(
+	protected void readGroupDefaultActions(
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name) {
 
-		List<String> communityDefaultActions = new UniqueList<String>(
+		List<String> groupDefaultActions = new UniqueList<String>(
 			getActions(actionsMap, name));
 
-		Element communityDefaultsElement = getPermissionsChildElement(
+		Element groupDefaultsElement = getPermissionsChildElement(
 			parentElement, "community-defaults");
 
-		communityDefaultActions.addAll(
-			readActionKeys(communityDefaultsElement));
+		groupDefaultActions.addAll(
+			readActionKeys(groupDefaultsElement));
 
-		setActions(actionsMap, name, communityDefaultActions);
+		setActions(actionsMap, name, groupDefaultActions);
 	}
 
 	protected List<String> readGuestDefaultActions(
@@ -983,8 +983,8 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		setActions(_modelResourceActions, name, supportsActions);
 
-		readCommunityDefaultActions(
-			modelResourceElement, _modelResourceCommunityDefaultActions,  name);
+		readGroupDefaultActions(
+			modelResourceElement, _modelResourceGroupDefaultActions, name);
 
 		List<String> guestDefaultActions = readGuestDefaultActions(
 			modelResourceElement, _modelResourceGuestDefaultActions, name);
@@ -1045,8 +1045,8 @@ public class ResourceActionsImpl implements ResourceActions {
 		supportsActions = setActions(
 			_portletResourceActions, name, supportsActions);
 
-		readCommunityDefaultActions(
-			portletResourceElement, _portletResourceCommunityDefaultActions,
+		readGroupDefaultActions(
+			portletResourceElement, _portletResourceGroupDefaultActions,
 			name);
 
 		List<String> guestDefaultActions = readGuestDefaultActions(
@@ -1192,7 +1192,7 @@ public class ResourceActionsImpl implements ResourceActions {
 
 	private Map<String, Set<String>> _modelPortletResources;
 	private Map<String, List<String>> _modelResourceActions;
-	private Map<String, List<String>> _modelResourceCommunityDefaultActions;
+	private Map<String, List<String>> _modelResourceGroupDefaultActions;
 	private Map<String, List<String>> _modelResourceGuestDefaultActions;
 	private Map<String, List<String>> _modelResourceGuestUnsupportedActions;
 	private Map<String, List<String>> _modelResourceOwnerDefaultActions;
@@ -1200,7 +1200,7 @@ public class ResourceActionsImpl implements ResourceActions {
 	private Set<String> _portalModelResources;
 	private Map<String, Set<String>> _portletModelResources;
 	private Map<String, List<String>> _portletResourceActions;
-	private Map<String, List<String>> _portletResourceCommunityDefaultActions;
+	private Map<String, List<String>> _portletResourceGroupDefaultActions;
 	private Map<String, List<String>> _portletResourceGuestDefaultActions;
 	private Map<String, List<String>> _portletResourceGuestUnsupportedActions;
 	private Map<String, List<String>> _portletResourceLayoutManagerActions;
