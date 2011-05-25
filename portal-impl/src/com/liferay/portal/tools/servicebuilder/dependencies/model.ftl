@@ -36,7 +36,7 @@ import java.util.Map;
  * @generated
  */
 public interface ${entity.name}Model extends
-	<#if entity.hasColumn("classNameId") && entity.hasColumn("classPK")>
+	<#if entity.isAttachedModel()>
 		AttachedModel,
 	</#if>
 

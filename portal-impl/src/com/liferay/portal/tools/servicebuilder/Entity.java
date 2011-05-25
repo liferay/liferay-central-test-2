@@ -415,6 +415,26 @@ public class Entity {
 		return _uuid;
 	}
 
+	public boolean isAttachedModel() {
+		if (hasColumn("classNameId") && hasColumn("classPK")) {
+			EntityColumn classNameIdCol = getColumn("classNameId");
+
+			String classNameIdColType = classNameIdCol.getType();
+
+			EntityColumn classPKCol = getColumn("classPK");
+
+			String classPKColType = classPKCol.getType();
+
+			if (classNameIdColType.equals("long") &&
+				classPKColType.equals("long")) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean isAuditedModel() {
 		if (hasColumn("companyId") && hasColumn("createDate") &&
 			hasColumn("modifiedDate") && hasColumn("userId") &&
