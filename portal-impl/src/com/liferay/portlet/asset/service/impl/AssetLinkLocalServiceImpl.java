@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portlet.asset.NoSuchLinkException;
 import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.asset.service.base.AssetLinkLocalServiceBaseImpl;
@@ -54,10 +55,10 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 		assetLinkPersistence.update(link, false);
 
-		if (AssetLinkConstants.isBidirectional(type)) {
-			linkId = counterLocalService.increment();
+		if (AssetLinkConstants.isTypeBi(type)) {
+			long linkId2 = counterLocalService.increment();
 
-			AssetLink link2 = assetLinkPersistence.create(linkId);
+			AssetLink link2 = assetLinkPersistence.create(linkId2);
 
 			link2.setCompanyId(user.getCompanyId());
 			link2.setUserId(user.getUserId());
@@ -75,12 +76,12 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 	}
 
 	public void deleteLink(AssetLink link) throws SystemException {
-		if (AssetLinkConstants.isBidirectional(link.getType())) {
-			AssetLink link2 = assetLinkPersistence.fetchByE_E_T(
-				link.getEntryId2(), link.getEntryId1(), link.getType());
-
-			if (link2 != null) {
-				assetLinkPersistence.remove(link2);
+		if (AssetLinkConstants.isTypeBi(link.getType())) {
+			try {
+				assetLinkPersistence.removeByE_E_T(
+					link.getEntryId2(), link.getEntryId1(), link.getType());
+			}
+			catch (NoSuchLinkException nsle) {
 			}
 		}
 

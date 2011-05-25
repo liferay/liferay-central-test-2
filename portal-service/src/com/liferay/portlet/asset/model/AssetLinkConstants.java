@@ -24,8 +24,12 @@ public class AssetLinkConstants {
 
 	public static final int TYPE_RELATED = 0;
 
-	public static boolean isBidirectional(int type) {
-		if (type == TYPE_RELATED) {
+	public static boolean isTypeBi(int type) {
+		return !isTypeUni(type);
+	}
+
+	public static boolean isTypeUni(int type) {
+		if (type == TYPE_CHILD) {
 			return true;
 		}
 		else {
