@@ -167,21 +167,22 @@ public class MediaWikiEngine implements WikiEngine {
 		ParserInput parserInput = getParserInput(
 			page.getNodeId(), page.getTitle());
 
-		String html = StringPool.BLANK;
+		String content = StringPool.BLANK;
 
 		try {
-			html = page.getContent();
+			content = page.getContent();
 
 			ImageTagMatcher imageTagMatcher = new ImageTagMatcher();
 
-			html = ParserUtil.parse(parserInput, parserOutput,
-				imageTagMatcher.replaceMatches(html));
+			content = ParserUtil.parse(
+				parserInput, parserOutput,
+				imageTagMatcher.replaceMatches(content));
 		}
 		catch (ParserException pe) {
 			throw new PageContentException(pe);
 		}
 
-		return html;
+		return content;
 	}
 
 	protected String postParsePage(

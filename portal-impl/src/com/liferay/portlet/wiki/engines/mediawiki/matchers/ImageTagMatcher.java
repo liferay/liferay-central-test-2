@@ -20,6 +20,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.regex.MatchResult;
 
+/**
+ * @author Shinn Lok
+ */
 public class ImageTagMatcher extends CallbackMatcher {
 
 	public ImageTagMatcher() {
