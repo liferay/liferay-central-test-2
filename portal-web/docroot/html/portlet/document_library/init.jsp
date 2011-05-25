@@ -167,9 +167,9 @@ else if (!portletId.equals(PortletKeys.DOCUMENT_LIBRARY) && !ArrayUtil.contains(
 
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null), true);
 
-
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
+
 <%!
 private static final String _getFileEntryImage(FileEntry fileEntry, ThemeDisplay themeDisplay) {
 	StringBundler sb = new StringBundler(5);

@@ -65,16 +65,14 @@ public class CompareVersionsAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				setForward(
-					renderRequest, "portlet.document_library.error");
+				setForward(renderRequest, "portlet.document_library.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
-			"portlet.document_library.compare_versions");
+		return mapping.findForward("portlet.document_library.compare_versions");
 	}
 
 	protected void compareVersions(RenderRequest renderRequest)

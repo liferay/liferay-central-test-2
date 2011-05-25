@@ -74,8 +74,7 @@ public class EditFolderAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(
-					actionRequest, "portlet.document_library.error");
+				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
@@ -103,8 +102,7 @@ public class EditFolderAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward(
-					"portlet.document_library.error");
+				return mapping.findForward("portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -112,8 +110,7 @@ public class EditFolderAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(
-				renderRequest, "portlet.document_library.edit_folder"));
+			getForward(renderRequest, "portlet.document_library.edit_folder"));
 	}
 
 	protected void deleteFolders(ActionRequest actionRequest) throws Exception {

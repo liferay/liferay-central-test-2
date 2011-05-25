@@ -73,8 +73,7 @@ public class EditRepositoryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(
-					actionRequest, "portlet.document_library.error");
+				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFolderNameException ||
 					 e instanceof DuplicateRepositoryNameException ||
@@ -103,8 +102,7 @@ public class EditRepositoryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward(
-					"portlet.document_library.error");
+				return mapping.findForward("portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -113,8 +111,7 @@ public class EditRepositoryAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(
-				renderRequest,
-				"portlet.document_library.edit_repository"));
+				renderRequest, "portlet.document_library.edit_repository"));
 	}
 
 	protected void unmountRepository(ActionRequest actionRequest)

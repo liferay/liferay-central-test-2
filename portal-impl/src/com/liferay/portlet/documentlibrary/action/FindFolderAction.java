@@ -63,8 +63,7 @@ public class FindFolderAction extends Action {
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
-			portletURL.setParameter(
-				"struts_action", "/document_library/view");
+			portletURL.setParameter("struts_action", "/document_library/view");
 			portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			response.sendRedirect(portletURL.toString());
