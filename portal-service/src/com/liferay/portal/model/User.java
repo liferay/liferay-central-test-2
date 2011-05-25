@@ -165,6 +165,8 @@ public interface User extends UserModel {
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserGroups()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.lang.String getUserName();
+
 	public java.util.TimeZone getTimeZone();
 
 	public boolean hasCompanyMx()
@@ -212,6 +214,8 @@ public interface User extends UserModel {
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted);
 
 	public void setTimeZoneId(java.lang.String timeZoneId);
+
+	public void setUserName(java.lang.String userName);
 
 	public void updateSocialContributionEquity(long groupId, double value);
 

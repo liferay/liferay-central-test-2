@@ -1081,6 +1081,10 @@ public class UserWrapper implements User {
 		return _user.getUserGroups();
 	}
 
+	public java.lang.String getUserName() {
+		return _user.getUserName();
+	}
+
 	public java.util.TimeZone getTimeZone() {
 		return _user.getTimeZone();
 	}
@@ -1151,6 +1155,10 @@ public class UserWrapper implements User {
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted) {
 		_user.setPasswordUnencrypted(passwordUnencrypted);
+	}
+
+	public void setUserName(java.lang.String userName) {
+		_user.setUserName(userName);
 	}
 
 	public void updateSocialContributionEquity(long groupId, double value) {

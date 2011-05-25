@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.UserModelImpl
  * @generated
  */
-public interface UserModel extends BaseModel<User> {
+public interface UserModel extends AuditedModel, BaseModel<User> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
