@@ -294,13 +294,6 @@ public class AssetLinkLocalServiceUtil {
 		return getService().getReverseLinks(entryId, typeId);
 	}
 
-	public static com.liferay.portlet.asset.model.AssetLink updateLink(
-		long userId, long entryId1, long entryId2, int type, int weight)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateLink(userId, entryId1, entryId2, type, weight);
-	}
-
 	public static void updateLinks(long userId, long entryId,
 		long[] linkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
