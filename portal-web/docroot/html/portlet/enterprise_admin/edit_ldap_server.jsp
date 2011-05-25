@@ -425,6 +425,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			var groupMappingGroupName = "";
 			var groupMappingDescription = "";
 			var groupMappingUser = "";
+			var exportMappingUserDefaultObjectClass = "";
+			var exportMappingGroupDefaultObjectClass = "";
 
 			if (!ldapType) {
 				A.all(document.<portlet:namespace />fm.<portlet:namespace />defaultLdap).some(
@@ -454,13 +456,15 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				userMappingFirstName = "givenName";
 				userMappingMiddleName = "";
 				userMappingLastName = "sn";
-				userMappingJobTitle = "";
-				userMappingGroup = "";
-				userMappingUuid = "";
-				importGroupSearchFilter = "";
-				groupMappingGroupName = "";
-				groupMappingDescription = "";
-				groupMappingUser = "";
+				userMappingJobTitle = "title";
+				userMappingGroup = "groupMembership";
+				userMappingUuid = "uuid";
+				importGroupSearchFilter = "(objectClass=groupOfUniqueNames)";
+				groupMappingGroupName = "cn";
+				groupMappingDescription = "description";
+				groupMappingUser = "uniqueMember";
+				exportMappingUserDefaultObjectClass = "top,person,inetOrgPerson,organizationalPerson";
+				exportMappingGroupDefaultObjectClass = "top,groupOfUniqueNames";
 			}
 			else if (ldapType == "fedora") {
 				baseProviderURL = "ldap://localhost:19389";
@@ -483,6 +487,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				groupMappingGroupName = "";
 				groupMappingDescription = "";
 				groupMappingUser = "";
+				exportMappingUserDefaultObjectClass = "";
+				exportMappingGroupDefaultObjectClass = "";
 			}
 			else if (ldapType == "microsoft") {
 				baseProviderURL = "ldap://localhost:389";
@@ -505,6 +511,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				groupMappingGroupName = "cn";
 				groupMappingDescription = "sAMAccountName";
 				groupMappingUser = "member";
+				exportMappingUserDefaultObjectClass = "";
+				exportMappingGroupDefaultObjectClass = "";
 			}
 			else if (ldapType == "novell") {
 				url = "ldap://localhost:389";
@@ -527,6 +535,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				groupMappingGroupName = "";
 				groupMappingDescription = "";
 				groupMappingUser = "";
+				exportMappingUserDefaultObjectClass = "";
+				exportMappingGroupDefaultObjectClass = "";
 			}
 			else if (ldapType == "open") {
 				url = "ldap://localhost:389";
@@ -549,6 +559,8 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 				groupMappingGroupName = "cn";
 				groupMappingDescription = "description";
 				groupMappingUser = "uniqueMember";
+				exportMappingUserDefaultObjectClass = "";
+				exportMappingGroupDefaultObjectClass = "";
 			}
 
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_BASE_PROVIDER_URL + postfix %>--'].value = baseProviderURL;
@@ -572,7 +584,9 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			document.<portlet:namespace />fm['<portlet:namespace />groupMappingDescription'].value = groupMappingDescription;
 			document.<portlet:namespace />fm['<portlet:namespace />groupMappingUser'].value = groupMappingUser;
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_USERS_DN + postfix %>--'].value = baseDN;
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_USER_DEFAULT_OBJECT_CLASSES + postfix %>--'].value = exportMappingUserDefaultObjectClass;
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_GROUPS_DN + postfix %>--'].value = baseDN;
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.LDAP_GROUP_DEFAULT_OBJECT_CLASSES + postfix %>--'].value = exportMappingGroupDefaultObjectClass;
 		},
 		['aui-base']
 	);
