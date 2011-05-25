@@ -282,10 +282,16 @@ public class DocumentImpl implements Document {
 		_fields.put(name, field);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void addModifiedDate() {
 		addModifiedDate(new Date());
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void addModifiedDate(Date modifiedDate) {
 		addDate(Field.MODIFIED, modifiedDate);
 	}

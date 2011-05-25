@@ -45,6 +45,8 @@ public class Field implements Serializable {
 
 	public static final String CONTENT = "content";
 
+	public static final String CREATE_DATE = "createDate";
+
 	public static final String DESCRIPTION = "description";
 
 	public static final String ENTRY_CLASS_NAME = "entryClassName";
@@ -62,7 +64,12 @@ public class Field implements Serializable {
 		Field.TITLE, Field.URL, Field.USER_NAME
 	};
 
+	/**
+	 * @deprecated {@link #MODIFIED_DATE}
+	 */
 	public static final String MODIFIED = "modified";
+
+	public static final String MODIFIED_DATE = "modified";
 
 	public static final String NAME = "name";
 

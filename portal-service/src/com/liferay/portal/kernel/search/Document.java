@@ -102,8 +102,14 @@ public interface Document extends Serializable {
 
 	public void addLocalizedText(String name, Map<Locale, String> values);
 
+	/**
+	 * @deprecated
+	 */
 	public void addModifiedDate();
 
+	/**
+	 * @deprecated
+	 */
 	public void addModifiedDate(Date modifiedDate);
 
 	public void addNumber(String name, double value);

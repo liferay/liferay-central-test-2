@@ -122,7 +122,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 				String url = portletURL.toString();
 
-				Date modifiedDate = result.getDate(Field.MODIFIED);
+				Date modifiedDate = result.getDate(Field.MODIFIED_DATE);
 
 				String content = StringPool.BLANK;
 
