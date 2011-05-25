@@ -361,7 +361,6 @@ public class DataFactory {
 
 			for (Permission permission : permissions) {
 				if (!groupDefaultActions.contains(permission.getActionId())) {
-
 					continue;
 				}
 

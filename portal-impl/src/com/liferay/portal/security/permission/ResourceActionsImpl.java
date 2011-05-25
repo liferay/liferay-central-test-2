@@ -362,8 +362,7 @@ public class ResourceActionsImpl implements ResourceActions {
 				checkPortletGroupDefaultActions(groupDefaultActions);
 
 				_portletResourceGroupDefaultActions.put(
-					name,
-					new UnmodifiableList<String>(groupDefaultActions));
+					name, new UnmodifiableList<String>(groupDefaultActions));
 			}
 
 			List<String> guestDefaultActions =
@@ -400,8 +399,8 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		// This method should always be called only after
 		// _getPortletResourceActions has been called at least once to
-		// populate the default group actions. Check to make sure this is
-		// the case. However, if it is not, that means the methods
+		// populate the default group actions. Check to make sure this is the
+		// case. However, if it is not, that means the methods
 		// getPortletResourceGuestDefaultActions and
 		// getPortletResourceGuestDefaultActions may not work either.
 
@@ -869,8 +868,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		Element groupDefaultsElement = getPermissionsChildElement(
 			parentElement, "community-defaults");
 
-		groupDefaultActions.addAll(
-			readActionKeys(groupDefaultsElement));
+		groupDefaultActions.addAll(readActionKeys(groupDefaultsElement));
 
 		setActions(actionsMap, name, groupDefaultActions);
 	}
@@ -1044,8 +1042,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			_portletResourceActions, name, supportsActions);
 
 		readGroupDefaultActions(
-			portletResourceElement, _portletResourceGroupDefaultActions,
-			name);
+			portletResourceElement, _portletResourceGroupDefaultActions, name);
 
 		List<String> guestDefaultActions = readGuestDefaultActions(
 			portletResourceElement, _portletResourceGuestDefaultActions, name);
