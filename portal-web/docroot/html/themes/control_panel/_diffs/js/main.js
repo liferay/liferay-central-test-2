@@ -303,7 +303,7 @@ if (!themeDisplay.isStatePopUp()) {
 
 					var searchPanelInput = instance._searchPanelInput;
 
-					instance._liveSearch = new A.LiveSearch(
+					var liveSearch = new A.LiveSearch(
 						{
 							input: searchPanelInput,
 							nodes: SELECTOR_SEARCH_NODES,
@@ -314,7 +314,7 @@ if (!themeDisplay.isStatePopUp()) {
 
 							on: {
 								search: function(event) {
-									if (trim(searchPanelInput.val())) {
+									if (trim(liveSearch.get('searchValue'))) {
 										body.addClass(CSS_SEARCH_PANEL_ACTIVE);
 
 										instance._searchActive = true;
@@ -328,7 +328,7 @@ if (!themeDisplay.isStatePopUp()) {
 
 									instance._refreshFocusManagerTask();
 
-									if (!trim(searchPanelInput.val())) {
+									if (!trim(liveSearch.get('searchValue'))) {
 										body.removeClass(CSS_SEARCH_PANEL_ACTIVE);
 
 										instance._searchActive = false;
@@ -337,6 +337,8 @@ if (!themeDisplay.isStatePopUp()) {
 							}
 						}
 					);
+
+					instance._liveSearch = liveSearch;
 				},
 
 				_focusSearchBar: function(event) {
@@ -414,27 +416,24 @@ if (!themeDisplay.isStatePopUp()) {
 				_uiSetHidden: function(newVal, persist) {
 					var instance = this;
 
+					var liveSearch = instance._liveSearch;
+
 					var panelCfg = instance._panelCfg;
 
 					var toggleValue = panelCfg.closeValue;
 
+					var searchValue = instance._searchValue;
+
 					if (!newVal) {
 						toggleValue = panelCfg.openValue;
-
-						instance._searchPanelInput.val(instance._searchValue);
 					}
 					else {
-						instance._searchValue = instance._searchPanelInput.val();
+						searchValue = '';
 
-						instance._searchPanelInput.val('');
+						instance._searchValue = liveSearch.get('searchValue');
 					}
 
-					instance._liveSearch.fire(
-						'search',
-						{
-							liveSearch: {}
-						}
-					);
+					liveSearch.search(searchValue);
 
 					body.removeClass(CSS_DISPLAY_PANEL_COLUMNS);
 
