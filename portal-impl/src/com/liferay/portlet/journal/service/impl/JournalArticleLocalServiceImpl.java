@@ -2029,7 +2029,8 @@ public class JournalArticleLocalServiceImpl
 				JournalArticle.class.getName(), article.getResourcePrimKey(),
 				article, serviceContext);
 		}
-		else if (version == JournalArticleConstants.DEFAULT_VERSION) {
+		else if (article.getVersion() ==
+				 	JournalArticleConstants.DEFAULT_VERSION) {
 
 			// Indexer
 
