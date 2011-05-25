@@ -185,11 +185,11 @@ public class DLIndexer extends BaseIndexer {
 		fileModel.setFileEntryId(fileEntry.getFileEntryId());
 		fileModel.setFileName(fileEntry.getName());
 		fileModel.setGroupId(fileEntry.getGroupId());
-		fileModel.setUserId(fileEntry.getUserId());
 		fileModel.setModifiedDate(fileEntry.getModifiedDate());
 		fileModel.setPortletId(PORTLET_ID);
 		fileModel.setProperties(fileEntry.getLuceneProperties());
 		fileModel.setRepositoryId(fileEntry.getDataRepositoryId());
+		fileModel.setUserId(fileEntry.getUserId());
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
