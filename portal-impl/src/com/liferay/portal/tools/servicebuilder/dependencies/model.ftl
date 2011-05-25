@@ -6,6 +6,7 @@ package ${packagePath}.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.GroupedModel;
@@ -35,6 +36,10 @@ import java.util.Map;
  * @generated
  */
 public interface ${entity.name}Model extends
+	<#if entity.hasColumn("classNameId") && entity.hasColumn("classPK")>
+		AttachedModel,
+	</#if>
+
 	<#if entity.isAuditedModel() && !entity.isGroupedModel()>
 		AuditedModel,
 	</#if>
