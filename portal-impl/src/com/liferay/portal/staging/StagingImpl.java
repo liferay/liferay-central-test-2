@@ -130,7 +130,7 @@ public class StagingImpl implements Staging {
 
 		Group stagingGroup = targetLayout.getGroup();
 		Group liveGroup = stagingGroup.getLiveGroup();
-	
+
 		Layout sourceLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
 			targetLayout.getUuid(), liveGroup.getGroupId());
 
@@ -918,7 +918,7 @@ public class StagingImpl implements Staging {
 		else {
 			stagingGroup = sourceLayout.getGroup();
 			liveGroup = stagingGroup.getLiveGroup();
-			
+
 			targetLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
 				sourceLayout.getUuid(), liveGroup.getGroupId());
 		}
