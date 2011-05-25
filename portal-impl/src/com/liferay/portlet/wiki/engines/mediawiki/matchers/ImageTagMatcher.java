@@ -15,22 +15,14 @@
 package com.liferay.portlet.wiki.engines.mediawiki.matchers;
 
 import com.liferay.portal.kernel.util.CallbackMatcher;
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.regex.MatchResult;
 
-/**
- * @author Jonathan Potter
- * @author Brian Wing Shun Chan
- */
-public class ImageURLMatcher extends CallbackMatcher {
+public class ImageTagMatcher extends CallbackMatcher {
 
-	public ImageURLMatcher(String attachmentURLPrefix) {
-		_attachmentURLPrefix = attachmentURLPrefix;
-
+	public ImageTagMatcher() {
 		setRegex(_REGEX);
 	}
 
@@ -39,29 +31,18 @@ public class ImageURLMatcher extends CallbackMatcher {
 	}
 
 	private static final String _REGEX =
-		"<a href=\"[^\"]*?Special:Upload[^\"]*?topic=Image:([^\"]*?)\".*?</a>";
+		"\\[\\[Image:[^\\]]+\\]\\]";
 
 	private Callback _callBack = new Callback() {
 
 		public String foundMatch(MatchResult matchResult) {
-			String title = StringUtil.replace(matchResult.group(1), "%5F",
-				StringPool.UNDERLINE);
+			String title = matchResult.group(0);
 
-			String url = _attachmentURLPrefix + HttpUtil.encodeURL(title);
+			title = StringUtil.replace(title, StringPool.UNDERLINE, "%5F");
 
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("<img alt=\"");
-			sb.append(title);
-			sb.append("\" class=\"wikiimg\" src=\"");
-			sb.append(url);
-			sb.append("\" />");
-
-			return sb.toString();
+			return title;
 		}
 
 	};
-
-	private String _attachmentURLPrefix;
 
 }

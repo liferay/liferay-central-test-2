@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.engines.mediawiki.matchers.EditURLMatcher;
+import com.liferay.portlet.wiki.engines.mediawiki.matchers.ImageTagMatcher;
 import com.liferay.portlet.wiki.engines.mediawiki.matchers.ImageURLMatcher;
 import com.liferay.portlet.wiki.engines.mediawiki.matchers.ViewURLMatcher;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -169,8 +170,12 @@ public class MediaWikiEngine implements WikiEngine {
 		String html = StringPool.BLANK;
 
 		try {
-			html = ParserUtil.parse(
-				parserInput, parserOutput, page.getContent());
+			html = page.getContent();
+
+			ImageTagMatcher imageTagMatcher = new ImageTagMatcher();
+
+			html = ParserUtil.parse(parserInput, parserOutput,
+				imageTagMatcher.replaceMatches(html));
 		}
 		catch (ParserException pe) {
 			throw new PageContentException(pe);
