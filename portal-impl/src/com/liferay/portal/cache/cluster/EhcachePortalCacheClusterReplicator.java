@@ -64,10 +64,6 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 
 	public void notifyElementPut(Ehcache ehcache, Element element)
 		throws CacheException {
-		PortalCacheClusterLinkUtil.sendEvent(
-			new PortalCacheClusterEvent(
-				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.PUT));
 	}
 
 	public void notifyElementRemoved(Ehcache ehcache, Element element)
