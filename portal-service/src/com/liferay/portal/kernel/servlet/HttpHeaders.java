@@ -76,10 +76,8 @@ public interface HttpHeaders {
 	public static final String CACHE_CONTROL_DEFAULT_VALUE =
 		"max-age=315360000, public";
 
-	public static final String CACHE_CONTROL_NO_CACHE_VALUE = "no-cache";
-
-	public static final String CACHE_CONTROL_NO_CACHE_NO_STORE_VALUE =
-		"no-cache, no-store";
+	public static final String CACHE_CONTROL_NO_CACHE_VALUE =
+		"private, no-cache, no-store, must-revalidate";
 
 	public static final String CACHE_CONTROL_PUBLIC_VALUE = "public";
 
@@ -89,6 +87,8 @@ public interface HttpHeaders {
 	public static final String CLOSE = CONNECTION_CLOSE_VALUE;
 
 	public static final String EXPIRES_DEFAULT_VALUE = "315360000";
+
+	public static final String PRAGMA_NO_CACHE_VALUE = "no-cache";
 
 	public static final String PRAGMA_PUBLIC_VALUE = "public";
 

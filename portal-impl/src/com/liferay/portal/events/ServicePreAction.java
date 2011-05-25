@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.mobile.device.Device;
 import com.liferay.portal.kernel.mobile.device.DeviceDetectionUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -1039,6 +1040,17 @@ public class ServicePreAction extends Action {
 		}
 		else if (!user.isDefaultUser()) {
 			signedIn = true;
+		}
+
+		if (PropsValues.BROWSER_CACHE_SIGNED_IN_DISABLED && signedIn) {
+			response.setHeader(
+				HttpHeaders.CACHE_CONTROL,
+				HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
+
+			response.setHeader(
+				HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_NO_CACHE_VALUE);
+
+			response.setDateHeader(HttpHeaders.EXPIRES, 0);
 		}
 
 		User realUser = user;
