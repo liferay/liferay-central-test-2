@@ -53,9 +53,7 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 		PollsQuestion question = pollsQuestionPersistence.findByPrimaryKey(
 			questionId);
 
-		if (serviceContext.getCreateDate(now).after(
-				question.getExpirationDate())) {
-
+		if (question.isExpired(serviceContext, now)) {
 			throw new QuestionExpiredException();
 		}
 

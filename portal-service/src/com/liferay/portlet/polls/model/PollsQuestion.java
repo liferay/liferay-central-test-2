@@ -36,4 +36,8 @@ public interface PollsQuestion extends PollsQuestionModel {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isExpired();
+
+	public boolean isExpired(
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.util.Date defaultCreateDate);
 }

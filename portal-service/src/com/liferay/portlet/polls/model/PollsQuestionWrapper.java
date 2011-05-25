@@ -538,6 +538,12 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.isExpired();
 	}
 
+	public boolean isExpired(
+		com.liferay.portal.service.ServiceContext serviceContext,
+		java.util.Date defaultCreateDate) {
+		return _pollsQuestion.isExpired(serviceContext, defaultCreateDate);
+	}
+
 	public PollsQuestion getWrappedPollsQuestion() {
 		return _pollsQuestion;
 	}

@@ -15,6 +15,7 @@
 package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
@@ -44,6 +45,19 @@ public class PollsQuestionImpl
 		Date expirationDate = getExpirationDate();
 
 		if ((expirationDate != null) && (expirationDate.before(new Date()))) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isExpired(
+		ServiceContext serviceContext, Date defaultCreateDate) {
+
+		Date createDate = serviceContext.getCreateDate(defaultCreateDate);
+
+		if (createDate.after(getExpirationDate()) {
 			return true;
 		}
 		else {
