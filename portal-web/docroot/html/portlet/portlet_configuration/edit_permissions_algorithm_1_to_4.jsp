@@ -137,15 +137,15 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 		}
 		else if (modelResource.equals(Layout.class.getName())) {
 
-			// User layouts should not have community assignments
+			// User layouts should not have site assignments
 
 			if (group.isUser()) {
 				tabs2Names = StringUtil.replace(tabs2Names, "site,", StringPool.BLANK);
 				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", StringPool.BLANK);
 			}
 			else if (group.isOrganization()) {
-				tabs2Names = StringUtil.replace(tabs2Names, "site,", "organization,");
-				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", "organization-roles,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site,", "site,organization,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", "site-roles,organization-roles,");
 			}
 
 			// Private layouts should not have guest assignments
@@ -160,8 +160,8 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", StringPool.BLANK);
 			}
 			else if (group.isOrganization()) {
-				tabs2Names = StringUtil.replace(tabs2Names, "site,", "organization,");
-				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", "organization-roles,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site,", "site,organization,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", "site-roles,organization-roles,");
 			}
 		}
 		%>

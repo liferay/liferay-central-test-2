@@ -172,12 +172,12 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			roles.remove(organizationOwner);
 		}
 
-		if (group.isRegularSite() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_SITE)) {
-			Role communityAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
-			Role communityOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
+		if (group.isSite() || ArrayUtil.contains(roleTypes, RoleConstants.TYPE_SITE)) {
+			Role siteAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+			Role siteOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
 
-			roles.remove(communityAdministrator);
-			roles.remove(communityOwner);
+			roles.remove(siteAdministrator);
+			roles.remove(siteOwner);
 		}
 
 		List<Team> teams = null;
