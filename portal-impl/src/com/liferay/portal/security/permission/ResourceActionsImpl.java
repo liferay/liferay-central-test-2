@@ -798,8 +798,7 @@ public class ResourceActionsImpl implements ResourceActions {
 				modelResource.equals(User.class.getName())) {
 
 				types = new int[] {
-					RoleConstants.TYPE_REGULAR,
-					RoleConstants.TYPE_ORGANIZATION
+					RoleConstants.TYPE_REGULAR, RoleConstants.TYPE_ORGANIZATION
 				};
 			}
 			else {
@@ -811,8 +810,7 @@ public class ResourceActionsImpl implements ResourceActions {
 				if (group.isOrganization()) {
 					types = new int[] {
 						RoleConstants.TYPE_REGULAR,
-						RoleConstants.TYPE_ORGANIZATION,
-						RoleConstants.TYPE_SITE
+						RoleConstants.TYPE_ORGANIZATION, RoleConstants.TYPE_SITE
 					};
 				}
 				else if (group.isUser()) {
