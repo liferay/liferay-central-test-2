@@ -10,6 +10,7 @@ import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.model.ResourcedModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -46,6 +47,10 @@ public interface ${entity.name}Model extends
 
 	<#if entity.isResourcedModel()>
 		, ResourcedModel
+	</#if>
+
+	<#if entity.isWorkflowEnabled()>
+		, WorkflowedModel
 	</#if>
 
 	{
