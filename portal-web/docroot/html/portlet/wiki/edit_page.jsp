@@ -422,22 +422,18 @@ if (Validator.isNull(redirect)) {
 
 <aui:script>
 	function <portlet:namespace />changeFormat(formatSelect) {
-		var currentFormat = formatSelect.options[window.<portlet:namespace />currentFormatIndex].value;
+		var currentFormat = formatSelect.options[window.<portlet:namespace />currentFormatIndex].text;
 
-		currentFormat = currentFormat.toUpperCase();
+		var newFormat = formatSelect.options[formatSelect.selectedIndex].text;
 
-		if (currentFormat == "HTML") {
-			var newFormat = formatSelect.options[formatSelect.selectedIndex].text;
+		var confirmMessage = '<liferay-ui:message key="you-may-lose-formatting-when-switching-from-x-to-x" />';
 
-			var confirmMessage = '<liferay-ui:message key="you-may-lose-formatting-when-switching-from-x-to-x" />';
+		confirmMessage = AUI().Lang.sub(confirmMessage, [currentFormat, newFormat]);
 
-			confirmMessage = AUI().Lang.sub(confirmMessage, [currentFormat, newFormat]);
+		if (!confirm(confirmMessage)) {
+			formatSelect.selectedIndex = window.<portlet:namespace />currentFormatIndex;
 
-			if (!confirm(confirmMessage)) {
-				formatSelect.selectedIndex = window.<portlet:namespace />currentFormatIndex;
-
-				return;
-			}
+			return;
 		}
 
 		if (window.<portlet:namespace />editor) {
