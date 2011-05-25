@@ -47,12 +47,9 @@ public class SocialRelationConstants {
 	}
 
 	public static boolean isTypeUni(int type) {
-		if ((type == SocialRelationConstants.TYPE_UNI_CHILD) ||
-			(type == SocialRelationConstants.TYPE_UNI_ENEMY) ||
-			(type == SocialRelationConstants.TYPE_UNI_FOLLOWER) ||
-			(type == SocialRelationConstants.TYPE_UNI_PARENT) ||
-			(type == SocialRelationConstants.TYPE_UNI_SUBORDINATE) ||
-			(type == SocialRelationConstants.TYPE_UNI_SUPERVISOR)) {
+		if ((type == TYPE_UNI_CHILD) || (type == TYPE_UNI_ENEMY) ||
+			(type == TYPE_UNI_FOLLOWER) || (type == TYPE_UNI_PARENT) ||
+			(type == TYPE_UNI_SUBORDINATE) || (type == TYPE_UNI_SUPERVISOR)) {
 
 			return true;
 		}
