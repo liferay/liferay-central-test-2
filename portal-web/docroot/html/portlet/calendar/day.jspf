@@ -248,7 +248,7 @@ if (!partDayResults.isEmpty()) {
 		for (CalEvent event : displayResults) {
 			event = event.toEscapedModel();
 
-			Date startDate = event.getStartDate();
+			Date startDate = Time.getDate(event.getStartDate(), TimeZoneUtil.getDefault());
 
 			if (event.isTimeZoneSensitive()) {
 				startDate = Time.getDate(event.getStartDate(), timeZone);
@@ -291,9 +291,9 @@ if (!partDayResults.isEmpty()) {
 								<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)) %>
 							</c:when>
 							<c:otherwise>
-								<%= dateFormatTime.format(event.getStartDate()) %>
+								<%= dateFormatTime.format(Time.getDate(event.getStartDate(), TimeZoneUtil.getDefault())) %>
 								-
-								<%= dateFormatTime.format(CalUtil.getEndTime(event)) %>
+								<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), TimeZoneUtil.getDefault())) %>
 							</c:otherwise>
 						</c:choose>
 					</div>

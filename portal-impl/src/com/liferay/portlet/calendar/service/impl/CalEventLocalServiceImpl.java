@@ -499,7 +499,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			// Time zone insensitive
 
 			Calendar tzICal = CalendarFactoryUtil.getCalendar(
-				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+				TimeZoneUtil.getDefault());
+
+			tzICal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
 				cal.get(Calendar.DATE));
 
 			List<CalEvent> events2 = calEventFinder.findByG_SD_T(

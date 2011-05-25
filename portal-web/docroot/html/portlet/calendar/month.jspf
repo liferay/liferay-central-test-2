@@ -229,7 +229,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("h:mma", local
 										<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
 									</c:when>
 									<c:otherwise>
-										<%= dateFormatTime.format(event.getStartDate()) %>
+										<%= dateFormatTime.format(Time.getDate(event.getStartDate(), TimeZoneUtil.getDefault())) %>
 									</c:otherwise>
 								</c:choose>
 							</c:if>

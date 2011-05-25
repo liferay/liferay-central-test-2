@@ -218,7 +218,7 @@ Format dateFormatDayOfWeek = FastDateFormatFactoryUtil.getSimpleDateFormat("EEE"
 											<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
 										</c:when>
 										<c:otherwise>
-											<%= dateFormatTime.format(event.getStartDate()) %>
+											<%= dateFormatTime.format(Time.getDate(event.getStartDate(), TimeZoneUtil.getDefault())) %>
 										</c:otherwise>
 									</c:choose>
 								</c:otherwise>

@@ -64,7 +64,7 @@ request.setAttribute("view_event.jsp-event", event);
 						<%= dateFormatDate.format(Time.getDate(event.getStartDate(), timeZone)) %>
 					</c:when>
 					<c:otherwise>
-						<%= dateFormatDate.format(event.getStartDate()) %>
+						<%= dateFormatDate.format(Time.getDate(event.getStartDate(), TimeZoneUtil.getDefault())) %>
 					</c:otherwise>
 				</c:choose>
 			</dd>
@@ -123,7 +123,7 @@ request.setAttribute("view_event.jsp-event", event);
 							</c:when>
 							<c:otherwise>
 								<abbr class="dtstart" title="<%= dateFormatISO8601.format(event.getStartDate()) %>">
-									<%= dateFormatTime.format(event.getStartDate()) %>
+									<%= dateFormatTime.format(Time.getDate(event.getStartDate(), TimeZoneUtil.getDefault())) %>
 								</abbr>
 							</c:otherwise>
 						</c:choose>
@@ -133,7 +133,7 @@ request.setAttribute("view_event.jsp-event", event);
 								<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)) %>
 							</c:when>
 							<c:otherwise>
-								<%= dateFormatTime.format(CalUtil.getEndTime(event)) %>
+								<%= dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), TimeZoneUtil.getDefault())) %>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>

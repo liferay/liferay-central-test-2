@@ -32,7 +32,7 @@ Calendar startDate = CalendarUtil.roundByMinutes((Calendar)selCal.clone(), 15);
 
 if (event != null) {
 	if (!event.isTimeZoneSensitive()) {
-		startDate = CalendarFactoryUtil.getCalendar();
+		startDate = CalendarFactoryUtil.getCalendar(TimeZoneUtil.getDefault());
 	}
 
 	startDate.setTime(event.getStartDate());
