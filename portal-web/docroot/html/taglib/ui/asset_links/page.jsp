@@ -54,7 +54,7 @@ if (classPK > 0) {
 
 				String asseLinktEntryTitle = assetRenderer.getTitle(locale);
 
-				String urlViewInContext = assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, "viewFullContentURLString");
+				String urlViewInContext = assetRenderer.getURLViewInContext((LiferayPortletRequest)portletRequest, (LiferayPortletResponse)portletResponse, "viewFullContentURLString");
 			%>
 
 				<li class="asset-links-list-item">
