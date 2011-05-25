@@ -105,16 +105,16 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 		_dlAppHelperLocalService.moveFileEntry(oldFileEntryId, newFileEntryId);
 	}
 
-	public void updateAsset(long userId,
+	public com.liferay.portlet.asset.model.AssetEntry updateAsset(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
 		java.lang.String mimeType, boolean addDraftAssetEntry, boolean visible)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppHelperLocalService.updateAsset(userId, fileEntry, fileVersion,
-			assetCategoryIds, assetTagNames, mimeType, addDraftAssetEntry,
-			visible);
+		return _dlAppHelperLocalService.updateAsset(userId, fileEntry,
+			fileVersion, assetCategoryIds, assetTagNames, mimeType,
+			addDraftAssetEntry, visible);
 	}
 
 	public void updateStatus(long userId,

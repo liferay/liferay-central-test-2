@@ -394,7 +394,7 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateAsset(long userId,
+	public com.liferay.portlet.asset.model.AssetEntry updateAsset(long userId,
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames)
