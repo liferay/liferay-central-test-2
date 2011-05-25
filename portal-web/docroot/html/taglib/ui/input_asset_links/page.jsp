@@ -142,7 +142,7 @@ assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
 					width: 820
 				},
 				id: 'asset_browser',
-				title: <liferay-ui:message key="asset-browser" />,
+				title: '<liferay-ui:message key="asset-browser" />',
 				uri: url
 			}
 		);
