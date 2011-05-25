@@ -501,7 +501,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			Calendar tzICal = CalendarFactoryUtil.getCalendar(
 				TimeZoneUtil.getDefault());
 
-			tzICal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+			tzICal.set(
+				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
 				cal.get(Calendar.DATE));
 
 			List<CalEvent> events2 = calEventFinder.findByG_SD_T(
