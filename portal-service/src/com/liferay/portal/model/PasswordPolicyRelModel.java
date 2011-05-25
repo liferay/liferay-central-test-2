@@ -33,7 +33,8 @@ import java.io.Serializable;
  * @see com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
  * @generated
  */
-public interface PasswordPolicyRelModel extends BaseModel<PasswordPolicyRel> {
+public interface PasswordPolicyRelModel extends AttachedModel,
+	BaseModel<PasswordPolicyRel> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

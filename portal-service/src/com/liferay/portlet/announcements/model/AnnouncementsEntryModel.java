@@ -16,6 +16,7 @@ package com.liferay.portlet.announcements.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
@@ -39,7 +40,7 @@ import java.util.Date;
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
  * @generated
  */
-public interface AnnouncementsEntryModel extends AuditedModel,
+public interface AnnouncementsEntryModel extends AttachedModel, AuditedModel,
 	BaseModel<AnnouncementsEntry> {
 	/*
 	 * NOTE FOR DEVELOPERS:

@@ -37,7 +37,7 @@ import java.util.Map;
  * @see com.liferay.portal.model.impl.RoleModelImpl
  * @generated
  */
-public interface RoleModel extends BaseModel<Role> {
+public interface RoleModel extends AttachedModel, BaseModel<Role> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

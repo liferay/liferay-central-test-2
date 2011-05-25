@@ -34,7 +34,7 @@ import java.io.Serializable;
  * @see com.liferay.portal.model.impl.ShardModelImpl
  * @generated
  */
-public interface ShardModel extends BaseModel<Shard> {
+public interface ShardModel extends AttachedModel, BaseModel<Shard> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.ratings.model;
 
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -34,7 +35,7 @@ import java.io.Serializable;
  * @see com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
  * @generated
  */
-public interface RatingsStatsModel extends BaseModel<RatingsStats> {
+public interface RatingsStatsModel extends AttachedModel, BaseModel<RatingsStats> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

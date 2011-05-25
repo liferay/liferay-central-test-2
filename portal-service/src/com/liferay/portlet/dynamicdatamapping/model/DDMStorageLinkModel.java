@@ -15,6 +15,7 @@
 package com.liferay.portlet.dynamicdatamapping.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -35,7 +36,8 @@ import java.io.Serializable;
  * @see com.liferay.portlet.dynamicdatamapping.model.impl.DDMStorageLinkModelImpl
  * @generated
  */
-public interface DDMStorageLinkModel extends BaseModel<DDMStorageLink> {
+public interface DDMStorageLinkModel extends AttachedModel,
+	BaseModel<DDMStorageLink> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

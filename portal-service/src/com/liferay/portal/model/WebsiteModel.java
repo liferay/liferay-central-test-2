@@ -37,7 +37,8 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WebsiteModelImpl
  * @generated
  */
-public interface WebsiteModel extends AuditedModel, BaseModel<Website> {
+public interface WebsiteModel extends AttachedModel, AuditedModel,
+	BaseModel<Website> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

@@ -37,8 +37,8 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl
  * @generated
  */
-public interface WorkflowInstanceLinkModel extends BaseModel<WorkflowInstanceLink>,
-	GroupedModel {
+public interface WorkflowInstanceLinkModel extends AttachedModel,
+	BaseModel<WorkflowInstanceLink>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

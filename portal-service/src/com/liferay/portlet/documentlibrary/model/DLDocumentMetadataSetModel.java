@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -35,7 +36,8 @@ import java.io.Serializable;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetModelImpl
  * @generated
  */
-public interface DLDocumentMetadataSetModel extends BaseModel<DLDocumentMetadataSet> {
+public interface DLDocumentMetadataSetModel extends AttachedModel,
+	BaseModel<DLDocumentMetadataSet> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

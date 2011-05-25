@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -34,7 +35,7 @@ import java.io.Serializable;
  * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
  * @generated
  */
-public interface MBDiscussionModel extends BaseModel<MBDiscussion> {
+public interface MBDiscussionModel extends AttachedModel, BaseModel<MBDiscussion> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

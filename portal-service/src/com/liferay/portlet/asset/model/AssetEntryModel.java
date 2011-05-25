@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
@@ -39,7 +40,8 @@ import java.util.Date;
  * @see com.liferay.portlet.asset.model.impl.AssetEntryModelImpl
  * @generated
  */
-public interface AssetEntryModel extends BaseModel<AssetEntry>, GroupedModel {
+public interface AssetEntryModel extends AttachedModel, BaseModel<AssetEntry>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

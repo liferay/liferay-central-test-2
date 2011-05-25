@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.ServiceContext;
 
@@ -33,7 +34,7 @@ import java.io.Serializable;
  * @see com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl
  * @generated
  */
-public interface ExpandoValueModel extends BaseModel<ExpandoValue> {
+public interface ExpandoValueModel extends AttachedModel, BaseModel<ExpandoValue> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
