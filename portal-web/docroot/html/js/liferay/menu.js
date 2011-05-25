@@ -7,17 +7,15 @@ AUI().add(
 
 		var ATTR_CLASS_NAME = 'className';
 
-		var ALIGN_AUTO = 'auto';
+		var AUTO = 'auto';
 
 		var ARIA_ATTR_ROLE = 'role';
 
 		var CSS_STATE_ACTIVE = 'yui3-aui-state-active';
 
-		var CSS_HELPER_HIDDEN = 'yui3-aui-helper-hidden-accessible';
-
 		var CSS_EXTENDED = 'lfr-extended';
 
-		var DIRECTION_AUTO = 'auto';
+		var DEFAULT_ALIGN_POINTS = ['tl', 'bl'];
 
 		var DIRECTION_DOWN = 'down';
 
@@ -27,28 +25,44 @@ AUI().add(
 
 		var EVENT_CLICK = 'click';
 
-		var ID = 'id';
+		var STR_B = 'b';
 
-		var LIST_ITEM = 'li';
+		var STR_L = 'l';
 
-		var OFFSET_HEIGHT = 'offsetHeight';
+		var STR_R = 'r';
 
-		var SELECTOR_ANCHOR = 'a';
+		var STR_T = 't';
 
-		var SELECTOR_SEARCH_CONTAINER = '.lfr-menu-list-search-container';
+		var MAP_ALIGN_HORIZONTAL_OVERLAY = {
+			right: STR_L,
+			left: STR_R
+		};
 
-		var SELECTOR_SEARCH_INPUT = '.lfr-menu-list-search';
+		var MAP_ALIGN_HORIZONTAL_TRIGGER = {
+			right: STR_R,
+			left: STR_L
+		};
 
-		var REGEX_ALIGN = /\balign-(right|left)\b/;
+		var MAP_ALIGN_VERTICAL_OVERLAY = {
+			down: STR_T,
+			up: STR_B
+		};
 
-		var REGEX_DIRECTION = /\bdirection-(down|left|right)\b/;
+		var REGEX_DIRECTION = /\bdirection-(down|left|right|up)\b/;
 
 		var REGEX_MAX_DISPLAY_ITEMS = /max-display-items-(\d+)/;
 
-		var TPL_MENU = '<div id="{menuId}" class="lfr-component lfr-menu-list" />';
+		var SELECTOR_ANCHOR = 'a';
 
-		var TPL_SEARCH_BOX =
-			'<div class="lfr-menu-list-search-container">' +
+		var SELECTOR_LIST_ITEM = 'li';
+
+		var SELECTOR_SEARCH_CONTAINER = '.lfr-menu-list-search-container';
+
+		var STR_BLANK = '';
+
+		var TPL_MENU = '<div class="lfr-component lfr-menu-list" />';
+
+		var TPL_SEARCH_BOX = '<div class="lfr-menu-list-search-container">' +
 				'<input autocomplete="off" aria-autocomplete="list" aria-expanded="true" aria-labelledby="{searchLabeledBy}" aria-owns="{searchOwns}" class="lfr-menu-list-search" id="{searchId}" role="combobox">' +
 			'</div>';
 
@@ -58,338 +72,322 @@ AUI().add(
 			if (!arguments.callee._hasRun) {
 				arguments.callee._hasRun = true;
 
-				instance._body = A.getBody();
-				instance._document = A.getDoc();
-				instance._window = A.getWin();
-
-				instance._active = {
-					menu: null,
-					trigger: null
-				};
-
 				var Layout = Liferay.Layout;
 
 				if (Layout) {
 					Layout.on('drag:start', instance._closeActiveMenu, instance);
 				}
 
-				instance._window.on(
-					'resize',
-					function(event) {
-						var menu = instance._active.menu;
+				A.getWin().on('resize', A.debounce(instance._positionActiveMenu, 200, instance));
 
-						if (menu && !menu.hasClass(CSS_HELPER_HIDDEN)) {
-							instance._positionActiveMenu();
-						}
-					}
-				);
-
-				instance._body.delegate(
+				A.getBody().delegate(
 					EVENT_CLICK,
 					function(event) {
 						var trigger = event.currentTarget;
-						var menu = trigger._AUI_MENU;
 
-						var active = instance._active;
+						var menu = instance._getMenu(trigger);
 
-						var activeMenu = active.menu;
+						instance._activeMenu = menu;
+						instance._activeTrigger = trigger;
 
-						if (!menu) {
-							menu = instance._createMenu(trigger);
-						}
-
-						if (activeMenu && !activeMenu.compareTo(menu)) {
-							instance._closeActiveMenu();
-						}
-
-						if (!menu.hasClass(CSS_HELPER_HIDDEN)) {
-							instance._closeActiveMenu();
-						}
-						else {
-							active.menu = menu;
-							active.trigger = trigger;
-
-							if (!menu.focusManager) {
-								instance._plugMenu(menu, trigger);
-							}
-
-							instance._positionActiveMenu();
-						}
+						instance._positionActiveMenu();
 
 						event.halt();
-
-						var anchor = trigger.one(SELECTOR_ANCHOR);
-
-						if (anchor) {
-							anchor.setAttrs(
-								{
-									'aria-haspopup': true,
-									role: 'button'
-								}
-							);
-						}
 					},
 					'.lfr-actions'
 				);
 
-				instance._document.on(EVENT_CLICK, instance._closeActiveMenu, instance);
+				A.getDoc().on(EVENT_CLICK, instance._closeActiveMenu, instance);
 			}
 		};
 
 		Menu.prototype = {
-			_createLiveSearch: function(trigger, menu) {
+			_closeActiveMenu: function() {
 				var instance = this;
 
-				var searchId = A.guid();
+				var menu = instance._activeMenu;
 
-				var listNode = menu.one('ul');
+				if (menu) {
+					instance._overlay.hide();
 
-				var searchLabelNode = trigger.one(SELECTOR_ANCHOR) || trigger;
+					var trigger = instance._activeTrigger;
 
-				var searchBoxContent = A.substitute(
-					TPL_SEARCH_BOX,
-					{
-						searchId: searchId,
-						searchLabeledBy: searchLabelNode.get(ID),
-						searchOwns: listNode.attr(ID)
+					instance._activeMenu = null;
+					instance._activeTrigger = null;
+
+					if (trigger.hasClass(CSS_EXTENDED)) {
+						trigger.removeClass(CSS_STATE_ACTIVE);
 					}
-				);
-
-				var inputSearch = A.Node.create(searchBoxContent);
-
-				menu.prepend(inputSearch);
-
-				var options = {
-					data: function(node) {
-						return trim(node.one(SELECTOR_ANCHOR).text());
-					},
-					input: '#' + searchId,
-					nodes: '#' + menu.get(ID) + ' > ul > li'
-				};
-
-				if (instance._liveSearch) {
-					instance._liveSearch.destroy();
 				}
-
-				instance._liveSearch = new A.LiveSearch(options);
-
-				instance._liveSearch.after(
-					'search',
-					function(event) {
-						menu.focusManager.refresh();
-					},
-					instance
-				);
-
-				return instance._liveSearch;
 			},
 
-			_createMenu: function(trigger) {
+			_getAlignPoints: A.cached(
+				function(cssClass) {
+					var instance = this;
+
+					var alignPoints = DEFAULT_ALIGN_POINTS;
+
+					if (cssClass.indexOf(AUTO) == -1) {
+						var directionMatch = cssClass.match(REGEX_DIRECTION);
+
+						var direction = (directionMatch && directionMatch[1]) || AUTO;
+
+						var overlayHorizontal = MAP_ALIGN_HORIZONTAL_OVERLAY[direction] || STR_L;
+						var overlayVertical = MAP_ALIGN_VERTICAL_OVERLAY[direction] || STR_T;
+
+						var triggerHorizontal = MAP_ALIGN_HORIZONTAL_TRIGGER[direction] || STR_L;
+						var triggerVertical = STR_T;
+
+						alignPoints = [overlayVertical + overlayHorizontal, triggerVertical + triggerHorizontal];
+					}
+
+					return alignPoints;
+				}
+			),
+
+			_getLiveSearch: function(trigger, menu) {
 				var instance = this;
 
-				var list = trigger.one('ul');
+				var liveSearch = menu._liveSearch;
 
-				var listItems = list.all(LIST_ITEM);
+				if (!liveSearch) {
+					var searchId = A.guid();
 
-				listItems.last().addClass('last');
+					var listNode = menu.one('ul');
 
-				var menuContent = A.substitute(
-					TPL_MENU,
-					{
-						menuId: A.guid()
-					}
-				);
+					var searchLabelNode = trigger.one(SELECTOR_ANCHOR) || trigger;
 
-				var menu = A.Node.create(menuContent);
+					var searchBoxContent = Lang.substitute(
+						TPL_SEARCH_BOX,
+						{
+							searchId: searchId,
+							searchLabeledBy: searchLabelNode.guid(),
+							searchOwns: listNode.guid()
+						}
+					);
 
-				menu.swallowEvent('click');
+					var inputSearch = A.Node.create(searchBoxContent);
 
-				menu._hideClass = CSS_HELPER_HIDDEN;
+					menu.prepend(inputSearch);
 
-				menu.appendChild(list);
+					var options = {
+						data: function(node) {
+							return trim(node.one(SELECTOR_ANCHOR).text());
+						},
+						input: '#' + searchId,
+						nodes: '#' + listNode.guid() + ' > li'
+					};
 
-				instance._body.prepend(menu);
+					liveSearch = new A.LiveSearch(options);
 
-				instance._setMenuHeight(trigger, menu, listItems);
+					var bodyNode = instance._overlay.bodyNode;
 
-				instance._setARIARoles(trigger, menu);
+					liveSearch.after(
+						'search',
+						function(event) {
+							bodyNode.focusManager.refresh();
+						},
+						instance
+					);
 
-				menu.hide();
+					menu._liveSearch = liveSearch;
+				}
 
-				Liferay.Util.createFlyouts(
-					{
-						container: menu.getDOM()
-					}
-				);
+				return liveSearch;
+			},
 
-				trigger._AUI_MENU = menu;
+			_getMenu: function(trigger) {
+				var instance = this;
+
+				var overlay = instance._overlay;
+
+				if (!overlay) {
+					overlay = new A.OverlayBase(
+						{
+							align: {
+								node: trigger,
+								points: DEFAULT_ALIGN_POINTS
+							},
+							constrain: true,
+							cssClass: 'lfr-menu-list',
+							hideClass: false,
+							preventOverlap: true,
+							zIndex: 999
+						}
+					).render();
+
+					var boundingBox = overlay.get('boundingBox');
+
+					boundingBox.addClass('lfr-component');
+					boundingBox.swallowEvent('click');
+
+					instance._overlay = overlay;
+				}
+				else {
+					overlay.set('align.node', trigger);
+				}
+
+				var listContainer = trigger.getData('menuListContainer');
+				var menu = trigger.getData('menu');
+				var menuHeight = trigger.getData('menuHeight');
+
+				var liveSearch = menu && menu._liveSearch;
+
+				if (liveSearch) {
+					liveSearch.search(STR_BLANK);
+				}
+
+				var listItems;
+
+				if (!menu || !listContainer) {
+					listContainer = trigger.one('ul');
+
+					listItems = listContainer.all(SELECTOR_LIST_ITEM);
+
+					menu = A.Node.create(TPL_MENU);
+
+					listContainer.placeBefore(menu);
+
+					listItems.last().addClass('last');
+
+					menu.append(listContainer);
+
+					trigger.setData('menuListContainer', listContainer);
+					trigger.setData('menu', menu);
+
+					instance._setARIARoles(trigger, menu, listContainer);
+
+					Liferay.Util.createFlyouts(
+						{
+							container: listContainer.getDOM()
+						}
+					);
+				}
+
+				overlay.setStdModContent(A.WidgetStdMod.BODY, menu);
+
+				if (!menuHeight) {
+					menuHeight = instance._getMenuHeight(trigger, menu, listItems || listContainer.all(SELECTOR_LIST_ITEM));
+
+					trigger.setData('menuHeight', menuHeight);
+
+					listContainer.addClass('lfr-menu-list-overflow');
+					listContainer.setStyle('height', menuHeight);
+				}
+
+				instance._getFocusManager().refresh();
 
 				return menu;
 			},
 
-			_closeActiveMenu: function() {
+			_getMenuHeight: function(trigger, menu, listItems) {
 				var instance = this;
 
-				var active = instance._active;
-				var activeMenu = active.menu;
+				var cssClass = trigger.attr(ATTR_CLASS_NAME);
 
-				if (activeMenu) {
-					activeMenu.hide();
+				var height = AUTO;
 
-					active.menu = null;
+				if (cssClass.indexOf('lfr-menu-expanded') == -1) {
+					var params = REGEX_MAX_DISPLAY_ITEMS.exec(cssClass);
 
-					var activeTrigger = active.trigger;
+					var maxDisplayItems = 3;//params && parseInt(params[1], 10);
 
-					if (activeTrigger.hasClass(CSS_EXTENDED)) {
-						activeTrigger.removeClass(CSS_STATE_ACTIVE);
+					if (maxDisplayItems && listItems.size() > maxDisplayItems) {
+						instance._getLiveSearch(trigger, trigger.getData('menu'));
+
+						height = 0;
+
+						var heights = listItems.slice(0, maxDisplayItems).get('offsetHeight');
+
+						for (var i = heights.length - 1; i >= 0; i--) {
+							height += heights[i];
+						}
 					}
-
-					active.trigger = null;
 				}
+
+				return height;
 			},
 
-			_plugMenu: function(menu, trigger) {
+			_getFocusManager: function() {
 				var instance = this;
 
-				menu.plug(
-					A.Plugin.NodeFocusManager,
-					{
-						circular: true,
-						descendants: 'li:not(.yui3-aui-helper-hidden) a,input',
-						focusClass: 'yui3-aui-focus',
-						keys: {
-							next: 'down:40',
-							previous: 'down:38'
+				var focusManager = instance._focusManager;
+
+				if (!focusManager) {
+					var bodyNode = instance._overlay.bodyNode;
+
+					bodyNode.plug(
+						A.Plugin.NodeFocusManager,
+						{
+							circular: true,
+							descendants: 'li:not(.yui3-aui-helper-hidden) a,input',
+							focusClass: 'yui3-aui-focus',
+							keys: {
+								next: 'down:40',
+								previous: 'down:38'
+							}
+						 }
+					);
+
+					bodyNode.on(
+						'key',
+						function(event) {
+							var anchor = instance._activeTrigger.one(SELECTOR_ANCHOR);
+
+							instance._closeActiveMenu();
+
+							if (anchor) {
+								anchor.focus();
+							}
+						},
+						'down:27,9'
+					);
+
+					focusManager = bodyNode.focusManager;
+
+					bodyNode.delegate(
+						'mouseenter',
+						function (event) {
+							if (focusManager.get('focused')) {
+								focusManager.focus(event.currentTarget.one(SELECTOR_ANCHOR));
+							}
+						},
+						SELECTOR_LIST_ITEM
+					);
+
+					focusManager.after(
+						'activeDescendantChange',
+						function(event) {
+							var descendants = focusManager.get('descendants');
+
+							var selectedItem = descendants.item(event.newVal);
+
+							bodyNode.one('ul').setAttribute('aria-activedescendant', selectedItem.guid());
 						}
-					 }
-				);
+					);
 
-				var anchor = trigger.one(SELECTOR_ANCHOR);
+					instance._focusManager = focusManager;
+				}
 
-				menu.on(
-					'key',
-					function(event) {
-						instance._closeActiveMenu();
-
-						if (anchor) {
-							anchor.focus();
-						}
-					},
-					'down:27,9'
-				);
-
-				var focusManager = menu.focusManager;
-
-				menu.delegate(
-					'mouseenter',
-					function (event) {
-						if (focusManager.get('focused')) {
-							focusManager.focus(event.currentTarget.one(SELECTOR_ANCHOR));
-						}
-					},
-					LIST_ITEM
-				);
-
-				focusManager.after(
-					'activeDescendantChange',
-					function(event) {
-						var descendants = focusManager.get('descendants');
-
-						var selectedItemIndex = event.newVal;
-
-						var selectedItem = descendants.item(selectedItemIndex);
-
-						menu.one('ul').setAttribute('aria-activedescendant', selectedItem.get(ID));
-					}
-				);
+				return focusManager;
 			},
 
 			_positionActiveMenu: function() {
 				var instance = this;
 
-				var active = instance._active;
-
-				var menu = active.menu;
-				var trigger = active.trigger;
+				var menu = instance._activeMenu;
+				var trigger = instance._activeTrigger;
 
 				if (menu) {
-					var triggerRegion = trigger.get('region');
-
 					var cssClass = trigger.attr(ATTR_CLASS_NAME);
 
-					var alignMatch = cssClass.match(REGEX_ALIGN);
+					var overlay = instance._overlay;
 
-					var align = (alignMatch && alignMatch[1]) || ALIGN_AUTO;
+					overlay.set('align.points', instance._getAlignPoints(cssClass));
 
-					var directionMatch = cssClass.match(REGEX_DIRECTION);
+					overlay._syncUIPosAlign();
 
-					var direction = (directionMatch && directionMatch[1]) || DIRECTION_AUTO;
-
-					var win = instance._window;
-
-					var menuHeight = menu.get(OFFSET_HEIGHT);
-					var menuWidth = menu.get('offsetWidth');
-
-					var triggerHeight = triggerRegion.height;
-					var triggerWidth = triggerRegion.width;
-
-					var menuTop = menuHeight + triggerRegion.top;
-					var menuLeft = menuWidth + triggerRegion.left;
-
-					var scrollTop = win.get('scrollTop');
-					var scrollLeft = win.get('scrollLeft');
-
-					var windowRegion = trigger.get('viewportRegion');
-
-					var windowHeight = windowRegion.height + scrollTop;
-					var windowWidth = windowRegion.width + scrollLeft;
-
-					if (align == ALIGN_AUTO) {
-						if (direction == DIRECTION_DOWN) {
-							triggerRegion.top += triggerHeight;
-						}
-
-						if (menuTop > windowHeight
-							&& ((triggerRegion.top - menuHeight) >= 0)) {
-
-							triggerRegion.top -= menuHeight;
-						}
-
-						if ((menuLeft > windowWidth || ((menuWidth/2) + triggerRegion.left) > windowWidth/2)
-							&& ((triggerRegion.left - menuWidth) >= 0)) {
-
-							triggerRegion.left -= (menuWidth - triggerWidth);
-						}
-						else {
-							if (direction == DIRECTION_LEFT) {
-								triggerRegion.left -= menuWidth;
-							}
-							else {
-								triggerRegion.left += triggerWidth;
-							}
-						}
-					}
-					else {
-						if (direction == DIRECTION_LEFT) {
-							triggerRegion.left -= (menuWidth - 2);
-						}
-						else if (direction == DIRECTION_RIGHT) {
-							triggerRegion.left += (triggerWidth + 2);
-						}
-
-						if (direction == DIRECTION_DOWN) {
-							triggerRegion.top += triggerHeight;
-						}
-						else {
-							triggerRegion.top -= (menuHeight - triggerHeight);
-						}
-					}
-
-					menu.setStyle('position', 'absolute');
-
-					menu.setXY([triggerRegion.left, triggerRegion.top]);
-
-					menu.show();
+					overlay.show();
 
 					if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() <= 7) {
 						var searchContainer = menu.one(SELECTOR_SEARCH_CONTAINER);
@@ -405,66 +403,39 @@ AUI().add(
 						trigger.addClass(CSS_STATE_ACTIVE);
 					}
 
-					instance._active = {
-						menu: menu,
-						trigger: trigger
-					};
-
-					menu.focusManager.focus(0);
+					overlay.bodyNode.focusManager.focus(0);
 				}
 			},
 
-			_setARIARoles: function(trigger, menu) {
+			_setARIARoles: function(trigger, menu, listContainer) {
 				var links = menu.all(SELECTOR_ANCHOR);
 
 				var searchContainer = menu.one(SELECTOR_SEARCH_CONTAINER);
 
 				var listNode = menu.one('ul');
 
-				if (!searchContainer) {
-					listNode.setAttribute(ARIA_ATTR_ROLE, 'menu');
-					links.set(ARIA_ATTR_ROLE, 'menuitem');
+				var ariaListNodeAttr = 'menu';
+				var ariaLinksAttr = 'menuitem';
+
+				if (searchContainer) {
+					ariaListNodeAttr = 'listbox';
+					ariaListNodeAttr = 'option';
 				}
-				else {
-					listNode.setAttribute(ARIA_ATTR_ROLE, 'listbox');
-					links.set(ARIA_ATTR_ROLE, 'option');
-				}
+
+				listNode.setAttribute(ARIA_ATTR_ROLE, ariaListNodeAttr);
+				links.set(ARIA_ATTR_ROLE, ariaLinksAttr);
 
 				var anchor = trigger.one(SELECTOR_ANCHOR);
 
 				if (anchor) {
-					listNode.setAttribute('aria-labelledby', anchor.get(ID));
-				}
-			},
+					anchor.attr(
+						{
+							'aria-haspopup': true,
+							role: 'button'
+						}
+					);
 
-			_setMenuHeight: function(trigger, menu, listItems) {
-				var instance = this;
-
-				var cssClass = trigger.attr(ATTR_CLASS_NAME);
-
-				if (cssClass.indexOf('lfr-menu-expanded') == -1) {
-					var match = REGEX_MAX_DISPLAY_ITEMS.exec(cssClass);
-
-					var maxDisplayItems = match && parseInt(match[1], 10);
-
-					if (maxDisplayItems && listItems.size() > maxDisplayItems) {
-						instance._createLiveSearch(trigger, menu);
-
-						var totalHeight = instance._liveSearch.get('input').get(OFFSET_HEIGHT);
-
-						A.some(
-							listItems,
-							function(item, index) {
-								totalHeight += item.get(OFFSET_HEIGHT);
-
-								return index === (maxDisplayItems - 1);
-							}
-						);
-
-						menu.addClass('lfr-menu-list-overflow');
-
-						menu.setStyle('height', totalHeight);
-					}
+					listNode.setAttribute('aria-labelledby', anchor.guid());
 				}
 			}
 		};
@@ -473,8 +444,8 @@ AUI().add(
 			var node = A.one(id);
 
 			if (node) {
-				node.delegate('mouseenter', A.rbind(Menu._targetLink, node, 'focus'), LIST_ITEM);
-				node.delegate('mouseleave', A.rbind(Menu._targetLink, node, 'blur'), LIST_ITEM);
+				node.delegate('mouseenter', A.rbind(Menu._targetLink, node, 'focus'), SELECTOR_LIST_ITEM);
+				node.delegate('mouseleave', A.rbind(Menu._targetLink, node, 'blur'), SELECTOR_LIST_ITEM);
 			}
 		};
 
@@ -490,6 +461,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-live-search', 'node-focusmanager', 'selector-css3']
+		requires: ['aui-live-search','aui-overlay', 'node-focusmanager', 'selector-css3']
 	}
 );
