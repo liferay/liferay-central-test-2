@@ -628,15 +628,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				}
 			}
 
-			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
-
 			if (entry.getVisible()) {
 				List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
 					entry.getEntryId());
 
 				boolean isNew = entry.isNew();
-
-				assetEntryPersistence.updateImpl(entry, false);
 
 				if (isNew) {
 					for (AssetTag tag : tags) {
@@ -660,6 +656,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 					}
 				}
 			}
+
+			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
+
+			assetEntryPersistence.updateImpl(entry, false);
 		}
 
 		// Update entry after tags so that entry listeners have access to the
