@@ -121,9 +121,22 @@ public class PortletExporter {
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
-		boolean exportPortletData = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_DATA + "_" +
-			PortletConstants.getRootPortletId(portletId));
+		
+		boolean exportPortletData = false;
+		
+		if (parameterMap.get(
+				PortletDataHandlerKeys.PORTLET_DATA + "_" + 
+				PortletConstants.getRootPortletId(portletId)) != null) {
+
+			exportPortletData = MapUtil.getBoolean(
+					parameterMap, PortletDataHandlerKeys.PORTLET_DATA + "_" +
+					PortletConstants.getRootPortletId(portletId));
+		}
+		else {
+			exportPortletData = MapUtil.getBoolean(
+					parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		}
+
 		boolean exportPortletDataAll = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA_ALL);
 		boolean exportPortletSetup = MapUtil.getBoolean(
