@@ -25,6 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.htmlparser.jericho.Source;
+import net.htmlparser.jericho.TextExtractor;
 
 /**
  * @author Brian Wing Shun Chan
@@ -206,7 +207,9 @@ public class HtmlImpl implements Html {
 
 		Source source = new Source(html);
 
-		return source.getTextExtractor().toString();
+		TextExtractor textExtractor = source.getTextExtractor();
+
+		return textExtractor.toString();
 	}
 
 	public String fromInputSafe(String text) {

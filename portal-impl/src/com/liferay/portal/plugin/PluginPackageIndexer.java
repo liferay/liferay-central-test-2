@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -37,7 +38,6 @@ import com.liferay.portal.model.CompanyConstants;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -77,86 +77,88 @@ public class PluginPackageIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		PluginPackage pluginPackage = (PluginPackage)obj;
 
-		String moduleId = pluginPackage.getModuleId();
-		String name = pluginPackage.getName();
-		String version = pluginPackage.getVersion();
-		Date modifiedDate = pluginPackage.getModifiedDate();
-		String author = pluginPackage.getAuthor();
-		List<String> types = pluginPackage.getTypes();
-		List<String> tags = pluginPackage.getTags();
-		List<License> licenses = pluginPackage.getLicenses();
-		//List<String> liferayVersions = pluginPackage.getLiferayVersions();
-		String shortDescription = HtmlUtil.extractText(
-			pluginPackage.getShortDescription());
+		Document document = new DocumentImpl();
+
+		document.addUID(PORTLET_ID, pluginPackage.getModuleId());
+
+		document.addKeyword(Field.COMPANY_ID, CompanyConstants.SYSTEM);
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(pluginPackage.getAuthor());
+		sb.append(StringPool.SPACE);
+
 		String longDescription = HtmlUtil.extractText(
 			pluginPackage.getLongDescription());
-		String changeLog = pluginPackage.getChangeLog();
-		String pageURL = pluginPackage.getPageURL();
-		String repositoryURL = pluginPackage.getRepositoryURL();
+
+		sb.append(longDescription);
+
+		sb.append(StringPool.SPACE);
+		sb.append(pluginPackage.getName());
+		sb.append(StringPool.SPACE);
+
+		String shortDescription = HtmlUtil.extractText(
+			pluginPackage.getShortDescription());
+
+		sb.append(shortDescription);
+
+		document.addText(Field.CONTENT, sb.toString());
+
+		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+
+		ModuleId moduleIdObj = ModuleId.getInstance(
+			pluginPackage.getModuleId());
+
+		document.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
+
+		document.addDate(Field.MODIFIED_DATE, pluginPackage.getModifiedDate());
 
 		String[] statusAndInstalledVersion =
 			PluginPackageUtil.getStatusAndInstalledVersion(pluginPackage);
 
-		String status = statusAndInstalledVersion[0];
-		String installedVersion = statusAndInstalledVersion[1];
+		document.addKeyword(Field.STATUS, statusAndInstalledVersion[0]);
 
-		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
+		document.addText(Field.TITLE, pluginPackage.getName());
 
-		StringBundler sb = new StringBundler(7);
-
-		sb.append(name);
-		sb.append(StringPool.SPACE);
-		sb.append(author);
-		sb.append(StringPool.SPACE);
-		sb.append(shortDescription);
-		sb.append(StringPool.SPACE);
-		sb.append(longDescription);
-
-		String content = sb.toString();
-
-		Document document = new DocumentImpl();
-
-		document.addUID(PORTLET_ID, moduleId);
-
-		document.addModifiedDate(modifiedDate);
-
-		document.addKeyword(Field.COMPANY_ID, CompanyConstants.SYSTEM);
-		document.addKeyword(Field.PORTLET_ID, PORTLET_ID);
-		document.addKeyword(Field.GROUP_ID, moduleIdObj.getGroupId());
-
-		document.addText(Field.TITLE, name);
-		document.addText(Field.CONTENT, content);
-
-		document.addKeyword("moduleId", moduleId);
 		document.addKeyword("artifactId", moduleIdObj.getArtifactId());
-		document.addKeyword("version", version);
-		document.addText("author", author);
-		document.addKeyword("type", types.toArray(new String[0]));
-		document.addKeyword("tag", tags.toArray(new String[0]));
+		document.addText("author", pluginPackage.getAuthor());
+		document.addText("changeLog", pluginPackage.getChangeLog());
+		document.addKeyword("installedVersion", statusAndInstalledVersion[1]);
 
-		String[] licenseNames = new String[licenses.size()];
+		List<License> licenses = pluginPackage.getLicenses();
+
+		document.addKeyword(
+			"license", StringUtil.split(ListUtil.toString(licenses, "name")));
+
+		document.addText("longDescription", longDescription);
+		document.addKeyword("moduleId", pluginPackage.getModuleId());
 
 		boolean osiLicense = false;
 
 		for (int i = 0; i < licenses.size(); i++) {
 			License license = licenses.get(i);
 
-			licenseNames[i] = license.getName();
-
 			if (license.isOsiApproved()) {
 				osiLicense = true;
+
+				break;
 			}
 		}
 
-		document.addKeyword("license", licenseNames);
-		document.addKeyword("osi-approved-license", String.valueOf(osiLicense));
+		document.addKeyword("osi-approved-license", osiLicense);
+		document.addText("pageURL", pluginPackage.getPageURL());
+		document.addKeyword("repositoryURL", pluginPackage.getRepositoryURL());
 		document.addText("shortDescription", shortDescription);
-		document.addText("longDescription", longDescription);
-		document.addText("changeLog", changeLog);
-		document.addText("pageURL", pageURL);
-		document.addKeyword("repositoryURL", repositoryURL);
-		document.addKeyword(Field.STATUS, status);
-		document.addKeyword("installedVersion", installedVersion);
+
+		List<String> tags = pluginPackage.getTags();
+
+		document.addKeyword("tag", tags.toArray(new String[0]));
+
+		List<String> types = pluginPackage.getTypes();
+
+		document.addKeyword("type", types.toArray(new String[0]));
+
+		document.addKeyword("version", pluginPackage.getVersion());
 
 		return document;
 	}
