@@ -39,7 +39,7 @@ portletURL.setPortletMode(PortletMode.VIEW);
 portletURL.setParameter("struts_action", "/journal_content_search/search");
 %>
 
-<form action="<%= portletURL.toString() %>" class="yui3-aui-form" method="post" name="<%= namespace %>fm" onSubmit="submitForm(this); return false;">
+<form action="<%= HtmlUtil.escape(portletURL.toString()) %>" class="yui3-aui-form" method="post" name="<%= namespace %>fm" onSubmit="submitForm(this); return false;">
 
 <%
 String taglibOnBlur = "if (this.value == '') { this.value = '" + unicodeDefaultKeywords + "'; }";
@@ -48,4 +48,4 @@ String taglibOnFocus = "if (this.value == '" + unicodeDefaultKeywords + "') { th
 
 <aui:input inlineField="<%= true %>" label="" name="keywords" size="30" onBlur="<%= taglibOnBlur %>" onFocus="<%= taglibOnFocus %>" title="search-web-content" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
-<aui:input align="absmiddle" border="0" inlineField="<%= true %>" label="" name="search" src='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' title="search" type="image" />
++<aui:input alt="search" inlineField="<%= true %>" label="" name="search" src='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' style="border: none; vertical-align: middle;" type="image" />

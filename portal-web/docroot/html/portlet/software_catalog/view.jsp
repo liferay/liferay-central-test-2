@@ -44,7 +44,7 @@ portletURL.setParameter("struts_action", "/software_catalog/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<form action="<%= portletURL %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+<form action="<%= HtmlUtil.escape(portletURL.toString()) %>" method="get" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 
 <liferay-ui:tabs
