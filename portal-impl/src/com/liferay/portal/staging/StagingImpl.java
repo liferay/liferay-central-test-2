@@ -130,10 +130,9 @@ public class StagingImpl implements Staging {
 
 		Group stagingGroup = targetLayout.getGroup();
 		Group liveGroup = stagingGroup.getLiveGroup();
-
-		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(
-			liveGroup.getGroupId(), targetLayout.isPrivateLayout(),
-			targetLayout.getLayoutId());
+	
+		Layout sourceLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+			targetLayout.getUuid(), liveGroup.getGroupId());
 
 		copyPortlet(
 			portletRequest, liveGroup.getGroupId(), stagingGroup.getGroupId(),
@@ -919,10 +918,9 @@ public class StagingImpl implements Staging {
 		else {
 			stagingGroup = sourceLayout.getGroup();
 			liveGroup = stagingGroup.getLiveGroup();
-
-			targetLayout = LayoutLocalServiceUtil.getLayout(
-				liveGroup.getGroupId(), sourceLayout.isPrivateLayout(),
-				sourceLayout.getLayoutId());
+			
+			targetLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+				sourceLayout.getUuid(), liveGroup.getGroupId());
 		}
 
 		copyPortlet(

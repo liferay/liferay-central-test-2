@@ -154,7 +154,7 @@ if (layout.isTypeControlPanel()) {
 									targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getClassPK());
 								}
 								else {
-									targetLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+									targetLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
 								}
 							}
 							catch (NoSuchLayoutException nsle) {
