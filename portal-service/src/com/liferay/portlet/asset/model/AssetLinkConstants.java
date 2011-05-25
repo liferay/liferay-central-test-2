@@ -16,11 +16,21 @@ package com.liferay.portlet.asset.model;
 
 /**
  * @author Jorge Ferrer
+ * @author Juan Fernández
  */
-public interface AssetLinkConstants {
+public class AssetLinkConstants {
 
 	public static final int TYPE_CHILD = 1;
 
 	public static final int TYPE_RELATED = 0;
+
+	public static boolean isBidirectional(int type) {
+		if (type == TYPE_RELATED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 }

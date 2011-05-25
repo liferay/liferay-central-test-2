@@ -28,6 +28,7 @@ import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
 public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
@@ -53,10 +54,36 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 		assetLinkPersistence.update(link, false);
 
+		if (AssetLinkConstants.isBidirectional(type)) {
+			linkId = counterLocalService.increment();
+
+			AssetLink link2 = assetLinkPersistence.create(linkId);
+
+			link2.setCompanyId(user.getCompanyId());
+			link2.setUserId(user.getUserId());
+			link2.setUserName(user.getFullName());
+			link2.setCreateDate(now);
+			link2.setEntryId1(entryId2);
+			link2.setEntryId2(entryId1);
+			link2.setType(type);
+			link2.setWeight(weight);
+
+			assetLinkPersistence.update(link2, false);
+		}
+
 		return link;
 	}
 
 	public void deleteLink(AssetLink link) throws SystemException {
+		if (AssetLinkConstants.isBidirectional(link.getType())) {
+			AssetLink link2 = assetLinkPersistence.fetchByE_E_T(
+				link.getEntryId2(), link.getEntryId1(), link.getType());
+
+			if (link2 != null) {
+				assetLinkPersistence.remove(link2);
+			}
+		}
+
 		assetLinkPersistence.remove(link);
 	}
 
@@ -116,27 +143,6 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return assetLinkPersistence.findByE2_T(entryId, typeId);
 	}
 
-	public AssetLink updateLink(
-			long userId, long entryId1, long entryId2, int type,
-			int weight)
-		throws SystemException, PortalException {
-
-		AssetLink link = assetLinkPersistence.fetchByE_E_T(
-			entryId1, entryId2, type);
-
-		if ((link == null) &&
-			(type == AssetLinkConstants.TYPE_RELATED)) {
-
-			link = assetLinkPersistence.fetchByE_E_T(entryId2, entryId1, type);
-		}
-
-		if (link == null) {
-			link = addLink(userId, entryId1, entryId2, type, weight);
-		}
-
-		return link;
-	}
-
 	public void updateLinks(long userId, long entryId, long[] linkEntryIds)
 		throws SystemException, PortalException {
 
@@ -155,9 +161,14 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 
 		for (long assetLinkEntryId : linkEntryIds) {
 			if (assetLinkEntryId != entryId) {
-				updateLink(
-					userId, entryId, assetLinkEntryId,
-					AssetLinkConstants.TYPE_RELATED, 0);
+				AssetLink link = assetLinkPersistence.fetchByE_E_T(
+					entryId, assetLinkEntryId, AssetLinkConstants.TYPE_RELATED);
+
+				if (link == null) {
+					addLink(
+						userId, entryId, assetLinkEntryId,
+						AssetLinkConstants.TYPE_RELATED, 0);
+				}
 			}
 		}
 	}
