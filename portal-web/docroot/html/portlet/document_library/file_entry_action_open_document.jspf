@@ -70,7 +70,7 @@
 
 	<c:if test="<%= officeDoc != null %>">
 		<liferay-ui:icon
-			image="../document_library_display/msoffice"
+			image="../document_library/msoffice"
 			message='<%= LanguageUtil.get(pageContext, "open-in-ms-office") %>'
 			url='<%= "javascript:" + renderResponse.getNamespace() + "openDocument();" %>'
 		/>

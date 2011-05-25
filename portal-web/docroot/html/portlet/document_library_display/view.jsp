@@ -212,7 +212,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					request.removeAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 					%>
 
-					<liferay-util:include page="/html/portlet/document_library_display/folder_action.jsp" />
+					<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 				</aui:column>
 			</c:if>
 		</aui:layout>

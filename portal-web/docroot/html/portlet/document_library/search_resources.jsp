@@ -60,7 +60,7 @@ if (Validator.isNull(displayStyle)) {
 	</div>
 
 	<liferay-portlet:renderURL varImpl="searchURL">
-		<portlet:param name="struts_action" value="/document_library_display/search" />
+		<portlet:param name="struts_action" value="/document_library/search" />
 	</liferay-portlet:renderURL>
 
 	<div class="document-container" id="<portlet:namespace />documentContainer">
@@ -74,7 +74,7 @@ if (Validator.isNull(displayStyle)) {
 			<%
 			PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
-			portletURL.setParameter("struts_action", "/document_library_display/search");
+			portletURL.setParameter("struts_action", "/document_library/search");
 			portletURL.setParameter("redirect", redirect);
 			portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
 			portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
@@ -215,7 +215,7 @@ if (Validator.isNull(displayStyle)) {
 
 							PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
-							rowURL.setParameter("struts_action", "/document_library_display/view_file_entry");
+							rowURL.setParameter("struts_action", "/document_library/view_file_entry");
 							rowURL.setParameter("redirect", currentURL);
 							rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 

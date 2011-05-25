@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
@@ -69,10 +69,10 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
 
-<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <portlet:actionURL var="editFileShortcutURL">
-	<portlet:param name="struts_action" value="/document_library_display/edit_file_shortcut" />
+	<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 </portlet:actionURL>
 
 <aui:form action="<%= editFileShortcutURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileShortcut();" %>'>
@@ -109,7 +109,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			</span>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectGroupURL">
-				<portlet:param name="struts_action" value="/document_library_display/select_group" />
+				<portlet:param name="struts_action" value="/document_library/select_group" />
 			</portlet:renderURL>
 
 			<%
@@ -130,7 +130,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			</span>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFileEntryURL">
-				<portlet:param name="struts_action" value="/document_library_display/select_file_entry" />
+				<portlet:param name="struts_action" value="/document_library/select_file_entry" />
 			</portlet:renderURL>
 
 			<%

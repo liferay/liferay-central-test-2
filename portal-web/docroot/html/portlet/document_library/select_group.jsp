@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <aui:form method="post" name="fm">
 	<liferay-ui:header
@@ -24,7 +24,7 @@
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setParameter("struts_action", "/document_library_display/select_group");
+	portletURL.setParameter("struts_action", "/document_library/select_group");
 
 	GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	%>

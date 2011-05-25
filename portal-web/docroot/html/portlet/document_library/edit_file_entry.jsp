@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
@@ -106,7 +106,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
-	<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 </c:if>
 
 <c:if test="<%= isLocked %>">
@@ -168,14 +168,14 @@ else if (documentType != null) {
 				fallbackContainer: '#<portlet:namespace />fallback',
 				maxFileSize: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> / 1024,
 				namespace: '<portlet:namespace />',
-				uploadFile: '<liferay-portlet:actionURL doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library_display/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />'
+				uploadFile: '<liferay-portlet:actionURL doAsUserId="<%= user.getUserId() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" /><portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></liferay-portlet:actionURL><liferay-ui:input-permissions-params modelName="<%= DLFileEntryConstants.getClassName() %>" />'
 			}
 		);
 	</aui:script>
 </c:if>
 
 <portlet:actionURL var="editFileEntryURL">
-	<portlet:param name="struts_action" value="/document_library_display/edit_file_entry" />
+	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 	<portlet:param name="uploader" value="classic" />
 </portlet:actionURL>
 
@@ -245,7 +245,7 @@ else if (documentType != null) {
 		%>
 
 		<portlet:renderURL var="viewFolderURL">
-			<portlet:param name="struts_action" value="/document_library_display/view" />
+			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
@@ -255,7 +255,7 @@ else if (documentType != null) {
 					<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
 
 					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
-						<portlet:param name="struts_action" value="/document_library_display/select_folder" />
+						<portlet:param name="struts_action" value="/document_library/select_folder" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 					</portlet:renderURL>
 
@@ -448,7 +448,7 @@ else if (documentType != null) {
 	}
 
 	function <portlet:namespace />lock() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library_display/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />removeFolder() {
@@ -476,12 +476,12 @@ else if (documentType != null) {
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
-		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library_display/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
+		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
 
 	function <portlet:namespace />unlock() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library_display/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

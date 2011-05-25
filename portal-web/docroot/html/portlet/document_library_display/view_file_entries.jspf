@@ -81,7 +81,7 @@
 			keyProperty="primaryKey"
 			modelVar="result"
 		>
-			<%@ include file="/html/portlet/document_library_display/cast_result.jspf" %>
+			<%@ include file="/html/portlet/document_library/cast_result.jspf" %>
 
 			<%
 			if (curFolder != null) {

@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <liferay-ui:header
 	backURL="javascript:history.go(-1);"

@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
@@ -72,12 +72,12 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 request.setAttribute("view_file_shortcut.jsp-fileShortcut", fileShortcut);
 %>
 
-<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <%
 Folder folder = fileShortcut.getFolder();
 
-String parentFolderName = LanguageUtil.get(pageContext, "document-home");
+String parentFolderName = LanguageUtil.get(pageContext, "documents-home");
 
 if (Validator.isNotNull(folder.getName())) {
 	parentFolderName = folder.getName();
@@ -85,7 +85,7 @@ if (Validator.isNotNull(folder.getName())) {
 %>
 
 <portlet:renderURL var="backURL">
-	<portlet:param name="struts_action" value="/document_library_display/view" />
+	<portlet:param name="struts_action" value="/document_library/view" />
 	<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
 </portlet:renderURL>
 
@@ -215,7 +215,7 @@ if (Validator.isNotNull(folder.getName())) {
 			</c:if>
 		</div>
 
-		<liferay-util:include page="/html/portlet/document_library_display/file_entry_action.jsp" />
+		<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 	</aui:column>
 </aui:layout>
 
@@ -285,7 +285,7 @@ if (Validator.isNotNull(folder.getName())) {
 
 				// Action
 
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library_display/file_version_action.jsp");
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
 
 				// Add result row
 
@@ -299,7 +299,7 @@ if (Validator.isNotNull(folder.getName())) {
 		<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED %>">
 			<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="comments">
 				<portlet:actionURL var="discussionURL">
-					<portlet:param name="struts_action" value="/document_library_display/edit_file_entry_discussion" />
+					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
 				</portlet:actionURL>
 
 				<liferay-ui:discussion

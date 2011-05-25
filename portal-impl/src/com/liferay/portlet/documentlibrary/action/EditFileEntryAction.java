@@ -15,10 +15,13 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileExtensionException;
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
@@ -34,16 +37,25 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrarydisplay.action.ActionUtil;
+import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
+import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.File;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -94,7 +106,9 @@ public class EditFileEntryAction extends PortletAction {
 
 			WindowState windowState = actionRequest.getWindowState();
 
-			if (!windowState.equals(LiferayWindowState.POP_UP)) {
+			if (cmd.equals(Constants.PREVIEW)) {
+			}
+			else if (!windowState.equals(LiferayWindowState.POP_UP)) {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
@@ -121,10 +135,12 @@ public class EditFileEntryAction extends PortletAction {
 					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 
-				setForward(actionRequest, "portlet.document_library.error");
+				setForward(
+					actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
+					 e instanceof FileExtensionException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof NoSuchFolderException ||
@@ -136,6 +152,13 @@ public class EditFileEntryAction extends PortletAction {
 
 					response.setStatus(
 						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION);
+				}
+				else if (e instanceof FileExtensionException) {
+					HttpServletResponse response =
+						PortalUtil.getHttpServletResponse(actionResponse);
+
+					response.setStatus(
+						ServletResponseConstants.SC_FILE_EXTENSION_EXCEPTION);
 				}
 				else if (e instanceof FileNameException) {
 					HttpServletResponse response =
@@ -154,7 +177,9 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof AssetTagException) {
+			else if (e instanceof AssetCategoryException ||
+					 e instanceof AssetTagException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
@@ -177,7 +202,8 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.document_library.error");
+				return mapping.findForward(
+					"portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -199,12 +225,54 @@ public class EditFileEntryAction extends PortletAction {
 		}
 		else {
 			long[] deleteFileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
 
 			for (int i = 0; i < deleteFileEntryIds.length; i++) {
 				DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
 			}
 		}
+	}
+
+	protected HashMap<Long, Fields> getFieldsMap(
+			UploadPortletRequest uploadRequest, long documentTypeId)
+		throws PortalException, SystemException {
+
+		HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
+
+		if (documentTypeId <= 0) {
+			return fieldsMap;
+		}
+
+		DLDocumentType documentType =
+			DLDocumentTypeLocalServiceUtil.getDocumentType(documentTypeId);
+
+		List<DDMStructure> ddmStructures = documentType.getDDMStructures();
+
+		for (DDMStructure ddmStructure : ddmStructures) {
+			String namespace = String.valueOf(
+				ddmStructure.getStructureId());
+
+			Set<String> fieldNames = ddmStructure.getFieldNames();
+
+			Fields fields = new Fields();
+
+			for (String name : fieldNames) {
+				Field field = new Field();
+
+				field.setName(name);
+
+				String value = ParamUtil.getString(
+					uploadRequest, namespace + name);
+
+				field.setValue(value);
+
+				fields.put(field);
+			}
+
+			fieldsMap.put(ddmStructure.getStructureId(), fields);
+		}
+
+		return fieldsMap;
 	}
 
 	protected void lockFileEntries(ActionRequest actionRequest)
@@ -296,6 +364,8 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String changeLog = ParamUtil.getString(uploadRequest, "changeLog");
+		long documentTypeId = ParamUtil.getLong(
+			uploadRequest, "documentTypeId");
 		boolean majorVersion = ParamUtil.getBoolean(
 			uploadRequest, "majorVersion");
 
@@ -310,6 +380,13 @@ public class EditFileEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
+		serviceContext.setAttribute("documentTypeId", documentTypeId);
+
+		HashMap<Long, Fields> fieldsMap = getFieldsMap(
+			uploadRequest, documentTypeId);
+
+		serviceContext.setAttribute("fieldsMap", fieldsMap);
+
 		if (cmd.equals(Constants.ADD)) {
 			if (Validator.isNull(title)) {
 				title = sourceFileName;
@@ -320,8 +397,6 @@ public class EditFileEntryAction extends PortletAction {
 			String extension = FileUtil.getExtension(sourceFileName);
 
 			serviceContext.setAttribute("extension", extension);
-
-			serviceContext.setAttribute("sourceFileName", sourceFileName);
 
 			// Add file entry
 
@@ -340,8 +415,6 @@ public class EditFileEntryAction extends PortletAction {
 				String extension = FileUtil.getExtension(sourceFileName);
 
 				serviceContext.setAttribute("extension", extension);
-
-				serviceContext.setAttribute("sourceFileName", sourceFileName);
 			}
 
 			// Update file entry

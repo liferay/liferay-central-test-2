@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrarydisplay.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -75,7 +75,7 @@ public class EditFolderAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(
-					actionRequest, "portlet.document_library_display.error");
+					actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
@@ -104,7 +104,7 @@ public class EditFolderAction extends PortletAction {
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward(
-					"portlet.document_library_display.error");
+					"portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -113,7 +113,7 @@ public class EditFolderAction extends PortletAction {
 
 		return mapping.findForward(
 			getForward(
-				renderRequest, "portlet.document_library_display.edit_folder"));
+				renderRequest, "portlet.document_library.edit_folder"));
 	}
 
 	protected void deleteFolders(ActionRequest actionRequest) throws Exception {

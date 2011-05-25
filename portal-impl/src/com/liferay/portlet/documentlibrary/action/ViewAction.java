@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrarydisplay.action.ActionUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -33,6 +32,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
+ * @author Brian Wing Shun Chan
  * @author Sergio González
  */
 public class ViewAction extends PortletAction {

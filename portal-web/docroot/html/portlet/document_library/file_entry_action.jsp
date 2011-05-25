@@ -45,14 +45,26 @@ if (row != null) {
 	}
 }
 else {
-	if (request.getAttribute("view_entries.jsp-fileEntry") != null) {
-		fileEntry = (FileEntry)request.getAttribute("view_entries.jsp-fileEntry");
+	if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
+		if (request.getAttribute("view_file_entry.jsp-fileEntry") != null) {
+			fileEntry = (FileEntry)request.getAttribute("view_file_entry.jsp-fileEntry");
+		}
+		else {
+			fileShortcut = (DLFileShortcut)request.getAttribute("view_file_shortcut.jsp-fileShortcut");
+		}
 	}
 	else {
-		fileShortcut = (DLFileShortcut)request.getAttribute("view_file_shortcut.jsp-fileShortcut");
+		if (request.getAttribute("view_entries.jsp-fileEntry") != null) {
+				fileEntry = (FileEntry)request.getAttribute("view_entries.jsp-fileEntry");
+		}
+		else {
+			fileShortcut = (DLFileShortcut)request.getAttribute("view_file_shortcut.jsp-fileShortcut");
+		}
 	}
 
-	view = true;
+	 if (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
+		 view = true;
+	 }
 }
 
 long folderId = 0;
@@ -64,21 +76,14 @@ else if (fileShortcut != null) {
 	folderId = fileShortcut.getFolderId();
 }
 
-PortletURL viewFolderURL = null;
-
-if (renderResponse != null) {
-	viewFolderURL = renderResponse.createRenderURL();
-}
-else {
-	viewFolderURL = resourceResponse.createRenderURL();
-}
+PortletURL viewFolderURL = liferayPortletResponse.createRenderURL();
 
 viewFolderURL.setParameter("struts_action", "/document_library/view");
 viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
-<span class="overlay document-action">
-	<liferay-ui:icon-menu align="auto" direction="down" extended="<%= false %>" icon="" message="">
+<liferay-util:buffer var="iconMenu">
+	<liferay-ui:icon-menu align='<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? "right" : "auto" %>' direction='<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? null : "down" %>' extended="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? true : false %>" icon="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? null : StringPool.BLANK %>" message='<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? "actions" : StringPool.BLANK %>' showExpanded="<%= view %>" showWhenSingleIcon="<%= view %>">
 		<c:choose>
 			<c:when test="<%= fileEntry != null %>">
 				<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
@@ -89,7 +94,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-				<%@ include file="/html/portlet/document_library_display/file_entry_action_open_document.jspf" %>
+				<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
 				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editURL">
@@ -120,7 +125,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= showActions %>">
-					<%@ include file="/html/portlet/document_library_display/file_entry_action_lock.jspf" %>
+					<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
@@ -137,7 +142,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
+			<c:if test="<%= !view && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
 					<portlet:actionURL var="deleteURL">
 						<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
@@ -164,7 +169,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-				<%@ include file="/html/portlet/document_library_display/file_entry_action_open_document.jspf" %>
+				<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
 				<c:if test="<%= !view && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 					<portlet:renderURL var="viewShortcutURL">
@@ -194,7 +199,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= showActions %>">
-					<%@ include file="/html/portlet/document_library_display/file_entry_action_lock.jspf" %>
+					<%@ include file="/html/portlet/document_library/file_entry_action_lock.jspf" %>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
@@ -239,4 +244,19 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 			</c:otherwise>
 		</c:choose>
 	</liferay-ui:icon-menu>
-</span>
+</liferay-util:buffer>
+
+<c:choose>
+	<c:when test="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) %>">
+
+		<%= iconMenu %>
+
+	</c:when>
+	<c:otherwise>
+		<span class="overlay document-action">
+
+			<%= iconMenu %>
+
+		</span>
+	</c:otherwise>
+</c:choose>

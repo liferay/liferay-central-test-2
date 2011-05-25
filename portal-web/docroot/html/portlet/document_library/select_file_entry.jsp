@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -38,7 +38,7 @@ if (folder != null) {
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setParameter("struts_action", "/document_library_display/select_file_entry");
+	portletURL.setParameter("struts_action", "/document_library/select_file_entry");
 	portletURL.setParameter("groupId", String.valueOf(groupId));
 	portletURL.setParameter("folderId", String.valueOf(folderId));
 
@@ -69,7 +69,7 @@ if (folder != null) {
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/document_library_display/select_file_entry");
+		rowURL.setParameter("struts_action", "/document_library/select_file_entry");
 		rowURL.setParameter("groupId", String.valueOf(groupId));
 		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 

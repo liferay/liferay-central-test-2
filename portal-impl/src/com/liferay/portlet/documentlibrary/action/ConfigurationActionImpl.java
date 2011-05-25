@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrarydisplay.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrarydisplay.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -66,7 +66,7 @@ public class CompareVersionsAction extends PortletAction {
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				setForward(
-					renderRequest, "portlet.document_library_display.error");
+					renderRequest, "portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -74,7 +74,7 @@ public class CompareVersionsAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			"portlet.document_library_display.compare_versions");
+			"portlet.document_library.compare_versions");
 	}
 
 	protected void compareVersions(RenderRequest renderRequest)

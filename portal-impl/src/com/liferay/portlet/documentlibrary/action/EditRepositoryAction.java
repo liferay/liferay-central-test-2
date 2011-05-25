@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrarydisplay.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryException;
@@ -74,7 +74,7 @@ public class EditRepositoryAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(
-					actionRequest, "portlet.document_library_display.error");
+					actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateFolderNameException ||
 					 e instanceof DuplicateRepositoryNameException ||
@@ -104,7 +104,7 @@ public class EditRepositoryAction extends PortletAction {
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
 				return mapping.findForward(
-					"portlet.document_library_display.error");
+					"portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -114,7 +114,7 @@ public class EditRepositoryAction extends PortletAction {
 		return mapping.findForward(
 			getForward(
 				renderRequest,
-				"portlet.document_library_display.edit_repository"));
+				"portlet.document_library.edit_repository"));
 	}
 
 	protected void unmountRepository(ActionRequest actionRequest)

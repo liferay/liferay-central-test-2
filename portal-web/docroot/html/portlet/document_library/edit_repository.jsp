@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -26,10 +26,10 @@ long repositoryId = BeanParamUtil.getLong(repository, request, "repositoryId");
 long folderId = ParamUtil.getLong(request, "folderId");
 %>
 
-<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <portlet:actionURL var="editRepositoryURL">
-	<portlet:param name="struts_action" value="/document_library_display/edit_repository" />
+	<portlet:param name="struts_action" value="/document_library/edit_repository" />
 </portlet:actionURL>
 
 <aui:form action="<%= editRepositoryURL %>" method="post" name="fm">

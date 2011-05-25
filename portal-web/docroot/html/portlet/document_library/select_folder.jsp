@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -42,7 +42,7 @@ if (folder != null) {
 	<%
 	PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setParameter("struts_action", "/document_library_display/select_folder");
+	portletURL.setParameter("struts_action", "/document_library/select_folder");
 	portletURL.setParameter("folderId", String.valueOf(folderId));
 
 	List<String> headerNames = new ArrayList<String>();
@@ -73,7 +73,7 @@ if (folder != null) {
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL.setParameter("struts_action", "/document_library_display/select_folder");
+		rowURL.setParameter("struts_action", "/document_library/select_folder");
 		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 		// Name
@@ -126,7 +126,7 @@ if (folder != null) {
 	<aui:button-row>
 		<c:if test="<%= showAddFolderButton %>">
 			<portlet:renderURL var="editFolderURL">
-				<portlet:param name="struts_action" value="/document_library_display/edit_folder" />
+				<portlet:param name="struts_action" value="/document_library/edit_folder" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 				<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />

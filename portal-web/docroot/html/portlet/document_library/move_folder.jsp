@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -27,10 +27,10 @@ long repositoryId = BeanParamUtil.getLong(folder, request, "repositoryId");
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 %>
 
-<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 
 <portlet:actionURL var="moveFolderURL">
-	<portlet:param name="struts_action" value="/document_library_display/move_folder" />
+	<portlet:param name="struts_action" value="/document_library/move_folder" />
 </portlet:actionURL>
 
 <aui:form action="<%= moveFolderURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFolder(false);" %>'>
@@ -68,14 +68,14 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 			%>
 
 			<portlet:renderURL var="viewFolderURL">
-				<portlet:param name="struts_action" value="/document_library_display/view" />
+				<portlet:param name="struts_action" value="/document_library/view" />
 				<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 			</portlet:renderURL>
 
 			<aui:a href="<%= viewFolderURL %>" id="parentFolderName"><%= parentFolderName %></aui:a>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
-				<portlet:param name="struts_action" value="/document_library_display/select_folder" />
+				<portlet:param name="struts_action" value="/document_library/select_folder" />
 				<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 			</portlet:renderURL>
 
@@ -114,7 +114,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
 
-		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library_display/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId + "'; void('');";
+		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId + "'; void('');";
 		nameEl.innerHTML = parentFolderName + "&nbsp;";
 	}
 

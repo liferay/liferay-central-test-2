@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portlet.documentlibrarydisplay.action;
+package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -40,9 +40,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * @author Ryan Park
+ * @author Brian Wing Shun Chan
  */
-public class FindFileEntryAction extends Action {
+public class FindFolderAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -51,9 +51,10 @@ public class FindFileEntryAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
-			long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
+			long groupId = ParamUtil.getLong(request,"groupId");
+			long folderId = ParamUtil.getLong(request, "folderId");
 
-			plid = getPlid(plid, fileEntryId);
+			plid = getPlid(plid, groupId, folderId);
 
 			PortletURL portletURL = new PortletURLImpl(
 				request, PortletKeys.DOCUMENT_LIBRARY_DISPLAY, plid,
@@ -63,8 +64,8 @@ public class FindFileEntryAction extends Action {
 			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter(
-				"struts_action", "/document_library_display/view_file_entry");
-			portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
+				"struts_action", "/document_library/view");
+			portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			response.sendRedirect(portletURL.toString());
 
@@ -77,7 +78,9 @@ public class FindFileEntryAction extends Action {
 		}
 	}
 
-	protected long getPlid(long plid, long fileEntryId) throws Exception {
+	protected long getPlid(long plid, long groupId, long folderId)
+		throws Exception {
+
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -95,10 +98,14 @@ public class FindFileEntryAction extends Action {
 			}
 		}
 
-		FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
+		if (groupId <= 0) {
+			Folder folder = DLAppLocalServiceUtil.getFolder(folderId);
+
+			groupId = folder.getRepositoryId();
+		}
 
 		plid = PortalUtil.getPlidFromPortletId(
-			fileEntry.getRepositoryId(), PortletKeys.DOCUMENT_LIBRARY_DISPLAY);
+			groupId, PortletKeys.DOCUMENT_LIBRARY_DISPLAY);
 
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;

@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/document_library_display/init.jsp" %>
+<%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
@@ -51,11 +51,11 @@ for (FileEntry fileEntry : fileEntries) {
 %>
 
 <c:if test="<%= Validator.isNull(referringPortletResource) %>">
-	<liferay-util:include page="/html/portlet/document_library_display/top_links.jsp" />
+	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 </c:if>
 
 <portlet:actionURL var="moveFileEntryURL">
-	<portlet:param name="struts_action" value="/document_library_display/move_file_entry" />
+	<portlet:param name="struts_action" value="/document_library/move_file_entry" />
 </portlet:actionURL>
 
 <aui:form action="<%= moveFileEntryURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(false);" %>'>
@@ -159,7 +159,7 @@ for (FileEntry fileEntry : fileEntries) {
 		%>
 
 		<portlet:renderURL var="viewFolderURL">
-			<portlet:param name="struts_action" value="/document_library_display/view" />
+			<portlet:param name="struts_action" value="/document_library/view" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
@@ -176,7 +176,7 @@ for (FileEntry fileEntry : fileEntries) {
 			<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
-				<portlet:param name="struts_action" value="/document_library_display/select_folder" />
+				<portlet:param name="struts_action" value="/document_library/select_folder" />
 				<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 			</portlet:renderURL>
 
@@ -205,7 +205,7 @@ for (FileEntry fileEntry : fileEntries) {
 
 		var nameEl = document.getElementById("<portlet:namespace />folderName");
 
-		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library_display/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
+		nameEl.href = "javascript:location = '<portlet:renderURL><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + folderId + "'; void('');";
 		nameEl.innerHTML = folderName + "&nbsp;";
 	}
 
