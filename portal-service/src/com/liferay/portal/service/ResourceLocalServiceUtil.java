@@ -248,24 +248,22 @@ public class ResourceLocalServiceUtil {
 
 	public static void addModelResources(long companyId, long groupId,
 		long userId, java.lang.String name, long primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addModelResources(companyId, groupId, userId, name, primKey,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public static void addModelResources(long companyId, long groupId,
 		long userId, java.lang.String name, java.lang.String primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.addModelResources(companyId, groupId, userId, name, primKey,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portal.model.Resource addResource(
@@ -349,24 +347,22 @@ public class ResourceLocalServiceUtil {
 
 	public static void updateResources(long companyId, long groupId,
 		java.lang.String name, long primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateResources(companyId, groupId, name, primKey,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public static void updateResources(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.updateResources(companyId, groupId, name, primKey,
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public static ResourceLocalService getService() {

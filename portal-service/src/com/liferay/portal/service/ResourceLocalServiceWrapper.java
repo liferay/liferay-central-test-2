@@ -237,22 +237,20 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addModelResources(companyId, groupId, userId,
-			name, primKey, communityPermissions, guestPermissions);
+			name, primKey, groupPermissions, guestPermissions);
 	}
 
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addModelResources(companyId, groupId, userId,
-			name, primKey, communityPermissions, guestPermissions);
+			name, primKey, groupPermissions, guestPermissions);
 	}
 
 	public com.liferay.portal.model.Resource addResource(long companyId,
@@ -336,22 +334,20 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, long primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.updateResources(companyId, groupId, name,
-			primKey, communityPermissions, guestPermissions);
+			primKey, groupPermissions, guestPermissions);
 	}
 
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.updateResources(companyId, groupId, name,
-			primKey, communityPermissions, guestPermissions);
+			primKey, groupPermissions, guestPermissions);
 	}
 
 	public ResourceLocalService getWrappedResourceLocalService() {

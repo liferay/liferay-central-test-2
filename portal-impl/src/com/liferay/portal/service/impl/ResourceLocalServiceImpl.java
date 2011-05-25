@@ -53,18 +53,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public void addModelResources(
 			long companyId, long groupId, long userId, String name,
-			long primKey, String[] communityPermissions,
-			String[] guestPermissions)
+			long primKey, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		addModelResources(
 			companyId, groupId, userId, name, String.valueOf(primKey),
-			communityPermissions, guestPermissions);
+			groupPermissions, guestPermissions);
 	}
 
 	public void addModelResources(
 			long companyId, long groupId, long userId, String name,
-			String primKey, String[] communityPermissions,
+			String primKey, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -110,12 +109,12 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			addModelResources_6(
-				companyId, groupId, userId, resource, communityPermissions,
+				companyId, groupId, userId, resource, groupPermissions,
 				guestPermissions);
 		}
 		else {
 			addModelResources_1to5(
-				companyId, groupId, userId, resource, communityPermissions,
+				companyId, groupId, userId, resource, groupPermissions,
 				guestPermissions);
 		}
 	}
@@ -218,9 +217,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			if (addGuestPermissions) {
 
-				// Don't add guest permissions when you've already added
-				// community permissions and the given community is the guest
-				// community.
+				// Don't add guest permissions when you've already added group
+				// permissions and the given group is the guest group.
 
 				addGuestPermissions(
 					companyId, groupId, userId, name, resource, portletActions);
@@ -354,24 +352,24 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public void updateResources(
 			long companyId, long groupId, String name, long primKey,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		updateResources(
-			companyId, groupId, name, String.valueOf(primKey),
-			communityPermissions, guestPermissions);
+			companyId, groupId, name, String.valueOf(primKey), groupPermissions,
+			guestPermissions);
 	}
 
 	public void updateResources(
 			long companyId, long groupId, String name, String primKey,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		Resource resource = getResource(
 			companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
-		if (communityPermissions == null) {
-			communityPermissions = new String[0];
+		if (groupPermissions == null) {
+			groupPermissions = new String[0];
 		}
 
 		if (guestPermissions == null) {
@@ -380,12 +378,12 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			updateResources_6(
-				companyId, groupId, resource, communityPermissions,
+				companyId, groupId, resource, groupPermissions,
 				guestPermissions);
 		}
 		else {
 			updateResources_1to5(
-				companyId, groupId, resource, communityPermissions,
+				companyId, groupId, resource, groupPermissions,
 				guestPermissions);
 		}
 	}
@@ -426,26 +424,26 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		long resourceId = resource.getResourceId();
 		String primKey = resource.getPrimKey();
 
-		List<Permission> communityPermissionsList =
+		List<Permission> groupPermissionsList =
 			permissionLocalService.getPermissions(
 				companyId, actionIds, resourceId);
 
 		PermissionsListFilter permissionsListFilter =
 			PermissionsListFilterFactory.getInstance();
 
-		communityPermissionsList =
+		groupPermissionsList =
 			permissionsListFilter.filterCommunityPermissions(
 				companyId, groupId, userId, name, primKey, portletActions,
-				communityPermissionsList);
+				groupPermissionsList);
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			Role role = roleLocalService.getDefaultGroupRole(groupId);
 
 			rolePersistence.addPermissions(
-				role.getRoleId(), communityPermissionsList);
+				role.getRoleId(), groupPermissionsList);
 		}
 		else {
-			groupPersistence.addPermissions(groupId, communityPermissionsList);
+			groupPersistence.addPermissions(groupId, groupPermissionsList);
 		}
 	}
 
@@ -533,7 +531,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	protected void addModelResources_1to5(
 			long companyId, long groupId, long userId, Resource resource,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
@@ -574,28 +572,28 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Community permissions
 
 		if (groupId > 0) {
-			if (communityPermissions == null) {
-				communityPermissions = new String[0];
+			if (groupPermissions == null) {
+				groupPermissions = new String[0];
 			}
 
-			List<Permission> communityPermissionsList =
+			List<Permission> groupPermissionsList =
 				permissionLocalService.getPermissions(
-					companyId, communityPermissions, resource.getResourceId());
+					companyId, groupPermissions, resource.getResourceId());
 
-			communityPermissionsList =
+			groupPermissionsList =
 				permissionsListFilter.filterCommunityPermissions(
 					companyId, groupId, userId, resource.getName(),
-					resource.getPrimKey(), false, communityPermissionsList);
+					resource.getPrimKey(), false, groupPermissionsList);
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 				Role role = roleLocalService.getDefaultGroupRole(groupId);
 
 				rolePersistence.addPermissions(
-					role.getRoleId(), communityPermissionsList);
+					role.getRoleId(), groupPermissionsList);
 			}
 			else {
 				groupPersistence.addPermissions(
-					groupId, communityPermissionsList);
+					groupId, groupPermissionsList);
 			}
 		}
 
@@ -627,7 +625,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	protected void addModelResources_6(
 			long companyId, long groupId, long userId, Resource resource,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Owner permissions
@@ -652,14 +650,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (groupId > 0) {
 			Role role = roleLocalService.getDefaultGroupRole(groupId);
 
-			if (communityPermissions == null) {
-				communityPermissions = new String[0];
+			if (groupPermissions == null) {
+				groupPermissions = new String[0];
 			}
 
 			resourcePermissionLocalService.setResourcePermissions(
 				resource.getCompanyId(), resource.getName(),
 				resource.getScope(), resource.getPrimKey(), role.getRoleId(),
-				communityPermissions);
+				groupPermissions);
 		}
 
 		// Guest permissions
@@ -880,13 +878,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	protected void updateResources_1to5(
 			long companyId, long groupId, Resource resource,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		Role role = roleLocalService.getDefaultGroupRole(groupId);
 
 		permissionLocalService.setRolePermissions(
-			role.getRoleId(), communityPermissions, resource.getResourceId());
+			role.getRoleId(), groupPermissions, resource.getResourceId());
 
 		role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
@@ -912,14 +910,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	protected void updateResources_6(
 			long companyId, long groupId, Resource resource,
-			String[] communityPermissions, String[] guestPermissions)
+			String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		Role role = roleLocalService.getDefaultGroupRole(groupId);
 
 		resourcePermissionLocalService.setResourcePermissions(
 			resource.getCompanyId(), resource.getName(), resource.getScope(),
-			resource.getPrimKey(), role.getRoleId(), communityPermissions);
+			resource.getPrimKey(), role.getRoleId(), groupPermissions);
 
 		role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
