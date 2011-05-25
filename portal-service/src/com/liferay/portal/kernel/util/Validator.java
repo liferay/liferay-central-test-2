@@ -962,7 +962,8 @@ public class Validator {
 	private static final String _XML_EMPTY = "<root />";
 
 	private static Pattern _emailAddressPattern = Pattern.compile(
-		"([\\w!#%&-/=_`~\\Q.$*+?^{|}\\E]+)*@([\\w-]+\\.)+[A-Za-z]+");
+		"[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@" +
+		"(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?");
 	private static Pattern _ipAddressPattern = Pattern.compile(
 		"\\b" +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +

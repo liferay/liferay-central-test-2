@@ -42,10 +42,14 @@ public class ValidatorTest extends TestCase {
 
 	public void testIsValidEmailAddress() throws Exception {
 		String[] validEmailAddresses = {
-			"email@domain.com", "firstname.lastname@domain.com",
-			"firstname+lastname@domain.com", "123456789@domain.com",
-			"email@domain-one.com", "____@domain.com", "email@domain.name",
-			"firstname-lastname@domain.com"
+			"test@liferay.com", "test123@liferay.com", "test.user@liferay.com",
+			"test@liferay.com.ch", "test!@liferay.com", "test#@liferay.com",
+			"test$@liferay.com", "test%@liferay.com", "test&@liferay.com",
+			"test'@liferay.com", "test*@liferay.com", "test+@liferay.com",
+			"test-@liferay.com", "test/@liferay.com", "test=@liferay.com",
+			"test?@liferay.com", "test^@liferay.com", "test_@liferay.com",
+			"test`@liferay.com", "test{@liferay.com", "test|@liferay.com",
+			"test{@liferay.com", "test~@liferay.com"
 		};
 
 		for (String validEmailAddress : validEmailAddresses) {
@@ -55,9 +59,10 @@ public class ValidatorTest extends TestCase {
 		}
 
 		String[] invalidEmailAddresses = {
-			"domain",  "#$%^&.com", "joe smith <email@domain.com",
-			"email.domain.com", "email@domain@domain.com",
-			"email@domain.com (joe smith)", "email@domain"
+			"test", "liferay.com", "@liferay.com", "test(@liferay.com",
+			"test)@liferay.com", "test,@liferay.com", ".test@liferay.com",
+			"test.@liferay.com", "te..st@liferay.com", "test user@liferay.com",
+			"test@-liferay.com", "test@liferay"
 		};
 
 		for (String invalidEmailAddress : invalidEmailAddresses) {
