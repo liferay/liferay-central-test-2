@@ -592,10 +592,6 @@ public class UserImpl extends UserModelImpl implements User {
 		return UserGroupLocalServiceUtil.getUserUserGroups(getUserId());
 	}
 
-	public String getUserName() {
-		return getFullName();
-	}
-
 	public TimeZone getTimeZone() {
 		return _timeZone;
 	}
@@ -713,10 +709,6 @@ public class UserImpl extends UserModelImpl implements User {
 		_timeZone = TimeZoneUtil.getTimeZone(timeZoneId);
 
 		super.setTimeZoneId(timeZoneId);
-	}
-	
-	public void setUserName(String userName) {
-		throw new UnsupportedOperationException();
 	}
 
 	public void updateSocialContributionEquity(long groupId, double value) {

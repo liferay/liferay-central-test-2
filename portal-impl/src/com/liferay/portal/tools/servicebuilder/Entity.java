@@ -436,11 +436,9 @@ public class Entity {
 	}
 
 	public boolean isAuditedModel() {
-		if ((hasColumn("companyId") && hasColumn("createDate") &&
-			 hasColumn("modifiedDate") && hasColumn("userId") &&
-			 hasColumn("userName")) ||
-			(_packagePath.equals("com.liferay.portal") &&
-			 _name.equals("User"))) {
+		if (hasColumn("companyId") && hasColumn("createDate") &&
+			hasColumn("modifiedDate") && hasColumn("userId") &&
+			hasColumn("userName")) {
 
 			return true;
 		}
