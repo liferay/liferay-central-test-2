@@ -47,7 +47,6 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -164,37 +163,33 @@ public class DLIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
-		long companyId = fileEntry.getCompanyId();
-		long groupId = fileEntry.getGroupId();
-		long userId = fileEntry.getUserId();
-		long repositoryId = fileEntry.getDataRepositoryId();
-		String fileName = fileEntry.getName();
-		long fileEntryId = fileEntry.getFileEntryId();
-		String properties = fileEntry.getLuceneProperties();
-		Date modifiedDate = fileEntry.getModifiedDate();
-
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			DLFileEntry.class.getName(), fileEntryId);
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				DLFileEntry.class.getName(), fileEntryId);
-		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-			DLFileEntry.class.getName(), fileEntryId);
-
 		FileModel fileModel = new FileModel();
 
+		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 		fileModel.setAssetCategoryIds(assetCategoryIds);
+
+		String[] assetCategoryNames =
+			AssetCategoryLocalServiceUtil.getCategoryNames(
+				DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 		fileModel.setAssetCategoryNames(assetCategoryNames);
+
+		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
+			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+
 		fileModel.setAssetTagNames(assetTagNames);
-		fileModel.setCompanyId(companyId);
-		fileModel.setFileEntryId(fileEntryId);
-		fileModel.setFileName(fileName);
-		fileModel.setGroupId(groupId);
-		fileModel.setUserId(userId);
-		fileModel.setModifiedDate(modifiedDate);
+
+		fileModel.setCompanyId(fileEntry.getCompanyId());
+		fileModel.setFileEntryId(fileEntry.getFileEntryId());
+		fileModel.setFileName(fileEntry.getName());
+		fileModel.setGroupId(fileEntry.getGroupId());
+		fileModel.setUserId(fileEntry.getUserId());
+		fileModel.setModifiedDate(fileEntry.getModifiedDate());
 		fileModel.setPortletId(PORTLET_ID);
-		fileModel.setProperties(properties);
-		fileModel.setRepositoryId(repositoryId);
+		fileModel.setProperties(fileEntry.getLuceneProperties());
+		fileModel.setRepositoryId(fileEntry.getDataRepositoryId());
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
