@@ -49,7 +49,7 @@ String headerTitle = LanguageUtil.get(pageContext, workflowTask.getName());
 
 headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + workflowHandler.getTitle(classPK, locale));
 
-PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, (LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, liferayPortletRequest, liferayPortletResponse);
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
@@ -194,7 +194,7 @@ if (assetEntry != null) {
 					</div>
 
 					<h3 class="task-content-title">
-						<img src="<%= workflowHandler.getIconPath((LiferayPortletRequest)renderRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK, locale) %>
+						<img src="<%= workflowHandler.getIconPath(liferayPortletRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK, locale) %>
 					</h3>
 
 					<%

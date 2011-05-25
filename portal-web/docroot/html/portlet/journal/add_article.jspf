@@ -15,7 +15,7 @@
 --%>
 
 <%
-Map<String, PortletURL> addArticleURLs = getAddArticleURLs(renderRequest, renderResponse);
+Map<String, PortletURL> addArticleURLs = getAddArticleURLs(liferayPortletRequest, liferayPortletResponse);
 %>
 
 <c:choose>
@@ -69,13 +69,13 @@ Map<String, PortletURL> addArticleURLs = getAddArticleURLs(renderRequest, render
 </c:choose>
 
 <%!
-public PortletURL getAddArticleURL(RenderRequest renderRequest, RenderResponse renderResponse, String structureId) throws Exception {
+public PortletURL getAddArticleURL(LiferayPortletRequest liferayPortletRequest, LiferayPortletResponse liferayPortletResponse, String structureId) throws Exception {
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
 
 	PortletURL addArticleURL = null;
 
 	if (assetRendererFactory != null) {
-		addArticleURL = assetRendererFactory.getURLAdd((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse);
+		addArticleURL = assetRendererFactory.getURLAdd(liferayPortletRequest, liferayPortletResponse);
 
 		if (addArticleURL != null) {
 			addArticleURL.setWindowState(LiferayWindowState.MAXIMIZED);
@@ -83,7 +83,7 @@ public PortletURL getAddArticleURL(RenderRequest renderRequest, RenderResponse r
 
 			addArticleURL.setParameter("struts_action", "/journal/edit_article");
 
-			String currentURL = PortalUtil.getCurrentURL(renderRequest);
+			String currentURL = PortalUtil.getCurrentURL(liferayPortletRequest);
 
 			addArticleURL.setParameter("redirect", currentURL);
 			addArticleURL.setParameter("backURL", currentURL);
@@ -97,19 +97,19 @@ public PortletURL getAddArticleURL(RenderRequest renderRequest, RenderResponse r
 	return addArticleURL;
 }
 
-public Map<String, PortletURL> getAddArticleURLs(RenderRequest renderRequest, RenderResponse renderResponse) throws Exception {
-	ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+public Map<String, PortletURL> getAddArticleURLs(LiferayPortletRequest liferayPortletRequest, LiferayPortletResponse liferayPortletResponse) throws Exception {
+	ThemeDisplay themeDisplay = (ThemeDisplay)liferayPortletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	Map<String, PortletURL> addArticleURLs = new TreeMap<String, PortletURL>();
 
 	List<JournalStructure> structures = JournalStructureLocalServiceUtil.getStructures(themeDisplay.getScopeGroupId());
 
-	PortletURL addArticleURL = getAddArticleURL(renderRequest, renderResponse, null);
+	PortletURL addArticleURL = getAddArticleURL(liferayPortletRequest, liferayPortletResponse, null);
 
 	addArticleURLs.put(JournalArticle.class.getName(), addArticleURL);
 
 	for (JournalStructure structure : structures) {
-		addArticleURL = getAddArticleURL(renderRequest, renderResponse, structure.getStructureId());
+		addArticleURL = getAddArticleURL(liferayPortletRequest, liferayPortletResponse, structure.getStructureId());
 
 		if (addArticleURL != null) {
 			addArticleURLs.put(JournalArticle.class.getName() + _CLASSNAME_SEPARATOR + structure.getName(), addArticleURL);
