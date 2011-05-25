@@ -32,4 +32,5 @@ public interface ClassedModel {
 	public Serializable getPrimaryKeyObj();
 
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
+
 }
