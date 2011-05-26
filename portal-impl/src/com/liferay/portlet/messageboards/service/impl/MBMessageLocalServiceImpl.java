@@ -1049,8 +1049,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		else {
 			category = new MBCategoryImpl();
 
-			category.setDisplayStyle(MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
 			category.setCategoryId(message.getCategoryId());
+			category.setDisplayStyle(MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
 		}
 
 		MBMessage parentMessage = null;
