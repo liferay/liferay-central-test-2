@@ -48,7 +48,7 @@ if (classPK > 0) {
 					assetLinkEntry = AssetEntryServiceUtil.getEntry(assetLink.getEntryId1());
 				}
 
-				if(!assetLinkEntry.isVisible()) {
+				if (!assetLinkEntry.isVisible()) {
 					continue;
 				}
 
