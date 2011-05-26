@@ -9,6 +9,8 @@
 
 	var REGEX_NOT_WHITESPACE = /[^\t\n\r ]/;
 
+	var REGEX_URL_PREFIX = /^(?:\/|https?|ftp):\/\//i;
+
 	var SPACE = ' ';
 
 	var STR_EQUALS = '=';
@@ -356,7 +358,9 @@
 		_handleLink: function(element, listTagsIn, listTagsOut) {
 			var hrefAttribute = element.getAttribute('href');
 
-			hrefAttribute = decodeURIComponent(hrefAttribute);
+			if (!REGEX_URL_PREFIX.test(hrefAttribute)) {
+				hrefAttribute = decodeURIComponent(hrefAttribute);
+			}
 
 			if (CKEDITOR.env.ie && (CKEDITOR.env.version <= 8)) {
 				var location = window.location;
