@@ -19,7 +19,9 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
@@ -27,6 +29,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.base.DLAppHelperLocalServiceBaseImpl;
@@ -213,7 +217,8 @@ public class DLAppHelperLocalServiceImpl
 
 	public AssetEntry updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			long[] assetCategoryIds, String[] assetTagNames, String mimeType,
+			long[] assetCategoryIds, String[] assetTagNames,
+			long[] assetLinkEntryIds, String mimeType,
 			boolean addDraftAssetEntry, boolean visible)
 		throws PortalException, SystemException {
 
@@ -254,6 +259,10 @@ public class DLAppHelperLocalServiceImpl
 			}
 		}
 
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
+
 		return assetEntry;
 	}
 
@@ -283,14 +292,30 @@ public class DLAppHelperLocalServiceImpl
 							draftAssetEntry.getCategoryIds();
 						String[] assetTagNames = draftAssetEntry.getTagNames();
 
-						assetEntryLocalService.updateEntry(
-							userId, fileEntry.getGroupId(),
-							DLFileEntryConstants.getClassName(),
-							fileEntry.getFileEntryId(), fileEntry.getUuid(),
-							assetCategoryIds, assetTagNames, true, null, null,
-							null, null, draftAssetEntry.getMimeType(),
-							fileEntry.getTitle(), fileEntry.getDescription(),
-							null, null, null, 0, 0, null, false);
+						List<AssetLink> assetLinks =
+							assetLinkLocalService.getDirectLinks(
+								draftAssetEntry.getEntryId(),
+								AssetLinkConstants.TYPE_RELATED);
+
+						long[] assetLinkEntryIds = StringUtil.split(
+							ListUtil.toString(assetLinks, "entryId2"), 0L);
+
+						AssetEntry assetEntry =
+							assetEntryLocalService.updateEntry(
+								userId, fileEntry.getGroupId(),
+								DLFileEntryConstants.getClassName(),
+								fileEntry.getFileEntryId(), fileEntry.getUuid(),
+								assetCategoryIds, assetTagNames, true, null,
+								null, null, null, draftAssetEntry.getMimeType(),
+								fileEntry.getTitle(),
+								fileEntry.getDescription(), null, null, null, 0,
+								0, null, false);
+
+						// Asset Links
+
+						assetLinkLocalService.updateLinks(
+							userId, assetEntry.getEntryId(),
+							assetLinkEntryIds, AssetLinkConstants.TYPE_RELATED);
 
 						assetEntryLocalService.deleteEntry(
 							draftAssetEntry.getEntryId());

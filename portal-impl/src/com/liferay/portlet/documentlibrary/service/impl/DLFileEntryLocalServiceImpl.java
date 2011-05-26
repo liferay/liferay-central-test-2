@@ -178,7 +178,8 @@ public class DLFileEntryLocalServiceImpl
 		updateAsset(
 			userId, dlFileEntry, dlFileVersion,
 			serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// DLApp
 
@@ -591,6 +592,17 @@ public class DLFileEntryLocalServiceImpl
 			long[] assetCategoryIds, String[] assetTagNames)
 		throws PortalException, SystemException {
 
+		return updateAsset(
+			userId, dlFileEntry, dlFileVersion, assetCategoryIds, assetTagNames,
+			null);
+	}
+
+	public AssetEntry updateAsset(
+			long userId, DLFileEntry dlFileEntry, DLFileVersion dlFileVersion,
+			long[] assetCategoryIds, String[] assetTagNames,
+			long[] assetLinkEntryIds)
+		throws PortalException, SystemException {
+
 		boolean addDraftAssetEntry = false;
 
 		if ((dlFileVersion != null) && !dlFileVersion.isApproved()) {
@@ -616,8 +628,8 @@ public class DLFileEntryLocalServiceImpl
 		return dlAppHelperLocalService.updateAsset(
 			userId, new LiferayFileEntry(dlFileEntry),
 			new LiferayFileVersion(dlFileVersion), assetCategoryIds,
-			assetTagNames, dlFileEntry.getMimeType(), addDraftAssetEntry,
-			visible);
+			assetTagNames, assetLinkEntryIds, dlFileEntry.getMimeType(),
+			addDraftAssetEntry, visible);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -1174,7 +1186,8 @@ public class DLFileEntryLocalServiceImpl
 		updateAsset(
 			userId, dlFileEntry, dlFileVersion,
 			serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Folder
 
