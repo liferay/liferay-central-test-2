@@ -129,6 +129,15 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 			<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />
 
+			<c:if test="<%= enableAssetLinks %>">
+				<aui:fieldset>
+					<liferay-ui:asset-links
+						className="<%= assetEntry.getClassName() %>"
+						classPK="<%= assetEntry.getClassPK() %>"
+					/>
+				</aui:fieldset>
+			</c:if>
+
 			<c:if test="<%= enableFlags %>">
 				<div class="asset-flag">
 					<liferay-ui:flags

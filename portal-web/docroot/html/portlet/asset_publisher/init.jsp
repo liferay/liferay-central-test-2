@@ -234,6 +234,7 @@ boolean enableTagBasedNavigation = GetterUtil.getBoolean(preferences.getValue("e
 String[] conversions = DocumentConversionUtil.getConversions("html");
 String[] extensions = preferences.getValues("extensions", new String[0]);
 boolean openOfficeServerEnabled = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED);
+boolean enableAssetLinks = GetterUtil.getBoolean(preferences.getValue("enableAssetLinks", null));
 boolean enableConversions = openOfficeServerEnabled && (extensions != null) && (extensions.length > 0);
 boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enablePrint", null));
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enableFlags", null));
