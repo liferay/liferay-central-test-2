@@ -28,6 +28,10 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -37,6 +41,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
@@ -559,6 +564,37 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			String uuid = PortalUUIDUtil.generate();
 
 			mbMessage.setUuid(uuid);
+		}
+
+		long userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
+
+		if (userId > 0) {
+			long companyId = mbMessage.getCompanyId();
+
+			long groupId = mbMessage.getGroupId();
+
+			long pageId = 0;
+
+			if (!isNew) {
+				pageId = mbMessage.getPrimaryKey();
+			}
+
+			try {
+				mbMessage.setSubject(SanitizerUtil.sanitize(companyId, groupId,
+						userId,
+						com.liferay.portlet.messageboards.model.MBMessage.class.getName(),
+						pageId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
+						mbMessage.getSubject(), null));
+
+				mbMessage.setBody(SanitizerUtil.sanitize(companyId, groupId,
+						userId,
+						com.liferay.portlet.messageboards.model.MBMessage.class.getName(),
+						pageId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
+						mbMessage.getBody(), null));
+			}
+			catch (SanitizerException se) {
+				throw new SystemException(se);
+			}
 		}
 
 		Session session = null;
