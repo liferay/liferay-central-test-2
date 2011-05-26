@@ -245,7 +245,7 @@ public class DLUtil {
 		}
 
 		portletURL.setParameter(
-			"folderId", String.valueOf(folder.getFolderId()));
+			"folderId", String.valueOf(folderId));
 
 		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId != defaultFolderId)) {
