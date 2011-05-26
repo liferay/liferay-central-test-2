@@ -65,7 +65,7 @@ import java.util.Locale;
  */
 public class UserServiceImpl extends UserServiceBaseImpl {
 
-	public void addGroupUsers(long groupId, long[] userIds)
+	public void addGroupUsers(long groupId, long remoteUserId, long[] userIds)
 		throws PortalException, SystemException {
 
 		try {
@@ -102,7 +102,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			}
 		}
 
-		userLocalService.addGroupUsers(groupId, userIds);
+		userLocalService.addGroupUsers(groupId, remoteUserId, userIds);
 	}
 
 	public void addOrganizationUsers(long organizationId, long[] userIds)
@@ -671,8 +671,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset,
+			long userId, String oldPassword,
+			String newPassword1, String newPassword2, boolean passwordReset,
 			String reminderQueryQuestion, String reminderQueryAnswer,
 			String screenName, String emailAddress, long facebookId,
 			String openId, String languageId, String timeZoneId,
@@ -687,7 +687,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			List<Address> addresses, List<EmailAddress> emailAddresses,
 			List<Phone> phones, List<Website> websites,
 			List<AnnouncementsDelivery> announcementsDelivers,
-			ServiceContext serviceContext)
+			long remoteUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = updateUser(
@@ -697,8 +697,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds,
-			userGroupRoles, userGroupIds, serviceContext);
+			jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
+			userGroupIds, remoteUserId, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
@@ -718,8 +718,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	}
 
 	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset,
+			long userId, String oldPassword,
+			String newPassword1, String newPassword2, boolean passwordReset,
 			String reminderQueryQuestion, String reminderQueryAnswer,
 			String screenName, String emailAddress, long facebookId,
 			String openId, String languageId, String timeZoneId,
@@ -731,7 +731,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String twitterSn, String ymSn, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds,
 			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
-			ServiceContext serviceContext)
+			long remoteUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -779,7 +779,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
-			userGroupIds, serviceContext);
+			userGroupIds, remoteUserId, serviceContext);
 	}
 
 	protected long[] checkGroups(long userId, long[] groupIds)

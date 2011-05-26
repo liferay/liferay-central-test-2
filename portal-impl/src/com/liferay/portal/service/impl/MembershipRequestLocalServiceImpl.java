@@ -134,11 +134,19 @@ public class MembershipRequestLocalServiceImpl
 			membershipRequestId);
 	}
 
+	public List<MembershipRequest> getMembershipRequests(
+			long userId, long groupId, int statusId)
+		throws SystemException {
+
+		return membershipRequestPersistence.findByG_U_S(
+			groupId, userId, statusId);
+	}
+
 	public boolean hasMembershipRequest(long userId, long groupId, int statusId)
 		throws SystemException {
 
-		List<MembershipRequest> membershipRequests =
-			membershipRequestPersistence.findByG_U_S(groupId, userId, statusId);
+		List<MembershipRequest> membershipRequests = getMembershipRequests(
+			userId, groupId, statusId);
 
 		if (membershipRequests.isEmpty()) {
 			return false;
@@ -162,7 +170,7 @@ public class MembershipRequestLocalServiceImpl
 
 	public void updateStatus(
 			long replierUserId, long membershipRequestId, String replyComments,
-			int statusId)
+			int statusId, boolean addUserToGroup)
 		throws PortalException, SystemException {
 
 		validate(replyComments);
@@ -178,11 +186,13 @@ public class MembershipRequestLocalServiceImpl
 
 		membershipRequestPersistence.update(membershipRequest, false);
 
-		if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
+		if ((statusId == MembershipRequestConstants.STATUS_APPROVED)
+			&& addUserToGroup) {
+
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};
 
 			userLocalService.addGroupUsers(
-				membershipRequest.getGroupId(), addUserIds);
+				membershipRequest.getGroupId(), replierUserId, addUserIds);
 		}
 
 		try {

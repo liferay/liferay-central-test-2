@@ -79,6 +79,8 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
@@ -299,8 +301,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *         be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void addGroupUsers(long groupId, long[] userIds)
+	public void addGroupUsers(long groupId, long remoteUserId, long[] userIds)
 		throws PortalException, SystemException {
+
+		for (long userId : userIds) {
+			List<MembershipRequest> membershipRequests =
+				membershipRequestLocalService.getMembershipRequests(
+					userId, groupId,
+					MembershipRequestConstants.STATUS_PENDING);
+
+			try {
+				User user = getUserById(userId);
+
+				Locale locale = user.getLocale();
+				for (MembershipRequest membershipRequest : membershipRequests) {
+					membershipRequestLocalService.updateStatus(
+						remoteUserId,
+						membershipRequest.getMembershipRequestId(),
+						LanguageUtil.get(
+							locale, "your-membership-has-been-approved"),
+						MembershipRequestConstants.STATUS_APPROVED, false);
+				}
+			}
+			catch (NoSuchUserException nsue) {
+			}
+		}
 
 		groupPersistence.addUsers(groupId, userIds);
 
@@ -3567,7 +3592,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void updateGroups(long userId, long[] newGroupIds)
+	public void updateGroups(long userId, long remoteUserId, long[] newGroupIds)
 		throws PortalException, SystemException {
 
 		if (newGroupIds == null) {
@@ -3590,7 +3615,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		for (long newGroupId : newGroupIds) {
 			if (!oldGroupIds.contains(newGroupId)) {
-				addGroupUsers(newGroupId, new long[] {userId});
+				addGroupUsers(newGroupId, remoteUserId, new long[] {userId});
 			}
 		}
 
@@ -4217,7 +4242,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String twitterSn, String ymSn, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds,
 			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
-			ServiceContext serviceContext)
+			long remoteUserId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -4368,7 +4393,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Groups
 
-		updateGroups(userId, groupIds);
+		updateGroups(userId, remoteUserId, groupIds);
 
 		// Organizations
 

@@ -303,10 +303,11 @@ public class UserLocalServiceUtil {
 	be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void addGroupUsers(long groupId, long[] userIds)
+	public static void addGroupUsers(long groupId, long remoteUserId,
+		long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().addGroupUsers(groupId, userIds);
+		getService().addGroupUsers(groupId, remoteUserId, userIds);
 	}
 
 	/**
@@ -2322,10 +2323,11 @@ public class UserLocalServiceUtil {
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void updateGroups(long userId, long[] newGroupIds)
+	public static void updateGroups(long userId, long remoteUserId,
+		long[] newGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateGroups(userId, newGroupIds);
+		getService().updateGroups(userId, remoteUserId, newGroupIds);
 	}
 
 	/**
@@ -2703,7 +2705,7 @@ public class UserLocalServiceUtil {
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
-		long[] userGroupIds,
+		long[] userGroupIds, long remoteUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -2715,7 +2717,7 @@ public class UserLocalServiceUtil {
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-			roleIds, userGroupRoles, userGroupIds, serviceContext);
+			roleIds, userGroupRoles, userGroupIds, remoteUserId, serviceContext);
 	}
 
 	public static UserLocalService getService() {

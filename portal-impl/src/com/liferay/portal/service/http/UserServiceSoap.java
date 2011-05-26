@@ -65,10 +65,10 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class UserServiceSoap {
-	public static void addGroupUsers(long groupId, long[] userIds)
-		throws RemoteException {
+	public static void addGroupUsers(long groupId, long remoteUserId,
+		long[] userIds) throws RemoteException {
 		try {
-			UserServiceUtil.addGroupUsers(groupId, userIds);
+			UserServiceUtil.addGroupUsers(groupId, remoteUserId, userIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -796,6 +796,7 @@ public class UserServiceSoap {
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
 		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers,
+		long remoteUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -819,7 +820,7 @@ public class UserServiceSoap {
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
-						announcementsDelivers), serviceContext);
+						announcementsDelivers), remoteUserId, serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -849,7 +850,7 @@ public class UserServiceSoap {
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
 		com.liferay.portal.model.UserGroupRoleSoap[] userGroupRoles,
-		long[] userGroupIds,
+		long[] userGroupIds, long remoteUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -863,7 +864,8 @@ public class UserServiceSoap {
 					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
 					groupIds, organizationIds, roleIds,
 					com.liferay.portal.model.impl.UserGroupRoleModelImpl.toModels(
-						userGroupRoles), userGroupIds, serviceContext);
+						userGroupRoles), userGroupIds, remoteUserId,
+					serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

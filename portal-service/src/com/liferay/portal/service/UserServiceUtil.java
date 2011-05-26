@@ -37,10 +37,11 @@ public class UserServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.UserServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static void addGroupUsers(long groupId, long[] userIds)
+	public static void addGroupUsers(long groupId, long remoteUserId,
+		long[] userIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().addGroupUsers(groupId, userIds);
+		getService().addGroupUsers(groupId, remoteUserId, userIds);
 	}
 
 	public static void addOrganizationUsers(long organizationId, long[] userIds)
@@ -433,6 +434,7 @@ public class UserServiceUtil {
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		long remoteUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -445,7 +447,8 @@ public class UserServiceUtil {
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
 			roleIds, userGroupRoles, userGroupIds, addresses, emailAddresses,
-			phones, websites, announcementsDelivers, serviceContext);
+			phones, websites, announcementsDelivers, remoteUserId,
+			serviceContext);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
@@ -467,7 +470,7 @@ public class UserServiceUtil {
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
-		long[] userGroupIds,
+		long[] userGroupIds, long remoteUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -479,7 +482,7 @@ public class UserServiceUtil {
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, groupIds, organizationIds,
-			roleIds, userGroupRoles, userGroupIds, serviceContext);
+			roleIds, userGroupRoles, userGroupIds, remoteUserId, serviceContext);
 	}
 
 	public static UserService getService() {

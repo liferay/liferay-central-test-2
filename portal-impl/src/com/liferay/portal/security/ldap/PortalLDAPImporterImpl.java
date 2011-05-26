@@ -1091,7 +1091,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			ldapUser.getTwitterSn(), ldapUser.getYmSn(), ldapUser.getJobTitle(),
 			ldapUser.getGroupIds(), ldapUser.getOrganizationIds(),
 			ldapUser.getRoleIds(), ldapUser.getUserGroupRoles(),
-			ldapUser.getUserGroupIds(), ldapUser.getServiceContext());
+			ldapUser.getUserGroupIds(), 0, ldapUser.getServiceContext());
 
 		if (ldapUserModifiedDate != null) {
 			user = UserLocalServiceUtil.updateModifiedDate(
