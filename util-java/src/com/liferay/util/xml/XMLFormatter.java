@@ -117,6 +117,7 @@ public class XMLFormatter {
 		outputFormat.setExpandEmptyElements(expandEmptyElements);
 		outputFormat.setIndent(indent);
 		outputFormat.setLineSeparator(StringPool.NEW_LINE);
+		outputFormat.setTrimText(false);
 
 		XMLWriter xmlWriter = new XMLWriter(
 			unsyncByteArrayOutputStream, outputFormat);
