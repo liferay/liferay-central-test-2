@@ -28,7 +28,7 @@
 		</c:if>
 
 		<%
-		String tabs1URL = portletURL.toString();
+		String tabs1URL = redirectURL.toString();
 
 		if (liveGroup.isUser()) {
 			PortletURL userTabs1URL = renderResponse.createRenderURL();
