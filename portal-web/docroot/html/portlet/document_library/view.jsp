@@ -61,54 +61,52 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 	<liferay-ui:message key="your-request-failed-to-complete" />
 </div>
 
-<aui:layout cssClass="view">
-	<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
-		<div class="header-row">
-			<div class="header-row-content"> </div>
-		</div>
+<span id="<portlet:namespace />documentLibraryContainer">
+	<aui:layout cssClass="view">
+		<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
+			<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
+		</aui:column>
 
-		<div class="body-row">
-			<div id="<portlet:namespace />folderContainer">
-				<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
-			</div>
-		</div>
-	</aui:column>
+		<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
+			<span class="search-button-container" id="<portlet:namespace />fileEntrySearchContainer">
+				<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
+			</span>
 
-	<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
-		<span class="search-button-container" id="<portlet:namespace />fileEntrySearchContainer">
-			<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
-		</span>
+			<liferay-portlet:renderURL varImpl="editFileEntryURL">
+				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+			</liferay-portlet:renderURL>
 
-		<liferay-portlet:renderURL varImpl="editFileEntryURL">
-			<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-		</liferay-portlet:renderURL>
+			<aui:form action="<%= editFileEntryURL.toString() %>" method="get" name="fm2">
+				<aui:input name="<%= Constants.CMD %>" type="hidden" />
+				<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+				<aui:input name="deleteEntryIds" type="hidden" />
+				<aui:input name="fileEntryIds" type="hidden" />
 
-		<aui:form action="<%= editFileEntryURL.toString() %>" method="get" name="fm2">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="deleteEntryIds" type="hidden" />
-			<aui:input name="fileEntryIds" type="hidden" />
+				<div class="header-row">
+					<div class="header-row-content">
+						<div class="toolbar">
+							<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
+						</div>
 
-			<div class="header-row">
-				<div class="header-row-content">
-					<div class="toolbar">
-						<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
-					</div>
-
-					<div class="display-style">
-						<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
+						<div class="display-style">
+							<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="document-container" id="<portlet:namespace />documentContainer">
-				<c:if test='<%= true %>'>
-					<liferay-util:include page="/html/portlet/document_library/view_entries.jsp" />
-				</c:if>
-			</div>
-		</aui:form>
-	</aui:column>
-</aui:layout>
+				<div class="document-container" id="<portlet:namespace />documentContainer">
+					<c:if test='<%= true %>'>
+						<liferay-util:include page="/html/portlet/document_library/view_entries.jsp" />
+					</c:if>
+				</div>
+			</aui:form>
+		</aui:column>
+	</aui:layout>
+
+	<div class="document-library-breadcrumb" id="<portlet:namespace />breadcrumbContainer">
+		<liferay-util:include page="/html/portlet/document_library/breadcrumb.jsp" />
+	</div>
+</span>
 
 <%
 if (folder != null) {
@@ -261,19 +259,29 @@ if (folder != null) {
 								fileEntrySearchContainer.plug(A.Plugin.ParseContent);
 								fileEntrySearchContainer.setContent(fileEntrySearch);
 
+								var parentFolderTitleContainer = A.one('#<portlet:namespace />parentFolderTitleContainer');
+								var parentFolderTitle = content.one('#<portlet:namespace />parentFolderTitle');
+
+								if (parentFolderTitle) {
+									parentFolderTitleContainer.setContent(parentFolderTitle);
+								}
+
+								var breadcrumbContainer = A.one('#<portlet:namespace />breadcrumbContainer');
+								var breadcrumb = content.one('#<portlet:namespace />breadcrumb');
+
+								breadcrumbContainer.setContent(breadcrumb);
+
 								var entries = content.one('#<portlet:namespace />entries');
 
 								entriesContainer.setContent(entries);
 							}
 
 							if (dataRefreshFolders) {
-								var foldersContent = content.one('#<portlet:namespace />folders');
+								var foldersContent = content.one('#<portlet:namespace />folderContainer');
 
 								if (foldersContent) {
-									content = foldersContent;
+									listView.set('data', foldersContent);
 								}
-
-								listView.set('data', content);
 							}
 						}
 					}
@@ -282,12 +290,16 @@ if (folder != null) {
 		}
 	);
 
-	A.one('#<portlet:namespace />documentContainer').delegate(
+	A.one('#<portlet:namespace />documentLibraryContainer').delegate(
 		'click',
 		function(event) {
 			event.preventDefault();
 
 			var requestUrl = event.currentTarget.attr('data-resource-url');
+
+			if (!requestUrl) {
+				requestUrl = event.currentTarget.attr('href');
+			}
 
 			var entriesContainer = A.one('#<portlet:namespace />documentContainer');
 
@@ -312,7 +324,7 @@ if (folder != null) {
 
 							var content = A.Node.create(responseData);
 
-							var folders = content.one('#<portlet:namespace />folders');
+							var folders = content.one('#<portlet:namespace />folderContainer');
 
 							listView.set('data', folders);
 
@@ -335,6 +347,16 @@ if (folder != null) {
 							fileEntrySearchContainer.plug(A.Plugin.ParseContent);
 							fileEntrySearchContainer.setContent(fileEntrySearch);
 
+							var parentFolderTitleContainer = A.one('#<portlet:namespace />parentFolderTitleContainer');
+							var parentFolderTitle = content.one('#<portlet:namespace />parentFolderTitle');
+
+							parentFolderTitleContainer.setContent(parentFolderTitle);
+
+							var breadcrumbContainer = A.one('#<portlet:namespace />breadcrumbContainer');
+							var breadcrumb = content.one('#<portlet:namespace />breadcrumb');
+
+							breadcrumbContainer.setContent(breadcrumb);
+
 							var entries = content.one('#<portlet:namespace />entries');
 
 							entriesContainer.setContent(entries);
@@ -343,6 +365,6 @@ if (folder != null) {
 				}
 			);
 		},
-		'a[data-folder=true]'
+		'a[data-folder=true], #<portlet:namespace />breadcrumbContainer a'
 	);
 </aui:script>

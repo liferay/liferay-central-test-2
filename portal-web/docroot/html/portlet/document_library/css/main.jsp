@@ -433,6 +433,13 @@
 		.edit-toolbar {
 			margin: 0;
 		}
+
+		.parent-folder-title {
+			color: #34404F;
+			font-weight: bold;
+			margin-top: 0.5em;
+			text-align: center;
+		}
 	}
 
 	.view {
@@ -444,6 +451,17 @@
 
 		.search-button {
 			float: right;
+		}
+	}
+
+	.document-library-breadcrumb {
+		border: 1px solid #CCC;
+		background-color: #FAFAFA;
+		margin-top: 1em;
+		padding: 7px;
+
+		.breadcrumbs {
+			margin-bottom: 0;
 		}
 	}
 

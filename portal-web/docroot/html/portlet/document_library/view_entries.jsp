@@ -225,6 +225,7 @@ for (int i = 0; i < results.size(); i++) {
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
 					<%
