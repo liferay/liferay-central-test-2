@@ -177,7 +177,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						</c:if>
 
 						<aui:button-row>
-							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value="<%= postReplyButtonLabel %>"  />
+							<aui:button id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value="<%= postReplyButtonLabel %>"  />
 
 							<%
 							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i + "').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "postReplyBody" + i + "').value = ''; void('');";
@@ -431,7 +431,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea"  wrap="soft" />
 
 									<aui:button-row>
-										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value='<%= themeDisplay.isSignedIn() ? "reply" : "reply-as" %>' />
+										<aui:button id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value='<%= themeDisplay.isSignedIn() ? "reply" : "reply-as" %>' />
 
 										<%
 										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i + "').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "postReplyBody" + i + "').value = ''; void('');";
@@ -688,39 +688,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			},
 			['aui-base']
 		);
-	</aui:script>
-
-	<aui:script use="aui-event-input">
-		var form = A.one(document.<%= namespace %><%= formName %>);
-
-		if (form) {
-			var textareas = form.all('textarea');
-
-			if (textareas) {
-				textareas.on(
-					'input',
-					function(event) {
-						var textarea = event.currentTarget;
-						var currentValue = A.Lang.trim(textarea.val());
-
-						var id = textarea.get('id');
-						var buttonId = id.replace(/Body/, 'Button');
-						var button = A.one('#' + buttonId);
-
-						if (button) {
-							button.set('disabled', !currentValue.length);
-
-							if (currentValue.length) {
-								button.ancestor('.yui3-aui-button').removeClass('yui3-aui-button-disabled');
-							}
-							else {
-								button.ancestor('.yui3-aui-button').addClass('yui3-aui-button-disabled');
-							}
-						}
-					}
-				);
-			}
-		}
 	</aui:script>
 </c:if>
 
