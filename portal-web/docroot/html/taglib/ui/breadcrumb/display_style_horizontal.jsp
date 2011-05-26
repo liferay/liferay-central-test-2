@@ -28,11 +28,11 @@ if (showParentGroups) {
 }
 
 if (showLayout) {
-	_buildLayoutBreadcrumb(selLayout, selLayoutParam, portletURL, themeDisplay, true, sb);
+	_buildLayoutBreadcrumb(selLayout, selLayoutParam, true, portletURL, themeDisplay, sb);
 }
 
 if (showPortletBreadcrumb) {
-	_buildPortletBreadcrumb(request, themeDisplay, showCurrentGroup, showCurrentPortlet, sb);
+	_buildPortletBreadcrumb(request, showCurrentGroup, showCurrentPortlet, themeDisplay, sb);
 }
 
 String breadcrumbString = sb.toString();

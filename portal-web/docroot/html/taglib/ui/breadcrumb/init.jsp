@@ -61,7 +61,7 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBundler
 	}
 }
 
-private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay, boolean selectedLayout, StringBundler sb) throws Exception {
+private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, boolean selectedLayout, PortletURL portletURL, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
 	String layoutURL = _getBreadcrumbLayoutURL(selLayout, selLayoutParam, portletURL, themeDisplay);
 	String target = PortalUtil.getLayoutTarget(selLayout);
 
@@ -166,7 +166,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	}
 }
 
-private void _buildPortletBreadcrumb(HttpServletRequest request, ThemeDisplay themeDisplay, boolean showCurrentGroup, boolean showCurrentPortlet, StringBundler sb) throws Exception {
+private void _buildPortletBreadcrumb(HttpServletRequest request, boolean showCurrentGroup, boolean showCurrentPortlet, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
 	List<KeyValuePair> portletBreadcrumbs = PortalUtil.getPortletBreadcrumbs(request);
 
 	if (portletBreadcrumbs == null) {
@@ -178,15 +178,17 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, ThemeDisplay th
 		String breadcrumbURL = portletBreadcrumb.getValue();
 
 		if (!showCurrentGroup) {
-			String groupName = themeDisplay.getParentGroupName();
+			String parentGroupName = themeDisplay.getParentGroupName();
 
-			if (groupName.equals(breadcrumbText)) {
+			if (parentGroupName.equals(breadcrumbText)) {
 				continue;
 			}
 		}
 
 		if (!showCurrentPortlet) {
-			String portletTitle = PortalUtil.getPortletTitle(themeDisplay.getPortletDisplay().getId(), themeDisplay.getUser());
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			String portletTitle = PortalUtil.getPortletTitle(portletDisplay.getId(), themeDisplay.getUser());
 
 			if (portletTitle.equals(breadcrumbText)) {
 				continue;
