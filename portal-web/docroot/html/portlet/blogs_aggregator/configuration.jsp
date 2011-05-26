@@ -39,8 +39,8 @@ if (organizationId > 0) {
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="preferences--organizationId--" type="hidden" value="<%= organizationId %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="preferences--organizationId--" type="hidden" value="<%= organizationId %>" />
 
 	<aui:fieldset>
 		<aui:select name="preferences--selectionMethod--">
