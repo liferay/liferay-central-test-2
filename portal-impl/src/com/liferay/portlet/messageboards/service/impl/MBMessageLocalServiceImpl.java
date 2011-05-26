@@ -55,6 +55,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.SubscriptionSender;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
@@ -372,7 +374,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, message, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Expando
 
@@ -1199,7 +1202,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, MBMessage message, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
 		boolean visible = false;
@@ -1211,12 +1214,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			visible = true;
 		}
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, message.getGroupId(), message.getWorkflowClassName(),
 			message.getMessageId(), message.getUuid(), assetCategoryIds,
 			assetTagNames, visible, null, null, null, null,
 			ContentTypes.TEXT_HTML, message.getSubject(), null, null, null,
 			null, 0, 0, null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	public MBMessage updateDiscussionMessage(
@@ -1351,7 +1358,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, message, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Expando
 

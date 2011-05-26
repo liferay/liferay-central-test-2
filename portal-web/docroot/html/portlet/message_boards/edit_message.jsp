@@ -330,6 +330,13 @@ if (Validator.isNull(redirect)) {
 			<aui:input name="tags" type="assetTags" />
 		</c:if>
 
+		<aui:fieldset>
+			<liferay-ui:input-asset-links
+				className="<%= MBMessage.class.getName() %>"
+				classPK="<%= (message != null) ? message.getMessageId() : 0 %>"
+			/>
+		</aui:fieldset>
+
 		<c:if test="<%= message == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions

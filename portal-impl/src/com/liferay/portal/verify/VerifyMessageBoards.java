@@ -101,7 +101,7 @@ public class VerifyMessageBoards extends VerifyProcess {
 		for (MBMessage message : messages) {
 			try {
 				MBMessageLocalServiceUtil.updateAsset(
-					message.getUserId(), message, null, null);
+					message.getUserId(), message, null, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
