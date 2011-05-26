@@ -61,7 +61,7 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 	<liferay-ui:message key="your-request-failed-to-complete" />
 </div>
 
-<span id="<portlet:namespace />documentLibraryContainer">
+<div id="<portlet:namespace />documentLibraryContainer">
 	<aui:layout cssClass="view">
 		<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
 			<liferay-util:include page="/html/portlet/document_library/view_folders.jsp" />
@@ -106,7 +106,7 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 	<div class="document-library-breadcrumb" id="<portlet:namespace />breadcrumbContainer">
 		<liferay-util:include page="/html/portlet/document_library/breadcrumb.jsp" />
 	</div>
-</span>
+</div>
 
 <%
 if (folder != null) {
@@ -267,6 +267,7 @@ if (folder != null) {
 								}
 
 								var breadcrumbContainer = A.one('#<portlet:namespace />breadcrumbContainer');
+
 								var breadcrumb = content.one('#<portlet:namespace />breadcrumb');
 
 								breadcrumbContainer.setContent(breadcrumb);
