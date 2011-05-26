@@ -167,7 +167,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		for (long assetLinkEntryId : linkEntryIds) {
 			if (assetLinkEntryId != entryId) {
 				AssetLink link = assetLinkPersistence.fetchByE_E_T(
-					entryId, assetLinkEntryId,typeId);
+					entryId, assetLinkEntryId, typeId);
 
 				if (link == null) {
 					addLink(userId, entryId, assetLinkEntryId, typeId, 0);
