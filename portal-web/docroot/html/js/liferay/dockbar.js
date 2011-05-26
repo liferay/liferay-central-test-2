@@ -615,7 +615,7 @@ AUI().add(
 								{
 									dialog: {
 										align: Util.Window.ALIGN_CENTER,
-										width: 820
+										width: 960
 									}
 								},
 								event.currentTarget
