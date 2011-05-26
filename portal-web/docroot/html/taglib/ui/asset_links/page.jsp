@@ -48,6 +48,10 @@ if (classPK > 0) {
 					assetLinkEntry = AssetEntryServiceUtil.getEntry(assetLink.getEntryId1());
 				}
 
+				if(!assetLinkEntry.isVisible()) {
+					continue;
+				}
+
 				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(assetLinkEntry.getClassNameId()));
 
 				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetLinkEntry.getClassPK());
