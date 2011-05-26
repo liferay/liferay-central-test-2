@@ -32,7 +32,7 @@ if (showLayout) {
 }
 
 if (showPortletBreadcrumb) {
-	_buildPortletBreadcrumb(request, sb);
+	_buildPortletBreadcrumb(request, themeDisplay, showCurrentGroup, showCurrentPortlet, sb);
 }
 
 String breadcrumbString = sb.toString();

@@ -32,6 +32,8 @@ if (!ArrayUtil.contains(PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS, displaySty
 	displayStyle = "horizontal";
 }
 
+boolean showCurrentGroup = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showCurrentGroup"));
+boolean showCurrentPortlet = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showCurrentPortlet"));
 boolean showGuestGroup = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showGuestGroup"));
 boolean showParentGroups = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showParentGroups"));
 boolean showLayout = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showLayout"));
@@ -164,7 +166,7 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	}
 }
 
-private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler sb) throws Exception {
+private void _buildPortletBreadcrumb(HttpServletRequest request, ThemeDisplay themeDisplay, boolean showCurrentGroup, boolean showCurrentPortlet, StringBundler sb) throws Exception {
 	List<KeyValuePair> portletBreadcrumbs = PortalUtil.getPortletBreadcrumbs(request);
 
 	if (portletBreadcrumbs == null) {
@@ -174,6 +176,22 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler s
 	for (KeyValuePair portletBreadcrumb : portletBreadcrumbs) {
 		String breadcrumbText = portletBreadcrumb.getKey();
 		String breadcrumbURL = portletBreadcrumb.getValue();
+
+		if (!showCurrentGroup) {
+			String groupName = themeDisplay.getParentGroupName();
+
+			if (groupName.equals(breadcrumbText)) {
+				continue;
+			}
+		}
+
+		if (!showCurrentPortlet) {
+			String portletTitle = PortalUtil.getPortletTitle(themeDisplay.getPortletDisplay().getId(), themeDisplay.getUser());
+
+			if (portletTitle.equals(breadcrumbText)) {
+				continue;
+			}
+		}
 
 		if (!CookieKeys.hasSessionId(request) && Validator.isNotNull(breadcrumbURL)) {
 			HttpSession session = request.getSession();

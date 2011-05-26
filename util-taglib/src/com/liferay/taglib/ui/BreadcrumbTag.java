@@ -45,6 +45,14 @@ public class BreadcrumbTag extends IncludeTag {
 		_selLayoutParam = selLayoutParam;
 	}
 
+	public void setShowCurrentGroup(boolean showCurrentGroup) {
+		_showCurrentGroup = showCurrentGroup;
+	}
+
+	public void setShowCurrentPortlet(boolean showCurrentPortlet) {
+		_showCurrentPortlet = showCurrentPortlet;
+	}
+
 	public void setShowGuestGroup(boolean showGuestGroup) {
 		_showGuestGroup = showGuestGroup;
 	}
@@ -66,6 +74,8 @@ public class BreadcrumbTag extends IncludeTag {
 		_portletURL = null;
 		_selLayout = null;
 		_selLayoutParam = null;
+		_showCurrentGroup = true;
+		_showCurrentPortlet = true;
 		_showGuestGroup = _SHOW_GUEST_GROUP;
 		_showLayout = true;
 		_showParentGroups = _SHOW_PARENT_GROUPS;
@@ -83,6 +93,12 @@ public class BreadcrumbTag extends IncludeTag {
 		request.setAttribute("liferay-ui:breadcrumb:selLayout", _selLayout);
 		request.setAttribute(
 			"liferay-ui:breadcrumb:selLayoutParam", _selLayoutParam);
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showCurrentGroup",
+			String.valueOf(_showCurrentGroup));
+		request.setAttribute(
+			"liferay-ui:breadcrumb:showCurrentPortlet",
+			String.valueOf(_showCurrentPortlet));
 		request.setAttribute(
 			"liferay-ui:breadcrumb:showGuestGroup",
 			String.valueOf(_showGuestGroup));
@@ -110,6 +126,8 @@ public class BreadcrumbTag extends IncludeTag {
 	private PortletURL _portletURL;
 	private Layout _selLayout;
 	private String _selLayoutParam;
+	private boolean _showCurrentGroup = true;
+	private boolean _showCurrentPortlet = true;
 	private boolean _showGuestGroup = _SHOW_GUEST_GROUP;
 	private boolean _showLayout = true;
 	private boolean _showParentGroups = _SHOW_PARENT_GROUPS;
