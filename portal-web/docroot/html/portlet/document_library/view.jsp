@@ -62,7 +62,7 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 </div>
 
 <aui:layout cssClass="view">
-	<aui:column columnWidth="<%= 20 %>" first="<%= true %>">
+	<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
 		<div class="header-row">
 			<div class="header-row-content"> </div>
 		</div>

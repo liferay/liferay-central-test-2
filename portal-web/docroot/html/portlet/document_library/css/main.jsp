@@ -348,8 +348,9 @@
 			padding-top: 0.5em;
 
 			.document-description {
+				clear: right;
 				display: block;
-				margin-top: 5px;
+				padding-top: 5px;
 			}
 
 			.document-thumbnail {
@@ -448,6 +449,10 @@
 
 	.context-pane {
 		border-left: 1px solid #CCC;
+	}
+
+	.navigation-pane {
+		border-right: 1px solid #CCC;
 	}
 
 	.taglib-webdav {
