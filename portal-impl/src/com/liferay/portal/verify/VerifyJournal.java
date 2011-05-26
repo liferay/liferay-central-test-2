@@ -109,7 +109,7 @@ public class VerifyJournal extends VerifyProcess {
 			catch (NoSuchEntryException nsee) {
 				try {
 					JournalArticleLocalServiceUtil.updateAsset(
-						article.getUserId(), article, null, null);
+						article.getUserId(), article, null, null, null);
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
