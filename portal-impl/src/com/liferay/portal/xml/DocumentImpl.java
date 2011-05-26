@@ -68,12 +68,12 @@ public class DocumentImpl extends BranchImpl implements Document {
 		return XMLFormatter.toString(_document, indent, expandEmptyElements);
 	}
 
-	public String formattedString(String indent, boolean expandEmptyElements,
-			boolean trimText)
+	public String formattedString(
+			String indent, boolean expandEmptyElements, boolean trimText)
 		throws IOException {
 
-		return XMLFormatter.toString(_document, indent, expandEmptyElements,
-			trimText);
+		return XMLFormatter.toString(
+			_document, indent, expandEmptyElements, trimText);
 	}
 
 	public Element getRootElement() {
