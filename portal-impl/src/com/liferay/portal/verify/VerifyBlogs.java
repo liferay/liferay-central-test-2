@@ -38,7 +38,7 @@ public class VerifyBlogs extends VerifyProcess {
 		for (BlogsEntry entry : entries) {
 			try {
 				BlogsEntryLocalServiceUtil.updateAsset(
-					entry.getUserId(), entry, null, null);
+					entry.getUserId(), entry, null, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

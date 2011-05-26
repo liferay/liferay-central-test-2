@@ -47,6 +47,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.SubscriptionSender;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntrySmallImageNameException;
@@ -167,7 +169,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Message boards
 
@@ -502,7 +505,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, BlogsEntry entry, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
 		boolean visible = false;
@@ -514,12 +517,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String summary = HtmlUtil.extractText(
 			StringUtil.shorten(entry.getContent(), 500));
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), entry.getUuid(), assetCategoryIds,
 			assetTagNames, visible, null, null, entry.getDisplayDate(), null,
 			ContentTypes.TEXT_HTML, entry.getTitle(), null, summary, null, null,
 			0, 0, null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	public BlogsEntry updateEntry(
@@ -599,7 +606,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, entry, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Workflow
 
