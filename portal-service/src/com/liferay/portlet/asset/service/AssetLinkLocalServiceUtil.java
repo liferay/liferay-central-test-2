@@ -295,10 +295,10 @@ public class AssetLinkLocalServiceUtil {
 	}
 
 	public static void updateLinks(long userId, long entryId,
-		long[] linkEntryIds)
+		long[] linkEntryIds, int typeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateLinks(userId, entryId, linkEntryIds);
+		getService().updateLinks(userId, entryId, linkEntryIds, typeId);
 	}
 
 	public static AssetLinkLocalService getService() {

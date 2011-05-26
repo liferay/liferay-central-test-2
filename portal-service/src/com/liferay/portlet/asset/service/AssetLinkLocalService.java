@@ -255,7 +255,8 @@ public interface AssetLinkLocalService {
 		long entryId, int typeId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateLinks(long userId, long entryId, long[] linkEntryIds)
+	public void updateLinks(long userId, long entryId, long[] linkEntryIds,
+		int typeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }
