@@ -36,13 +36,13 @@ if (folder != null) {
 	repositoryId = folder.getRepositoryId();
 }
 
-boolean viewFolders = ParamUtil.getBoolean(request, "viewFolders");
-boolean viewEntries = ParamUtil.getBoolean(request, "viewEntries");
 boolean viewAddButton = ParamUtil.getBoolean(request, "viewAddButton");
-boolean viewDisplayStyleButtons = ParamUtil.getBoolean(request, "viewDisplayStyleButtons");
-boolean viewFileEntrySearch = ParamUtil.getBoolean(request, "viewFileEntrySearch");
-boolean viewSortButton = ParamUtil.getBoolean(request, "viewSortButton");
 boolean viewBreadcrumb = ParamUtil.getBoolean(request, "viewBreadcrumb");
+boolean viewDisplayStyleButtons = ParamUtil.getBoolean(request, "viewDisplayStyleButtons");
+boolean viewEntries = ParamUtil.getBoolean(request, "viewEntries");
+boolean viewFileEntrySearch = ParamUtil.getBoolean(request, "viewFileEntrySearch");
+boolean viewFolders = ParamUtil.getBoolean(request, "viewFolders");
+boolean viewSortButton = ParamUtil.getBoolean(request, "viewSortButton");
 
 request.setAttribute("view.jsp-folder", folder);
 

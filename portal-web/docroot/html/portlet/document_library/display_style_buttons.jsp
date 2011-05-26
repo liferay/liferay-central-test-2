@@ -44,8 +44,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 						<c:choose>
 							<c:when test="<%= Validator.isNull(keywords) %>">
 								<portlet:param name="struts_action" value="/document_library/view" />
-								<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 								<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+								<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 							</c:when>
 							<c:otherwise>
 								<portlet:param name="struts_action" value="/document_library/search" />
@@ -70,8 +70,8 @@ String keywords = ParamUtil.getString(request, "keywords");
 						<c:choose>
 							<c:when test="<%= Validator.isNull(keywords) %>">
 								<portlet:param name="struts_action" value="/document_library/view" />
-								<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 								<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+								<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 						</c:when>
 						<c:otherwise>
 								<portlet:param name="struts_action" value="/document_library/search" />
@@ -79,10 +79,10 @@ String keywords = ParamUtil.getString(request, "keywords");
 							</c:otherwise>
 						</c:choose>
 
-						<portlet:param name="displayStyle" value="descriptive" />
-						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 						<portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" />
+						<portlet:param name="displayStyle" value="descriptive" />
+						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:resourceURL>
 
 					handler: function(event) {
@@ -96,19 +96,19 @@ String keywords = ParamUtil.getString(request, "keywords");
 						<c:choose>
 							<c:when test="<%= Validator.isNull(keywords) %>">
 								<portlet:param name="struts_action" value="/document_library/view" />
-								<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
 								<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-						</c:when>
-						<c:otherwise>
+								<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+							</c:when>
+							<c:otherwise>
 								<portlet:param name="struts_action" value="/document_library/search" />
 								<portlet:param name="keywords" value="<%= keywords %>" />
 							</c:otherwise>
 						</c:choose>
 
-						<portlet:param name="displayStyle" value="list" />
-						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 						<portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" />
+						<portlet:param name="displayStyle" value="list" />
+						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:resourceURL>
 
 					handler: function(event) {

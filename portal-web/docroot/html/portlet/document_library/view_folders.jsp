@@ -1,4 +1,3 @@
-<%@ page import="com.sun.xml.internal.bind.v2.runtime.reflect.Lister" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -106,8 +105,8 @@ if (folder != null) {
 					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="viewDocumentsHomeFoldersURL">
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-						<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="showRootFolder" value="<%= Boolean.FALSE.toString() %>" />
+						<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
@@ -116,11 +115,11 @@ if (folder != null) {
 						<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 						<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
 					<%
@@ -150,10 +149,10 @@ if (folder != null) {
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="navigation" value="recent-documents" />
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
 					<li class="folder <%= navigation.equals("recent-documents") ? "selected" : StringPool.BLANK %>">
@@ -173,10 +172,10 @@ if (folder != null) {
 						<portlet:param name="struts_action" value="/document_library/view" />
 						<portlet:param name="navigation" value="my-documents" />
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
 					<li class="folder <%= navigation.equals("my-documents") ? "selected" : StringPool.BLANK %>">
@@ -203,10 +202,10 @@ if (folder != null) {
 							<portlet:param name="struts_action" value="/document_library/view" />
 							<portlet:param name="documentTypeId" value="<%= String.valueOf(documentType.getDocumentTypeId()) %>" />
 							<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						</liferay-portlet:resourceURL>
 
 						<li class="folder document-type">
@@ -240,11 +239,11 @@ if (folder != null) {
 						<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 						<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
+						<portlet:param name="viewFolders" value="<%= Boolean.TRUE.toString() %>" />
 					</liferay-portlet:resourceURL>
 
 					<li class="folder">
@@ -280,10 +279,10 @@ if (folder != null) {
 							<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
 							<portlet:param name="showSiblings" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewAddButton" value="<%= Boolean.TRUE.toString() %>" />
-							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
-							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
-							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 							<portlet:param name="viewBreadcrumb" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewDisplayStyleButtons" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewEntries" value="<%= Boolean.TRUE.toString() %>" />
+							<portlet:param name="viewFileEntrySearch" value="<%= Boolean.TRUE.toString() %>" />
 						</liferay-portlet:resourceURL>
 
 						<li class="folder <%= (curFolder.getFolderId() == folderId) ? "selected" : StringPool.BLANK %>">
