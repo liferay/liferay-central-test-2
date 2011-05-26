@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -101,7 +102,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			fileEntryElement.addAttribute("bin-path", binPath);
 
-			InputStream is = FileEntryUtil.getContentStream(fileEntry);
+			InputStream is = null;
+
+			try {
+				is = FileEntryUtil.getContentStream(fileEntry);
+			}
+			catch (NoSuchFileException nsfe) {
+			}
 
 			if (is == null) {
 				if (_log.isWarnEnabled()) {
