@@ -963,7 +963,8 @@ public class PortletExporter {
 		portletPreferencesElement.addAttribute("path", path);
 
 		if (portletDataContext.isPathNotProcessed(path)) {
-			portletDataContext.addZipEntry(path, document.formattedString());
+			portletDataContext.addZipEntry(
+				path, document.formattedString(StringPool.TAB, false, false));
 		}
 	}
 

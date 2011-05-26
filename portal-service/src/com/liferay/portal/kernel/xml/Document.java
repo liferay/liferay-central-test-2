@@ -32,6 +32,10 @@ public interface Document extends Branch {
 	public String formattedString(String indent, boolean expandEmptyElements)
 		throws IOException;
 
+	public String formattedString(String indent, boolean expandEmptyElements,
+			boolean trimText)
+		throws IOException;
+
 	public Element getRootElement();
 
 	public String getXMLEncoding();

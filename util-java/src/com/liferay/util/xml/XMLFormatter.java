@@ -109,6 +109,14 @@ public class XMLFormatter {
 			Node node, String indent, boolean expandEmptyElements)
 		throws IOException {
 
+		return toString(node, indent, expandEmptyElements, true);
+	}
+
+	public static String toString(
+			Node node, String indent, boolean expandEmptyElements,
+			boolean trimText)
+		throws IOException {
+
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
@@ -117,6 +125,7 @@ public class XMLFormatter {
 		outputFormat.setExpandEmptyElements(expandEmptyElements);
 		outputFormat.setIndent(indent);
 		outputFormat.setLineSeparator(StringPool.NEW_LINE);
+		outputFormat.setTrimText(trimText);
 
 		XMLWriter xmlWriter = new XMLWriter(
 			unsyncByteArrayOutputStream, outputFormat);
