@@ -460,10 +460,13 @@ public class CalEventLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.calendar.model.CalEvent event,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateAsset(userId, event, assetCategoryIds, assetTagNames);
+		getService()
+			.updateAsset(userId, event, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(

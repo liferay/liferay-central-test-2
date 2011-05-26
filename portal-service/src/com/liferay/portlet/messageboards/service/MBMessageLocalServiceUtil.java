@@ -587,11 +587,13 @@ public class MBMessageLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateAsset(userId, message, assetCategoryIds, assetTagNames);
+			.updateAsset(userId, message, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(

@@ -400,10 +400,13 @@ public class BookmarksEntryLocalServiceUtil {
 
 	public static void updateAsset(long userId,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateAsset(userId, entry, assetCategoryIds, assetTagNames);
+		getService()
+			.updateAsset(userId, entry, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(

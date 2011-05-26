@@ -55,6 +55,7 @@ import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -573,23 +574,23 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 			long groupId = mbMessage.getGroupId();
 
-			long pageId = 0;
+			long messageId = 0;
 
 			if (!isNew) {
-				pageId = mbMessage.getPrimaryKey();
+				messageId = mbMessage.getPrimaryKey();
 			}
 
 			try {
 				mbMessage.setSubject(SanitizerUtil.sanitize(companyId, groupId,
 						userId,
 						com.liferay.portlet.messageboards.model.MBMessage.class.getName(),
-						pageId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
+						messageId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
 						mbMessage.getSubject(), null));
 
 				mbMessage.setBody(SanitizerUtil.sanitize(companyId, groupId,
 						userId,
 						com.liferay.portlet.messageboards.model.MBMessage.class.getName(),
-						pageId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
+						messageId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
 						mbMessage.getBody(), null));
 			}
 			catch (SanitizerException se) {
@@ -12596,6 +12597,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = AssetEntryPersistence.class)
 	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = AssetLinkPersistence.class)
+	protected AssetLinkPersistence assetLinkPersistence;
 	@BeanReference(type = AssetTagPersistence.class)
 	protected AssetTagPersistence assetTagPersistence;
 	@BeanReference(type = BlogsEntryPersistence.class)

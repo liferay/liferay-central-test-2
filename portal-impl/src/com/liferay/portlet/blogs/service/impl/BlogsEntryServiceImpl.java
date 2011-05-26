@@ -44,7 +44,6 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
-import com.sun.syndication.io.FeedException;
 
 import java.io.File;
 
@@ -416,12 +415,15 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			syndEntries.add(syndEntry);
 		}
 
+		/* No comitear
 		try {
 			return RSSUtil.export(syndFeed);
 		}
 		catch (FeedException fe) {
 			throw new SystemException(fe);
 		}
+		*/
+		return null;
 	}
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(

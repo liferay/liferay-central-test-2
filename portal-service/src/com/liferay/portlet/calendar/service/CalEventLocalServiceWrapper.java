@@ -445,11 +445,12 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.calendar.model.CalEvent event,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_calEventLocalService.updateAsset(userId, event, assetCategoryIds,
-			assetTagNames);
+			assetTagNames, assetLinkEntryIds);
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(

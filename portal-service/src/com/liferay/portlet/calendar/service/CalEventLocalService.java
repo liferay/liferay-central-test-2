@@ -380,7 +380,8 @@ public interface CalEventLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.calendar.model.CalEvent event,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

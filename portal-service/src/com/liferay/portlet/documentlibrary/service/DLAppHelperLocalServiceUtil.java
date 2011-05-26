@@ -116,13 +116,14 @@ public class DLAppHelperLocalServiceUtil {
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
-		java.lang.String mimeType, boolean addDraftAssetEntry, boolean visible)
+		long[] assetLinkEntryIds, java.lang.String mimeType,
+		boolean addDraftAssetEntry, boolean visible)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateAsset(userId, fileEntry, fileVersion,
-			assetCategoryIds, assetTagNames, mimeType, addDraftAssetEntry,
-			visible);
+			assetCategoryIds, assetTagNames, assetLinkEntryIds, mimeType,
+			addDraftAssetEntry, visible);
 	}
 
 	public static void updateStatus(long userId,

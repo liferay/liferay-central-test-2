@@ -574,11 +574,12 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 
 	public void updateAsset(long userId,
 		com.liferay.portlet.messageboards.model.MBMessage message,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames)
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageLocalService.updateAsset(userId, message, assetCategoryIds,
-			assetTagNames);
+			assetTagNames, assetLinkEntryIds);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(

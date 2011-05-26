@@ -390,7 +390,7 @@ public interface IGImageLocalService {
 	public void updateAsset(long userId,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
-		java.lang.String contentType)
+		long[] assetLinkEntryIds, java.lang.String contentType)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

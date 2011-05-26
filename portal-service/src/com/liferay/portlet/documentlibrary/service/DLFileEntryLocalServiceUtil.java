@@ -474,6 +474,19 @@ public class DLFileEntryLocalServiceUtil {
 			assetCategoryIds, assetTagNames);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetEntry updateAsset(
+		long userId,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateAsset(userId, dlFileEntry, dlFileVersion,
+			assetCategoryIds, assetTagNames, assetLinkEntryIds);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long userId, long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
