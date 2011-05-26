@@ -49,21 +49,9 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 	}
 
 	public void notifyElementEvicted(Ehcache ehcache, Element element) {
-		PortalCacheClusterEvent portalCacheClusterEvent =
-			new PortalCacheClusterEvent(
-				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.EVICTED);
-
-		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void notifyElementExpired(Ehcache ehcache, Element element) {
-		PortalCacheClusterEvent portalCacheClusterEvent =
-			new PortalCacheClusterEvent(
-				ehcache.getName(), element.getKey(),
-				PortalCacheClusterEventType.EXPIRED);
-
-		PortalCacheClusterLinkUtil.sendEvent(portalCacheClusterEvent);
 	}
 
 	public void notifyElementPut(Ehcache ehcache, Element element)
