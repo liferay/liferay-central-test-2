@@ -210,7 +210,8 @@ public class DLIndexer extends BaseIndexer {
 			Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
 		document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
 		document.addKeyword(Field.FOLDER_ID, folderId);
-		document.addKeyword(Field.GROUP_ID, getParentGroupId(fileModel.getGroupId()));
+		document.addKeyword(
+			Field.GROUP_ID, getParentGroupId(fileModel.getGroupId()));
 
 		Date modifiedDate = fileModel.getModifiedDate();
 
