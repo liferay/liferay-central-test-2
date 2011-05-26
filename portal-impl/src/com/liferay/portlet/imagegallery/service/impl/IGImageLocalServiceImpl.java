@@ -35,6 +35,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -167,7 +169,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			updateAsset(
 				userId, image, serviceContext.getAssetCategoryIds(),
-				serviceContext.getAssetTagNames(), contentType);
+				serviceContext.getAssetTagNames(),
+				serviceContext.getAssetLinkEntryIds(), contentType);
 
 			// Social
 
@@ -451,7 +454,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, IGImage image, long[] assetCategoryIds,
-			String[] assetTagNames, String contentType)
+			String[] assetTagNames, long[] assetLinkEntryIds,
+			String contentType)
 		throws PortalException, SystemException {
 
 		Image largeImage = imageLocalService.getImage(image.getLargeImageId());
@@ -464,12 +468,16 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			contentType = MimeTypesUtil.getContentType(largeImage.getType());
 		}
 
-		assetEntryLocalService.updateEntry(
+		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 			userId, image.getGroupId(), IGImage.class.getName(),
 			image.getImageId(), image.getUuid(), assetCategoryIds,
 			assetTagNames, true, null, null, null, null, contentType,
 			image.getName(), image.getDescription(), null, null, null,
 			largeImage.getHeight(), largeImage.getWidth(), null, false);
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	public IGImage updateImage(
@@ -526,9 +534,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			long[] assetCategoryIds = serviceContext.getAssetCategoryIds();
 			String[] assetTagNames = serviceContext.getAssetTagNames();
+			long[] assetLinkEntryIds = serviceContext.getAssetLinkEntryIds();
 
 			updateAsset(
-				userId, image, assetCategoryIds, assetTagNames, contentType);
+				userId, image, assetCategoryIds, assetTagNames,
+				assetLinkEntryIds, contentType);
 
 			// Social
 
