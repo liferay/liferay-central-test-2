@@ -79,7 +79,7 @@ public class JournalIndexer extends BaseIndexer {
 		Long classNameId = (Long)searchContext.getAttribute(
 			Field.CLASS_NAME_ID);
 
-		if (Validator.isNotNull(classNameId)) {
+		if (classNameId != null) {
 			contextQuery.addRequiredTerm("classNameId", classNameId.toString());
 		}
 
@@ -119,7 +119,6 @@ public class JournalIndexer extends BaseIndexer {
 		addLocalizedSearchTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, true);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, true);
-
 		addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, true);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
