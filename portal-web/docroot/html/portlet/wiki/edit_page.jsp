@@ -353,6 +353,13 @@ if (Validator.isNull(redirect)) {
 					</aui:field-wrapper>
 				</c:if>
 
+				<aui:fieldset>
+					<liferay-ui:input-asset-links
+						className="<%= WikiPage.class.getName() %>"
+						classPK="<%= classPK %>"
+					/>
+				</aui:fieldset>
+
 				<%
 				boolean approved = false;
 				boolean pending = false;

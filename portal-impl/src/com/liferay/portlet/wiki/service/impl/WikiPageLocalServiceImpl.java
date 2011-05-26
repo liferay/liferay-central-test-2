@@ -49,6 +49,8 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
+import com.liferay.portlet.asset.model.AssetLink;
+import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -172,7 +174,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Expando
 
@@ -363,6 +366,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
 		serviceContext.setAssetTagNames(assetTagNames);
+		serviceContext.setAssetLinkEntryIds(null);
 
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
@@ -1002,6 +1006,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
+		AssetEntry assetEntry =
+			assetEntryLocalService.getEntry(
+				WikiPage.class.getName(), page.getResourcePrimKey());
+
+		List<AssetLink> assetLinks =
+			assetLinkLocalService.getDirectLinks(
+				assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
+
+		long[] assetLinkEntryIds = StringUtil.split(
+			ListUtil.toString(assetLinks, "entryId2"), 0L);
+
+		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
+
 		addPage(
 			userId, nodeId, title, version, content, summary, false, format,
 			head, parentTitle, redirectTitle, serviceContext);
@@ -1019,7 +1036,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Asset
 
-		updateAsset(userId, page, null, null);
+		updateAsset(userId, page, null, null, null);
 
 		// Indexer
 
@@ -1074,7 +1091,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void updateAsset(
 			long userId, WikiPage page, long[] assetCategoryIds,
-			String[] assetTagNames)
+			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
 		boolean addDraftAssetEntry = false;
@@ -1091,8 +1108,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
+		AssetEntry assetEntry = null;
+
 		if (addDraftAssetEntry) {
-			assetEntryLocalService.updateEntry(
+			assetEntry = assetEntryLocalService.updateEntry(
 				userId, page.getGroupId(), WikiPage.class.getName(),
 				page.getPrimaryKey(), page.getUuid(), assetCategoryIds,
 				assetTagNames, false, null, null, null, null,
@@ -1100,13 +1119,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				0, 0, null, false);
 		}
 		else {
-			assetEntryLocalService.updateEntry(
+			assetEntry = assetEntryLocalService.updateEntry(
 				userId, page.getGroupId(), WikiPage.class.getName(),
 				page.getResourcePrimKey(), page.getUuid(), assetCategoryIds,
 				assetTagNames, page.isApproved(), null, null, null, null,
 				ContentTypes.TEXT_HTML, page.getTitle(), null, null, null, null,
 				0, 0, null, false);
 		}
+
+		assetLinkLocalService.updateLinks(
+			userId, assetEntry.getEntryId(), assetLinkEntryIds,
+			AssetLinkConstants.TYPE_RELATED);
 	}
 
 	public WikiPage updatePage(
@@ -1209,7 +1232,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		updateAsset(
 			userId, page, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			serviceContext.getAssetTagNames(),
+			serviceContext.getAssetLinkEntryIds());
 
 		// Workflow
 
@@ -1277,12 +1301,26 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 					long[] assetCategoryIds = draftAssetEntry.getCategoryIds();
 					String[] assetTagNames = draftAssetEntry.getTagNames();
 
-					assetEntryLocalService.updateEntry(
+					List<AssetLink> assetLinks =
+						assetLinkLocalService.getDirectLinks(
+							draftAssetEntry.getEntryId(),
+							AssetLinkConstants.TYPE_RELATED);
+
+					long[] assetLinkEntryIds = StringUtil.split(
+						ListUtil.toString(assetLinks, "entryId2"), 0L);
+
+					AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 						userId, page.getGroupId(), WikiPage.class.getName(),
 						page.getResourcePrimKey(), page.getUuid(),
 						assetCategoryIds, assetTagNames, true, null, null, null,
 						null, ContentTypes.TEXT_HTML, page.getTitle(), null,
 						null, null, null, 0, 0, null, false);
+
+					// Asset Links
+
+					assetLinkLocalService.updateLinks(
+						userId, assetEntry.getEntryId(),
+						assetLinkEntryIds, AssetLinkConstants.TYPE_RELATED);
 
 					assetEntryLocalService.deleteEntry(
 						draftAssetEntry.getEntryId());

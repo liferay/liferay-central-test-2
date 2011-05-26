@@ -36,7 +36,7 @@ public class VerifyWiki extends VerifyProcess {
 		for (WikiPage page : pages) {
 			try {
 				WikiPageLocalServiceUtil.updateAsset(
-					page.getUserId(), page, null, null);
+					page.getUserId(), page, null, null, null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
