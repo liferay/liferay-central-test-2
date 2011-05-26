@@ -464,7 +464,7 @@ public class PropsValues {
 
 	public static boolean DL_WEBDAV_SAVE_TO_SINGLE_VERSION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_WEBDAV_SAVE_TO_SINGLE_VERSION));
 
-	public static final String[] DOCKBAR_ADD_PORTLETS = PropsUtil.getArray(PropsKeys.DOCKBAR_ADD_PORTLETS);
+	public static String[] DOCKBAR_ADD_PORTLETS = PropsUtil.getArray(PropsKeys.DOCKBAR_ADD_PORTLETS);
 
 	public static final String DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER = PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER);
 
