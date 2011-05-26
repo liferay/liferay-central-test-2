@@ -38,6 +38,7 @@ dl.file.entry.drafts.enabled
 dl.hook.impl
 dl.webdav.auto.unlock
 dl.webdav.save.to.single.version
+dockbar.add.portlets
 field.enable.com.liferay.portal.model.Contact.birthday
 field.enable.com.liferay.portal.model.Contact.male
 field.enable.com.liferay.portal.model.Organization.status
