@@ -90,6 +90,13 @@ request.setAttribute("view_entry.jsp-entry", entry);
 				classPK="<%= entryId %>"
 			/>
 		</div>
+
+		<div class="entry-links">
+			<liferay-ui:asset-links
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= entryId %>"
+			/>
+		</div>
 	</aui:column>
 
 	<aui:column columnWidth="<%= 25 %>" cssClass="lfr-asset-column lfr-asset-column-actions" last="<%= true %>">

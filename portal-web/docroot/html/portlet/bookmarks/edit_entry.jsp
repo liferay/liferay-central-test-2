@@ -115,6 +115,13 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 		<aui:input name="tags" type="assetTags" />
 
+		<aui:fieldset>
+			<liferay-ui:input-asset-links
+				className="<%= BookmarksEntry.class.getName() %>"
+				classPK="<%= (entry != null) ? entry.getEntryId() : 0 %>"
+			/>
+		</aui:fieldset>
+
 		<c:if test="<%= entry == null %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
